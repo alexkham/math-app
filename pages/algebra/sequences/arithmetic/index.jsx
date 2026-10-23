@@ -378,6 +378,10 @@ The sequence $5, 12, 19, 26, 33$ has differences $7, 7, 7, 7$. All equal, so it 
 
 The sequence $1, 4, 9, 16, 25$ has differences $3, 5, 7, 9$. These are not constant, so the sequence is not arithmetic. (It is the sequence of perfect [square numbers](!/algebra/sequences/square-numbers), which grows quadratically rather than linearly.)
 
+@academic[pitfall,aside:true,width:35%:Subtracting in the wrong order
+Taking each term minus the next one: for $20, 17, 14, 11$ that gives $20 - 17 = 3$, so $d = 3$, as if the sequence rose. The difference is later minus earlier, $17 - 20 = -3$, so $d = -3$.
+[Read more](!#pitfalls)]@
+
 The test applies to any number of terms: compute all consecutive differences and check for uniformity. A single pair of unequal differences is enough to disqualify. Conversely, if only a few terms are given, the test cannot confirm an arithmetic pattern with certainty — the sequence $2, 4, 6$ could continue as $8, 10, \\ldots$ (arithmetic) or as $10, 16, \\ldots$ (something else). The rule generating the sequence, not just a finite sample, is what determines its type.`,
     before: ``,
     after: ``,
@@ -388,6 +392,10 @@ The test applies to any number of terms: compute all consecutive differences and
     content: `The explicit formula $a_n = a_1 + (n-1)d$ contains four quantities: $a_n$, $a_1$, $n$, and $d$. Given any three, the fourth can be found by solving the equation.
 
 Finding a specific term: if $a_1 = 4$ and $d = 6$, then $a_{20} = 4 + 19 \\cdot 6 = 118$.
+
+@academic[pitfall,aside:true,width:35%:Counting n steps instead of n − 1
+Writing $a_{20} = 4 + 20 \\cdot 6 = 124$ adds $d$ once too often, since $a_1$ already stands in place $1$. Only $19$ steps lead to place $20$: $a_{20} = 4 + 19 \\cdot 6 = 118$.
+[Read more](!#pitfalls)]@
 
 Finding the common difference: if $a_1 = 3$ and $a_8 = 24$, then $24 = 3 + 7d$, so $d = 3$.
 
@@ -486,7 +494,13 @@ This follows directly from the constant-difference property: since $a_n - a_{n-1
 
 Inserting arithmetic means between two values is the reverse problem: given endpoints $a$ and $b$, place $k$ terms between them so that the resulting $k + 2$ values form an arithmetic sequence. The common difference must be $d = \\frac{b - a}{k + 1}$, and the inserted terms are $a + d, a + 2d, \\ldots, a + kd$.
 
-For example, inserting $3$ arithmetic means between $5$ and $25$ requires $d = \\frac{25 - 5}{4} = 5$, producing the sequence $5, 10, 15, 20, 25$.`,
+For example, inserting $3$ arithmetic means between $5$ and $25$ requires $d = \\frac{25 - 5}{4} = 5$, producing the sequence $5, 10, 15, 20, 25$.
+
+@academic[pitfall,aside:true,width:35%:Dividing by the number of means
+Dividing $25 - 5$ by $3$ gives $d = \\frac{20}{3}$ and the list $5, \\frac{35}{3}, \\frac{55}{3}, 25$, with only two means. Three means make four steps: $d = \\frac{20}{4} = 5$.
+[Read more](!#pitfalls)]@
+
+In this kind of problem the two endpoints are fixed and only the spacing between them is unknown. Once $d$ is found, the inserted terms follow by repeated addition, and the last step from $a + kd$ must land exactly on $b$, which checks the whole list at once.`,
     before: ``,
     after: ``,
     link: '',
@@ -494,6 +508,59 @@ For example, inserting $3$ arithmetic means between $5$ and $25$ requires $d = \
   obj7: {
     title: `Arithmetic Sequences at a Glance`,
     content: `The page defined the common difference, derived the explicit and recursive formulas, the two equivalent series-sum formulas, the arithmetic-mean property, and the procedure for inserting means between two values. The table below collects each formula with a representative example for quick reference.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj8: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up again and again with arithmetic sequences. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Subtracting in the wrong order**
+
+When the consecutive differences are computed, each term is subtracted from the one before it instead of the one after it. The differences still come out equal, but with the wrong sign.
+
+Wrong working: for $20, 17, 14, 11$,
+$$20 - 17 = 3, \\quad 17 - 14 = 3, \\quad 14 - 11 = 3 \\implies d = 3$$
+
+Right working: the common difference is $d = a_{n+1} - a_n$, later term minus earlier term.
+$$17 - 20 = -3, \\quad 14 - 17 = -3, \\quad 11 - 14 = -3 \\implies d = -3$$
+
+Why it happens: the larger number is written first out of habit, and because all the differences agree, the constant-difference test passes and hides the sign error.
+
+How to check: add $d$ to the first term; it must give the second. $20 + 3 = 23$, not $17$, while $20 + (-3) = 17$. A falling sequence always has $d < 0$.
+
+**Counting n steps instead of n − 1**
+
+In the general term, $d$ is multiplied by the position $n$ instead of by $n - 1$, the number of steps from the first term.
+
+Wrong working: with $a_1 = 4$ and $d = 6$,
+$$a_{20} = 4 + 20 \\cdot 6 = 124$$
+
+Right working: from place $1$ to place $20$ there are $19$ steps.
+$$a_{20} = 4 + (20 - 1) \\cdot 6 = 4 + 114 = 118$$
+
+The same slip appears when solving for $d$: from $a_1 = 3$ and $a_8 = 24$, dividing $24 - 3 = 21$ by $8$ gives $d = \\frac{21}{8}$ instead of $\\frac{21}{7} = 3$.
+
+Why it happens: the formula is remembered as "first term plus $n$ times $d$", and the fact that $a_1$ already occupies the first place, before any $d$ is added, gets lost.
+
+How to check: put $n = 1$ into the formula; it must return $a_1$. The wrong version gives $4 + 1 \\cdot 6 = 10$, not $4$, while $4 + 0 \\cdot 6 = 4$.
+
+**Dividing by the number of means**
+
+When $k$ arithmetic means are inserted between $a$ and $b$, the gap $b - a$ is split into $k$ equal parts instead of $k + 1$.
+
+Wrong working: $3$ means between $5$ and $25$,
+$$d = \\frac{25 - 5}{3} = \\frac{20}{3}$$
+which gives the list $5, \\frac{35}{3}, \\frac{55}{3}, 25$, with only two values between the endpoints.
+
+Right working: $3$ means and $2$ endpoints make $5$ terms, and $5$ terms have $4$ steps between them.
+$$d = \\frac{25 - 5}{3 + 1} = 5$$
+The sequence is $5, 10, 15, 20, 25$.
+
+Why it happens: the number of values to insert and the number of steps between neighbouring values are easy to confuse; there is always one more step than there are inserted values.
+
+How to check: count the values strictly between the endpoints in the finished list; there must be exactly $k$. Equivalently, $a + (k + 1)d$ must equal $b$: $5 + 4 \\cdot 5 = 25$.`,
     before: ``,
     after: ``,
     link: '',
@@ -741,6 +808,14 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
           sectionsContent.obj7.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

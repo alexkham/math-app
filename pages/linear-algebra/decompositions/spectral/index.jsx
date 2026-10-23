@@ -1770,6 +1770,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spectralDiagrams from '@/app/components/linear-algebra copy/matrix/spectralDiagrams'
+import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -1901,7 +1903,7 @@ const keyWords = [
         identities: [
           {
             name: 'Powers',
-            anchor: '#3',
+            anchor: '#5',
             formula: '$A^k = QD^kQ^{\\mathsf{T}}$',
             condition: '$k \\geq 0$ integer; any $k$ if all $\\lambda_i > 0$',
             key: true,
@@ -1920,7 +1922,7 @@ const keyWords = [
             formula: '$A^{1/2} = QD^{1/2}Q^{\\mathsf{T}}$',
             condition: 'all $\\lambda_i \\geq 0$ \u2014 positive semi-definite',
             strict: true,
-            note: 'A symmetric square root exists exactly when no eigenvalue is negative, and it is unique among positive semi-definite matrices. This is the construction behind [Cholesky](!/linear-algebra/decompositions/cholesky) and behind whitening a covariance matrix.',
+            note: 'A symmetric square root exists exactly when no eigenvalue is negative, and it is unique among positive semi-definite matrices. It is a different factor from the triangular one in [Cholesky](!/linear-algebra/decompositions/cholesky), though both satisfy $A = BB^{\\mathsf{T}}$, and it is the one behind whitening a covariance matrix.',
           },
           {
             name: 'Exponential',
@@ -2187,6 +2189,10 @@ Eigenvectors corresponding to distinct eigenvalues are [orthogonal](!/linear-alg
 @academic[rule_theorem:Spectral Theorem
 Every real symmetric matrix is orthogonally diagonalizable.]@
 
+@academic[pitfall,aside:true,width:35%:Assuming eigenvectors are always orthogonal
+For $A = \\begin{pmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$, row reduction gives $(1, -1, 0)^T$ and $(1, 0, -1)^T$ for the repeated eigenvalue $\\lambda = 1$, and their dot product is $1$, not $0$. Orthogonalizing within the eigenspace replaces the second by $\\frac{1}{2}(1, 1, -2)^T$.
+[Read more](!#pitfalls)]@
+
 There always exist $n$ orthonormal eigenvectors forming a [basis](!/linear-algebra/vector-spaces) for $\\mathbb{R}^n$, even when eigenvalues are repeated. For a repeated eigenvalue with geometric multiplicity $k$, the eigenspace is $k$-dimensional, and Gram-Schmidt within that eigenspace produces $k$ orthonormal eigenvectors.
 
 Together these three facts guarantee that $A = QDQ^T$ exists for every real symmetric $A$.`,
@@ -2222,7 +2228,13 @@ Assemble $Q$ (orthonormal eigenvectors as columns) and $D$ (eigenvalues on the d
 
 @academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$: eigenvalues are $\\lambda_1 = 4$, $\\lambda_2 = 2$. Eigenvectors: $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$. Then $A = 4 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix} + 2 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 2 \\\\ 2 & 2 \\end{pmatrix} + \\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$.]@`,
+For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$: eigenvalues are $\\lambda_1 = 4$, $\\lambda_2 = 2$. Eigenvectors: $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$. Then $A = 4 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix} + 2 \\cdot \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 2 \\\\ 2 & 2 \\end{pmatrix} + \\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$.]@
+
+@academic[pitfall,aside:true,width:35%:Leaving the eigenvectors unnormalized
+Using $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$ unscaled gives $Q^TQ = 2I$ and $QDQ^T = \\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = 2A$. With the factor $\\frac{1}{\\sqrt{2}}$ on each column, $QDQ^T = A$.
+[Read more](!#pitfalls)]@
+
+Each eigenvector first comes out of row reduction as a direction, here $(1, 1)^T$ for $\\lambda_1 = 4$ and $(1, -1)^T$ for $\\lambda_2 = 2$, and any nonzero multiple of either would be an eigenvector as well. The factor $\\frac{1}{\\sqrt{2}}$ in front of each fixes its length at $1$. The pairing is fixed too: the $i$-th column of $Q$ goes with the $i$-th diagonal entry of $D$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2239,7 +2251,11 @@ The matrix exponential is: $e^{At} = Qe^{Dt}Q^T = Q\\,\\text{diag}(e^{\\lambda_1
 
 The [trace](!/linear-algebra/matrix/trace) is $\\text{tr}(A) = \\lambda_1 + \\cdots + \\lambda_n$. The [determinant](!/linear-algebra/determinants) is $\\det(A) = \\lambda_1 \\cdots \\lambda_n$. The [rank](!/linear-algebra/matrix/rank) is the number of nonzero eigenvalues.
 
-Every property of $A$ reduces to a property of the diagonal $D$, mediated by the orthogonal rotation $Q$. This is the computational power of diagonalization — and for symmetric matrices, the orthogonality of $Q$ ensures numerical stability as well.`,
+@academic[pitfall,aside:true,width:35%:Powering the entries of A
+Squaring each entry of $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$ gives $\\begin{pmatrix} 9 & 1 \\\\ 1 & 9 \\end{pmatrix}$, which is not $A^2$. Only $D$ is powered entry by entry: $A^2 = Q\\,\\text{diag}(16, 4)\\,Q^T = \\begin{pmatrix} 10 & 6 \\\\ 6 & 10 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+Every property of $A$ reduces to a property of the diagonal $D$, mediated by the orthogonal matrix $Q$. This is the computational power of diagonalization — and for symmetric matrices, the orthogonality of $Q$ ensures numerical stability as well.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2281,7 +2297,7 @@ Dimensionality reduction follows: projecting the data onto the top $k$ eigenvect
 
 The orthogonality of $Q$ provides three advantages. Inversion is free: $Q^{-1} = Q^T$, no computation needed. Multiplication preserves norms: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$, so numerical errors are not amplified. Projections are [orthogonal](!/linear-algebra/orthogonality/projections): the rank-one terms $\\mathbf{q}_i\\mathbf{q}_i^T$ are orthogonal projection matrices, making the outer product form geometrically transparent.
 
-The spectral decomposition exists only for [symmetric](!/linear-algebra/matrix/types) matrices (real case) or Hermitian matrices (complex case). For non-symmetric matrices, the eigendecomposition $PDP^{-1}$ may exist (when the matrix is diagonalizable) but $P$ is not orthogonal, and the computational and geometric advantages are lost.`,
+The spectral decomposition exists only for [symmetric](!/linear-algebra/matrix/types) matrices (real case) or normal matrices, those with $AA^{*} = A^{*}A$ (complex case, with $U$ unitary); among these, $D$ is real exactly for Hermitian $A$. For non-symmetric matrices, the eigendecomposition $PDP^{-1}$ may exist (when the matrix is diagonalizable) but $P$ is not orthogonal, and the computational and geometric advantages are lost.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2302,6 +2318,71 @@ The [SVD](!/linear-algebra/decompositions/svd) generalizes the spectral decompos
   obj10: {
     title: `Summary: What the Spectral Decomposition Gives You`,
     content: `Once $A = QDQ^T$ is in hand, most matrix-level quantities of interest reduce to operations on the diagonal $D$, with the orthogonal $Q$ rotating in and out of the eigenvector basis. The table below collects the six properties most commonly read off the decomposition — inverse, power, exponential, trace, determinant, and rank — alongside the formula in terms of $Q$ and $D$, the parallel formula in terms of individual eigenvalues, and the conditions under which each formula applies.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong answers when a symmetric matrix is decomposed, or used through its decomposition. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Assuming eigenvectors are always orthogonal**
+
+Eigenvectors that belong to different eigenvalues of a symmetric matrix are orthogonal automatically, and this is taken to hold for all eigenvectors. When an eigenvalue repeats, the basis that row reduction gives for its eigenspace is put into $Q$ unchanged.
+
+Wrong working: $A = \\begin{pmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$ has eigenvalues $4, 1, 1$. For $\\lambda = 4$ the unit eigenvector is $\\frac{1}{\\sqrt{3}}(1, 1, 1)^T$. Row reducing $A - I$ leaves the single equation $x_1 + x_2 + x_3 = 0$, with basis $(1, -1, 0)^T$ and $(1, 0, -1)^T$. Normalizing these two and using them as columns,
+$$Q = \\begin{pmatrix} 1/\\sqrt{3} & 1/\\sqrt{2} & 1/\\sqrt{2} \\\\ 1/\\sqrt{3} & -1/\\sqrt{2} & 0 \\\\ 1/\\sqrt{3} & 0 & -1/\\sqrt{2} \\end{pmatrix}$$
+has columns $2$ and $3$ with dot product $\\frac{1}{2}$, so $Q^TQ \\neq I$, and
+$$QDQ^T = \\begin{pmatrix} 7/3 & 5/6 & 5/6 \\\\ 5/6 & 11/6 & 4/3 \\\\ 5/6 & 4/3 & 11/6 \\end{pmatrix} \\neq A$$
+
+Right working: apply Gram-Schmidt inside the eigenspace.
+$$(1, 0, -1)^T - \\frac{1}{2}(1, -1, 0)^T = \\frac{1}{2}(1, 1, -2)^T$$
+This is still an eigenvector for $\\lambda = 1$, since $A(1, 1, -2)^T = (1, 1, -2)^T$. With $\\mathbf{q}_1 = \\frac{1}{\\sqrt{3}}(1, 1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$, $\\mathbf{q}_3 = \\frac{1}{\\sqrt{6}}(1, 1, -2)^T$ and $D = \\text{diag}(4, 1, 1)$, the columns are orthonormal and $QDQ^T = A$.
+
+Why it happens: the automatic orthogonality is stated for distinct eigenvalues. Inside one eigenspace every nonzero vector is an eigenvector, so any basis looks equally valid and nothing in the row reduction signals the problem.
+
+How to check: before assembling $Q$, compute the dot product of every pair of columns. Each must be $0$.
+
+**Leaving the eigenvectors unnormalized**
+
+Row reduction returns each eigenvector at a convenient scale, and the vectors go into $Q$ at that scale. The transpose is then used as the inverse, which is valid only for unit columns.
+
+Wrong working: for $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$ with $D = \\text{diag}(4, 2)$, take $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. Then
+$$QDQ^T = \\begin{pmatrix} 4 & 2 \\\\ 4 & -2 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix} = \\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = 2A$$
+
+Right working: divide each column by its length $\\sqrt{2}$, so $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. Then $Q^TQ = I$ and
+$$QDQ^T = \\frac{1}{2}\\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix} = A$$
+
+Why it happens: in the general form $A = PDP^{-1}$ any scaling of the eigenvectors works, because $P^{-1}$ undoes it. Replacing $P^{-1}$ by $Q^T$ is what makes unit length necessary.
+
+How to check: $Q^TQ$ must be $I$. Here the unscaled $Q$ gives $Q^TQ = 2I$, and the result comes out multiplied by exactly that factor $2$.
+
+**Powering the entries of A**
+
+A power or another function of $A$ is computed by applying it to each entry of $A$, the way it is applied to each entry of $D$.
+
+Wrong working: for $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$,
+$$A^2 \\to \\begin{pmatrix} 9 & 1 \\\\ 1 & 9 \\end{pmatrix}, \\qquad A^{-1} \\to \\begin{pmatrix} 1/3 & 1 \\\\ 1 & 1/3 \\end{pmatrix}$$
+
+Right working: power the eigenvalues $4$ and $2$ and rebuild with the projections $\\mathbf{q}_1\\mathbf{q}_1^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$ and $\\mathbf{q}_2\\mathbf{q}_2^T = \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix}$.
+$$A^2 = 16\\,\\mathbf{q}_1\\mathbf{q}_1^T + 4\\,\\mathbf{q}_2\\mathbf{q}_2^T = \\begin{pmatrix} 8 & 8 \\\\ 8 & 8 \\end{pmatrix} + \\begin{pmatrix} 2 & -2 \\\\ -2 & 2 \\end{pmatrix} = \\begin{pmatrix} 10 & 6 \\\\ 6 & 10 \\end{pmatrix}$$
+$$A^{-1} = \\frac{1}{4}\\,\\mathbf{q}_1\\mathbf{q}_1^T + \\frac{1}{2}\\,\\mathbf{q}_2\\mathbf{q}_2^T = \\begin{pmatrix} 1/8 & 1/8 \\\\ 1/8 & 1/8 \\end{pmatrix} + \\begin{pmatrix} 1/4 & -1/4 \\\\ -1/4 & 1/4 \\end{pmatrix} = \\begin{pmatrix} 3/8 & -1/8 \\\\ -1/8 & 3/8 \\end{pmatrix}$$
+
+Why it happens: for the diagonal matrix $D$, powers and other functions really do act entry by entry, and the rule is carried over to $A$, whose off-diagonal entries mix the eigenvector directions.
+
+How to check: the trace of $A^k$ must equal $\\lambda_1^k + \\cdots + \\lambda_n^k$. For $A^2$ that is $16 + 4 = 20$; the correct matrix has trace $10 + 10 = 20$, the entry-by-entry one only $18$. For $A^{-1}$, multiply back: $AA^{-1}$ must be $I$.
+
+**Judging definiteness by the entries**
+
+A symmetric matrix whose entries are all positive is called positive definite, as if positive numbers in the matrix made the form $\\mathbf{x}^TA\\mathbf{x}$ positive.
+
+Wrong working: every entry of $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ is positive, so $A$ is declared positive definite.
+
+Right working: $\\det(A - \\lambda I) = (1 - \\lambda)^2 - 4 = 0$ gives $\\lambda = 3$ and $\\lambda = -1$. The signs are mixed, so the form is indefinite. Directly, $\\mathbf{x}^TA\\mathbf{x} = x_1^2 + 4x_1x_2 + x_2^2$ is $6$ at $\\mathbf{x} = (1, 1)^T$ and $-2$ at $\\mathbf{x} = (1, -1)^T$.
+
+Why it happens: for a diagonal matrix the entries are the eigenvalues, so positive entries do mean positive definite. With off-diagonal entries present, the cross term $2a_{12}x_1x_2$ changes sign with $x_1x_2$ and can outweigh the squares.
+
+How to check: test a vector whose components have opposite signs, or, for a $2 \\times 2$ matrix, use the test $a_{11} > 0$ and $\\det A > 0$. Here $\\det A = 1 - 4 = -3 < 0$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2436,8 +2517,24 @@ const schemas = {
     }),
   };
 
+  const spectralNest = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Special cases of eigendecomposition',
+    preface: 'Every diagonalizable matrix has $A = PDP^{-1}$. Narrower classes get a better $P$: unitary for normal matrices, orthogonal for real symmetric ones.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'What symmetry buys',
+    conclusion: 'With $A = QDQ^T$, inversion is free, norms are preserved and the pieces are orthogonal projections. $D$ is real exactly when the matrix is Hermitian.',
+    levels: [
+      { id: 'sym', symbol: 'Aᵀ = A', name: '[Real symmetric](!/linear-algebra/decompositions/spectral)', note: '$A = QDQ^T$, $Q$ orthogonal' },
+      { id: 'norm', symbol: 'AA* = A*A', name: 'Normal', adds: 'the complex case', note: '$U$ unitary' },
+      { id: 'diag', symbol: 'PDP⁻¹', name: '[Diagonalizable](!/linear-algebra/eigen/diagonalization)', note: '$P$ invertible' },
+      { id: 'sq', symbol: 'n × n', name: 'Square', note: 'an eigendecomposition may not exist' },
+    ],
+  };
+
   return {
   props:{
+    spectralNest,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2459,7 +2556,7 @@ const schemas = {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
 
-export default function SpectralDecompositionPage({
+export default function SpectralDecompositionPage({spectralNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -2551,7 +2648,11 @@ export default function SpectralDecompositionPage({
           >
             <ObjectTypeProfile data={definitenessClasses} theme="navy" variant="grid" />
           </DiagramFrame>,
-          `The classification is immediate once the decomposition is in hand. Substituting $\\mathbf{x} = Q\\mathbf{y}$ turns the form into $\\sum \\lambda_i y_i^2$ — a weighted sum of squares — and the sign of a sum of squares is decided by the signs of the weights and nothing else. The magnitudes only stretch the surface; they never change which of the five classes it belongs to.`,
+          `@academic[pitfall,aside:true,width:35%:Judging definiteness by the entries
+Every entry of $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ is positive, yet its eigenvalues are $3$ and $-1$, and $\\mathbf{x} = (1, -1)^T$ gives $\\mathbf{x}^TA\\mathbf{x} = -2$. The form is indefinite, not positive definite.
+[Read more](!#pitfalls)]@
+
+The classification is immediate once the decomposition is in hand. Substituting $\\mathbf{x} = Q\\mathbf{y}$ turns the form into $\\sum \\lambda_i y_i^2$ — a weighted sum of squares — and the sign of a sum of squares is decided by the signs of the weights and nothing else. The magnitudes only stretch the surface; they never change which of the five classes it belongs to.`,
         ]
     },
     {
@@ -2568,6 +2669,14 @@ export default function SpectralDecompositionPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrameV2
+            key={'obj8-diagram'}
+            id="spectral-class-nesting"
+            title="Special cases of eigendecomposition"
+            source="/linear-algebra/decompositions/spectral"
+          >
+            <NestedContainment data={spectralNest} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -2596,6 +2705,14 @@ export default function SpectralDecompositionPage({
           </DiagramFrame>,
           `The four function entries are one rule with four choices of $f$: powers, reciprocals, roots and exponentials all reduce to $f(A) = Qf(D)Q^{\\mathsf{T}}$. What differs is only which eigenvalues $f$ accepts — every real number for the exponential, nonzero for the inverse, non-negative for the square root. Read the condition column downward and it is a list of what each function needs, not a list of separate theorems.`,
           `This works because $A$ is symmetric. A general matrix may fail to diagonalize at all, and even when it does the eigenvector matrix need not be orthogonal, so $P^{-1}$ must be computed rather than transposed. The [spectral theorem](#2) is what guarantees both the orthogonality and the existence — which is why this page can state everything unconditionally where the general case cannot.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

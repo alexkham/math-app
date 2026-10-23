@@ -14,6 +14,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -501,7 +503,7 @@ const occurenceMatrix=`
 <tr>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Geometric</td>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
@@ -511,7 +513,7 @@ const occurenceMatrix=`
 <tr style="background-color: #f8f9fa;">
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50;">Negative Binomial</td>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
+<td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #27ae60; text-align: center; font-weight: bold; font-size: 18px;">✓</td>
 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
@@ -648,6 +650,11 @@ Each face has an equal and independent chance of appearing.
       content:``,
       before:``,
        link:'/probability/distributions/discrete/binomial',
+      pitfall:`@academic[pitfall,aside:true,width:35%:Forgetting the binomial coefficient
+Using $p^k (1-p)^{n-k}$ alone gives the probability of one particular order of successes and failures. For $n = 5$, $p = 0.5$, $k = 3$ that is $0.5^5 = 0.03125$; counting all $\\binom{5}{3} = 10$ orders, $P(X = 3) = 0.3125$.
+[Read more](!#pitfalls)]@
+
+A binomial probability is read straight from the PMF in the table: fix $n$ and $p$, choose the number of successes $k$, and evaluate. With $n = 5$ flips of a fair coin, for instance, the event of exactly $3$ heads covers every sequence of five flips that contains three heads, wherever in the sequence they fall.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=2) →@
 
       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use binomial distributions cummulative table](!/tables/binomial-distribution) →@
@@ -742,6 +749,11 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
       content:``,
       before:``,
        link:'/probability/distributions/discrete/geometric',
+      pitfall:`@academic[pitfall,aside:true,width:35%:Counting failures instead of trials
+Using $(1-p)^k p$ for $P(X = k)$ puts $k$ failures before the success, which is $k + 1$ trials. Rolling until the first $6$, it gives $P(X = 4) = \\left(\\frac{5}{6}\\right)^4 \\cdot \\frac{1}{6} \\approx 0.080$; with $X$ counting trials, $P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} \\approx 0.096$.
+[Read more](!#pitfalls)]@
+
+The geometric variable measures how long one waits for the first success. Rolling a die until the first $6$ appears is the standard picture: the success probability is $p = \\frac{1}{6}$ on every roll, and there is no upper limit on the number of rolls. In the table, $X$ is the number of the roll on which that first $6$ appears.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=3) →@`,
      checklist:`     
 <h2 style="color: #3b82f6;"> Checklist for Identifying a Geometric Distribution</h2>
@@ -824,6 +836,11 @@ This means there's about a 9.6% chance that you'll need exactly 4 rolls to get y
       content:``,
       before:``,
        link:'/probability/distributions/discrete/negative-binomial',
+      pitfall:`@academic[pitfall,aside:true,width:35%:Leaving the last trial free
+Using $\\binom{k}{r}$ instead of $\\binom{k-1}{r-1}$ also counts sequences whose $r$-th success comes before trial $k$. For $r = 3$, $p = 0.5$, $k = 6$ it gives $20 \\cdot 0.5^6 = 0.3125$; with trial $6$ fixed as the third success, $P(X = 6) = \\binom{5}{2} \\cdot 0.5^6 = 0.15625$.
+[Read more](!#pitfalls)]@
+
+To use the PMF from the table, fix the target number of successes $r$, the success probability $p$, and the trial $k$ on which the target is reached. Flipping a fair coin until the third head is a typical case: $r = 3$, $p = 0.5$, and $X = 6$ means that the third head comes on the sixth flip.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=4) →@`,
       checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Negative Binomial Distribution</h2>
 ✔ Repeating the same [Bernoulli](!/probability/distributions/discrete#bernoulli) trial independently.  
@@ -916,6 +933,11 @@ Note: The geometric distribution is a special case of the negative binomial dist
       content:``,
       before:``,
        link:'/probability/distributions/discrete/hypergeometric',
+      pitfall:`@academic[pitfall,aside:true,width:35%:Treating the draws as independent
+Using the binomial with $p = \\frac{K}{N}$ ignores that each draw changes what is left. For $2$ cards from a deck, it puts $P(\\text{both aces}) = \\left(\\frac{4}{52}\\right)^2 = \\frac{1}{169} \\approx 0.0059$; without replacement, $\\frac{\\binom{4}{2}}{\\binom{52}{2}} = \\frac{6}{1326} = \\frac{1}{221} \\approx 0.0045$.
+[Read more](!#pitfalls)]@
+
+The PMF in the table counts possible samples: the ways to pick $k$ successes from the $K$ in the population, times the ways to pick the other $n - k$ items from the $N - K$ failures, divided by all ways to pick $n$ items. A typical case is a hand of cards dealt from a standard deck of $N = 52$ cards, with the $K = 4$ aces counted as successes.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=5) →@`,
       checklist:`<h2 style="color: #3b82f6;"> Checklist for Identifying a Hypergeometric Distribution</h2>
 ✔ Sampling is done without replacement from a finite population.  
@@ -1008,6 +1030,11 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
       content:``,
       before:``,
        link:'/probability/distributions/discrete/poisson',
+      pitfall:`@academic[pitfall,aside:true,width:35%:Keeping the rate of another interval
+Using $\\lambda = 4$ for a 30-minute window when calls arrive at $4$ per hour gives $P(X = 0) = e^{-4} \\approx 0.018$. Scaled to the window, $\\lambda = 4 \\cdot \\frac{1}{2} = 2$ and $P(X = 0) = e^{-2} \\approx 0.135$.
+[Read more](!#pitfalls)]@
+
+The parameter $\\lambda$ is the average number of events in the interval being counted, so it belongs to that interval. A call center that averages $4$ calls per hour is a typical case, and questions about it may concern one hour, a few minutes, or a whole shift.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=6) →@`,
       checklist:`<h2 style="color: #3b82f6;">Checklist for Identifying a Poisson Distribution</h2>
 ✔ Events occur independently over time or space.  
@@ -1156,7 +1183,7 @@ Here’s how it builds into larger structures:
 
 * [Binomial distribution](!/probability/distributions/discrete#binomial): Repeats the Bernoulli trial ( n ) times independently and counts how many successes occur.
 * [Geometric distribution](!/probability/distributions/discrete#geometric): Repeats the trial until the **first success**.
-* [Negative binomial distribution](!/probability/distributions/discrete#negative-binomial): Repeats until the **r-th success**.
+* [Negative binomial distribution](!/probability/distributions/discrete#negative_binomial): Repeats until the **r-th success**.
 * Even the [hypergeometric](!/probability/distributions/discrete#hypergeometric) and some **Markov models** borrow the concept of binary outcomes, though with modified assumptions (like dependence or sampling without replacement).
 
 This modularity makes the Bernoulli trial a **conceptual building block** — much like a “unit of randomness” — that helps us understand how randomness scales when we repeat simple actions under defined conditions.
@@ -1206,7 +1233,7 @@ The mathematical signature of a discrete distribution is the [probability mass f
 1. **Non-negativity**: $P(X = k) \\geq 0$ for all $k$
 2. **Normalization**: $\\sum_{\\text{all } k} P(X = k) = 1$
 
-The support of a discrete distribution — the set of values where $P(X = k) > 0$ — can be **finite** (like rolling a die: $\{1, 2, 3, 4, 5, 6\}$) or **countably infinite** (like counting trials until success: $\{1, 2, 3, \\ldots\}$). What matters is that you can list the outcomes, even if that list never ends.
+The support of a discrete distribution — the set of values where $P(X = k) > 0$ — can be **finite** (like rolling a die: $\\{1, 2, 3, 4, 5, 6\\}$) or **countably infinite** (like counting trials until success: $\\{1, 2, 3, \\ldots\\}$). What matters is that you can list the outcomes, even if that list never ends.
 
 This discreteness fundamentally shapes how we calculate probabilities: summing over points rather than integrating over intervals.`,
       before:``,
@@ -1219,7 +1246,7 @@ This discreteness fundamentally shapes how we calculate probabilities: summing o
       content:`
 Probability [distributions](!/probability/distributions) — whether discrete or [continuous](!/probability/distributions/continuous) — share certain fundamental features and properties: they have support (the set of possible values), a methods for assigning probabilities, and a [cumulative distribution function](!/probability/cdf). However, these features behave differently depending on whether the distribution is discrete or [continuous](!/probability/distributions/continuous), and it is precisely these differences in how we define and calculate these shared aspects that create the fundamental distinction between the two types.
 
-The most fundamental difference lies in the **support structure**,or the set of values the underlying random variable can be equal to. Discrete distributions have countable values with gaps — $\{0, 1, 2, \\ldots\}$ or $\{1, 2, 3, 4, 5, 6\}$. You can enumerate every possible outcome, even if the list is infinite. [Continuous distributions](!/probability/distributions/continuous), on the other hand, have uncountable intervals where every point in $(a, b)$ is reachable, with no gaps between values.
+The most fundamental difference lies in the **support structure**,or the set of values the underlying random variable can be equal to. Discrete distributions have countable values with gaps — $\\{0, 1, 2, \\ldots\\}$ or $\\{1, 2, 3, 4, 5, 6\\}$. You can enumerate every possible outcome, even if the list is infinite. [Continuous distributions](!/probability/distributions/continuous), on the other hand, have uncountable intervals where every point in $(a, b)$ is reachable, with no gaps between values.
 
 This structural difference directly affects how **probability is assigned at specific points**.
 
@@ -1230,6 +1257,10 @@ This happens because there are uncountably many points in any interval, so the p
 The mathematical tools used to describe probabilities also differ. Discrete distributions use the [probability mass function (PMF)](!/probability/probability-function), denoted $P(X = k)$, which directly gives the probability at each point. Continuous distributions use the [probability density function (PDF)](!/probability/probability-function), denoted $f(x)$, where $f(x) \\geq 0$ but importantly, $f(x)$ itself is not a probability — it's a density that must be integrated over an interval to yield probability.
 
 The [cumulative distribution function (CDF)](!/probability/cdf) behaves differently in each case. For discrete distributions, the CDF is a step function with jumps at each value in the support, calculated as $F(x) = P(X \\leq x) = \\sum_{k \\leq x} P(X = k)$. For continuous distributions, the CDF is a smooth, continuous curve given by $F(x) = \\int_{-\\infty}^x f(t) \\, dt$, with no jumps or discontinuities.
+
+@academic[pitfall,aside:true,width:35%:Treating strict and non-strict inequalities alike
+Reading $P(X < 4)$ for a fair die as $F(4)$ gives $\\frac{4}{6}$, which counts the face $4$ that the strict inequality leaves out. The correct value is $P(X < 4) = F(3) = \\frac{3}{6} = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
 
 These differences manifest in how we **calculate probabilities**. Discrete distributions require summation: $P(X \\in A) = \\sum_{k \\in A} P(X = k)$, adding up the probabilities of individual points in the set $A$. Continuous distributions require integration: $P(X \\in A) = \\int_A f(x) \\, dx$, measuring the area under the density curve over the region $A$.
 
@@ -1500,6 +1531,98 @@ For symmetric distributions, median and mean coincide. For skewed distributions,
       after:``,
   
     },
+    obj6:{
+      title:`Common Pitfalls`,
+      content:`Each of the six mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating strict and non-strict inequalities alike**
+
+For a discrete variable, a probability with a strict inequality such as $P(X < k)$ is read off the CDF as $F(k)$, or $P(X \\ge k)$ is computed as $1 - F(k)$. Both treat the value $k$ as if it carried no probability.
+
+Wrong working: for a fair die,
+$$P(X < 4) = F(4) = \\frac{4}{6} = \\frac{2}{3}$$
+
+Right working: the strict inequality leaves out the face $4$, so the CDF is read at the last value below it.
+$$P(X < 4) = P(X \\le 3) = F(3) = \\frac{3}{6} = \\frac{1}{2}$$
+
+Why it happens: for a continuous variable single points have probability $0$, so $<$ and $\\le$ give the same answer, and the habit carries over to discrete variables.
+
+How to check: list the values the inequality allows. $X < 4$ allows $1$, $2$ and $3$, three of six equally likely faces.
+
+**Forgetting the binomial coefficient**
+
+The probability of exactly $k$ successes in $n$ trials is computed as $p^k (1-p)^{n-k}$. That is the probability of one particular sequence, such as all successes first and all failures after.
+
+Wrong working: for $n = 5$, $p = 0.5$, $k = 3$,
+$$P(X = 3) = 0.5^3 \\cdot 0.5^2 = 0.03125$$
+
+Right working: every arrangement of $3$ successes among $5$ trials has this same probability, and there are $\\binom{5}{3} = 10$ arrangements.
+$$P(X = 3) = \\binom{5}{3} \\cdot 0.5^3 \\cdot 0.5^2 = 10 \\cdot 0.03125 = 0.3125$$
+
+Why it happens: the product rule for independent trials gives the probability of a sequence, and the event of exactly $k$ successes is easily pictured as a single sequence.
+
+How to check: the probabilities $P(X = 0), \\dots, P(X = n)$ must add up to $1$. Without the coefficients, for $n = 5$ and $p = 0.5$ the six values add up to only $6 \\cdot 0.03125 = 0.1875$.
+
+**Counting failures instead of trials**
+
+On this page the geometric $X$ counts the trials up to and including the first success. Some books define it as the number of failures before the first success instead, and the PMF $(1-p)^k p$ from that version is combined with the trial-counting $X$.
+
+Wrong working: rolling a die until the first $6$, with $p = \\frac{1}{6}$,
+$$P(X = 4) = \\left(\\frac{5}{6}\\right)^4 \\cdot \\frac{1}{6} = \\frac{625}{7776} \\approx 0.080$$
+
+Right working: $X = 4$ means three rolls without a $6$, then a $6$.
+$$P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} = \\frac{125}{1296} \\approx 0.096$$
+
+Why it happens: both definitions are in common use, and a formula from one source is easily combined with the definition of $X$ from another.
+
+How to check: put $k = 1$ into the PMF. The first roll is a $6$ with probability $\\frac{1}{6}$, so $P(X = 1)$ must equal $p$; the failures version gives $\\frac{5}{6} \\cdot \\frac{1}{6} = \\frac{5}{36}$ instead.
+
+**Leaving the last trial free**
+
+The number of ways to place $r$ successes among $k$ trials is counted as $\\binom{k}{r}$. That count includes sequences in which the $r$-th success comes earlier and trial $k$ is a failure, but $X = k$ requires the $r$-th success to come exactly on trial $k$.
+
+Wrong working: for $r = 3$, $p = 0.5$, $k = 6$,
+$$P(X = 6) = \\binom{6}{3} \\cdot 0.5^3 \\cdot 0.5^3 = 20 \\cdot \\frac{1}{64} = 0.3125$$
+
+Right working: trial $6$ is the third success, so only the other $2$ successes are placed among the first $5$ trials.
+$$P(X = 6) = \\binom{5}{2} \\cdot 0.5^3 \\cdot 0.5^3 = 10 \\cdot \\frac{1}{64} = 0.15625$$
+
+Why it happens: three successes in six trials sounds like a binomial question, and the binomial coefficient is the familiar one.
+
+How to check: write out one sequence the count includes. HHHTTT has three heads in six flips, but its third head comes on flip $3$, so it belongs to $X = 3$, not to $X = 6$.
+
+**Treating the draws as independent**
+
+Successes in a sample drawn without replacement are counted with the binomial PMF, using $p = \\frac{K}{N}$ on every draw. Without replacement the population changes after each draw, so the draws are not independent.
+
+Wrong working: two cards are drawn from a standard deck, with the aces as successes.
+$$P(X = 2) = \\left(\\frac{4}{52}\\right)^2 = \\frac{1}{169} \\approx 0.0059$$
+
+Right working: with $N = 52$, $K = 4$, $n = 2$,
+$$P(X = 2) = \\frac{\\binom{4}{2}\\binom{48}{0}}{\\binom{52}{2}} = \\frac{6}{1326} = \\frac{1}{221} \\approx 0.0045$$
+the same as $\\frac{4}{52} \\cdot \\frac{3}{51}$ worked out draw by draw.
+
+Why it happens: both models count successes in a fixed number of draws, and the binomial is usually learned first.
+
+How to check: ask whether a drawn item goes back. If not, the second draw sees $51$ cards with only $3$ aces, and its probability must change. The binomial is close only when $n$ is a small fraction of $N$.
+
+**Keeping the rate of another interval**
+
+The rate is given for one interval, such as calls per hour, and the question is about a different interval, but $\\lambda$ is used unchanged.
+
+Wrong working: calls arrive at an average of $4$ per hour. For no call in the next $30$ minutes,
+$$P(X = 0) = e^{-4} \\approx 0.018$$
+
+Right working: in half an hour the average number of calls is $\\lambda = 4 \\cdot \\frac{1}{2} = 2$.
+$$P(X = 0) = e^{-2} \\approx 0.135$$
+
+Why it happens: $\\lambda$ is stated once together with its unit, and the unit is lost when the number is put into the formula.
+
+How to check: compare the mean with the window. $E[X] = \\lambda$, and an average of $4$ calls in half an hour would mean $8$ calls per hour, twice the stated rate.
+`,
+      before:``,
+      after:``,
+    },
   
   }
 
@@ -1666,8 +1789,8 @@ const discreteDistributionsAttributesData = {
       discreteUniform: 'All values in $\\{a,\\dots,b\\}$ (uniform)',
       binomial: '$\\lfloor(n+1)p\\rfloor$ (bimodal if $(n+1)p$ is integer)',
       geometric: '$1$ (always)',
-      negativeBinomial: '$\\lfloor\\frac{(r-1)(1-p)}{p}\\rfloor$ if $r>1$; otherwise $r$',
-      hypergeometric: '$\\lfloor\\frac{(n+1)(K+1)}{N+2}\\rfloor$ (approximation)',
+      negativeBinomial: '$r + \\lfloor\\frac{(r-1)(1-p)}{p}\\rfloor$ if $r>1$; otherwise $r$',
+      hypergeometric: '$\\lfloor\\frac{(n+1)(K+1)}{N+2}\\rfloor$',
       poisson: '$\\lfloor\\lambda\\rfloor$ (bimodal if $\\lambda$ is integer)'
     },
     {
@@ -1722,8 +1845,27 @@ This page systematically presents six fundamental discrete distributions, detail
     }),
   };
 
+  const discreteFamilyTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Six discrete families',
+    preface: 'Each discrete distribution models one kind of counting situation. Match the situation to the family.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Read the story, pick the family',
+    conclusion: 'Fixed trials point to the binomial, waiting for successes to the geometric or negative binomial, sampling without replacement to the hypergeometric, and events at a steady rate to the Poisson.',
+    root: { name: 'Discrete distributions', sub: '6 families' },
+    children: [
+      { id: 'unif', name: '[Uniform](!/probability/distributions/discrete/uniform)', items: [ { label: 'Models', text: 'equally likely values, finitely many' } ] },
+      { id: 'bin', name: '[Binomial](!/probability/distributions/discrete/binomial)', items: [ { label: 'Models', text: 'successes in $n$ trials' } ] },
+      { id: 'geo', name: '[Geometric](!/probability/distributions/discrete/geometric)', items: [ { label: 'Models', text: 'trials until the first success' } ] },
+      { id: 'nb', name: '[Negative binomial](!/probability/distributions/discrete/negative-binomial)', items: [ { label: 'Models', text: 'trials until the $r$-th success' } ] },
+      { id: 'hyp', name: '[Hypergeometric](!/probability/distributions/discrete/hypergeometric)', items: [ { label: 'Models', text: 'drawing without replacement' } ] },
+      { id: 'poi', name: '[Poisson](!/probability/distributions/discrete/poisson)', items: [ { label: 'Models', text: 'events at a constant rate' } ] },
+    ],
+  };
+
    return {
       props:{
+    discreteFamilyTree,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1748,7 +1890,7 @@ This page systematically presents six fundamental discrete distributions, detail
     }
    }
 
-export default function DiscreteDistributionsPage({seoData,sectionsContent , introContent,
+export default function DiscreteDistributionsPage({discreteFamilyTree, seoData,sectionsContent , introContent,
       uniformTable,
       binomialTable,
       geometricTable,
@@ -1802,7 +1944,15 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
            <GenericTable  tableData={discreteDistributionsOverviewData} theme='lightBlue'
           cellFontSize={'16px'}
           headerFontSize={'18px'}/>,
-          </div>
+          </div>,
+          <DiagramFrame
+            key={'types-diagram'}
+            id="discrete-families-tree"
+            title="Six discrete distribution families"
+            source="/probability/distributions/discrete"
+          >
+            <TopDownTree data={discreteFamilyTree} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1886,6 +2036,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: binomialTable }} key="table" />,
+               sectionsContent.binomial.pitfall,
                sectionsContent.binomial.after,
         
             ]    
@@ -1913,6 +2064,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     // sectionsContent.geometric.pmf,
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["geometric distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: geometricTable }} key="table" />,
+              sectionsContent.geometric.pitfall,
               sectionsContent.geometric.after,
             ]
     },
@@ -1940,6 +2092,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
    
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html:distributionsDiagramsData["negative binomial distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: negativeBinomialTable }} key="table" />,
+               sectionsContent.negative.pitfall,
                sectionsContent.negative.after,
             ]
     },
@@ -1965,6 +2118,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     // sectionsContent.hypergeometric.parameters,
     // sectionsContent.hypergeometric.pmf,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: hypergeometricTable }} key="table" />,
+              sectionsContent.hypergeometric.pitfall,
               sectionsContent.hypergeometric.after,
             ]
     },
@@ -1992,6 +2146,7 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["poisson distribution"].svg }} key="table" />,
               <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: poissonTable }} key="table" />,
+               sectionsContent.poisson.pitfall,
                sectionsContent.poisson.after,
             ]
     },
@@ -2054,6 +2209,14 @@ export default function DiscreteDistributionsPage({seoData,sectionsContent , int
         link:'',
         content:[
           sectionsContent.properties.content,
+        ]
+    },
+     {
+        id:'pitfalls',
+        title:sectionsContent.obj6.title,
+        link:'',
+        content:[
+          sectionsContent.obj6.content,
         ]
     },
 

@@ -8337,6 +8337,8 @@ import ConceptIntro from '@/app/components/page-components/content-components/Co
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import svdDiagrams from '@/app/components/linear-algebra copy/matrix/svdDiagrams'
+import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -8623,7 +8625,7 @@ and everything depends on the interior $V^TU$. Under diagonalization the corresp
     title: 'What the SVD reveals',
     tallyLabel: 'readings',
     intro: 'Every entry comes from the same three factors. What changes is which one is being read \u2014 the singular values for size, the columns of $U$ and $V$ for structure, and all three together for geometry.',
-    footnote: 'No other factorization answers this many questions, and none exists for every matrix. That combination is why the SVD is the one to reach for when the matrix is rectangular, rank-deficient, or simply unknown \u2014 the conditions the [other decompositions](!/linear-algebra/decompositions) require are exactly the ones it does without.',
+    footnote: 'No other factorization that exists for every matrix answers this many questions. That combination is why the SVD is the one to reach for when the matrix is rectangular, rank-deficient, or simply unknown \u2014 the conditions many of the [other decompositions](!/linear-algebra/decompositions) require are exactly the ones it does without.',
     groups: [
       {
         heading: 'From the singular values',
@@ -8661,7 +8663,7 @@ and everything depends on the interior $V^TU$. Under diagonalization the corresp
             formula: 'partition $U$ and $V$ at index $r$',
             condition: 'orthonormal bases, all four at once',
             key: true,
-            note: 'First $r$ columns of $V$ span the row space and the rest the null space; first $r$ of $U$ span the column space and the rest the left null space. The only method giving [all four](!/linear-algebra/vector-spaces/fundamental-spaces) orthonormally from one computation.',
+            note: 'First $r$ columns of $V$ span the row space and the rest the null space; first $r$ of $U$ span the column space and the rest the left null space. It gives [all four](!/linear-algebra/vector-spaces/fundamental-spaces) orthonormally from one computation, with $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$ pairing them.',
           },
           {
             name: 'Pseudoinverse',
@@ -8681,7 +8683,7 @@ and everything depends on the interior $V^TU$. Under diagonalization the corresp
             formula: '$A_k = \\sum_{i=1}^{k} \\sigma_i \\mathbf{u}_i \\mathbf{v}_i^{\\mathsf{T}}$',
             condition: 'optimal for every unitarily invariant norm',
             key: true,
-            note: 'Truncating the outer-product sum gives the best rank-$k$ approximation there is \u2014 the Eckart\u2013Young theorem, and it is why the SVD underlies image compression and principal component analysis. The error is exactly $\\sigma_{k+1}$, so the singular values say in advance how much is lost.',
+            note: 'Truncating the outer-product sum gives the best rank-$k$ approximation there is \u2014 the Eckart\u2013Young theorem, and it is why the SVD underlies image compression and principal component analysis. The error in the operator norm is exactly $\\sigma_{k+1}$, so the singular values say in advance how much is lost.',
           },
           {
             name: 'Geometric action',
@@ -8713,9 +8715,9 @@ $\\Sigma$ scales each axis independently by the corresponding singular value. Ax
 
 $U$ rotates (or reflects) the scaled result into the output space.
 
-The singular values measure the stretching in each orthogonal direction. $\\sigma_1$ is the maximum stretching: $\\sigma_1 = \\max_{\\|\\mathbf{x}\\|=1}\\|A\\mathbf{x}\\|$. The smallest nonzero singular value $\\sigma_r$ is the minimum stretching on the [row space](!/linear-algebra/vector-spaces/fundamental-spaces). The ratio $\\sigma_1/\\sigma_r$ is the condition number — it measures how distorted the transformation is.
+The singular values measure the stretching in each orthogonal direction. $\\sigma_1$ is the maximum stretching: $\\sigma_1 = \\max_{\\|\\mathbf{x}\\|=1}\\|A\\mathbf{x}\\|$. The smallest nonzero singular value $\\sigma_r$ is the minimum stretching on the [row space](!/linear-algebra/vector-spaces/fundamental-spaces). For a full-rank matrix, the ratio $\\sigma_1/\\sigma_r$ is the condition number — it measures how distorted the transformation is.
 
-Even the most complex-looking matrix is geometrically just two rotations sandwiching a coordinate-axis scaling.`,
+Even the most complex-looking matrix is geometrically just two rotations or reflections sandwiching a coordinate-axis scaling.`,
     before: ``,
     after: ``,
     link: ``,
@@ -8748,7 +8750,7 @@ Even the most complex-looking matrix is geometrically just two rotations sandwic
         tex: `$\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$`,
         read: `The singular values, in decreasing order`,
         means: `Lowercase sigma with an index — and the ordering is part of the notation: writing $\\sigma_1$ **means** the largest, by the standing convention of **Singular Values** below. No other subscripted family on this site carries a built-in sort.`,
-        cases: `The extremes have second names: $\\sigma_1 = \\|A\\|_2$, the operator norm, and $\\sigma_1/\\sigma_r = \\kappa(A)$, the condition number — kappa being numerical analysis's own reserved letter.`,
+        cases: `The extremes have second names: $\\sigma_1 = \\|A\\|_2$, the operator norm, and, for full-rank $A$, $\\sigma_1/\\sigma_r = \\kappa(A)$, the condition number — kappa being numerical analysis's own reserved letter.`,
         alsoWritten: `$s_i$ in some numerical texts and most software output, freeing sigma for statistics.`,
         confusedWith: `The set-valued cousin: $\\sigma(A)$ with no subscript is the **spectrum** — the set of [eigenvalues](!/linear-algebra/eigen/characteristic-equation#notation). Subscripted sigma is a singular value, bare sigma-of is a set; eigenvalues and singular values agree only for special matrices, so the two sigmas rarely even hold the same numbers.`,
       },
@@ -8774,7 +8776,11 @@ The number of nonzero singular values equals the [rank](!/linear-algebra/matrix/
 
 This is the most numerically stable method for determining rank: compute the SVD and count singular values above a tolerance.
 
-The largest singular value $\\sigma_1$ is the operator norm $\\|A\\|_2 = \\max_{\\|\\mathbf{x}\\|=1}\\|A\\mathbf{x}\\|$. The [Frobenius norm](!/linear-algebra/matrix/trace) is $\\|A\\|_F = \\sqrt{\\sigma_1^2 + \\sigma_2^2 + \\cdots + \\sigma_r^2}$. The condition number is $\\kappa(A) = \\sigma_1/\\sigma_r$ — a large condition number means the matrix is nearly singular and small perturbations in the input cause large changes in the output.`,
+@academic[pitfall,aside:true,width:35%:Forgetting the square root
+Taking the eigenvalues of $A^TA$ as the singular values gives $3$ and $1$ for $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$, so $\\sigma_1^2 + \\sigma_2^2 = 10$, while the squared entries of $A$ add up to $4$. The singular values are $\\sqrt{3}$ and $1$.
+[Read more](!#pitfalls)]@
+
+The largest singular value $\\sigma_1$ is the operator norm $\\|A\\|_2 = \\max_{\\|\\mathbf{x}\\|=1}\\|A\\mathbf{x}\\|$. The [Frobenius norm](!/linear-algebra/matrix/trace) is $\\|A\\|_F = \\sqrt{\\sigma_1^2 + \\sigma_2^2 + \\cdots + \\sigma_r^2}$. For full-rank $A$, the condition number is $\\kappa(A) = \\sigma_1/\\sigma_r$ — a large condition number means the matrix is nearly singular and small perturbations in the input cause large changes in the output.`,
     before: ``,
     after: ``,
     link: ``,
@@ -8789,7 +8795,13 @@ The singular values are $\\sigma_i = \\sqrt{\\lambda_i}$. The left singular vect
 
 @academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$: $A^TA = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$, eigenvalues $3$ and $1$, eigenvectors $\\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\frac{1}{\\sqrt{2}}(1, -1)^T$. Singular values: $\\sqrt{3}$ and $1$. Left singular vectors: $\\mathbf{u}_1 = \\frac{1}{\\sqrt{3}}A\\mathbf{v}_1 = \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, $\\mathbf{u}_2 = A\\mathbf{v}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$. Extend with $\\mathbf{u}_3 = \\frac{1}{\\sqrt{3}}(-1, -1, 1)^T$.]@`,
+For $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$: $A^TA = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$, eigenvalues $3$ and $1$, eigenvectors $\\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\frac{1}{\\sqrt{2}}(1, -1)^T$. Singular values: $\\sqrt{3}$ and $1$. Left singular vectors: $\\mathbf{u}_1 = \\frac{1}{\\sqrt{3}}A\\mathbf{v}_1 = \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, $\\mathbf{u}_2 = A\\mathbf{v}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$. Extend with $\\mathbf{u}_3 = \\frac{1}{\\sqrt{3}}(-1, -1, 1)^T$.]@
+
+@academic[pitfall,aside:true,width:35%:Choosing the left vectors separately
+Taking each $\\mathbf{u}_i$ as an eigenvector of $AA^T$ on its own can flip a sign: $\\mathbf{u}_1 = -\\frac{1}{\\sqrt{6}}(1, 1, 2)^T$ is also a unit eigenvector, but with it $U\\Sigma V^T = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\\\ -1 & -1 \\end{pmatrix} \\neq A$. With $\\mathbf{u}_1 = \\frac{1}{\\sigma_1}A\\mathbf{v}_1$ the product is $A$.
+[Read more](!#pitfalls)]@
+
+In the example, the columns of $V$ came from the eigenvectors of $A^TA$, and the first two columns of $U$ were then produced from them one at a time by $\\mathbf{u}_i = \\frac{1}{\\sigma_i}A\\mathbf{v}_i$. Each such pair satisfies $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$, which is the column-by-column form of $AV = U\\Sigma$. Only $\\mathbf{u}_3$, which meets the zero row of $\\Sigma$, is fixed by orthogonality to $\\mathbf{u}_1$ and $\\mathbf{u}_2$ alone.`,
     before: ``,
     after: ``,
     link: ``,
@@ -8822,7 +8834,7 @@ The first $r$ columns of $U$ ($\\mathbf{u}_1, \\dots, \\mathbf{u}_r$) form an or
 
 The last $m - r$ columns of $U$ ($\\mathbf{u}_{r+1}, \\dots, \\mathbf{u}_m$) form an orthonormal basis for the left null space of $A$.
 
-No other factorization provides all four bases simultaneously, and no other method guarantees that these bases are orthonormal. The SVD is the complete structural portrait of any matrix.`,
+The SVD provides all four bases simultaneously, all orthonormal, and pairs them so that $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$. The SVD is the complete structural portrait of any matrix.`,
     before: ``,
     after: ``,
     link: ``,
@@ -8838,7 +8850,13 @@ The matrix $\\Sigma^+$ is formed by reciprocating each nonzero singular value an
 
 The pseudoinverse satisfies four defining properties: $AA^+A = A$, $A^+AA^+ = A^+$, $(AA^+)^T = AA^+$, $(A^+A)^T = A^+A$.
 
-@academic[rule_theorem_plain:For a full-rank overdetermined system ($m > n$, rank $= n$), $A^+\\mathbf{b}$ gives the [least-squares](!/linear-algebra/orthogonality/least-squares) solution. For a rank-deficient system, $A^+\\mathbf{b}$ gives the minimum-norm least-squares solution — the solution of smallest length among all minimizers of $\\|A\\mathbf{x} - \\mathbf{b}\\|$.]@`,
+@academic[rule_theorem_plain:For a full-rank overdetermined system ($m > n$, rank $= n$), $A^+\\mathbf{b}$ gives the [least-squares](!/linear-algebra/orthogonality/least-squares) solution. For a rank-deficient system, $A^+\\mathbf{b}$ gives the minimum-norm least-squares solution — the solution of smallest length among all minimizers of $\\|A\\mathbf{x} - \\mathbf{b}\\|$.]@
+
+@academic[pitfall,aside:true,width:35%:Keeping U and V in place
+Writing $U\\Sigma^+V^T$ instead of $V\\Sigma^+U^T$: for $A = \\begin{pmatrix} 0 & 2 \\\\ 0 & 0 \\end{pmatrix}$, with $\\mathbf{u}_1 = \\mathbf{e}_1$, $\\mathbf{v}_1 = \\mathbf{e}_2$ and $\\sigma_1 = 2$, it gives $\\begin{pmatrix} 0 & 1/2 \\\\ 0 & 0 \\end{pmatrix}$, and then $AA^+A = O$. The pseudoinverse is $\\begin{pmatrix} 0 & 0 \\\\ 1/2 & 0 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+Assembling $A^+$ takes three steps: reciprocate the nonzero singular values, transpose the shape of $\\Sigma$ to get $\\Sigma^+$, and multiply by the two orthogonal factors. When $A$ is square and invertible, the result is the ordinary inverse $A^{-1} = V\\Sigma^{-1}U^T$. In every case the result can be tested against the four defining properties above.`,
     before: ``,
     after: ``,
     link: ``,
@@ -8882,10 +8900,10 @@ It measures the total "energy" in the matrix.
 
 The condition number quantifies sensitivity to perturbation:
 
-@academic[formula_callout:condition_number|Condition Number|$$\\kappa(A) = \\frac{\\sigma_1}{\\sigma_r}$$]@
+@academic[formula_callout:condition_number|Condition Number|$$\\kappa(A) = \\frac{\\sigma_1}{\\sigma_n}$$]@
 @academic[formulas_link:/linear-algebra/formulas#condition_number]@
 
-A matrix with $\\kappa = 10^k$ loses roughly $k$ digits of accuracy in solving $A\\mathbf{x} = \\mathbf{b}$ with floating-point arithmetic. A perfectly conditioned matrix ($\\kappa = 1$) is orthogonal. A singular matrix ($\\sigma_r = 0$) has $\\kappa = \\infty$.
+A matrix with $\\kappa = 10^k$ loses roughly $k$ digits of accuracy in solving $A\\mathbf{x} = \\mathbf{b}$ with floating-point arithmetic. A perfectly conditioned matrix ($\\kappa = 1$) is a nonzero multiple of an orthogonal matrix. A singular square matrix ($\\sigma_n = 0$) has $\\kappa = \\infty$.
 
 The singular values are the natural measuring tool for matrices, just as eigenvalues are the natural measuring tool for symmetric matrices and [linear operators](!/linear-algebra/transformations). For non-symmetric matrices, singular values (not eigenvalues) govern norms and conditioning.`,
     before: ``,
@@ -8899,6 +8917,10 @@ The singular values are the natural measuring tool for matrices, just as eigenva
 The singular values are the eigenvalues.
 
 For a general symmetric matrix with some negative eigenvalues, the singular values are $|\\lambda_i|$. The signs are absorbed into $U$ or $V$: if $\\lambda_i < 0$, one of the corresponding singular vectors is negated so that $\\sigma_i = |\\lambda_i| > 0$.
+
+@academic[pitfall,aside:true,width:35%:Using the eigenvalues of A
+Reading the singular values of $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ off its eigenvalues $1, 1$ gives $\\|A\\|_2 = 1$ and $\\kappa(A) = 1$. From $A^TA = \\begin{pmatrix} 1 & 2 \\\\ 2 & 5 \\end{pmatrix}$, $\\sigma_{1,2} = \\sqrt{2} \\pm 1$, so $\\|A\\|_2 = 1 + \\sqrt{2}$ and $\\kappa(A) = 3 + 2\\sqrt{2}$.
+[Read more](!#pitfalls)]@
 
 For non-symmetric or rectangular matrices, the eigendecomposition does not apply (it requires square matrices and may not exist even then), but the SVD always does. The SVD is the correct generalization of the spectral decomposition to the broadest possible class of matrices.`,
     before: ``,
@@ -8935,9 +8957,9 @@ The best rank-$k$ approximation: truncate at $k$ terms.
 
 Norms and the condition number: directly from the singular values.
 
-The [geometry](!/linear-algebra/transformations/geometric) of the linear map: rotation, scaling, rotation.
+The [geometry](!/linear-algebra/transformations/geometric) of the linear map: rotation or reflection, scaling, rotation or reflection.
 
-For symmetric matrices, the SVD reduces to the [spectral decomposition](!/linear-algebra/decompositions/spectral). For invertible square matrices, the singular values reveal the conditioning that the [determinant](!/linear-algebra/determinants) alone cannot see (a matrix with $\\det = 1$ can still be poorly conditioned). For rectangular matrices, the SVD is the only factorization that applies without modification.
+For symmetric positive semi-definite matrices, the SVD reduces to the [spectral decomposition](!/linear-algebra/decompositions/spectral). For invertible square matrices, the singular values reveal the conditioning that the [determinant](!/linear-algebra/determinants) alone cannot see (a matrix with $\\det = 1$ can still be poorly conditioned). For rectangular matrices, the SVD is one of the few factorizations that apply without modification.
 
 The SVD is the culmination of the decomposition hierarchy — the most general, most informative, and most broadly applicable factorization in linear algebra.
 
@@ -8976,11 +8998,77 @@ The [SVD tool](!/linear-algebra/visual-tools/singular-value-decomposition) repor
     after: ``,
     link: ``,
   },
+  obj14: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when an SVD is worked out by hand. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Forgetting the square root**
+
+The eigenvalues of $A^TA$ are found correctly and then used directly as the singular values. The square root that turns them into stretch factors is left out.
+
+Wrong working: for $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$ from the worked example,
+$$A^TA = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}, \\quad \\lambda_1 = 3, \\; \\lambda_2 = 1 \\quad \\Longrightarrow \\quad \\sigma_1 = 3, \\; \\sigma_2 = 1$$
+
+Right working: each singular value is the square root of an eigenvalue.
+$$\\sigma_1 = \\sqrt{3}, \\quad \\sigma_2 = \\sqrt{1} = 1$$
+
+Why it happens: the whole computation runs through the eigenvalue problem for $A^TA$, and its eigenvalues look like the final answer. When an eigenvalue is $0$ or $1$ the square root changes nothing, which hides the step.
+
+How to check: the squares of the singular values must add up to the sum of the squared entries of $A$, which is $\\|A\\|_F^2$. Here the entries give $1 + 1 + 1 + 1 = 4$, and $(\\sqrt{3})^2 + 1^2 = 4$, while $3^2 + 1^2 = 10$. A second test: $\\|A\\mathbf{v}_1\\|$ must equal $\\sigma_1$, and $A\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 2)^T$ has length $\\sqrt{3}$.
+
+**Choosing the left vectors separately**
+
+The right singular vectors come from $A^TA$, and the left ones are taken as unit eigenvectors of $AA^T$, found independently. Each eigenvector is fixed only up to sign, so the two choices need not match, and $U\\Sigma V^T$ no longer equals $A$.
+
+Wrong working: with $\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\mathbf{v}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$ from the worked example, the unit eigenvector of $AA^T$ for $\\lambda = 3$ is taken as $\\mathbf{u}_1 = -\\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, with $\\mathbf{u}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$. Since $\\mathbf{u}_3$ meets a zero row of $\\Sigma$,
+$$U\\Sigma V^T = \\sigma_1\\mathbf{u}_1\\mathbf{v}_1^T + \\sigma_2\\mathbf{u}_2\\mathbf{v}_2^T = -\\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\\\ 2 & 2 \\end{pmatrix} + \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\\\ -1 & -1 \\end{pmatrix}$$
+
+Right working: compute $\\mathbf{u}_1$ from $\\mathbf{v}_1$.
+$$\\mathbf{u}_1 = \\frac{1}{\\sqrt{3}}A\\mathbf{v}_1 = \\frac{1}{\\sqrt{3}} \\cdot \\frac{1}{\\sqrt{2}}(1, 1, 2)^T = \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$$
+$$U\\Sigma V^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\\\ 2 & 2 \\end{pmatrix} + \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix} = A$$
+
+Why it happens: the columns of $U$ and $V$ are eigenvectors of $AA^T$ and $A^TA$, so it looks natural to compute both the same way. That description fixes each column only up to sign, and it says nothing about the pairing $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$ that holds the factorization together.
+
+How to check: for each nonzero $\\sigma_i$, compare $A\\mathbf{v}_i$ with $\\sigma_i\\mathbf{u}_i$. Here $A\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 2)^T$, while the wrong choice gives $\\sigma_1\\mathbf{u}_1 = -\\frac{1}{\\sqrt{2}}(1, 1, 2)^T$.
+
+**Keeping U and V in place**
+
+To build the pseudoinverse, $\\Sigma$ is replaced by $\\Sigma^+$ but the outer factors are left where they were, giving $U\\Sigma^+V^T$. The order has to reverse, as it does for the inverse of any product.
+
+Wrong working: $A = \\begin{pmatrix} 0 & 2 \\\\ 0 & 0 \\end{pmatrix}$ sends $\\mathbf{e}_2$ to $2\\mathbf{e}_1$ and $\\mathbf{e}_1$ to $\\mathbf{0}$, so $\\sigma_1 = 2$, $\\mathbf{v}_1 = \\mathbf{e}_2$, $\\mathbf{u}_1 = \\mathbf{e}_1$, and $\\sigma_2 = 0$, $\\mathbf{v}_2 = \\mathbf{e}_1$, $\\mathbf{u}_2 = \\mathbf{e}_2$. Then $U = I$, $V = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, $\\Sigma^+ = \\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix}$, and
+$$U\\Sigma^+V^T = \\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix}\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & 1/2 \\\\ 0 & 0 \\end{pmatrix}$$
+
+Right working: $V$ goes on the left and $U^T$ on the right.
+$$A^+ = V\\Sigma^+U^T = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & 0 \\\\ 1/2 & 0 \\end{pmatrix}$$
+
+Why it happens: $\\Sigma^+$ takes the place of $\\Sigma$ in the middle, and it is tempting to change nothing else. For a symmetric positive semi-definite matrix $U = V$, so the slip gives the right answer there and goes unnoticed.
+
+How to check: test the first defining property, $AA^+A = A$. With the correct $A^+$, $AA^+ = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $AA^+A = A$. With the wrong one, $A \\begin{pmatrix} 0 & 1/2 \\\\ 0 & 0 \\end{pmatrix} = O$, so $AA^+A = O$. For a rectangular $A$ the sizes alone catch it: $A^+$ must be $n \\times m$, and $U\\Sigma^+V^T$ is not even defined when $m \\neq n$.
+
+**Using the eigenvalues of A**
+
+For a square matrix, the singular values are read off the eigenvalues of $A$ itself, and the norm and the condition number are computed from them. This works for symmetric matrices, after taking absolute values, but not in general.
+
+Wrong working: $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ is triangular, with eigenvalues $1$ and $1$. Taking these as the singular values gives
+$$\\|A\\|_2 = 1, \\qquad \\kappa(A) = \\frac{1}{1} = 1$$
+
+Right working: the singular values come from $A^TA$.
+$$A^TA = \\begin{pmatrix} 1 & 2 \\\\ 2 & 5 \\end{pmatrix}, \\quad \\lambda^2 - 6\\lambda + 1 = 0, \\quad \\lambda = 3 \\pm 2\\sqrt{2}$$
+$$\\sigma_1 = \\sqrt{3 + 2\\sqrt{2}} = 1 + \\sqrt{2}, \\qquad \\sigma_2 = \\sqrt{3 - 2\\sqrt{2}} = \\sqrt{2} - 1$$
+$$\\|A\\|_2 = 1 + \\sqrt{2} \\approx 2.414, \\qquad \\kappa(A) = \\frac{\\sqrt{2} + 1}{\\sqrt{2} - 1} = 3 + 2\\sqrt{2} \\approx 5.83$$
+
+Why it happens: for symmetric matrices the singular values are the absolute values of the eigenvalues, as the section on the spectral decomposition shows, and the shortcut is carried over to matrices that are not symmetric.
+
+How to check: one vector is enough. $A\\mathbf{e}_2 = (2, 1)^T$ has length $\\sqrt{5} \\approx 2.24$, more than $1$, so $\\|A\\|_2$ cannot be $1$. The squares of the singular values must also add up to the squared entries, $1 + 4 + 0 + 1 = 6$; the eigenvalues give $1 + 1 = 2$, while $(1 + \\sqrt{2})^2 + (\\sqrt{2} - 1)^2 = 6$.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
 }
 
 const introContent = {
   title: `The Universal Matrix Factorization`,
-  content: `The singular value decomposition, written SVD, factors any matrix of any shape as UΣVᵀ — two orthogonal matrices sandwiching a diagonal matrix of non-negative singular values. It exists for every matrix, reveals the rank, provides orthonormal bases for all four fundamental subspaces, computes the pseudoinverse, yields the best low-rank approximation, and decomposes every linear transformation into a rotation, a scaling, and another rotation. No other single factorization provides this much information.`,
+  content: `The singular value decomposition, written SVD, factors any matrix of any shape as UΣVᵀ — two orthogonal matrices sandwiching a diagonal matrix of non-negative singular values. It exists for every matrix, reveals the rank, provides orthonormal bases for all four fundamental subspaces, computes the pseudoinverse, yields the best low-rank approximation, and decomposes every linear transformation into a rotation or reflection, a scaling, and another rotation or reflection. No other single factorization provides this much information.`,
 }
 
 const faqQuestions = {
@@ -9023,7 +9111,7 @@ const schemas = {
     },
     "teaches": [
       "SVD factorization A = UΣVᵀ for any matrix",
-      "Geometric interpretation as rotation-scaling-rotation",
+      "Geometric interpretation as rotation/reflection, scaling, rotation/reflection",
       "Singular values from eigenvalues of AᵀA",
       "Four fundamental subspaces from U and V",
       "Moore-Penrose pseudoinverse via SVD",
@@ -9109,8 +9197,24 @@ const schemas = {
     }),
   };
 
+  const svdNest = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'How far the SVD reaches',
+    preface: 'The spectral decomposition needs a symmetric matrix; the SVD works for every matrix. Moving outward, the two decompositions part ways.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The broadest possible class',
+    conclusion: 'Where eigendecomposition may fail or not apply, the SVD always does: it covers non-symmetric and rectangular matrices too.',
+    levels: [
+      { id: 'psd', symbol: 'S₊', name: 'Symmetric positive semi-definite', note: 'spectral decomposition and SVD coincide: $U = V = Q$, $\\Sigma = D$' },
+      { id: 'sym', symbol: 'S', name: '[Symmetric](!/linear-algebra/decompositions/spectral)', adds: 'negative eigenvalues', note: '$\\sigma_i = |\\lambda_i|$, signs absorbed into $U$ or $V$' },
+      { id: 'sq', symbol: 'M_n', name: 'Square', note: 'eigendecomposition may not exist' },
+      { id: 'all', symbol: 'M_{m×n}', name: 'All matrices', adds: 'rectangular shapes', note: 'only the [SVD](!/linear-algebra/decompositions/svd) applies' },
+    ],
+  };
+
   return {
   props:{
+    svdNest,
     demoUnits,
     sectionsContent,
     introContent,
@@ -9132,7 +9236,7 @@ const schemas = {
 }
    }
 
-export default function SVDPage({
+export default function SVDPage({svdNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -9350,6 +9454,14 @@ export default function SVDPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrameV2
+            key={'obj10-diagram'}
+            id="svd-reach-nesting"
+            title="How far the SVD reaches"
+            source="/linear-algebra/decompositions/svd"
+          >
+            <NestedContainment data={svdNest} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -9385,8 +9497,16 @@ export default function SVDPage({
           >
             <IdentitySheet data={svdReadings} theme="navy" variant="ledger" />
           </DiagramFrame>,
-          `Two of these deserve emphasis because nothing else supplies them. The **condition number** measures how badly a system amplifies error, and it is invisible to the determinant — a matrix can have determinant one and still be nearly singular in some direction. **Low-rank approximation** is optimal rather than merely reasonable: truncating the sum at $k$ terms gives the closest rank-$k$ matrix in every unitarily invariant norm, with error exactly $\\sigma_{k+1}$.`,
+          `Two of these deserve emphasis because nothing else supplies them. The **condition number** measures how badly a system amplifies error, and it is invisible to the determinant — a matrix can have determinant one and still be nearly singular in some direction. **Low-rank approximation** is optimal rather than merely reasonable: truncating the sum at $k$ terms gives the closest rank-$k$ matrix in every unitarily invariant norm, with error exactly $\\sigma_{k+1}$ in the operator norm.`,
           `The reason all of this comes from one factorization is that the SVD asks nothing of the matrix. It need not be square, invertible, symmetric or full rank — the factorization exists regardless, which is what separates it from every other decomposition in this section and why it is the one to reach for when the matrix is unknown.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

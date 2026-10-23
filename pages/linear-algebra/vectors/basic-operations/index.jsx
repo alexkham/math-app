@@ -1168,7 +1168,13 @@ $$\\mathbf{a} + \\mathbf{b} = (a_1 + b_1,\\ a_2 + b_2,\\ \\ldots,\\ a_n + b_n)$$
 
 The result is again a vector in $\\mathbb{R}^n$ — addition does not change the dimension. Both inputs must belong to the same space; adding a vector in $\\mathbb{R}^2$ to a vector in $\\mathbb{R}^3$ is undefined because there is no way to match up the components.
 
-Geometrically, vector addition has two equivalent visualizations. In the tip-to-tail method, the tail of $\\mathbf{b}$ is placed at the head of $\\mathbf{a}$, and the sum $\\mathbf{a} + \\mathbf{b}$ is the vector running from the tail of $\\mathbf{a}$ to the head of $\\mathbf{b}$. In the parallelogram method, both vectors share a common tail, and the sum is the diagonal of the parallelogram they form. The two constructions always yield the same result, and each highlights a different aspect of addition: tip-to-tail emphasizes sequential displacement, while the parallelogram makes the symmetry between $\\mathbf{a}$ and $\\mathbf{b}$ visually explicit.`,
+Geometrically, vector addition has two equivalent visualizations. In the tip-to-tail method, the tail of $\\mathbf{b}$ is placed at the head of $\\mathbf{a}$, and the sum $\\mathbf{a} + \\mathbf{b}$ is the vector running from the tail of $\\mathbf{a}$ to the head of $\\mathbf{b}$. In the parallelogram method, both vectors share a common tail, and the sum is the diagonal of the parallelogram they form. The two constructions always yield the same result, and each highlights a different aspect of addition: tip-to-tail emphasizes sequential displacement, while the parallelogram makes the symmetry between $\\mathbf{a}$ and $\\mathbf{b}$ visually explicit.
+
+@academic[pitfall,aside:true,width:35%:Taking the diagonal between the tips
+Reading the arrow that joins the two tips as the sum gives, for $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$, the vector $\\pm(3, -2)$, which is a difference. The sum is the diagonal from the shared tail: $\\mathbf{a} + \\mathbf{b} = (5, 4)$.
+[Read more](!#pitfalls)]@
+
+Both constructions start from the same two arrows. The parallelogram method in particular puts several segments on the page at once: the two sides drawn from the shared tail, their two translated copies, and two diagonals that cross in the middle. The component formula above is what ties the picture to the algebra, since every segment in the figure can be written in terms of the components of $\\mathbf{a}$ and $\\mathbf{b}$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1256,7 +1262,11 @@ $$\\mathbf{a} - \\mathbf{b} = \\mathbf{a} + (-\\mathbf{b}) = (a_1 - b_1,\\ a_2 -
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Reducing subtraction to addition and negation means that all four properties of addition — commutativity, associativity, identity, and inverse — carry over automatically. No separate set of rules is needed.
+Reducing subtraction to addition and negation means that no separate set of rules is needed: differences are handled by the four properties of addition. Subtraction itself is neither commutative nor associative — $\\mathbf{a} - \\mathbf{b} = -(\\mathbf{b} - \\mathbf{a})$.
+
+@academic[pitfall,aside:true,width:35%:Reversing the order of subtraction
+Drawing $\\mathbf{a} - \\mathbf{b}$ from the tip of $\\mathbf{a}$ to the tip of $\\mathbf{b}$ gives, for $\\mathbf{a} = (5, 2)$ and $\\mathbf{b} = (2, 4)$, the vector $(-3, 2)$, which is $\\mathbf{b} - \\mathbf{a}$. The difference is $(5 - 2,\\ 2 - 4) = (3, -2)$.
+[Read more](!#pitfalls)]@
 
 The geometric picture of subtraction is particularly useful. When $\\mathbf{a}$ and $\\mathbf{b}$ are drawn from a common tail, the difference $\\mathbf{a} - \\mathbf{b}$ is the vector pointing from the tip of $\\mathbf{b}$ to the tip of $\\mathbf{a}$. This interpretation connects subtraction directly to distance: the length of $\\mathbf{a} - \\mathbf{b}$ is the Euclidean distance between the heads of the two vectors, formalized as $d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a} - \\mathbf{b}\\|$ on the [magnitude](!/linear-algebra/vectors/magnitude) page.`,
     before: ``,
@@ -1277,6 +1287,10 @@ $$c\\mathbf{a} = (ca_1,\\ ca_2,\\ \\ldots,\\ ca_n)$$
 The result is always a vector in the same $\\mathbb{R}^n$.
 
 @academic[rule_plain:Geometrically, scalar multiplication changes the length of the vector by a factor of $|c|$ while preserving or reversing its direction depending on the sign of $c$.]@
+
+@academic[pitfall,aside:true,width:35%:Giving a negative scalar a negative length
+Writing $\\|-2\\mathbf{a}\\| = -2\\|\\mathbf{a}\\|$ for $\\mathbf{a} = (3, 4)$ gives a length of $-10$. But $-2\\mathbf{a} = (-6, -8)$ has length $\\sqrt{36 + 64} = 10 = |-2| \\cdot 5$; the sign only reverses the direction.
+[Read more](!#pitfalls)]@
 
 When $c > 0$, the scaled vector $c\\mathbf{a}$ points in the same direction as $\\mathbf{a}$. If $c > 1$, the vector stretches; if $0 < c < 1$, it compresses. When $c < 0$, the direction flips — the scaled vector points opposite to $\\mathbf{a}$, with its length multiplied by $|c|$. The boundary case $c = 0$ collapses any vector to the zero vector: $0\\mathbf{a} = \\mathbf{0}$.
 
@@ -1328,7 +1342,7 @@ Two special cases follow immediately from these rules. Setting $c = 0$ gives $0\
     title: `The Algebraic Foundation`,
     content: `Addition and scalar multiplication are not just two operations among many — they are the two operations on which the entire algebraic theory of vectors rests. Every other construction in this section is built from them. The [dot product](!/linear-algebra/vectors/dot-product) multiplies corresponding components and sums the results — a sequence of scalar multiplications followed by real-number addition. The [cross product](!/linear-algebra/vectors/cross-product) combines components through differences of pairwise products — again, scalar multiplication and addition in a specific pattern. A [linear combination](!/linear-algebra/vectors/linear-combinations) $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$ is nothing more than repeated scalar multiplication followed by repeated addition.
 
-The ten properties listed on this page — four for addition, four for scalar multiplication, plus two distributive laws — are not arbitrary. They are precisely the axioms that define a [vector space](!/linear-algebra/vector-spaces/axioms). Any collection of objects that satisfies these rules qualifies as a vector space, whether the objects are arrows in $\\mathbb{R}^3$, polynomials, matrices, or functions. The vectors in $\\mathbb{R}^n$ studied throughout this section are the most concrete example, but the algebraic structure they exhibit extends far beyond ordered tuples of numbers.`,
+The eight properties listed on this page — four for addition and four for scalar multiplication, two of them distributive laws — are not arbitrary. Together with closure, they are precisely the axioms that define a [vector space](!/linear-algebra/vector-spaces/axioms). Any collection of objects that satisfies these rules qualifies as a vector space, whether the objects are arrows in $\\mathbb{R}^3$, polynomials, matrices, or functions. The vectors in $\\mathbb{R}^n$ studied throughout this section are the most concrete example, but the algebraic structure they exhibit extends far beyond ordered tuples of numbers.`,
     before: ``,
     after: ``,
     link: '',
@@ -1336,6 +1350,59 @@ The ten properties listed on this page — four for addition, four for scalar mu
   obj7: {
     title: `Operations at a Glance`,
     content: `The page treated addition, subtraction, and scalar multiplication one at a time, presenting each through three lenses — a component formula, a geometric picture, and a list of algebraic rules that the operation satisfies. The table below collects all three operations across those three views in a single place, making explicit the parallel structure that runs through the page and showing where each operation borrows from or extends the others.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj8: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for most wrong answers with the basic operations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Taking the diagonal between the tips**
+
+In the parallelogram method, $\\mathbf{a}$ and $\\mathbf{b}$ are drawn from a shared tail, and the arrow joining their two tips is read off as the sum. That arrow is a diagonal of the same parallelogram, but it is the wrong one.
+
+Wrong working: for $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$, the arrow from the tip of $\\mathbf{b}$ to the tip of $\\mathbf{a}$ is
+$$(4 - 1,\\ 1 - 3) = (3, -2)$$
+and this is taken as $\\mathbf{a} + \\mathbf{b}$.
+
+Right working: the sum is the diagonal that starts at the shared tail and ends at the opposite corner.
+$$\\mathbf{a} + \\mathbf{b} = (4 + 1,\\ 1 + 3) = (5, 4)$$
+The arrow between the tips is $\\mathbf{a} - \\mathbf{b} = (3, -2)$, the difference.
+
+Why it happens: both diagonals are drawn from the same two arrows, and the one joining the tips looks like the natural link between $\\mathbf{a}$ and $\\mathbf{b}$.
+
+How to check: build the sum tip-to-tail. Walking $\\mathbf{a}$ from the origin ends at $(4, 1)$, and walking $\\mathbf{b}$ from there ends at $(5, 4)$, so the sum must reach $(5, 4)$. The lengths also disagree: $\\|(3, -2)\\| = \\sqrt{13} \\approx 3.61$, while $\\|(5, 4)\\| = \\sqrt{41} \\approx 6.40$.
+
+**Reversing the order of subtraction**
+
+The difference $\\mathbf{a} - \\mathbf{b}$ is drawn from the tip of $\\mathbf{a}$ to the tip of $\\mathbf{b}$, or computed by subtracting the components of $\\mathbf{a}$ from those of $\\mathbf{b}$. Both give $\\mathbf{b} - \\mathbf{a}$, the opposite vector.
+
+Wrong working: for $\\mathbf{a} = (5, 2)$ and $\\mathbf{b} = (2, 4)$,
+$$\\mathbf{a} - \\mathbf{b} = (2 - 5,\\ 4 - 2) = (-3, 2)$$
+
+Right working: subtract the components of $\\mathbf{b}$ from those of $\\mathbf{a}$.
+$$\\mathbf{a} - \\mathbf{b} = (5 - 2,\\ 2 - 4) = (3, -2)$$
+Drawn from a common tail, this is the arrow from the tip of $\\mathbf{b}$ to the tip of $\\mathbf{a}$.
+
+Why it happens: the expression is read left to right, "from $\\mathbf{a}$ to $\\mathbf{b}$", while the arrow for $\\mathbf{a} - \\mathbf{b}$ ends at $\\mathbf{a}$, the first vector written.
+
+How to check: add $\\mathbf{b}$ back. The result must be $\\mathbf{a}$: $(2, 4) + (3, -2) = (5, 2)$, as it should. The wrong answer gives $(2, 4) + (-3, 2) = (-1, 6)$, which is not $\\mathbf{a}$.
+
+**Giving a negative scalar a negative length**
+
+The length of $c\\mathbf{a}$ is found by multiplying the length of $\\mathbf{a}$ by $c$ itself, so a negative scalar produces a negative length.
+
+Wrong working: for $\\mathbf{a} = (3, 4)$, $\\|\\mathbf{a}\\| = 5$, and
+$$\\|-2\\mathbf{a}\\| = -2 \\cdot 5 = -10$$
+
+Right working: the length is multiplied by $|c|$.
+$$-2\\mathbf{a} = (-6, -8), \\qquad \\|-2\\mathbf{a}\\| = \\sqrt{36 + 64} = 10 = |-2| \\cdot 5$$
+The minus sign does not shrink anything; it turns $\\mathbf{a}$ around to point the opposite way.
+
+Why it happens: the rule $\\|c\\mathbf{a}\\| = c\\|\\mathbf{a}\\|$ gives the right answer for every positive $c$, so the absolute value gets left out.
+
+How to check: a length is never negative. Compute the components of $c\\mathbf{a}$ and take their length directly; the result must equal $|c|$ times $\\|\\mathbf{a}\\|$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1624,6 +1691,14 @@ demoUnits}) {
           sectionsContent.obj7.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

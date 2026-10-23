@@ -896,6 +896,10 @@ const sectionsContent = {
 @academic[formula_callout:Definition and Terminology
 $$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$]@
 
+@academic[pitfall,aside:true,width:35%:Multiplying the base by the exponent
+Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent counts factors: $4^3 = 4 \\cdot 4 \\cdot 4 = 64$.
+[Read more](!#pitfalls)]@
+
 This definition works when $n$ is a positive integer. The expression $2^5$ means $2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 = 32$. Five factors of 2.
 
 The word "power" refers to the entire expression, not just the exponent. Saying "$2^5$ is a power of 2" is correct. Saying "5 is the power" is imprecise — 5 is the exponent.
@@ -974,6 +978,12 @@ The definition extends the descending pattern below $a^0$. From $3^1 = 3$ and $3
 
 @academic[rule_plain:The base cannot be zero — $0^{-n}$ would require dividing by $0^n = 0$, which is undefined.]@
 
+@academic[pitfall,aside:true,width:35%:Making the result negative
+Reading $2^{-3}$ as $-2^3 = -8$ moves the minus sign onto the result. A negative exponent means a reciprocal: $2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$.
+[Read more](!#pitfalls)]@
+
+Evaluating a negative power takes two moves: compute the positive power, then take its reciprocal. For $5^{-2}$, the positive power is $5^2 = 25$, so $5^{-2} = \\frac{1}{25} = 0.04$.
+
 Negative exponents rewrite fractions without denominators: $1/a^3 = a^{-3}$. This notational flexibility is essential when applying the laws of exponents. The [negative exponents](!/algebra/powers/negative-exponents) page covers the full treatment.`,
     before: ``,
     after: ``,
@@ -1018,6 +1028,10 @@ The [irrational exponents](!/algebra/powers/irrational-exponents) page formalize
     title: `Laws of Exponents`,
     content: `@academic[rule_theorem_plain:A single set of rules governs all exponent types. The product rule $a^m \\cdot a^n = a^{m+n}$, the quotient rule $a^m / a^n = a^{m-n}$, the power-of-a-power rule $(a^m)^n = a^{mn}$, and the remaining laws hold whether the exponents are natural, zero, negative, rational, or irrational.]@
 
+@academic[pitfall,aside:true,width:35%:Multiplying the exponents in a product
+Writing $x^3 \\cdot x^4 = x^{12}$ multiplies the exponents, as for a power of a power. The product rule adds them: $x^3 \\cdot x^4 = x^{3+4} = x^7$.
+[Read more](!#pitfalls)]@
+
 These laws are first proved for natural exponents, where they follow from counting factors. The extensions to other exponent types are then defined so that the same laws remain valid — each new definition is chosen precisely to preserve these identities.
 
 Domain restrictions tighten as the exponent type broadens. Natural exponents allow any base. Zero and negative exponents exclude $a = 0$. Rational exponents with even denominators require $a \\geq 0$. Irrational exponents require $a > 0$.
@@ -1052,6 +1066,12 @@ To solve a specific equation step by step, the [exponential equation solver](!/a
 
 When $0 < a < 1$, the function is decreasing: larger exponents produce smaller values. The inequality reverses when solving.]@
 
+@academic[pitfall,aside:true,width:35%:Keeping the sign with a base below 1
+Comparing exponents in $\\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2}$ with the sign kept gives $x \\leq -2$, which includes $x = -3$, where $\\left(\\frac{1}{3}\\right)^{-3} = 27 > 9$. With a base below $1$ the sign flips: $x \\geq -2$.
+[Read more](!#pitfalls)]@
+
+The example $\\left(\\frac{1}{3}\\right)^x \\leq 9$ from the start of this section shows where the base enters. Writing $9$ as a power of the base, $9 = \\left(\\frac{1}{3}\\right)^{-2}$, puts both sides over the same base $\\frac{1}{3}$. What remains is a comparison of the exponents $x$ and $-2$, and the base decides which way that comparison runs.
+
 The [exponential inequalities](!/algebra/powers/exponential-inequalities) page develops the solving techniques and the role the base plays in determining direction.
 
 The [exponential inequality solver](!/algebra/calculators/inequalities/exponential) applies these direction rules step by step to a specific inequality.`,
@@ -1079,6 +1099,71 @@ The [exponential functions](!/algebra/powers/exponential-functions) page covers 
   obj12: {
     title: `Summary of Exponent Types`,
     content: `The exponent types covered above — natural, zero, negative, rational, and irrational — form a hierarchy of progressively broader definitions, each chosen to preserve the laws of exponents while tightening the conditions on the base. The table below collects each type with its definition, the base restriction it imposes, and a representative example.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj13: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when working with powers. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Multiplying the base by the exponent**
+
+A power with a natural exponent is evaluated by multiplying the base by the exponent, as if $a^n$ meant $a \\cdot n$.
+
+Wrong working:
+$$4^3 = 4 \\cdot 3 = 12$$
+
+Right working: the exponent counts how many factors of the base are multiplied together.
+$$4^3 = 4 \\cdot 4 \\cdot 4 = 16 \\cdot 4 = 64$$
+
+Why it happens: the base and the exponent are two visible numbers, and multiplying them is the first operation that comes to mind. For $2^2$ the wrong rule even gives the right answer, $2 \\cdot 2 = 4$, which hides the slip.
+
+How to check: estimate the size. $4^3$ starts with $4 \\cdot 4 = 16$, which is already larger than $12$.
+
+**Making the result negative**
+
+The minus sign in the exponent is moved onto the value, so a negative exponent is read as a negative result.
+
+Wrong working:
+$$2^{-3} = -2^3 = -8$$
+
+Right working: a negative exponent gives the reciprocal of the positive power.
+$$2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$$
+
+Why it happens: everywhere else a minus sign in front of a number makes it negative, and that reading is carried into the exponent. In the exponent, the minus sign means dividing by the base instead of multiplying by it.
+
+How to check: a positive base raised to any power gives a positive value, so a negative result for $2^{-3}$ is impossible. The pattern confirms the right value: $2^0 = 1$, and each step down divides by $2$, giving $2^{-1} = \\frac{1}{2}$, $2^{-2} = \\frac{1}{4}$, $2^{-3} = \\frac{1}{8}$.
+
+**Multiplying the exponents in a product**
+
+Two powers of the same base are multiplied, and their exponents are multiplied too, mixing up the product rule with the power-of-a-power rule.
+
+Wrong working:
+$$x^3 \\cdot x^4 = x^{3 \\cdot 4} = x^{12}$$
+
+Right working: count the factors. $x^3 \\cdot x^4 = (x \\cdot x \\cdot x)(x \\cdot x \\cdot x \\cdot x)$ has seven factors of $x$.
+$$x^3 \\cdot x^4 = x^{3+4} = x^7$$
+Multiplying the exponents belongs to a power raised to a power: $(x^3)^4 = x^{12}$.
+
+Why it happens: both rules turn two exponents into one, and a product of powers seems to call for a product of exponents.
+
+How to check: substitute $x = 2$. Then $2^3 \\cdot 2^4 = 8 \\cdot 16 = 128 = 2^7$, while $2^{12} = 4096$.
+
+**Keeping the sign with a base below 1**
+
+The base lies between $0$ and $1$, but the exponents are compared exactly as for a base greater than $1$, so the inequality sign is kept.
+
+Wrong working:
+$$\\left(\\frac{1}{3}\\right)^x \\leq 9 \\implies \\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2} \\implies x \\leq -2$$
+
+Right working: $\\left(\\frac{1}{3}\\right)^x$ is decreasing, so larger exponents give smaller values, and the sign flips when the exponents are compared.
+$$\\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2} \\implies x \\geq -2$$
+
+Why it happens: matching exponents is first learned with bases like $2$ or $10$, where the sign stays, and the step is repeated without a look at the base.
+
+How to check: test one value from the answer. $x = -3$ lies in the wrong answer and gives $\\left(\\frac{1}{3}\\right)^{-3} = 27$, which is not at most $9$. A value from the right answer, $x = 0$, gives $\\left(\\frac{1}{3}\\right)^0 = 1 \\leq 9$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1386,6 +1471,14 @@ export default function PowersAndExponentsPage({exponentTypeCases, seoData, sect
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
         ]
     },
     // {

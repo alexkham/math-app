@@ -206,8 +206,8 @@ where $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$ is the binomial coefficient.
 
  **Logic Behind the Formula**:
   * $\\binom{n}{k}$: The number of ways to choose $k$ successes from $n$ trials
-  * $p^k$: The probability of getting exactly $k$ successes
-  * $(1-p)^{n-k}$: The probability of getting exactly $n-k$ failures
+  * $p^k$: The probability that $k$ given trials all succeed
+  * $(1-p)^{n-k}$: The probability that the other $n-k$ trials all fail
   * The total probability sums to 1:
   
   $\\sum_{k=0}^{n} P(X = k) = \\sum_{k=0}^{n} \\binom{n}{k} p^k (1-p)^{n-k} = 1$
@@ -255,6 +255,12 @@ $$P(X > k) = 1 - P(X \\leq k) = 1 - F_X(k)$$]@
 For "at least $k$ successes":
 @academic[formula_callout:Cumulative Distribution Function (CDF)
 $$P(X \\geq k) = 1 - P(X \\leq k-1) = 1 - F_X(k-1)$$]@
+
+@academic[pitfall,aside:true,width:35%:Treating at least as more than
+For $n = 5$, $p = 0.5$, writing $P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{26}{32} = \\frac{6}{32}$ drops the $10$ sequences with exactly $3$ successes. The right cut is $1 - F_X(2) = 1 - \\frac{16}{32} = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
+
+The two complement rules look almost the same, and the whole difference between them is one value of $k$. A binomial count takes only whole-number values, so the wording of a question decides exactly which counts are kept: "more than", "at least", "fewer than" and "at most" each draw the line at a different place. The complement is taken on the other side of that line, and the CDF is read at the last count that falls outside the event. For a continuous variable a single point carries no probability and this bookkeeping would not matter; for the binomial, each count carries its own share of the total.
   `,
   before:``,
   after:``,
@@ -308,7 +314,13 @@ Consider flipping a fair coin 10 times, where $n = 10$ and $p = 0.5$:
 @academic[formula_callout:Expected Value (Mean)
 $$E[X] = 10 \\times 0.5 = 5$$]@
 
+@academic[pitfall,aside:true,width:35%:Expecting exactly np successes
+Reading $E[X] = 5$ as the number of heads ten flips will give overstates it: $P(X = 5) = \\frac{252}{1024} \\approx 0.246$, so about three runs in four end with some other count.
+[Read more](!#pitfalls)]@
+
 The expected number of heads in 10 flips is 5, which aligns perfectly with our intuition about a fair coin.
+
+The expected value describes the long run: if the ten flips were repeated many times, the count of heads would vary from one run to the next, and the average of those counts would settle near $5$. A single run of ten flips can end with any count from $0$ to $10$, and the PMF gives the chance of each.
 
 To compute the expected value of a binomial distribution for your own parameters, step by step, use the [binomial expected value calculator](!/probability/calculators/expected-value/binomial).
   `,
@@ -487,9 +499,15 @@ Suppose you flip a fair coin $n = 5$ times, where the probability of heads (succ
 
 $P(X = 3) = \\binom{5}{3} (0.5)^3 (0.5)^{5-3} = 10 \\cdot 0.125 \\cdot 0.25 = 0.3125$
 
+@academic[pitfall,aside:true,width:35%:Dropping the binomial coefficient
+Computing $P(X = 3)$ as $(0.5)^3 (0.5)^2 = 0.03125$ gives the chance of one sequence, such as HHHTT. There are $\\binom{5}{3} = 10$ such sequences, so $P(X = 3) = 0.3125$.
+[Read more](!#pitfalls)]@
+
 This means there's a 31.25% chance of getting exactly 3 heads in 5 coin flips.
 
 The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with probabilities determined by the formula above.
+
+Every bar of the PMF is computed with the same three-factor product, whatever the values of $n$, $p$ and $k$. The question fixes how many successes are wanted; the formula then has to account for all the orders in which those successes can appear among the trials, not just the order in which they happen to be written down.
       `,
       before:``,
       after:``,
@@ -576,6 +594,55 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
       after:``,
       link:'',
   
+    },
+    obj17:{
+      title:`Common Pitfalls`,
+      content:`Three mistakes account for most wrong answers in binomial problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating at least as more than**
+
+The question asks for at least $k$ successes, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.
+
+Wrong working: for $n = 5$ and $p = 0.5$,
+$$P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{26}{32} = \\frac{6}{32}$$
+
+Right working: at least $3$ means $3$, $4$ or $5$ successes, so the complement is at most $2$.
+$$P(X \\geq 3) = 1 - F_X(2) = 1 - \\frac{16}{32} = \\frac{1}{2}$$
+
+Why it happens: the two rules $1 - F_X(k)$ and $1 - F_X(k-1)$ differ by a single symbol, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.
+
+How to check: add the PMF values of the counts in the event. $P(X = 3) + P(X = 4) + P(X = 5) = \\frac{10 + 5 + 1}{32} = \\frac{1}{2}$.
+
+**Expecting exactly np successes**
+
+The mean $np$ is read as the number of successes the experiment will produce, or as a count that is very likely to come up.
+
+Wrong working: ten flips of a fair coin have $E[X] = 10 \\times 0.5 = 5$, so ten flips give $5$ heads.
+
+Right working: $5$ is the most likely count, but it is far from certain.
+$$P(X = 5) = \\binom{10}{5} (0.5)^{10} = \\frac{252}{1024} \\approx 0.246$$
+About three runs of ten flips in four end with some other count. The value $5$ is the long-run average of the counts over many runs.
+
+Why it happens: in everyday language "expected" means "predicted", while in probability it means a weighted average of all the possible values.
+
+How to check: ask whether $np$ is a possible count at all. Five flips of a fair coin have $E[X] = 5 \\times 0.5 = 2.5$, a number of heads that can never occur.
+
+**Dropping the binomial coefficient**
+
+The probability of exactly $k$ successes is computed as $p^k (1-p)^{n-k}$ alone, without the factor $\\binom{n}{k}$.
+
+Wrong working: for $5$ fair coin flips,
+$$P(X = 3) = (0.5)^3 (0.5)^2 = 0.03125$$
+
+Right working: $(0.5)^3 (0.5)^2$ is the probability of one particular sequence, such as HHHTT. The coefficient counts the $\\binom{5}{3} = 10$ sequences with three heads.
+$$P(X = 3) = 10 \\times 0.03125 = 0.3125$$
+
+Why it happens: the product of powers already looks like the probability of three successes and two failures, and counting the orders is a separate step that is easy to skip.
+
+How to check: the PMF values must add up to $1$. Without the coefficients, the six values for $k = 0, 1, \\ldots, 5$ are all $(0.5)^5 = \\frac{1}{32}$, and they add up to only $\\frac{6}{32}$.`,
+      before:``,
+      after:``,
+      link:'',
     },
     links:{
       decide:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About Distinguishing Discrete Distributions](!/probability/distributions/discrete#decide) →@
@@ -958,6 +1025,14 @@ export default function BinomialDistributionPage({
           sectionsContent.obj16.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

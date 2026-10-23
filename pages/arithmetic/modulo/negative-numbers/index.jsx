@@ -944,6 +944,10 @@ For positive dividends the answer would be immediate. But $-7$ is not a positive
 
 One answer is $-1$. Another is $2$. Both satisfy the division equation $a = n \\cdot q + r$ — they simply use different values of the quotient $q$, which forces different values of the remainder $r$.
 
+@academic[pitfall,aside:true,width:35%:Ignoring the minus sign
+Dropping the sign gives $(-7) \\bmod 3 = 7 \\bmod 3 = 1$, but $1$ fails the division equation: $-7 - 1 = -8$ is not a multiple of $3$. The answer is $-1$ or $2$.
+[Read more](!#10)]@
+
 This is not a mathematical ambiguity in the sense that either answer is wrong. It is a definitional fork: two conventions exist, each internally consistent, each producing valid results. The trouble begins when the two are mixed — a formula derived under one convention, implemented in a language that uses the other.`,
   before: ``,
   after: ``,
@@ -992,6 +996,10 @@ For $(-7) \\bmod 3$: divide $-7 \\div 3 = -2.33\\ldots$. Floor to $q = -3$. Comp
 
 For $(-23) \\bmod 5$: divide $-23 \\div 5 = -4.6$. Floor to $q = -5$. Remainder: $r = -23 - (5 \\times -5) = -23 + 25 = 2$. The result is $2$.
 
+@academic[pitfall,aside:true,width:35%:Flooring toward zero
+Taking the floor of $-3.4$ as $-3$ in $(-17) \\bmod 5$ gives $r = -17 + 15 = -2$, a negative remainder. The floor is $-4$, the next integer down: $r = -17 + 20 = 3$.
+[Read more](!#10)]@
+
 The remainder under this convention always falls in $\\{0, 1, 2, \\ldots, n-1\\}$, regardless of the dividend's sign. This is the convention preferred in mathematical texts, because it keeps remainders in the same canonical set used to define congruence classes.`,
   before: ``,
   after: ``,
@@ -1028,6 +1036,10 @@ A universal formula handles both cases automatically:
 @academic[formula_callout:Converting Between Conventions
 $$\\text{floored remainder} = ((a \\% \\; n) + n) \\% \\; n$$]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the final reduction
+Writing $(a \\% \\; n) + n$ without the outer $\\% \\; n$ breaks non-negative remainders: for $a = 7$, $n = 3$ it gives $1 + 3 = 4$, outside $\\{0, 1, 2\\}$. The full formula gives $4 \\% \\; 3 = 1$.
+[Read more](!#10)]@
+
 This works in any language regardless of which convention its $\\%$ operator uses. If the initial remainder is already non-negative, adding $n$ and reducing again leaves it unchanged. If it is negative, the addition shifts it into the correct range.`,
   before: ``,
   after: ``,
@@ -1036,7 +1048,7 @@ This works in any language regardless of which convention its $\\%$ operator use
 
 obj8: {
   title: `Congruence Perspective`,
-  content: `The two conventions produce different numbers, but those numbers represent the same congruence class. From the perspective of [congruence](!/arithmetic/modulo), there is no disagreement.
+  content: `When the dividend is negative and the division is not exact, the two conventions produce different numbers, but those numbers represent the same congruence class. From the perspective of [congruence](!/arithmetic/modulo), there is no disagreement.
 
 The values $-1$ and $2$ are both valid answers to $(-7) \\bmod 3$ because $-1 \\equiv 2 \\pmod{3}$. Their difference is $3$, a multiple of the modulus.
 
@@ -1055,7 +1067,7 @@ obj9: {
 
 Mathematical convention typically requires $n > 0$ and does not define modulo for negative divisors. The remainder is always taken with respect to a positive modulus.
 
-Programming languages that allow negative divisors produce results that vary by language, by convention, and sometimes by version. C and Java allow them but offer few guarantees about the sign of the result. Python handles them consistently under floored division but the behavior is unintuitive.
+Programming languages that allow negative divisors produce results that vary by language, by convention, and sometimes by version. C (since C99) and Java allow them and define the result by truncating the quotient, so the remainder takes the sign of the dividend. Python handles them consistently under floored division but the behavior is unintuitive.
 
 The safest practice is to avoid negative divisors entirely. Use the absolute value of the modulus and handle any sign logic separately. This eliminates an entire category of edge cases and makes the code's intent explicit.`,
   before: ``,
@@ -1072,7 +1084,43 @@ Array indexing is a common casualty. Accessing an array at position $(-1) \\% \\
 
 Forgetting to test negative inputs is the root cause. Modular code that works perfectly for positive numbers may silently break for negative ones. Any function that computes remainders should be tested with negative dividends explicitly.
 
-Mixing conventions within a single computation — reducing one value under floored division and another under truncated — produces results that belong to no consistent system. Pick one convention and apply it uniformly.`,
+Mixing conventions within a single computation — reducing one value under floored division and another under truncated — produces results that belong to no consistent system. Pick one convention and apply it uniformly.
+
+**Ignoring the minus sign**
+
+The minus sign of the dividend is set aside, the remainder of the positive number is computed, and that remainder is given as the answer for the negative one.
+
+Wrong working: $7 = 3 \\cdot 2 + 1$, so $(-7) \\bmod 3 = 1$.
+
+Right working: the division equation must hold for $-7$ itself. Truncated: $-7 = 3 \\cdot (-2) + (-1)$, so the remainder is $-1$. Floored: $-7 = 3 \\cdot (-3) + 2$, so the remainder is $2$. Neither convention gives $1$.
+
+Why it happens: in multiplication and division the size of a number and its sign can be handled separately, and that habit is carried over to remainders, where it does not work.
+
+How to check: subtract the answer from the dividend; the difference must be a multiple of $n$. $-7 - 1 = -8$ is not a multiple of $3$, while $-7 - (-1) = -6$ and $-7 - 2 = -9$ are.
+
+**Flooring toward zero**
+
+Under floored division, the quotient of a negative division is rounded to the neighbouring integer toward zero, as truncation does, instead of down.
+
+Wrong working: $-17 \\div 5 = -3.4$, floored to $-3$, so $r = -17 - (5 \\times -3) = -17 + 15 = -2$.
+
+Right working: the floor of $-3.4$ is $-4$, the greatest integer less than or equal to $-3.4$. Then $r = -17 - (5 \\times -4) = -17 + 20 = 3$, and indeed $-17 = 5 \\cdot (-4) + 3$.
+
+Why it happens: for positive numbers, flooring and dropping the decimal part give the same integer, so the floor is remembered as "drop the decimals". For a negative number, dropping the decimals moves up, toward zero.
+
+How to check: a floored remainder must lie in $\\{0, 1, \\ldots, n-1\\}$. A negative result such as $-2$ means the quotient was rounded the wrong way.
+
+**Dropping the final reduction**
+
+The conversion formula is shortened to $(a \\% \\; n) + n$. The added $n$ lifts a negative remainder into range, but it also lifts a remainder that was already non-negative out of range.
+
+Wrong working: for $n = 3$, $(7 \\% \\; 3) + 3 = 1 + 3 = 4$, and $((-9) \\% \\; 3) + 3 = 0 + 3 = 3$.
+
+Right working: $((7 \\% \\; 3) + 3) \\% \\; 3 = 4 \\% \\; 3 = 1$, and $(((-9) \\% \\; 3) + 3) \\% \\; 3 = 3 \\% \\; 3 = 0$.
+
+Why it happens: the formula is written to repair negative remainders and is tried only on inputs such as $-7$, where $(-1) + 3 = 2$ is already correct.
+
+How to check: test a positive dividend and an exact multiple as well. Every result must lie in $\\{0, 1, \\ldots, n-1\\}$; for $n = 3$, neither $4$ nor $3$ does.`,
   before: ``,
   after: ``,
   link: '',

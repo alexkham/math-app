@@ -1573,6 +1573,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
 import renderCurveFeatureV3 from '@/app/utils/illustrations/trigonometry/curves/curveFeature.v3'
 import renderRelationMap from '@/app/utils/illustrations/trigonometry/relations/relationMap'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2451,6 +2453,10 @@ The domain of tangent is all real numbers except the odd multiples of $\\frac{\\
 @academic[formula_callout:The Tangent Function
 $$\\theta \\neq \\frac{\\pi}{2} + n\\pi, \\quad n \\in \\mathbb{Z}$$]@
 
+@academic[pitfall,aside:true,width:35%:Excluding a single angle
+Writing the domain of tangent as $\\theta \\neq \\frac{\\pi}{2}$ keeps $\\theta = \\frac{3\\pi}{2}$, where $\\cos\\theta = 0$ and $\\tan\\theta$ is undefined. Every vertical terminal side is excluded: $\\theta \\neq \\frac{\\pi}{2} + n\\pi$.
+[Read more](!#pitfalls)]@
+
 The range, by contrast, is the entire real line $(-\\infty, \\infty)$. As $\\theta$ approaches an excluded value, $\\cos(\\theta)$ approaches zero while $\\sin(\\theta)$ approaches $\\pm 1$, driving the ratio toward $+\\infty$ or $-\\infty$. On the [graph](!/trigonometry/graphs), these excluded points correspond to vertical asymptotes.
 
 @academic[rule_plain:Tangent is periodic with period $\\pi$ — half the period of sine and cosine.]@
@@ -2476,6 +2482,10 @@ $$\\csc\\theta = \\frac{\\text{hypotenuse}}{\\text{side opposite to }\\theta}$$
 
 The right-triangle definition holds for $0 < \\theta < \\frac{\\pi}{2}$. Extended through the [unit circle](!/trigonometry/unit-circle), cosecant is the reciprocal of sine: $\\csc\\theta = \\frac{1}{\\sin\\theta}$.
 
+@academic[pitfall,aside:true,width:35%:Using the inverse sine key
+Computing $\\csc 30°$ with the $\\sin^{-1}$ key asks for $\\sin^{-1}(30)$, which does not exist, since $\\sin^{-1}$ accepts only inputs in $[-1, 1]$. Cosecant is a reciprocal: $\\csc 30° = \\frac{1}{\\sin 30°} = 2$.
+[Read more](!#pitfalls)]@
+
 It is defined wherever $\\sin(\\theta) \\neq 0$ — that is, for all $\\theta$ except integer multiples of $\\pi$: $\\theta \\neq n\\pi$, $n \\in \\mathbb{Z}$. At these excluded points (where the terminal side lies on the $x$-axis and $\\sin\\theta = 0$), cosecant is undefined, and the [graph](!/trigonometry/graphs) has vertical asymptotes.
 
 The range of cosecant is $(-\\infty, -1] \\cup [1, \\infty)$. Since $|\\sin\\theta| \\leq 1$, the reciprocal $|\\csc\\theta| = \\frac{1}{|\\sin\\theta|} \\geq 1$.
@@ -2488,7 +2498,7 @@ Cosecant is an odd function, inheriting this property from sine: $\\csc(-\\theta
 
 For acute angles, the right-triangle definition always gives a value greater than 1, since the hypotenuse exceeds every other side. The general function preserves this: the absolute value of cosecant is always at least 1.
 
-Cosecant appears less frequently in elementary problems than sine, cosine, or tangent, but it plays a significant role in the Pythagorean identity $1 + \\cot^2\\theta = \\csc^2\\theta$, in certain [identities](!/trigonometry/identities) and [formula](!/trigonometry/formulas) derivations, and in calculus (as the derivative of $-\\cot\\theta$ and in various integrals).`,
+Cosecant appears less frequently in elementary problems than sine, cosine, or tangent, but it plays a significant role in the Pythagorean identity $1 + \\cot^2\\theta = \\csc^2\\theta$, in certain [identities](!/trigonometry/identities) and [formula](!/trigonometry/formulas) derivations, and in calculus (its square $\\csc^2\\theta$ is the derivative of $-\\cot\\theta$, and it appears in various integrals).`,
     before: ``,
     after: ``,
     link: ``,
@@ -2514,7 +2524,7 @@ The range of secant mirrors that of cosecant: $(-\\infty, -1] \\cup [1, \\infty)
 
 Secant is an even function: $\\sec(-\\theta) = \\frac{1}{\\cos(-\\theta)} = \\frac{1}{\\cos\\theta} = \\sec\\theta$, since cosine is even. Its period is $2\\pi$.
 
-The Pythagorean identity $1 + \\tan^2\\theta = \\sec^2\\theta$ connects secant directly to tangent. This relationship is heavily used in the simplification of [identities](!/trigonometry/identities) and in calculus, where $\\sec^2\\theta$ appears as the derivative of $\\tan\\theta$ and in the integral of $\\sec\\theta\\tan\\theta$.
+The Pythagorean identity $1 + \\tan^2\\theta = \\sec^2\\theta$ connects secant directly to tangent. This relationship is heavily used in the simplification of [identities](!/trigonometry/identities) and in calculus, where $\\sec^2\\theta$ appears as the derivative of $\\tan\\theta$ and $\\sec\\theta\\tan\\theta$ appears as the derivative of $\\sec\\theta$.
 
 For acute angles, the right-triangle definition always gives a value greater than 1, reflecting that the hypotenuse exceeds any other side. Like cosecant, secant always has absolute value at least 1.`,
     before: ``,
@@ -2634,6 +2644,10 @@ $$\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}$$
 
 @academic[rule_corollary_plain:Combining reciprocal and quotient relationships, any expression involving the six functions can be rewritten purely in terms of $\\sin\\theta$ and $\\cos\\theta$.]@
 
+@academic[pitfall,aside:true,width:35%:Pairing secant with sine
+Taking $\\sec\\theta$ as $\\frac{1}{\\sin\\theta}$ gives $\\sec 60° = \\frac{1}{\\sin 60°} = \\frac{2}{\\sqrt{3}} \\approx 1.155$, which is $\\csc 60°$. Secant pairs with cosine: $\\sec 60° = \\frac{1}{\\cos 60°} = 2$.
+[Read more](!#pitfalls)]@
+
 For example, $\\sec\\theta\\tan\\theta = \\frac{1}{\\cos\\theta} \\cdot \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{\\sin\\theta}{\\cos^2\\theta}$. This conversion strategy — "write everything in sine and cosine" — is one of the most reliable first steps when simplifying trigonometric expressions or proving [identities](!/trigonometry/identities).
 
 The relationships also imply that the six functions naturally pair off. Sine and cosecant are reciprocals. Cosine and secant are reciprocals. Tangent and cotangent are reciprocals. Within each pair, the product is always 1:
@@ -2688,6 +2702,10 @@ The angle $\\frac{7\\pi}{4}$ is in $[0, 2\\pi)$, so no coterminal reduction is n
 evaluate $\\tan(240°)$.
 
 The angle $240°$ is in Quadrant III ($180° < 240° < 270°$). The reference angle is $240° - 180° = 60°$. Tangent is positive in Quadrant III (both sine and cosine are negative, and a negative divided by a negative is positive). Therefore $\\tan(240°) = +\\tan(60°) = \\sqrt{3}$.]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the quadrant sign
+Stopping at the reference angle gives $\\sin(210°) = \\sin(30°) = \\frac{1}{2}$. The angle $210°$ lies in Quadrant III, where sine is negative, so $\\sin(210°) = -\\frac{1}{2}$.
+[Read more](!#pitfalls)]@
 
 This procedure works uniformly for every angle and every function. For non-standard angles — those whose reference angle is not $30°$, $45°$, or $60°$ — a calculator is needed for the reference angle evaluation, but the sign-determination step remains the same.
 
@@ -2774,6 +2792,62 @@ The technique extends to starting from secant, cosecant, or cotangent — the Py
       after:``,
       link:'',
 
+    },
+
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes come up again and again when working with the six functions. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Excluding a single angle**
+
+The domain of tangent is written by excluding only the first angle where it fails, $\\frac{\\pi}{2}$, as if the problem happened once. Cosine is zero at infinitely many angles, and tangent is undefined at every one of them.
+
+Wrong working: $\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}$ is undefined at $\\theta = \\frac{\\pi}{2}$, so the domain is written as $\\theta \\neq \\frac{\\pi}{2}$. This leaves $\\theta = -\\frac{\\pi}{2}$ and $\\theta = \\frac{3\\pi}{2}$ in the domain.
+
+Right working: $\\cos\\theta = 0$ at $\\theta = \\ldots, -\\frac{\\pi}{2}, \\frac{\\pi}{2}, \\frac{3\\pi}{2}, \\ldots$, one every $\\pi$, so the domain is $\\theta \\neq \\frac{\\pi}{2} + n\\pi$, $n \\in \\mathbb{Z}$. At $\\theta = \\frac{3\\pi}{2}$, $\\sin\\theta = -1$ and $\\cos\\theta = 0$, so the ratio $\\frac{-1}{0}$ is undefined.
+
+Why it happens: in right-triangle work the angle never reaches $\\frac{\\pi}{2}$, so $90°$ is the only trouble spot ever met. On the unit circle the terminal side becomes vertical twice in every full turn.
+
+How to check: list the angles in one full turn $[0, 2\\pi)$ where $\\cos\\theta = 0$. There are two, $\\frac{\\pi}{2}$ and $\\frac{3\\pi}{2}$, so a domain that excludes only one of them is incomplete.
+
+**Using the inverse sine key**
+
+Cosecant is computed with the $\\sin^{-1}$ key, because $\\sin^{-1}$ looks like one over sine. That key gives the inverse function, which returns an angle, not a reciprocal.
+
+Wrong working: $\\csc 30°$ is entered as $\\sin^{-1}(30)$. The calculator reports an error, since $\\sin^{-1}$ accepts only inputs from $-1$ to $1$. Even with a valid input the key answers a different question: $\\sin^{-1}(0.5) = 30°$ is the angle whose sine is $0.5$.
+
+Right working: $\\csc 30° = \\frac{1}{\\sin 30°} = \\frac{1}{1/2} = 2$. On a calculator, find $\\sin 30° = 0.5$ first, then take its reciprocal.
+
+Why it happens: in algebra $x^{-1} = \\frac{1}{x}$, so $\\sin^{-1}$ reads as a reciprocal. Written on a function name, the $-1$ means the inverse function instead.
+
+How to check: a cosecant value is never between $-1$ and $1$. If the result is an error, an angle, or a number inside $(-1, 1)$, the wrong key was used.
+
+**Pairing secant with sine**
+
+The reciprocal pairs are matched by their first letters: secant with sine, cosecant with cosine. The actual pairs are the other way round.
+
+Wrong working: $\\sec 60° = \\frac{1}{\\sin 60°} = \\frac{1}{\\sqrt{3}/2} = \\frac{2}{\\sqrt{3}} \\approx 1.155$.
+
+Right working: $\\sec 60° = \\frac{1}{\\cos 60°} = \\frac{1}{1/2} = 2$. The value $\\frac{2}{\\sqrt{3}} \\approx 1.155$ belongs to $\\csc 60°$.
+
+Why it happens: secant and sine both start with s, and cosecant and cosine both start with co, so the names seem to match up that way.
+
+How to check: each reciprocal pair contains exactly one name with the prefix co: sine and cosecant, cosine and secant, tangent and cotangent. A quick test is $\\theta = 0$: $\\sec 0 = \\frac{1}{\\cos 0} = 1$, while $\\frac{1}{\\sin 0}$ is undefined.
+
+**Dropping the quadrant sign**
+
+The value at the reference angle is taken as the final answer, and the sign from Step 2 is never applied. Reference angles are acute, so every value looked up for them is positive, and so is every answer.
+
+Wrong working: $210°$ has reference angle $210° - 180° = 30°$, so $\\sin(210°) = \\sin(30°) = \\frac{1}{2}$.
+
+Right working: $210°$ lies in Quadrant III ($180° < 210° < 270°$), where sine is negative. So $\\sin(210°) = -\\sin(30°) = -\\frac{1}{2}$.
+
+Why it happens: the reference-angle lookup is the step that produces the number, and it feels like the end of the work. The sign comes from a separate step that is easy to skip.
+
+How to check: picture the point on the unit circle. At $210°$ it lies below the $x$-axis, so its $y$-coordinate, the sine, must be negative.`,
+      before:``,
+      after:``,
+      link:'',
     },
 
     faq: {
@@ -2896,8 +2970,35 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
     }),
   };
 
+  const sixTrigOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Six functions in three pairs',
+    preface: 'The six trigonometric functions pair up by behaviour: one pair is bounded, two pairs are unbounded.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Learn the pairs',
+    conclusion: 'Sine and cosine are bounded and continuous; tangent and cotangent are unbounded with half-period π; secant and cosecant are unbounded outside [−1, 1].',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'The six trigonometric functions', children: [
+        { id: 'sc', name: 'Sine and cosine', def: 'bounded and continuous', children: [
+          { id: 'sin', name: 'sin', def: 'y-coordinate; odd', example: 'period 2π' },
+          { id: 'cos', name: 'cos', def: 'x-coordinate; even', example: 'period 2π' },
+        ] },
+        { id: 'tc', name: 'Tangent and cotangent', def: 'unbounded, half-period π', children: [
+          { id: 'tan', name: 'tan', def: 'odd', example: 'sin/cos' },
+          { id: 'cot', name: 'cot', def: 'odd', example: 'cos/sin' },
+        ] },
+        { id: 'scs', name: 'Secant and cosecant', def: 'unbounded outside [−1, 1]', children: [
+          { id: 'sec', name: 'sec', def: 'even', example: '1/cos' },
+          { id: 'csc', name: 'csc', def: 'odd', example: '1/sin' },
+        ] },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    sixTrigOutline,
     demoUnits,
          sectionsContent,
          introContent,
@@ -2934,7 +3035,7 @@ Whether you are analyzing waveforms, studying rotations, or decomposing function
     }
    }
 
-export default function FunctionsPage({seoData,sectionsContent , introContent, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function FunctionsPage({sixTrigOutline, seoData,sectionsContent , introContent, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3087,6 +3188,15 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
         ]
     },
 
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+        ]
+    },
+
     // obj11: NEW capstone — six-function character card
     {
         id:'11',
@@ -3099,6 +3209,14 @@ export default function FunctionsPage({seoData,sectionsContent , introContent, o
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj11-diagram'}
+            id="six-trig-functions-outline"
+            title="The six trigonometric functions"
+            source="/trigonometry/functions"
+          >
+            <TaxonomyOutline data={sixTrigOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     // {

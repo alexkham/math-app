@@ -510,6 +510,12 @@ $$a^m \\cdot a^n = a^{m+n}$$
 
 The base stays fixed. Only the exponents combine. The expression $x^3 \\cdot x^5 = x^8$, and $2^{-1} \\cdot 2^{4} = 2^3 = 8$.
 
+@academic[pitfall,aside:true,width:35%:Multiplying the exponents
+Writing $2^3 \\cdot 2^2$ as $2^6$ gives $64$. The product is $8 \\cdot 4 = 32 = 2^5$: the exponents add, $3 + 2 = 5$.
+[Read more](!#10)]@
+
+Counting factors shows why the exponents add. In $x^3 \\cdot x^5$ the first power holds three factors of $x$ and the second holds five, and writing them side by side gives one string of eight factors. The rule is a shortcut for that count.
+
 The rule requires the bases to match. The product $2^3 \\cdot 3^4$ cannot be reduced by adding exponents — different bases mean the rule does not apply.
 
 This identity holds for all real exponents $m$ and $n$, subject to the domain restrictions on the base outlined later on this page.`,
@@ -531,9 +537,15 @@ $$\\frac{a^m}{a^n} = a^{m-n}$$
 
 The rule requires $a \\neq 0$. The expression $\\frac{x^7}{x^2} = x^5$, and $\\frac{5^3}{5^5} = 5^{-2} = \\frac{1}{25}$.
 
+@academic[pitfall,aside:true,width:35%:Dividing the exponents
+Writing $\\frac{2^6}{2^2}$ as $2^{6/2} = 2^3$ gives $8$. The quotient is $\\frac{64}{4} = 16 = 2^4$: the exponents subtract, $6 - 2 = 4$.
+[Read more](!#10)]@
+
 When $m = n$, the result is $a^0 = 1$. When $m < n$, the result is a [negative exponent](!/algebra/powers/negative-exponents) — a reciprocal. Both cases are natural consequences of subtracting exponents, and both require $a \\neq 0$.
 
-As with the product rule, the bases must be identical for the rule to apply.`,
+As with the product rule, the bases must be identical for the rule to apply.
+
+The subtraction always runs in the same order: the exponent of the numerator minus the exponent of the denominator. In $\\frac{5^3}{5^5}$ that is $3 - 5 = -2$, which is why the result is a fraction below $1$.`,
     before: ``,
     after: ``,
     link: '',
@@ -551,6 +563,12 @@ $$(a^m)^n = a^{mn}$$
 /algebra/formulas]@
 
 The expression $(x^3)^4 = x^{12}$, and $(2^{-1})^3 = 2^{-3} = \\frac{1}{8}$.
+
+@academic[pitfall,aside:true,width:35%:Adding the exponents
+Writing $(3^2)^3$ as $3^{2+3} = 3^5$ gives $243$. The value is $9^3 = 729 = 3^6$: the exponents multiply, $2 \\cdot 3 = 6$.
+[Read more](!#10)]@
+
+Counting factors shows why the exponents multiply. The power $(x^3)^4$ is four copies of the block $x^3$, and each block holds three factors of $x$, so the total is $4 \\cdot 3 = 12$ factors.
 
 This rule must not be confused with stacked exponents. The notation $a^{m^n}$ means $a^{(m^n)}$, evaluated from the top down — it is not the same as $(a^m)^n = a^{mn}$. For example, $2^{3^2} = 2^9 = 512$, while $(2^3)^2 = 2^6 = 64$.`,
     before: ``,
@@ -572,6 +590,10 @@ $$(ab)^n = a^n \\cdot b^n$$
 The expression $(3x)^4 = 3^4 \\cdot x^4 = 81x^4$.
 
 @academic[rule_corollary_plain:The rule extends to any number of factors: $(abc)^n = a^n b^n c^n$.]@
+
+@academic[pitfall,aside:true,width:35%:Raising only the variable
+Writing $(2x)^3$ as $2x^3$ leaves the $2$ unraised: at $x = 1$ it gives $2$, but $(2 \\cdot 1)^3 = 8$. Every factor takes the exponent: $(2x)^3 = 8x^3$.
+[Read more](!#10)]@
 
 The distribution works because multiplication is commutative — the factors can be rearranged so that all copies of $a$ group together and all copies of $b$ group together.
 
@@ -615,7 +637,13 @@ The rule requires $a \\neq 0$. The expression $4^{-2} = \\frac{1}{16}$, and $x^{
 
 @academic[rule_corollary_plain:The rule works in both directions. A negative exponent in the denominator moves the term to the numerator: $\\frac{1}{a^{-n}} = a^n$.]@
 
+@academic[pitfall,aside:true,width:35%:Reading a negative exponent as a negative number
+Writing $5^{-2}$ as $-25$ treats the minus sign as the sign of the value. The exponent asks for a reciprocal: $5^{-2} = \\frac{1}{25}$, which is positive.
+[Read more](!#10)]@
+
 An expression like $\\frac{x^{-3}}{y^{-2}}$ rewrites as $\\frac{y^2}{x^3}$ — each negative exponent crosses the fraction bar and becomes positive.
+
+Numbers make the pattern easy to follow. $2^{-1} = \\frac{1}{2}$, $2^{-2} = \\frac{1}{4}$ and $2^{-3} = \\frac{1}{8}$: each step down in the exponent divides by the base once more, so the values shrink toward $0$ as the exponent decreases.
 
 Applied to an entire fraction, the negative exponent flips it:
 
@@ -664,6 +692,12 @@ Both forms are equivalent. The expression $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$
 
 @academic[rule_corollary_plain:The special case $m = 1$ gives the pure root: $a^{1/n} = \\sqrt[n]{a}$.]@
 
+@academic[pitfall,aside:true,width:35%:Multiplying by the exponent
+Writing $9^{1/2}$ as $9 \\cdot \\frac{1}{2}$ gives $4.5$. The exponent $\\frac{1}{2}$ asks for a square root: $9^{1/2} = \\sqrt{9} = 3$.
+[Read more](!#10)]@
+
+In $8^{2/3}$, the denominator $3$ of the exponent names the root and the numerator $2$ names the power. Taking the root first keeps the numbers small: $\\sqrt[3]{8} = 2$, and then $2^2 = 4$. Taking the power first reaches the same value by a longer route, $\\sqrt[3]{64} = 4$.
+
 Exponent notation and radical notation are interchangeable representations of the same operation.
 
 When $m/n$ is negative, the [negative exponent](!/algebra/powers/negative-exponents) rule applies first: $a^{-m/n} = \\frac{1}{a^{m/n}}$. The full treatment, including domain considerations for even roots, appears on the [rational exponents](!/algebra/powers/rational-exponents) page.`,
@@ -700,7 +734,91 @@ The expression $0^{-n}$ is undefined for any positive $n$, since it demands divi
 
 The expressions $(-a)^n$ and $-a^n$ are not interchangeable. The first raises the negative quantity to the power: $(-3)^2 = 9$. The second raises $a$ to the power and then negates: $-3^2 = -9$. Parentheses determine which interpretation applies.
 
-The most persistent algebraic error is distributing an exponent over a sum: $(a + b)^n \\neq a^n + b^n$. The power of a product rule applies to multiplication, not addition. The expression $(2 + 3)^2 = 25$, while $2^2 + 3^2 = 13$. Expanding $(a + b)^n$ requires the binomial theorem or term-by-term multiplication — the exponent does not distribute.`,
+The most persistent algebraic error is distributing an exponent over a sum: $(a + b)^n \\neq a^n + b^n$. The power of a product rule applies to multiplication, not addition. The expression $(2 + 3)^2 = 25$, while $2^2 + 3^2 = 13$. Expanding $(a + b)^n$ requires the binomial theorem or term-by-term multiplication — the exponent does not distribute.
+
+**Multiplying the exponents**
+
+Two powers of the same base are multiplied, and the exponents are multiplied too, as in the power of a power rule.
+
+Wrong working:
+$$2^3 \\cdot 2^2 = 2^{3 \\cdot 2} = 2^6 = 64$$
+
+Right working: the product rule adds the exponents.
+$$2^3 \\cdot 2^2 = 2^{3 + 2} = 2^5 = 32$$
+
+Why it happens: the product rule and the power of a power rule both combine two exponents, and the one that multiplies is easily borrowed for the one that adds.
+
+How to check: evaluate both sides. $2^3 \\cdot 2^2 = 8 \\cdot 4 = 32$, which matches $2^5$ and not $2^6 = 64$.
+
+**Dividing the exponents**
+
+Two powers of the same base are divided, and the exponents are divided as well.
+
+Wrong working:
+$$\\frac{2^6}{2^2} = 2^{6/2} = 2^3 = 8$$
+
+Right working: the quotient rule subtracts the exponents.
+$$\\frac{2^6}{2^2} = 2^{6 - 2} = 2^4 = 16$$
+
+Why it happens: dividing the powers suggests dividing the exponents, by the same pattern that makes multiplying them look right in the product rule.
+
+How to check: evaluate both sides. $\\frac{2^6}{2^2} = \\frac{64}{4} = 16 = 2^4$. Cancelling shows it too: two of the six factors of $2$ cancel, leaving four.
+
+**Adding the exponents**
+
+A power is raised to another power, and the exponents are added as in the product rule.
+
+Wrong working:
+$$(3^2)^3 = 3^{2 + 3} = 3^5 = 243$$
+
+Right working: the power of a power rule multiplies the exponents.
+$$(3^2)^3 = 3^{2 \\cdot 3} = 3^6 = 729$$
+
+Why it happens: $(3^2)^3$ shows two exponents next to each other, which looks like the two exponents of the product rule's $a^m \\cdot a^n$.
+
+How to check: write out the copies. $(3^2)^3 = 3^2 \\cdot 3^2 \\cdot 3^2$ is three blocks of two factors, six factors in all, and $9 \\cdot 9 \\cdot 9 = 729$.
+
+**Raising only the variable**
+
+A product such as $2x$ is raised to a power, and the exponent is applied to the variable but not to the number in front of it.
+
+Wrong working:
+$$(2x)^3 = 2x^3$$
+
+Right working: the exponent goes to every factor of the product.
+$$(2x)^3 = 2^3 \\cdot x^3 = 8x^3$$
+
+Why it happens: $2x^3$ and $(2x)^3$ differ only by the parentheses, and the coefficient is read as standing outside the power.
+
+How to check: substitute $x = 1$. The original gives $(2 \\cdot 1)^3 = 8$; the wrong form gives $2$ and the right form gives $8$.
+
+**Reading a negative exponent as a negative number**
+
+The minus sign in the exponent is moved onto the value, so the power becomes negative instead of becoming a reciprocal.
+
+Wrong working:
+$$5^{-2} = -5^2 = -25$$
+
+Right working: a negative exponent gives the reciprocal of the positive power.
+$$5^{-2} = \\frac{1}{5^2} = \\frac{1}{25}$$
+
+Why it happens: everywhere else a minus sign makes a number negative, and that meaning is carried into the exponent.
+
+How to check: a positive base raised to any power is positive, so a negative result is impossible. The pattern $5^1 = 5$, $5^0 = 1$, $5^{-1} = \\frac{1}{5}$, $5^{-2} = \\frac{1}{25}$ divides by $5$ at each step.
+
+**Multiplying by the exponent**
+
+A fractional exponent is treated as a multiplier, so the base is multiplied by the fraction instead of having a root taken.
+
+Wrong working:
+$$9^{1/2} = 9 \\cdot \\frac{1}{2} = 4.5$$
+
+Right working: the exponent $\\frac{1}{2}$ is a square root.
+$$9^{1/2} = \\sqrt{9} = 3$$
+
+Why it happens: the exponent is read as an ordinary number to multiply by, instead of as an instruction about repeated multiplication.
+
+How to check: square the answer. Since $(9^{1/2})^2 = 9^1 = 9$, the value must square to $9$. But $4.5^2 = 20.25$, while $3^2 = 9$.`,
     before: ``,
     after: ``,
     link: '',

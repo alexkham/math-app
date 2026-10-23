@@ -1826,7 +1826,7 @@ const keyWords = [
           {
             name: 'Classical Gram\u2013Schmidt',
             anchor: '#2',
-            formula: '$\\mathbf{q}_j = \\mathbf{a}_j - \\sum_{i<j} \\operatorname{proj}_{\\mathbf{q}_i}(\\mathbf{a}_j)$',
+            formula: '$\\mathbf{u}_j = \\mathbf{a}_j - \\sum_{i<j} \\operatorname{proj}_{\\mathbf{q}_i}(\\mathbf{a}_j)$, $\\mathbf{q}_j = \\mathbf{u}_j / \\|\\mathbf{u}_j\\|$',
             condition: 'unstable \u2014 loses orthogonality',
             strict: true,
             note: 'Each column is orthogonalized against the **original** earlier columns. In exact arithmetic this is correct; in floating point the accumulated rounding means $Q^{\\mathsf{T}}Q$ drifts measurably from $I$, and badly when the columns are nearly dependent. Worth knowing as the definition, not as a method.',
@@ -2113,7 +2113,13 @@ The diagonal entry $R_{jj} = \\|\\mathbf{u}_j\\|$ — the norm of the $j$-th ort
 
 @academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$: Gram-Schmidt on the two columns gives $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T$ and $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, 2, -1)^T$. Then $R = \\begin{pmatrix} \\sqrt{2} & 1/\\sqrt{2} \\\\ 0 & 3/\\sqrt{6} \\end{pmatrix}$ and $A = QR$.]@`,
+For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$: Gram-Schmidt on the two columns gives $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T$ and $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, 2, -1)^T$. Then $R = \\begin{pmatrix} \\sqrt{2} & 1/\\sqrt{2} \\\\ 0 & 3/\\sqrt{6} \\end{pmatrix}$ and $A = QR$.]@
+
+@academic[pitfall,aside:true,width:35%:Leaving the columns unnormalized
+Putting $\\mathbf{u}_1 = (1, 0, 1)^T$ into $Q$ without dividing by its length gives $Q^TQ \\neq I$, and with $R_{11} = \\sqrt{2}$ the first column of $QR$ becomes $(\\sqrt{2}, 0, \\sqrt{2})^T$ instead of $\\mathbf{a}_1$. With $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T$ it is $(1, 0, 1)^T$.
+[Read more](!#pitfalls)]@
+
+Two quantities come out of every step of the computation: the leftover vector $\\mathbf{u}_j$, whose length becomes the diagonal entry $R_{jj}$, and the unit vector $\\mathbf{q}_j = \\mathbf{u}_j / \\|\\mathbf{u}_j\\|$ that becomes a column of $Q$. In the example, $\\mathbf{u}_1 = (1, 0, 1)^T$ has length $\\sqrt{2}$, and $\\mathbf{u}_2 = (1/2, 1, -1/2)^T$ has length $\\sqrt{3/2} = 3/\\sqrt{6}$, the entry in the bottom-right corner of $R$. The entry above it, $1/\\sqrt{2}$, is the dot product of $\\mathbf{q}_1$ with the second column $(1, 1, 0)^T$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2123,6 +2129,12 @@ For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$: Gram-Schm
     content: `A Householder reflection is an [orthogonal](!/linear-algebra/matrix/types) matrix $H = I - 2\\mathbf{v}\\mathbf{v}^T/(\\mathbf{v}^T\\mathbf{v})$ that reflects $\\mathbb{R}^m$ across the hyperplane perpendicular to $\\mathbf{v}$. By choosing $\\mathbf{v}$ appropriately, a single Householder reflection zeros out all entries below the pivot in one column.
 
 Applying Householder reflections sequentially — one per column — produces $H_n \\cdots H_2 H_1 A = R$. Since each $H_i$ is orthogonal, $Q = H_1 H_2 \\cdots H_n$ is orthogonal, giving $A = QR$.
+
+@academic[pitfall,aside:true,width:35%:Reversing the order of the reflections
+Taking $Q = H_2H_1$ from $H_2H_1A = R$ puts $Q^T$ in place of $Q$, and $QR$ no longer returns $A$. Inverting the product reverses it, $(H_2H_1)^{-1} = H_1H_2$, so $A = H_1H_2R$.
+[Read more](!#pitfalls)]@
+
+In the equation $H_n \\cdots H_2 H_1 A = R$ the reflections stand to the left of $A$ in the order they were applied: $H_1$ acts first and sits next to $A$, and $H_n$ acts last and sits on the far left. Each $H_i$ is symmetric as well as orthogonal, so it is its own transpose and its own inverse. Recovering $Q$ means moving the whole product of reflections to the right-hand side of that equation.
 
 Householder QR is more numerically stable than Gram-Schmidt. It achieves backward stability — the computed factors $Q$ and $R$ satisfy $QR = A + E$ where $\\|E\\|$ is on the order of machine precision times $\\|A\\|$. This makes Householder QR the standard algorithm in numerical libraries.`,
     before: ``,
@@ -2191,6 +2203,12 @@ With shifts (replacing $A_k$ by $A_k - \\sigma_k I$ before factoring and adding 
 
 The matrix $QQ^T$ is the [projection](!/linear-algebra/orthogonality/projections) matrix onto $\\text{Col}(A)$. For any $\\mathbf{b}$, $QQ^T\\mathbf{b}$ is the orthogonal projection of $\\mathbf{b}$ onto the column space.
 
+@academic[pitfall,aside:true,width:35%:Treating QQᵀ as the identity
+Replacing $QQ^T$ by $I$ for a thin $Q$ claims $QQ^T\\mathbf{b} = \\mathbf{b}$ for every $\\mathbf{b}$. For the worked example and $\\mathbf{b} = (1, 1, 1)^T$, the product is $(4/3, 2/3, 2/3)^T$; only $Q^TQ = I_2$ holds.
+[Read more](!#pitfalls)]@
+
+For the matrix of the worked example, $m = 3$ and $n = 2$, so $QQ^T$ is a $3 \\times 3$ matrix of rank $2$. It leaves every vector in the plane $\\text{Col}(A)$ unchanged and sends every vector perpendicular to that plane to $\\mathbf{0}$. A general vector of $\\mathbb{R}^3$ keeps only its component in the plane spanned by $\\mathbf{q}_1$ and $\\mathbf{q}_2$.
+
 Orthogonal multiplication preserves norms: $\\|A\\mathbf{x}\\| = \\|QR\\mathbf{x}\\| = \\|R\\mathbf{x}\\|$, since $\\|Q\\mathbf{y}\\| = \\|\\mathbf{y}\\|$ for any $\\mathbf{y}$. This means $R$ captures all the "size" information of $A$ — the orthogonal factor contributes nothing to stretching or compressing.
 
 $R$ is invertible when $A$ has full column rank (the diagonal entries are the norms of the Gram-Schmidt vectors, all positive). The [singular values](!/linear-algebra/decompositions/svd) of $A$ equal the singular values of $R$, since the orthogonal factor does not affect them.`,
@@ -2219,7 +2237,7 @@ In practice, Householder is the default for dense matrices, Givens for sparse on
 
 Gram-Schmidt takes the columns of $A$ and produces orthonormal vectors $\\mathbf{q}_1, \\dots, \\mathbf{q}_n$ while recording the coefficients $R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{a}_j$ along the way. Assembling these into matrices gives $A = QR$.
 
-Conversely, given $A = QR$, the columns of $Q$ are exactly what Gram-Schmidt would produce, and $R$ stores exactly the dot products Gram-Schmidt would compute. The factorization is the matrix-level summary of the vector-level algorithm.
+Conversely, given $A = QR$ with positive diagonal entries on $R$, the columns of $Q$ are exactly what Gram-Schmidt would produce, and $R$ stores exactly the dot products Gram-Schmidt would compute. The factorization is the matrix-level summary of the vector-level algorithm.
 
 This duality means every theorem about QR has an interpretation in terms of Gram-Schmidt, and vice versa. The QR decomposition is Gram-Schmidt made systematic, portable, and computable in a single matrix equation.`,
     before: ``,
@@ -2228,7 +2246,60 @@ This duality means every theorem about QR has an interpretation in terms of Gram
   },
   obj11: {
     title: `Summary: Four Routes to the Same Factorization`,
-    content: `The QR factorization is unique (with the positive-diagonal convention), but the algorithms that produce it are not. Classical Gram-Schmidt, modified Gram-Schmidt, Householder reflections, and Givens rotations all yield the same $A = QR$ in exact arithmetic, but they differ sharply in numerical stability and in the kinds of matrices they handle most efficiently. The table below collects each method alongside how it operates, its stability behavior, and the setting in which it is the right choice.`,
+    content: `The QR factorization is unique (for linearly independent columns, with the positive-diagonal convention), but the algorithms that produce it are not. Classical Gram-Schmidt, modified Gram-Schmidt, Householder reflections, and Givens rotations all yield the same $A = QR$ in exact arithmetic once signs are normalized so the diagonal of $R$ is positive, but they differ sharply in numerical stability and in the kinds of matrices they handle most efficiently. The table below collects each method alongside how it operates, its stability behavior, and the setting in which it is the right choice.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up again and again when a QR factorization is computed by hand or used afterwards. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Leaving the columns unnormalized**
+
+Gram-Schmidt first produces the orthogonal vectors $\\mathbf{u}_j$, and these are put into $Q$ as they are. The division by $\\|\\mathbf{u}_j\\|$ that turns them into unit vectors is skipped, while $R$ is filled in with the lengths as usual.
+
+Wrong working: for $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, take $\\mathbf{u}_1 = (1, 0, 1)^T$ and $\\mathbf{u}_2 = (1/2, 1, -1/2)^T$ as the columns of $Q$, with $R = \\begin{pmatrix} \\sqrt{2} & 1/\\sqrt{2} \\\\ 0 & 3/\\sqrt{6} \\end{pmatrix}$. Then
+$$Q^TQ = \\begin{pmatrix} 2 & 0 \\\\ 0 & 3/2 \\end{pmatrix} \\neq I, \\qquad \\text{first column of } QR = \\sqrt{2}\\,\\mathbf{u}_1 = (\\sqrt{2}, 0, \\sqrt{2})^T \\neq \\mathbf{a}_1$$
+
+Right working: divide each $\\mathbf{u}_j$ by its length.
+$$\\mathbf{q}_1 = \\frac{\\mathbf{u}_1}{\\sqrt{2}} = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T, \\qquad \\mathbf{q}_2 = \\frac{\\mathbf{u}_2}{\\sqrt{3/2}} = \\frac{1}{\\sqrt{6}}(1, 2, -1)^T$$
+Now $Q^TQ = I_2$ and $QR = A$. The first column of $QR$ is $\\sqrt{2}\\,\\mathbf{q}_1 = (1, 0, 1)^T$, and the second is $\\frac{1}{\\sqrt{2}}\\mathbf{q}_1 + \\frac{3}{\\sqrt{6}}\\mathbf{q}_2 = (\\frac{1}{2}, 0, \\frac{1}{2})^T + (\\frac{1}{2}, 1, -\\frac{1}{2})^T = (1, 1, 0)^T$.
+
+Why it happens: the length $\\|\\mathbf{u}_j\\|$ is already recorded in $R$ as the diagonal entry, so it feels as if it has been used. It is needed twice: once as $R_{jj}$, and once as the divisor that makes $\\mathbf{q}_j$ a unit vector.
+
+How to check: compute $Q^TQ$. Its diagonal entries are the squared lengths of the columns of $Q$, and every one of them must be $1$.
+
+**Reversing the order of the reflections**
+
+Householder reflections are applied to $A$ one after another, giving $H_n \\cdots H_2 H_1 A = R$. The product on the left is then taken as $Q$ in the same order, although $Q$ has to undo it.
+
+Wrong working: take $A = \\begin{pmatrix} 2 & 5 \\\\ 1 & 0 \\\\ 2 & -2 \\end{pmatrix}$. The reflections
+$$H_1 = \\frac{1}{3}\\begin{pmatrix} 2 & 1 & 2 \\\\ 1 & 2 & -2 \\\\ 2 & -2 & -1 \\end{pmatrix}, \\qquad H_2 = \\frac{1}{5}\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 3 & 4 \\\\ 0 & 4 & -3 \\end{pmatrix}$$
+give $H_1A = \\begin{pmatrix} 3 & 2 \\\\ 0 & 3 \\\\ 0 & 4 \\end{pmatrix}$ and $H_2H_1A = R = \\begin{pmatrix} 3 & 2 \\\\ 0 & 5 \\\\ 0 & 0 \\end{pmatrix}$. Taking $Q = H_2H_1$:
+$$H_2H_1 = \\frac{1}{15}\\begin{pmatrix} 10 & 5 & 10 \\\\ 11 & -2 & -10 \\\\ -2 & 14 & -5 \\end{pmatrix}, \\qquad H_2H_1R = \\begin{pmatrix} 2 & 3 \\\\ 11/5 & 4/5 \\\\ -2/5 & 22/5 \\end{pmatrix} \\neq A$$
+
+Right working: move the product to the other side. Each $H_i$ is its own inverse, so $A = (H_2H_1)^{-1}R = H_1^{-1}H_2^{-1}R = H_1H_2R$, and
+$$Q = H_1H_2 = \\frac{1}{15}\\begin{pmatrix} 10 & 11 & -2 \\\\ 5 & -2 & 14 \\\\ 10 & -10 & -5 \\end{pmatrix}, \\qquad QR = \\begin{pmatrix} 2 & 5 \\\\ 1 & 0 \\\\ 2 & -2 \\end{pmatrix} = A$$
+The wrong product $H_2H_1$ is exactly $Q^T$.
+
+Why it happens: $H_2H_1$ is the matrix that appears on the page, and it is orthogonal, so it looks like a valid $Q$. The inversion that reverses the order is a single step that is easy to skip.
+
+How to check: the first column of $Q$ must be the first column of $A$ divided by $R_{11}$. Here that is $\\frac{1}{3}(2, 1, 2)^T$, which is the first column of $H_1H_2$ and not of $H_2H_1$.
+
+**Treating QQᵀ as the identity**
+
+For a thin $Q$ with $m > n$, the identity $Q^TQ = I_n$ is turned around and $QQ^T$ is replaced by $I_m$, as if $Q$ were square.
+
+Wrong working: with $Q$ from the worked example and $\\mathbf{b} = (1, 1, 1)^T$, the least-squares solution $\\hat{\\mathbf{x}} = R^{-1}Q^T\\mathbf{b}$ gives $A\\hat{\\mathbf{x}} = QRR^{-1}Q^T\\mathbf{b} = QQ^T\\mathbf{b}$, and replacing $QQ^T$ by $I$ makes this $\\mathbf{b}$. The fit looks exact, with zero residual.
+
+Right working: $QQ^T\\mathbf{b}$ is the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$.
+$$QQ^T\\mathbf{b} = (\\mathbf{q}_1 \\cdot \\mathbf{b})\\,\\mathbf{q}_1 + (\\mathbf{q}_2 \\cdot \\mathbf{b})\\,\\mathbf{q}_2 = (1, 0, 1)^T + (\\tfrac{1}{3}, \\tfrac{2}{3}, -\\tfrac{1}{3})^T = (\\tfrac{4}{3}, \\tfrac{2}{3}, \\tfrac{2}{3})^T$$
+Solving $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b} = (\\sqrt{2}, 2/\\sqrt{6})^T$ gives $\\hat{\\mathbf{x}} = (2/3, 2/3)^T$, and $A\\hat{\\mathbf{x}} = (4/3, 2/3, 2/3)^T$. The residual is $\\mathbf{b} - A\\hat{\\mathbf{x}} = (-1/3, 1/3, 1/3)^T$, not zero.
+
+Why it happens: for a square orthogonal matrix both products equal $I$, and the two identities are learned together. For a thin $Q$ only the product of size $n \\times n$ is the identity.
+
+How to check: compare sizes and rank. $QQ^T$ is $m \\times m$ but has rank only $n$, so for $m > n$ it cannot be $I_m$. The residual $\\mathbf{b} - QQ^T\\mathbf{b}$ is zero only when $\\mathbf{b}$ already lies in $\\text{Col}(A)$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2555,6 +2626,14 @@ export default function QRDecompositionPage({qrStabilityLevels,
           </DiagramFrame>,
           `Why the second group wins is worth stating plainly. Building $Q$ by orthogonalization means every column inherits the rounding error of the columns before it, so orthogonality degrades as the computation proceeds — and degrades fastest exactly when the columns are nearly dependent, which is when the factorization was most needed. Householder and Givens never construct $Q$ from the data at all: each step is an orthogonal matrix by construction, and a product of orthogonal matrices is orthogonal whatever the arithmetic did.`,
           `In practice the choice is narrow. Householder is the default for dense matrices and is what [least squares](#6) routines call. Givens is chosen when the matrix is sparse or when entries arrive one at a time, since a rotation acts on two rows and leaves the rest untouched. Modified Gram–Schmidt survives where the columns of $Q$ are wanted explicitly and progressively — and classical Gram–Schmidt survives as an explanation.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1540,6 +1540,8 @@ import tripleAngleDiagrams from '@/app/components/trigonometry/tripleAngleDiagra
 import pythagoreanDiagrams from '@/app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams'
 import negativeAngleDiagrams from '@/app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 export async function getStaticProps(){
 
@@ -1763,7 +1765,7 @@ Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\
       \n`,     
 
       after:  `\nDefinition-based identities are fundamental relationships derived directly from how trigonometric functions are defined in a right triangle. They establish the basic connections between these functions and serve as building blocks for more complex identities.
-      To get better feeling and understanding of basic definition-based identities use our visual intteractive [unit circle](!/visual-tools/unit-circle) tool.
+      To get better feeling and understanding of basic definition-based identities use our visual interactive [unit circle](!/visual-tools/unit-circle) tool.
       `
  
     },
@@ -1956,6 +1958,133 @@ Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\
       `,
       after:``,
       link:'',
+    },
+
+    pitfallBoxes:{
+      reciprocal:`@academic[pitfall,aside:true,width:35%:Pairing secant with sine
+Taking secant as $\\frac{1}{\\sin\\theta}$ gives $\\sec 30^\\circ = \\frac{1}{1/2} = 2$. The correct value is $\\frac{1}{\\cos 30^\\circ} = \\frac{2}{\\sqrt{3}} \\approx 1.155$.
+[Read more](!#pitfalls)]@
+
+Rewriting secant, cosecant and cotangent through sine and cosine is usually the first step when simplifying an expression or proving an identity, so these pairs are used in almost every problem. The definitions settle each pair: a reciprocal function divides the same two sides of the triangle in the opposite order. A slip at that first step carries through every line that follows.`,
+      pythagorean:`@academic[pitfall,aside:true,width:35%:Taking the square root term by term
+Rooting each term of $\\sin^2\\theta = 1 - \\cos^2\\theta$ gives $\\sin\\theta = 1 - \\cos\\theta$, so $\\sin 60^\\circ = 1 - \\frac{1}{2} = \\frac{1}{2}$. The root covers the whole side: $\\sin 60^\\circ = \\sqrt{1 - \\frac{1}{4}} = \\frac{\\sqrt{3}}{2}$.
+[Read more](!#pitfalls)]@
+
+In practice the identity is most often used to find one function from another. When $\\cos\\theta$ is known, the equation is rearranged to $\\sin^2\\theta = 1 - \\cos^2\\theta$, and a square root then leads to $\\sin\\theta$ itself. That root has two possible signs, and the quadrant of $\\theta$ decides which one applies. The same steps work in the other two identities, for example to find $\\sec\\theta$ from $\\tan\\theta$.`,
+      even_odd:`@academic[pitfall,aside:true,width:35%:Pulling the minus sign out of cosine
+Moving the minus sign out of cosine gives $\\cos(-60^\\circ) = -\\cos 60^\\circ = -\\frac{1}{2}$. Cosine is even, so $\\cos(-60^\\circ) = \\cos 60^\\circ = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
+
+These rules are needed whenever a negative angle appears, for example after a difference identity or a reflection of a graph across the $y$-axis. Each function is rewritten for the positive angle according to its own symmetry, as listed in the table above. Clearing the negative angles first usually makes the rest of a simplification much shorter.`,
+      sum:`@academic[pitfall,aside:true,width:35%:Splitting the sine over a sum
+Splitting $\\sin(30^\\circ + 60^\\circ)$ into $\\sin 30^\\circ + \\sin 60^\\circ$ gives $\\frac{1 + \\sqrt{3}}{2} \\approx 1.366$, above the maximum $1$. The sum identity gives $\\frac{1}{4} + \\frac{3}{4} = 1 = \\sin 90^\\circ$.
+[Read more](!#pitfalls)]@
+
+Applying a sum identity starts by splitting the angle into two parts whose values are known, and then expanding. For example, $75^\\circ = 45^\\circ + 30^\\circ$ gives $\\sin 75^\\circ = \\sin 45^\\circ \\cos 30^\\circ + \\cos 45^\\circ \\sin 30^\\circ = \\frac{\\sqrt{6} + \\sqrt{2}}{4}$. The result is exact, with no calculator needed, and the same split works for cosine and tangent.`,
+      difference:`@academic[pitfall,aside:true,width:35%:Keeping the minus sign in a cosine difference
+Writing $\\cos(60^\\circ - 30^\\circ)$ as $\\cos 60^\\circ \\cos 30^\\circ - \\sin 60^\\circ \\sin 30^\\circ$ gives $0$. The correct expansion gives $\\frac{\\sqrt{3}}{4} + \\frac{\\sqrt{3}}{4} = \\frac{\\sqrt{3}}{2} = \\cos 30^\\circ$.
+[Read more](!#pitfalls)]@
+
+The difference identities are the sum identities with $b$ replaced by $-b$. Since $\\cos(-b) = \\cos b$ and $\\sin(-b) = -\\sin b$, only the terms that contain $\\sin b$ change sign. In the tangent identity both signs change: the numerator becomes a difference and the denominator a sum. These identities are the usual route to exact values such as $\\cos 15^\\circ = \\cos(45^\\circ - 30^\\circ)$.`,
+      half:`@academic[pitfall,aside:true,width:35%:Taking the sign from the whole angle
+Choosing the sign from $\\theta = 240^\\circ$ in Quadrant III gives $\\sin 120^\\circ = -\\sqrt{\\frac{1 - \\cos 240^\\circ}{2}} = -\\frac{\\sqrt{3}}{2}$. The half angle $120^\\circ$ is in Quadrant II, so $\\sin 120^\\circ = \\frac{\\sqrt{3}}{2}$.
+[Read more](!#pitfalls)]@
+
+Using a half-angle formula takes two separate decisions: the size of the value, which the square root gives, and its sign, which the formula leaves open with $\\pm$. The size depends only on $\\cos\\theta$, so two different angles with the same cosine give the same square root. The sign is read from the unit circle, once it is clear which angle is being placed there. The same two decisions appear in the cosine and tangent forms.`,
+      double:`@academic[pitfall,aside:true,width:35%:Doubling the sine value
+Pulling the $2$ out of $\\sin 60^\\circ = \\sin(2 \\cdot 30^\\circ)$ gives $2\\sin 30^\\circ = 1$. The identity gives $2\\sin 30^\\circ \\cos 30^\\circ = 2 \\cdot \\frac{1}{2} \\cdot \\frac{\\sqrt{3}}{2} = \\frac{\\sqrt{3}}{2}$.
+[Read more](!#pitfalls)]@
+
+Each double-angle formula rebuilds a value at $2\\theta$ from the values at $\\theta$. For example, with $\\sin\\theta = \\frac{3}{5}$ and $\\cos\\theta = \\frac{4}{5}$, the sine formula gives $\\sin 2\\theta = 2 \\cdot \\frac{3}{5} \\cdot \\frac{4}{5} = \\frac{24}{25}$, and the cosine formula gives $\\cos 2\\theta = \\frac{16}{25} - \\frac{9}{25} = \\frac{7}{25}$. The three cosine forms give the same value; the choice depends on which of $\\sin\\theta$ and $\\cos\\theta$ is known.`,
+    },
+
+    pitfalls:{
+      title:`Common Pitfalls`,
+      content:`Seven mistakes come up again and again when trigonometric identities are used. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Pairing secant with sine**
+
+When secant or cosecant is rewritten through sine and cosine, the pairs are swapped: secant is taken as the reciprocal of sine, and cosecant as the reciprocal of cosine. Every value built on the swapped pair is wrong, except at angles where sine and cosine happen to be equal.
+
+Wrong working: $\\sec 30^\\circ = \\frac{1}{\\sin 30^\\circ} = \\frac{1}{1/2} = 2$.
+
+Right working: secant is the reciprocal of cosine, so $\\sec 30^\\circ = \\frac{1}{\\cos 30^\\circ} = \\frac{1}{\\sqrt{3}/2} = \\frac{2}{\\sqrt{3}} = \\frac{2\\sqrt{3}}{3} \\approx 1.155$.
+
+Why it happens: the prefix "co" seems to point the wrong way. Cosecant sounds as if it belongs with cosine, which leaves secant for sine.
+
+How to check: a function times its reciprocal is $1$. Here $\\cos 30^\\circ \\cdot \\frac{2}{\\sqrt{3}} = \\frac{\\sqrt{3}}{2} \\cdot \\frac{2}{\\sqrt{3}} = 1$, while $\\cos 30^\\circ \\cdot 2 = \\sqrt{3}$, not $1$.
+
+**Taking the square root term by term**
+
+To find $\\sin\\theta$ from $\\cos\\theta$, the identity is rearranged to $\\sin^2\\theta = 1 - \\cos^2\\theta$, and then the square root is taken of each term separately. A square root does not split over a difference.
+
+Wrong working: for $\\theta = 60^\\circ$, $\\cos 60^\\circ = \\frac{1}{2}$, and $\\sin\\theta = 1 - \\cos\\theta$ gives $\\sin 60^\\circ = 1 - \\frac{1}{2} = \\frac{1}{2}$.
+
+Right working: $\\sin^2 60^\\circ = 1 - \\left(\\frac{1}{2}\\right)^2 = \\frac{3}{4}$, so $\\sin 60^\\circ = \\sqrt{\\frac{3}{4}} = \\frac{\\sqrt{3}}{2}$, with the positive sign because $60^\\circ$ is in Quadrant I.
+
+Why it happens: the squares and the square root look like inverse operations that cancel term by term, as if $\\sqrt{a^2 - b^2}$ were $a - b$.
+
+How to check: put the result back into the identity. With $\\sin 60^\\circ = \\frac{1}{2}$, $\\sin^2 60^\\circ + \\cos^2 60^\\circ = \\frac{1}{4} + \\frac{1}{4} = \\frac{1}{2}$, not $1$. With $\\frac{\\sqrt{3}}{2}$ the sum is $\\frac{3}{4} + \\frac{1}{4} = 1$.
+
+**Pulling the minus sign out of cosine**
+
+The rule for sine, $\\sin(-\\theta) = -\\sin\\theta$, is applied to every function, so the minus sign is moved out of cosine and secant as well.
+
+Wrong working: $\\cos(-60^\\circ) = -\\cos 60^\\circ = -\\frac{1}{2}$.
+
+Right working: cosine is even, so $\\cos(-60^\\circ) = \\cos 60^\\circ = \\frac{1}{2}$. The angle $-60^\\circ$ ends in Quadrant IV, where cosine is positive.
+
+Why it happens: sine is usually met first, and "a minus sign inside comes out" feels like a general rule, as it is for odd powers such as $(-x)^3 = -x^3$.
+
+How to check: place both angles on the unit circle. The points for $60^\\circ$ and $-60^\\circ$ are mirror images across the $x$-axis, so they share the $x$-coordinate $\\frac{1}{2}$, which is the cosine.
+
+**Splitting the sine over a sum**
+
+The sine of a sum is treated as if sine were a factor that distributes over the bracket: $\\sin(a + b) = \\sin a + \\sin b$.
+
+Wrong working: $\\sin(30^\\circ + 60^\\circ) = \\sin 30^\\circ + \\sin 60^\\circ = \\frac{1}{2} + \\frac{\\sqrt{3}}{2} = \\frac{1 + \\sqrt{3}}{2} \\approx 1.366$.
+
+Right working: $\\sin(30^\\circ + 60^\\circ) = \\sin 30^\\circ \\cos 60^\\circ + \\cos 30^\\circ \\sin 60^\\circ = \\frac{1}{2} \\cdot \\frac{1}{2} + \\frac{\\sqrt{3}}{2} \\cdot \\frac{\\sqrt{3}}{2} = \\frac{1}{4} + \\frac{3}{4} = 1$, which is $\\sin 90^\\circ$.
+
+Why it happens: a number in front of a bracket distributes, $k(a + b) = ka + kb$, and $\\sin(a + b)$ is written the same way. But sine is a function applied to the whole angle, not a number multiplying it.
+
+How to check: a sine value never exceeds $1$, so $1.366$ cannot be right. A second check is $a = b = 90^\\circ$: the split gives $\\sin 90^\\circ + \\sin 90^\\circ = 2$, while $\\sin 180^\\circ = 0$.
+
+**Keeping the minus sign in a cosine difference**
+
+The cosine of a difference is written with the same sign as the angle, $\\cos(a - b) = \\cos a \\cos b - \\sin a \\sin b$. That is the formula for $\\cos(a + b)$.
+
+Wrong working: $\\cos(60^\\circ - 30^\\circ) = \\cos 60^\\circ \\cos 30^\\circ - \\sin 60^\\circ \\sin 30^\\circ = \\frac{1}{2} \\cdot \\frac{\\sqrt{3}}{2} - \\frac{\\sqrt{3}}{2} \\cdot \\frac{1}{2} = 0$.
+
+Right working: $\\cos(60^\\circ - 30^\\circ) = \\cos 60^\\circ \\cos 30^\\circ + \\sin 60^\\circ \\sin 30^\\circ = \\frac{\\sqrt{3}}{4} + \\frac{\\sqrt{3}}{4} = \\frac{\\sqrt{3}}{2}$, which is $\\cos 30^\\circ$.
+
+Why it happens: in the sine identities the sign follows the angle, since $\\sin(a - b)$ has a minus. The same pattern is expected for cosine, where the sign is the opposite one.
+
+How to check: put $b = a$. Then $\\cos(a - a) = \\cos 0 = 1$. The right formula gives $\\cos^2 a + \\sin^2 a = 1$, while the wrong one gives $\\cos^2 a - \\sin^2 a$, which is $\\cos 2a$ and is not $1$ in general.
+
+**Taking the sign from the whole angle**
+
+In $\\sin\\frac{\\theta}{2} = \\pm\\sqrt{\\frac{1 - \\cos\\theta}{2}}$, the sign is chosen from the quadrant of $\\theta$ instead of the quadrant of the half angle $\\frac{\\theta}{2}$.
+
+Wrong working: $\\theta = 240^\\circ$ is in Quadrant III, where sine is negative, so $\\sin 120^\\circ = -\\sqrt{\\frac{1 - \\cos 240^\\circ}{2}} = -\\sqrt{\\frac{1 + 1/2}{2}} = -\\sqrt{\\frac{3}{4}} = -\\frac{\\sqrt{3}}{2}$.
+
+Right working: halve first. The half angle $120^\\circ$ is in Quadrant II, where sine is positive, so $\\sin 120^\\circ = +\\sqrt{\\frac{3}{4}} = \\frac{\\sqrt{3}}{2}$.
+
+Why it happens: $\\theta$ is the angle written in the problem, and its quadrant is the one already worked out, so it is used for the sign as well.
+
+How to check: picture the half angle on the unit circle. The point for $120^\\circ$ lies above the $x$-axis, so its sine must be positive.
+
+**Doubling the sine value**
+
+The $2$ in $\\sin 2\\theta$ is pulled out in front, as if doubling the angle doubled the value: $\\sin 2\\theta = 2\\sin\\theta$.
+
+Wrong working: $\\sin 60^\\circ = \\sin(2 \\cdot 30^\\circ) = 2\\sin 30^\\circ = 2 \\cdot \\frac{1}{2} = 1$.
+
+Right working: $\\sin 2\\theta = 2\\sin\\theta\\cos\\theta$, so $\\sin 60^\\circ = 2 \\cdot \\frac{1}{2} \\cdot \\frac{\\sqrt{3}}{2} = \\frac{\\sqrt{3}}{2} \\approx 0.866$.
+
+Why it happens: the $2$ looks like a coefficient, and in algebra a coefficient can be moved in front. Inside a function it is part of the angle and cannot be taken out.
+
+How to check: try $\\theta = 90^\\circ$. The wrong rule gives $\\sin 180^\\circ = 2\\sin 90^\\circ = 2$, a value no sine can reach, while in fact $\\sin 180^\\circ = 0$.`,
     },
 
   }
@@ -2656,8 +2785,47 @@ const faqQuestions = {
       }    
       
 
+  const trigIdentityOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Sixteen identity families in four groups',
+    preface: 'The trigonometric identities on this page fall into four groups by where they come from: the definitions, symmetry, angle arithmetic, and algebraic rewriting.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Know the source, rebuild the rest',
+    conclusion: 'Most identities can be derived from a few foundational ones; the groups show which family each one comes from.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Trigonometric identities', def: '16 families', children: [
+        { id: 'found', name: 'Foundational', children: [
+          { id: 'def', name: 'Definition-based', def: 'triangle sides' },
+          { id: 'rec', name: 'Reciprocal', def: 'multiplicative-inverse pairs' },
+          { id: 'pyth', name: 'Pythagorean', example: 'sin²θ + cos²θ = 1' },
+          { id: 'tri', name: 'Triangle geometry', def: 'any triangle' },
+        ] },
+        { id: 'sym', name: 'Symmetry', children: [
+          { id: 'eo', name: 'Even-odd', example: 'f(−θ)' },
+          { id: 'co', name: 'Co-function', example: 'f(π/2 − θ)' },
+          { id: 'per', name: 'Periodicity', example: 'f(θ + period) = f(θ)' },
+          { id: 'shift', name: 'Shift', example: 'f(θ + π), f(θ + π/2)' },
+        ] },
+        { id: 'arith', name: 'Angle arithmetic', children: [
+          { id: 'sum', name: 'Sum', example: 'f(a + b)' },
+          { id: 'diff', name: 'Difference', example: 'f(a − b)' },
+          { id: 'double', name: 'Double', example: 'f(2θ)' },
+          { id: 'triple', name: 'Triple', example: 'f(3θ)' },
+          { id: 'half', name: 'Half', example: 'f(θ/2)' },
+        ] },
+        { id: 'alg', name: 'Algebraic transform', children: [
+          { id: 'pr', name: 'Power-reducing', example: 'f²(θ) via f(2θ)' },
+          { id: 'ps', name: 'Product-to-sum' },
+          { id: 'sp', name: 'Sum-to-product' },
+        ] },
+      ] },
+    ],
+  };
+
     return{
         props:{
+    trigIdentityOutline,
 
             trigIdentitiesData,
             faqQuestions,
@@ -2672,7 +2840,7 @@ const faqQuestions = {
     }
 }
 
-export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,sectionsContent,introContent, summaryTable, demoUnits, faqQuestions}) {
+export default function TrigoIdentitiesPage({trigIdentityOutline, trigIdentitiesData ,config ,sectionsContent,introContent, summaryTable, demoUnits, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2721,6 +2889,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
         sectionsContent.reciprocal.after,
         <div key={'unit-reciprocal'} dangerouslySetInnerHTML={{ __html: demoUnits.reciprocal }} />,
         `With these six pairings internalized, every rational trigonometric expression becomes negotiable — whichever function a problem hands you, its reciprocal is one flip away.`,
+        sectionsContent.pitfallBoxes.reciprocal,
 
       ]
     },
@@ -2742,6 +2911,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
           sectionsContent.pythagorean.after,
                   <div key={'unit-pythagoreanProof'} dangerouslySetInnerHTML={{ __html: demoUnits.pythagoreanProof }} />,
             `Dividing that equation by cos²θ or sin²θ gives the other two Pythagorean identities in the table.`,
+            sectionsContent.pitfallBoxes.pythagorean,
         
       ]
     },
@@ -2783,6 +2953,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          sectionsContent.even_odd.after,
                   <div key={'unit-cosineEven'} dangerouslySetInnerHTML={{ __html: demoUnits.cosineEven }} />,
             `Secant follows cosine and is even; tangent, cotangent and cosecant follow sine and are odd.`,
+            sectionsContent.pitfallBoxes.even_odd,
 
         
       ]
@@ -2862,6 +3033,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.sum.after,
+         sectionsContent.pitfallBoxes.sum,
         
       ]
     },
@@ -2879,6 +3051,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.difference.after,
+         sectionsContent.pitfallBoxes.difference,
         
         
       ]
@@ -2900,6 +3073,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
          sectionsContent.half.after,
          <div key={'unit-half'} dangerouslySetInnerHTML={{ __html: demoUnits.half }} />,
          `With halves as with doubles, the lesson is the same: every fractional angle is reachable from whole ones — at the price of a square root and a careful sign check.`,
+         sectionsContent.pitfallBoxes.half,
 
       ]
     },
@@ -2921,6 +3095,7 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
           sectionsContent.double.after,
           <div key={'unit-double'} dangerouslySetInnerHTML={{ __html: demoUnits.double }} />,
           `Compact as they look, these doubled forms are the hinge between single-angle values and the power-reducing, half-angle, and integration techniques that follow.`,
+          sectionsContent.pitfallBoxes.double,
 
 
        
@@ -3010,6 +3185,15 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
       ]
     },
 
+    {
+      id:'pitfalls',
+      title: sectionsContent.pitfalls.title,
+      link: '',
+      content:[
+        sectionsContent.pitfalls.content,
+      ]
+    },
+
     // NEW summary capstone section
     {
       id:'summary',
@@ -3020,6 +3204,14 @@ export default function TrigoIdentitiesPage({trigIdentitiesData ,config ,section
         <div key={'summary-table'} style={tableWrapStyle}
              dangerouslySetInnerHTML={{ __html: summaryTable }} />,
         sectionsContent.summary.after,
+        <DiagramFrame
+          key={'summary-diagram'}
+          id="trig-identity-families-outline"
+          title="Trigonometric identity families"
+          source="/trigonometry/identities"
+        >
+          <TaxonomyOutline data={trigIdentityOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+        </DiagramFrame>,
       ]
     },
 

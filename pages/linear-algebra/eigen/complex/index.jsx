@@ -1629,11 +1629,11 @@ const spiralRegimes = {
           shape: 'antidiagonal',
           condition: '$r = 1$',
           properties: {
-            action: 'pure rotation by $\\theta$, no scaling',
+            action: 'pure rotation by $\\theta$ in the basis of the real canonical form, no scaling',
             det: '$\\det A = 1$',
-            orbit: 'a closed circle',
+            orbit: 'a closed ellipse (a circle in the basis of the real canonical form)',
           },
-          note: 'Lengths are preserved exactly, so the matrix is [orthogonal](!/linear-algebra/matrix/types). Every orbit closes if $\\theta$ is a rational multiple of $2\\pi$ and fills the circle densely otherwise \u2014 the boundary case in every stability argument.',
+          note: 'In the basis of the real canonical form, lengths are preserved exactly and the block is [orthogonal](!/linear-algebra/matrix/types); $A$ itself need not be. Every orbit closes if $\\theta$ is a rational multiple of $2\\pi$ and fills the circle densely otherwise \u2014 the boundary case in every stability argument.',
         },
       ],
     },
@@ -1706,7 +1706,7 @@ const complexEigenvalues = {
   title: 'Reading a conjugate pair',
   tallyLabel: 'readings',
   intro: 'A complex pair is not a failure of the real case \u2014 it is a rotation, and its two parts say by how much and through what angle. The modulus and argument are the whole content, and everything below is one of them applied.',
-  footnote: 'The single idea underneath: a real matrix with eigenvalues $re^{\\pm i\\theta}$ acts on the corresponding real plane as a rotation by $\\theta$ scaled by $r$. Recognition, canonical form and stability are all that statement read at different moments \u2014 which is why the modulus and argument are worth computing before anything else.',
+  footnote: 'The single idea underneath: a real matrix with eigenvalues $re^{\\pm i\\theta}$ acts on the corresponding real plane, in the basis of the real canonical form, as a rotation by $\\theta$ scaled by $r$. Recognition, canonical form and stability are all that statement read at different moments \u2014 which is why the modulus and argument are worth computing before anything else.',
   groups: [
     {
       heading: 'Recognising the pair',
@@ -1749,7 +1749,7 @@ const complexEigenvalues = {
         {
           name: 'Argument',
           anchor: '#3',
-          formula: '$\\theta = \\arctan(b/a)$',
+          formula: '$\\theta = \\arg(a + bi)$',
           condition: 'the rotation angle',
           note: 'How far the plane turns per application. A pair with $a = 0$ is a quarter turn; the sign of $b$ picks the direction, and the two conjugates give the two orientations of the same rotation.',
         },
@@ -1771,7 +1771,7 @@ const complexEigenvalues = {
           formula: '$|\\lambda| < 1$ for every eigenvalue',
           condition: 'for $\\mathbf{x}_{k+1} = A\\mathbf{x}_k$',
           strict: true,
-          note: 'The modulus alone decides whether iteration spirals inward or outward; the argument only sets how fast it turns. Note $|\\lambda| = 1$ is the boundary case \u2014 a pure rotation that neither grows nor decays.',
+          note: 'The modulus alone decides whether iteration spirals inward or outward; the argument only sets how fast it turns. Note $|\\lambda| = 1$ is the boundary case \u2014 in the basis of the real canonical form, a pure rotation that neither grows nor decays.',
         },
         {
           name: 'Continuous stability',
@@ -1989,9 +1989,9 @@ One consequence for odd-dimensional real matrices: at least one eigenvalue must 
   },
   obj3: {
     title: `The 2×2 Case in Detail`,
-    content: `A $2 \\times 2$ real matrix with complex eigenvalues $\\lambda = a \\pm bi$ (where $b \\neq 0$) acts as a rotation composed with a scaling. The eigenvalues have modulus $r = \\sqrt{a^2 + b^2}$ and argument $\\theta = \\arctan(b/a)$.
+    content: `A $2 \\times 2$ real matrix with complex eigenvalues $\\lambda = a \\pm bi$ (where $b \\neq 0$) acts, in a suitable real basis, as a rotation composed with a scaling. The eigenvalues have modulus $r = \\sqrt{a^2 + b^2}$ and argument $\\theta$ with $\\cos\\theta = a/r$, $\\sin\\theta = b/r$ (this is $\\arctan(b/a)$ only when $a > 0$).
 
-When $r = 1$ (equivalently, $\\det(A) = a^2 + b^2 = 1$), the transformation is a pure rotation by angle $\\theta$. When $r > 1$, it is a rotation with outward spiraling. When $r < 1$, it is a rotation with inward spiraling.
+When $r = 1$ (equivalently, $\\det(A) = a^2 + b^2 = 1$), the transformation is, in that basis, a pure rotation by angle $\\theta$. When $r > 1$, it is a rotation with outward spiraling. When $r < 1$, it is a rotation with inward spiraling.
 
 ## Worked Example
 
@@ -2000,7 +2000,11 @@ For $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$: $\\text{tr}(A) = 4$
 @academic[formula_callout:The 2×2 Case in Detail
 $$\\lambda = \\frac{4 \\pm \\sqrt{-4}}{2} = 2 \\pm i$$]@
 
-The modulus is $r = \\sqrt{4 + 1} = \\sqrt{5}$ and the argument is $\\theta = \\arctan(1/2)$. The transformation rotates by $\\arctan(1/2) \\approx 26.6°$ while scaling distances by $\\sqrt{5} \\approx 2.24$. Since $r > 1$, repeated application spirals outward.`,
+@academic[pitfall,aside:true,width:35%:Taking the determinant as the modulus
+Reading $\\det(A) = 5$ as the modulus says distances are scaled by $5$. But $\\det(A) = a^2 + b^2 = r^2$, so $r = \\sqrt{5} \\approx 2.24$; the factor $5$ belongs to areas.
+[Read more](!#pitfalls)]@
+
+The modulus is $r = \\sqrt{4 + 1} = \\sqrt{5}$ and the argument is $\\theta = \\arctan(1/2)$. In the basis of the real canonical form, the transformation rotates by $\\arctan(1/2) \\approx 26.6°$ while scaling distances by $\\sqrt{5} \\approx 2.24$. Since $r > 1$, repeated application spirals outward.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2028,9 +2032,15 @@ This eigenvector splits into real and imaginary parts: $\\mathbf{v} = \\underbra
 @academic[formula_callout:real_canonical_form_2x2|Real Canonical Form 2x2|$$\\lambda = a \\pm bi \\Rightarrow P^{-1}AP = \\begin{pmatrix} a & -b \\\\ b & a \\end{pmatrix} = r\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$$]@
 @academic[formulas_link:/linear-algebra/formulas#real_canonical_form_2x2]@
 
-where $r = \\sqrt{a^2 + b^2}$ and $\\theta = \\arctan(b/a)$. This is a rotation by $\\theta$ scaled by $r$.
+where $r = \\sqrt{a^2 + b^2}$ and $\\theta$ satisfies $\\cos\\theta = a/r$, $\\sin\\theta = b/r$. This is a rotation by $\\theta$ scaled by $r$.
 
 The similarity is achieved by the real matrix $P = [\\mathbf{w} \\; \\mathbf{u}]$ — imaginary part first, then real part — where $\\mathbf{v} = \\mathbf{u} + i\\mathbf{w}$ is the complex eigenvector for $\\lambda = a + bi$. Then $P^{-1}AP = \\begin{pmatrix} a & -b \\\\ b & a \\end{pmatrix}$.
+
+@academic[pitfall,aside:true,width:35%:Putting the real part first
+Taking $P = [\\mathbf{u} \\; \\mathbf{w}] = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}$ gives $P^{-1}AP = \\begin{pmatrix} 2 & 1 \\\\ -1 & 2 \\end{pmatrix}$, a rotation the other way. With $P = [\\mathbf{w} \\; \\mathbf{u}] = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ the result is $\\begin{pmatrix} 2 & -1 \\\\ 1 & 2 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+For the running example, $\\lambda = 2 + i$ and $\\mathbf{v} = (1 + i, 1)^T$ from the previous section, so $\\mathbf{u} = (1, 1)^T$ and $\\mathbf{w} = (1, 0)^T$. These two real vectors become the columns of $P$, and $P^{-1}AP$ should come out as the block with $a = 2$ and $b = 1$. Computing it is a direct check on the eigenvector found above.
 
 This is the real alternative to diagonalization: instead of a diagonal matrix with complex entries (which is valid over $\\mathbb{C}$ but not over $\\mathbb{R}$), we get a real $2 \\times 2$ rotation-scaling block. The transformation is expressed in its simplest real form.`,
     before: ``,
@@ -2039,7 +2049,7 @@ This is the real alternative to diagonalization: instead of a diagonal matrix wi
   },
   obj6: {
     title: `Complex Eigenvalues in Larger Matrices`,
-    content: `For an $n \\times n$ real matrix, complex eigenvalues still come in conjugate pairs. Each pair contributes a $2 \\times 2$ rotation-scaling block to the real canonical form. Real eigenvalues contribute $1 \\times 1$ blocks (just the eigenvalue itself).
+    content: `For an $n \\times n$ real matrix, complex eigenvalues still come in conjugate pairs. When $A$ is diagonalizable over $\\mathbb{C}$, each pair contributes a $2 \\times 2$ rotation-scaling block to the real canonical form, and each real eigenvalue contributes a $1 \\times 1$ block (just the eigenvalue itself).
 
 A $4 \\times 4$ matrix with eigenvalues $2 \\pm 3i$ and $-1 \\pm i$ has real canonical form
 
@@ -2051,7 +2061,7 @@ A $3 \\times 3$ matrix with eigenvalues $5$ and $1 \\pm 2i$ has real canonical f
 @academic[formula_callout:Complex Eigenvalues in Larger Matrices
 $$\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 1 & -2 \\\\ 0 & 2 & 1 \\end{pmatrix}$$]@
 
-The real canonical form is the real analogue of [diagonalization](!/linear-algebra/eigen/diagonalization): it achieves the simplest possible real matrix that is similar to $A$, with the block structure directly reflecting the eigenvalue spectrum.`,
+The real canonical form is the real analogue of [diagonalization](!/linear-algebra/eigen/diagonalization): for a matrix diagonalizable over $\\mathbb{C}$ it achieves the simplest possible real matrix that is similar to $A$, with the block structure directly reflecting the eigenvalue spectrum; otherwise larger real Jordan blocks appear.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2061,6 +2071,10 @@ The real canonical form is the real analogue of [diagonalization](!/linear-algeb
     content: `Complex eigenvalues produce oscillatory behavior in dynamical systems.
 
 In the discrete system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$, an eigenvalue $\\lambda = a + bi$ with modulus $r = |\\lambda| = \\sqrt{a^2 + b^2}$ generates a spiraling trajectory. When $r > 1$, the spiral grows outward — the system is unstable. When $r < 1$, the spiral decays inward — the system converges to the origin. When $r = 1$, the trajectory traces a closed curve — perpetual oscillation without growth or decay.
+
+@academic[pitfall,aside:true,width:35%:Using the real-part test on a discrete system
+Judging $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ by the sign of the real part calls $\\lambda = \\frac{1}{2} \\pm \\frac{1}{2}i$ unstable, since $\\operatorname{Re}(\\lambda) > 0$. Here the modulus decides: $|\\lambda| = \\frac{\\sqrt{2}}{2} \\approx 0.71 < 1$, so the iterates spiral in to $\\mathbf{0}$.
+[Read more](!#pitfalls)]@
 
 In the continuous system $\\mathbf{x}' = A\\mathbf{x}$, an eigenvalue $\\lambda = a + bi$ contributes a term $e^{at}(\\cos bt, \\sin bt)$ to the solution. The real part $a$ determines exponential growth ($a > 0$) or decay ($a < 0$). The imaginary part $b$ determines the oscillation frequency. When $a = 0$, the oscillation is sustained. When $a < 0$, it is damped. When $a > 0$, it grows without bound.
 
@@ -2088,6 +2102,79 @@ The choice between working over $\\mathbb{R}$ and $\\mathbb{C}$ is a recurring t
   obj9: {
     title: `Summary: Complex Eigenvalues at a Glance`,
     content: `The behavior of complex eigenvalues for a real matrix is governed by a handful of formulas and statements that connect the discriminant, the modulus, the argument, and the real part to specific geometric and dynamical consequences. The table below collects each one alongside what it produces and what it means, providing a single reference for the page&apos;s key facts.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when working with complex eigenvalues. Three are marked with a box where they happen in the sections above, and the first, the formula for the angle, is flagged in the text of the 2×2 section. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading the angle from the arctangent alone**
+
+The argument $\\theta$ of $a + bi$ is computed as $\\arctan(b/a)$ whatever the sign of $a$. The arctangent only returns angles between $-90°$ and $90°$, so when $a < 0$ the angle lands in the wrong half of the plane.
+
+Wrong working: for the pair $-1 \\pm i$ of the $4 \\times 4$ example, $r = \\sqrt{2}$ and
+$$\\theta = \\arctan\\left(\\frac{1}{-1}\\right) = -45°$$
+$$\\sqrt{2}\\begin{pmatrix} \\cos(-45°) & -\\sin(-45°) \\\\ \\sin(-45°) & \\cos(-45°) \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ -1 & 1 \\end{pmatrix}$$
+which is not the block $\\begin{pmatrix} -1 & -1 \\\\ 1 & -1 \\end{pmatrix}$ of that pair.
+
+Right working: use $\\cos\\theta = a/r$ and $\\sin\\theta = b/r$ together.
+$$\\cos\\theta = -\\frac{1}{\\sqrt{2}}, \\quad \\sin\\theta = \\frac{1}{\\sqrt{2}} \\quad\\Rightarrow\\quad \\theta = 135°$$
+$$\\sqrt{2}\\begin{pmatrix} \\cos 135° & -\\sin 135° \\\\ \\sin 135° & \\cos 135° \\end{pmatrix} = \\begin{pmatrix} -1 & -1 \\\\ 1 & -1 \\end{pmatrix}$$
+
+Why it happens: most worked examples, including $2 \\pm i$ on this page, have $a > 0$, where $\\arctan(b/a)$ is correct, so the shortcut is remembered as the rule.
+
+How to check: the signs of $\\cos\\theta$ and $\\sin\\theta$ must match the signs of $a$ and $b$. Here $a < 0$ and $b > 0$, so $\\theta$ lies between $90°$ and $180°$.
+
+**Taking the determinant as the modulus**
+
+The determinant $\\det(A) = a^2 + b^2$ is read as the modulus $r$ of the eigenvalues, so the scaling factor comes out squared.
+
+Wrong working: for $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$,
+$$\\det(A) = 3 \\cdot 1 - (-2) \\cdot 1 = 5 \\quad\\Rightarrow\\quad r = 5$$
+and the rotation-scaling is said to stretch distances by $5$.
+
+Right working: the eigenvalues are $2 \\pm i$, and
+$$r = |2 + i| = \\sqrt{2^2 + 1^2} = \\sqrt{5} \\approx 2.24, \\qquad \\det(A) = (2 + i)(2 - i) = 5 = r^2$$
+In the basis of the real canonical form, distances are scaled by $\\sqrt{5}$; the factor $5$ is how much areas grow.
+
+Why it happens: the determinant is often described as the scaling factor of a transformation. It is the factor for areas, and in the plane that is the square of the factor for lengths.
+
+How to check: for a real $2 \\times 2$ matrix with a complex pair, $r = \\sqrt{\\det(A)}$. The verdict on growth is the same either way, since $r > 1$ exactly when $\\det(A) > 1$, so only the rate gives the slip away.
+
+**Putting the real part first**
+
+The matrix $P$ is built with the real part $\\mathbf{u}$ of the eigenvector as its first column and the imaginary part $\\mathbf{w}$ second. The result is still a rotation-scaling block, but the sign of $b$ is flipped, so it turns the other way.
+
+Wrong working: with $\\mathbf{v} = (1 + i, 1)^T$, $\\mathbf{u} = (1, 1)^T$ and $\\mathbf{w} = (1, 0)^T$,
+$$P = [\\mathbf{u} \\; \\mathbf{w}] = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}, \\qquad P^{-1} = \\begin{pmatrix} 0 & 1 \\\\ 1 & -1 \\end{pmatrix}$$
+$$P^{-1}AP = \\begin{pmatrix} 0 & 1 \\\\ 1 & -1 \\end{pmatrix}\\begin{pmatrix} 1 & 3 \\\\ 2 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ -1 & 2 \\end{pmatrix}$$
+the block for $a = 2$ and $b = -1$, a rotation by $-\\theta$.
+
+Right working: imaginary part first.
+$$P = [\\mathbf{w} \\; \\mathbf{u}] = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}, \\qquad P^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}$$
+$$P^{-1}AP = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 3 & 1 \\\\ 1 & 2 \\end{pmatrix} = \\begin{pmatrix} 2 & -1 \\\\ 1 & 2 \\end{pmatrix}$$
+
+Why it happens: $\\mathbf{v} = \\mathbf{u} + i\\mathbf{w}$ lists the real part first, and that order is carried into $P$. Some textbooks do use $[\\mathbf{u} \\; \\mathbf{w}]$, but pair it with the eigenvalue $a - bi$, and the two conventions get mixed.
+
+How to check: $A\\mathbf{w}$ must equal $a\\mathbf{w} + b\\mathbf{u}$. Here $A\\mathbf{w} = (3, 1)^T = 2(1, 0)^T + 1 \\cdot (1, 1)^T$, so $\\mathbf{w}$ belongs in the first column, and the entry below the diagonal of $P^{-1}AP$ must be $b = 1$.
+
+**Using the real-part test on a discrete system**
+
+The stability of $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ is judged by the sign of $\\operatorname{Re}(\\lambda)$, the test for continuous systems, or the other way round: $\\mathbf{x}' = A\\mathbf{x}$ is judged by $|\\lambda|$.
+
+Wrong working: $A = \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ 1 & 1 \\end{pmatrix}$ has $\\text{tr}(A) = 1$ and $\\det(A) = \\frac{1}{2}$, so
+$$\\lambda = \\frac{1 \\pm \\sqrt{1 - 2}}{2} = \\frac{1}{2} \\pm \\frac{1}{2}i, \\qquad \\operatorname{Re}(\\lambda) = \\frac{1}{2} > 0$$
+and the discrete system is declared unstable.
+
+Right working: for a discrete system the modulus decides.
+$$|\\lambda| = \\sqrt{\\frac{1}{4} + \\frac{1}{4}} = \\frac{\\sqrt{2}}{2} \\approx 0.71 < 1$$
+Starting from $\\mathbf{x}_0 = (1, 0)^T$, the iterates $(\\frac{1}{2}, \\frac{1}{2})^T$ and $(0, \\frac{1}{2})^T$ have lengths $0.71$ and $0.5$: the trajectory spirals in to $\\mathbf{0}$. For $\\mathbf{x}' = A\\mathbf{x}$ with the same matrix the verdict reverses: $|\\lambda| < 1$, but $\\operatorname{Re}(\\lambda) > 0$, and the solutions grow like $e^{t/2}$.
+
+Why it happens: both tests compare an eigenvalue with a boundary, the unit circle for discrete systems and the imaginary axis for continuous ones, and the two boundaries are easily swapped.
+
+How to check: ask what the system does to the part of $\\mathbf{x}$ along an eigenvector. A discrete step multiplies it by $\\lambda$, so after $n$ steps its size is $|\\lambda|^n$; a continuous solution behaves like $e^{\\lambda t}$, whose size is $e^{at}$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2380,6 +2467,14 @@ const schemas = {
           </DiagramFrame>,
           `The real canonical form is what keeps this practical. A conjugate pair can be handled entirely in $\\mathbb{R}$: the matrix is similar to a block $\\begin{bmatrix} a & -b \\\\ b & a \\end{bmatrix}$, which is a rotation by $\\theta$ scaled by $r$, and no complex arithmetic is required at any point. The complex numbers are a route to the answer rather than a property of it.`,
           `The two stability criteria are worth separating carefully, because they look alike and are not. A discrete system $\\mathbf{x}_{k+1} = A\\mathbf{x}_k$ is stable when every $|\\lambda| < 1$ — the modulus decides, since each step multiplies by it. A continuous system $\\mathbf{x}' = A\\mathbf{x}$ is stable when every $\\operatorname{Re}(\\lambda) < 0$ — the real part decides, since the solution behaves as $e^{\\lambda t}$. Applying the wrong test gives a confidently wrong answer.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

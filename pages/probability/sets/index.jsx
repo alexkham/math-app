@@ -779,8 +779,8 @@ A set in probability is simply a collection of possible outcomes of a random exp
 In set theory, a set is an abstract collection of objects with no context attached. In probability, a set always describes "what can happen" when an experiment is run. Its elements are outcomes, and these sets help us form events, define sample spaces, and build probability models.
 
 **Examples**:
-•  S{H, T}  — the outcomes of a coin toss
-• $ {1, 2, 3, 4, 5, 6}$ — the outcomes of a die roll
+•  {H, T}  — the outcomes of a coin toss
+• {1, 2, 3, 4, 5, 6} — the outcomes of a die roll
 • intervals like $[0, 5]$ — possible values of a continuous measurement
 
 In probability, sets are not abstract objects — they are the language we use to describe outcomes, events, and everything built on top of them.`,
@@ -814,6 +814,12 @@ Probability deals with a few main kinds of sets, each matching a different type 
       title:`Core Set Operations in Probability`,
       content:`
 Probability uses the same basic operations as set theory, but with a different purpose. In set theory, union, intersection, complement, and difference are abstract tools for manipulating collections of objects. In probability, these operations gain a concrete interpretation: they describe how events relate to one another inside a sample space. The union of two events represents any outcome where at least one of them happens; the intersection represents outcomes where both occur; the complement represents the event "not happening"; and the difference keeps outcomes belonging to one event but not the other. When two events share no outcomes, they are disjoint. The full technical treatment of these operations belongs to the set-theory section, but here we use them as the machinery that turns real-life statements about uncertainty into precise events we can assign probabilities to.
+
+@academic[pitfall,aside:true,width:35%:Dropping the overlap from a union
+Taking "even or greater than 3" on a die as one or the other but not both gives $\\{2, 5\\}$ and $P = \\frac{2}{6}$. The union keeps the overlap: $\\{2, 4, 5, 6\\}$, so $P = \\frac{4}{6} = \\frac{2}{3}$.
+[Read more](!#mistakes)]@
+
+Each operation can be tried on a single die roll. With $A = \\{2, 4, 6\\}$, the event "even", and $B = \\{4, 5, 6\\}$, the event "greater than 3", the union $A \\cup B$ is the event "even or greater than 3", the intersection $A \\cap B$ is "even and greater than 3", and the complement $A^c$ is "odd".
 `,
       before:``,
       after:``,
@@ -823,6 +829,12 @@ Probability uses the same basic operations as set theory, but with a different p
       title:`How Sets Become Events`,
       content:`
 In probability, an event is nothing more than a set of outcomes. Once a sample space is defined, every meaningful statement about what might happen is translated into a set inside that space. Saying "the die shows an even number" becomes the set {2, 4, 6}; saying "the waiting time is less than 3 minutes" becomes the interval (0, 3). This translation is what turns everyday language into precise mathematical objects. Once an event is expressed as a set, all of probability's tools—probabilities, complements, unions, intersections, conditional relationships—can be applied to it. In this way, sets are not just background structure; they are the actual form that events take.
+
+@academic[pitfall,aside:true,width:35%:Swapping union and intersection
+Reading "a heart or a king" as the intersection leaves only the king of hearts, $P = \\frac{1}{52}$. The union holds $13 + 4 - 1 = 16$ cards, so $P = \\frac{16}{52} = \\frac{4}{13}$.
+[Read more](!#mistakes)]@
+
+Statements that join two conditions are translated the same way: each condition becomes its own set, and the connecting word decides how the two sets are combined. For a card drawn from a standard deck, "a heart" is a set of 13 cards and "a king" is a set of 4.
 `,
       before:``,
       after:``,
@@ -841,6 +853,20 @@ A probability model is built from three parts: the sample space, the collection 
       title:`Common Mistakes and Misunderstandings`,
       content:`
 Several errors show up repeatedly when learners first connect sets to probability. One common mistake is confusing a single outcome with an event, even though an event can contain many outcomes. Another is mixing up union and intersection, which leads to incorrect interpretations such as treating "A or B" as "A and B." Some people treat complements incorrectly by forgetting that they are defined relative to the entire sample space, not just the part of the problem they happen to be focusing on. In continuous settings, a frequent misunderstanding is expecting individual points to have nonzero probability, even though their probability is actually zero. Recognizing these mistakes early helps prevent deeper errors when working with conditional probability, independence, and probability distributions.
+
+**Dropping the overlap from a union**
+
+The event "A or B" is read as one or the other but not both, so the outcomes that belong to both events are left out. In probability, "or" is inclusive: the union keeps every outcome that is in $A$, in $B$, or in both.
+
+Wrong working: on a die, with $A = \\{2, 4, 6\\}$ (even) and $B = \\{4, 5, 6\\}$ (greater than 3), only the outcomes in exactly one of the events are kept.
+$$\\{2, 5\\}, \\quad P = \\frac{2}{6} = \\frac{1}{3}$$
+
+Right working: the union also keeps the overlap $A \\cap B = \\{4, 6\\}$.
+$$A \\cup B = \\{2, 4, 5, 6\\}, \\quad P(A \\cup B) = \\frac{4}{6} = \\frac{2}{3}$$
+
+Why it happens: in everyday speech "or" often means one choice only, as in "tea or coffee". The set union carries no such restriction.
+
+How to check: the union contains each of the two events, so its probability is never smaller than the larger of $P(A)$ and $P(B)$. Here $P(A) = \\frac{3}{6}$, and the wrong answer $\\frac{2}{6}$ is smaller.
 `,
       before:``,
       after:``,

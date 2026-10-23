@@ -211,6 +211,12 @@ Let $u = x^2$, so $du = 2x\\, dx$:
 $$= \\int \\cos u\\, du = \\sin u + C = \\sin(x^2) + C$$]@
 
 For definite integrals, convert the limits: when $x = a$, $u = g(a)$; when $x = b$, $u = g(b)$.
+
+@academic[pitfall,aside:true,width:35%:Keeping the x-bounds after substituting
+Evaluating $\\sin u$ from $0$ to $2$, the old $x$-bounds of $\\int_0^2 2x\\cos(x^2)\\, dx$, gives $\\sin 2 \\approx 0.909$. In $u = x^2$ the bounds are $0$ and $4$, and the integral is $\\sin 4 \\approx -0.757$.
+[Read more](!#pitfalls)]@
+
+The bounds of a definite integral are values of the variable of integration. In $\\int_0^2 2x\\cos(x^2)\\, dx$ the numbers $0$ and $2$ are values of $x$; after the substitution $u = x^2$ the integral runs over values of $u$, and the antiderivative $\\sin u$ is a function of $u$. Converting the bounds at the moment of substitution means the evaluation never has to return to $x$.
 `,
     before: ``,
     after: ``,
@@ -276,6 +282,12 @@ Let $u = x$ and $dv = e^x\\, dx$. Then $du = dx$ and $v = e^x$:
 
 $$= xe^x - \\int e^x\\, dx = xe^x - e^x + C = e^x(x - 1) + C$$]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the minus sign
+Adding the second integral instead of subtracting it gives $\\int x e^x\\, dx = xe^x + e^x + C$, whose derivative is $xe^x + 2e^x$. Subtracting gives $xe^x - e^x + C$, whose derivative is $xe^x$.
+[Read more](!#pitfalls)]@
+
+The formula comes from integrating the product rule $(uv)' = u'v + uv'$ and solving for $\\int u\\, dv$, which is why the second integral is subtracted. In the example, $u = x$ and $v = e^x$ give $uv = xe^x$, and the integral left over, $\\int v\\, du = \\int e^x\\, dx$, is simple enough to finish at once.
+
 **Choosing the first factor:** LIATE guides selection—Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential. Earlier types typically make better choices for $u$.
 `,
     before: ``,
@@ -303,6 +315,12 @@ $$\\int \\sin^3 x\\, dx = \\int \\sin x (1 - \\cos^2 x)\\, dx$$
 Let $u = \\cos x$:
 
 $$= -\\int (1 - u^2)\\, du = -u + \\frac{u^3}{3} + C = -\\cos x + \\frac{\\cos^3 x}{3} + C$$]@
+
+@academic[pitfall,aside:true,width:35%:Losing the sign of du
+Taking $du = \\sin x\\, dx$ for $u = \\cos x$ gives $\\int \\sin^3 x\\, dx = \\cos x - \\frac{\\cos^3 x}{3} + C$, whose derivative is $-\\sin^3 x$. With $du = -\\sin x\\, dx$ the answer is $-\\cos x + \\frac{\\cos^3 x}{3} + C$.
+[Read more](!#pitfalls)]@
+
+The saved factor $\\sin x$ is what makes the substitution possible: together with $dx$ it is matched against $du$ for $u = \\cos x$, and the remaining even power becomes a polynomial in $u$. For an odd power of cosine the roles swap, and $\\cos x\\, dx$ is matched against $du$ for $u = \\sin x$. In both cases the answer can be checked by differentiating it back to the integrand.
 `,
     before: ``,
     after: ``,
@@ -326,6 +344,12 @@ $$\\int \\frac{1}{\\sqrt{1 - x^2}}\\, dx$$
 Let $x = \\sin\\theta$, so $dx = \\cos\\theta\\, d\\theta$ and $\\sqrt{1 - x^2} = \\cos\\theta$:
 
 $$= \\int \\frac{\\cos\\theta}{\\cos\\theta}\\, d\\theta = \\int d\\theta = \\theta + C = \\arcsin x + C$$]@
+
+@academic[pitfall,aside:true,width:35%:Replacing dx with dθ
+Swapping $dx$ for $d\\theta$ without the factor $\\cos\\theta$ leaves $\\int \\frac{d\\theta}{\\cos\\theta} = \\ln|\\sec\\theta + \\tan\\theta| + C$, a different function. With $dx = \\cos\\theta\\, d\\theta$ the cosines cancel and the answer is $\\arcsin x + C$.
+[Read more](!#pitfalls)]@
+
+The substitution $x = \\sin\\theta$ is applied to the whole integral. It rewrites the radical $\\sqrt{1 - x^2}$ as $\\cos\\theta$, and differentiating it gives the differential $dx$ in terms of $d\\theta$; the integrand in $\\theta$ is built from both. At the end, $\\theta = \\arcsin x$ returns the answer to the original variable.
 `,
     before: ``,
     after: ``,
@@ -349,6 +373,12 @@ $$\\frac{1}{(x-1)(x+1)} = \\frac{A}{x-1} + \\frac{B}{x+1}$$
 Solving gives $A = 1/2$, $B = -1/2$:
 
 $$= \\frac{1}{2}\\int \\frac{1}{x-1}\\, dx - \\frac{1}{2}\\int \\frac{1}{x+1}\\, dx = \\frac{1}{2}\\ln|x-1| - \\frac{1}{2}\\ln|x+1| + C$$]@
+
+@academic[pitfall,aside:true,width:35%:Taking the log of the whole denominator
+Writing $\\ln|x^2 - 1| + C$ for $\\int \\frac{1}{x^2 - 1}\\, dx$ gives a function whose derivative is $\\frac{2x}{x^2 - 1}$, not $\\frac{1}{x^2 - 1}$. The decomposition gives $\\frac{1}{2}\\ln|x - 1| - \\frac{1}{2}\\ln|x + 1| + C$.
+[Read more](!#pitfalls)]@
+
+Each simple fraction integrates on its own: a constant over a linear factor $x - r$ gives that constant times $\\ln|x - r|$, because the derivative of $x - r$ is $1$. The two logarithms can be combined at the end into $\\frac{1}{2}\\ln\\left|\\frac{x - 1}{x + 1}\\right| + C$, a single term with the same derivative.
 `,
     before: ``,
     after: ``,
@@ -379,6 +409,75 @@ Multiple techniques often combine. A problem might require substitution followed
     title: `Summary: The Techniques at a Glance`,
     content: `
 The techniques covered above all share the same goal—reshape the integrand until it matches a [known formula](!/calculus/integrals/special)—but each one reverses a different differentiation rule and is triggered by a different signal in the integrand. The table below collects all five in one place, pairing each technique with what it reverses, the pattern that signals it, the standard setup, and a canonical example. Read the &quot;Recognize when…&quot; column first when scanning an unfamiliar integral; read across the row once a match is found.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes cause many of the wrong answers when these techniques are carried out. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Keeping the x-bounds after substituting**
+
+In a definite integral, the integrand and $dx$ are rewritten in $u$, but the bounds are left as they were. The antiderivative in $u$ is then evaluated at numbers that are values of $x$.
+
+Wrong working: with $u = x^2$, $\\int_0^2 2x\\cos(x^2)\\, dx$ becomes $\\int_0^2 \\cos u\\, du = \\sin 2 - \\sin 0 \\approx 0.909$.
+
+Right working: when $x = 0$, $u = 0$; when $x = 2$, $u = 4$. So the integral is $\\int_0^4 \\cos u\\, du = \\sin 4 - \\sin 0 \\approx -0.757$.
+
+Why it happens: the bounds are written once, at the start, and are read as part of the integral sign rather than as values of a particular variable.
+
+How to check: take the other route. Back-substitute to get the antiderivative $\\sin(x^2)$ and evaluate it at the $x$-bounds: $\\sin(2^2) - \\sin(0^2) = \\sin 4$. The two routes must agree.
+
+**Dropping the minus sign**
+
+In integration by parts, $uv - \\int v\\, du$ is written with a plus sign, so the second integral is added instead of subtracted.
+
+Wrong working: $\\int x e^x\\, dx = xe^x + \\int e^x\\, dx = xe^x + e^x + C$.
+
+Right working: $\\int x e^x\\, dx = xe^x - \\int e^x\\, dx = xe^x - e^x + C = e^x(x - 1) + C$.
+
+Why it happens: the product rule has a plus sign, and the parts formula is remembered by its shape. The minus only appears when $\\int v\\, du$ is moved to the other side of the integrated product rule.
+
+How to check: differentiate the answer. $(xe^x + e^x)' = xe^x + 2e^x$, which is not the integrand; $(xe^x - e^x)' = e^x + xe^x - e^x = xe^x$, which is.
+
+**Losing the sign of du**
+
+With $u = \\cos x$, the differential is taken as $du = \\sin x\\, dx$ instead of $du = -\\sin x\\, dx$, and the whole answer comes out with the wrong sign.
+
+Wrong working: $\\int \\sin x (1 - \\cos^2 x)\\, dx = \\int (1 - u^2)\\, du = u - \\frac{u^3}{3} + C = \\cos x - \\frac{\\cos^3 x}{3} + C$.
+
+Right working: $\\sin x\\, dx = -du$, so the integral is $-\\int (1 - u^2)\\, du = -\\cos x + \\frac{\\cos^3 x}{3} + C$.
+
+Why it happens: the derivative of $\\sin x$ is $\\cos x$ with no sign, and the same is expected the other way round.
+
+How to check: on $[0, \\pi]$ the integrand $\\sin^3 x$ is never negative, so $\\int_0^\\pi \\sin^3 x\\, dx$ must be positive. The right answer gives $\\left(1 - \\frac{1}{3}\\right) - \\left(-1 + \\frac{1}{3}\\right) = \\frac{4}{3}$; the wrong one gives $-\\frac{4}{3}$.
+
+**Replacing dx with dθ**
+
+In a trigonometric substitution, the radical is rewritten in $\\theta$, but $dx$ is replaced by $d\\theta$ alone, without the factor that comes from differentiating $x = \\sin\\theta$.
+
+Wrong working: $\\int \\frac{1}{\\sqrt{1 - x^2}}\\, dx = \\int \\frac{1}{\\cos\\theta}\\, d\\theta = \\ln|\\sec\\theta + \\tan\\theta| + C = \\ln\\left|\\frac{1 + x}{\\sqrt{1 - x^2}}\\right| + C$.
+
+Right working: $dx = \\cos\\theta\\, d\\theta$, so $\\int \\frac{\\cos\\theta}{\\cos\\theta}\\, d\\theta = \\theta + C = \\arcsin x + C$.
+
+Why it happens: in $u$-substitution the new differential is often just $du$, and the habit carries over to a substitution that runs the other way, where $x$ is the function of $\\theta$.
+
+How to check: differentiate the answer in $x$. The wrong answer has derivative $\\frac{1}{1 - x^2}$, not $\\frac{1}{\\sqrt{1 - x^2}}$; at $x = 0.6$ these are $1.5625$ and $1.25$.
+
+**Taking the log of the whole denominator**
+
+The rule $\\int \\frac{1}{x}\\, dx = \\ln|x| + C$ is stretched to any denominator, so $\\frac{1}{x^2 - 1}$ is integrated straight to a logarithm of $x^2 - 1$ without being decomposed.
+
+Wrong working: $\\int \\frac{1}{x^2 - 1}\\, dx = \\ln|x^2 - 1| + C$.
+
+Right working: decompose first. $\\frac{1}{x^2 - 1} = \\frac{1/2}{x - 1} - \\frac{1/2}{x + 1}$, so the integral is $\\frac{1}{2}\\ln|x - 1| - \\frac{1}{2}\\ln|x + 1| + C$.
+
+Why it happens: the rule $\\int \\frac{f'(x)}{f(x)}\\, dx = \\ln|f(x)| + C$ is remembered without its condition. It needs the derivative of the denominator in the numerator, here $2x$, and the numerator is $1$.
+
+How to check: differentiate. $\\frac{d}{dx}\\ln|x^2 - 1| = \\frac{2x}{x^2 - 1}$, which at $x = 2$ is $\\frac{4}{3}$, while the integrand at $x = 2$ is $\\frac{1}{3}$.
 `,
     before: ``,
     after: ``,
@@ -676,6 +775,14 @@ export default function PageTemplate({integrationTechniqueTree, seoData, section
           sectionsContent.obj8.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -13,6 +13,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -455,6 +457,12 @@ The two derivatives differ only by sign. This follows from the identity $\\arcsi
 To derive the arcsine formula: let $y = \\arcsin x$, so $\\sin y = x$ with $y \\in [-\\pi/2, \\pi/2]$. Differentiating implicitly: $\\cos y \\cdot \\frac{dy}{dx} = 1$. Since $y$ lies in the first or fourth quadrant, $\\cos y \\geq 0$, so $\\cos y = \\sqrt{1 - \\sin^2 y} = \\sqrt{1 - x^2}$. Solving gives $\\frac{dy}{dx} = \\frac{1}{\\sqrt{1 - x^2}}$.
 
 The domain restriction $|x| < 1$ reflects the range of $\\sin y$ on $[-\\pi/2, \\pi/2]$. At $x = \\pm 1$, the denominator vanishes—the graph of $\\arcsin x$ has vertical tangents at its endpoints.
+
+@academic[pitfall,aside:true,width:35%:Forgetting the chain rule
+Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leaves out the derivative of the inner $2x$. The chain rule gives $\\frac{d}{dx}[\\arcsin(2x)] = \\frac{2}{\\sqrt{1 - 4x^2}}$.
+[Read more](!#pitfalls)]@
+
+The formulas are stated for the bare variable $x$, but in practice the argument of $\\arcsin$ or $\\arccos$ is often an expression such as $2x$, $x^2$ or $e^x$. The formula is then evaluated at that inner expression, and the [chain rule](!/calculus/derivatives/rules#7) links the result to the rate at which the inner expression changes. The same holds for every formula on this page.
 `,
     before: ``,
     after: ``,
@@ -500,6 +508,10 @@ $$\\frac{d}{dx}[\\operatorname{arccsc} x] = -\\frac{1}{|x| \\sqrt{x^2 - 1}}$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the absolute value
+Using $\\frac{1}{x\\sqrt{x^2 - 1}}$ gives the slope $-\\frac{1}{2\\sqrt{3}} \\approx -0.289$ at $x = -2$. But $\\operatorname{arcsec} x$ rises on both parts of its domain, and the formula with $|x|$ gives $\\frac{1}{2\\sqrt{3}} \\approx 0.289$.
+[Read more](!#pitfalls)]@
+
 The derivation for arcsecant: let $y = \\text{arcsec}\\, x$, so $\\sec y = x$. Differentiating: $\\sec y \\tan y \\cdot \\frac{dy}{dx} = 1$. Since $\\sec y = x$ and $\\tan y = \\pm\\sqrt{\\sec^2 y - 1} = \\pm\\sqrt{x^2 - 1}$, the sign depends on the quadrant. The absolute value $|x|$ in the formula resolves this: $\\sec y \\tan y = |x|\\sqrt{x^2 - 1}$ across the full domain.
 
 These derivatives are less frequently encountered than the arcsine and arctangent versions. They appear primarily in integrals of the form $\\int \\frac{1}{x\\sqrt{x^2 - 1}}\\,dx$ and in problems involving [trigonometric substitution](!/calculus/integrals/techniques).
@@ -523,7 +535,7 @@ $(\\text{arcsec}\\, x)' + (\\text{arccsc}\\, x)' = 0$, both involving $\\frac{1}
 
 Each pair shares the same magnitude because the two functions in each pair sum to a constant ($\\frac{\\pi}{2}$). The cofunction always carries the negative sign—the same pattern seen in the [common trigonometric derivatives](!/calculus/derivatives/common) where $\\cos$, $\\cot$, and $\\csc$ derivatives are negative.
 
-Two distinct algebraic forms appear: $\\sqrt{1 - x^2}$ for the sine/cosine pair, $1 + x^2$ for the tangent/cotangent pair, and $|x|\\sqrt{x^2 - 1}$ for the secant/cosecant pair. These three expressions reappear in integration, where recognizing them triggers the corresponding inverse trigonometric antiderivative. The table below collects the three algebraic forms alongside their cofunction pairs and the identity that explains why each pair shares the same magnitude.
+Three distinct algebraic forms appear: $\\sqrt{1 - x^2}$ for the sine/cosine pair, $1 + x^2$ for the tangent/cotangent pair, and $|x|\\sqrt{x^2 - 1}$ for the secant/cosecant pair. These three expressions reappear in integration, where recognizing them triggers the corresponding inverse trigonometric antiderivative. The table below collects the three algebraic forms alongside their cofunction pairs and the identity that explains why each pair shares the same magnitude.
 `,
     before: ``,
     after: ``,
@@ -567,6 +579,10 @@ $$\\frac{d}{dx}[\\operatorname{csch} x] = -\\operatorname{csch} x \\coth x$$
 /calculus/formulas]@
 
 The critical difference from trigonometric derivatives: $(\\cosh x)' = \\sinh x$ carries no negative sign, whereas $(\\cos x)' = -\\sin x$ does. This single sign difference propagates through all six formulas.
+
+@academic[pitfall,aside:true,width:35%:Copying the sign of sec x
+Taking over $(\\sec x)' = \\sec x \\tan x$ gives $(\\operatorname{sech} x)' = \\operatorname{sech} x \\tanh x$, positive for $x > 0$. But $\\operatorname{sech} x = \\frac{1}{\\cosh x}$ falls there as $\\cosh x$ grows; the derivative is $-\\operatorname{sech} x \\tanh x$.
+[Read more](!#pitfalls)]@
 
 Each derivative is verified directly by differentiating the exponential definitions. For $\\sinh x$: $\\frac{d}{dx}\\left[\\frac{e^x - e^{-x}}{2}\\right] = \\frac{e^x + e^{-x}}{2} = \\cosh x$. No special limits or implicit differentiation are needed—the [exponential derivative](!/calculus/derivatives/common) does all the work.
 `,
@@ -615,6 +631,10 @@ The challenge lies at the boundaries.
 
 Consider $f(x) = x^2$ for $x \\leq 1$ and $f(x) = 2x - 1$ for $x > 1$. Continuity at $x = 1$: $f(1) = 1$ from the left, $2(1) - 1 = 1$ from the right—they match. Left derivative at $1$: $\\frac{d}{dx}[x^2]\\big|_{x=1} = 2$. Right derivative at $1$: $\\frac{d}{dx}[2x - 1]\\big|_{x=1} = 2$. Both derivatives match, so $f'(1) = 2$.
 
+@academic[pitfall,aside:true,width:35%:Comparing slopes without checking continuity
+For $f(x) = x^2$ when $x \\leq 1$ and $f(x) = 2x$ when $x > 1$, both pieces have slope $2$ at $x = 1$, which suggests $f'(1) = 2$. But the pieces give the values $1$ and $2$ there: the graph jumps, and $f'(1)$ does not exist.
+[Read more](!#pitfalls)]@
+
 If either continuity fails or the one-sided derivatives disagree, the function is not [differentiable](!/calculus/derivatives/differentiability) at that boundary. The absolute value function $|x|$ is the canonical example: continuous at $x = 0$, but left derivative $-1$ and right derivative $+1$ do not match. The table below names each of the three boundary conditions, what it requires, and the failure mode that appears when it is violated.
 `,
     before: ``,
@@ -655,6 +675,63 @@ $$\\frac{d}{dx}[\\text{arctanh}\\, x] = \\frac{1}{1-x^2}$$
 /calculus/formulas]@
 
 Together with the [common derivatives](!/calculus/derivatives/common), these formulas cover every standard function encountered in calculus. Recognizing the algebraic forms—$\\sqrt{1-x^2}$, $1+x^2$, $\\sqrt{x^2 \\pm 1}$, $1-x^2$—is equally important for integration, where these expressions signal inverse trigonometric or inverse hyperbolic antiderivatives. The table below assembles all 15 formulas as a single reference card, organized by category and including the domain on which each derivative is valid.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `
+Four mistakes cause many of the wrong answers when these formulas are used. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Forgetting the chain rule**
+
+The formulas on this page are stated for the bare variable $x$. When the argument is an expression such as $2x$, that expression is put into the formula, but the derivative of the inside is left out.
+
+Wrong working: $\\frac{d}{dx}[\\arcsin(2x)] = \\frac{1}{\\sqrt{1 - (2x)^2}} = \\frac{1}{\\sqrt{1 - 4x^2}}$.
+
+Right working: with $u = 2x$ and $u' = 2$, $\\frac{d}{dx}[\\arcsin u] = \\frac{u'}{\\sqrt{1 - u^2}} = \\frac{2}{\\sqrt{1 - 4x^2}}$.
+
+Why it happens: the inner expression is copied into the formula correctly, so the result looks complete. The missing factor is invisible when the inside is a plain $x$, which is the only case the formulas show.
+
+How to check: compare with the slope measured from the graph. At $x = 0.25$ the slope of $\\arcsin(2x)$ is about $2.309$, which matches $\\frac{2}{\\sqrt{0.75}} \\approx 2.309$; the wrong formula gives $\\frac{1}{\\sqrt{0.75}} \\approx 1.155$, half as much.
+
+**Dropping the absolute value**
+
+The arcsecant derivative is written as $\\frac{1}{x\\sqrt{x^2 - 1}}$, without the absolute value. For $x > 1$ this agrees with the formula, but for $x < -1$ it has the wrong sign.
+
+Wrong working: at $x = -2$, $\\frac{1}{x\\sqrt{x^2 - 1}} = \\frac{1}{-2\\sqrt{3}} \\approx -0.289$.
+
+Right working: at $x = -2$, $\\frac{1}{|x|\\sqrt{x^2 - 1}} = \\frac{1}{2\\sqrt{3}} \\approx 0.289$.
+
+Why it happens: the derivation gives $\\frac{1}{\\sec y \\tan y}$, and replacing $\\sec y$ by $x$ and $\\tan y$ by $\\sqrt{x^2 - 1}$ looks natural. On the branch where $x < -1$, both $\\sec y$ and $\\tan y$ are negative, so their product is positive, and the absolute value records exactly that.
+
+How to check: compare nearby values of the function. $\\operatorname{arcsec}(-2.1) \\approx 2.067$ and $\\operatorname{arcsec}(-1.9) \\approx 2.125$, so the function rises near $x = -2$, at a rate of about $\\frac{2.125 - 2.067}{0.2} \\approx 0.29$. The slope must be positive.
+
+**Copying the sign of sec x**
+
+The hyperbolic derivatives are written by analogy with the trigonometric ones, sign included. Since $(\\sec x)' = \\sec x \\tan x$ has no minus sign, none is expected for $\\operatorname{sech} x$ either.
+
+Wrong working: $\\frac{d}{dx}[\\operatorname{sech} x] = \\operatorname{sech} x \\tanh x$.
+
+Right working: $\\operatorname{sech} x = (\\cosh x)^{-1}$, so $\\frac{d}{dx}[\\operatorname{sech} x] = -(\\cosh x)^{-2}\\sinh x = -\\frac{1}{\\cosh x} \\cdot \\frac{\\sinh x}{\\cosh x} = -\\operatorname{sech} x \\tanh x$.
+
+Why it happens: differentiating a reciprocal always produces a minus sign. For $\\sec x$ it is cancelled by the minus sign in $(\\cos x)' = -\\sin x$, which leaves $\\sec x \\tan x$ positive. For $\\operatorname{sech} x$ there is nothing to cancel it, because $(\\cosh x)' = \\sinh x$ has no minus sign.
+
+How to check: $\\operatorname{sech} 0 = 1$ and $\\operatorname{sech} 1 \\approx 0.648$, so the function falls for $x > 0$, where $\\tanh x > 0$. A derivative of $\\operatorname{sech} x \\tanh x$ would be positive there; the right formula gives about $-0.494$ at $x = 1$.
+
+**Comparing slopes without checking continuity**
+
+At a boundary, the two pieces are differentiated and their slopes at the boundary are compared, but nobody checks that the pieces meet. Matching slopes are then taken as the derivative.
+
+Wrong working: for $f(x) = x^2$ when $x \\leq 1$ and $f(x) = 2x$ when $x > 1$, the slopes are $\\frac{d}{dx}[x^2]\\big|_{x=1} = 2$ and $\\frac{d}{dx}[2x] = 2$, so $f'(1) = 2$.
+
+Right working: check the values first. From the left $f(1) = 1$; from the right $2x \\to 2$ as $x \\to 1^+$. The pieces do not meet, $f$ is not continuous at $1$, and $f'(1)$ does not exist.
+
+Why it happens: differentiating removes a constant term, so two pieces that differ by a constant have the same derivative. Here $2x$ and the section's $2x - 1$ both have slope $2$; only their values at $x = 1$ tell them apart.
+
+How to check: compute the difference quotient from the right. $\\frac{f(1 + h) - f(1)}{h} = \\frac{2(1 + h) - 1}{h} = \\frac{1 + 2h}{h}$, which is $102$ at $h = 0.01$ and grows without bound as $h \\to 0^+$.
 `,
     before: ``,
     after: ``,
@@ -826,8 +903,44 @@ const schemas = {
     }),
   };
 
+  const specialDerivativesOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Fifteen derivatives in three families',
+    preface: 'The special derivatives come from three families: the inverse trigonometric, the hyperbolic and the inverse hyperbolic functions. Each entry shows the derivative and where it holds.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Watch the domain',
+    conclusion: 'Inverse functions bring square roots and restricted domains; the hyperbolic derivatives mirror the trigonometric ones with sign changes.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Special derivatives', children: [
+        { id: 'it', name: 'Inverse trigonometric', children: [
+          { id: 'it1', name: 'arcsin x', def: '|x| < 1', example: '1 / √(1 − x²)' },
+          { id: 'it2', name: 'arccos x', def: '|x| < 1', example: '−1 / √(1 − x²)' },
+          { id: 'it3', name: 'arctan x', def: 'all real x', example: '1 / (1 + x²)' },
+          { id: 'it4', name: 'arccot x', def: 'all real x', example: '−1 / (1 + x²)' },
+          { id: 'it5', name: 'arcsec x', def: '|x| > 1', example: '1 / (|x| √(x² − 1))' },
+          { id: 'it6', name: 'arccsc x', def: '|x| > 1', example: '−1 / (|x| √(x² − 1))' },
+        ] },
+        { id: 'h', name: 'Hyperbolic', children: [
+          { id: 'h1', name: 'sinh x', def: 'all real x', example: 'cosh x' },
+          { id: 'h2', name: 'cosh x', def: 'all real x', example: 'sinh x' },
+          { id: 'h3', name: 'tanh x', def: 'all real x', example: 'sech² x' },
+          { id: 'h4', name: 'coth x', def: 'x ≠ 0', example: '−csch² x' },
+          { id: 'h5', name: 'sech x', def: 'all real x', example: '−sech x · tanh x' },
+          { id: 'h6', name: 'csch x', def: 'x ≠ 0', example: '−csch x · coth x' },
+        ] },
+        { id: 'ih', name: 'Inverse hyperbolic', children: [
+          { id: 'ih1', name: 'arcsinh x', def: 'all real x', example: '1 / √(x² + 1)' },
+          { id: 'ih2', name: 'arccosh x', def: 'x > 1', example: '1 / √(x² − 1)' },
+          { id: 'ih3', name: 'arctanh x', def: '|x| < 1', example: '1 / (1 − x²)' },
+        ] },
+      ] },
+    ],
+  };
+
   return {
   props:{
+    specialDerivativesOutline,
     sectionsContent,
     introContent,
     obj4Table,
@@ -847,7 +960,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({
+export default function PageTemplate({specialDerivativesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -933,6 +1046,22 @@ export default function PageTemplate({
         content:[
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj8Table}}/>,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="special-derivatives-outline"
+            title="Special derivatives by family"
+            source="/calculus/derivatives/special"
+          >
+            <TaxonomyOutline data={specialDerivativesOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

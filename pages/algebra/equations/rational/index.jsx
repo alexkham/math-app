@@ -235,6 +235,12 @@ $$x^2 - 2x - 14 = 0$$]@
 
 The [quadratic formula](!/algebra/equations/quadratic) gives $x = 1 \\pm \\sqrt{15}$. Neither value equals $1$ or $-4$, so both lie within the domain and both are genuine solutions.
 
+@academic[pitfall,aside:true,width:35%:Multiplying only the fractions
+Multiplying only the fractions by $(x - 1)(x + 4)$ and leaving the $1$ as it is gives $5x + 10 = 1$, so $x = -\\frac{9}{5}$, which does not satisfy the equation. With the $1$ multiplied too, the solutions are $x = 1 \\pm \\sqrt{15}$.
+[Read more](!#pitfalls)]@
+
+In this example the right side is the plain number $1$, a term with no visible denominator. When the whole equation is multiplied by the LCD, that term is multiplied as well, and the product $1 \\cdot (x - 1)(x + 4)$ is what supplies the $x^2$ on the right of the cleared equation.
+
 The LCD must include every distinct factor that appears in any denominator, each raised to the highest power at which it occurs. Identifying the LCD accurately is essential — using a smaller common multiple leaves some fractions uncleared, while using an unnecessarily large one introduces extra factors that complicate the resulting polynomial without benefit.
 
 To solve your own rational equation with each step shown, use the [rational equation solver](!/algebra/calculators/equations/rational).`,
@@ -270,7 +276,13 @@ Checking: $\\frac{-3}{-3 - 3} = \\frac{-3}{-6} = \\frac{1}{2}$ and $\\frac{9}{-3
 
 Now consider $\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$. Multiply by $(x - 3)$: $x - 3 = x - 3$, which simplifies to $0 = 0$. This is an identity — yet $x = 3$ is not a valid solution because it was excluded from the domain. Every real number except $3$ satisfies the original equation. Without the domain check, $x = 3$ would appear to be among the solutions.
 
-The rule is absolute: every candidate obtained after clearing denominators must be substituted back into the original equation to confirm it does not violate any domain restriction.`,
+@academic[pitfall,aside:true,width:35%:Skipping the domain check
+Taking $0 = 0$ from $\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$ to mean every real number keeps $x = 3$, where both fractions are undefined. The solution set is every real number except $3$.
+[Read more](!#pitfalls)]@
+
+The rule is absolute: every candidate obtained after clearing denominators must be substituted back into the original equation to confirm it does not violate any domain restriction.
+
+For a single candidate the check is quick. It is first compared with the excluded values listed at the start; if it is not one of them, it is substituted into both sides of the original equation, as was done for $x = -3$ above, to confirm that the two sides agree.`,
     before: ``,
     after: ``,
     link: '',
@@ -303,7 +315,9 @@ $$3x^2 - 4x - 4 = 0$$]@
 
 The quadratic formula yields $x = \\frac{4 \\pm \\sqrt{16 + 48}}{6} = \\frac{4 \\pm 8}{6}$, giving $x = 2$ or $x = -\\frac{2}{3}$. Neither is zero, so both are valid solutions.
 
-Monomial-denominator equations serve as the natural entry point for the technique of clearing denominators because the LCD is always a single power of the variable, making the multiplication step transparent.`,
+Monomial-denominator equations serve as the natural entry point for the technique of clearing denominators because the LCD is always a single power of the variable, making the multiplication step transparent.
+
+@academic[punchline:With single-term denominators the LCD is one monomial, and $x = 0$ is the only value to rule out.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -365,7 +379,9 @@ For example, $\\frac{x + 1}{x - 2} = \\frac{3}{4}$ becomes $4(x + 1) = 3(x - 2)$
 
 Cross-multiplication is fast but limited to equations already in the form of two equal fractions. When more than two fractions appear, or when fractions are added or subtracted, the general LCD method is required. Even in the proportional case, domain restrictions must be stated and checked: if the variable appears in $B$ or $D$, any value that zeros out either denominator is excluded.
 
-A common structural clue that an equation is a proportion in disguise: if every term can be combined so that exactly one fraction appears on each side, cross-multiplication applies.`,
+A common structural clue that an equation is a proportion in disguise: if every term can be combined so that exactly one fraction appears on each side, cross-multiplication applies.
+
+@academic[punchline:Cross-multiplication is clearing denominators for two fractions, so the excluded values must still be checked.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -377,7 +393,18 @@ A common structural clue that an equation is a proportion in disguise: if every 
 
 Negative exponents are the most direct case. The equation $x^{-1} + x^{-2} = 6$ is equivalent to $\\frac{1}{x} + \\frac{1}{x^2} = 6$, which is a standard rational equation with monomial denominators. Rewriting negative exponents as fractions is not a choice of style — it is a recognition of what the equation actually is.
 
+@academic[pitfall,aside:true,width:35%:Reading a negative exponent as a negative number
+Reading $x^{-1} + x^{-2} = 6$ as $-x - x^2 = 6$ gives $x^2 + x + 6 = 0$, which has no real roots. As fractions, $\\frac{1}{x} + \\frac{1}{x^2} = 6$ has the solutions $x = \\frac{1}{2}$ and $x = -\\frac{1}{3}$.
+[Read more](!#pitfalls)]@
+
+Rewritten this way, the equation has one excluded value, $x = 0$, and its LCD is $x^2$. From here it is solved exactly like the monomial-denominator equations above: clear the fractions, solve the resulting quadratic, and check each candidate against $x \\neq 0$.
+
 Certain symmetric expressions become rational under substitution. The equation $x + \\frac{1}{x} = \\frac{5}{2}$ can be treated directly as a rational equation by clearing $x$ from the denominator: $x^2 + 1 = \\frac{5x}{2}$, then $2x^2 - 5x + 2 = 0$. Alternatively, the substitution $u = x + \\frac{1}{x}$ captures a structure that appears in many competition and textbook problems.
+
+@academic[fact,aside:true,width:35%:Never strictly between $-2$ and $2$
+For real $x \\neq 0$, the sum $x + \\frac{1}{x}$ is at least $2$ or at most $-2$, because $x^2 - kx + 1 = 0$ has discriminant $k^2 - 4$. So an equation like $x + \\frac{1}{x} = 1$ has no real solution at all.]@
+
+Here the quadratic $2x^2 - 5x + 2 = 0$ factors as $(2x - 1)(x - 2) = 0$, so $x = 2$ or $x = \\frac{1}{2}$. Neither is $0$, so both are solutions, and each one is the reciprocal of the other: $2 + \\frac{1}{2} = \\frac{5}{2}$. For a general right side $k$, clearing the denominator in $x + \\frac{1}{x} = k$ gives $x^2 - kx + 1 = 0$, and whether that quadratic has real roots depends on the size of $k$.
 
 Equations involving rates, reciprocals of linear expressions, or differences of fractions often reduce to rational equations after algebraic manipulation. In every case, the same discipline applies: identify domain restrictions from any variable denominator, clear denominators systematically, solve the resulting polynomial, and verify all candidates against the original equation.`,
     before: ``,
@@ -388,6 +415,62 @@ Equations involving rates, reciprocals of linear expressions, or differences of 
   obj9: {
     title: `Summary of Rational Equation Subtypes`,
     content: `The four configurations covered above all use the same underlying technique — identify domain, find LCD, clear denominators, solve, verify — but differ in how the LCD is identified and what specific risks they introduce. The table below compares them at a glance.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for most wrong answers to rational equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Multiplying only the fractions**
+
+The equation contains a term with no denominator, and only the fractions are multiplied by the LCD. The term without a denominator is copied into the cleared equation unchanged.
+
+Wrong working:
+$$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1 \\implies 3(x + 4) + 2(x - 1) = 1$$
+$$5x + 10 = 1 \\implies x = -\\frac{9}{5}$$
+
+Right working: the $1$ is multiplied by the LCD as well.
+$$3(x + 4) + 2(x - 1) = (x - 1)(x + 4)$$
+$$x^2 - 2x - 14 = 0 \\implies x = 1 \\pm \\sqrt{15}$$
+Neither value is $1$ or $-4$, so both are solutions.
+
+Why it happens: the LCD is found by looking at the denominators, so attention stays on the fractions, and a whole number looks as if it needs nothing.
+
+How to check: substitute the result into the original equation. $x = -\\frac{9}{5}$ gives $\\frac{3}{-14/5} + \\frac{2}{11/5} = -\\frac{15}{14} + \\frac{10}{11} = -\\frac{25}{154}$, not $1$.
+
+**Skipping the domain check**
+
+The cleared equation is solved, and its solutions are reported as the answer without being compared with the excluded values.
+
+Wrong working:
+$$\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1 \\implies x - 3 = x - 3 \\implies 0 = 0$$
+so every real number is reported as a solution.
+
+Right working: the domain excludes $x = 3$, so the solution set is every real number except $3$. In the same way, $\\frac{2}{x^2 - 1} = \\frac{1}{x - 1}$ clears to $2 = x + 1$, so $x = 1$; but $x = 1$ is excluded, and that equation has no solution.
+
+Why it happens: multiplying by the LCD removes the denominators, and with them the only visible sign of the restrictions. The cleared equation looks like an ordinary polynomial equation, which has no excluded values.
+
+How to check: substitute each candidate into the original equation, not the cleared one. At $x = 3$ the term $\\frac{3}{3 - 3}$ is a division by zero, and at $x = 1$ so is $\\frac{1}{1 - 1}$.
+
+**Reading a negative exponent as a negative number**
+
+In an equation written with negative exponents, $x^{-1}$ and $x^{-2}$ are read as $-x$ and $-x^2$, so the equation is never rewritten as a rational one.
+
+Wrong working:
+$$x^{-1} + x^{-2} = 6 \\implies -x - x^2 = 6 \\implies x^2 + x + 6 = 0$$
+The discriminant is $1 - 24 = -23 < 0$, so no real solution is reported.
+
+Right working: $x^{-1} = \\frac{1}{x}$ and $x^{-2} = \\frac{1}{x^2}$, with $x \\neq 0$. Multiplying by the LCD $x^2$:
+$$\\frac{1}{x} + \\frac{1}{x^2} = 6 \\implies x + 1 = 6x^2 \\implies 6x^2 - x - 1 = 0$$
+$$(3x + 1)(2x - 1) = 0$$
+so $x = \\frac{1}{2}$ or $x = -\\frac{1}{3}$. Neither is zero, so both are solutions.
+
+Why it happens: the minus sign in the exponent looks like the minus sign of a negative number, but it stands for a reciprocal, not a change of sign.
+
+How to check: substitute the results. $x = \\frac{1}{2}$ gives $2 + 4 = 6$, and $x = -\\frac{1}{3}$ gives $-3 + 9 = 6$.`,
     before: ``,
     after: ``,
     link: '',
@@ -635,6 +718,7 @@ export default function RationalEquationsPage({rationalSubtypeTree,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          `@academic[punchline:Multiplying every term by the LCD turns a rational equation into a polynomial one in a single step.]@`,
         ]
     },
     {
@@ -684,6 +768,7 @@ export default function RationalEquationsPage({rationalSubtypeTree,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+          `@academic[punchline:Negative exponents and reciprocals hide rational equations; once rewritten, they are solved and checked like any other.]@`,
         ]
     },
     {
@@ -705,6 +790,14 @@ export default function RationalEquationsPage({rationalSubtypeTree,
           >
             <TopDownTree data={rationalSubtypeTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

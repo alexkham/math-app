@@ -1093,6 +1093,12 @@ The norm satisfies two additional structural properties. Under [scalar multiplic
 
 In $\\mathbb{R}^2$, direction can be described by the angle $\\alpha$ that the vector makes with the positive $x$-axis. A vector $(v_1, v_2)$ points in the direction $\\alpha = \\arctan\\left(\\frac{v_2}{v_1}\\right)$, with appropriate adjustment for quadrant. In $\\mathbb{R}^3$, a single angle is insufficient — direction is instead specified by two angles or, more commonly, by the unit vector $\\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}$ that points the same way with magnitude stripped away.
 
+@academic[pitfall,aside:true,width:35%:Skipping the quadrant adjustment
+Reading the angle of $(-1, -1)$ as $\\arctan\\left(\\frac{-1}{-1}\\right) = \\arctan(1) = 45^\\circ$ points it into the first quadrant. Both components are negative, so the vector lies in the third quadrant: $\\alpha = 45^\\circ + 180^\\circ = 225^\\circ$.
+[Read more](!#pitfalls)]@
+
+Finding the angle of a specific vector takes two readings of its components. The ratio $\\frac{v_2}{v_1}$ fixes the slope of the line the vector lies along, and the signs of $v_1$ and $v_2$ fix which way along that line it points. Both readings go into the final angle, measured from the positive $x$-axis.
+
 The unit vector representation generalizes to any $\\mathbb{R}^n$. Dividing a nonzero vector by its [magnitude](!/linear-algebra/vectors/magnitude) isolates its direction as a vector on the unit sphere. Two vectors that differ only in magnitude share the same unit vector and therefore point the same way.
 
 The zero vector has no direction. Its components are all zero, its magnitude is zero, and there is no meaningful orientation to extract. The expression $\\frac{\\mathbf{0}}{\\|\\mathbf{0}\\|}$ involves division by zero and is undefined. This is not a technicality — the zero vector genuinely has no directional content.`,
@@ -1175,6 +1181,10 @@ $$\\mathbf{a} = \\mathbf{b} \\iff a_i = b_i \\text{ for every } i = 1, 2, \\ldot
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Comparing only the lengths
+Calling $(3, 4)$ and $(4, 3)$ equal because both have length $5$ skips the components. They differ in the first slot, $3 \\neq 4$, so $(3, 4) \\neq (4, 3)$: the two arrows point in different directions.
+[Read more](!#pitfalls)]@
+
 There is no partial equality for vectors. If even a single component differs, the vectors are not equal. This all-or-nothing criterion is the algebraic version of the geometric requirement: equal vectors must have the same magnitude and the same direction.
 
 For free vectors — vectors defined by magnitude and direction alone, without a fixed position — equality is independent of location. An arrow drawn at one corner of a diagram represents the same vector as an identical arrow drawn elsewhere, as long as the length and orientation agree. Moving a vector without rotating or rescaling it does not change the vector. This is the principle that allows vectors to be repositioned freely in tip-to-tail constructions and parallelogram diagrams without altering the result of an [addition](!/linear-algebra/vectors/basic-operations).`,
@@ -1216,6 +1226,10 @@ $$\\mathbf{a} \\perp \\mathbf{b} \\quad \\Longleftrightarrow \\quad \\mathbf{a} 
 
 In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicularity — the two vectors meet at a right angle. The algebraic condition $a_1b_1 + a_2b_2 + \\cdots + a_nb_n = 0$ translates the geometric concept of a $90°$ angle into a computation that works in any dimension, including those beyond visualization.
 
+@academic[pitfall,aside:true,width:35%:Reading not orthogonal as parallel
+Concluding that $(1, 2)$ and $(3, 1)$ are parallel because $1 \\cdot 3 + 2 \\cdot 1 = 5 \\neq 0$ skips a case. Their ratios differ, $\\frac{1}{3} \\neq \\frac{2}{1}$, so the pair is neither parallel nor orthogonal: the vectors meet at $45^\\circ$.
+[Read more](!#pitfalls)]@
+
 Orthogonality is in a sense the opposite extreme of parallelism. Parallel vectors are maximally aligned — one lies entirely along the direction of the other. Orthogonal vectors have zero alignment — projecting one onto the other yields the zero vector. Between these extremes lies every other angular relationship, measured quantitatively by the dot product.
 
 The zero vector is orthogonal to every vector, since $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for all $\\mathbf{v}$. This is consistent with the convention that the zero vector is also parallel to every vector. The zero vector is the only vector that is simultaneously parallel and orthogonal to everything — a consequence of its having no magnitude and no direction.
@@ -1231,7 +1245,13 @@ Orthogonality grows in importance well beyond this section. Orthogonal bases sim
 
 Under addition, vectors are commutative ($\\mathbf{a} + \\mathbf{b} = \\mathbf{b} + \\mathbf{a}$), associative ($( \\mathbf{a} + \\mathbf{b}) + \\mathbf{c} = \\mathbf{a} + (\\mathbf{b} + \\mathbf{c})$), have an identity element ($\\mathbf{a} + \\mathbf{0} = \\mathbf{a}$), and every vector has an additive inverse ($\\mathbf{a} + (-\\mathbf{a}) = \\mathbf{0}$). Under scalar multiplication, associativity holds ($c(d\\mathbf{a}) = (cd)\\mathbf{a}$), the scalar $1$ acts as an identity ($1\\mathbf{a} = \\mathbf{a}$), and two distributive laws connect the two operations: $c(\\mathbf{a} + \\mathbf{b}) = c\\mathbf{a} + c\\mathbf{b}$ and $(c + d)\\mathbf{a} = c\\mathbf{a} + d\\mathbf{a}$.
 
-These ten properties are not specific to vectors in $\\mathbb{R}^n$ — they are the axioms that define a [vector space](!/linear-algebra/vector-spaces/axioms). Any mathematical structure satisfying the same rules qualifies as a vector space, whether its elements are arrows in the plane, polynomials, matrices, or functions. The vectors in $\\mathbb{R}^n$ are the most tangible example, but the algebraic framework they satisfy is far more general.`,
+@academic[pitfall,aside:true,width:35%:Scaling only the first vector
+Writing $2\\big((1, 0) + (0, 3)\\big)$ as $(2, 0) + (0, 3) = (2, 3)$ leaves the second vector unscaled. The scalar multiplies every term: $(2, 0) + (0, 6) = (2, 6)$.
+[Read more](!#pitfalls)]@
+
+In a computation, the distributive laws let a scalar be applied before or after an addition. The vector $3(\\mathbf{a} + \\mathbf{b})$ can be found by adding first and scaling the sum, or by scaling $\\mathbf{a}$ and $\\mathbf{b}$ separately and adding the results. The two routes always end at the same vector, so either one serves as a check on the other.
+
+These eight properties are not specific to vectors in $\\mathbb{R}^n$ — together with closure, they are the axioms that define a [vector space](!/linear-algebra/vector-spaces/axioms). Any mathematical structure satisfying the same rules qualifies as a vector space, whether its elements are arrows in the plane, polynomials, matrices, or functions. The vectors in $\\mathbb{R}^n$ are the most tangible example, but the algebraic framework they satisfy is far more general.`,
     before: ``,
     after: ``,
     link: '',
@@ -1239,6 +1259,68 @@ These ten properties are not specific to vectors in $\\mathbb{R}^n$ — they are
   obj8: {
     title: `Summary: Properties at a Glance`,
     content: `This page has introduced six properties of vectors &mdash; three intrinsic to a single vector (magnitude, direction, dimension) and three relational between two vectors (equality, parallelism, orthogonality). The table below collects all six in a single reference, grouped by type, with each property's defining condition and one key fact to remember. The algebraic axioms in the previous section are properties of the operations rather than of vectors themselves, and are developed in full on the [vector space axioms](!/linear-algebra/vector-spaces/axioms) page.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for most wrong answers about vector properties. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Skipping the quadrant adjustment**
+
+The direction angle of a vector in $\\mathbb{R}^2$ is read straight from $\\arctan\\left(\\frac{v_2}{v_1}\\right)$, and the signs of the components are never looked at. The arctangent only returns angles between $-90^\\circ$ and $90^\\circ$, so every vector with a negative first component gets an angle on the wrong side.
+
+Wrong working:
+$$\\mathbf{v} = (-1, -1), \\qquad \\alpha = \\arctan\\left(\\frac{-1}{-1}\\right) = \\arctan(1) = 45^\\circ$$
+
+Right working: both components are negative, so the vector lies in the third quadrant, and $180^\\circ$ is added to the arctangent.
+$$\\alpha = 45^\\circ + 180^\\circ = 225^\\circ$$
+
+Why it happens: the ratio $\\frac{-1}{-1}$ equals $1$, the same as $\\frac{1}{1}$, so the signs cancel before the arctangent ever sees them.
+
+How to check: the cosine and sine of the angle must have the signs of $v_1$ and $v_2$. For $45^\\circ$ both are positive, which does not match $(-1, -1)$. For $225^\\circ$ both equal $-\\frac{\\sqrt{2}}{2}$, which does.
+
+**Comparing only the lengths**
+
+Two vectors are declared equal because their magnitudes match, or because they contain the same numbers in a different order.
+
+Wrong working:
+$$\\|(3, 4)\\| = \\sqrt{9 + 16} = 5, \\quad \\|(4, 3)\\| = \\sqrt{16 + 9} = 5, \\quad \\text{so } (3, 4) = (4, 3)$$
+
+Right working: compare the vectors component by component. The first components are $3$ and $4$, and $3 \\neq 4$, so $(3, 4) \\neq (4, 3)$. One differing component is enough.
+
+Why it happens: the magnitude is the single number most often computed for a vector, and it is tempting to let it stand for the whole vector. But a length is shared by many vectors: every vector whose tip lies on the circle of radius $5$ has length $5$.
+
+How to check: subtract the two vectors. Equal vectors have difference $\\mathbf{0}$, and here $(3, 4) - (4, 3) = (-1, 1) \\neq \\mathbf{0}$.
+
+**Reading not orthogonal as parallel**
+
+A nonzero dot product is taken to mean that the two vectors are parallel, as if every pair had to be one or the other.
+
+Wrong working:
+$$(1, 2) \\cdot (3, 1) = 3 + 2 = 5 \\neq 0, \\quad \\text{so } (1, 2) \\parallel (3, 1)$$
+
+Right working: parallelism has its own test. $(1, 2) = c(3, 1)$ would need $c = \\frac{1}{3}$ from the first component and $c = 2$ from the second, so no such scalar exists. The pair is neither parallel nor orthogonal; the angle between them satisfies
+$$\\cos\\theta = \\frac{5}{\\sqrt{5}\\,\\sqrt{10}} = \\frac{1}{\\sqrt{2}}, \\qquad \\theta = 45^\\circ$$
+
+Why it happens: parallelism and orthogonality are introduced together as opposite extremes, and the wide range of angles between them is easy to forget.
+
+How to check: run both tests separately. Parallel vectors are scalar multiples of each other; orthogonal vectors have dot product $0$. A pair that fails both is neither.
+
+**Scaling only the first vector**
+
+A scalar multiplies a sum of vectors, but it is applied to the first vector only, and the rest are copied unchanged.
+
+Wrong working:
+$$2\\big((1, 0) + (0, 3)\\big) = (2, 0) + (0, 3) = (2, 3)$$
+
+Right working: by the distributive law $c(\\mathbf{a} + \\mathbf{b}) = c\\mathbf{a} + c\\mathbf{b}$, the scalar reaches every term.
+$$2\\big((1, 0) + (0, 3)\\big) = (2, 0) + (0, 6) = (2, 6)$$
+
+Why it happens: the scalar is written right next to the first vector, and the bracket that carries it to the others is easy to lose.
+
+How to check: take the other route and add first. $(1, 0) + (0, 3) = (1, 3)$, and $2(1, 3) = (2, 6)$, which differs from $(2, 3)$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1526,6 +1608,14 @@ export default function VectorPropertiesPage({parallelCases, seoData, sectionsCo
           >
             <PropertyLawCard data={vectorProperties} theme="navy" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -807,6 +807,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vectorLinCombDiagrams from '@/app/components/linear-algebra copy/matrix/vectorLinCombDiagrams'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1090,6 +1092,36 @@ const combinationForms = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1) — template I, naming. Running instance:
+// 2u + 3v with u = (1, 2), v = (3, 1), which is (11, 7). Old obj1 text is kept
+// in sectionsContent.obj1, unused; its formula box, formulas link, rule box,
+// three passages and the definition demo frame with its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciMixTable = ciTableOpen(['', 'oats (cups)', 'nuts (cups)']) +
+  ciRow(['one bag of mix A', '1', '2']) +
+  ciRow(['one bag of mix B', '3', '1'], { shade: true }) +
+  ciRow(['2 bags of A', '2', '4']) +
+  ciRow(['3 bags of B', '9', '3'], { shade: true }) +
+  ciRow(['total', '11', '7'], { last: true, color: '#2563EB' }) +
+  '</tbody></table>'
+const ciEntryTable = ciTableOpen(['entry', '2 × u', '3 × v', 'sum']) +
+  ciRow(['first', '2 × 1 = 2', '3 × 3 = 9', '11']) +
+  ciRow(['second', '2 × 2 = 4', '3 × 1 = 3', '7'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciUsesTable = ciTableOpen(['question', 'asked as a linear combination']) +
+  ciRow(['which vectors can these reach?', 'the span: all their linear combinations']) +
+  ciRow(['is any vector redundant?', 'independence: only the all-zero combination gives 0'], { shade: true }) +
+  ciRow(['does Ax = b have a solution?', 'is b a combination of the columns of A?']) +
+  ciRow(['what is a basis?', 'a set that writes every vector as one combination'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -1139,6 +1171,10 @@ $$\\text{Span}\\{\\mathbf{v}_1, \\mathbf{v}_2, \\ldots, \\mathbf{v}_k\\} = \\{c_
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Confusing the set with its span
+Saying that $(3, -2)$ is not in $\\text{Span}\\{(1, 0), (0, 1)\\}$ because it is neither of the two vectors reads the span as the set itself. Since $(3, -2) = 3(1, 0) - 2(0, 1)$, it is in the span.
+[Read more](!#pitfalls)]@
+
 The span is a subset of $\\mathbb{R}^n$ that contains all vectors reachable through linear combinations — and no others. It always contains the zero vector, since setting every coefficient to zero produces $\\mathbf{0}$.
 
 The geometric shape of the span reflects the structure of the input vectors. A single nonzero vector spans a line. Two non-parallel vectors span a plane. In general, the span of $k$ vectors that are "sufficiently independent" is a $k$-dimensional flat subspace passing through the origin. What "sufficiently independent" means precisely is the subject of linear independence, but the intuition is clear: each new vector expands the span by one dimension only if it points in a direction not already covered.
@@ -1172,6 +1208,10 @@ This produces the zero vector for any choice of $\\mathbf{v}_1, \\ldots, \\mathb
 
 A non-trivial combination is one in which at least one coefficient is nonzero. The distinction between trivial and non-trivial combinations is the key to defining linear independence. A set of vectors is linearly independent if the only combination that produces $\\mathbf{0}$ is the trivial one — there is no way to combine the vectors with nonzero coefficients and arrive back at the origin. If a non-trivial combination does produce $\\mathbf{0}$, then at least one vector in the set can be written as a linear combination of the others, revealing redundancy.
 
+@academic[pitfall,aside:true,width:35%:Testing one combination only
+Trying $c_1 = c_2 = 1$ on $(1, 2)$ and $(2, 4)$ gives $(3, 6) \\neq \\mathbf{0}$, which does not show independence. Other coefficients reach zero, $2(1, 2) - 1(2, 4) = \\mathbf{0}$, so the pair is dependent.
+[Read more](!#pitfalls)]@
+
 This characterization is developed formally in the [linear independence](!/linear-algebra/vector-spaces/linear-independence) section, but the computational meaning is accessible now: if the equation $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ has only the solution $c_1 = c_2 = \\cdots = c_k = 0$, the vectors are independent. If it has other solutions, they are dependent.`,
     before: ``,
     after: ``,
@@ -1192,6 +1232,10 @@ $$A\\mathbf{x} = \\mathbf{b}$$
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Writing the vectors as rows
+To reach $\\mathbf{b} = (3, 7)$ from $(1, 2)$ and $(0, 1)$, rows give $c_1 + 2c_2 = 3$ and $c_2 = 7$, so $c_1 = -11$, but $-11(1, 2) + 7(0, 1) = (-11, -15) \\neq \\mathbf{b}$. As columns, $c_1 = 3$ and $c_2 = 1$.
+[Read more](!#pitfalls)]@
 
 The linear combination question and the system-of-equations question are identical — they are two descriptions of the same problem. The combination exists if and only if the system has a solution. Solving the system finds the coefficients; the coefficients reconstruct the combination.
 
@@ -1214,6 +1258,58 @@ Both concepts — [linear independence](!/linear-algebra/vector-spaces/linear-in
   obj8: {
     title: `Summary: Linear Combinations as the Unifying Construction`,
     content: `Every operation introduced earlier in the section can be written as a linear combination with a particular pattern of coefficients. Scalar multiplication is a one-vector combination; ordinary addition is a two-vector combination with both coefficients equal to 1; the trivial combination uses all-zero coefficients. The table below recovers each familiar operation as a special case of the general formula c₁<b>v</b>₁ + ⋯ + cₖ<b>v</b>ₖ &mdash; showing that the construction on this page is not a new tool, but a unifying lens through which every operation earlier in the section can be viewed.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for most wrong answers about linear combinations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Confusing the set with its span**
+
+The span of a set is treated as if it were the set itself, a short list of the given vectors, rather than the collection of every combination of them. A vector that is not on the list is then wrongly left out.
+
+Wrong working: $(3, -2)$ is neither $(1, 0)$ nor $(0, 1)$, so $(3, -2) \\notin \\text{Span}\\{(1, 0), (0, 1)\\}$.
+
+Right working: look for coefficients.
+$$c_1(1, 0) + c_2(0, 1) = (c_1, c_2) = (3, -2)$$
+gives $c_1 = 3$ and $c_2 = -2$, so $(3, -2) = 3(1, 0) - 2(0, 1)$ is in the span. In fact every vector of $\\mathbb{R}^2$ is.
+
+Why it happens: the notation $\\text{Span}\\{\\ldots\\}$ puts braces around the same short list that names the set, and the infinite collection it stands for is never written out.
+
+How to check: the span of a set that contains a nonzero vector is never finite; it holds every multiple of that vector, and $\\mathbf{0}$ as well. An answer that treats the span as a few listed vectors has read the braces as the set.
+
+**Testing one combination only**
+
+To decide whether vectors are independent, one choice of nonzero coefficients is tried. When it does not give $\\mathbf{0}$, the vectors are declared independent.
+
+Wrong working: for $(1, 2)$ and $(2, 4)$,
+$$1(1, 2) + 1(2, 4) = (3, 6) \\neq \\mathbf{0}, \\quad \\text{so the vectors are independent}$$
+
+Right working: solve $c_1(1, 2) + c_2(2, 4) = \\mathbf{0}$ for all coefficients at once. The components give $c_1 + 2c_2 = 0$ and $2c_1 + 4c_2 = 0$; the second equation is twice the first, so every $c_1 = -2c_2$ works. With $c_2 = -1$ and $c_1 = 2$:
+$$2(1, 2) - 1(2, 4) = (0, 0)$$
+A non-trivial combination reaches $\\mathbf{0}$, so the pair is dependent.
+
+Why it happens: one failed attempt feels like evidence, but independence is a statement about every possible choice of coefficients, and a single trial cannot cover them all.
+
+How to check: for two vectors, look for a scalar multiple. Here $(2, 4) = 2(1, 2)$, so the vectors are parallel and therefore dependent. For more vectors, solve the system instead of sampling it.
+
+**Writing the vectors as rows**
+
+When the combination question is turned into $A\\mathbf{x} = \\mathbf{b}$, the given vectors are placed as the rows of $A$ instead of its columns. The resulting system may still have a solution, but its numbers are not the coefficients of the combination.
+
+Wrong working: to write $\\mathbf{b} = (3, 7)$ as a combination of $(1, 2)$ and $(0, 1)$, the rows $(1, 2)$ and $(0, 1)$ give the system
+$$c_1 + 2c_2 = 3, \\qquad c_2 = 7$$
+so $c_2 = 7$ and $c_1 = -11$.
+
+Right working: each equation collects one component from every vector. The first components give $c_1 \\cdot 1 + c_2 \\cdot 0 = 3$, and the second components give $c_1 \\cdot 2 + c_2 \\cdot 1 = 7$, so
+$$c_1 = 3, \\qquad c_2 = 7 - 6 = 1$$
+and $3(1, 2) + 1(0, 1) = (3, 7) = \\mathbf{b}$.
+
+Why it happens: vectors are usually written across the page, as $(1, 2)$, so they are copied into the matrix the way they are written, as rows.
+
+How to check: substitute the coefficients back into the combination; the result must be $\\mathbf{b}$. The wrong answer gives $-11(1, 2) + 7(0, 1) = (-11, -15)$, which is not $(3, 7)$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1325,6 +1421,22 @@ const schemas = {
   // Operation A demonstration units: a frozen tool state, an explanation panel
   // reading that state, and the contextual link, in one frame. Built here and
   // rendered as content-array items - never interpolated into sectionsContent.
+  // Concept introduction figures (section 1), one running instance: 2u + 3v.
+  const fpCiWalk = { kind: 'pieces', svgTitle: 'Two steps of u = (1, 2) then three steps of v = (3, 1) end at (11, 7)', xRange: [0, 12], yRange: [0, 8],
+    pieces: [
+      { fn: (x) => 2 * x, from: 0, to: 2, ends: [null, null], color: 'g', label: { text: '2 steps of u', x: 2.3, y: 2.4, pos: 'e' } },
+      { fn: (x) => 4 + (x - 2) / 3, from: 2, to: 11, ends: [null, null], color: 'f', label: { text: '3 steps of v', x: 6.5, y: 4.3, pos: 's' } },
+    ],
+    points: [{ x: 1, y: 2 }, { x: 2, y: 4 }, { x: 5, y: 5 }, { x: 8, y: 6 }, { x: 11, y: 7, label: '(11, 7)', pos: 'nw' }],
+    caption: 'Steps of u and v, laid end to end, land at (11, 7)' };
+
+  const conceptIntroFigures = {
+    walk: renderFunctionPlotV4(fpCiWalk),
+    mixTable: ciMixTable,
+    entryTable: ciEntryTable,
+    usesTable: ciUsesTable,
+  };
+
   const demoUnits = {
     columnPicture: demoUnitFrame({
       svg: vectorPictureDiagrams.columns.allPieces.replace(/url\(#vpd-c-/g, 'url(#vpd-c4-'),
@@ -1357,6 +1469,7 @@ const schemas = {
 
   return {
   props: {
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -1374,9 +1487,77 @@ const schemas = {
   }
 }
    }
-export default function LinearCombinationsPage({seoData, sectionsContent, introContent, obj5Table, combinationForms, faqQuestions, schemas, demoUnits}) {
+export default function LinearCombinationsPage({seoData, sectionsContent, introContent, obj5Table, combinationForms, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'already',
+        lead: `You already make combinations like this: so much of one thing plus so much of another.`,
+        content: [
+          `A trail mix comes in two bags. Mix A holds $1$ cup of oats and $2$ cups of nuts; mix B holds $3$ cups of oats and $1$ cup of nuts. Buy $2$ bags of A and $3$ bags of B and you can work out what you have without a formula: scale each bag's contents, then add.`,
+          ciTable('mixTable'),
+        ],
+      },
+      {
+        id: 'places',
+        kind: 'instance',
+        lead: `The same calculation turns up in moves on a grid and in columns of numbers.`,
+        content: [
+          `On a grid. One kind of step, $\\mathbf{u}$, goes $1$ right and $2$ up; another, $\\mathbf{v}$, goes $3$ right and $1$ up. Take two $\\mathbf{u}$-steps, then three $\\mathbf{v}$-steps, and you end up $11$ right and $7$ up.`,
+          `In columns of numbers. Write the bags, or the steps, as vectors $\\mathbf{u} = (1, 2)$ and $\\mathbf{v} = (3, 1)$ and compute $2\\mathbf{u} + 3\\mathbf{v}$ entry by entry.`,
+          ciTable('entryTable'),
+        ],
+        visual: ciSvg('walk'),
+        caption: `Two $\\mathbf{u}$-steps from the origin reach $(2, 4)$; three $\\mathbf{v}$-steps from there reach $(11, 7)$ — the same pair of numbers as the trail mix and the table.`,
+      },
+      {
+        id: 'shared',
+        lead: `What they share: scale each vector by its own number, then add the results.`,
+        content: `Bags, steps, columns: in each case there are a few fixed vectors, each one is multiplied by a number saying how much of it to take, and the scaled copies are added. The objects differ; the structure — $2\\mathbf{u} + 3\\mathbf{v} = (11, 7)$ — is the same every time.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Given vectors $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$ in $\\mathbb{R}^n$ and scalars $c_1, \\ldots, c_k$, a [linear combination](!/linear-algebra/definitions#linear_combination) of the vectors is the vector`,
+        formula: `@academic[formula_callout:Linear Combination
+$$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$
+/linear-algebra/formulas#linear_combination]@`,
+        footer: `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+      },
+      {
+        id: 'kind',
+        lead: `A linear combination is a vector, in the same space as the vectors combined.`,
+        content: [
+          `The expression is a linear combination of those vectors. The scalars $c_i$ are called the coefficients or weights of the combination. Each term $c_i\\mathbf{v}_i$ is a [scaled](!/linear-algebra/vectors/basic-operations) copy of $\\mathbf{v}_i$, and the full expression adds all the scaled copies together.`,
+          `The definition imposes no restrictions on the coefficients — they can be positive, negative, or zero. Setting all coefficients to $1$ reduces the linear combination to ordinary vector addition. Using a single vector with one coefficient gives scalar multiplication. Setting all coefficients to zero produces the zero vector. These familiar operations are not separate concepts; they are boundary cases of the same construction.`,
+          `@academic[rule_plain:A linear combination always produces a vector in the same $\\mathbb{R}^n$ as the inputs.]@`,
+          `Both scalar multiplication and addition preserve the dimension, so no matter how many vectors are combined or what coefficients are chosen, the result remains in the original space.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What the name buys: many different questions become one question.`,
+        content: [
+          `Once "linear combination" has a name, a whole family of questions turns out to be the same question in different words.`,
+          ciTable('usesTable'),
+          <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `Scaling and adding are the only two operations at work, which is why every rule that follows on this page is really a rule about those two.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page shows what linear combinations look like geometrically, how to tell whether a vector is one, how to find the coefficients, the link to matrix–vector multiplication, and the ideas built on them: span, independence and bases.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1384,9 +1565,7 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
-          `Scaling and adding are the only two operations at work, which is why every rule that follows on this page is really a rule about those two.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1463,6 +1642,14 @@ export default function LinearCombinationsPage({seoData, sectionsContent, introC
           </DiagramFrame>,
           `Reading it this way changes what the basic operations are. Addition is not an operation that linear combinations later generalise — it is the combination with both coefficients equal to one, and subtraction is the same with one of them negated. Nothing is added to the vocabulary between the first row and the last; only the freedom in the coefficients changes.`,
           `The trivial combination is the row that matters most later, and it is easy to pass over. Every set of vectors admits it, so exhibiting **a** combination equal to $\\mathbf{0}$ establishes nothing at all. [Independence](!/linear-algebra/vector-spaces/linear-independence) is the statement that it is the only one, and that single word — only — is what the rest of the subject is built on.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

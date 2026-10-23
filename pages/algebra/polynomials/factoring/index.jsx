@@ -14,6 +14,8 @@ import completeTheSquareDiagrams from '@/app/components/algebra/visualizers/equa
 import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -188,7 +190,7 @@ const keyWords = [
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Skipping the GCF</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factoring 3x<sup>3</sup> − 12x without first pulling 3x; misses or mangles the rest</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">extract GCF first &nbsp;→&nbsp; 3x(x + 2)(x − 3)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">extract GCF first &nbsp;→&nbsp; 3x(x + 2)(x − 2)</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Wrong signs in trinomial</td>
@@ -616,6 +618,10 @@ For $6x^3 + 9x^2 - 3x$, each term is divisible by $3x$. Factoring it out gives $
 
 In $4x^2y + 8xy^2$, the numerical GCF is $4$, the lowest power of $x$ is $x^1$, and the lowest power of $y$ is $y^1$, so the GCF is $4xy$. Factoring yields $4xy(x + 2y)$.
 
+@academic[pitfall,aside:true,width:35%:Losing the term that equals the GCF
+Writing $6x^3 + 9x^2 - 3x$ as $3x(2x^2 + 3x)$ drops the last term: that product is only $6x^3 + 9x^2$. The term $-3x$ leaves $-1$ behind, so the factorization is $3x(2x^2 + 3x - 1)$.
+[Read more](!#12)]@
+
 Extracting the GCF should become automatic — it simplifies the remaining expression and often makes subsequent factoring steps far more manageable. A polynomial like $2x^3 + 8x^2 + 8x$ looks like a difficult cubic until the GCF of $2x$ is removed, leaving $2x(x^2 + 4x + 4)$, which is a recognizable perfect square trinomial: $2x(x + 2)^2$.`,
     before: ``,
     after: ``,
@@ -651,6 +657,10 @@ $$x^2 + (a + b)x + ab = (x + a)(x + b)$$
 
 For $x^2 + 7x + 12$, the task is to find two numbers that multiply to $12$ and add to $7$. The pair $3$ and $4$ satisfies both conditions: $3 \\cdot 4 = 12$ and $3 + 4 = 7$. So $x^2 + 7x + 12 = (x + 3)(x + 4)$.
 
+@academic[pitfall,aside:true,width:35%:Choosing the wrong signs
+Writing $x^2 - 5x + 6$ as $(x + 2)(x - 3)$ gets the sizes $2$ and $3$ right but not the signs: it expands to $x^2 - x - 6$. With $c > 0$ and $b < 0$ both numbers are negative: $(x - 2)(x - 3)$.
+[Read more](!#12)]@
+
 The signs of $b$ and $c$ guide the search. When $c$ is positive and $b$ is positive, both numbers are positive. When $c$ is positive and $b$ is negative, both numbers are negative — for instance, $x^2 - 9x + 20 = (x - 4)(x - 5)$ since $(-4)(-5) = 20$ and $(-4) + (-5) = -9$. When $c$ is negative, the two numbers have opposite signs: $x^2 + 2x - 15 = (x + 5)(x - 3)$ because $5 \\cdot (-3) = -15$ and $5 + (-3) = 2$.
 
 Not every trinomial of this form factors over the integers. The polynomial $x^2 + x + 1$ requires two integers that multiply to $1$ and add to $1$ — no such pair exists.
@@ -668,6 +678,10 @@ Not every trinomial of this form factors over the integers. The polynomial $x^2 
 Multiply $a$ and $c$ to get the product $ac$. Then find two numbers $m$ and $n$ such that $m \\cdot n = ac$ and $m + n = b$. Use these numbers to split the middle term into two terms, creating a four-term polynomial that can be factored by grouping.
 
 For $6x^2 + 11x + 4$, compute $ac = 6 \\cdot 4 = 24$. The pair $3$ and $8$ satisfies $3 \\cdot 8 = 24$ and $3 + 8 = 11$. Rewrite the middle term: $6x^2 + 3x + 8x + 4$. Group and factor: $3x(2x + 1) + 4(2x + 1) = (3x + 4)(2x + 1)$.
+
+@academic[pitfall,aside:true,width:35%:Using the AC pair as the factors
+Writing $6x^2 + 11x + 4$ as $(x + 3)(x + 8)$ treats the pair for $ac = 24$ as if $a$ were $1$; that product is $x^2 + 11x + 24$. The pair only splits the middle term, and grouping gives $(3x + 4)(2x + 1)$.
+[Read more](!#12)]@
 
 The order in which the split terms are written does not affect the final result. Writing $6x^2 + 8x + 3x + 4$ instead leads to $2x(3x + 4) + 1(3x + 4) = (2x + 1)(3x + 4)$ — the same factors in a different order.
 
@@ -741,6 +755,10 @@ $$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$$
 
 Each factors a two-term cubic into a linear factor and a quadratic factor. The linear factor shares the same sign as the original expression. The quadratic factor follows the pattern: square the first term, take the opposite sign for the product term, then square the last term. The mnemonic SOAP — Same, Opposite, Always Positive — captures the sign sequence.
 
+@academic[pitfall,aside:true,width:35%:Keeping the sign in the middle term
+Writing $x^3 + 27$ as $(x + 3)(x^2 + 3x + 9)$ copies the plus sign into the quadratic factor; that product is $x^3 + 6x^2 + 18x + 27$. The middle sign is the opposite one: $(x + 3)(x^2 - 3x + 9)$.
+[Read more](!#12)]@
+
 For $x^3 + 8$, recognize $8 = 2^3$. The sum of cubes formula gives $x^3 + 2^3 = (x + 2)(x^2 - 2x + 4)$. The linear factor $(x + 2)$ takes the same sign as the original sum. The quadratic factor has a negative middle term (opposite) and a positive constant (always positive).
 
 For $27x^3 - 1$, recognize $27x^3 = (3x)^3$ and $1 = 1^3$. The difference of cubes formula gives $(3x - 1)(9x^2 + 3x + 1)$. The linear factor takes the minus sign (same as the original difference), the middle term is positive (opposite), and the constant remains positive.
@@ -780,12 +798,19 @@ $$x^n + a^n = (x + a)(x^{n-1} - ax^{n-2} + \\cdots + a^{n-1})$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
+@academic[fact,aside:true,width:35%:Nothing but $0$ and $\\pm 1$ until $105$
+In the irreducible pieces of $x^n - 1$, every coefficient is $0$, $1$ or $-1$ for all $n$ up to $104$. At $n = 105 = 3 \\cdot 5 \\cdot 7$, the first $n$ with three different odd prime factors, a piece of degree $48$ has the coefficient $-2$.]@
+
+With $a = 1$ these formulas take apart $x^n - 1$. For $n = 6$, the even-power formula gives $x^6 - 1 = (x^3 - 1)(x^3 + 1)$, and the odd-power formulas split each factor again: $x^6 - 1 = (x - 1)(x^2 + x + 1)(x + 1)(x^2 - x + 1)$. None of the four pieces factors further over the integers. Fully factored over the integers, every $x^n - 1$ breaks into such pieces, one for each divisor of $n$: here $1$, $2$, $3$ and $6$.
+
 Known roots provide another entry point. If $r$ is a root of a polynomial $P(x)$, then $(x - r)$ is a factor, and polynomial [division](!/algebra/polynomials/operations) produces the remaining quotient. For instance, if direct substitution shows that $P(2) = 0$, then $(x - 2)$ divides $P(x)$ evenly, and the quotient can be factored further using any applicable technique.
 
 @academic[rule_theorem:Fundamental Theorem of Algebra
 The [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) guarantees that every polynomial of degree $n$ has exactly $n$ roots over the [complex numbers](!/complex-numbers), counted with multiplicity.]@
 
-This means complete factorization into linear factors is always possible in that setting.`,
+This means complete factorization into linear factors is always possible in that setting.
+
+@academic[punchline:A higher-degree polynomial is factored by spotting a structure that turns it into a case already known.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -819,6 +844,11 @@ The [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) se
 
 @academic[rule_theorem_plain:Over the reals, the irreducible building blocks are linear polynomials and quadratic polynomials with negative discriminant ($b^2 - 4ac < 0$). Every real polynomial factors into a product of such pieces.]@
 
+@academic[fact,aside:true,width:35%:No real roots, yet $x^4 + 1$ factors
+Adding and taking away $2x^2$ makes a difference of squares: $x^4 + 1 = (x^2 + 1)^2 - (\\sqrt{2}x)^2 = (x^2 + \\sqrt{2}x + 1)(x^2 - \\sqrt{2}x + 1)$. Over the integers, $x^4 + 1$ does not factor at all.]@
+
+The rule above has a consequence for polynomials with no real roots at all. A real polynomial without real roots has no linear factor, so its pieces over the reals must all be quadratics with negative discriminant. Its complex roots come in conjugate pairs $z$ and $\\bar{z}$, and each pair gives one such real quadratic, $(x - z)(x - \\bar{z})$.
+
 Over the integers, identifying irreducibility is harder and no single test covers all cases, though the discriminant and the rational root theorem from the [rules](!/algebra/polynomials/rules) page offer useful starting points.`,
     before: ``,
     after: ``,
@@ -837,7 +867,35 @@ Confusing the sum and difference of squares is another trap. The difference $a^2
 
 With cube formulas, the most common error is mishandling signs in the quadratic factor. For $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$, the middle term of the quadratic factor is $-ab$, not $+ab$. Mixing this up produces an incorrect factorization that fails verification.
 
-Stopping too early leaves factors on the table. After obtaining $(x^2 + 4)(x^2 - 4)$ from $x^4 - 16$, the second factor is itself a difference of squares. Every factor must be inspected for further decomposition before the factorization is considered complete.`,
+Stopping too early leaves factors on the table. After obtaining $(x^2 + 4)(x^2 - 4)$ from $x^4 - 16$, the second factor is itself a difference of squares. Every factor must be inspected for further decomposition before the factorization is considered complete.
+
+**Losing the term that equals the GCF**
+
+When one term of the polynomial is the GCF itself, or its negative, dividing that term by the GCF leaves $1$ or $-1$. That quotient is easy to overlook, and the term vanishes from the parentheses.
+
+Wrong working:
+$$6x^3 + 9x^2 - 3x = 3x(2x^2 + 3x)$$
+
+Right working: divide every term by $3x$. The quotients are $6x^3 \\div 3x = 2x^2$, $9x^2 \\div 3x = 3x$ and $-3x \\div 3x = -1$, so
+$$6x^3 + 9x^2 - 3x = 3x(2x^2 + 3x - 1)$$
+
+Why it happens: dividing a term by itself feels like it leaves nothing behind, so the $-1$ is never written down.
+
+How to check: the parentheses must hold as many terms as the original polynomial. Substituting $x = 1$ also catches it: the original gives $6 + 9 - 3 = 12$, the wrong form $3 \\cdot 5 = 15$, and the right form $3 \\cdot 4 = 12$.
+
+**Using the AC pair as the factors**
+
+In the AC method, the two numbers are found for the product $ac$ and then written straight into $(x + m)(x + n)$, as in the simple case. The step where the pair splits the middle term is skipped, and the leading coefficient is lost.
+
+Wrong working: for $6x^2 + 11x + 4$, $ac = 24$ and the pair $3$, $8$ gives $3 \\cdot 8 = 24$, $3 + 8 = 11$, so
+$$6x^2 + 11x + 4 = (x + 3)(x + 8)$$
+
+Right working: use the pair to split the middle term, then group.
+$$6x^2 + 3x + 8x + 4 = 3x(2x + 1) + 4(2x + 1) = (3x + 4)(2x + 1)$$
+
+Why it happens: the search for two numbers looks exactly like the one in the simple case, where the pair goes directly into the factors.
+
+How to check: expand the answer. $(x + 3)(x + 8) = x^2 + 11x + 24$ has leading coefficient $1$ and constant $24$, not $6$ and $4$. The right answer gives $(3x + 4)(2x + 1) = 6x^2 + 3x + 8x + 4 = 6x^2 + 11x + 4$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1017,8 +1075,34 @@ const schemas = {
     }),
   };
 
+  const factorOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Read the structure, pick the technique',
+    preface: 'Factoring always starts with the greatest common factor; after that, the number of terms and the leading coefficient point to the technique.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Inspect again after every step',
+    conclusion: 'After any step, re-inspect each factor for further factoring, and verify by expanding back.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Factoring a polynomial', children: [
+        { id: 'gcf', name: 'First move: extract the GCF', def: 'any polynomial', example: '6x³ + 9x² − 3x → 3x(2x² + 3x − 1)' },
+        { id: 'two', name: 'Two terms', def: 'difference of squares, sum or difference of cubes', example: '9x² − 16 → (3x + 4)(3x − 4)' },
+        { id: 'three', name: 'Three terms', children: [
+          { id: 'a1', name: 'Leading coefficient 1', def: 'find m·n = c and m + n = b', example: 'x² + 7x + 12' },
+          { id: 'ac', name: 'Leading coefficient ≠ 1', def: 'AC method', example: '6x² + 11x + 4' },
+        ] },
+        { id: 'four', name: 'Four or more terms', def: 'grouping', example: 'x³ + 2x² + 3x + 6' },
+        { id: 'high', name: 'Higher degree', children: [
+          { id: 'even', name: 'Only even powers', def: 'substitute u = x²', example: 'x⁴ + 5x² + 6' },
+          { id: 'knownroot', name: 'Known root r', def: 'divide by (x − r)' },
+        ] },
+      ] },
+    ],
+  };
+
   return {
   props:{
+    factorOutline,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1039,7 +1123,7 @@ const schemas = {
 }
    }
 
-export default function FactoringPage({seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function FactoringPage({factorOutline, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -1192,6 +1276,14 @@ export default function FactoringPage({seoData, sectionsContent, introContent, o
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj13-diagram'}
+            id="factoring-decision-outline"
+            title="A factoring decision tree"
+            source="/algebra/polynomials/factoring"
+          >
+            <TaxonomyOutline data={factorOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

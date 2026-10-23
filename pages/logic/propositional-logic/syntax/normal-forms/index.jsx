@@ -291,7 +291,7 @@ The number of minterms in the DNF equals the number of true rows. The number of 
 
     obj9: {
       title: `What Are Normal Forms in Logic?`,
-      content: `A normal form is a standardized way of writing a logical expression so that every formula has exactly one canonical representation. Normal forms eliminate structural ambiguity and make it possible to compare two formulas by comparing their normalized versions.
+      content: `A normal form is a standardized way of writing a logical expression; in its canonical version (full minterms or maxterms) every formula has exactly one representation, up to the order of terms. Normal forms eliminate structural ambiguity and make it possible to compare two formulas by comparing their normalized versions.
 
 In **propositional logic**, the two most important normal forms are DNF and CNF. Both require that the expression use only three connectives: AND ($\\wedge$), OR ($\\vee$), and NOT ($\\neg$). Any implication, biconditional, or exclusive-or must first be rewritten using these three operators before the normal form can be constructed. The converter handles this rewriting internally during truth table evaluation.
 

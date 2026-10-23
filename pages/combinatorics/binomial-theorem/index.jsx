@@ -1600,6 +1600,10 @@ $$(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k.$$
 
 @academic[rule_corollary_plain:The expansion has exactly $n+1$ terms, indexed by $k$ from $0$ through $n$.]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the middle terms
+Writing $(a + b)^2$ as $a^2 + b^2$ keeps only the two end terms. With $a = 2$ and $b = 3$ that gives $4 + 9 = 13$, but $(2 + 3)^2 = 25$; the missing middle term is $2ab = 12$.
+[Read more](!#pitfalls)]@
+
 The coefficients $\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}$ are precisely the entries of row $n$ of Pascal's triangle — so the row of the triangle reads as the row of coefficients in the expansion. The $\\sum$ summation sign and the rest of the theorem's notation are collected among the [combinatorics symbols](!/math-symbols/combinatorics).
 
 ## Combinatorial Proof
@@ -1782,6 +1786,12 @@ The number of distinct terms in the multinomial expansion equals the number of t
 $$\\binom{n+r-1}{r-1}.$$]@
 
 For the binomial case $r = 2$ this gives $\\binom{n+1}{1} = n+1$, matching the count from the binomial theorem.
+
+@academic[pitfall,aside:true,width:35%:Counting n + 1 terms for three summands
+Counting the terms of $(a + b + c)^3$ as $3 + 1 = 4$ carries the binomial count over to a base with three summands. With $r = 3$ the count is $\\binom{3 + 2}{2} = \\binom{5}{2} = 10$.
+[Read more](!#pitfalls)]@
+
+The count grows with both numbers in the problem: the exponent $n$ and the number of summands $r$. Each extra summand is one more letter that can take a share of the exponent, so the list of possible monomials lengthens quickly even for small powers. Collecting the terms of an expansion therefore starts with knowing how many distinct monomials to expect.
 `,
     before: ``,
     between: ``,
@@ -1792,7 +1802,7 @@ For the binomial case $r = 2$ this gives $\\binom{n+1}{1} = n+1$, matching the c
   obj5: {
     title: `Worked Expansions`,
     content: `
-Four worked examples covering the standard problem types.
+Five worked examples covering the standard problem types.
 
 ## Full Expansion: $(x+2)^4$
 
@@ -1800,6 +1810,12 @@ Substitute $a = x$ and $b = 2$. The coefficients are row 4 of Pascal's triangle:
 
 @academic[formula_callout:Worked Expansions
 $$(x+2)^4 = x^4 + 4x^3(2) + 6x^2(4) + 4x(8) + 16 = x^4 + 8x^3 + 24x^2 + 32x + 16.$$]@
+
+@academic[pitfall,aside:true,width:35%:Writing b instead of its power
+Using $2$ in every term instead of $2^k$ gives $x^4 + 8x^3 + 12x^2 + 8x + 2$. The term with $x^2$ takes $2^2 = 4$, so it is $6x^2(4) = 24x^2$, and the last term is $2^4 = 16$.
+[Read more](!#pitfalls)]@
+
+Each term of the expansion is a product of three parts: a coefficient from row $4$, a power of $x$ that falls from $x^4$ to $x^0$, and a power of the second summand. In every term the two exponents add up to $4$. Checking that sum term by term is a quick way to confirm that no part of a term was left out.
 
 ## Expansion with Signs: $(2a - 3b)^3$
 
@@ -1814,6 +1830,12 @@ Simplifying each term:
 $$(2a - 3b)^3 = 8a^3 - 36a^2 b + 54a b^2 - 27 b^3.$$]@
 
 The alternating signs come directly from the powers of $-3b$.
+
+@academic[pitfall,aside:true,width:35%:Making every term after the first negative
+Writing a minus before each later term gives $8a^3 - 36a^2 b - 54ab^2 - 27b^3$. The third term holds $(-3b)^2 = 9b^2$, which is positive, so it is $+54ab^2$.
+[Read more](!#pitfalls)]@
+
+The same approach works for any difference $(a - b)^n$: it is the sum $(a + (-b))^n$, so the coefficients are still row $n$ of Pascal's triangle. The second summand is carried into every term together with its sign, and each power of it is worked out before the term is simplified. Only the signs of the terms can differ from those of $(a + b)^n$.
 
 ## Single Coefficient: $x^5$ in $(1+x)^8$
 
@@ -1835,6 +1857,12 @@ The term is independent of $x$ when $10 - 2k = 0$, i.e. $k = 5$. The constant te
 
 @academic[formula_callout:Worked Expansions
 $$\\binom{10}{5} = 252.$$]@
+
+@academic[pitfall,aside:true,width:35%:Ignoring the power from 1/x
+Solving $10 - k = 0$, from the first summand alone, gives $k = 10$ and the answer $1$; that term is $\\binom{10}{10} x^{-10}$, not a constant. With $\\left(\\frac{1}{x}\\right)^k$ included, $10 - 2k = 0$ gives $k = 5$ and $252$.
+[Read more](!#pitfalls)]@
+
+The same method finds the term with any chosen power of $x$. The exponent of $x$ in the general term, here $10 - 2k$, is set equal to the target power and solved for $k$. A solution that is not a whole number from $0$ to $10$ means that power does not appear in the expansion at all; for example, $x^3$ would need $k = 3.5$.
 
 ## Multinomial Expansion: $(a+b+c)^3$
 
@@ -1869,6 +1897,86 @@ The number of terms, $\\binom{3+3-1}{3-1} = \\binom{5}{2} = 10$, matches the cou
     content: `
 The page covered the theorem statement, the general-term formula, useful substitutions that yield combinatorial identities, the multinomial generalization, and the standard problem types. The table below collects the structural facts about (a+b)<sup>n</sup> in one reference card.
 `,
+    before: ``,
+    between: ``,
+    after: ``,
+    link: '',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Six mistakes come up again and again when expanding powers with the binomial theorem. Five are marked where they happen in the sections above; the sixth, numbering the terms by the power of $b$, is the one the index convention in **The General Term** guards against. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the middle terms**
+
+The power of a sum is expanded as the sum of the powers, $(a + b)^n = a^n + b^n$. Only the two end terms of the expansion survive, and the $n - 1$ terms that mix $a$ and $b$ are lost.
+
+Wrong working: $(x + 3)^2 = x^2 + 9$.
+
+Right working: $(x + 3)^2 = \\binom{2}{0} x^2 + \\binom{2}{1} x \\cdot 3 + \\binom{2}{2} 3^2 = x^2 + 6x + 9$.
+
+Why it happens: powers do spread over products, $(ab)^n = a^n b^n$, and the same move looks just as natural for sums.
+
+How to check: substitute a number. With $x = 1$, $(1 + 3)^2 = 16$, while $1 + 9 = 10$ and $1 + 6 + 9 = 16$. Counting terms also catches it: the theorem gives $n + 1$ terms, and $a^n + b^n$ has only two.
+
+**Using the power of b as the term number**
+
+A term asked for by its position is computed with $k$ equal to that position. Terms are numbered from $T_1$, the term with $b^0$, so the term number is always one more than the power of $b$.
+
+Wrong working: the 4th term of $(a + b)^{10}$ is taken as $\\binom{10}{4} a^6 b^4 = 210 a^6 b^4$.
+
+Right working: $T_4 = T_{3+1}$, so $k = 3$ and $T_4 = \\binom{10}{3} a^7 b^3 = 120 a^7 b^3$.
+
+Why it happens: two counters run side by side, the power $k$ starting from $0$ and the term number starting from $1$, and the formula $T_{k+1}$ hides the shift in a subscript.
+
+How to check: list the first terms by their powers of $b$: $T_1$ has $b^0$, $T_2$ has $b^1$, $T_3$ has $b^2$ and $T_4$ has $b^3$.
+
+**Counting n + 1 terms for three summands**
+
+The number of terms of a multinomial expansion is taken from the binomial rule, $n + 1$, or from the number of products before like terms are collected, $r^n$.
+
+Wrong working: $(a + b + c)^3$ is said to have $3 + 1 = 4$ terms, or $3^3 = 27$ terms.
+
+Right working: the distinct monomials match the tuples $(k_1, k_2, k_3)$ of non-negative integers with $k_1 + k_2 + k_3 = 3$, and there are $\\binom{3 + 3 - 1}{3 - 1} = \\binom{5}{2} = 10$ of them. The $27$ products collect into these $10$ terms, as the coefficients show: $3 \\cdot 1 + 6 \\cdot 3 + 1 \\cdot 6 = 27$.
+
+Why it happens: the rule $n + 1$ is learned first, for two summands, and is easy to reuse without asking where it came from. The count $r^n$ counts the choices from the factors before equal monomials are combined.
+
+How to check: list the monomials by their exponent patterns. For $(a + b + c)^3$ the pattern $(3, 0, 0)$ can be arranged in $3$ ways, $(2, 1, 0)$ in $6$ ways and $(1, 1, 1)$ in $1$ way: $3 + 6 + 1 = 10$.
+
+**Writing b instead of its power**
+
+In each term, the second summand is written once instead of being raised to the power $k$. The coefficients from Pascal's triangle are right, but every term from the third one on comes out wrong.
+
+Wrong working: $(x + 2)^4 = x^4 + 4x^3(2) + 6x^2(2) + 4x(2) + 2 = x^4 + 8x^3 + 12x^2 + 8x + 2$.
+
+Right working: $(x + 2)^4 = x^4 + 4x^3(2) + 6x^2(2^2) + 4x(2^3) + 2^4 = x^4 + 8x^3 + 24x^2 + 32x + 16$.
+
+Why it happens: when the second summand is a plain number, it is easy to treat it as part of the coefficient and copy it instead of raising it to a power.
+
+How to check: the exponents in every term must add up to $n$. In $6x^2(2)$ they add up to $2 + 1 = 3$, not $4$. Substituting $x = 1$ also works: $(1 + 2)^4 = 81$, and $1 + 8 + 24 + 32 + 16 = 81$, while $1 + 8 + 12 + 8 + 2 = 31$.
+
+**Making every term after the first negative**
+
+In the expansion of a difference, a minus sign is written before every term after the first. The sign belongs to the second summand, so it is raised to the power $k$ along with it, and every even power makes it positive.
+
+Wrong working: $(2a - 3b)^3 = 8a^3 - 36a^2 b - 54ab^2 - 27b^3$.
+
+Right working: the terms carry $(-3b)^0 = 1$, $(-3b)^1 = -3b$, $(-3b)^2 = 9b^2$ and $(-3b)^3 = -27b^3$, so $(2a - 3b)^3 = 8a^3 - 36a^2 b + 54ab^2 - 27b^3$.
+
+Why it happens: the minus sign in the base is read as an operation between terms rather than as part of the second summand $-3b$.
+
+How to check: substitute values. With $a = b = 1$, $(2 - 3)^3 = -1$. The correct expansion gives $8 - 36 + 54 - 27 = -1$, while the all-minus version gives $8 - 36 - 54 - 27 = -109$.
+
+**Ignoring the power from 1/x**
+
+To find the term independent of $x$, only the power of $x$ from the first summand is set to zero. The second summand $\\frac{1}{x}$ contributes a power of $x$ as well, namely $x^{-k}$.
+
+Wrong working: in $\\left(x + \\frac{1}{x}\\right)^{10}$, the condition $10 - k = 0$ gives $k = 10$, and the constant term is reported as $\\binom{10}{10} = 1$.
+
+Right working: the general term is $\\binom{10}{k} x^{10-k} x^{-k} = \\binom{10}{k} x^{10-2k}$. Setting $10 - 2k = 0$ gives $k = 5$, and the constant term is $\\binom{10}{5} = 252$.
+
+Why it happens: the power of $x$ in $a^{n-k}$ is the visible one, and $\\left(\\frac{1}{x}\\right)^k$ does not look like a power of $x$ until it is rewritten as $x^{-k}$.
+
+How to check: put the $k$ found back into the term. For $k = 10$ the term is $x^0 \\cdot x^{-10} = x^{-10}$, which still depends on $x$; for $k = 5$ it is $x^5 \\cdot x^{-5} = 1$, times $\\binom{10}{5} = 252$.`,
     before: ``,
     between: ``,
     after: ``,
@@ -2118,6 +2226,14 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     {

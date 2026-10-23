@@ -176,6 +176,10 @@ $$a_n = \\frac{1}{b_n} = \\frac{1}{b_1 + (n-1)d}$$
 
 The simplest example takes $b_n = n$: the reciprocals $1, \\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}, \\ldots$ form the harmonic sequence of natural number reciprocals. The sequence $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\frac{1}{9}, \\ldots$ is also harmonic — it comes from the arithmetic sequence $3, 5, 7, 9, \\ldots$ with $b_1 = 3$ and $d = 2$.
 
+@academic[pitfall,aside:true,width:35%:Using a common difference of the terms
+Treating $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\ldots$ as arithmetic with $d = \\frac{1}{5} - \\frac{1}{3} = -\\frac{2}{15}$ gives $a_{10} = \\frac{1}{3} + 9 \\cdot \\left(-\\frac{2}{15}\\right) = -\\frac{13}{15}$. The difference $d = 2$ belongs to the denominators: $b_{10} = 3 + 9 \\cdot 2 = 21$, so $a_{10} = \\frac{1}{21}$.
+[Read more](!#pitfalls)]@
+
 A harmonic sequence is neither arithmetic nor [geometric](!/algebra/sequences/geometric). The differences between consecutive terms are not constant (they decrease), and the ratios are not constant either (they approach $1$ from below). The defining property is that the reciprocals form an arithmetic progression — the structure lives one layer down.`,
     before: ``,
     after: ``,
@@ -237,6 +241,10 @@ $$H = \\frac{2ab}{a + b}$$]@
 
 @academic[rule_plain:In a harmonic sequence, every term (except the first and last) is the harmonic mean of its two neighbors.]@
 
+@academic[pitfall,aside:true,width:35%:Averaging the terms instead of their reciprocals
+Taking the term between $\\frac{1}{3}$ and $\\frac{1}{7}$ as their average gives $\\frac{1}{2}\\left(\\frac{1}{3} + \\frac{1}{7}\\right) = \\frac{5}{21}$, and $3, \\frac{21}{5}, 7$ is not arithmetic. Averaging the reciprocals $3$ and $7$ gives $5$, so the term is $\\frac{1}{5}$.
+[Read more](!#pitfalls)]@
+
 This follows from the fact that the reciprocals form an arithmetic sequence: the reciprocal of each term is the [arithmetic mean](!/algebra/sequences/arithmetic#6) of the reciprocals of its neighbors, and taking reciprocals back gives the harmonic mean relationship.
 
 Inserting $k$ harmonic means between two values $a$ and $b$ reduces to inserting $k$ arithmetic means between $\\frac{1}{a}$ and $\\frac{1}{b}$, then taking reciprocals of all inserted terms.`,
@@ -264,7 +272,78 @@ $$\\frac{2ab}{a+b} \\leq \\sqrt{ab} \\leq \\frac{a+b}{2}$$]@
 
 This chain links the three types of sequences through their associated means. Each mean captures a different notion of "average": arithmetic for additive processes, geometric for multiplicative processes, and harmonic for rates and reciprocals.
 
+@academic[pitfall,aside:true,width:35%:Averaging speeds with the arithmetic mean
+Averaging $60$ km/h out and $40$ km/h back over the same distance as $\\frac{60 + 40}{2} = 50$ km/h is too high: $120$ km each way takes $2 + 3 = 5$ hours for $240$ km, so $48$ km/h. That is the harmonic mean $\\frac{2 \\cdot 60 \\cdot 40}{60 + 40} = 48$.
+[Read more](!#pitfalls)]@
+
+Rates are the typical setting for the harmonic mean. When a trip is split into equal distances covered at different speeds, the time for each part is the distance divided by the speed, so the total time adds up reciprocals of the speeds. The average speed of the whole trip is the total distance divided by that total time.
+
 The AM–GM portion of the inequality ($G \\leq A$) is used extensively throughout algebra, particularly in optimization and in proving [inequalities](!/algebra/inequalities). The full three-way chain places the harmonic mean as the lower bound of the trio.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj6: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again with harmonic sequences, the harmonic series and the harmonic mean. Three of them are marked where they happen in the sections above; the fourth is the misreading that the section on the harmonic series answers. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Using a common difference of the terms**
+
+The terms of a harmonic sequence are treated as an arithmetic sequence: a common difference is read off from the first two terms, and the formula $a_n = a_1 + (n-1)d$ is applied to the terms themselves instead of to their reciprocals.
+
+Wrong working: for $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\ldots$,
+$$d = \\frac{1}{5} - \\frac{1}{3} = -\\frac{2}{15}, \\quad a_{10} = \\frac{1}{3} + 9 \\cdot \\left(-\\frac{2}{15}\\right) = -\\frac{13}{15}$$
+
+Right working: the arithmetic sequence is the denominators $3, 5, 7, \\ldots$, with $b_1 = 3$ and $d = 2$.
+$$b_{10} = 3 + 9 \\cdot 2 = 21, \\quad a_{10} = \\frac{1}{b_{10}} = \\frac{1}{21}$$
+
+Why it happens: the general-term formula of an arithmetic sequence is the one most practised, and the difference is taken of whatever numbers are written down, not of their reciprocals.
+
+How to check: compute a second difference. $\\frac{1}{7} - \\frac{1}{5} = -\\frac{2}{35}$, which is not $-\\frac{2}{15}$, so the terms are not arithmetic. A negative answer is also impossible here: every term of this sequence is a positive fraction.
+
+**Concluding convergence from shrinking terms**
+
+Because the terms $\\frac{1}{n}$ approach zero, the harmonic series is taken to add up to some finite total.
+
+Wrong working: $\\frac{1}{n} \\to 0$, so the later additions become negligible and the partial sums settle at a limit.
+
+Right working: group the terms as in the grouping proof. The block from $\\frac{1}{2^k + 1}$ to $\\frac{1}{2^{k+1}}$ has $2^k$ terms, each at least $\\frac{1}{2^{k+1}}$, so it adds at least $\\frac{1}{2}$:
+$$H_{2^k} \\geq 1 + \\frac{k}{2}$$
+The partial sums pass every bound, so the series diverges.
+
+Why it happens: for the geometric series, terms that shrink to zero go together with a finite sum, and the condition that the terms approach zero gets mistaken for a test that settles convergence.
+
+How to check: put in a size. With $k = 20$ the bound gives $H_{2^{20}} \\geq 11$, so the first $1{,}048{,}576$ terms already add up to more than $10$, and the next blocks keep adding at least $\\frac{1}{2}$ each.
+
+**Averaging the terms instead of their reciprocals**
+
+The term between two neighbours in a harmonic sequence, or a harmonic mean between two values, is found by averaging the two values directly, as in an arithmetic sequence.
+
+Wrong working: between $\\frac{1}{3}$ and $\\frac{1}{7}$,
+$$\\frac{1}{2}\\left(\\frac{1}{3} + \\frac{1}{7}\\right) = \\frac{1}{2} \\cdot \\frac{10}{21} = \\frac{5}{21}$$
+
+Right working: average the reciprocals $3$ and $7$, then take the reciprocal back.
+$$\\frac{3 + 7}{2} = 5, \\quad \\text{so the term is } \\frac{1}{5}$$
+The two-number formula gives the same: $H = \\frac{2 \\cdot \\frac{1}{3} \\cdot \\frac{1}{7}}{\\frac{1}{3} + \\frac{1}{7}} = \\frac{\\frac{2}{21}}{\\frac{10}{21}} = \\frac{1}{5}$.
+
+Why it happens: the rule "a term is the average of its neighbours" is true for arithmetic sequences and is carried over without the step down to the reciprocals.
+
+How to check: take reciprocals of the three terms; they must form an arithmetic sequence. $3, 5, 7$ does, with difference $2$. The wrong answer gives $3, \\frac{21}{5}, 7$, with differences $\\frac{6}{5}$ and $\\frac{14}{5}$.
+
+**Averaging speeds with the arithmetic mean**
+
+Two speeds held over equal distances are averaged with the arithmetic mean, as if the trip spent equal time at each speed.
+
+Wrong working: $60$ km/h out and $40$ km/h back over the same road,
+$$\\frac{60 + 40}{2} = 50$$
+
+Right working: take the distance as $120$ km each way. The trip out takes $\\frac{120}{60} = 2$ hours and the trip back $\\frac{120}{40} = 3$ hours, so $240$ km take $5$ hours:
+$$\\frac{240}{5} = 48 = \\frac{2 \\cdot 60 \\cdot 40}{60 + 40}$$
+The average speed is the harmonic mean, $48$ km/h, whatever the distance.
+
+Why it happens: the arithmetic mean is the everyday meaning of "average", and it is right when equal times are spent at each speed. With equal distances, more time is spent at the slower speed, which pulls the average down.
+
+How to check: work out the total time from the claimed average. At $50$ km/h, $240$ km would take $4.8$ hours, but the two legs actually take $5$ hours.`,
     before: ``,
     after: ``,
     link: '',
@@ -500,6 +579,14 @@ export default function HarmonicSequencesPage({meanOrderLevels, seoData, section
           >
             <Hierarchy data={meanOrderLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

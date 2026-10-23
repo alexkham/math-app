@@ -1426,6 +1426,12 @@ A lunch combo is built from 3 main courses, 2 drinks, and 4 desserts. Each main 
 $$3 \\times 2 \\times 4 = 24$$
  
 possible meals.]@
+
+@academic[pitfall,aside:true,width:35%:Adding the steps
+Adding the menu counts, $3 + 2 + 4 = 9$, counts dishes, not meals: a meal is a main and a drink and a dessert. Each of the $3 \\times 2 = 6$ main-and-drink pairs takes any of $4$ desserts, so there are $3 \\times 2 \\times 4 = 24$ meals.
+[Read more](!#pitfalls)]@
+
+Here every outcome uses all three steps: a meal has one main, one drink and one dessert. The traveller in the addition rule makes a single choice instead, and each trip uses exactly one mode of transport. Whether an outcome is put together from several choices or picked from one of several separate lists is what decides between multiplying and adding.
  
 ## The Independence Condition
  
@@ -1457,7 +1463,13 @@ The strategy is to count the total, count the complement, and subtract.
  
 @academic[example:Example
  
-The number of arrangements of $n$ distinct items in which at least one item ends up in a specific designated position is awkward to count directly — multiple items can satisfy the condition independently, and the cases overlap. The complementary count — arrangements in which no item is in that position — partitions cleanly: the designated position holds one of the $n-1$ non-designated items, and the remaining $n-1$ items fill the rest. Subtracting this count from $n!$ gives the desired number.]@
+The number of arrangements of $n$ distinct items in which a designated item lands in a designated position can be found from its complement: the arrangements in which that item is not in that position. The complement partitions cleanly: the designated position holds one of the $n-1$ other items, and the remaining $n-1$ items fill the rest in $(n-1)!$ ways. Subtracting $(n-1) \\cdot (n-1)!$ from $n!$ gives the desired number, $(n-1)!$.]@
+
+@academic[pitfall,aside:true,width:35%:Securing one success first
+For at least one head in $4$ coin flips, choosing the flip that shows the head ($4$ ways) and letting the other $3$ land freely gives $4 \\cdot 2^3 = 32$, more than the $2^4 = 16$ possible outcomes. The complement gives $16 - 1 = 15$.
+[Read more](!#pitfalls)]@
+
+A condition of the form "at least one" hides many cases at once: exactly one, exactly two, and so on up to all of them, and a single outcome can meet the condition in several places. Its negation, "none", is a single case with no overlaps, and it is usually counted by one product. That is why the subtraction route is the standard choice whenever the words "at least one" appear.
  
 ## Structural Note
  
@@ -1486,6 +1498,12 @@ $$|S| = f(n) = g(n) \\implies f(n) = g(n).$$
 ## The Handshake Lemma
  
 A canonical illustration: in a group of people who have shaken hands in various pairings, the sum of the number of hands each person shook equals twice the total number of handshakes. The reason is that each handshake is counted once from each participant&apos;s perspective — the same set (handshakes) counted two ways. In graph theory this becomes $\\sum_{v} \\deg(v) = 2|E|$, where the left side sums degrees over all vertices and the right side counts each edge from both endpoints.
+
+@academic[pitfall,aside:true,width:35%:Counting each handshake twice
+With $6$ people who all shake hands, $6 \\cdot 5 = 30$ counts every handshake once from each of its two people. The lemma halves the sum: $\\frac{30}{2} = 15$ handshakes, the same as the $\\binom{6}{2} = 15$ pairs.
+[Read more](!#pitfalls)]@
+
+The lemma is easiest to use when every person's count is known. If each of $n$ people shakes hands with every other person exactly once, each of them shakes $n - 1$ hands, so the left side of the identity is a single product. The right side then gives the number of handshakes, which must match the number of pairs of people.
  
 ## Combinatorial Identities
  
@@ -1532,6 +1550,10 @@ $$n \\text{ items into } k \\text{ containers} \\implies \\exists \\text{ contai
  
 ## Examples
  
+@academic[pitfall,aside:true,width:35%:Rounding n/k down
+For $25$ people and $12$ months, $\\lfloor 25/12 \\rfloor = 2$ claims only that some month has $2$ birthdays. The bound is $\\lceil 25/12 \\rceil = 3$: with at most $2$ per month, $12$ months hold only $24$ people.
+[Read more](!#pitfalls)]@
+
 In any group of 13 people, at least two share a birth month — the 13 people are distributed among 12 months, so the basic form applies.
  
 Among any 5 integers chosen from $\\{1, 2, \\ldots, 8\\}$, at least two come from one of the four pairs $\\{1,2\\}, \\{3,4\\}, \\{5,6\\}, \\{7,8\\}$ — 5 items distributed into 4 pairs forces at least one pair to contain two of the chosen integers, and those two differ by exactly 1.
@@ -1579,6 +1601,75 @@ The addition rule splits a count across mutually exclusive cases. The multiplica
  
 These five principles together cover the logical foundation of every formula that appears in the rest of the section.
 `,
+    before: ``,
+    between: ``,
+    after: ``,
+    link: '',
+  },
+
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again when the counting principles are put to work. Four are marked where they happen in the sections above; the fifth, adding cases that overlap, is described in the addition rule section. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Adding overlapping cases**
+
+A count is split into cases and the case counts are added, but some outcomes belong to two cases at once. Each of those outcomes is counted twice.
+
+Wrong working: the integers from $1$ to $20$ divisible by $2$ or by $3$. There are $10$ multiples of $2$ and $6$ multiples of $3$, so the count is given as $10 + 6 = 16$.
+
+Right working: the multiples of $6$, namely $6$, $12$ and $18$, are in both lists. Subtracting them once gives $10 + 6 - 3 = 13$. This is the [inclusion–exclusion principle](!/combinatorics/inclusion-exclusion) for two sets.
+
+Why it happens: the word "or" points to the addition rule, and the condition that the cases cannot happen together is easy to skip.
+
+How to check: look for one outcome that fits two cases; here $6$ is divisible by both $2$ and $3$. Listing the numbers also works: $2, 3, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20$ are $13$ numbers.
+
+**Adding the steps**
+
+An outcome is built from several choices made together, but the option counts are added as if a single choice were made from one combined list. The reverse slip multiplies alternatives: the traveller's $2$ bus, $3$ train and $4$ taxi routes give $9$ trips, not $2 \\times 3 \\times 4 = 24$, because a trip uses only one of them.
+
+Wrong working: a lunch combo has $3$ mains, $2$ drinks and $4$ desserts, and the number of meals is given as $3 + 2 + 4 = 9$.
+
+Right working: each meal is one main and one drink and one dessert. The $3$ mains pair with the $2$ drinks in $3 \\times 2 = 6$ ways, and each pair goes with any of the $4$ desserts: $3 \\times 2 \\times 4 = 24$ meals.
+
+Why it happens: $9$ is the number of dishes on the menu, and adding feels like putting the options together. The word "and" is often left out of the problem.
+
+How to check: ask whether one outcome uses one choice or one of each. Main $1$ alone already gives $2 \\times 4 = 8$ different meals, so $9$ meals in total is far too few.
+
+**Securing one success first**
+
+For an "at least one" condition, one success is fixed first and everything else is left free. An outcome with several successes is then counted once for each of them.
+
+Wrong working: at least one head in $4$ coin flips. Choose the flip that shows the head in $4$ ways and let the other $3$ flips land freely in $2^3 = 8$ ways: $4 \\cdot 8 = 32$.
+
+Right working: there are $2^4 = 16$ outcomes in all, and only one of them, all tails, has no head. So $16 - 1 = 15$ outcomes have at least one head.
+
+Why it happens: fixing a head does guarantee the condition, so the count looks safe. But an outcome such as two heads followed by two tails is reached twice, once with the first flip fixed and once with the second, and four heads is reached four times.
+
+How to check: the answer can never be larger than the total; $32 > 16$ shows the overcount. Counting by the exact number of heads confirms the right answer: $\\binom{4}{1} + \\binom{4}{2} + \\binom{4}{3} + \\binom{4}{4} = 4 + 6 + 4 + 1 = 15$.
+
+**Counting each handshake twice**
+
+The number of handshakes is found by adding up how many hands each person shook, and that sum is given as the answer.
+
+Wrong working: $6$ people each shake hands with everyone else. Each shakes $5$ hands, so the count is given as $6 \\cdot 5 = 30$.
+
+Right working: each handshake involves $2$ people, so it appears twice in the sum. By the handshake lemma the sum is $2|E|$, so $|E| = \\frac{30}{2} = 15$. Choosing the $2$ people of a handshake gives the same number: $\\binom{6}{2} = 15$.
+
+Why it happens: counting person by person is natural, and it is easy to forget that the handshake between two people appears in both of their counts.
+
+How to check: try $3$ people. They make $3$ handshakes, but the per-person sum is $3 \\cdot 2 = 6$. The per-person sum is always even, since it is twice the number of handshakes; an odd sum signals a slip in the counts.
+
+**Rounding n/k down**
+
+The generalized form guarantees a container with at least $\\lceil n/k \\rceil$ items, but the quotient is rounded down instead of up.
+
+Wrong working: $25$ people and $12$ months. $\\lfloor 25/12 \\rfloor = 2$, so the conclusion drawn is only that some month has at least $2$ birthdays. For $13$ people the floor gives $1$, which says nothing at all.
+
+Right working: $\\lceil 25/12 \\rceil = 3$. If every month had at most $2$ birthdays, the $12$ months would hold at most $24$ people, fewer than $25$. So some month has at least $3$.
+
+Why it happens: rounding down is the habit for questions like "how many full boxes", where the leftover is ignored. Here the leftover is the whole point: it has to go somewhere, and it pushes one container higher.
+
+How to check: spread the items as evenly as possible. $12$ months with $2$ people each hold $24$; the $25$th person makes a third in some month, so the guaranteed number is $3$.`,
     before: ``,
     between: ``,
     after: ``,
@@ -1830,6 +1921,14 @@ export default function CountingPrinciplesPage({seoData, sectionsContent, introC
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     {

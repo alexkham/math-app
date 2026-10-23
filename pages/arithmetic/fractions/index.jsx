@@ -699,6 +699,8 @@ import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fr
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -927,6 +929,23 @@ const keyWords = [
 `
 
 
+    // Concept introduction (section 1) — template A, definition last. Running
+    // instance: 3 pizzas shared among 4 people. Old obj1 text is kept in
+    // sectionsContent.obj1, unused; its rule box, pitfall aside (another
+    // session, uncommitted) and three passages are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciShareTable = ciTableOpen(['pizzas', 'people', 'whole pizzas each?', 'share each']) +
+      ciRow(['8', '4', 'yes: 2', '2']) +
+      ciRow(['4', '4', 'yes: 1', '1'], { shade: true }) +
+      ciRow(['3', '4', 'no', '?'], { last: true, color: '#a4243b', cols: [2, 3] }) +
+      '</tbody></table>'
+
     const sectionsContent={
 
     obj0: {
@@ -954,6 +973,10 @@ const keyWords = [
     content: `A fraction expresses a quantity as a ratio of two integers. The general form is $\\frac{a}{b}$, where $a$ is the numerator and $b$ is the denominator. The horizontal line separating them is called the fraction bar or vinculum. In running text the same fraction may be written with a slash, $a/b$ — both forms appear among the [arithmetic symbols](!/math-symbols/arithmetic).
 
 @academic[rule_plain:Every fraction represents a division operation. The expression $\\frac{a}{b}$ is equivalent to $a \\div b$, meaning the numerator divided by the denominator.]@
+
+@academic[pitfall,aside:true,width:35%:Dividing the bottom by the top
+Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a proper fraction. The numerator is divided by the denominator: $\\frac{2}{5} = 2 \\div 5 = 0.4$.
+[Read more](!#pitfalls)]@
 
 For example, $\\frac{3}{4}$ equals $3 \\div 4 = 0.75$.
 
@@ -1051,6 +1074,10 @@ Unit fractions serve as the building blocks of all fractions. Any fraction $\\fr
 
 @academic[rule_plain:An important property of unit fractions is that larger denominators produce smaller values.]@
 
+@academic[pitfall,aside:true,width:35%:Judging unit fractions by the denominator
+Ranking $\\frac{1}{10}$ above $\\frac{1}{5}$ because $10 > 5$ reverses the order: $\\frac{1}{10} = 0.1$ is half of $\\frac{1}{5} = 0.2$, so $\\frac{1}{10} < \\frac{1}{5}$.
+[Read more](!#pitfalls)]@
+
 The fraction $\\frac{1}{8}$ is smaller than $\\frac{1}{4}$ because dividing something into eight parts creates smaller pieces than dividing it into four parts. This inverse relationship between denominator size and fraction value is essential when [comparing fractions](!/arithmetic/fractions/comparing).`,
     before: ``,
     after: ``,
@@ -1063,9 +1090,21 @@ The fraction $\\frac{1}{8}$ is smaller than $\\frac{1}{4}$ because dividing some
 
 [Adding and subtracting fractions](!/arithmetic/fractions/adding-subtracting) requires a common denominator. Fractions with the same denominator can be added or subtracted by combining their numerators: $\\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}$. When denominators differ, each fraction must first be converted to an [equivalent fraction](!/arithmetic/fractions/equivalent) with a shared denominator.
 
+@academic[pitfall,aside:true,width:35%:Adding across the top and bottom
+Adding numerators and denominators gives $\\frac{1}{2} + \\frac{1}{4} = \\frac{2}{6} = \\frac{1}{3}$, less than $\\frac{1}{2}$ alone. In quarters, $\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$.
+[Read more](!#pitfalls)]@
+
+A shared denominator turns both fractions into pieces of one size, so the pieces can be counted together. For $\\frac{1}{2} + \\frac{1}{3}$, halves and thirds both fit into sixths: $\\frac{1}{2} = \\frac{3}{6}$ and $\\frac{1}{3} = \\frac{2}{6}$. Three sixths and two sixths make $\\frac{5}{6}$.
+
 [Multiplying fractions](!/arithmetic/fractions/multiplying) follows a direct rule: multiply the numerators together and multiply the denominators together. The product $\\frac{2}{3} \\times \\frac{4}{5}$ equals $\\frac{2 \\times 4}{3 \\times 5} = \\frac{8}{15}$. No common denominator is needed.
 
 [Dividing fractions](!/arithmetic/fractions/dividing) transforms into multiplication by the reciprocal. To compute $\\frac{2}{3} \\div \\frac{4}{5}$, multiply the first fraction by the flipped second fraction: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12}$, which simplifies to $\\frac{5}{6}$.
+
+@academic[pitfall,aside:true,width:35%:Flipping the first fraction
+Inverting $\\frac{3}{4}$ instead of $\\frac{1}{2}$ turns $\\frac{3}{4} \\div \\frac{1}{2}$ into $\\frac{4}{3} \\times \\frac{1}{2} = \\frac{2}{3}$. Only the divisor is flipped: $\\frac{3}{4} \\times \\frac{2}{1} = \\frac{3}{2}$.
+[Read more](!#pitfalls)]@
+
+Dividing by $\\frac{4}{5}$ asks how many copies of $\\frac{4}{5}$ fit into $\\frac{2}{3}$, and multiplying by the reciprocal answers that question. The result can be checked by multiplying back: $\\frac{5}{6} \\times \\frac{4}{5} = \\frac{20}{30} = \\frac{2}{3}$, the number that was divided.
 
 [Comparing fractions](!/arithmetic/fractions/comparing) determines which of two fractions is larger, smaller, or whether they are equal. Methods include finding common denominators, cross-multiplication, or converting to decimals.
 
@@ -1159,6 +1198,62 @@ Each model serves different purposes. Circle models suit introductory understand
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes account for many of the wrong answers in early fraction work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dividing the bottom by the top**
+
+A fraction is turned into a decimal by dividing the denominator by the numerator, usually because the larger number is placed first, as in most whole-number division. The two numbers swap roles, and a proper fraction comes out larger than one.
+
+Wrong working: $\\frac{2}{5} = 5 \\div 2 = 2.5$.
+
+Right working: the numerator is divided by the denominator, so $\\frac{2}{5} = 2 \\div 5 = 0.4$. Multiplying back confirms it: $0.4 \\times 5 = 2$, the numerator.
+
+Why it happens: whole-number division problems almost always divide a larger number by a smaller one, so $5 \\div 2$ looks like the natural problem and $2 \\div 5$ looks impossible until division into decimals is familiar.
+
+How to check: a proper fraction lies between $0$ and $1$, so its decimal must too. The value $2.5$ is more than two wholes, which $\\frac{2}{5}$ cannot be.
+
+**Judging unit fractions by the denominator**
+
+Two unit fractions are compared by their denominators as if they were whole numbers, so the one with the larger denominator is taken to be the larger fraction.
+
+Wrong working: $10 > 5$, so $\\frac{1}{10} > \\frac{1}{5}$.
+
+Right working: $\\frac{1}{10}$ is one of ten equal pieces of a whole and $\\frac{1}{5}$ is one of five, and ten pieces are smaller than five. In decimals, $\\frac{1}{10} = 0.1$ and $\\frac{1}{5} = 0.2$, so $\\frac{1}{10} < \\frac{1}{5}$. In fact $\\frac{1}{5} = \\frac{2}{10}$, two of the tenths.
+
+Why it happens: with whole numbers a larger number always means more, and that habit is carried over to the denominator, which counts how many pieces the whole is cut into rather than how much is taken.
+
+How to check: picture one whole shared among more people; each share gets smaller. Or convert both to decimals: $0.1 < 0.2$.
+
+**Adding across the top and bottom**
+
+Two fractions are added by adding their numerators and adding their denominators, as if each fraction were two separate whole numbers.
+
+Wrong working: $\\frac{1}{2} + \\frac{1}{4} = \\frac{1 + 1}{2 + 4} = \\frac{2}{6} = \\frac{1}{3}$.
+
+Right working: rewrite $\\frac{1}{2}$ in quarters, $\\frac{1}{2} = \\frac{2}{4}$, then add the numerators and keep the denominator: $\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$.
+
+Why it happens: multiplication of fractions does work straight across, $\\frac{1}{2} \\times \\frac{1}{4} = \\frac{1 \\times 1}{2 \\times 4} = \\frac{1}{8}$, and the same pattern is expected for addition.
+
+How to check: the sum of two positive numbers is larger than each of them. The wrong answer $\\frac{1}{3}$ is smaller than $\\frac{1}{2}$, so it cannot be $\\frac{1}{2}$ plus something; $\\frac{3}{4}$ is larger than both.
+
+**Flipping the first fraction**
+
+In a division of fractions, the reciprocal is taken of the first fraction, or of both, instead of only the second fraction, the divisor.
+
+Wrong working: $\\frac{3}{4} \\div \\frac{1}{2} = \\frac{4}{3} \\times \\frac{1}{2} = \\frac{4}{6} = \\frac{2}{3}$.
+
+Right working: keep the first fraction and flip only the divisor: $\\frac{3}{4} \\div \\frac{1}{2} = \\frac{3}{4} \\times \\frac{2}{1} = \\frac{6}{4} = \\frac{3}{2}$.
+
+Why it happens: the rule is remembered as "flip and multiply" without which fraction is flipped, and the first fraction is the one seen first.
+
+How to check: multiply the answer by the divisor; it must give the first fraction back. $\\frac{3}{2} \\times \\frac{1}{2} = \\frac{3}{4}$, while $\\frac{2}{3} \\times \\frac{1}{2} = \\frac{1}{3}$. A half also fits into three quarters more than once, so the answer must be larger than $1$.`,
+      before:``,
+      after:``,
+      link:'',
+
     }
   
   }
@@ -1271,6 +1366,16 @@ const schemas = {
     notes: [{ text: 'proper: 3 of 4 parts, less than one whole', color: 'f' }, { text: 'improper: 5 thirds, one whole and 2 thirds more', color: 'r' }], caption: 'Proper stays inside one whole; improper spills over' };
   const fbUnitFractions = { kind: 'bars', svgTitle: 'Unit fractions 1/2, 1/4 and 1/8 on bars of the same whole: each is half the one before', rows: [{ n: 2, k: 1, label: '1/2', partLabels: true }, { n: 4, k: 1, label: '1/4', color: 'r', partLabels: true }, { n: 8, k: 1, label: '1/8', color: 'g', partLabels: true }],
     notes: [{ text: 'same whole, more parts: each part is smaller' }, { text: '1/8 < 1/4 < 1/2' }], caption: 'Larger denominator, smaller unit fraction' };
+  const fbCiPizzas = { kind: 'bars', svgTitle: 'Three pizzas cut into quarters make 12 quarters; one person takes 3 of them: three quarters',
+    rows: [{ n: 4, k: 12, label: '3 pizzas' }, { n: 4, k: 3, label: 'one share', partLabels: true }],
+    notes: [{ text: '3 pizzas, each cut into 4: 12 quarters' }, { text: '12 quarters ÷ 4 people = 3 quarters each', color: 'f' }],
+    caption: 'Each person gets 3 of the 4 parts of one whole: 3/4' };
+
+  const conceptIntroFigures = {
+    pizzas: renderFractionBar(fbCiPizzas),
+    shareTable: ciShareTable,
+  };
+
   const demoUnits = {
     threeFifths: demoUnitFrame({
       svg: renderFractionBar(fbThreeFifths),
@@ -1309,8 +1414,33 @@ const schemas = {
     ],
   };
 
+  const fractionTypesOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Two ways to classify a fraction',
+    preface: 'Fractions are classified either by how the numerator compares with the denominator, or by their structure.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'One fraction, several labels',
+    conclusion: 'The two classifications overlap: a unit fraction is also proper, and an improper fraction can be rewritten as a mixed number.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Types of fractions', children: [
+        { id: 'rel', name: 'By numerator and denominator', children: [
+          { id: 'proper', name: 'Proper', def: 'numerator < denominator; value < 1', example: '2/5' },
+          { id: 'improper', name: 'Improper', def: 'numerator ≥ denominator; value ≥ 1', example: '5/3' },
+          { id: 'unit', name: 'Unit', def: 'numerator = 1', example: '1/7' },
+        ] },
+        { id: 'struct', name: 'By structure', children: [
+          { id: 'mixed', name: '[Mixed number](!/arithmetic/fractions/mixed-numbers)', def: 'whole number plus a proper fraction', example: '2¾' },
+          { id: 'equiv', name: '[Equivalent](!/arithmetic/fractions/equivalent)', def: 'same value, scaled', example: '1/2 = 2/4' },
+          { id: 'complex', name: '[Complex](!/arithmetic/fractions/complex)', def: 'a fraction inside the numerator or denominator' },
+        ] },
+      ] },
+    ],
+  };
+
 return {
   props: {
+    fractionTypesOutline,
     fractionOpTree,
     sectionsContent,
     introContent,
@@ -1320,6 +1450,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Fractions: Definition, Types & Operations | Learn Math Class",
       description: "Learn fractions from the ground up: numerator and denominator, proper vs improper fractions, unit fractions, operations, and visual models for understanding.",
@@ -1332,9 +1463,69 @@ return {
    }
 
 
-export default function FractionsPage({fractionOpTree, seoData, sectionsContent, introContent, obj3Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function FractionsPage({fractionTypesOutline, fractionOpTree, seoData, sectionsContent, introContent, obj3Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Whole numbers cannot share 3 pizzas among 4 people.`,
+        content: [
+          `Share $8$ pizzas among $4$ people and each gets $2$; share $4$ and each gets $1$. Share $3$ and there is no whole number to give each person — less than one pizza each, but how much less?`,
+          ciTable('shareTable'),
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Cutting every pizza into four equal parts solves it.`,
+        content: `Cut each of the $3$ pizzas into $4$ equal slices: that makes $3 \\times 4 = 12$ slices, each one quarter of a pizza. Dealt out to $4$ people, each person gets $12 \\div 4 = 3$ slices — three quarters of a pizza, written $\\frac{3}{4}$.`,
+        visual: ciSvg('pizzas'),
+        caption: `Top: the $3$ pizzas, each cut into $4$, all $12$ quarters. Bottom: one person's share, $3$ of the $4$ parts of a single whole.`,
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in 3/4 was chosen: the 4 came from the people and the 3 from the pizzas.`,
+        content: [
+          `The bottom number had to be $4$ because there were four people to share among; the top had to be $3$ because three pizzas were being shared. Sharing $3$ among $4$ is just $3 \\div 4$, and the fraction is the answer to that division.`,
+          `@academic[rule_plain:Every fraction represents a division operation. The expression $\\frac{a}{b}$ is equivalent to $a \\div b$, meaning the numerator divided by the denominator.]@`,
+          `@academic[pitfall,aside:true,width:35%:Dividing the bottom by the top
+Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a proper fraction. The numerator is divided by the denominator: $\\frac{2}{5} = 2 \\div 5 = 0.4$.
+[Read more](!#pitfalls)]@`,
+          `For example, $\\frac{3}{4}$ equals $3 \\div 4 = 0.75$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [fraction](!/arithmetic/definitions#fraction) expresses a quantity as a ratio of two integers. The general form is $\\frac{a}{b}$, where $a$ is the numerator and $b$ is the denominator. The horizontal line separating them is called the fraction bar or vinculum. In running text the same fraction may be written with a slash, $a/b$ — both forms appear among the [arithmetic symbols](!/math-symbols/arithmetic).`,
+        footer: `So the pizza share is $\\frac{3}{4}$: numerator $3$, denominator $4$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A fraction is a single number, even though it is written with two.`,
+        content: `$\\frac{3}{4}$ is not a pair of numbers but one quantity — the same as $0.75$ — with its own place on the number line, between $0$ and $1$. The two written numbers are the instructions for finding it: cut into $4$, take $3$.`,
+      },
+      {
+        id: 'caveat',
+        lead: `The sharing idea works for any whole numbers, with two things to watch.`,
+        content: [
+          `What generalizes: $\\frac{a}{b}$ always means $a \\div b$. What was particular: with fewer pizzas than people the share was less than one; share $5$ pizzas among $4$ and each gets $\\frac{5}{4}$, more than one whole. And one thing can never happen: sharing among nobody.`,
+          `The denominator cannot equal zero. Division by zero is undefined in mathematics, so expressions like $\\frac{5}{0}$ have no meaning. Any integer $b \\neq 0$ can serve as a denominator.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers fraction notation, the roles of numerator and denominator, the ways fractions are pictured, proper and improper fractions, unit fractions, fractions on the number line, and the operations and types of fractions that later pages develop.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1350,7 +1541,7 @@ export default function FractionsPage({fractionOpTree, seoData, sectionsContent,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1390,6 +1581,14 @@ export default function FractionsPage({fractionOpTree, seoData, sectionsContent,
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="fraction-types-outline"
+            title="Two ways to classify a fraction"
+            source="/arithmetic/fractions"
+          >
+            <TaxonomyOutline data={fractionTypesOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1446,6 +1645,14 @@ export default function FractionsPage({fractionOpTree, seoData, sectionsContent,
           sectionsContent.obj8.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

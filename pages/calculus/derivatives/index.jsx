@@ -15,6 +15,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDerivativeLocalDiagrams from '@/app/components/calculus/visualizers/functionDerivativeLocalDiagrams'
 import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -194,6 +198,26 @@ const keyWords = [
   
 
 
+// Concept introduction (section 1) — template E, widening. Running instance:
+// f(x) = x² at a = 3. Old obj1 text is kept in sectionsContent.obj1, unused;
+// its three formula boxes, three sentences and the secant demo frame with its
+// line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSecantTable = ciTableOpen(['second point x', 'rise f(x) − 9', 'run x − 3', 'slope']) +
+  ciRow(['4', '7', '1', '7']) +
+  ciRow(['3.5', '3.25', '0.5', '6.5'], { shade: true }) +
+  ciRow(['3.1', '0.61', '0.1', '6.1']) +
+  ciRow(['3.01', '0.0601', '0.01', '6.01'], { shade: true }) +
+  ciRow(['2.99', '−0.0599', '−0.01', '5.99']) +
+  ciRow(['2.9', '−0.59', '−0.1', '5.9'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/derivatives (hub) ──────────────────────────────────────────
 
@@ -271,6 +295,12 @@ The symbol $f'(x)$ denotes the derivative of $f$ with respect to $x$. Higher der
 
 The symbol $\\frac{dy}{dx}$ denotes the derivative of $y$ with respect to $x$. It suggests a ratio of infinitesimal changes—and while the derivative is defined as a limit rather than a literal fraction, this notation behaves like a fraction in the [chain rule](!/calculus/derivatives/rules) and in [differentials](!/calculus/derivatives/differentials). Higher derivatives follow the pattern $\\frac{d^2y}{dx^2}$, $\\frac{d^3y}{dx^3}$. The operator form $\\frac{d}{dx}[f(x)]$ emphasizes differentiation as an operation applied to an expression.
 
+@academic[pitfall,aside:true,width:35%:Squaring the first derivative
+Reading $\\frac{d^2y}{dx^2}$ as $\\left(\\frac{dy}{dx}\\right)^2$ turns $y = x^3$ into $(3x^2)^2 = 9x^4$. Differentiating twice gives $\\frac{d^2y}{dx^2} = 6x$.
+[Read more](!#pitfalls)]@
+
+The symbol $\\frac{d^2y}{dx^2}$ is shorthand for $\\frac{d}{dx}\\left(\\frac{dy}{dx}\\right)$: the operator $\\frac{d}{dx}$ is applied to $y$, and then applied again to the result. The upper $2$ is attached to $d$ and counts the applications; the lower $2$ is attached to $dx$ and records that both are taken with respect to $x$.
+
 ## Euler Notation
 
 The operator $D$ or $D_x$ applied to a function: $Df(x)$ means the same as $f'(x)$. Higher orders use powers of the operator: $D^2 f$, $D^n f$. This notation appears in differential equations and operator theory.
@@ -296,6 +326,12 @@ The table below collects the four systems side by side with their first-derivati
     content: `
 The sign of the derivative at a point reveals whether the function is increasing or decreasing there. Where $f'(x) > 0$, the function rises; where $f'(x) < 0$, the function falls. Points where $f'(x) = 0$ or $f'(x)$ is undefined are critical points—candidates for local maxima, minima, or neither.
 
+@academic[pitfall,aside:true,width:35%:Calling every critical point an extremum
+Treating $f'(c) = 0$ as proof of a peak or valley makes $x = 0$ an extremum of $f(x) = x^3$, since $f'(0) = 0$. But $f'(x) = 3x^2$ is positive on both sides, so $x^3$ keeps rising and $x = 0$ is neither.
+[Read more](!#pitfalls)]@
+
+For $f(x) = x^3 - 3x$, the derivative $f'(x) = 3x^2 - 3$ is zero at $x = -1$ and $x = 1$. It is positive to the left of $-1$, negative between the two points and positive to the right of $1$. The graph rises, falls and rises again, so $x = -1$ is a local maximum and $x = 1$ a local minimum.
+
 The second derivative adds another layer. Where $f''(x) > 0$, the graph is concave up; where $f''(x) < 0$, the graph is concave down. Points where concavity changes are inflection points. Together, the first and second derivatives determine the complete shape of a curve: its direction, its turning points, and its bending.
 
 [Derivative graph analysis](!/calculus/derivatives/graph-analysis) combines these tools into a systematic framework for understanding function behavior, from tangent line equations to optimization and curve sketching.
@@ -309,7 +345,7 @@ The second derivative adds another layer. Where $f''(x) > 0$, the graph is conca
     content: `
 The definition $f'(a)$ produces a single number—the slope at one point. Replacing $a$ with a variable $x$ yields $f'(x)$, a function that assigns a slope to every point in its domain. The derivative function has its own graph, its own properties, and can itself be differentiated.
 
-The graph of $f'$ encodes the behavior of $f$: where $f$ climbs, $f'$ is positive; where $f$ descends, $f'$ is negative; where $f$ has an extremum, $f'$ crosses zero. Reading one graph from the other—and reversing the process—is a core skill.
+The graph of $f'$ encodes the behavior of $f$: where $f$ climbs, $f'$ is positive or zero; where $f$ descends, $f'$ is negative or zero; where $f$ has an extremum, $f'$ crosses zero or is undefined. Reading one graph from the other—and reversing the process—is a core skill.
 
 [The derivative as a function](!/calculus/derivatives/function) develops this perspective, including the domain of $f'$, the relationship between the graphs of $f$ and $f'$, and the interpretation of $f'$ as a standalone object.
 `,
@@ -336,6 +372,12 @@ The converse is false: $f(x) = |x|$ is continuous at $x = 0$ but not differentia
     title: `Differentiation Rules`,
     content: `
 Computing derivatives from the limit definition is tedious for all but the simplest functions. Differentiation rules replace the limit with algebraic procedures: the power rule handles $x^n$, the product rule handles $f \\cdot g$, the quotient rule handles $f/g$, and the chain rule handles compositions $f(g(x))$.
+
+@academic[pitfall,aside:true,width:35%:Multiplying the derivatives
+Writing $(fg)' = f'g'$ turns $\\frac{d}{dx}[x^2 \\cdot x^3]$ into $2x \\cdot 3x^2 = 6x^3$. The product rule $(fg)' = f'g + fg'$ gives $2x \\cdot x^3 + x^2 \\cdot 3x^2 = 5x^4$, the derivative of $x^5$.
+[Read more](!#pitfalls)]@
+
+A function built from simpler pieces is differentiated from the outside in: the rule for the outermost operation is applied first, and each piece it produces is then differentiated by another rule or by a formula from the list of common derivatives. For $x^2 \\sin x$ that means the product rule once, followed by the derivatives of $x^2$ and $\\sin x$.
 
 Beyond computational rules, the Mean Value Theorem guarantees that every differentiable function achieves its average rate of change at some interior point. Rolle's Theorem and L'Hôpital's rule follow as consequences, connecting derivatives to existence results and limit evaluation.
 
@@ -409,6 +451,63 @@ The differential $dy$ approximates the actual change $\\Delta y = f(x + dx) - f(
     before: ``,
     after: ``,
     link: '/calculus/derivatives/differentials',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `
+Four mistakes come up again and again when derivatives are first computed and read. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Squaring a sum term by term**
+
+Working from the definition, $f(a + h)$ has to be written out before $f(a)$ is subtracted. For $f(x) = x^2$ at $a = 3$, the square $(3 + h)^2$ is written as $3^2 + h^2$.
+
+Wrong working: $\\dfrac{(3 + h)^2 - 9}{h} = \\dfrac{9 + h^2 - 9}{h} = h$, which tends to $0$, so $f'(3) = 0$.
+
+Right working: $(3 + h)^2 = 9 + 6h + h^2$, so $\\dfrac{(3 + h)^2 - 9}{h} = \\dfrac{6h + h^2}{h} = 6 + h$, which tends to $6$. So $f'(3) = 6$.
+
+Why it happens: a power does spread over a product, $(3h)^2 = 9h^2$, and the same move looks just as natural over a sum, where it fails: the cross term $2 \\cdot 3 \\cdot h$ is lost.
+
+How to check: put $h = 1$ into both forms. The original gives $\\dfrac{16 - 9}{1} = 7$, the slope of the secant from $x = 3$ to $x = 4$; the wrong form gives $1$. A derivative of $0$ would also mean a level tangent at $(3, 9)$, where the parabola is clearly rising.
+
+**Squaring the first derivative**
+
+The second derivative $\\dfrac{d^2y}{dx^2}$ is read as the square of the first derivative, because the $2$s look like exponents of a fraction.
+
+Wrong working: for $y = x^3$, $\\dfrac{dy}{dx} = 3x^2$, so $\\dfrac{d^2y}{dx^2} = (3x^2)^2 = 9x^4$.
+
+Right working: differentiate the first derivative. $\\dfrac{d^2y}{dx^2} = \\dfrac{d}{dx}\\left(3x^2\\right) = 6x$.
+
+Why it happens: Leibniz notation is built to behave like a fraction in the chain rule and in differentials, so the superscripts are read as powers of that fraction as well.
+
+How to check: each differentiation lowers the degree of a polynomial by one, so the second derivative of a cubic has degree $1$. The result $9x^4$ has degree $4$; at $x = 1$ it gives $9$, while $6x$ gives $6$.
+
+**Calling every critical point an extremum**
+
+A critical point is found by solving $f'(x) = 0$, and it is declared a local maximum or minimum without looking at the sign of $f'$ on either side.
+
+Wrong working: for $f(x) = x^3$, $f'(x) = 3x^2$ and $f'(0) = 0$, so $x = 0$ is a local extremum.
+
+Right working: $f'(x) = 3x^2 > 0$ for every $x \\neq 0$, so the derivative is positive on both sides of $0$ and does not change sign. The function rises through $x = 0$, which is neither a maximum nor a minimum.
+
+Why it happens: at every peak and valley of a smooth graph the tangent is level, and the statement is read backwards, as if every level tangent were a peak or a valley.
+
+How to check: compare values on either side. $f(-0.1) = -0.001$, $f(0) = 0$ and $f(0.1) = 0.001$, so $f(0)$ is neither the largest nor the smallest of the three.
+
+**Multiplying the derivatives**
+
+The derivative of a product is taken as the product of the derivatives of its factors.
+
+Wrong working: $\\dfrac{d}{dx}[x^2 \\cdot x^3] = 2x \\cdot 3x^2 = 6x^3$.
+
+Right working: the product rule $(fg)' = f'g + fg'$ gives $2x \\cdot x^3 + x^2 \\cdot 3x^2 = 2x^4 + 3x^4 = 5x^4$.
+
+Why it happens: the sum rule $(f + g)' = f' + g'$ works piece by piece, and a product is expected to behave the same way.
+
+How to check: simplify first when possible. $x^2 \\cdot x^3 = x^5$, and the power rule gives $5x^4$, not $6x^3$.
+`,
+    before: ``,
+    after: ``,
+    link: '',
   },
   roadmap: {
     title: `Roadmap of the Derivatives Subtree`,
@@ -538,6 +637,33 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  // Concept introduction figures (section 1), one running instance: x² at 3.
+  const fpCiLine = { kind: 'pieces', svgTitle: 'A straight line has the same slope 2 between any two of its points', xRange: [0, 5], yRange: [-1, 9],
+    pieces: [
+      { fn: (x) => 2 * x - 1, from: 0, to: 5, ends: [null, null], color: 'f', label: { text: 'y = 2x − 1', x: 3.6, y: 6.2, pos: 'nw' } },
+    ],
+    points: [{ x: 1, y: 1 }, { x: 2, y: 3 }, { x: 3, y: 5 }, { x: 4.5, y: 8 }],
+    notes: [{ x: 2.6, y: 2.6, text: '1 → 2: rise 2, run 1', pos: 'e' }, { x: 2.6, y: 1.8, text: '3 → 4.5: rise 3, run 1.5', pos: 'e' },
+      { x: 2.6, y: 1.0, text: 'slope 2 both times', pos: 'e', color: 'r' }],
+    caption: 'On a line, any two points give the same slope' };
+  const fpCiSecants = { kind: 'pieces', svgTitle: 'Secants of y = x^2 from (3, 9) have different slopes', xRange: [1, 4.5], yRange: [0, 18], yStep: 2,
+    pieces: [
+      { fn: (x) => x * x, from: 1, to: 4.25, ends: [null, null], color: 'f', label: { text: 'y = x²', x: 1.1, y: 3, pos: 'e' } },
+      { fn: (x) => 7 * x - 12, from: 4.2, to: 4.201, ends: [null, null], color: 'g', ghost: [[2.2, 4.4]] },
+      { fn: (x) => 5 * x - 6, from: 4.2, to: 4.201, ends: [null, null], color: 'g', ghost: [[1.6, 4.4]] },
+      { fn: (x) => 6 * x - 9, from: 2, to: 4.4, ends: [null, null], color: 'g' },
+    ],
+    points: [{ x: 3, y: 9 }, { x: 4, y: 16 }, { x: 2, y: 4 }],
+    notes: [{ x: 3.15, y: 3.4, text: 'to x = 4: slope 7', pos: 'e' }, { x: 3.15, y: 2.2, text: 'to x = 2: slope 5', pos: 'e' },
+      { x: 3.15, y: 1, text: 'tangent: slope 6', pos: 'e', color: 'r' }],
+    caption: 'Two points on a curve: the slope depends on which two' };
+
+  const conceptIntroFigures = {
+    line: renderFunctionPlotV4(fpCiLine),
+    secants: renderFunctionPlotV4(fpCiSecants),
+    secantTable: ciSecantTable,
+  };
+
   const demoUnits = {
     secant: demoUnitFrame({
       svg: functionDerivativeLocalDiagrams.asc,
@@ -562,9 +688,42 @@ const schemas = {
     }),
   };
 
+  const derivRoadmapOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Nine pages in four groups',
+    preface: 'The derivatives pages split into the concept, the computation, the catalogue of results, and the extensions.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Where to go next',
+    conclusion: 'Start with the concept pages, learn the rules and techniques, keep the catalogues as reference, and move to the extensions last.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Derivatives', def: '9 pages', children: [
+        { id: 'concept', name: 'Concept', children: [
+          { id: 'ga', name: '[Graph analysis](!/calculus/derivatives/graph-analysis)', def: "signs of f′ and f″ control the shape" },
+          { id: 'fn', name: '[Derivative as a function](!/calculus/derivatives/function)', def: "f′(x) as its own function" },
+          { id: 'dif', name: '[Differentiability](!/calculus/derivatives/differentiability)', def: 'when the derivative exists or fails' },
+        ] },
+        { id: 'comp', name: 'Computation', children: [
+          { id: 'rules', name: '[Rules](!/calculus/derivatives/rules)', def: 'algebraic procedures replacing the limit' },
+          { id: 'tech', name: '[Techniques](!/calculus/derivatives/techniques)', def: 'methods for non-explicit forms' },
+        ] },
+        { id: 'cat', name: 'Catalogue', children: [
+          { id: 'common', name: '[Common](!/calculus/derivatives/common)', def: 'standard function derivatives' },
+          { id: 'special', name: '[Special](!/calculus/derivatives/special)', def: 'families beyond the standard set' },
+        ] },
+        { id: 'ext', name: 'Extension', children: [
+          { id: 'higher', name: '[Higher-order](!/calculus/derivatives/higher-order)', def: 'repeated differentiation' },
+          { id: 'diffs', name: '[Differentials](!/calculus/derivatives/differentials)', example: "dy = f′(x)·dx" },
+        ] },
+      ] },
+    ],
+  };
+
    return {
   props: {
+    derivRoadmapOutline,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -583,17 +742,83 @@ const schemas = {
    }
 
 
-   export default function DerivativesPage({
+   export default function DerivativesPage({derivRoadmapOutline, 
      seoData,
      sectionsContent,
      introContent,
      obj2Table,
      roadmapTable,
      faqQuestions,
-     schemas, demoUnits
+     schemas, demoUnits, conceptIntroFigures
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'line',
+        lead: `You can already find the slope of a straight line.`,
+        content: `Take any two points on it, divide the rise by the run, and the answer is the slope. For a straight line it does not matter which two points you pick: $y = 2x - 1$ rises $2$ for every $1$ across, between any pair.`,
+        visual: ciSvg('line'),
+        caption: `Two different pairs of points on $y = 2x - 1$ — from $(1, 1)$ to $(2, 3)$, and from $(3, 5)$ to $(4.5, 8)$ — give the same slope $2$.`,
+      },
+      {
+        id: 'wall',
+        kind: 'instance',
+        lead: `On a curve, the slope at one point cannot be found that way.`,
+        content: [
+          `On $y = x^2$, ask how steep the curve is at $x = 3$, where $f(3) = 9$. Rise over run needs a second point, and the answer depends on which one.`,
+          `@academic[formula_callout:The Difference Quotient and Its Limit
+$$\\frac{f(a + h) - f(a)}{h}$$]@`,
+          `Geometrically, this is the slope of the secant line connecting $(a, f(a))$ and $(a + h, f(a + h))$. As $h \\to 0$, the secant line rotates toward the tangent line at $x = a$.`,
+          ciTable('secantTable'),
+          `Every second point gives a different slope — $7$, $6.5$, $6.1$ — so no single pair answers the question. But as the second point closes in on $3$ from either side, the slopes close in on one number: $6$.`,
+        ],
+        visual: ciSvg('secants'),
+        caption: `The dashed secants from $(3, 9)$ to $x = 4$ and $x = 2$ have slopes $7$ and $5$. The solid line touching the curve at $(3, 9)$ has slope $6$ — the value the table's slopes approach.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [derivative](!/calculus/definitions#derivative) of $f$ at $a$ is the limit of the difference quotient — the slope of the curve at that single point:`,
+        formula: `@academic[formula_callout:The Difference Quotient and Its Limit
+$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
+        footer: `For $f(x) = x^2$ at $a = 3$: $\\frac{(3 + h)^2 - 9}{h} = 6 + h$, so $f'(3) = 6$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A derivative at a point is a number: the slope of the tangent line there.`,
+        content: `$f'(3) = 6$ is one number, the slope of the line that touches $y = x^2$ at $(3, 9)$. Doing the same at every point gives a new function, $f'(x) = 2x$, which is what "the derivative of $f$" usually means.`,
+      },
+      {
+        id: 'survives',
+        lead: `Rise over run still does all the work.`,
+        content: [
+          `The derivative is not a new kind of computation — it is the old slope, taken between two points that close in on each other. For a straight line nothing changes: every secant is the line itself, so the derivative of $2x - 1$ is $2$ at every point. The same quotient can be written with the second point called $x$ instead of $a + h$:`,
+          `@academic[formula_callout:The Difference Quotient and Its Limit
+$$f'(a) = \\lim_{x \\to a} \\frac{f(x) - f(a)}{x - a}$$]@`,
+          `Both forms define the same quantity. The first emphasizes the increment $h$; the second emphasizes the point $x$ approaching $a$.`,
+          <div key={'unit-secant'} dangerouslySetInnerHTML={{ __html: demoUnits.secant }} />,
+          `The derivative is the number this slope approaches, and every later rule is a shortcut for computing it.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        tone: 'break',
+        lead: `What you lose: the limit may not exist.`,
+        content: `A straight line always has a slope; a curve does not always have one at every point. When this limit exists, $f'(a)$ equals the slope of the tangent line to the graph of $f$ at the point $(a, f(a))$. When the limit does not exist—due to a corner, cusp, vertical tangent, or discontinuity—the derivative is undefined at that point. Which points fail, and why, is the subject of [differentiability](!/calculus/derivatives/differentiability).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers derivative notation, what the derivative says about a graph, the differentiation rules that replace the limit with shortcuts, derivatives of common functions, and the main applications.`,
+      },
+    ],
+  }
 
   const genericSections=[
     // {
@@ -609,9 +834,12 @@ const schemas = {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-secant'} dangerouslySetInnerHTML={{ __html: demoUnits.secant }} />,
-          `The derivative is the number this slope approaches, and every later rule is a shortcut for computing it.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@academic[pitfall,aside:true,width:35%:Squaring a sum term by term
+Writing $(3 + h)^2$ as $9 + h^2$ turns the difference quotient of $x^2$ at $3$ into $\\frac{h^2}{h} = h$, and the limit into $0$. The full square $9 + 6h + h^2$ gives $6 + h$, so $f'(3) = 6$.
+[Read more](!#pitfalls)]@
+
+Working from the definition always takes the same three steps: write out $f(a + h)$, subtract $f(a)$, and divide by $h$. The subtraction removes every term that does not contain $h$, which is what makes the division possible. For $f(x) = x^2$ at a general point $a$, the three steps give $\\frac{2ah + h^2}{h} = 2a + h$, and the limit is $2a$.`,
         ]
     },
     {
@@ -700,12 +928,28 @@ const schemas = {
         ]
     },
     {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
+        ]
+    },
+    {
         id:'roadmap',
         title:sectionsContent.roadmap.title,
         link:sectionsContent.roadmap.link,
         content:[
           sectionsContent.roadmap.content,
           <div key={'roadmap-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: roadmapTable}}/>,
+          <DiagramFrame
+            key={'roadmap-diagram'}
+            id="derivatives-roadmap-outline"
+            title="The derivatives pages"
+            source="/calculus/derivatives"
+          >
+            <TaxonomyOutline data={derivRoadmapOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

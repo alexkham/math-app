@@ -174,43 +174,43 @@ const summaryTable = `
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">lim<sub>x → ±∞</sub> f(x) = L &nbsp;(finite)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">end behavior settles to a single value</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal asymptote y = L in that direction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj3</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">3</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">lim<sub>x → ±∞</sub> f(x) = ±∞</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function grows without bound in that direction</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no horizontal asymptote there</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">5</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">lim<sub>x → a</sub> f(x) = ±∞ &nbsp;(one or both sides)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">output blows up near a finite point a</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertical asymptote x = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj8, obj9</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">8, 9</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational p/q, &nbsp;deg p &lt; deg q</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">denominator dominates</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal asymptote y = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj4, obj5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">4, 5</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational p/q, &nbsp;deg p = deg q</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">leading-degree terms balance</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal asymptote y = (leading p) / (leading q)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj4, obj5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">4, 5</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational p/q, &nbsp;deg p &gt; deg q</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerator dominates</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no horizontal asymptote (function escapes to ±∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">5</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Mixed exponential / logarithmic</td>
       <td style="padding: 12px 15px; color: #34495e;">apply the <a href="/calculus/limits/special" style="${linkStyle}">growth-rate hierarchy</a> (log ≪ poly ≪ exp)</td>
-      <td style="padding: 12px 15px; color: #34495e;">depends on which family dominates — see obj11, obj12 above</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">obj6, obj11, obj12</td>
+      <td style="padding: 12px 15px; color: #34495e;">depends on which family dominates — see sections 11 and 12 above</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">6, 11, 12</td>
     </tr>
   </tbody>
 </table>
@@ -297,7 +297,7 @@ $$\\lim_{x \\to \\infty} f(x) = L \\;\\text{ or }\\; \\lim_{x \\to -\\infty} f(x
 A function can have:
 
 - No horizontal asymptote (if the limit is infinite or doesn't exist)
-- One horizontal asymptote (same limit in both directions)
+- One horizontal asymptote (the same finite limit in both directions, or a finite limit in only one direction, as with $e^x$ as $x \\to -\\infty$)
 - Two horizontal asymptotes (different finite limits as $x \\to \\infty$ and $x \\to -\\infty$)
 
 For example:
@@ -327,7 +327,13 @@ Divide by $x^2$:
 @academic[formula_callout:Evaluating Limits at Infinity — Rational Functions
 $$= \\lim_{x \\to \\infty} \\frac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}} = \\frac{3 + 0 - 0}{2 - 0} = \\frac{3}{2}$$]@
 
+@academic[pitfall,aside:true,width:35%:Setting infinity over infinity to 1
+Putting $x = \\infty$ into $\\frac{3x^2 + 5x - 1}{2x^2 - 7}$ gives $\\frac{\\infty}{\\infty}$, and cancelling that to $1$ treats $\\infty$ as a number. At $x = 1000$ the quotient is already about $1.50$; dividing by $x^2$ gives the limit $\\frac{3}{2}$.
+[Read more](!#pitfalls)]@
+
 Terms with $x$ in the denominator vanish as $x \\to \\infty$. Only the leading coefficients survive.
+
+Dividing by $x^2$ changes the form of the quotient and not its value: for every $x \\neq 0$, the numerator and the denominator are divided by the same nonzero number. After the division each part has a finite limit, $3$ on top and $2$ below, so the limit of the quotient is the quotient of those two limits.
 `,
     before: ``,
     after: ``,
@@ -354,6 +360,12 @@ $$\\lim_{x \\to \\infty} \\frac{4x^2 + x}{2x^2 + 5} = \\frac{4}{2} = 2$$]@
 
 @academic[formula_callout:Dominant Term Analysis
 $$\\lim_{x \\to \\infty} \\frac{x^3}{x + 1} = \\infty$$]@
+
+@academic[pitfall,aside:true,width:35%:Taking the first coefficients instead of the leading ones
+Reading $\\frac{7 + 4x^2}{x + 2x^2}$ from the left takes $7$ and $1$ as the coefficients and gives the limit $7$. The leading terms are $4x^2$ and $2x^2$, so the limit is $\\frac{4}{2} = 2$.
+[Read more](!#pitfalls)]@
+
+In all three cases the comparison is between the leading terms: the term with the highest power of $x$ in the numerator and the one in the denominator. The degrees $m$ and $n$ are the exponents of those two terms, and when $m = n$ their coefficients give the limit. All the other terms only affect how quickly the quotient settles down or grows, not where it goes.
 `,
     before: ``,
     after: ``,
@@ -430,7 +442,13 @@ then the line $x = a$ is a vertical asymptote. The graph shoots up or down near 
 
 Vertical asymptotes typically occur where the denominator of a rational function equals zero while the numerator does not.
 
+@academic[pitfall,aside:true,width:35%:Calling every zero of the denominator an asymptote
+Placing an asymptote at $x = 2$ for $\\frac{x^2 - 4}{x - 2}$ because the denominator vanishes there ignores that the numerator vanishes too. The function equals $x + 2$ for $x \\neq 2$, so the limit is $4$: a hole, not an asymptote.
+[Read more](!#pitfalls)]@
+
 For $f(x) = \\dfrac{1}{x - 2}$, the denominator vanishes at $x = 2$. The line $x = 2$ is a vertical asymptote.
+
+Here the numerator is the constant $1$, so near $x = 2$ the quotient is $1$ divided by a number close to $0$. At $x = 2.01$ it equals $100$ and at $x = 1.99$ it equals $-100$. Moving closer to $2$ makes the values grow without bound in size on both sides, which is what puts the asymptote at $x = 2$.
 `,
     before: ``,
     after: ``,
@@ -453,6 +471,12 @@ For $x$ slightly less than $2$: $x - 2 < 0$ (small negative), so $\\dfrac{1}{x-2
 
 @academic[formula_callout:Sign Analysis for Infinite Limits
 $$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$]@
+
+@academic[pitfall,aside:true,width:35%:Ignoring the sign of the numerator
+Reading only the small positive denominator in $\\lim_{x \\to 2^+} \\frac{x - 5}{x - 2}$ gives $+\\infty$. The numerator tends to $-3$, so the quotient is negative near $2$ and the limit is $-\\infty$.
+[Read more](!#pitfalls)]@
+
+The same reading works for any quotient whose numerator tends to a nonzero number while the denominator tends to $0$. Near the point the numerator stays close to its limit, so its sign does not change, while the denominator is a small number whose sign depends on the side of approach. The size of the quotient grows without bound, and the signs of the two parts decide its direction, as in ordinary division.
 `,
     before: ``,
     after: ``,
@@ -580,6 +604,63 @@ The one-sided notation is essential: $\\ln x$ is undefined for $x \\leq 0$, so n
     title: `Summary: Master Diagnostic for Limits and Asymptotes`,
     content: `
 Every type of infinity behavior on this page maps cleanly to a graph feature: finite limits at ±∞ create horizontal asymptotes, infinite limits at finite a create vertical asymptotes, and the relative degree of a rational function&apos;s numerator and denominator determines exactly which case applies. The table below collects the diagnostic patterns in one master reference — given an observed limit form, it points to what that form means and what asymptote (if any) it produces.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj14: {
+    title: `Common Pitfalls`,
+    content: `
+Four mistakes cause most wrong answers with limits at infinity and infinite limits. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Setting infinity over infinity to 1**
+
+As $x \\to \\infty$ the numerator and the denominator both grow without bound, and $\\dfrac{\\infty}{\\infty}$ is cancelled to $1$ as if $\\infty$ were a number.
+
+Wrong working: in $\\lim_{x \\to \\infty} \\dfrac{3x^2 + 5x - 1}{2x^2 - 7}$ both parts tend to $\\infty$, so the limit is $\\dfrac{\\infty}{\\infty} = 1$.
+
+Right working: divide every term by $x^2$. The expression becomes $\\dfrac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$, which tends to $\\dfrac{3 + 0 - 0}{2 - 0} = \\dfrac{3}{2}$.
+
+Why it happens: a number divided by itself is $1$, and $\\infty$ is handled like a number. But the two parts can grow at different rates: $\\dfrac{x^2}{x}$ also has the form $\\dfrac{\\infty}{\\infty}$ and tends to $\\infty$, while $\\dfrac{x}{x^2}$ tends to $0$.
+
+How to check: evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{3004999}{1999993} \\approx 1.5025$, close to $1.5$ and not to $1$.
+
+**Taking the first coefficients instead of the leading ones**
+
+When a polynomial is not written in descending powers, its first coefficient is not its leading coefficient. The ratio of the first coefficients is then read off as the limit, and it has nothing to do with the limit.
+
+Wrong working: in $\\lim_{x \\to \\infty} \\dfrac{7 + 4x^2}{x + 2x^2}$ the first coefficients are $7$ and $1$, so the limit is $\\dfrac{7}{1} = 7$.
+
+Right working: the leading terms are $4x^2$ and $2x^2$, so $m = n = 2$. Dividing every term by $x^2$ gives $\\dfrac{\\frac{7}{x^2} + 4}{\\frac{1}{x} + 2}$, which tends to $\\dfrac{0 + 4}{0 + 2} = 2$.
+
+Why it happens: polynomials are usually written with the highest power first, so "leading" and "first" are taken to mean the same thing.
+
+How to check: rewrite both polynomials in descending powers before reading anything off, or evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{4000007}{2001000} \\approx 1.999$, close to $2$ and far from $7$.
+
+**Calling every zero of the denominator an asymptote**
+
+A vertical asymptote is placed at every point where the denominator is $0$, without a check of the numerator there. If the numerator is also $0$, the form is $\\dfrac{0}{0}$, and the graph may have only a hole.
+
+Wrong working: the denominator of $\\dfrac{x^2 - 4}{x - 2}$ vanishes at $x = 2$, so $x = 2$ is a vertical asymptote.
+
+Right working: the numerator is also $0$ at $x = 2$. Factoring gives $\\dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$ for $x \\neq 2$, so $\\lim_{x \\to 2} \\dfrac{x^2 - 4}{x - 2} = 4$. The limit is finite: the graph is the line $y = x + 2$ with a hole at $(2, 4)$, and there is no vertical asymptote.
+
+Why it happens: in the simplest examples, such as $\\dfrac{1}{x - 2}$, the numerator is a constant, and the zero of the denominator is all there is to check.
+
+How to check: substitute the zero of the denominator into the numerator. A nonzero value means an asymptote; a zero means the limit has to be computed first. Here, at $x = 2.01$ the quotient is $\\dfrac{2.01^2 - 4}{0.01} = 4.01$, which stays bounded.
+
+**Ignoring the sign of the numerator**
+
+In a one-sided infinite limit the sign is read from the denominator alone: a small positive denominator is taken to mean $+\\infty$, whatever the numerator does.
+
+Wrong working: as $x \\to 2^+$, $x - 2$ is a small positive number, so $\\lim_{x \\to 2^+} \\dfrac{x - 5}{x - 2} = +\\infty$.
+
+Right working: the numerator tends to $2 - 5 = -3$, which is negative. A negative number divided by a small positive number is a large negative number, so $\\lim_{x \\to 2^+} \\dfrac{x - 5}{x - 2} = -\\infty$.
+
+Why it happens: in the standard example $\\dfrac{1}{x - 2}$ the numerator is $1$, so the sign of the quotient is the sign of the denominator, and that shortcut is carried over to quotients where it no longer holds.
+
+How to check: evaluate just to the right of the point. At $x = 2.01$ the quotient is $\\dfrac{-2.99}{0.01} = -299$.
 `,
     before: ``,
     after: ``,
@@ -944,6 +1025,14 @@ export default function InfinityPage({growthRateLevels, seoData, sectionsContent
           sectionsContent.obj13.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

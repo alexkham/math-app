@@ -1133,6 +1133,14 @@ In a contingency table, marginals appear naturally as the row totals and column 
 • Column totals give the probabilities for the values of the other.  
 They represent the standalone behaviour of each variable, separated from the combinations.
 
+@academic[pitfall,aside:true,width:35%:Reading one cell as the marginal
+Taking $P(X = x_1)$ from the single cell $P(x_1, y_1) = 0.20$ leaves out the other column. The marginal is the row total, $0.20 + 0.10 = 0.30$.
+[Read more](!#mistakes)]@
+
+Suppose the first row of a table holds $P(x_1, y_1) = 0.20$ and $P(x_1, y_2) = 0.10$. Each of these cells pairs $x_1$ with one particular value of $Y$, and together the cells of the row list every way in which $x_1$ can occur.
+
+The question $P(X = x_1)$ asks about $x_1$ alone, whatever value $Y$ happens to take. It does not single out any one column of the table.
+
 **From a density (continuous variables).**  
 For continuous variables, marginal probabilities (densities) are obtained by integrating the joint density over the other variable.  
 This gathers all the mass that belongs to a specific value or range of one variable.
@@ -1158,6 +1166,10 @@ The entire table follows this pattern — no row or column deviates from it.
 
 **How it appears with densities (continuous case).**  
 For continuous variables, independence means the joint density breaks into the product of the two marginal densities. The density surface has no tilt, stretch, or pattern linking the variables.
+
+@academic[pitfall,aside:true,width:35%:Assuming independence by default
+Multiplying the marginals for two cards drawn without replacement gives $P(\\text{both aces}) = \\frac{1}{13} \\cdot \\frac{1}{13} = \\frac{1}{169}$. The draws are dependent, and the joint value is $\\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{1}{221}$.
+[Read more](!#mistakes)]@
 
 **What independence means in practice.**  
 Independence says the variables do not influence each other, do not track each other, and do not create patterns together. Most real-world variables are not independent — dependence is the norm, independence is the special case.
@@ -1190,6 +1202,14 @@ Independence is the cleanest possible relationship between variables: completely
 • In a density: joint density ÷ marginal density  
 • The chain rule comes from this relationship and breaks joint probabilities into conditional pieces  
 • Bayes' theorem is a direct consequence of joint and marginal probabilities working together
+
+@academic[pitfall,aside:true,width:35%:Confusing joint with conditional
+Reporting the cell $P(x_1, y_1) = 0.20$ as $P(X = x_1 \\mid Y = y_1)$ skips the division. With the column total $P(Y = y_1) = 0.50$, the conditional is $0.20 / 0.50 = 0.40$.
+[Read more](!#mistakes)]@
+
+The joint value and the conditional value answer different questions about the same cell. The joint $P(x_1, y_1)$ measures the cell against the whole table, whose total is $1$.
+
+The conditional $P(X = x_1 \\mid Y = y_1)$ measures the same cell against its own column only, since conditioning on $Y = y_1$ removes every other column from view. A cell holding $0.20$ is a small share of the whole table but can be a large share of a column whose total is small.
 `,
       before:``,
       after:``,
@@ -1243,6 +1263,25 @@ The pitfalls above can be lined up with what makes each one a misreading and wha
       before:``,
       after:``,
   
+    },
+    mistakesEntries:{
+      content:`
+One further mistake is marked where it happens in **Marginal Probabilities** above; here it is worked through in full.
+
+**Reading one cell as the marginal**
+
+A table gives the joint probabilities, and the probability of one value of $X$ on its own is needed. Instead of adding the cells across the row of that value, a single cell of the row is taken as the answer.
+
+Wrong working: in a table whose first row holds $P(x_1, y_1) = 0.20$ and $P(x_1, y_2) = 0.10$,
+$$P(X = x_1) = P(x_1, y_1) = 0.20$$
+
+Right working: $x_1$ can occur together with $y_1$ or with $y_2$, so both cells count.
+$$P(X = x_1) = P(x_1, y_1) + P(x_1, y_2) = 0.20 + 0.10 = 0.30$$
+
+Why it happens: the cell sits in the row labelled $x_1$, so it looks like the number that belongs to $x_1$. But every cell also carries a value of $Y$; only the row total is free of it.
+
+How to check: the marginals of one variable must add up to $1$. With the second row $P(x_2, y_1) = 0.30$ and $P(x_2, y_2) = 0.40$, the single cells of the first column give $0.20 + 0.30 = 0.50$, while the row totals give $0.30 + 0.70 = 1$.
+`,
     },
     other:{
   
@@ -1476,6 +1515,7 @@ export default function JointProbabilityPage({
           sectionsContent.mistakes.content,
           <div key={'mistakes-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          sectionsContent.mistakesEntries.content,
         ]
     },
     {

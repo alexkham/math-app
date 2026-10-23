@@ -697,6 +697,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -940,6 +941,31 @@ export async function getStaticProps(){
     }
   }
 
+  // Concept introduction (section 1) — template A, definition last. Running
+  // instance: the conditional-probability tree tool's defaults, P(A) = 0.6,
+  // P(B|A) = 0.7, P(B|Aᶜ) = 0.3 (state unhighlighted). Old obj1 text (three
+  // paragraphs, no widgets) is kept in sectionsContent.obj1, unused, and reused
+  // verbatim.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciStagesTable = ciTableOpen(['stage', 'possible results', 'probabilities']) +
+    ciRow(['1: does A happen?', 'A, or not A', '0.6 and 0.4']) +
+    ciRow(['2, after A: does B happen?', 'B, or not B', '0.7 and 0.3'], { shade: true }) +
+    ciRow(['2, after not A: does B happen?', 'B, or not B', '0.3 and 0.7'], { last: true }) +
+    '</tbody></table>'
+  const ciPathsTable = ciTableOpen(['path', 'multiply along it', 'probability']) +
+    ciRow(['A, then B', '0.6 × 0.7', '0.42']) +
+    ciRow(['A, then not B', '0.6 × 0.3', '0.18'], { shade: true }) +
+    ciRow(['not A, then B', '0.4 × 0.3', '0.12']) +
+    ciRow(['not A, then not B', '0.4 × 0.7', '0.28'], { shade: true }) +
+    ciRow(['all four paths', '', '1.00'], { last: true, color: '#2563EB', cols: [2] }) +
+    '</tbody></table>'
+
   const sectionsContent={
 
     obj0: {
@@ -1007,6 +1033,10 @@ Each branch probability represents the likelihood of an outcome **given** that t
 
 The probability of a complete path is obtained by following the path from the root and combining the probabilities along its branches. This reflects how uncertainty accumulates across successive stages of the process.
 
+@academic[pitfall,aside:true,width:35%:Adding along a path
+Adding the branch values on a path, for two draws without replacement from 3 red and 2 blue balls, gives $P(R_1 \\cap R_2) = \\frac{3}{5} + \\frac{2}{4} = \\frac{11}{10}$, more than 1. Along a path the values multiply: $\\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{3}{10}$.
+[Read more](!#8)]@
+
 Tree diagrams therefore make it explicit how local, step-by-step probabilities combine to produce probabilities of full outcome sequences.
 `,
       before:``,
@@ -1020,6 +1050,10 @@ Tree diagrams therefore make it explicit how local, step-by-step probabilities c
 Tree diagrams make conditional probability explicit by construction.
 
 Each branch represents the probability of an outcome **given** that the process has reached a certain stage. Moving along a branch means accepting the condition imposed by all previous outcomes on the path.
+
+@academic[pitfall,aside:true,width:35%:Treating later branches as unconditional
+Copying $P(R_1) = \\frac{3}{5}$ onto the second-draw branch, for draws without replacement from 3 red and 2 blue balls, gives $P(R_1 \\cap R_2) = \\frac{3}{5} \\cdot \\frac{3}{5} = \\frac{9}{25}$. Once a red is gone the branch is $P(R_2 \\mid R_1) = \\frac{2}{4}$, so the path is $\\frac{3}{10}$.
+[Read more](!#8)]@
 
 Because of this, conditional probability is not an extra concept added to the diagram — it is already built into how the diagram is read. Probabilities are interpreted step by step, with each stage conditioning on what has happened before.
 
@@ -1042,7 +1076,7 @@ Each first-level branch of a tree represents a distinct case that cannot occur t
 When a later event can occur through several different branches, its overall probability is obtained by accounting for **all paths** that lead to it. Each path contributes according to the probability values along that path, and the total probability is obtained by combining these contributions.]@
 
 In this way, the law of total probability is not an abstract rule added afterward.
-It is read directly from the structure of the tree: split the process into disjoint cases, follow the branches, and combine their contributions — the multiply-along-a-branch, add-across-branches reading that [total probability notation](!/probability/total-probability#notation) writes as marks.
+It is read directly from the structure of the tree: split the process into disjoint cases, follow the branches, and combine their contributions — the multiply-along-a-path, add-across-paths reading that [total probability notation](!/probability/total-probability#notation) writes as marks.
 `,
       before:``,
       after:``,
@@ -1055,6 +1089,10 @@ It is read directly from the structure of the tree: split the process into disjo
 Tree diagrams provide a clear method for computing probabilities in multi-stage situations.
 
 Each complete path through the diagram represents one possible sequence of outcomes. The probability of such a sequence is obtained by following the path and combining the probability values along its branches.
+
+@academic[pitfall,aside:true,width:35%:Counting only one order
+Taking only the path red then blue for one ball of each colour, drawn from 3 red and 2 blue, gives $\\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{3}{10}$. Blue then red is a second path, so the probability is $\\frac{3}{10} + \\frac{2}{5} \\cdot \\frac{3}{4} = \\frac{3}{5}$.
+[Read more](!#8)]@
 
 When a question involves several possible sequences, the corresponding path probabilities are combined to obtain the final result. In this way, tree diagrams turn complex probability questions into structured path-based calculations.
 
@@ -1071,6 +1109,10 @@ This approach is especially helpful when outcomes depend on earlier stages and w
 Tree diagrams provide a natural visual setting for understanding Bayes' theorem.
 
 A tree can be read in one direction to represent how probabilities are assigned before any information is observed. Once an outcome at a later stage is known, the same tree can be used to reason backward, focusing only on the paths consistent with the observed information.
+
+@academic[pitfall,aside:true,width:35%:Reading the branch in the wrong direction
+Answering $P(R_1 \\mid B_2)$, first ball red given second blue, with the branch $P(B_2 \\mid R_1) = \\frac{2}{4}$ gives $\\frac{1}{2}$ (3 red, 2 blue, no replacement). The paths ending in blue carry $\\frac{3}{10}$ and $\\frac{1}{10}$, so $P(R_1 \\mid B_2) = \\frac{3}{10} \\div \\frac{4}{10} = \\frac{3}{4}$.
+[Read more](!#8)]@
 
 By restricting attention to these paths and renormalizing their probability values, the diagram shows how probabilities are updated in light of new evidence. This makes the logic of Bayes' theorem visible without relying solely on algebraic formulas.
 
@@ -1112,6 +1154,34 @@ Typical mistakes include:
 Another common error is reading the tree in the wrong direction after information is observed. Once an outcome at a later stage is known, only the paths consistent with that outcome should be considered.
 
 Being careful about what each branch represents, and what information is being conditioned on at each stage, prevents most misunderstandings.
+
+**Adding along a path**
+
+The probability of a complete path is found by adding the branch values on it instead of multiplying them. Each later branch is a fraction of what is left after the earlier ones, and adding ignores that.
+
+Wrong working: two balls are drawn without replacement from a bag of 3 red and 2 blue; the path is red, then red.
+$$P(R_1 \\cap R_2) = \\frac{3}{5} + \\frac{2}{4} = \\frac{11}{10}$$
+
+Right working: the branch values along the path multiply.
+$$P(R_1 \\cap R_2) = P(R_1) \\cdot P(R_2 \\mid R_1) = \\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{6}{20} = \\frac{3}{10}$$
+
+Why it happens: a tree uses two operations, multiplying along a path and adding across paths, and the two are easily swapped.
+
+How to check: a path probability is never larger than any branch value on it, since each step keeps only a fraction of what came before; $\\frac{11}{10}$ is not even a probability. The four paths of this tree must also add to $1$: $\\frac{3}{10} + \\frac{3}{10} + \\frac{3}{10} + \\frac{1}{10} = 1$.
+
+**Counting only one order**
+
+An event that can happen in more than one order is given the probability of a single path. "One red and one blue" is reached by red then blue and by blue then red, which are two different paths of the tree.
+
+Wrong working: from the same bag of 3 red and 2 blue, two draws without replacement,
+$$P(\\text{one of each}) = P(R_1 \\cap B_2) = \\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{3}{10}$$
+
+Right working: both paths are added.
+$$P(\\text{one of each}) = \\frac{3}{5} \\cdot \\frac{2}{4} + \\frac{2}{5} \\cdot \\frac{3}{4} = \\frac{3}{10} + \\frac{3}{10} = \\frac{3}{5}$$
+
+Why it happens: the question names colours, not an order, so only one path comes to mind; the tree records the draws in order and keeps the two orders apart.
+
+How to check: list every leaf that matches the event before computing. The three events "both red", "both blue" and "one of each" must add to $1$: $\\frac{3}{10} + \\frac{1}{10} + \\frac{3}{5} = 1$.
 `,
       before:``,
       after:``,
@@ -1217,6 +1287,12 @@ They help track how probabilities change as information accumulates and make com
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    tree: conditionalTreeDiagrams.unhighlighted,
+    stagesTable: ciStagesTable,
+    pathsTable: ciPathsTable,
+  };
+
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: conditionalTreeDiagrams.subtreeGivenA,
@@ -1244,6 +1320,7 @@ They help track how probabilities change as information accumulates and make com
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1270,10 +1347,70 @@ export default function TreeDiagramsPage({
   schemas,
   obj7Table,
   obj8Table,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Some random processes happen in stages, and the later stages depend on the earlier ones.`,
+        content: [
+          `A tree diagram represents a random process that unfolds in stages.`,
+          `Say event $A$ happens with probability $0.6$. Whether $B$ then happens depends on how the first stage went: probability $0.7$ after $A$, but only $0.3$ when $A$ did not happen. A flat list of outcomes would lose that dependence.`,
+          ciTable('stagesTable'),
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Drawing each stage as a fork, and multiplying along each route, gives every full outcome.`,
+        content: [
+          `Start with a fork for stage one, $A$ or not $A$. From each end, fork again for stage two with that stage's own probabilities. Each route from the start to an end is one complete outcome, and its probability is the product of the numbers along it.`,
+          ciTable('pathsTable'),
+          `$B$ happens on two of the paths, so $P(B) = 0.42 + 0.12 = 0.54$ — read straight off the routes.`,
+        ],
+        visual: ciSvg('tree'),
+        caption: `The same process as a tree: one fork for $A$, then a fork for $B$ under each branch, with each end labelled by its path probability. The same state is on the [conditional probability tree](!/probability/visual-tools/conditional-probability/tree-diagram).`,
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in those numbers was chosen: each route's probability was forced by the branches it follows.`,
+        content: [
+          `Each stage corresponds to a point where several outcomes are possible.  
+From that point, the process branches, and each branch represents one possible result of the next step.`,
+          `The second-stage numbers are conditional — $0.7$ is the chance of $B$ given that $A$ already happened — so multiplying them along a route is exactly the multiplication rule. And because each fork's numbers add to $1$, the four routes together add to $1$ as well.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [tree diagram](!/probability/definitions#probability_tree) is a picture of a random process in stages: each fork shows the possible results of one stage, each branch carries the probability of its result given the path so far, and each route from the start to an end is one complete outcome.`,
+        footer: `Here: two stages, four routes, probabilities $0.42$, $0.18$, $0.12$ and $0.28$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A tree diagram is a way of organizing a probability problem, not a new rule.`,
+        content: `A complete path from the start of the tree to a final node represents one full sequence of outcomes.  
+The tree does not define randomness on its own — it **organizes** an already defined situation so that sequential outcomes and their relationships are explicit.`,
+      },
+      {
+        id: 'caveat',
+        lead: `Forking and multiplying generalize; two things grow or go wrong as trees get bigger.`,
+        content: `What generalizes: any number of stages and any number of results per stage. What was particular: two stages with two results each, so only four routes. Each extra stage multiplies the number of routes, so trees for long processes get large quickly. And every branch after the first carries a conditional probability; copying a first-stage number onto a later branch, as if the stages were independent, is the commonest error — the [common mistakes](!/probability/tree-diagrams#8) section shows it.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the parts of a tree, how probability values are placed on it, its link to conditional probability and to the law of total probability, how to read paths, and the common mistakes.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1290,7 +1427,7 @@ export default function TreeDiagramsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

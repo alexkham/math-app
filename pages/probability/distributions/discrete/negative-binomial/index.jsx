@@ -1139,6 +1139,10 @@ Consider rolling a die until you get three 6's, where $r = 3$ and $p = \\frac{1}
 @academic[formula_callout:Expected Value (Mean)
 $$E[X] = \\frac{3}{1/6} = 18$$]@
 
+@academic[pitfall,aside:true,width:35%:Mixing up trials and failures
+Reading $E[X] = 18$ as the number of rolls that miss counts the three 6's among the failures. The misses before the third 6 average $18 - 3 = 15$, the mean $\\frac{r(1-p)}{p}$ of the failure count.
+[Read more](!#pitfalls)]@
+
 On average, you expect to roll the die 18 times before accumulating three 6's. This is exactly three times the expected wait for a single 6.
 
 To compute the expected value of a negative binomial distribution for your own parameters, step by step, use the [negative binomial expected value calculator](!/probability/calculators/expected-value/negative-binomial).
@@ -1202,6 +1206,10 @@ $$\\mathrm{Var}(X) = \\frac{3 \\times \\frac{5}{6}}{(\\frac{1}{6})^2} = \\frac{\
 
 @academic[formula_callout:Variance and Standard Deviation
 $$\\sigma = \\sqrt{90} \\approx 9.487$$]@
+
+@academic[pitfall,aside:true,width:35%:Multiplying the standard deviation by r
+Taking $3$ times the geometric standard deviation, $3\\sqrt{30} \\approx 16.4$ rolls, overstates the spread. Variances add, standard deviations do not: $\\sigma = \\sqrt{3 \\times 30} = \\sqrt{90} \\approx 9.5$.
+[Read more](!#pitfalls)]@
 
 The variance of 90 and standard deviation of about 9.5 indicate high variability around the expected 18 rolls. The actual number of rolls needed could vary substantially from this average.
   `,
@@ -1295,7 +1303,13 @@ Suppose you're flipping a coin until you get $r = 3$ heads, where the probabilit
 
 $P(X = 6) = \\binom{6-1}{3-1} (0.5)^3 (0.5)^{6-3} = \\binom{5}{2} (0.5)^3 (0.5)^3 = 10 \\cdot 0.125 \\cdot 0.125 = 0.15625$
 
+@academic[pitfall,aside:true,width:35%:Counting the successes anywhere
+Using the binomial $\\binom{6}{3}(0.5)^6 = 0.3125$ counts every way to get 3 heads in 6 flips, including those where the third head came earlier. With the sixth flip fixed as the third head, $P(X = 6) = \\binom{5}{2}(0.5)^6 = 0.15625$.
+[Read more](!#pitfalls)]@
+
 This means there's a 15.625% chance that you'll need exactly 6 flips to get your third head.
+
+The question fixes when the experiment stops, not only how many heads appear. The sixth flip has to be the third head, so only the first five flips are free, and the other two heads can sit anywhere among them.
 
 Note: The geometric distribution is a special case of the negative binomial distribution where $r = 1$.
       `,
@@ -1384,6 +1398,55 @@ Note: The geometric distribution is a special case of the negative binomial dist
       after:``,
       link:'',
   
+    },
+    obj17:{
+      title:`Common Pitfalls`,
+      content:`Three mistakes come up again and again in negative binomial problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Mixing up trials and failures**
+
+The mean $\\frac{r}{p}$ counts all trials, the $r$ successes included. It is read as the expected number of failures, or it is compared with a result that counts failures only.
+
+Wrong working: for a die rolled until three 6's appear, $E[X] = \\frac{3}{1/6} = 18$ is read as the number of rolls that are not a 6.
+
+Right working: $X$ counts all the rolls, and three of them are the 6's. The number of failures is $Y = X - r$, so
+$$E[Y] = \\frac{r}{p} - r = \\frac{r(1-p)}{p} = \\frac{3 \\cdot \\frac{5}{6}}{\\frac{1}{6}} = 15$$
+
+Why it happens: the negative binomial has two conventions, one counting trials and one counting the failures before the $r$-th success, and sources and software do not agree on which to use. The formulas in the sections above count trials, while the calculator on this page counts failures.
+
+How to check: look at where the support starts. Under the trials convention $X \\geq r$, so here the PMF starts at $k = 3$; under the failures convention it starts at $0$. The two means always differ by exactly $r$: $18 - 15 = 3$.
+
+**Multiplying the standard deviation by r**
+
+The negative binomial is the sum of $r$ independent geometric waits, and its standard deviation is taken as $r$ times the geometric one.
+
+Wrong working: for three 6's on a die, the geometric standard deviation is $\\sqrt{30} \\approx 5.477$, so
+$$\\sigma = 3 \\times \\sqrt{30} \\approx 16.43$$
+
+Right working: the variances of independent variables add.
+$$\\mathrm{Var}(X) = 30 + 30 + 30 = 90, \\quad \\sigma = \\sqrt{90} \\approx 9.487$$
+
+Why it happens: the mean does scale by $r$, from $\\frac{1}{p}$ to $\\frac{r}{p}$, so it seems natural for the spread to scale the same way. The standard deviation is the square root of a sum of variances, so it grows only like $\\sqrt{r}$.
+
+How to check: square the result and compare it with the variance formula. $(3\\sqrt{30})^2 = 270$, three times the $90$ that $\\frac{r(1-p)}{p^2}$ gives.
+
+**Counting the successes anywhere**
+
+The probability that the $r$-th success comes on trial $k$ is computed with the binomial formula for $r$ successes in $k$ trials, $\\binom{k}{r} p^r (1-p)^{k-r}$.
+
+Wrong working: for the third head on flip six, with $p = 0.5$,
+$$P(X = 6) = \\binom{6}{3} (0.5)^3 (0.5)^3 = 20 \\cdot 0.015625 = 0.3125$$
+This counts every sequence with three heads in six flips, including HHHTTT, where the third head came on flip three and the experiment would already have stopped.
+
+Right working: the sixth flip must be the third head, so the other two heads go among the first five flips.
+$$P(X = 6) = \\binom{5}{2} (0.5)^3 (0.5)^3 = 10 \\cdot 0.015625 = 0.15625$$
+
+Why it happens: both formulas contain the same powers $p^r (1-p)^{k-r}$, and the coefficient $\\binom{k}{r}$ is the familiar one from the binomial, so the stopping rule gets lost.
+
+How to check: the PMF values must add up to $1$. With $\\binom{k}{r}$ in place of $\\binom{k-1}{r-1}$, the values for $p = 0.5$ and $r = 3$ add up to $2$.`,
+      before:``,
+      after:``,
+      link:'',
     },
      links:{
       decide:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About Distinguishing Discrete Distributions](!/probability/distributions/discrete#decide) →@
@@ -1759,6 +1822,14 @@ export default function NegativeBinomialDistributionPage({
           sectionsContent.obj16.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

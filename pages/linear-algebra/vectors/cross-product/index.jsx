@@ -2184,7 +2184,7 @@ export async function getStaticProps(){
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Volume of a parallelepiped</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|a &middot; (b &times; c)|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">signed volume of the box with edges a, b, c</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">volume of the box with edges a, b, c (without the absolute value, the signed volume)</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Test for coplanarity</td>
@@ -2388,6 +2388,10 @@ $$\\mathbf{a} \\times \\mathbf{b} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} &
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the minus on the middle component
+Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) = (-3, -6, -3)$. The cofactor signs are $+, -, +$, so the $\\mathbf{j}$ term is $-(1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j} = 6\\mathbf{j}$, and the result is $(-3, 6, -3)$.
+[Read more](!#pitfalls)]@
+
 Placing vectors rather than numbers in the top row makes this a notational device rather than a genuine determinant. Still, applying cofactor expansion along that top row reproduces the component formula term by term. The determinant layout keeps the six constituent products and their signs organized in a form that is easy to remember and hard to scramble.
 
 To compute the cross product of two specific vectors, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
@@ -2497,7 +2501,7 @@ The procedure is physical: align the fingers of the right hand along $\\mathbf{a
 
 Switching the operands — computing $\\mathbf{b} \\times \\mathbf{a}$ instead — reverses the curl direction, sending the thumb the opposite way. This is the geometric engine behind anti-commutativity: the two cross products share the same length but face in opposite directions.
 
-Embedded in the right-hand rule is the concept of orientation. A coordinate system is called right-handed when $\\mathbf{i} \\times \\mathbf{j}$ points along $\\mathbf{k}$; a left-handed system would have it pointing along $-\\mathbf{k}$. The cross product is sensitive to this distinction — adopting the opposite handedness convention would reverse every cross product in $\\mathbb{R}^3$. No such sensitivity appears in the dot product or in any operation on $\\mathbb{R}^2$, making orientation a phenomenon particular to three-dimensional vector multiplication.`,
+Embedded in the right-hand rule is the concept of orientation. A coordinate system is called right-handed when $\\mathbf{i} \\times \\mathbf{j}$ points along $\\mathbf{k}$; a left-handed system would have it pointing along $-\\mathbf{k}$. The cross product is sensitive to this distinction — adopting the opposite handedness convention would reverse every cross product in $\\mathbb{R}^3$. No such sensitivity appears in the dot product; in $\\mathbb{R}^2$ the same orientation question is answered by the sign of the $2 \\times 2$ determinant $a_1b_2 - a_2b_1$.`,
     before: ``,
     after: ``,
     link: '',
@@ -2522,7 +2526,13 @@ Exchanging the two inputs flips the output vector. In the language of the right-
 @academic[formula_callout:Properties of the Cross Product
 $$\\mathbf{a} \\times (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\times \\mathbf{b} + \\mathbf{a} \\times \\mathbf{c}$$]@
 
+@academic[pitfall,aside:true,width:35%:Expanding as if the order did not matter
+Multiplying out $(\\mathbf{i} + \\mathbf{j}) \\times (\\mathbf{i} - \\mathbf{j})$ like $(x + y)(x - y) = x^2 - y^2$ cancels the middle terms and gives $\\mathbf{0}$. But $-\\mathbf{i} \\times \\mathbf{j} = -\\mathbf{k}$ and $\\mathbf{j} \\times \\mathbf{i} = -\\mathbf{k}$ add up, so the result is $-2\\mathbf{k}$.
+[Read more](!#pitfalls)]@
+
 The cross product spreads across sums on either side. Because of anti-commutativity, distributing from the right introduces a sign change relative to distributing from the left.
+
+Expanding a product of two sums, such as $(\\mathbf{a} + \\mathbf{b}) \\times (\\mathbf{c} + \\mathbf{d})$, applies this rule on both sides and produces four cross products: $\\mathbf{a} \\times \\mathbf{c} + \\mathbf{a} \\times \\mathbf{d} + \\mathbf{b} \\times \\mathbf{c} + \\mathbf{b} \\times \\mathbf{d}$. Each term keeps a factor of the first sum on the left and a factor of the second sum on the right. The layout is the same as multiplying out two binomials in algebra; what differs is which of the resulting terms may be combined.
 
 ## Scalar Factoring
 
@@ -2576,6 +2586,10 @@ $$\\mathbf{a} \\times \\mathbf{b} = \\mathbf{0} \\iff \\mathbf{a} \\parallel \\m
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Reading a zero cross product as perpendicular
+Taking $\\mathbf{a} \\times \\mathbf{b} = \\mathbf{0}$ to mean a right angle mixes up the two tests. $(1, 2, 3) \\times (2, 4, 6) = \\mathbf{0}$ because $(2, 4, 6) = 2(1, 2, 3)$: the vectors are parallel, and their dot product is $28$, not $0$.
+[Read more](!#pitfalls)]@
 
 Parallel vectors sit along the same line, so the angle between them is $0$ or $\\pi$. In either case $\\sin\\theta$ vanishes, collapsing the magnitude $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ to zero. A zero magnitude forces the cross product itself to be $\\mathbf{0}$. The zero vector is parallel to every vector by convention, so the test absorbs the edge cases naturally.
 
@@ -2647,6 +2661,57 @@ Taken together, the two products partition the angular information between a pai
   obj9: {
     title: `Summary of Cross Product Uses`,
     content: `The preceding sections put the cross product to a small set of distinct uses — measuring the area of a parallelogram, constructing a vector perpendicular to a given plane, testing whether two vectors are parallel, computing the volume of a parallelepiped through the scalar triple product, and reducing nested cross products through the vector triple product expansion. The table below collects these uses in one place: each row pairs a geometric or algebraic result with the formula that delivers it and a one-line statement of what that result captures.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for many wrong cross products. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the minus on the middle component**
+
+The symbolic determinant is expanded along its top row, but all three cofactors are taken with a plus sign. The $\\mathbf{j}$ component comes out with the wrong sign.
+
+Wrong working, for $\\mathbf{a} = (1, 2, 3)$ and $\\mathbf{b} = (4, 5, 6)$:
+$$\\mathbf{a} \\times \\mathbf{b} = (2 \\cdot 6 - 3 \\cdot 5)\\,\\mathbf{i} + (1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j} + (1 \\cdot 5 - 2 \\cdot 4)\\,\\mathbf{k} = (-3, -6, -3)$$
+
+Right working: the cofactor signs along the top row are $+, -, +$.
+$$\\mathbf{a} \\times \\mathbf{b} = (2 \\cdot 6 - 3 \\cdot 5)\\,\\mathbf{i} - (1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j} + (1 \\cdot 5 - 2 \\cdot 4)\\,\\mathbf{k} = (-3, 6, -3)$$
+This matches the component formula, whose middle entry is $a_3b_1 - a_1b_3 = 3 \\cdot 4 - 1 \\cdot 6 = 6$.
+
+Why it happens: the minus sign on the middle term is not visible in the determinant itself; it comes from the checkerboard of cofactor signs, which is easy to forget when the expansion is done quickly.
+
+How to check: the result must be perpendicular to both inputs. $(-3, -6, -3) \\cdot (1, 2, 3) = -24$, so the wrong answer fails. $(-3, 6, -3) \\cdot (1, 2, 3) = 0$ and $(-3, 6, -3) \\cdot (4, 5, 6) = 0$.
+
+**Expanding as if the order did not matter**
+
+A product of two sums is multiplied out with distributivity, and the terms are then collected as in ordinary algebra, where $xy$ and $yx$ are the same.
+
+Wrong working:
+$$(\\mathbf{a} + \\mathbf{b}) \\times (\\mathbf{a} - \\mathbf{b}) = \\mathbf{a} \\times \\mathbf{a} - \\mathbf{b} \\times \\mathbf{b} = \\mathbf{0}$$
+The middle terms $-\\mathbf{a} \\times \\mathbf{b}$ and $\\mathbf{b} \\times \\mathbf{a}$ are taken to cancel.
+
+Right working: keep all four terms in order and use $\\mathbf{b} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{b})$.
+$$(\\mathbf{a} + \\mathbf{b}) \\times (\\mathbf{a} - \\mathbf{b}) = \\mathbf{a} \\times \\mathbf{a} - \\mathbf{a} \\times \\mathbf{b} + \\mathbf{b} \\times \\mathbf{a} - \\mathbf{b} \\times \\mathbf{b} = -2(\\mathbf{a} \\times \\mathbf{b})$$
+With $\\mathbf{a} = \\mathbf{i}$ and $\\mathbf{b} = \\mathbf{j}$, the result is $-2\\mathbf{k}$, not $\\mathbf{0}$.
+
+Why it happens: the pattern $(x + y)(x - y) = x^2 - y^2$ is so familiar that the middle terms are cancelled without being written down. That cancellation needs $xy = yx$, which the cross product does not have.
+
+How to check: compute one case in components. $(1, 1, 0) \\times (1, -1, 0) = (0, 0, -2)$, which is $-2\\mathbf{k}$.
+
+**Reading a zero cross product as perpendicular**
+
+The two zero tests are swapped: a zero cross product is read as a right angle, the meaning that belongs to a zero dot product.
+
+Wrong working:
+$$(1, 2, 3) \\times (2, 4, 6) = \\mathbf{0} \\implies (1, 2, 3) \\perp (2, 4, 6)$$
+
+Right working: a zero cross product means the vectors are parallel. Here $(2, 4, 6) = 2(1, 2, 3)$, so the angle between them is $0$. The test for a right angle is the dot product, and $(1, 2, 3) \\cdot (2, 4, 6) = 2 + 8 + 18 = 28 \\neq 0$.
+
+Why it happens: both tests end in "equals zero", and the dot product test for perpendicular vectors is usually learned first, so a zero result gets the familiar reading.
+
+How to check: go back to the magnitude formula. $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ is zero only when $\\sin\\theta = 0$, at $\\theta = 0$ or $\\theta = \\pi$. Perpendicular vectors give the longest cross product their lengths allow, as in $\\mathbf{i} \\times \\mathbf{j} = \\mathbf{k}$.`,
     before: ``,
     after: ``,
     link: '',
@@ -2945,6 +3010,14 @@ demoUnits}) {
           sectionsContent.obj9.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

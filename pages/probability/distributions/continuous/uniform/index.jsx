@@ -1375,10 +1375,14 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if 
 **Key Properties**:
  • $F(a) = 0$ (no probability mass below the lower bound)
  • $F(b) = 1$ (all probability mass is within [a, b])
- • The [CDF(Cumulative Density Function)](!/probability/cdf) increases linearly from 0 to 1 within the interval [a, b]
+ • The [CDF (Cumulative Distribution Function)](!/probability/cdf) increases linearly from 0 to 1 within the interval [a, b]
  • For any $x$ in [a, b], $F(x)$ represents the fraction of the interval covered from $a$ to $x$
 
-**Practical Use:** The [CDF(Cumulative Density Function)](!/probability/cdf) for the uniform distribution is particularly simple. To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3. For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.
+@academic[pitfall,aside:true,width:35%:Extending the ramp past b
+Using $\\frac{x-a}{b-a}$ beyond $b$ gives $F(15) = 1.5$ for $U(0, 10)$, so $P(8 \\leq X \\leq 15) = 1.5 - 0.8 = 0.7$. Above $b$ the CDF stays at $1$: $P(8 \\leq X \\leq 15) = 1 - 0.8 = 0.2$.
+[Read more](!#pitfalls)]@
+
+**Practical Use:** The [CDF (Cumulative Distribution Function)](!/probability/cdf) for the uniform distribution is particularly simple. To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3. For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.
       `,
       before:``,
       after:``,
@@ -1434,6 +1438,10 @@ Suppose a bus arrives randomly between 2:00 PM and 2:30 PM, modeled as uniform o
 
 @academic[formula_callout:Expected Value (Mean)
 $$E[X] = \\frac{0 + 30}{2} = 15 \\text{ minutes}$$]@
+
+@academic[pitfall,aside:true,width:35%:Halving the width
+Computing $\\frac{b-a}{2}$ for $U(2, 8)$ gives $3$, half the length of the interval rather than its centre. The mean is $\\frac{a+b}{2} = \\frac{2+8}{2} = 5$.
+[Read more](!#pitfalls)]@
 
 The expected arrival time is 2:15 PM, exactly halfway through the 30-minute window. If you repeatedly sample random arrival times, the long-run average will converge to 15 minutes after 2:00 PM.
 
@@ -1523,6 +1531,10 @@ $$\\mathrm{Var}(X) = \\frac{(30-0)^2}{12} = \\frac{900}{12} = 75 \\text{ minutes
 
 @academic[formula_callout:Variance and Standard Deviation
 $$\\sigma = \\frac{30}{\\sqrt{12}} \\approx 8.66 \\text{ minutes}$$]@
+
+@academic[pitfall,aside:true,width:35%:Dividing the width by 12
+Writing $\\sigma = \\frac{b-a}{12}$ gives $\\frac{30}{12} = 2.5$ minutes for the bus. The variance divides the squared width by $12$, so the root takes in the $12$ too: $\\sigma = \\frac{30}{\\sqrt{12}} \\approx 8.66$ minutes.
+[Read more](!#pitfalls)]@
 
 The variance of 75 min² and standard deviation of about 8.66 minutes indicate moderate spread. While the expected arrival is 15 minutes after 2:00 PM, typical variations are around ±8.66 minutes, meaning arrivals between roughly 6 and 24 minutes are common.
   `,
@@ -1696,6 +1708,10 @@ The middle 50% of arrivals span a 15-minute window from 2:07:30 PM to 2:22:30 PM
 
 ### Other Notable Percentiles
 
+@academic[pitfall,aside:true,width:35%:Forgetting to add a
+Taking $x_p = p \\cdot b$ for $U(10, 30)$ gives the 25th percentile $0.25 \\cdot 30 = 7.5$, below the interval. The quantile starts from $a$: $x_{0.25} = 10 + 0.25(30 - 10) = 15$.
+[Read more](!#pitfalls)]@
+
 **10th percentile:** $x_{0.10} = a + 0.10(b - a)$ (10% of values below this)
 
 **90th percentile:** $x_{0.90} = a + 0.90(b - a)$ (90% of values below this)
@@ -1837,7 +1853,7 @@ where $\\Delta = \\frac{b-a}{n}$ as the grid becomes infinitely fine.
 Among all continuous distributions on $[a, b]$, the uniform distribution has **maximum entropy**—it represents the state of complete ignorance about where in the interval a value might fall.
 
 **Sum of Uniforms:**
-Unlike the normal and exponential distributions, sums of uniform random variables do **not** remain uniform. Instead, the sum of $n$ independent $\\text{Uniform}(0, 1)$ variables approaches normal by the [Central Limit Theorem](!/probability/central-limit-theorem).
+Unlike the normal distribution, sums of uniform random variables do **not** remain uniform. Instead, the sum of $n$ independent $\\text{Uniform}(0, 1)$ variables approaches normal by the [Central Limit Theorem](!/probability/central-limit-theorem).
 
 ### Practical Implications
 
@@ -1965,7 +1981,7 @@ This makes generating uniform random variables and computing [quantiles](!/proba
 For $n$ independent $\\text{Uniform}(0, 1)$ variables, the $k$-th order statistic follows a Beta$(k, n-k+1)$ distribution. The minimum and maximum have simple distributions:
 
 @academic[formula_callout:Properties
-$$\\min(X_1, \\ldots, X_n) \\sim \\text{Uniform}(a, a + \\frac{b-a}{n})$$ (approximately, for large $n$)]@
+$$\\min(X_1, \\ldots, X_n) \\sim \\text{Beta}(1, n), \\qquad E[\\min] = \\frac{1}{n+1}$$]@
 
 **Not Closed Under Addition:**
 Unlike the normal distribution, sums of independent uniform variables do **not** remain uniform. Instead, the sum approaches normal by the [Central Limit Theorem](!/probability/central-limit-theorem).
@@ -2001,6 +2017,69 @@ Unlike the normal distribution, sums of independent uniform variables do **not**
       after:``,
       link:'',
     },
+    obj18:{
+      title:`Common Pitfalls`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Extending the ramp past b**
+
+A probability $P(c \\leq X \\leq d)$ is found from the CDF, but one end of the window lies outside the interval $[a, b]$, and the middle line $\\frac{x-a}{b-a}$ of the CDF is used there anyway.
+
+Wrong working: for $X \\sim U(0, 10)$,
+$$P(8 \\leq X \\leq 15) = \\frac{15 - 0}{10} - \\frac{8 - 0}{10} = 1.5 - 0.8 = 0.7$$
+
+Right working: above $b = 10$ the CDF equals $1$, so $F(15) = 1$.
+$$P(8 \\leq X \\leq 15) = F(15) - F(8) = 1 - 0.8 = 0.2$$
+
+Why it happens: the shortcut $\\frac{d-c}{b-a}$ is quick and is shown for windows inside the interval, so it gets applied to any window. It holds only when $a \\leq c \\leq d \\leq b$.
+
+How to check: a CDF value can never exceed $1$, so $F(15) = 1.5$ is a warning sign. Cutting the window to the part inside the interval first gives the same answer: $[8, 15]$ becomes $[8, 10]$, a length of $2$ out of $10$.
+
+**Halving the width**
+
+The mean of a uniform distribution is the midpoint of the interval, and the midpoint is mixed up with half the length of the interval.
+
+Wrong working: for $X \\sim U(2, 8)$,
+$$E[X] = \\frac{b-a}{2} = \\frac{8-2}{2} = 3$$
+
+Right working: the midpoint is the average of the two endpoints.
+$$E[X] = \\frac{a+b}{2} = \\frac{2+8}{2} = 5$$
+
+Why it happens: the bus example starts at $a = 0$, where $\\frac{b-a}{2}$ and $\\frac{a+b}{2}$ both equal $\\frac{b}{2}$, so the wrong formula gives the right answer there. The difference shows only when $a \\neq 0$.
+
+How to check: shift the interval. Moving $U(2, 8)$ to $U(102, 108)$ must move the mean by $100$, from $5$ to $105$; the half-width $3$ does not move at all, so it cannot be the mean.
+
+**Dividing the width by 12**
+
+The standard deviation is needed, and the divisor $12$ from the variance formula is applied to the width directly, without its square root.
+
+Wrong working: for the bus on $[0, 30]$ minutes,
+$$\\sigma = \\frac{b-a}{12} = \\frac{30}{12} = 2.5 \\text{ minutes}$$
+
+Right working: the variance divides the squared width by $12$, and the standard deviation is the square root of the whole fraction.
+$$\\mathrm{Var}(X) = \\frac{30^2}{12} = 75, \\qquad \\sigma = \\sqrt{75} = \\frac{30}{\\sqrt{12}} \\approx 8.66 \\text{ minutes}$$
+
+Why it happens: the $12$ is the memorable part of the formula, and the square root is taken of the top only: $\\sqrt{(b-a)^2} = b - a$ is used, $\\sqrt{12}$ is forgotten.
+
+How to check: for any uniform distribution the standard deviation is about $0.289$ of the width, so a 30-minute window must give close to $8.7$ minutes. A value of $2.5$ minutes would keep almost every arrival within a few minutes of 2:15, which a flat density over the whole half hour does not do.
+
+**Forgetting to add a**
+
+A quantile is found with $x_p = a + p(b - a)$, and the formula is shortened to $p \\cdot b$, which is correct only when the interval starts at $0$.
+
+Wrong working: for $X \\sim U(10, 30)$,
+$$x_{0.25} = 0.25 \\cdot 30 = 7.5$$
+
+Right working: the quantile lies a fraction $p$ of the width beyond the starting point $a$.
+$$x_{0.25} = a + 0.25(b - a) = 10 + 0.25 \\cdot 20 = 15$$
+
+Why it happens: the worked percentiles on this page use the bus interval $[0, 30]$, where $a = 0$ and the two formulas agree.
+
+How to check: every quantile must lie inside the interval, and $7.5$ is below $a = 10$, a value the variable never takes. Substituting back confirms the right answer: $F(15) = \\frac{15 - 10}{30 - 10} = 0.25$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
     links:{
   
       title:``,
@@ -2012,7 +2091,7 @@ Unlike the normal distribution, sums of independent uniform variables do **not**
          @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Continuous Uniform](!/probability/distributions/continuous/uniform#12) →@
             `,
                  calculators:`            
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Continuous Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
         `,
   
     },
@@ -2351,6 +2430,14 @@ export default function ContinuousUniformDistributionPage({
           sectionsContent.capstone.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj18.title,
+        link:sectionsContent.obj18.link,
+        content:[
+          sectionsContent.obj18.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

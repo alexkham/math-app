@@ -2297,7 +2297,13 @@ An immediate consequence is that any matrix with two identical rows has determin
 
 The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#6), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.
 
-Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.`,
+@academic[pitfall,aside:true,width:35%:Ignoring the sign of a row swap
+Swapping the rows of $\\begin{pmatrix} 0 & 1 \\\\ 2 & 3 \\end{pmatrix}$ to reach the triangular $\\begin{pmatrix} 2 & 3 \\\\ 0 & 1 \\end{pmatrix}$ and keeping its diagonal product gives $2$. The swap flips the sign: the determinant is $0 \\cdot 3 - 1 \\cdot 2 = -2$.
+[Read more](!#pitfalls)]@
+
+Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.
+
+Swaps enter elimination whenever a pivot position holds a zero. No multiple of that row can clear the entries below it, so a lower row with a nonzero entry in that column is moved up first. The swap only reorders the rows, and every row of the matrix is still present afterwards.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2403,6 +2409,12 @@ No row swaps and no row scalings were used — only row additions. The determina
 
 @academic[formula_callout:Computing Determinants via Row Reduction
 $$\\det(A) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = (-32) \\cdot \\left(-\\frac{29}{4}\\right) = 232$$]@
+
+@academic[pitfall,aside:true,width:35%:Doubling a row to avoid fractions
+Clearing the fraction with $R_4 \\to 2R_4 - R_2$ in place of $R_4 - \\frac{1}{2}R_2$ also doubles row $4$. The diagonal then ends in $-\\frac{29}{2}$ and the product is $464$. Dividing by that factor $2$ gives $\\det(A) = 232$.
+[Read more](!#pitfalls)]@
+
+Fractions appeared twice in this reduction, with the multipliers $\\frac{1}{2}$ and $\\frac{1}{8}$, and they are the price of using row additions alone. Each of those steps changes one row by a multiple of another row and leaves everything else in place, which is why the diagonal product could be read off at the end with no correction.
 
 ## Complexity
 
@@ -2522,6 +2534,51 @@ Each of these conditions approaches invertibility from a different angle — ran
   obj10: {
     title: `Summary of Determinant Properties`,
     content: `Across the sections above, each operation, transformation, or matrix structure has its own effect on the determinant. The table below collects every rule covered on the page into a single reference card — a one-stop lookup whenever a calculation requires recalling the right identity.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Three slips come up again and again when determinants are computed with row operations. Two are marked with a box where they happen in the sections above, and the third, pulling the scalar out of $kA$ only once, is flagged in the row-scaling section. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Ignoring the sign of a row swap**
+
+Rows are exchanged to bring a nonzero entry into a pivot position, and the reduction carries on as if the determinant had not changed. The diagonal product of the final triangular matrix is then reported as $\\det(A)$, with the wrong sign whenever the number of swaps is odd.
+
+Wrong working: for $A = \\begin{pmatrix} 0 & 2 & 1 \\\\ 3 & 1 & 2 \\\\ 0 & 0 & 4 \\end{pmatrix}$ the first pivot is $0$, so rows $1$ and $2$ are swapped:
+$$\\begin{pmatrix} 3 & 1 & 2 \\\\ 0 & 2 & 1 \\\\ 0 & 0 & 4 \\end{pmatrix}, \\qquad 3 \\cdot 2 \\cdot 4 = 24$$
+
+Right working: one swap was used, so the diagonal product is multiplied by $(-1)^1$, and $\\det(A) = -24$.
+
+Why it happens: a swap changes no entry, so it hardly feels like an operation on the matrix, and in a long reduction the count is easy to lose.
+
+How to check: expand along a column with zeros. Column $1$ of $A$ has the single nonzero entry $3$, at position $(2,1)$, where the sign is $-$: $\\det(A) = -3 \\cdot \\det\\begin{pmatrix} 2 & 1 \\\\ 0 & 4 \\end{pmatrix} = -3 \\cdot 8 = -24$.
+
+**Pulling the scalar out once**
+
+A scalar multiplying the whole matrix is taken out of the determinant as a single factor, $\\det(kA) = k \\det(A)$. But $kA$ scales every one of the $n$ rows, and each row gives its own factor $k$.
+
+Wrong working: for $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$, $\\det(A) = 4 - 6 = -2$, and the single factor gives $\\det(3A) = 3 \\cdot (-2) = -6$.
+
+Right working: $3A = \\begin{pmatrix} 3 & 6 \\\\ 9 & 12 \\end{pmatrix}$, so $\\det(3A) = 36 - 54 = -18 = 3^2 \\cdot (-2)$.
+
+Why it happens: the row-scaling rule takes out exactly one factor of $k$, and multiplying the whole matrix by $k$ is read as one scaling instead of $n$ of them.
+
+How to check: try $A = I_n$. The matrix $kI_n$ is diagonal with $n$ entries equal to $k$, so $\\det(kI_n) = k^n$. For $n = 2$ and $k = 2$ this is $4$, the value in the non-property example, not $2$.
+
+**Doubling a row to avoid fractions**
+
+To keep the arithmetic in whole numbers, a row is replaced by a multiple of itself plus a multiple of another row, as in $R_4 \\to 2R_4 - R_2$. That step is a row scaling and a row addition at once. The addition is free, but the scaling multiplies the determinant by $2$.
+
+Wrong working: in the worked example, after the first round of eliminations, row $4$ is $(0, -1, 3, -10)$ and row $2$ is $(0, -2, 4, -5)$. Replacing row $4$ by $2R_4 - R_2$ gives $(0, 0, 2, -15)$. Subtracting $\\frac{1}{4}$ of row $3$, which is $(0, 0, 8, -2)$, leaves $(0, 0, 0, -\\frac{29}{2})$, and the diagonal product is
+$$2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{2}\\right) = 464$$
+
+Right working: the step $R_4 \\to 2R_4 - R_2$ doubled row $4$, so the product is $2 \\det(A)$ and $\\det(A) = \\frac{464}{2} = 232$. Using $R_4 \\to R_4 - \\frac{1}{2}R_2$, as the worked example does, gives $232$ directly.
+
+Why it happens: the step still looks like adding a multiple of one row to another, and the coefficient on the row being replaced is easy to overlook. Only that coefficient matters: in $R_i \\to aR_i + cR_k$ the determinant is multiplied by $a$, whatever $c$ is.
+
+How to check: for every step, look at the coefficient of the row being replaced. If it is not $1$, write it down, and divide the final diagonal product by the product of all such coefficients. The same bookkeeping covers dividing a pivot row by its pivot: halving row $1$ of the worked example leaves a diagonal product of $116$, which has to be multiplied by $2$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2801,6 +2858,14 @@ const schemas = {
           >
             <PropertyLawCard data={determinantProperties} theme="navy" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

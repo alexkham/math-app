@@ -1086,6 +1086,12 @@ For "more than $k$ events":
 @academic[formula_callout:Cumulative Distribution Function (CDF)
 $$P(X > k) = 1 - F_X(k)$$]@
 
+@academic[pitfall,aside:true,width:35%:Treating at least as more than
+For $\\lambda = 3$, writing $P(X \\geq 2) = 1 - F_X(2) \\approx 1 - 0.423 = 0.577$ leaves out $P(X = 2) \\approx 0.224$. At least $2$ means more than $1$: $P(X \\geq 2) = 1 - F_X(1) \\approx 1 - 0.199 = 0.801$.
+[Read more](!#pitfalls)]@
+
+The complement rule above is written for the event "more than $k$". A Poisson count takes only whole-number values, so the wording of a question decides exactly which counts are kept: "more than", "at least", "fewer than" and "at most" each draw the line at a different count. Every count on either side of that line carries its own share of the probability, and the CDF is read at the last count that falls outside the event.
+
 **Infinite Support**: Unlike finite discrete distributions, the Poisson distribution has infinite support ($k$ can be arbitrarily large), though probabilities decrease rapidly for $k \\gg \\lambda$.
   `,
   before:``,
@@ -1221,6 +1227,10 @@ $$\\mathrm{Var}(X) = 16$$]@
 @academic[formula_callout:Variance and Standard Deviation
 $$\\sigma = \\sqrt{16} = 4$$]@
 
+@academic[pitfall,aside:true,width:35%:Taking lambda as the standard deviation
+Reading $\\lambda = 16$ as the typical deviation gives hours anywhere from $16 - 16 = 0$ to $16 + 16 = 32$ calls. Only the variance equals $\\lambda$; the standard deviation is $\\sqrt{\\lambda} = \\sqrt{16} = 4$.
+[Read more](!#pitfalls)]@
+
 The variance equals the expected value (16), and the standard deviation of 4 indicates that in most hours, the number of calls will fall within roughly 12 to 20 calls (within one standard deviation of the mean).
   `,
   before: ``,
@@ -1315,6 +1325,12 @@ Suppose a call center receives an average of $\\lambda = 4$ calls per hour. The 
 $P(X = 6) = \\frac{4^6 e^{-4}}{6!} = \\frac{4096 \\cdot 0.0183}{720} \\approx 0.104$
 
 This means there's about a 10.4% chance of receiving exactly 6 calls in an hour.
+
+@academic[pitfall,aside:true,width:35%:Not rescaling lambda to the interval
+Using the hourly rate $\\lambda = 4$ for a half-hour window gives $P(X = 0) = e^{-4} \\approx 0.018$. Half an hour carries half the rate, $\\lambda = 2$, so $P(X = 0) = e^{-2} \\approx 0.135$.
+[Read more](!#pitfalls)]@
+
+The rate in this example is stated per hour, and the probability $0.104$ belongs to exactly one hour of calls. Questions about the same call center often ask about other stretches of time, such as a quarter of an hour, a morning or a full shift, and each of those is a separate count with its own Poisson distribution.
 
 Note: The Poisson distribution is often used as an approximation to the binomial distribution when $n$ is large and $p$ is small, with $\\lambda = np$.
 
@@ -1413,6 +1429,55 @@ $$X \\sim \\text{Poisson}(\\lambda_X),\\; Y \\sim \\text{Poisson}(\\lambda_Y) \\
       after:``,
       link:'',
   
+    },
+    obj17:{
+      title:`Common Pitfalls`,
+      content:`Three mistakes account for most wrong answers in Poisson problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating at least as more than**
+
+The question asks for at least $k$ events, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.
+
+Wrong working: for $\\lambda = 3$,
+$$P(X \\geq 2) = 1 - F_X(2) = 1 - \\left(P(X = 0) + P(X = 1) + P(X = 2)\\right) \\approx 1 - 0.423 = 0.577$$
+
+Right working: at least $2$ means $2$ or more events, so the complement is at most $1$.
+$$P(X \\geq 2) = 1 - F_X(1) = 1 - \\left(e^{-3} + 3e^{-3}\\right) = 1 - 4e^{-3} \\approx 1 - 0.199 = 0.801$$
+
+Why it happens: the page's complement rule is written for "more than $k$", and the two wordings differ by a single count. For continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.
+
+How to check: the gap between the two answers must be exactly the probability of the count that was dropped. Here $0.801 - 0.577 = 0.224$, and $P(X = 2) = \\frac{3^2 e^{-3}}{2!} = 4.5e^{-3} \\approx 0.224$.
+
+**Taking lambda as the standard deviation**
+
+Because the variance of a Poisson count equals $\\lambda$, the number $\\lambda$ itself is taken as the typical distance of a count from its mean.
+
+Wrong working: calls arrive at $\\lambda = 16$ per hour, so $\\sigma = 16$, and a typical hour has anywhere from $16 - 16 = 0$ to $16 + 16 = 32$ calls.
+
+Right working: the variance is $\\lambda = 16$, and the standard deviation is its square root.
+$$\\sigma = \\sqrt{\\lambda} = \\sqrt{16} = 4$$
+A typical hour has between $16 - 4 = 12$ and $16 + 4 = 20$ calls.
+
+Why it happens: the Poisson distribution is the one familiar case where a single number is both the mean and the variance, and "$\\lambda$ is the spread" is remembered without the square root.
+
+How to check: look at the units. The variance is measured in calls squared, while the standard deviation is measured in calls, like the mean. The PMF agrees: for $\\lambda = 16$, the counts from $12$ to $20$ hold about 74% of hours, while the counts from $0$ to $32$ hold about 99.99%, far more than a band of one standard deviation on each side of the mean usually holds.
+
+**Not rescaling lambda to the interval**
+
+The rate is given for one interval, and the question is about another, but the same $\\lambda$ is used.
+
+Wrong working: a call center receives $4$ calls per hour on average. The probability of no calls in half an hour is taken as
+$$P(X = 0) = e^{-4} \\approx 0.018$$
+
+Right working: $\\lambda$ is the expected number of calls in the window being watched. Half an hour carries half the hourly rate, $\\lambda = 4 \\times \\frac{1}{2} = 2$.
+$$P(X = 0) = e^{-2} \\approx 0.135$$
+
+Why it happens: $\\lambda$ is quoted as "the rate", and it feels like a fixed property of the call center rather than the average count over one particular length of time.
+
+How to check: a whole hour with no calls is two half hours with no calls. With the right rate, $e^{-2} \\times e^{-2} = e^{-4}$, which matches the one-hour probability; with the wrong rate, the two half hours would give $e^{-4} \\times e^{-4} = e^{-8}$ for the hour.`,
+      before:``,
+      after:``,
+      link:'',
     },
      links:{
       decide:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About Distinguishing Discrete Distributions](!/probability/distributions/discrete#decide) →@
@@ -1794,6 +1859,14 @@ export default function PoissonDistributionPage({
           sectionsContent.obj16.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -16,6 +16,7 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
 
 
 export async function getStaticProps(){
@@ -486,6 +487,10 @@ When the quadratic expression $ax^2 + bx + c$ can be decomposed into a product o
 
 Consider $x^2 - 5x + 6 = 0$. The left side factors as $(x - 2)(x - 3) = 0$. Setting each factor equal to zero gives $x - 2 = 0$ or $x - 3 = 0$, so $x = 2$ or $x = 3$. Both values satisfy the original equation.
 
+@academic[pitfall,aside:true,width:35%:Factoring before the right side is zero
+Setting each factor of $x(x - 1) = 6$ equal to $6$ gives $x = 6$ or $x = 7$, but $6 \\cdot 5 = 30$. Moving the $6$ first gives $x^2 - x - 6 = (x - 3)(x + 2) = 0$, so $x = 3$ or $x = -2$.
+[Read more](!#pitfalls)]@
+
 When the leading coefficient is not $1$, factoring requires more care. The equation $6x^2 + x - 2 = 0$ factors as $(2x - 1)(3x + 2) = 0$, giving $x = \\frac{1}{2}$ or $x = -\\frac{2}{3}$. Finding these factors involves searching for two binomials whose product reconstructs the original trinomial — a process that amounts to finding two numbers whose product is $ac$ and whose sum is $b$.
 
 Factoring is efficient when it works, but it has a fundamental limitation: not every quadratic with rational coefficients factors into binomials with rational entries. The equation $x^2 - 2 = 0$ has solutions $x = \\pm\\sqrt{2}$, which are irrational, so no factorization over the rationals exists. A method that handles every quadratic without exception requires a different approach.`,
@@ -527,6 +532,10 @@ The left side factors as a perfect square:
 @academic[formula_callout:Solving by Completing the Square
 $$\\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$$]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the negative square root
+Taking only the positive root of $(x - 2)^2 = 9$ gives $x - 2 = 3$, so $x = 5$ alone. Both roots count: $x - 2 = \\pm 3$, so $x = 5$ or $x = -1$.
+[Read more](!#pitfalls)]@
+
 Taking the square root of both sides and isolating $x$ gives the two solutions. The expression under the square root, $b^2 - 4ac$, determines whether those solutions are real or complex.
 
 As a concrete example, consider $x^2 + 6x + 2 = 0$. Move the constant: $x^2 + 6x = -2$. Half of $6$ is $3$, and $3^2 = 9$. Add $9$ to both sides: $x^2 + 6x + 9 = 7$. Factor: $(x + 3)^2 = 7$. Take roots: $x + 3 = \\pm\\sqrt{7}$. The solutions are $x = -3 + \\sqrt{7}$ and $x = -3 - \\sqrt{7}$.`,
@@ -552,6 +561,10 @@ For the equation $2x^2 - 3x - 5 = 0$, the coefficients are $a = 2$, $b = -3$, $c
 
 @academic[formula_callout:The Quadratic Formula
 $$x = \\frac{-(-3) \\pm \\sqrt{(-3)^2 - 4(2)(-5)}}{2(2)} = \\frac{3 \\pm \\sqrt{9 + 40}}{4} = \\frac{3 \\pm \\sqrt{49}}{4} = \\frac{3 \\pm 7}{4}$$]@
+
+@academic[pitfall,aside:true,width:35%:Dividing only the root by 2a
+Writing $x = -b \\pm \\frac{\\sqrt{b^2 - 4ac}}{2a}$ for $x^2 - 6x + 5 = 0$ gives $6 \\pm \\frac{4}{2}$, so $8$ and $4$. The whole numerator goes over $2a$: $\\frac{6 \\pm 4}{2}$, so $x = 5$ or $x = 1$.
+[Read more](!#pitfalls)]@
 
 The two solutions are $x = \\frac{10}{4} = \\frac{5}{2}$ and $x = \\frac{-4}{4} = -1$.
 
@@ -579,6 +592,10 @@ Its value determines the nature and number of solutions without requiring the fu
 When $\\Delta > 0$, the square root is a positive real number, and the formula produces two distinct real solutions. The equation $x^2 - 5x + 3 = 0$ has $\\Delta = 25 - 12 = 13 > 0$, so two different real roots exist.
 
 When $\\Delta = 0$, the square root vanishes, and the formula collapses to a single value $x = -\\frac{b}{2a}$. The quadratic has a repeated root — a double root — and the polynomial factors as $a(x - r)^2$ where $r = -\\frac{b}{2a}$. The equation $x^2 - 6x + 9 = 0$ has $\\Delta = 36 - 36 = 0$ and the single solution $x = 3$.
+
+@academic[pitfall,aside:true,width:35%:Losing the sign of a negative c
+Computing $-4ac$ for $x^2 + 2x - 3 = 0$ as $-12$ gives $\\Delta = 4 - 12 = -8$ and no real roots. With $c = -3$, $-4ac = -4(1)(-3) = 12$, so $\\Delta = 16$ and $x = 1$ or $x = -3$.
+[Read more](!#pitfalls)]@
 
 When $\\Delta < 0$, no real number has a negative square, so the square root does not produce a real value. Over the real numbers, the equation has no solutions. Over the [complex numbers](!/complex-numbers), the formula yields two conjugate roots $x = \\frac{-b \\pm i\\sqrt{|\\Delta|}}{2a}$, where $i$ is the imaginary unit. The equation $x^2 + x + 1 = 0$ has $\\Delta = 1 - 4 = -3 < 0$ and the complex roots $x = \\frac{-1 \\pm i\\sqrt{3}}{2}$.
 
@@ -621,6 +638,10 @@ The most common case is the bi-quadratic equation $ax^4 + bx^2 + c = 0$. Setting
 
 For example, $x^4 - 5x^2 + 4 = 0$ becomes $u^2 - 5u + 4 = 0$ with $u = x^2$. Factoring gives $(u - 1)(u - 4) = 0$, so $u = 1$ or $u = 4$. Back-substituting: $x^2 = 1$ gives $x = \\pm 1$, and $x^2 = 4$ gives $x = \\pm 2$. The original quartic has four real solutions.
 
+@academic[pitfall,aside:true,width:35%:Stopping at the substitute variable
+Giving $u = 4$ and $u = -1$ as the solutions of $x^4 - 3x^2 - 4 = 0$ answers for $u$, not for $x$. Back-substituting, $x^2 = 4$ gives $x = \\pm 2$ and $x^2 = -1$ gives no real $x$, so the real solutions are $x = \\pm 2$.
+[Read more](!#pitfalls)]@
+
 The substitution pattern extends beyond powers of $x$. Any equation of the form $a[f(x)]^2 + b[f(x)] + c = 0$ is quadratic in $f(x)$. Setting $u = f(x)$ reduces it, and back-substitution after solving requires solving $f(x) = u_1$ and $f(x) = u_2$ separately. Extraneous solutions can arise during back-substitution, so every candidate must be checked in the original equation.`,
     before: ``,
     after: ``,
@@ -648,6 +669,85 @@ The sign of $a$ determines the parabola's orientation — opening upward when $a
   obj9: {
     title: `Summary of Solving Methods`,
     content: `Four methods cover every quadratic equation in practice. Two are universal — completing the square and the quadratic formula always work. Two depend on the equation's specific structure: factoring needs a clean rational decomposition, and Vieta's inspection needs roots simple enough to spot. The table below summarizes when to reach for each, whether it is universal, and what insight each one produces beyond the solution itself.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for most wrong answers to quadratic equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Factoring before the right side is zero**
+
+The equation is already written as a product, but the product equals a number other than zero. The zero-product property is applied anyway, and each factor is set equal to that number.
+
+Wrong working:
+$$x(x - 1) = 6 \\implies x = 6 \\text{ or } x - 1 = 6 \\implies x = 6 \\text{ or } x = 7$$
+
+Right working: move every term to one side first.
+$$x^2 - x - 6 = 0 \\implies (x - 3)(x + 2) = 0 \\implies x = 3 \\text{ or } x = -2$$
+
+Why it happens: the left side already looks factored, so bringing the equation to standard form seems unnecessary. But the zero-product property works only because zero is special: a product is $0$ only when one factor is $0$, while a product of $6$ can come from $2 \\cdot 3$, $12 \\cdot \\frac{1}{2}$ or infinitely many other pairs.
+
+How to check: substitute each answer into the original equation. $x = 6$ gives $6 \\cdot 5 = 30$ and $x = 7$ gives $7 \\cdot 6 = 42$, neither equal to $6$. The right answers give $3 \\cdot 2 = 6$ and $(-2)(-3) = 6$.
+
+**Dropping the negative square root**
+
+After completing the square, the equation has the form $(x + k)^2 = p$ with $p > 0$, and only the positive square root of $p$ is taken.
+
+Wrong working:
+$$(x - 2)^2 = 9 \\implies x - 2 = 3 \\implies x = 5$$
+
+Right working: both $3$ and $-3$ square to $9$.
+$$(x - 2)^2 = 9 \\implies x - 2 = \\pm 3 \\implies x = 5 \\text{ or } x = -1$$
+
+Why it happens: the symbol $\\sqrt{9}$ means only the positive root, $3$, and taking the square root of both sides is read as applying that symbol. The equation asks for every number whose square is $9$, and there are two.
+
+How to check: when $p > 0$, the equation $(x + k)^2 = p$ always has two roots, placed symmetrically around $x = -k$. Here $5$ and $-1$ lie $3$ units on either side of $2$, and $(-1 - 2)^2 = 9$.
+
+**Dividing only the root by 2a**
+
+The quadratic formula is copied with the fraction bar under the square root alone, so $-b$ is left outside the division.
+
+Wrong working for $x^2 - 6x + 5 = 0$, with $a = 1$, $b = -6$, $c = 5$ and $\\Delta = 36 - 20 = 16$:
+$$x = 6 \\pm \\frac{\\sqrt{16}}{2} = 6 \\pm 2 \\implies x = 8 \\text{ or } x = 4$$
+
+Right working: the whole numerator $-b \\pm \\sqrt{\\Delta}$ is divided by $2a$.
+$$x = \\frac{6 \\pm 4}{2} \\implies x = 5 \\text{ or } x = 1$$
+
+Why it happens: the formula is often written or remembered in one line, and the length of the fraction bar gets lost. On a calculator the same slip appears when the numerator is not put in brackets.
+
+How to check: by Vieta's formulas the roots must add up to $-\\frac{b}{a} = 6$ and multiply to $\\frac{c}{a} = 5$. The wrong pair gives $8 + 4 = 12$ and $8 \\cdot 4 = 32$; the right pair gives $5 + 1 = 6$ and $5 \\cdot 1 = 5$.
+
+**Losing the sign of a negative c**
+
+The discriminant is computed with the minus sign in $-4ac$ but without the sign of $c$ itself, so a negative $c$ is treated as positive.
+
+Wrong working for $x^2 + 2x - 3 = 0$:
+$$\\Delta = 2^2 - 4 \\cdot 1 \\cdot 3 = 4 - 12 = -8 < 0$$
+which suggests the equation has no real solutions.
+
+Right working: with $c = -3$,
+$$\\Delta = 2^2 - 4(1)(-3) = 4 + 12 = 16 > 0$$
+so there are two real roots, $x = \\frac{-2 \\pm 4}{2}$, that is $x = 1$ or $x = -3$.
+
+Why it happens: the formula already contains a minus sign, and writing the coefficients without brackets hides the second one.
+
+How to check: when $a$ and $c$ have opposite signs, $-4ac$ is positive, so $\\Delta = b^2 - 4ac > 0$ and the equation always has two real roots. A negative discriminant in that case means a sign was lost. Factoring confirms the roots here: $(x - 1)(x + 3) = x^2 + 2x - 3$.
+
+**Stopping at the substitute variable**
+
+In a reducible equation, the substitution $u = x^2$ turns the problem into a quadratic in $u$, and the values of $u$ are reported as the answer.
+
+Wrong working:
+$$x^4 - 3x^2 - 4 = 0 \\implies u^2 - 3u - 4 = 0 \\implies (u - 4)(u + 1) = 0 \\implies u = 4 \\text{ or } u = -1$$
+
+Right working: each value of $u$ is turned back into an equation in $x$. From $x^2 = 4$, $x = 2$ or $x = -2$. From $x^2 = -1$ there is no real $x$. The real solutions are $x = 2$ and $x = -2$.
+
+Why it happens: solving the quadratic in $u$ feels like the end of the problem, because it is the step where the familiar methods are used. The question, though, was asked about $x$.
+
+How to check: substitute the answers into the original equation. $x = 2$ gives $16 - 12 - 4 = 0$. Read as values of $x$, the numbers $4$ and $-1$ fail: $x = 4$ gives $256 - 48 - 4 = 204$ and $x = -1$ gives $1 - 3 - 4 = -6$.`,
     before: ``,
     after: ``,
     link: '',
@@ -831,8 +931,53 @@ const schemas = {
     ],
   };
 
+  const quadraticFormulaAnatomy = {
+    header: {
+      kicker: 'the formula, part by part',
+      title: 'The quadratic formula',
+      lede: 'completing the square once, in general form: put in a, b, c and read off both solutions',
+    },
+    formula: [
+      { kind: 'part', id: 'x', children: [ { kind: 'var', text: 'x' } ] },
+      { kind: 'op', text: '=' },
+      { kind: 'frac',
+        num: [
+          { kind: 'part', id: 'mb', children: [ { kind: 'op', text: '−', tight: true }, { kind: 'var', text: 'b' } ] },
+          { kind: 'part', id: 'pm', children: [ { kind: 'op', text: '±' } ] },
+          { kind: 'rad', children: [
+            { kind: 'part', id: 'disc', children: [
+              { kind: 'var', text: 'b' }, { kind: 'sup', children: [ { kind: 'op', text: '2', tight: true } ] },
+              { kind: 'op', text: '−' }, { kind: 'op', text: '4', tight: true }, { kind: 'var', text: 'a' }, { kind: 'var', text: 'c' },
+            ] },
+          ] },
+        ],
+        den: [
+          { kind: 'part', id: 'den', children: [ { kind: 'op', text: '2', tight: true }, { kind: 'var', text: 'a' } ] },
+        ],
+      },
+    ],
+    parts: [
+      { id: 'x', color: '#475569', chip: 'x', title: 'The solutions', side: 'bottom',
+        tip: 'The values of x that make ax² + bx + c equal 0.',
+        desc: 'What the formula returns: the roots of ax² + bx + c = 0, the points where the parabola meets the x-axis. Example: for 2x² − 3x − 5 = 0 the formula gives x = 5/2 and x = −1.' },
+      { id: 'mb', color: '#06357A', chip: '−b', title: 'Centre line', side: 'top',
+        tip: 'Over 2a, it marks the midpoint of the two solutions.',
+        desc: 'Divided by 2a, −b gives the vertex line x = −b/2a, halfway between the two solutions. When the discriminant is 0, the single solution sits exactly there. Example: b = −3, so −b = 3 and the centre is 3/4, halfway between 5/2 and −1.' },
+      { id: 'pm', color: '#0284C7', chip: '±', title: 'Two solutions', side: 'top',
+        tip: 'Step the same distance to each side of the centre.',
+        desc: 'One solution adds the square root, the other subtracts it, so the two solutions sit symmetrically around −b/2a. Example: (3 + 7)/4 = 5/2 and (3 − 7)/4 = −1.' },
+      { id: 'disc', color: '#2563EB', chip: 'b² − 4ac', title: 'Discriminant', side: 'top',
+        tip: 'Its sign tells how many real solutions there are.',
+        desc: 'The [discriminant](!/algebra/definitions#discriminant): positive gives two real solutions, zero gives one, negative gives none. Its square root sets the gap between them, √Δ / |a|. Example: (−3)² − 4(2)(−5) = 49, √49 = 7, gap 7/2.' },
+      { id: 'den', color: '#5B7DB1', chip: '2a', title: 'Divides everything above', side: 'bottom',
+        tip: 'It divides the whole numerator, not only the root.',
+        desc: 'The whole numerator goes over 2a, and the formula needs a ≠ 0. Example: 2a = 4, so all of 3 ± 7 is divided by 4. Dividing only the 7 gives 3 ± 7/4, which is wrong.' },
+    ],
+  };
+
    return {
   props: {
+    quadraticFormulaAnatomy,
     quadMethodTree,
     demoUnits,
     sectionsContent,
@@ -856,7 +1001,7 @@ const schemas = {
    }
 
 
-export default function QuadraticEquationsPage({quadMethodTree, 
+export default function QuadraticEquationsPage({quadraticFormulaAnatomy, quadMethodTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -939,6 +1084,16 @@ export default function QuadraticEquationsPage({quadMethodTree,
           sectionsContent.obj4.content,
           <div key={'unit-formulaRoots'} dangerouslySetInnerHTML={{ __html: demoUnits.formulaRoots }} />,
           `When the discriminant is 0 the half-width vanishes and the two roots merge on the axis.`,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="quadratic-formula-anatomy"
+            title="The quadratic formula, part by part"
+            source="/algebra/equations/quadratic"
+            before={"Taking the formula apart: the $\\pm$ sign, the discriminant under the root, and the $2a$ below."}
+            after={"The part most often misread is the denominator: $2a$ divides $-b$ as well as the square root. The [discriminant](!/algebra/definitions#discriminant) alone tells how many real solutions to expect."}
+          >
+            <FormulaAnatomy data={quadraticFormulaAnatomy} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1016,6 +1171,14 @@ export default function QuadraticEquationsPage({quadMethodTree,
           >
             <TopDownTree data={quadMethodTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -798,6 +798,7 @@ import weightedExpectedValueDiagrams from '@/app/components/probability/expected
 import discreteExpectedValueDiagrams from '@/app/components/probability/expected-value/discreteExpectedValueDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -978,6 +979,32 @@ export async function getStaticProps(){
 `
 
 
+    // Concept introduction (section "intuition") — template D, comparison.
+    // Running instance: a fair die against a game paying $10 with probability
+    // 0.1 and costing $1 otherwise. Old intuition text (three paragraphs, no
+    // widgets) is kept in sectionsContent.intuition, unused, and reused
+    // verbatim; the pull-right demo frame with its line is carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciDieTable = ciTableOpen(['face', '1', '2', '3', '4', '5', '6']) +
+      ciRow(['probability', '1/6', '1/6', '1/6', '1/6', '1/6', '1/6'], { last: true }) +
+      '</tbody></table>'
+    const ciGameTable = ciTableOpen(['outcome', 'value', 'probability', 'value × probability']) +
+      ciRow(['win', '+$10', '0.1', '+$1.00']) +
+      ciRow(['lose', '−$1', '0.9', '−$0.90'], { shade: true }) +
+      ciRow(['plain average of the values', '(10 − 1) ÷ 2 = $4.50', '', 'ignores how often each happens'], { color: '#a4243b', cols: [1, 3] }) +
+      ciRow(['weighted by probability', '', '', '1.00 − 0.90 = $0.10'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+      '</tbody></table>'
+    const ciSpreadTable = ciTableOpen(['game', 'outcomes', 'expected value']) +
+      ciRow(['A (above)', '+$10 or −$1', '$0.10']) +
+      ciRow(['B', '+$0.10 every time', '$0.10'], { shade: true, last: true }) +
+      '</tbody></table>'
+
     const sectionsContent={
 
       obj0: {
@@ -1135,6 +1162,10 @@ $$E[g(X)] = \\int_{-\\infty}^{\\infty} g(x)\\,f_X(x)\\,dx$$
 /probability/formulas]@
 
 The density determines how much each transformed value contributes to the final average.
+
+@academic[pitfall,aside:true,width:35%:Applying the function to the mean
+Computing $E[X^2]$ as $(E[X])^2$ squares the average instead of averaging the squares: for a fair die it gives $3.5^2 = 12.25$. Weighting $x^2$ by $\\frac{1}{6}$ gives $E[X^2] = \\frac{91}{6} \\approx 15.17$.
+[Read more](!#pitfalls)]@
 
 Expected value of a function is a fundamental idea because it appears everywhere: in variance, in risk analysis, in moments of distributions, and in many applied calculations where the quantity of interest is built from $X$ rather than $X$ itself.
 
@@ -1314,6 +1345,10 @@ $$E[X] = 0\\cdot0.1 + 1\\cdot0.3 + 2\\cdot0.4 + 3\\cdot0.2 = 1.7$$]@
 
 ### Intuition :
 
+@academic[pitfall,aside:true,width:35%:Averaging the values without weights
+Adding the values and dividing by their count gives $\\frac{0 + 1 + 2 + 3}{4} = 1.5$, as if every value were equally likely. Weighted by the probabilities, $E[X] = 1.7$.
+[Read more](!#pitfalls)]@
+
 This calculation can be read as a **balance**: values that occur more often pull the average toward themselves, while rare values have little influence. If this morning were repeated many times under similar conditions, the average number of items sold would stabilize near (1.7).
 
 In case of [continuous random variable](!/probability/random-variables#types), the same idea applies, but probabilities are replaced by a density and the sum becomes an integral. That case is handled separately later.
@@ -1419,6 +1454,12 @@ Now compute the integral:
 @academic[formula_callout:**Continuous Random Variables (using a PDF)**
 $$E[X] = \\frac{1}{2} \\cdot \\frac{x^3}{3} \\bigg|_{0}^{2} = \\frac{1}{2} \\cdot \\frac{8}{3} = \\frac{4}{3} \\approx 1.33.$$]@
 
+@academic[pitfall,aside:true,width:35%:Integrating the density alone
+Leaving out the factor $x$ gives $\\int_{0}^{2} \\frac{x}{2} \\, dx = 1$, the total probability, which is the same for every density. With the factor, $E[X] = \\int_{0}^{2} x \\cdot \\frac{x}{2} \\, dx = \\frac{4}{3}$.
+[Read more](!#pitfalls)]@
+
+The example uses two integrals over the same interval $[0, 2]$ with the same density. The first, in the validity check, confirms that the area under $f(x)$ is $1$. The second, which produces the expected value, carries one more factor in its integrand.
+
 This example shows how expected value can be calculated directly from a probability density function formula, without approximating with discrete intervals. The structure of the PDF determines the calculation.
       
       `,
@@ -1441,6 +1482,10 @@ Once derived, these formulas become standard results that can be used directly w
   after:`
 The normal distribution is typically presented with its mean $μ$ already given as a parameter, so $E(X) = μ$ by definition.
 
+@academic[pitfall,aside:true,width:35%:Using 1/p for the number of failures
+Applying $E[X] = \\frac{1}{p}$ when $X$ counts the failures before the first success gives $4$ for $p = 0.25$. That formula counts the trials, the success included; the failures have mean $\\frac{1-p}{p} = 3$.
+[Read more](!#pitfalls)]@
+
 Using these established formulas makes calculations immediate. Instead of setting up integrals or sums from scratch, you simply identify the distribution type and its parameters, then apply the corresponding formula. This approach is both faster and less error-prone, especially when working with well-known distributions in applied problems.
 `,
 },
@@ -1455,6 +1500,68 @@ Using these established formulas makes calculations immediate. Instead of settin
     capstone:{
       title:`**Expected Value at a Glance**`,
       content:`The table below condenses expected value into a single reference card — what it is, the discrete and continuous formulas that define it, how to compute the expectation of a function of X, the structural properties that govern it (linearity, scaling, the product rule under independence), and the situations in which it fails to exist.`,
+      before:``,
+      after:``,
+    },
+    obj6:{
+      title:`Common Pitfalls`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Averaging the values without weights**
+
+The values of $X$ and their probabilities are given in a table, and the expected value is taken as the ordinary average of the values. The probabilities are never used.
+
+Wrong working: for $X$ taking $0, 1, 2, 3$ with probabilities $0.1, 0.3, 0.4, 0.2$,
+$$E[X] = \\frac{0 + 1 + 2 + 3}{4} = 1.5$$
+
+Right working: each value is multiplied by its probability, and the products are added.
+$$E[X] = 0 \\cdot 0.1 + 1 \\cdot 0.3 + 2 \\cdot 0.4 + 3 \\cdot 0.2 = 0 + 0.3 + 0.8 + 0.6 = 1.7$$
+
+Why it happens: "average" first means adding numbers and dividing by how many there are. That ordinary average is the expected value only when every value is equally likely, as on a fair die.
+
+How to check: compare the answer with where the probability sits. Here $2$ and $3$ carry $0.6$ of the probability, so the balance point must lie above the midpoint $1.5$ of the values.
+
+**Integrating the density alone**
+
+For a continuous variable, the integral is set up over the right interval with the right density, but the factor $x$ is left out of the integrand.
+
+Wrong working: for $f(x) = \\frac{x}{2}$ on $[0, 2]$,
+$$E[X] = \\int_{0}^{2} \\frac{x}{2} \\, dx = \\frac{x^2}{4} \\bigg|_{0}^{2} = 1$$
+
+Right working: each value $x$ is weighted by its density.
+$$E[X] = \\int_{0}^{2} x \\cdot \\frac{x}{2} \\, dx = \\frac{x^3}{6} \\bigg|_{0}^{2} = \\frac{8}{6} = \\frac{4}{3}$$
+
+Why it happens: the validity check $\\int f(x) \\, dx = 1$ and the expected value use the same density and the same limits, and the two integrals are easily swapped.
+
+How to check: every density integrates to $1$, so an answer of exactly $1$ that did not use $x$ says nothing about this distribution. Here the density rises towards $2$, so the mean must lie to the right of the midpoint $1$.
+
+**Using 1/p for the number of failures**
+
+The geometric formula $E[X] = \\frac{1}{p}$ is applied to a variable that counts the failures before the first success. The formula in the table belongs to the version that counts trials up to and including the first success.
+
+Wrong working: with $p = 0.25$ and $X$ the number of failures before the first success,
+$$E[X] = \\frac{1}{p} = \\frac{1}{0.25} = 4$$
+
+Right working: the number of failures is the number of trials minus the one success, so its mean is one less.
+$$E[X] = \\frac{1}{p} - 1 = \\frac{1-p}{p} = \\frac{0.75}{0.25} = 3$$
+
+Why it happens: both versions are called geometric and share the parameter $p$; the table lists only one formula, and the wording of a problem decides which variable is meant.
+
+How to check: try $p = 1$, where the first trial always succeeds. There are no failures, so the mean must be $0$; the formula $\\frac{1-p}{p}$ gives $0$, while $\\frac{1}{p}$ gives $1$, the number of trials.
+
+**Applying the function to the mean**
+
+The expected value of $g(X)$ is needed, and $g$ is applied to $E[X]$ instead of to each value of $X$ before averaging.
+
+Wrong working: for a fair die,
+$$E[X^2] = (E[X])^2 = 3.5^2 = 12.25$$
+
+Right working: each value is squared first, and the squares are weighted by $\\frac{1}{6}$.
+$$E[X^2] = \\frac{1 + 4 + 9 + 16 + 25 + 36}{6} = \\frac{91}{6} \\approx 15.17$$
+
+Why it happens: for a linear function the shortcut works, since $E[aX + b] = aE[X] + b$, and it is easy to carry it over to functions that are not linear.
+
+How to check: $E[X^2] - (E[X])^2$ is the variance, which is never negative and is zero only for a constant. So $E[X^2]$ must come out larger than $(E[X])^2$ for a die; here the gap is $\\frac{91}{6} - 12.25 = \\frac{35}{12} \\approx 2.92$, the variance of a fair die.`,
       before:``,
       after:``,
     },
@@ -1562,6 +1669,12 @@ const continuousExpectedValueFormulasData = {
     vlines: [{ x: 1, label: '' }, { x: 4 / 3, label: '' }],
     notes: [{ x: 0.97, y: 1.12, text: 'midpoint 1', pos: 'w' }, { x: 1.36, y: 1.12, text: 'E[X] = 4/3', pos: 'e', color: 'r' }, { x: 1.45, y: 0.35, text: 'more weight on the right', pos: 'e' }, { x: 1.45, y: 0.27, text: 'pulls the mean right', pos: 'e' }],
     caption: 'The mean 4/3 sits right of the midpoint 1' };
+  const conceptIntroFigures = {
+    dieTable: ciDieTable,
+    gameTable: ciGameTable,
+    spreadTable: ciSpreadTable,
+  };
+
   const demoUnits = {
     u_intuition_0: demoUnitFrame({
       svg: weightedExpectedValueDiagrams['pull-right'],
@@ -1621,6 +1734,7 @@ const continuousExpectedValueFormulasData = {
       props:{
     expectedValueCases,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          generalTable,
@@ -1652,10 +1766,82 @@ export default function ExpectedValuePage({expectedValueCases,
   continuousExpectedValueFormulasData,
   propertiesTable,
   examplesTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // "Intuition" section concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'works',
+        lead: `For a fair die, the plain average of the faces already gives the long-run result.`,
+        content: [
+          `Add the faces and divide by six: $\\frac{1 + 2 + 3 + 4 + 5 + 6}{6} = 3.5$. Roll the die many times and the average of the rolls settles near $3.5$. If that method always worked, nothing more would be needed — so a new idea owes an explanation of where it does not.`,
+          ciTable('dieTable'),
+        ],
+      },
+      {
+        id: 'waste',
+        kind: 'instance',
+        lead: `When outcomes are not equally likely, the plain average gets the answer badly wrong.`,
+        content: [
+          `A game pays 10 dollars with probability $0.1$ and costs 1 dollar otherwise. Averaging the two values says the game is worth 4.50 dollars a play — but nine plays in ten lose.`,
+          ciTable('gameTable'),
+          `Weighting each value by how often it happens gives 0.10 dollars per play: still slightly in your favour, but forty-five times less than the plain average claimed. The plain average treats a rare win and a frequent loss as equally important.`,
+          <div key={'unit-u_intuition_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_intuition_0 }} />,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [expected value](!/probability/definitions#expected_value) of a random variable is the average of its values, each weighted by its probability: for a discrete variable, $E[X] = \\sum x \\, P(X = x)$.`,
+        footer: `For the game, $E[X] = 10(0.1) + (-1)(0.9) = 0.10$.`,
+      },
+      {
+        id: 'kind',
+        lead: `An expected value is a single number describing a whole distribution.`,
+        content: [
+          `The simplest way to think about expected value is as the **long-run average** of a [random variable](!/probability/random-variables).
+If you could run the same random experiment again and again, the results would fluctuate from trial
+to trial, but the average of all outcomes would settle around a single number. That number is the
+expected value.`,
+          `The value that occurs most often and the expected value are not necessarily the same.
+In fact, the expected value might not match any specific outcome at all.
+It is simply the number that reflects the overall behavior of the distribution — a kind of “center of gravity” for probability.`,
+        ],
+      },
+      {
+        id: 'free',
+        lead: `Two facts come with it for free.`,
+        content: [
+          `First, the old method is the special case: when every outcome has the same probability, weighting changes nothing, which is why the die's plain average was right. Second, nothing requires the result to be a possible outcome — no die ever shows $3.5$, and no single play of the game pays 0.10 dollars.`,
+          `For [discrete random variables](!/probability/random-variables#types), this average is formed by giving more weight to outcomes that are more likely.
+For [continuous variables](!/probability/random-variables#types), the density curve shows where values tend to concentrate, and the expected
+value reflects the balance point of that curve.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Everything rests on weighting by probability, and that hides how far results stray.`,
+        content: [
+          `Weighting by probability is the single cause behind every fact above — and it has a cost. Two games with the same expected value can feel completely different.`,
+          ciTable('spreadTable'),
+          `Expected value cannot tell A from B; how spread out the results are is measured separately, by the [variance](!/probability/variance).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: [
+          `The rest of the page gives the notation, how to calculate expected values for discrete and continuous variables, the values for common distributions, its properties, expected values of functions and sums, and worked examples.`,
+          `The calculation behind the balance point comes next.`,
+        ],
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1672,9 +1858,7 @@ export default function ExpectedValuePage({expectedValueCases,
         title:sectionsContent.intuition.title,
         link:'',
         content:[
-            sectionsContent.intuition.content,
-                  <div key={'unit-u_intuition_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_intuition_0 }} />,
-          `The calculation behind the balance point comes next.`,
+            <ConceptIntro key={'intuition-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1814,6 +1998,14 @@ export default function ExpectedValuePage({expectedValueCases,
             sectionsContent.capstone.content,
             <div key={'summary-table'} style={tableWrapStyle}
                  dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj6.title,
+        link:'',
+        content:[
+            sectionsContent.obj6.content,
         ]
     },
     // {

@@ -15,6 +15,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -514,7 +516,7 @@ Standard deviation is approximately 28.9% of the interval width. For a uniform d
 **Properties**:
 • The median equals the mean: both are $(a+b)/2$
 • Any value has equal density, but the distribution still has a well-defined center and spread
-• Approximately 86.6% of values fall within one standard deviation of the mean (compared to 68% for normal)`,
+• Approximately 57.7% of values fall within one standard deviation of the mean (compared to 68% for normal)`,
 
   keyProperties:`<h3 style="color: #1e3a8a;">Key Properties and Special Characteristics</h3>
 **Perfect Symmetry**: The uniform distribution is symmetric about its mean $(a+b)/2$. The probability density is identical at equal distances from the center: $f(\\mu - d) = f(\\mu + d)$ for any $d$.
@@ -647,7 +649,7 @@ Remarkably, the standard deviation equals the mean for the exponential distribut
   keyProperties:`<h3 style="color: #1e3a8a;">Key Properties and Special Characteristics</h3>
 **Memoryless Property**: The exponential distribution's most distinctive feature. If $X \\sim \\text{Exp}(\\lambda)$, then $P(X > s + t \\mid X > s) = P(X > t)$ for all $s, t \\geq 0$. The amount of time already waited doesn't affect the distribution of remaining waiting time. This is the continuous analog of the geometric distribution's memoryless property.
 
-**Heavy Right Tail**: The distribution is strongly right-skewed with a long tail extending toward infinity. While most values cluster near zero, there's always some probability of observing very large values. The skewness coefficient is exactly 2 for all exponential distributions.
+**Long Right Tail**: The distribution is strongly right-skewed with a long tail extending toward infinity. While most values cluster near zero, there's always some probability of observing very large values. The skewness coefficient is exactly 2 for all exponential distributions.
 
 **Constant Hazard Rate**: The hazard rate (instantaneous failure rate) is constant and equal to λ. This means the risk of an event occurring in the next instant remains the same regardless of how much time has passed. This property is equivalent to memorylessness.
 
@@ -700,6 +702,12 @@ Understanding whether your [random variable](!/probability/random-variables) is 
 • A) Discrete: work with individual probabilities; Continuous: work with probability densities
 • B) Discrete: sum probabilities; Continuous: integrate over intervals
 • C) Discrete: bars on graphs; Continuous: smooth curves where area matters
+
+@academic[pitfall,aside:true,width:35%:Treating the density as a point probability
+Writing $P(X < 3) = F(3) - f(3)$ for $X \\sim U(0, 10)$ gives $0.3 - 0.1 = 0.2$. A single point has probability $0$, so $P(X < 3) = P(X \\leq 3) = 0.3$.
+[Read more](!#pitfalls)]@
+
+The switch from sums to areas also changes the role of the ends of an interval. In a discrete model, a strict or non-strict inequality decides whether the boundary value is counted. In a continuous model, the boundary is a single point on the axis, and the probability comes from the area between the ends.
 
 `,
       before:``,
@@ -809,7 +817,7 @@ Continuous distributions aren't isolated mathematical objects—they're intercon
 Some distributions are generalizations of others. The gamma distribution generalizes the exponential: when the shape parameter equals 1, you get the exponential distribution back. Similarly, the chi-squared distribution is a special case of the gamma distribution. The beta distribution with parameters (1,1) becomes the uniform distribution on [0,1]. These hierarchies mean mastering one distribution gives you insight into several others.
 
 **Transformations and Derived Distributions**
-New distributions arise from transforming existing ones. If X follows a [normal](!/probability/distributions/continuous#normal) distribution, then e^X follows a lognormal distribution—the transformation creates a fundamentally different shape. The chi-squared distribution emerges when you sum squared standard normal variables. Taking the ratio of two chi-squared variables (properly scaled) yields a Student's t-distribution. These connections explain why certain distributions appear in statistical testing.
+New distributions arise from transforming existing ones. If X follows a [normal](!/probability/distributions/continuous#normal) distribution, then e^X follows a lognormal distribution—the transformation creates a fundamentally different shape. The chi-squared distribution emerges when you sum squared standard normal variables. Taking the ratio of two chi-squared variables (each divided by its degrees of freedom) yields an F-distribution, and a standard normal divided by the square root of a scaled chi-squared variable yields a Student's t-distribution. These connections explain why certain distributions appear in statistical testing.
 
 **Limiting Behaviors**
 As parameters change, distributions can converge to others. The Student's t-distribution approaches the [normal](!/probability/distributions/continuous#normal) distribution as degrees of freedom increase—its heavier tails gradually thin out. The binomial distribution (discrete) approaches the normal distribution under certain conditions, bridging the discrete-continuous divide. The Poisson process generates exponential waiting times, linking discrete event counts to continuous time intervals.
@@ -861,6 +869,12 @@ The probability density function f(x) tells you the relative likelihood of value
 
 The cumulative distribution function F(x) = P(X ≤ x) answers the question "what's the probability the [random variable](!/probability/random-variables) is at most x?" This is directly usable. If you need P(X ≤ 5), just evaluate F(5). For P(X > 5), use 1 - F(5). For P(3 < X ≤ 7), calculate F(7) - F(3). The CDF eliminates the need for integration in many practical problems.
 
+@academic[pitfall,aside:true,width:35%:Reading F(x) as the right tail
+Taking $F(2)$ as $P(X > 2)$ for an exponential with $\\lambda = 1$ gives $1 - e^{-2} \\approx 0.865$, which is $P(X \\leq 2)$. The right tail is $P(X > 2) = 1 - F(2) = e^{-2} \\approx 0.135$.
+[Read more](!#pitfalls)]@
+
+F always measures the area to the left of its argument. An event that lies to the right of a point, or between two points, is therefore built from left-hand areas and the total area of 1.
+
 **The Fundamental Relationship**
 
 The PDF and CDF are intimately connected: F(x) = ∫[-∞ to x] f(t)dt, and conversely, f(x) = dF(x)/dx.
@@ -892,6 +906,12 @@ A [normal](!/probability/distributions/continuous#normal) distribution isn't use
 
 The simplest approach matches theoretical moments to sample moments. For a [normal](!/probability/distributions/continuous#normal) distribution, estimate μ with the sample mean x̄ and σ² with the sample variance s². For an exponential distribution, estimate λ as 1/x̄ since the theoretical mean equals 1/λ. This method is intuitive and computationally straightforward, though not always the most efficient.
 
+@academic[pitfall,aside:true,width:35%:Using the sample mean as the rate
+Taking $\\hat{\\lambda} = \\bar{x}$ for waiting times with sample mean $\\bar{x} = 4$ minutes gives a rate of 4 events per minute. Matching $E[X] = \\frac{1}{\\lambda}$ to $\\bar{x}$ gives $\\hat{\\lambda} = \\frac{1}{4} = 0.25$ per minute.
+[Read more](!#pitfalls)]@
+
+Each match runs through the formula that ties the parameter to the moment. For the normal distribution, μ is itself the mean. For the exponential, λ is a rate, counted in events per unit of time, while the sample mean x̄ is measured in units of time.
+
 **Maximum Likelihood Estimation (MLE)**
 
 MLE finds parameter values that make the observed data most probable. You construct a likelihood function—the probability of seeing your data given certain parameters—and maximize it. For many standard distributions, MLE formulas are well-established. For the normal distribution, MLE actually gives the same estimates as the method of moments. For others like the Weibull distribution, MLE requires numerical optimization but provides more accurate estimates, especially with smaller samples.
@@ -912,6 +932,12 @@ Transforming [random variables](!/probability/random-variables) is a powerful te
 **The Standard Normal Distribution**
 
 The most important transformation in statistics converts any normal distribution to the standard normal with mean 0 and variance 1. Using the transformation Z = (X - μ)/σ, you standardize your variable. This Z-score tells you how many standard deviations a value is from the mean. Why standardize? Because we have extensive tables and software for the standard normal, and all normal distribution problems reduce to this single reference distribution.
+
+@academic[pitfall,aside:true,width:35%:Dividing by the variance
+Standardizing $x = 7$ from $X \\sim N(5, 2^2)$ with the variance gives $z = \\frac{7 - 5}{4} = 0.5$. With the standard deviation $\\sigma = 2$, $z = \\frac{7 - 5}{2} = 1$: the value is one standard deviation above the mean.
+[Read more](!#pitfalls)]@
+
+A z-score counts standard deviations, so it carries no units. A height and a test score can both have z = 1, which means each lies one standard deviation above its own mean.
 
 **Linear Transformations**
 
@@ -1009,6 +1035,69 @@ Changing parameters reshapes the distribution dynamically. For the normal distri
       after:``,
   
     },
+    obj6:{
+      title:`Common Pitfalls`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating the density as a point probability**
+
+A probability with a strict inequality is computed by taking the non-strict one and removing the boundary value, as for a discrete variable. The density at the boundary is used as the probability of that value.
+
+Wrong working: for $X \\sim U(0, 10)$, with $F(3) = \\frac{3}{10} = 0.3$ and $f(3) = \\frac{1}{10} = 0.1$,
+$$P(X < 3) = P(X \\leq 3) - P(X = 3) = F(3) - f(3) = 0.3 - 0.1 = 0.2$$
+
+Right working: a single point has probability $0$ for a continuous variable, so nothing is removed.
+$$P(X < 3) = P(X \\leq 3) - 0 = F(3) = \\frac{3 - 0}{10 - 0} = 0.3$$
+
+Why it happens: for a discrete variable, $P(X < 3)$ and $P(X \\leq 3)$ differ by the probability of the value $3$, and that habit is carried over. The density $f(3)$ looks like the natural stand-in for $P(X = 3)$, but it is a height, not an area.
+
+How to check: shrink the interval. $P(3 \\leq X \\leq 3 + h) = 0.1h$ for $X \\sim U(0, 10)$, which goes to $0$ as $h$ goes to $0$; whatever the density, the area above one point is $0$.
+
+**Reading F(x) as the right tail**
+
+A question asks for the probability that $X$ exceeds a value, and $F$ at that value is given as the answer. $F$ is the area to the left.
+
+Wrong working: for an exponential variable with $\\lambda = 1$,
+$$P(X > 2) = F(2) = 1 - e^{-2} \\approx 0.865$$
+
+Right working: the right tail is what remains of the total area after the left part.
+$$P(X > 2) = 1 - F(2) = 1 - (1 - e^{-2}) = e^{-2} \\approx 0.135$$
+
+Why it happens: the CDF is the number that tables and software return, and it is easy to report it without asking which side of the point it covers. For the exponential, $F(x) = 1 - e^{-\\lambda x}$ already contains a "$1 -$", which makes it look like a complement.
+
+How to check: compare with the shape. The exponential density with $\\lambda = 1$ is highest at $0$ and falls quickly, so most of the area lies below $2$, and the probability of exceeding $2$ must be small.
+
+**Using the sample mean as the rate**
+
+In the method of moments for the exponential distribution, the sample mean is used directly as the estimate of $\\lambda$. But $\\lambda$ is a rate, and the mean of the distribution is $\\frac{1}{\\lambda}$.
+
+Wrong working: waiting times between arrivals have sample mean $\\bar{x} = 4$ minutes, so
+$$\\hat{\\lambda} = \\bar{x} = 4 \\text{ per minute}$$
+
+Right working: the theoretical mean $\\frac{1}{\\lambda}$ is matched to the sample mean, and the equation is solved for $\\lambda$.
+$$\\frac{1}{\\hat{\\lambda}} = \\bar{x} = 4 \\quad\\Rightarrow\\quad \\hat{\\lambda} = \\frac{1}{4} = 0.25 \\text{ per minute}$$
+
+Why it happens: for the normal distribution the parameter $\\mu$ is the mean, so the sample mean is the estimate directly; the same shortcut is carried over to a distribution whose parameter is not the mean.
+
+How to check: look at the units. A mean of 4 minutes between arrivals means one arrival every 4 minutes, which is a quarter of an arrival per minute; a rate of 4 per minute would mean an arrival every 15 seconds.
+
+**Dividing by the variance**
+
+A normal value is standardized with $\\sigma^2$ in the denominator instead of $\\sigma$, often because the distribution is written as $N(\\mu, \\sigma^2)$ and the second number is copied straight into the formula.
+
+Wrong working: for $X \\sim N(5, 2^2)$, written $N(5, 4)$, and $x = 7$,
+$$z = \\frac{7 - 5}{4} = 0.5$$
+
+Right working: the denominator is the standard deviation $\\sigma = \\sqrt{4} = 2$.
+$$z = \\frac{x - \\mu}{\\sigma} = \\frac{7 - 5}{2} = 1$$
+
+Why it happens: the usual notation $N(\\mu, \\sigma^2)$ puts the variance in the second place, while the z-score formula needs its square root.
+
+How to check: $7$ is exactly one step of $\\sigma = 2$ above the mean $5$, so its z-score must be $1$. A z-score is a count of standard deviations, and it has to agree with that count on simple values.`,
+      before:``,
+      after:``,
+
+    },
   
   }
 
@@ -1081,8 +1170,32 @@ This section organizes continuous distributions, highlights their shared structu
     }),
   };
 
+  const continuousFamilyOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Nine continuous families',
+    preface: 'Different continuous distributions model different kinds of real-world quantities. Match the phenomenon to the family.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Same tools, different shapes',
+    conclusion: 'All continuous distributions share densities and integration-based calculations like [expected value](!/probability/expected-value) and [variance](!/probability/variance); they differ in shape, support, parameters and the phenomena they fit.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Continuous distributions', example: 'f(x)', children: [
+        { id: 'normal', name: '[Normal](!/probability/distributions/continuous/normal)', def: 'heights, test scores, measurement errors', example: 'bell curve' },
+        { id: 'uniform', name: '[Uniform](!/probability/distributions/continuous/uniform)', def: 'every value in a range equally likely', example: 'rounding errors' },
+        { id: 'exp', name: '[Exponential](!/probability/distributions/continuous/exponential)', def: 'waiting times between events', example: 'memoryless' },
+        { id: 'beta', name: 'Beta', def: 'probabilities, proportions, percentages', example: 'on [0, 1]' },
+        { id: 'gamma', name: 'Gamma', def: 'waiting time for several events', example: 'generalizes exponential' },
+        { id: 'chi', name: 'Chi-squared', def: 'hypothesis tests, goodness of fit', example: 'sum of squared normals' },
+        { id: 't', name: 'Student\'s t', def: 'small samples, unknown variance', example: 'heavier tails' },
+        { id: 'weibull', name: 'Weibull', def: 'lifetimes and failure rates', example: 'reliability' },
+        { id: 'lognormal', name: 'Lognormal', def: 'income, particle sizes, stock prices', example: 'log is normal' },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    continuousFamilyOutline,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1101,7 +1214,7 @@ This section organizes continuous distributions, highlights their shared structu
     }
    }
 
-export default function ContinuousDistributionsPage({seoData,sectionsContent , introContent,
+export default function ContinuousDistributionsPage({continuousFamilyOutline, seoData,sectionsContent , introContent,
     normalTable,
          exponentialTable,
          continuousUniformTable, demoUnits
@@ -1145,6 +1258,14 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
           sectionsContent.types.content,
                   <div key={'unit-u_types_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_types_1 }} />,
           `All these families share the properties listed next.`,
+          <DiagramFrame
+            key={'types-diagram'}
+            id="continuous-families-outline"
+            title="Nine continuous distribution families"
+            source="/probability/distributions/continuous"
+          >
+            <TaxonomyOutline data={continuousFamilyOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
      {
@@ -1402,6 +1523,14 @@ export default function ContinuousDistributionsPage({seoData,sectionsContent , i
         link:'',
         content:[
           sectionsContent.visualization.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj6.title,
+        link:'',
+        content:[
+          sectionsContent.obj6.content,
         ]
     },
     // {

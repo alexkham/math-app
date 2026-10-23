@@ -1060,12 +1060,12 @@ const obj9Table = `
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Diagonal — some entries zero</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in REF (zero rows reorder to the bottom)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in REF once zero rows are moved to the bottom</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a pivot only where the diagonal entry is nonzero</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
     </tr>
     <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Upper triangular</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Upper triangular, no zero on the diagonal</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">already in REF</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">nonzero diagonal entries serve as pivots</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">number of nonzero diagonal entries</td>
@@ -1073,7 +1073,7 @@ const obj9Table = `
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Lower triangular</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">NOT in REF — the staircase goes the wrong direction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward elimination converts it quickly; at most one elimination per column</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">forward elimination converts it quickly; with a nonzero diagonal, each elimination changes only the entry it clears</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">depends on the matrix</td>
     </tr>
     <tr>
@@ -1470,6 +1470,10 @@ Row $2$: $x_2 + 4(2) = -1$, so $x_2 = -9$.
 
 Row $1$: $x_1 + 3(-9) - 2(2) = 5$, so $x_1 = 5 + 27 + 4 = 36$.
 
+@academic[pitfall,aside:true,width:35%:Reading the answer straight off the REF
+Taking the last column as the solution gives $x_1 = 5$, $x_2 = -1$, $x_3 = 2$, but row $1$ then reads $5 + 3(-1) - 2(2) = -2 \\neq 5$. The entries above the pivots still have to be cleared by back substitution, which gives $x_1 = 36$, $x_2 = -9$, $x_3 = 2$.
+[Read more](!#pitfalls)]@
+
 Each step uses values computed in previous steps. The process requires $n$ substitutions for an $n \\times n$ system with a unique solution. When free variables are present, they appear as unresolved symbols carried through the substitution, producing a parametric expression.`,
     before: ``,
     after: ``,
@@ -1512,6 +1516,10 @@ Pivots in columns $1$ and $3$. Free variables: $x_2 = s$, $x_4 = t$. Reading off
 @academic[formula_callout:Parametric Vector Form
 $$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} -2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 1 \\\\ 0 \\\\ -3 \\\\ 1 \\end{pmatrix}$$]@
 
+@academic[pitfall,aside:true,width:35%:Copying the free column without changing sign
+Taking the entries of column $2$ as they stand gives the direction $(2, 1, 0, 0)$, and at $s = 1$ the point $(7, 1, -2, 0)$, where row $1$ gives $7 + 2(1) - 0 = 9 \\neq 5$. Moving $2x_2$ to the right side flips the sign, so the direction is $(-2, 1, 0, 0)$.
+[Read more](!#pitfalls)]@
+
 The first vector is a particular solution $\\mathbf{x}_p$. The two direction vectors form a [basis](!/linear-algebra/vector-spaces) for the null space of the coefficient matrix. The solution set is the null space translated by $\\mathbf{x}_p$ — an affine subspace of dimension $2$ in $\\mathbb{R}^4$.
 
 For a [homogeneous](!/linear-algebra/linear-systems/homogeneous) system ($\\mathbf{b} = \\mathbf{0}$), the particular solution is $\\mathbf{0}$ and the general solution is purely a null-space combination.`,
@@ -1532,6 +1540,10 @@ This row represents the equation $0 = d$, which no values of the unknowns can sa
 
 The extra column $\\mathbf{b}$ introduces a new pivot that the coefficient matrix alone does not have — meaning $\\mathbf{b}$ is not in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.
 
+@academic[pitfall,aside:true,width:35%:Reading a zero row as a contradiction
+Declaring $\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$ inconsistent because of its zero row gives no solution. That row says $0 = 0$, which every $\\mathbf{x}$ satisfies, and the system has infinitely many solutions, $x_1 = 3 - 2t$, $x_2 = t$.
+[Read more](!#pitfalls)]@
+
 If no such contradictory row appears, the system is consistent. The distinction between unique and infinite solutions then depends on whether free variables exist: rank $= n$ gives a unique solution, rank $< n$ gives infinitely many.`,
     before: ``,
     after: ``,
@@ -1543,11 +1555,11 @@ If no such contradictory row appears, the system is consistent. The distinction 
 
 The [identity matrix](!/linear-algebra/matrix/types) $I_n$ is in RREF: $n$ pivots, each equal to $1$, each alone in its column. Rank $n$, no free variables.
 
-Any [diagonal](!/linear-algebra/matrix/types) matrix is in REF. If all diagonal entries are nonzero, scaling each to $1$ produces RREF. If some diagonal entries are zero, the corresponding rows are zero rows and the rank drops.
+Any [diagonal](!/linear-algebra/matrix/types) matrix is in REF once its zero rows are moved to the bottom. If all diagonal entries are nonzero, scaling each to $1$ produces RREF. If some diagonal entries are zero, the corresponding rows are zero rows and the rank drops.
 
-An upper [triangular](!/linear-algebra/matrix/types) matrix is already in REF. Its pivots are the nonzero diagonal entries, and its rank equals the number of nonzero entries on the diagonal.
+An upper [triangular](!/linear-algebra/matrix/types) matrix with no zeros on the diagonal is already in REF. Its pivots are the diagonal entries, and its rank is $n$; with zeros on the diagonal, further elimination may be needed and the rank is at least the number of nonzero diagonal entries.
 
-A lower triangular matrix is not in REF (the staircase goes the wrong way), but forward elimination converts it quickly — each column requires at most one elimination step.
+A lower triangular matrix is not in REF (the staircase goes the wrong way), but forward elimination converts it quickly — when the diagonal entries are nonzero, each elimination step changes only the entry it clears.
 
 The zero matrix is in both REF and RREF. It has rank $0$, and the corresponding homogeneous system $O\\mathbf{x} = \\mathbf{0}$ has every variable free.`,
     before: ``,
@@ -1562,7 +1574,13 @@ This is the standard computational method for determining rank: row reduce and c
 
 From the rank, everything else follows. The dimension of the column space is $r$. The dimension of the row space is $r$. The number of free variables is $n - r$. The dimension of the null space is $n - r$. The system $A\\mathbf{x} = \\mathbf{b}$ is consistent if and only if the augmented matrix has the same rank $r$ as $A$. The solution, when it exists, is unique if $r = n$ and infinite if $r < n$.
 
-The pivot positions also identify [bases](!/linear-algebra/vector-spaces) for the fundamental subspaces. The original columns at pivot positions form a basis for the column space. The nonzero rows of the echelon form are a basis for the row space. The parametric solution of $A\\mathbf{x} = \\mathbf{0}$ gives a basis for the null space. Everything flows from counting and locating the pivots.`,
+The pivot positions also identify [bases](!/linear-algebra/vector-spaces) for the fundamental subspaces. The original columns at pivot positions form a basis for the column space. The nonzero rows of the echelon form are a basis for the row space. The parametric solution of $A\\mathbf{x} = \\mathbf{0}$ gives a basis for the null space. Everything flows from counting and locating the pivots.
+
+@academic[pitfall,aside:true,width:35%:Taking basis columns from the reduced matrix
+For $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, with reduced form $\\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix}$, taking pivot column $1$ of the reduced form gives $(1, 0)$, which is not in $\\text{Col}(A)$ at all. The basis is column $1$ of $A$ itself, $(1, 2)$.
+[Read more](!#pitfalls)]@
+
+Each basis is read after the same single reduction. The reduction locates the pivots, and that one list of positions then serves the column space, the row space and the null space. What differs from one basis to the next is the matrix the vectors are copied from, and that choice follows from how row operations act on rows and on columns.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1570,6 +1588,70 @@ The pivot positions also identify [bases](!/linear-algebra/vector-spaces) for th
   obj11: {
     title: `Summary: Everything Readable from RREF`,
     content: `The RREF of A is a single canonical form, but it carries a remarkable amount of structural information about the matrix — the rank, the nullity, bases for the column, row, and null spaces, and the consistency, uniqueness, and invertibility verdicts for any system A·x = b. The table below collects each property that can be extracted directly from RREF alongside the rule for reading it and the underlying reason.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes cause many wrong answers when solutions and bases are read from an echelon form. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading the answer straight off the REF**
+
+The last column of a row echelon form is taken as the solution, as if the matrix were already reduced. In REF a pivot row can still hold entries in the columns of later pivots, so the last column is not yet the answer.
+
+Wrong working: for the system of the worked example,
+$$\\left(\\begin{array}{ccc|c} 1 & 3 & -2 & 5 \\\\ 0 & 1 & 4 & -1 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right) \\quad \\Longrightarrow \\quad x_1 = 5, \\; x_2 = -1, \\; x_3 = 2$$
+
+Right working: solve from the bottom row upward.
+$$x_3 = 2, \\qquad x_2 = -1 - 4(2) = -9, \\qquad x_1 = 5 - 3(-9) + 2(2) = 36$$
+
+Why it happens: in RREF the last column really is the solution, and the two forms look alike at a glance. The difference sits in the entries above the pivots, which REF does not clear.
+
+How to check: substitute into the first row. The wrong values give $5 + 3(-1) - 2(2) = -2$, not $5$; the right ones give $36 + 3(-9) - 2(2) = 5$.
+
+**Copying the free column without changing sign**
+
+When a direction vector is built for a free variable, the entries of its column in the RREF are copied into the vector as they stand. Those entries sit on the left side of the equations, and moving them to the right side changes their sign.
+
+Wrong working: for the RREF
+$$\\left(\\begin{array}{cccc|c} 1 & 2 & 0 & -1 & 5 \\\\ 0 & 0 & 1 & 3 & -2 \\end{array}\\right)$$
+copying columns $2$ and $4$ gives
+$$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} -1 \\\\ 0 \\\\ 3 \\\\ 1 \\end{pmatrix}$$
+
+Right working: write each row as an equation and solve for its pivot variable, $x_1 = 5 - 2s + t$ and $x_3 = -2 - 3t$. The coefficients of $s$ and $t$ are the free-column entries with the sign changed:
+$$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} -2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 1 \\\\ 0 \\\\ -3 \\\\ 1 \\end{pmatrix}$$
+
+Why it happens: the particular solution is copied from the last column with no change of sign, because those entries already sit on the right side. The same copying is then applied to the free columns, whose entries sit on the left.
+
+How to check: every direction vector must solve the homogeneous system. The wrong vector $(2, 1, 0, 0)$ gives $2 + 2(1) - 0 = 4$ in row $1$, not $0$; the right one gives $-2 + 2(1) - 0 = 0$.
+
+**Reading a zero row as a contradiction**
+
+A row of zeros in the reduced augmented matrix is taken as a sign that the system has no solution. Only a row with zeros on the left of the bar and a nonzero entry on the right is a contradiction.
+
+Wrong working:
+$$\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right) \\quad \\Longrightarrow \\quad \\text{a zero row, so no solution}$$
+
+Right working: the second row is the equation $0x_1 + 0x_2 = 0$, true for every $\\mathbf{x}$. Only the first row constrains the unknowns, $x_1 + 2x_2 = 3$. Column $2$ is free, so $x_2 = t$ and $x_1 = 3 - 2t$, infinitely many solutions. In rank terms, $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = 1 < 2$.
+
+Why it happens: the contradiction row $[0 \\; \\cdots \\; 0 \\mid d]$ and the zero row look almost the same, and both turn up at the bottom of the matrix. The difference is one entry, the one to the right of the bar.
+
+How to check: look only at the last entry of each row whose coefficients are all zero. If it is $0$, the row can be dropped; if it is nonzero, the system is inconsistent.
+
+**Taking basis columns from the reduced matrix**
+
+The pivot columns of the reduced form are used as a basis for the column space of $A$. Row operations preserve which columns depend on which, but they change the columns themselves, so the reduced columns need not lie in $\\text{Col}(A)$.
+
+Wrong working:
+$$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix} \\sim \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix} \\quad \\Longrightarrow \\quad \\text{basis } \\left\\{ \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} \\right\\}$$
+
+Right working: the only pivot is in column $1$, so the basis is column $1$ of the original $A$:
+$$\\text{Col}(A) = \\text{span}\\left\\{ \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} \\right\\}$$
+
+Why it happens: for the row space the reduced rows are the right answer, and the two rules look symmetric. They are not, because row operations preserve the row space but not the column space.
+
+How to check: every column of $A$ must be a combination of the basis vectors. Column $1$ of $A$, $(1, 2)$, is not a multiple of $(1, 0)$, while both columns of $A$ are multiples of $(1, 2)$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1899,6 +1981,14 @@ export default function EchelonFormPage({
           `The last three entries are the same question asked with increasing strictness: does a solution exist, is it unique, and does the matrix invert. Each adds a condition to the one before, and a square matrix satisfying all three reduces to the identity — which is the point at which reduction stops being a technique for solving systems and becomes a test of the matrix itself.`,
         ]
     },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',
@@ -2012,7 +2102,7 @@ export default function EchelonFormPage({
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Reduced Row Echelon Form(REF)</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Reduced Row Echelon Form (RREF)</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

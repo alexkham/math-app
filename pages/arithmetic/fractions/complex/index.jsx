@@ -883,6 +883,10 @@ Examples include:
 @academic[formula_callout:What Is a Complex Fraction
 $$\\frac{\\frac{1}{2}}{3} \\quad \\frac{4}{\\frac{2}{5}} \\quad \\frac{\\frac{3}{4}}{\\frac{5}{6}}$$]@
 
+@academic[pitfall,aside:true,width:35%:Misreading the main bar
+Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\frac{2}{3} = \\frac{3}{2}$. The main bar sits under $\\frac{1}{2}$, so the value is $\\frac{1}{2} \\div 3 = \\frac{1}{6}$.
+[Read more](!#7)]@
+
 The first has a fraction only in the numerator. The second has a fraction only in the denominator. The third has fractions in both positions.
 
 Complex fractions arise naturally in algebra, physics, and rate problems. Any division of fractions can be written as a complex fraction: $\\frac{2}{3} \\div \\frac{4}{5}$ equals $\\frac{\\frac{2}{3}}{\\frac{4}{5}}$.`,
@@ -900,6 +904,10 @@ Apply the rule for [dividing fractions](!/arithmetic/fractions/dividing): multip
 @academic[formula_callout:Simplifying — Method 1: Division
 $$\\frac{\\frac{3}{4}}{\\frac{5}{6}} = \\frac{3}{4} \\div \\frac{5}{6} = \\frac{3}{4} \\times \\frac{6}{5} = \\frac{18}{20} = \\frac{9}{10}$$]@
 
+@academic[pitfall,aside:true,width:35%:Forgetting to flip
+Multiplying straight across, $\\frac{3}{4} \\times \\frac{5}{6} = \\frac{15}{24} = \\frac{5}{8}$, skips the reciprocal. Turning the divisor over first gives $\\frac{3}{4} \\times \\frac{6}{5} = \\frac{9}{10}$.
+[Read more](!#7)]@
+
 When only the numerator or only the denominator contains a fraction, the same approach works. For $\\frac{\\frac{2}{3}}{4}$, rewrite 4 as $\\frac{4}{1}$ and proceed: $\\frac{2}{3} \\div \\frac{4}{1} = \\frac{2}{3} \\times \\frac{1}{4} = \\frac{2}{12} = \\frac{1}{6}$.`,
     before: ``,
     after: ``,
@@ -914,6 +922,10 @@ For $\\frac{\\frac{1}{2}}{\\frac{3}{4}}$, the internal denominators are 2 and 4.
 
 @academic[formula_callout:Simplifying — Method 2: LCD
 $$\\frac{\\frac{1}{2}}{\\frac{3}{4}} \\times \\frac{4}{4} = \\frac{\\frac{1}{2} \\times 4}{\\frac{3}{4} \\times 4} = \\frac{2}{3}$$]@
+
+@academic[pitfall,aside:true,width:35%:Multiplying only part by the LCD
+In $\\frac{\\frac{1}{2} + 1}{\\frac{3}{4}}$, multiplying only $\\frac{1}{2}$ and $\\frac{3}{4}$ by $4$ gives $\\frac{2 + 1}{3} = 1$. Every term must be multiplied, the $1$ included: $\\frac{2 + 4}{3} = 2$.
+[Read more](!#7)]@
 
 This method is especially efficient when the numerator or denominator contains sums or differences of fractions, avoiding multiple division steps.`,
     before: ``,
@@ -933,6 +945,12 @@ The complex fraction becomes $\\frac{\\frac{5}{6}}{\\frac{1}{4}} = \\frac{5}{6} 
 
 Alternatively, multiply by the LCD of 2, 3, and 4, which is 12. Both approaches reach the same answer.
 
+@academic[pitfall,aside:true,width:35%:Flipping a sum term by term
+Turning $\\frac{1}{\\frac{1}{2} + \\frac{1}{3}}$ into $2 + 3 = 5$ flips each term instead of the whole denominator. Combined first, the denominator is $\\frac{5}{6}$, and the value is $\\frac{6}{5}$.
+[Read more](!#7)]@
+
+The order of the steps matters most when the sum sits in the denominator. The division step turns the whole denominator over, so that denominator has to be a single fraction before it is flipped. The LCD method avoids the question, clearing every inner denominator in one multiplication.
+
 To check the sum or difference in the top or bottom part before dividing, use the [fraction calculator](!/calculators/fraction-calculator).`,
     before: ``,
     after: ``,
@@ -950,7 +968,13 @@ Convert: $2\\frac{1}{2} = \\frac{5}{2}$ and $1\\frac{1}{4} = \\frac{5}{4}$.
 @academic[formula_callout:Complex Fractions with Mixed Numbers
 $$\\frac{\\frac{5}{2}}{\\frac{5}{4}} = \\frac{5}{2} \\times \\frac{4}{5} = \\frac{20}{10} = 2$$]@
 
-The 5s cancel during multiplication, leaving $\\frac{4}{2} = 2$ directly.`,
+The 5s cancel during multiplication, leaving $\\frac{4}{2} = 2$ directly.
+
+@academic[pitfall,aside:true,width:35%:Dividing the parts separately
+Dividing whole by whole, $2 \\div 1 = 2$, and fraction by fraction, $\\frac{1}{2} \\div \\frac{1}{4} = 2$, then adding gives $4$. Converted first, $\\frac{5}{2} \\div \\frac{5}{4} = 2$.
+[Read more](!#7)]@
+
+Converting first turns each mixed number into a single fraction, so the main bar divides one number by another. A mixed number is a sum, $2\\frac{1}{2} = 2 + \\frac{1}{2}$, and the conversion packs that sum into one fraction before any division happens, just as the sums in the previous section were combined first.`,
     before: ``,
     after: ``,
     link: '',
@@ -980,7 +1004,43 @@ Applying the LCD incorrectly causes problems. The LCD must multiply the entire n
 
 Leaving answers unsimplified wastes effort. After clearing the complex structure, check whether the result reduces to [simplest form](!/arithmetic/fractions/equivalent).
 
-Mixing up which fraction to flip leads to inverted answers. In $\\frac{a}{b} \\div \\frac{c}{d}$, only the divisor $\\frac{c}{d}$ gets flipped, never the dividend $\\frac{a}{b}$.`,
+Mixing up which fraction to flip leads to inverted answers. In $\\frac{a}{b} \\div \\frac{c}{d}$, only the divisor $\\frac{c}{d}$ gets flipped, never the dividend $\\frac{a}{b}$.
+
+**Misreading the main bar**
+
+In a complex fraction the longest bar is the main bar, the division that is done last. Reading a shorter bar as the main one regroups the expression and changes its value.
+
+Wrong working: $\\frac{\\frac{1}{2}}{3}$ is read as $1$ over $\\frac{2}{3}$, so $1 \\div \\frac{2}{3} = 1 \\times \\frac{3}{2} = \\frac{3}{2}$.
+
+Right working: the main bar sits under $\\frac{1}{2}$, so the expression is $\\frac{1}{2} \\div 3 = \\frac{1}{2} \\times \\frac{1}{3} = \\frac{1}{6}$.
+
+Why it happens: handwritten bars often come out about the same length, and the numbers stacked in a column look the same under either grouping.
+
+How to check: rewrite with $\\div$ and brackets, $(1 \\div 2) \\div 3$ against $1 \\div (2 \\div 3)$, which makes the grouping visible. An estimate helps too: half of something shared among $3$ is less than $\\frac{1}{2}$, so an answer above $1$ means the bars were read the other way.
+
+**Flipping a sum term by term**
+
+The denominator of a complex fraction is a sum of fractions, and each term of the sum is turned over separately, as if the reciprocal of a sum were the sum of the reciprocals.
+
+Wrong working: $\\frac{1}{\\frac{1}{2} + \\frac{1}{3}} = 2 + 3 = 5$.
+
+Right working: combine first, $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$, so $\\frac{1}{\\frac{5}{6}} = 1 \\times \\frac{6}{5} = \\frac{6}{5}$. The LCD method agrees: multiplying top and bottom by $6$ gives $\\frac{6}{3 + 2} = \\frac{6}{5}$.
+
+Why it happens: a single fraction is inverted by flipping it, and the same move is applied to each piece of a sum. It works for a product, since $\\frac{1}{\\frac{1}{2} \\times \\frac{1}{3}} = 2 \\times 3 = 6$, but not for a sum.
+
+How to check: estimate the size. The denominator $\\frac{1}{2} + \\frac{1}{3}$ is more than $\\frac{1}{2}$ and less than $1$, so the value must lie between $1$ and $2$, and $5$ is far too large.
+
+**Dividing the parts separately**
+
+A complex fraction with mixed numbers is worked part by part: whole over whole and fraction over fraction, and the two results are put back together.
+
+Wrong working: for $\\frac{2\\frac{1}{2}}{1\\frac{1}{4}}$, $\\frac{2}{1} = 2$ and $\\frac{\\frac{1}{2}}{\\frac{1}{4}} = \\frac{1}{2} \\times \\frac{4}{1} = 2$, so the answer is $2 + 2 = 4$.
+
+Right working: convert first, $2\\frac{1}{2} = \\frac{5}{2}$ and $1\\frac{1}{4} = \\frac{5}{4}$, so the value is $\\frac{5}{2} \\times \\frac{4}{5} = 2$.
+
+Why it happens: mixed numbers can be added part by part, whole with whole and fraction with fraction, and that habit is carried over to division, where it does not hold.
+
+How to check: multiply back. The answer times the denominator must give the numerator: $1\\frac{1}{4} \\times 2 = 2\\frac{1}{2}$, while $1\\frac{1}{4} \\times 4 = 5$.`,
     before: ``,
     after: ``,
     link: '',

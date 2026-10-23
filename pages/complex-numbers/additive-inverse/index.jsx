@@ -1405,12 +1405,12 @@ export async function getStaticProps(){
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">−z and z̄ coincide when…</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;" colspan="2"><div style="text-align: center;">z is pure imaginary (or z = 0)</div></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;" colspan="2"><div style="text-align: center;">z is pure imaginary (zero included)</div></td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Most common confusion</td>
       <td style="padding: 12px 15px; color: #34495e;">writing −(a + bi) = −a + bi (flipping only one sign)</td>
-      <td style="padding: 12px 15px; color: #34495e;">writing z̄ = −z (which is true only for pure imaginary z)</td>
+      <td style="padding: 12px 15px; color: #34495e;">writing z̄ = −z (which is true only for pure imaginary z, zero included)</td>
     </tr>
   </tbody>
 </table>
@@ -1891,6 +1891,10 @@ $$(a + bi) + (-a - bi) = (a + (-a)) + (b + (-b))i = 0 + 0i = 0$$]@
 
 The real components cancel and the imaginary components cancel, leaving zero.
 
+@academic[pitfall,aside:true,width:35%:Making both parts negative
+Reading $-z$ as the number whose two parts are negative leaves $z = -2 - 5i$ unchanged, and $z + z = -4 - 10i \\neq 0$. Flipping each sign gives $-z = 2 + 5i$.
+[Read more](!#10)]@
+
 Consider $z = 3 + 2i$. The additive inverse is $-z = -3 - 2i$. Adding them: $(3 + 2i) + (-3 - 2i) = 0$. For $z = -4 + 5i$, the inverse is $-z = 4 - 5i$. The signs of both components flip. For $z = -1 - 7i$, the inverse is $-z = 1 + 7i$. A number in the third quadrant has its inverse in the first quadrant, and vice versa.
 
 The pattern is consistent: whatever signs the real and imaginary parts carry, the additive inverse reverses both.`,
@@ -1947,6 +1951,12 @@ The [modulus](!/complex-numbers/absolute-value) remains unchanged under this ref
 $$|-z| = |z|$$]@
 
 Both $z$ and $-z$ lie at the same distance from the origin. They occupy opposite ends of a diameter of the circle centered at the origin with radius $|z|$.
+
+@academic[pitfall,aside:true,width:35%:Pulling the minus out of the modulus
+Writing $|-z| = -|z|$ for $z = 3 + 4i$ gives $|-3 - 4i| = -5$, a negative distance. The modulus ignores the signs: $|-3 - 4i| = \\sqrt{9 + 16} = 5$.
+[Read more](!#10)]@
+
+The modulus is computed from the squares $a^2$ and $b^2$, and squaring erases the sign of each part. Negating $z$ changes both signs at once, yet the two squares under the root, and with them the distance from the origin, stay exactly as they were.
 
 The [argument](!/complex-numbers/trigonometric-form) shifts by exactly $\\pi$ radians:
 
@@ -2025,7 +2035,7 @@ Geometrically, conjugation reflects across the real axis. A point above the axis
 
 For $z = 4 + 3i$: the conjugate $\\overline{z} = 4 - 3i$ lies directly below $z$, reflected across the horizontal axis. The additive inverse $-z = -4 - 3i$ lies diagonally opposite, reflected through the origin.
 
-When are they equal? Only for pure imaginary numbers. If $z = bi$ with $b \\neq 0$, then $\\overline{z} = -bi$ and $-z = -bi$. Both operations produce the same result. For any number with a nonzero real part, conjugate and additive inverse differ.
+When are they equal? Only for pure imaginary numbers (zero included). If $z = bi$, then $\\overline{z} = -bi$ and $-z = -bi$. Both operations produce the same result. For any number with a nonzero real part, conjugate and additive inverse differ.
 
 The most common mistake is writing $-(3 + 2i) = -3 + 2i$, negating only the real part. This produces the negation of the conjugate, not the additive inverse. The correct result is $-(3 + 2i) = -3 - 2i$, with both signs flipped.`,
   before: ``,
@@ -2068,6 +2078,10 @@ Consider $(5 + 3i) - (2 + 7i)$. The additive inverse of $2 + 7i$ is $-2 - 7i$. A
 
 @academic[formula_callout:Connection to Subtraction
 $$(5 + 3i) + (-2 - 7i) = (5 + (-2)) + (3 + (-7))i = 3 - 4i$$]@
+
+@academic[pitfall,aside:true,width:35%:Dropping a sign in subtraction
+Changing only the real sign of the subtracted number gives $(5 + 3i) - (2 + 7i) = 5 + 3i - 2 + 7i = 3 + 10i$. The inverse $-2 - 7i$ changes both signs, so the difference is $3 - 4i$.
+[Read more](!#10)]@
 
 This matches the component-wise subtraction rule: subtract real parts and subtract imaginary parts. The rule works precisely because subtraction means adding the inverse, and the inverse negates both components.
 
@@ -2122,7 +2136,31 @@ $$(5 + 2i) + (-3 + 4i) = 2 + 6i$$]@
 
 A common error is writing $(5 + 2i) - (3 - 4i) = 5 + 2i - 3 - 4i = 2 - 2i$, forgetting that subtracting $-4i$ means adding $+4i$. Distributing the negative sign completely — to both the real and imaginary parts of the subtracted number — eliminates this mistake.
 
-When in doubt, write out the additive inverse explicitly before combining terms. Converting $z_1 - z_2$ to $z_1 + (-z_2)$ and computing $-z_2$ as a separate step reduces errors.`,
+When in doubt, write out the additive inverse explicitly before combining terms. Converting $z_1 - z_2$ to $z_1 + (-z_2)$ and computing $-z_2$ as a separate step reduces errors.
+
+**Making both parts negative**
+
+The minus in $-z$ is read as an instruction to make both parts negative, rather than to change the sign of each part. A number whose parts are already negative is then left as it is, and a number with one negative part gets only its other part changed.
+
+Wrong working: for $z = -2 - 5i$, both parts are already negative, so $-z = -2 - 5i$.
+
+Right working: $-z = -(-2) - (-5)i = 2 + 5i$, and $(-2 - 5i) + (2 + 5i) = 0$.
+
+Why it happens: the formula $-z = -a - bi$ shows two minus signs, which suggests that the inverse always has negative parts. The minus signs act on $a$ and $b$, and when these are negative, the parts of $-z$ come out positive.
+
+How to check: add the result to $z$. With the wrong answer, $(-2 - 5i) + (-2 - 5i) = -4 - 10i$, not $0$.
+
+**Pulling the minus out of the modulus**
+
+The minus sign of $-z$ is carried outside the modulus bars, so $|-z|$ is written as $-|z|$. The result is a negative number, which cannot be a distance.
+
+Wrong working: for $z = 3 + 4i$, $|-z| = -|z| = -\\sqrt{9 + 16} = -5$.
+
+Right working: $-z = -3 - 4i$, so $|-z| = \\sqrt{(-3)^2 + (-4)^2} = \\sqrt{9 + 16} = 5 = |z|$.
+
+Why it happens: in ordinary algebra a factor of $-1$ is often moved to the front of an expression, and the same move is tried on the modulus. The modulus of a product is the product of the moduli, so $|-z| = |-1| \\cdot |z| = |z|$, because $|-1| = 1$, not $-1$.
+
+How to check: a modulus is never negative, so any negative value for $|-z|$ is wrong at once.`,
   before: ``,
   after: ``,
   link: '',
@@ -2191,7 +2229,7 @@ When in doubt, write out the additive inverse explicitly before combining terms.
 const faqQuestions = {
   obj1: {
     question: "What is the difference between the additive inverse and the conjugate?",
-    answer: "Negation flips both components, sending a + bi to −a − bi, which rotates the point half a turn about the origin. Conjugation flips only the imaginary part, reflecting it across the real axis. The two coincide only for pure imaginary numbers, where there is no real part left to distinguish them.",
+    answer: "Negation flips both components, sending a + bi to −a − bi, which rotates the point half a turn about the origin. Conjugation flips only the imaginary part, reflecting it across the real axis. The two coincide only for pure imaginary numbers (zero included), where there is no real part left to distinguish them.",
     sectionId: "6"
   },
   obj2: {

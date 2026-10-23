@@ -260,7 +260,13 @@ When radicals appear unlike but can be simplified to like form:
 @academic[formula_callout:Adding and Subtracting Like Radicals
 $$\\sqrt{12} + \\sqrt{27} = 2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$$]@
 
-Always [simplify](!/algebra/roots/simplifying) each radical before attempting to add or subtract.`,
+Always [simplify](!/algebra/roots/simplifying) each radical before attempting to add or subtract.
+
+@academic[pitfall,aside:true,width:35%:Adding the radicands
+Writing $\\sqrt{2} + \\sqrt{3} = \\sqrt{5}$ adds what is under the radical signs. But $\\sqrt{2} + \\sqrt{3} \\approx 3.15$, while $\\sqrt{5} \\approx 2.24$. Unlike radicals do not combine, so $\\sqrt{2} + \\sqrt{3}$ is already the final form.
+[Read more](!#pitfalls)]@
+
+Addition of radicals works like collecting like terms. The radical part acts as a common factor, so $3\\sqrt{5} + 7\\sqrt{5} = (3 + 7)\\sqrt{5} = 10\\sqrt{5}$, in the same way that $3x + 7x = (3 + 7)x = 10x$. Simplifying first is what reveals such a common factor when the radicals do not look alike at the start.`,
     before: ``,
     after: ``,
     link: '',
@@ -292,7 +298,13 @@ $$(2\\sqrt{3})^2 = 2^2 \\cdot (\\sqrt{3})^2 = 4 \\cdot 3 = 12$$]@
 Multiplication often produces results that can be [simplified](!/algebra/roots/simplifying):
 
 @academic[formula_callout:Multiplying Radicals with the Same Index
-$$\\sqrt{6} \\cdot \\sqrt{8} = \\sqrt{48} = \\sqrt{16 \\cdot 3} = 4\\sqrt{3}$$]@`,
+$$\\sqrt{6} \\cdot \\sqrt{8} = \\sqrt{48} = \\sqrt{16 \\cdot 3} = 4\\sqrt{3}$$]@
+
+@academic[pitfall,aside:true,width:35%:Squaring only the radical
+Squaring only the radical part, $(2\\sqrt{3})^2 = 2 \\cdot 3 = 6$, leaves the coefficient unsquared. Both factors are squared: $2^2 \\cdot (\\sqrt{3})^2 = 4 \\cdot 3 = 12$.
+[Read more](!#pitfalls)]@
+
+In each product above, the coefficients and the radicals are handled as two separate groups: the numbers outside multiply together, and the radicands multiply under a single radical. A square such as $(2\\sqrt{3})^2$ is the same kind of product, $2\\sqrt{3} \\cdot 2\\sqrt{3}$, written in shorter form.`,
     before: ``,
     after: ``,
     link: '',
@@ -321,7 +333,13 @@ $$\\sqrt[3]{2} = \\sqrt[6]{2^2} = \\sqrt[6]{4}$$]@
 @academic[formula_callout:Multiplying Radicals with Different Indices
 $$\\sqrt[6]{8} \\cdot \\sqrt[6]{4} = \\sqrt[6]{32}$$]@
 
-Both methods reach the same result. The exponent approach is often more efficient for complex expressions.`,
+@academic[pitfall,aside:true,width:35%:Multiplying across different indices
+Writing $\\sqrt{2} \\cdot \\sqrt[3]{2} = \\sqrt[6]{4}$ multiplies the radicands as if the indices matched. But $\\sqrt[6]{4} \\approx 1.26$, while the product is about $1.41 \\cdot 1.26 \\approx 1.78$. With exponents, $2^{1/2} \\cdot 2^{1/3} = 2^{5/6} = \\sqrt[6]{32}$.
+[Read more](!#pitfalls)]@
+
+Both methods reach the same result. The exponent approach is often more efficient for complex expressions.
+
+Both routes rest on the same fact: radicals can share one radical sign only once they have the same index. Here the common index is $6$, the least common multiple of $2$ and $3$, and each radicand is raised to the power that the new index requires: $2^3$ for the square root and $2^2$ for the cube root.`,
     before: ``,
     after: ``,
     link: '',
@@ -350,7 +368,13 @@ When indices differ, convert to [rational exponents](!/algebra/roots/rational-ex
 @academic[formula_callout:Dividing Radicals
 $$\\frac{\\sqrt{8}}{\\sqrt[3]{4}} = \\frac{2^{3/2}}{2^{2/3}} = 2^{3/2 - 2/3} = 2^{9/6 - 4/6} = 2^{5/6} = \\sqrt[6]{32}$$]@
 
-If the result leaves a radical in the denominator, [rationalize](!/algebra/roots/simplifying) to achieve simplest form.`,
+If the result leaves a radical in the denominator, [rationalize](!/algebra/roots/simplifying) to achieve simplest form.
+
+@academic[pitfall,aside:true,width:35%:Cancelling a number into the radicand
+Writing $\\frac{\\sqrt{12}}{2} = \\sqrt{6}$ divides the radicand by a number outside the radical. But $\\sqrt{6} \\approx 2.45$, while $\\frac{\\sqrt{12}}{2} \\approx 1.73$. Simplify first: $\\frac{\\sqrt{12}}{2} = \\frac{2\\sqrt{3}}{2} = \\sqrt{3}$.
+[Read more](!#pitfalls)]@
+
+In the example with coefficients, the division splits into two independent quotients: $\\frac{12}{4} = 3$ for the numbers outside the radicals and $\\frac{15}{3} = 5$ for the radicands inside. The two results are then written side by side as $3\\sqrt{5}$.`,
     before: ``,
     after: ``,
     link: '',
@@ -459,6 +483,85 @@ After any operation, simplify the result. Multiplication often creates perfect p
 When expanding products, apply distributive property carefully. Track each term. Combine like radicals at the end.
 
 These operations prepare expressions for solving [radical equations](!/algebra/roots/equations) and for analyzing [radical functions](!/algebra/roots/functions). Fluency here makes those topics more accessible.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again in operations with radicals. The first four are marked where they happen in the sections above, and the fifth is the error named in the section on expanding products. Here each one is worked through in full, with the wrong and the right working side by side.
+
+**Adding the radicands**
+
+Two radicals are added by adding the numbers under the radical signs, as if the radical were a bracket that could hold the sum.
+
+Wrong working:
+$$\\sqrt{2} + \\sqrt{3} = \\sqrt{5}$$
+The same slip with like radicals gives $3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{10}$.
+
+Right working: $\\sqrt{2}$ and $\\sqrt{3}$ are unlike, so the sum stays $\\sqrt{2} + \\sqrt{3}$. For like radicals only the coefficients are added:
+$$3\\sqrt{5} + 7\\sqrt{5} = 10\\sqrt{5}$$
+
+Why it happens: the product rule $\\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{ab}$ seems to invite an addition version, and adding the numbers under the radicals feels like the natural way to combine them.
+
+How to check: compare decimals. $\\sqrt{2} + \\sqrt{3} \\approx 3.15$, while $\\sqrt{5} \\approx 2.24$. Likewise $10\\sqrt{10} \\approx 31.62$, while $3\\sqrt{5} + 7\\sqrt{5} \\approx 22.36 \\approx 10\\sqrt{5}$.
+
+**Squaring only the radical**
+
+A term with a coefficient, such as $2\\sqrt{3}$, is squared, but only the radical part is squared and the coefficient is left as it was.
+
+Wrong working:
+$$(2\\sqrt{3})^2 = 2 \\cdot 3 = 6$$
+
+Right working: the square applies to both factors of the term.
+$$(2\\sqrt{3})^2 = 2^2 \\cdot (\\sqrt{3})^2 = 4 \\cdot 3 = 12$$
+
+Why it happens: $(\\sqrt{3})^2 = 3$ is the step that stands out, and the coefficient in front is treated as if it stood outside the brackets.
+
+How to check: write the square as a product. $2\\sqrt{3} \\cdot 2\\sqrt{3} = (2 \\cdot 2)(\\sqrt{3} \\cdot \\sqrt{3}) = 4 \\cdot 3 = 12$. In decimals, $2\\sqrt{3} \\approx 3.46$, and $3.46^2 \\approx 12$.
+
+**Multiplying across different indices**
+
+The product rule is applied to radicals whose indices differ, and the radicands are multiplied under some combined index.
+
+Wrong working:
+$$\\sqrt{2} \\cdot \\sqrt[3]{2} = \\sqrt[6]{2 \\cdot 2} = \\sqrt[6]{4}$$
+
+Right working: convert to rational exponents and add them over a common denominator.
+$$\\sqrt{2} \\cdot \\sqrt[3]{2} = 2^{1/2} \\cdot 2^{1/3} = 2^{3/6 + 2/6} = 2^{5/6} = \\sqrt[6]{32}$$
+
+Why it happens: the product rule $\\sqrt[n]{a} \\cdot \\sqrt[n]{b} = \\sqrt[n]{ab}$ is used without checking that both radicals share the same index $n$.
+
+How to check: compare decimals. $\\sqrt{2} \\cdot \\sqrt[3]{2} \\approx 1.414 \\cdot 1.260 \\approx 1.78$ and $\\sqrt[6]{32} \\approx 1.78$, while $\\sqrt[6]{4} \\approx 1.26$.
+
+**Cancelling a number into the radicand**
+
+A number outside the radical is divided into the radicand, as if both stood under the same radical sign.
+
+Wrong working:
+$$\\frac{\\sqrt{12}}{2} = \\sqrt{\\frac{12}{2}} = \\sqrt{6}$$
+
+Right working: simplify the radical first, then cancel numbers that stand outside it.
+$$\\frac{\\sqrt{12}}{2} = \\frac{2\\sqrt{3}}{2} = \\sqrt{3}$$
+
+Why it happens: the quotient rule lets radicands be divided under one radical, and the $2$ in the denominator is treated as if it were a radicand too.
+
+How to check: compare decimals. $\\frac{\\sqrt{12}}{2} \\approx \\frac{3.46}{2} \\approx 1.73$ and $\\sqrt{3} \\approx 1.73$, while $\\sqrt{6} \\approx 2.45$.
+
+**Dropping the middle term**
+
+A binomial that contains a radical is squared, and only the squares of the two terms are written down.
+
+Wrong working:
+$$(\\sqrt{5} + \\sqrt{2})^2 = 5 + 2 = 7$$
+
+Right working: the square of a binomial has three terms.
+$$(\\sqrt{5} + \\sqrt{2})^2 = (\\sqrt{5})^2 + 2\\sqrt{5}\\sqrt{2} + (\\sqrt{2})^2 = 7 + 2\\sqrt{10}$$
+
+Why it happens: a product squares factor by factor, $(ab)^2 = a^2b^2$, and the same move is carried over to a sum.
+
+How to check: compare decimals. $\\sqrt{5} + \\sqrt{2} \\approx 3.65$, and $3.65^2 \\approx 13.32$, which matches $7 + 2\\sqrt{10} \\approx 13.32$ and not $7$.`,
     before: ``,
     after: ``,
     link: '',
@@ -710,6 +813,14 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

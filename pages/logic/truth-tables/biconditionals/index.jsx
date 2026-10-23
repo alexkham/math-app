@@ -48,9 +48,9 @@ export default function BiconditionalsTruthTablesPage({demoUnits,  keyWords, bic
             { symbol: '(P → Q) ∧ (Q → P)', func: (a, b) => (!a || b) && (!b || a) }
           ]
         },
-        '((P ↔ Q) ∧ (Q ↔ R)) ↔ (P ↔ R)': { 
-          symbol: '((P ↔ Q) ∧ (Q ↔ R)) ↔ (P ↔ R)', 
-          func: (a, b, c) => ((((a && b) || (!a && !b)) && ((b && c) || (!b && !c)))) === ((a && c) || (!a && !c)),
+        '((P ↔ Q) ∧ (Q ↔ R)) → (P ↔ R)': { 
+          symbol: '((P ↔ Q) ∧ (Q ↔ R)) → (P ↔ R)', 
+          func: (a, b, c) => !(((a && b) || (!a && !b)) && ((b && c) || (!b && !c))) || ((a && c) || (!a && !c)),
           variables: 3,
           subExpressions: [
             { symbol: 'P ↔ Q', func: (a, b, c) => (a && b) || (!a && !b) },
@@ -167,6 +167,12 @@ export default function BiconditionalsTruthTablesPage({demoUnits,  keyWords, bic
         title: sectionsContent.obj10.title,
         link: sectionsContent.obj10.link,
         content: [sectionsContent.obj10.content]
+      },
+      {
+        id: 'pitfalls',
+        title: sectionsContent.pitfalls.title,
+        link: sectionsContent.pitfalls.link,
+        content: [sectionsContent.pitfalls.content]
       },
       // faq: rendered component — must be built here, not in getStaticProps
       {
@@ -316,7 +322,7 @@ export async function getStaticProps() {
         { title: "Read Full Explanation", link: "/logic/truth-tables/biconditionals#5" }
       ]
     },
-    '((P ↔ Q) ∧ (Q ↔ R)) ↔ (P ↔ R)': {
+    '((P ↔ Q) ∧ (Q ↔ R)) → (P ↔ R)': {
       text: "This [tautology](!/logic/propositional-logic/semantics/tautology) illustrates the transitivity property of logical equivalence. If P is equivalent to Q, and Q is equivalent to R, then P must be equivalent to R. This principle is central to constructing chains of equivalent statements in formal proofs and mathematical reasoning. The formula is valid for all possible combinations of truth values, confirming its status as a fundamental logical truth.",
       links: [
         { title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
@@ -365,6 +371,10 @@ export async function getStaticProps() {
 
 The biconditional is equivalent to the conjunction of two conditionals: P ↔ Q ≡ (P → Q) ∧ (Q → P). This means P is both sufficient and necessary for Q. In mathematics, "if and only if" (abbreviated iff) signals that a definition or characterization is being given — the two sides are interchangeable.
 
+@academic[pitfall,aside:true,width:35%:Reading P ↔ Q as both true
+Taking P ↔ Q to mean "P and Q are both true" marks the FF row F, which is the table of P ∧ Q. At P = F, Q = F, P ∧ Q is F but P ↔ Q is T, because the two values match.
+[Read more](!#pitfalls)]@
+
 The truth table for P ↔ Q has two true rows (TT and FF) and two false rows (TF and FT). This symmetric structure reflects the fact that the biconditional treats P and Q identically — P ↔ Q is the same as Q ↔ P.`,
       before: ``,
       after: ``,
@@ -375,6 +385,10 @@ The truth table for P ↔ Q has two true rows (TT and FF) and two false rows (TF
       content: `@academic[rule_theorem_plain:A biconditional P ↔ Q that is a [tautology](!/logic/propositional-logic/semantics/tautology) — true in every row of its truth table — establishes that P and Q are logically equivalent.]@
 
 Logical equivalence means the two formulas have identical truth tables: they agree on every possible input.
+
+@academic[pitfall,aside:true,width:35%:Checking only some rows
+Seeing (P → Q) ↔ (Q → P) come out T at P = Q = T and at P = Q = F suggests that P → Q and Q → P are equivalent. At P = T, Q = F it is F, so they are not: only a biconditional that is T in all four rows gives an equivalence.
+[Read more](!#pitfalls)]@
 
 Many of the formulas on this page are tautological biconditionals. For example, (P ↔ Q) ↔ ((P → Q) ∧ (Q → P)) is true in every row, confirming that "if and only if" and "mutual [implication](!/logic/propositional-logic/semantics/implication)" mean exactly the same thing.
 
@@ -400,6 +414,10 @@ The biconditional can also be expressed using other connectives: P ↔ Q ≡ (P 
 
 @academic[rule_plain:Negating both sides of an equivalence preserves the equivalence.]@
 
+@academic[pitfall,aside:true,width:35%:Negating both sides of a biconditional
+Taking ¬P ↔ ¬Q as the negation of P ↔ Q fails at P = Q = T: there ¬(P ↔ Q) is F but ¬P ↔ ¬Q is T. Negating one side gives the negation: ¬(P ↔ Q) ≡ P ↔ ¬Q.
+[Read more](!#pitfalls)]@
+
 The proof is direct: P ↔ Q means P and Q have the same truth value. If both are true, then ¬P and ¬Q are both false — still matching. If both are false, then ¬P and ¬Q are both true — still matching. In either case ¬P ↔ ¬Q holds.
 
 This symmetry under negation is a distinctive feature of the biconditional. It does not hold for the conditional: P → Q is not equivalent to ¬P → ¬Q (that would be the inverse, which is a common logical fallacy).`,
@@ -413,6 +431,10 @@ This symmetry under negation is a distinctive feature of the biconditional. It d
 
 @academic[rule_plain:P ↔ Q holds if and only if P → Q and Q → P both hold.]@
 
+@academic[pitfall,aside:true,width:35%:Proving only one direction
+Showing P → Q and concluding P ↔ Q misses the row P = F, Q = T: there P → Q is T but P ↔ Q is F. The biconditional also needs Q → P, which is exactly what fails in that row.
+[Read more](!#pitfalls)]@
+
 This equivalence is the standard definition of the biconditional in many logic textbooks. It also provides the standard proof strategy for biconditional statements: prove the forward direction (P → Q) and the backward direction (Q → P) separately.
 
 The truth table confirms that both sides agree in all four rows. When P and Q match (TT or FF), both implications hold and the biconditional is true. When they differ (TF or FT), one implication fails and both the conjunction and the biconditional are false.`,
@@ -421,7 +443,7 @@ The truth table confirms that both sides agree in all four rows. When P and Q ma
       link: ``,
     },
     obj6: {
-      title: `((P ↔ Q) ∧ (Q ↔ R)) ↔ (P ↔ R): Transitivity`,
+      title: `((P ↔ Q) ∧ (Q ↔ R)) → (P ↔ R): Transitivity`,
       content: `This [tautology](!/logic/propositional-logic/semantics/tautology) establishes that logical equivalence is transitive: if P is equivalent to Q and Q is equivalent to R, then P is equivalent to R.
 
 The reasoning is straightforward. P ↔ Q means P and Q share a truth value. Q ↔ R means Q and R share a truth value. Therefore P and R share a truth value, giving P ↔ R.
@@ -474,9 +496,80 @@ Double negation elimination (from ¬¬P infer P) is accepted in classical logic 
       title: `(P ∧ Q) ↔ ¬(¬P ∨ ¬Q): De Morgan&apos;s Law`,
       content: `This [tautology](!/logic/propositional-logic/semantics/tautology) expresses De Morgan&apos;s first law as a biconditional: the conjunction P ∧ Q is equivalent to the negation of the disjunction of the negations, ¬(¬P ∨ ¬Q).
 
+@academic[pitfall,aside:true,width:35%:Keeping the connective in De Morgan's law
+Passing the outer negation of ¬(¬P ∨ ¬Q) to each part and keeping the ∨ gives P ∨ Q. At P = T, Q = F, ¬(¬P ∨ ¬Q) is F but P ∨ Q is T. The negation flips the connective: ¬(¬P ∨ ¬Q) ≡ P ∧ Q.
+[Read more](!#pitfalls)]@
+
 Reading it plainly: "P and Q" is the same as "it is not the case that not-P or not-Q." If both P and Q hold, then neither ¬P nor ¬Q holds, so their disjunction is false and its negation is true. If either P or Q fails, the corresponding negation is true, the disjunction is true, and its negation is false.
 
 De Morgan&apos;s laws (the second being P ∨ Q ↔ ¬(¬P ∧ ¬Q)) are essential tools in simplifying logical expressions, designing digital circuits, and converting between conjunctive and disjunctive normal forms.`,
+      before: ``,
+      after: ``,
+      link: ``,
+    },
+    pitfalls: {
+      title: `Common Pitfalls`,
+      content: `Five slips account for many wrong answers on biconditional truth tables. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading P ↔ Q as both true**
+
+The biconditional is read as a claim that P and Q both hold, as if "P if and only if Q" meant "P and Q". The row where both are false is then marked F, and the column that comes out belongs to a different connective.
+
+Wrong working: P ↔ Q is true when P and Q are true, so for (P, Q) equal to (T, T), (T, F), (F, T), (F, F) the column reads T, F, F, F.
+
+Right working: P ↔ Q is true when P and Q have the same truth value. In the row (F, F) the values match, so the column reads T, F, F, T. The column T, F, F, F is the table of P ∧ Q, which differs from P ↔ Q exactly in the row (F, F).
+
+Why it happens: everyday "if and only if" sentences are usually about the case where both parts happen, so the case where neither happens is overlooked. The phrase "both true or both false" is remembered without its second half.
+
+How to check: count the T rows. P ↔ Q has two, TT and FF; a column with a single T, in the TT row, is P ∧ Q.
+
+**Checking only some rows**
+
+A biconditional between two formulas is evaluated in a few rows, it comes out true there, and the two formulas are declared equivalent. Equivalence needs the biconditional to be true in every row.
+
+Wrong working: for (P → Q) ↔ (Q → P), take P = Q = T: both implications are T, so the biconditional is T. Take P = Q = F: both implications are T again. So P → Q ≡ Q → P.
+
+Right working: two variables give four rows. For (P, Q) equal to (T, T), (T, F), (F, T), (F, F), P → Q takes T, F, T, T and Q → P takes T, T, F, T, so the biconditional takes T, F, F, T. It is not a tautology, and P → Q is not equivalent to its converse Q → P.
+
+Why it happens: the rows where P and Q have the same value are the easiest to evaluate, and in those rows a formula and its converse always agree, because swapping P and Q changes nothing when they are equal.
+
+How to check: list all the rows before deciding, four for two variables and eight for three, and look for a single F in the final column. One F is enough to rule out the equivalence.
+
+**Negating both sides of a biconditional**
+
+To negate P ↔ Q, the negation is placed on both sides, giving ¬P ↔ ¬Q. Section 4 shows that this formula is equivalent to P ↔ Q itself, so it cannot be its negation.
+
+Wrong working: ¬(P ↔ Q) ≡ ¬P ↔ ¬Q.
+
+Right working: at P = Q = T, P ↔ Q is T, so ¬(P ↔ Q) is F, while ¬P ↔ ¬Q is F ↔ F, which is T. The negation goes on one side only: ¬(P ↔ Q) ≡ P ↔ ¬Q ≡ ¬P ↔ Q, true exactly when P and Q differ, which is the exclusive or.
+
+Why it happens: the negation is distributed over the biconditional like a minus sign multiplied into a bracket. Negation preservation, (P ↔ Q) ↔ (¬P ↔ ¬Q), says precisely that the two negations cancel out.
+
+How to check: the negation must be F wherever P ↔ Q is T. Test P = Q = T: ¬P ↔ ¬Q is T there, so it is not the negation.
+
+**Proving only one direction**
+
+An "if and only if" statement is proved by showing one implication, usually P → Q, and the proof stops there. One implication still allows a row in which the biconditional is false.
+
+Wrong working: if x = 2, then x² = 4. So x = 2 if and only if x² = 4.
+
+Right working: P → Q rules out only the row P = T, Q = F. In the row P = F, Q = T, P → Q is T but P ↔ Q is F, because Q → P is T → F, which is F. In the example, x = −2 gives x² = 4 while x = 2 is false, so the backward direction fails and the biconditional is false. Only P → Q and Q → P together rule out both mixed rows: P ↔ Q ≡ (P → Q) ∧ (Q → P).
+
+Why it happens: the forward direction is often the interesting one, and the backward direction feels as if it should follow automatically. It does not: P → Q is T in three rows, P ↔ Q only in two.
+
+How to check: an "if and only if" proof has two parts, one for each arrow. Before finishing, look for the part that starts from Q and arrives at P.
+
+**Keeping the connective in De Morgan's law**
+
+To simplify ¬(¬P ∨ ¬Q), the outer negation is passed to each part, but the ∨ between the parts is kept. The result is a different formula.
+
+Wrong working: ¬(¬P ∨ ¬Q) ≡ ¬¬P ∨ ¬¬Q ≡ P ∨ Q.
+
+Right working: at P = T, Q = F, ¬P ∨ ¬Q is F ∨ T, which is T, so ¬(¬P ∨ ¬Q) is F, while P ∨ Q is T. De Morgan's law changes the connective: ¬(¬P ∨ ¬Q) ≡ ¬¬P ∧ ¬¬Q ≡ P ∧ Q, which is F in that row, as it should be.
+
+Why it happens: the negation is treated like a minus sign, as in −(a + b) = −a + (−b), where the operation between the terms keeps its form. In words, "not (not P or not Q)" gets heard as "P or Q".
+
+How to check: test a row where P and Q differ, such as P = T, Q = F. The original and the rewritten formula must have the same value there.`,
       before: ``,
       after: ``,
       link: ``,

@@ -1331,6 +1331,12 @@ $$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}, \\
 /probability/formulas]@
 
 **Practical Example:** Human heights follow approximately a normal distribution. If adult male heights have $\\mu = 175$ cm and $\\sigma = 7$ cm, then $X \\sim N(175, 49)$. The PDF tells us the relative likelihood of observing different heights, with the peak at 175 cm and decreasing probability as we move toward very short or very tall individuals.
+
+@academic[pitfall,aside:true,width:35%:Reading the variance as the standard deviation
+Taking the 49 in $N(175, 49)$ as $\\sigma$ puts the middle 68% of heights between $175 - 49 = 126$ and $175 + 49 = 224$ cm. The 49 is the variance $\\sigma^2$, so $\\sigma = \\sqrt{49} = 7$ cm and the 68% band is 168 to 182 cm.
+[Read more](!#pitfalls)]@
+
+In this example the curve is centred at 175 cm, and its width is set by the standard deviation of 7 cm. About 95% of heights lie within two standard deviations of the centre, between 161 and 189 cm, and the curve is already close to zero beyond three, below 154 or above 196 cm.
       `,
       before:``,
       after:``,
@@ -1357,6 +1363,12 @@ $$\\Phi(z) = P(Z \\leq z) = \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\
 • Any normal CDF can be expressed using the standard normal: $F(x) = \\Phi\\left(\\frac{x-\\mu}{\\sigma}\\right)$
 
 **Practical Use:** The normal CDF has no closed-form expression, so we use tables, calculators, or software. To find $P(X \\leq 180)$ when $X \\sim N(175, 49)$, convert to standard normal: $Z = (180-175)/7 \\approx 0.714$, then look up $\\Phi(0.714) \\approx 0.762$, meaning about 76.2% of values fall below 180.
+
+@academic[pitfall,aside:true,width:35%:Reading the table value as the upper tail
+Taking $\\Phi(0.714) \\approx 0.762$ as $P(X > 180)$ reports the share of heights below 180 cm as the share above it. The upper tail is $1 - 0.762 = 0.238$, about 23.8%.
+[Read more](!#pitfalls)]@
+
+A z-table lists only left-hand areas, $\\Phi(z) = P(Z \\leq z)$. Questions about the upper tail, such as the share of heights above 180 cm, are answered from the same table entry, since the whole area under the curve is 1.
       `,
       before:``,
       after:``,
@@ -1545,7 +1557,7 @@ $$\\text{Median} = \\mu$$]@
 @academic[formula_callout:Mode and Median
 $$F(\\mu) = 0.5$$]@
 
-This symmetry means that [mode](!/probability/mode) = [median](!/probability/median) = [mean](!/probability/expected-value) = $\\mu$, a unique property that holds only for symmetric distributions.
+This symmetry means that [mode](!/probability/mode) = [median](!/probability/median) = [mean](!/probability/expected-value) = $\\mu$, a property that holds for every symmetric unimodal distribution.
 
 @academic[example:Example
 For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:
@@ -1557,7 +1569,7 @@ Half of all heights fall below 170 cm, and half fall above. This coincides with 
 **Properties:**
 • For the normal distribution: mode = median = mean (all equal $\\mu$)
 • The parameter $\\sigma$ controls spread but doesn't affect the location of mode or median
-• This triple equality holds for all symmetric distributions but is particularly important for the normal distribution
+• This triple equality holds for all symmetric unimodal distributions but is particularly important for the normal distribution
 • Unlike skewed distributions where mean, median, and mode diverge, the normal distribution's symmetry keeps them aligned
   `,
   before: ``,
@@ -1650,6 +1662,10 @@ The middle 50% of heights span about 13.5 cm.]@
 **95th percentile:** $x_{0.95} = \\mu + 1.645\\sigma$ (only 5% exceed this value)
 
 **99th percentile:** $x_{0.99} = \\mu + 2.326\\sigma$ (only 1% exceed this value)
+
+@academic[pitfall,aside:true,width:35%:Using 1.96 for the 95th percentile
+Using $z = 1.96$ for the 95th percentile of heights gives $170 + 10(1.96) = 189.6$ cm, which leaves only 2.5% above. The 95th percentile uses $z_{0.95} = 1.645$: $170 + 10(1.645) = 186.45$ cm.
+[Read more](!#pitfalls)]@
 
 These percentiles are commonly used in hypothesis testing and confidence interval construction.
   `,
@@ -1778,6 +1794,10 @@ If $X_1 \\sim N(\\mu_1, \\sigma_1^2)$ and $X_2 \\sim N(\\mu_2, \\sigma_2^2)$ are
 @academic[formula_callout:Special Cases
 $$X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$$]@
 
+@academic[pitfall,aside:true,width:35%:Adding the standard deviations
+For independent $X_1 \\sim N(10, 3^2)$ and $X_2 \\sim N(20, 4^2)$, adding $3 + 4$ gives the sum a standard deviation of 7. Variances add: $9 + 16 = 25$, so $X_1 + X_2 \\sim N(30, 5^2)$ with $\\sigma = 5$.
+[Read more](!#pitfalls)]@
+
 The normal distribution is **closed under addition**—sums of normal variables remain normal.
 
 ### Practical Implications
@@ -1839,7 +1859,7 @@ Probabilities in the tails decrease rapidly:
 • $P(|X - \\mu| > 3\\sigma) \\approx 0.003$ (0.3%)
 • $P(|X - \\mu| > 4\\sigma) \\approx 0.00006$ (0.006%)
 
-The tails are "thin"—extreme values are increasingly rare. This is lighter than polynomial tails but heavier than exponential cutoffs.
+The tails are "thin"—extreme values are increasingly rare. This is lighter than polynomial tails and even lighter than exponential tails.
 
 ### Unique Mathematical Properties
 
@@ -1862,6 +1882,12 @@ $$aX + b \\sim N(a\\mu + b, a^2\\sigma^2)$$
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Scaling the variance by a
+For $X \\sim N(20, 2^2)$ in degrees Celsius and $Y = 1.8X + 32$, multiplying the variance by $1.8$ gives $\\mathrm{Var}(Y) = 7.2$. The variance scales by $a^2$: $1.8^2 \\cdot 4 = 12.96$, so $Y \\sim N(68, 3.6^2)$.
+[Read more](!#pitfalls)]@
+
+Adding $b$ slides the bell along the axis without changing its width. Multiplying by $a$ stretches every distance from the mean by the factor $|a|$, as when temperatures in degrees Celsius are converted to degrees Fahrenheit with $a = 1.8$ and $b = 32$.
 
 **Closure Under Addition:**
 If $X_1 \\sim N(\\mu_1, \\sigma_1^2)$ and $X_2 \\sim N(\\mu_2, \\sigma_2^2)$ are independent:
@@ -1940,6 +1966,85 @@ This convergence explains why the normal distribution appears so frequently in n
       after:``,
       link:'',
     },
+    obj18:{
+      title:`Common Pitfalls`,
+      content:`Each of the five mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading the variance as the standard deviation**
+
+A distribution is declared as $N(\\mu, \\sigma^2)$, and the second number is used as the standard deviation. Every interval built from it comes out too wide, and every z-score too small.
+
+Wrong working: for heights $X \\sim N(175, 49)$, taking $\\sigma = 49$, the band holding about 68% of heights is
+$$\\mu \\pm \\sigma = 175 \\pm 49 = 126 \\text{ to } 224 \\text{ cm}$$
+
+Right working: the second number is the variance, so its square root is the standard deviation.
+$$\\sigma = \\sqrt{49} = 7, \\qquad \\mu \\pm \\sigma = 175 \\pm 7 = 168 \\text{ to } 182 \\text{ cm}$$
+
+Why it happens: the parameters are introduced as $\\mu$ and $\\sigma$, but the declaration carries $\\sigma^2$; some texts and most software use $N(\\mu, \\sigma)$ instead, so both forms are in circulation.
+
+How to check: compare the spread with the data. A band from 126 to 224 cm would contain almost every adult, which is far more than 68%; when the second number is a perfect square such as 49, the source is very likely giving the variance.
+
+**Reading the table value as the upper tail**
+
+A question asks for the probability above a value, and $\\Phi(z)$ from the table is reported as the answer. The table gives the area to the left of $z$.
+
+Wrong working: for $X \\sim N(175, 49)$, with $z = \\frac{180 - 175}{7} \\approx 0.714$,
+$$P(X > 180) = \\Phi(0.714) \\approx 0.762$$
+
+Right working: the upper tail is the total area minus the left part.
+$$P(X > 180) = 1 - \\Phi(0.714) \\approx 1 - 0.762 = 0.238$$
+
+Why it happens: the table lookup is the hard step, and once a number is found it is easy to report it without asking which side of $z$ it covers.
+
+How to check: draw the bell and mark the point. 180 cm lies above the mean of 175 cm, so less than half of the area lies to its right; an answer above 0.5 for an upper tail beyond the mean is always wrong.
+
+**Using 1.96 for the 95th percentile**
+
+The 95th percentile is needed, and the familiar value $1.96$ is used for $z$. That value cuts off 2.5% in each tail, so it belongs to the middle 95%, not to the point with 95% below it.
+
+Wrong working: for heights with $\\mu = 170$ cm and $\\sigma = 10$ cm,
+$$x_{0.95} = 170 + 10(1.96) = 189.6 \\text{ cm}$$
+
+Right working: the 95th percentile has 5% above it, so $z_{0.95} = 1.645$.
+$$x_{0.95} = 170 + 10(1.645) = 170 + 16.45 = 186.45 \\text{ cm}$$
+
+Why it happens: $1.96$ appears in every 95% confidence interval and becomes the number attached to "95%". A confidence interval is two-sided, while a percentile is one-sided.
+
+How to check: count the tails. $P(Z > 1.96) \\approx 0.025$ and $P(Z > 1.645) \\approx 0.05$; only the second leaves 5% above the cut.
+
+**Adding the standard deviations**
+
+Two independent normal variables are added, and the standard deviation of the sum is taken as the sum of the two standard deviations. For independent variables it is the variances that add.
+
+Wrong working: for independent $X_1 \\sim N(10, 3^2)$ and $X_2 \\sim N(20, 4^2)$,
+$$\\sigma_{X_1 + X_2} = 3 + 4 = 7$$
+
+Right working: the variances add, and the standard deviation is the square root of the total.
+$$\\mathrm{Var}(X_1 + X_2) = 3^2 + 4^2 = 9 + 16 = 25, \\qquad \\sigma_{X_1 + X_2} = \\sqrt{25} = 5$$
+so $X_1 + X_2 \\sim N(30, 5^2)$.
+
+Why it happens: the means do add, $10 + 20 = 30$, and the same rule is carried over to the spread. Adding standard deviations is correct only when the two variables move in perfect step, which independent variables do not.
+
+How to check: the standard deviation of the sum of two independent variables is always less than the sum of their standard deviations, and at least as large as the larger one. Here it must lie between 4 and 7.
+
+**Scaling the variance by a**
+
+A normal variable is transformed to $aX + b$, and the variance is multiplied by $a$, or $b$ is added to the spread as well as to the mean.
+
+Wrong working: for temperatures $X \\sim N(20, 2^2)$ in degrees Celsius and $Y = 1.8X + 32$ in degrees Fahrenheit,
+$$\\mathrm{Var}(Y) = 1.8 \\cdot 4 = 7.2$$
+
+Right working: the mean follows $a\\mu + b$, and the variance is multiplied by $a^2$; the shift $b$ does not change the spread.
+$$E[Y] = 1.8 \\cdot 20 + 32 = 68, \\qquad \\mathrm{Var}(Y) = 1.8^2 \\cdot 4 = 3.24 \\cdot 4 = 12.96$$
+so $\\sigma_Y = 3.6$ and $Y \\sim N(68, 3.6^2)$.
+
+Why it happens: the mean is multiplied by $a$, and the same factor is applied to the variance. But variance is measured in squared units, so it picks up the factor twice.
+
+How to check: work with the standard deviation, which is in the same units as the data. A spread of 2 degrees Celsius is a spread of $1.8 \\cdot 2 = 3.6$ degrees Fahrenheit, and $3.6^2 = 12.96$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
      links:{
   
       title:``,
@@ -1948,10 +2053,10 @@ This convergence explains why the normal distribution appears so frequently in n
       after:``,
       link:'',
       examples:`
-         @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Normal](!/probability/distributions/continuous/uniform#12) →@
+         @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Normal](!/probability/distributions/continuous/normal#12) →@
             `,
                  calculators:`            
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Continuous Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
         `,
   
     },
@@ -2310,6 +2415,14 @@ export default function NormalDistributionPage({
           sectionsContent.capstone.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj18.title,
+        link:'',
+        content:[
+          sectionsContent.obj18.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

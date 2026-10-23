@@ -1019,6 +1019,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
 
 
 
@@ -1047,23 +1048,23 @@ export async function getStaticProps(){
     A -- Yes --> B["Repetition allowed?"]
     A -- No --> C["Objects distinct or identical?"]
     
-    B -- Yes --> D["Permutation with Repetition (#2)"]
+    B -- Yes --> D["Permutation with Repetition (#4)"]
     B -- No --> E["Use all n items?"]
     
     E -- No --> F["Permutation without Repetition (#3)"]
     E -- Yes --> G["Linear or Circular?"]
     
     G -- Linear --> H["Full Permutation (#1)"]
-    G -- Circular --> I["Circular Permutation (#4)"]
+    G -- Circular --> I["Circular Permutation (#5)"]
     
     C -- Distinct --> J["Select a subset or Distribute all?"]
     C -- Identical --> K["Empty cells allowed?"]
     
-    J -- Select --> L["Combination (#5)"]
-    J -- Distribute --> M["Labeled or Unlabeled?"]
+    J -- Select --> L["Combination (#6)"]
+    J -- Distribute --> M["Group sizes fixed?"]
     
-    M -- Labeled --> N["Distribution into Cells (#7)"]
-    M -- Unlabeled --> O["Partition into Groups (#6)"]
+    M -- No --> N["Distribution into Cells (#10)"]
+    M -- Yes --> O["Partition into Groups (#7)"]
     
     K -- Yes --> P["Weak Composition (#8)"]
     K -- No --> Q["Strong Composition (#9)"]`
@@ -1233,7 +1234,7 @@ graph TD
       {
         '#': `7`,
         scenario: '[Partition into Groups](!/combinatorics/combinations#partition)',
-        description: 'Division of n distinct elements into r unlabeled subsets, considering only which elements share the same subset and not the order or names of subsets.',
+        description: 'Division of n distinct elements into r labeled groups of given sizes, considering only which elements share the same group and not the order within groups.',
         essence: '[Combination](!/combinatorics/combinations)'
       },
       {
@@ -1407,6 +1408,12 @@ Five logical rules govern how counts combine:
 • **Pigeonhole principle** — guarantees that when more items are distributed than there are containers, at least one container must hold a repeat.
 
 The first two are foundational; the other three extend or apply them.
+
+@academic[pitfall,aside:true,width:35%:Adding counts of sequential choices
+Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 + 3 = 8$ treats the two choices as alternatives. Each shirt goes with each pair, so there are $5 \\cdot 3 = 15$ outfits.
+[Read more](!#pitfalls)]@
+
+Which of the two rules applies depends on how an outcome is built. When a single choice is made from one of several separate groups, the groups are alternatives and each option belongs to exactly one of them. When an outcome needs one choice at each of several stages, every option at one stage can be combined with every option at the next. The linking word in the problem often shows which structure is present: "or" joins alternatives, "and" joins stages.
 `,
     before: ``,
     between: ``,
@@ -1429,6 +1436,10 @@ $$|A \\cup B| = |A| + |B| - |A \\cap B|.$$
 
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the triple intersection
+Counting $1$ to $30$ divisible by $2$, $3$ or $5$ as $15 + 10 + 6 - 5 - 3 - 2 = 21$ loses $30$, which is added three times and subtracted three times. Adding back the triple term gives $21 + 1 = 22$.
+[Read more](!#pitfalls)]@
 
 For three sets the pattern continues — add singles, subtract pairwise intersections, add the triple intersection. For $n$ sets the signs alternate down the line, with one term for every non-empty subset of the sets involved.
 
@@ -1461,6 +1472,12 @@ $$\\binom{n}{r} = \\frac{n!}{r!(n-r)!}.$$
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Using a permutation for a selection
+Counting committees of $3$ from $10$ people as $P(10,3) = 720$ treats each order of the same three members as a new committee. A committee has no order, so the count is $\\binom{10}{3} = 120$.
+[Read more](!#pitfalls)]@
+
+The two formulas are closely linked. Every unordered selection of $r$ items can be lined up in $r!$ different orders, so each combination stands for exactly $r!$ permutations, and $\\binom{n}{r} = \\frac{P(n,r)}{r!}$. Which count a problem needs depends on whether two outcomes with the same items in a different order are treated as different outcomes.
+
 Variants cover partitioning items into groups, distributing identical items into labeled cells, and weak and strong compositions.
 
 All of these formulas are built from a handful of [combinatorial symbols](!/math-symbols/combinatorics) — the factorial $n!$, the arrangement count $P(n,r)$, the binomial coefficient $\\binom{n}{r}$ — each listed in the symbols reference with the [LaTeX](!/latex) code that produces it, and the [mathematical keyboard](!/keyboard) lets you type them directly.
@@ -1480,7 +1497,7 @@ Multiplication-rule problems generate sequences of choices. A single structural 
   obj4: {
     title: `Standard Scenarios`,
     content: `
-Within the two families, problems reduce to ten standard templates — five permutation scenarios and five combination scenarios. Each scenario asks a distinct structural question and has a known formula. Permutation scenarios appear on the left, combination scenarios on the right, with each scenario paired with its counterpart on the opposite side.
+Within the two families, problems reduce to ten standard templates — five permutation scenarios and five combination scenarios. Each scenario asks a distinct structural question and has a known formula. Permutation scenarios come first and combination scenarios after them, with each scenario paired with its counterpart on the opposite side.
 
 ## Permutation Scenarios
 
@@ -1496,7 +1513,13 @@ Within the two families, problems reduce to ten standard templates — five perm
 • [Partition into groups](!/combinatorics/combinations#partition) — split $n$ items into labeled groups of sizes $k_1, k_2, \\ldots, k_r$: $\\binom{n}{k_1, k_2, \\ldots, k_r}$
 • [Weak composition](!/combinatorics/combinations#weak) — distribute $n$ identical items into $r$ bins, bins allowed empty: $\\binom{n+r-1}{r-1}$
 • [Strong composition](!/combinatorics/combinations#strong) — distribute $n$ identical items into $r$ bins, no bin empty: $\\binom{n-1}{r-1}$
-• [Distribution into cells](!/combinatorics/combinations#distribution) — distribute $n$ distinct items into $r$ labeled cells with specified sizes: multinomial coefficient
+• [Distribution into cells](!/combinatorics/combinations#distribution) — distribute $n$ distinct items into $r$ labeled cells, cells allowed empty: $r^n$
+
+@academic[pitfall,aside:true,width:35%:Swapping base and exponent
+Counting ways to drop $3$ distinct letters into $4$ mailboxes as $3^4 = 81$ has each mailbox choosing a letter. Each letter chooses a mailbox, so the count is $4^3 = 64$.
+[Read more](!#pitfalls)]@
+
+Two of the formulas above are powers, and both come from the multiplication rule. In a permutation with repetition, each of the $r$ positions is filled from the $n$ choices, giving one factor of $n$ per position. In a distribution into cells, each of the $n$ items is sent to one of the $r$ cells, giving one factor of $r$ per item.
 
 To count arrangements and selections for your own numbers in each of these scenarios, use the [combinatorics calculator](!/combinatorics/calculator).
 `,
@@ -1542,6 +1565,12 @@ $$(a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} \\, a^{n-k} b^k.$$
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Forgetting the power on b
+Taking the $x^2$ term of $(x + 2)^4$ as $\\binom{4}{2} x^2 \\cdot 2 = 12x^2$ leaves the $2$ without its power. With $b^k = 2^2 = 4$, the term is $6 \\cdot 4\\, x^2 = 24x^2$.
+[Read more](!#pitfalls)]@
+
+Each term of the expansion has three parts: the coefficient $\\binom{n}{k}$, the power $a^{n-k}$ and the power $b^k$, with the two exponents always adding up to $n$. When $a$ or $b$ is a number, or a variable with a coefficient, its power is a number too, and it multiplies into the coefficient of the term. Only for $(x + y)^n$ are the coefficients read directly from a row of Pascal's triangle.
+
 The theorem generalizes — the multinomial theorem expands $(x_1 + x_2 + \\cdots + x_r)^n$ using multinomial coefficients.
 `,
     before: ``,
@@ -1562,6 +1591,76 @@ The theorem generalizes — the multinomial theorem expands $(x_1 + x_2 + \\cdot
 • [Algebra](!/algebra) — binomial and polynomial expansions, and the algebraic identities that arise from combinatorial counts.
 
 • [Linear Algebra](!/linear-algebra) — combinatorial structures appear in matrices and in permutations as transformations.
+`,
+    before: ``,
+    between: ``,
+    after: ``,
+    link: '',
+  },
+  obj8: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes come up again and again in basic counting problems. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Adding counts of sequential choices**
+
+An outcome is built in stages, one choice at each stage, but the counts of the stages are added as if they were alternatives. The sum counts the options at the stages, not the ways to combine them.
+
+Wrong working: an outfit is one of $5$ shirts and one of $3$ pairs of trousers, so there are $5 + 3 = 8$ outfits.
+
+Right working: every shirt can be worn with every pair of trousers. The multiplication rule gives $5 \\cdot 3 = 15$ outfits.
+
+Why it happens: both rules start from the same numbers, and "5 shirts and 3 pairs of trousers" reads like a list of things to total. The addition rule fits only when exactly one option is picked from one of the groups.
+
+How to check: list the outcomes for a single shirt. It already gives $3$ outfits, one with each pair of trousers, so $5$ shirts give $5$ groups of $3$.
+
+**Dropping the triple intersection**
+
+With three sets, the pairwise intersections are subtracted and the calculation stops there. Elements that lie in all three sets were added three times and subtracted three times, so they are no longer counted at all.
+
+Wrong working: for the numbers $1$ to $30$ divisible by $2$, $3$ or $5$, $|A| = 15$, $|B| = 10$, $|C| = 6$, $|A \\cap B| = 5$, $|A \\cap C| = 3$ and $|B \\cap C| = 2$, so the count is $15 + 10 + 6 - 5 - 3 - 2 = 21$.
+
+Right working: the triple intersection holds the multiples of $30$, so $|A \\cap B \\cap C| = 1$ and $|A \\cup B \\cup C| = 21 + 1 = 22$.
+
+Why it happens: the two-set formula ends with a subtraction, and the three-set version is remembered as "add the sets, subtract the overlaps" without its last term.
+
+How to check: count the complement. The numbers from $1$ to $30$ divisible by none of $2$, $3$ and $5$ are $1, 7, 11, 13, 17, 19, 23, 29$. There are $8$ of them, and $30 - 8 = 22$.
+
+**Using a permutation for a selection**
+
+A problem that asks only which items are chosen is counted with $P(n,r)$, the formula for ordered arrangements. Each selection is then counted once for every order of its items.
+
+Wrong working: a committee of $3$ from $10$ people is counted as $P(10,3) = 10 \\cdot 9 \\cdot 8 = 720$.
+
+Right working: a committee has no first, second or third member, so order does not matter: $\\binom{10}{3} = \\frac{720}{3!} = \\frac{720}{6} = 120$.
+
+Why it happens: picking the members one after another feels like a sequence of choices, and the multiplication rule naturally produces $10 \\cdot 9 \\cdot 8$.
+
+How to check: swap two chosen items. If Ann, Ben, Cat and Cat, Ben, Ann describe the same committee, order does not matter and the ordered count must be divided by $r!$.
+
+**Swapping base and exponent**
+
+In a power formula such as $r^n$ for a distribution into cells, the number of items and the number of cells trade places. The count then answers a different question.
+
+Wrong working: $3$ distinct letters are dropped into $4$ mailboxes, and a mailbox may stay empty. The count is given as $3^4 = 81$.
+
+Right working: each of the $3$ letters chooses one of the $4$ mailboxes, so the count is $4 \\cdot 4 \\cdot 4 = 4^3 = 64$.
+
+Why it happens: the two power formulas on the page, $n^r$ and $r^n$, look alike, and the letters $n$ and $r$ stand for different things in the two scenarios.
+
+How to check: try a single letter. It can go into any of the $4$ mailboxes, which $4^1 = 4$ gives and $1^4 = 1$ does not.
+
+**Forgetting the power on b**
+
+A term of the binomial expansion is written with its coefficient $\\binom{n}{k}$ and the power of the variable, but the number in the binomial is not raised to its power.
+
+Wrong working: the $x^2$ term of $(x + 2)^4$ has $k = 2$, and it is written as $\\binom{4}{2} x^2 \\cdot 2 = 6 \\cdot 2\\, x^2 = 12x^2$.
+
+Right working: the term is $\\binom{4}{2} x^2 \\cdot 2^2 = 6 \\cdot 4\\, x^2 = 24x^2$. The full expansion is $(x + 2)^4 = x^4 + 8x^3 + 24x^2 + 32x + 16$.
+
+Why it happens: in $(a + b)^n$ with letters, $b^k$ looks like bookkeeping for the variables, and when $b$ is a number its power is easy to lose.
+
+How to check: set $x = 1$. The expansion must equal $(1 + 2)^4 = 81$, and $1 + 8 + 24 + 32 + 16 = 81$; with $12x^2$ in place of $24x^2$ the sum is only $69$.
 `,
     before: ``,
     between: ``,
@@ -1718,8 +1817,37 @@ const schemas = {
     ],
   };
 
+  const scenarioOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Ten templates for counting problems',
+    preface: 'Almost every counting problem matches one of ten standard scenarios. The first split is whether the order of the chosen items matters.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Find the template, then the formula',
+    conclusion: 'Decide whether order matters, then whether items repeat or are identical; the matching scenario hands you the formula.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Standard counting scenarios', def: 'ten templates', children: [
+        { id: 'perm', name: '[Permutation scenarios](!/combinatorics/permutations)', def: 'order matters', children: [
+          { id: 'full', name: 'Full permutation', def: 'arrange n distinct items in a row', example: 'n!' },
+          { id: 'ident', name: 'With identical items', def: 'n items, n₁ … nₖ of each type', example: 'n!/(n₁!…nₖ!)' },
+          { id: 'partial', name: 'Partial, no repetition', def: 'arrange r chosen from n', example: 'n!/(n−r)!' },
+          { id: 'rep', name: 'With repetition', def: 'fill r positions from n choices', example: 'nʳ' },
+          { id: 'circ', name: 'Circular', def: 'arrange n items in a circle', example: '(n−1)!' },
+        ] },
+        { id: 'comb', name: '[Combination scenarios](!/combinatorics/combinations)', def: 'order does not matter', children: [
+          { id: 'simple', name: 'Simple combination', def: 'choose r items from n', example: 'C(n, r)' },
+          { id: 'part', name: 'Partition into groups', def: 'split n items into labeled groups', example: 'multinomial' },
+          { id: 'weak', name: 'Weak composition', def: 'n identical items into r bins, empty allowed', example: 'C(n+r−1, r−1)' },
+          { id: 'strong', name: 'Strong composition', def: 'n identical items into r bins, none empty', example: 'C(n−1, r−1)' },
+          { id: 'dist', name: 'Distribution into cells', def: 'n distinct items into r labeled cells', example: 'rⁿ' },
+        ] },
+      ] },
+    ],
+  };
+
     return {
   props:{
+    scenarioOutline,
     permCombCases,
     demoUnits,
     sectionsContent,
@@ -1744,7 +1872,7 @@ const schemas = {
    
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function CombinatoricsBasicsPage({permCombCases, sectionsContent, introContent,
+export default function CombinatoricsBasicsPage({scenarioOutline, permCombCases, sectionsContent, introContent,
   combinatoricsScenariosData, countingPrinciplesData, countingPrinciplesDiagram,
   seoData, faqQuestions, schemas, demoUnits}) {
 
@@ -1797,6 +1925,14 @@ export default function CombinatoricsBasicsPage({permCombCases, sectionsContent,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="counting-scenarios-outline"
+            title="Ten standard counting scenarios"
+            source="/combinatorics/basics"
+          >
+            <TaxonomyOutline data={scenarioOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1815,6 +1951,14 @@ export default function CombinatoricsBasicsPage({permCombCases, sectionsContent,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
         ]
     },
     {

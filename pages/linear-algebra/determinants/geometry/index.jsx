@@ -1219,6 +1219,10 @@ This scaling factor applies uniformly to every region, not just the unit hypercu
 @academic[formula_callout:determinant_volume_scaling_factor|Determinant Volume Scaling Factor|$$\\operatorname{vol}(A(S)) = |\\det(A)| \\cdot \\operatorname{vol}(S)$$]@
 @academic[formulas_link:/linear-algebra/formulas#determinant_volume_scaling_factor]@
 
+@academic[pitfall,aside:true,width:35%:Pulling the scaling factor out once
+Taking the map $\\mathbf{x} \\mapsto 2\\mathbf{x}$ on $\\mathbb{R}^3$ to scale volumes by $2$ treats $\\det(2I)$ as $2\\det(I) = 2$. All three directions double, so $\\det(2I) = 2^3 = 8$; in general $\\det(kA) = k^n \\det(A)$.
+[Read more](!#pitfalls)]@
+
 Three regimes emerge from this interpretation. When $|\\det(A)| > 1$, the map expands volumes. When $0 < |\\det(A)| < 1$, it compresses volumes. When $|\\det(A)| = 1$, volumes are preserved — the map is volume-preserving. Rotations and reflections both fall in this last category.
 
 When $\\det(A) = 0$, the map collapses at least one dimension entirely. The image of $\\mathbb{R}^n$ under a singular matrix is a subspace of dimension less than $n$ — a hyperplane, a line, a point, or something in between — and all $n$-dimensional volumes map to zero.`,
@@ -1237,6 +1241,12 @@ In two dimensions, orientation is the sense of rotation. A positively oriented p
 In three dimensions, orientation is handedness. The standard basis is right-handed. A transformation with positive determinant sends right-handed triples to right-handed triples; a transformation with negative determinant sends them to left-handed triples.
 
 Standard examples make the distinction concrete. A rotation matrix in $\\mathbb{R}^2$ or $\\mathbb{R}^3$ always has $\\det = +1$ — it preserves both volume and orientation. A reflection across a line (in $\\mathbb{R}^2$) or a plane (in $\\mathbb{R}^3$) has $\\det = -1$ — it preserves volume but flips orientation. An improper rotation, which composes a rotation with a reflection, also has $\\det = -1$.
+
+@academic[pitfall,aside:true,width:35%:Reading a determinant of 1 as a rotation
+Concluding that $A$ is a rotation because $\\det(A) = 1$ fails for the shear $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$: its determinant is $1$, yet it sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$. A determinant of $1$ only says that area and orientation are kept.
+[Read more](!#pitfalls)]@
+
+The examples above start from a known map and then compute its determinant. Classifying an unknown map runs the other way: the matrix is given, its determinant is computed, and the number is then read for what it says about the map. The size of that number and its sign are the two readings that this section and the previous one provide.
 
 When $\\det(A) = 0$, orientation is undefined. The map crushes the space down to a lower-dimensional image, and the concept of clockwise versus counterclockwise or right-handed versus left-handed no longer applies in the collapsed image.`,
     before: ``,
@@ -1262,12 +1272,16 @@ A singular matrix ($\\det = 0$) is a transformation that is not bijective. It ma
   },
   obj6: {
     title: `The Change-of-Variables Formula`,
-    content: `The geometric interpretation of the determinant extends beyond linear maps through the change-of-variables formula in multivariable integration. Given a differentiable transformation $T: \\mathbb{R}^n \\to \\mathbb{R}^n$, the formula reads
+    content: `The geometric interpretation of the determinant extends beyond linear maps through the change-of-variables formula in multivariable integration. Given a continuously differentiable transformation $T: \\mathbb{R}^n \\to \\mathbb{R}^n$ that is one-to-one on the region of integration, with $\\det(J_T) \\neq 0$ there, the formula reads
 
 @academic[formula_callout:The Change-of-Variables Formula
 $$\\int f(\\mathbf{y}) \\, d\\mathbf{y} = \\int f(T(\\mathbf{x})) \\, |\\det(J_T(\\mathbf{x}))| \\, d\\mathbf{x}$$]@
 
 where $J_T(\\mathbf{x})$ is the Jacobian matrix of $T$ at the point $\\mathbf{x}$ — the $n \\times n$ matrix of all partial derivatives $\\frac{\\partial T_i}{\\partial x_j}$.
+
+@academic[pitfall,aside:true,width:35%:Dropping the Jacobian factor
+Writing $dA = dr\\,d\\theta$ in polar coordinates gives the unit disk an area of $\\int_0^{2\\pi}\\!\\int_0^1 dr\\,d\\theta = 2\\pi$. With the factor $|\\det(J_T)| = r$, the area is $\\int_0^{2\\pi}\\!\\int_0^1 r\\,dr\\,d\\theta = \\pi$.
+[Read more](!#pitfalls)]@
 
 The Jacobian matrix is the best linear approximation to $T$ near $\\mathbf{x}$. At each point, it acts like a linear transformation on a small neighborhood, and its determinant measures the local volume distortion. The absolute value appears because the integral accumulates unsigned volume — areas and volumes are always non-negative regardless of orientation.
 
@@ -1292,6 +1306,12 @@ Given three vertices $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$ in the plane, the 
 The $2 \\times 2$ matrix has as its columns the edge vectors from vertex $1$ to the other two vertices. The determinant gives the signed area of the parallelogram spanned by these edges, and the triangle occupies exactly half of that parallelogram.
 
 For the vertices $(1, 2)$, $(4, 6)$, $(3, 1)$: the edge vectors are $(3, 4)$ and $(2, -1)$, the determinant is $3(-1) - 4(2) = -11$, and the area is $\\frac{11}{2}$.
+
+@academic[pitfall,aside:true,width:35%:Using the vertices instead of edge vectors
+Putting the vertices $(4, 6)$ and $(3, 1)$ in as columns gives $\\frac{1}{2}|4 \\cdot 1 - 3 \\cdot 6| = 7$, the area of the triangle with corners $(0, 0)$, $(4, 6)$, $(3, 1)$. The edge vectors $(3, 4)$ and $(2, -1)$ give the true area $\\frac{11}{2}$.
+[Read more](!#pitfalls)]@
+
+Each edge vector is a difference of two vertices, so the formula depends only on the shape of the triangle and not on where it sits in the plane: moving all three vertices by the same amount leaves both edge vectors unchanged. Any vertex can serve as vertex $1$. Another choice gives different edge vectors and may flip the sign of the determinant, but its absolute value, and so the area, stays the same.
 
 ## Parallelogram Area
 
@@ -1318,6 +1338,70 @@ The parallelepiped spanned by three vectors in $\\mathbb{R}^3$ has volume equal 
   obj8: {
     title: `Summary: Geometric Meaning by Dimension`,
     content: `The geometric content of the determinant takes a recognizable shape in each dimension, with the underlying picture — signed n-volume of an n-parallelepiped — running through them all. The table below collects what det(A) measures, what its sign indicates, and what its vanishing represents, dimension by dimension.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when the determinant is used to measure areas and volumes. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Pulling the scaling factor out once**
+
+A map that multiplies every coordinate by the same number $k$ has the matrix $kI$, and scaling a map $A$ in the same way gives $kA$. The factor $k$ is taken out of the determinant once, so the volume factor is taken to be $k\\det(A)$.
+
+Wrong working: for the map $\\mathbf{x} \\mapsto 2\\mathbf{x}$ on $\\mathbb{R}^3$, $\\det(2I) = 2\\det(I) = 2$, so the unit cube is expected to go to a solid of volume $2$.
+
+Right working: every one of the three rows of $2I$ carries the factor $2$.
+$$\\det(2I) = \\det\\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix} = 2 \\cdot 2 \\cdot 2 = 8$$
+The unit cube goes to the cube with side $2$, whose volume is $8$. For an $n \\times n$ matrix, $\\det(kA) = k^n \\det(A)$.
+
+Why it happens: the determinant is linear in each row separately, so a factor in one row comes out once. Multiplying the whole matrix by $k$ puts the factor in all $n$ rows. For a single number, the case $n = 1$, scaling by $k$ really does scale by $k$, and that habit is carried over.
+
+How to check: picture the unit square or cube. Doubling every side of a square gives area $4$, and doubling every side of a cube gives volume $8$, never $2$.
+
+**Reading a determinant of 1 as a rotation**
+
+Rotations have determinant $+1$ and reflections $-1$, and the statement is read backwards: a matrix with determinant $1$ is taken to be a rotation, one with $-1$ a reflection. The determinant records only how volumes scale and whether orientation is kept. Lengths and angles can still change.
+
+Wrong working: for $S = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$, $\\det(S) = 1 \\cdot 1 - 1 \\cdot 0 = 1$, so $S$ is called a rotation.
+
+Right working: $S$ sends $(1, 0)$ to $(1, 0)$ and $(0, 1)$ to $(1, 1)$. The second image has length $\\sqrt{2}$, and the two images meet at $45^\\circ$ instead of $90^\\circ$. $S$ is a shear: it keeps area and orientation but changes the shape of the square. A rotation also needs $S^T S = I$, and here
+$$S^T S = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix} \\neq I$$
+
+Why it happens: the standard examples are always given in one direction, from the map to its determinant, and "rotations have determinant $1$" is remembered as "determinant $1$ means rotation".
+
+How to check: look at the columns. For a rotation or a reflection both columns have length $1$ and are perpendicular. The second column of $S$ is $(1, 1)$, of length $\\sqrt{2}$.
+
+**Dropping the Jacobian factor**
+
+When an integral is moved to new coordinates, the differentials are replaced, for example $dx\\,dy$ by $dr\\,d\\theta$, but the factor $|\\det(J_T)|$ that measures how the map stretches area is left out.
+
+Wrong working: the area of the unit disk in polar coordinates,
+$$\\int_0^{2\\pi}\\!\\int_0^1 dr\\,d\\theta = 2\\pi$$
+
+Right working: for $T(r, \\theta) = (r\\cos\\theta, r\\sin\\theta)$,
+$$\\det(J_T) = \\det\\begin{pmatrix} \\cos\\theta & -r\\sin\\theta \\\\ \\sin\\theta & r\\cos\\theta \\end{pmatrix} = r\\cos^2\\theta + r\\sin^2\\theta = r$$
+so the area is
+$$\\int_0^{2\\pi}\\!\\int_0^1 r\\,dr\\,d\\theta = \\int_0^{2\\pi} \\frac{1}{2}\\,d\\theta = \\pi$$
+
+Why it happens: in the new variables the region is a plain rectangle, $0 \\le r \\le 1$ and $0 \\le \\theta \\le 2\\pi$, and the integral looks complete without the factor. The stretching done by the map cannot be seen in the new coordinates.
+
+How to check: integrate $1$ over a region whose area is known. The unit disk must give $\\pi$; the wrong answer $2\\pi$ is the area of the rectangle in the $(r, \\theta)$ plane, not of the disk.
+
+**Using the vertices instead of edge vectors**
+
+The two columns of the $2 \\times 2$ matrix are filled with two of the vertices themselves instead of the edge vectors from vertex $1$. This measures a different triangle, the one with a corner at the origin.
+
+Wrong working: for the vertices $(1, 2)$, $(4, 6)$, $(3, 1)$, taking $(4, 6)$ and $(3, 1)$ as columns,
+$$\\frac{1}{2}\\left|\\det\\begin{pmatrix} 4 & 3 \\\\ 6 & 1 \\end{pmatrix}\\right| = \\frac{1}{2}|4 - 18| = 7$$
+
+Right working: the edge vectors are $(4 - 1, 6 - 2) = (3, 4)$ and $(3 - 1, 1 - 2) = (2, -1)$, and
+$$\\frac{1}{2}\\left|\\det\\begin{pmatrix} 3 & 2 \\\\ 4 & -1 \\end{pmatrix}\\right| = \\frac{1}{2}|-3 - 8| = \\frac{11}{2}$$
+
+Why it happens: the parallelogram formula takes vectors that start at the origin, and vertex coordinates look like such vectors. The shortcut is right only when one of the vertices is the origin.
+
+How to check: shift all three vertices by the same amount; the area must not change. Moving $(1, 2)$ to the origin gives the vertices $(0, 0)$, $(3, 4)$, $(2, -1)$, and the shortcut now gives $\\frac{11}{2}$ instead of $7$, so it cannot have been measuring the original triangle.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1735,6 +1819,14 @@ export default function DeterminantGeometryPage({signedAreaCases, detSignCases, 
           </DiagramFrame>,
           `That the pattern continues past three dimensions is a claim rather than an observation, and it is worth being clear about which way the definition runs. In $\\mathbb{R}^2$ and $\\mathbb{R}^3$ the determinant is checked against an area and a volume that were already understood. Above that there is no prior notion of content to check against, so the determinant supplies one — $n$-dimensional volume is **defined** as what the determinant measures, and the [change of variables formula](#6) is what makes that definition useful rather than arbitrary.`,
           `The zero case deserves separate attention because it is the one that loses information. A determinant of zero says the image fits inside a proper subspace, but says nothing about which subspace or how far the collapse went — a matrix squashing $\\mathbb{R}^3$ onto a plane and one squashing it onto a point both report zero. The determinant detects collapse; [rank](!/linear-algebra/matrix/rank) measures it.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

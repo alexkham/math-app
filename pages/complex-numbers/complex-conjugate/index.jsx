@@ -1880,6 +1880,10 @@ $$\\overline{z_1 \\cdot z_2} = \\overline{z_1} \\cdot \\overline{z_2}$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Forgetting to conjugate i
+Conjugating $i(2 + 3i)$ as $i \\cdot \\overline{(2 + 3i)} = i(2 - 3i) = 3 + 2i$ leaves the factor $i$ unchanged. Both factors flip: $\\overline{i} \\cdot \\overline{(2 + 3i)} = -i(2 - 3i) = -3 - 2i$, the conjugate of $i(2 + 3i) = -3 + 2i$.
+[Read more](!#pitfalls)]@
+
 The conjugate of a product equals the product of the conjugates. Verification requires expanding both sides and comparing — the algebra confirms equality. This property proves invaluable when simplifying products or verifying identities.
 
 Division follows the same pattern:
@@ -1922,6 +1926,10 @@ The proof follows from direct expansion. Let $z = a + bi$, so $\\bar{z} = a - bi
 
 @academic[formula_callout:Conjugate and Modulus
 $$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - abi + abi - b^2i^2 = a^2 - b^2(-1) = a^2 + b^2$$]@
+
+@academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
+Expanding $(3 + 4i)(3 - 4i)$ to $9 - 16 = -7$ takes $(4i)^2$ to be $16$. In fact $(4i)^2 = 16i^2 = -16$, so the product is $9 - (-16) = 25 = |3 + 4i|^2$.
+[Read more](!#pitfalls)]@
 
 The middle terms cancel, and $i^2 = -1$ converts the final term to positive. The result $a^2 + b^2$ matches the definition $|z|^2 = a^2 + b^2$ exactly.
 
@@ -1992,6 +2000,10 @@ The difference between a number and its conjugate isolates the imaginary part:
 @academic[formula_callout:Useful Identities
 $$z - \\bar{z} = (a + bi) - (a - bi) = 2bi$$]@
 
+@academic[pitfall,aside:true,width:35%:Dividing by 2 instead of 2i
+For $z = 5 - 3i$, halving $z - \\bar{z} = -6i$ gives $-3i$, which is not $Im(z)$: the imaginary part is the real number $-3$. Dividing by $2i$ gives it: $\\frac{-6i}{2i} = -3$.
+[Read more](!#pitfalls)]@
+
 The real terms cancel, leaving twice the imaginary term. Rearranging: $Im(z) = \\frac{z - \\bar{z}}{2i}$. This identity guarantees that $z - \\bar{z}$ is always pure imaginary. The result necessarily sits on the vertical axis.
 
 The product of a number and its conjugate yields the squared modulus:
@@ -2016,6 +2028,10 @@ Consider the division $\\frac{w}{z}$ where both $w$ and $z$ are complex. The den
 
 @academic[formula_callout:Applications to Division
 $$\\frac{w}{z} = \\frac{w}{z} \\cdot \\frac{\\bar{z}}{\\bar{z}} = \\frac{w \\cdot \\bar{z}}{z \\cdot \\bar{z}} = \\frac{w \\cdot \\bar{z}}{|z|^2}$$]@
+
+@academic[pitfall,aside:true,width:35%:Multiplying only the denominator
+Multiplying just the denominator of $\\frac{2 + i}{1 + i}$ by $1 - i$ gives $\\frac{2 + i}{2}$, a different number. With the numerator multiplied too, $\\frac{(2 + i)(1 - i)}{(1 + i)(1 - i)} = \\frac{3 - i}{2} = \\frac{3}{2} - \\frac{1}{2}i$.
+[Read more](!#pitfalls)]@
 
 The denominator becomes $z \\cdot \\bar{z} = |z|^2$, a real number. The numerator $w \\cdot \\bar{z}$ is some complex number that can be computed by standard multiplication. Dividing a complex number by a real number simply scales both components, yielding standard form.
 
@@ -2053,6 +2069,10 @@ The proof exploits how conjugation interacts with polynomial evaluation. Since c
 
 @academic[formula_callout:Conjugate Pairs in Polynomials
 $$\\overline{p(z_0)} = \\overline{a_nz_0^n + \\cdots + a_0} = a_n\\overline{z_0^n} + \\cdots + a_0 = a_n(\\bar{z_0})^n + \\cdots + a_0 = p(\\bar{z_0})$$]@
+
+@academic[pitfall,aside:true,width:35%:Pairing roots without real coefficients
+Taking $-i$ as a root of $z^2 - 2iz - 1$ because $i$ is one ignores the coefficient $-2i$, which is not real. Substituting gives $(-i)^2 - 2i(-i) - 1 = -1 - 2 - 1 = -4$; the polynomial is $(z - i)^2$, and $i$ is its only root.
+[Read more](!#pitfalls)]@
 
 The key step uses $\\overline{a_k} = a_k$ because each coefficient is real. If $p(z_0) = 0$, then $\\overline{p(z_0)} = \\bar{0} = 0$, so $p(\\bar{z_0}) = 0$.
 
@@ -2122,6 +2142,85 @@ Conjugate pairs multiply to give real quadratic factors. If $z_0 = a + bi$ is a 
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Six mistakes account for many of the wrong answers in work with the conjugate. Five are marked where they happen in the sections above; the confusion of the conjugate with the negative is the one the definition section already points out. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Confusing the conjugate with the negative**
+
+Asked for the conjugate, both signs are flipped instead of only the sign of the imaginary part. The result is the negative of the number, its reflection through the origin rather than across the real axis.
+
+Wrong working: $\\overline{3 + 2i} = -3 - 2i$.
+
+Right working: the real part stays and only the imaginary sign changes, so $\\overline{3 + 2i} = 3 - 2i$. The number $-3 - 2i$ is $-(3 + 2i)$.
+
+Why it happens: both operations flip a sign and both are written with a single mark, a bar or a minus.
+
+How to check: a number and its conjugate have the same real part, so their sum is real and equal to twice that part: $(3 + 2i) + (3 - 2i) = 6$. A number and its negative add to $0$.
+
+**Forgetting to conjugate i**
+
+A product that contains the factor $i$ is conjugated factor by factor, but the bar is applied to the other factor only, as if $i$ were a real constant.
+
+Wrong working: $\\overline{i(2 + 3i)} = i \\cdot (2 - 3i) = 2i - 3i^2 = 3 + 2i$.
+
+Right working: every factor is conjugated, and $\\overline{i} = -i$. So $\\overline{i(2 + 3i)} = -i(2 - 3i) = -2i + 3i^2 = -3 - 2i$. Directly, $i(2 + 3i) = 2i + 3i^2 = -3 + 2i$, whose conjugate is $-3 - 2i$.
+
+Why it happens: $i$ looks like a fixed coefficient, and coefficients usually pass through the bar unchanged. Only real coefficients do.
+
+How to check: work out the product first, then flip the sign of its imaginary part. Both routes must give the same number.
+
+**Forgetting that i squared is −1**
+
+In the product $z \\cdot \\bar{z} = (a + bi)(a - bi)$, the difference-of-squares pattern gives $a^2 - (bi)^2$, and $(bi)^2$ is then taken to be $b^2$.
+
+Wrong working: $(3 + 4i)(3 - 4i) = 9 - 16 = -7$.
+
+Right working: $(3 + 4i)(3 - 4i) = 9 - (4i)^2 = 9 - 16i^2 = 9 + 16 = 25$. Since $|3 + 4i| = \\sqrt{9 + 16} = 5$, this is $|3 + 4i|^2 = 25$, as the identity requires.
+
+Why it happens: the real pattern $(x + y)(x - y) = x^2 - y^2$ is applied with $y = 4$ instead of $y = 4i$.
+
+How to check: $z \\cdot \\bar{z}$ is never negative. A negative result such as $-7$ shows the slip at once; the answer must equal $a^2 + b^2$.
+
+**Dividing by 2 instead of 2i**
+
+The imaginary part is extracted from $z - \\bar{z} = 2bi$ by halving it, which leaves the term $bi$ instead of the real number $b$.
+
+Wrong working: for $z = 5 - 3i$, $z - \\bar{z} = (5 - 3i) - (5 + 3i) = -6i$, so $Im(z) = \\frac{-6i}{2} = -3i$.
+
+Right working: $Im(z) = \\frac{z - \\bar{z}}{2i} = \\frac{-6i}{2i} = -3$.
+
+Why it happens: the formula for the real part divides by $2$, and the imaginary part is often pictured as the whole term $bi$ rather than its coefficient $b$.
+
+How to check: $Im(z)$ is always a real number. Read it off directly: in $5 - 3i$ the coefficient of $i$ is $-3$.
+
+**Multiplying only the denominator**
+
+To make the denominator real, it is multiplied by its conjugate, but the numerator is left as it is. The fraction has then been multiplied by $\\bar{z}$ instead of by $\\frac{\\bar{z}}{\\bar{z}} = 1$, so its value changes.
+
+Wrong working: $\\frac{2 + i}{1 + i} \\to \\frac{2 + i}{(1 + i)(1 - i)} = \\frac{2 + i}{2} = 1 + \\frac{1}{2}i$.
+
+Right working: $\\frac{2 + i}{1 + i} = \\frac{(2 + i)(1 - i)}{(1 + i)(1 - i)} = \\frac{2 - 2i + i - i^2}{1 - i^2} = \\frac{3 - i}{2} = \\frac{3}{2} - \\frac{1}{2}i$.
+
+Why it happens: the goal is a real denominator, and the step looks like a repair of the denominator alone.
+
+How to check: multiply the answer by the original denominator; it must give the numerator back. $\\left(\\frac{3}{2} - \\frac{1}{2}i\\right)(1 + i) = \\frac{3}{2} + \\frac{3}{2}i - \\frac{1}{2}i - \\frac{1}{2}i^2 = 2 + i$, while $\\left(1 + \\frac{1}{2}i\\right)(1 + i) = \\frac{1}{2} + \\frac{3}{2}i$.
+
+**Pairing roots without real coefficients**
+
+The conjugate pair theorem is applied to a polynomial with a coefficient that is not real, and the conjugate of a known root is listed as a second root.
+
+Wrong working: $i$ is a root of $z^2 - 2iz - 1$, since $i^2 - 2i \\cdot i - 1 = -1 + 2 - 1 = 0$. So $-i$ is a root too, and the roots are $\\pm i$.
+
+Right working: substituting $-i$ gives $(-i)^2 - 2i(-i) - 1 = -1 + 2i^2 - 1 = -1 - 2 - 1 = -4$, not $0$. The polynomial is $(z - i)^2$, so $i$ is a double root and $-i$ is not a root. The proof of the theorem needs $\\overline{a_k} = a_k$, and here $\\overline{-2i} = 2i$.
+
+Why it happens: the theorem is remembered as "complex roots come in pairs", without its condition on the coefficients.
+
+How to check: look at every coefficient before pairing roots. If one is not real, substitute the conjugate and see whether it gives $0$.`,
+      before:``,
+      after:``,
+      link:'',
     },
   
     faq: {
@@ -2411,7 +2510,7 @@ export default function ComplexConjugatePage({
         content:[
           sectionsContent.obj6.content,
                   <div key={'unit-conjugatePair'} dangerouslySetInnerHTML={{ __html: demoUnits.conjugatePair }} />,
-          `Halving them gives Re(z) = 3 and Im(z) = 2 back.`,
+          `Halving the sum and dividing the difference by 2i gives Re(z) = 3 and Im(z) = 2 back.`,
         ]
     },
     {
@@ -2443,6 +2542,14 @@ export default function ComplexConjugatePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

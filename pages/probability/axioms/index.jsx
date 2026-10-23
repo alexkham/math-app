@@ -1204,6 +1204,12 @@ $$P(\\emptyset) = 0$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Adding probabilities of overlapping events
+Adding $P(A) + P(B)$ for $A$ = first die shows 6 and $B$ = second die shows 6 gives $\\frac{6}{36} + \\frac{6}{36} = \\frac{12}{36}$, counting the outcome $(6, 6)$ twice. Subtracting $P(A \\cap B) = \\frac{1}{36}$ gives $\\frac{11}{36}$.
+[Read more](!#pitfalls)]@
+
+The two-event union rule applies to any pair of events, whether or not they share outcomes. Its last term, $P(A \\cap B)$, is the probability of the outcomes the two events have in common. For disjoint events that term is $0$, and the rule reduces to Axiom 3.
+
 These results show how much structure is already enforced by the axioms alone. Many familiar probability rules emerge without introducing any new principles. The table below names each consequence with its formal statement and the line of reasoning that produces it from the axioms.
 `,
       before:``,
@@ -1227,6 +1233,10 @@ The probability axioms are intentionally minimal. They impose consistency, but t
 
 - **No restriction to finite spaces**  
   The axioms apply equally to finite, countable, and continuous sample spaces.
+
+@academic[pitfall,aside:true,width:35%:Assuming outcomes are equally likely
+Treating the 11 possible sums of two dice as equally likely gives $P(\\text{sum} = 7) = \\frac{1}{11}$. The equally likely outcomes are the 36 ordered pairs, and six of them sum to 7, so $P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$.
+[Read more](!#pitfalls)]@
 
 This section is crucial because it separates what probability **requires** from what is often **assumed**. Many misunderstandings arise from attributing extra meaning to the axioms that they do not contain. The table below collects each non-assumption alongside what it means and where the corresponding assumption must come from if a model needs it.
 `,
@@ -1298,6 +1308,40 @@ This chain of logical inference is what transforms probability from a collection
       content:`
 The three probability axioms are minimal in form, yet through logical inference they generate the entire structure of probability — conditional probability, total probability, independence, Bayes&apos; theorem, random variables, and distributions all trace back to them. The table below collects the key downstream concepts, naming what each builds on and what the axioms ultimately provide.
 `,
+      before:``,
+      after:``,
+    },
+    pitfalls:{
+      title:`Common Pitfalls`,
+      content:`Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Adding probabilities of overlapping events**
+
+Two events can both happen, but the probability that at least one of them happens is found by adding their probabilities, as if Axiom 3 applied. The outcomes they share are then counted twice.
+
+Wrong working: roll two dice, with $A$ = the first die shows 6 and $B$ = the second die shows 6.
+$$P(A \\cup B) = P(A) + P(B) = \\frac{6}{36} + \\frac{6}{36} = \\frac{12}{36} = \\frac{1}{3}$$
+
+Right working: the outcome $(6, 6)$ lies in both events, so its probability is subtracted once.
+$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = \\frac{6}{36} + \\frac{6}{36} - \\frac{1}{36} = \\frac{11}{36}$$
+
+Why it happens: Axiom 3 is the first rule for combining events, and its condition, that the events share no outcome, is easy to drop when the events look unrelated.
+
+How to check: count outcomes directly. The pairs with at least one 6 fill one row and one column of the $6 \\times 6$ grid, which share one cell, so there are $6 + 6 - 1 = 11$ of them. With more rolls the sum gives itself away: adding $\\frac{1}{6}$ once for each of seven rolls gives $\\frac{7}{6}$, more than $1$, which breaks the bound $P(A) \\leq 1$.
+
+**Assuming outcomes are equally likely**
+
+The possible results of an experiment are listed, and each is given the same probability, one over the number of results. Nothing in the axioms says the results are equally likely, and often they are not.
+
+Wrong working: the sum of two dice takes the 11 values $2, 3, \\ldots, 12$, so
+$$P(\\text{sum} = 7) = \\frac{1}{11}$$
+
+Right working: for fair dice the 36 ordered pairs of faces are equally likely. Six of them sum to 7, namely $(1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1)$, so
+$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$
+
+Why it happens: for a single fair die or coin, every listed result really does have the same probability, and the habit carries over to results built from several outcomes.
+
+How to check: compare two results whose pairs are easy to count. A sum of 2 comes only from $(1, 1)$, while a sum of 7 comes from six pairs, so the two cannot have the same probability: $\\frac{1}{36}$ against $\\frac{6}{36}$.`,
       before:``,
       after:``,
     },
@@ -1512,6 +1556,14 @@ export default function AxiomsPage({
         content:[
           sectionsContent.overview.content,
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:'',
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

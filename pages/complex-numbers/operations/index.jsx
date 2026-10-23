@@ -1170,6 +1170,10 @@ $$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Multiplying part by part
+Multiplying real parts and imaginary parts separately, as in addition, gives $(1 + 2i)(3 + 4i) = 3 + 8i$. Expanding all four products gives $3 + 4i + 6i + 8i^2 = -5 + 10i$.
+[Read more](!#7)]@
+
 The real part of the product is $ac - bd$. The imaginary part is $ad + bc$. Both involve contributions from all four original values.
 
 Step-by-step example: Compute $(2 + 3i)(4 - i)$.
@@ -1179,6 +1183,10 @@ Expand: $2 \\cdot 4 + 2 \\cdot (-i) + 3i \\cdot 4 + 3i \\cdot (-i) = 8 - 2i + 12
 Substitute $i^2 = -1$: $= 8 - 2i + 12i - 3(-1) = 8 - 2i + 12i + 3$
 
 Combine: $= (8 + 3) + (-2 + 12)i = 11 + 10i$
+
+@academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
+Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12i - 3 = 5 + 10i$. Since $i^2 = -1$, the term is $+3$ and the product is $11 + 10i$.
+[Read more](!#7)]@
 
 Multiplying by a pure real number scales both components proportionally. The product $3(2 + 5i) = 6 + 15i$ stretches the number by factor $3$ without rotating it. Multiplying by $i$ rotates $90°$ counterclockwise: $i(2 + 5i) = 2i + 5i^2 = -5 + 2i$. The [trigonometric form](!/complex-numbers/trigonometric-form) reveals multiplication's full geometric meaning — moduli multiply, arguments add.`,
   after: ``,
@@ -1199,6 +1207,10 @@ $$\\frac{a + bi}{c + di} = \\frac{(ac + bd) + (bc - ad)i}{c^2 + d^2}$$
 
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Dividing part by part
+Dividing real part by real part and imaginary part by imaginary part turns $\\frac{4 + 6i}{2 + 3i}$ into $\\frac{4}{2} + \\frac{6}{3}i = 2 + 2i$. But $4 + 6i = 2(2 + 3i)$, so the quotient is $2$.
+[Read more](!#7)]@
 
 The denominator becomes $c^2 + d^2$, a real number, because $z \\cdot \\bar{z} = |z|^2$ for any complex $z$. The numerator requires standard complex multiplication. Once the denominator is real, divide each component of the numerator by it.
 
@@ -1281,6 +1293,10 @@ Apply the formula: $(3 + 4i)^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{
 
 Verification: $(3 + 4i) \\cdot \\left(\\frac{3}{25} - \\frac{4}{25}i\\right) = \\frac{9}{25} - \\frac{12}{25}i + \\frac{12}{25}i - \\frac{16}{25}i^2 = \\frac{9}{25} + \\frac{16}{25} = \\frac{25}{25} = 1$.]@
 
+@academic[pitfall,aside:true,width:35%:Stopping at the conjugate
+Taking $z^{-1} = \\bar{z}$ for $z = 2 - i$ gives $2 + i$, but $(2 - i)(2 + i) = 5$, not $1$. Dividing by $|z|^2 = 5$ gives $z^{-1} = \\frac{2}{5} + \\frac{1}{5}i$.
+[Read more](!#7)]@
+
 The inverse exists precisely when $|z|^2 \\neq 0$, which occurs exactly when $z \\neq 0$. Division by zero remains undefined in $\\mathbb{C}$ as in $\\mathbb{R}$ — the number $0$ has no multiplicative inverse.
 
 Geometrically, $z^{-1}$ lies on the same ray from the origin as $\\bar{z}$, but at distance $1/|z|$ rather than $|z|$. Inversion reflects across the real axis and rescales the [modulus](!/complex-numbers/absolute-value) to its reciprocal.`,
@@ -1304,7 +1320,43 @@ Geometrically, $z^{-1}$ lies on the same ray from the origin as $\\bar{z}$, but 
 
 **Confusing conjugate and negative:** The conjugate of $3 + 2i$ is $3 - 2i$, not $-3 - 2i$. Conjugation flips only the imaginary sign; negation flips both. These operations differ and serve different purposes.
 
-**Tips for accuracy:** Work step by step, writing each intermediate result. Check products by verifying that the [modulus](!/complex-numbers/absolute-value) of the product equals the product of moduli: $|z_1 z_2| = |z_1||z_2|$. For division, verify that multiplying the quotient by the divisor recovers the dividend.`,
+**Tips for accuracy:** Work step by step, writing each intermediate result. Check products by verifying that the [modulus](!/complex-numbers/absolute-value) of the product equals the product of moduli: $|z_1 z_2| = |z_1||z_2|$. For division, verify that multiplying the quotient by the divisor recovers the dividend.
+
+**Multiplying part by part**
+
+The product is formed the way a sum is: real part times real part, imaginary part times imaginary part. The two cross terms are lost, and the product of the imaginary parts lands in the wrong place.
+
+Wrong working: $(1 + 2i)(3 + 4i) = 1 \\cdot 3 + (2 \\cdot 4)i = 3 + 8i$.
+
+Right working: $(1 + 2i)(3 + 4i) = 3 + 4i + 6i + 8i^2 = 3 + 10i - 8 = -5 + 10i$.
+
+Why it happens: addition and subtraction really do work part by part, and the same pattern is carried over to multiplication. Multiplication distributes instead, so each part of one factor meets each part of the other.
+
+How to check: moduli multiply. $|1 + 2i| \\cdot |3 + 4i| = \\sqrt{5} \\cdot 5 = \\sqrt{125}$, and $|-5 + 10i| = \\sqrt{25 + 100} = \\sqrt{125}$, while $|3 + 8i| = \\sqrt{73}$.
+
+**Dividing part by part**
+
+The quotient is formed the way a difference is: real part over real part, imaginary part over imaginary part. Division by a complex number does not split over the parts of the denominator.
+
+Wrong working: $\\frac{4 + 6i}{2 + 3i} = \\frac{4}{2} + \\frac{6}{3}i = 2 + 2i$.
+
+Right working: multiply by the conjugate $2 - 3i$. $\\frac{(4 + 6i)(2 - 3i)}{(2 + 3i)(2 - 3i)} = \\frac{8 - 12i + 12i - 18i^2}{4 + 9} = \\frac{26}{13} = 2$.
+
+Why it happens: addition and subtraction work part by part, and so does division by a real number: $\\frac{4 + 6i}{2} = 2 + 3i$. A complex denominator mixes the parts, just as a complex factor does in multiplication.
+
+How to check: multiply the answer by the denominator; it must give the numerator back. $(2 + 2i)(2 + 3i) = 4 + 6i + 4i + 6i^2 = -2 + 10i$, not $4 + 6i$, while $2(2 + 3i) = 4 + 6i$.
+
+**Stopping at the conjugate**
+
+The conjugate is found and given as the inverse, without the division by $|z|^2$. The answer points in the right direction but has the wrong length, unless $|z| = 1$.
+
+Wrong working: $(2 - i)^{-1} = \\overline{2 - i} = 2 + i$.
+
+Right working: $|2 - i|^2 = 4 + 1 = 5$, so $(2 - i)^{-1} = \\frac{2 + i}{5} = \\frac{2}{5} + \\frac{1}{5}i$. Indeed $(2 - i)\\left(\\frac{2}{5} + \\frac{1}{5}i\\right) = \\frac{4}{5} + \\frac{2}{5}i - \\frac{2}{5}i - \\frac{1}{5}i^2 = \\frac{4}{5} + \\frac{1}{5} = 1$.
+
+Why it happens: the conjugate does the visible work of the formula, flipping the sign of the imaginary part, and the real divisor $|z|^2$ looks like a final tidy-up that can be dropped. On the unit circle the two coincide, which makes the shortcut look right.
+
+How to check: multiply $z$ by the answer; the product must be $1$. Here $(2 - i)(2 + i) = 5$, so the conjugate is $5$ times too large.`,
   after: ``,
   link: '',
 },

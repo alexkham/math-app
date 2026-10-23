@@ -307,7 +307,11 @@ obj1: {
   content: `The greatest common divisor of two positive integers $a$ and $b$, written $\\gcd(a, b)$, is the largest positive integer that divides both.
 
 The [common factors](!/arithmetic/divisibility/factors) of $12$ and $18$ are $\\{1, 2, 3, 6\\}$. The largest is $6$, so $\\gcd(12, 18) = 6$.`,
-  afterFigure: `The common factors of $20$ and $35$ are $\\{1, 5\\}$. The largest is $5$, so $\\gcd(20, 35) = 5$.
+  afterFigure: `@academic[pitfall,aside:true,width:35%:Confusing the GCD with the LCM
+Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least common multiple, a number that $12$ and $18$ both divide. The GCD divides both numbers, so it is $6$.
+[Read more](!#pitfalls)]@
+
+The common factors of $20$ and $35$ are $\\{1, 5\\}$. The largest is $5$, so $\\gcd(20, 35) = 5$.
 
 The GCD always exists for any pair of positive integers, and it is always at least $1$ — because $1$ divides everything. It can never exceed the smaller of the two numbers, since no factor of $a$ can be larger than $a$ itself.
 
@@ -388,7 +392,7 @@ Factors of $36$: $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$.
 Common factors: $\\{1, 2, 3, 4, 6, 12\\}$.
 
 The largest is $12$, so $\\gcd(24, 36) = 12$.`,
-  afterFigure: `The method is transparent and reliable for small numbers. For large numbers it becomes impractical — finding all factors of a number like $1{,}764$ requires systematic testing up to $\\sqrt{1764} \\approx 42$, and doing this for two numbers is tedious. The methods that follow avoid listing factors entirely.`,
+  afterFigure: `The method is transparent and reliable for small numbers. For large numbers it becomes impractical — finding all factors of a number like $1{,}764$ requires systematic testing up to $\\sqrt{1764} = 42$, and doing this for two numbers is tedious. The methods that follow avoid listing factors entirely.`,
   before: ``,
   after: ``,
   link: '',
@@ -414,7 +418,13 @@ Take the smaller exponent for each shared prime: $\\min(4, 2) = 2$ for the prime
 
 @academic[formula_callout:Method 2: Prime Factorization
 $$\\gcd(48, 180) = 2^2 \\cdot 3^1 = 4 \\cdot 3 = 12$$]@`,
-  afterFigure: `This method is efficient when the factorizations are easy to find. For numbers whose prime factors are not immediately apparent, the Euclidean algorithm is faster.`,
+  afterFigure: `@academic[pitfall,aside:true,width:35%:Taking the larger exponent
+Taking the larger exponent of each shared prime in $40 = 2^3 \\cdot 5$ and $60 = 2^2 \\cdot 3 \\cdot 5$ gives $2^3 \\cdot 5 = 40$, which does not divide $60$. The smaller exponents give $\\gcd(40, 60) = 2^2 \\cdot 5 = 20$.
+[Read more](!#pitfalls)]@
+
+Each shared prime comes with two exponents, one from each factorization, and the GCD can use only one of them. In the figure, the amber blocks of each stack mark the copies of a prime that both numbers contain, and the dashed blocks mark the copies that only one of them has.
+
+This method is efficient when the factorizations are easy to find. For numbers whose prime factors are not immediately apparent, the Euclidean algorithm is faster.`,
   before: ``,
   after: ``,
   link: '',
@@ -436,7 +446,11 @@ $105 = 42 \\cdot 2 + 21$, so $\\gcd(105, 42) = \\gcd(42, 21)$.
 $42 = 21 \\cdot 2 + 0$, so $\\gcd(42, 21) = 21$.
 
 The last nonzero remainder is $21$, which is $\\gcd(252, 105)$.`,
-  afterFigure: `The algorithm works because any common divisor of $a$ and $b$ is also a common divisor of $b$ and $a \\bmod b$. The [modulo](!/arithmetic/modulo) operation peels away multiples of $b$ from $a$, leaving a smaller number with the same common divisor structure. This is the most efficient of the three methods, particularly for large numbers where factorization is difficult.`,
+  afterFigure: `@academic[pitfall,aside:true,width:35%:Keeping the larger number
+Dividing $252$ by the remainder $42$ gives $252 = 42 \\cdot 6 + 0$ and the answer $42$, which does not divide $105$. The remainder divides $105$: $105 = 42 \\cdot 2 + 21$, so the GCD is $21$.
+[Read more](!#pitfalls)]@
+
+The algorithm works because any common divisor of $a$ and $b$ is also a common divisor of $b$ and $a \\bmod b$. The [modulo](!/arithmetic/modulo) operation peels away multiples of $b$ from $a$, leaving a smaller number with the same common divisor structure. This is the most efficient of the three methods, particularly for large numbers where factorization is difficult.`,
   before: ``,
   after: ``,
   link: '',
@@ -561,6 +575,12 @@ obj10: {
   title: `Applications of GCD`,
   content: `The most immediate application is simplifying **fractions**. The fraction $\\frac{24}{36}$ reduces to $\\frac{2}{3}$ by dividing numerator and denominator by $\\gcd(24, 36) = 12$. A fraction is in lowest terms when the GCD of its numerator and denominator is $1$.
 
+@academic[pitfall,aside:true,width:35%:Stopping at a smaller common factor
+Dividing $\\frac{18}{24}$ by the common factor $2$ and stopping gives $\\frac{9}{12}$, which is not in lowest terms: $9$ and $12$ still share $3$. Dividing by $\\gcd(18, 24) = 6$ gives $\\frac{3}{4}$ at once.
+[Read more](!#pitfalls)]@
+
+Any common factor of the numerator and denominator can be cancelled, and every cancellation gives a fraction of the same value. What differs is how far a single cancellation goes: the larger the common factor, the smaller the numbers that remain.
+
 Ratios simplify the same way. A rectangle with dimensions $48 \\times 80$ has an aspect ratio of $48:80$. Dividing both by $\\gcd(48, 80) = 16$ gives $3:5$, as the figure below shows.`,
   afterFigure: `Tiling problems use the GCD geometrically. The largest square tile that fits perfectly into a $48 \\times 80$ rectangle has side length $\\gcd(48, 80) = 16$. The rectangle is then covered by $3 \\times 5 = 15$ such tiles with no gaps or overlaps, as shown below.`,
   afterFigure2: `The GCD also connects to the [LCM](!/arithmetic/divisibility/lcm) through a clean identity: $a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$. Knowing the GCD gives the LCM for free, and vice versa.`,
@@ -591,6 +611,73 @@ Simplify $\\frac{84}{126}$. $\\gcd(84, 126)$: $126 = 84 \\cdot 1 + 42$, $84 = 42
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Five mistakes account for many of the wrong answers in GCD work. Four are marked where they happen in the sections above; the confusion of coprime with prime is the one the notation and coprime sections already point out. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Confusing the GCD with the LCM**
+
+The greatest common divisor is answered with a common multiple, usually the least common multiple or the product of the two numbers. Both names contain "common", and both are found from the same two numbers.
+
+Wrong working: $12$ and $18$ both go into $36$, so $\\gcd(12, 18) = 36$.
+
+Right working: the GCD must divide both numbers. The factors of $12$ are $\\{1, 2, 3, 4, 6, 12\\}$ and the factors of $18$ are $\\{1, 2, 3, 6, 9, 18\\}$. The common factors are $\\{1, 2, 3, 6\\}$, so $\\gcd(12, 18) = 6$. The number $36$ is $\\text{lcm}(12, 18)$.
+
+Why it happens: "greatest" suggests a large answer, and "common" is read as a number both lead to rather than a number that goes into both.
+
+How to check: the GCD can never exceed the smaller number, so $\\gcd(12, 18) \\leq 12$. Both divisions must also come out whole: $12 \\div 6 = 2$ and $18 \\div 6 = 3$.
+
+**Taking the larger exponent**
+
+In the prime factorization method, each shared prime is raised to the larger of its two exponents. That is the rule for the least common multiple, not for the GCD.
+
+Wrong working: $40 = 2^3 \\cdot 5$ and $60 = 2^2 \\cdot 3 \\cdot 5$. The larger exponents give $2^3 \\cdot 5 = 40$.
+
+Right working: take the smaller exponent of each shared prime, $\\min(3, 2) = 2$ for the prime $2$ and $\\min(1, 1) = 1$ for the prime $5$. The prime $3$ is not shared. So $\\gcd(40, 60) = 2^2 \\cdot 5 = 20$, and indeed $40 = 20 \\cdot 2$ and $60 = 20 \\cdot 3$.
+
+Why it happens: the GCD and the LCM are read from the same two factorizations and differ only in minimum against maximum, and the word "greatest" pulls toward the larger exponent.
+
+How to check: divide both numbers by the result. $60 \\div 40 = 1.5$ is not whole, so $40$ is not a common divisor at all.
+
+**Keeping the larger number**
+
+After the first division of the Euclidean algorithm, the next division keeps the original larger number and divides it by the remainder, instead of dividing the previous divisor.
+
+Wrong working: for $\\gcd(252, 105)$, $252 = 105 \\cdot 2 + 42$, then $252 = 42 \\cdot 6 + 0$, so the GCD is $42$.
+
+Right working: the pair moves along, $(252, 105) \\to (105, 42) \\to (42, 21)$. The steps are $105 = 42 \\cdot 2 + 21$ and $42 = 21 \\cdot 2 + 0$, so $\\gcd(252, 105) = 21$.
+
+Why it happens: the larger number feels like the number being worked on, while the rule $(a, b) \\to (b, \\; a \\bmod b)$ drops it after the first step.
+
+How to check: the result must divide both original numbers. $105 \\div 42 = 2.5$, so $42$ fails; $252 \\div 21 = 12$ and $105 \\div 21 = 5$.
+
+**Taking coprime to mean prime**
+
+"Relatively prime" is read as a property of each number on its own, so a pair is called coprime only when both numbers are prime.
+
+Wrong working: neither $8$ nor $15$ is prime, so $8$ and $15$ are not coprime.
+
+Right working: the factors of $8$ are $\\{1, 2, 4, 8\\}$ and the factors of $15$ are $\\{1, 3, 5, 15\\}$. The only common factor is $1$, so $\\gcd(8, 15) = 1$ and the two numbers are coprime.
+
+Why it happens: the word "prime" inside "relatively prime" suggests that the numbers themselves must be prime.
+
+How to check: compute the GCD. Two numbers are coprime exactly when their GCD is $1$, whether or not either of them is prime.
+
+**Stopping at a smaller common factor**
+
+A fraction is divided by a common factor that is not the greatest one, and the result is taken to be in lowest terms.
+
+Wrong working: $18$ and $24$ are both even, so $\\frac{18}{24} = \\frac{9}{12}$, and the fraction is simplified.
+
+Right working: $9$ and $12$ still share the factor $3$, so $\\frac{9}{12} = \\frac{3}{4}$. In one step, $\\gcd(18, 24) = 6$ and $\\frac{18 \\div 6}{24 \\div 6} = \\frac{3}{4}$.
+
+Why it happens: the first common factor that is spotted, often $2$, is cancelled, the result looks simpler, and the check that nothing else is shared is skipped.
+
+How to check: find the GCD of the new numerator and denominator. $\\gcd(9, 12) = 3$ means the fraction is not finished; $\\gcd(3, 4) = 1$ means it is.`,
+      before:``,
+      after:``,
+      link:'',
     },
     obj13:{
       title:``,
@@ -1043,6 +1130,14 @@ rtGcdObj10Tiles, demoUnits}) {
           >
             <TopDownTree data={gcdMethodTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

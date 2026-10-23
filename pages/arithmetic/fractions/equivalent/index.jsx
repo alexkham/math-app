@@ -868,6 +868,10 @@ Every fraction belongs to an infinite family of equivalent fractions. The fracti
 
 Starting with $\\frac{3}{5}$ and multiplying both parts by 2 gives $\\frac{6}{10}$. Multiplying by 3 gives $\\frac{9}{15}$. All three fractions are equivalent.
 
+@academic[pitfall,aside:true,width:35%:Adding the same number
+Adding $2$ to both parts of $\\frac{3}{5}$ gives $\\frac{5}{7}$, a larger value: $\\frac{5}{7} \\approx 0.71$, while $\\frac{3}{5} = 0.6$. Multiplying both parts by $2$ keeps the value: $\\frac{6}{10}$.
+[Read more](!#pitfalls)]@
+
 This process works because multiplying by $\\frac{n}{n}$ is the same as multiplying by 1, which does not change a value. The equation $\\frac{3}{5} \\times \\frac{2}{2} = \\frac{6}{10}$ shows that the transformation preserves quantity.
 
 Creating equivalent fractions with a specific denominator is essential for [adding and subtracting fractions](!/arithmetic/fractions/adding-subtracting). To rewrite $\\frac{2}{3}$ with denominator 12, determine what multiplies 3 to get 12. Since $3 \\times 4 = 12$, multiply both parts by 4: $\\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$.`,
@@ -894,6 +898,10 @@ The [fraction calculator](!/calculators/fraction-calculator) reduces every resul
     title: `Simplest Form`,
     content: `A fraction is in simplest form when its numerator and denominator share no common factor other than 1. The fraction $\\frac{2}{3}$ is in simplest form because 2 and 3 have no common divisors except 1. The fraction $\\frac{4}{6}$ is not in simplest form because both 4 and 6 are divisible by 2.
 
+@academic[pitfall,aside:true,width:35%:Stopping before simplest form
+Dividing $\\frac{12}{18}$ by $2$ and stopping at $\\frac{6}{9}$ leaves the common factor $3$. One more division gives $\\frac{2}{3}$, where the GCF of $2$ and $3$ is $1$.
+[Read more](!#pitfalls)]@
+
 To verify simplest form, check whether any integer greater than 1 divides both parts evenly. If none exists, the fraction is fully simplified. Alternatively, compute the GCF; if it equals 1, the fraction is in simplest form.
 
 Simplest form is also called lowest terms or reduced form. Final answers are typically expected in this form unless a specific denominator is required.`,
@@ -909,6 +917,10 @@ Simplest form is also called lowest terms or reduced form. Final answers are typ
 Testing $\\frac{3}{4}$ and $\\frac{9}{12}$: compute $3 \\times 12 = 36$ and $4 \\times 9 = 36$. The products match, confirming equivalence.
 
 Testing $\\frac{2}{5}$ and $\\frac{3}{7}$: compute $2 \\times 7 = 14$ and $5 \\times 3 = 15$. The products differ, so the fractions are not equivalent.
+
+@academic[pitfall,aside:true,width:35%:Pairing a product with the wrong fraction
+Crediting $15 = 5 \\times 3$ to $\\frac{2}{5}$ because it contains the $5$ makes $\\frac{2}{5}$ look larger than $\\frac{3}{7}$. Each product goes with the fraction whose numerator it uses: $14$ with $\\frac{2}{5}$, $15$ with $\\frac{3}{7}$, so $\\frac{3}{7}$ is larger.
+[Read more](!#pitfalls)]@
 
 Cross-multiplication also extends to [comparing fractions](!/arithmetic/fractions/comparing). When the cross products are unequal, the larger product indicates the larger fraction.`,
     before: ``,
@@ -933,6 +945,10 @@ The density of equivalent fractions is unlimited. Between any two distinct point
     content: `Finding a common denominator means rewriting two or more fractions as equivalent fractions that share the same denominator. This process is necessary for [adding and subtracting fractions](!/arithmetic/fractions/adding-subtracting) with different denominators.
 
 Any common multiple of the denominators can serve as a common denominator. For $\\frac{1}{3}$ and $\\frac{1}{4}$, the denominators 3 and 4 share multiples 12, 24, 36, and so on. Using 12: $\\frac{1}{3} = \\frac{4}{12}$ and $\\frac{1}{4} = \\frac{3}{12}$.
+
+@academic[pitfall,aside:true,width:35%:Changing only the denominator
+Writing $\\frac{1}{3}$ as $\\frac{1}{12}$ changes the value: $\\frac{1}{12}$ is only a quarter of $\\frac{1}{3}$. The numerator takes the same factor $4$: $\\frac{1}{3} = \\frac{4}{12}$.
+[Read more](!#pitfalls)]@
 
 The [least common multiple](!/arithmetic/divisibility/lcm) produces the least common denominator (LCD). Using the LCD keeps numbers as small as possible. For denominators 6 and 8, the LCM is 24, so 24 is the LCD. Larger common denominators like 48 also work but result in bigger numbers that require simplification afterward.`,
     before: ``,
@@ -1000,6 +1016,61 @@ The [least common multiple](!/arithmetic/divisibility/lcm) produces the least co
     },
 
 
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes cause many of the wrong answers when fractions are rewritten, simplified or compared. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Adding the same number**
+
+To build an equivalent fraction, the same number is added to the numerator and the denominator instead of multiplying them by it. Subtracting the same number from both parts is the same mistake run backward.
+
+Wrong working: $\\frac{3}{5} = \\frac{3 + 2}{5 + 2} = \\frac{5}{7}$.
+
+Right working: $\\frac{3}{5} = \\frac{3 \\times 2}{5 \\times 2} = \\frac{6}{10}$. Multiplying by $\\frac{2}{2}$ is multiplying by $1$, so the value stays $0.6$.
+
+Why it happens: the rule is remembered as "do the same thing to the top and the bottom", and adding feels like doing the same thing. Adding changes both parts by the same amount, but not in the same proportion, so the value moves.
+
+How to check: cross-multiply. For $\\frac{3}{5}$ and $\\frac{5}{7}$, $3 \\times 7 = 21$ and $5 \\times 5 = 25$ differ, so they are not equivalent. For $\\frac{3}{5}$ and $\\frac{6}{10}$, $3 \\times 10 = 30$ and $5 \\times 6 = 30$ match.
+
+**Stopping before simplest form**
+
+When simplifying step by step, one common factor is divided out and the result is taken as final, although the new numerator and denominator still share a factor.
+
+Wrong working: $\\frac{12}{18} = \\frac{12 \\div 2}{18 \\div 2} = \\frac{6}{9}$, and the work stops there.
+
+Right working: $6$ and $9$ still share the factor $3$, so $\\frac{6}{9} = \\frac{6 \\div 3}{9 \\div 3} = \\frac{2}{3}$. Dividing by the GCF $6$ at once gives the same $\\frac{2}{3}$ in one step.
+
+Why it happens: the first factor spotted, often $2$, is divided out, the new numbers look small, and the final check is skipped.
+
+How to check: find the GCF of the final numerator and denominator. For $\\frac{6}{9}$ it is $3$, so the fraction is not finished; for $\\frac{2}{3}$ it is $1$.
+
+**Pairing a product with the wrong fraction**
+
+When cross products are used to compare two fractions, each product is credited to the fraction whose denominator it contains, and the comparison comes out reversed.
+
+Wrong working: for $\\frac{2}{5}$ and $\\frac{3}{7}$, the product $5 \\times 3 = 15$ contains the $5$ of $\\frac{2}{5}$, so the larger product $15$ is taken to mean that $\\frac{2}{5}$ is larger.
+
+Right working: each product belongs to the fraction whose numerator it uses. $2 \\times 7 = 14$ goes with $\\frac{2}{5}$ and $5 \\times 3 = 15$ goes with $\\frac{3}{7}$. Since $14 < 15$, $\\frac{2}{5} < \\frac{3}{7}$.
+
+Why it happens: every cross product mixes one number from each fraction, so both fractions appear in it, and the crossing lines of the method do not show which way to read the result.
+
+How to check: the cross products are the numerators over the common denominator $5 \\times 7 = 35$: $\\frac{2}{5} = \\frac{14}{35}$ and $\\frac{3}{7} = \\frac{15}{35}$. In decimals, $\\frac{2}{5} = 0.4$ and $\\frac{3}{7} \\approx 0.43$.
+
+**Changing only the denominator**
+
+When fractions are rewritten over a common denominator, the new denominator is written in, but the numerator is left as it was.
+
+Wrong working: with the common denominator $12$, $\\frac{1}{3}$ becomes $\\frac{1}{12}$ and $\\frac{1}{4}$ becomes $\\frac{1}{12}$, so the two fractions now look equal.
+
+Right working: $3 \\times 4 = 12$, so the numerator of $\\frac{1}{3}$ is also multiplied by $4$: $\\frac{1}{3} = \\frac{4}{12}$. And $4 \\times 3 = 12$, so $\\frac{1}{4} = \\frac{3}{12}$.
+
+Why it happens: the goal of the step is the common denominator, so attention goes to the bottom of the fraction. Changing only the denominator cuts the whole into smaller parts but keeps the same number of them, so the amount shrinks.
+
+How to check: cross-multiply the old and new fraction. For $\\frac{1}{3}$ and $\\frac{1}{12}$, $1 \\times 12 = 12$ and $3 \\times 1 = 3$ differ; for $\\frac{1}{3}$ and $\\frac{4}{12}$, $1 \\times 12 = 12$ and $3 \\times 4 = 12$ match.`,
+      before:``,
+      after:``,
+      link:'',
+    },
     obj15:{
   
       title:``,
@@ -1267,6 +1338,14 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
           sectionsContent.obj8.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

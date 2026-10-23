@@ -622,6 +622,8 @@ import diagrams from '@/app/api/db/svg/set-theory/svg'
 import summaries from '@/app/api/db/tables/set-theory/summaries'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -763,15 +765,25 @@ The **cardinality** of a mathematical set is simply its size — the number of e
 
 If A = {1, 2, 3}, then the cardinality of A is |A| = 3, because there are three elements in the set. If B = {1, 'apple', 3.14, True}, then |B| = 4, because there are four elements in this set.
 
+@academic[pitfall,aside:true,width:35%:Counting a repeated element twice
+Taking $|\\{1, 2, 2, 3\\}| = 4$ counts the entry 2 twice. The listing names only the elements 1, 2 and 3, so the size is $3$, the same as for $\\{1, 2, 3\\}$.
+[Read more](!#pitfalls)]@
+
+To find a cardinality from a listing, read off the members one by one and count them. The order in which they are written plays no part, so {3, 1, 2} gives the same count as {1, 2, 3}, and a member that is itself a word, a number or a symbol counts in the same way as any other. For a finite set the counting always comes to an end, and its result is the cardinality: 0 for the empty set and a positive whole number for any other finite set.
+
 Based on cardinality, mathematical sets are classified into groups:
 
-- **Finite sets** — sets having a well-defined number of elements that may be expressed by a natural number. Examples: A = {1, 2, 3, 4, 5}, B = {1, 'apple', 3.14, True}. A set may contain millions of objects, but as long as it can be counted even theoretically, the set is finite.
+- **Finite sets** — sets having a well-defined number of elements that may be expressed by a natural number. Examples: A = {1, 2, 3, 4, 5}, B = {1, 'apple', 3.14, True}. A set may contain millions of objects, but as long as counting its elements would eventually end, even if only in theory, the set is finite.
 
 - **Infinite sets** — sets whose elements cannot be exhausted by counting. Examples: A = {x | x is a positive even number} — it is impossible to count all positive even numbers; B = {1, 2, 3, ...}.
 
 - **Empty set** — a special case of a finite set having no elements. Notations used for the empty set: E = { } or E = ∅.
 
 - **Universal set** — a set that contains all the objects or elements under consideration within a specific context or domain of discourse. It is typically denoted **U** or **ξ**. The universal set may be finite — if it represents the days of the week, then U = {Monday, Tuesday, Wednesday, ..., Sunday}, a finite set of 7 elements. It may also be infinite — if it represents all natural numbers, then U = {1, 2, 3, ...}; if it represents all real numbers, then U = ℝ, an infinite set with an uncountable number of elements.
+
+@academic[pitfall,aside:true,width:35%:Putting the empty set inside braces
+Writing the empty set as $\\{\\varnothing\\}$ gives a set with one element, the empty set itself, so $|\\{\\varnothing\\}| = 1$. The empty set is $\\varnothing$ or $\\{\\}$ on its own, with $|\\varnothing| = 0$.
+[Read more](!#pitfalls)]@
 
 Interestingly, despite being conceptually opposite, the universal set and the empty set share fundamental commonalities in set theory. Both are extremes in the hierarchy of sets — the universal set containing everything and the empty set containing nothing. Yet they are complementary and serve as identity elements in key set operations.
 
@@ -801,7 +813,13 @@ Understanding the universal set and the empty set has immense importance for mas
 
 - **Basic subsets** — a set is a [subset](!/set-theory/subsets) of another set if every element of this set is also an element of the including set. Example: A = {1, 2} is a subset of B = {1, 2, 3, 4}.
 
-- **Proper subsets** — a proper subset of a set is a subset that is not equal to the original set, containing fewer elements. Example: A = {1, 2} is a proper subset of B.
+- **Proper subsets** — a proper subset of a set is a subset that is not equal to the original set; for a finite set, it contains fewer elements. Example: A = {1, 2} is a proper subset of B.
+
+@academic[pitfall,aside:true,width:35%:Using the membership sign for a subset
+Writing $\\{1, 2\\} \\in B$ for $B = \\{1, 2, 3, 4\\}$ claims that the set $\\{1, 2\\}$ is one of the four elements of $B$, and it is not. The correct statements are $\\{1, 2\\} \\subseteq B$ and $1 \\in B$.
+[Read more](!#pitfalls)]@
+
+The example set B = {1, 2, 3, 4} has many subsets besides A = {1, 2}. The one-element sets such as {3} are subsets of B, and so are the empty set and B itself, since each of them is built only from elements of B. Their sizes run from 0 elements for the empty set up to 4 elements for B itself, and only B is a subset of B that is not proper. In all, a set with 4 elements has $2^4 = 16$ subsets.
 
 **Supersets**
 
@@ -834,15 +852,96 @@ The diagrams accompanying each operation below are [Venn diagrams](!/set-theory/
     `,
     content2: `
 - **Union (∪)** — the union of two sets A and B, denoted A ∪ B, is the set of elements that are in A, in B, or in both. Example: if A = {1, 2, 3} and B = {4, 5, 3}, then A ∪ B = {1, 2, 3, 4, 5}.
+
+@academic[pitfall,aside:true,width:35%:Adding the sizes for a union
+Taking $3 + 3 = 6$ as the size of $A \\cup B$ for $A = \\{1, 2, 3\\}$ and $B = \\{4, 5, 3\\}$ counts the shared element 3 twice. The union $\\{1, 2, 3, 4, 5\\}$ has $5$ elements: $3 + 3 - 1 = 5$.
+[Read more](!#pitfalls)]@
+
+The shared element 3 belongs to A and to B at the same time, and the union takes it in like any other element. Union is the set version of the word "or": an element qualifies as soon as it belongs to at least one of the two sets, and belonging to both is allowed. The elements 1 and 2 come into the union from A alone, and 4 and 5 from B alone. The diagram below shades both circles completely, the overlap included.
     `,
     content3: `
 - **Difference (−)** — the difference between two sets A and B, denoted A − B, is the set of elements that are in A but not in B. Example: if A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, then A − B = {1, 2}.
+
+@academic[pitfall,aside:true,width:35%:Reversing the difference
+Computing $B - A$ in place of $A - B$ for $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$ gives $\\{5, 6\\}$, the part of $B$ outside $A$. Order matters: $A - B = \\{1, 2\\}$ and $B - A = \\{5, 6\\}$ are different sets.
+[Read more](!#pitfalls)]@
+
+The difference starts from the first set and removes whatever the second set also contains. In the example, A loses 3 and 4 because B contains them, and it keeps 1 and 2, which B lacks. The elements 5 and 6 belong to B alone, so they play no part in the result: the difference only ever takes elements away from A and never adds any. The diagram below shades the part of the circle A that lies outside B.
     `,
     content4: `
 - **Symmetric difference (Δ)** — the symmetric difference between two sets A and B, denoted A Δ B, is the set of elements that are in either of the sets A or B but not in their intersection. Example: if A = {1, 2, 3} and B = {3, 4, 5}, then A Δ B = {1, 2, 4, 5}.
     `,
     content5: `
 This section demonstrates the fundamental operations on sets with graphical examples to aid in understanding intersection, union, difference, and symmetric difference. The dedicated [operations on sets](!/set-theory/operations) page develops each operation in depth, together with the algebraic laws they obey.
+    `,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj6: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes come up again and again with the basic vocabulary of sets. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Counting a repeated element twice**
+
+A set is written down with one element listed twice, and its size is read off as the number of entries in the listing. Repeated entries name the same element, so they add nothing to the set.
+
+Wrong working: $\\{1, 2, 2, 3\\}$ has four entries, so $|\\{1, 2, 2, 3\\}| = 4$.
+
+Right working: the distinct elements are 1, 2 and 3, so $\\{1, 2, 2, 3\\} = \\{1, 2, 3\\}$ and $|\\{1, 2, 2, 3\\}| = 3$.
+
+Why it happens: counting the entries on the page is quicker than checking each one against the others, and many lists outside mathematics, such as shopping lists or tallies, do count repeats.
+
+How to check: rewrite the set with each element once, in any order, before counting. The number of entries in the rewritten listing is the cardinality.
+
+**Putting the empty set inside braces**
+
+The empty set is written as $\\{\\varnothing\\}$, with its symbol placed inside a pair of braces. The braces build a new set whose one element is the empty set, so the result is no longer empty.
+
+Wrong working: $E = \\{\\varnothing\\}$ is taken to be the empty set, so $|E| = 0$.
+
+Right working: $\\{\\varnothing\\}$ has exactly one element, so $|\\{\\varnothing\\}| = 1$. The empty set is written $\\varnothing$ or $\\{\\}$ on its own, and $|\\varnothing| = 0$.
+
+Why it happens: other sets are written with braces, so wrapping the symbol in braces looks like proper set notation. But $\\varnothing$ is already a complete name for a set and needs no braces around it.
+
+How to check: ask what is listed between the outer braces. In $\\{\\varnothing\\}$ there is one item, so the set is not empty.
+
+**Using the membership sign for a subset**
+
+The sign $\\in$ is written between two sets when one is contained in the other. $\\in$ says that its left side is one of the elements of the right side; containment of a whole set is written $\\subseteq$.
+
+Wrong working: for $B = \\{1, 2, 3, 4\\}$, the statements $\\{1, 2\\} \\in B$ and $1 \\subseteq B$ are written.
+
+Right working: the elements of $B$ are the numbers 1, 2, 3 and 4, and the set $\\{1, 2\\}$ is not one of them, so $\\{1, 2\\} \\notin B$ but $\\{1, 2\\} \\subseteq B$. The number 1 is an element, so $1 \\in B$, and the one-element set built from it is a subset: $\\{1\\} \\subseteq B$.
+
+Why it happens: both signs are often read aloud as "is in", and in everyday speech a group of items can be in a collection just as a single item can.
+
+How to check: read $x \\in B$ as "x appears in the listing of B". Look for $\\{1, 2\\}$, braces included, among the listed elements of $B$; it is not there.
+
+**Adding the sizes for a union**
+
+The size of a union is found by adding the sizes of the two sets. Elements that belong to both sets are then counted once for each set.
+
+Wrong working: for $A = \\{1, 2, 3\\}$ and $B = \\{4, 5, 3\\}$, the size of $A \\cup B$ is given as $3 + 3 = 6$.
+
+Right working: $A \\cup B = \\{1, 2, 3, 4, 5\\}$, which has $5$ elements. In general the size of the union is $|A| + |B| - |A \\cap B|$, and here $A \\cap B = \\{3\\}$, so $3 + 3 - 1 = 5$. The [inclusion-exclusion principle](!/combinatorics/inclusion-exclusion) extends this correction to more than two sets.
+
+Why it happens: the union is built by putting two sets together, and putting together sounds like adding.
+
+How to check: write the union out and count it, or test the answer against its bounds. The union has at least as many elements as the larger set and at most $|A| + |B|$, and it reaches $|A| + |B|$ only when the sets are disjoint.
+
+**Reversing the difference**
+
+$A - B$ is computed as if the order of the two sets did not matter, and the elements of $B$ outside $A$ are returned. Unlike union and intersection, the difference can change when the sets swap places.
+
+Wrong working: for $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$, the difference is given as $A - B = \\{5, 6\\}$.
+
+Right working: start from $A$ and remove the elements that are also in $B$, namely 3 and 4. This leaves $A - B = \\{1, 2\\}$. The set $\\{5, 6\\}$ is the other difference, $B - A$.
+
+Why it happens: union, intersection and symmetric difference give the same set in either order, and the habit carries over to the one basic operation where order matters.
+
+How to check: every element of $A - B$ must be an element of $A$. Since 5 and 6 are not in $A$, the set $\\{5, 6\\}$ cannot be $A - B$.
     `,
     before: ``,
     after: ``,
@@ -979,8 +1078,28 @@ const schemas = {
     }),
   };
 
+  const setTypesOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Sets by how many elements they hold',
+    preface: 'A set is finite when its elements can be counted to an end and infinite when they cannot. The universal set is the frame for everything under consideration.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Size is cardinality',
+    conclusion: 'How to compare the sizes of sets, including infinite ones, is the subject of [cardinality](!/set-theory/cardinality).',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Types of sets', children: [
+        { id: 'fin', name: 'Finite', def: 'a well-defined number of elements', example: '{1, 2, 3, 4, 5}', children: [
+          { id: 'empty', name: 'Empty set', def: 'a special case of a finite set', example: '∅' },
+        ] },
+        { id: 'inf', name: 'Infinite', def: 'cannot be exhausted by counting', example: '{1, 2, 3, …}' },
+        { id: 'uni', name: 'Universal', def: 'all objects under consideration; finite or infinite', example: 'U' },
+      ] },
+    ],
+  };
+
   return {
   props: {
+    setTypesOutline,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1005,7 +1124,7 @@ const schemas = {
    }
 
 
-export default function SetTheoryBasicsPage({seoData, sectionsContent, introContent, figs, notationTable, cardinalityTable, relationshipsTable, operationsTable, faqQuestions, schemas, demoUnits}) {
+export default function SetTheoryBasicsPage({setTypesOutline, seoData, sectionsContent, introContent, figs, notationTable, cardinalityTable, relationshipsTable, operationsTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1062,6 +1181,14 @@ export default function SetTheoryBasicsPage({seoData, sectionsContent, introCont
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: cardinalityTable }}
           />,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="set-types-outline"
+            title="Types of sets by size"
+            source="/set-theory/basics"
+          >
+            <TaxonomyOutline data={setTypesOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1111,6 +1238,14 @@ export default function SetTheoryBasicsPage({seoData, sectionsContent, introCont
           />,
                   <div key={'unit-intersection'} dangerouslySetInnerHTML={{ __html: demoUnits.intersection }} />,
           `The operations page develops each of these with its own laws and diagrams.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

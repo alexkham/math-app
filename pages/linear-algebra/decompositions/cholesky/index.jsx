@@ -2196,9 +2196,13 @@ The convention can also be written $A = R^TR$ with $R = L^T$ upper triangular �
 
 Symmetry means $A = A^T$. Positive definiteness means $\\mathbf{x}^TA\\mathbf{x} > 0$ for every nonzero vector $\\mathbf{x}$.
 
+@academic[pitfall,aside:true,width:35%:Skipping the symmetry check
+Testing only positivity passes $B = \\begin{pmatrix} 4 & 0 \\\\ 2 & 5 \\end{pmatrix}$: its eigenvalues $4, 5$ and leading minors $4, 20$ are all positive. But $B \\neq B^T$, so no $L$ exists; the formulas still return an $L$, with $LL^T = \\begin{pmatrix} 4 & 2 \\\\ 2 & 5 \\end{pmatrix} \\neq B$.
+[Read more](!#pitfalls)]@
+
 Several equivalent conditions characterize positive definiteness: all [eigenvalues](!/linear-algebra/eigen) of $A$ are strictly positive; all leading principal minors (the [determinants](!/linear-algebra/determinants) of the upper-left $k \\times k$ submatrices) are positive; all pivots in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) (without pivoting) are positive.
 
-If either symmetry or positive definiteness fails, the Cholesky algorithm breaks down. A non-symmetric matrix has no $LL^T$ form. A symmetric matrix that is positive semi-definite (some eigenvalue is zero) produces a zero on the diagonal of $L$. An indefinite matrix (eigenvalues of both signs) produces a negative number under the square root, halting the algorithm.
+If either symmetry or positive definiteness fails, there is no Cholesky factor. A non-symmetric matrix has no $LL^T$ form. A symmetric matrix that is positive semi-definite (some eigenvalue is zero) produces a zero on the diagonal of $L$. An indefinite matrix (eigenvalues of both signs) produces a negative number under the square root, halting the algorithm.
 
 These equivalent characterizations differ in computational cost and in when each is the practical tool of choice.`,
     before: ``,
@@ -2234,7 +2238,13 @@ $l_{33} = \\sqrt{6 - (-1)^2 - 1^2} = \\sqrt{4} = 2$.
 @academic[formula_callout:The Algorithm
 $$L = \\begin{pmatrix} 2 & 0 & 0 \\\\ 1 & 2 & 0 \\\\ -1 & 1 & 2 \\end{pmatrix}$$]@
 
-Verification: $LL^T = \\begin{pmatrix} 4 & 2 & -2 \\\\ 2 & 5 & 1 \\\\ -2 & 1 & 6 \\end{pmatrix} = A$.`,
+Verification: $LL^T = \\begin{pmatrix} 4 & 2 & -2 \\\\ 2 & 5 & 1 \\\\ -2 & 1 & 6 \\end{pmatrix} = A$.
+
+@academic[pitfall,aside:true,width:35%:Dropping the subtracted sum
+Computing $l_{32} = a_{32}/l_{22} = \\frac{1}{2}$ leaves out $l_{31}l_{21} = -1$. Entry $(3, 2)$ of $LL^T$ then comes out $(-1)(1) + \\frac{1}{2} \\cdot 2 = 0$, not $a_{32} = 1$. With the sum, $l_{32} = (1 - (-1)(1))/2 = 1$.
+[Read more](!#pitfalls)]@
+
+Each entry of $L$ is built from the matching entry of $A$ and from entries of $L$ already found to its left. The first column uses only $A$ and $l_{11}$, while every later entry first subtracts the products collected so far: $l_{32}$ draws on $l_{31}$ and $l_{21}$, and $l_{33}$ on the whole third row before it. This is why the columns have to be computed in order, from left to right.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2246,6 +2256,10 @@ Verification: $LL^T = \\begin{pmatrix} 4 & 2 & -2 \\\\ 2 & 5 & 1 \\\\ -2 & 1 & 6
 Forward substitution: solve $L\\mathbf{y} = \\mathbf{b}$ for $\\mathbf{y}$. Cost: $O(n^2)$.
 
 Back substitution: solve $L^T\\mathbf{x} = \\mathbf{y}$ for $\\mathbf{x}$. Cost: $O(n^2)$.
+
+@academic[pitfall,aside:true,width:35%:Using L in both solves
+Solving $L\\mathbf{x} = \\mathbf{y}$ in the second step solves $L^2\\mathbf{x} = \\mathbf{b}$. For the worked example with $\\mathbf{b} = (0, 6, 7)^T$, so $\\mathbf{y} = (0, 3, 2)^T$, it gives $\\mathbf{x} = (0, \\frac{3}{2}, \\frac{1}{4})^T$. Back substitution on $L^T$ gives $\\mathbf{x} = (0, 1, 1)^T$.
+[Read more](!#pitfalls)]@
 
 The structure is identical to [LU](!/linear-algebra/decompositions/lower-upper), but only one triangular factor needs to be stored. The other is its transpose, which costs nothing extra — the same array of numbers is read in reverse order.`,
     before: ``,
@@ -2295,7 +2309,7 @@ The [normal equations](!/linear-algebra/orthogonality/least-squares) $A^TA\\hat{
 
 Covariance matrices in statistics are symmetric positive semi-definite (positive definite when no variable is a linear combination of the others). Cholesky is used to sample from multivariate normal distributions: if $\\Sigma = LL^T$, then $L\\mathbf{z}$ (with $\\mathbf{z}$ standard normal) has distribution $\\mathcal{N}(\\mathbf{0}, \\Sigma)$.
 
-Stiffness matrices in finite element analysis are symmetric positive definite. Newton's method in optimization solves $H\\mathbf{d} = -\\nabla f$ where $H$ (the Hessian) is positive definite at a strict local minimum. In both cases, Cholesky is the standard solver.`,
+Stiffness matrices in finite element analysis are symmetric positive definite. Newton's method in optimization solves $H\\mathbf{d} = -\\nabla f$ where $H$ (the Hessian) is positive definite near a minimum that the second-derivative test confirms. In both cases, Cholesky is the standard solver.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2327,6 +2341,63 @@ In practice, numerical near-singularity — eigenvalues very close to zero but n
   obj11: {
     title: `Summary: Matrix Property and Cholesky Outcome`,
     content: `The behavior of the Cholesky algorithm depends entirely on what kind of matrix it is asked to factor — positive definite, positive semi-definite, indefinite, non-symmetric, or merely near-singular. The table below collects each scenario, what the algorithm does in each case, and the standard remedy when the straightforward $A = LL^T$ form does not apply. The "positive semi-definite" row links back to the pivoted-Cholesky treatment above.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for many wrong results with the Cholesky decomposition. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Skipping the symmetry check**
+
+Before factoring, the eigenvalues or the leading principal minors are checked, and when they are positive the matrix is taken to be positive definite. The matrix is never compared with its transpose, although those tests describe positive definiteness only for symmetric matrices.
+
+Wrong working: $B = \\begin{pmatrix} 4 & 0 \\\\ 2 & 5 \\end{pmatrix}$ is triangular, so its eigenvalues are $4$ and $5$, and its leading minors are $4$ and $4 \\cdot 5 - 0 \\cdot 2 = 20$. All are positive, so $B = LL^T$ is expected. The formulas read only $b_{11}$, $b_{21}$ and $b_{22}$:
+$$l_{11} = \\sqrt{4} = 2, \\quad l_{21} = 2/2 = 1, \\quad l_{22} = \\sqrt{5 - 1^2} = 2, \\qquad L = \\begin{pmatrix} 2 & 0 \\\\ 1 & 2 \\end{pmatrix}$$
+
+Right working: compare $B$ with $B^T$ first.
+$$B^T = \\begin{pmatrix} 4 & 2 \\\\ 0 & 5 \\end{pmatrix} \\neq B$$
+Since $LL^T$ is symmetric for every $L$, no Cholesky factor exists. The $L$ found above gives $LL^T = \\begin{pmatrix} 4 & 2 \\\\ 2 & 5 \\end{pmatrix}$, which differs from $B$ in the entry above the diagonal.
+
+Why it happens: the list of equivalent conditions is quoted without its standing assumption that $A$ is symmetric. The formulas use only the entries on and below the diagonal, so they run without any warning.
+
+How to check: compare $a_{ij}$ with $a_{ji}$ before anything else. After factoring, multiply out $LL^T$ and compare every entry with $A$, including those above the diagonal.
+
+**Dropping the subtracted sum**
+
+In the off-diagonal formula, the sum $\\sum_{k=1}^{j-1} l_{ik}l_{jk}$ is left out once $j > 1$, and the entry is computed as $a_{ij}/l_{jj}$, the way the first column is.
+
+Wrong working: in the worked example,
+$$l_{32} = \\frac{a_{32}}{l_{22}} = \\frac{1}{2}$$
+Entry $(3, 2)$ of $LL^T$ is row $3$ of $L$ times row $2$ of $L$:
+$$l_{31}l_{21} + l_{32}l_{22} = (-1)(1) + \\frac{1}{2} \\cdot 2 = 0 \\neq a_{32} = 1$$
+The error spreads: $l_{33} = \\sqrt{6 - (-1)^2 - (\\frac{1}{2})^2} = \\frac{\\sqrt{19}}{2} \\approx 2.18$ instead of $2$.
+
+Right working: subtract the products already available.
+$$l_{32} = \\frac{a_{32} - l_{31}l_{21}}{l_{22}} = \\frac{1 - (-1)(1)}{2} = 1, \\qquad l_{31}l_{21} + l_{32}l_{22} = -1 + 2 = 1 = a_{32}$$
+
+Why it happens: in the first column the sum is empty, so the first entries are plain divisions, and that pattern is carried over to the later columns.
+
+How to check: rebuild one entry at a time. Entry $(i, j)$ of $LL^T$ is row $i$ of $L$ times row $j$ of $L$, and it must equal $a_{ij}$.
+
+**Using L in both solves**
+
+After forward substitution, the second triangular solve is done with $L$ again instead of $L^T$. Only $L$ is stored, and the array is read in the same order twice.
+
+Wrong working: with the worked example and $\\mathbf{b} = (0, 6, 7)^T$, forward substitution gives $\\mathbf{y}$:
+$$y_1 = \\frac{0}{2} = 0, \\quad y_2 = \\frac{6 - 1 \\cdot 0}{2} = 3, \\quad y_3 = \\frac{7 - (-1) \\cdot 0 - 1 \\cdot 3}{2} = 2$$
+Then $L\\mathbf{x} = \\mathbf{y}$ is solved from the top:
+$$x_1 = 0, \\quad x_2 = \\frac{3 - 0}{2} = \\frac{3}{2}, \\quad x_3 = \\frac{2 + 0 - \\frac{3}{2}}{2} = \\frac{1}{4}$$
+and $A(0, \\frac{3}{2}, \\frac{1}{4})^T = (\\frac{5}{2}, \\frac{31}{4}, 3)^T \\neq \\mathbf{b}$. This $\\mathbf{x}$ solves $L^2\\mathbf{x} = \\mathbf{b}$.
+
+Right working: solve $L^T\\mathbf{x} = \\mathbf{y}$ from the bottom, with $L^T = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & 2 & 1 \\\\ 0 & 0 & 2 \\end{pmatrix}$.
+$$x_3 = \\frac{2}{2} = 1, \\quad x_2 = \\frac{3 - 1}{2} = 1, \\quad x_1 = \\frac{0 - 1 + 1}{2} = 0$$
+and $A(0, 1, 1)^T = (0, 6, 7)^T = \\mathbf{b}$.
+
+Why it happens: the second factor is not stored as a separate matrix, so it is easy to run the same routine on the same array twice.
+
+How to check: forward substitution starts at the top with $y_1$, back substitution at the bottom with $x_n$. If both solves start at the top, $L$ was used twice. Multiplying $A\\mathbf{x}$ and comparing with $\\mathbf{b}$ settles it.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2659,6 +2730,14 @@ export default function PageTemplate({choleskyLevels,
           </DiagramFrame>,
           `That property is what makes it the standard definiteness test. The alternative is computing every eigenvalue and checking the signs, which costs more, converges iteratively rather than terminating, and returns approximations that then have to be judged against zero. Cholesky answers in $\\tfrac{1}{3}n^3$ operations, finishes in a fixed number of steps, and hands back the factorization as well when the answer is yes.`,
           `One case deserves separate attention because it does not announce itself. A matrix that is positive definite but nearly singular runs to completion — no error, no halt — while the small pivots quietly amplify rounding error through $L$. The result looks like a successful factorization and is not a reliable one, which is why the smallest diagonal entry of $L$ is worth reading rather than assuming.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

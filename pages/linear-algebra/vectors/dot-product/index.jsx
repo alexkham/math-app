@@ -1113,6 +1113,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
 import projectionDiagrams from '@/app/components/linear-algebra copy/matrix/projectionDiagrams'
 import renderVectorArrowsV4 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1281,8 +1282,8 @@ const obj6Table = `
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Positive (&gt; 0)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cos θ &gt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ ∈ (0, π/2)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">acute angle &mdash; vectors point in broadly the same direction</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">θ ∈ [0, π/2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">acute (or zero) angle &mdash; vectors point in broadly the same direction</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Zero (= 0)</td>
@@ -1293,8 +1294,8 @@ const obj6Table = `
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Negative (&lt; 0)</td>
       <td style="padding: 12px 15px; color: #34495e;">cos θ &lt; 0</td>
-      <td style="padding: 12px 15px; color: #34495e;">θ ∈ (π/2, π)</td>
-      <td style="padding: 12px 15px; color: #34495e;">obtuse angle &mdash; vectors point in broadly opposite directions</td>
+      <td style="padding: 12px 15px; color: #34495e;">θ ∈ (π/2, π]</td>
+      <td style="padding: 12px 15px; color: #34495e;">obtuse (or straight) angle &mdash; vectors point in broadly opposite directions</td>
     </tr>
   </tbody>
 </table>
@@ -1571,6 +1572,35 @@ const summaryTable = `
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1) — template B, definition first. Running
+// instance: a = (3, 1), b = (1, 2), a · b = 5, angle 45°. Old obj1 text is kept
+// in sectionsContent.obj1, unused; its formula box, formulas link, pitfall
+// aside, four passages and the dot demo frame with its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciProductsTable = ciTableOpen(['component', 'a', 'b', 'product']) +
+  ciRow(['first', '3', '1', '3']) +
+  ciRow(['second', '1', '2', '2'], { shade: true }) +
+  ciRow(['sum', '', '', 'a · b = 5'], { last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+const ciExamplesTable = ciTableOpen(['a', 'b', 'products', 'a · b']) +
+  ciRow(['(3, 1)', '(1, 2)', '3 + 2', '5'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['(3, 4)', '(1, −2)', '3 + (−8)', '−5'], { shade: true }) +
+  ciRow(['(1, 2, 3)', '(4, 0, −1)', '4 + 0 + (−3)', '1']) +
+  ciRow(['(3, 1)', '(3, 1)', '9 + 1', '10'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciPromiseTable = ciTableOpen(['promise', 'check on a = (3, 1), b = (1, 2)', 'kept?']) +
+  ciRow(['a · a is the squared length', 'a · a = 10, and ‖a‖ = √10', 'yes'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['it reflects the angle', '5 = √10 · √5 · cos 45°, since √50 · 0.707… = 5', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['perpendicular gives 0', '(3, 1) · (−1, 3) = −3 + 3 = 0', 'yes'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Algebraic Definition`,
@@ -1586,6 +1616,10 @@ $$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n = \\sum_{i
 The notation uses a centered dot between the two vectors. Other names for the same operation are the inner product and the scalar product — the latter emphasizing that the output is a scalar, not a vector.
 
 This definition works in any dimension. In $\\mathbb{R}^2$, the dot product of $(3, 4)$ and $(1, -2)$ is $3(1) + 4(-2) = -5$. In $\\mathbb{R}^5$, the same rule applies with five terms instead of two. The computation is mechanical, but the meaning it carries — revealed by the geometric definition — is what makes the dot product central to the rest of linear algebra.
+
+@academic[pitfall,aside:true,width:35%:Leaving the products as a vector
+Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $(3, -8)$ stops halfway. The products are added: $3 + (-8) = -5$, a single number.
+[Read more](!#pitfalls)]@
 
 The dot product differs fundamentally from [vector addition](!/linear-algebra/vectors/basic-operations) and scalar multiplication. Those operations take vectors and produce vectors. The dot product takes two vectors and collapses them into a single number, discarding the directional structure in favor of a measurement of alignment.
 
@@ -1650,7 +1684,13 @@ Why does this agree with the component-wise formula? Place $\\mathbf{a}$ and $\\
 @academic[formula_callout:Geometric Definition
 $$\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2 - 2\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$$]@
 
-Now expand $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ by writing it as $(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b})$ and distributing. The result is $\\|\\mathbf{a}\\|^2 - 2(\\mathbf{a} \\cdot \\mathbf{b}) + \\|\\mathbf{b}\\|^2$. Setting the two expressions equal and cancelling the squared norms leaves $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$. The component-based sum of products and the length-angle formula are two faces of a single quantity — one assembled from arithmetic on coordinates, the other encoding geometric information about orientation.`,
+Now expand $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ by writing it as $(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b})$ and distributing. The result is $\\|\\mathbf{a}\\|^2 - 2(\\mathbf{a} \\cdot \\mathbf{b}) + \\|\\mathbf{b}\\|^2$. Setting the two expressions equal and cancelling the squared norms leaves $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$. The component-based sum of products and the length-angle formula are two faces of a single quantity — one assembled from arithmetic on coordinates, the other encoding geometric information about orientation.
+
+@academic[pitfall,aside:true,width:35%:Dropping the middle term
+Squaring term by term, $\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2$, loses $-2(\\mathbf{a} \\cdot \\mathbf{b})$. For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$ it gives $27$, but $\\mathbf{a} - \\mathbf{b} = (3, -2)$ has squared length $13 = 27 - 2(7)$.
+[Read more](!#pitfalls)]@
+
+Distributing $(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b})$ produces four dot products, just as multiplying out $(x - y)^2$ produces four terms. Two of them are the squared lengths $\\mathbf{a} \\cdot \\mathbf{a}$ and $\\mathbf{b} \\cdot \\mathbf{b}$, and the other two, $-\\mathbf{a} \\cdot \\mathbf{b}$ and $-\\mathbf{b} \\cdot \\mathbf{a}$, merge into one by commutativity. That merged term is the only place where the two vectors meet, and it is the term the law of cosines matches with $-2\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1721,6 +1761,10 @@ $$\\cos\\theta = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Dividing by the squared lengths
+For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$, using $17$ and $10$ in the denominator gives $\\cos\\theta = \\frac{7}{170} \\approx 0.041$, so $\\theta \\approx 87.6^\\circ$. The norms are $\\sqrt{17}$ and $\\sqrt{10}$: $\\cos\\theta = \\frac{7}{\\sqrt{170}} \\approx 0.537$ and $\\theta \\approx 57.5^\\circ$.
+[Read more](!#pitfalls)]@
+
 This formula is defined only when both vectors are nonzero, since division by zero is undefined. The angle $\\theta$ lies in the interval $[0, \\pi]$, covering all possibilities from vectors pointing in the same direction ($\\theta = 0$) to vectors pointing in exactly opposite directions ($\\theta = \\pi$).
 
 The right-hand side is the dot product of the two normalized vectors $\\hat{\\mathbf{a}} \\cdot \\hat{\\mathbf{b}}$. Normalization strips away the magnitudes, leaving only the directional relationship.
@@ -1736,11 +1780,11 @@ In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, this formula can be verified against the
     title: `Sign of the Dot Product`,
     content: `The sign of the dot product reveals the angular relationship between two vectors without requiring the angle itself to be computed. Since $\\|\\mathbf{a}\\|$ and $\\|\\mathbf{b}\\|$ are both positive for nonzero vectors, the sign of $\\mathbf{a} \\cdot \\mathbf{b}$ is determined entirely by $\\cos\\theta$.
 
-When $\\mathbf{a} \\cdot \\mathbf{b} > 0$, the cosine is positive, which means $\\theta$ lies in the interval $(0, \\frac{\\pi}{2})$. The vectors form an acute angle — they point in broadly the same direction.
+When $\\mathbf{a} \\cdot \\mathbf{b} > 0$, the cosine is positive, which means $\\theta$ lies in the interval $[0, \\frac{\\pi}{2})$. The vectors form an acute (or zero) angle — they point in broadly the same direction.
 
 When $\\mathbf{a} \\cdot \\mathbf{b} = 0$, the cosine is zero, placing $\\theta$ at exactly $\\frac{\\pi}{2}$. The vectors are perpendicular — neither has any component in the direction of the other.
 
-When $\\mathbf{a} \\cdot \\mathbf{b} < 0$, the cosine is negative, so $\\theta$ lies in $(\\frac{\\pi}{2}, \\pi)$. The vectors form an obtuse angle — they point in broadly opposite directions.
+When $\\mathbf{a} \\cdot \\mathbf{b} < 0$, the cosine is negative, so $\\theta$ lies in $(\\frac{\\pi}{2}, \\pi]$. The vectors form an obtuse (or straight) angle — they point in broadly opposite directions.
 
 This three-way classification is a fast diagnostic tool. Checking whether a dot product is positive, zero, or negative is often all that is needed to determine the geometric relationship between two vectors — no square roots, no inverse cosines, just the sign of a sum of products.`,
     before: ``,
@@ -1815,6 +1859,10 @@ $$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{\\mathbf{a} \\cdot \\mathbf{
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Dividing by the length instead of its square
+Projecting $\\mathbf{a} = (4, 2)$ onto $\\mathbf{b} = (1, 1)$ with $\\|\\mathbf{b}\\| = \\sqrt{2}$ in the denominator gives $\\frac{6}{\\sqrt{2}}(1, 1) \\approx (4.24, 4.24)$, of length $6$, longer than $\\mathbf{a}$ itself. With $\\|\\mathbf{b}\\|^2 = 2$, the projection is $3(1, 1) = (3, 3)$.
+[Read more](!#pitfalls)]@
+
 Equivalently, the denominator can be written $\\mathbf{b} \\cdot \\mathbf{b}$. The coefficient $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{b} \\cdot \\mathbf{b}}$ rescales $\\mathbf{b}$ so that the output has the appropriate length and orientation. What results is a vector parallel to $\\mathbf{b}$ whose norm equals $|\\text{comp}_{\\mathbf{b}}\\,\\mathbf{a}|$.
 
 ## Orthogonal Decomposition
@@ -1843,6 +1891,85 @@ This two-part split reappears in more sophisticated forms throughout linear alge
   obj10: {
     title: `Summary: Every Use of the Dot Product`,
     content: `Across the sections above, the dot product appears in seven distinct roles &mdash; measuring length, computing angles, testing orthogonality, classifying the angular relationship by sign, bounding products of vectors, and producing two kinds of projection. The table below collects all of these in a single reference, organized around the question each role answers and the formula that does the work. Every entry below is built from the same operation <b>a</b> · <b>b</b> = Σ a<sub>i</sub>b<sub>i</sub> &mdash; the geometric variety on the page comes from how that one number is interpreted and combined with the norm.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again in dot product work. Four of them are marked where they happen in the sections above; the fifth is the cancellation law that the properties card lists as failing. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Leaving the products as a vector**
+
+The components are multiplied in pairs, and the list of products is given as the answer, the way vector addition gives a list of sums. The second half of the definition, adding the products, never happens.
+
+Wrong working:
+$$(3, 4) \\cdot (1, -2) = (3 \\cdot 1,\\ 4 \\cdot (-2)) = (3, -8)$$
+
+Right working: the products are added.
+$$(3, 4) \\cdot (1, -2) = 3(1) + 4(-2) = 3 - 8 = -5$$
+
+Why it happens: vector addition and scalar multiplication both work component by component and return a vector, and the first step of the dot product looks exactly the same.
+
+How to check: the result of a dot product is one number. An answer that still has components is missing the sum.
+
+**Dropping the middle term**
+
+A squared length of a difference or a sum is expanded as if the square could be taken term by term, and the cross term $-2(\\mathbf{a} \\cdot \\mathbf{b})$ disappears.
+
+Wrong working, for $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$:
+$$\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2 = 17 + 10 = 27$$
+
+Right working: expand the dot product with distributivity and merge the two middle terms by commutativity.
+$$(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b}) = \\|\\mathbf{a}\\|^2 - 2(\\mathbf{a} \\cdot \\mathbf{b}) + \\|\\mathbf{b}\\|^2 = 17 - 2(7) + 10 = 13$$
+
+Why it happens: the square on $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ looks like the square of a number, and the same slip as $(x - y)^2 = x^2 - y^2$ carries over to vectors.
+
+How to check: compute the difference first. $\\mathbf{a} - \\mathbf{b} = (3, -2)$, and $3^2 + (-2)^2 = 13$. The term-by-term version is right only when $\\mathbf{a} \\cdot \\mathbf{b} = 0$, which is the Pythagorean theorem.
+
+**Cancelling a vector from both sides**
+
+From $\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{a} \\cdot \\mathbf{c}$ with $\\mathbf{a} \\neq \\mathbf{0}$, the vector $\\mathbf{a}$ is divided out to conclude $\\mathbf{b} = \\mathbf{c}$, as with numbers.
+
+Wrong working, with the vectors from the properties card:
+$$\\mathbf{a} = (1, 0),\\ \\mathbf{b} = (2, 5),\\ \\mathbf{c} = (2, 9): \\quad \\mathbf{a} \\cdot \\mathbf{b} = 2 = \\mathbf{a} \\cdot \\mathbf{c} \\implies \\mathbf{b} = \\mathbf{c}$$
+But $\\mathbf{b} \\neq \\mathbf{c}$.
+
+Right working: move everything to one side and use distributivity.
+$$\\mathbf{a} \\cdot \\mathbf{b} - \\mathbf{a} \\cdot \\mathbf{c} = \\mathbf{a} \\cdot (\\mathbf{b} - \\mathbf{c}) = 0$$
+The equation only says that $\\mathbf{b} - \\mathbf{c}$ is orthogonal to $\\mathbf{a}$. Here $\\mathbf{b} - \\mathbf{c} = (0, -4)$, and $(1, 0) \\cdot (0, -4) = 0$.
+
+Why it happens: for numbers, $ab = ac$ with $a \\neq 0$ does give $b = c$. The dot product has no inverse to divide by, because it only sees the part of $\\mathbf{b}$ that lies along $\\mathbf{a}$.
+
+How to check: compute $\\mathbf{b} - \\mathbf{c}$ and dot it with $\\mathbf{a}$. A result of $0$ with $\\mathbf{b} - \\mathbf{c} \\neq \\mathbf{0}$ shows that $\\mathbf{b}$ and $\\mathbf{c}$ can differ.
+
+**Dividing by the squared lengths**
+
+In the angle formula, the denominator is filled with $\\mathbf{a} \\cdot \\mathbf{a}$ and $\\mathbf{b} \\cdot \\mathbf{b}$, which are the squared lengths, instead of the lengths themselves.
+
+Wrong working, for $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$ with $\\mathbf{a} \\cdot \\mathbf{b} = 7$:
+$$\\cos\\theta = \\frac{7}{17 \\cdot 10} = \\frac{7}{170} \\approx 0.041, \\quad \\theta \\approx 87.6^\\circ$$
+
+Right working: $\\|\\mathbf{a}\\| = \\sqrt{17}$ and $\\|\\mathbf{b}\\| = \\sqrt{10}$.
+$$\\cos\\theta = \\frac{7}{\\sqrt{17}\\,\\sqrt{10}} = \\frac{7}{\\sqrt{170}} \\approx 0.537, \\quad \\theta \\approx 57.5^\\circ$$
+
+Why it happens: the values $17$ and $10$ come out of the same kind of sum of products as $\\mathbf{a} \\cdot \\mathbf{b}$, and the square root that turns them into lengths is easy to leave out.
+
+How to check: the angle must not change when a vector is stretched. Doubling $\\mathbf{a}$ to $(8, 2)$ gives $\\frac{14}{68 \\cdot 10} \\approx 0.021$ with the squared lengths, a different angle, while the correct formula gives $\\frac{14}{\\sqrt{680}} \\approx 0.537$ again.
+
+**Dividing by the length instead of its square**
+
+The vector projection is written with $\\|\\mathbf{b}\\|$ in the denominator, copied from the scalar projection, instead of $\\|\\mathbf{b}\\|^2$.
+
+Wrong working, for $\\mathbf{a} = (4, 2)$ and $\\mathbf{b} = (1, 1)$ with $\\mathbf{a} \\cdot \\mathbf{b} = 6$:
+$$\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|}\\,\\mathbf{b} = \\frac{6}{\\sqrt{2}}(1, 1) \\approx (4.24, 4.24)$$
+
+Right working: $\\|\\mathbf{b}\\|^2 = \\mathbf{b} \\cdot \\mathbf{b} = 2$.
+$$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{6}{2}(1, 1) = (3, 3)$$
+
+Why it happens: the scalar projection divides by $\\|\\mathbf{b}\\|$ once, and the vector projection looks like the same fraction placed in front of $\\mathbf{b}$. But $\\mathbf{b}$ is not a unit vector, so a second division by $\\|\\mathbf{b}\\|$ is needed to turn it into one.
+
+How to check: a projection is never longer than the vector projected. The wrong answer has length $6$, more than $\\|\\mathbf{a}\\| = \\sqrt{20} \\approx 4.47$. Also, $\\mathbf{a}$ minus its projection must be orthogonal to $\\mathbf{b}$: $(4, 2) - (3, 3) = (1, -1)$, and $(1, -1) \\cdot (1, 1) = 0$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1965,6 +2092,29 @@ const schemas = {
     caption: 'the sign of a \u00b7 b tells the angle: acute, right, obtuse',
   };
 
+  // Concept introduction figures (section 1), one running instance: a = (3, 1), b = (1, 2).
+  const vaCiPair = {
+    kind: 'angle', a: [3, 1], b: [1, 2], third: false, nx: 6, ny: 3,
+    svgTitle: 'a = (3, 1) and b = (1, 2) from the origin, 45 degrees apart',
+    labels: [['a = (3, 1)', 2.4, 0.55, 'a'], ['b = (1, 2)', 0.55, 2.25, 'b']],
+    notes: ['how much do a and b point the same way?'],
+    caption: 'Two vectors and the angle between them',
+  };
+  const vaCiTurn = {
+    kind: 'signs', a: [3, 1],
+    svgTitle: 'Against a = (3, 1): b at 45 degrees, at a right angle, and pointing away',
+    cases: [{ b: [1, 2], kind: 'acute' }, { b: [-0.5, 1.5], kind: 'right angle' }, { b: [-2, 1], kind: 'obtuse' }],
+    caption: 'the same rule, a · b, as b turns away from a',
+  };
+
+  const conceptIntroFigures = {
+    pair: renderVectorArrowsV4(vaCiPair),
+    turn: renderVectorArrowsV4(vaCiTurn),
+    productsTable: ciProductsTable,
+    examplesTable: ciExamplesTable,
+    promiseTable: ciPromiseTable,
+  };
+
   const demoUnits = {
     dot: demoUnitFrame({
       svg: innerProductDiagrams.done,
@@ -1999,6 +2149,7 @@ const schemas = {
   return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -2018,9 +2169,82 @@ const schemas = {
   }
 }
    }
-export default function DotProductPage({seoData, sectionsContent, introContent, obj2Table, dotProductLaws, obj6Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function DotProductPage({seoData, sectionsContent, introContent, obj2Table, dotProductLaws, obj6Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'difficulty',
+        lead: `Nothing so far measures how two vectors relate to each other.`,
+        content: `Length measures one vector at a time. Adding and scaling make new vectors. But no operation yet answers the obvious question about two arrows: do they point the same way, at right angles, or against each other — and by how much? A single number that answered it would be worth a great deal.`,
+        visual: ciSvg('pair'),
+        caption: `Two arrows from the origin, $(3, 1)$ and $(1, 2)$, with the angle between them marked.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [dot product](!/linear-algebra/definitions#dot_product) of two vectors $\\mathbf{a} = (a_1, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, \\ldots, b_n)$ in $\\mathbb{R}^n$ is the scalar obtained by multiplying corresponding components and summing the results:`,
+        formula: `@academic[formula_callout:Dot Product (Algebraic Form)
+$$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n = \\sum_{i=1}^{n} a_ib_i$$
+/linear-algebra/formulas#dot_product_algebraic]@`,
+        visual: ciTable('productsTable'),
+        caption: `For $\\mathbf{a} = (3, 1)$ and $\\mathbf{b} = (1, 2)$: multiply down each row, then add the products — $3 + 2 = 5$.`,
+        footer: `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+      },
+      {
+        id: 'kind',
+        lead: `A dot product is a number, not a vector.`,
+        content: [
+          `The dot product differs fundamentally from [vector addition](!/linear-algebra/vectors/basic-operations) and scalar multiplication. Those operations take vectors and produce vectors. The dot product takes two vectors and collapses them into a single number, discarding the directional structure in favor of a measurement of alignment.`,
+          `@academic[pitfall,aside:true,width:35%:Leaving the products as a vector
+Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $(3, -8)$ stops halfway. The products are added: $3 + (-8) = -5$, a single number.
+[Read more](!#pitfalls)]@`,
+          `The notation uses a centered dot between the two vectors. Other names for the same operation are the inner product and the scalar product — the latter emphasizing that the output is a scalar, not a vector.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `On numbers, the rule is the same in every dimension.`,
+        content: [
+          `This definition works in any dimension. In $\\mathbb{R}^2$, the dot product of $(3, 4)$ and $(1, -2)$ is $3(1) + 4(-2) = -5$. In $\\mathbb{R}^5$, the same rule applies with five terms instead of two. The computation is mechanical, but the meaning it carries — revealed by the geometric definition — is what makes the dot product central to the rest of linear algebra.`,
+          ciTable('examplesTable'),
+          `Two pairs give positive numbers, one gives a negative number, and a vector dotted with itself gives $10$. What those signs and sizes mean is the next thing to check.`,
+          <div key={'unit-dot'} dangerouslySetInnerHTML={{ __html: demoUnits.dot }} />,
+          `Everything later on this page — angles, orthogonality, projections — is read off that single number.`,
+        ],
+      },
+      {
+        id: 'verification',
+        lead: `The definition keeps the promises the opening asked for.`,
+        content: [
+          `A number that measures how vectors relate should give back length, track the angle, and vanish at right angles. Test all three on the running example.`,
+          ciTable('promiseTable'),
+        ],
+        visual: ciSvg('turn'),
+        caption: `The same rule against $\\mathbf{a} = (3, 1)$ as $\\mathbf{b}$ turns: $5$ at $45°$, $0$ at a right angle (the square), and negative once $\\mathbf{b}$ points away.`,
+      },
+      {
+        id: 'caveat',
+        lead: `The definition says how to compute; why it measures angle needs a second, geometric description.`,
+        content: [
+          `Nothing in "multiply and add" mentions angles, yet the checks above came out right. The reason is the geometric definition in the next section, $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\| \\cos\\theta$, which agrees with this one in every case. The algebraic rule is for computing; the geometric one is for meaning.`,
+          `To compute the dot product of two specific vectors, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page gives the notation, the geometric definition and why the two agree, the algebraic properties, the angle between vectors, orthogonality, the Cauchy–Schwarz inequality, and projections.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2028,9 +2252,7 @@ export default function DotProductPage({seoData, sectionsContent, introContent, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-dot'} dangerouslySetInnerHTML={{ __html: demoUnits.dot }} />,
-          `Everything later on this page — angles, orthogonality, projections — is read off that single number.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2156,6 +2378,14 @@ export default function DotProductPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

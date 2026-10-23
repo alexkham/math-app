@@ -902,7 +902,13 @@ Equivalently, for any $\\varepsilon > 0$,
 @academic[formula_callout:Statement of Chebyshev's Inequality
 $$\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\varepsilon^2}$$]@
 
+@academic[pitfall,aside:true,width:35%:Treating the variance as the standard deviation
+With variance $4$ and a deviation of $3$, taking $\\sigma = 4$ gives $k = \\frac{3}{4}$ and a bound of $\\frac{16}{9}$, which says nothing. The standard deviation is $\\sigma = \\sqrt{4} = 2$, so $k = \\frac{3}{2}$ and the bound is $\\frac{1}{k^2} = \\frac{4}{9} \\approx 0.44$.
+[Read more](!#pitfalls)]@
+
 The bound depends only on the variance and makes no assumptions about the form of the distribution.
+
+In a problem, the two forms are fed with whatever numbers it supplies: a mean, a measure of spread, and a distance from the mean. The first form needs that distance expressed as a number $k$ of standard deviations, while the second takes the distance $\\varepsilon$ as it stands and compares it with the variance. Both routes lead to the same number, because $\\varepsilon = k\\sigma$.
 `,
       before:``,
       after:``,
@@ -976,6 +982,10 @@ For this reason, Chebyshev's inequality should be read as a **guarantee**, not a
 Markov's inequality uses only the expected value of a random variable and applies to non-negative quantities. As a result, it places very weak restrictions on how values are distributed.
 
 Chebyshev's inequality incorporates additional information: the variance. By measuring how values spread around the mean, variance allows much stronger control over deviations in both directions.
+
+@academic[pitfall,aside:true,width:35%:Halving the bound for one tail
+Splitting $\\frac{1}{k^2}$ equally between the tails gives $\\mathbb{P}(X - \\mu \\ge 2\\sigma) \\le 0.125$. But $X = 2$ with probability $0.2$ and $X = -0.5$ with probability $0.8$ has $\\mu = 0$, $\\sigma = 1$ and that tail equal to $0.2$; without symmetry, one tail is bounded only by the full $\\frac{1}{4}$.
+[Read more](!#pitfalls)]@
 
 In effect, Chebyshev's inequality applies Markov's idea to squared deviations from the mean. This extra structure tightens the bound while still avoiding any assumptions about the exact form of the distribution.
 
@@ -1071,6 +1081,76 @@ For this reason, Chebyshev's inequality is a central tool in probability theory:
       after:``,
       link:'',
   
+    },
+    pitfalls:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes account for most wrong uses of Chebyshev's inequality. Three of them are marked where they happen in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating the variance as the standard deviation**
+
+A problem gives the variance, and that number is used where the standard deviation belongs, either to convert the distance into $k$ or as the $\\sigma$ in $\\varepsilon = k\\sigma$.
+
+Wrong working: for a variable with mean $10$ and variance $4$, and a deviation of $3$,
+$$k = \\frac{3}{4}, \\qquad \\frac{1}{k^2} = \\frac{16}{9} \\approx 1.78$$
+A bound above $1$ says nothing.
+
+Right working: the standard deviation is $\\sigma = \\sqrt{4} = 2$.
+$$k = \\frac{3}{2}, \\qquad \\frac{1}{k^2} = \\frac{4}{9} \\approx 0.44$$
+The second form gives the same number directly: $\\frac{\\sigma^2}{\\varepsilon^2} = \\frac{4}{9}$.
+
+Why it happens: both numbers describe spread, and problems give one or the other. The letter $\\sigma^2$ in the second form makes it easy to forget that the first form needs $\\sigma$ itself.
+
+How to check: compute the bound both ways. The $k$ route and the $\\varepsilon$ route must give the same number; here $\\frac{16}{9}$ against $\\frac{4}{9}$ shows that one of them used the wrong spread.
+
+**Reading the bound as the probability**
+
+The bound is reported as the chance of a large deviation, as if Chebyshev computed it rather than capped it.
+
+Wrong working: for a normal variable with mean $10$ and variance $4$,
+$$\\mathbb{P}\\big(|X - 10| \\ge 3\\big) \\approx \\frac{4}{9} \\approx 0.44$$
+
+Right working: Chebyshev only says the probability is at most $\\frac{4}{9}$. For this normal variable the deviation is $1.5$ standard deviations, and the true probability is
+$$\\mathbb{P}\\big(|Z| \\ge 1.5\\big) \\approx 0.134$$
+about a third of the bound.
+
+Why it happens: the bound is the only number the calculation produces, and with nothing else on the page it gets read as the answer.
+
+How to check: write $\\le$ in the answer, never $=$ or $\\approx$. If the distribution is known, compute the true probability and compare; it should come out at or below the bound, often far below.
+
+**Halving the bound for one tail**
+
+Only one direction matters, say $X$ far above its mean, and the two-sided bound $\\frac{1}{k^2}$ is split in half on the assumption that the two tails share it equally.
+
+Wrong working: with $k = 2$,
+$$\\mathbb{P}(X - \\mu \\ge 2\\sigma) \\le \\frac{1}{2} \\cdot \\frac{1}{4} = 0.125$$
+
+Right working: take $X = 2$ with probability $0.2$ and $X = -0.5$ with probability $0.8$. Then
+$$\\mu = 0.2 \\cdot 2 + 0.8 \\cdot (-0.5) = 0, \\qquad \\sigma^2 = 0.2 \\cdot 4 + 0.8 \\cdot 0.25 = 1$$
+and $\\mathbb{P}(X - \\mu \\ge 2\\sigma) = \\mathbb{P}(X \\ge 2) = 0.2$, more than $0.125$. Without symmetry, the event $X - \\mu \\ge k\\sigma$ is contained in $|X - \\mu| \\ge k\\sigma$, so the safe one-sided bound is the full $\\frac{1}{k^2} = 0.25$.
+
+Why it happens: the picture of a bell curve with two equal tails is the default, and Chebyshev assumes nothing about shape, symmetry included.
+
+How to check: ask whether the distribution is known to be symmetric about its mean. If it is not, keep the whole $\\frac{1}{k^2}$ for a single tail.
+
+**Using the variance of one roll for the average**
+
+Chebyshev is applied to the average of $n$ observations, but the variance put into the bound is that of a single observation.
+
+Wrong working: for the average of $n$ die rolls and $\\varepsilon = 0.5$,
+$$\\mathbb{P}\\big(|\\bar{X}_n - 3.5| \\ge 0.5\\big) \\le \\frac{35/12}{0.25} \\approx 11.67$$
+for every $n$, a bound that never says anything.
+
+Right working: for independent rolls, the average has variance $\\frac{\\sigma^2}{n} = \\frac{35}{12n}$, so
+$$\\mathbb{P}\\big(|\\bar{X}_n - 3.5| \\ge 0.5\\big) \\le \\frac{35/12}{0.25\\, n} \\approx \\frac{11.67}{n}$$
+which is about $0.117$ at $n = 100$ and falls toward $0$ as $n$ grows.
+
+Why it happens: the variance of one roll is the number that is easy to compute, and the step from one roll to the average is skipped.
+
+How to check: the bound for an average must shrink as $n$ grows. If $n$ does not appear in it, the variance of the average was never used.`,
+      before:``,
+      after:``,
+      link:'',
+
     },
     obj11:{
       title:``,
@@ -1272,6 +1352,11 @@ export default function ChebyshevInequalityPage({
         content:[
           sectionsContent.obj6.content,
                   <div key={'unit-chebLln'} dangerouslySetInnerHTML={{ __html: demoUnits.chebLln }} />,
+          `@academic[pitfall,aside:true,width:35%:Using the variance of one roll for the average
+Putting the variance of a single roll, $\\frac{35}{12}$, into the bound gives $\\frac{35/12}{0.25} \\approx 11.67$ for every $n$, which says nothing. The average of $n$ rolls has variance $\\frac{35}{12n}$, so the bound is $\\frac{11.67}{n}$, at most $0.117$ at $n = 100$.
+[Read more](!#pitfalls)]@
+
+In the die example the quantity being controlled is the average of the rolls, and the tolerance $\\varepsilon = 0.5$ stays fixed however many rolls are taken. The threshold does not move as $n$ grows; the bound responds only through the spread that is divided by $\\varepsilon^2$. Each roll on its own is exactly as variable after a hundred rolls as after one.`,
           `A bound that tends to 0 as n grows is exactly what the weak law of large numbers states.`,
         ]
     },
@@ -1309,6 +1394,14 @@ export default function ChebyshevInequalityPage({
           sectionsContent.obj10.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

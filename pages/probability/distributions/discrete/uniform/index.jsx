@@ -1038,7 +1038,7 @@ $n=b−a+1$ is total number of possible values
 
 **Support (Range of the Random Variable)**:
   * The random variable $X$ can take on $n = b - a + 1$ distinct values: $x_1, x_2, \\ldots, x_n$.
-  * These values could be consecutive integers (like $1, 2, 3, \\ldots, n$) or any set of $n$ distinct values.
+  * These values could be consecutive integers (like $1, 2, 3, \\ldots, n$) or, more generally, any set of $n$ distinct values (the formulas on this page use the consecutive integers $a, a+1, \\ldots, b$).
   * The **range** or **support** is thus a finite, countable set.
 
 **Logic Behind the Formula**:
@@ -1052,6 +1052,12 @@ Since all probabilities are equal:
   $n \\cdot \\frac{1}{n} = (b - a + 1) \\cdot \\frac{1}{b - a + 1} = 1$
   
   This makes the individual probability of each outcome $\\frac{1}{n} = \\frac{1}{b - a + 1}$.
+
+@academic[pitfall,aside:true,width:35%:Forgetting to count both ends
+Counting the integers from $10$ to $20$ as $20 - 10 = 10$ gives each value $\\frac{1}{10}$, and the $11$ probabilities add up to $1.1$. Both bounds are values: $n = 20 - 10 + 1 = 11$, so $P(X = x) = \\frac{1}{11}$.
+[Read more](!#pitfalls)]@
+
+In practice the formula is used by counting. The bounds $a$ and $b$ are read off the problem, the values from $a$ to $b$ are counted, and that count becomes the denominator shared by every outcome. On a standard die the count is plain to see; on a range such as the integers from $10$ to $20$, it has to be worked out from the bounds.
 
 
       `,
@@ -1094,6 +1100,12 @@ $\\lfloor x \\rfloor$ = floor function (largest integer less than or equal to $x
 3. **After the range** ($x > b$): All outcomes have occurred, so $F_X(x) = 1$.
 
 **Step Function Behavior**: Since $X$ only takes integer values, the CDF remains constant between integers and jumps by $\\frac{1}{b - a + 1}$ at each integer point.
+
+@academic[pitfall,aside:true,width:35%:Treating at least as more than
+For a fair die, writing $P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{3}{6} = \\frac{1}{2}$ drops the face $3$ itself. At least $3$ means $3, 4, 5, 6$, so $P(X \\geq 3) = 1 - F_X(2) = 1 - \\frac{2}{6} = \\frac{2}{3}$.
+[Read more](!#pitfalls)]@
+
+Questions about a range of outcomes are answered from this staircase. A roll below $4$, a draw of at least $15$, a number of at most $8$: each picks out a block of consecutive values, and its probability is read from the CDF, directly or through the complement. Because every jump has the same height, each value that lands inside or outside the block changes the answer by exactly $\\frac{1}{b - a + 1}$.
   `,
   before:``,
   after:``,
@@ -1201,7 +1213,7 @@ For $\\mathbb{E}[X^2]$, using the PMF $P(X = x) = \\frac{1}{b - a + 1}$:
 @academic[formula_callout:Variance and Standard Deviation
 $$\\mathbb{E}[X^2] = \\sum_{x=a}^{b} x^2 \\cdot \\frac{1}{b - a + 1} = \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x^2$$]@
 
-Using the formula for sum of squares: $\\sum_{x=a}^{b} x^2 = \\frac{(b - a + 1)(2b^2 + 2ab + 2a^2 - a - b)}{6}$
+Using the formula for sum of squares: $\\sum_{x=a}^{b} x^2 = \\frac{(b - a + 1)(2b^2 + 2ab + 2a^2 - a + b)}{6}$
 
 After algebraic manipulation:
 
@@ -1224,6 +1236,10 @@ $$\\mathrm{Var}(X) = \\frac{(6 - 1 + 1)^2 - 1}{12} = \\frac{36 - 1}{12} = \\frac
 
 @academic[formula_callout:Variance and Standard Deviation
 $$\\sigma = \\sqrt{\\frac{35}{12}} \\approx 1.708$$]@
+
+@academic[pitfall,aside:true,width:35%:Using the continuous variance formula
+Borrowing $\\frac{(b - a)^2}{12}$ from the continuous uniform gives the die $\\frac{(6 - 1)^2}{12} = \\frac{25}{12} \\approx 2.083$. The discrete formula counts the values: $\\frac{6^2 - 1}{12} = \\frac{35}{12} \\approx 2.917$.
+[Read more](!#pitfalls)]@
 
 The variance of approximately 2.917 indicates moderate spread around the mean of 3.5, with outcomes ranging from 1 to 6.
   `,
@@ -1402,6 +1418,55 @@ Each face has an equal and independent chance of appearing.
       after:``,
       link:'',
   
+    },
+    obj17:{
+      title:`Common Pitfalls`,
+      content:`Three mistakes account for most wrong answers in discrete uniform problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Forgetting to count both ends**
+
+The number of values is taken as the distance $b - a$ between the bounds, so one of the two endpoints is left out of the count.
+
+Wrong working: for the integers from $10$ to $20$,
+$$n = 20 - 10 = 10, \\qquad P(X = x) = \\frac{1}{10}$$
+
+Right working: both $10$ and $20$ are possible values, so the count is one more than the distance.
+$$n = 20 - 10 + 1 = 11, \\qquad P(X = x) = \\frac{1}{11}$$
+
+Why it happens: subtracting the bounds measures the length of the range, and on the standard die starting at $1$ the slip is hidden, because the count $6$ is also the upper bound. Once the lower bound is not $1$, length and count differ by one.
+
+How to check: the probabilities must add up to $1$. With the wrong count, the $11$ values each get $\\frac{1}{10}$, and $11 \\times \\frac{1}{10} = 1.1$. With the right count, $11 \\times \\frac{1}{11} = 1$.
+
+**Treating at least as more than**
+
+The question asks for at least $k$, and the complement is taken at $k$ instead of at $k - 1$, so the value $k$ itself is left out.
+
+Wrong working: for a fair die,
+$$P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{3}{6} = \\frac{1}{2}$$
+
+Right working: at least $3$ means $3$, $4$, $5$ or $6$, so the complement is at most $2$.
+$$P(X \\geq 3) = 1 - F_X(2) = 1 - \\frac{2}{6} = \\frac{2}{3}$$
+
+Why it happens: the rules for "more than" and "at least" differ by a single value, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.
+
+How to check: count the values in the event and divide by $n$. The faces $3, 4, 5, 6$ are four of six, so the answer is $\\frac{4}{6} = \\frac{2}{3}$.
+
+**Using the continuous variance formula**
+
+The variance of the continuous uniform on $[a, b]$, $\\frac{(b - a)^2}{12}$, is used for the discrete uniform on $\\{a, a + 1, \\ldots, b\\}$.
+
+Wrong working: for a fair die,
+$$\\mathrm{Var}(X) = \\frac{(6 - 1)^2}{12} = \\frac{25}{12} \\approx 2.083$$
+
+Right working: the discrete formula uses the number of values $n = b - a + 1 = 6$.
+$$\\mathrm{Var}(X) = \\frac{n^2 - 1}{12} = \\frac{36 - 1}{12} = \\frac{35}{12} \\approx 2.917$$
+
+Why it happens: both distributions are called uniform, both formulas have $12$ in the denominator, and the continuous one is shorter and easier to remember.
+
+How to check: compute the variance directly from the definition. The mean is $3.5$, and the squared distances of the six faces from it are $6.25, 2.25, 0.25, 0.25, 2.25, 6.25$. Their average is $\\frac{17.5}{6} = \\frac{35}{12} \\approx 2.917$.`,
+      before:``,
+      after:``,
+      link:'',
     },
      links:{
       decide:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About Distinguishing Discrete Distributions](!/probability/distributions/discrete#decide) →@
@@ -1766,6 +1831,14 @@ export default function DiscreteUniformDistributionPage({
           sectionsContent.obj16.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

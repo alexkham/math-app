@@ -886,6 +886,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixTypesDiagrams from '@/app/components/matrices/matrixTypesDiagrams'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1324,16 +1326,19 @@ The [trace](!/linear-algebra/matrix/trace) counts the fixed points of $\\sigma$,
 
 **Closure and the connection to row swaps.** The product of two permutation matrices is a permutation matrix, the inverse of one is one, and the identity is one — so the $n \\times n$ permutation matrices form a group under multiplication, a copy of the symmetric group $S_n$ sitting inside the invertible matrices.
 
+@academic[pitfall,aside:true,width:35%:Inverting a permutation matrix by itself
+Taking $P^{-1} = P$, as for a single row swap, fails for the $P$ above: $P^2 = \\begin{pmatrix} 0 & 0 & 1 \\\\ 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{pmatrix} \\neq I$. The inverse is $P^{\\mathsf{T}}$, which for this cycle equals that same matrix $P^2$.
+[Read more](!#pitfalls)]@
+
 Inside that group, the matrices that swap exactly two rows are the row-swap [elementary matrices](!/linear-algebra/linear-systems/gaussian-elimination) of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Every permutation matrix is a product of them, because every permutation is a product of transpositions. The relationship runs one way only: row-swap elementary matrices are permutation matrices, but a permutation matrix is elementary only when it swaps a single pair. The other two kinds of elementary matrix — scaling a row, adding a multiple of one row to another — are not permutation matrices at all, since they change values rather than only positions.
 
-**Where it shows up.** [LU decomposition](!/linear-algebra/decompositions/lower-upper) with partial pivoting cannot always factor $A$ directly, because a zero may sit where a pivot is needed. Recording the row swaps in a permutation matrix repairs this, and the factorisation is stated as
+**Where it shows up.** [LU decomposition](!/linear-algebra/decompositions/lower-upper) without pivoting cannot always factor $A$ directly, because a zero may sit where a pivot is needed. Recording the row swaps in a permutation matrix repairs this, and the factorisation is stated as
 
 @academic[formula_callout:PA LU Partial Pivoting
 $$PA = LU$$
 /linear-algebra/formulas#pa_lu_partial_pivoting]@
 
-@academic[formulas_link:/linear-algebra/formulas#identity_matrix_definition]@
-/linear-algebra/formulas]@
+@academic[formulas_link:/linear-algebra/formulas#pa_lu_partial_pivoting]@
 
 The $P$ is exactly the bookkeeping of which rows were exchanged on the way to upper triangular form.
 
@@ -1412,6 +1417,10 @@ When $\\det(Q) = +1$, the matrix is a rotation. When $\\det(Q) = -1$, it involve
 
 They also preserve dot products ($Q\\mathbf{x} \\cdot Q\\mathbf{y} = \\mathbf{x} \\cdot \\mathbf{y}$) and therefore angles between vectors. A transformation that preserves all distances and angles is called an isometry, and the orthogonal matrices are precisely the linear isometries.
 
+@academic[pitfall,aside:true,width:35%:Orthogonal columns without unit length
+Taking $Q^T$ as the inverse of $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, whose columns are perpendicular but of length $\\sqrt{2}$, gives $Q^T Q = 2I$, not $I$. Here $Q^{-1} = \\frac{1}{2}Q^T$; dividing $Q$ by $\\sqrt{2}$ makes it orthogonal.
+[Read more](!#pitfalls)]@
+
 Common examples include rotation matrices in $\\mathbb{R}^2$ and $\\mathbb{R}^3$, reflection matrices across any line or plane through the origin, and permutation matrices that reorder coordinates. The inverse of an orthogonal matrix is its transpose — making it the cheapest matrix inverse to compute.`,
     before: ``,
     after: ``,
@@ -1465,6 +1474,10 @@ Reflections are the prototypical example: reflecting twice across the same line 
 
 The matrix $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ is involutory — it swaps the two coordinates and swapping twice restores the original. It is also a [permutation matrix](!/linear-algebra/matrix/types#12), which is worth noting because the two conditions are independent: this matrix satisfies both, but most permutation matrices are not involutory and most involutory matrices are not permutations.
 
+@academic[pitfall,aside:true,width:35%:Expecting only ±I to square to I
+Factoring $A^2 - I = (A - I)(A + I) = O$ and setting a factor to zero gives only $A = \\pm I$. But $A = \\text{diag}(1, -1)$ also squares to $I$, with $A - I = \\text{diag}(0, -2)$ and $A + I = \\text{diag}(2, 0)$ both nonzero.
+[Read more](!#pitfalls)]@
+
 More generally, any matrix of the form $2P - I$, where $P$ is idempotent, is involutory. Expanding gives $(2P - I)^2 = 4P^2 - 4P + I = 4P - 4P + I = I$, using $P^2 = P$. Geometrically this converts a projection into the reflection across the same subspace: instead of landing on the subspace, the vector travels the same distance again and comes out the other side.`,
     before: ``,
     after: ``,
@@ -1483,7 +1496,13 @@ Its columns are [linearly dependent](!/linear-algebra/vector-spaces/linear-indep
 
 A nonsingular (invertible) matrix has nonzero determinant, full rank, and linearly independent columns and rows. The system $Ax = \\mathbf{b}$ has exactly one solution for every right-hand side, and the [inverse](!/linear-algebra/matrix/inverse) $A^{-1}$ exists.
 
-Any matrix type can be singular or nonsingular depending on its entries. A diagonal matrix is singular if any diagonal entry is zero. A triangular matrix is singular if any diagonal entry is zero. An orthogonal matrix is never singular, since its determinant is $\\pm 1$. A nilpotent matrix (other than the zero matrix of order $1$) is always singular, since all its eigenvalues are zero.`,
+Any matrix type can be singular or nonsingular depending on its entries. A diagonal matrix is singular if any diagonal entry is zero. A triangular matrix is singular if any diagonal entry is zero. An orthogonal matrix is never singular, since its determinant is $\\pm 1$. A nilpotent matrix is always singular, since all its eigenvalues are zero.
+
+@academic[pitfall,aside:true,width:35%:Judging invertibility from the diagonal
+Calling $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ nonsingular because no diagonal entry is zero misses $\\det = 1 \\cdot 4 - 2 \\cdot 2 = 0$. The diagonal test holds only for diagonal and triangular matrices; this one is singular, its second column twice the first.
+[Read more](!#pitfalls)]@
+
+Most matrices met in practice have no special pattern at all. For them, deciding whether the matrix is singular takes a computation: evaluating the determinant, finding the rank by row reduction, or spotting a dependence among the columns. Which of the three is quickest depends on the size of the matrix and on how its entries are related.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1499,6 +1518,72 @@ Three are defined by a relation to the transpose. Symmetric matrices ($A = A^T$)
 Three are defined by a power condition. Nilpotent matrices ($A^k = O$) have all eigenvalues zero. Idempotent matrices ($A^2 = A$) are projections with $\\text{rank} = \\text{tr}$. Involutory matrices ($A^2 = I$) are their own inverse.
 
 These categories are not mutually exclusive, and the three axes cut across each other freely. The identity matrix is diagonal, symmetric, orthogonal, triangular, idempotent, involutory, and a permutation simultaneously. A $1 \\times 1$ zero matrix is diagonal, symmetric, skew-symmetric, triangular, nilpotent, and singular. Permutation matrices are all orthogonal, but only the ones built from disjoint swaps are involutory. Recognizing which types a given matrix belongs to is often the fastest route to understanding its behavior.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj13: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when the matrix types on this page are put to use. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Inverting a permutation matrix by itself**
+
+A row swap undoes itself, so the inverse of every permutation matrix is taken to be the matrix itself. That holds only for permutations built from disjoint swaps; a cycle of three positions is not undone by repeating it.
+
+Wrong working: with $P = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$ from the permutation section, take $P^{-1} = P$. Then
+$$P \\cdot P = \\begin{pmatrix} 0 & 0 & 1 \\\\ 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{pmatrix} \\neq I$$
+
+Right working: the inverse is the transpose.
+$$P^{-1} = P^{\\mathsf{T}} = \\begin{pmatrix} 0 & 0 & 1 \\\\ 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{pmatrix}, \\qquad P P^{\\mathsf{T}} = I$$
+Applying the cycle twice moves every coordinate two steps along it, which is the same as one step back, so here $P^2 = P^{-1}$ and $P^3 = I$.
+
+Why it happens: the first permutation matrices most learners meet are single swaps such as $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, which are their own inverses, and the property is carried over to all of them.
+
+How to check: since $P^{-1} = P^{\\mathsf{T}}$, a permutation matrix is its own inverse exactly when it is symmetric. The $P$ above is not symmetric, so $P^{-1} \\neq P$.
+
+**Orthogonal columns without unit length**
+
+A matrix whose columns are perpendicular is called orthogonal, and its transpose is used as its inverse. The definition asks for more: the columns must be orthonormal, perpendicular and each of length $1$.
+
+Wrong working: the columns $(1, 1)$ and $(1, -1)$ of $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$ have dot product $0$, so take $Q^{-1} = Q^T$. But
+$$Q^T Q = \\begin{pmatrix} 2 & 0 \\\\ 0 & 2 \\end{pmatrix} = 2I \\neq I$$
+
+Right working: each column has length $\\sqrt{2}$, and $Q^T Q = 2I$ gives
+$$Q^{-1} = \\tfrac{1}{2}Q^T = \\begin{pmatrix} 1/2 & 1/2 \\\\ 1/2 & -1/2 \\end{pmatrix}$$
+Dividing by $\\sqrt{2}$ gives the orthogonal matrix $\\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, whose inverse really is its transpose.
+
+Why it happens: the name says orthogonal, and the unit-length half of the condition is not in the name.
+
+How to check: compute $Q^T Q$. Its off-diagonal entries test perpendicularity and its diagonal entries are the squared column lengths, which must all be $1$. The determinant is a second test: here $\\det(Q) = -2$, not $\\pm 1$.
+
+**Expecting only ±I to square to I**
+
+The equation $A^2 = I$ is solved like $x^2 = 1$: factor it as $(A - I)(A + I) = O$ and conclude that one factor is zero. For matrices that step fails, because two nonzero matrices can multiply to $O$.
+
+Wrong working:
+$$A^2 = I \\implies (A - I)(A + I) = O \\implies A = I \\text{ or } A = -I$$
+
+Right working: $A = \\text{diag}(1, -1)$ is neither, yet
+$$A^2 = \\text{diag}(1, 1) = I, \\qquad (A - I)(A + I) = \\text{diag}(0, -2)\\,\\text{diag}(2, 0) = O$$
+The swap $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ and every matrix $2P - I$ with $P$ idempotent are further solutions.
+
+Why it happens: for numbers, a product is zero only when a factor is zero, and that rule is used without noticing.
+
+How to check: test a reflection. $\\text{diag}(1, -1)$ reflects the plane across the $x$-axis, and reflecting twice returns every vector, so it must satisfy $A^2 = I$.
+
+**Judging invertibility from the diagonal**
+
+The diagonal test from the diagonal and triangular sections is applied to a matrix with no such pattern: no zero on the diagonal is read as nonsingular, or a zero on the diagonal as singular.
+
+Wrong working: $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ has diagonal entries $1$ and $4$, neither zero, so it is declared nonsingular.
+
+Right working:
+$$\\det(A) = 1 \\cdot 4 - 2 \\cdot 2 = 0$$
+The second column is twice the first, the rank is $1$, and $A$ is singular. The test fails the other way too: $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has only zeros on its diagonal, but its determinant is $-1$ and it is invertible.
+
+Why it happens: for diagonal and triangular matrices the determinant is the product of the diagonal entries, and those are the first cases learned.
+
+How to check: before reading anything off the diagonal, confirm that every entry below it, or every entry above it, is zero. Otherwise compute the determinant or row reduce.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1678,8 +1763,24 @@ const schemas = {
     }),
   };
 
+  const permNest = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Where permutation matrices live',
+    preface: 'Permutation matrices sit inside a chain of matrix classes: a few are elementary row swaps, all of them are orthogonal, and every orthogonal matrix is invertible.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Inverting is free',
+    conclusion: 'Because permutation matrices are orthogonal, $P^{-1} = P^T$: undoing a permutation means transposing it.',
+    levels: [
+      { id: 'swap', symbol: 'E', name: '[Row-swap elementary](!/linear-algebra/linear-systems/gaussian-elimination)', note: 'swaps a single pair of rows' },
+      { id: 'perm', symbol: 'P', name: 'Permutation', adds: 'any reordering', note: 'one 1 in each row and column', example: 'n! of them' },
+      { id: 'orth', symbol: 'Q', name: '[Orthogonal](!/linear-algebra/matrix/types)', note: '$Q^{-1} = Q^T$' },
+      { id: 'inv', symbol: 'A', name: '[Invertible](!/linear-algebra/matrix/inverse)', note: '$A^{-1}$ exists' },
+    ],
+  };
+
 return {
   props: {
+    permNest,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1701,7 +1802,7 @@ return {
 }
 
 
-export default function MatrixTypesPage({demoUnits, seoData, sectionsContent, introContent, obj8Table, obj12Table, matrixTypeProfiles, faqQuestions, schemas}) {
+export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsContent, introContent, obj8Table, obj12Table, matrixTypeProfiles, faqQuestions, schemas}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1753,6 +1854,14 @@ export default function MatrixTypesPage({demoUnits, seoData, sectionsContent, in
           <div key={'obj12-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj12Table }} />,
           `Reading the table downward shows why the determinant is called the sign of the permutation rather than a separate quantity to compute. Each transposition is one row swap, one row swap flips the sign, and the parity of the swap count is the same however the permutation is decomposed.`,
+          <DiagramFrameV2
+            key={'obj12-diagram'}
+            id="permutation-matrix-nesting"
+            title="Where permutation matrices live"
+            source="/linear-algebra/matrix/types"
+          >
+            <NestedContainment data={permNest} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1826,6 +1935,14 @@ export default function MatrixTypesPage({demoUnits, seoData, sectionsContent, in
           </DiagramFrame>,
           `The power conditions are worth reading as polynomial equations. $A^2 = A$ says every eigenvalue satisfies $\\lambda^2 = \\lambda$, so $\\lambda \\in \\{0, 1\\}$; $A^2 = I$ says $\\lambda^2 = 1$, so $\\lambda = \\pm 1$; $A^k = O$ says $\\lambda^k = 0$, so every eigenvalue is zero. Three types, three constraints, and all of them fall out of substituting an eigenvector into the defining equation.`,
           `Two entries are worth contrasting directly. A nilpotent matrix has every eigenvalue zero and is never diagonalizable unless it is the zero matrix — the eigenvalues say nothing is happening while the matrix plainly does something, which is precisely what a defective matrix looks like. An idempotent matrix also has a constrained spectrum, but it is diagonalizable, and its rank equals its trace. Same kind of condition, opposite structural outcome.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
         ]
     },
    

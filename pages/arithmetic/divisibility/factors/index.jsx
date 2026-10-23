@@ -291,8 +291,8 @@ const sectionsContent = {
   content: `
 - [Divisor (Factor)](!/arithmetic/definitions#divisor) — the central concept on this page; an integer that divides another exactly
 - [Multiple](!/arithmetic/definitions#multiple) — the counterpart to a factor, produced by multiplying out
-- [Prime Number](!/arithmetic/definitions#prime_number) — an integer whose only factors are 1 and itself
-- [Composite Number](!/arithmetic/definitions#composite_number) — an integer with additional factors beyond 1 and itself
+- [Prime Number](!/arithmetic/definitions#prime_number) — an integer greater than 1 whose only factors are 1 and itself
+- [Composite Number](!/arithmetic/definitions#composite_number) — an integer greater than 1 with additional factors beyond 1 and itself
 - [Prime Factorization](!/arithmetic/definitions#prime_factorization) — decomposition into primes, used here to count divisors`,
   before: ``,
   after: `
@@ -304,7 +304,7 @@ const sectionsContent = {
     title: `Factors (Divisors)`,
     content: `A factor of $n$ is any integer $a$ such that $a \\mid n$ — meaning $n = a \\cdot k$ for some integer $k$. The terms "factor" and "divisor" are interchangeable.
 
-Every positive integer has at least two factors: $1$ and itself. The number $1$ divides everything, and every number divides itself. Most numbers have additional factors between these two extremes.
+Every integer greater than $1$ has at least two factors: $1$ and itself. The number $1$ divides everything, and every number divides itself. Most numbers have additional factors between these two extremes.
 
 The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The factors of $13$ are just $1$ and $13$ — making it prime.`,
     afterFigure: `Unlike multiples, which extend infinitely, the factor set of any positive integer is finite. No factor of $n$ can exceed $n$ itself (in absolute value), so the search space is bounded from the start.`,
@@ -322,7 +322,11 @@ For $n = 36$, test integers from $1$ to $6$ (since $\\sqrt{36} = 6$):
 $1 \\mid 36$: pair $(1, 36)$. $2 \\mid 36$: pair $(2, 18)$. $3 \\mid 36$: pair $(3, 12)$. $4 \\mid 36$: pair $(4, 9)$. $5 \\nmid 36$: skip. $6 \\mid 36$: pair $(6, 6)$.
 
 To list all factors of a specific number, use the [factoring calculator](!/algebra/calculators/factoring).`,
-    afterFigure: `The complete factor set is $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$ — nine factors, all discovered by testing only six candidates.
+    afterFigure: `@academic[pitfall,aside:true,width:35%:Forgetting the partner factors
+Writing down only the successful test values $1, 2, 3, 4, 6$ gives $36$ just five factors. Each success $a \\mid 36$ also gives the partner $36 \\div a$, so $36$, $18$, $12$ and $9$ belong in the list too.
+[Read more](!#pitfalls)]@
+
+The complete factor set is $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$ — nine factors, all discovered by testing only six candidates.
 
 For large numbers, [divisibility rules](!/arithmetic/divisibility/rules) speed up the testing. Checking whether $2$, $3$, or $5$ divide $n$ takes a glance at the digits, not a full division.`,
     before: ``,
@@ -339,7 +343,11 @@ For large numbers, [divisibility rules](!/arithmetic/divisibility/rules) speed u
 Together they satisfy $a \\cdot \\frac{n}{a} = n$, and listing factor pairs ensures no divisor is overlooked.
 
 For $n = 24$, the pairs are: $(1, 24)$, $(2, 12)$, $(3, 8)$, $(4, 6)$. Each pair multiplies to $24$, and together they account for all eight factors.`,
-    afterFigure: `For perfect squares, one pair collapses into a repeated value. The number $36$ has the pair $(6, 6)$ — the square root paired with itself. This is why perfect squares have an odd number of factors: every other factor appears in a pair of two distinct values, but the square root stands alone.
+    afterFigure: `@academic[pitfall,aside:true,width:35%:Counting the square root twice
+Counting two factors for every pair gives $16$ six factors from $(1, 16)$, $(2, 8)$ and $(4, 4)$. The pair $(4, 4)$ holds only one factor, so $16$ has five: $1, 2, 4, 8, 16$.
+[Read more](!#pitfalls)]@
+
+For perfect squares, one pair collapses into a repeated value. The number $36$ has the pair $(6, 6)$ — the square root paired with itself. This is why perfect squares have an odd number of factors: every other factor appears in a pair of two distinct values, but the square root stands alone.
 
 Organizing factors into pairs is more reliable than listing them individually. Starting from $(1, n)$ and working inward, each successful division test produces two factors at once — halving the work and providing a built-in completeness check.`,
     before: ``,
@@ -352,7 +360,11 @@ Organizing factors into pairs is more reliable than listing them individually. S
     content: `The proper divisors of $n$ are all of its factors except $n$ itself. They are the numbers that divide $n$ without being equal to it.
 
 The proper divisors of $12$ are $\\{1, 2, 3, 4, 6\\}$. The number $12$ itself is excluded.`,
-    afterFigure: `Proper divisors define three classical categories. A number is perfect if the sum of its proper divisors equals the number: $6 = 1 + 2 + 3$, so $6$ is perfect. A number is abundant if the sum exceeds it: the proper divisors of $12$ sum to $1 + 2 + 3 + 4 + 6 = 16 > 12$. A number is deficient if the sum falls short: the proper divisors of $10$ sum to $1 + 2 + 5 = 8 < 10$.
+    afterFigure: `@academic[pitfall,aside:true,width:35%:Counting the number among its proper divisors
+Adding $28$ to its own proper divisors gives $1 + 2 + 4 + 7 + 14 + 28 = 56 > 28$, so $28$ looks abundant. Without $28$ the sum is $1 + 2 + 4 + 7 + 14 = 28$, and $28$ is perfect.
+[Read more](!#pitfalls)]@
+
+Proper divisors define three classical categories. A number is perfect if the sum of its proper divisors equals the number: $6 = 1 + 2 + 3$, so $6$ is perfect. A number is abundant if the sum exceeds it: the proper divisors of $12$ sum to $1 + 2 + 3 + 4 + 6 = 16 > 12$. A number is deficient if the sum falls short: the proper divisors of $10$ sum to $1 + 2 + 5 = 8 < 10$.
 
 Perfect numbers are rare. The first four are $6, 28, 496$, and $8{,}128$. Every known perfect number is even, and whether an odd perfect number exists remains one of the oldest unsolved problems in mathematics.`,
     before: ``,
@@ -362,7 +374,7 @@ Perfect numbers are rare. The first four are $6, 28, 496$, and $8{,}128$. Every 
 
   obj5: {
     title: `Multiples`,
-    content: `A multiple of $a$ is any number $b$ such that $a \\mid b$ — meaning $b = a \\cdot k$ for some positive integer $k$. Where factors divide into a number, multiples are produced by multiplying out from it.
+    content: `A multiple of $a$ is any number $b$ such that $a \\mid b$ — meaning $b = a \\cdot k$ for some integer $k$. Where factors divide into a number, multiples are produced by multiplying out from it.
 
 The multiples of $7$ are $7, 14, 21, 28, 35, 42, \\ldots$ — an infinite sequence with no largest member.
 
@@ -430,6 +442,10 @@ The greatest common factor is the largest member of the common factor set. For $
 
 The multiples of $4$ are $4, 8, 12, 16, 20, 24, 28, 32, 36, \\ldots$ The multiples of $6$ are $6, 12, 18, 24, 30, 36, \\ldots$ The common multiples are $12, 24, 36, 48, \\ldots$ — every value that appears in both lists.
 
+@academic[pitfall,aside:true,width:35%:Multiplying to get the LCM
+Taking $6 \\cdot 8 = 48$ as the smallest common multiple of $6$ and $8$ skips $24$, which both divide: $24 = 6 \\cdot 4 = 8 \\cdot 3$. The product is the least common multiple only when the two numbers share no factor except $1$, as $4$ and $9$ do.
+[Read more](!#pitfalls)]@
+
 The smallest positive common multiple is the [LCM](!/arithmetic/divisibility/lcm). For $4$ and $6$, it is $12$. Every other common multiple is a multiple of the LCM: $24 = 2 \\cdot 12$, $36 = 3 \\cdot 12$, and so on.
 
 Common multiples arise naturally in problems involving synchronization. If one event repeats every $4$ days and another every $6$ days, they coincide every $12$ days — the LCM of their periods.`,
@@ -449,10 +465,18 @@ If $n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots p_k^{a_k}$, the number of positive di
 @academic[formula_callout:Counting Factors
 $$(a_1 + 1)(a_2 + 1) \\cdots (a_k + 1)$$]@
 
+@academic[pitfall,aside:true,width:35%:Multiplying the exponents
+Counting the factors of $12 = 2^2 \\cdot 3$ as $2 \\cdot 1 = 2$ misses most of them. Adding $1$ to each exponent gives $(2 + 1)(1 + 1) = 6$, the factors $1, 2, 3, 4, 6, 12$.
+[Read more](!#pitfalls)]@
+
 Each prime factor $p_i$ can appear in a divisor $0, 1, 2, \\ldots, a_i$ times — that is $a_i + 1$ independent choices. The total number of divisors is the product of all these choices.
 
 The number $72 = 2^3 \\cdot 3^2$ has $(3+1)(2+1) = 12$ factors. Listing them confirms: $1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72$ — exactly twelve.`,
-    afterFigure: `The number $100 = 2^2 \\cdot 5^2$ has $(2+1)(2+1) = 9$ factors.
+    afterFigure: `@academic[pitfall,aside:true,width:35%:Counting with factors that are not prime
+Reading $36 = 4 \\cdot 9$ as two factors with exponent $1$ gives $(1 + 1)(1 + 1) = 4$, but $36$ has $9$ factors. The formula needs primes: $36 = 2^2 \\cdot 3^2$ gives $(2 + 1)(2 + 1) = 9$.
+[Read more](!#pitfalls)]@
+
+The number $100 = 2^2 \\cdot 5^2$ has $(2+1)(2+1) = 9$ factors.
 
 The formula reveals structure that raw listing obscures. A number with many small prime factors has more divisors than a number of similar size with fewer, larger prime factors. The number $60 = 2^2 \\cdot 3 \\cdot 5$ has $12$ factors, while $64 = 2^6$ has only $7$.`,
     before: ``,
@@ -532,6 +556,98 @@ Is $20$ abundant or deficient? Proper divisors: $1, 2, 4, 5, 10$. Sum: $22 > 20$
   obj12: {
     title: `Summary: A Toolkit for Divisor Structure`,
     content: `Every question this page addresses about a number $n$ — what its factors are, how many it has, how it compares to similar numbers, what it shares with another integer — reduces to one of a small set of recurring tools. The table below collects those tools in one place, paired with a worked example so each row stands as both a reference and a reminder of how to apply it.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj13: {
+    title: `Common Pitfalls`,
+    content: `Seven mistakes account for many of the wrong answers about factors and multiples. Six are marked where they happen in the sections above; the mix-up between factors and multiples is the one **Factors vs Multiples** already warns about. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Forgetting the partner factors**
+
+The pair search tests candidates only up to $\\sqrt{n}$. Each test that succeeds is written down, but its partner $\\frac{n}{a}$ is not, so the list stops at $\\sqrt{n}$ and misses every factor above it.
+
+Wrong working: for $n = 36$, the tests for $1, 2, 3, 4, 6$ succeed, so the factors of $36$ are $1, 2, 3, 4, 6$, five in total.
+
+Right working: each success gives a pair: $(1, 36)$, $(2, 18)$, $(3, 12)$, $(4, 9)$, $(6, 6)$. The factors are $1, 2, 3, 4, 6, 9, 12, 18, 36$, nine in total.
+
+Why it happens: the rule "test up to $\\sqrt{n}$" is read as the end of the list, when it is only the halfway mark of the search.
+
+How to check: the largest factor of $n$ is $n$ itself. A list of the factors of $36$ that does not end in $36$ is incomplete.
+
+**Counting the square root twice**
+
+Every factor pair is counted as two factors, including the pair in which the square root of a perfect square meets itself.
+
+Wrong working: $16$ has the pairs $(1, 16)$, $(2, 8)$ and $(4, 4)$, so it has $3 \\cdot 2 = 6$ factors.
+
+Right working: the pair $(4, 4)$ contributes the single factor $4$. The factors of $16$ are $1, 2, 4, 8, 16$, five in total. In the same way $36$ has $9$ factors, not $10$.
+
+Why it happens: for a number that is not a perfect square every pair really holds two different factors, so "two per pair" becomes a habit.
+
+How to check: a perfect square has an odd number of factors, so an even count for $16$, $36$ or $100$ means the root was counted twice. The counting formula agrees: $16 = 2^4$ has $4 + 1 = 5$ factors.
+
+**Counting the number among its proper divisors**
+
+When a number is classified as perfect, abundant or deficient, the number itself is added to the sum of its proper divisors. The sum then always exceeds $n$, and every number looks abundant.
+
+Wrong working: for $28$, $1 + 2 + 4 + 7 + 14 + 28 = 56 > 28$, so $28$ is abundant.
+
+Right working: the proper divisors leave out $28$ itself. Their sum is $1 + 2 + 4 + 7 + 14 = 28$, equal to the number, so $28$ is perfect.
+
+Why it happens: the full list of divisors ends with $n$, and the sum $\\sigma(n)$ in **Sum of Factors** includes it. The word "proper" is the only signal to drop it.
+
+How to check: with $n$ included, the sum of the divisors of any $n > 1$ is at least $n + 1$, so if every number tested comes out abundant, $n$ was counted. When the full sum $\\sigma(n)$ is used, compare it with $2n$, not with $n$: $\\sigma(28) = 56 = 2 \\cdot 28$.
+
+**Mixing up factors and multiples**
+
+The two words for the two sides of $a \\mid b$ are swapped, so the numbers that go into $n$ are listed as its multiples, or the numbers it goes into as its factors.
+
+Wrong working: the multiples of $12$ are $1, 2, 3, 4, 6, 12$.
+
+Right working: those are the factors of $12$, the numbers that divide it. The multiples of $12$ are $12 \\cdot 1, 12 \\cdot 2, 12 \\cdot 3, \\ldots$, that is $12, 24, 36, 48, \\ldots$
+
+Why it happens: both words come from the same multiplication fact. $12 = 3 \\cdot 4$ makes $3$ a factor of $12$ and $12$ a multiple of $3$, and which side each word belongs to has to be remembered.
+
+How to check: compare sizes and count. A positive factor of $n$ is at most $n$ and there are finitely many; a positive multiple of $n$ is at least $n$ and the list never ends.
+
+**Multiplying to get the LCM**
+
+The product of two numbers is taken as their smallest common multiple.
+
+Wrong working: the least common multiple of $6$ and $8$ is $6 \\cdot 8 = 48$.
+
+Right working: the multiples of $6$ are $6, 12, 18, 24, \\ldots$ and the multiples of $8$ are $8, 16, 24, \\ldots$, and the first one they share is $24$. The product $48 = 2 \\cdot 24$ is a common multiple, but not the smallest.
+
+Why it happens: the product is always a common multiple, and when the two numbers share no factor except $1$, as $4$ and $9$ do, it is the least one, $36$. The shortcut works often enough to seem like a rule.
+
+How to check: if the two numbers share a factor $d > 1$, the product divided by $d$ is still a common multiple. Both $6$ and $8$ are even, and $48 \\div 2 = 24$ is divisible by both: $24 = 6 \\cdot 4 = 8 \\cdot 3$.
+
+**Multiplying the exponents**
+
+In the factor-count formula the added $1$s are dropped, and the exponents of the prime factorization are multiplied as they stand.
+
+Wrong working: $12 = 2^2 \\cdot 3$ has exponents $2$ and $1$, so it has $2 \\cdot 1 = 2$ factors.
+
+Right working: an exponent $a_i$ allows $a_i + 1$ choices, from $0$ to $a_i$ copies of its prime. So $12$ has $(2 + 1)(1 + 1) = 6$ factors: $1, 2, 3, 4, 6, 12$.
+
+Why it happens: the exponent counts the copies of a prime that are present, and the choice of taking none of them, which gives the factors without that prime, is easy to overlook.
+
+How to check: try a prime power. The factors of $8 = 2^3$ are $1, 2, 4, 8$, four of them, which is $3 + 1$ and not $3$. For $72 = 2^3 \\cdot 3^2$, multiplying the exponents gives $6$, while **Counting Factors** lists $12$.
+
+**Counting with factors that are not prime**
+
+The counting formula is applied to a factorization whose bases are not all prime.
+
+Wrong working: $36 = 4 \\cdot 9$, two bases with exponent $1$, so $36$ has $(1 + 1)(1 + 1) = 4$ factors.
+
+Right working: break each base down to primes first. $4 = 2^2$ and $9 = 3^2$, so $36 = 2^2 \\cdot 3^2$ and it has $(2 + 1)(2 + 1) = 9$ factors: $1, 2, 3, 4, 6, 9, 12, 18, 36$.
+
+Why it happens: $4 \\cdot 9$ is a true factorization, and the formula looks as if it reads any exponents. It counts correctly only with primes; built from $4$ and $9$ alone, the factors $2$, $3$, $6$, $12$ and $18$ never appear.
+
+How to check: every base must be prime before the formula is used. The pair search also catches it: $36$ has the pairs $(1, 36)$, $(2, 18)$, $(3, 12)$, $(4, 9)$, $(6, 6)$, far more than four factors.`,
     before: ``,
     after: ``,
     link: '',
@@ -901,6 +1017,14 @@ export default function FactorsPage({seoData, sectionsContent,
           sectionsContent.obj12.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

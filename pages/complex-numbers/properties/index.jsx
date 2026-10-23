@@ -1909,13 +1909,13 @@ const sectionsContent={
   title: `Overview of Complex Number Properties`,
   content: `The properties of complex numbers fall into distinct categories based on their origin and nature.
 
-**Arithmetic properties** govern basic operations — addition, subtraction, multiplication, and division. These properties derive from the fact that complex numbers form what mathematicians call a field, an algebraic structure shared with the [real numbers](!/complex-numbers/algebraic-form) $\\mathbb{R}$ and rational numbers $\\mathbb{Q}$. Any rule that works for real arithmetic also works for complex arithmetic.
+**Arithmetic properties** govern basic operations — addition, subtraction, multiplication, and division. These properties derive from the fact that complex numbers form what mathematicians call a field, an algebraic structure shared with the [real numbers](!/complex-numbers/algebraic-form) $\\mathbb{R}$ and rational numbers $\\mathbb{Q}$. Every rule that follows from the field axioms — commutativity, associativity, distributivity, identities and inverses — works for complex arithmetic just as for real arithmetic.
 
 **Conjugate, modulus, and argument properties** are unique to complex numbers. The [conjugate](!/complex-numbers/complex-conjugate) $\\overline{z}$ reflects a number across the real axis. The [modulus](!/complex-numbers/absolute-value) $|z|$ measures distance from the origin. The [argument](!/complex-numbers/trigonometric-form) $\\arg(z)$ specifies direction. Each of these concepts carries its own set of rules describing how it behaves under arithmetic operations.
 
-**Algebraic closure** is a property that makes $\\mathbb{C}$ more powerful than $\\mathbb{R}$. Every polynomial equation has solutions in the complex numbers — a guarantee that real numbers cannot provide.
+**Algebraic closure** is a property that makes $\\mathbb{C}$ more powerful than $\\mathbb{R}$. Every non-constant polynomial equation has solutions in the complex numbers — a guarantee that real numbers cannot provide.
 
-**Ordering** is a property that $\\mathbb{C}$ lacks. Unlike real numbers, complex numbers cannot be arranged on a line from smallest to largest. The familiar comparisons "greater than" and "less than" do not apply.
+**Ordering** is a property that $\\mathbb{C}$ lacks. Unlike real numbers, complex numbers cannot be arranged on a line from smallest to largest in a way that respects addition and multiplication. The familiar comparisons "greater than" and "less than" do not apply.
 
 The sections that follow examine each category in detail.`,
   before: ``,
@@ -1929,7 +1929,7 @@ The sections that follow examine each category in detail.`,
 
 The rational numbers $\\mathbb{Q}$ form a field. So do the real numbers $\\mathbb{R}$. The complex numbers $\\mathbb{C}$ extend this pattern — they too satisfy every field axiom.
 
-Why does this matter? Because field structure ensures that algebraic techniques transfer seamlessly. Factoring, expanding, simplifying, solving equations — all the methods developed for real numbers work identically for complex numbers. No special cases, no exceptions, no hidden traps.
+Why does this matter? Because field structure ensures that algebraic techniques transfer seamlessly. Factoring, expanding, simplifying, solving equations — all the methods that rely only on the field rules work identically for complex numbers. Rules that depend on order or on real square roots, such as $x^2 \\geq 0$ or $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$, do not carry over.
 
 The field axioms divide into several groups:
 
@@ -1992,6 +1992,12 @@ Grouping does not affect the result.
 • Multiplicative inverse: For every $z \\neq 0$, there exists $z^{-1}$ such that $z \\cdot z^{-1} = 1$
 
 The multiplicative inverse is $z^{-1} = \\frac{\\overline{z}}{|z|^2}$.
+
+@academic[pitfall,aside:true,width:35%:Dividing by the modulus instead of its square
+For $z = 1 + i$, taking $z^{-1} = \\frac{1 - i}{\\sqrt{2}}$ divides by $|z|$, and then $(1 + i) \\cdot \\frac{1 - i}{\\sqrt{2}} = \\sqrt{2}$, not $1$. Dividing by $|z|^2 = 2$ gives $z^{-1} = \\frac{1 - i}{2}$.
+[Read more](!#pitfalls)]@
+
+The conjugate in the numerator is what makes the formula work. Multiplying $z$ by $\\overline{z}$ produces the real number $|z|^2$, so the product $z \\cdot z^{-1}$ becomes $\\frac{z \\cdot \\overline{z}}{|z|^2}$, a real number divided by itself. The inverse is found without solving any equation, only by conjugating and scaling.
 
 ## Distributivity
 
@@ -2070,6 +2076,10 @@ $$z - \\overline{z} = 2i \\cdot \\text{Im}(z)$$]@
 @academic[formula_callout:Properties of the Conjugate
 $$z \\cdot \\overline{z} = |z|^2$$]@
 
+@academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
+Expanding $(2 + 3i)(2 - 3i)$ to $4 - 9 = -5$ takes $(3i)^2$ to be $9$. In fact $(3i)^2 = 9i^2 = -9$, so the product is $4 - (-9) = 13 = |2 + 3i|^2$.
+[Read more](!#pitfalls)]@
+
 A complex number multiplied by its conjugate yields the square of its [modulus](!/complex-numbers/absolute-value) — always a non-negative real number. This property is essential for [division](!/complex-numbers/operations) of complex numbers.`,
   before: ``,
   after: ``,
@@ -2139,6 +2149,10 @@ $$|z_1 + z_2| \\leq |z_1| + |z_2|$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Adding the moduli of a sum
+Writing $|3 + 4i| = |3| + |4i| = 7$ treats the triangle inequality as an equality. The modulus of the sum is $\\sqrt{3^2 + 4^2} = 5$, which is less than $7$.
+[Read more](!#pitfalls)]@
+
 The distance from the origin to $z_1 + z_2$ never exceeds the sum of individual distances. Geometrically, one side of a triangle cannot exceed the sum of the other two sides.
 
 ## Reverse Triangle Inequality
@@ -2168,6 +2182,10 @@ $$\\arg(z_1 \\cdot z_2) = \\arg(z_1) + \\arg(z_2)$$
 
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Leaving the sum outside the principal range
+Adding $\\text{Arg}(-1) = \\pi$ and $\\text{Arg}(i) = \\frac{\\pi}{2}$ gives $\\frac{3\\pi}{2}$ for the product $-i$, outside $(-\\pi, \\pi]$. Subtracting $2\\pi$ gives the principal value $\\text{Arg}(-i) = -\\frac{\\pi}{2}$.
+[Read more](!#pitfalls)]@
 
 Multiplying complex numbers adds their arguments. Geometrically, multiplication rotates by the sum of the angles.
 
@@ -2280,7 +2298,7 @@ Then $i \\cdot i > 0$, so $i^2 > 0$, meaning $-1 > 0$. But this contradicts $1 >
 
 Then $-i > 0$, so $(-i)(-i) > 0$, meaning $i^2 > 0$, so $-1 > 0$. Same contradiction.
 
-Neither case works. The number $i$ cannot be consistently placed relative to $0$, and the same argument applies to every non-real complex number.
+Neither case works. The number $i$ cannot be consistently placed relative to $0$, and this single case already rules out any ordering of $\\mathbb{C}$ compatible with the field operations.
 
 ## What We Can Compare
 
@@ -2350,6 +2368,73 @@ Although $z_1 < z_2$ is meaningless for complex numbers, we can compare their [m
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Five mistakes come up again and again when these properties are put to work. Four are marked where they happen in the sections above; the square-root rule is the one the field section already warns about. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Multiplying square roots of negative numbers**
+
+The real rule $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$ is carried over to negative numbers, whose square roots are imaginary. The two minus signs under the roots are multiplied away before the roots are taken.
+
+Wrong working: $\\sqrt{-4} \\cdot \\sqrt{-9} = \\sqrt{(-4)(-9)} = \\sqrt{36} = 6$.
+
+Right working: take each root first, $\\sqrt{-4} = 2i$ and $\\sqrt{-9} = 3i$, then multiply: $2i \\cdot 3i = 6i^2 = -6$.
+
+Why it happens: the rule holds for every pair of non-negative reals, so it feels like a general rule of arithmetic. It depends on real square roots and is not one of the field axioms.
+
+How to check: write every square root of a negative number as a multiple of $i$ before doing anything else; the factor $i \\cdot i = -1$ then appears on its own.
+
+**Dividing by the modulus instead of its square**
+
+The inverse formula $z^{-1} = \\frac{\\overline{z}}{|z|^2}$ is copied with $|z|$ in the denominator instead of $|z|^2$.
+
+Wrong working: for $z = 1 + i$, $|z| = \\sqrt{2}$, so $z^{-1} = \\frac{1 - i}{\\sqrt{2}}$. Then $(1 + i) \\cdot \\frac{1 - i}{\\sqrt{2}} = \\frac{2}{\\sqrt{2}} = \\sqrt{2}$.
+
+Right working: $|z|^2 = 1^2 + 1^2 = 2$, so $z^{-1} = \\frac{1 - i}{2} = \\frac{1}{2} - \\frac{1}{2}i$. Check: $(1 + i) \\cdot \\frac{1 - i}{2} = \\frac{1 - i^2}{2} = \\frac{2}{2} = 1$.
+
+Why it happens: the modulus and its square look alike, and dividing $z$ by $|z|$ is a familiar step, the one that gives a number of length $1$ in the same direction.
+
+How to check: multiply $z$ by the proposed inverse. The product must be exactly $1$; a result equal to $|z|$, here $\\sqrt{2}$, shows that one factor of $|z|$ is missing.
+
+**Forgetting that i squared is −1**
+
+In $z \\cdot \\overline{z} = (a + bi)(a - bi)$, the difference-of-squares pattern gives $a^2 - (bi)^2$, and $(bi)^2$ is then taken to be $b^2$.
+
+Wrong working: $(2 + 3i)(2 - 3i) = 4 - 9 = -5$.
+
+Right working: $(2 + 3i)(2 - 3i) = 4 - (3i)^2 = 4 - 9i^2 = 4 + 9 = 13$. Since $|2 + 3i| = \\sqrt{4 + 9} = \\sqrt{13}$, this is $|2 + 3i|^2 = 13$, as the identity requires.
+
+Why it happens: the real pattern $(x + y)(x - y) = x^2 - y^2$ is applied with $y = 3$ instead of $y = 3i$.
+
+How to check: $z \\cdot \\overline{z}$ is never negative. A negative result such as $-5$ shows the slip at once; the answer must equal $a^2 + b^2$.
+
+**Adding the moduli of a sum**
+
+The modulus of a sum is replaced by the sum of the moduli, as if the triangle inequality were an equation. It only says that $|z_1 + z_2|$ is at most $|z_1| + |z_2|$.
+
+Wrong working: $|3 + 4i| = |3| + |4i| = 3 + 4 = 7$.
+
+Right working: $|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$. The sum of the moduli, $7$, is only an upper bound.
+
+Why it happens: the conjugate passes through sums and the modulus passes through products, so it is tempting to expect the modulus to pass through sums as well.
+
+How to check: picture the two numbers as arrows. Unless they point in the same direction, the arrow of the sum is shorter than the two arrows laid end to end. Here $3$ points right and $4i$ points up, so the result must be less than $7$.
+
+**Leaving the sum outside the principal range**
+
+The rule $\\arg(z_1 z_2) = \\arg(z_1) + \\arg(z_2)$ is applied to principal arguments, and the sum is reported as the principal argument of the product even when it falls outside the interval $(-\\pi, \\pi]$.
+
+Wrong working: $\\text{Arg}(-1) = \\pi$ and $\\text{Arg}(i) = \\frac{\\pi}{2}$, so $\\text{Arg}((-1) \\cdot i) = \\frac{3\\pi}{2}$.
+
+Right working: the sum $\\frac{3\\pi}{2}$ is a valid argument of $-i$, but it lies outside $(-\\pi, \\pi]$. Subtracting $2\\pi$ gives $\\text{Arg}(-i) = \\frac{3\\pi}{2} - 2\\pi = -\\frac{\\pi}{2}$.
+
+Why it happens: the rule holds for $\\arg$, which allows any multiple of $2\\pi$, while $\\text{Arg}$ must land in one fixed interval.
+
+How to check: compute the product, here $-i$, and locate it. It lies on the negative imaginary axis, where the principal argument is $-\\frac{\\pi}{2}$.`,
+      before:``,
+      after:``,
+      link:'',
     },
   
     faq: {
@@ -2488,13 +2573,13 @@ const schemas = {
     preface: 'The properties of $\\mathbb{C}$ fall into four groups: what it shares with the reals, what is new, what it guarantees, and what it gives up.',
     conclusionLabel: 'Takeaway',
     conclusionTitle: 'A trade',
-    conclusion: '$\\mathbb{C}$ gains roots for every polynomial and loses the ability to compare numbers by size.',
+    conclusion: '$\\mathbb{C}$ gains roots for every non-constant polynomial and loses any ordering compatible with its arithmetic.',
     root: { name: 'Properties of complex numbers', sub: '4 groups' },
     children: [
-      { id: 'field', name: 'Arithmetic', items: [ { label: 'Status', text: 'a field: same rules as $\\mathbb{R}$ and $\\mathbb{Q}$' } ] },
+      { id: 'field', name: 'Arithmetic', items: [ { label: 'Status', text: 'a field: same field rules as $\\mathbb{R}$ and $\\mathbb{Q}$' } ] },
       { id: 'new', name: '[Conjugate](!/complex-numbers/complex-conjugate), [modulus](!/complex-numbers/absolute-value), argument', items: [ { label: 'Status', text: 'unique to $\\mathbb{C}$' }, { label: 'Meaning', text: 'reflection, distance, direction' } ] },
-      { id: 'closure', name: 'Algebraic closure', items: [ { label: 'Status', text: 'every polynomial has roots in $\\mathbb{C}$' } ] },
-      { id: 'order', name: 'Ordering', items: [ { label: 'Status', text: 'no $<$ or $>$' } ], flag: true, warn: 'lacking in $\\mathbb{C}$' },
+      { id: 'closure', name: 'Algebraic closure', items: [ { label: 'Status', text: 'every non-constant polynomial has roots in $\\mathbb{C}$' } ] },
+      { id: 'order', name: 'Ordering', items: [ { label: 'Status', text: 'no $<$ or $>$ compatible with its arithmetic' } ], flag: true, warn: 'lacking in $\\mathbb{C}$' },
     ],
   };
 
@@ -2641,6 +2726,14 @@ export default function PropertiesPage({complexPropertyTree,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

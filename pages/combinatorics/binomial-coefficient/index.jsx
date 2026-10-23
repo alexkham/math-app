@@ -1102,6 +1102,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 import renderBinomialCurve from '@/app/utils/illustrations/combinatorics/binomial/binomialCurve'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1510,6 +1511,29 @@ export async function getStaticProps(){
 
 // formulas-optimized: v1 | 2026-06-11 | 10 callouts (obj1 ×2, obj2 ×7, obj4 ×1)
 // Skipped (empty link.url in data): Sum of Squares of Binomial Coefficients, Newton's Generalized Binomial Theorem
+// Concept introduction (section 1) — template F, collapse. Running instance:
+// C(4, 2) = 6 — the Pascal tool's identity state (row 4, entry 2, with its two
+// parents). Old obj1 text is kept in sectionsContent.obj1, unused; its four
+// formula widgets, the demo frame with its line, and three sentences are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBothTable = ciTableOpen(['row n', 'triangle entry 2', 'pairs from n items', 'count']) +
+  ciRow(['2', '1', '{1,2}', '1']) +
+  ciRow(['3', '1 + 2 = 3', '{1,2} {1,3} {2,3}', '3'], { shade: true }) +
+  ciRow(['4', '3 + 3 = 6', '{1,2} {1,3} {1,4} {2,3} {2,4} {3,4}', '6'], { last: true, color: '#2563EB', cols: [1, 3] }) +
+  '</tbody></table>'
+const ciSplitTable = ciTableOpen(['pairs from {1, 2, 3, 4}', 'which ones', 'how many']) +
+  ciRow(['containing 4', '{1,4} {2,4} {3,4}', '3 — pick 1 more of 3'], {}) +
+  ciRow(['not containing 4', '{1,2} {1,3} {2,3}', '3 — pick 2 of 3'], { shade: true }) +
+  ciRow(['all pairs', '', '3 + 3 = 6'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -1666,6 +1690,12 @@ $$\\sum_{i=k}^{n} \\binom{i}{k} = \\binom{n+1}{k+1}.$$
 
 A sum running down a diagonal of Pascal's triangle equals a single entry one row below.
 
+@academic[pitfall,aside:true,width:35%:Taking the entry from the last row of the sum
+Writing $\\sum_{i=2}^{5} \\binom{i}{2}$ as $\\binom{5}{3} = 10$ stops one row too early and gives half the actual total. The upper index is $n + 1$: $\\binom{6}{3} = 20$.
+[Read more](!#pitfalls)]@
+
+Take $k = 2$ and $n = 5$. The sum $\\binom{2}{2} + \\binom{3}{2} + \\binom{4}{2} + \\binom{5}{2} = 1 + 3 + 6 + 10 = 20$ adds the first four triangular numbers, which run down one diagonal of the triangle. The identity names this total as a single coefficient, so a long diagonal sum never has to be added term by term.
+
 Most of these identities admit both algebraic and combinatorial proofs. The combinatorial proofs typically use [double counting](!/combinatorics/counting-principles#double): the same set is enumerated by two different strategies, and the two expressions for its size are equated.
 `,
     before: ``,
@@ -1684,6 +1714,12 @@ $$\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}.$$]@
 
 @academic[rule:Pascal's Rule
 Each interior entry equals the sum of the two entries directly above it — the visual form of Pascal's rule.]@
+
+@academic[pitfall,aside:true,width:35%:Counting rows and positions from 1
+Calling the top $1$ row $1$ and the left edge position $1$ reads $\\binom{5}{2}$ off the row $1, 4, 6, 4, 1$ as $4$. Counting both from $0$, row $5$ is $1, 5, 10, 10, 5, 1$ and $\\binom{5}{2} = 10$.
+[Read more](!#pitfalls)]@
+
+To read a value off the triangle, locate it by two counts: the row, counted down from the single $1$ at the top, and the position within the row, counted from the left edge. Both counts follow the indices of $\\binom{n}{k}$, so a lookup in the triangle needs no formula at all. For small $n$ this is the quickest way to get a binomial coefficient, and it shows the neighbouring values at the same time.
 
 ## What the Triangle Encodes
 
@@ -1735,6 +1771,12 @@ $$\\binom{n}{k} = \\binom{n}{k, \\, n-k}.$$]@
 
 The multinomial coefficient counts the number of distinct arrangements of $n$ items in which $k_1$ are of type 1, $k_2$ are of type 2, and so on through $k_r$ items of type $r$. This is the same count that appears in [permutations with identical items](!/combinatorics/permutations#identical) — the two viewpoints (partitioning into groups versus arranging with repetition of types) refer to the same enumeration.
 
+@academic[pitfall,aside:true,width:35%:Using the multinomial for unnamed groups
+Using $\\binom{6}{2, 2, 2} = 90$ for the ways to split $6$ people into $3$ pairs counts each split $3! = 6$ times, once for every way of naming the pairs. The number of pairings is $90 / 6 = 15$.
+[Read more](!#pitfalls)]@
+
+In the group reading, each group has its own size and its own name: group $1$ receives $k_1$ items, group $2$ receives $k_2$ items, and so on. Splitting $6$ people into a team for Monday, a team for Tuesday and a team for Wednesday, two people each, is counted by $\\binom{6}{2, 2, 2} = \\frac{6!}{2!\\,2!\\,2!} = 90$. It is the same number as the arrangements of the letters $A, A, B, B, C, C$: line the people up and write under each one the letter of that person's team.
+
 The multinomial coefficient is also the natural coefficient in the [multinomial theorem](!/combinatorics/binomial-theorem), which expands $(x_1 + x_2 + \\cdots + x_r)^n$.
 `,
     before: ``,
@@ -1761,6 +1803,62 @@ The multinomial coefficient is also the natural coefficient in the [multinomial 
     content: `
 The page covered the formal definition and notation, the network of identities the coefficient satisfies, the Pascal&apos;s-triangle organization, and the multinomial generalization. The table below collects the formula, boundary values, and generalizations in one reference card.
 `,
+    before: ``,
+    between: ``,
+    after: ``,
+    link: '',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when working with binomial coefficients. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the k! in the denominator**
+
+The binomial coefficient is computed as the product $n(n-1)\\cdots(n-k+1)$ alone, without dividing by $k!$. That product counts ordered selections, in which the same group picked in a different order is counted again.
+
+Wrong working: the number of ways to choose $2$ of $50$ items is given as $50 \\cdot 49 = 2450$.
+
+Right working: $\\binom{50}{2} = \\frac{50!}{2!\\,48!} = \\frac{50 \\cdot 49}{2!} = \\frac{2450}{2} = 1225$.
+
+Why it happens: after the factorials cancel, the product on top looks like the whole computation, and the small $k!$ underneath is easy to forget. The same product without the division is the correct count of [permutations](!/combinatorics/permutations), so it looks familiar.
+
+How to check: try a case small enough to list. The pairs from $\\{1, 2, 3\\}$ are $\\{1, 2\\}$, $\\{1, 3\\}$ and $\\{2, 3\\}$: three of them, while $3 \\cdot 2 = 6$. A product without $k!$ is always $k!$ times too large.
+
+**Taking the entry from the last row of the sum**
+
+The hockey stick sum $\\sum_{i=k}^{n} \\binom{i}{k}$ is written as a coefficient from row $n$, where the sum stops, instead of from the row below it.
+
+Wrong working: $\\binom{2}{2} + \\binom{3}{2} + \\binom{4}{2} + \\binom{5}{2} = \\binom{5}{3} = 10$.
+
+Right working: the identity gives $\\binom{n+1}{k+1}$ with $n = 5$ and $k = 2$, so the sum is $\\binom{6}{3} = 20$. Adding directly confirms it: $1 + 3 + 6 + 10 = 20$.
+
+Why it happens: the upper limit of the sum is $n$, and that $n$ is copied into the answer without the shift. In the triangle, the total sits one row below the last term of the diagonal, a step that is easy to miss.
+
+How to check: add the first two terms by hand. $\\binom{2}{2} + \\binom{3}{2} = 1 + 3 = 4 = \\binom{4}{3}$, while the last row of that sum gives $\\binom{3}{3} = 1$.
+
+**Counting rows and positions from 1**
+
+Pascal's triangle is read with the top row as row $1$ and the left edge as position $1$. The triangle is indexed from $0$ in both directions, so this lands one row above and one position to the left of the intended entry.
+
+Wrong working: for $\\binom{5}{2}$, the fifth row from the top is $1, 4, 6, 4, 1$, its second number is $4$, and $\\binom{5}{2} = 4$ is reported.
+
+Right working: the top row is row $0$, so row $5$ is $1, 5, 10, 10, 5, 1$. Its positions are $k = 0, 1, \\ldots, 5$, and position $2$ is the third number: $\\binom{5}{2} = 10$.
+
+Why it happens: everyday counting starts at $1$, and the triangle carries no labels. The count from $0$ comes from the left edge $\\binom{n}{0} = 1$ and the single entry $\\binom{0}{0} = 1$ at the top.
+
+How to check: row $n$ has $n + 1$ entries, and its second entry is $\\binom{n}{1} = n$. Row $5$ must start $1, 5$; a row that starts $1, 4$ is row $4$.
+
+**Using the multinomial for unnamed groups**
+
+The multinomial coefficient is used to split items into groups of equal size that have no names. The coefficient counts splits into named groups, so each split into unnamed groups is counted once for every way of naming them.
+
+Wrong working: the number of ways to pair up $6$ people is given as $\\binom{6}{2, 2, 2} = \\frac{720}{8} = 90$.
+
+Right working: the $90$ counts splits into a first, a second and a third pair. Any one pairing can be labelled in $3! = 6$ ways, so the number of pairings is $\\frac{90}{6} = 15$.
+
+Why it happens: the formula has a slot for each group size, and nothing in it asks whether the groups have names. When the sizes are all different, the sizes themselves tell the groups apart and no division is needed, which makes the equal-size case easy to overlook.
+
+How to check: count directly. Person $1$ has $5$ possible partners, then the first person left over has $3$, and the last two form the final pair: $5 \\cdot 3 \\cdot 1 = 15$.`,
     before: ``,
     between: ``,
     after: ``,
@@ -1885,6 +1983,12 @@ const schemas = {
     extra: [{ x: -1, label: 'x = \u22121: value 1' }, { x: 2.5, label: 'x = 5/2: value 15/8' }],
   };
 
+  const conceptIntroFigures = {
+    identity: pascalTriangleDiagrams.identity,
+    bothTable: ciBothTable,
+    splitTable: ciSplitTable,
+  };
+
   const demoUnits = {
     symmetry: demoUnitFrame({
       svg: pascalTriangleDiagrams.symmetry,
@@ -1903,6 +2007,7 @@ const schemas = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1922,9 +2027,91 @@ const schemas = {
     }
    }
 
-export default function BinomialCoefficientPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function BinomialCoefficientPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (collapse).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'triangle',
+        lead: `One account is a triangle of numbers built by adding.`,
+        content: `Start with $1$ at the top. Each row begins and ends with $1$, and every number inside is the sum of the two just above it. Row $4$ reads $1, 4, 6, 4, 1$, and its middle entry $6$ comes from $3 + 3$ in row $3$. Nothing about choosing or counting is involved — only adding.`,
+        visual: ciSvg('identity'),
+        caption: `The highlighted cell is row $4$, entry $2$, holding $6$; the two cells feeding it are $3$ and $3$. The same state is on the [Pascal's triangle explorer](!/combinatorics/visual-tools/pascal-triangle).`,
+      },
+      {
+        id: 'second',
+        lead: `The other account is a count: how many ways to choose k items from n.`,
+        content: `Take $4$ items, numbered $1$ to $4$, and ask how many different pairs can be picked when order does not matter — the [combinations](!/combinatorics/combinations) of $2$ from $4$. This is a question about groups of objects, with no triangle and no adding in sight.`,
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Both accounts give the same numbers.`,
+        content: [
+          `Put the triangle's entry and the actual list of pairs side by side for a few rows.`,
+          ciTable('bothTable'),
+          `Row by row the two columns agree: $1$, $3$, $6$. Listing the pairs of $\\{1, 2, 3, 4\\}$ gives exactly six, the number the triangle produced by adding $3 + 3$.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree, because counting pairs splits the same way the triangle adds.`,
+        content: [
+          `Sort the pairs by whether they contain the last item, $4$.`,
+          ciTable('splitTable'),
+          `Pairs with $4$ need one more item from the other three: $3$ ways. Pairs without $4$ are pairs from three items: $3$ ways. That is the triangle's rule — an entry is the sum of the two above it — read as a statement about choosing. The two accounts were never separate: the triangle is the table of these counts.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `For non-negative integers $n$ and $k$ with $0 \\le k \\le n$, the [binomial coefficient](!/combinatorics/definitions#binomial_coefficient) $\\binom{n}{k}$ is the number that both accounts describe — entry $k$ of row $n$, the number of ways to choose $k$ of $n$ items — and it equals`,
+        formula: `@academic[formula_callout:Binomial Coefficient
+$$\\binom{n}{k} = \\frac{n!}{k!\\,(n-k)!}.$$
+/combinatorics/formulas#binomial_coefficient]@`,
+        footer: `@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@`,
+      },
+      {
+        id: 'kind',
+        lead: `A binomial coefficient is a whole number, and its formula extends to a polynomial.`,
+        content: [
+          `For whole-number $n$ and $k$ it is a count, so always a non-negative integer. Boundary cases follow directly: $\\binom{n}{0} = \\binom{n}{n} = 1$ for every $n \\ge 0$, and $\\binom{n}{k} = 0$ whenever $k > n$.`,
+          `The formula itself does not need $n$ to be a whole number:`,
+          `@academic[formula_callout:Generalized Binomial Coefficient
+$$\\binom{x}{k} = \\frac{x(x-1)(x-2) \\cdots (x-k+1)}{k!}, \\quad k \\in \\mathbb{Z}_{\\ge 0}, \\; x \\in \\mathbb{R} \\text{ (or } \\mathbb{C}\\text{)}.$$
+/combinatorics/formulas#generalized_binomial_coefficient]@`,
+          `@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@`,
+          `Here $x$ can be any real or complex number and $k$ remains a non-negative integer. The numerator is a polynomial of degree $k$ in $x$, so $\\binom{x}{k}$ is itself a polynomial in $x$. This is the form that appears in Newton's generalized binomial theorem, where the upper index is no longer required to be a non-negative integer.`,
+          <div key={'unit-generalizedC2'} dangerouslySetInnerHTML={{ __html: demoUnits.generalizedC2 }} />,
+          `For any k the curve is a polynomial of degree k, and it vanishes at x = 0, 1, ..., k - 1: fewer than k items leave no way to choose k.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Reach for the triangle, the count or the formula depending on the job.`,
+        content: [
+          `The triangle is quickest for small $n$ and makes identities visible — symmetry, row sums, the adding rule. The count is what gives a binomial coefficient its meaning in a problem. The factorial formula is the one to compute with once $n$ is large: no one builds row $50$ by hand, but $\\binom{50}{2} = \\frac{50 \\cdot 49}{2} = 1225$ takes a line.`,
+          `@academic[pitfall,aside:true,width:35%:Dropping the k! in the denominator
+Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so every pair is counted twice. Dividing by $2! = 2$ gives $\\binom{50}{2} = 1225$.
+[Read more](!#pitfalls)]@`,
+          `The factorial formula cancels down to a short product before any large factorial is computed: $\\frac{n!}{k!\\,(n-k)!} = \\frac{n(n-1)\\cdots(n-k+1)}{k!}$, with $k$ factors on top. The top counts the ways to pick $k$ items one after another, as a first, a second and so on. The bottom counts the orders in which the same $k$ items can be picked, which is why it appears whenever order does not matter.`,
+          `To evaluate the factorials in this formula for specific values, use the [factorial calculator](!/calculators/factorial-calculator).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the identities that connect binomial coefficients, Pascal's triangle in detail, and the multinomial coefficient; the [binomial theorem](!/combinatorics/binomial-theorem) page shows the same numbers as the coefficients of $(a + b)^n$.`,
+      },
+    ],
+  }
 
   const genericSections=[
     // {
@@ -1940,9 +2127,7 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-generalizedC2'} dangerouslySetInnerHTML={{ __html: demoUnits.generalizedC2 }} />,
-          `For any k the curve is a polynomial of degree k, and it vanishes at x = 0, 1, ..., k - 1: fewer than k items leave no way to choose k.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1992,6 +2177,14 @@ export default function BinomialCoefficientPage({seoData, sectionsContent, intro
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     {

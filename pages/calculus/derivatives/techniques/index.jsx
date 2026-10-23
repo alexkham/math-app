@@ -359,9 +359,13 @@ Given an equation relating $x$ and $y$—such as $x^2 + y^2 = 25$—implicit dif
 
 The method: differentiate both sides of the equation with respect to $x$. Every term involving only $x$ is differentiated normally. Every term involving $y$ is differentiated using the [chain rule](!/calculus/derivatives/rules), treating $y$ as a function of $x$. This introduces a factor of $\\frac{dy}{dx}$ wherever $y$ appears. After differentiation, solve the resulting equation algebraically for $\\frac{dy}{dx}$.
 
-For $x^2 + y^2 = 25$: differentiating gives $2x + 2y\\frac{dy}{dx} = 0$. Solving yields $\\frac{dy}{dx} = -\\frac{x}{y}$. The result depends on both $x$ and $y$—this is typical and expected. The formula gives the slope at any point $(x, y)$ on the curve without choosing a branch.
+For $x^2 + y^2 = 25$: differentiating gives $2x + 2y\\frac{dy}{dx} = 0$. Solving yields $\\frac{dy}{dx} = -\\frac{x}{y}$. The result depends on both $x$ and $y$—this is typical and expected. The formula gives the slope at any point $(x, y)$ on the curve with $y \\neq 0$, without choosing a branch.
 
-The technique works because the equation defines $y$ as a function of $x$ locally (by the Implicit Function Theorem), even when no global explicit formula exists. Differentiating the equation preserves the relationship while extracting the rate of change. The table below collects this procedure as a four-step recipe.
+@academic[pitfall,aside:true,width:35%:Dropping the dy/dx factor
+Differentiating $y^2$ as $2y$ turns $x^2 + y^2 = 25$ into $2x + 2y = 0$, an equation with no $\\frac{dy}{dx}$ to solve for. With $\\frac{d}{dx}[y^2] = 2y\\frac{dy}{dx}$, the slope is $-\\frac{x}{y}$, which is $-\\frac{3}{4}$ at $(3, 4)$.
+[Read more](!#pitfalls)]@
+
+The technique works because the equation defines $y$ as a function of $x$ locally (by the Implicit Function Theorem, near points where $\\frac{\\partial F}{\\partial y} \\neq 0$ for the equation written as $F(x, y) = 0$), even when no global explicit formula exists. Differentiating the equation preserves the relationship while extracting the rate of change. The table below collects this procedure as a four-step recipe.
 `,
     before: ``,
     after: ``,
@@ -412,6 +416,12 @@ Implicit differentiation extends beyond circles and ellipses. Any equation relat
 
 Tangent lines to implicitly defined curves follow directly. For $x^3 + y^3 = 6xy$ (the folium of Descartes), implicit differentiation gives $\\frac{dy}{dx} = \\frac{6y - 3x^2}{3y^2 - 6x}$. Evaluating at a specific point on the curve produces the tangent slope there.
 
+@academic[pitfall,aside:true,width:35%:Forgetting the product rule on xy
+Differentiating $6xy$ as $6x\\frac{dy}{dx}$ gives $\\frac{dy}{dx} = \\frac{x^2}{2x - y^2}$, a slope of $-3$ at the point $(3, 3)$ of the folium. With $\\frac{d}{dx}[6xy] = 6y + 6x\\frac{dy}{dx}$, the slope there is $-1$.
+[Read more](!#pitfalls)]@
+
+In the folium, the right side $6xy$ is a product of two functions of $x$: the factor $x$ itself and the factor $y$, which depends on $x$ through the curve. The left side is differentiated term by term, $x^3$ to $3x^2$ and $y^3$ to $3y^2\\frac{dy}{dx}$. Once both sides are differentiated, every $\\frac{dy}{dx}$ term is collected on one side, and the slope formula above follows.
+
 Higher-order derivatives can be found implicitly as well. After finding $\\frac{dy}{dx}$, differentiate the result implicitly again with respect to $x$—every occurrence of $\\frac{dy}{dx}$ is itself a function of $x$, and the first-derivative expression can be substituted back in. The algebra is heavier, but the method is systematic.
 
 Related rates problems are implicit differentiation with respect to time $t$ rather than $x$. If a relationship holds among several quantities that all vary with $t$, differentiating implicitly with respect to $t$ connects their rates of change. This application is developed in [graph analysis](!/calculus/derivatives/graph-analysis).
@@ -436,6 +446,10 @@ $$y = f(x) \\implies \\ln y = \\ln f(x) \\implies \\frac{y'}{y} = \\frac{d}{dx}[
 
 For $y = x^x$: taking $\\ln$ gives $\\ln y = x \\ln x$. Differentiating: $\\frac{1}{y}\\frac{dy}{dx} = \\ln x + 1$. Solving: $\\frac{dy}{dx} = x^x(\\ln x + 1)$. No standard rule handles $x^x$ directly—the base and exponent both vary. Logarithmic differentiation is the natural approach.
 
+@academic[pitfall,aside:true,width:35%:Forgetting to multiply by y
+Stopping at $\\frac{1}{y}\\frac{dy}{dx} = \\ln x + 1$ gives $\\ln x + 1$ as the derivative of $x^x$, about $1.69$ at $x = 2$. Multiplying by $y = x^x$ gives $x^x(\\ln x + 1) \\approx 6.77$ there.
+[Read more](!#pitfalls)]@
+
 The technique also simplifies expressions like $y = \\frac{x^2 \\sqrt{x+1}}{(x-3)^4}$, where the product and quotient rules together would produce unwieldy algebra. After taking $\\ln$, the expression becomes $\\ln y = 2\\ln x + \\frac{1}{2}\\ln(x+1) - 4\\ln(x-3)$, and differentiating this sum is straightforward.
 `,
     before: ``,
@@ -454,9 +468,13 @@ $$(f^{-1})'(b) = \\frac{1}{f'(a)} \\quad \\text{where } b = f(a)$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-provided $f'(f^{-1}(x)) \\neq 0$. The derivative of the inverse is the reciprocal of the derivative of the original, evaluated at the corresponding point.
+provided $f'(a) \\neq 0$. The derivative of the inverse is the reciprocal of the derivative of the original, evaluated at the corresponding point.
 
 The derivation uses implicit differentiation. If $y = f^{-1}(x)$, then $f(y) = x$. Differentiating both sides with respect to $x$: $f'(y) \\cdot \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{f'(y)}$.
+
+@academic[pitfall,aside:true,width:35%:Evaluating the derivative at the wrong point
+Using $\\frac{1}{f'(b)}$ for $f(x) = e^x$ and $b = 2$ gives $(f^{-1})'(2) = \\frac{1}{e^2} \\approx 0.135$. The formula needs $a = f^{-1}(2) = \\ln 2$, and $(f^{-1})'(2) = \\frac{1}{e^{\\ln 2}} = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
 
 Geometrically, the graphs of $f$ and $f^{-1}$ are reflections across the line $y = x$. If $f$ has slope $m$ at a point, $f^{-1}$ has slope $1/m$ at the reflected point. A horizontal tangent on $f$ (slope $0$) corresponds to a vertical tangent on $f^{-1}$ (slope undefined), which is why $f'(f^{-1}(x)) \\neq 0$ is required.
 `,
@@ -499,6 +517,12 @@ provided $\\frac{dx}{dt} \\neq 0$. Each coordinate is differentiated with respec
 
 For a circle parametrized by $x = \\cos t$, $y = \\sin t$: $\\frac{dx}{dt} = -\\sin t$ and $\\frac{dy}{dt} = \\cos t$, so $\\frac{dy}{dx} = \\frac{\\cos t}{-\\sin t} = -\\cot t$. At $t = \\pi/4$, the slope is $-1$.
 
+@academic[pitfall,aside:true,width:35%:Flipping the parametric ratio
+Dividing $\\frac{dx}{dt}$ by $\\frac{dy}{dt}$ gives $\\frac{-\\sin t}{\\cos t} = -\\tan t$, which is $-\\frac{1}{\\sqrt{3}} \\approx -0.577$ at $t = \\frac{\\pi}{6}$. The slope is $\\frac{dy/dt}{dx/dt} = -\\cot t = -\\sqrt{3} \\approx -1.732$.
+[Read more](!#pitfalls)]@
+
+In the circle example the two derivatives play different roles. The rate $\\frac{dy}{dt} = \\cos t$ measures how fast the point rises, and $\\frac{dx}{dt} = -\\sin t$ how fast it moves sideways; the slope is the rise per unit of sideways motion. Near $t = \\pi/2$, at the top of the circle, $\\frac{dy}{dt}$ is close to $0$ and the tangent is almost flat.
+
 The second derivative of a parametric curve is not $\\frac{d^2y/dt^2}{d^2x/dt^2}$. The correct formula is
 
 @academic[formula_callout:Parametric Second Derivative
@@ -521,7 +545,7 @@ Each technique targets a specific structural pattern.
 
 Implicit differentiation applies when $x$ and $y$ are tangled in an equation that is difficult or impossible to solve for $y$—circles, ellipses, higher-degree curves, and any relation not naturally in $y = f(x)$ form. It also applies in related rates, where multiple quantities depend on time.
 
-Logarithmic differentiation applies when the expression involves products of many factors, quotients with complex structure, or—most distinctively—variable exponents like $x^x$, $(\\sin x)^{\\cos x}$, or $x^{\\ln x}$. If the exponent contains the variable, logarithmic differentiation is typically the only viable approach.
+Logarithmic differentiation applies when the expression involves products of many factors, quotients with complex structure, or—most distinctively—variable exponents like $x^x$, $(\\sin x)^{\\cos x}$, or $x^{\\ln x}$. If the exponent contains the variable, logarithmic differentiation is the standard approach; rewriting $f^g$ as $e^{g \\ln f}$ is the same idea in another form.
 
 The inverse function derivative applies when differentiating $f^{-1}$ and the derivative of $f$ is known. It is the standard route to [inverse trigonometric](!/calculus/derivatives/special) and inverse hyperbolic derivatives.
 
@@ -537,6 +561,87 @@ These techniques are not mutually exclusive. A single problem may require implic
     title: `All Four Techniques as the Chain Rule`,
     content: `
 Each technique on this page looks different, but all four are expressions of the same underlying rule — the [chain rule](!/calculus/derivatives/rules) applied through a layer that hides the direct y-as-function-of-x form. The table below names that layer for each technique and the chain-rule form it produces.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `
+Six mistakes cause most wrong answers with these techniques. Five of them are marked where they happen in the sections above; the sixth, the parametric second derivative, is the one the section on parametric differentiation warns against. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the dy/dx factor**
+
+Every term with $y$ is differentiated as if $y$ were the variable, so the chain-rule factor $\\dfrac{dy}{dx}$ never appears.
+
+Wrong working: differentiating $x^2 + y^2 = 25$ gives $2x + 2y = 0$. There is no $\\dfrac{dy}{dx}$ left to solve for, and the equation even fails at the point $(3, 4)$ of the circle: $6 + 8 \\neq 0$.
+
+Right working: $y$ is a function of $x$, so $\\dfrac{d}{dx}[y^2] = 2y\\dfrac{dy}{dx}$. Then $2x + 2y\\dfrac{dy}{dx} = 0$ and $\\dfrac{dy}{dx} = -\\dfrac{x}{y}$; at $(3, 4)$ the slope is $-\\dfrac{3}{4}$.
+
+Why it happens: in ordinary differentiation the letter in the expression is the variable. Here $x$ is the variable, and $y$ only looks like one.
+
+How to check: where one branch can be solved for $y$, compare. On the upper half of the circle $y = \\sqrt{25 - x^2}$, and $\\dfrac{dy}{dx} = -\\dfrac{x}{\\sqrt{25 - x^2}}$, which is $-\\dfrac{3}{4}$ at $x = 3$.
+
+**Forgetting the product rule on xy**
+
+A term that multiplies $x$ and $y$, like $6xy$ in the folium $x^3 + y^3 = 6xy$, is differentiated as a constant times $y$, as though $x$ did not change.
+
+Wrong working: $\\dfrac{d}{dx}[6xy] = 6x\\dfrac{dy}{dx}$. Then $3x^2 + 3y^2\\dfrac{dy}{dx} = 6x\\dfrac{dy}{dx}$ and $\\dfrac{dy}{dx} = \\dfrac{x^2}{2x - y^2}$, which at $(3, 3)$ gives $\\dfrac{9}{6 - 9} = -3$.
+
+Right working: $6xy$ is a product of two functions of $x$, so $\\dfrac{d}{dx}[6xy] = 6y + 6x\\dfrac{dy}{dx}$. Then $3x^2 + 3y^2\\dfrac{dy}{dx} = 6y + 6x\\dfrac{dy}{dx}$ and $\\dfrac{dy}{dx} = \\dfrac{6y - 3x^2}{3y^2 - 6x}$; at $(3, 3)$ the slope is $\\dfrac{18 - 27}{27 - 18} = -1$.
+
+Why it happens: the $y$ in the term draws all the attention, because it is the part that needs the chain rule, and the $x$ beside it is treated as a coefficient.
+
+How to check: the folium does not change when $x$ and $y$ are swapped, so it is symmetric about the line $y = x$. At the point $(3, 3)$ on that line, the tangent must therefore have slope $1$ or $-1$; the value $-3$ cannot be right.
+
+**Forgetting to multiply by y**
+
+After the logarithm is differentiated, the result is the derivative of $\\ln y$, not of $y$. The last step, multiplying through by $y$ and writing $y$ in terms of $x$, is left out.
+
+Wrong working: from $\\ln y = x\\ln x$, $\\dfrac{1}{y}\\dfrac{dy}{dx} = \\ln x + 1$, so $\\dfrac{dy}{dx} = \\ln x + 1$.
+
+Right working: multiply both sides by $y$. $\\dfrac{dy}{dx} = y(\\ln x + 1) = x^x(\\ln x + 1)$.
+
+Why it happens: the differentiated right side $\\ln x + 1$ looks like a finished answer, and the $\\dfrac{1}{y}$ in front of $\\dfrac{dy}{dx}$ on the left is easy to lose.
+
+How to check: compare with a difference quotient at one point. At $x = 2$, $\\dfrac{2.01^{2.01} - 1.99^{1.99}}{0.02} \\approx 6.77$, which matches $4(\\ln 2 + 1) \\approx 6.77$ and not $\\ln 2 + 1 \\approx 1.69$.
+
+**Evaluating the derivative at the wrong point**
+
+In $(f^{-1})'(b) = \\dfrac{1}{f'(a)}$, the derivative of $f$ is evaluated at $b$, the input of $f^{-1}$, instead of at $a = f^{-1}(b)$.
+
+Wrong working: for $f(x) = e^x$, $f'(x) = e^x$, so $(f^{-1})'(2) = \\dfrac{1}{f'(2)} = \\dfrac{1}{e^2} \\approx 0.135$.
+
+Right working: first find $a$ with $f(a) = 2$, which is $a = \\ln 2$. Then $(f^{-1})'(2) = \\dfrac{1}{f'(\\ln 2)} = \\dfrac{1}{e^{\\ln 2}} = \\dfrac{1}{2}$.
+
+Why it happens: the formula is remembered as one over the derivative, and the point on the left side is carried over without being converted.
+
+How to check: when $f^{-1}$ is known, differentiate it directly. Here $f^{-1}(x) = \\ln x$ and $(\\ln x)' = \\dfrac{1}{x}$, which is $\\dfrac{1}{2}$ at $x = 2$.
+
+**Flipping the parametric ratio**
+
+The slope of a parametric curve is computed as $\\dfrac{dx/dt}{dy/dt}$, with the two parameter derivatives in the wrong order.
+
+Wrong working: for $x = \\cos t$, $y = \\sin t$, $\\dfrac{dx/dt}{dy/dt} = \\dfrac{-\\sin t}{\\cos t} = -\\tan t$; at $t = \\dfrac{\\pi}{6}$ this is $-\\dfrac{1}{\\sqrt{3}} \\approx -0.577$.
+
+Right working: $\\dfrac{dy}{dx} = \\dfrac{dy/dt}{dx/dt} = \\dfrac{\\cos t}{-\\sin t} = -\\cot t$; at $t = \\dfrac{\\pi}{6}$ the slope is $-\\sqrt{3} \\approx -1.732$.
+
+Why it happens: both orders look like a ratio of two derivatives. At $t = \\dfrac{\\pi}{4}$, the point used in the section, the two orders even agree, both giving $-1$, so a check there catches nothing.
+
+How to check: the tangent to a circle is perpendicular to the radius. At $t = \\dfrac{\\pi}{6}$ the point is $\\left(\\dfrac{\\sqrt{3}}{2}, \\dfrac{1}{2}\\right)$, the radius has slope $\\dfrac{1/2}{\\sqrt{3}/2} = \\dfrac{1}{\\sqrt{3}}$, and the perpendicular slope is $-\\sqrt{3}$.
+
+**Dividing the second derivatives**
+
+The second derivative of a parametric curve is computed by dividing $\\dfrac{d^2y}{dt^2}$ by $\\dfrac{d^2x}{dt^2}$, copying the pattern of the first derivative.
+
+Wrong working: for $x = \\cos t$, $y = \\sin t$, $\\dfrac{d^2y/dt^2}{d^2x/dt^2} = \\dfrac{-\\sin t}{-\\cos t} = \\tan t$, which is $1$ at $t = \\dfrac{\\pi}{4}$.
+
+Right working: differentiate $\\dfrac{dy}{dx} = -\\cot t$ with respect to $t$, which gives $\\csc^2 t$, then divide by $\\dfrac{dx}{dt} = -\\sin t$. So $\\dfrac{d^2y}{dx^2} = -\\dfrac{1}{\\sin^3 t}$, which is $-2\\sqrt{2} \\approx -2.83$ at $t = \\dfrac{\\pi}{4}$.
+
+Why it happens: the first-derivative formula looks like a cancellation of $dt$, and the same cancellation is expected one order higher, where it no longer holds.
+
+How to check: the sign of the second derivative gives the concavity. At $t = \\dfrac{\\pi}{4}$ the point $\\left(\\dfrac{\\sqrt{2}}{2}, \\dfrac{\\sqrt{2}}{2}\\right)$ is on the upper half of the circle, which bends downward, so the second derivative must be negative; $\\tan t = 1$ is positive.
 `,
     before: ``,
     after: ``,
@@ -849,6 +954,14 @@ export default function PageTemplate({differentiationTechniqueTree,
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',
@@ -1009,7 +1122,7 @@ export default function PageTemplate({differentiationTechniqueTree,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Derivation Techniques</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Differentiation Techniques</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

@@ -1100,6 +1100,10 @@ For $(23 - 47) \\bmod 10$: reduce $23$ to $3$ and $47$ to $7$. Subtract: $3 - 7 
 
 The alternative is to compute the full subtraction first: $23 - 47 = -24$, then $-24 \\bmod 10 = 6$ (using the floored convention). Either route gives $6$.
 
+@academic[pitfall,aside:true,width:35%:Ignoring the minus sign
+Reducing $-24$ as if it were $24$ gives $-24 \\bmod 10 = 4$, yet $-24 - 4 = -28$ is not a multiple of $10$. Going down to $-30$ gives $-24 = 10 \\cdot (-3) + 6$, so the result is $6$.
+[Read more](!#pitfalls)]@
+
 The negative intermediate result is not an error — it reflects a position on the number cycle that has wrapped past zero in the backward direction. Adding $n$ translates it to its equivalent position in $\\{0, 1, \\ldots, n-1\\}$.`,
   before: ``,
   after: ``,
@@ -1162,9 +1166,13 @@ Powers of $2 \\bmod 7$ produce the sequence: $2, 4, 1, 2, 4, 1, 2, 4, 1, \\ldots
 
 To compute $2^{100} \\bmod 7$, divide the exponent by the cycle length: $100 = 3 \\cdot 33 + 1$. The remainder is $1$, so $2^{100}$ lands at the same position as $2^1$ in the cycle. The answer is $2$.
 
+@academic[pitfall,aside:true,width:35%:Reducing the exponent by the modulus
+Reducing the exponent of $2^{100}$ modulo $7$ gives $100 \\bmod 7 = 2$ and $2^2 = 4$. The powers repeat every $3$ steps, not every $7$: $100 \\bmod 3 = 1$, so $2^{100} \\bmod 7 = 2$.
+[Read more](!#pitfalls)]@
+
 Powers of $3 \\bmod 10$ cycle through $\\{3, 9, 7, 1\\}$ with length $4$. For $3^{75} \\bmod 10$: $75 = 4 \\cdot 18 + 3$, so $3^{75}$ matches $3^3 = 7$. The answer is $7$.
 
-The cycle always begins once the remainder $1$ appears (assuming it does), because $a^k \\equiv 1$ implies $a^{k+j} \\equiv a^j$ for any $j$ — the sequence restarts.`,
+The cycle always closes once the remainder $1$ appears (assuming it does), because $a^k \\equiv 1$ implies $a^{k+j} \\equiv a^j$ for any $j$ — the sequence restarts.`,
   before: ``,
   after: ``,
   link: '',
@@ -1194,6 +1202,10 @@ Finding the last digit of a large [power](!/algebra/powers) reduces to modular e
 Find the last digit of $7^{100}$. The powers of $7 \\bmod 10$ cycle: $7, 9, 3, 1, 7, 9, 3, 1, \\ldots$ with period $4$.
 
 Divide the exponent by the cycle length: $100 = 4 \\cdot 25 + 0$. A remainder of $0$ means the exponent aligns with the end of a full cycle — the position of $7^4$, whose last digit is $1$.
+
+@academic[pitfall,aside:true,width:35%:Reading remainder 0 as the first place
+Reading the remainder $0$ in $20 = 4 \\cdot 5 + 0$ as the first place of the cycle $2, 4, 8, 6$ gives $2$ as the last digit of $2^{20}$. A remainder of $0$ points to the last place, so the last digit is $6$.
+[Read more](!#pitfalls)]@
 
 Find the last digit of $3^{75}$. The powers of $3 \\bmod 10$ cycle: $3, 9, 7, 1$ with period $4$. Divide: $75 = 4 \\cdot 18 + 3$. The remainder $3$ points to the third position in the cycle: $7$.
 
@@ -1225,6 +1237,12 @@ The same logic handles backward calculations. If it is $3{:}00$ now, what time w
 Today is Wednesday (day $3$). What day is it in $100$ days? Compute $(3 + 100) \\bmod 7 = 103 \\bmod 7$. Divide: $103 = 7 \\cdot 14 + 5$. Day $5$ is Friday.
 
 January $1$ is a Monday (day $1$). What day is March $15$? Count the days: $31$ (remaining in January) $+ 28$ (February) $+ 14$ (first $14$ days of March) $= 73$ days later. Compute $(1 + 73) \\bmod 7 = 74 \\bmod 7$. Divide: $74 = 7 \\cdot 10 + 4$. Day $4$ is Thursday.
+
+@academic[pitfall,aside:true,width:35%:Counting the days off by one
+Counting $31 - 1 = 30$ days for the rest of January gives $72$ days and $(1 + 72) \\bmod 7 = 3$, a Wednesday. January 1 to February 1 is $31$ days, so the count is $73$ and March 15 is a Thursday.
+[Read more](!#pitfalls)]@
+
+In date problems the reduction modulo $7$ is the easy step; the work lies in the day count. The number added to the starting day is the number of days that pass between the two dates, and it is built from the month lengths before any reduction is done.
 
 Larger spans work identically. What day is it $1{,}000$ days from a Tuesday (day $2$)? Compute $(2 + 1000) \\bmod 7 = 1002 \\bmod 7$. Divide: $1002 = 7 \\cdot 143 + 1$. Day $1$ is Monday.`,
   before: ``,
@@ -1275,6 +1293,74 @@ To check modular results with your own numbers, use the [modulo calculator](!/ca
       link:'',
       link:'',
   
+    },
+
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Five mistakes account for many of the wrong answers in modular arithmetic. Four are marked where they happen in the sections above; dividing the remainders is the one the division section already shows. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Ignoring the minus sign**
+
+A negative number is reduced by its size alone, as if $-24$ and $24$ had the same remainder. The sign is dropped, or put back in front of the remainder of the positive number.
+
+Wrong working: $24 = 10 \\cdot 2 + 4$, so $-24 \\bmod 10 = 4$.
+
+Right working: the remainder $r$ must satisfy $-24 = 10q + r$ with $0 \\leq r < 10$. The multiple of $10$ at or below $-24$ is $-30$, so $-24 = 10 \\cdot (-3) + 6$ and $-24 \\bmod 10 = 6$. The route through remainders agrees: $3 - 7 = -4$ and $-4 + 10 = 6$.
+
+Why it happens: for positive numbers the remainder is what is left after taking away multiples of $n$, and that habit is carried over to negative numbers, where the step goes down to the next multiple, away from zero.
+
+How to check: the number minus the result must be a multiple of $n$. $-24 - 6 = -30$ passes; $-24 - 4 = -28$ fails.
+
+**Reducing the exponent by the modulus**
+
+The base of a power may be replaced by its remainder, and the same move is made on the exponent: it is reduced modulo $n$ instead of modulo the length of the cycle of powers.
+
+Wrong working: for $2^{100} \\bmod 7$, $100 = 7 \\cdot 14 + 2$, so $2^{100} \\equiv 2^2 = 4 \\pmod{7}$.
+
+Right working: the powers of $2$ modulo $7$ run $2, 4, 1$ and repeat, so the cycle length is $3$. Since $100 = 3 \\cdot 33 + 1$, $2^{100} \\equiv 2^1 = 2 \\pmod{7}$.
+
+Why it happens: the core principle allows any number in a sum or a product to be replaced by its remainder, and the exponent looks like one more such number. But the exponent counts multiplications, and the count repeats with the cycle, not with $n$.
+
+How to check: try a small exponent that can be worked out in full. $2^7 = 128 = 7 \\cdot 18 + 2$, so $2^7 \\bmod 7 = 2$, while reducing the exponent $7$ modulo $7$ would give $2^0 = 1$.
+
+**Dividing the remainders**
+
+A quotient is reduced by reducing the dividend and the divisor first and then dividing, as is done for sums, differences and products.
+
+Wrong working: for $(12 \\div 4) \\bmod 5$, $12 \\bmod 5 = 2$ and $4 \\bmod 5 = 4$, so the answer is $\\frac{2}{4} = 0.5$.
+
+Right working: divide before reducing, $12 \\div 4 = 3$ and $3 \\bmod 5 = 3$. Working only with remainders, dividing by $4$ means multiplying by the inverse of $4$: $4 \\cdot 4 = 16 \\equiv 1 \\pmod{5}$, so the inverse is $4$ and $2 \\cdot 4 = 8 \\equiv 3 \\pmod{5}$.
+
+Why it happens: addition, subtraction and multiplication all allow reducing first, so division is expected to work the same way.
+
+How to check: multiply back. The answer times the divisor must be congruent to the dividend: $3 \\cdot 4 = 12 \\equiv 2 \\pmod{5}$. A result like $0.5$ is not a remainder at all.
+
+**Reading remainder 0 as the first place**
+
+In a last-digit problem the exponent is divided by the cycle length, and a remainder of $0$ is matched with the first entry of the cycle, or with the power $a^0 = 1$.
+
+Wrong working: the last digits of the powers of $2$ cycle $2, 4, 8, 6$. For $2^{20}$, $20 = 4 \\cdot 5 + 0$, and the remainder $0$ is read as the first place, giving $2$.
+
+Right working: a remainder of $0$ means the exponent is a whole number of cycles, so $2^{20}$ sits in the same place as $2^4 = 16$, the last place of the cycle. The last digit is $6$, and indeed $2^{20} = 1{,}048{,}576$.
+
+Why it happens: the remainders $1$, $2$ and $3$ match the first, second and third places directly, and $0$ matches no place number, so it is attached to the start.
+
+How to check: replace a remainder of $0$ by the cycle length. The exponent $20$ then behaves like the exponent $4$, and $2^4 = 16$ ends in $6$.
+
+**Counting the days off by one**
+
+When the number of days between two dates is built from month lengths, one end of the span is left out or counted twice.
+
+Wrong working: January 1 is already used, so $31 - 1 = 30$ days remain in January. With $28$ for February and $14$ for March, the count is $30 + 28 + 14 = 72$, and $(1 + 72) \\bmod 7 = 3$, a Wednesday.
+
+Right working: from January 1 to February 1 is $31$ days, to March 1 another $28$, and to March 15 another $14$, so $31 + 28 + 14 = 73$. Then $(1 + 73) \\bmod 7 = 74 \\bmod 7 = 4$, a Thursday.
+
+Why it happens: the days left in January are counted without January 1, and the days in March are counted without March 15, so the two ends of the span are handled by different rules and one day goes missing.
+
+How to check: test the count on a short span. From January 1 to January 8 is $8 - 1 = 7$ days, and January 8 falls on the same weekday as January 1.`,
+      before:``,
+      after:``,
+      link:'',
     },
 
 
@@ -1517,7 +1603,7 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
                   <div key={'unit-powCycle'} dangerouslySetInnerHTML={{ __html: demoUnits.powCycle }} />,
-            `With only 7 possible remainders, a repeat must come within the first 7 powers.`,
+            `A power of 2 is never a multiple of 7, so only 6 remainders are possible, and a repeat must come within the first 7 powers.`,
         ]
     },
     {
@@ -1578,6 +1664,14 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
           sectionsContent.obj14.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -86,6 +86,12 @@ export default function ImplicationsTruthTablesPage({conditionalFormTree, demoUn
         link: sectionsContent.obj8.link,
         content: [sectionsContent.obj8.content]
       },
+      {
+        id: 'pitfalls',
+        title: sectionsContent.pitfalls.title,
+        link: sectionsContent.pitfalls.link,
+        content: [sectionsContent.pitfalls.content]
+      },
       // faq: rendered component — must be built here, not in getStaticProps
       {
         id: 'faq',
@@ -269,7 +275,13 @@ The material conditional is false in exactly one case: when the antecedent is tr
 
 The "vacuous truth" cases — where P is false and the implication is true regardless of Q — are often counterintuitive at first but are essential for consistency in formal logic.
 
-@academic[rule_plain:A false hypothesis cannot invalidate a conditional statement.]@`,
+@academic[rule_plain:A false hypothesis cannot invalidate a conditional statement.]@
+
+@academic[pitfall,aside:true,width:35%:Making P → Q false when P is false
+Marking P → Q as F in the row P = F, Q = T, because the "if" part did not happen, gives the column of P ↔ Q instead. In that row P → Q is T; its only F row is P = T, Q = F.
+[Read more](!#pitfalls)]@
+
+Filling in the column for P → Q means going through the four rows one by one. In the two rows with P = T, the conditional is put to the test, and its value is simply the value of Q. In the two rows with P = F, the hypothesis does not hold, and the value of Q is never tested against it.`,
       before: ``,
       after: ``,
       link: ``,
@@ -284,7 +296,7 @@ The "vacuous truth" cases — where P is false and the implication is true regar
 
 • **[Contrapositive](!/logic/truth-tables/implications#8)**: ¬Q → ¬P — reverses and negates. Logically equivalent to P → Q.
 
-The contrapositive equivalence (P → Q ≡ ¬Q → ¬P) is one of the most important results in propositional logic. It is the basis of proof by contrapositive: to prove "if P then Q," it suffices to prove "if not Q then not P." The converse and inverse, while related to each other (each is the contrapositive of the other), are independent of the original implication.`,
+The contrapositive equivalence (P → Q ≡ ¬Q → ¬P) is one of the most important results in propositional logic. It is the basis of proof by contrapositive: to prove "if P then Q," it suffices to prove "if not Q then not P." The converse and inverse, while related to each other (each is the contrapositive of the other), are not equivalent to the original implication, and neither follows from it.`,
       before: ``,
       after: ``,
       link: ``,
@@ -292,6 +304,10 @@ The contrapositive equivalence (P → Q ≡ ¬Q → ¬P) is one of the most impo
     obj3: {
       title: `P → Q: Material Implication`,
       content: `The material [implication](!/logic/propositional-logic/semantics/implication) P → Q is the foundational conditional in propositional logic. It is defined by the equivalence P → Q ≡ ¬P ∨ Q: the implication is true whenever P is false or Q is true (or both).
+
+@academic[pitfall,aside:true,width:35%:Negating Q instead of P
+Rewriting P → Q as P ∨ ¬Q fails at P = F, Q = T: there P → Q is T but P ∨ ¬Q is F. P ∨ ¬Q is the converse Q → P; the negation goes on the antecedent, P → Q ≡ ¬P ∨ Q.
+[Read more](!#pitfalls)]@
 
 The only falsifying assignment is P = T, Q = F. This single false row captures the core idea of logical consequence — a true premise cannot lead to a false conclusion.
 
@@ -308,7 +324,7 @@ Material implication is used throughout mathematics to express theorems, definit
 
 The converse is false when Q is true and P is false — the opposite falsifying case from the original.
 
-A common logical error is affirming the consequent: assuming that because P → Q is true, Q → P must also be true. The truth tables on this page show precisely why this reasoning fails. However, when both P → Q and Q → P hold, the result is the [biconditional](!/logic/truth-tables/biconditionals) P ↔ Q.`,
+A common logical error is confusing an implication with its converse: assuming that because P → Q is true, Q → P must also be true. The truth tables on this page show precisely why this reasoning fails. However, when both P → Q and Q → P hold, the result is the [biconditional](!/logic/truth-tables/biconditionals) P ↔ Q.`,
       before: ``,
       after: ``,
       link: ``,
@@ -327,6 +343,10 @@ The equivalence ¬P → Q ≡ P ∨ Q is useful in simplifying logical expressio
     obj6: {
       title: `P → ¬Q: Negated Consequent`,
       content: `The [implication](!/logic/propositional-logic/semantics/implication) P → ¬Q reads "if P then not Q." By material implication, P → ¬Q ≡ ¬P ∨ ¬Q. This is the negation of the conjunction P ∧ Q by De Morgan&apos;s law: asserting P → ¬Q is the same as denying that P and Q are both true.
+
+@academic[pitfall,aside:true,width:35%:Reading P → ¬Q as the negation of P → Q
+Taking P → ¬Q to mean "P → Q is false" fails at P = F: there P → Q and P → ¬Q are both T, whatever Q is. The negation of P → Q is P ∧ ¬Q, true only at P = T, Q = F.
+[Read more](!#pitfalls)]@
 
 This form expresses mutual exclusivity under a condition: if P holds, then Q cannot. It appears in mathematical proofs where establishing one property rules out another.
 
@@ -354,9 +374,68 @@ The inverse is false when P is false and Q is true. Confusing the inverse with t
 
 Their truth tables are identical: both are false only when P is true and Q is false (equivalently, when ¬Q is true and ¬P is false).
 
+@academic[pitfall,aside:true,width:35%:Negating without reversing
+Forming the contrapositive by negating both parts but keeping their order gives the inverse ¬P → ¬Q, which differs from P → Q at P = F, Q = T: P → Q is T, ¬P → ¬Q is F. The parts must also swap: ¬Q → ¬P.
+[Read more](!#pitfalls)]@
+
 The equivalence P → Q ≡ ¬Q → ¬P is one of the most used results in mathematical proof. Proof by contrapositive works by proving ¬Q → ¬P instead of P → Q directly, which is often easier when the negated forms are simpler to work with.
 
 For example, to prove "if n² is even then n is even," it is simpler to prove the contrapositive: "if n is odd then n² is odd." The [truth table](!/logic/truth-tables) confirms that these two statements are logically identical.`,
+      before: ``,
+      after: ``,
+      link: ``,
+    },
+    pitfalls: {
+      title: `Common Pitfalls`,
+      content: `Four slips account for many wrong answers when implications are evaluated, rewritten or used in proofs. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Making P → Q false when P is false**
+
+When the antecedent is false, the conditional is felt to have "not happened", and it is marked F. The column that results is not the column of P → Q.
+
+Wrong working: take the rows (P, Q) = (T, T), (T, F), (F, T), (F, F). Mark P → Q as T and F in the first two rows, then F in the row (F, T) because P did not happen, and T in the row (F, F) because both parts agree. The column T, F, F, T is the column of the biconditional P ↔ Q.
+
+Right working: P → Q ≡ ¬P ∨ Q. In the row (F, T), ¬P is T, so ¬P ∨ Q is T. In the row (F, F), ¬P is again T, so ¬P ∨ Q is T. The column is T, F, T, T, with a single F at P = T, Q = F.
+
+Why it happens: in everyday speech "if" is often heard as "if and only if". "If you finish your homework, you can go out" suggests that otherwise you cannot, and that extra promise is read into P → Q.
+
+How to check: a conditional is F only when the hypothesis holds and the conclusion fails. Count the F entries in the column: P → Q has exactly one.
+
+**Negating Q instead of P**
+
+When P → Q is turned into a disjunction, the negation is put on the consequent instead of the antecedent, giving P ∨ ¬Q. That formula has a different truth table.
+
+Wrong working: P → Q ≡ P ∨ ¬Q. At P = F, Q = T this gives F ∨ F, which is F.
+
+Right working: P → Q ≡ ¬P ∨ Q. At P = F, Q = T this gives T ∨ T, which is T, matching P → Q, which is T because its antecedent is false. The formula P ∨ ¬Q is ¬Q ∨ P, the disjunction form of the converse Q → P.
+
+Why it happens: the pattern "one part negated, joined by or" is remembered without the detail of which part carries the negation.
+
+How to check: the disjunction must be F only at P = T, Q = F. There ¬P ∨ Q gives F ∨ F, which is F, while P ∨ ¬Q gives T ∨ T, which is T, so P ∨ ¬Q fails the test.
+
+**Reading P → ¬Q as the negation of P → Q**
+
+To say that "if P then Q" is false, the negation is moved onto the consequent and the arrow is kept. The result, P → ¬Q, is another implication, and like P → Q it is true in every row where P is false.
+
+Wrong working: ¬(P → Q) ≡ P → ¬Q, so the denial of "if it rains, the ground is wet" would be "if it rains, the ground is not wet".
+
+Right working: ¬(P → Q) ≡ ¬(¬P ∨ Q) ≡ ¬¬P ∧ ¬Q ≡ P ∧ ¬Q. At P = F, Q = T, the formula P → Q is T, so its negation must be F. P ∧ ¬Q is F there, but P → ¬Q is F → F, which is T. The denial is "it rains and the ground is not wet".
+
+Why it happens: in speech, "it is not true that if it rains the ground is wet" sounds like a claim about what happens when it rains, so the "if" is kept.
+
+How to check: a formula and its negation have opposite values in every row. P → Q and P → ¬Q are both T in the two rows with P = F, so neither is the negation of the other.
+
+**Negating without reversing**
+
+To form the contrapositive of P → Q, both parts are negated but left in their original order, giving ¬P → ¬Q. That is the inverse, which is not equivalent to P → Q.
+
+Wrong working: with P = "n² is even" and Q = "n is even", the contrapositive is written as "if n² is odd then n is odd", which is ¬P → ¬Q. Proving it proves the inverse, and so the converse "if n is even then n² is even", not the original statement.
+
+Right working: negate and swap: ¬Q → ¬P, "if n is odd then n² is odd". For (P, Q) = (T, T), (T, F), (F, T), (F, F), the formula ¬Q → ¬P takes the values T, F, T, T, the same as P → Q. The inverse ¬P → ¬Q takes T, T, F, T: at P = F, Q = T it is T → F, which is F, while P → Q is T.
+
+Why it happens: "negate" is remembered and "reverse" is forgotten. The inverse also looks closer to the original, with the parts still in their familiar places.
+
+How to check: the contrapositive must be F in the same row as the original, P = T, Q = F. There ¬Q → ¬P is T → F, which is F, as required; ¬P → ¬Q is F → T, which is T, so it is not the contrapositive.`,
       before: ``,
       after: ``,
       link: ``,

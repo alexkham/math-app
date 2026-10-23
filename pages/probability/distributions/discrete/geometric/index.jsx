@@ -990,6 +990,12 @@ $$P(X > m + n \\mid X > m) = P(X > n)$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Expecting a success to be due
+For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chance that flip six is a tail too makes heads look $\\frac{63}{64}$ likely. Given the five tails, $P(X = 6 \\mid X > 5) = \\frac{1}{2}$, as on the first flip.
+[Read more](!#pitfalls)]@
+
+Read the identity with $m$ as the number of trials that have already failed and $n$ as a number of trials still to come. The left side is the chance of waiting more than $n$ further trials after those failures; the right side is the chance of waiting more than $n$ trials from the very start. The two are equal for every $m$: the trials already played are spent, and each new trial succeeds with the same probability $p$.
+
  
 `,
       before:``,
@@ -1091,6 +1097,12 @@ Instead of summing probabilities from 1 to $k$, it's easier to use the complemen
 
 @academic[formula_callout:Cumulative Distribution Function (CDF)
 $$P(X \\leq k) = 1 - P(\\text{all first } k \\text{ trials fail}) = 1 - (1-p)^k$$]@
+
+@academic[pitfall,aside:true,width:35%:Adding p for each trial
+Writing $P(X \\leq 6) = 6 \\times \\frac{1}{6} = 1$ for a die adds the chance of a 6 on each roll and makes a 6 within six rolls certain. The complement gives $P(X \\leq 6) = 1 - \\left(\\frac{5}{6}\\right)^6 \\approx 0.665$.
+[Read more](!#pitfalls)]@
+
+The event that the first success comes within $k$ trials can happen in $k$ different ways, one for each trial on which it can arrive, and each way has its own probability. The complement happens in only one way: all of the first $k$ trials fail. Because the trials are independent, those $k$ failure probabilities multiply, which is why the complement is the shorter road to the CDF.
 
 **Verification by Summation**:
 We can verify this by summing the PMF:
@@ -1329,7 +1341,13 @@ Suppose you're rolling a fair six-sided die until you get a 6. The probability o
 
 $P(X = 4) = \\left(\\frac{5}{6}\\right)^{4-1} \\cdot \\frac{1}{6} = \\left(\\frac{5}{6}\\right)^{3} \\cdot \\frac{1}{6} \\approx 0.096$
 
+@academic[pitfall,aside:true,width:35%:Using k failures in the exponent
+Writing $\\left(\\frac{5}{6}\\right)^{4} \\cdot \\frac{1}{6} \\approx 0.080$ puts four failed rolls before the 6, which is the chance of needing five rolls. Exactly $4$ rolls means $3$ failures: $P(X = 4) \\approx 0.096$.
+[Read more](!#pitfalls)]@
+
 This means there's about a 9.6% chance that you'll need exactly 4 rolls to get your first 6.
+
+The roll that shows the first 6 is itself one of the $k$ rolls being counted. Every term of the PMF is built from the same two pieces: a run of failed rolls, each with probability $\\frac{5}{6}$, and then one roll that shows a 6 with probability $\\frac{1}{6}$.
       `,
       before:``,
       after:``,
@@ -1416,6 +1434,58 @@ This means there's about a 9.6% chance that you'll need exactly 4 rolls to get y
       after:``,
       link:'',
   
+    },
+    obj17:{
+      title:`Common Pitfalls`,
+      content:`Three mistakes come up again and again in geometric problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Expecting a success to be due**
+
+After a run of failures, the next trial is treated as more likely to succeed than the first one was. The probability of the whole run, computed from the start, is used as if it were the probability of the next trial.
+
+Wrong working: a fair coin has shown five tails. Six tails in a row has probability
+$$P(X > 6) = \\left(\\frac{1}{2}\\right)^6 = \\frac{1}{64}$$
+so flip six is taken to be heads with probability $1 - \\frac{1}{64} = \\frac{63}{64}$.
+
+Right working: the five tails have already happened, so the question is conditional on $X > 5$.
+$$P(X = 6 \\mid X > 5) = \\frac{P(X = 6)}{P(X > 5)} = \\frac{1/64}{1/32} = \\frac{1}{2}$$
+
+Why it happens: a long streak of failures is rare when viewed from the start, and that rarity is carried over to the next trial, even though each flip is independent of the ones before it.
+
+How to check: apply the memoryless identity with $m = 5$ and $n = 1$. $P(X > 6 \\mid X > 5) = P(X > 1) = \\frac{1}{2}$, so heads on flip six has probability $1 - \\frac{1}{2} = \\frac{1}{2}$, exactly as on the first flip.
+
+**Adding p for each trial**
+
+The probability that the first success comes within $k$ trials is computed as $k$ times $p$, adding up the chance of a success on each trial.
+
+Wrong working: for a die rolled until the first 6,
+$$P(X \\leq 6) = 6 \\times \\frac{1}{6} = 1$$
+which says a 6 is certain to appear within six rolls.
+
+Right working: the complement of a 6 within six rolls is six rolls with no 6.
+$$P(X \\leq 6) = 1 - \\left(\\frac{5}{6}\\right)^6 = 1 - \\frac{15625}{46656} \\approx 0.665$$
+
+Why it happens: for one trial $P(X \\leq 1) = p$ is correct, and for small $k$ and small $p$ the product $kp$ is close to the right value, so the shortcut looks reliable. It counts the outcomes with a 6 on several of the rolls more than once.
+
+How to check: the result must stay below $1$. With seven rolls the same shortcut gives $7 \\times \\frac{1}{6} = \\frac{7}{6}$, which is not a probability. Summing the PMF gives the right value as well: $\\frac{1}{6} + \\frac{5}{36} + \\cdots + \\left(\\frac{5}{6}\\right)^5 \\cdot \\frac{1}{6} \\approx 0.665$.
+
+**Using k failures in the exponent**
+
+The probability that the first success comes on trial $k$ is computed as $(1-p)^k p$, as if $k$ failures came before the success.
+
+Wrong working: for a die and $k = 4$,
+$$P(X = 4) = \\left(\\frac{5}{6}\\right)^4 \\cdot \\frac{1}{6} = \\frac{625}{7776} \\approx 0.080$$
+This is the probability of four failed rolls followed by a 6, that is, of needing five rolls.
+
+Right working: the fourth roll is the success, so only three rolls fail.
+$$P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} = \\frac{125}{1296} \\approx 0.096$$
+
+Why it happens: the trial number $k$ appears in the question, so it goes straight into the exponent. The form $(1-p)^k p$ is also correct under the other convention, where $X$ counts failures instead of trials, and formulas copied from such a source carry it over.
+
+How to check: put $k = 1$. The first roll is a 6 with probability $\\frac{1}{6}$, and $(1-p)^{k-1} p$ gives exactly that, while $(1-p)^k p$ gives $\\frac{5}{36}$. The wrong PMF also adds up to $1 - p = \\frac{5}{6}$ instead of $1$.`,
+      before:``,
+      after:``,
+      link:'',
     },
      links:{
       decide:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About Distinguishing Discrete Distributions](!/probability/distributions/discrete#decide) →@
@@ -1787,6 +1857,14 @@ export default function GeometricDistributionPage({
           sectionsContent.obj16.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

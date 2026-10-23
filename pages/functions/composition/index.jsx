@@ -2607,6 +2607,10 @@ Step 2: $f(10) = 10^2 + 1 = 101$
 
 Therefore $(f \\circ g)(4) = 101$.
 
+@academic[pitfall,aside:true,width:35%:Multiplying instead of composing
+Reading $\\circ$ as a product gives $f(4) \\cdot g(4) = 17 \\cdot 10 = 170$. Composition feeds the output of $g$ into $f$: $(f \\circ g)(4) = f(g(4)) = f(10) = 101$.
+[Read more](!#pitfalls)]@
+
 Now find $(g \\circ f)(4)$ — the composition in the opposite order.
 
 Step 1: $f(4) = 4^2 + 1 = 17$
@@ -2646,7 +2650,13 @@ $$g(f(x)) = 2(x^2 - 4) + 1 = 2x^2 - 8 + 1 = 2x^2 - 7$$]@
 
 So $(g \\circ f)(x) = 2x^2 - 7$.
 
-The two composite functions are different, confirming that composition is not commutative.`,
+The two composite functions are different, confirming that composition is not commutative.
+
+@academic[pitfall,aside:true,width:35%:Distributing to the first term only
+Expanding $2(x^2 - 4) + 1$ as $2x^2 - 4 + 1$ doubles only the first term and gives $2x^2 - 3$. The $2$ multiplies all of $f(x)$: $2x^2 - 8 + 1 = 2x^2 - 7$, and indeed $g(f(0)) = g(-4) = -7$.
+[Read more](!#pitfalls)]@
+
+In both directions the inner formula goes in as a single unit. The outer function acts on all of it at once — $f$ squares the whole of $2x + 1$ before subtracting $4$, and $g$ doubles the whole of $x^2 - 4$ before adding $1$. The substitution is therefore written with brackets first and expanded only afterwards, and the expanded result is a new function of $x$.`,
     before: ``,
     after: ``,
     link: '',
@@ -2689,6 +2699,12 @@ Condition 2: $f$ requires $g(x) \\neq 0$, so $x^2 - 1 \\neq 0$, meaning $x \\neq
 
 The domain of $f \\circ g$ is $\\{x : x \\neq -1 \\text{ and } x \\neq 1\\}$.
 
+@academic[pitfall,aside:true,width:35%:Reading the domain from the simplified formula
+With $f(x) = x^2$ and $g(x) = \\sqrt{x}$, the formula $f(g(x)) = (\\sqrt{x})^2 = x$ seems to accept every $x$, but $g(-4)$ does not exist. Condition 1 removes all $x < 0$, so the domain is $[0, \\infty)$.
+[Read more](!#pitfalls)]@
+
+In both examples condition 1 removed nothing, because the inner function was a polynomial that accepts every real number. When the inner function carries a restriction of its own — a square root, a fraction, a logarithm — condition 1 removes inputs before $f$ is ever reached. Both conditions together decide the domain, and they are applied to the two original functions, one step at a time.
+
 The table below collects these worked examples side by side so the two-condition structure stands out at a glance.`,
     before: ``,
     after: ``,
@@ -2711,7 +2727,7 @@ These are different functions with different [graphs](!/functions/graphs) and di
 
 Non-commutativity reflects the asymmetry of chained processes. Converting Celsius to Fahrenheit, then to Rankine produces a different result than converting Celsius to Rankine, then to Fahrenheit — if such a path even made sense.
 
-In rare cases, $f \\circ g = g \\circ f$. When both functions are linear with the same slope but different intercepts, for example, or when one function is the identity. But these are special cases, not the general rule.
+In rare cases, $f \\circ g = g \\circ f$. When both functions are shifts $x + p$ and $x + q$, for example, or when one function is the identity. But these are special cases, not the general rule.
 
 The table below sets $f \\circ g$ and $g \\circ f$ side by side for this pair to make the asymmetry concrete.`,
     before: ``,
@@ -2836,7 +2852,13 @@ $$f(f^{-1}(x)) = f\\left(\\frac{x - 3}{2}\\right) = 2 \\cdot \\frac{x - 3}{2} + 
 @academic[formula_callout:Composition and Inverse Functions
 $$f^{-1}(f(x)) = f^{-1}(2x + 3) = \\frac{(2x + 3) - 3}{2} = \\frac{2x}{2} = x \\checkmark$$]@
 
+@academic[pitfall,aside:true,width:35%:Taking the inverse as a reciprocal
+Using $\\frac{1}{2x + 3}$ for $f^{-1}(x)$ fails the check: at $x = 0$ it gives $\\frac{1}{3}$, and $f\\left(\\frac{1}{3}\\right) = \\frac{2}{3} + 3 = \\frac{11}{3}$, not $0$. The $-1$ marks the inverse function, $f^{-1}(x) = \\frac{x - 3}{2}$.
+[Read more](!#pitfalls)]@
+
 This verification method confirms that two functions are inverses. If either composition fails to produce $x$, the functions are not inverses.
+
+In practice the check rejects a wrong candidate quickly: a single input that does not come back unchanged is enough. A formula that passes both compositions for every $x$ in the domain is the inverse, since a function has only one.
 
 @academic[rule_plain:The identity function $I(x) = x$ is the compositional equivalent of the number $1$ in multiplication: $f \\circ I = I \\circ f = f$ for any function $f$.]@
 
@@ -2880,11 +2902,91 @@ Pricing calculations chain. A $20\\%$ discount applies first: $g(p) = 0.8p$. The
 @academic[formula_callout:Applications of Composition
 $$f(g(p)) = 1.08(0.8p) = 0.864p$$]@
 
-The order matters: tax on the discounted price differs from discount on the taxed price.
+Here the order does not matter, since both steps are scalings: $0.8(1.08p) = 1.08(0.8p)$. It would matter with a fixed-amount discount such as $p - 10$.
 
 Growth models chain. If population depends on resources, and resources depend on time, then population depends on time through composition.
 
 In each case, composition captures the sequential nature of the process. The intermediate quantity — Kelvin, discounted price, resource level — may never be explicitly calculated, but it mediates the relationship between initial input and final output.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Six mistakes come up again and again when functions are composed. Four are marked where they happen in the sections above. Composing in the wrong order is the one that **Evaluating Compositions at a Point** and **Non-Commutativity** already show, and squaring instead of composing is the one that **Composition with Itself** points out. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Multiplying instead of composing**
+
+The value $(f \\circ g)(a)$ is computed as $f(a) \\cdot g(a)$: both functions are evaluated at the same input and their outputs are multiplied.
+
+Wrong working: with $f(x) = x^2 + 1$ and $g(x) = 3x - 2$, $f(4) = 17$ and $g(4) = 10$, so $(f \\circ g)(4)$ is given as $17 \\cdot 10 = 170$.
+
+Right working: $g$ acts first and its output becomes the input of $f$. $g(4) = 3(4) - 2 = 10$, then $f(10) = 10^2 + 1 = 101$, so $(f \\circ g)(4) = 101$.
+
+Why it happens: the ring $\\circ$ looks like the multiplication dot, and the product $(fg)(x)$ of [function arithmetic](!/functions/arithmetic) is built from the same two letters.
+
+How to check: in a composition only the inner function sees the original input. If $f(4)$ appears in the working for $(f \\circ g)(4)$, the chain was never formed.
+
+**Composing in the wrong order**
+
+The symbol $f \\circ g$ is read from left to right, so $f$ is applied first and $g$ second. That computes $g \\circ f$ instead.
+
+Wrong working: for $(f \\circ g)(4)$ with the same $f$ and $g$, first $f(4) = 17$, then $g(17) = 3(17) - 2 = 49$.
+
+Right working: first $g(4) = 10$, then $f(10) = 101$. The value $49$ is $(g \\circ f)(4)$, a different composition.
+
+Why it happens: the written order is $f$ then $g$, but the order of action is $g$ then $f$; the notation reads from right to left.
+
+How to check: rewrite the symbol in nested form, $f(g(4))$. The innermost brackets are evaluated first, so $g$ goes first.
+
+**Distributing to the first term only**
+
+When the inner formula is substituted into the outer function, the outer function's operation is applied to only part of it, usually because the substituted expression is written without brackets.
+
+Wrong working: for $f(x) = x^2 - 4$ and $g(x) = 2x + 1$, $g(f(x)) = 2x^2 - 4 + 1 = 2x^2 - 3$.
+
+Right working: $g(f(x)) = 2(x^2 - 4) + 1 = 2x^2 - 8 + 1 = 2x^2 - 7$.
+
+Why it happens: the substitution is done in the head, the brackets are never written, and the $2$ lands only on the first term it meets.
+
+How to check: evaluate at one point step by step. $f(0) = -4$ and $g(-4) = -8 + 1 = -7$; the right formula gives $-7$ at $x = 0$, the wrong one gives $-3$.
+
+**Reading the domain from the simplified formula**
+
+The domain of $f \\circ g$ is read from the final simplified formula, so the restriction of the inner function drops out of sight and condition 1 is never applied.
+
+Wrong working: for $f(x) = x^2$ and $g(x) = \\sqrt{x}$, $f(g(x)) = (\\sqrt{x})^2 = x$, so the domain is given as all real numbers.
+
+Right working: condition 1 requires $x$ in the domain of $g$, so $x \\geq 0$. Condition 2 adds nothing, since $f$ accepts every real number. The domain is $[0, \\infty)$: at $x = -4$ the first step, $g(-4) = \\sqrt{-4}$, is not a real number, so the input never reaches $f$.
+
+Why it happens: simplifying removes the square root, and with it the visible sign that negative inputs are not allowed.
+
+How to check: apply both conditions to the original functions before simplifying, and push one doubtful input through the inner function first.
+
+**Squaring instead of composing with itself**
+
+The composition $f \\circ f$, written $f^2$ in some texts, is computed as $f(x) \\cdot f(x)$, the square of the output, instead of applying $f$ twice.
+
+Wrong working: for $f(x) = 2x$, $(f \\circ f)(x) = (2x)^2 = 4x^2$.
+
+Right working: $f(f(x)) = f(2x) = 2(2x) = 4x$. At $x = 3$, $f(3) = 6$ and $f(6) = 12$, which matches $4x = 12$, while $4x^2$ gives $36$.
+
+Why it happens: $f^2$ is used for both meanings, and squaring is the meaning met first, with numbers and with $\\sin^2\\theta$.
+
+How to check: compute $f(f(a))$ for one number $a$ step by step and compare it with the formula.
+
+**Taking the inverse as a reciprocal**
+
+The symbol $f^{-1}$ is read as $\\frac{1}{f}$, so the reciprocal of the output is taken as the inverse function and put into the composition check.
+
+Wrong working: for $f(x) = 2x + 3$, the candidate is $\\frac{1}{2x + 3}$. Then $f\\left(\\frac{1}{2x + 3}\\right) = \\frac{2}{2x + 3} + 3$, which is not $x$; at $x = 0$ it equals $\\frac{2}{3} + 3 = \\frac{11}{3}$.
+
+Right working: the inverse undoes $f$ step by step, $f^{-1}(x) = \\frac{x - 3}{2}$, and $f(f^{-1}(x)) = (x - 3) + 3 = x$ for every $x$.
+
+Why it happens: for numbers $a^{-1} = \\frac{1}{a}$, and the same exponent on a function is read the same way.
+
+How to check: run the composition at one convenient input. An inverse returns that input unchanged; $\\frac{11}{3} \\neq 0$ rejects the reciprocal at once.`,
     before: ``,
     after: ``,
     link: '',
@@ -3221,6 +3323,14 @@ export default function CompositionPage({
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     {

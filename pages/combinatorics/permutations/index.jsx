@@ -1415,6 +1415,8 @@ import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 
@@ -1695,7 +1697,7 @@ const permutationWithRepetitionTable=`
         <tbody>
             <tr style="background-color: #f8f9fa;">
                 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Use all items</td>
-                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✓</td>
+                <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: center; color: #27ae60; font-size: 18px; font-weight: bold;">✗</td>
             </tr>
             <tr>
                 <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #2c3e50; text-align: left;">Order matters</td>
@@ -2066,6 +2068,25 @@ const circularTable=`
 // formulas-optimized: v1 | 2026-06-11 | 3 callouts (obj8 ×3); 6 skipped (inside @academic[example:...]@)
 // Skipped: Factorial (logic), Full Permutation (full), Permutation with Identical Items (identical),
 //          Partial Permutation (without), Permutation with Repetition (with), Circular Permutation (circular)
+// Concept introduction (section "logic") — template A, definition last.
+// Running instance: arranging A, B, C. The section's two scenario diagrams and
+// two example boxes are carried in unchanged; its old text stays in
+// sectionsContent.logic, unused.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciGrowthTable = ciTableOpen(['items n', 'choices, position by position', 'arrangements']) +
+  ciRow(['1', '1', '1']) +
+  ciRow(['2', '2 × 1', '2'], { shade: true }) +
+  ciRow(['3', '3 × 2 × 1', '6'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['4', '4 × 3 × 2 × 1', '24'], { shade: true }) +
+  ciRow(['5', '5 × 4 × 3 × 2 × 1', '120'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
     full:{
@@ -2124,6 +2145,12 @@ formula:`@academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@`
       Where multinomial coefficient: counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.
       
        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=2) →@
+
+@academic[pitfall,aside:true,width:35%:Missing a repeated letter
+Computing $\\frac{11!}{4! \\cdot 4!} = 69{,}300$ for MISSISSIPPI divides out the Is and the Ss but not the two Ps, so every word is counted twice. With $2!$ in the denominator, the count is $34{,}650$.
+[Read more](!#pitfalls)]@
+
+MISSISSIPPI is the standard case for this formula. Its $11$ letters fall into four groups: one M, four Is, four Ss and two Ps, so $n = 11$ and the group sizes are $1, 4, 4$ and $2$. Swapping two letters of the same group gives back the same word, and the denominator removes these swaps group by group. A letter that appears only once forms a group of size one and contributes $1! = 1$.
       
       
       
@@ -2162,6 +2189,12 @@ Most common:
       Where $n!$ counts all arrangements, dividing by $(n-r)!$ removes the unused positions.
       
        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=3) →@
+
+@academic[pitfall,aside:true,width:35%:Dividing by r! when order matters
+Using $\\binom{10}{3} = 120$ for gold, silver and bronze among 10 runners counts only which three runners win a medal. Each such trio can receive the three medals in $3! = 6$ orders, so the count is $P(10, 3) = 720$.
+[Read more](!#pitfalls)]@
+
+A race with 10 runners and medals for the first three places is the typical case: $n = 10$ runners and $r = 3$ places. The formula keeps only the first $r$ factors of $10!$, one for each place to fill: $10$ choices for the gold, $9$ for the silver and $8$ for the bronze. The remaining factors $7 \\cdot 6 \\cdots 1$ are exactly the $(n - r)! = 7!$ that the division removes.
       
       `,
       between:`
@@ -2232,12 +2265,18 @@ Alternative notations
       If $n$ is a total number of items to arrange then fixing one item reduces circular arrangements to $(n-1)!$ linear ones.
       
        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=5) →@
+
+@academic[pitfall,aside:true,width:35%:Using n! for a round table
+Counting $5! = 120$ seatings for 5 people at a round table counts each seating 5 times, once for every turn of the table. Dividing by 5 gives $4! = 24$.
+[Read more](!#pitfalls)]@
+
+Five people at a round table show how this works. Fix one of them in a seat; every seating can then be read from that seat clockwise, and the other four people fill the remaining seats in any order. Turning the whole table moves everyone at once but leaves each person with the same neighbours on the left and on the right, which is why a turn does not create a new arrangement.
     
        
       `,
       between:`
       **Circular Permutation — Examples**:
-Arranging guests around a round table, seating participants in a circular panel, ordering beads in a circular necklace, organizing tasks in a repeating cycle, setting positions for players in a circular game arrangement.`,
+Arranging guests around a round table, seating participants in a circular panel, ordering beads on a ring that is never flipped over, organizing tasks in a repeating cycle, setting positions for players in a circular game arrangement.`,
   
     },
 
@@ -2264,18 +2303,24 @@ Alternative notations:
  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
 
 **Formula**:
-      Total number of permutations with repetitions possible and all items used is:
+      Total number of permutations with repetition allowed, filling $r$ positions from $n$ items, is:
      @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{rep}}(n,r)=n^{r}$]@
      Where each of the $r$ positions can be filled in $n$ ways.
 
 
  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=4) →@
 
+@academic[pitfall,aside:true,width:35%:Swapping the base and the exponent
+Writing $4^{10} = 1{,}048{,}576$ for a 4-digit PIN treats it as 10 positions with 4 options each. Four positions with 10 digits each give $10^4 = 10{,}000$ codes.
+[Read more](!#pitfalls)]@
+
+A 4-digit PIN is the standard example. Each of the $r = 4$ positions can hold any of the $n = 10$ digits, whatever was entered before, so the same digit may appear in several positions, as in 0707 or 1111. The count is built position by position, exactly as for a full permutation, except that the number of options never shrinks from one position to the next.
+
 
 `,
 between:`
 **Permutation with Repetition — Examples**:
-Generating PIN codes from digits, creating letter sequences for passwords, arranging beads in a bracelet where colors can repeat, composing license plate numbers, assigning seats with multiple people allowed in the same category.
+Generating PIN codes from digits, creating letter sequences for passwords, setting the dials of a combination lock, composing license plate numbers, assigning seats with multiple people allowed in the same category.
 `,
   
     },
@@ -2296,7 +2341,7 @@ By addressing these additional questions, we can classify permutations into seve
   
       title:`The Logic behind permutations`,
       content:``,
-      before:`In combinatorics, we distinguish between several [types](!/combinatorics/permutations#types) of permutations based on different criteria, but they all share one key property: in every type, the order of arrangement matters ( and that is exactly what makes the difference between [permutations and variations](!/combinatorics#permutations_vs_combinations)).
+      before:`In combinatorics, we distinguish between several [types](!/combinatorics/permutations#types) of permutations based on different criteria, but they all share one key property: in every type, the order of arrangement matters ( and that is exactly what makes the difference between [permutations and combinations](!/combinatorics#permutations_vs_combinations)).
 In all different scenarios, the mechanism for creating a permutation is similar, and it is important to understand it.
 When creating an arrangement, we must make two decisions:
 1. Which item to pick?
@@ -2411,6 +2456,12 @@ $$!4 = 4! \\sum_{k=0}^{4} \\frac{(-1)^k}{k!} = 24 \\left(1 - 1 + \\tfrac{1}{2} -
 
 Out of the $4! = 24$ possible orderings of the four hats, exactly 9 satisfy the no-fixed-point condition.]@
 
+@academic[pitfall,aside:true,width:35%:Subtracting only the single fixed points
+Taking $24 - 4 \\cdot 3! = 0$ for the 4 hats removes every order that returns two or more hats several times. Adding back pairs and subtracting triples gives $24 - 24 + 12 - 4 + 1 = 9$.
+[Read more](!#pitfalls)]@
+
+Behind the five terms of the sum are the counts of orders with chosen hats fixed. Fixing the hat of one chosen guest leaves $3! = 6$ orders, and there are $4$ guests to choose. Fixing a chosen pair leaves $2! = 2$ orders for each of the $\\binom{4}{2} = 6$ pairs, a chosen three leaves $1$ order for each of the $4$ triples, and all four fixed is the single order that returns every hat. An order that returns two hats correctly is among the orders counted for each of those two guests.
+
 The [factorial calculator](!/calculators/factorial-calculator) also computes the subfactorial $!n$, which counts derangements directly.
 `,
     before: ``,
@@ -2419,6 +2470,77 @@ The [factorial calculator](!/calculators/factorial-calculator) also computes the
     link: '',
   },
   
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes come up again and again when counting permutations. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Missing a repeated letter**
+
+In a word with several repeated letters, the factorial of one group or of two groups goes into the denominator and another group is left out. Every arrangement is then counted once for each order of the letters in the missing group.
+
+Wrong working: MISSISSIPPI has $11$ letters with four Is, four Ss and two Ps, and the count is given as $\\frac{11!}{4! \\cdot 4!} = \\frac{39{,}916{,}800}{576} = 69{,}300$.
+
+Right working: every repeated group gets its factorial: $\\frac{11!}{1! \\cdot 4! \\cdot 4! \\cdot 2!} = \\frac{39{,}916{,}800}{1152} = 34{,}650$.
+
+Why it happens: the large groups catch the eye, and a group of two looks too small to matter. Yet a group of two halves the count.
+
+How to check: list the letters with their counts before writing the formula, and make sure the counts add up to $n$: here $1 + 4 + 4 + 2 = 11$. Each count in that list must appear as a factorial in the denominator.
+
+**Dividing by r! when order matters**
+
+The places in the arrangement are different, but the count is done with the binomial coefficient $\\binom{n}{r}$, which treats the chosen items as a group with no order.
+
+Wrong working: gold, silver and bronze among $10$ runners: $\\binom{10}{3} = 120$.
+
+Right working: the medals are different, so the order of the three winners matters: $P(10, 3) = 10 \\cdot 9 \\cdot 8 = 720$. This is $120 \\cdot 3! = 720$: each group of three winners can receive the medals in $6$ orders.
+
+Why it happens: "choose 3 of 10" sounds like a selection, and the binomial coefficient is the more familiar formula. The words gold, silver and bronze are what make the places different.
+
+How to check: swap two of the winners and ask whether the result changes. If gold and silver swapped gives a different outcome, order matters and $P(n, r)$ is the count.
+
+**Swapping the base and the exponent**
+
+In a count with repetition, the number of positions is used as the base and the number of options as the exponent.
+
+Wrong working: a 4-digit PIN from the digits 0 to 9 is counted as $4^{10} = 1{,}048{,}576$.
+
+Right working: there are $4$ positions and each can hold any of $10$ digits, so the count is $10 \\cdot 10 \\cdot 10 \\cdot 10 = 10^4 = 10{,}000$.
+
+Why it happens: $n^r$ is remembered as a pattern of two numbers, without the product of choices behind it.
+
+How to check: write the count as a product of choices, one factor for each position. The number of factors is the exponent and each factor is the base. For a 4-digit PIN the codes 0000 to 9999 give exactly $10{,}000$.
+
+**Using n! for a round table**
+
+Seats around a round table are treated like places in a row, so the count is $n!$. A row has a first place; a round table does not, and turning the whole table gives the same seating.
+
+Wrong working: $5$ people around a round table: $5! = 120$ seatings.
+
+Right working: each seating appears $5$ times among the $120$ rows, once for each person who could sit in the first place of the row. So the count is $\\frac{5!}{5} = 4! = 24$. Equivalently, fix one person and arrange the other $4$: $4! = 24$.
+
+Why it happens: the people are distinct and order matters, which is exactly the description of a full permutation. The extra condition that turns count as the same arrangement is easy to overlook.
+
+How to check: take $n = 3$. Three people around a table have only $2$ seatings: the order clockwise is either A, B, C or A, C, B. The formula $(3 - 1)! = 2$ agrees, while $3! = 6$ does not.
+
+**Subtracting only the single fixed points**
+
+When counting derangements, the orders that return at least one hat are counted as $n \\cdot (n-1)!$ and subtracted once. Orders that return two or more hats are inside several of these counts, so they are subtracted more than once.
+
+Wrong working: for $4$ guests, $4! - 4 \\cdot 3! = 24 - 24 = 0$ derangements.
+
+Right working: continue the alternating sum: $24 - \\binom{4}{1} 3! + \\binom{4}{2} 2! - \\binom{4}{3} 1! + \\binom{4}{4} 0! = 24 - 24 + 12 - 4 + 1 = 9$.
+
+Why it happens: "subtract the orders where someone gets their own hat" sounds like one subtraction, and $n \\cdot (n-1)!$ looks like the number of such orders. It is not: it counts the identity order $4$ times, once for each guest.
+
+How to check: the answer $0$ is impossible for $n \\geq 2$, since moving every hat one seat along is always a derangement. For small $n$ the small values listed above give a direct check: $!3 = 2$ and $!4 = 9$.
+`,
+    before: ``,
+    between: ``,
+    after: ``,
+    link: '',
+  },
+
   faq: {
     title: `Permutations FAQ`,
   },
@@ -2432,7 +2554,7 @@ const introContent = {
   title: "Permutations: Understanding Ordered Arrangements",
   content: `Permutations are arrangements where **order matters**. As we discussed on the [main combinatorics page](!/combinatorics), this is what distinguishes permutations from [combinations](!/combinatorics/combinations).
 
-On this page, we'll explore four key permutation scenarios: [Full Permutation](!/combinatorics/permutations#full) (arranging all n distinct elements), [Permutation with Repetition](!/combinatorics/permutations#with) (arrangements where certain elements can repeat), [Permutation without Repetition](!/combinatorics/permutations#without) (selecting and arranging r elements from n options), and [Circular Permutation](!/combinatorics/permutations#circular) (arrangements around a circle where rotations are identical).
+On this page, we'll explore the key permutation scenarios, including [Full Permutation](!/combinatorics/permutations#full) (arranging all n distinct elements), [Permutation with Repetition](!/combinatorics/permutations#with) (arrangements where certain elements can repeat), [Permutation without Repetition](!/combinatorics/permutations#without) (selecting and arranging r elements from n options), and [Circular Permutation](!/combinatorics/permutations#circular) (arrangements around a circle where rotations are identical).
 
 Each scenario has specific formulas and real-world applications. Ready to dive into the details, or want to compare with [combinations](!/combinatorics/combinations) where order doesn't matter?
 
@@ -2546,6 +2668,11 @@ const schemas = {
     caption: '2 of the 3! = 6 orders give nobody their own hat: !3 = 2',
   };
 
+  const conceptIntroFigures = {
+    n4: fullPermutationDiagrams.n4,
+    growthTable: ciGrowthTable,
+  };
+
   const demoUnits = {
     fullN3: demoUnitFrame({
       svg: fullPermutationDiagrams.n3,
@@ -2578,6 +2705,7 @@ const schemas = {
     identicalTable,
     permutationsScenariosTableData,
     demoUnits,
+    conceptIntroFigures,
     partialWithoutTable,
     permutationWithRepetitionTable,
     circularTable,
@@ -2589,7 +2717,74 @@ const schemas = {
   
 export default function PermutationsPage({seoData, sectionsContent, introContent, permutationsDiagram, fullPermutationTable,
   identicalTable, permutationsTable, permutationsScenariosTableData, partialWithoutTable,
-  permutationWithRepetitionTable, circularTable, faqQuestions, schemas, demoUnits}) {
+  permutationWithRepetitionTable, circularTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  // The section's scenario diagrams carry a fixed left margin; inside the
+  // introduction's narrower column the wrapper cancels it and scales them to fit.
+  // The diagrams themselves are unchanged.
+  const ciFit = (name) => (
+    <div key={name} className="ci-fit" dangerouslySetInnerHTML={{ __html: scenariosData[name].svg }} />
+  )
+  const ciFitStyle = <style key="ci-fit-style">{'.ci-fit svg{margin-left:0 !important;max-width:100%;height:auto;display:block;margin-right:auto}.ci-fit svg[style*=margin-bottom]{margin-bottom:-12% !important}'}</style>
+
+  // "The Logic behind permutations" concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Lining things up in order gets out of hand quickly.`,
+        content: [
+          `Two items can stand in a row in $2$ ways: AB or BA. Three letters A, B, C already give more, and the list is easy to get wrong — skip one order or write another twice. Ten books on a shelf could not be listed by hand at all. There has to be a way to count the orders without writing them out.`,
+          ciFitStyle,
+          ciFit("Permutations (Full)"),
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Building the orders one position at a time gives the count.`,
+        content: [
+          `Fill the three places of the row in turn. The first place can take any of the $3$ letters. Once it is filled, $2$ letters are left for the second place. Then $1$ letter is left for the third. Every first choice combines with every second choice and every third, so the counts multiply.`,
+          ciFit("Permutations of ABC: STEP-by-Step"),
+          `@academic[example:&nbsp\t\t\t\t\t\t$3\\times 2 \\times 1 = 6 (n!)$]@`,
+          `Six orders: ABC, ACB, BAC, BCA, CAB, CBA — exactly the list above, with nothing missed and nothing repeated.`,
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in that count was chosen; every factor was forced.`,
+        content: [
+          `Each factor is one less than the one before because a letter, once placed, cannot be used again. The factors multiply because the choices are made in sequence — the [multiplication principle](!/combinatorics#multi). Nothing depended on there being three letters: with $n$ items the first place has $n$ options, the next $n - 1$, and so on down to $1$.`,
+          ciTable('growthTable'),
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [permutation](!/combinatorics/definitions#permutation) of a set of distinct items is an arrangement of all of them in a definite order. For $n$ distinct objects, the number of permutations is:`,
+        formula: `@academic[example:&nbsp\t\t\t\t\t\t$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$]@`,
+        footer: `The product $n \\times (n - 1) \\times \\dots \\times 1$ is the factorial $n!$; for $3$ letters, $3! = 6$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A permutation is an ordered arrangement, and n! is a count of them.`,
+        content: `Each permutation is a sequence: ABC and BAC contain the same letters but are different permutations, because order is the whole point. In every type of permutation, the order of arrangement matters — that is exactly what separates permutations from [combinations](!/combinatorics/combinations), where only the group counts. The number $n!$ is how many such sequences there are.`,
+      },
+      {
+        id: 'caveat',
+        lead: `The multiplying generalizes; the rest was particular to this example.`,
+        content: `What generalizes is the mechanism: fill positions one by one and multiply the options at each step. What was particular: every item was used, every item was different, none could repeat, and the row had a first and last place. Change any of these — use only some items, allow identical items or repetition, seat them in a circle — and the factors change, which is what the [types](!/combinatorics/permutations#types) of permutations below sort out. And the count grows fast: $4$ items already give $24$ orders, and $10$ give $3{,}628{,}800$.`,
+        visual: ciSvg('n4'),
+        caption: `All $24$ orders of $4$ items, grouped by the item in first place: $4$ groups of $6$, the $3! = 6$ orders of the rest. The same state is on the [full permutation visualizer](!/combinatorics/visual-tools/full-permutation).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page goes through the types of permutations — full, with identical items, partial, with repetition, circular — their notation, and derangements, where no item may stay in its place.`,
+      },
+    ],
+  }
   
   const permutationsSections=[
     {
@@ -2597,12 +2792,7 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
         title:sectionsContent.logic.title,
         link:'',
         content:[
-          sectionsContent.logic.before,
-          scenariosData["Permutations of ABC: STEP-by-Step"].svg,
-          sectionsContent.logic.between,
-          scenariosData["Permutations (Full)"].svg,
-         
-          
+          <ConceptIntro key={'logic-intro'} data={conceptIntro} />,
         ]
     },
    {
@@ -2741,6 +2931,14 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
           sectionsContent.obj8.content,
           <div key={'unit-hatCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.hatCheck }} />,
           `Both derangements are rotations: in B C A every hat moves one seat one way, in C A B one seat the other way.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
 //   {

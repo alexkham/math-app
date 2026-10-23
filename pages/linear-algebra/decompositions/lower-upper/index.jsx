@@ -3278,6 +3278,12 @@ The multipliers fill $L$: $L = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1
 
 Verification: $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix} = A$.
 
+@academic[pitfall,aside:true,width:35%:Storing the negated multiplier
+Writing $-2$, $1$, $3$ below the diagonal because those are the amounts added gives $L = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & 3 & 1 \\end{pmatrix}$ and $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ -4 & -4 & 6 \\\\ 2 & -5 & 25 \\end{pmatrix} \\neq A$. The entries of $L$ are the multipliers $m_{21} = 2$, $m_{31} = -1$, $m_{32} = -3$.
+[Read more](!#pitfalls)]@
+
+Reading $L$ off the elimination takes no extra arithmetic. Each multiplier is filed at the position of the zero it created: $m_{21}$ at $(2, 1)$, $m_{31}$ at $(3, 1)$ and $m_{32}$ at $(3, 2)$. Multiplying $L$ by $U$ then reverses the row operations one by one, which is why the product rebuilds $A$ exactly.
+
 To compute the LU decomposition of your own matrix, use the [matrix calculator](!/linear-algebra/calculators/matrix).`,
     before: ``,
     after: ``,
@@ -3298,9 +3304,9 @@ The two factors compare cleanly on the same set of attributes — diagonal, belo
   },
   obj4: {
     title: `When LU Exists Without Pivoting`,
-    content: `The factorization $A = LU$ without row swaps exists if and only if every leading principal submatrix of $A$ is nonsingular. The $k$-th leading principal submatrix is the upper-left $k \\times k$ block of $A$, and its [determinant](!/linear-algebra/determinants) must be nonzero for $k = 1, 2, \\dots, n$.
+    content: `For an [invertible](!/linear-algebra/matrix/inverse) matrix $A$, the factorization $A = LU$ without row swaps exists if and only if every leading principal submatrix of $A$ is nonsingular. The $k$-th leading principal submatrix is the upper-left $k \\times k$ block of $A$, and its [determinant](!/linear-algebra/determinants) must be nonzero for $k = 1, 2, \\dots, n$.
 
-When a zero appears in a pivot position during elimination, no row-addition operation can produce a nonzero pivot — a row swap is required. The simple $A = LU$ factorization breaks down, and the pivoted version $PA = LU$ is needed.
+When a zero appears in a pivot position during elimination of an invertible matrix, no row-addition operation can produce a nonzero pivot — a row swap is required. The simple $A = LU$ factorization breaks down, and the pivoted version $PA = LU$ is needed.
 
 For example, $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has no $LU$ factorization without pivoting: the $(1,1)$ entry is zero, and no multiple of row $1$ can create a nonzero pivot. But after swapping the two rows, elimination proceeds immediately.`,
     before: ``,
@@ -3317,6 +3323,10 @@ The factorization becomes:
 @academic[formulas_link:/linear-algebra/formulas#pa_lu_partial_pivoting]@
 
 where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra/matrix/types#12). This factorization exists for every [invertible](!/linear-algebra/matrix/inverse) matrix — partial pivoting eliminates the restriction on leading principal submatrices.
+
+@academic[pitfall,aside:true,width:35%:Choosing the largest signed entry
+In a pivot column holding $2$ and $-5$, keeping $2$ because $2 > -5$ gives the multiplier $-5/2$, larger than $1$ in size. Partial pivoting compares $|2|$ with $|-5|$, swaps the $-5$ row up, and the multiplier becomes $2/(-5) = -2/5$.
+[Read more](!#pitfalls)]@
 
 Partial pivoting also improves numerical stability. Small pivots amplify rounding errors (dividing by a number near zero magnifies imprecision), and selecting the largest available pivot keeps the multipliers in $L$ bounded by $1$ in absolute value, limiting error accumulation.
 
@@ -3336,7 +3346,11 @@ Forward substitution: solve $L\\mathbf{y} = P\\mathbf{b}$ for $\\mathbf{y}$. Sin
 
 Back substitution: solve $U\\mathbf{x} = \\mathbf{y}$ for $\\mathbf{x}$. Since $U$ is upper triangular, this starts at the bottom and works upward. Cost: $O(n^2)$.
 
-The factorization itself costs $\\frac{2}{3}n^3$ operations. Each subsequent solve costs $O(n^2)$. For $k$ systems with the same coefficient matrix but different right-hand sides $\\mathbf{b}_1, \\dots, \\mathbf{b}_k$: factor once at cost $\\frac{2}{3}n^3$, then solve $k$ times at cost $kn^2$. When $k$ is large, the per-system cost drops to essentially $O(n^2)$ — far cheaper than $k$ independent eliminations at $\\frac{2}{3}n^3$ each.`,
+@academic[pitfall,aside:true,width:35%:Forgetting to permute the right-hand side
+For $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$, one swap gives $L = I$ and $U = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$. Solving with $\\mathbf{b} = (2, 4)$ instead of $P\\mathbf{b}$ gives $\\mathbf{x} = (0, 2)$, but $A\\mathbf{x} = (4, 2)$. With $P\\mathbf{b} = (4, 2)$, $\\mathbf{x} = (1, 1)$.
+[Read more](!#pitfalls)]@
+
+The factorization itself costs $\\frac{2}{3}n^3$ operations. Each subsequent solve costs $O(n^2)$. For $k$ systems with the same coefficient matrix but different right-hand sides $\\mathbf{b}_1, \\dots, \\mathbf{b}_k$: factor once at cost $\\frac{2}{3}n^3$, then solve $k$ times at cost $2kn^2$. When $k$ is large, the per-system cost drops to essentially $O(n^2)$ — far cheaper than $k$ independent eliminations at $\\frac{2}{3}n^3$ each.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3350,6 +3364,10 @@ The factorization itself costs $\\frac{2}{3}n^3$ operations. Each subsequent sol
 
 where $s$ is the number of row swaps recorded in $P$. Without pivoting ($s = 0$), the sign factor drops and $\\det(A) = u_{11}u_{22}\\cdots u_{nn}$.
 
+@academic[pitfall,aside:true,width:35%:Dropping the sign of the row swaps
+For $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, one swap gives $U = I$, and multiplying its pivots alone gives $\\det A = 1$. With $s = 1$, $\\det A = (-1)^1 \\cdot 1 = -1$, which matches $0 \\cdot 0 - 1 \\cdot 1$.
+[Read more](!#pitfalls)]@
+
 This makes determinant computation essentially free once LU is available — just multiply the diagonal of $U$ and account for the sign. It is far more efficient than cofactor expansion, and it is the method every numerical library uses.`,
     before: ``,
     after: ``,
@@ -3359,7 +3377,7 @@ This makes determinant computation essentially free once LU is available — jus
     title: `LU and the Inverse`,
     content: `To compute $A^{-1}$, solve $A\\mathbf{x}_j = \\mathbf{e}_j$ for each standard basis vector $\\mathbf{e}_j$, $j = 1, \\dots, n$. The solutions $\\mathbf{x}_1, \\dots, \\mathbf{x}_n$ are the columns of $A^{-1}$.
 
-With LU: factor $A$ once ($\\frac{2}{3}n^3$), then solve $n$ systems ($n \\times O(n^2) = O(n^3)$). Total cost: roughly $\\frac{8}{3}n^3$ — cheaper than $n$ independent eliminations.
+With LU: factor $A$ once ($\\frac{2}{3}n^3$), then solve $n$ systems ($n \\times O(n^2) = O(n^3)$). Total cost: roughly $\\frac{8}{3}n^3$ counted directly, or $2n^3$ when the zeros in the columns of $I$ are used — cheaper than $n$ independent eliminations.
 
 In practice, computing $A^{-1}$ explicitly is rarely the right approach. Solving $A\\mathbf{x} = \\mathbf{b}$ via LU is faster than multiplying $A^{-1}\\mathbf{b}$, and more numerically stable. The [inverse](!/linear-algebra/matrix/inverse) formula is primarily a theoretical tool; for computation, LU solves are preferred.`,
     before: ``,
@@ -3382,7 +3400,7 @@ $$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 0 & -1/3 & 3 & -5/3 \\\\ 0 & 2 & 1 & 3 \\\
 
 The largest entry in column $2$ below position $(2,2)$ is $7/3$ in row $4$. Swap rows $2$ and $4$. Continue elimination on columns $2$ and $3$ with the appropriate multipliers.
 
-After completing all steps, the factorization $PA = LU$ is assembled with $P$ recording both row swaps, $L$ storing all multipliers, and $U$ storing the final upper triangular result. Verification: $LU = PA$.`,
+After completing all steps, the factorization $PA = LU$ is assembled with $P$ recording all three row swaps (column $3$ needs one too, since $22/7 > 1/7$), $L$ storing all multipliers, and $U$ storing the final upper triangular result. Verification: $LU = PA$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3403,6 +3421,66 @@ These options can be set side by side on cost per system, cost amortized over ma
   obj11: {
     title: `Summary: What LU Computes`,
     content: `Once $PA = LU$ is in hand, three of the most common matrix-level computations — solving a system, taking the determinant, and forming the inverse — collapse to cheap operations on the factors. The table below collects each task with the procedure it reduces to, the cost given the factorization, and the cost of doing the same task from scratch for comparison.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong factorizations and wrong answers obtained from correct ones. Each is marked with a box where it happens in the sections above; here each is worked through in full.
+
+**Storing the negated multiplier**
+
+The row operation is written as "row $2$ minus $2$ times row $1$", and the $-2$ from that operation is copied into $L$. The same is done for every step, so every entry below the diagonal of $L$ has the wrong sign.
+
+Wrong working: for the worked example, the operations add $-2$ times row $1$ to row $2$, $1$ times row $1$ to row $3$ and $3$ times row $2$ to row $3$. Storing those amounts gives
+$$LU = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & 3 & 1 \\end{pmatrix}\\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 & -1 \\\\ -4 & -4 & 6 \\\\ 2 & -5 & 25 \\end{pmatrix} \\neq A$$
+
+Right working: $L$ holds the multipliers $m_{21} = 2$, $m_{31} = -1$, $m_{32} = -3$, the numbers that were subtracted.
+$$LU = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1 & -3 & 1 \\end{pmatrix}\\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix} = A$$
+
+Why it happens: the elementary matrix $E_1$ of the first step really does carry $-2$ in position $(2, 1)$. But $L$ is built from the inverses $E_i^{-1}$, and each inverse negates its multiplier.
+
+How to check: the first column of $LU$ is $u_{11}$ times the first column of $L$, and it must equal the first column of $A$. Here $2 \\cdot (1, 2, -1) = (2, 4, -2)$ is correct, while $2 \\cdot (1, -2, 1) = (2, -4, 2)$ is not.
+
+**Choosing the largest signed entry**
+
+Partial pivoting is applied by picking the largest number in the pivot column, comparing signed values instead of absolute values. A negative entry of large size is passed over.
+
+Wrong working: for $A = \\begin{pmatrix} 2 & 1 \\\\ -5 & 3 \\end{pmatrix}$, $2 > -5$, so row $1$ stays as the pivot row. The multiplier is $m_{21} = -5/2$, and
+$$L = \\begin{pmatrix} 1 & 0 \\\\ -5/2 & 1 \\end{pmatrix}, \\quad U = \\begin{pmatrix} 2 & 1 \\\\ 0 & 11/2 \\end{pmatrix}$$
+This is a valid $A = LU$, but not the partial-pivoting factorization: the multiplier exceeds $1$ in size.
+
+Right working: $|-5| > |2|$, so the rows are swapped and $PA = \\begin{pmatrix} -5 & 3 \\\\ 2 & 1 \\end{pmatrix}$. The multiplier is $m_{21} = 2/(-5) = -2/5$, and
+$$L = \\begin{pmatrix} 1 & 0 \\\\ -2/5 & 1 \\end{pmatrix}, \\quad U = \\begin{pmatrix} -5 & 3 \\\\ 0 & 11/5 \\end{pmatrix}$$
+
+Why it happens: "largest" is read as the largest number. When all entries in the column are positive the two readings agree, so the difference shows up only with negative entries.
+
+How to check: every multiplier stored in $L$ must satisfy $|l_{ij}| \\le 1$. A multiplier of larger size means a larger pivot was available and was skipped.
+
+**Forgetting to permute the right-hand side**
+
+After computing $PA = LU$, forward substitution is run on $\\mathbf{b}$ itself. The rows of $A$ were reordered, but the entries of $\\mathbf{b}$ were not.
+
+Wrong working: for $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$ and $\\mathbf{b} = (2, 4)$, one swap gives $P = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, $L = I$ and $U = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$. Solving $L\\mathbf{y} = \\mathbf{b}$ gives $\\mathbf{y} = (2, 4)$. Back substitution gives $2x_2 = 4$, so $x_2 = 2$, and $3x_1 + 2 = 2$, so $x_1 = 0$. But $A(0, 2) = (4, 2) \\neq \\mathbf{b}$.
+
+Right working: $P\\mathbf{b} = (4, 2)$, so $\\mathbf{y} = (4, 2)$. Then $2x_2 = 2$ gives $x_2 = 1$, and $3x_1 + 1 = 4$ gives $x_1 = 1$. Check: $A(1, 1) = (2, 4) = \\mathbf{b}$.
+
+Why it happens: $P$ is used during the factorization and then put aside, and $L$ and $U$ look as if they factor $A$ itself. They factor $PA$.
+
+How to check: substitute the answer into the original system $A\\mathbf{x} = \\mathbf{b}$, not into $LU\\mathbf{x} = \\mathbf{b}$.
+
+**Dropping the sign of the row swaps**
+
+The determinant is taken as the product of the pivots on the diagonal of $U$, and the row swaps recorded in $P$ are ignored.
+
+Wrong working: for $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$, one swap gives $U = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$, and the product of the pivots is $3 \\cdot 2 = 6$.
+
+Right working: with $s = 1$ swap, $\\det A = (-1)^1 \\cdot 3 \\cdot 2 = -6$. Directly, $\\det A = 0 \\cdot 1 - 2 \\cdot 3 = -6$.
+
+Why it happens: without pivoting the determinant is exactly the product of the pivots, and that is the form most often remembered. The sign factor only appears once $P$ is in play.
+
+How to check: count the swaps, or compute $\\det P$, which is $+1$ or $-1$. For a $2 \\times 2$ matrix, compare with $ad - bc$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3710,6 +3788,14 @@ export default function LUDecompositionPage({
           </DiagramFrame>,
           `The break-even point arrives immediately. Solving one system by elimination costs $\\tfrac{2}{3}n^3$ whether or not the factors are kept, so keeping them is free; the second right-hand side then costs $2n^2$ instead of another $\\tfrac{2}{3}n^3$. For a $1000 \\times 1000$ matrix that is two million operations against roughly seven hundred million — a factor of several hundred, on the same matrix, for a different $\\mathbf{b}$.`,
           `The last row is the one to read as a warning. Computing $A^{-1}$ through LU is perfectly possible and rarely the right thing to do: it costs three times a single solve, and using the inverse afterwards is both slower and less accurate than the two triangular solves it replaced. The inverse is worth forming when it is the answer, not when it is a step toward one.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

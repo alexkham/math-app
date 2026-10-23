@@ -325,6 +325,10 @@ A linear polynomial ($n = 1$) has none — it is a straight line with no change 
 
 The actual number of turning points may be less than the maximum. The cubic $P(x) = x^3$ has no turning points at all — it increases steadily from left to right with an inflection point at the origin but no reversal of direction. The cubic $P(x) = x^3 - 3x$ has exactly two turning points, achieving the maximum for its degree.
 
+@academic[pitfall,aside:true,width:35%:Forcing the maximum number of turns
+Drawing every cubic with two turns gives $x^3 + x$ a peak and a valley it does not have. Both $x^3$ and $x$ increase everywhere, so $x^3 + x$ rises the whole way with no turning points.
+[Read more](!#12)]@
+
 Knowing the upper bound on turning points serves as a reality check when sketching. If a degree-$4$ polynomial sketch shows four turning points, something is wrong — the graph has been drawn with one bend too many.`,
   before: ``,
   after: ``,
@@ -344,7 +348,13 @@ At multiplicity $1$, the crossing is clean — the curve passes through at an an
 
 At multiplicity $2$, the curve reaches the axis and turns back, resembling a parabola tangent to the x-axis. At multiplicity $4$, the same touch-and-turn occurs but with a flatter approach.
 
-The polynomial $(x - 1)(x + 2)^2(x - 3)^3$ illustrates all three behaviors. At $x = 1$ (multiplicity $1$), the graph crosses at an angle. At $x = -2$ (multiplicity $2$), the graph touches and bounces back. At $x = 3$ (multiplicity $3$), the graph crosses with a flattened inflection. Recognizing these patterns from the factored form allows accurate sketching without plotting dozens of points.`,
+The polynomial $(x - 1)(x + 2)^2(x - 3)^3$ illustrates all three behaviors. At $x = 1$ (multiplicity $1$), the graph crosses at an angle. At $x = -2$ (multiplicity $2$), the graph touches and bounces back. At $x = 3$ (multiplicity $3$), the graph crosses with a flattened inflection. Recognizing these patterns from the factored form allows accurate sketching without plotting dozens of points.
+
+@academic[pitfall,aside:true,width:35%:Counting factors instead of exponents
+Reading $(x - 1)(x + 2)^2(x - 3)^3$ as a cubic because it has three factors predicts ends going opposite ways. The exponents add to $1 + 2 + 3 = 6$: even degree, positive leading coefficient, both ends rise.
+[Read more](!#12)]@
+
+The factored form carries more than the roots. Each exponent records a multiplicity, and together the factors also fix the degree of the polynomial and the sign of its leading coefficient, which decide the end behavior that the sketch must start and finish with.`,
   before: ``,
   after: ``,
   link: '',
@@ -366,6 +376,10 @@ An odd function satisfies $P(-x) = -P(x)$ for all $x$, making its graph symmetri
 @academic[rule_plain:A polynomial is an odd function when it contains only odd powers of $x$ — no constant term and no even-powered terms.]@
 
 The polynomial $P(x) = x^3 - 5x$ is odd: $P(-x) = -x^3 + 5x = -(x^3 - 5x) = -P(x)$.
+
+@academic[pitfall,aside:true,width:35%:Judging symmetry by the degree
+Calling $x^4 + x$ even because its degree is even fails at once: $P(1) = 2$ but $P(-1) = 0$, so the graph is not mirrored across the y-axis. Every power must be even; $x^4 + x$ has neither symmetry.
+[Read more](!#12)]@
 
 Most polynomials have neither symmetry. The presence of both even and odd powers — as in $x^3 + x^2$ — breaks both conditions. Recognizing symmetry when it exists cuts the graphing work in half, since the behavior on one side of the axis determines the other.`,
   before: ``,
@@ -397,7 +411,13 @@ The sign of $a$ controls the orientation. When $a > 0$, the parabola opens upwar
 
 The vertex lies at $x = -\\frac{b}{2a}$, and the corresponding $y$-value is $P\\left(-\\frac{b}{2a}\\right)$. The vertical line $x = -\\frac{b}{2a}$ is the axis of symmetry — every point on the parabola has a mirror image across this line.
 
-@academic[rule_theorem_plain:The discriminant $b^2 - 4ac$ determines the number of x-intercepts. When it is positive, the parabola crosses the x-axis at two points. When it is zero, the vertex sits on the x-axis and the parabola touches it at exactly one point. When it is negative, the parabola has no real [roots](!/algebra/polynomials/roots) and floats entirely above or below the x-axis.]@`,
+@academic[rule_theorem_plain:The discriminant $b^2 - 4ac$ determines the number of x-intercepts. When it is positive, the parabola crosses the x-axis at two points. When it is zero, the vertex sits on the x-axis and the parabola touches it at exactly one point. When it is negative, the parabola has no real [roots](!/algebra/polynomials/roots) and floats entirely above or below the x-axis.]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the minus in the vertex formula
+Using $x = \\frac{b}{2a}$ for $x^2 - 2x - 3$ gives $x = -1$, where $P(-1) = 0$ is a root, not the minimum. With $x = -\\frac{b}{2a}$ the vertex is at $x = 1$, with $P(1) = -4$.
+[Read more](!#12)]@
+
+Together, the sign of $a$, the vertex and the discriminant settle the sketch of a parabola: which way it opens, where it turns, and whether it reaches the x-axis. For the parabola $x^2 - 2x - 3$ shown below, $a = 1$, $b = -2$ and $c = -3$.`,
   before: ``,
   after: ``,
   link: '',
@@ -448,6 +468,10 @@ Next, find the y-intercept by evaluating $P(0)$. This gives a concrete anchor po
 
 Then find the x-intercepts by solving $P(x) = 0$. If the polynomial is in [factored form](!/algebra/polynomials/factoring), the roots and their multiplicities are immediately visible. If not, the [Rational Root Theorem](!/algebra/polynomials/rules) and synthetic division may help. At each root, note whether the graph crosses (odd multiplicity) or touches and turns (even multiplicity).
 
+@academic[pitfall,aside:true,width:35%:Drawing through every root
+Passing straight through every root sends $x(x - 2)^2$ below the axis to the right of $x = 2$. The root $2$ is double, so the graph touches at $(2, 0)$ and turns back up.
+[Read more](!#12)]@
+
 Plot the intercepts and mark the crossing or touching behavior at each x-intercept. Determine turning points if possible — for quadratics, the vertex formula gives the exact location; for higher degrees, calculus or test points between roots can help.
 
 Finally, connect the plotted points with a smooth curve that respects end behavior, passes through or touches each x-intercept as required, and does not exceed the maximum number of turning points. The result is a sketch that captures the essential shape of the polynomial.`,
@@ -468,7 +492,57 @@ Drawing sharp corners violates the fundamental smoothness of polynomial curves. 
 
 Exceeding the turning point bound creates impossible graphs. A cubic with three turning points or a quartic with four has too many direction changes for its degree. The bound of $n - 1$ is absolute.
 
-Ignoring the leading coefficient's sign flips the entire graph. The polynomials $x^4 - 3x^2 + 1$ and $-x^4 + 3x^2 - 1$ have identical turning points and roots but completely opposite orientations — one opens upward at the extremes, the other downward.`,
+Ignoring the leading coefficient's sign flips the entire graph. The polynomials $x^4 - 3x^2 + 1$ and $-x^4 + 3x^2 - 1$ have turning points at the same $x$-values (mirrored across the $x$-axis) and the same roots, but completely opposite orientations — one opens upward at the extremes, the other downward.
+
+**Forcing the maximum number of turns**
+
+The bound of $n - 1$ turning points is treated as the number every graph of degree $n$ must have, so each cubic is drawn with a peak and a valley.
+
+Wrong working: $x^3 + x$ is a cubic, so it is sketched rising to a peak, falling to a valley and rising again.
+
+Right working: $x^3$ and $x$ both increase everywhere, so their sum increases everywhere too. The graph of $x^3 + x = x(x^2 + 1)$ rises the whole way, crosses the axis only at the origin, and has no turning points.
+
+Why it happens: the familiar S-shaped cubics, such as $x^3 - 3x$, use both turns, and the bound is remembered as a fixed count rather than a ceiling.
+
+How to check: ask whether the polynomial can fall anywhere. For $x^3 + x$, a larger $x$ makes both $x^3$ and $x$ larger, so the value never falls; the values at $x = -1, 0, 1, 2$ are $-2, 0, 2, 10$. A curve that never falls has no peak and no valley.
+
+**Counting factors instead of exponents**
+
+The degree is read from the number of factors in the factored form, and the exponents are ignored. The wrong degree then gives the wrong end behavior.
+
+Wrong working: $(x - 1)(x + 2)^2(x - 3)^3$ has three factors, so it is taken as a cubic: odd degree with a positive leading coefficient, so the left end falls and the right end rises.
+
+Right working: the degree is the sum of the exponents, $1 + 2 + 3 = 6$, and the leading term is $x \\cdot x^2 \\cdot x^3 = x^6$. Even degree with a positive leading coefficient: both ends rise.
+
+Why it happens: each factor gives one root, so counting factors feels like counting the degree, and the exponents are treated as details that only shape the graph at each root.
+
+How to check: test a large negative value. At $x = -10$ the factors are $-11$, $(-8)^2 = 64$ and $(-13)^3 = -2197$. Two negative numbers and a positive one multiply to a positive number, so the left end is up, not down.
+
+**Judging symmetry by the degree**
+
+Symmetry is decided from the leading term alone: an even degree is taken to mean an even function, and an odd degree an odd function.
+
+Wrong working: $x^4 + x$ has even degree, so its graph is drawn as a mirror image across the y-axis.
+
+Right working: replace $x$ with $-x$. $P(-x) = x^4 - x$, which is neither $P(x) = x^4 + x$ nor $-P(x) = -x^4 - x$. The polynomial has neither symmetry, because it mixes an even power with an odd one.
+
+Why it happens: the words even and odd describe both the degree and the symmetry, and the leading term is the one that already decides the end behavior.
+
+How to check: substitute one pair of opposite values. An even function gives equal values at $x = 1$ and $x = -1$, an odd function gives opposite values; for $x^4 + x$ they are $2$ and $0$, which are neither.
+
+**Dropping the minus in the vertex formula**
+
+The vertex is computed as $\\frac{b}{2a}$ instead of $-\\frac{b}{2a}$, which puts it at the mirror position on the other side of the y-axis.
+
+Wrong working: for $x^2 - 2x - 3$, $a = 1$ and $b = -2$, so $x = \\frac{-2}{2} = -1$, and the vertex is taken as $(-1, P(-1)) = (-1, 0)$.
+
+Right working:
+$$x = -\\frac{b}{2a} = -\\frac{-2}{2 \\cdot 1} = 1$$
+and $P(1) = 1 - 2 - 3 = -4$. The vertex is $(1, -4)$.
+
+Why it happens: with a negative $b$, the minus in the formula and the sign of $b$ cancel, and one of the two signs is easily lost.
+
+How to check: with $a > 0$ the vertex is the lowest point, but $P(1) = -4$ lies below $P(-1) = 0$, so $(-1, 0)$ cannot be the minimum; it is a root. The vertex also sits midway between the roots $-1$ and $3$: $\\frac{-1 + 3}{2} = 1$.`,
   before: ``,
   after: ``,
   link: '',

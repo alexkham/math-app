@@ -327,7 +327,13 @@ When $0 < a < 1$, the function decays. The curve is a mirror image — high on t
 
 @academic[rule_corollary_plain:The point $(0, 1)$ lies on every exponential graph, regardless of the base. This is a direct consequence of the [zero exponent rule](!/algebra/powers/zero-powers): $a^0 = 1$ for any positive $a$.]@
 
-The larger the base (when $a > 1$), the steeper the growth. The function $10^x$ rises far more aggressively than $2^x$. The closer the base is to $1$ from either side, the flatter the curve — $1.01^x$ grows, but barely.`,
+The larger the base (when $a > 1$), the steeper the growth. The function $10^x$ rises far more aggressively than $2^x$. The closer the base is to $1$ from either side, the flatter the curve — $1.01^x$ grows, but barely.
+
+@academic[pitfall,aside:true,width:35%:Expecting a larger base to decay faster
+Carrying "larger base, steeper curve" over to decay makes $0.9^x$ look like the faster fall. But $0.9^3 = 0.729$ while $0.5^3 = 0.125$: the base nearer $0$ decays faster.
+[Read more](!#pitfalls)]@
+
+For a decay curve, every step from $x$ to $x + 1$ multiplies the output by the base, a number below $1$. Starting from $(0, 1)$, three steps to the right leave the curve at height $a^3$, so two decay curves are compared by how much of the output each one keeps per step.`,
   before: ``,
   after: ``,
   link: '',
@@ -342,6 +348,10 @@ The domain is all real numbers. Every real $x$ — positive, negative, zero, rat
 
 The range is $(0, \\infty)$. The output is always positive — never zero, never negative. No matter how far left the curve extends, it approaches the horizontal axis but never reaches it.
 
+@academic[pitfall,aside:true,width:35%:Making the output negative for a negative exponent
+Reading $2^{-3}$ as $-8$, or as $-6$, puts points of the curve below the axis. A negative exponent takes a reciprocal, not a sign: $2^{-3} = \\frac{1}{8}$, small but positive.
+[Read more](!#pitfalls)]@
+
 The horizontal asymptote is the line $y = 0$. For $a > 1$, the curve approaches zero as $x \\to -\\infty$. For $0 < a < 1$, it approaches zero as $x \\to +\\infty$. In neither case does the function touch the axis.
 
 The function is one-to-one. When $a > 1$, it is strictly increasing — different inputs always produce different outputs. When $0 < a < 1$, it is strictly decreasing. This is the property that makes [exponential equations](!/algebra/powers/exponential-equations) and [inequalities](!/algebra/powers/exponential-inequalities) solvable: $a^x = a^y$ implies $x = y$.
@@ -355,6 +365,10 @@ There is no x-intercept. Since $a^x > 0$ for all $x$, the graph never crosses th
 obj4: {
   title: `Exponential vs Power Functions`,
   content: `The expressions $x^2$ and $2^x$ look similar on paper but behave in fundamentally different ways. In $x^2$, the variable is the base — this is a power function, a [polynomial](!/algebra/polynomials). In $2^x$, the variable is the exponent — this is an exponential function.
+
+@academic[pitfall,aside:true,width:35%:Swapping the base and the exponent
+Evaluating $2^x$ as if it were $x^2$ gives $25$ at $x = 5$ and $1$ at $x = -1$. With the variable in the exponent, $2^5 = 32$ and $2^{-1} = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
 
 For small positive values of $x$, the polynomial can dominate. At $x = 2$, $x^2 = 4$ while $2^x = 4$ — they are equal. At $x = 3$, $x^2 = 9$ while $2^x = 8$ — the polynomial is still ahead.
 
@@ -404,6 +418,55 @@ obj6: {
       after:``,
       link:'',
   
+    },
+    obj16: {
+      title: `Common Pitfalls`,
+      content: `Three mistakes come up again and again when working with $f(x) = a^x$. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Expecting a larger base to decay faster**
+
+For growth curves, a larger base gives a steeper curve. The same rule is then carried over to bases between $0$ and $1$, and $0.9^x$ is taken to fall faster than $0.5^x$ because $0.9$ is the larger number.
+
+Wrong working: $0.9 > 0.5$, so $0.9^x$ is judged the faster decay.
+
+Right working: compare the two curves after the same number of steps.
+$$0.9^3 = 0.729 \\qquad 0.5^3 = 0.125$$
+After three steps $0.9^x$ still keeps about $73\\%$ of its starting value, while $0.5^x$ keeps only $12.5\\%$. The base nearer $0$ decays faster; the base nearer $1$ gives the flatter curve.
+
+Why it happens: "larger base, steeper curve" is first learned on growth curves, where it is true, and it is applied without checking which side of $1$ the base lies on.
+
+How to check: write each decay base as the reciprocal of a growth base. $0.5^x = 2^{-x}$ is the mirror image of $2^x$, while $0.9^x = \\left(\\frac{10}{9}\\right)^{-x}$ mirrors the much flatter $\\left(\\frac{10}{9}\\right)^x$. The steeper growth curve has the steeper mirror image.
+
+**Making the output negative for a negative exponent**
+
+A negative input is taken to give a negative output, as if the minus sign in the exponent passed on to the result. Some learners also multiply base and exponent, reading $2^{-3}$ as $2 \\cdot (-3)$.
+
+Wrong working:
+$$2^{-3} = -(2^3) = -8 \\qquad \\text{or} \\qquad 2^{-3} = 2 \\cdot (-3) = -6$$
+
+Right working: a negative exponent means a reciprocal.
+$$2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$$
+For negative $x$ the outputs of $2^x$ are fractions between $0$ and $1$, never negative numbers.
+
+Why it happens: elsewhere in arithmetic a minus sign makes a quantity negative, and the sign of the exponent is read the same way.
+
+How to check: the range of every exponential function is $(0, \\infty)$, so a negative or zero output always signals an error. Stepping left from $x = 0$ halves $2^x$ each time: $1, \\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}$ at $x = 0, -1, -2, -3$, getting closer to $0$ without crossing it.
+
+**Swapping the base and the exponent**
+
+The expressions $2^x$ and $x^2$ contain the same symbols, and the exponential is evaluated as if the variable were the base.
+
+Wrong working: at $x = 5$, $2^x$ is computed as $5^2 = 25$; at $x = -1$, as $(-1)^2 = 1$.
+
+Right working: the base stays $2$ and $x$ goes in the exponent.
+$$2^5 = 32 \\qquad 2^{-1} = \\frac{1}{2}$$
+
+Why it happens: in polynomials the letter almost always sits in the base, so the eye puts it there by habit.
+
+How to check: substitute $x = 0$. The exponential gives $2^0 = 1$, while the power function gives $0^2 = 0$. Every exponential graph passes through $(0, 1)$, so an output of $0$ at $x = 0$ means the roles were swapped.`,
+      before: ``,
+      after: ``,
+      link: '',
     },
     obj8:{
       title:``,
@@ -759,6 +822,14 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

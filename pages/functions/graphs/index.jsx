@@ -935,6 +935,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
 import renderFunctionPlotV3 from '@/app/utils/illustrations/functions/graphs/functionPlot.v3'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1273,7 +1275,11 @@ obj3: {
   content: `Given a function's equation, the most direct way to produce its graph is point plotting: choose input values, compute outputs, plot the resulting points, and connect them with an appropriate curve.
 
 For $f(x) = x^2 - 4x + 3$, build a table of values:`,
-  contentAfter: `Plot these five points and connect them with a smooth parabola. The curve passes through $(1, 0)$ and $(3, 0)$, reaches a minimum at $(2, -1)$, and opens upward.
+  contentAfter: `@academic[pitfall,aside:true,width:35%:Joining points with straight segments
+Joining $(1, 0)$, $(2, -1)$ and $(3, 0)$ with a ruler draws a sharp corner at the vertex and puts the graph above $x = 1.5$ at height $-0.5$. The curve is smooth and lower there: $f(1.5) = 2.25 - 6 + 3 = -0.75$.
+[Read more](!#pitfalls)]@
+
+Plot these five points and connect them with a smooth parabola. The curve passes through $(1, 0)$ and $(3, 0)$, reaches a minimum at $(2, -1)$, and opens upward.
 
 Choosing strategic points improves efficiency. Include $x = 0$ to find the $y$-intercept. Solve $f(x) = 0$ to find $x$-intercepts. For quadratics, find the vertex. For rational functions, identify asymptotes. For periodic functions, capture at least one full period.
 
@@ -1338,6 +1344,10 @@ To find $f(a)$ for a specific input $a$: locate $a$ on the horizontal axis, draw
 
 To find all $x$ such that $f(x) = b$ for a specific output $b$: locate $b$ on the vertical axis, draw a horizontal line to the curve, and read the $x$-coordinates of all intersection points. Each intersection gives a solution.
 
+@academic[pitfall,aside:true,width:35%:Stopping at the first intersection
+Solving $f(x) = 5$ for $f(x) = x^2 - 4$ by reading only the crossing on the right gives $x = 3$ alone. The line $y = 5$ meets the parabola twice: $x = -3$ and $x = 3$.
+[Read more](!#pitfalls)]@
+
 The first question has at most one answer — a function produces exactly one output per input. The second question may have zero, one, or many answers — multiple inputs can share the same output.
 
 Precision depends on the graph's scale and clarity. Reading $f(2)$ from a carefully drawn graph might yield $f(2) = 3.7$, but the true value might be $3.71$ or $3.68$. Graphs provide estimates; equations provide exact values.
@@ -1362,6 +1372,10 @@ The $x$-intercepts are points where the graph crosses the horizontal axis. At th
 
 A function can have zero, one, or many $x$-intercepts. The parabola $f(x) = x^2 + 1$ has none — it never touches the $x$-axis. The parabola $f(x) = x^2$ has exactly one, at the origin. The sine function has infinitely many, at every integer multiple of $\\pi$.
 
+@academic[pitfall,aside:true,width:35%:Setting the wrong variable to zero
+Finding the $x$-intercept of $f(x) = 2x - 6$ by putting $x = 0$ gives $-6$, which belongs to the $y$-intercept $(0, -6)$. For the $x$-intercept the output is set to zero: $2x - 6 = 0$, so the point is $(3, 0)$.
+[Read more](!#pitfalls)]@
+
 The $x$-intercepts are the zeros of the function, and finding them is equivalent to solving the equation $f(x) = 0$. This connection makes intercepts central to both graphing and equation-solving. The table below sets the two intercept types side by side with their algebraic methods, graphical meaning, and count.`,
     before: ``,
     after: ``,
@@ -1376,7 +1390,13 @@ Peaks are local high points — places where the graph rises to a summit and the
 
 The absolute maximum is the highest point on the entire graph; the absolute minimum is the lowest. These may occur at turning points or at the endpoints of a restricted domain. Some functions have no absolute extrema — a line extends forever in both directions without reaching a highest or lowest point.
 
-Asymptotes are lines the graph approaches but never reaches. A vertical asymptote appears where the function blows up toward infinity; the graph rises or falls steeply, getting arbitrarily close to a vertical line. A horizontal asymptote describes end behavior — the graph levels off toward a fixed height as $x$ extends toward infinity.
+@academic[pitfall,aside:true,width:35%:Giving the location as the maximum
+For $f(x) = -x^2 + 2x + 3$, whose peak is at $(1, 4)$, answering "the maximum is $1$" reports where the peak is, not how high it is. The maximum value is $f(1) = 4$, reached at $x = 1$.
+[Read more](!#pitfalls)]@
+
+Every turning point is a pair $(x, y)$, and its two coordinates carry different information: the input where the function turns, and the output it reaches there. Questions about extrema can ask for either one — where a maximum occurs, or what the maximum value is. On a graph, the first is read along the horizontal axis and the second along the vertical axis.
+
+Asymptotes are lines the graph approaches arbitrarily closely; a graph can still cross a horizontal or oblique asymptote. A vertical asymptote appears where the function blows up toward infinity; the graph rises or falls steeply, getting arbitrarily close to a vertical line. A horizontal asymptote describes end behavior — the graph levels off toward a fixed height as $x$ extends toward infinity.
 
 Holes are single missing points — places where the graph is undefined but the surrounding curve continues smoothly. Holes appear as open circles on carefully drawn graphs and correspond to removable discontinuities in the function.
 
@@ -1396,7 +1416,7 @@ Parabolas come from quadratic functions $f(x) = ax^2 + bx + c$. They open upward
 
 S-curves come from cubic functions. They feature one inflection point where the curve changes from bending one way to bending the other. Both ends extend to infinity, in opposite directions.
 
-Hyperbolas come from simple rational functions like $f(x) = 1/x$. They have two separate branches, one in Quadrants I and III, the other reflected. Vertical and horizontal asymptotes frame the curve.
+Hyperbolas come from simple rational functions like $f(x) = 1/x$. They have two separate branches, one in Quadrant I and the other in Quadrant III. Vertical and horizontal asymptotes frame the curve.
 
 Half-curves come from radical functions like $f(x) = \\sqrt{x}$. They begin at a starting point and extend in one direction, curving gently.
 
@@ -1438,6 +1458,12 @@ The [domain](!/functions/domain) appears as horizontal extent. Where does the gr
 
 The [range](!/functions/range) appears as vertical extent. How high does the graph reach? How low? Are there values of $y$ the graph never attains?
 
+@academic[pitfall,aside:true,width:35%:Reading the range off the horizontal axis
+The parabola $f(x) = x^2 - 4$ spreads over every $x$, so its range is given as all real numbers. That is the domain; read vertically, the lowest point is $(0, -4)$ and the range is $[-4, \\infty)$.
+[Read more](!#pitfalls)]@
+
+Domain and range are read from the same picture, each against its own axis. A graph can run without end in one direction while staying bounded in the other, so the two answers often look nothing alike. Each one needs its own look at the curve: the horizontal spread for the domain, the vertical spread for the range.
+
 Symmetry appears as visual balance. A graph symmetric about the $y$-axis represents an [even function](!/functions/properties). A graph symmetric about the origin represents an odd function.
 
 Comparing graphs reveals relationships between functions. Two functions with the same shape but different positions differ by a [transformation](!/functions/transformations). Two functions that intersect share common solutions.
@@ -1451,6 +1477,74 @@ Graphs translate between the algebraic and the visual. The equation $f(x) = x^2 
   obj11: {
     title: `What to Look For on a Graph`,
     content: `Every question that can be asked about a function corresponds to a feature that can be located visually on its graph. The table below collects the most common questions — value lookups, intercepts, domain and range, monotonicity, extrema, symmetry, end behavior, asymptotes, and continuity — alongside the visual cue that answers each, useful as a reference card when reading any unfamiliar graph.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again when drawing and reading graphs of functions. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Joining points with straight segments**
+
+After a table of values is plotted, the points are joined with straight segments, as if the function were linear between them. For a curved graph this draws corners that are not there and gives wrong values between the plotted inputs.
+
+Wrong working: for $f(x) = x^2 - 4x + 3$, the points $(1, 0)$ and $(2, -1)$ are joined by a segment, so the graph above $x = 1.5$ is read at the midpoint height $-0.5$, and the bottom of the sketch is a sharp V at $(2, -1)$.
+
+Right working: the graph is a parabola, so it bends between the points. At $x = 1.5$, $f(1.5) = 1.5^2 - 4(1.5) + 3 = 2.25 - 6 + 3 = -0.75$, below the segment, and the curve is rounded at the vertex $(2, -1)$.
+
+Why it happens: a ruler gives a neat sketch, and five points look like enough to fix the shape. The points fix only positions; the shape between them comes from knowing the function family.
+
+How to check: evaluate the function halfway between two plotted inputs. If the value differs from the height of the segment there, the graph curves.
+
+**Stopping at the first intersection**
+
+To solve $f(x) = b$ from a graph, the horizontal line $y = b$ is drawn, the first crossing is read, and the search stops. Every other crossing is a solution too, and it is lost.
+
+Wrong working: for $f(x) = x^2 - 4$ and $b = 5$, the line $y = 5$ is followed to the right branch of the parabola, giving $x = 3$ as the only answer.
+
+Right working: the line $y = 5$ meets both branches, at $x = -3$ and $x = 3$. Both check: $(-3)^2 - 4 = 5$ and $3^2 - 4 = 5$.
+
+Why it happens: reading $f(a)$ from an input always gives one answer, and the same habit is carried over to the reverse question, which can have zero, one or many answers.
+
+How to check: follow the horizontal line across the whole graph, from the left edge to the right edge, and count the crossings before writing the answer.
+
+**Setting the wrong variable to zero**
+
+The two intercept rules are swapped: to find the $x$-intercept, the input $x$ is set to zero, and to find the $y$-intercept, the output is set to zero.
+
+Wrong working: for $f(x) = 2x - 6$, the $x$-intercept is found as $f(0) = -6$ and written as the point $(-6, 0)$.
+
+Right working: on the $x$-axis the output is zero, so solve $2x - 6 = 0$, giving $x = 3$ and the point $(3, 0)$. The $y$-intercept is $f(0) = -6$, the point $(0, -6)$.
+
+Why it happens: the name "$x$-intercept" mentions $x$, so $x$ feels like the variable to change. The name actually says which axis the point lies on, and on that axis the other coordinate is zero.
+
+How to check: substitute the point into the function. For $(3, 0)$, $f(3) = 0$, so it lies on the graph. For $(-6, 0)$, $f(-6) = -18$, not $0$, so it does not.
+
+**Giving the location as the maximum**
+
+Asked for the maximum value of a function, the $x$-coordinate of the peak is given instead of its height.
+
+Wrong working: $f(x) = -x^2 + 2x + 3$ peaks at $(1, 4)$, and the maximum is reported as $1$.
+
+Right working: the maximum value is the output at the peak, $f(1) = -1 + 2 + 3 = 4$, and it is reached at $x = 1$. A full answer names both: the maximum value $4$ occurs at $x = 1$.
+
+Why it happens: finding the peak usually starts by locating its $x$-coordinate, and the first number found is written down as the answer.
+
+How to check: a maximum value is an output, so it is read on the vertical axis. If the answer is a position on the horizontal axis, it answers "where", not "how high".
+
+**Reading the range off the horizontal axis**
+
+The range is read from how far the graph spreads left and right, which is the domain, instead of how far it reaches up and down.
+
+Wrong working: $f(x) = x^2 - 4$ is defined for every $x$, and its graph spreads across the whole horizontal axis, so the range is given as all real numbers.
+
+Right working: the range collects the $y$-values the graph reaches. The lowest point is $(0, -4)$ and the parabola rises without end from there, so the range is $[-4, \\infty)$. All real numbers is the domain.
+
+Why it happens: both answers come from the same picture, and in many first examples, such as lines with nonzero slope, domain and range are both all real numbers, so the difference never shows.
+
+How to check: pick a $y$-value outside the claimed range and draw the horizontal line there. For $y = -5$ the line misses the parabola, since $x^2 - 4 = -5$ has no real solution, so $-5$ is not in the range.`,
     before: ``,
     after: ``,
     link: '',
@@ -1490,7 +1584,7 @@ const faqQuestions = {
   },
   obj4: {
     question: "Can a graph cross its own asymptote?",
-    answer: "A horizontal asymptote yes, a vertical one never. Horizontal asymptotes describe end behaviour far out, so nothing stops the curve crossing them in the middle. A vertical asymptote marks an input the function has no value at, so the curve cannot reach it, let alone pass through.",
+    answer: "A horizontal asymptote yes; a vertical one it meets at most once, and usually not at all. Horizontal asymptotes describe end behaviour far out, so nothing stops the curve crossing them in the middle. A vertical asymptote usually marks an input the function has no value at, so the curve cannot reach it; a function defined there touches the line at only that one point.",
     sectionId: "7"
   }
 }
@@ -1601,8 +1695,32 @@ const faqQuestions = {
     }),
   };
 
+  const curveOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Every family leaves a shape',
+    preface: 'Graphs of the common function families fall into a small set of recognisable curves.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Read the family from the curve',
+    conclusion: 'See the [function families](!/functions/families) page for each family in detail.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Types of curves', def: 'by function family', children: [
+        { id: 'line', name: 'Line', def: 'constant slope, no curvature', example: 'mx + b' },
+        { id: 'parab', name: 'Parabola', def: 'single vertex; opens up if a > 0', example: 'ax² + bx + c' },
+        { id: 's', name: 'S-curve', def: 'one inflection point', example: 'ax³ + …' },
+        { id: 'hyp', name: 'Hyperbola', def: 'two branches, asymptotes', example: '1/x' },
+        { id: 'half', name: 'Half-curve', def: 'starts at a point, goes one way', example: '√x' },
+        { id: 'v', name: 'V-shape', def: 'two linear pieces meeting at a vertex', example: '|x|' },
+        { id: 'wave', name: 'Wave', def: 'periodic, bounded oscillation', example: 'sin, cos' },
+        { id: 'grow', name: 'Growth or decay', def: 'stays on one side of the x-axis', example: 'aˣ' },
+        { id: 'stair', name: 'Staircase', def: 'horizontal segments with jumps', example: 'step functions' },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    curveOutline,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1625,7 +1743,7 @@ const faqQuestions = {
     }
    }
 
-export default function GraphsPage({
+export default function GraphsPage({curveOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1759,6 +1877,14 @@ export default function GraphsPage({
           />,
                   <div key={'unit-curves'} dangerouslySetInnerHTML={{ __html: demoUnits.curves }} />,
           `Each family leaves a shape you can name at a glance, which is the point of learning them.`,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="curve-types-outline"
+            title="Types of curves"
+            source="/functions/graphs"
+          >
+            <TaxonomyOutline data={curveOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1775,6 +1901,14 @@ export default function GraphsPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     {

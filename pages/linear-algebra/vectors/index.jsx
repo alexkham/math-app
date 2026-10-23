@@ -906,6 +906,10 @@ Scalar multiplication scales a vector by a real number. Multiplying by a positiv
 @academic[formula_callout:Magnitude and the Norm
 $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@
 
+@academic[pitfall,aside:true,width:35%:Adding the lengths
+Taking $\\|\\mathbf{a} + \\mathbf{b}\\|$ to be $\\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ gives $3 + 4 = 7$ for $\\mathbf{a} = (3, 0)$ and $\\mathbf{b} = (0, 4)$. But $\\mathbf{a} + \\mathbf{b} = (3, 4)$, whose length is $\\sqrt{9 + 16} = 5$.
+[Read more](!#pitfalls)]@
+
 This quantity is called the Euclidean norm, and it satisfies three fundamental properties: it is never negative, it scales predictably under scalar multiplication ($\\|c\\mathbf{v}\\| = |c|\\|\\mathbf{v}\\|$), and it obeys the triangle inequality ($\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$).
 
 The norm also provides a natural notion of distance: the distance between two vectors $\\mathbf{a}$ and $\\mathbf{b}$ is $\\|\\mathbf{a} - \\mathbf{b}\\|$. Closely tied to magnitude is the concept of a unit vector — a vector whose norm equals $1$. Any nonzero vector can be rescaled to unit length through normalization, a process that extracts pure direction by dividing out the magnitude.`,
@@ -919,6 +923,10 @@ The norm also provides a natural notion of distance: the distance between two ve
 
 @academic[formula_callout:The Dot Product
 $$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n$$]@
+
+@academic[pitfall,aside:true,width:35%:Keeping the products as a vector
+Stopping after the multiplications turns $(1, 2, 3) \\cdot (4, -5, 6)$ into the vector $(4, -10, 18)$. The products must be added: $4 - 10 + 18 = 12$, a single number.
+[Read more](!#pitfalls)]@
 
 This algebraic formula has a geometric equivalent: $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\cos\\theta$, where $\\theta$ is the angle between the two vectors. The geometric form reveals what the dot product actually measures — how much two vectors align directionally. When the dot product is positive, the vectors point roughly the same way. When it is negative, they point roughly in opposite directions. When it equals zero, the vectors are orthogonal: perpendicular in the geometric sense.
 
@@ -939,6 +947,10 @@ $$\\mathbf{a} \\times \\mathbf{b} = (a_2b_3 - a_3b_2,\\ a_3b_1 - a_1b_3,\\ a_1b_
 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Flipping the sign of the middle component
+Writing the middle entry as $a_1b_3 - a_3b_1$ turns $(1, 2, 3) \\times (4, 5, 6)$ into $(-3, -6, -3)$, which is not perpendicular to $(1, 2, 3)$. The middle entry is $a_3b_1 - a_1b_3 = 12 - 6 = 6$, so the product is $(-3, 6, -3)$.
+[Read more](!#pitfalls)]@
 
 The magnitude $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\sin\\theta$ equals the area of the parallelogram that the two vectors span. The direction is determined by the right-hand rule, which introduces the concept of orientation — a handedness to three-dimensional space that has no analogue in the dot product. Unlike most operations encountered so far, the cross product is anti-commutative: swapping the order of the inputs reverses the direction of the result.`,
     before: ``,
@@ -968,6 +980,56 @@ Linear combinations also set the stage for two concepts developed in the [vector
   obj10: {
     title: `Summary: All Vector Operations at a Glance`,
     content: `The operations introduced above share a unifying structure but vary widely in what they take in, what they return, and what they reveal about the underlying geometry. The table below collects every operation in this section, noting its inputs and output types, the formula, and its geometric meaning. Reading across each row situates a single operation in full; reading down each column compares operations on the same attribute — and each operation's name links to the dedicated page where it is developed in detail.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Three slips come up again and again when these operations are first met. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Adding the lengths**
+
+The length of a sum is found by adding the lengths of the two vectors, as if magnitudes combined the way the vectors do.
+
+Wrong working: for $\\mathbf{a} = (3, 0)$ and $\\mathbf{b} = (0, 4)$,
+$$\\|\\mathbf{a} + \\mathbf{b}\\| = \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\| = 3 + 4 = 7$$
+
+Right working: add the vectors first, then take the length.
+$$\\mathbf{a} + \\mathbf{b} = (3, 4), \\qquad \\|\\mathbf{a} + \\mathbf{b}\\| = \\sqrt{9 + 16} = 5$$
+The triangle inequality only promises $5 \\leq 7$. The two sides are equal only when one vector is a non-negative multiple of the other.
+
+Why it happens: for numbers of the same sign, $|x + y| = |x| + |y|$, and the same habit is carried over to vectors that point in different directions.
+
+How to check: draw the two vectors tip-to-tail. Here they form the legs of a $3$–$4$–$5$ right triangle, and the sum is the hypotenuse, shorter than the two legs together.
+
+**Keeping the products as a vector**
+
+The dot product is computed by multiplying corresponding components, and the work stops there, leaving a vector instead of a number.
+
+Wrong working:
+$$(1, 2, 3) \\cdot (4, -5, 6) = (4, -10, 18)$$
+
+Right working: the products are added.
+$$(1, 2, 3) \\cdot (4, -5, 6) = 4 - 10 + 18 = 12$$
+
+Why it happens: addition, subtraction and scalar multiplication all work slot by slot and return a vector, so the first step of the dot product looks like one more operation of the same kind.
+
+How to check: the dot product is always a single number. Dotting a vector with itself must give its squared length: $(1, 2, 3) \\cdot (1, 2, 3) = 1 + 4 + 9 = 14 = \\|(1, 2, 3)\\|^2$.
+
+**Flipping the sign of the middle component**
+
+The middle component of the cross product is written as $a_1b_3 - a_3b_1$ instead of $a_3b_1 - a_1b_3$. In the determinant layout with $\\mathbf{i}$, $\\mathbf{j}$, $\\mathbf{k}$, this is the minus sign in front of the $\\mathbf{j}$ term being dropped.
+
+Wrong working: for $\\mathbf{a} = (1, 2, 3)$ and $\\mathbf{b} = (4, 5, 6)$,
+$$\\mathbf{a} \\times \\mathbf{b} = (2 \\cdot 6 - 3 \\cdot 5,\\ 1 \\cdot 6 - 3 \\cdot 4,\\ 1 \\cdot 5 - 2 \\cdot 4) = (-3, -6, -3)$$
+
+Right working:
+$$\\mathbf{a} \\times \\mathbf{b} = (2 \\cdot 6 - 3 \\cdot 5,\\ 3 \\cdot 4 - 1 \\cdot 6,\\ 1 \\cdot 5 - 2 \\cdot 4) = (-3, 6, -3)$$
+
+Why it happens: the first and third components open with the smaller index on $\\mathbf{a}$, $a_2b_3$ and $a_1b_2$, and the middle one is written the same way, opening with $a_1b_3$. The components actually follow the cyclic order $1 \\to 2 \\to 3 \\to 1$, which puts $a_3b_1$ first in the middle.
+
+How to check: the result must be perpendicular to both inputs. $(-3, 6, -3) \\cdot (1, 2, 3) = -3 + 12 - 9 = 0$ and $(-3, 6, -3) \\cdot (4, 5, 6) = -12 + 30 - 18 = 0$. The wrong answer gives $(-3, -6, -3) \\cdot (1, 2, 3) = -24$, not $0$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1228,6 +1290,14 @@ export default function VectorsPage({vectorTypeTree, seoData, sectionsContent, i
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // {

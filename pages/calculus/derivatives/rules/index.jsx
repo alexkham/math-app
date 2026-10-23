@@ -16,6 +16,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionMVTDiagrams from '@/app/components/functions/mvt/functionMVTDiagrams'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -467,6 +469,10 @@ $$\\frac{d}{dx}[c] = 0$$
 
 A constant function has a horizontal graph—its slope is zero everywhere. From the limit definition: the difference quotient $\\frac{c - c}{h} = 0$ for all $h$, so the limit is $0$.
 
+@academic[pitfall,aside:true,width:35%:Treating a constant as a variable
+Applying the power rule to $\\pi^2$ gives $\\frac{d}{dx}[\\pi^2] = 2\\pi$, as if $\\pi$ were the variable. But $\\pi^2 \\approx 9.87$ is a fixed number with no $x$ in it, so its derivative is $0$.
+[Read more](!#pitfalls)]@
+
 This rule is simple but essential. It establishes the baseline: quantities that do not change have zero rate of change. It also appears implicitly in every application of the sum rule, where constant terms vanish under differentiation.
 `,
     before: ``,
@@ -485,9 +491,15 @@ $$\\frac{d}{dx}[x^n] = n x^{n-1}$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-The rule covers positive integers ($x^3 \\to 3x^2$), negative integers ($x^{-2} \\to -2x^{-3}$), fractions ($x^{1/2} \\to \\frac{1}{2}x^{-1/2}$), and irrational exponents ($x^\\pi \\to \\pi x^{\\pi - 1}$). For positive integer $n$, the proof uses the binomial expansion of $(x+h)^n$ in the limit definition. Extension to rational and real exponents requires [logarithmic differentiation](!/calculus/derivatives/techniques) or the generalized exponential $x^n = e^{n \\ln x}$.
+The rule covers positive integers ($x^3 \\to 3x^2$), negative integers ($x^{-2} \\to -2x^{-3}$), fractions ($x^{1/2} \\to \\frac{1}{2}x^{-1/2}$), and irrational exponents ($x^\\pi \\to \\pi x^{\\pi - 1}$). For positive integer $n$, the proof uses the binomial expansion of $(x+h)^n$ in the limit definition. Extension to rational exponents follows from implicit differentiation; for all real exponents it uses [logarithmic differentiation](!/calculus/derivatives/techniques) or the generalized exponential $x^n = e^{n \\ln x}$.
 
 The power rule is the most frequently applied differentiation formula. Combined with the constant multiple and sum rules, it handles all polynomials and many algebraic expressions directly.
+
+@academic[pitfall,aside:true,width:35%:Moving a negative exponent toward zero
+Lowering $-2$ to $-1$ gives $\\frac{d}{dx}[x^{-2}] = -2x^{-1}$, which is $-1$ at $x = 2$. One less than $-2$ is $-3$: the derivative is $-2x^{-3}$, which is $-0.25$ at $x = 2$.
+[Read more](!#pitfalls)]@
+
+Negative and fractional exponents follow the same two steps as positive ones: the exponent comes down as a coefficient, and the new exponent is one less than the old. Roots and reciprocals are first rewritten as powers, $\\sqrt{x} = x^{1/2}$ and $\\frac{1}{x^2} = x^{-2}$, so that the rule can be applied to them. The result is then usually written back in the original form, as in $-2x^{-3} = -\\frac{2}{x^3}$.
 `,
     before: ``,
     after: ``,
@@ -599,6 +611,10 @@ The notation suggests fraction cancellation, and while $dy/dx$ is not literally 
 
 The chain rule extends to deeper compositions. For $f(g(h(x)))$: differentiate the outermost function at its argument, multiply by the derivative of the next layer at its argument, and continue inward. Each layer contributes a multiplicative factor.
 
+@academic[pitfall,aside:true,width:35%:Leaving out the inner derivative
+Differentiating only the outer function gives $\\frac{d}{dx}[\\sin(x^2)] = \\cos(x^2)$, without the factor from $x^2$. The chain rule multiplies by $(x^2)' = 2x$: the derivative is $2x\\cos(x^2)$.
+[Read more](!#pitfalls)]@
+
 This is the most powerful of the basic rules. Without it, [composite functions](!/calculus/derivatives/common)—$\\sin(x^2)$, $e^{3x}$, $\\ln(\\cos x)$—cannot be differentiated. Most applications of differentiation involve the chain rule at some level.
 `,
     before: ``,
@@ -644,6 +660,12 @@ $$\\text{If } f(a) = f(b), \\text{ then } f'(c) = 0 \\text{ for some } c \\in (a
 A function that starts and ends at the same value must have a horizontal tangent somewhere between. If the function rises above its starting value, it must turn around—creating a maximum with zero slope. If it drops below, it must turn upward—creating a minimum. If it stays constant, $f'(x) = 0$ everywhere on the interval.
 
 Rolle's Theorem is often used as a stepping stone in proofs. The Mean Value Theorem itself is proven by applying Rolle's Theorem to an auxiliary function constructed to satisfy $g(a) = g(b)$. It also appears in arguments about the number of roots: between any two roots of $f$, there must be a root of $f'$.
+
+@academic[pitfall,aside:true,width:35%:Skipping the differentiability check
+Concluding that $f(x) = |x|$ on $[-1, 1]$ has $f'(c) = 0$ somewhere, because $f(-1) = f(1) = 1$, is wrong: $f'(x)$ is $-1$ or $1$ and never $0$. The corner at $x = 0$ breaks differentiability, so Rolle's Theorem does not apply.
+[Read more](!#pitfalls)]@
+
+Each hypothesis has a job in this argument. Equal endpoint values make the secant through the endpoints flat, continuity on $[a, b]$ keeps the graph from jumping over the turning point, and differentiability on $(a, b)$ means the graph has a tangent line at every interior point, including the one where it turns. The sine curve below meets all three on $[0, 2\\pi]$: it is smooth everywhere, and $\\sin 0 = \\sin 2\\pi = 0$.
 `,
     before: ``,
     after: ``,
@@ -663,6 +685,10 @@ $$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)} \\
 
 The rule replaces a difficult limit of functions with a (potentially simpler) limit of their derivatives. It applies equally when $a$ is finite or $a = \\pm\\infty$.
 
+@academic[pitfall,aside:true,width:35%:Differentiating the fraction as a whole
+Applying the quotient rule to $\\frac{\\sin 2x}{x}$ gives $\\frac{2x\\cos 2x - \\sin 2x}{x^2}$, whose limit at $0$ is $0$, not the answer. The rule differentiates top and bottom separately: $\\frac{2\\cos 2x}{1} \\to 2$.
+[Read more](!#pitfalls)]@
+
 Critical requirements: the original limit must be an indeterminate form, and the limit of the derivative ratio must exist or be $\\pm\\infty$. If the derivative ratio produces another indeterminate form, L'Hôpital's rule may be applied again. If the derivative ratio oscillates or fails to exist, the rule gives no information—it does not say the original limit fails to exist, only that this method does not resolve it.
 
 Other indeterminate forms—$0 \\cdot \\infty$, $\\infty - \\infty$, $0^0$, $1^\\infty$, $\\infty^0$—can be converted to $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$ through algebraic rearrangement, then handled by L'Hôpital's rule. The conversion step varies by form: $0 \\cdot \\infty$ becomes a fraction by moving one factor to the denominator; exponential forms use the identity $f(x)^{g(x)} = e^{g(x) \\ln f(x)}$.
@@ -677,6 +703,99 @@ The Mean Value Theorem, Rolle's Theorem, and L'Hôpital's rule are the three the
     title: `All Rules and Theorems at a Glance`,
     content: `
 The ten formulas above split naturally into seven algebraic rules — constant, constant multiple, power, sum/difference, product, quotient, chain — and three interval theorems — Mean Value, Rolle&apos;s, and L&apos;Hôpital&apos;s. The table below collects every formula introduced on this page as a single reference card, with the key condition or note that governs its use.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `
+Seven mistakes cause most wrong answers when these rules and theorems are used. Five of them are marked where they happen in the sections above; the other two are the ones the product rule and quotient rule sections warn against. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating a constant as a variable**
+
+A constant that is written with a letter or a power, such as $\\pi^2$, $e^3$ or $\\ln 5$, is differentiated as if the letter were the variable.
+
+Wrong working: by the power rule, $\\dfrac{d}{dx}[\\pi^2] = 2\\pi$.
+
+Right working: $\\pi^2 \\approx 9.87$ contains no $x$, so $f(x) = \\pi^2$ is a constant function, and by the constant rule $\\dfrac{d}{dx}[\\pi^2] = 0$.
+
+Why it happens: the expression has the shape $x^n$ with $\\pi$ in the place of $x$, and the power rule is applied to the shape before anyone asks which symbol is the variable.
+
+How to check: ask whether the value changes when $x$ changes. The graph of $y = \\pi^2$ is a horizontal line at a height of about $9.87$, and its slope is $0$ everywhere.
+
+**Moving a negative exponent toward zero**
+
+With a negative exponent, one is subtracted in the wrong direction: the exponent is moved toward zero instead of away from it.
+
+Wrong working: $\\dfrac{d}{dx}[x^{-2}] = -2x^{-1} = -\\dfrac{2}{x}$.
+
+Right working: the new exponent is $-2 - 1 = -3$, so $\\dfrac{d}{dx}[x^{-2}] = -2x^{-3} = -\\dfrac{2}{x^3}$.
+
+Why it happens: for positive exponents, one less always means closer to zero, as in $3 \\to 2$. The habit is carried over to $-2$, where one less is $-3$.
+
+How to check: compare with a difference quotient at one point. For $f(x) = \\dfrac{1}{x^2}$, $\\dfrac{f(2.01) - f(1.99)}{0.02} \\approx -0.25$, which matches $-\\dfrac{2}{2^3} = -0.25$ and not $-\\dfrac{2}{2} = -1$.
+
+**Multiplying the derivatives of the factors**
+
+The derivative of a product is taken as the product of the derivatives, $(fg)' = f'g'$, following the pattern of the sum rule.
+
+Wrong working: for $x^2 \\cdot x^3$, $(x^2)' \\cdot (x^3)' = 2x \\cdot 3x^2 = 6x^3$.
+
+Right working: the product rule gives $2x \\cdot x^3 + x^2 \\cdot 3x^2 = 2x^4 + 3x^4 = 5x^4$.
+
+Why it happens: the sum rule lets each term be differentiated on its own, and it seems natural for products to work the same way.
+
+How to check: simplify first where possible. Here $x^2 \\cdot x^3 = x^5$, and the power rule gives $5x^4$ directly; $6x^3$ does not match.
+
+**Reversing the quotient rule numerator**
+
+The two terms in the numerator of the quotient rule are written in the wrong order, $fg' - f'g$, which flips the sign of the whole derivative.
+
+Wrong working: for $\\dfrac{x}{x + 1}$, $\\dfrac{x \\cdot 1 - 1 \\cdot (x + 1)}{(x + 1)^2} = -\\dfrac{1}{(x + 1)^2}$.
+
+Right working: $\\dfrac{1 \\cdot (x + 1) - x \\cdot 1}{(x + 1)^2} = \\dfrac{1}{(x + 1)^2}$.
+
+Why it happens: in the product rule the two terms are added, so their order does not matter, and the quotient rule is remembered as the same two terms with a minus sign between them.
+
+How to check: look at the sign. For $x > -1$ the function $\\dfrac{x}{x + 1}$ increases, from $0$ at $x = 0$ to $\\dfrac{1}{2}$ at $x = 1$, so its derivative must be positive there.
+
+**Leaving out the inner derivative**
+
+In a composite function only the outer function is differentiated, and the derivative of the inner function is never multiplied in.
+
+Wrong working: $\\dfrac{d}{dx}[\\sin(x^2)] = \\cos(x^2)$.
+
+Right working: the outer function is $\\sin u$ with $u = x^2$. Its derivative $\\cos u$ is evaluated at $u = x^2$ and multiplied by $\\dfrac{du}{dx} = 2x$, so $\\dfrac{d}{dx}[\\sin(x^2)] = 2x\\cos(x^2)$.
+
+Why it happens: the derivative of $\\sin$ is known by heart, and the inner $x^2$ is read as part of the argument rather than as a function with its own rate of change.
+
+How to check: compare with a difference quotient at one point. At $x = 1$, $\\dfrac{\\sin(1.01^2) - \\sin(0.99^2)}{0.02} \\approx 1.08$, which matches $2\\cos 1 \\approx 1.08$ and not $\\cos 1 \\approx 0.54$.
+
+**Skipping the differentiability check**
+
+Rolle's Theorem is applied as soon as $f(a) = f(b)$, without checking that $f$ is differentiable at every point of $(a, b)$.
+
+Wrong working: $f(x) = |x|$ on $[-1, 1]$ has $f(-1) = f(1) = 1$, so there is some $c$ in $(-1, 1)$ with $f'(c) = 0$.
+
+Right working: $f'(x) = -1$ for $x < 0$, $f'(x) = 1$ for $x > 0$, and $f'(0)$ does not exist. Differentiability fails at $0$, so the theorem does not apply, and in fact no $c$ has $f'(c) = 0$.
+
+Why it happens: the equal endpoint values are the condition that stands out, and continuity is easy to see on a graph; a single corner is easy to overlook.
+
+How to check: look for corners, cusps and vertical tangents inside the interval. The graph of $|x|$ has a corner at $0$, and its lowest point is a sharp point, not a horizontal tangent.
+
+**Differentiating the fraction as a whole**
+
+L'Hôpital's rule is applied by differentiating the quotient $\\dfrac{f}{g}$ with the quotient rule, instead of taking the ratio of the separate derivatives $\\dfrac{f'}{g'}$.
+
+Wrong working: for $\\lim_{x \\to 0} \\dfrac{\\sin 2x}{x}$, $\\left(\\dfrac{\\sin 2x}{x}\\right)' = \\dfrac{2x\\cos 2x - \\sin 2x}{x^2}$, and this tends to $0$ as $x \\to 0$.
+
+Right working: differentiate the top and the bottom separately. $\\lim_{x \\to 0} \\dfrac{(\\sin 2x)'}{(x)'} = \\lim_{x \\to 0} \\dfrac{2\\cos 2x}{1} = 2$.
+
+Why it happens: differentiating a fraction has always meant the quotient rule, and the rule's wording, the limit of the derivatives, is read the same way.
+
+How to check: evaluate the original quotient at a small $x$. At $x = 0.01$, $\\dfrac{\\sin 0.02}{0.01} \\approx 1.9999$, close to $2$ and far from $0$.
 `,
     before: ``,
     after: ``,
@@ -850,8 +969,37 @@ const schemas = {
     }),
   };
 
+  const derivRuleOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Seven rules and three theorems',
+    preface: 'The page collects seven algebraic rules for computing derivatives and three theorems about derivatives on an interval.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Rules compute, theorems reason',
+    conclusion: 'The rules turn derivatives into algebra; the theorems connect a derivative to the behaviour of the function across an interval.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Derivative rules and theorems', children: [
+        { id: 'rules', name: 'Algebraic rules', children: [
+          { id: 'c', name: 'Constant', example: "f′ = 0" },
+          { id: 'cm', name: 'Constant multiple', example: "(cf)′ = cf′" },
+          { id: 'p', name: 'Power', example: 'nxⁿ⁻¹' },
+          { id: 's', name: 'Sum and difference' },
+          { id: 'prod', name: 'Product', example: "f′g + fg′" },
+          { id: 'q', name: 'Quotient', def: 'needs g ≠ 0' },
+          { id: 'ch', name: 'Chain', example: "f′(g)·g′" },
+        ] },
+        { id: 'thm', name: 'Interval theorems', children: [
+          { id: 'mvt', name: 'Mean Value Theorem' },
+          { id: 'rolle', name: "Rolle's theorem", def: 'special case of the MVT with f(a) = f(b)' },
+          { id: 'lh', name: "L'Hôpital's rule", def: '0/0 and ∞/∞ forms' },
+        ] },
+      ] },
+    ],
+  };
+
   return {
   props:{
+    derivRuleOutline,
     demoUnits,
     sectionsContent,
     introContent,
@@ -870,7 +1018,7 @@ const schemas = {
 }
    }
 
-export default function RulesPage({
+export default function RulesPage({derivRuleOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -979,6 +1127,22 @@ export default function RulesPage({
         content:[
           sectionsContent.overview.content,
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+          <DiagramFrame
+            key={'overview-diagram'}
+            id="derivative-rules-outline"
+            title="Derivative rules and theorems"
+            source="/calculus/derivatives/rules"
+          >
+            <TaxonomyOutline data={derivRuleOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

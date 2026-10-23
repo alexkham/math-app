@@ -1984,7 +1984,7 @@ const reflectionCases = {
             effect: '$(x, y) \\mapsto (-x, y)$',
             fixed: 'the $y$-axis',
           },
-          note: 'The same matrix with the signs exchanged. Note this is not the negative of the row above \u2014 that would be $-I$, a rotation by $\\pi$, which reverses both coordinates and has $\\det = +1$.',
+          note: 'The same matrix with the signs exchanged, which makes it the negative of the row above. Negating both diagonal entries of $I$ instead gives $-I$, a rotation by $\\pi$, which reverses both coordinates and has $\\det = +1$.',
         },
       ],
     },
@@ -2126,7 +2126,7 @@ const transformationSignatures = {
           name: 'Orthogonal projection',
           anchor: '#7',
           formula: '$P^2 = P, \\quad P^{\\mathsf{T}} = P, \\quad \\det P = 0$',
-          condition: 'eigenvalues $0$ and $1$ only',
+          condition: 'eigenvalues only $0$ or $1$',
           key: true,
           note: 'Idempotent and symmetric. The zero determinant is not incidental \u2014 a projection collapses the perpendicular directions and nothing recovers them, so it is the only family here with no inverse. See [projection properties](!/linear-algebra/orthogonality/projections).',
         },
@@ -2313,7 +2313,13 @@ Column $1$ is the image of $\\mathbf{e}_1 = (1, 0)$ in $\\mathbb{R}^2$ or $(1, 0
 
 @academic[rule_plain:The absolute value $|\\det(A)|$ measures how the transformation scales areas (in $\\mathbb{R}^2$) or volumes (in $\\mathbb{R}^3$).]@
 
-The sign of $\\det(A)$ indicates orientation: positive means the transformation preserves handedness, negative means it reverses it. An [orthogonal](!/linear-algebra/matrix/types) matrix ($\\det = \\pm 1$) preserves all lengths and angles — it is a rigid motion.`,
+The sign of $\\det(A)$ indicates orientation: positive means the transformation preserves handedness, negative means it reverses it. An [orthogonal](!/linear-algebra/matrix/types) matrix ($\\det = \\pm 1$) preserves all lengths and angles — it is a rigid motion.
+
+@academic[pitfall,aside:true,width:35%:Mistaking area-preserving for rigid
+Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$: its determinant is $1$, yet it sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$. A rigid motion needs $A^T A = I$; here $A^T A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+Both readings are needed. The determinant is a single number, and it records only what happens to area and to orientation. The columns carry the rest of the picture: their lengths and the angle between them show whether each square of the grid keeps its shape or comes out stretched and tilted.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2366,6 +2372,10 @@ Non-uniform scaling stretches each axis independently. In $\\mathbb{R}^2$, $T(x,
 
 The [determinant](!/linear-algebra/determinants/geometry) is $c^n$ for uniform scaling and $c_1 c_2$ (or $c_1 c_2 c_3$) for non-uniform. When any scaling factor is zero, the transformation collapses that axis entirely and the determinant is zero.
 
+@academic[pitfall,aside:true,width:35%:Forgetting the power of c
+Writing $\\det(cI) = c$ gives $\\det(3I) = 3$ in $\\mathbb{R}^3$, although the unit cube becomes a cube of side $3$. Each of the three axes contributes a factor $3$, so $\\det(3I) = 3^3 = 27$.
+[Read more](!#pitfalls)]@
+
 In $\\mathbb{R}^3$, $\\text{diag}(c_1, c_2, c_3)$ scales each coordinate axis independently. The unit cube maps to a rectangular box with side lengths $|c_1|$, $|c_2|$, $|c_3|$ and volume $|c_1 c_2 c_3|$.`,
     before: ``,
     after: ``,
@@ -2417,6 +2427,12 @@ Rotations about the $x$-axis and $y$-axis have the same $2 \\times 2$ rotation b
 $$R_x(\\theta) = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & \\cos\\theta & -\\sin\\theta \\\\ 0 & \\sin\\theta & \\cos\\theta \\end{pmatrix}, \\quad R_y(\\theta) = \\begin{pmatrix} \\cos\\theta & 0 & \\sin\\theta \\\\ 0 & 1 & 0 \\\\ -\\sin\\theta & 0 & \\cos\\theta \\end{pmatrix}$$]@
 
 @academic[rule_plain:Every $3 \\times 3$ rotation matrix is orthogonal with determinant $+1$.]@
+
+@academic[pitfall,aside:true,width:35%:Misplacing the sign for the y-axis
+Copying the top-right $-\\sin\\theta$ of $R_x$ and $R_z$ into $R_y$ gives $R_y(-\\theta)$: at $\\theta = 90°$ it sends $(0, 0, 1)$ to $(-1, 0, 0)$. In the correct $R_y(\\theta)$ the $-\\sin\\theta$ sits bottom left, and $R_y(90°)$ sends $(0, 0, 1)$ to $(1, 0, 0)$.
+[Read more](!#pitfalls)]@
+
+Each of these matrices can be checked one column at a time, exactly as in the plane: column $j$ is the image of $\\mathbf{e}_j$. The direction of turn comes from the right-hand rule. With the thumb along the positive $y$-axis, the fingers curl from the positive $z$-axis toward the positive $x$-axis, so in the $xz$-plane the turn runs from $z$ to $x$ rather than from $x$ to $z$.
 
 The axis of rotation is the [eigenvector](!/linear-algebra/eigen) with eigenvalue $1$ — the direction that remains fixed. Any rotation in $\\mathbb{R}^3$ can be decomposed into rotations about the coordinate axes (Euler angles), though the decomposition is not unique.`,
     before: ``,
@@ -2489,7 +2505,11 @@ $$P = I - \\frac{\\mathbf{n}\\mathbf{n}^T}{\\mathbf{n}^T\\mathbf{n}}$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-All orthogonal projection matrices share the same algebraic signature: $P^2 = P$ ([idempotent](!/linear-algebra/matrix/types) — projecting twice is the same as projecting once), $P^T = P$ (symmetric), [eigenvalues](!/linear-algebra/eigen) are $0$ and $1$, and $\\text{rank}(P) = \\text{tr}(P)$. The determinant is $0$ unless the projection is onto the full space — projections always collapse at least one dimension.`,
+@academic[pitfall,aside:true,width:35%:Dropping the denominator of P
+Using $\\mathbf{u}\\mathbf{u}^T$ alone for $\\mathbf{u} = (1, 2)$ gives $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, which sends $(1, 2)$ to $(5, 10)$ instead of leaving it in place. Dividing by $\\mathbf{u}^T\\mathbf{u} = 5$ gives $P = \\frac{1}{5}\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, and $P(1, 2) = (1, 2)$.
+[Read more](!#pitfalls)]@
+
+All orthogonal projection matrices share the same algebraic signature: $P^2 = P$ ([idempotent](!/linear-algebra/matrix/types) — projecting twice is the same as projecting once), $P^T = P$ (symmetric), [eigenvalues](!/linear-algebra/eigen) are $0$ or $1$, and $\\text{rank}(P) = \\text{tr}(P)$. The determinant is $0$ unless the projection is onto the full space — any projection onto a proper subspace collapses at least one dimension.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2532,7 +2552,13 @@ A rotation followed by a scaling is $SA$ where $S$ is the scaling matrix and $A$
 
 Order matters. Rotating then shearing produces a different result from shearing then rotating: $\\text{Shear} \\cdot \\text{Rotation} \\neq \\text{Rotation} \\cdot \\text{Shear}$ in general.
 
-The [singular value decomposition](!/linear-algebra/decompositions/svd) reveals the hidden geometric structure of any matrix: $A = U\\Sigma V^T$, where $V^T$ is a rotation (or rotation-reflection), $\\Sigma$ is a coordinate-axis scaling, and $U$ is another rotation (or rotation-reflection). Every linear transformation is a rotation, followed by a scaling along the coordinate axes, followed by another rotation. The singular values in $\\Sigma$ measure the maximum stretching in each orthogonal direction.
+@academic[pitfall,aside:true,width:35%:Reading a product left to right
+Writing rotate by $90°$, then reflect across the $x$-axis, as $R_{90°} H$ with $H = \\text{diag}(1, -1)$ gives $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, which sends $(1, 0)$ to $(0, 1)$. The rotation acts first in $H R_{90°} = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$, which sends $(1, 0)$ to $(0, -1)$.
+[Read more](!#pitfalls)]@
+
+Turning a description into a matrix is therefore a matter of placement. The step named first in the description stands at the far right, next to the vector it acts on, and each later step is written to the left of the steps before it. A three-step description such as scale, then rotate, then shear becomes $\\text{Shear} \\cdot R_\\theta \\cdot S_k$.
+
+The [singular value decomposition](!/linear-algebra/decompositions/svd) reveals the hidden geometric structure of any matrix: $A = U\\Sigma V^T$, where $V^T$ is a rotation (or rotation-reflection), $\\Sigma$ is a coordinate-axis scaling, and $U$ is another rotation (or rotation-reflection). Every linear transformation is a rotation or reflection, followed by a scaling along the coordinate axes, followed by another rotation or reflection. The singular values in $\\Sigma$ measure the maximum stretching in each orthogonal direction.
 
 This decomposition means no linear transformation is truly exotic — even the most complex-looking matrix is just three simple geometric operations composed together.`,
     before: ``,
@@ -2559,6 +2585,88 @@ $|\\det(A)| = 1$: the transformation preserves area or volume. Rotations ($\\det
   obj11: {
     title: `Summary: Algebraic Signature of Each Family`,
     content: `Each family of geometric transformations has been treated in its own section, with its own matrix templates and its own algebraic identities. The table below sets all five side by side across the diagnostic signatures that distinguish them — orthogonality, determinant, eigenvalues, the characteristic algebraic identity, and what each family does to length and to area. It is the recognition card to keep nearby when a matrix is in hand and the question is which geometric family it belongs to.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again when a transformation is read from its matrix or a matrix is written down from a description. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Mistaking area-preserving for rigid**
+
+A matrix with determinant $1$ or $-1$ is taken to be a rotation or a reflection, because it preserves area. The determinant measures only area and orientation; lengths and angles are never tested.
+
+Wrong working: $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ has $\\det A = 1 \\cdot 1 - 1 \\cdot 0 = 1$, so it is declared a rotation, and every length is assumed to stay the same.
+
+Right working: test orthogonality directly.
+$$A^T A = \\begin{pmatrix} 1 & 0 \\\\ 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix} \\neq I$$
+The matrix is a horizontal shear. It sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$, and the right angle between the two axes becomes $45°$.
+
+Why it happens: every rotation and every reflection has $\\det = \\pm 1$, so the reverse statement feels natural. It is false: area can be kept while shape is lost.
+
+How to check: look at the columns. A rigid motion has columns of length $1$ that are perpendicular to each other. Here the second column $(1, 1)$ has length $\\sqrt{2}$, and the dot product of the two columns is $1$, not $0$.
+
+**Forgetting the power of c**
+
+The determinant of the uniform scaling $cI$ is taken to be $c$, as if one factor of $c$ were enough. Each of the $n$ axes is stretched by $c$, so the factor appears $n$ times.
+
+Wrong working: in $\\mathbb{R}^3$, $\\det(3I) = 3$, so the unit cube would map to a solid of volume $3$.
+
+Right working: $3I = \\text{diag}(3, 3, 3)$, so
+$$\\det(3I) = 3 \\cdot 3 \\cdot 3 = 27$$
+The unit cube becomes a cube of side $3$ and volume $27$. In $\\mathbb{R}^2$ the same matrix has $\\det(3I) = 9$.
+
+Why it happens: $cI$ reads as $c$ times $I$, and $\\det I = 1$, so taking the $c$ outside once seems natural. The general rule for an $n \\times n$ matrix is $\\det(cA) = c^n \\det(A)$.
+
+How to check: compute the area or volume of the image of the unit square or cube directly. Its sides have lengths $|c|$, one per axis, and their product is $|c|^n$.
+
+**Misplacing the sign for the y-axis**
+
+$R_x$ and $R_z$ both have $-\\sin\\theta$ above the diagonal, and that pattern is carried over to $R_y$. In $R_y$ the $-\\sin\\theta$ sits below the diagonal, in the bottom-left corner.
+
+Wrong working: the copied pattern at $\\theta = 90°$ is
+$$\\begin{pmatrix} \\cos\\theta & 0 & -\\sin\\theta \\\\ 0 & 1 & 0 \\\\ \\sin\\theta & 0 & \\cos\\theta \\end{pmatrix} = \\begin{pmatrix} 0 & 0 & -1 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & 0 \\end{pmatrix}$$
+It sends $(0, 0, 1)$ to $(-1, 0, 0)$ and $(1, 0, 0)$ to $(0, 0, 1)$. This is $R_y(-\\theta)$, a turn the wrong way.
+
+Right working:
+$$R_y(90°) = \\begin{pmatrix} 0 & 0 & 1 \\\\ 0 & 1 & 0 \\\\ -1 & 0 & 0 \\end{pmatrix}$$
+It sends $(0, 0, 1)$ to $(1, 0, 0)$ and $(1, 0, 0)$ to $(0, 0, -1)$, as the right-hand rule about the positive $y$-axis requires.
+
+Why it happens: the plane that turns is the $xz$-plane, and the matrix lists its coordinates in the order $x$, $z$. The cyclic order $x \\to y \\to z \\to x$ puts $z$ before $x$, so reading the $2 \\times 2$ block in the matrix's own order reverses the turn.
+
+How to check: look at column $3$, the image of $(0, 0, 1)$. For a small positive angle about the $y$-axis, the $z$-axis tips toward the positive $x$-axis, so the top entry of column $3$ must be $+\\sin\\theta$.
+
+**Dropping the denominator of P**
+
+The projection onto the line through $\\mathbf{u}$ is written as $\\mathbf{u}\\mathbf{u}^T$, without the division by $\\mathbf{u}^T\\mathbf{u}$. This is correct only when $\\mathbf{u}$ is a unit vector.
+
+Wrong working: with $\\mathbf{u} = (1, 2)$,
+$$\\mathbf{u}\\mathbf{u}^T = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}, \\qquad \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$$
+A vector already on the line is moved and made five times as long.
+
+Right working: $\\mathbf{u}^T\\mathbf{u} = 1 + 4 = 5$, so
+$$P = \\frac{1}{5}\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}, \\qquad P\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}, \\qquad P\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 1/5 \\\\ 2/5 \\end{pmatrix}$$
+
+Why it happens: many formulas are stated for unit vectors, such as the Householder matrix $I - 2\\,\\mathbf{n}\\mathbf{n}^T$ on this page. There the denominator equals $1$ and is left out, and the shorter form is then used for vectors that are not unit vectors.
+
+How to check: a projection satisfies $P^2 = P$, and its trace equals its rank. Here $(\\mathbf{u}\\mathbf{u}^T)^2 = \\begin{pmatrix} 5 & 10 \\\\ 10 & 20 \\end{pmatrix} = 5\\,\\mathbf{u}\\mathbf{u}^T$, and the trace of $\\mathbf{u}\\mathbf{u}^T$ is $5$, while a projection onto a line has rank $1$.
+
+**Reading a product left to right**
+
+A sequence of transformations is written down in the order the steps happen, from left to right. The product then performs them in the reverse order, because the rightmost factor acts first.
+
+Wrong working: rotate by $90°$, then reflect across the $x$-axis, with $H = \\text{diag}(1, -1)$, written as
+$$R_{90°} H = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix} = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$$
+This is the reflection across the line $y = x$, and it sends $(1, 0)$ to $(0, 1)$.
+
+Right working: the first step goes on the right.
+$$H R_{90°} = \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$$
+The rotation takes $(1, 0)$ to $(0, 1)$ and the reflection takes that to $(0, -1)$. The result is the reflection across the line $y = -x$.
+
+Why it happens: text is read from left to right, and the description lists the steps in that order. But each matrix acts on the vector to its right: $(H R_{90°})\\mathbf{x} = H(R_{90°}\\mathbf{x})$.
+
+How to check: follow one basis vector through the steps by hand, then compare the result with the matching column of the product. Here $(1, 0)$ must end at $(0, -1)$, the first column of $H R_{90°}$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2832,7 +2940,7 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
           </DiagramFrame>,
           `The doubled angle in the general matrix is the detail worth pausing on. Rotating the mirror by $\\alpha$ moves the image by $2\\alpha$, because the incoming ray and the outgoing ray each make angle $\\alpha$ with the line — so the total turn is twice the tilt. It also explains why composing two reflections gives a rotation by twice the angle between their mirrors, which is the fastest route to that result.`,
                   <div key={'unit-reflection'} dangerouslySetInnerHTML={{ __html: demoUnits.reflection }} />,
-          `Any matrix that is its own inverse and has determinant −1 in two dimensions is a reflection of this kind.`,
+          `Any orthogonal matrix with determinant −1 in two dimensions is a reflection of this kind, and such a matrix is automatically its own inverse.`,
         ]
     },
     {
@@ -2901,6 +3009,14 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
             <IdentitySheet data={transformationSignatures} theme="navy" variant="ledger" />
           </DiagramFrame>,
           `Notice which pairs are hard to tell apart. Rotation and shear both have $\\det = 1$, so area alone will not separate them — the eigenvalues do, a complex pair against a defective repeated root. Reflection and projection are both symmetric, and there the determinant separates them: $-1$ against $0$, orientation reversed against information destroyed. No single test identifies a family; the identity and the spectrum together do.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

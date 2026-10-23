@@ -959,7 +959,13 @@ An equivalent way to view the same idea is through conditional probabilities:
 - $P(A \\mid B) = P(A)$  
 - $P(B \\mid A) = P(B)$
 
+@academic[pitfall,aside:true,width:35%:Calling disjoint events independent
+Treating "roll a 1" and "roll a 2" on one die as independent because they share no outcomes fails the test: $P(A \\cap B) = 0$, but $P(A)\\,P(B) = \\frac{1}{36}$. Disjoint events with positive probability are dependent: $P(A \\mid B) = 0$, not $\\frac{1}{6}$.
+[Read more](!#mistakes)]@
+
 Each form highlights a different aspect, but they all represent the same underlying condition: the occurrence of one event leaves the probability of the other untouched.
+
+In practice the formula works as a test. Given two events with known probabilities, compute $P(A)\\,P(B)$ and compare it with the probability that both occur; the events are independent only when the two numbers agree. The joint probability $P(A \\cap B)$ has to be found separately, from the outcomes the two events share.
 `,
       before:``,
       after:``,
@@ -999,6 +1005,12 @@ Suppose $A$ is "it rains today" and $B$ is "the ground is wet." These events are
 
 **4. Table-Based Illustration**  
 A simple table of outcomes where every combination is equally likely (such as rolling two dice) often provides an easy demonstration of independent structure: each coordinate behaves as if the other were irrelevant.
+
+@academic[pitfall,aside:true,width:35%:Multiplying dependent events
+Taking $P(\\text{rain} \\cap \\text{wet}) = P(\\text{rain})\\,P(\\text{wet})$, with rain on 30% of days and wet ground on 41%, gives $0.3 \\cdot 0.41 \\approx 0.12$. Rain makes wet ground likely: if it is wet on 90% of rainy days, $P(\\text{rain} \\cap \\text{wet}) = 0.3 \\cdot 0.9 = 0.27$.
+[Read more](!#mistakes)]@
+
+In the first, second and fourth examples the two events come from separate mechanisms: two flips, two sensors, two dice. In the third, the wet ground is partly produced by the rain, so the two events are tied together by how the situation works. Problems usually state the separate probabilities of such events, and the chance that both happen is the quantity left to find.
 
 These examples show both the appearance of independence and how it differs from scenarios where events influence one another.
 
@@ -1041,7 +1053,13 @@ $$P(A \\cap B \\mid C) = P(A \\mid C)\\,P(B \\mid C)$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Assuming independence survives a condition
+With two fair coins, "first is heads" and "second is heads" are independent. Keeping them independent given "exactly one head" fails: each then has probability $\\frac{1}{2}$, but both together have probability $0$, not $\\frac{1}{4}$.
+[Read more](!#mistakes)]@
+
 This idea appears frequently in real systems: hidden variables, background conditions, or common causes can create apparent dependence that disappears once the underlying factor is taken into account. Conditional independence plays a central role in probabilistic modeling, graphical models, and Bayesian reasoning.
+
+Whether two events are independent is a statement about a particular setting. The same pair can be checked once with no extra information and again inside a condition $C$, and the two checks use different numbers: $P(A)$, $P(B)$ and $P(A \\cap B)$ in the first, and the same probabilities given $C$ in the second.
 `,
       before:``,
       after:``,

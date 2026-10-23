@@ -418,7 +418,11 @@ obj3: {
 The reason traces to a single congruence: $10 \\equiv 1 \\pmod{3}$. Every power of $10$ is also congruent to $1$ modulo $3$: $10^2 \\equiv 1$, $10^3 \\equiv 1$, and so on. A digit $d$ in the $k$th place contributes $d \\cdot 10^k \\equiv d \\cdot 1 = d \\pmod{3}$. The place value drops away entirely, and only the digit itself matters. The number is congruent to the sum of its digits modulo $3$.
 
 The number $729$ illustrates the rule: $7 + 2 + 9 = 18$, and $1 + 8 = 9$. Since $3 \\mid 9$, the number is divisible by $3$ — as shown below.`,
-  afterFigure: `The number $1{,}234$: $1 + 2 + 3 + 4 = 10$, and $1 + 0 = 1$. Since $3 \\nmid 1$, the number is not divisible by $3$.
+  afterFigure: `@academic[pitfall,aside:true,width:35%:Testing 3 by the last digit
+Judging by the last digit, $2{,}143$ passes because it ends in $3$, yet its digit sum $10$ fails and $2143 = 3 \\cdot 714 + 1$. And $1{,}257$ ends in $7$, but $1 + 2 + 5 + 7 = 15$, so $3 \\mid 1257$.
+[Read more](!#pitfalls)]@
+
+The number $1{,}234$: $1 + 2 + 3 + 4 = 10$, and $1 + 0 = 1$. Since $3 \\nmid 1$, the number is not divisible by $3$.
 
 The process can be repeated: if the digit sum is large, sum its digits again. The chain always terminates at a single digit, and that digit determines divisibility.`,
   before: ``,
@@ -433,7 +437,11 @@ obj4: {
 The number $100$ is divisible by $4$, and so is every higher power of $10$. Every digit beyond the tens place contributes a multiple of $100$ — automatically a multiple of $4$. Only the last two digits affect the remainder when dividing by $4$.
 
 The number $3{,}516$ illustrates the rule: the last two digits form $16$, and $16 \\div 4 = 4$ exactly, so $4 \\mid 3516$ — as the figure below shows.`,
-  afterFigure: `The number $7{,}230$: the last two digits form $30$, and $30 \\div 4 = 7.5$. So $4 \\nmid 7230$.
+  afterFigure: `@academic[pitfall,aside:true,width:35%:Testing 4 by the last digit
+Judging by the last digit alone, $2{,}134$ looks divisible by $4$ because it ends in $4$, yet $34 = 4 \\cdot 8 + 2$, so $4 \\nmid 2134$. And $3{,}516$ ends in $6$, yet $16 = 4 \\cdot 4$ gives $4 \\mid 3516$.
+[Read more](!#pitfalls)]@
+
+The number $7{,}230$: the last two digits form $30$, and $30 \\div 4 = 7.5$. So $4 \\nmid 7230$.
 
 For quick mental checks, it helps to know which two-digit endings are divisible by $4$: $00, 04, 08, 12, 16, 20, 24, 28, 32, 36, 40, 44, \\ldots$ — every fourth number from $00$ onward.`,
   before: ``,
@@ -464,6 +472,10 @@ obj6: {
 Since $6 = 2 \\times 3$ and $\\gcd(2, 3) = 1$, divisibility by $6$ requires passing both individual tests: the last digit must be even, and the digit sum must be divisible by $3$.
 
 The number $1{,}254$: last digit $4$ (even — passes the $2$ test), digit sum $1 + 2 + 5 + 4 = 12$ (divisible by $3$ — passes the $3$ test). Both conditions hold, so $6 \\mid 1254$.
+
+@academic[pitfall,aside:true,width:35%:Stopping after one passed test
+Calling $1{,}234$ divisible by $6$ because it is even skips the test for $3$: its digit sum $10$ fails, and $1234 = 6 \\cdot 205 + 4$. Both tests have to pass, as they do for $1{,}254$.
+[Read more](!#pitfalls)]@
 
 The number $2{,}135$: last digit $5$ (odd — fails the $2$ test). No need to check the digit sum. The number is not divisible by $6$.
 
@@ -677,6 +689,61 @@ Each rule is a human-readable compression of a modular identity. The [modular ar
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes account for many of the wrong answers when the rules are applied. The first three are marked where they happen in the sections above, and the fourth is the one the Combining Rules section warns about; here each is worked through in full, with the wrong and the right working side by side.
+
+**Testing 3 by the last digit**
+
+The last-digit tests for $2$, $5$ and $10$ are carried over to $3$, and a number is judged by whether its last digit is a multiple of $3$.
+
+Wrong working: $2{,}143$ ends in $3$, so $3 \\mid 2143$; $1{,}257$ ends in $7$, so $3 \\nmid 1257$.
+
+Right working: the digit sum decides. $2 + 1 + 4 + 3 = 10$ is not a multiple of $3$, so $3 \\nmid 2143$, and indeed $2143 = 3 \\cdot 714 + 1$. $1 + 2 + 5 + 7 = 15$ is a multiple of $3$, so $3 \\mid 1257$, and indeed $1257 = 3 \\cdot 419$.
+
+Why it happens: the last-digit rules are learned first and are the simplest, so the same kind of rule is expected for every divisor. They work only for divisors of $10$, and $3$ does not divide $10$: since $10 \\equiv 1 \\pmod{3}$, every digit counts, not just the last one.
+
+How to check: divide once. $2143 \\div 3$ is $714$ with remainder $1$, while $1257 \\div 3 = 419$ exactly.
+
+**Testing 4 by the last digit**
+
+The rule for $4$ is shortened to look like the rule for $2$: a number is judged by whether its last digit alone is a multiple of $4$.
+
+Wrong working: $2{,}134$ ends in $4$, so $4 \\mid 2134$; $3{,}516$ ends in $6$, so $4 \\nmid 3516$.
+
+Right working: the last two digits decide. $34 = 4 \\cdot 8 + 2$, so $4 \\nmid 2134$. $16 = 4 \\cdot 4$, so $4 \\mid 3516$, and indeed $3516 = 4 \\cdot 879$.
+
+Why it happens: $4$ is even, so a one-digit test like the one for $2$ seems natural. But $10$ is not a multiple of $4$, so the tens digit still changes the remainder; only $100$ is a multiple of $4$. The endings $14$ and $34$ end in $4$ and are not multiples of $4$, while $16$ and $36$ end in $6$ and are.
+
+How to check: with an even tens digit the last digit must be $0$, $4$ or $8$; with an odd tens digit it must be $2$ or $6$. In $2{,}134$ the tens digit $3$ is odd and the last digit is $4$, so $4 \\nmid 2134$.
+
+**Stopping after one passed test**
+
+Divisibility by $6$ needs two tests, and the number is declared divisible after passing only one of them, usually the test for $2$.
+
+Wrong working: $1{,}234$ ends in $4$, so it is even, and therefore $6 \\mid 1234$.
+
+Right working: the test for $3$ has to pass as well. $1 + 2 + 3 + 4 = 10$ is not a multiple of $3$, so $3 \\nmid 1234$ and $6 \\nmid 1234$. Indeed $1234 = 6 \\cdot 205 + 4$.
+
+Why it happens: a failed test settles the question at once, as for $2{,}135$, where the odd last digit is enough. That shortcut is carried over to a passed test, which settles nothing on its own.
+
+How to check: every multiple of $6$ is also a multiple of $3$. Since $1234 = 3 \\cdot 411 + 1$, it cannot be a multiple of $6$.
+
+**Combining factors that are not coprime**
+
+A composite divisor is split into two factors that share a divisor, as when $12$ is tested through $2$ and $6$, and passing both tests is taken as proof.
+
+Wrong working: $18$ is even and $18 = 6 \\cdot 3$, so it passes the tests for $2$ and for $6$, and therefore $12 \\mid 18$.
+
+Right working: split $12$ into coprime factors, $12 = 4 \\cdot 3$ with $\\gcd(4, 3) = 1$. The last two digits $18 = 4 \\cdot 4 + 2$ fail the test for $4$, so $12 \\nmid 18$. Indeed $18 = 12 \\cdot 1 + 6$.
+
+Why it happens: $2 \\cdot 6 = 12$, so the split looks natural. But every multiple of $6$ is already even, so the test for $2$ adds nothing, and the two tests together only show divisibility by $\\text{lcm}(2, 6) = 6$.
+
+How to check: compute the GCD of the two factors before using them. $\\gcd(2, 6) = 2$ rules the split out; the table in the Combining Rules section lists coprime splits such as $12 = 4 \\cdot 3$ and $24 = 8 \\cdot 3$.`,
+      before:``,
+      after:``,
+      link:'',
     }
   
   }
@@ -1093,6 +1160,14 @@ drObj10, demoUnits}) {
           sectionsContent.obj14.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

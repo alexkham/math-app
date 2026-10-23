@@ -1029,6 +1029,8 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import { renderState as renderInverseState } from '@/app/components/trigonometry/inverseFunctionDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1327,6 +1329,30 @@ const faqQuestions = {
   }
 
 
+// Concept introduction (section 1) — template C, failure first. Running
+// instance: sin x = 1/2. Old obj1 text is kept in sectionsContent.obj1, unused;
+// its theorem box, three passages and the whyRestrict figure with its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciUndoTable = ciTableOpen(['function', 'undone by', 'check']) +
+  ciRow(['double: 3 → 6', 'halve: 6 → 3', 'back to 3']) +
+  ciRow(['add 5: 3 → 8', 'subtract 5: 8 → 3', 'back to 3'], { shade: true }) +
+  ciRow(['sine: π/6 → 1/2', '1/2 → ?', '?'], { last: true, color: '#a4243b', cols: [1, 2] }) +
+  '</tbody></table>'
+const ciManyTable = ciTableOpen(['angle x', 'sin x']) +
+  ciRow(['π/6', '1/2']) +
+  ciRow(['5π/6', '1/2'], { shade: true }) +
+  ciRow(['π/6 + 2π = 13π/6', '1/2']) +
+  ciRow(['5π/6 + 2π = 17π/6', '1/2'], { shade: true }) +
+  ciRow(['… and infinitely many more', '1/2'], { last: true, color: '#a4243b' }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
    obj0: {
@@ -1445,6 +1471,12 @@ $$\\arccos(-x) = \\pi - \\arccos x$$
 @academic[formulas_link:Browse all trigonometry formulas
 /trigonometry/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Treating arccos as odd
+Copying the arcsine rule gives $\\arccos\\left(-\\frac{1}{2}\\right) = -\\frac{\\pi}{3}$, a negative angle that arccosine never returns. The supplement rule gives $\\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$.
+[Read more](!#pitfalls)]@
+
+For a negative input, this identity turns the work into a lookup at a positive one. To find $\\arccos\\left(-\\frac{\\sqrt{3}}{2}\\right)$, start from the known value $\\arccos\\left(\\frac{\\sqrt{3}}{2}\\right) = \\frac{\\pi}{6}$ and subtract it from $\\pi$, which gives $\\frac{5\\pi}{6}$. Every negative input lands this way in $\\left(\\frac{\\pi}{2}, \\pi\\right]$, the Quadrant II part of the range.
+
 The graph of $y = \\arccos(x)$ is a decreasing curve from $(−1, \\pi)$ to $(1, 0)$, passing through $(0, \\frac{\\pi}{2})$. It is the reflection of the restricted cosine graph over $y = x$.`,
     before: ``,
     after: ``,
@@ -1459,7 +1491,7 @@ $$\\arctan(x) = \\theta \\quad \\text{means} \\quad \\tan(\\theta) = x \\quad \\
 
 **Domain of** $\\arctan$: $(-\\infty, \\infty)$ — all real numbers, since tangent's range is unbounded.
 
-**Range of ** $\\arctan$: $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$ — an open interval, since tangent approaches but never reaches $\\pm\\frac{\\pi}{2}$ on its restricted domain.
+**Range of ** $\\arctan$: $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$ — an open interval, since the angles of tangent's restricted domain approach but never reach $\\pm\\frac{\\pi}{2}$.
 
 Exact values:
 
@@ -1518,6 +1550,10 @@ $$\\arctan x + \\operatorname{arccot} x = \\frac{\\pi}{2}$$
 
 @academic[formulas_link:Browse all trigonometry formulas
 /trigonometry/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Converting a negative arccot input directly
+Rewriting $\\operatorname{arccot}(-1)$ as $\\arctan(-1)$ gives $-\\frac{\\pi}{4}$, outside the range $(0, \\pi)$. From $\\arctan x + \\operatorname{arccot} x = \\frac{\\pi}{2}$, $\\operatorname{arccot}(-1) = \\frac{\\pi}{2} + \\frac{\\pi}{4} = \\frac{3\\pi}{4}$.
+[Read more](!#pitfalls)]@
 
 In practice, these are rarely evaluated directly. When an expression involves $\\text{arcsec}(x)$, it is usually converted to $\\arccos\\left(\\frac{1}{x}\\right)$ for computation. The same applies to arccosecant via arcsine and arccotangent via arctangent. Their primary role is theoretical — they appear in integral formulas in calculus (for example, $\\int \\frac{1}{x\\sqrt{x^2 - 1}}\\,dx = \\text{arcsec}|x| + C$) and in certain [identity](!/trigonometry/identities) derivations.`,
     before: ``,
@@ -1619,6 +1655,10 @@ To evaluate $\\cos(\\arctan(x))$: let $\\theta = \\arctan(x)$, so $\\tan\\theta 
 @academic[formula_callout:Compositions of Trigonometric and Inverse Trigonometric Functions
 $$\\cos(\\arctan(x)) = \\frac{1}{\\sqrt{1 + x^2}}$$]@
 
+@academic[pitfall,aside:true,width:35%:Cancelling mismatched functions
+Cancelling sine against arccosine gives $\\sin\\left(\\arccos\\frac{1}{2}\\right) = \\frac{1}{2}$. The inner angle is $\\arccos\\frac{1}{2} = \\frac{\\pi}{3}$, so the value is $\\sin\\frac{\\pi}{3} = \\frac{\\sqrt{3}}{2}$.
+[Read more](!#pitfalls)]@
+
 The triangle method works for every mixed composition. It converts the problem from inverse trigonometric territory back to [right triangle](!/trigonometry/right-triangle) ratios, using the Pythagorean [identity](!/trigonometry/identities) implicitly to find the missing side.
 
 All six mixed compositions — built from the right-triangle method demonstrated above — collect into the reference table below, with the algebraic form and validity domain for each.`,
@@ -1715,6 +1755,74 @@ All three primary inverse functions are continuous on their domains. Arcsine and
 
     },
 
+    obj16: {
+      title: `Common Pitfalls`,
+      content: `Five mistakes come up again and again when working with inverse trigonometric functions. Three are marked where they happen in the sections above; the notation and evaluation sections already warn about the other two. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating arccos as odd**
+
+The rule $\\arcsin(-x) = -\\arcsin x$ is carried over to arccosine, so a negative input is given the negative of the answer for the positive input. The result is a negative angle, and arccosine never returns one.
+
+Wrong working: $\\arccos\\left(-\\frac{1}{2}\\right) = -\\arccos\\left(\\frac{1}{2}\\right) = -\\frac{\\pi}{3}$.
+
+Right working: $\\arccos\\left(-\\frac{1}{2}\\right) = \\pi - \\arccos\\left(\\frac{1}{2}\\right) = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$. Indeed $\\cos\\frac{2\\pi}{3} = -\\frac{1}{2}$, and $\\frac{2\\pi}{3}$ lies in $[0, \\pi]$.
+
+Why it happens: arcsine and arctangent are both odd, so the habit of pulling the minus sign out is applied to the third inverse by default.
+
+How to check: an arccosine value lies in $[0, \\pi]$, so a negative answer is always wrong. Here also $\\cos\\left(-\\frac{\\pi}{3}\\right) = \\frac{1}{2}$, not $-\\frac{1}{2}$.
+
+**Converting a negative arccot input directly**
+
+Arccotangent is computed through $\\operatorname{arccot} x = \\arctan\\left(\\frac{1}{x}\\right)$, which holds only for $x > 0$. For a negative input the result lands in $\\left(-\\frac{\\pi}{2}, 0\\right)$, outside the range $(0, \\pi)$.
+
+Wrong working: $\\operatorname{arccot}(-1) = \\arctan\\left(\\frac{1}{-1}\\right) = \\arctan(-1) = -\\frac{\\pi}{4}$.
+
+Right working: from $\\arctan x + \\operatorname{arccot} x = \\frac{\\pi}{2}$, $\\operatorname{arccot}(-1) = \\frac{\\pi}{2} - \\arctan(-1) = \\frac{\\pi}{2} + \\frac{\\pi}{4} = \\frac{3\\pi}{4}$. The same comes from adding $\\pi$ to the arctangent result for $x < 0$: $-\\frac{\\pi}{4} + \\pi = \\frac{3\\pi}{4}$.
+
+Why it happens: calculators have no arccotangent key, and the reciprocal rule works for arccosecant and arcsecant on their whole domains, so it seems safe for arccotangent too.
+
+How to check: an arccotangent value lies in $(0, \\pi)$, so a negative answer is wrong. Then test the answer: $\\cot\\frac{3\\pi}{4} = \\frac{\\cos(3\\pi/4)}{\\sin(3\\pi/4)} = -1$.
+
+**Reading the inverse as a reciprocal**
+
+The notation $\\sin^{-1}(x)$ is read as a power, $\\frac{1}{\\sin x}$, following the pattern $\\sin^2 x = (\\sin x)^2$. The input is then treated as an angle and the output as a plain number, the reverse of what the inverse does.
+
+Wrong working: $\\sin^{-1}\\left(\\frac{1}{2}\\right) = \\frac{1}{\\sin\\frac{1}{2}} \\approx \\frac{1}{0.479} \\approx 2.09$, taking $\\frac{1}{2}$ as an angle of half a radian.
+
+Right working: $\\sin^{-1}\\left(\\frac{1}{2}\\right) = \\arcsin\\left(\\frac{1}{2}\\right) = \\frac{\\pi}{6} \\approx 0.52$, the angle whose sine is $\\frac{1}{2}$. The reciprocal is written $(\\sin x)^{-1}$ or $\\csc x$.
+
+Why it happens: every other superscript on a trigonometric function is a power, so $-1$ looks like one too.
+
+How to check: an arcsine value lies in $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, roughly from $-1.57$ to $1.57$. The value $2.09$ is outside, so it cannot be $\\sin^{-1}\\left(\\frac{1}{2}\\right)$. Applying sine to the right answer gives back the input: $\\sin\\frac{\\pi}{6} = \\frac{1}{2}$.
+
+**Picking an angle outside the range**
+
+The unit circle offers several angles with the given sine, and the one picked lies outside $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$. The evaluation section warns about this for $\\arcsin\\left(\\frac{1}{2}\\right)$; negative inputs are where it happens most.
+
+Wrong working: $\\sin\\frac{7\\pi}{6} = -\\frac{1}{2}$ and $\\sin\\frac{11\\pi}{6} = -\\frac{1}{2}$, so $\\arcsin\\left(-\\frac{1}{2}\\right)$ is given as $\\frac{7\\pi}{6}$ or $\\frac{11\\pi}{6}$.
+
+Right working: the only angle in $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$ whose sine is $-\\frac{1}{2}$ is $-\\frac{\\pi}{6}$, so $\\arcsin\\left(-\\frac{1}{2}\\right) = -\\frac{\\pi}{6}$. The angle $\\frac{11\\pi}{6} = -\\frac{\\pi}{6} + 2\\pi$ ends at the same point of the circle, but it is not the arcsine value.
+
+Why it happens: solving equations on $[0, 2\\pi)$ builds the habit of naming angles between $0$ and $2\\pi$, and negative angles feel unusual as answers.
+
+How to check: compare the answer with the range before writing it down. Both $\\frac{7\\pi}{6}$ and $\\frac{11\\pi}{6}$ are larger than $\\frac{\\pi}{2}$, so neither can be an arcsine value.
+
+**Cancelling mismatched functions**
+
+In a mixed composition such as $\\sin(\\arccos x)$, the outer function and the inner inverse belong to different functions, but they are cancelled as if the composition were direct.
+
+Wrong working: $\\sin\\left(\\arccos\\frac{1}{2}\\right) = \\frac{1}{2}$.
+
+Right working: let $\\theta = \\arccos\\frac{1}{2} = \\frac{\\pi}{3}$. Then $\\sin\\theta = \\sin\\frac{\\pi}{3} = \\frac{\\sqrt{3}}{2}$. The triangle formula gives the same value: $\\sqrt{1 - \\left(\\frac{1}{2}\\right)^2} = \\sqrt{\\frac{3}{4}} = \\frac{\\sqrt{3}}{2}$.
+
+Why it happens: the direct composition $\\sin(\\arcsin x) = x$ looks almost the same on the page, and the cancellation is carried over without checking that the two names match.
+
+How to check: try $x = 0$. Cancelling would give $\\sin(\\arccos 0) = 0$, but $\\arccos 0 = \\frac{\\pi}{2}$ and $\\sin\\frac{\\pi}{2} = 1$.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
     faq: {
       title: `Inverse Trigonometric Functions FAQ`,
     },
@@ -1794,6 +1902,12 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
     ],
   };
 
+  const conceptIntroFigures = {
+    arcsin: renderInverseState('arcsin'),
+    undoTable: ciUndoTable,
+    manyTable: ciManyTable,
+  };
+
   const demoUnits = {
     whyRestrict: demoUnitFrame({
       svg: renderCurveFeatureV2(cfWhyRestrict),
@@ -1846,6 +1960,7 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
       props:{
     inverseReciprocalTree,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj6Table,
@@ -1877,9 +1992,76 @@ export default function InverseFunctionsPage({inverseReciprocalTree,
   summaryTable,
   faqQuestions,
   schemas,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'assumption',
+        lead: `Every function we undo is run backwards to recover its input.`,
+        content: [
+          `Doubling is undone by halving, adding $5$ by subtracting $5$: given the output, you get back the one input that produced it. It is natural to expect the same of sine — since $\\sin\\frac{\\pi}{6} = \\frac{1}{2}$, the angle whose sine is $\\frac{1}{2}$ should be $\\frac{\\pi}{6}$.`,
+          ciTable('undoTable'),
+        ],
+      },
+      {
+        id: 'break',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Run backwards, sine gives not one angle but infinitely many.`,
+        content: [
+          `Ask for every angle whose sine is $\\frac{1}{2}$.`,
+          ciTable('manyTable'),
+          `$\\frac{\\pi}{6}$ is one answer among endlessly many. "The angle whose sine is $\\frac{1}{2}$" names no single angle, so as it stands there is nothing to define an inverse as.`,
+          <div key={'unit-whyRestrict'} dangerouslySetInnerHTML={{ __html: demoUnits.whyRestrict }} />,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The break was predictable: sine repeats, so it is not one-to-one.`,
+        content: [
+          `@academic[rule_theorem_plain:A function can have an inverse only if it is one-to-one: each output corresponds to exactly one input.]@`,
+          `The trigonometric functions, being periodic, are emphatically not one-to-one on their full domains. The equation $\\sin(x) = \\frac{1}{2}$ is satisfied by $\\frac{\\pi}{6}$, $\\frac{5\\pi}{6}$, $\\frac{\\pi}{6} + 2\\pi$, $\\frac{5\\pi}{6} + 2\\pi$, and infinitely many others. Defining "$\\sin^{-1}\\left(\\frac{1}{2}\\right)$" as all of these would not produce a function — a function must assign a single output to each input.`,
+          `It is like asking a phone directory who owns a number shared by a whole household: the question has several right answers. The comparison breaks in one useful way — sine's repetition is perfectly regular, so keeping just one stretch of its graph loses nothing.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [inverse trigonometric function](!/trigonometry/definitions#inverse_trigonometric_function) is the inverse of a trigonometric function restricted to an interval on which it is one-to-one. Arcsine, for example, gives the one angle in $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$ whose sine is a given number.`,
+        footer: `So $\\arcsin\\frac{1}{2} = \\frac{\\pi}{6}$: of all the angles in the table, the only one in $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$.`,
+      },
+      {
+        id: 'kind',
+        lead: `An inverse trigonometric function is a function: a number goes in and an angle comes out.`,
+        content: [
+          `Its input is a value of sine, cosine or tangent; its output is an angle, and exactly one angle each time. The solution is to restrict each trigonometric function to an interval where it is strictly monotonic — always increasing or always decreasing — and therefore one-to-one. On such an interval, the horizontal line test is passed, and an inverse function exists. The restricted function must still cover the entire range of the original, so that the inverse is defined for every relevant input.`,
+        ],
+        visual: ciSvg('arcsin'),
+        caption: `Sine kept only on $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$ and its mirror image across $y = x$, the graph of arcsine. The same state is on the [inverse functions explorer](!/trigonometry/visual-tools/inverse-functions).`,
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the failure becomes a test: undoing works only inside the chosen interval.`,
+        content: [
+          `$\\arcsin(\\sin x) = x$ holds when $x$ is in $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, and not otherwise: $\\arcsin\\left(\\sin\\frac{5\\pi}{6}\\right) = \\arcsin\\frac{1}{2} = \\frac{\\pi}{6}$, not $\\frac{5\\pi}{6}$. Every one of the other angles in the table is folded back onto the one the interval keeps.`,
+          `The choice of restriction interval is a convention, universally agreed upon. Different intervals could work (sine is also one-to-one on $\\left[\\frac{\\pi}{2}, \\frac{3\\pi}{2}\\right]$, for instance), but the standard choices have been selected for mathematical convenience — they are centered at or near the origin and produce the most natural behavior for compositions and calculus applications.`,
+          `The interval chosen is a convention, but the need to choose one is not.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page defines arcsine, arccosine and arctangent with their intervals, then the reciprocal inverses, their graphs, the composition rules, solving equations with inverse functions, and their derivatives.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1896,9 +2078,7 @@ export default function InverseFunctionsPage({inverseReciprocalTree,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-whyRestrict'} dangerouslySetInnerHTML={{ __html: demoUnits.whyRestrict }} />,
-          `The interval chosen is a convention, but the need to choose one is not.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1998,6 +2178,14 @@ export default function InverseFunctionsPage({inverseReciprocalTree,
           sectionsContent.obj9.content,
           <div key={'unit-inverseRanges'} dangerouslySetInnerHTML={{ __html: demoUnits.inverseRanges }} />,
           `Reading a graph in this direction is the quickest check that an inverse has been applied correctly.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // NEW capstone section: obj10

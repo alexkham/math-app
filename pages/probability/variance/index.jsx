@@ -965,6 +965,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1255,6 +1256,31 @@ export async function getStaticProps(){
     }
   }
 
+  // Concept introduction (section "definition") — template A, definition last.
+  // Running instance: X uniform on {1, 2, 3} and Y uniform on {0, 2, 4}, both
+  // with mean 2. Old definition text is kept in sectionsContent.definition,
+  // unused; its formula box, formulas link and four passages are carried in
+  // unchanged. Section "what" is unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciWorkTable = ciTableOpen(['', 'value', 'distance from mean 2', 'distance squared', 'probability']) +
+    ciRow(['X', '1', '−1', '1', '1/3']) +
+    ciRow(['X', '2', '0', '0', '1/3'], { shade: true }) +
+    ciRow(['X', '3', '+1', '1', '1/3']) +
+    ciRow(['Y', '0', '−2', '4', '1/3'], { shade: true }) +
+    ciRow(['Y', '2', '0', '0', '1/3']) +
+    ciRow(['Y', '4', '+2', '4', '1/3'], { shade: true, last: true }) +
+    '</tbody></table>'
+  const ciResultTable = ciTableOpen(['', 'average distance (signed)', 'average squared distance']) +
+    ciRow(['X', '(−1 + 0 + 1) ÷ 3 = 0', '(1 + 0 + 1) ÷ 3 = 2/3']) +
+    ciRow(['Y', '(−2 + 0 + 2) ÷ 3 = 0', '(4 + 0 + 4) ÷ 3 = 8/3'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+    '</tbody></table>'
+
   const sectionsContent={
     obj0: {
   title: `Key Terms`,
@@ -1321,7 +1347,7 @@ This measure gives us our first quantitative tool for describing not where a dis
           read:`sigma; the standard deviation`,
           means:`The square root of the variance — and the reason the squared notation matters: $\\sigma$ carries the same units as $X$, while $\\sigma^2$ carries their square. A spread in "dollars squared" is unreportable; the root brings it back.`,
           cases:`Reporting conventions follow the units: results and error bars are quoted in $\\sigma$, while algebra is done in $\\sigma^2$ because variances add for independent variables and standard deviations do not.`,
-          confusedWith:`Interchangeability. $\\sigma$ and $\\sigma^2$ are one letter apart and never equal (except at $1$) — reading a variance as a standard deviation silently squares or roots the answer, the arithmetic error this notation invites most often.`,
+          confusedWith:`Interchangeability. $\\sigma$ and $\\sigma^2$ are one letter apart and never equal (except at $0$ and $1$) — reading a variance as a standard deviation silently squares or roots the answer, the arithmetic error this notation invites most often.`,
         },
       ],
       symbolsHref:`/math-symbols/probability`,
@@ -1455,6 +1481,14 @@ $$\\mathbb{E}[X^2] = 0^2(0.1) + 1^2(0.3) + 2^2(0.4) + 3^2(0.2) = 0 + 0.3 + 1.6 +
 $$\\mathrm{Var}(X) = 3.7 - (1.7)^2 = 3.7 - 2.89 = 0.81$$]@
 
 The variance is 0.81, indicating moderate spread around the mean of 1.7 items.
+
+@academic[pitfall,aside:true,width:35%:Subtracting the mean instead of its square
+Taking $\\mathbb{E}[X^2] - \\mu$ gives $3.7 - 1.7 = 2$ for the shop's sales. The shortcut subtracts the squared mean: $3.7 - (1.7)^2 = 3.7 - 2.89 = 0.81$.
+[Read more](!#mistakes)]@
+
+The shortcut works with two different averages taken from the same table. The first, $\\mathbb{E}[X^2] = 3.7$, averages the squared values; the second, $\\mu = 1.7$, averages the values themselves and is then squared to $2.89$.
+
+Both quantities are measured in squared items, which is what allows one to be subtracted from the other. The gap between them is the variance, and it is never negative, because averaging the squares always gives at least the square of the average.
   `,
 },
 
@@ -1595,6 +1629,14 @@ $$\\operatorname{Var}(aX + b) = a^2\\,\\operatorname{Var}(X)$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Pulling the constant out unsquared
+Taking $a$ out of $\\operatorname{Var}(aX)$ as it is: if the shop earns 5 dollars per item, revenue $5X$ gets $5 \\cdot 0.81 = 4.05$. The factor comes out squared: $\\operatorname{Var}(5X) = 25 \\cdot 0.81 = 20.25$.
+[Read more](!#mistakes)]@
+
+In the combined rule the two constants play different parts. The factor $a$ changes the scale of the variable, so every deviation from the mean is stretched by the same factor $a$, and the mean itself moves to $a\\mu$.
+
+The constant $b$ only moves the whole distribution along the line. The values and the mean move together, the deviations stay as they were, and so $b$ leaves no trace in the result. This is the same pattern that appears whenever a variable is converted to new units, such as items to dollars or metres to centimetres.
+
 **Computational formula**: Variance can also be computed from the first two moments:
 
 @academic[formula_callout:Variance Computational Formula
@@ -1654,6 +1696,14 @@ This result extends to any finite collection of independent variables. For $X_1,
 @academic[formula_callout:Variance of a Sum
 $$\\mathrm{Var}(X_1 + X_2 + \\cdots + X_n) = \\mathrm{Var}(X_1) + \\mathrm{Var}(X_2) + \\cdots + \\mathrm{Var}(X_n)$$]@
 
+@academic[pitfall,aside:true,width:35%:Subtracting variances for a difference
+Writing $\\mathrm{Var}(X - Y) = \\mathrm{Var}(X) - \\mathrm{Var}(Y)$: with variances $4$ and $9$ this gives $-5$, a negative variance. For independent $X$ and $Y$ the variances still add: $\\mathrm{Var}(X - Y) = 4 + 9 = 13$.
+[Read more](!#mistakes)]@
+
+Differences of random variables come up as often as sums: the gap between two measurements, a profit computed as revenue minus cost, the change in a quantity from one day to the next. A difference $X - Y$ is the sum of $X$ and $-Y$, so it falls under the same rule.
+
+The second variable then enters with the factor $-1$ in front of it. How that factor behaves inside a variance is settled by the scaling rule from the previous section, applied with $a = -1$.
+
 **General case with dependence**: When $X$ and $Y$ are not independent, an additional term appears:
 
 @academic[formula_callout:Variance of a Sum
@@ -1663,7 +1713,13 @@ The quantity $\\mathrm{Cov}(X, Y)$ is the covariance between $X$ and $Y$, which 
 
 @academic[rule_corollary_plain:Positive covariance increases the variance of the sum, while negative covariance decreases it.]@
 
+@academic[pitfall,aside:true,width:35%:Adding variances of dependent variables
+Adding $\\mathrm{Var}(X) + \\mathrm{Var}(Y)$ when $Y = X$: for the shop's sales, $0.81 + 0.81 = 1.62$. Here $\\mathrm{Cov}(X, X) = 0.81$, so $\\mathrm{Var}(X + X) = 0.81 + 0.81 + 2(0.81) = 3.24$.
+[Read more](!#mistakes)]@
+
 When variables are independent, their covariance is zero, recovering the simpler formula.
+
+Whether the covariance term can be left out is a question about how the variables were produced, not about the formula. Two measurements taken on the same person, the sales of the same shop on two neighbouring days, or a variable added to itself all share information, and the covariance between them is part of the variance of their sum.
 
 When $X$ is split by the value of another variable $Y$, the variance decomposes into two parts:
 
@@ -1759,6 +1815,10 @@ $$\\sigma = \\sqrt{\\mathrm{Var}(X)}$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Adding standard deviations
+For independent $X$ and $Y$ with $\\sigma_X = 3$ and $\\sigma_Y = 4$, adding gives $\\sigma_{X+Y} = 7$. The variances add, not the roots: $\\sigma_{X+Y} = \\sqrt{9 + 16} = 5$.
+[Read more](!#mistakes)]@
+
 Because standard deviation shares the same units as the random variable itself, it provides a more intuitive sense of typical deviation magnitude. A standard deviation of 5 meters directly describes spread in meters, while a variance of 25 square meters requires mental conversion.
 
 Both measures contain the same information—knowing one determines the other. Variance appears more naturally in theoretical derivations and algebraic manipulations, while standard deviation proves more useful for interpretation and communication of results.
@@ -1783,7 +1843,49 @@ Several misconceptions about variance appear frequently when working with probab
 
 **Confusing standard deviation with variance**: Because standard deviation is the square root of variance, the two are related but not interchangeable. Failing to distinguish between $\\sigma$ and $\\sigma^2$ corrupts calculations and interpretations, especially when scaling or transforming variables.
 
-**Assuming variance behaves linearly**: Unlike expectation, variance does not satisfy $\\mathrm{Var}(aX + bY) = a\\mathrm{Var}(X) + b\\mathrm{Var}(Y)$ in general. The scaling rule involves squaring constants, and additivity requires independence. Treating variance as linear leads to systematic errors.`,
+**Assuming variance behaves linearly**: Unlike expectation, variance does not satisfy $\\mathrm{Var}(aX + bY) = a\\mathrm{Var}(X) + b\\mathrm{Var}(Y)$ in general. The scaling rule involves squaring constants, and additivity requires independence. Treating variance as linear leads to systematic errors.
+
+**Subtracting the mean instead of its square**
+
+The shortcut formula $\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$ is applied, but the mean is subtracted as it is, without being squared.
+
+Wrong working, for the shop's sales from the general case:
+$$\\mathbb{E}[X^2] = 3.7, \\quad \\mu = 1.7, \\quad \\mathrm{Var}(X) = 3.7 - 1.7 = 2$$
+
+Right working: the mean is squared before it is subtracted.
+$$\\mathrm{Var}(X) = 3.7 - (1.7)^2 = 3.7 - 2.89 = 0.81$$
+
+Why it happens: the formula holds two quantities that look alike, $\\mathbb{E}[X^2]$ and $\\mu^2$. After the work of computing $\\mathbb{E}[X^2]$, the second square is easy to drop.
+
+How to check: compare units. $\\mathbb{E}[X^2]$ is in squared items and $\\mu$ is in items, so they cannot be subtracted. Or compute once from the definition: $(0 - 1.7)^2(0.1) + (1 - 1.7)^2(0.3) + (2 - 1.7)^2(0.4) + (3 - 1.7)^2(0.2) = 0.289 + 0.147 + 0.036 + 0.338 = 0.81$.
+
+**Subtracting variances for a difference**
+
+The variance of a difference $X - Y$ is needed, and the rule for sums is applied with a minus sign in place of the plus.
+
+Wrong working, for independent $X$ and $Y$ with $\\mathrm{Var}(X) = 4$ and $\\mathrm{Var}(Y) = 9$:
+$$\\mathrm{Var}(X - Y) = \\mathrm{Var}(X) - \\mathrm{Var}(Y) = 4 - 9 = -5$$
+
+Right working: write the difference as a sum and use the scaling rule with $a = -1$.
+$$\\mathrm{Var}(X - Y) = \\mathrm{Var}(X) + (-1)^2\\,\\mathrm{Var}(Y) = 4 + 9 = 13$$
+
+Why it happens: for expectation the minus sign carries through, $E[X - Y] = E[X] - E[Y]$, and the same habit is applied to variance. Subtracting a variable adds uncertainty just as adding one does.
+
+How to check: a negative result is impossible, so it always signals an error. For two independent fair dice, the wrong rule gives $\\mathrm{Var}(X - Y) = 0$, yet $X - Y$ clearly varies from $-5$ to $5$; its actual variance is $\\frac{35}{12} + \\frac{35}{12} = \\frac{35}{6}$.
+
+**Adding standard deviations**
+
+The spread of a sum of independent variables is needed in standard-deviation form, and the two standard deviations are added directly.
+
+Wrong working, for independent $X$ and $Y$ with $\\sigma_X = 3$ and $\\sigma_Y = 4$:
+$$\\sigma_{X+Y} = 3 + 4 = 7$$
+
+Right working: add the variances, then take the square root.
+$$\\mathrm{Var}(X + Y) = 3^2 + 4^2 = 25, \\quad \\sigma_{X+Y} = \\sqrt{25} = 5$$
+
+Why it happens: standard deviations are the numbers that get reported, so they are the ones at hand. But the addition rule belongs to variances; for independent variables, standard deviations combine like the two shorter sides of a right triangle, not like lengths laid end to end.
+
+How to check: for independent variables, $\\sigma_{X+Y}$ is never larger than $\\sigma_X + \\sigma_Y$ and never smaller than the larger of the two. Here $5$ lies between $4$ and $7$; the sum $7$ would be reached only if the two variables moved in perfect step, which independent variables do not.`,
       before:``,
       after:``,
   
@@ -1961,6 +2063,14 @@ const continuousVarianceFormulasData = {
     yBars: lsVarBars,
     notes: [{ x: 2.3, y: -0.08, text: 'p(x) = x/10, mean 3', pos: 'e' }, { x: 2.3, y: -0.14, text: 'blue: (x − 3) · p(x), sum 0', pos: 'e', color: 'f' }, { x: 2.3, y: -0.2, text: 'amber: (x − 3)² · p(x), sum 1', pos: 'e', color: 'r' }],
     caption: 'Raw deviations cancel; squared ones add up to the variance' };
+  const conceptIntroFigures = {
+    low: varianceDiagrams.low,
+    high: varianceDiagrams.high,
+    outliers: varianceDiagrams.outliers,
+    workTable: ciWorkTable,
+    resultTable: ciResultTable,
+  };
+
   const demoUnits = {
     u_notation_0: demoUnitFrame({
       svg: varianceDiagrams.default,
@@ -1993,6 +2103,7 @@ const continuousVarianceFormulasData = {
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -2027,10 +2138,86 @@ export default function VariancePage({
   calculateTable,
   sdTable,
   mistakesTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciPair = (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 14px' }}>
+      {[['low', 'tightly grouped'], ['high', 'widely scattered']].map(([k, label]) => (
+        <div key={k} style={{ textAlign: 'center' }}>
+          <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[k] }} />
+          <div style={{ fontWeight: 700, color: '#06357a', fontSize: '15px', margin: '-4px 0 6px' }}>{label}</div>
+        </div>
+      ))}
+    </div>
+  )
+
+  // "What is Variance" concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Two sets of results can share a centre and still behave very differently.`,
+        content: `The [expected value](!/probability/expected-value) says where results balance. It says nothing about whether they huddle close to that point or scatter far from it — and a steady result and a wild one can balance in the same place. Something has to measure the scatter.`,
+        visual: ciPair,
+        caption: `Two data sets with about the same mean, around $21$: one grouped near it, one spread out. These are frozen states of the [variance visualizer](!/probability/visual-tools/variance).`,
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Measuring spread by hand starts with each value's distance from the mean.`,
+        content: [
+          `Take $X$, equally likely to be $1$, $2$ or $3$, and $Y$, equally likely to be $0$, $2$ or $4$. Both have mean $2$. Record how far each value lies from $2$.`,
+          ciTable('workTable'),
+          `Averaging the signed distances gives nothing useful — but averaging the squared distances separates the two at once.`,
+          ciTable('resultTable'),
+          `$Y$ spreads four times as much as $X$ by this measure: $\\frac{8}{3}$ against $\\frac{2}{3}$.`,
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in that recipe was chosen: the signed distances always cancel, so they had to be made positive.`,
+        content: [
+          `Distances below the mean are negative and distances above are positive, and around the mean they always balance — that is what being the mean means. Their average is $0$ for every distribution, so it cannot tell $X$ from $Y$. Squaring makes every distance count.`,
+          `The squaring step is crucial: it ensures that deviations above and below the mean both contribute positively to the measure, and it emphasizes larger deviations more heavily than smaller ones. A [random variable](!/probability/random-variables) with high variance produces outcomes that tend to be far from its expected value, while low variance indicates outcomes cluster tightly around the mean.`,
+          `To calculate it, we take each possible outcome, find how far it is from the mean, square that distance, and then average all those squared distances according to the probability of each outcome.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `[Variance](!/probability/definitions#variance) of a [random variable](!/probability/random-variables) is a quantitative characteristic of how far, on average, the outcomes of a [random variable](!/probability/random-variables) fall from what we expect.  In symbols, with $\\mu$ the mean:`,
+        formula: `@academic[formula_callout:Variance Definition
+$$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
+/probability/formulas#variance_definition]@`,
+        footer: `@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@`,
+      },
+      {
+        id: 'kind',
+        lead: `Variance is a single number, never negative, measured in squared units.`,
+        content: [
+          `It is $0$ only when there is no spread at all — a variable that always gives the same value — and grows as results scatter. Because distances are squared, its units are squared too: if $X$ is measured in metres, its variance is in square metres.`,
+          `This measure gives us our first quantitative tool for describing not where a distribution is centered, but how spread out or concentrated it is around that center.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Squared distances generalize; two consequences of squaring need care.`,
+        content: `What generalizes: the probability-weighted average of squared distances, for any random variable. What follows from squaring: the units are squared, which is why the [standard deviation](!/probability/variance#sd), the square root of variance, is used to state spread in the original units. And large distances dominate: one value far from the rest can inflate the variance more than everything else together.`,
+        visual: ciSvg('outliers'),
+        caption: `Six values close together and one far away: the single distant value contributes most of the variance.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page explains what variance measures in practice, its notation, how to calculate it for discrete and continuous variables, why the deviation is squared, its properties, the variance of sums, the variances of common distributions, and the standard deviation.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2047,7 +2234,7 @@ export default function VariancePage({
         title:sectionsContent.definition.title,
         link:'',
         content:[
-            sectionsContent.definition.content,
+            <ConceptIntro key={'definition-intro'} data={conceptIntro} />,
         ]
     },
   

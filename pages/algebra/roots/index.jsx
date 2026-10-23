@@ -12,6 +12,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
 
 
 export async function getStaticProps(){
@@ -310,6 +311,10 @@ For square roots and all even-index roots, the principal root is the non-negativ
 @academic[formula_callout:Principal Roots
 $$\\sqrt{25} = 5, \\quad \\text{not } -5, \\quad \\text{and not } \\pm 5$$]@
 
+@academic[pitfall,aside:true,width:35%:Simplifying the root of a square to x
+Writing $\\sqrt{x^2} = x$ fails for negative $x$: at $x = -3$ it gives $-3$, but $\\sqrt{(-3)^2} = \\sqrt{9} = 3$. The principal root is non-negative, so $\\sqrt{x^2} = |x|$.
+[Read more](!#pitfalls)]@
+
 This convention exists so that $\\sqrt{x}$ is a function — one input, one output. Without it, $\\sqrt{25}$ would have two values, and expressions involving radicals would become ambiguous.
 
 When both roots are needed, write $\\pm\\sqrt{25} = \\pm 5$ explicitly. This notation appears frequently when [solving radical equations](!/algebra/roots/equations).
@@ -404,6 +409,12 @@ These rules work when the indices match and when the radicands satisfy certain c
 
 @academic[rule_plain:Even-index roots require non-negative radicands in the real number system — a restriction detailed in [properties of radicals](!/algebra/roots/properties).]@
 
+@academic[pitfall,aside:true,width:35%:Splitting a root over a sum
+Taking $\\sqrt{9 + 16}$ term by term gives $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$. The rules cover products and quotients only; the radicand is added first: $\\sqrt{9 + 16} = \\sqrt{25} = 5$.
+[Read more](!#pitfalls)]@
+
+All three rules act on a radicand built by multiplication, by division, or from another radical. Radicands built by addition or subtraction, such as $\\sqrt{9 + 16}$ or $\\sqrt{x^2 + 9}$, are just as common: the Pythagorean theorem and the distance formula both produce them.
+
 The complete set of rules, with their restrictions and derivations, appears in [radical rules](!/algebra/roots/radical-rules). Mastering these rules is essential for [operations with radicals](!/algebra/roots/operations).
 
 The table below collects these three rules in compact form; the dedicated rules page develops them with their full restrictions.`,
@@ -451,6 +462,10 @@ $$x + 3 = 25$$]@
 
 @academic[formula_callout:Equations with Radicals
 $$x = 22$$]@
+
+@academic[pitfall,aside:true,width:35%:Squaring before isolating the radical
+Squaring $\\sqrt{x} + 2 = 4$ term by term gives $x + 4 = 16$, so $x = 12$, but $\\sqrt{12} + 2 \\approx 5.46$. Isolating first, $\\sqrt{x} = 2$, gives $x = 4$.
+[Read more](!#pitfalls)]@
 
 This process can introduce extraneous solutions — values that satisfy the transformed equation but not the original. Checking solutions is essential, especially with even-index radicals.
 
@@ -527,7 +542,7 @@ $$a^{1/2} = \\sqrt{a}, \\quad a^{1/3} = \\sqrt[3]{a}, \\quad a^{m/n} = \\sqrt[n]
 
 The laws of exponents govern both operations. Product rules, quotient rules, and power rules translate directly between radical and exponent notation. These connections are explored in [radical rules](!/algebra/roots/radical-rules) and [rational exponents](!/algebra/roots/rational-exponents).
 
-Domain restrictions tighten as exponents become more general. Natural exponents allow any base. Negative exponents exclude zero. Rational exponents with even denominators require positive bases. This progression mirrors the restrictions on even-index radicals detailed in [properties of radicals](!/algebra/roots/properties).
+Domain restrictions tighten as exponents become more general. Natural exponents allow any base. Negative exponents exclude zero. Rational exponents with even denominators require non-negative bases (positive when the exponent is negative). This progression mirrors the restrictions on even-index radicals detailed in [properties of radicals](!/algebra/roots/properties).
 
 Mastery of roots and powers together provides the foundation for exponential functions, logarithms, and calculus.`,
     before: ``,
@@ -538,6 +553,59 @@ Mastery of roots and powers together provides the foundation for exponential fun
   obj11: {
     title: `The Roots Subtree at a Glance`,
     content: `The sub-pages of the roots section develop each topic introduced above with full depth, worked examples, and edge cases. The table below collects them as a navigator — what each page covers and the question that would send you there — so you can dive into any specific area without retracing the hub.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up again and again when working with roots. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Simplifying the root of a square to x**
+
+A square root and a square are cancelled against each other, as if $\\sqrt{x^2}$ were always $x$. That is true only when $x \\geq 0$.
+
+Wrong working, for $x = -3$:
+$$\\sqrt{(-3)^2} = -3$$
+
+Right working: square first, then take the principal root.
+$$\\sqrt{(-3)^2} = \\sqrt{9} = 3 = |-3|$$
+In general, $\\sqrt{x^2} = |x|$.
+
+Why it happens: squaring and taking a square root undo each other, and in the other order the cancellation does work: $(\\sqrt{x})^2 = x$ for every $x \\geq 0$. In the order $\\sqrt{x^2}$, the radical returns only the non-negative root, so the sign of $x$ is lost.
+
+How to check: substitute a negative value. A square root is never negative, so a simplification that gives $-3$ for $x = -3$ cannot be right.
+
+**Splitting a root over a sum**
+
+The product rule is carried over to a sum under the radical, and the root is taken term by term.
+
+Wrong working:
+$$\\sqrt{9 + 16} = \\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$$
+
+Right working: evaluate the radicand first.
+$$\\sqrt{9 + 16} = \\sqrt{25} = 5$$
+An expression such as $\\sqrt{x^2 + 9}$ stays as it is; it does not split into $x + 3$.
+
+Why it happens: the product and quotient rules let a radical split, and the same move looks natural for addition. No rule allows it: roots split over multiplication and division only.
+
+How to check: square the answer. $7^2 = 49$, not $25$, while $5^2 = 25$.
+
+**Squaring before isolating the radical**
+
+Both sides are squared while another term still stands beside the radical, and each term is squared on its own.
+
+Wrong working:
+$$\\sqrt{x} + 2 = 4 \\implies x + 4 = 16 \\implies x = 12$$
+
+Right working: isolate the radical first, then square.
+$$\\sqrt{x} + 2 = 4 \\implies \\sqrt{x} = 2 \\implies x = 4$$
+Check: $\\sqrt{4} + 2 = 2 + 2 = 4$.
+
+Why it happens: squaring is meant to remove the radical, and squaring term by term seems to do that. But the square of a sum is not the sum of the squares: $(\\sqrt{x} + 2)^2 = x + 4\\sqrt{x} + 4$, so with the radical not isolated, it does not disappear.
+
+How to check: substitute the result into the original equation. $x = 12$ gives $\\sqrt{12} + 2 \\approx 3.46 + 2 = 5.46$, not $4$.`,
     before: ``,
     after: ``,
     link: '',
@@ -671,8 +739,37 @@ const schemas = {
     ],
   };
 
+  const rootsSubtreeOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'The roots pages',
+    preface: 'The roots section splits into eight pages, from the basic properties of radicals to their use in equations, functions and the complex numbers.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Rules first, then use',
+    conclusion: 'Properties and rules come first; simplifying and operations put them to work; equations, functions and complex numbers apply them.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Roots and radicals', children: [
+        { id: 'g1', name: 'Rules', children: [
+          { id: 'props', name: '[Properties of radicals](!/algebra/roots/properties)', def: 'even vs odd index, sign, domain' },
+          { id: 'rules', name: '[Radical rules](!/algebra/roots/radical-rules)', def: 'product, quotient, power, nested' },
+          { id: 'ratexp', name: '[Rational exponents](!/algebra/roots/rational-exponents)', def: 'fractional powers, converting forms' },
+        ] },
+        { id: 'g2', name: 'Working with radicals', children: [
+          { id: 'simp', name: '[Simplifying radicals](!/algebra/roots/simplifying)', def: 'extract perfect powers, clear fractions' },
+          { id: 'ops', name: '[Operations with radicals](!/algebra/roots/operations)', def: 'add like radicals, rationalize' },
+        ] },
+        { id: 'g3', name: 'Applications', children: [
+          { id: 'eq', name: '[Radical equations](!/algebra/roots/equations)', def: 'isolate the radical; extraneous solutions' },
+          { id: 'fn', name: '[Radical functions](!/algebra/roots/functions)', def: 'domains and graphs of √x and ∛x' },
+          { id: 'cx', name: 'Radicals and complex numbers', def: 'negative radicands through i' },
+        ] },
+      ] },
+    ],
+  };
+
    return {
   props: {
+    rootsSubtreeOutline,
     radicalFunctionCases,
     sectionsContent,
     introContent,
@@ -697,7 +794,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RootsAndRadicalsPage({radicalFunctionCases, 
+export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFunctionCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -817,6 +914,14 @@ export default function RootsAndRadicalsPage({radicalFunctionCases,
         ]
     },
     {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+        ]
+    },
+    {
         id:'11',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
@@ -824,6 +929,14 @@ export default function RootsAndRadicalsPage({radicalFunctionCases,
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'obj11-diagram'}
+            id="roots-subtree-outline"
+            title="The roots pages: rules, working, applications"
+            source="/algebra/roots"
+          >
+            <TaxonomyOutline data={rootsSubtreeOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     // {

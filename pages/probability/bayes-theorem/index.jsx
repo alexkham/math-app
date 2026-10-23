@@ -637,6 +637,7 @@ import conditionalTreeDiagrams from '@/app/components/probability/conditional-pr
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
 
 
 export async function getStaticProps(){
@@ -875,7 +876,7 @@ export async function getStaticProps(){
 - [Conditional Probability](!/probability/definitions#conditional_probability) — $P(A \\mid B)$, the quantity Bayes' theorem inverts
 - [Probability Measure](!/probability/definitions#probability_measure) — the function $P$ underlying all terms in the formula
 - [Disjoint Sets](!/probability/definitions#disjoint_sets) — partition elements must be disjoint
-- [Event](!/probability/definitions#event) — the observed evidence $A$ and the hypotheses $B_j$`,
+- [Event](!/probability/definitions#event) — the hypothesis $A$ and the observed evidence $B$`,
   before: ``,
   after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,
@@ -918,7 +919,7 @@ To compute a posterior probability from your own prior and likelihoods, use the 
       content:`
 Bayes' theorem is built entirely from [conditional probability](!/probability/conditional-probability). It does not introduce a new type of probability or a separate rule. Instead, it reorganizes conditional probabilities to answer a different kind of question.
 
-Conditional probability tells us how likely one event is when another has occured already. Bayes' theorem takes this idea and reverses the direction: it relates the probability of a cause given an observation to the probability of observing that outcome given the cause.
+Conditional probability tells us how likely one event is when another has occurred already. Bayes' theorem takes this idea and reverses the direction: it relates the probability of a cause given an observation to the probability of observing that outcome given the cause.
 
 Because of this, Bayes' theorem cannot be understood in isolation. It is a direct consequence of how [conditional probability](!/probability/conditional-probability) works, and its meaning becomes clear only when conditioning is already familiar.
 `,
@@ -986,6 +987,10 @@ $$P(A \\mid B) = \\dfrac{P(B \\mid A)\\,P(A)}{P(B)}$$
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Ignoring the prior
+Comparing defect rates alone, $P(D \\mid M_2) = 0.10 > P(D \\mid M_1) = 0.02$, blames machine 2 for a defective part. But machine 1 makes $90\\%$ of the parts: $P(M_1 \\mid D) = \\frac{0.9 \\cdot 0.02}{0.9 \\cdot 0.02 + 0.1 \\cdot 0.10} = \\frac{9}{14} \\approx 0.64$.
+[Read more](!#mistakes)]@
 
 Each part of the formula has a clear role.
 
@@ -1201,8 +1206,53 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
     ],
   };
 
+  const bayesAnatomy = {
+    header: {
+      kicker: 'the formula, part by part',
+      title: "Bayes' theorem",
+      lede: 'start from the prior, weigh it by how well the observation fits, rescale so everything adds up to 1',
+    },
+    formula: [
+      { kind: 'part', id: 'post', children: [
+        { kind: 'op', text: 'P(', tight: true }, { kind: 'var', text: 'A' }, { kind: 'op', text: '|' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')', tight: true },
+      ] },
+      { kind: 'op', text: '=' },
+      { kind: 'frac',
+        num: [
+          { kind: 'part', id: 'like', children: [
+            { kind: 'op', text: 'P(', tight: true }, { kind: 'var', text: 'B' }, { kind: 'op', text: '|' }, { kind: 'var', text: 'A' }, { kind: 'op', text: ')', tight: true },
+          ] },
+          { kind: 'op', text: ' ', tight: true },
+          { kind: 'part', id: 'prior', children: [
+            { kind: 'op', text: 'P(', tight: true }, { kind: 'var', text: 'A' }, { kind: 'op', text: ')', tight: true },
+          ] },
+        ],
+        den: [
+          { kind: 'part', id: 'norm', children: [
+            { kind: 'op', text: 'P(', tight: true }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')', tight: true },
+          ] },
+        ],
+      },
+    ],
+    parts: [
+      { id: 'post', chip: 'P(A | B)', title: 'Posterior', side: 'top',
+        tip: 'The updated probability of A once B is seen.',
+        desc: 'The output of the formula: the probability of A after the observation B. Example: machine 1 makes 90% of the parts with a 2% defect rate, machine 2 makes 10% with 10%. For a defective part, P(machine 1 | defective) = 0.018 / 0.028 = 9/14 ≈ 0.64.' },
+      { id: 'like', chip: 'P(B | A)', title: 'Likelihood', side: 'top',
+        tip: 'How well the observation fits the situation A.',
+        desc: 'How compatible the observation B is with A. Comparing likelihoods alone ignores how common each hypothesis is. Example: P(defective | machine 1) = 0.02, lower than machine 2’s 0.10, yet machine 1 is still the more likely source.' },
+      { id: 'prior', chip: 'P(A)', title: 'Prior', side: 'top',
+        tip: 'What you believed about A before any evidence.',
+        desc: 'The starting probability of A, before B is taken into account. The part most often dropped. Example: P(machine 1) = 0.9, and it is this 0.9 that outweighs the lower defect rate.' },
+      { id: 'norm', chip: 'P(B)', title: 'Normalization', side: 'bottom',
+        tip: 'Rescales so the updated probabilities sum to 1.',
+        desc: 'The overall probability of B across all hypotheses, found by [total probability](!/probability/total-probability). Example: P(defective) = 0.9 · 0.02 + 0.1 · 0.10 = 0.018 + 0.010 = 0.028.' },
+    ],
+  };
+
   return {
     props: {
+    bayesAnatomy,
     bayesFoundationLevels,
     demoUnits,
       sectionsContent,
@@ -1225,7 +1275,7 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function BayesPage({bayesFoundationLevels, 
+export default function BayesPage({bayesAnatomy, bayesFoundationLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -1271,6 +1321,13 @@ export default function BayesPage({bayesFoundationLevels,
         content:[
           sectionsContent.conditional.content,
                   <div key={'unit-u_conditional_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_conditional_0 }} />,
+          `@academic[pitfall,aside:true,width:35%:Swapping the two conditionals
+Reading a test's $P(+ \\mid D) = 0.99$ as the chance of disease after a positive result reverses the condition. With $P(D) = 0.01$ and $P(+ \\mid D^c) = 0.05$, the posterior is $P(D \\mid +) = \\frac{0.0099}{0.0594} = \\frac{1}{6} \\approx 0.17$.
+[Read more](!#mistakes)]@
+
+In the tree, the two conditionals sit in different places. $P(B \\mid A)$ is a branch weight, read forward from the situation to the observation, and it is usually the number a problem supplies. $P(A \\mid B)$ does not appear on the tree at all: it has to be computed from the products along the paths that end in $B$.
+
+Both quantities are built from the same joint probability $P(A \\cap B)$, but each measures it against a different event. The first measures it against $A$, the second against $B$.`,
           `The formula below writes this rearrangement out in symbols.`,
         ]
     },
@@ -1300,6 +1357,16 @@ export default function BayesPage({bayesFoundationLevels,
         content:[
           sectionsContent.formula.content,
           <div key={'formula-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: formulaTable}}/>,
+          <DiagramFrame
+            key={'formula-diagram'}
+            id="bayes-theorem-anatomy"
+            title="Bayes' theorem, part by part"
+            source="/probability/bayes-theorem"
+            before={"Taking the formula apart: the posterior on the left, the likelihood and the prior on top, the normalization below."}
+            after={"The part most often dropped is the prior: comparing likelihoods alone ignores how common each hypothesis was to begin with. The normalization $P(B)$ comes from the [law of total probability](!/probability/total-probability)."}
+          >
+            <FormulaAnatomy data={bayesAnatomy} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1309,6 +1376,13 @@ export default function BayesPage({bayesFoundationLevels,
         content:[
           sectionsContent.total.content,
                   <div key={'unit-u_total_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_total_1 }} />,
+          `@academic[pitfall,aside:true,width:35%:Leaving cases out of the denominator
+With $P(D) = 0.01$, $P(+ \\mid D) = 0.99$ and $P(+ \\mid D^c) = 0.05$, taking $P(+)$ from the disease branch alone, $0.0099$, gives $P(D \\mid +) = 1$. Adding the healthy branch, $0.05 \\cdot 0.99 = 0.0495$, gives $P(+) = 0.0594$ and $P(D \\mid +) = \\frac{1}{6}$.
+[Read more](!#mistakes)]@
+
+In a two-case problem the partition is a hypothesis and its complement, so $P(B)$ has exactly two contributions: $P(B \\mid A)\\,P(A)$ from the first case and $P(B \\mid A^c)\\,P(A^c)$ from the second. With more hypotheses there are more contributions, one for each branch of the partition.
+
+The numerator of Bayes' theorem is one of these contributions, and the denominator is their sum. The posterior is therefore the share of all routes to the evidence that pass through the hypothesis in question.`,
           `The chain rule offers a second way to read the same products.`,
         ]
     },

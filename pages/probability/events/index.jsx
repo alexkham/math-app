@@ -565,6 +565,9 @@ import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/ou
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennTwoSetDiagrams'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -848,6 +851,30 @@ export async function getStaticProps(){
     }
   }
 
+  // Concept introduction (section "sample") — template B, definition first.
+  // Running instance: events of two dice. Old sample text (three paragraphs,
+  // no widgets) is kept in sectionsContent.sample, unused, and reused
+  // verbatim; the even-sum demo frame with its line is carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciEventsTable = ciTableOpen(['in words', 'the outcomes it collects', 'how many']) +
+    ciRow(['sum is 7', '(1,6) (2,5) (3,4) (4,3) (5,2) (6,1)', '6']) +
+    ciRow(['doubles', '(1,1) (2,2) (3,3) (4,4) (5,5) (6,6)', '6'], { shade: true }) +
+    ciRow(['sum is even', 'half of the grid', '18']) +
+    ciRow(['sum is 13', 'none', '0'], { shade: true }) +
+    ciRow(['sum is at most 12', 'all of them', '36'], { last: true }) +
+    '</tbody></table>'
+  const ciPromiseTable = ciTableOpen(['event', 'probability by counting', 'kept?']) +
+    ciRow(['sum is 7', '6/36 = 1/6', 'a number between 0 and 1']) +
+    ciRow(['sum is 13 (no outcomes)', '0/36 = 0', 'impossible gets 0'], { shade: true }) +
+    ciRow(['sum is at most 12 (every outcome)', '36/36 = 1', 'certain gets 1'], { last: true }) +
+    '</tbody></table>'
+
   const sectionsContent={
     obj0: {
   title: `Key Terms`,
@@ -946,6 +973,10 @@ Larger events naturally represent more possibilities, and smaller events represe
 
 @academic[rule_axiom_plain:When two events cannot happen together, their chances simply add.]@
 
+@academic[pitfall,aside:true,width:35%:Adding probabilities of overlapping events
+On a die, adding $P(\\text{even}) + P(\\text{at least 4}) = \\frac{3}{6} + \\frac{3}{6} = 1$ counts the shared outcomes 4 and 6 twice. The union $\\{2, 4, 5, 6\\}$ has probability $\\frac{4}{6} = \\frac{2}{3}$.
+[Read more](!#pitfalls)]@
+
 When events overlap, their probabilities interact through the structure of that overlap.
 
 This section does not introduce formulas yet — only the intuitive idea that probability is a measure placed on events, and the structure of the events themselves determines how those probabilities behave.
@@ -960,6 +991,10 @@ This section does not introduce formulas yet — only the intuitive idea that pr
       title:`Independence `,
       content:`
 Sometimes two events do not influence each other in any meaningful way. When knowing that one occurs tells us nothing about whether the other occurs, we treat them as **independent**. This idea appears constantly in real situations: repeated measurements, separate components in a system, unrelated conditions, or outcomes that come from different sources.
+
+@academic[pitfall,aside:true,width:35%:Treating disjoint events as independent
+Calling a sum of 7 and doubles on two dice independent because they share no outcome gets it backwards. Once the sum is 7, doubles is impossible, so its chance drops from $\\frac{6}{36} = \\frac{1}{6}$ to $0$, and the events are dependent.
+[Read more](!#pitfalls)]@
 
 Independence is not about numbers yet — it is about the absence of connection. When events are independent, their occurrence patterns do not interact. When they are not independent, the presence of one event changes how we think about the other.
 
@@ -994,6 +1029,12 @@ Certain forms of events appear again and again in probability questions. Recogni
 - **Complements** — useful when it's easier to describe what does **not** happen.
 - **Case-based events** — describing a situation by splitting it into separate scenarios.
 - **Nested events** — one event happening inside a broader condition.
+
+@academic[pitfall,aside:true,width:35%:Taking the wrong complement
+Writing $1 - \\left(\\frac{1}{6}\\right)^2 = \\frac{35}{36}$ for at least one six in two rolls subtracts the chance of two sixes. The opposite of at least one six is no six at all, so $P = 1 - \\left(\\frac{5}{6}\\right)^2 = \\frac{11}{36}$.
+[Read more](!#pitfalls)]@
+
+The "at least one" and complement patterns often appear in the same problem. An event such as "at least one six in several rolls" gathers many separate cases, one six, two sixes and so on, while the event left over when it fails is a single, simpler case. Its probability is found first and then subtracted from $1$.
 
 These patterns are not special rules; they are simply common ways real situations get translated into event language. Once you see these structures, many probability problems become much clearer.
 `,
@@ -1042,6 +1083,56 @@ Seeing these connections early helps unify the subject: no matter how advanced t
       before:``,
       after:``,
   
+    },
+    pitfalls:{
+      title:`Common Pitfalls`,
+      content:`Each of the three mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Adding probabilities of overlapping events**
+
+The probability that at least one of two events occurs is found by adding their probabilities, although the two events share outcomes. Every shared outcome is then counted twice.
+
+Wrong working: roll one die, with $A$ = the result is even and $B$ = the result is at least 4.
+$$P(A \\cup B) = P(A) + P(B) = \\frac{3}{6} + \\frac{3}{6} = 1$$
+
+Right working: $A = \\{2, 4, 6\\}$ and $B = \\{4, 5, 6\\}$ share $4$ and $6$, so the union is $\\{2, 4, 5, 6\\}$ and the shared part is subtracted once.
+$$P(A \\cup B) = \\frac{3}{6} + \\frac{3}{6} - \\frac{2}{6} = \\frac{4}{6} = \\frac{2}{3}$$
+
+Why it happens: "or" suggests putting two things together, and adding is the first way of combining that comes to mind. The rule that disjoint events add is then used without checking that the events are disjoint.
+
+How to check: list the outcomes of the union and count them. An answer of $1$ would make the union certain, yet a roll of $1$ or $3$ lies in neither event.
+
+**Treating disjoint events as independent**
+
+Two events that share no outcome are called independent, because they seem to have nothing to do with each other. In fact, disjoint events with positive probabilities are tightly connected: if one occurs, the other cannot.
+
+Wrong working: roll two dice, with $A$ = the sum is 7 and $B$ = doubles. Since they share no outcome, they are taken as independent, so the chance of doubles is left at $\\frac{6}{36} = \\frac{1}{6}$ after the sum is known to be 7, and the product rule gives
+$$P(A \\cap B) = P(A)P(B) = \\frac{1}{6} \\cdot \\frac{1}{6} = \\frac{1}{36}$$
+
+Right working: a double always has an even sum, so no outcome is in both events.
+$$P(A \\cap B) = 0 \\neq \\frac{1}{36} = P(A)P(B)$$
+Once the sum is known to be 7, the chance of doubles is $0$, not $\\frac{1}{6}$. Knowing that $A$ occurred changes the view of $B$, so the events are dependent.
+
+Why it happens: "disjoint" and "independent" both sound like "separate", and in everyday speech the two ideas blur together.
+
+How to check: ask whether learning that one event happened changes anything about the other. For disjoint events with positive probabilities it always does, because it rules the other one out.
+
+**Taking the wrong complement**
+
+A problem that asks for "at least one" is solved through the complement, but the complement of the wrong event is used: the case where every trial succeeds is subtracted instead of the case where none does.
+
+Wrong working: for at least one six in two rolls of a die,
+$$P = 1 - \\left(\\frac{1}{6}\\right)^2 = 1 - \\frac{1}{36} = \\frac{35}{36}$$
+This is the probability of not rolling two sixes.
+
+Right working: the opposite of "at least one six" is "no six at all", which has probability $\\left(\\frac{5}{6}\\right)^2 = \\frac{25}{36}$.
+$$P = 1 - \\frac{25}{36} = \\frac{11}{36}$$
+
+Why it happens: the chance of a six, $\\frac{1}{6}$, is the number the problem gives, and it is raised to the number of rolls without asking which event that power describes.
+
+How to check: "at least one six" in two rolls happens only if the first roll or the second roll is a six, so its probability is at most $\\frac{1}{6} + \\frac{1}{6} = \\frac{1}{3}$. An answer of $\\frac{35}{36}$ is far above that bound; counting the grid of 36 outcomes gives 11 cells.`,
+      before:``,
+      after:``,
     }
   
   }
@@ -1072,6 +1163,17 @@ This page presents the idea of events and shows how they form the basic language
     events: [{ label: 'at least one 6', test: (a, b) => a === 6 || b === 6, color: 'r' }],
     notes: [{ text: 'complement: no 6 at all' }, { text: '5 × 5 = 25 white cells' }, { text: '36 − 25 = 11 cells', color: 'r' }, { text: 'P = 11/36', color: 'r' }],
     caption: 'At least one: count the complement and subtract' };
+  const ogCiSeven = { kind: 'dice', svgTitle: 'Two dice: the event sum is 7 picks out six of the 36 outcomes',
+    events: [{ label: 'sum is 7', test: (a, b) => a + b === 7, color: 'f' }],
+    notes: [{ text: 'the event is the set of', color: 'f' }, { text: 'shaded cells: 6 of 36', color: 'f' }],
+    caption: 'An event is a set of cells in the grid' };
+
+  const conceptIntroFigures = {
+    seven: renderOutcomeGrid(ogCiSeven),
+    eventsTable: ciEventsTable,
+    promiseTable: ciPromiseTable,
+  };
+
   const demoUnits = {
     u_sample_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.even,
@@ -1106,9 +1208,39 @@ This page presents the idea of events and shows how they form the basic language
     }),
   };
 
+  const eventTypesOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Eight kinds of event',
+    preface: 'Events are subsets of the sample space. Some are defined by what they contain; others are built from other events.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Events are sets',
+    conclusion: 'Every kind of event is a set, so the set operations give the vocabulary: complement, union, intersection and difference.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Types of events', children: [
+        { id: 'g1', name: 'Defined by what they contain', children: [
+          { id: 'elem', name: 'Elementary', def: 'exactly one outcome', example: '{ω}' },
+          { id: 'empty', name: 'Empty', def: 'cannot happen', example: '∅' },
+          { id: 'cert', name: 'Certain', def: 'always happens', example: 'Ω' },
+        ] },
+        { id: 'g2', name: 'Built from other events', children: [
+          { id: 'comp', name: 'Complement', def: 'everything outside the event', example: 'Aᶜ' },
+          { id: 'union', name: 'Union', def: 'at least one occurs ("or")', example: 'A ∪ B' },
+          { id: 'inter', name: 'Intersection', def: 'both occur ("and")', example: 'A ∩ B' },
+          { id: 'diff', name: 'Difference', def: 'in A but not in B', example: 'A − B' },
+        ] },
+        { id: 'g3', name: 'A relation between events', children: [
+          { id: 'disj', name: 'Disjoint', def: 'cannot occur together', example: 'A ∩ B = ∅' },
+        ] },
+      ] },
+    ],
+  };
+
   return {
     props: {
+    eventTypesOutline,
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       typesTable,
@@ -1127,7 +1259,7 @@ This page presents the idea of events and shows how they form the basic language
   }
 }
 
-export default function EventsPage({
+export default function EventsPage({eventTypesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1135,10 +1267,75 @@ export default function EventsPage({
   relationsTable,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // "Sample Space and Events" concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'difficulty',
+        lead: `Probability questions are about situations, and a situation usually covers many outcomes.`,
+        content: [
+          `In probability we start with the idea of a **sample space**: the collection of all possible outcomes of an experiment or situation. Once this full list of possibilities exists, we naturally group some of them together into meaningful situations — these are the **events** we reason about.`,
+          `"The two dice sum to $7$" is not one outcome of rolling two dice — it happens in six different ways. Without a name for such a collection, there is nothing to attach a probability to.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [event](!/probability/definitions#event) is a set of outcomes — any subset of the sample space $\\Omega$. The event happens when the experiment's outcome is one of its members.`,
+        visual: ciSvg('seven'),
+        caption: `The event "sum is $7$" in the $36$-cell sample space of two dice: the six shaded cells.`,
+        footer: `So "sum is $7$" $= \\{(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)\\}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `An event is a set, not a probability and not a single outcome.`,
+        content: [
+          `An event might contain just one outcome or many of them. What matters is that it represents a situation we care about: "the result is 4," "the value falls in a certain range," "the system enters a failure mode," and so on.`,
+          `An outcome such as $(3, 4)$ is one point of the sample space; the event "the first die shows $3$ and the second $4$" is the set $\\{(3, 4)\\}$ containing it. Probabilities are attached to events, never directly to bare outcomes.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `On two dice, every description picks out a set of cells.`,
+        content: [
+          `Write each situation as the outcomes it collects.`,
+          ciTable('eventsTable'),
+          `Some events are small, some large; one has no outcomes at all and one has every outcome. Each is still a subset of the grid.`,
+          <div key={'unit-u_sample_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_sample_0 }} />,
+        ],
+      },
+      {
+        id: 'verification',
+        lead: `The definition keeps its promise: every event can be given a probability.`,
+        content: [
+          `With equally likely outcomes, an event's probability is its share of the grid. Check the extreme cases as well as an ordinary one.`,
+          ciTable('promiseTable'),
+          `Seeing events as groups of outcomes is what allows us to compare possibilities, describe relationships between them, and eventually assign probabilities. The sample space provides the universe; events provide the structure we work with inside it.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Counting cells works only when the outcomes are equally likely.`,
+        content: `The definition of an event does not depend on the outcomes being equally likely — any subset is an event. But computing its probability as "cells in the event ÷ all cells" does: for loaded dice, or for "number of heads" as on the [sample space](!/probability/sample-space) page, the event still exists, but its probability has to be found by adding the probabilities of its outcomes.`,
+      },
+      {
+        id: 'exit',
+        content: [
+          `The rest of the page covers the types of events, events as sets and the operations on them, relations between events, assigning probabilities, independence, conditional events and common patterns.`,
+          `Events come in several structural types.`,
+        ],
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1155,9 +1352,7 @@ export default function EventsPage({
         title:sectionsContent.sample.title,
         link:'',
         content:[
-            sectionsContent.sample.content,
-                  <div key={'unit-u_sample_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_sample_0 }} />,
-          `Events come in several structural types.`,
+            <ConceptIntro key={'sample-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1168,6 +1363,14 @@ export default function EventsPage({
             sectionsContent.types.content,
             <div key={'types-table'} style={tableWrapStyle}
                  dangerouslySetInnerHTML={{ __html: typesTable }} />,
+            <DiagramFrame
+              key={'types-diagram'}
+              id="event-types-outline"
+              title="Eight kinds of event in three groups"
+              source="/probability/events"
+            >
+              <TaxonomyOutline data={eventTypesOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+            </DiagramFrame>,
         ]
     },
     {
@@ -1244,6 +1447,14 @@ export default function EventsPage({
           sectionsContent.obj5.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:'',
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

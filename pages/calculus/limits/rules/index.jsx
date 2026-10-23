@@ -64,7 +64,7 @@ const obj12Table = `
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Rational p(x)/q(x), &nbsp;q(a) = 0, &nbsp;p(a) ≠ 0</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">±∞</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">limit is infinite; analyze sign near a to determine + or −</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one-sided limits are infinite; analyze sign on each side of a to determine + or − (if the signs differ, the two-sided limit does not exist)</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Rational p(x)/q(x), &nbsp;p(a) = q(a) = 0</td>
@@ -169,7 +169,7 @@ const summaryTable = `
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">lim f<sup>n</sup> = L<sup>n</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n positive integer; rational n requires L &gt; 0 (or L ≥ 0 when denominator is odd)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n positive integer; rational n in lowest terms: any real L if the denominator is odd, L ≥ 0 if it is even (L ≠ 0 when n &lt; 0)</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Root</td>
@@ -537,6 +537,10 @@ $$\\lim_{x \\to a} [f(x) \\pm g(x)] = \\lim_{x \\to a} f(x) \\pm \\lim_{x \\to a
 
 The limit of a sum is the sum of the limits. The limit of a difference is the difference of the limits.
 
+@academic[pitfall,aside:true,width:35%:Cancelling infinity minus infinity to 0
+Splitting $\\lim_{x \\to \\infty} (\\sqrt{x^2 + x} - x)$ into $\\infty - \\infty$ and calling it $0$ uses the rule on parts with no finite limit. Rewriting it as $\\frac{x}{\\sqrt{x^2 + x} + x}$ gives the limit $\\frac{1}{2}$.
+[Read more](!#pitfalls)]@
+
 Both component limits must exist. If either fails to exist, these rules do not apply. The indeterminate form $\\infty - \\infty$ illustrates what can go wrong: two quantities both growing without bound may have a difference that converges, diverges, or oscillates.
 `,
     before: ``,
@@ -577,6 +581,10 @@ $$\\lim_{x \\to a} [f(x) \\cdot g(x)] = \\lim_{x \\to a} f(x) \\cdot \\lim_{x \\
 
 The limit of a product is the product of the limits. This extends to any finite number of factors: if each factor has a limit, the product's limit equals the product of those limits.
 
+@academic[pitfall,aside:true,width:35%:Treating zero times infinity as zero
+Writing $\\lim_{x \\to 0^+} \\sin x \\cdot \\frac{1}{x} = 0$ because $\\sin x \\to 0$ ignores that $\\frac{1}{x} \\to \\infty$. The product is $\\frac{\\sin x}{x}$, and its limit is $1$.
+[Read more](!#pitfalls)]@
+
 The indeterminate form $0 \\cdot \\infty$ shows the rule's limitation. When one factor approaches $0$ while the other grows without bound, the product's behavior depends on the relative rates—it might approach $0$, $\\infty$, or any finite value.
 `,
     before: ``,
@@ -597,7 +605,7 @@ $$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\frac{\\lim_{x \\to a} f(x)}{\\lim_{x \
 
 The limit of a quotient is the quotient of the limits, provided the denominator's limit is nonzero.
 
-When $M = 0$, the rule fails. If $L \\neq 0$ and $M = 0$, the limit is typically infinite (analyze the sign to determine $+\\infty$ or $-\\infty$). If both $L = 0$ and $M = 0$, you have the indeterminate form $0/0$, requiring [further techniques](!/calculus/limits/evaluating).
+When $M = 0$, the rule fails. If $L \\neq 0$ and $M = 0$, the limit is never finite: it is infinite or does not exist (analyze the sign to determine $+\\infty$ or $-\\infty$; for $1/x$ at $0$ the one-sided limits have opposite signs, so the limit does not exist). If both $L = 0$ and $M = 0$, you have the indeterminate form $0/0$, requiring [further techniques](!/calculus/limits/evaluating).
 `,
     before: ``,
     after: ``,
@@ -622,7 +630,7 @@ For rational exponents:
 @academic[formula_callout:Power Rule
 $$\\lim_{x \\to a} [f(x)]^{m/n} = L^{m/n}$$]@
 
-provided $L > 0$ (or $L \\geq 0$ when $n$ is odd). Root functions require care with domain restrictions.
+provided that, with $m/n$ in lowest terms, $L$ is any real number when $n$ is odd and $L \\geq 0$ when $n$ is even (and $L \\neq 0$ if $m/n < 0$). Root functions require care with domain restrictions.
 `,
     before: ``,
     after: ``,
@@ -702,7 +710,7 @@ $$\\lim_{x \\to a} \\frac{p(x)}{q(x)} = \\frac{p(a)}{q(a)}, \\quad q(a) \\neq 0$
 
 When the denominator is nonzero at $a$, substitute directly. When $q(a) = 0$, the quotient rule fails and [other techniques](!/calculus/limits/evaluating) are needed.
 
-If $q(a) = 0$ but $p(a) \\neq 0$, the limit is infinite. If both $p(a) = 0$ and $q(a) = 0$, factor and cancel the common root before substituting.
+If $q(a) = 0$ but $p(a) \\neq 0$, the one-sided limits are infinite ($\\pm\\infty$); the two-sided limit is $\\pm\\infty$ only if both sides agree, otherwise it does not exist. If both $p(a) = 0$ and $q(a) = 0$, factor and cancel the common root before substituting.
 `,
     before: ``,
     after: ``,
@@ -719,6 +727,10 @@ $$\\lim_{x \\to a} f(g(x)) = f\\left(\\lim_{x \\to a} g(x)\\right) \\quad \\text
 
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Moving the limit inside a discontinuous function
+Passing the limit into the floor function gives $\\lim_{x \\to 0} \\lfloor 1 - x^2 \\rfloor = \\lfloor 1 \\rfloor = 1$, but $\\lfloor u \\rfloor$ jumps at $u = 1$. Near $0$, $1 - x^2$ is just below $1$, so every value is $0$ and the limit is $0$.
+[Read more](!#pitfalls)]@
 
 The limit passes through continuous functions. You first find the limit of the inner function, then apply the outer function to that limit.
 
@@ -781,6 +793,51 @@ The [evaluating limits](!/calculus/limits/evaluating) page covers techniques for
     title: `Summary: Master Reference of Limit Rules`,
     content: `
 The rules above split into three families: the basic facts (constant, identity), the algebraic combination rules (sum/difference, constant multiple, product, quotient, power, root, absolute value), and the advanced rules (composition, Squeeze Theorem). The table below collects all eleven in one place with each rule&apos;s precise conditions, since the conditions — not the formulas — are what distinguish correct application from a misuse that produces a wrong answer.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj17: {
+    title: `Common Pitfalls`,
+    content: `
+Three mistakes cause most wrong answers when the limit rules are applied: each one uses a rule whose condition does not hold. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Cancelling infinity minus infinity to 0**
+
+A difference of two parts that both grow without bound is split with the difference rule, and $\\infty - \\infty$ is then cancelled to $0$ as if $\\infty$ were a number.
+
+Wrong working: $\\lim_{x \\to \\infty} (\\sqrt{x^2 + x} - x) = \\lim_{x \\to \\infty} \\sqrt{x^2 + x} - \\lim_{x \\to \\infty} x = \\infty - \\infty = 0$.
+
+Right working: neither part has a finite limit, so the difference rule does not apply. Multiply and divide by $\\sqrt{x^2 + x} + x$: for $x > 0$, $\\sqrt{x^2 + x} - x = \\dfrac{(x^2 + x) - x^2}{\\sqrt{x^2 + x} + x} = \\dfrac{x}{\\sqrt{x^2 + x} + x} = \\dfrac{1}{\\sqrt{1 + \\frac{1}{x}} + 1}$, and the limit is $\\dfrac{1}{1 + 1} = \\dfrac{1}{2}$.
+
+Why it happens: the difference rule is so natural that it is used before its condition is checked, and a number minus itself is $0$. But two quantities can both grow without bound while the gap between them settles, grows, or shrinks.
+
+How to check: evaluate at a large $x$. At $x = 100$, $\\sqrt{10100} - 100 \\approx 0.4988$; at $x = 10000$ the difference is about $0.49999$, closing in on $0.5$ and not on $0$.
+
+**Treating zero times infinity as zero**
+
+One factor of a product tends to $0$, and the product is declared to tend to $0$ without a look at the other factor. When the other factor grows without bound, the product rule does not apply.
+
+Wrong working: $\\lim_{x \\to 0^+} \\sin x = 0$, so $\\lim_{x \\to 0^+} \\sin x \\cdot \\dfrac{1}{x} = 0 \\cdot \\lim_{x \\to 0^+} \\dfrac{1}{x} = 0$.
+
+Right working: $\\dfrac{1}{x} \\to \\infty$ as $x \\to 0^+$, so the form is $0 \\cdot \\infty$ and the product rule says nothing. Combine the factors: $\\sin x \\cdot \\dfrac{1}{x} = \\dfrac{\\sin x}{x}$, and the [special limit](!/calculus/limits/special) $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$ gives the limit $1$.
+
+Why it happens: zero times any number is zero, and $\\infty$ is handled like one more number. The factor that tends to $0$ and the factor that grows without bound pull in opposite directions, and their rates decide the result.
+
+How to check: evaluate at a small positive $x$. At $x = 0.1$, $\\dfrac{\\sin 0.1}{0.1} \\approx 0.9983$, close to $1$ and far from $0$.
+
+**Moving the limit inside a discontinuous function**
+
+The composition rule is used without checking that the outer function is continuous at the limit of the inner one. The limit is moved inside, and the outer function is simply evaluated at that limit.
+
+Wrong working: $\\lim_{x \\to 0} (1 - x^2) = 1$, so $\\lim_{x \\to 0} \\lfloor 1 - x^2 \\rfloor = \\lfloor 1 \\rfloor = 1$.
+
+Right working: the floor function $\\lfloor u \\rfloor$ jumps from $0$ to $1$ at $u = 1$, so it is not continuous there and the composition rule does not apply. For $0 < |x| < 1$, $0 < 1 - x^2 < 1$, so $\\lfloor 1 - x^2 \\rfloor = 0$. The function equals $0$ for every $x$ near $0$ other than $0$ itself, and the limit is $0$.
+
+Why it happens: for the functions met most often, such as polynomials, roots, exponentials, sine and cosine, moving the limit inside always works, so the continuity check is skipped.
+
+How to check: look at how the inner function approaches its limit. Here $1 - x^2$ approaches $1$ from below only, and $\\lfloor u \\rfloor = 0$ for every $u$ just below $1$. At $x = 0.1$, $\\lfloor 0.99 \\rfloor = 0$.
 `,
     before: ``,
     after: ``,
@@ -1124,6 +1181,14 @@ export default function RulesPage({seoData, sectionsContent, introContent, quoti
           sectionsContent.obj16.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

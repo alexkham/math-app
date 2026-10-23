@@ -897,6 +897,7 @@ import eulerFormulaDiagrams from '@/app/components/calculators/complex-numbers/e
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 
 
 export async function getStaticProps(){
@@ -1117,7 +1118,7 @@ export async function getStaticProps(){
     obj1: {
   title: `The Imaginary Unit ($i$) and Pure Imaginary Numbers`,
   before: ``,
-  content: `The real number system, despite its vastness, cannot solve every equation. The simple polynomial $x^2 + 1 = 0$ has no solution among real numbers because no real number squared produces a negative result. This limitation led mathematicians to define a new number: the [imaginary unit](!/complex-numbers/imaginary-numbers) $i$, where $i^2 = -1$.
+  content: `The real number system, despite its vastness, cannot solve every equation. The simple polynomial $x^2 + 1 = 0$ has no solution among real numbers because no real number squared produces a negative result. This limitation is met by a new number: the [imaginary unit](!/complex-numbers/imaginary-numbers) $i$, where $i^2 = -1$.
 
 From this single definition, an entire class of numbers emerges. Pure imaginary numbers take the form $bi$ where $b$ is real — examples include $3i$, $-7i$, and $\\frac{1}{2}i$. These numbers exist on their own axis, perpendicular to the real number line.
 
@@ -1149,6 +1150,10 @@ Mathematicians assigned names to these components. The value $a$ is called the *
 
 @academic[formula_callout:Algebraic Representation and the Complex Conjugate
 $$Re(z) = a \\quad \\text{and} \\quad Im(z) = b$$]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the sign of the imaginary part
+Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -5)$ up to $(4, 5)$, which is the conjugate. Written as $4 + (-5)i$, the number has $Im(z) = -5$.
+[Read more](!#pitfalls)]@
 
 Note that the imaginary part is $b$ itself — a real number — not $bi$. The term "imaginary part" indicates which component of the number the value describes, not the nature of $b$ as a quantity.
 
@@ -1210,9 +1215,21 @@ notation: {
 
 [Addition and subtraction](!/complex-numbers/operations) work exactly as intuition suggests: combine the real components together, combine the imaginary components together. Given $z_1 = 3 + 2i$ and $z_2 = 1 - 5i$, their sum becomes $(3 + 1) + (2 - 5)i = 4 - 3i$. No new techniques required — just careful bookkeeping of like terms.
 
+@academic[pitfall,aside:true,width:35%:Subtracting only the real part
+Writing $(5 + i) - (2 - 3i)$ as $5 + i - 2 - 3i$ takes away only the $2$ and gives $3 - 2i$. The minus applies to both parts of the second number: $5 + i - 2 + 3i = 3 + 4i$.
+[Read more](!#pitfalls)]@
+
+Subtraction uses the same bookkeeping: real parts are subtracted from real parts, and imaginary parts from imaginary parts. For the same pair, the real parts give $3 - 1 = 2$ and the imaginary parts give $2 - (-5) = 7$, so $z_1 - z_2 = 2 + 7i$, the value listed in the table below. A negative imaginary part in $z_2$ turns that second subtraction into an addition.
+
 [Multiplication](!/complex-numbers/operations) demands more attention. We apply the distributive property as with any binomial product, but one crucial substitution changes everything: wherever $i^2$ appears, we replace it with $-1$. The product $(2 + 3i)(4 - i)$ expands to $8 - 2i + 12i - 3i^2$, and since $i^2 = -1$, this simplifies to $8 + 10i + 3 = 11 + 10i$.
 
-[Division](!/complex-numbers/operations) presents the only genuine challenge. A complex number in the denominator violates standard mathematical convention — we need real denominators for final answers. The solution employs the [conjugate](!/complex-numbers/complex-conjugate): multiply both numerator and denominator by the conjugate of the denominator. This works because $z \\cdot \\bar{z}$ always produces a real number. The fraction $\\frac{3 + 2i}{1 - 4i}$ transforms through multiplication by $\\frac{1 + 4i}{1 + 4i}$, converting the denominator to the real value $1 + 16 = 17$ and allowing us to express the result in standard $a + bi$ form.`,
+[Division](!/complex-numbers/operations) presents the only genuine challenge. A complex number in the denominator violates standard mathematical convention — we need real denominators for final answers. The solution employs the [conjugate](!/complex-numbers/complex-conjugate): multiply both numerator and denominator by the conjugate of the denominator. This works because $z \\cdot \\bar{z}$ always produces a real number. The fraction $\\frac{3 + 2i}{1 - 4i}$ transforms through multiplication by $\\frac{1 + 4i}{1 + 4i}$, converting the denominator to the real value $1 + 16 = 17$ and allowing us to express the result in standard $a + bi$ form.
+
+@academic[pitfall,aside:true,width:35%:Multiplying only the denominator
+Multiplying just the denominator of $\\frac{3 + 2i}{1 - 4i}$ by $1 + 4i$ gives $\\frac{3 + 2i}{17}$, a different number. Both parts are multiplied: $\\frac{(3 + 2i)(1 + 4i)}{17} = \\frac{-5 + 14i}{17}$.
+[Read more](!#pitfalls)]@
+
+Multiplying by $\\frac{1 + 4i}{1 + 4i}$ is multiplying by $1$, so the value of the fraction does not change, only its form. Once the denominator is real, it divides the real part and the imaginary part of the numerator separately, which puts the answer in standard $a + bi$ form. The table below gives the finished quotient next to the other three operations.`,
   after: ``,
   link: '/complex-numbers/operations',
 },
@@ -1226,12 +1243,18 @@ The placement of familiar numbers becomes immediate: real numbers like $3$ or $-
 
 This geometric perspective reveals structure invisible in pure algebra. The [conjugate](!/complex-numbers/complex-conjugate) $\\bar{z}$ appears as a reflection across the real axis. Addition of complex numbers follows the parallelogram rule familiar from vector mathematics. The [modulus](!/complex-numbers/absolute-value) $|z| = \\sqrt{a^2 + b^2}$ measures the straight-line distance from the origin to the point — a direct application of the Pythagorean theorem.
 
+@academic[pitfall,aside:true,width:35%:Squaring the whole imaginary term
+Putting $4i$ into the formula gives $|3 + 4i| = \\sqrt{3^2 + (4i)^2} = \\sqrt{-7}$, which is not a distance. The formula uses the imaginary part $b = 4$: $|3 + 4i| = \\sqrt{9 + 16} = 5$.
+[Read more](!#pitfalls)]@
+
+For the point $3 + 4i$, the segment from the origin is the hypotenuse of a right triangle. Its horizontal leg runs along the real axis and its vertical leg runs parallel to the imaginary axis, and the lengths of the two legs are the coordinates of the point. The modulus is computed from those two lengths alone.
+
 One fundamental difference separates $\\mathbb{C}$ from $\\mathbb{R}$: complex numbers cannot be ordered. We cannot say $3 + 2i$ is greater than $1 + 5i$ in any meaningful way. The real line has direction — numbers increase as we move right — but the complex plane extends in all directions equally. Only the modulus provides a sense of size, measuring how far each number lies from the origin.
 
 @academic[rule_theorem:Triangle Inequality
 The [Triangle Inequality](!/complex-numbers/absolute-value) governs how distances combine: $|z_1 + z_2| \\leq |z_1| + |z_2|$.]@
 
-Geometrically, this says the direct path between two points never exceeds the detour through the origin. This inequality appears constantly in analysis and provides essential bounds for estimation and proof.`,
+Geometrically, this says the direct path from $-z_2$ to $z_1$ never exceeds the detour through the origin. This inequality appears constantly in analysis and provides essential bounds for estimation and proof.`,
   after: ``,
   link: '/complex-numbers/geometric-representation',
 },
@@ -1301,6 +1324,10 @@ The theorem's true depth emerges when we reverse direction and seek roots rather
 
 If $w = R\\text{cis}\\phi$, the $n$-th roots follow the formula $z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 360°k}{n}\\right)$ for $k = 0, 1, 2, \\ldots, n-1$. Each root shares the same modulus $R^{1/n}$, placing all of them on a circle of that radius. Their arguments differ by exactly $\\frac{360°}{n}$, spacing them uniformly like vertices of a regular polygon.
 
+@academic[pitfall,aside:true,width:35%:Stopping at one root
+Answering $z^3 = 8$ with $z = 2$ alone finds one of three roots. With $8 = 8\\text{cis}(0°)$ and $k = 0, 1, 2$, the roots are $2$, $2\\text{cis}(120°) = -1 + \\sqrt{3}i$ and $2\\text{cis}(240°) = -1 - \\sqrt{3}i$.
+[Read more](!#pitfalls)]@
+
 The roots of unity — solutions to $z^n = 1$ — deserve special attention. Since $1 = 1\\text{cis}(0°)$, the $n$-th roots of unity are $z_k = \\text{cis}\\left(\\frac{360°k}{n}\\right)$. For $n = 4$, the fourth roots of unity are $1$, $i$, $-1$, and $-i$, forming a square on the unit circle. For $n = 6$, we obtain a regular hexagon. These roots appear throughout mathematics: in Fourier analysis, in polynomial factorization, in signal processing, and in the study of symmetry. The primitive root $\\omega = \\text{cis}\\left(\\frac{360°}{n}\\right)$ generates all others as powers: $\\omega^0, \\omega^1, \\omega^2, \\ldots, \\omega^{n-1}$.`,
   after: ``,
   link: '/complex-numbers/demoivre-theorem',
@@ -1322,7 +1349,7 @@ Consider the equation $x^4 + 1 = 0$, which has no real solutions since $x^4$ is 
 
 Polynomials with real coefficients exhibit special behavior: their non-real roots always appear in [conjugate](!/complex-numbers/complex-conjugate) pairs. If $z_0$ satisfies a real polynomial, so does $\\bar{z_0}$. This symmetry explains why real quadratics either have two real roots or two complex conjugates — never one of each. The geometric interpretation places conjugate pairs as reflections across the real axis, preserving the polynomial's real character.
 
-Certain equations showcase the interplay between conjugation and powers. The equation $z^n = \\bar{z}$ yields exactly $n + 2$ solutions: zero itself, plus $n + 1$ values distributed on the unit circle. Solving such equations requires translating into [trigonometric form](!/complex-numbers/trigonometric-form), applying the constraint that $r^n e^{in\\theta} = re^{-i\\theta}$, and extracting the permissible values of $r$ and $\\theta$. These techniques, combining algebraic manipulation with geometric insight, represent the full power of complex number theory applied to equation solving.`,
+Certain equations showcase the interplay between conjugation and powers. For $n \\geq 2$, the equation $z^n = \\bar{z}$ yields exactly $n + 2$ solutions: zero itself, plus $n + 1$ values distributed on the unit circle. Solving such equations requires translating into [trigonometric form](!/complex-numbers/trigonometric-form), applying the constraint that $r^n e^{in\\theta} = re^{-i\\theta}$, and extracting the permissible values of $r$ and $\\theta$. These techniques, combining algebraic manipulation with geometric insight, represent the full power of complex number theory applied to equation solving.`,
   after: ``,
   link: '/complex-numbers/equations-polynomials',
 },
@@ -1380,6 +1407,86 @@ Certain equations showcase the interplay between conjugation and powers. The equ
   
     },
   
+    obj16: {
+      title: `Common Pitfalls`,
+      content: `Six mistakes come up again and again in a first course on complex numbers. Five are marked where they happen in the sections above; ignoring the quadrant of the argument is the one that **Trigonometric Representation** already warns about. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the sign of the imaginary part**
+
+When the imaginary term is subtracted, as in $4 - 5i$, the minus sign is left behind and only the number after it is reported as the imaginary part.
+
+Wrong working: $4 - 5i$ has $Im(z) = 5$.
+
+Right working: in standard form $4 - 5i = 4 + (-5)i$, so $Re(z) = 4$ and $Im(z) = -5$.
+
+Why it happens: the minus looks like the operation between the two terms rather than part of the coefficient of $i$.
+
+How to check: plot the point. $Im(z) = -5$ puts $4 - 5i$ five units below the real axis, at $(4, -5)$. An imaginary part of $5$ would put it at $(4, 5)$, which is the conjugate $4 + 5i$.
+
+**Subtracting only the real part**
+
+In $z_1 - z_2$ the minus sign is applied to the real part of $z_2$ but not to its imaginary part, as if the brackets were not there.
+
+Wrong working: $(5 + i) - (2 - 3i) = 5 + i - 2 - 3i = 3 - 2i$.
+
+Right working: the minus sign changes the sign of both parts of $z_2$: $(5 + i) - (2 - 3i) = 5 + i - 2 + 3i = 3 + 4i$. Part by part, $5 - 2 = 3$ and $1 - (-3) = 4$.
+
+Why it happens: dropping brackets after a minus sign is a slip that already happens with real binomials, and a negative imaginary part turns it into a double negative.
+
+How to check: add the second number back. $(3 + 4i) + (2 - 3i) = 5 + i$ returns the first number, while $(3 - 2i) + (2 - 3i) = 5 - 5i$ does not.
+
+**Multiplying only the denominator**
+
+To make the denominator real, only the denominator is multiplied by its conjugate and the numerator is left as it was.
+
+Wrong working: $\\frac{3 + 2i}{1 - 4i} = \\frac{3 + 2i}{(1 - 4i)(1 + 4i)} = \\frac{3 + 2i}{17}$.
+
+Right working: multiply the numerator and the denominator by $1 + 4i$: $\\frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)} = \\frac{3 + 12i + 2i + 8i^2}{17} = \\frac{-5 + 14i}{17}$.
+
+Why it happens: the step that makes the denominator real is remembered, while the reason it is allowed, multiplying by $\\frac{1 + 4i}{1 + 4i} = 1$, is forgotten.
+
+How to check: multiply the answer by the original denominator. $\\frac{-5 + 14i}{17} \\cdot (1 - 4i) = \\frac{-5 + 20i + 14i - 56i^2}{17} = \\frac{51 + 34i}{17} = 3 + 2i$, the original numerator.
+
+**Squaring the whole imaginary term**
+
+In $|z| = \\sqrt{a^2 + b^2}$, the term $bi$ is put in place of $b$, so the $i$ is squared along with it.
+
+Wrong working: $|3 + 4i| = \\sqrt{3^2 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$.
+
+Right working: $a = 3$ and $b = 4$ are the two coordinates of the point $(3, 4)$, so $|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$.
+
+Why it happens: the formula is read as "square each term of $z$", and the imaginary term of $3 + 4i$ is $4i$.
+
+How to check: a modulus is a distance, so it is always a real number that is at least $0$. A negative number under the root, or an answer containing $i$, means the $i$ went into the formula.
+
+**Ignoring the quadrant**
+
+The argument is found from $\\tan\\theta = \\frac{b}{a}$ alone, and the calculator's arctangent is taken as the answer whatever the quadrant of $z$.
+
+Wrong working: for $z = -1 + i$, $\\tan\\theta = \\frac{1}{-1} = -1$, so $\\theta = \\arctan(-1) = -45°$.
+
+Right working: $-1 + i$ has a negative real part and a positive imaginary part, so it lies in the second quadrant. The angle there with tangent $-1$ is $180° - 45° = 135°$, so $\\arg(-1 + i) = 135°$ and $-1 + i = \\sqrt{2}\\text{cis}(135°)$.
+
+Why it happens: the arctangent only returns angles between $-90°$ and $90°$, so it cannot tell $-1 + i$ from $1 - i$, which has the same tangent.
+
+How to check: convert back. $\\sqrt{2}\\text{cis}(-45°) = 1 - i$, which is not the starting number, while $\\sqrt{2}\\text{cis}(135°) = -1 + i$.
+
+**Stopping at one root**
+
+An equation $z^n = w$ is solved like a real equation, by taking a single $n$-th root, and the other $n - 1$ roots are never looked for.
+
+Wrong working: $z^3 = 8$, so $z = 2$, the real cube root of $8$.
+
+Right working: write $8 = 8\\text{cis}(0°)$. The roots are $z_k = 2\\text{cis}\\left(\\frac{360°k}{3}\\right)$ for $k = 0, 1, 2$: $2$, $2\\text{cis}(120°) = -1 + \\sqrt{3}i$ and $2\\text{cis}(240°) = -1 - \\sqrt{3}i$.
+
+Why it happens: over the real numbers $x^3 = 8$ has only one solution, and that habit carries over.
+
+How to check: an equation $z^n = w$ with $w \\neq 0$ has exactly $n$ roots, spaced $\\frac{360°}{n}$ apart on one circle. Cubing a candidate confirms it: $(-1 + \\sqrt{3}i)^2 = -2 - 2\\sqrt{3}i$, and $(-2 - 2\\sqrt{3}i)(-1 + \\sqrt{3}i) = 2 - 2\\sqrt{3}i + 2\\sqrt{3}i + 6 = 8$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
     faq: {
       title: `Complex Numbers FAQ`,
     },
@@ -1390,7 +1497,7 @@ Certain equations showcase the interplay between conjugation and powers. The equ
   id: "intro",
   title: "The Evolution of Numbers: From Counting to Complexity",
   content: `
-  Mathematics began with natural numbers ($\\mathbb{N}$) for counting, but as we attempted to solve more equations, we had to "expand the bag". We added whole numbers ($\\mathbb{Z}$) for negatives, rational numbers ($\\mathbb{Q}$) for quotients, and real numbers ($\\mathbb{R}$) for values like $\\sqrt{2}$. However, the "R-bag" failed to solve the equation $x^2 + 1 = 0$, leading to the birth of the Complex Numbers ($\\mathbb{C}$). The [imaginary numbers page](!/complex-numbers/imaginary-numbers#number-system-ladder) draws the whole chain, with the problem that forced each step.
+  Mathematics began with natural numbers ($\\mathbb{N}$) for counting, but as we attempted to solve more equations, we had to "expand the bag". We added the integers ($\\mathbb{Z}$) for negatives, rational numbers ($\\mathbb{Q}$) for quotients, and real numbers ($\\mathbb{R}$) for values like $\\sqrt{2}$. However, the "R-bag" cannot solve the equation $x^2 + 1 = 0$; the Complex Numbers ($\\mathbb{C}$) can. The [imaginary numbers page](!/complex-numbers/imaginary-numbers#number-system-ladder) draws the whole chain, with the problem that forced each step.
   `
 }
 
@@ -1577,8 +1684,25 @@ const faqQuestions = {
     ],
   };
 
+  const numberSystemNest = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Expanding the bag',
+    preface: 'Each number system was built because the one inside it could not solve some equation. Every larger system keeps all the numbers of the smaller one.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Why the complex numbers exist',
+    conclusion: 'The real numbers still could not solve $x^2 + 1 = 0$. Adding $i$ gave the complex numbers, the last link in the chain. The [imaginary numbers page](!/complex-numbers/imaginary-numbers) follows the problem that forced each step.',
+    levels: [
+      { id: 'n', symbol: 'ℕ', name: 'Natural numbers', note: 'counting', example: '1, 2, 3, …' },
+      { id: 'z', symbol: 'ℤ', name: 'Integers', adds: 'negatives', example: '−2, −1, 0' },
+      { id: 'q', symbol: 'ℚ', name: 'Rational numbers', adds: 'quotients', example: '1/2, −3/4' },
+      { id: 'r', symbol: 'ℝ', name: 'Real numbers', adds: 'values like √2', example: '√2, π' },
+      { id: 'c', symbol: 'ℂ', name: 'Complex numbers', adds: '$i$', note: 'solves $x^2 + 1 = 0$', example: '3 + 2i, i' },
+    ],
+  };
+
    return {
       props:{
+    numberSystemNest,
     complexFormTree,
     demoUnits,
          sectionsContent,
@@ -1603,7 +1727,7 @@ const faqQuestions = {
     }
    }
 
-export default function ComplexNumbersBasicsPage({complexFormTree, seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ComplexNumbersBasicsPage({numberSystemNest, complexFormTree, seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1758,6 +1882,14 @@ export default function ComplexNumbersBasicsPage({complexFormTree, seoData, sect
           </DiagramFrame>,
         ]
     },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',
@@ -1845,6 +1977,15 @@ export default function ComplexNumbersBasicsPage({complexFormTree, seoData, sect
            backgroundColor='#f9fafb'
           textColor="#06357a"
         />
+   <div style={{ maxWidth: 910, margin: '24px auto 0' }}>
+    <DiagramFrame
+      id="number-system-nesting"
+      title="Each number system inside the next"
+      source="/complex-numbers/basics"
+    >
+      <NestedContainment data={numberSystemNest} />
+    </DiagramFrame>
+   </div>
    <br/>
     <KeyTermsCard
            id="0"

@@ -363,6 +363,9 @@ Which of those intervals belong to the answer is not decided by the quadratic. I
     title: `Graphical Interpretation`,
     content: `The [graph](!/algebra/logarithms/graphs) of $y = \\log_a(x)$ provides visual understanding of why direction depends on base.
 
+@academic[fact,aside:true,width:35%:The flip is a hidden minus sign
+Since $\\log_{1/a}(x) = -\\log_a(x)$, each falling curve is a rising one flipped over the $x$-axis. So $\\log_{1/2}(x) > 3$ is just $\\log_2(x) < -3$: the same reversal as multiplying both sides by $-1$.]@
+
 For $a > 1$, the curve rises from left to right. The inequality $\\log_a(x) > k$ asks: where is the curve above the horizontal line $y = k$? Since the curve is increasing, this occurs to the right of the intersection point — for $x > a^k$.
 
 For $0 < a < 1$, the curve falls from left to right. The inequality $\\log_a(x) > k$ asks the same question, but now the curve is above the line to the left of the intersection — for $x < a^k$.
@@ -636,6 +639,7 @@ export default function InequalitiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: directionTable }}
           />,
+          `@academic[punchline:Logarithms can be dropped from both sides because they are monotonic; the conditions on their arguments cannot.]@`,
         ]
     },
     {

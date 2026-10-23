@@ -1702,6 +1702,10 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
 
 Two vectors in $\\mathbb{R}^2$ are dependent if and only if they are parallel — one is a scalar multiple of the other. They point along the same line through the origin, so neither adds a direction that the other does not already cover. Two non-parallel vectors are independent and [span](!/linear-algebra/vector-spaces/span) all of $\\mathbb{R}^2$.
 
+@academic[pitfall,aside:true,width:35%:Checking only pairs
+Calling $(1, 0, 0)$, $(0, 1, 0)$, $(1, 1, 0)$ independent because no two are parallel misses $(1, 1, 0) = (1, 0, 0) + (0, 1, 0)$. All three lie in the plane $z = 0$, so the set is dependent.
+[Read more](!#pitfalls)]@
+
 Three vectors in $\\mathbb{R}^3$ are dependent if and only if they are coplanar — all three lie in a single plane through the origin. The third vector can be written as a combination of the first two, so it provides no new reach. Three non-coplanar vectors are independent and span all of $\\mathbb{R}^3$.
 
 @academic[rule_theorem_plain:In $\\mathbb{R}^n$, at most $n$ vectors can be independent. A set of $n + 1$ or more vectors in $\\mathbb{R}^n$ is automatically dependent, regardless of what the vectors are.]@
@@ -1732,6 +1736,12 @@ Test whether $\\mathbf{v}_1 = (1, 2, -1)$, $\\mathbf{v}_2 = (0, 1, 3)$, $\\mathb
 $$A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 2 & 1 & 0 \\\\ -1 & 3 & 1 \\end{pmatrix} \\xrightarrow{R_2 - 2R_1,\\; R_3 + R_1} \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & -4 \\\\ 0 & 3 & 3 \\end{pmatrix} \\xrightarrow{R_3 - 3R_2} \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & -4 \\\\ 0 & 0 & 15 \\end{pmatrix}$$]@
 
 Three pivots in three columns — no free variables. The set is independent.
+
+@academic[pitfall,aside:true,width:35%:Reading a zero row as dependence
+Calling $(1, 0, 1)$, $(0, 1, 2)$ dependent because their $3 \\times 2$ matrix reduces to $\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ reads the wrong part. Both columns hold a pivot, so the set is independent.
+[Read more](!#pitfalls)]@
+
+The pivots are read column by column, one column for each vector. Here the matrix is square, so three pivot columns also fill all three rows of the echelon form. With fewer vectors than entries the matrix is taller than it is wide: two vectors in $\\mathbb{R}^3$ give a $3 \\times 2$ matrix, and at most two of its three rows can hold a pivot. Whether every column still has one is what decides independence.
 
 @academic[example:Worked Example: Dependent Set
 
@@ -1786,9 +1796,9 @@ Removing a vector from a dependent set may or may not restore independence. It d
     title: `Dependence Relations`,
     content: `When a set is dependent, the nontrivial solution $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ is called a dependence relation. It identifies which vectors participate in the redundancy: those with nonzero coefficients.
 
-A common misconception is that dependence means every vector in the set is a combination of the others. This is false. Consider $\\{(1, 0), (0, 1), (2, 3)\\}$ in $\\mathbb{R}^2$. The set is dependent because $(2, 3) = 2(1, 0) + 3(0, 1)$, but neither $(1, 0)$ nor $(0, 1)$ is a combination of the other two alone — removing either of the first two would make the remaining pair independent.
+A common misconception is that dependence means every vector in the set is a combination of the others. This is false. Consider $\\{(1, 0), (2, 0), (0, 1)\\}$ in $\\mathbb{R}^2$. The set is dependent because $(2, 0) = 2(1, 0)$, but $(0, 1)$ is not a combination of the other two — every combination of $(1, 0)$ and $(2, 0)$ has second entry $0$.
 
-The dependence relation $2(1, 0) + 3(0, 1) + (-1)(2, 3) = (0, 0)$ has all three coefficients nonzero, so all three vectors participate. But the vector that can be "removed" without shrinking the span is $(2, 3)$, because it is the one that lies in the span of the other two — not because it has the largest coefficient.
+The dependence relation $2(1, 0) + (-1)(2, 0) + 0(0, 1) = (0, 0)$ gives $(0, 1)$ the coefficient $0$, so it does not participate. Only a participating vector can be "removed" without shrinking the span: here $(1, 0)$ or $(2, 0)$, but never $(0, 1)$, whose removal shrinks the span to the $x$-axis.
 
 When the null space of the column matrix has dimension greater than $1$, there are multiple linearly independent dependence relations, and different vectors can be expressed in terms of different subsets. The pivot/free column structure from row reduction clarifies which vectors are redundant.`,
     before: ``,
@@ -1810,6 +1820,10 @@ $$W(f_1, \\ldots, f_n)(x) = \\det\\begin{pmatrix} f_1(x) & \\cdots & f_n(x) \\\\
 
 @academic[rule_theorem:Wronskian Test
 If $W(f_1, \\dots, f_n)(x_0) \\neq 0$ at any single point $x_0$, the functions are linearly independent.]@
+
+@academic[pitfall,aside:true,width:35%:Testing the Wronskian at one point
+Calling $x$ and $x^2$ dependent because $W(x) = x \\cdot 2x - x^2 \\cdot 1 = x^2$ is $0$ at $x = 0$ reads one point as all of them. At $x = 1$, $W = 1 \\neq 0$, so the functions are independent.
+[Read more](!#pitfalls)]@
 
 The converse requires caution. A Wronskian that vanishes identically does not always imply dependence unless the functions are known to be solutions of a single linear ordinary differential equation with continuous coefficients. Without that structural guarantee, counterexamples exist where the Wronskian is zero everywhere yet the functions are independent.`,
     before: ``,
@@ -1837,6 +1851,57 @@ In abstract spaces where vectors are not columns of numbers, the row-reduction s
   obj9: {
     title: `Summary: Tests and Shortcuts for Independence`,
     content: `Determining independence rarely requires the full computation. Several no-computation shortcuts settle the question immediately for common configurations — a set containing $\\mathbf{0}$, a single nonzero vector, or more than $n$ vectors in $\\mathbb{R}^n$. When inspection alone is not enough, three distinct tests cover the remaining cases: row reduction for general vectors in $\\mathbb{R}^m$, the determinant for the square case, and the Wronskian for functions; abstract spaces fall back on the definition itself. The table below collects the full toolkit, grouped from inspection-only shortcuts down to computational tests, and notes which method applies to which context.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for many wrong answers when testing independence. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Checking only pairs**
+
+To test three or more vectors, each pair is checked for being parallel. When no vector is a multiple of another, the whole set is declared independent.
+
+Wrong working: take $\\mathbf{v}_1 = (1, 0, 0)$, $\\mathbf{v}_2 = (0, 1, 0)$, $\\mathbf{v}_3 = (1, 1, 0)$. No two of them are parallel, so the set is called independent.
+
+Right working: the third vector is the sum of the first two, $\\mathbf{v}_3 = \\mathbf{v}_1 + \\mathbf{v}_2$, which gives the nontrivial relation
+$$1 \\cdot \\mathbf{v}_1 + 1 \\cdot \\mathbf{v}_2 + (-1)\\mathbf{v}_3 = \\mathbf{0}$$
+Row reduction agrees: the matrix with these columns is already in echelon form,
+$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
+with only two pivots for three columns. All three vectors lie in the plane $z = 0$, so the set is dependent.
+
+Why it happens: for two vectors, being parallel is exactly the same as being dependent, and that test is carried over to larger sets. With three or more vectors, a dependence can involve several vectors at once while no single pair is parallel.
+
+How to check: test the whole set, never pairs. For $n$ vectors in $\\mathbb{R}^n$ the determinant does it in one step: here $\\det\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix} = 0$.
+
+**Reading a zero row as dependence**
+
+After row reduction, a row of zeros in the echelon form is taken as a sign that the vectors are dependent. A zero row is about the rows of the matrix, while independence is decided by its columns.
+
+Wrong working: take $\\mathbf{v}_1 = (1, 0, 1)$ and $\\mathbf{v}_2 = (0, 1, 2)$ as the columns of a $3 \\times 2$ matrix and reduce:
+$$\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 2 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 2 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$$
+The last row is zero, so the set is called dependent.
+
+Right working: both columns contain a pivot, so there are no free variables and $A\\mathbf{c} = \\mathbf{0}$ has only the solution $c_1 = c_2 = 0$. The set is independent. The zero row says something else: the two vectors do not span $\\mathbb{R}^3$.
+
+Why it happens: in the square case a zero row and a column without a pivot always come together, so the two are taken as the same signal. For a matrix that is taller than it is wide they part ways: rows decide spanning, columns decide independence.
+
+How to check: compare the number of pivots with the number of vectors, not with the number of rows. Or go back to the definition: $c_1(1, 0, 1) + c_2(0, 1, 2) = (c_1, c_2, c_1 + 2c_2)$, and setting this to $\\mathbf{0}$ forces $c_1 = c_2 = 0$ from the first two entries.
+
+**Testing the Wronskian at one point**
+
+The Wronskian is evaluated at one convenient point, often $x = 0$, and a zero value there is taken as proof that the functions are dependent.
+
+Wrong working: for $f_1 = x$ and $f_2 = x^2$,
+$$W(x) = \\det\\begin{pmatrix} x & x^2 \\\\ 1 & 2x \\end{pmatrix} = x \\cdot 2x - x^2 \\cdot 1 = x^2$$
+so $W(0) = 0$, and the functions are called dependent.
+
+Right working: the test needs a nonzero value at a single point, and $W(1) = 1 \\neq 0$. So $x$ and $x^2$ are independent. The definition confirms it: if $c_1 x + c_2 x^2 = 0$ for every $x$, then $x = 1$ gives $c_1 + c_2 = 0$ and $x = -1$ gives $-c_1 + c_2 = 0$, so $c_1 = c_2 = 0$.
+
+Why it happens: the test is stated in one direction only, and a zero at the chosen point seems to settle the question the other way. But $W$ is a function of $x$, and its value at one point says nothing about the others.
+
+How to check: work out $W$ as an expression in $x$ before substituting anything. If it is not zero for every $x$, any point where it is nonzero proves independence.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2120,6 +2185,14 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

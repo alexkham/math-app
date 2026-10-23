@@ -13,6 +13,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -217,6 +219,10 @@ The support determines:
 • Where to integrate when computing probabilities
 • What values are possible vs. impossible
 • The limits of integration: $P(X \\in A) = \\int_{A \\cap \\text{Support}} f_X(x)dx$
+
+@academic[pitfall,aside:true,width:35%:Using the formula outside the support
+Integrating $2e^{-2x}$ from $-\\infty$ to $1$ for an exponential with $\\lambda = 2$ diverges, because the formula grows without bound for $x < 0$. The density is $0$ there, so $P(X < 1) = \\int_0^1 2e^{-2x}\\,dx = 1 - e^{-2} \\approx 0.865$.
+[Read more](!#pitfalls)]@
 
 When computing $P(X \\in A)$ for some set $A$, only integrate over the intersection of $A$ with the support. Outside the support contributes nothing—integrating over those regions just adds zeros.
     `,
@@ -444,6 +450,12 @@ Example: [Exponential distribution](!/probability/distributions/continuous/expon
 
 @academic[formula_callout:Calculations Using the PDF
 $$P(1 \\leq X \\leq 3) = \\int_1^3 2e^{-2x}dx = [-e^{-2x}]_1^3 = e^{-2} - e^{-6} \\approx 0.133$$]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the minus sign of the antiderivative
+Taking $e^{-2x}$ as the antiderivative of $2e^{-2x}$ gives $e^{-6} - e^{-2} \\approx -0.133$, a negative probability. The antiderivative is $-e^{-2x}$, so $P(1 \\leq X \\leq 3) = e^{-2} - e^{-6} \\approx 0.133$.
+[Read more](!#pitfalls)]@
+
+The exponential example follows the pattern every interval probability uses: find an antiderivative of the density, evaluate it at the upper limit, and subtract its value at the lower limit. Because this density decreases, the interval $[1, 3]$ holds far less probability than the interval $[0, 2]$ of the same length, which holds $1 - e^{-4} \\approx 0.982$.
 
 ## Inequalities Are Irrelevant
 
@@ -689,6 +701,12 @@ $$f_Y(y) = \\frac{1}{3} \\cdot 1 = \\frac{1}{3} \\text{ for } y \\in [0, 3]$$]@
 
 The density drops to $\\frac{1}{3}$ because the interval stretched by factor 3.
 
+@academic[pitfall,aside:true,width:35%:Leaving out the factor 1/|a|
+Writing $f_Y(y) = f_X\\left(\\frac{y}{3}\\right) = 1$ on $[0, 3]$ substitutes without the factor, and the area under $f_Y$ becomes $3$. With the factor, $f_Y(y) = \\frac{1}{3} \\cdot 1 = \\frac{1}{3}$ and the area is $1$.
+[Read more](!#pitfalls)]@
+
+Two things happen in the linear formula. The argument $\\frac{y - b}{a}$ sends each value $y$ back to the value of $X$ it came from, which fixes where the density sits on the new axis. The factor in front sets how tall the density is there.
+
 Example: $Y = X + 5$ shifts the distribution but doesn't change density shape:
 
 @academic[formula_callout:Transformations (Change of Variables)
@@ -730,7 +748,7 @@ $$F_Y(y) = P(g(X) \\leq y)$$
 
 The Jacobian includes $|\\cdot|$ because density must remain non-negative. Whether $g$ increases or decreases, the density adjustment stays positive.
 
-Probability is preserved: $P(a \\leq X \\leq b) = P(g(a) \\leq Y \\leq g(b))$
+Probability is preserved: $P(a \\leq X \\leq b) = P(g(a) \\leq Y \\leq g(b))$ for increasing $g$ (for decreasing $g$ the bounds swap: $P(g(b) \\leq Y \\leq g(a))$)
 
 The Jacobian ensures total area under the new PDF still integrates to 1.
 
@@ -739,7 +757,7 @@ The Jacobian ensures total area under the new PDF still integrates to 1.
 When $g$ is not one-to-one, multiple $x$ values map to the same $y$. Sum their contributions:
 
 @academic[formula_callout:Transformations (Change of Variables)
-$$f_Y(y) = \\sum_{x: g(x) = y} f_X(x) \\cdot \\left|\\frac{d}{dy}g^{-1}(y)\\right|$$]@
+$$f_Y(y) = \\sum_{x: g(x) = y} \\frac{f_X(x)}{|g'(x)|}$$]@
 
 This generalizes the invertible case by collecting all pre-images.
 
@@ -958,6 +976,58 @@ Don't use $f(x)$ when you need cumulative probability—that's $F(x) = \\int_{-\
     before: ``,
     after: ``,
     link: '',
+  },
+  obj16: {
+    title: `Common Pitfalls`,
+    content: `Each of the three mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Using the formula outside the support**
+
+A density is given by a formula on its support and is $0$ elsewhere. When a probability is set up, the formula is integrated over the whole interval of the event, including the part that lies outside the support.
+
+Wrong working: for the exponential density $f(x) = 2e^{-2x}$, $x \\geq 0$,
+$$P(X < 1) = \\int_{-\\infty}^{1} 2e^{-2x}\\,dx = \\left[-e^{-2x}\\right]_{-\\infty}^{1}$$
+As $x \\to -\\infty$, $e^{-2x}$ grows without bound, so the integral diverges.
+
+Right working: the density is $0$ for $x < 0$, so only the part of the event inside the support counts.
+$$P(X < 1) = \\int_{0}^{1} 2e^{-2x}\\,dx = \\left[-e^{-2x}\\right]_{0}^{1} = 1 - e^{-2} \\approx 0.865$$
+
+Why it happens: the formula is the part of the PDF that is written large, while the condition $x \\geq 0$ sits beside it and is easy to drop. The tail formula $P(X < a) = \\int_{-\\infty}^{a} f_X(x)\\,dx$ then invites the lower limit $-\\infty$.
+
+How to check: a probability is a number between $0$ and $1$. An infinite or negative result, or one above $1$, means the integral has run where the density is $0$. Writing the support next to the limits before integrating catches it.
+
+**Dropping the minus sign of the antiderivative**
+
+An interval probability for the exponential density is set up correctly, but the antiderivative of $e^{-2x}$ is taken without the factor that comes from the chain rule, so its sign is lost.
+
+Wrong working:
+$$\\int_1^3 2e^{-2x}\\,dx = \\left[e^{-2x}\\right]_1^3 = e^{-6} - e^{-2} \\approx 0.0025 - 0.1353 = -0.133$$
+
+Right working: differentiating $-e^{-2x}$ gives $2e^{-2x}$, so $-e^{-2x}$ is the antiderivative.
+$$\\int_1^3 2e^{-2x}\\,dx = \\left[-e^{-2x}\\right]_1^3 = -e^{-6} + e^{-2} \\approx 0.133$$
+
+Why it happens: $e^{x}$ is its own antiderivative, and that rule is carried over to $e^{-2x}$ without accounting for the inner factor $-2$.
+
+How to check: differentiate the antiderivative and compare it with the density; $\\frac{d}{dx}e^{-2x} = -2e^{-2x}$, which has the wrong sign. A negative probability is always a sign of an error.
+
+**Leaving out the factor 1/|a|**
+
+The PDF of a linear transformation $Y = aX + b$ is found by substituting $\\frac{y - b}{a}$ into $f_X$, and the factor $\\frac{1}{|a|}$ in front is left out.
+
+Wrong working: for $X$ uniform on $[0, 1]$ and $Y = 3X$,
+$$f_Y(y) = f_X\\left(\\frac{y}{3}\\right) = 1 \\text{ for } y \\in [0, 3]$$
+The area under this function is $1 \\cdot 3 = 3$.
+
+Right working: the factor $\\frac{1}{|a|} = \\frac{1}{3}$ scales the height.
+$$f_Y(y) = \\frac{1}{3} f_X\\left(\\frac{y}{3}\\right) = \\frac{1}{3} \\text{ for } y \\in [0, 3]$$
+The area is $\\frac{1}{3} \\cdot 3 = 1$.
+
+Why it happens: for a PMF the substitution alone is correct, because each value keeps its own probability when it is moved. A density is probability per unit length, and stretching the axis by a factor $3$ spreads the same probability over three times the length.
+
+How to check: integrate the new density over its support. If the area is not $1$, the factor is missing; here the wrong answer has area $3$, exactly $|a|$.`,
+    before: ``,
+    after: ``,
+    link: '',
   }
 }
 
@@ -1135,8 +1205,24 @@ const schemas = {
     }),
   };
 
+  const pdfViewTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three views of one density',
+    preface: 'A probability density function can be drawn, written as a formula, or listed as numbers. Each view answers different questions.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Probability is area',
+    conclusion: 'Whichever view you use, the height is a density; probabilities come from the area under the curve.',
+    root: { name: 'Representing a PDF', sub: '3 views' },
+    children: [
+      { id: 'graph', name: 'Graphical', items: [ { label: 'Reads', text: 'height = density, area = probability' }, { label: 'Examples', text: 'normal, exponential curves' } ] },
+      { id: 'func', name: 'Functional', items: [ { label: 'Reads', text: 'an explicit $f(x)$, often piecewise' }, { label: 'Examples', text: 'uniform, exponential formulas' } ] },
+      { id: 'num', name: 'Numerical', items: [ { label: 'Reads', text: 'tabulated values' }, { label: 'Examples', text: 'normal CDF tables' } ] },
+    ],
+  };
+
    return {
   props:{
+    pdfViewTree,
     demoUnits,
      sectionsContent,
      introContent,
@@ -1153,7 +1239,7 @@ const schemas = {
 }
    }
 
-export default function PDFPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+export default function PDFPage({pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
     
   const genericSections=[
      {
@@ -1215,6 +1301,14 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="pdf-representations-tree"
+            title="Three views of a PDF"
+            source="/probability/probability-function/pdf"
+          >
+            <TopDownTree data={pdfViewTree} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1277,6 +1371,14 @@ export default function PDFPage({seoData, sectionsContent, introContent, faqQues
           sectionsContent.obj13.content,
                   <div key={'unit-u_13_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_13_2 }} />,
           `Each family has its own page with parameters, moments and applications.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:'',
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

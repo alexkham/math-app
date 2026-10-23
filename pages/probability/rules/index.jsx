@@ -668,6 +668,69 @@ export async function getStaticProps(){
         before:``,
         after:``,
       },
+
+      pitfalls:{
+        title:`Common Pitfalls`,
+        content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Leaving out the triple intersection**
+
+The probability of a union of three events is found by inclusion–exclusion, but the work stops after the pairwise intersections are subtracted. Outcomes that lie in all three events then drop out of the count completely.
+
+Wrong working: a number is drawn at random from $1$ to $30$; $A$ = divisible by $2$, $B$ = divisible by $3$, $C$ = divisible by $5$.
+$$P(A \\cup B \\cup C) = \\frac{15}{30} + \\frac{10}{30} + \\frac{6}{30} - \\frac{5}{30} - \\frac{3}{30} - \\frac{2}{30} = \\frac{21}{30} = \\frac{7}{10}$$
+
+Right working: the number $30$ lies in all three events, so $P(A \\cap B \\cap C) = \\frac{1}{30}$ is added back.
+$$P(A \\cup B \\cup C) = \\frac{21}{30} + \\frac{1}{30} = \\frac{22}{30} = \\frac{11}{15}$$
+
+Why it happens: with two events the formula ends after a single subtraction, and the pattern "add the single terms, subtract the overlaps" is carried over to three events unchanged.
+
+How to check: count the complement directly. The numbers from $1$ to $30$ divisible by none of $2$, $3$, $5$ are $1, 7, 11, 13, 17, 19, 23, 29$, eight of them, so the union holds $30 - 8 = 22$ numbers.
+
+**Adding the chances for at least one**
+
+To find the chance of at least one success over several trials, the success probabilities of the single trials are added. That treats the trials as disjoint events, although several of them can succeed together.
+
+Wrong working: four rolls of a fair die.
+$$P(\\text{at least one six}) = \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} + \\frac{1}{6} = \\frac{2}{3}$$
+
+Right working: the complement of "at least one six" is "no six in four rolls", which has probability $\\left(\\frac{5}{6}\\right)^4$.
+$$P(\\text{at least one six}) = 1 - \\left(\\frac{5}{6}\\right)^4 = 1 - \\frac{625}{1296} = \\frac{671}{1296} \\approx 0.518$$
+
+Why it happens: each roll does add some chance of a six, and the addition rule for disjoint events is the first rule learned for "or". By Boole's inequality, the sum is only an upper bound for the union.
+
+How to check: raise the number of rolls. With seven rolls the sum gives $\\frac{7}{6}$, more than $1$, which no probability can be. The complement rule gives $1 - \\left(\\frac{5}{6}\\right)^7 \\approx 0.721$.
+
+**Swapping the condition**
+
+The question asks for $P(A \\mid B)$, but the known value $P(B \\mid A)$ is used in its place. The two conditional probabilities are in general different numbers.
+
+Wrong working: one card is drawn from a standard deck; $K$ = king, $F$ = face card (jack, queen or king). Every king is a face card, so $P(F \\mid K) = 1$, and this is given as the answer:
+$$P(K \\mid F) = 1$$
+
+Right working: the Bayes theorem turns the condition around.
+$$P(K \\mid F) = \\frac{P(F \\mid K)\\,P(K)}{P(F)} = \\frac{1 \\cdot \\frac{4}{52}}{\\frac{12}{52}} = \\frac{4}{12} = \\frac{1}{3}$$
+
+Why it happens: in words, "a face card given a king" and "a king given a face card" sound alike, and in symbols the two differ only in the order of the letters.
+
+How to check: count inside the condition. Of the $12$ face cards, $4$ are kings, so $P(K \\mid F) = \\frac{4}{12}$; of the $4$ kings, all $4$ are face cards, so $P(F \\mid K) = 1$.
+
+**Multiplying unconditional probabilities**
+
+The probability that several events happen in sequence is found by multiplying their single probabilities, although the earlier events change the probabilities of the later ones. The plain product $P(A)\\,P(B)$ holds only for independent events.
+
+Wrong working: two cards are drawn without replacement; both should be aces.
+$$P(\\text{both aces}) = \\frac{4}{52} \\cdot \\frac{4}{52} = \\frac{1}{169}$$
+
+Right working: after a first ace, $3$ aces remain among $51$ cards.
+$$P(\\text{both aces}) = P(A_1)\\,P(A_2 \\mid A_1) = \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2652} = \\frac{1}{221}$$
+
+Why it happens: on its own, the second card is an ace with probability $\\frac{4}{52}$, just like the first, so the product looks natural. The chain rule needs the probability for the second card given what the first card was.
+
+How to check: count ordered pairs directly. There are $52 \\cdot 51 = 2652$ ordered pairs of different cards and $4 \\cdot 3 = 12$ of them are two aces, so the probability is $\\frac{12}{2652} = \\frac{1}{221}$.`,
+        before:``,
+        after:``,
+      },
   
   
     //   obj5:{
@@ -685,7 +748,7 @@ export async function getStaticProps(){
     const introContent = {
         id: "intro",
         title: "Welcome to the Rules of Probability.",
-        content: `Grounded in the three [axioms](!/probability#axioms) of probability—non-negativity, normalization and finite additivity—this section translates those foundational principles into practical tools. You’ll begin by revisiting the [basic axiomatic properties](!/probability/rules#basic) before moving on to [set-operation rules](!/probability/rules#set) (complements, differences and absorption), [additive rules](!/probability/rules#additive) (addition, inclusion–exclusion and Boole’s inequality) and [multiplicative rules](!/probability/rules#multy) (chain rule, law of total probability and Bayes’ theorem). Each law here is built on the axioms to ensure consistency and rigor. In upcoming chapters, you’ll see how these rules power classical (combinatorial) models, discrete and continuous distributions, conditional probability and independence, Bayesian inference, expectation and variance, limit theorems and stochastic processes. Keep this axiomatic framework in mind as your roadmap through the broader probability theory landscape.
+        content: `Grounded in the three [axioms](!/probability#axioms) of probability—non-negativity, normalization and countable additivity—this section translates those foundational principles into practical tools. You’ll begin by revisiting the [basic axiomatic properties](!/probability/rules#basic) before moving on to [set-operation rules](!/probability/rules#set) (complements, differences and absorption), [additive rules](!/probability/rules#additive) (addition, inclusion–exclusion and Boole’s inequality) and [multiplicative rules](!/probability/rules#multy) (chain rule, law of total probability and Bayes’ theorem). Each law here is built on the axioms to ensure consistency and rigor. In upcoming chapters, you’ll see how these rules power classical (combinatorial) models, discrete and continuous distributions, conditional probability and independence, Bayesian inference, expectation and variance, limit theorems and stochastic processes. Keep this axiomatic framework in mind as your roadmap through the broader probability theory landscape.
 `
       }
   
@@ -892,9 +955,21 @@ $$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$
 $$P(A \\cup B \\cup C) = P(A) + P(B) + P(C) - P(A \\cap B) - P(A \\cap C) - P(B \\cap C) + P(A \\cap B \\cap C)$$
 /probability/formulas#inclusion-exclusion_principle]@
 
+@academic[pitfall,aside:true,width:35%:Leaving out the triple intersection
+For a number drawn from $1$ to $30$, with $A$, $B$, $C$ = divisible by $2$, $3$, $5$, stopping after the pairwise terms gives $\\frac{15 + 10 + 6 - 5 - 3 - 2}{30} = \\frac{7}{10}$. Adding back $P(A \\cap B \\cap C) = \\frac{1}{30}$ gives $\\frac{22}{30} = \\frac{11}{15}$.
+[Read more](!#pitfalls)]@
+
+With three events, the single terms count every outcome in an overlap more than once, and the pairwise intersections are subtracted to correct this. An outcome that lies in all three events is touched by all six of these terms: three single terms and three pairwise ones. The final term of the formula, with its plus sign, decides how often such an outcome is counted in the end.
+
 @academic[formula_callout:Booles Inequality
 $$P\\!\\left(\\bigcup_{i=1}^{n} A_i\\right) \\leq \\sum_{i=1}^{n} P(A_i)$$
 /probability/formulas#booles_inequality]@
+
+@academic[pitfall,aside:true,width:35%:Adding the chances for at least one
+Adding $\\frac{1}{6}$ for each of four die rolls gives $P(\\text{at least one six}) = \\frac{4}{6} = \\frac{2}{3}$, but several rolls can show a six together. By the complement rule, $1 - \\left(\\frac{5}{6}\\right)^4 = \\frac{671}{1296} \\approx 0.518$.
+[Read more](!#pitfalls)]@
+
+Boole's inequality bounds the probability of a union by the sum of the single probabilities, and the bound is reached only when no two of the events can happen together. Questions of the form "at least one" over repeated trials, such as at least one six in several rolls of a die, ask for exactly such a union, with one event for each trial.
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
@@ -920,9 +995,21 @@ The multiplicative rules, stated formally:
 $$P(A \\cap B) = P(A)\\,P(B \\mid A) = P(B)\\,P(A \\mid B)$$
 /probability/formulas#multiplication_rule]@
 
+@academic[pitfall,aside:true,width:35%:Swapping the condition
+For one card, with $K$ = king and $F$ = face card, taking $P(K \\mid F)$ to equal $P(F \\mid K) = 1$ says every face card is a king. The Bayes theorem gives $P(K \\mid F) = \\frac{1 \\cdot \\frac{4}{52}}{\\frac{12}{52}} = \\frac{1}{3}$.
+[Read more](!#pitfalls)]@
+
+The multiplication rule can be written starting from either event: $P(A)\\,P(B \\mid A)$ and $P(B)\\,P(A \\mid B)$ are two routes to the same joint probability. Setting them equal and dividing by $P(A)$ is how the Bayes theorem in the table above is obtained, and it is the tool for turning a conditional probability around.
+
 @academic[formula_callout:Chain Rule
 $$P(A_1 \\cap A_2 \\cap \\cdots \\cap A_n) = P(A_1)\\,P(A_2 \\mid A_1)\\,P(A_3 \\mid A_1 \\cap A_2) \\cdots P(A_n \\mid A_1 \\cap \\cdots \\cap A_{n-1})$$
 /probability/formulas#chain_rule]@
+
+@academic[pitfall,aside:true,width:35%:Multiplying unconditional probabilities
+Drawing two cards without replacement, $P(\\text{both aces}) = \\frac{4}{52} \\cdot \\frac{4}{52} = \\frac{1}{169}$ ignores that the first ace leaves $3$ aces among $51$ cards. The chain rule gives $\\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{1}{221}$.
+[Read more](!#pitfalls)]@
+
+Each factor in the chain rule is conditioned on everything that came before it. In sequential experiments, such as drawing cards from a deck without putting them back, the earlier draws change what is left, and with it the probabilities for the later draws.
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
@@ -937,6 +1024,14 @@ $$P(A_1 \\cap A_2 \\cap \\cdots \\cap A_n) = P(A_1)\\,P(A_2 \\mid A_1)\\,P(A_3 \
                 sectionsContent.summary.content,
                 <div key={'summary-table'} style={tableWrapStyle}
                      dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+            ]
+        },
+        {
+            id:'pitfalls',
+            title:sectionsContent.pitfalls.title,
+            link:'',
+            content:[
+                sectionsContent.pitfalls.content,
             ]
         }
     ]

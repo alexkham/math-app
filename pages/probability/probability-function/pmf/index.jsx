@@ -1314,6 +1314,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1934,6 +1936,12 @@ $P(X \\notin A) = 1 - P(X \\in A)$
 @academic[example:Example
 $P(X > 3) = 1 - P(X \\leq 3) = 1 - \\frac{1}{2} = \\frac{1}{2}$]@
 
+@academic[pitfall,aside:true,width:35%:Using the wrong complement
+Writing $P(X > 3) = 1 - P(X < 3)$ leaves the face $3$ in neither event and gives $1 - \\frac{2}{6} = \\frac{2}{3}$. The complement of $X > 3$ is $X \\leq 3$, so $P(X > 3) = 1 - \\frac{1}{2} = \\frac{1}{2}$.
+[Read more](!#12)]@
+
+The complement rule needs the two events to split the support exactly: every value of $X$ lies in one of them and none lies in both. For the die, the faces $1, 2, 3$ make up the event $X \\leq 3$ and the faces $4, 5, 6$ make up its complement, three faces of mass $\\frac{1}{6}$ on each side.
+
 ## The Core Pattern
 
 Every probability question reduces to:
@@ -1976,6 +1984,12 @@ Example: Fair die.
 $$E[X] = 1 \\cdot \\frac{1}{6} + 2 \\cdot \\frac{1}{6} + 3 \\cdot \\frac{1}{6} + 4 \\cdot \\frac{1}{6} + 5 \\cdot \\frac{1}{6} + 6 \\cdot \\frac{1}{6} = \\frac{21}{6} = 3.5$$]@
 
 The average outcome over many rolls is 3.5.
+
+@academic[pitfall,aside:true,width:35%:Averaging the values without weights
+For the loaded die, $\\frac{1 + 2 + 3 + 4 + 5 + 6}{6} = 3.5$ treats every face as equally likely. Weighting each face by its probability, $E[X] = \\frac{1}{10}(1 + 2 + 3 + 4 + 5) + \\frac{1}{2} \\cdot 6 = 1.5 + 3 = 4.5$.
+[Read more](!#12)]@
+
+For the fair die every weight is the same, $\\frac{1}{6}$, so each face pulls on the balance point equally and the mean lands exactly in the middle of the support. When the weights differ, as on the loaded die from the axioms section, the faces that carry more probability pull the center of mass toward themselves.
 
 ## Median
 
@@ -2028,6 +2042,12 @@ $$\\text{Var}(X) = \\sum_{k \\in \\text{Support}} (k - E[X])^2 \\cdot p_X(k)$$]@
 Each value's squared distance from the mean is weighted by its probability. High-probability values far from the mean increase variance significantly.
 
 Computational shortcut: $\\text{Var}(X) = E[X^2] - (E[X])^2$
+
+@academic[pitfall,aside:true,width:35%:Subtracting the mean instead of its square
+For the fair die, $E[X^2] - E[X] = \\frac{91}{6} - 3.5 = \\frac{35}{3} \\approx 11.67$. The shortcut subtracts the squared mean: $\\frac{91}{6} - 3.5^2 = \\frac{35}{12} \\approx 2.92$.
+[Read more](!#12)]@
+
+For the fair die, the shortcut needs two averages taken with the same weights $\\frac{1}{6}$: $E[X^2]$, the average of the squared faces $1, 4, 9, 16, 25, 36$, which is $\\frac{91}{6}$, and the mean $E[X] = 3.5$ found in the location section. The shortcut saves computing six separate deviations from the mean and squaring each one.
 
 ## Standard Deviation
 
@@ -2117,6 +2137,12 @@ $$E[g(X)] = \\sum_{x} g(x) \\cdot p_X(x)$$
 You don't need to find $p_Y(y)$ first. Work directly with the original PMF.
 
 Linear transformations follow: $E[aX + b] = aE[X] + b$
+
+@academic[pitfall,aside:true,width:35%:Applying the function to the mean
+For $Y = (X - 3.5)^2$, plugging in the mean gives $(E[X] - 3.5)^2 = 0$, yet $Y$ is never $0$. Averaging $g(x)$ over the PMF gives $E[Y] = \\frac{0.25 + 2.25 + 6.25}{3} = \\frac{35}{12}$.
+[Read more](!#12)]@
+
+The linear rule lets the mean pass straight through the transformation: scale and shift $X$, and its mean is scaled and shifted in the same way. The squared distance $Y = (X - 3.5)^2$ from the example above is not of this form. It bends the number line, folding faces from both sides of $3.5$ onto the same value.
 
 ## Key Insight
 
@@ -2281,7 +2307,7 @@ The PMF starts at $p_X(0) = e^{-\\lambda}$, rises to a peak near $\\lambda$, the
 
 PMF: $p_X(k) = \\binom{k-1}{r-1} p^r (1-p)^{k-r}$ for $k \\in \\{r, r+1, r+2, \\ldots\\}$
 
-The PMF starts at $k=r$ (the minimum possible value) and typically decreases from there, though for small $p$ it may first increase slightly before declining. This is essentially a sum of $r$ independent geometric [random variables](!/probability/random-variables), so its shape resembles a widened, shifted geometric distribution. As $r$ increases, the mode shifts rightward and the distribution spreads out. The parameter $p$ controls the decay rate: high $p$ produces fast decay and concentration near $r$, while low $p$ produces slow decay and a long tail. When $r=1$, this reduces exactly to the geometric distribution. The PMF has heavier tails than the [Poisson](!/probability/distributions/discrete/poisson), making it useful for overdispersed count data. The ratio test shows probabilities eventually decrease monotonically, though the initial behavior depends on both parameters.
+The PMF starts at $k=r$ (the minimum possible value). For $r = 1$ it decreases from there; for $r \\geq 2$ it first rises whenever $p < 1 - \\frac{1}{r}$, peaks, and then declines. This is essentially a sum of $r$ independent geometric [random variables](!/probability/random-variables), so its shape resembles a widened, shifted geometric distribution. As $r$ increases, the mode shifts rightward and the distribution spreads out. The parameter $p$ controls the decay rate: high $p$ produces fast decay and concentration near $r$, while low $p$ produces slow decay and a long tail. When $r=1$, this reduces exactly to the geometric distribution. The PMF has heavier tails than the [Poisson](!/probability/distributions/discrete/poisson), making it useful for overdispersed count data. The ratio test shows probabilities eventually decrease monotonically, though the initial behavior depends on both parameters.
 
 [Read More About Negative Binomial Distribution](!/probability/distributions/discrete/negative-binomial)
 
@@ -2297,7 +2323,7 @@ The PMF is unimodal with a peak near $n \\cdot \\frac{K}{N}$, the expected propo
 
 PMF: $p_X(k) = \\frac{1}{n}$ for $k \\in \\{a, a+1, \\ldots, b\\}$ where $n = b - a + 1$
 
-The PMF is completely flat—constant probability across the entire support. No value is more likely than any other, making this the only distribution with no peak or mode (every value is equally modal). This represents maximum uncertainty given only knowledge of the support boundaries. The PMF has zero skewness and is perfectly symmetric around the midpoint $\\frac{a+b}{2}$. Adding or removing even one value from the support changes all probabilities—with $n$ values, each gets exactly $\\frac{1}{n}$ of the total probability mass. The uniform PMF serves as a reference distribution: deviations from uniformity indicate structure or bias in the data. Despite its simplicity, the discrete uniform appears frequently in practice: fair dice, random selection, lottery draws. The PMF provides no information about which specific value will occur—all are equally plausible.
+The PMF is completely flat—constant probability across the entire support. No value is more likely than any other, so there is no single peak: every value in the support is a mode. This represents maximum uncertainty given only knowledge of the support boundaries. The PMF has zero skewness and is perfectly symmetric around the midpoint $\\frac{a+b}{2}$. Adding or removing even one value from the support changes all probabilities—with $n$ values, each gets exactly $\\frac{1}{n}$ of the total probability mass. The uniform PMF serves as a reference distribution: deviations from uniformity indicate structure or bias in the data. Despite its simplicity, the discrete uniform appears frequently in practice: fair dice, random selection, lottery draws. The PMF provides no information about which specific value will occur—all are equally plausible.
 
 [Read More About Discrete Uniform Distribution](!/probability/distributions/discrete/uniform)
 
@@ -2351,6 +2377,62 @@ Don't waste time summing over values where the PMF is zero.
 Discrete [random variables](!/probability/random-variables) take isolated values, not continuous ranges. $P(2 < X < 3)$ might be zero if nothing sits between 2 and 3. Don't treat discrete variables as if they vary smoothly.
 
 Always check whether your variable is discrete or continuous before choosing methods.
+
+**Using the wrong complement**
+
+The probability of an event is found as one minus the probability of the opposite event, but the opposite event is written with the wrong inequality, so a boundary value falls into neither event.
+
+Wrong working: for a fair die,
+$$P(X > 3) = 1 - P(X < 3) = 1 - \\frac{2}{6} = \\frac{2}{3}$$
+
+Right working: the complement of $X > 3$ is $X \\leq 3$, the faces $1, 2, 3$.
+$$P(X > 3) = 1 - P(X \\leq 3) = 1 - \\frac{3}{6} = \\frac{1}{2}$$
+
+Why it happens: the opposite of "greater than" is read as "less than", and for continuous variables that slip costs nothing, since a single point has probability zero. For a discrete variable the boundary value carries its own mass.
+
+How to check: list the values of the event and of its complement. Together they must cover the support exactly once: here $\\{4, 5, 6\\}$ and $\\{1, 2, 3\\}$. With $X < 3$ the face $3$ is in neither list, and the wrong answer exceeds the direct count $p_X(4) + p_X(5) + p_X(6) = \\frac{1}{2}$ by exactly $p_X(3) = \\frac{1}{6}$.
+
+**Averaging the values without weights**
+
+The expected value is taken as the plain average of the values in the support, as if each were equally likely, and the PMF is not used.
+
+Wrong working: for the loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1, 2, 3, 4, 5\\}$,
+$$E[X] = \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} = 3.5$$
+
+Right working: each value is multiplied by its probability.
+$$E[X] = \\frac{1}{10}(1 + 2 + 3 + 4 + 5) + \\frac{1}{2} \\cdot 6 = 1.5 + 3 = 4.5$$
+
+Why it happens: for a fair die the plain average and the weighted average agree, and the fair die is usually the first example met.
+
+How to check: compare the answer with where the mass sits. Half the probability is on the face $6$, so the mean must lie well above the midpoint $3.5$ of the faces.
+
+**Subtracting the mean instead of its square**
+
+In the shortcut $\\text{Var}(X) = E[X^2] - (E[X])^2$, the mean is subtracted as it is, without being squared.
+
+Wrong working: for a fair die, $E[X^2] = \\frac{1 + 4 + 9 + 16 + 25 + 36}{6} = \\frac{91}{6}$ and $E[X] = 3.5$, so
+$$\\text{Var}(X) = \\frac{91}{6} - 3.5 = \\frac{35}{3} \\approx 11.67$$
+
+Right working: the mean is squared before it is subtracted.
+$$\\text{Var}(X) = \\frac{91}{6} - 3.5^2 = \\frac{182}{12} - \\frac{147}{12} = \\frac{35}{12} \\approx 2.92$$
+
+Why it happens: the formula holds two quantities that look alike, $E[X^2]$ and $(E[X])^2$, and after the work of computing $E[X^2]$ the second square is easy to drop.
+
+How to check: take the square root. The wrong variance gives a standard deviation of about $3.42$, more than the largest distance of any face from the mean, $6 - 3.5 = 2.5$. The right one gives $\\sqrt{35/12} \\approx 1.71$, the value quoted in the standard deviation section.
+
+**Applying the function to the mean**
+
+The expected value of $g(X)$ is needed, and $g$ is applied to $E[X]$ instead of to each value of $X$ before averaging.
+
+Wrong working: for a fair die and $Y = (X - 3.5)^2$,
+$$E[Y] = (E[X] - 3.5)^2 = (3.5 - 3.5)^2 = 0$$
+
+Right working: by LOTUS, each value $g(x)$ is weighted by $p_X(x) = \\frac{1}{6}$.
+$$E[Y] = \\frac{6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25}{6} = \\frac{17.5}{6} = \\frac{35}{12}$$
+
+Why it happens: for a linear function the shortcut is correct, $E[aX + b] = aE[X] + b$, and it is easy to carry it over to functions that are not linear.
+
+How to check: look at the values $Y$ can take. $Y$ is always $0.25$, $2.25$ or $6.25$, and an expected value lies between the smallest and the largest value of the variable, so $E[Y]$ cannot be $0$.
     `,
     before: ``,
     after: ``,
@@ -2669,8 +2751,24 @@ const generalTable = `
     }),
   };
 
+  const pmfViewTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three views of one PMF',
+    preface: 'A probability mass function can be drawn as bars, written as a formula, or laid out as a table.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Every view sums to 1',
+    conclusion: 'Bar heights, formula values and table entries are all probabilities, and in every view they add up to 1.',
+    root: { name: 'Representing a PMF', sub: '3 views' },
+    children: [
+      { id: 'graph', name: 'Graphical', items: [ { label: 'Reads', text: 'bars; height = probability' } ] },
+      { id: 'func', name: 'Functional', items: [ { label: 'Reads', text: 'a formula $p_X(k)$' }, { label: 'Examples', text: 'a die, the geometric distribution' } ] },
+      { id: 'tab', name: 'Tabular', items: [ { label: 'Reads', text: 'a value-probability table' }, { label: 'Example', text: 'the sum of two dice' } ] },
+    ],
+  };
+
   return {
   props:{
+    pmfViewTree,
     demoUnits,
      sectionsContent,
      introContent,
@@ -2695,7 +2793,7 @@ const generalTable = `
 }
    }
 
-export default function PMFPage({
+export default function PMFPage({pmfViewTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -2815,6 +2913,14 @@ export default function PMFPage({
           sectionsContent.obj4.after,
           <div key={'representations-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: representationsTable }} />,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="pmf-representations-tree"
+            title="Three views of a PMF"
+            source="/probability/probability-function/pmf"
+          >
+            <TopDownTree data={pmfViewTree} />
+          </DiagramFrame>,
         ]
     },
     {

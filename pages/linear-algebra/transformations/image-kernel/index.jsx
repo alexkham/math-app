@@ -1019,7 +1019,7 @@ const imageKernelPairs = {
           anchor: '#4',
           formula: '$\\operatorname{im}(T) = W$ vs $\\ker(T) = V$',
           condition: '$T$ is surjective vs $T$ is the zero map',
-          note: 'And again reversed. A full image is surjectivity; a full kernel is the zero map. Both extremes of the kernel column describe degenerate maps, while the image column runs from degenerate to ideal \u2014 the columns are not mirror images.',
+          note: 'And again reversed. A full image is surjectivity, the ideal end; a full kernel is the zero map, the degenerate end. Read with the row above, each column runs from degenerate to ideal, but in opposite directions.',
         },
       ],
     },
@@ -1206,6 +1206,10 @@ It contains $\\mathbf{0}$ (since $T(\\mathbf{0}) = \\mathbf{0}$), and if $T(\\ma
 
 When $T(\\mathbf{x}) = A\\mathbf{x}$, the kernel is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: all solutions to the [homogeneous](!/linear-algebra/linear-systems/homogeneous) system $A\\mathbf{x} = \\mathbf{0}$. Its dimension is the nullity, equal to $n - \\text{rank}(A)$.
 
+@academic[pitfall,aside:true,width:35%:Placing the kernel in the codomain
+Reading the kernel as the zero output gives $\\ker(T) = \\{(0, 0)\\}$ for $T(x, y, z) = (x, y)$, so $T$ looks injective. The kernel is a set of inputs in $\\mathbb{R}^3$: solving $T(\\mathbf{v}) = \\mathbf{0}$ gives the line $\\text{Span}\\{(0, 0, 1)\\}$.
+[Read more](!#pitfalls)]@
+
 The kernel measures the information lost by $T$. Vectors in the kernel are collapsed to $\\mathbf{0}$ — they represent directions that the transformation annihilates. A larger kernel means more information is destroyed.`,
     before: ``,
     after: ``,
@@ -1299,6 +1303,10 @@ $$\\dim V = \\dim W \\Rightarrow \\bigl(T \\text{ injective} \\iff T \\text{ sur
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Taking equal dimensions as bijective
+Calling $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ an isomorphism because it maps $\\mathbb{R}^2$ to $\\mathbb{R}^2$ fails: $A(-2, 1) = \\mathbf{0}$, so it is neither injective nor surjective. Its kernel is the line $\\text{Span}\\{(-2, 1)\\}$ and its image only the line $\\text{Span}\\{(1, 2)\\}$.
+[Read more](!#pitfalls)]@
+
 Checking any one of the three establishes the other two. This is because the rank-nullity theorem forces $\\dim(\\text{Im}(T)) + \\dim(\\ker(T)) = n$ (where $n = \\dim(V) = \\dim(W)$), and $\\dim(\\text{Im}(T)) \\leq n$. If the kernel is trivial (injective), the image has dimension $n$ and must equal all of $W$ (surjective). If the image is all of $W$ (surjective), the kernel must have dimension $0$ (injective).
 
 For matrix transformations between spaces of the same dimension, bijectivity is equivalent to the matrix being square and [invertible](!/linear-algebra/matrix/inverse).`,
@@ -1320,6 +1328,10 @@ $$\\dim\\text{Im}(T) + \\dim\\ker(T) = \\dim V$$
 The domain dimensions split between what the map preserves and what it destroys. The image captures the dimensions that survive; the kernel captures the dimensions that are annihilated.
 
 For [matrix](!/linear-algebra/matrix) transformations $T(\\mathbf{x}) = A\\mathbf{x}$, this becomes $\\text{rank}(A) + \\text{nullity}(A) = n$ — the familiar [rank-nullity theorem](!/linear-algebra/matrix/rank) in concrete language.
+
+@academic[pitfall,aside:true,width:35%:Counting the codomain in rank-nullity
+Subtracting the rank from the number of rows gives, for a $3 \\times 5$ matrix of rank $3$, nullity $3 - 3 = 0$, as if $A\\mathbf{x} = \\mathbf{0}$ had only the zero solution. The count runs over the $n = 5$ columns: $\\text{nullity}(A) = 5 - 3 = 2$.
+[Read more](!#pitfalls)]@
 
 The theorem constrains the interplay between injectivity and surjectivity. If $\\dim(V) > \\dim(W)$, the image can have at most $\\dim(W)$ dimensions, forcing the kernel to have at least $\\dim(V) - \\dim(W)$ dimensions — the map cannot be injective. If $\\dim(V) < \\dim(W)$, the image cannot fill all of $W$ — the map cannot be surjective.`,
     before: ``,
@@ -1351,7 +1363,13 @@ The image is the column space of $A$: row reduce $A$, identify the pivot columns
 
 @academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 1 & 3 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$. Pivots in columns $1$ and $2$. The image has basis $\\{(1, 0, 1), (2, 1, 3)\\}$ — two-dimensional. The kernel has one free variable ($x_3 = t$), giving $\\ker(T) = \\text{Span}\\{(-1, -1, 1)\\}$ — one-dimensional. Check: $2 + 1 = 3 = n$.]@`,
+For $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 1 & 3 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$. Pivots in columns $1$ and $2$. The image has basis $\\{(1, 0, 1), (2, 1, 3)\\}$ — two-dimensional. The kernel has one free variable ($x_3 = t$), giving $\\ker(T) = \\text{Span}\\{(-1, -1, 1)\\}$ — one-dimensional. Check: $2 + 1 = 3 = n$.]@
+
+@academic[pitfall,aside:true,width:35%:Using pivot columns of the echelon form
+Taking the pivot columns of the reduced matrix gives $\\{(1, 0, 0), (2, 1, 0)\\}$, the plane $x_3 = 0$, which contains $(1, 0, 0)$, a vector $A$ never outputs. The image is the plane $x_3 = x_1 + x_2$ spanned by $(1, 0, 1)$ and $(2, 1, 3)$.
+[Read more](!#pitfalls)]@
+
+Both answers come from one reduction, but they are read off in different places. The kernel is a set of inputs, so its basis is built from the solution of the reduced system. The image is a set of outputs, so the echelon form only says which columns to keep, and the vectors themselves are the columns that $A$ produces. Here the third column is redundant, since $(3, 1, 4) = (1, 0, 1) + (2, 1, 3)$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1375,6 +1393,68 @@ For matrix transformations, the [four fundamental subspaces](!/linear-algebra/ve
   obj10: {
     title: `Summary: Image and Kernel Side by Side`,
     content: `The whole page revolves around a single duality: the image lives in the codomain and records what T reaches, while the kernel lives in the domain and records what T destroys. Every concept introduced — injectivity, surjectivity, bijectivity, rank-nullity, dimension constraints, the fundamental decomposition — is a relation between these two subspaces. The table below sets them side by side across every attribute the page has touched, so the symmetry and the link supplied by rank-nullity are visible at a glance.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong answers about image and kernel. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Placing the kernel in the codomain**
+
+The kernel is treated as a set of outputs, usually as the zero output itself, and written as a subspace of $W$. It is a set of inputs: it lives in $V$, and its vectors have as many entries as $A$ has columns.
+
+Wrong working: for $T(x, y, z) = (x, y)$, with matrix $A = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{pmatrix}$, the kernel is described as the zero output, $\\ker(T) = \\{(0, 0)\\} \\subseteq \\mathbb{R}^2$. The kernel looks trivial, so $T$ is declared injective.
+
+Right working: solve $A\\mathbf{x} = \\mathbf{0}$. The equations are $x = 0$ and $y = 0$, and $z$ is free, so
+$$\\ker(T) = \\text{Span}\\{(0, 0, 1)\\} \\subseteq \\mathbb{R}^3$$
+a line, one-dimensional. $T$ is not injective: $T(0, 0, 5) = T(0, 0, 0) = (0, 0)$.
+
+Why it happens: the definition contains $\\mathbf{0}$, the zero vector of $W$, and it is easy to read the kernel as where the zero is rather than as what is sent to it. The equation $A\\mathbf{x} = \\mathbf{0}$ also has the zero with $m$ entries on its right-hand side.
+
+How to check: count entries. Kernel vectors have $n$ entries, one per column of $A$; image vectors have $m$ entries, one per row. Rank-nullity agrees: the rank is $2$ and $n = 3$, so the nullity must be $1$, not $0$.
+
+**Taking equal dimensions as bijective**
+
+The equal-dimension rule is read as: if $\\dim V = \\dim W$, then $T$ is bijective. The rule says only that the three properties then stand or fall together.
+
+Wrong working: $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ maps $\\mathbb{R}^2$ to $\\mathbb{R}^2$. The dimensions are equal, so $T$ is declared an isomorphism and its inverse is looked for.
+
+Right working: test one of the three properties.
+$$A\\begin{pmatrix} -2 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} -2 + 2 \\\\ -4 + 4 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix}$$
+So $\\ker(T) = \\text{Span}\\{(-2, 1)\\}$ and $T$ is not injective. By the equal-dimension rule it is not surjective either: the image is only the line $\\text{Span}\\{(1, 2)\\}$, and $(1, 0)$ is never reached. Also $\\det A = 4 - 4 = 0$, so there is no inverse.
+
+Why it happens: the formula puts the word bijective right next to $\\dim V = \\dim W$, and the dimension test of the Dimension Constraints section is easy to remember as a sufficient condition when it is only a necessary one.
+
+How to check: a dimension count can only rule a property out. To confirm bijectivity, one real test is still needed: a trivial kernel, full rank, or, for a square matrix, $\\det A \\neq 0$.
+
+**Counting the codomain in rank-nullity**
+
+The nullity is computed as $\\dim W - \\text{rank}$, that is $m - \\text{rank}(A)$, using the number of rows instead of the number of columns.
+
+Wrong working: take the $3 \\times 5$ matrix
+$$A = \\begin{pmatrix} 1 & 0 & 0 & 1 & 0 \\\\ 0 & 1 & 0 & 0 & 1 \\\\ 0 & 0 & 1 & 1 & 1 \\end{pmatrix}$$
+of rank $3$, a map $T: \\mathbb{R}^5 \\to \\mathbb{R}^3$. Then nullity $= 3 - 3 = 0$, so $A\\mathbf{x} = \\mathbf{0}$ would have only the zero solution and $T$ would be injective.
+
+Right working: $\\text{nullity}(A) = n - \\text{rank}(A) = 5 - 3 = 2$. The matrix is already in reduced form, with $x_4$ and $x_5$ free, and the kernel has the basis
+$$(-1, 0, -1, 1, 0), \\qquad (0, -1, -1, 0, 1)$$
+
+Why it happens: $m$ and $n$ are both sizes of $A$, and the rank is bounded by both. The image also sits in the codomain, so it is tempting to think the codomain is the space being split. The theorem splits the domain.
+
+How to check: count the columns without a pivot; that is the number of free variables, $n - \\text{rank}(A)$. And when $\\dim V > \\dim W$, the kernel can never be trivial, so a nullity of $0$ is impossible.
+
+**Using pivot columns of the echelon form**
+
+For the image, the pivot columns are taken from the echelon form instead of from $A$. Row operations keep the null space and the relations between the columns, but they change the column space.
+
+Wrong working: in the worked example the echelon form is $\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$, with pivots in columns $1$ and $2$. Its pivot columns give the basis $\\{(1, 0, 0), (2, 1, 0)\\}$, which spans the plane $x_3 = 0$.
+
+Right working: take columns $1$ and $2$ of the original $A$, $\\{(1, 0, 1), (2, 1, 3)\\}$. They span the plane $x_3 = x_1 + x_2$, and all three columns of $A$ lie in it. The vector $(1, 0, 0)$ does not: the system $A\\mathbf{x} = (1, 0, 0)$ has no solution, since row $3$ minus rows $1$ and $2$ gives $0 = -1$.
+
+Why it happens: the kernel basis really does come from the reduced form, so the same habit is carried over to the image, and the echelon form is the matrix already on the page.
+
+How to check: test each proposed basis vector $\\mathbf{w}$ by solving $A\\mathbf{x} = \\mathbf{w}$. A quicker sign: when the echelon form has a row of zeros, all its columns have a $0$ in that position, while the columns of $A$ usually do not.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1647,6 +1727,14 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
           </DiagramFrame>,
           `The clearest break is at the extremes. A trivial kernel is the best case — the map destroys nothing and is injective — while a trivial image is the worst, since the map sends everything to zero. Reverse them and the same reversal happens: a full image means surjectivity, a full kernel means the zero map again. The kernel column runs from ideal to degenerate; the image column runs the other way.`,
           `What ties them together is dimension rather than structure. Rank-nullity says the two dimensions sum to $\\dim V$, so neither can be chosen independently of the other — every direction in the domain is accounted for exactly once, surviving into the image or collapsing into the kernel. Note the sum is over the domain: the codomain plays no part, which is why a map can have a small image without having a large kernel.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

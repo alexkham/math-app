@@ -345,7 +345,7 @@ export async function getStaticProps() {
         description:`@academic[theorem: The Sample Space (Ω), is the collection of all different results that the experiment may produce.]@
         The [sample space](!/probability/sample-space) can be **finite** (for example, in the dice‐rolling scenario or coin flipping) or **infinite** (for instance, selecting a real number).
         In addition, we may divide [sample spaces](!/probability/sample-space) by outcome types into  **discrete** or **continuous**.
-        Often times, defining or calculating proper [sample space](!/probability/sample-space) for any given case may pose sertious challenge and demands experience and certain analytic skills.
+        Often times, defining or calculating proper [sample space](!/probability/sample-space) for any given case may pose serious challenge and demands experience and certain analytic skills.
          Although in the case of a dice roll the collection of possible outcomes may seem self‐evident, the sample space plays an important role in conducting more complex experiments. Typically, a researcher will take the sample space and partition it into subsets in order to draw various conclusions.
        In any practical application, accurately defining the sample space is essential to solving probability problems.
         
@@ -361,8 +361,14 @@ By definition, an [event](!/probability/events) is any subset of the [sample spa
  Event $D = \\{\\}$ (impossible event)
  As the definition states and the example shows, [probability event](!/probability/events) may include one or more outcomes.It is a set of results counting as one event.         
  @academic[theorem:Probability is a function that assigns to each event in the sample space a real number in $[0,1]$ where total probability value of the entire sample space $P(S)=1$.]@
- @academic[theorem:This number is calculated as a ratio $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$]@
+ @academic[theorem:This number is calculated as a ratio $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$, when all outcomes in $S$ are equally likely]@
  Probability function satisfies three basic [axioms](!/probability#axioms) of probability.
+
+@academic[pitfall,aside:true,width:35%:Treating unequal outcomes as equally likely
+Taking the eleven possible sums $2, 3, \\ldots, 12$ of two dice as the sample space gives $P(\\text{sum} = 7) = \\frac{1}{11}$. The sums are not equally likely; counting the $36$ ordered pairs of faces gives $\\frac{6}{36} = \\frac{1}{6}$.
+[Read more](!#pitfalls)]@
+
+The ratio counts outcomes, so its result depends on which list of outcomes is taken as the sample space. For a single die the six faces are the natural list. For two dice there is a choice between the $36$ ordered pairs of faces and the $11$ possible sums, and the two lists give different answers to the same question.
  `
          
       },
@@ -546,6 +552,12 @@ svg:
   **The intuition behind it**:
   If two events don’t influence each other, the probability that both happen is just the product of their individual chances. In other words, to find the chance of A and B occurring together, you multiply P(A) by P(B).
 
+@academic[pitfall,aside:true,width:35%:Multiplying dependent events
+For one die roll, with $A$ = even and $B$ = greater than $3$, the product gives $P(A \\cap B) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$. But $A \\cap B = \\{4, 6\\}$, so $P(A \\cap B) = \\frac{2}{6} = \\frac{1}{3}$: the events are dependent.
+[Read more](!#pitfalls)]@
+
+The product formula rests on the condition that knowing $B$ leaves the chance of $A$ unchanged. That condition is a property of the particular experiment and the particular pair of events, and it can be tested directly by comparing $P(A \\mid B)$ with $P(A)$. When the two differ, $P(A \\cap B)$ is found from the conditional probability instead, as $P(B)\\,P(A \\mid B)$.
+
 `,
 
       },
@@ -569,6 +581,39 @@ after:`Because of its central role, this concept receives its own dedicated [pag
 If you want to understand what a distribution really is, the probability function is the natural place to begin.`,
 link:'/probability/probability-function'
       },
+      pitfalls:{
+        title:`Common Pitfalls`,
+        content:`Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating unequal outcomes as equally likely**
+
+The ratio of favorable outcomes to all outcomes is applied to a list of outcomes that are not equally likely. The ratio counts outcomes, so it gives the right probability only when every outcome on the list carries the same weight.
+
+Wrong working: two dice are rolled, and the sample space is taken as the possible sums $2, 3, \\ldots, 12$. That is $11$ outcomes, one of them favorable:
+$$P(\\text{sum} = 7) = \\frac{1}{11}$$
+
+Right working: the equally likely outcomes are the $36$ ordered pairs (first die, second die). Six of them give a sum of $7$: $(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)$.
+$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$
+
+Why it happens: the question is about the sum, so the sums look like the natural outcomes. The list of sums does not show that different sums arise from different numbers of pairs.
+
+How to check: compare two outcomes on the list. A sum of $2$ arises only from $(1,1)$, with probability $\\frac{1}{36}$, while a sum of $7$ arises in six ways; the two cannot have the same probability.
+
+**Multiplying dependent events**
+
+The probability that two events both happen is found as $P(A)\\,P(B)$ without checking that the events are independent. The product formula holds only when knowing one event leaves the chance of the other unchanged.
+
+Wrong working: one roll of a fair die; $A$ = even $= \\{2, 4, 6\\}$, $B$ = greater than $3$ $= \\{4, 5, 6\\}$.
+$$P(A \\cap B) = P(A)\\,P(B) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$$
+
+Right working: $A \\cap B = \\{4, 6\\}$, two of the six faces.
+$$P(A \\cap B) = \\frac{2}{6} = \\frac{1}{3}$$
+The same result comes from the conditional probability: $P(B)\\,P(A \\mid B) = \\frac{1}{2} \\cdot \\frac{2}{3} = \\frac{1}{3}$.
+
+Why it happens: the product rule is short and is often the first rule met for "and", so it is applied by habit, and independence is assumed instead of checked.
+
+How to check: with six equally likely faces, every probability for one roll is a whole number of sixths, and $\\frac{1}{4}$ is not. Comparing $P(A \\mid B) = \\frac{2/6}{3/6} = \\frac{2}{3}$ with $P(A) = \\frac{1}{2}$ shows the events are dependent.`,
+      },
 
 
     }
@@ -589,7 +634,7 @@ Probability is widely applied in science, engineering, finance, and everyday dec
   const axiomsData = [
     {
       title: 'Non-negativity axiom',
-      text: 'For any event A, 0 ≤ P(A) ≤ 1.'
+      text: 'For any event A, P(A) ≥ 0 (together with the other two axioms this gives P(A) ≤ 1).'
     },
     {
       title: 'Normalization axiom',
@@ -774,6 +819,14 @@ export default function ProbabilityBasicsPage({
 
       ]
 
+    },
+    {
+      id:'pitfalls',
+      title:sectionContent.pitfalls.title,
+      link:'',
+      content:[
+        sectionContent.pitfalls.content,
+      ]
     },
     {
       id: 'symbols',

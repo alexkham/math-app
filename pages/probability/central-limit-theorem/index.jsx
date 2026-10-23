@@ -877,7 +877,7 @@ export async function getStaticProps(){
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Type of statement</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">deterministic limit</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">convergence of the mean to the single number μ</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distributional limit</td>
     </tr>
     <tr style="background: #f8f9fa;">
@@ -1158,6 +1158,10 @@ As more observations are averaged together, the variability of the sample mean n
 
 If we looked at the raw sample mean alone, this shrinking variability would eventually hide all randomness. Scaling by $\\sqrt{n}$ counteracts this effect by keeping the spread of the distribution at a visible, meaningful scale.
 
+@academic[pitfall,aside:true,width:35%:Standardizing the mean with σ
+Finding $P(\\bar X_{25} > 106)$ for $\\mu = 100$, $\\sigma = 15$ with $z = \\frac{106 - 100}{15} = 0.4$ uses the spread of one observation and gives about $0.34$. The mean's spread is $\\frac{15}{\\sqrt{25}} = 3$, so $z = 2$ and the probability is about $0.023$.
+[Read more](!#7)]@
+
 The factor $\\sigma / \\sqrt{n}$ reflects how uncertainty decreases with sample size. It captures the rate at which averaging reduces variability and explains why this term appears in the standardized form of the theorem.
 
 This scaling does not change the shape of the distribution.  
@@ -1217,6 +1221,58 @@ The table below sets each misconception alongside the corresponding correct view
       after:``,
       link:'',
   
+    },
+    misconceptionsMore:{
+      title:``,
+      content:`
+The misconceptions above concern what the theorem says. Three more errors appear when it is used in a calculation, and each one comes from taking the wrong spread. Each is marked where it happens in the sections above.
+
+**Multiplying σ by n for a sum**
+
+A question asks about the total of $n$ observations, and the spread of the total is taken as $n$ times the spread of one observation. The standard deviations are added as if they were lengths laid end to end.
+
+Wrong working: for 36 independent packages, each with mean weight $5$ kg and standard deviation $2$ kg, the total $S_{36}$ has mean $36 \\cdot 5 = 180$ kg and
+$$\\sigma_{S} = 36 \\cdot 2 = 72, \\quad z = \\frac{200 - 180}{72} \\approx 0.28, \\quad P(S_{36} > 200) \\approx 0.39$$
+
+Right working: the variances of independent terms add, so the variance of the sum is $n\\sigma^2$.
+$$\\operatorname{Var}(S_{36}) = 36 \\cdot 2^2 = 144, \\quad \\sigma_{S} = \\sqrt{144} = 12, \\quad z = \\frac{200 - 180}{12} \\approx 1.67, \\quad P(S_{36} > 200) \\approx 0.048$$
+
+Why it happens: the mean of the sum is $n\\mu$, so multiplying the standard deviation by $n$ looks like the same step. But independent deviations partly cancel, and the spread of the total grows like $\\sqrt{n}$, not like $n$.
+
+How to check: compare the spread with the mean. With spread $n\\sigma$, the total would be exactly as uncertain relative to its mean, $\\frac{72}{180} = 0.4$, as a single package is, $\\frac{2}{5} = 0.4$, and adding packages would steady nothing. The correct spread gives $\\frac{12}{180} \\approx 0.067$, which keeps shrinking as $n$ grows.
+
+**Using the standard error for single values**
+
+The spread $\\frac{\\sigma}{\\sqrt{n}}$ of the sample mean is used to describe individual observations, as though the narrow bell of averages showed where single values fall.
+
+Wrong working: for the exponential variable with $\\mu = \\sigma = 1$ from the Visual Intuition figure, with $n = 30$,
+$$\\frac{\\sigma}{\\sqrt{30}} \\approx 0.183, \\quad 1 \\pm 2 \\cdot 0.183 \\approx 0.63 \\text{ to } 1.37$$
+and this interval is read as holding about 95% of single observations.
+
+Right working: about 95% of sample means of 30 fall in that interval, but single observations keep their own skewed distribution. For one observation,
+$$P(0.63 < X < 1.37) = e^{-0.63} - e^{-1.37} \\approx 0.53 - 0.25 = 0.28$$
+
+Why it happens: both spreads come from the same $\\sigma$, and the standard error is the quantity written in the theorem's formula, so it is the one at hand.
+
+How to check: the spread of single values does not depend on $n$. If an interval meant for single observations gets narrower when the sample size grows, it is describing the mean, not the observations.
+
+**Standardizing the mean with σ**
+
+A probability about the sample mean is found by standardizing with $\\sigma$, the spread of one observation, instead of with the standard error $\\frac{\\sigma}{\\sqrt{n}}$.
+
+Wrong working: for $\\mu = 100$, $\\sigma = 15$ and $n = 25$,
+$$z = \\frac{106 - 100}{15} = 0.4, \\quad P(\\bar X_{25} > 106) \\approx 0.34$$
+
+Right working: the spread of the mean is the standard error.
+$$\\frac{\\sigma}{\\sqrt{n}} = \\frac{15}{\\sqrt{25}} = 3, \\quad z = \\frac{106 - 100}{3} = 2, \\quad P(\\bar X_{25} > 106) \\approx 0.023$$
+
+Why it happens: the z-score $\\frac{x - \\mu}{\\sigma}$ is first learned for single values, and the same pattern is reused for the mean with the denominator left unchanged.
+
+How to check: the answer must depend on $n$. With $\\sigma$ in the denominator the probability is $0.34$ for a sample of 25 and for a sample of 2,500 alike, although the mean of a larger sample strays less from $\\mu$.`,
+      before:``,
+      after:``,
+      link:'',
+
     },
     obj8:{
       title:`CLT vs Law of Large Numbers`,
@@ -1475,6 +1531,13 @@ export default function PageTemplate({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          `@academic[pitfall,aside:true,width:35%:Multiplying σ by n for a sum
+Giving the total of 36 packages, each with $\\mu = 5$ kg and $\\sigma = 2$ kg, the spread $36 \\cdot 2 = 72$ kg adds standard deviations and gives $P(S_{36} > 200) \\approx 0.39$. Variances add: $36 \\cdot 2^2 = 144$, so the spread is $\\sqrt{144} = 12$ kg and the probability is about $0.048$.
+[Read more](!#7)]@
+
+Many applied questions ask about a total rather than an average: the combined weight of a shipment, the total waiting time of a day's customers, the total claims an insurer pays in a year. The sum $S_n = X_1 + \\dots + X_n$ is the sample mean multiplied by $n$, so the theorem covers it under the same conditions, and its distribution is approximately normal as well, centered at $n\\mu$.
+
+The two forms move in opposite directions as $n$ grows. The mean concentrates around $\\mu$, while the sum spreads out, because every new observation brings its own variability into the total.`,
                   <div key={'unit-u_notation_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_notation_0 }} />,
           `The scaling behind that shrinking spread is the subject of the next section.`,
         ]
@@ -1487,6 +1550,13 @@ export default function PageTemplate({
           sectionsContent.obj4.content,
           <div key={'unit-cltShapes'} dangerouslySetInnerHTML={{ __html: demoUnits.cltShapes }} />,
           `For a skewed start like this one, n = 30 is a reasonable size; a symmetric start needs far fewer.`,
+          `@academic[pitfall,aside:true,width:35%:Using the standard error for single values
+Reading the narrow bell of means as the spread of single values: for the exponential above, with $\\mu = \\sigma = 1$, about 95% of means of 30 lie within $1 \\pm \\frac{2}{\\sqrt{30}}$, from $0.63$ to $1.37$. Only about 28% of single observations do: $e^{-0.63} - e^{-1.37} \\approx 0.28$.
+[Read more](!#7)]@
+
+The figure holds two different spreads. The amber curve is the distribution of a single observation, and it keeps the same shape and width whatever the sample size. The navy curve is the distribution of the average of 30 observations, and it narrows as the sample grows.
+
+Every probability question built on the theorem refers to one of these curves. A question about one waiting time or one measurement is answered from the original distribution; a question about the average of a sample is answered from the distribution of the sample mean.`,
         ]
     },
     {
@@ -1513,6 +1583,7 @@ export default function PageTemplate({
         content:[
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj7Table}}/>,
+          sectionsContent.misconceptionsMore.content,
         ]
     },
     {

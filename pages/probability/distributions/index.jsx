@@ -83,6 +83,10 @@ export async function getStaticProps(){
        
        `,
         after:`
+@academic[pitfall,aside:true,width:35%:Treating draws without replacement as binomial
+Using the binomial for draws without replacement gives every draw the same chance of success. For $2$ items from a batch of $10$ with $3$ defective, it puts $P(\\text{both defective}) = 0.3^2 = 0.09$; the hypergeometric gives $\\frac{\\binom{3}{2}}{\\binom{10}{2}} = \\frac{3}{45} \\approx 0.067$.
+[Read more](!#pitfalls)]@
+
         Understanding which distribution fits a given scenario is key to solving probability problems correctly. Each type has its own signature—whether you're counting successes in a fixed number of trials, waiting for events to happen, or sampling from a limited population. Just as importantly, each distribution comes with ready-made formulas for mean and variance that would be extremely difficult (or impossible) to derive from scratch every time you need them. Recognizing these patterns lets you pick the right tool and set up your calculations with confidence.
         `,
     
@@ -109,6 +113,12 @@ Common continuous distributions include the uniform, normal, exponential, gamma,
 This concept exists independently of any named distribution. In simple or irregular situations, the probability function may not follow a standard form, but it still governs how probabilities are assigned. When the underlying rule has a clear, organized pattern, it becomes possible to describe it through familiar distribution families such as Binomial, Poisson, or Normal. In those cases, the probability function takes on specific forms: a probability mass function for discrete variables or a probability density function for continuous variables.
 
 For [discrete random variables](!/probability/distributions#discrete_dist), this rule appears as a probability mass function (PMF), which specifies the probability of each individual value. For [continuous variables](!/probability/distributions#continuous_dist), the rule takes the form of a probability density function (PDF), which describes how probability is distributed across an interval. Although they behave differently, both PMFs and PDFs serve the same fundamental role: they encode the entire structure of the random phenomenon.
+
+@academic[pitfall,aside:true,width:35%:Reading a density as a probability
+Taking $f(x)$ as $P(X = x)$ breaks down for $X$ uniform on $[0, 0.5]$, where $f(x) = 2$ and no probability can exceed $1$. A single value has probability $0$; an interval gets the area under the curve, so $P(0 \\le X \\le 0.25) = 2 \\cdot 0.25 = 0.5$.
+[Read more](!#pitfalls)]@
+
+The difference shows up as soon as a value is read off a graph. A PMF is drawn as separate bars standing at the possible values, while a PDF is drawn as a curve over an interval, and both graphs have a height at every point of interest. What that height means is not the same in the two cases.
 `,
         before:``,
         after:`
@@ -243,9 +253,15 @@ $$F_X(x) = \\mathbb{P}(X \\leq x)$$
 
 This function serves as a complete characterization of any [random variable](!/probability/random-variables), whether [discrete](!/probability/distributions/discrete) or [continuous](!/probability/distributions/continuous). In the discrete case, the CDF forms a step function that increases in jumps at each outcome. In the continuous case, it appears as a smooth, continuous curve that represents the integral of the density function from $-\\infty$ to $x$.
 
-The [CDF](!/probability/cdf) is universally applicable and mathematically powerful. It allows us to easily calculate the probability of intervals—simply by taking the difference $F(b) - F(a)$—and is the basis for defining **Quantiles** and **Percentiles**.
+The [CDF](!/probability/cdf) is universally applicable and mathematically powerful. It allows us to easily calculate the probability of intervals—simply by taking the difference $F(b) - F(a) = P(a < X \\leq b)$—and is the basis for defining **Quantiles** and **Percentiles**.
 
-@academic[rule_plain:Because probabilities cannot be negative and total probability must sum to one, every CDF fundamentally starts at 0 (at $-\\infty$) and monotonically increases to 1 (at $+\\infty$).]@`,
+@academic[rule_plain:Because probabilities cannot be negative and total probability must sum to one, every CDF fundamentally starts at 0 (at $-\\infty$) and is non-decreasing up to 1 (at $+\\infty$).]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the left endpoint
+Using $F(b) - F(a)$ for $P(a \\le X \\le b)$ with a discrete $X$ leaves out the value $a$ itself. For a fair die, $F(4) - F(2) = \\frac{4}{6} - \\frac{2}{6} = \\frac{1}{3}$, while $P(2 \\le X \\le 4) = F(4) - F(1) = \\frac{4}{6} - \\frac{1}{6} = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
+
+Interval probabilities are where the discrete and continuous cases part ways. For a continuous variable a single point carries no probability, so including or excluding an endpoint changes nothing. For a discrete variable the CDF jumps at each value of the support, and an endpoint of an interval can sit exactly on one of those jumps.`,
         before:``,
         after:``,
     
@@ -281,6 +297,57 @@ The [CDF](!/probability/cdf) is universally applicable and mathematically powerf
         before:``,
         after:``,
     
+      },
+      obj6:{
+        title:`Common Pitfalls`,
+        content:`Each of the three mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating draws without replacement as binomial**
+
+A count of successes in a sample is modelled with the binomial distribution although the items are drawn without replacement from a small population. The binomial gives every draw the same success probability, independent of the other draws; without replacement, each draw changes what is left.
+
+Wrong working: $2$ items are drawn from a batch of $10$ that contains $3$ defective items. With $p = \\frac{3}{10}$ on each draw,
+$$P(\\text{both defective}) = 0.3^2 = 0.09$$
+
+Right working: after one defective item is drawn, only $2$ of the remaining $9$ items are defective.
+$$P(\\text{both defective}) = \\frac{3}{10} \\cdot \\frac{2}{9} = \\frac{6}{90} = \\frac{1}{15} \\approx 0.067$$
+This is the hypergeometric value $\\frac{\\binom{3}{2}\\binom{7}{0}}{\\binom{10}{2}} = \\frac{3}{45}$.
+
+Why it happens: both settings count successes in a fixed number of draws, so the binomial is the first model that comes to mind. The two differ only in whether a drawn item goes back.
+
+How to check: ask whether the same item could be drawn twice. If not, the hypergeometric applies; the binomial is a fair approximation only when the sample is a small fraction of the population.
+
+**Reading a density as a probability**
+
+For a continuous variable, the height of the PDF at a point is taken as the probability of that point.
+
+Wrong working: for $X$ uniform on $[0, 0.5]$, the density is $f(x) = \\frac{1}{0.5} = 2$, so
+$$P(X = 0.25) = f(0.25) = 2$$
+a probability larger than $1$.
+
+Right working: every single value of a continuous variable has probability $0$. Probability belongs to intervals and equals the area under the density:
+$$P(0 \\le X \\le 0.25) = \\int_{0}^{0.25} 2 \\, dx = 2 \\cdot 0.25 = 0.5$$
+
+Why it happens: for a discrete variable the height of a PMF bar is a probability, and a PDF graph looks like the same kind of picture.
+
+How to check: a probability can never exceed $1$. A density can, whenever the variable lives on a short interval, so a value above $1$ read off a curve is a density, not a probability.
+
+**Dropping the left endpoint**
+
+For a discrete variable, the probability of a closed interval $a \\le X \\le b$ is computed as $F(b) - F(a)$.
+
+Wrong working: for a fair die,
+$$P(2 \\le X \\le 4) = F(4) - F(2) = \\frac{4}{6} - \\frac{2}{6} = \\frac{1}{3}$$
+
+Right working: $F(b) - F(a) = P(a < X \\le b)$, which excludes $X = a$. To include the value $2$, subtract the CDF at the value just below it:
+$$P(2 \\le X \\le 4) = F(4) - F(1) = \\frac{4}{6} - \\frac{1}{6} = \\frac{1}{2}$$
+
+Why it happens: for continuous variables the endpoints carry no probability, so $F(b) - F(a)$ works for every kind of interval, and the habit carries over to discrete ones.
+
+How to check: count the values directly. The faces $2$, $3$ and $4$ are three of six equally likely faces, so the answer must be $\\frac{3}{6} = \\frac{1}{2}$.
+`,
+        before:``,
+        after:``,
       },
     
     }
@@ -332,7 +399,7 @@ The [CDF](!/probability/cdf) is universally applicable and mathematically powerf
           },
          
           {
-            type: '[Negative Binomial](!/probability/distributions/discrete#negative-binomial)',
+            type: '[Negative Binomial](!/probability/distributions/discrete#negative_binomial)',
             description: 'Generalizes the geometric to count trials until the $r$th success in Bernoulli($p$) trials; allows modeling multiple required successes.',
             examples: 'Number of coin tosses until 5 heads occur; calls made until 3 sales are closed'
           },
@@ -665,6 +732,14 @@ continuousDistributionsTypesData, seoData, demoUnits}) {
         link:sectionsContent.matter.link,
         content:[
           sectionsContent.matter.content,
+        ]
+    },
+     {
+        id:'pitfalls',
+        title:sectionsContent.obj6.title,
+        link:'',
+        content:[
+          sectionsContent.obj6.content,
         ]
     },
     

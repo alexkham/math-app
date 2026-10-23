@@ -2512,6 +2512,10 @@ const sectionsContent = {
 
 When $\\text{rank}(A) = \\min(m, n)$, the matrix has full rank — every row and every column contributes something that no combination of the others can reproduce. When $\\text{rank}(A) < \\min(m, n)$, the matrix is rank-deficient, meaning at least one row or column is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others.
 
+@academic[pitfall,aside:true,width:35%:Checking rows only in pairs
+Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{pmatrix}$ is a multiple of another misses combinations of several rows. Row $3$ is $2 \\cdot$ row $2 -$ row $1$, so the rank is $2$.
+[Read more](!#pitfalls)]@
+
 A $5 \\times 3$ matrix with rank $3$ uses all three of its column directions. A $5 \\times 3$ matrix with rank $2$ has one column that is redundant — it lies in the [span](!/linear-algebra/vector-spaces/span) of the other two. The rank does not say which column is redundant (often more than one subset works), only that the effective column count is $2$.`,
     before: ``,
     after: ``,
@@ -2603,6 +2607,10 @@ Swap rows $3$ and $4$ to place the pivot:
 @academic[formula_callout:Computing Rank via Row Reduction
 $$\\begin{pmatrix} 1 & 2 & 0 & -1 & 3 \\\\ 0 & 0 & 1 & 2 & -1 \\\\ 0 & 0 & 0 & -1 & 1 \\\\ 0 & 0 & 0 & 0 & 4 \\end{pmatrix}$$]@
 
+@academic[pitfall,aside:true,width:35%:Counting rows too early
+Counting the nonzero rows of $\\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 3 \\\\ 0 & 2 & 6 \\end{pmatrix}$ gives $3$, but rows $2$ and $3$ both start in column $2$, so it is not in echelon form yet. Subtracting $2$ times row $2$ from row $3$ leaves a zero row: the rank is $2$.
+[Read more](!#pitfalls)]@
+
 There are four pivots, in columns $1$, $3$, $4$, and $5$. So $\\text{rank}(A) = 4$. Column $2$ is the only non-pivot column, corresponding to the single free variable if this matrix were the coefficient matrix of a system.`,
     before: ``,
     after: ``,
@@ -2631,6 +2639,10 @@ This condition means that $\\mathbf{b}$ lies in the column space of $A$ — it c
 
 When solutions exist, uniqueness depends on whether the rank equals the number of unknowns $n$. If $\\text{rank}(A) = n$, there are no free variables and the solution is unique. If $\\text{rank}(A) < n$, there are $n - \\text{rank}(A)$ free variables, and the solution set is an infinite family parametrized by those free variables.
 
+@academic[pitfall,aside:true,width:35%:Skipping the consistency check
+Seeing $\\text{rank}(A) = 1 < 2$ for $x + y = 1$, $x + y = 2$ and concluding infinitely many solutions ignores $\\mathbf{b}$. Here $\\text{rank}([A \\mid \\mathbf{b}]) = 2$, so the system has no solution.
+[Read more](!#pitfalls)]@
+
 The three possible outcomes are: $\\text{rank}(A) < \\text{rank}([A \\mid \\mathbf{b}])$ means the system is inconsistent and has no solution. $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = n$ means there is exactly one solution. $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) < n$ means there are infinitely many solutions.
 
 There is no scenario with a finite number of solutions greater than one. A linear system either has zero, one, or infinitely many solutions.`,
@@ -2644,6 +2656,10 @@ There is no scenario with a finite number of solutions greater than one. A linea
 
 @academic[formula_callout:The Rank-Nullity Theorem
 $$\\text{rank}(A) + \\text{nullity}(A) = n$$]@
+
+@academic[pitfall,aside:true,width:35%:Subtracting the rank from the rows
+Using the number of rows gives a $2 \\times 4$ matrix of rank $2$ a nullity of $2 - 2 = 0$. But $A\\mathbf{x} = \\mathbf{0}$ has $4$ unknowns, so the nullity is $4 - 2 = 2$.
+[Read more](!#pitfalls)]@
 
 The $n$ columns of $A$ partition into two groups: the pivot columns, which contribute to the column space and drive the rank, and the free columns, which contribute to the null space and drive the nullity. Every column does exactly one of these things.
 
@@ -2686,7 +2702,7 @@ The rank of a sum is bounded by the sum of the ranks:
 @academic[formula_callout:rank_sum_inequality|Rank Sum Inequality|$$\\text{rank}(A + B) \\leq \\text{rank}(A) + \\text{rank}(B)$$]@
 @academic[formulas_link:/linear-algebra/formulas#rank_sum_inequality]@
 
-Equality holds when the column spaces of $A$ and $B$ are disjoint (intersect only at $\\mathbf{0}$).
+Equality holds when the column spaces of $A$ and $B$ intersect only at $\\mathbf{0}$ and their row spaces also intersect only at $\\mathbf{0}$.
 
 Multiplying by an invertible matrix preserves rank exactly:
 
@@ -2702,7 +2718,7 @@ for invertible $P$ and $Q$. This is because invertible matrices neither collapse
     title: `Rank of Special Matrices`,
     content: `Several [matrix types](!/linear-algebra/matrix/types) have rank that can be read off directly from their structure.
 
-The identity matrix $I_n$ has rank $n$ — all columns are standard basis vectors, which are linearly independent. Every invertible matrix has full rank by definition.
+The identity matrix $I_n$ has rank $n$ — all columns are standard basis vectors, which are linearly independent. Every invertible matrix has full rank — an $n \\times n$ matrix is invertible exactly when its rank is $n$.
 
 A [diagonal](!/linear-algebra/matrix/types) matrix has rank equal to the number of nonzero diagonal entries. The zero entries correspond to collapsed coordinate directions.
 
@@ -2745,6 +2761,81 @@ The four dimensions add up correctly on both sides: $\\text{rank}(A) + (n - \\te
   obj10: {
     title: `What Rank Governs`,
     content: `The rank shows up in nearly every structural fact about a matrix — solvability of systems, invertibility, the dimensions of the four fundamental subspaces, the image of the associated linear transformation. The table below collects these roles in one place: each row pairs an aspect of the matrix with what the single integer $r = \\text{rank}(A)$ pins down.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for many wrong answers about rank. Four are marked with a box where they happen in the sections above, and the fifth, reading the bound on the rank of a sum as an equality, is flagged in the properties card. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Checking rows only in pairs**
+
+To decide whether the rows of a matrix are independent, they are compared two at a time. If no row is a multiple of another, the matrix is declared to have full rank.
+
+Wrong working: in
+$$A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{pmatrix}$$
+no row is a multiple of another row, so $\\text{rank}(A) = 3$.
+
+Right working: reduce. Subtract $4$ times row $1$ from row $2$ and $7$ times row $1$ from row $3$, then subtract $2$ times the new row $2$ from the new row $3$:
+$$\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & -3 & -6 \\\\ 0 & -6 & -12 \\end{pmatrix} \\to \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & -3 & -6 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
+There are two pivots, so $\\text{rank}(A) = 2$. The dependence involves all three rows: $(7, 8, 9) = 2(4, 5, 6) - (1, 2, 3)$.
+
+Why it happens: for two vectors, dependence does mean that one is a multiple of the other. The pairwise test is carried over to three or more rows, where a row can be a combination of several others without being a multiple of any one of them.
+
+How to check: for a square matrix, compute the determinant. Here $\\det(A) = 0$, so the rank is below $3$. In general, reduce to echelon form and count the pivots.
+
+**Counting rows too early**
+
+Elimination is stopped while two rows still start in the same column, and the nonzero rows are counted as if the matrix were already in echelon form.
+
+Wrong working:
+$$\\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 3 \\\\ 0 & 2 & 6 \\end{pmatrix}$$
+has three nonzero rows, so its rank is $3$.
+
+Right working: rows $2$ and $3$ both have their first nonzero entry in column $2$. Subtracting $2$ times row $2$ from row $3$ gives
+$$\\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 3 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
+with pivots in columns $1$ and $2$ only, so the rank is $2$.
+
+Why it happens: the zeros at the start of the lower rows look like a finished staircase, and counting nonzero rows is the correct rule once the matrix really is in echelon form.
+
+How to check: before counting, confirm that each nonzero row starts strictly to the right of the row above it. If two rows start in the same column, the reduction is not finished.
+
+**Skipping the consistency check**
+
+A system with fewer pivots than unknowns is declared to have infinitely many solutions, judging from $\\text{rank}(A)$ alone.
+
+Wrong working: for the system $x + y = 1$, $x + y = 2$, the coefficient matrix $A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$ has rank $1 < 2$. That leaves one free variable, so the system has infinitely many solutions.
+
+Right working: subtracting row $1$ from row $2$ of the augmented matrix $[A \\mid \\mathbf{b}]$ gives the row $(0, 0, 1)$, which reads $0 = 1$. So $\\text{rank}([A \\mid \\mathbf{b}]) = 2 > \\text{rank}(A) = 1$, and the system has no solution at all.
+
+Why it happens: the count of free variables, $n - \\text{rank}(A)$, decides between one solution and infinitely many, and it is applied before the test that decides whether there is any solution.
+
+How to check: compare $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}])$ first. A reduced row with zeros in every coefficient position and a nonzero last entry means there is no solution.
+
+**Subtracting the rank from the rows**
+
+In the rank-nullity theorem, the rank is subtracted from the number of rows $m$ instead of the number of columns $n$.
+
+Wrong working: $A = \\begin{pmatrix} 1 & 0 & 2 & 1 \\\\ 0 & 1 & 1 & 3 \\end{pmatrix}$ is $2 \\times 4$ with rank $2$, so $\\text{nullity}(A) = 2 - 2 = 0$, and only $\\mathbf{x} = \\mathbf{0}$ solves $A\\mathbf{x} = \\mathbf{0}$.
+
+Right working: $A\\mathbf{x} = \\mathbf{0}$ has $4$ unknowns, so $\\text{nullity}(A) = 4 - 2 = 2$. The free variables $x_3$ and $x_4$ give the null space basis $(-2, -1, 1, 0)$ and $(-1, -3, 0, 1)$, and both vectors satisfy $A\\mathbf{x} = \\mathbf{0}$.
+
+Why it happens: $m$ comes first in "$m \\times n$", and the left null space really does have dimension $m - \\text{rank}(A)$, so the two counts get swapped.
+
+How to check: the null space lives in $\\mathbb{R}^n$, the space of inputs $\\mathbf{x}$. A matrix with more columns than rows always has nullity at least $n - m > 0$, so a nullity of $0$ for a wide matrix is impossible.
+
+**Treating the sum bound as an equality**
+
+The inequality $\\text{rank}(A + B) \\leq \\text{rank}(A) + \\text{rank}(B)$ is used as if its two sides were equal.
+
+Wrong working: with $A = I_2$ and $B = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, both of rank $2$, $\\text{rank}(A + B) = 2 + 2 = 4$.
+
+Right working: $A + B = \\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$, whose two rows are equal, so $\\text{rank}(A + B) = 1$.
+
+Why it happens: many matrix quantities, such as the trace, add over sums, and rank is expected to behave the same way. Rank counts independent directions, and the directions of $A$ and $B$ can overlap or cancel when the matrices are added.
+
+How to check: the rank can never exceed $\\min(m, n)$. A rank of $4$ for a $2 \\times 2$ matrix is impossible on its face.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3075,6 +3166,14 @@ export default function MatrixRankPage({rankCases, seoData, sectionsContent, int
           sectionsContent.obj10.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

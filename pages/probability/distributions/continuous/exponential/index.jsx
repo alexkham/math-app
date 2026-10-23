@@ -1193,7 +1193,7 @@ export async function getStaticProps(){
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/variance" style="${linkStyle}">Variance</a></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) = 1 / λ<sup>2</sup>; σ = 1 / λ = E[X]</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique to exponential: standard deviation equals the mean</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">for every λ, the standard deviation equals the mean</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/mode" style="${linkStyle}">Mode</a> and <a href="/probability/median" style="${linkStyle}">median</a></td>
@@ -1392,6 +1392,10 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{
 
 **Memoryless Property**: The exponential distribution is the only continuous distribution with the memoryless property: $P(X > s + t \\mid X > s) = P(X > t)$. In terms of the CDF: knowing that $X > s$ doesn't change the probability that $X > s + t$ relative to waiting an additional time $t$ from the start.
 
+@academic[pitfall,aside:true,width:35%:Using the CDF for a longer wait
+Using $F(x) = 1 - e^{-\\lambda x}$ for $P(X > x)$: with calls at $\\lambda = 5$ per hour it gives $P(X > 0.1) \\approx 0.393$, the chance of waiting at most 6 minutes. A wait longer than 6 minutes has probability $e^{-0.5} \\approx 0.607$.
+[Read more](!#pitfalls)]@
+
 **Practical Use:** The exponential CDF is one of the simplest to work with. To find $P(X \\leq x)$ when $X \\sim \\text{Exp}(3)$ and $x = 2$: $F(2) = 1 - e^{-3(2)} = 1 - e^{-6} \\approx 0.9975$, meaning about 99.75% of values fall below 2. The complementary probability $P(X > 2) = e^{-6} \\approx 0.0025$.
       `,
       before:``,
@@ -1452,6 +1456,10 @@ Suppose customers arrive at a store at an average rate of $\\lambda = 3$ custome
 @academic[formula_callout:Expected Value (Mean)
 $$E[X] = \\frac{1}{3} \\text{ hours} = 20 \\text{ minutes}$$]@
 
+@academic[pitfall,aside:true,width:35%:Taking the rate as the mean wait
+Using $E[X] = \\lambda$, as for a Poisson count, gives a mean wait of $3$ hours for $\\lambda = 3$ customers per hour. The wait is the reciprocal of the rate: $E[X] = \\frac{1}{3}$ hour $= 20$ minutes.
+[Read more](!#pitfalls)]@
+
 The expected time until the next customer arrives is 20 minutes. If the rate increases to $\\lambda = 6$ customers per hour, the expected wait drops to $\\frac{1}{6}$ hours, or 10 minutes.
 
 To compute the expected value of a exponential distribution for your own parameters, step by step, use the [exponential expected value calculator](!/probability/calculators/expected-value/exponential).
@@ -1511,7 +1519,7 @@ $$\\mathrm{Var}(X) = \\frac{2}{\\lambda^2} - \\left(\\frac{1}{\\lambda}\\right)^
 
 The result $\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$ shows that variance decreases rapidly as the rate increases. When events occur frequently (large $\\lambda$), waiting times are consistently short with little variability. When events are rare (small $\\lambda$), waiting times become both long and highly variable. The quadratic relationship means doubling the rate reduces variance by a factor of four.
 
-@academic[rule_corollary_plain:Notably, for the exponential distribution, the standard deviation equals the mean—a unique property that doesn't hold for most distributions.]@
+@academic[rule_corollary_plain:Notably, for the exponential distribution, the standard deviation equals the mean—a property that doesn't hold for most distributions.]@
 
 ### Standard Deviation
 
@@ -1699,6 +1707,10 @@ Half of waits are less than 13.9 minutes (the [median](!/probability/median)).
 The middle 50% of waiting times span about 22 minutes.]@
 
 ### Other Notable Percentiles
+
+@academic[pitfall,aside:true,width:35%:Using ln p instead of ln(1 − p)
+Computing $x_{0.25} = \\frac{-\\ln(0.25)}{3}$ for $\\lambda = 3$ gives $0.462$ hours $\\approx 27.7$ minutes, which is the 75th percentile. With $1 - p$: $x_{0.25} = \\frac{-\\ln(0.75)}{3} \\approx 0.096$ hours $\\approx 5.8$ minutes.
+[Read more](!#pitfalls)]@
 
 **90th percentile:** $x_{0.90} = \\frac{-\\ln(0.10)}{\\lambda} = \\frac{2.303}{\\lambda}$ (only 10% of waits exceed this)
 
@@ -1916,6 +1928,10 @@ $$P(X > s + t \\mid X > s) = P(X > t) \\text{ for all } s, t \\geq 0$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the condition
+With $\\lambda = 3$ per hour, or $0.05$ per minute, computing $P(X > 30 \\mid X > 20)$ as $P(X > 30) = e^{-1.5} \\approx 0.223$ ignores the 20 minutes already waited. Only the remaining 10 minutes count: $P(X > 10) = e^{-0.5} \\approx 0.607$.
+[Read more](!#pitfalls)]@
+
 The exponential is the **only continuous distribution** with this property. Past waiting time provides no information about future waiting time. This makes it ideal for modeling random arrivals and failures without aging effects.
 
 Equivalently:
@@ -1955,7 +1971,7 @@ If events follow a [Poisson process](!/probability/distributions/discrete/poisso
 @academic[formula_callout:Properties
 $$E[X] = \\sigma = \\frac{1}{\\lambda}$$]@
 
-This unique relationship (mean = standard deviation) holds only for the exponential distribution.
+This relationship (mean = standard deviation) holds for every exponential distribution, though not for most other distributions.
 
 **Lack of Memory Formula:**
 @academic[formula_callout:Properties
@@ -2002,6 +2018,70 @@ The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n,
       after:``,
       link:'',
     },
+    obj18:{
+      title:`Common Pitfalls`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Using the CDF for a longer wait**
+
+The question asks for the chance that the wait is longer than some time $x$, and the CDF $F(x) = 1 - e^{-\\lambda x}$ is used. The CDF gives the chance of waiting at most $x$, the opposite event.
+
+Wrong working: calls arrive at $\\lambda = 5$ per hour, and the chance of waiting more than 6 minutes ($0.1$ hours) is taken as
+$$P(X > 0.1) = 1 - e^{-5(0.1)} = 1 - e^{-0.5} \\approx 0.393$$
+
+Right working: the probability of a longer wait is the survival function.
+$$P(X > 0.1) = 1 - F(0.1) = e^{-0.5} \\approx 0.607$$
+
+Why it happens: both expressions contain $e^{-\\lambda x}$, and the CDF is the formula learned first, so the "$1 -$" is put in by habit.
+
+How to check: compare with the median. The median wait is $\\frac{\\ln 2}{5} \\approx 0.139$ hours, about 8.3 minutes, so a wait of more than 6 minutes must have probability above one half; $0.607$ fits, $0.393$ does not.
+
+**Taking the rate as the mean wait**
+
+The rate $\\lambda$ is used as the expected waiting time, as if the exponential had the Poisson mean $\\lambda$.
+
+Wrong working: customers arrive at $\\lambda = 3$ per hour,
+$$E[X] = \\lambda = 3 \\text{ hours}$$
+
+Right working: the mean wait is the reciprocal of the rate.
+$$E[X] = \\frac{1}{\\lambda} = \\frac{1}{3} \\text{ hour} = 20 \\text{ minutes}$$
+
+Why it happens: the same $\\lambda$ is the mean of the Poisson count of arrivals in one hour, here $3$ customers. The count and the wait come from the same process, and the count's mean is carried over to the wait.
+
+How to check: look at units and direction. $\\lambda$ is measured in customers per hour, while a wait is measured in hours. A higher rate must also give a shorter wait: $\\frac{1}{\\lambda}$ falls as $\\lambda$ grows, $\\lambda$ itself does not.
+
+**Using ln p instead of ln(1 − p)**
+
+The quantile formula $x_p = \\frac{-\\ln(1 - p)}{\\lambda}$ is written with $\\ln p$ in place of $\\ln(1 - p)$.
+
+Wrong working: for $\\lambda = 3$ per hour, the 25th percentile is taken as
+$$x_{0.25} = \\frac{-\\ln(0.25)}{3} = \\frac{1.386}{3} \\approx 0.462 \\text{ hours} \\approx 27.7 \\text{ minutes}$$
+
+Right working: the CDF equation leaves $1 - p$ on the right.
+$$x_{0.25} = \\frac{-\\ln(1 - 0.25)}{3} = \\frac{-\\ln(0.75)}{3} = \\frac{0.288}{3} \\approx 0.096 \\text{ hours} \\approx 5.8 \\text{ minutes}$$
+
+Why it happens: solving $1 - e^{-\\lambda x_p} = p$ gives $e^{-\\lambda x_p} = 1 - p$, and it is easy to set $e^{-\\lambda x_p}$ equal to $p$ instead. That solves $P(X > x_p) = p$, so every quantile is swapped with its mirror: the wrong 25th percentile is the true 75th.
+
+How to check: a 25th percentile must lie below the median, here 13.9 minutes, and 27.7 minutes lies above it. Substituting back confirms the right answer: $F(0.096) = 1 - e^{-0.288} \\approx 0.25$.
+
+**Dropping the condition**
+
+The chance of waiting more than $t$ longer, given that $s$ has already passed, is $P(X > s + t \\mid X > s)$. It is computed as the unconditional $P(X > s + t)$.
+
+Wrong working: customers arrive at $\\lambda = 3$ per hour, which is $0.05$ per minute. After 20 minutes without a customer, the chance of waiting more than 10 further minutes is taken as
+$$P(X > 30 \\mid X > 20) = P(X > 30) = e^{-0.05 \\cdot 30} = e^{-1.5} \\approx 0.223$$
+
+Right working: divide by the probability of the condition.
+$$P(X > 30 \\mid X > 20) = \\frac{P(X > 30)}{P(X > 20)} = \\frac{e^{-1.5}}{e^{-1}} = e^{-0.5} \\approx 0.607$$
+This equals $P(X > 10)$, as the memoryless property says.
+
+Why it happens: the event $X > 30$ already includes $X > 20$, so "both happen" shrinks to $X > 30$, and the division by $P(X > 20)$, the step that makes the probability conditional, is left out.
+
+How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so the conditional probability must exceed $P(X > 30) \\approx 0.223$. By the memoryless property it must also equal the chance that a fresh wait exceeds 10 minutes.`,
+      before:``,
+      after:``,
+      link:'',
+    },
      links:{
   
       title:``,
@@ -2010,10 +2090,10 @@ The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n,
       after:``,
       link:'',
       examples:`
-         @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Exponential](!/probability/distributions/continuous/uniform#12) →@
+         @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See More Examples of Exponential](!/probability/distributions/continuous/exponential#12) →@
             `,
                calculators:`            
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Discrete Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Continuous Distributions Probability Calculators ](!/probability/calculators/continuous-distributions) →@
         `,
   
     },
@@ -2379,6 +2459,14 @@ export default function ExponentialDistributionPage({
           sectionsContent.capstone.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj18.title,
+        link:sectionsContent.obj18.link,
+        content:[
+          sectionsContent.obj18.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

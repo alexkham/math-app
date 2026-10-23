@@ -1087,7 +1087,7 @@ There are exactly $n$ possibilities, and no remainder can reach $n$ itself — i
 
 When $n = 2$, every integer produces a remainder of $0$ or $1$. This is the basis of even and odd: even numbers give $0$, odd numbers give $1$.
 
-When $n = 10$, every integer produces a remainder between $0$ and $9$. That remainder is the last digit of the number — $347 \\bmod 10 = 7$, read directly from the ones place.
+When $n = 10$, every integer produces a remainder between $0$ and $9$. For a non-negative number, that remainder is its last digit — $347 \\bmod 10 = 7$, read directly from the ones place.
 
 When $n = 7$, every integer maps to one of seven remainders: $\\{0, 1, 2, 3, 4, 5, 6\\}$. No matter how large the dividend grows — thousands, millions, billions — the remainder when divided by $7$ never escapes this set.
 
@@ -1099,11 +1099,17 @@ The modulo operation compresses the entire number line into a finite set of $n$ 
 
 obj51: {
   title: `How to Compute a Remainder`,
-  content: `To find $a \\bmod n$, divide $a$ by $n$, discard the fractional part of the quotient, multiply back, and subtract. The gap between the original number and the nearest multiple of $n$ below it is the remainder.
+  content: `To find $a \\bmod n$, divide $a$ by $n$, discard the fractional part of the quotient, multiply back, and subtract. The gap between the original number and the nearest multiple of $n$ at or below it is the remainder.
 
 For $47 \\bmod 5$: divide $47 \\div 5 = 9.4$. The integer part is $9$. Multiply back: $9 \\times 5 = 45$. Subtract: $47 - 45 = 2$. The remainder is $2$.
 
 For $123 \\bmod 7$: divide $123 \\div 7 = 17.57\\ldots$. The integer part is $17$. Multiply back: $17 \\times 7 = 119$. Subtract: $123 - 119 = 4$. The remainder is $4$.
+
+@academic[pitfall,aside:true,width:35%:Reading the decimal part as the remainder
+Taking the $4$ in $47 \\div 5 = 9.4$ as the remainder gives $47 \\bmod 5 = 4$. The $0.4$ is a fraction of $5$, not a count of units: $0.4 \\cdot 5 = 2$, so $47 \\bmod 5 = 2$.
+[Read more](!#pitfalls)]@
+
+The decimal quotient is only a step on the way to the answer. Its integer part counts the complete copies of $n$ inside $a$, and multiplying back turns that count into the largest multiple of $n$ that fits. Only the subtraction measures the leftover in whole units, and that whole-number leftover is what modulo returns.
 
 The procedure has a compact formula using the floor function $\\lfloor x \\rfloor$, which gives the greatest integer less than or equal to $x$:
 
@@ -1122,11 +1128,17 @@ obj61: {
   title: `Edge Cases`,
   content: `Three cases deserve attention before the operation is applied routinely.
 
-When $a < n$, the divisor exceeds the dividend and fits zero times. The entire value of $a$ is the remainder: $3 \\bmod 10 = 3$, $0 \\bmod 5 = 0$, $6 \\bmod 7 = 6$. If $0 \\leq a < n$, then $a \\bmod n = a$ — the number already lies within the remainder set and needs no reduction.
+When $0 \\leq a < n$, the divisor exceeds the dividend and fits zero times. The entire value of $a$ is the remainder: $3 \\bmod 10 = 3$, $0 \\bmod 5 = 0$, $6 \\bmod 7 = 6$. If $0 \\leq a < n$, then $a \\bmod n = a$ — the number already lies within the remainder set and needs no reduction.
+
+@academic[pitfall,aside:true,width:35%:Giving the quotient instead of the remainder
+Answering $3 \\bmod 10 = 0$, because $10$ fits into $3$ zero times, reports the quotient. Modulo asks for what is left over, and all of $3$ is left: $3 \\bmod 10 = 3$.
+[Read more](!#pitfalls)]@
+
+Here the division equation takes the form $a = n \\cdot 0 + a$. The quotient is $0$ because no complete copy of $n$ fits, and nothing is taken away from $a$ before the remainder is read. The two parts of the equation say different things: the quotient that $n$ is too large to fit even once, the remainder how much of $a$ is left over.
 
 When $n = 1$, every integer is a multiple of $1$, so the remainder is always $0$. The expression $a \\bmod 1 = 0$ for any integer $a$. The remainder set $\\{0, 1, \\ldots, n-1\\}$ collapses to $\\{0\\}$.
 
-When $n = 0$, the operation is undefined. Division by zero has no meaning, and "the remainder when dividing by zero" inherits that meaninglessness. No quotient $q$ satisfies $a = 0 \\cdot q + r$, because $0 \\cdot q = 0$ regardless of $q$. In programming, attempting $a \\% \\; 0$ raises a runtime error.`,
+When $n = 0$, the operation is undefined. Division by zero has no meaning, and "the remainder when dividing by zero" inherits that meaninglessness. Every $q$ satisfies $a = 0 \\cdot q + r$ with $r = a$, because $0 \\cdot q = 0$ regardless of $q$, so the quotient is not unique, and no remainder can satisfy $0 \\leq r < 0$. In programming, attempting $a \\% \\; 0$ raises a runtime error.`,
   before: ``,
   after: ``,
   link: '',
@@ -1159,6 +1171,10 @@ The expression $17 \\equiv 5 \\pmod{12}$ holds because $17 \\bmod 12 = 5$ and $5
 
 The expression $23 \\equiv 2 \\pmod{7}$ holds because $23 \\bmod 7 = 2$ and $2 \\bmod 7 = 2$. Both leave a remainder of $2$.
 
+@academic[pitfall,aside:true,width:35%:Confusing mod with congruence
+Writing $17 \\bmod 5 = 7$ because $17 \\equiv 7 \\pmod{5}$ treats the relation as the operation. The value of $17 \\bmod 5$ is one number in $\\{0, 1, 2, 3, 4\\}$: $17 \\bmod 5 = 2$, while $17 \\equiv 7 \\pmod{5}$ is a true statement.
+[Read more](!#pitfalls)]@
+
 An equivalent way to test congruence: $a \\equiv b \\pmod{n}$ if and only if $n \\mid (a - b)$ — their difference is divisible by $n$. For the first example, $17 - 5 = 12$, and $12 \\mid 12$. For the second, $23 - 2 = 21$, and $7 \\mid 21$.
 
 Congruence is not a new operation. It is a way of saying "same remainder" — a relationship between two numbers with respect to a shared divisor.`,
@@ -1189,6 +1205,10 @@ These properties mean congruence partitions the integers into groups — called 
 obj7: {
   title: `The Clock Analogy`,
   content: `A $12$-hour clock is modular arithmetic made physical. After $12$ o'clock comes $1$ o'clock, not $13$ — the numbers wrap around.
+
+@academic[pitfall,aside:true,width:35%:Writing the modulus instead of 0
+Reading the dial gives $24 \\bmod 12 = 12$, since the hand points at $12$. A remainder is always less than $12$: $24 = 12 \\cdot 2 + 0$, so $24 \\bmod 12 = 0$, the position the dial labels $12$.
+[Read more](!#pitfalls)]@
 
 The time $15{:}00$ on a $24$-hour clock translates to $3{:}00$ on a $12$-hour clock: $15 \\bmod 12 = 3$. The time $27$ hours from midnight is $3{:}00$ AM: $27 \\bmod 12 = 3$. Different numbers, same position on the dial.
 
@@ -1285,6 +1305,61 @@ The [GCD](!/arithmetic/divisibility/gcd) — greatest common divisor — relies 
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes account for many wrong remainders. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading the decimal part as the remainder**
+
+A calculator divides $47$ by $5$ and shows $9.4$. The digits after the decimal point are read off as the remainder, as if $9.4$ meant "$9$ remainder $4$".
+
+Wrong working: $47 \\div 5 = 9.4$, so $47 \\bmod 5 = 4$.
+
+Right working: keep the integer part $9$, multiply back, $9 \\times 5 = 45$, and subtract, $47 - 45 = 2$. So $47 \\bmod 5 = 2$, and indeed $47 = 5 \\cdot 9 + 2$.
+
+Why it happens: "$9$ remainder $4$" and $9.4$ look alike, and the decimal point is read as a separator between quotient and remainder. The decimal part is a fraction of the divisor: $0.4$ of $5$ is $2$.
+
+How to check: put the answer into the division equation. $5 \\cdot 9 + 4 = 49$, not $47$, so $4$ cannot be the remainder; $5 \\cdot 9 + 2 = 47$ confirms $2$.
+
+**Giving the quotient instead of the remainder**
+
+When the dividend is smaller than the divisor, the divisor fits zero times, and that $0$ is given as the answer. The $0$ is the quotient; modulo asks for the remainder.
+
+Wrong working: $10$ goes into $3$ zero times, so $3 \\bmod 10 = 0$.
+
+Right working: $3 = 10 \\cdot 0 + 3$ with $0 \\leq 3 < 10$, so the quotient is $0$ and the remainder is $3$. So $3 \\bmod 10 = 3$.
+
+Why it happens: the first number found in a division is how many times the divisor fits, and "zero times" feels like the end of the work.
+
+How to check: a remainder of $0$ means that $n$ divides $a$. Since $10 \\nmid 3$, the answer cannot be $0$. More generally, if $0 \\leq a < n$, then $a \\bmod n = a$.
+
+**Confusing mod with congruence**
+
+Any number congruent to $a$ modulo $n$ is given as the value of $a \\bmod n$. The congruence $a \\equiv b \\pmod{n}$ holds for many values of $b$, but the operation $a \\bmod n$ returns exactly one number.
+
+Wrong working: $17 - 7 = 10$ is divisible by $5$, so $17 \\equiv 7 \\pmod{5}$, and therefore $17 \\bmod 5 = 7$.
+
+Right working: $17 = 5 \\cdot 3 + 2$ with $0 \\leq 2 < 5$, so $17 \\bmod 5 = 2$. The congruence $17 \\equiv 7 \\pmod{5}$ is also true, because $7 \\bmod 5 = 2$ as well: both numbers land on the remainder $2$.
+
+Why it happens: both use the word "mod", and $17 \\equiv 7 \\pmod{5}$ read aloud sounds almost like "$17$ mod $5$ is $7$".
+
+How to check: the value of $a \\bmod n$ must lie in $\\{0, 1, \\ldots, n-1\\}$. For $n = 5$ that set is $\\{0, 1, 2, 3, 4\\}$, and $7$ is not in it.
+
+**Writing the modulus instead of 0**
+
+A clock face has $12$ at the top, so a count that lands exactly on the top of the dial is given as $12$. In modulo arithmetic that position is the remainder $0$.
+
+Wrong working: at hour $24$ the hour hand points at $12$, so $24 \\bmod 12 = 12$.
+
+Right working: $24 = 12 \\cdot 2 + 0$, so $24 \\bmod 12 = 0$. The remainder set for $n = 12$ is $\\{0, 1, \\ldots, 11\\}$, and the dial's $12$ stands in for $0$.
+
+Why it happens: everyday clocks never show $0$, and the label on the dial is taken as the remainder.
+
+How to check: a remainder is always less than the modulus. An answer equal to $n$ means one more complete copy of $n$ can still be taken away.`,
+      before:``,
+      after:``,
+      link:'',
     }
   
   }
@@ -1623,6 +1698,14 @@ export default function ModuloPage({moduloDivisibilityCases, seoData, sectionsCo
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     {

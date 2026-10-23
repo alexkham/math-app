@@ -875,6 +875,8 @@ import functionRangeDiagrams from '@/app/components/functions/range/functionRang
 import functionTransformationsDiagrams from '@/app/components/functions/transformations/functionTransformationsDiagrams'
 import functionInverseDiagrams from '@/app/components/functions/inverse/functionInverseDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1072,7 +1074,7 @@ export async function getStaticProps(){
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Behavior analysis</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">extrema, monotonicity, or end behavior is clear</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">find min/max; check end limits and asymptotes</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">strictly increasing on [a, b] → range [f(a), f(b)]</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">continuous, strictly increasing on [a, b] → range [f(a), f(b)]</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Graphical reading</td>
@@ -1215,6 +1217,12 @@ $$x = 3 + \\frac{1}{y}$$]@
 
 This requires $y \\neq 0$. The range is $(-\\infty, 0) \\cup (0, \\infty)$.
 
+@academic[pitfall,aside:true,width:35%:Forgetting that a square root is never negative
+Solving $y = \\sqrt{x}$ to $x = y^2$ and stopping gives range $(-\\infty, \\infty)$, since every $y$ yields an $x$. Yet $y = -2$ gives $x = 4$, and $\\sqrt{4} = 2$, not $-2$. The range is $[0, \\infty)$.
+[Read more](!#pitfalls)]@
+
+Radical functions need one extra step in this method. Solving $y = \\sqrt{x - 1}$ for $x$ means squaring both sides, which gives $x = y^2 + 1$, a formula that produces a real $x$ for every real $y$. The squared equation and the original are not the same statement: the original also carries the sign of the square root, which the solved form no longer shows.
+
 The method works well for rational, quadratic, and simple radical functions. For more complex functions, other approaches may be needed.`,
     before: ``,
     after: ``,
@@ -1225,9 +1233,15 @@ The method works well for rational, quadratic, and simple radical functions. For
     title: `Finding Range by Analyzing Behavior`,
     content: `Understanding how a function behaves — its extrema, its trends, its limits — reveals its range without explicit algebraic solving.
 
-A function with an absolute minimum $m$ and no upper bound has range $[m, \\infty)$. A function with an absolute maximum $M$ and no lower bound has range $(-\\infty, M]$. A function bounded both above and below has range contained in some interval $[m, M]$.
+A continuous function on an interval with an absolute minimum $m$ and no upper bound has range $[m, \\infty)$. Such a function with an absolute maximum $M$ and no lower bound has range $(-\\infty, M]$. A function bounded both above and below has range contained in some interval $[m, M]$.
 
-Monotonic functions — those that only increase or only decrease — are easier to analyze. A strictly increasing function on domain $[a, b]$ has range $[f(a), f(b)]$. A strictly decreasing function on $[a, b]$ has range $[f(b), f(a)]$.
+Monotonic functions — those that only increase or only decrease — are easier to analyze. A continuous, strictly increasing function on domain $[a, b]$ has range $[f(a), f(b)]$. A continuous, strictly decreasing function on $[a, b]$ has range $[f(b), f(a)]$.
+
+@academic[pitfall,aside:true,width:35%:Using only the endpoint outputs
+Taking $f(x) = x^2$ on $[-1, 3]$ to have range $[f(-1), f(3)] = [1, 9]$ misses the vertex inside the interval, where $f(0) = 0$. The range is $[0, 9]$.
+[Read more](!#pitfalls)]@
+
+On a restricted domain $[a, b]$, the two endpoint outputs $f(a)$ and $f(b)$ always belong to the range, since both endpoints are inputs. What lies between them depends on how the function moves across the interval: it may rise steadily, fall steadily, or turn one or more times before it reaches the far end.
 
 End behavior determines whether the range extends to infinity. If $f(x) \\to \\infty$ as $x \\to \\infty$, the range has no upper bound. If $f(x) \\to -\\infty$ as $x \\to -\\infty$, the range has no lower bound.
 
@@ -1265,6 +1279,12 @@ Linear functions $f(x) = mx + b$ with $m \\neq 0$ have range $(-\\infty, \\infty
 
 Quadratic functions $f(x) = ax^2 + bx + c$ have range $[k, \\infty)$ when $a > 0$ and $(-\\infty, k]$ when $a < 0$, where $k$ is the $y$-coordinate of the vertex.
 
+@academic[pitfall,aside:true,width:35%:Taking the constant term as the vertex height
+For $f(x) = x^2 - 4x + 1$, reading the range as $[1, \\infty)$ uses $f(0) = 1$, the $y$-intercept. The vertex is at $x = 2$, with $f(2) = 4 - 8 + 1 = -3$, so the range is $[-3, \\infty)$.
+[Read more](!#pitfalls)]@
+
+For a quadratic in standard form, the vertex height $k$ does not appear in the formula; it has to be computed. The vertex sits at $x = -\\dfrac{b}{2a}$, and substituting that input back into $f$ gives its height. Completing the square reaches the same number by rewriting the function as $a(x - h)^2 + k$.
+
 Absolute value functions $f(x) = |x|$ have range $[0, \\infty)$. The output is never negative.
 
 Square root functions $f(x) = \\sqrt{x}$ have range $[0, \\infty)$. Cube root functions $f(x) = \\sqrt[3]{x}$ have range $(-\\infty, \\infty)$.
@@ -1293,6 +1313,10 @@ Vertical reflection flips the range. If $f(x)$ has range $[a, b]$, then $-f(x)$ 
 
 Horizontal transformations — shifts, stretches, reflections in the $y$-axis — do not change the range directly. They change which $x$-values produce which outputs, but not the collection of outputs itself. A horizontal shift moves the graph left or right without altering its vertical extent.
 
+@academic[pitfall,aside:true,width:35%:Shifting before scaling
+For $g(x) = 2\\sin(x) + 5$, adding $5$ to $[-1, 1]$ first and then doubling gives $[8, 12]$. Each output is $2y + 5$ with $y$ in $[-1, 1]$, running from $2(-1) + 5 = 3$ to $2(1) + 5 = 7$: the range is $[3, 7]$.
+[Read more](!#pitfalls)]@
+
 Combining transformations requires tracking each effect. For $g(x) = 2f(x - 3) + 5$, the range of $f$ is first scaled by $2$, then shifted up by $5$. The horizontal shift by $3$ does not affect the range.
 
 The table below collects each vertical transformation's effect on a known range $[a, b]$, with horizontal transformations listed as a single row to make explicit that they leave the range untouched.`,
@@ -1307,13 +1331,13 @@ The table below collects each vertical transformation's effect on a known range 
 
 A function modeling height produces only non-negative outputs. A ball thrown upward cannot have negative height (assuming ground level is zero). The range is bounded below by $0$ and above by the maximum height reached.
 
-A function modeling population produces positive integers — or positive real numbers if continuous approximation is acceptable. Population cannot be negative, and zero means extinction.
+A function modeling population produces non-negative integers — or non-negative real numbers if continuous approximation is acceptable. Population cannot be negative, and zero means extinction.
 
 Probabilities lie between $0$ and $1$ inclusive. A function giving probability as output has range contained in $[0, 1]$.
 
 Percentages lie between $0$ and $100$. Temperatures may have physical lower bounds (absolute zero) or practical bounds from the context.
 
-Context can also reveal the range conceptually. If $C(x)$ represents the cost of producing $x$ items and includes a fixed startup cost of $\\$500$, then the range begins at $500$ or higher, not at zero.
+Context can also reveal the range conceptually. If $C(x)$ represents the cost of producing $x$ items and includes a fixed startup cost of 500 dollars, then the range begins at $500$ or higher, not at zero.
 
 Interpreting the range means translating mathematical bounds into real-world meaning. "The range is $[0, 256]$" might mean "the brightness level varies from completely dark to maximum intensity."`,
     before: ``,
@@ -1344,6 +1368,62 @@ Understanding this relationship is essential for correctly defining and working 
   obj11: {
     title: `Summary of Methods for Finding Range`,
     content: `Six different paths lead to a function's range: algebraic inversion, behavior analysis, graphical reading, family recognition, contextual constraints, and the domain–range swap of an inverse. Which method fits depends on how the function is presented and what is already known about it. The table below collects each approach with the situation that calls for it, how the method works, and a small example — useful as a study guide and as a checklist when a single method does not yield a clean answer.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when finding the range of a function. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Forgetting that a square root is never negative**
+
+The algebraic method is applied to a radical function: the equation $y = f(x)$ is squared to solve for $x$, and the range is read from the solved form alone. Squaring hides the fact that a square root only produces non-negative outputs.
+
+Wrong working: $y = \\sqrt{x}$ gives $x = y^2$. This produces a real $x$ for every real $y$, so the range is given as $(-\\infty, \\infty)$.
+
+Right working: the original equation also requires $y \\geq 0$, because $\\sqrt{x}$ is never negative. Every $y \\geq 0$ is reached, at $x = y^2$, so the range is $[0, \\infty)$.
+
+Why it happens: the solved form looks like the end of the method, and squaring both sides feels like a harmless step. It is not reversible: $y = 2$ and $y = -2$ both square to $4$.
+
+How to check: substitute the solved $x$ back into the original function. For $y = -2$, $x = 4$, and $\\sqrt{4} = 2$, not $-2$, so $-2$ is not in the range.
+
+**Using only the endpoint outputs**
+
+On a restricted domain $[a, b]$, the range is taken to be the interval between $f(a)$ and $f(b)$. That rule holds for monotonic functions only; a function that turns inside the interval can go higher or lower than both endpoints.
+
+Wrong working: $f(x) = x^2$ on $[-1, 3]$ has $f(-1) = 1$ and $f(3) = 9$, so the range is given as $[1, 9]$.
+
+Right working: the parabola falls from $x = -1$ to its vertex at $x = 0$ and then rises to $x = 3$. The lowest output is $f(0) = 0$ and the highest is $f(3) = 9$, so the range is $[0, 9]$.
+
+Why it happens: the endpoint rule is quick and correct for the increasing and decreasing functions it is usually taught with, and a sketch is often skipped.
+
+How to check: look for turning points inside the interval. Compare the outputs there with the endpoint outputs, and take the smallest and largest of all of them.
+
+**Taking the constant term as the vertex height**
+
+For a quadratic $ax^2 + bx + c$, the number $c$ is used as the boundary of the range. But $c = f(0)$ is the $y$-intercept, and the boundary of the range is the height of the vertex.
+
+Wrong working: $f(x) = x^2 - 4x + 1$ opens upward, and its range is given as $[1, \\infty)$.
+
+Right working: the vertex is at $x = -\\dfrac{-4}{2 \\cdot 1} = 2$, and $f(2) = 4 - 8 + 1 = -3$. The range is $[-3, \\infty)$. Completing the square agrees: $x^2 - 4x + 1 = (x - 2)^2 - 3$.
+
+Why it happens: in vertex form $a(x - h)^2 + k$ the constant at the end is the vertex height, and that reading is carried over to standard form, where the constant means something else.
+
+How to check: evaluate the function at one more input, such as the vertex. Here $f(2) = -3$ is an output below $1$, so $[1, \\infty)$ cannot be the range.
+
+**Shifting before scaling**
+
+When a function is both stretched and shifted vertically, the shift is applied to the range first and the stretch second. The stretch then scales the shift as well.
+
+Wrong working: for $g(x) = 2\\sin(x) + 5$, the range $[-1, 1]$ of $\\sin$ is shifted to $[4, 6]$ and then doubled to $[8, 12]$.
+
+Right working: the formula doubles each output and then adds $5$. Doubling gives $[-2, 2]$, and adding $5$ gives $[3, 7]$.
+
+Why it happens: the $+5$ is the easiest part of the formula to spot, so it is handled first, without checking the order in which the formula actually acts on an output.
+
+How to check: compute the outputs at the extremes of the parent. $\\sin(x) = 1$ gives $2(1) + 5 = 7$, and $\\sin(x) = -1$ gives $2(-1) + 5 = 3$; $12$ never appears.`,
     before: ``,
     after: ``,
     link: '',
@@ -1521,8 +1601,42 @@ const faqQuestions = {
     }),
   };
 
+  const rangeByTypeOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Ranges of the common families',
+    preface: 'Knowing the family tells you the range before any calculation. Here is the range of each common function type.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Recognise the family first',
+    conclusion: 'Identify the family, read off its basic range, then adjust for any [transformations](!/functions/transformations).',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Range by function type', children: [
+        { id: 'alg', name: 'Polynomial and absolute value', children: [
+          { id: 'const', name: 'Constant', def: 'f(x) = c', example: '{c}' },
+          { id: 'lin', name: 'Linear', def: 'mx + b, m ≠ 0', example: '(−∞, ∞)' },
+          { id: 'qup', name: 'Quadratic, a > 0', def: 'vertex at height k', example: '[k, ∞)' },
+          { id: 'qdn', name: 'Quadratic, a < 0', def: 'vertex at height k', example: '(−∞, k]' },
+          { id: 'abs', name: 'Absolute value', def: '|x|', example: '[0, ∞)' },
+        ] },
+        { id: 'rt', name: 'Roots', children: [
+          { id: 'sqrt', name: 'Square root', def: '√x', example: '[0, ∞)' },
+          { id: 'cbrt', name: 'Cube root', def: '∛x', example: '(−∞, ∞)' },
+        ] },
+        { id: 'el', name: 'Exponential and logarithmic', children: [
+          { id: 'exp', name: 'Exponential', def: 'aˣ', example: '(0, ∞)' },
+          { id: 'log', name: 'Logarithmic', def: 'logₐ x', example: '(−∞, ∞)' },
+        ] },
+        { id: 'tg', name: 'Trigonometric', children: [
+          { id: 'sincos', name: 'Sine and cosine', example: '[−1, 1]' },
+          { id: 'tan', name: 'Tangent', example: '(−∞, ∞)' },
+        ] },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    rangeByTypeOutline,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1543,7 +1657,7 @@ const faqQuestions = {
     }
    }
 
-export default function RangePage({
+export default function RangePage({rangeByTypeOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1653,6 +1767,14 @@ export default function RangePage({
           />,
                   <div key={'unit-absolute'} dangerouslySetInnerHTML={{ __html: demoUnits.absolute }} />,
           `Recognising the family is often the fastest route to the range.`,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="range-by-type-outline"
+            title="Range of each common function type"
+            source="/functions/range"
+          >
+            <TaxonomyOutline data={rangeByTypeOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1686,6 +1808,14 @@ export default function RangePage({
           sectionsContent.obj10.content,
           <div key={'unit-swap'} dangerouslySetInnerHTML={{ __html: demoUnits.swap }} />,
           `Finding one function's range therefore also finds its inverse's domain.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     {

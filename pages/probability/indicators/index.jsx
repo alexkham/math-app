@@ -959,7 +959,7 @@ An indicator is **not** a probability value; it is a random variable whose value
   
       title:`Basic Properties of Indicator Random Variables`,
       content:`
-Indicator [random variable](!/probability/random-variables) have a simple structure.
+Indicator [random variables](!/probability/random-variables) have a simple structure.
 
 • They take only two values: $0$ or $1$
 • They are completely determined by the event they represent
@@ -982,6 +982,12 @@ $$I_{A^c} = 1 - I_A$$
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Adding indicators for a union
+Writing $I_{A \\cup B} = I_A + I_B$ for one die roll, with $A$ = even and $B$ = at least 4, gives the value $2$ at $\\omega = 4$ and $P(A \\cup B) = \\frac{1}{2} + \\frac{1}{2} = 1$. The overlap comes off once: $I_{A \\cup B} = I_A + I_B - I_A I_B$, so $P(A \\cup B) = 1 - \\frac{1}{3} = \\frac{2}{3}$.
+[Read more](!#pitfalls)]@
+
+A union is built from the two formulas above. An outcome lies outside $A \\cup B$ exactly when it lies outside both events, so $I_{(A \\cup B)^c} = (1 - I_A)(1 - I_B)$. Taking the complement once more writes the indicator of the union in terms of $I_A$, $I_B$ and their product.
 
 Because an indicator takes only the values $0$ and $1$, its variance is fixed by the probability of the event:
 
@@ -1051,6 +1057,10 @@ Many counting problems can be expressed as sums of indicator random variables.
 Each object or outcome is associated with an indicator that takes the value $1$ if a specified condition is met and $0$ otherwise.  
 The total count is obtained by summing these indicators.
 
+@academic[pitfall,aside:true,width:35%:Subtracting the overlap from a count
+Removing the overlap as for a union gives, for the number of sixes on two dice, $\\frac{1}{6} + \\frac{1}{6} - \\frac{1}{36} = \\frac{11}{36}$, the probability of at least one six. A double six adds $2$ to the count, so the expected number is $\\frac{1}{6} + \\frac{1}{6} = \\frac{1}{3}$.
+[Read more](!#pitfalls)]@
+
 This approach converts counting questions into expectation calculations and allows results to be obtained without enumerating all outcomes or computing complex probabilities.
 `,
       before:``,
@@ -1065,6 +1075,10 @@ Indicator [random variables](!/probability/random-variables) may be dependent.
 
 @academic[rule_plain:Dependence does not affect the validity of linearity of expectation, so expectations of sums of indicators can still be computed term by term.]@
 
+
+@academic[pitfall,aside:true,width:35%:Adding variances of dependent indicators
+For one coin toss with $A$ = heads, adding $\\operatorname{Var}(I_A) + \\operatorname{Var}(I_{A^c}) = \\frac{1}{4} + \\frac{1}{4}$ gives $\\frac{1}{2}$. But $I_A + I_{A^c} = 1$ on every outcome, so its variance is $0$: the covariance $-\\frac{1}{4}$, counted twice, cancels the sum.
+[Read more](!#pitfalls)]@
 
 However, dependence becomes important when higher-order quantities such as variance are considered.
 
@@ -1132,6 +1146,56 @@ Indicators function as a structural tool in probability theory, linking events, 
       after:``,
       link:'',
   
+    },
+    pitfalls:{
+      title:`Common Pitfalls`,
+      content:`Each of the three mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Adding indicators for a union**
+
+The indicator of $A \\cup B$ is needed, and $I_A + I_B$ is written for it. On outcomes that lie in both events the sum equals $2$, so it is not an indicator at all, and its expectation overstates the probability of the union.
+
+Wrong working: for one roll of a fair die with $A = \\{2, 4, 6\\}$ (even) and $B = \\{4, 5, 6\\}$ (at least 4),
+$$P(A \\cup B) = E[I_A + I_B] = \\frac{3}{6} + \\frac{3}{6} = 1$$
+
+Right working: the overlap is removed once, using the product rule for the intersection.
+$$I_{A \\cup B} = I_A + I_B - I_A I_B, \\quad P(A \\cup B) = \\frac{3}{6} + \\frac{3}{6} - \\frac{2}{6} = \\frac{4}{6} = \\frac{2}{3}$$
+
+Why it happens: "or" reads like "plus", and for disjoint events the sum is correct, because $I_A I_B = 0$ on every outcome there. Overlapping events break it.
+
+How to check: evaluate the formula at an outcome in both events. An indicator must give $1$, while $I_A + I_B$ gives $2$ at $\\omega = 4$. Or count directly: $A \\cup B = \\{2, 4, 5, 6\\}$ holds $4$ of the $6$ outcomes.
+
+**Subtracting the overlap from a count**
+
+The expected number of events that occur is computed like the probability of their union: the probabilities are added and the overlap is subtracted. That gives the probability that at least one event occurs, which is a different quantity.
+
+Wrong working: for $X$, the number of sixes on two fair dice,
+$$E[X] = \\frac{1}{6} + \\frac{1}{6} - \\frac{1}{36} = \\frac{11}{36}$$
+
+Right working: $X = I + J$, with one indicator per die, and linearity needs no correction for the overlap.
+$$E[X] = E[I] + E[J] = \\frac{6}{36} + \\frac{6}{36} = \\frac{12}{36} = \\frac{1}{3}$$
+
+Why it happens: the double six looks counted twice, as in inclusion–exclusion. For a count that is right: on $(6, 6)$ there really are two sixes, and $X = 2$.
+
+How to check: work out the distribution once. $X = 1$ on $10$ of the $36$ outcomes and $X = 2$ on $1$, so $E[X] = 1 \\cdot \\frac{10}{36} + 2 \\cdot \\frac{1}{36} = \\frac{12}{36}$.
+
+**Adding variances of dependent indicators**
+
+The variance of a sum of indicators is taken as the sum of their variances, as if the rule for expectation carried over. That holds only when every covariance between the indicators is zero, for example when they are independent.
+
+Wrong working: for one toss of a fair coin with $A$ = heads,
+$$\\operatorname{Var}(I_A + I_{A^c}) = \\frac{1}{2} \\cdot \\frac{1}{2} + \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{2}$$
+
+Right working: $I_A I_{A^c} = 0$ on every outcome, so $\\operatorname{Cov}(I_A, I_{A^c}) = E[I_A I_{A^c}] - E[I_A]E[I_{A^c}] = 0 - \\frac{1}{4} = -\\frac{1}{4}$, and
+$$\\operatorname{Var}(I_A + I_{A^c}) = \\frac{1}{4} + \\frac{1}{4} + 2\\left(-\\frac{1}{4}\\right) = 0$$
+
+Why it happens: linearity of expectation needs no independence, and the same habit is carried over to variance, which is not linear.
+
+How to check: by the complement rule, $I_A + I_{A^c} = I_A + (1 - I_A) = 1$ on every outcome, and a constant has variance $0$.`,
+      before:``,
+      after:``,
+      link:'',
+
     },
     obj12:{
       title:``,
@@ -1361,6 +1425,14 @@ export default function IndicatorsPage({
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:'',
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

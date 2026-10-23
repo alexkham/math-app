@@ -364,6 +364,12 @@ For example:
 
 @academic[formula_callout:Sum and Difference Rules
 $$\\int (x^3 + \\sin x)\\, dx = \\int x^3\\, dx + \\int \\sin x\\, dx = \\frac{x^4}{4} - \\cos x + C$$]@
+
+@academic[pitfall,aside:true,width:35%:Splitting a product like a sum
+Integrating each factor of $\\int x \\cdot x\\, dx$ separately gives $\\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$, whose derivative is $x^3$, not $x^2$. Multiplying first, $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
+[Read more](!#pitfalls)]@
+
+In the example the two terms are integrated independently: $x^3$ by the power rule and $\\sin x$ from the trigonometric formulas, and the two results are simply added, with one constant for the whole answer. The sum rule is what allows this, and it holds because differentiation splits over sums in the same way: $(F + G)' = F' + G'$.
 `,
     before: ``,
     after: ``,
@@ -392,6 +398,12 @@ Combined with the sum rule, linearity handles any linear combination:
 
 @academic[formula_callout:Constant Multiple Rule
 $$\\int [af(x) + bg(x)]\\, dx = a\\int f(x)\\, dx + b\\int g(x)\\, dx$$]@
+
+@academic[pitfall,aside:true,width:35%:Pulling a variable out of the integral
+Moving $x$ out of $\\int x \\cos x\\, dx$ gives $x \\sin x + C$, whose derivative is $\\sin x + x \\cos x$. Only constants come out; the correct result, by integration by parts, is $x \\sin x + \\cos x + C$.
+[Read more](!#pitfalls)]@
+
+The coefficients $a$ and $b$ here are fixed numbers, like the $7$ in the example above. Once they are taken out, what remains inside each integral is a single function, and the work reduces to finding $\\int f(x)\\, dx$ and $\\int g(x)\\, dx$ separately and combining the two results with the same coefficients.
 `,
     before: ``,
     after: ``,
@@ -408,6 +420,10 @@ $$\\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx = \\int_a^c f(x)\\, dx$$
 
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Not splitting where the formula changes
+Integrating $|x|$ on $[-1, 2]$ with the single antiderivative $\\frac{x^2}{2}$ gives $2 - \\frac{1}{2} = \\frac{3}{2}$. Splitting at $0$: $\\int_{-1}^0 (-x)\\, dx + \\int_0^2 x\\, dx = \\frac{1}{2} + 2 = \\frac{5}{2}$.
+[Read more](!#pitfalls)]@
 
 This property allows splitting an integral at any intermediate point. It proves essential for piecewise functions, where different formulas apply on different subintervals.
 
@@ -463,6 +479,10 @@ $$\\frac{d}{dx}\\left[\\int_a^x f(t)\\, dt\\right] = f(x) \\quad \\text{when } f
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Subtracting the lower limit in Part 1
+Mixing Part 1 with Part 2 gives $\\frac{d}{dx}\\int_1^x t^2\\, dt = x^2 - 1$. The integral is $\\frac{x^3}{3} - \\frac{1}{3}$, and the constant $-\\frac{1}{3}$ differentiates to $0$, so the derivative is $x^2$.
+[Read more](!#pitfalls)]@
+
 Differentiation undoes integration. The rate of change of accumulated area equals the integrand's value at the boundary.
 
 This result establishes that every continuous function has an antiderivative—namely, its accumulation function. The theorem guarantees antiderivatives exist, even when no elementary formula expresses them.
@@ -491,6 +511,12 @@ Example:
 
 @academic[formula_callout:Fundamental Theorem of Calculus — Part 2
 $$\\int_1^3 x^2\\, dx = \\frac{x^3}{3}\\Big|_1^3 = \\frac{27}{3} - \\frac{1}{3} = \\frac{26}{3}$$]@
+
+@academic[pitfall,aside:true,width:35%:Subtracting in the wrong order
+Computing $F(1) - F(3)$ for $\\int_1^3 x^2\\, dx$ gives $\\frac{1}{3} - \\frac{27}{3} = -\\frac{26}{3}$. The upper limit comes first: $F(3) - F(1) = \\frac{26}{3}$.
+[Read more](!#pitfalls)]@
+
+The antiderivative $\\frac{x^3}{3}$ is evaluated twice, once at each endpoint, and the constant of integration is left out because it would cancel. Since $x^2 > 0$ on $[1, 3]$, the result must be positive, and $\\frac{26}{3} \\approx 8.67$ has a sensible size: the region lies under a curve that rises from height $1$ to height $9$ over a width of $2$, so its area is between $2$ and $18$.
 `,
     before: ``,
     after: ``,
@@ -556,6 +582,75 @@ These properties enable estimation when exact computation is difficult or imposs
     title: `Summary: All Integration Rules at a Glance`,
     content: `
 The rules covered in the sections above fall into three groups — algebraic rules of linearity, properties of the interval of integration, and the Fundamental Theorem in its two parts — capped by the comparison properties that govern inequalities. The master reference below collects every rule on this page in one table, with a third column flagging whether each applies to both definite and indefinite integrals or to definite integrals only. Use it as a single-glance reminder while working problems; each row points back to the section above where the rule is derived and discussed.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes cause most wrong answers when these rules are applied. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Splitting a product like a sum**
+
+The sum rule splits an integral over $+$ and $-$. The same split is applied to a product: each factor is integrated separately and the results are multiplied.
+
+Wrong working: $\\int x \\cdot x\\, dx = \\left(\\int x\\, dx\\right)\\left(\\int x\\, dx\\right) = \\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$.
+
+Right working: multiply first, $x \\cdot x = x^2$, then $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
+
+Why it happens: integrals split over sums, and the pattern is extended by analogy. Derivatives do not split over products either: $(fg)' = f'g + fg'$, not $f'g'$.
+
+How to check: differentiate. $\\left(\\frac{x^4}{4}\\right)' = x^3$, not $x^2$; $\\left(\\frac{x^3}{3}\\right)' = x^2$.
+
+**Pulling a variable out of the integral**
+
+The constant multiple rule moves a number out of the integral. A factor that depends on $x$ is moved out the same way, and only the rest is integrated.
+
+Wrong working: $\\int x \\cos x\\, dx = x \\int \\cos x\\, dx = x \\sin x + C$.
+
+Right working: the factor $x$ changes with $x$, so it has to stay inside. This integral needs [integration by parts](!/calculus/integrals/techniques), which gives $x \\sin x + \\cos x + C$.
+
+Why it happens: in $\\int c \\cdot f(x)\\, dx$ the constant stands in front of the function, just where a variable factor would stand, and the condition that $c$ does not change with $x$ is easy to overlook.
+
+How to check: differentiate. $(x \\sin x)' = \\sin x + x \\cos x$, which has an extra $\\sin x$. $(x \\sin x + \\cos x)' = \\sin x + x \\cos x - \\sin x = x \\cos x$.
+
+**Not splitting where the formula changes**
+
+An integrand whose formula changes inside the interval, such as $|x|$ on $[-1, 2]$, is integrated with one antiderivative across the whole interval.
+
+Wrong working: treat $|x|$ as $x$, so $\\int_{-1}^2 |x|\\, dx = \\frac{x^2}{2}\\Big|_{-1}^2 = 2 - \\frac{1}{2} = \\frac{3}{2}$.
+
+Right working: $|x| = -x$ on $[-1, 0]$ and $|x| = x$ on $[0, 2]$. By additivity, $\\int_{-1}^0 (-x)\\, dx + \\int_0^2 x\\, dx = \\frac{1}{2} + 2 = \\frac{5}{2}$.
+
+Why it happens: for positive $x$ the absolute value changes nothing, so the formula for positive $x$ is used everywhere.
+
+How to check: the graph of $|x|$ on $[-1, 2]$ encloses two triangles with the axis, of areas $\\frac{1}{2} \\cdot 1 \\cdot 1 = \\frac{1}{2}$ and $\\frac{1}{2} \\cdot 2 \\cdot 2 = 2$, total $\\frac{5}{2}$. The wrong working also treats $\\int_{-1}^0 x\\, dx = -\\frac{1}{2}$ as part of the integral of $|x|$, a negative piece for an integrand that is never negative.
+
+**Subtracting the lower limit in Part 1**
+
+The derivative of an accumulation function $\\int_a^x f(t)\\, dt$ is written as $f(x) - f(a)$, as if Part 1 also produced a difference of endpoint values.
+
+Wrong working: $\\frac{d}{dx}\\int_1^x t^2\\, dt = x^2 - 1^2 = x^2 - 1$.
+
+Right working: $\\int_1^x t^2\\, dt = \\frac{x^3}{3} - \\frac{1}{3}$. The second term is a constant, with derivative $0$, so $\\frac{d}{dx}\\int_1^x t^2\\, dt = x^2$. The lower limit does not appear in the answer.
+
+Why it happens: Part 2 always produces a difference $F(b) - F(a)$, and the habit of subtracting something at the lower limit carries over to Part 1.
+
+How to check: changing the lower limit only shifts the accumulation function by a constant, so it cannot change the derivative. With $a = 0$, $\\int_0^x t^2\\, dt = \\frac{x^3}{3}$, whose derivative is again $x^2$.
+
+**Subtracting in the wrong order**
+
+In Part 2 the antiderivative is evaluated at both endpoints, but the subtraction is done the wrong way round: the value at the upper limit is taken away from the value at the lower limit.
+
+Wrong working: $\\int_1^3 x^2\\, dx = F(1) - F(3) = \\frac{1}{3} - \\frac{27}{3} = -\\frac{26}{3}$. That is the value of $\\int_3^1 x^2\\, dx$, the integral with its limits reversed.
+
+Right working: $\\int_1^3 x^2\\, dx = F(3) - F(1) = \\frac{27}{3} - \\frac{1}{3} = \\frac{26}{3}$.
+
+Why it happens: the lower limit is read first, as in $[1, 3]$, so it is often evaluated first and ends up first in the subtraction.
+
+How to check: the sign. $x^2 \\geq 0$ on $[1, 3]$, so by nonnegativity the integral cannot be negative. The bounding property gives the size: between $1 \\cdot 2 = 2$ and $9 \\cdot 2 = 18$.
 `,
     before: ``,
     after: ``,
@@ -827,6 +922,14 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
           sectionsContent.obj9.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

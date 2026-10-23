@@ -1659,7 +1659,7 @@ export async function getStaticProps(){
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Horizontal scale by b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[a, b] → [a⁄b, b⁄b] (or reversed if b &lt; 0)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[p, q] → [p⁄b, q⁄b] (or reversed if b &lt; 0)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unchanged</td>
     </tr>
     <tr style="background: #f8f9fa;">
@@ -2320,7 +2320,7 @@ When $h > 0$, the graph shifts right by $h$ units.
 
 When $h < 0$, the graph shifts left by $|h|$ units.
 
-The direction is counterintuitive. Subtracting $h$ inside the function moves the graph in the positive direction. This happens because $f(x - h) = f(x)$ requires $x$ to be $h$ units larger to produce the same output.
+The direction is counterintuitive. Subtracting $h$ inside the function moves the graph in the positive direction. This happens because $g(x) = f(x - h)$ needs $x$ to be $h$ units larger to produce the same output as $f$: $g(x + h) = f(x)$.
 
 For $f(x) = x^2$, the function $g(x) = (x - 3)^2$ shifts the parabola right $3$ units. The vertex moves from $(0, 0)$ to $(3, 0)$.
 
@@ -2373,6 +2373,10 @@ $$g(x) = f(-x)$$
 /functions/formulas]@
 
 Each input is negated before the function acts: the output at $x$ equals the original output at $-x$.
+
+@academic[pitfall,aside:true,width:35%:Negating the output instead of the input
+Reflecting $f(x) = (x - 2)^2$ in the $y$-axis as $-(x - 2)^2$ flips it across the $x$-axis instead: the vertex stays at $(2, 0)$ and the parabola opens downward. The $y$-axis mirror image is $f(-x) = (-x - 2)^2 = (x + 2)^2$, with vertex $(-2, 0)$.
+[Read more](!#pitfalls)]@
 
 For $f(x) = \\sqrt{x}$, the function $g(x) = \\sqrt{-x}$ reflects the half-curve across the $y$-axis. The original exists for $x \\geq 0$; the reflection exists for $x \\leq 0$.
 
@@ -2438,13 +2442,17 @@ When $b < 0$, a reflection across the $y$-axis also occurs.
 
 The effect is counterintuitive: multiplying $x$ by a number greater than $1$ makes the graph narrower, not wider. This happens because larger $b$ means reaching the same output values at smaller $x$ values.
 
+@academic[pitfall,aside:true,width:35%:Raising only x to the power
+Writing $f(2x)$ for $f(x) = x^3$ as $2x^3$ cubes only the $x$ and gives $2$ at $x = 1$, a vertical stretch. The whole input is cubed: $f(2x) = (2x)^3 = 8x^3$, which reaches $f(2) = 8$ already at $x = 1$.
+[Read more](!#pitfalls)]@
+
 For $f(x) = x^2$, the function $g(x) = (2x)^2 = 4x^2$ compresses the parabola horizontally by a factor of $2$. Points at $x = 1$ and $x = -1$ now achieve the heights that $f$ achieved at $x = 2$ and $x = -2$.
 
 For $f(x) = \\sin(x)$, the function $g(x) = \\sin(2x)$ compresses the wave horizontally. The period changes from $2\\pi$ to $\\pi$ — the wave completes twice as fast.
 
-Horizontal scaling affects the [domain](!/functions/domain). If $f$ has domain $[a, b]$, then $f(bx)$ has domain $[a/b, b/b] = [a/b, 1]$ when $b > 0$.
+Horizontal scaling affects the [domain](!/functions/domain). If $f$ has domain $[p, q]$, then $f(bx)$ has domain $[p/b, q/b]$ when $b > 0$.
 
-Across the six basic transformations covered in obj3–obj8, a single pattern emerges: operations applied **inside** $f$ act on the horizontal direction, while operations applied **outside** $f$ act on the vertical direction. The table below pairs the inside form with the outside form for each of the three operation types — addition, negation, and scaling.`,
+Across the six basic transformations covered in the sections above, a single pattern emerges: operations applied **inside** $f$ act on the horizontal direction, while operations applied **outside** $f$ act on the vertical direction. The table below pairs the inside form with the outside form for each of the three operation types — addition, negation, and scaling.`,
     before: ``,
     after: ``,
     link: '',
@@ -2493,17 +2501,21 @@ The vertex moves from $(0, 0)$ to $(-3, 5)$, and the parabola opens downward.`,
 
 One systematic approach applies transformations inside-out:
 
-First, apply horizontal transformations in the order they appear when reading from the variable outward: shift by $h$, then scale by $1/b$.
+First, apply horizontal transformations: scale by $1/b$, then shift by $h$ (a point $x_0$ moves to $x_0/b + h$).
 
 Then, apply vertical transformations in the order they appear when reading outward from the function: scale by $a$, then shift by $k$.
+
+@academic[pitfall,aside:true,width:35%:Reading the shift before factoring
+Reading $g(x) = (2x - 6)^2$ as a shift right by $6$ puts the vertex at $x = 6$, where $g(6) = 36$. Factoring first, $2x - 6 = 2(x - 3)$, gives $h = 3$: the vertex is $(3, 0)$.
+[Read more](!#pitfalls)]@
 
 For $g(x) = 3f(2(x - 1)) + 4$:
 
 Start with parent $f$
 
-Shift right $1$ (horizontal, inside)
+Compress horizontally by factor $2$ first (horizontal, inside)
 
-Compress horizontally by factor $2$ (horizontal, inside)
+Then shift right $1$ (horizontal, inside)
 
 Stretch vertically by factor $3$ (vertical, outside)
 
@@ -2533,6 +2545,12 @@ Step 5: Write the equation. For a parabola with vertex $(3, -2)$ opening downwar
 
 @academic[formula_callout:Writing Equations from Transformed Graphs
 $$y = -2(x - 3)^2 - 2$$]@
+
+@academic[pitfall,aside:true,width:35%:Copying the vertex sign into the bracket
+Writing the vertex $(3, -2)$ as $y = -2(x + 3)^2 - 2$ puts the vertex at $(-3, -2)$, and the check point $(4, -4)$ then gives $-100$. The bracket holds $x - h$: $y = -2(x - 3)^2 - 2$.
+[Read more](!#pitfalls)]@
+
+Step 5 is where the picture becomes a formula. The two coordinates of the vertex end up in different places: the vertical one stands alone at the end, where it is added to every output, and the horizontal one goes inside the bracket next to $x$, where it acts on the input before the squaring. The steepness found in Step 4 becomes the coefficient in front.
 
 Step 6: Verify by checking a point. Substitute another visible point into the equation and confirm equality.`,
     before: ``,
@@ -2566,13 +2584,13 @@ The table below collects each transformation's effect on domain and range in one
     title: `Effect on Key Features`,
     content: `Transformations move and modify all key features of a graph systematically.
 
-Intercepts transform with the graph. The $y$-intercept $f(0)$ moves to $a \\cdot f(-bh) + k$. Each $x$-intercept $c$ moves to $(c/b) + h$ — shifted and scaled horizontally.
+Intercepts transform with the graph. The $y$-intercept $f(0)$ moves to $a \\cdot f(-bh) + k$. When $k = 0$, each $x$-intercept $c$ moves to $(c/b) + h$ — scaled and shifted horizontally.
 
 Vertices, maxima, and minima move according to both shifts and scalings. The vertex of $f(x) = x^2$ at $(0, 0)$ moves to $(h, k)$ in $a(x - h)^2 + k$. If $a < 0$, a minimum becomes a maximum.
 
 Asymptotes shift with translations. A horizontal asymptote at $y = L$ becomes $y = aL + k$. A vertical asymptote at $x = c$ becomes $x = (c/b) + h$.
 
-Symmetry can be preserved or destroyed. Translating an even function horizontally off-center removes its $y$-axis symmetry. Reflecting an odd function vertically preserves origin symmetry; translating it does not.
+Symmetry can be preserved or destroyed. Translating an even function horizontally off-center removes its $y$-axis symmetry. Reflecting an odd function vertically preserves origin symmetry; translating it generally does not.
 
 Periodicity scales with horizontal transformations. A function with period $p$ becomes a function with period $p/|b|$ under $f(bx)$. Amplitude scales with vertical transformations.
 
@@ -2584,7 +2602,63 @@ Tracking these features during transformation confirms that the algebraic and ge
 
   obj14: {
     title: `Summary of Transformations`,
-    content: `The four transformation types — shifts, scalings (stretch/compression), and reflections — each appear in both horizontal and vertical form, giving six basic transformations governed by the four parameters $a$, $b$, $h$, $k$ in the general form $g(x) = a \\cdot f(b(x - h)) + k$. The table below collects each transformation with its form, geometric effect, and the parameter condition that distinguishes its variants — useful as a reference card when sketching transformed graphs or reading equations off of them.`,
+    content: `The three transformation types — shifts, scalings (stretch/compression), and reflections — each appear in both horizontal and vertical form, giving six basic transformations governed by the four parameters $a$, $b$, $h$, $k$ in the general form $g(x) = a \\cdot f(b(x - h)) + k$. The table below collects each transformation with its form, geometric effect, and the parameter condition that distinguishes its variants — useful as a reference card when sketching transformed graphs or reading equations off of them.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj15: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when transforming functions and reading transformed equations. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Negating the output instead of the input**
+
+Asked to reflect a graph in the $y$-axis, the minus sign is placed in front of the whole function instead of on the input. That produces the reflection in the $x$-axis, a different graph.
+
+Wrong working: for $f(x) = (x - 2)^2$, the reflection in the $y$-axis is written as $-(x - 2)^2$. Its vertex is still $(2, 0)$, and the parabola now opens downward.
+
+Right working: a reflection in the $y$-axis replaces $x$ with $-x$: $f(-x) = (-x - 2)^2 = (x + 2)^2$. The vertex moves to $(-2, 0)$, and the parabola still opens upward.
+
+Why it happens: both reflections use a single minus sign, and "reflect" suggests turning the graph over, which is what $-f(x)$ does.
+
+How to check: a reflection in the $y$-axis keeps the $y$-intercept, since $f(-0) = f(0)$. Here $f(0) = 4$, and $(0 + 2)^2 = 4$ agrees, while $-(0 - 2)^2 = -4$ does not.
+
+**Raising only x to the power**
+
+When $bx$ is substituted into a power function, the power is applied to $x$ alone and $b$ is left outside. The result is a vertical stretch $b \\cdot f(x)$, not the horizontal compression $f(bx)$.
+
+Wrong working: for $f(x) = x^3$, $f(2x)$ is written as $2x^3$. At $x = 1$ this gives $2$.
+
+Right working: the whole input is cubed: $f(2x) = (2x)^3 = 2^3 x^3 = 8x^3$. At $x = 1$ it gives $8 = f(2)$: the height $f$ reached at $x = 2$ is now reached at $x = 1$, which is the horizontal compression by a factor of $2$.
+
+Why it happens: $2x^3$ looks like "$x^3$ with $2x$ in place of $x$", but a power acts before multiplication, so $2x^3$ means $2 \\cdot x^3$, which is $2f(x)$.
+
+How to check: evaluate at one input. $f(2x)$ at $x = 1$ must equal $f(2)$; here $2 \\cdot 1^3 = 2$, while $f(2) = 8$.
+
+**Reading the shift before factoring**
+
+In an inside expression like $bx - c$, the number $c$ is read as the horizontal shift. The shift is the $h$ of the factored form $b(x - h)$, so $h = c/b$.
+
+Wrong working: $g(x) = (2x - 6)^2$ is read as "compress by $2$, shift right $6$", and the vertex is placed at $x = 6$. But $g(6) = (12 - 6)^2 = 36$, not $0$.
+
+Right working: $2x - 6 = 2(x - 3)$, so $b = 2$ and $h = 3$. The vertex is at $(3, 0)$, and indeed $g(3) = (6 - 6)^2 = 0$.
+
+Why it happens: in $f(x - h)$ the number next to $x$ is the shift, and the habit carries over when a factor $b$ stands in front of $x$. The factor acts on the shift as well, dividing it by $b$.
+
+How to check: the parent's vertex sits where the inside equals $0$. Solve $2x - 6 = 0$ to get $x = 3$.
+
+**Copying the vertex sign into the bracket**
+
+When an equation is written from a graph, the horizontal coordinate of the vertex is copied into the bracket with its sign unchanged, as if the bracket held $x + h$.
+
+Wrong working: for a downward parabola with vertex $(3, -2)$ and steepness $2$, the equation is written as $y = -2(x + 3)^2 - 2$. Its vertex is $(-3, -2)$, the mirror image of the intended one.
+
+Right working: vertex form is $a(x - h)^2 + k$, so $h = 3$ goes in as $x - 3$ and $k = -2$ is added at the end: $y = -2(x - 3)^2 - 2$. The point $(4, -4)$ checks: $-2(4 - 3)^2 - 2 = -4$.
+
+Why it happens: $k$ keeps its sign in the formula while $h$ appears with the opposite sign, and the two coordinates are read off the graph in the same way.
+
+How to check: substitute a second visible point, as in Step 6. With the wrong equation, $(4, -4)$ gives $-2(4 + 3)^2 - 2 = -100$, far from $-4$.`,
     before: ``,
     after: ``,
     link: '',
@@ -2615,7 +2689,7 @@ const faqQuestions = {
   },
   obj2: {
     question: "What is the difference between reflecting over the x-axis and the y-axis?",
-    answer: "Negating the whole function flips it vertically across the horizontal axis, turning every output upside down. Negating just the input flips it horizontally across the vertical axis, swapping left for right. Even functions look unchanged under the second, and odd functions look the same under either one applied twice.",
+    answer: "Negating the whole function flips it vertically across the horizontal axis, turning every output upside down. Negating just the input flips it horizontally across the vertical axis, swapping left for right. Even functions look unchanged under the second, and odd functions look unchanged when both are applied together.",
     sectionId: "5"
   },
   obj3: {
@@ -2630,7 +2704,7 @@ const faqQuestions = {
   },
   obj5: {
     question: "Do transformations change the domain and range?",
-    answer: "Horizontal changes affect the domain and vertical changes affect the range. A horizontal shift slides the domain, a horizontal stretch scales it, and a vertical shift or stretch does the same to the range. Reflections swap the endpoints of whichever interval they act on rather than moving them.",
+    answer: "Horizontal changes affect the domain and vertical changes affect the range. A horizontal shift slides the domain, a horizontal stretch scales it, and a vertical shift or stretch does the same to the range. Reflections negate the interval they act on, so [a, b] becomes [−b, −a]: the endpoints change sign and trade places.",
     sectionId: "12"
   }
 }
@@ -2973,6 +3047,14 @@ export default function TransformationsPage({
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj15.title,
+        link:sectionsContent.obj15.link,
+        content:[
+          sectionsContent.obj15.content,
         ]
     },
     {

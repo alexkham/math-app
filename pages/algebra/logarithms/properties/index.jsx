@@ -154,7 +154,15 @@ This restriction follows from the definition. The equation $\\log_a(x) = y$ mean
 
 Consequently, $\\log_a(0)$ is undefined — no solution to $a^y = 0$ exists. Similarly, $\\log_a(-5)$ is undefined — no real $y$ satisfies $a^y = -5$.
 
-For composite arguments, the entire expression inside the logarithm must be positive. The function $\\log_2(x - 3)$ requires $x - 3 > 0$, giving domain $x > 3$. The function $\\log_5(x^2 + 1)$ has domain all real numbers, since $x^2 + 1 > 0$ for every $x$.`,
+For composite arguments, the entire expression inside the logarithm must be positive. The function $\\log_2(x - 3)$ requires $x - 3 > 0$, giving domain $x > 3$. The function $\\log_5(x^2 + 1)$ has domain all real numbers, since $x^2 + 1 > 0$ for every $x$.
+
+@academic[pitfall,aside:true,width:35%:Including the endpoint
+Writing the domain of $\\log_2(x - 3)$ as $x \\geq 3$ lets in $x = 3$, where the logarithm is $\\log_2(0)$ and undefined. The domain is $x > 3$, the interval $(3, \\infty)$.
+[Read more](!#pitfalls)]@
+
+Finding such a domain comes down to solving an inequality in $x$: the whole argument is compared with zero. The edge of the answer is the value of $x$ at which the argument itself equals zero, $x = 3$ for $\\log_2(x - 3)$.
+
+Near that edge the argument is a small positive number and the logarithm is defined. The edge itself is the place where the definition from the start of this section has to be applied once more.`,
     before: ``,
     after: ``,
     link: '',
@@ -163,7 +171,11 @@ For composite arguments, the entire expression inside the logarithm must be posi
     title: `Range`,
     content: `@academic[rule_theorem_plain:The range of $f(x) = \\log_a(x)$ is all real numbers: $(-\\infty, \\infty)$.]@
 
-As $x$ increases from just above zero toward infinity, $\\log_a(x)$ takes every real value exactly once. Near zero, the logarithm plunges toward $-\\infty$. At $x = 1$, the logarithm equals zero. As $x$ grows large, the logarithm increases without bound, though slowly.
+As $x$ increases from just above zero toward infinity, $\\log_a(x)$ takes every real value exactly once. For a base $a > 1$: near zero, the logarithm plunges toward $-\\infty$; at $x = 1$, it equals zero; as $x$ grows large, it increases without bound, though slowly. For $0 < a < 1$ the picture is reflected: it falls from $+\\infty$ to $-\\infty$.
+
+@academic[pitfall,aside:true,width:35%:Thinking a logarithm cannot be negative
+Applying "must be positive" to the output instead of the argument makes $\\log_2(x) = -3$ look impossible. But $2^{-3} = \\frac{1}{8}$, so $x = \\frac{1}{8}$; only the argument has to be positive.
+[Read more](!#pitfalls)]@
 
 This unlimited range contrasts with the exponential function $g(x) = a^x$, whose range is $(0, \\infty)$. The domain and range swap between a function and its inverse — logarithms and exponentials exhibit this exchange precisely.`,
     before: ``,
@@ -180,7 +192,15 @@ When $0 < a < 1$, the function $f(x) = \\log_a(x)$ is strictly decreasing. If $x
 
 This property is critical for solving [inequalities](!/algebra/logarithms/inequalities).
 
-@academic[rule_corollary_plain:Taking logarithms preserves inequality direction when $a > 1$ and reverses it when $0 < a < 1$.]@`,
+@academic[rule_corollary_plain:Taking logarithms preserves inequality direction when $a > 1$ and reverses it when $0 < a < 1$.]@
+
+@academic[pitfall,aside:true,width:35%:Assuming every logarithm increases
+Concluding from $2 < 4$ that $\\log_{1/2}(2) < \\log_{1/2}(4)$ treats base $\\frac{1}{2}$ like base $2$. In fact $\\log_{1/2}(2) = -1$ and $\\log_{1/2}(4) = -2$, so $\\log_{1/2}(2) > \\log_{1/2}(4)$.
+[Read more](!#pitfalls)]@
+
+The corollary is used whenever two numbers are compared through their logarithms, or a logarithm is removed from both sides of an inequality. What decides the outcome is a single check made before any algebra: whether the base lies above $1$ or between $0$ and $1$.
+
+The bases met most often, $2$, $10$ and $e$, all lie above $1$. Bases such as $\\frac{1}{2}$ or $0.1$ appear less often, and they are the ones that fall into the second case.`,
     before: ``,
     after: ``,
     link: '',
@@ -198,6 +218,14 @@ The one-to-one property justifies a key technique for solving [equations](!/alge
 
 @academic[example:Example
 $\\log_3(2x + 1) = \\log_3(x + 5)$ implies $2x + 1 = x + 5$, giving $x = 4$.]@
+
+@academic[pitfall,aside:true,width:35%:Equating arguments before condensing
+Dropping the logarithms from $\\log_3(x) + \\log_3(2) = \\log_3(10)$ term by term gives $x + 2 = 10$, so $x = 8$, but $\\log_3(8) + \\log_3(2) = \\log_3(16)$. Condensed first, $\\log_3(2x) = \\log_3(10)$, so $x = 5$.
+[Read more](!#pitfalls)]@
+
+In the example each side is already a single logarithm with base $3$, which is exactly the form the property needs. The arguments $2x + 1$ and $x + 5$ are then set equal, and a linear equation is left.
+
+Equations met in practice often start further away from that form, with several logarithms on one side joined by sums, differences or coefficients.
 
 The [logarithmic equation solver](!/algebra/calculators/equations/logarithmic) uses this property whenever both sides are single logarithms with the same base.`,
     before: ``,
@@ -266,6 +294,70 @@ This inverse relationship provides the foundation for converting between logarit
   obj8: {
     title: `Summary of Properties`,
     content: `The seven properties above together describe how logarithmic functions behave on their domain and how that behavior shapes work with logarithmic equations, inequalities, and graphs. The table below collects each property in a single row — the statement and the practical consequence — useful as a reference card.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when these properties are put to work. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Including the endpoint**
+
+The domain of a composite logarithm is found by solving an inequality, but the inequality is written with $\\geq$ instead of $>$, so the value that makes the argument zero is let in.
+
+Wrong working:
+$$\\log_2(x - 3): \\quad x - 3 \\geq 0 \\implies x \\geq 3$$
+
+Right working: the argument must be strictly positive.
+$$x - 3 > 0 \\implies x > 3, \\text{ that is } (3, \\infty)$$
+
+Why it happens: the restriction is remembered as "the argument cannot be negative", which leaves zero allowed, as it is for square roots, where $\\sqrt{0} = 0$.
+
+How to check: substitute the endpoint. $x = 3$ gives $\\log_2(0)$, and no real $y$ satisfies $2^y = 0$, so the endpoint is excluded.
+
+**Thinking a logarithm cannot be negative**
+
+The rule that the argument must be positive is applied to the value of the logarithm instead, so an equation or a result with a negative logarithm is declared impossible.
+
+Wrong working:
+$$\\log_2(x) = -3 \\implies \\text{no solution, since a logarithm cannot be negative}$$
+
+Right working: convert to exponential form.
+$$\\log_2(x) = -3 \\implies x = 2^{-3} = \\frac{1}{8}$$
+The argument $\\frac{1}{8}$ is positive, so the solution is valid.
+
+Why it happens: the domain $(0, \\infty)$ and the range $(-\\infty, \\infty)$ are easy to swap, and most first examples use arguments above $1$, whose logarithms are positive for a base above $1$.
+
+How to check: any argument between $0$ and $1$ gives a negative logarithm when the base is above $1$. For example $\\log_{10}(0.01) = -2$, since $10^{-2} = 0.01$.
+
+**Assuming every logarithm increases**
+
+Two values of a logarithm are compared by comparing their arguments, with the order kept, even though the base lies between $0$ and $1$.
+
+Wrong working:
+$$2 < 4 \\implies \\log_{1/2}(2) < \\log_{1/2}(4)$$
+
+Right working: $\\log_{1/2}$ is strictly decreasing, so the order reverses.
+$$\\log_{1/2}(2) = -1, \\quad \\log_{1/2}(4) = -2, \\quad \\text{so } \\log_{1/2}(2) > \\log_{1/2}(4)$$
+
+Why it happens: the bases used most often, $2$, $10$ and $e$, are all above $1$, and "larger input, larger output" becomes a habit.
+
+How to check: compute both values from the definition. $\\left(\\frac{1}{2}\\right)^{-1} = 2$ and $\\left(\\frac{1}{2}\\right)^{-2} = 4$, so the larger argument has the smaller logarithm.
+
+**Equating arguments before condensing**
+
+The one-to-one property is used to drop the logarithms from every term, although one side holds a sum of two logarithms rather than a single one.
+
+Wrong working:
+$$\\log_3(x) + \\log_3(2) = \\log_3(10) \\implies x + 2 = 10 \\implies x = 8$$
+
+Right working: condense first with the product rule, then apply the property.
+$$\\log_3(2x) = \\log_3(10) \\implies 2x = 10 \\implies x = 5$$
+
+Why it happens: the property is remembered as "remove the logarithms" instead of "if $\\log_a(M) = \\log_a(N)$, then $M = N$", and its condition, a single logarithm on each side, is skipped.
+
+How to check: substitute the answer into the original equation. $x = 8$ gives $\\log_3(8) + \\log_3(2) = \\log_3(16)$, not $\\log_3(10)$. $x = 5$ gives $\\log_3(5) + \\log_3(2) = \\log_3(10)$.`,
     before: ``,
     after: ``,
     link: '',
@@ -526,7 +618,7 @@ export default function PropertiesPage({logMonotonicityCases,
         content:[
           sectionsContent.obj4.content,
           <div key={'unit-oneToOne'} dangerouslySetInnerHTML={{ __html: demoUnits.oneToOne }} />,
-          `This is why equating arguments is safe for log_a(x) but needs care when the argument is not monotonic.`,
+          `Equating arguments is always valid for log_a; what needs care is the equation that follows when the argument, as a function of x, is not one-to-one.`,
         ]
     },
     {
@@ -556,6 +648,7 @@ export default function PropertiesPage({logMonotonicityCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:Knowing $a^x$ means knowing $\\log_a(x)$: each graph is the other's mirror image in the line $y = x$.]@`,
         ]
     },
     {
@@ -569,6 +662,14 @@ export default function PropertiesPage({logMonotonicityCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

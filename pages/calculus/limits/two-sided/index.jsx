@@ -14,6 +14,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -317,6 +319,10 @@ $$\\lim_{x \\to a} f(x) = L \\iff \\lim_{x \\to a^-} f(x) = L \\;\\text{ and }\\
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Checking only one side
+Computing only the right-hand limit of $f(x) = x^2$ for $x < 1$ and $2x$ for $x \\geq 1$ gives $2$ and the claim $\\lim_{x \\to 1} f(x) = 2$. The left-hand limit is $1$, so the two-sided limit does not exist.
+[Read more](!#pitfalls)]@
+
 Three conditions must hold. First, the left-hand limit $\\lim_{x \\to a^-} f(x)$ must exist. Second, the right-hand limit $\\lim_{x \\to a^+} f(x)$ must exist. Third, these two values must be identical.
 
 If the one-sided limits differ, the two-sided limit does not exist. If either one-sided limit fails to exist (due to oscillation or unbounded behavior), the two-sided limit also fails to exist.
@@ -336,7 +342,7 @@ If the one-sided limits differ, the two-sided limit does not exist. If either on
         read: `x approaches a`,
         means: `Approach from **both sides at once** — no superscript, no preferred direction, and $x$ never equals $a$. LaTeX @[\\to]@; the [mathematical keyboard](!/keyboard) carries $\\rightarrow$ in its arrow set.`,
         cases: `Superscript added — directional, owned by [one-sided limits](!/calculus/limits/one-sided). $\\infty$ in place of $a$ — the approach never arrives, [limits at infinity](!/calculus/limits/infinity). In the [derivative](!/calculus/derivatives) definition the moving variable is renamed: $h \\to 0$.`,
-        alsoWritten: `“Tends to” in British texts, “approaches” in American ones. The arrow itself dates to Hardy's **A Course of Pure Mathematics** (1908); before it, texts put $x = a$ under the lim.`,
+        alsoWritten: `“Tends to” in British texts, “approaches” in American ones. The arrow itself appeared around 1905 (Leathem) and became standard through Hardy's **A Course of Pure Mathematics** (1908); before it, texts put $x = a$ under the lim.`,
         confusedWith: `Not an equality in motion. $0 < |x - a|$ holds the whole way — reading the arrow as “set $x = a$” is the substitution error the limit concept exists to avoid.`,
         sameGlyphElsewhere: `The same arrow writes [function mapping](!/functions/basics) $f: A \\to B$ and [logical implication](!/logic/propositional-logic/semantics/implication) $p \\to q$ — unrelated jobs.`,
       },
@@ -369,6 +375,10 @@ If the one-sided limits differ, the two-sided limit does not exist. If either on
     content: `
 Imagine tracing the graph of $f$ with your finger, moving toward $x = a$ from the left. Note the $y$-value your finger approaches. Now repeat from the right. If both traces converge to the same height, the two-sided limit exists and equals that height.
 
+@academic[pitfall,aside:true,width:35%:Reading the limit off the dot
+Answering $5$ for $f(x) = x + 1$ when $x \\neq 2$, with $f(2) = 5$, reads the plotted point. Both traces head to height $3$, so $\\lim_{x \\to 2} f(x) = 3$ while $f(2) = 5$.
+[Read more](!#pitfalls)]@
+
 The function value $f(a)$ is irrelevant to this process. The graph might have a hole at $x = a$, or the point might be displaced from where the traces converge. The limit cares only about approach, not arrival.
 
 A filled or open circle at $x = a$ tells you about $f(a)$, but the limit depends on the curve's behavior as it approaches that $x$-coordinate from both sides.
@@ -394,6 +404,12 @@ the left-hand limit at $x = 3$ is $4$ while the right-hand limit is $2$. No sing
 ## Infinite Disagreement
 
 One side may tend toward $+\\infty$ while the other tends toward $-\\infty$. For $f(x) = 1/(x - 2)$, approaching $x = 2$ from the right gives $+\\infty$, while approaching from the left gives $-\\infty$. The two-sided limit does not exist.
+
+@academic[pitfall,aside:true,width:35%:Writing the limit as infinity
+Writing $\\lim_{x \\to 2} \\frac{1}{x - 2} = \\infty$ because the values blow up drops the signs. The left side heads to $-\\infty$ and the right side to $+\\infty$, so the two-sided limit does not exist.
+[Read more](!#pitfalls)]@
+
+A short table of values shows the split. At $x = 2.01$ and $x = 2.001$ the function equals $100$ and $1000$; at $x = 1.99$ and $x = 1.999$ it equals $-100$ and $-1000$. The size grows without bound on both sides of $x = 2$, but the two sides never share a sign.
 
 ## Oscillation
 
@@ -438,6 +454,12 @@ For example:
 @academic[formula_callout:Evaluating Two-Sided Limits
 $$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3} = \\lim_{x \\to 3} \\frac{(x-3)(x+3)}{x-3} = \\lim_{x \\to 3} (x + 3) = 6$$]@
 
+@academic[pitfall,aside:true,width:35%:Stopping at 0/0
+Substituting $x = 3$ into $\\frac{x^2 - 9}{x - 3}$ gives $\\frac{0}{0}$, and the limit is declared undefined or nonexistent. The form only says more work is needed: after cancelling, the limit is $6$.
+[Read more](!#pitfalls)]@
+
+The cancellation is legitimate because the limit never uses the value at $x = 3$ itself. For every $x \\neq 3$ the two expressions are equal, so they approach the same number. The original function has a hole at $x = 3$, while $x + 3$ passes through the point $(3, 6)$.
+
 The [evaluating limits](!/calculus/limits/evaluating) page covers these techniques in detail.
 `,
     before: ``,
@@ -468,6 +490,10 @@ The derivative of $f$ at $x = a$ is defined as a two-sided limit:
 @academic[formula_callout:Relationship to Derivatives
 $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@
 
+@academic[pitfall,aside:true,width:35%:Mistaking continuity for differentiability
+Calling $|x|$ differentiable at $0$ because $\\lim_{x \\to 0} |x| = 0 = f(0)$ only checks continuity. The quotient $\\frac{|h|}{h}$ is $1$ for $h > 0$ and $-1$ for $h < 0$, so $f'(0)$ does not exist.
+[Read more](!#pitfalls)]@
+
 The variable $h$ approaches $0$ from both positive and negative values. Positive $h$ corresponds to approaching from the right; negative $h$ corresponds to approaching from the left. Differentiability requires the same rate of change from both directions.
 
 If only one direction yields a limit, we obtain a one-sided derivative. A function can have a left derivative and a right derivative that differ, in which case the two-sided derivative does not exist at that point.
@@ -480,6 +506,86 @@ If only one direction yields a limit, we obtain a one-sided derivative. A functi
     title: `Summary: Where Two-Sided Limits Appear in Calculus`,
     content: `
 The two-sided limit is the default notion of approach in calculus, and that default carries weight: most of the key definitions in the subject are stated as two-sided limits. The table below collects three settings where the two-sided form is structurally required, plus the one common exception — a domain boundary, where two-sided approach isn&apos;t even available. In every case, the requirement that the function agree from both sides isn&apos;t decorative; it&apos;s what makes the underlying definition well-posed.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for most wrong answers with two-sided limits. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Checking only one side**
+
+To find $\\lim_{x \\to a} f(x)$, only one direction is examined, usually the piece of the formula that holds at $x = a$, and its value is reported as the limit. The other side is never computed, so a disagreement goes unnoticed.
+
+Wrong working: for $f(x) = x^2$ when $x < 1$ and $f(x) = 2x$ when $x \\geq 1$,
+$$\\lim_{x \\to 1^+} 2x = 2, \\quad \\text{so} \\quad \\lim_{x \\to 1} f(x) = 2$$
+
+Right working: compute both sides and compare them.
+$$\\lim_{x \\to 1^-} x^2 = 1, \\qquad \\lim_{x \\to 1^+} 2x = 2$$
+Since $1 \\neq 2$, the two-sided limit does not exist.
+
+Why it happens: for continuous functions one side always gives the right answer, so the habit of checking a single direction works until the first piecewise function.
+
+How to check: evaluate the function on both sides of the point. Here $f(0.99) = 0.9801$ and $f(1.01) = 2.02$; values that close in on two different numbers mean there is no limit.
+
+**Reading the limit off the dot**
+
+When a graph has a displaced point, the height of the filled dot at $x = a$ is taken as the limit, instead of the height the curve approaches.
+
+Wrong working: for $f(x) = x + 1$ when $x \\neq 2$ and $f(2) = 5$, the graph shows $f(2) = 5$, so $\\lim_{x \\to 2} f(x) = 5$.
+
+Right working: the limit uses only values with $x \\neq 2$, where $f(x) = x + 1$.
+$$\\lim_{x \\to 2} f(x) = \\lim_{x \\to 2} (x + 1) = 3$$
+The value $f(2) = 5$ plays no part.
+
+Why it happens: for most functions met early on, the limit and the value are the same number, so the two are treated as one thing.
+
+How to check: read values near $a$, not at $a$. Here $f(1.99) = 2.99$ and $f(2.01) = 3.01$, both close to $3$. A limit that differs from $f(a)$ simply means the function is not [continuous](!/calculus/limits/continuity) there.
+
+**Writing the limit as infinity**
+
+Near a vertical asymptote the values grow without bound, and the two-sided limit is written as $\\infty$ without checking the sign on each side.
+
+Wrong working: dividing by a number close to $0$ gives a huge number, so
+$$\\lim_{x \\to 2} \\frac{1}{x - 2} = \\infty$$
+
+Right working: take the sides separately. For $x < 2$ the denominator is a small negative number, for $x > 2$ a small positive one.
+$$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty, \\qquad \\lim_{x \\to 2^+} \\frac{1}{x - 2} = +\\infty$$
+The sides head in opposite directions, so the two-sided limit does not exist, not even as an infinite limit.
+
+Why it happens: the rule that a tiny denominator gives a huge value is remembered for the size only, and the sign of the denominator is lost.
+
+How to check: substitute one value on each side. $x = 1.99$ gives $-100$ and $x = 2.01$ gives $100$. Writing $= \\infty$ for a two-sided limit is correct only when both sides go to $+\\infty$, as for $\\frac{1}{(x - 2)^2}$ at $x = 2$.
+
+**Stopping at 0/0**
+
+Direct substitution produces $\\frac{0}{0}$, and that result is taken as the answer: the limit is declared undefined, nonexistent, or equal to $0$.
+
+Wrong working:
+$$\\lim_{x \\to 3} \\frac{x^2 - 9}{x - 3} = \\frac{9 - 9}{3 - 3} = \\frac{0}{0}, \\quad \\text{so the limit does not exist}$$
+
+Right working: factor the numerator and cancel, which is allowed because $x \\neq 3$ throughout.
+$$\\frac{x^2 - 9}{x - 3} = \\frac{(x - 3)(x + 3)}{x - 3} = x + 3 \\quad (x \\neq 3), \\qquad \\lim_{x \\to 3} (x + 3) = 6$$
+
+Why it happens: substitution is the first tool learned, and $\\frac{0}{0}$ looks like a final result. It only says that the function has no value at $x = 3$, which a limit never needed.
+
+How to check: evaluate near the point. $x = 2.99$ gives $5.99$ and $x = 3.01$ gives $6.01$, both close to $6$.
+
+**Mistaking continuity for differentiability**
+
+A function whose two-sided limit at $a$ equals $f(a)$ is continuous there, and that is taken as proof that the derivative at $a$ exists too.
+
+Wrong working: $\\lim_{x \\to 0} |x| = 0 = f(0)$, so $|x|$ is continuous at $0$ and therefore differentiable at $0$.
+
+Right working: the derivative is its own two-sided limit, of the difference quotient.
+$$\\frac{f(0 + h) - f(0)}{h} = \\frac{|h|}{h} = \\begin{cases} 1 & h > 0 \\\\ -1 & h < 0 \\end{cases}$$
+The one-sided limits are $1$ and $-1$. They differ, so $f'(0)$ does not exist, although $|x|$ is continuous at $0$.
+
+Why it happens: both ideas are two-sided limits at the same point, and every differentiable function is continuous, so the reverse direction feels true as well.
+
+How to check: at a suspected corner, compute the slope from each side. For $|x|$ the slope is $-1$ on the left and $1$ on the right; any mismatch means no derivative.
 `,
     before: ``,
     after: ``,
@@ -643,8 +749,24 @@ const schemas = {
     }),
   };
 
+  const twoSidedFailTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Three ways a two-sided limit fails',
+    preface: 'A two-sided limit exists only when both one-sided limits exist and agree. It fails in three distinct ways.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Check each side separately',
+    conclusion: 'Compute the left and right limits on their own first; the failure type is visible as soon as you compare them. See [one-sided limits](!/calculus/limits/one-sided).',
+    root: { name: 'When a two-sided limit fails', sub: '3 ways' },
+    children: [
+      { id: 'jump', name: 'Jump', items: [ { label: 'One-sided limits', text: 'finite but different' }, { label: 'Example', text: 'a piecewise function: 4 on one side, 2 on the other' } ] },
+      { id: 'inf', name: 'Infinite disagreement', items: [ { label: 'One-sided limits', text: '$+\\infty$ on one side, $-\\infty$ on the other' }, { label: 'Example', text: '$1/(x - 2)$ at $x = 2$' } ] },
+      { id: 'osc', name: 'Oscillation', items: [ { label: 'One-sided limits', text: 'at least one never settles' } ] },
+    ],
+  };
+
 return {
   props: {
+    twoSidedFailTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -664,7 +786,7 @@ return {
    }
 
 
- export default function TwoSidedPage({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+ export default function TwoSidedPage({twoSidedFailTree, seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -726,6 +848,14 @@ return {
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
                   <div key={'unit-fail'} dangerouslySetInnerHTML={{ __html: demoUnits.fail }} />,
           `In every failure mode the two traces either disagree, run away, or never settle.`,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="two-sided-limit-failures-tree"
+            title="Three ways a two-sided limit fails"
+            source="/calculus/limits/two-sided"
+          >
+            <TopDownTree data={twoSidedFailTree} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -768,6 +898,14 @@ return {
           sectionsContent.obj9.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

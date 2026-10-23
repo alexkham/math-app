@@ -2223,7 +2223,13 @@ $\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$.
 
 $\\mathbf{u}_1 = (1, 1, 0)$. $\\frac{\\mathbf{u}_1 \\cdot \\mathbf{v}_2}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1} = \\frac{1}{2}$. $\\mathbf{u}_2 = (1, 0, 1) - \\frac{1}{2}(1, 1, 0) = (\\frac{1}{2}, -\\frac{1}{2}, 1)$.
 
-Check: $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0$.]@`,
+Check: $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0$.]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the denominator
+Subtracting $(\\mathbf{u}_1 \\cdot \\mathbf{v}_2)\\,\\mathbf{u}_1 = 1 \\cdot (1, 1, 0)$ gives $(0, -1, 1)$, whose dot product with $\\mathbf{u}_1$ is $-1$, not $0$. Dividing by $\\mathbf{u}_1 \\cdot \\mathbf{u}_1 = 2$ gives $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$.
+[Read more](!#pitfalls)]@
+
+The coefficient in front of $\\mathbf{u}_1$ is a ratio of two dot products. The numerator $\\mathbf{u}_1 \\cdot \\mathbf{v}_2$ measures how far $\\mathbf{v}_2$ reaches along $\\mathbf{u}_1$, and the denominator $\\mathbf{u}_1 \\cdot \\mathbf{u}_1 = \\|\\mathbf{u}_1\\|^2$ accounts for the length of $\\mathbf{u}_1$ itself, so rescaling $\\mathbf{u}_1$ leaves the subtracted vector unchanged. When $\\mathbf{u}_1$ is a unit vector the denominator equals $1$, which is why the formula becomes shorter once the vectors are normalized.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2237,6 +2243,10 @@ $$\\mathbf{u}_1 = \\mathbf{v}_1$$]@
 
 @academic[formula_callout:gram_schmidt_process|Gram-Schmidt Process|$$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\mathbf{u}_i \\cdot \\mathbf{v}_j}{\\mathbf{u}_i \\cdot \\mathbf{u}_i}\\,\\mathbf{u}_i \\quad \\text{for } j = 2, 3, \\dots, k$$]@
 @academic[formulas_link:/linear-algebra/formulas#gram-schmidt_process]@
+
+@academic[pitfall,aside:true,width:35%:Projecting onto the original vectors
+Projecting $\\mathbf{v}_3 = (0, 1, 1)$ onto $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$ instead of onto $\\mathbf{u}_1, \\mathbf{u}_2$ gives $(-1, \\frac{1}{2}, \\frac{1}{2})$, whose dot product with $\\mathbf{u}_1$ is $-\\frac{1}{2}$. Projecting onto the $\\mathbf{u}_i$ gives $\\mathbf{u}_3 = (-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3})$.
+[Read more](!#pitfalls)]@
 
 At each step, $\\mathbf{v}_j$ has its projections onto all previously computed orthogonal vectors subtracted. What remains is the component of $\\mathbf{v}_j$ perpendicular to $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$.
 
@@ -2296,6 +2306,10 @@ $$\\mathbf{q}_i = \\frac{\\mathbf{u}_i}{\\|\\mathbf{u}_i\\|}$$]@
 
 Each vector is divided by its length, making $\\|\\mathbf{q}_i\\| = 1$ while preserving direction. The resulting set satisfies $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.
 
+@academic[pitfall,aside:true,width:35%:Normalizing the inputs first
+Scaling $\\mathbf{v}_1, \\mathbf{v}_2$ to $\\frac{1}{\\sqrt{2}}(1, 1, 0)$ and $\\frac{1}{\\sqrt{2}}(1, 0, 1)$ before orthogonalizing gives $\\frac{1}{\\sqrt{2}}(\\frac{1}{2}, -\\frac{1}{2}, 1)$, of length $\\frac{\\sqrt{3}}{2}$, not $1$. Normalizing after the subtraction gives $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, -1, 2)$.
+[Read more](!#pitfalls)]@
+
 Normalization can be done at each step (normalize $\\mathbf{u}_j$ immediately before moving to $\\mathbf{v}_{j+1}$) or all at the end. The result is the same in exact arithmetic. In practice, normalizing at each step is slightly preferable for numerical stability, as it keeps the vectors well-scaled throughout the computation.`,
     before: ``,
     after: ``,
@@ -2344,7 +2358,6 @@ $$A = QR$$
 /linear-algebra/formulas#qr_decomposition]@
 
 @academic[formulas_link:/linear-algebra/formulas#gram-schmidt_process]@
-/linear-algebra/formulas]@
 
 $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns (the normalized $\\mathbf{q}_i$&apos;s). $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.
 
@@ -2389,6 +2402,10 @@ Householder reflections provide an even more robust alternative for computing th
 @academic[formula_callout:Gram-Schmidt on Abstract Inner Product Spaces
 $$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\langle \\mathbf{u}_i, \\mathbf{v}_j \\rangle}{\\langle \\mathbf{u}_i, \\mathbf{u}_i \\rangle}\\,\\mathbf{u}_i$$]@
 
+@academic[pitfall,aside:true,width:35%:Using the dot product of coefficients
+Treating $1$ and $x^2$ as coefficient lists $(1, 0, 0)$ and $(0, 0, 1)$ gives dot product $0$, so $x^2$ is kept unchanged, although $\\int_{-1}^{1} 1 \\cdot x^2\\,dx = \\frac{2}{3} \\neq 0$. With the integral inner product the third vector is $x^2 - \\frac{1}{3}$.
+[Read more](!#pitfalls)]@
+
 Orthogonalizing $\\{1, x, x^2\\}$ in the polynomial space $\\mathcal{P}_2$ with the inner product $\\langle p, q \\rangle = \\int_{-1}^{1} p(x)q(x)\\,dx$ produces the Legendre polynomials (up to normalization): $P_0(x) = 1$, $P_1(x) = x$, $P_2(x) = \\frac{1}{2}(3x^2 - 1)$. The polynomial $x$ is already orthogonal to $1$ under this inner product (the integral of an odd function over a symmetric interval is zero), so the first subtraction has no effect.
 
 On the function space $C[0, 2\\pi]$ with $\\langle f, g \\rangle = \\int_0^{2\\pi} f(x)g(x)\\,dx$, orthogonalizing appropriate function sets produces Fourier bases. The algorithm is identical in structure to the $\\mathbb{R}^n$ version — only the inner product changes.`,
@@ -2399,6 +2416,77 @@ On the function space $C[0, 2\\pi]$ with $\\langle f, g \\rangle = \\int_0^{2\\p
   obj11: {
     title: `Summary: Gram-Schmidt Across Settings`,
     content: `Gram-Schmidt operates uniformly across many settings — ℝⁿ with the standard dot product, polynomial spaces with integral inner products, function spaces in Fourier analysis, and abstract inner product spaces in general. The table below collects the main contexts in which the process is applied, alongside the input, the inner product used, and what the algorithm produces in each case.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Four slips account for many wrong Gram-Schmidt computations. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the denominator**
+
+The coefficient of $\\mathbf{u}_1$ is taken as the dot product $\\mathbf{u}_1 \\cdot \\mathbf{v}_2$ alone, as if $\\mathbf{u}_1$ had length $1$. The subtracted vector then has the wrong length, and what remains is not perpendicular to $\\mathbf{u}_1$.
+
+Wrong working: with $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$,
+$$\\mathbf{u}_2 = \\mathbf{v}_2 - (\\mathbf{u}_1 \\cdot \\mathbf{v}_2)\\,\\mathbf{u}_1 = (1, 0, 1) - 1 \\cdot (1, 1, 0) = (0, -1, 1)$$
+and $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0 - 1 + 0 = -1$.
+
+Right working: $\\mathbf{u}_1 \\cdot \\mathbf{u}_1 = 2$, so
+$$\\mathbf{u}_2 = (1, 0, 1) - \\frac{1}{2}(1, 1, 0) = \\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right)$$
+and $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0$.
+
+Why it happens: the orthonormal version of the formula, $(\\mathbf{q}_i \\cdot \\mathbf{v}_j)\\,\\mathbf{q}_i$, has no denominator, and it is used for vectors that have not been normalized.
+
+How to check: take the dot product of the new vector with every earlier one. Each product must be $0$.
+
+**Projecting onto the original vectors**
+
+At step $j$, the projections are taken onto the inputs $\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}$ instead of onto the orthogonal vectors $\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}$ already built. At $j = 2$ nothing changes, because $\\mathbf{u}_1 = \\mathbf{v}_1$, so the error first shows at $j = 3$.
+
+Wrong working: with $\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$ and $\\mathbf{v}_3 = (0, 1, 1)$,
+$$\\mathbf{v}_3 - \\frac{\\mathbf{v}_1 \\cdot \\mathbf{v}_3}{\\mathbf{v}_1 \\cdot \\mathbf{v}_1}\\,\\mathbf{v}_1 - \\frac{\\mathbf{v}_2 \\cdot \\mathbf{v}_3}{\\mathbf{v}_2 \\cdot \\mathbf{v}_2}\\,\\mathbf{v}_2 = (0, 1, 1) - \\frac{1}{2}(1, 1, 0) - \\frac{1}{2}(1, 0, 1) = \\left(-1, \\frac{1}{2}, \\frac{1}{2}\\right)$$
+Its dot product with $\\mathbf{u}_1 = (1, 1, 0)$ is $-1 + \\frac{1}{2} = -\\frac{1}{2}$, so it is not perpendicular to $\\mathbf{u}_1$.
+
+Right working: with $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$, the dot products are $\\mathbf{u}_2 \\cdot \\mathbf{v}_3 = \\frac{1}{2}$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_2 = \\frac{3}{2}$, so
+$$\\mathbf{u}_3 = (0, 1, 1) - \\frac{1}{2}(1, 1, 0) - \\frac{1}{3}\\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right) = \\left(-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$$
+Then $\\mathbf{u}_1 \\cdot \\mathbf{u}_3 = -\\frac{2}{3} + \\frac{2}{3} + 0 = 0$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_3 = -\\frac{1}{3} - \\frac{1}{3} + \\frac{2}{3} = 0$.
+
+Why it happens: the inputs are the vectors the problem states, so they are the ones at hand. But a sum of projections onto single vectors gives the projection onto their span only when those vectors are orthogonal, and $\\mathbf{v}_1 \\cdot \\mathbf{v}_2 = 1 \\neq 0$.
+
+How to check: test the new vector against all earlier $\\mathbf{u}_i$, not only the last one. The wrong vector above fails against $\\mathbf{u}_1$.
+
+**Normalizing the inputs first**
+
+The inputs are scaled to unit length before the process runs, in the hope that the output will then be orthonormal. The subtractions change the lengths again: each $\\mathbf{u}_j$ with $j \\geq 2$ is shorter than the vector it came from, unless that vector was already perpendicular to the earlier ones.
+
+Wrong working: scale to $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 0)$ and $\\frac{1}{\\sqrt{2}}(1, 0, 1)$. The dot product of the two is $\\frac{1}{2}$, so the second output is
+$$\\frac{1}{\\sqrt{2}}(1, 0, 1) - \\frac{1}{2} \\cdot \\frac{1}{\\sqrt{2}}(1, 1, 0) = \\frac{1}{\\sqrt{2}}\\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right)$$
+of length $\\frac{1}{\\sqrt{2}} \\cdot \\sqrt{\\frac{3}{2}} = \\frac{\\sqrt{3}}{2}$, not $1$.
+
+Right working: orthogonalize first, $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$ with $\\|\\mathbf{u}_2\\| = \\sqrt{\\frac{3}{2}}$, then divide:
+$$\\mathbf{q}_2 = \\frac{\\mathbf{u}_2}{\\|\\mathbf{u}_2\\|} = \\frac{1}{\\sqrt{6}}(1, -1, 2)$$
+which has length $\\frac{\\sqrt{1 + 1 + 4}}{\\sqrt{6}} = 1$.
+
+Why it happens: normalization looks like a preparation step that can be done at any point, but subtracting a projection shortens a vector.
+
+How to check: compute the length of every output vector. In an orthonormal set each length is exactly $1$, and here the second one is about $0.87$.
+
+**Using the dot product of coefficients**
+
+In a polynomial space with an integral inner product, the polynomials are written as lists of coefficients and the ordinary dot product is used. Under that dot product $1, x, x^2$ are already orthonormal, so the process changes nothing.
+
+Wrong working: $1 \\to (1, 0, 0)$, $x \\to (0, 1, 0)$ and $x^2 \\to (0, 0, 1)$. All dot products are $0$, so the output is $1, x, x^2$ unchanged. But
+$$\\langle 1, x^2 \\rangle = \\int_{-1}^{1} x^2\\,dx = \\frac{2}{3} \\neq 0$$
+so $1$ and $x^2$ are not orthogonal under the inner product of the problem.
+
+Right working: $\\langle 1, 1 \\rangle = 2$, $\\langle 1, x^2 \\rangle = \\frac{2}{3}$ and $\\langle x, x^2 \\rangle = \\int_{-1}^{1} x^3\\,dx = 0$, so the third vector is
+$$x^2 - \\frac{2/3}{2} \\cdot 1 - 0 \\cdot x = x^2 - \\frac{1}{3}$$
+which is $\\frac{2}{3}P_2(x)$.
+
+Why it happens: in $\\mathbb{R}^n$ the dot product is the only inner product in use, and a coefficient list looks exactly like a vector in $\\mathbb{R}^3$.
+
+How to check: compute one inner product of the result with an earlier vector, using the integral. Here $\\int_{-1}^{1} \\left(x^2 - \\frac{1}{3}\\right) dx = \\frac{2}{3} - \\frac{2}{3} = 0$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2719,6 +2807,14 @@ export default function GramSchmidtsPage({
           </DiagramFrame>,
           `The second group is where the generality earns its keep. Under the integral inner product on $[-1, 1]$ the monomials $1, x, x^2$ are independent but not orthogonal, and orthogonalizing them yields the Legendre polynomials — so those are not a separate construction but simply what this algorithm returns when handed the obvious basis. Under the inner product on $[0, 2\\pi]$, sines and cosines of distinct frequencies are already orthogonal, and the algorithm finds nothing to subtract.`,
           `That last observation is why a Fourier coefficient is a single integral rather than the solution of a linear system: the basis was orthogonal before anyone asked. The algorithm never inspects what a vector is — it calls the inner product and scalar multiplication and nothing else — which is what lets the same procedure serve tuples, polynomials and functions, and what makes it a constructive proof that every finite-dimensional inner product space has an orthonormal basis.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

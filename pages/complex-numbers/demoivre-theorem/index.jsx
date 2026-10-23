@@ -1052,6 +1052,7 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
 
 
 export async function getStaticProps(){
@@ -1135,7 +1136,7 @@ export async function getStaticProps(){
     <tr>
       <th style="${tableHeaders.aggregation} text-align: center;">n</th>
       <th style="${tableHeaders.aggregation} text-align: center;">Angular separation</th>
-      <th style="${tableHeaders.aggregation}">Polygon shape on the circle of radius R&#x141;ⁿ</th>
+      <th style="${tableHeaders.aggregation}">Polygon shape on the circle of radius R<sup>1/n</sup></th>
     </tr>
   </thead>
   <tbody>
@@ -1167,7 +1168,7 @@ export async function getStaticProps(){
     <tr>
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">general n</td>
       <td style="padding: 12px 15px; color: #34495e; text-align: center;">360°⁄n</td>
-      <td style="padding: 12px 15px; color: #34495e;">regular n-gon centered at origin</td>
+      <td style="padding: 12px 15px; color: #34495e;">regular n-gon centered at origin (n ≥ 3)</td>
     </tr>
   </tbody>
 </table>
@@ -1232,12 +1233,12 @@ export async function getStaticProps(){
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Formula</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = rⁿ cis(nθ)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z&#x2096; = R&#x141;ⁿ cis((φ + 360°k) ⁄ n), k = 0…n−1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">z&#x2096; = R<sup>1/n</sup> cis((φ + 360°k) ⁄ n), k = 0…n−1</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modulus operation</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r → rⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(raise to nth power)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">R → R&#x141;ⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(take positive nth root)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">R → R<sup>1/n</sup>&nbsp;&nbsp;<span style="font-size: 13px;">(take positive nth root)</span></td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Argument operation</td>
@@ -1252,7 +1253,7 @@ export async function getStaticProps(){
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Geometric picture</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a single point at distance rⁿ from the origin</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertices of a regular n-gon on the circle of radius R&#x141;ⁿ</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">vertices of a regular n-gon (n ≥ 3) on the circle of radius R<sup>1/n</sup></td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Worked example</td>
@@ -1317,6 +1318,10 @@ The formula extends naturally to complex numbers with arbitrary [modulus](!/comp
 
 @academic[formula_callout:De Moivre's Formula
 $$z^n = (r\\text{cis}\\theta)^n = r^n\\text{cis}(n\\theta)$$]@
+
+@academic[pitfall,aside:true,width:35%:Forgetting to raise the modulus
+Writing $(2\\text{cis}(45°))^4$ as $2\\text{cis}(180°) = -2$ multiplies the angle but leaves the modulus at $2$. The modulus is raised to the fourth power too: $2^4\\text{cis}(180°) = 16\\text{cis}(180°) = -16$.
+[Read more](!#pitfalls)]@
 
 The modulus raises to the $n$-th power while the argument multiplies by $n$. Both operations are elementary. The number $2\\text{cis}(30°)$ raised to the sixth power becomes $2^6\\text{cis}(180°) = 64\\text{cis}(180°) = -64$. What would require extensive algebra in rectangular form reduces to mental arithmetic in trigonometric form.
 
@@ -1393,6 +1398,10 @@ Step 3: The answer $32i$ is already in algebraic form.
 
 Verification through direct calculation would require multiplying $1 + i$ by itself ten times — tedious and error-prone. De Moivre's theorem completes the same computation in a few lines.
 
+@academic[pitfall,aside:true,width:35%:Taking the argument from the tangent alone
+Taking $\\theta = \\arctan\\frac{1}{-1} = -45°$ for $-1 + i$ gives $(-1 + i)^3 = (\\sqrt{2})^3\\text{cis}(-135°) = -2 - 2i$. The point lies in the second quadrant, so $\\theta = 135°$ and $(-1 + i)^3 = 2\\sqrt{2}\\text{cis}(405°) = 2 + 2i$.
+[Read more](!#pitfalls)]@
+
 Another example: find $(\\sqrt{3} - i)^6$. The modulus is $\\sqrt{3 + 1} = 2$. The argument, with $a = \\sqrt{3} > 0$ and $b = -1 < 0$, lies in the fourth quadrant: $\\theta = -30°$. So $\\sqrt{3} - i = 2\\text{cis}(-30°)$, and:
 
 @academic[formula_callout:Applying De Moivre's Theorem to Powers
@@ -1439,6 +1448,10 @@ $$z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 360°k}{n}\\right) \\quad \\text
 
 Each root has the same modulus: $|z_k| = R^{1/n}$, the positive real $n$-th root of the original modulus. The roots differ only in their arguments.
 
+@academic[pitfall,aside:true,width:35%:Adding the full turn after dividing
+For $z^3 = 8i$, taking the angles $\\frac{90°}{3} + 360°k = 30° + 360°k$ gives the single root $2\\text{cis}(30°)$ three times. Adding $360°k$ before dividing gives $\\frac{90° + 360°k}{3} = 30°, 150°, 270°$: the roots $\\sqrt{3} + i$, $-\\sqrt{3} + i$ and $-2i$.
+[Read more](!#pitfalls)]@
+
 The first root ($k = 0$) has argument $\\phi/n$, the original angle divided by $n$. Each subsequent root adds $360°/n$ to the argument. The $n$ roots space themselves evenly around the circle of radius $R^{1/n}$.
 
 Consider finding the cube roots of $8$. Write $8 = 8\\text{cis}(0°)$, so $R = 8$ and $\\phi = 0°$. The formula gives:
@@ -1460,17 +1473,17 @@ Three roots: $2$, $-1 + \\sqrt{3}i$, and $-1 - \\sqrt{3}i$. Each cubes to $8$.`,
     obj7: {
   title: `Geometric Interpretation of Roots`,
   before: ``,
-  content: `The $n$-th roots of any complex number arrange themselves with perfect geometric regularity. Plotting them on the [complex plane](!/complex-numbers/geometric-representation) reveals a pattern of elegant symmetry.
+  content: `The $n$-th roots of any nonzero complex number arrange themselves with perfect geometric regularity. Plotting them on the [complex plane](!/complex-numbers/geometric-representation) reveals a pattern of elegant symmetry.
 
 All $n$ roots share the same modulus $R^{1/n}$, placing them on a circle centered at the origin with that radius. They do not cluster or scatter randomly — they distribute themselves at equal angular intervals around this circle.
 
-The angular separation between consecutive roots is exactly $\\frac{360°}{n}$ (or $\\frac{2\\pi}{n}$ radians). The cube roots of any number sit $120°$ apart. Fourth roots sit $90°$ apart. Fifth roots sit $72°$ apart. This uniform spacing holds regardless of which number we take roots of — only the radius and starting angle vary.
+The angular separation between consecutive roots is exactly $\\frac{360°}{n}$ (or $\\frac{2\\pi}{n}$ radians). The cube roots of any nonzero number sit $120°$ apart. Fourth roots sit $90°$ apart. Fifth roots sit $72°$ apart. This uniform spacing holds regardless of which nonzero number we take roots of — only the radius and starting angle vary.
 
-The roots form vertices of a regular $n$-gon inscribed in the circle. Cube roots give an equilateral triangle. Fourth roots give a square. Fifth roots give a regular pentagon. The polygon may appear rotated depending on the argument of the original number, but its shape is always perfectly regular.
+For $n \\geq 3$, the roots form vertices of a regular $n$-gon inscribed in the circle. Cube roots give an equilateral triangle. Fourth roots give a square. Fifth roots give a regular pentagon. The polygon may appear rotated depending on the argument of the original number, but its shape is always perfectly regular.
 
-This geometric picture aids computation and verification. If one root is known, the others follow by rotating $360°/n$ around the origin. If roots fail to form a regular polygon, an error has occurred. The visual pattern provides both a computational shortcut and a consistency check.
+This geometric picture aids computation and verification. If one root is known, the others follow by rotating $360°/n$ around the origin. If roots fail to form a regular polygon (for $n \\geq 3$), an error has occurred. The visual pattern provides both a computational shortcut and a consistency check.
 
-The [conjugate](!/complex-numbers/complex-conjugate) relationship appears when the original number $w$ is real and positive. In that case $\\phi = 0°$, and the roots distribute symmetrically about the real axis. Complex roots come in conjugate pairs, with the real axis serving as a line of mirror symmetry.`,
+The [conjugate](!/complex-numbers/complex-conjugate) relationship appears when the original number $w$ is real. In that case $\\phi = 0°$ or $180°$, and the roots distribute symmetrically about the real axis. Complex roots come in conjugate pairs, with the real axis serving as a line of mirror symmetry.`,
   after: ``,
   link: '',
 },
@@ -1498,7 +1511,7 @@ The fourth roots of unity illustrate the pattern: $z_0 = 1$, $z_1 = i$, $z_2 = -
 
 The sixth roots of unity are $1$, $\\text{cis}(60°)$, $\\text{cis}(120°)$, $-1$, $\\text{cis}(240°)$, $\\text{cis}(300°)$. In algebraic form: $1$, $\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, $-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i$, $-1$, $-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$, $\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i$. They form a regular hexagon on the unit circle.
 
-The primitive $n$-th root of unity, denoted $\\omega = \\text{cis}\\left(\\frac{2\\pi}{n}\\right)$, generates all others through its powers. Since $z_k = \\omega^k$, the complete set of $n$-th roots of unity is $\\{1, \\omega, \\omega^2, \\ldots, \\omega^{n-1}\\}$. This generator perspective connects roots of unity to group theory and number theory.`,
+A primitive $n$-th root of unity, usually written $\\omega = \\text{cis}\\left(\\frac{2\\pi}{n}\\right)$, generates all others through its powers. Since $z_k = \\omega^k$, the complete set of $n$-th roots of unity is $\\{1, \\omega, \\omega^2, \\ldots, \\omega^{n-1}\\}$. This generator perspective connects roots of unity to group theory and number theory.`,
   after: ``,
   link: '',
 },
@@ -1661,6 +1674,61 @@ A regular pentagon with radius $2$, one vertex on the positive real axis.`,
   
     },
   
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes account for many of the wrong answers in work with De Moivre's theorem. Three are marked where they happen in the sections above; keeping only one root is the one the introduction to $n$-th roots already points out. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Forgetting to raise the modulus**
+
+The angle is multiplied by $n$, but the modulus is left as it is, as if every number had modulus $1$.
+
+Wrong working: $(2\\text{cis}(45°))^4 = 2\\text{cis}(4 \\times 45°) = 2\\text{cis}(180°) = -2$.
+
+Right working: $(2\\text{cis}(45°))^4 = 2^4\\text{cis}(180°) = 16\\text{cis}(180°) = -16$. In algebraic form $2\\text{cis}(45°) = \\sqrt{2} + \\sqrt{2}i$, its square is $2 + 4i + 2i^2 = 4i$, and $(4i)^2 = 16i^2 = -16$.
+
+Why it happens: the theorem is first stated for $\\cos\\theta + i\\sin\\theta$, whose modulus is $1$, and it is remembered as "multiply the angle".
+
+How to check: the modulus of $z^n$ is $|z|^n$. Here $|z^4| = 2^4 = 16$, so $-2$ cannot be right.
+
+**Taking the argument from the tangent alone**
+
+The argument is found as $\\arctan\\frac{b}{a}$ without looking at the quadrant of the point, and De Moivre's theorem then multiplies the wrong angle.
+
+Wrong working: for $z = -1 + i$, $\\theta = \\arctan\\frac{1}{-1} = -45°$, so $(-1 + i)^3 = (\\sqrt{2})^3\\text{cis}(-135°) = 2\\sqrt{2}\\left(-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i\\right) = -2 - 2i$.
+
+Right working: the point $(-1, 1)$ lies in the second quadrant, so $\\theta = 180° - 45° = 135°$. Then $(-1 + i)^3 = 2\\sqrt{2}\\text{cis}(405°) = 2\\sqrt{2}\\text{cis}(45°) = 2 + 2i$. Directly, $(-1 + i)^2 = 1 - 2i + i^2 = -2i$ and $-2i(-1 + i) = 2i - 2i^2 = 2 + 2i$.
+
+Why it happens: $\\arctan$ only returns angles between $-90°$ and $90°$, so it never gives the direction of a point with $a < 0$.
+
+How to check: the signs of $\\cos\\theta$ and $\\sin\\theta$ must match the signs of $a$ and $b$. Here $\\cos(-45°) > 0$ while $a = -1 < 0$.
+
+**Keeping only one root**
+
+An equation $z^n = w$ is solved with the single root that real-number experience suggests, and the other $n - 1$ roots are never looked for.
+
+Wrong working: $z^4 = 16$, so $z = 2$, or at most $z = \\pm 2$.
+
+Right working: $16 = 16\\text{cis}(0°)$, so $z_k = 16^{1/4}\\text{cis}\\left(\\frac{360°k}{4}\\right) = 2\\text{cis}(90°k)$ for $k = 0, 1, 2, 3$. The four roots are $2$, $2i$, $-2$ and $-2i$; for example $(2i)^4 = 16i^4 = 16$.
+
+Why it happens: the radical sign and the exponent $\\frac{1}{n}$ name a single value on the positive reals, and that habit is carried over to $\\mathbb{C}$.
+
+How to check: count the roots. A nonzero number has exactly $n$ distinct $n$-th roots, evenly spaced $\\frac{360°}{n}$ apart on one circle.
+
+**Adding the full turn after dividing**
+
+In the roots formula, the angle $\\phi$ is divided by $n$ first and the multiples of $360°$ are added afterwards. Every value of $k$ then gives the same direction.
+
+Wrong working: for $z^3 = 8i = 8\\text{cis}(90°)$, the angles $\\frac{90°}{3} + 360°k = 30°, 390°, 750°$ all point the same way, so the only root found is $2\\text{cis}(30°) = \\sqrt{3} + i$.
+
+Right working: the full turn is added before dividing, $\\alpha = \\frac{90° + 360°k}{3} = 30°, 150°, 270°$. The roots are $2\\text{cis}(30°) = \\sqrt{3} + i$, $2\\text{cis}(150°) = -\\sqrt{3} + i$ and $2\\text{cis}(270°) = -2i$. For example $(-2i)^3 = -8i^3 = 8i$.
+
+Why it happens: the identity $\\text{cis}\\theta = \\text{cis}(\\theta + 360°)$ is applied to the root's angle instead of to the angle of $w$, which is the one that can be written in many ways.
+
+How to check: consecutive roots must differ by $\\frac{360°}{n}$, here $120°$. If two of the listed roots coincide, the turns were added in the wrong place.`,
+      before:``,
+      after:``,
+      link:'',
+    },
     faq: {
       title: `De Moivre's Theorem FAQ`,
     },
@@ -1678,7 +1746,7 @@ A regular pentagon with radius $2$, one vertex on the positive real axis.`,
 const faqQuestions = {
   obj1: {
     question: "What is De Moivre's theorem?",
-    answer: "It says that raising a complex number in polar form to a power raises the modulus to that power and multiplies the angle by it. Powers therefore become one multiplication instead of repeated expansion. It works for negative and fractional exponents too, which is what makes root extraction possible. Watch it on the [De Moivre visualiser](!/complex-numbers/visual-tools/demoivre-visualizer).",
+    answer: "It says that raising a complex number in polar form to a power raises the modulus to that power and multiplies the angle by it. Powers therefore become one multiplication instead of repeated expansion. It works for negative integer exponents too, and with fractional exponents 1/n it yields the n roots once full turns are added to the angle, which is what makes root extraction possible. Watch it on the [De Moivre visualiser](!/complex-numbers/visual-tools/demoivre-visualizer).",
     sectionId: "2"
   },
   obj2: {
@@ -1837,8 +1905,59 @@ const schemas = {
     ],
   };
 
+  const nthRootsAnatomy = {
+    header: {
+      kicker: 'the formula, part by part',
+      title: 'The n-th roots of w = R cis φ',
+      lede: 'one modulus for all n roots; the arguments start at φ/n and step evenly around the circle',
+    },
+    formula: [
+      { kind: 'part', id: 'z', children: [
+        { kind: 'var', text: 'z' }, { kind: 'sub', children: [ { kind: 'var', text: 'k' } ] },
+      ] },
+      { kind: 'op', text: '=' },
+      { kind: 'part', id: 'mod', children: [
+        { kind: 'var', text: 'R' }, { kind: 'sup', children: [ { kind: 'op', text: '1/', tight: true }, { kind: 'var', text: 'n' } ] },
+      ] },
+      { kind: 'part', id: 'cis', children: [ { kind: 'op', text: 'cis', tight: true } ] },
+      { kind: 'op', text: '(', big: true, tight: true },
+      { kind: 'frac',
+        num: [
+          { kind: 'part', id: 'phi', children: [ { kind: 'var', text: 'φ' } ] },
+          { kind: 'op', text: '+' },
+          { kind: 'part', id: 'turn', children: [ { kind: 'op', text: '2', tight: true }, { kind: 'var', text: 'π' }, { kind: 'var', text: 'k' } ] },
+        ],
+        den: [
+          { kind: 'part', id: 'n', children: [ { kind: 'var', text: 'n' } ] },
+        ],
+      },
+      { kind: 'op', text: ')', big: true, tight: true },
+    ],
+    parts: [
+      { id: 'z', chip: 'zₖ', title: 'The k-th root', side: 'bottom',
+        tip: 'One of the n solutions of zⁿ = w.',
+        desc: 'Each value of k from 0 to n − 1 gives one root; together they are all solutions of zⁿ = w. Example: the cube roots of 8 are z₀ = 2, z₁ = −1 + √3 i and z₂ = −1 − √3 i. Each cubes to 8.' },
+      { id: 'mod', chip: 'R¹ᐟⁿ', title: 'Same modulus', side: 'top',
+        tip: 'Every root sits at the same distance from 0.',
+        desc: 'The positive real n-th root of the original modulus, shared by all n roots; the roots differ only in their arguments. Example: 8 = 8 cis 0°, so R = 8 and every cube root has modulus 8¹ᐟ³ = 2.' },
+      { id: 'cis', chip: 'cis', title: 'Direction', side: 'bottom',
+        tip: 'cis θ is short for cos θ + i sin θ.',
+        desc: 'It turns the angle in brackets into a point on the unit circle; the modulus in front scales it out to radius R¹ᐟⁿ. Example: 2 cis 120° = 2(−1/2 + (√3/2) i) = −1 + √3 i.' },
+      { id: 'phi', chip: 'φ', title: 'Original argument', side: 'top',
+        tip: 'The angle of w, shared out among the roots.',
+        desc: 'For k = 0 the argument is φ/n: the original angle divided by n. That first root is where the evenly spaced set starts. Example: φ = 0° for w = 8, so z₀ = 2 cis 0° = 2.' },
+      { id: 'turn', chip: 'k = 0 … n−1', title: 'Full turns', side: 'top',
+        tip: 'Add the full turns before dividing by n.',
+        desc: 'Adding 2πk (360°k) leaves w unchanged, but after dividing by n each k lands somewhere new. Adding the turns after dividing gives the same root n times. Example: for z³ = 8i, (90° + 360°k)/3 gives 30°, 150°, 270°.' },
+      { id: 'n', chip: 'n', title: 'Even spacing', side: 'bottom',
+        tip: 'Consecutive roots are 360°/n apart.',
+        desc: 'Dividing by n spreads the n roots evenly around the circle of radius R¹ᐟⁿ. Example: for the cube roots of 8 the step is 360°/3 = 120°, giving the angles 0°, 120° and 240°.' },
+    ],
+  };
+
   return {
   props:{
+    nthRootsAnatomy,
     unityParityCases,
     demoUnits,
     sectionsContent,
@@ -1864,7 +1983,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeMoivreTheoremPage({unityParityCases, 
+export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1945,6 +2064,16 @@ export default function DeMoivreTheoremPage({unityParityCases,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="nth-roots-anatomy"
+            title="The n-th roots formula, part by part"
+            source="/complex-numbers/demoivre-theorem"
+            before={"Taking the formula apart: the common modulus, the original argument, the full turns, and the division by $n$."}
+            after={"The part most often misread is the order of the full turns and the division: add $2\\pi k$ first, then divide by $n$. The [roots of unity](!#8) are the case $w = 1$."}
+          >
+            <FormulaAnatomy data={nthRootsAnatomy} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2027,6 +2156,14 @@ export default function DeMoivreTheoremPage({unityParityCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

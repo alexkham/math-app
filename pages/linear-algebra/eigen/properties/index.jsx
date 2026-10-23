@@ -1295,6 +1295,10 @@ $$\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$$]@
 
 This follows from the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation). The coefficient of $\\lambda^{n-1}$ in $p(\\lambda) = \\det(A - \\lambda I)$ is $(-1)^{n-1}\\text{tr}(A)$, and by Vieta&apos;s formulas, the sum of the roots of a degree-$n$ polynomial equals (up to sign) the coefficient of the $(n-1)$-th power term.
 
+@academic[pitfall,aside:true,width:35%:Reading eigenvalues off the diagonal
+Taking the diagonal entries $1, 3$ of $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ as its eigenvalues passes the trace test, $1 + 3 = 4$, but their product $3$ is not $\\det(A) = -5$. The eigenvalues are $5$ and $-1$.
+[Read more](!#pitfalls)]@
+
 The trace provides a quick consistency check. A $3 \\times 3$ matrix with diagonal entries $7, -2, 4$ has trace $9$. If the eigenvalues are computed as $5, 3, 1$, the sum is $9$ — consistent. If the sum does not match the trace, a computation error has occurred.`,
     before: ``,
     after: ``,
@@ -1308,12 +1312,17 @@ The trace provides a quick consistency check. A $3 \\times 3$ matrix with diagon
 $$\\det(A) = \\lambda_1 \\cdot \\lambda_2 \\cdots \\lambda_n$$
 /linear-algebra/formulas#determinant_product_of_eigenvalues]@
 
-@academic[formulas_link:/linear-algebra/formulas#multiplicity_inequality]@
-/linear-algebra/formulas]@
+@academic[formulas_link:/linear-algebra/formulas#determinant_product_of_eigenvalues]@
 
 This follows from evaluating the characteristic polynomial at $\\lambda = 0$: $p(0) = \\det(A - 0 \\cdot I) = \\det(A)$, and since the roots of $p$ are $\\lambda_1, \\dots, \\lambda_n$, the constant term is (up to sign) their product.
 
-The most immediate consequence is that $A$ is [invertible](!/linear-algebra/matrix/inverse) if and only if no eigenvalue is zero. A single vanishing eigenvalue makes the product zero, collapsing the determinant and rendering $A$ singular. Conversely, all eigenvalues nonzero means $\\det(A) \\neq 0$ and $A$ is invertible.`,
+The most immediate consequence is that $A$ is [invertible](!/linear-algebra/matrix/inverse) if and only if no eigenvalue is zero. A single vanishing eigenvalue makes the product zero, collapsing the determinant and rendering $A$ singular. Conversely, all eigenvalues nonzero means $\\det(A) \\neq 0$ and $A$ is invertible.
+
+@academic[pitfall,aside:true,width:35%:Counting a repeated eigenvalue once
+Listing the eigenvalues of $A = \\begin{pmatrix} 3 & 5 & 0 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & -2 \\end{pmatrix}$ as $3, -2$ gives the product $-6$. The characteristic polynomial is $(3 - \\lambda)^2(-2 - \\lambda)$, so $3$ counts twice and $\\det(A) = 3 \\cdot 3 \\cdot (-2) = -18$.
+[Read more](!#pitfalls)]@
+
+The list $\\lambda_1, \\dots, \\lambda_n$ in the formula comes from the characteristic polynomial, which has degree $n$ for an $n \\times n$ matrix and splits into $n$ linear factors over the complex numbers. A root of multiplicity $m$ fills $m$ places in the list, exactly as in the trace formula of section $1$, so the trace check and the determinant check are run on the same $n$ numbers.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1433,6 +1442,10 @@ The proof: $(A + cI)\\mathbf{v} = A\\mathbf{v} + c\\mathbf{v} = \\lambda\\mathbf
 
 The eigenvalues of $A + cI$ are $\\lambda_1 + c, \\lambda_2 + c, \\dots, \\lambda_n + c$. Scaling works similarly: $cA$ has eigenvalues $c\\lambda_1, c\\lambda_2, \\dots, c\\lambda_n$ with the same eigenvectors.
 
+@academic[pitfall,aside:true,width:35%:Adding the eigenvalues of a sum
+Adding eigenvalues the way the shift rule does predicts $0, 0$ for $A + B$ when $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$, each with eigenvalues $0, 0$. But $A + B = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has eigenvalues $1$ and $-1$.
+[Read more](!#pitfalls)]@
+
 These operations are useful in practice. Adding $cI$ can shift all eigenvalues to be positive (making a matrix positive definite for numerical purposes), or shift a known eigenvalue to zero (making $A - \\lambda_0 I$ singular, which is exactly how the eigenvalue equation is set up).`,
     before: ``,
     after: ``,
@@ -1498,9 +1511,13 @@ The immediate consequence: a matrix with $n$ distinct eigenvalues has $n$ indepe
 
 If $B = P^{-1}AP$ and $\\mathbf{v}$ is an eigenvector of $A$ with eigenvalue $\\lambda$, then $P^{-1}\\mathbf{v}$ is an eigenvector of $B$ with the same eigenvalue: $B(P^{-1}\\mathbf{v}) = P^{-1}AP(P^{-1}\\mathbf{v}) = P^{-1}A\\mathbf{v} = P^{-1}\\lambda\\mathbf{v} = \\lambda(P^{-1}\\mathbf{v})$.
 
+@academic[pitfall,aside:true,width:35%:Reading the theorem backwards
+Concluding similarity from equal eigenvalues fails for $\\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ and $2I$. Both have characteristic polynomial $(\\lambda - 2)^2$, but $P^{-1}(2I)P = 2I$ for every invertible $P$, so they are not similar; their geometric multiplicities are $1$ and $2$.
+[Read more](!#pitfalls)]@
+
 The eigenvalues stay the same; the eigenvectors transform by $P^{-1}$. This is consistent with the interpretation that eigenvalues are properties of the [transformation](!/linear-algebra/transformations), not of the matrix. Changing the basis changes the matrix and the eigenvector coordinates, but the eigenvalues — the intrinsic scaling factors — are invariant.
 
-The [trace](!/linear-algebra/matrix/trace), [determinant](!/linear-algebra/determinants), and [rank](!/linear-algebra/matrix/rank) are all derivable from the eigenvalues, so their invariance under similarity is a corollary of eigenvalue invariance.`,
+The [trace](!/linear-algebra/matrix/trace) and [determinant](!/linear-algebra/determinants) are derivable from the eigenvalues, and the [rank](!/linear-algebra/matrix/rank) is $n$ minus the geometric multiplicity of $0$, so their invariance under similarity is a corollary of the theorem above.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1526,11 +1543,74 @@ Power iteration turns this into an algorithm. Start with any vector having $c_1 
 @academic[formula_callout:The Dominant Eigenvalue and Power Iteration
 $$R(\\mathbf{x}) = \\frac{\\mathbf{x}^T A\\,\\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$$]@
 
-which equals $\\lambda$ exactly when $\\mathbf{x}$ is an eigenvector for $\\lambda$, and for a [symmetric matrix](!/linear-algebra/decompositions/spectral) always lies between the smallest and largest eigenvalues. Convergence is geometric with ratio $|\\lambda_2 / \\lambda_1|$: a wide gap between the top two eigenvalues means fast convergence, a narrow one means slow.
+which equals $\\lambda$ whenever $\\mathbf{x}$ is an eigenvector for $\\lambda$, and for a [symmetric matrix](!/linear-algebra/decompositions/spectral) always lies between the smallest and largest eigenvalues. Convergence is geometric with ratio $|\\lambda_2 / \\lambda_1|$: a wide gap between the top two eigenvalues means fast convergence, a narrow one means slow.
 
 Two things break the method. If $|\\lambda_1| = |\\lambda_2|$, as with a real matrix whose top eigenvalues form a complex conjugate pair, or with eigenvalues $\\lambda$ and $-\\lambda$, the iterates never settle. And if the starting vector has no $\\mathbf{v}_1$ component, the theory sends the iterates to the next eigenvector instead, though rounding error usually reintroduces a small $\\mathbf{v}_1$ component and rescues the method. Applying the same idea to $A^{-1}$ finds the eigenvalue of smallest modulus, and applying it to $(A - \\mu I)^{-1}$ finds the eigenvalue nearest a chosen shift $\\mu$, using the inverse and shift rules from earlier on this page.
 
 The [power iteration tool](!/linear-algebra/visual-tools/power-iteration) runs the iteration step by step and shows the direction locking on to the dominant eigenvector.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj13: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong answers when the properties on this page are put to use. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading eigenvalues off the diagonal**
+
+The trace is the sum of the diagonal entries and also the sum of the eigenvalues, so the diagonal entries themselves are taken to be the eigenvalues. That is true for diagonal and triangular matrices, and for no others in general.
+
+Wrong working: for $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$, the eigenvalues are read as $1$ and $3$.
+
+Right working: solve the characteristic equation.
+$$\\det(A - \\lambda I) = (1 - \\lambda)(3 - \\lambda) - 8 = \\lambda^2 - 4\\lambda - 5 = (\\lambda - 5)(\\lambda + 1)$$
+so the eigenvalues are $5$ and $-1$.
+
+Why it happens: the trace formula makes the two lists look interchangeable, and the first examples of eigenvalues are usually diagonal or triangular matrices, where they really are the same.
+
+How to check: run the trace check and the determinant check together. The wrong pair passes the first, $1 + 3 = 4$, and fails the second, $1 \\cdot 3 = 3$ while $\\det(A) = 3 - 8 = -5$. The right pair passes both: $5 + (-1) = 4$ and $5 \\cdot (-1) = -5$.
+
+**Counting a repeated eigenvalue once**
+
+The eigenvalues are listed as a set of distinct values, and that shorter list is used in the trace or determinant formula. Both formulas need every eigenvalue as often as it appears as a root of the characteristic polynomial.
+
+Wrong working: $A = \\begin{pmatrix} 3 & 5 & 0 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & -2 \\end{pmatrix}$ is triangular, with eigenvalues $3$ and $-2$. Taking each once gives
+$$\\det(A) = 3 \\cdot (-2) = -6, \\qquad \\text{tr}(A) = 3 + (-2) = 1$$
+
+Right working: the characteristic polynomial is $(3 - \\lambda)^2(-2 - \\lambda)$, so the list is $3, 3, -2$:
+$$\\det(A) = 3 \\cdot 3 \\cdot (-2) = -18, \\qquad \\text{tr}(A) = 3 + 3 + (-2) = 4$$
+
+Why it happens: the eigenvalue $3$ has only a one-dimensional eigenspace here, since $A - 3I$ has rank $2$, so only one eigenvector turns up for it. The formulas count the algebraic multiplicity, not the number of eigenvectors.
+
+How to check: an $n \\times n$ matrix has a list of exactly $n$ eigenvalues. The trace check also catches the slip: the diagonal entries add up to $4$, not $1$.
+
+**Adding the eigenvalues of a sum**
+
+The shift rule, $\\lambda \\mapsto \\lambda + c$ for $A + cI$, is carried over to the sum $A + B$ of two arbitrary matrices, and the eigenvalues of $A$ and $B$ are added in pairs.
+
+Wrong working: $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$ are triangular, each with eigenvalues $0, 0$. Adding gives $0, 0$ as the eigenvalues of $A + B$.
+
+Right working:
+$$\\det(A + B - \\lambda I) = \\det\\begin{pmatrix} -\\lambda & 1 \\\\ 1 & -\\lambda \\end{pmatrix} = \\lambda^2 - 1$$
+so the eigenvalues of $A + B$ are $1$ and $-1$, with eigenvectors $(1, 1)^T$ and $(1, -1)^T$. Products fail in the same way: $AB = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ has eigenvalues $1$ and $0$.
+
+Why it happens: the shift rule works because every vector is an eigenvector of $cI$, so $A$ and $cI$ share all eigenvectors of $A$. A general $B$ shares none: the only eigenvector direction of $A$ is $(1, 0)^T$, and that of $B$ is $(0, 1)^T$.
+
+How to check: the trace cannot catch this, because $\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)$ always holds. The determinant can: $\\det(A + B) = -1$, while the predicted eigenvalues $0, 0$ would give $0$.
+
+**Reading the theorem backwards**
+
+Similar matrices have the same eigenvalues, and this is turned around: two matrices with the same eigenvalues, or even the same characteristic polynomial, are taken to be similar.
+
+Wrong working: $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ and $2I$ both have characteristic polynomial $(\\lambda - 2)^2$, trace $4$ and determinant $4$, so they are declared similar.
+
+Right working: for every invertible $P$,
+$$P^{-1}(2I)P = 2P^{-1}P = 2I$$
+so the only matrix similar to $2I$ is $2I$ itself, and $A \\neq 2I$. The geometric multiplicities show the same thing: $A - 2I$ has rank $1$, so $m_g(2) = 1$ for $A$, while $m_g(2) = 2$ for $2I$. Similar matrices must agree on both.
+
+Why it happens: the theorem lists many quantities that similar matrices share, and it is natural to expect such a long list to pin the matrix down. The characteristic polynomial does not record the geometric multiplicities.
+
+How to check: compare the geometric multiplicities as well as the eigenvalues. For two diagonalizable matrices, the same eigenvalues with the same multiplicities do imply similarity, since both are similar to the same diagonal matrix.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1843,6 +1923,14 @@ export default function EigenvaluePropertiesPage({
           >
             <PropertyLawCard data={spectralProperties} theme="navy" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

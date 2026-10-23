@@ -388,18 +388,18 @@ export async function getStaticProps(){
         
         "Exclusive OR Laws": [
           { id: 26, law: "Definition of XOR", formula: "p ⊕ q ≡ (p ∨ q) ∧ ¬(p ∧ q)", explanation: "XOR is true when exactly one of p or q is true", topic: "Equivalences" },
-          { id: 27, law: "Involution of XOR", formula: "p ⊕ p ≡ F", explanation: "A value XOR itself is always false", topic: "Semantics" },
+          { id: 27, law: "Self-Inverse Law of XOR", formula: "p ⊕ p ≡ F", explanation: "A value XOR itself is always false", topic: "Semantics" },
           { id: 28, law: "Commutative Law of XOR", formula: "p ⊕ q ≡ q ⊕ p", explanation: "Order does not matter for XOR", topic: "Equivalences" },
           { id: 29, law: "Associative Law of XOR", formula: "(p ⊕ q) ⊕ r ≡ p ⊕ (q ⊕ r)", explanation: "Grouping does not matter for XOR", topic: "Equivalences" }
         ],
         
         "Monotonicity Laws": [
           { id: 30, law: "Monotonicity of OR", formula: "p → (p ∨ q)", explanation: "Adding a term to an OR does not make it false", topic: "Proof Techniques" },
-          { id: 31, law: "Monotonicity of AND", formula: "(p ∧ q) → p", explanation: "Removing a term from an AND does not make it true", topic: "Proof Techniques" }
+          { id: 31, law: "Monotonicity of AND", formula: "(p ∧ q) → p", explanation: "Removing a term from an AND does not make it false", topic: "Proof Techniques" }
         ],
         
         "Expansion Laws": [
-          { id: 32, law: "Ternary Absorption", formula: "(p ∧ q) ∨ (p ∧ r) ≡ p ∧ (q ∨ r)", explanation: "Factoring out common terms", topic: "Normal Forms" }
+          { id: 32, law: "Distributive Law (Factoring)", formula: "(p ∧ q) ∨ (p ∧ r) ≡ p ∧ (q ∨ r)", explanation: "Factoring out common terms", topic: "Normal Forms" }
         ],
         
         "Resolution Laws": [

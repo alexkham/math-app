@@ -1146,7 +1146,7 @@ const spanDiagnostics = {
         {
           name: 'Which vectors are redundant?',
           anchor: '#7',
-          formula: 'non-pivot columns of $\\operatorname{rref}(A)$',
+          formula: 'columns of $A$ at the non-pivot positions of $\\operatorname{rref}(A)$ (one valid choice)',
           condition: 'a pivot in every **column** \u21D2 none',
           strict: true,
           note: 'A column without a pivot corresponds to a vector already in the span of the earlier ones, so it can be dropped without changing the span. The reduced form names which \u2014 removing them leaves a [minimal spanning set](!/linear-algebra/vector-spaces/basis).',
@@ -1394,6 +1394,10 @@ The pattern is consistent: the dimension of the span equals the number of indepe
 
 @academic[rule_theorem_plain:In $\\mathbb{R}^n$, a spanning set must contain at least $n$ vectors.]@
 
+@academic[pitfall,aside:true,width:35%:Treating the count as enough
+Calling $(1, 2)$, $(2, 4)$, $(3, 6)$ a spanning set of $\\mathbb{R}^2$ because there are at least two of them ignores that all three are multiples of $(1, 2)$. Their span is the line $y = 2x$, and $(1, 0)$ is never reached.
+[Read more](!#pitfalls)]@
+
 Fewer than $n$ vectors cannot reach every direction — their span is a proper subspace of [dimension](!/linear-algebra/vector-spaces/dimension) less than $n$. A spanning set with exactly $n$ independent vectors is a [basis](!/linear-algebra/vector-spaces/basis). A spanning set with more than $n$ vectors contains redundancies that can be removed.
 
 The standard basis $\\{\\mathbf{e}_1, \\dots, \\mathbf{e}_n\\}$ spans $\\mathbb{R}^n$ with no redundancy. The set $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_1 + \\mathbf{e}_2\\}$ also spans $\\mathbb{R}^2$, but the third vector is redundant — it lies in the span of the first two. Removing it leaves a basis.`,
@@ -1414,7 +1418,7 @@ $$\\mathbf{b} \\in \\text{Span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} \\iff
 
 Row reduce the augmented matrix $[A \\mid \\mathbf{b}]$. If a row of the form $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ appears, the system is inconsistent and $\\mathbf{b}$ is not in the span.
 
-## Example: In the Span
+## Example: Not in the Span
 
 Is $\\mathbf{b} = (5, 3, 7)$ in $\\text{Span}\\{(1, 0, 1), (0, 1, 2)\\}$? Form and reduce:
 
@@ -1423,14 +1427,20 @@ $$\\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 1 & 2 & 7 \\end{pmatrix} \\xrig
 
 The last row reads $0 = -4$, a contradiction. So $\\mathbf{b}$ is not in the span.
 
-## Example: Not in the Span Versus In the Span
+## Example: In the Span
 
 Changing the target to $\\mathbf{b} = (5, 3, 11)$ and repeating:
 
 @academic[formula_callout:Testing Whether a Vector Is in a Span
 $$\\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 1 & 2 & 11 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 2 & 6 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 5 \\\\ 0 & 1 & 3 \\\\ 0 & 0 & 0 \\end{pmatrix}$$]@
 
-No contradiction. The solution is $c_1 = 5$, $c_2 = 3$, so $(5, 3, 11) = 5(1, 0, 1) + 3(0, 1, 2)$.`,
+No contradiction. The solution is $c_1 = 5$, $c_2 = 3$, so $(5, 3, 11) = 5(1, 0, 1) + 3(0, 1, 2)$.
+
+@academic[pitfall,aside:true,width:35%:Reducing without the target column
+Reducing only $A = [(1, 0, 1) \\; (0, 1, 2)]$ finds a pivot in each column, whatever $\\mathbf{b}$ is, and would put $(5, 3, 7)$ in the span. With $\\mathbf{b}$ attached the last row reads $0 = -4$, so it is not.
+[Read more](!#pitfalls)]@
+
+Both examples use the same two vectors, so the first two columns reduce in exactly the same way in each: pivots in rows $1$ and $2$, and zeros beneath them in row $3$. The two examples part only in the last column. Its third entry ends as $-4$ for $(5, 3, 7)$ and as $0$ for $(5, 3, 11)$, and that one entry is the whole difference between a vector outside the span and a vector inside it.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1440,6 +1450,10 @@ No contradiction. The solution is $c_1 = 5$, $c_2 = 3$, so $(5, 3, 11) = 5(1, 0,
     content: `The question "Does $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ span $\\mathbb{R}^n$?" asks whether $A\\mathbf{c} = \\mathbf{b}$ is consistent for every possible right-hand side $\\mathbf{b} \\in \\mathbb{R}^n$, where $A$ is the matrix with the vectors as columns.
 
 Row reduce $A$. The columns span $\\mathbb{R}^n$ if and only if every row of the echelon form contains a pivot. If any row is entirely zero, then for some choices of $\\mathbf{b}$ the augmented system will produce a $[0 \\; \\cdots \\; 0 \\mid d]$ contradiction, meaning those $\\mathbf{b}$ are unreachable.
+
+@academic[pitfall,aside:true,width:35%:Looking for pivots in the columns
+Saying $(1, 0)$, $(0, 1)$, $(1, 1)$ fail to span $\\mathbb{R}^2$ because column $3$ of $\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ has no pivot reads the wrong direction. Both rows have a pivot, so the set spans $\\mathbb{R}^2$.
+[Read more](!#pitfalls)]@
 
 For the square case — $n$ vectors in $\\mathbb{R}^n$ — spanning reduces to a [determinant](!/linear-algebra/determinants) test: the columns span $\\mathbb{R}^n$ if and only if $\\det(A) \\neq 0$. This is equivalent to independence when the count matches the dimension, which is why the spanning and independence conditions coincide for sets of exactly $n$ vectors in $\\mathbb{R}^n$.
 
@@ -1473,7 +1487,11 @@ $$\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} = \\text{Span}\\{\\math
 
 This happens exactly when $\\mathbf{v}_j$ is already a linear combination of the other vectors — it contributes no new directions.
 
-Removing all redundant vectors from a spanning set produces a basis: a minimal spanning set with no waste. The process can be carried out systematically via row reduction. Arrange the vectors as columns, reduce, and identify the pivot columns. The original vectors corresponding to pivot positions form a basis for the span. The non-pivot columns are the redundant ones.
+Removing redundant vectors from a spanning set one at a time, until none is left, produces a basis: a minimal spanning set with no waste. The process can be carried out systematically via row reduction. Arrange the vectors as columns, reduce, and identify the pivot columns. The original vectors corresponding to pivot positions form a basis for the span. The non-pivot columns are redundant: removing all of them leaves the span unchanged.
+
+@academic[pitfall,aside:true,width:35%:Using the echelon columns as the basis
+For $(1, 0, 1)$, $(0, 1, 2)$, $(1, 1, 3)$ the pivot columns of the echelon form are $(1, 0, 0)$ and $(0, 1, 0)$, which span the plane $z = 0$ and miss $(1, 0, 1)$. The basis is the original pair $(1, 0, 1)$, $(0, 1, 2)$.
+[Read more](!#pitfalls)]@
 
 For example, if four vectors in $\\mathbb{R}^3$ are given and row reduction reveals pivots in columns $1$, $2$, and $4$, then the original first, second, and fourth vectors form a basis for the span. The third vector is a combination of the first two.
 
@@ -1498,6 +1516,71 @@ In abstract spaces, the column-matrix approach is unavailable. Testing whether a
   obj9: {
     title: `Summary: Diagnostic Questions about Span`,
     content: `Every span question — whether a given vector is reachable, whether a set covers $\\mathbb{R}^n$, which vectors are redundant, whether a set is a basis — reduces to building a matrix from the given vectors, row-reducing it, and inspecting the result. What changes between questions is which part of the reduced form to look at: the augmented column for membership, the rows for spanning, the columns for redundancy, both for a basis. The table below collects these questions side by side, showing what to set up, what to look for in the reduced form, and what a positive answer means in each case.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong answers to span questions. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating the count as enough**
+
+A set with at least $n$ vectors is taken to span $\\mathbb{R}^n$ without any further check. The count is needed for spanning, but it does not guarantee it.
+
+Wrong working: the set $\\{(1, 2), (2, 4), (3, 6)\\}$ has three vectors in $\\mathbb{R}^2$, more than the two required, so it is called a spanning set.
+
+Right working: $(2, 4) = 2(1, 2)$ and $(3, 6) = 3(1, 2)$, so every combination is a multiple of $(1, 2)$:
+$$c_1(1, 2) + c_2(2, 4) + c_3(3, 6) = (c_1 + 2c_2 + 3c_3)(1, 2)$$
+The span is the line $y = 2x$. Testing $\\mathbf{b} = (1, 0)$ shows the gap:
+$$\\left(\\begin{array}{ccc|c} 1 & 2 & 3 & 1 \\\\ 2 & 4 & 6 & 0 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{ccc|c} 1 & 2 & 3 & 1 \\\\ 0 & 0 & 0 & -2 \\end{array}\\right)$$
+The last row reads $0 = -2$, so $(1, 0)$ is not in the span, and the set does not span $\\mathbb{R}^2$.
+
+Why it happens: the rule says a spanning set of $\\mathbb{R}^n$ needs at least $n$ vectors. Read backwards, it turns into "$n$ vectors are enough", which is a different and false statement.
+
+How to check: row-reduce and count the rows that hold a pivot. Here the echelon form of the coefficient matrix has one pivot row out of two, so the set misses a direction.
+
+**Reducing without the target column**
+
+To decide whether $\\mathbf{b}$ is in a span, only the matrix $A$ of the given vectors is reduced. When every column of $A$ has a pivot, $\\mathbf{b}$ is declared to be in the span.
+
+Wrong working: for $\\mathbf{b} = (5, 3, 7)$ and the vectors $(1, 0, 1)$, $(0, 1, 2)$,
+$$\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 2 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 2 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$$
+Both columns have a pivot, so $(5, 3, 7)$ is called a member of the span.
+
+Right working: reduce the augmented matrix $[A \\mid \\mathbf{b}]$, as in the first example of the membership section. The same steps end in the row $[0 \\; 0 \\mid -4]$, which reads $0 = -4$. The system is inconsistent and $(5, 3, 7)$ is not in the span. Pivots in every column of $A$ only say that the two vectors are independent, and that is true whichever $\\mathbf{b}$ is tested.
+
+Why it happens: the independence test reduces $A$ alone, and the membership test looks almost the same, so the extra column is dropped.
+
+How to check: substitute the combination back. The first two rows force $c_1 = 5$ and $c_2 = 3$, and $5(1, 0, 1) + 3(0, 1, 2) = (5, 3, 11)$, not $(5, 3, 7)$.
+
+**Looking for pivots in the columns**
+
+To decide whether a set spans $\\mathbb{R}^n$, the columns of the echelon form are searched for pivots. A column without a pivot is taken to mean that the set fails to span.
+
+Wrong working: for $\\{(1, 0), (0, 1), (1, 1)\\}$ the matrix is already in echelon form,
+$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$$
+Column $3$ has no pivot, so the set is said not to span $\\mathbb{R}^2$.
+
+Right working: spanning is read from the rows. Both rows hold a pivot, so $A\\mathbf{c} = \\mathbf{b}$ is consistent for every $\\mathbf{b} = (b_1, b_2)$: with the free variable $c_3 = 0$, the solution is $c_1 = b_1$, $c_2 = b_2$. The set spans $\\mathbb{R}^2$. The pivotless column says something else: $(1, 1)$ is redundant, since $(1, 1) = (1, 0) + (0, 1)$.
+
+Why it happens: the independence test reads the columns, and both tests use the same echelon form, so the habit of checking columns carries over.
+
+How to check: count the rows that hold a pivot and compare with $n$. Or test one target directly: $(2, -3) = 2(1, 0) - 3(0, 1) + 0(1, 1)$.
+
+**Using the echelon columns as the basis**
+
+To trim a spanning set to a basis, the vectors are row-reduced and the pivot columns of the echelon form are kept as the basis. Row operations change the columns, so these are not the vectors that were given.
+
+Wrong working: for $(1, 0, 1)$, $(0, 1, 2)$, $(1, 1, 3)$,
+$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 1 & 2 & 3 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 2 & 2 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
+The pivots are in columns $1$ and $2$, and the basis is written as $\\{(1, 0, 0), (0, 1, 0)\\}$.
+
+Right working: the pivot positions point back to the original vectors. The basis is $\\{(1, 0, 1), (0, 1, 2)\\}$, and the third vector is redundant: $(1, 1, 3) = (1, 0, 1) + (0, 1, 2)$. The span is the plane $z = x + 2y$, while $(1, 0, 0)$ and $(0, 1, 0)$ span the different plane $z = 0$.
+
+Why it happens: the echelon form is the matrix at hand once the reduction is finished. Row operations keep the relations among the columns, which is why the pivot positions are right, but they change the columns themselves.
+
+How to check: test a basis vector against the original set. Every vector in the span satisfies $z = x + 2y$, and $(1, 0, 0)$ gives $0 \\neq 1$, so it is not in the span at all.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1797,6 +1880,14 @@ export default function SpanPage({seoData, sectionsContent, introContent, obj2Ta
           </DiagramFrame>,
           `Two of these deserve to be held apart deliberately. **Spanning** is a condition on rows — a row without a pivot names a direction of $\\mathbb{R}^n$ that nothing in the set reaches. **Redundancy** is a condition on columns — a column without a pivot names a vector the others already reach. Both are read from the same echelon form and they answer opposite questions, which is why they are the pair most often confused.`,
           `A set passing both is a basis, and for $n$ vectors in $\\mathbb{R}^n$ the square determinant test collapses the two checks into one. Where the count is wrong no determinant exists and the conditions must be checked separately — fewer than $n$ vectors cannot span, more than $n$ cannot be [independent](!/linear-algebra/vector-spaces/linear-independence), and the reduction says which failure has occurred.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

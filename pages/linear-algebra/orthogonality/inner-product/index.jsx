@@ -1304,7 +1304,13 @@ This is the Euclidean norm — the generalization of the Pythagorean theorem to 
 
 @academic[rule_plain:The norm satisfies $\\|\\mathbf{v}\\| \\geq 0$ with equality only for $\\mathbf{v} = \\mathbf{0}$, and $\\|c\\mathbf{v}\\| = |c|\\|\\mathbf{v}\\|$ — scaling a vector scales its length by the absolute value of the scalar.]@
 
-A unit vector has $\\|\\mathbf{v}\\| = 1$. Any nonzero vector can be normalized — replaced by $\\hat{\\mathbf{v}} = \\mathbf{v}/\\|\\mathbf{v}\\|$, which points in the same direction with length $1$. Normalization preserves direction and discards magnitude.`,
+A unit vector has $\\|\\mathbf{v}\\| = 1$. Any nonzero vector can be normalized — replaced by $\\hat{\\mathbf{v}} = \\mathbf{v}/\\|\\mathbf{v}\\|$, which points in the same direction with length $1$. Normalization preserves direction and discards magnitude.
+
+@academic[pitfall,aside:true,width:35%:Dividing by the squared length
+Dividing by $\\mathbf{v} \\cdot \\mathbf{v}$ instead of $\\|\\mathbf{v}\\|$ turns $(3, 4)$ into $(\\frac{3}{25}, \\frac{4}{25})$, a vector of length $\\frac{1}{5}$. Dividing by $\\|(3, 4)\\| = 5$ gives the unit vector $(\\frac{3}{5}, \\frac{4}{5})$.
+[Read more](!#pitfalls)]@
+
+Normalizing is a two-stage computation. The sum of squares $\\mathbf{v} \\cdot \\mathbf{v}$ comes first, the length is taken from it, and only then is each component divided. The result can be checked at once, because the squares of the new components must add up to exactly $1$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1373,6 +1379,10 @@ The inequality is what makes the angle formula legitimate. It guarantees $-1 \\l
 
 The length of one side of a triangle never exceeds the sum of the other two. Equality holds if and only if $\\mathbf{u}$ and $\\mathbf{v}$ point in the same direction (one is a non-negative scalar multiple of the other).
 
+@academic[pitfall,aside:true,width:35%:Adding the lengths of a sum
+Writing $\\|\\mathbf{u} + \\mathbf{v}\\| = \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$ for $\\mathbf{u} = (3, 0)$ and $\\mathbf{v} = (0, 4)$ gives $3 + 4 = 7$. The sum is $(3, 4)$, so $\\|\\mathbf{u} + \\mathbf{v}\\| = 5$.
+[Read more](!#pitfalls)]@
+
 The proof follows from Cauchy-Schwarz. Square both sides: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2 \\leq \\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{u}\\|\\|\\mathbf{v}\\| + \\|\\mathbf{v}\\|^2 = (\\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|)^2$. The key step uses $\\mathbf{u} \\cdot \\mathbf{v} \\leq |\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$.
 
 The triangle inequality is essential for the distance function $d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$ to satisfy the metric axioms. It ensures that going from $\\mathbf{u}$ to $\\mathbf{w}$ directly is never longer than going via $\\mathbf{v}$.`,
@@ -1438,6 +1448,12 @@ The standard dot product on $\\mathbb{R}^n$ is one inner product. But the defini
     title: `Examples of Inner Products`,
     content: `The weighted inner product on $\\mathbb{R}^n$ is $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$, where $W$ is a [symmetric](!/linear-algebra/matrix/types) positive definite [matrix](!/linear-algebra/matrix). This distorts the standard geometry — unit circles become ellipses, and &quot;perpendicular&quot; directions depend on $W$. When $W = I$, it reduces to the standard dot product.
 
+@academic[pitfall,aside:true,width:35%:Measuring with the plain dot product
+Testing $\\mathbf{u} = (1, 1)$ and $\\mathbf{v} = (1, -2)$ with $\\mathbf{u} \\cdot \\mathbf{v} = -1$ when the space uses $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$ suggests they are not orthogonal. In this space $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 2(1)(1) + (1)(-2) = 0$, so they are.
+[Read more](!#pitfalls)]@
+
+In a weighted space every measurement goes through $W$. Lengths are $\\sqrt{\\mathbf{v}^T W \\mathbf{v}}$, and two vectors are orthogonal when $\\mathbf{u}^T W \\mathbf{v} = 0$. With $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$, the first coordinate counts twice in every product, so a pair of vectors can meet at a different angle here than under the standard dot product.
+
 On the polynomial space $\\mathcal{P}_n$, the inner product $\\langle p, q \\rangle = \\int_{-1}^{1} p(x)q(x)\\,dx$ defines orthogonality via integration. The polynomials $1$, $x$, and $\\frac{1}{2}(3x^2 - 1)$ are orthogonal under this product — these are the first three Legendre polynomials.
 
 On the function space $C[0, 2\\pi]$, the inner product $\\langle f, g \\rangle = \\int_0^{2\\pi} f(x)g(x)\\,dx$ makes sines and cosines orthogonal: $\\int_0^{2\\pi} \\sin(mx)\\cos(nx)\\,dx = 0$ for all integers $m, n$. This is the foundation of Fourier analysis.
@@ -1456,6 +1472,10 @@ Each inner product defines its own geometry, but the linear algebra — [project
 @academic[formula_callout:pythagorean_theorem|Pythagorean Theorem|$$\\mathbf{u} \\perp \\mathbf{v} \\implies \\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$$]@
 @academic[formulas_link:/linear-algebra/formulas#pythagorean_theorem]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the cross term
+Using $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$ for $\\mathbf{u} = (1, 0)$ and $\\mathbf{v} = (1, 1)$, which are not orthogonal, gives $1 + 2 = 3$. The sum is $(2, 1)$, so $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = 5$, which includes $2\\mathbf{u} \\cdot \\mathbf{v} = 2$.
+[Read more](!#pitfalls)]@
+
 The proof is a one-line expansion: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\mathbf{u} \\cdot \\mathbf{u} + 2\\mathbf{u} \\cdot \\mathbf{v} + \\mathbf{v} \\cdot \\mathbf{v} = \\|\\mathbf{u}\\|^2 + 0 + \\|\\mathbf{v}\\|^2$.
 
 The theorem extends to any number of mutually orthogonal vectors: if $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ are pairwise orthogonal, then
@@ -1471,6 +1491,72 @@ All cross terms vanish because every pair has dot product zero. This is not a sp
   obj11: {
     title: `Summary: What an Inner Product Induces`,
     content: `Every quantity built in this page — norm, distance, angle, the orthogonality criterion, and the projection formula on the projections page — is constructed from a single inner product through a small family of formulas. The table below collects each induced quantity alongside its general definition in any inner product space, the concrete dot-product form in ℝⁿ, and a pointer back to the section that introduced it.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Four slips account for many wrong answers when lengths, sums and inner products are computed. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dividing by the squared length**
+
+To normalize a vector, each component is divided by $\\mathbf{v} \\cdot \\mathbf{v}$, the sum of squares, and the square root is never taken. The result points the right way but does not have length $1$.
+
+Wrong working: for $\\mathbf{v} = (3, 4)$, $\\mathbf{v} \\cdot \\mathbf{v} = 9 + 16 = 25$, and
+$$\\frac{\\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}} = \\left(\\frac{3}{25}, \\frac{4}{25}\\right), \\quad \\left\\|\\left(\\frac{3}{25}, \\frac{4}{25}\\right)\\right\\| = \\frac{5}{25} = \\frac{1}{5}$$
+
+Right working: the length is $\\|\\mathbf{v}\\| = \\sqrt{25} = 5$, so
+$$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|} = \\left(\\frac{3}{5}, \\frac{4}{5}\\right)$$
+
+Why it happens: $\\mathbf{v} \\cdot \\mathbf{v}$ is the first number the computation produces, and the projection formula $\\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}}\\,\\mathbf{v}$ really does divide by it, so the two denominators get mixed up.
+
+How to check: square and add the new components. $\\left(\\frac{3}{5}\\right)^2 + \\left(\\frac{4}{5}\\right)^2 = \\frac{9}{25} + \\frac{16}{25} = 1$, while $\\left(\\frac{3}{25}\\right)^2 + \\left(\\frac{4}{25}\\right)^2 = \\frac{25}{625} = \\frac{1}{25}$.
+
+**Adding the lengths of a sum**
+
+The length of $\\mathbf{u} + \\mathbf{v}$ is found by adding the two lengths, as if the norm were linear. The triangle inequality says only that this sum is an upper bound.
+
+Wrong working: for $\\mathbf{u} = (3, 0)$ and $\\mathbf{v} = (0, 4)$,
+$$\\|\\mathbf{u} + \\mathbf{v}\\| = \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\| = 3 + 4 = 7$$
+
+Right working: add the vectors first, then take the length.
+$$\\mathbf{u} + \\mathbf{v} = (3, 4), \\quad \\|\\mathbf{u} + \\mathbf{v}\\| = \\sqrt{9 + 16} = 5$$
+
+Why it happens: the norm does pull out non-negative scalars, $\\|c\\mathbf{v}\\| = c\\|\\mathbf{v}\\|$ for $c \\geq 0$, and splitting a sum looks like the same kind of rule.
+
+How to check: the two sides are equal only when one vector is a non-negative multiple of the other. Here $(3, 0)$ and $(0, 4)$ are perpendicular, so the length of the sum must come out strictly less than $7$.
+
+**Measuring with the plain dot product**
+
+The space carries a weighted inner product $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$, but lengths and orthogonality are still tested with the ordinary dot product. The answers then belong to the standard geometry, not to the one the problem uses.
+
+Wrong working: with $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$, $\\mathbf{u} = (1, 1)$ and $\\mathbf{v} = (1, -2)$,
+$$\\mathbf{u} \\cdot \\mathbf{v} = 1 - 2 = -1 \\neq 0$$
+so the vectors are declared not orthogonal.
+
+Right working:
+$$\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v} = 2(1)(1) + 1(1)(-2) = 0$$
+so $\\mathbf{u}$ and $\\mathbf{v}$ are orthogonal in this space. Lengths change as well: here $\\|\\mathbf{u}\\| = \\sqrt{\\mathbf{u}^T W \\mathbf{u}} = \\sqrt{2 + 1} = \\sqrt{3}$, not $\\sqrt{2}$.
+
+Why it happens: the dot product is so familiar that orthogonality and length are read in their $\\mathbb{R}^n$ sense by default, even after the problem has declared another inner product.
+
+How to check: before any length, angle or orthogonality test, write down which inner product the space carries and compute every bracket with it. When $W$ is not the identity, the two answers usually differ.
+
+**Dropping the cross term**
+
+The Pythagorean identity $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$ is used for vectors that are not orthogonal, so the term $2\\mathbf{u} \\cdot \\mathbf{v}$ of the expansion is lost.
+
+Wrong working: for $\\mathbf{u} = (1, 0)$ and $\\mathbf{v} = (1, 1)$,
+$$\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2 = 1 + 2 = 3$$
+
+Right working: expand in full.
+$$\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2 = 1 + 2(1) + 2 = 5$$
+which matches $\\|(2, 1)\\|^2 = 4 + 1 = 5$.
+
+Why it happens: the identity is remembered as the formula for the length of a sum, and the condition $\\mathbf{u} \\perp \\mathbf{v}$ that makes the middle term vanish is left behind. It is the same slip as writing $(a + b)^2 = a^2 + b^2$ for numbers.
+
+How to check: compute $\\mathbf{u} \\cdot \\mathbf{v}$ first. Only when it is $0$ may the squared lengths simply be added.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1778,6 +1864,14 @@ export default function InnerProductPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

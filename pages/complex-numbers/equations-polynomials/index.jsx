@@ -970,7 +970,7 @@ import renderComplexRootsV2 from '@/app/utils/illustrations/complex-numbers/plan
 // stripping comments, so a stray apostrophe mis-pairs every quote after it.
 const hubMeta = {
   name: 'Complex Polynomial Equations',
-  hubDescription: 'Every polynomial finds its roots in the complex numbers: the Fundamental Theorem of Algebra, complete factorization into linear terms, Vieta formulas linking roots to coefficients, conjugate-pair symmetry of real polynomials, and equation-solving techniques that combine algebra with the geometry of the complex plane.',
+  hubDescription: 'Every non-constant polynomial finds its roots in the complex numbers: the Fundamental Theorem of Algebra, complete factorization into linear terms, Vieta formulas linking roots to coefficients, conjugate-pair symmetry of real polynomials, and equation-solving techniques that combine algebra with the geometry of the complex plane.',
 }
 
 export async function getStaticProps(){
@@ -1145,13 +1145,13 @@ export async function getStaticProps(){
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Pure n-th power</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = w</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">trig/exponential form + De Moivre's root formula</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n, evenly spaced on a circle (regular n-gon)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exactly n for w ≠ 0, evenly spaced on a circle (regular n-gon)</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power-equals-conjugate</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zⁿ = z̄</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">write z = re&#x2071;&#x1D52;; match moduli and arguments separately</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n + 2 (origin + n+1 on unit circle)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">n + 2 for n ≥ 2 (origin + n+1 on unit circle)</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Conjugate-locus equations</td>
@@ -1228,7 +1228,7 @@ The theorem's proof lies beyond elementary methods, requiring tools from analysi
     obj3: {
   title: `Factoring Polynomials over $\\mathbb{C}$`,
   before: ``,
-  content: `The Fundamental Theorem guarantees that every polynomial splits into linear factors over $\\mathbb{C}$. The factorization reveals the polynomial's roots explicitly and connects algebraic structure to geometric information in the [complex plane](!/complex-numbers/geometric-representation).
+  content: `The Fundamental Theorem guarantees that every non-constant polynomial splits into linear factors over $\\mathbb{C}$. The factorization reveals the polynomial's roots explicitly and connects algebraic structure to geometric information in the [complex plane](!/complex-numbers/geometric-representation).
 
 For a polynomial $p(z) = a_nz^n + a_{n-1}z^{n-1} + \\cdots + a_1z + a_0$, the complete factorization takes the form:
 
@@ -1248,7 +1248,7 @@ $$z^3 - 1 = (z - 1)(z - \\omega)(z - \\omega^2)$$]@
 
 Multiplying the last two factors produces a real quadratic: $(z - \\omega)(z - \\omega^2) = z^2 + z + 1$. Thus $z^3 - 1 = (z - 1)(z^2 + z + 1)$, the familiar factorization over $\\mathbb{R}$. Over $\\mathbb{C}$, we factor further into linear terms.
 
-Every polynomial admits such complete factorization. Real polynomials may resist factoring over $\\mathbb{R}$ into linear terms, but over $\\mathbb{C}$, every polynomial yields completely.`,
+Every non-constant polynomial admits such complete factorization. Real polynomials may resist factoring over $\\mathbb{R}$ into linear terms, but over $\\mathbb{C}$, every non-constant polynomial factors completely.`,
   after: ``,
   link: '',
 },
@@ -1259,7 +1259,7 @@ Every polynomial admits such complete factorization. Real polynomials may resist
   before: ``,
   content: `A remarkable correspondence links a polynomial's coefficients to symmetric combinations of its roots. These relationships, known as Vieta's formulas after François Viète, allow information to flow between the algebraic expression of a polynomial and the location of its roots.
 
-For a monic quadratic $z^2 + bz + c = 0$ with roots $z_1$ and $z_2$:
+For a quadratic $az^2 + bz + c = 0$ ($a \\neq 0$) with roots $z_1$ and $z_2$:
 
 @academic[formula_callout:Vieta's Quadratic
 $$z_1 + z_2 = -\\frac{b}{a}, \\qquad z_1 \\cdot z_2 = \\frac{c}{a}$$
@@ -1268,7 +1268,7 @@ $$z_1 + z_2 = -\\frac{b}{a}, \\qquad z_1 \\cdot z_2 = \\frac{c}{a}$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
-The sum of roots equals the negative of the linear coefficient. The product of roots equals the constant term. Given roots $3$ and $-5$, the polynomial is $z^2 - (-2)z + (-15) = z^2 + 2z - 15$.
+For a monic quadratic ($a = 1$), the sum of roots equals the negative of the linear coefficient. The product of roots equals the constant term. Given roots $3$ and $-5$, the polynomial is $z^2 - (-2)z + (-15) = z^2 + 2z - 15$.
 
 For a monic cubic $z^3 + bz^2 + cz + d = 0$ with roots $z_1$, $z_2$, $z_3$:
 
@@ -1278,6 +1278,10 @@ $$z_1 + z_2 + z_3 = -b$$]@
 $$z_1z_2 + z_1z_3 + z_2z_3 = c$$]@
 @academic[formula_callout:Vieta's Formulas
 $$z_1z_2z_3 = -d$$]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the alternating sign
+Taking the sum of the roots of $z^3 - z^2 + z - 1$ as $b = -1$ and their product as $d = -1$ leaves out the signs. Its roots are $1$, $i$, $-i$: the sum is $1 = -b$ and the product is $1 \\cdot i \\cdot (-i) = 1 = -d$.
+[Read more](!#pitfalls)]@
 
 The pattern continues for higher degrees. The $k$-th symmetric sum of roots (all products of $k$ roots) equals $(-1)^k$ times the coefficient of $z^{n-k}$ in a monic polynomial of degree $n$. Formally:
 
@@ -1309,6 +1313,10 @@ The proof exploits how conjugation interacts with polynomial evaluation. Let $p(
 
 @academic[formula_callout:Polynomials with Real Coefficients
 $$\\overline{p(z)} = \\overline{a_nz^n + \\cdots + a_0} = a_n\\overline{z^n} + \\cdots + a_0 = a_n(\\bar{z})^n + \\cdots + a_0 = p(\\bar{z})$$]@
+
+@academic[pitfall,aside:true,width:35%:Pairing roots without real coefficients
+Taking $i$ as a root of $z^2 + 2iz - 1$ because $-i$ is one ignores the coefficient $2i$, which is not real. Substituting gives $i^2 + 2i \\cdot i - 1 = -1 - 2 - 1 = -4$; the polynomial is $(z + i)^2$, and $-i$ is its only root.
+[Read more](!#pitfalls)]@
 
 The key step uses $\\overline{a_k} = a_k$ since each coefficient is real, and the property $\\overline{z^k} = (\\bar{z})^k$.
 
@@ -1353,6 +1361,10 @@ For a case with complex discriminant, take $z^2 + z + (1 - i) = 0$. The discrimi
 @academic[formula_callout:Quadratic Equations with Complex Coefficients
 $$\\Delta = 1 - 4(1 - i) = 1 - 4 + 4i = -3 + 4i$$]@
 
+@academic[pitfall,aside:true,width:35%:Splitting the square root over a sum
+Writing $\\sqrt{-3 + 4i}$ as $\\sqrt{-3} + \\sqrt{4i} = \\sqrt{2} + (\\sqrt{2} + \\sqrt{3})i$ gives a number whose square is not $-3 + 4i$. The square roots are $\\pm(1 + 2i)$, since $(1 + 2i)^2 = 1 + 4i - 4 = -3 + 4i$.
+[Read more](!#pitfalls)]@
+
 Finding $\\sqrt{-3 + 4i}$ requires the technique from [De Moivre's theorem](!/complex-numbers/demoivre-theorem). Convert $-3 + 4i$ to [trigonometric form](!/complex-numbers/trigonometric-form): modulus $\\sqrt{9 + 16} = 5$, argument $\\theta = \\arctan(4/(-3))$ adjusted to the second quadrant. The square roots have modulus $\\sqrt{5}$ and arguments $\\theta/2$ and $\\theta/2 + 180°$.
 
 The process is lengthier than real quadratics but entirely systematic. Every quadratic with complex coefficients has two roots in $\\mathbb{C}$ (counting multiplicity), accessible through the same formula that handles real coefficients.`,
@@ -1364,7 +1376,7 @@ The process is lengthier than real quadratics but entirely systematic. Every qua
     obj7: {
   title: `Solving $z^n = w$`,
   before: ``,
-  content: `Equations of the form $z^n = w$, where $w$ is a given complex number, have exactly $n$ solutions. The technique applies [De Moivre's theorem](!/complex-numbers/demoivre-theorem) systematically.
+  content: `Equations of the form $z^n = w$, where $w$ is a given nonzero complex number, have exactly $n$ solutions. The technique applies [De Moivre's theorem](!/complex-numbers/demoivre-theorem) systematically.
 
 The procedure:
 
@@ -1387,7 +1399,11 @@ $z_2 = 2\\text{cis}(225°) = 2 \\cdot \\frac{\\sqrt{2}}{2}(-1 - i) = \\sqrt{2}(-
 
 $z_3 = 2\\text{cis}(315°) = 2 \\cdot \\frac{\\sqrt{2}}{2}(1 - i) = \\sqrt{2}(1 - i)$]@
 
-Four roots forming a square on a circle of radius $2$, rotated $45°$ from the axes. Each satisfies $(z_k)^4 = -16$.`,
+@academic[pitfall,aside:true,width:35%:Stopping at one root
+Using only $k = 0$ for $z^4 = -16$ gives $z = \\sqrt{2}(1 + i)$, one solution out of four. The values $k = 1, 2, 3$ supply the other three: $\\sqrt{2}(-1 + i)$, $\\sqrt{2}(-1 - i)$ and $\\sqrt{2}(1 - i)$.
+[Read more](!#pitfalls)]@
+
+Four roots forming a square on a circle of radius $2$, rotated $45°$ from the axes. Each satisfies $(z_k)^4 = -16$. Consecutive roots sit a quarter turn apart, because the angles $\\frac{\\pi + 2\\pi k}{4}$ grow by $\\frac{\\pi}{2}$ with each step in $k$, and the modulus $\\sqrt{2} \\cdot \\sqrt{2} = 2$ is the same for all of them.`,
   after: ``,
   link: '',
 },
@@ -1395,7 +1411,7 @@ Four roots forming a square on a circle of radius $2$, rotated $45°$ from the a
     obj8: {
   title: `Solving $z^n = \\bar{z}$`,
   before: ``,
-  content: `The equation $z^n = \\bar{z}$ combines exponentiation with [conjugation](!/complex-numbers/complex-conjugate), producing a distinctive solution set. Unlike $z^n = w$ which has exactly $n$ roots, this equation has $n + 2$ solutions.
+  content: `The equation $z^n = \\bar{z}$ combines exponentiation with [conjugation](!/complex-numbers/complex-conjugate), producing a distinctive solution set. Unlike $z^n = w$ ($w \\neq 0$), which has exactly $n$ roots, this equation has $n + 2$ solutions for $n \\geq 2$.
 
 Begin by writing $z = re^{i\\theta}$ in [exponential form](!/complex-numbers/exponential-form). Then $z^n = r^ne^{in\\theta}$ and $\\bar{z} = re^{-i\\theta}$. The equation becomes:
 
@@ -1408,9 +1424,13 @@ Moduli: $r^n = r$, giving $r^n - r = r(r^{n-1} - 1) = 0$. Either $r = 0$ or $r^{
 
 Arguments: $n\\theta = -\\theta + 360°k$ for integer $k$, so $(n+1)\\theta = 360°k$, giving $\\theta = \\frac{360°k}{n+1}$.
 
+@academic[pitfall,aside:true,width:35%:Dividing out the modulus
+Dividing $r^2 = r$ by $r$ in $z^2 = \\bar{z}$ leaves only $r = 1$ and three solutions on the unit circle. Factoring instead, $r(r - 1) = 0$ keeps $r = 0$ as well, so $z = 0$ is a fourth solution.
+[Read more](!#pitfalls)]@
+
 The solution $r = 0$ yields $z = 0$.
 
-The solutions with $r^{n-1} = 1$ require $r = 1$ (since $r \\geq 0$). These solutions lie on the unit circle with arguments $\\theta = \\frac{360°k}{n+1}$ for $k = 0, 1, \\ldots, n$.
+The solutions with $r^{n-1} = 1$ require $r = 1$ (since $r \\geq 0$ and $n \\geq 2$). These solutions lie on the unit circle with arguments $\\theta = \\frac{360°k}{n+1}$ for $k = 0, 1, \\ldots, n$.
 
 Counting: one solution at the origin, plus $n + 1$ solutions on the unit circle, totaling $n + 2$ solutions.
 
@@ -1462,11 +1482,11 @@ This geometric approach often simplifies what algebraic manipulation would make 
 
 **Control Theory:** A dynamical system's stability hinges on the roots of its characteristic polynomial. If all roots have negative real parts (lying in the left half-plane), the system is stable — disturbances decay over time. Roots with positive real parts indicate instability — small perturbations grow without bound. Control engineers reshape root locations through feedback to achieve desired stability margins.
 
-**Geometry:** Regular polygons emerge as roots of unity. The $n$-th roots of unity form the vertices of a regular $n$-gon inscribed in the unit circle. Solving $z^n = 1$ constructs the polygon automatically. More generally, the roots of $z^n = w$ form a regular $n$-gon of radius $|w|^{1/n}$.
+**Geometry:** Regular polygons emerge as roots of unity. The $n$-th roots of unity form the vertices of a regular $n$-gon inscribed in the unit circle. Solving $z^n = 1$ constructs the polygon automatically. More generally, the roots of $z^n = w$ ($w \\neq 0$) form a regular $n$-gon of radius $|w|^{1/n}$.
 
 **Number Theory:** Cyclotomic polynomials — the minimal polynomials whose roots are primitive roots of unity — encode deep arithmetic structure. Their coefficients, degrees, and factorization properties connect to prime numbers, Galois theory, and algebraic integers.
 
-The Fundamental Theorem of Algebra ensures that these applications never encounter polynomials without roots. In $\\mathbb{C}$, every polynomial equation has solutions, making complex numbers the natural language for polynomial-based analysis across all fields.`,
+The Fundamental Theorem of Algebra ensures that these applications never encounter polynomials without roots. In $\\mathbb{C}$, every non-constant polynomial equation has solutions, making complex numbers the natural language for polynomial-based analysis across all fields.`,
   after: ``,
   link: '',
 },
@@ -1516,6 +1536,73 @@ The Fundamental Theorem of Algebra ensures that these applications never encount
   
     },
   
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Five mistakes account for many of the wrong answers when polynomial equations are solved over $\\mathbb{C}$. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the alternating sign**
+
+Vieta's formulas are read off the coefficients without the sign $(-1)^k$. In a monic polynomial the sum of the roots is the negative of the second coefficient, and for odd degree the product of the roots is the negative of the constant term.
+
+Wrong working: for $z^3 - z^2 + z - 1$, with $b = -1$, $c = 1$, $d = -1$, the sum of the roots is taken as $b = -1$ and the product as $d = -1$.
+
+Right working: $z_1 + z_2 + z_3 = -b = 1$, $z_1z_2 + z_1z_3 + z_2z_3 = c = 1$, $z_1z_2z_3 = -d = 1$. The polynomial factors as $(z - 1)(z^2 + 1)$, with roots $1$, $i$, $-i$: their sum is $1$, their pairwise products add to $i - i + 1 = 1$, and their product is $1 \\cdot i \\cdot (-i) = 1$.
+
+Why it happens: the signs alternate, so some of the formulas carry a minus sign and some do not, and the pattern is easy to lose.
+
+How to check: build the polynomial back from its roots. $(z - z_1)(z - z_2)(z - z_3)$ expands to $z^3 - (z_1 + z_2 + z_3)z^2 + \\cdots$, so a root sum of $1$ must appear as $-1$ in front of $z^2$.
+
+**Pairing roots without real coefficients**
+
+The conjugate root theorem is applied to a polynomial whose coefficients are not all real. The theorem rests on $\\overline{a_k} = a_k$ for every coefficient, and that step fails as soon as one coefficient is non-real.
+
+Wrong working: $z^2 + 2iz - 1 = 0$ has the root $-i$, so its conjugate $i$ is taken as the second root.
+
+Right working: substituting $z = i$ gives $i^2 + 2i \\cdot i - 1 = -1 - 2 - 1 = -4 \\neq 0$. The discriminant is $(2i)^2 - 4(1)(-1) = 0$, and the polynomial is $(z + i)^2$: its only root is $-i$, with multiplicity $2$.
+
+Why it happens: conjugate pairs are so familiar from real quadratics that they are expected everywhere.
+
+How to check: look at the coefficients before pairing. If any coefficient is non-real, substitute the conjugate and see whether it really gives $0$.
+
+**Splitting the square root over a sum**
+
+The square root of a complex discriminant $a + bi$ is taken term by term, as $\\sqrt{a} + \\sqrt{bi}$. Square roots do not split over sums, for real or for complex numbers.
+
+Wrong working: $\\sqrt{-3 + 4i} = \\sqrt{-3} + \\sqrt{4i} = \\sqrt{3}i + \\sqrt{2}(1 + i) = \\sqrt{2} + (\\sqrt{2} + \\sqrt{3})i$. Its square is about $-7.90 + 8.90i$, not $-3 + 4i$.
+
+Right working: look for $x + yi$ with $(x + yi)^2 = -3 + 4i$, or use the trigonometric form with modulus $5$. Both lead to $\\pm(1 + 2i)$, since $(1 + 2i)^2 = 1 + 4i + 4i^2 = -3 + 4i$. Then $z = \\frac{-1 \\pm (1 + 2i)}{2}$ gives $z = i$ and $z = -1 - i$.
+
+Why it happens: the same slip, $\\sqrt{x + y} = \\sqrt{x} + \\sqrt{y}$, is common with real numbers, and splitting the real and imaginary parts feels natural in algebraic form.
+
+How to check: square the result. A square root of $\\Delta$ must give $\\Delta$ back exactly. The modulus is a quick test too: the root must have modulus $\\sqrt{|\\Delta|} = \\sqrt{5}$, and $|1 + 2i| = \\sqrt{5}$.
+
+**Stopping at one root**
+
+An equation $z^n = w$ is solved with $k = 0$ only, giving the principal root and nothing else, as if the equation had one solution.
+
+Wrong working: $z^4 = -16$, $-16 = 16\\text{cis}(180°)$, so $z = 2\\text{cis}(45°) = \\sqrt{2}(1 + i)$, and the work stops there.
+
+Right working: $z_k = 2\\text{cis}(45° + 90°k)$ for $k = 0, 1, 2, 3$ gives $\\sqrt{2}(1 + i)$, $\\sqrt{2}(-1 + i)$, $\\sqrt{2}(-1 - i)$ and $\\sqrt{2}(1 - i)$.
+
+Why it happens: with real numbers a root sign such as $\\sqrt[3]{8} = 2$ names one number, and the habit of writing a single answer carries over.
+
+How to check: count the solutions. A nonzero $w$ always gives exactly $n$ solutions of $z^n = w$, spaced $360°/n$ apart on one circle; four solutions here, $90°$ apart.
+
+**Dividing out the modulus**
+
+In $z^n = \\bar{z}$ the modulus equation $r^n = r$ is divided by $r$, which silently assumes $r \\neq 0$ and throws away the solution $z = 0$.
+
+Wrong working: for $z^2 = \\bar{z}$, $r^2 = r$ becomes $r = 1$, and $3\\theta = 360°k$ gives $\\theta = 0°, 120°, 240°$. The answer is three solutions.
+
+Right working: $r^2 - r = r(r - 1) = 0$, so $r = 0$ or $r = 1$. The case $r = 0$ gives $z = 0$, and $0^2 = 0 = \\bar{0}$. With the three points on the unit circle, there are $4 = n + 2$ solutions.
+
+Why it happens: cancelling a common factor is a reflex from solving equations, and $r$ looks like a quantity that cannot be zero.
+
+How to check: test $z = 0$ directly in the original equation whenever a factor of $r$ or $z$ is cancelled.`,
+      before:``,
+      after:``,
+      link:'',
+    },
     faq: {
       title: `Complex Equations FAQ`,
     },
@@ -1526,7 +1613,7 @@ The Fundamental Theorem of Algebra ensures that these applications never encount
   const introContent = {
   id: "intro",
   title: "Where Every Polynomial Finds Its Roots",
-  content: `The real numbers leave many polynomial equations unsolved — $x^2 + 1 = 0$ has no real answer, and neither does $x^4 + 4 = 0$. Complex numbers fill this gap completely. The Fundamental Theorem of Algebra guarantees that every polynomial equation has solutions in $\\mathbb{C}$, and the number of solutions matches the polynomial's degree exactly. This completeness makes the complex field the natural setting for polynomial theory.`
+  content: `The real numbers leave many polynomial equations unsolved — $x^2 + 1 = 0$ has no real answer, and neither does $x^4 + 4 = 0$. Complex numbers fill this gap completely. The Fundamental Theorem of Algebra guarantees that every non-constant polynomial equation has solutions in $\\mathbb{C}$, and the number of solutions matches the polynomial's degree exactly. This completeness makes the complex field the natural setting for polynomial theory.`
 }
 
 const faqQuestions = {
@@ -1656,7 +1743,7 @@ const schemas = {
     zSquaredConj: demoUnitFrame({
       svg: renderComplexRootsV2(crZConj),
       caption: 'The n + 2 solutions for n = 2',
-      text: 'Matching moduli in z&#178; = z&#772; gives r&#178; = r, so r = 0 or r = 1. The case r = 0 is the single point z = 0, drawn filled. The case r = 1 puts the rest on the unit circle, where matching arguments gives 3&#952; = 360&#176;k: three solutions at 0&#176;, 120&#176; and 240&#176;. That makes 1 + 3 = 4 = n + 2, two more than the n roots of z&#8319; = w.',
+      text: 'Matching moduli in z&#178; = z&#772; gives r&#178; = r, so r = 0 or r = 1. The case r = 0 is the single point z = 0, drawn filled. The case r = 1 puts the rest on the unit circle, where matching arguments gives 3&#952; = 360&#176;k: three solutions at 0&#176;, 120&#176; and 240&#176;. That makes 1 + 3 = 4 = n + 2, two more than the n roots of z&#8319; = w for w &#8800; 0.',
     }),
   };
 
@@ -1818,6 +1905,14 @@ export default function EquationsPolynomialsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1178,6 +1178,10 @@ In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathca
 @academic[formula_callout:The Change-of-Basis Matrix
 $$P = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$]@
 
+@academic[pitfall,aside:true,width:35%:Converting in the wrong direction
+Multiplying $P$ by the standard coordinates of $(3, 1)$ gives $(4, 2)$, but $4(1, 1) + 2(1, -1) = (6, 2)$, not $(3, 1)$. The $\\mathcal{B}$-coordinates come from $P^{-1}$: $P^{-1}(3, 1) = (2, 1)$.
+[Read more](!#pitfalls)]@
+
 To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\mathbf{c} = (5, 1)$. Using $P^{-1} = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}$, we get $\\mathbf{c} = (3, 2)$. So $\\mathbf{v} = 3(1, 1) + 2(1, -1)$.`,
     before: ``,
     after: ``,
@@ -1258,6 +1262,10 @@ $$A' = P^{-1}AP \\Rightarrow \\begin{cases} \\det(A') = \\det(A) \\\\ \\text{tr}
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Treating shared invariants as proof of similarity
+Calling $I$ and $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ similar because both have trace $2$, determinant $1$, rank $2$ and eigenvalues $1, 1$ reads the rule backwards. $P^{-1}IP = I$ for every $P$, so $I$ is similar only to itself.
+[Read more](!#pitfalls)]@
+
 The [determinant](!/linear-algebra/determinants) is preserved: $\\det(P^{-1}AP) = \\det(P^{-1})\\det(A)\\det(P) = \\det(A)$.
 
 The [trace](!/linear-algebra/matrix/trace) is preserved: $\\text{tr}(P^{-1}AP) = \\text{tr}(APP^{-1}) = \\text{tr}(A)$ by the cyclic property.
@@ -1304,6 +1312,10 @@ Equivalently, $D = P^{-1}AP$.
 
 For example, $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with algebraic multiplicity $2$, but the eigenspace is one-dimensional (spanned by $(1, 0)$). There is no basis of eigenvectors, so $A$ cannot be diagonalized.
 
+@academic[pitfall,aside:true,width:35%:Blaming the repeated eigenvalue
+Ruling out diagonalization because $\\lambda = 2$ is repeated would also rule out $2I$, which has the same repeated eigenvalue and is already diagonal. What fails for $A$ is the eigenspace: dimension $1$, below the multiplicity $2$.
+[Read more](!#pitfalls)]@
+
 In such cases, the best achievable form under similarity is the Jordan normal form: a block-diagonal matrix where each block is an upper triangular matrix with a single eigenvalue on the diagonal and ones on the superdiagonal. The Jordan form is unique up to ordering of blocks and is the canonical representative of the similarity class. Its full development belongs to advanced linear algebra.`,
     before: ``,
     after: ``,
@@ -1317,6 +1329,10 @@ Orthogonal similarity preserves more than ordinary similarity. If $A$ is [symmet
 
 @academic[rule_theorem:Spectral Theorem
 The Spectral Theorem states that every real symmetric matrix is orthogonally similar to a diagonal matrix.]@
+
+@academic[pitfall,aside:true,width:35%:Transposing before normalizing
+For $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$, using $P^T$ as $P^{-1}$ with the eigenvectors $(1, 1)$ and $(1, -1)$, orthogonal but not unit, gives $P^TAP = \\begin{pmatrix} 6 & 0 \\\\ 0 & 2 \\end{pmatrix}$ instead of $D$. Dividing each column by $\\sqrt{2}$ makes $P$ orthogonal, and then $P^TAP = \\begin{pmatrix} 3 & 0 \\\\ 0 & 1 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
 
 The eigenvectors of a symmetric matrix can be chosen [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets), and the columns of $P$ form an orthonormal basis. This is a stronger conclusion than ordinary diagonalizability — the diagonalizing basis is not just independent but orthonormal, which simplifies [projections](!/linear-algebra/orthogonality/projections), [least squares](!/linear-algebra/orthogonality/least-squares), and numerical computation.`,
     before: ``,
@@ -1335,6 +1351,10 @@ For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\mathbf{0}$ gives $\\begin{pmatrix
 
 @academic[formula_callout:Worked Example: Full Basis Change
 $$P = \\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}, \\quad D = \\begin{pmatrix} 2 & 0 \\\\ 0 & 5 \\end{pmatrix}$$]@
+
+@academic[pitfall,aside:true,width:35%:Swapping P and its inverse
+Recombining as $P^{-1}DP$ instead of $PDP^{-1}$ gives $\\begin{pmatrix} 4 & -1 \\\\ -2 & 3 \\end{pmatrix}$, not $A$. With the eigenvectors as its columns, $P$ stands on the left of $D$: $A = PDP^{-1}$.
+[Read more](!#pitfalls)]@
 
 Verification: $P^{-1} = \\frac{1}{3}\\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}$, and $PDP^{-1} = \\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}\\begin{pmatrix} 2 & 0 \\\\ 0 & 5 \\end{pmatrix}\\frac{1}{3}\\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix} = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix} = A$.
 
@@ -1360,7 +1380,82 @@ Choosing the right basis is often the key insight that converts a hard problem i
   },
   obj10: {
     title: `Summary: Matrix Structure → Canonical Form`,
-    content: `The strategic-basis discussion above was organized by which kind of basis you choose. Reading the page in the other direction — starting from what you know about the matrix and asking what form it can be reduced to — gives a recognition guide for similarity transformations. The table below collects the standard canonical forms: when a matrix's structure permits a stronger reduction, similarity can deliver it; when no diagonalization exists, similarity still delivers the Jordan form (over ℝ or ℂ) and Schur form (always available over ℂ). It is the lookup card to consult when a specific A is in front of you and the question is how far similarity can simplify it.`,
+    content: `The strategic-basis discussion above was organized by which kind of basis you choose. Reading the page in the other direction — starting from what you know about the matrix and asking what form it can be reduced to — gives a recognition guide for similarity transformations. The table below collects the standard canonical forms: when a matrix's structure permits a stronger reduction, similarity can deliver it; when no diagonalization exists, similarity still delivers the Jordan form (over ℂ, or over ℝ when every eigenvalue is real) and Schur form (always available over ℂ). It is the lookup card to consult when a specific A is in front of you and the question is how far similarity can simplify it.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for many wrong answers on this topic. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Converting in the wrong direction**
+
+The matrix $P$ is built from the vectors of the new basis $\\mathcal{B}$, so it takes $\\mathcal{B}$-coordinates to standard coordinates. To find the $\\mathcal{B}$-coordinates of a vector given in standard coordinates, $P$ is applied to them anyway.
+
+Wrong working: with $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$, $P = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$ and $\\mathbf{v} = (3, 1)$,
+$$P\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix}$$
+taken as the $\\mathcal{B}$-coordinates of $\\mathbf{v}$.
+
+Right working: solve $P\\mathbf{c} = (3, 1)$, that is $c_1 + c_2 = 3$ and $c_1 - c_2 = 1$. This gives $c_1 = 2$, $c_2 = 1$, the same as
+$$P^{-1}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$$
+
+Why it happens: $P$ is made of the $\\mathcal{B}$ vectors, so it feels like the matrix that produces $\\mathcal{B}$-coordinates. It does the opposite: it takes $\\mathcal{B}$-coordinates as its input.
+
+How to check: rebuild the vector from the coordinates. $2(1, 1) + 1(1, -1) = (3, 1)$, as it should be, while $4(1, 1) + 2(1, -1) = (6, 2)$ is a different vector.
+
+**Treating shared invariants as proof of similarity**
+
+Two matrices turn out to have the same trace, determinant, rank and eigenvalues, and they are declared similar. These invariants are necessary for similarity, not sufficient.
+
+Wrong working: $I$ and $N = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ both have trace $2$, determinant $1$, rank $2$ and characteristic polynomial $(\\lambda - 1)^2$, so they are similar.
+
+Right working: for every invertible $P$,
+$$P^{-1}IP = P^{-1}P = I$$
+so the only matrix similar to $I$ is $I$ itself, and $N$ is not similar to $I$. $N$ is a defective matrix of the kind described in the section on when diagonalization fails.
+
+Why it happens: the list of invariants is read in both directions, as something similar matrices share and as a test that proves similarity.
+
+How to check: a differing invariant proves two matrices are not similar; matching invariants prove nothing. Here the eigenspaces differ: $N - I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has rank $1$, so the eigenspace of $N$ for $\\lambda = 1$ is one-dimensional, while for $I$ it is all of $\\mathbb{R}^2$.
+
+**Blaming the repeated eigenvalue**
+
+A repeated root of the characteristic polynomial is taken as the reason a matrix cannot be diagonalized.
+
+Wrong working: $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ and $2I$ both have characteristic polynomial $(\\lambda - 2)^2$, so neither is diagonalizable.
+
+Right working: compare the dimension of each eigenspace with the multiplicity. For $A$, $A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has rank $1$, so the eigenspace has dimension $2 - 1 = 1 < 2$, and $A$ is not diagonalizable. For $2I$, $2I - 2I$ is the zero matrix, the eigenspace has dimension $2$, and $2I$ is diagonalizable; it is already diagonal, with $P = I$.
+
+Why it happens: distinct eigenvalues guarantee a diagonalization, and the converse is assumed without checking, as if a repeated eigenvalue prevented it.
+
+How to check: for each repeated eigenvalue $\\lambda$, compute $n - \\text{rank}(A - \\lambda I)$ and compare it with the multiplicity of $\\lambda$.
+
+**Transposing before normalizing**
+
+For a symmetric matrix the eigenvectors are orthogonal, and $P^T$ is used in place of $P^{-1}$. But the eigenvectors were not scaled to length $1$, so $P$ is not an orthogonal matrix.
+
+Wrong working: $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$ has eigenvalues $3$ and $1$, with eigenvectors $(1, 1)$ and $(1, -1)$. With $P = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$,
+$$P^TAP = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}\\begin{pmatrix} 3 & 1 \\\\ 3 & -1 \\end{pmatrix} = \\begin{pmatrix} 6 & 0 \\\\ 0 & 2 \\end{pmatrix}$$
+
+Right working: divide each eigenvector by its length $\\sqrt{2}$.
+$$Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}, \\qquad Q^TAQ = \\frac{1}{2}\\begin{pmatrix} 6 & 0 \\\\ 0 & 2 \\end{pmatrix} = \\begin{pmatrix} 3 & 0 \\\\ 0 & 1 \\end{pmatrix} = D$$
+
+Why it happens: perpendicular columns sound like enough for an orthogonal matrix, but an orthogonal matrix needs orthonormal columns, each of length $1$.
+
+How to check: compute $P^TP$. Here $P^TP = 2I$, not $I$, so $P^T = 2P^{-1}$, and $P^TAP$ comes out as $2D$.
+
+**Swapping P and its inverse**
+
+The eigenvalues and eigenvectors are correct, but $P$, $D$ and $P^{-1}$ are multiplied in the wrong order, as $P^{-1}DP$ instead of $PDP^{-1}$.
+
+Wrong working: with $P = \\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix}$, $D = \\begin{pmatrix} 2 & 0 \\\\ 0 & 5 \\end{pmatrix}$ and $P^{-1} = \\frac{1}{3}\\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}$ from the worked example,
+$$P^{-1}DP = \\frac{1}{3}\\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}\\begin{pmatrix} 2 & 0 \\\\ 0 & 5 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix} = \\begin{pmatrix} 4 & -1 \\\\ -2 & 3 \\end{pmatrix}$$
+
+Right working: $PDP^{-1} = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix} = A$, as in the verification step of the worked example.
+
+Why it happens: both orders put $D$ between $P$ and $P^{-1}$, and the page uses both $A = PDP^{-1}$ and $D = P^{-1}AP$, which have the inverse on opposite sides.
+
+How to check: trace and determinant do not catch this, since the wrong matrix also has trace $7$ and determinant $10$. Check an eigenvector instead: $A(1, -2) = (2, -4) = 2(1, -2)$, while the wrong matrix sends $(1, -2)$ to $(6, -8)$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1629,6 +1724,14 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
           </DiagramFrame>,
           `Read downward and the hypotheses weaken while the form degrades in step. Distinct eigenvalues give a diagonal matrix and are easy to check; symmetry gives a diagonal matrix and an orthogonal $P$, so the inverse is a transpose; matching multiplicities is the exact condition and is the one that actually has to be tested. Below that line no diagonal form exists, and the question changes from **how do I diagonalize this** to **what is the best I can do**.`,
           `The last two rows answer that differently and it is worth knowing which is used. The Jordan form is the more informative — the ones on its superdiagonal count precisely how many eigenvectors each eigenvalue is missing — but it is numerically unusable, since an arbitrarily small perturbation can change the block structure entirely. The Schur form gives up on diagonal blocks and settles for triangular, in exchange for a unitary $P$ and stability. Libraries compute Schur; textbooks prove Jordan.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1371,6 +1371,12 @@ When $A$ has full column rank (the columns are [linearly independent](!/linear-a
 @academic[formula_callout:least_squares_solution|Least Squares Solution|$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$$]@
 @academic[formulas_link:/linear-algebra/formulas#least-squares_solution]@
 
+@academic[pitfall,aside:true,width:35%:Splitting the inverse into two factors
+Writing $(A^TA)^{-1} = A^{-1}(A^T)^{-1}$ collapses the formula to $\\hat{\\mathbf{x}} = A^{-1}\\mathbf{b}$, but the $4 \\times 2$ matrix $A$ of the line fit below has no inverse. Only the square matrix $A^TA$, there $\\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}$, is inverted, as one matrix.
+[Read more](!#pitfalls)]@
+
+The formula is read from right to left. The vector $A^T\\mathbf{b}$ collects the dot products of $\\mathbf{b}$ with the columns of $A$, the matrix $A^TA$ collects the dot products of the columns with each other, and the inverse of $A^TA$ turns the first into the coefficients. For the line fit below, $A$ is $4 \\times 2$, so both pieces are small: a $2 \\times 2$ matrix and a vector of length $2$.
+
 When $A$ does not have full column rank, $A^TA$ is singular and the normal equations have infinitely many solutions. All produce the same projection $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}}$, but the $\\hat{\\mathbf{x}}$ vectors differ. The minimum-norm solution — the one with smallest $\\|\\hat{\\mathbf{x}}\\|$ — is selected by the pseudoinverse.`,
     before: ``,
     after: ``,
@@ -1388,14 +1394,14 @@ $$A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\\\ 1 & 3 \\\\ 1 & 4 \\end{pmatrix}, \\
 Four equations in two unknowns — overdetermined. The normal equations:
 
 @academic[formula_callout:Worked Example: Fitting a Line
-$$A^TA = \\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}, \\quad A^T\\mathbf{y} = \\begin{pmatrix} 18 \\\\ 53 \\end{pmatrix}$$]@
+$$A^TA = \\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}, \\quad A^T\\mathbf{y} = \\begin{pmatrix} 18 \\\\ 54 \\end{pmatrix}$$]@
 
 Solving: $\\det(A^TA) = 120 - 100 = 20$. $(A^TA)^{-1} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}$.
 
 @academic[formula_callout:Worked Example: Fitting a Line
-$$\\hat{\\mathbf{c}} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}\\begin{pmatrix} 18 \\\\ 53 \\end{pmatrix} = \\frac{1}{20}\\begin{pmatrix} 540 - 530 \\\\ -180 + 212 \\end{pmatrix} = \\frac{1}{20}\\begin{pmatrix} 10 \\\\ 32 \\end{pmatrix} = \\begin{pmatrix} 0.5 \\\\ 1.6 \\end{pmatrix}$$]@
+$$\\hat{\\mathbf{c}} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}\\begin{pmatrix} 18 \\\\ 54 \\end{pmatrix} = \\frac{1}{20}\\begin{pmatrix} 540 - 540 \\\\ -180 + 216 \\end{pmatrix} = \\frac{1}{20}\\begin{pmatrix} 0 \\\\ 36 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 1.8 \\end{pmatrix}$$]@
 
-The best-fit line is $y = 0.5 + 1.6x$. The residuals are $2 - 2.1 = -0.1$, $3 - 3.7 = -0.7$, $6 - 5.3 = 0.7$, $7 - 6.9 = 0.1$. Their sum of squares $0.01 + 0.49 + 0.49 + 0.01 = 1.0$ is the minimum achievable error for any line through these data.`,
+The best-fit line is $y = 1.8x$ (the intercept comes out $0$). The residuals are $2 - 1.8 = 0.2$, $3 - 3.6 = -0.6$, $6 - 5.4 = 0.6$, $7 - 7.2 = -0.2$. Their sum of squares $0.04 + 0.36 + 0.36 + 0.04 = 0.8$ is the minimum achievable error for any line through these data.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1409,7 +1415,7 @@ The design matrix gains a third column:
 @academic[formula_callout:Worked Example: Fitting a Parabola
 $$A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 4 \\\\ 1 & 3 & 9 \\\\ 1 & 4 & 16 \\end{pmatrix}$$]@
 
-The normal equations $A^TA\\hat{\\mathbf{c}} = A^T\\mathbf{y}$ now form a $3 \\times 3$ system. The machinery is identical — only the model matrix changes. A higher-degree model provides a closer fit (the residual sum of squares cannot increase when the model gains flexibility), but it also risks fitting noise rather than signal.
+The normal equations $A^TA\\hat{\\mathbf{c}} = A^T\\mathbf{y}$ now form a $3 \\times 3$ system. The machinery is identical — only the model matrix changes. A higher-degree model provides a fit at least as close (the residual sum of squares cannot increase when the model gains flexibility), but it also risks fitting noise rather than signal.
 
 The framework generalizes to any linear model: $y = c_0 f_0(x) + c_1 f_1(x) + \\cdots + c_k f_k(x)$ where the functions $f_i$ are chosen in advance. Each choice produces a different design matrix $A$, and the normal equations produce the best coefficients in the least-squares sense.`,
     before: ``,
@@ -1424,6 +1430,12 @@ The framework generalizes to any linear model: $y = c_0 f_0(x) + c_1 f_1(x) + \\
 $$P = A(A^TA)^{-1}A^T$$]@
 
 When the columns of $A$ are [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) ($A = Q$ with $Q^TQ = I$), this simplifies to $P = QQ^T$.
+
+@academic[pitfall,aside:true,width:35%:Swapping the order of the two factors
+Writing $P = Q^TQ$ gives $I_n$, which is $n \\times n$ and for $m > n$ cannot even multiply $\\mathbf{b} \\in \\mathbb{R}^m$. For $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, $Q^TQ = 1$, while the projection is $P = QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+With orthonormal columns the middle factor $A^TA = Q^TQ$ drops out of the formula, and no inverse is left to compute. The projection becomes $P\\mathbf{b} = Q(Q^T\\mathbf{b})$: the entries of $Q^T\\mathbf{b}$ are the dot products of $\\mathbf{b}$ with the columns of $Q$, and $Q$ uses them as weights on those same columns.
 
 @academic[rule_plain:The projection matrix is [symmetric](!/linear-algebra/matrix/types) ($P^T = P$) and [idempotent](!/linear-algebra/matrix/types) ($P^2 = P$).]@
 
@@ -1474,6 +1486,10 @@ The critical advantage is numerical. Forming $A^TA$ explicitly squares the [cond
 
 Simple linear regression fits $y = \\beta_0 + \\beta_1 x + \\epsilon$ to data $(x_i, y_i)$. The design matrix has a column of ones and a column of $x_i$ values. The normal equations produce the slope $\\hat{\\beta}_1$ and intercept $\\hat{\\beta}_0$ that minimize $\\sum(y_i - \\beta_0 - \\beta_1 x_i)^2$.
 
+@academic[pitfall,aside:true,width:35%:Leaving out the column of ones
+Without the column of ones the model is $y = c_1x$, a line forced through the origin. For $(0, 1)$, $(1, 3)$, $(2, 5)$ the single column $(0, 1, 2)$ gives $5c_1 = 13$ and $y = 2.6x$, although the line $y = 1 + 2x$ passes through all three points.
+[Read more](!#pitfalls)]@
+
 Multiple linear regression fits $\\mathbf{y} = X\\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}$ where $X$ is the design matrix with rows for observations and columns for predictors. The normal equations $X^TX\\hat{\\boldsymbol{\\beta}} = X^T\\mathbf{y}$ give the coefficient estimates.
 
 The projection matrix $P = X(X^TX)^{-1}X^T$ is called the hat matrix in statistics because it puts the &quot;hat&quot; on $\\mathbf{y}$: $\\hat{\\mathbf{y}} = P\\mathbf{y}$. The residual vector $\\mathbf{e} = \\mathbf{y} - \\hat{\\mathbf{y}} = (I - P)\\mathbf{y}$ is the component of $\\mathbf{y}$ orthogonal to the column space of $X$, and $\\|\\mathbf{e}\\|^2$ is the residual sum of squares.`,
@@ -1502,6 +1518,61 @@ The error is zero if and only if $\\mathbf{b} \\in \\text{Col}(A)$ — if and on
   obj11: {
     title: `Summary: Methods for Computing the Least-Squares Solution`,
     content: `The least-squares solution x̂ can be computed by several distinct routes, each with its own cost and numerical-stability profile. The table below collects the main methods alongside their formulas, operation counts, and stability characteristics, providing a single reference for choosing among them.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up again and again when the least-squares formulas are applied by hand. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Splitting the inverse into two factors**
+
+The formula $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$ is simplified with the rule for the inverse of a product, $(XY)^{-1} = Y^{-1}X^{-1}$, taking $X = A^T$ and $Y = A$. The factors cancel, and the least-squares problem seems to disappear.
+
+Wrong working:
+$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b} = A^{-1}(A^T)^{-1}A^T\\mathbf{b} = A^{-1}\\mathbf{b}$$
+For the line fit, $A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\\\ 1 & 3 \\\\ 1 & 4 \\end{pmatrix}$ is $4 \\times 2$, so $A^{-1}$ does not exist and the last expression means nothing.
+
+Right working: form the $2 \\times 2$ matrix first and invert it as a whole,
+$$A^TA = \\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}, \\quad (A^TA)^{-1} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}$$
+and then multiply by the vector $A^T\\mathbf{y}$.
+
+Why it happens: the rule $(XY)^{-1} = Y^{-1}X^{-1}$ is learned for square invertible matrices and looks as if it applies to any product. Here neither $A$ nor $A^T$ is square; only their product is.
+
+How to check: check the sizes before writing an inverse, since only square matrices have one. If a simplification ends in $A^{-1}\\mathbf{b}$, then $A$ would have to be square and invertible, and in that case $A\\mathbf{x} = \\mathbf{b}$ has an exact solution and there was nothing to approximate.
+
+**Swapping the order of the two factors**
+
+With orthonormal columns, $A = Q$ and the projection matrix becomes $QQ^T$. The two factors are written in the other order, $Q^TQ$, which is the product that appears in the condition $Q^TQ = I$.
+
+Wrong working: for $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$ and $\\mathbf{b} = \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix}$,
+$$Q^TQ = \\tfrac{1}{2}(1 \\cdot 1 + 1 \\cdot 1) = 1$$
+a $1 \\times 1$ matrix. Read as the identity, it says $\\mathbf{b}$ is its own projection, $(2, 0)$, although $(2, 0)$ does not lie on the line spanned by $(1, 1)$.
+
+Right working:
+$$P = QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}, \\quad P\\mathbf{b} = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$$
+The projection $(1, 1)$ lies on the line, and the residual $(2, 0) - (1, 1) = (1, -1)$ is perpendicular to it.
+
+Why it happens: $Q^TQ = I$ is the identity that defines orthonormal columns, so $Q^TQ$ is the product written most often. For a square $Q$ both orders give $I$; for the tall matrices of least squares only $Q^TQ$ does.
+
+How to check: compare sizes. $P$ must be $m \\times m$ to multiply $\\mathbf{b} \\in \\mathbb{R}^m$; $Q^TQ$ is $n \\times n$ and $QQ^T$ is $m \\times m$. The result $P\\mathbf{b}$ must also lie in the column space of $Q$.
+
+**Leaving out the column of ones**
+
+The model $y = c_0 + c_1x$ is turned into a design matrix, but only the column of $x_i$ values is written down. The intercept $c_0$ gets no column, so the model actually fitted is $y = c_1x$, a line through the origin.
+
+Wrong working: for the points $(0, 1)$, $(1, 3)$, $(2, 5)$, with $A = \\begin{pmatrix} 0 \\\\ 1 \\\\ 2 \\end{pmatrix}$ and $\\mathbf{y} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 5 \\end{pmatrix}$,
+$$A^TA = 0 + 1 + 4 = 5, \\quad A^T\\mathbf{y} = 0 + 3 + 10 = 13, \\quad c_1 = \\frac{13}{5} = 2.6$$
+The fitted line $y = 2.6x$ leaves the residuals $1$, $0.4$ and $-0.2$.
+
+Right working: one column per coefficient, the first one all ones.
+$$A = \\begin{pmatrix} 1 & 0 \\\\ 1 & 1 \\\\ 1 & 2 \\end{pmatrix}, \\quad A^TA = \\begin{pmatrix} 3 & 3 \\\\ 3 & 5 \\end{pmatrix}, \\quad A^T\\mathbf{y} = \\begin{pmatrix} 9 \\\\ 13 \\end{pmatrix}$$
+Solving gives $c_0 = 1$ and $c_1 = 2$. The line $y = 1 + 2x$ passes through all three points, and every residual is $0$.
+
+Why it happens: the intercept multiplies the constant $1$, which does not appear anywhere in the data. Every coefficient of the model needs its own column, including the one that multiplies no variable.
+
+How to check: count the columns, one per unknown coefficient. With a column of ones the residuals always add up to $0$, because that column is orthogonal to the residual; here $1 + 0.4 - 0.2 = 1.2$, so the column is missing.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1876,6 +1947,14 @@ export default function LeastSquaresPage({normalEqCases,
           </DiagramFrame>,
           `Why forming $A^{\\mathsf{T}}A$ hurts is worth stating in numbers. The condition number of $A^{\\mathsf{T}}A$ is the square of the condition number of $A$, so a matrix with $\\kappa(A) = 10^4$ — unremarkable in a fitting problem — produces a system with $\\kappa = 10^8$. In double precision that consumes roughly half the available digits before the solve has started, and no amount of care in the solver recovers them.`,
           `QR avoids this because $Q$ is orthogonal: multiplying by it preserves lengths, so it cannot amplify error, and the triangular system inherits $A$'s conditioning rather than its square. The SVD goes further and drops the rank requirement entirely, which is the case where the other three have no unique answer to compute — among infinitely many minimisers it returns the one of least norm. That is a deliberate choice, not a default, and it is why the [pseudoinverse](#7) is the right tool when the rank is uncertain.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1308,6 +1308,10 @@ The first piece is a line with slope $1$, drawn for $x < 1$. At $x = 1$, this pi
 
 The second piece is a line with slope $2$, drawn for $x \\geq 1$. At $x = 1$, this piece gives $2(1) - 1 = 1$, and $x = 1$ is included, so place a solid dot at $(1, 1)$.
 
+@academic[pitfall,aside:true,width:35%:Forgetting endpoint markers
+Drawing both lines right up to $x = 1$ with no dots puts two points above $x = 1$, $(1, 4)$ and $(1, 1)$, so the graph seems to give two outputs. An open dot at $(1, 4)$ and a solid dot at $(1, 1)$ show that $f(1) = 1$.
+[Read more](!#12)]@
+
 The graph shows two line segments that do not connect — there is a jump at $x = 1$ from height $1$ to (approaching) height $4$.
 
 The visual reveals discontinuities. Pieces that connect smoothly indicate continuity at that boundary. Pieces that don't connect indicate a jump.`,
@@ -1351,6 +1355,10 @@ The first piece is constant at $2$ for all $x < 0$. It contributes $\\{2\\}$ to 
 The second piece is linear starting at $x = 0$. At $x = 0$, output is $1$. As $x \\to \\infty$, output $\\to \\infty$. This piece contributes $[1, \\infty)$ to the range.
 
 Combined range: $\\{2\\} \\cup [1, \\infty) = [1, \\infty)$ (since $2$ is already in $[1, \\infty)$).
+
+@academic[pitfall,aside:true,width:35%:Taking the range of the whole formula
+Taking all outputs of $x + 1$ gives the second piece, and the whole function, the range $(-\\infty, \\infty)$. On its interval $x \\geq 0$ the piece only reaches $[1, \\infty)$, so the range is $[1, \\infty)$.
+[Read more](!#12)]@
 
 Finding the range may require analyzing each piece separately — finding minima, maxima, and behavior on each interval — then combining results.
 
@@ -1407,7 +1415,13 @@ $$f(x) = |x - 3| + 2 = \\begin{cases} (x - 3) + 2 & \\text{if } x \\geq 3 \\\\ -
 
 The vertex moves to $(3, 2)$.
 
-Equations involving absolute values often require piecewise analysis. Solving $|x - 2| = 5$ means considering both pieces: $x - 2 = 5$ (giving $x = 7$) and $-(x - 2) = 5$ (giving $x = -3$).`,
+Equations involving absolute values often require piecewise analysis. Solving $|x - 2| = 5$ means considering both pieces: $x - 2 = 5$ (giving $x = 7$) and $-(x - 2) = 5$ (giving $x = -3$).
+
+@academic[pitfall,aside:true,width:35%:Solving only the positive case
+Removing the bars from $|x + 4| = 6$ to get $x + 4 = 6$ gives only $x = 2$. The negative piece, $-(x + 4) = 6$, gives $x = -10$ as well, and $|-10 + 4| = 6$.
+[Read more](!#12)]@
+
+Each piece turns the absolute value equation into an ordinary linear equation, valid on its own side of the vertex. The solution from the piece with $x - 2 \\geq 0$ must satisfy $x \\geq 2$, and the one from the piece with $x - 2 < 0$ must satisfy $x < 2$; here $7 \\geq 2$ and $-3 < 2$, so both solutions stand. On the number line they are the two points at distance $5$ from $2$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1421,6 +1435,12 @@ The floor function $\\lfloor x \\rfloor$ returns the greatest integer less than 
 
 @academic[formula_callout:Step Functions
 $$\\lfloor 2.7 \\rfloor = 2, \\quad \\lfloor -1.3 \\rfloor = -2, \\quad \\lfloor 5 \\rfloor = 5$$]@
+
+@academic[pitfall,aside:true,width:35%:Rounding negative inputs toward zero
+Dropping the decimal part of $-2.5$ gives $\\lfloor -2.5 \\rfloor = -2$, but $-2$ is greater than $-2.5$. The greatest integer less than or equal to $-2.5$ is $-3$.
+[Read more](!#12)]@
+
+Negative inputs follow the same definition as positive ones. The integers less than or equal to $-1.3$ are $-2, -3, -4, \\ldots$, and the greatest of them is $-2$. On the number line, the floor always moves left to the nearest integer, or stays put when the input is already an integer.
 
 The graph has horizontal segments at each integer height, jumping up at each integer input. The segment at height $n$ covers $[n, n+1)$ — closed on the left, open on the right.
 
@@ -1443,12 +1463,18 @@ Step functions model situations with discrete jumps: postage rates by weight, ta
     title: `Real-World Applications`,
     content: `Piecewise functions naturally model situations where rules change at thresholds.
 
-Tax brackets: Income tax rates increase at certain income levels. Income below $\\$10{,}000$ might be taxed at $10\\%$, income from $\\$10{,}000$ to $\\$40{,}000$ at $20\\%$, and income above $\\$40{,}000$ at $30\\%$.
+Tax brackets: Income tax rates increase at certain income levels. Income below 10,000 dollars might be taxed at $10\\%$, income from 10,000 dollars to 40,000 dollars at $20\\%$, and income above 40,000 dollars at $30\\%$.
 
 @academic[formula_callout:Real-World Applications
 $$T(x) = \\begin{cases} 0.10x & \\text{if } x \\leq 10000 \\\\ 1000 + 0.20(x - 10000) & \\text{if } 10000 < x \\leq 40000 \\\\ 7000 + 0.30(x - 40000) & \\text{if } x > 40000 \\end{cases}$$]@
 
-Shipping costs: Packages under $1$ pound cost $\\$5$. Packages from $1$ to $5$ pounds cost $\\$5$ plus $\\$2$ per additional pound. Packages over $5$ pounds cost $\\$13$ plus $\\$1.50$ per additional pound.
+@academic[pitfall,aside:true,width:35%:Taxing all income at the top rate
+Applying $30\\%$ to the whole income gives $T(50000) = 0.30 \\cdot 50000 = 15000$. Only the $10000$ above $40000$ is taxed at $30\\%$, so $T(50000) = 7000 + 0.30 \\cdot 10000 = 10000$.
+[Read more](!#12)]@
+
+The constants in the second and third pieces are the tax already owed on the lower brackets. The $1000$ is $10\\%$ of the first $10{,}000$ dollars, and $7000 = 1000 + 0.20 \\cdot 30{,}000$ is the tax on the first $40{,}000$ dollars. Because of them, adjacent pieces agree at each threshold: both give $1000$ at $x = 10000$ and $7000$ at $x = 40000$.
+
+Shipping costs: Packages under $1$ pound cost 5 dollars. Packages from $1$ to $5$ pounds cost 5 dollars plus 2 dollars per additional pound. Packages over $5$ pounds cost 13 dollars plus 1.50 dollars per additional pound.
 
 Utility rates: Electricity might cost one rate for the first $500$ kWh and a higher rate beyond that threshold.
 
@@ -1482,7 +1508,7 @@ Step 2: Write the formula for each region between thresholds.
 
 Step 3: Specify conditions using inequalities.
 
-Example: "A plumber charges $\\$50$ for the first hour and $\\$30$ for each additional hour."
+Example: "A plumber charges 50 dollars for the first hour and 30 dollars for each additional hour."
 
 Let $C(t)$ be the cost for $t$ hours of work ($t > 0$):
 
@@ -1492,7 +1518,13 @@ $$C(t) = \\begin{cases} 50 & \\text{if } 0 < t \\leq 1 \\\\ 50 + 30(t - 1) & \\t
 Simplifying the second piece: $50 + 30t - 30 = 30t + 20$.
 
 @academic[formula_callout:Writing Piecewise Functions
-$$C(t) = \\begin{cases} 50 & \\text{if } 0 < t \\leq 1 \\\\ 30t + 20 & \\text{if } t > 1 \\end{cases}$$]@`,
+$$C(t) = \\begin{cases} 50 & \\text{if } 0 < t \\leq 1 \\\\ 30t + 20 & \\text{if } t > 1 \\end{cases}$$]@
+
+@academic[pitfall,aside:true,width:35%:Charging the first hour twice
+Writing the second piece as $50 + 30t$ counts the first hour in both terms: it gives $C(2) = 50 + 60 = 110$. Only the hours after the first cost $30$ each, so $C(2) = 50 + 30(2 - 1) = 80$.
+[Read more](!#12)]@
+
+The threshold $t = 1$ is where the rule changes, and both pieces give $50$ there, so the charge does not jump. Past it, each extra hour adds $30$: at $t = 3$ the second piece gives $30(3) + 20 = 110$, the $50$ for the first hour plus $2 \\cdot 30 = 60$ for the other two.`,
     before: ``,
     after: ``,
     link: '',
@@ -1518,6 +1550,70 @@ The table below collects each mistake with the specific problem it causes and th
     before: ``,
     after: ``,
     link: '',
+  },
+
+  obj12b: {
+    content: `Five more mistakes are marked where they happen in the sections above. Each is worked through here in full, with the wrong and the right working side by side.
+
+**Taking the range of the whole formula**
+
+To find the range of a piecewise function, the range of each formula is found as if the formula ran over all real numbers. The condition beside it is ignored, so a piece seems to produce outputs it never reaches.
+
+Wrong working: for $f(x) = \\begin{cases} 2 & \\text{if } x < 0 \\\\ x + 1 & \\text{if } x \\geq 0 \\end{cases}$, the line $x + 1$ takes every real value, so the range is given as $(-\\infty, \\infty)$.
+
+Right working: on $x \\geq 0$ the line starts at $0 + 1 = 1$ and rises, so the second piece gives $[1, \\infty)$. The first piece gives $\\{2\\}$. The range is $\\{2\\} \\cup [1, \\infty) = [1, \\infty)$.
+
+Why it happens: the range of a single formula is a familiar task, and the condition next to it reads like a note on when to use the formula rather than a limit on its outputs.
+
+How to check: test a value from the claimed range. Is there an input with $f(x) = 0$? The first piece gives only $2$, and $x + 1 = 0$ needs $x = -1$, which is not in $x \\geq 0$. So $0$ is not in the range.
+
+**Solving only the positive case**
+
+An absolute value equation is solved by simply removing the bars, which uses only the piece for a non-negative inside. The solutions that come from the other piece are lost.
+
+Wrong working: $|x + 4| = 6$ becomes $x + 4 = 6$, so $x = 2$ is given as the only solution.
+
+Right working: split into the two pieces. If $x + 4 \\geq 0$: $x + 4 = 6$, so $x = 2$, and $2 \\geq -4$ holds. If $x + 4 < 0$: $-(x + 4) = 6$, so $x + 4 = -6$ and $x = -10$, and $-10 < -4$ holds. Both $x = 2$ and $x = -10$ are solutions.
+
+Why it happens: the bars look like brackets that can be dropped, and the positive case is the one that comes to mind first.
+
+How to check: on the number line, the inputs at distance $6$ from $-4$ are $-4 + 6 = 2$ and $-4 - 6 = -10$; there are two of them whenever the right side is positive. Substituting confirms both: $|2 + 4| = 6$ and $|-10 + 4| = |-6| = 6$.
+
+**Rounding negative inputs toward zero**
+
+The floor of a negative number is found by dropping its decimal part. That moves the number toward zero, which for a negative number is upward, while the floor always moves downward.
+
+Wrong working: $\\lfloor -2.5 \\rfloor = -2$, by cutting off the $.5$.
+
+Right working: the integers less than or equal to $-2.5$ are $-3, -4, -5, \\ldots$, and the greatest of them is $-3$. So $\\lfloor -2.5 \\rfloor = -3$. In the same way $\\lfloor -1.3 \\rfloor = -2$.
+
+Why it happens: for positive numbers, dropping the decimal part does give the floor, $\\lfloor 2.7 \\rfloor = 2$, so the shortcut seems to work everywhere. Calculators and programming languages that truncate also return $-2$.
+
+How to check: the floor is never greater than the input, and $\\lfloor x \\rfloor \\leq x < \\lfloor x \\rfloor + 1$. Here $-2 > -2.5$, so $-2$ fails; $-3 \\leq -2.5 < -2$ holds.
+
+**Taxing all income at the top rate**
+
+An income is placed in its bracket, and that bracket's rate is applied to the whole income. In the piecewise formula, each rate applies only to the part of the income that lies inside its own bracket.
+
+Wrong working: an income of $50{,}000$ dollars lies in the bracket $x > 40000$, so $T(50000) = 0.30 \\cdot 50000 = 15000$.
+
+Right working: use the third piece. $T(50000) = 7000 + 0.30(50000 - 40000) = 7000 + 3000 = 10000$. The $7000$ is the tax on the first $40{,}000$ dollars: $0.10 \\cdot 10000 + 0.20 \\cdot 30000 = 1000 + 6000$.
+
+Why it happens: the phrase "the $30\\%$ bracket" sounds like a rate for the whole income, and a single multiplication is simpler than the piecewise formula.
+
+How to check: compare two neighboring incomes. With the wrong method, an income of $40{,}000$ dollars pays $0.20 \\cdot 40000 = 8000$, but one dollar more pays $0.30 \\cdot 40001 \\approx 12000$, a jump of about $4000$ dollars. The piecewise $T$ has no jumps: both pieces give $7000$ at $x = 40000$.
+
+**Charging the first hour twice**
+
+A description has a fixed charge for a first block and a rate for what comes after it. The rate is applied to the whole quantity instead of only to the part beyond the first block.
+
+Wrong working: "50 dollars for the first hour and 30 dollars for each additional hour" is written as $C(t) = 50 + 30t$ for $t > 1$. Then $C(2) = 50 + 60 = 110$.
+
+Right working: after the first hour, $t - 1$ hours remain, so $C(t) = 50 + 30(t - 1) = 30t + 20$ for $t > 1$. Then $C(2) = 50 + 30 = 80$: the first hour plus one additional hour.
+
+Why it happens: "30 per hour" is turned straight into $30t$, and the word "additional" is lost on the way.
+
+How to check: compare the pieces at the threshold. The correct pieces both give $50$ at $t = 1$. As $t$ approaches $1$ from above, the wrong second piece approaches $50 + 30 = 80$, a jump of $30$ dollars that the description never mentions.`,
   },
 
   obj13: {
@@ -1920,6 +2016,7 @@ export default function PiecewisePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
+          sectionsContent.obj12b.content,
         ]
     },
     {

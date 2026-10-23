@@ -1476,6 +1476,12 @@ $$A = B \\iff (A \\subseteq B) \\land (B \\subseteq A)$$
 /set-theory/formulas]@
 
 This reduces the problem to two subset proofs: show every element of $A$ belongs to $B$, then show every element of $B$ belongs to $A$.
+
+@academic[pitfall,aside:true,width:35%:Proving only one inclusion
+Showing $A \\subseteq B$ for $A = \\{1, 2\\}$ and $B = \\{1, 2, 3\\}$ and stopping there would conclude $A = B$, yet $3 \\in B$ and $3 \\notin A$. Equality needs $B \\subseteq A$ as well, and here it fails.
+[Read more](!#pitfalls)]@
+
+Each direction is a separate argument that starts from an arbitrary element. For $A = \\{x \\in \\mathbb{Z} : x^2 = 1\\}$ and $B = \\{-1, 1\\}$, the first direction takes $x \\in A$, solves $x^2 = 1$ and finds $x = 1$ or $x = -1$, so $x \\in B$. The second direction takes each element of $B$ and checks it: $(-1)^2 = 1$ and $1^2 = 1$, so both lie in $A$.
     `,
     before: ``,
     after: ``,
@@ -1496,6 +1502,12 @@ This means a bijection exists between $A$ and $B$ — a one-to-one correspondenc
 However, equivalent sets need not be equal.
 
 The sets $\\{a, b, c\\}$ and $\\{1, 2, 3\\}$ are equivalent (both have cardinality $3$) but not equal (they contain different elements). The sets $\\mathbb{N}$ and $\\mathbb{Z}$ are equivalent (both countably infinite) but not equal ($\\mathbb{Z}$ contains negative integers).
+
+@academic[pitfall,aside:true,width:35%:Judging size by containment
+Concluding $|\\mathbb{N}| < |\\mathbb{Z}|$ because $\\mathbb{N} \\subsetneq \\mathbb{Z}$ applies a rule that holds only for finite sets. Listing $\\mathbb{Z}$ as $0, 1, -1, 2, -2, \\ldots$ pairs it term by term with $\\mathbb{N}$, so $|\\mathbb{N}| = |\\mathbb{Z}|$.
+[Read more](!#pitfalls)]@
+
+For finite sets, cardinality is found by counting, and a proper subset always has fewer elements than the set containing it: $\\{1, 2\\}$ has two, $\\{1, 2, 3\\}$ has three. For infinite sets the counting never ends, so equivalence is decided only by whether a bijection exists. The pair $\\mathbb{N}$ and $\\mathbb{Z}$ is the standard test case: every natural number is an integer, and $\\mathbb{Z}$ also contains the negative integers.
     `,
     before: ``,
     after: ``,
@@ -1516,7 +1528,13 @@ For a collection of more than two sets, the sets are pairwise disjoint if every 
 @academic[formula_callout:Disjoint Sets
 $$A_i \\cap A_j = \\emptyset \\quad \\text{for all } i \\neq j$$]@
 
+@academic[pitfall,aside:true,width:35%:Checking only the common intersection
+For $A = \\{1, 2\\}$, $B = \\{2, 3\\}$ and $C = \\{4\\}$, finding $A \\cap B \\cap C = \\emptyset$ and calling the sets pairwise disjoint misses $A \\cap B = \\{2\\}$. The three sets are not pairwise disjoint.
+[Read more](!#pitfalls)]@
+
 Pairwise disjoint sets have no overlap whatsoever — no element belongs to more than one set in the collection.
+
+For three sets $A_1$, $A_2$ and $A_3$ the condition means three separate intersections: $A_1 \\cap A_2$, $A_1 \\cap A_3$ and $A_2 \\cap A_3$. A collection of $n$ sets has $\\binom{n}{2}$ such pairs, and each pair is one instance of the condition $A_i \\cap A_j = \\emptyset$.
 
 In [probability](!/probability/events), disjoint events are called mutually exclusive: if one occurs, the others cannot.
     `,
@@ -1535,6 +1553,10 @@ $$A \\cap B \\neq \\emptyset \\quad \\text{and} \\quad A \\not\\subseteq B \\qua
 This means each set contains elements the other lacks, yet they also have common elements.
 
 The sets $\\{1, 2, 3\\}$ and $\\{2, 3, 4\\}$ overlap: they share $2$ and $3$, but $1$ belongs only to the first and $4$ belongs only to the second.
+
+@academic[pitfall,aside:true,width:35%:Calling nested sets overlapping
+Calling $\\{1, 2\\}$ and $\\{1, 2, 3\\}$ overlapping because they share $1$ and $2$ misses that $\\{1, 2\\} \\setminus \\{1, 2, 3\\} = \\emptyset$. The first set is a subset of the second, so the sets are nested, not overlapping.
+[Read more](!#pitfalls)]@
 
 In a [Venn diagram](!/set-theory/venn-diagrams), overlapping sets appear as circles that intersect but neither contains the other. The lens-shaped intersection region is non-empty, and both the $A \\setminus B$ and $B \\setminus A$ regions are also non-empty.
     `,
@@ -1560,8 +1582,83 @@ Examples:
 
 - Residue classes modulo $n$ partition $\\mathbb{Z}$ into $n$ subsets
 
+@academic[pitfall,aside:true,width:35%:Allowing an empty block
+Accepting $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}, \\emptyset\\}$ as a partition of $\\{1, 2, 3, 4, 5\\}$ checks only disjointness and the union, which both hold. The block $\\emptyset$ breaks $A_i \\neq \\emptyset$, so the collection is not a partition.
+[Read more](!#pitfalls)]@
+
+To test a proposed collection, each of the three conditions is checked on its own. In the first example, the blocks $\\{1, 3\\}$, $\\{2, 4\\}$ and $\\{5\\}$ each contain at least one element, no two of them share an element, and together they contain $1$, $2$, $3$, $4$ and $5$. All three conditions hold, so the collection is a partition.
+
 Partitions arise naturally in classification problems and connect to equivalence relations. The [law of total probability](!/probability/total-probability) relies on partitions: if events $B_1, B_2, \\ldots, B_n$ partition the sample space, probabilities can be computed by summing over the partition.
     `,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes come up often when sets are compared. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Proving only one inclusion**
+
+To prove $A = B$, one subset relation is shown and the proof stops there. One inclusion only says that one set lies inside the other; the second set can still have extra elements.
+
+Wrong working: for $A = \\{1, 2\\}$ and $B = \\{1, 2, 3\\}$, both $1$ and $2$ are in $B$, so $A \\subseteq B$, and the conclusion $A = B$ is drawn.
+
+Right working: check the other direction too. The element $3$ is in $B$ but not in $A$, so $B \\not\\subseteq A$ and $A \\neq B$. For $A = \\{x \\in \\mathbb{Z} : x^2 = 1\\}$ and $B = \\{-1, 1\\}$ both directions hold, and only then $A = B$.
+
+Why it happens: the first direction usually carries the real work, such as solving an equation or unpacking a definition, and the second looks too obvious to write down.
+
+How to check: after the proof, ask whether every element of $B$ has been shown to lie in $A$. If no argument covers that direction, the proof shows only $A \\subseteq B$.
+
+**Judging size by containment**
+
+Because $\\mathbb{N}$ is a proper subset of $\\mathbb{Z}$, it is taken to have fewer elements. That rule holds for finite sets but fails for infinite ones.
+
+Wrong working: every natural number is an integer, and $-1$ is an integer that is not natural, so $\\mathbb{N} \\subsetneq \\mathbb{Z}$ and therefore $|\\mathbb{N}| < |\\mathbb{Z}|$.
+
+Right working: list the integers as $0, 1, -1, 2, -2, 3, -3, \\ldots$ and pair them in order with the natural numbers. Every integer appears exactly once in the list, so the pairing is a bijection and $|\\mathbb{N}| = |\\mathbb{Z}|$.
+
+Why it happens: for finite sets a proper subset is always smaller, and that experience is carried over to infinite sets without a check.
+
+How to check: for infinite sets, look for a bijection instead of comparing by containment. The even natural numbers are another test case: they form a proper subset of $\\mathbb{N}$, yet $n \\mapsto 2n$ pairs them one to one with $\\mathbb{N}$.
+
+**Checking only the common intersection**
+
+To test whether three or more sets are pairwise disjoint, only the intersection of all of them is checked. An empty common intersection does not stop two of the sets from sharing elements.
+
+Wrong working: for $A = \\{1, 2\\}$, $B = \\{2, 3\\}$ and $C = \\{4\\}$, $A \\cap B \\cap C = \\emptyset$, so the sets are called pairwise disjoint.
+
+Right working: check each pair: $A \\cap B = \\{2\\}$, $A \\cap C = \\emptyset$ and $B \\cap C = \\emptyset$. The first pair shares $2$, so the sets are not pairwise disjoint.
+
+Why it happens: for two sets, the common intersection and the only pair are the same thing, so "no common element" and "pairwise disjoint" mean the same. With three or more sets they come apart.
+
+How to check: test each of the $\\binom{n}{2}$ pairs; for three sets that is three intersections. Equivalently, look for any element that appears in two of the sets.
+
+**Calling nested sets overlapping**
+
+Two sets that share elements are called overlapping without checking the other two conditions. When one set lies inside the other, they share elements but are nested.
+
+Wrong working: $\\{1, 2\\} \\cap \\{1, 2, 3\\} = \\{1, 2\\} \\neq \\emptyset$, so the sets are called overlapping.
+
+Right working: the definition also needs $A \\not\\subseteq B$ and $B \\not\\subseteq A$. Here $\\{1, 2\\} \\setminus \\{1, 2, 3\\} = \\emptyset$, so $\\{1, 2\\} \\subseteq \\{1, 2, 3\\}$ and the sets are nested, not overlapping. By contrast, $\\{1, 2, 3\\}$ and $\\{2, 3, 4\\}$ overlap: their differences are $\\{1\\}$ and $\\{4\\}$.
+
+Why it happens: in everyday language, overlap just means having something in common, and the subset conditions are easy to drop.
+
+How to check: compute $A \\cap B$, $A \\setminus B$ and $B \\setminus A$. The sets overlap only when all three are non-empty.
+
+**Allowing an empty block**
+
+A proposed partition is checked for disjointness and for its union, and the condition that every block is non-empty is skipped. The empty set passes the other two tests, so it slips in.
+
+Wrong working: in $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}, \\emptyset\\}$ the blocks are pairwise disjoint, since $\\emptyset$ shares nothing with any set, and their union is $\\{1, 2, 3, 4, 5\\}$, so the collection is called a partition of $\\{1, 2, 3, 4, 5\\}$.
+
+Right working: the definition requires $A_i \\neq \\emptyset$ for every block. The block $\\emptyset$ fails this, so the collection is not a partition; removing it leaves the partition $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}\\}$.
+
+Why it happens: the empty set changes neither the union nor the disjointness, so it looks harmless, and the non-empty condition is the easiest of the three to forget.
+
+How to check: go through the blocks one by one and name an element of each. A block with no element to name is empty and does not belong in a partition.
+`,
     before: ``,
     after: ``,
     link: '',
@@ -1832,6 +1929,14 @@ export default function SetRelationshipsPage({demoUnits, seoData, sectionsConten
           sectionsContent.obj5.content,
           <div key={'unit-partition'} dangerouslySetInnerHTML={{ __html: demoUnits.partition }} />,
           `Remove any one block, or let two blocks share an element, and the collection stops being a partition.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
 

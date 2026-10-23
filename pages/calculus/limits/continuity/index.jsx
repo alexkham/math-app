@@ -17,6 +17,7 @@ import functionContinuityDiagrams from '@/app/components/functions/continuity/fu
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -416,6 +417,29 @@ const summaryTable = `
 // };
 
 // formulas-optimized: v1 | 2026-06-09 | 3 callouts (obj2, obj10, obj11)
+// Concept introduction (section 1) — template G, exclusion. Candidates: the
+// continuity tool's smooth, hole, jump and asymptote states. Section 1 had
+// no widgets; its old text stays in sectionsContent.obj1, unused. The formal
+// definition with its formula box stays in section 2, unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSortTable = ciTableOpen(['graph', 'a value at the point?', 'values nearby settle?', 'do they match?']) +
+  ciRow(['A · smooth', 'yes', 'yes', 'yes'], { color: '#2563EB' }) +
+  ciRow(['B · hole', 'no', 'yes', '—'], { shade: true }) +
+  ciRow(['C · jump', 'yes', 'no: two different levels', '—']) +
+  ciRow(['D · asymptote', 'no', 'no: they run off to infinity', '—'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciRescueTable = ciTableOpen(['failed at the point', 'can one value fix it?']) +
+  ciRow(['hole, or a wrong value', 'yes: set f(a) to the value nearby points approach'], { color: '#2563EB', cols: [1] }) +
+  ciRow(['jump', 'no: the two sides approach different levels'], { shade: true }) +
+  ciRow(['asymptote', 'no: there is no level to fill in'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/limits/continuity ──────────────────────────────────────────
 
@@ -467,6 +491,12 @@ $$f \\text{ continuous at } a \\iff \\lim_{x \\to a} f(x) = f(a)$$
 /calculus/formulas]@
 
 encapsulates all three: the right side requires $f(a)$ to exist, the left side requires the limit to exist, and the equality requires them to match.
+
+@academic[pitfall,aside:true,width:35%:Stopping after two conditions
+Seeing that $f(1)$ is defined and $\\lim_{x \\to 1} f(x)$ exists, and calling $f$ continuous, skips condition 3. For $f(x) = x^2$ when $x \\neq 1$ and $f(1) = 3$, the limit is $1 \\neq 3$, so $f$ is not continuous at $1$.
+[Read more](!#pitfalls)]@
+
+In practice the conditions are checked in this order, at one specific point $a$. The first is about the single number $f(a)$, the second about the values of $f$ at points near $a$, and the third compares the two numbers these steps produce. The second condition deliberately ignores $f(a)$: the limit is built from values near $a$, never from the value at $a$ itself.
 `,
     before: ``,
     after: ``,
@@ -522,7 +552,13 @@ For closed intervals $[a, b]$, the definition adjusts at endpoints where only on
 - Right-continuous at $a$: $\\lim_{x \\to a^+} f(x) = f(a)$
 - Left-continuous at $b$: $\\lim_{x \\to b^-} f(x) = f(b)$
 
+@academic[pitfall,aside:true,width:35%:Asking for a two-sided limit at an endpoint
+Rejecting $\\sqrt{x}$ on $[0, 4]$ because there are no values left of $0$, and so no two-sided limit there, asks too much. At a left endpoint only the right side counts: $\\lim_{x \\to 0^+} \\sqrt{x} = 0 = \\sqrt{0}$, and $\\sqrt{x}$ is continuous on $[0, 4]$.
+[Read more](!#pitfalls)]@
+
 [One-sided continuity](!/calculus/limits/one-sided) handles the boundaries where the domain restricts approach to a single direction.
+
+Root functions are where this comes up most often. The domain of $\\sqrt{x}$ ends at $0$, so on an interval such as $[0, 4]$ the left endpoint can be approached only from the right. The same happens at the right endpoint of $[-3, 1]$ for $\\sqrt{1 - x}$, whose domain ends at $1$ and which can be approached there only from the left.
 `,
     before: ``,
     after: ``,
@@ -558,6 +594,10 @@ Consider:
 $$f(x) = \\frac{x^2 - 1}{x - 1}$$]@
 
 For $x \\neq 1$, this simplifies to $x + 1$. The limit as $x \\to 1$ is $2$. But $f(1)$ is undefined—division by zero.
+
+@academic[pitfall,aside:true,width:35%:Reading the value off the simplified formula
+Cancelling to $x + 1$ and then setting $f(1) = 1 + 1 = 2$ treats $f$ as $x + 1$ at $x = 1$ as well, and calls it continuous. The original formula gives $\\frac{0}{0}$ at $1$, so $f(1)$ is undefined and $f$ is discontinuous there.
+[Read more](!#pitfalls)]@
 
 The graph shows a hole at $(1, 2)$. The discontinuity is removable because redefining $f(1) = 2$ fills the hole and makes the function continuous.
 
@@ -597,6 +637,10 @@ For $f(x) = \\dfrac{1}{x}$ at $x = 0$:
 
 @academic[formula_callout:Infinite Discontinuity
 $$\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty \\qquad \\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty$$]@
+
+@academic[pitfall,aside:true,width:35%:Calling every zero of the denominator an asymptote
+Taking $x = 1$ as a vertical asymptote of $\\frac{x^2 - 1}{x - 1}$ because its denominator is $0$ there misses the cancellation: near $1$ the function equals $x + 1$, which tends to $2$, so the graph has a hole. Cancel common factors first; a zero left in the denominator, as with $\\frac{1}{x}$ at $0$, gives the asymptote.
+[Read more](!#pitfalls)]@
 
 The graph has a [vertical asymptote](!/calculus/limits/infinity) at $x = 0$. No finite value can serve as $f(0)$ because the function escapes to infinity from both sides.
 
@@ -648,7 +692,7 @@ For these functions, [evaluating limits](!/calculus/limits/evaluating) reduces t
 Continuity is preserved under standard operations. If $f$ and $g$ are continuous at $a$, then so are:
 
 @academic[formula_callout:Continuity Preserved Under Operations
-$$f, g \\text{ continuous at } a \\implies f \\pm g, \\; cf, \\; f \\cdot g, \\; f/g \\;(g(a) \\neq 0), \\; f \\circ g \\text{ continuous at } a$$
+$$f, g \\text{ continuous at } a \\implies f \\pm g, \\; cf, \\; f \\cdot g, \\; f/g \\;(g(a) \\neq 0), \\; f \\circ g \\;(f \\text{ continuous at } g(a)) \\text{ continuous at } a$$
 /calculus/formulas#continuity_preserved_under_operations]@
 
 @academic[formulas_link:Browse all limit formulas
@@ -673,6 +717,10 @@ $$f \\text{ continuous on } [a,b], \\; k \\text{ between } f(a) \\text{ and } f(
 
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Reading the theorem backwards
+For $f(x) = x^2$ on $[-1, 1]$, $f(-1) = f(1) = 1$, and concluding from this that $f$ never takes the value $0$ reverses the theorem. It speaks only about values between $f(a)$ and $f(b)$; here $f(0) = 0$.
+[Read more](!#pitfalls)]@
 
 Continuous functions hit every intermediate value—no skipping. The graph cannot jump from $f(a)$ to $f(b)$ without passing through every height in between.
 
@@ -702,6 +750,12 @@ $$f(2) = 8 - 2 - 1 = 5 > 0$$
 
 Since $f$ is continuous and changes sign, IVT guarantees a root between $1$ and $2$.]@
 
+@academic[pitfall,aside:true,width:35%:Skipping the continuity check
+Citing only the sign change of $f(x) = \\frac{1}{x}$, $f(-1) = -1 < 0 < 1 = f(1)$, predicts a root in $(-1, 1)$, yet $\\frac{1}{x} = 0$ has no solution. $f$ is not continuous at $0$, so the theorem does not apply on $[-1, 1]$.
+[Read more](!#pitfalls)]@
+
+The argument rests on two separate facts about $f$. The signs at the endpoints come from evaluating $f(1)$ and $f(2)$; continuity on the whole of $[1, 2]$ comes from knowing that $x^3 - x - 1$ is a polynomial. Only together do they force the graph to meet the $x$-axis somewhere between $1$ and $2$.
+
 The bisection method refines this: repeatedly halve the interval, keeping the half where the sign change occurs, to approximate the root to any desired precision.
 `,
     before: ``,
@@ -712,6 +766,87 @@ The bisection method refines this: repeatedly halve the interval, keeping the ha
     title: `Summary: Where Continuity Is the Hypothesis`,
     content: `
 Continuity isn&apos;t just a property a function might happen to have; it&apos;s a hypothesis that unlocks a long list of useful results across the limits subtree and beyond. The table below collects five places where this page&apos;s definition of continuity does the work — from the everyday move of direct substitution for limits, through the algebraic and composition rules, to the Intermediate Value Theorem. In each row, the required form of continuity is the condition that turns the right-hand result into a guarantee.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj14: {
+    title: `Common Pitfalls`,
+    content: `
+Six mistakes cause most wrong answers about continuity. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Stopping after two conditions**
+
+The function has a value at the point and a limit there, and it is declared continuous without the two numbers being compared. This happens most often with functions defined piecewise, where the value at the point is assigned separately from the formula around it.
+
+Wrong working: let $f(x) = x^2$ for $x \\neq 1$ and $f(1) = 3$. Then $f(1) = 3$ is defined, and $\\lim_{x \\to 1} f(x) = 1^2 = 1$ exists, so $f$ is continuous at $1$.
+
+Right working: condition 3 asks whether the limit equals the value. Here $\\lim_{x \\to 1} f(x) = 1$ and $f(1) = 3$, and $1 \\neq 3$, so $f$ is not continuous at $1$. The discontinuity is removable: redefining $f(1) = 1$ repairs it.
+
+Why it happens: conditions 1 and 2 are the ones that take work, the evaluation and the limit. Once both have succeeded, the comparison looks automatic and is left out.
+
+How to check: write the equation $\\lim_{x \\to a} f(x) = f(a)$ with both sides filled in by numbers. Here it reads $1 = 3$, which is false.
+
+**Asking for a two-sided limit at an endpoint**
+
+At the endpoint of a closed interval, the two-sided limit is demanded, as at an interior point. When the function is not defined on one side, the limit seems not to exist and the function is declared discontinuous.
+
+Wrong working: on $[0, 4]$, the function $\\sqrt{x}$ has no values for $x < 0$, so $\\lim_{x \\to 0^-} \\sqrt{x}$ does not exist, so there is no two-sided limit at $0$, so $\\sqrt{x}$ is not continuous on $[0, 4]$.
+
+Right working: on a closed interval, only right-continuity is required at the left endpoint and only left-continuity at the right endpoint. Here $\\lim_{x \\to 0^+} \\sqrt{x} = 0 = \\sqrt{0}$ and $\\lim_{x \\to 4^-} \\sqrt{x} = 2 = \\sqrt{4}$, and $\\sqrt{x}$ is continuous at every point of $(0, 4)$. So $\\sqrt{x}$ is continuous on $[0, 4]$.
+
+Why it happens: continuity at a point is learned with the two-sided limit, and that version is then applied at endpoints unchanged.
+
+How to check: ask whether the interval, or the domain, contains points on both sides of the point. If it contains points on one side only, the one-sided limit from that side is the one to compute.
+
+**Reading the value off the simplified formula**
+
+A formula that gives $0/0$ at a point is simplified, and the simplified formula is then used to supply the missing value, as if the two formulas were the same function.
+
+Wrong working: $f(x) = \\dfrac{x^2 - 1}{x - 1} = \\dfrac{(x - 1)(x + 1)}{x - 1} = x + 1$, so $f(1) = 2 = \\lim_{x \\to 1} f(x)$, and $f$ is continuous at $1$.
+
+Right working: the cancellation holds only for $x \\neq 1$. At $x = 1$ the original formula gives $\\dfrac{1 - 1}{1 - 1} = \\dfrac{0}{0}$, so $f(1)$ is undefined and condition 1 fails. The limit is $2$, so the discontinuity is removable. The function $x + 1$ is the repaired function, a different function from $f$.
+
+Why it happens: in algebra, simplifying an expression is treated as producing an equal expression, and the restriction $x \\neq 1$ disappears from view once the factor has been cancelled.
+
+How to check: substitute the point into the original formula, never into the simplified one. If the original gives $0/0$, the function has no value there.
+
+**Calling every zero of the denominator an asymptote**
+
+For a rational function, every zero of the denominator is taken to be a vertical asymptote, and so an infinite discontinuity.
+
+Wrong working: the denominator of $\\dfrac{x^2 - 1}{x - 1}$ is $0$ at $x = 1$, so the graph has a vertical asymptote at $x = 1$ and the discontinuity is infinite.
+
+Right working: the numerator is also $0$ at $x = 1$, and the two share the factor $x - 1$. For $x \\neq 1$ the function equals $x + 1$, which tends to $2$ as $x \\to 1$. The limit exists, so the discontinuity is removable: a hole at $(1, 2)$. Compare $\\dfrac{1}{x}$ at $0$: nothing cancels, the numerator stays $1$, and the one-sided limits are $-\\infty$ and $+\\infty$.
+
+Why it happens: division by zero is associated with blowing up, and for the first examples met, such as $\\dfrac{1}{x}$, it does.
+
+How to check: substitute the point into the numerator as well. A nonzero number over $0$ gives an infinite discontinuity. If both are $0$, cancel the common factor and look again. Values near the point show it too: $\\dfrac{x^2 - 1}{x - 1}$ gives $2.01$ at $x = 1.01$ and $1.99$ at $x = 0.99$, with no sign of blowing up.
+
+**Reading the theorem backwards**
+
+When the value $k$ does not lie between $f(a)$ and $f(b)$, for instance when $f(a)$ and $f(b)$ have the same sign and $k = 0$, the theorem is taken to say that $f$ never reaches $k$ on $[a, b]$.
+
+Wrong working: $f(x) = x^2$ on $[-1, 1]$ has $f(-1) = 1$ and $f(1) = 1$. There is no sign change, so $x^2 = 0$ has no solution in $(-1, 1)$.
+
+Right working: the theorem only goes one way. If $f$ is continuous and $k$ lies between $f(a)$ and $f(b)$, then $f(c) = k$ for some $c$; if $k$ does not lie between them, the theorem says nothing. Here $f(0) = 0$, so the equation has the solution $x = 0$.
+
+Why it happens: the theorem is used as a test for roots, and a test is expected to answer both yes and no.
+
+How to check: read a missing sign change as "no conclusion", not as "no root". Evaluating at an interior point settles it here: $f(0) = 0$.
+
+**Skipping the continuity check**
+
+A sign change of $f$ at the two endpoints is taken as enough to guarantee a root, without checking that $f$ is continuous on the whole interval.
+
+Wrong working: $f(x) = \\dfrac{1}{x}$ has $f(-1) = -1 < 0$ and $f(1) = 1 > 0$, so by the theorem $\\dfrac{1}{c} = 0$ for some $c$ in $(-1, 1)$.
+
+Right working: $\\dfrac{1}{x}$ is undefined at $0$, which lies in $[-1, 1]$, so $f$ is not continuous on $[-1, 1]$ and the theorem does not apply. In fact $\\dfrac{1}{c}$ is never $0$: the sign changes across the vertical asymptote at $x = 0$, not through a root.
+
+Why it happens: in most exercises the function is a polynomial, continuity holds automatically, and checking it becomes a step that is easy to skip.
+
+How to check: list the points of $[a, b]$ where $f$ is undefined or changes formula, such as zeros of a denominator or the break points of a piecewise definition. If there are any, continuity on $[a, b]$ has to be settled before the theorem is used.
 `,
     before: ``,
     after: ``,
@@ -851,6 +986,15 @@ const schemas = {
     vlines: [{ x: 1.25 }, { x: 1.5 }],
     notes: [{ x: 0.85, y: 5.4, text: 'sign change on [1.25, 1.5]: the root is there', pos: 'e', color: 'r' }],
     caption: 'Each halving keeps the half where the sign changes' };
+  const conceptIntroFigures = {
+    smooth: functionContinuityDiagrams.smooth,
+    hole: functionContinuityDiagrams.hole,
+    jump: functionContinuityDiagrams.jump,
+    asymptote: functionContinuityDiagrams.asymptote,
+    sortTable: ciSortTable,
+    rescueTable: ciRescueTable,
+  };
+
   const demoUnits = {
     three: demoUnitFrame({
       svg: functionContinuityDiagrams.wrongvalue,
@@ -928,6 +1072,7 @@ const schemas = {
 return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     discontinuityTypes,
     sectionsContent,
     introContent,
@@ -954,9 +1099,78 @@ const siteTheme = {
   warm: '#B45309', warmSoft: '#fef3c7', warmLine: '#fcd34d', warmInk: '#92400e',
 }
 
-export default function ContinuityPage({seoData, sectionsContent, introContent, discontinuityTypes, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ContinuityPage({seoData, sectionsContent, introContent, discontinuityTypes, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciCandidates = (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 14px' }}>
+      {[['smooth', 'A · smooth'], ['hole', 'B · hole'], ['jump', 'C · jump'], ['asymptote', 'D · asymptote']].map(([k, label]) => (
+        <div key={k} style={{ textAlign: 'center' }}>
+          <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[k] }} />
+          <div style={{ fontWeight: 700, color: '#06357a', fontSize: '15px', margin: '-4px 0 6px' }}>{label}</div>
+        </div>
+      ))}
+    </div>
+  )
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Four graphs, each looked at around one marked point — which of them is continuous there?`,
+        content: `Away from their marked points all four behave alike: the graph is one unbroken curve. At the marked point they differ. Before giving the property a name, look at what each graph does exactly there.`,
+        visual: ciCandidates,
+        caption: `A: $x^2$, smooth everywhere. B: a point missing at $x = 1$. C: a step at $x = 0$. D: a vertical asymptote. These are frozen states of the [continuity explorer](!/calculus/visual-tools/continuity).`,
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Only A passes; B, C and D each break at the point.`,
+        content: [
+          `Ask the same three questions of every graph at its marked point.`,
+          ciTable('sortTable'),
+          `Only A answers yes three times. Each of the others fails at least one question, and which one it fails is what tells them apart.`,
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `Each failure is at one exact place, and the near-misses do not fail at all.`,
+        content: `B fails because the point itself is missing — the curve on both sides heads for one height, but nothing sits there. C fails because the two sides head for two different heights. D fails because the values near the point do not settle at all. One more case looks harmless but also fails: a curve whose nearby values head for one height while the dot at the point sits somewhere else, a wrong value. The near-misses pass. $|x|$ has a sharp corner at $0$, but nothing is missing or misplaced, so it is continuous there — a corner is not a break. And a curve can be continuous at a point however steep it is, as long as it arrives.`,
+      },
+      {
+        id: 'rule',
+        lead: `The rule: the value at the point is what the nearby values approach.`,
+        content: `A function is continuous at a point when the function value at each point matches what the surrounding values predict: nearby inputs give outputs closing in on a height, and the point sits exactly at that height. Informally, you can trace the curve without lifting your pen. That picture works for whole stretches of a graph, but it breaks down for strange functions and says nothing about a single point — which is why the rule is stated with a limit, one point at a time.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A function $f$ is [continuous](!/calculus/definitions#continuity) at $x = a$ if its [limit](!/calculus/limits) as $x$ approaches $a$ exists and equals its value there: $\\lim_{x \\to a} f(x) = f(a)$.`,
+        footer: `The next section takes this one equation apart into the three conditions it contains.`,
+      },
+      {
+        id: 'kind',
+        lead: `Continuity is a property of a function at a point; on an interval, it holds at every point.`,
+        content: `It is a yes-or-no question about one point. A function continuous at every point of an interval is continuous on that interval, and that is the everyday sense of the word: small changes in input produce small changes in output. Temperature varies continuously throughout the day. Position changes continuously as you walk. Discontinuities—sudden jumps or gaps—signal something unusual: a switch being flipped, a boundary being crossed.`,
+      },
+      {
+        id: 'caveat',
+        lead: `Some rejected graphs can be repaired with a single value; others cannot.`,
+        content: [
+          `Whether one changed value would fix the failure sorts the discontinuities into kinds.`,
+          ciTable('rescueTable'),
+          `B is repaired by giving the function the value $2$ at $x = 1$; C and D stay broken whatever value is chosen.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page states the definition formally, then goes through each kind of discontinuity — removable, jump, infinite, oscillating — one-sided continuity, continuity on intervals, the functions that are continuous everywhere, and the theorems that continuity guarantees.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -964,7 +1178,7 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1110,6 +1324,14 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
           sectionsContent.obj13.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

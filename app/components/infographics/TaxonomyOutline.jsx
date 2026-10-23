@@ -70,20 +70,20 @@ import ExportButton from './utils/ExportButton';
 export const DEFAULT_THEME = {
   bg: '#ffffff',
   panel: '#ffffff',
-  panelSoft: '#eef2ff',
-  panelSofter: '#f8faff',
-  ink: '#1f2937',
-  title: '#1e3a8a',
-  titleSoft: '#c7d2fe',
-  titleLine: '#6366f1',
-  muted: '#6b7280',
-  line: '#e5e7eb',
-  line2: '#c7d2fe',
-  accent: '#4f46e5',
-  indigoSoft: '#e0e7ff',
-  warm: '#d97706',
-  warmSoft: '#fef3c7',
-  warmLine: '#fcd34d',
+  panelSoft: '#e8eefc',
+  panelSofter: '#f5f8ff',
+  ink: '#0f172a',
+  title: '#06357A',
+  titleSoft: '#bfd0f5',
+  titleLine: '#3b5bb5',
+  muted: '#64748b',
+  line: '#e2e8f0',
+  line2: '#9bb3ee',
+  accent: '#2563EB',
+  indigoSoft: '#dbe6fd',
+  warm: '#B45309',
+  warmSoft: '#fffbeb',
+  warmLine: '#f2d48a',
   warmInk: '#92400e',
   fontSans: "'Inter', system-ui, sans-serif",
   fontMono: "'JetBrains Mono', ui-monospace, monospace",
@@ -176,6 +176,21 @@ const ChevGap = ({ small }) => <span className={cls('to-chev-gap', small && 'to-
 
 /* ---------- component ---------- */
 
+/* ---------- neutral bordered text blocks (same look as Hierarchy / TopDownTree / NestedContainment) ---------- */
+
+const prosePars = (v) => (Array.isArray(v) ? v.map((p, i) => <p key={i}>{rc(p)}</p>) : rc(v));
+
+function ProseBlock({ label, title, body, where }) {
+  if (isEmpty(label) && isEmpty(title) && isEmpty(body)) return null;
+  return (
+    <div className={cls('to-prose', 'to-prose-' + where, !isEmpty(label) && 'to-prose-labelled')}>
+      {!isEmpty(label) && <span className="to-prose-label">{rc(label)}</span>}
+      {!isEmpty(title) && <div className="to-prose-title">{rc(title)}</div>}
+      {!isEmpty(body) && <div className="to-prose-body">{prosePars(body)}</div>}
+    </div>
+  );
+}
+
 export default function TaxonomyOutline({
   data,
   variant = 'outline',
@@ -260,6 +275,16 @@ export default function TaxonomyOutline({
     '--to-gw': (maxDepth + 1) * 10 + 10 + 'px',
   };
 
+  const d = data || {};
+  const rowStyle = (r) => {
+    const st = {};
+    if (!isEmpty(r.color)) st.background = r.color;
+    if (!isEmpty(r.borderColor)) st.borderColor = r.borderColor;
+    if (!isEmpty(r.textColor)) st.color = r.textColor;
+    if (!isEmpty(r.font)) st.fontFamily = r.font;
+    return st;
+  };
+
   /* ===== V1 outline ===== */
   const renderOutline = (list, nested) => (
     <ul className={cls('to-ol', nested && 'to-ol-nested')}>
@@ -269,9 +294,10 @@ export default function TaxonomyOutline({
         const r = n.raw;
         return (
           <li key={n.key}>
-            <div className={cls('to-ol-item', 'to-d' + Math.min(n.depth, 3), r.flag && 'to-flag', isOpen && 'to-open')}>
-              <div className={cls('to-ol-row', can && 'to-click')} {...(can ? clickProps(n.key) : {})}>
+            <div className={cls('to-ol-item', 'to-d' + Math.min(n.depth, 3), r.flag && 'to-flag', isOpen && 'to-open', !isEmpty(r.textColor) && 'to-custom-ink')}>
+              <div className={cls('to-ol-row', can && 'to-click', d.showLevels && 'to-ol-row-lv')} style={rowStyle(r)} {...(can ? clickProps(n.key) : {})}>
                 {can ? <Chev /> : <ChevGap />}
+                {d.showLevels && <span className="to-ol-lv">{!isEmpty(r.level) ? rc(r.level) : 'L' + n.depth}</span>}
                 <span className="to-ol-name">
                   {rc(r.name)}
                   {!isEmpty(r.def) && <span className="to-ol-def">{rc(r.def)}</span>}
@@ -516,8 +542,10 @@ export default function TaxonomyOutline({
           {exportable && <ExportButton formats={exportFormats} onExport={exportAs} busy={busy} theme={t} />}
         </div>
       )}
+      <ProseBlock where="pre" label={d.prefaceLabel} title={d.prefaceTitle} body={d.preface} />
       {body}
       {legend}
+      <ProseBlock where="con" label={d.conclusionLabel} title={d.conclusionTitle} body={d.conclusion} />
     </div>
   );
 }
@@ -571,6 +599,21 @@ const CSS = `
 .to-ol li{position:relative}
 .to-ol-nested > li::before{content:'';position:absolute;left:-18px;top:28px;width:14px;border-top:1.5px solid var(--to-line2)}
 .to-ol-item{margin:6px 0}
+.to-ol-row.to-ol-row-lv{grid-template-columns:22px auto 1fr auto}
+.to-ol-lv{font-family:var(--to-mono);font-size:10.5px;padding:2px 7px;border-radius:999px;background:var(--to-panel);color:var(--to-accent);border:1px solid var(--to-line2)}
+.to-d0 > .to-ol-row .to-ol-lv{background:transparent;color:var(--to-titleSoft);border-color:var(--to-titleLine)}
+.to-custom-ink > .to-ol-row .to-ol-name,.to-custom-ink > .to-ol-row .to-ol-ex,.to-custom-ink > .to-ol-row .to-ol-def{color:inherit!important}
+.to-ol-name a{color:inherit!important;text-decoration:underline;text-underline-offset:3px}
+.to-prose{background:#ffffff;border:2px solid #94a3b8;border-radius:14px;padding:16px 20px}
+.to-prose-labelled{padding-top:22px}
+.to-prose-pre{margin:8px 0 30px}
+.to-prose-con{margin:30px 0 0}
+.to-prose-label{display:table;margin:-33px 0 12px -4px;background:#ffffff;padding:0 8px;font-family:var(--to-mono);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#334155;line-height:18px}
+.to-prose-label *,.to-prose-title *{margin:0!important;padding:0;display:inline}
+.to-prose-title{font-size:16px;font-weight:600;color:#0f172a;margin-bottom:4px}
+.to-prose-body{font-size:14.5px;line-height:1.6;color:#334155}
+.to-prose-body p{margin:0 0 8px}
+.to-prose-body p:last-child{margin-bottom:0}
 .to-ol-row{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:center;padding:10px 14px;border-radius:10px}
 .to-ol-item.to-open > .to-ol-row{border-radius:10px 10px 0 0}
 .to-ol-name{font-weight:700;font-size:14px;color:var(--to-title)}

@@ -394,6 +394,10 @@ $12 = 2^2 \\cdot 3^1$
 
 $18 = 2^1 \\cdot 3^2$
 
+@academic[pitfall,aside:true,width:35%:Taking the smaller exponents
+Choosing the smaller exponent of each prime, as for the GCD, gives $2^1 \\cdot 3^1 = 6$, which divides $12$ and $18$ but is a multiple of neither. The larger exponents give $2^2 \\cdot 3^2 = 36$.
+[Read more](!#pitfalls)]@
+
 Every prime appearing in either factorization must appear in the LCM — otherwise the LCM would not be divisible by both. Take the larger exponent for each: $\\max(2, 1) = 2$ for the prime $2$, and $\\max(1, 2) = 2$ for the prime $3$.
 
 @academic[formula_callout:Method 2: Prime Factorization
@@ -453,6 +457,10 @@ The relationship is useful in both directions. Knowing the GCD gives the LCM, an
 @academic[formula_callout:When $a$ and $b$ Are Coprime
 $$\\text{lcm}(a, b) = a \\cdot b$$]@
 
+@academic[pitfall,aside:true,width:35%:Multiplying numbers that share a factor
+Using the product for $12$ and $18$ gives $12 \\cdot 18 = 216$, a common multiple but not the least, since $\\gcd(12, 18) = 6$. Dividing by the GCD gives $\\text{lcm}(12, 18) = \\frac{216}{6} = 36$.
+[Read more](!#pitfalls)]@
+
 With no shared prime factors, nothing overlaps. Every prime in $a$ is absent from $b$, and every prime in $b$ is absent from $a$. The LCM must include all of them at full strength, which is exactly what the product provides.
 
 $\\text{lcm}(7, 9) = 63$. The numbers share no common factor ($\\gcd = 1$), so the LCM equals their product.
@@ -497,6 +505,10 @@ $\\text{lcm}(4, 6) = 12$.
 $\\text{lcm}(12, 9)$: factoring gives $12 = 2^2 \\cdot 3$ and $9 = 3^2$. Maximum exponents: $2^2 \\cdot 3^2 = 36$.
 
 So $\\text{lcm}(4, 6, 9) = 36$.
+
+@academic[pitfall,aside:true,width:35%:Dividing the product of three by their GCD
+Stretching the two-number formula to $\\frac{4 \\cdot 6 \\cdot 9}{\\gcd(4, 6, 9)} = \\frac{216}{1} = 216$ gives a common multiple six times too large. Pairing the numbers step by step gives $\\text{lcm}(4, 6, 9) = 36$.
+[Read more](!#pitfalls)]@
 
 Alternatively, factor all three numbers at once and take the maximum exponent for each prime across all factorizations. Here $4 = 2^2$, $6 = 2 \\cdot 3$, $9 = 3^2$. The primes present are $2$ and $3$, with maximums $2^2$ and $3^2$. The result is $36$ — the same answer by a more direct route.
 
@@ -587,6 +599,49 @@ Find $\\text{lcm}(6, 10, 15)$. $\\text{lcm}(6, 10) = 30$. $\\text{lcm}(30, 15) =
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Three mistakes account for many of the wrong LCM answers. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Taking the smaller exponents**
+
+The prime factorization methods for the GCD and the LCM use the same factorizations and differ in one choice. That choice is swapped: for each prime the smaller exponent is taken, as for the GCD, instead of the larger one.
+
+Wrong working: $12 = 2^2 \\cdot 3$ and $18 = 2 \\cdot 3^2$. The smaller exponents are $1$ for the prime $2$ and $1$ for the prime $3$, so $\\text{lcm}(12, 18) = 2^1 \\cdot 3^1 = 6$.
+
+Right working: the larger exponents are $\\max(2, 1) = 2$ and $\\max(1, 2) = 2$, so $\\text{lcm}(12, 18) = 2^2 \\cdot 3^2 = 36$. The wrong answer $6$ is in fact $\\gcd(12, 18)$.
+
+Why it happens: the two methods are usually learned together, and min and max are easy to swap when nothing else in the working changes.
+
+How to check: the LCM is never smaller than the larger number. Since $6 < 18$, it cannot be $\\text{lcm}(12, 18)$, while $36 \\div 12 = 3$ and $36 \\div 18 = 2$ are both whole.
+
+**Multiplying numbers that share a factor**
+
+The coprime shortcut $\\text{lcm}(a, b) = a \\cdot b$ is used for every pair, including pairs that have a common factor.
+
+Wrong working: $\\text{lcm}(12, 18) = 12 \\cdot 18 = 216$.
+
+Right working: $\\gcd(12, 18) = 6$, so $\\text{lcm}(12, 18) = \\frac{12 \\cdot 18}{6} = \\frac{216}{6} = 36$. The product equals the LCM only when the GCD is $1$, as for $7$ and $9$, where $\\text{lcm}(7, 9) = 63$.
+
+Why it happens: the product is always a common multiple, so it passes the check that both numbers divide it, and for coprime pairs it is the right answer. The shortcut works often enough to seem like a rule.
+
+How to check: find the GCD first. If it is larger than $1$, the LCM is below the product. Here $216 \\div 6 = 36$, and $36$ is already divisible by both $12$ and $18$.
+
+**Dividing the product of three by their GCD**
+
+The formula $\\text{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$ is stretched to three numbers by dividing their product by the GCD of all three.
+
+Wrong working: $\\text{lcm}(4, 6, 9) = \\frac{4 \\cdot 6 \\cdot 9}{\\gcd(4, 6, 9)} = \\frac{216}{1} = 216$.
+
+Right working: pair the numbers. $\\text{lcm}(4, 6) = 12$, and then $\\text{lcm}(12, 9) = 36$. So $\\text{lcm}(4, 6, 9) = 36$, the same result as the maximum exponents $2^2 \\cdot 3^2$.
+
+Why it happens: the identity $a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$ looks as if it should extend to more numbers, but it does not. Here $4$ and $6$ share the factor $2$, and $6$ and $9$ share the factor $3$, yet no factor greater than $1$ is shared by all three, so dividing by $\\gcd(4, 6, 9) = 1$ removes nothing.
+
+How to check: test a smaller candidate. $216 \\div 6 = 36$, and $36$ is divisible by $4$, $6$ and $9$, so $216$ is not the least. For $6$, $10$ and $15$ the wrong formula gives $900$, while $\\text{lcm}(6, 10, 15) = 30$.`,
+      before:``,
+      after:``,
+      link:'',
     }
   
   }
@@ -595,7 +650,7 @@ Find $\\text{lcm}(6, 10, 15)$. $\\text{lcm}(6, 10) = 30$. $\\text{lcm}(30, 15) =
   const introContent = {
   id: "intro",
   title: "The Smallest Shared Multiple",
-  content: `While the [GCD](!/arithmetic/divisibility/gcd) finds the largest number that divides two given integers. The LCM works in the opposite direction — it finds the smallest number that both integers divide into. Where the GCD looks downward into shared factor structure, the LCM looks upward to the first point where two multiplication sequences meet.`
+  content: `While the [GCD](!/arithmetic/divisibility/gcd) finds the largest number that divides two given integers, the LCM works in the opposite direction — it finds the smallest number that both integers divide into. Where the GCD looks downward into shared factor structure, the LCM looks upward to the first point where two multiplication sequences meet.`
 }
 
 
@@ -1037,6 +1092,14 @@ obj10SvgBuses,pfLcmObj4, demoUnits}) {
           >
             <TopDownTree data={lcmMethodTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

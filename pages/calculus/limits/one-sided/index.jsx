@@ -1949,6 +1949,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2029,37 +2031,37 @@ const summaryTable = `
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Piecewise function at a boundary</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a different formula applies on each side of the boundary</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">use the left-side formula for LHL, the right-side formula for RHL; check whether they agree</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">5</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Jump discontinuity</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function jumps from one value to another at the point</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">LHL = L<sub>1</sub>, RHL = L<sub>2</sub>, with L<sub>1</sub> ≠ L<sub>2</sub>; both finite</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">6</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vertical asymptote</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function is unbounded near the point; signs may differ by direction</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">LHL = ±∞ and RHL = ±∞, possibly with opposite signs — see <a href="/calculus/limits/infinity" style="${linkStyle}">limits and infinity</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj6</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">7</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Domain boundary (radicals, etc.)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">function is only defined on one side of the boundary point</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">only one one-sided limit is meaningful; the other isn&apos;t defined</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj7</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">8</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Closed-interval endpoint</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">continuity at a or b on [a, b] can only be tested from inside the interval</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">continuous-from-right at a, continuous-from-left at b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj9</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">10</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Corner point (one-sided derivatives)</td>
       <td style="padding: 12px 15px; color: #34495e;">instantaneous rate of change differs left vs right at a kink</td>
       <td style="padding: 12px 15px; color: #34495e;">left-derivative ≠ right-derivative ⇒ function is not differentiable at the point</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">obj10</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">11</td>
     </tr>
   </tbody>
 </table>
@@ -2282,6 +2284,25 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 1 callout (obj9)
+// Concept introduction (section 1) — template C, failure first. Running
+// instance: the limit tool's jump state, f(x) = x for x < 0 and x + 1 for
+// x ≥ 0, at a = 0. Old obj1 text is kept in sectionsContent.obj1, unused; its
+// formula box and three sentences are carried in unchanged. Section 2
+// (right-hand limits) is unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciJumpTable = ciTableOpen(['from the left: x', 'f(x)', 'from the right: x', 'f(x)']) +
+  ciRow(['−0.1', '−0.1', '0.1', '1.1']) +
+  ciRow(['−0.01', '−0.01', '0.01', '1.01'], { shade: true }) +
+  ciRow(['−0.001', '−0.001', '0.001', '1.001']) +
+  ciRow(['heading to', '0', 'heading to', '1'], { shade: true, last: true, color: '#a4243b', cols: [1, 3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/limits/one-sided ───────────────────────────────────────────
 
@@ -2412,6 +2433,10 @@ The right-hand limit uses the formula $3x - 2$:
 @academic[formula_callout:Piecewise Functions
 $$\\lim_{x \\to 2^+} (3x - 2) = 4$$]@
 
+@academic[pitfall,aside:true,width:35%:Using the wrong piece
+Taking both sides from the piece that holds at $x = 2$: for $x^2$ when $x < 2$ and $3x$ when $x \\geq 2$, that gives $6$ from both sides. The left side uses $x^2$ and gives $4$, so the limit does not exist.
+[Read more](!#pitfalls)]@
+
 Since both one-sided limits equal $4$, the two-sided limit exists and equals $4$. If the formulas had produced different values, the two-sided limit would not exist.
 `,
     before: ``,
@@ -2431,6 +2456,10 @@ $$\\lim_{x \\to n^-} \\lfloor x \\rfloor = n - 1$$]@
 @academic[formula_callout:Jump Discontinuities
 $$\\lim_{x \\to n^+} \\lfloor x \\rfloor = n$$]@
 
+@academic[pitfall,aside:true,width:35%:Plugging in the integer
+Substituting $x = 2$ gives $\\lfloor 2 \\rfloor = 2$ as the left-hand limit. Just left of $2$, at $x = 1.9$ or $1.99$, the floor is $1$, so $\\lim_{x \\to 2^-} \\lfloor x \\rfloor = 1$.
+[Read more](!#pitfalls)]@
+
 The left-hand limit gives the integer below, while the right-hand limit gives the integer itself. The function jumps by $1$ at each integer. No two-sided limit exists at these points because the one-sided limits disagree.
 `,
     before: ``,
@@ -2449,6 +2478,10 @@ $$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$]@
 
 @academic[formula_callout:One-Sided Limits at Vertical Asymptotes
 $$\\lim_{x \\to 2^+} \\frac{1}{x - 2} = +\\infty$$]@
+
+@academic[pitfall,aside:true,width:35%:Ignoring the sign of the denominator
+Treating $\\lim_{x \\to 3^-} \\frac{x}{x - 3}$ as a number over something tiny gives $+\\infty$. For $x < 3$ the denominator is negative while the numerator is near $3$, so the limit is $-\\infty$; at $x = 2.99$ the value is $-299$.
+[Read more](!#pitfalls)]@
 
 From the left, $x - 2$ is a small negative number, so the reciprocal is a large negative number. From the right, $x - 2$ is a small positive number, so the reciprocal is a large positive number.
 
@@ -2492,6 +2525,10 @@ $$\\lim_{x \\to 0^+} \\frac{|x|}{x} = \\frac{x}{x} = 1$$]@
 @academic[formula_callout:Evaluating One-Sided Limits
 $$\\lim_{x \\to 0^-} \\frac{|x|}{x} = \\frac{-x}{x} = -1$$]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the absolute value bars
+Treating $|x - 2|$ as $x - 2$ in $\\lim_{x \\to 2^-} \\frac{x^2 - 4}{|x - 2|}$ cancels to $x + 2$ and gives $4$. For $x < 2$, $|x - 2| = 2 - x$, so the quotient is $-(x + 2)$ and the limit is $-4$.
+[Read more](!#pitfalls)]@
+
 When $x > 0$, the absolute value $|x| = x$. When $x < 0$, the absolute value $|x| = -x$. The direction of approach determines which case applies.
 `,
     before: ``,
@@ -2519,6 +2556,10 @@ $$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a); \\quad
 
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Checking continuity from one side
+Calling the step $f(x) = x$ for $x < 0$, $f(x) = x + 1$ for $x \\geq 0$ continuous at $0$ because $\\lim_{x \\to 0^+} f(x) = 1 = f(0)$ checks one side only. The left-hand limit is $0$, so $f$ is right-continuous at $0$ but not continuous.
+[Read more](!#pitfalls)]@
 
 Full continuity at $a$ requires both. On a closed interval $[a, b]$, continuity means: continuous on the open interval $(a, b)$, continuous from the right at $a$, and continuous from the left at $b$.
 `,
@@ -2555,6 +2596,88 @@ A function may have different instantaneous rates of change from the left and ri
     title: `Summary: Where One-Sided Limits Are Essential`,
     content: `
 One-sided limits aren&apos;t just a finer-grained version of the two-sided limit — they&apos;re the right tool for a handful of specific situations where two-sided analysis either fails or doesn&apos;t apply. The table below collects six such situations, pairing each with its diagnostic pattern: what the LHL and RHL typically look like, and why the one-sided form is structurally required. Recognizing the situation often points directly at the right technique.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for most wrong answers with one-sided limits. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Using the wrong piece**
+
+At a boundary between the pieces of a piecewise function, both one-sided limits are computed from the formula that holds at the boundary point itself, so the left side never uses its own formula.
+
+Wrong working: for $f(x) = x^2$ when $x < 2$ and $f(x) = 3x$ when $x \\geq 2$, the point $x = 2$ belongs to the piece $3x$, so
+$$\\lim_{x \\to 2^-} f(x) = 3 \\cdot 2 = 6, \\qquad \\lim_{x \\to 2^+} f(x) = 6, \\qquad \\lim_{x \\to 2} f(x) = 6$$
+
+Right working: each side uses the formula that holds on that side.
+$$\\lim_{x \\to 2^-} x^2 = 4, \\qquad \\lim_{x \\to 2^+} 3x = 6$$
+Since $4 \\neq 6$, the two-sided limit does not exist.
+
+Why it happens: the boundary point is listed in one of the pieces, and that piece feels like the formula at $2$. A left-hand limit never uses $x = 2$ itself, only values below it.
+
+How to check: pick one value on each side and ask which condition it meets. $x = 1.99$ satisfies $x < 2$ and gives $1.99^2 = 3.9601$; $x = 2.01$ satisfies $x \\geq 2$ and gives $6.03$.
+
+**Plugging in the integer**
+
+The left-hand limit of the floor function at an integer is found by substituting the integer, which gives the function value instead of the value approached from below.
+
+Wrong working:
+$$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = \\lfloor 2 \\rfloor = 2$$
+
+Right working: for $1 \\leq x < 2$ the floor is $1$, so the function is constant at $1$ just left of $2$.
+$$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = 1, \\qquad \\lim_{x \\to 2^+} \\lfloor x \\rfloor = 2$$
+The value $\\lfloor 2 \\rfloor = 2$ matches the right side only.
+
+Why it happens: direct substitution is the reflex, and it works for continuous functions. At a jump the value at the point belongs to one side only.
+
+How to check: evaluate just inside the side being approached. $\\lfloor 1.99 \\rfloor = 1$ and $\\lfloor 1.999 \\rfloor = 1$; a substituted answer that differs from these is wrong.
+
+**Ignoring the sign of the denominator**
+
+Near a vertical asymptote the size of the quotient is found correctly, but its sign is assumed to be positive.
+
+Wrong working: as $x \\to 3^-$ the numerator tends to $3$ and the denominator to $0$, so the quotient is $3$ divided by something tiny, and
+$$\\lim_{x \\to 3^-} \\frac{x}{x - 3} = +\\infty$$
+
+Right working: for $x$ slightly less than $3$, $x - 3$ is a small negative number while $x$ is close to $3$, which is positive. A positive number over a small negative one is a large negative number.
+$$\\lim_{x \\to 3^-} \\frac{x}{x - 3} = -\\infty, \\qquad \\lim_{x \\to 3^+} \\frac{x}{x - 3} = +\\infty$$
+
+Why it happens: the rule that a tiny denominator gives a huge value is remembered without the sign, and $x - 3$ is handled as if it were $|x - 3|$.
+
+How to check: substitute one value on the side. $x = 2.99$ gives $\\frac{2.99}{-0.01} = -299$.
+
+**Dropping the absolute value bars**
+
+In a quotient with an absolute value, $|x - a|$ is replaced by $x - a$ and cancelled, without checking which side of $a$ is being approached.
+
+Wrong working:
+$$\\lim_{x \\to 2^-} \\frac{x^2 - 4}{|x - 2|} = \\lim_{x \\to 2^-} \\frac{(x - 2)(x + 2)}{x - 2} = \\lim_{x \\to 2^-} (x + 2) = 4$$
+
+Right working: for $x < 2$, $x - 2$ is negative, so $|x - 2| = -(x - 2)$.
+$$\\lim_{x \\to 2^-} \\frac{(x - 2)(x + 2)}{-(x - 2)} = \\lim_{x \\to 2^-} \\big(-(x + 2)\\big) = -4$$
+From the right $|x - 2| = x - 2$ and the limit is $4$, so the two-sided limit does not exist.
+
+Why it happens: once the numerator is factored, the bars look like decoration, and the case $|u| = u$ is the one that comes to mind.
+
+How to check: substitute a value on the side. $x = 1.99$ gives $\\frac{3.9601 - 4}{0.01} = -3.99$, close to $-4$.
+
+**Checking continuity from one side**
+
+Continuity at a point is tested with one one-sided limit only. When that side matches $f(a)$, the function is called continuous.
+
+Wrong working: for $f(x) = x$ when $x < 0$ and $f(x) = x + 1$ when $x \\geq 0$,
+$$\\lim_{x \\to 0^+} (x + 1) = 1 = f(0), \\quad \\text{so } f \\text{ is continuous at } 0$$
+
+Right working: the right side shows only that $f$ is continuous from the right at $0$. The left side gives
+$$\\lim_{x \\to 0^-} x = 0 \\neq 1 = f(0)$$
+so $f$ is not continuous from the left, and therefore not continuous at $0$.
+
+Why it happens: the side whose formula contains the point is checked first, and it agrees with $f(a)$ whenever that piece is continuous.
+
+How to check: write down all three numbers, $f(a^-)$, $f(a^+)$ and $f(a)$, and require them to be equal. Here they are $0$, $1$ and $1$. Only at an endpoint of a closed interval is one side enough.
 `,
     before: ``,
     after: ``,
@@ -2703,6 +2826,20 @@ const schemas = {
     ],
     notes: [{ x: 0.15, y: -0.5, text: 'no value at 0', pos: 'e' }, { x: -2.9, y: 1.7, text: 'left −1, right 1: no limit at 0', pos: 'e', color: 'r' }],
     caption: '|x|/x: −1 from the left, 1 from the right, no limit at 0' };
+  // Concept introduction figures (section 1), one running instance: the jump at 0.
+  const fpCiSides = { kind: 'domainOpen', svgTitle: 'Two ways to approach a point: from the left and from the right', range: [-3, 3],
+    rows: [
+      { label: 'from the left: x < 0', color: 'g', segs: [[null, 0, false, true]], tag: { text: 'x → 0⁻', x: 1.2 } },
+      { label: 'from the right: x > 0', color: 'f', segs: [[0, null, true]], tag: { text: 'x → 0⁺', x: 1.6 } },
+    ],
+    caption: 'Every approach to 0 comes from one side or the other' };
+
+  const conceptIntroFigures = {
+    sides: renderFunctionPlotV2(fpCiSides),
+    jump: functionLimitDiagrams.jump,
+    jumpTable: ciJumpTable,
+  };
+
   const demoUnits = {
     connection: demoUnitFrame({
       svg: functionLimitDiagrams.onesided,
@@ -2740,6 +2877,7 @@ const schemas = {
 return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -2758,9 +2896,69 @@ return {
    }
 
 
-export default function OneSidedPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function OneSidedPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'assumption',
+        lead: `It is natural to expect a graph to head toward one height near any point.`,
+        content: `For a smooth curve, and even for a curve with a single missing point, the values near $x = 0$ close in on one number, whichever way $x$ comes from. A limit has only ever needed $x$ to get close to $0$; nobody asked from which side, because the answer never depended on it.`,
+        visual: ciSvg('sides'),
+        caption: `The two ways $x$ can approach $0$: through values less than $0$, or through values greater than $0$.`,
+      },
+      {
+        id: 'break',
+        kind: 'instance',
+        tone: 'break',
+        lead: `At a jump, the two sides head for different heights.`,
+        content: [
+          `Take $f(x) = x$ for $x < 0$ and $f(x) = x + 1$ for $x \\geq 0$, and approach $0$ from each side.`,
+          ciTable('jumpTable'),
+          `Values to the left close in on $0$; values to the right close in on $1$. There is no single number the function approaches at $0$, so $\\lim_{x \\to 0} f(x)$ does not exist — yet each side, on its own, is perfectly well behaved.`,
+        ],
+        visual: ciSvg('jump'),
+        caption: `The step at $x = 0$: the left branch arrives at height $0$ with an open circle, the right branch starts at height $1$ with a filled one. The same state is on the [limit explorer](!/calculus/visual-tools/limit).`,
+      },
+      {
+        id: 'diagnosis',
+        lead: `The break was readable in advance: the two sides follow two different rules.`,
+        content: `Left of $0$ the function is $x$, right of $0$ it is $x + 1$. Each formula on its own has an obvious value at $0$ — $0$ and $1$. A two-sided limit asks the two rules to agree, and here they were never going to. The fix is to stop asking for agreement and ask each side separately.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The left-hand [one-sided limit](!/calculus/definitions#one_sided_limit) of $f$ at $a$ is the value $f(x)$ approaches as $x$ approaches $a$ through values less than $a$; the right-hand limit uses values greater than $a$. The left-hand limit is written`,
+        formula: `@academic[formula_callout:Left-Hand Limits
+$$\\lim_{x \\to a^-} f(x)$$]@`,
+        footer: `For the step: $\\lim_{x \\to 0^-} f(x) = 0$ and $\\lim_{x \\to 0^+} f(x) = 1$. The right-hand notation is in the next section.`,
+      },
+      {
+        id: 'kind',
+        lead: `Each one-sided limit is a number, attached to a function, a point and a side.`,
+        content: [
+          `This notation means $x$ approaches $a$ through values strictly less than $a$. You move along the $x$-axis from the left, getting closer to $a$ but never reaching or passing it.`,
+          `Alternative notations include $\\lim_{x \\to a-} f(x)$ and $\\lim_{x \\uparrow a} f(x)$. Some texts describe this as approaching "from below" since smaller $x$-values lie below $a$ on the number line. All the variants appear among the [calculus symbols](!/math-symbols/calculus).`,
+          `The left-hand limit asks: as $x$ increases toward $a$, what value does $f(x)$ approach?`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the failure becomes a test for the two-sided limit.`,
+        content: `A two-sided limit exists exactly when both one-sided limits exist and are equal. So the check runs: compute each side; if they match, that common value is the limit; if they differ, as at the step, there is none. [Section 3](!/calculus/limits/one-sided#3) states this as an equivalence.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page gives right-hand limits, the connection to two-sided limits, how to evaluate one-sided limits, and where they are needed: piecewise functions, step functions, infinite one-sided limits, endpoints of domains, and continuity from one side.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2768,7 +2966,7 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2882,6 +3080,14 @@ export default function OneSidedPage({seoData, sectionsContent, introContent, ob
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

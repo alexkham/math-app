@@ -375,6 +375,10 @@ A quartic polynomial has degree $4$, and a quintic has degree $5$. Beyond degree
 
 The polynomial $2x^2 - x + 3$ is in standard form. The degrees decrease from left to right: $2$, then $1$, then $0$. The polynomial $3 + 2x^2 - x$ contains the same terms but is not in standard form. Rewriting it as $2x^2 - x + 3$ puts it in standard form.
 
+@academic[pitfall,aside:true,width:35%:Taking the first term as the leading term
+Reading the leading coefficient of $3 + 2x^2 - x$ from its first term gives $3$. The leading term is the one of highest degree, $2x^2$, so the leading coefficient is $2$.
+[Read more](!#pitfalls)]@
+
 Standard form offers several advantages. The leading term appears first, making the degree immediately visible. The leading coefficient is the first number you see, simplifying analysis of end behavior. Comparing two polynomials becomes easier when both follow the same ordering convention.
 
 When a term is missing, standard form reveals the gap. The polynomial $x^3 + 5x - 2$ skips degree $2$ — there is no $x^2$ term. In standard form, this absence is clear. Some contexts require writing missing terms explicitly with zero coefficients: $x^3 + 0x^2 + 5x - 2$. This expanded form proves useful in [long division and synthetic division](!/algebra/polynomials/operations), where alignment by degree matters.
@@ -427,6 +431,12 @@ Subtraction works the same way, with signs distributed across the second polynom
 @academic[formula_callout:Operations on Polynomials
 $$(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$$]@
 
+@academic[pitfall,aside:true,width:35%:Squaring a binomial term by term
+Writing $(x + 3)^2$ as $x^2 + 9$ drops the middle terms. Multiplying out $(x + 3)(x + 3)$ gives $x^2 + 3x + 3x + 9 = x^2 + 6x + 9$.
+[Read more](!#pitfalls)]@
+
+In the product above, the two binomials give four partial products before anything is combined: $x \\cdot x$, $x \\cdot (-3)$, $2 \\cdot x$ and $2 \\cdot (-3)$. The two middle products, $-3x$ and $2x$, are like terms and merge into $-x$. The same count holds for any product of two binomials, including a binomial multiplied by itself, and a binomial times a trinomial gives six partial products.
+
 Division introduces more complexity. Unlike the other three operations, dividing one polynomial by another does not always yield a polynomial. When it does not divide evenly, the result includes a quotient and a remainder, much like integer division. Techniques such as long division and synthetic division handle this process systematically.
 
 To add, subtract, multiply or divide specific polynomials step by step, use the [polynomial calculator](!/algebra/calculators/polynomial).`,
@@ -445,6 +455,10 @@ To add, subtract, multiply or divide specific polynomials step by step, use the 
 The polynomial $x^2 - 5x + 6$ factors as $(x - 2)(x - 3)$. Multiplying the factors back confirms the result. Factoring transforms a single expression into a product of lower-degree polynomials, revealing structure that the expanded form hides.
 
 Why factor at all? Because products are easier to analyze than sums. A polynomial in factored form exposes its [roots](!/algebra/polynomials/roots) directly — each factor $(x - r)$ identifies a root at $x = r$. Factored form also simplifies solving equations, canceling rational expressions, and understanding a polynomial's [graph](!/algebra/polynomials/graphing).
+
+@academic[pitfall,aside:true,width:35%:Factoring a sum of squares
+Factoring $x^2 + 9$ as $(x + 3)(x - 3)$ uses the difference-of-squares pattern on a sum. Multiplying back gives $x^2 - 9$. Since $x^2 + 9 \\geq 9$ for every real $x$, it has no real linear factors.
+[Read more](!#pitfalls)]@
 
 Several techniques exist. Extracting a greatest common factor applies to nearly every polynomial. Grouping handles four-term expressions by pairing terms strategically. Special patterns — the difference of squares, perfect square trinomials, and sum or difference of cubes — allow instant recognition and factoring. Trinomials of the form $ax^2 + bx + c$ require methods tailored to finding two binomial factors.
 
@@ -501,6 +515,10 @@ Combining end behavior, intercepts, turning points, and a few evaluated points p
 
 The Remainder Theorem states that when a polynomial $P(x)$ is divided by $(x - a)$, the remainder equals $P(a)$. No long division is needed — a single evaluation determines the remainder. If $P(x) = x^3 - 2x + 4$, the remainder upon dividing by $(x - 3)$ is $P(3) = 27 - 6 + 4 = 25$.
 
+@academic[pitfall,aside:true,width:35%:Evaluating at the wrong sign
+Dividing $x^3 - 2x + 4$ by $(x + 3)$ and using $P(3) = 25$ copies the sign from the divisor. Since $x + 3 = x - (-3)$, the remainder is $P(-3) = -27 + 6 + 4 = -17$.
+[Read more](!#pitfalls)]@
+
 The Factor Theorem follows immediately. Since the remainder of dividing $P(x)$ by $(x - a)$ is $P(a)$, the remainder is zero exactly when $P(a) = 0$. In other words, $(x - a)$ is a factor of $P(x)$ if and only if $a$ is a root. This bridges the gap between division and root-finding.
 
 The Rational Root Theorem narrows the search for roots when a polynomial has integer coefficients. If $\\frac{p}{q}$ is a rational root of $a_nx^n + \\cdots + a_0$ (in lowest terms), then $p$ divides the constant term $a_0$ and $q$ divides the leading coefficient $a_n$. This produces a finite list of candidates to test, transforming root-finding from guesswork into systematic elimination.
@@ -537,6 +555,69 @@ Together, these theorems provide a strategy: use the Rational Root Theorem to ge
   obj15: {
     title: ``,
     content: ``,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj16: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong answers in basic polynomial work. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Taking the first term as the leading term**
+
+A polynomial is written with its terms out of order, and the first term written is taken as the leading term, so the leading coefficient and the degree are read from the wrong term.
+
+Wrong working: in $3 + 2x^2 - x$, the first term is $3$, so the leading coefficient is taken as $3$ and the degree as $0$.
+
+Right working: the degrees of the terms are $0$, $2$ and $1$. The highest is $2$, so the leading term is $2x^2$, the leading coefficient is $2$ and the degree is $2$. In standard form the polynomial is $2x^2 - x + 3$.
+
+Why it happens: most polynomials are met in standard form, where the leading term does come first, and the habit of reading the first term carries over to polynomials that are not.
+
+How to check: rewrite the polynomial in standard form before naming its leading term, or list the degree of every term and pick the largest.
+
+**Squaring a binomial term by term**
+
+A binomial is squared by squaring each of its two terms, as if the exponent could be distributed over the sum.
+
+Wrong working:
+$$(x + 3)^2 = x^2 + 3^2 = x^2 + 9$$
+
+Right working: write the square as a product and multiply every term by every term.
+$$(x + 3)^2 = (x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9$$
+
+Why it happens: powers do distribute over products, $(3x)^2 = 9x^2$, and the same move is applied to a sum, where it fails.
+
+How to check: substitute a simple value. At $x = 1$, $(1 + 3)^2 = 16$, while $1^2 + 9 = 10$ and $1^2 + 6 + 9 = 16$.
+
+**Factoring a sum of squares**
+
+The difference-of-squares pattern $a^2 - b^2 = (a + b)(a - b)$ is applied to a sum $a^2 + b^2$.
+
+Wrong working:
+$$x^2 + 9 = (x + 3)(x - 3)$$
+
+Right working: multiplying back shows the factors give a difference, not a sum.
+$$(x + 3)(x - 3) = x^2 - 3x + 3x - 9 = x^2 - 9$$
+Since $x^2 \\geq 0$, the value of $x^2 + 9$ is at least $9$ for every real $x$, so it has no real roots and, by the Factor Theorem, no real linear factors. Over the real numbers, $x^2 + 9$ is irreducible.
+
+Why it happens: the two expressions $x^2 - 9$ and $x^2 + 9$ differ only in one sign, and the pattern for the first is learned so well that it is applied to both.
+
+How to check: multiply the proposed factors back out and compare the result with the original, sign by sign.
+
+**Evaluating at the wrong sign**
+
+The Remainder Theorem is applied to a divisor of the form $(x + a)$, and the polynomial is evaluated at $a$ instead of $-a$.
+
+Wrong working: dividing $P(x) = x^3 - 2x + 4$ by $(x + 3)$, the remainder is taken as $P(3) = 27 - 6 + 4 = 25$.
+
+Right working: write the divisor in the form $(x - a)$: $x + 3 = x - (-3)$, so $a = -3$.
+$$P(-3) = (-3)^3 - 2(-3) + 4 = -27 + 6 + 4 = -17$$
+The remainder is $-17$.
+
+Why it happens: the theorem is stated for $(x - a)$, and the number visible in $(x + 3)$ is $3$, so the minus sign in the statement is lost.
+
+How to check: the value to substitute is the one that makes the divisor zero. $x + 3 = 0$ at $x = -3$, not at $x = 3$. Synthetic division with $-3$ on the coefficients $1, 0, -2, 4$ also ends in $-17$.`,
     before: ``,
     after: ``,
     link: '',
@@ -823,6 +904,14 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // {

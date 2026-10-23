@@ -12,6 +12,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
 
 
 export async function getStaticProps(){
@@ -390,7 +391,13 @@ $\\log_2(8 \\cdot 4) = \\log_2(8) + \\log_2(4) = 3 + 2 = 5$. Verification: $8 \\
 
 The rule extends to any number of factors:
 @academic[formula_callout:The Product Rule
-$$\\log_a(xyz) = \\log_a(x) + \\log_a(y) + \\log_a(z)$$]@`,
+$$\\log_a(xyz) = \\log_a(x) + \\log_a(y) + \\log_a(z)$$]@
+
+@academic[pitfall,aside:true,width:35%:Splitting a sum
+Writing $\\log_2(4 + 4)$ as $\\log_2(4) + \\log_2(4)$ gives $2 + 2 = 4$. But $\\log_2(4 + 4) = \\log_2(8) = 3$: the rule splits products only, and $\\log_a(x + y)$ does not split.
+[Read more](!#7)]@
+
+In every use of the rule, the first step is to read the argument and find its factors. In $\\log_2(8 \\cdot 4)$ the factors are $8$ and $4$, and each one contributes its own logarithm to the sum. The same reading works with variables: $\\log_a(3x)$ has the factors $3$ and $x$, so it becomes $\\log_a(3) + \\log_a(x)$.`,
     before: ``,
     after: ``,
     link: '',
@@ -414,7 +421,13 @@ Derivation: Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a
 @academic[example:Example
 $\\log_3(81/9) = \\log_3(81) - \\log_3(9) = 4 - 2 = 2$. Verification: $81/9 = 9 = 3^2$.]@
 
-@academic[rule_corollary_plain:The quotient rule also yields: $\\log_a(1/x) = \\log_a(1) - \\log_a(x) = 0 - \\log_a(x) = -\\log_a(x)$.]@`,
+@academic[rule_corollary_plain:The quotient rule also yields: $\\log_a(1/x) = \\log_a(1) - \\log_a(x) = 0 - \\log_a(x) = -\\log_a(x)$.]@
+
+@academic[pitfall,aside:true,width:35%:Dividing the logarithms
+Writing $\\log_2(32/4)$ as $\\frac{\\log_2(32)}{\\log_2(4)}$ gives $\\frac{5}{2}$. The rule subtracts instead: $\\log_2(32) - \\log_2(4) = 5 - 2 = 3$, and $32/4 = 8 = 2^3$.
+[Read more](!#7)]@
+
+The quotient rule always works on a single logarithm whose argument is a fraction. In $\\log_3(81/9)$ the division sits inside the logarithm, and the rule turns it into the subtraction $\\log_3(81) - \\log_3(9)$. Read the other way, a difference of two logarithms in the same base condenses back into one logarithm of a quotient.`,
     before: ``,
     after: ``,
     link: '',
@@ -471,6 +484,12 @@ $$\\log_5(7) = \\frac{\\ln(7)}{\\ln(5)} = \\frac{1.946}{1.609} \\approx 1.209$$]
 
 @academic[rule_corollary_plain:A useful special case: $\\log_a(b) = \\frac{1}{\\log_b(a)}$. The logarithms are reciprocals when arguments and bases swap.]@
 
+@academic[pitfall,aside:true,width:35%:Inverting the fraction
+Writing $\\log_2(8)$ as $\\frac{\\ln(2)}{\\ln(8)}$ puts the base on top and gives $\\frac{1}{3}$. The argument goes in the numerator: $\\frac{\\ln(8)}{\\ln(2)} = 3$, and $2^3 = 8$.
+[Read more](!#7)]@
+
+Each application above follows the same pattern: two logarithms in a base the calculator knows, one divided by the other. A rough size check is always available. $\\log_2(10)$ must lie between $3$ and $4$, because $2^3 = 8$ and $2^4 = 16$, and $\\log_5(7)$ must lie between $1$ and $2$, because $5 < 7 < 25$.
+
 The four rules above all follow the same shape: name the logarithms, convert to exponential form, apply the matching exponent law, then read the result back as a logarithm. The table below sets the four derivations side by side so the shared pattern is visible at a glance.`,
     before: ``,
     after: ``,
@@ -492,7 +511,13 @@ $$= 3\\log_2(x) + \\log_2(y) - 2\\log_2(z)$$]@
 Expand $\\ln\\left(\\sqrt{\\frac{a}{b^3}}\\right)$.
 
 $$\\ln\\left(\\sqrt{\\frac{a}{b^3}}\\right) = \\ln\\left(\\frac{a}{b^3}\\right)^{1/2} = \\frac{1}{2}\\ln\\left(\\frac{a}{b^3}\\right)$$
-$$= \\frac{1}{2}\\left(\\ln(a) - \\ln(b^3)\\right) = \\frac{1}{2}\\ln(a) - \\frac{3}{2}\\ln(b)$$]@`,
+$$= \\frac{1}{2}\\left(\\ln(a) - \\ln(b^3)\\right) = \\frac{1}{2}\\ln(a) - \\frac{3}{2}\\ln(b)$$]@
+
+@academic[pitfall,aside:true,width:35%:Applying an exponent to the whole argument
+Writing $\\log_2(2 \\cdot 4^3)$ as $3\\log_2(2 \\cdot 4)$ gives $3 \\cdot 3 = 9$. The exponent belongs to $4$ only: $\\log_2(2) + 3\\log_2(4) = 1 + 6 = 7$, and $2 \\cdot 4^3 = 128 = 2^7$.
+[Read more](!#7)]@
+
+In both examples the expansion runs from the outside in. The outermost operation is split first, and the power rule comes last, applied to each piece that carries its own exponent. In the first example the exponent $3$ sits on $x$ and the exponent $2$ sits on $z$, so each becomes the coefficient of its own logarithm; in the second, the square root covers the whole fraction, so its $\\frac{1}{2}$ multiplies everything.`,
     before: ``,
     after: ``,
     link: '',
@@ -514,7 +539,15 @@ Condense $\\frac{1}{2}\\ln(a+1) - \\ln(b) - \\ln(c)$.
 $$\\frac{1}{2}\\ln(a+1) - \\ln(b) - \\ln(c) = \\ln(a+1)^{1/2} - \\ln(b) - \\ln(c)$$
 $$= \\ln\\sqrt{a+1} - \\ln(bc) = \\ln\\left(\\frac{\\sqrt{a+1}}{bc}\\right)$$]@
 
-Condensing is essential for solving [equations](!/algebra/logarithms/equations) where multiple logarithms must combine before applying the one-to-one [property](!/algebra/logarithms/properties).`,
+@academic[pitfall,aside:true,width:35%:Turning a coefficient into a factor
+Condensing $2\\log(x) + \\log(y)$ to $\\log(2xy)$: with $x = y = 10$ the sum is $2 + 1 = 3$, but $\\log(200) \\approx 2.301$. The coefficient becomes an exponent: $\\log(x^2 y) = \\log(1000) = 3$.
+[Read more](!#7)]@
+
+The order of the steps is the same in both examples. Every coefficient is dealt with first, so that each logarithm stands alone with coefficient $1$; only then do the sums and differences merge into a single argument. In the second example both $\\ln(b)$ and $\\ln(c)$ are subtracted, so $b$ and $c$ both end up in the denominator.
+
+Condensing is essential for solving [equations](!/algebra/logarithms/equations) where multiple logarithms must combine before applying the one-to-one [property](!/algebra/logarithms/properties).
+
+@academic[punchline:Condensing runs expansion backwards: turn every coefficient into an exponent first, then merge everything into one logarithm.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -547,7 +580,50 @@ Dividing logarithms is not the same as the logarithm of a quotient. However, not
 @academic[formula_callout:Common Errors
 $$(\\log_a(x))^n \\neq n\\log_a(x)$$]@
 
-Raising a logarithm to a power is not the same as multiplying by that power. The power rule applies to exponents inside the argument, not outside.`,
+Raising a logarithm to a power is not the same as multiplying by that power. The power rule applies to exponents inside the argument, not outside.
+
+**Inverting the fraction**
+
+The change of base formula is written with the two logarithms in the wrong places: the base of the original logarithm goes in the numerator and the argument goes in the denominator.
+
+Wrong working:
+$$\\log_2(8) = \\frac{\\ln(2)}{\\ln(8)} = \\frac{\\ln(2)}{3\\ln(2)} = \\frac{1}{3}$$
+That value is $\\log_8(2)$, the reciprocal of the right answer.
+
+Right working: the argument goes on top and the old base below.
+$$\\log_2(8) = \\frac{\\ln(8)}{\\ln(2)} = \\frac{3\\ln(2)}{\\ln(2)} = 3$$
+
+Why it happens: once both logarithms are in the new base they look alike, and nothing in the notation $\\log_a(x)$ shows which one belongs on top.
+
+How to check: estimate first. $\\log_2(8)$ asks for the power of $2$ that gives $8$, which is $3$, not a number below $1$. With a base greater than $1$, an argument larger than the base always gives a result greater than $1$.
+
+**Applying an exponent to the whole argument**
+
+The argument is a product with an exponent on one factor, and the power rule is used as if the exponent covered the whole product.
+
+Wrong working:
+$$\\log_2(2 \\cdot 4^3) = 3\\log_2(2 \\cdot 4) = 3\\log_2(8) = 9$$
+
+Right working: split the product first, then apply the power rule to the factor that carries the exponent.
+$$\\log_2(2 \\cdot 4^3) = \\log_2(2) + \\log_2(4^3) = 1 + 3\\log_2(4) = 1 + 6 = 7$$
+
+Why it happens: the exponent is the most visible part of the argument, so the power rule is applied before the product is taken apart.
+
+How to check: compute the argument directly. $2 \\cdot 4^3 = 2 \\cdot 64 = 128 = 2^7$, so the value is $7$. The exponent moves out as a coefficient only when it covers the entire argument, as in $\\log_2((2 \\cdot 4)^3) = 3\\log_2(8) = 9$.
+
+**Turning a coefficient into a factor**
+
+When condensing, a coefficient in front of a logarithm is moved into the argument as a multiplier instead of as an exponent.
+
+Wrong working:
+$$2\\log(x) + \\log(y) = \\log(2x) + \\log(y) = \\log(2xy)$$
+
+Right working: the power rule turns the coefficient into an exponent, then the product rule combines the two logarithms.
+$$2\\log(x) + \\log(y) = \\log(x^2) + \\log(y) = \\log(x^2 y)$$
+
+Why it happens: in ordinary algebra a coefficient multiplies, so $2x$ looks like the natural way to bring the $2$ inside.
+
+How to check: substitute numbers. With $x = y = 10$, the original is $2 \\cdot 1 + 1 = 3$. The wrong form gives $\\log(200) \\approx 2.301$; the right form gives $\\log(1000) = 3$.`,
     before: ``,
     after: ``,
     link: '',
@@ -695,8 +771,49 @@ const schemas = {
     ],
   };
 
+  const changeOfBaseAnatomy = {
+    header: {
+      kicker: 'the formula, part by part',
+      title: 'Change of base',
+      lede: 'any logarithm becomes a quotient of two logarithms in a base the calculator knows',
+    },
+    formula: [
+      { kind: 'part', id: 'want', children: [
+        { kind: 'op', text: 'log', tight: true }, { kind: 'sub', children: [ { kind: 'var', text: 'a' } ] },
+        { kind: 'op', text: '(', tight: true }, { kind: 'var', text: 'x' }, { kind: 'op', text: ')', tight: true },
+      ] },
+      { kind: 'op', text: '=' },
+      { kind: 'frac',
+        num: [
+          { kind: 'part', id: 'arg', children: [
+            { kind: 'op', text: 'log', tight: true }, { kind: 'sub', children: [ { kind: 'var', text: 'b' } ] },
+            { kind: 'op', text: '(', tight: true }, { kind: 'var', text: 'x' }, { kind: 'op', text: ')', tight: true },
+          ] },
+        ],
+        den: [
+          { kind: 'part', id: 'base', children: [
+            { kind: 'op', text: 'log', tight: true }, { kind: 'sub', children: [ { kind: 'var', text: 'b' } ] },
+            { kind: 'op', text: '(', tight: true }, { kind: 'var', text: 'a' }, { kind: 'op', text: ')', tight: true },
+          ] },
+        ],
+      },
+    ],
+    parts: [
+      { id: 'want', chip: 'logₐ(x)', title: 'The logarithm you want', side: 'top',
+        tip: 'The power a must be raised to in order to give x.',
+        desc: 'Base a, argument x, in a base the calculator may not have. Example: log₂(10) asks which power of 2 gives 10. It must lie between 3 and 4, because 2³ = 8 and 2⁴ = 16.' },
+      { id: 'arg', chip: 'numerator', title: 'Argument on top', side: 'top',
+        tip: 'The argument x, rewritten in the new base b.',
+        desc: 'Any base works as long as top and bottom use the same one; in practice 10 or e, which a calculator has. Example: for log₂(10) in base 10, the top is log(10) = 1.' },
+      { id: 'base', chip: 'denominator', title: 'Old base below', side: 'bottom',
+        tip: 'The old base a, in the same new base b.',
+        desc: 'Swapping top and bottom gives the reciprocal, a different number. Example: the bottom is log(2) ≈ 0.301, so log₂(10) = 1 / 0.301 ≈ 3.322. Upside down it would give 0.301, not a power between 3 and 4.' },
+    ],
+  };
+
    return {
   props: {
+    changeOfBaseAnatomy,
     logRuleTree,
     sectionsContent,
     introContent,
@@ -717,7 +834,7 @@ const schemas = {
 }
    }
 
- export default function LogarithmRulesPage({logRuleTree, 
+ export default function LogarithmRulesPage({changeOfBaseAnatomy, logRuleTree, 
    seoData,
    sectionsContent,
    introContent,
@@ -748,6 +865,10 @@ const schemas = {
           sectionsContent.obj1.content,
           <div key={'unit-product'} dangerouslySetInnerHTML={{ __html: demoUnits.product }} />,
           `Dividing inputs subtracts heights in the same way, which is the quotient rule.`,
+          `@academic[fact,aside:true,width:35%:Multiplying by adding for 350 years
+John Napier published the first table of logarithms in 1614. Such tables, and slide rules that add lengths on logarithmic scales, were the standard tool of scientists and engineers for multiplying until pocket calculators took over in the 1970s.]@
+
+The graph also suggests a way to multiply without multiplying. Suppose a table lists the common logarithm of every number to several decimal places. To find $xy$, look up $\\log(x)$ and $\\log(y)$, add the two values, and then search the table for the number whose logarithm is that sum. A long multiplication becomes one addition and three look-ups.`,
         ]
     },
     {
@@ -777,6 +898,16 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: derivationsTable }}
           />,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="change-of-base-anatomy"
+            title="Change of base, part by part"
+            source="/algebra/logarithms/rules"
+            before={"Taking the formula apart: the logarithm you want on the left, the argument in the numerator, the old base in the denominator."}
+            after={"The part most often misread is the order: the argument goes on top, the base below. The same formula gives the reciprocal rule $\\log_a(b) = \\frac{1}{\\log_b(a)}$."}
+          >
+            <FormulaAnatomy data={changeOfBaseAnatomy} />
+          </DiagramFrame>,
         ]
     },
     {

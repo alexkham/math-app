@@ -1001,6 +1001,12 @@ Visualizing operations:
 - [Difference](!/set-theory/operations#set-difference) $A \\setminus B$: shade circle $A$ but not the overlap
 
 - [Symmetric difference](!/set-theory/operations#symmetric-difference) $A \\triangle B$: shade both circles except the overlap
+
+@academic[pitfall,aside:true,width:35%:Leaving out the outside region
+Shading only the crescent of $B$ for $A^c$ treats the complement as $B \\setminus A$. With $U = \\{1, \\dots, 6\\}$, $A = \\{1, 2, 3\\}$ and $B = \\{3, 4\\}$ that gives $\\{4\\}$, but $A^c = \\{4, 5, 6\\}$: the region outside both circles belongs to it too.
+[Read more](!#pitfalls)]@
+
+Each shading in this list is a choice among the four regions above, and the operations differ only in which combination of regions they choose. Because the four regions do not overlap and together fill the whole rectangle, a shaded set is read off by collecting the elements of the regions it covers. When a diagram lists actual elements, each element of $U$ is written in exactly one region, according to whether it belongs to $A$ and whether it belongs to $B$.
     `,
     before: ``,
     after: ``,
@@ -1028,6 +1034,10 @@ This produces eight distinct regions:
 - $C \\cap A^c \\cap B^c$ — in $C$ only
 
 - $A^c \\cap B^c \\cap C^c$ — outside all three circles
+
+@academic[pitfall,aside:true,width:35%:Leaving out the centre of an overlap
+Shading only the region "in $A$ and $B$ but not $C$" for $A \\cap B$ drops the centre. With $A = \\{1, 2, 5\\}$, $B = \\{2, 3, 5\\}$, $C = \\{4, 5\\}$ that region holds only $2$, but $A \\cap B = \\{2, 5\\}$, with $5$ in the centre.
+[Read more](!#pitfalls)]@
 
 Each region corresponds to one row of a truth table with three variables. The eight regions represent all $2^3 = 8$ possible membership combinations.
 
@@ -1064,6 +1074,12 @@ For $(A \\cup B) \\cap C$:
 
 - The intersection keeps only the shaded region that falls within $C$
 
+@academic[pitfall,aside:true,width:35%:Shading the operations in the wrong order
+Combining $A$ and $B$ first in $A \\cup (B \\cap C)$ shades $(A \\cup B) \\cap C$ instead. With $A = \\{1\\}$, $B = \\{2\\}$, $C = \\{2, 3\\}$ that gives $\\{2\\}$; the bracket comes first, $B \\cap C = \\{2\\}$, and the answer is $\\{1, 2\\}$.
+[Read more](!#pitfalls)]@
+
+The two examples use the same three circles and the same two operations, and they differ only in where the brackets stand. The bracket marks the operation that is shaded first, and the operation outside it is then applied to that shaded result. In the first example the whole of circle $A$ ends up shaded, while in the second every shaded region lies inside circle $C$.
+
 Reading a shaded diagram requires the reverse process: examine which basic regions are shaded, then express the result using [set notation](!/math-symbols/set-theory). Complex shadings may require expressing the result as a union of disjoint regions.
     `,
     before: ``,
@@ -1089,6 +1105,12 @@ Verifying [De Morgan's law](!/set-theory/rules#de-morgans-laws) $(A \\cup B)^c =
 
 - Both sides produce the same shaded region — the area outside both circles
 
+@academic[pitfall,aside:true,width:35%:Keeping the union under the complement
+Writing $(A \\cup B)^c = A^c \\cup B^c$ moves the complement inside but keeps the union. With $U = \\{1, 2, 3, 4\\}$, $A = \\{1, 2\\}$, $B = \\{2, 3\\}$ the right side is $\\{1, 3, 4\\}$, but $(A \\cup B)^c = \\{4\\}$, which equals $A^c \\cap B^c$.
+[Read more](!#pitfalls)]@
+
+The two sides of the law build the same region in a different order. The left side combines the two sets first and takes a single complement at the end. The right side takes the complement of each set first and combines the two complements afterwards. Identities that move a complement inside brackets are where a side-by-side shading helps most, because each side can be shaded step by step and compared region by region.
+
 Verifying the [distributive law](!/set-theory/rules#distributive-laws) $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$:
 
 - Left side: shade $B \\cup C$, then restrict to the part inside $A$
@@ -1099,6 +1121,63 @@ Verifying the [distributive law](!/set-theory/rules#distributive-laws) $A \\cap 
 
 This method works for any identity involving a finite number of sets, though it constitutes a verification rather than a formal proof.
     `,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj6: {
+    title: `Common Pitfalls`,
+    content: `
+Four mistakes come up again and again when Venn diagrams are shaded and read. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Leaving out the outside region**
+
+The complement $A^c$ is shaded as the part of the other circle that lies outside $A$, the crescent $B \\setminus A$. The region outside both circles is left blank, although its elements are not in $A$ either.
+
+Wrong working: with $U = \\{1, 2, 3, 4, 5, 6\\}$, $A = \\{1, 2, 3\\}$ and $B = \\{3, 4\\}$, the complement is given as $A^c = \\{4\\}$.
+
+Right working: $A^c$ holds every element of $U$ that is not in $A$. That is the crescent $B \\setminus A = \\{4\\}$ together with the outside region $(A \\cup B)^c = \\{5, 6\\}$, so $A^c = \\{4, 5, 6\\}$.
+
+Why it happens: the circles draw the eye, and the empty-looking space between them and the rectangle is not seen as a region. The complement is then read as "the other set" instead of "everything else in $U$".
+
+How to check: count the elements. $A$ and $A^c$ together make up all of $U$, so $|A| + |A^c| = |U|$. Here $3 + 3 = 6$ is right, while $3 + 1 = 4$ falls short of $6$.
+
+**Leaving out the centre of an overlap**
+
+In a three-set diagram, $A \\cap B$ is shaded as the single region "in $A$ and $B$ but not $C$". The central region also lies inside both circles $A$ and $B$, so it belongs to $A \\cap B$ as well.
+
+Wrong working: with $A = \\{1, 2, 5\\}$, $B = \\{2, 3, 5\\}$ and $C = \\{4, 5\\}$, the region $A \\cap B \\cap C^c$ holds only $2$, and $A \\cap B$ is given as $\\{2\\}$.
+
+Right working: $A \\cap B$ is made of two regions, $A \\cap B \\cap C^c = \\{2\\}$ and $A \\cap B \\cap C = \\{5\\}$, so $A \\cap B = \\{2, 5\\}$.
+
+Why it happens: each of the eight regions is named by an exact membership pattern, and "in $A$ and $B$" sounds like a full description of $A \\cap B$. But $A \\cap B$ says nothing about $C$, so it takes both the piece outside $C$ and the piece inside it.
+
+How to check: list the common elements directly. $A$ holds $1, 2, 5$ and $B$ holds $2, 3, 5$, so they share $2$ and $5$. An expression that does not mention $C$ always shades regions in pairs, one inside $C$ and one outside it.
+
+**Shading the operations in the wrong order**
+
+The operation outside the brackets is carried out before the one inside them, so $A \\cup (B \\cap C)$ is shaded as $(A \\cup B) \\cap C$. The two expressions shade different regions.
+
+Wrong working: with $A = \\{1\\}$, $B = \\{2\\}$ and $C = \\{2, 3\\}$, the union is formed first, $A \\cup B = \\{1, 2\\}$, and then intersected with $C$, giving $\\{2\\}$.
+
+Right working: the bracket comes first, $B \\cap C = \\{2\\}$, and then $A \\cup \\{2\\} = \\{1, 2\\}$. On the diagram, $A \\cup (B \\cap C)$ shades all four regions of circle $A$ plus the part of the $B$–$C$ lens outside $A$, five of the eight regions, while $(A \\cup B) \\cap C$ shades only three regions, all inside $C$.
+
+Why it happens: expressions are read from left to right, like ordinary text. There is no rule that all books follow about whether $\\cup$ or $\\cap$ goes first, so the brackets are the only guide to the order.
+
+How to check: test an element that is in $A$ but not in $C$, such as $1$ here. It belongs to $A \\cup (B \\cap C)$, because it is in $A$, but not to $(A \\cup B) \\cap C$, which lies entirely inside $C$.
+
+**Keeping the union under the complement**
+
+The complement is moved inside the brackets, but the union between the sets is kept: $(A \\cup B)^c$ is rewritten as $A^c \\cup B^c$. De Morgan's law changes the union into an intersection.
+
+Wrong working: with $U = \\{1, 2, 3, 4\\}$, $A = \\{1, 2\\}$ and $B = \\{2, 3\\}$, the complements are $A^c = \\{3, 4\\}$ and $B^c = \\{1, 4\\}$, and $A^c \\cup B^c = \\{1, 3, 4\\}$ is given as $(A \\cup B)^c$.
+
+Right working: $A \\cup B = \\{1, 2, 3\\}$, so $(A \\cup B)^c = \\{4\\}$. The intersection $A^c \\cap B^c = \\{4\\}$ matches it.
+
+Why it happens: the complement is handled like a factor spread over a sum, as in $2(a + b) = 2a + 2b$, where the operation in the middle stays the same.
+
+How to check: shade both sides. $A^c \\cup B^c$ covers three of the four regions, everything except the lens, while $(A \\cup B)^c$ covers only the region outside both circles. The set $A^c \\cup B^c$ is in fact $(A \\cap B)^c$, the other De Morgan law.
+`,
     before: ``,
     after: ``,
     link: '',
@@ -1453,6 +1532,14 @@ export default function VennDiagramsPage({demoUnits, seoData, sectionsContent, i
     //     ]
     // },
     
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

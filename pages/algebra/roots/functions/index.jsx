@@ -298,7 +298,13 @@ The graph passes through the origin and extends in both directions.
 
 @academic[rule_plain:Negative inputs yield negative outputs; positive inputs yield positive outputs. The function preserves sign, consistent with [properties](!/algebra/roots/properties) of odd-index radicals.]@
 
-The cube root function is also one-to-one, with the cubing function as its inverse.`,
+The cube root function is also one-to-one, with the cubing function as its inverse.
+
+@academic[pitfall,aside:true,width:35%:Restricting an odd root
+Applying the square root's condition $x \\geq 0$ to $\\sqrt[3]{x}$ cuts off the left half of the graph, losing points like $(-8, -2)$. Since $(-2)^3 = -8$, every real input has a cube root: the domain is $(-\\infty, \\infty)$.
+[Read more](!#pitfalls)]@
+
+The square root and the cube root are written with the same radical sign; only the small index in its crook tells them apart. That index decides which inputs the function accepts, and with it how much of the number line the graph covers. Reading it first is the quickest way to know where a radical graph lives.`,
     before: ``,
     after: ``,
     link: '',
@@ -392,7 +398,13 @@ Odd index — no restriction on the radicand.
 
 Domain: $(-\\infty, \\infty)$.
 
-These domain calculations use the same principles as [simplifying](!/algebra/roots/simplifying) expressions and solving [radical equations](!/algebra/roots/equations). The index determines whether restrictions apply.`,
+These domain calculations use the same principles as [simplifying](!/algebra/roots/simplifying) expressions and solving [radical equations](!/algebra/roots/equations). The index determines whether restrictions apply.
+
+@academic[pitfall,aside:true,width:35%:Forgetting to flip the inequality
+Dividing $-2x \\geq -5$ by $-2$ without flipping the sign gives $x \\geq \\frac{5}{2}$, but $x = 3$ makes the radicand $5 - 6 = -1$. Flipping it gives $x \\leq \\frac{5}{2}$, the domain $(-\\infty, \\frac{5}{2}]$.
+[Read more](!#pitfalls)]@
+
+The second example is the only one of the three where the variable term has a negative coefficient. The first needs only an addition to isolate $x$, and the third needs nothing at all. In the second, isolating $x$ in $5 - 2x \\geq 0$ ends with a division by $-2$, the one step of solving an inequality that does more than change the numbers.`,
     before: ``,
     after: ``,
     link: '',
@@ -427,7 +439,13 @@ Combined example:
 @academic[formula_callout:Transformations
 $$f(x) = 2\\sqrt{x - 1} + 3$$]@
 
-Start at $(1, 3)$, stretched vertically by factor 2, rising to the right.`,
+Start at $(1, 3)$, stretched vertically by factor 2, rising to the right.
+
+@academic[pitfall,aside:true,width:35%:Shifting the wrong way
+Reading $\\sqrt{x + 2}$ as a shift right by $2$ puts the start at $(2, 0)$, but $\\sqrt{2 + 2} = 2$, not $0$. The radicand is $0$ at $x = -2$: the graph shifts left and starts at $(-2, 0)$.
+[Read more](!#pitfalls)]@
+
+Every transformed square root graph is anchored at its starting point, and the rest of the curve is drawn from there. The two coordinates of that point come from different places: the first from inside the radical, the second from the constant added outside it. In the combined example both shifts are positive numbers, yet only one of them appears with a plus sign.`,
     before: ``,
     after: ``,
     link: '',
@@ -507,7 +525,7 @@ Find the starting point (for even index) or the center point (for odd index) aft
 
 Plot additional points using the transformed function.
 
-Sketch the curve, respecting concavity — down for even index, changing at inflection for odd index.
+Sketch the curve, respecting concavity — down for even index (up when the curve is reflected over the $x$-axis), changing at inflection for odd index.
 
 @academic[example:Example
 $f(x) = -\\sqrt{x + 2} + 4$
@@ -531,6 +549,53 @@ The graph starts at $(-2, 4)$ and curves downward to the right.]@`,
   obj11: {
     title: `Parent Functions at a Glance`,
     content: `The two parent radical functions covered in the sections above can be set side by side as a single reference. The table below collects their domains and ranges, key points, graph shape and symmetry, inverses, and how each pattern generalizes to higher-index roots — useful as a study card and as a quick check when working with transformations or finding inverses.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for most wrong answers with radical functions. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Restricting an odd root**
+
+The rule that a radicand must be non-negative is learned with square roots and then applied to every radical, so the cube root is given the domain of the square root.
+
+Wrong working: $\\sqrt[3]{x}$ needs $x \\geq 0$, so its domain is $[0, \\infty)$ and $\\sqrt[3]{-8}$ is undefined. In the same way, $h(x) = \\sqrt[3]{x + 4}$ would need $x + 4 \\geq 0$, that is $x \\geq -4$.
+
+Right working: $(-2)^3 = -8$, so $\\sqrt[3]{-8} = -2$. Every real number has exactly one real cube root, so $\\sqrt[3]{x}$ has domain $(-\\infty, \\infty)$, and $h(x) = \\sqrt[3]{x + 4}$ has domain $(-\\infty, \\infty)$ as well.
+
+Why it happens: square roots come first, and the rule is remembered as "no negatives under a radical" instead of "no negatives under an even root".
+
+How to check: look at the index. If it is odd, try a negative input: $h(-12) = \\sqrt[3]{-8} = -2$ is a real number, although $-12 < -4$.
+
+**Forgetting to flip the inequality**
+
+The domain condition is set up correctly, but the last step, a division by a negative number, keeps the inequality sign as it is.
+
+Wrong working:
+$$5 - 2x \\geq 0 \\implies -2x \\geq -5 \\implies x \\geq \\frac{5}{2}$$
+
+Right working: dividing by $-2$ reverses the inequality.
+$$5 - 2x \\geq 0 \\implies -2x \\geq -5 \\implies x \\leq \\frac{5}{2}$$
+The domain of $g(x) = \\sqrt{5 - 2x}$ is $(-\\infty, \\frac{5}{2}]$.
+
+Why it happens: domain conditions are usually solved quickly, like equations, and most of them, such as $x - 3 \\geq 0$, never need a division by a negative number.
+
+How to check: test a value from the wrong answer. $x = 3$ gives $5 - 6 = -1$ under the root, which is not allowed. A value from the right answer, $x = 0$, gives $g(0) = \\sqrt{5}$, a real number.
+
+**Shifting the wrong way**
+
+The number added inside the radical is read like the number added outside it, so a plus sign inside is taken as a shift to the right.
+
+Wrong working: $\\sqrt{x + 2}$ is $\\sqrt{x}$ moved right by $2$, so the graph starts at $(2, 0)$ and the domain is $[2, \\infty)$.
+
+Right working: the graph starts where the radicand is $0$. Solving $x + 2 = 0$ gives $x = -2$, so $\\sqrt{x + 2} = \\sqrt{x - (-2)}$ is $\\sqrt{x}$ moved left by $2$. It starts at $(-2, 0)$ and has domain $[-2, \\infty)$. The same reading gives the starting point $(-2, 4)$ of $-\\sqrt{x + 2} + 4$ in the graphing strategy.
+
+Why it happens: outside the radical, $+k$ moves the graph up, in the direction of its sign. Inside, the shift acts on the input, and it moves the graph against the sign.
+
+How to check: substitute the $x$-coordinate of the starting point into the radicand; it must give $0$. For $x = 2$, $\\sqrt{2 + 2} = 2$, so $(2, 0)$ is not even on the graph. For $x = -2$, $\\sqrt{0} = 0$.`,
     before: ``,
     after: ``,
     link: '',
@@ -865,6 +930,14 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

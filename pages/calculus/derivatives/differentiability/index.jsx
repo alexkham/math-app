@@ -18,9 +18,34 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
+// Concept introduction (section 1) — template B, definition first. Running
+// instance: f(x) = x² at x = 1, with |x| at 0 as the contrast. Old obj1 text
+// is kept in sectionsContent.obj1, unused; its formula box is carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciQuotientTable = ciTableOpen(['h', '(1 + h)²', 'difference quotient', 'equals 2 + h']) +
+  ciRow(['0.1', '1.21', '0.21 / 0.1', '2.1']) +
+  ciRow(['0.01', '1.0201', '0.0201 / 0.01', '2.01'], { shade: true }) +
+  ciRow(['0.001', '1.002001', '0.002001 / 0.001', '2.001']) +
+  ciRow(['−0.001', '0.998001', '−0.001999 / −0.001', '1.999'], { shade: true }) +
+  ciRow(['−0.01', '0.9801', '−0.0199 / −0.01', '1.99']) +
+  ciRow(['−0.1', '0.81', '−0.19 / −0.1', '1.9'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciCornerTable = ciTableOpen(['h', '|h| / h']) +
+  ciRow(['0.1, 0.01, 0.001, …', '1'], { color: '#2563EB', cols: [1] }) +
+  ciRow(['−0.1, −0.01, −0.001, …', '−1'], { shade: true, last: true, color: '#a4243b', cols: [1] }) +
+  '</tbody></table>'
+
 const keyWords = [
   "differentiability",
   "differentiable function",
@@ -419,6 +444,10 @@ $$\\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\neq \\lim_{h \\to 0^+} \\frac{
 
 The graph makes a sharp turn at $x = a$—two distinct tangent directions meeting at a single point. The function is continuous at $a$ (no break in the graph), but the two-sided limit of the difference quotient fails to exist because the one-sided limits differ.
 
+@academic[pitfall,aside:true,width:35%:Assuming every absolute value makes a corner
+Seeing $|x|$ in $f(x) = x|x|$ and declaring a corner at $0$ skips the computation. The quotient is $\\frac{h|h|}{h} = |h|$, which tends to $0$ from both sides, so $f'(0) = 0$ and there is no corner.
+[Read more](!#pitfalls)]@
+
 The standard example is $f(x) = |x|$ at $x = 0$. The left-hand derivative is $-1$ and the right-hand derivative is $+1$. The graph forms a V-shape, and no single straight line can serve as a tangent. More generally, any piecewise linear function with a slope change at a junction has a corner there.
 `,
     before: ``,
@@ -431,6 +460,10 @@ The standard example is $f(x) = |x|$ at $x = 0$. The left-hand derivative is $-1
 A cusp occurs when both one-sided derivatives are infinite but with opposite signs. As $h \\to 0^+$, the difference quotient approaches $+\\infty$ (or $-\\infty$), and as $h \\to 0^-$, it approaches the opposite.
 
 The graph comes to a sharp point where the curve doubles back on itself with vertical tangent directions from both sides. Unlike a corner, the slopes do not stay finite—they blow up.
+
+@academic[pitfall,aside:true,width:35%:Checking only one side
+For $f(x) = x^{4/5}$ at $0$, checking only $h > 0$ gives the quotient $h^{-1/5} \\to +\\infty$ and suggests a vertical tangent. For $h < 0$ the quotient is negative and tends to $-\\infty$, so the point is a cusp.
+[Read more](!#pitfalls)]@
 
 The standard example is $f(x) = x^{2/3}$ at $x = 0$. The derivative $f'(x) = \\frac{2}{3}x^{-1/3}$ tends to $+\\infty$ from the right and $-\\infty$ from the left. The graph has a pointed tip at the origin, sharper than any corner. The function is continuous at $x = 0$, but the infinite and opposing slopes prevent differentiability.
 `,
@@ -458,7 +491,7 @@ A vertical tangent line has undefined slope, so the derivative does not exist in
 
 Since differentiability implies continuity, any discontinuity automatically rules out differentiability.
 
-At a jump discontinuity, the function leaps from one value to another. No tangent line can bridge the gap. At an infinite discontinuity (vertical asymptote), the function blows up—there is no point $(a, f(a))$ through which a tangent could pass. At a removable discontinuity, the limit exists but either $f(a)$ is undefined or differs from the limit; redefining $f(a)$ to equal the limit restores continuity and may restore differentiability.
+At a jump discontinuity, the function leaps from one value to another. No tangent line can bridge the gap. At an infinite discontinuity (vertical asymptote), the function blows up—even if $f(a)$ is assigned a value, the graph near $a$ does not approach the point $(a, f(a))$, so no tangent can pass through it. At a removable discontinuity, the limit exists but either $f(a)$ is undefined or differs from the limit; redefining $f(a)$ to equal the limit restores continuity and may restore differentiability.
 
 Discontinuities are the most straightforward obstruction to differentiability. The other failure modes—corners, cusps, vertical tangents—are subtler because the function is continuous at the problematic point.
 `,
@@ -487,6 +520,10 @@ $$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\qquad f'_+(a) = \\li
 /calculus/formulas]@
 
 @academic[rule_theorem_plain:The two-sided derivative $f'(a)$ exists if and only if both one-sided derivatives exist, are finite, and are equal: $f'_-(a) = f'_+(a)$.]@
+
+@academic[pitfall,aside:true,width:35%:Differentiating the pieces instead of using f(a)
+For $f(x) = x^2$ on $x \\leq 1$ and $2x + 1$ on $x > 1$, the piece formulas give slopes $2$ and $2$ at $x = 1$. But $f(1) = 1$ while the right piece tends to $3$, so $f'_+(1) = \\lim_{h \\to 0^+} \\frac{2 + 2h}{h} = +\\infty$ and $f$ is not differentiable at $1$.
+[Read more](!#pitfalls)]@
 
 One-sided derivatives appear naturally at endpoints of closed intervals, where only one direction of approach is available. They also arise at boundaries of piecewise functions, where different formulas govern the left and right sides. Checking whether the one-sided derivatives match at a boundary is the standard test for differentiability of a piecewise-defined function.
 `,
@@ -524,6 +561,63 @@ These examples demonstrate that differentiability is a genuinely restrictive con
     title: `Summary: A Typology of Differentiability Failure`,
     content: `
 The failure modes covered above—corners, cusps, vertical tangents, and discontinuities—each block differentiability through a different mechanism and leave a different signature on the graph. The table below collects them in parallel, organized by what the one-sided derivatives do, whether the function remains continuous at the problem point, and a canonical example for each. Reading across a row identifies the mode; reading down a column reveals what changes from one mode to the next.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `
+Four mistakes cause most wrong verdicts about differentiability. Three of them are marked where they happen in the sections above; the first is the one the sections on continuity and on intervals warn against. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Assuming continuity guarantees a derivative**
+
+Because differentiability implies continuity, the converse is assumed as well: a function whose graph has no break at a point is taken to have a derivative there.
+
+Wrong working: $f(x) = |x - 2|$ is continuous at $x = 2$, so $f'(2)$ exists, and by symmetry $f'(2) = 0$.
+
+Right working: the difference quotient is $\\frac{f(2 + h) - f(2)}{h} = \\frac{|h|}{h}$, which is $1$ for $h > 0$ and $-1$ for $h < 0$. The one-sided derivatives $-1$ and $1$ disagree, so $f'(2)$ does not exist.
+
+Why it happens: the implication is learned as a link between the two words, and the direction gets lost. An unbroken graph also looks well behaved enough to have a slope.
+
+How to check: compute the quotient for one small positive and one small negative $h$. At $h = 0.01$ it is $1$, at $h = -0.01$ it is $-1$.
+
+**Assuming every absolute value makes a corner**
+
+An absolute value in the formula is taken as proof of a corner, and the function is declared non-differentiable at the point where the inside is $0$, without computing anything.
+
+Wrong working: $f(x) = x|x|$ contains $|x|$, which has a corner at $0$, so $f$ has a corner at $0$ and $f'(0)$ does not exist.
+
+Right working: $f(0) = 0$, and the difference quotient is $\\frac{h|h|}{h} = |h|$, which tends to $0$ from both sides. So $f'(0) = 0$. Piece by piece, $f(x) = x^2$ for $x \\geq 0$ and $f(x) = -x^2$ for $x < 0$, and both have slope $0$ at $0$.
+
+Why it happens: the corner of $|x|$ is remembered as a property of the symbol rather than as the result of a computation. The extra factor $x$ flattens the graph near $0$ and removes the corner.
+
+How to check: evaluate the quotient. At $h = 0.01$ and at $h = -0.01$ it is $0.01$, small on both sides and shrinking with $h$.
+
+**Checking only one side**
+
+To tell a cusp from a vertical tangent, the slope is examined for positive $h$ (or positive $x$) only, and the sign on the other side is never checked.
+
+Wrong working: for $f(x) = x^{4/5}$, $f'(x) = \\frac{4}{5}x^{-1/5}$ grows without bound as $x \\to 0^+$, so $f'(x) \\to +\\infty$ and the graph has a vertical tangent at $0$.
+
+Right working: the quotient is $\\frac{f(h) - f(0)}{h} = \\frac{h^{4/5}}{h} = h^{-1/5}$. For $h > 0$ it tends to $+\\infty$. For $h < 0$, $h^{1/5}$ is negative, so $h^{-1/5}$ is negative and tends to $-\\infty$. The signs are opposite, so $0$ is a cusp, as for $x^{2/3}$.
+
+Why it happens: small positive numbers are the default test values, and the formula $x^{-1/5}$ does not show its sign for negative $x$ at a glance.
+
+How to check: try one value on each side. At $h = 10^{-5}$ the quotient is $10$; at $h = -10^{-5}$ it is $-10$. The values of $f$ give a second check: $x^{4/5} \\geq 0$ on both sides of $0$, so the graph comes down to the origin and goes back up, which is the shape of a cusp; a vertical tangent such as $x^{1/3}$ passes from negative to positive values.
+
+**Differentiating the pieces instead of using f(a)**
+
+At the boundary of a piecewise function, each piece's formula is differentiated and the two slopes are compared, without checking that the pieces meet.
+
+Wrong working: for $f(x) = x^2$ on $x \\leq 1$ and $f(x) = 2x + 1$ on $x > 1$, the left formula has derivative $2x$, which is $2$ at $x = 1$, and the right formula has derivative $2$. The slopes match, so $f'(1) = 2$.
+
+Right working: first check continuity. $f(1) = 1$ from the left piece, but the right piece tends to $2 \\cdot 1 + 1 = 3$, so $f$ jumps at $1$. The right-hand derivative uses $f(1)$: $\\lim_{h \\to 0^+} \\frac{2(1 + h) + 1 - 1}{h} = \\lim_{h \\to 0^+} \\frac{2 + 2h}{h} = +\\infty$. So $f$ is not differentiable at $1$; it is not even continuous there.
+
+Why it happens: the derivative of a piece's formula is the slope of that piece's own graph. It knows nothing about the value $f(1)$ or about whether the two graphs touch.
+
+How to check: before comparing slopes, put the boundary value into both formulas. Here they give $1$ and $3$, which settles the question. The quotient confirms it: at $h = 0.01$ the right-hand quotient is $202$.
 `,
     before: ``,
     after: ``,
@@ -675,6 +769,43 @@ const schemas = {
     vlines: [{ x: 0, label: 'tangent: x = 0' }],
     notes: [{ x: -2.9, y: -1.6, text: 'slope → +∞ from both sides', pos: 'e', color: 'r' }],
     caption: 'A vertical tangent: no sharp point, but the slope is infinite' };
+  // Concept introduction figures (section 1), one running instance: x² at x = 1.
+  const fpCiSmooth = { kind: 'pieces', svgTitle: 'y = x^2 has one tangent line at x = 1', xRange: [-1, 3], yRange: [-1, 5],
+    pieces: [
+      { fn: (x) => x * x, from: -1, to: 2.2, ends: [null, null], color: 'f', label: { text: 'y = x²', x: -0.9, y: 1.6, pos: 'e' } },
+      { fn: (x) => 2 * x - 1, from: 0, to: 2.8, ends: [null, null], color: 'g', label: { text: 'one tangent', x: 2.2, y: 3.2, pos: 'e' } },
+    ],
+    points: [{ x: 1, y: 1 }],
+    caption: 'x² at x = 1: one tangent' };
+  const fpCiCorner = { kind: 'pieces', svgTitle: 'y = |x| has two directions at x = 0', xRange: [-2, 2], yRange: [-1, 2.5],
+    pieces: [
+      { fn: (x) => Math.abs(x), from: -2, to: 2, ends: [null, null], color: 'f', label: { text: 'y = |x|', x: -1.9, y: 2.2, pos: 'e' } },
+      { fn: (x) => x, from: 0, to: 0.001, ends: [null, null], color: 'g', ghost: [[-1, 0]] },
+      { fn: (x) => -x, from: 0, to: 0.001, ends: [null, null], color: 'g', ghost: [[0, 1]] },
+    ],
+    points: [{ x: 0, y: 0 }],
+    caption: '|x| at x = 0: two directions' };
+  const fpCiSecants = { kind: 'pieces', svgTitle: 'Secants of y = x^2 through (1, 1) close in on the tangent of slope 2', xRange: [-0.5, 2.5], yRange: [-2, 6],
+    pieces: [
+      { fn: (x) => x * x, from: -0.5, to: 2.45, ends: [null, null], color: 'f' },
+      { fn: (x) => 3 * x - 2, from: 2.4, to: 2.401, ends: [null, null], color: 'g', ghost: [[0, 2.4]] },
+      { fn: (x) => 2.5 * x - 1.5, from: 2.4, to: 2.401, ends: [null, null], color: 'g', ghost: [[0, 2.4]] },
+      { fn: (x) => 2 * x - 1, from: 0, to: 2.4, ends: [null, null], color: 'g' },
+    ],
+    points: [{ x: 1, y: 1 }, { x: 2, y: 4 }, { x: 1.5, y: 2.25 }],
+    notes: [{ x: 1.15, y: -0.85, text: 'h = 1: slope 3 (dashed)', pos: 'e' },
+      { x: 1.15, y: -1.35, text: 'h = 0.5: slope 2.5 (dashed)', pos: 'e' },
+      { x: 1.15, y: -1.85, text: 'h → 0: slope 2 (solid)', pos: 'e', color: 'r' }],
+    caption: 'As h shrinks, the secants settle on one line' };
+
+  const conceptIntroFigures = {
+    smooth: renderFunctionPlotV4(fpCiSmooth),
+    corner: renderFunctionPlotV4(fpCiCorner),
+    secants: renderFunctionPlotV4(fpCiSecants),
+    quotientTable: ciQuotientTable,
+    cornerTable: ciCornerTable,
+  };
+
   const demoUnits = {
     jump: demoUnitFrame({
       svg: functionContinuityDiagrams.jump,
@@ -725,6 +856,7 @@ const schemas = {
   props: {
     differentiabilityFailureTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj7Table,
@@ -743,9 +875,76 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({differentiabilityFailureTree, seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({differentiabilityFailureTree, seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciPair = (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 14px' }}>
+      {['smooth', 'corner'].map((k) => (
+        <div key={k} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[k] }} />
+      ))}
+    </div>
+  )
+
+  // Section 1 concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'difficulty',
+        lead: `The derivative formula can always be written down, but it does not always give a number.`,
+        content: `The rules of differentiation hand out a slope at every point, as if every graph had one. Most do: at $x = 1$ the curve $y = x^2$ has exactly one tangent line. But at $x = 0$ the graph of $y = |x|$ comes in at one angle and leaves at another, and "the slope there" has no single answer. Something has to say in advance which points get a derivative and which do not.`,
+        visual: ciPair,
+        caption: `Left: $y = x^2$ and its one tangent at $(1, 1)$. Right: $y = |x|$, whose two dashed directions at $(0, 0)$ disagree.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A function $f$ is [differentiable](!/calculus/definitions#differentiability) at $x = a$ if the limit below exists and is finite:`,
+        formula: `@academic[formula_callout:The Definition of Differentiability
+$$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
+        visual: ciSvg('secants'),
+        caption: `Each dashed secant joins $(1, 1)$ to a point $h$ further along $y = x^2$; its slope is the difference quotient. As $h$ shrinks the secants settle on the solid tangent, slope $2$ — the limit in the box.`,
+        footer: `This is a two-sided [limit](!/calculus/limits/two-sided): the difference quotient must approach the same finite value whether $h \\to 0^+$ or $h \\to 0^-$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Differentiability is a property of a function at a point: it either holds there or it does not.`,
+        content: `It is a yes-or-no question asked of one function at one point. When the answer is yes, the limit is a number — the derivative $f'(a)$, the slope of the tangent. So $x^2$ is differentiable at $1$ with $f'(1) = 2$; the same function at another point is a separate question with its own answer.`,
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `On numbers, the difference quotient of x² at 1 closes in on 2 from both sides.`,
+        content: [
+          `For $f(x) = x^2$ at $a = 1$, the quotient is $\\frac{(1 + h)^2 - 1}{h}$. Take $h$ smaller and smaller, positive and negative.`,
+          ciTable('quotientTable'),
+          `The last column is always $2 + h$, since $(1 + h)^2 - 1 = 2h + h^2$. Positive $h$ approaches $2$ from above, negative $h$ from below, and both sides agree: the limit exists, it is finite, and $f'(1) = 2$.`,
+        ],
+      },
+      {
+        id: 'verification',
+        lead: `The definition keeps its promises.`,
+        content: `It promised a tangent line, and there is one: through $(1, 1)$ with slope $2$, the line $y = 2x - 1$, which touches $y = x^2$ only at that point, because $x^2 - (2x - 1) = (x - 1)^2 \\geq 0$. It also promised that a differentiable function cannot jump: as $h \\to 0$ the top of the quotient, $f(1 + h) - f(1)$, must go to $0$ for the quotient to stay finite, so $f(1 + h) \\to f(1)$. Being differentiable forces being continuous.`,
+      },
+      {
+        id: 'caveat',
+        tone: 'break',
+        lead: `The converse fails: a continuous function can still lack a derivative.`,
+        content: [
+          `Run the same test on $|x|$ at $0$. The quotient is $\\frac{|h|}{h}$, and it never settles on one number.`,
+          ciTable('cornerTable'),
+          `Each side has its own limit, $1$ and $-1$, but they disagree, so the two-sided limit does not exist — even though $|x|$ has no break at $0$. If the limit does not exist, or if it equals $\\pm\\infty$, or if $f(a)$ itself is undefined, then $f$ is not differentiable at $a$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page goes through the notation, why differentiability implies continuity, each way a derivative can fail — corners, cusps, vertical tangents and discontinuities — one-sided derivatives, differentiability on intervals, and pathological examples.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -753,7 +952,7 @@ export default function PageTemplate({differentiabilityFailureTree, seoData, sec
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -867,6 +1066,14 @@ export default function PageTemplate({differentiabilityFailureTree, seoData, sec
           >
             <TopDownTree data={differentiabilityFailureTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

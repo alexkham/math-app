@@ -1156,10 +1156,16 @@ Typical assumptions include:
 • the same mechanism is repeated each time
 • the outcome space is finite or infinite
 
+@academic[pitfall,aside:true,width:35%:Assuming independence for draws without replacement
+Treating two draws without replacement as independent gives $P(\\text{two aces}) = \\left(\\frac{4}{52}\\right)^2 = \\frac{1}{169}$. After one ace, $3$ of the $51$ cards left are aces, so the answer is $\\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{1}{221}$.
+[Read more](!#pitfalls)]@
+
 These assumptions are not conclusions.  
 They are inputs to the model.
 
 Changing an assumption changes the model, and therefore changes all results derived from it.
+
+Card draws show the second assumption at work. If each card is put back and the deck shuffled before the next draw, every draw faces the same $52$ cards. If the card is kept, the second draw faces only $51$ cards, and the deck it draws from is no longer the one the first draw saw.
 `,
       before:``,
       after:``,
@@ -1185,6 +1191,12 @@ Examples of this class include:
 Concrete realizations of these appear on the following pages:
 • Coin Toss Model
 • Dice Roll Model
+
+@academic[pitfall,aside:true,width:35%:Listing the sums as equally likely outcomes
+Taking the $11$ sums of two dice as equally likely outcomes gives $P(\\text{sum} = 7) = \\frac{1}{11}$. The equally likely outcomes are the $36$ ordered pairs, $6$ of which add to $7$, so $P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$.
+[Read more](!#pitfalls)]@
+
+In the dice model, the list of outcomes depends on what is recorded for each roll. Recording both faces in order gives the pairs from $(1, 1)$ to $(6, 6)$; recording only the total gives the numbers from $2$ to $12$. Both lists describe the same roll of two dice, and each total corresponds to a group of pairs, an event in the sense of the second bullet above.
 `,
       before:``,
       after:``,
@@ -1269,6 +1281,41 @@ Additional models will be added over time, following the same structure and conv
     summary:{
       title:`Probability Models at a Glance`,
       content:`The page has built up the probability model as the foundational layer beneath random variables and distributions, distinguishing what a model specifies from what is later measured on it. The table below collects the core ideas into a single reference card, pairing each aspect of probability modeling with its concise statement and a concrete example or symbol.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Assuming independence for draws without replacement**
+
+Two cards are drawn from a standard deck of $52$, and the first card is not put back. The assumption that trials do not influence each other is applied anyway, and the probabilities of the two draws are multiplied as if the deck were unchanged.
+
+Wrong working:
+$$P(\\text{two aces}) = \\frac{4}{52} \\cdot \\frac{4}{52} = \\frac{16}{2704} = \\frac{1}{169} \\approx 0.0059$$
+
+Right working: after an ace is drawn, $51$ cards remain and $3$ of them are aces.
+$$P(\\text{two aces}) = \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2652} = \\frac{1}{221} \\approx 0.0045$$
+
+Why it happens: coin and dice models, the first ones met, do assume independent trials, and the habit of multiplying carries over to draws where the first result changes what is left.
+
+How to check: count outcomes directly. There are $52 \\cdot 51 = 2652$ ordered pairs of different cards and $4 \\cdot 3 = 12$ ordered pairs of two aces, which gives $\\frac{12}{2652} = \\frac{1}{221}$. In a deck of two cards with one ace, the wrong method gives $\\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$ for two aces, though drawing two aces from it is impossible.
+
+**Listing the sums as equally likely outcomes**
+
+For two dice, the totals $2$ to $12$ are listed as the outcomes of the model, and each total is given the same probability.
+
+Wrong working: there are $11$ totals, each with probability $\\frac{1}{11}$, so
+$$P(\\text{sum} = 7) = \\frac{1}{11} \\approx 0.091$$
+
+Right working: the equally likely outcomes are the $36$ ordered pairs of faces. Six of them add to $7$: $(1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1)$.
+$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6} \\approx 0.167$$
+
+Why it happens: the question is about the total, so the totals look like the natural outcomes. The symmetry of a fair die holds for its faces, not for the totals that two dice produce.
+
+How to check: count how many pairs give each total. The total $2$ comes only from $(1, 1)$, while $7$ comes from six pairs, so the two cannot be equally likely. The counts $1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1$ add up to $36$.`,
       before:``,
       after:``,
       link:'',
@@ -1526,6 +1573,14 @@ export default function ModelsPage({
           sectionsContent.summary.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

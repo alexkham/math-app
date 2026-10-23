@@ -1180,6 +1180,9 @@ import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFuncti
 import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
 import negativeAngleDiagrams from '@/app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1701,6 +1704,29 @@ const faqQuestions = {
 //   }
 
 
+// Concept introduction (section 1) — template A, definition last. Running
+// instance: sine at 30° and 390°, then at multiples of π/2. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its six formula widgets, seven
+// passages and the periodic demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSinTable = ciTableOpen(['θ', 'sin θ', 'one turn later: θ + 2π', 'sin(θ + 2π)']) +
+  ciRow(['0', '0', '2π', '0']) +
+  ciRow(['π/2', '1', '5π/2', '1'], { shade: true }) +
+  ciRow(['π', '0', '3π', '0']) +
+  ciRow(['3π/2', '−1', '7π/2', '−1'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciPeriodsTable = ciTableOpen(['shift T', 'does sin(θ + T) = sin θ for every θ?']) +
+  ciRow(['π', 'no: sin(π/2 + π) = −1, not 1']) +
+  ciRow(['2π', 'yes — the smallest such shift'], { shade: true, color: '#2563EB', cols: [1] }) +
+  ciRow(['4π, 6π, …', 'yes, but each is several periods at once'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
    obj0: {
@@ -1822,6 +1848,10 @@ The geometric explanation is clean. On the [unit circle](!/trigonometry/unit-cir
 
 @academic[rule_plain:The reciprocal functions inherit the parity of their parent functions: the reciprocal of an even function is even, and the reciprocal of an odd function is odd.]@
 
+@academic[pitfall,aside:true,width:35%:Pulling the minus sign out of cosine
+Treating cosine like sine gives $\\cos\\left(-\\frac{\\pi}{3}\\right) = -\\frac{1}{2}$. Cosine is even, so $\\cos\\left(-\\frac{\\pi}{3}\\right) = \\cos\\frac{\\pi}{3} = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
+
 These symmetries are classified as the even/odd [identities](!/trigonometry/identities) and are used constantly in simplification. When a negative angle appears in an expression — say, $\\sin(-3x)$ — the odd identity converts it immediately to $-\\sin(3x)$, eliminating the negative argument. Similarly, $\\cos(-\\alpha) = \\cos(\\alpha)$ allows the sign to be dropped outright.
 
 On the [graphs](!/trigonometry/graphs), even symmetry (cosine, secant) produces a mirror image across the $y$-axis. Odd symmetry (sine, tangent, cosecant, cotangent) produces a $180°$ rotational symmetry about the origin.`,
@@ -1853,6 +1883,12 @@ Boundedness has immediate consequences for [equations](!/trigonometry/equations)
 - $\\csc(x) = 0.3$ has no solution — the output cannot be between $-1$ and $1$.
 - $\\tan(x) = 1000$ has solutions — tangent can take any real value.
 - $|\\sin(x)| \\leq 1$ is always true — it constrains nothing.
+
+@academic[pitfall,aside:true,width:35%:Dropping the reciprocal in cosecant
+Reading $\\csc x = 2$ as $\\sin x = 2$ declares it impossible, since $2 > 1$. Cosecant is a reciprocal, so $\\sin x = \\frac{1}{2}$, with solutions $x = \\frac{\\pi}{6} + 2n\\pi$ and $x = \\frac{5\\pi}{6} + 2n\\pi$.
+[Read more](!#pitfalls)]@
+
+For cosecant and secant, the range check passes through the reciprocal. The equation $\\csc x = c$ asks for $\\sin x = \\frac{1}{c}$, so it has solutions exactly when $\\frac{1}{c}$ lies in $[-1, 1]$, that is, when $|c| \\geq 1$. The same holds for $\\sec x = c$ with cosine in place of sine.
 
 Recognizing these range constraints before attempting to solve prevents wasted effort on impossible equations.`,
     before: ``,
@@ -1930,7 +1966,7 @@ This determines the domain of any expression involving these functions. For exam
 
 **Cotangent** is strictly decreasing on each interval $(n\\pi, (n+1)\\pi)$ — between its consecutive asymptotes. It runs from $+\\infty$ to $-\\infty$ within each period.
 
-**Secant** is decreasing on $\\left[0, \\frac{\\pi}{2}\\right)$, increasing on $\\left(\\frac{\\pi}{2}, \\pi\\right]$, and so on — its behavior follows from the reciprocal of cosine.
+**Secant** is increasing on $\\left[0, \\frac{\\pi}{2}\\right)$ and on $\\left(\\frac{\\pi}{2}, \\pi\\right]$, and so on — its behavior follows from the reciprocal of cosine.
 
 **Cosecant** is decreasing on $\\left(0, \\frac{\\pi}{2}\\right]$, increasing on $\\left[\\frac{\\pi}{2}, \\pi\\right)$, and so on — its behavior follows from the reciprocal of sine.
 
@@ -1957,6 +1993,12 @@ For transformed functions like $y = A\\sin(Bx - C) + D$, the extrema are:
 
 @academic[formula_callout:Extrema
 $$\\text{maximum} = D + |A|, \\quad \\text{minimum} = D - |A|$$]@
+
+@academic[pitfall,aside:true,width:35%:Using A instead of its absolute value
+For $y = -2\\sin x + 1$, taking $D + A = 1 + (-2) = -1$ as the maximum gives the minimum instead. With $|A| = 2$, the maximum is $1 + 2 = 3$, reached where $\\sin x = -1$.
+[Read more](!#pitfalls)]@
+
+To apply the formula, read $A$ and $D$ off the equation. For $y = 3\\sin(2x) - 4$, $A = 3$ and $D = -4$, so the outputs run from $-4 - 3 = -7$ up to $-4 + 3 = -1$. The line $y = D$ is the midline halfway between the two extremes, and the amplitude $|A|$ is the distance from the midline to either one.
 
 These occur at the same relative positions within each period as for the standard function, shifted according to the phase shift and compressed or stretched according to the period.`,
     before: ``,
@@ -2034,6 +2076,62 @@ These occur at the same relative positions within each period as for the standar
 
     },
 
+    obj16: {
+      title: `Common Pitfalls`,
+      content: `Four mistakes come up again and again when the properties of the trigonometric functions are put to use. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Adding 2π to tangent solutions**
+
+A general solution of a tangent equation is written by adding multiples of $2\\pi$, the period of sine and cosine. Tangent repeats every $\\pi$, so half of the solutions are lost.
+
+Wrong working: $\\tan x = 1$ gives $x = \\frac{\\pi}{4}$, so the general solution is written as $x = \\frac{\\pi}{4} + 2n\\pi$. On $[0, 2\\pi)$ this gives only $\\frac{\\pi}{4}$.
+
+Right working: tangent has period $\\pi$, so $x = \\frac{\\pi}{4} + n\\pi$. On $[0, 2\\pi)$ this gives $\\frac{\\pi}{4}$ and $\\frac{5\\pi}{4}$. Indeed $\\tan\\frac{5\\pi}{4} = \\frac{-\\sqrt{2}/2}{-\\sqrt{2}/2} = 1$.
+
+Why it happens: $2\\pi$ is the first period met, for sine and cosine, and it gets attached to every trigonometric equation by habit.
+
+How to check: test the angle half a turn away. If $\\theta_0$ solves a tangent or cotangent equation, so does $\\theta_0 + \\pi$; since $\\tan\\left(\\frac{\\pi}{4} + \\pi\\right) = 1$, the solution $\\frac{5\\pi}{4}$ must appear in the answer.
+
+**Pulling the minus sign out of cosine**
+
+The odd rule $\\sin(-\\theta) = -\\sin\\theta$ is applied to cosine as well, so a negative angle flips the sign of the cosine value.
+
+Wrong working: $\\cos\\left(-\\frac{\\pi}{3}\\right) = -\\cos\\frac{\\pi}{3} = -\\frac{1}{2}$.
+
+Right working: cosine is even, so $\\cos\\left(-\\frac{\\pi}{3}\\right) = \\cos\\frac{\\pi}{3} = \\frac{1}{2}$. On the unit circle, $-\\frac{\\pi}{3}$ is the reflection of $\\frac{\\pi}{3}$ across the $x$-axis, and the $x$-coordinate $\\frac{1}{2}$ does not change. Secant behaves the same way: $\\sec\\left(-\\frac{\\pi}{3}\\right) = \\sec\\frac{\\pi}{3} = 2$.
+
+Why it happens: four of the six functions are odd, so "the minus comes out" feels like the general rule, and the two even functions are the exceptions to remember.
+
+How to check: place the angle on the unit circle. The angle $-\\frac{\\pi}{3}$ ends in Quadrant IV, where cosine is positive, so a negative value cannot be right.
+
+**Dropping the reciprocal in cosecant**
+
+An equation in cosecant or secant is solved as if it were the matching sine or cosine equation, so the range test is applied to the wrong number.
+
+Wrong working: $\\csc x = 2$ is read as $\\sin x = 2$, and since $2 > 1$ the equation is declared to have no solution.
+
+Right working: $\\csc x = 2$ means $\\frac{1}{\\sin x} = 2$, so $\\sin x = \\frac{1}{2}$, giving $x = \\frac{\\pi}{6} + 2n\\pi$ and $x = \\frac{5\\pi}{6} + 2n\\pi$. Indeed $\\csc\\frac{\\pi}{6} = \\frac{1}{1/2} = 2$.
+
+Why it happens: the range $[-1, 1]$ is learned for sine first, and the step to the reciprocal is skipped when the equation looks familiar.
+
+How to check: the range of cosecant is $(-\\infty, -1] \\cup [1, \\infty)$, and $2$ lies inside it, so the equation must have solutions. Cosecant can never take the values strictly between $-1$ and $1$, such as $0.3$.
+
+**Using A instead of its absolute value**
+
+The extrema of $y = A\\sin(Bx - C) + D$ are computed as $D + A$ and $D - A$. When $A$ is negative, this swaps the two, and the maximum comes out smaller than the minimum.
+
+Wrong working: for $y = -2\\sin x + 1$, the maximum is given as $1 + (-2) = -1$ and the minimum as $1 - (-2) = 3$.
+
+Right working: $|A| = 2$, so the maximum is $1 + 2 = 3$ and the minimum is $1 - 2 = -1$. The maximum is reached where $\\sin x = -1$, at $x = \\frac{3\\pi}{2} + 2n\\pi$: $y = -2(-1) + 1 = 3$.
+
+Why it happens: in most examples $A$ is positive and the absolute value changes nothing, so it is dropped from memory.
+
+How to check: the maximum can never be smaller than the minimum. Substituting a single point also exposes the error: at $x = \\frac{3\\pi}{2}$, $y = 3$, which already exceeds the claimed maximum $-1$.`,
+      before: ``,
+      after: ``,
+      link: '',
+    },
+
     faq: {
       title: `Properties of Trigonometric Functions FAQ`,
     },
@@ -2085,6 +2183,12 @@ These properties govern every computation downstream. Periodicity is the reason 
   const cfMonoCos = monoRow('cos', 0, Math.PI, 'cos \u2014 falls on [0, \u03c0]', '\u2192 becomes arccos');
   const cfMonoTan = monoRow('tan', -Math.PI / 2 + 0.02, Math.PI / 2 - 0.02, 'tan \u2014 rises on (\u2212\u03c0/2, \u03c0/2)', '\u2192 becomes arctan');
 
+  const conceptIntroFigures = {
+    beyond360: unitCircleDiagrams.rotations.beyond360,
+    sinTable: ciSinTable,
+    periodsTable: ciPeriodsTable,
+  };
+
   const demoUnits = {
     periodic: demoUnitFrame({
       svg: trigFunctionsGraphDiagrams.sin,
@@ -2126,9 +2230,25 @@ These properties govern every computation downstream. Periodicity is the reason 
     }),
   };
 
+  const parityTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Two kinds of symmetry',
+    preface: 'Each of the six trigonometric functions is either even or odd. Which one follows from the unit circle.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Follow the coordinate',
+    conclusion: 'Cosine is the $x$-coordinate, which a reflection across the $x$-axis leaves alone; sine is the $y$-coordinate, which it flips. See [even-odd identities](!/trigonometry/identities).',
+    root: { name: 'Parity of the trig functions', sub: 'even or odd' },
+    children: [
+      { id: 'even', name: 'Even', symbol: '$f(-\\theta) = f(\\theta)$', items: [ { label: 'Symmetric about', text: 'the $y$-axis' }, { label: 'Functions', text: '$\\cos$, $\\sec$' } ] },
+      { id: 'odd', name: 'Odd', symbol: '$f(-\\theta) = -f(\\theta)$', items: [ { label: 'Symmetric about', text: 'the origin' }, { label: 'Functions', text: '$\\sin$, $\\tan$, $\\csc$, $\\cot$' } ] },
+    ],
+  };
+
    return {
       props:{
+    parityTree,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj8Table,
@@ -2147,17 +2267,100 @@ These properties govern every computation downstream. Periodicity is the reason 
     }
    }
 
-export default function PropertiesPage({
+export default function PropertiesPage({parityTree, 
   seoData,
   sectionsContent,
   introContent,
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Angles never run out, but the points they land on do.`,
+        content: `An angle can be $30°$, $390°$, $750°$ — as large as you like. A table of sine values that tried to list every angle would never end. Yet $390°$ is one full turn plus $30°$, and it ends at exactly the same point on the [unit circle](!/trigonometry/unit-circle) as $30°$, so it has the same sine, $\\frac{1}{2}$.`,
+        visual: ciSvg('beyond360'),
+        caption: `An angle of $390°$, read as one full round plus $30°$: its terminal side and its point on the circle are those of $30°$. The same state is on the [unit circle visualizer](!/visual-tools/unit-circle).`,
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Working out sine at quarter turns shows the values coming round again.`,
+        content: [
+          `Take $\\theta = 0, \\frac{\\pi}{2}, \\pi, \\frac{3\\pi}{2}, \\ldots$ and read sine off the circle at each.`,
+          ciTable('sinTable'),
+          `The first four values, $0, 1, 0, -1$, come back in the same order one full turn later — and would again at $4\\pi$, $6\\pi$, and so on. Nothing new appears after one full turn.`,
+          <div key={'unit-periodic'} dangerouslySetInnerHTML={{ __html: demoUnits.periodic }} />,
+          `Periodicity is the property that turns a finite table of values into a function on the whole real line.`,
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in that repetition was chosen; the circle forced it.`,
+        content: [
+          `This is a geometric fact: after a full rotation of $2\\pi$ radians around the [unit circle](!/trigonometry/unit-circle), the point $(\\cos\\theta, \\sin\\theta)$ returns to its starting position. The coordinates — and therefore the function values — are unchanged. Adding any integer multiple of $2\\pi$ has no effect: $\\sin(\\theta + 2n\\pi) = \\sin(\\theta)$ for all integers $n$.`,
+          `@academic[formula_callout:Sine Periodicity
+$$\\sin(\\theta + 2\\pi) = \\sin\\theta$$
+/trigonometry/formulas#sine_periodicity]@`,
+          `@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@`,
+          `@academic[formula_callout:Cosine Periodicity
+$$\\cos(\\theta + 2\\pi) = \\cos\\theta$$
+/trigonometry/formulas#cosine_periodicity]@`,
+          `@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@`,
+          `Cosecant and secant inherit the periods of their reciprocals. Since $\\csc\\theta = \\frac{1}{\\sin\\theta}$ and sine has period $2\\pi$, cosecant also has period $2\\pi$. The same applies to secant via cosine.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A function $f$ is [periodic](!/trigonometry/definitions#periodic_function) if there exists a positive number $T$ such that $f(\\theta + T) = f(\\theta)$ for every $\\theta$ in the domain. The smallest such $T$ is the fundamental period.`,
+        footer: `Sine, cosine, cosecant and secant have fundamental period $2\\pi$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Periodicity is a property of a function; the period is a number attached to it.`,
+        content: [
+          `A function either is periodic or is not, and when it is, its fundamental period is one positive number. Tangent and cotangent have the shorter period $\\pi$:`,
+          `@academic[formula_callout:Tangent Periodicity
+$$\\tan(\\theta + \\pi) = \\tan\\theta$$
+/trigonometry/formulas#tangent_periodicity]@`,
+          `@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@`,
+          `Cotangent shares this period: $\\cot(\\theta + \\pi) = \\cot(\\theta)$.`,
+          `The algebraic reason: $\\tan(\\theta + \\pi) = \\frac{\\sin(\\theta + \\pi)}{\\cos(\\theta + \\pi)} = \\frac{-\\sin\\theta}{-\\cos\\theta} = \\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta$. A half rotation negates both coordinates, but the ratio is unaffected. Geometrically, the point diametrically opposite $(\\cos\\theta, \\sin\\theta)$ on the unit circle has both coordinates negated, producing the same value of $\\frac{y}{x}$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The repeating generalizes; the number 2π, and taking the smallest shift, need care.`,
+        content: [
+          `What generalizes is the pattern $f(\\theta + T) = f(\\theta)$, for any function and any $T$. What was particular is the value: $2\\pi$ for sine, but $\\pi$ for tangent. And the period is the smallest shift that works — larger multiples work too, but they are not the period.`,
+          ciTable('periodsTable'),
+          `@academic[pitfall,aside:true,width:35%:Adding 2π to tangent solutions
+Writing the solutions of $\\tan x = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ misses $x = \\frac{5\\pi}{4}$, where $\\tan\\frac{5\\pi}{4} = 1$ too. Tangent repeats every $\\pi$, so $x = \\frac{\\pi}{4} + n\\pi$.
+[Read more](!#pitfalls)]@`,
+          `The practical consequence for [equations](!/trigonometry/equations): if $\\theta_0$ is a solution to a trigonometric equation, then $\\theta_0 + 2n\\pi$ (for sine, cosine, cosecant, secant) or $\\theta_0 + n\\pi$ (for tangent, cotangent) are also solutions. This generates the infinite families that characterize general solutions of trigonometric equations.`,
+          `The practical consequence for [graphs](!/trigonometry/graphs): every trigonometric graph is fully determined by one period. The rest is repetition.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the other properties of the six functions: which are even and which odd, boundedness and range, zeros, vertical asymptotes, where each increases and decreases, and how these combine.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2174,9 +2377,7 @@ export default function PropertiesPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-periodic'} dangerouslySetInnerHTML={{ __html: demoUnits.periodic }} />,
-          `Periodicity is the property that turns a finite table of values into a function on the whole real line.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2187,6 +2388,14 @@ export default function PropertiesPage({
           sectionsContent.obj2.content,
                   <div key={'unit-evenOdd'} dangerouslySetInnerHTML={{ __html: demoUnits.evenOdd }} />,
           `The parity of the other four functions follows by taking reciprocals and quotients of these two.`,
+          <DiagramFrame
+            key={'obj2-diagram'}
+            id="trig-parity-tree"
+            title="Even and odd trigonometric functions"
+            source="/trigonometry/properties"
+          >
+            <TopDownTree data={parityTree} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2235,6 +2444,14 @@ export default function PropertiesPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // NEW aggregation section: obj8

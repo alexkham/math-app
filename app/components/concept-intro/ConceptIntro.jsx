@@ -166,7 +166,15 @@ function Rich({ value }) {
 
   return parts.map((part, i) => {
     if (part === null || part === undefined || part === '') return null
-    if (typeof part === 'string') return <div key={i}>{processContent(part)}</div>
+    if (typeof part === 'string') {
+      // A text piece that follows another text piece gets a paragraph gap.
+      const afterText = i > 0 && typeof parts[i - 1] === 'string'
+      return (
+        <div key={i} style={afterText ? { marginTop: '0.9em' } : undefined}>
+          {processContent(part)}
+        </div>
+      )
+    }
     return <React.Fragment key={i}>{part}</React.Fragment>
   })
 }

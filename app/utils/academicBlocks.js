@@ -22,6 +22,12 @@ const FORMULA_CALLOUT_DEFAULTS = {
 // ─── Warning triangle drawn before the title of `pitfall` blocks ───
 const PITFALL_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;margin-right:6px;"><path d="M12 3.5 22 20.5H2Z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r="0.6" fill="#B45309"/></svg>';
 
+// ─── Light bulb drawn before the title of `fact` blocks ───
+const FACT_ICON = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#0C447C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-2px;margin-right:6px;"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"/></svg>';
+
+// ─── Target drawn at the start of `punchline` bands ───
+const PUNCHLINE_ICON = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#DCE6F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.8" fill="#DCE6F3"/></svg>';
+
 // ─── Centralized constants for "browse all formulas" links ───
 // These sit directly under a formula_callout card.
 // Negative marginTop pulls them tight against the card above.
@@ -174,6 +180,9 @@ export const renderAcademicBlockHTML = (
     // Common mistakes \u2014 site amber, thin border all round; `pitfall` shows the triangle, `pitfall_plain` does not
     pitfall:       { border: '1px solid #B45309', background: '#FDF3E3', color: '#B45309', label: 'Pitfall', icon: PITFALL_ICON },
     pitfall_plain: { border: '1px solid #B45309', background: '#FDF3E3', color: '#B45309', label: 'Pitfall' },
+
+    // Surprising true statements — light blue side box with a bulb; meant for `,aside:true`
+    fact:          { border: '1px solid #185FA5', background: '#E6F1FB', color: '#0C447C', label: 'Fact', icon: FACT_ICON },
 
     // Notation variants (7 color options for mathematical notation entries)
     notation_slate:    { border: '1px solid #5b7ca3', borderLeft: '6px solid #5b7ca3', background: '#eef2f7',    color: '#3f5c7e', label: 'Notation' },
@@ -376,6 +385,18 @@ export const renderAcademicBlockHTML = (
           <span style="font-size:11px;font-weight:600;letter-spacing:0.04em;color:#ffffff;background:#2563EB;border-radius:4px;padding:1px 6px;">${kind}</span>${name ? `<span>${name}</span>` : ''}
         </div>
         <div style="font-size:1em;line-height:1.6;">${statement}</div>
+      </div>
+    `.trim();
+  }
+
+  // ─── Punchline — the one-line takeaway at the end of a section ───
+  //   punchline   the whole content is the sentence; full-width slate band, white text, target icon
+  if (type === 'punchline') {
+    const sentence = content.trim().split(/\r?\n/).map((l) => l.trim()).filter(Boolean).map(processInline).join(' ');
+    return `
+      <div style="display:flex;align-items:center;gap:12px;box-sizing:border-box;clear:both;margin:24px 0;padding:14px 18px;border-radius:8px;background-color:#4A5E78;width:100%;">
+        ${PUNCHLINE_ICON}
+        <div style="font-size:1.125rem;font-weight:600;line-height:1.45;color:#ffffff;">${sentence}</div>
       </div>
     `.trim();
   }

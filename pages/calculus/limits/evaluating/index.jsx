@@ -132,55 +132,55 @@ const summaryTable = `
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">1</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any limit — always start here</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">direct substitution; if the result is defined and finite, that is the limit</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">1</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">2</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0/0 with a polynomial numerator and denominator</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">factor both, cancel the shared (x − a) factor, substitute again</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj4</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">4</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">3</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0/0 with radicals (square roots, etc.)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply numerator and denominator by the conjugate, simplify the difference of squares, cancel</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj5</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">5</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0/0 with shared factor hidden inside parens or powers</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">expand or simplify the algebra until the (x − a) factor emerges, then cancel</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj6</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">6</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">5</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0/0 with a difference of fractions</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">combine over a common denominator; the simplified numerator usually reveals the shared factor</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj7</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">7</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">6</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">∞/∞ for a rational function as x → ±∞</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">divide every term by the highest power of x in the denominator — see <a href="/calculus/limits/infinity" style="${linkStyle}">limits and infinity</a></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj8</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">8</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">7</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">expression resembles a known trig/exp form</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">rewrite to match a <a href="/calculus/limits/special" style="${linkStyle}">special limit</a> (sin u / u, (e<sup>u</sup>−1)/u, etc.) and apply</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj9</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">9</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">8</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">absolute values, piecewise functions, or potential left/right asymmetry</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">evaluate the <a href="/calculus/limits/one-sided" style="${linkStyle}">one-sided limits</a> separately; agreement determines whether the two-sided limit exists</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">obj10</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">10</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">9</td>
       <td style="padding: 12px 15px; color: #34495e;">nonzero / 0 (not indeterminate — limit is infinite)</td>
       <td style="padding: 12px 15px; color: #34495e;">sign-analyze numerator and denominator near a from each side to identify +∞ or −∞</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">obj11</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">11</td>
     </tr>
   </tbody>
 </table>
@@ -308,7 +308,7 @@ Indeterminate forms require transformation. The goal is to rewrite the expressio
   obj4: {
     title: `Factoring and Canceling`,
     content: `
-When substitution yields $0/0$, the numerator and denominator share a common factor. Factor both, cancel the shared factor, then substitute.
+When substitution into a rational function yields $0/0$, the numerator and denominator share a common factor. Factor both, cancel the shared factor, then substitute.
 
 @academic[formula_callout:Factoring and Canceling
 $$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$$]@
@@ -323,7 +323,13 @@ Cancel $(x - 2)$:
 @academic[formula_callout:Factoring and Canceling
 $$= \\lim_{x \\to 2} (x + 2) = 4$$]@
 
+@academic[pitfall,aside:true,width:35%:Cancelling terms instead of factors
+Striking out an $x$ in $x^2$ and in $x - 2$ turns $\\frac{x^2 - 4}{x - 2}$ into $\\frac{x - 4}{-2}$, which tends to $1$ as $x \\to 2$. Factoring first gives $\\frac{(x - 2)(x + 2)}{x - 2} = x + 2$, and the limit is $4$.
+[Read more](!#pitfalls)]@
+
 The cancellation is valid because the limit considers $x$ near $2$, not at $2$. For $x \\neq 2$, the factor $(x - 2)$ is nonzero and cancels legitimately.
+
+The same three steps handle any rational function that gives $0/0$ at a point $a$. A polynomial that is $0$ at $a$ has $(x - a)$ as a factor, so in a $0/0$ form both the numerator and the denominator contain it. Cancelling it once is often enough; if substitution still gives $0/0$, the factor is present again and the step is repeated.
 `,
     before: ``,
     after: ``,
@@ -351,6 +357,12 @@ Cancel $x$:
 
 @academic[formula_callout:Rationalizing — Conjugate Multiplication
 $$= \\lim_{x \\to 0} \\frac{1}{\\sqrt{x + 1} + 1} = \\frac{1}{2}$$]@
+
+@academic[pitfall,aside:true,width:35%:Multiplying only the numerator
+Multiplying just the top by $\\sqrt{x + 1} + 1$ turns the expression into $\\frac{x}{x} = 1$, a different function, and gives the limit $1$. Multiplying top and bottom keeps the value: $\\frac{1}{\\sqrt{x + 1} + 1} \\to \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
+
+The factor $\\dfrac{\\sqrt{x + 1} + 1}{\\sqrt{x + 1} + 1}$ equals $1$ for every $x$ near $0$, so multiplying by it changes the form of the expression and not its value. What the new form gains is the difference of squares in the numerator: the radical disappears, and the factor $x$ that caused the $0/0$ comes out into the open, where it can be cancelled against the $x$ in the denominator.
 `,
     before: ``,
     after: ``,
@@ -423,7 +435,13 @@ As $x \\to \\infty$, terms with $x$ in the denominator vanish:
 @academic[formula_callout:Multiplying by Strategic Forms of 1
 $$= \\frac{3 + 0 - 0}{2 - 0} = \\frac{3}{2}$$]@
 
+@academic[pitfall,aside:true,width:35%:Setting infinity over infinity to 1
+Reading $\\frac{\\infty}{\\infty}$ as $1$ gives $1$ for $\\lim_{x \\to \\infty} \\frac{3x^2 + 5x - 1}{2x^2 - 7}$. At $x = 1000$ the quotient is already about $1.50$; dividing by $x^2$ gives the limit $\\frac{3}{2}$.
+[Read more](!#pitfalls)]@
+
 This technique isolates the dominant terms that control behavior at infinity.
+
+Dividing by $x^2$ is the strategic form of $1$ in this example: dividing the numerator and the denominator by the same nonzero quantity leaves the value of the quotient unchanged for every $x \\neq 0$. After the division the numerator tends to $3$ and the denominator to $2$, the two leading coefficients. For a rational function whose numerator and denominator have the same degree, the limit at infinity is always the ratio of the leading coefficients.
 `,
     before: ``,
     after: ``,
@@ -446,6 +464,12 @@ Let $u = 3x$. As $x \\to 0$, $u \\to 0$:
 
 @academic[formula_callout:Using Known Limits
 $$= 3 \\cdot \\lim_{u \\to 0} \\frac{\\sin u}{u} = 3 \\cdot 1 = 3$$]@
+
+@academic[pitfall,aside:true,width:35%:Using the special limit without matching the argument
+Treating $\\frac{\\sin 3x}{x}$ as $\\frac{\\sin u}{u}$ gives $1$, but the denominator is $x$, not $3x$. At $x = 0.01$ the quotient is about $2.9996$; matching the argument gives $3$.
+[Read more](!#pitfalls)]@
+
+The factor $\\dfrac{3}{3}$ equals $1$, so it changes the form of the expression and not its value. Its job is to make the denominator equal to the argument of the sine, so that the substitution $u = 3x$ produces the standard form exactly. The factor $3$ left outside the limit is what carries the answer.
 `,
     before: ``,
     after: ``,
@@ -466,7 +490,13 @@ For $x < 0$: $|x| = -x$, so $\\dfrac{|x|}{x} = -1$
 @academic[formula_callout:One-Sided Evaluation
 $$\\lim_{x \\to 0^+} \\frac{|x|}{x} = 1 \\qquad \\lim_{x \\to 0^-} \\frac{|x|}{x} = -1$$]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the absolute value
+Replacing $|x|$ by $x$ simplifies $\\frac{|x|}{x}$ to $1$ and gives the limit $1$. That holds only for $x > 0$; for $x < 0$, $|x| = -x$ and the quotient is $-1$, so the left-hand limit is $-1$.
+[Read more](!#pitfalls)]@
+
 The one-sided limits differ, so the two-sided limit does not exist.
+
+Absolute values, piecewise definitions and other expressions whose formula changes at the point all call for this split. Each side is evaluated with the formula that holds on that side, and only then are the two results compared. The point itself plays no part: $\\frac{|x|}{x}$ has no value at $0$, and the limit is decided by the values on either side.
 `,
     before: ``,
     after: ``,
@@ -535,6 +565,87 @@ $$\\lim_{x \\to 2} \\left( \\frac{1}{x - 2} - \\frac{4}{x^2 - 4} \\right) = \\li
     title: `Summary: The Limit Evaluation Playbook`,
     content: `
 Every limit evaluation problem on this page follows the same arc: try direct substitution first, then classify the indeterminate form, then pick the technique that resolves it. The table below collects the nine moves in priority order — start at the top and move down only as needed. The right side of each row notes where on this page (or which sibling page) the move is detailed.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj14: {
+    title: `Common Pitfalls`,
+    content: `
+Six mistakes cause most wrong answers when limits are evaluated by algebra. Five of them are marked where they happen in the sections above; the first is the one the section on failed substitution warns against. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading 0/0 as the answer**
+
+Substitution gives $\\dfrac{0}{0}$, and that result is turned into an answer: $0$ because the numerator is $0$, $1$ because the two parts are equal, or "does not exist" because of the division by zero.
+
+Wrong working: substituting $x = 2$ into $\\dfrac{x^2 - 4}{x - 2}$ gives $\\dfrac{0}{0}$, so $\\lim_{x \\to 2} \\dfrac{x^2 - 4}{x - 2} = 0$.
+
+Right working: $\\dfrac{0}{0}$ only says that more work is needed. Factoring gives $\\lim_{x \\to 2} \\dfrac{(x - 2)(x + 2)}{x - 2} = \\lim_{x \\to 2} (x + 2) = 4$.
+
+Why it happens: $\\dfrac{0}{0}$ looks like a number, and three familiar rules each seem to apply to it: $0$ over anything is $0$, anything over itself is $1$, and division by $0$ is undefined. They contradict each other, which is exactly why the form decides nothing.
+
+How to check: evaluate the expression at points close to $2$. At $x = 2.01$ it gives $4.01$ and at $x = 1.99$ it gives $3.99$, far from $0$ and closing in on $4$.
+
+**Cancelling terms instead of factors**
+
+In a fraction such as $\\dfrac{x^2 - 4}{x - 2}$, matching symbols are struck out of single terms of the numerator and the denominator, before anything has been factored.
+
+Wrong working: strike one $x$ out of $x^2$ and the $x$ out of $x - 2$, leaving $\\dfrac{x - 4}{-2}$. Substituting $x = 2$ gives $\\dfrac{-2}{-2} = 1$.
+
+Right working: factor first. $\\dfrac{x^2 - 4}{x - 2} = \\dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$ for $x \\neq 2$, and the limit is $2 + 2 = 4$.
+
+Why it happens: cancelling works on factors, $\\dfrac{x \\cdot a}{x \\cdot b} = \\dfrac{a}{b}$, and the same crossing out looks just as natural inside sums, where it does not hold.
+
+How to check: compare the original and the rewritten expression at any convenient value. At $x = 3$ the original gives $\\dfrac{9 - 4}{3 - 2} = 5$, the wrong form gives $\\dfrac{3 - 4}{-2} = 0.5$, and $x + 2$ gives $5$.
+
+**Multiplying only the numerator**
+
+When rationalizing, the conjugate is multiplied into the numerator only. The expression that results is a different function, and its limit is a different number.
+
+Wrong working: $\\dfrac{(\\sqrt{x + 1} - 1)(\\sqrt{x + 1} + 1)}{x} = \\dfrac{(x + 1) - 1}{x} = \\dfrac{x}{x} = 1$, so the limit is $1$.
+
+Right working: multiply the numerator and the denominator by $\\sqrt{x + 1} + 1$, which multiplies the expression by $1$. Then $\\dfrac{x}{x(\\sqrt{x + 1} + 1)} = \\dfrac{1}{\\sqrt{x + 1} + 1}$, and the limit as $x \\to 0$ is $\\dfrac{1}{1 + 1} = \\dfrac{1}{2}$.
+
+Why it happens: the conjugate is thought of as a tool for removing the radical from the numerator, and the denominator, which has no radical, seems to need nothing.
+
+How to check: the rewritten expression must have the same value as the original at any allowed $x$. At $x = 3$ the original gives $\\dfrac{2 - 1}{3} = \\dfrac{1}{3}$; the right form gives $\\dfrac{1}{2 + 1} = \\dfrac{1}{3}$, the wrong form gives $1$.
+
+**Setting infinity over infinity to 1**
+
+As $x \\to \\infty$, the numerator and the denominator both grow without bound, and $\\dfrac{\\infty}{\\infty}$ is cancelled to $1$ as if $\\infty$ were a number.
+
+Wrong working: in $\\lim_{x \\to \\infty} \\dfrac{3x^2 + 5x - 1}{2x^2 - 7}$ both parts tend to $\\infty$, so the limit is $\\dfrac{\\infty}{\\infty} = 1$.
+
+Right working: divide every term by $x^2$. The expression becomes $\\dfrac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$, which tends to $\\dfrac{3}{2}$.
+
+Why it happens: a number divided by itself is $1$, and $\\infty$ is handled like a number. But the two infinities can grow at different rates: $\\dfrac{x^2}{x}$ is also of the form $\\dfrac{\\infty}{\\infty}$ and tends to $\\infty$, while $\\dfrac{x}{x^2}$ tends to $0$.
+
+How to check: evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{3004999}{1999993} \\approx 1.5025$, close to $1.5$ and not to $1$.
+
+**Using the special limit without matching the argument**
+
+The special limit $\\lim_{u \\to 0} \\dfrac{\\sin u}{u} = 1$ is applied to an expression that has the sine of one quantity over a different quantity.
+
+Wrong working: $\\lim_{x \\to 0} \\dfrac{\\sin 3x}{x} = 1$, by the special limit.
+
+Right working: the denominator has to match the argument of the sine. $\\dfrac{\\sin 3x}{x} = 3 \\cdot \\dfrac{\\sin 3x}{3x}$, and with $u = 3x$ the limit is $3 \\cdot 1 = 3$.
+
+Why it happens: the expression has the shape "sine of something over something", and the pattern is recognized by its shape before the two somethings are compared.
+
+How to check: evaluate at a small $x$. At $x = 0.01$, $\\dfrac{\\sin 0.03}{0.01} \\approx 2.9996$. For small angles $\\sin 3x \\approx 3x$, which also points to $3$.
+
+**Dropping the absolute value**
+
+The absolute value is removed as if $|x| = x$ for all $x$, so the expression is simplified to a single formula and only one limit is computed.
+
+Wrong working: $\\dfrac{|x|}{x} = \\dfrac{x}{x} = 1$, so $\\lim_{x \\to 0} \\dfrac{|x|}{x} = 1$.
+
+Right working: $|x| = x$ only for $x \\geq 0$. For $x > 0$ the quotient is $1$, and for $x < 0$ it is $\\dfrac{-x}{x} = -1$. The one-sided limits are $1$ and $-1$, so the two-sided limit does not exist.
+
+Why it happens: the values pictured for $x$ are usually positive, and for those the absolute value changes nothing.
+
+How to check: try one negative value. At $x = -0.1$ the quotient is $\\dfrac{0.1}{-0.1} = -1$, not $1$.
 `,
     before: ``,
     after: ``,
@@ -862,6 +973,14 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj13.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

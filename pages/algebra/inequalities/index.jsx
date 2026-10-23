@@ -426,6 +426,12 @@ An [equation](!/algebra/equations) asks where two expressions are equal. An ineq
 
 The solution set collects all solutions into one object. For $x > 3$, the solution set is the entire portion of the number line to the right of $3$. For $x^2 < 9$, the solution set is all $x$ between $-3$ and $3$. These are continuous stretches, not isolated values.
 
+@academic[pitfall,aside:true,width:35%:Taking square roots as in an equation
+Reducing $x^2 < 9$ to $x < 3$ keeps values like $x = -5$, where $x^2 = 25$. Both $-3$ and $3$ bound the set, so the answer is $-3 < x < 3$.
+[Read more](!#pitfalls)]@
+
+The inequality $x^2 < 9$ is a condition on the square of $x$, not on $x$ itself. Squaring gives the same result for a number and its opposite, so $-3$ and $3$ sit at the same height, $9$, and the boundary of the solution set has a point on each side of $0$.
+
 Set-builder notation provides a formal way to write solution sets: $\\{x \\in \\mathbb{R} : x > 3\\}$ reads "the set of all real numbers $x$ such that $x$ is greater than $3$." This notation works for any inequality, no matter how complex the condition. In practice, interval notation (covered in the next section) is more compact and more commonly used.`,
     before: ``,
     after: ``,
@@ -469,6 +475,9 @@ Adding or subtracting the same quantity on both sides preserves the direction of
 Multiplying or dividing both sides by a positive number also preserves the direction. If $a < b$ and $c > 0$, then $ac < bc$. Again, no surprises.
 
 Multiplying or dividing both sides by a negative number reverses the direction. If $a < b$ and $c < 0$, then $ac > bc$. The inequality flips. This is the single rule that distinguishes inequality manipulation from equation manipulation. Forgetting the flip is the most common error in inequality solving.
+
+@academic[fact,aside:true,width:35%:Reciprocals flip the order too
+From $2 < 3$ follows $\\frac{1}{2} > \\frac{1}{3}$: taking reciprocals reverses an inequality whenever both sides have the same sign, because $\\frac{1}{x}$ falls as $x$ grows on each side of $0$. With opposite signs it does not: $-1 < 2$ and $-1 < \\frac{1}{2}$.]@
 
 The reason for the reversal is arithmetic: $3 < 5$, but multiplying both sides by $-1$ gives $-3$ and $-5$, and $-3 > -5$. Negation mirrors the number line, swapping the relative positions of two values.
 
@@ -516,7 +525,7 @@ Squaring both sides is another non-equivalence-preserving operation. It may enla
     title: `Sign Analysis`,
     content: `For inequalities involving products, quotients, or higher-degree expressions, direct algebraic isolation of the variable is either impossible or unreliable. The method that handles all these cases uniformly is sign analysis.
 
-The idea is straightforward. Every polynomial or rational expression has a finite number of critical points — values where it equals zero or is undefined. Between consecutive critical points, the expression cannot change sign because a continuous function can only change sign by passing through zero or a discontinuity. Testing a single value in each interval determines the sign of the entire expression throughout that interval.
+The idea is straightforward. Every polynomial or rational expression has a finite number of critical points — values where it equals zero or is undefined. Between consecutive critical points, the expression cannot change sign because an expression can change sign only at a zero or at a point where it is undefined. Testing a single value in each interval determines the sign of the entire expression throughout that interval.
 
 The sign chart organizes this process. The critical points are marked on a number line, dividing it into intervals. For each factor in the expression, the sign across every interval is recorded in a row. The final row multiplies the signs together to give the sign of the overall expression in each interval. The solution to the inequality consists of the intervals where the sign matches the one demanded.
 
@@ -550,6 +559,10 @@ To solve a specific inequality, the [linear inequality solver](!/algebra/calcula
 
 The discriminant $\\Delta = b^2 - 4ac$ determines the structure before any intervals are tested. When $\\Delta > 0$, two distinct real roots divide the line into three intervals. When $\\Delta = 0$, a single repeated root creates two intervals. When $\\Delta < 0$, no real roots exist and the expression keeps the same sign everywhere — the sign of $a$ alone decides whether the inequality is always true or never true.
 
+@academic[pitfall,aside:true,width:35%:Reading no roots as no solution
+For $x^2 + 1 > 0$, $\\Delta = -4 < 0$, and stopping there gives "no solution". But $a = 1 > 0$, so $x^2 + 1$ is positive everywhere: the solution is $(-\\infty, \\infty)$.
+[Read more](!#pitfalls)]@
+
 The parabola $y = ax^2 + bx + c$ provides a geometric shortcut. The inequality $ax^2 + bx + c > 0$ asks where the parabola lies above the $x$-axis, and $ax^2 + bx + c < 0$ asks where it lies below. The opening direction (upward if $a > 0$, downward if $a < 0$) together with the root locations makes the answer visible.
 
 To solve a specific inequality, the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic) finds the roots, tests each interval and gives the solution in interval notation.`,
@@ -568,7 +581,13 @@ Root multiplicity plays a decisive role.
 
 @academic[rule_plain:At a root of odd multiplicity the polynomial changes sign, so the boundary separates a positive interval from a negative one. At a root of even multiplicity the polynomial keeps its sign, merely touching zero without crossing — the boundary is a tangent point rather than a crossing.]@
 
-This distinction determines the shape of the solution set near each root.`,
+@academic[pitfall,aside:true,width:35%:Switching the sign at every root
+Alternating signs for $(x + 2)(x - 1)^2(x - 5) \\leq 0$ gives $(-\\infty, -2] \\cup [1, 5]$, which keeps $x = -3$, where the product is $128$. The double root at $1$ keeps the sign, so the answer is $[-2, 5]$.
+[Read more](!#pitfalls)]@
+
+This distinction determines the shape of the solution set near each root.
+
+A sign chart is usually filled in from one end of the number line to the other, one critical point at a time. At each root the exponent of its factor is read off the factored form, and that exponent decides what is written in the next interval.`,
     before: ``,
     after: ``,
     link: '/algebra/inequalities/polynomial',
@@ -580,7 +599,7 @@ This distinction determines the shape of the solution set near each root.`,
 
 The critical points include both the zeros of the numerator (where the expression equals zero) and the zeros of the denominator (where the expression is undefined). Both types appear on the sign chart and create intervals for testing, but they are treated differently at the endpoint step: numerator zeros may be included in the solution for non-strict inequalities, while denominator zeros are always excluded because the expression does not exist there.
 
-A common and dangerous shortcut is cross-multiplying to clear the denominator. Because the denominator changes sign across the number line, the direction of the inequality would need to flip in some intervals but not others — making a single multiplication invalid. The sign chart avoids this entirely by analyzing the factored form directly, never multiplying through.`,
+A common and dangerous shortcut is cross-multiplying to clear the denominator. Because the denominator can change sign across the number line (at its real zeros), the direction of the inequality would need to flip in some intervals but not others — making a single multiplication invalid. The sign chart avoids this entirely by analyzing the factored form directly, never multiplying through.`,
     before: ``,
     after: ``,
     link: '/algebra/inequalities/rational',
@@ -590,13 +609,17 @@ A common and dangerous shortcut is cross-multiplying to clear the denominator. B
     title: `Absolute Value Inequalities`,
     content: `An [absolute value inequality](!/algebra/inequalities/absolute-value) translates into a compound inequality through two standard conversions, one for each direction.
 
-@academic[rule_plain:The "less than" form $|f(x)| < k$ (with $k > 0$) says that $f(x)$ lies within $k$ units of zero. This converts to the conjunction $-k < f(x) < k$, a bounded compound inequality whose solution is an interval.]@
+@academic[rule_plain:The "less than" form $|f(x)| < k$ (with $k > 0$) says that $f(x)$ lies within $k$ units of zero. This converts to the conjunction $-k < f(x) < k$, a bounded compound inequality whose solution, for linear $f$, is an interval.]@
 
 The inequality $|2x - 3| < 5$ becomes $-5 < 2x - 3 < 5$, which solves to $-1 < x < 4$.
 
-@academic[rule_plain:The "greater than" form $|f(x)| > k$ says that $f(x)$ lies more than $k$ units from zero. This converts to the disjunction $f(x) < -k$ or $f(x) > k$, producing two rays as the solution.]@
+@academic[rule_plain:The "greater than" form $|f(x)| > k$ says that $f(x)$ lies more than $k$ units from zero. This converts to the disjunction $f(x) < -k$ or $f(x) > k$, which for linear $f$ produces two rays as the solution.]@
 
 The inequality $|x + 1| \\geq 4$ becomes $x + 1 \\leq -4$ or $x + 1 \\geq 4$, giving $x \\leq -5$ or $x \\geq 3$.
+
+@academic[pitfall,aside:true,width:35%:Using AND for greater than
+Converting $|x + 1| \\geq 4$ to $-4 \\leq x + 1 \\leq 4$ gives $-5 \\leq x \\leq 3$, which keeps $x = 0$, where $|0 + 1| = 1$. Greater than means OR: $x \\leq -5$ or $x \\geq 3$.
+[Read more](!#pitfalls)]@
 
 The geometric reading — absolute value as distance on the number line — provides immediate intuition. The inequality $|x - a| < d$ describes all points within distance $d$ of $a$, forming the interval $(a - d, a + d)$. The inequality $|x - a| > d$ describes all points farther than $d$ from $a$, forming two rays.`,
     before: ``,
@@ -621,6 +644,95 @@ The geometric reading — absolute value as distance on the number line — prov
   obj15: {
     title: `Summary of Algebraic Inequality Types`,
     content: `The five algebraic inequality types covered above all produce solution sets shaped as intervals or unions of intervals, but they differ in how those intervals are found. The table below collects each type with its canonical form, the typical solution shape, and the primary solving technique.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj16: {
+    title: `Common Pitfalls`,
+    content: `Six mistakes cause most wrong answers in the inequality types on this page. Four of them are marked where they happen in the sections above; the other two are named in the text of their sections. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Taking square roots as in an equation**
+
+An inequality of the form $x^2 < k$ is solved by taking the square root of both sides, as for the equation $x^2 = k$, and only the positive root is kept.
+
+Wrong working:
+$$x^2 < 9 \\implies x < 3$$
+
+Right working: move everything to one side and factor.
+$$x^2 - 9 < 0 \\implies (x + 3)(x - 3) < 0$$
+The product is negative only between its roots, so $-3 < x < 3$.
+
+Why it happens: for the equation $x^2 = 9$ the step gives $x = \\pm 3$, and the inequality looks like the same problem with a different symbol. Writing $x < \\pm 3$ does not help, because it has no clear meaning as a set.
+
+How to check: test a value from the wrong answer outside the right one. $x = -5$ is less than $3$, but $(-5)^2 = 25$, which is not less than $9$. A value from the right answer, $x = 0$, gives $0 < 9$.
+
+**Forgetting the flip**
+
+Both sides are divided by a negative number, and the inequality symbol is kept as it was.
+
+Wrong working:
+$$-3x \\geq 12 \\implies x \\geq -4$$
+
+Right working: dividing by $-3$ reverses the direction.
+$$-3x \\geq 12 \\implies x \\leq -4$$
+
+Why it happens: the step is copied from equation solving, where dividing by a negative number changes nothing about the $=$ sign.
+
+How to check: test a value from the wrong answer. $x = 0$ satisfies $x \\geq -4$, but $-3 \\cdot 0 = 0$, which is not at least $12$. A value from the right answer, $x = -5$, gives $15 \\geq 12$.
+
+**Reading no roots as no solution**
+
+The discriminant of a quadratic inequality is negative, and the conclusion "no real roots" is turned into "no solution".
+
+Wrong working:
+$$x^2 + 1 > 0, \\quad \\Delta = 0^2 - 4 \\cdot 1 \\cdot 1 = -4 < 0 \\implies \\text{no solution}$$
+
+Right working: with no real roots the expression never changes sign, and the leading coefficient $a = 1 > 0$ makes the parabola open upward, so it lies above the $x$-axis everywhere. The solution is every real number, $(-\\infty, \\infty)$. The opposite inequality $x^2 + 1 < 0$ is the one with no solution.
+
+Why it happens: for the equation $x^2 + 1 = 0$, a negative discriminant does mean there is no real solution, and that habit carries over.
+
+How to check: test any single value. $x = 0$ gives $1 > 0$, so the solution set is not empty.
+
+**Switching the sign at every root**
+
+The sign chart is filled in by changing the sign at each critical point, without looking at the multiplicity of the factors.
+
+Wrong working: for $(x + 2)(x - 1)^2(x - 5) \\leq 0$, starting with $+$ to the right of $5$ and alternating gives $-$ on $(1, 5)$, $+$ on $(-2, 1)$ and $-$ to the left of $-2$, so the answer is taken as $(-\\infty, -2] \\cup [1, 5]$.
+
+Right working: the factor $(x - 1)^2$ has even multiplicity and is never negative, so the sign does not change at $x = 1$. The signs are $+$ to the left of $-2$, $-$ on $(-2, 1)$, $-$ on $(1, 5)$ and $+$ to the right of $5$. With the zeros $-2$, $1$ and $5$ included, the solution is $[-2, 5]$.
+
+Why it happens: for products of distinct linear factors the signs really do alternate, so alternation becomes a reflex.
+
+How to check: test a value in each interval. $x = -3$ gives $(-1)(16)(-8) = 128$, which is not $\\leq 0$; $x = 0$ gives $(2)(1)(-5) = -10 \\leq 0$.
+
+**Cross-multiplying**
+
+The denominator of a rational inequality is cleared by multiplying both sides by it, as if it were a positive number.
+
+Wrong working:
+$$\\frac{x - 2}{x + 1} > 0 \\implies x - 2 > 0 \\implies x > 2$$
+
+Right working: the critical points are $x = 2$ (numerator zero) and $x = -1$ (denominator zero). The quotient is positive to the left of $-1$, negative between $-1$ and $2$, and positive to the right of $2$. The solution is $(-\\infty, -1) \\cup (2, \\infty)$.
+
+Why it happens: multiplying by the denominator is the standard first step for rational equations. For an inequality it is valid only where the denominator is positive; where it is negative the direction would have to flip.
+
+How to check: test a value left of the pole. $x = -2$ gives $\\frac{-4}{-1} = 4 > 0$, so it belongs to the solution, but the wrong working lost it.
+
+**Using AND for greater than**
+
+A "greater than" absolute value inequality is converted with the bounded chain that belongs to the "less than" form.
+
+Wrong working:
+$$|x + 1| \\geq 4 \\implies -4 \\leq x + 1 \\leq 4 \\implies -5 \\leq x \\leq 3$$
+
+Right working: $|x + 1| \\geq 4$ says $x + 1$ is at least $4$ units from zero, which is a disjunction.
+$$x + 1 \\leq -4 \\text{ or } x + 1 \\geq 4 \\implies x \\leq -5 \\text{ or } x \\geq 3$$
+
+Why it happens: the chain $-k < f(x) < k$ is learned first and is the familiar shape. A related slip writes the OR case as a single chain, $-4 \\geq x + 1 \\geq 4$, which no number satisfies.
+
+How to check: test a value from the wrong answer. $x = 0$ gives $|0 + 1| = 1$, which is not at least $4$. A value from the right answer, $x = 4$, gives $|4 + 1| = 5 \\geq 4$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1004,6 +1116,7 @@ export default function InequalitiesPage({inequalityFamilyTree,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:Any step that keeps the order of numbers is safe; a step that reverses the order flips the symbol.]@`,
         ]
     },
 
@@ -1132,6 +1245,14 @@ export default function InequalitiesPage({inequalityFamilyTree,
           >
             <TopDownTree data={inequalityFamilyTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // {

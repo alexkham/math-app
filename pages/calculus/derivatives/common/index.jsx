@@ -14,6 +14,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -403,6 +405,10 @@ $$\\frac{d}{dx}[c] = 0$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Applying the power rule to a constant
+Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number as a function of $x$. $e^3 \\approx 20.09$ is a constant, so its derivative is $0$.
+[Read more](!#pitfalls)]@
+
 The graph of a constant function is a horizontal line. Every secant line through two points on it has slope zero, so the tangent line at every point also has slope zero. From the limit definition, the difference quotient $\\frac{c - c}{h} = 0$ for all $h \\neq 0$, and the limit is $0$.
 
 Under differentiation, constant terms vanish. In any sum $f(x) + c$, the constant contributes nothing to the derivative: $\\frac{d}{dx}[f(x) + c] = f'(x)$.
@@ -426,6 +432,10 @@ $$\\frac{d}{dx}[x^n] = nx^{n-1}$$
 The rule applies uniformly across exponent types. Positive integers: $\\frac{d}{dx}[x^5] = 5x^4$. Negative integers: $\\frac{d}{dx}[x^{-3}] = -3x^{-4}$. Fractions: $\\frac{d}{dx}[x^{1/2}] = \\frac{1}{2}x^{-1/2} = \\frac{1}{2\\sqrt{x}}$. Irrational exponents: $\\frac{d}{dx}[x^\\pi] = \\pi x^{\\pi - 1}$.
 
 For positive integer $n$, the proof expands $(x+h)^n$ using the binomial theorem. The leading term after cancellation is $nx^{n-1}h$, and dividing by $h$ and taking the limit gives $nx^{n-1}$. All higher-order terms contain $h$ as a factor and vanish in the limit.
+
+@academic[pitfall,aside:true,width:35%:Lowering a negative exponent toward zero
+Computing $-3 + 1$ instead of $-3 - 1$ turns $\\frac{d}{dx}[x^{-3}]$ into $-3x^{-2}$, which is $-0.75$ at $x = 2$. The rule always subtracts $1$: the derivative is $-3x^{-4}$, which is $-0.1875$ at $x = 2$.
+[Read more](!#pitfalls)]@
 
 Extension to negative and fractional exponents uses the quotient rule and the chain rule respectively, or alternatively [logarithmic differentiation](!/calculus/derivatives/techniques): writing $x^n = e^{n \\ln x}$ and applying the chain rule gives $\\frac{d}{dx}[x^n] = e^{n \\ln x} \\cdot \\frac{n}{x} = x^n \\cdot \\frac{n}{x} = nx^{n-1}$.
 `,
@@ -538,6 +548,10 @@ $$\\frac{d}{dx}[a^x] = a^x \\ln a$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Using the power rule on an exponential
+Bringing the exponent down turns $\\frac{d}{dx}[2^x]$ into $x \\cdot 2^{x-1}$, which is $0$ at $x = 0$. The variable is in the exponent, so the derivative is $2^x \\ln 2$, which is $\\ln 2 \\approx 0.693$ at $x = 0$.
+[Read more](!#pitfalls)]@
+
 This follows from rewriting $a^x = e^{x \\ln a}$ and applying the chain rule. The factor $\\ln a$ is constant—it scales the derivative. When $a = e$, $\\ln a = 1$ and the factor disappears, confirming the special role of base $e$.
 `,
     before: ``,
@@ -565,6 +579,10 @@ $$\\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$
 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the factor ln a
+Using $\\frac{1}{x}$ as the derivative of $\\log_{10} x$ gives slope $1$ at $x = 1$. The factor $\\frac{1}{\\ln 10}$ is missing: the derivative is $\\frac{1}{x \\ln 10}$, about $0.434$ at $x = 1$.
+[Read more](!#pitfalls)]@
 
 This follows from the change of base formula $\\log_a x = \\frac{\\ln x}{\\ln a}$ and the constant multiple rule. The natural logarithm gives the simplest derivative—another reason $e$ is the preferred base.
 
@@ -600,6 +618,75 @@ $$\\frac{d}{dx}[e^x] = e^x \\qquad \\frac{d}{dx}[a^x] = a^x \\ln a$$]@
 $$\\frac{d}{dx}[\\ln x] = \\frac{1}{x} \\qquad \\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$]@
 
 These twelve formulas, combined with the [differentiation rules](!/calculus/derivatives/rules), handle every explicit function built from powers, trigonometric functions, exponentials, and logarithms. Functions involving inverse trigonometric, hyperbolic, or piecewise definitions require the additional formulas collected in [derivatives of special functions](!/calculus/derivatives/special). The master reference card below collects everything in one place, grouped by function family for quick lookup.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes account for most wrong answers when these formulas are applied. Four of them are marked where they happen in the sections above; the sign of the cosine derivative is the one the sine and cosine section warns against. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Applying the power rule to a constant**
+
+A constant written as a power, such as $e^3$, $\\pi^2$ or $5^4$, is differentiated as if its base were the variable.
+
+Wrong working: $\\frac{d}{dx}[e^3] = 3e^2$, by the power rule.
+
+Right working: $e^3 \\approx 20.09$ is a fixed number; nothing in it depends on $x$. By the constant rule, $\\frac{d}{dx}[e^3] = 0$.
+
+Why it happens: the expression has the shape "something to a power", and the power rule is matched by shape. The rule is about $x^n$, where the base is the variable and the exponent is fixed.
+
+How to check: look for $x$. If the expression contains no $x$, its graph is a horizontal line and the derivative is $0$.
+
+**Lowering a negative exponent toward zero**
+
+With a negative exponent, $1$ is added to it instead of subtracted, so the new exponent moves toward zero.
+
+Wrong working: $\\frac{d}{dx}[x^{-3}] = -3x^{-3 + 1} = -3x^{-2}$. At $x = 2$ this gives $-\\frac{3}{4} = -0.75$.
+
+Right working: the rule gives $n - 1$, and $-3 - 1 = -4$. So $\\frac{d}{dx}[x^{-3}] = -3x^{-4}$, and at $x = 2$ this is $-\\frac{3}{16} = -0.1875$.
+
+Why it happens: for positive exponents, subtracting $1$ makes the exponent smaller in size, and that habit is carried over. For negative exponents, subtracting $1$ makes the exponent larger in size.
+
+How to check: compute a difference quotient. For $f(x) = x^{-3}$, $\\frac{f(2.001) - f(2)}{0.001} \\approx -0.1873$, close to $-0.1875$ and far from $-0.75$.
+
+**Dropping the minus sign on the cosine derivative**
+
+The derivative of $\\cos x$ is written as $\\sin x$, without the minus sign, by analogy with $\\frac{d}{dx}[\\sin x] = \\cos x$.
+
+Wrong working: $\\frac{d}{dx}[\\cos x] = \\sin x$, so the slope of $\\cos x$ at $x = \\frac{\\pi}{2}$ is $\\sin \\frac{\\pi}{2} = 1$.
+
+Right working: $\\frac{d}{dx}[\\cos x] = -\\sin x$, so the slope at $x = \\frac{\\pi}{2}$ is $-1$.
+
+Why it happens: the two formulas are learned as a pair, and the pair looks symmetric. It is not: going from sine to cosine keeps the sign, going from cosine to sine changes it.
+
+How to check: think of the graph. Between $0$ and $\\pi$ the cosine falls from $1$ to $-1$, so its slope there must be negative, and $-\\sin x$ is negative on that interval.
+
+**Using the power rule on an exponential**
+
+In $2^x$ the variable is the exponent, but the power rule is applied as if it were $x^n$: the exponent is brought down and lowered by one.
+
+Wrong working: $\\frac{d}{dx}[2^x] = x \\cdot 2^{x - 1}$. At $x = 0$ this gives $0$.
+
+Right working: the exponential rule applies. $\\frac{d}{dx}[2^x] = 2^x \\ln 2$, and at $x = 0$ this is $\\ln 2 \\approx 0.693$.
+
+Why it happens: $x^2$ and $2^x$ use the same symbols, and the power rule is the first rule learned, so it is applied by habit.
+
+How to check: compute a difference quotient at $x = 0$. $\\frac{2^{0.001} - 2^0}{0.001} \\approx 0.6934$, which is not $0$. An exponential with a base above $1$ is always increasing, so its slope cannot be $0$ anywhere.
+
+**Dropping the factor ln a**
+
+The derivative of $\\log_a x$ is written as $\\frac{1}{x}$, the formula for the natural logarithm, for every base.
+
+Wrong working: $\\frac{d}{dx}[\\log_{10} x] = \\frac{1}{x}$, so the slope at $x = 1$ is $1$.
+
+Right working: $\\log_{10} x = \\frac{\\ln x}{\\ln 10}$, so $\\frac{d}{dx}[\\log_{10} x] = \\frac{1}{x \\ln 10}$. At $x = 1$ this is $\\frac{1}{\\ln 10} \\approx 0.434$.
+
+Why it happens: $\\frac{1}{x}$ is the logarithm derivative used most often, and the base is easy to overlook.
+
+How to check: compute a difference quotient at $x = 1$. $\\frac{\\log_{10} 1.001 - \\log_{10} 1}{0.001} \\approx 0.4341$, close to $0.434$ and not $1$. Only for base $e$, where $\\ln e = 1$, is the derivative exactly $\\frac{1}{x}$.
 `,
     before: ``,
     after: ``,
@@ -758,8 +845,45 @@ const schemas = {
     }),
   };
 
+  const commonDerivativesOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Twelve derivatives in five families',
+    preface: 'Every derivative on this page belongs to one of five families. Learn the family and the members follow.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The building blocks',
+    conclusion: 'These twelve are the starting points; the [derivative rules](!/calculus/derivatives/rules) combine them into the derivative of almost any function.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Common derivatives', children: [
+        { id: 'c', name: 'Constant', children: [
+          { id: 'c1', name: 'c', example: '0' },
+        ] },
+        { id: 'p', name: 'Power', children: [
+          { id: 'p1', name: 'xⁿ', def: 'n ∈ ℝ', example: 'n · xⁿ⁻¹' },
+        ] },
+        { id: 't', name: 'Trigonometric', children: [
+          { id: 't1', name: 'sin x', example: 'cos x' },
+          { id: 't2', name: 'cos x', example: '−sin x' },
+          { id: 't3', name: 'tan x', example: 'sec² x' },
+          { id: 't4', name: 'cot x', example: '−csc² x' },
+          { id: 't5', name: 'sec x', example: 'sec x · tan x' },
+          { id: 't6', name: 'csc x', example: '−csc x · cot x' },
+        ] },
+        { id: 'e', name: 'Exponential', children: [
+          { id: 'e1', name: 'eˣ', example: 'eˣ' },
+          { id: 'e2', name: 'aˣ', def: 'a > 0, a ≠ 1', example: 'aˣ · ln a' },
+        ] },
+        { id: 'l', name: 'Logarithmic', children: [
+          { id: 'l1', name: 'ln x', def: 'x > 0', example: '1 / x' },
+          { id: 'l2', name: 'logₐ x', def: 'a > 0, a ≠ 1', example: '1 / (x · ln a)' },
+        ] },
+      ] },
+    ],
+  };
+
   return {
   props: {
+    commonDerivativesOutline,
     demoUnits,
     sectionsContent,
     introContent,
@@ -779,7 +903,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({commonDerivativesOutline, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -860,6 +984,22 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj8.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="common-derivatives-outline"
+            title="Common derivatives by family"
+            source="/calculus/derivatives/common"
+          >
+            <TaxonomyOutline data={commonDerivativesOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

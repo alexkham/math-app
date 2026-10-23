@@ -973,7 +973,7 @@ const combinationProperties = {
       statement: '$\\dim \\mathcal{L}(V, W) = \\dim(V) \\cdot \\dim(W)$',
       verdict: 'conditional',
       holdsWhen: 'both $V$ and $W$ finite-dimensional',
-      note: 'Closure under sum and scalar multiple makes $\\mathcal{L}(V, W)$ a [vector space](!/linear-algebra/vector-spaces/axioms) whose elements happen to be functions. Its dimension is the product of the two, which is the same count as the entries of an $m \\times n$ matrix \u2014 the [matrix representation](!/linear-algebra/transformations/matrix-representation) is a basis for it.',
+      note: 'Closure under sum and scalar multiple makes $\\mathcal{L}(V, W)$ a [vector space](!/linear-algebra/vector-spaces/axioms) whose elements happen to be functions. Its dimension is the product of the two, which is the same count as the entries of an $m \\times n$ matrix \u2014 the [matrix representation](!/linear-algebra/transformations/matrix-representation) identifies it with the space of $m \\times n$ matrices.',
     },
     {
       name: 'The zero vector is fixed',
@@ -1257,7 +1257,13 @@ $$= (c(2u_1 - u_2) + d(2v_1 - v_2), \\; c(u_1 + 3u_3) + d(v_1 + 3v_3))$$]@
 @academic[formula_callout:Proving Linearity
 $$= c(2u_1 - u_2, \\; u_1 + 3u_3) + d(2v_1 - v_2, \\; v_1 + 3v_3) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$]@
 
-Linearity holds. The key observation is that every component of $T$ is a linear expression in the input coordinates — no products, powers, or constant terms appear.`,
+@academic[pitfall,aside:true,width:35%:Proving linearity with numbers
+Testing $T(x, y) = xy$ on the pair $(1, 0)$, $(2, 0)$ gives $T(3, 0) = 0 = T(1, 0) + T(2, 0)$, which looks like additivity. The pair $(1, 0)$, $(0, 1)$ gives $T(1, 1) = 1 \\neq 0$, so $T$ is not linear.
+[Read more](!#9)]@
+
+Linearity holds. The key observation is that every component of $T$ is a linear expression in the input coordinates — no products, powers, or constant terms appear.
+
+Every line of the computation holds for all choices of $\\mathbf{u}$, $\\mathbf{v}$, $c$ and $d$ at once, because the letters stand for arbitrary values and nothing was assumed about them. That generality is what turns the calculation into a proof: one chain of equalities covers infinitely many cases.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1271,6 +1277,10 @@ The fastest first check is $T(\\mathbf{0}) = \\mathbf{0}$. Every linear transfor
 If $T(\\mathbf{0}) = \\mathbf{0}$ passes, test additivity or homogeneity with specific inputs. For $T(x, y) = (x^2, y)$: $T(1, 0) + T(1, 0) = (1, 0) + (1, 0) = (2, 0)$, but $T((1, 0) + (1, 0)) = T(2, 0) = (4, 0) \\neq (2, 0)$. One failure is enough.
 
 For $T(x) = x + 1$: $T(0) = 1 \\neq 0$. Done — no need to check anything else.
+
+@academic[pitfall,aside:true,width:35%:Calling every straight line linear
+Treating $T(x) = 2x + 3$ as linear because its graph is a line fails additivity: $T(1) + T(1) = 10$, while $T(1 + 1) = T(2) = 7$. Only lines through the origin, $T(x) = mx$, are linear maps.
+[Read more](!#9)]@
 
 Products of unknowns, powers higher than $1$, absolute values, square roots, and constant terms all break linearity. If the formula for $T$ involves any of these, the function is almost certainly not linear (and a counterexample is usually easy to construct).`,
     before: ``,
@@ -1321,6 +1331,10 @@ The first equality applies $T$'s linearity inside $S$; the second applies $S$'s 
 
 Composition is associative: $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. It is not commutative: $S \\circ T$ and $T \\circ S$ are generally different (and may not even have compatible domains).
 
+@academic[pitfall,aside:true,width:35%:Multiplying in the order of application
+Writing $[T][S]$ because $T$ acts first fails for $T$ the projection $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $S$ the quarter-turn $\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$: $[T][S]\\mathbf{e}_1 = (0, 0)$, but $S(T(\\mathbf{e}_1)) = S(1, 0) = (0, 1)$. The matrix is $[S][T] = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$.
+[Read more](!#9)]@
+
 When both transformations are represented by [matrices](!/linear-algebra/transformations/matrix-representation), composition corresponds to matrix multiplication: the matrix of $S \\circ T$ is the product of the matrix of $S$ with the matrix of $T$. This is the fundamental reason matrix multiplication is defined as it is — it encodes the composition of the maps the matrices represent.`,
     before: ``,
     after: ``,
@@ -1333,6 +1347,10 @@ When both transformations are represented by [matrices](!/linear-algebra/transfo
 The inverse, when it exists, is itself linear. If $T^{-1}(\\mathbf{w}_1) = \\mathbf{v}_1$ and $T^{-1}(\\mathbf{w}_2) = \\mathbf{v}_2$, then $T(c\\mathbf{v}_1 + d\\mathbf{v}_2) = cT(\\mathbf{v}_1) + dT(\\mathbf{v}_2) = c\\mathbf{w}_1 + d\\mathbf{w}_2$, so $T^{-1}(c\\mathbf{w}_1 + d\\mathbf{w}_2) = c\\mathbf{v}_1 + d\\mathbf{v}_2 = cT^{-1}(\\mathbf{w}_1) + dT^{-1}(\\mathbf{w}_2)$.
 
 @academic[rule_theorem_plain:$T$ is invertible if and only if it is bijective: injective (trivial [kernel](!/linear-algebra/transformations/image-kernel)) and surjective (image equals $W$).]@
+
+@academic[pitfall,aside:true,width:35%:Stopping at a trivial kernel
+Calling $T(x, y) = (x, y, 0)$ from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ invertible because its kernel is $\\{\\mathbf{0}\\}$ skips surjectivity: no $\\mathbf{v}$ has $T(\\mathbf{v}) = (0, 0, 1)$. Since $2 \\neq 3$, no linear map $\\mathbb{R}^2 \\to \\mathbb{R}^3$ is invertible.
+[Read more](!#9)]@
 
 When $\\dim(V) = \\dim(W)$, these two conditions are equivalent — checking either one establishes both. For [matrix](!/linear-algebra/matrix) transformations, invertibility of $T$ corresponds to [invertibility](!/linear-algebra/matrix/inverse) of the matrix $A$.
 
@@ -1360,14 +1378,54 @@ These operations give the set of all linear transformations from $V$ to $W$ the 
 
 The condition $T(\\mathbf{0}) = \\mathbf{0}$ is necessary but not sufficient. Passing it eliminates many non-examples quickly, but a function with $T(\\mathbf{0}) = \\mathbf{0}$ can still fail additivity or homogeneity. The function $T(x) = x|x|$ satisfies $T(0) = 0$ but is not linear.
 
-A component-by-component check works for maps defined by explicit formulas. If $T(x_1, \\dots, x_n) = (f_1(\\mathbf{x}), \\dots, f_m(\\mathbf{x}))$, then $T$ is linear if and only if each component function $f_i$ is a linear expression in $x_1, \\dots, x_n$ — meaning $f_i = a_{i1}x_1 + a_{i2}x_2 + \\cdots + a_{in}x_n$ with no constant term. Any constant, product, power, or nonlinear function appearing in any component disqualifies the entire map.`,
+A component-by-component check works for maps defined by explicit formulas. If $T(x_1, \\dots, x_n) = (f_1(\\mathbf{x}), \\dots, f_m(\\mathbf{x}))$, then $T$ is linear if and only if each component function $f_i$ is a linear expression in $x_1, \\dots, x_n$ — meaning $f_i = a_{i1}x_1 + a_{i2}x_2 + \\cdots + a_{in}x_n$ with no constant term. Any constant, product, power, or nonlinear function appearing in any component disqualifies the entire map.
+
+**Calling every straight line linear**
+
+A function whose graph is a straight line, such as $T(x) = 2x + 3$, is called linear, because in school algebra a "linear function" means exactly that. For a linear map the word is narrower: the line must pass through the origin.
+
+Wrong working: $T(x) = 2x + 3$ has a constant rate of change, so it is taken to be linear, and $T(1 + 1)$ is computed as $T(1) + T(1) = 5 + 5 = 10$.
+
+Right working: directly, $T(1 + 1) = T(2) = 2 \\cdot 2 + 3 = 7 \\neq 10$, so additivity fails and $T$ is not linear. The map $x \\mapsto 2x$ without the constant passes: $2(1 + 1) = 4 = 2 + 2$.
+
+Why it happens: the same word has two meanings. In algebra and calculus, "linear" means first degree, and any constant term is allowed. In linear algebra a constant term is a translation, and translations are not linear.
+
+How to check: evaluate at zero. A linear map must give $T(0) = 0$, while here $T(0) = 3$.
+
+**Multiplying in the order of application**
+
+In $S \\circ T$ the map $T$ acts first, so its matrix is written first, and the matrix of the composition is taken to be $[T][S]$ instead of $[S][T]$.
+
+Wrong working: let $T$ be the projection onto the first axis and $S$ the quarter-turn,
+$$[T] = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}, \\qquad [S] = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}, \\qquad [T][S] = \\begin{pmatrix} 0 & -1 \\\\ 0 & 0 \\end{pmatrix}$$
+which sends $\\mathbf{e}_1$ to $(0, 0)$.
+
+Right working: the matrix that acts first stands on the right.
+$$[S][T] = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$$
+Directly, $S(T(\\mathbf{e}_1)) = S(1, 0) = (0, 1)$ and $S(T(\\mathbf{e}_2)) = S(0, 0) = (0, 0)$, which are exactly the columns of $[S][T]$.
+
+Why it happens: the maps are described in the order they act, first $T$ and then $S$, and the matrices are written down in that same reading order. But a matrix product acts on a vector from the right, so the factor next to $\\mathbf{x}$ acts first.
+
+How to check: apply the product to $\\mathbf{e}_1$ and compare it with $S(T(\\mathbf{e}_1))$ computed one map at a time. Here $[T][S]\\mathbf{e}_1 = (0, 0)$ does not match $(0, 1)$.
+
+**Stopping at a trivial kernel**
+
+Injectivity is checked, the kernel turns out to be $\\{\\mathbf{0}\\}$, and $T$ is declared invertible. The shortcut is used even though $V$ and $W$ have different dimensions, so surjectivity is never checked.
+
+Wrong working: for $T: \\mathbb{R}^2 \\to \\mathbb{R}^3$, $T(x, y) = (x, y, 0)$, the equation $T(x, y) = \\mathbf{0}$ forces $x = y = 0$. The kernel is trivial, so $T$ is called invertible.
+
+Right working: the image of $T$ is the plane of vectors with third entry $0$, so $(0, 0, 1)$ is not $T(\\mathbf{v})$ for any $\\mathbf{v}$. $T$ is injective but not surjective, hence not invertible. By rank–nullity, $\\dim \\operatorname{im}(T) = 2 - 0 = 2 < 3$, and no linear map from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ can reach all of $\\mathbb{R}^3$.
+
+Why it happens: "either condition is enough" is true only when $\\dim(V) = \\dim(W)$, and the condition on the dimensions is easy to forget once the shortcut is familiar.
+
+How to check: compare the dimensions first. If $\\dim(V) \\neq \\dim(W)$, $T$ is not invertible; if they are equal, either the kernel test or the image test settles it.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj10: {
     title: `Summary: How Linear Maps Combine`,
-    content: `The four consequences-cluster sections above isolate distinct ways that linearity propagates through operations on the transformations themselves. The table below collects them in one place: composition produces another linear map, inversion preserves linearity, and the pointwise sum and scalar multiple of linear maps are themselves linear — giving the full set of all linear transformations from V to W the structure of a vector space in its own right.`,
+    content: `The four sections above on consequences of linearity isolate distinct ways that linearity propagates through operations on the transformations themselves. The table below collects them in one place: composition produces another linear map, inversion preserves linearity, and the pointwise sum and scalar multiple of linear maps are themselves linear — giving the full set of all linear transformations from V to W the structure of a vector space in its own right.`,
     before: ``,
     after: ``,
     link: ``,

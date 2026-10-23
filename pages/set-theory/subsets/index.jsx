@@ -1051,6 +1051,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1367,12 +1368,39 @@ const keyWords = [
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1) — template G, exclusion. Running instance:
+// B = {1, 2, 3, 4, 5} and candidate sets tested against it. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its two formula boxes, the example and
+// the two facts with their explanation, and the subset demo frame with its
+// line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCandidatesTable = ciTableOpen(['candidate', 'its elements']) +
+  ciRow(['C₁', '{2, 4}']) +
+  ciRow(['C₂', '{2, 6}'], { shade: true }) +
+  ciRow(['C₃', '{0, 1}']) +
+  ciRow(['C₄', '{1, 2, 3, 4, 5}'], { shade: true }) +
+  ciRow(['C₅', '∅ (no elements)'], { last: true }) +
+  '</tbody></table>'
+const ciSortTable = ciTableOpen(['candidate', 'element by element: in B?', 'every element in B?']) +
+  ciRow(['{2, 4}', '2 ✓  4 ✓', 'yes'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['{2, 6}', '2 ✓  6 ✗', 'no — 6 is missing'], { shade: true, color: '#a4243b', cols: [2] }) +
+  ciRow(['{0, 1}', '0 ✗  1 ✓', 'no — 0 is missing'], { color: '#a4243b', cols: [2] }) +
+  ciRow(['{1, 2, 3, 4, 5}', 'all five ✓', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['∅', 'nothing to check', 'yes'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj0: {
     title: `Key Terms`,
     content: `
 - [Subset](!/set-theory/definitions#subset) — a set whose elements all belong to another set
-- [Proper Subset](!/set-theory/definitions#proper_subset) — a subset strictly smaller than its containing set
+- [Proper Subset](!/set-theory/definitions#proper_subset) — a subset that is not equal to its containing set
 - [Superset](!/set-theory/definitions#superset) — the inverse of the subset relation
 - [Power Set](!/set-theory/definitions#power_set) — the collection of all subsets of a given set
 - [Empty Set](!/set-theory/definitions#empty_set) — subset of every set by vacuous truth
@@ -1459,6 +1487,12 @@ The standard number sets provide a natural example of superset chains:
 $$\\mathbb{C} \\supset \\mathbb{R} \\supset \\mathbb{Q} \\supset \\mathbb{Z} \\supset \\mathbb{N}$$]@
 
 Each set properly contains the one to its right: the [complex numbers](!/complex-numbers) contain the reals, which contain the rationals, and so on.
+
+@academic[pitfall,aside:true,width:35%:Reading the superset sign backwards
+Writing $\\{1, 2\\} \\supseteq \\{1, 2, 3\\}$ claims that every element of $\\{1, 2, 3\\}$ lies in $\\{1, 2\\}$, which fails at $3$. The open side faces the larger set: $\\{1, 2, 3\\} \\supseteq \\{1, 2\\}$.
+[Read more](!#pitfalls)]@
+
+Each link in the chain passes the subset test from the first section. Every natural number is an integer, every integer $n$ equals the fraction $\\frac{n}{1}$, and every fraction is a real number, so each set lies inside the set to its left. Each link is proper because the larger set has elements the smaller one lacks: $-1 \\in \\mathbb{Z}$ but $-1 \\notin \\mathbb{N}$, and $\\frac{1}{2} \\in \\mathbb{Q}$ but $\\frac{1}{2} \\notin \\mathbb{Z}$.
     `,
     before: ``,
     after: ``,
@@ -1535,6 +1569,75 @@ This is not the empty set — it is a set containing one element (the empty set)
 
 The power set transforms subset relationships into membership relationships: $B \\subseteq A$ if and only if $B \\in \\mathcal{P}(A)$.
     `,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes come up again and again with subsets and power sets. The first four are marked where they happen in the sections above; the fifth, the power set of the empty set, is the case the Power Set section singles out. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Confusing membership with containment**
+
+The symbol $\\in$ links an element to a set, and $\\subseteq$ links two sets. The two are swapped: an element is written on the left of $\\subseteq$, or a set is written on the left of $\\in$ as if it were one of the elements.
+
+Wrong working: with $B = \\{1, 2, 3, 4, 5\\}$, the fact that $2$ is in $B$ is written as $2 \\subseteq B$, and the fact that the set $\\{2\\}$ lies inside $B$ is written as $\\{2\\} \\in B$. The second statement is false: the elements of $B$ are the numbers $1$ to $5$, and none of them is the set $\\{2\\}$.
+
+Right working: the number $2$ is an element, so $2 \\in B$. The set $\\{2\\}$ has one element, $2$, and it belongs to $B$, so $\\{2\\} \\subseteq B$.
+
+Why it happens: both symbols are read as "is in" in everyday speech, and a one-element set such as $\\{2\\}$ looks almost the same as the element $2$.
+
+How to check: list the elements of the set on the right. A statement with $\\in$ is true only if the left side appears in that list; a statement with $\\subseteq$ is true only if every element of the left side does. For $C = \\{1, \\{2\\}\\}$ the two tests give different answers: $\\{2\\} \\in C$ is true, while $\\{2\\} \\subseteq C$ is false because $2 \\notin C$.
+
+**Reading the superset sign backwards**
+
+The superset sign $\\supseteq$ is read as "is contained in", so the smaller set is written on its open side. The statement then claims the opposite containment.
+
+Wrong working: $\\{1, 2\\} \\supseteq \\{1, 2, 3\\}$ is written to say that $\\{1, 2\\}$ lies inside $\\{1, 2, 3\\}$. In the same way, $\\mathbb{N} \\supseteq \\mathbb{Z}$ is written for "the natural numbers are among the integers". Both are false: $3 \\notin \\{1, 2\\}$, and $-1 \\in \\mathbb{Z}$ but $-1 \\notin \\mathbb{N}$.
+
+Right working: the open side faces the larger set, so $\\{1, 2, 3\\} \\supseteq \\{1, 2\\}$ and $\\mathbb{Z} \\supseteq \\mathbb{N}$. These say the same as $\\{1, 2\\} \\subseteq \\{1, 2, 3\\}$ and $\\mathbb{N} \\subseteq \\mathbb{Z}$.
+
+Why it happens: $\\subseteq$ and $\\supseteq$ are mirror images, and the readings "contains" and "is contained in" differ only by a few words.
+
+How to check: rewrite $X \\supseteq Y$ as $Y \\subseteq X$ and test each element of $Y$ against $X$. Like the inequality sign in $3 > 2$, the open side of the sign faces the larger side.
+
+**Removing the empty set from the proper count**
+
+A proper subset is taken to mean a subset that is neither empty nor the whole set, so two subsets are removed from $2^n$ instead of one.
+
+Wrong working: $\\{a, b, c\\}$ has $2^3 = 8$ subsets; removing $\\emptyset$ and $\\{a, b, c\\}$ gives $8 - 2 = 6$ proper subsets.
+
+Right working: a proper subset only has to differ from the set. Since $\\emptyset \\subseteq \\{a, b, c\\}$ and $\\emptyset \\neq \\{a, b, c\\}$, the empty set is proper, and only $\\{a, b, c\\}$ itself is removed. The proper subsets are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\}$, $\\{a, b\\}$, $\\{a, c\\}$ and $\\{b, c\\}$, which makes $2^3 - 1 = 7$.
+
+Why it happens: the empty set feels like no subset at all, so it is set aside together with the set itself.
+
+How to check: try a one-element set $\\{x\\}$. Its subsets are $\\emptyset$ and $\\{x\\}$, and $\\emptyset \\subset \\{x\\}$, so it has exactly one proper subset. The formula $2^1 - 1 = 1$ agrees; $2^1 - 2 = 0$ does not.
+
+**Leaving the braces off the singletons**
+
+When a power set is written out, the elements of the original set are listed in place of its one-element subsets.
+
+Wrong working: $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, 1, 2, \\{1, 2\\}\\}$.
+
+Right working: every element of $\\mathcal{P}(\\{1, 2\\})$ is a subset of $\\{1, 2\\}$. The subsets with one element are $\\{1\\}$ and $\\{2\\}$, so $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$.
+
+Why it happens: the outer braces of the power set seem to be enough, and $1$ and $\\{1\\}$ look almost alike.
+
+How to check: for each entry $S$ in the list, ask whether $S \\subseteq A$ makes sense and is true; that is exactly the condition for $S \\in \\mathcal{P}(A)$. Apart from $\\emptyset$, every entry of a written-out power set starts with its own brace.
+
+**Taking the power set of the empty set to be empty**
+
+The empty set has no elements, so its power set is taken to have none either.
+
+Wrong working: $\\mathcal{P}(\\emptyset) = \\emptyset$, so $|\\mathcal{P}(\\emptyset)| = 0$.
+
+Right working: $\\emptyset \\subseteq \\emptyset$, so the empty set is a subset of itself and therefore an element of its power set: $\\mathcal{P}(\\emptyset) = \\{\\emptyset\\}$, with $|\\mathcal{P}(\\emptyset)| = 1$.
+
+Why it happens: $\\{\\emptyset\\}$ and $\\emptyset$ look alike, and "nothing in, nothing out" sounds reasonable.
+
+How to check: use the count $|\\mathcal{P}(A)| = 2^{|A|}$. With $|A| = 0$ it gives $2^0 = 1$, not $0$. A power set is never empty, since $\\emptyset$ is always one of its elements.
+`,
     before: ``,
     after: ``,
     link: '',
@@ -1708,6 +1811,11 @@ const schemas = {
     svgTitle: 'One in-or-out choice per element builds every subset: 2 \u00d7 2 \u00d7 2 = 8',
   };
 
+  const conceptIntroFigures = {
+    candidatesTable: ciCandidatesTable,
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     subset: demoUnitFrame({
       svg: twoSetsVennDiagrams.subsetAinB,
@@ -1739,6 +1847,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Subsets and Power Sets: Notation, Counting & Examples | Learn Math Class",
       description: "Learn about subsets, proper subsets, supersets, and power sets. Understand subset notation, count subsets with 2ⁿ, and explore the power set concept.",
@@ -1751,9 +1860,88 @@ const schemas = {
    }
 
 
-export default function SubsetsPage({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function SubsetsPage({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Five sets, compared with B = {1, 2, 3, 4, 5}: which of them sit inside B?`,
+        content: [
+          `Some look obviously inside $B$, some obviously not, and two are odd cases — one is $B$ itself and one has no elements at all. Before naming the relationship, list them.`,
+          ciTable('candidatesTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Checked element by element, three pass and two fail.`,
+        content: [
+          `Take each candidate and ask, for each of its elements, whether it belongs to $B$.`,
+          ciTable('sortTable'),
+          `$\\{2, 4\\}$, $B$ itself and $\\emptyset$ pass; $\\{2, 6\\}$ and $\\{0, 1\\}$ fail.`,
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `A candidate fails at one element, and the surprising passes fail nowhere.`,
+        content: [
+          `Consider $A = \\{2, 4\\}$ and $B = \\{1, 2, 3, 4, 5\\}$. Since both $2$ and $4$ appear in $B$, we have $A \\subseteq B$. However, $\\{2, 6\\} \\not\\subseteq B$ because $6 \\notin B$ — a single missing element breaks the subset relationship. The same goes for $\\{0, 1\\}$: having $1$ in common with $B$ does not help, because $0$ is missing. The two passes that look odd are the near-misses worth understanding:`,
+          `- Every set is a subset of itself: $A \\subseteq A$ for any set $A$
+
+- The empty set is a subset of every set: $\\emptyset \\subseteq A$ for any set $A$`,
+          `The first fact is immediate since every element of $A$ trivially belongs to $A$. The second follows because the empty set contains no elements, so there is no element that could fail to belong to $A$.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: every element of the candidate must also be an element of B.`,
+        content: [
+          `Not most elements, not the important ones — every one. A single element outside $B$ is enough to fail, and a set with no elements has nothing that could fail. Drawn as circles, passing means one circle lies entirely inside the other.`,
+          <div key={'unit-subset'} dangerouslySetInnerHTML={{ __html: demoUnits.subset }} />,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A set $A$ is a [subset](!/set-theory/definitions#subset) of a set $B$ if every element of $A$ is also an element of $B$. This relationship is written:`,
+        formula: [
+          `@academic[formula_callout:Subsets
+$$A \\subseteq B$$]@`,
+          `@academic[formula_callout:Subsets
+$$A \\subseteq B \\iff \\forall x\\,(x \\in A \\Rightarrow x \\in B)$$]@`,
+        ],
+        footer: `So $\\{2, 4\\} \\subseteq B$, $B \\subseteq B$ and $\\emptyset \\subseteq B$, while $\\{2, 6\\} \\not\\subseteq B$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Being a subset is a relation between two sets: a statement that is true or false.`,
+        content: `@academic[pitfall,aside:true,width:35%:Confusing membership with containment
+Writing $2 \\subseteq B$ puts a number where a set must stand, and $\\{2\\} \\in B$ is false, since no element of $B = \\{1, 2, 3, 4, 5\\}$ is a set. The element claim is $2 \\in B$; the set claim is $\\{2\\} \\subseteq B$.
+[Read more](!#pitfalls)]@
+
+$A \\subseteq B$ is not a new set and not a number; it is a claim about two given sets, and it is either true or false. Order matters: $\\{2, 4\\} \\subseteq B$ is true, but $B \\subseteq \\{2, 4\\}$ is false.
+
+The claim is checked the way the candidates above were: take the set on the left and test each of its elements against the set on the right. With $B = \\{1, 2, 3, 4, 5\\}$, the claims $\\{1, 3\\} \\subseteq B$ and $\\{5\\} \\subseteq B$ pass this test, while $\\{5, 6\\} \\subseteq B$ fails at $6$.`,
+      },
+      {
+        id: 'caveat',
+        lead: `A rejected candidate usually contains a subset that passes.`,
+        content: `$\\{2, 6\\}$ is not a subset of $B$, but drop the offending $6$ and what is left, $\\{2\\}$, is. In general, the part of any set that lies inside $B$ — its [intersection](!/set-theory/operations) with $B$ — is always a subset of $B$. Failing is never a verdict on the whole set, only on the elements that stray outside.`,
+      },
+      {
+        id: 'exit',
+        content: [
+          `Containment is the relation the rest of this page builds on — proper subsets sharpen it, supersets reverse it, and the power set collects every way it can happen.`,
+        ],
+      },
+    ],
+  }
     
   const genericSections=[
     {
@@ -1769,9 +1957,7 @@ export default function SubsetsPage({seoData, sectionsContent, introContent, obj
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-subset'} dangerouslySetInnerHTML={{ __html: demoUnits.subset }} />,
-          `Containment is the relation the rest of this page builds on — proper subsets sharpen it, supersets reverse it, and the power set collects every way it can happen.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1805,6 +1991,11 @@ export default function SubsetsPage({seoData, sectionsContent, introContent, obj
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+          `@academic[pitfall,aside:true,width:35%:Removing the empty set from the proper count
+Removing $\\emptyset$ as well as the set itself gives $2^3 - 2 = 6$ proper subsets of $\\{a, b, c\\}$. Since $\\emptyset \\subseteq \\{a, b, c\\}$ and $\\emptyset \\neq \\{a, b, c\\}$, the empty set is proper, and the count is $2^3 - 1 = 7$.
+[Read more](!#pitfalls)]@
+
+The two columns of the table differ by exactly $1$ in every row, because a set has only one subset that is equal to it: the set itself. The first row follows the same pattern. The empty set has a single subset, $\\emptyset$, and that subset is the set itself, so the empty set has $2^0 - 1 = 0$ proper subsets. Further down, the gap stays at $1$ while the counts double, from $32$ and $31$ at $n = 5$ to $1024$ and $1023$ at $n = 10$.`,
         ]
     },
     {
@@ -1815,6 +2006,19 @@ export default function SubsetsPage({seoData, sectionsContent, introContent, obj
           sectionsContent.obj5.content,
           <div key={'unit-powerSet'} dangerouslySetInnerHTML={{ __html: demoUnits.powerSet }} />,
           `Every node in that diagram is a subset of $A$ and an element of $\\mathcal{P}(A)$ at once — the power set turns containment into membership.`,
+          `@academic[pitfall,aside:true,width:35%:Leaving the braces off the singletons
+Writing $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, 1, 2, \\{1, 2\\}\\}$ lists the elements $1$ and $2$, which are not subsets of $\\{1, 2\\}$. Every element of a power set is a set: $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$.
+[Read more](!#pitfalls)]@
+
+The eight subsets in the diagram are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\}$, $\\{a, b\\}$, $\\{a, c\\}$, $\\{b, c\\}$ and $\\{a, b, c\\}$. Written between one outer pair of braces, these eight sets make up $\\mathcal{P}(\\{a, b, c\\})$, so the power set has $8$ elements even though $\\{a, b, c\\}$ itself has only $3$. Each of the letters $a$, $b$ and $c$ appears in four of the eight subsets, one for every choice made about the other two letters.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
 

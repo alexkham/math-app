@@ -987,6 +987,12 @@ Each inequality has its own page with assumptions, statements, and typical uses.
 • Uses expectation only
 • Provides very general, often loose bounds
 
+@academic[pitfall,aside:true,width:35%:Using Markov on a variable that can be negative
+Applying Markov to $X = \\pm 10$ with equal chances, where $E[X] = 0$, gives $P(X \\geq 5) \\leq \\frac{0}{5} = 0$. In fact $P(X \\geq 5) = \\frac{1}{2}$; the bound holds only for $X \\geq 0$.
+[Read more](!#pitfalls)]@
+
+In symbols, Markov's inequality states that $P(X \\geq a) \\leq \\frac{E[X]}{a}$ for every threshold $a > 0$. The only inputs are the mean and the threshold, so the bound can be written down as soon as $E[X]$ is known. A mean of $2$, for example, gives $P(X \\geq 10) \\leq \\frac{2}{10} = 0.2$ for any variable that meets the condition in the first bullet above.
+
 
 
 **Chebyshev's Inequality**
@@ -1044,6 +1050,10 @@ Because they provide guarantees that hold under broad conditions, inequalities a
 Probability inequalities do not describe the full behavior of a random variable.
 
 They provide bounds that must hold, but they do not capture how probability is distributed within those bounds. As a result, the estimates they give may be conservative or loose.
+
+@academic[pitfall,aside:true,width:35%:Reading the bound as the probability
+Taking Markov's $P(X \\geq 4) \\leq \\frac{1}{4}$, for an exponential $X$ with mean $1$, as $P(X \\geq 4) \\approx 0.25$ overstates the chance about 14 times. The exact value is $e^{-4} \\approx 0.018$.
+[Read more](!#pitfalls)]@
 
 When the exact distribution of a random variable is known and manageable, working directly with that distribution is usually preferable. Inequalities become most valuable when such information is missing, incomplete, or too costly to compute.
 
@@ -1127,6 +1137,44 @@ As new inequalities are added, they are integrated into the same structure, allo
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Using Markov on a variable that can be negative**
+
+Markov's inequality is applied to a variable that takes negative values as well as positive ones. The mean is computed correctly and put into $\\frac{E[X]}{a}$, but the condition $X \\geq 0$ is never checked.
+
+Wrong working: let $X$ be $-10$ or $10$, each with probability $\\frac{1}{2}$.
+$$E[X] = (-10) \\cdot \\frac{1}{2} + 10 \\cdot \\frac{1}{2} = 0$$
+$$P(X \\geq 5) \\leq \\frac{E[X]}{5} = \\frac{0}{5} = 0$$
+
+Right working: $X$ can be negative, so Markov's inequality does not apply to it. Directly, $P(X \\geq 5) = P(X = 10) = \\frac{1}{2}$. A valid Markov bound comes from the shifted variable $X + 10$, which is never negative and has mean $10$:
+$$P(X \\geq 5) = P(X + 10 \\geq 15) \\leq \\frac{10}{15} = \\frac{2}{3}$$
+
+Why it happens: the formula uses only $E[X]$ and $a$, so nothing in it shows the condition. Negative values cancel positive ones in the mean, and a small mean then gives a bound that is too small.
+
+How to check: look at the smallest value $X$ can take before using the formula. A bound of $0$ for an event that clearly can happen, such as $X = 10$ here, is a sign that the condition was broken.
+
+**Reading the bound as the probability**
+
+The inequality gives an upper limit on a probability, and that limit is reported as the probability itself.
+
+Wrong working: $X$ is exponential with mean $1$. Markov's inequality gives
+$$P(X \\geq 4) \\leq \\frac{E[X]}{4} = \\frac{1}{4}$$
+and the answer is given as $P(X \\geq 4) \\approx 0.25$.
+
+Right working: the bound only says that the probability is at most $0.25$. The exponential distribution gives the exact value
+$$P(X \\geq 4) = e^{-4} \\approx 0.018$$
+which is about one time in $55$. Chebyshev's inequality, which also uses the variance $1$, gives $\\frac{1}{(4 - 1)^2} = \\frac{1}{9} \\approx 0.11$: closer, but still about six times too large.
+
+Why it happens: the bound is the only number the inequality produces, and it comes out of a formula just as an exact probability would. The sign $\\leq$ in front of it is easy to read past.
+
+How to check: the same bound holds for every non-negative variable with mean $1$. One of them is $X = 0$ with probability $\\frac{3}{4}$ and $X = 4$ with probability $\\frac{1}{4}$, where $P(X \\geq 4) = \\frac{1}{4}$ exactly; the exponential, with the same mean, has $0.018$. A number shared by such different variables cannot be the probability for each of them.`,
+      before:``,
+      after:``,
+      link:'',
     }
   
   }
@@ -1307,6 +1355,14 @@ export default function ProbabilityInequalitiesPage({
           sectionsContent.obj10.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

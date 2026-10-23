@@ -262,6 +262,10 @@ $$0^{-n} = \\frac{1}{0^n} = \\frac{1}{0}$$]@
 
 Division by zero is undefined. The expression $0^{-1}$, $0^{-2}$, $0^{-100}$ — none of them produce a real number.
 
+@academic[pitfall,aside:true,width:35%:Treating a negative power of zero as zero
+Carrying $0^n = 0$ over to a negative exponent gives $0^{-2} = 0$. But $0^{-2} = \\frac{1}{0^2} = \\frac{1}{0}$, so $0^{-2}$ is undefined and has no value at all.
+[Read more](!#pitfalls)]@
+
 The behavior of nearby bases hints at why. As the base $a$ approaches $0$ from above, $a^{-2} = \\frac{1}{a^2}$ grows without bound. The values $0.1^{-2} = 100$, $0.01^{-2} = 10{,}000$, $0.001^{-2} = 1{,}000{,}000$ — each step closer to zero sends the result further toward infinity.
 
 At $a = 0$ the growth is not just large — it is undefined. There is no finite number that $\\frac{1}{0^n}$ can equal. This is the first point in the exponent framework where zero as a base ceases to function, and it is the reason the [negative exponents](!/algebra/powers/negative-exponents) page requires $a \\neq 0$.`,
@@ -276,13 +280,23 @@ obj3: {
 
 The number $5^0 = 1$. The number $(-3)^0 = 1$. The number $(0.0001)^0 = 1$. The base is irrelevant — the answer is always $1$.
 
+@academic[pitfall,aside:true,width:35%:Reading a zero exponent as zero
+Reading $5^0$ as "five times zero" gives $5^0 = 0$, and reading it as "five left alone" gives $5^0 = 5$. The exponent counts factors of $5$, and zero factors leave $1$: $5^0 = 1$.
+[Read more](!#pitfalls)]@
+
 The quotient rule provides the algebraic proof. Dividing equal powers gives $\\frac{a^n}{a^n} = a^{n-n} = a^0$. But $\\frac{a^n}{a^n} = 1$ for any nonzero $a$. So $a^0 = 1$.
 
 A numerical pattern reaches the same conclusion from a different direction. List the descending powers of $3$: $3^3 = 27$, $3^2 = 9$, $3^1 = 3$. Each step divides by $3$. The next step in the sequence is $3 \\div 3 = 1$, so $3^0 = 1$. The same descent works for any base.
 
 A third argument frames it in terms of the empty product. The expression $a^n$ is the product of $n$ copies of $a$. When $n = 0$, there are no copies — an empty product. By convention, the product of no factors is the multiplicative identity, $1$, just as the sum of no terms is the additive identity, $0$.
 
-Three distinct arguments, one conclusion. The value $a^0 = 1$ is not arbitrary — it is the only value consistent with the [laws of exponents](!/algebra/powers/exponent-rules/).`,
+Three distinct arguments, one conclusion. The value $a^0 = 1$ is not arbitrary — it is the only value consistent with the [laws of exponents](!/algebra/powers/exponent-rules/).
+
+@academic[pitfall,aside:true,width:35%:Applying the zero exponent beyond its base
+Applying the exponent to the whole term gives $-3^0 = 1$ and $5x^0 = 1$. The exponent sits on $3$ and on $x$ only, so $-3^0 = -1$ and $5x^0 = 5$ for $x \\neq 0$.
+[Read more](!#pitfalls)]@
+
+In $(-3)^0$ the parentheses make the whole of $-3$ the base, so the exponent clearly applies to all of it. Written expressions do not always mark the base so plainly. A power can stand next to a coefficient, as in $5x^0$, or behind a minus sign, as in $-3^0$, and evaluating such a term starts with seeing which symbol the exponent is attached to.`,
   before: ``,
   after: ``,
   link: '',
@@ -437,6 +451,73 @@ The endpoint: [exponential functions](!/algebra/powers/exponential-functions) $f
       after:``,
       link:'',
   
+    },
+    obj16: {
+      title: `Common Pitfalls`,
+      content: `Four mistakes account for most wrong answers with zero in an exponent. The first three are marked where they happen in the sections above; the fourth belongs to the analysis section. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating a negative power of zero as zero**
+
+Zero raised to a positive power is zero, and the same answer is given when the exponent is negative.
+
+Wrong working:
+$$0^{-2} = 0 \\qquad \\text{(because zero to any power is zero)}$$
+
+Right working: a negative exponent takes the reciprocal first.
+$$0^{-2} = \\frac{1}{0^2} = \\frac{1}{0}$$
+Division by zero is undefined, so $0^{-2}$ has no value.
+
+Why it happens: the rule $0^n = 0$ is remembered as "zero to any power is zero", and its condition $n > 0$ is lost.
+
+How to check: rewrite the negative power as a reciprocal before evaluating it. If the denominator becomes $0$, the expression is undefined. Nearby bases point the same way: $0.1^{-2} = 100$ and $0.01^{-2} = 10{,}000$ grow as the base shrinks, instead of approaching $0$.
+
+**Reading a zero exponent as zero**
+
+The exponent $0$ is treated as a multiplier, or as a sign that the base is left unchanged.
+
+Wrong working:
+$$5^0 = 5 \\cdot 0 = 0 \\qquad \\text{or} \\qquad 5^0 = 5$$
+
+Right working: by the quotient rule,
+$$5^0 = 5^{2-2} = \\frac{5^2}{5^2} = \\frac{25}{25} = 1$$
+So $5^0 = 1$, and for example $7^0 + 3^0 = 1 + 1 = 2$.
+
+Why it happens: multiplying by $0$ gives $0$, and an exponent of $0$ looks as if it should do the same. The exponent counts factors of the base; zero factors give the empty product, $1$.
+
+How to check: continue the descending pattern. $5^2 = 25$ and $5^1 = 5$; dividing by $5$ once more gives $5^0 = 1$.
+
+**Applying the zero exponent beyond its base**
+
+The rule "anything to the zero is $1$" is applied to a whole term, including a coefficient or a minus sign that stand outside the base.
+
+Wrong working:
+$$-3^0 = 1 \\qquad 5x^0 = 1$$
+
+Right working: the exponent belongs only to the symbol it is attached to, and powers are evaluated before negation and multiplication.
+$$-3^0 = -(3^0) = -1 \\qquad 5x^0 = 5 \\cdot x^0 = 5 \\cdot 1 = 5 \\quad (x \\neq 0)$$
+With parentheses the result changes: $(-3)^0 = 1$ and $(5x)^0 = 1$ for $x \\neq 0$.
+
+Why it happens: the result $1$ is so simple that the whole term gets replaced by it, without first reading off which part is the base.
+
+How to check: substitute a value. With $x = 2$, $5x^0 = 5 \\cdot 2^0 = 5 \\cdot 1 = 5$, while $(5x)^0 = 10^0 = 1$. The two are different expressions.
+
+**Treating an indeterminate limit as 1**
+
+In calculus, a limit in which the base and the exponent both approach $0$ is evaluated by substituting and using the discrete convention $0^0 = 1$.
+
+Wrong working:
+$$\\lim_{x \\to 0^+} \\left(e^{-1/x}\\right)^x = 0^0 = 1$$
+
+Right working: for every $x > 0$ the expression simplifies before any limit is taken.
+$$\\left(e^{-1/x}\\right)^x = e^{-\\frac{1}{x} \\cdot x} = e^{-1}$$
+The expression is constant, so the limit is $e^{-1} \\approx 0.368$.
+
+Why it happens: $0^0 = 1$ is the standard value in algebra and combinatorics, and it is carried over into limits. In a limit the base and the exponent only approach $0$, and how fast each one gets there decides the result.
+
+How to check: evaluate the expression at a small $x$. At $x = 0.1$, $\\left(e^{-10}\\right)^{0.1} = e^{-1} \\approx 0.368$, far from $1$. By contrast, $x^x$ at $x = 0.01$ is about $0.955$, which does approach $1$.`,
+      before: ``,
+      after: ``,
+      link: '',
     }
   
   }
@@ -823,6 +904,14 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
 

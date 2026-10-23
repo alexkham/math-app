@@ -112,6 +112,10 @@ $$a_n = a_1 + (n - 1)d$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Counting n steps instead of n − 1
+Writing $a_n = a_1 + nd$ for $7, 3, -1, -5, \\ldots$ gives $a_4 = 7 + 4 \\cdot (-4) = -9$, but the fourth term is $-5$. Place $4$ is three steps from $a_1$: $a_4 = 7 + 3 \\cdot (-4) = -5$.
+[Read more](!#pitfalls)]@
+
 The common difference governs direction and spacing. When $d > 0$, the sequence increases; when $d < 0$, it decreases; when $d = 0$, every term is identical. The sequence $7, 3, -1, -5, \\ldots$ has $d = -4$, each term falling four units below the previous.
 
 Arithmetic sequences produce the simplest summation formula in all of mathematics. The sum of the first $n$ terms — the arithmetic series — is:
@@ -149,7 +153,13 @@ The sum of a finite geometric series has its own closed form:
 @academic[formula_callout:Geometric Sequences
 $$S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$$]@
 
-@academic[rule_plain:When $|r| < 1$, the terms shrink toward zero fast enough that the infinite series converges to $S = \\frac{a_1}{1 - r}$. When $|r| \\geq 1$, the terms do not diminish and the series diverges.]@`,
+@academic[rule_plain:When $|r| < 1$, the terms shrink toward zero fast enough that the infinite series converges to $S = \\frac{a_1}{1 - r}$. When $|r| \\geq 1$, the terms do not diminish and the series diverges.]@
+
+@academic[pitfall,aside:true,width:35%:Summing a series that diverges
+Applying $\\frac{a_1}{1 - r}$ to $3 + 12 + 48 + 192 + \\cdots$ gives $\\frac{3}{1 - 4} = -1$, a negative total for positive terms. With $r = 4$ the partial sums $3, 15, 63, 255, \\ldots$ grow without bound, so there is no sum.
+[Read more](!#pitfalls)]@
+
+The two sum formulas are built from the same two numbers, $a_1$ and $r$. The finite formula adds a fixed number of terms and holds for every ratio except $r = 1$. The infinite formula is the value that the partial sums $S_n$ settle on as $n$ grows, and it carries a condition on $r$ that the finite formula does not. Whether that condition holds is read from the ratio alone, before any sum is computed.`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Geometric Sequences](!/algebra/sequences/geometric) →@`,
@@ -257,6 +267,12 @@ Unlike every other sequence on this page, the primes follow no algebraic pattern
 
 Euclid proved that the primes are infinite: no finite list can contain them all. The argument assumes finitely many primes $p_1, p_2, \\ldots, p_k$, forms the product $N = p_1 p_2 \\cdots p_k + 1$, and observes that $N$ is not divisible by any prime on the list — so either $N$ itself is prime or it has a prime factor missing from the list.
 
+@academic[pitfall,aside:true,width:35%:Reading N as always prime
+Taking $N = p_1 p_2 \\cdots p_k + 1$ to be a new prime fails for the list $2, 3, 5, 7, 11, 13$: $N = 30031 = 59 \\cdot 509$. The proof only needs a prime factor of $N$ outside the list, here $59$ or $509$.
+[Read more](!#pitfalls)]@
+
+The construction works for any finite list of primes. For the list $2, 3, 5$ it gives $N = 31$, and for $2, 3, 5, 7$ it gives $N = 211$. In every case $N$ leaves remainder $1$ when divided by each prime on the list, so none of them can be a factor of $N$. That remainder is the only property of $N$ the argument uses.
+
 Although primes never run out, they do thin out.
 
 @academic[rule_theorem:Prime number theorem
@@ -268,6 +284,54 @@ The [prime numbers calculator](!/algebra/calculators/sequences/prime-numbers) li
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Prime Numbers](!/algebra/sequences/prime-numbers) →@`,
+    link: '',
+  },
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up often with the sequences on this page. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Counting n steps instead of n − 1**
+
+In the general term of an arithmetic sequence, $d$ is multiplied by the position $n$ instead of by $n - 1$, the number of steps from the first term.
+
+Wrong working: for $7, 3, -1, -5, \\ldots$ with $a_1 = 7$ and $d = -4$,
+$$a_4 = 7 + 4 \\cdot (-4) = -9$$
+
+Right working: from place $1$ to place $4$ there are $3$ steps.
+$$a_4 = 7 + (4 - 1) \\cdot (-4) = 7 - 12 = -5$$
+This matches the fourth term of the listed sequence.
+
+Why it happens: the formula is remembered as "first term plus $n$ times $d$", and the fact that $a_1$ already occupies the first place, before any $d$ is added, gets lost.
+
+How to check: put $n = 1$ into the formula; it must return $a_1$. The wrong version gives $7 + 1 \\cdot (-4) = 3$, which is the second term, while $7 + 0 \\cdot (-4) = 7$.
+
+**Summing a series that diverges**
+
+The infinite-sum formula $S = \\frac{a_1}{1 - r}$ is applied to a geometric series whose ratio has size $1$ or more.
+
+Wrong working: for $3 + 12 + 48 + 192 + \\cdots$ with $a_1 = 3$ and $r = 4$,
+$$S = \\frac{3}{1 - 4} = \\frac{3}{-3} = -1$$
+
+Right working: $|r| = 4 \\geq 1$, so the terms do not shrink. The partial sums are $3, 15, 63, 255, \\ldots$, and they grow without bound. The series diverges and has no sum.
+
+Why it happens: the formula needs only $a_1$ and $r$ and returns a number for every ratio except $r = 1$. The condition $|r| < 1$ is written beside it, not inside it, and is easy to leave behind.
+
+How to check: compare the answer with the first few partial sums. A series of positive terms cannot add up to a negative number: here every partial sum is positive and larger than the one before, so the sums cannot be approaching $-1$. Checking $|r| < 1$ first avoids the problem.
+
+**Reading N as always prime**
+
+In Euclid's proof, the number $N = p_1 p_2 \\cdots p_k + 1$ is taken to be a new prime, as if the construction always produced primes.
+
+Wrong working: the lists $2$, then $2, 3$, then $2, 3, 5$, then $2, 3, 5, 7$, then $2, 3, 5, 7, 11$ give $N = 3, 7, 31, 211, 2311$, all prime, so the next list should give a prime too:
+$$N = 2 \\cdot 3 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13 + 1 = 30031 \\text{ is prime}$$
+
+Right working: $30031 = 59 \\cdot 509$, so $N$ is not prime. Neither $59$ nor $509$ is on the list $2, 3, 5, 7, 11, 13$, so the list still misses a prime, which is all the proof claims.
+
+Why it happens: the first five cases are all prime, and the proof is often summarised as "multiply the primes and add one to get a new prime", which drops the second branch of the argument.
+
+How to check: the proof ends in two cases, "$N$ is prime" or "$N$ has a prime factor missing from the list". Either way a prime is missing, and the argument never needs to know which case holds. Dividing $30031$ by $59$ gives exactly $509$.`,
+    before: ``,
+    after: ``,
     link: '',
   },
 }
@@ -520,6 +584,14 @@ export default function SequencesPage({arithmeticDiffCases, seoData, sectionsCon
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // {

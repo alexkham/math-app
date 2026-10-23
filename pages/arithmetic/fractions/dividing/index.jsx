@@ -786,12 +786,12 @@ const keyWords = [
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Fraction ÷ whole number</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">write the whole over 1, then multiply by its reciprocal; result is smaller than the original</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">write the whole over 1, then multiply by its reciprocal; result is smaller than the original when the fraction is positive and the whole number is greater than 1</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(3⁄4) ÷ 2 = (3⁄4)(1⁄2) = 3⁄8</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Whole number ÷ fraction</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply the whole by the reciprocal of the fraction; if the fraction is &lt; 1, result is larger than the whole</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply the whole by the reciprocal of the fraction; if 0 &lt; fraction &lt; 1 and the whole is positive, result is larger than the whole</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">6 ÷ (1⁄2) = 6 × 2 = 12</td>
     </tr>
     <tr>
@@ -806,7 +806,7 @@ const keyWords = [
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Why it works</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiplication by a reciprocal undoes multiplication; division and ×-by-reciprocal are inverse operations</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiplication by a reciprocal undoes multiplication; division and ×-by-reciprocal are the same operation</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x ÷ (c⁄d) = x × (d⁄c)</td>
     </tr>
     <tr style="background: #f8f9fa;">
@@ -865,6 +865,10 @@ For example, $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{2}{3} \\times \\frac{5}{4
 
 The division sign $\\div$ is one of three spellings for the same operation: $a \\div b$, the slash $a / b$, and the stacked $\\frac{a}{b}$. Writing a fraction over a fraction produces the [complex fraction](!/arithmetic/fractions/complex) form of this same rule, where the longer bar shows which division is the main one.
 
+@academic[pitfall,aside:true,width:35%:Flipping the first fraction
+Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\frac{4}{5} = \\frac{12}{10} = \\frac{6}{5}$, the reciprocal of the true answer. Only the divisor is flipped: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{5}{6}$.
+[Read more](!#pitfalls)]@
+
 The mnemonic "keep, change, flip" summarizes the steps: keep the first fraction as is, change division to multiplication, flip the second fraction to its reciprocal.`,
     before: ``,
     after: ``,
@@ -877,7 +881,7 @@ The mnemonic "keep, change, flip" summarizes the steps: keep the first fraction 
 
 Multiplying by the reciprocal produces this result: $\\frac{1}{2} \\times \\frac{4}{1} = \\frac{4}{2} = 2$.
 
-The method works because multiplying by a reciprocal undoes multiplication. If $\\frac{a}{b} \\times \\frac{c}{d} = x$, then $x \\div \\frac{c}{d} = x \\times \\frac{d}{c}$ returns to $\\frac{a}{b}$. Division and multiplication by reciprocal are inverse operations.`,
+The method works because multiplying by a reciprocal undoes multiplication. If $\\frac{a}{b} \\times \\frac{c}{d} = x$, then $x \\div \\frac{c}{d} = x \\times \\frac{d}{c}$ returns to $\\frac{a}{b}$. Division by a fraction and multiplication by its reciprocal are the same operation.`,
     before: ``,
     after: ``,
     link: '',
@@ -900,10 +904,14 @@ Another example: $\\frac{5}{6} \\div 3 = \\frac{5}{6} \\times \\frac{1}{3} = \\f
 
   obj5: {
     title: `Dividing Whole Numbers by Fractions`,
-    content: `Dividing a whole number by a fraction produces a result larger than the original whole number when the fraction is less than 1. This reflects the question: how many small pieces fit into the whole?
+    content: `Dividing a positive whole number by a positive fraction produces a result larger than the original whole number when the fraction is less than 1. This reflects the question: how many small pieces fit into the whole?
 
 @academic[formula_callout:Dividing Whole Numbers by Fractions
 $$6 \\div \\frac{1}{2} = 6 \\times \\frac{2}{1} = 12$$]@
+
+@academic[pitfall,aside:true,width:35%:Dividing by a half as halving
+Reading $6 \\div \\frac{1}{2}$ as half of $6$ gives $3$, which is $6 \\times \\frac{1}{2}$. Dividing by $\\frac{1}{2}$ counts the halves in $6$: $6 \\times 2 = 12$.
+[Read more](!#pitfalls)]@
 
 Six wholes contain twelve halves. The reciprocal method captures this directly.
 
@@ -916,6 +924,10 @@ Another example: $4 \\div \\frac{2}{3} = 4 \\times \\frac{3}{2} = \\frac{12}{2} 
   obj6: {
     title: `Dividing Mixed Numbers`,
     content: `Mixed numbers must be converted to improper fractions before dividing. The conversion methods are detailed on the [mixed numbers](!/arithmetic/fractions/mixed-numbers) page.
+
+@academic[pitfall,aside:true,width:35%:Dividing the parts separately
+Splitting $3\\frac{1}{2} \\div 1\\frac{3}{4}$ into $3 \\div 1 = 3$ and $\\frac{1}{2} \\div \\frac{3}{4} = \\frac{2}{3}$ gives $3\\frac{2}{3}$. Converted first, $\\frac{7}{2} \\div \\frac{7}{4} = 2$.
+[Read more](!#pitfalls)]@
 
 To compute $3\\frac{1}{2} \\div 1\\frac{3}{4}$, first convert both values. The mixed number $3\\frac{1}{2}$ becomes $\\frac{7}{2}$ and $1\\frac{3}{4}$ becomes $\\frac{7}{4}$.
 
@@ -938,6 +950,10 @@ For $\\frac{8}{9} \\div \\frac{4}{3}$, rewrite as $\\frac{8}{9} \\times \\frac{3
 
 @academic[formula_callout:Simplifying and Cross-Canceling
 $$\\frac{8}{9} \\times \\frac{3}{4} = \\frac{2}{3} \\times \\frac{1}{1} = \\frac{2}{3}$$]@
+
+@academic[pitfall,aside:true,width:35%:Canceling before the flip
+Canceling the $3$ and $6$ in $\\frac{3}{4} \\div \\frac{5}{6}$ gives $\\frac{1}{4} \\times \\frac{2}{5} = \\frac{1}{10}$. Flipped first, $\\frac{3}{4} \\times \\frac{6}{5}$ cancels $6$ with $4$: $\\frac{3}{2} \\times \\frac{3}{5} = \\frac{9}{10}$.
+[Read more](!#pitfalls)]@
 
 Without cross-canceling, the product $\\frac{24}{36}$ requires reduction using the [GCD](!/arithmetic/divisibility/gcd). Canceling first avoids larger numbers entirely.`,
     before: ``,
@@ -1017,6 +1033,61 @@ Rate problems also use fraction division. If a pipe fills $\\frac{1}{4}$ of a ta
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes cause many of the wrong answers in fraction division. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Flipping the first fraction**
+
+In keep, change, flip, the reciprocal is taken of the first fraction, the one being divided, instead of the second. Sometimes both fractions are flipped.
+
+Wrong working: $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{3}{2} \\times \\frac{4}{5} = \\frac{12}{10} = \\frac{6}{5}$.
+
+Right working: keep $\\frac{2}{3}$, flip the divisor $\\frac{4}{5}$ to $\\frac{5}{4}$, and multiply: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$.
+
+Why it happens: the word "flip" does not say which fraction, and in multiplication the order of the two fractions does not matter, so their roles seem interchangeable. Division is not like that: flipping the first fraction computes $\\frac{4}{5} \\div \\frac{2}{3}$ instead, which is why the wrong answer $\\frac{6}{5}$ is exactly the reciprocal of $\\frac{5}{6}$.
+
+How to check: multiply the answer by the divisor; the result must be the first fraction. Here $\\frac{5}{6} \\times \\frac{4}{5} = \\frac{20}{30} = \\frac{2}{3}$, while $\\frac{6}{5} \\times \\frac{4}{5} = \\frac{24}{25}$, which is not $\\frac{2}{3}$.
+
+**Dividing by a half as halving**
+
+"Divided by one half" is read as "divided in half", and the number is halved instead of being divided by $\\frac{1}{2}$.
+
+Wrong working: $6 \\div \\frac{1}{2} = 3$.
+
+Right working: $6 \\div \\frac{1}{2} = 6 \\times \\frac{2}{1} = 12$. Each whole holds two halves, so six wholes hold twelve.
+
+Why it happens: in everyday speech, splitting something in half and dividing it by two mean the same thing, and "dividing by a half" sounds almost the same. The habit that division always makes a number smaller points the same way.
+
+How to check: multiply back. $12 \\times \\frac{1}{2} = 6$, the starting number, while $3 \\times \\frac{1}{2} = \\frac{3}{2}$ is not. Dividing a positive number by a fraction between $0$ and $1$ always gives more than the starting number.
+
+**Dividing the parts separately**
+
+The whole-number parts of two mixed numbers are divided by each other, the fraction parts by each other, and the two results are joined into a new mixed number.
+
+Wrong working: for $3\\frac{1}{2} \\div 1\\frac{3}{4}$, take $3 \\div 1 = 3$ and $\\frac{1}{2} \\div \\frac{3}{4} = \\frac{1}{2} \\times \\frac{4}{3} = \\frac{4}{6} = \\frac{2}{3}$, giving $3\\frac{2}{3}$.
+
+Right working: convert first, $3\\frac{1}{2} = \\frac{7}{2}$ and $1\\frac{3}{4} = \\frac{7}{4}$, then $\\frac{7}{2} \\times \\frac{4}{7} = \\frac{28}{14} = 2$.
+
+Why it happens: when adding mixed numbers, the whole parts and the fraction parts can be handled separately, so the same split seems natural here. Division does not split that way: $(3 + \\frac{1}{2}) \\div (1 + \\frac{3}{4})$ is not $3 \\div 1 + \\frac{1}{2} \\div \\frac{3}{4}$.
+
+How to check: estimate. $3\\frac{1}{2}$ is a little over $3$ and $1\\frac{3}{4}$ is a little under $2$, so the answer is about $2$, nowhere near $3\\frac{2}{3}$. Multiplying back confirms it: $2 \\times \\frac{7}{4} = \\frac{7}{2} = 3\\frac{1}{2}$.
+
+**Canceling before the flip**
+
+Cross-canceling is applied to the division as written, pairing the numerator of the first fraction with the denominator of the second, before the second fraction has been flipped.
+
+Wrong working: in $\\frac{3}{4} \\div \\frac{5}{6}$, cancel the $3$ against the $6$ to get $\\frac{1}{4} \\div \\frac{5}{2} = \\frac{1}{4} \\times \\frac{2}{5} = \\frac{2}{20} = \\frac{1}{10}$.
+
+Right working: flip first, $\\frac{3}{4} \\times \\frac{6}{5}$. Now the $6$ is a numerator and cancels against the $4$ by their common factor $2$: $\\frac{3}{2} \\times \\frac{3}{5} = \\frac{9}{10}$.
+
+Why it happens: the diagonal pattern from [multiplying fractions](!/arithmetic/fractions/multiplying) is used before the problem has become a multiplication. The $3$ and the $6$ sit on a diagonal and share a factor, so they look ready to cancel, but after the flip the $6$ moves to the top, on the same side as the $3$.
+
+How to check: multiply the answer by the divisor. $\\frac{9}{10} \\times \\frac{5}{6} = \\frac{45}{60} = \\frac{3}{4}$, the first fraction, while $\\frac{1}{10} \\times \\frac{5}{6} = \\frac{5}{60} = \\frac{1}{12}$ is not.`,
+      before:``,
+      after:``,
+      link:'',
     }
   
   }
@@ -1044,7 +1115,7 @@ const faqQuestions = {
   },
   obj2: {
     question: "Why does dividing by a fraction give a bigger result?",
-    answer: "Because division asks how many of the divisor fit inside the dividend, and small pieces fit many times. Dividing 6 by 1/2 asks how many halves are in 6, and the answer is 12. Any division by a number less than 1 enlarges the result; dividing by a fraction greater than 1, such as 3/2, shrinks it instead.",
+    answer: "Because division asks how many of the divisor fit inside the dividend, and small pieces fit many times. Dividing 6 by 1/2 asks how many halves are in 6, and the answer is 12. Dividing a positive number by any number between 0 and 1 enlarges the result; dividing it by a fraction greater than 1, such as 3/2, shrinks it instead.",
     sectionId: "3"
   },
   obj3: {
@@ -1132,7 +1203,7 @@ const schemas = {
   const fbHowManyQuarters = { kind: 'bars', svgTitle: 'How many quarters fit in one half: two, so 1/2 divided by 1/4 is 2', rows: [{ n: 2, k: 1, label: '1/2', partLabels: true }, { n: 4, k: 2, label: '1/4, 1/4', color: 'r', partLabels: true }],
     notes: [{ text: 'two quarters cover the same length as one half' }, { text: '1/2 ÷ 1/4 = 1/2 × 4 = 2', color: 'r' }], labelWidth: 84, caption: 'Division counts how many pieces fit' };
   const fbHalveFraction = { kind: 'bars', svgTitle: '3/4 divided by 2: each quarter split in half, 3 of the 8 eighths, 3/8', rows: [{ n: 4, k: 3, label: '3/4', partLabels: true }, { n: 8, k: 3, label: '÷ 2 = 3/8', color: 'r', partLabels: true }],
-    notes: [{ text: 'halving 3 quarters leaves 3 parts half as big' }, { text: '3/4 × 1/2 = 3/8', color: 'r' }], labelWidth: 84, caption: 'Dividing by a whole number makes the parts smaller' };
+    notes: [{ text: 'halving 3 quarters leaves 3 parts half as big' }, { text: '3/4 × 1/2 = 3/8', color: 'r' }], labelWidth: 84, caption: 'Dividing by a whole number greater than 1 makes the parts smaller' };
   const demoUnits = {
     howManyQuarters: demoUnitFrame({
       svg: renderFractionBar(fbHowManyQuarters),
@@ -1142,7 +1213,7 @@ const schemas = {
     halveFraction: demoUnitFrame({
       svg: renderFractionBar(fbHalveFraction),
       caption: 'Three quarters divided by 2',
-      text: 'Dividing 3/4 by 2 shares the shaded three quarters into two equal halves. Cutting every quarter in two turns the bar into eighths; half of the 6 shaded eighths is 3 eighths. So 3/4 &#247; 2 = 3/8, the same as 3/4 &#215; 1/2: dividing by a whole number makes the result smaller.',
+      text: 'Dividing 3/4 by 2 shares the shaded three quarters into two equal halves. Cutting every quarter in two turns the bar into eighths; half of the 6 shaded eighths is 3 eighths. So 3/4 &#247; 2 = 3/8, the same as 3/4 &#215; 1/2: dividing by a whole number greater than 1 makes the result smaller.',
     }),
   };
 
@@ -1202,7 +1273,7 @@ export default function DividingPage({seoData, sectionsContent, introContent, ca
         content:[
           sectionsContent.obj3.content,
                   <div key={'unit-howManyQuarters'} dangerouslySetInnerHTML={{ __html: demoUnits.howManyQuarters }} />,
-          `Dividing by a fraction less than 1 gives more than you started with: two pieces from one half.`,
+          `Dividing a positive amount by a fraction between 0 and 1 gives more than you started with: two pieces from one half.`,
         ]
     },
     {
@@ -1255,6 +1326,14 @@ export default function DividingPage({seoData, sectionsContent, introContent, ca
           sectionsContent.obj9.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

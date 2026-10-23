@@ -879,7 +879,7 @@ const transformationDictionary = {
   title: 'Transformation \u2194 matrix',
   tallyLabel: 'entries',
   intro: 'Once a basis is fixed the two languages are interchangeable, and every statement about a map has a matrix statement beside it. The point of reading them in parallel is to notice that neither side is primary \u2014 the matrix is not an approximation to the transformation, it is the transformation written in coordinates.',
-  footnote: 'The dictionary is exact and it is one-to-one, but only once a basis is chosen. Change the basis and the same transformation gets a different matrix \u2014 which is what makes [similarity](!/linear-algebra/transformations/basis-change) the right notion of sameness for matrices, and why properties surviving a basis change are the ones worth naming.',
+  footnote: 'The dictionary is exact and it is one-to-one, but only once a basis is chosen. Change the basis and the same transformation generally gets a different matrix \u2014 which is what makes [similarity](!/linear-algebra/transformations/basis-change) the right notion of sameness for matrices, and why properties surviving a basis change are the ones worth naming.',
   groups: [
     {
       heading: 'The correspondence itself',
@@ -925,7 +925,7 @@ const transformationDictionary = {
           anchor: '#7',
           formula: '$I \\leftrightarrow I_n$, $T^{-1} \\leftrightarrow A^{-1}$',
           condition: '$T$ bijective $\\iff$ $A$ invertible',
-          note: 'The identity transformation is the identity matrix in every basis \u2014 the one matrix a change of basis cannot alter. Invertibility transfers exactly, which is what makes the [invertibility equivalence](!/linear-algebra/matrix/inverse) a statement about transformations too.',
+          note: 'The identity transformation is the identity matrix in every basis \u2014 a change of basis cannot alter it (nor any scalar multiple $cI$). Invertibility transfers exactly, which is what makes the [invertibility equivalence](!/linear-algebra/matrix/inverse) a statement about transformations too.',
         },
       ],
     },
@@ -1162,7 +1162,13 @@ $T(\\mathbf{e}_3) = T(0, 0, 1) = (3, 5)$
 @academic[formula_callout:Constructing the Standard Matrix
 $$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$$]@
 
-Verification: $A\\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix} = \\begin{pmatrix} 2x - y + 3z \\\\ 4x + 5z \\end{pmatrix} = T(x, y, z)$.`,
+Verification: $A\\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix} = \\begin{pmatrix} 2x - y + 3z \\\\ 4x + 5z \\end{pmatrix} = T(x, y, z)$.
+
+@academic[pitfall,aside:true,width:35%:Placing the images in rows
+Writing $T(\\mathbf{e}_1), T(\\mathbf{e}_2), T(\\mathbf{e}_3)$ as rows gives the $3 \\times 2$ array $\\begin{pmatrix} 2 & 4 \\\\ -1 & 0 \\\\ 3 & 5 \\end{pmatrix}$, which cannot multiply a vector of $\\mathbb{R}^3$. As columns they give $A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+Each image $T(\\mathbf{e}_j)$ lies in $\\mathbb{R}^2$, so it supplies a column of length $2$, and there is one such column for each of the three input coordinates. The shape $2 \\times 3$ is therefore fixed before a single entry is computed. Reading down a column shows where one basis vector lands; reading across a row gives the coefficients of one output formula, such as $2x - y + 3z$ in the first row.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1174,6 +1180,10 @@ Verification: $A\\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix} = \\begin{pmatri
 Column $j$ tells you where $\\mathbf{e}_j$ goes. If the first column of a $2 \\times 2$ matrix is $(3, -1)^T$, then $(1, 0)$ maps to $(3, -1)$. The matrix is a complete lookup table: the image of any vector is computed by multiplication.
 
 The size $m \\times n$ records the dimensions of codomain ($m$ rows) and domain ($n$ columns). A $3 \\times 2$ matrix represents a map from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ — it embeds a plane into three-dimensional space. A $2 \\times 3$ matrix represents a map from $\\mathbb{R}^3$ to $\\mathbb{R}^2$ — it compresses three dimensions down to two.
+
+@academic[pitfall,aside:true,width:35%:Reading the size backwards
+Taking the $2 \\times 3$ matrix of the worked example as a map $\\mathbb{R}^2 \\to \\mathbb{R}^3$ swaps the two spaces: $A\\mathbf{x}$ needs $\\mathbf{x}$ with $3$ entries, one per column, and returns $2$. The map is $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$.
+[Read more](!#pitfalls)]@
 
 A square matrix ($m = n$) represents a transformation from a space to itself — a linear operator. Only operators can have [eigenvalues](!/linear-algebra/eigen), [determinants](!/linear-algebra/determinants), and [traces](!/linear-algebra/matrix/trace).`,
     before: ``,
@@ -1193,7 +1203,7 @@ $$[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\bigl[\\,[T(\\mathbf{v}_1)]_{\\
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Different bases give different matrices for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces a different but equally valid matrix representation.`,
+Different bases generally give different matrices for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces an equally valid, and generally different, matrix representation.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1221,6 +1231,10 @@ The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\m
     content: `@academic[rule_theorem_plain:If $T: U \\to V$ has matrix $A$ (relative to appropriate bases) and $S: V \\to W$ has matrix $B$, then the composition $S \\circ T: U \\to W$ has matrix $BA$.]@
 
 The order matches the composition: $S$ acts after $T$, and $B$ multiplies from the left. This is why [matrix multiplication](!/linear-algebra/matrix/operations) is defined as it is — the row-times-column rule encodes function composition.
+
+@academic[pitfall,aside:true,width:35%:Multiplying in the order of application
+Writing $AB$ for $S \\circ T$ applies $S$ first. With $T$ the quarter-turn $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and $S$ the projection $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$, $AB\\mathbf{e}_1 = (0, 1)$, but $S(T(\\mathbf{e}_1)) = S(0, 1) = (0, 0)$, which is $BA\\mathbf{e}_1$.
+[Read more](!#pitfalls)]@
 
 Associativity of matrix multiplication $(BC)A = B(CA)$ mirrors associativity of composition $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. Non-commutativity of multiplication $AB \\neq BA$ mirrors non-commutativity of composition $S \\circ T \\neq T \\circ S$.
 
@@ -1254,6 +1268,57 @@ This is why matrices dominate computational linear algebra. Abstract transformat
   obj9: {
     title: `Summary: The Transformation ↔ Matrix Dictionary`,
     content: `The recipe and examples above all serve a single end: each linear transformation between finite-dimensional spaces corresponds to a unique matrix, and every concept on the transformation side has a matching object on the matrix side. The table below collects the dictionary in one place — what to look at on the matrix when you want to know something about the transformation, and vice versa. It is a recap of the whole page and a reference for moving between the two languages.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for most wrong matrices of linear maps. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Placing the images in rows**
+
+The images $T(\\mathbf{e}_1), \\dots, T(\\mathbf{e}_n)$ are computed correctly, but each one is written as a row of the matrix instead of a column. The result is the transpose of the standard matrix.
+
+Wrong working: for $T(x, y, z) = (2x - y + 3z, \\; 4x + 5z)$, the images are $(2, 4)$, $(-1, 0)$ and $(3, 5)$. Stacked as rows they give
+$$\\begin{pmatrix} 2 & 4 \\\\ -1 & 0 \\\\ 3 & 5 \\end{pmatrix}$$
+a $3 \\times 2$ array. It can only multiply vectors with $2$ entries, so it cannot be applied to $(x, y, z)$ at all.
+
+Right working: the images are the columns.
+$$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}, \\qquad A\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix} = T(1, 1, 1)$$
+
+Why it happens: the images are found and written as horizontal tuples such as $(2, 4)$, and they are copied into the matrix in the same horizontal form.
+
+How to check: multiply the matrix by $\\mathbf{e}_1$. The result is the first column, and it must equal $T(\\mathbf{e}_1) = (2, 4)$. For a map between spaces of different dimensions, the size check is even quicker: the matrix of $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ must have $3$ columns.
+
+**Reading the size backwards**
+
+The size $m \\times n$ is read in the order it is written, as if the first number were the domain and the second the codomain. The map then appears to run between the wrong two spaces.
+
+Wrong working: the matrix $A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$ is $2 \\times 3$, so it is taken to be a map $\\mathbb{R}^2 \\to \\mathbb{R}^3$, and one tries to compute $A\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$. That product is undefined: each row of $A$ has $3$ entries and the vector has $2$.
+
+Right working: the number of columns is the number of inputs, and the number of rows is the number of outputs. $A$ has $3$ columns and $2$ rows, so it maps $\\mathbb{R}^3 \\to \\mathbb{R}^2$:
+$$A\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix}$$
+
+Why it happens: the arrow $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ names the domain first, while the size $m \\times n$ names the rows, that is the codomain, first. The two orders are opposite.
+
+How to check: write a test vector next to the matrix. The vector must have as many entries as the matrix has columns, and the product has as many entries as the matrix has rows.
+
+**Multiplying in the order of application**
+
+In $S \\circ T$ the map $T$ acts first, so its matrix is written first, and the matrix of the composition is taken to be $AB$ instead of $BA$.
+
+Wrong working: let $T$ be the quarter-turn with $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and $S$ the projection onto the first axis with $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$. Then
+$$AB = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$$
+which sends $\\mathbf{e}_1$ to $(0, 1)$.
+
+Right working: the matrix that acts first stands on the right.
+$$BA = \\begin{pmatrix} 0 & -1 \\\\ 0 & 0 \\end{pmatrix}$$
+Directly, $S(T(\\mathbf{e}_1)) = S(0, 1) = (0, 0)$ and $S(T(\\mathbf{e}_2)) = S(-1, 0) = (-1, 0)$, which are exactly the columns of $BA$.
+
+Why it happens: the maps are described in the order they act, first $T$ and then $S$, and the matrices are written down in that same reading order. But a matrix product acts on a vector from the right, so the factor next to $\\mathbf{x}$ acts first.
+
+How to check: apply the product to $\\mathbf{e}_1$ and compare it with $S(T(\\mathbf{e}_1))$ computed one map at a time. Here $AB\\mathbf{e}_1 = (0, 1)$ does not match $(0, 0)$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1525,7 +1590,15 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
             <IdentitySheet data={transformationDictionary} theme="navy" variant="ledger" />
           </DiagramFrame>,
           `The composition row is where the dictionary explains something rather than merely recording it. Applying $T$ and then $S$ corresponds to the product $BA$ — the matrix acting first written on the right, because it is the one the vector meets first. Matrix multiplication is defined as it is precisely so that this correspondence holds; the row-by-column rule is a consequence of wanting composition to translate, not an arbitrary convention.`,
-          `The dictionary is exact, and it is also basis-dependent. Fix a basis and the correspondence is one-to-one; change the basis and the same transformation acquires a different matrix. That is the whole reason [similarity](!/linear-algebra/transformations/basis-change) exists as a notion — two matrices related by $P^{-1}AP$ are the same map seen from two places, which is why the properties worth naming are the ones that survive the change.`,
+          `The dictionary is exact, and it is also basis-dependent. Fix a basis and the correspondence is one-to-one; change the basis and the same transformation generally acquires a different matrix. That is the whole reason [similarity](!/linear-algebra/transformations/basis-change) exists as a notion — two matrices related by $P^{-1}AP$ are the same map seen from two places, which is why the properties worth naming are the ones that survive the change.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps
@@ -1598,7 +1671,7 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Matric Representation of Linear Transformation</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Matrix Representation of Linear Transformation</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

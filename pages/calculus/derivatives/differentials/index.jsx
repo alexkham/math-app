@@ -1036,7 +1036,7 @@ const obj8Table = `
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">dx²</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(dx)² — the differential dx appearing as a factor twice</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">NOT dx raised to a power in any new sense; just dx·dx</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">NOT d(x²); just (dx)² = dx·dx</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">d²y / dx²</td>
@@ -1074,7 +1074,7 @@ const summaryTable = `
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Relative error</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|dy|/|f(x)| ≈ |f&apos;(x)/f(x)| · |dx|</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">xⁿ multiplies relative error by n</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">xⁿ multiplies relative error by |n|</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">power-law uncertainty scaling</td>
     </tr>
     <tr>
@@ -1317,6 +1317,10 @@ $$dy = f'(x)\\, dx$$
 
 The differential $dy$ depends on two things: the point $x$ (which determines the slope $f'(x)$) and the increment $dx$ (which determines the scale). For fixed $x$, $dy$ is a linear function of $dx$—doubling $dx$ doubles $dy$.
 
+@academic[pitfall,aside:true,width:35%:Dropping the dx
+Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$ for any step. With $dx = 0.1$, $dy = 3(2)^2(0.1) = 1.2$, close to the actual $\\Delta y = 1.261$.
+[Read more](!#pitfalls)]@
+
 Geometrically, $dy$ is the vertical change along the tangent line at $x$ when the horizontal position shifts by $dx$. The tangent line rises (or falls) at rate $f'(x)$, so a horizontal shift of $dx$ produces a vertical shift of $f'(x) \\cdot dx$.
 
 @academic[rule_plain:For a linear function $f(x) = mx + b$, the differential $dy = m \\cdot dx$ equals the actual change in $f$ exactly, because the tangent line to a linear function is the function itself.]@
@@ -1415,7 +1419,11 @@ $$f(x) \\approx f(a) + f'(a)(x - a) \\qquad \\Delta y \\approx f'(a)\\, \\Delta 
 
 This is the linearization of $f$ at $x$. Given a known value $f(x)$ and the slope $f'(x)$, the tangent line estimates $f$ at nearby points.
 
-To approximate $\\sqrt{4.03}$: take $f(x) = \\sqrt{x}$, $x = 4$, $dx = 0.03$. Then $f(4) = 2$ and $f'(x) = \\frac{1}{2\\sqrt{x}}$, so $f'(4) = \\frac{1}{4}$. The estimate is $2 + \\frac{1}{4}(0.03) = 2.0075$. The actual value is $\\sqrt{4.03} \\approx 2.00749...$—the approximation is accurate to five decimal places.
+To approximate $\\sqrt{4.03}$: take $f(x) = \\sqrt{x}$, $x = 4$, $dx = 0.03$. Then $f(4) = 2$ and $f'(x) = \\frac{1}{2\\sqrt{x}}$, so $f'(4) = \\frac{1}{4}$. The estimate is $2 + \\frac{1}{4}(0.03) = 2.0075$. The actual value is $\\sqrt{4.03} \\approx 2.00749...$—the approximation agrees to four decimal places, with an error of about $0.000014$.
+
+@academic[pitfall,aside:true,width:35%:Reporting the change as the value
+Stopping at $dy = \\frac{1}{4}(0.03) = 0.0075$ gives only the change in $f$, not $\\sqrt{4.03}$. The estimate adds the known value: $f(4) + dy = 2 + 0.0075 = 2.0075$.
+[Read more](!#pitfalls)]@
 
 The linearization can also be written as $L(x) = f(a) + f'(a)(x - a)$, the tangent line at $x = a$ used as a function. For $x$ near $a$, $L(x) \\approx f(x)$. The quality of the approximation depends on two factors: the size of $|x - a|$ and the magnitude of $f''$ near $a$, which controls how quickly the curve diverges from its tangent.
 `,
@@ -1436,9 +1444,9 @@ The derivative acts as an error amplification factor. Where $|f'(x)|$ is large, 
 The relative error normalizes by the function value:
 
 @academic[formula_callout:Error Estimation
-$$\\frac{|dy|}{|f(x)|} = \\frac{|f'(x)|}{|f(x)|} \\cdot |dx|$$]@
+$$\\text{relative error in } f \\approx \\frac{|dy|}{|f(x)|} = \\frac{|f'(x)|}{|f(x)|} \\cdot |dx|$$]@
 
-The ratio $\\frac{f'(x)}{f(x)} = \\frac{d}{dx}[\\ln|f(x)|]$ is the logarithmic derivative. Relative error in the output equals the logarithmic derivative times the absolute error in the input.
+The ratio $\\frac{f'(x)}{f(x)} = \\frac{d}{dx}[\\ln|f(x)|]$ is the logarithmic derivative. Relative error in the output is approximately the absolute value of the logarithmic derivative times the absolute error in the input.
 
 @academic[formula_callout:Logarithmic Derivative
 $$\\frac{d}{dx}[\\ln f(x)] = \\frac{f'(x)}{f(x)}$$
@@ -1447,7 +1455,13 @@ $$\\frac{d}{dx}[\\ln f(x)] = \\frac{f'(x)}{f(x)}$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-For $f(x) = x^n$: $\\frac{f'(x)}{f(x)} = \\frac{n}{x}$, so the relative error in $x^n$ is $n$ times the relative error in $x$. Squaring a measurement doubles its relative error. Cubing triples it. This scaling rule is a standard tool in experimental science for propagating uncertainties through power-law relationships.
+For $f(x) = x^n$: $\\frac{f'(x)}{f(x)} = \\frac{n}{x}$, so the relative error in $x^n$ is $|n|$ times the relative error in $x$. Squaring a measurement doubles its relative error. Cubing triples it. This scaling rule is a standard tool in experimental science for propagating uncertainties through power-law relationships.
+
+@academic[pitfall,aside:true,width:35%:Doubling the absolute error
+For $x = 10 \\pm 0.1$, taking the error in $x^2$ as $2(0.1) = 0.2$ applies the rule to the wrong error. The rule doubles the relative error, from 1% to 2%, so $|dy| = 2(10)(0.1) = 2$ and $x^2 = 100 \\pm 2$.
+[Read more](!#pitfalls)]@
+
+In practice the rule is applied in three steps. A measured value comes with an absolute uncertainty, a $\\pm$ figure such as $\\pm 0.1$, and dividing it by the value turns it into a relative error. The rule scales that relative error by $|n|$, and multiplying the result by the computed value $x^n$ turns it back into a $\\pm$ figure for the output. For a cube, $n = 3$, and the same steps give the uncertainty in a volume computed from a measured edge.
 `,
     before: ``,
     after: ``,
@@ -1468,6 +1482,10 @@ $$dz = \\frac{\\partial z}{\\partial x}\\, dx + \\frac{\\partial z}{\\partial y}
 Each partial derivative weights the contribution of the corresponding variable's error. The total differential estimates how $z$ responds to simultaneous small changes in all inputs.
 
 For the area of a rectangle $A = lw$: $dA = w\\,dl + l\\,dw$. If $l = 10 \\pm 0.1$ and $w = 5 \\pm 0.05$, then $dA = 5(0.1) + 10(0.05) = 1.0$. The area is approximately $50 \\pm 1.0$.
+
+@academic[pitfall,aside:true,width:35%:Adding the input errors unweighted
+Adding the errors directly gives $dA = 0.1 + 0.05 = 0.15$ and $A \\approx 50 \\pm 0.15$. Each error has to be multiplied by its partial derivative: $dA = 5(0.1) + 10(0.05) = 1.0$, so $A \\approx 50 \\pm 1.0$.
+[Read more](!#pitfalls)]@
 
 For the volume of a cylinder $V = \\pi r^2 h$: $dV = 2\\pi r h\\,dr + \\pi r^2\\,dh$. The radius error is amplified by $2\\pi r h$ and the height error by $\\pi r^2$. Since $r$ enters as a square, its error contributes more heavily—consistent with the power-law scaling of relative error.
 
@@ -1508,7 +1526,7 @@ The notation $d^2 y / dx^2$ for the [second derivative](!/calculus/derivatives/h
 @academic[formula_callout:Higher-Order Differentials
 $$\\frac{d^2 y}{dx^2} = \\frac{d^2 y}{(dx)^2} = f''(x)$$]@
 
-This explains the Leibniz notation for higher derivatives. The superscript on $d^2 y$ counts the number of times the differential operator $d$ has been applied. The square on $dx^2$ reflects that $dx$ appears as a factor twice—not that $dx$ is squared in a power sense.
+This explains the Leibniz notation for higher derivatives. The superscript on $d^2 y$ counts the number of times the differential operator $d$ has been applied. The square on $dx^2$ means $(dx)^2$—the differential $dx$ appearing as a factor twice—not the differential $d(x^2)$.
 
 Higher-order differentials extend the approximation. The second-order estimate of the change in $y$ is
 
@@ -1525,6 +1543,63 @@ This is the beginning of the Taylor expansion written in differential notation: 
     title: `Summary: What Differentials Are Good For`,
     content: `
 The single formula $dy = f'(x)\\,dx$ underlies every application of differentials covered above. The table below collects those applications side by side, pairing each with the formula it specializes to, a worked example from the page, and the situation where it earns its place over alternatives. Together, these capture the practical payoff of treating $dx$ and $dy$ as independent quantities rather than parts of an unbreakable $dy/dx$ symbol.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `
+Four mistakes cause most wrong answers when differentials are used for estimates and error bounds. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the dx**
+
+The differential $dy$ is written down as the derivative alone, without the factor $dx$. The result no longer depends on the step, so it cannot describe a change.
+
+Wrong working: for $y = x^3$, $dy = 3x^2$. At $x = 2$ this gives $dy = 12$, for a step of $0.1$ and for a step of $0.001$ alike.
+
+Right working: $dy = f'(x)\\,dx = 3x^2\\,dx$. At $x = 2$ with $dx = 0.1$, $dy = 12(0.1) = 1.2$. The actual change is $\\Delta y = 2.1^3 - 2^3 = 9.261 - 8 = 1.261$, close to $1.2$ and nowhere near $12$.
+
+Why it happens: the derivative is computed first and stands on its own in prime notation; the differential is the same expression with $dx$ attached, and the factor is easy to leave off.
+
+How to check: $dy$ must scale with $dx$. Halving the step should halve $dy$; if the answer contains no $dx$, nothing changes, and the factor is missing.
+
+**Reporting the change as the value**
+
+In a linear approximation, the differential $dy = f'(a)\\,dx$ is computed and given as the approximate value of $f$, although it is only the change from the known value $f(a)$.
+
+Wrong working: for $\\sqrt{4.03}$ with $a = 4$ and $dx = 0.03$, $dy = \\frac{1}{4}(0.03) = 0.0075$, so $\\sqrt{4.03} \\approx 0.0075$.
+
+Right working: $\\sqrt{4.03} \\approx f(4) + f'(4)\\,dx = 2 + 0.0075 = 2.0075$.
+
+Why it happens: the differential is the step that takes the work, and once it is done the problem feels finished; the known value $f(a)$ was found at the start and is forgotten by the end.
+
+How to check: the estimate must be close to the known value $f(a)$, because $x$ is close to $a$. $\\sqrt{4.03}$ has to be a little more than $\\sqrt{4} = 2$.
+
+**Doubling the absolute error**
+
+The power rule for errors, that $x^n$ carries $|n|$ times the relative error of $x$, is applied to the absolute error, the $\\pm$ figure of the measurement.
+
+Wrong working: $x = 10 \\pm 0.1$, so $x^2 = 100 \\pm 2(0.1) = 100 \\pm 0.2$.
+
+Right working: the relative error of $x$ is $\\frac{0.1}{10}$, which is 1%. Squaring doubles it to 2%, and 2% of $100$ is $2$, so $x^2 = 100 \\pm 2$. The differential gives the same: $|dy| = 2x\\,|dx| = 2(10)(0.1) = 2$.
+
+Why it happens: "squaring doubles the error" is remembered without the word relative, and the $\\pm$ figure is the error that is written down.
+
+How to check: square the largest possible value. $10.1^2 = 102.01$, about $2$ above $100$, not $0.2$.
+
+**Adding the input errors unweighted**
+
+For a quantity that depends on several measurements, the input errors are added as they are, without the partial derivatives that turn each one into a change of the result.
+
+Wrong working: for $A = lw$ with $l = 10 \\pm 0.1$ and $w = 5 \\pm 0.05$, $dA = 0.1 + 0.05 = 0.15$, so $A \\approx 50 \\pm 0.15$.
+
+Right working: $dA = \\frac{\\partial A}{\\partial l}\\,dl + \\frac{\\partial A}{\\partial w}\\,dw = w\\,dl + l\\,dw = 5(0.1) + 10(0.05) = 1.0$, so $A \\approx 50 \\pm 1.0$.
+
+Why it happens: the errors in length and width are both lengths, so adding them looks natural. But an error $dl$ in the length adds or removes a strip of size $w \\times dl$, so it changes the area by $w$ times as much.
+
+How to check: compute the area at the largest values. $(10.1)(5.05) = 51.005$, about $1$ above $50$, not $0.15$.
 `,
     before: ``,
     after: ``,
@@ -1561,12 +1636,12 @@ const faqQuestions = {
   },
   obj3: {
     question: "How accurate is a linear approximation?",
-    answer: "Two things control it: how far you move from the base point, and how sharply the curve bends there. The error grows with the distance from the base point and with the size of f″ nearby, since f″ measures how fast the curve pulls away from its tangent. Approximating √4.03 from x = 4 is accurate to five decimal places; a much larger step would not be.",
+    answer: "Two things control it: how far you move from the base point, and how sharply the curve bends there. The error grows with the distance from the base point and with the size of f″ nearby, since f″ measures how fast the curve pulls away from its tangent. Approximating √4.03 from x = 4 agrees to four decimal places; a much larger step would not be.",
     sectionId: "4"
   },
   obj4: {
     question: "Why does squaring a measurement double its relative error?",
-    answer: "Because for f(x) = xⁿ the logarithmic derivative f′(x)/f(x) equals n/x, so the relative error in the output is n times the relative error in the input. Squaring gives n = 2, cubing gives n = 3. A 1% error in a measured radius becomes a 2% error in its square and a 3% error in its cube.",
+    answer: "Because for f(x) = xⁿ the logarithmic derivative f′(x)/f(x) equals n/x, so the relative error in the output is |n| times the relative error in the input. Squaring gives n = 2, cubing gives n = 3. A 1% error in a measured radius becomes a 2% error in its square and a 3% error in its cube.",
     sectionId: "5"
   },
   obj5: {
@@ -1809,6 +1884,14 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj9.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

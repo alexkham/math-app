@@ -3165,7 +3165,13 @@ When eigenvalues repeat, diagonalizability depends on the eigenspaces. A repeate
 
 @academic[example:Example of Failure
 
-$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with $m_a = 2$, but $A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has null space of dimension $1$. Only one independent eigenvector exists, so $P$ cannot be built. The matrix is defective.]@`,
+$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with $m_a = 2$, but $A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has null space of dimension $1$. Only one independent eigenvector exists, so $P$ cannot be built. The matrix is defective.]@
+
+@academic[pitfall,aside:true,width:35%:Treating a repeated eigenvalue as failure
+Calling $A = \\begin{pmatrix} 3 & 1 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 1 & 3 \\end{pmatrix}$ defective because its eigenvalues $5, 2, 2$ repeat skips the eigenspace check. Here $A - 2I$ has rank $1$, so $m_g(2) = 2 = m_a(2)$ and $A$ is diagonalizable.
+[Read more](!#pitfalls)]@
+
+The test therefore runs one eigenvalue at a time. For each repeated eigenvalue $\\lambda$, the dimension of its eigenspace is $n - \\text{rank}(A - \\lambda I)$, and this number is compared with the multiplicity of $\\lambda$ as a root of the characteristic polynomial. An eigenvalue that occurs only once needs no check, since its eigenspace always has dimension exactly $1$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3189,7 +3195,13 @@ $$A^4 = P\\begin{pmatrix} 5^4 & 0 \\\\ 0 & (-1)^4 \\end{pmatrix}P^{-1} = \\begin
 @academic[formula_callout:Matrix Powers
 $$= \\frac{1}{3}\\begin{pmatrix} 625 & -1 \\\\ 1250 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ -2 & 1 \\end{pmatrix} = \\frac{1}{3}\\begin{pmatrix} 627 & 624 \\\\ 1248 & 1251 \\end{pmatrix} = \\begin{pmatrix} 209 & 208 \\\\ 416 & 417 \\end{pmatrix}$$]@
 
-Without diagonalization, computing $A^4$ requires three sequential matrix multiplications.`,
+@academic[pitfall,aside:true,width:35%:Powering the entries of A
+Raising each entry of $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ to the fourth power gives $\\begin{pmatrix} 1 & 16 \\\\ 256 & 81 \\end{pmatrix}$, which is not $A^4$. Only the diagonal factor $D$ is powered entry by entry, and $PD^4P^{-1} = \\begin{pmatrix} 209 & 208 \\\\ 416 & 417 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+Without diagonalization, computing $A^4$ requires three sequential matrix multiplications.
+
+Those multiplications are still the quickest check on the result. Squaring $A$ gives $A^2 = \\begin{pmatrix} 9 & 8 \\\\ 16 & 17 \\end{pmatrix}$, and squaring $A^2$ lands on the same $A^4$ as the diagonal route. Each entry of these products combines a whole row with a whole column, so every entry of $A$ has a share in every entry of $A^4$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3205,7 +3217,13 @@ $$\\mathbf{x}(t) = c_1 e^{\\lambda_1 t}\\mathbf{v}_1 + c_2 e^{\\lambda_2 t}\\mat
 
 Each eigenvalue determines the behavior along its eigenvector direction. Positive eigenvalues produce exponential growth, negative eigenvalues produce decay, and zero eigenvalues produce constant components. [Complex](!/linear-algebra/eigen/complex) eigenvalues produce oscillatory terms involving sines and cosines modulated by exponential envelopes.
 
-The constants $c_1, \\dots, c_n$ are determined by the initial condition $\\mathbf{x}(0)$: express $\\mathbf{x}(0)$ as a linear combination of the eigenvectors and read off the coefficients.`,
+@academic[pitfall,aside:true,width:35%:Reading the constants off the initial vector
+With $A$ from section $2$ and $\\mathbf{x}(0) = (1, 0)^T$, taking $c_1 = 1$, $c_2 = 0$ from the entries gives a solution that starts at $(1, 2)^T$. Solving $c_1(1, 2)^T + c_2(-1, 1)^T = (1, 0)^T$ gives $c_1 = \\frac{1}{3}$, $c_2 = -\\frac{2}{3}$.
+[Read more](!#pitfalls)]@
+
+The constants $c_1, \\dots, c_n$ are determined by the initial condition $\\mathbf{x}(0)$: express $\\mathbf{x}(0)$ as a linear combination of the eigenvectors and read off the coefficients.
+
+In matrix form, finding the constants is a single linear system. Collecting them in a vector $\\mathbf{c} = (c_1, \\dots, c_n)^T$, the solution at $t = 0$ reads $P\\mathbf{c} = \\mathbf{x}(0)$, so $\\mathbf{c} = P^{-1}\\mathbf{x}(0)$ holds the coordinates of the starting point in the eigenvector basis. This is the same change of basis that the factorization $A = PDP^{-1}$ performs, applied to one vector.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3242,7 +3260,11 @@ This can be rewritten as the [spectral decomposition](!/linear-algebra/decomposi
 @academic[formula_callout:spectral_decomposition|Spectral Decomposition|$$A = \\sum_{i=1}^{n} \\lambda_i \\, \\mathbf{q}_i \\mathbf{q}_i^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#spectral_decomposition]@
 
-Each term $\\lambda_i \\mathbf{q}_i\\mathbf{q}_i^T$ is the eigenvalue times the [projection](!/linear-algebra/orthogonality/projections) matrix onto the eigenspace. The matrix $A$ is decomposed into a sum of rank-one projections, weighted by eigenvalues.
+@academic[pitfall,aside:true,width:35%:Skipping the normalization
+Putting the eigenvectors $(1, 1)$ and $(1, -1)$ of $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$ into $Q$ without dividing by $\\sqrt{2}$ makes $Q^TQ = 2I$, so $QDQ^T = \\begin{pmatrix} 4 & 2 \\\\ 2 & 4 \\end{pmatrix} = 2A$. With unit columns, $QDQ^T = A$.
+[Read more](!#pitfalls)]@
+
+Each term $\\lambda_i \\mathbf{q}_i\\mathbf{q}_i^T$ is the eigenvalue times the [projection](!/linear-algebra/orthogonality/projections) matrix onto the line spanned by $\\mathbf{q}_i$, which is the whole eigenspace only when $\\lambda_i$ is a simple eigenvalue. The matrix $A$ is decomposed into a sum of rank-one projections, weighted by eigenvalues.
 
 The spectral theorem is the most powerful diagonalization result in real linear algebra. It guarantees real eigenvalues, orthogonal eigenvectors, and a decomposition that simultaneously diagonalizes and orthogonalizes.`,
     before: ``,
@@ -3298,6 +3320,83 @@ A matrix with any eigenvalue where $m_g < m_a$ is not diagonalizable. The shortf
 Matrices that are already diagonal are trivially diagonalizable ($P = I$). The identity matrix, all scalar matrices $cI$, and all [diagonal](!/linear-algebra/matrix/types) matrices fall here.
 
 The zero matrix is diagonalizable (it is already diagonal with all eigenvalues zero). A [nilpotent](!/linear-algebra/matrix/types) matrix is diagonalizable if and only if it is the zero matrix — any other nilpotent matrix is defective.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for many wrong answers when a matrix is diagonalized and the factorization is put to use. Four are marked with a box where they happen in the sections above, and the first, the order of the columns, is flagged in the construction section. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Mismatching the order of P and D**
+
+The eigenvectors are placed in $P$ in one order and the eigenvalues in $D$ in another, so column $j$ of $P$ no longer belongs to the $j$-th diagonal entry of $D$. The product $PDP^{-1}$ is still defined, but it is a different matrix.
+
+Wrong working: for $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ from section $2$, keep $P = \\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}$, whose first column belongs to $\\lambda = 5$, but write the eigenvalues in the other order:
+$$P\\begin{pmatrix} -1 & 0 \\\\ 0 & 5 \\end{pmatrix}P^{-1} = \\begin{pmatrix} 3 & -2 \\\\ -4 & 1 \\end{pmatrix} \\neq A$$
+
+Right working: the first diagonal entry is the eigenvalue of the first column.
+$$P\\begin{pmatrix} 5 & 0 \\\\ 0 & -1 \\end{pmatrix}P^{-1} = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix} = A$$
+
+Why it happens: the order of the eigenvalues is a free choice, so it feels as if any order will do. The freedom is real, but the same order has to be used in $P$ and in $D$, and nothing in the letters $PDP^{-1}$ shows whether it was.
+
+How to check: compare $AP$ with $PD$ column by column. Here $AP = \\begin{pmatrix} 5 & 1 \\\\ 10 & -1 \\end{pmatrix}$, while the mismatched $PD = \\begin{pmatrix} -1 & -5 \\\\ -2 & 5 \\end{pmatrix}$. The trace and the determinant do not catch this slip: the wrong product still has trace $4$ and determinant $-5$, the same as $A$.
+
+**Treating a repeated eigenvalue as failure**
+
+The characteristic polynomial has a repeated root, so the distinct-eigenvalue test does not apply, and the matrix is declared not diagonalizable without the eigenspace being computed.
+
+Wrong working: $A = \\begin{pmatrix} 3 & 1 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 1 & 3 \\end{pmatrix}$ has eigenvalues $5, 2, 2$. Since $2$ is a double root, $A$ has only two distinct eigenvalues for a $3 \\times 3$ matrix, and the conclusion drawn is that $A$ is defective.
+
+Right working: $A - 2I$ is the matrix with every entry $1$, of rank $1$, so the eigenspace of $\\lambda = 2$ has dimension $3 - 1 = 2$, spanned by $(1, -1, 0)^T$ and $(1, 0, -1)^T$. With $(1, 1, 1)^T$ for $\\lambda = 5$,
+$$P = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & -1 & 0 \\\\ 1 & 0 & -1 \\end{pmatrix}, \\quad D = \\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$$
+and $AP = PD = \\begin{pmatrix} 5 & 2 & 2 \\\\ 5 & -2 & 0 \\\\ 5 & 0 & -2 \\end{pmatrix}$, with $\\det(P) = 3 \\neq 0$. The matrix is diagonalizable.
+
+Why it happens: the sufficient condition, distinct eigenvalues, is read as if it were also necessary, and the standard example of failure, $\\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, happens to have a repeated eigenvalue.
+
+How to check: for every repeated eigenvalue, compute $n - \\text{rank}(A - \\lambda I)$ and compare it with the multiplicity. A real symmetric matrix, like this $A$, never needs the check: by the spectral theorem it is always diagonalizable.
+
+**Powering the entries of A**
+
+Once $D^k$ has been found by raising each diagonal entry to the $k$-th power, the same shortcut is applied to $A$ itself, and every entry of $A$ is raised to the $k$-th power.
+
+Wrong working:
+$$A^4 = \\begin{pmatrix} 1^4 & 2^4 \\\\ 4^4 & 3^4 \\end{pmatrix} = \\begin{pmatrix} 1 & 16 \\\\ 256 & 81 \\end{pmatrix}$$
+
+Right working: power only the diagonal factor.
+$$A^4 = P\\begin{pmatrix} 625 & 0 \\\\ 0 & 1 \\end{pmatrix}P^{-1} = \\begin{pmatrix} 209 & 208 \\\\ 416 & 417 \\end{pmatrix}$$
+
+Why it happens: for a diagonal matrix the entrywise power and the matrix power are the same thing, and the examples used to introduce powers are often diagonal. For any other matrix, the off-diagonal entries mix in every product.
+
+How to check: the trace of $A^k$ is $5^k + (-1)^k$ and the determinant is $(-5)^k$. For $k = 4$ these are $626$ and $625$. The entrywise answer has trace $82$ and determinant $81 - 4096 = -4015$.
+
+**Reading the constants off the initial vector**
+
+In the solution of $\\mathbf{x}' = A\\mathbf{x}$, the constants $c_1, \\dots, c_n$ are taken to be the entries of $\\mathbf{x}(0)$, instead of the coefficients of $\\mathbf{x}(0)$ in the eigenvector basis.
+
+Wrong working: with $A$ from section $2$ and $\\mathbf{x}(0) = (1, 0)^T$, take $c_1 = 1$ and $c_2 = 0$:
+$$\\mathbf{x}(t) = e^{5t}\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}, \\qquad \\mathbf{x}(0) = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} \\neq \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$$
+
+Right working: solve $c_1(1, 2)^T + c_2(-1, 1)^T = (1, 0)^T$, that is $c_1 - c_2 = 1$ and $2c_1 + c_2 = 0$. Adding the equations gives $3c_1 = 1$, so $c_1 = \\frac{1}{3}$ and $c_2 = -\\frac{2}{3}$:
+$$\\mathbf{x}(t) = \\frac{1}{3}e^{5t}\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} - \\frac{2}{3}e^{-t}\\begin{pmatrix} -1 \\\\ 1 \\end{pmatrix}$$
+
+Why it happens: in the standard basis the coordinates of a vector are its entries, so reading them off is a habit. In the eigenvector basis the coordinates have to be computed, as $\\mathbf{c} = P^{-1}\\mathbf{x}(0)$.
+
+How to check: put $t = 0$ into the solution. The right one gives $\\frac{1}{3}(1, 2)^T - \\frac{2}{3}(-1, 1)^T = (1, 0)^T$; the wrong one gives $(1, 2)^T$.
+
+**Skipping the normalization**
+
+For a symmetric matrix, the eigenvectors are placed in $Q$ as they come out of row reduction, and $Q^T$ is then used as the inverse. The transpose is the inverse only when the columns are unit vectors.
+
+Wrong working: $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$ has eigenvalues $3$ and $1$ with eigenvectors $(1, 1)^T$ and $(1, -1)^T$. With these as columns,
+$$Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}, \\quad QDQ^T = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}\\begin{pmatrix} 3 & 0 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix} = \\begin{pmatrix} 4 & 2 \\\\ 2 & 4 \\end{pmatrix} = 2A$$
+
+Right working: divide each eigenvector by its length $\\sqrt{2}$. Then $\\mathbf{q}_1\\mathbf{q}_1^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$, $\\mathbf{q}_2\\mathbf{q}_2^T = \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix}$, and
+$$3\\,\\mathbf{q}_1\\mathbf{q}_1^T + 1\\,\\mathbf{q}_2\\mathbf{q}_2^T = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix} = A$$
+
+Why it happens: with $P^{-1}$, the length of each eigenvector does not matter, because scaling a column of $P$ is undone by $P^{-1}$. Using $Q^T$ in place of the inverse removes that protection.
+
+How to check: compute $Q^TQ$ before using $Q^T$. It must be $I$; here the unnormalized $Q$ gives $2I$, which is why the result came out as $2A$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3670,6 +3769,14 @@ export default function DiagonalizationPage({odeEigenCases,
           </DiagramFrame>,
           `That distinction is where the usual error lives. Distinct eigenvalues guarantee diagonalizability, and it is tempting to read the guarantee backwards — but the identity matrix has a single eigenvalue repeated $n$ times and diagonalizes trivially, since every vector is an eigenvector. Repetition is not the problem; a repeated eigenvalue whose eigenspace is smaller than its multiplicity is.`,
           `When the test fails there is nothing to compute a way around, because the eigenvectors genuinely are not there. The Jordan form is what replaces diagonalization in that case: block diagonal rather than diagonal, with ones on the superdiagonal counting precisely how many eigenvectors each eigenvalue is missing. A nonzero [nilpotent matrix](#9) is the extreme case — every eigenvalue is zero, so diagonalizing it would force the matrix itself to be zero.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

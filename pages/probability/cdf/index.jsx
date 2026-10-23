@@ -667,6 +667,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -921,6 +922,36 @@ export async function getStaticProps(){
     }
   }
 
+  // Concept introduction (section 1, "from") — template A, definition last.
+  // Running instance: one fair die. Old "from" text (three paragraphs, no
+  // widgets) is kept in sectionsContent.from, unused, and reused verbatim.
+  // Sections "definition" and "mathematical" (with the formula box) unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciQuestionsTable = ciTableOpen(['question about a die roll X', 'as an event']) +
+    ciRow(['at most 4?', 'X ≤ 4']) +
+    ciRow(['more than 2?', 'X &gt; 2'], { shade: true }) +
+    ciRow(['between 3 and 5?', '2 &lt; X ≤ 5'], { last: true }) +
+    '</tbody></table>'
+  const ciRunningTable = ciTableOpen(['x', 'P(X = x)', 'P(X ≤ x): running total']) +
+    ciRow(['1', '1/6', '1/6']) +
+    ciRow(['2', '1/6', '2/6'], { shade: true }) +
+    ciRow(['3', '1/6', '3/6']) +
+    ciRow(['4', '1/6', '4/6'], { shade: true }) +
+    ciRow(['5', '1/6', '5/6']) +
+    ciRow(['6', '1/6', '6/6 = 1'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+    '</tbody></table>'
+  const ciEdgeTable = ciTableOpen(['question', 'value']) +
+    ciRow(['P(X ≤ 4)', '4/6']) +
+    ciRow(['P(X &lt; 4)', '3/6: the jump at 4 is left out'], { shade: true, color: '#a4243b', cols: [1] }) +
+    ciRow(['P(X ≤ 4.7)', '4/6: nothing new between 4 and 5'], { last: true }) +
+    '</tbody></table>'
+
   const sectionsContent={
     obj0: {
   title: `Key Terms`,
@@ -1059,6 +1090,12 @@ $$\\lim_{y \\to x^+} F_X(y) = F_X(x)$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Forgetting where the CDF is zero
+Writing $F_X(x) = 1 - e^{-x}$ for every real $x$ gives $F_X(-1) = 1 - e \\approx -1.72$, a negative probability, and $F_X(x) \\to -\\infty$ as $x \\to -\\infty$. As a CDF it must read $F_X(x) = 0$ for $x < 0$ and $1 - e^{-x}$ for $x \\ge 0$.
+[Read more](!#mistakes)]@
+
+A CDF given by a formula is usually written for the values the variable can actually take, such as $x \\ge 0$ for a waiting time, and that is where most of the work happens. The properties above, though, are statements about every real number $x$, including the values far to the left and far to the right of anything the variable can produce.
+
 These properties are what distinguish a valid CDF from an arbitrary function and guarantee that it represents a genuine probability distribution. The table below names each property, states it formally, and gives the structural guarantee it provides.
 `,
       before:``,
@@ -1081,7 +1118,13 @@ $$F_X(x) = \\sum_{k \\leq x} p_X(k)$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Reading the CDF as a point probability
+Taking $F_X(3) = \\frac{1}{2}$ for a fair die as the chance of rolling a $3$ counts the faces $1$, $2$ and $3$ together. The chance of a $3$ alone is the jump at $3$: $F_X(3) - F_X(2) = \\frac{1}{2} - \\frac{1}{3} = \\frac{1}{6}$.
+[Read more](!#mistakes)]@
+
 This makes the connection to the probability mass function clear: the PMF determines the jump sizes, while the CDF accumulates those jumps as the value increases. Reading the CDF from left to right shows how probability builds up one possible value at a time.
+
+On a graph of the staircase, two different heights can be read at every possible value: the level of the step that starts there, and the size of the riser that leads up to it. The level is a running total collected from the far left; the riser belongs to the single value where it stands.
 `,
       before:``,
       after:``,
@@ -1109,7 +1152,13 @@ $$f_X(x) = \\frac{d}{dx} F_X(x)$$
 
 @academic[rule_corollary_plain:A key consequence is that a continuous random variable assigns zero probability to any single exact value.]@
 
+@academic[pitfall,aside:true,width:35%:Reading the density as a probability
+For $X$ uniform on $[0, \\frac{1}{2}]$ the density is $f_X(x) = 2$, and taking $f_X(\\frac{1}{4}) = 2$ as $P(X \\le \\frac{1}{4})$ gives a probability above $1$. The CDF gives it: $F_X(\\frac{1}{4}) = 2 \\cdot \\frac{1}{4} = \\frac{1}{2}$.
+[Read more](!#mistakes)]@
+
 Probabilities are obtained only by looking at intervals, and the CDF provides a direct way to compute them.
+
+Two functions appear in this section, and both take a number $x$ and return a number. The CDF $F_X(x)$ returns accumulated probability, so its values always lie between $0$ and $1$. The density $f_X(x)$ returns the rate at which that probability is building near $x$; where a lot of probability is packed into a short stretch, the rate is high. A narrow interval can therefore carry a large density and still hold very little probability.
 `,
       before:``,
       after:``,
@@ -1143,6 +1192,12 @@ $$P(a < X \\le b) = F_X(b) - F_X(a)$$
 /probability/formulas]@
 
 This works uniformly for discrete, continuous, and mixed random variables. One-sided probabilities are handled just as easily by reading the CDF at a single point.
+
+@academic[pitfall,aside:true,width:35%:Dropping the mass at the left endpoint
+For a fair die, writing $P(2 \\le X \\le 4) = F_X(4) - F_X(2) = \\frac{4}{6} - \\frac{2}{6} = \\frac{1}{3}$ leaves out the face $2$. Subtracting $F_X(1)$ keeps it: $\\frac{4}{6} - \\frac{1}{6} = \\frac{1}{2}$.
+[Read more](!#mistakes)]@
+
+For a discrete variable, the interval in the formula has to match the interval in the question exactly. The left side is open at $a$ and closed at $b$, and the difference on the right reproduces precisely that: the mass sitting at $b$ is counted, the mass sitting at $a$ is not. Questions are phrased with every combination of $<$ and $\\le$, so each one is matched to this shape before any value of $F_X$ is read.
 
 For a continuous random variable the same probability is the area under the density:
 
@@ -1201,6 +1256,37 @@ Another frequent error is forgetting that the CDF is cumulative. Interpreting it
 In [discrete distributions](!/probability/distributions/discrete), jumps in the CDF are sometimes misread as arbitrary features. Each jump has a precise meaning: its size equals the probability assigned to that value.
 
 Finally, it is easy to forget that every valid CDF must satisfy basic properties such as monotonicity and proper limits. Violating these properties means the function cannot represent a [probability distribution](!/probability/distributions). The table below pairs each common mistake with the correction that prevents it.
+`,
+      more:`
+Two further mistakes come up once the CDF is used for calculations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading the density as a probability**
+
+For a continuous variable, the density $f_X(x)$ is evaluated at a point and its value is reported as a probability, either as $P(X \\le x)$ or as the chance of landing at $x$.
+
+Wrong working: for $X$ uniform on $[0, \\frac{1}{2}]$, the density is $f_X(x) = 2$ on that interval, so
+$$P\\left(X \\le \\frac{1}{4}\\right) = f_X\\left(\\frac{1}{4}\\right) = 2$$
+
+Right working: the probability is the area under the density up to $\\frac{1}{4}$, which is the value of the CDF there.
+$$F_X\\left(\\frac{1}{4}\\right) = \\int_0^{1/4} 2\\,dt = \\frac{1}{2}$$
+
+Why it happens: for a discrete variable the PMF value at a point is a probability, and the habit carries over to the density, which looks like the same kind of function and is written with almost the same letter as $F_X$.
+
+How to check: a probability can never exceed $1$, while a density can. Here $f_X(x) = 2$ at every point of $[0, \\frac{1}{2}]$, although the whole interval holds probability $F_X(\\frac{1}{2}) = 1$.
+
+**Dropping the mass at the left endpoint**
+
+For a discrete variable, the probability of a closed interval $a \\le X \\le b$ is computed as $F_X(b) - F_X(a)$, the formula for the half-open interval $a < X \\le b$.
+
+Wrong working: for a fair die,
+$$P(2 \\le X \\le 4) = F_X(4) - F_X(2) = \\frac{4}{6} - \\frac{2}{6} = \\frac{1}{3}$$
+
+Right working: $F_X(2)$ already contains the face $2$, so subtracting it removes that face from the answer. Subtract the CDF one value lower instead.
+$$P(2 \\le X \\le 4) = F_X(4) - F_X(1) = \\frac{4}{6} - \\frac{1}{6} = \\frac{1}{2}$$
+
+Why it happens: the formula $P(a < X \\le b) = F_X(b) - F_X(a)$ is remembered without its strict inequality on the left. For continuous variables the slip costs nothing, since $P(X = a) = 0$, so it goes unnoticed until a discrete problem.
+
+How to check: count the values directly. The faces $2$, $3$ and $4$ give $\\frac{3}{6} = \\frac{1}{2}$.
 `,
       before:``,
       after:``,
@@ -1292,6 +1378,13 @@ The sections that follow explain how this accumulation works, how it is defined 
     vlines: [{ x: 0 }],
     notes: [{ x: 0.08, y: 0.18, text: 'jump 0.3 = P(X = 0)', pos: 'e', color: 'r' }, { x: 2.05, y: 1.1, text: 'flat: no probability', pos: 'e', color: 'r' }],
     caption: 'One CDF, both kinds: a jump for the mass at 0, a ramp for the rest' };
+  const conceptIntroFigures = {
+    dieCdf: discreteCdfDiagrams.discreteUniform,
+    questionsTable: ciQuestionsTable,
+    runningTable: ciRunningTable,
+    edgeTable: ciEdgeTable,
+  };
+
   const demoUnits = {
     u_discrete_0: demoUnitFrame({
       svg: discreteCdfDiagrams.binomial,
@@ -1324,6 +1417,7 @@ The sections that follow explain how this accumulation works, how it is defined 
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       propertiesTable,
@@ -1352,10 +1446,72 @@ export default function PageTemplate({
   mistakesTable,
   overviewTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Many questions about a random number ask whether it stays below some level.`,
+        content: [
+          `Probability is first defined for events, but many questions involve numerical values rather than yes-or-no outcomes. A random variable connects these two views by assigning a number to each outcome of an experiment.`,
+          `Once a random variable is defined, statements about its value naturally form events. Expressions like $X \\le x$, $X > x$, or $a < X \\le b$ describe collections of outcomes and therefore have probabilities attached to them.`,
+          ciTable('questionsTable'),
+          `Answering each such question from scratch is tedious. One list that answered every "at most $x$" at once would answer the others too.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For a die, a running total of the probabilities builds that list.`,
+        content: [
+          `A fair die shows each face with probability $\\frac{1}{6}$. Go up the faces and keep a running total: the probability of rolling at most $x$.`,
+          ciTable('runningTable'),
+          `"More than $2$" is then $1 - \\frac{2}{6} = \\frac{4}{6}$, and "between $3$ and $5$" is $\\frac{5}{6} - \\frac{2}{6} = \\frac{3}{6}$ — read off the same column.`,
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in the running total was chosen: each entry is the last one plus one more probability.`,
+        content: `So the column can only stay the same or grow, it starts at $0$ before the smallest value and ends at $1$ after the largest. Between faces nothing is added, so the total stays flat and then jumps at each face — a staircase.`,
+        visual: ciSvg('dieCdf'),
+        caption: `The running total for a die, drawn: flat between faces, a jump of $\\frac{1}{6}$ at each face, ending at $1$. The same state is on the [discrete CDF visualizer](!/probability/visual-tools/cdf/discrete).`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [cumulative distribution function](!/probability/definitions#cumulative_distribution_function) of a random variable $X$ gives, for each real number $x$, the probability that $X$ is at most $x$: $F(x) = P(X \\le x)$.`,
+        footer: `For the die, $F(4) = \\frac{4}{6}$. The next two sections state the meaning and the formal definition in full.`,
+      },
+      {
+        id: 'kind',
+        lead: `A CDF is a function, defined for every real number, not only for the values X can take.`,
+        content: [
+          `Its input is any number $x$ and its output is a probability between $0$ and $1$. For the die, $F(4.7) = \\frac{4}{6}$ and $F(-3) = 0$, even though the die never shows $4.7$ or $-3$.`,
+          `The cumulative distribution function is built exactly on this connection. It takes events of the form $X \\le x$ and assigns to each value $x$ the probability of that event, linking random variables back to the event-based foundation of probability.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Running totals generalize; the jumps were particular to a die, and they make ≤ and < differ.`,
+        content: [
+          `What generalizes: every random variable has a CDF, built the same way. What was particular: a die's values are separate, so its CDF climbs in jumps; a continuous variable such as a measured height has a CDF that rises smoothly. And at a jump, "at most" and "less than" are different questions.`,
+          ciTable('edgeTable'),
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page states the CDF's core meaning and formal definition, its notation and properties, the CDF of discrete, continuous and mixed variables, and how to use it to find probabilities.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1372,7 +1528,7 @@ export default function PageTemplate({
         title:sectionsContent.from.title,
         link:'',
         content:[
-            sectionsContent.from.content,
+            <ConceptIntro key={'from-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1483,6 +1639,7 @@ export default function PageTemplate({
         content:[
             sectionsContent.mistakes.content,
             <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
+            sectionsContent.mistakes.more,
         ]
     },
     {

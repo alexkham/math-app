@@ -417,7 +417,7 @@ const sectionsContent = {
 
 ## Formulas Used on This Page
 
-- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + r_3 = -a_{n-1}$, $r_1 r_2 r_3 = (-1)^n a_0$
+- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + \\cdots + r_n = -a_{n-1}$, $r_1 r_2 \\cdots r_n = (-1)^n a_0$
 `,
     before: ``,
     after: `
@@ -443,7 +443,7 @@ The degree governs the maximum number of roots.
 
 @academic[rule_theorem_plain:A polynomial of degree $n$ has at most $n$ real roots, and when counted with multiplicity over the complex numbers, it has exactly $n$ roots.]@
 
-A cubic may have one or three real roots, a quartic may have zero, two, or four, and the possible counts depend on the specific coefficients involved.`,
+Counted with multiplicity, a cubic may have one or three real roots, a quartic may have zero, two, or four, and the possible counts depend on the specific coefficients involved.`,
     before: ``,
     after: ``,
     link: '',
@@ -482,7 +482,15 @@ Finding roots and finding factors are two expressions of the same problem.
 
 This connection creates a degree-reduction strategy. Once a root $r$ is identified — by inspection, by the rational root theorem, or by other means — dividing $P(x)$ by $(x - r)$ produces a quotient $Q(x)$ of degree $n - 1$. The roots of $Q(x)$ are the remaining roots of $P(x)$. Repeating the process reduces the degree one step at a time until the quotient is quadratic, at which point the quadratic formula finishes the job.
 
-[Polynomial division](!/algebra/polynomials/operations) can be carried out using long division or synthetic division. The [polynomial calculator](!/algebra/calculators/polynomial) does both and shows every step. Synthetic division is faster but limited to divisors of the form $(x - r)$, which is exactly the form needed when factoring out a known root.`,
+@academic[pitfall,aside:true,width:35%:Using the wrong sign of r
+Dividing $x^3 + 2x^2 - 5x - 6$ by $(x + 1)$ with $r = 1$ gives the remainder $P(1) = -8$, so the factor seems to fail. Since $x + 1 = x - (-1)$, $r = -1$: the remainder is $P(-1) = 0$ and the quotient is $x^2 + x - 6$.
+[Read more](!#pitfalls)]@
+
+[Polynomial division](!/algebra/polynomials/operations) can be carried out using long division or synthetic division. The [polynomial calculator](!/algebra/calculators/polynomial) does both and shows every step. Synthetic division is faster but limited to divisors of the form $(x - r)$, which is exactly the form needed when factoring out a known root.
+
+In synthetic division, the coefficients of $P(x)$ are written in a row and the number $r$ from the divisor $(x - r)$ is placed beside them. Each step multiplies by $r$ and adds the next coefficient. The last number produced is the remainder $P(r)$, so the same short table both tests a candidate and, when the remainder is zero, delivers the quotient.
+
+@academic[punchline:Each root found peels off one factor, leaving a smaller polynomial that holds all the remaining roots.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -497,7 +505,19 @@ This produces a finite, testable list of candidates. For the polynomial $2x^3 - 
 @academic[formula_callout:The Rational Root Theorem
 $$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$]@
 
+@academic[pitfall,aside:true,width:35%:Swapping the roles of p and q
+Building the list as divisors of $2$ over divisors of $12$ gives $\\pm 1, \\pm 2, \\pm \\frac{1}{2}, \\pm \\frac{1}{3}, \\dots, \\pm \\frac{1}{12}$, and the root $\\frac{3}{2}$ is missing. The numerator divides the constant term: $3$ divides $12$ and $2$ divides $2$, so $\\frac{3}{2}$ is a candidate.
+[Read more](!#pitfalls)]@
+
+Some of these fractions repeat values already on the list, such as $\\frac{2}{2} = 1$ and $\\frac{6}{2} = 3$, so each value is written only once, and sixteen candidates remain. Each one is tested by substitution, and the search can stop at the first candidate that gives zero, since one root is enough to begin reducing the degree.
+
 Testing $x = 2$: $P(2) = 2(8) - 3(4) - 8(2) + 12 = 16 - 12 - 16 + 12 = 0$. So $x = 2$ is a root, $(x - 2)$ is a factor, and dividing reduces the cubic to a quadratic $2x^2 + x - 6 = 0$, which the quadratic formula or further factoring can handle.
+
+@academic[pitfall,aside:true,width:35%:Dropping the root that was divided out
+Solving only the quotient $2x^2 + x - 6 = 0$ gives $x = \\frac{3}{2}$ or $x = -2$, two roots for a cubic. The root found by testing stays in the answer: $x = 2$, $x = \\frac{3}{2}$ and $x = -2$.
+[Read more](!#pitfalls)]@
+
+Each division lowers the degree by one, so the work on this cubic ends with a quadratic. That quadratic is a new, smaller equation: its roots are the roots of the cubic that remain once the factor $(x - 2)$ has been taken out. Multiplying back, $(x - 2)(2x^2 + x - 6)$ returns the original polynomial.
 
 The theorem guarantees nothing about irrational or complex roots. A polynomial like $x^3 - 2 = 0$ has no rational roots at all — its only real root is $\\sqrt[3]{2}$. The rational root theorem is a sieve, not a guarantee, and when every candidate fails, other methods are needed.`,
     before: ``,
@@ -513,6 +533,9 @@ The theorem guarantees nothing about irrational or complex roots. A polynomial l
 $$t^3 + pt + q = 0$$]@
 
 where $p$ and $q$ depend on the original coefficients. This depressed form is the starting point for Cardano's formula, which expresses the roots through cube roots and square roots of expressions involving $p$ and $q$.
+
+@academic[fact,aside:true,width:35%:Real roots through imaginary numbers
+Cardano's formula writes a root of $x^3 - 15x - 4 = 0$ as $\\sqrt[3]{2 + 11i} + \\sqrt[3]{2 - 11i}$, which is just $4$, since $(2 \\pm i)^3 = 2 \\pm 11i$. Bombelli worked this out in 1572: a quadratic needing $\\sqrt{-1}$ could be dismissed as unsolvable, but this cubic plainly has the root $4$.]@
 
 Cardano's formula yields all three roots, but its practical use is limited. The expressions under the radicals often involve nested roots that are difficult to simplify. Worse, when all three roots are real — the so-called casus irreducibilis — the formula necessarily passes through complex intermediate values to reach real answers. The formula is correct but computationally awkward.
 
@@ -536,7 +559,13 @@ The procedure works in full generality, but the algebra is heavy. Even for modes
 
 In practice, quartic equations that appear in coursework are usually structured to admit simpler approaches. Bi-quadratic equations $ax^4 + bx^2 + c = 0$ reduce directly to quadratics via the substitution $u = x^2$. Quartics with a rational root are handled by the rational root theorem and degree reduction. Quartics that factor into two quadratics — recognizable by grouping or by inspection — split without invoking the full Ferrari machinery.
 
-A quartic with real coefficients can have zero, two, or four real roots. Unlike cubics, a quartic is not guaranteed to have any real roots at all.`,
+@academic[pitfall,aside:true,width:35%:Taking only the positive square root
+Back-substituting $u = 1$ and $u = 4$ in $x^4 - 5x^2 + 4 = 0$ as $x = 1$ and $x = 2$ gives only two roots. Each positive $u$ gives two values, $x = \\pm\\sqrt{u}$, so the roots are $x = \\pm 1$ and $x = \\pm 2$.
+[Read more](!#pitfalls)]@
+
+With $u = x^2$, the quadratic in $u$ is solved first, and its solutions are values of $x^2$, not of $x$. Each one is then turned back into values of $x$ by solving $x^2 = u$. The sign of $u$ decides what that step yields: a negative $u$ yields no real $x$ at all, since no real square is negative.
+
+Counted with multiplicity, a quartic with real coefficients can have zero, two, or four real roots. Unlike cubics, a quartic is not guaranteed to have any real roots at all.`,
     before: ``,
     after: ``,
     link: '',
@@ -545,6 +574,9 @@ A quartic with real coefficients can have zero, two, or four real roots. Unlike 
   obj7: {
     title: `Degree Five and Beyond`,
     content: `The Abel–Ruffini theorem, proved in the early nineteenth century, establishes that no formula composed of arithmetic operations and radicals can solve every polynomial equation of degree five or higher. This does not mean that specific quintic equations are unsolvable — many factor, many have rational roots, and many yield to substitution. It means that no single formula analogous to the quadratic formula exists that accepts five arbitrary coefficients and returns the roots.
+
+@academic[fact,aside:true,width:35%:A single quintic beyond radicals
+Some single equations are out of reach too: no root of $x^5 - x - 1 = 0$ can be written in radicals, since its Galois group is $S_5$. Its one real root, about $1.1673$, is still computable to any precision.]@
 
 The impossibility is not a matter of insufficient ingenuity. Galois theory provides the precise criterion: a polynomial equation is solvable by radicals if and only if its Galois group is a solvable group. The symmetric group $S_n$ is solvable for $n \\leq 4$ and not solvable for $n \\geq 5$, which is why degree four is the last degree admitting a universal radical formula.
 
@@ -575,7 +607,7 @@ The general pattern is: odd multiplicity means the graph crosses the axis, even 
     content: `Vieta's formulas, introduced for the quadratic case on the [quadratic equations](!/algebra/equations/quadratic) page, extend to polynomials of any degree.
 
 @academic[formula_callout:Vieta's Formulas (General)
-$$r_1 + r_2 + r_3 = -a_{n-1} \\qquad r_1 r_2 r_3 = (-1)^n a_0$$
+$$r_1 + r_2 + \\cdots + r_n = -a_{n-1} \\qquad r_1 r_2 \\cdots r_n = (-1)^n a_0$$
 /algebra/formulas#vietas_formulas_general]@
 
 @academic[formulas_link:Browse all algebra formulas
@@ -597,6 +629,10 @@ continuing with alternating signs down to
 @academic[formula_callout:Relationships Between Roots and Coefficients
 $$r_1 \\cdot r_2 \\cdots r_n = (-1)^n a_0$$]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the sign in the product of roots
+Reading the product of the roots of $2x^3 - 3x^2 - 8x + 12 = 0$ as $\\frac{12}{2} = 6$ drops the alternating sign. For degree $3$ the product is $(-1)^3 \\cdot \\frac{12}{2} = -6$, and indeed $(-2) \\cdot \\frac{3}{2} \\cdot 2 = -6$.
+[Read more](!#pitfalls)]@
+
 Each formula equates a coefficient to an elementary symmetric polynomial in the roots. The first gives the sum of all roots, the second the sum of all pairwise products, the third the sum of all triple products, and the last the product of all roots.
 
 These relationships hold whether the roots are real or complex, rational or irrational. They allow certain questions about the roots to be answered without solving: the sum and product of the roots are readable directly from the coefficients. For a non-monic polynomial $a_n x^n + \\cdots + a_0 = 0$, dividing through by $a_n$ first converts it to monic form, or equivalently, each formula acquires $a_n$ in its denominator.`,
@@ -608,6 +644,90 @@ These relationships hold whether the roots are real or complex, rational or irra
   obj10: {
     title: `Summary by Degree`,
     content: `The table below collects the picture by degree: what the polynomial is called, whether a closed-form formula in radicals exists, the maximum number of real roots, and the technique most commonly applied in practice. The Fundamental Theorem of Algebra guarantees that the roots exist over $\\mathbb{C}$ for every row; what changes across degrees is whether they can be reached by a finite formula in radicals.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again when polynomial equations are solved by hand. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Using the wrong sign of r**
+
+The divisor is written as $(x + a)$, and the number $a$ is used as $r$ in synthetic division or in the Remainder Theorem, although both are stated for a divisor of the form $(x - r)$.
+
+Wrong working: to divide $P(x) = x^3 + 2x^2 - 5x - 6$ by $(x + 1)$, synthetic division is run with $r = 1$. The coefficients $1, 2, -5, -6$ become $1, 3, -2, -8$, so the remainder is $-8$ and $(x + 1)$ is rejected as a factor.
+
+Right working: $x + 1 = x - (-1)$, so $r = -1$. The coefficients become $1, 1, -6, 0$: the remainder is $0$ and the quotient is $x^2 + x - 6 = (x + 3)(x - 2)$.
+$$x^3 + 2x^2 - 5x - 6 = (x + 1)(x + 3)(x - 2)$$
+The roots are $x = -1$, $x = -3$ and $x = 2$.
+
+Why it happens: the plus sign in the divisor is copied as it is written, but the theorems subtract $r$, and $x + 1$ is $x$ minus the number $-1$.
+
+How to check: set the divisor equal to zero. $x + 1 = 0$ gives $x = -1$, the number that belongs in the division. The wrong remainder is a clue too: $-8$ is $P(1) = 1 + 2 - 5 - 6$, which tests the factor $(x - 1)$, not $(x + 1)$.
+
+**Swapping the roles of p and q**
+
+The Rational Root Theorem pairs two lists of divisors, one from the constant term and one from the leading coefficient. The lists are put the wrong way round, so the candidates are built as divisors of $a_n$ over divisors of $a_0$.
+
+Wrong working: for $2x^3 - 3x^2 - 8x + 12 = 0$, divisors of $2$ over divisors of $12$ give
+$$\\pm 1, \\pm 2, \\pm \\frac{1}{2}, \\pm \\frac{1}{3}, \\pm \\frac{2}{3}, \\pm \\frac{1}{4}, \\pm \\frac{1}{6}, \\pm \\frac{1}{12}$$
+Testing this list finds $x = 2$ and $x = -2$, but the third root is not on it.
+
+Right working: the numerator $p$ divides the constant term $12$, and the denominator $q$ divides the leading coefficient $2$.
+$$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$
+This list contains all three roots: $x = -2$, $x = \\frac{3}{2}$ and $x = 2$.
+
+Why it happens: both coefficients are split into divisors in exactly the same way, and nothing in that arithmetic shows which list belongs on top.
+
+How to check: try the recipe on a polynomial whose roots are known. $(x - 2)(x - 3) = x^2 - 5x + 6$ has the roots $2$ and $3$, which divide the constant term $6$. The swapped recipe would allow only $\\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{3}, \\pm \\frac{1}{6}$ and miss both.
+
+**Dropping the root that was divided out**
+
+Once a root has been found and divided out, the work moves on to the quotient. The roots of the quotient are given as the answer, and the root that started the reduction is left behind.
+
+Wrong working:
+$$2x^3 - 3x^2 - 8x + 12 = (x - 2)(2x^2 + x - 6)$$
+$$2x^2 + x - 6 = (2x - 3)(x + 2) = 0 \\implies x = \\frac{3}{2} \\text{ or } x = -2$$
+The answer is given as $x = \\frac{3}{2}$ or $x = -2$.
+
+Right working: the cubic is the product of all three factors.
+$$(x - 2)(2x - 3)(x + 2) = 0 \\implies x = 2, \\; x = \\frac{3}{2} \\text{ or } x = -2$$
+
+Why it happens: the quadratic quotient looks like a complete new problem, and solving it feels like the last step. The first root was found by testing rather than by solving, so it never appears in the final line of working.
+
+How to check: count the roots against the degree. Each factor $(x - r)$ removed by division accounts for one root, and the quotient holds the rest; here one division and two roots of the quotient make the three that a cubic has. Substituting confirms it: $P(2) = 16 - 12 - 16 + 12 = 0$.
+
+**Taking only the positive square root**
+
+In a bi-quadratic equation, the substitution $u = x^2$ gives a quadratic in $u$. Its solutions are turned back into values of $x$ with the positive square root only, and half of the roots are lost.
+
+Wrong working:
+$$x^4 - 5x^2 + 4 = 0 \\implies u^2 - 5u + 4 = (u - 1)(u - 4) = 0 \\implies u = 1 \\text{ or } u = 4$$
+$$x = \\sqrt{1} = 1 \\text{ or } x = \\sqrt{4} = 2$$
+
+Right working: each value of $u$ is a value of $x^2$, and $x^2 = u$ has two solutions when $u > 0$.
+$$x^2 = 1 \\implies x = \\pm 1 \\qquad x^2 = 4 \\implies x = \\pm 2$$
+The quartic has four real roots: $-2$, $-1$, $1$ and $2$.
+
+Why it happens: $\\sqrt{4} = 2$ is correct as the value of the square root, and the step from $x^2 = 4$ to $x = \\sqrt{4}$ looks like the same operation. But solving $x^2 = 4$ asks for every number whose square is $4$, and there are two.
+
+How to check: a bi-quadratic has only even powers of $x$, so $x$ and $-x$ always give the same value; the opposite of every root is a root too. Substituting $x = -1$ gives $1 - 5 + 4 = 0$.
+
+**Dropping the sign in the product of roots**
+
+Vieta's formulas carry alternating signs: the product of the roots is $(-1)^n \\frac{a_0}{a_n}$ and the sum is $-\\frac{a_{n-1}}{a_n}$. The sign factor is dropped and the product is read straight from the coefficients as $\\frac{a_0}{a_n}$.
+
+Wrong working: for $2x^3 - 3x^2 - 8x + 12 = 0$, the product of the roots is taken as $\\frac{12}{2} = 6$.
+
+Right working: the degree is $n = 3$, so
+$$r_1 r_2 r_3 = (-1)^3 \\cdot \\frac{12}{2} = -6$$
+The roots $-2$, $\\frac{3}{2}$ and $2$ confirm it: $(-2) \\cdot \\frac{3}{2} \\cdot 2 = -6$. Their sum is $-\\frac{-3}{2} = \\frac{3}{2}$, and indeed $-2 + \\frac{3}{2} + 2 = \\frac{3}{2}$.
+
+Why it happens: for a quadratic, the product of the roots is $\\frac{c}{a}$ with no visible sign, because $(-1)^2 = 1$. The habit carries over to odd degrees, where the sign factor is $-1$.
+
+How to check: build a cubic from simple roots and compare. $(x - 1)(x - 2)(x - 3) = x^3 - 6x^2 + 11x - 6$ has roots with product $6$, while its constant term is $-6$.`,
     before: ``,
     after: ``,
     link: '',
@@ -627,7 +747,7 @@ const introContent = {
 const faqQuestions = {
   obj1: {
     question: "Does Abel–Ruffini mean fifth-degree equations cannot be solved?",
-    answer: "No, and this is the usual misreading. Plenty of quintics are solvable: many factor, many have rational roots, many yield to substitution. What the theorem rules out is a single formula in arithmetic and radicals that takes five arbitrary coefficients and returns the roots. Individual equations are fine; a universal formula is what does not exist.",
+    answer: "No, and this is the usual misreading. Plenty of quintics are solvable: many factor, many have rational roots, many yield to substitution. What the theorem rules out is a single formula in arithmetic and radicals that takes five arbitrary coefficients and returns the roots. Many individual equations, such as $x^5 - 32 = 0$, are solvable in radicals; but no universal formula exists, and some specific equations, such as $x^5 - x - 1 = 0$, have no solution in radicals at all.",
     sectionId: "7"
   },
   obj2: {
@@ -891,6 +1011,7 @@ export default function PolynomialEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:From degree five on, no formula in radicals covers every equation, yet every root exists and can be computed to any precision.]@`,
         ]
     },
     {
@@ -919,6 +1040,7 @@ export default function PolynomialEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+          `@academic[punchline:A polynomial's coefficients already hold the sum and the product of its roots, so both are known before any root is found.]@`,
         ]
     },
     {
@@ -932,6 +1054,14 @@ export default function PolynomialEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

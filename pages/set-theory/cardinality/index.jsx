@@ -2619,7 +2619,7 @@ const keyWords = [
     </tr>
     <tr>
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Uncountable</td>
-      <td style="padding: 12px 15px; color: #34495e;">no bijection with ℕ is possible</td>
+      <td style="padding: 12px 15px; color: #34495e;">infinite, and no bijection with ℕ is possible</td>
       <td style="padding: 12px 15px; color: #34495e;">ℝ; any interval &nbsp;(a, b); &nbsp;𝒫(ℕ)</td>
       <td style="padding: 12px 15px; color: #34495e;">Cantor&apos;s diagonal argument &nbsp;(or Cantor&apos;s theorem)</td>
     </tr>
@@ -2728,6 +2728,12 @@ The empty set contains no elements:
 @academic[formula_callout:Definition of Cardinality
 $$|\\emptyset| = 0$$]@
 
+@academic[pitfall,aside:true,width:35%:Counting the elements inside an element
+Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts what is inside the inner braces. Each inner set is one element: $|\\{\\emptyset\\}| = 1$ and $|\\{\\{1, 2\\}, 3\\}| = 2$.
+[Read more](!#pitfalls)]@
+
+The elements being counted can be of any kind: numbers, letters, words, or other sets. A set whose elements are themselves sets is written with braces inside braces, as in $\\{\\{1, 2\\}, 3\\}$ or $\\{\\emptyset\\}$. Such sets are counted by the same rule as every other set, and they come up throughout this page once power sets appear, since every element of a power set is itself a set.
+
 Two sets have the same cardinality when a bijection (one-to-one correspondence) exists between them. For finite sets, this simply means they have the same count. For infinite sets, this definition becomes the primary tool for comparing sizes.
     `,
     before: ``,
@@ -2770,6 +2776,12 @@ $$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C
 @academic[formulas_link:Browse all set theory formulas
 /set-theory/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Forgetting the triple intersection
+Stopping after the pairs gives $4 + 3 + 3 - 2 - 1 - 2 = 5$: the element 4 is added three times and subtracted three times, so it is not counted. Adding $|A \\cap B \\cap C| = 1$ back gives $6$.
+[Read more](!#pitfalls)]@
+
+For a concrete case, take $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$. The singles are $4$, $3$ and $3$, and the pairwise intersections $\\{2, 4\\}$, $\\{4\\}$ and $\\{4, 5\\}$ have sizes $2$, $1$ and $2$. The element $4$ is the only one that lies in all three sets. The union is $\\{1, 2, 3, 4, 5, 6\\}$, with six elements, and each of the seven terms of the formula uses one of these counts.
+
 When the sets share no elements, the correction terms vanish and the cardinality simply adds:
 
 @academic[formula_callout:Cardinality of Disjoint Union
@@ -2800,6 +2812,12 @@ The standard number sets are all infinite:
 
 A defining property of infinite sets: an infinite set can be put into one-to-one correspondence with a proper subset of itself. For example, the function $f(n) = 2n$ maps $\\mathbb{N}$ bijectively onto the even numbers, which form a proper subset of $\\mathbb{N}$.
 
+@academic[pitfall,aside:true,width:35%:Treating a proper subset as smaller
+Concluding that the even numbers are fewer than $\\mathbb{N}$, because the odd numbers are missing from them, applies a rule that holds only for finite sets. The pairing $n \\mapsto 2n$ is a bijection, so $|\\{0, 2, 4, \\ldots\\}| = |\\mathbb{N}|$.
+[Read more](!#pitfalls)]@
+
+In the example, every natural number $n$ has exactly one partner $2n$, and every even number $m$ comes from exactly one natural number, $m/2$. The pairing therefore uses up both sets completely, with no element left over on either side. For a finite set, removing even a single element always leaves fewer elements than before, so no such pairing between the set and a part of it is possible.
+
 Not all infinite sets have the same cardinality. The integers and rationals turn out to be the same size as the natural numbers, but the real numbers form a strictly larger infinity.
     `,
     before: ``,
@@ -2823,7 +2841,18 @@ $$0, 1, -1, 2, -2, 3, -3, \\ldots$$]@
 
 establishes a bijection with $\\mathbb{N}$.
 
+@academic[pitfall,aside:true,width:35%:Listing the positive integers first
+Writing $0, 1, 2, 3, \\ldots$ and planning the negatives after them never reaches $-1$: no finite position is left for it. The alternating list puts $-1$ at position $3$ and $-3$ at position $7$.
+[Read more](!#pitfalls)]@
+
+In this listing, positive and negative integers take turns, with $0$ at the start. Each integer has a definite place: counting positions from $1$, the positive integer $n$ is entry number $2n$ and the negative integer $-n$ is entry number $2n + 1$. Reading the list in order, every integer is reached after finitely many steps, and no integer appears twice.
+
 The rationals $\\mathbb{Q}$ are countable despite appearing denser than $\\mathbb{Z}$. By arranging positive rationals in a grid and traversing diagonally, every rational is eventually listed.
+
+@academic[fact,aside:true,width:35%:Dense, yet no bigger than $\\mathbb{N}$
+Between any two fractions lie infinitely many more, even between $0$ and $\\frac{1}{1000}$. Still, $\\mathbb{Q}$ can be listed one by one, so it has exactly as many elements as $\\mathbb{N}$.]@
+
+Walking the diagonals of the grid gives the start of such a list: $1, \\frac{1}{2}, 2, \\frac{1}{3}, 3, \\frac{1}{4}, \\frac{2}{3}, \\frac{3}{2}, 4, \\ldots$ Along each diagonal the numerator and the denominator add up to the same number, and a fraction such as $\\frac{2}{2}$, equal to one already listed, is skipped. Each diagonal is finite, so every positive rational is reached after finitely many steps. Interleaving the negatives and $0$, as with the integers, extends the list to all of $\\mathbb{Q}$.
 
 A set is called countable if it is either finite or countably infinite. Some authors reserve "countable" for countably infinite sets only — context determines the convention.
 
@@ -2842,7 +2871,10 @@ A set is uncountable if it is infinite but not countable — its elements cannot
 
 @academic[rule_theorem_plain:The real numbers $\\mathbb{R}$ are uncountable.]@
 
-Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list. This new number differs from every listed number, contradicting the assumption that the list was complete.
+@academic[fact,aside:true,width:35%:The irrationals outnumber the fractions
+Since $\\mathbb{Q}$ is countable and $\\mathbb{R}$ is not, the irrationals alone are uncountable: a list of them, merged with a list of $\\mathbb{Q}$, would list all of $\\mathbb{R}$. The fractions are only a countable sliver of the line.]@
+
+Cantor's diagonal argument proves this: assume a listing of all real numbers between $0$ and $1$ exists. Construct a new number by making its $n$-th decimal digit different from the $n$-th digit of the $n$-th number in the list, using only digits other than $0$ and $9$ so that no number with two decimal forms (such as $0.4999\\ldots = 0.5$) can slip through. This new number differs from every listed number, contradicting the assumption that the list was complete.
 
 Any interval $(a, b)$ with $a < b$ is uncountable. In fact, every such interval has the same cardinality as $\\mathbb{R}$ itself — a bijection exists between them.
 
@@ -2899,6 +2931,12 @@ Cardinalities are compared using functions between sets:
 
 - $|A| < |B|$ when $|A| \\leq |B|$ and $|A| \\neq |B|$
 
+@academic[pitfall,aside:true,width:35%:Concluding smaller size from one injection
+Taking the injection $n \\mapsto n$ from $\\mathbb{N}$ into $\\mathbb{Q}$, which misses $\\tfrac{1}{2}$ and infinitely many other rationals, as proof that $|\\mathbb{N}| < |\\mathbb{Q}|$ overlooks the listing of the rationals. That listing is a bijection, so $|\\mathbb{N}| = |\\mathbb{Q}|$.
+[Read more](!#pitfalls)]@
+
+Sending each natural number to itself is an injection from $\\mathbb{N}$ into $\\mathbb{Z}$, so $|\\mathbb{N}| \\leq |\\mathbb{Z}|$. In the opposite direction, giving each integer its position in the listing $0, 1, -1, 2, -2, \\ldots$ from the section on countable sets is an injection from $\\mathbb{Z}$ into $\\mathbb{N}$, so $|\\mathbb{Z}| \\leq |\\mathbb{N}|$ as well. Two sets with injections running both ways are exactly the situation of the theorem below.
+
 @academic[rule_theorem:Cantor–Schröder–Bernstein Theorem
 The Cantor-Schröder-Bernstein theorem states: if $|A| \\leq |B|$ and $|B| \\leq |A|$, then $|A| = |B|$.]@
 
@@ -2914,6 +2952,75 @@ $$|A| < |\\mathcal{P}(A)|$$
 The [power set](!/set-theory/subsets) always has strictly greater cardinality than the original set. For finite sets, this is immediate: $2^n > n$. For infinite sets, the proof uses a diagonal argument similar to the uncountability of $\\mathbb{R}$.
 
 This theorem implies there is no largest cardinality — given any set, its power set is strictly larger, producing an endless hierarchy of infinite sizes.
+    `,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj8: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes come up again and again when sets are measured and compared. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Counting the elements inside an element**
+
+When the elements of a set are themselves sets, the members of those inner sets are counted as well, or an inner empty set is read as "nothing". Cardinality counts only the items listed at the outer level of braces.
+
+Wrong working: $|\\{\\{1, 2\\}, 3\\}| = 3$, counting 1, 2 and 3; and $|\\{\\emptyset\\}| = 0$, because the empty set has no elements.
+
+Right working: the outer braces of $\\{\\{1, 2\\}, 3\\}$ hold two items, the set $\\{1, 2\\}$ and the number $3$, so its cardinality is $2$. The outer braces of $\\{\\emptyset\\}$ hold one item, the empty set, so $|\\{\\emptyset\\}| = 1$, while $|\\emptyset| = 0$.
+
+Why it happens: inner braces look like grouping marks, and the numbers inside them catch the eye more than the braces do.
+
+How to check: split the listing only at the commas of the outer level and count the pieces. For a power set this gives the expected $2^n$: $\\mathcal{P}(\\{1\\}) = \\{\\emptyset, \\{1\\}\\}$ has $2^1 = 2$ elements.
+
+**Forgetting the triple intersection**
+
+For three sets, the singles are added, the pairwise intersections are subtracted, and the count stops there. The elements in all three sets are then added three times and subtracted three times, so they are not counted at all.
+
+Wrong working: for $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$, the size of the union is given as $4 + 3 + 3 - 2 - 1 - 2 = 5$.
+
+Right working: add back $|A \\cap B \\cap C| = 1$, the size of $\\{4\\}$: $4 + 3 + 3 - 2 - 1 - 2 + 1 = 6$. This matches the union $\\{1, 2, 3, 4, 5, 6\\}$.
+
+Why it happens: the two-set formula ends with a subtraction, and subtracting the overlaps feels like the complete correction. The over-correction at the centre stays hidden until one element is traced through every term.
+
+How to check: trace an element that is in all three sets, here $4$. It is counted by $|A|$, $|B|$ and $|C|$ and removed by all three pairwise terms, so without the triple term it is counted $3 - 3 = 0$ times. For small sets, writing the union out and counting it settles the answer.
+
+**Treating a proper subset as smaller**
+
+A proper subset of an infinite set is assumed to have a smaller cardinality, because some elements were removed to form it. This holds for finite sets but fails for infinite ones, where sizes are compared by bijections, not by containment.
+
+Wrong working: the even numbers $\\{0, 2, 4, \\ldots\\}$ leave out every odd number, so $|\\{0, 2, 4, \\ldots\\}| < |\\mathbb{N}|$.
+
+Right working: $f(n) = 2n$ pairs each $n \\in \\mathbb{N}$ with exactly one even number and reaches every even number $m$ from $n = m/2$. It is a bijection, so $|\\{0, 2, 4, \\ldots\\}| = |\\mathbb{N}|$.
+
+Why it happens: for finite sets, "part" and "smaller" always go together, and everyday counting is finite.
+
+How to check: before comparing sizes, look for a bijection. If a simple rule such as $n \\mapsto 2n$ or $n \\mapsto n + 1$ pairs the two sets completely, the sizes are equal, however the sets sit inside each other.
+
+**Listing the positive integers first**
+
+To list $\\mathbb{Z}$, the non-negative integers are written first and the negative integers are meant to follow. The first part never ends, so no negative integer ever gets a position.
+
+Wrong working: $0, 1, 2, 3, \\ldots, -1, -2, -3, \\ldots$ is offered as a listing of $\\mathbb{Z}$. There is no natural number $n$ for which $-1$ is the $n$-th entry.
+
+Right working: alternate the signs, $0, 1, -1, 2, -2, 3, -3, \\ldots$. Counting from $1$, the positive integer $n$ is entry $2n$ and $-n$ is entry $2n + 1$, so $-1$ is entry $3$ and $-3$ is entry $7$.
+
+Why it happens: putting like with like is the natural way to arrange a list, and for finite lists it works.
+
+How to check: pick any element, for example $-1$, and name its position as a definite number. If the only answer is "after all the positive integers", the list is not a listing in the sense of the section on countable sets. The same reason explains why the rationals are listed diagonally rather than row by row: a first row that never ends would never let the second row begin.
+
+**Concluding smaller size from one injection**
+
+An injection from $A$ into $B$ that misses some elements of $B$ is taken as proof that $|A| < |B|$. A single injection only shows $|A| \\leq |B|$; the strict inequality needs that no bijection between $A$ and $B$ exists at all.
+
+Wrong working: $n \\mapsto n$ is an injection from $\\mathbb{N}$ into $\\mathbb{Q}$, and it misses $\\tfrac{1}{2}$, so $|\\mathbb{N}| < |\\mathbb{Q}|$.
+
+Right working: the injection gives only $|\\mathbb{N}| \\leq |\\mathbb{Q}|$. The section on countable sets lists the rationals as a sequence, and that listing is a bijection with $\\mathbb{N}$, so $|\\mathbb{N}| = |\\mathbb{Q}|$.
+
+Why it happens: for finite sets, an injection that misses elements does prove strictness, because an injection between two sets of the same finite size always hits every element. Infinite sets do not behave this way.
+
+How to check: try to find a different function that is a bijection, or recall a known one. Even $\\mathbb{N}$ has the injection $n \\mapsto n + 1$ into itself, which misses $0$, and nobody concludes $|\\mathbb{N}| < |\\mathbb{N}|$.
     `,
     before: ``,
     after: ``,
@@ -3200,6 +3307,7 @@ export default function CardinalityPage({cardinalityLevels, seoData, sectionsCon
           sectionsContent.obj5.content,
           <div key={'unit-cantorDiagonal'} dangerouslySetInnerHTML={{ __html: demoUnits.cantorDiagonal }} />,
           `Whatever list is proposed, the diagonal construction produces a real number it leaves out.`,
+          `@academic[punchline:No list can hold every real number: some infinities are strictly larger than others.]@`,
           <div
             key={'obj5-table'}
             style={tableWrapStyle}
@@ -3239,6 +3347,15 @@ export default function CardinalityPage({cardinalityLevels, seoData, sectionsCon
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          `@academic[punchline:Infinite sizes are settled by pairings, not by appearances, and there is always a bigger one.]@`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
         ]
     },
 

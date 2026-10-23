@@ -1791,6 +1791,10 @@ The notation mirrors real number absolute value, and for good reason — modulus
 
 Computation proceeds by squaring both components, adding, and taking the square root. For $z = 3 + 4i$, we calculate $|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$. The famous 3-4-5 right triangle appears here — the complex number $3 + 4i$ lies exactly 5 units from the origin. For $z = -2 + i$, the modulus is $|z| = \\sqrt{(-2)^2 + 1^2} = \\sqrt{4 + 1} = \\sqrt{5}$, an irrational distance approximately equal to $2.236$.
 
+@academic[pitfall,aside:true,width:35%:Squaring the i with the imaginary part
+Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$, which is not even a real number. The imaginary part is the real number $b = 4$, so $|3 + 4i| = \\sqrt{9 + 16} = 5$.
+[Read more](!#pitfalls)]@
+
 The geometric picture makes modulus tangible. Draw the point, draw the line segment connecting it to the origin, and measure that segment's length. Every complex number possesses exactly one modulus, always a non-negative real value. Numbers closer to the origin have smaller moduli; numbers farther away have larger moduli. The modulus provides the only meaningful sense of "size" for complex numbers, since $\\mathbb{C}$ lacks the ordering that lets us compare real numbers directly.`,
   after: ``,
   link: '',
@@ -1871,6 +1875,10 @@ The proof follows from direct computation. Let $z = a + bi$, so $\\bar{z} = a - 
 $$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - (bi)^2 = a^2 - b^2i^2 = a^2 + b^2$$]@
 
 The cross terms cancel, and since $i^2 = -1$, the imaginary square becomes positive. The result $a^2 + b^2$ is precisely $|z|^2$ by definition of modulus.
+
+@academic[pitfall,aside:true,width:35%:Multiplying z by itself
+Computing $|z|^2$ for $z = 3 + 4i$ as $z \\cdot z$ gives $(3 + 4i)^2 = -7 + 24i$, which is not even real. The conjugate gives $(3 + 4i)(3 - 4i) = 9 + 16 = 25 = |z|^2$.
+[Read more](!#pitfalls)]@
 
 This identity appears everywhere in complex analysis. It explains why multiplying by the conjugate eliminates imaginary components — the product is guaranteed real. It provides a quick way to compute modulus: rather than taking a square root, compute $z \\cdot \\bar{z}$ and recognize the result as $|z|^2$.
 
@@ -1957,6 +1965,10 @@ $$|z_1 + z_2| \\leq |z_1| + |z_2|$$
 /complex-numbers/formulas]@
 
 The modulus of a sum never exceeds the sum of the moduli. Equality can occur, but the left side can never surpass the right.
+
+@academic[pitfall,aside:true,width:35%:Splitting the modulus of a sum
+Writing $|3 + 4i| = |3| + |4i| = 7$ treats the inequality as an equation. The direct distance is $|3 + 4i| = \\sqrt{9 + 16} = 5$, shorter than the two legs together.
+[Read more](!#pitfalls)]@
 
 The name comes from geometry. In the [complex plane](!/complex-numbers/geometric-representation), the numbers $0$, $z_1$, and $z_1 + z_2$ form vertices of a triangle (possibly degenerate). The side from $0$ to $z_1 + z_2$ has length $|z_1 + z_2|$. The path from $0$ to $z_1$ and then from $z_1$ to $z_1 + z_2$ has total length $|z_1| + |z_2|$. The direct path cannot exceed the detour — a triangle's side never surpasses the sum of the other two sides.
 
@@ -2053,6 +2065,12 @@ This interpretation converts geometric problems into algebraic ones and vice ver
 
 Circles admit elegant description through modulus. The set of all complex numbers $z$ satisfying $|z - z_0| = r$ forms a circle centered at $z_0$ with radius $r$. The equation asks for all points lying distance exactly $r$ from the center $z_0$. Similarly, $|z - z_0| < r$ describes the open disk interior, and $|z - z_0| \\leq r$ describes the closed disk including its boundary. These sets appear constantly in complex analysis: convergence regions, domains of analyticity, and integration contours often take circular form.
 
+@academic[pitfall,aside:true,width:35%:Reading the centre with the wrong sign
+Taking $2 - i$ as the centre of $|z + 2 - i| = 3$ keeps the signs as they stand inside the bars. Written as $|z - (-2 + i)| = 3$, the circle has centre $-2 + i$ and radius $3$.
+[Read more](!#pitfalls)]@
+
+In practice the equation rarely arrives in this tidy shape. A problem may give $|z + 2 - i| = 3$ or $|z - 1 + 4i| \\leq 2$, with the centre mixed in among the other terms inside the bars. Finding the centre and the radius is then the first step of the problem, and everything drawn afterwards depends on it.
+
 The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only when restricted to real numbers. In the full complex plane, the inequality carves out a two-dimensional region, not an interval. This shift from intervals to disks marks one of the fundamental differences between real and complex analysis.`,
   after: ``,
   link: '',
@@ -2119,6 +2137,62 @@ The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only 
   
     },
   
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes account for many of the wrong answers in modulus work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Squaring the i with the imaginary part**
+
+In $|a + bi| = \\sqrt{a^2 + b^2}$, the letter $b$ stands for the imaginary part, which is a real number. Squaring the whole term $bi$ instead brings in $i^2 = -1$, and the plus under the root turns into a minus.
+
+Wrong working: for $z = 3 + 4i$, $|z| = \\sqrt{3^2 + (4i)^2} = \\sqrt{9 + 16i^2} = \\sqrt{9 - 16} = \\sqrt{-7}$.
+
+Right working: the real part is $a = 3$ and the imaginary part is $b = 4$, so $|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$.
+
+Why it happens: the term $4i$ is what appears in the number, and it is squared as it stands. The imaginary part is $4$; the $i$ only marks the axis it lies along.
+
+How to check: a modulus is a distance, so it is a real number and never negative. A negative number under the root, or an $i$ in the answer, means the $i$ was squared.
+
+**Multiplying z by itself**
+
+The identity $z \\cdot \\bar{z} = |z|^2$ is replaced by $z \\cdot z$, as if $|z|^2$ and $z^2$ were the same thing. For real numbers they are, since $|x|^2 = x^2$, but for complex numbers they are not.
+
+Wrong working: for $z = 3 + 4i$, $|z|^2 = z^2 = (3 + 4i)^2 = 9 + 24i + 16i^2 = -7 + 24i$.
+
+Right working: $z \\cdot \\bar{z} = (3 + 4i)(3 - 4i) = 9 - 12i + 12i - 16i^2 = 9 + 16 = 25$, so $|z|^2 = 25$ and $|z| = 5$.
+
+Why it happens: the square of a real absolute value is the square of the number itself, and that habit carries over. The conjugate in the identity is then easy to drop.
+
+How to check: $|z|^2$ is a non-negative real number. If the result still has an imaginary part, or comes out negative, the conjugate is missing. For $z = i$, $z^2 = -1$ while $|i|^2 = i \\cdot (-i) = 1$.
+
+**Splitting the modulus of a sum**
+
+The product rule $|z_1 z_2| = |z_1||z_2|$ is copied onto sums, and $|z_1 + z_2|$ is replaced by $|z_1| + |z_2|$. The triangle inequality only says that the first is at most the second.
+
+Wrong working: $|3 + 4i| = |3| + |4i| = 3 + 4 = 7$.
+
+Right working: $|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$. Here $|3| + |4i| = 7$, and $5 < 7$, as the triangle inequality allows.
+
+Why it happens: the modulus behaves so well with products, quotients and powers that the same kind of rule is expected for sums.
+
+How to check: equality needs the two numbers to point in the same direction from the origin. $3$ lies on the real axis and $4i$ on the imaginary axis, so the triangle does not collapse and the sum of the moduli is strictly larger.
+
+**Reading the centre with the wrong sign**
+
+In $|z - z_0| = r$ the centre is the number subtracted from $z$. When the equation has a plus sign or several terms inside the bars, the centre is read off with the signs exactly as they appear.
+
+Wrong working: $|z + 2 - i| = 3$ is taken as the circle with centre $2 - i$ and radius $3$.
+
+Right working: $z + 2 - i = z - (-2 + i)$, so the equation is $|z - (-2 + i)| = 3$, the circle with centre $-2 + i$ and radius $3$.
+
+Why it happens: the centre stands inside the bars with its signs reversed, and the minus in $z - z_0$ is easy to overlook when the expression is not written in that form.
+
+How to check: substitute the supposed centre. At the true centre $z = -2 + i$ the left side is $|0| = 0$. At $z = 2 - i$ it is $|4 - 2i| = \\sqrt{20}$, not $0$, so $2 - i$ is not the centre.`,
+      before:``,
+      after:``,
+      link:'',
+    },
+
     faq: {
       title: `Modulus FAQ`,
     },
@@ -2265,7 +2339,7 @@ const schemas = {
     distance: demoUnitFrame({
       svg: distanceMidpointDiagrams.general,
       caption: 'Distance as the modulus of a difference',
-      text: 'For z&#8321; = &#8722;2 + i and z&#8322; = 3 + 3i the difference has real part 5 and imaginary part 2, the legs of the right triangle drawn between the points. Its modulus is the hypotenuse: |z&#8321; &#8722; z&#8322;| = &#8730;(5&#178; + 2&#178;) = &#8730;29 &#8776; 5.39. Drag either point on the',
+      text: 'For z&#8321; = &#8722;2 + i and z&#8322; = 3 + 3i the difference z&#8322; &#8722; z&#8321; has real part 5 and imaginary part 2, the legs of the right triangle drawn between the points. Its modulus is the hypotenuse: |z&#8321; &#8722; z&#8322;| = &#8730;(5&#178; + 2&#178;) = &#8730;29 &#8776; 5.39. Drag either point on the',
       href: '/complex-numbers/visual-tools/distance-midpoint',
       linkText: 'distance and midpoint visualizer',
     }),
@@ -2436,6 +2510,14 @@ export default function AbsoluteValuePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

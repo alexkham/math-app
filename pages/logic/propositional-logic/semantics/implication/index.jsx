@@ -61,7 +61,7 @@ export async function getStaticProps(){
       id: 6,
       law: "Monotonicity of AND",
       formula: "(p ∧ q) → p",
-      explanation: "Removing a term from an AND doesn't make it true."
+      explanation: "Removing a term from an AND doesn't make it false."
     },
     {
       id: 7,
@@ -231,7 +231,7 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
             content:[`**Logical implication** is a fundamental concept in logic and mathematics. It describes a conditional relationship between two statements.
 
             Logical implication ($p→q$) is a conditional statement meaning "if $p$, then $q$." It asserts that whenever $p$ (the antecedent or hypothesis) is true, $q$ (the consequent or conclusion) must also be true.
-            **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the the consequent**.
+            **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the consequent**.
             However, if $p$ is false, the implication is still considered to be true regardless of $q$. This is very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table).
             `,
         ]
@@ -285,7 +285,7 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
           
           `The counterintuitive aspect is that P → Q is true whenever P is false, regardless of Q's value. This is called **"vacuous truth"**. A helpful way to understand this is with a promise analogy: "If it rains, I'll bring an umbrella." If it doesn't rain, the promise remains unbroken whether I bring an umbrella or not.
           Promise may be broken only if it has been given. In case it had been never given (last 2 rows, when $P$ is equal to false)- it can not be broken and the whole statement evaluates to true.`,
-          `And to conclude this discussion, **the rule of thumb with logical implication is that whenever the hypotesis is false-the overall expression evaluates to true.**`,
+          `And to conclude this discussion, **the rule of thumb with logical implication is that whenever the hypothesis is false-the overall expression evaluates to true.**`,
           <div key={'unit-impliesRegion'} dangerouslySetInnerHTML={{ __html: demoUnits.impliesRegion }} />,
           `The only unshaded piece is P true and Q false: the one row of the table where P → Q is false.`,
           `<br id='tt_self'></br>`,
@@ -304,7 +304,11 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
             `,
             <MyList data={properties}
             key={2}
-            boxed={true} color={'blue'} compact={true} type={'dot'} />
+            boxed={true} color={'blue'} compact={true} type={'dot'} />,
+            `@academic[pitfall,aside:true,width:35%:Taking the inverse for the contrapositive
+Writing $\\neg p \\to \\neg q$ as the contrapositive of $p \\to q$ fails at the row $p = F$, $q = T$: there $p \\to q$ is T but $\\neg p \\to \\neg q$ is F. The inverse $\\neg p \\to \\neg q$ is equivalent to the converse $q \\to p$, not to $p \\to q$.
+[Read more](!#misconceptions)]@
+Contraposition and asymmetry both concern what happens when the two parts of an implication are rearranged. Swapping $p$ and $q$ alone gives the converse $q \\to p$, which can differ from $p \\to q$, as the mother example shows. Forming the contrapositive takes two moves together: both parts are negated, and they change places, giving $\\neg q \\to \\neg p$.`
         ]
           },
           {
@@ -318,7 +322,31 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
               `@academic[example:Example
 "If I win the lottery, then I will buy a new car." If I do not win the lottery, the statement remains valid regardless of whether I buy a car.]@`,
               
-              `Another common misunderstanding is to assume that $p \\rightarrow q$ is equivalent to $q \\rightarrow p$. This is incorrect: implication is not symmetric, and such an inference does not hold logically.`
+              `Another common misunderstanding is to assume that $p \\rightarrow q$ is equivalent to $q \\rightarrow p$. This is incorrect: implication is not symmetric, and such an inference does not hold logically.`,
+
+              `**Taking the inverse for the contrapositive**
+
+Asked for the contrapositive of $p \\to q$, the learner negates both parts but keeps their order, writing $\\neg p \\to \\neg q$. That formula is the inverse, and it is not equivalent to $p \\to q$.
+
+Wrong working: "If it rains, then the ground is wet" is $p \\to q$. Its contrapositive is taken to be "If it does not rain, then the ground is not wet", that is $\\neg p \\to \\neg q$.
+
+Right working: negate both parts and swap them, giving $\\neg q \\to \\neg p$, "If the ground is not wet, then it did not rain". In the row $p = F$, $q = T$, the formula $p \\to q$ is T and $\\neg q \\to \\neg p$ is $F \\to T$, which is T, while $\\neg p \\to \\neg q$ is $T \\to F$, which is F.
+
+Why it happens: negating each part looks like the whole change, and the swap is easy to forget. The inverse $\\neg p \\to \\neg q$ is the contrapositive of the converse $q \\to p$, so it is equivalent to the converse, which the asymmetry property already separates from $p \\to q$.
+
+How to check: compare the two formulas in the row where the original antecedent is F and the original consequent is T. $p \\to q$ is T there, and a correct contrapositive must be T there too.`,
+
+              `**Negating the implication as another implication**
+
+When an implication has to be denied, as in a proof by contradiction, its negation is written as another conditional, such as $p \\to \\neg q$. The negation of an implication is not a conditional at all: it is the single case that breaks it, $p$ true and $q$ false.
+
+Wrong working: to deny "If it rains, then the ground is wet", the learner states "If it rains, then the ground is not wet", that is $p \\to \\neg q$.
+
+Right working: by material implication $p \\to q \\equiv \\neg p \\lor q$, so $\\neg(p \\to q) \\equiv \\neg(\\neg p \\lor q) \\equiv p \\land \\neg q$, "It rains and the ground is not wet". For $(p, q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $p \\to q$ takes the values T, F, T, T and $p \\land \\neg q$ takes F, T, F, F, while $p \\to \\neg q$ takes F, T, T, T.
+
+Why it happens: the "not" is attached to the conclusion, as if denying a conditional meant changing what it promises. In everyday speech "it is not true that if it rains the ground is wet" sounds like a claim about what happens when it rains.
+
+How to check: a negation must take the opposite value of the original in every row. At $p = F$, $p \\to q$ is T, so its negation must be F there; $p \\to \\neg q$ is also T at $p = F$, so it is not the negation.`
             ]
           },
           {
@@ -332,7 +360,10 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
               `@academic[example:Example
 To prove "If $n^2$ is even, then $n$ is even," one may instead prove the contrapositive: "If $n$ is odd, then $n^2$ is odd."]@`,
               
-              `Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be valid.`
+              `@academic[pitfall,aside:true,width:35%:Negating the implication as another implication
+Taking $p \\to \\neg q$ as the negation of $p \\to q$ fails at $p = F$: in both rows with $p = F$, $p \\to q$ and $p \\to \\neg q$ are T together. The negation is $p \\land \\neg q$, which is T only at $p = T$, $q = F$.
+[Read more](!#misconceptions)]@
+Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be valid.`
             ]
           },
           {

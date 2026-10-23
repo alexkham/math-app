@@ -985,6 +985,10 @@ The Law of Large Numbers guarantees that as the sample size grows, the sample me
 
 The theorem explains why **averages are more reliable than individual observations**. A single measurement tells you little. The average of many measurements tells you almost everything about the underlying mean.
 
+@academic[pitfall,aside:true,width:35%:Expecting tails to be due
+Expecting tails to be more likely than $\\frac{1}{2}$ after 10 heads in a row gives the coin a memory it does not have; the next flip is still $\\frac{1}{2}$ either way. The share of heads settles by dilution: after 100 flips its expected value is $\\frac{10 + 45}{100} = 0.55$.
+[Read more](!#7)]@
+
 This is not about eliminating randomness—individual outcomes remain random. The theorem reveals that randomness, when aggregated, produces **predictable patterns**. Individual chaos becomes collective order through the simple act of averaging.
       `,
       before:``,
@@ -1141,7 +1145,7 @@ Its validity depends on several key conditions.
   The [expected value](!/probability/expected-value) $\\mu$ must exist and be finite. Distributions with undefined or infinite means (like the Cauchy distribution) violate this requirement. Without a well-defined mean, there is nothing for the sample mean to converge to.
 
  **Variance requirement (context-dependent)**  
-  The weak law does not require finite [variance](!/probability/variance)—only finite mean. The strong law typically requires stronger conditions. Heavy-tailed distributions with infinite variance can still satisfy the weak law, but convergence may be slow.
+  The weak law does not require finite [variance](!/probability/variance)—only finite mean. For independent, identically distributed variables the strong law also needs only a finite mean (Kolmogorov). Heavy-tailed distributions with infinite variance can still satisfy the weak law, but convergence may be slow.
 
 When these conditions fail, the conclusion of the theorem may no longer hold.  
 In particular, strongly dependent data or distributions without finite means can produce sample means that never stabilize, even as the sample size grows arbitrarily large. [Independence](!/probability/independence) and identical distribution are the core structural requirements.
@@ -1179,6 +1183,27 @@ The Law of Large Numbers is often misunderstood. The following clarifications ad
 
 The errors above share a common pattern: confusing what the theorem says about long-run behavior with claims about single observations or finite samples. The table below collects them with the underlying confusion and the correct view.
 `,
+  before:``,
+  after:``,
+  link:'',
+},
+
+    misconceptionsMore:{
+  title:``,
+  content:`
+**Expecting the count of heads to even out**
+
+The law is read as a statement about the number of heads: as the flips go on, the count is expected to come closer and closer to exactly half the number of flips.
+
+Wrong working: from $\\frac{H_n}{n} \\to \\frac{1}{2}$, where $H_n$ is the number of heads in $n$ flips, conclude that $H_n - \\frac{n}{2}$ shrinks toward $0$, so that after $10{,}000$ flips the count should sit closer to $5{,}000$ than it sat to $50$ after $100$ flips.
+
+Right working: $H_n$ has variance $n \\cdot \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{n}{4}$, so its distance from $\\frac{n}{2}$ has standard deviation $\\frac{\\sqrt{n}}{2}$:
+$$n = 100: \\ \\frac{\\sqrt{100}}{2} = 5, \\qquad n = 10{,}000: \\ \\frac{\\sqrt{10{,}000}}{2} = 50$$
+The share $\\frac{H_n}{n}$ has standard deviation $\\frac{1}{2\\sqrt{n}}$, which falls from $0.05$ to $0.005$. The typical gap in the count grows tenfold while the gap in the share shrinks tenfold.
+
+Why it happens: "the average settles at 0.5" sounds like "heads and tails balance out". The law divides by $n$, and that division is what makes the deviation small.
+
+How to check: at $n = 10{,}000$, two standard deviations of the count is $2 \\cdot 50 = 100$ heads, so the count usually lands anywhere from $4{,}900$ to $5{,}100$. As a share that same range is only $0.49$ to $0.51$.`,
   before:``,
   after:``,
   link:'',
@@ -1558,6 +1583,13 @@ export default function LargeNumbersLawPage({
           sectionsContent.obj4.content,
                   <div key={'unit-llnRuns'} dangerouslySetInnerHTML={{ __html: demoUnits.llnRuns }} />,
           `Run it again and the early paths change completely; the place they settle does not.`,
+          `@academic[pitfall,aside:true,width:35%:Expecting the count of heads to even out
+Expecting the number of heads to close in on $\\frac{n}{2}$ confuses the count with the share. The count's distance from $\\frac{n}{2}$ has standard deviation $\\frac{\\sqrt{n}}{2}$: $5$ at $n = 100$, $50$ at $n = 10{,}000$. Only the share's gap shrinks, from $0.05$ to $0.005$.
+[Read more](!#7)]@
+
+The curves in the figure follow the share of heads: the number of heads so far divided by the number of flips. The number of heads itself is a different quantity. After $n$ flips its mean is $\\frac{n}{2}$, and every new flip still moves it by a full unit, no matter how long the run has been.
+
+The law of large numbers is a statement about the share. Dividing by $n$ is the step that turns a count which keeps wandering into an average that settles.`,
         ]
     },
     {
@@ -1609,6 +1641,7 @@ export default function LargeNumbersLawPage({
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
                   <div key={'unit-llnDilution'} dangerouslySetInnerHTML={{ __html: demoUnits.llnDilution }} />,
             `The surplus of 5 heads is still expected at n = 1000; it is just 0.5% of the flips.`,
+            sectionsContent.misconceptionsMore.content,
         ]
     },
     {

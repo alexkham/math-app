@@ -835,6 +835,10 @@ $$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{a \\times c}{b \\times d}$$]@
 
 For example, $\\frac{2}{3} \\times \\frac{4}{5} = \\frac{2 \\times 4}{3 \\times 5} = \\frac{8}{15}$.
 
+@academic[pitfall,aside:true,width:35%:Keeping the denominator
+Keeping the shared denominator, as in addition, turns $\\frac{2}{5} \\times \\frac{3}{5}$ into $\\frac{6}{5}$, more than either factor. The denominators multiply too: $\\frac{2 \\times 3}{5 \\times 5} = \\frac{6}{25}$.
+[Read more](!#pitfalls)]@
+
 This rule makes sense geometrically. Taking $\\frac{2}{3}$ of $\\frac{4}{5}$ means subdividing something already divided into fifths, then taking a portion. The product describes the fraction of the original whole that remains.`,
     before: ``,
     after: ``,
@@ -847,6 +851,10 @@ This rule makes sense geometrically. Taking $\\frac{2}{3}$ of $\\frac{4}{5}$ mea
 
 @academic[formula_callout:Multiplying Fractions by Whole Numbers
 $$\\frac{3}{4} \\times 5 = \\frac{3}{4} \\times \\frac{5}{1} = \\frac{15}{4} = 3\\frac{3}{4}$$]@
+
+@academic[pitfall,aside:true,width:35%:Multiplying the denominator too
+Multiplying both parts by $5$ turns $\\frac{3}{4} \\times 5$ into $\\frac{15}{20} = \\frac{3}{4}$, the starting fraction. Only the numerator is multiplied: $\\frac{15}{4} = 3\\frac{3}{4}$.
+[Read more](!#pitfalls)]@
 
 Alternatively, think of multiplying a fraction by a whole number as repeated addition. The expression $4 \\times \\frac{2}{3}$ means $\\frac{2}{3} + \\frac{2}{3} + \\frac{2}{3} + \\frac{2}{3} = \\frac{8}{3}$.
 
@@ -864,6 +872,10 @@ Consider $\\frac{4}{9} \\times \\frac{3}{8}$. The numerator 4 and denominator 8 
 
 @academic[formula_callout:Cross-Canceling Before Multiplying
 $$\\frac{4}{9} \\times \\frac{3}{8} = \\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}$$]@
+
+@academic[pitfall,aside:true,width:35%:Canceling two numerators
+Canceling the numerators $2$ and $4$ in $\\frac{2}{3} \\times \\frac{4}{5}$ gives $\\frac{1}{3} \\times \\frac{2}{5} = \\frac{2}{15}$. A factor cancels only between a numerator and a denominator; here nothing cancels, and the product is $\\frac{8}{15}$.
+[Read more](!#pitfalls)]@
 
 Without canceling first, the product is $\\frac{12}{72}$, which then requires finding the [GCD](!/arithmetic/divisibility/gcd) to reduce. Cross-canceling reaches the simplified answer directly.`,
     before: ``,
@@ -907,6 +919,10 @@ Cross-canceling across all fractions before multiplying is particularly efficien
 
 @academic[formula_callout:The Word "Of" Means Multiply
 $$\\frac{2}{3} \\times 12 = \\frac{2 \\times 12}{3} = \\frac{24}{3} = 8$$]@
+
+@academic[pitfall,aside:true,width:35%:Giving the discount as the price
+Taking $\\frac{1}{3}$ off a price of $30$ as $\\frac{1}{3} \\times 30 = 10$ finds the discount, not the new price. The price left is $30 - 10 = 20$, which is $\\frac{2}{3}$ of $30$.
+[Read more](!#pitfalls)]@
 
 This interpretation appears constantly in applications. A recipe asks for $\\frac{3}{4}$ of a cup. A sale offers $\\frac{1}{3}$ off the original price. A problem states that $\\frac{2}{5}$ of the students are absent. Each "of" translates to multiplication.`,
     before: ``,
@@ -993,6 +1009,73 @@ Multiplying by a fraction's reciprocal produces 1. The product $\\frac{3}{4} \\t
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Five mistakes cause many of the wrong answers in fraction multiplication. Four are marked with a box where they happen in the sections above, and the fifth is the one the mixed-numbers section warns about. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Keeping the denominator**
+
+The two fractions have the same denominator, and the habit from addition takes over: the numerators are multiplied, but the shared denominator is kept as it is.
+
+Wrong working: $\\frac{2}{5} \\times \\frac{3}{5} = \\frac{2 \\times 3}{5} = \\frac{6}{5}$.
+
+Right working: multiply the denominators as well, $\\frac{2}{5} \\times \\frac{3}{5} = \\frac{2 \\times 3}{5 \\times 5} = \\frac{6}{25}$.
+
+Why it happens: adding like fractions keeps the denominator, $\\frac{2}{5} + \\frac{3}{5} = \\frac{5}{5}$, and the two rules are learned close together. In multiplication the denominator is not a shared unit: taking $\\frac{2}{5}$ of some fifths cuts each fifth into five smaller parts, which are twenty-fifths.
+
+How to check: the size. Both factors are less than 1, so the product must be smaller than each of them. $\\frac{6}{5}$ is more than 1, while $\\frac{6}{25}$ is less than both $\\frac{2}{5} = \\frac{10}{25}$ and $\\frac{3}{5} = \\frac{15}{25}$.
+
+**Multiplying the denominator too**
+
+A fraction is multiplied by a whole number, and the whole number is applied to both the numerator and the denominator.
+
+Wrong working: $\\frac{3}{4} \\times 5 = \\frac{3 \\times 5}{4 \\times 5} = \\frac{15}{20} = \\frac{3}{4}$.
+
+Right working: write $5$ as $\\frac{5}{1}$, so $\\frac{3}{4} \\times \\frac{5}{1} = \\frac{15}{4} = 3\\frac{3}{4}$. Only the numerator is multiplied by 5.
+
+Why it happens: multiplying the numerator and the denominator by the same number is how [equivalent fractions](!/arithmetic/fractions/equivalent) are built. That move multiplies by $\\frac{5}{5} = 1$, not by $5$, which is why the wrong working ends where it started.
+
+How to check: repeated addition. Five copies of $\\frac{3}{4}$ are $\\frac{3}{4} + \\frac{3}{4} + \\frac{3}{4} + \\frac{3}{4} + \\frac{3}{4} = \\frac{15}{4}$, far more than the $\\frac{3}{4}$ the wrong working returns.
+
+**Canceling two numerators**
+
+Cross-canceling is applied to any two numbers that share a factor, including two numerators or two denominators, instead of only a numerator paired with a denominator.
+
+Wrong working: in $\\frac{2}{3} \\times \\frac{4}{5}$, the numerators 2 and 4 share the factor 2, so both are divided by 2, giving $\\frac{1}{3} \\times \\frac{2}{5} = \\frac{2}{15}$.
+
+Right working: no numerator shares a factor with a denominator here, since 2 and 5 have none and 4 and 3 have none. Nothing cancels, and the product is $\\frac{2 \\times 4}{3 \\times 5} = \\frac{8}{15}$.
+
+Why it happens: the eye looks for any pair with a common factor and ignores where the pair sits. Dividing a numerator and a denominator by 2 divides by $\\frac{2}{2} = 1$ and leaves the value alone; dividing two numerators by 2 divides the whole product by 4.
+
+How to check: multiply straight across without canceling and compare. Here $\\frac{8}{15}$ is exactly four times $\\frac{2}{15}$, the factor that was wrongly removed.
+
+**Multiplying the parts separately**
+
+The whole parts of two mixed numbers are multiplied together, the fractional parts are multiplied together, and the two results are joined into a new mixed number.
+
+Wrong working: for $2\\frac{1}{3} \\times 1\\frac{1}{2}$, take $2 \\times 1 = 2$ and $\\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}$, giving $2\\frac{1}{6}$.
+
+Right working: convert first, $2\\frac{1}{3} = \\frac{7}{3}$ and $1\\frac{1}{2} = \\frac{3}{2}$, then $\\frac{7}{3} \\times \\frac{3}{2} = \\frac{21}{6} = \\frac{7}{2} = 3\\frac{1}{2}$.
+
+Why it happens: a mixed number is a sum, and adding mixed numbers part by part works, so the same split seems natural here. But a product of two sums has four terms: $(2 + \\frac{1}{3})(1 + \\frac{1}{2}) = 2 + 1 + \\frac{1}{3} + \\frac{1}{6} = 3\\frac{1}{2}$. The parts method keeps only the first and the last, and loses the $1$ and the $\\frac{1}{3}$ in the middle.
+
+How to check: estimate. $2\\frac{1}{3} \\times 1\\frac{1}{2}$ is more than $2\\frac{1}{3} \\times 1 = 2\\frac{1}{3}$, so $2\\frac{1}{6}$ is too small.
+
+**Giving the discount as the price**
+
+A price is reduced by a fraction, such as $\\frac{1}{3}$ off. The fraction of the price is computed correctly, and that amount is reported as the new price.
+
+Wrong working: $\\frac{1}{3}$ off a price of $30$ is $\\frac{1}{3} \\times 30 = 10$, so the new price is $10$.
+
+Right working: $\\frac{1}{3}$ of $30$ is the discount, $10$, and the new price is $30 - 10 = 20$. In one step, the buyer pays $1 - \\frac{1}{3} = \\frac{2}{3}$ of the price: $\\frac{2}{3} \\times 30 = 20$.
+
+Why it happens: "off" and "of" look and sound alike, and the multiplication is the right first step, so the work seems finished once it is done.
+
+How to check: the discount and the new price must add up to the original price, $10 + 20 = 30$. A third off should leave most of the price, so a new price of $10$ is far too low.`,
+      before:``,
+      after:``,
+      link:'',
     }
   
   }
@@ -1224,6 +1307,14 @@ export default function MultiplyingPage({seoData, sectionsContent, introContent,
           sectionsContent.obj8.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

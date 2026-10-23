@@ -249,7 +249,7 @@ const complexNumbersCheatSheetData = {
           name: 'Pure Imaginary Numbers',
           definition: {
             term: 'Pure Imaginary',
-            description: 'A number of the form $bi$ where $b \\in \\mathbb{R}$ and $b \\neq 0$. Equivalently, $z$ is [pure imaginary](!/complex-numbers/imaginary-numbers) when $Re(z) = 0$ and $z \\neq 0$.'
+            description: 'A number of the form $bi$ where $b \\in \\mathbb{R}$ (zero included). Equivalently, $z$ is [pure imaginary](!/complex-numbers/imaginary-numbers) when $Re(z) = 0$.'
           },
           note: 'Zero ($0 + 0i$) is both real and pure imaginary — the only number with dual membership.',
           color: '#6366f1'

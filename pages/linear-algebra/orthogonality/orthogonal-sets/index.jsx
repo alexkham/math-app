@@ -1234,7 +1234,7 @@ A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1
         tex: `$Q^{T}Q = I$, so $Q^{-1} = Q^{T}$`,
         read: `Q is orthogonal: its transpose is its inverse`,
         means: `$Q$ is the reserved letter for a matrix with orthonormal columns, and the defining equation is the payoff — **Orthogonal Matrices** below — since it replaces inversion, normally expensive, with transposition, which is free.`,
-        cases: `The equation is a statement about **columns**, and it forces the same of rows, so $QQ^{T} = I$ holds too — one of the few places where a matrix identity is symmetric in that way.`,
+        cases: `The equation is a statement about **columns**, and for a square $Q$ it forces the same of rows, so $QQ^{T} = I$ holds too — one of the few places where a matrix identity is symmetric in that way.`,
         confusedWith: `The name itself. An "orthogonal matrix" has **orthonormal** columns, not merely orthogonal ones — unit length is part of the definition, and a matrix whose columns are perpendicular but not normalised satisfies no such identity. The terminology is a historical accident the notation does not repeat.`,
       },
     ],
@@ -1277,6 +1277,12 @@ The key mechanism is that orthogonality isolates each coefficient. Dotting with 
 
 Any orthogonal set can be made orthonormal by normalizing each vector: $\\hat{\\mathbf{v}}_i = \\mathbf{v}_i / \\|\\mathbf{v}_i\\|$. The directions are preserved, only the lengths change to $1$.
 
+@academic[pitfall,aside:true,width:35%:Dividing by the squared length
+Dividing by $\\mathbf{v} \\cdot \\mathbf{v} = 6$ instead of $\\|\\mathbf{v}\\| = \\sqrt{6}$ turns $(1, -2, 1)$ into $\\tfrac{1}{6}(1, -2, 1)$, whose length is $\\tfrac{1}{\\sqrt{6}} \\approx 0.41$. The unit vector is $\\tfrac{1}{\\sqrt{6}}(1, -2, 1)$.
+[Read more](!#pitfalls)]@
+
+For the set $(1, 1, 1)$, $(1, -2, 1)$, $(1, 0, -1)$ from the first section, the three vectors have squared lengths $3$, $6$ and $2$, so each one is rescaled by a different factor. The right angles survive the rescaling: scaling two vectors multiplies their dot product by the two scale factors, and zero stays zero.
+
 The standard [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n\\}$ for $\\mathbb{R}^n$ is orthonormal: $\\mathbf{e}_i \\cdot \\mathbf{e}_j = \\delta_{ij}$ because each basis vector has a single $1$ in a different position. It is the simplest orthonormal set, but far from the only one.`,
     before: ``,
     after: ``,
@@ -1317,7 +1323,13 @@ Let $\\{\\mathbf{q}_1, \\mathbf{q}_2, \\mathbf{q}_3\\}$ be an orthonormal basis 
 
 For $\\mathbf{x} = (3, 1, 2)$: $c_1 = \\mathbf{x} \\cdot \\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(3 + 1 + 0) = \\frac{4}{\\sqrt{2}} = 2\\sqrt{2}$, $c_2 = \\mathbf{x} \\cdot \\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(3 - 1 + 4) = \\frac{6}{\\sqrt{6}} = \\sqrt{6}$, $c_3 = \\mathbf{x} \\cdot \\mathbf{q}_3 = \\frac{1}{\\sqrt{3}}(-3 + 1 + 2) = 0$.
 
-So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\cdot \\mathbf{q}_3$. The zero third coordinate means $\\mathbf{x}$ has no component in the $\\mathbf{q}_3$ direction — it is orthogonal to $\\mathbf{q}_3$.]@`,
+So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\cdot \\mathbf{q}_3$. The zero third coordinate means $\\mathbf{x}$ has no component in the $\\mathbf{q}_3$ direction — it is orthogonal to $\\mathbf{q}_3$.]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the denominator
+Using $c_i = \\mathbf{x} \\cdot \\mathbf{v}_i$ for the set $(1, 1, 1)$, $(1, -2, 1)$, $(1, 0, -1)$ and $\\mathbf{x} = (3, 1, 2)$ gives $(6, 3, 1)$, which rebuilds $(10, 0, 8)$, not $\\mathbf{x}$. Dividing by $3$, $6$ and $2$ gives $(2, \\tfrac{1}{2}, \\tfrac{1}{2})$.
+[Read more](!#pitfalls)]@
+
+The worked example uses unit vectors, which is why each coordinate came from a single dot product. Orthogonal bases met in practice are often not normalized, such as the set $(1, 1, 1)$, $(1, -2, 1)$, $(1, 0, -1)$ from the first section, and their coordinates are still read off one at a time, with no system to solve.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1329,6 +1341,10 @@ So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\c
 @academic[rule_theorem_plain:The rows of an orthogonal matrix also form an orthonormal set — orthogonality of columns and rows go together.]@
 
 The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^TQ) = \\det(Q)^2$. When $\\det(Q) = +1$, the matrix represents a [rotation](!/linear-algebra/transformations/geometric). When $\\det(Q) = -1$, it represents a rotation composed with a reflection.
+
+@academic[pitfall,aside:true,width:35%:Stopping at orthogonal columns
+Taking $M^{-1} = M^T$ for $M = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, whose columns are perpendicular but of length $\\sqrt{2}$, fails: $M^TM = 2I$, so $M^{-1} = \\tfrac{1}{2}M^T$, and $\\det M = -2$. Dividing each column by $\\sqrt{2}$ gives an orthogonal matrix.
+[Read more](!#pitfalls)]@
 
 The defining geometric property is that orthogonal matrices preserve the dot product: $(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = (Q\\mathbf{u})^T(Q\\mathbf{v}) = \\mathbf{u}^TQ^TQ\\mathbf{v} = \\mathbf{u}^T\\mathbf{v} = \\mathbf{u} \\cdot \\mathbf{v}$. Preserving the dot product automatically preserves lengths ($\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$), angles, and distances. An orthogonal matrix is a rigid motion of $\\mathbb{R}^n$ — it rearranges vectors without distorting any geometric relationship.`,
     before: ``,
@@ -1388,6 +1404,58 @@ For a matrix $Q$ this is exactly the orthogonality condition of the earlier sect
 They split into two families by the determinant. Those with $\\det Q = 1$ are [rotations](!/linear-algebra/transformations/geometric), which preserve orientation; those with $\\det Q = -1$ reverse it, and in the plane these are exactly the reflections in a line through the origin. In space an isometry is a rotation about an axis, a reflection in a plane, or a rotation combined with a reflection. Translations also preserve distance but move the origin, so they are not linear and fall outside this classification.
 
 The [reflection tool](!/linear-algebra/visual-tools/reflection-2d) shows the orientation-reversing family in the plane, and the [orthogonal matrices tool](!/linear-algebra/visual-tools/orthogonal-matrices) shows the length-preservation check $Q^TQ = I$ directly.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes cause many wrong answers with orthogonal sets. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Dividing by the squared length**
+
+Normalizing a vector means dividing it by its length $\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}}$. The square root is left out, and the vector is divided by $\\mathbf{v} \\cdot \\mathbf{v}$ instead.
+
+Wrong working:
+$$\\mathbf{v} = (1, -2, 1), \\quad \\mathbf{v} \\cdot \\mathbf{v} = 6, \\quad \\frac{\\mathbf{v}}{6} = \\left(\\tfrac{1}{6}, -\\tfrac{1}{3}, \\tfrac{1}{6}\\right)$$
+Its length is $\\sqrt{\\tfrac{1}{36} + \\tfrac{1}{9} + \\tfrac{1}{36}} = \\sqrt{\\tfrac{1}{6}} \\approx 0.41$, so the result is not a unit vector.
+
+Right working:
+$$\\|\\mathbf{v}\\| = \\sqrt{6}, \\quad \\hat{\\mathbf{v}} = \\frac{1}{\\sqrt{6}}(1, -2, 1), \\quad \\hat{\\mathbf{v}} \\cdot \\hat{\\mathbf{v}} = \\frac{1 + 4 + 1}{6} = 1$$
+
+Why it happens: the squared length $\\mathbf{v} \\cdot \\mathbf{v}$ is the number already at hand. It is the denominator of the coordinate formula $c_i = \\frac{\\mathbf{x} \\cdot \\mathbf{v}_i}{\\mathbf{v}_i \\cdot \\mathbf{v}_i}$ and of projection formulas, while normalizing needs the length itself.
+
+How to check: take the dot product of the result with itself; it must be $1$. After dividing by $\\mathbf{v} \\cdot \\mathbf{v}$ it is $\\frac{1}{\\mathbf{v} \\cdot \\mathbf{v}}$ instead, here $\\tfrac{1}{6}$.
+
+**Dropping the denominator**
+
+The coordinate formula for an orthonormal basis, $c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$, is applied to an orthogonal basis whose vectors are not unit vectors. The denominator $\\mathbf{v}_i \\cdot \\mathbf{v}_i$ equals $1$ only when $\\|\\mathbf{v}_i\\| = 1$.
+
+Wrong working: with $\\mathbf{v}_1 = (1, 1, 1)$, $\\mathbf{v}_2 = (1, -2, 1)$, $\\mathbf{v}_3 = (1, 0, -1)$ and $\\mathbf{x} = (3, 1, 2)$,
+$$\\mathbf{x} \\cdot \\mathbf{v}_1 = 6, \\quad \\mathbf{x} \\cdot \\mathbf{v}_2 = 3, \\quad \\mathbf{x} \\cdot \\mathbf{v}_3 = 1$$
+Taking these as the coordinates gives $6\\mathbf{v}_1 + 3\\mathbf{v}_2 + 1\\mathbf{v}_3 = (10, 0, 8)$, not $\\mathbf{x}$.
+
+Right working: divide each dot product by $\\mathbf{v}_i \\cdot \\mathbf{v}_i$, which is $3$, $6$ and $2$.
+$$c_1 = \\frac{6}{3} = 2, \\quad c_2 = \\frac{3}{6} = \\frac{1}{2}, \\quad c_3 = \\frac{1}{2}$$
+Then $2\\mathbf{v}_1 + \\tfrac{1}{2}\\mathbf{v}_2 + \\tfrac{1}{2}\\mathbf{v}_3 = (2 + \\tfrac{1}{2} + \\tfrac{1}{2}, \\; 2 - 1 + 0, \\; 2 + \\tfrac{1}{2} - \\tfrac{1}{2}) = (3, 1, 2)$.
+
+Why it happens: the orthonormal formula is the one that gets remembered, because it is shorter and worked examples tend to use unit vectors. Orthogonal sets with whole-number entries, such as this one, are rarely normalized.
+
+How to check: rebuild $\\mathbf{x}$ from the coordinates. With the denominator missing, each coordinate is too large by the factor $\\mathbf{v}_i \\cdot \\mathbf{v}_i$.
+
+**Stopping at orthogonal columns**
+
+A square matrix whose columns are pairwise perpendicular is treated as an orthogonal matrix, and its transpose is used as its inverse. The definition also requires every column to have length $1$.
+
+Wrong working:
+$$M = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}, \\quad M^{-1} = M^T = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$
+But $M^TM = \\begin{pmatrix} 2 & 0 \\\\ 0 & 2 \\end{pmatrix} = 2I$, not $I$, so $M^T$ is not the inverse.
+
+Right working: the columns have length $\\sqrt{2}$, so $M^{-1} = \\tfrac{1}{2}M^T = \\begin{pmatrix} \\tfrac{1}{2} & \\tfrac{1}{2} \\\\ \\tfrac{1}{2} & -\\tfrac{1}{2} \\end{pmatrix}$. Dividing each column by $\\sqrt{2}$ gives the orthogonal matrix $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, with $Q^TQ = I$ and $Q^{-1} = Q^T$.
+
+Why it happens: the name says orthogonal, and the columns are orthogonal. Unit length is part of the definition but not of the name.
+
+How to check: compute $M^TM$. A diagonal result with entries other than $1$ means the columns are orthogonal but not unit length. The determinant is a quick test too: an orthogonal matrix has $\\det = \\pm 1$, and here $\\det M = -2$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1687,6 +1755,14 @@ export default function OrthogonalSetsPage({
           </DiagramFrame>,
           `What changes is that the coordinates stop depending on each other. In a general basis, finding one coordinate of $\\mathbf{x}$ means solving for all of them at once — the system $B\\mathbf{c} = \\mathbf{x}$ couples every unknown to every other. With an orthonormal basis each coordinate is an independent dot product, so a single one can be computed alone, and adding a new basis vector does not change the coordinates already found.`,
           `The projection row is where this pays off most visibly. The general formula requires $(A^{\\mathsf{T}}A)^{-1}$, a matrix inverse computed before anything can be projected. When the columns are orthonormal, $A^{\\mathsf{T}}A$ is the identity, the inverse disappears, and the projection is a sum of independent terms — which is precisely why [Gram–Schmidt](!/linear-algebra/orthogonality/gram-schmidt) is worth running before a projection-heavy computation rather than after.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

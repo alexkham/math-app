@@ -826,6 +826,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
+import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -963,7 +965,7 @@ const subspaceRecognition = {
           formula: '$\\{\\mathbf{0}\\}$',
           condition: '$\\dim = 0$; the smallest',
           strict: true,
-          note: 'All three clauses hold vacuously: $\\mathbf{0} + \\mathbf{0} = \\mathbf{0}$ and $c\\mathbf{0} = \\mathbf{0}$. Its dimension is zero, not one \u2014 the [empty set is its basis](!/linear-algebra/vector-spaces/dimension), since $\\mathbf{0}$ is dependent on its own and cannot belong to one.',
+          note: 'All three clauses hold directly: $\\mathbf{0} + \\mathbf{0} = \\mathbf{0}$ and $c\\mathbf{0} = \\mathbf{0}$. Its dimension is zero, not one \u2014 the [empty set is its basis](!/linear-algebra/vector-spaces/dimension), since $\\mathbf{0}$ is dependent on its own and cannot belong to one.',
         },
         {
           name: 'Any span',
@@ -1249,6 +1251,10 @@ $$W \\subseteq V \\text{ is a subspace} \\iff W \\neq \\emptyset \\text{ and } c
 
 This single condition captures both closure properties simultaneously.
 
+@academic[pitfall,aside:true,width:35%:Stopping at the zero vector
+Taking $\\{(x, y) : y = x^2\\}$ as a subspace because it contains $(0, 0)$ skips closure: $2 \\cdot (1, 1) = (2, 2)$ is not in the set, since $2 \\neq 2^2$. Containing $\\mathbf{0}$ is necessary but not sufficient, and this set is not a subspace.
+[Read more](!#pitfalls)]@
+
 The requirement that $W$ be nonempty is essential. Once at least one vector $\\mathbf{v}$ is known to lie in $W$, closure under scalar multiplication with $c = 0$ guarantees $\\mathbf{0} = 0\\mathbf{v} \\in W$. So the zero vector belongs to every subspace. Conversely, if $\\mathbf{0} \\notin W$, then $W$ cannot be a subspace — this is often the fastest way to disqualify a candidate.`,
     before: ``,
     after: ``,
@@ -1291,7 +1297,13 @@ the set of all vectors that $A$ maps to the zero vector. This is a subspace of $
 
 Verification is direct. The zero vector satisfies $A\\mathbf{0} = \\mathbf{0}$, so $\\mathbf{0} \\in \\text{Null}(A)$. If $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = A\\mathbf{u} + A\\mathbf{v} = \\mathbf{0} + \\mathbf{0} = \\mathbf{0}$, so $\\mathbf{u} + \\mathbf{v} \\in \\text{Null}(A)$. If $A\\mathbf{v} = \\mathbf{0}$, then $A(c\\mathbf{v}) = cA\\mathbf{v} = c\\mathbf{0} = \\mathbf{0}$, so $c\\mathbf{v} \\in \\text{Null}(A)$. Both closure conditions hold.
 
-The dimension of the null space is the nullity. By the [rank-nullity theorem](!/linear-algebra/matrix/rank), $\\text{rank}(A) + \\text{nullity}(A) = n$. When $A$ has full column [rank](!/linear-algebra/matrix/rank) ($\\text{rank} = n$), the null space is $\\{\\mathbf{0}\\}$ and the map $\\mathbf{x} \\mapsto A\\mathbf{x}$ is injective. When the rank is less than $n$, the null space is nontrivial and the map collapses some directions to zero.`,
+The dimension of the null space is the nullity. By the [rank-nullity theorem](!/linear-algebra/matrix/rank), $\\text{rank}(A) + \\text{nullity}(A) = n$. When $A$ has full column [rank](!/linear-algebra/matrix/rank) ($\\text{rank} = n$), the null space is $\\{\\mathbf{0}\\}$ and the map $\\mathbf{x} \\mapsto A\\mathbf{x}$ is injective. When the rank is less than $n$, the null space is nontrivial and the map collapses some directions to zero.
+
+@academic[pitfall,aside:true,width:35%:Counting rows instead of columns
+For $A = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ of rank $2$, using its $2$ rows gives nullity $2 - 2 = 0$, yet $(-1, -1, 1)$ solves $A\\mathbf{x} = \\mathbf{0}$. With $n = 3$ columns, the nullity is $3 - 2 = 1$.
+[Read more](!#pitfalls)]@
+
+The count can be read off the reduced form of $A$. Every column holds either a pivot or a free variable, the pivot columns number $\\text{rank}(A)$, and each free variable contributes one vector to a basis of the null space. With $n$ columns in all, that leaves $n - \\text{rank}(A)$ free variables.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1351,6 +1363,12 @@ $$\\dim(W_1 + W_2) = \\dim(W_1) + \\dim(W_2) - \\dim(W_1 \\cap W_2)$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Adding dimensions without the overlap
+Adding the dimensions of the $xy$-plane and the $xz$-plane in $\\mathbb{R}^3$ gives $\\dim(W_1 + W_2) = 2 + 2 = 4$, more than $\\dim \\mathbb{R}^3 = 3$. The planes share the $x$-axis, so the sum has dimension $2 + 2 - 1 = 3$.
+[Read more](!#pitfalls)]@
+
+The subtracted term accounts for overlap. A basis of $W_1 \\cap W_2$ can be extended to a basis of $W_1$ and to a basis of $W_2$, so the directions shared by both subspaces are counted once in $\\dim(W_1)$ and again in $\\dim(W_2)$; subtracting $\\dim(W_1 \\cap W_2)$ counts them a single time.
+
 When $W_1 \\cap W_2 = \\{\\mathbf{0}\\}$, the sum is called a direct sum, written $W_1 \\oplus W_2$, and every vector in the sum has a unique decomposition as $\\mathbf{w}_1 + \\mathbf{w}_2$.`,
     before: ``,
     after: ``,
@@ -1383,6 +1401,49 @@ This decomposition separates the particular and homogeneous contributions. The p
     after: ``,
     link: ``,
   },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up again and again with subspaces. Each one is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Stopping at the zero vector**
+
+A candidate set is checked for the zero vector, found to contain it, and declared a subspace without the two closure conditions being tested.
+
+Wrong working: $W = \\{(x, y) : y = x^2\\}$ contains $(0, 0)$, since $0 = 0^2$, so $W$ is taken to be a subspace of $\\mathbb{R}^2$.
+
+Right working: test closure with vectors from $W$. The point $(1, 1)$ is in $W$, but $2 \\cdot (1, 1) = (2, 2)$, and $2 \\neq 2^2 = 4$, so $(2, 2) \\notin W$. Addition fails as well: $(1, 1)$ and $(-1, 1)$ are in $W$, but $(1, 1) + (-1, 1) = (0, 2)$, and $2 \\neq 0^2$. $W$ is not a subspace.
+
+Why it happens: the zero-vector check is the quickest test and often the one that settles the question, so it gets treated as the whole test. It works in one direction only: a set without $\\mathbf{0}$ is ruled out, but a set with $\\mathbf{0}$ still has to pass both closure conditions.
+
+How to check: after the zero-vector check, try one sum and one multiple with a negative scalar, using vectors from the set. A single result outside $W$ settles the question; if none turns up, prove closure with general vectors and a general scalar.
+
+**Counting rows instead of columns**
+
+The rank-nullity theorem is applied with the number of rows $m$ in place of the number of columns $n$, so the nullity comes out as $m - \\text{rank}(A)$.
+
+Wrong working: $A = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ has rank $2$ and $2$ rows, so the nullity is taken as $2 - 2 = 0$ and $\\text{Null}(A)$ as $\\{\\mathbf{0}\\}$.
+
+Right working: the null space lives in $\\mathbb{R}^n$, with $n = 3$ the number of columns. $A$ is already in reduced form, with pivots in columns $1$ and $2$ and $x_3$ free. The equations $x_1 + x_3 = 0$ and $x_2 + x_3 = 0$ give $\\mathbf{x} = x_3(-1, -1, 1)$, so $\\text{Null}(A) = \\text{Span}\\{(-1, -1, 1)\\}$ and the nullity is $3 - 2 = 1$.
+
+Why it happens: an $m \\times n$ matrix has two sizes, and the rows are what one sees when writing out the equations, while the null space is a set of inputs, one entry per column.
+
+How to check: count the free variables in the reduced form, one for each column without a pivot. Here column $3$ has no pivot, so the nullity is $1$. Multiplying back confirms it: $A(-1, -1, 1) = (-1 + 1, -1 + 1) = (0, 0)$.
+
+**Adding dimensions without the overlap**
+
+The dimension of a sum of subspaces is taken as $\\dim(W_1) + \\dim(W_2)$, leaving out the correction for the intersection.
+
+Wrong working: the $xy$-plane $W_1$ and the $xz$-plane $W_2$ in $\\mathbb{R}^3$ both have dimension $2$, so $\\dim(W_1 + W_2) = 2 + 2 = 4$.
+
+Right working: the two planes meet in the $x$-axis, so $\\dim(W_1 \\cap W_2) = 1$ and $\\dim(W_1 + W_2) = 2 + 2 - 1 = 3$. The sum is all of $\\mathbb{R}^3$: any $(a, b, c)$ equals $(a, b, 0) + (0, 0, c)$.
+
+Why it happens: for a direct sum the dimensions do simply add, and that case is carried over to sums whose pieces overlap.
+
+How to check: a subspace can never have a larger dimension than the space it lies in. A result of $4$ inside $\\mathbb{R}^3$ is impossible, so the overlap has been missed.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
 }
 
 
@@ -1394,7 +1455,7 @@ This decomposition separates the particular and homogeneous contributions. The p
 const faqQuestions = {
   obj1: {
     question: "Is every subset of a vector space a subspace?",
-    answer: "No, and the containment symbol is silent on the matter. The unit circle in $\\mathbb{R}^2$ is a perfectly good subset and fails closure immediately, since adding two points on it lands off it. Writing $W \\subseteq V$ asserts membership only; subspacehood is a structural claim that has to be tested.",
+    answer: "No, and the containment symbol is silent on the matter. The unit circle in $\\mathbb{R}^2$ is a perfectly good subset and fails closure immediately, since adding two points on it usually lands off it — $(1, 0) + (0, 1) = (1, 1)$, at distance $\\sqrt{2}$ from the origin. Writing $W \\subseteq V$ asserts membership only; subspacehood is a structural claim that has to be tested.",
     sectionId: "notation"
   },
   obj2: {
@@ -1515,8 +1576,25 @@ const schemas = {
     }),
   };
 
+  const subspaceOpNest = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Subspaces built from two subspaces',
+    preface: 'From two subspaces $W_1$ and $W_2$ of $V$, the intersection and the sum are again subspaces, and they bracket each of the originals.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Dimension bookkeeping',
+    conclusion: '$\\dim(W_1 + W_2) = \\dim W_1 + \\dim W_2 - \\dim(W_1 \\cap W_2)$. The union, unlike these, is almost never a subspace.',
+    levels: [
+      { id: 'int', symbol: 'W₁ ∩ W₂', name: 'Intersection', note: 'always a subspace; between {0} and one of the originals' },
+      { id: 'w1', symbol: 'W₁', name: '[Subspace](!/linear-algebra/vector-spaces/subspaces)', note: 'one of the two originals' },
+      { id: 'sum', symbol: 'W₁ + W₂', name: 'Sum', adds: 'all combinations', note: 'the smallest subspace containing both' },
+      { id: 'v', symbol: 'V', name: 'The whole space' },
+    ],
+    chainSymbol: '⊆',
+  };
+
 return {
   props:{
+    subspaceOpNest,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1537,7 +1615,7 @@ return {
 
    }
 
-export default function SubspacesPage({seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits}) {
+export default function SubspacesPage({subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1635,6 +1713,14 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrameV2
+            key={'obj8-diagram'}
+            id="subspace-operations-nesting"
+            title="Intersection and sum of subspaces"
+            source="/linear-algebra/vector-spaces/subspaces"
+          >
+            <NestedContainment data={subspaceOpNest} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1662,6 +1748,14 @@ export default function SubspacesPage({seoData, sectionsContent, introContent, o
           </DiagramFrame>,
           `In practice the origin test comes first because it is nearly free. Two of the three failures below are settled by it alone — an affine line and the solution set of $A\\mathbf{x} = \\mathbf{b}$ both miss $\\mathbf{0}$, and neither needs a closure argument. Running the clauses in the order cheap-to-expensive means most non-subspaces are disqualified before any real work.`,
           `The first quadrant is the case worth dwelling on, because it passes two clauses out of three. It contains the origin, and the sum of two vectors with non-negative components has non-negative components — everything looks right until scaling by $-1$ leaves the set entirely. Passing most of the test is not passing it, and the clauses fail independently: nothing about closure under addition implies closure under scaling.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

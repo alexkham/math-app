@@ -260,6 +260,10 @@ When $\\Delta < 0$, no real roots exist. The quadratic never touches zero and ma
 
 The expression dips below zero between the roots and rises above zero outside them.
 
+@academic[pitfall,aside:true,width:35%:Multiplying by -1 without flipping the sign
+Turning $-x^2 + x + 6 > 0$ into $x^2 - x - 6 > 0$ keeps the sign and gives $x < -2$ or $x > 3$. Multiplying by $-1$ flips it: $x^2 - x - 6 < 0$, so $-2 < x < 3$.
+[Read more](!#pitfalls)]@
+
 If $a < 0$, the parabola opens downward. The signs are reversed: the quadratic is negative on the outer intervals and positive on the inner interval $(r_1, r_2)$. The expression rises above zero only between the roots.
 
 To solve $x^2 - 5x + 4 > 0$, find the roots of $x^2 - 5x + 4 = 0$. Factoring gives $(x - 1)(x - 4) = 0$, so $r_1 = 1$ and $r_2 = 4$. Since $a = 1 > 0$, the expression is positive outside the roots. The solution is $(-\\infty, 1) \\cup (4, \\infty)$.
@@ -278,9 +282,18 @@ To solve $x^2 - 5x + 4 \\leq 0$ instead, select the interval where the expressio
 
 If $a > 0$: the expression is positive everywhere except at $x = r$, where it is zero. The inequality $ax^2 + bx + c > 0$ is satisfied by all $x \\neq r$, and the solution is $(-\\infty, r) \\cup (r, \\infty)$. The non-strict version $ax^2 + bx + c \\geq 0$ is satisfied by every real number: $(-\\infty, \\infty)$.
 
+@academic[pitfall,aside:true,width:35%:Missing the root in a non-strict inequality
+Reading $(x - 2)^2 \\leq 0$ as "a square is never negative, so no solution" drops the equality. Since $x^2 - 4x + 4 = (x - 2)^2$ equals $0$ at $x = 2$, the solution is the single point $x = 2$.
+[Read more](!#pitfalls)]@
+
 If $a < 0$: the expression is negative everywhere except at $x = r$, where it is zero. The inequality $ax^2 + bx + c < 0$ is satisfied by all $x \\neq r$, and the non-strict version $ax^2 + bx + c \\leq 0$ holds for all real $x$. The inequality $ax^2 + bx + c > 0$ has no solution — a negative times a non-negative square is never positive.
 
-Consider $x^2 - 6x + 9 > 0$. The discriminant is $36 - 36 = 0$, and the expression factors as $(x - 3)^2$. This is positive for all $x \\neq 3$ and zero at $x = 3$. The solution is $(-\\infty, 3) \\cup (3, \\infty)$, the entire real line minus one point.`,
+Consider $x^2 - 6x + 9 > 0$. The discriminant is $36 - 36 = 0$, and the expression factors as $(x - 3)^2$. This is positive for all $x \\neq 3$ and zero at $x = 3$. The solution is $(-\\infty, 3) \\cup (3, \\infty)$, the entire real line minus one point.
+
+@academic[fact,aside:true,width:35%:Why the square wins on area
+A rectangle with perimeter $20$ and one side $x$ has area $x(10 - x)$, and $25 - x(10 - x) = (x - 5)^2 \\geq 0$. So no rectangle with that perimeter beats the $5 \\times 5$ square, and only the square reaches $25$.]@
+
+The same perfect square settles questions that do not look like inequalities at first. When an expression can be rewritten as a constant minus a square, $k - (x - r)^2$, it can never be larger than $k$, because the square is never negative, and it equals $k$ only at $x = r$. The claim that $k$ is the largest value is then just the inequality $(x - r)^2 \\geq 0$, the $\\Delta = 0$ case of this section with $a > 0$.`,
     before: ``,
     after: ``,
     link: '',
@@ -294,9 +307,18 @@ If $a > 0$: the expression is positive everywhere. The inequality $ax^2 + bx + c
 
 If $a < 0$: the expression is negative everywhere. The inequality $ax^2 + bx + c < 0$ (or $\\leq 0$) holds for all $x$, and $ax^2 + bx + c > 0$ (or $\\geq 0$) has no solution.
 
+@academic[pitfall,aside:true,width:35%:Reading no roots as no solution
+Concluding from $\\Delta = 4 - 20 = -16$ that $x^2 + 2x + 5 > 0$ has no solution answers the equation, not the inequality. With $a = 1 > 0$ the expression is always positive, so every real $x$ is a solution.
+[Read more](!#pitfalls)]@
+
 The equation $x^2 + x + 1 = 0$ has $\\Delta = 1 - 4 = -3 < 0$, and since $a = 1 > 0$, the expression $x^2 + x + 1$ is positive for every real $x$. The inequality $x^2 + x + 1 > 0$ is universally true. The inequality $x^2 + x + 1 < 0$ is universally false.
 
-No sign chart is needed in this case. The absence of real roots means no critical points exist, so there is only one interval — the entire number line — and its sign is determined by $a$.`,
+No sign chart is needed in this case. The absence of real roots means no critical points exist, so there is only one interval — the entire number line — and its sign is determined by $a$.
+
+@academic[fact,aside:true,width:35%:The discriminant proves Cauchy–Schwarz
+For any numbers $p, q, r, s$, the quadratic $(pt + r)^2 + (qt + s)^2$ in $t$ is never negative, so its discriminant is at most $0$. Written out, that is $(pr + qs)^2 \\leq (p^2 + q^2)(r^2 + s^2)$, the inequality behind $|\\cos\\theta| \\leq 1$ for the angle between two vectors.]@
+
+The reasoning also runs backwards. If a quadratic with $a > 0$ is known to be non-negative for every real $x$, it cannot have two distinct real roots, because it would be negative between them, so its discriminant must satisfy $\\Delta \\leq 0$. A statement about the sign of an expression at every point then becomes a single inequality between its coefficients, with no $x$ left in it.`,
     before: ``,
     after: ``,
     link: '',
@@ -310,6 +332,10 @@ For the inequality $(x - 1)(x - 4) > 0$, the roots are $r_1 = 1$ and $r_2 = 4$, 
 
 @academic[formula_callout:Sign Chart Method
 $$\\begin{array}{c|ccc} & x < 1 & 1 < x < 4 & x > 4 \\\\ \\hline (x-1) & - & + & + \\\\ (x-4) & - & - & + \\\\ \\hline \\text{product} & + & - & + \\end{array}$$]@
+
+@academic[pitfall,aside:true,width:35%:Setting each factor positive
+Solving $(x + 2)(x - 3) > 0$ as $x + 2 > 0$ or $x - 3 > 0$ gives $x > -2$, which includes $x = 0$, where the product is $-6$. The product is positive when both factors share a sign: $x < -2$ or $x > 3$.
+[Read more](!#pitfalls)]@
 
 The solution to the $> 0$ inequality consists of the intervals where the product is positive: $(-\\infty, 1) \\cup (4, \\infty)$.
 
@@ -331,7 +357,7 @@ When $a < 0$, the parabola opens downward. It rises above the axis between its r
 
 This geometric reading makes the sign chart unnecessary for many students — once the roots and the direction of opening are identified, the solution is visible from the shape of the curve. The sign chart is the algebraic encoding of the same information, and either approach yields identical results.
 
-The vertex of the parabola, located at $x = -\\frac{b}{2a}$, is the point of maximum depth below the axis (when $a > 0$) or maximum height above it (when $a < 0$). Its position does not directly affect the solution set of the inequality, but it determines how far the parabola penetrates into the region of the opposite sign.`,
+The vertex of the parabola, located at $x = -\\frac{b}{2a}$, is the point of maximum depth below the axis (when $a > 0$ and the parabola crosses the axis) or maximum height above it (when $a < 0$). Its position does not directly affect the solution set of the inequality, but it determines how far the parabola penetrates into the region of the opposite sign.`,
     before: ``,
     after: ``,
     link: '',
@@ -342,6 +368,10 @@ The vertex of the parabola, located at $x = -\\frac{b}{2a}$, is the point of max
     content: `Certain inequalities of degree higher than two can be reduced to quadratic inequalities through substitution, following the same strategy used for [reducible equations](!/algebra/equations/quadratic).
 
 The bi-quadratic inequality $x^4 - 5x^2 + 4 > 0$ becomes $u^2 - 5u + 4 > 0$ with the substitution $u = x^2$. The quadratic factors as $(u - 1)(u - 4) > 0$, which is satisfied when $u < 1$ or $u > 4$. Back-substituting: $x^2 < 1$ gives $-1 < x < 1$, and $x^2 > 4$ gives $x < -2$ or $x > 2$. The complete solution is $(-\\infty, -2) \\cup (-1, 1) \\cup (2, \\infty)$.
+
+@academic[pitfall,aside:true,width:35%:Taking only the positive square root
+Turning $x^2 > 9$ into $x > 3$ loses half the answer: $x = -4$ also works, since $(-4)^2 = 16 > 9$. The solution is $x < -3$ or $x > 3$.
+[Read more](!#pitfalls)]@
 
 The back-substitution step requires care. The condition $u = x^2$ forces $u \\geq 0$, so any solution for $u$ that is negative produces no real values of $x$. Additionally, each positive value of $u$ splits into two symmetric values $x = \\pm\\sqrt{u}$, potentially doubling the number of boundary points on the $x$-axis.
 
@@ -354,6 +384,82 @@ The substitution pattern extends to any inequality of the form $a[f(x)]^2 + b[f(
   obj9: {
     title: `Summary of Quadratic Inequality Cases`,
     content: `All quadratic inequalities reduce to one of three structural cases determined by the discriminant $\\Delta$. The table below collects each case with the resulting sign pattern of the expression and the solutions to the strict $> 0$ and $< 0$ inequalities, assuming $a > 0$. For $a < 0$, the $> 0$ and $< 0$ solutions swap. For non-strict inequalities ($\\geq 0$ or $\\leq 0$), include the roots where the expression equals zero.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for most wrong answers to quadratic inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Multiplying by -1 without flipping the sign**
+
+The leading coefficient is negative, and the inequality is multiplied by $-1$ to make it positive, which makes factoring easier. Every term changes sign, but the inequality sign is left as it was.
+
+Wrong working:
+$$-x^2 + x + 6 > 0 \\implies x^2 - x - 6 > 0 \\implies (x + 2)(x - 3) > 0 \\implies x < -2 \\text{ or } x > 3$$
+
+Right working: multiplying both sides by a negative number reverses the inequality.
+$$-x^2 + x + 6 > 0 \\implies x^2 - x - 6 < 0 \\implies (x + 2)(x - 3) < 0 \\implies -2 < x < 3$$
+
+Why it happens: multiplying by $-1$ feels like tidying up the expression, and the inequality sign is forgotten as part of the same operation.
+
+How to check: test one value. $x = 0$ gives $-0 + 0 + 6 = 6 > 0$, so $0$ must be in the answer; it lies in $-2 < x < 3$ but not in the wrong answer. The shape agrees: with $a = -1 < 0$ the parabola opens downward and is positive between its roots.
+
+**Missing the root in a non-strict inequality**
+
+When $\\Delta = 0$, the expression is a multiple of a perfect square, and the inequality includes equality. The square is treated as if it could only be positive or negative, and the point where it equals zero is lost.
+
+Wrong working:
+$$x^2 - 4x + 4 \\leq 0 \\implies (x - 2)^2 \\leq 0$$
+and since a square is never negative, the inequality is declared to have no solution.
+
+Right working: $(x - 2)^2 \\leq 0$ means $(x - 2)^2 < 0$ or $(x - 2)^2 = 0$. The first never happens; the second happens at $x = 2$. The solution is the single point $x = 2$.
+
+Why it happens: the familiar fact that a square is never negative answers the strict question $< 0$, and the "or equal" part of $\\leq$ gets dropped.
+
+How to check: substitute the repeated root. $x = 2$ gives $4 - 8 + 4 = 0$, and $0 \\leq 0$ is true, so the solution set cannot be empty.
+
+**Reading no roots as no solution**
+
+The discriminant is negative, so the corresponding equation has no real roots, and that verdict is carried over to the inequality.
+
+Wrong working:
+$$x^2 + 2x + 5 > 0, \\quad \\Delta = 2^2 - 4(1)(5) = 4 - 20 = -16 < 0$$
+so the inequality is declared to have no solution.
+
+Right working: with $\\Delta < 0$ the expression never changes sign, and its sign is the sign of $a$. Here $a = 1 > 0$, so $x^2 + 2x + 5 > 0$ for every real $x$. The solution is $(-\\infty, \\infty)$.
+
+Why it happens: for equations, a negative discriminant does mean no real solutions, and the same verdict is applied out of habit. An inequality asks about the sign of the expression, not about where it equals zero.
+
+How to check: substitute any value. $x = 0$ gives $5 > 0$, so the solution set is not empty. Completing the square shows why it holds everywhere: $x^2 + 2x + 5 = (x + 1)^2 + 4 \\geq 4$.
+
+**Setting each factor positive**
+
+After factoring, the inequality $(x - r_1)(x - r_2) > 0$ is solved like an equation, by applying the condition to each factor separately.
+
+Wrong working:
+$$(x + 2)(x - 3) > 0 \\implies x + 2 > 0 \\text{ or } x - 3 > 0 \\implies x > -2$$
+
+Right working: a product of two factors is positive when both factors have the same sign. Both are positive when $x > 3$; both are negative when $x < -2$. The solution is $(-\\infty, -2) \\cup (3, \\infty)$.
+
+Why it happens: the zero-product property, a product is zero when one factor is zero, is carried over to inequalities. There is no such rule for "greater than zero": a product is positive only when its factors share a sign, which is a condition on both factors at once.
+
+How to check: test one value from the wrong answer. $x = 0$ gives $(0 + 2)(0 - 3) = -6 < 0$. Values from the right answer, $x = -3$ and $x = 4$, give $(-1)(-6) = 6$ and $(6)(1) = 6$, both positive.
+
+**Taking only the positive square root**
+
+After back-substitution, an inequality of the form $x^2 > p$ or $x^2 < p$ with $p > 0$ remains, and the square root is taken as if both sides were positive numbers.
+
+Wrong working:
+$$x^2 > 9 \\implies x > 3$$
+
+Right working: $x^2 > 9$ means $|x| > 3$, so $x < -3$ or $x > 3$. In the same way, $x^2 < 9$ means $|x| < 3$, that is $-3 < x < 3$.
+
+Why it happens: taking the square root of both sides is the step used for equations like $x^2 = 9$, where the $\\pm$ is easy to remember. In an inequality the negative side becomes a separate interval, and it is left out.
+
+How to check: test a negative value. $x = -4$ gives $(-4)^2 = 16 > 9$, so it belongs to the answer, yet $-4 > 3$ is false. The same test catches the $<$ case: $x < 3$ would include $x = -5$, where $25 < 9$ is false.`,
     before: ``,
     after: ``,
     link: '',
@@ -674,6 +780,7 @@ $$ax^2 + bx + c > 0$$]@`,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+          `@academic[punchline:A quadratic can change sign only at a real root, and the discriminant counts those roots before any testing.]@`,
         ]
     },
     {
@@ -727,6 +834,7 @@ $$ax^2 + bx + c > 0$$]@`,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:A quadratic inequality is a question about a parabola: its roots and the way it opens decide the answer.]@`,
         ]
     },
     {
@@ -752,6 +860,14 @@ $$ax^2 + bx + c > 0$$]@`,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

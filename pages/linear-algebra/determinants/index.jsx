@@ -680,6 +680,8 @@ import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -815,6 +817,44 @@ const keyWords = [
 </table>
 `
 
+  // Concept introduction (section 1) — template F, collapse. Running
+  // instance: A = [[3, 1], [2, 5]], the worked example of section 2
+  // (det = 13). Section 1 had no widgets; its old text stays in
+  // sectionsContent.obj1, unused. The formula itself stays in section 2.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciBothTable = ciTableOpen(['columns', 'area of the parallelogram', 'ad − bc']) +
+    ciRow(['(3, 2) and (1, 5)', '28 − 15 = 13', '3·5 − 1·2 = 13'], { color: '#2563EB', cols: [1, 2] }) +
+    ciRow(['(2, 0) and (0, 3)', 'a 2 × 3 rectangle: 6', '2·3 − 0·0 = 6'], { shade: true }) +
+    ciRow(['(1, 2) and (2, 4)', 'on one line: 0', '1·4 − 2·2 = 0'], { last: true }) +
+    '</tbody></table>'
+  const ciRulesTable = ciTableOpen(['change to the columns', 'area', 'ad − bc']) +
+    ciRow(['slide one column along the other (add a multiple of it)', 'unchanged', 'unchanged']) +
+    ciRow(['stretch one column by a factor k', 'times k', 'times k'], { shade: true }) +
+    ciRow(['start from the unit square, columns (1, 0) and (0, 1)', '1', '1·1 − 0·0 = 1'], { last: true }) +
+    '</tbody></table>'
+  const fpCiPara = { kind: 'pieces', svgTitle: 'The columns (3, 2) and (1, 5) span a parallelogram of area 13', xRange: [0, 4.5], yRange: [0, 7.5],
+    pieces: [
+      { fn: (x) => (2 / 3) * x, from: 0, to: 3, ends: [null, null], color: 'f', label: { text: 'column (3, 2)', x: 2.4, y: 1.3, pos: 'se' } },
+      { fn: (x) => 5 * x, from: 0, to: 1, ends: [null, null], color: 'g', label: { text: 'column (1, 5)', x: 0.75, y: 3, pos: 'e' } },
+      { fn: (x) => 5 * x - 13, from: 3, to: 4, ends: [null, null], color: 'g' },
+      { fn: (x) => (2 / 3) * x + 13 / 3, from: 1, to: 4, ends: [null, null], color: 'f' },
+    ],
+    points: [{ x: 3, y: 2 }, { x: 1, y: 5 }, { x: 4, y: 7 }],
+    notes: [{ x: 1.7, y: 3.9, text: 'area 13', pos: 'e', color: 'r' }],
+    caption: 'The two columns span a parallelogram of area 13' };
+
+  const conceptIntroFigures = {
+    para: renderFunctionPlotV4(fpCiPara),
+    bothTable: ciBothTable,
+    rulesTable: ciRulesTable,
+  };
+
   const sectionsContent = {
   obj1: {
     title: `The Determinant as a Scalar Assignment`,
@@ -840,6 +880,10 @@ the determinant is
 $$\\det(A) = ad - bc$$]@
 
 One way to see where this formula comes from is to solve the system $Ax = \\mathbf{v}$ for a general right-hand side. Applying elimination, the solution involves dividing by $ad - bc$ at every step. When $ad - bc = 0$, the system either has no solution or infinitely many, and the matrix cannot be inverted. When $ad - bc \\neq 0$, there is a unique solution for every $\\mathbf{v}$, and the inverse exists.
+
+@academic[pitfall,aside:true,width:35%:Subtracting in the wrong order
+Taking $bc - ad$ for $\\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$ gives $1 \\cdot 2 - 3 \\cdot 5 = -13$, the right size with the wrong sign. The main diagonal comes first: $ad - bc = 15 - 2 = 13$.
+[Read more](!#pitfalls)]@
 
 The expression $ad - bc$ also carries geometric meaning. The columns of $A$ are the vectors $(a, c)$ and $(b, d)$ in $\\mathbb{R}^2$. The signed area of the parallelogram these two vectors span equals exactly $ad - bc$. A positive value means the columns are arranged counterclockwise; a negative value means clockwise; zero means the columns are parallel and the parallelogram collapses to a line segment.
 
@@ -890,6 +934,10 @@ $$\\det(A) = 2[(-1)(3) - (4)(2)] - 3[(0)(3) - (4)(5)] + 1[(0)(2) - (-1)(5)]$$]@
 
 @academic[formula_callout:The 3×3 Formula
 $$= 2(-3 - 8) - 3(0 - 20) + 1(0 + 5) = 2(-11) - 3(-20) + 5 = -22 + 60 + 5 = 43$$]@
+
+@academic[pitfall,aside:true,width:35%:Adding all three terms
+Adding the terms instead of alternating the signs gives $2(-11) + 3(-20) + 1(5) = -77$. The middle term is subtracted: $2(-11) - 3(-20) + 1(5) = 43$.
+[Read more](!#pitfalls)]@
 
 The same result follows from the Sarrus rule: downward diagonals give $2(-1)(3) + 3(4)(5) + 1(0)(2) = -6 + 60 + 0 = 54$; upward diagonals give $1(-1)(5) + 2(4)(2) + 3(0)(3) = -5 + 16 + 0 = 11$; the determinant is $54 - 11 = 43$.`,
     before: ``,
@@ -960,6 +1008,10 @@ $$= 1(-25) - 2(-5) + (-1)(15) = -25 + 10 - 15 = -30$$]@
 
 So $\\det(A) = (-1)^{5} \\cdot 1 \\cdot (-30) = (-1)(-30) = 30$.
 
+@academic[pitfall,aside:true,width:35%:Reusing the first-row signs
+Applying the first-row pattern $+, -, +, -$ down column $2$ gives the entry at $(3,2)$ the sign $+$ and $\\det(A) = -30$. The sign comes from the position, $(-1)^{3+2} = -1$, so $\\det(A) = 30$.
+[Read more](!#pitfalls)]@
+
 The choice of column $2$ reduced the problem from four $3 \\times 3$ determinants down to one. This illustrates why scanning for zeros before expanding is the first step in any hand computation.
 
 To compute the determinant of a specific matrix, use the [matrix calculator](!/linear-algebra/calculators/matrix).`,
@@ -1002,13 +1054,21 @@ Both give the same result regardless of which row or column is chosen. Collectin
     title: `How Row Operations Affect the Determinant`,
     content: `The three elementary row operations interact with the determinant in simple, predictable ways. Swapping two rows multiplies the determinant by $-1$. Multiplying a row by a nonzero scalar $k$ multiplies the determinant by $k$. Adding a scalar multiple of one row to a different row leaves the determinant unchanged.
 
+@academic[pitfall,aside:true,width:35%:Scaling the whole matrix once
+Writing $\\det(2A) = 2\\det(A)$ for $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$ gives $4$. Doubling $A$ doubles both rows, so $\\det(2A) = 2^2 \\cdot 2 = 8$; in general $\\det(kA) = k^n \\det(A)$.
+[Read more](!#pitfalls)]@
+
 These three rules turn [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) into a determinant-computing algorithm. Reduce $A$ to upper triangular form using row operations, tracking every swap and every scaling. The determinant of the resulting triangular matrix is the product of its diagonal entries. Adjusting for the tracked sign flips and scale factors gives $\\det(A)$.
 
 This approach requires on the order of $n^3$ arithmetic operations — a dramatic improvement over the $n!$ cost of cofactor expansion. For any matrix larger than $4 \\times 4$, row reduction is the practical method.
 
 ## A Quick Illustration
 
-Starting from $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, subtract $\\frac{3}{2}$ times row $1$ from row $2$ (this does not change the determinant) to get $\\begin{pmatrix} 2 & 4 \\\\ 0 & 1 \\end{pmatrix}$. The product of the diagonal is $2 \\cdot 1 = 2$, which matches $\\det(A) = 2 \\cdot 7 - 4 \\cdot 3 = 2$.
+@academic[pitfall,aside:true,width:35%:Forgetting to undo a scaling
+Dividing row $1$ of $\\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$ by $2$ and then clearing below the pivot gives $\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$, with diagonal product $1$. That division halved the determinant, so $\\det(A) = 2 \\cdot 1 = 2$.
+[Read more](!#pitfalls)]@
+
+Starting from $A =\\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, subtract $\\frac{3}{2}$ times row $1$ from row $2$ (this does not change the determinant) to get $\\begin{pmatrix} 2 & 4 \\\\ 0 & 1 \\end{pmatrix}$. The product of the diagonal is $2 \\cdot 1 = 2$, which matches $\\det(A) = 2 \\cdot 7 - 4 \\cdot 3 = 2$.
 
 The complete set of algebraic [properties](!/linear-algebra/determinants/properties) — including the multiplicative rule $\\det(AB) = \\det(A)\\det(B)$, transpose invariance, and the full invertibility equivalence — is developed on the properties page. The three rules above collect into a compact reference:`,
     before: ``,
@@ -1047,6 +1107,98 @@ Each of these formulas is developed with full worked examples on the [applicatio
   obj11: {
     title: `Summary: How to Compute a Determinant`,
     content: `Across the methods covered above, four routes lead to $\\det(A)$ — the closed-form $2\\times 2$ formula, the closed-form $3\\times 3$ expansion (or Sarrus), general cofactor expansion, and row reduction. Each is the right choice in a different regime, distinguished by matrix size, sparsity of the matrix, and whether the work needs to scale to large $n$. The table below collects all four side by side on the underlying formula, the situation it suits best, and the asymptotic cost.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Six mistakes account for many wrong determinants. Five are marked with a box where they happen in the sections above, and the sixth, a diagonal shortcut used on a $4 \\times 4$ matrix, is flagged in the section on the $3 \\times 3$ formula. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Subtracting in the wrong order**
+
+The $2 \\times 2$ formula is applied with its two products the wrong way round: the product of the other diagonal comes first, and the main-diagonal product is subtracted from it.
+
+Wrong working: for $A = \\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$,
+$$bc - ad = 1 \\cdot 2 - 3 \\cdot 5 = 2 - 15 = -13$$
+
+Right working: the main diagonal $a, d$ comes first.
+$$ad - bc = 3 \\cdot 5 - 1 \\cdot 2 = 15 - 2 = 13$$
+
+Why it happens: both products are formed correctly and only their order is swapped. The two results differ only in sign, so the wrong one looks just as plausible.
+
+How to check: the identity matrix must give $1$. With $ad - bc$, $\\det(I) = 1 \\cdot 1 - 0 \\cdot 0 = 1$; with the order reversed it gives $-1$.
+
+**Adding all three terms**
+
+In the first-row expansion of a $3 \\times 3$ determinant, the three terms are added as if every sign were $+$. The middle term should be subtracted.
+
+Wrong working: for the matrix of the worked example, $A = \\begin{pmatrix} 2 & 3 & 1 \\\\ 0 & -1 & 4 \\\\ 5 & 2 & 3 \\end{pmatrix}$,
+$$2(-11) + 3(-20) + 1(5) = -22 - 60 + 5 = -77$$
+
+Right working: the signs alternate $+, -, +$.
+$$2(-11) - 3(-20) + 1(5) = -22 + 60 + 5 = 43$$
+
+Why it happens: the three $2 \\times 2$ determinants are computed carefully, and the sign in front of the middle one is lost when the terms are put together. A negative middle value, as here, makes the slip easier, because two minus signs have to combine into a plus.
+
+How to check: compute the same determinant with the rule of Sarrus, which has no position signs to forget. For this matrix it gives $54 - 11 = 43$.
+
+**Using the diagonal rule on a 4×4 matrix**
+
+The rule of Sarrus is stretched to a $4 \\times 4$ matrix: the first three columns are copied to the right, and the four downward diagonal products minus the four upward ones are taken as the determinant.
+
+Wrong working: for the $4 \\times 4$ matrix of the section on small determinants, $A = \\begin{pmatrix} 1 & 0 & 2 & -1 \\\\ 3 & 0 & 0 & 5 \\\\ 2 & 1 & 4 & -3 \\\\ 1 & 0 & 5 & 0 \\end{pmatrix}$, the downward diagonals give $0$, $0$, $0$ and $(-1)(3)(1)(5) = -15$, and all four upward diagonals give $0$. The result would be $-15 - 0 = -15$.
+
+Right working: expand along column $2$, which has a single nonzero entry.
+$$\\det(A) = (-1)^{3+2} \\cdot 1 \\cdot M_{32} = (-1)(-30) = 30$$
+
+Why it happens: the diagonal picture is easy to remember, and nothing in it seems tied to the size $3$. But a $4 \\times 4$ determinant has $4! = 24$ products, and the diagonals reach only $8$ of them.
+
+How to check: count the products. A determinant of size $n$ has $n!$ of them, a diagonal rule of this kind produces $2n$, and the two counts agree only for $n = 3$.
+
+**Reusing the first-row signs**
+
+When a determinant is expanded along a row or column other than the first row, the signs are taken from the first-row pattern $+, -, +, -$ in the order the entries are used, instead of from their positions.
+
+Wrong working: in the $4 \\times 4$ example, the expansion along column $2$ has a single term, from the entry $1$ at position $(3,2)$. Running $+, -, +, -$ down the column gives row $3$ the sign $+$:
+$$\\det(A) = +1 \\cdot M_{32} = 1 \\cdot (-30) = -30$$
+
+Right working: the sign of position $(i,j)$ is $(-1)^{i+j}$. For $(3,2)$ it is $(-1)^{5} = -1$, so
+$$\\det(A) = (-1) \\cdot 1 \\cdot (-30) = 30$$
+
+Why it happens: most worked expansions use the first row, where the pattern does start with $+$. Column $2$ starts with $-$, and so does row $2$.
+
+How to check: read the sign off the checkerboard pattern in the section on minors and cofactors. Position $(3,2)$ sits on a $-$ square.
+
+**Scaling the whole matrix once**
+
+The rule for scaling one row is applied to a multiple of the whole matrix: $\\det(kA)$ is taken to be $k\\det(A)$.
+
+Wrong working: for $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, with $\\det(A) = 2$,
+$$\\det(2A) = 2\\det(A) = 4$$
+
+Right working: $2A$ multiplies each of the $2$ rows by $2$, and each row contributes its own factor.
+$$\\det(2A) = \\det\\begin{pmatrix} 4 & 8 \\\\ 6 & 14 \\end{pmatrix} = 4 \\cdot 14 - 8 \\cdot 6 = 56 - 48 = 8 = 2^2 \\cdot 2$$
+For an $n \\times n$ matrix, $\\det(kA) = k^n \\det(A)$.
+
+Why it happens: multiplying a matrix by $k$ looks like one operation, but it scales all $n$ rows at once, and the row rule counts each of them.
+
+How to check: try $A = I$. The matrix $kI$ is diagonal with $n$ entries equal to $k$, so its determinant is $k^n$, not $k$.
+
+**Forgetting to undo a scaling**
+
+During row reduction a row is divided by its pivot to make the pivot $1$, and the diagonal product of the final triangular matrix is reported as the determinant without accounting for that division.
+
+Wrong working: for $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, divide row $1$ by $2$ to get $\\begin{pmatrix} 1 & 2 \\\\ 3 & 7 \\end{pmatrix}$, then subtract $3$ times row $1$ from row $2$:
+$$\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}, \\quad 1 \\cdot 1 = 1$$
+
+Right working: dividing row $1$ by $2$ divided the determinant by $2$, so the product is multiplied back by $2$.
+$$\\det(A) = 2 \\cdot (1 \\cdot 1) = 2$$
+This matches $2 \\cdot 7 - 4 \\cdot 3 = 2$.
+
+Why it happens: making every pivot equal to $1$ is a habit from solving linear systems, where scaling a row does not change the solution. For a determinant it does change the value.
+
+How to check: keep a running factor beside the reduction and multiply by it at the end. Or avoid scaling altogether: row additions alone, as in the illustration of the row-operations section, leave the determinant unchanged.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1216,6 +1368,7 @@ const schemas = {
     detRowOpTree,
     singularCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj8Table,
@@ -1241,10 +1394,70 @@ export default function DeterminantsPage({detRowOpTree, singularCases,
   obj8Table,
   obj10Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (collapse).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'area',
+        lead: `One account is an area: the parallelogram spanned by the columns.`,
+        content: `Take $A = \\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$ and draw its two columns as arrows from the origin, $(3, 2)$ and $(1, 5)$. Together they span a parallelogram. Its area can be found with nothing but a ruler: the surrounding $4 \\times 7$ box has area $28$, and the triangles and rectangles left over around the parallelogram add up to $15$, so the parallelogram has area $13$.`,
+        visual: ciSvg('para'),
+        caption: `The arrows $(3, 2)$ and $(1, 5)$ and the two copies that close the shape. The region between them has area $13$.`,
+      },
+      {
+        id: 'formula',
+        lead: `The other account is a short calculation on the four entries.`,
+        content: `Multiply the two entries on the main diagonal, multiply the other two, and subtract: $ad - bc = 3 \\cdot 5 - 1 \\cdot 2 = 13$. No drawing, no geometry — four numbers and one subtraction. Section 2 takes this formula as its starting point.`,
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Both accounts give the same number every time.`,
+        content: [
+          `Try a few pairs of columns both ways.`,
+          ciTable('bothTable'),
+          `The rectangle is the easy check — its area is plainly $2 \\times 3$. The last pair is the telling one: both columns lie on the same line, the parallelogram collapses to nothing, and the formula gives $0$ as well.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree, because area and ad − bc react to the columns in the same way.`,
+        content: [
+          `Change the columns and watch both quantities.`,
+          ciTable('rulesTable'),
+          `Sliding a column along the other is a shear: the parallelogram leans but keeps its base and height, and $ad - bc$ is unchanged by the same move. Stretching a column stretches both by the same factor, and the unit square starts both at $1$. Any two quantities that behave this way under every change of columns are the same quantity — the two accounts were describing one number all along. (The formula can also come out negative; that sign records which way round the columns go, an orientation the plain area ignores.)`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [determinant](!/linear-algebra/definitions#determinant) of a square matrix $A$ is the single number $\\det(A)$ that both accounts describe: the signed factor by which $A$ scales area (volume, in higher dimensions), equal for a $2 \\times 2$ matrix to $ad - bc$.`,
+        footer: `For $A = \\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$, $\\det(A) = 13$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A determinant is a number, and only square matrices have one.`,
+        content: `It is one real number (or complex number, if the entries are complex) attached to the whole matrix. It is defined only for square matrices — a rectangular matrix has no determinant. The notation $|A|$ is widespread but potentially confusing, since the same vertical bars denote absolute value for real numbers and modulus for complex numbers. When there is any risk of ambiguity, $\\det(A)$ is preferred.`,
+      },
+      {
+        id: 'caveat',
+        lead: `Use the formula to compute and the area to understand.`,
+        content: `The formula is what you calculate with, and for larger matrices it grows into the expansions of the sections below. The area is what explains the results. A zero determinant means the columns have collapsed onto a line (a plane, in 3D), so the map $x \\mapsto Ax$ squashes space flat and cannot be undone: $A$ is [invertible](!/linear-algebra/matrix/inverse) if and only if $\\det(A) \\neq 0$. The determinant also determines whether that map preserves or reverses orientation, and appears in explicit formulas for eigenvalues, matrix inverses, and solutions to linear systems.`,
+      },
+      {
+        id: 'exit',
+        content: `The next several sections develop the determinant starting from the smallest cases — the $2 \\times 2$ formula, the $3 \\times 3$ rule — and building toward cofactor expansion, the general definition, its properties, and its geometric meaning.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1252,7 +1465,7 @@ export default function DeterminantsPage({detRowOpTree, singularCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1364,6 +1577,14 @@ export default function DeterminantsPage({detRowOpTree, singularCases,
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
 

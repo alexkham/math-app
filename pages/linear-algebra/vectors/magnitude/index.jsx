@@ -909,7 +909,7 @@ const normProperties = {
       anchor: '#3',
       statement: '$\\|\\mathbf{u} + \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$',
       verdict: 'conditional',
-      holdsWhen: 'equality iff $\\mathbf{u}$ and $\\mathbf{v}$ point the same way',
+      holdsWhen: 'equality iff one is $\\mathbf{0}$ or $\\mathbf{u}$ and $\\mathbf{v}$ point the same way',
       note: 'The direct path is never longer than the tip-to-tail path. Equality holds exactly when one vector is a non-negative multiple of the other \u2014 the triangle degenerates to a line. This is the axiom that makes [distance](#4) a metric, and it follows from the [Cauchy\u2013Schwarz inequality](!/linear-algebra/orthogonality/inner-product).',
       witness: {
         label: 'Both extremes',
@@ -1124,6 +1124,12 @@ In $\\mathbb{R}^3$, the same reasoning applies in two stages. A vector $\\mathbf
 @academic[formula_callout:Magnitude in Two and Three Dimensions
 $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + v_3^2}$$]@
 
+@academic[pitfall,aside:true,width:35%:Taking the root term by term
+Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4 = 7$, gives the wrong length for $(3, -4)$. The root applies to the whole sum: $\\|(3, -4)\\| = \\sqrt{9 + 16} = \\sqrt{25} = 5$.
+[Read more](!#pitfalls)]@
+
+For a concrete case in three dimensions, the vector $\\mathbf{v} = (2, -1, 2)$ has magnitude $\\sqrt{2^2 + (-1)^2 + 2^2} = \\sqrt{4 + 1 + 4} = \\sqrt{9} = 3$. Every component enters the sum as a square, so the sign of the middle entry plays no part in the length.
+
 The geometric intuition is the same in both cases: the magnitude is the straight-line distance from the tail of the vector to its tip. The only difference is the number of perpendicular components being combined.
 
 To compute the magnitude of a specific vector, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
@@ -1180,7 +1186,7 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2} = \\sqrt{\\sum_{i=
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-This quantity is called the Euclidean norm, or equivalently the $\\ell^2$ norm. The subscript distinguishes it from other ways of measuring vector size — the $\\ell^1$ norm sums absolute values, the $\\ell^\\infty$ norm takes the largest absolute component — but when "norm" appears without qualification in this section, it always refers to the Euclidean norm.
+This quantity is called the Euclidean norm, or equivalently the $\\ell^2$ norm. The superscript distinguishes it from other ways of measuring vector size — the $\\ell^1$ norm sums absolute values, the $\\ell^\\infty$ norm takes the largest absolute component — but when "norm" appears without qualification in this section, it always refers to the Euclidean norm.
 
 The double-bar notation $\\|\\mathbf{v}\\|$ is standard for the norm. Single bars $|x|$ are reserved for the absolute value of a scalar. The distinction matters: magnitude is a property of vectors, absolute value is a property of numbers, and the notational separation keeps the two from being confused.
 
@@ -1220,7 +1226,11 @@ $$\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The length of a sum never exceeds the sum of the individual lengths. Geometrically, in the tip-to-tail picture of vector addition, the direct path from start to finish (the sum) is never longer than the path that follows both vectors end to end. Equality holds only when $\\mathbf{a}$ and $\\mathbf{b}$ point in the same direction — when the path is already straight. The triangle inequality is proved using the Cauchy–Schwarz inequality, which is developed on the [dot product](!/linear-algebra/vectors/dot-product) page.`,
+@academic[pitfall,aside:true,width:35%:Adding the lengths
+Taking $\\|\\mathbf{a} + \\mathbf{b}\\| = \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (-3, 4)$ gives $5 + 5 = 10$. The sum is $(0, 8)$, so $\\|\\mathbf{a} + \\mathbf{b}\\| = 8$.
+[Read more](!#pitfalls)]@
+
+The length of a sum never exceeds the sum of the individual lengths. Geometrically, in the tip-to-tail picture of vector addition, the direct path from start to finish (the sum) is never longer than the path that follows both vectors end to end. Equality holds only when one of $\\mathbf{a}$, $\\mathbf{b}$ is $\\mathbf{0}$ or they point in the same direction — when the path is already straight. The triangle inequality is proved using the Cauchy–Schwarz inequality, which is developed on the [dot product](!/linear-algebra/vectors/dot-product) page.`,
     before: ``,
     after: ``,
     link: '',
@@ -1237,6 +1247,10 @@ $$d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a} - \\mathbf{b}\\| = \\sqrt{(a_1 - 
 /linear-algebra/formulas]@
 
 When $\\mathbf{a}$ and $\\mathbf{b}$ are interpreted as position vectors — arrows from the origin to points in space — this formula gives the straight-line distance between those points. In $\\mathbb{R}^2$, it reduces to the familiar distance formula from coordinate geometry. In $\\mathbb{R}^3$, it extends to three-dimensional Euclidean distance. In higher dimensions, the algebraic expression remains identical even though the geometry can no longer be drawn.
+
+@academic[pitfall,aside:true,width:35%:Subtracting the lengths
+Computing $\\|\\mathbf{a}\\| - \\|\\mathbf{b}\\|$ for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (4, 3)$ gives $5 - 5 = 0$, as if the two points coincided. The distance is the length of the difference: $\\|(-1, 1)\\| = \\sqrt{2}$.
+[Read more](!#pitfalls)]@
 
 Distance inherits its behavior from the norm. It is always non-negative, equals zero only when the two vectors are identical, is symmetric ($d(\\mathbf{a}, \\mathbf{b}) = d(\\mathbf{b}, \\mathbf{a})$, since $\\|\\mathbf{a} - \\mathbf{b}\\| = \\|\\mathbf{b} - \\mathbf{a}\\|$), and satisfies its own triangle inequality: $d(\\mathbf{a}, \\mathbf{c}) \\leq d(\\mathbf{a}, \\mathbf{b}) + d(\\mathbf{b}, \\mathbf{c})$. These properties make the Euclidean distance a metric — a formal measure of separation on $\\mathbb{R}^n$.`,
     before: ``,
@@ -1280,6 +1294,12 @@ This divides every component by the same positive scalar $\\|\\mathbf{v}\\|$, wh
 @academic[formula_callout:Normalization
 $$\\left\\|\\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}\\right\\| = \\frac{\\|\\mathbf{v}\\|}{\\|\\mathbf{v}\\|} = 1$$]@
 
+@academic[pitfall,aside:true,width:35%:Dividing by the squared length
+Dividing $\\mathbf{v} = (1, 2, 2)$ by $1 + 4 + 4 = 9$ gives $\\left(\\frac{1}{9}, \\frac{2}{9}, \\frac{2}{9}\\right)$, whose length is $\\frac{1}{3}$, not $1$. Dividing by $\\|\\mathbf{v}\\| = \\sqrt{9} = 3$ gives $\\hat{\\mathbf{v}} = \\left(\\frac{1}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$.
+[Read more](!#pitfalls)]@
+
+In a computation, normalization comes down to two steps. The length is found first, from the components of $\\mathbf{v}$, and then every component is divided by that one number. The identity above doubles as a check on the result: the squares of the new components must add up to exactly $1$.
+
 Because the scalar $\\frac{1}{\\|\\mathbf{v}\\|}$ is positive, the direction of $\\mathbf{v}$ is preserved — the normalized vector $\\hat{\\mathbf{v}}$ points exactly the same way as $\\mathbf{v}$, just with unit length.
 
 @academic[rule_plain:The zero vector cannot be normalized.]@
@@ -1294,6 +1314,70 @@ Normalization appears throughout the rest of this section. The angle formula on 
   obj7: {
     title: `Summary: Norm and the Concepts Built from It`,
     content: `The norm is the foundation of three related concepts this page has developed: distance (the norm of a difference), unit vector (a vector with norm exactly 1), and normalization (rescaling any nonzero vector to unit length). The table below collects each alongside its definition, formula, and direct relationship to the norm ‖<b>v</b>‖ &mdash; showing the family tree of ideas that grow out of a single length measurement.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj8: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for most wrong answers in computations with the norm. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Taking the root term by term**
+
+The magnitude is computed by taking the square root of each squared component on its own and adding the results, as if the root could be split across the sum.
+
+Wrong working:
+$$\\|(3, -4)\\| = \\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4 = 7$$
+
+Right working: add the squares first, then take one square root of the total.
+$$\\|(3, -4)\\| = \\sqrt{3^2 + (-4)^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$$
+
+Why it happens: for non-negative numbers the root does split over a product, $\\sqrt{ab} = \\sqrt{a}\\,\\sqrt{b}$, and the same move is carried over to a sum, where it fails.
+
+How to check: square the answer; it must equal the sum of the squared components. The wrong answer gives $7^2 = 49$, but $3^2 + (-4)^2 = 25$. The right answer gives $5^2 = 25$.
+
+**Adding the lengths**
+
+The norm is treated as if it passed through addition: the length of a sum is taken to be the sum of the two lengths.
+
+Wrong working: for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (-3, 4)$,
+$$\\|\\mathbf{a} + \\mathbf{b}\\| = \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\| = 5 + 5 = 10$$
+
+Right working: add the vectors first, then measure the sum.
+$$\\mathbf{a} + \\mathbf{b} = (0, 8), \\qquad \\|\\mathbf{a} + \\mathbf{b}\\| = \\sqrt{0^2 + 8^2} = 8$$
+As the triangle inequality requires, $8 \\leq 10$.
+
+Why it happens: a scalar does come out of the norm, $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$, and addition is expected to behave the same way. It does only in the equality case of the triangle inequality.
+
+How to check: the sum of lengths is exact only when one vector is a non-negative multiple of the other. Here $(-3, 4)$ is not a multiple of $(3, 4)$, so $10$ can only be an upper bound, and the length of the sum must be computed directly.
+
+**Subtracting the lengths**
+
+The distance between two vectors is computed as the difference of their lengths, $\\|\\mathbf{a}\\| - \\|\\mathbf{b}\\|$, instead of the length of their difference, $\\|\\mathbf{a} - \\mathbf{b}\\|$.
+
+Wrong working: for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (4, 3)$,
+$$d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a}\\| - \\|\\mathbf{b}\\| = 5 - 5 = 0$$
+
+Right working: subtract the vectors first, then take the norm.
+$$\\mathbf{a} - \\mathbf{b} = (-1, 1), \\qquad d(\\mathbf{a}, \\mathbf{b}) = \\sqrt{(-1)^2 + 1^2} = \\sqrt{2}$$
+
+Why it happens: the two expressions differ only in where the bars close, and the word "difference" suggests subtracting the two lengths that are already known.
+
+How to check: a distance of $0$ means the two vectors are identical, and $(3, 4) \\neq (4, 3)$, so $0$ cannot be right. In general the difference of the lengths is only a lower bound for the distance, by the reverse triangle inequality.
+
+**Dividing by the squared length**
+
+When a vector is normalized, its components are divided by the sum of their squares, $\\|\\mathbf{v}\\|^2$, because the square root was never taken.
+
+Wrong working: for $\\mathbf{v} = (1, 2, 2)$, the sum of squares is $1 + 4 + 4 = 9$, and
+$$\\frac{\\mathbf{v}}{9} = \\left(\\frac{1}{9}, \\frac{2}{9}, \\frac{2}{9}\\right)$$
+
+Right working: the length is $\\|\\mathbf{v}\\| = \\sqrt{9} = 3$, so
+$$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{3} = \\left(\\frac{1}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$$
+
+Why it happens: the sum of squares is the first number the computation produces, and it is easy to stop there. The squared norm also appears on its own in formulas such as $\\|\\mathbf{v}\\|^2 = \\mathbf{v} \\cdot \\mathbf{v}$, so it looks like a finished quantity.
+
+How to check: square and add the components of the result. The wrong answer gives $\\frac{1}{81} + \\frac{4}{81} + \\frac{4}{81} = \\frac{1}{9}$, a length of $\\frac{1}{3}$. The right answer gives $\\frac{1}{9} + \\frac{4}{9} + \\frac{4}{9} = 1$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1558,6 +1642,14 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj8.title,
+        link:sectionsContent.obj8.link,
+        content:[
+          sectionsContent.obj8.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

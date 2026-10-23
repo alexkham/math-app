@@ -552,7 +552,13 @@ $$P(x) = (x - c) \\cdot Q(x) + P(c)$$
 
 This means the remainder can be found without performing any division at all. To find the remainder when $P(x) = x^3 - 4x + 2$ is divided by $(x - 3)$, simply compute $P(3) = 27 - 12 + 2 = 17$. The remainder is $17$.
 
-The theorem applies to any polynomial and any value of $c$. If $P(x) = 2x^4 - x^2 + 5$ and the divisor is $(x + 1)$, read $(x + 1)$ as $(x - (-1))$ and evaluate $P(-1) = 2(1) - 1 + 5 = 6$. The remainder is $6$, confirmed instantly without setting up [long division or synthetic division](!/algebra/polynomials/operations).`,
+The theorem applies to any polynomial and any value of $c$. If $P(x) = 2x^4 - x^2 + 5$ and the divisor is $(x + 1)$, read $(x + 1)$ as $(x - (-1))$ and evaluate $P(-1) = 2(1) - 1 + 5 = 6$. The remainder is $6$, confirmed instantly without setting up [long division or synthetic division](!/algebra/polynomials/operations).
+
+@academic[pitfall,aside:true,width:35%:Using the wrong sign of c
+Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x + 3)$, $P(3) = 17$ is the remainder for $(x - 3)$. Here $c = -3$, so the remainder is $P(-3) = -13$.
+[Read more](!#13)]@
+
+In both examples the whole computation is a single evaluation, and the only choice to make is the value of $c$. The theorem is stated for a divisor written as $(x - c)$, so $c$ is the number that makes the divisor equal to zero.`,
     before: ``,
     after: ``,
     link: '',
@@ -638,6 +644,10 @@ For $P(x) = 2x^3 + x^2 - 13x + 6$, the constant term is $6$ with divisors $\\pm 
 @academic[formula_callout:The Rational Root Theorem
 $$\\pm 1, \\pm 2, \\pm 3, \\pm 6, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$]@
 
+@academic[pitfall,aside:true,width:35%:Leaving out the fractions
+Listing only the divisors of $6$ for $2x^3 + x^2 - 13x + 6$ gives $\\pm 1, \\pm 2, \\pm 3, \\pm 6$ and misses the root $\\frac{1}{2}$. Dividing by $q = \\pm 2$ adds $\\pm\\frac{1}{2}$ and $\\pm\\frac{3}{2}$.
+[Read more](!#13)]@
+
 Twelve candidates replace infinitely many possibilities. Each can be tested by substitution or synthetic division until all rational roots are found or the list is exhausted.`,
     before: ``,
     after: ``,
@@ -699,6 +709,10 @@ To count positive real roots, write $P(x)$ in standard form and count how many t
 
 To count negative real roots, apply the same procedure to $P(-x)$. Substituting $-x$ gives $P(-x) = -x^3 - 2x^2 + x + 2$, with signs $-, -, +, +$. One sign change occurs, so the polynomial has exactly $1$ negative real root.
 
+@academic[pitfall,aside:true,width:35%:Changing the sign of every term
+Writing $P(-x)$ for $x^3 - 2x^2 - x + 2$ as $-x^3 + 2x^2 + x - 2$ flips all four signs and gives $2$ changes, so $2$ or $0$ negative roots. Only odd powers flip: $-x^3 - 2x^2 + x + 2$ has $1$ change, exactly $1$ negative root.
+[Read more](!#13)]@
+
 The rule does not identify the roots or specify which of the possible counts is correct. For $P(x) = x^3 - 2x^2 - x + 2$, the actual roots are $1$, $2$, and $-1$ — two positive and one negative, consistent with the prediction. But the rule alone cannot distinguish between $2$ positive roots and $0$ positive roots without further analysis.`,
     before: ``,
     after: ``,
@@ -729,6 +743,10 @@ The Fundamental Theorem of Algebra makes a sweeping guarantee: every polynomial 
 A quadratic has $2$ roots. A cubic has $3$. A degree-$10$ polynomial has $10$. No polynomial of positive degree can avoid having roots — the theorem eliminates the possibility of a polynomial that simply never equals zero.
 
 Some roots may repeat. The polynomial $x^3 - 3x^2 + 3x - 1 = (x - 1)^3$ has degree $3$ but only one distinct root, $x = 1$, appearing with multiplicity $3$. The count of $n$ roots includes these repetitions.
+
+@academic[pitfall,aside:true,width:35%:Expecting all roots to be real
+Reading exactly $n$ roots as $n$ real roots: $x^3 - x^2 + x - 1$ would then cross the x-axis three times. It factors as $(x - 1)(x^2 + 1)$, so it crosses only at $x = 1$; the other roots are $\\pm i$.
+[Read more](!#13)]@
 
 For polynomials with real coefficients, an additional constraint applies: complex roots come in conjugate pairs. If $a + bi$ is a root, then $a - bi$ is also a root. This means a real polynomial of odd degree must have at least one real root — an odd number of roots cannot be paired off entirely into conjugate pairs.
 
@@ -763,6 +781,10 @@ $$r_1 \\cdot r_2 \\cdot r_3 = -d$$]@
 @academic[rule_theorem:Vieta's Formulas
 The pattern extends to any degree: the $k$-th elementary symmetric polynomial of the roots equals $(-1)^k$ times the coefficient of $x^{n-k}$ in a monic degree-$n$ polynomial.]@
 
+@academic[pitfall,aside:true,width:35%:Taking the sum of the roots as b
+Reading the sum of the roots of $x^2 - 5x + 6$ as $b = -5$ clashes with its roots $2$ and $3$. The sum is $-b = 5$ and the product is $c = 6$.
+[Read more](!#13)]@
+
 These relationships are useful for verifying [factorizations](!/algebra/polynomials/factoring). After finding roots $1$, $2$, and $3$ for $x^3 - 6x^2 + 11x - 6$, Vieta's formulas confirm: $1 + 2 + 3 = 6 = -(-6)$, $1 \\cdot 2 + 1 \\cdot 3 + 2 \\cdot 3 = 11$, and $1 \\cdot 2 \\cdot 3 = 6 = -(-6)$. All three match the coefficients. They also allow solving problems where individual roots are not needed — for instance, finding the sum of the squares of the roots using $(r_1 + r_2 + r_3)^2 - 2(r_1r_2 + r_1r_3 + r_2r_3) = 36 - 22 = 14$.`,
     before: ``,
     after: ``,
@@ -779,7 +801,36 @@ With the Rational Root Theorem, two errors dominate. The first is forgetting neg
 
 In Descartes' Rule of Signs, the most common error occurs when computing $P(-x)$. Every odd-powered term changes sign while even-powered terms stay the same. Writing $P(-x)$ incorrectly — changing the wrong terms or missing one — corrupts the sign-change count.
 
-With Vieta's formulas, sign errors are persistent. The sum of roots for $x^2 + bx + c$ is $-b$, not $b$. The product of roots for a cubic $x^3 + bx^2 + cx + d$ is $-d$, not $d$. The alternating sign pattern $(-1)^k$ is easy to lose track of, especially at higher degrees.`,
+With Vieta's formulas, sign errors are persistent. The sum of roots for $x^2 + bx + c$ is $-b$, not $b$. The product of roots for a cubic $x^3 + bx^2 + cx + d$ is $-d$, not $d$. The alternating sign pattern $(-1)^k$ is easy to lose track of, especially at higher degrees.
+
+**Using the wrong sign of c**
+
+The divisor has a plus sign, as in $(x + 3)$, and the number shown in it is substituted directly. The theorem is stated for $(x - c)$, so the evaluation happens at the wrong point.
+
+Wrong working: for $P(x) = x^3 - 4x + 2$ divided by $(x + 3)$,
+$$P(3) = 27 - 12 + 2 = 17$$
+
+Right working: $(x + 3) = (x - (-3))$, so $c = -3$ and
+$$P(-3) = -27 + 12 + 2 = -13$$
+The remainder is $-13$.
+
+Why it happens: the theorem is written with a minus sign in the divisor, so the sign of $c$ is the opposite of the sign that appears there. Reading the number straight off the divisor skips that step.
+
+How to check: $c$ is the value that makes the divisor zero. $x = -3$ gives $x + 3 = 0$; $x = 3$ does not. Synthetic division by $(x + 3)$ gives the bottom row $1, -3, 5, -13$, ending in the same remainder $-13$.
+
+**Expecting all roots to be real**
+
+The Fundamental Theorem of Algebra promises $n$ roots for a polynomial of degree $n$, and that is read as $n$ real roots, so $n$ crossings of the x-axis are expected.
+
+Wrong working: $x^3 - x^2 + x - 1$ has degree $3$, so its graph is expected to cross the x-axis three times. After the root $x = 1$ is found, two more real roots are searched for, and none exists.
+
+Right working: $P(1) = 1 - 1 + 1 - 1 = 0$, and dividing out $(x - 1)$ leaves $x^2 + 1$:
+$$x^3 - x^2 + x - 1 = (x - 1)(x^2 + 1)$$
+The factor $x^2 + 1$ has roots $\\pm i$. The three roots are $1$, $i$ and $-i$: one real, two complex.
+
+Why it happens: the roots met in early work are real numbers, and the theorem's count of roots in the complex numbers is easy to read as a count of x-intercepts.
+
+How to check: look for real roots in each factor. $x^2 + 1 = 0$ needs $x^2 = -1$, which no real number satisfies, and since $x^2 + 1 > 0$ for every $x$, the graph of $x^3 - x^2 + x - 1$ crosses the x-axis only at $x = 1$.`,
     before: ``,
     after: ``,
     link: '',

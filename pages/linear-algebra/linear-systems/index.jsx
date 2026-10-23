@@ -881,7 +881,13 @@ There is no fourth option.
 
 @academic[rule_theorem_plain:A linear system never has exactly two solutions, or ten, or any finite number greater than one.]@
 
-The proof is simple: if $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are both solutions with $\\mathbf{x}_1 \\neq \\mathbf{x}_2$, then $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ is a solution for every $t \\in \\mathbb{R}$, producing infinitely many.`,
+The proof is simple: if $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are both solutions with $\\mathbf{x}_1 \\neq \\mathbf{x}_2$, then $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ is a solution for every $t \\in \\mathbb{R}$, producing infinitely many.
+
+@academic[pitfall,aside:true,width:35%:Treating a zero row as a contradiction
+Reading the zero row of $\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$ as a sign of inconsistency gives no solution. The row says $0 = 0$, true for every $\\mathbf{x}$; with $y$ free, $x = 3 - 2y$, and there are infinitely many solutions.
+[Read more](!#pitfalls)]@
+
+In practice the outcome is read from the augmented matrix after row reduction, working up from the bottom row. Rows whose coefficients have all been eliminated often appear there, because one equation of the system was a combination of the others or contradicted them. The table below collects what each outcome looks like in the reduced matrix.`,
     before: ``,
     after: ``,
     link: ``,
@@ -908,6 +914,10 @@ In higher dimensions the geometry is harder to visualize but the classification 
 Swapping two rows ($R_i \\leftrightarrow R_j$) reorders the equations. Multiplying a row by a nonzero scalar ($kR_i \\to R_i$) rescales an equation. Adding a multiple of one row to another ($R_i + cR_j \\to R_i$) replaces one equation with a combination of two equations.
 
 @academic[rule_theorem_plain:Each operation is reversible: a swap undoes itself, scaling by $k$ is reversed by scaling by $1/k$, and adding $c$ times row $j$ to row $i$ is reversed by subtracting $c$ times row $j$ from row $i$. Reversibility guarantees that the solution set is unchanged — no solutions are created or destroyed.]@
+
+@academic[pitfall,aside:true,width:35%:Leaving the right-hand side unchanged
+Applying $R_2 - 2R_1 \\to R_2$ to the coefficients only turns $\\left(\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 2 & 1 & 4 \\end{array}\\right)$ into a second row $(0, -1 \\mid 4)$, giving $y = -4$, $x = 7$. On the full row it is $(0, -1 \\mid -2)$, so $y = 2$ and $x = 1$.
+[Read more](!#pitfalls)]@
 
 Each row operation corresponds to left-multiplication by an [elementary matrix](!/linear-algebra/matrix/operations). This algebraic interpretation connects the row-reduction algorithm to the theory of matrix factorization and [invertibility](!/linear-algebra/matrix/inverse). The full systematic application of row operations is [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination).`,
     before: ``,
@@ -937,7 +947,13 @@ Nontrivial solutions exist if and only if the rank of $A$ is less than $n$. If t
 
 @academic[rule_theorem_plain:The solution set of a homogeneous system is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$.]@
 
-The superposition principle holds — any linear combination of solutions is again a solution — which is why the solution set has the clean structure of a vector space rather than an arbitrary collection of points.`,
+The superposition principle holds — any linear combination of solutions is again a solution — which is why the solution set has the clean structure of a vector space rather than an arbitrary collection of points.
+
+@academic[pitfall,aside:true,width:35%:Adding solutions of a non-homogeneous system
+Adding two solutions of $x + y = 2$, such as $(2, 0)$ and $(0, 2)$, gives $(2, 2)$, where $x + y = 4$; in general $A(\\mathbf{x}_1 + \\mathbf{x}_2) = 2\\mathbf{b}$. Superposition holds only when $\\mathbf{b} = \\mathbf{0}$; here the difference $(2, -2)$ solves $x + y = 0$.
+[Read more](!#pitfalls)]@
+
+A system with a nonzero right-hand side, $A\\mathbf{x} = \\mathbf{b}$, is tied to the homogeneous system $A\\mathbf{x} = \\mathbf{0}$ with the same coefficient matrix. When it is consistent, its solution set is one particular solution plus every solution of the homogeneous system: the null space moved away from the origin. It is a point, line, plane or higher flat that does not pass through the origin, so it is not a subspace.`,
     before: ``,
     after: ``,
     link: ``,
@@ -950,7 +966,13 @@ Existence: a solution exists if and only if $\\text{rank}(A) = \\text{rank}([A \
 
 Uniqueness: if a solution exists, it is unique if and only if $\\text{rank}(A) = n$. Full column rank means no free variables and a trivial null space, so the particular solution stands alone with no homogeneous component to add freedom.
 
-When $A$ is square ($m = n$) and $\\det(A) \\neq 0$, both conditions hold for every $\\mathbf{b}$: the system always has a unique solution, given by $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires comparing ranks and identifying free variables. The full treatment, including overdetermined and underdetermined systems, is on the [solvability](!/linear-algebra/linear-systems/solvability) page.`,
+When $A$ is square ($m = n$) and $\\det(A) \\neq 0$, both conditions hold for every $\\mathbf{b}$: the system always has a unique solution, given by $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires comparing ranks and identifying free variables. The full treatment, including overdetermined and underdetermined systems, is on the [solvability](!/linear-algebra/linear-systems/solvability) page.
+
+@academic[pitfall,aside:true,width:35%:Reading a zero determinant as no solution
+Concluding no solution from $\\det(A) = 0$ fails for $x + y = 2$, $2x + 2y = 4$. The determinant is $1 \\cdot 2 - 1 \\cdot 2 = 0$, yet the second equation is twice the first, so every point $(t, 2 - t)$ is a solution.
+[Read more](!#pitfalls)]@
+
+For a singular square matrix the outcome depends on $\\mathbf{b}$ as well as on $A$. The same coefficient matrix can give a consistent system for one right-hand side and an inconsistent one for another, and the existence condition above, the comparison of $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}])$, is what separates the two.`,
     before: ``,
     after: ``,
     link: ``,
@@ -975,6 +997,76 @@ To solve a specific system with Gaussian elimination, Gauss-Jordan or Cramer's r
   obj11: {
     title: `Summary: Rank Conditions and Solution Sets`,
     content: `The rank of A and its relationship to the rank of the augmented matrix [A | b] settles every question about A·x = b — whether a solution exists, whether it is unique, and what shape the solution set takes. The table below collects each rank pattern alongside the resulting outcome, the structure of the solution set, and the geometric picture, providing a single reference card for the hub.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong verdicts about linear systems. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating a zero row as a contradiction**
+
+After row reduction, a row whose coefficients are all zero is taken as a sign that the system has no solution, without looking at its last entry. Only a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ is a contradiction; a row $[0 \\; \\cdots \\; 0 \\mid 0]$ is the equation $0 = 0$.
+
+Wrong working: for $x + 2y = 3$, $2x + 4y = 6$, the operation $R_2 - 2R_1 \\to R_2$ gives
+$$\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
+and the zero row is read as "inconsistent, no solution".
+
+Right working: the second row says $0x + 0y = 0$, which every $\\mathbf{x}$ satisfies. Only $x + 2y = 3$ remains, $y$ is free, and
+$$(x, y) = (3 - 2t, \\; t), \\quad t \\in \\mathbb{R}$$
+gives infinitely many solutions. Had the second equation been $2x + 4y = 7$, the same operation would give the row $[0 \\; 0 \\mid 1]$, the impossible $0 = 1$, and then there would be no solution.
+
+Why it happens: a row of zero coefficients appears both when an equation is redundant and when it contradicts the others, and only the last entry tells the two apart.
+
+How to check: look at the entry to the right of the bar. Or substitute one candidate: $t = 0$ gives $(3, 0)$, and $3 + 0 = 3$, $6 + 0 = 6$ both hold.
+
+**Leaving the right-hand side unchanged**
+
+A row operation is carried out on the coefficient part of the augmented matrix, and the entry to the right of the bar is copied down unchanged. The new row then stands for an equation the system never implied.
+
+Wrong working: for $x + y = 3$, $2x + y = 4$, apply $R_2 - 2R_1 \\to R_2$ to the coefficients only:
+$$\\left(\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 2 & 1 & 4 \\end{array}\\right) \\to \\left(\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 0 & -1 & 4 \\end{array}\\right)$$
+so $y = -4$ and $x = 3 - (-4) = 7$.
+
+Right working: the operation acts on the whole row, so the last entry becomes $4 - 2 \\cdot 3 = -2$:
+$$\\left(\\begin{array}{cc|c} 1 & 1 & 3 \\\\ 0 & -1 & -2 \\end{array}\\right)$$
+so $y = 2$ and $x = 3 - 2 = 1$.
+
+Why it happens: the bar makes the last column look like a separate object, and much of the work on a system, such as finding the rank of $A$, looks at the coefficients alone.
+
+How to check: substitute into the original equations. $(1, 2)$ gives $1 + 2 = 3$ and $2 + 2 = 4$. The wrong answer $(7, -4)$ satisfies the first equation but gives $14 - 4 = 10 \\neq 4$ in the second.
+
+**Adding solutions of a non-homogeneous system**
+
+The superposition principle of homogeneous systems is applied to $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$: the sum or a multiple of two solutions is taken to be another solution.
+
+Wrong working: $(2, 0)$ and $(0, 2)$ both solve $x + y = 2$, so their sum $(2, 2)$ is taken as a solution. But $2 + 2 = 4 \\neq 2$.
+
+Right working: in general
+$$A(\\mathbf{x}_1 + \\mathbf{x}_2) = A\\mathbf{x}_1 + A\\mathbf{x}_2 = \\mathbf{b} + \\mathbf{b} = 2\\mathbf{b}$$
+What does hold is $A(\\mathbf{x}_1 - \\mathbf{x}_2) = \\mathbf{0}$: the difference $(2, -2)$ solves $x + y = 0$. The solutions of $x + y = 2$ are one particular solution plus the homogeneous ones:
+$$(x, y) = (2, 0) + t(-1, 1) = (2 - t, \\; t)$$
+
+Why it happens: superposition is learned for homogeneous systems, and the right-hand side is not checked when it is reused.
+
+How to check: if the solutions of $A\\mathbf{x} = \\mathbf{b}$ could be added and scaled freely, $0 \\cdot \\mathbf{x}_1 = \\mathbf{0}$ would be one of them. But $A\\mathbf{0} = \\mathbf{0} \\neq \\mathbf{b}$.
+
+**Reading a zero determinant as no solution**
+
+For a square system, $\\det(A) = 0$ is taken to mean that there is no solution. It only means that the solution is not unique for every $\\mathbf{b}$: depending on $\\mathbf{b}$, there are no solutions or infinitely many.
+
+Wrong working: for $x + y = 2$, $2x + 2y = 4$,
+$$\\det\\begin{pmatrix} 1 & 1 \\\\ 2 & 2 \\end{pmatrix} = 1 \\cdot 2 - 1 \\cdot 2 = 0$$
+so the system is declared to have no solution.
+
+Right working: reduce the augmented matrix.
+$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 2 & 2 & 4 \\end{array}\\right) \\to \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
+Here $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = 1 < 2$, so there are infinitely many solutions, $(t, \\; 2 - t)$. With the right-hand side $(2, 5)$ instead, the last row becomes $[0 \\; 0 \\mid 1]$, the ranks are $1$ and $2$, and then there is no solution.
+
+Why it happens: $\\det(A) \\neq 0$ means exactly one solution for every $\\mathbf{b}$, and its negation is misread as no solution at all.
+
+How to check: compare $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}])$, or simply try to find one solution: $(2, 0)$ satisfies both $x + y = 2$ and $2x + 2y = 4$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1325,6 +1417,14 @@ export default function LinearSystemsPage({solutionMethodTree, linesGeometryCase
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
 ]

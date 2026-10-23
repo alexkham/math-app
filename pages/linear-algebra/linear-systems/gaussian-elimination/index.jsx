@@ -1026,7 +1026,7 @@ const obj10Table = `
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Gauss-Jordan (forward + backward to RREF)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">~ n³</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">backward pass roughly doubles the forward pass</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">backward pass adds up to roughly 50% to the forward pass</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Computing <a href="/linear-algebra/matrix/inverse" style="${linkStyle}">A⁻¹</a> explicitly, then x = A⁻¹b</td>
@@ -1359,6 +1359,10 @@ Each operation also corresponds to left-multiplication by an [elementary matrix]
 
 Start with the leftmost column that contains a nonzero entry. Identify a nonzero entry in that column to serve as the pivot — if the entry in the current top row is zero, swap that row with a row below that has a nonzero entry in this column. Then use row addition to eliminate every entry below the pivot: for each row $i$ below the pivot row, add $-\\frac{a_{ij}}{a_{pj}}$ times the pivot row to row $i$, zeroing out the $(i, j)$ entry.
 
+@academic[pitfall,aside:true,width:35%:Updating two rows from each other at once
+Doing $R_1 - R_2 \\to R_1$ and $R_2 - R_1 \\to R_2$ in one step on $x_1 + x_2 = 2$, $x_1 - x_2 = 0$ gives the rows $[0 \\; 2 \\mid 2]$ and $[0 \\; {-2} \\mid {-2}]$, which allow infinitely many solutions. $R_2 - R_1 \\to R_2$ alone gives the unique solution $x_1 = x_2 = 1$.
+[Read more](!#pitfalls)]@
+
 Move one column to the right and one row down, and repeat the process on the submatrix below and to the right of the current pivot. Continue until no rows or columns remain to process.
 
 The result is a matrix in row echelon form: a staircase of pivots descending from upper-left to lower-right, with zeros filling in below and to the left of each pivot. Any rows that are entirely zero sit at the bottom.`,
@@ -1403,7 +1407,11 @@ Each step required only previously solved variables. The process terminates in $
 
 After forward elimination produces REF, continue by working from the bottom pivot upward. For each pivot, add appropriate multiples of its row to the rows above to eliminate all entries above the pivot. Then scale the pivot row so the pivot entry becomes $1$.
 
-The payoff is that in RREF, the solution is visible by direct inspection — no back substitution is needed. Each pivot row reads "$x_i = \\text{(expression in free variables and constants)}$." The trade-off is that the backward pass requires additional row operations, roughly doubling the total work compared to forward elimination alone.
+@academic[pitfall,aside:true,width:35%:Reading the answer off echelon form
+Reading the last column of the echelon form in the back substitution example as the solution gives $(9, 6, 10)$, and already the bottom row fails: $5 \\cdot 10 \\neq 10$. That matrix is in REF, not RREF; the solution is $(11/4, 5/2, 2)$.
+[Read more](!#pitfalls)]@
+
+The payoff is that in RREF, the solution is visible by direct inspection — no back substitution is needed. Each pivot row reads "$x_i = \\text{(expression in free variables and constants)}$." The trade-off is that the backward pass requires additional row operations, raising the total work by up to roughly $50\\%$ compared to forward elimination alone.
 
 For hand computation, the choice between back substitution (stop at REF) and Gauss-Jordan (continue to RREF) is a matter of preference. For computer implementations, both approaches are standard.`,
     before: ``,
@@ -1424,6 +1432,10 @@ $$\\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 2 & 5 & 1 & 8 \\\\ 3 & 8 & 2 
 
 @academic[formula_callout:Worked Example: Unique Solution
 $$\\xrightarrow{R_3 - 2R_2} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 2 \\\\ 0 & 0 & -1 & 0 \\end{array}\\right)$$]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the right-hand side
+Applying $R_2 - 2R_1$ to the coefficients only keeps the constant $8$ instead of $8 - 2 \\cdot 3 = 2$. Back substitution then gives $(71, -28, 12)$, which fails the second equation: $14 \\neq 8$. The full row operation gives $(-1, 2, 0)$.
+[Read more](!#pitfalls)]@
 
 Three pivots in three columns — unique solution. Back substitution: row $3$ gives $-x_3 = 0$, so $x_3 = 0$. Row $2$ gives $x_2 + 3(0) = 2$, so $x_2 = 2$. Row $1$ gives $x_1 + 2(2) - 0 = 3$, so $x_1 = -1$.
 
@@ -1453,7 +1465,13 @@ The general solution in parametric vector form:
 @academic[formula_callout:Worked Example: Infinitely Many Solutions
 $$\\mathbf{x} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 1 \\end{pmatrix}$$]@
 
-The solution set is a two-dimensional plane in $\\mathbb{R}^4$, passing through $(-1, 0, 2, 0)$ and spanned by two direction vectors.`,
+@academic[pitfall,aside:true,width:35%:Dropping the free variable's own entry
+Writing the $s$-vector as $(1, 0, 0, 0)$, without the $1$ for $x_2 = s$, gives at $s = 1, t = 0$ the point $(0, 0, 2, 0)$, where the first equation reads $4 = 3$. The direction vectors are $(1, 1, 0, 0)$ and $(3, 0, -2, 1)$.
+[Read more](!#pitfalls)]@
+
+The solution set is a two-dimensional plane in $\\mathbb{R}^4$, passing through $(-1, 0, 2, 0)$ and spanned by two direction vectors.
+
+Each row of the vector form belongs to one unknown, $x_1$ to $x_4$ from top to bottom. The constant vector is the solution with $s = t = 0$, and the vector multiplied by $s$ records how every unknown changes when $s$ grows by $1$ and $t$ stays fixed. Any choice of the two parameters, such as $s = 1, t = 0$, must give a point that satisfies both original equations.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1474,6 +1492,10 @@ The second row reads $0x_1 + 0x_2 = -1$, which is the equation $0 = -1$. This is
 
 The system is inconsistent. Geometrically, the two equations represent parallel lines in $\\mathbb{R}^2$: $x_1 + x_2 = 2$ and $x_1 + x_2 = 3/2$ (the second equation, after dividing by $2$). Parallel lines with different intercepts never intersect.
 
+@academic[pitfall,aside:true,width:35%:Treating a zero row as a contradiction
+For $x_1 + x_2 = 2$, $2x_1 + 2x_2 = 4$, $R_2 - 2R_1$ leaves the row $[0 \\; 0 \\mid 0]$. Reading it as no solution is wrong: it says $0 = 0$, true for every pair, and the system has infinitely many solutions $(2 - s, s)$.
+[Read more](!#pitfalls)]@
+
 Inconsistency is always detectable in echelon form: a row $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ means $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$, and by the [Rouché-Capelli theorem](!/linear-algebra/linear-systems/solvability), no solution exists.`,
     before: ``,
     after: ``,
@@ -1483,7 +1505,7 @@ Inconsistency is always detectable in echelon form: a row $[0 \\; 0 \\; \\cdots 
     title: `Computational Cost`,
     content: `Forward elimination on an $n \\times n$ system requires roughly $\\frac{2}{3}n^3$ arithmetic operations (multiplications and additions). The cost comes from the nested loop structure: for each of the $n$ pivot columns, elimination involves $O(n)$ rows, each requiring $O(n)$ operations.
 
-Back substitution requires roughly $n^2$ operations — a negligible addition compared to forward elimination. Gauss-Jordan elimination (continuing to RREF) raises the total to roughly $n^3$, because the backward pass does comparable work to the forward pass.
+Back substitution requires roughly $n^2$ operations — a negligible addition compared to forward elimination. Gauss-Jordan elimination (continuing to RREF) raises the total to roughly $n^3$, because, in the classical form that clears above each pivot during the sweep, the backward pass adds about half the work of the forward pass.
 
 These costs are dramatically better than the alternatives for large systems. [Cramer&apos;s rule](!/linear-algebra/determinants/applications) requires $n + 1$ [determinant](!/linear-algebra/determinants) evaluations, each costing $O(n^3)$ via row reduction or $O(n!)$ via cofactor expansion — orders of magnitude slower. Computing the [inverse](!/linear-algebra/matrix/inverse) explicitly costs roughly $2n^3$ operations. Gaussian elimination is the standard baseline against which all other direct methods are measured.`,
     before: ``,
@@ -1496,7 +1518,7 @@ These costs are dramatically better than the alternatives for large systems. [Cr
 
 Partial pivoting addresses this by modifying the pivot selection step. At each stage, instead of using whatever nonzero entry happens to sit in the pivot position, the algorithm scans the entries below (and including) the current position in the pivot column and swaps the row with the largest absolute value into the pivot position. This keeps the multipliers $-a_{ij}/a_{pj}$ small, which limits the accumulation of rounding error.
 
-Partial pivoting does not change the mathematical structure of Gaussian elimination — it only changes which row swaps are performed. The echelon form, the rank, the pivots, and the solution are all the same in exact arithmetic. The difference is entirely numerical: partial pivoting makes the computation stable.
+Partial pivoting does not change the mathematical structure of Gaussian elimination — it only changes which row swaps are performed. The pivot positions, the rank, and the solution are the same in exact arithmetic; only the echelon form and the pivot values can differ. The difference is entirely numerical: partial pivoting makes the computation stable.
 
 Every serious numerical implementation of Gaussian elimination uses partial pivoting by default. In the [LU decomposition](!/linear-algebra/decompositions/lower-upper), the row swaps are recorded in a [permutation matrix](!/linear-algebra/matrix/types#12) $P$, giving the factorization $PA = LU$.`,
     before: ``,
@@ -1506,6 +1528,86 @@ Every serious numerical implementation of Gaussian elimination uses partial pivo
   obj12: {
     title: `Summary: The Algorithm at a Glance`,
     content: `Gaussian elimination splits cleanly into a small number of stages — preparing the augmented matrix, reducing it forward, classifying columns as pivot or free, and reading the solution by back substitution or Gauss-Jordan. The table below collects each stage alongside what happens in it and what the next step receives as input, providing a single-page workflow card for the procedure.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj13: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for many wrong answers in Gaussian elimination. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Updating two rows from each other at once**
+
+Two row additions are carried out in the same step, and each one reads the other row before it has changed: $R_1 - R_2 \\to R_1$ and $R_2 - R_1 \\to R_2$ together. Each move on its own is a legal row operation, but the pair is not, and information is lost.
+
+Wrong working: for $x_1 + x_2 = 2$, $x_1 - x_2 = 0$,
+$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\end{array}\\right) \\to \\left(\\begin{array}{cc|c} 0 & 2 & 2 \\\\ 0 & -2 & -2 \\end{array}\\right)$$
+The second row is $-1$ times the first, so only $x_2 = 1$ remains, $x_1$ looks free, and the system seems to have infinitely many solutions.
+
+Right working: one operation, with the pivot row left as it is.
+$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\end{array}\\right) \\xrightarrow{R_2 - R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & -2 & -2 \\end{array}\\right)$$
+Row $2$ gives $x_2 = 1$ and row $1$ gives $x_1 = 1$: the unique solution $(1, 1)$.
+
+Why it happens: worked examples write several operations over one arrow, such as $R_2 - 2R_1,\\; R_3 - 3R_1$, and that looks as if any two operations can be combined. Those two are safe only because both read row $1$, which neither of them changes.
+
+How to check: row operations never change the rank. The coefficient matrix $\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$ has rank $2$, but the wrong result has rank $1$, so a step was not a row operation.
+
+**Reading the answer off echelon form**
+
+The last column of the augmented matrix is read as the solution as soon as the matrix is in row echelon form. That reading is valid only in reduced row echelon form, where every pivot is $1$ and is the only nonzero entry in its column.
+
+Wrong working: from the matrix of the back substitution example,
+$$\\left(\\begin{array}{ccc|c} 2 & -1 & 3 & 9 \\\\ 0 & 4 & -2 & 6 \\\\ 0 & 0 & 5 & 10 \\end{array}\\right)$$
+the values $x_1 = 9$, $x_2 = 6$, $x_3 = 10$ are read off.
+
+Right working: back substitution from the bottom row gives $x_3 = 2$, then $x_2 = 5/2$, then $x_1 = 11/4$. Continuing to RREF gives the same values in the last column:
+$$\\left(\\begin{array}{ccc|c} 1 & 0 & 0 & 11/4 \\\\ 0 & 1 & 0 & 5/2 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right)$$
+
+Why it happens: both forms are staircases with zeros below the pivots, and in RREF the last column really is the answer, so the habit carries over to REF.
+
+How to check: substitute into the bottom row. With $x_3 = 10$ it reads $5 \\cdot 10 = 50$, not $10$. Before reading the last column, check that every pivot is $1$ and has zeros above it.
+
+**Dropping the right-hand side**
+
+A row operation is applied to the coefficients but not to the constant behind the bar. The coefficient part still reduces correctly, so nothing looks wrong until the end.
+
+Wrong working: in the unique-solution example, $R_2 - 2R_1$ turns $(2, 5, 1)$ into $(0, 1, 3)$ but the constant $8$ is kept.
+$$\\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 8 \\\\ 0 & 2 & 5 & 4 \\end{array}\\right) \\xrightarrow{R_3 - 2R_2} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 8 \\\\ 0 & 0 & -1 & -12 \\end{array}\\right)$$
+Back substitution gives $x_3 = 12$, $x_2 = 8 - 36 = -28$ and $x_1 = 3 - 2(-28) + 12 = 71$.
+
+Right working: the constant becomes $8 - 2 \\cdot 3 = 2$, the third row ends in $0$ instead of $-12$, and back substitution gives $x_3 = 0$, $x_2 = 2$, $x_1 = -1$.
+
+Why it happens: the bar sets the constants apart, and attention goes to the entries being eliminated, which all sit to the left of it.
+
+How to check: substitute into the original equations. The wrong answer $(71, -28, 12)$ satisfies the first and third equations, but the second gives $2(71) + 5(-28) + 12 = 14$, not $8$.
+
+**Dropping the free variable's own entry**
+
+When the parametric vector form is assembled, each direction vector is filled in only from the pivot rows. The entry of the free variable itself, which equals its parameter, is left at $0$.
+
+Wrong working: from $x_1 = -1 + s + 3t$ and $x_3 = 2 - 2t$,
+$$\\mathbf{x} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix}$$
+
+Right working: write all four unknowns, including $x_2 = s$ and $x_4 = t$, and then split by parameter.
+$$\\mathbf{x} = \\begin{pmatrix} -1 + s + 3t \\\\ s \\\\ 2 - 2t \\\\ t \\end{pmatrix} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 1 \\end{pmatrix}$$
+
+Why it happens: the free variables never stand alone on the left of an equation from the echelon form, so they are easy to miss when the vector is built from those equations.
+
+How to check: set one parameter to $1$ and the other to $0$, and substitute. The wrong form gives $(0, 0, 2, 0)$ at $s = 1, t = 0$, and the first equation reads $0 - 0 + 4 + 0 = 4$, not $3$. The right form gives $(0, 1, 2, 0)$, which satisfies both equations. In the right form, the free-variable entries of the direction vectors are always $1$ and $0$.
+
+**Treating a zero row as a contradiction**
+
+Any row with zeros in all the coefficient columns is read as a sign that the system has no solution. Only a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ is a contradiction; a row that is zero all the way across says $0 = 0$.
+
+Wrong working: for $x_1 + x_2 = 2$, $2x_1 + 2x_2 = 4$,
+$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 2 & 2 & 4 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
+and the second row is taken to mean that the system is inconsistent.
+
+Right working: the second row reads $0 = 0$, which every pair $(x_1, x_2)$ satisfies, so it puts no condition on the solution. Row $1$ has its pivot in column $1$ and column $2$ is free: $x_2 = s$, $x_1 = 2 - s$. There are infinitely many solutions; the two equations describe the same line.
+
+Why it happens: the no-solution example also ends in a row whose coefficients are all zero, and the entry behind the bar is overlooked.
+
+How to check: look behind the bar before deciding. Here $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = 1$, so the system is consistent; the point $(2, 0)$ satisfies both equations.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1859,7 +1961,15 @@ export default function GaussianEliminationPage({rowOperationTree,
             <IdentitySheet data={eliminationStages} theme="navy" variant="ledger" />
           </DiagramFrame>,
           `The classification stage is the one most easily skipped and the one that carries the most. Before any solution is written down, the pivot positions already give the rank, the free columns already give the number of parameters, and a contradiction row already settles that there is no solution at all. Work done after that point is filling in a shape that has already been determined.`,
-          `Between the two readings, back substitution wins on arithmetic and Gauss–Jordan wins on form. Continuing to the reduced row echelon form costs roughly half again as much for the same answer, which is a poor trade if solving is the goal. It is the right trade when the **form** is the goal — the RREF is unique where the REF is not, so it is what a null space basis, a matrix inverse, or a comparison between two matrices has to be read from.`,
+          `Between the two readings, back substitution wins on arithmetic and Gauss–Jordan wins on form. Continuing to the reduced row echelon form costs up to roughly half again as much for the same answer, which is a poor trade if solving is the goal. It is the right trade when the **form** is the goal — the RREF is unique where the REF is not, so it is what a null space basis, a matrix inverse, or a comparison between two matrices has to be read from.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

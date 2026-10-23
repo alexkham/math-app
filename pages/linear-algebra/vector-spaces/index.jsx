@@ -994,6 +994,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
 
 
 export async function getStaticProps(){
@@ -1235,7 +1236,13 @@ Checking a candidate set means testing each rule. Most failures happen at closur
 
 In $\\mathbb{R}^3$ the subspaces are exactly four kinds of sets: the origin alone, lines through the origin, planes through the origin, and $\\mathbb{R}^3$ itself. A plane that misses the origin, such as $z = 1$, fails the first test.
 
-@academic[rule_theorem_plain:The solution set of a homogeneous system $A\\mathbf{x} = \\mathbf{0}$ is always a subspace, while the solution set of $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$ never is.]@`,
+@academic[rule_theorem_plain:The solution set of a homogeneous system $A\\mathbf{x} = \\mathbf{0}$ is always a subspace, while the solution set of $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$ never is.]@
+
+@academic[pitfall,aside:true,width:35%:Testing scaling only with positive scalars
+The quarter-plane of vectors $(x, y)$ with $x \\geq 0$ and $y \\geq 0$ contains $\\mathbf{0}$, is closed under addition, and keeps every positive multiple. But $(-1)(1, 2) = (-1, -2)$ leaves it, so it is not a subspace.
+[Read more](!#pitfalls)]@
+
+Running the test on a candidate set means taking arbitrary members $\\mathbf{u}$ and $\\mathbf{v}$ of the set and an arbitrary real scalar $c$, then asking whether $\\mathbf{u} + \\mathbf{v}$ and $c\\mathbf{u}$ are still in the set. A single pair of vectors or a single scalar that leads outside is enough to rule the set out. Showing that a set is a subspace takes the general argument, for every choice at once.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1254,6 +1261,10 @@ Span answers a reachability question: which vectors can be built from the ones y
   obj5: {
     title: `Linear Independence`,
     content: `A set of vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence) when the only way to combine them into the zero vector is with all coefficients zero: $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ forces $c_1 = \\cdots = c_k = 0$. If some other combination works, the set is dependent, and at least one vector can be written using the others.
+
+@academic[pitfall,aside:true,width:35%:Checking the vectors two at a time
+No two of $(1, 0, 1)$, $(0, 1, 1)$, $(1, 1, 2)$ are multiples of each other, so the set looks independent. But $(1, 1, 2) = (1, 0, 1) + (0, 1, 1)$, so the set is dependent.
+[Read more](!#pitfalls)]@
 
 Independence measures redundancy. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ span $\\mathbb{R}^2$, but they are dependent, since $(1, 1) = (1, 0) + (0, 1)$; dropping any one of them leaves the span unchanged. To test vectors in $\\mathbb{R}^n$, place them as the columns of a matrix and row reduce: they are independent exactly when every column has a pivot.
 
@@ -1283,6 +1294,10 @@ Dimension turns many questions into counting.
 
 @academic[rule_theorem_plain:In a space of dimension $n$, any $n$ independent vectors automatically span, and any $n$ spanning vectors are automatically independent, so only one of the two conditions has to be checked.]@
 
+@academic[pitfall,aside:true,width:35%:Counting entries instead of basis vectors
+The plane $x + y + z = 0$ in $\\mathbb{R}^3$ is given dimension $3$ because its vectors have three entries. A basis is $(-1, 1, 0)$, $(-1, 0, 1)$, so the dimension is $2$.
+[Read more](!#pitfalls)]@
+
 A subspace never has a larger dimension than the space that contains it, and it is the whole space when the dimensions match. Some spaces, such as the space of all polynomials, have no finite basis and are called infinite-dimensional.`,
     before: ``,
     after: ``,
@@ -1292,6 +1307,10 @@ A subspace never has a larger dimension than the space that contains it, and it 
     title: `The Four Fundamental Subspaces`,
     content: `Every $m \\times n$ matrix $A$ comes with four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces). The column space and the left null space live in $\\mathbb{R}^m$; the row space and the null space live in $\\mathbb{R}^n$. The column space holds every output $A\\mathbf{x}$, and the null space holds every input that $A$ sends to zero.
 
+@academic[pitfall,aside:true,width:35%:Subtracting the rank from the row count
+For $A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & 3 \\end{pmatrix}$, of rank $2$, taking $m - r = 2 - 2 = 0$ says only $\\mathbf{0}$ solves $A\\mathbf{x} = \\mathbf{0}$. Yet $(-2, -3, 1)$ does: the null space has dimension $n - r = 3 - 2 = 1$.
+[Read more](!#pitfalls)]@
+
 Their dimensions are fixed by the [rank](!/linear-algebra/matrix/rank) $r$. The column space and the row space both have dimension $r$, the null space has dimension $n - r$, and the left null space has dimension $m - r$. This is the rank–nullity theorem in its full form. The pairs also meet at right angles: the row space is orthogonal to the null space, and the column space is orthogonal to the left null space.`,
     before: ``,
     after: ``,
@@ -1299,7 +1318,7 @@ Their dimensions are fixed by the [rank](!/linear-algebra/matrix/rank) $r$. The 
   },
   obj9: {
     title: `Coordinates and Change of Basis`,
-    content: `Once a basis $B = \\{\\mathbf{b}_1, \\ldots, \\mathbf{b}_n\\}$ is fixed, each vector $\\mathbf{v}$ is described by its coordinate vector $[\\mathbf{v}]_B$: the coefficients in $\\mathbf{v} = c_1\\mathbf{b}_1 + \\cdots + c_n\\mathbf{b}_n$. The same vector has different coordinates in different bases. The vector $(3, 1)$ has coordinates $(3, 1)$ in the standard basis of $\\mathbb{R}^2$, but in the basis $(1, 1), (1, -1)$ its coordinates are $(2, 1)$, since $2(1, 1) + 1(1, -1) = (3, 1)$.
+    content: `Once a basis $B = \\{\\mathbf{b}_1, \\ldots, \\mathbf{b}_n\\}$ is fixed, each vector $\\mathbf{v}$ is described by its coordinate vector $[\\mathbf{v}]_B$: the coefficients in $\\mathbf{v} = c_1\\mathbf{b}_1 + \\cdots + c_n\\mathbf{b}_n$. The same vector generally has different coordinates in different bases. The vector $(3, 1)$ has coordinates $(3, 1)$ in the standard basis of $\\mathbb{R}^2$, but in the basis $(1, 1), (1, -1)$ its coordinates are $(2, 1)$, since $2(1, 1) + 1(1, -1) = (3, 1)$.
 
 Moving between two bases takes a single invertible matrix, the change-of-basis matrix. The [basis change](!/linear-algebra/transformations/basis-change) page shows how to build it and how the matrix of a linear transformation changes when the basis does.`,
     before: ``,
@@ -1340,6 +1359,67 @@ Each page in this section treats one step of this chain in full, with definition
   obj13: {
     title: `Summary: Catalog of Vector Spaces`,
     content: `This page gave an overview of the vector-space framework — axioms, subspaces, span, independence, basis, dimension and coordinates — and the running theme is that the same abstract structure shows up in many concrete settings. The table below collects the main examples: the typical kind of object, the operations on it, the dimension, the standard basis, and the isomorphism class. The central conclusion of the theory is visible at a glance — any two finite-dimensional real vector spaces with the same dimension are isomorphic, so every finite-dimensional example here is ultimately a copy of some ℝⁿ.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj14: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong answers about subspaces, independence and dimension. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Testing scaling only with positive scalars**
+
+The closure test for scalar multiplication is run with positive scalars only, such as $c = 2$ or $c = \\frac{1}{2}$. A set that is closed under addition and under positive scaling then passes, even though it fails for negative scalars.
+
+Wrong working: let $Q$ be the set of vectors $(x, y)$ with $x \\geq 0$ and $y \\geq 0$. It contains $(0, 0)$. If $\\mathbf{u}$ and $\\mathbf{v}$ have nonnegative entries, so does $\\mathbf{u} + \\mathbf{v}$. For $c = 2$, $2(1, 2) = (2, 4)$ is in $Q$. Conclusion: $Q$ is a subspace.
+
+Right working: closure under scalar multiplication must hold for every real $c$. With $c = -1$,
+$$(-1)(1, 2) = (-1, -2)$$
+which has negative entries and is not in $Q$. So $Q$ is not a subspace.
+
+Why it happens: the scalings that come to mind first are stretching and shrinking, both with positive numbers. Negative scalars, which point a vector the other way, are the ones that break sets like $Q$.
+
+How to check: always try $c = -1$. A subspace contains $-\\mathbf{u}$ for every $\\mathbf{u}$ in it, so if the negative of some member is missing, the set is not a subspace.
+
+**Checking the vectors two at a time**
+
+Independence of three or more vectors is tested by comparing them in pairs. Since no vector is a multiple of another, the set is called independent.
+
+Wrong working: none of $(1, 0, 1)$, $(0, 1, 1)$, $(1, 1, 2)$ is a multiple of another, so the three vectors are declared independent.
+
+Right working: place them as the columns of a matrix and row reduce.
+$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix} \\to \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
+The third column has no pivot, so the vectors are dependent. Indeed $(1, 1, 2) = (1, 0, 1) + (0, 1, 1)$.
+
+Why it happens: for two vectors, being multiples of each other is exactly what dependence means, and the pair test is carried over to larger sets. With three or more vectors, one of them can be a combination of several others without being a multiple of any single one.
+
+How to check: row reduce and count pivots; the vectors are independent only if every column has one. For $n$ vectors in $\\mathbb{R}^n$, the determinant of the matrix they form must be nonzero; here it is $0$.
+
+**Counting entries instead of basis vectors**
+
+The dimension of a subspace of $\\mathbb{R}^n$ is read off from the number of entries in its vectors, which always gives $n$.
+
+Wrong working: every vector in the plane $W$ given by $x + y + z = 0$ has three entries, so $\\dim W = 3$.
+
+Right working: solve for one variable, $x = -y - z$. Every vector in $W$ is then
+$$(-y - z, y, z) = y(-1, 1, 0) + z(-1, 0, 1)$$
+The vectors $(-1, 1, 0)$ and $(-1, 0, 1)$ span $W$ and are not multiples of each other, so they form a basis and $\\dim W = 2$.
+
+Why it happens: the vectors of $W$ have three entries because $W$ sits inside $\\mathbb{R}^3$. The number of entries describes the surrounding space, not the subspace.
+
+How to check: a subspace with the same dimension as the space around it is the whole space. If $\\dim W$ were $3$, $W$ would be all of $\\mathbb{R}^3$, but $(1, 0, 0)$ is not in $W$, since $1 + 0 + 0 \\neq 0$.
+
+**Subtracting the rank from the row count**
+
+The dimension of the null space of an $m \\times n$ matrix is computed as $m - r$, from the number of rows, instead of $n - r$, from the number of columns.
+
+Wrong working: $A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & 3 \\end{pmatrix}$ is $2 \\times 3$ with rank $2$, so the null space would have dimension $2 - 2 = 0$, and only $\\mathbf{x} = \\mathbf{0}$ would solve $A\\mathbf{x} = \\mathbf{0}$.
+
+Right working: the null space lives in $\\mathbb{R}^n$, the space of inputs, so its dimension is $n - r = 3 - 2 = 1$. Setting the free variable $x_3 = t$ gives $x_1 = -2t$ and $x_2 = -3t$, so the null space is the line spanned by $(-2, -3, 1)$. The count $m - r = 0$ belongs to the left null space.
+
+Why it happens: row reduction works on rows, so their number is the first one at hand. But each column stands for a variable, and the null space has one dimension for each free variable, that is, for each column without a pivot.
+
+How to check: count the columns without a pivot in the echelon form. Here column $3$ has none, so the null space has dimension $1$. The rank and the null-space dimension must add up to $n$, the number of columns.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1459,8 +1539,37 @@ const schemas = {
     ],
   };
 
+  const vectorSpaceExamplesOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Where vector spaces show up',
+    preface: 'Vector spaces are not only arrows: polynomials, matrices and functions form vector spaces too, and many familiar sets sit inside them as subspaces.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Same axioms, very different objects',
+    conclusion: 'Anything that satisfies the axioms is a vector space, whatever its elements look like.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Common vector spaces', children: [
+        { id: 'fin', name: 'Finite-dimensional', children: [
+          { id: 'rn', name: 'ℝⁿ', def: 'n-tuples of real numbers' },
+          { id: 'pn', name: 'Pₙ', def: 'polynomials of degree at most n', example: 'dim n + 1' },
+          { id: 'mat', name: 'm × n matrices', example: 'dim mn' },
+        ] },
+        { id: 'inf', name: 'Infinite-dimensional', children: [
+          { id: 'cf', name: 'Continuous functions', def: 'on an interval' },
+        ] },
+        { id: 'sub', name: 'Subspace examples', children: [
+          { id: 'hom', name: 'Solutions of a homogeneous system' },
+          { id: 'sym', name: 'Symmetric n × n matrices' },
+          { id: 'p0', name: 'Polynomials with p(0) = 0' },
+          { id: 'ode', name: 'Solutions of y″ + y = 0', def: 'basis cos x, sin x' },
+        ] },
+      ] },
+    ],
+  };
+
 return {
   props:{
+    vectorSpaceExamplesOutline,
     vectorSpaceChainLevels,
     demoUnits,
     sectionsContent,
@@ -1483,7 +1592,7 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function VectorSpacesPage({vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits}) {
+export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1574,6 +1683,14 @@ export default function VectorSpacesPage({vectorSpaceChainLevels, seoData, secti
         link:sectionsContent.obj11.link,
         content:[
         sectionsContent.obj11.content,
+        <DiagramFrame
+          key={'obj11-diagram'}
+          id="vector-space-examples-outline"
+          title="Common vector spaces and subspaces"
+          source="/linear-algebra/vector-spaces"
+        >
+          <TaxonomyOutline data={vectorSpaceExamplesOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+        </DiagramFrame>,
       ]
     },
     {
@@ -1600,6 +1717,14 @@ export default function VectorSpacesPage({vectorSpaceChainLevels, seoData, secti
           sectionsContent.obj13.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
         ]
     },
 ]

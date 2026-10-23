@@ -202,6 +202,10 @@ $$n^2 = 1 + 3 + 5 + \\cdots + (2n - 1)$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Using the last odd number as n
+Taking $1 + 3 + 5 + \\cdots + 99$ as $99^2 = 9801$ squares the last term. The last term is $2n - 1 = 99$, so $n = 50$ and the sum is $50^2 = 2500$.
+[Read more](!#pitfalls)]@
+
 Every perfect square is a sum of consecutive odd numbers starting from $1$. This identity can be verified by the arithmetic series formula: the sum of the first $n$ odd numbers is $\\frac{n}{2}(1 + (2n-1)) = n^2$.
 
 The difference between consecutive squares is always odd: $S_n - S_{n-1} = 2n - 1$. This means no two consecutive integers are both perfect squares — there is always an odd gap between neighboring squares, and that gap widens as $n$ grows.`,
@@ -214,6 +218,12 @@ The difference between consecutive squares is always odd: $S_n - S_{n-1} = 2n - 
     content: `Perfect squares have distinctive divisibility patterns. A perfect square modulo $4$ is always $0$ or $1$ — never $2$ or $3$. This is because even numbers squared give multiples of $4$, and odd numbers squared give $1$ more than a multiple of $4$. Similarly, a perfect square modulo $3$ is always $0$ or $1$ — never $2$.
 
 The last digit of a perfect square can only be $0, 1, 4, 5, 6,$ or $9$. Any integer ending in $2, 3, 7,$ or $8$ is immediately ruled out as a perfect square, without computing any square root.
+
+@academic[pitfall,aside:true,width:35%:Reading the last-digit test backwards
+Calling $26$ a square because it ends in $6$: $5^2 = 25$ and $6^2 = 36$, so $26$ lies between two squares. A good last digit only keeps a number possible; $\\sqrt{N}$ must still be a whole number.
+[Read more](!#pitfalls)]@
+
+Both tests are quick filters: each looks at one feature of the number, its remainder or its last digit, and needs no root at all. A number that fails either one is ruled out at once, which makes them useful for large candidates such as $7{,}382$, which ends in $2$, or $15{,}643$, which leaves remainder $3$ on division by $4$.
 
 Consecutive perfect squares are always [coprime](!/arithmetic/divisibility): $\\gcd(n^2, (n+1)^2) = 1$, because $\\gcd(n, n+1) = 1$ and the GCD of squares equals the square of the GCD.
 
@@ -242,6 +252,10 @@ Substituting $\\sum k = \\frac{n(n+1)}{2}$ and solving for $\\sum k^2$ gives the
 
 For example, the sum of the first $5$ squares is $1 + 4 + 9 + 16 + 25 = 55$, which matches $\\frac{5 \\cdot 6 \\cdot 11}{6} = 55$.
 
+@academic[pitfall,aside:true,width:35%:Squaring the sum instead of summing the squares
+Writing $1^2 + 2^2 + \\cdots + 5^2$ as $(1 + 2 + \\cdots + 5)^2$ gives $15^2 = 225$. Each term is squared separately: $1 + 4 + 9 + 16 + 25 = 55$.
+[Read more](!#pitfalls)]@
+
 This formula contrasts with the [triangular number](!/algebra/sequences/triangular-numbers) sum $\\sum k = \\frac{n(n+1)}{2}$, which is quadratic in $n$. The sum of squares is cubic — each additional term contributes a squared value, making the total grow faster.`,
     before: ``,
     after: ``,
@@ -266,6 +280,56 @@ $$a = m^2 - n^2, \\quad b = 2mn, \\quad c = m^2 + n^2$$
 /algebra/formulas]@
 
 The triple $(3, 4, 5)$ comes from $m = 2, n = 1$; the triple $(5, 12, 13)$ from $m = 3, n = 2$. Pythagorean triples connect square numbers to geometry — each triple defines a right triangle with integer side lengths.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj6: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up again and again with square numbers. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Using the last odd number as n**
+
+In the identity $n^2 = 1 + 3 + 5 + \\cdots + (2n - 1)$, $n$ is the number of odd terms, not the last term. Squaring the last odd number counts far too many terms.
+
+Wrong working:
+$$1 + 3 + 5 + \\cdots + 99 = 99^2 = 9801$$
+
+Right working: the last term is $2n - 1$, so $2n - 1 = 99$ gives $n = 50$ terms.
+$$1 + 3 + 5 + \\cdots + 99 = 50^2 = 2500$$
+
+Why it happens: in the sum of the first $n$ positive integers the last term is $n$ itself, and that habit carries over to the odd numbers, where the last term is $2n - 1$.
+
+How to check: try a short case. $1 + 3 + 5 = 9 = 3^2$, with $3$ terms, while squaring the last term would give $5^2 = 25$. Also, $50$ terms that are each below $100$ add up to less than $50 \\cdot 100 = 5000$, so $9801$ is too large.
+
+**Reading the last-digit test backwards**
+
+The last-digit rule and the remainder rules say what a square cannot look like. They are used the other way round, as if every number with an allowed last digit or remainder were a square.
+
+Wrong working: $26$ ends in $6$, an allowed last digit, and $13$ leaves remainder $1$ on division by $4$, an allowed remainder, so both are taken to be perfect squares.
+
+Right working: the tests can only rule numbers out. To confirm a square, its square root must be a whole number:
+$$5^2 = 25 < 26 < 36 = 6^2, \\quad 3^2 = 9 < 13 < 16 = 4^2$$
+so neither $26$ nor $13$ is a perfect square. A number that passes, such as $676$, needs the same check: $26^2 = 676$, so it is a square.
+
+Why it happens: the tests are quick and look like a full answer, and the difference between "every square ends in $0, 1, 4, 5, 6$ or $9$" and "every number ending in those digits is a square" is easy to miss.
+
+How to check: find the two consecutive squares around the number. If it equals neither, it is not a square, whatever its last digit. Most numbers pass the digit test: $6$ of the $10$ possible last digits are allowed, while only $10$ of the first $100$ integers are squares.
+
+**Squaring the sum instead of summing the squares**
+
+The sum $\\sum k^2$ is read as $\\left(\\sum k\\right)^2$: the numbers are added first and the total is squared, instead of each number being squared first.
+
+Wrong working:
+$$1^2 + 2^2 + 3^2 + 4^2 + 5^2 = (1 + 2 + 3 + 4 + 5)^2 = 15^2 = 225$$
+
+Right working:
+$$1^2 + 2^2 + 3^2 + 4^2 + 5^2 = 1 + 4 + 9 + 16 + 25 = 55$$
+which matches $\\frac{5 \\cdot 6 \\cdot 11}{6} = 55$.
+
+Why it happens: squaring looks as if it should pass through a sum, the way multiplication by a constant does. It does not: $(a + b)^2 = a^2 + 2ab + b^2$, and the cross terms $2ab$ are what make $225$ so much larger than $55$.
+
+How to check: use $n = 2$. $1^2 + 2^2 = 5$, while $(1 + 2)^2 = 9$. The formula gives $\\frac{2 \\cdot 3 \\cdot 5}{6} = 5$.`,
     before: ``,
     after: ``,
     link: '',
@@ -466,6 +530,14 @@ export default function SquareNumbersPage({seoData, sectionsContent, introConten
           sectionsContent.obj5.content,
           <div key={'unit-twoTriangles'} dangerouslySetInnerHTML={{ __html: demoUnits.twoTriangles }} />,
           `The same cut works for every n: n² = Tₙ + Tₙ₋₁.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj6.title,
+        link:sectionsContent.obj6.link,
+        content:[
+          sectionsContent.obj6.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

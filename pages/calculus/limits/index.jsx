@@ -19,6 +19,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -45,6 +47,35 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 // ─── TABLES ───────────────────────────────────────────────────────────────
 
 // obj2 — aggregation: the three failure modes for limits
+// Concept introduction (section 1) — template H, open question. Running
+// instance: (x² − 1)/(x − 1) as x → 1, the section's own demo frame (the
+// limit tool's removable state). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box and the demo frame with its
+// closing line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciApproachTable = ciTableOpen(['x', 'distance from 1', 'f(x)', 'distance from 2']) +
+  ciRow(['0.9', '0.1', '1.9', '0.1']) +
+  ciRow(['0.99', '0.01', '1.99', '0.01'], { shade: true }) +
+  ciRow(['0.999', '0.001', '1.999', '0.001']) +
+  ciRow(['1', '0', '0/0 — no value', '—'], { shade: true, color: '#B45309' }) +
+  ciRow(['1.001', '0.001', '2.001', '0.001']) +
+  ciRow(['1.01', '0.01', '2.01', '0.01'], { shade: true }) +
+  ciRow(['1.1', '0.1', '2.1', '0.1'], { last: true }) +
+  '</tbody></table>'
+const ciMisleadTable = ciTableOpen(['x', 'sin(π/x)']) +
+  ciRow(['0.1', '0']) +
+  ciRow(['0.01', '0'], { shade: true }) +
+  ciRow(['0.001', '0']) +
+  ciRow(['0.0952…', '1'], { shade: true, color: '#a4243b' }) +
+  ciRow(['0.00995…', '1'], { last: true, color: '#a4243b' }) +
+  '</tbody></table>'
+
 const obj2Table = `
 <table class="styled-table" style="border-collapse: collapse; width: 95%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -289,6 +320,12 @@ then the two-sided limit equals $L$. If the one-sided limits differ, or if eithe
 
 This requirement unifies behavior from both directions into a single value.
 
+@academic[pitfall,aside:true,width:35%:Checking only one side
+Testing $\\frac{|x|}{x}$ at $x = 0.1$, $0.01$ and $0.001$ gives $1$ each time, so the limit at $0$ looks like $1$. From the left the values are $-1$: the one-sided limits differ, and the two-sided limit does not exist.
+[Read more](!#pitfalls)]@
+
+Each one-sided limit is found separately, using only inputs from its own side of $a$: values below $a$ for the left-hand limit and values above $a$ for the right-hand limit. Only when both are known can they be compared, and only their agreement gives the two-sided limit a value.
+
 The limit symbol and its one-sided variants are catalogued among the [calculus symbols](!/math-symbols/calculus) together with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.
 `,
     before: ``,
@@ -345,6 +382,12 @@ The [Squeeze Theorem](!/calculus/limits/rules) offers another approach.
 If $g(x) \\leq f(x) \\leq h(x)$ near $a$ and both $g$ and $h$ approach the same limit $L$, then $f$ must also approach $L$.]@
 
 The function is trapped between two bounds converging to the same value.
+
+@academic[pitfall,aside:true,width:35%:Bounds that fail for negative x
+Multiplying $-1 \\leq \\sin(1/x) \\leq 1$ by $x$ gives $-x \\leq x \\sin(1/x) \\leq x$, false for $x < 0$: at $x = -0.1$ it says $0.1 \\leq x \\sin(1/x) \\leq -0.1$. The bounds $-|x| \\leq x \\sin(1/x) \\leq |x|$ hold on both sides and give the limit $0$.
+[Read more](!#pitfalls)]@
+
+The theorem is the standard tool for a product in which one factor oscillates and the other tends to $0$, such as $x \\sin(1/x)$ as $x \\to 0$. The factor $\\sin(1/x)$ has no limit, so the product rule above does not apply, but it always lies between $-1$ and $1$, and bounds for the whole product are built from that.
 `,
     before: ``,
     after: ``,
@@ -359,10 +402,16 @@ When substitution yields an indeterminate form—most commonly $0/0$—the expre
 
 ## Factoring
 
-If both numerator and denominator vanish at $a$, they share a common factor of $(x - a)$. Factor it out, cancel, and substitute again:
+If a polynomial numerator and denominator both vanish at $a$, they share a common factor of $(x - a)$. Factor it out, cancel, and substitute again:
 
 @academic[formula_callout:Evaluating Limits
 $$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} \\frac{(x-2)(x+2)}{x-2} = \\lim_{x \\to 2} (x + 2) = 4$$]@
+
+@academic[pitfall,aside:true,width:35%:Stopping at 0/0
+Substituting $x = 2$ into $\\frac{x^2 - 4}{x - 2}$ gives $\\frac{0}{0}$, and reading that as a limit of $0$, or as no limit, stops too early. After cancelling $x - 2$, the limit is $2 + 2 = 4$.
+[Read more](!#pitfalls)]@
+
+The cancellation is legitimate because the limit never uses the value at $x = 2$ itself. For every $x \\neq 2$ the expressions $\\frac{x^2 - 4}{x - 2}$ and $x + 2$ are equal, and the limit looks only at those inputs, so the two have the same limit. The simplified form is a polynomial, and substitution now gives a number.
 
 ## Rationalizing
 
@@ -389,6 +438,12 @@ $$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$$
 /calculus/formulas]@
 
 This holds when $x$ is measured in radians. It underlies the derivatives of sine and cosine.
+
+@academic[pitfall,aside:true,width:35%:Reading every sine limit as 1
+Giving $\\lim_{x \\to 0} \\frac{\\sin 3x}{x}$ the value $1$ ignores that the angle is $3x$ but the denominator is $x$. Rewriting it as $3 \\cdot \\frac{\\sin 3x}{3x}$ gives $3 \\cdot 1 = 3$.
+[Read more](!#pitfalls)]@
+
+The limit applies to one exact shape: the sine of a quantity divided by the same quantity, with that quantity tending to $0$. Since $5x \\to 0$ and $x^2 \\to 0$ as $x \\to 0$, the expressions $\\frac{\\sin 5x}{5x}$ and $\\frac{\\sin(x^2)}{x^2}$ have this shape and also tend to $1$.
 
 The fundamental exponential limit:
 
@@ -449,6 +504,10 @@ $$\\lim_{x \\to a} f(x) = f(a)$$]@
 
 This single equation encodes three requirements. First, $f(a)$ must be defined—the function must have a value at $a$. Second, the limit must exist—$f(x)$ must approach some definite value as $x \\to a$. Third, these two values must match.
 
+@academic[pitfall,aside:true,width:35%:Taking f(a) as the limit
+For $f(x) = \\frac{x^2 - 1}{x - 1}$ when $x \\neq 1$ and $f(1) = 5$, substituting $x = 1$ gives a limit of $5$. Values near $1$ approach $2$, so the limit is $2$, and $f$ is not continuous at $1$.
+[Read more](!#pitfalls)]@
+
 Failure of any condition creates a discontinuity. A hole in the graph (removable discontinuity) occurs when the limit exists but differs from the function value or the function is undefined. A jump discontinuity occurs when left and right limits differ. An infinite discontinuity occurs when the function blows up.
 
 @academic[rule_theorem:Intermediate Value Theorem
@@ -465,6 +524,73 @@ This result has profound consequences for proving that equations have solutions.
     content: `
 The sections above introduce the foundational ideas; each topic gets a dedicated page that develops the techniques, examples, and edge cases more fully. The table below collects the seven leaf pages in a suggested reading order — from the basic one-sided / two-sided distinction through the computational rules and evaluation techniques, on to special limits, behavior at infinity, and finally continuity. Each row pairs a topic with its key idea and a link to the page where the detail lives.
 `,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes account for many wrong answers with limits. Each one is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Checking only one side**
+
+A two-sided limit is estimated from inputs on one side of the point only, usually the right, where values like $0.1$, $0.01$ and $0.001$ are easy to write down. Whatever those values approach is reported as the limit.
+
+Wrong working: for $\\lim_{x \\to 0} \\frac{|x|}{x}$, the inputs $0.1$, $0.01$ and $0.001$ all give $\\frac{|x|}{x} = 1$, so the limit is reported as $1$.
+
+Right working: for $x > 0$, $|x| = x$ and $\\frac{|x|}{x} = 1$, so $\\lim_{x \\to 0^+} \\frac{|x|}{x} = 1$. For $x < 0$, $|x| = -x$ and $\\frac{|x|}{x} = -1$, so $\\lim_{x \\to 0^-} \\frac{|x|}{x} = -1$. The one-sided limits differ, so $\\lim_{x \\to 0} \\frac{|x|}{x}$ does not exist.
+
+Why it happens: for most functions met early on, such as polynomials, both sides give the same answer, so checking one side seems enough.
+
+How to check: always evaluate at least one input on each side of the point. Here $x = 0.01$ gives $1$ and $x = -0.01$ gives $-1$.
+
+**Bounds that fail for negative x**
+
+To apply the Squeeze Theorem to $x \\sin(1/x)$ as $x \\to 0$, the inequality $-1 \\leq \\sin(1/x) \\leq 1$ is multiplied by $x$, without noticing that multiplying by a negative number reverses the inequality signs.
+
+Wrong working: from $-1 \\leq \\sin(1/x) \\leq 1$ it follows that $-x \\leq x \\sin(1/x) \\leq x$. At $x = -0.1$ this claims $0.1 \\leq x \\sin(1/x) \\leq -0.1$, which no number satisfies.
+
+Right working: take absolute values. $|x \\sin(1/x)| = |x| \\cdot |\\sin(1/x)| \\leq |x|$, so $-|x| \\leq x \\sin(1/x) \\leq |x|$ for every $x \\neq 0$. Both bounds tend to $0$ as $x \\to 0$, so $\\lim_{x \\to 0} x \\sin(1/x) = 0$.
+
+Why it happens: the squeeze is set up with positive $x$ in mind, but a two-sided limit at $0$ uses negative inputs as well.
+
+How to check: test the bounds at a negative input. At $x = -0.1$, $x \\sin(1/x) = -0.1 \\sin(-10) \\approx -0.054$. The correct bounds give $-0.1 \\leq -0.054 \\leq 0.1$, which holds; the wrong ones put the lower bound $0.1$ above the upper bound $-0.1$.
+
+**Stopping at 0/0**
+
+Direct substitution gives $\\frac{0}{0}$, and this is taken as the answer: read either as a limit of $0$ or as a sign that the limit does not exist.
+
+Wrong working: $\\frac{2^2 - 4}{2 - 2} = \\frac{0}{0}$, so $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$ is reported as $0$, or as not existing.
+
+Right working: the numerator factors as $(x - 2)(x + 2)$. Cancel $x - 2$, which is allowed because $x \\neq 2$ throughout the approach, then substitute: $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} (x + 2) = 4$.
+
+Why it happens: $\\frac{0}{0}$ looks like a result. A zero on top seems to make the fraction zero, and a zero below seems to make it impossible. It is neither; it only says that substitution has not decided the limit.
+
+How to check: evaluate near the point. At $x = 1.99$ the expression is $3.99$, and at $x = 2.01$ it is $4.01$, both close to $4$.
+
+**Reading every sine limit as 1**
+
+Any limit of the sine of something divided by something, as $x \\to 0$, is given the value $1$, even when the angle and the denominator are different.
+
+Wrong working: $\\lim_{x \\to 0} \\frac{\\sin 3x}{x} = 1$.
+
+Right working: make the denominator match the angle. $\\frac{\\sin 3x}{x} = 3 \\cdot \\frac{\\sin 3x}{3x}$, and $3x \\to 0$ as $x \\to 0$, so $\\lim_{x \\to 0} \\frac{\\sin 3x}{x} = 3 \\cdot 1 = 3$.
+
+Why it happens: the special limit is remembered as "sine over $x$ goes to $1$", and the condition that the angle and the denominator be the same quantity is lost.
+
+How to check: evaluate at a small input. At $x = 0.01$, $\\frac{\\sin 0.03}{0.01} \\approx 2.9996$, close to $3$ and far from $1$.
+
+**Taking f(a) as the limit**
+
+The limit at $a$ is found by evaluating the function at $a$, even when the function is given its value at $a$ by a separate rule. Substitution gives the limit only for a function that is continuous at $a$, which is exactly what is in question.
+
+Wrong working: let $f(x) = \\frac{x^2 - 1}{x - 1}$ for $x \\neq 1$ and $f(1) = 5$. Then $\\lim_{x \\to 1} f(x) = f(1) = 5$, and since the limit equals $f(1)$, $f$ is called continuous at $1$.
+
+Right working: the limit uses only inputs $x \\neq 1$, where $f(x) = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1$. So $\\lim_{x \\to 1} f(x) = 2$. Since $f(1) = 5 \\neq 2$, the third condition fails, and $f$ has a removable discontinuity at $1$.
+
+Why it happens: direct substitution works for polynomials and for most functions met in practice, so it becomes the default way to find any limit.
+
+How to check: evaluate near the point rather than at it. At $x = 0.99$ and $x = 1.01$ the values are $1.99$ and $2.01$, near $2$ and far from $5$.`,
     before: ``,
     after: ``,
     link: ``
@@ -593,6 +719,32 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  // Concept introduction figures (section 1), one running instance: (x² − 1)/(x − 1), x → 1.
+  const fpCiHole = { kind: 'pieces', svgTitle: 'y = (x^2 - 1)/(x - 1) has a hole at x = 1', xRange: [-1, 3], yRange: [-0.5, 4.5],
+    pieces: [
+      { fn: (x) => x + 1, from: -1, to: 1, ends: [null, 'open'], color: 'f' },
+      { fn: (x) => x + 1, from: 1, to: 3, ends: ['open', null], color: 'f', label: { text: 'y = (x² − 1)/(x − 1)', x: 1.4, y: 1.2, pos: 'e' } },
+    ],
+    vlines: [{ x: 1, label: 'x = 1' }],
+    notes: [{ x: -0.9, y: 3.6, text: 'no value at x = 1', pos: 'e', color: 'r' }],
+    caption: 'An unbroken line with one point missing' };
+  const fpCiBand = { kind: 'pieces', svgTitle: 'Inputs within 0.5 of 1 give outputs within 0.5 of 2', xRange: [0, 2], yRange: [1, 3], xStep: 0.5, yStep: 0.5,
+    pieces: [
+      { fn: (x) => x + 1, from: 0, to: 1, ends: [null, 'open'], color: 'f' },
+      { fn: (x) => x + 1, from: 1, to: 2, ends: ['open', null], color: 'f' },
+      { fn: () => 2.5, from: 0, to: 2, ends: [null, null], color: 'g' },
+      { fn: () => 1.5, from: 0, to: 2, ends: [null, null], color: 'g' },
+    ],
+    vlines: [{ x: 0.5 }, { x: 1.5 }],
+    caption: 'Any x between 0.5 and 1.5 lands between 1.5 and 2.5' };
+
+  const conceptIntroFigures = {
+    hole: renderFunctionPlotV4(fpCiHole),
+    band: renderFunctionPlotV4(fpCiBand),
+    approachTable: ciApproachTable,
+    misleadTable: ciMisleadTable,
+  };
+
   const demoUnits = {
     idea: demoUnitFrame({
       svg: functionLimitDiagrams.removable,
@@ -634,6 +786,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -652,9 +805,72 @@ const schemas = {
   }
 }
    }
-export default function LimitsPage({seoData, sectionsContent, introContent, obj2Table, obj4Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function LimitsPage({seoData, sectionsContent, introContent, obj2Table, obj4Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `What is this function at x = 1?`,
+        content: `Take $f(x) = \\frac{x^2 - 1}{x - 1}$. Its graph looks like an ordinary straight line, except that at $x = 1$ there is a gap: the point is missing. It is a fair question what value belongs there — the line clearly seems to be aiming at something.`,
+        visual: ciSvg('hole'),
+        caption: `The open dot is the missing point at $x = 1$. Everywhere else the graph is the line $y = x + 1$.`,
+      },
+      {
+        id: 'deadend',
+        lead: `Substituting gives nothing.`,
+        content: `The usual tool is to put the number in:
+$$f(1) = \\frac{1^2 - 1}{1 - 1} = \\frac{0}{0}$$
+and $\\frac{0}{0}$ is not a number. Division by zero has no answer, so the function simply has no value at $1$. Every method so far — substitute, simplify the result, read it off — stops right here.`,
+      },
+      {
+        id: 'approach',
+        kind: 'instance',
+        lead: `Getting close instead of arriving gives a clear answer.`,
+        content: [
+          `Stay away from $1$, but come as close as you like, from both sides.`,
+          ciTable('approachTable'),
+          `Each time $x$ is ten times closer to $1$, $f(x)$ is ten times closer to $2$, from below on the left and from above on the right. The values never reach $2$ — they cannot, since the one input that would give it is the missing one — but they close in on it without limit.`,
+          <div key={'unit-idea'} dangerouslySetInnerHTML={{ __html: demoUnits.idea }} />,
+          `Everything that follows refines this one question: what is the function heading toward?`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [limit](!/calculus/definitions#limit) of $f(x)$ as $x$ approaches $a$ is the number $L$ that $f(x)$ gets arbitrarily close to when $x$ gets sufficiently close to $a$, without being equal to $a$. It is written`,
+        formula: `@academic[formula_callout:The Central Idea of a Limit
+$$\\lim_{x \\to a} f(x) = L$$]@`,
+        footer: `For our function, $\\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1} = 2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A limit is a single number, and it ignores the value at the point itself.`,
+        content: `It is not a function and not a process; it is one number attached to a function and a point — here, $2$. "Arbitrarily close" means closer than any positive distance you specify. "Sufficiently close" means there exists some neighborhood around $a$ where this closeness holds. And $f(a)$ plays no part: it may not exist, as here, or it may differ from what the surrounding values suggest. The limit looks only at the approach.`,
+        visual: ciSvg('band'),
+        caption: `Demand outputs within $0.5$ of $2$ (the two horizontal lines) and inputs within $0.5$ of $1$ (the two dashed lines) deliver them. Demand $0.001$ and inputs within $0.001$ do. Any tolerance can be met.`,
+      },
+      {
+        id: 'caveat',
+        lead: `A table is persuasive, not a proof.`,
+        content: [
+          `Tables can mislead. Here is one that seems to settle $\\lim_{x \\to 0} \\sin(\\pi/x)$:`,
+          ciTable('misleadTable'),
+          `The first three rows say $0$, but they were lucky choices: other inputs just as close to $0$ give $1$, and the function keeps swinging between $-1$ and $1$ — that limit does not exist. For our function the answer $2$ can be confirmed another way: for $x \\neq 1$, $\\frac{x^2 - 1}{x - 1} = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1$, which is near $2$ when $x$ is near $1$. Turning "the values seem to approach" into "they do" is what the rules and methods below are for.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `Limits serve as the foundation for all of calculus. The derivative is defined as a limit of difference quotients. The definite integral is defined as a limit of Riemann sums. Continuity is defined by comparing limits to function values. The rest of the page covers when limits fail to exist, two-sided and one-sided limits, the limit rules, how to evaluate them, special limits, limits involving infinity, and continuity.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -662,9 +878,7 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-idea'} dangerouslySetInnerHTML={{ __html: demoUnits.idea }} />,
-          `Everything that follows refines this one question: what is the function heading toward?`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -753,6 +967,14 @@ export default function LimitsPage({seoData, sectionsContent, introContent, obj2
           sectionsContent.obj10.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

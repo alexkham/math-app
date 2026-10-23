@@ -337,7 +337,7 @@ obj0: {
 - [Absolute Value Equation](!/algebra/formulas#absolute_value_equation) — $|p| = b \\implies p = b \\text{ or } p = -b$
 - [Absolute Value Inequalities](!/algebra/formulas#absolute_value_inequalities) — $|p| < b \\implies -b < p < b$
 - [Vieta's Formulas (Quadratic)](!/algebra/formulas#vietas_formulas_quadratic) — $x_1 + x_2 = -\\frac{b}{a}$
-- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + r_3 = -a_{n-1}$
+- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + \\cdots + r_n = -a_{n-1}$
 `,
     before: ``,
     after: `
@@ -395,6 +395,10 @@ A contradiction is true for no value of the variable. The equation $x + 1 = x + 
 
 These reversible operations are the backbone of algebraic manipulation.
 
+@academic[pitfall,aside:true,width:35%:Dividing by the variable
+Dividing $x^2 = 3x$ by $x$ gives $x = 3$ and loses $x = 0$, where both sides equal $0$. Moving every term to one side, $x(x - 3) = 0$, gives $x = 0$ or $x = 3$.
+[Read more](!#pitfalls)]@
+
 Other operations carry risk. Multiplying both sides by an expression containing the variable may introduce values that were not solutions of the original equation. Squaring both sides can do the same. The equation $x = 3$ has one solution, but squaring gives $x^2 = 9$, whose solution set $\\{-3, 3\\}$ is larger. The extra value $x = -3$ is an extraneous solution — it satisfies the transformed equation but not the original. Any solving method that involves a non-reversible step demands verification: every candidate must be substituted back into the original equation to confirm it is genuine.`,
     before: ``,
     after: ``,
@@ -419,6 +423,10 @@ Algebraic equations form the core of this section. Each degree class has its own
 
 Solving a linear equation requires nothing beyond the properties of equality: isolate the variable by undoing the operations applied to it, working in reverse order. When the equation involves parentheses, the [distributive property](!/arithmetic/properties#5) clears them first. When fractions appear with numerical denominators, multiplying through by the least common denominator converts the equation to integer coefficients without changing its type. The mechanics are straightforward, but they establish the logical framework — preserving equivalence through reversible operations — that every other equation type builds upon.
 
+@academic[pitfall,aside:true,width:35%:Reading 0 = 0 as x = 0
+Simplifying $2(x + 1) = 2x + 2$ to $0 = 0$ and writing $x = 0$ reports a single solution. The statement $0 = 0$ no longer contains $x$ and is always true, so the solution set is all of $\\mathbb{R}$.
+[Read more](!#pitfalls)]@
+
 The structure breaks only when the variable terms cancel entirely during simplification. If the remaining statement is true (like $0 = 0$), the original equation is an identity. If it is false (like $0 = 5$), the equation is a contradiction. These edge cases aside, first-degree equations are the most predictable objects in algebra.`,
     before: ``,
     after: ``,
@@ -437,6 +445,10 @@ $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
 
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the sign of b
+For $x^2 - 5x + 6 = 0$, writing $-b$ as $-5$ gives $x = \\frac{-5 \\pm 1}{2}$, that is $-2$ and $-3$. Here $b = -5$, so $-b = 5$ and $x = \\frac{5 \\pm 1}{2}$: $x = 3$ or $x = 2$.
+[Read more](!#pitfalls)]@
 
 The formula accepts any coefficients and delivers the roots directly, making it the default tool when factoring is not immediate. Vieta's formulas offer a complementary perspective: the sum of the two roots equals $-\\frac{b}{a}$ and their product equals $\\frac{c}{a}$, connecting solutions back to the coefficients that generated them.
 
@@ -481,6 +493,10 @@ The risk of extraneous solutions is not a minor technicality — it is the defin
     title: `Absolute Value Equations`,
     content: `An [absolute value equation](!/algebra/equations/absolute-value) involves the absolute value function $|f(x)|$ applied to an expression containing the unknown. The absolute value of a number is its distance from zero, so $|f(x)| = k$ asks: where is $f(x)$ exactly $k$ units from zero? When $k > 0$, the answer splits into two cases — $f(x) = k$ and $f(x) = -k$ — each generating its own equation to solve. When $k = 0$, a single equation $f(x) = 0$ remains. When $k < 0$, no solution exists because distance is never negative.
 
+@academic[pitfall,aside:true,width:35%:Forgetting the negative case
+Solving $|x - 2| = 5$ as $x - 2 = 5$ gives only $x = 7$. The case $x - 2 = -5$ adds $x = -3$, and $|-3 - 2| = 5$ as well, so both $x = 7$ and $x = -3$ are solutions.
+[Read more](!#pitfalls)]@
+
 This case-splitting approach extends to more complex configurations. The equation $|f(x)| = |g(x)|$ decomposes into $f(x) = g(x)$ and $f(x) = -g(x)$. Equations with multiple absolute value terms require identifying the critical points where each expression inside $|\\;|$ changes sign, then solving on each interval separately using the piecewise definition. The geometric reading — absolute value as distance on the number line — often provides a faster route to the answer than purely mechanical case analysis.`,
     before: ``,
     after: ``,
@@ -510,6 +526,82 @@ This case-splitting approach extends to more complex configurations. The equatio
   obj12: {
     title: `Summary of Algebraic Equation Types`,
     content: `The table below collects the five algebraic equation classes covered on this page. For each class, it shows the canonical form, the maximum number of real solutions, and the primary technique used to solve it. Use it as a reference card.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj13: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes cause most wrong answers in the equation types on this page. Four of them are marked where they happen in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dividing by the variable**
+
+Both sides of an equation share a factor that contains the unknown, and the factor is cancelled by dividing both sides by it.
+
+Wrong working:
+$$x^2 = 3x \\implies x = 3$$
+
+Right working: move every term to one side and factor.
+$$x^2 - 3x = 0 \\implies x(x - 3) = 0 \\implies x = 0 \\text{ or } x = 3$$
+
+Why it happens: dividing by a constant is always safe, and dividing by $x$ looks like the same step. But when $x = 0$ it is a division by zero, so the solution $x = 0$ is thrown away without notice.
+
+How to check: substitute $x = 0$ into the original equation. Both sides give $0$, so it is a solution the wrong working lost.
+
+**Skipping the check after squaring**
+
+A radical equation is squared to remove the root, and every solution of the squared equation is reported as an answer.
+
+Wrong working:
+$$\\sqrt{x + 5} = x - 1 \\implies x + 5 = x^2 - 2x + 1 \\implies x^2 - 3x - 4 = 0 \\implies x = 4 \\text{ or } x = -1$$
+
+Right working: squaring is not reversible, so each candidate goes back into the original equation. For $x = 4$, $\\sqrt{9} = 3$ and $4 - 1 = 3$, which match. For $x = -1$, $\\sqrt{4} = 2$ but $-1 - 1 = -2$, which do not. The only solution is $x = 4$.
+
+Why it happens: the squared equation is an ordinary quadratic, and its two clean roots look final. Squaring also accepts values where the two sides are opposites, since $2^2 = (-2)^2$.
+
+How to check: substitute every candidate into the original equation, not into the squared one.
+
+**Reading 0 = 0 as x = 0**
+
+The variable terms cancel while simplifying, the statement $0 = 0$ is left, and it is read as the answer $x = 0$.
+
+Wrong working:
+$$2(x + 1) = 2x + 2 \\implies 2x + 2 = 2x + 2 \\implies 0 = 0 \\implies x = 0$$
+
+Right working: $0 = 0$ contains no $x$ and is true, so the original equation holds for every value of $x$. It is an identity, and the solution set is $\\mathbb{R}$.
+
+Why it happens: most solving ends with a line of the form $x = \\ldots$, and a lone $0$ on the last line looks like the value of $x$.
+
+How to check: substitute a value other than $0$. For $x = 5$, both sides give $12$, so $x = 0$ is not the only solution.
+
+**Dropping the sign of b**
+
+The quadratic formula is used with a negative coefficient $b$, and $-b$ is written with the wrong sign.
+
+Wrong working: for $x^2 - 5x + 6 = 0$, with $a = 1$, $b = -5$, $c = 6$ and $\\Delta = 25 - 24 = 1$,
+$$x = \\frac{-5 \\pm 1}{2} \\implies x = -2 \\text{ or } x = -3$$
+
+Right working: $-b = -(-5) = 5$, so
+$$x = \\frac{5 \\pm 1}{2} \\implies x = 3 \\text{ or } x = 2$$
+
+Why it happens: the minus sign in front of $b$ in the formula and the minus sign inside $b$ itself are easy to merge into one, especially when $b$ is copied straight from the equation.
+
+How to check: substitute a root. $x = -2$ gives $4 + 10 + 6 = 20$, not $0$; $x = 2$ gives $4 - 10 + 6 = 0$. By Vieta's formulas the roots must also add up to $-\\frac{b}{a} = 5$.
+
+**Forgetting the negative case**
+
+An absolute value equation $|f(x)| = k$ with $k > 0$ is solved by dropping the bars, so only the case $f(x) = k$ is solved.
+
+Wrong working:
+$$|x - 2| = 5 \\implies x - 2 = 5 \\implies x = 7$$
+
+Right working: both cases are needed.
+$$x - 2 = 5 \\implies x = 7 \\qquad x - 2 = -5 \\implies x = -3$$
+
+Why it happens: the bars look like a pair of brackets, and removing them seems harmless. But a number and its opposite have the same absolute value, so each value of $k$ comes from two values of $f(x)$.
+
+How to check: use the distance reading. $|x - 2| = 5$ asks for the points at distance $5$ from $2$ on the number line, and there are two of them, $7$ and $-3$.`,
     before: ``,
     after: ``,
     link: '',
@@ -824,6 +916,7 @@ export default function EquationsPage({beyondAlgebraTree, equationFamilyTree,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+          `@academic[punchline:Reversible steps preserve the solution set; after any step that cannot be undone, check every candidate in the original equation.]@`,
         ]
     },
     {
@@ -939,6 +1032,14 @@ export default function EquationsPage({beyondAlgebraTree, equationFamilyTree,
           >
             <TopDownTree data={equationFamilyTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj13.title,
+        link:sectionsContent.obj13.link,
+        content:[
+          sectionsContent.obj13.content,
         ]
     },
 ]

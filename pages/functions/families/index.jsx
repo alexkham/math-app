@@ -1639,6 +1639,7 @@ import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/func
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import Hierarchy from '@/app/components/infographics/Hierarchy'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
 
 
 export async function getStaticProps(){
@@ -1697,14 +1698,14 @@ export async function getStaticProps(){
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">none — only the right half exists</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">resembles √x: starts at origin, increasing, concave down; higher even roots flatter near 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">resembles √x: starts at origin, increasing, concave down; higher even roots steeper near 0, flatter beyond x = 1</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Odd n (5th, 7th, ...)</td>
       <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
       <td style="padding: 12px 15px; color: #34495e;">(−∞, ∞)</td>
       <td style="padding: 12px 15px; color: #34495e;">odd — point symmetry about the origin</td>
-      <td style="padding: 12px 15px; color: #34495e;">resembles ∛x: S-curve through origin; higher odd roots flatter</td>
+      <td style="padding: 12px 15px; color: #34495e;">resembles ∛x: S-curve through origin; higher odd roots steeper near 0, flatter beyond |x| = 1</td>
     </tr>
   </tbody>
 </table>
@@ -1824,14 +1825,14 @@ export async function getStaticProps(){
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x^(1⁄n)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[0, ∞)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">flatter generalization of √x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">generalization of √x: steeper near 0, flatter beyond x = 1</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">nth root, odd n</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x^(1⁄n)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">ℝ</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">flatter generalization of ∛x</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">generalization of ∛x: steeper near 0, flatter beyond |x| = 1</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Absolute value</td>
@@ -2428,6 +2429,12 @@ Moving one unit right always changes the output by exactly $m$ units.
 
 Every linear function with $m \\neq 0$ is one-to-one, passing the horizontal line test. Its [inverse](!/functions/inverse) is also linear: $f^{-1}(x) = \\dfrac{x - b}{m}$.
 
+@academic[pitfall,aside:true,width:35%:Reading the inverse as a reciprocal
+Taking $f^{-1}(x) = \\dfrac{1}{2x + 6}$ for $f(x) = 2x + 6$ reads the $-1$ as a power. Since $f(1) = 8$, the inverse must send $8$ back to $1$, but the reciprocal gives $\\dfrac{1}{22}$; the inverse is $f^{-1}(x) = \\dfrac{x - 6}{2}$.
+[Read more](!#pitfalls)]@
+
+The inverse undoes the function: it takes an output of $f$ and returns the input that produced it. For a line, this means solving $y = mx + b$ for $x$: first $b$ is subtracted, then the result is divided by $m$, the two steps of $f$ undone in reverse order.
+
 The parent linear function is $f(x) = x$ — slope $1$, passing through the origin at $45°$.`,
     before: ``,
     after: ``,
@@ -2466,6 +2473,12 @@ $$f(x) = a(x - h)^2 + k$$
 
 @academic[formulas_link:Browse all functions formulas
 /functions/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Taking the sign inside the bracket
+Reading the vertex of $f(x) = 2(x + 3)^2 - 1$ as $(3, -1)$ copies the sign shown in the bracket. Since $x + 3 = x - (-3)$, $h = -3$ and the vertex is $(-3, -1)$, where $f(-3) = -1$ is the minimum.
+[Read more](!#pitfalls)]@
+
+Vertex form trades the coefficients $a$, $b$, $c$ for $a$, $h$ and $k$. The parameter $a$ is the same in both forms, so the opening direction and the width carry over unchanged, while $h$ and $k$ place the turning point without any further calculation.
 
 The vertex's coordinates can be recovered from the standard-form coefficients directly:
 
@@ -2563,7 +2576,7 @@ $$x = a \\quad \\text{where } Q(a) = 0 \\text{ and } P(a) \\neq 0$$
 
 The function approaches $\\pm\\infty$ near these values.
 
-Holes (removable discontinuities) occur where both $P(x) = 0$ and $Q(x) = 0$ share a common factor. The graph has a gap at that point.
+Holes (removable discontinuities) occur where $P$ and $Q$ share a common factor that cancels completely from the denominator (if the factor appears more times in $Q$, as in $\\frac{x}{x^2}$, a vertical asymptote remains instead). At a hole the graph has a gap.
 
 Horizontal asymptotes describe end behavior. When the degrees of numerator and denominator are equal, the asymptote sits at the ratio of leading coefficients:
 
@@ -2585,7 +2598,13 @@ $$y = 0 \\quad \\text{when } \\deg P < \\deg Q$$
 
 @academic[rule_plain:When the numerator's degree exceeds the denominator's, there is no horizontal asymptote — an oblique asymptote appears when the degree difference is exactly $1$.]@
 
-The simplest rational function is $f(x) = \\dfrac{1}{x}$, with vertical asymptote at $x = 0$, horizontal asymptote at $y = 0$, and hyperbolic shape with branches in quadrants I and III.`,
+@academic[pitfall,aside:true,width:35%:Assuming the asymptote is never crossed
+Assuming $f(x) = \\dfrac{x}{x^2 + 1}$ never meets its horizontal asymptote $y = 0$ fails at once: $f(0) = 0$, so the graph crosses it at the origin. The asymptote fixes only the ends, as $x \\to \\pm\\infty$.
+[Read more](!#pitfalls)]@
+
+The simplest rational function is $f(x) = \\dfrac{1}{x}$, with vertical asymptote at $x = 0$, horizontal asymptote at $y = 0$, and hyperbolic shape with branches in quadrants I and III.
+
+A horizontal asymptote is a statement about the far ends of the graph, where $x$ is large in size. The degree comparison above decides the asymptote, but the values of the function over the middle of the graph come from the formula itself, by evaluating it at particular inputs.`,
     before: ``,
     after: ``,
     link: '',
@@ -2601,7 +2620,7 @@ The parent function $f(x) = \\sqrt{x}$ starts at the origin and rises gradually 
 
 [Range](!/functions/range): $[0, \\infty)$ — square roots are non-negative.
 
-The [graph](!/functions/graphs) is the right half of a parabola lying on its side. It is the [inverse](!/functions/inverse) of $f(x) = x^2$ restricted to $[0, \\infty)$.
+The [graph](!/functions/graphs) is the upper half of a parabola lying on its side. It is the [inverse](!/functions/inverse) of $f(x) = x^2$ restricted to $[0, \\infty)$.
 
 Key [properties](!/functions/properties): Increasing on entire domain. Concave down — the rate of increase slows. One-to-one. Continuous on its domain.
 
@@ -2645,14 +2664,14 @@ For even $n$ (fourth root, sixth root, etc.):
 - [Domain](!/functions/domain): $[0, \\infty)$
 - [Range](!/functions/range): $[0, \\infty)$
 - Behavior resembles square root — starting at origin, increasing, concave down
-- Higher even roots are flatter near the origin and rise more slowly
+- Higher even roots rise more steeply near the origin and more slowly for $x > 1$
 
 For odd $n$ (fifth root, seventh root, etc.):
 - Domain: all real numbers
 - Range: all real numbers
 - Behavior resembles cube root — S-shaped curve through origin
 - Odd symmetry about the origin
-- Higher odd roots are flatter, rising and falling more slowly
+- Higher odd roots are steeper near the origin and flatter for $|x| > 1$
 
 All $n$th root functions are one-to-one. Each is the [inverse](!/functions/inverse) of the corresponding power function $x^n$ (with appropriate domain restriction for even $n$).
 
@@ -2703,6 +2722,12 @@ The ceiling function $\\lceil x \\rceil$ returns the least integer greater than 
 @academic[formula_callout:Step Functions
 $$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -0.3 \\rceil = 0, \\quad \\lceil 4 \\rceil = 4$$]@
 
+@academic[pitfall,aside:true,width:35%:Truncating negative inputs
+Reading $\\lfloor -2.7 \\rfloor$ as $-2$ drops the decimal part, but $-2$ lies above $-2.7$. The greatest integer at or below $-2.7$ is $-3$, so $\\lfloor -2.7 \\rfloor = -3$, just as $\\lfloor -0.3 \\rfloor = -1$.
+[Read more](!#pitfalls)]@
+
+Both functions move a non-integer input to a neighboring integer: the floor to the nearest integer on its left on the number line, the ceiling to the nearest one on its right. Integer inputs are left unchanged by both, which is why $\\lfloor 4 \\rfloor = \\lceil 4 \\rceil = 4$.
+
 [Domain](!/functions/domain): all real numbers.
 
 [Range](!/functions/range): all integers $\\mathbb{Z}$.
@@ -2733,7 +2758,7 @@ Key [properties](!/functions/properties): Horizontal asymptote at $y = 0$. Alway
 
 The natural exponential $f(x) = e^x$ uses base $e \\approx 2.718$. It is ubiquitous in calculus because it is its own derivative.
 
-Exponential functions are [inverses](!/functions/inverse) of logarithmic functions with the same base. This connection makes logarithms essential for solving exponential equations.
+Exponential functions $b^x$ (with $a = 1$) are [inverses](!/functions/inverse) of logarithmic functions with the same base. This connection makes logarithms essential for solving exponential equations.
 
 Detailed treatment appears in the algebra section on exponential functions.`,
     before: ``,
@@ -2761,6 +2786,12 @@ Key [properties](!/functions/properties): One-to-one. Continuous on its domain. 
 Common bases: $\\log_{10}(x) = \\log(x)$ (common logarithm), $\\log_e(x) = \\ln(x)$ (natural logarithm).
 
 @academic[rule_plain:Logarithms convert multiplication to addition: $\\log(ab) = \\log(a) + \\log(b)$.]@
+
+@academic[pitfall,aside:true,width:35%:Splitting the log of a sum
+Writing $\\log(10 + 10)$ as $\\log(10) + \\log(10) = 2$ applies the product rule to a sum. In fact $\\log(20) \\approx 1.301$; the value $2$ belongs to $\\log(10 \\cdot 10) = \\log(100)$.
+[Read more](!#pitfalls)]@
+
+The rule turns one multiplication into one addition. For example, $\\log(1000) = \\log(10 \\cdot 100) = \\log(10) + \\log(100) = 1 + 2 = 3$, which agrees with $10^3 = 1000$. The same idea gives $\\log(a/b) = \\log(a) - \\log(b)$ for quotients.
 
 This property underlies their historical use in computation and their modern role in scaling (decibels, pH, Richter scale).
 
@@ -2827,11 +2858,79 @@ Invertibility:
 
 Periodicity:
 - Periodic: trigonometric functions
-- Non-periodic: all polynomial, rational, exponential, logarithmic, radical functions
+- Non-periodic: all non-constant polynomial, rational, exponential, logarithmic, radical functions
 
 Each family has its natural applications. Linear for constant rates. Quadratic for projectile motion. Exponential for growth and decay. Trigonometric for cycles. Choosing the right family is the first step in mathematical modeling.
 
 The table below puts the growth ranking in compact form with representative examples — handy when comparing how fast different families ultimately grow.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again when working with these families. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading the inverse as a reciprocal**
+
+The notation $f^{-1}$ is read as a power, and the inverse is computed as $\\dfrac{1}{f(x)}$. The reciprocal and the inverse are different functions.
+
+Wrong working: for $f(x) = 2x + 6$, $f^{-1}(x) = \\dfrac{1}{2x + 6}$.
+
+Right working: solve $y = 2x + 6$ for $x$. Subtracting $6$ and dividing by $2$ gives $x = \\dfrac{y - 6}{2}$, so $f^{-1}(x) = \\dfrac{x - 6}{2}$. This matches $\\dfrac{x - b}{m}$ with $m = 2$ and $b = 6$.
+
+Why it happens: in $x^{-1} = \\dfrac{1}{x}$ the $-1$ is an exponent, and the same mark written on a function name looks identical.
+
+How to check: an inverse sends each output back to its input. $f(1) = 8$, and $f^{-1}(8) = \\dfrac{8 - 6}{2} = 1$, while the reciprocal gives $\\dfrac{1}{2 \\cdot 8 + 6} = \\dfrac{1}{22}$.
+
+**Taking the sign inside the bracket**
+
+The vertex is read from vertex form by copying the numbers as they appear. The value of $k$ comes out right, but $h$ gets the wrong sign.
+
+Wrong working: $f(x) = 2(x + 3)^2 - 1$ has vertex $(3, -1)$.
+
+Right working: vertex form is $a(x - h)^2 + k$. Writing $x + 3 = x - (-3)$ gives $h = -3$ and $k = -1$, so the vertex is $(-3, -1)$. Standard form agrees: $2(x + 3)^2 - 1 = 2x^2 + 12x + 17$, and $-\\dfrac{b}{2a} = -\\dfrac{12}{4} = -3$.
+
+Why it happens: $k$ is read with the sign it shows, so the same is expected of $h$; the minus sign built into $(x - h)$ is easy to forget.
+
+How to check: substitute the claimed $h$. $f(-3) = 2 \\cdot 0 - 1 = -1$, the smallest value, since $2(x + 3)^2 \\geq 0$; $f(3) = 2 \\cdot 36 - 1 = 71$, nowhere near a minimum.
+
+**Assuming the asymptote is never crossed**
+
+A horizontal asymptote is treated like a vertical one, as a line the graph can never touch. A vertical asymptote marks an excluded input; a horizontal one only describes the ends of the graph.
+
+Wrong working: $f(x) = \\dfrac{x}{x^2 + 1}$ has numerator degree lower than denominator degree, so its horizontal asymptote is $y = 0$. The graph is then said never to meet the $x$-axis, so $f$ has no zeros.
+
+Right working: $f(x) = 0$ where the numerator is zero, at $x = 0$. The graph passes through the origin, rises to $f(1) = \\dfrac{1}{2}$, and then falls back toward $0$ as $x \\to \\infty$. It crosses its horizontal asymptote and then approaches it from above.
+
+Why it happens: vertical asymptotes really are never crossed, because the function is undefined there, and the asymptote of $\\dfrac{1}{x}$, the first example met, is never reached either.
+
+How to check: solve $f(x) = L$, where $y = L$ is the horizontal asymptote. Here $\\dfrac{x}{x^2 + 1} = 0$ has the solution $x = 0$; every solution is a point where the graph meets the asymptote.
+
+**Truncating negative inputs**
+
+The floor is found by deleting the decimal part of the input. That works for positive inputs but not for negative non-integers.
+
+Wrong working: $\\lfloor -2.7 \\rfloor = -2$.
+
+Right working: the floor is the greatest integer less than or equal to the input. The integers at or below $-2.7$ are $-3, -4, -5, \\ldots$, and the greatest of them is $-3$, so $\\lfloor -2.7 \\rfloor = -3$. In the same way, $\\lceil -2.7 \\rceil = -2$.
+
+Why it happens: for positive inputs, as in $\\lfloor 2.7 \\rfloor = 2$, cutting off the decimal gives the right answer, so the shortcut is learned as the rule.
+
+How to check: the floor can never be larger than the input. Since $-2 > -2.7$, $-2$ cannot be the floor of $-2.7$.
+
+**Splitting the log of a sum**
+
+The product rule is applied to a sum, as if the logarithm distributed over addition.
+
+Wrong working: $\\log(10 + 10) = \\log(10) + \\log(10) = 1 + 1 = 2$.
+
+Right working: $\\log(10 + 10) = \\log(20) \\approx 1.301$. The product rule needs a product: $\\log(10 \\cdot 10) = \\log(10) + \\log(10) = 2$, and indeed $\\log(100) = 2$. The logarithm of a sum has no general simplification.
+
+Why it happens: $\\log(ab) = \\log(a) + \\log(b)$ looks like a distributive law, and distributing over a sum is a familiar move.
+
+How to check: undo the logarithm. If $\\log(20)$ were $2$, then $10^2$ would equal $20$, but $10^2 = 100$.`,
     before: ``,
     after: ``,
     link: '',
@@ -3079,8 +3178,45 @@ const faqQuestions = {
     ],
   };
 
+  const familyOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'The function families on one page',
+    preface: 'Every family on this page, grouped the way the page treats them. Polynomials and radicals open into their members.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Recognise the shape, name the family',
+    conclusion: 'Each family leaves a characteristic shape on the graph: lines, parabolas, S-curves, asymptotes, half-curves, V-shapes, staircases and waves.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Function families', children: [
+        { id: 'poly', name: 'Polynomial', children: [
+          { id: 'const', name: 'Constant', def: 'horizontal line, range {c}', example: 'f(x) = c' },
+          { id: 'lin', name: 'Linear', def: 'constant slope', example: 'mx + b' },
+          { id: 'quad', name: 'Quadratic', def: 'parabola with a vertex', example: 'ax² + bx + c' },
+          { id: 'cubic', name: 'Cubic', def: 'S-curve, up to 2 turning points', example: 'ax³ + …' },
+          { id: 'higher', name: 'Higher degree', def: 'up to n zeros, n − 1 turns', example: 'degree n' },
+        ] },
+        { id: 'rat', name: 'Rational', def: 'asymptotes; holes possible', example: 'P(x)/Q(x)' },
+        { id: 'rad', name: 'Radical', children: [
+          { id: 'sqrt', name: 'Square root', def: 'starts at the origin', example: '√x' },
+          { id: 'cbrt', name: 'Cube root', def: 'S-curve through the origin', example: '∛x' },
+          { id: 'even', name: 'nth root, even n', def: 'domain [0, ∞)' },
+          { id: 'odd', name: 'nth root, odd n', def: 'domain ℝ' },
+        ] },
+        { id: 'abs', name: 'Absolute value', def: 'V-shape, vertex at the origin', example: '|x|' },
+        { id: 'step', name: 'Step', def: 'staircase, range ℤ', example: '⌊x⌋, ⌈x⌉' },
+        { id: 'exp', name: 'Exponential', def: 'growth or decay, asymptote y = 0', example: 'a·bˣ' },
+        { id: 'log', name: 'Logarithmic', def: 'inverse of exponential, asymptote x = 0', example: 'logₐ x' },
+        { id: 'trig', name: 'Trigonometric', children: [
+          { id: 'sincos', name: 'Sine and cosine', def: 'period 2π, range [−1, 1]' },
+          { id: 'tan', name: 'Tangent', def: 'period π, vertical asymptotes' },
+        ] },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    familyOutline,
     familyGrowthLevels,
     rationalAsymptoteCases,
     demoUnits,
@@ -3107,7 +3243,7 @@ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', 
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function FamiliesPage({familyGrowthLevels, rationalAsymptoteCases, 
+export default function FamiliesPage({familyOutline, familyGrowthLevels, rationalAsymptoteCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -3283,7 +3419,7 @@ export default function FamiliesPage({familyGrowthLevels, rationalAsymptoteCases
         content:[
           sectionsContent.obj15.content,
           <div key={'unit-logFamily'} dangerouslySetInnerHTML={{ __html: demoUnits.logFamily }} />,
-          `ln(1) = 0 for every base's logarithm: all log graphs pass through (1, 0).`,
+          `log_b(1) = 0 for every base b: all log graphs pass through (1, 0).`,
         ]
     },
     {
@@ -3318,6 +3454,14 @@ export default function FamiliesPage({familyGrowthLevels, rationalAsymptoteCases
         ]
     },
     {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
+        ]
+    },
+    {
         id:'18',
         title:sectionsContent.obj18.title,
         link:sectionsContent.obj18.link,
@@ -3328,6 +3472,14 @@ export default function FamiliesPage({familyGrowthLevels, rationalAsymptoteCases
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj18-diagram'}
+            id="function-families-outline"
+            title="Function families at a glance"
+            source="/functions/families"
+          >
+            <TaxonomyOutline data={familyOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
 

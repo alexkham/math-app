@@ -230,7 +230,13 @@ $$a^0 = 1$$]@
 
 The quotient rule provides one proof: $a^0 = a^{n-n} = \\frac{a^n}{a^n} = 1$. But the same conclusion emerges from a purely numerical pattern. The powers of $3$ descend by a factor of $3$ at each step: $3^3 = 27$, $3^2 = 9$, $3^1 = 3$. Continuing the pattern — dividing by $3$ each time — gives $3^0 = 1$. The same sequence works for any nonzero base: $5^0 = 1$, $(-7)^0 = 1$, $(0.01)^0 = 1$.
 
-The restriction $a \\neq 0$ is essential. The expression $0^0$ sits at the intersection of two conflicting patterns. Following $a^0 = 1$ suggests $0^0 = 1$. Following $0^n = 0$ suggests $0^0 = 0$. Since both patterns have equal claim and produce different answers, $0^0$ is left undefined — or, in certain contexts, assigned a value by convention depending on the application, most commonly $1$ in combinatorics and series.`,
+The restriction $a \\neq 0$ is essential. The expression $0^0$ sits at the intersection of two conflicting patterns. Following $a^0 = 1$ suggests $0^0 = 1$. Following $0^n = 0$ suggests $0^0 = 0$. Since both patterns have equal claim and produce different answers, $0^0$ is left undefined — or, in certain contexts, assigned a value by convention depending on the application, most commonly $1$ in combinatorics and series.
+
+@academic[pitfall,aside:true,width:35%:Reading a zero exponent as zero
+Reading $7^0$ as $7 \\cdot 0$ gives $7^0 = 0$. One step down the pattern from $7^1 = 7$ is $7 \\div 7$, so $7^0 = 1$.
+[Read more](!#pitfalls)]@
+
+Outside the single case $0^0$, the zero exponent gives the same value for every base, whether positive, negative or fractional. That value does not grow or shrink with the base, which sets the zero exponent apart from every other power: $a^1$, $a^2$ and $a^{-1}$ all change when $a$ changes, while $a^0$ stays fixed.`,
   before: ``,
   after: ``,
   link: '',
@@ -244,6 +250,10 @@ obj3: {
 $$a^{-n} = \\frac{1}{a^n}$$]@
 
 A negative exponent produces the reciprocal of the corresponding positive power. The expression $2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$. The expression $5^{-1} = \\frac{1}{5}$. The expression $10^{-4} = \\frac{1}{10000} = 0.0001$.
+
+@academic[pitfall,aside:true,width:35%:Making the result negative
+Reading the minus in $2^{-3}$ as a sign gives $-8$ or $-\\frac{1}{8}$. The minus asks only for a reciprocal: $2^{-3} = \\frac{1}{8}$, a positive number.
+[Read more](!#pitfalls)]@
 
 This definition is not arbitrary — it is the only one compatible with the product rule. The product $a^3 \\cdot a^{-3}$ must equal $a^{3+(-3)} = a^0 = 1$. For that to hold, $a^{-3}$ must be the value that multiplies with $a^3$ to give $1$ — which is $\\frac{1}{a^3}$.
 
@@ -310,7 +320,13 @@ The case $n = 1$ gives the simplest form of the reciprocal: $a^{-1} = \\frac{1}{
 
 @academic[rule_corollary_plain:A negative exponent in the denominator moves the expression to the numerator. The fraction $\\frac{1}{a^{-n}}$ equals $a^n$, since taking the reciprocal of a reciprocal returns the original.]@
 
-Similarly, $\\frac{a^{-2}}{b^{-3}} = \\frac{b^3}{a^2}$ — each negative exponent crosses the fraction bar and becomes positive.`,
+Similarly, $\\frac{a^{-2}}{b^{-3}} = \\frac{b^3}{a^2}$ — each negative exponent crosses the fraction bar and becomes positive.
+
+@academic[pitfall,aside:true,width:35%:Dropping the minus without moving the factor
+Clearing $\\frac{a^{-2}}{b^{-3}}$ by deleting the minus signs gives $\\frac{a^2}{b^3}$. Each factor crosses the bar as its sign flips: $\\frac{a^{-2}}{b^{-3}} = \\frac{b^3}{a^2}$.
+[Read more](!#pitfalls)]@
+
+Moving a factor across the bar is allowed because it is the same as taking a reciprocal: dividing by $b^{-3}$ is multiplying by $b^3$, and multiplying by $a^{-2}$ is dividing by $a^2$. Each factor with a negative exponent is moved on its own, while factors with positive exponents stay where they are.`,
   before: ``,
   after: ``,
   link: '',
@@ -345,6 +361,10 @@ Simplify $(2a^{-3})^2$. Distribute the exponent: $2^2 \\cdot (a^{-3})^2 = 4a^{-6
 Simplify $\\frac{a^{-2}b^3}{a^4b^{-1}}$. Handle each variable separately. For $a$: $a^{-2-4} = a^{-6}$. For $b$: $b^{3-(-1)} = b^{3+1} = b^4$. The result is $a^{-6}b^4 = \\frac{b^4}{a^6}$.
 
 Simplify $\\left(\\frac{x^{-1}}{y^2}\\right)^{-3}$. The negative exponent flips the fraction: $\\left(\\frac{y^2}{x^{-1}}\\right)^3 = \\left(\\frac{y^2 \\cdot x}{1}\\right)^3 = (xy^2)^3 = x^3y^6$.
+
+@academic[pitfall,aside:true,width:35%:Moving the coefficient with the power
+Rewriting $4a^{-6}$ as $\\frac{1}{4a^6}$ sends the $4$ below the bar too. The exponent $-6$ belongs to $a$ alone, so $4a^{-6} = \\frac{4}{a^6}$.
+[Read more](!#pitfalls)]@
 
 In each case, the laws reduce the expression step by step. Negative exponents are not obstacles — they are instructions to take reciprocals, and they simplify by the same rules that govern every other exponent.
 
@@ -429,6 +449,71 @@ To check a negative power with your own numbers, use the [exponent calculator](!
       after:``,
       link:'',
   
+    },
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes account for most wrong answers with zero and negative exponents. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading a zero exponent as zero**
+
+An expression with exponent $0$ is evaluated as if the exponent were a factor, so the base is multiplied by zero instead of being raised to the zero power.
+
+Wrong working:
+$$7^0 = 7 \\cdot 0 = 0$$
+
+Right working: the powers of $7$ drop by a factor of $7$ at each step, $7^2 = 49$ and $7^1 = 7$, so the next step is
+$$7^0 = \\frac{7^1}{7} = 1$$
+The quotient rule gives the same value: $\\frac{7^1}{7^1} = 7^{1-1} = 7^0$, and the left side is $1$.
+
+Why it happens: "zero of something is nothing" is a strong habit from multiplication, and $7^0$ and $7 \\cdot 0$ look alike, with the base followed by a zero.
+
+How to check: use the product rule. $7^0 \\cdot 7^2$ must equal $7^{0+2} = 49$. With $7^0 = 1$ the product is $1 \\cdot 49 = 49$; with $7^0 = 0$ it would be $0$.
+
+**Making the result negative**
+
+The minus in the exponent is read as the sign of the answer, so a negative exponent is expected to produce a negative number.
+
+Wrong working:
+$$2^{-3} = -2^3 = -8 \\quad \\text{or} \\quad 2^{-3} = -\\frac{1}{8}$$
+
+Right working: the negative exponent takes the reciprocal of the positive power.
+$$2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$$
+For a positive base the result is always positive. The sign of the result comes from the base: $(-2)^{-3} = \\frac{1}{(-2)^3} = -\\frac{1}{8}$.
+
+Why it happens: everywhere else a minus sign in front of a number makes it negative, and that habit carries over to the exponent.
+
+How to check: multiply by the matching positive power. $2^3 \\cdot 2^{-3}$ must equal $2^0 = 1$. With $\\frac{1}{8}$ the product is $8 \\cdot \\frac{1}{8} = 1$; with $-8$ it is $-64$, and with $-\\frac{1}{8}$ it is $-1$.
+
+**Dropping the minus without moving the factor**
+
+In a fraction with negative exponents, the minus signs are removed but each factor stays on its own side of the bar.
+
+Wrong working:
+$$\\frac{a^{-2}}{b^{-3}} = \\frac{a^2}{b^3}$$
+
+Right working: $a^{-2} = \\frac{1}{a^2}$ moves $a$ below the bar, and $\\frac{1}{b^{-3}} = b^3$ moves $b$ above it.
+$$\\frac{a^{-2}}{b^{-3}} = \\frac{b^3}{a^2}$$
+
+Why it happens: the rule is remembered as "make the exponents positive", and the half of it that moves the factor across the bar is lost.
+
+How to check: substitute small numbers. With $a = 2$ and $b = 3$, the original is $\\frac{2^{-2}}{3^{-3}} = \\frac{1/4}{1/27} = \\frac{27}{4}$. The right answer gives $\\frac{3^3}{2^2} = \\frac{27}{4}$; the wrong one gives $\\frac{4}{27}$.
+
+**Moving the coefficient with the power**
+
+A term such as $4a^{-6}$ is rewritten with a positive exponent, and the whole term, coefficient included, is moved below the bar.
+
+Wrong working:
+$$(2a^{-3})^2 = 4a^{-6} = \\frac{1}{4a^6}$$
+
+Right working: the exponent $-6$ applies to $a$ only, so only $a$ moves.
+$$4a^{-6} = 4 \\cdot \\frac{1}{a^6} = \\frac{4}{a^6}$$
+
+Why it happens: $4a^{-6}$ is read as one block that moves as a whole. Without brackets, an exponent belongs only to the symbol directly before it.
+
+How to check: substitute $a = 1$. The original $(2 \\cdot 1^{-3})^2 = 4$. The right answer gives $\\frac{4}{1^6} = 4$; the wrong one gives $\\frac{1}{4}$.`,
+      before:``,
+      after:``,
+      link:'',
     }
   
   }
@@ -674,6 +759,14 @@ export default function NegativeExponentsPage({seoData, sectionsContent, introCo
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

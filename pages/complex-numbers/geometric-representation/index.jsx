@@ -1141,6 +1141,10 @@ Every other complex number — those with both $a \\neq 0$ and $b \\neq 0$ — l
 
 Consider $z = 3 + 2i$. The real part $3$ dictates movement three units right from the origin. The imaginary part $2$ dictates movement two units up. The point $(3, 2)$ marks the location. For $z = -1 + 4i$, move one unit left and four units up to reach $(-1, 4)$. For $z = -2 - 3i$, move two units left and three units down to reach $(-2, -3)$ in the third quadrant.
 
+@academic[pitfall,aside:true,width:35%:Swapping the coordinates
+Plotting $-1 + 4i$ at $(4, -1)$ reads the imaginary part as the horizontal coordinate and lands in the fourth quadrant. The real part is horizontal: $-1 + 4i$ is the point $(-1, 4)$, in the second quadrant.
+[Read more](!#pitfalls)]@
+
 The four quadrants organize complex numbers by the signs of their components. The first quadrant (upper right) contains numbers with positive real and positive imaginary parts. The second quadrant (upper left) holds numbers with negative real parts but positive imaginary parts. The third quadrant (lower left) contains both parts negative. The fourth quadrant (lower right) has positive real parts with negative imaginary parts. Knowing the quadrant immediately reveals the sign pattern of a complex number.
 
 Special cases occupy the axes rather than the quadrants. Real numbers like $5$ appear at $(5, 0)$ on the horizontal axis. Pure imaginary numbers like $-2i$ appear at $(0, -2)$ on the vertical axis. These numbers have one zero component, placing them precisely on the boundary between quadrants rather than inside any particular region.
@@ -1162,6 +1166,10 @@ Vector addition follows the parallelogram rule, also known as tip-to-tail additi
 
 Subtraction reverses the second vector before adding. To compute $z_1 - z_2$, flip $z_2$ to point in the opposite direction and then add. The result connects the two points in the plane, giving the displacement from $z_2$ to $z_1$. The [modulus](!/complex-numbers/absolute-value) of $z_1 - z_2$ measures the distance between them.
 
+@academic[pitfall,aside:true,width:35%:Subtracting the moduli
+For $z_1 = 4 + 3i$ and $z_2 = 1 - i$, taking the distance as $|z_1| - |z_2| = 5 - \\sqrt{2} \\approx 3.59$ compares two arrow lengths, not the two points. The distance is $|z_1 - z_2| = |3 + 4i| = 5$.
+[Read more](!#pitfalls)]@
+
 The vector interpretation makes the [modulus](!/complex-numbers/absolute-value) geometrically obvious. The length of the arrow from the origin to $(a, b)$ follows from the Pythagorean theorem: $|z| = \\sqrt{a^2 + b^2}$. This is simply the distance formula applied to a vector's components, revealing modulus as nothing more exotic than length.`,
   after: ``,
   link: '',
@@ -1177,6 +1185,10 @@ The vector interpretation makes the [modulus](!/complex-numbers/absolute-value) 
 This transformation has a name: reflection across the real axis. The real axis acts as a mirror. Points above the axis map to corresponding points below; points below map to points above. Points on the real axis itself — the real numbers — remain fixed in place, unmoved by conjugation because they have no imaginary component to negate.
 
 Concrete examples illustrate the reflection. The number $z = 2 + 3i$ sits at $(2, 3)$, two units right and three units up. Its conjugate $\\bar{z} = 2 - 3i$ sits at $(2, -3)$, the same distance right but now three units down. Draw both points and the horizontal axis, and the mirror symmetry becomes unmistakable. Similarly, $z = -1 + 4i$ at $(-1, 4)$ reflects to $\\bar{z} = -1 - 4i$ at $(-1, -4)$.
+
+@academic[pitfall,aside:true,width:35%:Reflecting across the imaginary axis
+Placing the conjugate of $2 + 3i$ at $(-2, 3)$ negates the real part instead; that point is $-2 + 3i = -\\bar{z}$. Only the imaginary part flips: $\\bar{z} = 2 - 3i$, at $(2, -3)$.
+[Read more](!#pitfalls)]@
 
 The reflection perspective explains several algebraic facts geometrically. Taking the conjugate twice returns to the original point — reflecting across the same mirror twice restores every point to its starting position, confirming $\\overline{\\bar{z}} = z$. A number equals its own conjugate precisely when reflection leaves it unchanged, which happens only for points on the mirror itself — the real numbers. A number equals the negative of its conjugate when it lies on the imaginary axis, equidistant above and below the origin.`,
   after: ``,
@@ -1194,6 +1206,10 @@ Complex numbers refuse such arrangement.
 @academic[rule_theorem_plain:No consistent definition of "less than" extends from $\\mathbb{R}$ to $\\mathbb{C}$ while preserving the essential properties we expect from an ordering.]@
 
 The question "Is $3 + 2i$ greater than $1 + 5i$?" has no meaningful answer. Neither number dominates the other in any standard sense.
+
+@academic[pitfall,aside:true,width:35%:Comparing complex numbers like reals
+Writing $2i > i$ because $2 > 1$ leads to nonsense: subtracting $i$ gives $i > 0$, and multiplying by this positive $i$ gives $i^2 > 0$, that is $-1 > 0$. Only real quantities compare, such as the moduli $|2i| = 2 > |i| = 1$.
+[Read more](!#pitfalls)]@
 
 The geometry reveals why ordering fails. Real numbers occupy a one-dimensional line where direction determines comparison — rightward means greater, leftward means lesser. Complex numbers fill a two-dimensional plane where points spread in all directions. No single direction consistently represents "greater than" without privileging some numbers arbitrarily over others. Should $3 + 2i$ exceed $1 + 5i$ because it lies further right, or should $1 + 5i$ exceed $3 + 2i$ because it lies further up? Neither choice maintains logical consistency across all pairs.
 
@@ -1213,6 +1229,10 @@ Addition performs vector combination. Given $z_1$ and $z_2$ as arrows from the o
 Subtraction measures displacement between points. The difference $z_1 - z_2$ represents the vector pointing from $z_2$ to $z_1$. Its modulus $|z_1 - z_2|$ gives the distance between the two complex numbers. In navigation terms, subtraction answers "how far and in what direction must I travel from $z_2$ to reach $z_1$?"
 
 Multiplication introduces richer geometry involving both scaling and rotation. Multiplying by a positive real number stretches or shrinks the vector without changing its direction — $2z$ points the same way as $z$ but twice as far from the origin. Multiplying by $-1$ rotates the vector by $180°$, flipping it to the opposite side of the plane. Multiplying by $i$ rotates $90°$ counterclockwise: the number $1$ becomes $i$, $i$ becomes $-1$, $-1$ becomes $-i$, and $-i$ returns to $1$.
+
+@academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
+Expanding $i(3 + 2i) = 3i + 2i^2$ with $2i^2$ read as $2$ gives $2 + 3i$, which only swaps the coordinates of $(3, 2)$. With $i^2 = -1$, $i(3 + 2i) = -2 + 3i$: the point $(3, 2)$ turned $90°$ counterclockwise to $(-2, 3)$.
+[Read more](!#pitfalls)]@
 
 General multiplication combines rotation with scaling. The product $z_1 \\cdot z_2$ has modulus $|z_1||z_2|$ — the lengths multiply. Its angle from the positive real axis equals the sum of the individual angles — the rotations add. This geometric description anticipates the [trigonometric form](!/complex-numbers/trigonometric-form), where multiplication becomes transparently simple: multiply magnitudes, add angles.`,
   after: ``,
@@ -1288,6 +1308,73 @@ General multiplication combines rotation with scaling. The product $z_1 \\cdot z
   
     },
   
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Five mistakes come up again and again when complex numbers are read as points and arrows. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Swapping the coordinates**
+
+A complex number is plotted with its two parts in the wrong order: the imaginary part is used as the horizontal coordinate and the real part as the vertical one. The point lands in the wrong place, often in the wrong quadrant.
+
+Wrong working: $-1 + 4i$ is plotted at $(4, -1)$, four units right and one unit down, in the fourth quadrant.
+
+Right working: the real part $-1$ is the horizontal coordinate and the imaginary part $4$ the vertical one, so $-1 + 4i$ is the point $(-1, 4)$, one unit left and four units up, in the second quadrant.
+
+Why it happens: in $-1 + 4i$ the number $4$ is the one that stands out, attached to $i$, and some numbers are written with the imaginary term first, such as $4i - 1$, which is the same number.
+
+How to check: the sign of the real part decides left or right of the imaginary axis. Here the real part $-1$ is negative, so the point must lie to the left.
+
+**Subtracting the moduli**
+
+The distance between two complex numbers is found by subtracting their distances from the origin, instead of taking the modulus of their difference.
+
+Wrong working: for $z_1 = 4 + 3i$ and $z_2 = 1 - i$, the distance is taken as $|z_1| - |z_2| = 5 - \\sqrt{2} \\approx 3.59$.
+
+Right working: $z_1 - z_2 = (4 - 1) + (3 - (-1))i = 3 + 4i$, so the distance is $|z_1 - z_2| = \\sqrt{3^2 + 4^2} = 5$.
+
+Why it happens: for real numbers on a line, the distance between two positive numbers is the larger minus the smaller. In the plane the two arrows usually point in different directions, so their lengths alone do not give the gap between their tips.
+
+How to check: plot both points. From $(1, -1)$ to $(4, 3)$ the horizontal gap is $3$ and the vertical gap is $4$, so the distance is $5$ by the Pythagorean theorem.
+
+**Reflecting across the imaginary axis**
+
+The conjugate is drawn as the mirror image in the vertical axis instead of the horizontal one, so the real part changes sign and the imaginary part stays.
+
+Wrong working: the conjugate of $z = 2 + 3i$ is placed at $(-2, 3)$, which is the number $-2 + 3i$.
+
+Right working: conjugation keeps the real part and flips the imaginary part, so $\\bar{z} = 2 - 3i$, at $(2, -3)$. The point $-2 + 3i$ is $-\\bar{z}$, the negative of the conjugate.
+
+Why it happens: both axes can serve as a mirror, and the word "reflection" does not say which one. The conjugate always uses the real axis.
+
+How to check: $z$ and $\\bar{z}$ lie on the same vertical line, so $z + \\bar{z}$ is real: $(2 + 3i) + (2 - 3i) = 4$. With the wrong point, $(2 + 3i) + (-2 + 3i) = 6i$, which is not real.
+
+**Comparing complex numbers like reals**
+
+An inequality sign is placed between two complex numbers, usually by comparing their coefficients, as if $\\mathbb{C}$ were ordered like $\\mathbb{R}$.
+
+Wrong working: $2i > i$ because $2 > 1$. Subtracting $i$ from both sides gives $i > 0$, and multiplying both sides by the positive number $i$ gives $i^2 > 0$, that is $-1 > 0$.
+
+Right working: complex numbers have no order, so $2i > i$ has no meaning. What can be compared are real numbers attached to them, such as the moduli: $|2i| = 2 > |i| = 1$, so $2i$ lies farther from the origin.
+
+Why it happens: $2i$ and $i$ look like $2$ and $1$ with a label attached, and on the imaginary axis $2i$ does sit above $i$. Being higher on one axis is not an ordering of the whole plane.
+
+How to check: before writing an inequality sign, make sure both sides are real numbers. If either side has a nonzero imaginary part, compare moduli, real parts or imaginary parts instead, and say which.
+
+**Forgetting that i squared is −1**
+
+When a number is multiplied by $i$, the term with $i^2$ is left as a positive real number, so the result is not a quarter turn.
+
+Wrong working: $i(3 + 2i) = 3i + 2i^2 = 3i + 2 = 2 + 3i$. The point $(3, 2)$ moves to $(2, 3)$, its mirror image in the diagonal line $y = x$.
+
+Right working: $i(3 + 2i) = 3i + 2i^2 = 3i - 2 = -2 + 3i$. The point $(3, 2)$ turns $90°$ counterclockwise to $(-2, 3)$.
+
+Why it happens: the expansion is done like ordinary algebra, and the step $i^2 = -1$ is skipped at the end.
+
+How to check: a quarter turn keeps the length and makes a right angle with the original arrow. Both $(-2, 3)$ and $(2, 3)$ have length $\\sqrt{13}$, but only $(-2, 3)$ is perpendicular to $(3, 2)$: $3 \\cdot (-2) + 2 \\cdot 3 = 0$, while $3 \\cdot 2 + 2 \\cdot 3 = 12$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
     faq: {
       title: `Complex Plane FAQ`,
     },
@@ -1575,6 +1662,14 @@ export default function GeometricRepresentationPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

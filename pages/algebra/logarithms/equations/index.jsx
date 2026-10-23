@@ -196,6 +196,14 @@ $$x = 3^{-2} = \\frac{1}{9}$$]@
 Solve $\\ln(x) = 4$.
 $$x = e^4 \\approx 54.598$$]@
 
+@academic[pitfall,aside:true,width:35%:Swapping the base and the exponent
+Rewriting $\\log_2(x) = 5$ as $x = 5^2 = 25$ raises the wrong number to the wrong power, and $\\log_2(25) \\approx 4.64$, not $5$. The correct answer is $x = 2^5 = 32$.
+[Read more](!#pitfalls)]@
+
+In each of these examples the conversion uses the same three numbers: the base, the value of the logarithm, and the argument. The base of the logarithm becomes the base of the power, the value $k$ becomes the exponent, and the argument is what that power equals.
+
+Once the equation is in exponential form, the logarithm is gone and only arithmetic remains. For $\\ln(x) = 4$ the base is $e$, so the answer is a power of $e$.
+
 When the argument is an expression, solve the resulting equation:
 
 @academic[example:Example
@@ -227,7 +235,15 @@ Solve $\\ln(x^2) = \\ln(9)$.
 $$x^2 = 9$$
 $$x = \\pm 3$$
 
-Check both: $\\ln((-3)^2) = \\ln(9)$ works, and $\\ln((3)^2) = \\ln(9)$ works. Both solutions are valid.]@`,
+Check both: $\\ln((-3)^2) = \\ln(9)$ works, and $\\ln((3)^2) = \\ln(9)$ works. Both solutions are valid.]@
+
+@academic[pitfall,aside:true,width:35%:Rejecting the negative root
+Dropping $x = -3$ because it is negative, or because $\\ln(x^2)$ was first rewritten as $2\\ln(x)$, leaves only $x = 3$. But $(-3)^2 = 9 > 0$, so both $x = 3$ and $x = -3$ solve the equation.
+[Read more](!#pitfalls)]@
+
+In both examples the logarithms have the same base, so they are removed in one step and the equation becomes a statement about the arguments alone. What remains is ordinary algebra: a linear equation in the first case and a quadratic one in the second.
+
+The domain check is then made on the arguments as they appear in the original equation. In the second example the argument is $x^2$, not $x$, and its sign is what decides which roots stand.`,
     before: ``,
     after: ``,
     link: '',
@@ -251,7 +267,15 @@ $$x = 4 \\text{ or } x = -2$$
 
 Check domain: $x = 4$ gives $\\log_2(4) + \\log_2(2)$, both defined. $x = -2$ gives $\\log_2(-2)$, undefined. Reject $x = -2$.
 
-Solution: $x = 4$.]@`,
+Solution: $x = 4$.]@
+
+@academic[pitfall,aside:true,width:35%:Turning a sum of logarithms into the logarithm of a sum
+Condensing $\\log_2(x) + \\log_2(x - 2)$ to $\\log_2(2x - 2)$ gives $2x - 2 = 8$, so $x = 5$, but $\\log_2(5) + \\log_2(3) = \\log_2(15) \\neq 3$. The product rule gives $x(x - 2) = 8$, so $x = 4$.
+[Read more](!#pitfalls)]@
+
+The condensing step is what makes the equation solvable: two logarithms with the same base become one, and the equation takes the basic form of the first section. The rule used here is the product rule, which joins the arguments $x$ and $x - 2$ into a single expression.
+
+After the conversion to exponential form the equation is a quadratic in $x$, and a quadratic can have two roots. Each root is then checked in the original equation, where both logarithms still stand separately.`,
     before: ``,
     after: ``,
     link: '',
@@ -302,6 +326,10 @@ $$x = 5 \\text{ or } x = -2$$
 Check $x = 5$: $\\log(5) + \\log(2)$ — both defined, sum equals $\\log(10) = 1$. Valid.
 
 Check $x = -2$: $\\log(-2)$ — undefined. Extraneous.]@
+
+@academic[pitfall,aside:true,width:35%:Checking roots in the condensed equation
+Testing $x = -2$ in $\\log(x(x-3)) = 1$ gives $\\log((-2)(-5)) = \\log(10) = 1$, so it seems to pass. In the original, $\\log(-2)$ is undefined, so the only solution is $x = 5$.
+[Read more](!#pitfalls)]@
 
 The squaring, factoring, or combining steps do not "create" these solutions — they were always algebraic solutions to the transformed equation. The domain restrictions eliminate them.
 
@@ -354,6 +382,14 @@ $$\\log(3^x) = \\log(7)$$
 $$x \\cdot \\log(3) = \\log(7)$$
 $$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$]@
 
+@academic[pitfall,aside:true,width:35%:Turning the quotient into a difference
+Rewriting $\\frac{\\log(7)}{\\log(3)}$ as $\\log(7) - \\log(3) = \\log\\left(\\frac{7}{3}\\right)$ gives $x \\approx 0.368$, and $3^{0.368} \\approx 1.5$, not $7$. The correct value is $x \\approx 1.771$.
+[Read more](!#pitfalls)]@
+
+The power rule is what moves the unknown out of the exponent: $\\log(3^x)$ becomes $x \\cdot \\log(3)$, a product of $x$ and a fixed number. Dividing both sides by that number isolates $x$.
+
+The answer is therefore a fraction with one logarithm on top and another underneath. Each is a plain decimal, $\\log(7) \\approx 0.845$ and $\\log(3) \\approx 0.477$, and the final value comes from dividing one by the other.
+
 Either $\\log$ or $\\ln$ works — the ratio is identical.
 
 @academic[example:Example
@@ -363,9 +399,16 @@ $$\\ln(5^{2x+1}) = \\ln(12)$$
 $$(2x+1)\\ln(5) = \\ln(12)$$
 $$2x + 1 = \\frac{\\ln(12)}{\\ln(5)}$$
 $$2x = \\frac{\\ln(12)}{\\ln(5)} - 1$$
-$$x = \\frac{1}{2}\\left(\\frac{\\ln(12)}{\\ln(5)} - 1\\right) \\approx 0.271$$]@
+$$x = \\frac{1}{2}\\left(\\frac{\\ln(12)}{\\ln(5)} - 1\\right) \\approx 0.272$$]@
 
-To evaluate the final logarithm numerically, use the [log calculator](!/calculators/log-calculator).`,
+@academic[fact,aside:true,width:35%:No fraction solves $3^x = 7$
+The answer $\\log_3(7) \\approx 1.771$ is irrational. If it were a fraction $\\frac{p}{q}$, raising $3^{p/q} = 7$ to the power $q$ would give $3^p = 7^q$, but no power of $3$ is divisible by $7$.]@
+
+In both examples the answer is left as a quotient of logarithms or rounded to a decimal, not written as an exact fraction. An exact value appears only when the right side is a recognizable power of the base: $3^x = 81$ gives $x = 4$, and $8^x = 2$ gives $x = \\frac{1}{3}$ because $8^{1/3} = 2$. For $3^x = 7$ the logarithm does the work, and a calculator supplies the digits.
+
+To evaluate the final logarithm numerically, use the [log calculator](!/calculators/log-calculator).
+
+@academic[punchline:Taking logarithms of both sides brings an unknown exponent down into an ordinary product that algebra can solve.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -420,6 +463,79 @@ The expressions $\\log(7)/\\log(3)$ and $\\ln(7)/\\ln(3)$ compute to identical d
   obj10: {
     title: `Summary of Solving Methods`,
     content: `The page covers two related families of equations: equations whose unknown sits inside a logarithm, and exponential equations solved by taking a logarithm of both sides. The same toolkit — convert, condense, apply the one-to-one property, substitute, and check the domain — handles every form. The table below collects each equation form with its method and a worked example, in the order the page introduces them.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj11: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again in logarithmic equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Swapping the base and the exponent**
+
+A logarithm is converted to exponential form, but the base and the value of the logarithm trade places, so the value is raised to the power of the base.
+
+Wrong working:
+$$\\log_2(x) = 5 \\implies x = 5^2 = 25$$
+
+Right working: $\\log_a(x) = k$ means $a^k = x$, so the base $2$ is raised to the power $5$.
+$$\\log_2(x) = 5 \\implies x = 2^5 = 32$$
+
+Why it happens: the equation holds two small numbers, and the conversion is remembered as "one number to the power of the other" without which one is the base.
+
+How to check: raise the base to the value of the logarithm and compare with the answer. $2^5 = 32$, not $25$; indeed $\\log_2(25) \\approx 4.64$, while $\\log_2(32) = 5$.
+
+**Rejecting the negative root**
+
+An equation such as $\\ln(x^2) = \\ln(9)$ produces a negative root, and it is thrown out on the belief that logarithmic equations never have negative solutions. The same loss happens when $\\ln(x^2)$ is rewritten as $2\\ln(x)$ before solving.
+
+Wrong working:
+$$\\ln(x^2) = \\ln(9) \\implies 2\\ln(x) = \\ln(9) \\implies \\ln(x) = \\ln(3) \\implies x = 3$$
+
+Right working: the one-to-one property gives $x^2 = 9$, so $x = 3$ or $x = -3$. The argument is $x^2$, which equals $9$ for both values, so both solutions stand.
+
+Why it happens: the rule "the argument must be positive" is remembered as "$x$ must be positive". The power rule $\\log_a(M^p) = p\\log_a(M)$ needs $M > 0$, so using it with $M = x$ quietly adds the condition $x > 0$.
+
+How to check: substitute the negative root into the original equation. $x = -3$ gives $\\ln((-3)^2) = \\ln(9)$, which is true.
+
+**Turning a sum of logarithms into the logarithm of a sum**
+
+Two logarithms with the same base are added, and the sum is condensed by adding the arguments instead of multiplying them.
+
+Wrong working:
+$$\\log_2(x) + \\log_2(x - 2) = 3 \\implies \\log_2(2x - 2) = 3 \\implies 2x - 2 = 8 \\implies x = 5$$
+
+Right working: the product rule gives $\\log_2(x(x - 2)) = 3$, so $x^2 - 2x = 8$ and $(x - 4)(x + 2) = 0$. Of $x = 4$ and $x = -2$, only $x = 4$ keeps both arguments positive.
+
+Why it happens: the plus sign between the logarithms looks as if it should carry over to the arguments. The product rule turns a product inside into a sum outside, not a sum into a sum.
+
+How to check: substitute the answer into the original equation. $x = 5$ gives $\\log_2(5) + \\log_2(3) = \\log_2(15) \\approx 3.907$, not $3$. $x = 4$ gives $\\log_2(4) + \\log_2(2) = 2 + 1 = 3$.
+
+**Checking roots in the condensed equation**
+
+The roots of the quadratic are tested, but in the condensed equation rather than in the original one, so an extraneous root passes the test.
+
+Wrong working: $\\log(x) + \\log(x - 3) = 1$ is condensed to $\\log(x(x - 3)) = 1$, with roots $x = 5$ and $x = -2$. In the condensed form $x = -2$ gives $\\log((-2)(-5)) = \\log(10) = 1$, so both roots are kept.
+
+Right working: in the original equation $x = -2$ gives $\\log(-2)$, which is undefined, so it is rejected. $x = 5$ gives $\\log(5) + \\log(2) = \\log(10) = 1$. The only solution is $x = 5$.
+
+Why it happens: the condensed equation is the last line written before the quadratic, so it is the one at hand. But it is defined on a larger set: the product $x(x - 3)$ is also positive when both factors are negative.
+
+How to check: write the domain from the original terms before solving. Here $x > 0$ and $x - 3 > 0$ give $x > 3$, and any root outside it is rejected at once.
+
+**Turning the quotient into a difference**
+
+The answer to an exponential equation is a quotient of two logarithms, and it is mistaken for the quotient rule, so the division is replaced by a subtraction.
+
+Wrong working:
+$$x = \\frac{\\log(7)}{\\log(3)} = \\log(7) - \\log(3) = \\log\\left(\\frac{7}{3}\\right) \\approx 0.368$$
+
+Right working: the two logarithms are separate numbers, divided as they stand.
+$$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$
+
+Why it happens: the quotient rule $\\log\\left(\\frac{M}{N}\\right) = \\log(M) - \\log(N)$ also has a fraction and a difference in it. There the fraction is inside one logarithm; here it is a fraction of two logarithms. The only rule that applies to it is the change of base formula, which turns it into $\\log_3(7)$, not into a difference.
+
+How to check: substitute the answer into the original equation. $3^{0.368} \\approx 1.50$, far from $7$, while $3^{1.771} \\approx 7.00$.`,
     before: ``,
     after: ``,
     link: '',
@@ -659,6 +775,7 @@ export default function EquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:Algebra solves the transformed equation; only the domain of the original equation decides which roots are answers.]@`,
         ]
     },
     {
@@ -713,6 +830,14 @@ export default function EquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj11.title,
+        link:sectionsContent.obj11.link,
+        content:[
+          sectionsContent.obj11.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

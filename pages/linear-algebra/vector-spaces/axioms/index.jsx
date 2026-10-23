@@ -1293,8 +1293,8 @@ const obj8Table = `
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">ℝ² with (u₁, u₂) ⊕ (v₁, v₂) = (u₁ + v₁, 0)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">distributivity over vector addition (axiom 8)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the second component is always destroyed; c(<b>u</b> + <b>v</b>) ≠ c<b>u</b> + c<b>v</b> in general</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">zero vector (axiom 4) and distributivity over scalar addition (axiom 9)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the second component is always destroyed, so no zero vector exists, and (c + d)<b>v</b> ≠ c<b>v</b> ⊕ d<b>v</b> whenever v₂ ≠ 0</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">A line in ℝ² that does not pass through the origin; usual operations</td>
@@ -1568,7 +1568,7 @@ const summaryTable = `
 const sectionsContent = {
   obj1: {
     title: `The Idea of Abstraction`,
-    content: `[Vectors](!/linear-algebra/vectors) in $\\mathbb{R}^n$ can be added entry by entry and scaled by real numbers. Polynomials can be added and scaled. [Matrices](!/linear-algebra/matrix) can be added and scaled. Continuous functions on an interval can be added and scaled. In each case, the same algebraic patterns appear: addition is commutative and associative, scaling distributes over sums, a zero element absorbs addition, and scaling by $1$ leaves every object unchanged.
+    content: `[Vectors](!/linear-algebra/vectors) in $\\mathbb{R}^n$ can be added entry by entry and scaled by real numbers. Polynomials can be added and scaled. [Matrices](!/linear-algebra/matrix) can be added and scaled. Continuous functions on an interval can be added and scaled. In each case, the same algebraic patterns appear: addition is commutative and associative, scaling distributes over sums, adding a zero element changes nothing, and scaling by $1$ leaves every object unchanged.
 
 A vector space is the formal extraction of these patterns. Rather than proving results separately for columns, polynomials, matrices, and functions, the axioms identify the common thread. Anything proved from the axioms alone — and that includes the entire theory of [linear independence](!/linear-algebra/vector-spaces/linear-independence), [span](!/linear-algebra/vector-spaces/span), [basis](!/linear-algebra/vector-spaces), and [dimension](!/linear-algebra/vector-spaces/dimension) — holds in every setting where the axioms are satisfied.`,
     before: ``,
@@ -1765,7 +1765,19 @@ The set of polynomials of degree exactly $n$ is not a vector space. Adding two p
 
 The set of positive real numbers with ordinary addition is not a vector space. There is no zero element: no positive real number $z$ satisfies $x + z = x$ for all positive $x$.
 
-The set $\\mathbb{R}^2$ can be equipped with non-standard operations that violate the axioms. Defining "addition" by $(u_1, u_2) \\oplus (v_1, v_2) = (u_1 + v_1, 0)$ fails to produce a vector space — the second component is always destroyed, and the distributive law $c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v}$ breaks.
+@academic[pitfall,aside:true,width:35%:Trying only positive scalars
+Testing scalar closure with $c = 2$ or $c = \\frac{1}{2}$ keeps $x = 3$ positive, so the test seems to pass. But $(-1) \\cdot 3 = -3$ and $0 \\cdot 3 = 0$ are not positive: the positive reals fail closure under scalar multiplication as well.
+[Read more](!#pitfalls)]@
+
+Scaling on this set is the ordinary product $cx$ of a scalar and a positive number. The scalars come from the field and the vectors from the set, and here the two are different: the field is all of $\\mathbb{R}$, while the set is only its positive part. Each scaling axiom pairs one element of the field with one element of the set.
+
+The set $\\mathbb{R}^2$ can be equipped with non-standard operations that violate the axioms. Defining "addition" by $(u_1, u_2) \\oplus (v_1, v_2) = (u_1 + v_1, 0)$ fails to produce a vector space — the second component is always destroyed, so there is no zero vector, and with ordinary scaling the distributive law $(c + d)\\mathbf{v} = c\\mathbf{v} \\oplus d\\mathbf{v}$ breaks whenever $v_2 \\neq 0$.
+
+@academic[pitfall,aside:true,width:35%:Using the subspace test on new operations
+Testing only the two closure axioms, as for a subspace, passes $\\oplus$: every $(u_1 + v_1, 0)$ and every $c\\mathbf{v}$ lies in $\\mathbb{R}^2$. Yet $(1, 2) \\oplus \\mathbf{z} = (1 + z_1, 0)$ never equals $(1, 2)$, so there is no zero vector and this is not a vector space.
+[Read more](!#pitfalls)]@
+
+The points here are those of the whole plane, which is a vector space under the usual operations. Replacing the addition creates a new candidate, and the question is no longer which points belong to the set but how the new operation behaves on them. The same set can be a vector space under one pair of operations and fail to be one under another.
 
 A line in $\\mathbb{R}^2$ that does not pass through the origin is not a [subspace](!/linear-algebra/vector-spaces/subspaces): it does not contain $\\mathbf{0}$, and adding two points on the line generally produces a point not on the line. These failures are useful — they confirm that the axioms distinguish genuine vector spaces from imposters.`,
     before: ``,
@@ -1800,6 +1812,12 @@ This follows from $\\mathbf{v} + (-1)\\mathbf{v} = 1\\mathbf{v} + (-1)\\mathbf{v
 
 If $c\\mathbf{v} = \\mathbf{0}$, then $c = 0$ or $\\mathbf{v} = \\mathbf{0}$. A nonzero scalar cannot annihilate a nonzero vector — there are no zero divisors in a vector space.
 
+@academic[pitfall,aside:true,width:35%:Dividing by a vector
+Dividing both sides of $c\\mathbf{v} = d\\mathbf{v}$ by $\\mathbf{v}$ to get $c = d$ uses an operation the axioms never define, and it fails for $\\mathbf{v} = \\mathbf{0}$: $2 \\cdot \\mathbf{0} = 5 \\cdot \\mathbf{0}$ although $2 \\neq 5$. The correct conclusion is $c = d$ or $\\mathbf{v} = \\mathbf{0}$.
+[Read more](!#pitfalls)]@
+
+This fact is what takes the place of cancellation in equations between vectors. An equation of the form $c\\mathbf{v} = d\\mathbf{v}$ is first collected on one side with the distributive axiom, giving $(c - d)\\mathbf{v} = \\mathbf{0}$, and the rule above then splits it into two cases.
+
 The zero vector is unique, and the additive inverse of each vector is unique. Both proofs are short exercises from the axioms. These facts ensure that the algebraic structure is well-defined and free of ambiguity.`,
     before: ``,
     after: ``,
@@ -1813,7 +1831,7 @@ Every theorem about [linear independence](!/linear-algebra/vector-spaces/linear-
 
 The axioms also make clear what is not a vector space. Attempting to apply basis theory, dimension counting, or rank arguments to a set that fails the axioms produces nonsense. Checking the axioms first is a prerequisite for using any of the tools of linear algebra.
 
-The ten axioms are not arbitrary — they are the minimal set of conditions that support the concepts of independence, span, and basis. Every axiom is used in at least one proof along the way from the definition of a vector space to the classification theorem that says two spaces are isomorphic if and only if they have the same dimension.`,
+The ten axioms are not arbitrary — they are a compact set of conditions that support the concepts of independence, span, and basis. Every axiom is used in at least one proof along the way from the definition of a vector space to the classification theorem that says two spaces are isomorphic if and only if they have the same dimension.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1821,6 +1839,49 @@ The ten axioms are not arbitrary — they are the minimal set of conditions that
   obj11: {
     title: `Summary: How the Axioms Instantiate`,
     content: `The ten axioms describe an abstract structure; the canonical examples make that structure concrete. The table below collects the four standard vector spaces side by side, naming what the role of "vector" is in each, the addition and scaling rules that satisfy the axioms, the specific element that serves as the zero vector, and the recipe for the additive inverse. Reading across each row instantiates the abstract axioms in a single specific space; reading down each column shows the same axiomatic ingredient taking different concrete forms.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up again and again when the axioms are checked by hand. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Trying only positive scalars**
+
+Closure under scalar multiplication is tested with a few convenient scalars, usually positive ones, and the set passes. The scalars of a real vector space are all real numbers, and the negative scalars and $0$ are where such a test most often fails.
+
+Wrong working: for the positive real numbers with ordinary operations, $2 \\cdot 3 = 6$ and $\\frac{1}{2} \\cdot 3 = \\frac{3}{2}$ are positive, so the set is declared closed under scaling.
+
+Right working: the axiom demands $cx > 0$ for every real $c$ and every $x > 0$. Taking $c = -1$ and $x = 3$ gives $(-1) \\cdot 3 = -3$, which is not positive. Scalar closure fails, in addition to the missing zero vector.
+
+Why it happens: in pictures and examples, scaling usually means stretching by a positive factor, and the scalars are thought of as sizes rather than as all the elements of the field.
+
+How to check: always try $c = -1$ and $c = 0$. Scaling by $-1$ must give the additive inverse and scaling by $0$ must give the zero vector, so both results have to lie in the set.
+
+**Using the subspace test on new operations**
+
+For a subset of a known vector space with the same operations, closure under addition and under scaling is enough, because the other eight axioms are inherited. With operations defined from scratch nothing is inherited, and checking only the two closures proves nothing.
+
+Wrong working: on $\\mathbb{R}^2$ with $(u_1, u_2) \\oplus (v_1, v_2) = (u_1 + v_1, 0)$ and ordinary scaling, the result $(u_1 + v_1, 0)$ is a point of $\\mathbb{R}^2$, and so is $c\\mathbf{v}$. Both closures hold, so the set is declared a vector space.
+
+Right working: test the other axioms too. A zero vector $\\mathbf{z}$ would need $(1, 2) \\oplus \\mathbf{z} = (1 + z_1, 0) = (1, 2)$, which is impossible because $0 \\neq 2$. The distributive law fails as well: with $c = 2$, $d = 3$ and $\\mathbf{v} = (1, 2)$, $(c + d)\\mathbf{v} = 5(1, 2) = (5, 10)$, while $c\\mathbf{v} \\oplus d\\mathbf{v} = (2, 4) \\oplus (3, 6) = (5, 0)$. The set is not a vector space.
+
+Why it happens: the subspace test is the version of the check that comes up most often, and its shortcut is carried over to settings where the eight inherited axioms were never established.
+
+How to check: ask whether the operations are the usual ones of a larger vector space. If they are not, all ten axioms have to be verified, and the zero vector is a good place to start.
+
+**Dividing by a vector**
+
+An equation such as $c\\mathbf{v} = d\\mathbf{v}$ is simplified by cancelling $\\mathbf{v}$ on both sides, as if $\\mathbf{v}$ were a nonzero number. A vector space has no division by vectors, and the cancellation loses a case.
+
+Wrong working: from $c\\mathbf{v} = d\\mathbf{v}$, divide both sides by $\\mathbf{v}$ and conclude $c = d$.
+
+Right working: add $-(d\\mathbf{v})$ to both sides and use distributivity over scalars: $(c - d)\\mathbf{v} = \\mathbf{0}$. Since a vector space has no zero divisors, $c - d = 0$ or $\\mathbf{v} = \\mathbf{0}$, so $c = d$ or $\\mathbf{v} = \\mathbf{0}$.
+
+Why it happens: with real numbers, $ca = da$ and $a \\neq 0$ give $c = d$ by dividing, and the same step looks natural with a bold letter in place of $a$.
+
+How to check: substitute $\\mathbf{v} = \\mathbf{0}$. Then $2 \\cdot \\mathbf{0} = \\mathbf{0} = 5 \\cdot \\mathbf{0}$, so the equation holds with $c = 2$ and $d = 5$, and any argument that concluded $c = d$ has missed this case.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2083,6 +2144,14 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

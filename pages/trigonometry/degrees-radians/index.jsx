@@ -1307,6 +1307,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import trigoAngleTypesDiagrams from '@/app/components/trigonometry/angle/types/trigoAngleTypesDiagrams'
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 import renderCircleArc from '@/app/utils/illustrations/trigonometry/circle/circleArc'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1949,6 +1951,12 @@ const sectionsContent={
 
 For precision beyond whole degrees, two conventions exist. The older system uses minutes and seconds of arc: $1° = 60'$ (sixty minutes) and $1' = 60''$ (sixty seconds). A measurement like $41°24'36''$ is common in navigation, cartography, and astronomy. The modern alternative is decimal degrees — for example, $41.41°$ — which is simpler for computation. Converting between the two is arithmetic: divide the minutes by 60 and the seconds by 3600, then add.
 
+@academic[pitfall,aside:true,width:35%:Reading minutes as decimal digits
+Writing $41°24'36''$ as $41.2436°$ treats the minutes and seconds as decimal places. The correct value is $41 + \\frac{24}{60} + \\frac{36}{3600} = 41.41°$.
+[Read more](!#pitfalls)]@
+
+A DMS reading counts the way a clock does: sixty seconds make a minute and sixty minutes make a degree. A decimal reading counts in tens, so the two forms of the same angle usually share only their whole-degree part. Before a DMS value enters a calculation, each of its three parts is turned into degrees on its own, and only then are the parts combined.
+
 Degrees are intuitive and widely understood outside of mathematics. Compass bearings, latitude and longitude, architectural plans, and most geometric software use degrees as the default. Within trigonometry, degrees remain useful for visualizing angles and for problems stated in everyday terms. Their limitation appears when formulas demand a unit tied to the geometry of the circle — which is precisely what radians provide.`,
     before: ``,
     after: ``,
@@ -2025,6 +2033,12 @@ To convert radians to degrees, multiply by $\\frac{180}{\\pi}$:
 @academic[formula_callout:Converting Between Degrees and Radians
 $$\\theta_{\\text{deg}} = \\theta_{\\text{rad}} \\times \\frac{180}{\\pi}$$]@
 
+@academic[pitfall,aside:true,width:35%:Using the factor upside down
+Converting $60°$ with $\\frac{180}{\\pi}$ gives $\\frac{10800}{\\pi} \\approx 3437.7$, far more than a full turn of $2\\pi \\approx 6.28$. The right factor is $\\frac{\\pi}{180}$: $60° = \\frac{\\pi}{3} \\approx 1.047$.
+[Read more](!#pitfalls)]@
+
+The two factors are reciprocals of each other, and each is the identity $180° = \\pi$ rearranged into a fraction worth exactly $1$. Multiplying by such a fraction changes the unit without changing the angle. The unit being removed sits in the denominator, so it cancels, and the unit being introduced sits in the numerator.
+
 The standard angles that appear throughout trigonometry should be known in both units without computation:
 
 - $30° = \\frac{\\pi}{6}$
@@ -2068,6 +2082,10 @@ $$s = \\frac{\\theta}{360} \\times 2\\pi r = \\frac{\\pi r \\theta}{180}$$]@
 
 The additional factors are the price of using a unit not inherently tied to the circle. This is one of the clearest practical demonstrations of why radians simplify computation.
 
+@academic[pitfall,aside:true,width:35%:Putting degrees into the arc formula
+With $r = 5$ and $\\theta = 60°$, writing $s = 5 \\times 60 = 300$ gives an arc longer than the whole circumference $10\\pi \\approx 31.4$. In radians $\\theta = \\frac{\\pi}{3}$, so $s = \\frac{5\\pi}{3} \\approx 5.24$.
+[Read more](!#pitfalls)]@
+
 Arc length problems typically involve three quantities — $s$, $r$, and $\\theta$ — and any one of them can be found given the other two. A common variation asks for the angle subtended by a known arc on a known circle: $\\theta = \\frac{s}{r}$. Another asks for the radius of a circle given an arc length and central angle: $r = \\frac{s}{\\theta}$. In each case, the formula remains $s = r\\theta$ with $\\theta$ in radians.`,
     before: ``,
     after: ``,
@@ -2094,6 +2112,10 @@ If the angle is given in degrees:
 @academic[formula_callout:Sector Area
 $$A = \\frac{\\theta}{360} \\times \\pi r^2$$]@
 
+@academic[pitfall,aside:true,width:35%:Using the circumference for the area
+For a $60°$ sector of radius $6$, writing $\\frac{60}{360} \\times 2\\pi \\cdot 6 = 2\\pi$ gives the arc length, not the area. The area uses $\\pi r^2$: $\\frac{60}{360} \\times 36\\pi = 6\\pi$.
+[Read more](!#pitfalls)]@
+
 As with arc length, the radian version is simpler and is the standard in mathematical work. Problems involving sector area follow the same pattern as arc length: three quantities ($A$, $r$, $\\theta$), any one computable from the other two. A typical application is finding the area swept by a rotating object — a windshield wiper, a radar beam, a door opening through a measured angle.
 
 The relationship between arc length and sector area is worth noting: $A = \\frac{1}{2}rs$, obtained by substituting $s = r\\theta$ into the sector area formula. This parallels the triangle area formula $A = \\frac{1}{2} \\times \\text{base} \\times \\text{height}$, with the arc length playing the role of the base and the radius playing the role of the height. For very small angles, the sector closely approximates a triangle, and this analogy becomes nearly exact.`,
@@ -2105,7 +2127,7 @@ The relationship between arc length and sector area is worth noting: $A = \\frac
     title: `Standard Position of an Angle`,
     content: `In trigonometry, angles are placed on the coordinate plane in a standardized way. An angle is in standard position when its vertex is at the origin and its initial side lies along the positive $x$-axis. The terminal side is the ray that results from rotating the initial side through the given angle. This convention fixes a reference frame for all trigonometric evaluation: every angle, regardless of its measure, has a definite position on the plane and a definite intersection with the [unit circle](!/trigonometry/unit-circle).
 
-The direction of rotation determines the sign of the angle. Counterclockwise rotation produces a positive angle; clockwise rotation produces a negative angle. The angle $90°$ is a quarter turn counterclockwise, while $-90°$ is a quarter turn clockwise. Both terminate at the same position on the coordinate plane — along the negative or positive $y$-axis respectively — but they are different angles with different trigonometric interpretations: $\\sin(90°) = 1$ while $\\sin(-90°) = -1$.
+The direction of rotation determines the sign of the angle. Counterclockwise rotation produces a positive angle; clockwise rotation produces a negative angle. The angle $90°$ is a quarter turn counterclockwise, while $-90°$ is a quarter turn clockwise. They terminate at different positions on the coordinate plane — along the positive and negative $y$-axis respectively — and they are different angles with different trigonometric interpretations: $\\sin(90°) = 1$ while $\\sin(-90°) = -1$.
 
 There is no restriction on the size of an angle. A rotation of $450°$ passes through a full rotation ($360°$) and continues another $90°$, terminating at the same position as $90°$. A rotation of $-270°$ goes $270°$ clockwise, also terminating at the $90°$ position. These are coterminal angles — different rotations that share the same terminal side.`,
     before: ``,
@@ -2160,7 +2182,78 @@ $$\\tan(\\pi - \\theta) = -\\tan\\theta$$
 
 These facts play a direct role in solving [trigonometric equations](!/trigonometry/equations) and in analyzing the ambiguous case of the [Law of Sines](!/trigonometry/sines-cosines-law).
 
+@academic[pitfall,aside:true,width:35%:Swapping complement and supplement
+Taking the complement of $35°$ as $180° - 35° = 145°$ subtracts from a straight angle. The complement is $90° - 35° = 55°$; $145°$ is the supplement.
+[Read more](!#pitfalls)]@
+
 For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°$), while $40°$ and $140°$ are supplementary ($40° + 140° = 180°$). The complement of $\\frac{\\pi}{6}$ is $\\frac{\\pi}{2} - \\frac{\\pi}{6} = \\frac{\\pi}{3}$. The supplement of $\\frac{\\pi}{6}$ is $\\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6}$. Recognizing these pairs accelerates computation across the subject.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj16: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again when angles are measured, converted and used in circle formulas. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading minutes as decimal digits**
+
+A degrees-minutes-seconds angle is turned into decimal degrees by writing the minutes and seconds after the decimal point, as if a degree were split into tenths and hundredths instead of sixtieths.
+
+Wrong working: $41°24'36''$ is written as $41.2436°$.
+
+Right working: $24' = \\frac{24}{60}° = 0.4°$ and $36'' = \\frac{36}{3600}° = 0.01°$, so $41°24'36'' = 41 + 0.4 + 0.01 = 41.41°$.
+
+Why it happens: the marks between the numbers look like separators in an ordinary decimal number, and base 60 is met almost only in clock time, where the same slip ($1$ hour $30$ minutes is not $1.30$ hours) is just as common.
+
+How to check: convert the decimal part back. $0.41° \\times 60 = 24.6'$, and $0.6' \\times 60 = 36''$, which returns $41°24'36''$. Starting from $41.2436°$ instead gives $0.2436 \\times 60 \\approx 14.6'$, not $24'$.
+
+**Using the factor upside down**
+
+Degrees are converted to radians by multiplying by $\\frac{180}{\\pi}$, the factor meant for the opposite direction.
+
+Wrong working: $60° \\times \\frac{180}{\\pi} = \\frac{10800}{\\pi} \\approx 3437.7$.
+
+Right working: $60° \\times \\frac{\\pi}{180} = \\frac{60\\pi}{180} = \\frac{\\pi}{3} \\approx 1.047$.
+
+Why it happens: both factors are built from the same two numbers, $180$ and $\\pi$, and which one goes on top is remembered rather than worked out.
+
+How to check: one radian is about $57.3°$, so the radian measure of an angle is always a much smaller number than its degree measure. Treating the factor as a unit ratio also settles it: in $60° \\times \\frac{\\pi \\text{ rad}}{180°}$ the degrees cancel and radians remain.
+
+**Putting degrees into the arc formula**
+
+The formula $s = r\\theta$ is used with the angle still in degrees. The formula holds only for $\\theta$ in radians.
+
+Wrong working: for $r = 5$ and $\\theta = 60°$, $s = 5 \\times 60 = 300$.
+
+Right working: first $\\theta = 60 \\times \\frac{\\pi}{180} = \\frac{\\pi}{3}$, then $s = 5 \\times \\frac{\\pi}{3} = \\frac{5\\pi}{3} \\approx 5.24$. The degree form gives the same: $s = \\frac{\\pi \\cdot 5 \\cdot 60}{180} = \\frac{5\\pi}{3}$.
+
+Why it happens: $s = r\\theta$ shows no unit, and problems usually state the angle in degrees, so the given number is substituted as it stands.
+
+How to check: compare with the whole circumference, $2\\pi r = 10\\pi \\approx 31.4$. A $60°$ arc is one sixth of the circle, about $5.24$; an arc longer than the circumference is impossible for an angle under one full turn.
+
+**Using the circumference for the area**
+
+In the degree formula for a sector, the fraction $\\frac{\\theta}{360}$ is multiplied by the circumference $2\\pi r$ instead of the area $\\pi r^2$.
+
+Wrong working: for a $60°$ sector of radius $6$, $A = \\frac{60}{360} \\times 2\\pi \\cdot 6 = 2\\pi \\approx 6.28$.
+
+Right working: $A = \\frac{60}{360} \\times \\pi \\cdot 6^2 = \\frac{36\\pi}{6} = 6\\pi \\approx 18.85$. The radian formula agrees: $\\frac{1}{2} \\cdot 6^2 \\cdot \\frac{\\pi}{3} = 6\\pi$.
+
+Why it happens: the arc and sector formulas in degrees share the same fraction $\\frac{\\theta}{360}$ and differ only in what follows it, and both $2\\pi r$ and $\\pi r^2$ are remembered as "the circle formula".
+
+How to check: an area must come out in square units, so $r$ has to appear squared. Here $2\\pi$ is exactly the arc length of the same sector, a sign that the length formula was used.
+
+**Swapping complement and supplement**
+
+The two words are mixed up, so a complement is found by subtracting from $180°$, or a supplement by subtracting from $90°$.
+
+Wrong working: the complement of $35°$ is given as $180° - 35° = 145°$.
+
+Right working: the complement of $35°$ is $90° - 35° = 55°$. The supplement is $180° - 35° = 145°$.
+
+Why it happens: both words name the angle that completes a given one, and neither word says which total it completes.
+
+How to check: the complement of an angle between $0°$ and $90°$ is again between $0°$ and $90°$. An obtuse answer to a complement question means the straight-angle total was used.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2324,8 +2417,23 @@ The distinction matters far beyond notation. [Arc length](!/trigonometry/degrees
 
 
 
+  const anglePairTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Two angle pairs',
+    preface: 'Two angles that add up to a right angle or to a straight angle carry special relationships between their trigonometric values.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Where the identities come from',
+    conclusion: 'Complementary pairs give the cofunction identities; supplementary pairs give $\\sin(\\pi - \\theta) = \\sin\\theta$ with cosine and tangent changing sign.',
+    root: { name: 'Angle pairs', sub: '2 relations' },
+    children: [
+      { id: 'comp', name: 'Complementary', symbol: 'sum $90°$ ($\\pi/2$)', items: [ { label: 'Example', text: '$40°$ and $50°$' }, { label: 'Where', text: 'the acute angles of a [right triangle](!/trigonometry/right-triangle)' }, { label: 'Gives', text: 'the cofunction identities' } ] },
+      { id: 'supp', name: 'Supplementary', symbol: 'sum $180°$ ($\\pi$)', items: [ { label: 'Example', text: '$40°$ and $140°$' }, { label: 'Gives', text: '$\\sin(\\pi - \\theta) = \\sin\\theta$' }, { label: 'Sign change', text: 'cosine and tangent' } ] },
+    ],
+  };
+
    return {
       props:{
+    anglePairTree,
          sectionsContent,
          introContent,
          obj3Table,
@@ -2346,7 +2454,7 @@ The distinction matters far beyond notation. [Arc length](!/trigonometry/degrees
     }
    }
 
-export default function DegreesRadiansPage({seoData,sectionsContent , introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function DegreesRadiansPage({anglePairTree, seoData,sectionsContent , introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2467,6 +2575,22 @@ export default function DegreesRadiansPage({seoData,sectionsContent , introConte
           />,
                   <div key={'unit-compSupp'} dangerouslySetInnerHTML={{ __html: demoUnits.compSupp }} />,
           `The cofunction identities below are these two relationships written in the language of the trigonometric functions.`,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="angle-pairs-tree"
+            title="Complementary and supplementary angles"
+            source="/trigonometry/degrees-radians"
+          >
+            <TopDownTree data={anglePairTree} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
 

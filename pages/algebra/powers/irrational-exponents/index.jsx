@@ -14,6 +14,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import Hierarchy from '@/app/components/infographics/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 
 
 export async function getStaticProps(){
@@ -225,6 +226,10 @@ obj4: {
 
 The reason is that negative bases produce erratic behavior under dense rational exponents. Consider $(-1)^x$ at rationals near $\\frac{1}{2}$. The value $(-1)^{1/3} = -1$, but $(-1)^{1/2}$ is undefined in the reals. Nearby rational exponents alternate between real and undefined, making it impossible to define a smooth limiting value.
 
+@academic[pitfall,aside:true,width:35%:Using a negative base
+Reading $-2^{\\pi} \\approx -8.825$ off a calculator as the value of $(-2)^{\\pi}$ puts the minus sign outside the power. $(-2)^{\\pi}$ has no real value: an irrational power needs a base $a > 0$.
+[Read more](!#pitfalls)]@
+
 For $a > 0$, no such problem arises. The function $a^x$ is positive for all rational $x$, changes smoothly, and extends without ambiguity to every irrational $x$. The restriction $a > 0$ is the price of completeness — it is what allows $a^x$ to be defined for the entire real number line.
 
 Zero is excluded as well. The expression $0^x$ equals $0$ for positive $x$ and is undefined for negative $x$ (since $0^{-n} = \\frac{1}{0^n}$), so no continuous extension to all real exponents is possible.`,
@@ -243,7 +248,13 @@ The same continuity argument extends every other law — quotient rule, power of
 
 @academic[rule_theorem_plain:If a rule works for every rational exponent, and irrational exponents are defined as limits of rational ones, then the rule works for irrational exponents as well.]@
 
-No separate derivation is needed. Three rounds of verification — natural, negative, rational — established the laws for all rational exponents. The continuous extension to irrationals carries those laws across the finish line automatically.`,
+@academic[pitfall,aside:true,width:35%:Multiplying the exponents
+Multiplying the exponents in $2^{\\pi} \\cdot 2^{1-\\pi}$ gives $2^{\\pi(1-\\pi)} = 2^{\\pi - \\pi^2} \\approx 0.0094$. The product rule adds them: $2^{\\pi + (1-\\pi)} = 2^1 = 2$.
+[Read more](!#pitfalls)]@
+
+No separate derivation is needed. Three rounds of verification — natural, negative, rational — established the laws for all rational exponents. The continuous extension to irrationals carries those laws across the finish line automatically.
+
+In practice, an expression with irrational exponents is simplified with the same moves as one with whole-number exponents. Powers of the same base are combined through their exponents, and a power raised to a power is collapsed into a single exponent. Only the exponents look unfamiliar; the bookkeeping is unchanged.`,
   before: ``,
   after: ``,
   link: '',
@@ -346,8 +357,43 @@ This is the foundation on which [exponential functions](!/algebra/powers/exponen
       after:``,
       link:'',
   
-    }
-  
+    },
+
+obj16: {
+  title: `Common Pitfalls`,
+  content: `Two mistakes account for most wrong answers with irrational exponents. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Using a negative base**
+
+A negative base is given an irrational exponent and a value is produced anyway. Most often the value comes from a calculator: typed as $-2^{\\pi}$, the expression is read as $-(2^{\\pi})$, and that result is taken as the value of $(-2)^{\\pi}$.
+
+Wrong working:
+$$(-2)^{\\pi} = -(2^{\\pi}) \\approx -8.825$$
+
+Right working: $(-2)^{\\pi}$ would have to be the limit of $(-2)^r$ for rationals $r$ close to $\\pi$, and those values do not settle. For $r = \\frac{22}{7}$ the denominator is odd and the numerator even, so $(-2)^{22/7} = 2^{22/7} \\approx 8.833$. For $r = \\frac{311}{99}$ both are odd, so $(-2)^{311/99} = -2^{311/99} \\approx -8.824$. For $r = 3.14 = \\frac{157}{50}$ the denominator is even, and $(-2)^{157/50}$ is not a real number. No single value is approached, so $(-2)^{\\pi}$ is not defined in the reals. Only $a > 0$ gives an irrational power a value.
+
+Why it happens: negative bases work with whole-number exponents, so nothing seems to forbid them here. On a calculator, the power is applied before the minus sign, so $-2^{\\pi}$ quietly becomes $-(2^{\\pi})$.
+
+How to check: look at the base before anything else; if it is negative and the exponent is irrational, there is no real value. A calculator given the parentheses, $(-2)^{\\pi}$, reports an error or a non-real result rather than $-8.825$.
+
+**Multiplying the exponents**
+
+Two powers of the same base are multiplied, and their exponents are multiplied too, as in the power-of-a-power rule.
+
+Wrong working:
+$$2^{\\pi} \\cdot 2^{1-\\pi} = 2^{\\pi(1-\\pi)} = 2^{\\pi - \\pi^2} \\approx 2^{-6.728} \\approx 0.0094$$
+
+Right working: the product rule adds the exponents.
+$$2^{\\pi} \\cdot 2^{1-\\pi} = 2^{\\pi + (1-\\pi)} = 2^1 = 2$$
+
+Why it happens: the product rule $a^m \\cdot a^n = a^{m+n}$ and the power rule $(a^m)^n = a^{mn}$ look alike. With unfamiliar exponents such as $\\pi$, it is easy to match the pattern by its look rather than by what it means.
+
+How to check: estimate each factor. $2^{\\pi} \\approx 8.825$ and $2^{1-\\pi} \\approx 0.227$, and their product is about $2$, not about $0.01$.`,
+  before: ``,
+  after: ``,
+  link: '',
+},
+
   }
 
 
@@ -489,8 +535,24 @@ const schemas = {
     ],
   };
 
+  const exponentNest = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four stages, each extending the last',
+    preface: 'The definition of $a^x$ was built in four stages. Each stage keeps every exponent the previous one allowed and fills in more of the number line, while preserving the same rules.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The whole real line',
+    conclusion: 'For any base $a > 0$ and any real exponent $x$, $a^x$ is defined, positive, and obeys every law of exponents. This is the foundation of [exponential functions](!/algebra/powers/exponential-functions).',
+    levels: [
+      { id: 'nat', symbol: 'ℤ⁺', name: '[Natural exponents](!/algebra/powers/natural-exponents)', note: 'repeated multiplication', example: '2⁴ = 16' },
+      { id: 'int', symbol: 'ℤ', name: '[Negative exponents](!/algebra/powers/negative-exponents)', adds: 'zero and the negative integers', note: '$a^0 = 1$, $a^{-n} = 1/a^n$', example: '2⁻³ = 1/8' },
+      { id: 'rat', symbol: 'ℚ', name: '[Rational exponents](!/algebra/powers/rational-exponents)', adds: 'every fraction', note: '$a^{m/n} = \\sqrt[n]{a^m}$', example: '8^(2/3) = 4' },
+      { id: 'real', symbol: 'ℝ', name: 'Irrational exponents', adds: 'the remaining points', note: 'continuous extension', example: '2^π ≈ 8.825' },
+    ],
+  };
+
 return {
   props: {
+    exponentNest,
     baseRestrictionLevels,
     sectionsContent,
     introContent,
@@ -515,7 +577,7 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function IrrationalExponentsPage({baseRestrictionLevels, seoData, sectionsContent, introContent, obj2Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function IrrationalExponentsPage({exponentNest, baseRestrictionLevels, seoData, sectionsContent, introContent, obj2Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -598,6 +660,22 @@ export default function IrrationalExponentsPage({baseRestrictionLevels, seoData,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="exponent-domain-nesting"
+            title="How the allowed exponents nest"
+            source="/algebra/powers/irrational-exponents"
+          >
+            <NestedContainment data={exponentNest} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

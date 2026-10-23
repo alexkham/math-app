@@ -1290,6 +1290,8 @@ import quadrantSignsDiagrams from '@/app/components/trigonometry/quadrantSignsDi
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 import renderCircleArcV2 from '@/app/utils/illustrations/trigonometry/circle/circleArc.v2'
+import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1881,6 +1883,28 @@ const faqQuestions = {
 //   }
 
 
+// Concept introduction (section 1) — template E, widening. Running instance:
+// 30° against 150°. Old obj1 text is kept in sectionsContent.obj1, unused; its
+// formula box, three passages and the radiusOne demo frame with its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciWallTable = ciTableOpen(['angle', 'inside a right triangle?', 'sine by opposite ÷ hypotenuse']) +
+  ciRow(['30°', 'yes', '1/2']) +
+  ciRow(['90°', 'only as the right angle itself', 'no triangle to read'], { shade: true }) +
+  ciRow(['150°', 'no: larger than 90°', '?'], { color: '#a4243b', cols: [1, 2] }) +
+  ciRow(['210°', 'no', '?'], { shade: true, last: true, color: '#a4243b', cols: [1, 2] }) +
+  '</tbody></table>'
+const ciAgreeTable = ciTableOpen(['angle', 'point on the unit circle', 'cos (x)', 'sin (y)']) +
+  ciRow(['30°', '(√3/2, 1/2)', '0.866', '0.5']) +
+  ciRow(['150°', '(−√3/2, 1/2)', '−0.866', '0.5'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
  obj0: {
@@ -1957,6 +1981,10 @@ $$\\sec\\theta = \\frac{1}{\\cos\\theta} = \\frac{1}{x} \\quad (x \\neq 0)$$]@
 
 @academic[formula_callout:Coordinates as Trigonometric Values
 $$\\csc\\theta = \\frac{1}{\\sin\\theta} = \\frac{1}{y} \\quad (y \\neq 0)$$]@
+
+@academic[pitfall,aside:true,width:35%:Swapping sine and cosine
+Reading the $30°$ point $\\left(\\frac{\\sqrt{3}}{2}, \\frac{1}{2}\\right)$ as $(\\sin\\theta, \\cos\\theta)$ gives $\\sin 30° = \\frac{\\sqrt{3}}{2}$. The first coordinate is the cosine, so $\\cos 30° = \\frac{\\sqrt{3}}{2}$ and $\\sin 30° = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
 
 For acute angles in the first quadrant, this definition agrees perfectly with the right triangle ratios. Dropping a perpendicular from the point $P = (\\cos\\theta, \\sin\\theta)$ to the $x$-axis creates a right triangle with hypotenuse 1 (the radius), horizontal leg $\\cos\\theta$, and vertical leg $\\sin\\theta$. The ratios opposite/hypotenuse and adjacent/hypotenuse reproduce $\\sin\\theta$ and $\\cos\\theta$ exactly. The unit circle definition is a generalization that preserves everything from the triangle definition while removing the constraint that $\\theta$ be acute.`,
     before: ``,
@@ -2056,6 +2084,10 @@ The key property: the trigonometric function values at any angle $\\theta$ equal
 @academic[formula_callout:Reference Angles
 $$|\\sin\\theta| = \\sin(\\text{reference angle}), \\quad |\\cos\\theta| = \\cos(\\text{reference angle})$$]@
 
+@academic[pitfall,aside:true,width:35%:Measuring the reference angle to the y-axis
+Taking the reference angle of $120°$ as $120° - 90° = 30°$ measures to the $y$-axis and gives $\\sin 120° = \\frac{1}{2}$. Measured to the $x$-axis it is $180° - 120° = 60°$, so $\\sin 120° = \\frac{\\sqrt{3}}{2}$.
+[Read more](!#pitfalls)]@
+
 This reduces every trigonometric evaluation to two steps: (1) find the reference angle and evaluate the function there (using the known values from the [special right triangles](!/trigonometry/right-triangle)), and (2) attach the correct sign based on the quadrant.
 
 For example, to evaluate $\\sin(225°)$: the angle is in Quadrant III, so the reference angle is $225° - 180° = 45°$. The sine of $45°$ is $\\frac{\\sqrt{2}}{2}$. Sine is negative in Quadrant III, so $\\sin(225°) = -\\frac{\\sqrt{2}}{2}$.
@@ -2071,7 +2103,7 @@ The four reference-angle formulas — one per quadrant, in both degree and radia
   },
   obj6: {
     title: `Exact Values for the Standard Angles`,
-    content: `The sixteen standard angles — every multiple of $30°$ and $45°$ from $0°$ to $360°$ — each have exact trigonometric values expressible using only integers, fractions, and square roots. These values are not approximations; they are the precise coordinates of the corresponding points on the unit circle.
+    content: `The sixteen standard angles — every multiple of $30°$ and $45°$ from $0°$ to $330°$ — each have exact trigonometric values expressible using only integers, fractions, and square roots. These values are not approximations; they are the precise coordinates of the corresponding points on the unit circle.
 
 The first-quadrant values come directly from the [special right triangles](!/trigonometry/right-triangle):
 
@@ -2082,6 +2114,10 @@ The first-quadrant values come directly from the [special right triangles](!/tri
 - $(\\cos 90°, \\sin 90°) = (0, 1)$
 
 Every other standard angle shares one of these reference angles — $30°$, $45°$, or $60°$ — and its coordinates are obtained by adjusting signs according to the quadrant. For instance, $150°$ has reference angle $30°$ and lies in Quadrant II, so $\\cos(150°) = -\\frac{\\sqrt{3}}{2}$ and $\\sin(150°) = \\frac{1}{2}$. The angle $315°$ has reference angle $45°$ and lies in Quadrant IV, so $\\cos(315°) = \\frac{\\sqrt{2}}{2}$ and $\\sin(315°) = -\\frac{\\sqrt{2}}{2}$.
+
+@academic[pitfall,aside:true,width:35%:Dropping the quadrant sign
+Copying the first-quadrant value unchanged gives $\\cos 240° = \\cos 60° = \\frac{1}{2}$. The $240°$ point is in Quadrant III, where $x$ is negative, so $\\cos 240° = -\\frac{1}{2}$.
+[Read more](!#pitfalls)]@
 
 A useful observation: only five magnitudes ever appear as coordinates on the unit circle at standard angles: $0$, $\\frac{1}{2}$, $\\frac{\\sqrt{2}}{2}$, $\\frac{\\sqrt{3}}{2}$, and $1$. The entire unit circle diagram, with all sixteen labeled points, is built from just these five values with appropriate sign changes. Recognizing this pattern — rather than memorizing sixteen separate pairs — is the efficient path to fluency.
 
@@ -2107,6 +2143,10 @@ The identity has two standard rearrangements:
 
 @academic[formula_callout:The Pythagorean Identity
 $$\\sin^2\\theta = 1 - \\cos^2\\theta \\qquad \\text{and} \\qquad \\cos^2\\theta = 1 - \\sin^2\\theta$$]@
+
+@academic[pitfall,aside:true,width:35%:Taking only the positive root
+Writing $\\sin\\theta = \\sqrt{1 - \\cos^2\\theta}$ for a Quadrant IV angle with $\\cos\\theta = \\frac{3}{5}$ gives $\\sin\\theta = \\frac{4}{5}$. In Quadrant IV the $y$-coordinate is negative, so $\\sin\\theta = -\\frac{4}{5}$.
+[Read more](!#pitfalls)]@
 
 These substitutions appear constantly in simplification and equation solving. If an expression contains $\\sin^2\\theta$ and it would be simpler in terms of $\\cos\\theta$, replace $\\sin^2\\theta$ with $1 - \\cos^2\\theta$. The reverse substitution is equally common.
 
@@ -2140,6 +2180,10 @@ These are the three Pythagorean [identities](!/trigonometry/identities) — all 
 This is the geometric meaning of coterminal angles: different amounts of rotation that end at the same point on the circle.
 
 @academic[rule_plain:Since the trigonometric values depend only on the terminal point — not on how many times the terminal side wound around to get there — coterminal angles always produce identical function values.]@
+
+@academic[pitfall,aside:true,width:35%:Turning a negative angle counterclockwise
+Turning $150°$ counterclockwise for $-150°$ lands on the $150°$ point and gives $\\sin(-150°) = \\frac{1}{2}$. The clockwise turn ends where $210°$ does, so $\\sin(-150°) = -\\frac{1}{2}$.
+[Read more](!#pitfalls)]@
 
 The angle $\\theta$, the angle $\\theta + 360°$, the angle $\\theta - 360°$, and the angle $\\theta + 720°$ all yield the same sine, the same cosine, and the same everything else.
 
@@ -2217,6 +2261,73 @@ This perspective also explains why the [graphs](!/trigonometry/graphs) of sine a
       link:'',
 
     },
+    obj16: {
+      title: `Common Pitfalls`,
+      content: `Five mistakes come up again and again when values are read off the unit circle. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Swapping sine and cosine**
+
+The point where the terminal side meets the circle is read as $(\\sin\\theta, \\cos\\theta)$, so the first coordinate is taken as the sine. Every value then comes out as the value of the other function.
+
+Wrong working: at $30°$ the point is $\\left(\\frac{\\sqrt{3}}{2}, \\frac{1}{2}\\right)$. Reading the first coordinate as the sine gives $\\sin 30° = \\frac{\\sqrt{3}}{2}$ and $\\cos 30° = \\frac{1}{2}$.
+
+Right working: the point is $(\\cos\\theta, \\sin\\theta)$, so $\\cos 30° = \\frac{\\sqrt{3}}{2}$ and $\\sin 30° = \\frac{1}{2}$.
+
+Why it happens: sine is usually named first, in SOH CAH TOA and in lists of the functions, so it is put first in the pair as well.
+
+How to check: sine is the height of the point. The $30°$ point lies low on the circle, close to the $x$-axis, so its height must be the smaller of the two values, $\\frac{1}{2}$.
+
+**Measuring the reference angle to the y-axis**
+
+The reference angle is taken between the terminal side and the nearest part of the $y$-axis instead of the $x$-axis. The angle found is the complement of the true reference angle, so sine and cosine trade values.
+
+Wrong working: the terminal side of $120°$ is $30°$ past the positive $y$-axis, so the reference angle is taken as $30°$ and $\\sin 120° = \\sin 30° = \\frac{1}{2}$.
+
+Right working: $120°$ is in Quadrant II, so the reference angle is $180° - 120° = 60°$. Sine is positive in Quadrant II, so $\\sin 120° = \\sin 60° = \\frac{\\sqrt{3}}{2}$.
+
+Why it happens: the terminal side of $120°$ is closer to the $y$-axis than to the $x$-axis, and the nearest axis looks like the natural one to measure from.
+
+How to check: the $120°$ point is $\\left(-\\frac{1}{2}, \\frac{\\sqrt{3}}{2}\\right)$, high on the circle. A point that high has a large sine, and $\\frac{1}{2}$ is too small for it.
+
+**Dropping the quadrant sign**
+
+The value at the reference angle is given as the answer, and the sign that the quadrant supplies is never attached. Every answer comes out positive, even in quadrants where the function is negative.
+
+Wrong working: $240°$ has reference angle $240° - 180° = 60°$, and $\\cos 60° = \\frac{1}{2}$, so $\\cos 240° = \\frac{1}{2}$.
+
+Right working: $240°$ lies in Quadrant III, where both coordinates are negative. So $\\cos 240° = -\\frac{1}{2}$, and likewise $\\sin 240° = -\\frac{\\sqrt{3}}{2}$.
+
+Why it happens: the reference-angle step produces a finished-looking number, and the second step, attaching the sign, is easy to skip once that number is found.
+
+How to check: picture the point. At $240°$ it sits left of the $y$-axis and below the $x$-axis, so both of its coordinates must be negative; the summary table lists $\\left(-\\frac{1}{2}, -\\frac{\\sqrt{3}}{2}\\right)$.
+
+**Taking only the positive root**
+
+The rearranged identity $\\sin^2\\theta = 1 - \\cos^2\\theta$ is solved for $\\sin\\theta$ by taking the positive square root only. The identity fixes the size of $\\sin\\theta$ but not its sign.
+
+Wrong working: $\\cos\\theta = \\frac{3}{5}$ with $\\theta$ in Quadrant IV. Then $\\sin^2\\theta = 1 - \\frac{9}{25} = \\frac{16}{25}$, so $\\sin\\theta = \\frac{4}{5}$.
+
+Right working: $\\sin\\theta = \\pm\\frac{4}{5}$, and the quadrant chooses the sign. In Quadrant IV the $y$-coordinate is negative, so $\\sin\\theta = -\\frac{4}{5}$.
+
+Why it happens: the square root symbol always means the non-negative root, and the step from $\\sin^2\\theta$ to $\\sin\\theta$ is written as if it were that symbol.
+
+How to check: the points $\\left(\\frac{3}{5}, \\frac{4}{5}\\right)$ and $\\left(\\frac{3}{5}, -\\frac{4}{5}\\right)$ both lie on the unit circle, since $\\frac{9}{25} + \\frac{16}{25} = 1$. Only the second is in Quadrant IV, below the $x$-axis.
+
+**Turning a negative angle counterclockwise**
+
+The minus sign of a negative angle is ignored, and the angle is drawn as the counterclockwise rotation of the same size. The terminal side lands in the wrong quadrant.
+
+Wrong working: $-150°$ is drawn as $150°$, in Quadrant II, so $\\sin(-150°) = \\sin 150° = \\frac{1}{2}$.
+
+Right working: $-150°$ is a clockwise turn of $150°$. Adding a full turn gives the coterminal angle $-150° + 360° = 210°$, in Quadrant III, so $\\sin(-150°) = \\sin 210° = -\\frac{1}{2}$.
+
+Why it happens: angles are usually met as positive sizes, and the minus sign is read as part of the number rather than as the direction of the turn.
+
+How to check: a clockwise turn from the positive $x$-axis goes down into Quadrant IV first, so every angle between $-180°$ and $0°$ ends below the $x$-axis, where sine is negative.`,
+      before: ``,
+      after: ``,
+      link: ``,
+    },
 
     faq: {
       title: `Unit Circle FAQ`,
@@ -2261,6 +2372,15 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
     notes: ['where x = 0, anything divided by cos breaks;', 'where y = 0, anything divided by sin breaks'],
   };
 
+
+  const conceptIntroFigures = {
+    triangle: triangleDiagrams['right-30-60'],
+    at150: angleExplorerDiagrams.specials[150],
+    circle30: unitCircleDiagrams.specials[30],
+    circle150: unitCircleDiagrams.specials[150],
+    wallTable: ciWallTable,
+    agreeTable: ciAgreeTable,
+  };
 
   const demoUnits = {
     coordinates: demoUnitFrame({
@@ -2327,6 +2447,7 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj4Table,
@@ -2368,10 +2489,78 @@ export default function UnitCirclePage({
   obj5Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'triangle',
+        lead: `You can already find the sine of an angle inside a right triangle.`,
+        content: `Sine is opposite over hypotenuse, cosine adjacent over hypotenuse. In a right triangle with a $30°$ angle the side opposite it is half the hypotenuse, so $\\sin 30° = \\frac{1}{2}$, and the adjacent side gives $\\cos 30° = \\frac{\\sqrt{3}}{2}$.`,
+        visual: ciSvg('triangle'),
+        caption: `A right triangle with angles $30°$, $60°$ and $90°$. The ratios of its sides are the [right-triangle](!/trigonometry/right-triangle) definitions of sine and cosine. The same state is on the [triangle explorer](!/trigonometry/visual-tools/triangle-explorer).`,
+      },
+      {
+        id: 'wall',
+        kind: 'instance',
+        lead: `For an angle of 150°, there is no right triangle to read.`,
+        content: [
+          `The angles of a right triangle other than the right angle are both less than $90°$. An angle of $150°$ can never sit inside one, so "opposite over hypotenuse" has nothing to point at — yet a calculator says $\\sin 150° = 0.5$.`,
+          ciTable('wallTable'),
+          `Past $90°$ the triangle definitions run out. Something has to say what sine and cosine mean for every angle, not just the acute ones.`,
+        ],
+        visual: ciSvg('at150'),
+        caption: `An angle of $150°$ in standard position: wider than any angle a right triangle can hold. The same state is on the [angle explorer](!/trigonometry/visual-tools/angle-explorer).`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [unit circle](!/trigonometry/definitions#unit_circle) is the circle of radius $1$ centred at the origin of the coordinate plane. Every point $(x, y)$ on it satisfies`,
+        formula: `@academic[formula_callout:Definition and Equation
+$$x^2 + y^2 = 1$$]@`,
+        footer: `The next section uses it to define sine and cosine for any angle: the point where the angle's terminal side meets the circle is $(\\cos\\theta, \\sin\\theta)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The unit circle is a set of points — a curve in the plane, not a number or a function.`,
+        content: `It is the collection of all points at distance $1$ from the origin. This equation is a direct application of the Pythagorean theorem (or equivalently, the distance formula): a point lies on the unit circle if and only if its distance from the origin is exactly 1.`,
+      },
+      {
+        id: 'survives',
+        lead: `For acute angles, nothing changes: the circle gives the triangle's values.`,
+        content: [
+          `Draw the $30°$ angle from the origin and drop a line from where it meets the circle. That makes the same right triangle as before, with hypotenuse $1$ — so its legs are exactly $\\cos 30°$ and $\\sin 30°$, the point's coordinates.`,
+          `The choice of radius 1 is deliberate. It eliminates the denominator from the [right triangle](!/trigonometry/right-triangle) definitions. In a right triangle inscribed in a circle of radius $r$, the sine of an angle is $\\frac{\\text{opposite}}{r}$ and the cosine is $\\frac{\\text{adjacent}}{r}$. When $r = 1$, these reduce to simply the opposite and adjacent sides — or equivalently, the $y$- and $x$-coordinates of the point where the terminal side meets the circle. The unit circle strips away the division and makes the coordinates themselves equal to the trigonometric values.`,
+          `Any circle of radius $r$ could serve a similar purpose — the values would just need to be divided by $r$. But with $r = 1$, no division is necessary, and the connection between geometry and function values is as direct as possible.`,
+          <div key={'unit-radiusOne'} dangerouslySetInnerHTML={{ __html: demoUnits.radiusOne }} />,
+          `That is the entire reason the unit circle, rather than some other circle, carries the definitions.`,
+        ],
+        visual: ciSvg('circle30'),
+        caption: `The $30°$ point on the unit circle, $(\\frac{\\sqrt{3}}{2}, \\frac{1}{2})$: its coordinates are the triangle's cosine and sine. The same state is on the [unit circle visualizer](!/visual-tools/unit-circle).`,
+      },
+      {
+        id: 'caveat',
+        lead: `What you lose: the side lengths of a triangle, which were always positive.`,
+        content: [
+          `At $150°$ the point is $(-\\frac{\\sqrt{3}}{2}, \\frac{1}{2})$. Its height is the same as at $30°$, so $\\sin 150° = \\frac{1}{2}$ — the calculator's answer — but its $x$-coordinate is negative, so $\\cos 150° = -\\frac{\\sqrt{3}}{2}$. Coordinates can be negative where lengths cannot, and the picture of a triangle's sides gives way to the position of a point.`,
+          ciTable('agreeTable'),
+        ],
+        visual: ciSvg('circle150'),
+        caption: `The $150°$ point: the same height as the $30°$ point, mirrored to the left of the $y$-axis.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page reads the six trigonometric values off the circle's coordinates, goes through the quadrantal angles and the signs in each quadrant, reference angles, the special angles, the Pythagorean identity and coterminal angles.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2388,9 +2577,7 @@ export default function UnitCirclePage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-radiusOne'} dangerouslySetInnerHTML={{ __html: demoUnits.radiusOne }} />,
-          `That is the entire reason the unit circle, rather than some other circle, carries the definitions.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2494,6 +2681,14 @@ export default function UnitCirclePage({
           sectionsContent.obj9.content,
                   <div key={'unit-sineWave'} dangerouslySetInnerHTML={{ __html: demoUnits.sineWave }} />,
           `The other five functions arise the same way, each from a different quantity read off the same rotating point.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // NEW capstone section: obj10

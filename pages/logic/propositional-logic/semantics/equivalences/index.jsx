@@ -470,8 +470,8 @@ If you can rewrite $P$ into $Q$ (or vice versa), they are equivalent.
 ✅ Best for: Proofs and simplifying expressions without constructing tables.
 ❌ Requires familiarity with logical laws.`,
 `**Using Logical Implications**:
-Show that $P→Q$ and $Q→P$ are both true.
-If both implications hold, then $P≡Q$.
+Show that $P→Q$ and $Q→P$ are both tautologies.
+If both implications are tautologies, then $P≡Q$.
 ✅ Best for: When equivalences involve implications.
 ❌ Requires proving two separate implications.`,
 `**Venn Diagrams (Set-Theoretic Approach)**:
@@ -581,7 +581,7 @@ const logicalEquivalences = [
   },
   {
     id: "7",
-    name: "Nested Implications in a Disjunction",
+    name: "Implications with a Common Consequent",
     equivalence: "$(p \\rightarrow r) \\land (q \\rightarrow r) \\equiv (p \\lor q) \\rightarrow r$",
     explanation: "If both $p$ and $q$ imply $r$, then their disjunction also implies $r$."
   },
@@ -703,6 +703,95 @@ All logical equivalences involving **implications** provide ways to rewrite cond
 
   },
 
+  pitfallBoxes:{
+    verify:`@academic[pitfall,aside:true,width:35%:Checking only some rows
+Comparing $p \\to q$ and $q \\to p$ only at $p = q = T$ and $p = q = F$, where both are T, makes them look equivalent. At $p = T$, $q = F$ the first is F and the second is T, so they are not equivalent.
+[Read more](!#pitfalls)]@
+Whichever method is used, the claim being tested is the same: the two formulas agree in every row of the truth table. With $n$ variables there are $2^n$ rows, four for two variables and eight for three, and the verdict depends on all of them. A single row in which the two columns differ is enough to show that the formulas are not equivalent.`,
+    laws:`@academic[pitfall,aside:true,width:35%:Keeping the connective in De Morgan's law
+Rewriting $\\neg (P \\land Q)$ as $\\neg P \\land \\neg Q$ fails at $P = T$, $Q = F$: there $\\neg (P \\land Q)$ is T but $\\neg P \\land \\neg Q$ is F. The negation flips the connective, so $\\neg (P \\land Q) \\equiv \\neg P \\lor \\neg Q$.
+[Read more](!#pitfalls)]@
+De Morgan's laws are the tools for moving a negation inside brackets. They are needed whenever a negated compound has to be simplified, for example when stating exactly what it means for "the file is open and the disk is full" to fail. Each of the two laws is checked on four rows, one for each pair of truth values of $P$ and $Q$.`,
+    conditional:`@academic[pitfall,aside:true,width:35%:Negating an implication into an implication
+Writing $\\neg (p \\to q)$ as $p \\to \\neg q$ fails at $p = F$, $q = T$: there $\\neg (p \\to q)$ is F but $p \\to \\neg q$ is T. The negation is a conjunction, $\\neg (p \\to q) \\equiv p \\land \\neg q$.
+[Read more](!#pitfalls)]@
+Negating a conditional comes up whenever a claim of the form "if $p$, then $q$" has to be refuted. To deny such a claim is to describe the cases in which it fails, and the truth table of $p \\to q$ has exactly one such row. Material implication turns the arrow into $\\neg p \\lor q$, and from there De Morgan's law carries the negation inside.
+
+@academic[pitfall,aside:true,width:35%:Joining the antecedents with AND
+Rewriting $(p \\to r) \\land (q \\to r)$ as $(p \\land q) \\to r$ fails at $p = T$, $q = F$, $r = F$: the left side is F, the right side is T. Joined by $\\land$, the two implications combine their antecedents with $\\lor$: $(p \\lor q) \\to r$.
+[Read more](!#pitfalls)]@
+Four of the equivalences in the table merge two implications that share one part into a single implication. When the shared part is the antecedent $p$, the connective between the two implications passes to the consequents unchanged. In the other two the shared part is the consequent $r$, and the parts being combined are the antecedents.`,
+    biconditional:`@academic[pitfall,aside:true,width:35%:Negating both sides of a biconditional
+Taking $\\neg p \\leftrightarrow \\neg q$ as the negation of $p \\leftrightarrow q$ fails at $p = q = T$: there $\\neg (p \\leftrightarrow q)$ is F but $\\neg p \\leftrightarrow \\neg q$ is T. Negating one side gives the negation: $\\neg (p \\leftrightarrow q) \\equiv p \\leftrightarrow \\neg q$.
+[Read more](!#pitfalls)]@
+The biconditional is true exactly when its two sides have the same truth value, so its negation is true exactly when they differ. Two rows of the table above place negation signs at the sides of a biconditional, and they do different things: one leaves the truth value unchanged, the other turns it into its opposite. A negation written outside the brackets, $\\neg (p \\leftrightarrow q)$, describes the rows $p = T$, $q = F$ and $p = F$, $q = T$.`,
+  },
+
+  pitfalls:{
+    title:'Common Pitfalls',
+    content:`Five slips account for many wrong answers when equivalences are checked or used. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Checking only some rows**
+
+Two formulas are compared on a few convenient rows of the truth table, they agree there, and they are declared equivalent. Equivalence is a claim about every row, so agreement on some of them proves nothing.
+
+Wrong working: for $p \\to q$ and $q \\to p$, take $p = q = T$: both are T. Take $p = q = F$: both are T. The two formulas agree, so $p \\to q \\equiv q \\to p$.
+
+Right working: two variables give four rows. For $(p, q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $p \\to q$ takes the values T, F, T, T and $q \\to p$ takes T, T, F, T. The columns differ in the rows $(T, F)$ and $(F, T)$, so the formulas are not equivalent: $q \\to p$ is the converse of $p \\to q$.
+
+Why it happens: the rows where both variables have the same value are the easiest to evaluate, and agreement there feels like evidence. A truth table settles equivalence only when it is complete.
+
+How to check: count the rows first, $2^n$ for $n$ variables, and fill in every one. To refute an equivalence, one row with different values is enough; to confirm it, all $2^n$ rows must match.
+
+**Keeping the connective in De Morgan's law**
+
+The negation in front of a bracket is passed to each part inside, but the connective between the parts is left as it was. The result is not equivalent to the original formula.
+
+Wrong working: to simplify $\\neg (P \\land Q)$, apply the negation to each part, giving $\\neg P$ and $\\neg Q$, and keep the $\\land$ between them: $\\neg (P \\land Q) \\equiv \\neg P \\land \\neg Q$.
+
+Right working: at $P = T$, $Q = F$, the conjunction $P \\land Q$ is F, so $\\neg (P \\land Q)$ is T, while $\\neg P \\land \\neg Q$ is $F \\land T$, which is F. De Morgan's law changes the connective: $\\neg (P \\land Q) \\equiv \\neg P \\lor \\neg Q$, and $\\neg P \\lor \\neg Q$ is $F \\lor T$, which is T in that row. In the same way, $\\neg (P \\lor Q) \\equiv \\neg P \\land \\neg Q$.
+
+Why it happens: the negation is treated like a minus sign multiplied into a bracket, as in $-(a + b) = -a + (-b)$, where the operation between the terms keeps its form. In words, "not both" gets heard as "neither".
+
+How to check: test the row $P = T$, $Q = F$. "Not both $P$ and $Q$" is true there, because $Q$ is false, so the rewritten form must be T in that row too.
+
+**Negating an implication into an implication**
+
+Asked to negate "if $p$, then $q$", the learner moves the negation onto the consequent and keeps the arrow, writing $p \\to \\neg q$. That formula is a different implication, not the negation.
+
+Wrong working: $\\neg (p \\to q) \\equiv p \\to \\neg q$, so the negation of "if it rains, the ground is wet" would be "if it rains, the ground is not wet".
+
+Right working: rewrite with material implication and De Morgan's law: $\\neg (p \\to q) \\equiv \\neg (\\neg p \\lor q) \\equiv \\neg \\neg p \\land \\neg q \\equiv p \\land \\neg q$. The wrong form fails at $p = F$, $q = T$: there $p \\to q$ is T, so $\\neg (p \\to q)$ is F, but $p \\to \\neg q$ is $F \\to F$, which is T. The negation is "it rains and the ground is not wet".
+
+Why it happens: in everyday speech, "it is not true that if it rains the ground is wet" sounds like a claim about what happens when it rains, so the "if" is kept. The negation of a conditional states a single case: the one row where $p \\to q$ is F.
+
+How to check: the negation of a formula must be T exactly where the formula is F. $p \\to q$ is F only at $p = T$, $q = F$, so its negation must be T in that row and F in the other three. $p \\land \\neg q$ passes this test; $p \\to \\neg q$ fails it, being T in both rows with $p = F$.
+
+**Joining the antecedents with AND**
+
+Two implications with the same consequent, $(p \\to r) \\land (q \\to r)$, are merged by joining their antecedents with $\\land$, the connective that stands between the two implications. With a shared consequent the connective changes.
+
+Wrong working: by analogy with $(p \\to q) \\land (p \\to r) \\equiv p \\to (q \\land r)$, write $(p \\to r) \\land (q \\to r) \\equiv (p \\land q) \\to r$.
+
+Right working: at $p = T$, $q = F$, $r = F$, the implication $p \\to r$ is F, so the left side is F, while $(p \\land q) \\to r$ is $F \\to F$, which is T. With material implication and the distributive law: $(\\neg p \\lor r) \\land (\\neg q \\lor r) \\equiv (\\neg p \\land \\neg q) \\lor r \\equiv \\neg (p \\lor q) \\lor r \\equiv (p \\lor q) \\to r$.
+
+Why it happens: the equivalences for a shared antecedent keep the connective, and the same is expected of a shared consequent. But once the arrow is rewritten, $p \\to r \\equiv \\neg p \\lor r$, the antecedent stands under a negation, and De Morgan's law turns the connective over.
+
+How to check: read it in words. "If it rains, the ground is wet, and if the sprinkler runs, the ground is wet" means the ground is wet when either one happens, which is $(p \\lor q) \\to r$. Or test the row $p = T$, $q = F$, $r = F$.
+
+**Negating both sides of a biconditional**
+
+To negate $p \\leftrightarrow q$, the negation is put on both sides, giving $\\neg p \\leftrightarrow \\neg q$. That formula is equivalent to $p \\leftrightarrow q$ itself, so it has the opposite value of the negation in every row.
+
+Wrong working: $\\neg (p \\leftrightarrow q) \\equiv \\neg p \\leftrightarrow \\neg q$.
+
+Right working: at $p = q = T$, $p \\leftrightarrow q$ is T, so $\\neg (p \\leftrightarrow q)$ is F, but $\\neg p \\leftrightarrow \\neg q$ is $F \\leftrightarrow F$, which is T. The negation goes on one side only: $\\neg (p \\leftrightarrow q) \\equiv p \\leftrightarrow \\neg q \\equiv \\neg p \\leftrightarrow q$, true exactly when $p$ and $q$ differ.
+
+Why it happens: the negation is distributed over the biconditional as if it were multiplied into a bracket. The row Negation Preservation in Biconditional in the table shows that negating both sides changes nothing, which is exactly why it cannot produce the negation.
+
+How to check: count the negations. A negation on one side flips the value of the biconditional, so two of them cancel and one negates. Test $p = q = T$: the negation must be F there.`,
+  },
+
   faq:{
     title:`Logical Equivalence FAQ`,
   }
@@ -797,7 +886,8 @@ export default function EquivalencesPage({demoUnits, verify ,biconditionalEquiva
               sectionsContent.verify.before,
             <MyList data={verify}
             key={4}
-            boxed={true} color={'blue'} compact={true} type={'number'} />
+            boxed={true} color={'blue'} compact={true} type={'number'} />,
+            sectionsContent.pitfallBoxes.verify,
         ]
           },
          
@@ -810,6 +900,7 @@ export default function EquivalencesPage({demoUnits, verify ,biconditionalEquiva
 <MyList data={logicalLaws}
 key={1}
  boxed={true} color={'blue'} compact={true} type={'dot'} width={'300px'}/>,
+ sectionsContent.pitfallBoxes.laws,
 
  sectionsContent.laws.after,
  <div key={'unit-absorption'} dangerouslySetInnerHTML={{ __html: demoUnits.absorption }} />,
@@ -826,6 +917,7 @@ key={1}
 key={2}
 copyableFields={'equivalence'}
 includedFields={['name','equivalence','explanation']}/>,
+sectionsContent.pitfallBoxes.conditional,
 sectionsContent.conditional.after,
 ]
           },
@@ -838,7 +930,15 @@ sectionsContent.conditional.after,
                 key={3}
                 copyableFields={'equivalence'}
                 includedFields={['name','equivalence','explanation']}/>,
+                sectionsContent.pitfallBoxes.biconditional,
              sectionsContent.biconditional.after,
+            ]
+          },
+          {
+            id:'pitfalls',
+            title:sectionsContent.pitfalls.title,
+            content:[
+              sectionsContent.pitfalls.content,
             ]
           },
           // faq: rendered component — must be built here, not in getStaticProps

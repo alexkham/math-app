@@ -103,12 +103,12 @@ const summaryTable = `
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a; text-align: center;">4</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Add the constant of integration — the answer is F(x) + C, never just F(x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">obj2 above (constant of integration)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">section 2 above (constant of integration)</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">5</td>
       <td style="padding: 12px 15px; color: #34495e;">Verify by differentiating — F&apos;(x) should return the original integrand f(x)</td>
-      <td style="padding: 12px 15px; color: #34495e;">obj6 above (verifying antiderivatives)</td>
+      <td style="padding: 12px 15px; color: #34495e;">section 6 above (verifying antiderivatives)</td>
     </tr>
   </tbody>
 </table>
@@ -395,6 +395,12 @@ $$\\int \\frac{1}{x}\\, dx = \\ln|x| + C$$
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Using the power rule on 1/x
+Writing $\\frac{1}{x}$ as $x^{-1}$ and applying the power rule gives $\\frac{x^{0}}{0}$, a division by zero. The power rule excludes $n = -1$; the antiderivative is $\\ln|x| + C$.
+[Read more](!#pitfalls)]@
+
+The reciprocal formula fills the one gap in the power rule. Its antiderivative is a logarithm, not a power of $x$, and the absolute value lets one formula serve both sides of $0$: for $x > 0$, $(\\ln x)' = \\frac{1}{x}$, and for $x < 0$, $(\\ln(-x))' = \\frac{-1}{-x} = \\frac{1}{x}$. At $x = 0$ itself neither $\\frac{1}{x}$ nor $\\ln|x|$ is defined.
+
 **Exponential:**
 
 @academic[formula_callout:Exponential Antiderivative
@@ -408,6 +414,12 @@ $$\\int e^x\\, dx = e^x + C$$
 
 @academic[formula_callout:Basic Antiderivative Formulas
 $$\\int \\cos x\\, dx = \\sin x + C \\qquad \\int \\sin x\\, dx = -\\cos x + C$$]@
+
+@academic[pitfall,aside:true,width:35%:Losing the minus sign in the sine integral
+Writing $\\int \\sin x\\, dx = \\cos x + C$ gives a function whose derivative is $-\\sin x$, not $\\sin x$. The correct antiderivative is $-\\cos x + C$.
+[Read more](!#pitfalls)]@
+
+Both trigonometric formulas are derivatives read backwards, which is also the fastest way to recall them: $(\\sin x)' = \\cos x$ and $(-\\cos x)' = \\sin x$. A quick derivative of a candidate answer settles which function goes with which, and with which sign, without memorizing a separate table.
 
 The [special integrals](!/calculus/integrals/special) page provides a more complete list.
 `,
@@ -438,6 +450,12 @@ These rules reduce complex integrands to combinations of simpler ones. For examp
 
 @academic[formula_callout:Linearity of Indefinite Integrals
 $$\\int (3x^2 + 5x - 2)\\, dx = 3 \\cdot \\frac{x^3}{3} + 5 \\cdot \\frac{x^2}{2} - 2x + C = x^3 + \\frac{5x^2}{2} - 2x + C$$]@
+
+@academic[pitfall,aside:true,width:35%:Pulling a variable out of the integral
+Moving $x$ out of $\\int x \\cdot 2x\\, dx$ as if it were a constant gives $x \\cdot x^2 + C = x^3 + C$, whose derivative is $3x^2$, not $2x^2$. Multiplying first, $\\int 2x^2\\, dx = \\frac{2x^3}{3} + C$.
+[Read more](!#pitfalls)]@
+
+In the example, the coefficients $3$, $5$ and $-2$ are fixed numbers, so each one passes through the integral sign unchanged, and what is left in each term is a power of $x$ that the power rule handles. The same two steps, splitting the sum and then taking out the numbers, turn any polynomial into a list of power-rule integrals with a single $+ C$ at the end.
 `,
     before: ``,
     after: ``,
@@ -494,6 +512,63 @@ This connection, detailed on the [rules](!/calculus/integrals/rules) page, is wh
     title: `Summary: The Indefinite-Integration Workflow`,
     content: `
 Every indefinite integral on this page follows the same five-step procedure, whether the integrand is a single power function or a complicated composition that requires a technique. The table below collects the workflow with a pointer to the sibling page where each step&apos;s detail lives — special integrals for the formula library, rules for linearity and the FTC, techniques for transformations. Use this as a reminder while working a problem: every step matters, and skipping the final verification is the single most common source of errors.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `
+Four mistakes cause most wrong answers in basic indefinite integration. Three of them are marked where they happen in the sections above; the first is the one the section on the constant of integration warns against. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Forgetting the + C**
+
+The antiderivative is found correctly, but the answer is written as $F(x)$ alone. That names one antiderivative where the indefinite integral asks for all of them, and it leaves nothing to adjust when an initial condition has to be met.
+
+Wrong working: $\\int 2x\\, dx = x^2$. With the condition $F(0) = 3$, this gives $F(0) = 0^2 = 0$, and there is no constant left to fix it.
+
+Right working: $\\int 2x\\, dx = x^2 + C$. The condition gives $0^2 + C = 3$, so $C = 3$ and $F(x) = x^2 + 3$.
+
+Why it happens: differentiation wipes out constants, so the constant is invisible when the derivative is read backwards. In definite integrals the constant cancels and is never written, and the habit carries over.
+
+How to check: every indefinite integral has exactly one arbitrary constant. Before an initial condition is used, there must be a $C$ in the answer to solve for.
+
+**Using the power rule on 1/x**
+
+The integrand $\\frac{1}{x}$ is rewritten as $x^{-1}$ and the power rule is applied as for any other power. With $n = -1$ the rule's denominator $n + 1$ is $0$.
+
+Wrong working: $\\int x^{-1}\\, dx = \\frac{x^{-1+1}}{-1+1} + C = \\frac{x^{0}}{0} + C$, which is undefined.
+
+Right working: the power rule holds only for $n \\neq -1$. The reciprocal formula covers this case: $\\int \\frac{1}{x}\\, dx = \\ln|x| + C$.
+
+Why it happens: $x^{-1}$ looks like every other power of $x$, and the condition $n \\neq -1$ stands beside the rule, where it is easy to skip.
+
+How to check: differentiate. $(\\ln|x|)' = \\frac{1}{x}$ for every $x \\neq 0$. No power of $x$ can work: $(x^k)' = kx^{k-1}$ has the exponent $-1$ only when $k = 0$, and then the derivative is $0$.
+
+**Losing the minus sign in the sine integral**
+
+The antiderivatives of $\\sin x$ and $\\cos x$ are recalled from the derivative table, and the minus sign ends up on the wrong formula or disappears.
+
+Wrong working: $\\int \\sin x\\, dx = \\cos x + C$, or $\\int \\cos x\\, dx = -\\sin x + C$.
+
+Right working: $\\int \\sin x\\, dx = -\\cos x + C$, because $(-\\cos x)' = -(-\\sin x) = \\sin x$. And $\\int \\cos x\\, dx = \\sin x + C$, because $(\\sin x)' = \\cos x$.
+
+Why it happens: in the derivative table the minus sign belongs to the cosine, $(\\cos x)' = -\\sin x$. Read backwards, the sign moves to the other formula, and it is easy to leave it where it was.
+
+How to check: differentiate the answer. $(\\cos x)' = -\\sin x$ has the wrong sign. A definite value also catches it: $\\int_0^{\\pi} \\sin x\\, dx$ is the area under one arch of the sine, which is positive. With $-\\cos x$ it is $-\\cos \\pi + \\cos 0 = 2$; with $\\cos x$ it would be $\\cos \\pi - \\cos 0 = -2$.
+
+**Pulling a variable out of the integral**
+
+The constant multiple rule lets a number pass through the integral sign. A factor that contains $x$ is moved out the same way, and only the rest is integrated.
+
+Wrong working: $\\int x \\cdot 2x\\, dx = x \\int 2x\\, dx = x \\cdot x^2 + C = x^3 + C$.
+
+Right working: multiply first, $x \\cdot 2x = 2x^2$, then $\\int 2x^2\\, dx = 2 \\cdot \\frac{x^3}{3} + C = \\frac{2x^3}{3} + C$.
+
+Why it happens: in $\\int c \\cdot f(x)\\, dx$ the constant stands in front of the function, just where a variable factor would stand, and the condition that $c$ does not change with $x$ is easy to overlook.
+
+How to check: differentiate. $(x^3)' = 3x^2$, not $2x^2$; $\\left(\\frac{2x^3}{3}\\right)' = 2x^2$.
 `,
     before: ``,
     after: ``,
@@ -763,6 +838,14 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj8.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -232,7 +232,7 @@ export async function getStaticProps(){
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Fixed mode/median/mean ordering</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">always applying mode &lt; median &lt; mean</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">that ordering holds only for right-skewed; reverses for left-skewed; ties for symmetric</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">that ordering typically holds for right-skewed (not guaranteed); usually reverses for left-skewed; ties for symmetric unimodal</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Sample mode as population mode</td>
@@ -281,7 +281,7 @@ export async function getStaticProps(){
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Compared with mean &amp; median</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">peak vs balance point vs 50th percentile &mdash; same for symmetric, separate for skewed</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">peak vs balance point vs 50th percentile &mdash; same for symmetric unimodal, separate for skewed</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">right skew: mode &lt; median &lt; mean</td>
     </tr>
     <tr>
@@ -488,6 +488,12 @@ Use calculus to locate the maximum of the PDF:
 - If $\\alpha, \\beta < 1$: bimodal at the boundaries $0$ and $1$
 - If $\\alpha = \\beta = 1$: reduces to uniform (no unique mode)
 
+@academic[pitfall,aside:true,width:35%:Using the Beta mode formula outside its range
+Applying $\\frac{\\alpha - 1}{\\alpha + \\beta - 2}$ to $\\alpha = \\beta = 0.5$ gives $\\frac{-0.5}{-1} = 0.5$, where the density $\\frac{1}{\\pi\\sqrt{x(1-x)}}$ is at its lowest, $\\frac{2}{\\pi} \\approx 0.64$. The modes are the ends $0$ and $1$.
+[Read more](!#12)]@
+
+The three cases follow the shape of the density on $[0, 1]$. With both parameters above $1$ the curve starts at $0$, rises to a single interior peak and falls back to $0$ at the right end. With both below $1$ it is U-shaped, climbing without bound toward each end of the interval.
+
 ## Boundary Modes
 
 Some distributions have modes at the edge of their support rather than in the interior. The exponential distribution is a classic example—maximum density occurs at $x = 0$, the leftmost point of the support $[0, \\infty)$.
@@ -496,14 +502,14 @@ When the support is bounded, always check endpoint values even after finding int
 
 ## Visual Identification
 
-On a density curve, the mode is the highest point on the graph. For symmetric distributions like the normal, the peak sits at the center. For skewed distributions, the peak shifts toward one tail.
+On a density curve, the mode is the highest point on the graph. For symmetric unimodal distributions like the normal, the peak sits at the center. For skewed distributions, the peak shifts toward one tail.
 
 ## Key Properties
 
 - Continuous distributions typically have a unique mode (unimodal)
 - Some distributions have multiple local maxima (multimodal)
 - The mode can lie outside the mean $\\pm$ several standard deviations
-- Unlike discrete cases, ties are impossible—density is a continuous function
+- Ties are possible: a uniform density is flat, and a symmetric two-peaked density has two equal peaks
 - Mode location reveals distribution shape: central peak suggests symmetry, edge peak suggests strong skew
   `,
   before: ``,
@@ -571,7 +577,7 @@ Bimodality is a signal to look deeper rather than force-fit a unimodal model.
 
 ## Mode Count vs Distribution Complexity
 
-More modes don't necessarily mean more parameters. The [Discrete Uniform](!/probability/distributions/discrete/uniform) has infinitely many modes but only two parameters ($a$ and $b$). The [Normal](!/probability/distributions/continuous/normal) has one mode despite having two parameters ($\\mu$ and $\\sigma$).
+More modes don't necessarily mean more parameters. The [Discrete Uniform](!/probability/distributions/discrete/uniform) has $b - a + 1$ modes but only two parameters ($a$ and $b$). The [Normal](!/probability/distributions/continuous/normal) has one mode despite having two parameters ($\\mu$ and $\\sigma$).
 
 Modality describes shape, not parameter count.
   `,
@@ -594,13 +600,13 @@ Three measures describe where distributions center: mode, [mean](!/probability/e
 
 ## Symmetric Distributions
 
-When distributions mirror themselves around a center point, all three measures collapse to the same value.
+When unimodal distributions mirror themselves around a center point, all three measures collapse to the same value.
 
 [Normal distribution](!/probability/distributions/continuous/normal): mode = median = mean = $\\mu$
 
-[Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1,2,3,4,5\\}$: all three equal $3$
+[Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1,2,3,4,5\\}$: mean and median equal $3$, and every value is a mode
 
-Perfect symmetry forces the peak, the balance point, and the probability split to occupy identical positions.
+Perfect symmetry with a single peak forces the peak, the balance point, and the probability split to occupy identical positions.
 
 ## Skewed Distributions
 
@@ -659,7 +665,7 @@ Income data illustrates this: billionaires inflate the mean drastically while le
 
 ## Spatial Relationships
 
-Symmetric case: All three occupy the same point at distribution center.
+Symmetric unimodal case: All three occupy the same point at distribution center.
 
 Right-skewed case: Mode sits at the left peak, median slightly right, mean furthest right chasing the tail.
 
@@ -712,7 +718,7 @@ This makes mode ideal for data with contamination or measurement errors in the t
 The mode reveals nothing about [variance](!/probability/variance) or spread. Two distributions can share the same mode while having vastly different variability.
 
 @academic[example:Example
-[Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have mode $0$, yet spread differs by a factor of 100.]@
+[Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have mode $0$, yet their standard deviations are $1$ and $10$.]@
 
 The mode operates independently of scale—it tracks peak location, not dispersion.
 
@@ -781,10 +787,22 @@ Compute $P(X = k)$ for $k = 0, 1, 2, \\ldots, 10$. The maximum occurs at $k = 3$
 
 Mode = $3$.]@
 
+@academic[pitfall,aside:true,width:35%:Reporting the peak height instead of its location
+Answering with the largest probability: here that gives mode $= 0.267$. The mode is the value where that probability occurs, $k = 3$.
+[Read more](!#12)]@
+
+Step 3 searches the column of probabilities, but what it returns is a point of the support. In the binomial example the two columns live on different scales: the probabilities are numbers between $0$ and $1$, while the values are counts of successes from $0$ to $10$.
+
 **Shortcut for known distributions**: Many standard distributions have analytical expressions:
 • [Geometric](!/probability/distributions/discrete/geometric): mode = $1$ always
 • [Poisson](!/probability/distributions/discrete/poisson): mode = $\\lfloor \\lambda \\rfloor$
 • [Binomial](!/probability/distributions/discrete/binomial): mode = $\\lfloor (n+1)p \\rfloor$
+
+@academic[pitfall,aside:true,width:35%:Dropping the second mode at a tie
+Using $\\lfloor (n+1)p \\rfloor$ alone for $n = 5$, $p = 0.5$ gives one mode, $3$. Here $(n+1)p = 3$ is an integer and $P(X = 2) = P(X = 3) = 0.3125$, so $2$ and $3$ are both modes.
+[Read more](!#12)]@
+
+Each shortcut comes from comparing neighbouring probabilities. For the binomial, $P(X = k + 1) \\geq P(X = k)$ exactly when $k + 1 \\leq (n+1)p$, so the probabilities rise as long as that holds and fall after it. The Poisson rule follows the same way, with $\\lambda$ in place of $(n+1)p$.
 
 ## For Continuous Distributions
 
@@ -909,13 +927,13 @@ The [PMF](!/probability/probability-function/pmf) $P(X = k) = (1-p)^{k-1}p$ decr
 
 [Negative Binomial](!/probability/distributions/discrete/negative-binomial) with parameters $r$ and $p$
 
-Mode: $\\lfloor \\frac{(r-1)(1-p)}{p} \\rfloor$ when $r > 1$
+Mode: $r + \\lfloor \\frac{(r-1)(1-p)}{p} \\rfloor$ when $r > 1$, counting trials
 
 When $r = 1$, reduces to geometric with mode $1$.
 
 [Hypergeometric](!/probability/distributions/discrete/hypergeometric) with parameters $N, K, n$
 
-Mode: $\\lfloor \\frac{(n+1)(K+1)}{N+2} \\rfloor$ (approximation)
+Mode: $\\lfloor \\frac{(n+1)(K+1)}{N+2} \\rfloor$
 
 Exact mode requires numerical evaluation of the [PMF](!/probability/probability-function/pmf) for small parameter values.
 
@@ -1186,7 +1204,7 @@ The mode is still the maximum of $f(x)$, even when $f(x) > 1$.
 
 The relationship mode < [median](!/probability/median) < [mean](!/probability/expected-value) holds only for right-skewed distributions.
 
-Symmetric distributions have all three equal.
+Symmetric unimodal distributions have all three equal.
 
 Left-skewed distributions reverse the inequality.
 
@@ -1207,6 +1225,33 @@ For categorical data (colors, types, categories), mode is often the only meaning
 Calculating a [mean](!/probability/expected-value) of {red, blue, green} makes no sense—report the mode instead.
 
 Similarly, multimodal data demands mode analysis rather than forcing a single-value summary.
+
+**Using the Beta mode formula outside its range**
+
+The formula $\\frac{\\alpha - 1}{\\alpha + \\beta - 2}$ is applied to a Beta distribution without checking that both parameters exceed $1$.
+
+Wrong working, for $\\alpha = \\beta = 0.5$:
+$$\\text{mode} = \\frac{0.5 - 1}{0.5 + 0.5 - 2} = \\frac{-0.5}{-1} = 0.5$$
+
+Right working: with $\\alpha, \\beta < 1$ the density $f(x) = \\frac{1}{\\pi\\sqrt{x(1-x)}}$ is U-shaped. At $x = 0.5$ it takes its smallest value, $f(0.5) = \\frac{2}{\\pi} \\approx 0.64$, and it grows without bound toward both ends, so the modes are at the boundaries $0$ and $1$.
+
+Why it happens: the formula comes from solving $f'(x) = 0$, and for $\\alpha, \\beta < 1$ that equation still has a solution inside $(0, 1)$. That point is the bottom of the U, not a peak, and the formula cannot tell the two apart.
+
+How to check: compare the density at the candidate with its value near an end. Here $f(0.5) \\approx 0.64$, while $f(0.01) = \\frac{1}{\\pi\\sqrt{0.0099}} \\approx 3.2$, so $0.5$ cannot be the highest point.
+
+**Reporting the peak height instead of its location**
+
+The largest probability in the PMF is found correctly, but that probability is given as the mode instead of the value where it occurs.
+
+Wrong working, for the binomial with $n = 10$, $p = 0.3$:
+$$\\max_k P(X = k) = P(X = 3) \\approx 0.267 \\implies \\text{mode} = 0.267$$
+
+Right working: the mode is the argument of the maximum, not the maximum itself.
+$$\\text{mode} = \\arg\\max_k P(X = k) = 3$$
+
+Why it happens: the search in Step 3 runs over the probabilities, so the last number written down is a probability. The definition asks for the $k$ that produced it.
+
+How to check: the mode must be a value the variable can take. Here $X$ counts successes, a whole number from $0$ to $10$, so $0.267$ cannot be its mode.
   `,
   before: ``,
   after: ``,
@@ -1241,7 +1286,7 @@ Right skew: mode < median < mean
 
 Left skew: mean < median < mode
 
-Symmetric: mode = median = mean
+Symmetric unimodal: mode = median = mean
 
 ## Distribution Shape
 

@@ -2012,6 +2012,10 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@
 
 Verification: $(3 + 4i)\\left(\\frac{3}{25} - \\frac{4}{25}i\\right) = \\frac{9}{25} - \\frac{12}{25}i + \\frac{12}{25}i - \\frac{16}{25}i^2 = \\frac{9}{25} + \\frac{16}{25} = 1$.
 
+@academic[pitfall,aside:true,width:35%:Inverting each part separately
+Writing $\\frac{1}{3 + 4i}$ as $\\frac{1}{3} + \\frac{1}{4}i$ inverts the two parts on their own, and $(3 + 4i)\\left(\\frac{1}{3} + \\frac{1}{4}i\\right) = \\frac{25}{12}i$, not $1$. The conjugate formula gives $\\frac{3}{25} - \\frac{4}{25}i$.
+[Read more](!#11)]@
+
 For $z = 2i$, a pure imaginary number, the conjugate is $-2i$ and the modulus squared is $4$. The inverse is $\\frac{-2i}{4} = -\\frac{1}{2}i$. For $z = 1 + i$, the conjugate is $1 - i$ and the modulus squared is $2$. The inverse is $\\frac{1 - i}{2} = \\frac{1}{2} - \\frac{1}{2}i$.`,
   before: ``,
   after: ``,
@@ -2036,6 +2040,10 @@ This is a real number — the square of the modulus. The result:
 
 @academic[formula_callout:Why the Formula Works
 $$\\frac{1}{z} = \\frac{a - bi}{a^2 + b^2} = \\frac{\\overline{z}}{|z|^2}$$]@
+
+@academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
+Expanding $(2 + 5i)(2 - 5i)$ to $4 - 25 = -21$ takes $(5i)^2$ to be $25$. Since $(5i)^2 = 25i^2 = -25$, the denominator is $4 + 25 = 29$, and $\\frac{1}{2 + 5i} = \\frac{2 - 5i}{29}$.
+[Read more](!#11)]@
 
 The key insight is that multiplying any complex number by its conjugate produces a real number. This property converts division by a complex number into division by a real number, which is straightforward.
 
@@ -2110,6 +2118,10 @@ The argument negates:
 @academic[formula_callout:Geometric Interpretation
 $$\\arg(z^{-1}) = -\\arg(z)$$]@
 
+@academic[pitfall,aside:true,width:35%:Inverting only the modulus
+For $|z| = 2$ and $\\arg(z) = \\frac{\\pi}{3}$, taking the number with modulus $\\frac{1}{2}$ and the same argument gives a product with $z$ of argument $\\frac{2\\pi}{3}$, which is not $1$. The argument negates too: $\\arg(z^{-1}) = -\\frac{\\pi}{3}$.
+[Read more](!#11)]@
+
 If $z$ points in direction $\\theta$, then $z^{-1}$ points in direction $-\\theta$. A number in the upper half-plane has its inverse in the lower half-plane, and vice versa. A number at angle $\\frac{\\pi}{4}$ (northeast) has its inverse at angle $-\\frac{\\pi}{4}$ (southeast).
 
 Combining both effects: the multiplicative inverse reflects $z$ across the real axis and scales its distance from the origin by $\\frac{1}{|z|^2}$. Alternatively, in [trigonometric form](!/complex-numbers/trigonometric-form), if $z = r\\,\\text{cis}\\,\\theta$, then $z^{-1} = \\frac{1}{r}\\,\\text{cis}(-\\theta)$.`,
@@ -2179,6 +2191,10 @@ The multiplicative inverse of $z = a + bi$ is $z^{-1} = \\frac{a - bi}{a^2 + b^2
 
 For $z = 3 + 4i$: the conjugate is $\\overline{z} = 3 - 4i$, while the inverse is $z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$. These differ by a factor of $25 = |z|^2$.
 
+@academic[pitfall,aside:true,width:35%:Stopping at the conjugate
+Taking $z^{-1} = \\overline{z}$ for $z = 1 + 2i$ gives $1 - 2i$, but $(1 + 2i)(1 - 2i) = 5$, not $1$. Dividing by $|z|^2 = 5$ gives $z^{-1} = \\frac{1}{5} - \\frac{2}{5}i$.
+[Read more](!#11)]@
+
 Geometrically, conjugation reflects across the real axis while preserving the modulus: $|\\overline{z}| = |z|$. Inversion also reflects across the real axis but additionally scales: $|z^{-1}| = \\frac{1}{|z|}$. The conjugate stays on the same circle centered at the origin; the inverse moves to a different circle.
 
 The relationship between them is:
@@ -2237,6 +2253,12 @@ Consider $\\frac{5 + 3i}{1 + 2i}$. The conjugate of the denominator is $1 - 2i$,
 @academic[formula_callout:Connection to Division
 $$\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{5} = \\frac{5 - 10i + 3i - 6i^2}{5} = \\frac{5 - 7i + 6}{5} = \\frac{11 - 7i}{5} = \\frac{11}{5} - \\frac{7}{5}i$$]@
 
+@academic[pitfall,aside:true,width:35%:Dividing by the modulus, not its square
+Dividing $(5 + 3i)(1 - 2i) = 11 - 7i$ by $|1 + 2i| = \\sqrt{5}$ gives $\\frac{11 - 7i}{\\sqrt{5}}$, too long by a factor of $\\sqrt{5}$. The divisor is $|1 + 2i|^2 = 5$, so the quotient is $\\frac{11}{5} - \\frac{7}{5}i$.
+[Read more](!#11)]@
+
+The work splits into two products. The numerator $5 + 3i$ is multiplied by the conjugate $1 - 2i$, giving $11 - 7i$, and the denominator $1 + 2i$ is multiplied by the same conjugate, giving the real number $5$. Each part of $11 - 7i$ is then divided by that real number, and the quotient lands in standard form.
+
 The connection explains why division by zero is undefined: zero has no multiplicative inverse, so $z_1 \\cdot 0^{-1}$ is meaningless.
 
 For detailed coverage of division and other arithmetic, see [operations](!/complex-numbers/operations).`,
@@ -2280,7 +2302,31 @@ Confusing $z^{-1}$ with $-z$ conflates two unrelated operations. The multiplicat
 
 Confusing $z^{-1}$ with $\\overline{z}$ is another pitfall. They are equal only on the unit circle. For $z = 3 + 4i$, the conjugate is $3 - 4i$ while the inverse is $\\frac{3 - 4i}{25}$. Forgetting to divide by $|z|^2$ leaves the answer off by a factor of $25$.
 
-Leaving a complex denominator unreduced is incomplete. A final answer like $\\frac{2 + 3i}{1 - i}$ requires rationalization. Multiply by $\\frac{1 + i}{1 + i}$ to obtain a real denominator and express the result in standard [algebraic form](!/complex-numbers/algebraic-form).`,
+Leaving a complex denominator unreduced is incomplete. A final answer like $\\frac{2 + 3i}{1 - i}$ requires rationalization. Multiply by $\\frac{1 + i}{1 + i}$ to obtain a real denominator and express the result in standard [algebraic form](!/complex-numbers/algebraic-form).
+
+**Inverting only the modulus**
+
+In polar form, the modulus of $z$ is replaced by its reciprocal, but the argument is copied unchanged. The result has the right distance from the origin and points in the wrong direction.
+
+Wrong working: for $z = 2\\,\\text{cis}\\,\\frac{\\pi}{3}$, $z^{-1} = \\frac{1}{2}\\,\\text{cis}\\,\\frac{\\pi}{3}$.
+
+Right working: the modulus inverts and the argument negates, so $z^{-1} = \\frac{1}{2}\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right)$. Then $z \\cdot z^{-1} = 2 \\cdot \\frac{1}{2}\\,\\text{cis}\\left(\\frac{\\pi}{3} - \\frac{\\pi}{3}\\right) = \\text{cis}\\,0 = 1$.
+
+Why it happens: for real numbers the inverse is just the reciprocal, so the step is applied to the length alone. The arguments of real numbers, $0$ and $\\pi$, give the same direction when negated, so the angle never had to change before.
+
+How to check: multiply the answer by $z$. Moduli multiply and arguments add, so the wrong answer gives $2 \\cdot \\frac{1}{2}\\,\\text{cis}\\left(\\frac{\\pi}{3} + \\frac{\\pi}{3}\\right) = \\text{cis}\\,\\frac{2\\pi}{3}$, not $1$.
+
+**Dividing by the modulus, not its square**
+
+The conjugate method divides by $|z|^2$, but the denominator is written as $|z|$, the modulus itself. The result points in the right direction but has the wrong length.
+
+Wrong working: $\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{|1 + 2i|} = \\frac{11 - 7i}{\\sqrt{5}}$.
+
+Right working: $(1 + 2i)(1 - 2i) = 1 + 4 = 5 = |1 + 2i|^2$, so $\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{5} = \\frac{11 - 7i}{5} = \\frac{11}{5} - \\frac{7}{5}i$.
+
+Why it happens: the modulus is the quantity usually named and computed, and the square is easy to lose next to $\\sqrt{a^2 + b^2}$. Multiplying the denominator by its conjugate gives $a^2 + b^2$ itself, with no square root.
+
+How to check: multiply the answer by the denominator; it must give the numerator back. $\\left(\\frac{11}{5} - \\frac{7}{5}i\\right)(1 + 2i) = \\frac{11}{5} + \\frac{22}{5}i - \\frac{7}{5}i - \\frac{14}{5}i^2 = 5 + 3i$, while the wrong answer gives $\\frac{(11 - 7i)(1 + 2i)}{\\sqrt{5}} = \\frac{25 + 15i}{\\sqrt{5}} = \\sqrt{5}\\,(5 + 3i)$.`,
   before: ``,
   after: ``,
   link: '',

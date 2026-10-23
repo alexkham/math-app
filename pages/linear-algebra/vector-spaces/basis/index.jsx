@@ -1167,7 +1167,11 @@ $$[\\mathbf{v}]_\\mathcal{B} = \\begin{pmatrix} c_1 \\\\ c_2 \\\\ \\vdots \\\\ c
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Coordinates depend entirely on the choice of basis. The same vector $\\mathbf{v}$ has different coordinates in different bases — the vector does not change, but its numerical description does.
+Coordinates depend entirely on the choice of basis. The same vector $\\mathbf{v}$ generally has different coordinates in different bases — the vector does not change, but its numerical description does.
+
+@academic[pitfall,aside:true,width:35%:Reading components as coordinates
+Taking $[\\mathbf{v}]_\\mathcal{B} = (3, 5)$ for $\\mathbf{v} = (3, 5)$ and $\\mathcal{B} = \\{(1, 2), (0, 1)\\}$ rebuilds $3(1, 2) + 5(0, 1) = (3, 11)$, not $\\mathbf{v}$. Solving the system gives $[\\mathbf{v}]_\\mathcal{B} = (3, -1)$, since $3(1, 2) - 1(0, 1) = (3, 5)$.
+[Read more](!#pitfalls)]@
 
 To find the coordinates of $\\mathbf{v}$ relative to $\\mathcal{B}$, solve the [linear system](!/linear-algebra/linear-systems) $c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n = \\mathbf{v}$. If the basis vectors are columns of a [matrix](!/linear-algebra/matrix) $B$, this is the system $B\\mathbf{c} = \\mathbf{v}$, and the coordinate vector is $\\mathbf{c} = B^{-1}\\mathbf{v}$ when $B$ is invertible. For the standard basis, $B = I$, so the coordinates are simply the components of $\\mathbf{v}$ itself.`,
     before: ``,
@@ -1237,7 +1241,7 @@ Both processes terminate because [dimension](!/linear-algebra/vector-spaces/dime
   },
   obj9: {
     title: `Change of Basis`,
-    content: `Different bases assign different coordinates to the same vector. The change-of-basis matrix converts between them.
+    content: `Different bases generally assign different coordinates to the same vector. The change-of-basis matrix converts between them.
 
 If $\\mathcal{B}$ and $\\mathcal{C}$ are two bases for $V$, the change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ satisfies
 
@@ -1261,7 +1265,13 @@ $$P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = \\bigl(P_{\\mathcal{C} \\leftarrow
 
 In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of $(1, 1)$ are just $(1, 1)$, and the $\\mathcal{C}$-coordinates of $(1, -1)$ are $(1, -1)$. So $P_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (3, 1)$: solve $P\\mathbf{c} = (3, 1)$, giving $\\mathbf{c} = P^{-1}(3, 1) = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = (2, 1)$. So $[\\mathbf{v}]_\\mathcal{B} = (2, 1)$, meaning $\\mathbf{v} = 2(1, 1) + 1(1, -1)$.
 
-Change of basis connects to [similarity](!/linear-algebra/transformations/basis-change): if a [linear transformation](!/linear-algebra/transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $P^{-1}AP$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigen/diagonalization).]@`,
+Change of basis connects to [similarity](!/linear-algebra/transformations/basis-change): if a [linear transformation](!/linear-algebra/transformations) has matrix $A$ in basis $\\mathcal{B}$, its matrix in basis $\\mathcal{C}$ is $PAP^{-1}$ with $P = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$. Choosing a good basis — one that simplifies $A$ into diagonal or triangular form — is the central idea behind [diagonalization](!/linear-algebra/eigen/diagonalization).]@
+
+@academic[pitfall,aside:true,width:35%:Applying the matrix in the wrong direction
+Multiplying $\\mathbf{v} = (3, 1)$ by $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ instead of solving gives $(4, 2)$, but $4(1, 1) + 2(1, -1) = (6, 2)$, not $\\mathbf{v}$. The input of $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is $\\mathcal{B}$-coordinates, so $[\\mathbf{v}]_\\mathcal{B} = P^{-1}\\mathbf{v} = (2, 1)$.
+[Read more](!#pitfalls)]@
+
+In the example, the known coordinates were the standard ones, $(3, 1)$, and the unknown ones were the $\\mathcal{B}$-coordinates. The matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is built directly from the $\\mathcal{B}$-vectors, so it is the easy matrix to write down, while the conversion that was needed ran from $\\mathcal{C}$ back to $\\mathcal{B}$. Which coordinates are given and which are wanted decides whether $P$ or its inverse is applied.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1298,18 +1308,82 @@ Span is tested by checking whether $A\\mathbf{c} = \\mathbf{b}$ is consistent fo
 
 @academic[rule_theorem_plain:A set of exactly $n$ vectors in an $n$-dimensional space is a basis if and only if it is independent (spanning follows automatically), and if and only if it spans the space (independence follows automatically).]@
 
-At the magic count $n = \\dim(V)$, the two conditions become equivalent.`,
+@academic[pitfall,aside:true,width:35%:Checking one condition with the wrong count
+Calling $\\{(1, 0, 0), (0, 1, 0)\\}$ a basis of $\\mathbb{R}^3$ because it is independent misses that every combination $(a, b, 0)$ has third entry $0$, so $(0, 0, 1)$ is out of reach. The shortcut needs exactly $3$ vectors; this set is a basis only of the $xy$-plane.
+[Read more](!#pitfalls)]@
+
+At the magic count $n = \\dim(V)$, the two conditions become equivalent.
+
+In practice the theorem halves the work. For $n$ vectors in $\\mathbb{R}^n$, a single determinant settles both conditions at once: a nonzero value shows that the vectors are independent, and with the count equal to the dimension they span the space as well.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj12: {
     title: `Subspaces and the Fundamental Subspaces`,
-    content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is itself a vector space under the same operations. The subspace test requires only two checks: closure under addition and closure under scalar multiplication. Lines and planes through the origin, null spaces, column spaces, and row spaces are all subspaces.
+    content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is itself a vector space under the same operations. The subspace test requires only three checks: the subset contains the zero vector, and it is closed under addition and under scalar multiplication. Lines and planes through the origin, null spaces, column spaces, and row spaces are all subspaces.
 
 Every $m \\times n$ matrix $A$ defines four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces): the column space in $\\mathbb{R}^m$ (dimension $r$), the row space in $\\mathbb{R}^n$ (dimension $r$), the null space in $\\mathbb{R}^n$ (dimension $n - r$), and the left null space in $\\mathbb{R}^m$ (dimension $m - r$), where $r = \\text{rank}(A)$.
 
 These four subspaces split into two pairs of [orthogonal](!/linear-algebra/orthogonality) complements: the row space and null space are perpendicular in $\\mathbb{R}^n$, while the column space and left null space are perpendicular in $\\mathbb{R}^m$. The [rank](!/linear-algebra/matrix/rank) governs all four dimensions and completely determines the geometry of the linear map $\\mathbf{x} \\mapsto A\\mathbf{x}$.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for many wrong answers when working with bases and coordinates. Three are marked with a box where they happen in the sections above, and the fourth, taking the echelon columns as a basis for the column space, is flagged in the section on finding a basis. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading components as coordinates**
+
+The coordinates of $\\mathbf{v}$ relative to a basis $\\mathcal{B}$ are written down as the components of $\\mathbf{v}$, as they would be in the standard basis. For any other basis, the components and the coordinates are usually different numbers.
+
+Wrong working: for $\\mathcal{B} = \\{(1, 2), (0, 1)\\}$ and $\\mathbf{v} = (3, 5)$, take $[\\mathbf{v}]_\\mathcal{B} = (3, 5)$.
+
+Right working: solve $c_1(1, 2) + c_2(0, 1) = (3, 5)$. The first entries give $c_1 = 3$, and the second entries give $2 \\cdot 3 + c_2 = 5$, so $c_2 = -1$ and $[\\mathbf{v}]_\\mathcal{B} = (3, -1)$.
+
+Why it happens: in $\\mathbb{R}^n$ almost all work is done in the standard basis, where coordinates and components coincide, so the difference never shows.
+
+How to check: rebuild the vector from its coordinates. With $(3, 5)$, $3(1, 2) + 5(0, 1) = (3, 11) \\neq \\mathbf{v}$; with $(3, -1)$, $3(1, 2) - 1(0, 1) = (3, 5) = \\mathbf{v}$.
+
+**Using echelon columns for the column space**
+
+After row reduction, the pivot columns of the echelon form are taken as the basis of $\\text{Col}(A)$, instead of the matching columns of $A$. Row operations change the columns, so the echelon columns usually span a different subspace.
+
+Wrong working: for the matrix $A$ of the worked example in the section on finding a basis, the pivot columns of the echelon form are $(1, 0, 0)$ and $(0, 1, 0)$, and $\\{(1, 0, 0), (0, 1, 0)\\}$ is given as a basis of $\\text{Col}(A)$.
+
+Right working: the pivots are in columns $1$ and $3$, so the basis is made of columns $1$ and $3$ of the original $A$: $\\{(1, 2, 3), (0, 1, 1)\\}$.
+
+Why it happens: the echelon form is the matrix on the page at the end of the computation, and its pivot columns are the simplest vectors in sight.
+
+How to check: every original column must be a combination of the proposed basis. Column $1$ of $A$, $(1, 2, 3)$, has third entry $3$, while every combination of $(1, 0, 0)$ and $(0, 1, 0)$ has third entry $0$. With the right basis, column $2$ is $2(1, 2, 3)$ and column $4$ is $(1, 3, 4) = (1, 2, 3) + (0, 1, 1)$.
+
+**Applying the matrix in the wrong direction**
+
+The change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ takes $\\mathcal{B}$-coordinates as input and returns $\\mathcal{C}$-coordinates. When the $\\mathcal{C}$-coordinates are known and the $\\mathcal{B}$-coordinates are wanted, $P$ is applied anyway instead of its inverse.
+
+Wrong working: in the change-of-basis example, $\\mathcal{C}$ is the standard basis and $\\mathbf{v} = (3, 1)$. Multiplying,
+$$P\\mathbf{v} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix}$$
+and $(4, 2)$ is given as $[\\mathbf{v}]_\\mathcal{B}$.
+
+Right working: solve $P\\mathbf{c} = \\mathbf{v}$, or apply the inverse:
+$$\\mathbf{c} = P^{-1}\\mathbf{v} = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$$
+
+Why it happens: $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the matrix that is easy to write, with the $\\mathcal{B}$-vectors as its columns, and its subscript is easily read left to right, as if it started at $\\mathcal{C}$. The wrong product still computes, so nothing signals the error.
+
+How to check: rebuild $\\mathbf{v}$ from the answer. $4(1, 1) + 2(1, -1) = (6, 2) \\neq (3, 1)$, while $2(1, 1) + 1(1, -1) = (3, 1)$.
+
+**Checking one condition with the wrong count**
+
+The theorem that one condition implies the other applies only to sets of exactly $n = \\dim(V)$ vectors. Applied to a smaller set, independence is taken to imply spanning; applied to a larger set, spanning is taken to imply independence.
+
+Wrong working: $\\{(1, 0, 0), (0, 1, 0)\\}$ is independent, since neither vector is a multiple of the other, so it is declared a basis of $\\mathbb{R}^3$.
+
+Right working: the set has $2$ vectors and $\\dim(\\mathbb{R}^3) = 3$, so spanning has to be checked separately. Every combination $a(1, 0, 0) + b(0, 1, 0) = (a, b, 0)$ has third entry $0$, so $(0, 0, 1)$ is not in the span and the set is not a basis. Adding $(0, 0, 1)$ gives the standard basis.
+
+Why it happens: the shortcut saves a whole check and is used so often for $n$ vectors in $\\mathbb{R}^n$ that the condition on the count is forgotten.
+
+How to check: count first. Fewer than $n$ vectors can never span an $n$-dimensional space and more than $n$ can never be independent, so only a set of exactly $n$ vectors can be a basis.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1640,6 +1714,14 @@ export default function BasisVectorSpacePage({seoData, sectionsContent, introCon
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

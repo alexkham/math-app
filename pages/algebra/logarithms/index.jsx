@@ -735,7 +735,7 @@ const keyWords = [
   <tbody>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Base a &lt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">non-integer exponents produce complex or undefined values</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">most non-integer exponents produce complex or undefined values</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(−2)^(1⁄2) is not a real number</td>
     </tr>
     <tr>
@@ -949,6 +949,10 @@ The notation $\\log_a(b) = c$ is read as "log base $a$ of $b$ equals $c$." This 
 
 Consider $\\log_2(8) = 3$. This asks: what power of $2$ gives $8$? Since $2^3 = 8$, the answer is $3$. Similarly, $\\log_{10}(1000) = 3$ because $10^3 = 1000$, and $\\log_5(25) = 2$ because $5^2 = 25$.
 
+@academic[pitfall,aside:true,width:35%:Swapping base and exponent
+Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 9$, not $8$. The base stays the base: $2^3 = 8$.
+[Read more](!#pitfalls)]@
+
 The base sits as a subscript, the argument sits inside parentheses, and the output is the exponent. Every logarithm can be rewritten as an exponential equation, and every exponential equation can be rewritten using logarithms. This duality is the foundation of all logarithmic work — converting between forms is often the first step in solving problems.`,
   before: ``,
   after: ``,
@@ -990,9 +994,9 @@ Additional values follow patterns. For base $10$: $\\log_{10}(10) = 1$, $\\log_{
   title: `Inverse Identities`,
   content: `Logarithms and exponentials undo each other. Two identities express this relationship and arise whenever the operations are composed.
 
-The first identity: $\\log_a(a^x) = x$. Taking the logarithm of an exponential with the same base extracts the exponent. The expression $\\log_2(2^5) = 5$ without calculation — the logarithm simply returns what the exponent was. This works because logarithm asks "what power of $a$ gives $a^x$?" and the answer is obviously $x$.
+The first identity: $\\log_a(a^x) = x$. Taking the logarithm of an exponential with the same base extracts the exponent. The expression $\\log_2(2^5)$ equals $5$ without calculation — the logarithm simply returns what the exponent was. This works because logarithm asks "what power of $a$ gives $a^x$?" and the answer is obviously $x$.
 
-The second identity: $a^{\\log_a(x)} = x$. Raising the base to a logarithmic power returns the original argument. The expression $3^{\\log_3(7)} = 7$ without calculation — the exponential returns what the argument was. This works because $\\log_a(x)$ is precisely the power that produces $x$ when applied to base $a$.
+The second identity: $a^{\\log_a(x)} = x$. Raising the base to a logarithmic power returns the original argument. The expression $3^{\\log_3(7)}$ equals $7$ without calculation — the exponential returns what the argument was. This works because $\\log_a(x)$ is precisely the power that produces $x$ when applied to base $a$.
 
 These identities are not tricks to memorize but logical necessities. If $f(x) = a^x$ and $g(x) = \\log_a(x)$, then $f$ and $g$ are inverse functions: $f(g(x)) = x$ and $g(f(x)) = x$. Each operation reverses the other.
 
@@ -1024,7 +1028,10 @@ To evaluate log, ln or a logarithm in any other base directly, use the [log calc
   title: `Properties of Logarithms`,
   content: `Logarithmic functions possess structural characteristics that determine their behavior across the entire domain.
 
-The domain of $\\log_a(x)$ is all positive real numbers — only positive arguments are permitted. The range is all real numbers — logarithms can produce any output, positive or negative. As $x$ approaches zero from the right, the logarithm decreases without bound. As $x$ increases without bound, the logarithm also increases, but slowly.
+@academic[fact,aside:true,width:35%:Thirty questions find one in a billion
+Since $\\log_2(10^9) \\approx 29.9$, halving a billion possibilities $30$ times leaves just one. That is why a yes-or-no guessing game over a billion numbers needs at most $30$ questions.]@
+
+The domain of $\\log_a(x)$ is all positive real numbers — only positive arguments are permitted. The range is all real numbers — logarithms can produce any output, positive or negative. For a base $a > 1$, as $x$ approaches zero from the right, the logarithm decreases without bound, and as $x$ increases without bound, the logarithm also increases, but slowly. For $0 < a < 1$ both directions reverse.
 
 Monotonicity depends on the base.
 
@@ -1045,6 +1052,10 @@ The product rule: $\\log_a(xy) = \\log_a(x) + \\log_a(y)$. Logarithms convert mu
 
 The quotient rule: $\\log_a(x/y) = \\log_a(x) - \\log_a(y)$. Division becomes subtraction. The power rule: $\\log_a(x^n) = n \\cdot \\log_a(x)$. Exponents come down as coefficients.
 
+@academic[pitfall,aside:true,width:35%:Splitting the logarithm of a sum
+Writing $\\log_2(4 + 4)$ as $\\log_2(4) + \\log_2(4) = 4$ treats a sum like a product. The true value is $\\log_2(8) = 3$.
+[Read more](!#pitfalls)]@
+
 These rules allow expanding complex logarithms into simpler pieces and condensing sums of logarithms into single expressions. Both skills appear constantly when solving [equations](!/algebra/logarithms/equations). The change of base formula converts logarithms from one base to another, enabling calculator computation for any base.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithm Rules](!/algebra/logarithms/rules) →@`,
@@ -1056,9 +1067,19 @@ These rules allow expanding complex logarithms into simpler pieces and condensin
 
 An equation like $\\log_2(x) = 5$ converts directly to exponential form: $x = 2^5 = 32$. The logarithm definition provides the solution method. An equation like $\\log_3(x - 1) = \\log_3(7)$ uses the one-to-one property: since the logarithms are equal and have the same base, the arguments must match, giving $x - 1 = 7$ and $x = 8$.
 
+@academic[pitfall,aside:true,width:35%:Rejecting a negative solution
+Rejecting $x = -1$ in $\\log_2(x + 5) = 2$ because it is negative throws away the only solution. The condition is on the argument: $-1 + 5 = 4 > 0$ and $\\log_2(4) = 2$, so $x = -1$ is valid.
+[Read more](!#pitfalls)]@
+
 More complex equations require the [rules](!/algebra/logarithms/rules) to combine or separate logarithms before these techniques apply. Every solution must be checked against domain restrictions — the argument of every logarithm must be positive. Extraneous solutions that violate these restrictions must be rejected. The [logarithmic equation solver](!/algebra/calculators/equations/logarithmic) works through both forms step by step and rejects answers outside the domain.
 
-Logarithms also solve exponential equations when matching bases fails. An equation like $3^x = 7$ has no integer solution, but taking logarithms of both sides and applying the power rule yields $x = \\log(7)/\\log(3)$.`,
+Logarithms also solve exponential equations when matching bases fails. An equation like $3^x = 7$ has no integer solution, but taking logarithms of both sides and applying the power rule yields $x = \\log(7)/\\log(3)$.
+
+@academic[pitfall,aside:true,width:35%:Reading a ratio of logs as a log of a ratio
+Turning $\\frac{\\log(7)}{\\log(3)}$ into $\\log\\left(\\frac{7}{3}\\right) \\approx 0.368$ applies the quotient rule where it does not hold. The two logs are divided as numbers: $x \\approx \\frac{0.845}{0.477} \\approx 1.771$.
+[Read more](!#pitfalls)]@
+
+The answer $x = \\log(7)/\\log(3)$ is a ratio of two separate logarithms, one in the numerator and one in the denominator. A calculator evaluates each of them on its own, $\\log(7) \\approx 0.845$ and $\\log(3) \\approx 0.477$, and only then are the two values divided. A quick estimate shows what size of answer to expect: $3^1 = 3$ and $3^2 = 9$ lie on either side of $7$, so $x$ must fall between $1$ and $2$. Substituting the result back into $3^x$ should return a value close to $7$.`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Logarithmic Equations](!/algebra/logarithms/equations) →@`,
   link: '/algebra/logarithms/equations',
@@ -1082,7 +1103,7 @@ The [logarithmic inequality solver](!/algebra/calculators/inequalities/logarithm
   title: `Graphing Logarithmic Functions`,
   content: `The graph of $y = \\log_a(x)$ has a distinctive shape determined by the [properties](!/algebra/logarithms/properties) of the function.
 
-Every logarithmic graph passes through $(1, 0)$ because $\\log_a(1) = 0$ for all bases. Every graph also passes through $(a, 1)$ because $\\log_a(a) = 1$. A vertical asymptote exists at $x = 0$ — the graph approaches the $y$-axis but never touches it, plunging toward $-\\infty$ as $x$ approaches zero from the right.
+Every logarithmic graph passes through $(1, 0)$ because $\\log_a(1) = 0$ for all bases. Every graph also passes through $(a, 1)$ because $\\log_a(a) = 1$. A vertical asymptote exists at $x = 0$ — the graph approaches the $y$-axis but never touches it, plunging toward $-\\infty$ as $x$ approaches zero from the right when $a > 1$ (and rising toward $+\\infty$ when $0 < a < 1$).
 
 The base controls the overall direction. For $a > 1$, the graph rises from left to right. For $0 < a < 1$, the graph falls. Larger bases (when greater than one) produce flatter curves; the function grows more slowly.
 
@@ -1135,8 +1156,73 @@ Transformations shift, stretch, and reflect the basic shape. Horizontal shifts m
       after:``,
       link:'',
   
-    }
+    },
   
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Four mistakes cause most wrong answers in early work with logarithms. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Swapping base and exponent**
+
+A logarithm is rewritten in exponential form, but the three numbers land in the wrong places: the value of the logarithm becomes the base of the power instead of its exponent.
+
+Wrong working:
+$$\\log_2(8) = 3 \\implies 3^2 = 8$$
+
+Right working: the base of the logarithm is the base of the power, the value of the logarithm is the exponent, and the argument is the result.
+$$\\log_2(8) = 3 \\iff 2^3 = 8$$
+
+Why it happens: both forms use the same three numbers, and the small subscript base is easy to read as just another number to place.
+
+How to check: work out the power that was written. $3^2 = 9$, which is not $8$, while $2^3 = 8$ is true.
+
+**Splitting the logarithm of a sum**
+
+The product rule is applied to a sum, as if the logarithm could be distributed over addition.
+
+Wrong working:
+$$\\log_2(4 + 4) = \\log_2(4) + \\log_2(4) = 2 + 2 = 4$$
+
+Right working: add first, then take the logarithm.
+$$\\log_2(4 + 4) = \\log_2(8) = 3$$
+No rule splits the logarithm of a sum. The product rule needs a product: $\\log_2(4 \\cdot 4) = \\log_2(16) = 4 = \\log_2(4) + \\log_2(4)$.
+
+Why it happens: the product rule looks like the distributive law, and the habit of distributing over a sum carries over to the logarithm.
+
+How to check: try the simplest numbers. $\\log_{10}(1 + 1) = \\log_{10}(2) \\approx 0.301$, but $\\log_{10}(1) + \\log_{10}(1) = 0$.
+
+**Rejecting a negative solution**
+
+The domain check is applied to the variable instead of to the arguments, so a negative value of $x$ is thrown out even though every argument is positive.
+
+Wrong working:
+$$\\log_2(x + 5) = 2 \\implies x + 5 = 2^2 = 4 \\implies x = -1$$
+and $x = -1$ is rejected because it is negative, leaving no solution.
+
+Right working: the domain is $x + 5 > 0$, that is $x > -5$. The value $x = -1$ satisfies it, and $\\log_2(-1 + 5) = \\log_2(4) = 2$. The solution is $x = -1$.
+
+Why it happens: the rule "logarithms of negative numbers do not exist" gets shortened to "negative numbers are not allowed", and the condition moves from the argument to $x$.
+
+How to check: substitute the candidate into each argument and look at the sign of the argument, not the sign of $x$.
+
+**Reading a ratio of logs as a log of a ratio**
+
+After solving an exponential equation with logarithms, the answer is a quotient of two logarithms, and the quotient rule is applied to it backwards.
+
+Wrong working:
+$$3^x = 7 \\implies x = \\frac{\\log(7)}{\\log(3)} = \\log(7) - \\log(3) = \\log\\left(\\frac{7}{3}\\right) \\approx 0.368$$
+
+Right working: the two logarithms are evaluated separately and then divided.
+$$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$
+
+Why it happens: the quotient rule $\\log\\left(\\frac{x}{y}\\right) = \\log(x) - \\log(y)$ also has a fraction and logarithms in it, and the two forms look alike at a glance. The rule is about the logarithm of a quotient, not a quotient of logarithms.
+
+How to check: raise $3$ to the answer. $3^{0.368} \\approx 1.50$, far from $7$, while $3^{1.771} \\approx 7.00$.`,
+      before:``,
+      after:``,
+      link:'',
+    }
+
   }
 
 const introContent = {
@@ -1409,6 +1495,7 @@ export default function LogarithmsPage({logInequalityCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:Logarithms move every operation one level down: products become sums, quotients differences, and powers multiples.]@`,
         ]
     },
     {
@@ -1454,6 +1541,14 @@ export default function LogarithmsPage({logInequalityCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
 

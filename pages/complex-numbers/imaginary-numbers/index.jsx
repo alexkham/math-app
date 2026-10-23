@@ -1100,6 +1100,9 @@ import complexExplorerDiagrams from '@/app/components/calculators/complex-number
 import iPowersDiagrams from '@/app/components/calculators/complex-numbers/iPowersDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -1501,6 +1504,37 @@ export async function getStaticProps(){
 //   }
 
 // formulas-optimized: v1 | 2026-06-11 | 2 callouts (obj2, obj5)
+// Concept introduction (section 1) — template E, widening. Running instance:
+// x² = −1, with √−9 = 3i. Old obj1 text (four paragraphs, no widgets) is kept
+// in sectionsContent.obj1, unused, and reused verbatim; the section's number
+// system ladder with its two lines is carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSquaresTable = ciTableOpen(['x', 'x²', 'equals −1?']) +
+  ciRow(['−2', '4', 'no']) +
+  ciRow(['−1', '1', 'no'], { shade: true }) +
+  ciRow(['−0.5', '0.25', 'no']) +
+  ciRow(['0', '0', 'no'], { shade: true }) +
+  ciRow(['0.5', '0.25', 'no']) +
+  ciRow(['1', '1', 'no'], { shade: true }) +
+  ciRow(['2', '4', 'no'], { last: true }) +
+  '</tbody></table>'
+const ciRulesTable = ciTableOpen(['old rule', 'with i']) +
+  ciRow(['like terms add', '2i + 3i = 5i']) +
+  ciRow(['numbers multiply', '3 · 2i = 6i'], { shade: true }) +
+  ciRow(['a square root undoes a square', '√−9 = 3i, and (3i)² = 9i² = −9']) +
+  ciRow(['x² = −1 now has roots', 'x = i and x = −i'], { shade: true, last: true, color: '#2563EB', cols: [1] }) +
+  '</tbody></table>'
+const ciLossTable = ciTableOpen(['familiar rule', 'what happens with i']) +
+  ciRow(['every number is &gt; 0, = 0 or &lt; 0', 'i is none of them: i &gt; 0 and i &lt; 0 would both give i² &gt; 0'], { color: '#a4243b', cols: [1] }) +
+  ciRow(['√a · √b = √(ab)', '√−1 · √−1 = i · i = −1, but √((−1)(−1)) = √1 = 1'], { shade: true, last: true, color: '#a4243b', cols: [1] }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
    obj0: {
@@ -1549,6 +1583,10 @@ $$\\sqrt{-a} = i\\sqrt{a} \\quad (a > 0)$$
 
 The negative sign transforms into the imaginary unit, while the magnitude passes through unchanged.
 
+@academic[pitfall,aside:true,width:35%:Taking the minus sign out of the root
+Simplifying $\\sqrt{-9}$ to $-3$ moves the minus sign outside the root, but $(-3)^2 = 9$, not $-9$. The root is $\\sqrt{-9} = i\\sqrt{9} = 3i$, since $(3i)^2 = 9i^2 = -9$.
+[Read more](!#pitfalls)]@
+
 Consider $\\sqrt{-4}$. Applying the rule: $\\sqrt{-4} = i\\sqrt{4} = i \\cdot 2 = 2i$. The answer $2i$ satisfies verification, since $(2i)^2 = 4i^2 = 4(-1) = -4$. For $\\sqrt{-7}$, where the radicand has no perfect square factor, we obtain $\\sqrt{-7} = i\\sqrt{7}$, leaving the irrational portion intact. A more involved example: $\\sqrt{-12} = i\\sqrt{12} = i\\sqrt{4 \\cdot 3} = 2i\\sqrt{3}$, combining the extraction of $i$ with standard simplification of the remaining radical.
 
 One critical warning accompanies this technique: the familiar product rule for radicals, $\\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{ab}$, fails when both radicands are negative. A naive calculation might proceed as $\\sqrt{-1} \\cdot \\sqrt{-1} = \\sqrt{(-1)(-1)} = \\sqrt{1} = 1$. But this contradicts the definition — we know $\\sqrt{-1} = i$, and $i \\cdot i = i^2 = -1$, not $+1$. The error arises because the product rule assumes non-negative radicands. When negatives appear, extract $i$ from each factor first, then multiply: $\\sqrt{-1} \\cdot \\sqrt{-1} = i \\cdot i = i^2 = -1$. This trap catches many students; the safest practice converts all negative square roots to $i$-form before performing any multiplication.`,
@@ -1565,6 +1603,10 @@ One critical warning accompanies this technique: the familiar product rule for r
   content: `The imaginary unit $i$ serves as the foundation for an entire family of numbers. Multiply $i$ by any real number $b$, and the result $bi$ belongs to a special category: the pure imaginary numbers. These occupy a distinct position within the broader [complex number](!/complex-numbers) system, characterized by the complete absence of a real component.
 
 Formally, when we write a complex number in standard form $z = a + bi$, the number qualifies as pure imaginary precisely when $a = 0$. The real part vanishes entirely, leaving only the imaginary term. The structure reduces to $z = 0 + bi = bi$, where $b$ can be any real value — positive, negative, rational, irrational, or even zero.
+
+@academic[pitfall,aside:true,width:35%:Judging by the letter i
+Calling $4i^2$ pure imaginary because it contains $i$ skips the simplification: $4i^2 = 4(-1) = -4$, a real number. Write the number as $a + bi$ first; it is pure imaginary only when $a = 0$.
+[Read more](!#pitfalls)]@
 
 Examples span a wide range of appearances. Simple cases include $3i$, $-7i$, and $\\frac{1}{2}i$. More elaborate forms arise in calculations: $\\sqrt{5}i$ carries an irrational coefficient, while $\\frac{6\\sqrt{3}}{13}i$ combines fractions and radicals. Despite their varied appearances, all share the defining characteristic — no real part exists alongside the imaginary term.
 
@@ -1651,9 +1693,17 @@ Begin with the first four powers. By definition, $i^1 = i$. Squaring gives $i^2 
 
 The sequence $i, -1, -i, 1$ repeats indefinitely. Every fourth power brings the value back to $1$, launching the cycle anew. This periodicity means that $i^{17}$ equals $i^1$, that $i^{42}$ equals $i^2$, and that $i^{1000}$ equals $i^4 = 1$. No matter how large the exponent grows, only four possible outcomes exist.
 
+@academic[pitfall,aside:true,width:35%:Treating every even power as −1
+Taking $i^{100} = -1$ because $100$ is even treats the powers like $(-1)^n$, which alternate in twos. The powers of $i$ cycle in fours: $i^{100} = (i^4)^{25} = 1$; only even exponents with remainder $2$, like $i^{102}$, give $-1$.
+[Read more](!#pitfalls)]@
+
 The computational shortcut exploits this four-cycle through division with remainder. To evaluate $i^k$ for any positive integer $k$, divide $k$ by $4$ and examine the remainder $r$. The answer matches $i^r$: remainder $0$ yields $1$, remainder $1$ yields $i$, remainder $2$ yields $-1$, and remainder $3$ yields $-i$.
 
 Consider $i^{323}$. Dividing $323$ by $4$ produces $80$ with remainder $3$. Therefore $i^{323} = i^3 = -i$. The enormous exponent collapses to a single-digit calculation. Similarly, $i^{500}$ has remainder $0$ when divided by $4$, so $i^{500} = i^0 = 1$. For $i^{67}$, the division $67 ÷ 4$ leaves remainder $3$, giving $i^{67} = -i$.
+
+@academic[pitfall,aside:true,width:35%:Ignoring the sign of the exponent
+Evaluating $i^{-3}$ as $i^3 = -i$ drops the minus sign of the exponent. In fact $i^{-3} = \\frac{1}{i^3} = \\frac{1}{-i} = i$; adding $4$ to the exponent gives the same, $i^{-3} = i^{1} = i$.
+[Read more](!#pitfalls)]@
 
 Negative exponents follow the same logic after one preliminary step. Recall that $i^{-1} = \\frac{1}{i}$, which simplifies by multiplying numerator and denominator by $i$: $\\frac{1}{i} \\cdot \\frac{i}{i} = \\frac{i}{i^2} = \\frac{i}{-1} = -i$. Thus $i^{-1} = -i$, corresponding to remainder $3$ in the cycle. The pattern for negative powers runs backward through the same four values, and the remainder method adapts naturally once the exponent's sign is handled.`,
   after: ``,
@@ -1767,6 +1817,85 @@ The [absolute value](!/complex-numbers/absolute-value) of a pure imaginary numbe
   
     },
   
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Six mistakes come up again and again in first work with imaginary numbers. Four are marked where they happen in the sections above; the other two, multiplying negative radicands under one root and keeping the $i$ in the imaginary part, are the ones the page already warns about in its own text. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Taking the minus sign out of the root**
+
+The square root of a negative number is simplified by moving the minus sign in front of the root, as if $\\sqrt{-a}$ were $-\\sqrt{a}$.
+
+Wrong working: $\\sqrt{-9} = -\\sqrt{9} = -3$.
+
+Right working: the minus sign becomes the factor $i$, so $\\sqrt{-9} = i\\sqrt{9} = 3i$.
+
+Why it happens: the $-1$ inside the root looks like an ordinary factor that can be pulled out, the way a factor $4$ comes out as $2$. But $\\sqrt{-1}$ is $i$, not $-1$.
+
+How to check: square the answer. $(-3)^2 = 9$, which is not $-9$, while $(3i)^2 = 9i^2 = -9$.
+
+**Multiplying negative radicands under one root**
+
+Two square roots of negative numbers are combined into a single root with the product rule $\\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{ab}$, which holds only for non-negative radicands.
+
+Wrong working: $\\sqrt{-4} \\cdot \\sqrt{-9} = \\sqrt{(-4)(-9)} = \\sqrt{36} = 6$.
+
+Right working: convert each root to $i$-form first, then multiply: $\\sqrt{-4} \\cdot \\sqrt{-9} = 2i \\cdot 3i = 6i^2 = -6$.
+
+Why it happens: the product rule is used so often with positive numbers that its condition is forgotten.
+
+How to check: the product of two pure imaginary numbers $bi$ and $ci$ is $bc \\cdot i^2 = -bc$. Since $\\sqrt{-4} = 2i$ and $\\sqrt{-9} = 3i$ both have positive coefficients, their product must be negative, so $6$ cannot be right.
+
+**Judging by the letter i**
+
+A number is called pure imaginary because $i$ appears in it, without first writing it in the form $a + bi$.
+
+Wrong working: $4i^2$ contains $i$, so it is pure imaginary.
+
+Right working: $4i^2 = 4(-1) = -4 = -4 + 0i$. Its real part is $-4$, not $0$, so it is a real number, not a pure imaginary one. The reverse also happens: $(1 + i)^2 = 1 + 2i + i^2 = 2i$ is pure imaginary, although it was built from a number with real part $1$.
+
+Why it happens: the letter $i$ is the visible mark of imaginary numbers, and $i^2$ still shows it even though its value is $-1$.
+
+How to check: simplify fully, using $i^2 = -1$, until the number reads $a + bi$ with real $a$ and $b$. Then look only at $a$.
+
+**Keeping the i in the imaginary part**
+
+Asked for $Im(z)$, the whole imaginary term is given, $i$ included, or its sign is dropped.
+
+Wrong working: for $z = 4 - 6i$, $Im(z) = -6i$, or $Im(z) = 6$.
+
+Right working: write $z = 4 + (-6)i$. The real number standing before $i$ is $-6$, so $Im(z) = -6$.
+
+Why it happens: the name "imaginary part" suggests an imaginary number, and in $4 - 6i$ the minus sign looks like part of the subtraction rather than part of the coefficient.
+
+How to check: $Im(z)$ is always a real number, so an answer containing $i$ is wrong. Rebuilding $z$ as $Re(z) + Im(z) \\cdot i = 4 + (-6)i$ must give back the original number.
+
+**Treating every even power as −1**
+
+Every even power of $i$ is taken to be $-1$ and every odd power to be $i$, as if the powers alternated in twos like the powers of $-1$.
+
+Wrong working: $100$ is even, so $i^{100} = -1$.
+
+Right working: the powers of $i$ repeat every four steps. Since $100 = 4 \\cdot 25$, the remainder is $0$ and $i^{100} = (i^4)^{25} = 1^{25} = 1$. An even exponent gives $-1$ only when its remainder on division by $4$ is $2$, as in $i^{102} = -1$.
+
+Why it happens: the first fact learned is $i^2 = -1$, and it is extended to all even exponents without checking $i^4 = 1$.
+
+How to check: divide the exponent by $4$ and use the remainder, never just the parity. For $100$ the remainder is $0$, so the answer is $1$.
+
+**Ignoring the sign of the exponent**
+
+For a negative exponent, the minus sign is dropped and the remainder method is applied to the positive number.
+
+Wrong working: $i^{-3} = i^3 = -i$.
+
+Right working: $i^{-3} = \\frac{1}{i^3} = \\frac{1}{-i} = -\\frac{1}{i} = -(-i) = i$. Adding $4$ to the exponent does not change the value, so $i^{-3} = i^{-3 + 4} = i^1 = i$ as well.
+
+Why it happens: the remainder method is learned for positive exponents, and $-3$ is read as $3$.
+
+How to check: multiply the answer by $i^3$. A correct $i^{-3}$ gives $i^{-3} \\cdot i^3 = i^0 = 1$: here $i \\cdot (-i) = -i^2 = 1$. The wrong answer gives $(-i)(-i) = i^2 = -1$.`,
+      before:``,
+      after:``,
+      link:'',
+    },
     faq: {
       title: `Imaginary Numbers FAQ`,
     },
@@ -1889,6 +2018,22 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const fpCiNoMeet = { kind: 'pieces', svgTitle: 'y = x^2 never comes down to y = -1', xRange: [-2.5, 2.5], yRange: [-2, 5],
+    pieces: [
+      { fn: (x) => x * x, from: -2.2, to: 2.2, ends: [null, null], color: 'f', label: { text: 'y = x²', x: 1.6, y: 2.56, pos: 'e' } },
+      { fn: () => -1, from: -2.5, to: 2.5, ends: [null, null], color: 'g', label: { text: 'y = −1', x: 1.6, y: -1, pos: 's' } },
+    ],
+    notes: [{ x: -2.4, y: 4.4, text: 'the curve never reaches the line', pos: 'e', color: 'r' }],
+    caption: 'No real x has x² = −1' };
+
+  const conceptIntroFigures = {
+    noMeet: renderFunctionPlotV4(fpCiNoMeet),
+    iTimesI: complexMultiplicationDiagrams.iTimesI,
+    squaresTable: ciSquaresTable,
+    rulesTable: ciRulesTable,
+    lossTable: ciLossTable,
+  };
+
   const demoUnits = {
     pureImag: demoUnitFrame({
       svg: complexExplorerDiagrams.pureImaginary,
@@ -1955,6 +2100,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     numberSystemLadder,
     sectionsContent,
     introContent,
@@ -1994,10 +2140,86 @@ export default function ImaginaryNumbersPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'can',
+        lead: `Every number system so far was built to answer a question the one before could not.`,
+        content: [
+          `Every expansion of our number system arose from an equation that refused to yield solutions. Negative numbers emerged when subtraction demanded answers beyond the counting numbers. Fractions appeared when division insisted on exactness. Irrational numbers surfaced when geometry required lengths like $\\sqrt{2}$ that no fraction could capture. Each time, mathematicians faced a choice: declare certain problems unsolvable, or expand the boundaries of what counts as a number.`,
+          `Five systems, each forced by a problem the one before could not answer: the counting numbers $\\mathbb{N}$ cannot give $3 - 5$, the integers $\\mathbb{Z}$ cannot give $1 \\div 3$, the rationals $\\mathbb{Q}$ cannot give the diagonal of a unit square, $\\sqrt{2}$, and the reals $\\mathbb{R}$ cannot solve $x^2 + 1 = 0$. The complex numbers $\\mathbb{C}$ can. Read the chain downward; each arrow carries the problem that forced the next step.`,
+          <DiagramFrame
+            key={'obj1-diagram'}
+            id="number-system-ladder"
+            title="Five number systems, each forced by a problem the last could not solve"
+            source="/complex-numbers/imaginary-numbers"
+          >
+            <Hierarchy data={numberSystemLadder} variant="derivation" exportable={false} theme={siteTheme} />
+          </DiagramFrame>,
+        ],
+      },
+      {
+        id: 'wall',
+        kind: 'instance',
+        lead: `The real numbers cannot solve x² = −1.`,
+        content: [
+          `The equation $x^2 + 1 = 0$ poses exactly this challenge to the real number system $\\mathbb{R}$. Rearranging gives $x^2 = -1$, which asks: what number, when multiplied by itself, produces negative one? No real number qualifies. Positive numbers squared remain positive. Negative numbers squared also yield positive results, since two negative signs cancel. Zero squared gives zero. The entire real line offers no candidate.`,
+          ciTable('squaresTable'),
+          `Every square in the table is $0$ or positive, and no real number could do better: a positive times a positive is positive, a negative times a negative is positive too.`,
+        ],
+        visual: ciSvg('noMeet'),
+        caption: `The parabola $y = x^2$ never dips below the axis, so it never meets the line $y = -1$: the equation has no real solution.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [imaginary unit](!/complex-numbers/definitions#imaginary_unit) $i$ is a number defined by the single property $i^2 = -1$. An [imaginary number](!/complex-numbers/definitions#imaginary_number) is a real multiple of it, $bi$ with $b$ real and $b \\neq 0$.`,
+        footer: `So $x^2 = -1$ has the two solutions $x = i$ and $x = -i$, and $\\sqrt{-9} = 3i$.`,
+      },
+      {
+        id: 'kind',
+        lead: `An imaginary number is a number, but not one on the real number line.`,
+        content: [
+          `Rather than abandon such equations as meaningless, mathematicians introduced a new object: the imaginary unit, denoted $i$, defined by the single property $i^2 = -1$. This definition creates exactly what the equation demands — a number whose square is negative one. The symbol $i$ does not represent any point on the traditional number line; it exists perpendicular to all real numbers, opening an entirely new dimension for mathematical exploration.`,
+          `An equivalent notation writes $i = \\sqrt{-1}$, interpreting $i$ as the principal square root of negative one — both ways of writing the unit appear among the [complex number symbols](!/math-symbols/complex-numbers). This form emphasizes the connection to familiar radical expressions, though it requires caution. The usual rules for manipulating square roots do not always extend safely to negative radicands, a subtlety explored in the [next section](!/complex-numbers/imaginary-numbers#2). Despite its name, nothing about the imaginary unit is fictitious or unreal — it is simply a different kind of number, as legitimate as any other, governed by consistent rules that extend arithmetic into new territory.`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `The old rules of arithmetic still hold.`,
+        content: [
+          `Treat $i$ like any other symbol and replace $i^2$ by $-1$ wherever it appears: everything else works as before.`,
+          ciTable('rulesTable'),
+          `Nothing is lost on the way down. Each system keeps the arithmetic of the one above it and adds the missing answers, so the complex numbers extend the reals rather than replace them: a real number is a complex number whose imaginary part is zero. What the chain also shows is that $i$ is not a stranger act than the others; admitting $\\sqrt{2}$ was once the same kind of step.`,
+        ],
+        visual: ciSvg('iTimesI'),
+        caption: `$i \\times i$ on the complex multiplication tool: the product lands on $-1$. The same state is on the [complex multiplication visualizer](!/complex-numbers/visual-tools/multiplication).`,
+      },
+      {
+        id: 'caveat',
+        tone: 'break',
+        lead: `What you lose: order, and one rule for square roots.`,
+        content: [
+          `Admitting $i$ costs two familiar habits.`,
+          ciTable('lossTable'),
+          `So imaginary numbers cannot be compared with $<$, and square roots of negative numbers are best rewritten with $i$ before multiplying: $\\sqrt{-4} \\cdot \\sqrt{-9} = 2i \\cdot 3i = -6$, not $\\sqrt{36} = 6$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers square roots of negative numbers, pure imaginary numbers, notation, the imaginary part of a complex number, the powers of $i$ and their cycle, arithmetic with imaginary numbers, and their place in the complex plane.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2014,17 +2236,7 @@ export default function ImaginaryNumbersPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          `Five systems, each forced by a problem the one before could not answer: the counting numbers $\\mathbb{N}$ cannot give $3 - 5$, the integers $\\mathbb{Z}$ cannot give $1 \\div 3$, the rationals $\\mathbb{Q}$ cannot give the diagonal of a unit square, $\\sqrt{2}$, and the reals $\\mathbb{R}$ cannot solve $x^2 + 1 = 0$. The complex numbers $\\mathbb{C}$ can. Read the chain downward; each arrow carries the problem that forced the next step.`,
-          <DiagramFrame
-            key={'obj1-diagram'}
-            id="number-system-ladder"
-            title="Five number systems, each forced by a problem the last could not solve"
-            source="/complex-numbers/imaginary-numbers"
-          >
-            <Hierarchy data={numberSystemLadder} variant="derivation" exportable={false} theme={siteTheme} />
-          </DiagramFrame>,
-          `Nothing is lost on the way down. Each system keeps the arithmetic of the one above it and adds the missing answers, so the complex numbers extend the reals rather than replace them: a real number is a complex number whose imaginary part is zero. What the chain also shows is that $i$ is not a stranger act than the others; admitting $\\sqrt{2}$ was once the same kind of step.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2126,6 +2338,14 @@ export default function ImaginaryNumbersPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

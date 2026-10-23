@@ -576,6 +576,7 @@ import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/di
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -834,6 +835,30 @@ export async function getStaticProps(){
     }
   }
 
+  // Concept introduction (section "definition") — template A, definition last.
+  // Running instance: tossing two coins. Old definition text (no widgets) is
+  // kept in sectionsContent.definition, unused, and reused verbatim; the
+  // two-dice demo frame with its line is carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciQuestionTable = ciTableOpen(['question', 'what must be known first']) +
+    ciRow(['chance of exactly one head in two tosses?', 'every way two tosses can come out']) +
+    ciRow(['chance of a sum of 7 with two dice?', 'every way two dice can land'], { shade: true, last: true }) +
+    '</tbody></table>'
+  const ciCoinsTable = ciTableOpen(['', 'second coin H', 'second coin T']) +
+    ciRow(['<b>first coin H</b>', 'HH', 'HT']) +
+    ciRow(['<b>first coin T</b>', 'TH', 'TT'], { shade: true, last: true }) +
+    '</tbody></table>'
+  const ciDescribeTable = ciTableOpen(['described as', 'outcomes', 'equally likely?']) +
+    ciRow(['what each coin shows', 'HH, HT, TH, TT', 'yes: 1/4 each'], { color: '#2563EB', cols: [2] }) +
+    ciRow(['number of heads', '0, 1, 2', 'no: 1/4, 1/2, 1/4'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+    '</tbody></table>'
+
   const sectionsContent={
     obj0: {
   title: `Key Terms`,
@@ -860,7 +885,7 @@ Each outcome represents one full, specific result of the situation. Together, th
 **Examples**:
 Rolling a die → {1, 2, 3, 4, 5, 6}
  Tossing two coins → {HH, HT, TH, TT}
- Measuring a persons height → all real numbers in an interval (for example, [0, 3] meters)
+ Measuring a person's height → all real numbers in an interval (for example, [0, 3] meters)
 `,
       before:``,
       after:``,
@@ -949,6 +974,10 @@ Once the sample space is identified, it can be written in different ways dependi
 - **Cartesian products** for combining simpler spaces, e.g.  
   $\\Omega = A \\times B$
 
+@academic[pitfall,aside:true,width:35%:Ignoring the order
+Listing two tosses as $\\{HH, HT, TT\\}$ merges $HT$ and $TH$, so the event "the first toss is heads" cannot be written as a subset. With ordered pairs it is $\\{(H,H), (H,T)\\}$, with probability $\\frac{2}{4} = \\frac{1}{2}$.
+[Read more](!#mistakes)]@
+
 These representations make it easier to see how outcomes are organized and how events will be formed from them.
 `,
       before:``,
@@ -968,6 +997,12 @@ A sample space is not just any set—it must satisfy a few basic requirements so
 
 These properties ensure that probabilities assigned to events make sense and behave consistently.
 
+@academic[pitfall,aside:true,width:35%:Listing overlapping outcomes
+Taking $\\Omega = \\{\\text{heart}, \\text{king}, \\text{other}\\}$ for one card puts the king of hearts in two outcomes, and the probabilities add to $\\frac{13 + 4 + 36}{52} = \\frac{53}{52}$. With $\\{\\text{heart}, \\text{other king}, \\text{other}\\}$ they add to $\\frac{13 + 3 + 36}{52} = 1$.
+[Read more](!#mistakes)]@
+
+The two middle requirements are checked together: every result of the experiment must match exactly one listed outcome. For a single card drawn from a deck, the 52 individual cards pass this test at once, and outcomes that describe groups of cards have to be tested group by group.
+
 When the outcomes are equally likely, probability reduces to counting:
 
 @academic[formula_callout:Classical Probability Formula
@@ -976,6 +1011,12 @@ $$P(A) = \\frac{|A|}{|\\Omega|}$$
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Counting outcomes that are not equally likely
+Using $\\Omega = \\{2, 3, \\ldots, 12\\}$ for the sum of two dice gives $P(\\text{sum} = 7) = \\frac{1}{11}$, but these 11 sums are not equally likely. Over the 36 ordered pairs, $P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$.
+[Read more](!#mistakes)]@
+
+Applying the formula takes two counts: the outcomes in $A$ and the outcomes in $\\Omega$. For one die, both come straight from the list $\\{1, 2, 3, 4, 5, 6\\}$. For two dice, the list is the grid of 36 ordered pairs from the definition above, each with probability $\\frac{1}{36}$.
 `,
       before:``,
       after:``,
@@ -1025,6 +1066,34 @@ These examples show how the structure of $\\Omega$ changes with the scenario, bu
 • Using an incomplete $\\Omega$, which leads to incorrect event definitions or wrong probabilities  
 
 A correct sample space removes ambiguity and prevents errors in later calculations.
+
+**Listing overlapping outcomes**
+
+The outcomes of a sample space are written as groups of results, and some result falls into two of the groups. The outcomes are then not mutually exclusive, and a single draw counts as two outcomes at once.
+
+Wrong working: for one card from a standard deck, with $\\Omega = \\{\\text{heart}, \\text{king}, \\text{other}\\}$, where "other" means neither a heart nor a king,
+$$P(\\text{heart}) + P(\\text{king}) + P(\\text{other}) = \\frac{13}{52} + \\frac{4}{52} + \\frac{36}{52} = \\frac{53}{52}$$
+
+Right working: the king of hearts goes into one group only, so the three remaining kings form their own outcome.
+$$\\Omega = \\{\\text{heart}, \\text{other king}, \\text{other}\\}, \\quad \\frac{13}{52} + \\frac{3}{52} + \\frac{36}{52} = \\frac{52}{52} = 1$$
+
+Why it happens: each group is described by one feature, on its own, and the places where two groups meet are never looked at. A card with both features is easy to miss when the groups are named rather than listed card by card.
+
+How to check: the probabilities of all outcomes in $\\Omega$ must add to exactly $1$. A total above $1$ means some result is counted twice; a total below $1$ means some result is missing.
+
+**Counting outcomes that are not equally likely**
+
+The counting formula $P(A) = \\frac{|A|}{|\\Omega|}$ is applied to a sample space whose outcomes have different probabilities.
+
+Wrong working: for the sum of two dice, with $\\Omega = \\{2, 3, \\ldots, 12\\}$,
+$$|\\Omega| = 11, \\quad P(\\text{sum} = 7) = \\frac{1}{11}$$
+
+Right working: count in the sample space of 36 equally likely ordered pairs. Six of them give a sum of $7$: $(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)$.
+$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$
+
+Why it happens: the list of sums is a correct sample space, so it looks ready for counting. But a correct list says nothing about whether its outcomes are equally likely: the sum $2$ comes from one pair, the sum $7$ from six.
+
+How to check: compare two outcomes directly. A sum of $2$ needs both dice to show $1$, while a sum of $7$ can be made in six ways, so the two cannot share the probability $\\frac{1}{11}$. Over the 36 pairs, the sums $2$ to $12$ have probabilities $\\frac{1}{36}, \\frac{2}{36}, \\ldots, \\frac{6}{36}, \\ldots, \\frac{1}{36}$, which add to $1$.
 `,
       before:``,
       after:``,
@@ -1094,6 +1163,12 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
     events: [{ label: '{1, 2}: one 1, one 2', test: (a, b) => (a === 1 && b === 2) || (a === 2 && b === 1), color: 'r' }, { label: '{1, 1}: double 1', test: (a, b) => a === 1 && b === 1, color: 'f' }],
     notes: [{ text: '{1, 2}: 2 cells, P = 2/36', color: 'r' }, { text: '{1, 1}: 1 cell, P = 1/36', color: 'f' }, { text: '21 unordered results,' }, { text: 'not equally likely' }],
     caption: 'Drop the order and the outcomes stop being equally likely' };
+  const conceptIntroFigures = {
+    questionTable: ciQuestionTable,
+    coinsTable: ciCoinsTable,
+    describeTable: ciDescribeTable,
+  };
+
   const demoUnits = {
     u_definition_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.none,
@@ -1142,6 +1217,7 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
     props: {
     sampleSpaceSizeLevels,
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1170,10 +1246,77 @@ export default function SampleSpacePage({sampleSpaceSizeLevels,
   schemas,
   outcomesTable,
   mistakesTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // "Definition" section concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Before asking how likely something is, you need to know everything that could happen.`,
+        content: [
+          `"What is the chance of exactly one head in two tosses?" has no answer until the possible results are on the table. A chance compares the ways something can happen with all the ways things can go — and the second list has to be written down first.`,
+          ciTable('questionTable'),
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For two coins, pairing each result of the first with each of the second lists everything.`,
+        content: [
+          `The first coin lands H or T; so does the second. Take every combination.`,
+          ciTable('coinsTable'),
+          `Four results: HH, HT, TH, TT. Exactly one head happens in two of them, HT and TH — so the chance is $\\frac{2}{4} = \\frac{1}{2}$.`,
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in that list was chosen: each entry is one complete result, and no result is missing or repeated.`,
+        content: [
+          `Each outcome represents one full, specific result of the situation. Together, these outcomes form the background on which events are defined and probabilities are assigned. HT and TH both count because they are different results — the first coin differs. Leave one out and some result has nowhere to go; list one twice and it is counted double. The same rule built the grid of two dice: every pair of faces exactly once.`,
+          <div key={'unit-u_definition_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_definition_0 }} />,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [sample space](!/probability/definitions#sample_space) is the complete collection of all possible outcomes a scenario can produce. Every outcome that can happen belongs to it, and anything that cannot happen is not included.`,
+        footer: `For two coins, $\\Omega = \\{HH, HT, TH, TT\\}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A sample space is a set: the set of all outcomes, written Ω.`,
+        content: [
+          `It is not a number and not a probability — it is the collection everything else is measured against. It can be small, large, or infinite:`,
+          `**Examples**:
+Rolling a die → {1, 2, 3, 4, 5, 6}
+ Tossing two coins → {HH, HT, TH, TT}
+ Measuring a person's height → all real numbers in an interval (for example, [0, 3] meters)`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Listing every full result once generalizes; how the results are described needs care.`,
+        content: [
+          `What generalizes: write down every complete result once. What was particular: the four coin results happen to be equally likely. Describe the same tosses by the number of heads instead and the sample space is still valid — but its outcomes are not equally likely, so counting them gives wrong chances.`,
+          ciTable('describeTable'),
+          `Counting "$1$ head out of $3$ possibilities" would give $\\frac{1}{3}$, not the true $\\frac{1}{2}$: the outcome "one head" covers two results, HT and TH.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: [
+          `The rest of the page covers notation, the types of sample spaces, how to write outcomes, the properties of a sample space, events as subsets of it, worked practice, and the mistakes to avoid.`,
+          `Sample spaces come in several types, listed next.`,
+        ],
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1190,9 +1333,7 @@ export default function SampleSpacePage({sampleSpaceSizeLevels,
         title:sectionsContent.definition.title,
         link:'',
         content:[
-            sectionsContent.definition.content,
-                  <div key={'unit-u_definition_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_definition_0 }} />,
-          `Sample spaces come in several types, listed next.`,
+            <ConceptIntro key={'definition-intro'} data={conceptIntro} />,
         ]
     },
     {

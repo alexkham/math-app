@@ -178,7 +178,7 @@ const summaryTable = `
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">One radical each side, even index</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(2x + 3) = √(x + 7)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square directly, solve, check</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">low — both sides non-negative</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">low — check only that both radicands are non-negative</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Odd-index radical</td>
@@ -381,6 +381,10 @@ $$x = 4$$]@
 
 Check: $\\sqrt{9} - \\sqrt{4} = 3 - 2 = 1$. Valid.
 
+@academic[pitfall,aside:true,width:35%:Squaring term by term
+Squaring each term, $(\\sqrt{x} + 1)^2 = x + 1$, turns the equation into $x + 5 = x + 1$, that is $5 = 1$, so it seems to have no solution. The middle term is needed: $x + 5 = x + 2\\sqrt{x} + 1$ leads to $x = 4$.
+[Read more](!#pitfalls)]@
+
 The first squaring did not eliminate all radicals — a radical remained from expanding $(\\sqrt{x} + 1)^2$ using techniques from [operations](!/algebra/roots/operations). A second isolation and squaring completed the process.`,
     before: ``,
     after: ``,
@@ -427,7 +431,13 @@ $$2x + 6 = 4\\sqrt{3x + 1}$$]@
 @academic[formula_callout:Equations with Radicals on Both Sides
 $$x + 3 = 2\\sqrt{3x + 1}$$]@
 
-Square again and solve. Check all candidates.`,
+Square again and solve. Check all candidates.
+
+@academic[pitfall,aside:true,width:35%:Skipping the check when both sides are radicals
+Squaring $\\sqrt{x - 5} = \\sqrt{2x - 9}$ gives $x - 5 = 2x - 9$, so $x = 4$, and the answer is accepted unchecked. At $x = 4$ both radicands equal $-1$, so neither side exists: the equation has no solution.
+[Read more](!#pitfalls)]@
+
+In both configurations, squaring once or twice turns the radicals into ordinary expressions, and the equation that remains is solved like any other linear or quadratic equation. The candidates it produces still belong to the original equation. There, each square root is defined only where its radicand is non-negative, and each side must take the same value.`,
     before: ``,
     after: ``,
     link: '',
@@ -526,6 +536,10 @@ Check $x = 0$: $\\sqrt{1} = 1$ and $0 - 1 = -1$. No match. Extraneous.
 
 Solution: $x = 4$ only.
 
+@academic[pitfall,aside:true,width:35%:Checking in the squared equation
+Substituting $x = 0$ into the squared equation $2x + 1 = (x - 1)^2$ gives $1 = 1$, so $x = 0$ looks valid. In the original, $\\sqrt{1} = 1$ but $0 - 1 = -1$, so $x = 4$ is the only solution.
+[Read more](!#pitfalls)]@
+
 Verification protects against extraneous solutions introduced by squaring and against domain violations where radicands become negative.`,
     before: ``,
     after: ``,
@@ -535,6 +549,58 @@ Verification protects against extraneous solutions introduced by squaring and ag
   obj11: {
     title: `Configurations at a Glance`,
     content: `The configurations covered in the sections above collect into a single reference. Each row gives a configuration, an example, the solving approach, and whether extraneous solutions are likely — useful as a quick check when faced with a new radical equation and as a reminder of when verification is essential versus merely good practice.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes account for many wrong answers to radical equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Squaring term by term**
+
+One side is a sum that contains a radical, and it is squared one term at a time, as if $(a + b)^2$ were $a^2 + b^2$.
+
+Wrong working:
+$$\\sqrt{x + 5} = \\sqrt{x} + 1 \\implies x + 5 = x + 1 \\implies 5 = 1$$
+The contradiction suggests that the equation has no solution.
+
+Right working: the square of a sum keeps its middle term.
+$$(\\sqrt{x} + 1)^2 = x + 2\\sqrt{x} + 1$$
+$$x + 5 = x + 2\\sqrt{x} + 1 \\implies 4 = 2\\sqrt{x} \\implies \\sqrt{x} = 2 \\implies x = 4$$
+
+Why it happens: squaring a single radical simply removes the root sign, and the same move is then applied to each term of a sum.
+
+How to check: try the expansion with numbers. $(3 + 1)^2 = 16$, while $3^2 + 1^2 = 10$. And $x = 4$ does satisfy the original equation: $\\sqrt{9} - \\sqrt{4} = 3 - 2 = 1$.
+
+**Skipping the check when both sides are radicals**
+
+With one square root on each side, squaring gives a linear equation at once. Both sides are non-negative, so no sign is lost, and the check gets skipped. The radicands, however, can still be negative.
+
+Wrong working:
+$$\\sqrt{x - 5} = \\sqrt{2x - 9} \\implies x - 5 = 2x - 9 \\implies x = 4$$
+The answer $x = 4$ is accepted without substitution.
+
+Right working: substitute $x = 4$ into the original. The radicands are $4 - 5 = -1$ and $2 \\cdot 4 - 9 = -1$, so neither $\\sqrt{-1}$ is a real number. The equation has no solution. The domain shows the same thing: $x - 5 \\geq 0$ and $2x - 9 \\geq 0$ require $x \\geq 5$, and $4$ lies outside it.
+
+Why it happens: the argument "both sides are principal roots, so both are non-negative" rules out one kind of extraneous solution, and it is taken to rule out all of them.
+
+How to check: when substituting, evaluate each radicand first. If any radicand under an even root is negative, the candidate is rejected.
+
+**Checking in the squared equation**
+
+The candidates are substituted into the equation obtained after squaring, instead of into the original equation.
+
+Wrong working:
+$$\\sqrt{2x + 1} = x - 1 \\implies 2x + 1 = x^2 - 2x + 1 \\implies x^2 - 4x = 0 \\implies x = 0 \\text{ or } x = 4$$
+Checked in $2x + 1 = (x - 1)^2$: $x = 0$ gives $1 = 1$ and $x = 4$ gives $9 = 9$, so both are kept.
+
+Right working: checked in the original. $x = 0$ gives $\\sqrt{1} = 1$ on the left and $0 - 1 = -1$ on the right, so it is rejected. $x = 4$ gives $\\sqrt{9} = 3$ and $4 - 1 = 3$, so it is kept. The solution is $x = 4$ only.
+
+Why it happens: the squared equation is the last one written down and the easiest to evaluate. But every candidate satisfies it automatically, since that is the equation it was solved from, so a check there cannot reject anything.
+
+How to check: substitute into the very first line of the problem, before any squaring, and compare the two sides with the radical evaluated as a principal root.`,
     before: ``,
     after: ``,
     link: '',
@@ -554,7 +620,7 @@ Solving radical equations requires both algebraic manipulation and verification.
 const faqQuestions = {
   obj1: {
     question: "When can you skip checking for extraneous solutions?",
-    answer: "In two configurations. Odd-index equations are safe, since cubing preserves sign and no principal root convention restricts the output: $\\sqrt[3]{2x + 1} = \\sqrt[3]{x - 3}$ gives $x = -4$, which holds. A single radical equal to a single radical of the same even index is also safe, because both sides are principal roots. Everything else with an even index must be verified.",
+    answer: "Fully in one configuration, and almost in a second. Odd-index equations are safe, since cubing preserves sign and no principal root convention restricts the output: $\\sqrt[3]{2x + 1} = \\sqrt[3]{x - 3}$ gives $x = -4$, which holds. A single radical equal to a single radical of the same even index needs only a domain check: the candidate must make both radicands non-negative, since $\\sqrt{x - 5} = \\sqrt{2x - 9}$ gives $x = 4$, where both radicands are $-1$. Everything else with an even index must be verified.",
     sectionId: "10"
   },
   obj2: {
@@ -862,6 +928,14 @@ export default function RootEquationsPage({radicalEquationCases, seoData, sectio
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

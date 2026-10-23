@@ -624,6 +624,7 @@ import renderPushforward from '@/app/utils/illustrations/probability/variables/p
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -852,6 +853,38 @@ export async function getStaticProps(){
     }
   }
 
+  // Concept introduction (section "outcomes") — template I, naming. Running
+  // instance: the number of heads in three tosses (the section's demo frame),
+  // with the sum of two dice and a game's winnings as the other places. Old
+  // outcomes text (three paragraphs, no widgets) is kept in
+  // sectionsContent.outcomes, unused, and reused verbatim; the coin demo frame
+  // with its line is carried in unchanged. Section "definition" is unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciPlacesTable = ciTableOpen(['experiment', 'an outcome', 'the number you care about']) +
+    ciRow(['three coin tosses', 'HTH', 'heads: 2']) +
+    ciRow(['two dice', '(3, 5)', 'sum: 8'], { shade: true }) +
+    ciRow(['a game (win 10 dollars at 0.1, else lose 1)', 'a loss', 'winnings: −1']) +
+    ciRow(['a light bulb', 'it fails after 812.4 hours', 'lifetime: 812.4'], { shade: true, last: true }) +
+    '</tbody></table>'
+  const ciHeadsTable = ciTableOpen(['outcome', 'heads', 'outcome', 'heads']) +
+    ciRow(['HHH', '3', 'HTT', '1'], { color: '#2563EB', cols: [1, 3] }) +
+    ciRow(['HHT', '2', 'THT', '1'], { shade: true, color: '#2563EB', cols: [1, 3] }) +
+    ciRow(['HTH', '2', 'TTH', '1'], { color: '#2563EB', cols: [1, 3] }) +
+    ciRow(['THH', '2', 'TTT', '0'], { shade: true, last: true, color: '#2563EB', cols: [1, 3] }) +
+    '</tbody></table>'
+  const ciUsesTable = ciTableOpen(['once it has a name, X', 'you can ask']) +
+    ciRow(['the probability of a value', 'P(X = 2) = 3/8: three of the eight outcomes']) +
+    ciRow(['its distribution', 'the probability of every value at once'], { shade: true }) +
+    ciRow(['its expected value', 'E[X] = 1.5 heads in the long run']) +
+    ciRow(['its variance', 'how far X typically strays from 1.5'], { shade: true, last: true }) +
+    '</tbody></table>'
+
   const sectionsContent={
 
     obj0: {
@@ -927,6 +960,12 @@ These values can be listed individually, even if the list is infinite.
 Discrete random variables typically arise from counting processes, such as the number
 of successes in repeated trials or the outcome of a dice roll.
 
+@academic[pitfall,aside:true,width:35%:Calling an unbounded count continuous
+Calling the number of tosses until the first head continuous, because its values never stop, would make $P(X = 1) = 0$. The values are isolated and can be listed, so $X$ is discrete: $P(X = k) = \\left(\\frac{1}{2}\\right)^k$, and $P(X = 1) = \\frac{1}{2}$.
+[Read more](!#pitfalls)]@
+
+Some counting processes have no largest value. Tossing a coin until the first head appears can take $1$ toss, $2$ tosses, $3$ tosses, or any larger whole number of tosses.
+
 ### Continuous Random Variables
 
 A continuous random variable takes values from intervals of real numbers.  
@@ -934,6 +973,12 @@ Its possible values form a continuum rather than separate points.
 
 Continuous random variables usually arise from measurement, such as time, length,
 weight, or temperature.
+
+@academic[pitfall,aside:true,width:35%:Reading the density as a probability
+Taking $f_X(x)$ as $P(X = x)$ fails for $X$ uniform on $[0, 0.5]$: there $f_X(x) = 2$, more than any probability can be. Each single value has $P(X = x) = 0$; intervals get areas, such as $P(0 \\le X \\le 0.25) = 0.5$.
+[Read more](!#pitfalls)]@
+
+Because the values form a continuum, a continuous variable is not described by listing a probability for each value. Its distribution is given by a density $f_X(x)$, and probabilities are areas under that curve: $P(a \\le X \\le b) = \\int_a^b f_X(x)\\,dx$.
 `,
       before:``,
       after:``,
@@ -952,7 +997,13 @@ This allows probabilities to be written in forms like the probability that a ran
 variable takes a specific value or lies between two bounds.
 
 Rewriting events in this way makes probability expressions easier to analyze and
-prepares the ground for probability functions and distributions introduced later.`,
+prepares the ground for probability functions and distributions introduced later.
+
+@academic[pitfall,aside:true,width:35%:Confusing less than with at most
+For a fair die, reading $P(X < 3)$ as $P(X \\le 3) = \\frac{3}{6} = \\frac{1}{2}$ wrongly includes the face $3$. The condition $X < 3$ collects only the faces $1$ and $2$, so $P(X < 3) = \\frac{2}{6} = \\frac{1}{3}$.
+[Read more](!#pitfalls)]@
+
+For a fair die roll $X$, the statement $X \\le 3$ collects the faces $1$, $2$ and $3$, and the statement $2 \\le X \\le 5$ collects the faces $2$, $3$, $4$ and $5$. Each condition picks out a set of outcomes, and the probability of the statement is the probability of that set.`,
       before:``,
       after:``,
   
@@ -988,6 +1039,12 @@ Rolling dice can produce a random variable equal to the face value or the sum of
 multiple rolls.  
 In measurement-based experiments, a random variable may represent time, distance,
 weight, or temperature.
+
+@academic[pitfall,aside:true,width:35%:Treating the values as equally likely
+Giving each of the $11$ sums of two dice the probability $\\frac{1}{11}$ makes $P(X = 7) = \\frac{1}{11}$. Six of the $36$ pairs give a sum of $7$, so $P(X = 7) = \\frac{6}{36} = \\frac{1}{6}$, while $P(X = 2) = \\frac{1}{36}$.
+[Read more](!#pitfalls)]@
+
+The sum of two dice is a case where several outcomes share one value. The experiment has $36$ equally likely ordered pairs of faces, and the random variable sends them to only $11$ possible sums, from $2$ to $12$.
 
 In many models, simple indicator variables are used, taking the value 1 when an event
 occurs and 0 when it does not.
@@ -1061,6 +1118,72 @@ The page has shown that random variables turn outcomes into numbers, that they c
       before:``,
       after:``,
     },
+    pitfalls:{
+      title:`Common Pitfalls`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Calling an unbounded count continuous**
+
+A variable whose values have no upper limit is classed as continuous, because its list of values never ends. Having infinitely many values is taken to mean having a continuum of values.
+
+Wrong working: $X$ is the number of tosses of a fair coin until the first head. Its values $1, 2, 3, \\ldots$ never end, so $X$ is treated as continuous, and every single value gets probability $0$:
+$$P(X = 1) = 0$$
+
+Right working: the values are isolated whole numbers that can be listed one by one, so $X$ is discrete. The first head comes on toss $k$ when the first $k - 1$ tosses are tails and toss $k$ is a head:
+$$P(X = k) = \\left(\\frac{1}{2}\\right)^{k-1} \\cdot \\frac{1}{2} = \\left(\\frac{1}{2}\\right)^k$$
+So $P(X = 1) = \\frac{1}{2}$, $P(X = 2) = \\frac{1}{4}$, and the probabilities over all $k$ add up to $1$.
+
+Why it happens: in everyday speech "infinite" and "continuous" both suggest something endless. The difference is between a list that goes on, which is countable, and an interval that has no gaps.
+
+How to check: ask whether the variable can take values between two neighbouring ones. Between $2$ and $3$ tosses there is nothing the count can take, while a waiting time in seconds can take every value between $2$ and $3$.
+
+**Reading the density as a probability**
+
+For a continuous variable, the value of the density $f_X(x)$ at a point is read as the probability $P(X = x)$, in the same way as a value of a probability mass function.
+
+Wrong working: $X$ is uniform on $[0, 0.5]$, so $f_X(x) = 2$ on that interval, and
+$$P(X = 0.25) = f_X(0.25) = 2$$
+a "probability" larger than $1$.
+
+Right working: probabilities of a continuous variable are areas under the density. A single value has probability $0$, and an interval gets the area above it:
+$$P(X = 0.25) = 0, \\qquad P(0 \\le X \\le 0.25) = \\int_0^{0.25} 2 \\, dx = 0.5$$
+
+Why it happens: for a discrete variable the value $p_X(x)$ is a probability, and the density $f_X(x)$ is written in the same way, so it is read in the same way.
+
+How to check: a probability is never above $1$, but a density can be. The whole area under this density is $2 \\cdot 0.5 = 1$, as it must be, even though the curve itself stands at height $2$.
+
+**Confusing less than with at most**
+
+For a discrete variable, the strict condition $X < a$ is treated as if it were $X \\le a$, or the other way round, so the boundary value is counted when it should not be, or left out when it belongs.
+
+Wrong working: $X$ is the result of a fair die roll.
+$$P(X < 3) = P(X \\le 3) = \\frac{3}{6} = \\frac{1}{2}$$
+
+Right working: $X < 3$ collects only the faces $1$ and $2$.
+$$P(X < 3) = \\frac{2}{6} = \\frac{1}{3}$$
+The two probabilities differ by the probability of the boundary value: $P(X \\le 3) - P(X < 3) = P(X = 3) = \\frac{1}{6}$.
+
+Why it happens: for a continuous variable the two conditions have the same probability, because a single value has probability $0$. The habit is then carried over to discrete variables, where a single value can carry real probability.
+
+How to check: list the values the condition collects and ask whether the boundary value is among them. For $X < 3$ on a die the list is $1, 2$; for $X \\le 3$ it is $1, 2, 3$.
+
+**Treating the values as equally likely**
+
+The outcomes of the experiment are equally likely, and the values of the random variable are assumed to be equally likely as well. But several outcomes can share one value, and then the values carry different probabilities.
+
+Wrong working: $X$ is the sum of two fair dice. It takes the $11$ values $2, 3, \\ldots, 12$, each given the same probability:
+$$P(X = 7) = \\frac{1}{11}$$
+
+Right working: the equally likely outcomes are the $36$ ordered pairs of faces. Six of them give a sum of $7$: $(1, 6)$, $(2, 5)$, $(3, 4)$, $(4, 3)$, $(5, 2)$ and $(6, 1)$.
+$$P(X = 7) = \\frac{6}{36} = \\frac{1}{6}$$
+Only $(1, 1)$ gives a sum of $2$, so $P(X = 2) = \\frac{1}{36}$.
+
+Why it happens: for a single die the value and the outcome are the same thing, so equally likely outcomes do give equally likely values. A sum merges several outcomes into one value, and that link breaks.
+
+How to check: count the outcomes behind each value. For the sum of two dice the counts are $1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1$, which add up to $36$; equal probabilities would need equal counts.`,
+      before:``,
+      after:``,
+    },
     obj3:{
   
       title:``,
@@ -1123,6 +1246,12 @@ distributions, averages, variability, and comparison of outcomes.
   const rvHeads = (s) => [...s].filter((c) => c === 'H').length;
   const pwHeadsMap = { kind: 'map-and-stack', svgTitle: 'Three tosses: X = number of heads maps the 8 outcomes to 0, 1, 2, 3 with masses 1/8, 3/8, 3/8, 1/8', outcomes: rvSeqs.map((s) => ({ label: s, value: rvHeads(s) })), range: [0, 3], axisLabel: 'X = heads',
     notes: [{ text: 'each outcome carries 1/8; the stacks are the PMF of X' }], caption: 'A random variable sends outcomes to numbers' };
+  const conceptIntroFigures = {
+    placesTable: ciPlacesTable,
+    headsTable: ciHeadsTable,
+    usesTable: ciUsesTable,
+  };
+
   const demoUnits = {
     u_outcomes_0: demoUnitFrame({
       svg: coinSampleSpaceDiagrams.none,
@@ -1155,6 +1284,7 @@ distributions, averages, variability, and comparison of outcomes.
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1179,10 +1309,76 @@ export default function RandomVariablesPage({
   faqQuestions,
   schemas,
   typesTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // "From Outcomes to Numerical Values" concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'already',
+        lead: `You already turn outcomes into numbers without thinking about it.`,
+        content: [
+          `Random experiments produce outcomes, not numbers.  
+A coin toss results in heads or tails, a dice roll produces faces, and an experiment
+ends in one of many possible outcomes.`,
+          `Many probability questions, however, are not about the outcomes themselves but about
+numerical results derived from them.  
+Counting successes, summing values, or recording measurements all require assigning
+numbers to outcomes.`,
+        ],
+      },
+      {
+        id: 'places',
+        kind: 'instance',
+        lead: `The same move appears in coins, dice, games and measurements.`,
+        content: [
+          `In each case the experiment ends in an outcome, and a fixed rule reads a number off it.`,
+          ciTable('placesTable'),
+          `Take the coins in full. Every one of the eight outcomes of three tosses gets its count of heads.`,
+          ciTable('headsTable'),
+          <div key={'unit-u_outcomes_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_outcomes_0 }} />,
+        ],
+      },
+      {
+        id: 'shared',
+        lead: `What they share is a rule that gives every outcome exactly one number.`,
+        content: `Counting heads, adding the faces, paying out the winnings, reading the lifetime: each is a rule that takes any outcome and returns a single real number. The outcomes differ — sequences, pairs, events, times — and the rule always has the same shape. Several outcomes may get the same number (three outcomes have $2$ heads), but no outcome gets two.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [random variable](!/probability/definitions#random_variable) is a rule that assigns a real number to each outcome of a random experiment — a function from the sample space to the real numbers.`,
+        footer: `Here $X$ = number of heads sends HHT to $2$ and TTT to $0$. The next section states the definition in full.`,
+      },
+      {
+        id: 'kind',
+        lead: `A random variable is a function — neither random nor a variable in the usual sense.`,
+        content: `The rule itself is fixed: HHT always gives $2$. What is random is which outcome the experiment produces, and so which number comes out. The name is old; "random function of the outcome" would describe it better. A random variable performs exactly this role: it assigns a numerical value to each
+possible outcome of a random experiment, making quantitative probability analysis
+possible.`,
+      },
+      {
+        id: 'caveat',
+        lead: `What the name buys: one set of tools for coins, dice, games and bulbs alike.`,
+        content: [
+          `With the outcomes replaced by numbers, the same questions can be asked of every experiment.`,
+          ciTable('usesTable'),
+        ],
+      },
+      {
+        id: 'exit',
+        content: [
+          `The rest of the page gives the formal definition, the types of random variables, how probabilities attach to them, why they matter, examples and notation.`,
+          `The definition makes this assignment precise.`,
+        ],
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1199,9 +1395,7 @@ export default function RandomVariablesPage({
         title:sectionsContent.outcomes.title,
         link:'',
         content:[
-            sectionsContent.outcomes.content,
-                  <div key={'unit-u_outcomes_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_outcomes_0 }} />,
-          `The definition makes this assignment precise.`,
+            <ConceptIntro key={'outcomes-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1297,6 +1491,14 @@ export default function RandomVariablesPage({
           sectionsContent.summary.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:'',
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

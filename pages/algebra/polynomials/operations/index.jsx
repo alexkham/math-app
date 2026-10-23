@@ -13,6 +13,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -486,6 +488,10 @@ For $(x + 2)(x^2 - 3x + 1)$, distribute each term of the binomial across the tri
 
 @academic[rule_theorem_plain:The degree of a product equals the sum of the degrees of the factors — always, without exception.]@
 
+@academic[pitfall,aside:true,width:35%:Multiplying the exponents
+Multiplying the exponents as well as the coefficients turns $2x^2 \\cdot 3x^3$ into $6x^6$; at $x = 2$ that is $384$, but the product is $8 \\cdot 24 = 192$. Exponents add: $2x^2 \\cdot 3x^3 = 6x^5$.
+[Read more](!#pitfalls)]@
+
 A degree-$2$ polynomial times a degree-$3$ polynomial produces a degree-$5$ polynomial. This follows from the fact that the highest-degree terms in each factor multiply to produce the highest-degree term in the product, and no other pair of terms can reach that degree.
 
 The number of terms before combining can grow quickly. Multiplying an $m$-term polynomial by an $n$-term polynomial generates $m \\times n$ individual products. A binomial times a trinomial produces $6$ terms before simplification; two four-term polynomials produce $16$. Careful bookkeeping — and a systematic approach to distributing — prevents missed terms.`,
@@ -510,6 +516,12 @@ $$(a - b)^2 = a^2 - 2ab + b^2$$
 
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the middle term
+Squaring each term on its own gives $(x + 3)^2 = x^2 + 9$; at $x = 1$ that is $10$, but $(1 + 3)^2 = 16$. The square keeps its middle term: $(x + 3)^2 = x^2 + 6x + 9$.
+[Read more](!#pitfalls)]@
+
+Squaring a binomial means multiplying it by itself: $(a + b)^2 = (a + b)(a + b)$. Distributing produces four products, $a^2$, $ab$, $ba$ and $b^2$, and the two middle ones are equal, so they combine into a single term.
 
 The middle term is always twice the product of the two original terms — a detail that connects directly to identifying perfect square trinomials when [factoring](!/algebra/polynomials/factoring).
 
@@ -592,6 +604,10 @@ The connection to polynomial evaluation is immediate.
 @academic[rule_theorem:Remainder Theorem
 The remainder produced by synthetic division equals $P(c)$, the value of the dividend evaluated at $x = c$.]@
 
+@academic[pitfall,aside:true,width:35%:Using the wrong sign for c
+Dividing $x^3 - 2x^2 + 5x - 3$ by $x + 1$ with $c = 1$ actually divides by $x - 1$ and returns remainder $1 = P(1)$. Since $x + 1 = x - (-1)$, use $c = -1$: quotient $x^2 - 3x + 8$, remainder $-11$.
+[Read more](!#pitfalls)]@
+
 This is the Remainder Theorem in action, and it means synthetic division doubles as a fast way to compute $P(c)$ without substituting into every term. If $P(c) = 0$, then $(x - c)$ divides the polynomial evenly and $c$ is a [root](!/algebra/polynomials/roots).
 
 The limitation is strict: synthetic division works only for divisors of the form $(x - c)$. Dividing by $x^2 + 1$, by $2x - 3$, or by any polynomial of degree two or higher requires the full long division procedure.`,
@@ -619,6 +635,68 @@ These relationships provide a quick sanity check. If multiplying two quadratics 
   obj9: {
     title: `Summary: The Four Operations at a Glance`,
     content: `The four operations on polynomials — addition, subtraction, multiplication, and division — each follow a distinct procedure and affect the degree of the result in a predictable way. The table below collects every operation with its core technique, its degree effect, and the typical pitfall to watch for.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj16: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for most wrong answers in polynomial arithmetic. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Negating only the first term**
+
+In a subtraction, the minus sign in front of the parentheses is applied to the first term of the subtracted polynomial only, and the remaining terms are copied with their original signs.
+
+Wrong working:
+$$(2x^2 + 3x - 1) - (x^2 - 5x + 4) = 2x^2 + 3x - 1 - x^2 - 5x + 4 = x^2 - 2x + 3$$
+
+Right working: every term of the second polynomial changes sign, so it becomes $-x^2 + 5x - 4$.
+$$(2x^2 + 3x - 1) + (-x^2 + 5x - 4) = x^2 + 8x - 5$$
+
+Why it happens: removing parentheses after a plus sign changes nothing, and the same habit is carried over to a minus sign, which then seems to belong only to the term written next to it.
+
+How to check: substitute a value. At $x = 1$ the original is $(2 + 3 - 1) - (1 - 5 + 4) = 4 - 0 = 4$. The wrong result gives $1 - 2 + 3 = 2$; the right one gives $1 + 8 - 5 = 4$.
+
+**Multiplying the exponents**
+
+When two terms are multiplied, the exponents of the variable are multiplied too, in the same way as the coefficients.
+
+Wrong working:
+$$2x^2 \\cdot 3x^3 = 6x^6$$
+
+Right working: the coefficients multiply and the exponents add, because $x^2 \\cdot x^3$ is $(x \\cdot x)(x \\cdot x \\cdot x)$, five factors of $x$.
+$$2x^2 \\cdot 3x^3 = (2 \\cdot 3)x^{2 + 3} = 6x^5$$
+
+Why it happens: the coefficients really are multiplied, and the exponents sit right beside them, so the same operation gets applied to both.
+
+How to check: substitute $x = 2$. The product is $2 \\cdot 2^2 \\cdot 3 \\cdot 2^3 = 8 \\cdot 24 = 192$, which matches $6 \\cdot 2^5 = 192$ but not $6 \\cdot 2^6 = 384$. The degree rule gives the same signal: terms of degree $2$ and $3$ multiply to a term of degree $5$.
+
+**Dropping the middle term**
+
+A binomial is squared by squaring each of its two terms, as if the exponent could be handed out over the sum.
+
+Wrong working:
+$$(x + 3)^2 = x^2 + 3^2 = x^2 + 9$$
+
+Right working: write the square as a product and distribute.
+$$(x + 3)^2 = (x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9$$
+
+Why it happens: an exponent does distribute over a product, $(ab)^2 = a^2b^2$, and the same move is carried over to a sum, where it does not hold.
+
+How to check: substitute $x = 1$. The original gives $(1 + 3)^2 = 16$; the wrong form gives $1 + 9 = 10$, the right one $1 + 6 + 9 = 16$. Counting products works too: a binomial times a binomial makes four products, and $x^2 + 9$ accounts for only two of them.
+
+**Using the wrong sign for c**
+
+Synthetic division needs the divisor in the form $x - c$. For a divisor such as $x + 1$, the number $1$ is read off directly and used as $c$.
+
+Wrong working: dividing $x^3 - 2x^2 + 5x - 3$ by $x + 1$ with $c = 1$ gives the bottom row $1, -1, 4, 1$, that is, quotient $x^2 - x + 4$ and remainder $1$. This is the division by $x - 1$ from the section above.
+
+Right working: $x + 1 = x - (-1)$, so $c = -1$. Bring down $1$; then $1 \\cdot (-1) = -1$ and $-2 + (-1) = -3$; then $-3 \\cdot (-1) = 3$ and $5 + 3 = 8$; then $8 \\cdot (-1) = -8$ and $-3 + (-8) = -11$. The bottom row $1, -3, 8, -11$ gives quotient $x^2 - 3x + 8$ and remainder $-11$.
+
+Why it happens: the divisor shows $+1$, and the number placed to the left of the row is copied from it without first rewriting the divisor as $x - c$.
+
+How to check: by the Remainder Theorem, the remainder must equal the dividend evaluated where the divisor is zero. Here $P(-1) = -1 - 2 - 5 - 3 = -11$. Multiplying back also works: $(x + 1)(x^2 - 3x + 8) - 11 = x^3 - 2x^2 + 5x - 3$.`,
     before: ``,
     after: ``,
     link: '',
@@ -791,8 +869,25 @@ const schemas = {
     }),
   };
 
+  const polyOpTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four operations on polynomials',
+    preface: 'Each operation has its own rule, and each tells you something about the degree of the result.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Degree is the bookkeeping',
+    conclusion: 'Sums keep the degree at most the larger one, products add the degrees, and division leaves a remainder of lower degree than the divisor.',
+    root: { name: 'Polynomial operations', sub: '4 operations' },
+    children: [
+      { id: 'add', name: 'Add', items: [ { label: 'Rule', text: 'combine like terms' }, { label: 'Degree', text: 'at most the larger degree' } ] },
+      { id: 'sub', name: 'Subtract', items: [ { label: 'Rule', text: 'distribute the negative over every term' } ] },
+      { id: 'mul', name: 'Multiply', items: [ { label: 'Rule', text: 'every term times every term' }, { label: 'Degree', text: 'the sum of the degrees' } ] },
+      { id: 'div', name: 'Divide', items: [ { label: 'Rule', text: 'long or synthetic division' }, { label: 'Remainder', text: 'degree below the divisor' } ] },
+    ],
+  };
+
   return {
   props:{
+    polyOpTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -813,7 +908,7 @@ const schemas = {
    }
 
 
-export default function OperationsPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function OperationsPage({polyOpTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -929,6 +1024,22 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="polynomial-operations-tree"
+            title="The four polynomial operations"
+            source="/algebra/polynomials/operations"
+          >
+            <TopDownTree data={polyOpTree} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

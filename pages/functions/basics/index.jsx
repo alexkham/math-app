@@ -893,6 +893,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationships/setElements.v2'
 import renderLineTest from '@/app/utils/illustrations/functions/graphs/lineTest'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
 
 
 export async function getStaticProps(){
@@ -1203,6 +1206,10 @@ If every vertical line intersects the graph at most once, the graph is a functio
 
 The test works because a vertical line consists of all points with a fixed $x$-value. If the line crosses the graph twice, those two intersection points have the same $x$-coordinate but different $y$-coordinates — meaning the same input produces two different outputs, violating the definition of a function.
 
+@academic[pitfall,aside:true,width:35%:Testing with horizontal lines
+Checking $y = x^2$ with the horizontal line $y = 4$ finds two crossings, at $x = -2$ and $x = 2$, and rejects the graph. Two inputs sharing the output $4$ is allowed, so the graph is still a function; only vertical lines decide it.
+[Read more](!#pitfalls)]@
+
 A parabola opening upward passes the test: every vertical line hits it at most once. A circle fails: vertical lines through the interior hit it twice. A horizontal line passes: each vertical line intersects it exactly once. A vertical line fails spectacularly: a single vertical line intersects it infinitely many times.
 
 The test applies only to graphs in the standard $xy$-plane where $x$ represents input and $y$ represents output. It is a visual check, useful for quickly identifying whether a curve could represent a function.`,
@@ -1283,7 +1290,13 @@ Evaluating with expressions as input requires careful substitution. For $f(x) = 
 @academic[formula_callout:Evaluating Functions
 $$f(a + 2) = (a + 2)^2 + 1 = a^2 + 4a + 4 + 1 = a^2 + 4a + 5$$]@
 
-The parentheses around $a + 2$ are essential — without them, order of operations produces errors.`,
+@academic[pitfall,aside:true,width:35%:Squaring a sum term by term
+Writing $(a + 2)^2$ as $a^2 + 4$ gives $f(a + 2) = a^2 + 5$, which at $a = 1$ is $6$, not $f(3) = 10$. The square has a middle term: $(a + 2)^2 = a^2 + 4a + 4$, so $f(a + 2) = a^2 + 4a + 5$.
+[Read more](!#pitfalls)]@
+
+The parentheses around $a + 2$ are essential — without them, order of operations produces errors.
+
+Once the substitution is written, the rest is ordinary algebra: the bracket is expanded and like terms are collected. The result is a new expression in $a$, the output of $f$ for every input of the form $a + 2$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1315,6 +1328,12 @@ From a graph, apply the vertical line test. If any vertical line crosses the gra
 
 From an equation, consider whether solving for $y$ yields a unique value for each $x$. The equation $y = x^2$ defines a function: each $x$ gives exactly one $y$. The equation $y^2 = x$ does not define $y$ as a function of $x$: for $x = 4$, both $y = 2$ and $y = -2$ satisfy the equation.
 
+@academic[pitfall,aside:true,width:35%:Dropping the negative root
+Solving $y^2 = x$ as $y = \\sqrt{x}$ keeps one root and makes the equation look like a function. At $x = 9$ both $y = 3$ and $y = -3$ satisfy it, since $y = \\pm\\sqrt{x}$; it does not define $y$ as a function of $x$.
+[Read more](!#pitfalls)]@
+
+Solving for $y$ is where the equation test is decided. What matters is how many values of $y$ the solved form returns for a single $x$: exactly one for every $x$ means a function, two or more for any $x$ means a relation that is not a function.
+
 From a verbal description, analyze the rule. "Assign to each person their biological mother" defines a function. "Assign to each person their sibling" does not — a person may have multiple siblings or none.
 
 The table below collects the diagnostic in each representation along with an example of a relation that fails the test.`,
@@ -1333,6 +1352,12 @@ The $y$-intercept is the output when the input is zero, namely $f(0)$. On a grap
 
 @academic[rule_plain:Not every function has a $y$-intercept — if $0$ is not in the domain, $f(0)$ does not exist.]@
 
+@academic[pitfall,aside:true,width:35%:Confusing zeros with the y-intercept
+Answering "find the zeros of $f(x) = x^2 - 5x + 6$" with $f(0) = 6$ finds the $y$-intercept instead. The zeros solve $f(x) = 0$: $(x - 2)(x - 3) = 0$, so $x = 2$ and $x = 3$.
+[Read more](!#pitfalls)]@
+
+Zeros and the $y$-intercept both involve setting something equal to zero, which is why they sit side by side here. For zeros, the output is set to $0$ and the equation is solved for the input; for the $y$-intercept, the input is set to $0$ and the output is computed. On a graph, the first are read on the horizontal axis, the second on the vertical one.
+
 Undefined points are inputs where the function has no output. Division by zero, square roots of negative numbers, and logarithms of non-positive numbers all produce undefined results. The function $f(x) = 1/x$ is undefined at $x = 0$. The function $g(x) = \\sqrt{x}$ is undefined for $x < 0$ when restricted to real outputs.
 
 Identifying these special values — where the function equals zero, where it is undefined, where it crosses the axes — anchors the analysis of any function.`,
@@ -1345,13 +1370,97 @@ Identifying these special values — where the function equals zero, where it is
     title: `Functions in Context`,
     content: `Functions model relationships in the real world. The input and output carry units, the domain reflects physical constraints, and the function values have practical meaning.
 
-A function $C(n)$ might give the cost in dollars to produce $n$ items. Here $n$ must be a non-negative integer (or non-negative real, if fractional production makes sense), and $C(n)$ represents actual currency. The statement $C(100) = 450$ means producing $100$ items costs $\\$450$.
+A function $C(n)$ might give the cost in dollars to produce $n$ items. Here $n$ must be a non-negative integer (or non-negative real, if fractional production makes sense), and $C(n)$ represents actual currency. The statement $C(100) = 450$ means producing $100$ items costs $450$ dollars.
 
-A function $d(t)$ might give the distance in meters traveled after $t$ seconds. The domain might be $[0, 10]$ if the motion is observed for ten seconds. The zeros of $d$ indicate when the object is at the starting position. The [range](!/functions/range) indicates how far the object travels.
+A function $d(t)$ might give the position in meters, measured from the starting point, after $t$ seconds. The domain might be $[0, 10]$ if the motion is observed for ten seconds. The zeros of $d$ indicate when the object is at the starting position. The [range](!/functions/range) indicates how far from the start the object gets.
+
+@academic[pitfall,aside:true,width:35%:Reading function values backwards
+Reading $d(4) = 12$ as "after $12$ seconds the object has gone $4$ meters" swaps input and output. The input sits inside the parentheses, $t = 4$ seconds; the output is the distance, $12$ meters.
+[Read more](!#pitfalls)]@
 
 Interpreting functions in context means translating between mathematical statements and real-world meaning. What does $f(5) = 20$ mean? What does it mean for the function to be increasing? What real-world constraint limits the domain?
 
 Context also imposes restrictions absent from pure mathematics. Time cannot be negative, populations must be non-negative integers, percentages lie between $0$ and $100$. These constraints shape the [domain](!/functions/domain) when functions model reality.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Six mistakes come up again and again in first work with functions. Five are marked where they happen in the sections above; rejecting a shared output is the one that **What is a Function** already points out. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Rejecting a shared output**
+
+When checking whether a rule is a function, two inputs with the same output are counted as a violation. The definition restricts each input to one output; it says nothing against an output being reached more than once.
+
+Wrong working: for $f(x) = x^2$, $f(2) = 4$ and $f(-2) = 4$, so one output comes from two inputs and $f$ is declared not a function.
+
+Right working: each input has exactly one output, $2 \\mapsto 4$ and $-2 \\mapsto 4$, so $f$ is a function. In the same way $\\{(2, 5), (3, 7), (4, 5)\\}$ is a function even though $5$ appears twice.
+
+Why it happens: the condition is remembered as "one input, one output" and then applied in both directions. The two-way version is a different, stronger property, being one-to-one, which matters later for inverses.
+
+How to check: look only for a repeated input with different outputs. Repeated outputs never decide the question.
+
+**Testing with horizontal lines**
+
+The line test is run with horizontal lines instead of vertical ones. A horizontal line collects points with the same $y$-value, so two crossings mean two inputs share one output, which a function is allowed to do.
+
+Wrong working: the line $y = 4$ meets $y = x^2$ at $(-2, 4)$ and $(2, 4)$; two crossings, so the graph is rejected.
+
+Right working: a vertical line $x = c$ meets $y = x^2$ only at $(c, c^2)$, one point for every $c$, so $y = x^2$ is a function.
+
+Why it happens: the horizontal line test looks the same and is taught soon after, as the test for one-to-one functions.
+
+How to check: ask what the line holds fixed. A vertical line fixes the input $x$, and the definition of a function is a statement about one input at a time.
+
+**Squaring a sum term by term**
+
+When a function is evaluated at an expression, the substitution is done correctly but the bracket is expanded as if $(a + 2)^2$ were $a^2 + 2^2$.
+
+Wrong working: $f(a + 2) = (a + 2)^2 + 1 = a^2 + 4 + 1 = a^2 + 5$.
+
+Right working: $(a + 2)^2 = (a + 2)(a + 2) = a^2 + 2a + 2a + 4 = a^2 + 4a + 4$, so $f(a + 2) = a^2 + 4a + 5$.
+
+Why it happens: squaring does pass through products, $(2a)^2 = 4a^2$, and the same move is carried over to sums, where it fails.
+
+How to check: substitute a number. At $a = 1$ the input is $3$ and $f(3) = 3^2 + 1 = 10$; the right result gives $1 + 4 + 5 = 10$, the wrong one gives $1 + 5 = 6$.
+
+**Dropping the negative root**
+
+To test an equation, it is solved for $y$, but an even root is taken with only its positive value, so the equation seems to give one $y$ per $x$.
+
+Wrong working: $y^2 = x$ gives $y = \\sqrt{x}$, one value for each $x$, so the equation is declared a function.
+
+Right working: $y^2 = x$ gives $y = \\pm\\sqrt{x}$. At $x = 9$ both $y = 3$ and $y = -3$ satisfy $y^2 = 9$: one input, two outputs, so $y$ is not a function of $x$. The equation $y = \\sqrt{x}$ on its own is a function; it describes only the upper half of the curve.
+
+Why it happens: the radical sign means the non-negative root, so writing $\\sqrt{x}$ quietly discards the second solution.
+
+How to check: pick one $x > 0$ and substitute both candidate values of $y$ into the original equation. If both work, the equation is not a function of $x$.
+
+**Confusing zeros with the y-intercept**
+
+Both ideas involve zero. Asked for the zeros, $f(0)$ is computed, which sets the input to zero instead of the output.
+
+Wrong working: for $f(x) = x^2 - 5x + 6$, $f(0) = 0 - 0 + 6 = 6$, so the zero is given as $6$.
+
+Right working: solve $x^2 - 5x + 6 = 0$. Factoring gives $(x - 2)(x - 3) = 0$, so $x = 2$ or $x = 3$; indeed $f(2) = 4 - 10 + 6 = 0$ and $f(3) = 9 - 15 + 6 = 0$. The value $6$ is the $y$-intercept, the point $(0, 6)$.
+
+Why it happens: the word "zero" appears in both definitions, once for the output and once for the input.
+
+How to check: a zero is an input, and substituting it must give $0$. Here $f(6) = 36 - 30 + 6 = 12$, not $0$, so $6$ is not a zero.
+
+**Reading function values backwards**
+
+In a statement such as $d(4) = 12$ from a real context, the two numbers are swapped: the output is read as the input and the other way round.
+
+Wrong working: $d(4) = 12$ is read as "after $12$ seconds the object has gone $4$ meters", which is the statement $d(12) = 4$.
+
+Right working: the number inside the parentheses is the input, $t = 4$ seconds, and the value of the function is the output, $12$ meters. So after $4$ seconds the object has gone $12$ meters. In the same way $C(100) = 450$ says that $100$ items cost $450$ dollars.
+
+Why it happens: in everyday speech the quantity being asked about often comes first, and once both are plain numbers nothing on the page says which is which.
+
+How to check: attach the units. The input of $d$ is measured in seconds and its output in meters, so $d(4) = 12$ reads "at $4$ seconds, $12$ meters". The domain helps too: if the motion is observed on $[0, 10]$, a time of $12$ seconds is not even an allowed input.`,
     before: ``,
     after: ``,
     link: '',
@@ -1538,8 +1647,59 @@ const faqQuestions = {
     }),
   };
 
+  const representationTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Four ways to present one function',
+    preface: 'The same function can be given by an equation, a table, a graph or words. Each shows something the others hide.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Precision against overview',
+    conclusion: 'Equations are exact, graphs show the overall shape, tables give values at chosen points, and words tie the function to its context.',
+    root: { name: 'Representing a function', sub: '4 forms' },
+    children: [
+      { id: 'eq', name: 'Equation', items: [ { label: 'Gives', text: 'an explicit formula' }, { label: 'Strength', text: 'precise and compact' } ] },
+      { id: 'tab', name: 'Table', items: [ { label: 'Gives', text: 'input-output pairs at selected points' } ], flag: true, warn: 'values in between must be inferred' },
+      { id: 'graph', name: 'Graph', items: [ { label: 'Gives', text: 'shape, trends and extrema at a glance' } ], flag: true, warn: 'exact values are only estimates' },
+      { id: 'verbal', name: 'Verbal', items: [ { label: 'Gives', text: 'the rule in words' }, { label: 'Strength', text: 'ties to context, but imprecise' } ] },
+    ],
+  };
+
+  const functionTopicsOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Eleven topics, one subject',
+    preface: 'The functions section covers eleven topics. Each one studies a different aspect of how an input becomes an output.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Start with what goes in and what comes out',
+    conclusion: 'Domain and range come first: what goes in and what comes out. The rest build on them.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Function topics', children: [
+        { id: 'io', name: 'What goes in and comes out', children: [
+          { id: 'dom', name: '[Domain](!/functions/domain)', def: 'the set of allowed inputs' },
+          { id: 'ran', name: '[Range](!/functions/range)', def: 'outputs the function actually produces' },
+        ] },
+        { id: 'see', name: 'Seeing and describing', children: [
+          { id: 'gr', name: '[Graphs](!/functions/graphs)', def: 'functions drawn as curves' },
+          { id: 'an', name: '[Analyzing](!/functions/analyzing)', def: 'increases, decreases, extreme values' },
+          { id: 'pr', name: '[Properties](!/functions/properties)', def: 'symmetry, monotonicity, boundedness, continuity' },
+        ] },
+        { id: 'build', name: 'Building new functions', children: [
+          { id: 'ar', name: '[Arithmetic](!/functions/arithmetic)', def: 'addition, subtraction, multiplication, division' },
+          { id: 'tr', name: '[Transformations](!/functions/transformations)', def: 'shifts, stretches, compressions, reflections' },
+          { id: 'co', name: '[Composition](!/functions/composition)', def: "chaining one function's output into another" },
+          { id: 'in', name: '[Inverse](!/functions/inverse)', def: 'recovering input from output' },
+        ] },
+        { id: 'kinds', name: 'Kinds of functions', children: [
+          { id: 'pw', name: '[Piecewise](!/functions/piecewise)', def: 'different rules on different intervals' },
+          { id: 'fa', name: '[Families](!/functions/families)', def: 'groups by shared structure' },
+        ] },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    functionTopicsOutline,
+    representationTree,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1562,7 +1722,7 @@ const faqQuestions = {
     }
    }
 
-export default function FunctionsBasicsPage({
+export default function FunctionsBasicsPage({functionTopicsOutline, representationTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1630,6 +1790,14 @@ export default function FunctionsBasicsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="function-representations-tree"
+            title="Four ways to represent a function"
+            source="/functions/basics"
+          >
+            <TopDownTree data={representationTree} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1697,6 +1865,14 @@ export default function FunctionsBasicsPage({
         ]
     },
     {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
+        ]
+    },
+    {
         id:'11',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
@@ -1707,6 +1883,14 @@ export default function FunctionsBasicsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj11-diagram'}
+            id="function-topics-outline"
+            title="The function topics in four groups"
+            source="/functions/basics"
+          >
+            <TaxonomyOutline data={functionTopicsOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
 

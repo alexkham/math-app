@@ -1529,6 +1529,12 @@ $P(\\text{run}) = 0.8 × 0.6 + 0.5 × 0.3 + 0.1 × 0.1$
 
 $64$% chance you'll go running.]@
 
+@academic[pitfall,aside:true,width:35%:Leaving out a case
+Counting only the infected group gives $P(\\text{positive}) = 0.95 \\times 0.01 = 0.0095$. The healthy group tests positive too, $0.10 \\times 0.99 = 0.099$, so $P(\\text{positive}) = 0.1085$, more than eleven times as large.
+[Read more](!#mistakes)]@
+
+In Example 1 the two cases are very different in size: one person in a hundred is infected and ninety-nine are healthy. Each group has its own chance of a positive result, $0.95$ for the first and $0.10$ for the second, and the test is designed around the first group. The second, smaller conditional probability applies to almost the whole population.
+
 In each example, the total probability emerges from weighted contributions across distinct scenarios.`,
       before:``,
       after:``,
@@ -1567,6 +1573,10 @@ $$P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ
 That's the law of total probability.
 
 **The deep intuition:**
+
+@academic[pitfall,aside:true,width:35%:Using overlapping cases
+Splitting a die roll into the cases 1 to 4 and 3 to 6 puts the 4 in both pieces of "even": $P(\\text{even}) = \\frac{2}{6} + \\frac{2}{6} = \\frac{2}{3}$. With the disjoint cases 1 to 3 and 4 to 6, $P(\\text{even}) = \\frac{1}{6} + \\frac{2}{6} = \\frac{1}{2}$.
+[Read more](!#mistakes)]@
 
 You're not doing anything clever. You're just acknowledging that $A$ happens "in pieces" across the cases, and probability naturally adds across those disjoint pieces. The conditional probabilities weight each piece by how much of $A$ falls in that case. The case probabilities weight by how likely each case is to occur.
 
@@ -1729,6 +1739,12 @@ Without total probability, you have no way to compute $P(A)$ from the conditiona
 6. Total probability normalizes across all cases: $∑ P(A | Bⱼ)·P(Bⱼ)$
 7. The ratio gives the posterior: $P(Bᵢ | A)$
 
+@academic[pitfall,aside:true,width:35%:Reversing the condition
+Reading $P(\\text{positive} \\mid \\text{disease}) = 0.95$ as the chance of disease after a positive test ignores the healthy majority. With Example 1's total $P(\\text{positive}) = 0.1085$ as the denominator, $P(\\text{disease} \\mid \\text{positive}) = \\frac{0.0095}{0.1085} \\approx 0.088$.
+[Read more](!#mistakes)]@
+
+Example 1 above fits this flow directly. The cases are infected and healthy, the observed event is a positive test, and the conditional probabilities the problem gives are the test's rates within each group. The question a patient asks runs the other way: given the positive result, how likely is the disease?
+
 Total probability ensures the posteriors sum to 1. It's the normalization constant that makes Bayes work.
 
 Bayes and total probability are two sides of the same reasoning framework. Total probability aggregates forward (from cases to outcome). Bayes inverts backward (from outcome to cases).`,
@@ -1781,7 +1797,19 @@ The weights must be $P(Bᵢ)$, not $P(Bᵢ | A)$ or other quantities.
 
 Fix: verify you're using prior probabilities of cases, not posteriors.
 
-Each mistake violates the fundamental structure: a valid partition with properly weighted conditional contributions.`,
+Each mistake violates the fundamental structure: a valid partition with properly weighted conditional contributions.
+
+**Reversing the condition**
+
+Bayes' theorem is set up from the conditional probabilities a problem gives, and the given $P(A \\mid B_i)$ is read as the $P(B_i \\mid A)$ being asked for. In medical testing this turns the accuracy of the test into the patient's chance of being ill.
+
+Wrong working: in Example 1 the test detects the disease with probability $0.95$, so a positive result is taken to mean $P(\\text{disease} \\mid \\text{positive}) = 0.95$.
+
+Right working: the numerator is $P(\\text{positive} \\mid \\text{disease})\\,P(\\text{disease}) = 0.95 \\times 0.01 = 0.0095$. The denominator is the total probability of a positive test, $0.0095 + 0.10 \\times 0.99 = 0.1085$. So $P(\\text{disease} \\mid \\text{positive}) = \\frac{0.0095}{0.1085} \\approx 0.088$, under nine percent.
+
+Why it happens: both quantities use the same two events with a bar between them, and the one the problem states is the one in front of the reader. The healthy group is ninety-nine times larger, and its false positives make up $0.099$ of the $0.1085$; nothing in the number $0.95$ shows that.
+
+How to check: count people. Out of 10,000, the 100 infected give 95 positives and the 9,900 healthy give 990. Of the 1,085 positives only 95 are infected, and $\\frac{95}{1085} \\approx 0.088$.`,
       before:``,
       after:``,
   

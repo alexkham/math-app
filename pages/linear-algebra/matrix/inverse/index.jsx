@@ -3536,7 +3536,7 @@ Both products must equal the identity. A matrix possessing an inverse is called 
 
 Uniqueness follows from a short argument. Suppose both $B$ and $C$ satisfy $AB = I$ and $CA = I$. Then $B = IB = (CA)B = C(AB) = CI = C$, so $B$ and $C$ must be the same matrix. This means a matrix either has no inverse or has exactly one.
 
-The inverse is defined only for square matrices. A rectangular matrix cannot satisfy $AA^{-1} = A^{-1}A = I$ because the products would require incompatible dimensions. One-sided inverses (left or right) can exist for rectangular matrices with full column or full row [rank](!/linear-algebra/matrix/rank), but the two-sided inverse is a strictly square concept.`,
+The inverse is defined only for square matrices. A rectangular matrix cannot satisfy $AA^{-1} = A^{-1}A = I$ because $\\text{rank}(A) \\le \\min(m, n)$, so at least one of the products ($m \\times m$ or $n \\times n$) has rank too low to be an identity. One-sided inverses (left or right) can exist for rectangular matrices with full column or full row [rank](!/linear-algebra/matrix/rank), but the two-sided inverse is a strictly square concept.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3551,7 +3551,7 @@ The inverse is defined only for square matrices. A rectangular matrix cannot sat
         tex: `$A^{-1}$`,
         read: `A inverse`,
         means: `The $-1$ superscript's fourth habitat — and like $f^{-1}$ and $\\sin^{-1}$, a **label**: $A^{-1}$ is defined by $AA^{-1} = A^{-1}A = I$ in the **Definition** above, not by any division. Only on plain [numbers](!/algebra/powers/negative-exponents#notation) does the superscript mean a genuine reciprocal.`,
-        cases: `Exists only for square, nonsingular matrices — writing $A^{-1}$ silently asserts both. The vocabulary pair travels with the mark: *invertible/nonsingular* when it exists, **singular** when it does not.`,
+        cases: `Exists only for square, nonsingular matrices — writing $A^{-1}$ silently asserts both. The vocabulary pair travels with the mark: **invertible**/**nonsingular** when it exists, **singular** when it does not.`,
         alsoWritten: `$\\operatorname{inv}(A)$ — the functional spelling in software (MATLAB, NumPy), rarely in print.`,
         confusedWith: `$\\frac{1}{A}$. There is no matrix fraction — the reciprocal habit has nothing to grab, because “over $A$” cannot say on **which side** $A^{-1}$ multiplies.`,
       },
@@ -3589,6 +3589,10 @@ The inverse is defined only for square matrices. A rectangular matrix cannot sat
 The recipe is: swap the diagonal entries, negate the off-diagonal entries, and divide everything by the [determinant](!/linear-algebra/determinants) $ad - bc$.
 
 ## Worked Examples
+
+@academic[pitfall,aside:true,width:35%:Dropping the determinant factor
+Swapping and negating without dividing turns $A = \\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}$ into $\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$, and $A$ times that is $10I$, not $I$. With $\\det(A) = 10$, the inverse is $\\frac{1}{10}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$.
+[Read more](!#9)]@
 
 For $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$, the determinant is $3 \\cdot 2 - 1 \\cdot 5 = 1$. The inverse is $A^{-1} = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$. Since $\\det(A) = 1$, every entry of $A^{-1}$ is an integer.
 
@@ -3651,6 +3655,12 @@ $$\\begin{pmatrix} 1 & 0 & 0 & 6 & -3 & 1 \\\\ 0 & 1 & 0 & -3 & 2 & -1 \\\\ 0 & 
 
 So $A^{-1} = \\begin{pmatrix} 6 & -3 & 1 \\\\ -3 & 2 & -1 \\\\ 1 & -1 & 1 \\end{pmatrix}$.
 
+@academic[pitfall,aside:true,width:35%:Stopping at echelon form
+Reading the right half once the left half is triangular, after the second step, gives $\\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 1 \\end{pmatrix}$; $A$ times it has first row $(-2, 1, 1)$, not $(1, 0, 0)$. The left half has to reach $I$; then the right half is $A^{-1}$, with first row $(6, -3, 1)$.
+[Read more](!#9)]@
+
+The reduction ran in two stages. The first two steps cleared the entries below the diagonal and left an upper triangular left half with ones on the diagonal. The last two steps worked upward from row $3$ and cleared the entries above the diagonal, and every operation was applied to the whole row of six entries. Multiplying $A$ by the final right half returns $I$, which confirms the result.
+
 @academic[rule_plain:If at any point during reduction the left half develops a row of all zeros, $A$ is singular and no inverse exists.]@
 
 To compute the inverse of a specific matrix with each step shown, use the [matrix calculator](!/linear-algebra/calculators/matrix).`,
@@ -3666,6 +3676,10 @@ To compute the inverse of a specific matrix with each step shown, use the [matri
 @academic[formulas_link:/linear-algebra/formulas#inverse_via_adjugate]@
 
 The adjugate is the transpose of the [cofactor](!/linear-algebra/determinants/cofactors) matrix, so each entry of $A^{-1}$ is a cofactor of $A$ divided by $\\det(A)$.
+
+@academic[pitfall,aside:true,width:35%:Forgetting to transpose the cofactors
+Dividing the cofactor matrix itself by $\\det(A)$ for $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$ gives $\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$, and $A$ times it is $\\begin{pmatrix} 5 & -12 \\\\ 8 & -19 \\end{pmatrix}$. Transposed first, it gives the inverse $\\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$.
+[Read more](!#9)]@
 
 For the $2 \\times 2$ case, the adjugate formula reduces to the swap-and-negate formula from section $2$. The cofactor matrix of $\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$ is $\\begin{pmatrix} d & -c \\\\ -b & a \\end{pmatrix}$, and transposing gives $\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$, which is exactly the numerator matrix in the $2 \\times 2$ inverse formula.
 
@@ -3688,7 +3702,13 @@ The inverse of a product reverses the order:
 @academic[formula_callout:inverse_of_product|Inverse of Product|$$(AB)^{-1} = B^{-1} A^{-1}$$]@
 @academic[formulas_link:/linear-algebra/formulas#inverse_of_product]@
 
+@academic[pitfall,aside:true,width:35%:Keeping the order in a product
+Writing $(AB)^{-1} = A^{-1}B^{-1}$ for $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ and $B = \\begin{pmatrix} 1 & 0 \\\\ 1 & 1 \\end{pmatrix}$ gives $\\begin{pmatrix} 2 & -1 \\\\ -1 & 1 \\end{pmatrix}$. The inverse of $AB = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix}$ is $B^{-1}A^{-1} = \\begin{pmatrix} 1 & -1 \\\\ -1 & 2 \\end{pmatrix}$.
+[Read more](!#9)]@
+
 This generalizes to any number of factors — $(A_1 A_2 \\cdots A_k)^{-1} = A_k^{-1} \\cdots A_2^{-1} A_1^{-1}$.
+
+The reason is the order in which the matrices act. In $AB\\mathbf{x}$, the matrix $B$ acts on $\\mathbf{x}$ first and $A$ acts second, so getting $\\mathbf{x}$ back means removing $A$ first and $B$ second: $B^{-1}A^{-1}(AB)\\mathbf{x} = B^{-1}(A^{-1}A)B\\mathbf{x} = B^{-1}B\\mathbf{x} = \\mathbf{x}$.
 
 Transpose and inverse commute:
 
@@ -3728,7 +3748,7 @@ This follows immediately from the [multiplicative property](!/linear-algebra/det
 
 This is the matrix analogue of dividing both sides by $A$. Multiplying both sides on the left by $A^{-1}$ gives $A^{-1}A\\mathbf{x} = A^{-1}\\mathbf{b}$, which simplifies to $\\mathbf{x} = A^{-1}\\mathbf{b}$.
 
-In principle, this solves the system in one matrix-vector multiplication — but only if $A^{-1}$ is already known. Computing $A^{-1}$ from scratch requires roughly as much work as solving the system by [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination), and the elimination approach is more numerically stable. Even when multiple systems share the same coefficient matrix $A$ with different right-hand sides, the LU decomposition is preferred: factor $A = LU$ once, then solve each system with two cheap triangular substitutions.
+In principle, this solves the system in one matrix-vector multiplication — but only if $A^{-1}$ is already known. Computing $A^{-1}$ from scratch requires about three times as much work as solving the system once by [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination), and the elimination approach is more numerically stable. Even when multiple systems share the same coefficient matrix $A$ with different right-hand sides, the LU decomposition is preferred: factor $A = LU$ once, then solve each system with two cheap triangular substitutions.
 
 The formula $\\mathbf{x} = A^{-1}\\mathbf{b}$ is most valuable as a theoretical tool. It proves that an invertible system always has a unique solution, and it makes the dependence of $\\mathbf{x}$ on $\\mathbf{b}$ explicit and linear.`,
     before: ``,
@@ -3743,6 +3763,12 @@ A [diagonal](!/linear-algebra/matrix/types) matrix $D = \\text{diag}(d_1, \\dots
 
 @academic[formula_callout:diagonal_matrix_inverse|Diagonal Matrix Inverse|$$D = \\text{diag}(d_1, \\dots, d_n) \\Rightarrow D^{-1} = \\text{diag}(1/d_1, \\dots, 1/d_n)$$]@
 @academic[formulas_link:/linear-algebra/formulas#diagonal_matrix_inverse]@
+
+@academic[pitfall,aside:true,width:35%:Reciprocating every entry
+Applying the diagonal rule to $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$ gives $\\begin{pmatrix} 1/3 & 1 \\\\ 1/5 & 1/2 \\end{pmatrix}$, and $A$ times it has first row $(6/5, 7/2)$, not $(1, 0)$. The inverse is $\\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$.
+[Read more](!#9)]@
+
+The rule works because a diagonal matrix scales each coordinate on its own: $D$ multiplies the $i$-th coordinate by $d_i$ and never mixes one coordinate into another. Undoing it means dividing each coordinate by its own $d_i$, which is exactly what $\\text{diag}(1/d_1, \\dots, 1/d_n)$ does. For example, $\\text{diag}(2, -4, 5)^{-1} = \\text{diag}(1/2, -1/4, 1/5)$.
 
 An [orthogonal](!/linear-algebra/matrix/types) matrix $Q$ has the cheapest possible inverse — its transpose:
 
@@ -3770,7 +3796,49 @@ The inverse of a product reverses order. Writing $(AB)^{-1} = A^{-1}B^{-1}$ is w
 
 Not every matrix is invertible. Assuming an inverse exists without checking the determinant or rank leads to division-by-zero errors in the $2 \\times 2$ formula and to contradictions in row reduction.
 
-The inverse is not the entry-by-entry reciprocal. The matrix $A^{-1}$ is not obtained by replacing each $a_{ij}$ with $1/a_{ij}$. The inverse is a global operation that depends on all entries simultaneously.`,
+The inverse is not the entry-by-entry reciprocal. The matrix $A^{-1}$ is not obtained by replacing each $a_{ij}$ with $1/a_{ij}$. The inverse is a global operation that depends on all entries simultaneously.
+
+**Dropping the determinant factor**
+
+In the $2 \\times 2$ formula, the swap and the sign changes are the visible part of the work, and the division by $ad - bc$ is left out. The result is $\\det(A)$ times the inverse, not the inverse.
+
+Wrong working: for $A = \\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}$, swap the diagonal entries and negate the off-diagonal ones:
+$$A^{-1} = \\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$$
+
+Right working: $\\det(A) = 4 \\cdot 6 - 7 \\cdot 2 = 10$, so
+$$A^{-1} = \\frac{1}{10}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix} = \\begin{pmatrix} 0.6 & -0.7 \\\\ -0.2 & 0.4 \\end{pmatrix}$$
+
+Why it happens: many practice matrices, including the worked examples in section $2$, have determinant $1$, where the division changes nothing and is easy to forget.
+
+How to check: multiply $A$ by the answer. The wrong form gives $\\begin{pmatrix} 10 & 0 \\\\ 0 & 10 \\end{pmatrix} = 10I$; the right form gives $I$.
+
+**Stopping at echelon form**
+
+Row reduction of $[A \\mid I]$ has two stages: clearing the entries below the diagonal, then clearing the entries above it. After the first stage the left half is triangular and looks finished, and the right half is read off as the inverse.
+
+Wrong working: for the matrix $A$ of section $4$, stop when the left half is $\\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 1 \\end{pmatrix}$ and take
+$$A^{-1} = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 1 \\end{pmatrix}$$
+
+Right working: continue upward. Subtract row $3$ from rows $2$ and $1$, then subtract $2$ times row $2$ from row $1$. The left half becomes $I$, and
+$$A^{-1} = \\begin{pmatrix} 6 & -3 & 1 \\\\ -3 & 2 & -1 \\\\ 1 & -1 & 1 \\end{pmatrix}$$
+
+Why it happens: when Gaussian elimination is used to solve a system, it stops at echelon form and finishes with back-substitution, and that habit carries over to the inverse.
+
+How to check: the left half must be exactly $I$ before the right half is read. Multiplying also catches it: $A$ times the wrong form is $\\begin{pmatrix} -2 & 1 & 1 \\\\ -5 & 2 & 3 \\\\ -2 & 0 & 3 \\end{pmatrix}$, while $A$ times the right form is $I$.
+
+**Forgetting to transpose the cofactors**
+
+The adjugate formula needs two steps once the cofactors are known: transpose the cofactor matrix, then divide by the determinant. The transpose is skipped, and the cofactor matrix itself is divided by $\\det(A)$.
+
+Wrong working: for $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$, the cofactors are $C_{11} = 2$, $C_{12} = -5$, $C_{21} = -1$, $C_{22} = 3$, and $\\det(A) = 1$, so
+$$A^{-1} = \\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$$
+
+Right working: transpose first, so $\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$, and
+$$A^{-1} = \\frac{1}{1}\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$$
+
+Why it happens: the cofactor $C_{ij}$ is computed for position $(i, j)$, and it feels natural to leave it there. For a symmetric matrix the transpose changes nothing, so the slip goes unnoticed in such examples.
+
+How to check: multiply $A$ by the answer. The wrong form gives $\\begin{pmatrix} 5 & -12 \\\\ 8 & -19 \\end{pmatrix}$, the right form gives $I$. For a $2 \\times 2$ matrix, the result must also agree with the swap-and-negate formula.`,
     before: ``,
     after: ``,
     link: ``,

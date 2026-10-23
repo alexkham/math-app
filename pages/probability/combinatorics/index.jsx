@@ -881,8 +881,14 @@ Probability calculations depend on how outcomes are organized.
 • If order does not matter, outcomes are counted as unordered selections.
 • In some models, repetition of outcomes is allowed; in others, it is not.
 
+@academic[pitfall,aside:true,width:35%:Counting the event and the sample space differently
+For two aces in two cards, counting the event unordered, $\\binom{4}{2} = 6$, but the sample space ordered, $52 \\cdot 51 = 2652$, gives $\\frac{6}{2652} = \\frac{1}{442}$. Counted unordered both times, $P = \\frac{6}{1326} = \\frac{1}{221}$.
+[Read more](!#pitfalls)]@
+
 These structural distinctions determine which counting method applies to a given probability [model](!/probability/models).  
 Choosing the wrong structure leads directly to incorrect probability values.
+
+A classical probability uses the chosen structure twice: once to count the outcomes in the event $A$ and once to count the whole sample space $\\Omega$. Two cards drawn from a deck, for instance, can be listed as ordered draws, where the ace of spades followed by the king of hearts differs from the king of hearts followed by the ace of spades, or as unordered pairs, where both describe the same hand.
 `,
       before:``,
       after:``,
@@ -917,6 +923,12 @@ When counting is repeated across structured experiments, probability distributio
 • In sampling without replacement, counting selections leads to the [hypergeometric distribution](!/probability/distributions/discrete#hypergeometric).
 • In symmetric finite models, counting outcomes leads to the [discrete uniform distribution](!/probability/distributions/discrete#uniform).
 
+@academic[pitfall,aside:true,width:35%:Using the binomial without replacement
+Drawing 3 balls without replacement from 5 red and 5 blue, the binomial gives $P(\\text{3 red}) = \\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$. Each draw changes the urn, so the count is hypergeometric: $\\frac{\\binom{5}{3}}{\\binom{10}{3}} = \\frac{10}{120} = \\frac{1}{12}$.
+[Read more](!#pitfalls)]@
+
+The first two cases answer the same kind of question: how many items of one type turn up among $n$ draws. What separates them is whether each drawn item goes back before the next draw. With replacement, every draw faces the same proportions; without replacement, each draw changes what is left for the next one.
+
 In each case, counting determines the possible values of a [random variable](!/probability/random-variables) and the probabilities assigned to those values.  
 This establishes the chain: counting → [random variable](!/probability/random-variables) → [probability distribution](!/probability/distributions). The table below collects this chain in compact form, naming what is counted in each structured experiment and the distribution it produces.
 `,
@@ -933,6 +945,10 @@ This establishes the chain: counting → [random variable](!/probability/random-
 • Outcomes that contradict the given information are removed.
 • The [sample space](!/probability/sample-space) is reduced.
 • Probabilities are recalculated by counting outcomes within this restricted space.
+
+@academic[pitfall,aside:true,width:35%:Keeping the full sample space
+For two coins, $P(\\text{two heads} \\mid \\text{at least one head})$ found as $\\frac{1}{4}$ still divides by all four outcomes. The condition removes TT, leaving HH, HT and TH, so the answer is $\\frac{1}{3}$.
+[Read more](!#pitfalls)]@
 
 Under finite, equally likely assumptions, [conditional probability](!/probability/conditional-probability) is therefore a counting problem on a smaller sample space.  
 This interpretation provides the structural basis for Bayes' theorem.
@@ -1007,6 +1023,70 @@ This page explains how counting is used within probability theory, while all cou
       after:``,
       link:'',
   
+    },
+    pitfalls:{
+      title:`Common Pitfalls`,
+      content:`Each of the four mistakes below comes up in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Counting the event and the sample space differently**
+
+The event is counted as unordered selections and the sample space as ordered ones, or the other way round. The fraction then compares two different kinds of outcome, and the result is off by a constant factor.
+
+Wrong working: two cards are drawn from a standard deck of $52$, and the event is that both are aces. The event is counted as unordered pairs of aces, the sample space as ordered draws:
+$$P = \\frac{\\binom{4}{2}}{52 \\cdot 51} = \\frac{6}{2652} = \\frac{1}{442}$$
+
+Right working: count both unordered, or both ordered.
+$$P = \\frac{\\binom{4}{2}}{\\binom{52}{2}} = \\frac{6}{1326} = \\frac{1}{221} \\qquad \\text{or} \\qquad P = \\frac{4 \\cdot 3}{52 \\cdot 51} = \\frac{12}{2652} = \\frac{1}{221}$$
+
+Why it happens: the two counts are made separately, often with different tools. A combination answers "which aces", while the product rule answers "how many ways to draw", and nothing in the fraction shows that the two use different outcomes.
+
+How to check: work the answer out a second way, draw by draw: $\\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2652} = \\frac{1}{221}$. An answer that is off by a factor of $2$, or of $k!$ for $k$ items, points to a mixed structure.
+
+**Counting unordered results as equally likely**
+
+The results of an experiment are described without order, such as "two heads" or "a 1 and a 2", and each such result is treated as one outcome of an equally likely sample space.
+
+Wrong working: three fair coins are tossed. The number of heads can be $0$, $1$, $2$ or $3$; that is four results, so
+$$P(\\text{exactly 2 heads}) = \\frac{1}{4}$$
+
+Right working: the equally likely outcomes are the $2^3 = 8$ ordered sequences. Exactly two heads occur in HHT, HTH and THH, so
+$$P(\\text{exactly 2 heads}) = \\frac{3}{8}$$
+
+Why it happens: the question asks about a count, and listing the possible counts feels like listing the outcomes. The classical formula is then applied to a sample space whose members are not equally likely.
+
+How to check: ask whether each listed result can happen in only one way. Here $0$ heads happens only as TTT, but $2$ heads happens in three ways; the correct probabilities $\\frac{1}{8}, \\frac{3}{8}, \\frac{3}{8}, \\frac{1}{8}$ add up to $1$ and are not all equal.
+
+**Using the binomial without replacement**
+
+Items are drawn without replacement, but the draws are treated as independent trials with a fixed success probability, and the binomial formula is used.
+
+Wrong working: an urn holds $5$ red and $5$ blue balls, and $3$ are drawn without replacement. With $p = \\frac{5}{10} = \\frac{1}{2}$,
+$$P(\\text{3 red}) = \\binom{3}{3}\\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$$
+
+Right working: the count is hypergeometric, because every draw changes the urn.
+$$P(\\text{3 red}) = \\frac{\\binom{5}{3}\\binom{5}{0}}{\\binom{10}{3}} = \\frac{10}{120} = \\frac{1}{12}$$
+Draw by draw the same value appears: $\\frac{5}{10} \\cdot \\frac{4}{9} \\cdot \\frac{3}{8} = \\frac{60}{720} = \\frac{1}{12}$.
+
+Why it happens: the first draw has the same probability in both models, $\\frac{1}{2}$, so the setup looks like repeated trials.
+
+How to check: look at the last draw. After two red balls are gone, only $3$ of the $8$ remaining balls are red, so the third draw succeeds with probability $\\frac{3}{8}$, not $\\frac{1}{2}$. The binomial is only a close approximation when the sample is a small part of a large population; here $3$ of $10$ balls are drawn.
+
+**Keeping the full sample space**
+
+A condition is given, the outcomes of the event inside the condition are counted correctly, but the count is divided by the size of the original sample space instead of the restricted one.
+
+Wrong working: two fair coins are tossed, and it is known that at least one shows heads. For both heads, the one outcome HH is divided by all four outcomes:
+$$P(\\text{two heads} \\mid \\text{at least one head}) = \\frac{1}{4}$$
+
+Right working: the condition removes TT, so the restricted space is HH, HT, TH, with $3$ outcomes.
+$$P(A \\mid B) = \\frac{|A \\cap B|}{|B|} = \\frac{1}{3}$$
+
+Why it happens: the classical formula has $|\\Omega|$ in the denominator, and $\\Omega$ is not rewritten after the condition is applied.
+
+How to check: compare with the unconditional probability. $P(\\text{two heads}) = \\frac{1}{4}$ as well, so the wrong answer ignores the information completely. Since HH lies inside the condition, removing outcomes can only raise its probability.`,
+      before:``,
+      after:``,
+      link:'',
     },
     obj10:{
       title:``,
@@ -1129,7 +1209,7 @@ This page explains how counting methods connect to probability calculations, fro
         title: "Combinatorics in Probability: Counting and Classical Formula | Learn Math Class",
         description: "Learn how combinatorics and counting methods form the foundation of classical probability. Understand finite sample spaces, equally likely outcomes, and the classical probability formula.",
         keywords: keyWords.join(", "),
-        url: "/combinatorics",
+        url: "/probability/combinatorics",
         name: "Combinatorics in Probability"
       }
     }
@@ -1238,6 +1318,14 @@ export default function CombinatoricsPage({
         content:[
           sectionsContent.obj9.content,
           <div key={'summary-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: summaryTable}}/>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

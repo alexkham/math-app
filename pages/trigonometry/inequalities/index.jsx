@@ -925,7 +925,7 @@ export async function getStaticProps(){
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Endpoint inclusion</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">not a distinction (equality &lt;em&gt;is&lt;/em&gt; the answer)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">not a distinction (equality <em>is</em> the answer)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">open if strict (&gt;, &lt;); closed if non-strict (≥, ≤)</td>
     </tr>
     <tr>
@@ -1062,7 +1062,7 @@ export async function getStaticProps(){
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#7" style="${linkStyle}">Transformed</a>: A·f(Bx+C)+D ⋛ a</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">isolate f(·); substitute u = Bx+C and solve in u</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basic-form solution in u, scaled by 1/|B| and shifted; |B| copies per outer period</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">basic-form solution in u, scaled by 1/|B| and shifted; |B| copies per outer period when B is an integer</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">period of f scaled by 1/|B|</td>
     </tr>
     <tr>
@@ -1164,6 +1164,10 @@ const faqQuestions = {
     title: `Solutions as Intervals`,
     content: `The solution to a trigonometric inequality is fundamentally different from the solution to an equation. An equation like $\\sin(x) = \\frac{1}{2}$ produces isolated points: $x = \\frac{\\pi}{6}, \\frac{5\\pi}{6}$, plus their periodic repetitions. An inequality like $\\sin(x) > \\frac{1}{2}$ produces intervals: the entire stretch of angles between $\\frac{\\pi}{6}$ and $\\frac{5\\pi}{6}$ (exclusive), plus periodic repetitions.
 
+@academic[pitfall,aside:true,width:35%:Taking arcsin of both sides
+Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\pi}{6}$, which keeps $x = \\pi$, where $\\sin(\\pi) = 0$. On $[0, 2\\pi)$ the answer is $\\frac{\\pi}{6} < x < \\frac{5\\pi}{6}$.
+[Read more](!#pitfalls)]@
+
 This shift from points to intervals is a consequence of continuity. Since sine is continuous, if $\\sin(a) > \\frac{1}{2}$ and $\\sin(b) > \\frac{1}{2}$ and there is no point between $a$ and $b$ where $\\sin(x) = \\frac{1}{2}$, then $\\sin(x) > \\frac{1}{2}$ for every $x$ between $a$ and $b$. The boundary points — the solutions of the corresponding equation — are where the function crosses the threshold, and the intervals between them are where the inequality holds.
 
 On a restricted interval like $[0, 2\\pi)$, the solution is a finite union of intervals. In general solution form, the pattern repeats: each interval shifts by $2\\pi$ (for sine, cosine, cosecant, secant) or $\\pi$ (for tangent, cotangent) to produce the complete solution set.
@@ -1197,6 +1201,12 @@ The equation $\\cos(x) = \\frac{1}{2}$ has solutions $x = \\frac{\\pi}{3}$ and $
 $$x \\in \\left[0, \\frac{\\pi}{3}\\right) \\cup \\left(\\frac{5\\pi}{3}, 2\\pi\\right)$$
 
 The endpoints $\\frac{\\pi}{3}$ and $\\frac{5\\pi}{3}$ are excluded because the inequality is strict ($>$, not $\\geq$). The endpoint $0$ is included because the interval $[0, 2\\pi)$ starts there and $\\cos(0) = 1 > \\frac{1}{2}$.]@
+
+@academic[pitfall,aside:true,width:35%:Taking the arc between the boundary angles
+For $\\cos(x) > \\frac{1}{2}$, writing $\\left(\\frac{\\pi}{3}, \\frac{5\\pi}{3}\\right)$ keeps $x = \\pi$, where $\\cos(\\pi) = -1$. That interval solves $\\cos(x) < \\frac{1}{2}$; the answer is $\\left[0, \\frac{\\pi}{3}\\right) \\cup \\left(\\frac{5\\pi}{3}, 2\\pi\\right)$.
+[Read more](!#pitfalls)]@
+
+Step 4 is where the answer is decided. The boundary angles split the interval into pieces, and on each piece the curve stays entirely above or entirely below the line, so one test angle inside a piece settles the whole piece. For cosine the piece that contains $0$ continues past $2\\pi$ into the next period, so on $[0, 2\\pi)$ it shows up as two separate intervals, one at each end.
 
 The graphical method is especially useful for transformed functions — $2\\sin(3x) - 1 > 0$ is harder to handle algebraically, but sketching the transformed graph and reading off the solution intervals is straightforward once the [transformations](!/trigonometry/graphs) are understood.`,
     before: ``,
@@ -1236,7 +1246,7 @@ Set side by side, the two methods differ less in what they yield than in what th
 **Case** $|a| < 1$: The equation $\\sin(x) = a$ has two solutions per period: $x_1$ and $x_2 = \\pi - x_1$ (where $x_1 = \\arcsin(a)$). The sign of $a$ determines the quadrants. Within one period $[0, 2\\pi)$:
 
 - $\\sin(x) > a$ when $a > 0$: the solution is $(x_1, x_2)$ — the arc where sine exceeds $a$, passing through the maximum.
-- $\\sin(x) > a$ when $a < 0$: the solution is $[0, x_2) \\cup (x_1, 2\\pi)$ where $x_1 = \\pi - \\arcsin(a)$ and $x_2 = \\arcsin(a) + 2\\pi$ — the larger arc that includes the maximum. More carefully: the two boundary angles are $\\pi + |\\arcsin(a)|$ and $2\\pi - |\\arcsin(a)|$ (in Quadrants III and IV), and sine exceeds $a$ on the arc that does not pass through the minimum.
+- $\\sin(x) > a$ when $a < 0$: the solution is $[0, x_1) \\cup (x_2, 2\\pi)$ where $x_1 = \\pi - \\arcsin(a)$ and $x_2 = \\arcsin(a) + 2\\pi$ — the larger arc that includes the maximum. More carefully: the two boundary angles are $\\pi + |\\arcsin(a)|$ and $2\\pi - |\\arcsin(a)|$ (in Quadrants III and IV), and sine exceeds $a$ on the arc that does not pass through the minimum.
 
 **Case** $a = 1$: $\\sin(x) \\geq 1$ is satisfied only at $x = \\frac{\\pi}{2} + 2n\\pi$ (a single point per period). $\\sin(x) > 1$ has no solution.
 
@@ -1267,7 +1277,13 @@ The boundary cases ($a = \\pm 1$, $|a| > 1$) parallel those for sine.
 
 Since tangent is strictly increasing on each period interval, there is no ambiguity: the function is below $a$ to the left of $x_0$ and above $a$ to the right. The general solution adds $n\\pi$ to shift across periods.
 
-@academic[rule_plain:The asymptotes must always be excluded from the solution, regardless of whether the inequality is strict or non-strict — tangent is undefined there.]@`,
+@academic[rule_plain:The asymptotes must always be excluded from the solution, regardless of whether the inequality is strict or non-strict — tangent is undefined there.]@
+
+@academic[pitfall,aside:true,width:35%:Repeating tangent every 2π
+Adding $2n\\pi$ to the basic solution $\\left(\\frac{\\pi}{4}, \\frac{\\pi}{2}\\right)$ of $\\tan(x) > 1$ loses $\\left(\\frac{5\\pi}{4}, \\frac{3\\pi}{2}\\right)$, where $\\tan\\left(\\frac{4\\pi}{3}\\right) = \\sqrt{3} > 1$. The full solution is $\\left(\\frac{\\pi}{4} + n\\pi, \\frac{\\pi}{2} + n\\pi\\right)$.
+[Read more](!#pitfalls)]@
+
+To write the general solution, one basic interval is found first and then shifted by whole periods in both directions. On $[0, 2\\pi)$ tangent covers two full periods, with asymptotes at $\\frac{\\pi}{2}$ and $\\frac{3\\pi}{2}$, so the pattern of solution intervals appears twice within one turn of the circle. Listing the intervals on $[0, 2\\pi)$ first, then checking that the general solution produces every one of them, confirms that the right period was used.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1326,7 +1342,11 @@ $$x \\in \\left(\\frac{\\pi}{18} + \\frac{2n\\pi}{3}, \\quad \\frac{5\\pi}{18} +
 - $n = 1$: $\\left(\\frac{\\pi}{18} + \\frac{2\\pi}{3}, \\frac{5\\pi}{18} + \\frac{2\\pi}{3}\\right) = \\left(\\frac{13\\pi}{18}, \\frac{17\\pi}{18}\\right)$
 - $n = 2$: $\\left(\\frac{\\pi}{18} + \\frac{4\\pi}{3}, \\frac{5\\pi}{18} + \\frac{4\\pi}{3}\\right) = \\left(\\frac{25\\pi}{18}, \\frac{29\\pi}{18}\\right)$
 
-The multiplier in the argument multiplies the number of solution intervals within a fixed domain — the same phenomenon seen in [multiple-angle equations](!/trigonometry/equations). A coefficient of $B$ in $\\sin(Bx)$ creates $B$ copies of the basic solution pattern within one $2\\pi$ interval.
+@academic[pitfall,aside:true,width:35%:Leaving the period undivided
+Dividing only $\\frac{\\pi}{6}$ and $\\frac{5\\pi}{6}$ by $3$ and keeping $+2n\\pi$ leaves one interval on $[0, 2\\pi)$, $\\left(\\frac{\\pi}{18}, \\frac{5\\pi}{18}\\right)$, and loses the other two. The period is divided too: $+\\frac{2n\\pi}{3}$.
+[Read more](!#pitfalls)]@
+
+The multiplier in the argument multiplies the number of solution intervals within a fixed domain — the same phenomenon seen in [multiple-angle equations](!/trigonometry/equations). A positive integer coefficient $B$ in $\\sin(Bx)$ creates $B$ copies of the basic solution pattern within one $2\\pi$ interval.
 
 Vertical shifts ($+D$) and amplitude changes ($A$) affect the threshold value after isolation. Phase shifts ($-C$) offset the interval boundaries. But the core method remains the same: isolate, solve for the inner argument, recover the outer variable, and restrict to the domain.`,
     before: ``,
@@ -1354,6 +1374,10 @@ $\\cos(x) \\leq \\frac{1}{2}$ on $\\left[\\frac{\\pi}{3}, \\frac{5\\pi}{3}\\righ
 Intersection: $\\left[\\frac{\\pi}{3}, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{3\\pi}{2}, \\frac{5\\pi}{3}\\right]$
 
 The points $x = \\frac{\\pi}{2}$ and $x = \\frac{3\\pi}{2}$ are excluded because secant is undefined there (vertical asymptotes on the [graph](!/trigonometry/graphs)).]@
+
+@academic[pitfall,aside:true,width:35%:Flipping without the sign condition
+Turning $\\sec(x) \\geq 2$ straight into $\\cos(x) \\leq \\frac{1}{2}$ gives $\\left[\\frac{\\pi}{3}, \\frac{5\\pi}{3}\\right]$, which keeps $x = \\pi$, where $\\sec(\\pi) = -1$. With $\\cos(x) > 0$ the answer is $\\left[\\frac{\\pi}{3}, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{3\\pi}{2}, \\frac{5\\pi}{3}\\right]$.
+[Read more](!#pitfalls)]@
 
 The reversal of the inequality direction when taking the reciprocal deserves emphasis. If $\\cos(x) > 0$ and $\\frac{1}{\\cos(x)} \\geq 2$, then $\\cos(x) \\leq \\frac{1}{2}$. If $\\cos(x) < 0$ and $\\frac{1}{\\cos(x)} \\geq 2$, there is no solution — a negative reciprocal cannot exceed 2. This case analysis — splitting based on the sign of the denominator — is essential for all inequalities involving reciprocal or quotient [functions](!/trigonometry/functions).`,
     before: ``,
@@ -1422,6 +1446,74 @@ The reversal of the inequality direction when taking the reciprocal deserves emp
       after:``,
       link:'',
 
+    },
+
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Five mistakes come up again and again when trigonometric inequalities are solved. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Taking arcsin of both sides**
+
+The inequality $\\sin(x) > \\frac{1}{2}$ is handled like a linear one: arcsin is applied to both sides, and the result is read as $x > \\arcsin\\left(\\frac{1}{2}\\right)$. Arcsine returns a single angle; it says nothing about where sine stays above the level.
+
+Wrong working: $\\sin(x) > \\frac{1}{2} \\Rightarrow x > \\arcsin\\left(\\frac{1}{2}\\right) = \\frac{\\pi}{6}$, so every angle above $\\frac{\\pi}{6}$ is taken as a solution.
+
+Right working: $\\sin(x) = \\frac{1}{2}$ at $x = \\frac{\\pi}{6}$ and $x = \\frac{5\\pi}{6}$ on $[0, 2\\pi)$, and sine is above $\\frac{1}{2}$ only between them. The answer is $\\frac{\\pi}{6} < x < \\frac{5\\pi}{6}$, and in general $x \\in \\left(\\frac{\\pi}{6} + 2n\\pi, \\frac{5\\pi}{6} + 2n\\pi\\right)$.
+
+Why it happens: in algebra, applying an increasing function to both sides keeps an inequality true, and arcsin looks like the step that undoes sine. But sine is increasing only on $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, and the solution set reaches beyond that stretch.
+
+How to check: test an angle from the claimed answer. $x = \\pi$ satisfies $x > \\frac{\\pi}{6}$, but $\\sin(\\pi) = 0$, which is not above $\\frac{1}{2}$.
+
+**Taking the arc between the boundary angles**
+
+Once the boundary angles are found, the interval between them is written as the answer without checking on which side of the line the curve lies there.
+
+Wrong working: for $\\cos(x) > \\frac{1}{2}$ on $[0, 2\\pi)$, the boundary angles are $\\frac{\\pi}{3}$ and $\\frac{5\\pi}{3}$, and the answer is given as $\\left(\\frac{\\pi}{3}, \\frac{5\\pi}{3}\\right)$.
+
+Right working: test one angle in each piece. $\\cos(0) = 1 > \\frac{1}{2}$, so the piece at the start belongs; $\\cos(\\pi) = -1 < \\frac{1}{2}$, so the middle piece does not; $\\cos\\left(\\frac{11\\pi}{6}\\right) = \\frac{\\sqrt{3}}{2} > \\frac{1}{2}$, so the piece at the end belongs. The answer is $\\left[0, \\frac{\\pi}{3}\\right) \\cup \\left(\\frac{5\\pi}{3}, 2\\pi\\right)$.
+
+Why it happens: for $\\sin(x) > a$ with $a > 0$ the answer really is the interval between the two boundary angles, and that pattern is copied to other functions and other directions.
+
+How to check: the middle of the claimed interval must satisfy the inequality. Here the middle is $x = \\pi$, and $\\cos(\\pi) = -1$ fails.
+
+**Repeating tangent every 2π**
+
+The general solution of a tangent inequality is written with the period $2\\pi$, copied from sine and cosine. Tangent repeats every $\\pi$, so half of the solution intervals are lost.
+
+Wrong working: $\\tan(x) > 1$ has the basic interval $\\left(\\frac{\\pi}{4}, \\frac{\\pi}{2}\\right)$, and the general solution is written as $\\left(\\frac{\\pi}{4} + 2n\\pi, \\frac{\\pi}{2} + 2n\\pi\\right)$. On $[0, 2\\pi)$ this gives only $\\left(\\frac{\\pi}{4}, \\frac{\\pi}{2}\\right)$.
+
+Right working: the general solution is $\\left(\\frac{\\pi}{4} + n\\pi, \\frac{\\pi}{2} + n\\pi\\right)$. On $[0, 2\\pi)$ it gives $\\left(\\frac{\\pi}{4}, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{5\\pi}{4}, \\frac{3\\pi}{2}\\right)$.
+
+Why it happens: most inequalities on the page involve sine and cosine, whose period is $2\\pi$, so $+2n\\pi$ is added by habit.
+
+How to check: test an angle in the lost interval. $\\tan\\left(\\frac{4\\pi}{3}\\right) = \\sqrt{3} \\approx 1.732 > 1$, so $\\left(\\frac{5\\pi}{4}, \\frac{3\\pi}{2}\\right)$ belongs to the answer.
+
+**Leaving the period undivided**
+
+When $x$ is recovered from $u = 3x$, only the two endpoint angles are divided by $3$, and the term $+2n\\pi$ is copied unchanged.
+
+Wrong working: $u \\in \\left(\\frac{\\pi}{6} + 2n\\pi, \\frac{5\\pi}{6} + 2n\\pi\\right)$ becomes $x \\in \\left(\\frac{\\pi}{18} + 2n\\pi, \\frac{5\\pi}{18} + 2n\\pi\\right)$, which on $[0, 2\\pi)$ gives only $\\left(\\frac{\\pi}{18}, \\frac{5\\pi}{18}\\right)$.
+
+Right working: the whole expression is divided by $3$, so $x \\in \\left(\\frac{\\pi}{18} + \\frac{2n\\pi}{3}, \\frac{5\\pi}{18} + \\frac{2n\\pi}{3}\\right)$. On $[0, 2\\pi)$ this gives $\\left(\\frac{\\pi}{18}, \\frac{5\\pi}{18}\\right) \\cup \\left(\\frac{13\\pi}{18}, \\frac{17\\pi}{18}\\right) \\cup \\left(\\frac{25\\pi}{18}, \\frac{29\\pi}{18}\\right)$.
+
+Why it happens: the term $+2n\\pi$ looks like a fixed label that marks a general solution, not a part of the expression being divided.
+
+How to check: $\\sin(3x)$ has period $\\frac{2\\pi}{3}$, so three intervals must appear on $[0, 2\\pi)$. A test angle confirms a lost one: at $x = \\frac{5\\pi}{6}$, $3x = \\frac{5\\pi}{2}$ and $2\\sin\\left(\\frac{5\\pi}{2}\\right) - 1 = 1 > 0$.
+
+**Flipping without the sign condition**
+
+To solve $\\sec(x) \\geq 2$, both sides are flipped to $\\cos(x) \\leq \\frac{1}{2}$ without the condition $\\cos(x) > 0$. Taking reciprocals reverses an inequality only when both sides have the same sign.
+
+Wrong working: $\\sec(x) \\geq 2 \\Rightarrow \\cos(x) \\leq \\frac{1}{2} \\Rightarrow x \\in \\left[\\frac{\\pi}{3}, \\frac{5\\pi}{3}\\right]$.
+
+Right working: $\\sec(x) \\geq 2$ needs $\\cos(x) > 0$ as well as $\\cos(x) \\leq \\frac{1}{2}$. Intersecting $\\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{3\\pi}{2}, 2\\pi\\right)$ with $\\left[\\frac{\\pi}{3}, \\frac{5\\pi}{3}\\right]$ gives $\\left[\\frac{\\pi}{3}, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{3\\pi}{2}, \\frac{5\\pi}{3}\\right]$.
+
+Why it happens: "take the reciprocal and reverse the sign" is learned with positive numbers, where it always works, and the sign of $\\cos(x)$ changes across the interval without being visible in the inequality.
+
+How to check: test an angle from the claimed answer. At $x = \\pi$, $\\sec(\\pi) = \\frac{1}{\\cos(\\pi)} = -1$, which is not $\\geq 2$; at $x = \\frac{\\pi}{2}$, secant is not even defined.`,
+      before:``,
+      after:``,
+      link:'',
     },
 
     faq: {
@@ -1507,7 +1599,7 @@ Two methods dominate. The graphical approach plots the function and a horizontal
     secDomain: demoUnitFrame({
       svg: trigFunctionsGraphDiagrams.sec,
       caption: 'y = sec x: asymptotes at every zero of cosine',
-      text: 'The upward branches of the secant curve sit only where the cosine is positive and never dip below 1, so sec&#8201;x &#8805; 2 is solved on those branches alone, between the asymptotes at 90&#176; and 270&#176; that must be excluded from any solution set. The marker at 60&#176; reads exactly 2, an endpoint of the answer. Trace a branch out to its asymptote on the',
+      text: 'The upward branches of the secant curve sit only where the cosine is positive and never dip below 1, so sec&#8201;x &#8805; 2 is solved on those branches alone, away from the asymptotes at 90&#176; and 270&#176;, which must be excluded from any solution set. The marker at 60&#176; reads exactly 2, an endpoint of the answer. Trace a branch out to its asymptote on the',
       href: '/trigonometry/visual-tools/functions-graphs',
       linkText: 'trigonometric functions graphs',
     }),
@@ -1653,6 +1745,14 @@ export default function InequalitiesPage({
           sectionsContent.obj8.content,
                   <div key={'unit-secDomain'} dangerouslySetInnerHTML={{ __html: demoUnits.secDomain }} />,
           `Excluding the asymptotes is not a technicality: at those angles the inequality has no left-hand side at all.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // NEW capstone section: obj9

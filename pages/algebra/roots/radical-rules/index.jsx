@@ -474,7 +474,13 @@ This is the power of a product rule from [powers](!/algebra/powers), applied to 
 
 Attempting to compute $\\sqrt{-2} \\cdot \\sqrt{-8}$ as $\\sqrt{16} = 4$ produces an error. Negative radicands under even roots require complex number treatment.
 
-The product rule is essential for [simplifying radicals](!/algebra/roots/simplifying) — factoring out perfect powers relies on splitting the radical.`,
+@academic[pitfall,aside:true,width:35%:Distributing a radical over addition
+Splitting $\\sqrt{36 + 64}$ like a product gives $\\sqrt{36} + \\sqrt{64} = 14$. The rule covers products only; the sum is added first: $\\sqrt{100} = 10$.
+[Read more](!#6)]@
+
+The product rule is essential for [simplifying radicals](!/algebra/roots/simplifying) — factoring out perfect powers relies on splitting the radical.
+
+Splitting works because the radicand is written as a product first. In $\\sqrt{12} = \\sqrt{4 \\cdot 3}$ the factor $4$ is a perfect square, so its root leaves the radical as the whole number $2$, while the factor $3$ stays inside.`,
     before: ``,
     after: ``,
     link: '',
@@ -542,6 +548,14 @@ $$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$]@
 @academic[formula_callout:Power Rule
 $$\\sqrt{16^3} = 16^{3/2} = \\left(\\sqrt{16}\\right)^3 = 4^3 = 64$$]@
 
+@academic[pitfall,aside:true,width:35%:Putting the index on top
+Writing $\\sqrt[3]{8^2}$ as $8^{3/2}$ swaps the two numbers and gives $\\sqrt{512} \\approx 22.6$. The exponent goes on top and the index below: $8^{2/3} = 4$.
+[Read more](!#6)]@
+
+Both examples are worked twice, once as a fractional power and once by taking the root first and then raising the result to the power. The two routes meet at the same number, which makes the second route a built-in check on the first.
+
+Taking the root first also keeps the numbers small: $\\sqrt[3]{8} = 2$ and $\\sqrt{16} = 4$ are found before any power is raised, so the work never passes through $64$ or $4096$.
+
 When the exponent and index share a common factor, the radical simplifies:
 
 @academic[formula_callout:Power Rule
@@ -585,7 +599,13 @@ $$\\left(a^{1/n}\\right)^{1/m} = a^{1/(mn)}$$]@
 
 This is the power of a power rule from [powers](!/algebra/powers) — multiply the exponents. Since $\\frac{1}{n} \\cdot \\frac{1}{m} = \\frac{1}{mn}$, the indices multiply.
 
-Nested radicals sometimes appear in [simplifying](!/algebra/roots/simplifying) problems and when solving certain [radical equations](!/algebra/roots/equations). Recognizing the pattern allows immediate simplification.`,
+@academic[pitfall,aside:true,width:35%:Adding the indices of nested roots
+Adding the indices turns $\\sqrt[3]{\\sqrt{64}}$ into $\\sqrt[5]{64} \\approx 2.30$. The indices multiply, $3 \\cdot 2 = 6$, so $\\sqrt[3]{\\sqrt{64}} = \\sqrt[6]{64} = 2$.
+[Read more](!#6)]@
+
+Nested radicals sometimes appear in [simplifying](!/algebra/roots/simplifying) problems and when solving certain [radical equations](!/algebra/roots/equations). Recognizing the pattern allows immediate simplification.
+
+Collapsing a nested radical takes one step: the two indices combine into a single index, and the radicand stays exactly as it was. In $\\sqrt[3]{\\sqrt{64}}$ the number $64$ never changes; only the root taken of it does.`,
     before: ``,
     after: ``,
     link: '',
@@ -647,7 +667,50 @@ Dropping absolute values:
 @academic[formula_callout:Common Errors
 $$\\sqrt{x^2} = |x|, \\quad \\text{not } x$$]@
 
-When $x$ might be negative, the absolute value is essential. The [properties of radicals](!/algebra/roots/properties) page explains why.`,
+When $x$ might be negative, the absolute value is essential. The [properties of radicals](!/algebra/roots/properties) page explains why.
+
+**Putting the index on top**
+
+A power under a radical is rewritten as a fractional exponent, and the two numbers change places: the index becomes the numerator and the exponent the denominator.
+
+Wrong working:
+$$\\sqrt[3]{8^2} = 8^{3/2} = \\sqrt{8^3} = \\sqrt{512} \\approx 22.6$$
+
+Right working: the exponent of the radicand is the numerator, the index is the denominator.
+$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$
+
+Why it happens: the index is written high, in the crook of the radical sign, so it seems to belong on top of the fraction.
+
+How to check: a cube root of $8^2 = 64$ must be a number whose cube is $64$. That is $4$, since $4^3 = 64$, while $22.6^3$ is more than $11000$.
+
+**Adding the indices of nested roots**
+
+A radical sits inside another radical, and the two indices are combined by adding them instead of multiplying them.
+
+Wrong working:
+$$\\sqrt[3]{\\sqrt{64}} = \\sqrt[3 + 2]{64} = \\sqrt[5]{64} \\approx 2.30$$
+
+Right working: the indices multiply.
+$$\\sqrt[3]{\\sqrt{64}} = \\sqrt[3 \\cdot 2]{64} = \\sqrt[6]{64} = 2$$
+
+Why it happens: adding exponents, $a^m \\cdot a^n = a^{m+n}$, is the exponent law used most often, and it gets borrowed for a root of a root. In exponent form the step is a power of a power, $\\left(64^{1/2}\\right)^{1/3} = 64^{1/6}$, where the exponents multiply.
+
+How to check: work from the inside out. $\\sqrt{64} = 8$ and $\\sqrt[3]{8} = 2$, while $\\sqrt[5]{64}$ is not even a whole number, since $2^5 = 32$ and $3^5 = 243$.
+
+**Stopping before the largest square**
+
+To simplify a square root, the radicand is split into a perfect square times another factor. When the square chosen is not the largest one, the factor left inside still contains a square, and the work stops too early.
+
+Wrong working:
+$$\\sqrt{72} = \\sqrt{4 \\cdot 18} = \\sqrt{4} \\cdot \\sqrt{18} = 2\\sqrt{18}$$
+
+Right working: use the largest square factor of $72$, which is $36$.
+$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$
+Starting from $2\\sqrt{18}$ also works if the splitting continues: $2\\sqrt{9 \\cdot 2} = 2 \\cdot 3\\sqrt{2} = 6\\sqrt{2}$.
+
+Why it happens: $4$ is the first square that comes to mind, and once one square has been pulled out the expression already looks simplified.
+
+How to check: look at the number left under the radical. If it has a square factor other than $1$ (such as $4$, $9$ or $16$), the simplification is not finished. Here $18 = 9 \\cdot 2$ fails the test, and $2$ passes it.`,
     before: ``,
     after: ``,
     link: '',
@@ -659,6 +722,10 @@ When $x$ might be negative, the absolute value is essential. The [properties of 
 
 @academic[formula_callout:Applying the Rules
 $$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$]@
+
+@academic[pitfall,aside:true,width:35%:Stopping before the largest square
+Splitting $\\sqrt{72}$ as $\\sqrt{4 \\cdot 18} = 2\\sqrt{18}$ and stopping leaves a square inside, since $18 = 9 \\cdot 2$. The largest square factor, $36$, gives $6\\sqrt{2}$ in one step.
+[Read more](!#6)]@
 
 Extracting perfect powers, rationalizing denominators, reducing indices, and combining like radicals all follow from the rules on this page. The complete toolkit for these techniques appears in [simplifying radicals](!/algebra/roots/simplifying), and methods for adding, subtracting, and multiplying radical expressions are covered in [operations with radicals](!/algebra/roots/operations). These rules also underpin solving [radical equations](!/algebra/roots/equations), where isolating and eliminating radicals requires systematic application of these identities.`,
     before: ``,

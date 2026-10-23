@@ -670,6 +670,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import renderMatrixGrid from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid'
 import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -882,6 +884,10 @@ The entries can be real numbers, complex numbers, or elements of any algebraic f
     title: `Dimensions, Rows, and Columns`,
     content: `The size of a matrix is described by two numbers: $m$ rows and $n$ columns, written $m \\times n$. The notation $A \\in \\mathbb{R}^{m \\times n}$ states that $A$ is an $m \\times n$ matrix with real entries. The total number of entries is $m \\cdot n$. Order matters: a $3 \\times 5$ matrix and a $5 \\times 3$ matrix have different shapes and are never equal, regardless of their entries.
 
+@academic[pitfall,aside:true,width:35%:Swapping the row and column index
+Reading $a_{12}$ as column $1$, row $2$ in $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}$ gives $a_{12} = 4$. The row index comes first, so $a_{12} = 2$, and $4$ is $a_{21}$.
+[Read more](!#pitfalls)]@
+
 Row $i$ of $A$ is the horizontal slice $(a_{i1}, a_{i2}, \\dots, a_{in})$, a $1 \\times n$ vector. Column $j$ is the vertical slice $(a_{1j}, a_{2j}, \\dots, a_{mj})^T$, an $m \\times 1$ vector. The main diagonal consists of the entries where the row index equals the column index: $a_{11}, a_{22}, \\dots, a_{kk}$ with $k = \\min(m, n)$. The diagonal is defined for any matrix, not just square ones, though it is most prominent in the square case.
 
 A matrix with $m = n$ is called square, and square matrices occupy a special position.
@@ -933,6 +939,12 @@ Addition is entry-by-entry: $(A + B)_{ij} = a_{ij} + b_{ij}$. Both matrices must
 
 Matrix multiplication is more involved. For $A$ of size $m \\times n$ and $B$ of size $n \\times p$, the product $AB$ has size $m \\times p$, with each entry computed as the dot product of a row of $A$ with a column of $B$: $(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} b_{kj}$. The number of columns of $A$ must equal the number of rows of $B$; otherwise the product is undefined.
 
+@academic[pitfall,aside:true,width:35%:Multiplying entry by entry
+Multiplying matching positions turns $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$ into $\\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$. Each entry of $AB$ needs a row times a column, which gives $\\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+For two $2 \\times 2$ matrices, the product takes four separate dot products, one for each entry. The entry in row $2$, column $1$ of $AB$, for instance, pairs the second row of $A$ with the first column of $B$: the first entries of the two are multiplied, then the second entries, and the two products are added. The other three entries are built the same way from the remaining row and column pairs.
+
 The transpose $A^T$ swaps rows and columns: $(A^T)_{ij} = a_{ji}$. An $m \\times n$ matrix becomes $n \\times m$.
 
 @academic[rule_plain:One property that distinguishes matrix arithmetic from ordinary arithmetic is that multiplication is not commutative.]@
@@ -966,7 +978,13 @@ For a $2 \\times 2$ matrix $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}
 @academic[formula_callout:The Inverse of a Matrix
 $$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$]@
 
-which breaks down precisely when $ad - bc = 0$. For larger matrices, the inverse can be computed by row reduction or through the adjugate formula, though in practice solving $Ax = \\mathbf{b}$ directly is almost always more efficient than computing $A^{-1}$.`,
+which breaks down precisely when $ad - bc = 0$. For larger matrices, the inverse can be computed by row reduction or through the adjugate formula, though in practice solving $Ax = \\mathbf{b}$ directly is almost always more efficient than computing $A^{-1}$.
+
+@academic[pitfall,aside:true,width:35%:Swapping the wrong pair
+Swapping $b$ and $c$ instead of $a$ and $d$ turns $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$, with $ad - bc = 1$, into $\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$, and $A$ times that is $\\begin{pmatrix} 3 & -7 \\\\ 7 & -16 \\end{pmatrix}$, not $I$. The inverse is $\\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@
+
+Applying the formula to a particular matrix takes three steps: compute $ad - bc$, rearrange the four entries in the pattern the formula shows, and divide every entry by the determinant. Multiplying the result by $A$ should then give the identity matrix, so every inverse found this way can be verified in a few lines of arithmetic.`,
     before: ``,
     after: ``,
     link: ``,
@@ -991,7 +1009,7 @@ $$Ax = \\mathbf{b}$$]@
 
 where $A$ is the $m \\times n$ coefficient matrix, $\\mathbf{x}$ is the $n \\times 1$ vector of unknowns, and $\\mathbf{b}$ is the $m \\times 1$ vector of right-hand sides. The augmented matrix $[A \\mid \\mathbf{b}]$ appends $\\mathbf{b}$ as an extra column, creating the compact representation used in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination).
 
-Whether the system has no solution, exactly one solution, or infinitely many solutions depends entirely on the rank of $A$ relative to the rank of the augmented matrix $[A \\mid \\mathbf{b}]$. When $A$ is square and invertible, the unique solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires the [rank](!/linear-algebra/matrix/rank) and the structure of the null space.`,
+Whether the system has no solution, exactly one solution, or infinitely many solutions depends entirely on how the rank of $A$ compares with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$ and with the number of unknowns $n$. When $A$ is square and invertible, the unique solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires the [rank](!/linear-algebra/matrix/rank) and the structure of the null space.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1012,6 +1030,53 @@ This perspective transforms matrices from static tables of numbers into active g
   obj11: {
     title: `Four Views of a Matrix`,
     content: `Matrices appear throughout this section under several guises: a rectangular array of numbers, an arrangement of column or row vectors, a compact encoding of a linear system, and a transformation between vector spaces. Each view emphasizes different structure and pairs naturally with different tools. The table below collects these four perspectives along with the question each best answers and the concepts that flow from it.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Three mistakes come up again and again when matrices are first met. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Swapping the row and column index**
+
+The entry $a_{ij}$ is read as column $i$, row $j$, the way a point $(x, y)$ is read across first and then up. Every entry looked up this way is taken from the mirror position.
+
+Wrong working: in $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}$, the entry $a_{12}$ is looked up in column $1$, row $2$, which gives $a_{12} = 4$.
+
+Right working: the first index is the row and the second is the column, so $a_{12}$ sits in row $1$, column $2$, and $a_{12} = 2$. The entry $4$ is $a_{21}$.
+
+Why it happens: coordinates in the plane put the horizontal position first, and the horizontal position of an entry is its column. Matrix indices follow the opposite order, rows first, the same order as in the size $m \\times n$.
+
+How to check: look for an index that cannot fit the size. $A$ is $2 \\times 3$, so $a_{23} = 6$ exists, but under the swapped reading $a_{23}$ would sit in row $3$, which $A$ does not have.
+
+**Multiplying entry by entry**
+
+The product $AB$ is computed by multiplying the entries that sit in the same position, the way matrices are added. Rows and columns are never combined.
+
+Wrong working:
+$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix} = \\begin{pmatrix} 1 \\cdot 5 & 2 \\cdot 6 \\\\ 3 \\cdot 7 & 4 \\cdot 8 \\end{pmatrix} = \\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$$
+
+Right working: each entry is a row of the left matrix times a column of the right matrix.
+$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix} = \\begin{pmatrix} 1 \\cdot 5 + 2 \\cdot 7 & 1 \\cdot 6 + 2 \\cdot 8 \\\\ 3 \\cdot 5 + 4 \\cdot 7 & 3 \\cdot 6 + 4 \\cdot 8 \\end{pmatrix} = \\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$$
+
+Why it happens: addition and scalar multiplication really do work position by position, so the same pattern is carried over to the product.
+
+How to check: multiply by the identity matrix, which must return the matrix unchanged. With the row-times-column rule, $AI = A$. Entry by entry, $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ and $I$ give $\\begin{pmatrix} 1 & 0 \\\\ 0 & 4 \\end{pmatrix}$, only the diagonal.
+
+**Swapping the wrong pair**
+
+In the formula for the inverse of a $2 \\times 2$ matrix, two entries trade places and the other two change sign. The pairs get mixed up: $b$ and $c$ are swapped, and $a$ and $d$ stay where they are.
+
+Wrong working: for $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$, the determinant is $ad - bc = 6 - 5 = 1$, and swapping the off-diagonal entries gives
+$$\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$$
+
+Right working: swap the diagonal entries $a$ and $d$, change the sign of $b$ and $c$ where they stand, and divide by $ad - bc = 1$.
+$$A^{-1} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$$
+
+Why it happens: the formula moves two entries and negates the other two, and from memory it is easy to attach the swap to the pair that should only be negated.
+
+How to check: multiply by $A$. The wrong answer gives $\\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix} = \\begin{pmatrix} 3 & -7 \\\\ 7 & -16 \\end{pmatrix}$, while the right one gives $\\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}\\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1133,8 +1198,38 @@ const schemas = {
     }),
   };
 
+  const matrixShapesOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'Shapes with their own names',
+    preface: 'Some matrices are named for where their zeros sit; others for an equation they satisfy. Each name carries a guarantee that simplifies computation.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'The name tells you the shortcut',
+    conclusion: 'Spot the shape first: diagonal and triangular matrices give determinants and eigenvalues from the diagonal; symmetric and orthogonal ones bring real eigenvalues and preserved lengths. The full list is on the [matrix types](!/linear-algebra/matrix/types) page.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Special matrix shapes', children: [
+        { id: 'zeros', name: 'Named for where the zeros sit', children: [
+          { id: 'diag', name: 'Diagonal', def: 'nonzero entries only on the main diagonal; products, powers and inverses act on the diagonal alone' },
+          { id: 'id', name: 'Identity', def: 'diagonal with every diagonal entry 1', example: 'AI = IA = A' },
+          { id: 'tri', name: 'Triangular', def: 'zeros above or below the diagonal; determinant and eigenvalues read from the diagonal' },
+        ] },
+        { id: 'eq', name: 'Named for an equation they satisfy', children: [
+          { id: 'sym', name: 'Symmetric', def: 'real eigenvalues, orthogonal eigenvectors', example: 'A = Aᵀ' },
+          { id: 'orth', name: 'Orthogonal', def: 'orthonormal columns; preserves lengths and angles', example: 'QᵀQ = I' },
+        ] },
+        { id: 'more', name: '[More types](!/linear-algebra/matrix/types)', children: [
+          { id: 'skew', name: 'Skew-symmetric' },
+          { id: 'nil', name: 'Nilpotent' },
+          { id: 'idem', name: 'Idempotent' },
+          { id: 'perm', name: 'Permutation' },
+        ] },
+      ] },
+    ],
+  };
+
   return {
   props: {
+    matrixShapesOutline,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1156,7 +1251,7 @@ const schemas = {
 
 
 
-   export default function MatricesPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits}) {
+   export default function MatricesPage({matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1215,6 +1310,14 @@ const schemas = {
           sectionsContent.obj6.content,
           <div key={'obj6-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="matrix-shapes-outline"
+            title="Special matrix shapes and what they guarantee"
+            source="/linear-algebra/matrix"
+          >
+            <TaxonomyOutline data={matrixShapesOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1261,6 +1364,14 @@ const schemas = {
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // {

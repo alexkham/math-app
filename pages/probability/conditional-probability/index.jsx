@@ -1044,6 +1044,12 @@ If $A$ is "tomorrow is sunny" and $B$ is "a fair coin lands heads today," knowin
 Consider drawing two cards from a deck without replacement. Let $A$ be "the second card is an ace" and $B$ be "the first card is an ace."  
 Knowing whether $B$ occurred changes how we evaluate $A$, because the situation after the first draw is different from the original one.
 
+@academic[pitfall,aside:true,width:35%:Ignoring the first draw
+Taking $P(A \\mid B) = \\frac{4}{52} = \\frac{1}{13}$ treats the two draws as independent, as if the first ace went back into the deck. Given that the first card is an ace, 51 cards remain and 3 of them are aces, so $P(A \\mid B) = \\frac{3}{51} = \\frac{1}{17}$.
+[Read more](!#mistakes)]@
+
+In the card example the condition is not a filter applied after the fact; it is a change in the deck itself. The first draw removes a card, so the second card is drawn from a different collection than the first, and what that collection holds depends on whether $B$ occurred.
+
 These examples show how conditional probability reflects the impact of information on how uncertainty is assessed. The table below sets them side by side so the three distinct behaviors — change, no change, and sequential dependence — can be compared directly.
 `,
       before:``,
@@ -1223,25 +1229,28 @@ The rest of the page explains how this change of viewpoint works, how it is expr
     },
     formula: [
       { kind: 'part', id: 'left', children: [
-        { kind: 'op', text: 'P(' }, { kind: 'var', text: 'A' }, { kind: 'op', text: ' | ' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')' },
+        { kind: 'op', text: 'P(', tight: true }, { kind: 'var', text: 'A' }, { kind: 'op', text: '|' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')', tight: true },
       ] },
-      { kind: 'op', text: ' = ' },
+      { kind: 'op', text: '=' },
       { kind: 'frac',
         num: [ { kind: 'part', id: 'num', children: [
-          { kind: 'op', text: 'P(' }, { kind: 'var', text: 'A' }, { kind: 'op', text: ' ∩ ' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')' },
+          { kind: 'op', text: 'P(', tight: true }, { kind: 'var', text: 'A' }, { kind: 'op', text: '∩' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')', tight: true },
         ] } ],
         den: [ { kind: 'part', id: 'den', children: [
-          { kind: 'op', text: 'P(' }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')' },
+          { kind: 'op', text: 'P(', tight: true }, { kind: 'var', text: 'B' }, { kind: 'op', text: ')', tight: true },
         ] } ],
       },
     ],
     parts: [
-      { id: 'left', color: '#06357A', chip: 'what is asked', title: 'Probability of A given B', side: 'top',
-        desc: 'The chance of $A$ once $B$ is known to have occurred. The bar reads "given": everything to its right is the restricted world we now live in.' },
-      { id: 'num', color: '#2563EB', chip: 'numerator', title: 'The part of A inside B', side: 'top',
-        desc: 'Only the outcomes where both $A$ and $B$ happen count. The rest of $A$ lies outside the condition and is dropped.' },
-      { id: 'den', color: '#B45309', chip: 'denominator', title: 'Rescale to the world of B', side: 'bottom',
-        desc: 'Dividing by $P(B)$ makes the probabilities inside $B$ add up to one again. It is a rescaling, not a new law of probability.' },
+      { id: 'left', chip: 'P(A | B)', title: 'Probability of A given B', side: 'top',
+        tip: 'The chance of A once B is known to have happened.',
+        desc: 'The bar reads "given": everything to its right is the restricted world we now work in. Example: two dice, A = first die even, B = sum 8. Of the 5 outcomes with sum 8, 3 have an even first die, so P(A | B) = 3/5.' },
+      { id: 'num', chip: 'P(A ∩ B)', title: 'The part of A inside B', side: 'top',
+        tip: 'Only outcomes where both A and B happen count.',
+        desc: 'The rest of A lies outside the condition and is dropped. Measured against the whole sample space, this is not yet the answer. Example: 3 of the 36 outcomes have an even first die and sum 8, so P(A ∩ B) = 3/36.' },
+      { id: 'den', chip: 'P(B)', title: 'Rescale to the world of B', side: 'bottom',
+        tip: 'Makes the probabilities inside B add up to 1.',
+        desc: 'Dividing by P(B) turns B into the whole sample space. It is a rescaling, not a new law of probability. Example: P(sum 8) = 5/36, and (3/36) ÷ (5/36) = 3/5: each of the 5 remaining outcomes now carries 1/5.' },
     ],
   };
 
@@ -1305,6 +1314,13 @@ export default function ConditionalProbabilityPage({
             sectionsContent.conditioning.content,
                   <div key={'unit-givenSum8'} dangerouslySetInnerHTML={{ __html: demoUnits.givenSum8 }} />,
             `Dividing by P(sum 8) = 5/36 in the formula does exactly this rescaling to the 5 remaining cells.`,
+            `@academic[pitfall,aside:true,width:35%:Counting over the whole sample space
+Counting the 3 favorable outcomes against all 36 gives $\\frac{3}{36} = \\frac{1}{12}$, which is $P(\\text{first even} \\cap \\text{sum } 8)$, not the conditional. Inside the condition only 5 outcomes remain, so $P(\\text{first even} \\mid \\text{sum } 8) = \\frac{3}{5}$.
+[Read more](!#mistakes)]@
+
+In the dice example the information arrives before anything is counted. The five outcomes with sum 8 become the whole sample space, each now carrying probability $\\frac{1}{5}$ instead of $\\frac{1}{36}$, and every count is taken among them.
+
+The event is described exactly as before, in words and in outcomes. What has changed is the collection it is counted in, and with it the total that every count is compared against.`,
         ]
     },
     {
@@ -1314,6 +1330,13 @@ export default function ConditionalProbabilityPage({
         content:[
             sectionsContent.meaning.content,
                   <div key={'unit-u_meaning_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_meaning_0 }} />,
+          `@academic[pitfall,aside:true,width:35%:Using the complement of the condition
+Expecting $P(A \\mid B) + P(A \\mid B^c) = 1$ mixes two different conditions. For the dice, $P(\\text{first even} \\mid \\text{sum } 8) + P(\\text{first even} \\mid \\text{sum not } 8) = \\frac{3}{5} + \\frac{15}{31} = \\frac{168}{155}$. The pair that sums to 1 is $P(A \\mid B) + P(A^c \\mid B) = \\frac{3}{5} + \\frac{2}{5}$.
+[Read more](!#mistakes)]@
+
+Inside a restricted situation, an event and its complement split the condition between them: every outcome that remains either belongs to the event or does not. That is why the two branches below $A$ in the tree carry weights that add to $1$.
+
+Under a different condition, a different set of outcomes remains. The probability of the same event is then measured against a different total, and it belongs to a different restricted situation.`,
           `The formula makes this restriction a division.`,
         ]
     },
@@ -1405,6 +1428,18 @@ The part most often misread is the bar. $P(A \\mid B)$ and $P(B \\mid A)$ share 
         content:[
           sectionsContent.mistakes.content,
           <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
+          `
+**Using the complement of the condition**
+
+The complement rule is applied on the wrong side of the bar. Instead of the event, the condition is replaced by its complement, and the two conditional probabilities are expected to add to $1$.
+
+Wrong working: with two dice, $P(\\text{first even} \\mid \\text{sum } 8) = \\frac{3}{5}$, so $P(\\text{first even} \\mid \\text{sum not } 8)$ is taken as $1 - \\frac{3}{5} = \\frac{2}{5}$.
+
+Right working: the 31 outcomes with a sum other than 8 include 15 with an even first die, so $P(\\text{first even} \\mid \\text{sum not } 8) = \\frac{15}{31}$. The number $\\frac{2}{5}$ belongs to the complement of the event inside the same condition: 2 of the 5 outcomes with sum 8, (3,5) and (5,3), have an odd first die, so $P(\\text{first odd} \\mid \\text{sum } 8) = \\frac{2}{5}$.
+
+Why it happens: the rule $P(A^c) = 1 - P(A)$ is first learned without a bar, and once a bar appears it is not obvious which side the complement belongs on. Only the left side can be complemented this way; the right side fixes the restricted situation.
+
+How to check: two conditional probabilities add to $1$ only when they are measured inside the same condition. Probabilities under different conditions must instead average back to the unconditional value: $\\frac{5}{36} \\cdot \\frac{3}{5} + \\frac{31}{36} \\cdot \\frac{15}{31} = \\frac{3}{36} + \\frac{15}{36} = \\frac{1}{2} = P(\\text{first even})$.`,
         ]
     },
     {

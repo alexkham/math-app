@@ -424,6 +424,10 @@ The sequence $1, 2, 4, 7$ has ratios $2, 2, 1.75$. The final ratio differs, so t
 
 @academic[rule_theorem_plain:A constant sequence like $5, 5, 5, 5$ is both arithmetic (with $d = 0$) and geometric (with $r = 1$). This is the only type of sequence that belongs to both families.]@
 
+@academic[pitfall,aside:true,width:35%:Dividing in the wrong order
+Dividing each term by the next: for $54, 18, 6, 2$ that gives $\\frac{54}{18} = 3$, so $r = 3$, as if the sequence grew. The ratio is later over earlier, $\\frac{18}{54} = \\frac{1}{3}$, so $r = \\frac{1}{3}$.
+[Read more](!#pitfalls)]@
+
 As with arithmetic sequences, a finite sample cannot confirm a geometric pattern with certainty. The sequence $2, 4, 8$ could continue as $16, 32, \\ldots$ (geometric with $r = 2$) or as $14, 22, \\ldots$ (not geometric). The defining rule, not the sample, is what settles the classification.`,
     before: ``,
     after: ``,
@@ -434,6 +438,10 @@ As with arithmetic sequences, a finite sample cannot confirm a geometric pattern
     content: `The explicit formula $a_n = a_1 \\cdot r^{n-1}$ contains four quantities. Given any three, the fourth can be found.
 
 Finding a specific term: if $a_1 = 3$ and $r = 2$, then $a_{10} = 3 \\cdot 2^9 = 1536$.
+
+@academic[pitfall,aside:true,width:35%:Using the power n instead of n − 1
+Writing $a_{10} = 3 \\cdot 2^{10} = 3072$ multiplies by $r$ once too often, since $a_1$ already stands in place $1$. Only $9$ steps lead to place $10$: $a_{10} = 3 \\cdot 2^9 = 1536$.
+[Read more](!#pitfalls)]@
 
 Finding the common ratio: if $a_1 = 5$ and $a_4 = 40$, then $40 = 5 \\cdot r^3$, so $r^3 = 8$ and $r = 2$.
 
@@ -504,7 +512,13 @@ Divide by $1 - r$ to isolate $S_n$. When $r = 1$, every term equals $a_1$ and $S
 For example, the sum $1 + 2 + 4 + 8 + \\cdots + 2^9$ has $a_1 = 1$, $r = 2$, and $n = 10$:
 
 @academic[formula_callout:Finite Geometric Series
-$$S_{10} = 1 \\cdot \\frac{1 - 2^{10}}{1 - 2} = \\frac{1 - 1024}{-1} = 1023$$]@`,
+$$S_{10} = 1 \\cdot \\frac{1 - 2^{10}}{1 - 2} = \\frac{1 - 1024}{-1} = 1023$$]@
+
+@academic[pitfall,aside:true,width:35%:Taking n from the last exponent
+Reading $n = 9$ off the last term $2^9$ gives $\\frac{1 - 2^9}{1 - 2} = 511$, which leaves out one term. The exponents run from $0$ to $9$, so there are $10$ terms and $S_{10} = 1023$.
+[Read more](!#pitfalls)]@
+
+The closed form needs three inputs: the first term, the ratio and the number of terms being added. The first two can be read straight off the sum, while the third has to be counted from the exponents of the terms. In this example the result is one less than $2^{10}$, the power of $2$ that would come next, and the same pattern holds for every sum of this kind: $1 + 2 + \\cdots + 2^{m} = 2^{m+1} - 1$.`,
     before: ``,
     after: ``,
     link: '',
@@ -524,9 +538,15 @@ The series $\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots$ has $a_1 = \\f
 
 Repeating decimals provide another illustration. The decimal $0.333\\ldots = \\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots$ is a geometric series with $a_1 = \\frac{3}{10}$ and $r = \\frac{1}{10}$, summing to $\\frac{3/10}{9/10} = \\frac{1}{3}$.
 
-@academic[rule_plain:When $|r| \\geq 1$, the terms do not diminish (or grow in magnitude), and the partial sums grow without bound. The series diverges and no finite sum exists.]@
+@academic[rule_plain:When $|r| \\geq 1$, the terms do not diminish (or grow in magnitude), and the partial sums do not settle to a limit. The series diverges and no finite sum exists.]@
 
-The boundary case $r = -1$ produces partial sums that oscillate between $a_1$ and $0$ without settling — this too is divergent.`,
+@academic[pitfall,aside:true,width:35%:Summing a series that diverges
+Applying $\\frac{a_1}{1 - r}$ to $1 + 2 + 4 + 8 + \\cdots$ gives $\\frac{1}{1 - 2} = -1$, a negative total for positive terms. With $r = 2$ the partial sums $1, 3, 7, 15, \\ldots$ grow without bound, so there is no sum.
+[Read more](!#pitfalls)]@
+
+The boundary case $r = -1$ produces partial sums that oscillate between $a_1$ and $0$ without settling — this too is divergent.
+
+Both series summed earlier in this section pass the test: $|r| = \\frac{1}{2}$ for the halves and $|r| = \\frac{1}{10}$ for the repeating decimal. For them the partial sums $S_n$ settle on a single value, and $\\frac{a_1}{1 - r}$ is exactly that value. The formula is the limit of the finite sum, so it describes a series only when that limit exists.`,
     before: ``,
     after: ``,
     link: '',
@@ -552,6 +572,12 @@ This follows from the constant-ratio property: $a_{n-1} = \\frac{a_n}{r}$ and $a
 
 Inserting geometric means between two positive values $a$ and $b$ requires placing $k$ terms so that the resulting $k + 2$ values form a geometric sequence. The common ratio must be $r = \\left(\\frac{b}{a}\\right)^{1/(k+1)}$, and the inserted terms are $ar, ar^2, \\ldots, ar^k$.
 
+@academic[pitfall,aside:true,width:35%:Taking the root by the number of means
+For $3$ means between $2$ and $162$, the cube root $r = \\sqrt[3]{81} \\approx 4.33$ reaches $162$ in three steps and leaves only two means. Three means make four steps: $r = \\sqrt[4]{81} = 3$, giving $6, 18, 54$.
+[Read more](!#pitfalls)]@
+
+In this kind of problem the two endpoints are fixed and only the ratio between neighbouring terms is unknown. Once $r$ is found, the inserted terms follow by repeated multiplication, and the last step from $ar^k$ must land exactly on $b$, which checks the whole list at once.
+
 The AM–GM inequality states that for any set of positive numbers, the geometric mean never exceeds the [arithmetic mean](!/algebra/sequences/arithmetic#6):
 
 @academic[formula_callout:Geometric Mean
@@ -565,6 +591,88 @@ Equality holds only when all values are identical. This inequality extends to in
   obj8: {
     title: `Geometric Sequences at a Glance`,
     content: `The page defined the common ratio, derived the explicit and recursive formulas, the finite-series telescoping sum, the infinite-series convergence rule, and the geometric-mean property. The table below collects each formula with a representative example for quick reference.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again with geometric sequences. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dividing in the wrong order**
+
+When the ratios of consecutive terms are computed, each term is divided by the one after it instead of the one before it. The ratios still come out equal, but each is the reciprocal of the true ratio.
+
+Wrong working: for $54, 18, 6, 2$,
+$$\\frac{54}{18} = 3, \\quad \\frac{18}{6} = 3, \\quad \\frac{6}{2} = 3 \\implies r = 3$$
+
+Right working: the common ratio is $r = \\frac{a_{n+1}}{a_n}$, later term over earlier term.
+$$\\frac{18}{54} = \\frac{1}{3}, \\quad \\frac{6}{18} = \\frac{1}{3}, \\quad \\frac{2}{6} = \\frac{1}{3} \\implies r = \\frac{1}{3}$$
+
+Why it happens: the larger number is written on top out of habit, and because all the ratios agree, the constant-ratio test passes and hides the error.
+
+How to check: multiply the first term by $r$; it must give the second. $54 \\cdot 3 = 162$, not $18$, while $54 \\cdot \\frac{1}{3} = 18$. A sequence of positive terms that shrinks always has $0 < r < 1$.
+
+**Using the power n instead of n − 1**
+
+In the general term, $r$ is raised to the position $n$ instead of to $n - 1$, the number of steps from the first term.
+
+Wrong working: with $a_1 = 3$ and $r = 2$,
+$$a_{10} = 3 \\cdot 2^{10} = 3072$$
+
+Right working: from place $1$ to place $10$ there are $9$ steps.
+$$a_{10} = 3 \\cdot 2^{10 - 1} = 3 \\cdot 512 = 1536$$
+
+The same slip appears when solving for $r$: from $a_1 = 5$ and $a_4 = 40$, writing $40 = 5r^4$ gives $r^4 = 8$ and $r \\approx 1.68$, instead of $r^3 = 8$ and $r = 2$.
+
+Why it happens: the formula is remembered as "first term times $r$ to the $n$", and the fact that $a_1$ already occupies the first place, before any multiplication by $r$, gets lost.
+
+How to check: put $n = 1$ into the formula; it must return $a_1$. The wrong version gives $3 \\cdot 2^1 = 6$, which is the second term, while $3 \\cdot 2^0 = 3$.
+
+**Taking n from the last exponent**
+
+In the finite sum formula, $n$ is the number of terms added. It is read off the exponent of the last term instead of being counted.
+
+Wrong working: for $1 + 2 + 4 + \\cdots + 2^9$, taking $n = 9$,
+$$S = \\frac{1 - 2^9}{1 - 2} = \\frac{1 - 512}{-1} = 511$$
+
+Right working: the exponents run $0, 1, 2, \\ldots, 9$, which is $10$ terms.
+$$S_{10} = \\frac{1 - 2^{10}}{1 - 2} = \\frac{1 - 1024}{-1} = 1023$$
+
+Why it happens: the terms are $a_1 r^0, a_1 r^1, \\ldots, a_1 r^{n-1}$, so the exponent of the last term is always one less than the number of terms.
+
+How to check: a sum of positive terms is larger than its last term. The wrong answer $511$ is smaller than the last term $2^9 = 512$ alone, so it cannot be right; $1023 = 511 + 512$ is.
+
+**Summing a series that diverges**
+
+The infinite-sum formula $S = \\frac{a_1}{1 - r}$ is applied to a series whose ratio has size $1$ or more.
+
+Wrong working: for $1 + 2 + 4 + 8 + \\cdots$ with $a_1 = 1$ and $r = 2$,
+$$S = \\frac{1}{1 - 2} = -1$$
+
+Right working: $|r| = 2 \\geq 1$, so the terms do not shrink. The partial sums are $1, 3, 7, 15, \\ldots$, that is $S_n = 2^n - 1$, and they grow without bound. The series diverges and has no sum.
+
+The same happens at $r = -1$: for $1 - 1 + 1 - 1 + \\cdots$ the formula gives $\\frac{1}{1 - (-1)} = \\frac{1}{2}$, but the partial sums alternate $1, 0, 1, 0, \\ldots$ and never settle.
+
+Why it happens: the formula needs only $a_1$ and $r$ and returns a number for every ratio except $r = 1$. The condition $|r| < 1$ is written beside it, not inside it, and is easy to leave behind.
+
+How to check: compare the answer with the first few partial sums. A series of positive terms cannot add up to a negative number, and partial sums that keep increasing cannot be approaching $-1$. Checking $|r| < 1$ first avoids the problem.
+
+**Taking the root by the number of means**
+
+When $k$ geometric means are inserted between $a$ and $b$, the ratio $\\frac{b}{a}$ is split into $k$ equal factors instead of $k + 1$.
+
+Wrong working: $3$ means between $2$ and $162$,
+$$r^3 = \\frac{162}{2} = 81 \\implies r = \\sqrt[3]{81} \\approx 4.33$$
+which gives the list $2, 8.65, 37.44, 162$ (values rounded), with only two values between the endpoints.
+
+Right working: $3$ means and $2$ endpoints make $5$ terms, and $5$ terms have $4$ steps between them.
+$$r^4 = \\frac{162}{2} = 81 \\implies r = \\sqrt[4]{81} = 3$$
+The sequence is $2, 6, 18, 54, 162$.
+
+Why it happens: the number of values to insert and the number of steps between neighbouring values are easy to confuse; there is always one more step than there are inserted values.
+
+How to check: count the values strictly between the endpoints in the finished list; there must be exactly $k$. Equivalently, $a \\cdot r^{k + 1}$ must equal $b$: $2 \\cdot 3^4 = 162$.`,
     before: ``,
     after: ``,
     link: '',
@@ -812,6 +920,14 @@ export default function GeometricSequencesPage({seoData, sectionsContent, introC
           sectionsContent.obj8.content,
           <div key={'capstone-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

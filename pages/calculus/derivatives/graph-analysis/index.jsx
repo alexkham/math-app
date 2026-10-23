@@ -501,6 +501,10 @@ The tangent line to $f$ at $x = a$ passes through $(a, f(a))$ with slope $f'(a)$
 $$y - f(a) = f'(a)(x - a) \\qquad y = f(a) + f'(a)(x - a)$$
 /calculus/formulas#tangent_line_equation]@
 
+@academic[pitfall,aside:true,width:35%:Leaving x in the slope
+Putting the derivative function into the formula for $f(x) = x^2$ at $a = 3$ gives $y - 9 = 2x(x - 3)$, a parabola, not a line. The slope is the number $f'(3) = 6$: $y - 9 = 6(x - 3)$, so $y = 6x - 9$.
+[Read more](!#pitfalls)]@
+
 This line is the best linear approximation to $f$ near $x = a$. For values of $x$ close to $a$, the tangent line and the curve are nearly indistinguishable. This is the geometric foundation of [linear approximation](!/calculus/derivatives/differentials).
 
 The normal line at the same point is perpendicular to the tangent. If $f'(a) \\neq 0$, its slope is $-1/f'(a)$. If $f'(a) = 0$, the tangent is horizontal and the normal is vertical.
@@ -571,6 +575,12 @@ $$f'(x) > 0 \\implies f \\text{ increasing}, \\quad f'(x) < 0 \\implies f \\text
 The proof relies on the [Mean Value Theorem](!/calculus/derivatives/rules). For any two points $x_1 < x_2$ in $(a, b)$, there exists $c$ between them with $f(x_2) - f(x_1) = f'(c)(x_2 - x_1)$. If $f'(c) > 0$ and $x_2 - x_1 > 0$, then $f(x_2) - f(x_1) > 0$, confirming $f$ is increasing.
 
 To find where a function increases or decreases: solve $f'(x) = 0$ and identify where $f'$ is undefined, then test the sign of $f'$ in each resulting interval.
+
+@academic[pitfall,aside:true,width:35%:Joining intervals across a break
+For $f(x) = -\\frac{1}{x}$, $f'(x) = \\frac{1}{x^2} > 0$ wherever it exists, yet "increasing on $(-\\infty, 0) \\cup (0, \\infty)$" is false: $f(-1) = 1 > f(1) = -1$. The function is increasing on $(-\\infty, 0)$ and on $(0, \\infty)$, separately.
+[Read more](!#pitfalls)]@
+
+The points found this way split the domain into open intervals. On each interval $f'$ keeps a single sign, so one test value inside it is enough: for $f(x) = x^3 - 3x$, the points $x = \\pm 1$ give three intervals, and $f'(-2) = 9$, $f'(0) = -3$ and $f'(2) = 9$ show that $f$ increases, decreases, then increases again. A value of $x$ where $f$ itself is undefined also splits the domain, since $f'$ cannot exist there either.
 `,
     before: ``,
     after: ``,
@@ -594,6 +604,10 @@ Critical points are the only candidates for local extrema.
 If $f$ has a local maximum or minimum at $c$, then $c$ must be a critical point.]@
 
 This is Fermat's theorem: a local extremum at an interior point requires the derivative to vanish or fail to exist.
+
+@academic[pitfall,aside:true,width:35%:Skipping points where the derivative is undefined
+Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\frac{2}{3}x^{-1/3}$ is never $0$. But $f'(0)$ does not exist, so $x = 0$ is a critical point, and it is the minimum: $f(0) = 0$.
+[Read more](!#pitfalls)]@
 
 The converse is false. The function $f(x) = x^3$ has $f'(0) = 0$, so $x = 0$ is a critical point, but $f$ has no extremum there—it increases through the origin. A critical point is a candidate that must be tested further.
 
@@ -638,6 +652,10 @@ $$f'(c) = 0, \\; f''(c) < 0 \\implies c \\text{ is a local max}$$
 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Swapping the two verdicts
+Reading $f''(c) > 0$ as a peak calls $x = 1$ a maximum of $f(x) = x^3 - 3x$, where $f''(1) = 6$. A positive second derivative means a cup, so $x = 1$ is the local minimum, $f(1) = -2$; the maximum is at $x = -1$, where $f''(-1) = -6$.
+[Read more](!#pitfalls)]@
 
 If $f''(c) = 0$, the test is inconclusive. The point might be an extremum or an inflection point—further analysis is required. In this case, fall back to the first derivative test or examine [higher-order derivatives](!/calculus/derivatives/higher-order).
 
@@ -718,6 +736,10 @@ $$f \\text{ continuous on } [a, b] \\implies f \\text{ attains a max and min on 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Forgetting the endpoints
+Comparing only the critical values of $f(x) = x^3 - 3x$ on $[-3, 3]$, $f(-1) = 2$ and $f(1) = -2$, gives a maximum of $2$. The endpoints give $f(3) = 18$ and $f(-3) = -18$, so the absolute maximum is $18$ and the absolute minimum is $-18$.
+[Read more](!#pitfalls)]@
+
 Applied optimization problems translate a real scenario into a function of one variable. The steps are: identify the quantity to optimize, express it as a function of a single variable, determine the feasible domain, find critical points within that domain, and compare values at critical points and endpoints.
 
 The derivative identifies candidates; the context determines which candidate solves the problem. Checking that a critical point is actually a maximum (or minimum) rather than merely a critical point is an essential final step. The table below collects this procedure as a five-step recipe.
@@ -733,6 +755,10 @@ Related rates problems involve two or more quantities that change simultaneously
 
 The method uses [implicit differentiation](!/calculus/derivatives/techniques) with respect to $t$. Start with an equation relating the variables—geometric, physical, or algebraic. Differentiate both sides with respect to $t$, applying the chain rule to every variable that depends on $t$. Substitute known values and known rates, then solve for the unknown rate.
 
+@academic[pitfall,aside:true,width:35%:Dropping the chain-rule factor
+Differentiating $A = \\pi r^2$ with respect to $t$ as $\\frac{dA}{dt} = 2\\pi r$ leaves out $\\frac{dr}{dt}$. With $r = 5$ and $\\frac{dr}{dt} = 2$ this gives $10\\pi$; the chain rule gives $\\frac{dA}{dt} = 2\\pi r \\frac{dr}{dt} = 20\\pi$.
+[Read more](!#pitfalls)]@
+
 Setting up the relationship correctly is the critical step. The equation must hold at all times, not just at the particular instant in question. Constants can be substituted only after differentiation—replacing a variable with a fixed value before differentiating eliminates its rate of change from the equation.
 `,
     before: ``,
@@ -743,6 +769,87 @@ Setting up the relationship correctly is the critical step. The equation must ho
     title: `The Full Derivative Toolkit at a Glance`,
     content: `
 Every section above introduced a separate way the first or second derivative answers a question about the graph of f — direction, steepness, extrema, concavity, inflection, sketching, optimization, related rates. The table below lays them all out side by side: each tool, the geometric or applied question it settles, and the specific derivative information it needs.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `
+Six mistakes cause many wrong answers when derivatives are used to read a graph. Each is marked by a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Leaving x in the slope**
+
+When the tangent line at $x = a$ is written, the derivative goes into the point-slope formula as the function $f'(x)$ instead of its value $f'(a)$. The slope then still contains $x$, and the equation is no longer a line.
+
+Wrong working: for $f(x) = x^2$ at $a = 3$, $f(3) = 9$ and $f'(x) = 2x$, so $y - 9 = 2x(x - 3)$. This expands to $y = 2x^2 - 6x + 9$, a parabola.
+
+Right working: evaluate the derivative first, $f'(3) = 6$. Then $y - 9 = 6(x - 3)$, so $y = 6x - 9$.
+
+Why it happens: the formula $y - f(a) = f'(a)(x - a)$ contains both $a$ and $x$, and right after $f'(x)$ has been computed the two letters are easy to merge.
+
+How to check: a tangent line has the form $y = mx + b$ with numbers $m$ and $b$, and no power of $x$ beyond the first. It must also pass through the point: at $x = 3$, $6 \\cdot 3 - 9 = 9 = f(3)$.
+
+**Joining intervals across a break**
+
+$f'$ has the same sign on both sides of a point where $f$ is undefined, and the two intervals are joined into one, as if $f$ kept increasing across the gap.
+
+Wrong working: for $f(x) = -\\frac{1}{x}$, $f'(x) = \\frac{1}{x^2} > 0$ for every $x \\neq 0$, so $f$ is increasing on $(-\\infty, 0) \\cup (0, \\infty)$.
+
+Right working: the sign test speaks about one open interval at a time. $f$ is increasing on $(-\\infty, 0)$ and increasing on $(0, \\infty)$, but not on their union: $-1 < 1$, while $f(-1) = 1 > f(1) = -1$.
+
+Why it happens: the hole at $x = 0$ is easy to overlook when $f'$ has the same sign on both sides of it, and a union of intervals looks like a tidy single answer.
+
+How to check: take one input on each side of the break and compare the outputs. If the larger input gives the smaller output, the function is not increasing across the break.
+
+**Skipping points where the derivative is undefined**
+
+Critical points are found by solving $f'(x) = 0$ only. Points of the domain where $f'$ does not exist are left out, and an extremum at a corner or a cusp is lost.
+
+Wrong working: for $f(x) = x^{2/3}$, $f'(x) = \\frac{2}{3}x^{-1/3}$, which is never $0$. So $f$ has no critical points and no extrema.
+
+Right working: $f(0) = 0$ is defined but $f'(0)$ does not exist, so $x = 0$ is a critical point. For $x < 0$, $f'(x) < 0$, and for $x > 0$, $f'(x) > 0$, so $f$ has a local minimum at $0$. Since $x^{2/3} = (x^{1/3})^2 \\geq 0$ for every $x$, it is also the absolute minimum.
+
+Why it happens: the condition $f'(x) = 0$ turns into an equation to solve, while the condition "$f'(c)$ does not exist" has nothing to solve and is easily forgotten.
+
+How to check: after solving $f'(x) = 0$, look for values in the domain of $f$ where the formula for $f'$ breaks down: a zero denominator, a negative power of $x$, an absolute value.
+
+**Swapping the two verdicts**
+
+In the second derivative test, the sign of $f''(c)$ is matched to the wrong verdict: a positive value is read as a peak and a negative value as a valley.
+
+Wrong working: for $f(x) = x^3 - 3x$, $f'(x) = 3x^2 - 3$ is $0$ at $x = \\pm 1$, and $f''(x) = 6x$. Since $f''(1) = 6 > 0$, $x = 1$ is a local maximum.
+
+Right working: $f''(1) > 0$ means concave up, a cup, so $x = 1$ is a local minimum, $f(1) = -2$. At $x = -1$, $f''(-1) = -6 < 0$, a cap, so $x = -1$ is a local maximum, $f(-1) = 2$.
+
+Why it happens: "positive" sounds like "high", and the maximum is the high point, so the positive sign gets attached to the maximum.
+
+How to check: try the simplest case. $f(x) = x^2$ has $f''(0) = 2 > 0$ and an obvious minimum at $0$. In the example, the values agree: $f(1) = -2$ is lower than $f(-1) = 2$.
+
+**Forgetting the endpoints**
+
+On a closed interval, the absolute extrema are chosen from the critical points alone, and the values at the endpoints are never computed.
+
+Wrong working: for $f(x) = x^3 - 3x$ on $[-3, 3]$, the critical points are $x = \\pm 1$, with $f(-1) = 2$ and $f(1) = -2$. So the absolute maximum is $2$ and the absolute minimum is $-2$.
+
+Right working: the candidates are the critical points and the endpoints. $f(-3) = -27 + 9 = -18$, $f(-1) = 2$, $f(1) = -2$, $f(3) = 27 - 9 = 18$. The absolute maximum is $18$ at $x = 3$ and the absolute minimum is $-18$ at $x = -3$.
+
+Why it happens: the derivative finds the points where the graph turns, and an endpoint is not a turning point, so it never appears when $f'(x) = 0$ is solved.
+
+How to check: a local maximum is only the highest point nearby. Evaluate $f$ at both ends of the interval and compare before naming an absolute extremum.
+
+**Dropping the chain-rule factor**
+
+In a related rates problem, a quantity that depends on time is differentiated as if it were the variable of differentiation itself, and the factor from the chain rule is lost.
+
+Wrong working: for a circle with area $A = \\pi r^2$, $\\frac{dA}{dt} = 2\\pi r$. With $r = 5$ cm and $\\frac{dr}{dt} = 2$ cm/s, this gives $10\\pi$.
+
+Right working: $r$ depends on $t$, so $\\frac{dA}{dt} = 2\\pi r \\frac{dr}{dt}$. At $r = 5$ and $\\frac{dr}{dt} = 2$: $\\frac{dA}{dt} = 2\\pi \\cdot 5 \\cdot 2 = 20\\pi \\approx 62.8$ cm²/s.
+
+Why it happens: $2\\pi r$ is the familiar derivative of $\\pi r^2$ with respect to $r$, and the switch from $r$ to $t$ as the variable is easy to miss.
+
+How to check: look at the units. $2\\pi r$ is measured in cm, not in cm²/s. And if the radius stopped growing, $\\frac{dr}{dt} = 0$, the area could not change, so the rate must contain $\\frac{dr}{dt}$.
 `,
     before: ``,
     after: ``,
@@ -1118,6 +1225,14 @@ export default function PageTemplate({
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
         ]
     },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',
@@ -1188,7 +1303,7 @@ export default function PageTemplate({
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Graph Analyzis with Derivatives</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Graph Analysis with Derivatives</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

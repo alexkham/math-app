@@ -1084,6 +1084,12 @@ For "more than $k$ successes":
 
 @academic[formula_callout:Cumulative Distribution Function (CDF)
 $$P(X > k) = 1 - F_X(k)$$]@
+
+@academic[pitfall,aside:true,width:35%:Treating at least as more than
+For at least one ace in a five-card hand, writing $1 - F_X(1)$ also removes the hands with exactly one ace, giving $P(X \\geq 2) \\approx 0.042$. The right cut is $1 - F_X(0) \\approx 0.341$.
+[Read more](!#pitfalls)]@
+
+The complement rule above covers one wording, and questions use several: "more than", "at least", "fewer than" and "at most". The count of successes takes only whole-number values, so each wording keeps a different set of counts, and the complement keeps the counts on the other side of that line. The CDF is then read at the last count that falls outside the event.
   `,
   before:``,
   after:``,
@@ -1210,10 +1216,14 @@ Consider drawing 5 cards from a standard deck of 52, counting aces. Here $N = 52
 $$\\mathrm{Var}(X) = 5 \\cdot \\frac{4}{52} \\cdot \\frac{48}{52} \\cdot \\frac{47}{51}$$]@
 
 @academic[formula_callout:Variance and Standard Deviation
-$$= 5 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} \\cdot \\frac{47}{51} \\approx 0.331$$]@
+$$= 5 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} \\cdot \\frac{47}{51} \\approx 0.327$$]@
 
 @academic[formula_callout:Variance and Standard Deviation
-$$\\sigma \\approx \\sqrt{0.331} \\approx 0.575$$]@
+$$\\sigma \\approx \\sqrt{0.327} \\approx 0.572$$]@
+
+@academic[pitfall,aside:true,width:35%:Leaving out the correction factor
+Dropping $\\frac{47}{51}$ gives the binomial variance $5 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} = \\frac{60}{169} \\approx 0.355$, too large for cards that are not put back. With the factor, $\\mathrm{Var}(X) \\approx 0.33$.
+[Read more](!#pitfalls)]@
 
 The relatively small variance reflects the limited range of possible outcomes (0 to 4 aces) and the constraining effect of sampling without replacement from a finite deck.
   `,
@@ -1304,7 +1314,13 @@ Suppose you have a deck of $N = 52$ cards containing $K = 13$ hearts. You draw $
 @academic[formula_callout:Applications and Examples
 $$P(X = 2) = \\frac{\\binom{13}{2} \\binom{52-13}{5-2}}{\\binom{52}{5}} = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}} = \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$$]@
 
+@academic[pitfall,aside:true,width:35%:Treating the draws as independent
+Using the binomial with $p = \\frac{13}{52} = \\frac{1}{4}$ gives $\\binom{5}{2}(0.25)^2(0.75)^3 \\approx 0.264$, as if each card went back. Without replacement the count of hands gives $P(X = 2) \\approx 0.274$.
+[Read more](!#pitfalls)]@
+
 This means there's about a 27.4% chance of getting exactly 2 hearts when drawing 5 cards from a standard deck.
+
+Each heart that is drawn leaves one fewer heart in the deck, so the chance of a heart on the next card depends on the cards already drawn. The three binomial coefficients count whole hands instead of multiplying chances draw by draw, and that is how the formula keeps track of the shrinking deck.
 
 Note: When $N$ is very large relative to $n$, the hypergeometric distribution approximates the binomial distribution with $p = \\frac{K}{N}$.
       `,
@@ -1393,6 +1409,55 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
       after:``,
       link:'',
   
+    },
+    obj17:{
+      title:`Common Pitfalls`,
+      content:`Three mistakes come up again and again in hypergeometric problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Treating at least as more than**
+
+The question asks for at least $k$ successes, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.
+
+Wrong working: for at least one ace in a five-card hand ($N = 52$, $K = 4$, $n = 5$),
+$$P(X \\geq 1) = 1 - F_X(1) \\approx 1 - (0.659 + 0.299) = 0.042$$
+
+Right working: at least one ace means $1$, $2$, $3$ or $4$ aces, so the complement is a hand with no ace at all.
+$$P(X \\geq 1) = 1 - F_X(0) = 1 - \\frac{\\binom{48}{5}}{\\binom{52}{5}} = 1 - \\frac{1712304}{2598960} \\approx 0.341$$
+
+Why it happens: the rules $1 - F_X(k)$ and $1 - F_X(k-1)$ differ by a single symbol, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.
+
+How to check: the event contains the hands with exactly one ace, and those alone have probability $\\frac{4 \\cdot \\binom{48}{4}}{\\binom{52}{5}} = \\frac{778320}{2598960} \\approx 0.299$. An answer below that, such as $0.042$, cannot be right.
+
+**Leaving out the correction factor**
+
+The variance of a sample drawn without replacement is computed with the binomial formula $np(1-p)$ and $p = \\frac{K}{N}$, and the factor $\\frac{N-n}{N-1}$ is left out.
+
+Wrong working: for the number of aces in five cards,
+$$\\mathrm{Var}(X) = 5 \\cdot \\frac{4}{52} \\cdot \\frac{48}{52} = \\frac{60}{169} \\approx 0.355$$
+
+Right working: the cards are not put back, so the finite population correction applies.
+$$\\mathrm{Var}(X) = \\frac{60}{169} \\cdot \\frac{47}{51} = \\frac{940}{2873} \\approx 0.33$$
+
+Why it happens: the mean $n \\cdot \\frac{K}{N}$ is the same as the binomial mean with $p = \\frac{K}{N}$, so it is natural to expect the variance to match as well. Only the variance feels the dependence between the draws.
+
+How to check: take the whole population as the sample, $n = N$. Drawing all $52$ cards always gives $4$ aces, so the variance must be $0$. The correction factor $\\frac{52-52}{51}$ gives exactly $0$, while the binomial formula gives $52 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} = \\frac{48}{13} \\approx 3.69$.
+
+**Treating the draws as independent**
+
+The probability of $k$ successes in draws without replacement is computed with the binomial formula, as if every draw had the same chance $\\frac{K}{N}$ whatever came before.
+
+Wrong working: for exactly $2$ hearts in $5$ cards, with $p = \\frac{13}{52} = \\frac{1}{4}$,
+$$P(X = 2) = \\binom{5}{2} (0.25)^2 (0.75)^3 = 10 \\cdot 0.0625 \\cdot 0.421875 \\approx 0.264$$
+
+Right working: count the hands.
+$$P(X = 2) = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}} = \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$$
+
+Why it happens: the binomial formula is usually learned first, and a question with a fixed number of draws and a success rate of $\\frac{1}{4}$ looks like a binomial question on the surface. Whether the cards go back is easy to overlook.
+
+How to check: look at an extreme count, where the gap is largest. For five hearts in five cards the binomial gives $(0.25)^5 \\approx 0.00098$, while the count of hands gives $\\frac{\\binom{13}{5}}{\\binom{52}{5}} = \\frac{1287}{2598960} \\approx 0.00050$, about half as much: each heart drawn makes the next one less likely.`,
+      before:``,
+      after:``,
+      link:'',
     },
      links:{
       decide:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn More About Distinguishing Discrete Distributions](!/probability/distributions/discrete#decide) →@
@@ -1748,6 +1813,14 @@ export default function HypergeometricDistributionPage({
           sectionsContent.obj16.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj17.title,
+        link:sectionsContent.obj17.link,
+        content:[
+          sectionsContent.obj17.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

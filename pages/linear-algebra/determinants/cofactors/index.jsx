@@ -1465,6 +1465,12 @@ Applying the signs: $C_{11} = +23$, $C_{12} = -12$, $C_{14} = -(-17) = +17$. The
 @academic[formula_callout:Laplace Expansion Along a Row
 $$\\det(A) = 1(23) + 3(-12) + 0 + 2(17) = 23 - 36 + 34 = 21$$]@
 
+@academic[pitfall,aside:true,width:35%:Dropping the sign factor
+Using the minors in place of the cofactors gives $1(23) + 3(12) + 0 + 2(-17) = 25$. With the signs $+, -, +, -$ of row $1$, the sum is $23 - 36 + 34 = 21$.
+[Read more](!#pitfalls)]@
+
+Every term of the expansion is built from three pieces: an entry of the chosen row, the minor left after deleting that entry's row and column, and the sign the checkerboard gives to its position. The minors are plain determinants of the smaller matrices and carry no sign of their own; the sign enters only when each minor is turned into a cofactor.
+
 ## Verification via a Different Row
 
 Expanding the same matrix along row $3$ (which has a zero in the first position) would produce the same value $21$, confirming that the choice of row is purely a matter of computational convenience.`,
@@ -1528,6 +1534,10 @@ $$\\text{cof}(A) = \\begin{pmatrix} 20 & -8 & -12 \\\\ -29 & 8 & 18 \\\\ -13 & 4
 
 where each entry was computed in the earlier sections. As a check, the Laplace expansion along row $1$ should give $\\det(A) = 2(20) + 5(-8) + 1(-12) = 40 - 40 - 12 = -12$. Along row $2$: $0(-29) + 3(8) + (-2)(18) = 0 + 24 - 36 = -12$. Along row $3$: $4(-13) + 1(4) + 6(6) = -52 + 4 + 36 = -12$. All three rows agree.
 
+@academic[pitfall,aside:true,width:35%:Starting every row with a plus sign
+Giving row $2$ the signs $+, -, +$ turns its expansion into $0(29) - 3(8) + (-2)(-18) = 12$. Row $2$ starts with $(-1)^{2+1} = -1$, so its signs are $-, +, -$ and the sum is $-12$.
+[Read more](!#pitfalls)]@
+
 The cofactor matrix encodes every possible cofactor expansion simultaneously — each row of $\\text{cof}(A)$ contains the cofactors needed for expansion along the corresponding row of $A$, and each column contains those needed for column expansion.`,
     before: ``,
     after: ``,
@@ -1551,6 +1561,10 @@ The adjugate satisfies
 
 @academic[formula_callout:adjugate_identity|Adjugate Identity|$$A \\cdot \\operatorname{adj}(A) = \\operatorname{adj}(A) \\cdot A = \\det(A) \\, I$$]@
 @academic[formulas_link:/linear-algebra/formulas#adjugate_identity]@
+
+@academic[pitfall,aside:true,width:35%:Forgetting to transpose the cofactors
+Using $\\operatorname{cof}(A)$ itself as the adjugate pairs row $1$ of $A$ with column $1$ of $\\operatorname{cof}(A)$: $2(20) + 5(-29) + 1(-13) = -118$, not $-12$. After the transpose, row $1$ meets its own cofactors: $2(20) + 5(-8) + 1(-12) = -12$.
+[Read more](!#pitfalls)]@
 
 To see why, consider the $(i,k)$ entry of the product $A \\cdot \\operatorname{adj}(A)$. This is $\\sum_{j=1}^{n} a_{ij} \\cdot [\\operatorname{adj}(A)]_{jk} = \\sum_{j=1}^{n} a_{ij} \\, C_{kj}$. When $i = k$, this sum is exactly the Laplace expansion of $\\det(A)$ along row $i$, so the diagonal entries equal $\\det(A)$. When $i \\neq k$, the sum pairs the entries of row $i$ with the cofactors of a different row $k$. This is equivalent to computing the determinant of a matrix with two identical rows (row $i$ appears in both its own position and row $k$'s), which is always zero. So the off-diagonal entries vanish.
 
@@ -1582,6 +1596,56 @@ The Laplace expansion is best understood as a theoretical instrument. It defines
   obj8: {
     title: `Summary: The Cofactor Construction Chain`,
     content: `The objects introduced above — minor, cofactor, cofactor matrix, adjugate — form a single construction chain, each built from the previous one and culminating in the inverse formula. The table below collects each link in the chain alongside its definition, its shape (number or matrix), and the role it plays in connecting one stage to the next.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `Three slips come up again and again in cofactor work. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dropping the sign factor**
+
+The entries of the expansion row are multiplied by their minors $M_{ij}$ instead of their cofactors $C_{ij}$. The checkerboard signs never enter, so every term at a position where $i + j$ is odd comes out with the wrong sign.
+
+Wrong working: for the $4 \\times 4$ matrix of the worked example, expanding along row $1$ with the minors $M_{11} = 23$, $M_{12} = 12$, $M_{14} = -17$,
+$$1 \\cdot 23 + 3 \\cdot 12 + 0 + 2 \\cdot (-17) = 23 + 36 - 34 = 25$$
+
+Right working: the positions $(1,1), (1,2), (1,3), (1,4)$ carry the signs $+, -, +, -$, so $C_{12} = -12$ and $C_{14} = +17$.
+$$1 \\cdot 23 + 3 \\cdot (-12) + 0 + 2 \\cdot 17 = 23 - 36 + 34 = 21$$
+
+Why it happens: the minors take all the effort, and once they are found the expansion looks finished. The $2 \\times 2$ minors already contain a minus sign of their own, in $ad - bc$, which makes it easy to believe the signs have been taken care of.
+
+How to check: expand along a second row. Along row $3$, which is $(0, 4, -1, 3)$, the minors are $M_{32} = -12$, $M_{33} = -3$, $M_{34} = 10$, and with the signs $-, +, -$ at those positions the sum is $4 \\cdot 12 + (-1)(-3) + 3 \\cdot (-10) = 48 + 3 - 30 = 21$, matching row $1$. Without signs the same row gives $4(-12) + (-1)(-3) + 3(10) = -15$, which disagrees with the $25$ from row $1$.
+
+**Starting every row with a plus sign**
+
+The signs $+, -, +$ are written down afresh at the start of every row or column instead of being read from the checkerboard. Along an odd-numbered row or column the pattern really does start with $+$, so the slip goes unnoticed there; along an even-numbered one every sign is reversed, and so is the determinant.
+
+Wrong working: for $A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$, row $2$ has the minors $M_{21} = 29$, $M_{22} = 8$, $M_{23} = -18$. With the signs $+, -, +$,
+$$0 \\cdot 29 - 3 \\cdot 8 + (-2)(-18) = 0 - 24 + 36 = 12$$
+
+Right working: the sign at position $(2,1)$ is $(-1)^{2+1} = -1$, so row $2$ runs $-, +, -$.
+$$-0 \\cdot 29 + 3 \\cdot 8 - (-2)(-18) = 0 + 24 - 36 = -12$$
+which matches the expansions along rows $1$ and $3$.
+
+Why it happens: most first examples are expanded along row $1$, where the pattern begins with $+$, and the habit is carried over to the other rows.
+
+How to check: the first sign of row $i$ is $(-1)^{i+1}$, plus for odd rows and minus for even rows. If a second expansion gives the same size but the opposite sign, this slip is the usual cause.
+
+**Forgetting to transpose the cofactors**
+
+The cofactor matrix itself is used as the adjugate. The identity $A \\cdot \\operatorname{adj}(A) = \\det(A) \\, I$ then fails, and so does the inverse formula built on it. The slip is invisible only when $\\operatorname{cof}(A)$ happens to be symmetric.
+
+Wrong working: with the running example,
+$$A \\cdot \\operatorname{cof}(A) = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix} \\begin{pmatrix} 20 & -8 & -12 \\\\ -29 & 8 & 18 \\\\ -13 & 4 & 6 \\end{pmatrix} = \\begin{pmatrix} -118 & 28 & 72 \\\\ -61 & 16 & 42 \\\\ -27 & 0 & 6 \\end{pmatrix}$$
+which is not a multiple of $I$, so dividing it by $\\det(A) = -12$ does not give $A^{-1}$.
+
+Right working: transpose first, $\\operatorname{adj}(A) = \\operatorname{cof}(A)^T$. The product is then $-12 \\, I$, as in the verification of the adjugate section.
+
+Why it happens: the cofactor matrix is where all the work goes, and the transpose is a last step with no arithmetic in it. The cofactor $C_{ij}$ belongs to position $(i,j)$ of $A$, so it feels natural to leave it there.
+
+How to check: every diagonal entry of $A$ times the candidate adjugate is a Laplace expansion and must equal $\\det(A)$. Row $2$ of $A$ against column $2$ of the true adjugate gives $0(-29) + 3(8) + (-2)(18) = -12$; against column $2$ of $\\operatorname{cof}(A)$ it gives $0(-8) + 3(8) + (-2)(4) = 16$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1860,6 +1924,14 @@ const schemas = {
           </DiagramFrame>,
           `The identity $A \\cdot \\operatorname{adj}(A) = \\det(A) \\cdot I$ is the destination, and it is more general than the inverse formula it produces. It holds for every square matrix, singular ones included — where it says $A \\cdot \\operatorname{adj}(A) = O$, which is informative rather than vacuous. Dividing by $\\det(A)$ is the last step, and it is the only step that requires a hypothesis.`,
           `None of this is how anything is computed. A minor is a determinant, so every level of the recursion multiplies the work by another factor of $n$ — the adjugate of a $5 \\times 5$ matrix means twenty-five $4 \\times 4$ determinants, each of which means four $3 \\times 3$ determinants. Reduction computes a determinant in $\\tfrac{2}{3}n^3$ operations and factorization inverts in $2n^3$. What the chain provides instead is a closed form, and closed forms are what proofs and symbolic work need.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

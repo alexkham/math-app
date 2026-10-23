@@ -1228,11 +1228,41 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
+import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import Hierarchy from '@/app/components/infographics/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
+// Concept introduction (section 1) — template I, naming. Running instance:
+// x³ throughout — the derivative tool's cubic state, position t³, the curve
+// y = x³, and the chain x³ → 3x² → 6x → 6 → 0. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box and corollary box are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciMotionTable = ciTableOpen(['time t', 'position t³', 'velocity 3t²', 'acceleration 6t']) +
+  ciRow(['0', '0', '0', '0']) +
+  ciRow(['1', '1', '3', '6'], { shade: true }) +
+  ciRow(['2', '8', '12', '12']) +
+  ciRow(['3', '27', '27', '18'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciChainTable = ciTableOpen(['start', 'once', 'twice', 'three times', 'four times']) +
+  ciRow(['x³', '3x²', '6x', '6', '0'], { last: true, color: '#06357a', cols: [0] }) +
+  '</tbody></table>'
+const ciUsesTable = ciTableOpen(['once it has a name', 'what it settles']) +
+  ciRow(['the sign of f″', 'which way a curve bends, and where an inflection is']) +
+  ciRow(['f″ at a critical point', 'minimum or maximum, by the second derivative test'], { shade: true }) +
+  ciRow(['s″(t)', 'acceleration, for any motion']) +
+  ciRow(['every f⁽ⁿ⁾(a)', 'the coefficients of a Taylor series'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const keyWords = [
   "higher order derivatives",
   "second derivative",
@@ -1421,7 +1451,7 @@ const keyWords = [
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">e<sup>x</sup></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">e<sup>x</sup></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">self-replicating; the only nonzero elementary function with this property</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">self-replicating; together with its constant multiples Ce<sup>x</sup>, the only functions with this property</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">e<sup>a x</sup></td>
@@ -1788,11 +1818,15 @@ The chain fails quickly for functions with corners, and the order at which it fa
     content: `
 The second derivative $f''(x)$ measures the rate of change of the slope. Where $f''(x) > 0$, the slope $f'(x)$ is increasing—the function bends upward (concave up). Where $f''(x) < 0$, the slope is decreasing—the function bends downward (concave down).
 
+@academic[pitfall,aside:true,width:35%:Squaring the first derivative
+Reading $f''(x)$ or $\\frac{d^2y}{dx^2}$ as the square of the first derivative turns $y = x^3$ into $(3x^2)^2 = 9x^4$, which is never negative. Differentiating twice gives $f''(x) = 6x$, and $f''(-1) = -6$: the curve bends down there.
+[Read more](!#pitfalls)]@
+
 This information is independent of whether $f$ itself is increasing or decreasing. A function can rise while decelerating ($f' > 0$, $f'' < 0$) or fall while accelerating in the negative direction ($f' < 0$, $f'' < 0$). The first and second derivatives describe different aspects of behavior.
 
 The second derivative also powers the [second derivative test](!/calculus/derivatives/graph-analysis) for classifying critical points. At a point where $f'(c) = 0$: if $f''(c) > 0$, the critical point is a local minimum; if $f''(c) < 0$, a local maximum; if $f''(c) = 0$, the test is inconclusive.
 
-Inflection points—where concavity reverses—occur where $f''$ changes sign. The condition $f''(c) = 0$ is necessary but not sufficient; the sign of $f''$ must actually switch across $c$.
+Inflection points—where concavity reverses—occur where $f''$ changes sign. When $f''(c)$ exists, the condition $f''(c) = 0$ is necessary but not sufficient (and $f''$ may instead fail to exist, as for $x^{1/3}$ at $0$); the sign of $f''$ must actually switch across $c$.
 `,
     before: ``,
     after: ``,
@@ -1806,6 +1840,12 @@ In kinematics, the first three derivatives of position $s(t)$ have standard name
 The first derivative $s'(t)$ is velocity: the rate of change of position. It tells how fast an object moves and in which direction.
 
 The second derivative $s''(t)$ is acceleration: the rate of change of velocity. Positive acceleration means speeding up (in the positive direction) or decelerating (in the negative direction). The sign of acceleration relative to the sign of velocity determines whether the object is speeding up or slowing down.
+
+@academic[pitfall,aside:true,width:35%:Reading negative acceleration as slowing down
+Taking $s''(t) < 0$ to mean slowing down fails for $s(t) = -t^2$: at $t = 1$, $s''(1) = -2$, yet the speed $|s'(t)| = 2t$ grows from $2$ at $t = 1$ to $4$ at $t = 2$. Velocity $-2$ and acceleration $-2$ have the same sign, so the object is speeding up.
+[Read more](!#pitfalls)]@
+
+For the position $s(t) = t^3$ from the first section, the velocity is $3t^2$ and the acceleration is $6t$. At $t = 2$ the velocity is $12$ and the acceleration is $12$, both positive, and the table of values there shows the object covering more ground in each second than in the one before. Speed is the size of the velocity, $|s'(t)|$; it carries no direction, while velocity and acceleration both do.
 
 The third derivative $s'''(t)$ is jerk: the rate of change of acceleration. Jerk is felt physically as a sudden push or lurch—smooth motion has low jerk, while abrupt starts and stops produce high jerk. Elevator design, roller coaster engineering, and vehicle ride comfort all involve controlling jerk.
 
@@ -1842,7 +1882,7 @@ The natural exponential $e^x$ is unchanged by differentiation:
 $$\\frac{d^n}{dx^n}[e^x] = e^x$$
 /calculus/formulas#nth_derivative_of_natural_exponential]@
 
-Every derivative of $e^x$ is $e^x$. No other elementary function has this property (aside from the trivial $f(x) = 0$).
+Every derivative of $e^x$ is $e^x$. The only functions with this property are the constant multiples $Ce^x$ (including the trivial $f(x) = 0$).
 
 For the general exponential $e^{ax}$, the chain rule introduces a factor of $a$ at each step:
 
@@ -1852,6 +1892,10 @@ $$\\frac{d^n}{dx^n}[e^{ax}] = a^n e^{ax}$$
 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Using the chain-rule factor only once
+Writing $\\frac{d^3}{dx^3}[e^{2x}] = 2e^{2x}$ keeps the factor $2$ from the first step only. Differentiating three times gives $4e^{2x}$ after the second step and $8e^{2x}$ after the third, so the answer is $8e^{2x}$.
+[Read more](!#pitfalls)]@
 
 Each differentiation multiplies by $a$. After $n$ differentiations, the accumulated constant is $a^n$. This pattern appears in solutions to differential equations, where $e^{ax}$ satisfies equations whose characteristic root is $a$.
 
@@ -1886,6 +1930,10 @@ $$\\frac{d^n}{dx^n}[\\cos x] = \\cos\\!\\left(x + \\frac{n\\pi}{2}\\right)$$
 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Dropping the minus sign
+Taking the derivative of $\\cos x$ to be $\\sin x$ makes the cycle $\\sin x \\to \\cos x \\to \\sin x$, of length two, and gives $\\frac{d^2}{dx^2}[\\sin x] = \\sin x$. With $(\\cos x)' = -\\sin x$ the second derivative is $-\\sin x$, and the cycle closes only after four steps.
+[Read more](!#pitfalls)]@
 
 For $\\sin(ax)$, the chain rule introduces a factor of $a$ per differentiation: $\\frac{d^n}{dx^n}[\\sin(ax)] = a^n \\sin\\left(ax + \\frac{n\\pi}{2}\\right)$. The cycle in the trigonometric part persists; only the amplitude grows as $a^n$.
 
@@ -1943,11 +1991,15 @@ $$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
+@academic[pitfall,aside:true,width:35%:Leaving out the factorials
+Using $f^{(n)}(a)$ as the coefficient without dividing by $n!$ turns the cubic Taylor polynomial of $\\sin x$ at $0$ into $x - x^3$, which gives $0.375$ at $x = 0.5$. With $\\frac{f'''(0)}{3!} = -\\frac{1}{6}$ it is $x - \\frac{x^3}{6} \\approx 0.47917$, close to $\\sin 0.5 \\approx 0.47943$.
+[Read more](!#pitfalls)]@
+
 Each coefficient depends on a higher-order derivative evaluated at the center point $a$. The zeroth derivative $f^{(0)}(a) = f(a)$ gives the constant term. The first derivative gives the linear term. The second derivative gives the quadratic correction. Each successive term captures finer detail about how $f$ deviates from the lower-order approximation.
 
-The Taylor polynomial of degree $k$ truncates the series after $k + 1$ terms, providing a polynomial approximation to $f$ near $a$. The quality of the approximation improves with $k$—more derivatives mean a closer fit over a wider interval.
+The Taylor polynomial of degree $k$ truncates the series after $k + 1$ terms, providing a polynomial approximation to $f$ near $a$. For well-behaved functions such as $\\sin x$, the approximation improves with $k$—more derivatives typically mean a closer fit near $a$, often over a wider interval.
 
-The connection between higher-order derivatives and Taylor series gives these derivatives their deepest significance: the complete collection $\\{f^{(n)}(a)\\}_{n=0}^{\\infty}$ determines $f$ locally (for analytic functions). Knowing all derivatives at a single point reconstructs the entire function in a neighborhood of that point.
+The connection between higher-order derivatives and Taylor series gives these derivatives their deepest significance: the complete collection $\\{f^{(n)}(a)\\}_{n=0}^{\\infty}$ determines $f$ locally (for analytic functions). For such functions, knowing all derivatives at a single point reconstructs the entire function in a neighborhood of that point.
 `,
     before: ``,
     after: ``,
@@ -1962,7 +2014,7 @@ The smoothness classes organize functions by how many continuous derivatives the
 
 Polynomials, $e^x$, $\\sin x$, $\\cos x$, and their compositions are all $C^\\infty$. [Piecewise functions](!/calculus/derivatives/special) typically belong to a finite $C^n$ class determined by how smoothly the pieces join at their boundaries: matching values gives $C^0$, matching first derivatives gives $C^1$, and so on.
 
-There exist functions that are $C^\\infty$ but not analytic—their Taylor series converges but not to the function itself. The standard example is $f(x) = e^{-1/x^2}$ for $x \\neq 0$ and $f(0) = 0$: every derivative at $x = 0$ is zero, so the Taylor series is identically zero, yet the function is not zero away from the origin.
+There exist functions that are $C^\\infty$ but not analytic—their Taylor series either diverges or converges to something other than the function itself. The standard example is $f(x) = e^{-1/x^2}$ for $x \\neq 0$ and $f(0) = 0$: every derivative at $x = 0$ is zero, so the Taylor series is identically zero, yet the function is not zero away from the origin.
 
 @academic[rule_theorem_plain:Smooth does not automatically mean representable by a power series.]@
 
@@ -1976,6 +2028,75 @@ The table below lays out the main tiers — C⁰, the general C&#8319;, C&#8734;
     title: `nth Derivatives at a Glance`,
     content: `
 Different function families behave very differently under repeated differentiation: polynomials terminate, exponentials replicate, and trigonometric functions cycle. The table below collects the closed-form nth derivative for each standard function discussed above into a single reference card, with a brief note on what drives the pattern.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `
+Five mistakes cause many wrong answers with higher-order derivatives. Each is marked by a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Squaring the first derivative**
+
+The second derivative is computed as the square of the first: $f''(x)$ is read as $(f'(x))^2$, or $\\frac{d^2y}{dx^2}$ as $\\left(\\frac{dy}{dx}\\right)^2$.
+
+Wrong working: for $y = x^3$, $\\frac{dy}{dx} = 3x^2$, so $\\frac{d^2y}{dx^2} = (3x^2)^2 = 9x^4$. This is never negative, so the curve would be concave up everywhere.
+
+Right working: differentiate $3x^2$ once more, $\\frac{d^2y}{dx^2} = 6x$. At $x = -1$ it is $-6$, so the curve bends down to the left of $0$ and up to the right, as the first section shows.
+
+Why it happens: in $\\frac{d^2y}{dx^2}$ the $2$ looks like an exponent, and in $f''$ the second prime looks like a repeat of the first; both suggest a product of two first derivatives.
+
+How to check: compare the degrees. Each differentiation lowers the degree of a polynomial by one, so the second derivative of $x^3$ must have degree $1$, not $4$.
+
+**Reading negative acceleration as slowing down**
+
+The sign of $s''(t)$ alone is taken to decide whether an object speeds up or slows down: a negative acceleration is read as braking, a positive one as speeding up.
+
+Wrong working: for $s(t) = -t^2$, $s''(t) = -2 < 0$, so the object is slowing down.
+
+Right working: the velocity is $s'(t) = -2t$, and for $t > 0$ the speed is $|s'(t)| = 2t$. At $t = 1$ the speed is $2$, at $t = 2$ it is $4$: the object speeds up. Velocity and acceleration are both negative, and when they have the same sign the speed grows.
+
+Why it happens: in everyday speech "acceleration" means speeding up and "deceleration" slowing down. In calculus a negative acceleration only says that the velocity decreases, and a negative velocity that decreases gets larger in size.
+
+How to check: compare the signs of $s'(t)$ and $s''(t)$ at the moment in question, or compute the speed $|s'(t)|$ at two nearby times.
+
+**Using the chain-rule factor only once**
+
+When $e^{ax}$ is differentiated several times, the factor $a$ from the chain rule is written once, as if it appeared only at the first step.
+
+Wrong working: $\\frac{d^3}{dx^3}[e^{2x}] = 2e^{2x}$.
+
+Right working: each step applies the chain rule again. $\\frac{d}{dx}[e^{2x}] = 2e^{2x}$, $\\frac{d^2}{dx^2}[e^{2x}] = 4e^{2x}$, $\\frac{d^3}{dx^3}[e^{2x}] = 8e^{2x}$, which is $2^3 e^{2x}$, as the formula $a^n e^{ax}$ says.
+
+Why it happens: after the first step, $2e^{2x}$ looks like a constant times an exponential, and the exponential is then treated like $e^x$, whose derivative is itself.
+
+How to check: count the factors. Three differentiations bring in three chain-rule factors of $2$, so the coefficient must be $2 \\cdot 2 \\cdot 2 = 8$. The same count for $a^x$ gives $(\\ln a)^n$.
+
+**Dropping the minus sign**
+
+The derivative of $\\cos x$ is taken to be $\\sin x$ instead of $-\\sin x$. The error is carried into every later step, and the cycle comes out with the wrong length.
+
+Wrong working: $\\sin x \\to \\cos x \\to \\sin x \\to \\cos x$, so $\\frac{d^2}{dx^2}[\\sin x] = \\sin x$ and $\\frac{d^3}{dx^3}[\\sin x] = \\cos x$.
+
+Right working: $\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x$. So $\\frac{d^2}{dx^2}[\\sin x] = -\\sin x$, $\\frac{d^3}{dx^3}[\\sin x] = -\\cos x$, and the cycle closes after four steps.
+
+Why it happens: the derivative of $\\sin x$ has no minus sign, and the derivative of $\\cos x$ is remembered by symmetry with it.
+
+How to check: use the compact formula $\\sin\\left(x + \\frac{n\\pi}{2}\\right)$; for $n = 2$ it gives $\\sin(x + \\pi) = -\\sin x$. Or test one point: $\\sin x$ has a maximum at $x = \\frac{\\pi}{2}$, so its second derivative cannot be positive there, and $-\\sin\\frac{\\pi}{2} = -1$ is negative.
+
+**Leaving out the factorials**
+
+In the Taylor series, the coefficient of $(x - a)^n$ is taken to be $f^{(n)}(a)$, without the division by $n!$.
+
+Wrong working: for $\\sin x$ at $a = 0$, the values $f(0), f'(0), f''(0), f'''(0)$ are $0, 1, 0, -1$, so the cubic Taylor polynomial is $x - x^3$. At $x = 0.5$ it gives $0.375$.
+
+Right working: divide each derivative by $n!$. The cubic term is $\\frac{-1}{3!}x^3 = -\\frac{x^3}{6}$, and the polynomial is $x - \\frac{x^3}{6}$. At $x = 0.5$ it gives $0.5 - 0.02083 \\approx 0.47917$, while $\\sin 0.5 \\approx 0.47943$.
+
+Why it happens: the first two terms, $f(a)$ and $f'(a)(x - a)$, show no division, because $0! = 1! = 1$, and the pattern seems to continue without it.
+
+How to check: differentiate the polynomial $n$ times at the center; it must give back $f^{(n)}(a)$. The third derivative of $x - x^3$ is $-6$, not $f'''(0) = -1$; the third derivative of $x - \\frac{x^3}{6}$ is $-1$.
 `,
     before: ``,
     after: ``,
@@ -2149,6 +2270,23 @@ const schemas = {
     points: [{ x: 0, y: 0 }],
     notes: [{ x: 0.15, y: -0.6, text: 'corner in f′: f″(0) does not exist', pos: 'e', color: 'r' }],
     caption: 'x|x| has a continuous derivative with a corner: class C¹, not C²' };
+  // Concept introduction figures (section 1), one running instance: x³.
+  const fpCiBend = { kind: 'pieces', svgTitle: 'y = x^3 bends down left of 0 and up right of 0', xRange: [-2, 2], yRange: [-6, 6], yStep: 2,
+    pieces: [
+      { fn: (x) => x * x * x, from: -2, to: 0, ends: [null, null], color: 'g', label: { text: 'bends down (6x < 0)', x: -1.9, y: 4.6, pos: 'e' } },
+      { fn: (x) => x * x * x, from: 0, to: 2, ends: [null, null], color: 'f', label: { text: 'bends up (6x > 0)', x: 0.15, y: -4.6, pos: 'e' } },
+    ],
+    points: [{ x: 0, y: 0 }],
+    caption: 'y = x³: the slope 3x² falls, then rises; 6x tells which' };
+
+  const conceptIntroFigures = {
+    cubic: functionDerivativeDiagrams.cubic,
+    bend: renderFunctionPlotV4(fpCiBend),
+    motionTable: ciMotionTable,
+    chainTable: ciChainTable,
+    usesTable: ciUsesTable,
+  };
+
   const demoUnits = {
     second: demoUnitFrame({
       svg: functionConcavityDiagrams.up,
@@ -2194,6 +2332,7 @@ const schemas = {
   props: {
     smoothnessLevels,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2225,10 +2364,73 @@ export default function PageTemplate({smoothnessLevels,
   obj9Table,
   overviewTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'already',
+        lead: `You have already taken the derivative of a derivative.`,
+        content: `Differentiate $f(x) = x^3$ and you get $f'(x) = 3x^2$, the slope of the curve at each point. Ask how fast that slope is changing and there is only one way to answer: differentiate $3x^2$, which gives $6x$. Nothing new was needed — the same operation, applied to its own result.`,
+        visual: ciSvg('cubic'),
+        caption: `The solid curve is $f(x) = x^3$, the dashed one its derivative $3x^2$; the straight line is the tangent at one point, and its slope is the dashed curve's height there. Differentiating the dashed curve in turn gives $6x$. The same state is on the [derivative visualizer](!/calculus/visual-tools/derivative).`,
+      },
+      {
+        id: 'places',
+        kind: 'instance',
+        lead: `The same move turns up in three different places.`,
+        content: [
+          `In motion. If a position is $s(t) = t^3$, its derivative is the velocity $3t^2$, and the derivative of the velocity is the acceleration $6t$.`,
+          ciTable('motionTable'),
+          `In the shape of a curve. The slope of $y = x^3$ is $3x^2$; whether that slope is shrinking or growing — whether the curve bends down or up — is the sign of its derivative, $6x$.`,
+          `In plain algebra. Keep differentiating $x^3$ and the powers step down until nothing is left.`,
+          ciTable('chainTable'),
+        ],
+        visual: ciSvg('bend'),
+        caption: `Left of $0$, $6x < 0$: the slope shrinks and the curve bends down. Right of $0$, $6x > 0$: the slope grows and the curve bends up. The dot at $0$ is where $6x$ changes sign.`,
+      },
+      {
+        id: 'shared',
+        lead: `What the three share is a rate of change of a rate of change.`,
+        content: `Acceleration is how fast velocity changes; bending is how fast slope changes; each column of the chain is how fast the previous column changes. In every case a derivative is taken, and then the derivative of that result. The surface is different — seconds and metres, curves, powers of $x$ — and the operation underneath is the same.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The second derivative of $f$ is the derivative of $f'$. Each [higher-order derivative](!/calculus/definitions#higher_order_derivative) is the derivative of the one before: the third is the derivative of $f''$, and the $n$th, $f^{(n)}$, is $f$ differentiated $n$ times.`,
+        formula: `@academic[formula_callout:Definition
+$$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
+        footer: `For $f(x) = x^3$: $f'' = 6x$, $f''' = 6$, and every derivative after that is $0$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A higher-order derivative is a function, just as the first derivative is.`,
+        content: `$f''(x) = 6x$ is a new function with its own graph; evaluated at a point it gives a number, $f''(2) = 12$. It is not a different kind of object from $f'$ — only one step further down the same chain.`,
+      },
+      {
+        id: 'caveat',
+        lead: `What the name buys: each fact about it is proved once and used everywhere.`,
+        content: [
+          `Once "second derivative" is a thing with a name and a symbol, one result serves motion, curves and series at once.`,
+          ciTable('usesTable'),
+          `The chain also has a limit of its own.`,
+          `@academic[rule_corollary_plain:Each order depends on the one below it: $f^{(n)}$ exists at a point only if $f^{(n-1)}$ exists in a neighbourhood of it and is [differentiable](!/calculus/derivatives/differentiability) there.]@`,
+          `The chain fails quickly for functions with corners, and the order at which it fails is what the [smoothness classes](!/calculus/derivatives/higher-order#9) below measure.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation for every order, the second derivative and its physical meaning, the patterns that repeated differentiation produces for polynomials, exponentials, sine and cosine, nth-derivative formulas, the link to Taylor series, and smoothness classes.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2236,7 +2438,7 @@ export default function PageTemplate({smoothnessLevels,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2348,6 +2550,14 @@ export default function PageTemplate({smoothnessLevels,
         content:[
           sectionsContent.overview.content,
           <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

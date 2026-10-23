@@ -259,7 +259,10 @@ These two properties generate every valid algebraic step in the solution of a li
 
   obj3: {
     title: `Solving Single-Step and Multi-Step Equations`,
-    content: `A single-step equation requires exactly one application of the properties of equality. The equation $x - 9 = 4$ is solved by adding $9$ to both sides, yielding $x = 13$. The equation $-5x = 40$ is solved by dividing both sides by $-5$, yielding $x = -8$. In each case, one operation undoes the one operation binding the variable.
+    content: `@academic[fact,aside:true,width:35%:Algebra is named after this step
+The word algebra comes from al-jabr, Arabic for restoring, in al-Khwarizmi's ninth-century book on equations. It named exactly this move: a subtracted term is removed from one side by adding it to both sides.]@
+
+A single-step equation requires exactly one application of the properties of equality. The equation $x - 9 = 4$ is solved by adding $9$ to both sides, yielding $x = 13$. The equation $-5x = 40$ is solved by dividing both sides by $-5$, yielding $x = -8$. In each case, one operation undoes the one operation binding the variable.
 
 Multi-step equations demand a sequence of operations. Consider $4x - 7 = 2x + 11$. The variable appears on both sides and constants are mixed in. The strategy proceeds in stages: gather all variable terms on one side and all constant terms on the other, then isolate the variable.
 
@@ -281,6 +284,10 @@ Divide both sides by $2$:
 @academic[formula_callout:Solving Single-Step and Multi-Step Equations
 $$x = 9$$]@
 
+@academic[pitfall,aside:true,width:35%:Moving a term without changing its sign
+Carrying $-7$ across unchanged turns $2x - 7 = 11$ into $2x = 11 - 7 = 4$, so $x = 2$. Adding $7$ to both sides gives $2x = 18$ and $x = 9$.
+[Read more](!#pitfalls)]@
+
 The order of these steps is flexible — subtracting $2x$ first or adding $7$ first both reach the same result — but the underlying logic is rigid: every step must preserve equivalence, and each step must bring the equation closer to the form $x = \\text{value}$.
 
 To solve your own linear equation with each step shown, use the [linear equation solver](!/algebra/calculators/equations/linear).`,
@@ -300,7 +307,15 @@ From here, the procedure is identical to any multi-step equation. Subtract $4x$ 
 
 Nested parentheses require working from the innermost grouping outward. The equation $2[3(x + 1) - 4] = 10$ simplifies as follows: first distribute the $3$ inside the brackets to get $2[3x + 3 - 4] = 10$, then simplify inside the brackets to $2[3x - 1] = 10$, then distribute the $2$ to obtain $6x - 2 = 10$, and finally solve to get $x = 2$.
 
-A persistent source of error is the negative sign preceding parentheses. In the expression $-(x + 4)$, the negative distributes to every term inside, producing $-x - 4$. Writing $-x + 4$ instead is one of the most common algebraic mistakes, and it changes the solution entirely.`,
+A persistent source of error is the negative sign preceding parentheses. In the expression $-(x + 4)$, the negative distributes to every term inside, producing $-x - 4$. Writing $-x + 4$ instead is one of the most common algebraic mistakes, and it changes the solution entirely.
+
+@academic[pitfall,aside:true,width:35%:Distributing a minus sign to the first term only
+Opening $5x - (2x + 4) = 11$ as $5x - 2x + 4 = 11$ gives $3x = 7$, so $x = \\frac{7}{3}$. Both terms change sign: $5x - 2x - 4 = 11$, so $x = 5$.
+[Read more](!#pitfalls)]@
+
+Subtracting a whole bracket is where this matters in practice. In $5x - (2x + 4) = 11$, the bracket is removed first and its terms are combined with $5x$; only then do the usual steps of collecting and isolating begin. Substituting the result into the original equation, with the bracket still in place, confirms the value of $x$.
+
+@academic[punchline:Parentheses add one step, not a new method: distribute fully, signs included, then solve as usual.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -323,6 +338,10 @@ $$4x + 3x - 6 = 60$$]@
 $$7x = 66$$]@
 @academic[formula_callout:Equations with Fractions
 $$x = \\frac{66}{7}$$]@
+
+@academic[pitfall,aside:true,width:35%:Multiplying only the fractions by the LCD
+Multiplying the two fractions by $12$ but leaving the $5$ gives $4x + 3(x - 2) = 5$, so $x = \\frac{11}{7}$. The $5$ becomes $60$ too, and $x = \\frac{66}{7}$.
+[Read more](!#pitfalls)]@
 
 The multiplication by $12$ is valid because $12$ is a nonzero constant — it does not depend on $x$. The solution set is preserved exactly. After clearing, the equation is a standard multi-step linear equation with integer coefficients.
 
@@ -364,7 +383,13 @@ An identity arises when simplification eliminates the variable and leaves a true
 
 A contradiction arises when simplification eliminates the variable and leaves a false numerical statement. The equation $3(x + 1) = 3x + 8$ distributes to $3x + 3 = 3x + 8$. Subtracting $3x$ from both sides gives $3 = 8$, which is false for every value of $x$. No real number satisfies the equation, and the solution set is empty.
 
-@academic[rule_plain:Both situations are recognizable during solving: the variable terms cancel completely, and the remaining constant equation decides between identity and contradiction. If the constants match, every value works. If they clash, nothing does.]@`,
+@academic[rule_plain:Both situations are recognizable during solving: the variable terms cancel completely, and the remaining constant equation decides between identity and contradiction. If the constants match, every value works. If they clash, nothing does.]@
+
+@academic[pitfall,aside:true,width:35%:Taking an identity for no solution
+Reading $6 = 6$ as no solution, because $x$ has cancelled, discards every answer. $2(x + 3) = 2x + 6$ holds for every $x$, for example $x = 1$ gives $8 = 8$. The solution set is $\\mathbb{R}$.
+[Read more](!#pitfalls)]@
+
+In both examples the working ends on a line with no $x$ in it, after the same distribute-and-subtract steps used throughout the page. The answer is then a whole solution set rather than a single number, so it is written as $\\mathbb{R}$ or as the empty set instead of $x = \\text{value}$.`,
     before: ``,
     after: ``,
     link: '',
@@ -402,6 +427,69 @@ To rearrange a formula for any variable with each step shown, use the [literal e
   obj9: {
     title: `Summary of Linear Equation Forms`,
     content: `The forms covered above all reduce to the same standard multi-step procedure once a single preparation step is applied. The table below collects each form, an example, the preparation that converts it to a clean multi-step equation, and the technique that finishes it.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj10: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes account for most wrong answers to linear equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Moving a term without changing its sign**
+
+A constant is carried to the other side of the equation, but its sign is left as it was. "Moving" a term is shorthand for adding or subtracting it on both sides, and the shorthand hides which of the two was used.
+
+Wrong working:
+$$2x - 7 = 11 \\implies 2x = 11 - 7 = 4 \\implies x = 2$$
+
+Right working: add $7$ to both sides.
+$$2x - 7 + 7 = 11 + 7 \\implies 2x = 18 \\implies x = 9$$
+
+Why it happens: the phrase "move it to the other side" says where the term goes but not what happens to it, so the addition property is replaced by a picture of the term jumping across the equals sign.
+
+How to check: substitute into the original equation $4x - 7 = 2x + 11$. $x = 2$ gives $1$ on the left and $15$ on the right. $x = 9$ gives $29$ on both sides.
+
+**Distributing a minus sign to the first term only**
+
+A bracket with a minus sign in front of it is opened, and only the first term inside changes sign.
+
+Wrong working:
+$$5x - (2x + 4) = 11 \\implies 5x - 2x + 4 = 11 \\implies 3x = 7 \\implies x = \\frac{7}{3}$$
+
+Right working: the minus sign is a factor of $-1$ for the whole bracket, so $-(2x + 4) = -2x - 4$.
+$$5x - 2x - 4 = 11 \\implies 3x = 15 \\implies x = 5$$
+
+Why it happens: the minus sign is written right next to the first term, so it looks as though it belongs to that term alone.
+
+How to check: substitute with the bracket still in place. $x = 5$ gives $25 - (10 + 4) = 11$. $x = \\frac{7}{3}$ gives $\\frac{35}{3} - \\frac{26}{3} = 3$, not $11$.
+
+**Multiplying only the fractions by the LCD**
+
+To clear the fractions, each fraction is multiplied by the LCD, but the whole-number term on the other side is left as it was. The two sides are then multiplied by different numbers, and the equation changes.
+
+Wrong working:
+$$\\frac{x}{3} + \\frac{x - 2}{4} = 5 \\implies 4x + 3(x - 2) = 5 \\implies 7x = 11 \\implies x = \\frac{11}{7}$$
+
+Right working: multiply every term on both sides, including the $5$, by $12$.
+$$4x + 3(x - 2) = 60 \\implies 7x - 6 = 60 \\implies 7x = 66 \\implies x = \\frac{66}{7}$$
+
+Why it happens: the attention is on the denominators, so a term without one seems to need nothing.
+
+How to check: substitute into the original equation. $x = \\frac{66}{7}$ gives $\\frac{22}{7} + \\frac{13}{7} = 5$. $x = \\frac{11}{7}$ gives $\\frac{5}{12}$ on the left, exactly $12$ times too small.
+
+**Taking an identity for no solution**
+
+The variable terms cancel, and the disappearance of $x$ is taken to mean that no number solves the equation.
+
+Wrong working:
+$$2(x + 3) = 2x + 6 \\implies 2x + 6 = 2x + 6 \\implies 6 = 6 \\implies \\text{no solution}$$
+
+Right working: $6 = 6$ is true and contains no $x$, so it is true whatever $x$ is. The solution set is $\\mathbb{R}$. "No solution" belongs to a false statement such as the $3 = 8$ of $3(x + 1) = 3x + 8$.
+
+Why it happens: in a conditional equation the working ends with $x = \\text{value}$, so a last line without $x$ looks like a dead end rather than an answer.
+
+How to check: substitute any two numbers. $x = 1$ gives $8 = 8$; $x = -10$ gives $-14 = -14$.`,
     before: ``,
     after: ``,
     link: '',
@@ -599,6 +687,7 @@ export default function LinearEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+          `@academic[punchline:Each legal step does the same thing to both sides, so the solution set never changes; it only comes into view.]@`,
         ]
     },
     {
@@ -672,6 +761,14 @@ export default function LinearEquationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj10.title,
+        link:sectionsContent.obj10.link,
+        content:[
+          sectionsContent.obj10.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

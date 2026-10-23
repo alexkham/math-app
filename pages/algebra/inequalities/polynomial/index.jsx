@@ -10,6 +10,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -79,6 +81,36 @@ const linkStyle = 'color: inherit; text-decoration: underline;'
 // ---------- TABLES ----------
 
 // obj2 — aggregation (process): 5-step sign-chart procedure
+// Concept introduction (section 1) — template G, exclusion. Running instance:
+// (x + 1)x(x − 1) < 0, the inequality tool's poly-cluster state; the other
+// candidates are its rat-simple, rad-basic and abs-centered states. Old obj1
+// text is kept in sectionsContent.obj1, unused; its formula box and theorem
+// box are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciFaultTable = ciTableOpen(['candidate', 'what x is doing', 'what the graph does']) +
+  ciRow(['A', 'whole powers only: x³ − x', 'unbroken, defined everywhere'], { color: '#2563EB', cols: [0] }) +
+  ciRow(['B', 'x in a denominator', 'breaks at the wall x = −2'], { shade: true }) +
+  ciRow(['C', 'x under a root', 'starts at 0, nothing to the left'], {}) +
+  ciRow(['D', 'x inside bars', 'has a corner at 0'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciSignsTable = ciTableOpen(['piece of the line', 'x + 1', 'x', 'x − 1', 'product']) +
+  ciRow(['left of −1', '−', '−', '−', '− : in'], { color: '#2563EB', cols: [4] }) +
+  ciRow(['between −1 and 0', '+', '−', '−', '+'], { shade: true }) +
+  ciRow(['between 0 and 1', '+', '+', '−', '− : in'], { color: '#2563EB', cols: [4] }) +
+  ciRow(['right of 1', '+', '+', '+', '+'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciRescueTable = ciTableOpen(['rejected candidate', 'how it is still solved']) +
+  ciRow(['B · rational', 'same sign chart, with the denominator zeros added as walls']) +
+  ciRow(['C · radical', 'restrict to where the root exists first, then compare'], { shade: true }) +
+  ciRow(['D · absolute value', 'convert to a compound inequality without bars'], { last: true }) +
+  '</tbody></table>'
+
 const obj2Table = `
 <table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
@@ -267,6 +299,10 @@ The task is to determine that sign in every interval and select those that satis
 
 Step 1: Solve $P(x) = 0$ to find all real roots. Use factoring, the [rational root theorem](!/algebra/polynomials/rules), or the [quadratic formula](!/algebra/equations/quadratic) after degree reduction — whatever combination of techniques produces the roots.
 
+@academic[pitfall,aside:true,width:35%:Dividing both sides by x
+Dividing $x^3 > 4x$ by $x$ gives $x^2 > 4$, so $x < -2$ or $x > 2$, but $x = -3$ fails: $-27 < -12$. Kept as $x(x + 2)(x - 2) > 0$, the root $0$ stays on the chart and the answer is $(-2, 0) \\cup (2, \\infty)$.
+[Read more](!#pitfalls)]@
+
 Step 2: Order the roots on the number line from smallest to largest. They divide the line into intervals: one to the left of the smallest root, one between each consecutive pair, and one to the right of the largest.
 
 Step 3: In each interval, determine the sign of $P(x)$. Choose any convenient test point within the interval and evaluate the sign — either by substituting into $P(x)$ directly or, if $P(x)$ is in factored form, by tracking the sign of each factor separately and multiplying.
@@ -293,9 +329,15 @@ In $(1, 5)$: the factors $(x + 2)$ and $(x - 1)$ are positive, $(x - 5)$ is nega
 
 In $(5, \\infty)$: all three factors are positive. The product is positive.
 
+@academic[pitfall,aside:true,width:35%:Misreading a reversed factor
+Reading $(5 - x)$ in $(x + 2)(x - 1)(5 - x) < 0$ like $(x - 5)$ gives $(-\\infty, -2) \\cup (1, 5)$, but $x = 3$ gives $5 \\cdot 2 \\cdot 2 = 20 > 0$. The factor $5 - x$ is positive left of $5$, so the answer is $(-2, 1) \\cup (5, \\infty)$.
+[Read more](!#pitfalls)]@
+
 The inequality $< 0$ selects the negative intervals: $(-\\infty, -2) \\cup (1, 5)$. No numerical evaluation of $P(x)$ was needed — only sign tracking.
 
-This approach is faster than substituting test points into the expanded polynomial, especially for higher-degree expressions with many terms. It requires the polynomial to be in factored form, which is why factoring is typically the first step.`,
+This approach is faster than substituting test points into the expanded polynomial, especially for higher-degree expressions with many terms. It requires the polynomial to be in factored form, which is why factoring is typically the first step.
+
+@academic[punchline:On any interval between roots, a product is negative exactly when an odd number of its factors are negative.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -315,7 +357,13 @@ A factor $(x - r)^2$ is positive on both sides of $r$ (and zero at $r$ itself), 
 
 Consider $(x + 1)(x - 3)^2 > 0$. The roots are $x = -1$ (multiplicity $1$) and $x = 3$ (multiplicity $2$). In $(-\\infty, -1)$: $(x + 1)$ is negative and $(x - 3)^2$ is positive — product is negative. In $(-1, 3)$: $(x + 1)$ is positive and $(x - 3)^2$ is positive — product is positive. In $(3, \\infty)$: both are positive — product is positive. The sign changes at $x = -1$ (odd multiplicity) but not at $x = 3$ (even multiplicity). The solution is $(-1, 3) \\cup (3, \\infty)$, which simplifies to $(-1, \\infty) \\setminus \\{3\\}$ — all $x > -1$ except $x = 3$, where the expression equals zero.
 
-This multiplicity rule eliminates the need to test points in every interval. Once the sign is known in any one interval, the sign in each adjacent interval is determined by whether the separating root has odd or even multiplicity.`,
+@academic[pitfall,aside:true,width:35%:Flipping the sign at a double root
+Alternating the signs at every root of $(x + 1)(x - 3)^2 > 0$ makes $(-1, 3)$ negative and gives $(-\\infty, -1) \\cup (3, \\infty)$. The double root $3$ keeps the sign, so the answer is $(-1, 3) \\cup (3, \\infty)$.
+[Read more](!#pitfalls)]@
+
+This multiplicity rule eliminates the need to test points in every interval. Once the sign is known in any one interval, the sign in each adjacent interval is determined by whether the separating root has odd or even multiplicity.
+
+In practice the chart is filled by walking along the number line one root at a time and carrying the sign across each root in turn. The exponent of each factor is read straight from the factored form, which is why repeated factors are collected into a single power, such as $(x - 3)^2$, before the chart is drawn.`,
     before: ``,
     after: ``,
     link: '',
@@ -334,6 +382,11 @@ For even degree with $a_n < 0$: the polynomial is negative on both outer interva
 For odd degree with $a_n > 0$: the polynomial is negative far to the left and positive far to the right. The leftmost interval is negative and the rightmost is positive.
 
 For odd degree with $a_n < 0$: the polynomial is positive far to the left and negative far to the right. The signs are reversed from the previous case.
+
+@academic[fact,aside:true,width:35%:Odd degree always has a root
+Every polynomial of odd degree has at least one real root, because a graph with no breaks cannot pass from one side of the axis to the other without meeting it. So an odd-degree $P(x) > 0$ never holds for every $x$, as $x^2 + 1 > 0$ does.]@
+
+In both odd-degree cases the two outer intervals carry opposite signs: far to the left the polynomial lies on one side of the axis, and far to the right on the other. In both even-degree cases the two ends lie on the same side. Between the two ends, the graph of a polynomial runs along the whole number line with no breaks or jumps.
 
 Knowing the outermost signs and applying the multiplicity rule inward determines the sign in every interval without any test-point computation. Start from the rightmost interval (whose sign is the sign of $a_n$ for odd degree, or positive for even degree with $a_n > 0$), then flip or preserve the sign at each root moving leftward according to its multiplicity. This technique is faster and less error-prone than substituting numerical test points.`,
     before: ``,
@@ -359,7 +412,13 @@ For polynomials that factor partially — say, one rational root found and a rem
     title: `Worked Examples`,
     content: `A cubic with three distinct real roots: solve $x^3 - 6x^2 + 11x - 6 \\leq 0$. The polynomial factors as $(x - 1)(x - 2)(x - 3)$. The roots $1$, $2$, $3$ create four intervals. All three roots have odd multiplicity, so the sign alternates. The leading coefficient is positive and the degree is odd, so the rightmost interval $(3, \\infty)$ is positive. Moving left: $(2, 3)$ is negative, $(1, 2)$ is positive, $(-\\infty, 1)$ is negative. The inequality $\\leq 0$ selects the negative intervals and includes the roots: $(-\\infty, 1] \\cup [2, 3]$.
 
-A quartic with a repeated root: solve $(x + 2)^2(x - 1)(x - 4) > 0$. The roots are $-2$ (multiplicity $2$), $1$ (multiplicity $1$), and $4$ (multiplicity $1$). The leading term is $x^4$ (positive), so both outermost intervals are positive. Moving inward from the right: $(4, \\infty)$ is positive. At $x = 4$ (odd), the sign flips: $(1, 4)$ is negative. At $x = 1$ (odd), the sign flips: $(-2, 1)$ is positive. At $x = -2$ (even), the sign stays: $(-\\infty, -2)$ is positive. The solution to $> 0$ is $(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$, which simplifies to $(-\\infty, 1) \\cup (4, \\infty)$ with the single exclusion $x \\neq -2$ already handled by the strict inequality — but since $P(-2) = 0$, the strict inequality excludes $-2$ automatically. The solution is $(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$.
+A quartic with a repeated root: solve $(x + 2)^2(x - 1)(x - 4) > 0$. The roots are $-2$ (multiplicity $2$), $1$ (multiplicity $1$), and $4$ (multiplicity $1$). The leading term is $x^4$ (positive), so both outermost intervals are positive. Moving inward from the right: $(4, \\infty)$ is positive. At $x = 4$ (odd), the sign flips: $(1, 4)$ is negative. At $x = 1$ (odd), the sign flips: $(-2, 1)$ is positive. At $x = -2$ (even), the sign stays: $(-\\infty, -2)$ is positive. The solution to $> 0$ is $(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$, — the even-multiplicity root $-2$ splits the left interval without changing the sign, and since $P(-2) = 0$, the strict inequality excludes $-2$ automatically. The solution is $(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$.
+
+@academic[pitfall,aside:true,width:35%:Losing an isolated root
+Solving $(x + 2)^2(x - 1)(x - 4) \\leq 0$ from the negative interval alone gives $[1, 4]$ and loses $x = -2$, where the product is $0$. The solution is $\\{-2\\} \\cup [1, 4]$.
+[Read more](!#pitfalls)]@
+
+The double root $-2$ is the one place in this example where the endpoint rule and the multiplicity rule meet. The sign does not change there: the polynomial is positive on both sides of $-2$ and touches zero at that single point. Whether a point like this belongs to the answer is decided by the endpoint rule of Step 5, not by the intervals around it.
 
 A polynomial with an irrational root: solve $x^3 - 3x + 1 > 0$. The rational root theorem yields no rational roots. Numerical methods show three real roots near $x \\approx -1.88$, $x \\approx 0.35$, and $x \\approx 1.53$. All have odd multiplicity, so the sign alternates. The leading coefficient is positive, so the pattern from right to left is $+, -, +, -$. The solution is approximately $(-1.88, 0.35) \\cup (1.53, \\infty)$.`,
     before: ``,
@@ -370,6 +429,75 @@ A polynomial with an irrational root: solve $x^3 - 3x + 1 > 0$. The rational roo
   obj8: {
     title: `Summary: Filling the Sign Chart Without Test Points`,
     content: `The sign chart for a polynomial inequality of degree three or higher can be filled in entirely without test points by combining the root multiplicity rule (Section 4) with the end behavior of the polynomial (Section 5). The table below collects the resulting workflow: each step lists what is determined at that stage and the tool that supplies it, building the sign chart from the rightmost interval inward.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `Four mistakes come up again and again when polynomial inequalities are solved by hand. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Dividing both sides by x**
+
+An inequality with $x$ in every term, such as $x^3 > 4x$, is simplified by dividing both sides by $x$, as one might in an equation. The sign of $x$ is unknown, so it is unclear whether the inequality should flip, and the root $x = 0$ disappears from the chart.
+
+Wrong working:
+$$x^3 > 4x \\implies x^2 > 4 \\implies x < -2 \\text{ or } x > 2$$
+
+Right working: collect everything on one side and factor.
+$$x^3 - 4x > 0 \\implies x(x + 2)(x - 2) > 0$$
+The roots $-2$, $0$ and $2$ are all simple. The degree is odd and the leading coefficient is positive, so from the right the signs are $+$ on $(2, \\infty)$, $-$ on $(0, 2)$, $+$ on $(-2, 0)$ and $-$ on $(-\\infty, -2)$. The solution is $(-2, 0) \\cup (2, \\infty)$.
+
+Why it happens: cancelling a common factor is routine in equations, and dividing an inequality by a positive number is safe, so a variable factor gets treated like any other number.
+
+How to check: test a value from the wrong answer. $x = -3$ gives $(-3)^3 = -27$, which is not greater than $4(-3) = -12$. A value the wrong answer left out, $x = -1$, gives $-1 > -4$, which is true.
+
+**Misreading a reversed factor**
+
+A factor written as $(5 - x)$ instead of $(x - 5)$ is given the usual pattern in the sign chart: negative to the left of its root and positive to the right. For $(5 - x)$ it is the other way round.
+
+Wrong working: $(x + 2)(x - 1)(5 - x) < 0$ is charted with the signs of $(x + 2)(x - 1)(x - 5)$, which is negative on $(-\\infty, -2)$ and $(1, 5)$. The answer is given as $(-\\infty, -2) \\cup (1, 5)$.
+
+Right working: $5 - x$ is positive for $x < 5$ and negative for $x > 5$.
+
+In $(-\\infty, -2)$: $(-)(-)(+)$, positive.
+
+In $(-2, 1)$: $(+)(-)(+)$, negative.
+
+In $(1, 5)$: $(+)(+)(+)$, positive.
+
+In $(5, \\infty)$: $(+)(+)(-)$, negative.
+
+The solution is $(-2, 1) \\cup (5, \\infty)$. Equivalently, $5 - x = -(x - 5)$, so the inequality is $(x + 2)(x - 1)(x - 5) > 0$.
+
+Why it happens: the rule "negative left of the root, positive right of it" is learned on factors of the form $(x - r)$ and then applied to every factor by habit. In $(5 - x)$ the coefficient of $x$ is negative, which reverses the pattern.
+
+How to check: substitute a value from the answer. $x = 3$ gives $(5)(2)(2) = 20$, which is not below zero. End behavior catches it too: the leading term is $-x^3$, so the rightmost interval must be negative.
+
+**Flipping the sign at a double root**
+
+The signs are alternated at every root, as in a chart where all roots are simple, without reading the multiplicity of each root.
+
+Wrong working: for $(x + 1)(x - 3)^2 > 0$, the rightmost interval $(3, \\infty)$ is positive. Flipping at $3$ makes $(-1, 3)$ negative, and flipping at $-1$ makes $(-\\infty, -1)$ positive. The answer is given as $(-\\infty, -1) \\cup (3, \\infty)$.
+
+Right working: $3$ has multiplicity $2$, so the sign stays positive on $(-1, 3)$. The simple root $-1$ flips it, so $(-\\infty, -1)$ is negative. The solution is $(-1, 3) \\cup (3, \\infty)$.
+
+Why it happens: the first examples of sign charts usually have only simple roots, where alternating is right every time, so alternation becomes the rule instead of multiplicity.
+
+How to check: test one point next to the repeated root. $x = 0$ gives $(1)(9) = 9 > 0$, so $(-1, 3)$ is positive. A value from the wrong answer, $x = -2$, gives $(-1)(25) = -25$.
+
+**Losing an isolated root**
+
+For a non-strict inequality, the answer is read only from the chosen intervals and their endpoints. A root of even multiplicity that sits between two intervals of the wrong sign satisfies $P(r) = 0$ but is the endpoint of no chosen interval, so it is lost.
+
+Wrong working: for $(x + 2)^2(x - 1)(x - 4) \\leq 0$, the signs are $+$ on $(-\\infty, -2)$, $+$ on $(-2, 1)$, $-$ on $(1, 4)$ and $+$ on $(4, \\infty)$. The only negative interval is $(1, 4)$; with its endpoints, the answer is given as $[1, 4]$.
+
+Right working: $P(-2) = 0$, and $0 \\leq 0$, so $x = -2$ satisfies the inequality. The solution is $\\{-2\\} \\cup [1, 4]$.
+
+Why it happens: Step 5 is read as "include the endpoints of the chosen intervals", and $-2$ is not an endpoint of any chosen interval. It is a single point where the graph touches the axis.
+
+How to check: for $\\leq$ or $\\geq$, list every root at the end. Each root makes $P(x) = 0$, so each one satisfies the inequality and must appear in the answer.`,
     before: ``,
     after: ``,
     link: '',
@@ -476,6 +604,24 @@ const schemas = {
       { x: -3.4, y: -52, text: 'solution: x < −2, −2 < x < 1, x > 4', pos: 'e', color: 'r' }],
     caption: 'Positive at both ends; the double root −2 keeps the sign' };
 
+  // Concept introduction figures (section 1), one running instance: (x + 1)x(x − 1) < 0.
+  const fpCiSet = { kind: 'domainOpen', svgTitle: 'The solution set of (x + 1)x(x - 1) < 0', range: [-3, 3],
+    rows: [
+      { label: '(x + 1)x(x − 1) < 0', color: 'f', segs: [[null, -1, false, true], [0, 1, true, true]], tag: { text: '(−∞, −1) ∪ (0, 1)', x: 1.9 } },
+    ],
+    caption: 'Two of the four pieces; the three roots left out' };
+
+  const conceptIntroFigures = {
+    cubic: inequalityVisualizerDiagrams['poly-cluster'],
+    rational: inequalityVisualizerDiagrams['rat-simple'],
+    radical: inequalityVisualizerDiagrams['rad-basic'],
+    absolute: inequalityVisualizerDiagrams['abs-centered'],
+    set: renderFunctionPlotV2(fpCiSet),
+    faultTable: ciFaultTable,
+    signsTable: ciSignsTable,
+    rescueTable: ciRescueTable,
+  };
+
   const demoUnits = {
     chart: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['poly-three'],
@@ -506,6 +652,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -534,10 +681,90 @@ const schemas = {
   obj4Table,
   obj5Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciCandidates = (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 14px' }}>
+      {[['cubic', 'A', '(x + 1)x(x − 1) < 0'], ['rational', 'B', '(x − 1)/(x + 2) < 0'], ['radical', 'C', '√x − 2 < 0'], ['absolute', 'D', '|x| − 3 < 0']].map(([k, letter, label]) => (
+        <div key={k} style={{ textAlign: 'center' }}>
+          <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[k] }} />
+          <div style={{ fontWeight: 700, color: '#06357a', fontSize: '15px', margin: '-4px 0 6px' }}>{letter} · {label}</div>
+        </div>
+      ))}
+    </div>
+  )
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Four inequalities look alike, and only one of them is a polynomial inequality.`,
+        content: `Each of these asks where an expression is below zero: A, $(x + 1)x(x - 1) < 0$; B, $\\frac{x - 1}{x + 2} < 0$; C, $\\sqrt{x} - 2 < 0$; D, $|x| - 3 < 0$. Written out, they differ only in a symbol or two. Drawn, they do not.`,
+        visual: ciCandidates,
+        caption: `Each graph is the left side; the blue bar on the axis is where it is below zero. These are four frozen states of the [inequality visual explorer](!/algebra/visual-tools/inequality).`,
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Sorted, A is the polynomial inequality, and B, C and D are not.`,
+        content: [
+          `What decides it is what happens to $x$ inside each expression, and it shows directly in the graphs.`,
+          ciTable('faultTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `Each rejected candidate fails at one exact place, and the near-misses do not fail at all.`,
+        content: `B fails at $x = -2$, where its denominator is zero: the expression does not exist there, and the graph breaks. C fails left of $0$, where a square root has no real value. D fails at $0$ in a quieter way: the bars make it two different formulas glued at a corner. The near-misses pass. $(x + 1)x(x - 1)$ is in factored form, but multiplied out it is $x^3 - x$, an ordinary polynomial. $\\frac{x^2 + 1}{5} > x$ has a fraction, but its denominator is a constant, so it is just a polynomial times $\\frac{1}{5}$.`,
+      },
+      {
+        id: 'rule',
+        lead: `The rule: only whole-number powers of x, multiplied by constants and added.`,
+        content: [
+          `Such an expression is defined for every real $x$ and its graph never breaks, so it can change sign only by passing through zero — only at a root. That is what makes A easy: its roots $-1$, $0$ and $1$ cut the line into four pieces, and on each piece the sign is fixed.`,
+          ciTable('signsTable'),
+          `The product is negative on two pieces, so A's answer is $x < -1$ or $0 < x < 1$ — the two blue bars in its graph.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [polynomial inequality](!/algebra/definitions#polynomial_inequality) has the form below — or with $<$, $\\leq$ or $\\geq$ — where $P(x)$ is a polynomial of degree $n \\geq 3$.`,
+        formula: `@academic[formula_callout:Definition
+$$P(x) > 0$$]@`,
+        footer: `Its equation counterpart: [polynomial equations](!/algebra/equations/polynomial).`,
+      },
+      {
+        id: 'kind',
+        lead: `A polynomial inequality is a statement about the sign of a polynomial, and its answer is a set.`,
+        content: [
+          `It is not a number and not a function. It asks where a polynomial is above or below the axis, and its answer collects those stretches of the line. [Linear](!/algebra/inequalities/linear) and [quadratic](!/algebra/inequalities/quadratic) inequalities are the special cases $n = 1$ and $n = 2$; from degree three onward the stretches multiply.`,
+          `@academic[rule_theorem_plain:As with [polynomial equations](!/algebra/equations/polynomial), the degree $n$ sets an upper bound: a polynomial of degree $n$ has at most $n$ real roots, and these roots create at most $n + 1$ intervals on the number line. Within each interval, the polynomial maintains a constant sign.]@`,
+        ],
+        visual: ciSvg('set'),
+        caption: `A's answer: two of its four pieces. The open dots are the roots $-1$, $0$ and $1$, where the product is $0$ and so not below it.`,
+      },
+      {
+        id: 'caveat',
+        lead: `The rejected candidates are not lost; each has its own way back.`,
+        content: [
+          `Excluding B, C and D only means the plain polynomial method does not apply to them as they stand.`,
+          ciTable('rescueTable'),
+          `Each has its own page: [rational inequalities](!/algebra/inequalities/rational), [absolute value inequalities](!/algebra/inequalities/absolute-value). The polynomial case is the one the others are brought back to.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page is the method for the polynomial case: the sign chart, reading signs from factored form, how root multiplicity decides whether the sign changes, end behavior, polynomials that do not factor nicely, worked examples, and filling the chart without test points.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -555,7 +782,7 @@ const schemas = {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
 
@@ -597,7 +824,7 @@ const schemas = {
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
                   <div key={'unit-double'} dangerouslySetInnerHTML={{ __html: demoUnits.double }} />,
-          `End behaviour, treated next, fixes the sign of the first interval so the rest follow by flipping.`,
+          `End behaviour, treated next, fixes the sign of the first interval; the rest follow by flipping at odd-multiplicity roots and keeping the sign at even ones.`,
         ]
     },
 
@@ -613,6 +840,7 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:Far from the origin a polynomial follows its leading term, so its signs at both ends are known before any root is found.]@`,
         ]
     },
     {
@@ -648,6 +876,14 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // {

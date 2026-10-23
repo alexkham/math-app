@@ -14,6 +14,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
+import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -125,28 +127,28 @@ const summaryTable = `
   <tbody>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f is increasing</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos;(x) &gt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">graph of f&apos; lies above the x-axis</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos;(x) ≥ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">graph of f&apos; lies on or above the x-axis</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f is decreasing</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos;(x) &lt; 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">graph of f&apos; lies below the x-axis</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos;(x) ≤ 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">graph of f&apos; lies on or below the x-axis</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f has a local extremum at a</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos;(a) = 0, or f&apos; undefined at a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal tangent on f</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">horizontal tangent on f when f&apos;(a) = 0 (corner or cusp when f&apos; is undefined)</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f has a local maximum</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos; changes sign + → −</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos; crosses zero from above</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos; changes sign + → − (sufficient, not necessary)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos; crosses zero from above, or jumps from + to − at a corner or cusp</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f has a local minimum</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos; changes sign − → +</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos; crosses zero from below</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos; changes sign − → + (sufficient, not necessary)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f&apos; crosses zero from below, or jumps from − to + at a corner or cusp</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">f is steep at a</td>
@@ -375,6 +377,10 @@ For $f(x) = x^2$:
 @academic[formula_callout:Computing the Derivative Function from the Definition
 $$f'(x) = \\lim_{h \\to 0} \\frac{(x+h)^2 - x^2}{h} = \\lim_{h \\to 0} \\frac{2xh + h^2}{h} = \\lim_{h \\to 0} (2x + h) = 2x$$]@
 
+@academic[pitfall,aside:true,width:35%:Squaring a sum term by term
+Writing $(x + h)^2$ as $x^2 + h^2$ leaves $\\frac{h^2}{h} = h$, which tends to $0$, so $f'(x) = 0$ for every $x$. With $(x + h)^2 = x^2 + 2xh + h^2$ the quotient is $2x + h$, and $f'(x) = 2x$.
+[Read more](!#pitfalls)]@
+
 The result $f'(x) = 2x$ is a function: input $x$, output the slope of the parabola at that $x$. At $x = 3$, the slope is $6$. At $x = -1$, the slope is $-2$.
 
 Once [differentiation rules](!/calculus/derivatives/rules) are established, this limit computation becomes unnecessary for standard functions. But the limit definition remains the foundation—every rule is proven from it, and nonstandard functions may require returning to it directly.
@@ -427,7 +433,11 @@ Once [differentiation rules](!/calculus/derivatives/rules) are established, this
     content: `
 The graph of $f'$ can be read directly from the graph of $f$ without computing any formula.
 
-Where $f$ is increasing, $f'$ is positive—the graph of $f'$ lies above the $x$-axis. Where $f$ is decreasing, $f'$ is negative—the graph of $f'$ lies below the $x$-axis. Where $f$ has a local extremum, $f'$ crosses zero (or is undefined).
+Where $f$ is increasing, $f' \\geq 0$—the graph of $f'$ lies on or above the $x$-axis (as for $x^3$ at $x = 0$). Where $f$ is decreasing, $f' \\leq 0$—the graph of $f'$ lies on or below the $x$-axis. Where $f$ has a local extremum, $f'$ crosses zero (or is undefined).
+
+@academic[pitfall,aside:true,width:35%:Reading the slope from the height
+Taking the sign of $f'$ from the height of $f$: $f(x) = x^2$ is positive at $x = -1$, which suggests $f'(-1) > 0$. But $f$ is falling there, and $f'(-1) = 2(-1) = -2$.
+[Read more](!#pitfalls)]@
 
 Steep sections of $f$ correspond to large values of $|f'|$. Flat sections of $f$ correspond to $f'$ near zero. A straight segment of $f$ with constant slope corresponds to $f'$ being constant—a horizontal segment on the graph of $f'$.
 
@@ -443,6 +453,10 @@ Where $f$ is concave up, the slope is increasing, so $f'$ is an increasing funct
 The reverse problem—reconstructing $f$ from $f'$—is possible up to a vertical shift.
 
 Where $f'$ is positive, $f$ is rising. Where $f'$ is negative, $f$ is falling. Where $f'$ crosses zero from positive to negative, $f$ has a local maximum. Where $f'$ crosses zero from negative to positive, $f$ has a local minimum.
+
+@academic[pitfall,aside:true,width:35%:Taking every zero of the derivative as an extremum
+Reading $f'(a) = 0$ alone as a maximum or minimum fails for $f(x) = x^3$: $f'(0) = 0$, yet $f$ rises on both sides of $0$. Since $f'(x) = 3x^2$ does not change sign at $0$, there is no extremum there.
+[Read more](!#pitfalls)]@
 
 The magnitude of $f'$ controls steepness: large positive values of $f'$ mean $f$ is climbing steeply; values of $f'$ near zero mean $f$ is nearly flat. Where $f'$ is increasing, $f$ is concave up. Where $f'$ is decreasing, $f$ is concave down.
 
@@ -510,6 +524,51 @@ Functions whose derivatives are continuous everywhere form the class $C^1$. Most
     title: `Summary: How f and f' Correspond`,
     content: `
 The two graphical translations covered above—reading $f'$ from $f$, and reconstructing $f$ from $f'$—are two views of a single dictionary connecting features of one function to features of the other. The table below collects this correspondence in compact form, organized by behavior of $f$ with the parallel behavior of $f'$ alongside; reading the columns in reverse order recovers the $f' \\to f$ mapping. Together with the vertical-translation ambiguity in the final row, this is everything the derivative function knows about the shape of $f$.
+`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+  obj9: {
+    title: `Common Pitfalls`,
+    content: `
+Three mistakes cause most wrong answers when the derivative function is computed from the definition or read from a graph. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Squaring a sum term by term**
+
+In the limit definition for $f(x) = x^2$, the term $f(x + h) = (x + h)^2$ is expanded as if a square could be taken one term at a time, and the cross term $2xh$ is lost.
+
+Wrong working: $\\dfrac{(x + h)^2 - x^2}{h} = \\dfrac{x^2 + h^2 - x^2}{h} = \\dfrac{h^2}{h} = h$, and as $h \\to 0$ this gives $f'(x) = 0$ for every $x$.
+
+Right working: $(x + h)^2 = x^2 + 2xh + h^2$, so $\\dfrac{(x + h)^2 - x^2}{h} = \\dfrac{2xh + h^2}{h} = 2x + h$, which tends to $2x$. So $f'(x) = 2x$.
+
+Why it happens: multiplication spreads over a sum, $3(x + h) = 3x + 3h$, and squaring is treated as if it did the same. It does not: $(x + h)^2 = (x + h)(x + h)$, and multiplying out produces the cross term $2xh$.
+
+How to check: a derivative equal to $0$ everywhere belongs to a flat graph, and the parabola is not flat. Numerically, at $x = 3$ with $h = 0.01$ the quotient is $\\dfrac{3.01^2 - 9}{0.01} = 6.01$, close to $6$ and far from $0$.
+
+**Reading the slope from the height**
+
+When the graph of $f'$ is sketched from the graph of $f$, the sign of $f'$ is taken from where $f$ sits, above or below the $x$-axis, instead of from whether $f$ is rising or falling.
+
+Wrong working: $f(x) = x^2$ lies above the $x$-axis for every $x \\neq 0$, so $f'$ is drawn positive everywhere, and $f'(-1) > 0$.
+
+Right working: for $x < 0$ the parabola falls, so $f'$ is negative there. With $f'(x) = 2x$, $f'(-1) = -2$; the graph of $f'$ is below the axis to the left of $0$ and above it to the right.
+
+Why it happens: both graphs are drawn on the same kind of axes, and copying the shape of $f$ is easier than reading its slope point by point.
+
+How to check: follow the tangent at a sample point. At $x = -1$ the tangent to $x^2$ goes down to the right, so its slope, which is the value of $f'$ there, is negative.
+
+**Taking every zero of the derivative as an extremum**
+
+When $f$ is reconstructed from $f'$, every point where $f'$ equals $0$ is marked as a maximum or a minimum, without checking whether $f'$ changes sign there.
+
+Wrong working: for $f(x) = x^3$, $f'(x) = 3x^2$ is $0$ at $x = 0$, so $f$ is said to have a local extremum at $0$.
+
+Right working: $3x^2 > 0$ on both sides of $0$, so $f$ rises before $0$ and after it. The tangent at $0$ is horizontal, but there is no extremum: $f(-0.1) = -0.001$ is below $f(0) = 0$, and $f(0.1) = 0.001$ is above it.
+
+Why it happens: at a smooth maximum or minimum the tangent is always horizontal, and the statement is read backwards: horizontal tangent, therefore extremum.
+
+How to check: look at the sign of $f'$ just left and just right of the zero. An extremum needs a change of sign, from positive to negative for a maximum and from negative to positive for a minimum.
 `,
     before: ``,
     after: ``,
@@ -669,8 +728,24 @@ const schemas = {
     }),
   };
 
+  const smoothNest = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'How smooth is the derivative?',
+    preface: 'Functions sort into classes by how well their derivatives behave. Each class sits inside the one around it.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Differentiable is not the same as C¹',
+    conclusion: 'A derivative can exist everywhere and still be discontinuous, as $x^2 \\sin(1/x)$ shows; by Darboux\'s theorem it can never have a jump.',
+    levels: [
+      { id: 'cinf', symbol: 'C∞', name: '[Smooth](!/calculus/derivatives/higher-order)', note: 'all higher derivatives exist and are continuous' },
+      { id: 'c1', symbol: 'C¹', name: 'Continuously differentiable', note: '$f\'$ exists and is continuous', example: 'polynomials, sin x, eˣ' },
+      { id: 'd', symbol: 'D', name: '[Differentiable](!/calculus/derivatives/differentiability)', note: '$f\'$ exists everywhere but may be discontinuous', example: 'x² sin(1/x), f(0) = 0' },
+      { id: 'c0', symbol: 'C⁰', name: '[Continuous](!/calculus/limits/continuity)', note: '$f\'$ may not exist', example: '|x|' },
+    ],
+  };
+
   return {
   props: {
+    smoothNest,
     demoUnits,
     sectionsContent,
     introContent,
@@ -690,7 +765,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -776,6 +851,14 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="derivative-continuity-nesting"
+            title="Classes of functions by their derivative"
+            source="/calculus/derivatives/function"
+          >
+            <NestedContainment data={smoothNest} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -786,6 +869,14 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj8.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj9.title,
+        link:sectionsContent.obj9.link,
+        content:[
+          sectionsContent.obj9.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

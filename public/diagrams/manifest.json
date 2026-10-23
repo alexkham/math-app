@@ -1,5 +1,41 @@
 [
   {
+    "id": "algebraic-identities-outline",
+    "title": null,
+    "source": "/algebra/identities",
+    "section": "algebra",
+    "width": 933,
+    "height": 1061,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "angle-pairs-tree",
+    "title": null,
+    "source": "/trigonometry/degrees-radians",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 706,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "arithmetic-properties-outline",
+    "title": null,
+    "source": "/arithmetic/properties",
+    "section": "arithmetic",
+    "width": 933,
+    "height": 1016,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "arithmetic-sequence-difference-cases",
     "title": null,
     "source": "/algebra/sequences",
@@ -24,6 +60,18 @@
     ]
   },
   {
+    "id": "bayes-theorem-anatomy",
+    "title": null,
+    "source": "/probability/bayes-theorem",
+    "section": "probability",
+    "width": 933,
+    "height": 735,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "canonical-forms",
     "title": "How simple the matrix can be made",
     "source": "/linear-algebra/transformations/basis-change",
@@ -42,6 +90,18 @@
     "section": "set-theory",
     "width": 933,
     "height": 833,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "change-of-base-anatomy",
+    "title": null,
+    "source": "/algebra/logarithms/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 632,
     "formats": [
       "png",
       "pdf"
@@ -90,6 +150,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1134,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "common-derivatives-outline",
+    "title": null,
+    "source": "/calculus/derivatives/common",
+    "section": "calculus",
+    "width": 933,
+    "height": 1213,
     "formats": [
       "png",
       "pdf"
@@ -174,11 +246,10 @@
     "title": null,
     "source": "/probability/conditional-probability",
     "section": "probability",
-    "width": 690,
-    "height": 789,
+    "width": 933,
+    "height": 632,
     "formats": [
       "png",
-      "svg",
       "pdf"
     ]
   },
@@ -207,6 +278,30 @@
     ]
   },
   {
+    "id": "continuous-families-outline",
+    "title": null,
+    "source": "/probability/distributions/continuous",
+    "section": "probability",
+    "width": 909,
+    "height": 827,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "counting-scenarios-outline",
+    "title": null,
+    "source": "/combinatorics/basics",
+    "section": "combinatorics",
+    "width": 901,
+    "height": 991,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "covariance-sign-cases",
     "title": null,
     "source": "/probability/covariance",
@@ -225,6 +320,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1412,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "curve-types-outline",
+    "title": null,
+    "source": "/functions/graphs",
+    "section": "functions",
+    "width": 933,
+    "height": 804,
     "formats": [
       "png",
       "pdf"
@@ -261,6 +368,42 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 731,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "derivative-continuity-nesting",
+    "title": null,
+    "source": "/calculus/derivatives/function",
+    "section": "calculus",
+    "width": 933,
+    "height": 748,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "derivative-rules-outline",
+    "title": null,
+    "source": "/calculus/derivatives/rules",
+    "section": "calculus",
+    "width": 933,
+    "height": 966,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "derivatives-roadmap-outline",
+    "title": null,
+    "source": "/calculus/derivatives",
+    "section": "calculus",
+    "width": 933,
+    "height": 1010,
     "formats": [
       "png",
       "pdf"
@@ -436,6 +579,18 @@
     ]
   },
   {
+    "id": "discrete-families-tree",
+    "title": null,
+    "source": "/probability/distributions/discrete",
+    "section": "probability",
+    "width": 909,
+    "height": 614,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "dot-product-laws",
     "title": "Properties of the dot product",
     "source": "/linear-algebra/vectors/dot-product",
@@ -497,6 +652,18 @@
     ]
   },
   {
+    "id": "event-types-outline",
+    "title": null,
+    "source": "/probability/events",
+    "section": "probability",
+    "width": 933,
+    "height": 915,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "existence-condition-rank-cases",
     "title": null,
     "source": "/linear-algebra/linear-systems/solvability",
@@ -529,6 +696,19 @@
     "height": 739,
     "formats": [
       "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "exponent-domain-nesting",
+    "title": null,
+    "source": "/algebra/powers/irrational-exponents",
+    "section": "algebra",
+    "width": 933,
+    "height": 794,
+    "formats": [
+      "png",
+      "svg",
       "pdf"
     ]
   },
@@ -569,6 +749,18 @@
     ]
   },
   {
+    "id": "factoring-decision-outline",
+    "title": null,
+    "source": "/algebra/polynomials/factoring",
+    "section": "algebra",
+    "width": 933,
+    "height": 833,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "four-subspace-card",
     "title": "The four fundamental subspaces",
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
@@ -593,6 +785,42 @@
     ]
   },
   {
+    "id": "fraction-types-outline",
+    "title": null,
+    "source": "/arithmetic/fractions",
+    "section": "arithmetic",
+    "width": 933,
+    "height": 766,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "function-arithmetic-tree",
+    "title": null,
+    "source": "/functions/arithmetic",
+    "section": "functions",
+    "width": 933,
+    "height": 608,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "function-families-outline",
+    "title": null,
+    "source": "/functions/families",
+    "section": "functions",
+    "width": 933,
+    "height": 1330,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "function-family-growth-pyramid",
     "title": null,
     "source": "/functions/families",
@@ -611,6 +839,42 @@
     "section": "functions",
     "width": 690,
     "height": 1717,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "function-properties-outline",
+    "title": null,
+    "source": "/functions/properties",
+    "section": "functions",
+    "width": 933,
+    "height": 1374,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "function-representations-tree",
+    "title": null,
+    "source": "/functions/basics",
+    "section": "functions",
+    "width": 933,
+    "height": 623,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "function-topics-outline",
+    "title": null,
+    "source": "/functions/basics",
+    "section": "functions",
+    "width": 933,
+    "height": 1109,
     "formats": [
       "png",
       "pdf"
@@ -659,6 +923,18 @@
     "section": "calculus",
     "width": 933,
     "height": 668,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "herons-formula-anatomy",
+    "title": null,
+    "source": "/trigonometry/sines-cosines-law",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 592,
     "formats": [
       "png",
       "pdf"
@@ -737,12 +1013,36 @@
     ]
   },
   {
+    "id": "integral-types-tree",
+    "title": null,
+    "source": "/calculus/integrals",
+    "section": "calculus",
+    "width": 933,
+    "height": 629,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "integration-techniques-tree",
     "title": null,
     "source": "/calculus/integrals/techniques",
     "section": "calculus",
     "width": 933,
     "height": 663,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "inverse-pairs-outline",
+    "title": null,
+    "source": "/functions/inverse",
+    "section": "functions",
+    "width": 933,
+    "height": 920,
     "formats": [
       "png",
       "pdf"
@@ -978,6 +1278,18 @@
     ]
   },
   {
+    "id": "matrix-shapes-outline",
+    "title": null,
+    "source": "/linear-algebra/matrix",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 1009,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "matrix-type-profiles",
     "title": "Eleven types and what each one forces",
     "source": "/linear-algebra/matrix/types",
@@ -1051,12 +1363,36 @@
     ]
   },
   {
+    "id": "nth-roots-anatomy",
+    "title": null,
+    "source": "/complex-numbers/demoivre-theorem",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 820,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "number-system-ladder",
     "title": null,
     "source": "/complex-numbers/imaginary-numbers",
     "section": "complex-numbers",
     "width": 690,
     "height": 1467,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "number-system-nesting",
+    "title": null,
+    "source": "/complex-numbers/basics",
+    "section": "complex-numbers",
+    "width": 706,
+    "height": 888,
     "formats": [
       "png",
       "pdf"
@@ -1087,12 +1423,36 @@
     ]
   },
   {
+    "id": "orthonormal-orthogonal-nesting",
+    "title": null,
+    "source": "/linear-algebra/orthogonality",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 677,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "parallel-vectors-scalar-cases",
     "title": null,
     "source": "/linear-algebra/vectors/properties",
     "section": "linear-algebra",
     "width": 690,
     "height": 1093,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "pdf-representations-tree",
+    "title": null,
+    "source": "/probability/probability-function/pdf",
+    "section": "probability",
+    "width": 933,
+    "height": 605,
     "formats": [
       "png",
       "pdf"
@@ -1111,12 +1471,48 @@
     ]
   },
   {
+    "id": "permutation-matrix-nesting",
+    "title": null,
+    "source": "/linear-algebra/matrix/types",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 771,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "pmf-pdf-tree",
     "title": null,
     "source": "/probability/probability-function",
     "section": "probability",
     "width": 933,
     "height": 724,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "pmf-representations-tree",
+    "title": null,
+    "source": "/probability/probability-function/pmf",
+    "section": "probability",
+    "width": 933,
+    "height": 605,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "polynomial-operations-tree",
+    "title": null,
+    "source": "/algebra/polynomials/operations",
+    "section": "algebra",
+    "width": 933,
+    "height": 628,
     "formats": [
       "png",
       "pdf"
@@ -1243,6 +1639,18 @@
     ]
   },
   {
+    "id": "quadratic-formula-anatomy",
+    "title": null,
+    "source": "/algebra/equations/quadratic",
+    "section": "algebra",
+    "width": 933,
+    "height": 843,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "quadratic-methods-tree",
     "title": null,
     "source": "/algebra/equations/quadratic",
@@ -1285,6 +1693,18 @@
     "section": "algebra",
     "width": 933,
     "height": 572,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "range-by-type-outline",
+    "title": null,
+    "source": "/functions/range",
+    "section": "functions",
+    "width": 933,
+    "height": 1115,
     "formats": [
       "png",
       "pdf"
@@ -1411,6 +1831,18 @@
     ]
   },
   {
+    "id": "roots-subtree-outline",
+    "title": null,
+    "source": "/algebra/roots",
+    "section": "algebra",
+    "width": 933,
+    "height": 957,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "row-operations-tree",
     "title": null,
     "source": "/linear-algebra/linear-systems/gaussian-elimination",
@@ -1453,6 +1885,30 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "set-types-outline",
+    "title": null,
+    "source": "/set-theory/basics",
+    "section": "set-theory",
+    "width": 933,
+    "height": 586,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "six-trig-functions-outline",
+    "title": null,
+    "source": "/trigonometry/functions",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 837,
     "formats": [
       "png",
       "pdf"
@@ -1507,6 +1963,30 @@
     ]
   },
   {
+    "id": "special-derivatives-outline",
+    "title": null,
+    "source": "/calculus/derivatives/special",
+    "section": "calculus",
+    "width": 933,
+    "height": 1315,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "special-integrals-outline",
+    "title": null,
+    "source": "/calculus/integrals/special",
+    "section": "calculus",
+    "width": 933,
+    "height": 1736,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "special-inverses",
     "title": "When structure makes the inverse cheap",
     "source": "/linear-algebra/matrix/inverse",
@@ -1519,12 +1999,36 @@
     ]
   },
   {
+    "id": "special-limits-outline",
+    "title": null,
+    "source": "/calculus/limits/special",
+    "section": "calculus",
+    "width": 933,
+    "height": 1337,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "special-ranks",
     "title": "Ranks readable from structure",
     "source": "/linear-algebra/matrix/rank",
     "section": "linear-algebra",
     "width": 840,
     "height": 1118,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "spectral-class-nesting",
+    "title": null,
+    "source": "/linear-algebra/decompositions/spectral",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 771,
     "formats": [
       "png",
       "pdf"
@@ -1615,6 +2119,18 @@
     ]
   },
   {
+    "id": "subspace-operations-nesting",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces/subspaces",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 715,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "subspace-recognition",
     "title": "Subspace or not, and which clause decides",
     "source": "/linear-algebra/vector-spaces/subspaces",
@@ -1657,6 +2173,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 875,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "svd-reach-nesting",
+    "title": null,
+    "source": "/linear-algebra/decompositions/svd",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 765,
     "formats": [
       "png",
       "pdf"
@@ -1723,12 +2251,48 @@
     ]
   },
   {
+    "id": "trig-identity-families-outline",
+    "title": null,
+    "source": "/trigonometry/identities",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 1388,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "trig-parity-tree",
+    "title": null,
+    "source": "/trigonometry/properties",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 651,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "two-lines-solution-cases",
     "title": null,
     "source": "/linear-algebra/linear-systems",
     "section": "linear-algebra",
     "width": 690,
     "height": 1211,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "two-sided-limit-failures-tree",
+    "title": null,
+    "source": "/calculus/limits/two-sided",
+    "section": "calculus",
+    "width": 933,
+    "height": 624,
     "formats": [
       "png",
       "pdf"
@@ -1765,6 +2329,18 @@
     "section": "linear-algebra",
     "width": 840,
     "height": 1781,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "vector-space-examples-outline",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 935,
     "formats": [
       "png",
       "pdf"

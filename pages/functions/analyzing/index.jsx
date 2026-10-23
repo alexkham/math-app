@@ -1325,6 +1325,10 @@ The [range](!/functions/range) appears as vertical extent — the set of $y$-val
 
 Scan the graph from bottom to top. What is the lowest point? The highest? Does the graph extend infinitely upward or downward? Horizontal asymptotes suggest bounds the function approaches but may not reach.
 
+@academic[pitfall,aside:true,width:35%:Putting the asymptote in the range
+The graph of $f(x) = 2^x$ levels off toward $y = 0$; writing its range as $[0, \\infty)$ claims that some input gives $0$. Since $2^x > 0$ for every $x$, the range is $(0, \\infty)$.
+[Read more](!#pitfalls)]@
+
 Express both domain and range in interval notation. A graph existing for all $x$ except $x = 2$, with $y$-values spanning from $-3$ up to but not including $5$, would have domain $(-\\infty, 2) \\cup (2, \\infty)$ and range $[-3, 5)$.`,
     before: ``,
     after: ``,
@@ -1341,6 +1345,12 @@ To identify these intervals from a graph, trace the curve from left to right. No
 
 For $f(x) = x^2$, the graph falls as $x$ moves from $-\\infty$ toward $0$, then rises as $x$ moves from $0$ toward $\\infty$. The function is decreasing on $(-\\infty, 0)$ and increasing on $(0, \\infty)$.
 
+@academic[pitfall,aside:true,width:35%:Reading the graph right to left
+Starting at the vertex of $y = x^2$ and moving left, the curve climbs, so $(-\\infty, 0)$ gets called increasing. Read with the inputs growing, $f(-2) = 4$ drops to $f(-1) = 1$: $x^2$ is decreasing on $(-\\infty, 0)$.
+[Read more](!#pitfalls)]@
+
+Each of these statements is a comparison between inputs. Inside an interval, two inputs $a < b$ are chosen and their outputs are set side by side; on the graph, the same comparison is a step from a point on the left to a point on the right. The direction of that step is fixed by the $x$-axis, whichever part of the curve is being looked at.
+
 A function is constant on an interval if it produces the same output throughout. The graph is a horizontal segment over that interval.
 
 Turning points mark transitions between increasing and decreasing behavior. At a turning point, the function switches direction — rising then falling, or falling then rising. These are candidates for local extrema.`,
@@ -1355,9 +1365,13 @@ Turning points mark transitions between increasing and decreasing behavior. At a
 
 A function is negative where its output is less than zero. On the graph, these are intervals where the curve lies below the $x$-axis.
 
-A function equals zero at its $x$-intercepts — the points where the curve crosses the horizontal axis. These points separate positive and negative intervals.
+A function equals zero at its $x$-intercepts — the points where the curve crosses the horizontal axis. Zeros where the curve crosses the axis (rather than just touching it) separate positive and negative intervals.
 
 For $f(x) = x^2 - 4$, the zeros occur at $x = -2$ and $x = 2$. The parabola opens upward, so it dips below the axis between the zeros and rises above the axis outside them. The function is positive on $(-\\infty, -2) \\cup (2, \\infty)$ and negative on $(-2, 2)$.
+
+@academic[pitfall,aside:true,width:35%:Closing the brackets at the zeros
+Writing $x^2 - 4$ as positive on $(-\\infty, -2] \\cup [2, \\infty)$ includes $x = \\pm 2$, where the output is $0$, not positive. For $f(x) > 0$ the zeros stay out: $(-\\infty, -2) \\cup (2, \\infty)$.
+[Read more](!#pitfalls)]@
 
 This analysis connects to solving inequalities. Asking "where is $f(x) > 0$?" is the same as asking "for which $x$ is the graph above the axis?" Asking "where is $f(x) \\leq 3$?" becomes "where is the graph at or below the horizontal line $y = 3$?"
 
@@ -1379,6 +1393,10 @@ A local minimum occurs at $x = c$ if $f(c)$ is less than or equal to all nearby 
 
 The absolute maximum (or global maximum) is the largest value the function achieves anywhere on its domain. The absolute minimum is the smallest value. These may coincide with local extrema or may occur at endpoints of a restricted domain.
 
+@academic[pitfall,aside:true,width:35%:Giving the location instead of the value
+Saying "the local maximum of $x^3 - 3x$ is $-1$" gives the input where the peak sits. The local maximum value is $f(-1) = -1 + 3 = 2$, reached at $x = -1$: the peak is the point $(-1, 2)$.
+[Read more](!#pitfalls)]@
+
 To locate extrema from a graph, identify all peaks and valleys. Read the $y$-coordinate of each — these are the extreme values. Then determine which, if any, is the absolute highest or lowest.
 
 Not every function has absolute extrema. The function $f(x) = x$ on $(-\\infty, \\infty)$ has no maximum or minimum — it extends without bound in both directions. But on a closed interval $[0, 5]$, it has absolute minimum $0$ at $x = 0$ and absolute maximum $5$ at $x = 5$.`,
@@ -1399,6 +1417,10 @@ A function has odd symmetry if its graph is symmetric about the origin. Rotating
 
 Examples of odd functions: $f(x) = x^3$, $f(x) = x$, $f(x) = \\sin(x)$. Each satisfies $f(-x) = -f(x)$.
 
+@academic[pitfall,aside:true,width:35%:Judging symmetry by the degree
+Calling $f(x) = x^3 + 1$ odd because its highest power is odd fails the test: $f(-1) = 0$, but $-f(1) = -2$. It is not even either, since $f(1) = 2$; only comparing $f(-x)$ with $f(x)$ and $-f(x)$ decides.
+[Read more](!#pitfalls)]@
+
 Most functions have neither symmetry. The function $f(x) = x^2 + x$ is neither even nor odd: $f(-x) = x^2 - x$, which equals neither $f(x)$ nor $-f(x)$.
 
 Recognizing symmetry halves the graphing work. For an even function, graphing the right half determines the left. For an odd function, graphing one quadrant determines the opposite quadrant.`,
@@ -1417,11 +1439,17 @@ The sine function has period $2\\pi$: the wave from $x = 0$ to $x = 2\\pi$ repea
 
 To identify the period from a graph, find two consecutive peaks (or valleys, or any matching points) and measure the horizontal distance between them. That distance is the period.
 
+@academic[pitfall,aside:true,width:35%:Measuring between consecutive zeros
+Taking the zeros of $\\sin x$ at $0$ and $\\pi$ as matching points gives a period of $\\pi$. But $\\sin(\\pi/2) = 1$ while $\\sin(3\\pi/2) = -1$, so a shift by $\\pi$ does not repeat the wave; the period is $2\\pi$.
+[Read more](!#pitfalls)]@
+
+On a wave, most heights are reached twice in every cycle, once while the curve climbs and once while it falls. Two points match only when they share both the height and the direction in which the curve passes through them. Peaks and valleys are the easiest pair to use, since each occurs exactly once per cycle.
+
 The amplitude of a periodic function measures the vertical extent of oscillation — half the distance from the maximum to the minimum value. For $f(x) = \\sin(x)$, the amplitude is $1$, since the function oscillates between $-1$ and $1$.
 
 Periodicity appears in modeling cycles: daily temperatures, sound waves, seasonal patterns, alternating current. Any phenomenon that repeats regularly suggests a periodic function model.
 
-Non-periodic functions never repeat exactly. The exponential function $f(x) = 2^x$ grows without cycling back. Linear functions, polynomials, and logarithms are all non-periodic.`,
+Non-periodic functions never repeat exactly. The exponential function $f(x) = 2^x$ grows without cycling back. Non-constant polynomials (linear functions included) and logarithms are all non-periodic.`,
     before: ``,
     after: ``,
     link: '',
@@ -1538,6 +1566,98 @@ The table below collects the three representations side by side with what each r
 obj11: {
     title: `Complete Analysis at a Glance`,
     content: `Analyzing a function comes down to building a feature-by-feature profile. The table below collects every feature covered above into a workflow checklist — what question each feature answers, how to find it from a graph or equation, and how each plays out on a concrete example. Use it as a checklist when working through an unfamiliar function so no critical feature is overlooked.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  pitfalls: {
+    title: `Common Pitfalls`,
+    content: `Seven mistakes come up again and again when a function is analyzed. Six are marked where they happen in the sections above; giving the intervals in $y$-values is the one that **Intervals of Increase and Decrease** already points out. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Putting the asymptote in the range**
+
+A graph that levels off toward a horizontal asymptote is read as if it reached the asymptote's height, and that height is written into the range with a closed bracket.
+
+Wrong working: the graph of $f(x) = 2^x$ approaches the line $y = 0$ on the left and rises without bound on the right, so the range is written as $[0, \\infty)$.
+
+Right working: $2^x > 0$ for every real $x$. Even far to the left the output stays positive, for example $f(-10) = 2^{-10} = \\frac{1}{1024}$, and no input gives $0$. Every positive height is reached, so the range is $(0, \\infty)$.
+
+Why it happens: near the asymptote the curve and the line are drawn so close together that they look joined, and the lowest height visible in the picture is taken as a value of the function.
+
+How to check: set $f(x)$ equal to the boundary value and try to solve. The equation $2^x = 0$ has no solution, so $0$ stays out of the range.
+
+**Giving the intervals in y-values**
+
+Asked where a function increases or decreases, the answer lists the heights the curve passes through instead of the inputs over which it rises or falls.
+
+Wrong working: for $f(x) = x^2 - 4$, the curve climbs from its lowest point $(0, -4)$ upward without bound, so $f$ is declared increasing on $(-4, \\infty)$.
+
+Right working: the rising branch lies over the inputs $x > 0$, so $f$ is increasing on $(0, \\infty)$ and decreasing on $(-\\infty, 0)$. The interval $(-4, \\infty)$ is the set of outputs that the rising branch reaches, not a set of inputs.
+
+Why it happens: rising and falling are seen as vertical motion, so the eye reads the vertical axis.
+
+How to check: take a number from the answer and test it as an input. From $(-4, \\infty)$ take $x = -3$: $f(-3) = 5$ and $f(-2) = 0$, so the function is falling there, and $-3$ cannot belong to an interval of increase.
+
+**Reading the graph right to left**
+
+The curve is traced outward from a striking point such as a vertex, in both directions, so both sides seem to climb.
+
+Wrong working: starting at the vertex of $y = x^2$ and moving left, the curve rises; moving right from the vertex, it rises too. Both $(-\\infty, 0)$ and $(0, \\infty)$ are called increasing.
+
+Right working: direction is judged with the inputs growing. On $(-\\infty, 0)$, $-2 < -1$ and $f(-2) = 4 > f(-1) = 1$, so $f$ is decreasing there. On $(0, \\infty)$, $1 < 2$ and $f(1) = 1 < f(2) = 4$, so $f$ is increasing there.
+
+Why it happens: the eye starts at the most noticeable point of the graph and moves away from it, which on the left of a vertex means moving against the $x$-axis.
+
+How to check: apply the definition to two inputs $a < b$ in the interval. If $f(a) > f(b)$, the function is decreasing there, whatever the curve seemed to do.
+
+**Closing the brackets at the zeros**
+
+When the positive or negative intervals are written, the zeros that bound them are included, although at a zero the output is neither positive nor negative.
+
+Wrong working: for $f(x) = x^2 - 4$, the zeros are $x = \\pm 2$ and the curve lies above the axis outside them, so $f(x) > 0$ on $(-\\infty, -2] \\cup [2, \\infty)$.
+
+Right working: $f(2) = 4 - 4 = 0$ and $f(-2) = 4 - 4 = 0$, so neither zero satisfies $f(x) > 0$. The answer is $(-\\infty, -2) \\cup (2, \\infty)$. The zeros belong only to the non-strict condition: $f(x) \\geq 0$ on $(-\\infty, -2] \\cup [2, \\infty)$.
+
+Why it happens: the zeros are found first and written down as the endpoints, and the bracket is chosen out of habit rather than from the condition.
+
+How to check: substitute each endpoint. If the output is $0$, the endpoint belongs only to the version with $\\geq$ or $\\leq$.
+
+**Giving the location instead of the value**
+
+An extremum is reported as the input where it occurs instead of the output it reaches.
+
+Wrong working: for $f(x) = x^3 - 3x$, the peak sits above $x = -1$, so the local maximum is given as $-1$.
+
+Right working: $f(-1) = (-1)^3 - 3(-1) = -1 + 3 = 2$. The local maximum value is $2$, it occurs at $x = -1$, and the peak is the point $(-1, 2)$. In the same way the local minimum value is $f(1) = 1 - 3 = -2$, reached at $x = 1$.
+
+Why it happens: on a graph the peak is found first by its position along the horizontal axis, and that is the number that gets written down.
+
+How to check: read the wording of the question. "Where" or "at what $x$" asks for the input; "what is the maximum" asks for the output, a height read on the vertical axis.
+
+**Judging symmetry by the degree**
+
+A polynomial is labeled odd or even from its highest power alone, as if the name of the symmetry came from the degree.
+
+Wrong working: $f(x) = x^3 + 1$ has degree $3$, so it is called odd.
+
+Right working: $f(-x) = (-x)^3 + 1 = -x^3 + 1$, while $-f(x) = -x^3 - 1$. These differ, so $f$ is not odd. It is not even either: $f(-1) = 0$ but $f(1) = 2$. The function has neither symmetry; its graph is $y = x^3$ moved up by $1$, symmetric about the point $(0, 1)$ rather than the origin.
+
+Why it happens: for polynomials with only odd powers, such as $x^3 - 3x$, or only even powers, such as $x^4 - x^2$, the names do agree. But the property needs every term; a constant term is an even power, $x^0$, and one such term breaks odd symmetry.
+
+How to check: test one number. If $f(-1) \\neq -f(1)$, the function is not odd; if $f(-1) \\neq f(1)$, it is not even.
+
+**Measuring between consecutive zeros**
+
+The period is measured between two neighboring points at the same height that are not matching points of the cycle, most often two neighboring zeros.
+
+Wrong working: $\\sin x$ is zero at $x = 0$ and at $x = \\pi$, so the period is given as $\\pi$.
+
+Right working: a shift by $\\pi$ does not repeat the wave. $\\sin(\\pi/2) = 1$, but $\\sin(\\pi/2 + \\pi) = \\sin(3\\pi/2) = -1$; in fact $\\sin(x + \\pi) = -\\sin x$, the wave turned upside down. At $0$ the curve rises through the axis and at $\\pi$ it falls through it. The next zero where it rises again is $2\\pi$, and the peaks at $\\pi/2$ and $5\\pi/2$ give the same distance, $2\\pi$.
+
+Why it happens: zeros are the easiest points to read off a graph, and two of them look alike because both lie on the axis.
+
+How to check: test the candidate $p$ at a point where the function is not zero. If $f(x + p) \\neq f(x)$ there, $p$ is not a period.`,
     before: ``,
     after: ``,
     link: '',
@@ -1976,6 +2096,14 @@ export default function AnalyzingFunctionsPage({
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.pitfalls.title,
+        link:sectionsContent.pitfalls.link,
+        content:[
+          sectionsContent.pitfalls.content,
         ]
     },
     // {

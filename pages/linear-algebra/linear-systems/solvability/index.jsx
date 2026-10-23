@@ -1874,7 +1874,7 @@ const systemShapes = {
 
 // obj10 — aggregation: the solution-set decomposition x = xp + xh
 const obj10Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sed-serif;">
+<table class="styled-table" style="border-collapse: collapse; width: 70%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
   <thead>
     <tr>
       <th style="${tableHeaders.aggregation}">Component</th>
@@ -1959,7 +1959,7 @@ const solvabilityQuestions = {
           formula: '$A^{\\mathsf{T}}A\\hat{\\mathbf{x}} = A^{\\mathsf{T}}\\mathbf{b}$',
           condition: '$m > n$, no exact solution',
           strict: true,
-          note: 'More equations than unknowns usually means no solution at all, so the question changes: least squares minimises $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ instead of solving. The answer is the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space \u2014 the closest reachable point.',
+          note: 'More equations than unknowns usually means no solution at all, so the question changes: least squares minimises $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ instead of solving. The answer makes $A\\hat{\\mathbf{x}}$ the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space \u2014 the closest reachable point.',
         },
         {
           name: 'Underdetermined',
@@ -2198,7 +2198,13 @@ $$\\text{rank}(A) = n$$]@
 
 where $n$ is the number of unknowns. Full column rank means every column of $A$ contains a pivot, leaving no free variables. The null space is $\\{\\mathbf{0}\\}$, so the particular solution $\\mathbf{x}_p$ stands alone with nothing to add.
 
-When $\\text{rank}(A) < n$, there are $n - \\text{rank}(A)$ free variables. Each free variable parametrizes a direction along which the solution can move without violating the equations. The solution set is infinite — a translated copy of the null space, which has dimension $n - \\text{rank}(A)$.`,
+When $\\text{rank}(A) < n$, there are $n - \\text{rank}(A)$ free variables. Each free variable parametrizes a direction along which the solution can move without violating the equations. The solution set is infinite — a translated copy of the null space, which has dimension $n - \\text{rank}(A)$.
+
+@academic[pitfall,aside:true,width:35%:Skipping the existence check
+Concluding "exactly one solution" from $\\text{rank}(A) = n$ alone fails for $x_1 = 1$, $x_1 = 2$: here $\\text{rank}(A) = 1 = n$, yet $\\text{rank}([A \\mid \\mathbf{b}]) = 2$ and there is no solution. Uniqueness can be claimed only after $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$ has been checked.
+[Read more](!#pitfalls)]@
+
+The rank test for uniqueness looks only at the coefficient matrix. It compares the number of pivot columns of $A$ with the number of unknowns, and $\\mathbf{b}$ plays no part in it. The same count comes out for every right-hand side the system could be given.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2242,6 +2248,10 @@ The theorem unifies the existence and dimension questions into a single rank com
 
 The solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$, or equivalently, the solution obtained by [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Existence and uniqueness both hold universally — the right-hand side does not matter.
 
+@academic[pitfall,aside:true,width:35%:Reading a zero determinant as no solution
+Concluding "no solution" from $\\det(A) = 0$ fails for $x_1 + 2x_2 = 3$, $2x_1 + 4x_2 = 6$: the determinant is $0$, yet $x_1 = 3 - 2t$, $x_2 = t$ solves it for every $t$. Only a $\\mathbf{b}$ outside $\\text{Col}(A)$, such as $(3, 5)$, leaves no solution.
+[Read more](!#pitfalls)]@
+
 If $\\det(A) = 0$: the matrix is singular, the rank is less than $n$, and the outcome depends on $\\mathbf{b}$. For some $\\mathbf{b}$ (those in the column space), infinitely many solutions exist. For other $\\mathbf{b}$ (those outside the column space), no solution exists. The determinant test determines whether the coefficient matrix is adequate; the rank comparison with the augmented matrix determines whether the specific $\\mathbf{b}$ is reachable.`,
     before: ``,
     after: ``,
@@ -2253,9 +2263,13 @@ If $\\det(A) = 0$: the matrix is singular, the rank is less than $n$, and the ou
 
 The column space of $A$ is at most $n$-dimensional inside $\\mathbb{R}^m$. When $m > n$, this column space is a proper subspace — most vectors in $\\mathbb{R}^m$ lie outside it. A randomly chosen $\\mathbf{b}$ will almost certainly not be in the column space, making the system inconsistent.
 
+@academic[pitfall,aside:true,width:35%:Deciding existence from the shape alone
+Concluding "no solution" because $m = 3 > n = 2$ fails for $x_1 + x_2 = 2$, $x_1 - x_2 = 0$, $2x_1 = 2$: both ranks equal $2$, and $\\mathbf{x} = (1, 1)$ is the unique solution. Only the rank comparison decides.
+[Read more](!#pitfalls)]@
+
 A solution exists only when $\\mathbf{b}$ happens to lie in the column space — when the extra equations are consistent with the first $n$. When a solution does exist and $\\text{rank}(A) = n$, it is unique.
 
-When no exact solution exists, the [least-squares](!/linear-algebra/orthogonality/least-squares) approach finds the $\\hat{\\mathbf{x}}$ that minimizes $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ — the closest approximation. The least-squares solution satisfies the normal equations $A^T A \\hat{\\mathbf{x}} = A^T \\mathbf{b}$ and is the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space.`,
+When no exact solution exists, the [least-squares](!/linear-algebra/orthogonality/least-squares) approach finds the $\\hat{\\mathbf{x}}$ that minimizes $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ — the closest approximation. The least-squares solution satisfies the normal equations $A^T A \\hat{\\mathbf{x}} = A^T \\mathbf{b}$ and $A\\hat{\\mathbf{x}}$ is the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2264,9 +2278,13 @@ When no exact solution exists, the [least-squares](!/linear-algebra/orthogonalit
     title: `Underdetermined Systems`,
     content: `@academic[rule_corollary_plain:When $m < n$ — fewer equations than unknowns — the system is underdetermined. If a solution exists, it is never unique: the rank cannot exceed $m$, which is less than $n$, so at least $n - m$ free variables remain.]@
 
+@academic[pitfall,aside:true,width:35%:Assuming a wide system always has solutions
+Expecting infinitely many solutions because $m = 2 < n = 3$ fails for $x_1 + x_2 + x_3 = 1$, $x_1 + x_2 + x_3 = 2$: $\\text{rank}(A) = 1$ but $\\text{rank}([A \\mid \\mathbf{b}]) = 2$, so there is no solution. A wide shape rules out uniqueness, not inconsistency.
+[Read more](!#pitfalls)]@
+
 The solution set, when nonempty, is an affine subspace of dimension at least $n - m$. Multiple vectors $\\mathbf{x}$ satisfy the equations, and additional criteria beyond the linear system itself are needed to select a preferred one.
 
-Common selection criteria include minimum norm (the $\\mathbf{x}$ closest to $\\mathbf{0}$, given by the pseudoinverse $\\mathbf{x} = A^T(AA^T)^{-1}\\mathbf{b}$), sparsity (the $\\mathbf{x}$ with the fewest nonzero entries, central to compressed sensing), and physical constraints (bounds or nonnegativity in engineering applications).
+Common selection criteria include minimum norm (the $\\mathbf{x}$ closest to $\\mathbf{0}$, given by the pseudoinverse $\\mathbf{x} = A^+\\mathbf{b}$, which equals $A^T(AA^T)^{-1}\\mathbf{b}$ when $A$ has full row rank), sparsity (the $\\mathbf{x}$ with the fewest nonzero entries, central to compressed sensing), and physical constraints (bounds or nonnegativity in engineering applications).
 
 Underdetermined systems are not defective — they arise naturally whenever a problem has more degrees of freedom than constraints. The linear system identifies the feasible set; the selection criterion picks a point within it.`,
     before: ``,
@@ -2297,6 +2315,10 @@ where $\\mathbf{x}_p$ is any one particular solution and $\\mathbf{x}_h$ ranges 
 
 The dimension of the solution set equals the dimension of the null space: $n - \\text{rank}(A)$. When this is $0$, the solution set is a single point $\\{\\mathbf{x}_p\\}$. When it is $1$, the solution set is a line. When it is $2$, a plane. The shape is always a flat, and the null space determines its orientation.
 
+@academic[pitfall,aside:true,width:35%:Dropping the particular solution
+Writing the solutions of $x_1 + x_2 = 2$ as $\\mathbf{x} = t(-1, 1)$ gives only the null space: at $t = 0$ it offers $\\mathbf{0}$, and $0 + 0 \\neq 2$. Adding $\\mathbf{x}_p = (2, 0)$ gives the solution set $\\mathbf{x} = (2, 0) + t(-1, 1)$.
+[Read more](!#pitfalls)]@
+
 The particular solution $\\mathbf{x}_p$ captures the effect of the right-hand side $\\mathbf{b}$. The [homogeneous](!/linear-algebra/linear-systems/homogeneous) component $\\mathbf{x}_h$ captures the inherent freedom in the system — the directions along which the solution can shift without violating any equation. This decomposition into &quot;forced&quot; and &quot;free&quot; parts is one of the most fundamental structural results in linear algebra.`,
     before: ``,
     after: ``,
@@ -2305,6 +2327,88 @@ The particular solution $\\mathbf{x}_p$ captures the effect of the right-hand si
   obj11: {
     title: `Summary: Solvability Questions Answered`,
     content: `The two foundational questions about A·x = b — existence and uniqueness — together with the structure of the solution set and the special behavior of square, overdetermined, and underdetermined shapes, can be collected as a six-row Q&amp;A reference. The table below pairs each question a reader might bring to a linear system with the answer in terms of rank, determinant, or solution-set structure.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes cause many wrong verdicts about linear systems. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Skipping the existence check**
+
+A unique solution is announced as soon as $\\text{rank}(A) = n$, without checking that a solution exists at all. Full column rank says there is at most one solution; it does not say there is one.
+
+Wrong working: for the system $x_1 = 1$, $x_1 = 2$,
+$$A = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}, \\quad \\text{rank}(A) = 1 = n \\quad \\Longrightarrow \\quad \\text{exactly one solution}$$
+
+Right working: reduce the augmented matrix first.
+$$\\left(\\begin{array}{c|c} 1 & 1 \\\\ 1 & 2 \\end{array}\\right) \\sim \\left(\\begin{array}{c|c} 1 & 1 \\\\ 0 & 1 \\end{array}\\right)$$
+The second row reads $0 = 1$, so $\\text{rank}([A \\mid \\mathbf{b}]) = 2 > \\text{rank}(A)$ and there is no solution.
+
+Why it happens: for a square matrix with $\\det(A) \\neq 0$, full rank does guarantee a solution, and the habit carries over to tall matrices, where it does not.
+
+How to check: ask the existence question first. Look for a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ in the reduced augmented matrix before counting pivot columns.
+
+**Reading a zero determinant as no solution**
+
+$\\det(A) = 0$ is taken to mean that $A\\mathbf{x} = \\mathbf{b}$ has no solution. A zero determinant says only that a solution, when there is one, is not unique; whether one exists depends on $\\mathbf{b}$.
+
+Wrong working:
+$$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}, \\quad \\det(A) = 4 - 4 = 0 \\quad \\Longrightarrow \\quad x_1 + 2x_2 = 3, \\; 2x_1 + 4x_2 = 6 \\text{ has no solution}$$
+
+Right working: reduce the augmented matrix.
+$$\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\end{array}\\right) \\sim \\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
+Both ranks are $1$, so the system is consistent, with one free variable: $x_2 = t$, $x_1 = 3 - 2t$. With $\\mathbf{b} = (3, 5)$ instead, the second row becomes $[0 \\; 0 \\mid -1]$ and there is no solution.
+
+Why it happens: for a single equation $ax = b$, $a = 0$ usually means no solution, and $\\det(A) = 0$ is read the same way. The case $0x = 0$, true for every $x$, is the one that gets forgotten.
+
+How to check: after finding $\\det(A) = 0$, compare $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}])$. Equal ranks mean infinitely many solutions, unequal ranks mean none.
+
+**Deciding existence from the shape alone**
+
+A system with more equations than unknowns is declared inconsistent without any reduction. Most right-hand sides do make a tall system inconsistent, but some do not.
+
+Wrong working:
+$$x_1 + x_2 = 2, \\quad x_1 - x_2 = 0, \\quad 2x_1 = 2 \\qquad m = 3 > n = 2 \\quad \\Longrightarrow \\quad \\text{no solution}$$
+
+Right working: reduce the augmented matrix.
+$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\\\ 2 & 0 & 2 \\end{array}\\right) \\sim \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & -2 & -2 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
+Both ranks are $2 = n$, so there is exactly one solution: $x_2 = 1$, $x_1 = 1$.
+
+Why it happens: the third equation looks like one constraint too many, and a randomly chosen right-hand side would indeed break the system. Here the third equation is the sum of the first two, so it adds nothing new.
+
+How to check: substitute the candidate solution into every equation. $\\mathbf{x} = (1, 1)$ gives $2$, $0$ and $2$, matching all three right-hand sides.
+
+**Assuming a wide system always has solutions**
+
+A system with fewer equations than unknowns is expected to have infinitely many solutions. The shape guarantees free variables, so a solution is never unique, but it does not guarantee that a solution exists.
+
+Wrong working:
+$$x_1 + x_2 + x_3 = 1, \\quad x_1 + x_2 + x_3 = 2 \\qquad m = 2 < n = 3 \\quad \\Longrightarrow \\quad \\text{infinitely many solutions}$$
+
+Right working: reduce the augmented matrix.
+$$\\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 1 & 1 & 1 & 2 \\end{array}\\right) \\sim \\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 0 & 0 & 0 & 1 \\end{array}\\right)$$
+The second row reads $0 = 1$, so $\\text{rank}(A) = 1$ but $\\text{rank}([A \\mid \\mathbf{b}]) = 2$, and there is no solution.
+
+Why it happens: "more unknowns than equations" is remembered as "always solvable", and the condition that a solution must exist first is dropped.
+
+How to check: before counting free variables, check that the reduction produced no row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$. Two equations with the same left side and different right sides, as here, always produce one.
+
+**Dropping the particular solution**
+
+The solution set of $A\\mathbf{x} = \\mathbf{b}$ is written using only the free directions, as if $\\mathbf{b}$ were $\\mathbf{0}$. That describes the null space, the solution set of the homogeneous system, not the solutions of $A\\mathbf{x} = \\mathbf{b}$.
+
+Wrong working: for $x_1 + x_2 = 2$, the free variable $x_2 = t$ gives the direction $(-1, 1)$, and the answer is written as
+$$\\mathbf{x} = t\\begin{pmatrix} -1 \\\\ 1 \\end{pmatrix}$$
+
+Right working: $x_1 = 2 - t$, so the constant $2$ stays in the answer.
+$$\\mathbf{x} = \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} -1 \\\\ 1 \\end{pmatrix}$$
+This is a line through $(2, 0)$, parallel to the null space and not through the origin.
+
+Why it happens: the free directions are the part of the answer that takes work to find, and the constant column is easy to leave behind. For homogeneous systems the particular solution really is $\\mathbf{0}$, which reinforces the habit.
+
+How to check: set every parameter to $0$. The result must solve $A\\mathbf{x} = \\mathbf{b}$; the wrong answer gives $\\mathbf{0}$, and $0 + 0 \\neq 2$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2711,6 +2815,14 @@ export default function SolvabilityPage({existenceCases, squareSystemCases,
           </DiagramFrame>,
           `Both comparisons come out of the same reduction, which is why they are never computed separately. Reduce $[A \\mid \\mathbf{b}]$ once: a contradiction row settles existence, and the count of pivot columns settles uniqueness. Nothing else is needed, and no determinant is involved — which matters because the determinant test only applies to square systems, while these two apply to every system.`,
           `The last two rows are worth reading as a change of question rather than a failure. An overdetermined system usually has no solution, so least squares asks for the closest approximation instead and answers with a projection. An underdetermined system has too many, so a selection criterion is imposed from outside the algebra — minimum norm, sparsity, or whatever the model requires. In both cases the linear algebra is finished; what remains is deciding what you wanted.`,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

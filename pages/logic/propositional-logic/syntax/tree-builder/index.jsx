@@ -216,6 +216,10 @@ Parentheses control grouping and override the default operator precedence. Wrapp
 
 Each internal node displays the sub-expression it governs along with its operator. Branches descend from each operator to its operands. Leaf nodes at the bottom are individual propositional variables.
 
+@academic[pitfall,aside:true,width:35%:Putting the negation at the root
+Reading $\\neg P \\wedge Q$ as $\\neg (P \\wedge Q)$ puts $\\neg$ at the root, but the analyzer's root is $\\wedge$, with $\\neg$ above $P$ alone. At $P = T$, $Q = F$ the misread formula is T, while $\\neg P \\wedge Q$ is F.
+[Read more](!#9)]@
+
 Reading the tree from top to bottom reveals evaluation order: the deepest nodes are evaluated first, and results propagate upward until the root produces the final truth value. This structure mirrors the recursive definition of well-formed formulas in **propositional logic** and makes operator precedence visually explicit.
 
 For a negation node, only one branch descends because negation is a unary operator. All other connectives are binary operators and produce two branches, one for the left operand and one for the right.`,
@@ -241,6 +245,10 @@ Above the table, a badge automatically classifies the proposition. **Tautology**
       content: `A **tautology** is a formula that is true under every possible truth assignment. Classic examples include the law of excluded middle, $P \\vee \\neg P$, and the expression $(P \\to Q) \\leftrightarrow (\\neg P \\vee Q)$. Enter either of these into the analyzer to see the tautology badge appear.
 
 A **contradiction** is the opposite: a formula that is false under every assignment. The simplest contradiction is $P \\wedge \\neg P$. Contradictions are important because any argument whose premises lead to a contradiction contains an inconsistency.
+
+@academic[pitfall,aside:true,width:35%:Reading not a tautology as a contradiction
+Calling $P \\to Q$ a contradiction because it is not a tautology overlooks the row $P = F$, $Q = F$, where it is T. It is F only at $P = T$, $Q = F$, so $P \\to Q$ is contingent.
+[Read more](!#9)]@
 
 A **contingent** proposition is neither a tautology nor a contradiction. Its truth value changes depending on the assignment. Most everyday logical statements are contingent. Recognizing which category a formula falls into is a fundamental task in **propositional calculus** and is used extensively in proof techniques, circuit design, and automated reasoning.`,
       before: ``,
@@ -280,6 +288,10 @@ Syntax trees are foundational in computer science as well. Compilers and interpr
 
 When two operators share the same precedence level, the analyzer resolves them left to right. For instance, $P \\wedge Q \\wedge R$ is parsed as $(P \\wedge Q) \\wedge R$.
 
+@academic[pitfall,aside:true,width:35%:Dropping the parentheses in a chain of implications
+Typing $P \\to Q \\to R$ for $P \\to (Q \\to R)$, as if grouping never mattered, gives the analyzer's $(P \\to Q) \\to R$. At $P = F$, $Q = T$, $R = F$ the intended formula is T and the parsed one is F.
+[Read more](!#9)]@
+
 Explicit parentheses always override these defaults. If you are unsure how your expression will be parsed, add parentheses around the sub-expression you want evaluated first. The resulting syntax tree will confirm whether the grouping matches your intention.
 
 Understanding precedence is essential for writing unambiguous logical formulas, especially in formal proofs and digital circuit specifications where incorrect grouping leads to entirely different truth conditions.`,
@@ -298,7 +310,45 @@ Unknown characters produce an error identifying the offending token and its posi
 
 If two binary operators appear next to each other without an operand between them, the parser cannot build a valid tree and will report an invalid expression. Make sure every binary connective has exactly one operand on each side.
 
-When an error appears, read the message carefully. It usually points to the exact position in the input where parsing failed, making it straightforward to correct the issue.`,
+When an error appears, read the message carefully. It usually points to the exact position in the input where parsing failed, making it straightforward to correct the issue.
+
+Three further slips produce no error message at all: the analyzer accepts the formula and the mistake lies in how it is read or typed. Each is marked where it happens in the sections above.
+
+**Putting the negation at the root**
+
+A formula such as $\\neg P \\wedge Q$ is read as the negation of the whole conjunction. The $\\neg$ is taken to govern everything after it, so the main connective is misidentified and the truth values come out wrong.
+
+Wrong working: read $\\neg P \\wedge Q$ as $\\neg (P \\wedge Q)$. At $P = T$, $Q = F$, $P \\wedge Q$ is F, so $\\neg (P \\wedge Q)$ is T, and the formula is called true in this row.
+
+Right working: negation binds most tightly, so $\\neg$ applies to $P$ alone and the main connective is $\\wedge$. At $P = T$, $Q = F$, $\\neg P$ is F and $Q$ is F, so $\\neg P \\wedge Q$ is F.
+
+Why it happens: in everyday speech "not" often covers a whole phrase, and the formula is read like a sentence instead of by the precedence rules.
+
+How to check: look at the root of the syntax tree. If the root is $\\wedge$ and the negation node sits above a single leaf, the $\\neg$ covers only that variable. To negate the conjunction, type $\\neg (P \\wedge Q)$.
+
+**Reading not a tautology as a contradiction**
+
+When the badge does not say Tautology, the formula is taken to be always false. A formula that fails in one row can still be true in the others.
+
+Wrong working: $P \\to Q$ is F at $P = T$, $Q = F$, so it is not a tautology, and it is then called a contradiction.
+
+Right working: list all four rows. $P \\to Q$ is T at $P = T$, $Q = T$, at $P = F$, $Q = T$ and at $P = F$, $Q = F$, and F only at $P = T$, $Q = F$. It is true in some rows and false in one, so it is contingent.
+
+Why it happens: tautology and contradiction are learned as a pair of opposites, and the third case, a contingent formula, is forgotten.
+
+How to check: look for one row where the result is T and one where it is F. If both exist, the formula is contingent; it is a contradiction only when every row is F.
+
+**Dropping the parentheses in a chain of implications**
+
+Because $P \\wedge Q \\wedge R$ means the same with either grouping, the parentheses in $P \\to (Q \\to R)$ are left out. Implication does not regroup freely, and the analyzer groups a chain from the left.
+
+Wrong working: type $P \\to Q \\to R$ meaning $P \\to (Q \\to R)$. The analyzer builds $(P \\to Q) \\to R$. At $P = F$, $Q = T$, $R = F$, $P \\to Q$ is T and $R$ is F, so $(P \\to Q) \\to R$ is F.
+
+Right working: type $P \\to (Q \\to R)$. In the same row $Q \\to R$ is F and $P$ is F, so $P \\to (Q \\to R)$ is T. The two groupings give different results.
+
+Why it happens: grouping does not matter for $\\wedge$, $\\vee$ and $\\oplus$, so it is assumed not to matter for $\\to$ either. Many textbooks also group a chain of implications from the right, the opposite of the analyzer's left-to-right rule.
+
+How to check: look at the root of the syntax tree. For $P \\to (Q \\to R)$ the root's left branch must be the single leaf $P$; if the left branch is $P \\to Q$, the grouping is the other one.`,
       before: ``,
       after: ``,
       link: '',

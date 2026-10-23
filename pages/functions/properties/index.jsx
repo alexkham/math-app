@@ -1564,6 +1564,8 @@ import functionTypesDiagrams from '@/app/components/functions/types/functionType
 import functionRangeDiagrams from '@/app/components/functions/range/functionRangeDiagrams'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2312,6 +2314,12 @@ Most functions fall into the third category. The function $f(x) = x^2 + x$ satis
 
 @academic[rule_plain:For a function to be even or odd, its domain must be symmetric about the origin — if $x$ is in the domain, so is $-x$.]@
 
+@academic[pitfall,aside:true,width:35%:Judging by the exponents alone
+Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -x^3 + 1$, while $-f(x) = -x^3 - 1$. The constant does not change sign, so $f$ is neither even nor odd.
+[Read more](!#pitfalls)]@
+
+For polynomials the substitution can be read term by term, since $(-x)^n = x^n$ when $n$ is even and $(-x)^n = -x^n$ when $n$ is odd. Each term either keeps its sign or flips it, and the function is even or odd only when all of its terms do the same.
+
 The table below collects the three possible outcomes with the algebraic test, the graphical symmetry it implies, and a few examples for each.`,
     before: ``,
     after: ``,
@@ -2326,7 +2334,7 @@ A graph symmetric about the $y$-axis has the property that the point $(x, y)$ li
 
 A graph symmetric about the origin has the property that $(x, y)$ lies on the graph if and only if $(-x, -y)$ does. Every point has a counterpart obtained by rotating $180°$ around the origin. This is the graphical signature of odd functions.
 
-A graph symmetric about the $x$-axis would have $(x, y)$ on the graph whenever $(x, -y)$ is. But such a curve fails the vertical line test — it cannot represent a function, since one $x$-value would correspond to two $y$-values.
+A graph symmetric about the $x$-axis would have $(x, y)$ on the graph whenever $(x, -y)$ is. But unless the curve lies on the $x$-axis ($y = 0$), it fails the vertical line test — it cannot represent a function, since one $x$-value would correspond to two $y$-values.
 
 Symmetry about other vertical lines is possible. The parabola $f(x) = (x - 3)^2$ is symmetric about the line $x = 3$. Its vertex lies on this axis of symmetry, and the graph is a mirror image on either side.
 
@@ -2347,6 +2355,10 @@ The function $f(x) = x^2$ is not one-to-one on $(-\\infty, \\infty)$. Both $f(3)
 The horizontal line test identifies one-to-one functions graphically. If every horizontal line intersects the graph at most once, the function is one-to-one. If any horizontal line crosses twice or more, it is not.
 
 @academic[rule_theorem_plain:One-to-one functions are precisely those that have [inverse functions](!/functions/inverse).]@
+
+@academic[pitfall,aside:true,width:35%:Confusing one-to-one with being a function
+Since each input of $f(x) = |x|$ has one output, $f$ is called one-to-one. That is only the function condition; one-to-one asks about outputs, and $f(-2) = f(2) = 2$, so $|x|$ is not one-to-one.
+[Read more](!#pitfalls)]@
 
 Because each output comes from a unique input, the process can be reversed — given an output, identify the input that produced it. This reversal defines the inverse.
 
@@ -2426,7 +2438,11 @@ A monotonically decreasing function satisfies $a < b \\implies f(a) \\geq f(b)$.
 
 Examples of monotonic functions: $f(x) = e^x$ (strictly increasing), $f(x) = \\ln(x)$ (strictly increasing on its domain), $f(x) = -x^3$ (strictly decreasing), $f(x) = 3$ (constant, hence both non-decreasing and non-increasing).
 
-Monotonic functions are always one-to-one (unless constant). Because they never produce the same output twice (in the strict case), they have [inverses](!/functions/inverse). This is why exponential functions have logarithmic inverses — both are strictly monotonic.
+Strictly monotonic functions are always one-to-one. Because they never produce the same output twice (in the strict case), they have [inverses](!/functions/inverse). This is why exponential functions have logarithmic inverses — both are strictly monotonic.
+
+@academic[pitfall,aside:true,width:35%:Joining intervals of decrease
+Since $f(x) = 1/x$ falls on $(-\\infty, 0)$ and on $(0, \\infty)$, it is called decreasing on its whole domain. But $-1 < 1$ and $f(-1) = -1 < f(1) = 1$; it is decreasing on each interval separately, not monotonic.
+[Read more](!#pitfalls)]@
 
 Many functions are monotonic on pieces of their domain but not overall. The function $f(x) = \\sin(x)$ increases on some intervals and decreases on others. It is not monotonic on $\\mathbb{R}$, but it is strictly increasing on $[-\\pi/2, \\pi/2]$, enabling the definition of $\\arcsin$ on that restricted domain.`,
     before: ``,
@@ -2489,6 +2505,12 @@ This is the Extreme Value Theorem. The extrema occur either at local extrema wit
 
 To find absolute extrema on $[a, b]$: identify all local extrema in $(a, b)$, evaluate the function at these points and at the endpoints $a$ and $b$, and compare to find the largest and smallest values.
 
+@academic[pitfall,aside:true,width:35%:Forgetting the endpoints
+Comparing only the turning points of $f(x) = x^3 - 3x$ on $[-2, 3]$ gives the absolute maximum $f(-1) = 2$. The endpoint $x = 3$ gives $f(3) = 27 - 9 = 18$, the true absolute maximum.
+[Read more](!#pitfalls)]@
+
+The list of candidates is short: the turning points inside the interval and its two ends. A turning point is high or low only compared with its neighbors, while an end of the interval can be highest or lowest simply because the graph stops there. Comparing the values at all the candidates settles both absolute extrema at once.
+
 The table below contrasts the two notions of extremum — local relative to a neighborhood, absolute relative to the entire domain — and shows when each is guaranteed to exist.`,
     before: ``,
     after: ``,
@@ -2505,7 +2527,7 @@ A function is continuous on an interval if it is continuous at every point in th
 
 Polynomials are continuous everywhere. Rational functions are continuous wherever defined — at every point except where the denominator is zero. Exponential, logarithmic, and trigonometric functions are continuous on their domains.
 
-Continuity guarantees certain behaviors. A continuous function on a closed interval achieves its maximum and minimum values. A continuous function that is negative at one point and positive at another must cross zero somewhere in between (Intermediate Value Theorem).
+Continuity guarantees certain behaviors. A continuous function on a closed interval achieves its maximum and minimum values. A function continuous on an interval that is negative at one point of that interval and positive at another must cross zero somewhere in between (Intermediate Value Theorem).
 
 Most functions encountered in elementary mathematics are continuous on their domains. Discontinuities, when they occur, are special events worth noting and classifying.`,
     before: ``,
@@ -2518,6 +2540,12 @@ Most functions encountered in elementary mathematics are continuous on their dom
     content: `When continuity fails, the type of failure is classified by what goes wrong.
 
 A removable discontinuity (or hole) occurs when the limit exists but the function is either undefined or has a different value at that point. The graph has a single missing point — a hole that could be "filled in" by redefining the function there. The function $f(x) = \\dfrac{x^2 - 1}{x - 1}$ has a removable discontinuity at $x = 1$.
+
+@academic[pitfall,aside:true,width:35%:Cancelling away the hole
+Simplifying $\\frac{x^2 - 1}{x - 1}$ to $x + 1$ and stating $f(1) = 2$ fills in a point that is missing: at $x = 1$ the formula gives $\\frac{0}{0}$. The limit is $2$, but $f(1)$ is undefined.
+[Read more](!#pitfalls)]@
+
+Factoring is the usual way to find such a hole. When the numerator and the denominator share a factor, the function agrees with a simpler expression everywhere except where that factor is zero, and the limit at that point can be read from the simpler expression. The graph is the simpler curve with one point removed.
 
 A jump discontinuity occurs when the left-hand limit and right-hand limit both exist but differ. The function jumps from one value to another. [Piecewise functions](!/functions/piecewise) often have jump discontinuities at the boundaries between pieces.
 
@@ -2541,7 +2569,7 @@ A horizontal asymptote is a horizontal line $y = L$ that the graph approaches as
 
 An oblique (or slant) asymptote is a non-horizontal line $y = mx + b$ that the graph approaches as $x \\to \\pm\\infty$. This occurs in rational functions when the numerator's degree exceeds the denominator's degree by exactly one. The function $f(x) = \\dfrac{x^2 + 1}{x}$ has oblique asymptote $y = x$.
 
-A function can cross a horizontal or oblique asymptote; it describes limiting behavior, not a barrier. A function never crosses a vertical asymptote — the function is undefined there.
+A function can cross a horizontal or oblique asymptote; it describes limiting behavior, not a barrier. A function's graph meets a vertical asymptote at most once, and usually not at all — the function is typically undefined there.
 
 Asymptotes shape the large-scale structure of a graph, providing guidelines the curve follows at its extremes. The table below collects the three asymptote types with the form of the line, the condition that produces them, and a worked example.`,
     before: ``,
@@ -2575,13 +2603,13 @@ End behavior provides the frame for the entire graph — knowing where the curve
 
 The smallest such $p$ is called the fundamental period (or simply the period). The function $f(x) = \\sin(x)$ has period $2\\pi$: the wave from $0$ to $2\\pi$ repeats identically thereafter.
 
-Periodic functions have bounded [range](!/functions/range) — the repeating pattern confines outputs to a fixed interval. The sine and cosine functions have range $[-1, 1]$.
+Periodic functions that are continuous on all of $\\mathbb{R}$ have bounded [range](!/functions/range) — the repeating pattern confines outputs to a fixed interval. The sine and cosine functions have range $[-1, 1]$.
 
 The amplitude measures half the vertical distance between maximum and minimum values. For $f(x) = \\sin(x)$, the amplitude is $1$. For $f(x) = 3\\sin(x)$, the amplitude is $3$.
 
 Periodic functions model cyclic phenomena: sound waves, tides, seasons, heartbeats, alternating current. The period corresponds to the duration of one cycle; the amplitude corresponds to the intensity of oscillation.
 
-Not all functions are periodic. Polynomials, exponentials, and logarithms never repeat exactly. Linear combinations of periodic functions with incommensurable periods can produce non-periodic behavior.`,
+Not all functions are periodic. Non-constant polynomials, exponentials, and logarithms never repeat exactly. Linear combinations of periodic functions with incommensurable periods can produce non-periodic behavior.`,
     before: ``,
     after: ``,
     link: '',
@@ -2625,6 +2653,10 @@ For $f(x) = x^2$ on $[1, 3]$:
 @academic[formula_callout:Average Rate of Change
 $$\\frac{f(3) - f(1)}{3 - 1} = \\frac{9 - 1}{2} = 4$$]@
 
+@academic[pitfall,aside:true,width:35%:Subtracting in mismatched order
+Taking the outputs in one order and the inputs in the other gives $\\frac{f(3) - f(1)}{1 - 3} = \\frac{8}{-2} = -4$, a decrease. Both differences must start from the same endpoint: $\\frac{9 - 1}{3 - 1} = 4$.
+[Read more](!#pitfalls)]@
+
 The function increases by an average of $4$ units in output for each unit of input over this interval.
 
 Average rate of change has units: output units per input unit. If $f(t)$ gives position in meters after $t$ seconds, the average rate of change is average velocity in meters per second.
@@ -2652,6 +2684,86 @@ Visually, concavity is detected by the curve's shape. A parabola opening upward 
 Concavity affects how well a linear approximation fits a curve. Concave-up regions curve away from tangent lines in one direction; concave-down regions curve away in the other.
 
 Full analysis of concavity uses calculus — specifically, the second derivative. In algebra, recognizing concavity provides qualitative understanding of graph shape.`,
+    before: ``,
+    after: ``,
+    link: '',
+  },
+
+  obj20: {
+    title: `Common Pitfalls`,
+    content: `Six mistakes come up again and again when the properties on this page are tested. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Judging by the exponents alone**
+
+A function is called even or odd from the look of its formula: odd powers suggest odd, even powers suggest even. The test itself, comparing $f(-x)$ with $f(x)$ and $-f(x)$, is skipped, and a single term of the other kind goes unnoticed.
+
+Wrong working: $f(x) = x^3 + 1$ has the odd power $x^3$, so $f$ is declared odd.
+
+Right working: $f(-x) = (-x)^3 + 1 = -x^3 + 1$. This is not $f(x) = x^3 + 1$, and not $-f(x) = -x^3 - 1$, so $f$ is neither even nor odd. The constant $1$ is the term $1 \\cdot x^0$, an even power, and it keeps its sign.
+
+Why it happens: for a single power the shortcut is right, $x^3$ is odd and $x^4$ is even, so it is carried over to sums whose terms disagree.
+
+How to check: substitute one pair of inputs. Here $f(1) = 2$ and $f(-1) = 0$; an odd function would need $f(-1) = -2$, and an even one $f(-1) = 2$.
+
+**Confusing one-to-one with being a function**
+
+The two conditions are mixed up. Being a function means each input has one output; being one-to-one means each output comes from one input. A rule can satisfy the first and fail the second.
+
+Wrong working: for $f(x) = |x|$, every input has exactly one absolute value, so $f$ is declared one-to-one.
+
+Right working: $f(-2) = 2$ and $f(2) = 2$. Two different inputs share the output $2$, so $|x|$ is not one-to-one. It is a function, since no input has two outputs.
+
+Why it happens: both conditions are phrased with "one" and "each", and both come with a line test, vertical for functions and horizontal for one-to-one.
+
+How to check: look for two different inputs with the same output, or draw a horizontal line. The line $y = 2$ meets the graph of $|x|$ at $(-2, 2)$ and $(2, 2)$.
+
+**Joining intervals of decrease**
+
+A function decreases on two separate intervals, and the two facts are combined into one statement about the whole domain. Decreasing on a set needs $f(a) > f(b)$ for every $a < b$ in the set, including pairs taken from different intervals.
+
+Wrong working: $f(x) = 1/x$ is decreasing on $(-\\infty, 0)$ and on $(0, \\infty)$, so it is declared decreasing on its whole domain, a monotonic function.
+
+Right working: take $a = -1$ and $b = 1$. Then $a < b$, but $f(-1) = -1 < 1 = f(1)$. The function is decreasing on each interval separately; on its whole domain it is not monotonic.
+
+Why it happens: the graph falls everywhere it is drawn, and the break at $x = 0$, where the outputs pass from large negative to large positive values, is easy to overlook.
+
+How to check: pick one input from each interval and compare. For a function decreasing on the union, the left input must give the larger output.
+
+**Forgetting the endpoints**
+
+Absolute extrema on a closed interval are looked for only at the turning points, and the values at the two ends of the interval are never computed.
+
+Wrong working: for $f(x) = x^3 - 3x$ on $[-2, 3]$, the turning points give $f(-1) = 2$ and $f(1) = -2$, so the absolute maximum is given as $2$.
+
+Right working: add the endpoints. $f(-2) = -8 + 6 = -2$ and $f(3) = 27 - 9 = 18$. Comparing $-2$, $2$, $-2$ and $18$, the absolute maximum is $18$, at $x = 3$, and the absolute minimum is $-2$, reached at both $x = -2$ and $x = 1$.
+
+Why it happens: local extrema are found first and look like the natural candidates, since they are the peaks and valleys of the graph.
+
+How to check: evaluate $f$ at a few points of the interval, the ends included. A single value larger than the claimed maximum, such as $f(3) = 18 > 2$, shows that the claim is wrong.
+
+**Cancelling away the hole**
+
+A rational function is simplified by cancelling a common factor, and the simplified formula is then used at the point where that factor is zero. The original function is undefined there.
+
+Wrong working: $f(x) = \\frac{x^2 - 1}{x - 1} = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1$, so $f(1) = 2$ and $f$ is continuous at $x = 1$.
+
+Right working: the cancellation is valid only for $x \\neq 1$. At $x = 1$ the original formula gives $\\frac{1 - 1}{1 - 1} = \\frac{0}{0}$, so $f(1)$ is undefined. The limit as $x \\to 1$ is $2$, and the graph is the line $y = x + 1$ with the point $(1, 2)$ missing: a removable discontinuity.
+
+Why it happens: after cancelling, the factor that caused the problem is no longer visible, and the simpler formula looks like the same function.
+
+How to check: substitute into the original formula, not the simplified one. A result of $\\frac{0}{0}$ there signals a hole.
+
+**Subtracting in mismatched order**
+
+In the formula $\\frac{f(b) - f(a)}{b - a}$, the two differences are taken in opposite orders: the outputs from right to left and the inputs from left to right, or the other way round.
+
+Wrong working: for $f(x) = x^2$ on $[1, 3]$, $\\frac{f(3) - f(1)}{1 - 3} = \\frac{9 - 1}{-2} = -4$.
+
+Right working: both differences start at the same endpoint. $\\frac{f(3) - f(1)}{3 - 1} = \\frac{8}{2} = 4$, or equally $\\frac{f(1) - f(3)}{1 - 3} = \\frac{-8}{-2} = 4$.
+
+Why it happens: the endpoints are read off in whatever order they come to mind, and nothing in the arithmetic flags the wrong sign.
+
+How to check: compare the sign with the graph. On $[1, 3]$ the outputs rise from $1$ to $9$, so the average rate of change must be positive.`,
     before: ``,
     after: ``,
     link: '',
@@ -2902,8 +3014,48 @@ const faqQuestions = {
     }),
   };
 
+  const functionPropertiesOutline = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'The properties on this page',
+    preface: 'Each property describes one facet of a function: its symmetry, how it maps inputs, its direction, its bounds, its extremes, its continuity and its shape.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Check each facet in turn',
+    conclusion: 'Describing a function fully means walking through these facets one by one; each has its own section above.',
+    showLevels: true,
+    nodes: [
+      { id: 'root', name: 'Function properties', children: [
+        { id: 'sym', name: 'Symmetry', children: [
+          { id: 'even', name: 'Even', def: 'mirror in the y-axis', example: 'f(−x) = f(x)' },
+          { id: 'odd', name: 'Odd', def: 'point symmetry', example: 'f(−x) = −f(x)' },
+        ] },
+        { id: 'map', name: 'Mapping', children: [
+          { id: 'oto', name: 'One-to-one', def: 'horizontal line test' },
+          { id: 'onto', name: 'Onto', def: 'range equals codomain' },
+          { id: 'bij', name: 'Bijective', def: 'both' },
+        ] },
+        { id: 'mono', name: 'Monotonicity', children: [
+          { id: 'incdec', name: 'Increasing or decreasing', def: 'on an interval (a, b)' },
+          { id: 'mon', name: 'Monotonic', def: 'one direction throughout' },
+        ] },
+        { id: 'bound', name: 'Bounded', def: 'outputs within [m, M]' },
+        { id: 'ext', name: 'Extrema', children: [
+          { id: 'loc', name: 'Local' },
+          { id: 'abs', name: 'Absolute' },
+        ] },
+        { id: 'cont', name: 'Continuity and limits', children: [
+          { id: 'c', name: 'Continuous' },
+          { id: 'asym', name: 'Asymptote' },
+        ] },
+        { id: 'per', name: 'Periodic', example: 'f(x + p) = f(x)' },
+        { id: 'zero', name: 'Zero at c', example: 'f(c) = 0' },
+        { id: 'conc', name: 'Concavity', def: 'up or down' },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    functionPropertiesOutline,
     demoUnits,
          sectionsContent,
          introContent,
@@ -2926,7 +3078,7 @@ const faqQuestions = {
     }
    }
 
-export default function PropertiesPage({
+export default function PropertiesPage({functionPropertiesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -3149,6 +3301,14 @@ export default function PropertiesPage({
         ]
     },
     {
+        id:'pitfalls',
+        title:sectionsContent.obj20.title,
+        link:sectionsContent.obj20.link,
+        content:[
+          sectionsContent.obj20.content,
+        ]
+    },
+    {
         id:'19',
         title:sectionsContent.obj19.title,
         link:sectionsContent.obj19.link,
@@ -3159,6 +3319,14 @@ export default function PropertiesPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          <DiagramFrame
+            key={'obj19-diagram'}
+            id="function-properties-outline"
+            title="Function properties by facet"
+            source="/functions/properties"
+          >
+            <TaxonomyOutline data={functionPropertiesOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
+          </DiagramFrame>,
         ]
     },
 

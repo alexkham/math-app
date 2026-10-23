@@ -916,6 +916,7 @@ import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDia
 import renderTriangleLabelV2 from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel.v2'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
 
 
 export async function getStaticProps(){
@@ -1251,7 +1252,7 @@ The Law of Sines cannot start a solution when no complete side-angle pair is ava
 
 The analysis depends on whether $A$ is acute or obtuse, and on the relative sizes of $a$ and $b$.
 
-**When** $A$ **is acute:** Compute the height from the vertex opposite $b$: $h = b\\sin A$. This is the shortest distance from that vertex to the line containing side $a$.
+**When** $A$ **is acute:** Compute the height from vertex $C$, the far end of side $b$: $h = b\\sin A$. This is the shortest distance from $C$ to the line containing side $c$, the other side of angle $A$.
 
 - If $a < h$: the side $a$ is too short to reach the opposite side. No triangle exists.
 - If $a = h$: the side $a$ just reaches, forming a right angle. Exactly one (right) triangle.
@@ -1262,6 +1263,10 @@ The analysis depends on whether $A$ is acute or obtuse, and on the relative size
 
 - If $a \\leq b$: no triangle (the side opposite the obtuse angle must be the longest).
 - If $a > b$: exactly one triangle (the obtuse angle is at $A$, so $B$ must be acute).
+
+@academic[pitfall,aside:true,width:35%:Keeping only the acute angle
+With $a = 7$, $b = 10$, $A = 35°$, the Law of Sines gives $\\sin B \\approx 0.819$; stopping at $B \\approx 55.0°$ loses a whole triangle. $B \\approx 125.0°$ also works, since $35° + 125.0° < 180°$.
+[Read more](!#pitfalls)]@
 
 In practice, the safest approach is computational: use the Law of Sines to find $\\sin B$, check whether the value is valid ($\\leq 1$), then check whether both the acute and obtuse solutions for $B$ produce a valid triangle (i.e., whether $A + B < 180°$ in each case).
 
@@ -1322,12 +1327,22 @@ $$c^2 = 8^2 + 6^2 - 2(8)(6)\\cos 50° = 64 + 36 - 96\\cos 50° \\approx 100 - 61
 @academic[formula_callout:When to Use the Law of Cosines
 $$c \\approx 6.19$$]@
 
+@academic[pitfall,aside:true,width:35%:Subtracting before multiplying by cos C
+Working $64 + 36 - 96\\cos 50°$ as $(100 - 96)\\cos 50°$ gives $c^2 \\approx 2.57$ and $c \\approx 1.60$. Multiplying first gives $96\\cos 50° \\approx 61.7$, so $c^2 \\approx 38.3$ and $c \\approx 6.19$.
+[Read more](!#pitfalls)]@
+
+Here $c^2$ is the value of the whole right-hand side, and the third side is its square root. The angle between the two known sides is acute, so $c^2$ comes out below $8^2 + 6^2 = 100$ and the third side is shorter than it would be if the two sides met at a right angle. With an obtuse angle the cosine is negative, and $c^2$ lands above that value instead.
+
 **SSS (Side-Side-Side):** All three sides are known, and the angles must be found. Rearrange the Law of Cosines to solve for an angle:
 
 @academic[formula_callout:When to Use the Law of Cosines
 $$\\cos C = \\frac{a^2 + b^2 - c^2}{2ab}$$]@
 
 Compute $\\cos C$, then apply [arccosine](!/trigonometry/inverse-functions) to find $C$. Repeat for another angle, or use $A + B + C = 180°$ for the third.
+
+@academic[pitfall,aside:true,width:35%:Finding an obtuse angle with arcsine
+With $a = 10$, $b = 4$, $C = 40°$, so $c \\approx 7.40$, the Law of Sines gives $\\sin A \\approx 0.869$ and arcsine returns $A \\approx 60.3°$. The angle opposite the longest side is obtuse: $\\cos A \\approx -0.495$, so $A \\approx 119.7°$.
+[Read more](!#pitfalls)]@
 
 A practical strategy for SSS: find the largest angle first (the one opposite the longest side). If its cosine is negative, the angle is obtuse, and the triangle contains an obtuse angle. If positive, all angles are acute. Finding the largest angle first resolves this question immediately, and the remaining angles (which must be acute) can be found more safely with the Law of Sines — since arcsine of a positive value always gives an acute angle, there is no ambiguity.`,
     before: ``,
@@ -1357,7 +1372,7 @@ In these configurations, no complete pair exists until after the first computati
 • AAA — three angles, no sides. This determines the shape of the triangle (similarity class) but not its size. There is no unique solution.
 • Only one or two pieces of information — insufficient to determine any triangle.
 
-Any other combination of three pieces of information (out of three sides and three angles) falls into one of the cases above and is solvable by the appropriate law or combination.`,
+Any other combination of three pieces of information (out of three sides and three angles) falls into one of the cases above and is handled by the appropriate law or combination, although SSA data can give no triangle and SSS data must satisfy the triangle inequality.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1375,12 +1390,16 @@ $$A = \\frac{1}{2}ab\\sin C$$
 
 where $a$ and $b$ are two sides and $C$ is the angle between them.
 
-The derivation is direct. Drop an altitude $h$ from vertex $C$ to side $c$. Then $h = a\\sin B$ (from the right triangle formed). But the formula is more naturally derived as $h = b\\sin A$ from one perspective or $h = a\\sin B$ from another. Using $h = b\\sin A$:
+The derivation is direct. Drop an altitude $h$ from vertex $A$ to side $a$. Then $h = b\\sin C$ (from the right triangle formed). Using side $a$ as the base:
 
 @academic[formula_callout:Area of a Triangle Using Trigonometry
 $$\\text{Area} = \\frac{1}{2} \\times a \\times h = \\frac{1}{2} \\times a \\times b\\sin C$$]@
 
 This holds for all triangles — acute, right, or obtuse. For a right triangle with $C = 90°$, $\\sin C = 1$, and the formula reduces to $\\frac{1}{2}ab$, consistent with the standard formula (where $a$ and $b$ are the legs).
+
+@academic[pitfall,aside:true,width:35%:Using an angle that is not between the sides
+For the triangle $a = 8$, $b = 6$, $C = 50°$, taking $\\frac{1}{2}(8)(6)\\sin A$ with $A \\approx 82.0°$ gives about $23.8$. The angle between the sides 8 and 6 is $C$, so the area is $\\frac{1}{2}(8)(6)\\sin 50° \\approx 18.4$.
+[Read more](!#pitfalls)]@
 
 The formula requires exactly the SAS configuration: two sides and the included angle. If other configurations are given, the missing information must be found first using the Law of Sines or Law of Cosines.
 
@@ -1418,6 +1437,10 @@ $$= \\sqrt{303.1875} \\approx 17.41$$]@
 
 Heron&apos;s formula can be derived from the trigonometric area formula $\\frac{1}{2}ab\\sin C$ combined with the Law of Cosines. Express $\\cos C$ in terms of the sides, use $\\sin^2 C = 1 - \\cos^2 C$ to find $\\sin C$, substitute into the area formula, and simplify. The algebra is substantial but the result is elegant.
 
+@academic[pitfall,aside:true,width:35%:Using the perimeter instead of the semi-perimeter
+For sides 5, 7, 9, taking $s = 21$ gives $\\sqrt{21 \\cdot 16 \\cdot 14 \\cdot 12} \\approx 237.6$, far more than the triangle can hold. With $s = 10.5$ the area is $\\sqrt{10.5 \\cdot 5.5 \\cdot 3.5 \\cdot 1.5} \\approx 17.41$.
+[Read more](!#pitfalls)]@
+
 The formula has the advantage of requiring only side lengths — no angles, no trigonometric function evaluations. It is useful when the sides are given numerically and the area is the only quantity sought. Its disadvantage is that it provides no angle information; if angles are also needed, the Law of Cosines is a more efficient starting point.
 
 A validity check: $s - a$, $s - b$, and $s - c$ must all be positive. If any of them is zero or negative, the three given lengths do not form a valid triangle (they violate the triangle inequality).
@@ -1440,6 +1463,73 @@ The two area formulas — the SAS form and Heron&apos;s formula — sit side by 
 **Indirect measurement.** The height of a mountain, the distance to a star (via parallax), or the span of a bridge can be determined by measuring accessible distances and angles and solving the resulting triangle. Each problem reduces to identifying the triangle, classifying the known information (AAS, ASA, SAS, SSA, SSS), and applying the appropriate law.
 
 In every application, the first step is geometric: identify the triangle, label the known and unknown elements, and determine which law applies. The computation follows mechanically from there.`,
+    before: ``,
+    after: ``,
+    link: ``,
+  },
+  obj16: {
+    title: `Common Pitfalls`,
+    content: `Five mistakes come up again and again when solving oblique triangles. Each is marked where it happens in the sections above and worked through here in full, with the wrong and the right working side by side.
+
+**Keeping only the acute angle**
+
+In the SSA case the Law of Sines gives a value of $\\sin B$, and the arcsine of that value is taken as the only answer. Sine has the same value at $B$ and at $180° - B$, so a second triangle can be lost.
+
+Wrong working: $a = 7$, $b = 10$, $A = 35°$. Then $\\sin B = \\frac{10\\sin 35°}{7} \\approx 0.819$, so $B \\approx 55.0°$, $C \\approx 90.0°$, and one triangle is reported.
+
+Right working: the second candidate is $B \\approx 180° - 55.0° = 125.0°$. Since $35° + 125.0° = 160.0° < 180°$, it gives a second triangle with $C \\approx 20.0°$ and $c \\approx 4.18$; the first triangle has $c \\approx 12.20$.
+
+Why it happens: arcsine returns only angles up to $90°$, and its single answer looks complete.
+
+How to check: compare $a$ with the height $h = b\\sin A = 10\\sin 35° \\approx 5.74$. Here $5.74 < 7 < 10$, so $h < a < b$, which is the two-triangle case in the table above.
+
+**Subtracting before multiplying by cos C**
+
+In the Law of Cosines the term $2ab\\cos C$ is a single product. Worked left to right, the expression subtracts $2ab$ from $a^2 + b^2$ first and then multiplies the difference by $\\cos C$.
+
+Wrong working: $a = 8$, $b = 6$, $C = 50°$. $c^2 = (64 + 36 - 96)\\cos 50° = 4\\cos 50° \\approx 2.57$, so $c \\approx 1.60$.
+
+Right working: $96\\cos 50° \\approx 61.71$, so $c^2 \\approx 100 - 61.71 = 38.29$ and $c \\approx 6.19$.
+
+Why it happens: the expression is typed into a calculator in the order it is written, and the product $2ab\\cos C$ is split by the subtraction.
+
+How to check: any two sides of a triangle add up to more than the third. With $c \\approx 1.60$, $1.60 + 6 = 7.60 < 8$, so no triangle has these sides.
+
+**Finding an obtuse angle with arcsine**
+
+After the third side is found, the Law of Sines is used for the angle opposite the longest side. Arcsine only returns angles up to $90°$, so an obtuse angle comes out as its acute supplement.
+
+Wrong working: $a = 10$, $b = 4$, $C = 40°$. The Law of Cosines gives $c^2 = 116 - 80\\cos 40° \\approx 54.72$, so $c \\approx 7.40$. Then $\\sin A = \\frac{10\\sin 40°}{7.40} \\approx 0.869$, so $A \\approx 60.3°$, which leaves $B \\approx 79.7°$.
+
+Right working: $\\cos A = \\frac{b^2 + c^2 - a^2}{2bc} = \\frac{16 + 54.72 - 100}{2(4)(7.40)} \\approx -0.495$, so $A \\approx 119.7°$ and $B \\approx 20.3°$.
+
+Why it happens: the Law of Sines is quicker than the Law of Cosines, and the acute value it returns raises no alarm.
+
+How to check: the largest angle faces the longest side. With $A \\approx 60.3°$ and $B \\approx 79.7°$, the shortest side $b = 4$ would face the largest angle, which is impossible.
+
+**Using an angle that is not between the sides**
+
+The area formula $\\frac{1}{2}ab\\sin C$ needs the angle formed by the two sides in it. Another angle of the triangle is used instead.
+
+Wrong working: in the triangle with $a = 8$, $b = 6$, $C = 50°$, the angle $A \\approx 82.0°$ is used: $\\frac{1}{2}(8)(6)\\sin 82.0° \\approx 23.8$.
+
+Right working: the sides $a$ and $b$ meet at $C$, so the area is $\\frac{1}{2}(8)(6)\\sin 50° \\approx 24 \\times 0.766 \\approx 18.4$.
+
+Why it happens: the formula is remembered as "two sides and an angle", without the word included.
+
+How to check: the area does not depend on which pair of sides is used. With $c \\approx 6.19$ and $B \\approx 48.0°$, the sides $a$ and $c$ meet at $B$, and $\\frac{1}{2}(8)(6.19)\\sin 48.0° \\approx 18.4$ as well.
+
+**Using the perimeter instead of the semi-perimeter**
+
+Heron&apos;s formula uses $s = \\frac{a + b + c}{2}$, half the perimeter. The halving is skipped and the full perimeter is used.
+
+Wrong working: for sides 5, 7, 9, $s = 21$ gives $\\sqrt{21 \\cdot 16 \\cdot 14 \\cdot 12} = \\sqrt{56448} \\approx 237.6$.
+
+Right working: $s = 10.5$, so the area is $\\sqrt{10.5 \\cdot 5.5 \\cdot 3.5 \\cdot 1.5} = \\sqrt{303.1875} \\approx 17.41$.
+
+Why it happens: the letter $s$ looks as if it stands for the sum of the sides, and the halving is easy to drop when the formula is written from memory.
+
+How to check: the area is at most half the product of any two sides, since $\\sin C \\leq 1$. For the sides 7 and 9 that bound is $\\frac{1}{2}(7)(9) = 31.5$, so $237.6$ is impossible.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1593,8 +1683,40 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
     ],
   };
 
+  const heronAnatomy = {
+    header: {
+      kicker: 'the formula, part by part',
+      title: "Heron's formula",
+      lede: 'the area of a triangle from its three sides alone, with no angle needed',
+    },
+    formula: [
+      { kind: 'part', id: 'area', children: [ { kind: 'var', text: 'A' } ] },
+      { kind: 'op', text: '=' },
+      { kind: 'rad', children: [
+        { kind: 'part', id: 's', children: [ { kind: 'var', text: 's' } ] },
+        { kind: 'part', id: 'f', children: [
+          { kind: 'op', text: '(', tight: true }, { kind: 'var', text: 's' }, { kind: 'op', text: '−' }, { kind: 'var', text: 'a' }, { kind: 'op', text: ')', tight: true },
+          { kind: 'op', text: '(', tight: true }, { kind: 'var', text: 's' }, { kind: 'op', text: '−' }, { kind: 'var', text: 'b' }, { kind: 'op', text: ')', tight: true },
+          { kind: 'op', text: '(', tight: true }, { kind: 'var', text: 's' }, { kind: 'op', text: '−' }, { kind: 'var', text: 'c' }, { kind: 'op', text: ')', tight: true },
+        ] },
+      ] },
+    ],
+    parts: [
+      { id: 'area', chip: 'A', title: 'Area', side: 'top',
+        tip: 'The area, from the three side lengths alone.',
+        desc: 'No angle and no trigonometric function is needed, but no angle comes out either. If an angle is also wanted, the Law of Cosines is the better start. Example: sides 5, 7, 9 give A = √303.1875 ≈ 17.41.' },
+      { id: 's', chip: 's = (a + b + c)/2', title: 'Semi-perimeter', side: 'bottom',
+        tip: 'Half the perimeter, not the whole of it.',
+        desc: 'Add the three sides and halve. Using the full perimeter is the usual slip, and it gives an area far too large. Example: s = (5 + 7 + 9)/2 = 10.5; with s = 21 the result would be about 237.6.' },
+      { id: 'f', chip: 's − a, s − b, s − c', title: 'Three gaps', side: 'top',
+        tip: 'How far s exceeds each side; all must be positive.',
+        desc: 'Multiply s by the three gaps and take the square root. A gap that is zero or negative means the lengths break the triangle inequality and form no triangle. Example: 10.5 − 5 = 5.5, 10.5 − 7 = 3.5, 10.5 − 9 = 1.5, and 10.5 × 5.5 × 3.5 × 1.5 = 303.1875.' },
+    ],
+  };
+
    return {
       props:{
+    heronAnatomy,
     lawChoiceCases,
     demoUnits,
          sectionsContent,
@@ -1618,7 +1740,7 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function SinesCosinesLawPage({lawChoiceCases, 
+export default function SinesCosinesLawPage({heronAnatomy, lawChoiceCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1743,6 +1865,16 @@ export default function SinesCosinesLawPage({lawChoiceCases,
           sectionsContent.obj9.content,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="herons-formula-anatomy"
+            title="Heron's formula, part by part"
+            source="/trigonometry/sines-cosines-law"
+            before={"Taking the formula apart: the area on the left, the semi-perimeter $s$, and the three differences under the root."}
+            after={"The part most often misread is $s$: it is half the perimeter, not the perimeter. When an angle is also needed, the Law of Cosines is the better starting point."}
+          >
+            <FormulaAnatomy data={heronAnatomy} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1751,6 +1883,14 @@ export default function SinesCosinesLawPage({lawChoiceCases,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // NEW capstone section: obj11

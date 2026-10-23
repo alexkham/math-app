@@ -234,6 +234,10 @@ The inequality $\\left(\\frac{1}{3}\\right)^x > 9$ requires more care. Rewrite $
 
 The inequality $5^{x-1} \\leq 125$ rewrites as $5^{x-1} \\leq 5^3$. Base greater than $1$, direction preserved: $x - 1 \\leq 3$, so $x \\leq 4$.
 
+@academic[pitfall,aside:true,width:35%:Keeping the direction with a base below 1
+Turning $\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$ into $x > -2$ keeps the sign, as for base $2$. That includes $x = 0$, where $\\left(\\frac{1}{3}\\right)^0 = 1 < 9$. The solution is $x < -2$.
+[Read more](!#pitfalls)]@
+
 The procedure is consistent: rewrite both sides with a common base, then read off the inequality between exponents — preserving direction if the base exceeds $1$, reversing it if the base is a proper fraction.
 
 To solve your own exponential inequality with each step shown, use the [exponential inequality solver](!/algebra/calculators/inequalities/exponential).`,
@@ -253,6 +257,10 @@ The inequality $9^{x+1} \\geq 27^x$ involves $9 = 3^2$ and $27 = 3^3$. Rewriting
 
 The inequality $\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2$ requires converting both bases. Since $\\frac{1}{4} = 2^{-2}$ and $\\frac{1}{8} = 2^{-3}$, the inequality becomes $(2^{-2})^x > (2^{-3})^2$, or $2^{-2x} > 2^{-6}$. Base $2 > 1$: $-2x > -6$, so $x < 3$.
 
+@academic[pitfall,aside:true,width:35%:Skipping the flip in the exponent step
+Dividing $-2x > -6$ by $-2$ without reversing the sign gives $x > 3$. But $x = 4$ gives $\\left(\\frac{1}{4}\\right)^4 = \\frac{1}{256}$, less than $\\left(\\frac{1}{8}\\right)^2 = \\frac{1}{64}$. The solution is $x < 3$.
+[Read more](!#pitfalls)]@
+
 The algebraic manipulation happens before the directional rule is applied. Simplify first, compare second.`,
   before: ``,
   after: ``,
@@ -270,6 +278,12 @@ The inequality $2^x > -5$ is satisfied by every real $x$, because $2^x$ is alway
 
 The inequality $2^x < -1$ has no solution at all, for the same reason.
 
+@academic[pitfall,aside:true,width:35%:Reading a negative side as no solution
+Since no power of $2$ equals $-5$, $2^x > -5$ is declared to have no solution, as if it were $2^x = -5$. But $2^x > 0 > -5$ for every $x$, so every real $x$ is a solution.
+[Read more](!#pitfalls)]@
+
+In both inequalities the right side is negative, while the left side is a power of a positive base. Which way the inequality points is what separates the two cases: one asks whether a positive quantity can exceed a negative number, the other whether it can fall below one.
+
 When [negative exponents](!/algebra/powers/negative-exponents) appear with variable bases, domain restrictions must be checked. The expression $x^{-2} > 4$ requires $x \\neq 0$, and the solution set must exclude zero regardless of what the algebra produces. Similarly, expressions involving [rational exponents](!/algebra/powers/rational-exponents) with even roots require the base to be non-negative.`,
   before: ``,
   after: ``,
@@ -284,7 +298,7 @@ The inequality $\\frac{1}{4} < 2^x < 16$ sets lower and upper bounds on $2^x$. R
 
 The inequality $\\frac{1}{27} \\leq 3^{x-1} \\leq 81$ rewrites as $3^{-3} \\leq 3^{x-1} \\leq 3^4$. Preserving direction: $-3 \\leq x - 1 \\leq 4$, so $-2 \\leq x \\leq 5$.
 
-With a base between $0$ and $1$, both inequality directions flip. The inequality $\\frac{1}{9} < \\left(\\frac{1}{3}\\right)^x < 3$ rewrites as $\\left(\\frac{1}{3}\\right)^{-2} < \\left(\\frac{1}{3}\\right)^x < \\left(\\frac{1}{3}\\right)^{-1}$. Since $\\frac{1}{3} < 1$, the function is decreasing: $-2 > x > -1$, which reads as $-1 < x < -2$ — but this is empty when written carelessly. Reversing properly: $-2 < x < -1$. Care with the direction at each step prevents this kind of error.
+With a base between $0$ and $1$, both inequality directions flip. The inequality $\\frac{1}{9} < \\left(\\frac{1}{3}\\right)^x < 3$ rewrites as $\\left(\\frac{1}{3}\\right)^{2} < \\left(\\frac{1}{3}\\right)^x < \\left(\\frac{1}{3}\\right)^{-1}$. Since $\\frac{1}{3} < 1$, the function is decreasing, so both comparisons reverse: $2 > x > -1$. Copied carelessly as $2 < x < -1$ it looks empty; read left to right it is $-1 < x < 2$. Care with the direction at each step prevents this kind of error.
 
 Systems involving multiple exponential inequalities with different bases are handled by solving each inequality independently and then intersecting the solution sets.`,
   before: ``,
@@ -375,6 +389,54 @@ Systems involving multiple exponential inequalities with different bases are han
       after:``,
       link:'',
   
+    },
+
+    obj16:{
+      title:`Common Pitfalls`,
+      content:`Three mistakes account for many wrong answers to exponential inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
+
+**Keeping the direction with a base below 1**
+
+The base lies between $0$ and $1$, but the exponents are compared exactly as for a base greater than $1$, so the inequality sign is kept.
+
+Wrong working:
+$$\\left(\\frac{1}{3}\\right)^x > 9 \\implies \\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2} \\implies x > -2$$
+
+Right working: $\\left(\\frac{1}{3}\\right)^x$ is decreasing, so the sign flips when the exponents are compared.
+$$\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2} \\implies x < -2$$
+
+Why it happens: the step "same base, compare the exponents" is first learned with bases like $2$, $3$ and $5$, where it keeps the sign, and the size of the base is not checked.
+
+How to check: test one value from each answer. $x = 0$ lies in the wrong answer, and $\\left(\\frac{1}{3}\\right)^0 = 1$, which is not greater than $9$. A value from the right answer, $x = -3$, gives $\\left(\\frac{1}{3}\\right)^{-3} = 27 > 9$.
+
+**Skipping the flip in the exponent step**
+
+The base is checked, found to be greater than $1$, and the direction is kept. The same direction is then kept again in the linear step that follows, even though that step divides by a negative number.
+
+Wrong working:
+$$\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2 \\implies 2^{-2x} > 2^{-6} \\implies -2x > -6 \\implies x > 3$$
+
+Right working: base $2 > 1$, so $-2x > -6$ is correct. Dividing both sides by $-2$ reverses the sign.
+$$-2x > -6 \\implies x < 3$$
+
+Why it happens: two separate direction rules meet in one problem. The base rule decides the sign when the exponentials are dropped; the ordinary rule for dividing by a negative decides it in the linear step. After "base above $1$, keep the direction", the second rule is easy to skip.
+
+How to check: test a value from the wrong answer. $x = 4$ gives $\\left(\\frac{1}{4}\\right)^4 = \\frac{1}{256}$, which is less than $\\left(\\frac{1}{8}\\right)^2 = \\frac{1}{64}$. A value from the right answer, $x = 2$, gives $\\left(\\frac{1}{4}\\right)^2 = \\frac{1}{16} > \\frac{1}{64}$.
+
+**Reading a negative side as no solution**
+
+The right side is negative, so it cannot be written as a power of the base. The inequality is then treated like the equation with the same two sides, which has no solution.
+
+Wrong working: no exponent gives $2^x = -5$, so $2^x > -5$ is declared to have no solution.
+
+Right working: $2^x > 0$ for every real $x$, and $0 > -5$, so $2^x > -5$ holds for every real $x$. Only the opposite direction, as in $2^x < -5$, has no solution.
+
+Why it happens: equations such as $2^x = -4$ have no solution for exactly this reason, and the same conclusion is carried over to inequalities without looking at which way the sign points.
+
+How to check: substitute any value. $x = 0$ gives $2^0 = 1 > -5$, and even $x = -10$ gives $2^{-10} = \\frac{1}{1024} > -5$.`,
+      before:``,
+      after:``,
+      link:'',
     }
   
   }
@@ -404,7 +466,7 @@ const faqQuestions = {
   },
   obj4: {
     question: "How do you flip a compound inequality with a fractional base?",
-    answer: "Reverse both comparisons and then rewrite the chain so it reads left to right. With $\\frac{1}{3}$ as the base, flipping $-2 < x < -1$ carelessly produces $-2 > x > -1$, which looks like the empty set once transcribed as $-1 < x < -2$. Reorder the endpoints after reversing, and check that the smaller bound ends up on the left.",
+    answer: "Reverse both comparisons and then rewrite the chain so it reads left to right. With $\\frac{1}{3}$ as the base, the exponents $2$ and $-1$ give $2 > x > -1$ after reversing, which looks like the empty set if it is transcribed as $2 < x < -1$; the correct reading is $-1 < x < 2$. Reorder the endpoints after reversing, and check that the smaller bound ends up on the left.",
     sectionId: "5"
   }
 }
@@ -636,6 +698,14 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

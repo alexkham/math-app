@@ -13,6 +13,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 import functionRiemannDiagrams from '@/app/components/functions/riemann/functionRiemannDiagrams'
+import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -343,6 +345,12 @@ $$\\int_a^b f(x)\\, dx$$]@
 
 Positive where $f(x) > 0$, negative where $f(x) < 0$. The integral sums these signed contributions.
 
+@academic[pitfall,aside:true,width:35%:Reading signed area as area
+Taking $\\int_0^{2\\pi} \\sin x\\, dx = 0$ as the area between $\\sin x$ and the axis says the region has no area. Each of the two arches has area $2$, so the area is $2 + |-2| = 4$.
+[Read more](!#pitfalls)]@
+
+When $f$ changes sign on $[a, b]$, the positive and negative contributions are added together and partly cancel. The integral then measures a net amount: for a velocity that can turn negative, the net change in position rather than the total distance covered.
+
 Rigorously, the definite integral arises as a limit of Riemann sums. Partition the interval $[a, b]$ into subintervals, approximate the area with rectangles, and take the limit as the rectangles become infinitely thin. This construction gives precise meaning to "area under a curve."
 `,
     before: ``,
@@ -362,6 +370,12 @@ The constant $C$ is essential.
 @academic[rule_corollary_plain:Since the derivative of any constant is zero, infinitely many functions share the same derivative.]@
 
 The "$+ C$" represents this entire family.
+
+@academic[pitfall,aside:true,width:35%:Forgetting the constant of integration
+Writing $\\int 2x\\, dx = x^2$ keeps one antiderivative only, and a condition such as $F(0) = 5$ then cannot be met, since $x^2$ is $0$ at $x = 0$. With $x^2 + C$ the condition gives $C = 5$ and $F(x) = x^2 + 5$.
+[Read more](!#pitfalls)]@
+
+For example, $x^3$, $x^3 + 7$ and $x^3 - 2$ all have derivative $3x^2$, so each of them is an antiderivative of $3x^2$, and $\\int 3x^2\\, dx = x^3 + C$ names all of them at once. Each choice of $C$ shifts the graph of $x^3$ up or down, and all the shifted graphs have the same slope at every $x$.
 
 Finding antiderivatives is the core skill of indefinite integration. Unlike differentiation, which follows systematic rules, integration often requires insight, technique, and pattern recognition.
 `,
@@ -385,6 +399,12 @@ $$\\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$$
 
 @academic[formulas_link:Browse all calculus formulas
 /calculus/formulas]@
+
+@academic[pitfall,aside:true,width:35%:Integrating a product factor by factor
+Splitting $\\int x \\cdot x\\, dx$ into $\\int x\\, dx \\cdot \\int x\\, dx$ gives $\\frac{x^4}{4} + C$, whose derivative is $x^3$, not $x^2$. Linearity covers sums and constant factors only; here $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
+[Read more](!#pitfalls)]@
+
+Together the two rules break an integrand built from sums and constant multiples into single pieces. A polynomial, for instance, is integrated one power at a time: $\\int (3x^2 + 4x)\\, dx = 3\\int x^2\\, dx + 4\\int x\\, dx = x^3 + 2x^2 + C$.
 
 The Fundamental Theorem of Calculus connects definite and indefinite integrals. If $F$ is any antiderivative of $f$:
 
@@ -465,6 +485,10 @@ Integrals of unbounded functions:
 @academic[formula_callout:Improper Integrals
 $$\\int_0^1 \\frac{1}{\\sqrt{x}}\\, dx = \\lim_{a \\to 0^+} \\int_a^1 \\frac{1}{\\sqrt{x}}\\, dx = 2$$]@
 
+@academic[pitfall,aside:true,width:35%:Missing a blow-up inside the interval
+Applying $F(b) - F(a)$ to $\\int_{-1}^{1} \\frac{1}{x^2}\\, dx$ gives $\\left[-\\frac{1}{x}\\right]_{-1}^{1} = -2$, a negative value for a positive integrand. The integrand is unbounded at $x = 0$, where $\\int_0^1 \\frac{1}{x^2}\\, dx$ already diverges, so the integral diverges.
+[Read more](!#pitfalls)]@
+
 An improper integral converges if the limit exists and is finite; otherwise it diverges. The distinction matters—some infinite regions have finite area, others do not.
 `,
     before: ``,
@@ -490,6 +514,63 @@ Verification is simple: differentiate your answer. The derivative of the antider
     title: `Summary: A Map of the Integrals Subtree`,
     content: `
 The seven subtopics covered in the sections above are different facets of the same underlying tool: recovering totals from rates, and reversing differentiation. The table below collects them in one place, pairing each subtopic with its key idea, the situation that calls for it, and a direct link to its dedicated page. Read it as a navigation map for the rest of this chapter — the row matching a given problem points to where to start.
+`,
+    before: ``,
+    after: ``,
+    link: ``
+  },
+  obj12: {
+    title: `Common Pitfalls`,
+    content: `
+Four mistakes cause many wrong answers in a first course on integration. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
+
+**Reading signed area as area**
+
+A definite integral is computed and its value is reported as the area of the region between the curve and the $x$-axis, even though part of the region lies below the axis.
+
+Wrong working: $\\int_0^{2\\pi} \\sin x\\, dx = \\left[-\\cos x\\right]_0^{2\\pi} = -1 - (-1) = 0$, so the region between $\\sin x$ and the axis on $[0, 2\\pi]$ has area $0$.
+
+Right working: $\\sin x$ is negative on $(\\pi, 2\\pi)$, so split there. $\\int_0^{\\pi} \\sin x\\, dx = 1 - (-1) = 2$ and $\\int_{\\pi}^{2\\pi} \\sin x\\, dx = -1 - 1 = -2$. The area is $2 + |-2| = 4$, while the integral, the net amount, is $0$.
+
+Why it happens: the definite integral is introduced as "the area under a curve", and for a function that stays above the axis the two are the same number.
+
+How to check: an area is never negative, and it is $0$ only when there is no region. A sketch of the graph shows whether the curve crosses the axis inside $[a, b]$; if it does, the integral and the area differ.
+
+**Forgetting the constant of integration**
+
+An indefinite integral is written as a single function, without $+ C$. The answer then names one antiderivative instead of the whole family, and a later condition on the function cannot be used.
+
+Wrong working: $\\int 2x\\, dx = x^2$. Asked for the antiderivative with $F(0) = 5$, the only candidate is $F(x) = x^2$, and $F(0) = 0$, not $5$.
+
+Right working: $\\int 2x\\, dx = x^2 + C$. The condition gives $F(0) = 0 + C = 5$, so $C = 5$ and $F(x) = x^2 + 5$.
+
+Why it happens: a derivative is one function, and the answer to the reverse question is expected to be one function as well. The constant is invisible when the answer is checked by differentiating, because its derivative is $0$.
+
+How to check: two different methods can give answers that look different but differ by a constant. $\\int 2\\sin x \\cos x\\, dx$ comes out as $\\sin^2 x + C$ by one substitution and $-\\cos^2 x + C$ by another; the two differ by $\\sin^2 x + \\cos^2 x = 1$, which the $+ C$ absorbs.
+
+**Integrating a product factor by factor**
+
+Linearity splits an integral of a sum into a sum of integrals. The same splitting is then applied to a product, as if the integral of a product were the product of the integrals.
+
+Wrong working: $\\int x \\cdot x\\, dx = \\int x\\, dx \\cdot \\int x\\, dx = \\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$.
+
+Right working: simplify the integrand first. $x \\cdot x = x^2$, and the power rule gives $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
+
+Why it happens: the sum rule and the constant multiple rule both let the integral pass through, and a product looks like the next case of the same pattern. There is no such rule for products; integration by parts is the technique that handles many of them.
+
+How to check: differentiate the answer. $\\left(\\frac{x^4}{4}\\right)' = x^3$, which is not the integrand $x^2$; $\\left(\\frac{x^3}{3}\\right)' = x^2$, which is.
+
+**Missing a blow-up inside the interval**
+
+The Fundamental Theorem of Calculus is applied to an integrand that is unbounded at a point inside $[a, b]$. The antiderivative is defined at both ends, so nothing seems wrong, but the integral is improper.
+
+Wrong working: $\\int_{-1}^{1} \\frac{1}{x^2}\\, dx = \\left[-\\frac{1}{x}\\right]_{-1}^{1} = -1 - 1 = -2$.
+
+Right working: $\\frac{1}{x^2}$ is unbounded at $x = 0$, so the integral splits there into two improper integrals. $\\int_0^1 \\frac{1}{x^2}\\, dx = \\lim_{a \\to 0^+} \\left(-1 + \\frac{1}{a}\\right) = \\infty$, so that part diverges, and the whole integral diverges.
+
+Why it happens: the evaluation $F(b) - F(a)$ looks only at the endpoints, so a problem in the middle of the interval goes unseen. The theorem needs $f$ to be continuous on all of $[a, b]$.
+
+How to check: $\\frac{1}{x^2}$ is positive everywhere it is defined, so its integral over an interval cannot be negative; the $-2$ is a warning. Before evaluating, look for points in $[a, b]$ where a denominator is $0$.
 `,
     before: ``,
     after: ``,
@@ -650,8 +731,23 @@ const schemas = {
     }),
   };
 
+  const integralTypeTree = {
+    prefaceLabel: 'Before you read',
+    prefaceTitle: 'One symbol, two meanings',
+    preface: 'The integral sign is used for two different objects. Whether limits of integration are written decides which one is meant.',
+    conclusionLabel: 'Takeaway',
+    conclusionTitle: 'Limits mean a number',
+    conclusion: 'With limits the integral is a number; without them it is a family of functions, written with $+ C$.',
+    root: { name: 'The integral', sub: '2 types' },
+    children: [
+      { id: 'def', name: '[Definite](!/calculus/integrals/definite)', symbol: '$\\int_a^b f(x)\\,dx$', items: [ { label: 'Result', text: 'a number' }, { label: 'Means', text: 'area or total change' } ] },
+      { id: 'indef', name: '[Indefinite](!/calculus/integrals/indefinite)', symbol: '$\\int f(x)\\,dx = F(x) + C$', items: [ { label: 'Result', text: 'a family of antiderivatives' } ] },
+    ],
+  };
+
    return {
   props: {
+    integralTypeTree,
     demoUnits,
     sectionsContent,
     introContent,
@@ -672,7 +768,7 @@ const schemas = {
 }
    }
 
-export default function IntegralsPage({seoData, sectionsContent, introContent, obj2Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function IntegralsPage({integralTypeTree, seoData, sectionsContent, introContent, obj2Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -695,6 +791,14 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, o
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
                   <div key={'unit-twoTypes'} dangerouslySetInnerHTML={{ __html: demoUnits.twoTypes }} />,
           `The Fundamental Theorem is the statement that these two meanings agree.`,
+          <DiagramFrame
+            key={'obj2-diagram'}
+            id="integral-types-tree"
+            title="Definite and indefinite integrals"
+            source="/calculus/integrals"
+          >
+            <TopDownTree data={integralTypeTree} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -775,6 +879,14 @@ export default function IntegralsPage({seoData, sectionsContent, introContent, o
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'pitfalls',
+        title:sectionsContent.obj12.title,
+        link:sectionsContent.obj12.link,
+        content:[
+          sectionsContent.obj12.content,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

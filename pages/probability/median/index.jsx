@@ -2101,6 +2101,12 @@ Unlike [expected value](!/probability/expected-value), there's no universal form
 3. Verify both conditions hold at that value
 4. If multiple consecutive values satisfy both conditions, any of them qualifies as a median
 
+@academic[pitfall,aside:true,width:35%:Taking the middle of the listed values
+Picking the middle of the support: for values $1, 2, 3, 4, 5$ with probabilities $0.4, 0.3, 0.1, 0.1, 0.1$ that gives $3$. Accumulating, $F(1) = 0.4$ and $F(2) = 0.7$, so the median is $2$.
+[Read more](!#13)]@
+
+The search runs along the support from the smallest value upward, adding probabilities as it goes. Every value contributes its own weight, so a value that carries a large share of the probability can hold the halfway point by itself, wherever it stands in the list.
+
 ## Medians for Common Discrete Distributions
 
 [Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{a, a+1, \\ldots, b\\}$
@@ -2126,7 +2132,7 @@ For $n=10, p=0.5$, numerical evaluation gives median $= 5$]@
 Median: $m = \\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\rceil$
 
 @academic[example:Example
-For $p = 0.3$, median $= \\lceil 1.98 \\rceil = 2$]@
+For $p = 0.3$, median $= \\lceil 1.94 \\rceil = 2$]@
 
 [Negative Binomial](!/probability/distributions/discrete/negative-binomial) with parameters $r$ and $p$
 
@@ -2225,6 +2231,12 @@ $$e^{-\\lambda m} = 0.5$$]@
 @academic[formula_callout:Median for Continuous Distributions
 $$m = \\frac{\\ln(2)}{\\lambda}$$]@
 
+@academic[pitfall,aside:true,width:35%:Setting the density equal to one half
+Solving $f(m) = 0.5$ instead of $F(m) = 0.5$: for $\\lambda = 2$, $2e^{-2m} = 0.5$ gives $m = \\frac{\\ln 4}{2} \\approx 0.693$. The CDF condition $1 - e^{-2m} = 0.5$ gives $m = \\frac{\\ln 2}{2} \\approx 0.347$.
+[Read more](!#13)]@
+
+The derivation runs entirely through the CDF $F(x) = 1 - e^{-\\lambda x}$, which measures the area under the density $\\lambda e^{-\\lambda x}$ between $0$ and $x$. Solving it once gives the median for every rate at the same time: a larger $\\lambda$ packs the probability closer to $0$, and doubling $\\lambda$ halves the median.
+
 Beta Distribution with parameters $\\alpha, \\beta$
 
 Median: No general closed form except for special cases
@@ -2289,7 +2301,7 @@ On a density curve, the median is the vertical line that splits the area under t
 
 • Continuous distributions typically have a unique median
 • The median can be found by solving $F(m) = 0.5$ or using $F^{-1}(0.5)$
-• Unlike discrete cases, ties are impossible due to the smooth nature of the CDF
+• Ties are rarer than in discrete cases, but a flat stretch of the CDF at height $0.5$ still makes every point of that stretch a median
 • The median is always in the interior of the support for distributions with unbounded support
 • For bounded support, the median may approach but typically doesn't reach the boundaries
   `,
@@ -2390,11 +2402,11 @@ Median: The 50th percentile that divides total probability equally
 
 ## Symmetric Distributions
 
-When distributions mirror themselves around a center point, all three measures collapse to the same value.
+When unimodal distributions mirror themselves around a center point, all three measures collapse to the same value.
 
 [Normal distribution](!/probability/distributions/continuous/normal): median = mean = mode = $\\mu$
 
-[Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1,2,3,4,5\\}$: all three equal $3$
+[Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1,2,3,4,5\\}$: mean and median equal $3$, and every value is a mode
 
 Perfect symmetry forces the probability split, the balance point, and the peak to occupy identical positions.
 
@@ -2459,7 +2471,7 @@ Right-skewed case: Mode sits at the left peak, median slightly right, mean furth
 
 Left-skewed case: Reversed ordering with mean leftmost, mode rightmost.
 
-The median always falls between the mode and mean in skewed distributions, acting as a compromise measure that balances probability division against probability concentration.
+The median usually falls between the mode and mean in skewed distributions, acting as a compromise measure that balances probability division against probability concentration.
   `,
   link: '',
 },
@@ -2504,6 +2516,12 @@ If $g$ is strictly increasing, it preserves the ordering of values, so the 50th 
 @academic[example:Example
 If $X$ has median $5$, then $Y = X^2$ has median $25$ (assuming $X > 0$).]@
 
+@academic[pitfall,aside:true,width:35%:Squaring the median when X can be negative
+Squaring the median of $X$ uniform on $[-1, 1]$ gives $0^2 = 0$. But $P(X^2 \\leq t) = \\sqrt{t}$, which reaches $0.5$ at $t = 0.25$, so the median of $X^2$ is $0.25$.
+[Read more](!#13)]@
+
+The example asks for $X > 0$ because $x^2$ is strictly increasing only on the positive half of the line. There a larger value of $X$ always gives a larger value of $X^2$, so the order of the outcomes survives the transformation and the value with half the probability below it keeps its place.
+
 This property holds for the median and [mode](!/probability/mode) but fails for the [mean](!/probability/expected-value).
 
 ## Robustness to Outliers
@@ -2536,7 +2554,7 @@ Skewed distributions separate median from [mean](!/probability/expected-value), 
 The median reveals nothing about [variance](!/probability/variance) or spread. Two distributions can share the same median while having vastly different variability.
 
 @academic[example:Example
-[Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have median $0$, yet spread differs by a factor of 100.]@
+[Normal distributions](!/probability/distributions/continuous/normal) $N(0, 1)$ and $N(0, 100)$ both have median $0$, yet their standard deviations are $1$ and $10$.]@
 
 The median operates independently of scale—it tracks the probability midpoint, not dispersion.
 
@@ -2589,6 +2607,12 @@ If multiple consecutive values satisfy both conditions, any of them qualifies as
 Compute CDF values for $k = 0, 1, 2, \\ldots, 10$. The CDF reaches $F(5) = 0.623 \\geq 0.5$, and $P(X \\geq 5) = 0.623 \\geq 0.5$.
 
 Median = $5$.]@
+
+@academic[pitfall,aside:true,width:35%:Looking for an exact half on a discrete CDF
+Requiring $F(m) = 0.5$ here finds no $k$, since $F$ jumps from $F(4) \\approx 0.377$ to $F(5) \\approx 0.623$; interpolating gives $4.5$, which is not a median. The median is the first $k$ with $F(k) \\geq 0.5$: $m = 5$.
+[Read more](!#13)]@
+
+Between neighbouring values of the support the CDF of a discrete variable stays flat, and at each value it rises in a single step. The size of each step is the probability of that value, so for the binomial the largest steps sit near the centre of the distribution.
 
 **Shortcut for known distributions**: Many standard distributions have analytical approximations or tables:
 • [Geometric](!/probability/distributions/discrete/geometric): median = $\\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\rceil$
@@ -2679,6 +2703,12 @@ Data $\\{3, 7, 1, 9\\}$
 Sorted: $\\{1, 3, 7, 9\\}$
 
 Median = $\\frac{3 + 7}{2} = 5$.]@
+
+@academic[pitfall,aside:true,width:35%:Forgetting to sort the data
+Taking the middle entry as recorded: for $\\{3, 7, 1, 9, 5\\}$ the third entry is $1$. Sorted, the list is $\\{1, 3, 5, 7, 9\\}$ and the median is $5$.
+[Read more](!#13)]@
+
+In both examples the median's place in the list is set by the sample size alone: position $\\frac{n+1}{2}$, which is the third value for $n = 5$ and falls halfway between the second and third for $n = 4$. The values themselves decide only what sits at that place.
 
 ## Visual Methods
 
@@ -3054,6 +3084,80 @@ When data is naturally ranked but not numerically meaningful (like satisfaction 
 
 Calculating a mean of $\\{$poor, fair, good, excellent$\\}$ coded as $\\{1,2,3,4\\}$ assumes equal spacing that may not exist. The median respects the ordering without assuming equal intervals.
 
+**Taking the middle of the listed values**
+
+The support of a discrete variable is written in order, and the value in the middle of that list is taken as the median, as if every value had the same probability.
+
+Wrong working, for values $1, 2, 3, 4, 5$ with probabilities $0.4, 0.3, 0.1, 0.1, 0.1$:
+$$\\text{middle of } \\{1, 2, 3, 4, 5\\} = 3$$
+
+Right working: accumulate the probabilities and stop at the first value where the total reaches $0.5$.
+$$F(1) = 0.4, \\quad F(2) = 0.4 + 0.3 = 0.7 \\geq 0.5$$
+Both conditions hold at $2$: $P(X \\leq 2) = 0.7$ and $P(X \\geq 2) = 0.6$. The median is $2$.
+
+Why it happens: for a list of data, or for a uniform distribution, the middle position is the median, and the habit carries over to distributions whose values carry unequal weights.
+
+How to check: at the proposed median, add the probabilities on each side. At $3$, $P(X \\geq 3) = 0.3$, which is below $0.5$, so $3$ fails the second condition.
+
+**Setting the density equal to one half**
+
+For a continuous variable, the condition "half the probability" is applied to the density $f$ instead of to the CDF $F$.
+
+Wrong working, for the exponential distribution with $\\lambda = 2$:
+$$2e^{-2m} = 0.5 \\implies e^{-2m} = 0.25 \\implies m = \\frac{\\ln 4}{2} \\approx 0.693$$
+
+Right working: the area to the left of $m$ must be one half.
+$$1 - e^{-2m} = 0.5 \\implies e^{-2m} = 0.5 \\implies m = \\frac{\\ln 2}{2} \\approx 0.347$$
+
+Why it happens: for a discrete variable the probabilities are read straight from the PMF, and the density looks like the continuous version of it. But a density value is not a probability; only areas under the density are.
+
+How to check: put the answer back into the CDF. $F(0.693) = 1 - e^{-1.386} = 1 - 0.25 = 0.75$, so three quarters of the probability lies below the wrong answer, not half.
+
+**Squaring the median when X can be negative**
+
+The rule $\\text{median}(g(X)) = g(\\text{median}(X))$ is applied with $g(x) = x^2$ to a variable that takes both negative and positive values, where $x^2$ is not monotonic.
+
+Wrong working, for $X$ uniform on $[-1, 1]$:
+$$\\text{median}(X) = 0 \\implies \\text{median}(X^2) = 0^2 = 0$$
+
+Right working: find the CDF of $Y = X^2$ directly. For $0 \\leq t \\leq 1$:
+$$P(X^2 \\leq t) = P(-\\sqrt{t} \\leq X \\leq \\sqrt{t}) = \\frac{2\\sqrt{t}}{2} = \\sqrt{t}$$
+Setting $\\sqrt{t} = 0.5$ gives $t = 0.25$, so the median of $X^2$ is $0.25$.
+
+Why it happens: the rule is stated for strictly monotonic $g$, and squaring is usually met on positive numbers, where it is increasing. On $[-1, 1]$ it folds the negative half onto the positive one, so values from both ends of $X$ land at the top of $X^2$.
+
+How to check: $X^2$ is never negative, so a median of $0$ would need half the probability at or below $0$. But $P(X^2 \\leq 0) = P(X = 0) = 0$.
+
+**Looking for an exact half on a discrete CDF**
+
+The continuous condition $F(m) = 0.5$ is applied to a discrete variable, whose CDF rises in steps and usually never takes the value $0.5$.
+
+Wrong working, for the binomial with $n = 10$, $p = 0.5$:
+$$F(4) \\approx 0.377, \\quad F(5) \\approx 0.623$$
+No $k$ gives $F(k) = 0.5$, so either the median is declared not to exist, or the two values are interpolated:
+$$m = 4 + \\frac{0.5 - 0.377}{0.623 - 0.377} = 4.5$$
+
+Right working: take the first value where the CDF reaches or passes $0.5$, and check both conditions there.
+$$F(5) \\approx 0.623 \\geq 0.5, \\quad P(X \\geq 5) = 1 - F(4) \\approx 0.623 \\geq 0.5$$
+The median is $5$.
+
+Why it happens: $F(m) = 0.5$ is the first definition most learners meet, and it works in every continuous example. For a discrete variable the CDF jumps over $0.5$ between two neighbouring values.
+
+How to check: test both conditions at the answer. At $4.5$, $P(X \\leq 4.5) = F(4) \\approx 0.377$, which is below one half, so $4.5$ is not a median.
+
+**Forgetting to sort the data**
+
+The sample median is read from the middle position of the data as they were recorded, before the values are put in order.
+
+Wrong working, for the data $\\{3, 7, 1, 9, 5\\}$: with $n = 5$ the middle position is the third, and the third entry is $1$.
+
+Right working: sort first, then take the middle position.
+$$\\{1, 3, 5, 7, 9\\} \\implies \\text{median} = 5$$
+
+Why it happens: the position formula $\\frac{n+1}{2}$ is applied mechanically. It gives a position, and a position only means something in a sorted list.
+
+How to check: count the values on each side of the answer. With $1$ there are no values below it and four above, while a median of five values has two on each side.
+
 ## Pitfalls at a Glance
 
 The table below packages the most frequent errors into a single reference, pairing each mistake with the underlying confusion and the correct view.
@@ -3120,7 +3224,7 @@ Right skew: mode $< $ median $< $ mean
 
 Left skew: mean $< $ median $< $ mode
 
-Symmetric: mode = median = mean
+Symmetric unimodal: mode = median = mean
 
 ## Specific Distribution Families
 
