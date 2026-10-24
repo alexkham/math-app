@@ -266,7 +266,9 @@ Always [simplify](!/algebra/roots/simplifying) each radical before attempting to
 Writing $\\sqrt{2} + \\sqrt{3} = \\sqrt{5}$ adds what is under the radical signs. But $\\sqrt{2} + \\sqrt{3} \\approx 3.15$, while $\\sqrt{5} \\approx 2.24$. Unlike radicals do not combine, so $\\sqrt{2} + \\sqrt{3}$ is already the final form.
 [Read more](!#pitfalls)]@
 
-Addition of radicals works like collecting like terms. The radical part acts as a common factor, so $3\\sqrt{5} + 7\\sqrt{5} = (3 + 7)\\sqrt{5} = 10\\sqrt{5}$, in the same way that $3x + 7x = (3 + 7)x = 10x$. Simplifying first is what reveals such a common factor when the radicals do not look alike at the start.`,
+Addition of radicals works like collecting like terms. The radical part acts as a common factor, so $3\\sqrt{5} + 7\\sqrt{5} = (3 + 7)\\sqrt{5} = 10\\sqrt{5}$, in the same way that $3x + 7x = (3 + 7)x = 10x$. Simplifying first is what reveals such a common factor when the radicals do not look alike at the start.
+
+@academic[punchline:A radical part works like a variable: only matching ones combine, and simplifying first shows which ones match.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -404,6 +406,11 @@ $$( 3 + \\sqrt{2})(3 - \\sqrt{2}) = 9 - 2 = 7$$]@
 @academic[formula_callout:Conjugates
 $$(\\sqrt{7} + \\sqrt{3})(\\sqrt{7} - \\sqrt{3}) = 7 - 3 = 4$$]@
 
+@academic[fact,aside:true,width:35%:Powers that nearly hit whole numbers
+$(1 + \\sqrt{2})^{10} \\approx 6725.99985$. Its conjugate's power $(1 - \\sqrt{2})^{10} \\approx 0.00015$ is tiny, and the two add up to exactly $6726$, since every term carrying $\\sqrt{2}$ cancels.]@
+
+The cancellation does not depend on multiplying. In $a + \\sqrt{b}$ and $a - \\sqrt{b}$, every term that carries $\\sqrt{b}$ comes with opposite signs, so the same thing happens when the two are added: $(3 + \\sqrt{2}) + (3 - \\sqrt{2}) = 6$. Squaring each and adding gives $(11 + 6\\sqrt{2}) + (11 - 6\\sqrt{2}) = 22$, and higher powers behave the same way.
+
 Conjugates are essential for [rationalizing denominators](!/algebra/roots/simplifying) and appear in solving certain [radical equations](!/algebra/roots/equations).`,
     before: ``,
     after: ``,
@@ -461,6 +468,9 @@ $$(\\sqrt{x} + 3)^2 = x + 6\\sqrt{x} + 9$$]@
 
 @academic[formula_callout:Squaring Radical Expressions
 $$(\\sqrt{x + 1} - 2)^2 = (x + 1) - 4\\sqrt{x + 1} + 4 = x + 5 - 4\\sqrt{x + 1}$$]@
+
+@academic[fact,aside:true,width:35%:A nested root that comes apart
+Read backwards, $(\\sqrt{5} + \\sqrt{2})^2 = 7 + 2\\sqrt{10}$ says $\\sqrt{7 + 2\\sqrt{10}} = \\sqrt{5} + \\sqrt{2}$. The root inside a root unravels because $7 = 5 + 2$ and $10 = 5 \\cdot 2$.]@
 
 When solving [radical equations](!/algebra/roots/equations), squaring both sides is the primary technique for eliminating radicals. The expressions above show what results from squaring — and why squaring a binomial with a radical does not fully eliminate the radical unless conjugates are involved.
 
@@ -782,6 +792,7 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          `@academic[punchline:Multiplying a radical binomial by its conjugate always clears the square roots, because the cross terms cancel.]@`,
         ]
     },
     {

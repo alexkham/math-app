@@ -278,7 +278,12 @@ Not every limit exists. When asking what value $f(x)$ approaches as $x \\to a$, 
 
 ## Oscillation
 
+@academic[fact,aside:true,width:35%:No limit at any point
+Dirichlet's function of 1829 is $1$ at every rational $x$ and $0$ at every irrational $x$. Every interval, however small, holds numbers of both kinds, so near any point the values keep jumping between $0$ and $1$, and the limit fails everywhere.]@
+
 A function may bounce between values without settling. Consider $\\sin(1/x)$ as $x \\to 0$. As $x$ shrinks, the argument $1/x$ grows without bound, and the sine oscillates between $-1$ and $1$ infinitely often. No single value $L$ captures what the function approaches.
+
+The swings come faster the closer $x$ gets to $0$. The sine runs through a full cycle each time $1/x$ grows by $2\\pi$, so between $x = 0.01$ and $x = 0.001$ alone the graph completes more than a hundred full cycles.
 
 ## Unbounded Behavior
 
@@ -609,6 +614,9 @@ Limits formalize the intuition of "getting arbitrarily close." The notation
 
 @academic[formula_callout:Summary: Navigating the Limits Subtree
 $$\\lim_{x \\to a} f(x) = L$$]@
+
+@academic[fact,aside:true,width:35%:Ghosts of departed quantities
+Newton and Leibniz divided by a tiny increment and then dropped it as if it were zero, and in 1734 Bishop Berkeley mocked such vanishing quantities as ghosts. The definition by tolerances, made exact by Cauchy and Weierstrass between the 1820s and the 1860s, answered him without any infinitely small numbers.]@
 
 means that $f(x)$ can be made as close to $L$ as desired by taking $x$ sufficiently close to $a$. The function need not be defined at $a$, and even if it is, the value $f(a)$ plays no role in determining the limit. Only the approach matters.
 

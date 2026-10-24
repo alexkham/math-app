@@ -482,6 +482,11 @@ $$\\frac{\\sin x(\\cos h - 1) + \\cos x \\sin h}{h} = \\sin x \\cdot \\frac{\\co
 
 The [special limits](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{\\sin h}{h} = 1$ and $\\lim_{h \\to 0} \\frac{\\cos h - 1}{h} = 0$ yield the result: $\\cos x$.
 
+@academic[fact,aside:true,width:35%:Degrees would spoil the formula
+Measured in degrees, $\\frac{d}{dx}[\\sin x^\\circ] = \\frac{\\pi}{180}\\cos x^\\circ \\approx 0.01745\\cos x^\\circ$, because $\\frac{\\sin h}{h}$ tends to $1$ only when $h$ is in radians. Radians are the one unit that makes the extra factor exactly $1$.]@
+
+All the trigonometric formulas on this page measure $x$ in radians. On the unit circle, an angle of $h$ radians cuts off an arc of length exactly $h$, and for small $h$ the height $\\sin h$ of the arc's endpoint is almost the arc itself. That is the geometric content of $\\frac{\\sin h}{h} \\to 1$.
+
 The cosine derivative follows similarly, or by differentiating $\\cos x = \\sin(\\pi/2 - x)$ using the chain rule. The negative sign in $(\\cos x)' = -\\sin x$ is essential and a frequent source of error.
 
 Repeated differentiation cycles with period four: $\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x$. This periodicity extends to [higher-order derivatives](!/calculus/derivatives/higher-order): $\\frac{d^n}{dx^n}[\\sin x] = \\sin(x + n\\pi/2)$.
@@ -954,6 +959,7 @@ export default function PageTemplate({commonDerivativesOutline, seoData, section
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          `@academic[punchline:Every trigonometric derivative comes from those of sine and cosine, through the quotient rule.]@`,
         ]
     },
     {

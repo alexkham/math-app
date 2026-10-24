@@ -1255,7 +1255,9 @@ This single condition captures both closure properties simultaneously.
 Taking $\\{(x, y) : y = x^2\\}$ as a subspace because it contains $(0, 0)$ skips closure: $2 \\cdot (1, 1) = (2, 2)$ is not in the set, since $2 \\neq 2^2$. Containing $\\mathbf{0}$ is necessary but not sufficient, and this set is not a subspace.
 [Read more](!#pitfalls)]@
 
-The requirement that $W$ be nonempty is essential. Once at least one vector $\\mathbf{v}$ is known to lie in $W$, closure under scalar multiplication with $c = 0$ guarantees $\\mathbf{0} = 0\\mathbf{v} \\in W$. So the zero vector belongs to every subspace. Conversely, if $\\mathbf{0} \\notin W$, then $W$ cannot be a subspace — this is often the fastest way to disqualify a candidate.`,
+The requirement that $W$ be nonempty is essential. Once at least one vector $\\mathbf{v}$ is known to lie in $W$, closure under scalar multiplication with $c = 0$ guarantees $\\mathbf{0} = 0\\mathbf{v} \\in W$. So the zero vector belongs to every subspace. Conversely, if $\\mathbf{0} \\notin W$, then $W$ cannot be a subspace — this is often the fastest way to disqualify a candidate.
+
+@academic[punchline:A nonempty subset is a subspace exactly when combining its vectors never leads outside it; the other axioms come free from $V$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1276,6 +1278,9 @@ Every other subspace lies strictly between these two extremes: it contains $\\ma
     content: `@academic[rule_theorem_plain:The subspaces of $\\mathbb{R}^2$ are completely classified: $\\{\\mathbf{0}\\}$, lines through the origin, and $\\mathbb{R}^2$ itself.]@
 
 There is nothing else. Every line through the origin has the form $\\{t\\mathbf{v} : t \\in \\mathbb{R}\\}$ for some nonzero vector $\\mathbf{v}$, and it is straightforward to verify that this set is closed under addition and scalar multiplication.
+
+@academic[fact,aside:true,width:35%:Lines through the eye look like points
+To an eye at the origin, a whole line through the origin is seen end-on as a single point, and a plane through it as a single line. Projective geometry makes this a definition: the points of the projective plane are the lines through the origin of $\\mathbb{R}^3$, and its lines are the planes through the origin.]@
 
 The subspaces of $\\mathbb{R}^3$ are: $\\{\\mathbf{0}\\}$, lines through the origin (dimension $1$), planes through the origin (dimension $2$), and $\\mathbb{R}^3$ itself (dimension $3$).
 
@@ -1351,6 +1356,9 @@ The row space and the null space together account for all of $\\mathbb{R}^n$. Th
     content: `New subspaces can be built from existing ones through set-theoretic operations, though not all operations preserve the subspace property.
 
 The intersection of two subspaces $W_1$ and $W_2$ is always a subspace. If $\\mathbf{u}$ and $\\mathbf{v}$ both lie in $W_1 \\cap W_2$, then $\\mathbf{u} + \\mathbf{v}$ lies in $W_1$ (since $W_1$ is a subspace) and in $W_2$ (since $W_2$ is a subspace), so it lies in $W_1 \\cap W_2$. The same argument works for scalar multiples. The intersection can be anything from $\\{\\mathbf{0}\\}$ (if the two subspaces share only the zero vector) to one of the original subspaces (if one contains the other).
+
+@academic[fact,aside:true,width:35%:Finitely many subspaces never fill $\\mathbb{R}^n$
+Not even a million proper subspaces cover $\\mathbb{R}^n$: each is a flat slice of zero volume, and finitely many zero volumes add up to zero. With scalars $0$ and $1$ and arithmetic mod $2$ this fails, since that plane has only four points and its three lines through the origin cover them all.]@
 
 The union of two subspaces is almost never a subspace. If $\\mathbf{u} \\in W_1 \\setminus W_2$ and $\\mathbf{v} \\in W_2 \\setminus W_1$, the sum $\\mathbf{u} + \\mathbf{v}$ typically lies in neither $W_1$ nor $W_2$, violating closure. The only exception is when one subspace contains the other.
 
@@ -1721,6 +1729,7 @@ export default function SubspacesPage({subspaceOpNest, seoData, sectionsContent,
           >
             <NestedContainment data={subspaceOpNest} />
           </DiagramFrameV2>,
+          `@academic[punchline:Intersections and sums of subspaces are always subspaces; a union almost never is, because closure breaks between the pieces.]@`,
         ]
     },
     {

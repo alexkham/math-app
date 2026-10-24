@@ -592,6 +592,11 @@ $$\\sqrt[3]{\\sqrt{64}} = \\sqrt[6]{64} = 2$$]@
 
 Verification: $\\sqrt{64} = 8$, and $\\sqrt[3]{8} = 2$. Correct.
 
+@academic[fact,aside:true,width:35%:A cube root from the square-root key
+Since $\\frac{1}{3} = \\frac{1}{4} + \\frac{1}{16} + \\frac{1}{64} + \\cdots$, the endless product $\\sqrt[4]{a} \\cdot \\sqrt[16]{a} \\cdot \\sqrt[64]{a} \\cdots$ equals $\\sqrt[3]{a}$ for every $a > 0$. Each factor is the one before it under two more square roots.]@
+
+Square roots stacked inside one another give only indices that are powers of $2$. Two square roots make a fourth root, three make an eighth root, and $k$ of them make a root of index $2^k$. A calculator with nothing but a square-root key can therefore take fourth, eighth and sixteenth roots by pressing the key again and again, but no number of presses lands on an index of $3$.
+
 In exponent notation, this rule becomes transparent:
 
 @academic[formula_callout:Radical of a Radical
@@ -621,6 +626,9 @@ The indices must match. The product and quotient rules require the same index on
 $$\\sqrt{a} \\cdot \\sqrt[3]{b} \\neq \\sqrt[?]{ab}$$]@
 
 To multiply radicals with different indices, convert to [rational exponents](!/algebra/roots/rational-exponents), find a common denominator, then proceed.
+
+@academic[fact,aside:true,width:35%:A one-line proof that $1 = -1$
+Squaring $\\sqrt{-1}$ gives $-1$ by definition, yet $\\sqrt{-1} \\cdot \\sqrt{-1} = \\sqrt{(-1)(-1)} = \\sqrt{1} = 1$. The false step is the product rule, used where its radicands are negative.]@
 
 For even indices, radicands must be non-negative in real numbers. The [properties of radicals](!/algebra/roots/properties) page details how even and odd indices differ. This restriction applies across all the rules: the product rule requires both factors to be non-negative, the quotient rule requires a non-negative numerator and a positive denominator, and the power rule requires a non-negative base whenever the index is even.
 
@@ -660,7 +668,7 @@ Ignoring domain restrictions:
 @academic[formula_callout:Common Errors
 $$\\sqrt{-3} \\cdot \\sqrt{-3} \\neq \\sqrt{9} = 3$$]@
 
-The left side has no real value. Each factor is non-real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in radicals and complex numbers.
+Each factor on the left is non-real, although their product $(i\\sqrt{3})^2 = -3$ is real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in radicals and complex numbers.
 
 Dropping absolute values:
 
@@ -1005,6 +1013,7 @@ export default function RadicalRulesPage({radicalRuleTree, seoData, sectionsCont
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          `@academic[punchline:Under a shared index, a root of a product splits into a product of roots, and that split frees perfect powers.]@`,
         ]
     },
     {
@@ -1021,6 +1030,7 @@ export default function RadicalRulesPage({radicalRuleTree, seoData, sectionsCont
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `@academic[punchline:Under a radical the exponent goes on top and the index below, and the root may be taken before or after the power.]@`,
         ]
     },
     {
@@ -1042,6 +1052,7 @@ export default function RadicalRulesPage({radicalRuleTree, seoData, sectionsCont
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:The radical rules hold only for matching indices and, under even roots, non-negative radicands; outside those limits they produce false results.]@`,
         ]
     },
     {

@@ -931,6 +931,11 @@ The zero vector is orthogonal to every vector, since $\\mathbf{0} \\cdot \\mathb
 
 In $\\mathbb{R}^3$, the standard basis vectors $\\mathbf{e}_1 = (1, 0, 0)$, $\\mathbf{e}_2 = (0, 1, 0)$, $\\mathbf{e}_3 = (0, 0, 1)$ are mutually orthogonal — every pair has dot product zero. The [cross product](!/linear-algebra/vectors/cross-product) $\\mathbf{a} \\times \\mathbf{b}$ produces a vector orthogonal to both $\\mathbf{a}$ and $\\mathbf{b}$, constructing perpendicularity from any two non-parallel inputs.
 
+@academic[fact,aside:true,width:35%:No two cube diagonals are perpendicular
+The long diagonals of a cube point along $(\\pm 1, \\pm 1, \\pm 1)$, and the dot product of two such vectors is a sum of three terms $\\pm 1$: an odd number, never $0$. A four-dimensional cube does have four mutually perpendicular diagonals, along $(1, 1, 1, 1)$, $(1, 1, -1, -1)$, $(1, -1, 1, -1)$ and $(1, -1, -1, 1)$.]@
+
+Integer examples are easy to find in $\\mathbb{R}^3$ as well. Besides the standard basis, the vectors $(1, 2, 2)$, $(2, 1, -2)$ and $(2, -2, 1)$ are mutually orthogonal: the three pairs have dot products $2 + 2 - 4 = 0$, $2 - 4 + 2 = 0$ and $4 - 2 - 2 = 0$, and all three vectors have the same length $3$.
+
 Orthogonality is the foundation of coordinate systems. Axes that are perpendicular allow each coordinate to be read independently — changing one coordinate does not affect any other. This independence is what makes orthogonal bases so powerful.`,
     before: ``,
     after: ``,
@@ -960,7 +965,12 @@ The most important structural consequence is the orthogonal decomposition. Every
 @academic[formula_callout:Orthogonal Complements
 $$\\mathbf{v} = \\mathbf{w} + \\mathbf{w}^\\perp$$]@
 
-where $\\mathbf{w} \\in W$ and $\\mathbf{w}^\\perp \\in W^\\perp$. The two components are perpendicular to each other: $\\mathbf{w} \\cdot \\mathbf{w}^\\perp = 0$. This decomposition is the geometric heart of [projection](!/linear-algebra/orthogonality/projections): $\\mathbf{w}$ is the projection of $\\mathbf{v}$ onto $W$, and $\\mathbf{w}^\\perp$ is the residual.`,
+@academic[fact,aside:true,width:35%:The double complement can outgrow $W$
+In the space of sequences $(x_1, x_2, \\ldots)$ with $x_1^2 + x_2^2 + \\cdots$ finite, let $W$ hold the sequences with only finitely many nonzero entries. Every $(0, \\ldots, 0, 1, 0, \\ldots)$ lies in $W$, so only $\\mathbf{0}$ is perpendicular to all of $W$: $W^\\perp = \\{\\mathbf{0}\\}$, and $(W^\\perp)^\\perp$ is the whole space, which also holds $(1, \\frac{1}{2}, \\frac{1}{3}, \\ldots)$.]@
+
+where $\\mathbf{w} \\in W$ and $\\mathbf{w}^\\perp \\in W^\\perp$. The two components are perpendicular to each other: $\\mathbf{w} \\cdot \\mathbf{w}^\\perp = 0$. This decomposition is the geometric heart of [projection](!/linear-algebra/orthogonality/projections): $\\mathbf{w}$ is the projection of $\\mathbf{v}$ onto $W$, and $\\mathbf{w}^\\perp$ is the residual.
+
+Both dimension statements above are proved for $\\mathbb{R}^n$, where every subspace has a finite dimension. Orthogonal complements are defined in exactly the same way in spaces of infinite sequences, with the dot product replaced by the infinite sum $x_1 y_1 + x_2 y_2 + \\cdots$, and in spaces of functions, where it becomes an integral. There a subspace can have infinitely many independent directions, and the count $\\dim(W) + \\dim(W^\\perp) = n$ has no number $n$ to reach.`,
     before: ``,
     after: ``,
     link: ``,
@@ -996,7 +1006,9 @@ These two pairs of complements are the structural backbone of projection and [le
 
 [Least-squares](!/linear-algebra/orthogonality/least-squares) approximation — the best approximate solution when $A\\mathbf{x} = \\mathbf{b}$ has no exact solution — reduces to projecting $\\mathbf{b}$ onto the column space. The normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ are a direct consequence of the orthogonality condition on the residual.
 
-[Orthogonal matrices](!/linear-algebra/matrix/types) preserve lengths and angles, making them numerically stable in computation. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) converts any basis into an orthogonal one, ensuring these benefits are always available.`,
+[Orthogonal matrices](!/linear-algebra/matrix/types) preserve lengths and angles, making them numerically stable in computation. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) converts any basis into an orthogonal one, ensuring these benefits are always available.
+
+@academic[punchline:Perpendicular directions do not interfere, so each piece of a problem is solved on its own, with one dot product.]@`,
     before: ``,
     after: ``,
     link: ``,

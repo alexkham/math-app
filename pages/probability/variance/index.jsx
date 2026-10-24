@@ -1365,7 +1365,10 @@ This measure gives us our first quantitative tool for describing not where a dis
       content:`
 Variance captures how spread out a [random variable's](!/probability/random-variables) outcomes are around its [expected value](!/probability/expected-value). It quantifies the degree of fluctuation, inconsistency, or variability we can expect from the random process.
 
-When a [random variable](!/probability/random-variables) has low variance, its outcomes cluster tightly near the[mean(expected value)](!/probability/expected-value). Most realizations fall close to what we expect. When variance is high, outcomes scatter widely—some fall far above the mean, others far below, creating unpredictability in individual observations.
+@academic[fact,aside:true,width:35%:The widest spread on an interval
+A variable that never leaves $[a, b]$ has variance at most $\\frac{(b-a)^2}{4}$, so a score out of 10 has $\\sigma \\le 5$. Only a fair coin between the two ends reaches it: no value lies farther than $\\frac{b-a}{2}$ from the midpoint.]@
+
+When a [random variable](!/probability/random-variables) has low variance, its outcomes cluster tightly near the [mean (expected value)](!/probability/expected-value). Most realizations fall close to what we expect. When variance is high, outcomes scatter widely—some fall far above the mean, others far below, creating unpredictability in individual observations.
 
 [Expected value](!/probability/expected-value) alone tells us the center of a distribution but says nothing about reliability or concentration. Two [random variables](!/probability/random-variables) can share the same mean yet behave completely differently: one might produce nearly constant outcomes while the other swings wildly. Variance distinguishes between these cases.
 
@@ -1584,6 +1587,9 @@ square:{
       content:`
 The definition of variance requires squaring each deviation before averaging. This choice is not arbitrary—it serves several mathematical and practical purposes.
 
+@academic[fact,aside:true,width:35%:No centre beats the mean
+Measured by squared distance, the mean is the closest single point to $X$: $E[(X - c)^2] = \\mathrm{Var}(X) + (\\mu - c)^2$, so any other centre $c$ adds the square of its miss. The variance is the smallest average that any centre can achieve.]@
+
 First, squaring prevents cancellation. If we simply averaged the raw deviations $(X - \\mu)$ without squaring, positive and negative deviations would cancel each other out, always yielding zero. Squaring ensures all deviations contribute positively to the measure.
 
 Second, squaring emphasizes larger deviations more heavily than smaller ones. A deviation of 10 contributes 100 to the variance, while a deviation of 1 contributes only 1. This makes variance sensitive to outliers and extreme values, which is often desirable when assessing risk or variability.
@@ -1672,6 +1678,8 @@ $$E\\!\\left[(X - \\mu)^k\\right]$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[punchline:Shifting a variable leaves its variance unchanged, while scaling it by $a$ multiplies the variance by $a^2$.]@
+
 `,
       before:``,
       after:``,
@@ -1730,7 +1738,9 @@ $$\\operatorname{Var}(X) = E\\!\\left[\\operatorname{Var}(X \\mid Y)\\right] + \
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
-For a deeper understanding of how variables interact, see the [covariance](!/probability/covariance) page.`,
+For a deeper understanding of how variables interact, see the [covariance](!/probability/covariance) page.
+
+@academic[punchline:For independent variables, variances add even for a difference; dependence adds a covariance term that can raise or lower the total.]@`,
       before:``,
       after:``,
   
@@ -1738,7 +1748,7 @@ For a deeper understanding of how variables interact, see the [covariance](!/pro
     distributions:{
       title:`Variance in Standard Distributions`,
       content:`
-Many commonly used probability distributions have closed-form expressions for their variance. The following table provides these formulas without derivation:
+Many commonly used probability distributions have closed-form expressions for their variance. The formulas below are given without derivation:
 
 **Bernoulli distribution** (parameter $p$):
 @academic[formula_callout:Bernoulli Variance
@@ -1904,7 +1914,7 @@ Variance is built directly from expectation. The formula $\\mathrm{Var}(X) = \\m
 When working with multiple random variables, covariance extends the concept of variance to measure how two variables vary together. Variance is actually a special case of covariance: 
 
 @academic[formula_callout:Connections to Other Probability Concepts
-$$\\mathrm{Var}(X) = \\mathrm{Cov}(X, X)$$. ]@
+$$\\mathrm{Var}(X) = \\mathrm{Cov}(X, X)$$]@
 
 See the [covariance](!/probability/covariance) page.
 

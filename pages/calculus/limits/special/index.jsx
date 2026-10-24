@@ -509,6 +509,11 @@ $$\\cos x < \\frac{\\sin x}{x} < 1$$]@
 
 As $x \\to 0$, $\\cos x \\to 1$, so $\\dfrac{\\sin x}{x}$ is squeezed to $1$.
 
+@academic[fact,aside:true,width:35%:Why a pendulum keeps time
+The pull that brings a pendulum back is proportional to $\\sin \\theta$. Replacing $\\sin \\theta$ by $\\theta$ gives the period $2\\pi\\sqrt{L/g}$, the same for every width of swing; the exact period at $10^\\circ$ is only $0.19\\%$ longer, at $30^\\circ$ about $1.7\\%$.]@
+
+Read as an approximation, the limit says that for a small angle measured in radians, $\\sin x$ and $x$ are nearly the same number: $\\sin 0.1 \\approx 0.09983$, less than $0.2\\%$ below $0.1$. The relative gap shrinks with the angle, roughly like $\\frac{x^2}{6}$. This is why physics and engineering often replace $\\sin x$ by $x$ as long as an angle stays small: $x$ is far easier to compute with, and the error stays under control.
+
 This limit determines the derivative of $\\sin x$: the fact that $(\\sin x)' = \\cos x$ depends entirely on this result.
 `,
     before: ``,
@@ -600,6 +605,8 @@ An equivalent form:
 
 @academic[formula_callout:The Natural Exponential Limit
 $$\\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$$]@
+
+@academic[punchline:Of all exponential functions, only $e^x$ leaves $x = 0$ with slope exactly $1$, and that is why it is its own derivative.]@
 `,
     before: ``,
     after: ``,
@@ -634,6 +641,11 @@ This can be seen by substituting $u = \\ln(1 + x)$, so $e^u = 1 + x$ and $x = e^
 
 @academic[formula_callout:Related Exponential Limits
 $$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = \\lim_{u \\to 0} \\frac{u}{e^u - 1} = 1$$]@
+
+@academic[fact,aside:true,width:35%:The rule of 72 comes from this limit
+Money growing at $r\\%$ a year doubles in about $\\frac{72}{r}$ years. Since $\\ln(1 + x) \\approx x$, the exact time $\\frac{\\ln 2}{\\ln(1 + r/100)}$ is close to $\\frac{69.3}{r}$; 72 makes up for $\\ln(1 + x)$ lying a little below $x$, and at $8\\%$ the exact time is $9.01$ years.]@
+
+Near $0$, then, $\\ln(1 + x)$ and $x$ are almost the same number: $\\ln 1.05 \\approx 0.0488$, against $0.05$. Growth problems use this constantly. An amount that grows by the fraction $x$ each year is multiplied by $(1 + x)^n$ after $n$ years, so it has doubled once $n \\ln(1 + x) = \\ln 2$, that is, after $\\frac{\\ln 2}{\\ln(1 + x)}$ years. At a rate of $5\\%$ a year that comes to about $14.2$ years.
 `,
     before: ``,
     after: ``,
@@ -1092,6 +1104,7 @@ export default function SpecialPage({specialLimitsOutline, seoData, sectionsCont
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          `@academic[punchline:Every trigonometric limit in this table comes from $\\frac{\\sin x}{x} \\to 1$ by algebra alone, with no new geometry.]@`,
         ]
     },
     {

@@ -305,6 +305,9 @@ const sectionsContent = {
 
 What makes these equations distinct from polynomial equations is the position of the variable. In $x^3 = 8$, the variable is the base and the exponent is a fixed number — this is a polynomial equation, solved by taking a [root](!/algebra/powers/rational-exponents). In $2^x = 8$, the base is fixed and the exponent is the variable — this is an exponential equation, and roots alone will not solve it.
 
+@academic[fact,aside:true,width:35%:Three solutions to $2^x = x^2$
+With $x$ in the exponent on one side and in the base on the other, this equation is neither kind. It has three real solutions: $x = 2$, $x = 4$, and $x \\approx -0.767$, where the falling $x^2$ meets the rising $2^x$. Neither matching bases nor logarithms can isolate the third one.]@
+
 The distinction matters because the techniques are entirely different. Polynomial equations are solved by [factoring](!/algebra/polynomials/factoring), applying the quadratic formula, or extracting roots. Exponential equations require rewriting expressions using the [laws of exponents](!/algebra/powers/exponent-rules/), matching bases, or — when those approaches fail — **logarithms**.`,
     before: ``,
     after: ``,
@@ -389,6 +392,9 @@ $$a^x = a^y \\implies x = y \\qquad (a > 0,\\; a \\neq 1)$$]@
 This works because [exponential functions](!/algebra/powers/exponential-functions) with base $a > 0$, $a \\neq 1$ are one-to-one — different exponents always produce different outputs.
 
 For $2^x = 8$, recognize that $8 = 2^3$. The equation becomes $2^x = 2^3$, so $x = 3$.
+
+@academic[fact,aside:true,width:35%:$3^x + 4^x = 5^x$ has one solution
+It holds at $x = 2$, the $3$-$4$-$5$ right triangle, and nowhere else. Dividing by $5^x$ gives $\\left(\\frac{3}{5}\\right)^x + \\left(\\frac{4}{5}\\right)^x = 1$, and a sum of two falling powers meets each level only once.]@
 
 The method extends to cases where the connection between bases is less obvious. The equation $4^x = 8$ involves different bases, but both are [powers of 2](!/algebra/powers/natural-exponents): $4 = 2^2$ and $8 = 2^3$. Rewriting gives $(2^2)^x = 2^3$, which by the [power of a power rule](!/algebra/powers/exponent-rules/) becomes $2^{2x} = 2^3$. Matching exponents: $2x = 3$, so $x = \\frac{3}{2}$.
 
@@ -870,6 +876,7 @@ export default function ExponentialEquationsPage({expEquationTree, seoData, sect
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+          `@academic[punchline:When one exponent is double another, the equation is a quadratic in $a^x$, and only its positive roots survive.]@`,
         ]
     },
 
@@ -885,6 +892,7 @@ export default function ExponentialEquationsPage({expEquationTree, seoData, sect
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+          `@academic[punchline:When the variable is the base, the reciprocal exponent undoes the power, and an even power calls for both signs.]@`,
         ]
     },
     {

@@ -2176,7 +2176,9 @@ The critical advantage over the normal equations is numerical.
 
 @academic[rule_plain:Forming $A^TA$ squares the [condition number](!/linear-algebra/matrix/rank): $\\kappa(A^TA) = \\kappa(A)^2$.]@
 
-If $A$ has condition number $10^6$, the normal equations work with condition number $10^{12}$, losing $12$ digits of accuracy in double precision. QR avoids this squaring and works with the original condition number $10^6$.`,
+If $A$ has condition number $10^6$, the normal equations work with condition number $10^{12}$, losing $12$ digits of accuracy in double precision. QR avoids this squaring and works with the original condition number $10^6$.
+
+@academic[punchline:Least squares through QR needs one triangular solve and keeps the accuracy that forming $A^TA$ throws away.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2190,9 +2192,14 @@ If $A$ has condition number $10^6$, the normal equations work with condition num
 
 @academic[rule_theorem_plain:Under mild conditions, $A_k$ converges to an upper triangular matrix with the eigenvalues on the diagonal.]@
 
+@academic[fact,aside:true,width:35%:Its inventor never saw it take over
+John Francis published the QR algorithm in 1961, and Vera Kublanovskaya found it independently the same year. Francis left numerical analysis soon after and learned only in 2007 that his method had been named one of the ten most important algorithms of the 20th century.]@
+
 The convergence is driven by the fact that $A_{k+1} = Q_k^T A_k Q_k$ — each iteration is a [similarity](!/linear-algebra/transformations/basis-change) transformation that preserves the eigenvalues while driving the sub-diagonal entries toward zero.
 
-With shifts (replacing $A_k$ by $A_k - \\sigma_k I$ before factoring and adding $\\sigma_k I$ back), convergence accelerates dramatically — cubic convergence for symmetric matrices with the Wilkinson shift. The QR algorithm computes eigenvalues without ever forming the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation), avoiding the severe numerical instability of polynomial root-finding.`,
+With shifts (replacing $A_k$ by $A_k - \\sigma_k I$ before factoring and adding $\\sigma_k I$ back), convergence accelerates dramatically — cubic convergence for symmetric matrices with the Wilkinson shift. The QR algorithm computes eigenvalues without ever forming the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation), avoiding the severe numerical instability of polynomial root-finding.
+
+@academic[punchline:Reversing the factors is a similarity, so the QR algorithm can reshape a matrix freely without ever touching its eigenvalues.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2221,6 +2228,9 @@ $R$ is invertible when $A$ has full column rank (the diagonal entries are the no
     content: `Classical Gram-Schmidt can lose orthogonality in floating-point arithmetic when the columns of $A$ are nearly [dependent](!/linear-algebra/vector-spaces/linear-independence). The computed $\\mathbf{q}_i$'s may fail to be perpendicular to machine precision, and the errors accumulate with each step.
 
 Modified Gram-Schmidt improves stability by updating the remaining vectors in place after each [projection](!/linear-algebra/orthogonality/projections) subtraction, rather than using the original columns throughout. The mathematical result is identical in exact arithmetic, but the numerical behavior is significantly better.
+
+@academic[fact,aside:true,width:35%:At most $n$ mirrors make any orthogonal matrix
+Householder QR on an $n \\times n$ orthogonal matrix, with each diagonal entry kept positive, ends after $n - 1$ reflections with an $R$ that is triangular and orthogonal: the identity, except perhaps a $-1$ in the last corner, which is one more reflection. So every orthogonal matrix is a product of at most $n$ reflections.]@
 
 Householder reflections provide the strongest stability guarantee. Each reflection zeros an entire column below the diagonal in a single, orthogonally-implemented step. The resulting QR factorization is backward stable — the gold standard in numerical linear algebra.
 

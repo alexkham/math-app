@@ -230,7 +230,7 @@ obj2: {
 
 The inequality $2^x > 8$ rewrites as $2^x > 2^3$. Since the base $2$ is greater than $1$, the function is increasing and the inequality preserves direction: $x > 3$.
 
-The inequality $\\left(\\frac{1}{3}\\right)^x > 9$ requires more care. Rewrite $9$ as a power of $\\frac{1}{3}$: since $\\frac{1}{3}^{-2} = 3^2 = 9$, the inequality becomes $\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$. The base $\\frac{1}{3}$ is between $0$ and $1$, so the function is decreasing and the inequality flips: $x < -2$.
+The inequality $\\left(\\frac{1}{3}\\right)^x > 9$ requires more care. Rewrite $9$ as a power of $\\frac{1}{3}$: since $\\left(\\frac{1}{3}\\right)^{-2} = 3^2 = 9$, the inequality becomes $\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$. The base $\\frac{1}{3}$ is between $0$ and $1$, so the function is decreasing and the inequality flips: $x < -2$.
 
 The inequality $5^{x-1} \\leq 125$ rewrites as $5^{x-1} \\leq 5^3$. Base greater than $1$, direction preserved: $x - 1 \\leq 3$, so $x \\leq 4$.
 
@@ -250,6 +250,9 @@ To solve your own exponential inequality with each step shown, use the [exponent
 obj3: {
   title: `Inequalities Requiring Simplification`,
   content: `When the two sides of an inequality do not immediately share a base, the [laws of exponents](!/algebra/powers/exponent-rules/) are needed to rewrite one or both sides before comparison.
+
+@academic[fact,aside:true,width:35%:Matching exponents instead of bases
+$2^{300}$ and $3^{200}$ share no base, but they can share an exponent: $2^{300} = 8^{100}$ and $3^{200} = 9^{100}$. Since $9 > 8$, $3^{200}$ is the larger, by a factor of $\\left(\\frac{9}{8}\\right)^{100}$, over $130{,}000$.]@
 
 The inequality $4^x < 32$ involves $4 = 2^2$ and $32 = 2^5$. Rewriting: $(2^2)^x < 2^5$, so $2^{2x} < 2^5$. Base $2 > 1$, direction preserved: $2x < 5$, giving $x < \\frac{5}{2}$.
 
@@ -648,6 +651,7 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
           sectionsContent.obj2.content,
           <div key={'unit-expFlip'} dangerouslySetInnerHTML={{ __html: demoUnits.expFlip }} />,
           `With 2ˣ > 8 the curve rises and the direction is kept: x > 3.`,
+          `@academic[punchline:Once both sides are powers of one base, the inequality passes to the exponents, and the base decides its direction.]@`,
         ]
     },
 

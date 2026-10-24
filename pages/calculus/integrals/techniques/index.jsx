@@ -288,7 +288,14 @@ Adding the second integral instead of subtracting it gives $\\int x e^x\\, dx = 
 
 The formula comes from integrating the product rule $(uv)' = u'v + uv'$ and solving for $\\int u\\, dv$, which is why the second integral is subtracted. In the example, $u = x$ and $v = e^x$ give $uv = xe^x$, and the integral left over, $\\int v\\, du = \\int e^x\\, dx$, is simple enough to finish at once.
 
+The formula accepts any split of the integrand, even an odd one. For $\\int \\frac{1}{x}\\, dx$, take $u = \\frac{1}{x}$ and $dv = dx$; then $du = -\\frac{1}{x^2}\\, dx$ and $v = x$, and the formula gives $\\int \\frac{1}{x}\\, dx = x \\cdot \\frac{1}{x} - \\int x \\left(-\\frac{1}{x^2}\\right) dx = 1 + \\int \\frac{1}{x}\\, dx$. The split is legal, but it only returns the integral it started from.
+
+@academic[fact,aside:true,width:35%:Parts seems to prove $0 = 1$
+Subtracting $\\int \\frac{1}{x}\\, dx$ from both sides of $\\int \\frac{1}{x}\\, dx = 1 + \\int \\frac{1}{x}\\, dx$ leaves $0 = 1$. Nothing is broken: each indefinite integral stands for the whole family $\\ln|x| + C$, and two members of that family may differ by $1$.]@
+
 **Choosing the first factor:** LIATE guides selection—Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential. Earlier types typically make better choices for $u$.
+
+The two splits above show what the choice decides. In both, the formula moves the derivative from $v$ to $u$: with $u = x$ in $\\int x e^x\\, dx$ the integral left behind is $\\int e^x\\, dx$, simpler than the original, while $u = \\frac{1}{x}$ in $\\int \\frac{1}{x}\\, dx$ leaves the original integral unchanged. A choice is good when the factor chosen as $u$ becomes simpler after differentiation and $dv$ can still be integrated.
 `,
     before: ``,
     after: ``,
@@ -399,7 +406,12 @@ Pattern recognition guides technique selection.
 
 **Partial fractions:** Rational functions with factorable denominators.
 
+@academic[fact,aside:true,width:35%:One substitution for every trig fraction
+With $t = \\tan\\frac{x}{2}$, $\\sin x = \\frac{2t}{1 + t^2}$, $\\cos x = \\frac{1 - t^2}{1 + t^2}$ and $dx = \\frac{2\\, dt}{1 + t^2}$. Every rational expression in $\\sin x$ and $\\cos x$ becomes a rational function of $t$, so partial fractions can always finish it.]@
+
 Multiple techniques often combine. A problem might require substitution followed by parts, or partial fractions followed by a trigonometric integral.
+
+Some combinations are planned from the start. An integrand such as $\\frac{1}{2 + \\cos x}$ is a fraction built from $\\cos x$, with no odd power to save and no radical to replace, so none of the trigonometric patterns above fits it directly. A substitution can still turn it into a rational function of a new variable, and partial fractions take over from there.
 `,
     before: ``,
     after: ``,
@@ -719,6 +731,7 @@ export default function PageTemplate({integrationTechniqueTree, seoData, section
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `@academic[punchline:Integration by parts moves the derivative from one factor to the other, and it pays off only when the integral left behind is simpler.]@`,
         ]
     },
     {
@@ -739,6 +752,7 @@ export default function PageTemplate({integrationTechniqueTree, seoData, section
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          `@academic[punchline:A trigonometric substitution trades a square root for a Pythagorean identity, and the radical collapses to a single trigonometric factor.]@`,
         ]
     },
     {

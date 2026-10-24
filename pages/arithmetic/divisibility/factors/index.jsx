@@ -478,7 +478,14 @@ Reading $36 = 4 \\cdot 9$ as two factors with exponent $1$ gives $(1 + 1)(1 + 1)
 
 The number $100 = 2^2 \\cdot 5^2$ has $(2+1)(2+1) = 9$ factors.
 
-The formula reveals structure that raw listing obscures. A number with many small prime factors has more divisors than a number of similar size with fewer, larger prime factors. The number $60 = 2^2 \\cdot 3 \\cdot 5$ has $12$ factors, while $64 = 2^6$ has only $7$.`,
+The formula reveals structure that raw listing obscures. A number with many small prime factors has more divisors than a number of similar size with fewer, larger prime factors. The number $60 = 2^2 \\cdot 3 \\cdot 5$ has $12$ factors, while $64 = 2^6$ has only $7$.
+
+The same idea says how to build a number with many factors and keep it small: use the smallest primes, and give the larger exponents to the smaller primes. Swapping two exponents so that the larger one sits on the smaller prime keeps the factor count and makes the number smaller: $2 \\cdot 3^2 = 18$ and $2^2 \\cdot 3 = 12$ both have $6$ factors.
+
+@academic[fact,aside:true,width:35%:$720720$ has $240$ factors
+$720720 = 2^4 \\cdot 3^2 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13$ has $(4 + 1)(2 + 1)(1 + 1)^4 = 240$ factors, and no smaller number has as many. It is also the smallest number divisible by every whole number from $1$ to $16$.]@
+
+A number with more factors than every smaller number is called highly composite. The first few are $1, 2, 4, 6, 12, 24, 36, 48, 60, 120$, each of them built from the smallest primes with exponents that never increase from one prime to the next. The number $60$, for example, is the smallest number with $12$ factors. Srinivasa Ramanujan studied these numbers in a long paper published in 1915.`,
     before: ``,
     after: `
     
@@ -491,7 +498,12 @@ The formula reveals structure that raw listing obscures. A number with many smal
     content: `The sum of all positive divisors of $n$ is denoted $\\sigma(n)$. Like the divisor count, it can be computed directly from the prime factorization.
 
 For $n = 12$: the divisors are $1, 2, 3, 4, 6, 12$, and $\\sigma(12) = 1 + 2 + 3 + 4 + 6 + 12 = 28$.`,
-    afterFigure: `For $n = 6$: the divisors are $1, 2, 3, 6$, and $\\sigma(6) = 1 + 2 + 3 + 6 = 12$. The sum of all divisors is twice the number — but more revealing is that the sum of the proper divisors is $1 + 2 + 3 = 6$, equal to $n$ itself. This makes $6$ a perfect number.
+    afterFigure: `@academic[fact,aside:true,width:35%:Every even perfect number has one shape
+When $2^p - 1$ is prime, $n = 2^{p-1}(2^p - 1)$ is perfect, since $\\sigma(n) = (2^p - 1) \\cdot 2^p = 2n$; this gives $6$, $28$, $496$ and $8{,}128$. Euclid proved this around 300 BC, and about 2,000 years later Euler showed that every even perfect number has this shape.]@
+
+For $n = 6$: the divisors are $1, 2, 3, 6$, and $\\sigma(6) = 1 + 2 + 3 + 6 = 12$. The sum of all divisors is twice the number — but more revealing is that the sum of the proper divisors is $1 + 2 + 3 = 6$, equal to $n$ itself. This makes $6$ a perfect number.
+
+The next perfect number, $28 = 2^2 \\cdot 7$, has the same shape as $6 = 2 \\cdot 3$: a power of $2$ times an odd prime. For a number $2^k \\cdot q$ of this shape, the divisors are the powers $1, 2, \\ldots, 2^k$ together with those same powers times $q$, so $\\sigma(2^k q) = (1 + 2 + \\cdots + 2^k)(1 + q) = (2^{k+1} - 1)(q + 1)$. For $28$ this gives $7 \\cdot 8 = 56 = 2 \\cdot 28$.
 
 The relationship between $\\sigma(n)$ and $n$ classifies every positive integer. When $\\sigma(n) - n = n$, the number is perfect. When $\\sigma(n) - n > n$, it is abundant. When $\\sigma(n) - n < n$, it is deficient. Most numbers are deficient; abundance and perfection are the exceptions.`,
     before: ``,
@@ -846,6 +858,7 @@ export default function FactorsPage({seoData, sectionsContent,
                dangerouslySetInnerHTML={{ __html: fsFactorsObj2 }} />,
           sectionsContent.obj2.afterFigure,
           // sectionsContent.obj2.after,
+          `@academic[punchline:Testing up to $\\sqrt{n}$ is enough, because every successful test also yields the partner factor above the root.]@`,
         ]
     },
     {
@@ -955,6 +968,7 @@ export default function FactorsPage({seoData, sectionsContent,
         content:[
           sectionsContent.obj8.content,
           // sectionsContent.obj8.after,
+          `@academic[punchline:Common multiples never run out, and every one of them is a multiple of the LCM.]@`,
         ]
     },
     {
@@ -967,6 +981,7 @@ export default function FactorsPage({seoData, sectionsContent,
                dangerouslySetInnerHTML={{ __html: fsFactorsObj9 }} />,
           sectionsContent.obj9.afterFigure,
           // sectionsContent.obj9.after,
+          `@academic[punchline:The number of factors is set by the exponents in the prime factorization, not by the size of the number.]@`,
         ]
     },
     {

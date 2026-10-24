@@ -1246,7 +1246,14 @@ where $P = P_{\\mathcal{B} \\leftarrow \\mathcal{C}}$ is the change-of-basis mat
 
 The derivation is direct. For any vector $\\mathbf{v}$, the transformation in $\\mathcal{B}$-coordinates reads $[T(\\mathbf{v})]_\\mathcal{B} = A[\\mathbf{v}]_\\mathcal{B}$. Converting to $\\mathcal{C}$-coordinates with $P^{-1} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$: $[T(\\mathbf{v})]_\\mathcal{C} = P^{-1}[T(\\mathbf{v})]_\\mathcal{B} = P^{-1}A[\\mathbf{v}]_\\mathcal{B} = P^{-1}AP[\\mathbf{v}]_\\mathcal{C}$. Since this holds for every $\\mathbf{v}$, the matrix of $T$ in basis $\\mathcal{C}$ is $P^{-1}AP$.
 
-Two matrices related by $A' = P^{-1}AP$ for some invertible $P$ are called similar. Similarity is an equivalence relation: every matrix is similar to itself ($P = I$), similarity is symmetric ($A' = P^{-1}AP$ implies $A = PA'P^{-1}$), and it is transitive.`,
+@academic[fact,aside:true,width:35%:Every matrix is similar to its transpose
+For every square $A$ there is an invertible $P$ with $A^T = P^{-1}AP$, even though rows and columns trade places. Transposing does not change the rank of $A - \\lambda I$ or of any of its powers, and those ranks are exactly what decides similarity.]@
+
+Two matrices related by $A' = P^{-1}AP$ for some invertible $P$ are called similar. Similarity is an equivalence relation: every matrix is similar to itself ($P = I$), similarity is symmetric ($A' = P^{-1}AP$ implies $A = PA'P^{-1}$), and it is transitive.
+
+Similarity can join matrices whose entries look nothing alike. Because $P$ may be any invertible matrix, a triangular matrix can be similar to one with no zero entries at all. Deciding whether two given matrices are similar means finding such a $P$, and the entries alone give little hint of where to look.
+
+@academic[punchline:$P^{-1}AP$ translates new coordinates into old ones, applies $A$, and translates the answer back.]@`,
     before: ``,
     after: ``,
     link: ``,

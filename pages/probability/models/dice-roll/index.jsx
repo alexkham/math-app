@@ -1139,6 +1139,9 @@ The dice roll model is the simplest probability model that captures randomness w
 
 It introduces genuinely categorical behavior, where outcomes are not ordered by default and where events naturally involve grouping and comparison rather than simple success–failure logic.
 
+@academic[fact,aside:true,width:35%:No fixed toss count gives a fair die
+Each sequence of $k$ fair coin tosses has probability $\\frac{1}{2^k}$, so any rule that turns $k$ tosses into a face gives it a probability $\\frac{m}{2^k}$, never $\\frac{1}{6}$. Tossing three coins and starting again on two of the eight results works, but with no upper limit on the number of tosses.]@
+
 Because of this, the dice roll model forms a bridge between binary models and more general discrete models. It provides a foundation for understanding categorical data, aggregation of outcomes, and the construction of complex probability distributions from finite sources of randomness.
 `,
       before:``,
@@ -1453,6 +1456,10 @@ Long stretches without a given face are an ordinary part of repeated rolling. In
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[fact,aside:true,width:35%:Three dice beating each other in turn
+Dice marked 2, 2, 4, 4, 9, 9 and 1, 1, 6, 6, 8, 8 and 3, 3, 5, 5, 7, 7 all have mean 5, yet the first beats the second, the second beats the third, and the third beats the first, each with probability $\\frac{5}{9}$. A win is decided cell by cell on the grid, not by the averages.]@
+
+The faces of a die need not carry the numbers 1 to 6: any six numbers can be written on them, and each choice is a random variable on the same six equally likely outcomes. A die marked 2, 2, 4, 4, 9, 9 has faces summing to 30, so its mean is 5, the same as a die marked 1, 1, 6, 6, 8, 8. Rolling two such dice and asking which shows the larger number compares the two random variables over the 36 cells of the grid, one pair of faces at a time.`,
         ]
     },
     {

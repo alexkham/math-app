@@ -484,6 +484,9 @@ $$\\frac{d}{dx}[\\operatorname{arccot} x] = -\\frac{1}{1 + x^2}$$
 
 Again the derivatives are negatives of each other, following from $\\arctan x + \\text{arccot}\\, x = \\frac{\\pi}{2}$.
 
+@academic[fact,aside:true,width:35%:$\\pi$ hides in the arctangent slope
+Writing $\\frac{1}{1 + x^2} = 1 - x^2 + x^4 - \\cdots$ and undoing the derivative gives $\\arctan x = x - \\frac{x^3}{3} + \\frac{x^5}{5} - \\cdots$, so $\\frac{\\pi}{4} = \\arctan 1 = 1 - \\frac{1}{3} + \\frac{1}{5} - \\cdots$. The Kerala school credited this to Madhava, around 1400, long before Gregory and Leibniz found it in the 1670s.]@
+
 To derive the arctangent formula: let $y = \\arctan x$, so $\\tan y = x$. Differentiating: $\\sec^2 y \\cdot \\frac{dy}{dx} = 1$. Using the identity $\\sec^2 y = 1 + \\tan^2 y = 1 + x^2$ gives $\\frac{dy}{dx} = \\frac{1}{1 + x^2}$.
 
 Unlike arcsine and arccosine, arctangent is defined for all real $x$—no domain restriction. The derivative $\\frac{1}{1 + x^2}$ is always positive, confirming that $\\arctan x$ is strictly increasing. As $x \\to \\pm\\infty$, the derivative approaches zero, reflecting the horizontal asymptotes $y = \\pm\\frac{\\pi}{2}$. The function rises everywhere but flattens out at the extremes.
@@ -609,6 +612,9 @@ $$\\frac{d}{dx}[\\operatorname{arctanh} x] = \\frac{1}{1 - x^2}$$
 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
+
+@academic[fact,aside:true,width:35%:Mercator's map runs on arctanh
+A Mercator map draws latitude $\\varphi$ at height $\\operatorname{arctanh}(\\sin \\varphi)$, in Earth radii. Its rate of growth, $\\frac{\\cos \\varphi}{1 - \\sin^2 \\varphi} = \\sec \\varphi$, matches the map's east-west stretch at that latitude, which is why small shapes keep their angles.]@
 
 Compare with inverse trigonometric derivatives: $\\sqrt{1 - x^2}$ becomes $\\sqrt{x^2 + 1}$ or $\\sqrt{x^2 - 1}$, and $1 + x^2$ becomes $1 - x^2$. The signs inside the expressions flip.
 
@@ -1010,6 +1016,7 @@ export default function PageTemplate({specialDerivativesOutline,
         content:[
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj4Table}}/>,
+          `@academic[punchline:Two functions that add up to a constant have opposite derivatives, so the six formulas are really three.]@`,
         ]
     },
     {

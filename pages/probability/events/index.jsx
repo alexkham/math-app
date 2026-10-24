@@ -938,6 +938,11 @@ Events behave exactly like sets, and this is not an accident. Each event corresp
 This view makes probability easier to work with. Union becomes the event that happens when at least one situation holds. Intersection captures situations that happen together. Complements describe everything outside the event. Relationships such as subsets, equality, and overlap all come directly from basic set structure.
 
 Venn diagrams fit perfectly here: they visualize how events relate, how they overlap, and how they combine. Thinking of events as sets gives a clear geometric intuition that supports every later concept in probability.
+
+@academic[fact,aside:true,width:35%:Two dice, 68 billion events
+A die has $2^6 = 64$ events, but two dice, with only $36$ outcomes, have $2^{36}$, about $68.7$ billion: each extra outcome doubles the count.]@
+
+Because an event is any subset of $\\Omega$, building one comes down to a yes-or-no choice for each outcome: is it in the event or not? For one die that makes six separate choices. Answering no every time gives the empty event, answering yes every time gives the certain event, and every other pattern of answers gives a different event in between. Only a few of these events ever get a name such as "the sum is 7".
 `,
       before:``,
       after:``,
@@ -1429,6 +1434,10 @@ export default function EventsPage({eventTypesOutline,
           sectionsContent.patterns.content,
                   <div key={'unit-atLeastOne'} dangerouslySetInnerHTML={{ __html: demoUnits.atLeastOne }} />,
           `The same move works for any number of dice: P(at least one six) = 1 − (5/6)ⁿ.`,
+          `@academic[fact,aside:true,width:35%:Six rolls, still no sure six
+The chance of at least one six in six rolls is only $1 - \\left(\\frac{5}{6}\\right)^6 \\approx 0.665$: about one set of six rolls in three has no six at all. With $n$ rolls of an $n$-sided die the chance sinks toward $1 - \\frac{1}{e} \\approx 0.632$.]@
+
+The formula also tests a common hunch: a six comes up on one roll in six, so six rolls ought to be enough to see one. In event language, the sample space of six rolls holds $6^6 = 46656$ ordered sequences, and "at least one six" is everything in it except the $5^6 = 15625$ sequences with no six at all. How large that leftover block is decides how safe the hunch is.`,
         ]
     },
     {

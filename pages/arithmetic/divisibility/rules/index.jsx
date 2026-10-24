@@ -577,7 +577,12 @@ The reasoning is identical to the rule for $3$: $10 \\equiv 1 \\pmod{9}$, so eve
 The number $8{,}127$ illustrates the rule: $8 + 1 + 2 + 7 = 18$, and $18 \\div 9 = 2$ exactly, so $9 \\mid 8127$ — as shown below.`,
   afterFigure: `The number $4{,}825$: $4 + 8 + 2 + 5 = 19$, and $19 \\div 9 = 2$ remainder $1$. So $9 \\nmid 4825$.
 
-Since $9 = 3^2$, every number divisible by $9$ is automatically divisible by $3$ — but not the other way around. The number $729$ is divisible by both; the number $12$ is divisible by $3$ but not by $9$.`,
+@academic[fact,aside:true,width:35%:Swapped digits leave a multiple of 9
+Writing $8{,}172$ for $8{,}127$ swaps two digits, and the error $45 = 9 \\cdot 5$ is a multiple of $9$, as it is for every such swap: both numbers have the same digit sum. Bookkeepers whose totals differ by a multiple of $9$ look first for two transposed digits.]@
+
+Since $9 = 3^2$, every number divisible by $9$ is automatically divisible by $3$ — but not the other way around. The number $729$ is divisible by both; the number $12$ is divisible by $3$ but not by $9$.
+
+Because only the digit sum matters, the test for $9$ cannot see the order of the digits. The numbers $8{,}127$, $8{,}172$ and $7{,}281$ all have the digit sum $18$, so all three are multiples of $9$, even though they are three different numbers. The test answers the same way for every rearrangement of the same digits.`,
   before: ``,
   after: ``,
   link: '',
@@ -653,6 +658,9 @@ Common error: testing divisibility by $12$ by checking $2$ and $6$ instead of $4
 obj13: {
   title: `Why These Rules Work`,
   content: `Every divisibility rule is a consequence of how the base $10$ behaves under [modular arithmetic](!/arithmetic/modulo).
+
+@academic[fact,aside:true,width:35%:Seven has a test, but no digit pattern
+On division by $7$, the powers of $10$ leave remainders $1, 3, 2, 6, 4, 5$ and then repeat, too irregular for a digit rule. Yet $7$ divides $10a + b$ exactly when it divides $a - 2b$, since $10(a - 2b) = (10a + b) - 21b$: for $2{,}401$, $240 - 2 = 238$ and $23 - 16 = 7$.]@
 
 A number written in decimal is $d_k \\cdot 10^k + d_{k-1} \\cdot 10^{k-1} + \\cdots + d_1 \\cdot 10 + d_0$. Reducing this expression [modulo](!/arithmetic/modulo) a divisor $n$ replaces each $10^j$ with its remainder modulo $n$, and the pattern of those remainders determines the rule. The symbol $\\equiv$ below reads "is congruent to" — the notation is introduced in the [congruence section](!/arithmetic/modulo#5) of the modulo page.
 
@@ -1082,6 +1090,7 @@ drObj10, demoUnits}) {
       <div key={'obj7-svg'} style={{ maxWidth: '700px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: drObj7 }} />,
       sectionsContent.obj7.afterFigure,
+      `@academic[punchline:Each doubling of the divisor, from $2$ to $4$ to $8$, adds one more final digit to check.]@`,
     ]
 },
 
@@ -1132,6 +1141,7 @@ drObj10, demoUnits}) {
           <div key={'obj11-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj11Table }} />,
           sectionsContent.obj11.after,
+          `@academic[punchline:Test a composite divisor through coprime factors only: factors that share a divisor can both pass while the number fails.]@`,
         ]
     },
     {

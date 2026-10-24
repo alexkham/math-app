@@ -939,6 +939,11 @@ The additive rules, stated formally:
 $$P(A^c) = 1 - P(A)$$
 /probability/formulas#complement_rule]@
 
+@academic[fact,aside:true,width:35%:Four rolls win, twenty-four lose
+At least one six in $4$ rolls has probability $1 - \\left(\\frac{5}{6}\\right)^4 \\approx 0.518$, but at least one double six in $24$ rolls of two dice only $1 - \\left(\\frac{35}{36}\\right)^{24} \\approx 0.491$. Gamblers expected equal odds, since $\\frac{4}{6} = \\frac{24}{36}$; this puzzle of the Chevalier de Méré reached Pascal in 1654.]@
+
+The complement rule is most useful when an event is awkward to describe directly but its opposite is simple. "At least one six in several rolls of a die" covers many cases: one six, two sixes, and so on up to a six on every roll. Its complement, "no six at all", is a single case, and for $n$ independent rolls its probability is the product $\\left(\\frac{5}{6}\\right)^n$. The same method works for any target and any number of trials, for example a double six when two dice are rolled together, with $\\frac{35}{36}$ in place of $\\frac{5}{6}$.
+
 @academic[formula_callout:Monotonicity Rule
 $$A \\subseteq B \\implies P(A) \\leq P(B)$$
 /probability/formulas#monotonicity_rule]@
@@ -961,7 +966,7 @@ For a number drawn from $1$ to $30$, with $A$, $B$, $C$ = divisible by $2$, $3$,
 
 With three events, the single terms count every outcome in an overlap more than once, and the pairwise intersections are subtracted to correct this. An outcome that lies in all three events is touched by all six of these terms: three single terms and three pairwise ones. The final term of the formula, with its plus sign, decides how often such an outcome is counted in the end.
 
-@academic[formula_callout:Booles Inequality
+@academic[formula_callout:Boole's Inequality
 $$P\\!\\left(\\bigcup_{i=1}^{n} A_i\\right) \\leq \\sum_{i=1}^{n} P(A_i)$$
 /probability/formulas#booles_inequality]@
 
@@ -974,6 +979,7 @@ Boole's inequality bounds the probability of a union by the sum of the single pr
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 `,
+            `@academic[punchline:Probabilities add only over disjoint pieces; wherever events overlap, the shared part must be corrected for.]@`,
             ]
         },
         {

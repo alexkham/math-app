@@ -896,6 +896,9 @@ In practice the outcome is read from the augmented matrix after row reduction, w
     title: `Geometric Interpretation`,
     content: `Each equation in a linear system defines a hyperplane in $\\mathbb{R}^n$. The solution set is the intersection of all $m$ hyperplanes.
 
+@academic[fact,aside:true,width:35%:A ten-thousandth moves the answer to $(1, 1)$
+The lines $x + y = 2$ and $x + 1.0001y = 2$ meet at $(2, 0)$. Change the second right-hand side to $2.0001$ and they meet at $(1, 1)$: the lines differ in direction by less than $0.003^\\circ$, so a tiny shift of one slides the crossing point far along the other.]@
+
 For two equations in two unknowns, each equation is a line in $\\mathbb{R}^2$. Two distinct non-parallel lines meet at exactly one point — a unique solution. Parallel lines never meet — no solution. Coincident lines (the same line described twice) overlap entirely — infinitely many solutions.
 
 For three equations in three unknowns, each equation is a plane in $\\mathbb{R}^3$. Three planes can intersect in a point, along a line, or not at all. They can also coincide or be arranged so that each pair intersects but no point lies on all three — a triangular prism configuration that yields no solution.
@@ -1383,6 +1386,7 @@ export default function LinearSystemsPage({solutionMethodTree, linesGeometryCase
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          `@academic[punchline:Whether a solution exists depends on $\\mathbf{b}$ and the column space; whether it is unique depends on $A$ alone.]@`,
         ]
     },
     {

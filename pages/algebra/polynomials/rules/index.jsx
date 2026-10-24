@@ -695,6 +695,9 @@ For $x^3 - 6x^2 + 11x - 6$, the only candidates are the divisors of $-6$: $\\pm 
 
 Testing: $P(1) = 1 - 6 + 11 - 6 = 0$, so $1$ is a root. Dividing out $(x - 1)$ leaves $x^2 - 5x + 6 = (x - 2)(x - 3)$. All three roots — $1$, $2$, $3$ — are integers dividing $6$, exactly as the theorem predicts.
 
+@academic[fact,aside:true,width:35%:A square root is whole or irrational
+For a whole number $n$, the polynomial $x^2 - n$ is monic, so any rational root it has is an integer. Hence $\\sqrt{n}$ is either a whole number or irrational: no fraction squares to exactly $2$, though $\\left(\\frac{7}{5}\\right)^2 = 1.96$ comes close.]@
+
 This simplification makes monic polynomials particularly approachable. The candidate list is shorter, the candidates are easier to test, and the search is faster. Recognizing that a polynomial is monic before beginning the root search saves unnecessary work with fractions.`,
     before: ``,
     after: ``,
@@ -704,6 +707,9 @@ This simplification makes monic polynomials particularly approachable. The candi
   obj9: {
     title: `Descartes' Rule of Signs`,
     content: `Descartes' Rule of Signs estimates the number of positive and negative real roots of a polynomial by counting sign changes in its coefficients.
+
+@academic[fact,aside:true,width:35%:Few terms, few real roots
+Whatever its degree, a polynomial with $k$ nonzero terms has at most $2k - 1$ distinct real roots: at most $k - 1$ sign changes for positive roots, as many for negative ones, plus possibly $0$. So $x^{100} - 1$ has only two real roots, $1$ and $-1$, out of its hundred.]@
 
 To count positive real roots, write $P(x)$ in standard form and count how many times the sign of the coefficients changes from one term to the next. For $P(x) = x^3 - 2x^2 - x + 2$, the coefficient signs are $+, -, -, +$. The sign changes twice: from $+$ to $-$ and from $-$ to $+$. The polynomial has either $2$ or $0$ positive real roots — the actual count equals the number of sign changes or less by an even number.
 
@@ -1113,6 +1119,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+          `@academic[punchline:Two synthetic divisions can fence in every real root, so candidates outside the fence never need testing.]@`,
         ]
     },
     {
@@ -1136,6 +1143,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
+          `@academic[punchline:Any symmetric expression in the roots can be computed from the coefficients, without solving for a single root.]@`,
         ]
     },
 

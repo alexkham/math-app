@@ -888,6 +888,9 @@ export async function getStaticProps(){
       content:`
 Bayes' theorem appears in situations where we observe something directly, but care about something that is not directly visible. We see evidence, data, or outcomes, while the underlying cause or explanation remains uncertain.
 
+@academic[fact,aside:true,width:35%:Switching doors wins two times in three
+You pick door 1 of three, and the host, who knows where the car is, opens door 3 to show a goat. Switching to door 2 wins with probability $\\frac{2}{3}$: a car behind door 2 forces him to open door 3, while a car behind door 1 leaves him a free choice he makes only half the time.]@
+
 In many problems, the probability of observing evidence given a cause is easier to assess than the probability of the cause given the evidence. This asymmetry creates a gap: we know how likely the evidence is under different scenarios, but we want to reason in the opposite direction.
 
 Bayes' theorem provides the bridge between these two perspectives. It shows how information flows from what we can observe to what we want to infer, allowing probabilities to be updated in a principled and consistent way.
@@ -907,6 +910,8 @@ The idea is simple in principle. We start with an initial assessment of how like
 This verbal description captures the essence of Bayes' theorem before any symbols appear. The formula that follows is simply a precise way to express this update process using [conditional probability](!/probability/conditional-probability).
 
 To compute a posterior probability from your own prior and likelihoods, use the [Bayes calculator](!/probability/calculators/bayes-calculator).
+
+@academic[punchline:An updated probability weighs each possibility twice: by how likely it was beforehand and by how well it explains the observation.]@
 `,
       before:``,
       after:``,
@@ -1056,6 +1061,11 @@ An item belongs to one of several categories, and we observe some of its feature
 
 **3. When intuition fails**  
 People often judge likelihoods by focusing only on how striking an observation is, ignoring how common the underlying situations are. Bayes' theorem corrects this by forcing both aspects to be considered together.
+
+@academic[fact,aside:true,width:35%:Most doctors answered 95%, not 2%
+In a 1978 study at Harvard Medical School, the most common answer to this question was 95%, and only 11 of 60 doctors and students gave the right one, about 2%. Out of 1,000 people, 1 is ill, while about 50 healthy people also test positive.]@
+
+A classic screening question shows the effect. A disease affects one person in a thousand, and a test always detects it but also gives a false positive to 5% of healthy people. A person with no symptoms tests positive. How likely is it that this person has the disease? The striking observation is the positive result; the common situation is being healthy.
 
 These examples show Bayes' theorem as a reasoning tool rather than a calculation trick. It organizes how probabilities should change when information arrives.
 `,

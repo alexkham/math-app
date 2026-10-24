@@ -130,29 +130,37 @@ function buildCss() {
     '.mop-root *,.mop-root *::before,.mop-root *::after{box-sizing:border-box;}' +
     '.mop-root a{color:var(--mop-accent);text-underline-offset:2px;}' +
 
-    /* ---------- masthead ---------- */
-    '.mop-mast{background:var(--mop-ink);color:var(--mop-paper);' +
-    'padding:24px 30px 22px;position:relative;}' +
-    ".mop-mast::after{content:'';position:absolute;left:30px;right:30px;bottom:0;" +
-    'height:3px;background:var(--mop-accent);}' +
-    ".mop-kick{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9px;" +
-    'font-weight:800;letter-spacing:.22em;text-transform:uppercase;opacity:.62;}' +
-    ".mop-ttl{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;" +
-    'font-size:26px;letter-spacing:-.03em;margin:8px 0 0;line-height:1.07;}' +
-    '.mop-intro{font-size:13.5px;margin:10px 0 0;max-width:600px;opacity:.76;}' +
+    /* ---------- masthead (light: pale blue band, navy text) ---------- */
+    '.mop-mast{background:#eef4fc;color:#06357A;' +
+    'padding:20px 30px 18px;position:relative;border-bottom:1px solid #d6e2f3;}' +
+    ".mop-kick{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;" +
+    'font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#2563EB;}' +
+    ".mop-ttl{font-family:'Inter',system-ui,sans-serif;font-weight:600;" +
+    'font-size:21px;letter-spacing:-.01em;margin:6px 0 0;line-height:1.2;color:#06357A;}' +
+    '.mop-intro{font-size:13.5px;margin:8px 0 0;max-width:600px;color:#4a6285;}' +
     '.mop-tally{position:absolute;right:30px;top:24px;text-align:right;' +
     "font-family:'JetBrains Mono',ui-monospace,monospace;}" +
-    '.mop-tally b{display:block;font-size:22px;font-weight:800;line-height:1;}' +
-    '.mop-tally i{font-style:normal;font-size:8px;letter-spacing:.16em;' +
-    'text-transform:uppercase;opacity:.6;}' +
+    '.mop-tally b{display:block;font-size:20px;font-weight:700;line-height:1;color:#06357A;}' +
+    '.mop-tally i{font-style:normal;font-size:9px;letter-spacing:.16em;' +
+    'text-transform:uppercase;color:#4a6285;}' +
     '.mop-tally u{display:block;text-decoration:none;font-size:8px;margin-top:7px;' +
     'letter-spacing:.16em;text-transform:uppercase;color:var(--mop-accent);}' +
     '.mop-anchor{display:inline-block;margin-top:11px;' +
     "font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9px;" +
     'font-weight:800;letter-spacing:.14em;text-transform:uppercase;' +
-    'padding:4px 9px;border:1px solid rgba(255,255,255,.34);' +
-    'color:var(--mop-paper);text-decoration:none;}' +
-    '.mop-anchor:hover{background:var(--mop-accent);border-color:var(--mop-accent);}' +
+    'padding:4px 9px;border:1px solid #c3d0e4;border-radius:4px;' +
+    'color:#2563EB;text-decoration:none;background:#fff;}' +
+    '.mop-anchor:hover{background:#2563EB;border-color:#2563EB;color:#fff;}' +
+
+    /* ---------- download safety ----------
+     * The diagram generator flattens every element to position:static.
+     * These scoped rules outrank it, so the matrix brackets (drawn by
+     * ::before/::after on .mop-mx) and KaTeX super/subscripts keep their
+     * layout in the PNG/PDF. On the live page they restate the same values. */
+    '.mop-root .mop-mx{position:relative !important;}' +
+    '.mop-root .katex .vlist>span{position:relative !important;}' +
+    '.mop-root .katex .rlap,.mop-root .katex .llap,.mop-root .katex .clap{position:relative !important;}' +
+    '.mop-root .katex .rlap>.inner,.mop-root .katex .llap>.inner,.mop-root .katex .clap>.inner{position:absolute !important;}' +
 
     /* ---------- matrices ---------- */
     '.mop-fig{margin:0;text-align:center;}' +
@@ -352,7 +360,7 @@ function buildCss() {
     '@media (max-width:640px){' +
     '.mop-mast{padding:20px 18px 18px;}' +
     '.mop-mast::after{left:18px;right:18px;}' +
-    '.mop-ttl{font-size:21px;}' +
+    '.mop-ttl{font-size:18px;}' +
     '.mop-tally{display:none;}' +
     '.mop-chain,.mop-stage,.mop-deriv,.mop-verd,.mop-note,.mop-foot,' +
     '.mop-iter,.mop-more{padding-left:18px;padding-right:18px;}' +
@@ -1168,9 +1176,9 @@ export default function MatrixOperation(props) {
       : null;
 
   const mast = (
-    <div className="mop-mast">
+    <div className="mop-mast" data-keep-position="">
       {tally ? (
-        <div className="mop-tally">
+        <div className="mop-tally" data-keep-position="">
           <b>{tally.n}</b>
           <i>{processContent(tally.label)}</i>
           {gaps.length ? <u>{gaps.length + ' gap' + (gaps.length > 1 ? 's' : '')}</u> : null}

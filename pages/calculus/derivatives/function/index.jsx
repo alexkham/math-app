@@ -442,6 +442,8 @@ Taking the sign of $f'$ from the height of $f$: $f(x) = x^2$ is positive at $x =
 Steep sections of $f$ correspond to large values of $|f'|$. Flat sections of $f$ correspond to $f'$ near zero. A straight segment of $f$ with constant slope corresponds to $f'$ being constant—a horizontal segment on the graph of $f'$.
 
 Where $f$ is concave up, the slope is increasing, so $f'$ is an increasing function on that interval. Where $f$ is concave down, $f'$ is decreasing. Inflection points of $f$—where concavity changes—correspond to local extrema of $f'$.
+
+@academic[punchline:Each feature of $f'$ reports on the slope of $f$: sign gives direction, size gives steepness, trend gives bending.]@
 `,
     before: ``,
     after: ``,
@@ -474,6 +476,9 @@ This ambiguity is resolved only when a specific function value is known—an ini
     title: `The Relationship Between f and f'`,
     content: `
 The derivative function $f'$ encodes the shape of $f$ completely, up to vertical translation. The correspondence runs in both directions:
+
+@academic[fact,aside:true,width:35%:Positive slope, yet not rising
+For $g(x) = \\frac{x}{2} + x^2 \\sin(1/x)$ with $g(0) = 0$, the slope at $0$ is $g'(0) = \\frac{1}{2}$, yet $g$ is not increasing on any interval around $0$. Near $0$ its derivative keeps swinging between about $-\\frac{1}{2}$ and $\\frac{3}{2}$, so $g$ falls again and again.]@
 
 Zeros of $f'$ correspond to horizontal tangents on $f$—local extrema or plateaus. Sign changes of $f'$ correspond to direction changes of $f$. Extrema of $f'$ correspond to inflection points of $f$, where the bending direction reverses.
 
@@ -512,9 +517,14 @@ However, derivatives satisfy a strong structural constraint.
 @academic[rule_theorem:Darboux's theorem
 Darboux's theorem states that $f'$ always has the intermediate value property: if $f'$ takes values $A$ and $B$ on an interval, it takes every value between $A$ and $B$ somewhere on that interval.]@
 
+@academic[fact,aside:true,width:35%:A derivative integration cannot undo
+In 1881 Vito Volterra glued copies of $x^2 \\sin(1/x)$ onto a Cantor-like set of positive length. His function is differentiable everywhere with a bounded derivative, yet that derivative is discontinuous on too large a set to have a Riemann integral.]@
+
 This means $f'$ cannot have jump discontinuities. The only discontinuities possible for a derivative are oscillatory ones—the kind seen in the example above.
 
 Functions whose derivatives are continuous everywhere form the class $C^1$. Most functions encountered in standard calculus belong to $C^1$ or higher smoothness classes, but the distinction matters in theoretical work and in the study of [differentiability](!/calculus/derivatives/differentiability).
+
+Discontinuities of $f'$ matter again when the derivative is integrated. Integration is meant to undo differentiation: integrating $f'$ from $a$ to $b$ should give back $f(b) - f(a)$. When $f'$ is continuous this always works, and it still works for $x^2 \\sin(1/x)$, whose derivative stays bounded near $0$ and misbehaves at only one point.
 `,
     before: ``,
     after: ``,

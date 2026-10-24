@@ -447,7 +447,12 @@ obj8: {
   content: `@academic[rule_theorem:Fundamental Theorem of Arithmetic
 The Fundamental Theorem of Arithmetic guarantees that every integer greater than $1$ can be expressed as a product of primes, and that this expression is unique up to the order of the factors.]@
 
+@academic[fact,aside:true,width:35%:Where $441$ splits two ways
+Among the numbers $1, 5, 9, 13, 17, \\ldots$, each one more than a multiple of $4$, the number $441$ splits as $9 \\cdot 49$ and as $21 \\cdot 21$, and none of $9$, $21$, $49$ splits further within the list. The primes $3$ and $7$ that would reconcile the two are missing from it.]@
+
 The number $360$ factors as $2^3 \\cdot 3^2 \\cdot 5$. No other combination of primes produces $360$. The number $84$ factors as $2^2 \\cdot 3 \\cdot 7$. The factorization is a fingerprint — it identifies the number completely.
+
+Uniqueness is the deeper half of the theorem. Existence is easy: any composite factor can be split again until only primes remain, as the factor tree for $360$ further down shows. That two different ways of splitting always end with the same primes needs a proof, and the proof rests on one property of primes: a prime that divides a product $a \\cdot b$ divides $a$ or divides $b$.
 
 Prime factorization reveals the divisor structure of a number. The number of factors of $n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots$ is $(a_1 + 1)(a_2 + 1) \\cdots$ — a formula that reads the answer directly from the exponents.
 
@@ -941,6 +946,7 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
       <div key={'obj6-svg'} style={{ maxWidth: '800px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: fsMainObj6 }} />,
       sectionsContent.obj6.afterFigure,
+      `@academic[punchline:A number has finitely many factors, paired around its square root, but infinitely many multiples.]@`,
     ]
 },
     {

@@ -309,6 +309,11 @@ $$f(x) = \\frac{2x + 1}{x - 3}$$]@
 $$\\lim_{x \\to \\infty} f(x) = 2 \\qquad \\lim_{x \\to -\\infty} f(x) = 2$$]@
 
 The line $y = 2$ is a horizontal asymptote in both directions.
+
+@academic[fact,aside:true,width:35%:Crossing an asymptote infinitely often
+$\\frac{\\sin x}{x}$ tends to $0$ as $x \\to \\infty$, so $y = 0$ is its horizontal asymptote. Yet it equals $0$ at every nonzero multiple of $\\pi$: the graph crosses the line infinitely many times, with swings that shrink like $\\frac{1}{x}$.]@
+
+The definition of a horizontal asymptote asks only that the values of $f$ close in on $L$ far out. It says nothing about the side from which they approach, or about whether the graph ever reaches the line. For this function the gap to the line is $\\frac{2x + 1}{x - 3} - 2 = \\frac{7}{x - 3}$, positive for $x > 3$ and negative for $x < 3$. So the graph stays above $y = 2$ on the right and below it on the left, and it never meets the line at all.
 `,
     before: ``,
     after: ``,
@@ -397,7 +402,12 @@ $$\\lim_{x \\to \\infty} \\frac{\\ln x}{x^n} = 0 \\quad \\text{for any } n > 0$$
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
 
+@academic[fact,aside:true,width:35%:$\\ln x$ leads $x^{0.1}$ past $10^{15}$
+Past $x \\approx 3$, $\\ln x$ runs ahead of $x^{0.1}$, and the power catches up only near $x \\approx 3.4 \\times 10^{15}$, where both are about $36$. Writing $x = e^t$ shows why: the race becomes $t$ against $e^{t/10}$.]@
+
 These [special limits](!/calculus/limits/special) determine which terms dominate in mixed expressions.
+
+Both limits say who wins in the end and nothing about when. The comparison is between the functions themselves, so a small power such as $x^{0.1}$ still counts as a polynomial-type term and still beats $\\ln x$ eventually. Before that happens, the two can trade places, and the weaker family can lead for a long stretch of $x$. A limit at infinity looks only at the far end, however late the final order sets in.
 `,
     before: ``,
     after: ``,
@@ -922,6 +932,7 @@ export default function InfinityPage({growthRateLevels, seoData, sectionsContent
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          `@academic[punchline:Far out, a rational function is ruled by its two leading terms; the others change only the speed, never the destination.]@`,
         ]
     },
     {

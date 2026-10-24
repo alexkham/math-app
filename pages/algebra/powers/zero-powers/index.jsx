@@ -12,6 +12,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -221,6 +222,31 @@ const keyWords = [
 </table>
 `
 
+    // Concept introduction (section 3, "Zero as an Exponent") — template A,
+    // definition last. Running instance: descending powers of 3. Old obj3 text
+    // is kept in sectionsContent.obj3, unused; its rule box, two pitfall
+    // asides, seven passages, the three-proofs table and the zero demo frame
+    // with its line are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciCountTable = ciTableOpen(['power', 'written out', 'factors of 3']) +
+      ciRow(['3³', '3 · 3 · 3', '3']) +
+      ciRow(['3²', '3 · 3', '2'], { shade: true }) +
+      ciRow(['3¹', '3', '1']) +
+      ciRow(['3⁰', '?', '0'], { shade: true, last: true, color: '#a4243b', cols: [1] }) +
+      '</tbody></table>'
+    const ciStairsTable = ciTableOpen(['power', 'value', 'step to the next']) +
+      ciRow(['3³', '27', '÷ 3']) +
+      ciRow(['3²', '9', '÷ 3'], { shade: true }) +
+      ciRow(['3¹', '3', '÷ 3']) +
+      ciRow(['3⁰', '1', ''], { shade: true, last: true, color: '#2563EB', cols: [1] }) +
+      '</tbody></table>'
+
     const sectionsContent={
 obj0: {
   title: `Key Terms`,
@@ -310,6 +336,9 @@ From the base side: $0^n = 0$ for every positive $n$. As $n$ decreases toward ze
 
 From the exponent side: $a^0 = 1$ for every nonzero $a$. As $a$ decreases toward zero, each value is $1$. Following this pattern to $a = 0$ suggests $0^0 = 1$.
 
+@academic[fact,aside:true,width:35%:Computers keep both answers
+The floating-point standard IEEE 754 has two power functions. pow gives $0^0 = 1$, as algebra does; powr is built from $e^{y \\ln x}$, and since $0 \\cdot \\ln 0$ has no value, it reports $0^0$ as an invalid operation.]@
+
 Both patterns are valid within their own domains. Neither generalizes cleanly to the point where base and exponent are simultaneously zero. The result depends on which direction you approach from — and that dependence is precisely what makes $0^0$ problematic.
 
 The resolution is not a single universal answer. Different branches of mathematics handle $0^0$ differently, each for good reasons rooted in what that branch needs the expression to do.`,
@@ -349,6 +378,9 @@ In combinatorics, $0^0$ counts the number of functions from the empty set to the
 The function $f(x) = x^x$ approaches $1$ as $x \\to 0^+$. Evaluated along this path, $0^0$ appears to equal $1$.
 
 But the function $g(x) = 0^x$ equals $0$ for every positive $x$ and approaches $0$ as $x \\to 0^+$. Along this path, $0^0$ appears to equal $0$.
+
+@academic[fact,aside:true,width:35%:$x^x$ dips before it reaches 1
+On the way from $x = 1$ down to $0$, $x^x$ does not climb steadily toward $1$. It first falls to about $0.692$ at $x = \\frac{1}{e} \\approx 0.368$, where the derivative $x^x(\\ln x + 1)$ is zero, and only then rises back toward $1$.]@
 
 Other paths yield still other values. The expression $f(x, y) = x^y$ can be guided toward $0^0$ along curves that produce any non-negative limit. The destination depends on the route — the hallmark of an indeterminate form.
 
@@ -752,6 +784,11 @@ const schemas = {
     notes: [{ x: -1.9, y: 1.7, text: 'at t = 0 the patterns disagree: 0⁰ = 0 or 1?', pos: 'e', color: 'r' }],
     caption: '0⁰ sits where 0ᵗ = 0 and t⁰ = 1 meet: no single value fits both' };
 
+  const conceptIntroFigures = {
+    countTable: ciCountTable,
+    stairsTable: ciStairsTable,
+  };
+
   const demoUnits = {
     zero: demoUnitFrame({
       svg: powersTableDiagrams['b5-cap'],
@@ -775,6 +812,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -795,9 +833,80 @@ return {
    }
 
 // export default function ZeroPowersPage({seoData,sectionsContent , introContent}) {
-export default function ZeroPowersPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ZeroPowersPage({seoData, sectionsContent, introContent, obj3Table, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 3 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `An exponent counts factors, so a zero exponent seems to count nothing.`,
+        content: [
+          `$3^3$ is three factors of $3$, $3^2$ is two, $3^1$ is one. Then $3^0$ asks for no factors at all — and it is not obvious what number that should be. Zero? Three? Something else?`,
+          ciTable('countTable'),
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Walking down the powers of 3 one step at a time answers it.`,
+        content: [
+          `Each step down removes one factor of $3$, which means dividing by $3$. Keep going one more step than usual.`,
+          ciTable('stairsTable'),
+          `A numerical pattern reaches the same conclusion from a different direction. List the descending powers of $3$: $3^3 = 27$, $3^2 = 9$, $3^1 = 3$. Each step divides by $3$. The next step in the sequence is $3 \\div 3 = 1$, so $3^0 = 1$. The same descent works for any base.`,
+          <div key={'unit-zero'} dangerouslySetInnerHTML={{ __html: demoUnits.zero }} />,
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `Nothing in that answer was chosen: three separate arguments all force the value 1.`,
+        content: [
+          `The quotient rule provides the algebraic proof. Dividing equal powers gives $\\frac{a^n}{a^n} = a^{n-n} = a^0$. But $\\frac{a^n}{a^n} = 1$ for any nonzero $a$. So $a^0 = 1$.`,
+          `A third argument frames it in terms of the empty product. The expression $a^n$ is the product of $n$ copies of $a$. When $n = 0$, there are no copies — an empty product. By convention, the product of no factors is the multiplicative identity, $1$, just as the sum of no terms is the additive identity, $0$.`,
+          <div key={'obj3-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          `Three distinct arguments, one conclusion. The value $a^0 = 1$ is not arbitrary — it is the only value consistent with the [laws of exponents](!/algebra/powers/exponent-rules/).`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [zero exponent](!/algebra/definitions#zero_exponent): for any nonzero number $a$, the power $a^0$ is defined to be $1$.`,
+        formula: `@academic[rule_plain:Setting the exponent to zero produces a result that surprises at first glance: $a^0 = 1$ for every nonzero $a$.]@`,
+        footer: `So $3^0 = 1$ — the bottom row of the staircase.`,
+      },
+      {
+        id: 'kind',
+        lead: `a⁰ is simply the number 1, whatever the base.`,
+        content: [
+          `The number $5^0 = 1$. The number $(-3)^0 = 1$. The number $(0.0001)^0 = 1$. The base is irrelevant — the answer is always $1$.`,
+          `@academic[pitfall,aside:true,width:35%:Reading a zero exponent as zero
+Reading $5^0$ as "five times zero" gives $5^0 = 0$, and reading it as "five left alone" gives $5^0 = 5$. The exponent counts factors of $5$, and zero factors leave $1$: $5^0 = 1$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rule holds for every nonzero base; two places need care.`,
+        content: [
+          `What generalizes: every argument above works for any base except $0$. What was particular: a positive base like $3$. The first place to be careful is the base $0$ itself, where the staircase would divide by zero.`,
+          `Only the base 0 breaks this argument, which is why 0&#8304; needs the separate discussion below.`,
+          `The second is deciding what the base actually is.`,
+          `@academic[pitfall,aside:true,width:35%:Applying the zero exponent beyond its base
+Applying the exponent to the whole term gives $-3^0 = 1$ and $5x^0 = 1$. The exponent sits on $3$ and on $x$ only, so $-3^0 = -1$ and $5x^0 = 5$ for $x \\neq 0$.
+[Read more](!#pitfalls)]@`,
+          `In $(-3)^0$ the parentheses make the whole of $-3$ the base, so the exponent clearly applies to all of it. Written expressions do not always mark the base so plainly. A power can stand next to a coefficient, as in $5x^0$, or behind a minus sign, as in $-3^0$, and evaluating such a term starts with seeing which symbol the exponent is attached to.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page takes up $0^0$, where the two patterns collide, then the zero exponent in the exponent laws, in polynomials and in other contexts.`,
+      },
+    ],
+  }
     
   const genericSections=[
       {
@@ -833,14 +942,7 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
-          sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
-                  <div key={'unit-zero'} dangerouslySetInnerHTML={{ __html: demoUnits.zero }} />,
-          `Only the base 0 breaks this argument, which is why 0&#8304; needs the separate discussion below.`,
+          <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -859,6 +961,7 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@academic[punchline:In algebra and counting, $0^0 = 1$ is not a free choice: the binomial theorem, power series and function counts all need it.]@`,
         ]
     },
 
@@ -874,6 +977,7 @@ export default function ZeroPowersPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          `@academic[punchline:In a limit, $0^0$ has no value of its own: how fast base and exponent reach zero decides it.]@`,
         ]
     },
 

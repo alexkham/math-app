@@ -1225,6 +1225,9 @@ The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the 
     title: `When Do Nontrivial Solutions Exist?`,
     content: `@academic[rule_theorem_plain:Nontrivial solutions to $A\\mathbf{x} = \\mathbf{0}$ exist if and only if the [rank](!/linear-algebra/matrix/rank) of $A$ is less than $n$, the number of unknowns.]@
 
+@academic[fact,aside:true,width:35%:Balancing a reaction is a homogeneous system
+Balancing $a\\,\\text{C}_3\\text{H}_8 + b\\,\\text{O}_2 \\to c\\,\\text{CO}_2 + d\\,\\text{H}_2\\text{O}$ gives one equation per element and one unknown per molecule. Three elements against four unknowns force a nontrivial solution, and its smallest whole-number point $(1, 5, 3, 4)$ is the balanced equation.]@
+
 When $\\text{rank}(A) < n$, at least one free variable appears in the [echelon form](!/linear-algebra/linear-systems/echelon-form), and that free variable parametrizes a family of nonzero solutions.
 
 For a square $n \\times n$ matrix, nontrivial solutions exist if and only if $\\det(A) = 0$. A nonzero [determinant](!/linear-algebra/determinants) means full rank, which means no free variables, which means only the trivial solution.
@@ -1292,7 +1295,9 @@ Taking the rows of the echelon form as null-space vectors fails: $A(1, 2, -1, 0,
 
 The null space is $\\text{Span}\\{\\mathbf{v}_1, \\mathbf{v}_2\\}$, a two-dimensional subspace of $\\mathbb{R}^5$.
 
-Each basis vector can be tested against the original matrix $A$, since row operations change the rows but keep the solutions. For $\\mathbf{v}_2 = (-1, 0, -1, 1, 0)$, the three rows of $A$ give $-1 + 1 = 0$, $-2 + 2 = 0$ and $1 - 2 + 1 = 0$. The count matches as well: one basis vector for each free variable, two in all.`,
+Each basis vector can be tested against the original matrix $A$, since row operations change the rows but keep the solutions. For $\\mathbf{v}_2 = (-1, 0, -1, 1, 0)$, the three rows of $A$ give $-1 + 1 = 0$, $-2 + 2 = 0$ and $1 - 2 + 1 = 0$. The count matches as well: one basis vector for each free variable, two in all.
+
+@academic[punchline:Row reduction turns the null space into a recipe: one free variable, one basis vector, and nothing to guess.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1303,6 +1308,9 @@ Each basis vector can be tested against the original matrix $A$, since row opera
 
 @academic[formula_callout:Parametric Vector Form
 $$\\mathbf{x} = t_1\\mathbf{v}_1 + t_2\\mathbf{v}_2 + \\cdots + t_k\\mathbf{v}_k$$]@
+
+@academic[fact,aside:true,width:35%:Loops in a circuit are free variables
+Kirchhoff's current law is $A\\mathbf{x} = \\mathbf{0}$ with one equation per junction and one unknown current per wire. In a connected circuit the rank is the number of junctions minus one, so the parameters number wires minus junctions plus one: the count of windows in a flat circuit diagram, by Euler's formula.]@
 
 where $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ are the basis vectors found by the algorithm above and $t_1, \\dots, t_k$ are free parameters ranging over all real numbers. The number of parameters $k = n - \\text{rank}(A)$ is the nullity.
 
@@ -1325,7 +1333,9 @@ This is precisely the statement that the solution set is a [subspace](!/linear-a
 @academic[rule:Superposition principle
 Superposition holds only for homogeneous systems.]@
 
-For a non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$, the sum of two solutions is generally not a solution: $A(\\mathbf{x}_1 + \\mathbf{x}_2) = \\mathbf{b} + \\mathbf{b} = 2\\mathbf{b} \\neq \\mathbf{b}$.`,
+For a non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$, the sum of two solutions is generally not a solution: $A(\\mathbf{x}_1 + \\mathbf{x}_2) = \\mathbf{b} + \\mathbf{b} = 2\\mathbf{b} \\neq \\mathbf{b}$.
+
+@academic[punchline:Solutions of $A\\mathbf{x} = \\mathbf{0}$ can be added and scaled freely, so a few basis solutions describe every one of them.]@`,
     before: ``,
     after: ``,
     link: ``,

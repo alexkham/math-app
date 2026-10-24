@@ -359,7 +359,7 @@ By definition, an [event](!/probability/events) is any subset of the [sample spa
  Event $B = \\{5\\}$ (rolling exactly 5)
  Event $C = \\{1, 2, 3, 4, 5, 6\\}$ (any outcome - certain event)
  Event $D = \\{\\}$ (impossible event)
- As the definition states and the example shows, [probability event](!/probability/events) may include one or more outcomes.It is a set of results counting as one event.         
+ As the definition states and the example shows, [probability event](!/probability/events) may include one or more outcomes. It is a set of results counting as one event.         
  @academic[theorem:Probability is a function that assigns to each event in the sample space a real number in $[0,1]$ where total probability value of the entire sample space $P(S)=1$.]@
  @academic[theorem:This number is calculated as a ratio $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$, when all outcomes in $S$ are equally likely]@
  Probability function satisfies three basic [axioms](!/probability#axioms) of probability.
@@ -375,6 +375,9 @@ The ratio counts outcomes, so its result depends on which list of outcomes is ta
       set:{
         title:`Set Theory & Event Algebra`,
         content:`
+@academic[fact,aside:true,width:35%:Random numbers are almost never fractions
+Picked uniformly from $[0,1]$, a number is a fraction with probability $0$: the fractions can be listed one by one, and countably many zeros add up to $0$. Additivity stops at countable sums, so the uncountably many points of $[0,1]$ can still carry a total of $1$.]@
+
 This apparent contradiction reveals why probability theory fundamentally operates with [sets](!/set-theory) rather than isolated points. We don't manipulate individual outcomes; instead, we work with collections or groups of outcomes. An event isn't a single dot—it's a [set](!/set-theory) of possible outcomes that satisfy our condition of interest.
 
 This set-theoretic foundation makes perfect sense: when we ask "what's the probability of rolling an even number on a die," we're really asking about the set $ \\{2, 4, 6\\}$, not about individual outcomes in isolation.
@@ -410,7 +413,13 @@ By treating [events](!/probability/events) as sets, we gain access to the full p
         link:'',
         before:``,
         after:``,
-        description:`**Why Combinatorial Counting Remains Essential**
+        description:`
+@academic[fact,aside:true,width:35%:Probability began with an unfinished game
+In 1654 Pascal and Fermat asked how to split the stakes of a game between two equal players, stopped when one needed $2$ more wins and the other $3$. Fermat imagined all $4$ possible remaining rounds played out, even past the deciding one, so that the $16$ win-loss sequences are equally likely; $11$ favor the first player, so the stakes split $11 : 5$.]@
+
+Counting is the oldest tool in probability. Long before axioms or distributions, questions about games of chance were settled by listing the equally likely ways a game could unfold and dividing the favorable cases by the total. The hard part was rarely the division; it was finding a list of cases that really are equally likely.
+
+**Why Combinatorial Counting Remains Essential**
 Even with powerful general tools—[probability distributions](!/probability#distributions), [conditional‐probability](!/probability#conditional) identities, and [set algebra theorems](!/probability#set)—the direct application of [combinatorial](!/combinatorics) principles is often the most effective method:
 
  **Fundamental Combinatorial Rules**
@@ -531,7 +540,7 @@ svg:
       },
       conditional:{
         title:`Conditional Probability & Independence`,
-        before:`@academic[example:Conditional probability is simply the chance of something happening once you already know something else has happened. It tells you how your outlook on an event shifts when you gain new information about another event's occurence.]@
+        before:`@academic[example:Conditional probability is simply the chance of something happening once you already know something else has happened. It tells you how your outlook on an event shifts when you gain new information about another event's occurrence.]@
 `,
         after:``,
         link:'/probability/conditional-probability',
@@ -547,7 +556,7 @@ svg:
  \t\t\t\t\t\t$P(A\\mid B)\\;=\\;P(A)$
  Equivalently, the fact that $B$ happened gives you zero new information about $A$.
 
- ** The multiplication rule for independent events is**:
+ **The multiplication rule for independent events is**:
     $P(A\\cap B)\\;=\\;P(A)\\,P(B)$
   **The intuition behind it**:
   If two events don’t influence each other, the probability that both happen is just the product of their individual chances. In other words, to find the chance of A and B occurring together, you multiply P(A) by P(B).
@@ -638,7 +647,7 @@ Probability is widely applied in science, engineering, finance, and everyday dec
     },
     {
       title: 'Normalization axiom',
-      text: '$P(S) = 1$, meaning the probabilities of all possible outcomes in S sum exactly to 1'
+      text: '$P(S) = 1$, meaning the whole sample space S has probability exactly 1'
     },
     {
       title: 'Countable additivity axiom',
@@ -714,6 +723,7 @@ export default function ProbabilityBasicsPage({
         sectionContent.set.content,
         setsProbabilityData["Events as Sets in Probability"].svg,
         sectionContent.set.after,
+        `@academic[punchline:Probability lives on sets of outcomes, not on single points, so the algebra of sets becomes the algebra of events.]@`,
       ]
 
     },
@@ -781,7 +791,8 @@ export default function ProbabilityBasicsPage({
                     marginLeft:'-150px'
                   }} dangerouslySetInnerHTML={{ 
                     __html:   sectionContent.distributions.svg,
-                  }} />
+                  }} />,
+        `@academic[punchline:One experiment can carry many distributions: each random variable regroups the same total probability of 1 by its own values.]@`,
                
 
         

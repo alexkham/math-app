@@ -1042,6 +1042,11 @@ where $\\binom{k-1}{r-1} = \\frac{(k-1)!}{(r-1)!(k-r)!}$ is the binomial coeffic
   
   * This follows from the negative binomial series expansion.
 
+@academic[fact,aside:true,width:35%:Where the negative comes from
+With $q = 1 - p$, the probabilities are exactly the terms of $p^r (1 - q)^{-r}$ expanded by Newton's binomial series. The exponent $-r$ is the negative in the name, and since $(1 - q)^{-r} = p^{-r}$, the terms add up to $p^r \\cdot p^{-r} = 1$.]@
+
+That expansion is the binomial theorem stretched beyond whole-number powers. Newton showed that $(1 + x)^n$ can be expanded for any exponent $n$, not only for $n = 1, 2, 3, \\ldots$, at the price of an infinite series in place of a finite sum. For exponents that are not positive whole numbers the expansion never stops, which is just what an unbounded support needs: one term for each possible number of trials.
+
       `,
       before:``,
       after:``,
@@ -1312,6 +1317,11 @@ This means there's a 15.625% chance that you'll need exactly 6 flips to get your
 The question fixes when the experiment stops, not only how many heads appear. The sixth flip has to be the third head, so only the first five flips are free, and the other two heads can sit anywhere among them.
 
 Note: The geometric distribution is a special case of the negative binomial distribution where $r = 1$.
+
+@academic[fact,aside:true,width:35%:Banach's matchboxes
+When the first box turns up empty, the other still holds about $7$ matches on average, and it is empty too only about 8% of the time. A box is found empty on its $51$st pick, a negative binomial wait with $r = 51$ and $p = \\frac{1}{2}$, and a fair coin rarely keeps the two counts level that long.]@
+
+The same stopping rule drives a classic puzzle told about the mathematician Stefan Banach. He carries two matchboxes, one in each pocket, each starting with $50$ matches, and every time he needs a match he picks a pocket at random. Eventually he reaches for a match, opens a box and finds it empty, and the question is how many matches the other box holds at that moment.
       `,
       before:``,
       after:``,
@@ -1702,6 +1712,7 @@ export default function NegativeBinomialDistributionPage({
           sectionsContent.links.decide,
           sectionsContent.obj1.example,
           sectionsContent.links.example,
+          `@academic[punchline:The negative binomial fixes the number of successes and leaves the number of trials to chance.]@`,
         ]
     },
      {
@@ -1750,6 +1761,7 @@ export default function NegativeBinomialDistributionPage({
         </div>,   
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `The CDF has no closed form and is summed term by term.`,
+          `@academic[punchline:The last trial is always the final success, so only the trials before it are free to arrange.]@`,
         ]
     },
     {
@@ -1773,6 +1785,7 @@ export default function NegativeBinomialDistributionPage({
           sectionsContent.obj6.content,
                   <div key={'unit-u_6_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_6_1 }} />,
           `The variance is derived by the same additive argument.`,
+          `@academic[punchline:Each required success adds its own geometric wait, so the mean grows by 1/p trials per success.]@`,
         ]
     },
     {

@@ -1830,6 +1830,11 @@ Example: Roll two dice, sum the results:
     after: `
     Tables are especially useful when the PMF doesn't follow a simple formula or when presenting empirical data.
 
+@academic[fact,aside:true,width:35%:Odd dice, the same table
+Dice numbered $1, 2, 2, 3, 3, 4$ and $1, 3, 4, 5, 6, 8$ produce this exact table: their $36$ face pairs hit each sum as often as ordinary dice do. Apart from ordinary dice, no other pair with positive whole-number faces does (Sicherman dice).]@
+
+The two-dice table comes from counting: of the $36$ equally likely ordered pairs of faces, one gives the sum $2$, two give the sum $3$, and six give the most common sum, $7$. The table keeps only the sums and their chances. Which faces produced each sum is no longer recorded anywhere in it.
+
 ## Why Three Views?
 
 - **Graphical:** Best for intuition and pattern recognition
@@ -2014,7 +2019,12 @@ A distribution can have multiple modes if several values share the maximum proba
 
 ## Why These Matter
 
+@academic[fact,aside:true,width:35%:A valid PMF with no mean
+The masses $p_X(k) = \\frac{1}{k(k+1)}$ for $k = 1, 2, 3, \\ldots$ add up to $1$, since each equals $\\frac{1}{k} - \\frac{1}{k+1}$ and the sum telescopes. Yet $E[X] = \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\cdots$ is the harmonic series, which grows without bound.]@
+
 Location measures summarize where the distribution sits on the number line. They answer: "What's a typical value?" Each measure captures a different notion of "typical."
+
+On an infinite support the mean is no longer a finite list of products but an infinite sum. The masses must shrink toward zero for the probabilities to add up to $1$, while the values $k$ they multiply keep growing, and the two pull in opposite directions. The median and the mode are not weighted sums of the values; they come from comparing masses, and every PMF has both.
     `,
     before: ``,
     after: ``,
@@ -2030,7 +2040,7 @@ Location measures summarize where the distribution sits on the number line. They
   obj8: {
     title: `Derived Properties: Spread Measures`,
     content: `
-While [location](!/probability/probability-function/pmf#7) tells you where the distribution is centered. Spread tells you how much the values vary around that center.
+While [location](!/probability/probability-function/pmf#7) tells you where the distribution is centered, spread tells you how much the values vary around that center.
 
 ## Variance
 
@@ -2299,7 +2309,7 @@ The PMF decreases monotonically—it never increases. Maximum mass always sits a
 
 PMF: $p_X(k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$ for $k \\in \\{0, 1, 2, \\ldots\\}$
 
-The PMF starts at $p_X(0) = e^{-\\lambda}$, rises to a peak near $\\lambda$, then decays toward zero. For small $\\lambda$ (less than 1), the mode is at 0 and the PMF shows strong right skew. For moderate $\\lambda$ (around 5-10), the PMF becomes roughly symmetric and bell-shaped. For large $\\lambda$ (greater than 20), the PMF looks nearly normal. The rise-and-fall pattern is governed by the competition between $\\lambda^k$ (which grows) and $k!$ (which grows faster). The peak shifts rightward as $\\lambda$ increases, and the spread increases proportionally—both mean and [variance](!/probability/variance) equal $\\lambda$. The Poisson PMF never reaches zero for any finite $k$, though it becomes negligibly small far from $\\lambda$.
+The PMF starts at $p_X(0) = e^{-\\lambda}$, rises to a peak near $\\lambda$, then decays toward zero. For small $\\lambda$ (less than 1), the mode is at 0 and the PMF shows strong right skew. For moderate $\\lambda$ (around 5-10), the PMF becomes roughly symmetric and bell-shaped. For large $\\lambda$ (greater than 20), the PMF looks nearly normal. The rise-and-fall pattern is governed by the competition between $\\lambda^k$ (which grows) and $k!$ (which grows faster). The peak shifts rightward as $\\lambda$ increases, and the variance increases in proportion, with the standard deviation growing like $\\sqrt{\\lambda}$—both mean and [variance](!/probability/variance) equal $\\lambda$. The Poisson PMF never reaches zero for any finite $k$, though it becomes negligibly small far from $\\lambda$.
 
 [Read More About Poisson Distribution](!/probability/distributions/discrete/poisson)
 

@@ -1785,6 +1785,9 @@ Every subset of an independent set is independent. If no nontrivial combination 
 
 Adding a vector $\\mathbf{w}$ to an independent set $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ preserves independence if and only if $\\mathbf{w} \\notin \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$. If $\\mathbf{w}$ is already in the span, it can be written as a combination of the existing vectors, creating a dependence relation. If it is outside the span, no such relation exists.
 
+@academic[fact,aside:true,width:35%:Infinitely many, any three independent
+The vectors $(1, t, t^2)$, one for each real $t$, point in infinitely many directions of $\\mathbb{R}^3$, yet any three with different $t$ are independent. For $t = a, b, c$ their determinant is $(b - a)(c - a)(c - b)$, never zero.]@
+
 In an $n$-dimensional space, any independent set has at most $n$ elements. An independent set with exactly $n$ elements is automatically a [basis](!/linear-algebra/vector-spaces/basis) — the spanning condition comes for free once the count reaches the dimension. An independent set with fewer than $n$ elements can always be extended to a basis by adding more vectors.
 
 Removing a vector from a dependent set may or may not restore independence. It depends on which vector is removed and which vectors participate in the dependence relation.`,
@@ -1800,7 +1803,9 @@ A common misconception is that dependence means every vector in the set is a com
 
 The dependence relation $2(1, 0) + (-1)(2, 0) + 0(0, 1) = (0, 0)$ gives $(0, 1)$ the coefficient $0$, so it does not participate. Only a participating vector can be "removed" without shrinking the span: here $(1, 0)$ or $(2, 0)$, but never $(0, 1)$, whose removal shrinks the span to the $x$-axis.
 
-When the null space of the column matrix has dimension greater than $1$, there are multiple linearly independent dependence relations, and different vectors can be expressed in terms of different subsets. The pivot/free column structure from row reduction clarifies which vectors are redundant.`,
+When the null space of the column matrix has dimension greater than $1$, there are multiple linearly independent dependence relations, and different vectors can be expressed in terms of different subsets. The pivot/free column structure from row reduction clarifies which vectors are redundant.
+
+@academic[punchline:A dependence relation names the redundant vectors: any vector with a nonzero coefficient can go without shrinking the span.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1825,7 +1830,9 @@ If $W(f_1, \\dots, f_n)(x_0) \\neq 0$ at any single point $x_0$, the functions a
 Calling $x$ and $x^2$ dependent because $W(x) = x \\cdot 2x - x^2 \\cdot 1 = x^2$ is $0$ at $x = 0$ reads one point as all of them. At $x = 1$, $W = 1 \\neq 0$, so the functions are independent.
 [Read more](!#pitfalls)]@
 
-The converse requires caution. A Wronskian that vanishes identically does not always imply dependence unless the functions are known to be solutions of a single linear ordinary differential equation with continuous coefficients. Without that structural guarantee, counterexamples exist where the Wronskian is zero everywhere yet the functions are independent.`,
+The converse requires caution. A Wronskian that vanishes identically does not always imply dependence unless the functions are known to be solutions of a single linear ordinary differential equation with continuous coefficients. Without that structural guarantee, counterexamples exist where the Wronskian is zero everywhere yet the functions are independent.
+
+@academic[punchline:A Wronskian that is nonzero at one point proves independence; one that is zero everywhere does not, by itself, prove dependence.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1833,6 +1840,9 @@ The converse requires caution. A Wronskian that vanishes identically does not al
   obj8: {
     title: `Independence in Abstract Vector Spaces`,
     content: `The definition of independence — the only combination giving $\\mathbf{0}$ is the trivial one — applies in any vector space, not just $\\mathbb{R}^n$.
+
+@academic[fact,aside:true,width:35%:Exponentials never depend on each other
+For different rates $a_1 < \\cdots < a_n$, the functions $e^{a_1 x}, \\ldots, e^{a_n x}$ are independent: dividing a relation by $e^{a_n x}$ and letting $x \\to \\infty$ forces the last coefficient to be $0$, and the rest follow in turn. With infinitely many independent functions, the continuous functions have no finite basis.]@
 
 In the polynomial space $\\mathcal{P}_n$, the set $\\{1, x, x^2, \\dots, x^n\\}$ is independent. The equation $c_0 + c_1 x + c_2 x^2 + \\cdots + c_n x^n = 0$ for all $x$ forces every coefficient to be zero, because a nonzero polynomial of degree at most $n$ can have at most $n$ roots, but this equation must hold for every real number. Since there are $n + 1$ vectors and $\\dim(\\mathcal{P}_n) = n + 1$, this independent set is a [basis](!/linear-algebra/vector-spaces/basis).
 
@@ -2143,6 +2153,7 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
           >
             <PropertyLawCard data={independenceProperties} theme="navy" />
           </DiagramFrame>,
+          `@academic[punchline:Independence survives dropping vectors and adding genuinely new directions, but no independent set can outgrow the dimension.]@`,
         ]
     },
     {

@@ -845,6 +845,8 @@ import complexExplorerDiagrams from '@/app/components/calculators/complex-number
 import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
+import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1082,6 +1084,35 @@ export async function getStaticProps(){
 `
 
   // ---------- SECTIONS (original prose unchanged; obj8 added) ----------
+
+    // Concept introduction (section 1, "From Algebra to Geometry") — template E,
+    // widening. Running instance: z = 2 + 3i, the complex explorer's quadrantI
+    // state. Old obj1 text is kept in sectionsContent.obj1, unused; its five
+    // paragraphs (the rule box among them) are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciPlaceTable = ciTableOpen(['number', 'its place on the line']) +
+      ciRow(['−2', 'two units left of 0']) +
+      ciRow(['0', 'the starting point'], { shade: true }) +
+      ciRow(['1.5', 'halfway between 1 and 2']) +
+      ciRow(['2 + 3i', 'no place at all'], { shade: true, last: true, color: '#a4243b', cols: [1] }) +
+      '</tbody></table>'
+    const ciKeepTable = ciTableOpen(['real number', 'as a complex number', 'point in the plane']) +
+      ciRow(['3', '3 + 0i', '(3, 0)']) +
+      ciRow(['−2', '−2 + 0i', '(−2, 0)'], { shade: true }) +
+      ciRow(['0', '0 + 0i', '(0, 0)'], { last: true }) +
+      '</tbody></table>'
+    const fpCiLine = { kind: 'domainOpen', svgTitle: 'The real numbers fill the whole number line', range: [-4, 4],
+      rows: [
+        { label: 'real numbers', color: 'g', segs: [[null, null]], tag: { text: 'every point used', x: 2.2 } },
+      ],
+      includedNote: 'a real number', excludedNote: 'a gap (there are none)',
+      caption: 'Every point of the line is already a real number' }
 
     const sectionsContent={
 obj0: {
@@ -1495,6 +1526,13 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    line: renderFunctionPlotV2(fpCiLine),
+    plane: complexExplorerDiagrams.quadrantI,
+    placeTable: ciPlaceTable,
+    keepTable: ciKeepTable,
+  };
+
   const demoUnits = {
     plot: demoUnitFrame({
       svg: complexExplorerDiagrams.quadrantII,
@@ -1529,6 +1567,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1557,10 +1596,73 @@ export default function GeometricRepresentationPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Every real number already has a place: a point on the number line.`,
+        content: [
+          `Negative numbers sit to the left of $0$, positive ones to the right, and fractions and irrationals fill the gaps between. Each real number gets exactly one point, and every point is used.`,
+        ],
+        visual: ciSvg('line'),
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The complex number 2 + 3i has nowhere to go on that line.`,
+        content: [
+          `Try to place a few numbers. The real ones each land on a point. $2 + 3i$ does not: it is not to the left or right of anything, because it carries a second number, the $3$ in front of $i$, that the line has no room for.`,
+          ciTable('placeTable'),
+          `The [algebraic form](!/complex-numbers/algebraic-form) $z = a + bi$ contains two real numbers: the real part $a$ and the imaginary part $b$. Two numbers naturally suggest two dimensions. Rather than confining complex numbers to a line, we grant them an entire plane — a flat surface where horizontal position encodes the real part and vertical position encodes the imaginary part.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [complex plane](!/complex-numbers/definitions#complex_plane) adds one new direction, at right angles to the number line. The horizontal axis carries the real part, the vertical axis carries the imaginary part, and the number $a + bi$ is the point $(a, b)$.`,
+        formula: `@academic[rule_plain:Every complex number finds a home at exactly one point, and every point in the plane represents exactly one complex number.]@`,
+        footer: `So $2 + 3i$ is the point $(2, 3)$: two units right, three units up — the way two numbers on a map, east and north, fix a single place.`,
+      },
+      {
+        id: 'kind',
+        lead: `A complex number is a point of the plane, read off by its two coordinates.`,
+        content: [
+          `The correspondence is direct: the complex number $z = a + bi$ maps to the point with coordinates $(a, b)$. The number $4 + 3i$ becomes the point $(4, 3)$, located four units right of the origin and three units up. The number $-2 + i$ becomes $(-2, 1)$, sitting in the second quadrant.`,
+          `This visualization carries a historical name: the Argand diagram, honoring Jean-Robert Argand, who published the geometric interpretation in 1806. Other mathematicians including Caspar Wessel and Carl Friedrich Gauss developed similar ideas independently. The plane itself is called the complex plane, and its two axes receive names reflecting their contents — the real axis runs horizontally, the imaginary axis runs vertically.`,
+        ],
+        visual: ciSvg('plane'),
+        caption: `$z = 2 + 3i$ at the point $(2, 3)$, in the first quadrant. The same state is on the [complex number explorer](!/complex-numbers/visual-tools/complex-explorer).`,
+      },
+      {
+        id: 'survives',
+        lead: `Nothing was taken away: the old number line is still there, as the horizontal axis.`,
+        content: [
+          `A real number $a$ is the complex number $a + 0i$, so it lands at $(a, 0)$ — on the real axis, in the same order and at the same distances as on the old line.`,
+          ciTable('keepTable'),
+          `The identification of complex numbers with points transforms algebra into geometry. Questions about numbers become questions about locations. Properties of operations become properties of movements. The entire machinery of coordinate geometry — distance, angle, reflection, rotation — applies immediately to complex arithmetic, providing visual intuition that pure symbolism cannot offer.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `One thing is lost: complex numbers cannot be lined up from smallest to largest.`,
+        content: `On a line, every number is to the left or right of every other, which is what "smaller" and "larger" mean. In the plane there is no single direction to compare along — $2 + 3i$ and $3 + 2i$ are neither smaller nor larger than each other. The section on the [lack of order](!/complex-numbers/geometric-representation#6) explains why no ordering can be made to work.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page names the two axes, plots complex numbers, reads them as arrows from the origin, and shows the conjugate and the arithmetic operations as movements in the plane.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1577,7 +1679,7 @@ export default function GeometricRepresentationPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

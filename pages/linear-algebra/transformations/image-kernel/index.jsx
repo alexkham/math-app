@@ -1385,7 +1385,12 @@ $$V = \\ker(T) \\oplus (\\text{a complement of } \\ker(T))$$]@
 
 Every vector $\\mathbf{v} \\in V$ splits as $\\mathbf{v} = \\mathbf{v}_k + \\mathbf{v}_c$ where $\\mathbf{v}_k \\in \\ker(T)$ and $\\mathbf{v}_c$ is in the complement. Then $T(\\mathbf{v}) = T(\\mathbf{v}_c)$, and the restriction of $T$ to the complement is a bijection onto $\\text{Im}(T)$.
 
-For matrix transformations, the [four fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces) provide the natural complement: the row space of $A$ is the orthogonal complement of the null space in $\\mathbb{R}^n$, and $A$ maps the row space bijectively onto the column space. The null-space component is destroyed; the row-space component survives intact.`,
+@academic[fact,aside:true,width:35%:The $+ C$ of calculus is a kernel
+On functions defined on an interval, differentiation is linear, and its kernel is the constant functions, since only constants have derivative $0$. So two antiderivatives of the same $f$ differ by a kernel element, and the $+ C$ in $\\int f\\,dx = F + C$ is that kernel added to one answer.]@
+
+For matrix transformations, the [four fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces) provide the natural complement: the row space of $A$ is the orthogonal complement of the null space in $\\mathbb{R}^n$, and $A$ maps the row space bijectively onto the column space. The null-space component is destroyed; the row-space component survives intact.
+
+The same split governs equations. If $T(\\mathbf{v}_0) = \\mathbf{w}$, then every $\\mathbf{v}_0 + \\mathbf{k}$ with $\\mathbf{k} \\in \\ker(T)$ is also a solution of $T(\\mathbf{v}) = \\mathbf{w}$, and any two solutions differ by a vector of the kernel. The complete solution set is therefore one particular solution shifted by the whole kernel: a single point when the kernel is trivial, a line, a plane or a larger flat piece when it is not.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1674,6 +1679,7 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@academic[punchline:Between finite-dimensional spaces of the same dimension, one-to-one and onto stand or fall together, so checking either one settles both.]@`,
         ]
     },
     {
@@ -1692,6 +1698,7 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          `@academic[punchline:Comparing dimensions can rule out injectivity or surjectivity, but it can never guarantee either.]@`,
         ]
     },
     {

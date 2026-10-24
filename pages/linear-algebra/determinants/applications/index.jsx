@@ -1491,7 +1491,12 @@ The solution is $x_1 = -23/(-15) = 23/15$, $x_2 = 1/(-15) = -1/15$, $x_3 = -26/(
 
 @academic[rule_corollary_plain:Cramer's rule proves that each solution component is a rational function of the matrix entries and the right-hand side entries.]@
 
-This has consequences in pure algebra and in sensitivity analysis, where it shows how solutions respond to perturbations in the data. As a computational method, however, it requires $n + 1$ determinant evaluations, making it far more expensive than [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) for large systems.`,
+@academic[fact,aside:true,width:35%:Maclaurin had the rule first
+Colin Maclaurin's Treatise of Algebra, printed in 1748, two years after his death, already solves systems in 2 and 3 unknowns this way. Cramer's book of 1750 stated the rule for any number of unknowns, with a rule for the signs, and his name stuck.]@
+
+This has consequences in pure algebra and in sensitivity analysis, where it shows how solutions respond to perturbations in the data. As a computational method, however, it requires $n + 1$ determinant evaluations, making it far more expensive than [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) for large systems.
+
+The ratios in the rule were written down before determinants had a name or a notation. Early statements spelled out each numerator and each denominator as a sum of signed products of coefficients, six products for three unknowns, and left the reader to follow the pattern of signs to larger systems. The theory of determinants later grew out of exactly these sums.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1777,7 +1782,12 @@ The product formula: $(x_2 - x_1)(x_3 - x_1)(x_3 - x_2) = (2 - 1)(4 - 1)(4 - 2) 
 
 @academic[rule_corollary_plain:The Vandermonde determinant is nonzero precisely when all nodes are distinct.]@
 
+@academic[fact,aside:true,width:35%:$b^2 - 4c$ is a squared Vandermonde
+For $x^2 + bx + c$ with roots $r_1, r_2$, the discriminant $b^2 - 4c$ equals $(r_2 - r_1)^2$, the square of the $2 \\times 2$ Vandermonde determinant of the roots. For every polynomial with leading coefficient $1$, the discriminant is the squared Vandermonde of its roots, which is why it is zero exactly at a repeated root.]@
+
 This guarantees that a polynomial of degree at most $n - 1$ is uniquely determined by its values at $n$ distinct points — the theoretical foundation of polynomial interpolation. It also appears in the theory of symmetric polynomials and in the derivation of various discrete orthogonality relations.
+
+Exchanging two nodes exchanges two rows of $V$, so the determinant changes sign. Its square does not change at all: $\\det(V)^2$ stays the same under every reordering of the nodes, which makes it a symmetric polynomial in them. When the nodes are the roots of a polynomial, any symmetric polynomial in the roots can be rewritten in terms of the coefficients, without solving for the roots.
 
 ## Other Structured Determinants
 
@@ -2094,6 +2104,7 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@academic[punchline:A determinant turns the search for eigenvalues into finding the roots of one polynomial.]@`,
         ]
     },
     {

@@ -8873,6 +8873,9 @@ This is the Eckart-Young-Mirsky theorem.
 @academic[rule_theorem:Eckart–Young–Mirsky theorem
 Among all matrices of rank at most $k$, $A_k$ is the closest to $A$.]@
 
+@academic[fact,aside:true,width:35%:Published in a psychology journal
+Eckart and Young proved in 1936 that truncating the SVD gives the closest lower-rank matrix, in the first volume of Psychometrika. Psychologists needed it for factor analysis: explaining a large table of test scores by a few underlying abilities.]@
+
 The approximation error equals $\\sigma_{k+1}$ (the first discarded singular value) in the operator norm, and $\\sqrt{\\sigma_{k+1}^2 + \\cdots + \\sigma_r^2}$ in the Frobenius norm.
 
 When the singular values decay rapidly — $\\sigma_1 \\gg \\sigma_2 \\gg \\cdots$ — a small number of terms captures most of the matrix. This is the basis of image compression (store $k$ singular value triples instead of $mn$ entries), noise reduction (discard small singular values as noise), latent semantic analysis (retain the top-$k$ "concepts" in a document-term matrix), and dimensionality reduction more broadly.`,
@@ -8933,6 +8936,9 @@ For non-symmetric or rectangular matrices, the eigendecomposition does not apply
 
 @academic[formula_callout:svd_outer_product_form|SVD Outer Product Form|$$A = \\sum_{i=1}^{r} \\sigma_i \\, \\mathbf{u}_i \\mathbf{v}_i^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#svd_outer_product_form]@
+
+@academic[fact,aside:true,width:35%:A million dollars for a low-rank guess
+The Netflix Prize data held about 100 million ratings from 480,189 users of 17,770 films, so under 1.2% of the table was filled. Fitting the known ratings with a short sum of rank-one terms, called SVD by the contestants, was central to the entry that won the one-million-dollar prize in 2009.]@
 
 Each term $\\sigma_i \\mathbf{u}_i\\mathbf{v}_i^T$ is an $m \\times n$ rank-one matrix. The singular value $\\sigma_i$ weights its contribution. The terms are ordered by importance: the first term captures the most of $A$ (in the norm sense), the second captures the most of the remainder, and so on.
 
@@ -9428,6 +9434,7 @@ export default function SVDPage({svdNest,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@academic[punchline:The pseudoinverse inverts the matrix on every direction it keeps and sends the directions it cannot reach to zero.]@`,
         ]
     },
     {
@@ -9436,6 +9443,7 @@ export default function SVDPage({svdNest,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@academic[punchline:How fast the singular values fall decides how few numbers can stand in for the whole matrix.]@`,
         ]
     },
     {

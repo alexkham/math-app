@@ -1141,7 +1141,12 @@ $$E[X] = n \\cdot \\frac{K}{N}$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[fact,aside:true,width:35%:Counting a lake's fish by tagging
+Ecologists tag $K = 100$ fish and release them; a later catch of $n = 50$ holds $k = 5$ tagged ones. Setting $5 = 50 \\cdot \\frac{100}{N}$ estimates the lake at $N = 1000$ fish, without catching them all.]@
+
 The result $E[X] = n \\cdot \\frac{K}{N}$ captures the intuition that the expected proportion of successes in the sample matches the proportion in the population. If you sample $n$ items from a population where the success rate is $\\frac{K}{N}$, you expect $n \\cdot \\frac{K}{N}$ successes on average.
+
+The same relation can be read in the other direction. In some studies the population size $N$ is the unknown, while the number of marked items $K$ and the sample size $n$ are chosen in advance and the number of marked items in the sample is observed. Since that count tends to land near its mean, a single sample already says something about the size of the whole population.
 
 ### Example
 
@@ -1153,6 +1158,8 @@ $$E[X] = 5 \\cdot \\frac{4}{52} = \\frac{20}{52} \\approx 0.385$$]@
 On average, you expect to draw about 0.385 aces in a 5-card hand, which reflects the 4-in-52 proportion of aces in the deck.
 
 To compute the expected value of a hypergeometric distribution for your own parameters, step by step, use the [hypergeometric expected value calculator](!/probability/calculators/expected-value/hypergeometric).
+
+@academic[punchline:Draws without replacement depend on each other, yet the sample's expected share of successes is exactly the population's share.]@
   `,
   before: ``,
   after: ``,
@@ -1201,7 +1208,7 @@ $$\\mathrm{Var}(X) = n \\cdot \\frac{K}{N} \\cdot \\left(1 - \\frac{K}{N}\\right
 
 The first three terms $n \\cdot \\frac{K}{N} \\cdot \\left(1 - \\frac{K}{N}\\right)$ match the binomial variance formula with $p = \\frac{K}{N}$.
 
-The additional factor $\\frac{N-n}{N-1}$ is called the **finite population correction** and is always less than 1. It accounts for the reduction in variance caused by sampling without replacement. As the sample size $n$ approaches the population size $N$, this factor approaches zero, reflecting that sampling the entire population leaves no variability.
+The additional factor $\\frac{N-n}{N-1}$ is called the **finite population correction** and is less than 1 whenever $n > 1$. It accounts for the reduction in variance caused by sampling without replacement. As the sample size $n$ approaches the population size $N$, this factor approaches zero, reflecting that sampling the entire population leaves no variability.
 
 ### Standard Deviation
 
@@ -1242,7 +1249,12 @@ For the hypergeometric distribution, the mode depends on the parameters $N$, $K$
 
 The mode is $\\lfloor \\frac{(n+1)(K+1)}{N+2} \\rfloor$
 
+@academic[fact,aside:true,width:35%:A ticket most likely matches nothing
+In a 6-from-49 lottery ($N = 49$, $K = n = 6$) the mode is $\\lfloor \\frac{7 \\cdot 7}{51} \\rfloor = 0$: a ticket matches none of the drawn numbers 43.6% of the time, and all six once in 13,983,816 tickets.]@
+
 **Intuition:** The mode sits near the [expected value](!/probability/expected-value) $\\frac{nK}{N}$, representing the most likely number of successes when sampling without replacement. Unlike the [binomial](!/probability/distributions/discrete/binomial) where trials are independent, the hypergeometric mode reflects how depletion of the population affects the probability distribution.
+
+A lottery draw fits this setting directly. The draw picks the winning numbers, which play the role of the $K$ successes among the $N$ numbers on offer, and a ticket is a sample of $n$ numbers chosen without repeats. The number of matches on the ticket is then a hypergeometric count, and the mode formula applies to it as to any other choice of $N$, $K$ and $n$.
 
 @academic[example:Example
 For $N = 50$, $K = 20$, $n = 10$:

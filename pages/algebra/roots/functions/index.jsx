@@ -363,6 +363,11 @@ Shape resembles the cube root — S-curve through origin, odd symmetry.
 
 Higher odd indices produce flatter curves. The fifth root is flatter than the cube root.
 
+@academic[fact,aside:true,width:35%:High roots crowd toward 1
+For every positive $x$, $\\sqrt[n]{x} = x^{1/n}$ gets closer to $1$ as $n$ grows, since the exponent $\\frac{1}{n}$ shrinks toward $0$. The $100$th root of a billion is only about $1.23$.]@
+
+The index acts on inputs above $1$ and below $1$ in opposite ways. Above $1$, a higher index gives a smaller output: $\\sqrt{16} = 4$, $\\sqrt[4]{16} = 2$, $\\sqrt[8]{16} \\approx 1.41$. Between $0$ and $1$, a higher index gives a larger output: $\\sqrt{0.0625} = 0.25$, $\\sqrt[4]{0.0625} = 0.5$, $\\sqrt[8]{0.0625} \\approx 0.71$. At $x = 1$ itself every root equals $1$, so all these curves pass through the point $(1, 1)$.
+
 @academic[rule_theorem_plain:All $n$th root functions are one-to-one and serve as inverses to the corresponding power functions, with domain restrictions for even indices.]@`,
     before: ``,
     after: ``,
@@ -506,6 +511,11 @@ Cube: $x^3 = 2y + 1$
 Solve: $y = \\frac{x^3 - 1}{2}$
 
 The inverse is $g^{-1}(x) = \\frac{x^3 - 1}{2}$, valid for all real $x$.
+
+@academic[fact,aside:true,width:35%:A radical that is its own inverse
+Solving $x^2 = 1 - y^2$ for $y \\geq 0$ gives $y = \\sqrt{1 - x^2}$, the very formula it started from. Its graph is a quarter of the unit circle, symmetric across the line $y = x$.]@
+
+Both inverses above are polynomials: once each side is raised to the index, no radical is left. That changes when the radicand already contains a square of $x$. For $f(x) = \\sqrt{1 - x^2}$ with $0 \\leq x \\leq 1$, swapping gives $x = \\sqrt{1 - y^2}$, and squaring gives $x^2 = 1 - y^2$, so solving for $y$ needs one more square root.
 
 The connection between [rational exponents](!/algebra/roots/rational-exponents) and roots makes these inverse relationships algebraically natural. Roots undo powers; powers undo roots.`,
     before: ``,
@@ -835,6 +845,7 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
           sectionsContent.obj2.content,
           <div key={'unit-sqrtRuns'} dangerouslySetInnerHTML={{ __html: demoUnits.sqrtRuns }} />,
           `The runs grow 1, 3, 5, …: the odd numbers, since (n + 1)² − n² = 2n + 1.`,
+          `@academic[punchline:The square root keeps rising without limit, but each extra unit of height costs a longer stretch of input.]@`,
         ]
     },
     {
@@ -863,6 +874,7 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
           sectionsContent.obj5.content,
           <div key={'unit-evenIndex'} dangerouslySetInnerHTML={{ __html: demoUnits.evenIndex }} />,
           `Between 0 and 1 the order flips: there the fourth root is the higher curve.`,
+          `@academic[punchline:Whether the index is even or odd decides the domain and the shape; how large it is only decides how flat the curve runs.]@`,
         ]
     },
     {
@@ -886,6 +898,7 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:A number added inside the radical shifts the graph against its sign; a number added outside shifts it with its sign.]@`,
         ]
     },
     {

@@ -1031,7 +1031,12 @@ The squaring function $T(x) = x^2$ from $\\mathbb{R}$ to $\\mathbb{R}$ fails add
 
 @academic[rule_plain:Affine maps $T(\\mathbf{v}) = A\\mathbf{v} + \\mathbf{b}$ are linear only when $\\mathbf{b} = \\mathbf{0}$.]@
 
-The matrix part preserves linearity; the constant shift breaks it. Affine maps are important in geometry and optimization, but they are not linear transformations in the sense used here.`,
+The matrix part preserves linearity; the constant shift breaks it. Affine maps are important in geometry and optimization, but they are not linear transformations in the sense used here.
+
+@academic[fact,aside:true,width:35%:One dimension up, translation is linear
+The shear $(x, y, z) \\mapsto (x + b_1 z, \\; y + b_2 z, \\; z)$ of $\\mathbb{R}^3$ is linear, and on the plane $z = 1$ it acts as the translation by $(b_1, b_2)$. Graphics software moves 3D objects the same way, with $4 \\times 4$ matrices.]@
+
+The failure of translation is a real inconvenience in practice. Computer graphics, robotics and surveying all rotate, scale and move objects, and rotations and scalings combine neatly as matrix products, while a translation can never be written as $A\\mathbf{v}$, since $A\\mathbf{0} = \\mathbf{0}$ for every matrix. A long chain of such steps would then have to carry a matrix and a separate shift vector through every product. One way around this is an extra coordinate: the point $(x, y)$ of the plane is stored as $(x, y, 1)$ in $\\mathbb{R}^3$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1039,6 +1044,9 @@ The matrix part preserves linearity; the constant shift breaks it. Affine maps a
   obj4: {
     title: `Examples Beyond Rⁿ`,
     content: `Linear transformations are not limited to matrix multiplication on column vectors. Any function between [vector spaces](!/linear-algebra/vector-spaces/axioms) that respects addition and scaling qualifies.
+
+@academic[fact,aside:true,width:35%:A squared input, yet a linear map
+The map $p(x) \\mapsto p(x^2)$ is linear, although squaring is the standard non-example: $(p + q)(x^2) = p(x^2) + q(x^2)$ and $(cp)(x^2) = c\\,p(x^2)$. Linearity is judged in the function $p$, not in $x$; Koopman used this in 1931 to study nonlinear motion with linear maps.]@
 
 Differentiation $T(p) = p'$ on the polynomial space $\\mathcal{P}_n$ is linear: $(p + q)' = p' + q'$ and $(cp)' = cp'$. Integration $T(f) = \\int_a^x f(t)\\,dt$ on $C[a, b]$ is linear by the linearity of the integral. The [transpose](!/linear-algebra/matrix/operations) map $T(A) = A^T$ on $\\mathbb{R}^{n \\times n}$ is linear: $(A + B)^T = A^T + B^T$ and $(cA)^T = cA^T$. The [trace](!/linear-algebra/matrix/trace) $T(A) = \\text{tr}(A)$ from $\\mathbb{R}^{n \\times n}$ to $\\mathbb{R}$ is linear by additivity and scalar homogeneity of the trace.
 
@@ -1354,6 +1362,7 @@ export default function LinearTransformationsPage({seoData, sectionsContent, int
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@academic[punchline:A linear map is nothing more than a free choice of where each basis vector goes.]@`,
         ]
     },
     {
@@ -1370,6 +1379,7 @@ export default function LinearTransformationsPage({seoData, sectionsContent, int
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@academic[punchline:A matrix is a linear map written down in chosen bases; new bases rewrite the matrix, not the map.]@`,
         ]
     },
     {

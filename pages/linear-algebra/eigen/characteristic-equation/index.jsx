@@ -1319,6 +1319,9 @@ For non-triangular $3 \\times 3$ matrices, the cubic must be factored by finding
 @academic[rule_theorem:Abel–Ruffini theorem
 There is no general closed-form formula for roots of polynomials of degree $5$ or higher (Abel-Ruffini theorem), so explicit factoring is limited to small matrices or matrices with special structure.]@
 
+@academic[fact,aside:true,width:35%:Root finders compute eigenvalues
+Every polynomial $\\lambda^n + c_{n-1}\\lambda^{n-1} + \\cdots + c_0$ is, up to sign, the characteristic polynomial of its companion matrix: $1$s just below the diagonal and $-c_0, \\ldots, -c_{n-1}$ down the last column. The roots functions of MATLAB and NumPy run the idea backwards, finding a polynomial's roots as that matrix's eigenvalues.]@
+
 [Diagonal](!/linear-algebra/matrix/types) and [triangular](!/linear-algebra/matrix/types) matrices are immediate: the eigenvalues are the diagonal entries. Block triangular matrices factor block by block: the characteristic polynomial is the product of the characteristic polynomials of the diagonal blocks.
 
 For general large matrices, eigenvalues are computed numerically by iterative algorithms — most importantly the QR algorithm, which repeatedly applies [QR decompositions](!/linear-algebra/decompositions/qr) to converge on the eigenvalues without ever forming the characteristic polynomial explicitly. Computing the polynomial and then finding its roots is numerically unstable for large $n$ and is never used in practice.`,
@@ -1377,9 +1380,14 @@ In both cases the reduced matrix keeps a single nonzero row, which encodes one e
 
 where $O$ is the zero matrix and $\\lambda$ is replaced by $A$ (with constant terms multiplied by $I$).
 
-For example, if $p(\\lambda) = \\lambda^2 - 5\\lambda + 6$, then $A^2 - 5A + 6I = O$. This can be rearranged to express $A^{-1}$ as a polynomial in $A$: $A^{-1} = \\frac{1}{6}(5I - A)$ (provided $\\det(A) = 6 \\neq 0$). More generally, the Cayley-Hamilton theorem guarantees that $A^{-1}$ can always be written as a polynomial in $A$ of degree at most $n - 1$.
+@academic[fact,aside:true,width:35%:Cayley checked only two sizes
+Cayley published the theorem in 1858 after checking it for $2 \\times 2$ and $3 \\times 3$ matrices, and wrote that a general proof did not seem necessary. Hamilton had met the quaternion case earlier; the first proof for every size came from Frobenius in 1878.]@
 
-The theorem also shows that any power $A^k$ with $k \\geq n$ can be reduced to a polynomial in $A$ of degree at most $n - 1$ — the characteristic polynomial provides a recurrence that expresses higher powers in terms of lower ones.`,
+For example, if $p(\\lambda) = \\lambda^2 - 5\\lambda + 6$, then $A^2 - 5A + 6I = O$. This can be rearranged to express $A^{-1}$ as a polynomial in $A$: $A^{-1} = \\frac{1}{6}(5I - A)$ (provided $\\det(A) = 6 \\neq 0$). More generally, the Cayley-Hamilton theorem guarantees that, whenever $A$ is invertible, $A^{-1}$ can be written as a polynomial in $A$ of degree at most $n - 1$.
+
+The theorem also shows that any power $A^k$ with $k \\geq n$ can be reduced to a polynomial in $A$ of degree at most $n - 1$ — the characteristic polynomial provides a recurrence that expresses higher powers in terms of lower ones.
+
+@academic[punchline:Because an $n \\times n$ matrix satisfies its own characteristic polynomial, every power of it reduces to a combination of $I, A, \\ldots, A^{n-1}$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1702,6 +1710,7 @@ export default function CharacteristicEquationPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:The characteristic polynomial defines the eigenvalues, but beyond small or structured matrices it is not how they are computed.]@`,
         ]
     },
     {

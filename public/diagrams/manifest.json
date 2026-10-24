@@ -17,7 +17,7 @@
     "source": "/trigonometry/degrees-radians",
     "section": "trigonometry",
     "width": 933,
-    "height": 706,
+    "height": 730,
     "formats": [
       "png",
       "pdf"
@@ -29,7 +29,7 @@
     "source": "/arithmetic/properties",
     "section": "arithmetic",
     "width": 933,
-    "height": 1016,
+    "height": 1039,
     "formats": [
       "png",
       "pdf"
@@ -40,8 +40,8 @@
     "title": null,
     "source": "/algebra/sequences",
     "section": "algebra",
-    "width": 690,
-    "height": 1113,
+    "width": 933,
+    "height": 730,
     "formats": [
       "png",
       "pdf"
@@ -53,7 +53,7 @@
     "source": "/probability/bayes-theorem",
     "section": "probability",
     "width": 933,
-    "height": 739,
+    "height": 762,
     "formats": [
       "png",
       "pdf"
@@ -76,8 +76,8 @@
     "title": "How simple the matrix can be made",
     "source": "/linear-algebra/transformations/basis-change",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 973,
+    "width": 783,
+    "height": 1015,
     "formats": [
       "png",
       "pdf"
@@ -112,8 +112,8 @@
     "title": "What the polynomial encodes",
     "source": "/linear-algebra/eigen/characteristic-equation",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1413,
+    "width": 783,
+    "height": 1490,
     "formats": [
       "png",
       "pdf"
@@ -124,8 +124,8 @@
     "title": "What the algorithm does with each matrix",
     "source": "/linear-algebra/decompositions/cholesky",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 939,
+    "width": 783,
+    "height": 995,
     "formats": [
       "png",
       "pdf"
@@ -136,8 +136,8 @@
     "title": "The cofactor construction chain",
     "source": "/linear-algebra/determinants/cofactors",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1078,
+    "width": 783,
+    "height": 1116,
     "formats": [
       "png",
       "pdf"
@@ -148,8 +148,8 @@
     "title": "One construction, chosen coefficients",
     "source": "/linear-algebra/vectors/linear-combinations",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1134,
+    "width": 783,
+    "height": 1138,
     "formats": [
       "png",
       "pdf"
@@ -172,8 +172,8 @@
     "title": "Reading a conjugate pair",
     "source": "/linear-algebra/eigen/complex",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1343,
+    "width": 783,
+    "height": 1403,
     "formats": [
       "png",
       "svg",
@@ -186,7 +186,7 @@
     "source": "/complex-numbers/basics",
     "section": "complex-numbers",
     "width": 933,
-    "height": 664,
+    "height": 666,
     "formats": [
       "png",
       "svg",
@@ -198,8 +198,8 @@
     "title": null,
     "source": "/complex-numbers/multiplicative-inverse",
     "section": "complex-numbers",
-    "width": 690,
-    "height": 1258,
+    "width": 933,
+    "height": 764,
     "formats": [
       "png",
       "pdf"
@@ -211,7 +211,7 @@
     "source": "/complex-numbers/operations",
     "section": "complex-numbers",
     "width": 933,
-    "height": 624,
+    "height": 626,
     "formats": [
       "png",
       "pdf"
@@ -223,7 +223,7 @@
     "source": "/complex-numbers/properties",
     "section": "complex-numbers",
     "width": 933,
-    "height": 626,
+    "height": 649,
     "formats": [
       "png",
       "pdf"
@@ -235,7 +235,7 @@
     "source": "/logic/truth-tables/implications",
     "section": "logic",
     "width": 933,
-    "height": 690,
+    "height": 691,
     "formats": [
       "png",
       "pdf"
@@ -247,7 +247,7 @@
     "source": "/probability/conditional-probability",
     "section": "probability",
     "width": 933,
-    "height": 632,
+    "height": 650,
     "formats": [
       "png",
       "pdf"
@@ -258,8 +258,8 @@
     "title": null,
     "source": "/complex-numbers/algebraic-form",
     "section": "complex-numbers",
-    "width": 690,
-    "height": 1152,
+    "width": 933,
+    "height": 687,
     "formats": [
       "png",
       "pdf"
@@ -295,7 +295,7 @@
     "source": "/combinatorics/basics",
     "section": "combinatorics",
     "width": 901,
-    "height": 991,
+    "height": 1014,
     "formats": [
       "png",
       "pdf"
@@ -306,8 +306,8 @@
     "title": null,
     "source": "/probability/covariance",
     "section": "probability",
-    "width": 690,
-    "height": 876,
+    "width": 933,
+    "height": 860,
     "formats": [
       "png",
       "pdf"
@@ -318,8 +318,8 @@
     "title": "Properties of the cross product",
     "source": "/linear-algebra/vectors/cross-product",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1412,
+    "width": 783,
+    "height": 1486,
     "formats": [
       "png",
       "pdf"
@@ -343,7 +343,7 @@
     "source": "/linear-algebra/decompositions",
     "section": "linear-algebra",
     "width": 933,
-    "height": 730,
+    "height": 750,
     "formats": [
       "png",
       "pdf"
@@ -354,8 +354,8 @@
     "title": "Definiteness, read from the signs",
     "source": "/linear-algebra/decompositions/spectral",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 776,
+    "width": 783,
+    "height": 797,
     "formats": [
       "png",
       "pdf"
@@ -366,7 +366,7 @@
     "title": "Four criteria, four prices",
     "source": "/linear-algebra/decompositions/cholesky",
     "section": "linear-algebra",
-    "width": 840,
+    "width": 783,
     "height": 731,
     "formats": [
       "png",
@@ -379,7 +379,7 @@
     "source": "/calculus/derivatives/function",
     "section": "calculus",
     "width": 933,
-    "height": 748,
+    "height": 775,
     "formats": [
       "png",
       "pdf"
@@ -391,7 +391,7 @@
     "source": "/calculus/derivatives/rules",
     "section": "calculus",
     "width": 933,
-    "height": 966,
+    "height": 989,
     "formats": [
       "png",
       "pdf"
@@ -403,7 +403,7 @@
     "source": "/calculus/derivatives",
     "section": "calculus",
     "width": 933,
-    "height": 1010,
+    "height": 1033,
     "formats": [
       "png",
       "pdf"
@@ -414,8 +414,8 @@
     "title": "Six places a determinant does the work",
     "source": "/linear-algebra/determinants/applications",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1122,
+    "width": 783,
+    "height": 1210,
     "formats": [
       "png",
       "pdf"
@@ -426,8 +426,8 @@
     "title": "What the determinant measures, by dimension",
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 989,
+    "width": 783,
+    "height": 1033,
     "formats": [
       "png",
       "pdf"
@@ -438,8 +438,8 @@
     "title": "One question, twelve answers",
     "source": "/linear-algebra/determinants/properties",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1308,
+    "width": 783,
+    "height": 1316,
     "formats": [
       "png",
       "svg",
@@ -451,8 +451,8 @@
     "title": "What each operation does to the determinant",
     "source": "/linear-algebra/determinants/properties",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1767,
+    "width": 783,
+    "height": 1845,
     "formats": [
       "png",
       "pdf"
@@ -475,8 +475,8 @@
     "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1239,
+    "width": 933,
+    "height": 748,
     "formats": [
       "png",
       "pdf"
@@ -487,8 +487,8 @@
     "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1193,
+    "width": 933,
+    "height": 748,
     "formats": [
       "png",
       "pdf"
@@ -499,8 +499,8 @@
     "title": null,
     "source": "/linear-algebra/determinants",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1088,
+    "width": 933,
+    "height": 765,
     "formats": [
       "png",
       "pdf"
@@ -511,8 +511,8 @@
     "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1440,
+    "width": 933,
+    "height": 788,
     "formats": [
       "png",
       "pdf"
@@ -523,8 +523,8 @@
     "title": "Which matrices diagonalize",
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1108,
+    "width": 783,
+    "height": 1168,
     "formats": [
       "png",
       "pdf"
@@ -535,8 +535,8 @@
     "title": "Ordinary and spectral, compared",
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 576,
+    "width": 783,
+    "height": 577,
     "formats": [
       "png",
       "pdf"
@@ -548,7 +548,7 @@
     "source": "/calculus/derivatives/differentiability",
     "section": "calculus",
     "width": 933,
-    "height": 690,
+    "height": 691,
     "formats": [
       "png",
       "pdf"
@@ -571,8 +571,8 @@
     "title": null,
     "source": "/calculus/limits/continuity",
     "section": "calculus",
-    "width": 690,
-    "height": 637,
+    "width": 933,
+    "height": 534,
     "formats": [
       "png",
       "pdf"
@@ -595,8 +595,8 @@
     "title": "Properties of the dot product",
     "source": "/linear-algebra/vectors/dot-product",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1366,
+    "width": 783,
+    "height": 1403,
     "formats": [
       "png",
       "pdf"
@@ -607,8 +607,8 @@
     "title": null,
     "source": "/linear-algebra/eigen",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 996,
+    "width": 933,
+    "height": 645,
     "formats": [
       "png",
       "pdf"
@@ -619,8 +619,8 @@
     "title": "Gaussian elimination, stage by stage",
     "source": "/linear-algebra/linear-systems/gaussian-elimination",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 981,
+    "width": 783,
+    "height": 1059,
     "formats": [
       "png",
       "pdf"
@@ -632,7 +632,7 @@
     "source": "/algebra/equations",
     "section": "algebra",
     "width": 933,
-    "height": 827,
+    "height": 849,
     "formats": [
       "png",
       "svg",
@@ -645,7 +645,7 @@
     "source": "/algebra/equations",
     "section": "algebra",
     "width": 933,
-    "height": 678,
+    "height": 701,
     "formats": [
       "png",
       "pdf"
@@ -668,8 +668,8 @@
     "title": null,
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 976,
+    "width": 933,
+    "height": 688,
     "formats": [
       "png",
       "pdf"
@@ -680,8 +680,8 @@
     "title": null,
     "source": "/probability/expected-value",
     "section": "probability",
-    "width": 690,
-    "height": 1029,
+    "width": 933,
+    "height": 716,
     "formats": [
       "png",
       "pdf"
@@ -693,7 +693,7 @@
     "source": "/algebra/powers/irrational-exponents",
     "section": "algebra",
     "width": 933,
-    "height": 739,
+    "height": 762,
     "formats": [
       "png",
       "pdf"
@@ -705,7 +705,7 @@
     "source": "/algebra/powers/irrational-exponents",
     "section": "algebra",
     "width": 933,
-    "height": 794,
+    "height": 798,
     "formats": [
       "png",
       "svg",
@@ -717,8 +717,8 @@
     "title": null,
     "source": "/algebra/powers/exponent-rules",
     "section": "algebra",
-    "width": 690,
-    "height": 1260,
+    "width": 933,
+    "height": 775,
     "formats": [
       "png",
       "pdf"
@@ -729,8 +729,8 @@
     "title": null,
     "source": "/algebra/powers",
     "section": "algebra",
-    "width": 690,
-    "height": 1230,
+    "width": 933,
+    "height": 674,
     "formats": [
       "png",
       "pdf"
@@ -765,8 +765,8 @@
     "title": "The four fundamental subspaces",
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1108,
+    "width": 783,
+    "height": 1135,
     "formats": [
       "png",
       "pdf"
@@ -778,7 +778,7 @@
     "source": "/arithmetic/fractions",
     "section": "arithmetic",
     "width": 933,
-    "height": 624,
+    "height": 647,
     "formats": [
       "png",
       "pdf"
@@ -790,7 +790,7 @@
     "source": "/arithmetic/fractions",
     "section": "arithmetic",
     "width": 933,
-    "height": 766,
+    "height": 789,
     "formats": [
       "png",
       "pdf"
@@ -802,7 +802,7 @@
     "source": "/functions/arithmetic",
     "section": "functions",
     "width": 933,
-    "height": 608,
+    "height": 609,
     "formats": [
       "png",
       "pdf"
@@ -826,7 +826,7 @@
     "source": "/functions/families",
     "section": "functions",
     "width": 933,
-    "height": 810,
+    "height": 812,
     "formats": [
       "png",
       "pdf"
@@ -837,8 +837,8 @@
     "title": null,
     "source": "/functions/analyzing",
     "section": "functions",
-    "width": 690,
-    "height": 1717,
+    "width": 933,
+    "height": 1522,
     "formats": [
       "png",
       "pdf"
@@ -862,7 +862,7 @@
     "source": "/functions/basics",
     "section": "functions",
     "width": 933,
-    "height": 623,
+    "height": 646,
     "formats": [
       "png",
       "pdf"
@@ -886,7 +886,7 @@
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
     "section": "linear-algebra",
     "width": 933,
-    "height": 651,
+    "height": 652,
     "formats": [
       "png",
       "pdf"
@@ -898,7 +898,7 @@
     "source": "/arithmetic/divisibility/gcd",
     "section": "arithmetic",
     "width": 933,
-    "height": 625,
+    "height": 624,
     "formats": [
       "png",
       "pdf"
@@ -909,8 +909,8 @@
     "title": "The same algorithm across settings",
     "source": "/linear-algebra/orthogonality/gram-schmidt",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1102,
+    "width": 783,
+    "height": 1155,
     "formats": [
       "png",
       "pdf"
@@ -922,7 +922,7 @@
     "source": "/calculus/limits/infinity",
     "section": "calculus",
     "width": 933,
-    "height": 668,
+    "height": 693,
     "formats": [
       "png",
       "pdf"
@@ -945,8 +945,8 @@
     "title": "Where Ax = 0 turns up",
     "source": "/linear-algebra/linear-systems/homogeneous",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1072,
+    "width": 783,
+    "height": 1130,
     "formats": [
       "png",
       "pdf"
@@ -957,8 +957,8 @@
     "title": "Image and kernel, side by side",
     "source": "/linear-algebra/transformations/image-kernel",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1195,
+    "width": 783,
+    "height": 1220,
     "formats": [
       "png",
       "pdf"
@@ -970,7 +970,7 @@
     "source": "/calculus/integrals/improper",
     "section": "calculus",
     "width": 933,
-    "height": 628,
+    "height": 651,
     "formats": [
       "png",
       "pdf"
@@ -981,8 +981,8 @@
     "title": "What operations do to an independent set",
     "source": "/linear-algebra/vector-spaces/linear-independence",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1454,
+    "width": 783,
+    "height": 1533,
     "formats": [
       "png",
       "pdf"
@@ -994,7 +994,7 @@
     "source": "/algebra/inequalities",
     "section": "algebra",
     "width": 933,
-    "height": 706,
+    "height": 750,
     "formats": [
       "png",
       "pdf"
@@ -1005,8 +1005,8 @@
     "title": "The three axioms",
     "source": "/linear-algebra/orthogonality/inner-product",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1287,
+    "width": 783,
+    "height": 1330,
     "formats": [
       "png",
       "pdf"
@@ -1018,7 +1018,7 @@
     "source": "/calculus/integrals",
     "section": "calculus",
     "width": 933,
-    "height": 629,
+    "height": 630,
     "formats": [
       "png",
       "pdf"
@@ -1030,7 +1030,7 @@
     "source": "/calculus/integrals/techniques",
     "section": "calculus",
     "width": 933,
-    "height": 663,
+    "height": 683,
     "formats": [
       "png",
       "pdf"
@@ -1053,8 +1053,8 @@
     "title": "Properties of the inverse",
     "source": "/linear-algebra/matrix/inverse",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1518,
+    "width": 783,
+    "height": 1605,
     "formats": [
       "png",
       "pdf"
@@ -1066,7 +1066,7 @@
     "source": "/trigonometry/inverse-functions",
     "section": "trigonometry",
     "width": 933,
-    "height": 651,
+    "height": 652,
     "formats": [
       "png",
       "pdf"
@@ -1077,8 +1077,8 @@
     "title": "The invertibility equivalence",
     "source": "/linear-algebra/matrix/inverse",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1308,
+    "width": 783,
+    "height": 1336,
     "formats": [
       "png",
       "svg",
@@ -1090,8 +1090,8 @@
     "title": null,
     "source": "/trigonometry/sines-cosines-law",
     "section": "trigonometry",
-    "width": 690,
-    "height": 1173,
+    "width": 933,
+    "height": 734,
     "formats": [
       "png",
       "pdf"
@@ -1114,8 +1114,8 @@
     "title": "Four ways to compute the same solution",
     "source": "/linear-algebra/orthogonality/least-squares",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 917,
+    "width": 783,
+    "height": 977,
     "formats": [
       "png",
       "pdf"
@@ -1126,8 +1126,8 @@
     "title": null,
     "source": "/calculus/limits/rules",
     "section": "calculus",
-    "width": 690,
-    "height": 1274,
+    "width": 933,
+    "height": 787,
     "formats": [
       "png",
       "pdf"
@@ -1138,8 +1138,8 @@
     "title": "How linear maps combine",
     "source": "/linear-algebra/transformations/properties",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1389,
+    "width": 783,
+    "height": 1457,
     "formats": [
       "png",
       "pdf"
@@ -1150,8 +1150,8 @@
     "title": null,
     "source": "/algebra/polynomials/graphing",
     "section": "algebra",
-    "width": 690,
-    "height": 922,
+    "width": 933,
+    "height": 702,
     "formats": [
       "png",
       "pdf"
@@ -1162,8 +1162,8 @@
     "title": null,
     "source": "/algebra/inequalities/linear",
     "section": "algebra",
-    "width": 690,
-    "height": 931,
+    "width": 933,
+    "height": 688,
     "formats": [
       "png",
       "pdf"
@@ -1174,8 +1174,8 @@
     "title": null,
     "source": "/algebra/logarithms/properties",
     "section": "algebra",
-    "width": 690,
-    "height": 1038,
+    "width": 933,
+    "height": 742,
     "formats": [
       "png",
       "pdf"
@@ -1187,7 +1187,7 @@
     "source": "/algebra/logarithms/rules",
     "section": "algebra",
     "width": 933,
-    "height": 595,
+    "height": 619,
     "formats": [
       "png",
       "pdf"
@@ -1198,8 +1198,8 @@
     "title": null,
     "source": "/algebra/logarithms",
     "section": "algebra",
-    "width": 690,
-    "height": 1018,
+    "width": 933,
+    "height": 731,
     "formats": [
       "png",
       "pdf"
@@ -1210,8 +1210,8 @@
     "title": "What each factor holds",
     "source": "/linear-algebra/decompositions/lower-upper",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 648,
+    "width": 783,
+    "height": 652,
     "formats": [
       "png",
       "pdf"
@@ -1222,8 +1222,8 @@
     "title": "What LU computes, and at what cost",
     "source": "/linear-algebra/decompositions/lower-upper",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 851,
+    "width": 783,
+    "height": 891,
     "formats": [
       "png",
       "pdf"
@@ -1255,11 +1255,11 @@
   },
   {
     "id": "matrix-powers-by-hand",
-    "title": "Four powers, computed the long way",
+    "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 685,
+    "width": 933,
+    "height": 631,
     "formats": [
       "png",
       "pdf"
@@ -1270,8 +1270,8 @@
     "title": "Which laws survive the product",
     "source": "/linear-algebra/matrix/operations",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1620,
+    "width": 783,
+    "height": 1651,
     "formats": [
       "png",
       "pdf"
@@ -1294,8 +1294,8 @@
     "title": "Eleven types and what each one forces",
     "source": "/linear-algebra/matrix/types",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1927,
+    "width": 783,
+    "height": 1925,
     "formats": [
       "png",
       "pdf"
@@ -1319,8 +1319,8 @@
     "title": null,
     "source": "/arithmetic/modulo",
     "section": "arithmetic",
-    "width": 690,
-    "height": 1055,
+    "width": 933,
+    "height": 764,
     "formats": [
       "png",
       "pdf"
@@ -1331,8 +1331,8 @@
     "title": "Properties of the norm",
     "source": "/linear-algebra/vectors/magnitude",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1389,
+    "width": 783,
+    "height": 1446,
     "formats": [
       "png",
       "pdf"
@@ -1343,8 +1343,8 @@
     "title": null,
     "source": "/linear-algebra/orthogonality/least-squares",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 978,
+    "width": 933,
+    "height": 694,
     "formats": [
       "png",
       "pdf"
@@ -1368,7 +1368,7 @@
     "source": "/complex-numbers/demoivre-theorem",
     "section": "complex-numbers",
     "width": 933,
-    "height": 820,
+    "height": 838,
     "formats": [
       "png",
       "pdf"
@@ -1379,8 +1379,8 @@
     "title": null,
     "source": "/complex-numbers/imaginary-numbers",
     "section": "complex-numbers",
-    "width": 690,
-    "height": 1467,
+    "width": 850,
+    "height": 1351,
     "formats": [
       "png",
       "pdf"
@@ -1392,7 +1392,7 @@
     "source": "/complex-numbers/basics",
     "section": "complex-numbers",
     "width": 706,
-    "height": 888,
+    "height": 916,
     "formats": [
       "png",
       "pdf"
@@ -1403,8 +1403,8 @@
     "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1264,
+    "width": 933,
+    "height": 729,
     "formats": [
       "png",
       "pdf"
@@ -1415,8 +1415,8 @@
     "title": "Operations in an orthonormal basis",
     "source": "/linear-algebra/orthogonality/orthogonal-sets",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1092,
+    "width": 783,
+    "height": 1169,
     "formats": [
       "png",
       "pdf"
@@ -1428,7 +1428,7 @@
     "source": "/linear-algebra/orthogonality",
     "section": "linear-algebra",
     "width": 933,
-    "height": 677,
+    "height": 679,
     "formats": [
       "png",
       "pdf"
@@ -1439,8 +1439,8 @@
     "title": null,
     "source": "/linear-algebra/vectors/properties",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1093,
+    "width": 933,
+    "height": 667,
     "formats": [
       "png",
       "pdf"
@@ -1452,7 +1452,7 @@
     "source": "/probability/probability-function/pdf",
     "section": "probability",
     "width": 933,
-    "height": 605,
+    "height": 628,
     "formats": [
       "png",
       "pdf"
@@ -1463,8 +1463,8 @@
     "title": null,
     "source": "/combinatorics/basics",
     "section": "combinatorics",
-    "width": 651,
-    "height": 1034,
+    "width": 901,
+    "height": 735,
     "formats": [
       "png",
       "pdf"
@@ -1476,7 +1476,7 @@
     "source": "/linear-algebra/matrix/types",
     "section": "linear-algebra",
     "width": 933,
-    "height": 771,
+    "height": 775,
     "formats": [
       "png",
       "pdf"
@@ -1488,7 +1488,7 @@
     "source": "/probability/probability-function",
     "section": "probability",
     "width": 933,
-    "height": 724,
+    "height": 725,
     "formats": [
       "png",
       "pdf"
@@ -1524,7 +1524,7 @@
     "source": "/algebra/sequences/prime-numbers",
     "section": "algebra",
     "width": 933,
-    "height": 663,
+    "height": 687,
     "formats": [
       "png",
       "pdf"
@@ -1535,8 +1535,8 @@
     "title": null,
     "source": "/algebra/roots/properties",
     "section": "algebra",
-    "width": 690,
-    "height": 959,
+    "width": 933,
+    "height": 721,
     "formats": [
       "png",
       "pdf"
@@ -1547,8 +1547,8 @@
     "title": "Dot against cross",
     "source": "/linear-algebra/vectors/cross-product",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 576,
+    "width": 783,
+    "height": 589,
     "formats": [
       "png",
       "pdf"
@@ -1559,7 +1559,7 @@
     "title": "Four ways to read the same product",
     "source": "/linear-algebra/matrix/operations",
     "section": "linear-algebra",
-    "width": 840,
+    "width": 783,
     "height": 1003,
     "formats": [
       "png",
@@ -1571,8 +1571,8 @@
     "title": "Four formulas, one operation",
     "source": "/linear-algebra/orthogonality/projections",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1000,
+    "width": 783,
+    "height": 1017,
     "formats": [
       "png",
       "pdf"
@@ -1583,8 +1583,8 @@
     "title": "Properties of orthogonal projections",
     "source": "/linear-algebra/orthogonality/projections",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1531,
+    "width": 783,
+    "height": 1651,
     "formats": [
       "png",
       "pdf"
@@ -1595,8 +1595,8 @@
     "title": "Thin QR and full QR",
     "source": "/linear-algebra/decompositions/qr",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 557,
+    "width": 783,
+    "height": 590,
     "formats": [
       "png",
       "pdf"
@@ -1607,8 +1607,8 @@
     "title": "Where each factor comes from",
     "source": "/linear-algebra/orthogonality/gram-schmidt",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 557,
+    "width": 783,
+    "height": 579,
     "formats": [
       "png",
       "pdf"
@@ -1631,8 +1631,8 @@
     "title": "Four routes to the same factorization",
     "source": "/linear-algebra/decompositions/qr",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 900,
+    "width": 783,
+    "height": 938,
     "formats": [
       "png",
       "pdf"
@@ -1667,8 +1667,8 @@
     "title": null,
     "source": "/algebra/roots/equations",
     "section": "algebra",
-    "width": 690,
-    "height": 970,
+    "width": 933,
+    "height": 730,
     "formats": [
       "png",
       "pdf"
@@ -1679,8 +1679,8 @@
     "title": null,
     "source": "/algebra/roots",
     "section": "algebra",
-    "width": 690,
-    "height": 951,
+    "width": 933,
+    "height": 729,
     "formats": [
       "png",
       "pdf"
@@ -1692,7 +1692,7 @@
     "source": "/algebra/roots/radical-rules",
     "section": "algebra",
     "width": 933,
-    "height": 572,
+    "height": 592,
     "formats": [
       "png",
       "pdf"
@@ -1715,8 +1715,8 @@
     "title": null,
     "source": "/linear-algebra/matrix/rank",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1010,
+    "width": 933,
+    "height": 787,
     "formats": [
       "png",
       "pdf"
@@ -1727,8 +1727,8 @@
     "title": "Properties of rank",
     "source": "/linear-algebra/matrix/rank",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1711,
+    "width": 783,
+    "height": 1789,
     "formats": [
       "png",
       "pdf"
@@ -1740,7 +1740,7 @@
     "source": "/algebra/equations/rational",
     "section": "algebra",
     "width": 933,
-    "height": 624,
+    "height": 644,
     "formats": [
       "png",
       "pdf"
@@ -1751,8 +1751,8 @@
     "title": null,
     "source": "/algebra/roots/rational-exponents",
     "section": "algebra",
-    "width": 690,
-    "height": 1017,
+    "width": 933,
+    "height": 749,
     "formats": [
       "png",
       "pdf"
@@ -1763,8 +1763,8 @@
     "title": null,
     "source": "/functions/families",
     "section": "functions",
-    "width": 690,
-    "height": 1217,
+    "width": 933,
+    "height": 776,
     "formats": [
       "png",
       "pdf"
@@ -1775,8 +1775,8 @@
     "title": null,
     "source": "/complex-numbers/multiplicative-inverse",
     "section": "complex-numbers",
-    "width": 690,
-    "height": 1304,
+    "width": 933,
+    "height": 700,
     "formats": [
       "png",
       "pdf"
@@ -1788,7 +1788,7 @@
     "source": "/trigonometry/graphs",
     "section": "trigonometry",
     "width": 933,
-    "height": 651,
+    "height": 652,
     "formats": [
       "png",
       "pdf"
@@ -1799,8 +1799,8 @@
     "title": "Reflections in the plane",
     "source": "/linear-algebra/transformations/geometric",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1009,
+    "width": 783,
+    "height": 1046,
     "formats": [
       "png",
       "pdf"
@@ -1823,8 +1823,8 @@
     "title": null,
     "source": "/complex-numbers/demoivre-theorem",
     "section": "complex-numbers",
-    "width": 690,
-    "height": 903,
+    "width": 933,
+    "height": 688,
     "formats": [
       "png",
       "pdf"
@@ -1848,7 +1848,7 @@
     "source": "/linear-algebra/linear-systems/gaussian-elimination",
     "section": "linear-algebra",
     "width": 933,
-    "height": 650,
+    "height": 675,
     "formats": [
       "png",
       "pdf"
@@ -1859,8 +1859,8 @@
     "title": "Everything readable from the RREF",
     "source": "/linear-algebra/linear-systems/echelon-form",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1230,
+    "width": 783,
+    "height": 1308,
     "formats": [
       "png",
       "pdf"
@@ -1932,7 +1932,7 @@
     "source": "/linear-algebra/linear-systems",
     "section": "linear-algebra",
     "width": 933,
-    "height": 627,
+    "height": 628,
     "formats": [
       "png",
       "pdf"
@@ -1943,8 +1943,8 @@
     "title": "Every solvability question, answered by rank",
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1061,
+    "width": 783,
+    "height": 1145,
     "formats": [
       "png",
       "pdf"
@@ -1955,8 +1955,8 @@
     "title": "Four questions, one reduction",
     "source": "/linear-algebra/vector-spaces/span",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 829,
+    "width": 783,
+    "height": 905,
     "formats": [
       "png",
       "pdf"
@@ -1991,8 +1991,8 @@
     "title": "When structure makes the inverse cheap",
     "source": "/linear-algebra/matrix/inverse",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1299,
+    "width": 783,
+    "height": 1297,
     "formats": [
       "png",
       "pdf"
@@ -2015,8 +2015,8 @@
     "title": "Ranks readable from structure",
     "source": "/linear-algebra/matrix/rank",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1118,
+    "width": 783,
+    "height": 1155,
     "formats": [
       "png",
       "pdf"
@@ -2039,8 +2039,8 @@
     "title": "Spectral properties at a glance",
     "source": "/linear-algebra/eigen/properties",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1821,
+    "width": 783,
+    "height": 1943,
     "formats": [
       "png",
       "pdf"
@@ -2051,8 +2051,8 @@
     "title": "What the decomposition gives you",
     "source": "/linear-algebra/decompositions/spectral",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1153,
+    "width": 783,
+    "height": 1199,
     "formats": [
       "png",
       "pdf"
@@ -2063,8 +2063,8 @@
     "title": "Three regimes, set by the modulus",
     "source": "/linear-algebra/eigen/complex",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 804,
+    "width": 458,
+    "height": 1397,
     "formats": [
       "png",
       "pdf"
@@ -2075,8 +2075,8 @@
     "title": null,
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1063,
+    "width": 933,
+    "height": 758,
     "formats": [
       "png",
       "pdf"
@@ -2087,8 +2087,8 @@
     "title": "The default basis of each space",
     "source": "/linear-algebra/vector-spaces/basis",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 893,
+    "width": 783,
+    "height": 913,
     "formats": [
       "png",
       "pdf"
@@ -2099,8 +2099,8 @@
     "title": "Dimensions of the standard spaces",
     "source": "/linear-algebra/vector-spaces/dimension",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1168,
+    "width": 783,
+    "height": 1187,
     "formats": [
       "png",
       "pdf"
@@ -2112,7 +2112,7 @@
     "source": "/linear-algebra/vector-spaces/dimension",
     "section": "linear-algebra",
     "width": 933,
-    "height": 739,
+    "height": 764,
     "formats": [
       "png",
       "pdf"
@@ -2124,7 +2124,7 @@
     "source": "/linear-algebra/vector-spaces/subspaces",
     "section": "linear-algebra",
     "width": 933,
-    "height": 715,
+    "height": 739,
     "formats": [
       "png",
       "pdf"
@@ -2135,8 +2135,8 @@
     "title": "Subspace or not, and which clause decides",
     "source": "/linear-algebra/vector-spaces/subspaces",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1271,
+    "width": 783,
+    "height": 1347,
     "formats": [
       "png",
       "pdf"
@@ -2147,8 +2147,8 @@
     "title": "Sum and direct sum",
     "source": "/linear-algebra/vector-spaces/dimension",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 704,
+    "width": 783,
+    "height": 724,
     "formats": [
       "png",
       "pdf"
@@ -2159,8 +2159,8 @@
     "title": "The four subspaces, by matrix type",
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 648,
+    "width": 783,
+    "height": 651,
     "formats": [
       "png",
       "pdf"
@@ -2171,8 +2171,8 @@
     "title": "Three forms, one factorization",
     "source": "/linear-algebra/decompositions/svd",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 875,
+    "width": 783,
+    "height": 999,
     "formats": [
       "png",
       "pdf"
@@ -2184,7 +2184,7 @@
     "source": "/linear-algebra/decompositions/svd",
     "section": "linear-algebra",
     "width": 933,
-    "height": 765,
+    "height": 791,
     "formats": [
       "png",
       "pdf"
@@ -2195,8 +2195,8 @@
     "title": "What the SVD reveals",
     "source": "/linear-algebra/decompositions/svd",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1234,
+    "width": 783,
+    "height": 1294,
     "formats": [
       "png",
       "pdf"
@@ -2207,8 +2207,8 @@
     "title": "What the shape of A predicts",
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 712,
+    "width": 783,
+    "height": 736,
     "formats": [
       "png",
       "pdf"
@@ -2219,8 +2219,8 @@
     "title": "Trace properties at a glance",
     "source": "/linear-algebra/matrix/trace",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1560,
+    "width": 783,
+    "height": 1644,
     "formats": [
       "png",
       "pdf"
@@ -2231,8 +2231,8 @@
     "title": "Transformation ↔ matrix",
     "source": "/linear-algebra/transformations/matrix-representation",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1232,
+    "width": 783,
+    "height": 1291,
     "formats": [
       "png",
       "pdf"
@@ -2243,8 +2243,8 @@
     "title": "Recognising a family from its matrix",
     "source": "/linear-algebra/transformations/geometric",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 983,
+    "width": 783,
+    "height": 1004,
     "formats": [
       "png",
       "pdf"
@@ -2279,8 +2279,8 @@
     "title": null,
     "source": "/linear-algebra/linear-systems",
     "section": "linear-algebra",
-    "width": 690,
-    "height": 1211,
+    "width": 933,
+    "height": 704,
     "formats": [
       "png",
       "pdf"
@@ -2292,7 +2292,7 @@
     "source": "/calculus/limits/two-sided",
     "section": "calculus",
     "width": 933,
-    "height": 624,
+    "height": 647,
     "formats": [
       "png",
       "pdf"
@@ -2303,8 +2303,8 @@
     "title": "The eight laws the operations obey",
     "source": "/linear-algebra/vectors/basic-operations",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1516,
+    "width": 783,
+    "height": 1554,
     "formats": [
       "png",
       "pdf"
@@ -2315,8 +2315,8 @@
     "title": "Properties at a glance",
     "source": "/linear-algebra/vectors/properties",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1343,
+    "width": 783,
+    "height": 1461,
     "formats": [
       "png",
       "pdf"
@@ -2327,8 +2327,8 @@
     "title": "The ten axioms",
     "source": "/linear-algebra/vector-spaces/axioms",
     "section": "linear-algebra",
-    "width": 840,
-    "height": 1781,
+    "width": 783,
+    "height": 1804,
     "formats": [
       "png",
       "pdf"
@@ -2352,7 +2352,7 @@
     "source": "/linear-algebra/vector-spaces",
     "section": "linear-algebra",
     "width": 933,
-    "height": 952,
+    "height": 975,
     "formats": [
       "png",
       "pdf"

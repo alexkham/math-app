@@ -1089,7 +1089,12 @@ Subtraction fails: $(8 - 3) - 2 = 3$, but $8 - (3 - 2) = 7$. Division fails: $(1
  
 ## Generalization
  
-The associative property extends to any number of terms or factors. A sum like $a + b + c + d + e$ can be evaluated in any grouping order and yields the same result. This is why such expressions are written without parentheses — none are needed.`,
+The associative property extends to any number of terms or factors. A sum like $a + b + c + d + e$ can be evaluated in any grouping order and yields the same result. This is why such expressions are written without parentheses — none are needed.
+
+@academic[fact,aside:true,width:35%:Computer sums depend on the grouping
+In standard double precision, $(10^{20} + (-10^{20})) + 1 = 1$, but $10^{20} + (-10^{20} + 1) = 0$. A stored number keeps only about $16$ significant digits, so $-10^{20} + 1$ rounds back to $-10^{20}$ and the $1$ is lost.]@
+
+The property is a statement about exact numbers. A calculator or a computer works with rounded numbers instead: it keeps a fixed number of significant digits and rounds the result of every single addition before the next one starts. A long sum is therefore computed as a chain of rounded partial sums, and the grouping decides which partial sums are formed along the way. Exact arithmetic, with whole numbers or fractions written out in full, involves no rounding at all.`,
     before: ``,
     after: ``,
     link: '',
@@ -1185,6 +1190,9 @@ For every nonzero real number $a$, the value $\\frac{1}{a}$ — also called its 
  
 ## Why Zero Has No Multiplicative Inverse
  
+@academic[fact,aside:true,width:35%:The first rules for zero allowed $0 \\div 0$
+Brahmagupta's rules of 628, the oldest known rules for computing with zero, declared $0 \\div 0 = 0$. Every $q$ satisfies $q \\cdot 0 = 0$, so $0$ has no better claim to be the quotient than any other number.]@
+
 The number $0$ is the only real number without a multiplicative inverse. The equation $0 \\cdot x = 1$ has no solution because, by the [zero property of multiplication](!/arithmetic/properties#8), $0 \\cdot x = 0$ for every $x$. There is no number that, when multiplied by $0$, gives $1$. This is the formal reason division by zero is undefined: $\\frac{1}{0}$ would be the multiplicative inverse of $0$, and that inverse does not exist.`,
     before: ``,
     after: ``,
@@ -1303,7 +1311,7 @@ The properties are usually applied without being named. The point of stating the
  
 [Fractions](!/arithmetic/fractions) inherit every property of multiplication and addition. The [reciprocal](!/arithmetic/fractions/dividing#1) of a fraction is its multiplicative inverse, and adding fractions with a common denominator uses the same commutative and associative rules as adding integers.
  
-[Modular arithmetic](!/arithmetic/modulo) extends these properties to a finite cyclic system. Addition and multiplication remain commutative, associative, and distributive within any modulus, but inverses behave differently — not every element has a multiplicative inverse modulo $n$ unless it is [coprime](!/arithmetic/divisibility/gcd#7) to $n$.
+[Modular arithmetic](!/arithmetic/modulo) extends these properties to a finite cyclic system. Addition and multiplication remain commutative, associative, and distributive within any modulus, but inverses behave differently — an element has a multiplicative inverse modulo $n$ only when it is [coprime](!/arithmetic/divisibility/gcd#7) to $n$.
  
 [Algebraic equations](!/algebra/equations) are solved by applying these properties step by step. Equivalent equations are produced by adding the same quantity to both sides (additive inverse), multiplying both sides by a nonzero constant (multiplicative inverse), or distributing across parentheses. The solving methods catalogued under linear, quadratic, and polynomial equations all rest on the rules listed here.
  
@@ -1653,6 +1661,7 @@ export default function ArithmeticProperties({arithPropOutline, seoData, section
           sectionsContent.obj9.content,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          `@academic[punchline:The sign rules are not memorized conventions: distributivity and additive inverses force every one of them.]@`,
         ]
     },
     {

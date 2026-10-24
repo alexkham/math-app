@@ -415,6 +415,9 @@ obj5: {
 @academic[formula_callout:Method 3: Using GCD
 $$\\text{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$$]@
 
+@academic[fact,aside:true,width:35%:Two Maya calendars realign every 52 years
+The Maya ran a $260$-day calendar alongside a $365$-day one. Since $\\gcd(260, 365) = 5$, the same pair of dates comes back after $\\frac{260 \\cdot 365}{5} = 18{,}980$ days, which is $52$ years, not the $260$ years the plain product would give.]@
+
 For $\\text{lcm}(12, 18)$: $\\gcd(12, 18) = 6$, so $\\text{lcm} = \\frac{12 \\cdot 18}{6} = \\frac{216}{6} = 36$.
 
 For $\\text{lcm}(35, 15)$: $\\gcd(35, 15) = 5$, so $\\text{lcm} = \\frac{35 \\cdot 15}{5} = \\frac{525}{5} = 105$.
@@ -442,7 +445,9 @@ Consider a prime $p$ appearing with exponent $\\alpha$ in $a$ and $\\beta$ in $b
 
 This holds for every prime simultaneously, so the products are equal.
 
-The relationship is useful in both directions. Knowing the GCD gives the LCM, and knowing the LCM gives the GCD — each determines the other when $a$ and $b$ are fixed.`,
+The relationship is useful in both directions. Knowing the GCD gives the LCM, and knowing the LCM gives the GCD — each determines the other when $a$ and $b$ are fixed.
+
+@academic[punchline:For each prime the GCD keeps the smaller exponent and the LCM the larger, so together they rebuild $a \\cdot b$ exactly.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -538,7 +543,12 @@ obj10: {
   content: `Adding **fractions** with different denominators requires a common denominator, and the LCM of the denominators is the smallest one that works. To add $\\frac{1}{4} + \\frac{1}{6}$: $\\text{lcm}(4, 6) = 12$, so $\\frac{1}{4} = \\frac{3}{12}$ and $\\frac{1}{6} = \\frac{2}{12}$, giving $\\frac{5}{12}$.
 
 Scheduling problems are natural LCM applications. If Bus A arrives every $12$ minutes and Bus B every $18$ minutes, and both just arrived simultaneously, they next coincide in $\\text{lcm}(12, 18) = 36$ minutes.`,
-  afterFigure: `Cycle synchronization follows the same pattern. Two gears with $12$ and $18$ teeth respectively realign after $36$ teeth have passed the contact point. Two blinking lights with periods of $4$ and $6$ seconds flash together every $12$ seconds.
+  afterFigure: `@academic[fact,aside:true,width:35%:Two cicada broods meet every 221 years
+Brood XIII of the periodical cicadas emerges every $17$ years and Brood XIX every $13$. The periods are coprime, so the two line up only every $13 \\cdot 17 = 221$ years: in 2024 both came out in Illinois for the first time since 1803.]@
+
+Cycle synchronization follows the same pattern. Two gears with $12$ and $18$ teeth respectively realign after $36$ teeth have passed the contact point. Two blinking lights with periods of $4$ and $6$ seconds flash together every $12$ seconds.
+
+Nature runs such cycles too. Periodical cicadas spend most of their lives underground and then come out all at once as a brood, every $13$ years in some broods and every $17$ years in others. Where a $13$-year brood and a $17$-year brood live side by side, the two emerge in the same year only at common multiples of their periods.
 
 In each case, the question is the same: when does the first simultaneous recurrence occur? The answer is always the LCM of the individual periods.`,
   before: ``,

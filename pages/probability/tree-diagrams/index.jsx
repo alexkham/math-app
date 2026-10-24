@@ -1016,6 +1016,11 @@ A tree diagram is built from a small number of structural elements, each with a 
   Sequences of connected branches from the root to a terminal node, representing complete outcome sequences.
 
 These components work together to make the order of events and the structure of sequential randomness explicit.
+
+@academic[fact,aside:true,width:35%:A best-of-seven tree has 70 leaves
+A path stops as soon as one side has 4 wins, so the tree has 70 leaves, not $2^7 = 128$. With evenly matched sides, ending in game 6 and in game 7 are equally likely, $\\frac{5}{16}$ each: at $3$–$2$, game 6 either ends it or makes it $3$–$3$.]@
+
+Not every path has to reach the same depth. When a process stops as soon as its result is settled, a node can be terminal at an early stage while other branches keep splitting. A match played as a best-of-seven series is a typical case: some paths end after four games, others run to the seventh. The leaves of such a tree sit at different stages, and each one is still a complete outcome sequence.
 `,
       before:``,
       after:``,
@@ -1127,6 +1132,9 @@ Tree diagrams therefore serve as an intuitive bridge between conditional probabi
       title:`Tree Diagrams vs Other Representations`,
       content:`
 Tree diagrams are one of several ways to represent probabilistic situations.
+
+@academic[fact,aside:true,width:35%:A poker hand sits on 120 paths
+Dealing 5 cards one at a time gives a tree with $52 \\cdot 51 \\cdot 50 \\cdot 49 \\cdot 48 = 311{,}875{,}200$ paths, yet there are only $2{,}598{,}960$ different hands. The tree records order, so each hand appears on $5! = 120$ paths.]@
 
 Compared to tables, tree diagrams emphasize **order and sequence**, making them better suited for problems where outcomes occur in stages. Compared to formulas, they highlight **structure and dependencies** rather than algebraic relationships.
 
@@ -1474,6 +1482,7 @@ The tree does not define randomness on its own — it **organizes** an already d
           sectionsContent.obj5.content,
                   <div key={'unit-u_5_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_2 }} />,
           `Bayes theorem reads the same tree backwards.`,
+          `@academic[punchline:Multiply along a path for one sequence, add across paths for an event: every tree calculation is these two moves.]@`,
         ]
     },
     {

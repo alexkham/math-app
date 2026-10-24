@@ -1080,6 +1080,9 @@ Understanding this distinction prevents a common mistake — assuming probabilit
       content:`
 Conditional probability shows up naturally in many recurring situations.
 
+@academic[fact,aside:true,width:35%:Which die showed the six matters
+Roll two dice. Given that at least one shows a six, both are sixes with probability $\\frac{1}{11}$; given that the first die shows a six, the answer is $\\frac{1}{6}$. The first condition leaves 11 outcomes, the second only 6.]@
+
 One common pattern is **"given that…"** reasoning, where information is stated explicitly and probabilities must be evaluated under that condition. Another is **filtering**, where attention is restricted to cases that meet a certain criterion before any assessment is made.
 
 Conditioning also appears in **sequential processes**, where earlier outcomes affect how later ones are viewed, and in **classification problems**, where probabilities are evaluated within specific groups or categories.
@@ -1379,6 +1382,11 @@ The formula has three parts, and the lines above have named each of them: the co
           `
 
 The part most often misread is the bar. $P(A \\mid B)$ and $P(B \\mid A)$ share the same numerator but divide by different events, so they are different numbers; [Bayes' theorem](!/probability/bayes-theorem) is the rule for converting one into the other.`,
+          `@academic[fact,aside:true,width:35%:Raising a chance works both ways
+In the dice example, $\\frac{3}{5} > \\frac{1}{2}$ and $\\frac{1}{6} > \\frac{5}{36}$: each condition makes the other event more likely. It always goes both ways, since each inequality, multiplied out, reads $P(A \\cap B) > P(A)\\,P(B)$.]@
+
+For the two dice, both directions can be read off the grid. Among the 5 outcomes with sum 8, an even first die appears 3 times, so $P(\\text{first even} \\mid \\text{sum } 8) = \\frac{3}{5}$. Among the 18 outcomes with an even first die, a sum of 8 appears 3 times, (2,6), (4,4) and (6,2), so $P(\\text{sum } 8 \\mid \\text{first even}) = \\frac{3}{18} = \\frac{1}{6}$. Each can be set against its own unconditional value, $\\frac{1}{2}$ and $\\frac{5}{36}$.`,
+          `@academic[punchline:Conditioning keeps only the part of A inside B and rescales it, so that B becomes the whole sample space.]@`,
         ]
     },
     {
@@ -1410,6 +1418,7 @@ The part most often misread is the bar. $P(A \\mid B)$ and $P(B \\mid A)$ share 
           sectionsContent.independence.content,
                   <div key={'unit-independentGrid'} dangerouslySetInnerHTML={{ __html: demoUnits.independentGrid }} />,
           `Compare the sum-8 condition above, which moved the probability from 1/2 to 3/5.`,
+          `@academic[punchline:Conditioning usually moves a probability; independence is exactly the case where the condition leaves it where it was.]@`,
         ]
     },
     {

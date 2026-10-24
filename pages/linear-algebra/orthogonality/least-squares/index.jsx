@@ -1292,7 +1292,12 @@ const leastSquaresMethods = {
 const sectionsContent = {
   obj1: {
     title: `The Problem`,
-    content: `The [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ may have no solution — $\\mathbf{b}$ may not lie in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$. This is typical when the system is overdetermined: more equations than unknowns, with the equations imposing contradictory constraints.
+    content: `@academic[fact,aside:true,width:35%:A lost asteroid found again
+Ceres, discovered on 1 January 1801, was followed for about six weeks before it vanished in the Sun's glare. The 24-year-old Gauss fitted an orbit to those few observations, Ceres was found again on 31 December 1801 close to his prediction, and least squares was part of the method he published in 1809.]@
+
+The [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ may have no solution — $\\mathbf{b}$ may not lie in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$. This is typical when the system is overdetermined: more equations than unknowns, with the equations imposing contradictory constraints.
+
+Overdetermined systems are the normal situation whenever something is measured. An orbit around the Sun is fixed by six numbers, but astronomers record far more than six positions, and each one carries a small measurement error. The equations then disagree slightly with one another, and no single orbit satisfies all of them exactly.
 
 When no exact solution exists, the goal shifts from solving $A\\mathbf{x} = \\mathbf{b}$ to minimizing the error:
 
@@ -1369,7 +1374,7 @@ These are the normal equations. They form a square $n \\times n$ system regardle
 When $A$ has full column rank (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving a unique least-squares solution:
 
 @academic[formula_callout:least_squares_solution|Least Squares Solution|$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$$]@
-@academic[formulas_link:/linear-algebra/formulas#least-squares_solution]@
+@academic[formulas_link:/linear-algebra/formulas#least_squares_solution]@
 
 @academic[pitfall,aside:true,width:35%:Splitting the inverse into two factors
 Writing $(A^TA)^{-1} = A^{-1}(A^T)^{-1}$ collapses the formula to $\\hat{\\mathbf{x}} = A^{-1}\\mathbf{b}$, but the $4 \\times 2$ matrix $A$ of the line fit below has no inverse. Only the square matrix $A^TA$, there $\\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}$, is inverted, as one matrix.
@@ -1414,6 +1419,9 @@ The design matrix gains a third column:
 
 @academic[formula_callout:Worked Example: Fitting a Parabola
 $$A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 4 \\\\ 1 & 3 & 9 \\\\ 1 & 4 & 16 \\end{pmatrix}$$]@
+
+@academic[fact,aside:true,width:35%:The best parabola is a straight line
+For these four points the least-squares parabola is $y = 1.8x$ again, with $c_2 = 0$. The line's residuals $(0.2, -0.6, 0.6, -0.2)$ are already perpendicular to the new column $(1, 4, 9, 16)$, so the extra freedom has nothing to fix.]@
 
 The normal equations $A^TA\\hat{\\mathbf{c}} = A^T\\mathbf{y}$ now form a $3 \\times 3$ system. The machinery is identical — only the model matrix changes. A higher-degree model provides a fit at least as close (the residual sum of squares cannot increase when the model gains flexibility), but it also risks fitting noise rather than signal.
 
@@ -1471,7 +1479,7 @@ When $A$ does not have full column rank, the Moore-Penrose pseudoinverse $A^+$ i
 Substituting $A = QR$ into $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ gives $R^TQ^TQR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Since $Q^TQ = I$, this simplifies to $R^TR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Multiplying both sides by $(R^T)^{-1}$:
 
 @academic[formula_callout:least_squares_via_qr|Least Squares via QR|$$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$]@
-@academic[formulas_link:/linear-algebra/formulas#least-squares_via_qr]@
+@academic[formulas_link:/linear-algebra/formulas#least_squares_via_qr]@
 
 The right-hand side $Q^T\\mathbf{b}$ is a vector of $n$ dot products. The left-hand side is an upper [triangular](!/linear-algebra/matrix/types) system, solved by back substitution.
 
@@ -1920,6 +1928,7 @@ export default function LeastSquaresPage({normalEqCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+          `@academic[punchline:Linear regression is least squares under another name: the fitted values are the projection of the data onto the column space.]@`,
         ]
     },
     {

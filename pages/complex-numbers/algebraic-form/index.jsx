@@ -1211,6 +1211,7 @@ import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbe
 import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -1695,6 +1696,26 @@ export async function getStaticProps(){
 
 
 // formulas-optimized: v1 | 2026-06-11 | 3 callouts (obj1, obj3, obj21)
+// Concept introduction (section 1, "The Standard Form of a Complex Number") —
+// template I, naming. Running instance: 4 − 5i, read as 4 + (−5)i. Old obj1
+// text is kept in sectionsContent.obj1, unused; its formula box and link, the
+// pitfall aside, six passages and obj1Table are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciShapesTable = ciTableOpen(['as first written', 'tidied', 'real piece', 'times i']) +
+  ciRow(['4 − 5i', '4 + (−5)i', '4', '−5'], { color: '#2563EB', cols: [1] }) +
+  ciRow(['2i + 3', '3 + 2i', '3', '2'], { shade: true }) +
+  ciRow(['7i', '0 + 7i', '0', '7']) +
+  ciRow(['5', '5 + 0i', '5', '0'], { shade: true }) +
+  ciRow(['i²', '−1 + 0i', '−1', '0']) +
+  ciRow(['(1 + i)²', '0 + 2i', '0', '2'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
    obj0: {
@@ -2220,6 +2241,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    shapesTable: ciShapesTable,
+  };
+
   const demoUnits = {
     conj: demoUnitFrame({
       svg: conjugateModulusDiagrams.start,
@@ -2280,6 +2305,7 @@ const schemas = {
   props:{
     conjugateClassCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2311,10 +2337,78 @@ export default function AlgebraicFormPage({conjugateClassCases,
   obj3Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Whenever you work out an expression with i in it, you already tidy the answer the same way.`,
+        content: [
+          `Expanding $(1 + i)^2$ gives $1 + 2i + i^2$. Nobody leaves it like that: $i^2$ is replaced by $-1$, the plain numbers are collected, and what remains is $2i$. The answer ends as a plain number plus some number of $i$'s.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Numbers that look quite different all tidy into that one shape.`,
+        content: [
+          `A subtraction, a sum written backwards, a lone multiple of $i$, an ordinary real number, $i^2$, and a square — each can be rewritten as one real piece plus a real number times $i$.`,
+          ciTable('shapesTable'),
+        ],
+      },
+      {
+        id: 'shared',
+        lead: `What they share: two real numbers, one standing alone and one multiplying i.`,
+        content: [
+          `The structure mirrors a binomial with two distinct terms. The first term $a$ stands alone as an ordinary real number. The second term $bi$ combines a real coefficient $b$ with the imaginary unit. Addition joins them into a single mathematical object. The number $3 + 2i$ contains real term $3$ and imaginary term $2i$. The number $-1 + 7i$ has real term $-1$ and imaginary term $7i$. Even $4 - 5i$ fits this pattern when read as $4 + (-5)i$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A complex number written as $a + bi$, with $a$ and $b$ real, is in [algebraic form](!/complex-numbers/definitions#algebraic_form), also called standard form. The number $a$ is its [real part](!/complex-numbers/definitions#real_part) and $b$ is its [imaginary part](!/complex-numbers/definitions#imaginary_part).`,
+        formula: [
+          `Every complex number can be written in a single canonical format:`,
+          `@academic[formula_callout:Algebraic Form
+$$z = a + bi$$
+/complex-numbers/formulas#algebraic_form]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+          `Here $a$ and $b$ are real numbers and $i$ is the [imaginary unit](!/complex-numbers/imaginary-numbers) satisfying $i^2 = -1$. This representation, called the standard form or algebraic form, provides a uniform way to express any element of $\\mathbb{C}$.`,
+        ],
+        footer: `So $4 - 5i$ has real part $4$ and imaginary part $-5$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Algebraic form is a way of writing a complex number: one expression that carries two real numbers.`,
+        content: [
+          `The real number $a$ is called the real part of $z$. The real number $b$ — not $bi$, just $b$ — is called the imaginary part. This terminology causes confusion at first, since the "imaginary part" is itself a real number. The name indicates which component of $z$ the value describes, not the nature of $b$ as a quantity.`,
+          `@academic[pitfall,aside:true,width:35%:Combining the two terms
+Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the point $(0, 5)$ instead of $(3, 2)$. The two terms never merge: $3 + 2i$ is already in standard form, with real part $3$ and imaginary part $2$.
+[Read more](!#pitfalls)]@`,
+          `The imaginary unit $i$ serves a structural role: it separates and distinguishes the two components. Without $i$, we could not tell where the real part ends and the imaginary part begins. The expression $a + bi$ packages two independent real values into one object, with $i$ acting as the marker that identifies which piece is which. This packaging allows complex numbers to encode two-dimensional information — a feature that becomes central when we explore the [geometric representation](!/complex-numbers/geometric-representation).`,
+          `Special cases deserve mention. When $b = 0$, the imaginary term vanishes and $z = a + 0i = a$ reduces to a pure real number. When $a = 0$, the real term vanishes and $z = 0 + bi = bi$ becomes a [pure imaginary number](!/complex-numbers/imaginary-numbers). When both $a = 0$ and $b = 0$, we obtain $z = 0$, the complex number zero. Every real number and every pure imaginary number fits within the algebraic form as a special case — the complex numbers contain all previous number systems as subsets.`,
+          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What the name buys: once every number is in this form, questions about them become questions about two real numbers.`,
+        content: `Two complex numbers are equal exactly when their real parts match and their imaginary parts match, and sums and conjugates are worked out part by part. None of that has to be re-argued for each new expression: tidy it into $a + bi$ first, then read off $a$ and $b$. The section on [equality of complex numbers](!/complex-numbers/algebraic-form#3) is the first use.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation $\\operatorname{Re}(z)$ and $\\operatorname{Im}(z)$, the real and imaginary parts in detail, equality, the conjugate and its properties, and identities with conjugates.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2331,12 +2425,7 @@ export default function AlgebraicFormPage({conjugateClassCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

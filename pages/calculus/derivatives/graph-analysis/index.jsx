@@ -581,6 +581,8 @@ For $f(x) = -\\frac{1}{x}$, $f'(x) = \\frac{1}{x^2} > 0$ wherever it exists, yet
 [Read more](!#pitfalls)]@
 
 The points found this way split the domain into open intervals. On each interval $f'$ keeps a single sign, so one test value inside it is enough: for $f(x) = x^3 - 3x$, the points $x = \\pm 1$ give three intervals, and $f'(-2) = 9$, $f'(0) = -3$ and $f'(2) = 9$ show that $f$ increases, decreases, then increases again. A value of $x$ where $f$ itself is undefined also splits the domain, since $f'$ cannot exist there either.
+
+@academic[punchline:On each interval where $f'$ keeps one sign, that sign alone tells whether $f$ rises or falls.]@
 `,
     before: ``,
     after: ``,
@@ -632,7 +634,12 @@ $$f'(x) \\text{ changes } - \\to + \\text{ at } c \\implies c \\text{ is a local
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-The test works even when $f'(c)$ does not exist, as long as $f$ is continuous at $c$. It requires checking the sign of $f'$ in an interval immediately to the left and immediately to the right of $c$. No information about $f''$ is needed, making this test universally applicable among derivative-based classification methods.
+@academic[fact,aside:true,width:35%:A minimum the sign test cannot see
+$f(x) = x^2\\left(2 + \\sin\\frac{1}{x}\\right)$, with $f(0) = 0$, has a strict minimum at $0$, since $f(x) \\geq x^2$. Yet $f'(x) = 2x\\left(2 + \\sin\\frac{1}{x}\\right) - \\cos\\frac{1}{x}$ takes both signs on every interval beside $0$, so the first derivative test has no sign to read.]@
+
+The test works even when $f'(c)$ does not exist, as long as $f$ is continuous at $c$. It requires checking the sign of $f'$ in an interval immediately to the left and immediately to the right of $c$. No information about $f''$ is needed, which makes this test the most widely applicable of the derivative-based classification methods.
+
+The test needs one sign of $f'$ on a whole interval just left of $c$ and one sign on a whole interval just right of it. For a non-constant polynomial such intervals always exist, because $f'$ has only finitely many zeros and keeps one sign between neighboring ones. The test is a sufficient condition for an extremum: when it gives a verdict, the verdict is right.
 `,
     before: ``,
     after: ``,
@@ -699,6 +706,9 @@ $$f''(c) = 0 \\text{ or undefined}, \\text{ and } f''(x) \\text{ changes sign at
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
+@academic[fact,aside:true,width:35%:The bell curve bends one standard deviation out
+For the standard bell curve $f(x) = e^{-x^2/2}$, $f''(x) = (x^2 - 1)e^{-x^2/2}$ changes sign at $x = \\pm 1$. So the curve turns from a cap to a cup exactly one standard deviation from its center, and $\\sigma$ can be read off a drawn bell curve as the distance to an inflection point.]@
+
 At an inflection point, $f''$ must either equal zero or fail to exist. However, $f''(c) = 0$ alone does not guarantee an inflection point. The function $f(x) = x^4$ has $f''(0) = 0$, but the concavity does not change at $x = 0$—the graph is concave up on both sides. The sign of $f''$ must actually switch across the point.
 
 To locate inflection points: find where $f''(x) = 0$ or $f''$ is undefined, then verify that $f''$ changes sign. On the graph of $f'$, inflection points of $f$ correspond to local extrema of $f'$—the slope of $f$ reaches a peak or trough and reverses direction.
@@ -717,6 +727,8 @@ The process begins with preliminary analysis: domain, intercepts, symmetry (even
 First derivative analysis determines where $f$ increases and decreases, and locates all local extrema. Second derivative analysis determines concavity intervals and inflection points. End behavior—the function's direction as $x \\to \\pm\\infty$—frames the overall shape.
 
 Combining these elements produces a qualitative sketch without plotting individual points. The derivative framework reveals structure that pointwise computation alone would miss: a function might appear flat in a table of values while the derivatives expose a subtle extremum nearby.
+
+@academic[punchline:The signs of $f'$ and $f''$, read interval by interval, fix the shape of a graph before a single point is plotted.]@
 `,
     before: ``,
     after: ``,
@@ -760,6 +772,8 @@ Differentiating $A = \\pi r^2$ with respect to $t$ as $\\frac{dA}{dt} = 2\\pi r$
 [Read more](!#pitfalls)]@
 
 Setting up the relationship correctly is the critical step. The equation must hold at all times, not just at the particular instant in question. Constants can be substituted only after differentiation—replacing a variable with a fixed value before differentiating eliminates its rate of change from the equation.
+
+@academic[punchline:Differentiate the relation that holds at every instant, and only then substitute the numbers of the moment.]@
 `,
     before: ``,
     after: ``,

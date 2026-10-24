@@ -730,7 +730,12 @@ const sectionsContent = {
     title: `The Core Idea`,
     content: `When a [matrix](!/linear-algebra/matrix) $A$ multiplies a vector $\\mathbf{x}$, the result $A\\mathbf{x}$ is usually a vector pointing in a completely different direction. But for certain special vectors, the output $A\\mathbf{x}$ points in the same direction as $\\mathbf{x}$ — it is simply a scaled copy.
 
-These are the vectors that the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$ stretches, compresses, or reverses without deflecting. They are the "natural axes" of the transformation, and the scaling factors measure exactly how the transformation acts along each such axis. Finding these directions and factors is the eigenvalue problem.`,
+@academic[fact,aside:true,width:35%:Eigen means own
+The prefix is German for own: an eigenvector is a direction that belongs to the matrix itself. The word Eigenwert, own value, comes from Hilbert's 1904 work on integral equations; English writers long said characteristic root, or Sylvester's latent root, instead.]@
+
+These are the vectors that the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$ stretches, compresses, or reverses without deflecting. They are the "natural axes" of the transformation, and the scaling factors measure exactly how the transformation acts along each such axis. Finding these directions and factors is the eigenvalue problem.
+
+These directions belong to the transformation, not to the way it happens to be written down. In another basis the same transformation gets a different array of numbers, yet it stretches the same lines by the same factors. The eigenvalues are therefore the same numbers whichever basis is used to write the matrix.`,
     before: ``,
     after: ``,
     link: ``,
@@ -803,7 +808,9 @@ It contains the zero vector and is closed under addition and scalar multiplicati
 Reporting $\\mathbf{v} = \\mathbf{0}$ when $A - \\lambda I$ reduces with no free variable hides an error in $\\lambda$. For $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$, a sign slip gives $\\lambda = -2$, and $A + 2I = \\begin{pmatrix} 6 & 2 \\\\ 1 & 5 \\end{pmatrix}$ has $\\det = 28 \\neq 0$, so only $\\mathbf{0}$ solves it. The true eigenvalue $\\lambda = 2$ leaves a free variable and gives $\\mathbf{v} = (-1, 1)^T$.
 [Read more](!#pitfalls)]@
 
-The [dimension](!/linear-algebra/vector-spaces/dimension) of the eigenspace is called the geometric multiplicity of $\\lambda$. Finding a [basis](!/linear-algebra/vector-spaces) for the eigenspace is a standard null-space computation: row reduce $A - \\lambda I$ and extract the general solution in parametric form. Each free variable contributes one basis vector to the eigenspace.`,
+The [dimension](!/linear-algebra/vector-spaces/dimension) of the eigenspace is called the geometric multiplicity of $\\lambda$. Finding a [basis](!/linear-algebra/vector-spaces) for the eigenspace is a standard null-space computation: row reduce $A - \\lambda I$ and extract the general solution in parametric form. Each free variable contributes one basis vector to the eigenspace.
+
+@academic[punchline:An eigenvalue never comes with a single eigenvector: it owns a whole subspace of them, found as an ordinary null space.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -864,6 +871,9 @@ The full set of [properties](!/linear-algebra/eigen/properties) — including ei
   obj8: {
     title: `Why Eigenvalues Matter`,
     content: `[Diagonalization](!/linear-algebra/eigen/diagonalization) is the most immediate application. If $A$ has $n$ [linearly independent](!/linear-algebra/vector-spaces/linear-independence) eigenvectors, it can be written as $A = PDP^{-1}$ where $D$ is the diagonal matrix of eigenvalues. This factorization reduces matrix powers to $A^k = PD^kP^{-1}$ — raising a diagonal matrix to a power means raising each diagonal entry independently.
+
+@academic[fact,aside:true,width:35%:Google's ranking is an eigenvector
+PageRank, the score Google first used to rank web pages, is the eigenvector for eigenvalue $1$ of a matrix with one row and one column per page. With billions of pages, it was found by multiplying by the matrix over and over, never through a characteristic polynomial.]@
 
 In dynamical systems, eigenvalues determine long-term behavior. The system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ grows, decays, or oscillates depending on whether the eigenvalues have absolute value greater than, less than, or equal to $1$. The system $\\mathbf{x}' = A\\mathbf{x}$ has solutions involving $e^{\\lambda t}$, so the real parts of the eigenvalues determine exponential growth or decay and the imaginary parts determine oscillation frequency.
 
@@ -1184,6 +1194,7 @@ export default function EigenvaluesPage({eigenGrowthCases,
           >
             <CaseSplit data={eigenGrowthCases} variant="poster" proseStyle="cards" theme={figureTheme} />
           </DiagramFrame>,
+          `@academic[punchline:Powers, long-run behavior, principal directions and vibration modes are all read from the eigenvalues and eigenvectors.]@`,
         ]
     },
     {

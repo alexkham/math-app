@@ -1349,7 +1349,9 @@ When $\\cos\\theta = 1$ ($\\theta = 0$), the vectors point in the same direction
 
 The orthogonality condition $\\mathbf{u} \\cdot \\mathbf{v} = 0$ is the case $\\theta = 90°$. The dot product encodes the full metric geometry of $\\mathbb{R}^n$: length from $\\mathbf{v} \\cdot \\mathbf{v}$, angle from $\\mathbf{u} \\cdot \\mathbf{v}$, and distance from $(\\mathbf{u} - \\mathbf{v}) \\cdot (\\mathbf{u} - \\mathbf{v})$.
 
-For $\\mathbf{u} = (1, 2, 3)$ and $\\mathbf{v} = (4, -1, 2)$: $\\mathbf{u} \\cdot \\mathbf{v} = 4 - 2 + 6 = 8$, $\\|\\mathbf{u}\\| = \\sqrt{14}$, $\\|\\mathbf{v}\\| = \\sqrt{21}$. So $\\cos\\theta = 8/\\sqrt{294} \\approx 0.467$, giving $\\theta \\approx 62.2°$.`,
+For $\\mathbf{u} = (1, 2, 3)$ and $\\mathbf{v} = (4, -1, 2)$: $\\mathbf{u} \\cdot \\mathbf{v} = 4 - 2 + 6 = 8$, $\\|\\mathbf{u}\\| = \\sqrt{14}$, $\\|\\mathbf{v}\\| = \\sqrt{21}$. So $\\cos\\theta = 8/\\sqrt{294} \\approx 0.467$, giving $\\theta \\approx 62.2°$.
+
+@academic[punchline:Length, distance and angle are all read off from one product, so choosing the product chooses the geometry.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1401,7 +1403,12 @@ A vector space equipped with an inner product is called an inner product space. 
 
 @academic[rule_theorem_plain:The Cauchy-Schwarz inequality, the triangle inequality, and the Pythagorean theorem all hold in any inner product space.]@
 
-The standard dot product on $\\mathbb{R}^n$ is one inner product. But the definition admits many others, each defining a different geometry on the same set of vectors.`,
+@academic[fact,aside:true,width:35%:No inner product gives taxicab length
+Jordan and von Neumann proved in 1935 that a length comes from an inner product exactly when $\\|\\mathbf{u} + \\mathbf{v}\\|^2 + \\|\\mathbf{u} - \\mathbf{v}\\|^2 = 2\\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{v}\\|^2$ for all $\\mathbf{u}, \\mathbf{v}$. For $(1, 0)$ and $(0, 1)$ the taxicab length gives $4 + 4 = 8$ on the left and $2 + 2 = 4$ on the right.]@
+
+The standard dot product on $\\mathbb{R}^n$ is one inner product. But the definition admits many others, each defining a different geometry on the same set of vectors.
+
+Each of these geometries brings its own length, $\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$. Lengths can also be defined directly, with no inner product in sight. The taxicab length $|v_1| + |v_2|$ on $\\mathbb{R}^2$ adds the distances travelled along each axis, as on a street grid. It is zero only for $\\mathbf{0}$, scales by $|c|$ when the vector is multiplied by $c$, and satisfies the triangle inequality, just as a length that comes from an inner product does.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1483,7 +1490,12 @@ The theorem extends to any number of mutually orthogonal vectors: if $\\mathbf{v
 @academic[formula_callout:The Pythagorean Theorem
 $$\\|\\mathbf{v}_1 + \\mathbf{v}_2 + \\cdots + \\mathbf{v}_k\\|^2 = \\|\\mathbf{v}_1\\|^2 + \\|\\mathbf{v}_2\\|^2 + \\cdots + \\|\\mathbf{v}_k\\|^2$$]@
 
-All cross terms vanish because every pair has dot product zero. This is not a special property of $\\mathbb{R}^2$ or $\\mathbb{R}^3$ — it holds in any inner product space. The Pythagorean theorem is a direct consequence of the inner product axioms, and it is the reason that orthogonal decompositions are so computationally clean: lengths decompose into independent, additive contributions from each perpendicular direction.`,
+@academic[fact,aside:true,width:35%:Pythagoras sums the reciprocal squares
+On $(-\\pi, \\pi)$, $x = 2\\left(\\sin x - \\frac{\\sin 2x}{2} + \\frac{\\sin 3x}{3} - \\cdots\\right)$. Its squared length $\\int_{-\\pi}^{\\pi} x^2\\,dx = \\frac{2\\pi^3}{3}$ is the sum of the pieces' squared lengths $\\frac{4}{n^2} \\cdot \\pi$, which gives $1 + \\frac{1}{4} + \\frac{1}{9} + \\cdots = \\frac{\\pi^2}{6}$.]@
+
+All cross terms vanish because every pair has dot product zero. This is not a special property of $\\mathbb{R}^2$ or $\\mathbb{R}^3$ — it holds in any inner product space. The Pythagorean theorem is a direct consequence of the inner product axioms, and it is the reason that orthogonal decompositions are so computationally clean: lengths decompose into independent, additive contributions from each perpendicular direction.
+
+The sum may even run over infinitely many perpendicular pieces. On $[-\\pi, \\pi]$ with $\\langle f, g \\rangle = \\int_{-\\pi}^{\\pi} f(x)g(x)\\,dx$, the functions $\\sin x, \\sin 2x, \\sin 3x, \\ldots$ are mutually orthogonal, each with $\\|\\sin nx\\|^2 = \\pi$, and many functions can be written as an infinite combination $b_1 \\sin x + b_2 \\sin 2x + \\cdots$ of them.`,
     before: ``,
     after: ``,
     link: ``,

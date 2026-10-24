@@ -1042,6 +1042,9 @@ When the numerator equals the denominator, the fraction equals one whole. The fr
 
 Proper fractions have a numerator smaller than the denominator, making their value less than one. Improper fractions have a numerator greater than or equal to the denominator, making their value one or greater. Both types are covered in detail below.
 
+@academic[fact,aside:true,width:35%:Three unit fractions, still unproved
+Every $\\frac{4}{n}$ with $n \\ge 2$ checked so far is a sum of three unit fractions, as $\\frac{4}{5} = \\frac{1}{2} + \\frac{1}{4} + \\frac{1}{20}$. Erdős and Straus conjectured in 1948 that this always works; computers have confirmed it for every $n$ up to $10^{17}$, but no proof is known.]@
+
 A unit fraction has a numerator of exactly one, such as $\\frac{1}{2}$, $\\frac{1}{3}$, or $\\frac{1}{7}$. Unit fractions serve as building blocks for all other fractions and are explored further below.
 
 [Mixed numbers](!/arithmetic/fractions/mixed-numbers) combine a whole number with a proper fraction, such as $2\\frac{3}{4}$. They provide an intuitive way to express quantities greater than one and convert directly to and from improper fractions.
@@ -1070,7 +1073,12 @@ Improper fractions are not incorrect despite their name. They are essential in c
     title: `Unit Fractions`,
     content: `A unit fraction has a numerator of one. The simplest examples are $\\frac{1}{2}$, $\\frac{1}{3}$, $\\frac{1}{4}$, and so on. Each unit fraction represents exactly one part when a whole is divided into equal pieces.
 
+@academic[fact,aside:true,width:35%:Egyptian scribes summed unit fractions
+Apart from a few special signs such as $\\frac{2}{3}$, Egyptian notation could write only unit fractions, so every other fraction became a sum of different unit fractions. The Rhind papyrus, about 1550 BC, opens with a table of such sums for $\\frac{2}{n}$, among them $\\frac{2}{5} = \\frac{1}{3} + \\frac{1}{15}$.]@
+
 Unit fractions serve as the building blocks of all fractions. Any fraction $\\frac{a}{b}$ can be understood as $a$ copies of the unit fraction $\\frac{1}{b}$. The fraction $\\frac{3}{5}$ equals $\\frac{1}{5} + \\frac{1}{5} + \\frac{1}{5}$, or three copies of one-fifth.
+
+Copies of one size are not the only way to build a fraction from unit fractions. Three fifths is also a half plus a tenth: $\\frac{1}{2} + \\frac{1}{10} = \\frac{5}{10} + \\frac{1}{10} = \\frac{6}{10} = \\frac{3}{5}$. In this split every piece has a different size, and two pieces are enough instead of three.
 
 @academic[rule_plain:An important property of unit fractions is that larger denominators produce smaller values.]@
 
@@ -1571,6 +1579,7 @@ Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a pr
           sectionsContent.obj2.content,
                   <div key={'unit-threeFifths'} dangerouslySetInnerHTML={{ __html: demoUnits.threeFifths }} />,
           `Shading all 5 parts would give 5/5 = 1, the whole bar.`,
+          `@academic[punchline:The denominator sets the size of the pieces and the numerator counts them; neither number alone gives the value.]@`,
         ]
     },
     {
@@ -1627,6 +1636,7 @@ Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a pr
           >
             <TopDownTree data={fractionOpTree} />
           </DiagramFrame>,
+          `@academic[punchline:Only adding and subtracting need a common denominator; multiplying and dividing work straight across, once the divisor is flipped.]@`,
         ]
     },
     {

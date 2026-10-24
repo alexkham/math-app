@@ -564,6 +564,9 @@ Each pairs a linear factor with a quadratic factor to produce a two-term cubic. 
 
 For $(2x + 3)(x - 4)$, the four steps produce: First $2x \\cdot x = 2x^2$, Outer $2x \\cdot (-4) = -8x$, Inner $3 \\cdot x = 3x$, Last $3 \\cdot (-4) = -12$. Combining the middle terms gives $2x^2 - 5x - 12$.
 
+@academic[fact,aside:true,width:35%:Three products are enough
+FOIL makes four products, but in $(ax + b)(cx + d)$ the middle coefficient $ad + bc$ equals $(a + b)(c + d) - ac - bd$, so three multiplications suffice. Applied over and over, this trick (Karatsuba, 1960) multiplies huge numbers faster than school long multiplication.]@
+
 FOIL is nothing more than a structured way to ensure all four products are accounted for — it is a special case of the general distribution used in multiplying any two polynomials. Its value lies in speed and reliability for the specific case of two binomials, where exactly four products always arise.
 
 The method does not extend beyond binomials. Attempting to apply FOIL to a binomial times a trinomial, or to two trinomials, misses terms. A binomial times a trinomial requires six products, not four. For anything beyond two binomials, the full term-by-term distribution described in the previous section is the correct approach.`,
@@ -596,6 +599,9 @@ To divide your own polynomials by long or synthetic division with each step show
   obj7: {
     title: `Synthetic Division`,
     content: `When the divisor is a linear binomial of the form $(x - c)$, synthetic division offers a streamlined alternative to long division. It uses only the coefficients of the dividend and the value $c$, reducing the process to a compact sequence of multiplications and additions.
+
+@academic[fact,aside:true,width:35%:No method uses fewer multiplications
+Each step of synthetic division is one multiplication and one addition, so a polynomial of degree $n$ is evaluated with only $n$ of each. For coefficients not known in advance, V. Pan proved in 1966 that no method can use fewer multiplications.]@
 
 To divide $x^3 - 2x^2 + 5x - 3$ by $(x - 1)$, write the coefficients $1, -2, 5, -3$ in a row and place $c = 1$ to the left. Bring down the first coefficient: $1$. Multiply by $c$: $1 \\cdot 1 = 1$. Add to the next coefficient: $-2 + 1 = -1$. Multiply by $c$: $-1 \\cdot 1 = -1$. Add: $5 + (-1) = 4$. Multiply: $4 \\cdot 1 = 4$. Add: $-3 + 4 = 1$. The bottom row reads $1, -1, 4, 1$ — giving a quotient of $x^2 - x + 4$ with remainder $1$, matching the long division result exactly.
 
@@ -947,6 +953,7 @@ export default function OperationsPage({polyOpTree, seoData, sectionsContent, in
           sectionsContent.obj3.content,
                   <div key={'unit-multiply'} dangerouslySetInnerHTML={{ __html: demoUnits.multiply }} />,
           `Long division, treated next, runs this grid backwards one cell at a time.`,
+          `@academic[punchline:Multiplying polynomials is every term times every term: degrees add, and $m$ terms by $n$ terms give $mn$ products.]@`,
         ]
     },
 
@@ -999,6 +1006,7 @@ export default function OperationsPage({polyOpTree, seoData, sectionsContent, in
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:Synthetic division is long division by $x - c$ reduced to its coefficients, and its final number is always $P(c)$.]@`,
         ]
     },
     {

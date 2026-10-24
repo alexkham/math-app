@@ -1631,7 +1631,7 @@ const spiralRegimes = {
           properties: {
             action: 'pure rotation by $\\theta$ in the basis of the real canonical form, no scaling',
             det: '$\\det A = 1$',
-            orbit: 'a closed ellipse (a circle in the basis of the real canonical form)',
+            orbit: 'points on a closed ellipse (a circle in the basis of the real canonical form)',
           },
           note: 'In the basis of the real canonical form, lengths are preserved exactly and the block is [orthogonal](!/linear-algebra/matrix/types); $A$ itself need not be. Every orbit closes if $\\theta$ is a rational multiple of $2\\pi$ and fills the circle densely otherwise \u2014 the boundary case in every stability argument.',
         },
@@ -1687,7 +1687,7 @@ const obj7Table = `
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Marginally stable</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|λ| = 1 → trajectory traces a closed (periodic) curve</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">|λ| = 1 → trajectory stays on a closed curve</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Re(λ) = 0 → sustained oscillation at constant amplitude</td>
     </tr>
     <tr style="background: #f8f9fa;">
@@ -1731,7 +1731,7 @@ const complexEigenvalues = {
           anchor: '#6',
           formula: '$n$ odd $\\Rightarrow$ at least one real $\\lambda$',
           condition: 'real matrices only',
-          note: 'Complex roots come in pairs, so an odd number of them cannot pair off entirely and at least one must be real. This is why a rotation in $\\mathbb{R}^3$ has an axis while a rotation in $\\mathbb{R}^2$ has none \u2014 the leftover real eigenvalue is the axis.',
+          note: 'Complex roots come in pairs, so an odd number of them cannot pair off entirely and at least one must be real. This is why a rotation in $\\mathbb{R}^3$ has an axis while a rotation in $\\mathbb{R}^2$ has none \u2014 the eigenvector of the leftover real eigenvalue spans the axis.',
         },
       ],
     },
@@ -1989,7 +1989,10 @@ One consequence for odd-dimensional real matrices: at least one eigenvalue must 
   },
   obj3: {
     title: `The 2×2 Case in Detail`,
-    content: `A $2 \\times 2$ real matrix with complex eigenvalues $\\lambda = a \\pm bi$ (where $b \\neq 0$) acts, in a suitable real basis, as a rotation composed with a scaling. The eigenvalues have modulus $r = \\sqrt{a^2 + b^2}$ and argument $\\theta$ with $\\cos\\theta = a/r$, $\\sin\\theta = b/r$ (this is $\\arctan(b/a)$ only when $a > 0$).
+    content: `@academic[fact,aside:true,width:35%:No crystal has fivefold symmetry
+A rotation that maps a plane lattice onto itself has integer entries in a basis of lattice vectors, so its trace $2\\cos\\theta$ is an integer (in space, $1 + 2\\cos\\theta$). For a complex pair that leaves only $\\theta = 60°$, $90°$ or $120°$: crystals allow 6-, 4- and 3-fold turns, never the $72°$ turn of 5-fold symmetry.]@
+
+A $2 \\times 2$ real matrix with complex eigenvalues $\\lambda = a \\pm bi$ (where $b \\neq 0$) acts, in a suitable real basis, as a rotation composed with a scaling. The eigenvalues have modulus $r = \\sqrt{a^2 + b^2}$ and argument $\\theta$ with $\\cos\\theta = a/r$, $\\sin\\theta = b/r$ (this is $\\arctan(b/a)$ only when $a > 0$).
 
 When $r = 1$ (equivalently, $\\det(A) = a^2 + b^2 = 1$), the transformation is, in that basis, a pure rotation by angle $\\theta$. When $r > 1$, it is a rotation with outward spiraling. When $r < 1$, it is a rotation with inward spiraling.
 
@@ -2061,7 +2064,12 @@ A $3 \\times 3$ matrix with eigenvalues $5$ and $1 \\pm 2i$ has real canonical f
 @academic[formula_callout:Complex Eigenvalues in Larger Matrices
 $$\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 1 & -2 \\\\ 0 & 2 & 1 \\end{pmatrix}$$]@
 
-The real canonical form is the real analogue of [diagonalization](!/linear-algebra/eigen/diagonalization): for a matrix diagonalizable over $\\mathbb{C}$ it achieves the simplest possible real matrix that is similar to $A$, with the block structure directly reflecting the eigenvalue spectrum; otherwise larger real Jordan blocks appear.`,
+@academic[fact,aside:true,width:35%:Only 8 of 100 eigenvalues are real
+A $100 \\times 100$ matrix with independent, normally distributed entries has on average only about $8.4$ real eigenvalues; the other $90$ or so pair off into $2 \\times 2$ blocks. The expected number of real eigenvalues grows only like $\\sqrt{2n/\\pi}$ (Edelman, Kostlan and Shub, 1994).]@
+
+The real canonical form is the real analogue of [diagonalization](!/linear-algebra/eigen/diagonalization): for a matrix diagonalizable over $\\mathbb{C}$ it achieves the simplest possible real matrix that is similar to $A$, with the block structure directly reflecting the eigenvalue spectrum; otherwise larger real Jordan blocks appear.
+
+How the $n$ eigenvalues split between the two kinds of block depends on the matrix. A [symmetric matrix](!/linear-algebra/decompositions/spectral) has only real eigenvalues, so its real canonical form is made of $1 \\times 1$ blocks alone, while a rotation of $\\mathbb{R}^4$ in two separate planes is made of two $2 \\times 2$ blocks and nothing else. A matrix whose entries are chosen at random falls somewhere between these extremes.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2070,7 +2078,7 @@ The real canonical form is the real analogue of [diagonalization](!/linear-algeb
     title: `Dynamical Systems Interpretation`,
     content: `Complex eigenvalues produce oscillatory behavior in dynamical systems.
 
-In the discrete system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$, an eigenvalue $\\lambda = a + bi$ with modulus $r = |\\lambda| = \\sqrt{a^2 + b^2}$ generates a spiraling trajectory. When $r > 1$, the spiral grows outward — the system is unstable. When $r < 1$, the spiral decays inward — the system converges to the origin. When $r = 1$, the trajectory traces a closed curve — perpetual oscillation without growth or decay.
+In the discrete system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$, an eigenvalue $\\lambda = a + bi$ with modulus $r = |\\lambda| = \\sqrt{a^2 + b^2}$ generates a spiraling trajectory. When $r > 1$, the spiral grows outward — the system is unstable. When $r < 1$, the spiral decays inward — the system converges to the origin. When $r = 1$, the points stay on a closed curve — perpetual oscillation without growth or decay.
 
 @academic[pitfall,aside:true,width:35%:Using the real-part test on a discrete system
 Judging $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ by the sign of the real part calls $\\lambda = \\frac{1}{2} \\pm \\frac{1}{2}i$ unstable, since $\\operatorname{Re}(\\lambda) > 0$. Here the modulus decides: $|\\lambda| = \\frac{\\sqrt{2}}{2} \\approx 0.71 < 1$, so the iterates spiral in to $\\mathbf{0}$.
@@ -2382,6 +2390,7 @@ const schemas = {
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `@academic[punchline:Real entries force complex eigenvalues, and their eigenvectors, to arrive in conjugate pairs.]@`,
         ]
     },
     {
@@ -2409,6 +2418,7 @@ const schemas = {
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@academic[punchline:A complex eigenvector is two real vectors in disguise, spanning the plane on which the matrix rotates and scales.]@`,
         ]
     },
     {

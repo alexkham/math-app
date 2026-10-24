@@ -1203,7 +1203,12 @@ $$[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\bigl[\\,[T(\\mathbf{v}_1)]_{\\
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Different bases generally give different matrices for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces an equally valid, and generally different, matrix representation.`,
+@academic[fact,aside:true,width:35%:Differentiation is a quarter-turn
+With the basis $\\{\\cos x, \\sin x\\}$, the derivative has matrix $\\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}$, a quarter-turn of the coefficient plane. Two quarter-turns give $-I$, which is $f'' = -f$, and four give $I$: the fourth derivative of $\\sin x$ is $\\sin x$ again.]@
+
+Different bases generally give different matrices for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces an equally valid, and generally different, matrix representation.
+
+Spaces of functions work the same way. The functions $a\\cos x + b\\sin x$ form a two-dimensional space, and differentiation maps this space to itself, because the derivative of each such function is again a combination of $\\cos x$ and $\\sin x$. Its matrix is built by the same column recipe, one column for each basis function.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1221,7 +1226,14 @@ $T(x^2) = 2x = 0 \\cdot 1 + 2 \\cdot x$, so column $3$ is $(0, 2)^T$.
 @academic[formula_callout:Worked Example: Differentiation
 $$[T] = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$$]@
 
-The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\mathcal{P}_2) = 3$ columns. The [rank](!/linear-algebra/matrix/rank) is $2$ — differentiation maps $\\mathcal{P}_2$ onto all of $\\mathcal{P}_1$. The [null space](!/linear-algebra/vector-spaces/fundamental-spaces) is one-dimensional, spanned by the constant polynomial $1$ — the only polynomials whose derivative is zero.`,
+@academic[fact,aside:true,width:35%:Pascal's triangle shifts polynomials
+On $\\mathcal{P}_3$ the shift $p(x) \\mapsto p(x + 1)$ sends $x^j$ to $(1 + x)^j$, so its matrix has the rows of Pascal's triangle as its columns. Taylor's theorem writes the same map as $I + D + \\frac{1}{2}D^2 + \\frac{1}{6}D^3$, with $D$ the derivative matrix, and the series stops because $D^4 = O$.]@
+
+The $2 \\times 3$ shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\mathcal{P}_2) = 3$ columns. The [rank](!/linear-algebra/matrix/rank) is $2$ — differentiation maps $\\mathcal{P}_2$ onto all of $\\mathcal{P}_1$. The [null space](!/linear-algebra/vector-spaces/fundamental-spaces) is one-dimensional, spanned by the constant polynomial $1$ — the only polynomials whose derivative is zero.
+
+Differentiation can also be treated as a map from $\\mathcal{P}_3$ to itself, with the basis $\\{1, x, x^2, x^3\\}$ on both sides. Its matrix $D$ is then $4 \\times 4$, with the entries $1, 2, 3$ just above the diagonal and zeros everywhere else. Each application lowers every degree by one, so four applications send every cubic to $0$, and $D^4$ is the zero matrix.
+
+@academic[punchline:With bases fixed, even differentiation becomes a matrix, and calculus on polynomials turns into arithmetic on coordinates.]@`,
     before: ``,
     after: ``,
     link: ``,

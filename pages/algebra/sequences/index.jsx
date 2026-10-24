@@ -81,6 +81,9 @@ export async function getStaticProps(){
 
 Formally, a sequence is a function $f: \\mathbb{N} \\to \\mathbb{R}$ — it takes a natural number and returns a real number. The function viewpoint makes precise what "ordered list" means: two sequences are equal exactly when $a_n = b_n$ for every index $n$.
 
+@academic[fact,aside:true,width:35%:$1, 2, 4, 8, 16$, then $31$
+Mark $n$ points on a circle and join every pair by a chord, with no three chords meeting at one point. For $n = 1$ to $5$ the circle falls into $1, 2, 4, 8, 16$ regions, but for $n = 6$ into $31$: the count is $\\binom{n}{4} + \\binom{n}{2} + 1$, not $2^{n-1}$.]@
+
 A sequence can be **finite** (a fixed number of terms, such as $3, 7, 11, 15$) or **infinite** (continuing without end, such as $1, 4, 9, 16, \\ldots$). The ellipsis signals that the pattern continues, though what "the pattern" is must be stated explicitly — the sequence $1, 2, 4, \\ldots$ could be [powers](!/algebra/powers) of $2$, or the start of something else entirely.
 
 Two notations are standard. The brace form $\\{a_n\\}_{n=1}^{\\infty}$ names the entire sequence as a single object. The listing form $a_1, a_2, a_3, \\ldots$ displays individual terms. Both are used interchangeably throughout this section.`,
@@ -96,7 +99,12 @@ A **recursive** definition computes each term from one or more previous terms, t
 
 The trade-off is direct access versus structural transparency. An explicit formula lets you jump to any term instantly. A recursive rule reveals how the sequence builds on itself — each term emerges from the ones before it — but forces you to compute terms in order.
 
-Some sequences admit both forms. The [arithmetic sequence](!/algebra/sequences/arithmetic) $2, 5, 8, 11, \\ldots$ can be written explicitly as $a_n = 3n - 1$ or recursively as $a_1 = 2$, $a_n = a_{n-1} + 3$. Others, like the sequence of [prime numbers](!/algebra/sequences/prime-numbers), have no known closed-form expression and resist explicit formulation entirely.`,
+@academic[fact,aside:true,width:35%:A simple rule no one can prove ends
+Halve an even term; triple an odd term and add $1$. Started at $27$, this recursion climbs as high as $9232$ and needs $111$ steps to reach $1$, and no one has proved that every starting value reaches $1$ at all.]@
+
+Some sequences admit both forms. The [arithmetic sequence](!/algebra/sequences/arithmetic) $2, 5, 8, 11, \\ldots$ can be written explicitly as $a_n = 3n - 1$ or recursively as $a_1 = 2$, $a_n = a_{n-1} + 3$. Others, like the sequence of [prime numbers](!/algebra/sequences/prime-numbers), have no known closed-form expression and resist explicit formulation entirely.
+
+@academic[punchline:A formula reaches any term in one step; a recurrence reaches it only by building every term before it.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -253,7 +261,9 @@ $$\\sum_{k=1}^{n} k^2 = \\frac{n(n+1)(2n+1)}{6}$$
 
 This formula appears throughout mathematics — in variance calculations, area approximations, and [polynomial](!/algebra/polynomials) identities.
 
-The [square numbers calculator](!/algebra/calculators/sequences/square-numbers) lists square numbers and tests whether a given number is a perfect square.`,
+The [square numbers calculator](!/algebra/calculators/sequences/square-numbers) lists square numbers and tests whether a given number is a perfect square.
+
+@academic[punchline:Each square grows from the one before by the next odd number, so the squares are running totals of the odd numbers.]@`,
     before: ``,
     after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Square Numbers](!/algebra/sequences/square-numbers) →@`,

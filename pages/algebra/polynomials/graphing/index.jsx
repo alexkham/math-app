@@ -267,6 +267,9 @@ const keyWords = [
 
 @academic[rule_theorem_plain:The defining visual property of polynomial graphs is smoothness. The curve has no breaks, no jumps, no holes, and no sharp corners.]@
 
+@academic[fact,aside:true,width:35%:A smooth curve can fake a corner
+No polynomial graph has a corner, yet some polynomial stays within $0.001$ of the V-shaped graph of $|x|$ for every $x$ from $-1$ to $1$. Weierstrass proved in 1885 that any unbroken curve over a closed interval can be shadowed this closely; the corner becomes a bend too tight to see.]@
+
 It flows continuously from left to right, bending and turning but never snapping or creating an angle. This smoothness distinguishes polynomial graphs from those of piecewise functions, absolute value expressions, or rational functions with asymptotes.
 
 The shape of the curve is governed by the polynomial's degree and coefficients. A degree-$1$ polynomial produces a straight line. A degree-$2$ polynomial produces a parabola. Higher degrees create progressively more complex curves with more potential bends, but every polynomial graph shares the same fundamental character — smooth, continuous, and defined for all real $x$.`,
@@ -433,9 +436,12 @@ Unlike a parabola, a cubic is guaranteed to cross the x-axis at least once.
 
 It may cross once, twice, or three times, depending on the nature of its roots.
 
+@academic[fact,aside:true,width:35%:A half-turn maps every cubic onto itself
+Shifting $x$ by $-\\frac{b}{3a}$ removes the $x^2$ term and leaves $at^3 + pt$ plus a constant, an odd function. So every cubic is symmetric about its inflection point, and its two turning points, when it has them, are mirror images through it.]@
+
 A cubic has at most two turning points. When both exist, the curve rises, turns, falls, turns again, and rises (or the reverse), creating an S-like profile. When no turning points exist — as with $P(x) = x^3$ — the curve increases or decreases monotonically, bending but never reversing direction.
 
-The inflection point, where the curve changes from concave up to concave down or vice versa, is a defining feature of cubics. It occurs at $x = -\\frac{b}{3a}$ and represents the point of maximum curvature change. For $P(x) = x^3$, the inflection point is at the origin, where the curve transitions smoothly from bending one way to bending the other.`,
+The inflection point, where the curve changes from concave up to concave down or vice versa, is a defining feature of cubics. It occurs at $x = -\\frac{b}{3a}$ and is the point where the curvature changes sign. For $P(x) = x^3$, the inflection point is at the origin, where the curve transitions smoothly from bending one way to bending the other.`,
   before: ``,
   after: ``,
   link: '',
@@ -832,6 +838,7 @@ export default function GraphingPage({linearPolyCases, seoData, sectionsContent,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          `@academic[punchline:Far from the origin a polynomial behaves like its leading term, so the parity of the degree and one sign fix both ends.]@`,
         ]
     },
     {
@@ -867,6 +874,7 @@ export default function GraphingPage({linearPolyCases, seoData, sectionsContent,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          `@academic[punchline:Symmetry is read from every exponent, not from the degree: all even powers mirror, all odd powers rotate, a mix gives neither.]@`,
         ]
     },
     {

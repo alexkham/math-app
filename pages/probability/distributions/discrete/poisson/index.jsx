@@ -970,8 +970,13 @@ export async function getStaticProps(){
 
 The defining idea is event intensity, not trial structure. [Events](!/probability/events) are assumed to occur randomly but with a stable long-run average frequency. The [random variable](!/probability/random-variables) represents the number of events that occur in any given interval of time, regardless of when they occur within it.
 
+@academic[fact,aside:true,width:35%:Horse kicks follow the formula
+In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 122 deaths in 200 corps-years, $0.61$ per corps per year. With $\\lambda = 0.61$ the formula predicts $108.7$ corps-years with no death and $66.3$ with one; the records show $109$ and $65$.]@
+
 The Poisson distribution is especially effective for representing rare or spontaneous events, and it often arises as an approximation to the [binomial distribution](!/probability/distributions/discrete/binomial) when the number of trials is large and the probability of success is small.
      
+A typical source of such counts is a large group exposed to a small risk: many drivers on one road, many atoms in a radioactive sample, many soldiers in an army. Each member adds an event only rarely and independently of the others, so the number of members and the risk of each one are seldom known exactly. What is recorded is the number of events per year, per hour or per square kilometre, and its long-run average is the only number the model needs.
+
 `,
       before:``,
       after:``,
@@ -1208,6 +1213,9 @@ Applying the shortcut formula:
 @academic[formula_callout:Variance and Standard Deviation
 $$\\mathrm{Var}(X) = (\\lambda^2 + \\lambda) - \\lambda^2 = \\lambda$$]@
 
+@academic[fact,aside:true,width:35%:Flying bombs passed the variance test
+In 1946 R. D. Clarke split 144 square kilometres of south London into 576 squares and counted 537 V-1 flying bomb hits. The mean per square was $0.93$ and the variance $0.97$, so the clusters people saw were no more than pure chance produces.]@
+
 The result $\\mathrm{Var}(X) = \\lambda$ reveals a remarkable property: **the Poisson distribution's variance equals its mean**. This makes the Poisson distribution unique among common distributions. The single parameter $\\lambda$ completely determines both the center and the spread of the distribution.
 
 This property provides a practical test: if observed count data has variance approximately equal to its mean, the Poisson distribution may be an appropriate model.
@@ -1232,6 +1240,8 @@ Reading $\\lambda = 16$ as the typical deviation gives hours anywhere from $16 -
 [Read more](!#pitfalls)]@
 
 The variance equals the expected value (16), and the standard deviation of 4 indicates that in most hours, the number of calls will fall within roughly 12 to 20 calls (within one standard deviation of the mean).
+
+@academic[punchline:A Poisson count has no separate spread setting: the mean $\\lambda$ fixes the standard deviation at $\\sqrt{\\lambda}$.]@
   `,
   before: ``,
   after: ``,
@@ -1787,6 +1797,7 @@ export default function PoissonDistributionPage({
       </div>,
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `The CDF adds these bars from the left.`,
+          `@academic[punchline:Each Poisson probability is a term of the series for $e^{\\lambda}$, scaled by $e^{-\\lambda}$ so all terms sum to one.]@`,
         ]
     },
     {

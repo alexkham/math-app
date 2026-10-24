@@ -2295,7 +2295,7 @@ The median divides probability mass equally, while the mode identifies maximum d
 
 ## Visual Identification
 
-On a density curve, the median is the vertical line that splits the area under the curve into two equal parts. For symmetric distributions, this line passes through the peak. For skewed distributions, the median sits between the [mode](!/probability/mode) and [mean](!/probability/expected-value).
+On a density curve, the median is the vertical line that splits the area under the curve into two equal parts. For symmetric distributions, this line passes through the peak. For skewed distributions, the median usually sits between the [mode](!/probability/mode) and [mean](!/probability/expected-value).
 
 ## Key Properties
 
@@ -2423,6 +2423,11 @@ Extreme large values drag the mean rightward. The median holds closer to the pro
 
 [Exponential distribution](!/probability/distributions/continuous/exponential): mode = $0$, median = $\\frac{\\ln(2)}{\\lambda}$, mean = $\\frac{1}{\\lambda}$
 
+@academic[fact,aside:true,width:35%:A half-life is a median
+The half-life of an isotope is the median lifetime of one atom, $\\frac{\\ln 2}{\\lambda}$. The mean lifetime $\\frac{1}{\\lambda}$ is about $1.44$ half-lives, because the few atoms that last much longer pull the average up.]@
+
+Radioactive decay produces exactly this shape. Each atom waits an exponential time before it decays, at a rate $\\lambda$ fixed by the isotope: most atoms go early, while a few survive many times longer than the rest. Tables of isotopes do not list the rate itself. They list the time by which half of a large sample has decayed.
+
 Left skew (tail stretches toward smaller values):
 
 @academic[formula_callout:Median, Mean, and Mode Compared
@@ -2488,7 +2493,12 @@ The median minimizes the [expected value](!/probability/expected-value) of absol
 @academic[formula_callout:Properties of the Median
 $$\\text{median}(X) = \\arg\\min_m E[|X - m|]$$]@
 
+@academic[fact,aside:true,width:35%:Mean and median within one standard deviation
+For any $X$ with finite variance, $|\\mu - m| \\leq \\sigma$, however skewed the distribution. The chain is short: $|\\mu - m| \\leq E|X - m| \\leq E|X - \\mu| \\leq \\sigma$, where the middle step is the median's minimizing property.]@
+
 Among all possible values $m$, the median produces the smallest average absolute distance from $X$. This contrasts with the [mean](!/probability/expected-value), which minimizes squared deviations: $E[(X - \\mu)^2]$.
+
+So the two centres answer two different questions about distance. The mean is the best single guess when errors are squared, the median the best when errors count at their plain size. In a skewed distribution the two best guesses move apart, and the long tail decides how far the mean is dragged away from the median.
 
 ## Transformation Under Linear Operations
 
@@ -2522,7 +2532,7 @@ Squaring the median of $X$ uniform on $[-1, 1]$ gives $0^2 = 0$. But $P(X^2 \\le
 
 The example asks for $X > 0$ because $x^2$ is strictly increasing only on the positive half of the line. There a larger value of $X$ always gives a larger value of $X^2$, so the order of the outcomes survives the transformation and the value with half the probability below it keeps its place.
 
-This property holds for the median and [mode](!/probability/mode) but fails for the [mean](!/probability/expected-value).
+This property holds for the median, and for the [mode](!/probability/mode) of a discrete variable, but fails for the [mean](!/probability/expected-value).
 
 ## Robustness to Outliers
 
@@ -3518,6 +3528,7 @@ export default function MedianPage({
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          `@academic[punchline:A strictly increasing CDF crosses one half once; a stepped CDF jumps past it, which is why discrete medians need two conditions.]@`,
         ]
     },
     {

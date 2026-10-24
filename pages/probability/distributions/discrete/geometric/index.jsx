@@ -1111,6 +1111,11 @@ We can verify this by summing the PMF:
 $$P(X \\leq k) = \\sum_{i=1}^{k} (1-p)^{i-1}p = p\\sum_{i=0}^{k-1} (1-p)^i = p \\cdot \\frac{1-(1-p)^k}{1-(1-p)} = 1-(1-p)^k$$]@
 
 **Monotonic Property**: As $k$ increases, $(1-p)^k$ decreases toward 0, so $F_X(k)$ increases toward 1, which reflects the increasing certainty that success will eventually occur.
+
+@academic[fact,aside:true,width:35%:Zero in 300 caps the rate near 1%
+If $n$ trials all fail, any $p$ above $\\frac{3}{n}$ would have made that run less than 5% likely, since $\\left(1 - \\frac{3}{n}\\right)^n < e^{-3} \\approx 0.05$. So no side effect in 300 patients makes a rate above 1% implausible.]@
+
+The same tail can be read in the other direction. Suppose $p$ is unknown and $n$ trials have been run with no success at all. Each candidate value of $p$ gives that run the probability $(1-p)^n$, which is tiny when $p$ is large, so a long run of failures rules out the larger values of $p$ and leaves only the small ones as believable.
   `,
   before:``,
   after:``,
@@ -1169,7 +1174,7 @@ Consider rolling a die until you get a 6, where $p = \\frac{1}{6}$:
 @academic[formula_callout:Expected Value (Mean)
 $$E[X] = \\frac{1}{1/6} = 6$$]@
 
-On average, you expect to roll the die 6 times before seeing the first 6. This makes intuitive sense: with a 1-in-6 chance per roll, the average wait is 6 rolls.
+On average, you expect to roll the die 6 times, counting the roll that shows the first 6. This makes intuitive sense: with a 1-in-6 chance per roll, the average wait is 6 rolls.
 
 To compute the expected value of a geometric distribution for your own parameters, step by step, use the [geometric expected value calculator](!/probability/calculators/expected-value/geometric).
   `,
@@ -1240,6 +1245,8 @@ $$\\mathrm{Var}(X) = \\frac{1 - \\frac{1}{6}}{(\\frac{1}{6})^2} = \\frac{\\frac{
 $$\\sigma = \\sqrt{30} \\approx 5.477$$]@
 
 The variance of 30 and standard deviation of about 5.5 indicate substantial variability around the expected wait time of 6 rolls. You might get lucky and succeed on roll 2, or unlucky and wait 15+ rolls.
+
+@academic[punchline:When success is rare, the spread of the wait is nearly as large as the wait itself.]@
   `,
   before: ``,
   after: ``,
@@ -1739,6 +1746,7 @@ export default function GeometricDistributionPage({
           sectionsContent.links.decide,
           sectionsContent.obj1.example,
           sectionsContent.links.example,
+          `@academic[punchline:However many trials have failed, the wait still ahead is a fresh geometric wait with the same $p$.]@`,
         ]
     },
 
@@ -1800,6 +1808,7 @@ export default function GeometricDistributionPage({
           </div>,    
                   <div key={'unit-u_5_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_1 }} />,
           `The mean of the distribution is derived next.`,
+          `@academic[punchline:Questions about success within $k$ trials are answered through their opposite: $k$ failures in a row.]@`,
         ]
     },
     {

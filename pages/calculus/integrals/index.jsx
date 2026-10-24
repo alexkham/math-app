@@ -315,6 +315,9 @@ The same symbol serves both purposes. Context determines which interpretation ap
     content: `
 The integral notation carries specific meaning in each component.
 
+@academic[fact,aside:true,width:35%:Before $\\int$, Leibniz wrote omn.
+In his notes Leibniz first summed with "omn.", short for Cavalieri's "omnes lineae", all the lines; on 29 October 1675 he wrote that it would be useful to write $\\int$ instead. The word integral came later: it first appeared in print in 1690, in a paper by Jacob Bernoulli.]@
+
 The integral sign $\\int$ is an elongated S, standing for "sum." It originated with Leibniz, who conceived integration as summing infinitesimal pieces.
 
 The integrand $f(x)$ is the function being integrated. It describes what is accumulated at each point.
@@ -843,6 +846,7 @@ export default function IntegralsPage({integralTypeTree, seoData, sectionsConten
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          `@academic[punchline:Each technique undoes a familiar rule, rewriting an unfamiliar integrand as one with a known antiderivative.]@`,
         ]
     },
     {

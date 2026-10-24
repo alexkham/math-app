@@ -973,7 +973,9 @@ Since $28 > 27$, we have $\\frac{4}{9} > \\frac{3}{7}$.
 For $\\frac{5}{8}$ and $\\frac{2}{3}$, crediting $8 \\times 2 = 16$ to $\\frac{5}{8}$ because it contains the $8$ gives $\\frac{5}{8} > \\frac{2}{3}$. The $16$ is built from the numerator $2$, so it belongs to $\\frac{2}{3}$, and $\\frac{2}{3} > \\frac{5}{8}$.
 [Read more](!#pitfalls)]@
 
-The rule: multiply each numerator by the opposite denominator. The cross product stays on the same side as its numerator. If $a \\times d > b \\times c$ (with positive denominators), then $\\frac{a}{b} > \\frac{c}{d}$.`,
+The rule: multiply each numerator by the opposite denominator. The cross product stays on the same side as its numerator. If $a \\times d > b \\times c$ (with positive denominators), then $\\frac{a}{b} > \\frac{c}{d}$.
+
+The shortcut is the common denominator method with one step skipped. Over the denominator $b \\times d$, the fraction $\\frac{a}{b}$ becomes $\\frac{a \\times d}{b \\times d}$ and $\\frac{c}{d}$ becomes $\\frac{b \\times c}{b \\times d}$, so the two cross products are exactly the new numerators. For $\\frac{3}{7}$ and $\\frac{4}{9}$ they are $\\frac{27}{63}$ and $\\frac{28}{63}$.`,
     before: ``,
     after: ``,
     link: '',
@@ -1053,6 +1055,9 @@ Sorting by numerators: $7 < 8 < 9 < 10$. The order is $\\frac{7}{12} < \\frac{2}
   obj9: {
     title: `Number Line Visualization`,
     content: `Placing fractions on a number line shows their relative positions visually. Fractions further to the right are larger.
+
+@academic[fact,aside:true,width:35%:Nothing simpler fits between $\\frac{3}{7}$ and $\\frac{4}{9}$
+Their cross products, $27$ and $28$, differ by just $1$, and for such a pair no fraction in between has a denominator below $7 + 9 = 16$. The first to fit is $\\frac{3 + 4}{7 + 9} = \\frac{7}{16}$.]@
 
 The interval from 0 to 1 can be subdivided according to any denominator. Marking fourths at $\\frac{1}{4}$, $\\frac{2}{4}$, $\\frac{3}{4}$ and thirds at $\\frac{1}{3}$, $\\frac{2}{3}$ shows that $\\frac{1}{3}$ lies between $\\frac{1}{4}$ and $\\frac{2}{4}$, confirming $\\frac{1}{4} < \\frac{1}{3} < \\frac{1}{2}$.
 

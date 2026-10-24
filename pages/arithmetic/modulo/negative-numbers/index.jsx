@@ -975,7 +975,10 @@ For positive dividends, both conventions round the same direction and produce id
 
 obj3: {
   title: `Truncated Division (Round Toward Zero)`,
-  content: `Under truncated division, the quotient is obtained by dividing and discarding the fractional part — rounding toward zero. The remainder takes whatever sign is needed to satisfy $a = n \\cdot q + r$.
+  content: `@academic[fact,aside:true,width:35%:C left the sign to the compiler
+Until its 1999 standard, C let each compiler choose, so $(-7) \\% \\; 3$ could legally print $-1$ on one machine and $2$ on another. C99 settled on truncation, the rule Fortran already followed.]@
+
+Under truncated division, the quotient is obtained by dividing and discarding the fractional part — rounding toward zero. The remainder takes whatever sign is needed to satisfy $a = n \\cdot q + r$.
 
 For $(-7) \\bmod 3$: divide $-7 \\div 3 = -2.33\\ldots$. Truncate toward zero to get $q = -2$. Compute the remainder: $r = -7 - (3 \\times -2) = -7 + 6 = -1$. The result is $-1$.
 
@@ -1010,6 +1013,9 @@ The remainder under this convention always falls in $\\{0, 1, 2, \\ldots, n-1\\}
 obj5: {
   title: `Which Convention Is Correct?`,
   content: `Both are correct. They are different definitions, not different attempts at the same definition.
+
+@academic[fact,aside:true,width:35%:Python floors for times before 1970
+Python's creator chose floored division with clocks in mind: a moment $t$ seconds after the start of 1970 has time of day $t \\bmod 86{,}400$. One second before 1970, at $t = -1$, flooring gives $86{,}399$, which is 23:59:59, while truncation gives a meaningless $-1$.]@
 
 Mathematics typically prefers floored division. Remainders stay in $\\{0, 1, \\ldots, n-1\\}$, congruence classes have a single canonical representative per class, and theoretical arguments are cleaner when remainders are non-negative.
 
@@ -1377,6 +1383,7 @@ export default function NegativeNumbersPage({seoData, sectionsContent, introCont
           sectionsContent.obj2.content,
                   <div key={'unit-negConventions'} dangerouslySetInnerHTML={{ __html: demoUnits.negConventions }} />,
           `When the division is not exact, the two remainders differ by exactly n: here 2 − (−1) = 3.`,
+          `@academic[punchline:Every convention solves the same equation $a = n \\cdot q + r$; only the rounding of the quotient differs, and the remainder follows from it.]@`,
         ]
     },
     {
@@ -1419,6 +1426,7 @@ export default function NegativeNumbersPage({seoData, sectionsContent, introCont
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@academic[punchline:Whatever convention a language follows, $((a \\% \\; n) + n) \\% \\; n$ always returns the remainder in $\\{0, 1, \\ldots, n-1\\}$.]@`,
         ]
     },
     {

@@ -2281,9 +2281,14 @@ For large symmetric positive definite systems, Cholesky is the fastest direct so
     title: `No Pivoting Needed`,
     content: `@academic[rule_theorem_plain:Unlike LU, the Cholesky algorithm never requires row swaps. Positive definiteness guarantees that the quantity under the square root is strictly positive at every step — no zero or negative pivots can occur.]@
 
+@academic[fact,aside:true,width:35%:The diagonal of $A$ caps every entry of $L$
+The diagonal of $LL^T = A$ reads $a_{ii} = l_{i1}^2 + l_{i2}^2 + \\cdots + l_{ii}^2$, a sum of squares, so no entry in row $i$ of $L$ can exceed $\\sqrt{a_{ii}}$ in size. The numbers cannot grow out of control, which is why skipping row swaps costs no accuracy.]@
+
 This makes the algorithm simpler (no [permutation matrix](!/linear-algebra/matrix/types#12) to track), more stable (no near-zero pivots to amplify errors), and more predictable (the algorithm either runs to completion or breaks down, with no ambiguity).
 
-If the algorithm encounters a non-positive value under the square root, the matrix is not positive definite. The breakdown happens at the first index $j$ where the leading $j \\times j$ principal submatrix fails to be positive definite. This makes Cholesky an efficient positive definiteness test: attempt the factorization and check whether it succeeds.`,
+If the algorithm encounters a non-positive value under the square root, the matrix is not positive definite. The breakdown happens at the first index $j$ where the leading $j \\times j$ principal submatrix fails to be positive definite. This makes Cholesky an efficient positive definiteness test: attempt the factorization and check whether it succeeds.
+
+@academic[punchline:Positive definiteness does the job that pivoting does in LU: every pivot is positive, so no row ever has to move.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2304,6 +2309,9 @@ The test is binary: the factorization either succeeds or fails. When it succeeds
   obj8: {
     title: `Where Cholesky Appears`,
     content: `Symmetric positive definite matrices appear throughout applied mathematics, and Cholesky is the default solver for all of them.
+
+@academic[fact,aside:true,width:35%:Invented for surveyors' least squares
+André-Louis Cholesky, a French artillery officer and surveyor, devised the method by 1910 to solve the normal equations of least-squares adjustments in map-making. He was killed in the First World War in 1918, and a fellow officer published the method in 1924.]@
 
 The [normal equations](!/linear-algebra/orthogonality/least-squares) $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ produce a symmetric positive definite matrix $A^TA$ (when $A$ has full column [rank](!/linear-algebra/matrix/rank)). Cholesky on $A^TA$ solves least squares, though [QR](!/linear-algebra/decompositions/qr) is preferred for numerical stability.
 
@@ -2333,7 +2341,9 @@ Cholesky is the symmetric-positive-definite specialization of LU. It exploits $A
 
 Pivoted Cholesky handles this case: $PAP^T = LL^T$ with a [permutation](!/linear-algebra/matrix/types) matrix $P$ and $L$ possibly having some zero diagonal entries. The permutation reorders the rows and columns to push the rank deficiency to the end.
 
-In practice, numerical near-singularity — eigenvalues very close to zero but not exactly zero — is more common than exact singularity. A condition-number-based threshold determines which eigenvalues are treated as zero. Adding a small regularization $\\epsilon I$ to $A$ (making it $A + \\epsilon I$, which is positive definite for any $\\epsilon > 0$) is a common remedy that restores the standard Cholesky factorization at the cost of a controlled perturbation.`,
+In practice, numerical near-singularity — eigenvalues very close to zero but not exactly zero — is more common than exact singularity. A condition-number-based threshold determines which eigenvalues are treated as zero. Adding a small regularization $\\epsilon I$ to $A$ (making it $A + \\epsilon I$, which is positive definite for any $\\epsilon > 0$) is a common remedy that restores the standard Cholesky factorization at the cost of a controlled perturbation.
+
+@academic[punchline:Zero eigenvalues stop the plain algorithm and near-zero ones spoil it; pivoting or a small shift $\\epsilon I$ is the repair.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2700,6 +2710,7 @@ export default function PageTemplate({choleskyLevels,
           >
             <Hierarchy data={choleskyLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
           </DiagramFrameV2>,
+          `@academic[punchline:Cholesky is LU for a symmetric positive definite matrix: half the work, no pivoting, and $\\sqrt{D}$ folded into $L$.]@`,
         ]
     },
     // obj10 was previously commented out in the source; uncommented so the

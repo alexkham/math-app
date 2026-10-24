@@ -1016,9 +1016,14 @@ $$2^3 = 8, \\quad 2^{3.1} \\approx 8.574, \\quad 2^{3.14} \\approx 8.815, \\quad
 
 The values converge, and the limit is $2^\\pi$.
 
-This construction requires the base to be positive. For $a > 0$, the function $a^x$ is continuous and the limit always exists. For $a \\leq 0$, the sequence of rational approximations does not converge to a consistent real value.
+@academic[fact,aside:true,width:35%:Hilbert asked what $2^{\\sqrt{2}}$ is
+The limit gives $2^{\\sqrt{2}}$ a value at once, yet whether that value is rational was one of Hilbert's 23 open problems of 1900. It was settled only in the 1930s: $2^{\\sqrt{2}}$ is irrational, and even transcendental, a root of no polynomial with whole-number coefficients.]@
 
-The [irrational exponents](!/algebra/powers/irrational-exponents) page formalizes this limiting process and the domain restriction $a > 0$.`,
+This construction requires the base to be positive. For $a > 0$, the function $a^x$ is continuous and the limit always exists. For $a < 0$, the sequence of rational approximations does not converge to a consistent real value. For $a = 0$, the limit exists only for positive exponents, and it is $0$.
+
+The [irrational exponents](!/algebra/powers/irrational-exponents) page formalizes this limiting process and the domain restriction $a > 0$.
+
+@academic[punchline:An irrational power is never computed by itself; it is the one value that powers at nearby rational exponents close in on.]@`,
     before: ``,
     after: ``,
     link: '/algebra/powers/irrational-exponents',
@@ -1087,6 +1092,9 @@ The [exponential inequality solver](!/algebra/calculators/inequalities/exponenti
 For $a > 1$, the function grows — each unit increase in $x$ multiplies the output by $a$. For $0 < a < 1$, the function decays.
 
 @academic[rule_theorem_plain:The number $e \\approx 2.718$ occupies a central role: the function $e^x$ is its own derivative, making it foundational in calculus.]@
+
+@academic[fact,aside:true,width:35%:$e^x$ never drops below $x^e$
+For every $x > 0$, $e^x \\geq x^e$, with equality only at $x = e$, because $\\frac{\\ln x}{x}$ is largest at $x = e$. So $e^\\pi \\approx 23.14$ beats $\\pi^e \\approx 22.46$, while no other base manages this: $3^{2.9} \\approx 24.19$ is below $2.9^3 \\approx 24.39$.]@
 
 Exponential functions are the counterpart of [polynomial functions](!/algebra/polynomials). In a polynomial, the base varies and the exponent is fixed ($x^3$). In an exponential function, the base is fixed and the exponent varies ($3^x$). The behaviors are fundamentally different.
 

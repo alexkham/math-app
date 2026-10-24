@@ -1853,7 +1853,12 @@ where $\\Delta = \\frac{b-a}{n}$ as the grid becomes infinitely fine.
 Among all continuous distributions on $[a, b]$, the uniform distribution has **maximum entropy**—it represents the state of complete ignorance about where in the interval a value might fall.
 
 **Sum of Uniforms:**
-Unlike the normal distribution, sums of uniform random variables do **not** remain uniform. Instead, the sum of $n$ independent $\\text{Uniform}(0, 1)$ variables approaches normal by the [Central Limit Theorem](!/probability/central-limit-theorem).
+Unlike the normal distribution, sums of uniform random variables do **not** remain uniform. Instead, the sum of $n$ independent $\\text{Uniform}(0, 1)$ variables, once standardized, approaches normal by the [Central Limit Theorem](!/probability/central-limit-theorem).
+
+@academic[fact,aside:true,width:35%:About $e$ draws to pass 1
+Add $\\text{Uniform}(0, 1)$ numbers one at a time until the total exceeds $1$: on average this takes $e \\approx 2.718$ draws. The first $n$ draws stay at or below $1$ with probability $\\frac{1}{n!}$, and these chances add up to $e$.]@
+
+The shape of the sum changes step by step. Two draws give a triangular density on $[0, 2]$ with its peak at $1$. Three draws give a density made of three pieces of parabolas on $[0, 3]$, which already looks like a bell. Each new draw adds $\\frac{1}{2}$ to the mean and $\\frac{1}{12}$ to the variance, so the sum of $n$ draws has mean $\\frac{n}{2}$ and variance $\\frac{n}{12}$.
 
 ### Practical Implications
 
@@ -1933,6 +1938,11 @@ Among all continuous distributions on $[a, b]$, the uniform distribution has the
 $$H = \\ln(b - a)$$]@
 
 It represents maximum uncertainty or minimum information—complete ignorance about where in $[a, b]$ a value falls.
+
+@academic[fact,aside:true,width:35%:An entropy below zero
+For $\\text{Uniform}(0, 0.5)$ the formula gives $H = \\ln 0.5 \\approx -0.69$. The entropy of a discrete variable is never negative, but the entropy of a density is measured against an interval of length $1$, so every shorter interval scores below zero.]@
+
+The entropy depends only on the width of the interval, never on where it sits: $\\text{Uniform}(0, 2)$ and $\\text{Uniform}(100, 102)$ both have $H = \\ln 2$. Doubling the width adds $\\ln 2 \\approx 0.69$ to $H$, and halving it takes the same amount away, just as the variance $\\frac{(b-a)^2}{12}$ ignores the location and follows the width alone.
 
 **Probability Proportional to Length:**
 For any subinterval $[c, d] \\subseteq [a, b]$:
@@ -2367,6 +2377,7 @@ export default function ContinuousUniformDistributionPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@academic[punchline:Only the width of the interval sets the spread: shifting a uniform moves its mean but never its variance.]@`,
         ]
     },
     {
@@ -2391,6 +2402,7 @@ export default function ContinuousUniformDistributionPage({
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          `@academic[punchline:Knowing only a value's bounds leads to the uniform, and uniform numbers in turn can generate any other continuous distribution.]@`,
         ]
     },
     {

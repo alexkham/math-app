@@ -561,7 +561,7 @@ This connection to the [powers](!/algebra/powers) section shows that rational ex
 @academic[formula_callout:General Rational Exponents
 $$a^{m/n} = \\sqrt[n]{a^m} = (\\sqrt[n]{a})^m$$]@
 
-Either interpretation gives the same result. The root can be taken first, or the power can be applied first.
+For $a \\geq 0$, either interpretation gives the same result. The root can be taken first, or the power can be applied first.
 
 @academic[formula_callout:General Rational Exponents
 $$8^{2/3} = \\sqrt[3]{8^2} = \\sqrt[3]{64} = 4$$]@
@@ -649,6 +649,11 @@ $$\\frac{1}{\\sqrt{x}} = \\frac{1}{x^{1/2}} = x^{-1/2}$$]@
 
 @academic[formula_callout:Converting Between Forms
 $$\\frac{1}{\\sqrt[3]{a^2}} = a^{-2/3}$$]@
+
+@academic[fact,aside:true,width:35%:A4 paper in rational exponents
+An A4 sheet measures $2^{-9/4}$ by $2^{-7/4}$ meters, that is $\\frac{1}{\\sqrt[4]{512}}$ by $\\frac{1}{\\sqrt[4]{128}}$, which rounds to $210$ by $297$ millimeters. A0 has sides $2^{-1/4}$ and $2^{1/4}$, and four halvings divide each side by $2^2 = 4$.]@
+
+The same conversions describe the international paper sizes. The largest sheet, A0, has an area of $1$ square meter, and its long side is $\\sqrt{2} = 2^{1/2}$ times its short side. Cutting a sheet in half across its long side gives the next size, A1, then A2, A3 and A4. Each cut halves the area, while the ratio of the long side to the short side stays $\\sqrt{2}$.
 
 This flexibility allows choosing the form best suited to the task. Exponent form for algebraic manipulation; radical form for numerical evaluation or clarity.
 
@@ -785,7 +790,12 @@ Division works similarly:
 @academic[formula_callout:Combining Radicals via Exponents
 $$\\frac{\\sqrt[3]{x}}{\\sqrt[4]{x}} = \\frac{x^{1/3}}{x^{1/4}} = x^{4/12 - 3/12} = x^{1/12} = \\sqrt[12]{x}$$]@
 
-The exponent approach handles [operations](!/algebra/roots/operations) that radical notation makes cumbersome.`,
+The exponent approach handles [operations](!/algebra/roots/operations) that radical notation makes cumbersome.
+
+@academic[fact,aside:true,width:35%:Twelve equal steps nearly make $\\frac{3}{2}$
+A pure fifth has the frequency ratio $\\frac{3}{2}$, and seven piano steps give $2^{7/12} \\approx 1.4983$, about $0.1$ percent short. It can never be exact: $2^{7/12} = \\frac{3}{2}$ would mean $2^{19} = 3^{12}$, an even number equal to an odd one.]@
+
+Twelfth roots have an everyday use in music. A piano splits each octave, a doubling of the frequency, into twelve equal steps, so one step multiplies the frequency by $2^{1/12} = \\sqrt[12]{2} \\approx 1.0595$. A run of $k$ steps multiplies it by $2^{k/12}$, and joining two runs adds their exponents over the common denominator $12$, just as in the products above. A run of seven steps is the interval musicians call a fifth.`,
     before: ``,
     after: ``,
     link: '',
@@ -1110,6 +1120,7 @@ export default function RationalExponentsPage({ratExpDomainCases, seoData, secti
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `@academic[punchline:In a rational exponent the denominator is the root and the numerator is the power: $a^{m/n}$ does both.]@`,
         ]
     },
     {
@@ -1165,6 +1176,7 @@ export default function RationalExponentsPage({ratExpDomainCases, seoData, secti
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@academic[punchline:Written as powers of one base, radicals simplify by ordinary fraction arithmetic on the exponents.]@`,
         ]
     },
     {

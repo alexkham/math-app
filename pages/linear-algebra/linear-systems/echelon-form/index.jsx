@@ -1345,7 +1345,10 @@ const rrefReadings = {
 const sectionsContent = {
   obj1: {
     title: `Row Echelon Form`,
-    content: `A matrix is in row echelon form (REF) if it satisfies three conditions. Every zero row (a row of all zeros) sits at the bottom of the matrix. The leading entry of each nonzero row — called the pivot — is strictly to the right of the pivot in the row above. Every entry below a pivot is zero.
+    content: `@academic[fact,aside:true,width:35%:A ladder hides in the name
+Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for troops drawn up in staggered steps, each unit set off to one side of the one ahead: the same offset staircase the pivots form.]@
+
+A matrix is in row echelon form (REF) if it satisfies three conditions. Every zero row (a row of all zeros) sits at the bottom of the matrix. The leading entry of each nonzero row — called the pivot — is strictly to the right of the pivot in the row above. Every entry below a pivot is zero.
 
 @academic[formula_callout:pivot_definition|Pivot Definition|$$\\text{pivot} = \\text{leading nonzero entry of a row in echelon form}$$]@
 @academic[formulas_link:/linear-algebra/formulas#pivot_definition]@
@@ -1522,7 +1525,9 @@ Taking the entries of column $2$ as they stand gives the direction $(2, 1, 0, 0)
 
 The first vector is a particular solution $\\mathbf{x}_p$. The two direction vectors form a [basis](!/linear-algebra/vector-spaces) for the null space of the coefficient matrix. The solution set is the null space translated by $\\mathbf{x}_p$ — an affine subspace of dimension $2$ in $\\mathbb{R}^4$.
 
-For a [homogeneous](!/linear-algebra/linear-systems/homogeneous) system ($\\mathbf{b} = \\mathbf{0}$), the particular solution is $\\mathbf{0}$ and the general solution is purely a null-space combination.`,
+For a [homogeneous](!/linear-algebra/linear-systems/homogeneous) system ($\\mathbf{b} = \\mathbf{0}$), the particular solution is $\\mathbf{0}$ and the general solution is purely a null-space combination.
+
+@academic[punchline:Every solution set of a consistent linear system is one particular solution shifted by the whole null space.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1571,6 +1576,9 @@ The zero matrix is in both REF and RREF. It has rank $0$, and the corresponding 
     content: `@academic[rule_theorem_plain:The [rank](!/linear-algebra/matrix/rank) of any matrix equals the number of pivots in any echelon form.]@
 
 This is the standard computational method for determining rank: row reduce and count pivots.
+
+@academic[fact,aside:true,width:35%:Rank 1 on paper, rank 2 on a computer
+The rows $(7, 21)$ and $(9, 27)$ are proportional, yet $R_2 - \\frac{9}{7}R_1$ in double precision leaves about $3.6 \\times 10^{-15}$ where $0$ belongs, because $\\frac{9}{7}$ has no exact binary form. Numerical software therefore counts a pivot only above a small tolerance.]@
 
 From the rank, everything else follows. The dimension of the column space is $r$. The dimension of the row space is $r$. The number of free variables is $n - r$. The dimension of the null space is $n - r$. The system $A\\mathbf{x} = \\mathbf{b}$ is consistent if and only if the augmented matrix has the same rank $r$ as $A$. The solution, when it exists, is unique if $r = n$ and infinite if $r < n$.
 
@@ -1895,6 +1903,7 @@ export default function EchelonFormPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          `@academic[punchline:However a matrix is reduced, its RREF comes out the same, so whatever it shows belongs to the matrix itself.]@`,
         ]
     },
     {

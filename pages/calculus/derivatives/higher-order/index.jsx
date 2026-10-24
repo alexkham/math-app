@@ -1827,6 +1827,8 @@ This information is independent of whether $f$ itself is increasing or decreasin
 The second derivative also powers the [second derivative test](!/calculus/derivatives/graph-analysis) for classifying critical points. At a point where $f'(c) = 0$: if $f''(c) > 0$, the critical point is a local minimum; if $f''(c) < 0$, a local maximum; if $f''(c) = 0$, the test is inconclusive.
 
 Inflection points—where concavity reverses—occur where $f''$ changes sign. When $f''(c)$ exists, the condition $f''(c) = 0$ is necessary but not sufficient (and $f''$ may instead fail to exist, as for $x^{1/3}$ at $0$); the sign of $f''$ must actually switch across $c$.
+
+@academic[punchline:The first derivative says which way a graph is heading; the second says which way it bends.]@
 `,
     before: ``,
     after: ``,
@@ -1848,6 +1850,11 @@ Taking $s''(t) < 0$ to mean slowing down fails for $s(t) = -t^2$: at $t = 1$, $s
 For the position $s(t) = t^3$ from the first section, the velocity is $3t^2$ and the acceleration is $6t$. At $t = 2$ the velocity is $12$ and the acceleration is $12$, both positive, and the table of values there shows the object covering more ground in each second than in the one before. Speed is the size of the velocity, $|s'(t)|$; it carries no direction, while velocity and acceleration both do.
 
 The third derivative $s'''(t)$ is jerk: the rate of change of acceleration. Jerk is felt physically as a sudden push or lurch—smooth motion has low jerk, while abrupt starts and stops produce high jerk. Elevator design, roller coaster engineering, and vehicle ride comfort all involve controlling jerk.
+
+@academic[fact,aside:true,width:35%:Why bends start with a spiral
+Joining straight track directly to a circular bend would make the sideways acceleration jump from $0$ to $\\frac{v^2}{R}$ in an instant, an infinite jerk. Railways and highways insert a spiral whose curvature grows in proportion to distance, so the acceleration builds at a steady rate.]@
+
+Jerk also appears where the speed never changes. A train running at constant speed $v$ along straight track has no acceleration at all. On a circular bend of radius $R$ it has a sideways acceleration of $\\frac{v^2}{R}$, directed toward the centre of the circle, which passengers feel as a push toward the outside of the bend. Somewhere between the straight and the bend that acceleration has to appear, and the rate at which it appears is a jerk.
 
 Beyond the third derivative, the terms snap ($s^{(4)}$), crackle ($s^{(5)}$), and pop ($s^{(6)}$) are used in specialized engineering contexts but rarely appear in standard calculus. The table below collects all six in order, with each name paired with what the derivative measures.
 `,
@@ -1972,6 +1979,11 @@ $$\\frac{d^n}{dx^n}[x^m] = \\frac{m!}{(m-n)!}\\, x^{m-n} \\quad (n \\leq m)$$
 /calculus/formulas]@
 
 The coefficient $\\frac{m!}{(m-n)!}$ is the falling factorial, counting the multipliers accumulated over $n$ applications of the power rule.
+
+@academic[fact,aside:true,width:35%:Half a derivative brings in $\\pi$
+With factorials extended to fractions, $\\left(\\frac{1}{2}\\right)! = \\frac{\\sqrt{\\pi}}{2}$, and the formula gives $\\frac{d^{1/2}}{dx^{1/2}}[x] = \\frac{2\\sqrt{x}}{\\sqrt{\\pi}}$. Applying the same half-derivative once more gives exactly $1$, the ordinary derivative of $x$.]@
+
+Once the pattern is written as a single formula, the order $n$ looks like any other number in it. The question of what a derivative of order $\\frac{1}{2}$ would mean was asked almost as soon as the notation existed: in 1695 L'Hôpital put it to Leibniz in a letter, and Leibniz answered that it led to a paradox from which useful consequences would one day be drawn. An answer needs factorials of numbers that are not whole, and the gamma function supplies them.
 
 These closed-form expressions are useful for computing specific high-order derivatives without performing each differentiation step individually.
 `,
@@ -2522,6 +2534,7 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
           sectionsContent.obj8.content,
           <div key={'unit-taylorSine'} dangerouslySetInnerHTML={{ __html: demoUnits.taylorSine }} />,
           `Only odd powers appear because the even-order derivatives of sin x at 0 are all 0.`,
+          `@academic[punchline:For analytic functions, the derivatives at one point rebuild the whole function around it.]@`,
         ]
     },
     {

@@ -1286,7 +1286,10 @@ const eliminationStages = {
 const sectionsContent = {
   obj1: {
     title: `The Goal`,
-    content: `The input is an augmented matrix $[A \\mid \\mathbf{b}]$ representing a linear system $A\\mathbf{x} = \\mathbf{b}$. The output is an equivalent system — one with exactly the same solution set — in a form simple enough that the solution can be read off directly or obtained with minimal effort.
+    content: `@academic[fact,aside:true,width:35%:Elimination on a counting board
+The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century AD, lays out a system as columns of rods on a board, in effect an augmented matrix, and eliminates column against column, some 1,700 years before Gauss. The subtractions produce negative numbers, so the same chapter gives rules for them.]@
+
+The input is an augmented matrix $[A \\mid \\mathbf{b}]$ representing a linear system $A\\mathbf{x} = \\mathbf{b}$. The output is an equivalent system — one with exactly the same solution set — in a form simple enough that the solution can be read off directly or obtained with minimal effort.
 
 The "simple form" is [echelon form](!/linear-algebra/linear-systems/echelon-form): a staircase pattern where the leading entry of each row is to the right of the leading entry of the row above, and everything below each leading entry is zero. Once the augmented matrix is in echelon form, the solution is extracted by back substitution — solving from the last equation upward.
 
@@ -1516,11 +1519,16 @@ These costs are dramatically better than the alternatives for large systems. [Cr
     title: `Partial Pivoting`,
     content: `In exact arithmetic, any nonzero entry can serve as a pivot. In floating-point arithmetic, the choice matters. A very small pivot amplifies rounding errors — dividing by a number close to zero magnifies any imprecision in the numerator.
 
+@academic[fact,aside:true,width:35%:One tiny pivot, a wrong answer
+Solve $10^{-20}x_1 + x_2 = 1$, $x_1 + x_2 = 2$ in double precision without a swap: the multiplier $10^{20}$ swamps the second row, and the computer returns $x_1 = 0$, although the true value is $1$ to twenty decimal places. Swapping the rows first gives $x_1 = x_2 = 1$.]@
+
 Partial pivoting addresses this by modifying the pivot selection step. At each stage, instead of using whatever nonzero entry happens to sit in the pivot position, the algorithm scans the entries below (and including) the current position in the pivot column and swaps the row with the largest absolute value into the pivot position. This keeps the multipliers $-a_{ij}/a_{pj}$ small, which limits the accumulation of rounding error.
 
 Partial pivoting does not change the mathematical structure of Gaussian elimination — it only changes which row swaps are performed. The pivot positions, the rank, and the solution are the same in exact arithmetic; only the echelon form and the pivot values can differ. The difference is entirely numerical: partial pivoting makes the computation stable.
 
-Every serious numerical implementation of Gaussian elimination uses partial pivoting by default. In the [LU decomposition](!/linear-algebra/decompositions/lower-upper), the row swaps are recorded in a [permutation matrix](!/linear-algebra/matrix/types#12) $P$, giving the factorization $PA = LU$.`,
+Every serious numerical implementation of Gaussian elimination uses partial pivoting by default. In the [LU decomposition](!/linear-algebra/decompositions/lower-upper), the row swaps are recorded in a [permutation matrix](!/linear-algebra/matrix/types#12) $P$, giving the factorization $PA = LU$.
+
+@academic[punchline:Pivoting never changes the answer in exact arithmetic; it decides whether a computer actually finds it.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1841,6 +1849,7 @@ export default function GaussianEliminationPage({rowOperationTree,
           >
             <TopDownTree data={rowOperationTree} />
           </DiagramFrameV2>,
+          `@academic[punchline:Row operations change the equations but never the solutions, because every one of them can be undone.]@`,
         ]
     },
     {
@@ -1935,6 +1944,7 @@ export default function GaussianEliminationPage({rowOperationTree,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+          `@academic[punchline:At about $\\frac{2}{3}n^3$ operations, elimination is cheaper than Cramer's rule or an explicit inverse, so direct solvers build on it.]@`,
         ]
     },
     {

@@ -3612,6 +3612,9 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 2 & 7 \\end{pmatrix}$, the determinant is $
 @academic[formula_callout:invertible_matrix_theorem|Invertible Matrix Theorem|$$\\begin{aligned} \\text{For } A \\in \\mathbb{R}^{n \\times n}, \\text{ the following are equivalent:} & \\\\ (1)\\ A \\text{ is invertible} \\quad (2)\\ \\det(A) \\neq 0 \\quad (3)\\ \\operatorname{rank}(A) = n & \\\\ (4)\\ \\text{columns of } A \\text{ are linearly independent} & \\\\ (5)\\ \\text{rows of } A \\text{ are linearly independent} & \\\\ (6)\\ \\text{columns of } A \\text{ span } \\mathbb{R}^n \\quad (7)\\ \\text{columns form a basis of } \\mathbb{R}^n & \\\\ (8)\\ A\\mathbf{x} = \\mathbf{0} \\text{ has only the trivial solution} & \\\\ (9)\\ A\\mathbf{x} = \\mathbf{b} \\text{ has a unique solution for every } \\mathbf{b} & \\\\ (10)\\ \\operatorname{Null}(A) = \\{\\mathbf{0}\\} & \\\\ (11)\\ \\operatorname{rref}(A) = I \\quad (12)\\ A \\text{ is a product of elementary matrices} & \\\\ (13)\\ 0 \\text{ is not an eigenvalue of } A & \\end{aligned}$$]@
 @academic[formulas_link:/linear-algebra/formulas#invertible_matrix_theorem]@
 
+@academic[fact,aside:true,width:35%:A random matrix is invertible
+Fill a matrix with numbers drawn at random from an interval and it is invertible with probability $1$: the singular ones all satisfy the one equation $\\det(A) = 0$, a surface with no volume in the space of entries. With entries only $0$ or $1$ the odds turn: just $6$ of the $16$ such $2 \\times 2$ matrices are invertible.]@
+
 $A$ is invertible. The [determinant](!/linear-algebra/determinants) $\\det(A) \\neq 0$. The [rank](!/linear-algebra/matrix/rank) of $A$ equals $n$. The columns of $A$ are [linearly independent](!/linear-algebra/vector-spaces/linear-independence). The rows of $A$ are linearly independent. The columns of $A$ [span](!/linear-algebra/vector-spaces/span) $\\mathbb{R}^n$. The columns of $A$ form a [basis](!/linear-algebra/vector-spaces/basis) for $\\mathbb{R}^n$. The homogeneous system $Ax = \\mathbf{0}$ has only the trivial solution. The system $Ax = \\mathbf{b}$ has a unique solution for every $\\mathbf{b} \\in \\mathbb{R}^n$. The [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ is $\\{\\mathbf{0}\\}$. The [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form) of $A$ is $I$. The matrix $A$ is a product of elementary matrices. Zero is not an [eigenvalue](!/linear-algebra/eigen) of $A$.
 
 The power of this theorem is that proving any one condition automatically establishes all the others. Checking the determinant is often the fastest single test, but in large-scale computation, rank determination via row reduction is more practical.`,
@@ -3847,6 +3850,9 @@ How to check: multiply $A$ by the answer. The wrong form gives $\\begin{pmatrix}
     title: `When Not to Compute the Inverse`,
     content: `The formula $\\mathbf{x} = A^{-1}\\mathbf{b}$ is clean on paper but misleading as a computational strategy. In almost every practical setting, solving $Ax = \\mathbf{b}$ by row reduction or LU decomposition is faster and more numerically stable than computing $A^{-1}$ first and then multiplying.
 
+@academic[fact,aside:true,width:35%:Fractions in, trillions out
+The Hilbert matrix, with entries $\\frac{1}{i + j - 1}$, has an inverse made entirely of whole numbers, and for the $10 \\times 10$ one the largest is $3{,}480{,}673{,}996{,}800$. Rounding errors in the entries get multiplied by numbers that large, so a computer carrying 16 digits can lose about 13 of them.]@
+
 Row reduction requires roughly $\\frac{2}{3}n^3$ operations to factor a system. Computing the full inverse requires roughly $2n^3$ operations — three times the cost — and introduces additional rounding error in floating-point arithmetic. When multiple systems with the same $A$ need to be solved, the LU factorization should be computed once and reused, not replaced by an explicit inverse.
 
 The inverse is the right object when $A^{-1}$ itself — the entire matrix, not just its action on a specific $\\mathbf{b}$ — is what matters. This happens in theoretical derivations, in symbolic formulas where the dependence on parameters must be made explicit, in sensitivity analysis, and when working with small matrices by hand. For a $2 \\times 2$ or $3 \\times 3$ matrix, computing the inverse directly is perfectly reasonable. For an $n \\times n$ matrix with $n$ in the hundreds or thousands, it is almost never the right approach.`,
@@ -4077,6 +4083,7 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
           >
             <EquivalenceRing data={invertibilityRing} theme="navy" variant="ring" />
           </DiagramFrame>,
+          `@academic[punchline:All thirteen conditions are one fact seen from different sides: $A$ sends no nonzero vector to $\\mathbf{0}$.]@`,
         ]
     },
     {
@@ -4113,6 +4120,7 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
           >
             <PropertyLawCard data={inverseProperties} theme="navy" />
           </DiagramFrame>,
+          `@academic[punchline:The inverse follows the rules of reciprocals except that order matters: to undo a product, undo the last factor first.]@`,
         ]
     },
     {

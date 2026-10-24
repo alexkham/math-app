@@ -405,6 +405,11 @@ Finding the position of a term: if $a_1 = 7$, $d = 5$, and some term equals $52$
 
 When two non-consecutive terms are given — say $a_3 = 11$ and $a_9 = 35$ — write both in terms of $a_1$ and $d$: $a_1 + 2d = 11$ and $a_1 + 8d = 35$. Subtracting gives $6d = 24$, so $d = 4$, and back-substituting gives $a_1 = 3$.
 
+@academic[fact,aside:true,width:35%:One square brings infinitely many
+If an arithmetic sequence of whole numbers with $d > 0$ contains one perfect square $x^2$, it contains infinitely many. The reason: $(x + d)^2 = x^2 + d(2x + d)$, so $(x + d)^2$ lies a whole number of steps further along, and the same step repeats forever.]@
+
+The same position test shows which numbers a sequence can hold. In $3, 7, 11, 15, \\ldots$ a value $v$ appears only when $\\frac{v - 3}{4}$ is a whole number, that is, when $v$ leaves remainder $3$ on division by $4$. Every perfect square leaves remainder $0$ or $1$, so this sequence contains no square at all. The sequence $1, 4, 7, 10, \\ldots$, by contrast, already holds $1$, $4$ and $16$ among its first six terms.
+
 To find any term of your own arithmetic sequence, use the [arithmetic sequence calculator](!/algebra/calculators/sequences/arithmetic-sequence).`,
     before: ``,
     after: ``,
@@ -468,7 +473,12 @@ $$S_n = \\frac{n}{2}(2a_1 + (n-1)d)$$]@
 
 This version is useful when $a_n$ is not known directly.
 
-The sum of the first $100$ natural numbers, famously attributed to the young Gauss: $a_1 = 1$, $a_{100} = 100$, so $S_{100} = \\frac{100}{2}(1 + 100) = 5050$.`,
+The sum of the first $100$ natural numbers, famously attributed to the young Gauss: $a_1 = 1$, $a_{100} = 100$, so $S_{100} = \\frac{100}{2}(1 + 100) = 5050$.
+
+@academic[fact,aside:true,width:35%:Only powers of $2$ resist
+Every whole number except $1, 2, 4, 8, 16, \\ldots$ is a sum of two or more consecutive positive integers. Such a sum is $\\frac{k(2a + k - 1)}{2}$, where one of $k$ and $2a + k - 1$ is odd and larger than $1$, so a power of $2$ can never be one.]@
+
+With $d = 1$ the formula sums any run of consecutive whole numbers. A run of $k$ terms starting at $a$ ends at $a + k - 1$, so its sum is $\\frac{k}{2}(2a + k - 1)$. Read the other way, the formula splits a number into such runs: $15 = 7 + 8 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5$, and $9 = 4 + 5 = 2 + 3 + 4$.`,
     before: ``,
     after: ``,
     link: '',
@@ -736,6 +746,7 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
           sectionsContent.obj1.content,
           <div key={'unit-arithLine'} dangerouslySetInnerHTML={{ __html: demoUnits.arithLine }} />,
           `A non-arithmetic sequence such as 1, 4, 9, 16 bends away from any line.`,
+          `@academic[punchline:An arithmetic sequence is a linear function read at whole-number inputs, with the common difference as its slope.]@`,
         ]
     },
     {
@@ -772,6 +783,7 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          `@academic[punchline:Every term-finding problem comes down to the general term $a_n = a_1 + (n - 1)d$, solved for whatever is missing.]@`,
         ]
     },
     {
@@ -790,6 +802,7 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
           sectionsContent.obj5.content,
           <div key={'unit-gaussPairs'} dangerouslySetInnerHTML={{ __html: demoUnits.gaussPairs }} />,
           `Gauss's 1 + 2 + … + 100 is the same picture with 100 columns of 101.`,
+          `@academic[punchline:Any arithmetic sum equals the number of terms times the average of the first and last terms.]@`,
         ]
     },
     {

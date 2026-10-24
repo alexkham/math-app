@@ -1277,6 +1277,7 @@ import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1751,6 +1752,28 @@ const keyWords = [
 //   }
 
 // formulas-optimized: v1 | 2026-06-11 | 8 callouts (obj1, obj3 ×5, obj5 ×2)
+// Concept introduction (section 1, "Definition of the Conjugate") — template
+// A, definition last. Running instance: z = −1 + 4i, the conjugate tool's
+// negativeReal state. Old obj1 text is kept in sectionsContent.obj1, unused;
+// its formula box, formulas link, four paragraphs and obj1Table are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciMirrorTable = ciTableOpen(['', 'real part', 'imaginary part', 'point']) +
+  ciRow(['−1 + 4i', '−1', '4', '(−1, 4)']) +
+  ciRow(['its mirror image', '−1', '−4', '(−1, −4)'], { shade: true, last: true, color: '#2563EB', cols: [2, 3] }) +
+  '</tbody></table>'
+const ciPairTable = ciTableOpen(['combine the pair', 'work', 'result']) +
+  ciRow(['add', '(−1 + 4i) + (−1 − 4i)', '−2']) +
+  ciRow(['multiply', '(−1)² − (4i)² = 1 + 16', '17'], { shade: true }) +
+  ciRow(['subtract', '(−1 + 4i) − (−1 − 4i)', '8i'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 obj0: {
   title: `Key Terms`,
@@ -2346,6 +2369,12 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    mirror: conjugateModulusDiagrams.negativeReal,
+    mirrorTable: ciMirrorTable,
+    pairTable: ciPairTable,
+  };
+
   const demoUnits = {
     geom: demoUnitFrame({
       svg: conjugateModulusDiagrams.start,
@@ -2380,6 +2409,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2410,10 +2440,80 @@ export default function ComplexConjugatePage({
   obj5Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Every point in the complex plane has a mirror image across the real axis.`,
+        content: [
+          `Fold the plane along the horizontal axis. A point above the axis lands on a point below it, at the same distance from the fold, and a point on the axis stays where it is. Each complex number gets a partner this way.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The mirror image of −1 + 4i is −1 − 4i.`,
+        content: [
+          `$-1 + 4i$ sits one unit left of the origin and four units up. Its mirror image is still one unit left, but four units down: the real part stays, the imaginary part changes sign.`,
+          ciTable('mirrorTable'),
+        ],
+        visual: ciSvg('mirror'),
+        caption: `$z = -1 + 4i$ and its mirror image $-1 - 4i$, the same distance from the origin. The same state is on the [conjugate and modulus tool](!/complex-numbers/visual-tools/complex-conjugate).`,
+      },
+      {
+        id: 'forcing',
+        lead: `This partner is the one that cancels the imaginary part.`,
+        content: [
+          `Put the pair together. Adding them cancels the imaginary parts and leaves a real number. Multiplying them gives $(-1)^2 - (4i)^2 = 1 + 16$, again a real number with no $i$ left. Only subtracting keeps the imaginary part, and then it doubles.`,
+          ciTable('pairTable'),
+          `That is why this partner comes up so often: it is how an $i$ is removed from a sum, a product or a denominator.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [complex conjugate](!/complex-numbers/definitions#complex_conjugate) of $z = a + bi$ is $a - bi$: the same real part, the opposite imaginary part.`,
+        formula: [
+          `@academic[formula_callout:Complex Conjugate
+$$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
+/complex-numbers/formulas#complex_conjugate]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+        ],
+        footer: `So the conjugate of $-1 + 4i$ is $-1 - 4i$ — its mirror image.`,
+      },
+      {
+        id: 'kind',
+        lead: `Conjugation is an operation: it takes one complex number and returns another.`,
+        content: [
+          `The operation preserves the real part $a$ exactly while reversing the sign of the imaginary part. Where the original number has $+bi$, the conjugate has $-bi$. Where the original has $-bi$, the conjugate has $+bi$. Only the vertical component changes; the horizontal component remains untouched.`,
+          `Concrete examples illustrate the pattern. The conjugate of $3 + 2i$ is $3 - 2i$. The conjugate of $-1 - 4i$ is $-1 + 4i$ — the negative imaginary part becomes positive. The conjugate of $5$ (a real number, written as $5 + 0i$) is simply $5$ — with no imaginary part to flip, nothing changes. The conjugate of $7i$ (pure imaginary, written as $0 + 7i$) is $-7i$ — the entire number negates because the real part contributes nothing.`,
+          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Two things to keep apart: the conjugate is not the negative, and it has two names.`,
+        content: [
+          `The conjugate is not the same as negation. The negative of $3 + 2i$ is $-3 - 2i$, changing both signs. The conjugate $3 - 2i$ changes only the imaginary sign. Confusing these operations leads to errors, particularly when manipulating equations involving both.`,
+          `Two notations appear in mathematical literature. The overline $\\bar{z}$ dominates pure mathematics and most textbooks. The asterisk $z^*$ appears frequently in physics and engineering, particularly in quantum mechanics and signal processing. Both symbols denote the identical operation. This text uses the overline convention, but readers should recognize both forms as equivalent — both are listed among the [complex number symbols](!/math-symbols/complex-numbers).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the reflection picture, the properties of the conjugate, its link to the modulus, and its use in division and in polynomials.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2430,12 +2530,7 @@ export default function ComplexConjugatePage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

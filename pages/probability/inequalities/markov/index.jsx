@@ -1010,6 +1010,11 @@ Common situations include:
 • providing a first step in theoretical arguments or proofs
 • serving as a baseline before applying stronger inequalities
 
+@academic[fact,aside:true,width:35%:Proving existence without an example
+Erdős's 1947 argument, in one case: color each link among $1024$ points red or blue by a coin toss. The expected number of $20$-point groups whose links all share one color is about $7 \\times 10^{-16}$, so some coloring has no such group at all, though the argument never shows one.]@
+
+A common first step in proofs applies Markov's inequality to a count. If $N$ counts how many objects of some kind occur, then $N$ is never negative, and the threshold $a = 1$ gives $\\mathbb{P}(N \\ge 1) \\le \\mathbb{E}[N]$. When the expected count is below $1$, the chance of at least one such object is below $1$ as well, so with positive probability there is none.
+
 In practice, Markov's inequality is rarely the final result.  
 It is used to establish a guaranteed bound that can later be improved by introducing additional assumptions or information.
 `,
@@ -1045,6 +1050,9 @@ Many stronger probability inequalities can be viewed as extensions or refinement
       title:`Limitations of Markov's Inequality`,
       content:`
 Although Markov's inequality always holds under its assumptions, the bounds it provides are often very loose.
+
+@academic[fact,aside:true,width:35%:Loose, yet impossible to improve
+For any mean $m$ and threshold $a \\ge m$, the variable equal to $a$ with probability $\\frac{m}{a}$ and to $0$ otherwise has mean $m$ and $\\mathbb{P}(X \\ge a) = \\frac{m}{a}$ exactly. Knowing only the mean, no smaller bound can be guaranteed.]@
 
 Because it uses only the expected value, the inequality ignores how values are distributed around that average. As a result, the bound may be far larger than the true probability, especially when the random variable has light tails or is tightly concentrated.
 

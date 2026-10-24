@@ -559,6 +559,11 @@ $$\\frac{d}{dx}[f(x) \\cdot g(x)] = f'(x) \\cdot g(x) + f(x) \\cdot g'(x)$$
 
 The derivative of a product is not the product of the derivatives. Each factor takes a turn being differentiated while the other remains unchanged, and the two contributions are added.
 
+@academic[fact,aside:true,width:35%:Leibniz tried $dx\\,dy$ first
+In a manuscript of 11 November 1675, Leibniz examined whether $d(xy)$ is the same as $dx\\,dy$, and a worked example showed that it is not. Ten days later, on 21 November, he wrote down the correct rule $d(xy) = x\\,dy + y\\,dx$.]@
+
+The tempting guess fails on the simplest product. For $x \\cdot x = x^2$ the derivative is $2x$, while the product of the derivatives is $1 \\cdot 1 = 1$; at $x = 3$ that is $6$ against $1$. The product rule gives the right answer: $1 \\cdot x + x \\cdot 1 = 2x$.
+
 The proof adds and subtracts $f(x+h)g(x)$ inside the difference quotient for $f(x)g(x)$, splitting it into a piece that isolates $g'$ and a piece that isolates $f'$. The fact that [differentiability implies continuity](!/calculus/derivatives/differentiability) ensures that $f(x+h) \\to f(x)$ as $h \\to 0$.
 
 For three factors: $(fgh)' = f'gh + fg'h + fgh'$. The pattern generalizes—each factor is differentiated once while all others remain, and the results are summed.
@@ -582,6 +587,8 @@ $$\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{f'(x) \\cdot g(x) - f(
 The numerator subtracts where the product rule adds, and the entire expression is divided by the square of the denominator. The order matters: $f'g - fg'$, not $fg' - f'g$.
 
 The quotient rule can be derived from the product rule by writing $f/g = f \\cdot g^{-1}$ and applying the chain rule to $g^{-1}$. Both approaches yield the same formula. In practice, the quotient rule is applied directly when the function is naturally a fraction, and rewriting as a product is preferred when the denominator is a simple power.
+
+@academic[punchline:A quotient is a product with a reciprocal factor, so the quotient rule is the product rule plus the chain rule.]@
 `,
     before: ``,
     after: ``,
@@ -616,6 +623,8 @@ Differentiating only the outer function gives $\\frac{d}{dx}[\\sin(x^2)] = \\cos
 [Read more](!#pitfalls)]@
 
 This is the most powerful of the basic rules. Without it, [composite functions](!/calculus/derivatives/common)—$\\sin(x^2)$, $e^{3x}$, $\\ln(\\cos x)$—cannot be differentiated. Most applications of differentiation involve the chain rule at some level.
+
+@academic[punchline:However deep the composition, its derivative is the product of the derivatives of its layers, each taken at its own input.]@
 `,
     before: ``,
     after: ``,
@@ -632,6 +641,9 @@ $$f'(c) = \\frac{f(b) - f(a)}{b - a} \\qquad \\text{for some } c \\in (a, b)$$
 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
+
+@academic[fact,aside:true,width:35%:No mean value on a circle
+The theorem needs real-valued functions. A point moving round the unit circle as $(\\cos t, \\sin t)$, $0 \\leq t \\leq 2\\pi$, ends where it started, so its average velocity is zero, yet its velocity $(-\\sin t, \\cos t)$ has length $1$ at every moment.]@
 
 The instantaneous rate of change at $c$ equals the average rate of change over the entire interval. Geometrically, there is a point where the tangent line is parallel to the secant line connecting $(a, f(a))$ and $(b, f(b))$.
 

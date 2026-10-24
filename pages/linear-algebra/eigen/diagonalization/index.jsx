@@ -3058,7 +3058,7 @@ const diagonalizabilityCases = {
 const matrixPowersByHand = {
   kicker: 'Eigen \u00B7 matrix powers',
   title: 'Four powers, computed the long way',
-  intro: 'Each state is the previous one multiplied by $A$ again. Three multiplications to reach $A^4$, and every one of them depends on the one before it.',
+  intro: 'Each state is the previous one multiplied by $A$ again. Three multiplications to reach $A$⁴, and every one of them depends on the one before it.',
   operation: 'power',
   A: [[1, 2], [4, 3]],
   powers: 4,
@@ -3239,7 +3239,12 @@ $$\\mathbf{x}_n = PD^nP^{-1}\\mathbf{x}_0 = c_1 \\lambda_1^n \\mathbf{v}_1 + c_2
 
 As $n \\to \\infty$, the term $c_i \\lambda_i^n \\mathbf{v}_i$ with the largest $|\\lambda_i|$ dominates all others.
 
-The [Fibonacci sequence](!/algebra/sequences/fibonacci) provides a classic application. The recurrence $F_{n+1} = F_n + F_{n-1}$ translates to $\\begin{pmatrix} F_{n+1} \\\\ F_n \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}^n \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$. The matrix has eigenvalues $\\phi = \\frac{1 + \\sqrt{5}}{2}$ and $\\hat{\\phi} = \\frac{1 - \\sqrt{5}}{2}$. Diagonalization gives the Binet formula: $F_n = \\frac{\\phi^n - \\hat{\\phi}^n}{\\sqrt{5}}$, a closed-form expression for the $n$-th Fibonacci number.`,
+@academic[fact,aside:true,width:35%:Rounding gives every Fibonacci number
+Since $|\\hat{\\phi}^n| \\leq 1$ and $\\sqrt{5} > 2$, the term $\\hat{\\phi}^n/\\sqrt{5}$ is always smaller than $\\frac{1}{2}$ in size. So $F_n$ is simply $\\phi^n/\\sqrt{5}$ rounded to the nearest whole number: $\\phi^{10}/\\sqrt{5} \\approx 55.004$, and $F_{10} = 55$.]@
+
+The [Fibonacci sequence](!/algebra/sequences/fibonacci) provides a classic application. The recurrence $F_{n+1} = F_n + F_{n-1}$ translates to $\\begin{pmatrix} F_{n+1} \\\\ F_n \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}^n \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$. The matrix has eigenvalues $\\phi = \\frac{1 + \\sqrt{5}}{2}$ and $\\hat{\\phi} = \\frac{1 - \\sqrt{5}}{2}$. Diagonalization gives the Binet formula: $F_n = \\frac{\\phi^n - \\hat{\\phi}^n}{\\sqrt{5}}$, a closed-form expression for the $n$-th Fibonacci number.
+
+The second eigenvalue is $\\hat{\\phi} \\approx -0.618$, smaller than $1$ in size, so $\\hat{\\phi}^n$ shrinks toward zero with alternating sign while $\\phi^n$ grows. The dominant eigenvalue takes over within a few steps: already $F_{11}/F_{10} = 89/55 \\approx 1.618$ agrees with $\\phi$ to three decimals.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3296,7 +3301,12 @@ The Jordan form is block diagonal, with each block a Jordan block:
 @academic[formula_callout:When Diagonalization Fails
 $$J_k(\\lambda) = \\begin{pmatrix} \\lambda & 1 & 0 & \\cdots & 0 \\\\ 0 & \\lambda & 1 & \\cdots & 0 \\\\ \\vdots & & \\ddots & \\ddots & \\vdots \\\\ 0 & & & \\lambda & 1 \\\\ 0 & & & & \\lambda \\end{pmatrix}$$]@
 
+@academic[fact,aside:true,width:35%:A millionth makes the shear diagonalizable
+Change the corner entry of $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ to $1.000001$ and the two eigenvalues become distinct, so the matrix diagonalizes. Its eigenvectors $(1, 0)$ and $(1, 0.000001)$ are then almost parallel: the missing eigenvector returns as a near copy of the first.]@
+
 A $k \\times k$ Jordan block has the eigenvalue $\\lambda$ on the diagonal and ones on the superdiagonal. A diagonalizable eigenvalue contributes $1 \\times 1$ Jordan blocks. A defective eigenvalue contributes blocks larger than $1 \\times 1$.
+
+The smallest defective matrix is the single block $J_2(1) = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$, the horizontal shear. It slides each point sideways by its height, so the horizontal axis is the only line that keeps its direction, and the repeated eigenvalue $1$ has just one eigenvector, $(1, 0)$.
 
 @academic[rule_theorem_plain:The Jordan form is unique up to the ordering of blocks and is the canonical representative of the similarity class.]@
 
@@ -3627,6 +3637,7 @@ export default function DiagonalizationPage({odeEigenCases,
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          `@academic[punchline:Diagonalizing does not change the map, only the point of view: in the eigenvector basis it is pure stretching.]@`,
         ]
     },
     {
@@ -3672,14 +3683,14 @@ export default function DiagonalizationPage({odeEigenCases,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <DiagramFrame
+          <DiagramFrameV2
             key={'obj4-diagram'}
             id="matrix-powers-by-hand"
             title="Four powers, computed the long way"
             source="/linear-algebra/eigen/diagonalization"
           >
             <MatrixOperation data={matrixPowersByHand} theme="navy" variant="iterate" />
-          </DiagramFrame>,
+          </DiagramFrameV2>,
           `The diagram is the route the formula replaces, and it is worth seeing once because the cost is invisible in the formula. Each state above costs a full matrix multiplication and each depends on the one before it, so reaching $A^{20}$ means nineteen of them, while $PD^{20}P^{-1}$ costs exactly what $A^4$ did \u2014 one inversion and two products, whatever the exponent.`,
           `The invariant columns are the sharper point. The determinant runs $-5, 25, -125, 625$ and the trace runs $4, 26, 124, 626$ \u2014 these are $(-5)^k$ and $5^k + (-1)^k$, computed from the eigenvalues alone. The entries of $A^k$ grow unpredictably; the two numbers that describe the matrix do not. Diagonalization is what moves that regularity out of the invariants and into the matrix itself.`,
                   <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,

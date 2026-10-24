@@ -962,6 +962,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import renderComplexRootsV2 from '@/app/utils/illustrations/complex-numbers/plane/complexRoots.v2'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 // Surfaced on the /complex-numbers hub via buildSectionData extraction.
@@ -1734,6 +1736,32 @@ const schemas = {
     captionLines: ['z² = z̄ has 2 + 2 = 4 solutions: z = 0, and three with |z| = 1', 'at 0°, 120°, 240°, where 3θ is a multiple of 360°'],
   };
 
+  // Concept introduction (section 1, "Polynomial Equations with Complex
+  // Solutions") — template E, widening. Running instance: x² + 1 = 0, roots
+  // ±i. Old obj1 text (five paragraphs, no widgets) is kept in
+  // sectionsContent.obj1, unused, and reused verbatim.
+  const fpCiWall = { kind: 'pieces', svgTitle: 'y = x^2 - 4 crosses the x-axis at -2 and 2; y = x^2 + 1 never reaches it',
+    xRange: [-3, 3], yRange: [-6, 10], yStep: 2,
+    pieces: [
+      { fn: (x) => x * x - 4, from: -3, to: 3, ends: [null, null], color: 'g', label: { text: 'y = x² − 4', x: 2.35, y: 1.5, pos: 'e' } },
+      { fn: (x) => x * x + 1, from: -3, to: 3, ends: [null, null], color: 'f', label: { text: 'y = x² + 1', x: -2.3, y: 6.3, pos: 'w' } },
+    ],
+    points: [{ x: -2, y: 0 }, { x: 2, y: 0 }],
+    notes: [{ x: 0.15, y: 0.35, text: 'never reaches 0', pos: 'e', color: 'r' }],
+    caption: 'x² − 4 = 0 at x = ±2; x² + 1 stays at 1 or above' }
+  const crCiPair = {
+    kind: 'roots',
+    svgTitle: 'The roots of x^2 + 1: i and -i on the unit circle',
+    ticks: { re: ['1', '−1'], im: ['', ''] },
+    roots: [{ arg: 90, label: 'i' }, { arg: 270, label: '−i' }],
+    pairNote: 'i and −i are conjugates',
+    captionLines: ['x² + 1 = (x − i)(x + i): two roots, off the real axis'],
+  };
+  const conceptIntroFigures = {
+    wall: renderFunctionPlotV4(fpCiWall),
+    pair: renderComplexRoots(crCiPair),
+  };
+
   const demoUnits = {
     cubeUnity: demoUnitFrame({
       svg: renderComplexRoots(crCubeUnity),
@@ -1758,6 +1786,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Polynomial Equations & Fundamental Theorem | Learn Math Class",
       description: "Learn how complex numbers solve all polynomial equations. Covers the Fundamental Theorem of Algebra, factoring over ℂ, Vieta's formulas, conjugate pairs, and solving equations like z^n = w.",
@@ -1781,9 +1810,72 @@ export default function EquationsPolynomialsPage({
   faqQuestions,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Real numbers solve plenty of polynomial equations.`,
+        content: [
+          `$x^2 - 4 = 0$ has the solutions $x = 2$ and $x = -2$. On the graph of $y = x^2 - 4$ they are the two places where the curve crosses the $x$-axis.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `x² + 1 = 0 has no real solution at all.`,
+        content: [
+          `Squaring a real number never gives a negative result, so $x^2 + 1$ is always at least $1$. Its graph sits entirely above the $x$-axis and never crosses it.`,
+          `Real numbers solve many polynomial equations but fail systematically on others. The equation $x^2 - 4 = 0$ yields $x = \\pm 2$, both real. The equation $x^2 + 1 = 0$ yields nothing — no real number squared equals $-1$. This gap plagued mathematics for centuries.`,
+        ],
+        visual: ciSvg('wall'),
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Working in $\\mathbb{C}$, a root (or solution) of a polynomial equation $p(x) = 0$ is any complex number $z$ with $p(z) = 0$ — real or not.`,
+        footer: `So $x^2 + 1 = 0$ has two roots, $i$ and $-i$, just as negative numbers were once admitted so that $x + 5 = 0$ would have one.`,
+      },
+      {
+        id: 'kind',
+        lead: `A complex root is a point of the complex plane where the polynomial is zero.`,
+        content: [
+          `Complex numbers close the gap entirely. The equation $x^2 + 1 = 0$ has two solutions in $\\mathbb{C}$: $x = i$ and $x = -i$. Each satisfies $i^2 = -1$ and $(-i)^2 = -1$. The [imaginary unit](!/complex-numbers/imaginary-numbers) exists precisely to solve this equation.`,
+          `Higher-degree equations with no real solutions also yield to complex numbers. Consider $x^4 + 4 = 0$, equivalent to $x^4 = -4$. No real fourth power is negative, yet four complex solutions exist. Using [De Moivre's theorem](!/complex-numbers/demoivre-theorem), we write $-4 = 4\\text{cis}(180°)$ and extract fourth roots: $z_k = \\sqrt{2}\\text{cis}(45° + 90°k)$ for $k = 0, 1, 2, 3$. The solutions are $1 + i$, $-1 + i$, $-1 - i$, and $1 - i$.`,
+        ],
+        visual: ciSvg('pair'),
+        caption: `The roots of $x^2 + 1$: $i$ and $-i$, above and below the real axis.`,
+      },
+      {
+        id: 'survives',
+        lead: `Nothing was lost: every real root is still a root.`,
+        content: [
+          `Real numbers are complex numbers with imaginary part $0$, so $x^2 - 4 = 0$ still has exactly the roots $2$ and $-2$. Some equations now have real and non-real roots side by side.`,
+          `Even equations mixing real and complex solutions find all their roots in $\\mathbb{C}$. The equation $x^3 + x = 0$ factors as $x(x^2 + 1) = 0$, giving $x = 0$ (real) and $x = \\pm i$ (complex). Three roots total, matching the cubic degree.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What is lost is the picture: complex roots do not show up on the ordinary graph.`,
+        content: `The graph of $y = x^2 + 1$ is drawn over real $x$ only, so a curve that misses the $x$-axis means "no real roots", not "no roots". Non-real roots have to be found by algebra, or drawn in the complex plane instead.`,
+      },
+      {
+        id: 'exit',
+        content: [
+          `The pattern holds universally: every polynomial equation of degree $n$ has exactly $n$ roots when we work in $\\mathbb{C}$ and count roots according to their multiplicity.`,
+          `The next section states this as the [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials#2); the page then covers factoring over $\\mathbb{C}$, Vieta's formulas, real coefficients, and solving equations such as $z^n = w$.`,
+        ],
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1800,7 +1892,7 @@ export default function EquationsPolynomialsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

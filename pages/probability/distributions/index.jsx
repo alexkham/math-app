@@ -60,7 +60,10 @@ export async function getStaticProps(){
       basic:{
         title:`2 Basic Types of Distributions`,
         content:``,
-        before:`Probability distributions are mathematical models that quantify how likely different outcomes are when dealing with uncertainty and randomness. These powerful tools allow us to systematically describe and predict the behavior of random phenomena across countless real-world scenarios. They fall into two fundamental categories: [discrete distributions](!/probability/distributions#discrete_dist) deal with countable outcomes (like number of successes, coin flips, or defective items), while [continuous distributions](!/probability/distributions#continuous_dist) handle measurable quantities that can take any value within a range (like height, time, or temperature). The key difference lies in whether you can list all possible outcomes (discrete) or whether outcomes form an unbroken continuum (continuous).
+        before:`@academic[fact,aside:true,width:35%:Neither discrete nor continuous
+At a light that is red for 60 seconds and green for 60, a driver arriving at a random moment waits exactly $0$ seconds with probability $\\frac{1}{2}$, and otherwise any time up to $60$ seconds, spread evenly. One value carries positive probability, so the wait is not continuous; the other values fill an interval, so it is not discrete either.]@
+
+Probability distributions are mathematical models that quantify how likely different outcomes are when dealing with uncertainty and randomness. These powerful tools allow us to systematically describe and predict the behavior of random phenomena across countless real-world scenarios. They fall into two fundamental categories: [discrete distributions](!/probability/distributions#discrete_dist) deal with countable outcomes (like number of successes, coin flips, or defective items), while [continuous distributions](!/probability/distributions#continuous_dist) handle measurable quantities that can take any value within a range (like height, time, or temperature). The key difference lies in whether you can list all possible outcomes (discrete) or whether outcomes form an unbroken continuum (continuous).
 
         `,
         between:`
@@ -145,6 +148,8 @@ The relationship between [random variable](!/probability/random-variables) and d
 
 The distribution functions as a model that captures the regularities of randomness in quantitative form. It abstracts from individual realizations and describes the law governing the occurrence of outcomes. Distributions provide the foundation for defining [expectation](!/probability/expected-value), [variance](!/probability/variance), moments, and limit theorems, forming the central organizing concept of probability theory.
 
+@academic[punchline:A distribution records how likely each value of a variable is and forgets which outcomes produced it.]@
+
 `,
         before:``,
         after:``,
@@ -217,7 +222,12 @@ Similarly, [variance](!/probability/variance) $\\text{Var}(X) = \\mathbb{E}[(X -
 
 Not all distributions have finite moments—the Cauchy distribution, for instance, has no finite mean.
 
-Distributions can be characterized by **moment generating functions** or **characteristic functions**, which encode all moments when they exist and provide tools for deriving distributional properties.`,
+@academic[fact,aside:true,width:35%:All moments agree, densities differ
+If $\\ln X$ is standard normal, the density $f$ of $X$ and the wavy density $f(x)\\,(1 + \\sin(2\\pi \\ln x))$ give the same $\\mathbb{E}[X^k]$ for every whole number $k$. Putting $x = e^t$, the wave adds $e^{k^2/2 - 2\\pi^2} \\sin(2\\pi k) = 0$ to each moment (Heyde, 1963).]@
+
+Distributions can be characterized by **moment generating functions** or **characteristic functions**, which encode all moments when they exist and provide tools for deriving distributional properties.
+
+Moments make a long list of numbers: $\\mathbb{E}[X]$, $\\mathbb{E}[X^2]$, $\\mathbb{E}[X^3]$, and so on without end. It is natural to read this list as a full fingerprint of the distribution, so that two distributions with the same moments would have to be the same distribution. For a variable confined to a bounded interval, such as $[0, 1]$, that reading is correct. A variable whose values can grow without limit, such as a waiting time or an income, is a different matter.`,
         before:``,
         after:``,
     
@@ -619,6 +629,7 @@ continuousDistributionsTypesData, seoData, demoUnits}) {
            <GenericTable key={'properties'} tableData={fundamentalPropertiesData} theme='lightBlue'
           cellFontSize={'16px'}
           headerFontSize={'18px'}/>,
+          `@academic[punchline:Every distribution has a CDF that fixes it completely; moments only summarize it, and may not even exist.]@`,
           
         ]
     },

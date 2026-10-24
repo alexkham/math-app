@@ -1190,7 +1190,12 @@ This quantity is called the Euclidean norm, or equivalently the $\\ell^2$ norm. 
 
 The double-bar notation $\\|\\mathbf{v}\\|$ is standard for the norm. Single bars $|x|$ are reserved for the absolute value of a scalar. The distinction matters: magnitude is a property of vectors, absolute value is a property of numbers, and the notational separation keeps the two from being confused.
 
-In dimensions beyond three, the formula cannot be visualized as a geometric length, but it retains the same algebraic role. It measures how far $\\mathbf{v}$ sits from the origin in the coordinate system of $\\mathbb{R}^n$, generalizing the concept of length purely through algebra.`,
+In dimensions beyond three, the formula cannot be visualized as a geometric length, but it retains the same algebraic role. It measures how far $\\mathbf{v}$ sits from the origin in the coordinate system of $\\mathbb{R}^n$, generalizing the concept of length purely through algebra.
+
+@academic[fact,aside:true,width:35%:A unit cube with a diagonal of 10
+The far corner $(1, 1, \\ldots, 1)$ lies $\\sqrt{1 + 1 + \\cdots + 1} = \\sqrt{n}$ from the origin, so the diagonal keeps growing with the dimension. In $\\mathbb{R}^{100}$ a cube whose edges all have length $1$ has a diagonal of length $10$.]@
+
+The vector whose components all equal $1$ makes a convenient test case. In $\\mathbb{R}^2$ it runs from the origin to the far corner of the unit square, and in $\\mathbb{R}^3$ to the far corner of the unit cube. In $\\mathbb{R}^n$ it joins two opposite corners of the $n$-dimensional unit cube, every edge of which still has length $1$, and its norm comes from the same formula: one squared $1$ for each of the $n$ components.`,
     before: ``,
     after: ``,
     link: '',
@@ -1270,6 +1275,9 @@ The standard basis vectors are the most immediate examples. In $\\mathbb{R}^3$:
 
 @academic[formula_callout:Unit Vectors
 $$\\mathbf{e}_1 = (1, 0, 0), \\quad \\mathbf{e}_2 = (0, 1, 0), \\quad \\mathbf{e}_3 = (0, 0, 1)$$]@
+
+@academic[fact,aside:true,width:35%:In the taxicab norm, $\\pi$ is $4$
+Measured by $\\|\\mathbf{v}\\|_1 = |v_1| + |v_2|$, the unit circle is a square with corners $(\\pm 1, 0)$ and $(0, \\pm 1)$. Each side has taxicab length $1 + 1 = 2$, so circumference over diameter is $\\frac{8}{2} = 4$.]@
 
 Each has exactly one component equal to $1$ and the rest equal to $0$, giving a norm of $1$. These unit vectors point along the coordinate axes, and any vector can be decomposed as a [linear combination](!/linear-algebra/vectors/linear-combinations) of them: $\\mathbf{v} = v_1\\mathbf{e}_1 + v_2\\mathbf{e}_2 + v_3\\mathbf{e}_3$.
 
@@ -1601,6 +1609,7 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
           >
             <PropertyLawCard data={normProperties} theme="navy" />
           </DiagramFrame>,
+          `@academic[punchline:Three rules make a measure a length: zero only at the zero vector, scaling by $|c|$, and no straight path longer than a detour.]@`,
         ]
     },
     {

@@ -1198,6 +1198,8 @@ $$E[X \\mid Y = y] = \\sum_{x} x\\,p_{X \\mid Y}(x \\mid y) \\quad \\text{or} \\
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
+
+@academic[punchline:To average $g(X)$, weight each $g(x)$ by the probability of $x$; the distribution of $g(X)$ itself is never needed.]@
 `,
       before:``,
       after:``,
@@ -1242,6 +1244,9 @@ $$E\\!\\left[E[X \\mid Y]\\right] = E[X]$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[fact,aside:true,width:35%:An infinite average from a fair coin
+Toss a coin until the first head; a head on toss $k$ pays $2^k$ dollars, with probability $\\frac{1}{2^k}$. Every term $2^k \\cdot \\frac{1}{2^k}$ adds $1$, so $E[X]$ is infinite, yet half of all games pay just 2 dollars.]@
+
 **When Expected Value Exists**  
 Expected value is not guaranteed to be finite for every distribution. Some distributions, such as the Cauchy distribution, have no defined expected value because the integral diverges. This reminds us that expectation is a mathematical quantity that depends on the shape and behavior of the probability function.
 
@@ -1268,7 +1273,14 @@ $$E[aX + bY] = a\\,E[X] + b\\,E[Y]$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
+@academic[fact,aside:true,width:35%:Nearly fifteen rolls to see every face
+Rolling a die until all six faces have appeared takes $14.7$ rolls on average. The waits for the six new faces have means $\\frac{6}{6}, \\frac{6}{5}, \\ldots, \\frac{6}{1}$, and linearity adds them: $6\\left(1 + \\frac{1}{2} + \\cdots + \\frac{1}{6}\\right) = 14.7$.]@
+
 The same idea extends to any number of variables: $E(X1 + X2 + ... + Xn) = E(X1) + E(X2) + ... + E(Xn)$. This property allows complicated expressions to be handled piece by piece, turning difficult problems into simple ones whose individual expectations are easy to compute. Because of this, linearity of expectation is one of the most widely used tools in probability.
+
+Waiting times are a natural place to use it. The number of rolls a die needs before every face has shown up can be cut into stages, one for each new face, and each stage is a geometric wait whose mean $\\frac{1}{p}$ appears in the table of standard formulas above. The stages are not equally long, but the total wait is simply their sum.
+
+@academic[punchline:The average of a total is the total of the averages, whether or not the parts depend on each other.]@
 `,
       before:``,
       after:``,
@@ -1573,7 +1585,7 @@ How to check: $E[X^2] - (E[X])^2$ is the variance, which is never negative and i
   id: "intro",
   title: "Understanding Expected Value",
   content: `
-Expected value is the number that describes the long-run average outcome of a random variable.If you could repeat the same random experiment over and over, the expected value tells you what the results would settle around on average.
+Expected value is the number that describes the long-run average outcome of a random variable. If you could repeat the same random experiment over and over, the expected value tells you what the results would settle around on average.
 
 It works the same way for:
 
@@ -1582,7 +1594,7 @@ It works the same way for:
 
 even though the way we calculate it differs.
 
-Expected value is one of the most important ideas in probability.It connects the outcome of a random experiment to the overall behavior of a distribution and
+Expected value is one of the most important ideas in probability. It connects the outcome of a random experiment to the overall behavior of a distribution and
 provides the foundation for variance, covariance, risk calculations, and many principles in probability and statistics.
 `
 }

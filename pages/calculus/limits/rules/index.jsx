@@ -760,9 +760,14 @@ $$g(x) \\leq f(x) \\leq h(x) \\text{ near } a, \\; \\lim_{x \\to a} g(x) = \\lim
 @academic[formulas_link:Browse all limit formulas
 /calculus/formulas]@
 
+@academic[fact,aside:true,width:35%:Archimedes squeezed $\\pi$ with polygons
+Archimedes trapped a circle between an inscribed and a circumscribed $96$-sided polygon, whose perimeters he could compute. That pinned $\\pi$ between $\\frac{223}{71} \\approx 3.1408$ and $\\frac{22}{7} \\approx 3.1429$ more than 2,200 years ago.]@
+
 The function $f$ is trapped between two functions that converge to the same limit. It has nowhere to go but $L$.
 
 This theorem proves the [special limit](!/calculus/limits/special) $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$ through a geometric argument that bounds $\\dfrac{\\sin x}{x}$ between $\\cos x$ and $1$ near zero.
+
+The same idea pins down numbers as well as functions. A quantity that cannot be computed directly is caught between a lower estimate and an upper estimate that can be computed, and both estimates are refined until they agree to as many digits as needed.
 `,
     before: ``,
     after: ``,
@@ -772,6 +777,11 @@ This theorem proves the [special limit](!/calculus/limits/special) $\\lim_{x \\t
     title: `When Rules Fail`,
     content: `
 Every rule requires component limits to exist. When they don't, the rule cannot be applied directly.
+
+@academic[fact,aside:true,width:35%:Two missing limits can add up to one
+$\\lfloor x \\rfloor$ and $\\lfloor -x \\rfloor$ both jump at $0$, so neither has a limit there, yet for every non-integer $x$ their sum is $-1$. One missing limit cannot be rescued this way: if $f$ and $f + g$ both have limits, so does $g = (f + g) - f$.]@
+
+A failed condition only silences the rule. The rule then gives no value for the limit of the combination, but it does not rule out that such a limit exists either. The combination has to be examined on its own terms, as a single expression rather than as a sum or product of parts.
 
 Indeterminate forms signal this breakdown:
 
@@ -1161,6 +1171,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, quoti
           sectionsContent.obj14.content,
           <div key={'unit-squeeze'} dangerouslySetInnerHTML={{ __html: demoUnits.squeeze }} />,
           `Without the factor x² the band would stay between −1 and 1 and the squeeze would fail.`,
+          `@academic[punchline:A limit no rule can reach can still be forced: trap the function between two bounds that meet.]@`,
         ]
     },
     {
@@ -1171,6 +1182,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, quoti
           sectionsContent.obj15.content,
           <div key={'obj15-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj15Table }} />,
+          `@academic[punchline:A limit rule applies only when its conditions hold; an indeterminate form means rewrite the expression first, then apply the rules.]@`,
         ]
     },
     {

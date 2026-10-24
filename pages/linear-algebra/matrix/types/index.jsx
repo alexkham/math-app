@@ -1385,7 +1385,12 @@ The first term is symmetric, the second is skew-symmetric, and this splitting is
 
 @academic[rule_theorem_plain:The eigenvalues of a real skew-symmetric matrix are either zero or purely imaginary — they come in conjugate pairs $\\pm bi$ with real eigenvalues restricted to zero.]@
 
+@academic[fact,aside:true,width:35%:Skew determinants are perfect squares
+For even order, the determinant of a skew-symmetric matrix is the square of a polynomial in its entries. With $a, b, c, d, e, f$ the six entries above the diagonal of a $4 \\times 4$ one, read row by row, it equals $(af - be + cd)^2$.]@
+
 For matrices of odd order, the determinant is always zero: $\\det(A) = \\det(A^T) = \\det(-A) = (-1)^n \\det(A)$, and when $n$ is odd, this forces $\\det(A) = 0$. For even order, the determinant can be nonzero.
+
+The smallest even case shows what kind of number comes out: $\\det \\begin{pmatrix} 0 & a \\\\ -a & 0 \\end{pmatrix} = a^2$. A $4 \\times 4$ skew-symmetric matrix is fixed by the six entries above its diagonal, since the diagonal is zero and everything below is a negated mirror image. Expanding its determinant by cofactors gives a polynomial of degree four in those six numbers.
 
 In $\\mathbb{R}^3$, the [cross product](!/linear-algebra/vectors/cross-product) $\\mathbf{a} \\times \\mathbf{b}$ can be written as $[\\mathbf{a}]_\\times \\mathbf{b}$, where $[\\mathbf{a}]_\\times$ is the $3 \\times 3$ skew-symmetric matrix
 
@@ -1435,6 +1440,11 @@ Common examples include rotation matrices in $\\mathbb{R}^2$ and $\\mathbb{R}^3$
 
 The smallest such $k$ is called the index of nilpotency.
 
+@academic[fact,aside:true,width:35%:Squares to zero with no zero entry
+$\\begin{pmatrix} 1 & 1 \\\\ -1 & -1 \\end{pmatrix}^2 = O$, though none of its four entries is zero. Both columns lie on the line through $(1, -1)$, and that line is exactly what the matrix sends to $\\mathbf{0}$, so a second application wipes out everything.]@
+
+The examples that come to mind first are strictly upper triangular, with zeros on and below the diagonal. Each multiplication by such a matrix pushes the nonzero entries at least one diagonal further up and to the right, so after at most $n$ steps nothing is left. Seen this way, nilpotency looks like one more pattern of zeros, like the diagonal and triangular conditions earlier on this page, with the zeros spreading a little further at every power.
+
 @academic[rule_theorem_plain:Every eigenvalue of a nilpotent matrix is zero, which forces both the determinant and the trace to vanish.]@
 
 Nilpotent matrices have a useful algebraic consequence: the matrix $I - A$ is always invertible, with inverse given by a finite geometric series:
@@ -1478,7 +1488,9 @@ The matrix $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ is involutory — 
 Factoring $A^2 - I = (A - I)(A + I) = O$ and setting a factor to zero gives only $A = \\pm I$. But $A = \\text{diag}(1, -1)$ also squares to $I$, with $A - I = \\text{diag}(0, -2)$ and $A + I = \\text{diag}(2, 0)$ both nonzero.
 [Read more](!#pitfalls)]@
 
-More generally, any matrix of the form $2P - I$, where $P$ is idempotent, is involutory. Expanding gives $(2P - I)^2 = 4P^2 - 4P + I = 4P - 4P + I = I$, using $P^2 = P$. Geometrically this converts a projection into the reflection across the same subspace: instead of landing on the subspace, the vector travels the same distance again and comes out the other side.`,
+More generally, any matrix of the form $2P - I$, where $P$ is idempotent, is involutory. Expanding gives $(2P - I)^2 = 4P^2 - 4P + I = 4P - 4P + I = I$, using $P^2 = P$. Geometrically this converts a projection into the reflection across the same subspace: instead of landing on the subspace, the vector travels the same distance again and comes out the other side.
+
+The converse holds as well. If $A^2 = I$, then $P = \\frac{1}{2}(A + I)$ satisfies $P^2 = \\frac{1}{4}(A^2 + 2A + I) = \\frac{1}{4}(2A + 2I) = P$, so $P$ is idempotent and $A = 2P - I$. Every involutory matrix arises in this way, from the projection onto the subspace it leaves fixed.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1862,6 +1874,7 @@ export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsC
           >
             <NestedContainment data={permNest} />
           </DiagramFrameV2>,
+          `@academic[punchline:A permutation matrix only moves entries, so its inverse, determinant, trace and eigenvalues are all read off the permutation.]@`,
         ]
     },
     {
@@ -1908,6 +1921,7 @@ export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsC
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          `@academic[punchline:A matrix that is its own inverse is always a projection turned into a reflection: $A = 2P - I$.]@`,
         ]
     },
     {
@@ -1916,6 +1930,7 @@ export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsC
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          `@academic[punchline:Only a few matrix types settle invertibility in advance; for every other matrix it takes a computation.]@`,
         ]
     },
     {

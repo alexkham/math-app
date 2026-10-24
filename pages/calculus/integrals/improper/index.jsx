@@ -419,6 +419,13 @@ If $f(x) \\geq g(x)$ and $\\int g$ diverges, then $\\int f$ diverges.
 Does $\\int_1^{\\infty} \\frac{1}{x^2 + 1}\\, dx$ converge?
 
 Since $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x^2}$ and $\\int_1^{\\infty} \\dfrac{1}{x^2}\\, dx$ converges, the given integral converges by comparison.]@
+
+@academic[fact,aside:true,width:35%:Finite volume, infinite surface area
+Spinning $y = \\frac{1}{x}$ for $x \\geq 1$ about the $x$-axis gives a horn of volume $\\pi \\int_1^{\\infty} \\frac{dx}{x^2} = \\pi$. Its surface integrand $\\frac{2\\pi}{x}\\sqrt{1 + \\frac{1}{x^4}}$ lies above $\\frac{2\\pi}{x}$, so by comparison its surface area is infinite (Torricelli, 1644).]@
+
+The second half of the test runs the other way. To show that an integral diverges, look for a smaller integrand whose integral is already known to diverge, usually $\\frac{1}{x}$ or another power with $p \\leq 1$. For example, $\\sqrt{x^2 + 1} > x$, so $\\frac{\\sqrt{x^2 + 1}}{x^2} > \\frac{1}{x}$ on $[1, \\infty)$, and $\\int_1^{\\infty} \\frac{\\sqrt{x^2 + 1}}{x^2}\\, dx$ diverges by comparison with $\\int_1^{\\infty} \\frac{1}{x}\\, dx$.
+
+Nothing here needs an antiderivative. The square root never has to be integrated: one inequality between the integrands settles the verdict, as long as it holds for every $x \\geq 1$.
 `,
     before: ``,
     after: ``,
@@ -444,6 +451,11 @@ Compare to $g(x) = 1/x^2$:
 $$\\lim_{x \\to \\infty} \\frac{x/(x^3 + 5)}{1/x^2} = \\lim_{x \\to \\infty} \\frac{x^3}{x^3 + 5} = 1$$
 
 Since $\\int_1^{\\infty} 1/x^2\\, dx$ converges, so does the given integral.]@
+
+@academic[fact,aside:true,width:35%:Converging only by cancellation
+$\\int_0^{\\infty} \\frac{\\sin x}{x}\\, dx = \\frac{\\pi}{2}$, yet $\\int_0^{\\infty} \\frac{|\\sin x|}{x}\\, dx$ diverges. Each arch of $|\\sin x|$ from $k\\pi$ to $(k + 1)\\pi$ adds at least $\\frac{2}{(k + 1)\\pi}$, and these add up like $1 + \\frac{1}{2} + \\frac{1}{3} + \\cdots$; only the changing signs keep the first integral finite.]@
+
+Both comparison tests are stated for integrands that stay positive. Their verdicts rest on area piling up, and positive area can only pile up. An integrand that changes sign has positive and negative pieces that can partly cancel, so the tests are applied to $|f|$ instead: if $\\int_a^{\\infty} |f(x)|\\, dx$ converges, then $\\int_a^{\\infty} f(x)\\, dx$ converges too, and the integral is said to converge absolutely. For an integrand that never changes sign this adds nothing new, since then $|f|$ is $f$ or $-f$.
 `,
     before: ``,
     after: ``,
@@ -870,6 +882,7 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          `@academic[punchline:Every trouble spot, an infinite end or an asymptote, gets its own limit, and the integral converges only if each one does.]@`,
         ]
     },
     {
@@ -890,6 +903,7 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          `@academic[punchline:For powers of $x$ the dividing line is $\\frac{1}{x}$: decay faster at infinity, or blow up slower at zero, and the area is finite.]@`,
         ]
     },
     {

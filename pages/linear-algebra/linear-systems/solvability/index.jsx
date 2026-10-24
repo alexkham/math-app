@@ -2141,7 +2141,7 @@ The two questions are independent — existence can hold without uniqueness, and
     entries: [
       {
         id: 'consistent-vocabulary',
-        tex: `$consistent / inconsistent$`,
+        tex: `$\\text{consistent / inconsistent}$`,
         read: `the system has at least one solution — or none at all`,
         means: `A two-word classification applied to the **system**, not to any solution: consistent means at least one exists, inconsistent means none does. The words settle existence only and say nothing about how many, which is why **The Two Questions** above keeps existence and uniqueness apart.`,
         cases: `The marks that detect inconsistency are visual: a row reading $[\\,0 \\; \\cdots \\; 0 \\mid d\\,]$ with $d \\neq 0$ asserts $0 = d$, so a single such row in the [augmented matrix](!/linear-algebra/linear-systems/gaussian-elimination#notation) decides the whole system.`,
@@ -2221,7 +2221,12 @@ $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) < n$: infinitely many sol
 
 @academic[rule_theorem_plain:There is no case with a finite number of solutions greater than one.]@
 
-If two distinct solutions exist, their difference lies in the null space, which is a [subspace](!/linear-algebra/vector-spaces/subspaces) — and a nontrivial subspace contains infinitely many vectors, generating infinitely many solutions.`,
+@academic[fact,aside:true,width:35%:Exactly two solutions, in arithmetic mod 2
+With arithmetic mod $2$, where $1 + 1 = 0$, the equation $x_1 + x_2 = 1$ has exactly two solutions, $(1, 0)$ and $(0, 1)$. The line through two solutions has one point per scalar, and mod $2$ there are only two scalars.]@
+
+If two distinct solutions exist, their difference lies in the null space, which is a [subspace](!/linear-algebra/vector-spaces/subspaces) — and a nontrivial subspace contains infinitely many vectors, generating infinitely many solutions.
+
+The argument uses only one property of the scalars: there are infinitely many of them. The points $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ all solve the system, because $A(\\mathbf{x}_2 - \\mathbf{x}_1) = \\mathbf{b} - \\mathbf{b} = \\mathbf{0}$, and different values of $t$ give different points since $\\mathbf{x}_2 - \\mathbf{x}_1 \\neq \\mathbf{0}$. The number of solutions is therefore at least the number of scalars available for $t$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2269,7 +2274,9 @@ Concluding "no solution" because $m = 3 > n = 2$ fails for $x_1 + x_2 = 2$, $x_1
 
 A solution exists only when $\\mathbf{b}$ happens to lie in the column space — when the extra equations are consistent with the first $n$. When a solution does exist and $\\text{rank}(A) = n$, it is unique.
 
-When no exact solution exists, the [least-squares](!/linear-algebra/orthogonality/least-squares) approach finds the $\\hat{\\mathbf{x}}$ that minimizes $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ — the closest approximation. The least-squares solution satisfies the normal equations $A^T A \\hat{\\mathbf{x}} = A^T \\mathbf{b}$ and $A\\hat{\\mathbf{x}}$ is the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space.`,
+When no exact solution exists, the [least-squares](!/linear-algebra/orthogonality/least-squares) approach finds the $\\hat{\\mathbf{x}}$ that minimizes $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ — the closest approximation. The least-squares solution satisfies the normal equations $A^T A \\hat{\\mathbf{x}} = A^T \\mathbf{b}$ and $A\\hat{\\mathbf{x}}$ is the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space.
+
+@academic[punchline:Extra equations rarely agree, so a tall system usually has no exact solution and least squares settles for the nearest one.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2286,6 +2293,11 @@ The solution set, when nonempty, is an affine subspace of dimension at least $n 
 
 Common selection criteria include minimum norm (the $\\mathbf{x}$ closest to $\\mathbf{0}$, given by the pseudoinverse $\\mathbf{x} = A^+\\mathbf{b}$, which equals $A^T(AA^T)^{-1}\\mathbf{b}$ when $A$ has full row rank), sparsity (the $\\mathbf{x}$ with the fewest nonzero entries, central to compressed sensing), and physical constraints (bounds or nonnegativity in engineering applications).
 
+@academic[fact,aside:true,width:35%:Ten equations, a thousand unknowns
+A $10 \\times 1000$ system whose columns are independent ten at a time has at most one solution with $5$ or fewer nonzero entries. Two such solutions would differ by a null-space vector with at most $10$ nonzero entries, and no $10$ columns can cancel.]@
+
+Sparsity deserves a closer look, because it changes how much information a solution carries. A vector in $\\mathbb{R}^{1000}$ with only $5$ nonzero entries is described by $10$ numbers: where those entries sit and what they are. Compressed sensing measures such a vector with far fewer equations than unknowns and then looks, among the infinitely many solutions, for the sparsest one.
+
 Underdetermined systems are not defective — they arise naturally whenever a problem has more degrees of freedom than constraints. The linear system identifies the feasible set; the selection criterion picks a point within it.`,
     before: ``,
     after: ``,
@@ -2299,7 +2311,9 @@ When the system is inconsistent, the hyperplanes have no common point. In $\\mat
 
 When the system has a unique solution, the hyperplanes meet at a single point. This requires at least $n$ independent equations — enough to cut the solution space down from $n$ dimensions to $0$.
 
-When the system has infinitely many solutions, the hyperplanes meet along a flat of dimension $n - r$, where $r = \\text{rank}(A)$. Each independent equation reduces the dimension of the intersection by one, and the rank counts how many equations cut independently. The remaining $n - r$ dimensions are the free directions in the solution set.`,
+When the system has infinitely many solutions, the hyperplanes meet along a flat of dimension $n - r$, where $r = \\text{rank}(A)$. Each independent equation reduces the dimension of the intersection by one, and the rank counts how many equations cut independently. The remaining $n - r$ dimensions are the free directions in the solution set.
+
+@academic[punchline:Solving a linear system is intersecting hyperplanes, and each independent equation cuts the intersection down by one dimension.]@`,
     before: ``,
     after: ``,
     link: ``,

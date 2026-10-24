@@ -311,6 +311,11 @@ As $n \\to \\infty$ and the rectangles become infinitely thin, the Riemann sum a
 $$\\int_a^b f(x)\\, dx = \\lim_{n \\to \\infty} \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$]@
 
 @academic[rule_theorem_plain:The choice of sample points—left endpoints, right endpoints, midpoints—affects individual Riemann sums but not the limit, provided $f$ is integrable.]@
+
+@academic[fact,aside:true,width:35%:Archimedes summed a parabola first
+In the third century BC Archimedes proved that a parabolic segment has $\\frac{4}{3}$ the area of its inscribed triangle. He filled it with triangles whose areas form $1 + \\frac{1}{4} + \\frac{1}{16} + \\cdots$ times the first one, and he showed that this sum is $\\frac{4}{3}$ exactly.]@
+
+Filling a curved region with simpler shapes of known area is far older than the integral sign. Greek geometers did it by what is now called the method of exhaustion: pieces are added until the region left over is smaller than any given amount, and a proposed value is confirmed by showing that the area can be neither larger nor smaller than it. A Riemann sum does the same with thin rectangles, and the limit replaces the two-sided argument with a single step.
 `,
     before: ``,
     after: ``,
@@ -512,6 +517,11 @@ Geometrically, $f_{\\text{avg}}$ is the height of a rectangle with base $[a, b]$
 
 @academic[formula_callout:Average Value of a Function
 $$f(c) = f_{\\text{avg}}$$]@
+
+@academic[fact,aside:true,width:35%:Mains at 230 volts peaks near 325
+An alternating voltage is rated instead by the square root of the average of its square. The average of $\\sin^2 x$ over a cycle is one half, so the rating is the peak divided by $\\sqrt{2}$, and $230$-volt mains swings to about $\\pm 325$ volts.]@
+
+The average value depends on the interval as well as on the function. On $[0, \\pi]$ the arch of $\\sin x$ has area $2$, so its average value there is $\\frac{2}{\\pi} \\approx 0.64$. On the full period $[0, 2\\pi]$ the area below the axis cancels the area above, and the average value is $0$. Any quantity that swings evenly between positive and negative values has average value $0$ over a whole cycle, however large its swings are.
 `,
     before: ``,
     after: ``,
@@ -849,6 +859,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj3.content,
           <div key={'unit-signedArea'} dangerouslySetInnerHTML={{ __html: demoUnits.signedArea }} />,
           `Over [0, π] alone the integral is 2: only a full period cancels.`,
+          `@academic[punchline:A definite integral measures net accumulation, not area: to count every region as positive, integrate $|f|$.]@`,
         ]
     },
     {
@@ -885,6 +896,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj7.content,
           <div key={'unit-avgValue'} dangerouslySetInnerHTML={{ __html: demoUnits.avgValue }} />,
           `Because x² curves upward, its average 3 lies above the midpoint value f(1.5) = 2.25.`,
+          `@academic[punchline:The average value is the total divided by the interval's length, and a continuous function always attains it.]@`,
         ]
     },
     {

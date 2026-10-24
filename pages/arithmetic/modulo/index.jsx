@@ -1089,6 +1089,11 @@ When $n = 2$, every integer produces a remainder of $0$ or $1$. This is the basi
 
 When $n = 10$, every integer produces a remainder between $0$ and $9$. For a non-negative number, that remainder is its last digit — $347 \\bmod 10 = 7$, read directly from the ones place.
 
+@academic[fact,aside:true,width:35%:Why some ISBNs end in X
+The last character of a 10-digit ISBN makes $10d_1 + 9d_2 + \\ldots + 1 \\cdot d_{10}$ divisible by $11$, so it can take any of the eleven values $0$ to $10$, and $10$ is written X. Since $11$ is prime, the check catches every single wrong digit and every swap of two digits.]@
+
+When $n = 11$, the possible remainders run from $0$ to $10$: eleven values, one more than there are decimal digits. Every one of them except the last fits in a single digit place, but a remainder of $10$ needs two. A one-character code built on division by $11$ has to borrow an extra symbol for that case.
+
 When $n = 7$, every integer maps to one of seven remainders: $\\{0, 1, 2, 3, 4, 5, 6\\}$. No matter how large the dividend grows — thousands, millions, billions — the remainder when divided by $7$ never escapes this set.
 
 The modulo operation compresses the entire number line into a finite set of $n$ values, repeating in cycles. Every integer lands somewhere in $\\{0, 1, \\ldots, n-1\\}$, and infinitely many integers share each landing spot.`,
@@ -1213,6 +1218,11 @@ Reading the dial gives $24 \\bmod 12 = 12$, since the hand points at $12$. A rem
 The time $15{:}00$ on a $24$-hour clock translates to $3{:}00$ on a $12$-hour clock: $15 \\bmod 12 = 3$. The time $27$ hours from midnight is $3{:}00$ AM: $27 \\bmod 12 = 3$. Different numbers, same position on the dial.
 
 Days of the week follow the same pattern with $n = 7$. Starting from Sunday ($0$), day $10$ of a sequence falls on the same weekday as day $3$: $10 \\bmod 7 = 3$, which is Wednesday. Day $17$ is also Wednesday. Day $24$ is Wednesday again. The cycle repeats every $7$ days.
+
+@academic[fact,aside:true,width:35%:The 13th is most often a Friday
+Over the $4800$ months of a $400$-year cycle, the 13th falls on a Friday $688$ times, more than on any other weekday. The cycle is $146{,}097$ days, exactly $20{,}871$ weeks, so the same uneven pattern repeats forever.]@
+
+The calendar runs the same count on a larger scale. The weekday of a date moves forward by $365 \\bmod 7 = 1$ from one year to the next, and by $2$ after a leap day. Leap years follow a rule that only repeats after $400$ years: every fourth year, except century years not divisible by $400$. Whether the weekdays themselves repeat after that comes down to one remainder, the number of days in $400$ years taken mod $7$.
 
 The general principle: any system that cycles with period $n$ is governed by modular arithmetic. Months cycle with period $12$. Musical notes (in Western chromatic tuning) cycle with period $12$. Degree measurements on a compass cycle with period $360$. In each case, modulo captures the wrap-around — reducing an unbounded count to a position within a fixed cycle.`,
   before: ``,
@@ -1680,6 +1690,7 @@ export default function ModuloPage({moduloDivisibilityCases, seoData, sectionsCo
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[punchline:Congruence mod $n$ behaves like equality and sorts every integer into exactly one of $n$ remainder classes.]@`,
         ]
     },
     {

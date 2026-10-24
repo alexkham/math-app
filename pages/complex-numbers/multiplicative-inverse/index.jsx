@@ -1372,6 +1372,7 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -1955,6 +1956,30 @@ const keyWords = [
 
 
 // formulas-optimized: v1 | 2026-06-11 | 2 callouts (obj2, obj5)
+// Concept introduction (section 2, "Multiplicative Inverse of a Complex
+// Number") — template C, failure first. Running instance: z = 3 + 4i, the
+// section's own. Old obj2 text is kept in sectionsContent.obj2, unused; its
+// four formula boxes and link, the pitfall aside and seven passages are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBreakTable = ciTableOpen(['piece of (3 + 4i)(1/3 + i/4)', 'value']) +
+  ciRow(['3 · 1/3', '1']) +
+  ciRow(['3 · i/4', '3i/4'], { shade: true }) +
+  ciRow(['4i · 1/3', '4i/3']) +
+  ciRow(['4i · i/4', 'i² = −1'], { shade: true }) +
+  ciRow(['total', '25i/12, not 1'], { last: true, color: '#a4243b', cols: [1] }) +
+  '</tbody></table>'
+const ciSumTable = ciTableOpen(['', 'invert the whole', 'invert each piece']) +
+  ciRow(['real: 2 + 3', '1/5 = 0.2', '1/2 + 1/3 ≈ 0.83']) +
+  ciRow(['complex: 3 + 4i', '3/25 − 4i/25', '1/3 + i/4'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
     obj0: {
@@ -2482,6 +2507,11 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    breakTable: ciBreakTable,
+    sumTable: ciSumTable,
+  };
+
   const demoUnits = {
     geom: demoUnitFrame({
       svg: deMoivreDiagrams.inverse,
@@ -2583,6 +2613,7 @@ const schemas = {
     realInverseCases,
     complexInverseCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -2615,10 +2646,84 @@ export default function MultiplicativeInversePage({realInverseCases, complexInve
   obj11Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `For real numbers, the inverse is a flipped fraction — so it seems natural to flip each part of a complex number.`,
+        content: [
+          `The inverse of $5$ is $\\frac{1}{5}$ and the inverse of $4$ is $\\frac{1}{4}$. A complex number like $3 + 4i$ is built from a $3$ and a $4$, so a sensible first guess is $\\frac{1}{3} + \\frac{1}{4}i$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Multiplying back shows the guess is wrong: the product is not 1.`,
+        content: [
+          `An inverse must multiply with $3 + 4i$ to give $1$. Expand the product piece by piece.`,
+          ciTable('breakTable'),
+          `@academic[pitfall,aside:true,width:35%:Inverting each part separately
+Writing $\\frac{1}{3 + 4i}$ as $\\frac{1}{3} + \\frac{1}{4}i$ inverts the two parts on their own, and $(3 + 4i)\\left(\\frac{1}{3} + \\frac{1}{4}i\\right) = \\frac{25}{12}i$, not $1$. The conjugate formula gives $\\frac{3}{25} - \\frac{4}{25}i$.
+[Read more](!#11)]@`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The failure was predictable: 3 + 4i is a sum, and a sum cannot be inverted piece by piece.`,
+        content: [
+          `The same thing happens with plain numbers. $\\frac{1}{2 + 3}$ is $\\frac{1}{5}$, not $\\frac{1}{2} + \\frac{1}{3}$. When two complex numbers are multiplied, every part meets every other part and $i \\cdot i$ turns into $-1$, so the real and imaginary parts cannot be handled one at a time. Any inverse has to be found for the number as a whole.`,
+          ciTable('sumTable'),
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [multiplicative inverse](!/complex-numbers/definitions#multiplicative_inverse) of a nonzero complex number $z$, written $z^{-1}$ or $\\frac{1}{z}$, is the complex number $w$ with $z \\cdot w = 1$.`,
+        formula: [
+          `For a nonzero complex number $z = a + bi$, the multiplicative inverse is the unique complex number $w$ satisfying $z \\cdot w = 1$. The formula is:`,
+          `@academic[formula_callout:Multiplicative Inverse
+$$z^{-1} = \\frac{\\overline{z}}{|z|^2} = \\frac{a - bi}{a^2 + b^2}$$
+/complex-numbers/formulas#multiplicative_inverse]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+          `This expression uses the [conjugate](!/complex-numbers/complex-conjugate) $\\overline{z} = a - bi$ in the numerator and the square of the [modulus](!/complex-numbers/absolute-value) $|z|^2 = a^2 + b^2$ in the denominator.`,
+          `Separating into real and imaginary parts:`,
+          `@academic[formula_callout:Multiplicative Inverse of a Complex Number
+$$z^{-1} = \\frac{a}{a^2 + b^2} - \\frac{b}{a^2 + b^2}i$$]@`,
+        ],
+        footer: `So $(3 + 4i)^{-1} = \\frac{3}{25} - \\frac{4}{25}i$, not $\\frac{1}{3} + \\frac{1}{4}i$.`,
+      },
+      {
+        id: 'kind',
+        lead: `z⁻¹ is again a complex number, worked out from the conjugate and the modulus.`,
+        content: [
+          `Consider $z = 3 + 4i$. The conjugate is $\\overline{z} = 3 - 4i$ and the modulus squared is $|z|^2 = 9 + 16 = 25$. The multiplicative inverse is:`,
+          `@academic[formula_callout:Multiplicative Inverse of a Complex Number
+$$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
+          `Verification: $(3 + 4i)\\left(\\frac{3}{25} - \\frac{4}{25}i\\right) = \\frac{9}{25} - \\frac{12}{25}i + \\frac{12}{25}i - \\frac{16}{25}i^2 = \\frac{9}{25} + \\frac{16}{25} = 1$.`,
+          `For $z = 2i$, a pure imaginary number, the conjugate is $-2i$ and the modulus squared is $4$. The inverse is $\\frac{-2i}{4} = -\\frac{1}{2}i$. For $z = 1 + i$, the conjugate is $1 - i$ and the modulus squared is $2$. The inverse is $\\frac{1 - i}{2} = \\frac{1}{2} - \\frac{1}{2}i$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the definition is a test — and it shows why 0 is left out.`,
+        content: `A number $w$ is the inverse of $z$ exactly when $z \\cdot w = 1$, so any answer can be checked by multiplying it back; the guess $\\frac{1}{3} + \\frac{1}{4}i$ fails that check, $\\frac{3}{25} - \\frac{4}{25}i$ passes it. The same test explains the exclusion: $0 \\cdot w = 0$ for every $w$, so no number passes it for $z = 0$, as the section on [why zero has no multiplicative inverse](!/complex-numbers/multiplicative-inverse#8) explains.`,
+      },
+      {
+        id: 'exit',
+        content: `The next section shows where the formula comes from; after it come the notation, the picture of the inverse, its properties, the comparison with the conjugate, zero, division and uniqueness.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2651,7 +2756,7 @@ export default function MultiplicativeInversePage({realInverseCases, complexInve
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

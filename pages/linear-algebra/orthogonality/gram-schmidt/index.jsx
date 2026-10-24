@@ -2242,7 +2242,7 @@ The coefficient in front of $\\mathbf{u}_1$ is a ratio of two dot products. The 
 $$\\mathbf{u}_1 = \\mathbf{v}_1$$]@
 
 @academic[formula_callout:gram_schmidt_process|Gram-Schmidt Process|$$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\mathbf{u}_i \\cdot \\mathbf{v}_j}{\\mathbf{u}_i \\cdot \\mathbf{u}_i}\\,\\mathbf{u}_i \\quad \\text{for } j = 2, 3, \\dots, k$$]@
-@academic[formulas_link:/linear-algebra/formulas#gram-schmidt_process]@
+@academic[formulas_link:/linear-algebra/formulas#gram_schmidt_process]@
 
 @academic[pitfall,aside:true,width:35%:Projecting onto the original vectors
 Projecting $\\mathbf{v}_3 = (0, 1, 1)$ onto $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$ instead of onto $\\mathbf{u}_1, \\mathbf{u}_2$ gives $(-1, \\frac{1}{2}, \\frac{1}{2})$, whose dot product with $\\mathbf{u}_1$ is $-\\frac{1}{2}$. Projecting onto the $\\mathbf{u}_i$ gives $\\mathbf{u}_3 = (-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3})$.
@@ -2344,7 +2344,9 @@ To run Gram-Schmidt on your own set of vectors, use the [vector calculator](!/li
 
 What remains after subtraction is the component of $\\mathbf{v}_j$ [orthogonal](!/linear-algebra/orthogonality) to $W_{j-1}$. This component is nonzero because $\\mathbf{v}_j \\notin W_{j-1}$ — guaranteed by the independence of the original set.
 
-The span is preserved at each step. Each $\\mathbf{u}_j$ is a linear combination of $\\mathbf{v}_j$ and $\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}$, and each earlier $\\mathbf{u}_i$ is a combination of $\\mathbf{v}_1, \\dots, \\mathbf{v}_i$. So $\\mathbf{u}_j \\in \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_j\\}$, and the reverse inclusion follows because $\\mathbf{v}_j$ can be recovered from $\\mathbf{u}_j$ and the earlier $\\mathbf{u}_i$&apos;s.`,
+The span is preserved at each step. Each $\\mathbf{u}_j$ is a linear combination of $\\mathbf{v}_j$ and $\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}$, and each earlier $\\mathbf{u}_i$ is a combination of $\\mathbf{v}_1, \\dots, \\mathbf{v}_i$. So $\\mathbf{u}_j \\in \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_j\\}$, and the reverse inclusion follows because $\\mathbf{v}_j$ can be recovered from $\\mathbf{u}_j$ and the earlier $\\mathbf{u}_i$&apos;s.
+
+@academic[punchline:Independence guarantees that something survives each subtraction, and the subtraction guarantees that what survives is perpendicular.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2357,11 +2359,11 @@ The span is preserved at each step. Each $\\mathbf{u}_j$ is a linear combination
 $$A = QR$$
 /linear-algebra/formulas#qr_decomposition]@
 
-@academic[formulas_link:/linear-algebra/formulas#gram-schmidt_process]@
+@academic[formulas_link:/linear-algebra/formulas#gram_schmidt_process]@
 
 $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns (the normalized $\\mathbf{q}_i$&apos;s). $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.
 
-The entries of $R$ are the dot products computed during Gram-Schmidt: $R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{a}_j$ for $i \\leq j$, and $R_{ij} = 0$ for $i > j$ (because $\\mathbf{a}_j$&apos;s projection onto $\\mathbf{q}_i$ is zero when $i > j$ — that direction hasn&apos;t been subtracted yet).
+The entries of $R$ are the dot products computed during Gram-Schmidt: $R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{a}_j$ for $i \\leq j$, and $R_{ij} = 0$ for $i > j$ (because $\\mathbf{a}_j$ lies in the span of $\\mathbf{q}_1, \\ldots, \\mathbf{q}_j$, so it is perpendicular to $\\mathbf{q}_i$ when $i > j$).
 
 The factorization captures two complementary pieces of information. $Q$ stores the orthonormal directions. $R$ stores the coefficients that express the original columns in terms of those directions: $\\mathbf{a}_j = R_{1j}\\mathbf{q}_1 + R_{2j}\\mathbf{q}_2 + \\cdots + R_{jj}\\mathbf{q}_j$.`,
     before: ``,
@@ -2386,7 +2388,10 @@ The QR approach avoids forming $A^TA$ explicitly. This matters because the condi
   },
   obj9: {
     title: `Numerical Stability`,
-    content: `Classical Gram-Schmidt (as presented above) can lose orthogonality in floating-point arithmetic. When the input vectors are nearly dependent, the computed $\\mathbf{u}_j$&apos;s may fail to be perpendicular to machine precision, and the errors accumulate with each step.
+    content: `@academic[fact,aside:true,width:35%:Perpendicular on paper, $60^\\circ$ on a computer
+Run classical Gram-Schmidt in double precision on $(1, \\varepsilon, 0, 0)$, $(1, 0, \\varepsilon, 0)$, $(1, 0, 0, \\varepsilon)$ with $\\varepsilon = 10^{-8}$: since $1 + \\varepsilon^2$ rounds to $1$, the last two outputs come out with $\\mathbf{q}_2 \\cdot \\mathbf{q}_3 = \\frac{1}{2}$, an angle of $60^\\circ$. The modified version, on the same input, gives $\\mathbf{q}_2 \\cdot \\mathbf{q}_3 \\approx 10^{-16}$.]@
+
+Classical Gram-Schmidt (as presented above) can lose orthogonality in floating-point arithmetic. When the input vectors are nearly dependent, the computed $\\mathbf{u}_j$&apos;s may fail to be perpendicular to machine precision, and the errors accumulate with each step.
 
 Modified Gram-Schmidt addresses this by reorganizing the computation. Instead of computing all projections using the original $\\mathbf{v}_j$, modified Gram-Schmidt updates $\\mathbf{v}_j$ in place after each projection is subtracted. At step $j$, first subtract the projection onto $\\mathbf{u}_1$ from $\\mathbf{v}_j$, then subtract the projection onto $\\mathbf{u}_2$ from the updated $\\mathbf{v}_j$, and so on. The mathematical result is identical in exact arithmetic, but the modified version is significantly more stable numerically.
 
@@ -2780,6 +2785,7 @@ export default function GramSchmidtsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+          `@academic[punchline:Formulas that agree in exact arithmetic can behave very differently on a computer: the order of the subtractions matters.]@`,
         ]
     },
     {
@@ -2805,6 +2811,8 @@ export default function GramSchmidtsPage({
           >
             <IdentitySheet data={gramSchmidtSettings} theme="navy" variant="ledger" />
           </DiagramFrame>,
+          `@academic[fact,aside:true,width:35%:$x^8$ and $x^{10}$ sit $6^\\circ$ apart
+Under $\\langle p, q \\rangle = \\int_{-1}^{1} p(x)q(x)\\,dx$, the cosine of the angle between $x^8$ and $x^{10}$ is $\\frac{\\sqrt{357}}{19} \\approx 0.994$, about $6^\\circ$. High powers look almost alike on $[-1, 1]$, so the monomials are close to dependent and Gram-Schmidt removes most of each higher power.]@`,
           `The second group is where the generality earns its keep. Under the integral inner product on $[-1, 1]$ the monomials $1, x, x^2$ are independent but not orthogonal, and orthogonalizing them yields the Legendre polynomials — so those are not a separate construction but simply what this algorithm returns when handed the obvious basis. Under the inner product on $[0, 2\\pi]$, sines and cosines of distinct frequencies are already orthogonal, and the algorithm finds nothing to subtract.`,
           `That last observation is why a Fourier coefficient is a single integral rather than the solution of a linear system: the basis was orthogonal before anyone asked. The algorithm never inspects what a vector is — it calls the inner product and scalar multiplication and nothing else — which is what lets the same procedure serve tuples, polynomials and functions, and what makes it a constructive proof that every finite-dimensional inner product space has an orthonormal basis.`,
         ]

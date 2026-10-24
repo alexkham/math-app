@@ -407,6 +407,9 @@ $$P(-2) = 2(-2)^2 - 3(-2) + 1 = 2(4) + 6 + 1 = 8 + 6 + 1 = 15$$]@
 
 The squared term produces a positive result, and subtracting a negative becomes addition.
 
+@academic[fact,aside:true,width:35%:Two values reveal every coefficient
+If all coefficients are non-negative integers, $P(1)$ gives their sum $S$. No coefficient exceeds $S$, so $P(S + 1)$ written in base $S + 1$ lists the coefficients as digits: for $2x^2 + 3x + 1$, $P(7) = 120$, which is $231$ in base $7$.]@
+
 Evaluation connects algebra to geometry. Each input-output pair $(a, P(a))$ defines a point on the polynomial's [graph](!/algebra/polynomials/graphing). Evaluating $P(x)$ at many values traces out the curve. The point $(4, 21)$ lies on the graph of $P(x) = 2x^2 - 3x + 1$, as does $(-2, 15)$.
 
 Evaluation also detects [roots](!/algebra/polynomials/roots). If $P(a) = 0$, then $a$ is a root of the polynomial. Testing whether a value is a root requires only evaluation — substitute and check whether the result is zero.`,
@@ -462,7 +465,9 @@ Factoring $x^2 + 9$ as $(x + 3)(x - 3)$ uses the difference-of-squares pattern o
 
 Several techniques exist. Extracting a greatest common factor applies to nearly every polynomial. Grouping handles four-term expressions by pairing terms strategically. Special patterns — the difference of squares, perfect square trinomials, and sum or difference of cubes — allow instant recognition and factoring. Trinomials of the form $ax^2 + bx + c$ require methods tailored to finding two binomial factors.
 
-Not every polynomial factors neatly over the integers. The expression $x^2 + 1$ has no real factors. Determining when a polynomial is irreducible — when no further factoring is possible — is itself an important skill.`,
+Not every polynomial factors neatly over the integers. The expression $x^2 + 1$ has no real factors. Determining when a polynomial is irreducible — when no further factoring is possible — is itself an important skill.
+
+@academic[punchline:Factoring turns a sum into a product, and in a product every linear factor names a root.]@`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Factoring Techniques](!/algebra/polynomials/factoring) →@`,
   link: '/algebra/polynomials/factoring',
@@ -789,6 +794,7 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj1Table }}
           />,
+          `@academic[punchline:A polynomial uses only whole-number powers of the variable; a negative, fractional or variable exponent puts an expression outside the family.]@`,
         ]
     },
 

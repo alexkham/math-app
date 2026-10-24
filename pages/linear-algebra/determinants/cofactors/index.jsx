@@ -1345,6 +1345,9 @@ For a $3 \\times 3$ matrix
 @academic[formula_callout:Minors
 $$A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$$]@
 
+@academic[fact,aside:true,width:35%:Lewis Carroll's four-minor shortcut
+In 1866 Charles Dodgson, the author of Alice's Adventures in Wonderland, published a way to build a determinant from smaller minors alone. For this matrix it reads $a_{22} \\det(A) = M_{11} M_{33} - M_{13} M_{31}$: four corner minors give $20 \\cdot 6 - (-12)(-13) = -36$, and dividing by the centre entry $3$ gives $\\det(A) = -12$.]@
+
 there are nine minors, one for each entry. Deleting row $1$ and column $1$ leaves $\\begin{pmatrix} 3 & -2 \\\\ 1 & 6 \\end{pmatrix}$, so $M_{11} = 3 \\cdot 6 - (-2) \\cdot 1 = 20$. Deleting row $1$ and column $2$ leaves $\\begin{pmatrix} 0 & -2 \\\\ 4 & 6 \\end{pmatrix}$, so $M_{12} = 0 \\cdot 6 - (-2) \\cdot 4 = 8$. Deleting row $1$ and column $3$ leaves $\\begin{pmatrix} 0 & 3 \\\\ 4 & 1 \\end{pmatrix}$, so $M_{13} = 0 \\cdot 1 - 3 \\cdot 4 = -12$.
 
 Continuing this way produces all nine values:
@@ -1574,6 +1577,9 @@ With $\\det(A) = -12$:
 
 @academic[formula_callout:The Adjugate
 $$A \\cdot \\operatorname{adj}(A) = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix} \\begin{pmatrix} 20 & -29 & -13 \\\\ -8 & 8 & 4 \\\\ -12 & 18 & 6 \\end{pmatrix} = \\begin{pmatrix} -12 & 0 & 0 \\\\ 0 & -12 & 0 \\\\ 0 & 0 & -12 \\end{pmatrix} = -12 \\, I$$]@
+
+@academic[fact,aside:true,width:35%:A singular adjugate has rank 1 or 0
+When $\\det(A) = 0$, the identity says $A \\cdot \\operatorname{adj}(A) = O$, so every column of $\\operatorname{adj}(A)$ lies in the null space of $A$. If that null space is a single line, $\\operatorname{adj}(A)$ has rank exactly $1$; if it is larger, every cofactor is $0$.]@
 
 This identity is the foundation of the [adjugate inverse formula](!/linear-algebra/determinants/applications): dividing both sides by $\\det(A)$ gives $A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$, valid whenever $\\det(A) \\neq 0$.`,
     before: ``,
@@ -1892,6 +1898,8 @@ const schemas = {
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `The identity itself asks nothing of $\\det(A)$. The adjugate is built entry by entry from the minors, so it exists for every square matrix, singular or not. For $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, whose determinant is $0$, the adjugate is $\\begin{pmatrix} 4 & -2 \\\\ -2 & 1 \\end{pmatrix}$, and the product of the two matrices is the zero matrix, exactly as $\\det(A) \\, I$ predicts.`,
+          `@academic[punchline:A row paired with its own cofactors gives the determinant; paired with another row's cofactors, it gives zero.]@`,
         ]
     },
     {

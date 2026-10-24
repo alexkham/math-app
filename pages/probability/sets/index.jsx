@@ -1052,6 +1052,7 @@ export default function SetsInProbabilityPage({
                dangerouslySetInnerHTML={{ __html: operationsTable }} />,
                   <div key={'unit-u_operations_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_operations_0 }} />,
           `These regions are what turn sets into events.`,
+          `@academic[punchline:In probability, "or", "and" and "not" are union, intersection and complement, applied to sets of outcomes.]@`,
         ]
     },
     {

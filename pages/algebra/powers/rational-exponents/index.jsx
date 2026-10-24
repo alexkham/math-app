@@ -239,6 +239,9 @@ $$a^{m/n} = \\left(a^{1/n}\\right)^m = \\left(\\sqrt[n]{a}\\right)^m$$]@
 @academic[formula_callout:Fractional Exponents
 $$a^{m/n} = \\left(a^m\\right)^{1/n} = \\sqrt[n]{a^m}$$]@
 
+@academic[fact,aside:true,width:35%:Planet years follow a $\\frac{3}{2}$ power
+Kepler found that the square of a planet's year is proportional to the cube of its distance from the Sun, so the year grows as distance$^{3/2}$. Jupiter is $5.2$ times as far out as Earth, and $5.2^{3/2} \\approx 11.9$: its year lasts about $11.9$ Earth years.]@
+
 Both routes produce the same result — the power of a power rule guarantees this — but one path may be computationally easier than the other.
 
 For $8^{2/3}$, taking the root first is simpler: $8^{1/3} = 2$, then $2^2 = 4$. Taking the power first means computing $8^2 = 64$ and then $\\sqrt[3]{64} = 4$ — correct, but with larger intermediate numbers.
@@ -331,6 +334,11 @@ Writing $(-16)^{1/4} = -2$ fails the check: $(-2)^4 = 16$, not $-16$. No real nu
 Odd roots carry no such restriction. The expression $(-8)^{1/3} = \\sqrt[3]{-8} = -2$, because $(-2)^3 = -8$. Odd roots of negative numbers are negative, and the computation proceeds without difficulty.
 
 @academic[rule_plain:For a general rational exponent $a^{m/n}$, the domain depends on the denominator of the fraction when written in lowest terms. If $n$ is even, then $a \\geq 0$ (with $a > 0$ if $m$ is negative). If $n$ is odd, then $a$ can be any real number (with $a \\neq 0$ if $m$ is negative).]@
+
+@academic[fact,aside:true,width:35%:To a computer, $\\frac{1}{3}$ has an even denominator
+The stored copy of $\\frac{1}{3}$ is the binary fraction $\\frac{6004799503160661}{2^{54}}$, already in lowest terms, and its denominator is even. By the rule above, $-8$ to that power has no real value, so JavaScript returns NaN instead of $-2$ and Python returns a complex number.]@
+
+The rule reads the exponent as an exact fraction, and on paper it always is. A calculator or a program works with a rounded copy instead: it can store only binary fractions, numbers whose denominator is a power of $2$, and it keeps the one closest to what was typed. For positive bases the rounding is harmless, since it changes the answer at most in the last few digits.
 
 This marks a tightening of restrictions that continues into [irrational exponents](!/algebra/powers/irrational-exponents), where the base must be strictly positive.`,
   before: ``,
@@ -699,6 +707,7 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          `@academic[punchline:Root first or power first, a fractional power has one value; the order only decides how big the numbers get along the way.]@`,
         ]
     },
     {

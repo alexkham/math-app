@@ -1330,7 +1330,9 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
 
 Adding two linear combinations of these vectors produces another linear combination, and scaling a linear combination by a scalar produces another, so both closure conditions hold automatically.
 
-By convention, the span of the empty set is $\\{\\mathbf{0}\\}$. With no vectors to combine, the only reachable point is the zero vector (the combination with no terms).`,
+By convention, the span of the empty set is $\\{\\mathbf{0}\\}$. With no vectors to combine, the only reachable point is the zero vector (the combination with no terms).
+
+@academic[punchline:The span of a set is the smallest subspace containing it: everything its vectors can build, and nothing more.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1383,7 +1385,7 @@ The span of two non-parallel vectors is a plane through the origin — a two-dim
 
 The span of three vectors in $\\mathbb{R}^3$ that do not all lie in a single plane is all of $\\mathbb{R}^3$. If the three vectors are coplanar, the span is a plane. If two of the three are parallel, the span may be only a line.
 
-The pattern is consistent: the dimension of the span equals the number of independent vectors in the set, regardless of how many total vectors are present. Redundant vectors — those already in the span of the others — add nothing to the reach.`,
+The pattern is consistent: the dimension of the span equals the largest number of independent vectors in the set, regardless of how many total vectors are present. Redundant vectors — those already in the span of the others — add nothing to the reach.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1469,6 +1471,9 @@ Fewer than $n$ vectors can never span $\\mathbb{R}^n$. An $n \\times k$ matrix w
 @academic[formula_callout:Span and Column Space
 $$\\text{Col}(A) = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf{a}_n\\}$$]@
 
+@academic[fact,aside:true,width:35%:Three in four Lights Out boards are hopeless
+In the $5 \\times 5$ Lights Out puzzle, pressing a light flips it and its edge neighbours. A starting pattern can be cleared exactly when it lies in the column space of a $25 \\times 25$ matrix with arithmetic mod $2$, and that matrix has rank $23$, so only $1$ pattern in $4$ is solvable.]@
+
 This identity connects the abstract concept of span to the concrete question of system solvability. The system $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b}$ lies in the column space of $A$ — that is, if and only if $\\mathbf{b}$ is in the span of the columns.
 
 The rank of $A$ equals the dimension of the column space, which equals the number of independent columns. The pivot columns of the echelon form identify which original columns form a [basis](!/linear-algebra/vector-spaces/basis) for the column space. The non-pivot columns are redundant — they lie in the span of the pivot columns.
@@ -1503,6 +1508,9 @@ This reduction process is always possible in finite-dimensional spaces: every sp
   obj8: {
     title: `Span in Abstract Vector Spaces`,
     content: `The definition of span — the set of all linear combinations — applies in any vector space, not just $\\mathbb{R}^n$.
+
+@academic[fact,aside:true,width:35%:All powers of $x$, still no $e^x$
+The span of $1, x, x^2, x^3, \\ldots$ holds only polynomials, because a linear combination has finitely many terms. So $e^x = 1 + x + \\frac{x^2}{2} + \\cdots$ stays outside it, although its series uses nothing but these powers.]@
 
 In the polynomial space $\\mathcal{P}_2$, the span of $\\{1, x, x^2\\}$ is all of $\\mathcal{P}_2$, since every polynomial $a + bx + cx^2$ of degree at most $2$ is a linear combination of these three. The set is independent and has the right count ($3 = \\dim(\\mathcal{P}_2)$), so it is the standard basis.
 
@@ -1861,6 +1869,7 @@ export default function SpanPage({seoData, sectionsContent, introContent, obj2Ta
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+          `@academic[punchline:Span means the same in every vector space; outside $\\mathbb{R}^n$, redundancy hides in identities rather than in pivot columns.]@`,
         ]
     },
     {

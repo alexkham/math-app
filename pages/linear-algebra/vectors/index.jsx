@@ -810,6 +810,9 @@ $$\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[fact,aside:true,width:35%:A photo is a single vector
+A 12-megapixel colour photo stores three brightness values per pixel, for red, green and blue, so the whole picture is one vector in $\\mathbb{R}^{36{,}000{,}000}$. Dimming it to half brightness is scalar multiplication by $\\frac{1}{2}$.]@
+
 Each entry $v_i$ is called a component. In $\\mathbb{R}^2$, a vector has two components and can be plotted on a coordinate plane. In $\\mathbb{R}^3$, three components place it in three-dimensional space. For $n > 3$, direct visualization is no longer possible, but the algebraic framework continues to function identically. The components of a vector encode both its magnitude and its direction numerically, linking the geometric and algebraic viewpoints into a single coherent object.`,
     before: ``,
     after: ``,
@@ -821,6 +824,11 @@ Each entry $v_i$ is called a component. In $\\mathbb{R}^2$, a vector has two com
 
 @academic[formula_callout:Notation and Representation
 $$\\mathbf{v},\\quad \\mathbf{u},\\quad \\mathbf{w}$$]@
+
+@academic[fact,aside:true,width:35%:Twenty equations became four
+Maxwell's 1865 theory of electromagnetism was written out component by component, 20 equations in all. In 1884 Heaviside rewrote it in vector notation, where one equation stands for three, and grouped it into the four Maxwell's equations known today.]@
+
+A single bold letter stands for the whole list of components, so one equation between vectors says as much as $n$ equations between numbers. In $\\mathbb{R}^3$, the equation $\\mathbf{a} + \\mathbf{b} = \\mathbf{c}$ packs together $a_1 + b_1 = c_1$, $a_2 + b_2 = c_2$ and $a_3 + b_3 = c_3$.
 
 In handwritten work, an arrow placed above the letter serves the same purpose: $\\vec{v}$, $\\vec{u}$, $\\vec{w}$. When a vector runs from a specific point $A$ to a specific point $B$, the notation $\\vec{AB}$ identifies both the direction and the endpoints explicitly.
 
@@ -930,7 +938,9 @@ Stopping after the multiplications turns $(1, 2, 3) \\cdot (4, -5, 6)$ into the 
 
 This algebraic formula has a geometric equivalent: $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\cos\\theta$, where $\\theta$ is the angle between the two vectors. The geometric form reveals what the dot product actually measures — how much two vectors align directionally. When the dot product is positive, the vectors point roughly the same way. When it is negative, they point roughly in opposite directions. When it equals zero, the vectors are orthogonal: perpendicular in the geometric sense.
 
-This connection to angles makes the dot product the gateway to projection: decomposing one vector into a component along another and a component perpendicular to it.`,
+This connection to angles makes the dot product the gateway to projection: decomposing one vector into a component along another and a component perpendicular to it.
+
+@academic[punchline:The dot product turns the angle between two vectors into plain arithmetic on their components.]@`,
     before: ``,
     after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[The Dot Product](!/linear-algebra/vectors/dot-product) →@`,
     link: '',
@@ -972,7 +982,9 @@ is a linear combination of those vectors. Adding two vectors is the special case
 
 The set of all possible linear combinations of a given collection of vectors is called the span of that collection. The span of a single nonzero vector is a line through the origin. The span of two non-parallel vectors is a plane. The span of three non-coplanar vectors in $\\mathbb{R}^3$ fills the entire space. Asking whether a particular vector lies in the span of a given set turns out to be equivalent to asking whether a certain [system of equations](!/linear-algebra/linear-systems) has a solution — a connection that links vectors directly to the machinery of matrices and row reduction.
 
-Linear combinations also set the stage for two concepts developed in the [vector spaces](!/linear-algebra/vector-spaces) section: linear independence, which identifies when no vector in a set is redundant, and basis, which captures the minimal spanning set needed to reach every point in a space.`,
+Linear combinations also set the stage for two concepts developed in the [vector spaces](!/linear-algebra/vector-spaces) section: linear independence, which identifies when no vector in a set is redundant, and basis, which captures the minimal spanning set needed to reach every point in a space.
+
+@academic[punchline:Every vector built by scaling and adding lies in the span, and testing membership means solving a linear system.]@`,
     before: ``,
     after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Linear Combinations](!/linear-algebra/vectors/linear-combinations) →@`,
     link: '',

@@ -1200,6 +1200,9 @@ $$\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0 \\quad \\text{for all } i \\neq j$$]@
 
 The vectors in an orthogonal set must all be nonzero — the zero vector is excluded because including it would trivialize the structure (every vector is orthogonal to $\\mathbf{0}$, so $\\mathbf{0}$ carries no directional information).
 
+@academic[fact,aside:true,width:35%:All-sign bases need a multiple of 4
+$n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exist for $n = 1$ and $n = 2$, and otherwise only when $n$ is a multiple of $4$: any three of them sort the $n$ positions into four equal groups by which signs agree. Whether every multiple of $4$ works is still unproved.]@
+
 For example, $\\{(1, 0, 0), (0, 2, 0), (0, 0, -3)\\}$ is orthogonal in $\\mathbb{R}^3$: every pair of distinct vectors has dot product zero. The vectors need not have the same length, and their lengths can be anything nonzero.
 
 A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1)(1) + (1)(-2) + (1)(1) = 0$, $(1)(1) + (1)(0) + (1)(-1) = 0$, $(1)(1) + (-2)(0) + (1)(-1) = 0$. All three pairwise products vanish — the set is orthogonal despite none of the vectors being aligned with the coordinate axes.`,
@@ -1720,6 +1723,7 @@ export default function OrthogonalSetsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:A tall matrix with orthonormal columns inverts on one side only: $Q^TQ = I$, while $QQ^T$ merely projects.]@`,
         ]
     },
     {
@@ -1728,6 +1732,7 @@ export default function OrthogonalSetsPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@academic[punchline:In an orthonormal basis, squared length splits exactly among the coordinates, and whatever a partial set misses lies perpendicular to it.]@`,
         ]
     },
     {
@@ -1736,6 +1741,7 @@ export default function OrthogonalSetsPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          `@academic[punchline:Length is enough: a linear map that preserves every length preserves all of the geometry, angles and distances included.]@`,
         ]
     },
     {

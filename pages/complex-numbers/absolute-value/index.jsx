@@ -1273,6 +1273,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
 import distanceMidpointDiagrams from '@/app/components/calculators/complex-numbers/distanceMidpointDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1749,6 +1750,34 @@ export async function getStaticProps(){
 
 
 // formulas-optimized: v1 | 2026-06-11 | 10 callouts (obj1 ×2, obj3, obj4 ×4, obj5, obj7, obj8)
+// Concept introduction (section 1, "Definition of Modulus") — template E,
+// widening. Running instance: z = 3 + 4i. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its two formula boxes with their links, the
+// pitfall aside, six passages, obj1Table and the modulus demo frame with its
+// line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciLineTable = ciTableOpen(['real number', 'distance from 0', 'absolute value']) +
+  ciRow(['−3', '3 steps left', '3']) +
+  ciRow(['3', '3 steps right', '3'], { shade: true }) +
+  ciRow(['0', 'no steps', '0'], { last: true }) +
+  '</tbody></table>'
+const ciTriesTable = ciTableOpen(['rule tried on 3 + 4i', 'result', 'what goes wrong']) +
+  ciRow(['drop the minus sign', '3 + 4i', 'no sign to drop; still not a size']) +
+  ciRow(['add the parts', '7', 'not a distance from 0'], { shade: true }) +
+  ciRow(['take the larger part', '4', 'ignores the other part'], { last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
+const ciRealTable = ciTableOpen(['real number a', 'as a + 0i', 'modulus √(a² + 0²)', 'absolute value |a|']) +
+  ciRow(['−3', '−3 + 0i', '√9 = 3', '3']) +
+  ciRow(['5', '5 + 0i', '√25 = 5', '5'], { shade: true }) +
+  ciRow(['0', '0 + 0i', '√0 = 0', '0'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
    obj0: {
@@ -2314,6 +2343,12 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    lineTable: ciLineTable,
+    triesTable: ciTriesTable,
+    realTable: ciRealTable,
+  };
+
   const demoUnits = {
     modulus: demoUnitFrame({
       svg: conjugateModulusDiagrams.start,
@@ -2348,6 +2383,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2378,10 +2414,91 @@ export default function AbsoluteValuePage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `For a real number, the absolute value is its distance from 0 on the number line.`,
+        content: [
+          `$|-3| = 3$ because $-3$ is three steps from $0$; $|3| = 3$ for the same reason. In practice the rule is simple: drop the minus sign.`,
+          ciTable('lineTable'),
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `For 3 + 4i that rule has nothing to work with.`,
+        content: [
+          `$3 + 4i$ has no minus sign to drop, and it is not on the number line at all, so "steps from 0 along the line" means nothing. Other quick rules give answers, but none of them is a distance.`,
+          ciTable('triesTable'),
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [modulus](!/complex-numbers/definitions#modulus) of $z = a + bi$, written $|z|$, is the distance from the origin to the point $(a, b)$ in the complex plane — measured straight, like a ruler laid from $0$ to the point.`,
+        formula: [
+          `The formula is thus:`,
+          `@academic[formula_callout:Modulus
+$$|z| = \\sqrt{a^2 + b^2}$$
+/complex-numbers/formulas#modulus]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+          `An often-useful equivalent form avoids the square root:`,
+          `@academic[formula_callout:Modulus Squared
+$$|z|^2 = a^2 + b^2$$
+/complex-numbers/formulas#modulus_squared]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+        ],
+        footer: `So $|3 + 4i| = \\sqrt{9 + 16} = 5$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The modulus is a length: one real number, never negative.`,
+        content: [
+          `The modulus of a complex number $z = a + bi$, written $|z|$, measures the straight-line distance from the origin to the point $(a, b)$ in the [complex plane](!/complex-numbers/geometric-representation). This distance follows directly from the Pythagorean theorem: the point $(a, b)$ sits at the end of a right triangle with horizontal leg $a$ and vertical leg $b$, so the hypotenuse has length $\\sqrt{a^2 + b^2}$.`,
+          `Computation proceeds by squaring both components, adding, and taking the square root. For $z = 3 + 4i$, we calculate $|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$. The famous 3-4-5 right triangle appears here — the complex number $3 + 4i$ lies exactly 5 units from the origin. For $z = -2 + i$, the modulus is $|z| = \\sqrt{(-2)^2 + 1^2} = \\sqrt{4 + 1} = \\sqrt{5}$, an irrational distance approximately equal to $2.236$.`,
+          `@academic[pitfall,aside:true,width:35%:Squaring the i with the imaginary part
+Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$, which is not even a real number. The imaginary part is the real number $b = 4$, so $|3 + 4i| = \\sqrt{9 + 16} = 5$.
+[Read more](!#pitfalls)]@`,
+          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          `The geometric picture makes modulus tangible. Draw the point, draw the line segment connecting it to the origin, and measure that segment's length. Every complex number possesses exactly one modulus, always a non-negative real value. Numbers closer to the origin have smaller moduli; numbers farther away have larger moduli. The modulus provides the only meaningful sense of "size" for complex numbers, since $\\mathbb{C}$ lacks the ordering that lets us compare real numbers directly.`,
+          <div key={'unit-modulus'} dangerouslySetInnerHTML={{ __html: demoUnits.modulus }} />,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing was lost on the real line: for a real number, the modulus is the old absolute value.`,
+        content: [
+          `A real number $a$ is the point $(a, 0)$, so its modulus is $\\sqrt{a^2 + 0^2} = \\sqrt{a^2} = |a|$ — the same number as before.`,
+          ciTable('realTable'),
+          `The notation mirrors real number absolute value, and for good reason — modulus generalizes the familiar concept to two dimensions. Where real absolute value measures distance from zero along a line, complex modulus measures distance from zero across a plane.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What the modulus does not keep is direction.`,
+        content: `On the line, a size of $3$ leaves only two numbers, $3$ and $-3$. In the plane, a modulus of $5$ fits $3 + 4i$, $-5$, $5i$, $4 - 3i$ and every other point on the circle of radius $5$ around the origin. The modulus says how far, never which way; the direction is a separate number, the argument.`,
+      },
+      {
+        id: 'exit',
+        content: [
+          `Everything below is about how this one length behaves.`,
+          `The page goes on to its notation, the special cases, its link to the conjugate, its properties and the triangle inequality.`,
+        ],
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2398,14 +2515,7 @@ export default function AbsoluteValuePage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
-                  <div key={'unit-modulus'} dangerouslySetInnerHTML={{ __html: demoUnits.modulus }} />,
-          `Everything below is about how this one length behaves.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

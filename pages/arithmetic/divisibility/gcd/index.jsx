@@ -435,7 +435,10 @@ This method is efficient when the factorizations are easy to find. For numbers w
 
 obj5: {
   title: `Method 3: Euclidean Algorithm`,
-  content: `The Euclidean algorithm computes the GCD without factoring either number. It relies on a single property: $\\gcd(a, b) = \\gcd(b, \\; a \\bmod b)$. Replacing the larger number with the remainder of their division preserves the GCD while shrinking the problem.
+  content: `@academic[fact,aside:true,width:35%:Fibonacci neighbours are the slowest pairs
+Run on $89$ and $55$, the algorithm walks down the Fibonacci numbers $34, 21, 13, \\ldots, 1$ and takes $9$ divisions, more than any pair whose smaller number is below $55$. Lamé proved in 1844 that consecutive Fibonacci numbers are the slowest pairs of their size, which caps the count at five divisions per digit of the smaller number.]@
+
+The Euclidean algorithm computes the GCD without factoring either number. It relies on a single property: $\\gcd(a, b) = \\gcd(b, \\; a \\bmod b)$. Replacing the larger number with the remainder of their division preserves the GCD while shrinking the problem.
 
 For $\\gcd(252, 105)$:
 
@@ -512,6 +515,9 @@ And a prime $p$ is coprime with every number it does not divide.`,
 obj8: {
   title: `Properties of Coprime Numbers`,
   content: `Coprimality enables conclusions that fail for numbers with shared factors.
+
+@academic[fact,aside:true,width:35%:Coprime coins pay every large amount
+Coins worth $3$ and $5$ pay every whole amount from $8$ on, since $8$, $9$ and $10$ can be paid and adding coins of $3$ reaches the rest; $7$ is the largest amount they miss. Coins worth $4$ and $6$ share the factor $2$, so no number of them ever pays an odd amount.]@
 
 If $\\gcd(a, b) = 1$ and $a \\mid (b \\cdot c)$, then $a \\mid c$. When $a$ and $b$ share no common factor, the factor $a$ hiding inside the product $b \\cdot c$ must come entirely from $c$. Without coprimality, this inference breaks — $6 \\mid (4 \\cdot 3)$ does not imply $6 \\mid 3$.
 
@@ -1036,6 +1042,7 @@ rtGcdObj10Tiles, demoUnits}) {
       sectionsContent.obj5.afterFigure,
               <div key={'unit-euclid'} dangerouslySetInnerHTML={{ __html: demoUnits.euclid }} />,
           `The next section writes the same steps out as a procedure to follow by hand.`,
+          `@academic[punchline:Replacing a pair by the smaller number and the remainder never changes the GCD, so division alone finds it, with no factoring.]@`,
         ]
 },
 
@@ -1104,6 +1111,7 @@ rtGcdObj10Tiles, demoUnits}) {
       <div key={'obj10-svg-tiles'} style={{ maxWidth: '800px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: rtGcdObj10Tiles }} />,
       sectionsContent.obj10.afterFigure2,
+      `@academic[punchline:Reducing fractions, simplifying ratios and tiling rectangles ask one question: the largest number that divides both quantities.]@`,
     ]
 },
     {

@@ -134,9 +134,14 @@ const sectionsContent = {
     title: `What a Decomposition Is`,
     content: `A matrix decomposition (or factorization) expresses a [matrix](!/linear-algebra/matrix) $A$ as a product of two or more matrices with known, exploitable structure. The factors are typically [triangular](!/linear-algebra/matrix/types), [diagonal](!/linear-algebra/matrix/types), or [orthogonal](!/linear-algebra/matrix/types) — matrices for which solving systems, computing [determinants](!/linear-algebra/determinants), and extracting [eigenvalues](!/linear-algebra/eigen) are either trivial or dramatically simplified.
 
+@academic[fact,aside:true,width:35%:A way of working made the top ten
+In 2000 the journal Computing in Science and Engineering named the ten algorithms most influential on 20th-century science. One entry was not a single algorithm but the decompositional approach itself, formalized by Alston Householder in 1951: factor the matrix, then reuse the factors.]@
+
 A decomposition does not change the matrix. It reveals the internal structure of $A$ by splitting it into interpretable components. The product of the factors always reproduces $A$ exactly — the information is rearranged, not altered.
 
-Every decomposition represents a trade: an upfront cost to compute the factors, followed by cheap operations that use them. The factorization is done once; the payoff is reaped every time the factors are applied.`,
+Every decomposition represents a trade: an upfront cost to compute the factors, followed by cheap operations that use them. The factorization is done once; the payoff is reaped every time the factors are applied.
+
+The same factors serve many different questions. A single LU factorization solves a system for any right-hand side, gives the determinant from the diagonal of $U$, and builds the inverse column by column; a single SVD gives the rank, the pseudoinverse and the best low-rank approximation at once. The work goes into finding the structure, and the answers are then read off it.`,
     before: ``,
     after: ``,
     link: ``,

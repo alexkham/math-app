@@ -604,6 +604,11 @@ The logarithm itself requires integration by parts:
 $$\\int \\ln x\\, dx = x\\ln x - x + C$$
 /calculus/formulas#antiderivative_of_natural_log]@
 
+@academic[fact,aside:true,width:35%:Factorials hide in $\\int \\ln x\\, dx$
+The sum $\\ln 1 + \\ln 2 + \\cdots + \\ln n$ is $\\ln n!$, and it stays close to $\\int_1^n \\ln x\\, dx = n\\ln n - n + 1$: for $n = 100$ they are $363.7$ and $361.5$. That is why $n!$ grows like $\\left(\\frac{n}{e}\\right)^n$, the main factor in Stirling's formula.]@
+
+The parts come from $u = \\ln x$ and $dv = dx$, so that $du = \\frac{1}{x}\\, dx$ and $v = x$. The formula then gives $x\\ln x - \\int x \\cdot \\frac{1}{x}\\, dx = x\\ln x - x + C$, and differentiating confirms it: $(x\\ln x - x)' = \\ln x + 1 - 1 = \\ln x$. Over an interval such as $[1, n]$ the antiderivative gives $\\int_1^n \\ln x\\, dx = n\\ln n - n + 1$.
+
 A crucial pattern recognizes when integrands have the form $f'(x)/f(x)$:
 
 @academic[formula_callout:Logarithmic Derivative Pattern
@@ -655,7 +660,12 @@ $$\\int \\csc x\\, dx = -\\ln|\\csc x + \\cot x| + C = \\ln|\\csc x - \\cot x| +
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
 
+@academic[fact,aside:true,width:35%:A formula read off two tables
+In 1599 Edward Wright added up secants, one small step at a time, for a navigation table. In the 1640s the teacher Henry Bond saw that it matched a table of $\\ln\\tan\\left(\\frac{\\varphi}{2} + \\frac{\\pi}{4}\\right) = \\ln(\\sec\\varphi + \\tan\\varphi)$; James Gregory proved the match only in 1668.]@
+
 The $\\sec x$ and $\\csc x$ integrals are less obvious—they require multiplying by clever forms of $1$ to create the $f'/f$ pattern.
+
+For $\\sec x$ the form of $1$ is $\\frac{\\sec x + \\tan x}{\\sec x + \\tan x}$. The numerator becomes $\\sec^2 x + \\sec x\\tan x$, which is exactly the derivative of the new denominator $\\sec x + \\tan x$, so the integral is $\\ln|\\sec x + \\tan x| + C$. The step is easy to check once it is written down, but nothing in the integrand $\\sec x$ points to it, and the formula is hard to find by reasoning alone.
 `,
     before: ``,
     after: ``,
@@ -978,6 +988,7 @@ export default function PageTemplate({specialIntegralsOutline, seoData, sections
           sectionsContent.obj2.content,
           <div key={'unit-lnAbs'} dangerouslySetInnerHTML={{ __html: demoUnits.lnAbs }} />,
           `The two halves can even carry different constants: 0 is not in the domain, so nothing links them.`,
+          `@academic[punchline:The power rule covers every exponent except $-1$, and that single gap is filled by the logarithm $\\ln|x|$.]@`,
         ]
     },
     {
@@ -1119,7 +1130,7 @@ export default function PageTemplate({specialIntegralsOutline, seoData, sections
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Special Interals</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Special Integrals</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

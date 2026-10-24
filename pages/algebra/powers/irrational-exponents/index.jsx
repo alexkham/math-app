@@ -210,7 +210,10 @@ obj3: {
   title: `Why This Works`,
   content: `The approximation method succeeds because the function $a^x$, when restricted to rational values of $x$, behaves smoothly. Plot the points $(x, 2^x)$ for rational $x$ and the result is a curve with no gaps, no jumps, and no sudden direction changes.
 
-Between any two rational numbers there are infinitely many more. The rational values of $2^x$ fill the curve so densely that only isolated points — corresponding to irrational exponents — are missing.
+Between any two rational numbers there are infinitely many more. The rational values of $2^x$ fill the curve so densely that every stretch of it, however short, contains them; what is missing are the points at irrational exponents, which lie just as densely between them.
+
+@academic[fact,aside:true,width:35%:Smoothness, not the laws, fixes $2^\\pi$
+Some functions equal $2^x$ at every rational $x$, obey $f(x+y) = f(x)\\,f(y)$ for all real numbers, and still give $f(\\pi)$ any positive value. They can only be built with the axiom of choice and jump everywhere, so asking for a curve without jumps leaves $2^x$ as the only candidate.]@
 
 Defining $2^\\pi$ as the [limit](!/calculus/limits/two-sided) of $2^{r_n}$ for a sequence of rationals $r_n \\to \\pi$ fills in exactly those missing points. The process is called continuous extension — the smooth behavior of $a^x$ at rational points guarantees that the extension to irrational points is unique and well-defined.
 
@@ -254,7 +257,12 @@ Multiplying the exponents in $2^{\\pi} \\cdot 2^{1-\\pi}$ gives $2^{\\pi(1-\\pi)
 
 No separate derivation is needed. Three rounds of verification — natural, negative, rational — established the laws for all rational exponents. The continuous extension to irrationals carries those laws across the finish line automatically.
 
-In practice, an expression with irrational exponents is simplified with the same moves as one with whole-number exponents. Powers of the same base are combined through their exponents, and a power raised to a power is collapsed into a single exponent. Only the exponents look unfamiliar; the bookkeeping is unchanged.`,
+In practice, an expression with irrational exponents is simplified with the same moves as one with whole-number exponents. Powers of the same base are combined through their exponents, and a power raised to a power is collapsed into a single exponent. Only the exponents look unfamiliar; the bookkeeping is unchanged.
+
+@academic[fact,aside:true,width:35%:Irrational to an irrational, yet rational
+Either $\\sqrt{2}^{\\sqrt{2}}$ is rational, or it is irrational and $\\left(\\sqrt{2}^{\\sqrt{2}}\\right)^{\\sqrt{2}} = \\sqrt{2}^{\\sqrt{2} \\cdot \\sqrt{2}} = \\sqrt{2}^2 = 2$. Either way an irrational number raised to an irrational power can be rational, and the argument never needs to know which case holds.]@
+
+The power-of-a-power rule is where two irrational exponents meet. Raising $a^x$ to the power $y$ multiplies the exponents, and the product of two irrational numbers can be rational, as in $\\sqrt{2} \\cdot \\sqrt{2} = 2$ or $\\sqrt{3} \\cdot \\sqrt{12} = 6$. The result is then an ordinary rational power of the base, worked out with a root and a power alone.`,
   before: ``,
   after: ``,
   link: '',

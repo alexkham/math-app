@@ -299,7 +299,12 @@ $$\\lim_{x \\to a} f(x) = L$$]@
 
 means $x$ approaches $a$ from both directions. Values slightly less than $a$ and values slightly greater than $a$ must both send $f(x)$ toward the same number $L$.
 
+@academic[fact,aside:true,width:35%:Limit $0$ at every point
+Thomae's function of 1875 is $\\frac{1}{q}$ at each fraction $\\frac{p}{q}$ in lowest terms and $0$ at each irrational. Near any point only finitely many fractions have a small denominator, so from both sides the values close in on $0$ everywhere, though at every fraction the function sits above $0$.]@
+
 No superscript appears on the $a$—this absence signals the two-sided requirement. The function must exhibit consistent behavior from the left and from the right. When you trace the graph toward $x = a$ from either direction, both traces must converge to the same $y$-value.
+
+Tracing with a finger assumes a graph that can be drawn without lifting the pen. The definition itself asks for less: only that the values on both sides come close to $L$, whatever the graph looks like between them and at $a$ itself.
 
 The two-sided limit is the default interpretation whenever limit notation appears without further qualification.
 `,
@@ -461,6 +466,8 @@ Substituting $x = 3$ into $\\frac{x^2 - 9}{x - 3}$ gives $\\frac{0}{0}$, and the
 The cancellation is legitimate because the limit never uses the value at $x = 3$ itself. For every $x \\neq 3$ the two expressions are equal, so they approach the same number. The original function has a hole at $x = 3$, while $x + 3$ passes through the point $(3, 6)$.
 
 The [evaluating limits](!/calculus/limits/evaluating) page covers these techniques in detail.
+
+@academic[punchline:Two expressions that agree everywhere near $a$, except possibly at $a$ itself, have the same limit at $a$.]@
 `,
     before: ``,
     after: ``,
@@ -497,6 +504,8 @@ Calling $|x|$ differentiable at $0$ because $\\lim_{x \\to 0} |x| = 0 = f(0)$ on
 The variable $h$ approaches $0$ from both positive and negative values. Positive $h$ corresponds to approaching from the right; negative $h$ corresponds to approaching from the left. Differentiability requires the same rate of change from both directions.
 
 If only one direction yields a limit, we obtain a one-sided derivative. A function can have a left derivative and a right derivative that differ, in which case the two-sided derivative does not exist at that point.
+
+@academic[punchline:A derivative is a two-sided limit, so at a corner, where the slopes from the two sides differ, it does not exist.]@
 `,
     before: ``,
     after: ``,

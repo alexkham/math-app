@@ -257,6 +257,11 @@ Reading the minus in $2^{-3}$ as a sign gives $-8$ or $-\\frac{1}{8}$. The minus
 
 This definition is not arbitrary — it is the only one compatible with the product rule. The product $a^3 \\cdot a^{-3}$ must equal $a^{3+(-3)} = a^0 = 1$. For that to hold, $a^{-3}$ must be the value that multiplies with $a^3$ to give $1$ — which is $\\frac{1}{a^3}$.
 
+@academic[fact,aside:true,width:35%:Why $0.1 + 0.2$ misses $0.3$
+No finite sum of negative powers of $2$ equals $\\frac{1}{10}$: such a sum is a fraction over a power of $2$, which can never cancel the factor $5$ in $10$. Stored in base $2$, both $0.1$ and $0.2$ are rounded, and JavaScript or Python report $0.1 + 0.2$ as $0.30000000000000004$.]@
+
+Negative powers of $10$ are the place values of decimals: $0.375 = 3 \\cdot 10^{-1} + 7 \\cdot 10^{-2} + 5 \\cdot 10^{-3}$. Computers store numbers the same way in base $2$, whose places are $2^{-1} = 0.5$, $2^{-2} = 0.25$, $2^{-3} = 0.125$ and so on, each half of the one before. The number $0.375$ fits this system exactly, as $2^{-2} + 2^{-3}$.
+
 When the base is itself a fraction, the reciprocal interpretation applies in full. The expression $\\left(\\frac{1}{3}\\right)^{-2}$ means the reciprocal of $\\left(\\frac{1}{3}\\right)^2 = \\frac{1}{9}$, which is $9$. Equivalently, $\\left(\\frac{1}{3}\\right)^{-2} = 3^2 = 9$. A negative exponent on a fraction flips it before raising to the positive power.`,
   before: ``,
   after: ``,
@@ -694,6 +699,7 @@ export default function NegativeExponentsPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `@academic[punchline:A negative exponent stands for a reciprocal, and the product rule leaves no other choice.]@`,
         ]
     },
     {

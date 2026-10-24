@@ -1151,6 +1151,9 @@ Both scalar multiplication and addition preserve the dimension, so no matter how
 
 A single nonzero vector $\\mathbf{v}$ generates all its scalar multiples: $c\\mathbf{v}$ for every real number $c$. These fill a line through the origin in the direction of $\\mathbf{v}$. Moving $c$ from $-\\infty$ to $\\infty$ sweeps the entire line, passing through the origin at $c = 0$.
 
+@academic[fact,aside:true,width:35%:Nearly parallel, huge coefficients
+$(1, 0)$ and $(1, 0.001)$ are not parallel, so they span $\\mathbb{R}^2$. But reaching $(0, 1)$ takes $-1000(1, 0) + 1000(1, 0.001)$: the two vectors differ by only $0.001$ sideways, so that difference has to be scaled up a thousand times.]@
+
 Two vectors $\\mathbf{u}$ and $\\mathbf{v}$ that are not [parallel](!/linear-algebra/vectors/properties) generate all combinations $c_1\\mathbf{u} + c_2\\mathbf{v}$. Varying both coefficients independently fills a plane through the origin — the plane that contains both $\\mathbf{u}$ and $\\mathbf{v}$. In $\\mathbb{R}^2$, two non-parallel vectors already span the entire space. In $\\mathbb{R}^3$, they span a flat sheet passing through the origin, leaving one dimension unreached.
 
 Three vectors in $\\mathbb{R}^3$ that do not all lie in the same plane span the full space: every point in $\\mathbb{R}^3$ is reachable as $c_1\\mathbf{u} + c_2\\mathbf{v} + c_3\\mathbf{w}$ for some choice of coefficients. If the three vectors are coplanar, however, the third contributes nothing new — the span remains a plane rather than expanding to fill three dimensions.
@@ -1536,6 +1539,8 @@ $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$
         id: 'kind',
         lead: `A linear combination is a vector, in the same space as the vectors combined.`,
         content: [
+          `@academic[fact,aside:true,width:35%:Some colours need negative red
+In the colour-matching experiments of the late 1920s behind the 1931 CIE colour standard, observers mixed red, green and blue lights to copy pure colours from a prism. Blue-green light could be matched only by adding red to the target itself, so its recipe has a negative coefficient of red.]@`,
           `The expression is a linear combination of those vectors. The scalars $c_i$ are called the coefficients or weights of the combination. Each term $c_i\\mathbf{v}_i$ is a [scaled](!/linear-algebra/vectors/basic-operations) copy of $\\mathbf{v}_i$, and the full expression adds all the scaled copies together.`,
           `The definition imposes no restrictions on the coefficients — they can be positive, negative, or zero. Setting all coefficients to $1$ reduces the linear combination to ordinary vector addition. Using a single vector with one coefficient gives scalar multiplication. Setting all coefficients to zero produces the zero vector. These familiar operations are not separate concepts; they are boundary cases of the same construction.`,
           `@academic[rule_plain:A linear combination always produces a vector in the same $\\mathbb{R}^n$ as the inputs.]@`,
@@ -1592,6 +1597,7 @@ $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@academic[punchline:A set spans a space when it reaches every vector, whether or not it carries vectors it does not need.]@`,
         ]
     },
     {
@@ -1605,6 +1611,7 @@ $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:Any vectors reach zero with all-zero coefficients; only a second way of reaching it reveals a redundant vector.]@`,
         ]
     },
     {

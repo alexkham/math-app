@@ -451,6 +451,8 @@ Stopping at $\\frac{1}{y}\\frac{dy}{dx} = \\ln x + 1$ gives $\\ln x + 1$ as the 
 [Read more](!#pitfalls)]@
 
 The technique also simplifies expressions like $y = \\frac{x^2 \\sqrt{x+1}}{(x-3)^4}$, where the product and quotient rules together would produce unwieldy algebra. After taking $\\ln$, the expression becomes $\\ln y = 2\\ln x + \\frac{1}{2}\\ln(x+1) - 4\\ln(x-3)$, and differentiating this sum is straightforward.
+
+@academic[punchline:Logarithms turn products, quotients and powers into sums, and sums are the easiest thing to differentiate.]@
 `,
     before: ``,
     after: ``,
@@ -532,7 +534,9 @@ $$\\frac{d^2 y}{dx^2} = \\frac{d}{dx}\\!\\left[\\frac{dy}{dx}\\right] = \\frac{d
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-Differentiate $dy/dx$ (which is a function of $t$) with respect to $t$, then divide by $dx/dt$ once more. This error is common and produces incorrect concavity analysis when made.
+Differentiate $dy/dx$ (which is a function of $t$) with respect to $t$, then divide by $dx/dt$ once more. Skipping that second division is a common error and produces incorrect concavity analysis.
+
+@academic[punchline:A parametric slope is a ratio of two rates in $t$, but second derivatives cannot be divided the same way.]@
 `,
     before: ``,
     after: ``,
@@ -544,6 +548,9 @@ Differentiate $dy/dx$ (which is a function of $t$) with respect to $t$, then div
 Each technique targets a specific structural pattern.
 
 Implicit differentiation applies when $x$ and $y$ are tangled in an equation that is difficult or impossible to solve for $y$—circles, ellipses, higher-degree curves, and any relation not naturally in $y = f(x)$ form. It also applies in related rates, where multiple quantities depend on time.
+
+@academic[fact,aside:true,width:35%:Two wrong rules add up to the right one
+Treating $x^x$ as a power gives $x \\cdot x^{x-1} = x^x$; treating it as an exponential gives $x^x \\ln x$. Neither is its derivative, yet their sum $x^x(\\ln x + 1)$ is: when base and exponent both vary, their two effects add.]@
 
 Logarithmic differentiation applies when the expression involves products of many factors, quotients with complex structure, or—most distinctively—variable exponents like $x^x$, $(\\sin x)^{\\cos x}$, or $x^{\\ln x}$. If the exponent contains the variable, logarithmic differentiation is the standard approach; rewriting $f^g$ as $e^{g \\ln f}$ is the same idea in another form.
 
@@ -865,6 +872,7 @@ export default function PageTemplate({differentiationTechniqueTree,
           <div key={'unit-circleTangent'} dangerouslySetInnerHTML={{ __html: demoUnits.circleTangent }} />,
           `At (5, 0) the formula divides by y = 0: the tangent there is vertical.`,
           <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj1Table}}/>,
+          `@academic[punchline:The slope of a curve comes straight from its equation; there is no need to solve for $y$ first.]@`,
         ]
     },
     {
@@ -910,6 +918,10 @@ export default function PageTemplate({differentiationTechniqueTree,
           sectionsContent.obj4.content,
           <div key={'unit-inverseSlopes'} dangerouslySetInnerHTML={{ __html: demoUnits.inverseSlopes }} />,
           `A flat spot on f, slope 0, would mirror to a vertical tangent on f⁻¹, which is why f′ ≠ 0 is required.`,
+          `@academic[fact,aside:true,width:35%:A slope for an inverse with no formula
+The function $f(x) = x^5 + x$ is one-to-one, but no formula built from arithmetic and roots gives its inverse. Still, $f(1) = 2$ and $f'(1) = 6$, so $(f^{-1})'(2) = \\frac{1}{6}$ exactly.]@
+
+The formula never asks for $f^{-1}$ itself. Everything on its right side comes from $f$: an input $a$, its output $b = f(a)$, and the slope $f'(a)$ there. To find the slope of the inverse at $b$, it is enough to know which input of $f$ produces $b$ and to differentiate $f$ at that input. Finding that input is the only step that involves the inverse at all, and it can often be done by trying simple values of $a$ until $f(a)$ equals $b$.`,
         ]
     },
     {

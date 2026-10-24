@@ -976,6 +976,9 @@ The Law of Large Numbers is not about individual outcomes or single measurements
 
 Instead, it describes the behavior of the **average** as more and more observations are collected.
 
+@academic[fact,aside:true,width:35%:10,000 tosses in an internment camp
+Interned in Denmark during the Second World War, the mathematician John Kerrich tossed a coin 10,000 times and counted 5,067 heads. The share, $0.5067$, sat within $0.007$ of $\\frac{1}{2}$: at that size its standard deviation is only $\\frac{1}{2\\sqrt{10{,}000}} = 0.005$.]@
+
 When you flip a coin once, the result is completely unpredictable. When you flip it ten times, the proportion of heads might be anywhere from 0 to 1. But when you flip it a thousand times, something remarkable happens: the proportion stabilizes near 0.5, and deviations become increasingly rare.
 
 This stabilization is not coincidence—it is mathematical necessity.
@@ -1071,6 +1074,9 @@ This says: the probability of the sample mean deviating from $\\mu$ by more than
 With probability 1:
 @academic[formula_callout:Weak vs Strong Law of Large Numbers
 $$\\displaystyle \\bar X_n \\to \\mu \\text{ as } n \\to \\infty$$]@
+
+@academic[fact,aside:true,width:35%:Proved for almost every number, not $\\pi$
+In 1909 Émile Borel proved one of the first strong laws: for almost every number in $[0, 1]$, each digit $0$ to $9$ has a long-run share of exactly $\\frac{1}{10}$ in its decimal expansion. Yet for $\\pi$, $e$ and $\\sqrt{2}$ no one has proved it.]@
 
 This says: for almost every sequence of observations, the sample mean actually converges to $\\mu$. This is **almost sure convergence**—a stronger form of convergence than the weak law provides. The set of sequences that fail to converge has probability zero.
 
@@ -1600,6 +1606,7 @@ The law of large numbers is a statement about the share. Dividing by $n$ is the 
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          `@academic[punchline:The weak law makes a large miss unlikely at each n; the strong law makes the path you observe actually arrive.]@`,
         ]
     },
     {

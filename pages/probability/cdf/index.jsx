@@ -1169,6 +1169,9 @@ Two functions appear in this section, and both take a number $x$ and return a nu
       content:`
 Some random variables do not fit neatly into purely discrete or purely continuous categories. They may assign positive probability to certain specific values while also spreading probability continuously over intervals.
 
+@academic[fact,aside:true,width:35%:A CDF with no jumps and no density
+Write $X$ in base $3$, each digit a fair choice of $0$ or $2$: every single value has probability $0$, so the CDF never jumps, yet $X$ stays in the Cantor set, of total length $0$, so there is no density. This CDF, the devil's staircase, climbs from $0$ to $1$ while staying flat on gaps of total length $1$ inside $[0, 1]$.]@
+
 The CDF handles this naturally. It combines flat regions, smooth increases, and sudden jumps within a single function. Jumps represent discrete probability masses, while smooth segments represent continuously distributed probability.
 
 This is one reason the CDF is more general than the PMF or PDF. Even when neither of those fully describes a distribution on its own, the CDF still provides a complete and consistent representation.
@@ -1299,7 +1302,12 @@ How to check: count the values directly. The faces $2$, $3$ and $4$ give $\\frac
 
 It provides a single framework that works for [discrete](!/probability/distributions/discrete), [continuous](!/probability/distributions/continuous), and mixed distributions. This makes it a central object in probability theory and a natural bridge between different types of models.
 
+@academic[fact,aside:true,width:35%:Every continuous variable hides a uniform one
+Feed a continuous $X$ into its own CDF and $F_X(X)$ is uniform on $[0, 1]$: $F_X(X) \\le u$ means $X$ has not passed the point where $F_X$ reaches $u$, which has probability $u$. Run backwards, $F_X^{-1}(U)$ for a uniform $U$ has CDF $F_X$, a standard way to simulate any distribution.]@
+
 Many important concepts rely directly on the CDF, including quantiles, medians, percentiles, and probability intervals. In both theory and applications, the CDF is often the most convenient way to reason about probabilities.
+
+A quantile reads the CDF backwards. The median is the value $m$ with $F_X(m) = \\frac{1}{2}$, and the $90$th percentile is the value where $F_X$ first reaches $0.9$. For a continuous variable every level $u$ between $0$ and $1$ is reached somewhere, so the CDF and its inverse pass freely between values of $X$ and probabilities.
 `,
       before:``,
       after:``,
@@ -1573,6 +1581,7 @@ export default function PageTemplate({
         content:[
             sectionsContent.properties.content,
             <div key={'properties-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: propertiesTable}}/>,
+            `@academic[punchline:These four properties are the whole test: every function that passes them is the CDF of some random variable.]@`,
         ]
     },
     {

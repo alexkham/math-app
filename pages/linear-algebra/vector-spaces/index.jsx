@@ -1214,7 +1214,10 @@ const summaryTable = `
 const sectionsContent = {
   obj1: {
     title: `What a Vector Space Is`,
-    content: `Vectors in $\\mathbb{R}^n$ can be added and scaled. So can polynomials, [matrices](!/linear-algebra/matrix), and continuous functions. A vector space is the formal name for any collection of objects where these two operations — addition and scalar multiplication — satisfy ten algebraic [axioms](!/linear-algebra/vector-spaces/axioms): closure, commutativity, associativity, the existence of a zero element, additive inverses, and the expected distributive and identity laws for scalars.
+    content: `@academic[fact,aside:true,width:35%:Written in 1888, taken up in the 1920s
+Peano gave the first axiomatic definition of a vector space in 1888 and already noted that the polynomials of degree at most $n$ form a space of $n + 1$ dimensions. His book had little influence, and the axioms caught on only after Banach's 1920 dissertation.]@
+
+Vectors in $\\mathbb{R}^n$ can be added and scaled. So can polynomials, [matrices](!/linear-algebra/matrix), and continuous functions. A vector space is the formal name for any collection of objects where these two operations — addition and scalar multiplication — satisfy ten algebraic [axioms](!/linear-algebra/vector-spaces/axioms): closure, commutativity, associativity, the existence of a zero element, additive inverses, and the expected distributive and identity laws for scalars.
 
 The objects in a vector space are called vectors regardless of whether they look like arrows, columns of numbers, polynomials, or functions. The power of the abstraction is that every theorem proved from the axioms alone applies to every vector space simultaneously. [Linear independence](!/linear-algebra/vector-spaces/linear-independence), [span](!/linear-algebra/vector-spaces/span), basis, [dimension](!/linear-algebra/vector-spaces/dimension), and [subspaces](!/linear-algebra/vector-spaces/subspaces) are all defined from the axioms, and their properties carry over to any setting where the axioms hold.`,
     before: ``,
@@ -1340,7 +1343,10 @@ For example, the polynomial $3 - x + 2x^2$ corresponds to the column $(3, -1, 2)
   },
   obj11: {
     title: `Common Examples of Vector Spaces`,
-    content: `The same axioms hold in many settings. Column vectors in $\\mathbb{R}^n$ are the model case. The space $P_n$ of polynomials of degree at most $n$ has dimension $n + 1$. The space of $m \\times n$ matrices has dimension $mn$, with a basis made of the matrices that have a single entry $1$ and zeros elsewhere. The continuous functions on an interval form an infinite-dimensional space.
+    content: `@academic[fact,aside:true,width:35%:Multiplication as vector addition
+With $x \\oplus y = xy$ as addition and $c \\odot x = x^c$ as scaling, the positive reals form a vector space whose zero vector is $1$ and in which the negative of $x$ is $\\frac{1}{x}$. The logarithm carries it onto $\\mathbb{R}$, so its dimension is $1$.]@
+
+The same axioms hold in many settings. Column vectors in $\\mathbb{R}^n$ are the model case. The space $P_n$ of polynomials of degree at most $n$ has dimension $n + 1$. The space of $m \\times n$ matrices has dimension $mn$, with a basis made of the matrices that have a single entry $1$ and zeros elsewhere. The continuous functions on an interval form an infinite-dimensional space.
 
 Subspaces give many more examples: the solutions of a homogeneous linear system, the symmetric $n \\times n$ matrices, the polynomials with $p(0) = 0$, and the solutions of a homogeneous linear differential equation such as $y'' + y = 0$, whose solution space has the basis $\\cos x, \\sin x$.`,
     before: ``,
@@ -1643,6 +1649,7 @@ export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpac
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[punchline:A basis is a spanning set with nothing to spare, so every vector is built from it in exactly one way.]@`,
         ]
     },
     {
@@ -1659,6 +1666,7 @@ export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpac
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@academic[punchline:Once the size of a matrix is known, its rank alone fixes the dimensions of all four fundamental subspaces.]@`,
         ]
     },
     {

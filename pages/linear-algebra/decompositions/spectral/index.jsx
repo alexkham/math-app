@@ -2117,6 +2117,9 @@ const sectionsContent = {
 @academic[formula_callout:What the Spectral Decomposition Is
 $$A = QDQ^T$$]@
 
+@academic[fact,aside:true,width:35%:The spectrum turned out to be literal
+Mathematicians were calling the set of eigenvalues a spectrum by the early 1900s, a word borrowed from light. In 1926 Schrödinger found the energy levels of hydrogen as the eigenvalues of a symmetric operator, and the gaps between them give the frequencies of its spectral lines.]@
+
 where $Q$ is [orthogonal](!/linear-algebra/matrix/types) ($Q^TQ = QQ^T = I$) and $D = \\text{diag}(\\lambda_1, \\dots, \\lambda_n)$ is the diagonal matrix of [eigenvalues](!/linear-algebra/eigen). The columns of $Q$ are orthonormal eigenvectors: $Q = [\\mathbf{q}_1 \\; \\mathbf{q}_2 \\; \\cdots \\; \\mathbf{q}_n]$ with $A\\mathbf{q}_i = \\lambda_i\\mathbf{q}_i$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.
 
 This is the [diagonalization](!/linear-algebra/eigen/diagonalization) $A = PDP^{-1}$ specialized to symmetric matrices, where the crucial bonus is that $P$ can be chosen orthogonal — so $P^{-1} = P^T$. The orthogonality of $Q$ is not a convenience; it is a structural guarantee that holds for every real symmetric matrix, regardless of eigenvalue multiplicities.`,
@@ -2266,6 +2269,9 @@ Every property of $A$ reduces to a property of the diagonal $D$, mediated by the
 
 @academic[formula_callout:quadratic_form_diagonalization|Quadratic Form Diagonalization|$$\\mathbf{x}^T A \\mathbf{x} = \\mathbf{y}^T D \\mathbf{y} = \\sum_{i=1}^{n} \\lambda_i y_i^2, \\qquad \\mathbf{x} = Q\\mathbf{y}$$]@
 @academic[formulas_link:/linear-algebra/formulas#quadratic_form_diagonalization]@
+
+@academic[fact,aside:true,width:35%:Every solid has three wobble-free axes
+The inertia matrix of any rigid body, even a potato, is symmetric, so it has three perpendicular eigenvectors: the principal axes of the body. Spun freely about one of them, the body turns without wobbling.]@
 
 In the eigenvector coordinate system, the quadratic form decouples into a sum of independent squared terms. The eigenvectors define the principal axes of the quadratic surface (ellipsoid, hyperboloid, etc.), and the eigenvalues determine the curvature along each axis.
 
@@ -2612,6 +2618,7 @@ export default function SpectralDecompositionPage({spectralNest,
           sectionsContent.obj3.content,
                   <div key={'unit-outer'} dangerouslySetInnerHTML={{ __html: demoUnits.outer }} />,
           `This is the form principal component analysis uses, where the weights are variances and the pieces are the components.`,
+          `@academic[punchline:Every symmetric matrix is a sum of independent stretches along perpendicular directions, and nothing more.]@`,
         ]
     },
     {

@@ -1103,6 +1103,9 @@ When outcomes are discrete, we often organize all combinations into a contingenc
 Each cell shows the likelihood of a specific pair of values, and probabilities for larger sets are found by adding the relevant cells.  
 Tables make joint behaviour easy to read and compare.
 
+@academic[fact,aside:true,width:35%:A broken stick makes a triangle 1 time in 4
+Break a stick at two points chosen uniformly at random. The three pieces form a triangle with probability $\\frac{1}{4}$: in the unit square of the two cut points, the pairs that leave every piece shorter than half the stick cover exactly a quarter of the area.]@
+
 **3. Using densities (continuous variables).**  
 For continuous variables, we compute joint probability by integrating the joint density over the region of interest.  
 This replaces the idea of adding cell values with measuring how probability mass is spread over an area.

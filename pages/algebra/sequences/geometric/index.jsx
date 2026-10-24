@@ -518,7 +518,9 @@ $$S_{10} = 1 \\cdot \\frac{1 - 2^{10}}{1 - 2} = \\frac{1 - 1024}{-1} = 1023$$]@
 Reading $n = 9$ off the last term $2^9$ gives $\\frac{1 - 2^9}{1 - 2} = 511$, which leaves out one term. The exponents run from $0$ to $9$, so there are $10$ terms and $S_{10} = 1023$.
 [Read more](!#pitfalls)]@
 
-The closed form needs three inputs: the first term, the ratio and the number of terms being added. The first two can be read straight off the sum, while the third has to be counted from the exponents of the terms. In this example the result is one less than $2^{10}$, the power of $2$ that would come next, and the same pattern holds for every sum of this kind: $1 + 2 + \\cdots + 2^{m} = 2^{m+1} - 1$.`,
+The closed form needs three inputs: the first term, the ratio and the number of terms being added. The first two can be read straight off the sum, while the third has to be counted from the exponents of the terms. In this example the result is one less than $2^{10}$, the power of $2$ that would come next, and the same pattern holds for every sum of this kind: $1 + 2 + \\cdots + 2^{m} = 2^{m+1} - 1$.
+
+@academic[punchline:Multiplying a geometric sum by $r$ shifts it one place along, so subtracting the two cancels all but two terms.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -534,7 +536,10 @@ $$S = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-The series $\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots$ has $a_1 = \\frac{1}{2}$ and $r = \\frac{1}{2}$, so $S = \\frac{1/2}{1 - 1/2} = 1$. Adding half of the remaining distance at each step eventually fills the full unit.
+@academic[fact,aside:true,width:35%:Achilles catches the tortoise after all
+In Zeno's paradox, Achilles runs ten times as fast as a tortoise that starts $100$ m ahead, and must first reach where it was, by which time it has moved on, without end. His stages $100 + 10 + 1 + \\cdots$ form a series with $r = \\frac{1}{10}$, so he draws level after exactly $\\frac{1000}{9} = 111.\\overline{1}$ m.]@
+
+The series $\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots$ has $a_1 = \\frac{1}{2}$ and $r = \\frac{1}{2}$, so $S = \\frac{1/2}{1 - 1/2} = 1$. Adding half of the remaining distance at each step comes as close to the full unit as desired, and the infinite sum is exactly $1$.
 
 Repeating decimals provide another illustration. The decimal $0.333\\ldots = \\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots$ is a geometric series with $a_1 = \\frac{3}{10}$ and $r = \\frac{1}{10}$, summing to $\\frac{3/10}{9/10} = \\frac{1}{3}$.
 
@@ -902,6 +907,7 @@ export default function GeometricSequencesPage({seoData, sectionsContent, introC
           sectionsContent.obj6.content,
           <div key={'unit-halvesFill'} dangerouslySetInnerHTML={{ __html: demoUnits.halvesFill }} />,
           `With r = 2 the gap would never close: each term would be larger than everything before it.`,
+          `@academic[punchline:Infinitely many terms can have a finite sum, and for a geometric series that happens exactly when $|r| < 1$.]@`,
         ]
     },
     {

@@ -342,6 +342,9 @@ Over the [complex numbers](!/complex-numbers), every polynomial of degree $n \\g
 
 A degree $5$ polynomial always has exactly five complex roots — some may be real, some may involve $i$, and some may repeat, but the count is always five.
 
+@academic[fact,aside:true,width:35%:A ten-millionth erases ten real roots
+Expanded, Wilkinson's polynomial $(x - 1)(x - 2)\\cdots(x - 20)$ has $-210$ as its coefficient of $x^{19}$; lowering it by $2^{-23}$, about one ten-millionth, turns ten of its twenty real roots into complex pairs such as $16.73 \\pm 2.81i$. Near $x = 16$ that nudge times $x^{19}$ is about $9 \\times 10^{15}$, hundreds of times the polynomial's own values there.]@
+
 The gap between "at most $n$ real roots" and "exactly $n$ complex roots" explains what happens when a polynomial appears to have fewer roots than its degree suggests. The polynomial $x^2 + 1$ has degree $2$ but no real roots. Its two roots, $x = i$ and $x = -i$, exist in the complex number system. The polynomial $x^3 - x$ has degree $3$ and three real roots: $0$, $1$, and $-1$. The number of real roots varies; the number of complex roots (counting multiplicity) never does.`,
   before: ``,
   after: ``,
@@ -436,7 +439,9 @@ Building the candidates as divisors of $2$ over divisors of $12$ puts the leadin
 
 Testing candidates by substitution identifies actual roots. For the polynomial above, $P(2) = 16 - 12 - 16 + 12 = 0$, confirming $x = 2$ as a root. Once a root is found, dividing out its factor reduces the degree, and the process can repeat on the quotient.
 
-The theorem does not guarantee that rational roots exist — only that if they do, they appear on the list. A polynomial like $x^2 - 2$ has irrational roots ($\\pm\\sqrt{2}$), and no rational candidate will test to zero.`,
+The theorem does not guarantee that rational roots exist — only that if they do, they appear on the list. A polynomial like $x^2 - 2$ has irrational roots ($\\pm\\sqrt{2}$), and no rational candidate will test to zero.
+
+@academic[punchline:The Rational Root Theorem turns an endless search into a short checklist, but it only ever finds rational roots.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -524,6 +529,9 @@ $$r_1r_2 + r_1r_3 + r_2r_3 = c$$]@
 $$r_1 \\cdot r_2 \\cdot r_3 = -d$$]@
 
 The pattern generalizes to any degree $n$. The elementary symmetric polynomials of the roots correspond, with alternating signs, to the coefficients of the polynomial (assuming the leading coefficient is $1$).
+
+@academic[fact,aside:true,width:35%:A negative sum of squares
+For $x^3 + x + 1$, the roots add up to $0$ and their pairwise products to $1$, so their squares add up to $0^2 - 2 \\cdot 1 = -2$. Squares of real numbers never sum to a negative number, so some roots must be complex, and no root had to be found.]@
 
 Vieta's formulas are useful for checking answers — if claimed roots don't produce the correct sum or product, an error exists. They also solve problems that ask about root relationships without requiring the roots themselves. If a problem asks for $r_1^2 + r_2^2$, computing $(r_1 + r_2)^2 - 2r_1r_2$ uses only the sum and product, both available directly from the coefficients.`,
   before: ``,
@@ -925,6 +933,7 @@ export default function RootsPage({rootMethodTree, seoData, sectionsContent, int
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          `@academic[punchline:The sign of the discriminant tells what kind of roots a quadratic has before either one is computed.]@`,
         ]
     },
     {

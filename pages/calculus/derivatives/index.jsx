@@ -307,7 +307,12 @@ The operator $D$ or $D_x$ applied to a function: $Df(x)$ means the same as $f'(x
 
 ## Newton Notation
 
+@academic[fact,aside:true,width:35%:Newton's dots against Leibniz's d
+In 1712 a Royal Society committee ruled that Newton came first; its report was drafted by Newton himself, then the Society's President. British mathematicians kept his dots for a century, until Cambridge students led by Charles Babbage campaigned for "pure D-ism" against "the Dot-age of the University".]@
+
 A dot above the variable: $\\dot{y}$ for the first derivative, $\\ddot{y}$ for the second. Used almost exclusively where the independent variable is time. The notation signals that differentiation is with respect to $t$.
+
+Newton called a derivative a fluxion, the rate at which a flowing quantity, a fluent, changes with time, and he was working with fluxions by 1666. Leibniz reached the same methods independently in the 1670s, wrote $dy$ and $dx$ for infinitely small differences, and published first, in 1684. Which of the two had invented calculus, and whose notation to use, became a bitter dispute between British and continental mathematicians.
 
 In [LaTeX](!/latex) source, the Leibniz form is produced by \\frac{dy}{dx}, the primes by f' directly, and the Newton dots by \\dot{y} and \\ddot{y}.
 

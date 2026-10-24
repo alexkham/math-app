@@ -1294,7 +1294,12 @@ Writing $\\|-2\\mathbf{a}\\| = -2\\|\\mathbf{a}\\|$ for $\\mathbf{a} = (3, 4)$ g
 
 When $c > 0$, the scaled vector $c\\mathbf{a}$ points in the same direction as $\\mathbf{a}$. If $c > 1$, the vector stretches; if $0 < c < 1$, it compresses. When $c < 0$, the direction flips — the scaled vector points opposite to $\\mathbf{a}$, with its length multiplied by $|c|$. The boundary case $c = 0$ collapses any vector to the zero vector: $0\\mathbf{a} = \\mathbf{0}$.
 
-Because scalar multiplication only ever stretches, compresses, or reverses a vector along its own line, the result $c\\mathbf{a}$ is always [parallel](!/linear-algebra/vectors/properties) to $\\mathbf{a}$ (provided $\\mathbf{a} \\neq \\mathbf{0}$). This observation becomes important later: two vectors are parallel precisely when one is a scalar multiple of the other.`,
+Because scalar multiplication only ever stretches, compresses, or reverses a vector along its own line, the result $c\\mathbf{a}$ is always [parallel](!/linear-algebra/vectors/properties) to $\\mathbf{a}$ (provided $\\mathbf{a} \\neq \\mathbf{0}$). This observation becomes important later: two vectors are parallel precisely when one is a scalar multiple of the other.
+
+@academic[fact,aside:true,width:35%:Every quadrilateral hides a parallelogram
+Joining the midpoints of the four sides of any quadrilateral, even a non-convex one, gives a parallelogram. With corners $\\mathbf{a}, \\mathbf{b}, \\mathbf{c}, \\mathbf{d}$ in order, the midpoints $\\frac{1}{2}(\\mathbf{a} + \\mathbf{b})$ and $\\frac{1}{2}(\\mathbf{b} + \\mathbf{c})$ differ by $\\frac{1}{2}(\\mathbf{c} - \\mathbf{a})$, and so do the midpoints of the other two sides.]@
+
+Scaling by $\\frac{1}{2}$ also locates midpoints. The point halfway between the tips of $\\mathbf{a}$ and $\\mathbf{b}$ is $\\mathbf{a} + \\frac{1}{2}(\\mathbf{b} - \\mathbf{a}) = \\frac{1}{2}(\\mathbf{a} + \\mathbf{b})$, the average of the two vectors. The arrow from one midpoint to another is then a difference of two such averages, and comparing those arrows component by component shows whether two segments are parallel and equally long, with no angles or rulers involved.`,
     before: ``,
     after: ``,
     link: '',
@@ -1341,6 +1346,9 @@ Two special cases follow immediately from these rules. Setting $c = 0$ gives $0\
   obj6: {
     title: `The Algebraic Foundation`,
     content: `Addition and scalar multiplication are not just two operations among many — they are the two operations on which the entire algebraic theory of vectors rests. Every other construction in this section is built from them. The [dot product](!/linear-algebra/vectors/dot-product) multiplies corresponding components and sums the results — a sequence of scalar multiplications followed by real-number addition. The [cross product](!/linear-algebra/vectors/cross-product) combines components through differences of pairwise products — again, scalar multiplication and addition in a specific pattern. A [linear combination](!/linear-algebra/vectors/linear-combinations) $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$ is nothing more than repeated scalar multiplication followed by repeated addition.
+
+@academic[fact,aside:true,width:35%:One law follows from the other seven
+Expanding $(1 + 1)(\\mathbf{a} + \\mathbf{b})$ by each distributive law gives $\\mathbf{a} + \\mathbf{a} + \\mathbf{b} + \\mathbf{b} = \\mathbf{a} + \\mathbf{b} + \\mathbf{a} + \\mathbf{b}$. Cancelling the first $\\mathbf{a}$ and the last $\\mathbf{b}$ on both sides leaves $\\mathbf{a} + \\mathbf{b} = \\mathbf{b} + \\mathbf{a}$, so commutativity never has to be assumed.]@
 
 The eight properties listed on this page — four for addition and four for scalar multiplication, two of them distributive laws — are not arbitrary. Together with closure, they are precisely the axioms that define a [vector space](!/linear-algebra/vector-spaces/axioms). Any collection of objects that satisfies these rules qualifies as a vector space, whether the objects are arrows in $\\mathbb{R}^3$, polynomials, matrices, or functions. The vectors in $\\mathbb{R}^n$ studied throughout this section are the most concrete example, but the algebraic structure they exhibit extends far beyond ordered tuples of numbers.`,
     before: ``,
@@ -1681,6 +1689,7 @@ demoUnits}) {
           >
             <PropertyLawCard data={operationLaws} theme="navy" />
           </DiagramFrame>,
+          `@academic[punchline:Anything that can be added and scaled under these eight laws is a vector, whether an arrow, a polynomial or a function.]@`,
         ]
     },
     {

@@ -1139,6 +1139,11 @@ By changing the mapping (not the model), the resulting distribution may be:
 
 The model remains unchanged.  
 Only the measurement changes.
+
+@academic[fact,aside:true,width:35%:One random point, endless coin tosses
+The binary digits of a point chosen uniformly from $[0, 1]$ are independent fair coin tosses: each pattern of the first $k$ digits marks off an interval of length $\\frac{1}{2^k}$, so every pattern is equally likely. One draw from this single model carries infinitely many independent variables.]@
+
+Even a very plain model supports a great many measurements. In the model where a single point is chosen uniformly from the interval $[0, 1]$, so that every subinterval has probability equal to its length, the point itself has a continuous distribution. Reading its first decimal digit gives a discrete variable with ten equally likely values. Replacing every point below $\\frac{1}{2}$ by $\\frac{1}{2}$ gives a mixed variable, with probability $\\frac{1}{2}$ sitting on the single value $\\frac{1}{2}$ and the rest spread evenly above it.
 `,
       before:``,
       after:``,
@@ -1178,7 +1183,7 @@ Card draws show the second assumption at work. If each card is put back and the 
 Some probability models have a finite or countable set of outcomes.
 
 In such models:
-• all outcomes can be listed explicitly
+• all outcomes can be listed one by one
 • events are formed by grouping outcomes
 • probabilities are assigned directly to each outcome
 
@@ -1234,6 +1239,11 @@ Because of this:
 • models can be useful even when they are unrealistic
 • realistic detail does not guarantee correctness
 • conclusions are valid only within the chosen model
+
+@academic[fact,aside:true,width:35%:Seven riffles to trust the card model
+Four riffle shuffles cannot even reach every order: one riffle can produce at most $2^{52}$ orders, and $2^{208}$ is far below $52! \\approx 8 \\times 10^{67}$. Bayer and Diaconis showed in 1992 that the deck comes close to the equally likely model only after about $7$ riffles.]@
+
+Card games give a familiar example. The standard card model takes all $52!$ orders of a shuffled deck as equally likely, and every probability for a dealt hand rests on that assumption. A real shuffle starts from whatever order the deck was in and changes it a little at a time, so whether the model fits depends on how much shuffling was actually done.
 
 When a model does not match the situation it is applied to, probability calculations remain correct mathematically but become irrelevant in practice.
 `,
@@ -1521,6 +1531,7 @@ export default function ModelsPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@academic[punchline:A model's answers are only as trustworthy as its assumptions, and those are chosen, not proved.]@`,
         ]
     },
     {

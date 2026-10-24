@@ -3810,7 +3810,12 @@ $$(2)(5) + (-1)(2) + (4)(0) = 8, \\quad (2)(1) + (-1)(-3) + (4)(6) = 29$$]@
 @academic[formula_callout:Matrix Multiplication — Definition
 $$AB = \\begin{pmatrix} 5 & 19 \\\\ 8 & 29 \\end{pmatrix}$$]@
 
+@academic[fact,aside:true,width:35%:Seven products instead of eight
+In 1969 Volker Strassen multiplied two $2 \\times 2$ matrices with $7$ multiplications instead of $8$, at the cost of extra additions. His formulas never use $ab = ba$, so they also work on blocks of a large matrix, and applied again and again they cut a $1024 \\times 1024$ product from about 1.07 billion multiplications to about 282 million.]@
+
 Each entry required $n = 3$ multiplications and $n - 1 = 2$ additions. The full product required $m \\times p = 4$ such computations.
+
+The same count works for any sizes. Each of the $mp$ entries of the product needs $n$ multiplications, so multiplying an $m \\times n$ matrix by an $n \\times p$ matrix straight from the definition takes $mnp$ multiplications in all. For two square $n \\times n$ matrices that is $n^3$: $8$ for $2 \\times 2$ matrices, $1000$ for $10 \\times 10$ matrices, and a million for $100 \\times 100$ matrices.
 
 @academic[pitfall,aside:true,width:35%:Multiplying entry by entry
 Multiplying matching positions turns $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$ into $\\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$, the Hadamard product, not $AB$. The row-by-column rule gives $\\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$.
@@ -3949,7 +3954,9 @@ The key property is that left-multiplying a matrix $A$ by an elementary matrix $
 Writing $AE$ instead of $EA$ for the row swap $E = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ and $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ gives $\\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}$, with the columns swapped. The row swap is $EA = \\begin{pmatrix} 3 & 4 \\\\ 1 & 2 \\end{pmatrix}$.
 [Read more](!#pitfalls)]@
 
-This leads to a structural result: every invertible matrix can be written as a product of elementary matrices. Since [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) reduces an invertible matrix to the identity through a sequence of row operations, each operation corresponds to an elementary matrix, and reversing the sequence expresses the original matrix as their product. This factorization is more conceptual than computational, but it underpins the theoretical foundations of the [determinant](!/linear-algebra/determinants) and the inverse.`,
+This leads to a structural result: every invertible matrix can be written as a product of elementary matrices. Since [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) reduces an invertible matrix to the identity through a sequence of row operations, each operation corresponds to an elementary matrix, and reversing the sequence expresses the original matrix as their product. This factorization is more conceptual than computational, but it underpins the theoretical foundations of the [determinant](!/linear-algebra/determinants) and the inverse.
+
+@academic[punchline:Every row operation is a left multiplication by an elementary matrix, so Gaussian elimination is a chain of matrix products.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -3975,7 +3982,10 @@ Each of these [decompositions](!/linear-algebra/decompositions) has its own page
   },
   obj12: {
     title: `Dimension Summary`,
-    content: `The dimension requirements for each operation are worth collecting in one place. Addition and subtraction require both matrices to share the same $m \\times n$ dimensions, and the result is $m \\times n$. Scalar multiplication imposes no restriction and preserves the original dimensions. The product $AB$ requires the column count of $A$ to match the row count of $B$ — if $A$ is $m \\times n$ and $B$ is $n \\times p$, the result is $m \\times p$. The transpose of an $m \\times n$ matrix is $n \\times m$. Powers $A^k$ require $A$ to be square and produce a matrix of the same size.
+    content: `@academic[fact,aside:true,width:35%:Same product, ten times the work
+For $A$ of size $10 \\times 100$, $B$ of size $100 \\times 5$ and $C$ of size $5 \\times 50$, the route $(AB)C$ passes through the small $10 \\times 5$ matrix $AB$ and takes 5,000 + 2,500 = 7,500 multiplications. The route $A(BC)$ passes through the $100 \\times 50$ matrix $BC$ and takes 25,000 + 50,000 = 75,000.]@
+
+The dimension requirements for each operation are worth collecting in one place. Addition and subtraction require both matrices to share the same $m \\times n$ dimensions, and the result is $m \\times n$. Scalar multiplication imposes no restriction and preserves the original dimensions. The product $AB$ requires the column count of $A$ to match the row count of $B$ — if $A$ is $m \\times n$ and $B$ is $n \\times p$, the result is $m \\times p$. The transpose of an $m \\times n$ matrix is $n \\times m$. Powers $A^k$ require $A$ to be square and produce a matrix of the same size.
 
 A common source of confusion is the product rule. The product of two $n \\times n$ matrices is $n \\times n$, but the product of a $2 \\times 3$ matrix with a $3 \\times 5$ matrix is $2 \\times 5$. The &quot;inner&quot; dimensions must match and are consumed; the &quot;outer&quot; dimensions survive into the result.`,
     before: ``,

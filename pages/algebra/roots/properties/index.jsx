@@ -563,7 +563,12 @@ Odd-index radicals preserve sign. Positive radicands yield positive roots. Negat
 
 There is no ambiguity requiring a principal root convention for odd indices. Every real number has exactly one real cube root, one real fifth root, and so on. The radical simply returns that unique value.
 
-This means [radical functions](!/algebra/roots/functions) with odd index have domain all real numbers. No restrictions, no need for [complex numbers](!/complex-numbers) to handle negative inputs.`,
+This means [radical functions](!/algebra/roots/functions) with odd index have domain all real numbers. No restrictions, no need for [complex numbers](!/complex-numbers) to handle negative inputs.
+
+@academic[fact,aside:true,width:35%:Three cube roots of $-8$
+Besides $-2$, the complex numbers $1 + i\\sqrt{3}$ and $1 - i\\sqrt{3}$ also cube to $-8$. Every nonzero number has three cube roots; the radical returns the only real one.]@
+
+The word real appears twice in the statement that every real number has exactly one real cube root, and the second one carries weight. The graph of $y = x^3$ lives in the real plane, so it can show only the real solutions of an equation such as $x^3 = -8$. Whether other, non-real solutions exist is a question the graph cannot answer. The odd-index radical is defined to return the solution on the real line, which makes $\\sqrt[3]{-8}$ a single negative real number.`,
     before: ``,
     after: ``,
     link: '',
@@ -631,7 +636,12 @@ $$\\sqrt{x^6} = |x^3| = |x|^3$$]@
 When the resulting exponent is even, the absolute value is unnecessary since even powers are already non-negative:
 
 @academic[formula_callout:The Identity for Even Roots
-$$\\sqrt{x^4} = x^2 \\quad \\text{(no absolute value needed)}$$]@`,
+$$\\sqrt{x^4} = x^2 \\quad \\text{(no absolute value needed)}$$]@
+
+@academic[fact,aside:true,width:35%:A maximum with no comparison
+The larger of two numbers is $\\max(a, b) = \\frac{a + b + \\sqrt{(a - b)^2}}{2}$: the midpoint of the two plus half the distance between them. A single formula picks the larger number without ever comparing them.]@
+
+The identity also runs backwards: wherever an absolute value appears, it can be rewritten as the root of a square. The distance between two numbers $a$ and $b$ on the number line is $|a - b|$, and in this form it becomes $\\sqrt{(a - b)^2}$. The radical takes care of the sign by itself, so the same expression is correct whichever of $a$ and $b$ is larger.`,
     before: ``,
     after: ``,
     link: '',
@@ -1124,6 +1134,7 @@ export default function PropertiesPage({principalRootCases, seoData, sectionsCon
           sectionsContent.obj1.content,
           <div key={'unit-evenPowers'} dangerouslySetInnerHTML={{ __html: demoUnits.evenPowers }} />,
           `x⁴ hugs the axis more tightly near 0 but has the same floor: nothing below 0.`,
+          `@academic[punchline:Every even power is at least $0$, so an even root of a negative number is never a real number.]@`,
         ]
     },
     {
@@ -1169,6 +1180,7 @@ export default function PropertiesPage({principalRootCases, seoData, sectionsCon
           >
             <CaseSplit data={principalRootCases} variant="poster" proseStyle="cards" theme={figureTheme} />
           </DiagramFrame>,
+          `@academic[punchline:The radical sign names one number, the non-negative root; the other root has to be asked for with $\\pm$.]@`,
         ]
     },
     {
@@ -1179,6 +1191,7 @@ export default function PropertiesPage({principalRootCases, seoData, sectionsCon
           sectionsContent.obj4.content,
           <div key={'unit-absIdentity'} dangerouslySetInnerHTML={{ __html: demoUnits.absIdentity }} />,
           `For ∛(x³) there is no fold: the graph is the whole line y = x.`,
+          `@academic[punchline:An even root of an even power returns the size of the number, not the number itself: $\\sqrt{x^2} = |x|$.]@`,
         ]
     },
     {

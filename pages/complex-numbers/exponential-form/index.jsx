@@ -1369,6 +1369,7 @@ import eulerFormulaDiagrams from '@/app/components/calculators/complex-numbers/e
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1908,6 +1909,33 @@ export async function getStaticProps(){
 
 
 // formulas-optimized: v1 | 2026-06-11 | 5 callouts (obj1, obj3, obj4, obj5, obj8)
+// Concept introduction (section 4, "The Exponential Form of a Complex
+// Number") — template D, comparison. Running instance: z = 2e^(iπ/3) =
+// 1 + √3 i, the Euler visualizer's scaled state already shown in this section.
+// Old obj4 text is kept in sectionsContent.obj4, unused; its three formula
+// boxes and link, the rule box, the pitfall aside, six passages and the
+// scaledPolar demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciWasteTable = ciTableOpen(['step', 'squaring 2(cos π/3 + i sin π/3)', 'squaring 2e^(iπ/3)']) +
+  ciRow(['1', '4(cos π/3 + i sin π/3)²', '4e^(2iπ/3) — done'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['2', '4(cos² π/3 + 2i sin π/3 cos π/3 − sin² π/3)', ''], { shade: true }) +
+  ciRow(['3', '4((cos² π/3 − sin² π/3) + i · 2 sin π/3 cos π/3)', '']) +
+  ciRow(['4', 'recognise two double-angle identities', ''], { shade: true }) +
+  ciRow(['5', '4(cos 2π/3 + i sin 2π/3)', ''], { last: true }) +
+  '</tbody></table>'
+const ciFreeTable = ciTableOpen(['with z = 2e^(iπ/3)', 'exponent rule', 'result']) +
+  ciRow(['z · z', 'add the exponents', '4e^(2iπ/3) = −2 + 2√3 i']) +
+  ciRow(['z³', 'multiply the exponent by 3', '8e^(iπ) = −8'], { shade: true }) +
+  ciRow(['1 / z', 'negate the exponent', '(1/2)e^(−iπ/3)']) +
+  ciRow(['z / z', 'subtract the exponents', 'e⁰ = 1'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
   obj0: {
@@ -2528,6 +2556,11 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    wasteTable: ciWasteTable,
+    freeTable: ciFreeTable,
+  };
+
   const demoUnits = {
     euler: demoUnitFrame({
       svg: eulerFormulaDiagrams.theta45,
@@ -2576,6 +2609,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -2605,10 +2639,86 @@ export default function ExponentialFormPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 4 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The trigonometric form already describes every complex number by distance and angle.`,
+        content: [
+          `$2\\left(\\cos\\frac{\\pi}{3} + i\\sin\\frac{\\pi}{3}\\right)$ is the point at distance $2$ and angle $\\frac{\\pi}{3}$, which is $1 + \\sqrt{3}i$. Nothing is wrong with it, so any new way of writing the same number has to earn its place.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Squaring it in trigonometric form takes five steps; written as an exponential it takes one.`,
+        content: [
+          `The trigonometric form writes the angle twice and keeps cosine and sine apart, so every product has to be expanded and then put back together with trigonometric identities. The exponential form carries the angle once, in an exponent, and the ordinary exponent rules do the work.`,
+          ciTable('wasteTable'),
+          `It is the difference between writing $2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2$ and writing $2^5$: the same number, but one of them can be worked with directly.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Writing a complex number as $z = re^{i\\theta}$, with $r$ its modulus and $\\theta$ its argument in radians, is its [exponential form](!/complex-numbers/definitions#exponential_form).`,
+        formula: [
+          `Euler's formula transforms the [trigonometric form](!/complex-numbers/trigonometric-form) into something more compact. Since $\\text{cis}\\theta = \\cos\\theta + i\\sin\\theta = e^{i\\theta}$, any complex number $z = r\\text{cis}\\theta$ can be written:`,
+          `@academic[formula_callout:Exponential Form
+$$z = re^{i\\theta}$$
+/complex-numbers/formulas#exponential_form]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+          `Here $r = |z|$ is the [modulus](!/complex-numbers/absolute-value) and $\\theta = \\arg(z)$ is the argument. The exponential form packages both pieces of information into a single expression resembling a power.`,
+        ],
+        footer: `So $1 + \\sqrt{3}i = 2e^{i\\pi/3}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is the same number as before, in a third notation.`,
+        content: [
+          `The three representations of a complex number are equivalent:`,
+          `@academic[formula_callout:The Exponential Form of a Complex Number
+$$z = a + bi = r(\\cos\\theta + i\\sin\\theta) = r\\text{cis}\\theta = re^{i\\theta}$$]@`,
+          `Algebraic form displays the real and imaginary components directly. Trigonometric form emphasizes modulus and argument through explicit trigonometric functions. Exponential form achieves the same emphasis with more economical notation.`,
+          `@academic[rule_plain:Every nonzero complex number has an exponential form.]@`,
+          `The number $3 + 4i$ has modulus $5$ and argument $\\arctan(4/3) \\approx 53.13°$, so $3 + 4i = 5e^{i \\cdot 0.927}$ (in radians). The number $-2$ has modulus $2$ and argument $\\pi$, so $-2 = 2e^{i\\pi}$. Even pure imaginaries fit: $i = 1 \\cdot e^{i\\pi/2} = e^{i\\pi/2}$.`,
+          <div key={'unit-scaledPolar'} dangerouslySetInnerHTML={{ __html: demoUnits.scaledPolar }} />,
+          `With r = 1 the same point sits on the unit circle: e^(iθ) alone is a pure direction.`,
+        ],
+      },
+      {
+        id: 'free',
+        lead: `Multiplication, powers, reciprocals and division then follow without being asked for.`,
+        content: [
+          `The exponential form excels in computation. Standard rules for exponents — which students learn long before complex numbers — apply directly. Multiplying $e^{i\\theta_1}$ by $e^{i\\theta_2}$ yields $e^{i(\\theta_1 + \\theta_2)}$. Dividing subtracts exponents. Raising to a power multiplies the exponent. These rules, familiar from real exponentials, now govern complex arithmetic.`,
+          ciTable('freeTable'),
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `All of this has one cause — Euler's formula makes e^(iθ) obey the exponent rules — and it has a price.`,
+        content: [
+          `The exponent rules only work with the angle in radians, because Euler's formula is stated in radians. And the form helps only with multiplying: adding two numbers in exponential form still means going back to $a + bi$, since there is no rule for $e^{i\\alpha} + e^{i\\beta}$. [Euler's formula](!/complex-numbers/exponential-form#1) itself is at the top of the page.`,
+          `@academic[pitfall,aside:true,width:35%:Putting degrees in the exponent
+Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads radians: $5e^{i \\cdot 53.13} \\approx -4.81 + 1.37i$, a different point. With the angle in radians, $5e^{i \\cdot 0.927} \\approx 3 + 4i$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, converting between the forms, and multiplication, division, powers and roots in exponential form.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2658,9 +2768,7 @@ export default function ExponentialFormPage({
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
-          sectionsContent.obj4.content,
-          <div key={'unit-scaledPolar'} dangerouslySetInnerHTML={{ __html: demoUnits.scaledPolar }} />,
-          `With r = 1 the same point sits on the unit circle: e^(iθ) alone is a pure direction.`,
+          <ConceptIntro key={'obj4-intro'} data={conceptIntro} />,
         ]
     },
     {

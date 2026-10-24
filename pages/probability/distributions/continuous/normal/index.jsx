@@ -1557,7 +1557,7 @@ $$\\text{Median} = \\mu$$]@
 @academic[formula_callout:Mode and Median
 $$F(\\mu) = 0.5$$]@
 
-This symmetry means that [mode](!/probability/mode) = [median](!/probability/median) = [mean](!/probability/expected-value) = $\\mu$, a property that holds for every symmetric unimodal distribution.
+This symmetry means that [mode](!/probability/mode) = [median](!/probability/median) = [mean](!/probability/expected-value) = $\\mu$, a property that holds for every symmetric unimodal distribution that has a mean.
 
 @academic[example:Example
 For human heights with $\\mu = 170$ cm and $\\sigma = 10$ cm:
@@ -1569,7 +1569,7 @@ Half of all heights fall below 170 cm, and half fall above. This coincides with 
 **Properties:**
 • For the normal distribution: mode = median = mean (all equal $\\mu$)
 • The parameter $\\sigma$ controls spread but doesn't affect the location of mode or median
-• This triple equality holds for all symmetric unimodal distributions but is particularly important for the normal distribution
+• This triple equality holds for all symmetric unimodal distributions that have a mean, but is particularly important for the normal distribution
 • Unlike skewed distributions where mean, median, and mode diverge, the normal distribution's symmetry keeps them aligned
   `,
   before: ``,
@@ -1668,6 +1668,8 @@ Using $z = 1.96$ for the 95th percentile of heights gives $170 + 10(1.96) = 189.
 [Read more](!#pitfalls)]@
 
 These percentiles are commonly used in hypothesis testing and confidence interval construction.
+
+@academic[punchline:Every normal percentile is a standard $z$-value, stretched by $\\sigma$ and shifted by $\\mu$.]@
   `,
   before: ``,
   after: ``,
@@ -1710,7 +1712,7 @@ The normal distribution appears throughout nature and human activity whenever ma
 **Natural Phenomena:**
 • Temperature variations around seasonal averages
 • Rainfall amounts in many regions
-• Particle velocities in gases (Maxwell-Boltzmann distribution)
+• Each velocity component of a gas particle (the speed itself follows the Maxwell-Boltzmann distribution)
 
 ### Why It Appears
 
@@ -1754,6 +1756,11 @@ $$f(z) = \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}}$$
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
+
+@academic[fact,aside:true,width:35%:A circle hides in the bell curve
+Squaring the area under $e^{-z^2/2}$ gives $\\iint e^{-(x^2 + y^2)/2}\\,dx\\,dy$, a surface that looks the same in every direction around the origin. Added up in rings of radius $r$, it equals $\\int_0^{\\infty} 2\\pi r\\, e^{-r^2/2}\\,dr = 2\\pi$, so the area itself is $\\sqrt{2\\pi}$.]@
+
+The factor $\\frac{1}{\\sqrt{2\\pi}}$ in front has a single job: it is the reciprocal of the area under the bare curve $e^{-z^2/2}$, so that the total comes out as exactly 1. That area cannot be found the usual way, because $e^{-z^2/2}$ has no antiderivative made of ordinary functions. The value of the constant, $\\pi$ included, has to be reached by another route.
 
 Any normal random variable $X \\sim N(\\mu, \\sigma^2)$ can be standardized:
 
@@ -1898,6 +1905,11 @@ $$X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$$
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
+
+@academic[fact,aside:true,width:35%:Normal plus normal, yet not normal
+Take $X \\sim N(0, 1)$ and let a fair coin decide between $Y = X$ and $Y = -X$. By symmetry $Y \\sim N(0, 1)$ as well, yet $X + Y$ equals $0$ half the time, a jump no normal variable has; $X$ and $Y$ are even uncorrelated without being independent.]@
+
+The word independent carries the weight in this rule. The usual proof multiplies the two moment generating functions, and splitting $E\\left[e^{t(X_1 + X_2)}\\right]$ into $E\\left[e^{tX_1}\\right] \\cdot E\\left[e^{tX_2}\\right]$ is exactly the step that uses independence. Knowing only that each variable on its own follows a bell curve says nothing about how the two move together.
 
 Sums of independent normal variables remain normal—a rare property called **stability** or **reproductive property**.
 
@@ -2335,6 +2347,7 @@ export default function NormalDistributionPage({
                     </div>,
                   <div key={'unit-u_6_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_6_1 }} />,
           `The mean and variance can nevertheless be computed exactly.`,
+          `@academic[punchline:A single table of $\\Phi$ answers every normal question: subtract the mean, divide by the standard deviation, then look up.]@`,
         ]
     },
     {

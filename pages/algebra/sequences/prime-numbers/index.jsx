@@ -314,6 +314,9 @@ $$\\pi(n) \\approx \\frac{n}{\\ln n}$$
 
 as $n$ grows large. The approximation improves in relative terms: the ratio $\\frac{\\pi(n)}{n / \\ln n}$ approaches $1$.
 
+@academic[fact,aside:true,width:35%:A hundred composites in a row
+The numbers $101! + 2, 101! + 3, \\ldots, 101! + 101$ are $100$ consecutive composites, because $k$ divides $101! + k$ for every $k$ from $2$ to $101$. The same trick gives a prime-free run of any length.]@
+
 The practical interpretation is that near a large number $n$, roughly one in every $\\ln n$ integers is prime. Near $n = 1{,}000{,}000$, the average gap between consecutive primes is about $\\ln(10^6) \\approx 13.8$. Near $n = 10^{12}$, it is about $27.6$. Primes spread further apart on average but never disappear.
 
 The prime number theorem was conjectured by Gauss and Legendre in the late 18th century and proved independently by Hadamard and de la Vallée-Poussin in 1896.`,
@@ -326,6 +329,9 @@ The prime number theorem was conjectured by Gauss and Legendre in the late 18th 
     content: `Certain primes satisfy additional structural constraints, leading to named families.
 
 **Mersenne primes** have the form $2^p - 1$, where $p$ itself must be prime (though not every prime $p$ produces a Mersenne prime). The first Mersenne primes are $3, 7, 31, 127$ (corresponding to $p = 2, 3, 5, 7$). The exponent $p = 11$ gives $2^{11} - 1 = 2047 = 23 \\times 89$, which is composite. The largest known primes are typically Mersenne primes, found by specialized search algorithms.
+
+@academic[fact,aside:true,width:35%:Why a 17-gon can be drawn
+A regular polygon with a prime number $p$ of sides can be drawn with ruler and compass exactly when $p - 1$ is a power of $2$, that is, when $p$ is a Fermat prime. So the $17$-gon, found by Gauss at $18$, can be drawn, but the $7$-gon cannot.]@
 
 **Fermat primes** have the form $2^{2^n} + 1$. Only five are known: $3, 5, 17, 257, 65537$ (for $n = 0, 1, 2, 3, 4$). Fermat conjectured that all numbers of this form are prime; Euler disproved this by showing $2^{2^5} + 1 = 4294967297 = 641 \\times 6700417$.
 
@@ -401,17 +407,17 @@ const faqQuestions = {
   obj1: {
     question: "Is $2^p - 1$ prime whenever $p$ is prime?",
     answer: "No, and this is the standard trap with Mersenne numbers. A prime exponent is necessary but not sufficient: $p = 2, 3, 5, 7$ give the primes $3, 7, 31, 127$, but $p = 11$ gives $2^{11} - 1 = 2047$, which factors as $23 \\times 89$. Mersenne primes still supply the largest primes known, found by dedicated search.",
-    sectionId: "6"
+    sectionId: "7"
   },
   obj2: {
     question: "Was Fermat right that every $2^{2^n} + 1$ is prime?",
     answer: "No. Fermat conjectured it after checking $n = 0$ through $4$, which give $3, 5, 17, 257$ and $65537$. Euler then factored the next one: $2^{2^5} + 1 = 4294967297 = 641 \\times 6700417$. Those five remain the only Fermat primes anyone has found, so the conjecture failed at the first case beyond hand computation.",
-    sectionId: "6"
+    sectionId: "7"
   },
   obj3: {
     question: "Are there infinitely many twin primes?",
     answer: "Nobody knows, and it is one of the oldest open problems in mathematics. Twin primes are pairs differing by $2$, such as $(11, 13)$ and $(29, 31)$, and they keep appearing as far as anyone has searched. That contrasts sharply with primes themselves, where infinitude was proved in antiquity. The twin prime conjecture is widely believed but unproven.",
-    sectionId: "6"
+    sectionId: "7"
   }
 }
 
@@ -613,6 +619,7 @@ export default function PrimeNumbersPage({primeTypeTree, seoData, sectionsConten
           sectionsContent.obj4.content,
           <div key={'unit-trialPairs'} dangerouslySetInnerHTML={{ __html: demoUnits.trialPairs }} />,
           `For a perfect square such as 49 the pair 7 · 7 sits exactly at √n.`,
+          `@academic[punchline:Factors come in pairs on either side of $\\sqrt{n}$, so a number with no prime factor up to $\\sqrt{n}$ is prime.]@`,
         ]
     },
     {
@@ -633,6 +640,7 @@ export default function PrimeNumbersPage({primeTypeTree, seoData, sectionsConten
           sectionsContent.obj6.content,
           <div key={'unit-primeCount'} dangerouslySetInnerHTML={{ __html: demoUnits.primeCount }} />,
           `Below 100 the estimate runs low by about 3; in relative terms the gap shrinks as n grows.`,
+          `@academic[punchline:Primes never run out, but they thin out at a steady rate: near $n$, about one integer in $\\ln n$ is prime.]@`,
         ]
     },
     {

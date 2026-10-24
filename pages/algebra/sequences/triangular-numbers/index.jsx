@@ -182,6 +182,9 @@ $$T_1 = 1, \\quad T_n = T_{n-1} + n$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
+@academic[fact,aside:true,width:35%:Cubes add up to a squared triangle
+The first $n$ cubes add up to $T_n^2$, as in $1 + 8 + 27 + 64 = 100 = T_4^2$. Each step adds exactly one cube: $T_n^2 - T_{n-1}^2 = (T_n - T_{n-1})(T_n + T_{n-1}) = n \\cdot n^2$.]@
+
 This recursive definition makes the growth pattern visible — the increments $1, 2, 3, 4, 5, \\ldots$ are themselves the natural numbers. The triangular numbers grow faster than a linear sequence (where increments are constant) but slower than an exponential one.
 
 The increments form an [arithmetic sequence](!/algebra/sequences/arithmetic) with common difference $1$. The triangular numbers are therefore the partial sums of an arithmetic sequence — they accumulate linearly growing additions.`,
@@ -252,7 +255,12 @@ $$\\sum_{k=1}^{n} T_k = \\frac{n(n+1)(n+2)}{6}$$
 
 This extends the figurate number idea from two dimensions (triangles) to three (tetrahedra).
 
-To compute tetrahedral numbers directly, use the [tetrahedral numbers calculator](!/algebra/calculators/sequences/tetrahedral-numbers).`,
+To compute tetrahedral numbers directly, use the [tetrahedral numbers calculator](!/algebra/calculators/sequences/tetrahedral-numbers).
+
+@academic[fact,aside:true,width:35%:Three triangular numbers always suffice
+Every whole number is a sum of three triangular numbers, as in $17 = 1 + 1 + 15$. Gauss found this in 1796 and wrote "Eureka" in his diary; since $8T_k + 1 = (2k + 1)^2$, it amounts to writing $8m + 3$ as three odd squares.]@
+
+A different question asks which whole numbers are sums of a few triangular numbers, with repeats allowed and $T_0 = 0$ counted. Two are not always enough: the triangular numbers up to $5$ are $0$, $1$ and $3$, and no two of them add up to $5$. The numbers $8$, $14$ and $17$ fail in the same way. Checking a number by hand means subtracting each triangular number below it in turn and asking whether what is left is triangular too.`,
     before: ``,
     after: ``,
     link: '',
@@ -309,17 +317,17 @@ const faqQuestions = {
   obj1: {
     question: "How do you test whether a number is triangular?",
     answer: "Check whether $8m + 1$ is a perfect square. Solving $m = \\frac{n(n+1)}{2}$ for $n$ gives $n = \\frac{-1 + \\sqrt{1 + 8m}}{2}$, which lands on a positive integer exactly when $8m + 1$ is a square. Take $m = 15$: then $8(15) + 1 = 121 = 11^2$, so $15$ is triangular, and indeed $T_5 = 15$.",
-    sectionId: "3"
+    sectionId: "4"
   },
   obj2: {
     question: "Are triangular numbers odd or even?",
     answer: "They alternate in pairs rather than one by one. $T_n$ is odd when $n$ leaves remainder $1$ or $2$ on division by $4$, and even when the remainder is $0$ or $3$. The parity therefore runs odd, odd, even, even, odd, odd, even, even, and repeats with period four rather than switching every term.",
-    sectionId: "3"
+    sectionId: "4"
   },
   obj3: {
     question: "What do you get by adding up triangular numbers?",
     answer: "The tetrahedral numbers, given by $\\sum_{k=1}^{n} T_k = \\frac{n(n+1)(n+2)}{6}$. Where a triangular number counts dots in a flat triangle, stacking those triangles gives a tetrahedron, so the sum extends the figurate idea from two dimensions into three. The formula mirrors the triangular one with an extra factor.",
-    sectionId: "3"
+    sectionId: "4"
   }
 }
 

@@ -884,6 +884,9 @@ This perspective captures the core intuition and prepares the ground for the for
     definition:{
       title:`Formal Definition of Independence (In Words)`,
       content:`
+@academic[fact,aside:true,width:35%:Independent of itself only at 0 or 1
+Take $B = A$: knowing $A$ occurred makes $A$ certain, so $A$ is independent of itself only if it was already certain or impossible. In symbols, $P(A \\cap A) = P(A)$ must equal $P(A)^2$, which forces $P(A) = 0$ or $1$.]@
+
 Two events are considered independent when knowing that one has occurred does not alter the chance of the other. In other words, the likelihood of event A remains exactly the same whether event B happens or not, and vice versa.
 
 This definition focuses on the idea of unchanged information. If the occurrence of one event never forces us to revise our expectation about the other, the two events meet the formal standard of independence, even before introducing any symbolic expressions.
@@ -1028,6 +1031,11 @@ Many situations look independent at first glance but are not. Dependence appears
 A common failure pattern is **shared causes**. Two events may seem unrelated, but both are influenced by the same underlying factor. Observing one then provides information about the other.
 
 Another pattern is **structural restriction**. When events draw from a limited set of possibilities, the occurrence of one may remove options for the other, creating dependence.
+
+@academic[fact,aside:true,width:35%:One die, two independent events
+On one fair die, "even" has probability $\\frac{1}{2}$ and "at most 2" has $\\frac{1}{3}$; both happen only on a 2, with probability $\\frac{1}{6} = \\frac{1}{2} \\cdot \\frac{1}{3}$, so they are independent. Change the second event to "at most 3" and $\\frac{1}{6} \\neq \\frac{1}{4}$: now they are dependent.]@
+
+A shared mechanism is a reason to check, not a verdict. Two events about a single roll of one fair die, such as "the roll is even" and "the roll is at most 2", come from the same roll and even share an outcome, the 2. Whether learning one changes the chance of the other is still settled only by the numbers: the probability that both occur against the product of the two separate probabilities.
 
 Dependence also arises through **conditioning**. Events that are independent in isolation may become dependent once additional information is known, or dependent events may appear independent only within a restricted context.
 
@@ -1274,6 +1282,7 @@ export default function IndependencePage({
             sectionsContent.formula.content,
                   <div key={'unit-independentSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.independentSquare }} />,
             `Change either column's height and the blue area stops being P(A) · P(B).`,
+            `@academic[punchline:Independence is a numerical test: two events are independent exactly when the chance of both equals the product of their chances.]@`,
         ]
     },
     {
@@ -1312,6 +1321,7 @@ export default function IndependencePage({
         link:'',
         content:[
           sectionsContent.conditional.content,
+          `@academic[punchline:Independence belongs to a setting: a new condition can create it or destroy it.]@`,
         ]
     },
     {

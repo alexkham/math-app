@@ -3611,6 +3611,11 @@ The left null space measures the failure of surjectivity.
 
 If the left null space is nontrivial, there are directions in $\\mathbb{R}^m$ that the column space misses.
 
+@academic[fact,aside:true,width:35%:One vector proves there is no solution
+When $\\mathbf{y}^T \\mathbf{b} \\neq 0$, the combined equation reads $0 = \\mathbf{y}^T \\mathbf{b}$, which is false, so no $\\mathbf{x}$ solves $A\\mathbf{x} = \\mathbf{b}$. Every unsolvable system has such a $\\mathbf{y}$, for example the left-null-space part of $\\mathbf{b}$, so a claim of no solution can always be checked by multiplication alone.]@
+
+A vector $\\mathbf{y}$ in the left null space can also be read as a list of weights for the $m$ equations of $A\\mathbf{x} = \\mathbf{b}$. Multiplying the $i$-th equation by $y_i$ and adding all of them gives the combined equation $\\mathbf{y}^T A\\mathbf{x} = \\mathbf{y}^T \\mathbf{b}$. Because $\\mathbf{y}^T A = \\mathbf{0}^T$, every unknown cancels on the left, and only the right-hand side is left to decide whether the combined equation can hold.
+
 To find a basis, solve $A^T\\mathbf{y} = \\mathbf{0}$ by row reducing $A^T$. Alternatively, row reduce $[A \\mid I_m]$ — the identity block tracks the row operations, and its rows beside the zero rows of the reduced $A$ reveal the left null space.
 
 ## Continuing the Example
@@ -3647,7 +3652,9 @@ For a $2 \\times 5$ matrix of rank $2$, swapping the sizes gives $\\dim(\\text{N
 
 The first equation is the rank-nullity theorem. The second is its transpose analogue. Together they say that the four subspaces account for every dimension of both the domain and the codomain — nothing is missing and nothing is double-counted.
 
-For the running example ($3 \\times 4$ matrix, rank $2$): the row space and null space have dimensions $2$ and $2$, summing to $4 = n$. The column space and left null space have dimensions $2$ and $1$, summing to $3 = m$.`,
+For the running example ($3 \\times 4$ matrix, rank $2$): the row space and null space have dimensions $2$ and $2$, summing to $4 = n$. The column space and left null space have dimensions $2$ and $1$, summing to $3 = m$.
+
+@academic[punchline:Row space and null space split the domain, column space and left null space split the codomain, with nothing left over.]@`,
     before: ``,
     after: ``,
     link: ``,

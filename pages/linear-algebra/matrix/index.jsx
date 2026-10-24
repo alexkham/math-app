@@ -875,7 +875,12 @@ In full generality, an $m \\times n$ matrix looks like
 @academic[formula_callout:What a Matrix Is
 $$A = \\begin{pmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{21} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} \\end{pmatrix}$$]@
 
-The entries can be real numbers, complex numbers, or elements of any algebraic field. Throughout this site, entries are real unless explicitly stated otherwise.`,
+@academic[fact,aside:true,width:35%:A matrix is named after a womb
+J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw the array as the parent from which many determinants are born, one for every choice of an equal number of rows and columns.]@
+
+The entries can be real numbers, complex numbers, or elements of any algebraic field. Throughout this site, entries are real unless explicitly stated otherwise.
+
+The idea of the array is much older than its name. Rectangular tables of coefficients were used to solve systems of equations long before anyone treated the table itself as a mathematical object, and for a long time such an array mattered mainly as a source of determinants, numbers computed from a square block of its entries.`,
     before: ``,
     after: ``,
     link: ``,
@@ -984,7 +989,9 @@ which breaks down precisely when $ad - bc = 0$. For larger matrices, the inverse
 Swapping $b$ and $c$ instead of $a$ and $d$ turns $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$, with $ad - bc = 1$, into $\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$, and $A$ times that is $\\begin{pmatrix} 3 & -7 \\\\ 7 & -16 \\end{pmatrix}$, not $I$. The inverse is $\\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$.
 [Read more](!#pitfalls)]@
 
-Applying the formula to a particular matrix takes three steps: compute $ad - bc$, rearrange the four entries in the pattern the formula shows, and divide every entry by the determinant. Multiplying the result by $A$ should then give the identity matrix, so every inverse found this way can be verified in a few lines of arithmetic.`,
+Applying the formula to a particular matrix takes three steps: compute $ad - bc$, rearrange the four entries in the pattern the formula shows, and divide every entry by the determinant. Multiplying the result by $A$ should then give the identity matrix, so every inverse found this way can be verified in a few lines of arithmetic.
+
+@academic[punchline:A square matrix can be undone exactly when its determinant is nonzero, and multiplying back to $I$ confirms any inverse.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1009,7 +1016,9 @@ $$Ax = \\mathbf{b}$$]@
 
 where $A$ is the $m \\times n$ coefficient matrix, $\\mathbf{x}$ is the $n \\times 1$ vector of unknowns, and $\\mathbf{b}$ is the $m \\times 1$ vector of right-hand sides. The augmented matrix $[A \\mid \\mathbf{b}]$ appends $\\mathbf{b}$ as an extra column, creating the compact representation used in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination).
 
-Whether the system has no solution, exactly one solution, or infinitely many solutions depends entirely on how the rank of $A$ compares with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$ and with the number of unknowns $n$. When $A$ is square and invertible, the unique solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires the [rank](!/linear-algebra/matrix/rank) and the structure of the null space.`,
+Whether the system has no solution, exactly one solution, or infinitely many solutions depends entirely on how the rank of $A$ compares with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$ and with the number of unknowns $n$. When $A$ is square and invertible, the unique solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires the [rank](!/linear-algebra/matrix/rank) and the structure of the null space.
+
+@academic[punchline:A whole linear system fits in the single equation $A\\mathbf{x} = \\mathbf{b}$, and ranks decide how many solutions it has.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1019,6 +1028,9 @@ Whether the system has no solution, exactly one solution, or infinitely many sol
     content: `Every $m \\times n$ matrix $A$ defines a function from $\\mathbb{R}^n$ to $\\mathbb{R}^m$ by the rule $\\mathbf{x} \\mapsto A\\mathbf{x}$. This function is a [linear transformation](!/linear-algebra/transformations): it preserves addition ($A(\\mathbf{x} + \\mathbf{y}) = A\\mathbf{x} + A\\mathbf{y}$) and scalar multiplication ($A(c\\mathbf{x}) = cA\\mathbf{x}$).
 
 The columns of $A$ reveal exactly what the transformation does to the standard basis. The first column $\\mathbf{a}_1$ is the image of $\\mathbf{e}_1$, the second column $\\mathbf{a}_2$ is the image of $\\mathbf{e}_2$, and so on. Once the images of the basis vectors are known, the image of any vector follows by linearity.
+
+@academic[fact,aside:true,width:35%:Defined to chain two maps
+Arthur Cayley wrote down the product rule in 1858 so that the product of two matrices is the matrix of two linear substitutions performed one after the other. Row times column is what that composition produces, and two motions done in reverse order generally differ, so $AB \\neq BA$.]@
 
 When $A$ is square and invertible, the transformation is bijective — every output has exactly one input, and the inverse transformation is given by $A^{-1}$. When $A$ is singular, the transformation collapses at least one dimension, mapping $\\mathbb{R}^n$ onto a proper subspace of $\\mathbb{R}^m$. The rank of $A$ is the dimension of this image, and the null space captures everything that gets sent to zero.
 

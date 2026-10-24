@@ -2573,7 +2573,12 @@ $$\\text{column rank of } A = \\text{row rank of } A$$]@
 
 This common value is called the rank of $A$, written $\\text{rank}(A)$ or $\\text{rk}(A)$.
 
-The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows live in $\\mathbb{R}^n$ — two different spaces, potentially of different dimensions. The proof goes through row reduction: elementary row operations do not change the row space, and in [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form), the number of nonzero rows (row rank) equals the number of pivot columns (column rank). Since row operations preserve both counts, the equality holds for the original matrix.`,
+@academic[fact,aside:true,width:35%:A million entries, rank 2
+The $1000 \\times 1000$ matrix holding $1, 2, \\ldots, 1{,}000{,}000$ in reading order has rank $2$. Each row is the first row plus a multiple of the all-ones row, and each column is the first column plus a multiple of the all-ones column.]@
+
+The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows live in $\\mathbb{R}^n$ — two different spaces, potentially of different dimensions. The proof goes through row reduction: elementary row operations do not change the row space, and in [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form), the number of nonzero rows (row rank) equals the number of pivot columns (column rank). Since row operations preserve both counts, the equality holds for the original matrix.
+
+@academic[punchline:Rows and columns live in different spaces, yet they always hold the same number of independent directions.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2624,7 +2629,9 @@ Full column rank means $\\text{rank}(A) = n$ — all $n$ columns are independent
 
 Full row rank means $\\text{rank}(A) = m$ — all $m$ rows are independent. When $A$ has full row rank, the system $Ax = \\mathbf{b}$ has at least one solution for every $\\mathbf{b}$, because the column space is all of $\\mathbb{R}^m$.
 
-When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simultaneously: the system has exactly one solution for every right-hand side, and $A$ is [invertible](!/linear-algebra/matrix/inverse).`,
+When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simultaneously: the system has exactly one solution for every right-hand side, and $A$ is [invertible](!/linear-algebra/matrix/inverse).
+
+@academic[punchline:Full column rank allows at most one solution, full row rank at least one; only a square matrix can have both.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2736,7 +2743,12 @@ The rank of $A^T A$ equals the rank of $A$:
 @academic[formula_callout:gram_rank_identity|Gram Rank Identity|$$\\text{rank}(A^T A) = \\text{rank}(A)$$]@
 @academic[formulas_link:/linear-algebra/formulas#gram_rank_identity]@
 
-This follows from the fact that the null spaces of $A$ and $A^T A$ are identical: $A\\mathbf{x} = \\mathbf{0}$ implies $A^T A \\mathbf{x} = \\mathbf{0}$, and conversely $A^T A \\mathbf{x} = \\mathbf{0}$ implies $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2 = 0$, so $A\\mathbf{x} = \\mathbf{0}$. By the rank-nullity theorem, equal nullities with the same $n$ give equal ranks.`,
+@academic[fact,aside:true,width:35%:Complex entries break this identity
+For $A = \\begin{pmatrix} 1 \\\\ i \\end{pmatrix}$, $A^T A = 1 + i^2 = 0$, so the rank drops from $1$ to $0$. The step $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2$ needs real entries; complex matrices use the conjugate transpose instead, with $\\text{rank}(A^* A) = \\text{rank}(A)$.]@
+
+This follows from the fact that the null spaces of $A$ and $A^T A$ are identical: $A\\mathbf{x} = \\mathbf{0}$ implies $A^T A \\mathbf{x} = \\mathbf{0}$, and conversely $A^T A \\mathbf{x} = \\mathbf{0}$ implies $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2 = 0$, so $A\\mathbf{x} = \\mathbf{0}$. By the rank-nullity theorem, equal nullities with the same $n$ give equal ranks.
+
+The identity is what makes the [least squares](!/linear-algebra/orthogonality/least-squares) normal equations $A^T A \\mathbf{x} = A^T \\mathbf{b}$ dependable. When the columns of $A$ are independent, $A^T A$ is an invertible $n \\times n$ matrix, so the best-fit $\\mathbf{x}$ exists and is unique, even when the original system $A\\mathbf{x} = \\mathbf{b}$ has no solution at all.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3046,6 +3058,7 @@ export default function MatrixRankPage({rankCases, seoData, sectionsContent, int
           >
             <CaseSplit data={rankCases} variant="poster" proseStyle="cards" theme={figureTheme} />
           </DiagramFrameV2>,
+          `@academic[punchline:Rank counts the independent directions a matrix actually uses, not the rows or columns it happens to have.]@`,
         ]
     },
     {

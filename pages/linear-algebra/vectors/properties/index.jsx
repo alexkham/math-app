@@ -1112,6 +1112,7 @@ The zero vector has no direction. Its components are all zero, its magnitude is 
 
 In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, dimension has a direct geometric meaning — it is the number of independent spatial directions available. Two-component vectors live in a plane; three-component vectors live in the full space we inhabit visually. For $n > 3$, the geometric picture breaks down, but the algebraic structure does not. Operations, norms, and dot products all work identically in $\\mathbb{R}^{100}$ as they do in $\\mathbb{R}^3$ — only the number of terms in each sum changes.
 
+
 Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}^n$ has exactly $n$ components, and all operations within $\\mathbb{R}^n$ produce vectors with $n$ components. A vector cannot gain or lose components through addition, scaling, or any [linear combination](!/linear-algebra/vectors/linear-combinations). This rigidity is what keeps the algebra consistent.`,
     before: ``,
     after: ``,
@@ -1205,6 +1206,11 @@ $$\\mathbf{a} \\parallel \\mathbf{b} \\iff \\mathbf{a} = c\\mathbf{b} \\text{ fo
 When $c > 0$, the two vectors point in the same direction — they are parallel in the strict sense. When $c < 0$, they point in opposite directions — anti-parallel. Both cases fall under the umbrella of parallelism because the vectors lie along the same line through the origin, differing only in scale and possibly in sign.
 
 Parallelism can be detected without computing the scalar $c$ explicitly. If the components of $\\mathbf{a}$ and $\\mathbf{b}$ satisfy $\\frac{a_1}{b_1} = \\frac{a_2}{b_2} = \\cdots = \\frac{a_n}{b_n}$ (with appropriate handling when a component of $\\mathbf{b}$ is zero), the vectors are parallel. Alternatively, in $\\mathbb{R}^3$, the [cross product](!/linear-algebra/vectors/cross-product) provides a definitive test: $\\mathbf{a} \\times \\mathbf{b} = \\mathbf{0}$ if and only if $\\mathbf{a}$ and $\\mathbf{b}$ are parallel.
+
+@academic[fact,aside:true,width:35%:Parallel to parallel, yet perpendicular
+$(1, 0)$ and $(0, 1)$ are each parallel to $\\mathbf{0}$ under the convention below, yet they meet at a right angle. Passing parallelism along a chain works only when the middle vector is nonzero.]@
+
+Among nonzero vectors, parallelism passes along a chain. If $\\mathbf{a} = c\\mathbf{b}$ and $\\mathbf{b} = d\\mathbf{w}$, then $\\mathbf{a} = (cd)\\mathbf{w}$, so a vector parallel to a vector parallel to $\\mathbf{w}$ is itself parallel to $\\mathbf{w}$. This is what lets a whole family of vectors be described as lying along one line through the origin.
 
 By convention, the zero vector is considered parallel to every vector, since $\\mathbf{0} = 0\\mathbf{b}$ for any $\\mathbf{b}$. This convention avoids the need to exclude $\\mathbf{0}$ as a special case in statements about parallelism.
 
@@ -1518,6 +1524,7 @@ export default function VectorPropertiesPage({parallelCases, seoData, sectionsCo
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `@academic[punchline:Direction is what remains of a vector once its length is divided out, so the zero vector has none.]@`,
         ]
     },
     {
@@ -1584,6 +1591,7 @@ export default function VectorPropertiesPage({parallelCases, seoData, sectionsCo
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          `@academic[punchline:Orthogonality turns a right angle into one equation, a dot product of zero, that works in every dimension.]@`,
         ]
     },
     {

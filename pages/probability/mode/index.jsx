@@ -529,6 +529,9 @@ Examples: [Normal](!/probability/distributions/continuous/normal), [Binomial](!/
 
 **Bimodal**: Two distinct peaks with equal or nearly equal height.
 
+@academic[fact,aside:true,width:35%:Adult heights have only one peak
+Men's and women's heights pooled together give a single hump, not two. An equal mix of two normal curves with spread $\\sigma$ dips in the middle only when the means are more than $2\\sigma$ apart, and the gap between the average heights of men and women is smaller than that.]@
+
 This often indicates a mixture of two underlying populations or processes. Data from two separate groups (morning commuters vs evening commuters, weekday traffic vs weekend traffic) can produce bimodal patterns.
 
 **Multimodal**: Three or more peaks.
@@ -560,9 +563,9 @@ Combining two or more distributions creates multimodal patterns naturally. A mix
 @academic[formula_callout:Multiple Modes (Modality)
 $$f(x) = w_1 f_1(x) + w_2 f_2(x)$$]@
 
-produces peaks at the modes of the component distributions, weighted by $w_1$ and $w_2$.
+produces peaks at the modes of the component distributions, weighted by $w_1$ and $w_2$, provided the components are far enough apart.
 
-This models scenarios where data comes from multiple sources: heights of adults (male + female populations), customer arrival times (rush hour + off-peak periods), or test scores (prepared + unprepared students).
+This models scenarios where data comes from multiple sources: times between eruptions of the Old Faithful geyser (short + long waits), customer arrival times (rush hour + off-peak periods), or test scores (prepared + unprepared students).
 
 ## Practical Interpretation
 
@@ -883,6 +886,8 @@ If the probability function has several local maxima, determine whether you want
 Multimodal distributions require identifying all peaks, not just the tallest.
 
 To find the mode of your own data set, use the [statistics calculator](!/calculators/statistics-calculator).
+
+@academic[punchline:A mode search always looks for the highest point, bar or curve, and checks the edges of the support too.]@
   `,
   before: ``,
   after: ``,

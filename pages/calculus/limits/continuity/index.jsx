@@ -622,7 +622,12 @@ The floor function $\\lfloor x \\rfloor$ jumps at every integer. At $x = 2$:
 @academic[formula_callout:Jump Discontinuity
 $$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = 1 \\qquad \\lim_{x \\to 2^+} \\lfloor x \\rfloor = 2$$]@
 
+@academic[fact,aside:true,width:35%:Increasing functions can only jump
+A function that never decreases has both one-sided limits at every point, so each of its discontinuities is a jump. It can jump at every fraction, but never at uncountably many points: each jump skips an interval of heights, the skipped intervals never overlap, and each contains a fraction of its own.]@
+
 No single value of $f(2)$ can equal both one-sided limits. The discontinuity cannot be removed—the gap is intrinsic to the function's definition.
+
+The floor function never decreases: as $x$ moves to the right, $\\lfloor x \\rfloor$ either stays where it is or steps up. Many step functions met in practice behave the same way, such as a parking fee charged for each started hour, or the number of people who have entered a building by time $t$. For any function of this kind, the values just to the left of a point can never lie above the values just to its right.
 `,
     before: ``,
     after: ``,
@@ -1189,6 +1194,7 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
           sectionsContent.obj2.content,
                   <div key={'unit-three'} dangerouslySetInnerHTML={{ __html: demoUnits.three }} />,
           `Each way the three conditions can fail has a name, and the next sections take them in turn.`,
+          `@academic[punchline:Continuity at a point is one equation, limit equals value, and it fails when either side is missing or the two disagree.]@`,
         ]
     },
     {
@@ -1304,6 +1310,11 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
           sectionsContent.obj11.content,
           <div key={'unit-ivtLevel'} dangerouslySetInnerHTML={{ __html: demoUnits.ivtLevel }} />,
           `Without continuity the guarantee fails: a jump can skip a level entirely.`,
+          `@academic[fact,aside:true,width:35%:Two opposite points, one temperature
+At any moment some pair of opposite points on the equator has exactly the same temperature. Let $g$ be the temperature at a point minus the temperature at the point opposite; going halfway round turns $g$ into $-g$, so the continuous $g$ cannot keep one sign and is $0$ somewhere.]@
+
+The theorem is often applied to a function built for the purpose rather than to the one in the question. To show that two continuous quantities $p$ and $q$ are equal somewhere on $[a, b]$, apply it to their difference $g = p - q$, which is continuous too. If $g$ is negative at one end and positive at the other, then $g(c) = 0$ for some $c$, and so $p(c) = q(c)$. Nothing more about $p$ and $q$ needs to be known than their continuity and the two signs.`,
+          `@academic[punchline:A continuous function cannot skip a value on its way, so solutions exist even when no one can say where.]@`,
         ]
     },
     {
@@ -1314,6 +1325,7 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
           sectionsContent.obj12.content,
           <div key={'unit-bisection'} dangerouslySetInnerHTML={{ __html: demoUnits.bisection }} />,
           `Ten halvings shrink [1, 2] to an interval shorter than 0.001.`,
+          `@academic[punchline:A sign change in a continuous function proves a root exists, and repeated halving pins it down to any accuracy.]@`,
         ]
     },
     {

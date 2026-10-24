@@ -1176,6 +1176,9 @@ $$\\operatorname{Cov}(X, Y) = E\\!\\left[(X - \\mu_X)(Y - \\mu_Y)\\right]$$
 The value of covariance indicates the direction of the relationship between two 
 [random variables](!/probability/random-variables), not its strength.
 
+@academic[fact,aside:true,width:35%:Positive, positive, yet negative
+Covariance signs do not chain. With independent $A$, $B$, $C$ of variance $1$, let $X = A + B$, $Y = B + C$ and $Z = C - A$: each pair shares a different piece, so $\\operatorname{Cov}(X, Y) = 1$ and $\\operatorname{Cov}(Y, Z) = 1$, yet $\\operatorname{Cov}(X, Z) = -1$.]@
+
 A positive covariance means that higher-than-average values of one variable tend to
 occur with higher-than-average values of the other.  
 A negative covariance means that higher-than-average values of one variable tend to
@@ -1214,6 +1217,11 @@ individual behavior. It captures information that [variance](!/probability/varia
 This concept plays a central role in many areas of probability and statistics, including
 the study of joint distributions, linear relationships, and multivariate models.
 It is also a key component in formulas involving sums of [random variables](!/probability/random-variables).
+
+@academic[fact,aside:true,width:35%:Three-way opposition stops at $-\\frac{1}{2}$
+Two variables can have correlation $-1$, but if every pair among three variables has the same correlation $\\rho$, then $\\rho \\geq -\\frac{1}{2}$. The three standardized variables add up to a sum with variance $3 + 6\\rho$, which cannot be negative.]@
+
+Sums show this most directly. The variance of $X + Y$ is $\\operatorname{Var}(X) + \\operatorname{Var}(Y) + 2\\operatorname{Cov}(X, Y)$, and with three variables each of the three pairs adds its own covariance, counted twice. Positive covariances make a sum spread more than its parts suggest; negative covariances let deviations cancel, so the sum spreads less.
 
 Understanding covariance is essential before introducing correlation, covariance
 matrices, and more advanced multivariate concepts.
@@ -1319,6 +1327,8 @@ Using $\\operatorname{Var}(X)\\operatorname{Var}(Y)$ in the denominator: with $\
 The denominator is built so that the units cancel. The covariance in the numerator carries the unit of $X$ times the unit of $Y$, and the product in the denominator carries exactly the same pair of units, so the ratio is a pure number.
 
 That is what makes correlation comparable across pairs and unchanged by a change of scale: recording $X$ in centimetres instead of metres multiplies the numerator and the denominator by the same factor $100$. The bounds then give the number a fixed reading, with values near $1$ or $-1$ for an almost exact linear relationship and values near $0$ for little linear tendency.
+
+@academic[punchline:Correlation is covariance with the units divided out: one scale, from $-1$ to $1$, for every pair of variables.]@
 `,
       before:``,
       after:``,
@@ -1596,6 +1606,7 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
           sectionsContent.obj2.content,
           <div key={'unit-covSign'} dangerouslySetInnerHTML={{ __html: demoUnits.covSign }} />,
           `If the amber points dominated instead, the covariance would be negative.`,
+          `@academic[punchline:Covariance is positive when two deviations tend to share a sign and negative when they tend to oppose.]@`,
         ]
     },
     {

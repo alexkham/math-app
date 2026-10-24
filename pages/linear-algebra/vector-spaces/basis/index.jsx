@@ -1189,6 +1189,9 @@ $$\\mathbf{e}_i = (0, \\ldots, 0, \\underset{i\\text{-th}}{1}, 0, \\ldots, 0), \
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[fact,aside:true,width:35%:JPEG stores coordinates, not pixels
+An $8 \\times 8$ block of a grayscale photo is a vector in $\\mathbb{R}^{64}$, and its pixel values are its standard coordinates. JPEG rewrites it in a basis of $64$ cosine patterns, where most coordinates are close to zero and can be rounded away.]@
+
 Independence is immediate — each vector has a $1$ in a position where all others have $0$, so no vector is a combination of the rest. Spanning follows from the fact that any vector $(v_1, \\dots, v_n) = v_1\\mathbf{e}_1 + \\cdots + v_n\\mathbf{e}_n$.
 
 The standard basis has a special property: coordinates relative to it are just the components of the vector. For any other basis, finding coordinates requires solving a system. This is why the standard basis is the default — but it is one choice among infinitely many, and other bases are often better suited to particular problems.`,
@@ -1199,6 +1202,9 @@ The standard basis has a special property: coordinates relative to it are just t
   obj6: {
     title: `Other Standard Bases`,
     content: `Every vector space encountered in practice comes with a natural default basis.
+
+@academic[fact,aside:true,width:35%:Fonts are drawn in another basis
+A cubic Bézier curve, the shape behind many font outlines and drawing tools, is a polynomial written in the basis $(1 - t)^3$, $3t(1 - t)^2$, $3t^2(1 - t)$, $t^3$ of $\\mathcal{P}_3$ instead of $1, t, t^2, t^3$. Its coordinates in that basis are the control points a designer drags.]@
 
 The polynomial space $\\mathcal{P}_n$ of polynomials with degree at most $n$ has the monomial basis $\\{1, x, x^2, \\dots, x^n\\}$, consisting of $n + 1$ elements. Every polynomial $a_0 + a_1 x + \\cdots + a_n x^n$ is a linear combination of these monomials, and the coefficients are unique (a polynomial is determined by its coefficients). The coordinates of a polynomial relative to the monomial basis are its coefficients.
 
@@ -1221,7 +1227,9 @@ For the row space: the nonzero rows of the echelon form are a basis. Unlike the 
 
 @academic[example:Worked Example
 
-For $A = \\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 2 & 4 & 1 & 3 \\\\ 3 & 6 & 1 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 0 & 0 & 1 & 1 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$. Pivots are in columns $1$ and $3$. The column space basis is $\\{(1, 2, 3), (0, 1, 1)\\}$ — the first and third columns of the original $A$. The row space basis is $\\{(1, 2, 0, 1), (0, 0, 1, 1)\\}$. The null space has two free variables (columns $2$ and $4$), and solving yields a two-dimensional null space.]@`,
+For $A = \\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 2 & 4 & 1 & 3 \\\\ 3 & 6 & 1 & 4 \\end{pmatrix}$, row reduction gives $\\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 0 & 0 & 1 & 1 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$. Pivots are in columns $1$ and $3$. The column space basis is $\\{(1, 2, 3), (0, 1, 1)\\}$ — the first and third columns of the original $A$. The row space basis is $\\{(1, 2, 0, 1), (0, 0, 1, 1)\\}$. The null space has two free variables (columns $2$ and $4$), and solving yields a two-dimensional null space.]@
+
+@academic[punchline:One row reduction gives all three bases: original pivot columns, nonzero echelon rows, and one null-space vector per free variable.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1304,7 +1312,7 @@ This is why dimension occupies such a central place in the theory.`,
 
 Independence is tested by checking whether the homogeneous system $A\\mathbf{c} = \\mathbf{0}$ has only the trivial solution, where $A$ is the matrix whose columns are the vectors. For $n$ vectors in $\\mathbb{R}^n$, this reduces to checking whether the [determinant](!/linear-algebra/determinants) is nonzero. In $\\mathbb{R}^n$, at most $n$ vectors can be independent — any set of $n + 1$ or more is automatically dependent.
 
-Span is tested by checking whether $A\\mathbf{c} = \\mathbf{b}$ is consistent for every $\\mathbf{b}$, or for a specific $\\mathbf{b}$ if the question is about membership. The span of a set is always a subspace, and its dimension equals the number of independent vectors in the set.
+Span is tested by checking whether $A\\mathbf{c} = \\mathbf{b}$ is consistent for every $\\mathbf{b}$, or for a specific $\\mathbf{b}$ if the question is about membership. The span of a set is always a subspace, and its dimension equals the largest number of independent vectors in the set.
 
 @academic[rule_theorem_plain:A set of exactly $n$ vectors in an $n$-dimensional space is a basis if and only if it is independent (spanning follows automatically), and if and only if it spans the space (independence follows automatically).]@
 

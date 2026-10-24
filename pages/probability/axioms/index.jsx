@@ -1000,6 +1000,9 @@ export async function getStaticProps(){
       content:`
 Axioms are the foundation of any mathematical theory. They are the basic rules, the cornerstones, the starting assumptions that we accept without proof. Every branch of mathematics — geometry, algebra, calculus, and probability — is built on axioms. They are the bedrock statements from which everything else follows through logical reasoning.
 
+@academic[fact,aside:true,width:35%:Axioms came 2,200 years after Euclid
+Euclid set out axioms for geometry around 300 BC, but probability had none until Andrei Kolmogorov's book of 1933, although Hilbert had asked for them in 1900. The missing tool was measure theory, built around 1900: Kolmogorov's axioms treat probability as a measure, like length or area.]@
+
 In geometry, we start with axioms like "a straight line can be drawn between any two points." In algebra, we have axioms about how addition and multiplication behave. These are not proven — they are assumed to be true, and from them we derive theorems, corollaries, and all the rules that make the field work. Axioms are milestones that anchor the entire structure. They provide the foundation from which we build, through logical inference, all the knowledge in that field. Without axioms, there would be no starting point, no common ground, and no way to ensure that our reasoning leads to consistent conclusions.
 
 Axioms in mathematics are the foundational cornerstones upon which entire theories are built. They:
@@ -1053,7 +1056,7 @@ Probabilities cannot be negative. Every event is assigned a value that is zero o
 The event that represents "something happens" — the entire sample space — is assigned probability one. This fixes the scale of probability.
 
 **Additivity for Disjoint Events**  
-When two events cannot occur together, the probability that one or the other occurs is the sum of their probabilities. Disjoint situations contribute independently to the total.
+When two events cannot occur together, the probability that one or the other occurs is the sum of their probabilities. Disjoint situations contribute separately to the total.
 
 Together, these axioms define what it means for a probability assignment to be valid. All further probability rules are consequences of these basic constraints. The table below collects them in compact form — the formal statement, in standard [probability notation](!/math-symbols/probability), and the meaning behind each.
 `,
@@ -1150,7 +1153,7 @@ axiom3:{
   
       title:`Axiom 3 — Additivity for Disjoint Events`,
       content:`
-When two events cannot occur together, their probabilities should contribute independently to the total chance that one of them occurs. Disjoint situations do not interfere with one another, so there is no overlap to account for.
+When two events cannot occur together, their probabilities should contribute separately to the total chance that one of them occurs. Disjoint situations do not interfere with one another, so there is no overlap to account for.
 
 This axiom states that if events share no common outcomes, the probability that one or the other occurs is the sum of their probabilities. It formalizes how probability combines across mutually exclusive cases.
 
@@ -1166,6 +1169,11 @@ $$P\\!\\left(\\bigcup_{i=1}^{\\infty} A_i\\right) = \\sum_{i=1}^{\\infty} P(A_i)
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
+
+@academic[fact,aside:true,width:35%:Some sets cannot have a probability
+For a point picked uniformly on a circle, Giuseppe Vitali in 1905 cut the circle into countably many rotated copies of one set. The copies must get equal probabilities, and countably many equal values add up to $0$ or to infinity, never to $1$, so that set can have no probability at all.]@
+
+The countable form is what lets probability handle infinite sample spaces. For a point picked uniformly on a circle of circumference $1$, each arc gets probability equal to its length, and Axiom 3 must hold even when an event is cut into infinitely many disjoint pieces. Turning the circle moves every arc to an arc of the same length, so a uniform model gives a set and each rotated copy of it the same probability.
 
 Additivity captures the idea that probability accumulates across exclusive alternatives. It is the mechanism that allows probability to be built up from separate cases into a complete description of uncertainty.
 `,
@@ -1522,6 +1530,7 @@ export default function AxiomsPage({
         content:[
           sectionsContent.consequences.content,
           <div key={'consequences-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: consequencesTable}}/>,
+          `@academic[punchline:The complement rule, monotonicity and the union rule are not extra assumptions: the three axioms already force them.]@`,
         ]
     },
     {
@@ -1531,6 +1540,7 @@ export default function AxiomsPage({
         content:[
           sectionsContent.assume.content,
           <div key={'assume-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: assumeTable}}/>,
+          `@academic[punchline:The axioms decide which assignments are allowed, not which one is right; fairness and independence are modeling choices.]@`,
         ]
     },
     {

@@ -398,6 +398,13 @@ $$\\mathrm{Var}(X) = 100 \\times 0.5 \\times 0.5 = 25$$]@
 $$\\sigma = \\sqrt{25} = 5$$]@
 
 The variance of 25 and standard deviation of 5 indicate that while we expect 50 heads on average, typical outcomes will deviate by about 5 heads in either direction.
+
+@academic[fact,aside:true,width:35%:Bernoulli asked for 25,550 draws
+In 1713 Jacob Bernoulli showed that 25,550 draws from an urn with 3 white balls in every 5 make it 1000 to 1 that the white share lands within $\\frac{1}{50}$ of $\\frac{3}{5}$. His bound was loose: the binomial variance shows that about 6,500 draws already do it.]@
+
+Dividing the count by $n$ turns it into the proportion of successes, $\\frac{X}{n}$, whose standard deviation is $\\sqrt{\\frac{p(1-p)}{n}}$. This shrinks as the trials pile up: the count of heads strays further from $np$ in absolute terms, while the share of heads closes in on $p$. The same formula tells how many trials a given precision needs, since halving the spread of the proportion takes four times as many trials.
+
+@academic[punchline:The count spreads only like $\\sqrt{n}$, so the proportion of successes tightens around $p$ as trials accumulate.]@
   `,
   before: ``,
   after: ``,
@@ -410,7 +417,7 @@ obj8: {
 
 The [mode](!/probability/mode) is the value of $k$ (number of successes) with the highest probability—the peak of the [PMF](!/probability/probability-function/pmf).
 
-For the [binomial distribution](!/probability/distributions/discrete/binomial), the mode depends on the product $np$:
+For the [binomial distribution](!/probability/distributions/discrete/binomial), the mode depends on $(n+1)p$:
 
 **If** $(n+1)p$  **is an integer:**
 The distribution has two modes: $(n+1)p - 1$ and $(n+1)p$
@@ -441,6 +448,11 @@ $(n+1)p = 10 \\times 0.5 = 5$ (integer)
 
 Modes = 4 and 5 (both equally likely)]@
 
+@academic[fact,aside:true,width:35%:Exactly half heads gets rarer
+100 fair flips give exactly 50 heads only about 8% of the time, and 10,000 flips give exactly 5,000 heads less than 1% of the time. The spread grows like $\\sqrt{n}$, so the tallest bar shrinks like $\\frac{1}{\\sqrt{n}}$.]@
+
+For a fair coin and an even number of flips $n$, the mode is $\\frac{n}{2}$: exactly half heads is the single most likely count. As $n$ grows, the mode stays in the middle of the PMF, but the bars spread over the $n + 1$ possible counts from $0$ to $n$, while the total height of all the bars is always $1$. What changes is how tall the tallest bar can remain.
+
 ### Median
 
 The [median](!/probability/median) is the value $m$ such that $P(X \\leq m) \\geq 0.5$ and $P(X \\geq m) \\geq 0.5$.
@@ -452,7 +464,7 @@ $$\\sum_{k=0}^{m} \\binom{n}{k} p^k (1-p)^{n-k} \\geq 0.5$$]@
 
 **Properties of the median:**
 • The median is always within one unit of the mean $np$
-• For symmetric cases ($p = 0.5$), median = mode = mean
+• For symmetric cases ($p = 0.5$) with even $n$, median = mode = mean
 • For skewed distributions, median lies between mean and mode
 
 @academic[example:Example
@@ -904,6 +916,7 @@ export default function BinomialDistributionPage({
           sectionsContent.links.decide,
           sectionsContent.obj1.example,
           sectionsContent.links.example,
+          `@academic[punchline:The binomial needs all four: a fixed number of trials, two outcomes, a constant $p$ and independence.]@`,
 
         ]
     },
@@ -952,6 +965,7 @@ export default function BinomialDistributionPage({
                   </div>,
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `Summing these bars from the left gives the CDF.`,
+          `@academic[punchline:Every binomial probability is the number of orders times the chance of one order.]@`,
         ]
     },
     {

@@ -332,7 +332,12 @@ where $C$ is an arbitrary constant. This follows from a basic fact: if two funct
 
 The "$+ C$" in indefinite integrals is not optional notation—it represents the complete answer. Omitting it gives only one member of the family when infinitely many exist.
 
+@academic[fact,aside:true,width:35%:The power rule's limit is $\\ln x$
+As $n$ approaches $-1$, the antiderivative $\\frac{x^{n+1} - 1}{n+1}$ approaches $\\ln x$ for every $x > 0$, the very function the power rule cannot give at $n = -1$. The constant does the work: at $n = -0.999$ and $x = 2$ it gives $0.6934$, against $\\ln 2 \\approx 0.6931$, while $\\frac{x^{n+1}}{n+1}$ alone blows up.]@
+
 Initial conditions pin down $C$. If you know that $F(0) = 3$, for instance, you can solve for the specific constant that satisfies this requirement.
+
+One condition can also fix $C$ for a whole family of integrands at once. For $f(x) = x^n$ with $n \\neq -1$, the condition $F(1) = 0$ gives $C = -\\frac{1}{n+1}$ and the antiderivative $\\frac{x^{n+1} - 1}{n+1}$. At $n = -1$ the power rule itself breaks down, since its denominator $n + 1$ is $0$.
 `,
     before: ``,
     after: ``,
@@ -479,7 +484,14 @@ $$\\int \\sec^2 x\\, dx = \\tan x + C$$
 
 Verify: $(\\tan x)' = \\sec^2 x$. Correct.
 
+@academic[fact,aside:true,width:35%:An antiderivative no formula can write
+$e^{-x^2}$ is continuous, so it has antiderivatives, such as $\\int_0^x e^{-t^2}\\, dt$. Yet in the 1830s Joseph Liouville proved that none of them is a finite formula in powers, roots, exponentials, logarithms and trigonometric functions; the same holds for $\\frac{\\sin x}{x}$.]@
+
 This check catches sign errors, missing constants, and algebraic mistakes. It works because differentiation is mechanical—once you have a candidate antiderivative, verification is straightforward.
+
+The two directions are not equally easy. Differentiating a formula built from powers, roots, exponentials, logarithms and trigonometric functions always succeeds, and the result is again such a formula. Going backwards there is no rule that always works, so a candidate antiderivative is often found by trying, and the derivative check is what confirms it.
+
+@academic[punchline:Finding an antiderivative may take ingenuity, but checking one always takes a single differentiation.]@
 `,
     before: ``,
     after: ``,
@@ -720,7 +732,7 @@ const schemas = {
   const demoUnits = {
     anti: demoUnitFrame({
       svg: functionFTCDiagrams.quadratic,
-      caption: 'F(x) = &#8747;&#8320;&#710;x t&#178; dt = x&#179;/3 is an antiderivative of x&#178;',
+      caption: 'F(x) = &#8747;&#8320;&#739; t&#178; dt = x&#179;/3 is an antiderivative of x&#178;',
       text: 'The lower curve is f(t) = t&#178; and the upper one is the area accumulated under it from 0; the slope of the upper curve at any x equals the height of the lower one there, which is what F&#8242; = f means. Start the accumulation from a different a and the upper curve shifts by a constant: the + C of the indefinite integral. Change the starting point and watch the whole antiderivative slide on the',
       href: '/calculus/visual-tools/fundamental-theorem',
       linkText: 'fundamental theorem of calculus visualizer',

@@ -1680,7 +1680,10 @@ A set satisfying all ten is a vector space. A set violating even one is not.`,
   },
   obj3: {
     title: `The Field of Scalars`,
-    content: `The scalars in a vector space come from a field — a set where addition, subtraction, multiplication, and division (by nonzero elements) all work and satisfy the standard arithmetic laws. The real numbers $\\mathbb{R}$ and the [complex numbers](!/complex-numbers) $\\mathbb{C}$ are the two fields that appear most often in linear algebra.
+    content: `@academic[fact,aside:true,width:35%:Sets as vectors, where $1 + 1 = 0$
+Over the field $\\{0, 1\\}$, in which $1 + 1 = 0$, the subsets of a set form a vector space: $A + B$ keeps the elements lying in exactly one of the two. Every vector is its own negative, since $A + A = \\varnothing$, which over $\\mathbb{R}$ only the zero vector can do.]@
+
+The scalars in a vector space come from a field — a set where addition, subtraction, multiplication, and division (by nonzero elements) all work and satisfy the standard arithmetic laws. The real numbers $\\mathbb{R}$ and the [complex numbers](!/complex-numbers) $\\mathbb{C}$ are the two fields that appear most often in linear algebra.
 
 A vector space over $\\mathbb{R}$ is called a real vector space. A vector space over $\\mathbb{C}$ is called a complex vector space. The choice of field determines what scalars are available for multiplication, and this affects the structure of the space. For instance, every real [symmetric](!/linear-algebra/matrix/types) matrix has real [eigenvalues](!/linear-algebra/eigen), but a general real matrix may have complex eigenvalues — a phenomenon visible only when the scalar field extends from $\\mathbb{R}$ to $\\mathbb{C}$.
 
@@ -1771,7 +1774,7 @@ Testing scalar closure with $c = 2$ or $c = \\frac{1}{2}$ keeps $x = 3$ positive
 
 Scaling on this set is the ordinary product $cx$ of a scalar and a positive number. The scalars come from the field and the vectors from the set, and here the two are different: the field is all of $\\mathbb{R}$, while the set is only its positive part. Each scaling axiom pairs one element of the field with one element of the set.
 
-The set $\\mathbb{R}^2$ can be equipped with non-standard operations that violate the axioms. Defining "addition" by $(u_1, u_2) \\oplus (v_1, v_2) = (u_1 + v_1, 0)$ fails to produce a vector space — the second component is always destroyed, so there is no zero vector, and with ordinary scaling the distributive law $(c + d)\\mathbf{v} = c\\mathbf{v} \\oplus d\\mathbf{v}$ breaks whenever $v_2 \\neq 0$.
+The set $\\mathbb{R}^2$ can be equipped with non-standard operations that violate the axioms. Defining "addition" by $(u_1, u_2) \\oplus (v_1, v_2) = (u_1 + v_1, 0)$ fails to produce a vector space — the second component is always destroyed, so there is no zero vector, and with ordinary scaling the distributive law $(c + d)\\mathbf{v} = c\\mathbf{v} \\oplus d\\mathbf{v}$ breaks whenever $v_2 \\neq 0$ and $c + d \\neq 0$.
 
 @academic[pitfall,aside:true,width:35%:Using the subspace test on new operations
 Testing only the two closure axioms, as for a subspace, passes $\\oplus$: every $(u_1 + v_1, 0)$ and every $c\\mathbf{v}$ lies in $\\mathbb{R}^2$. Yet $(1, 2) \\oplus \\mathbf{z} = (1 + z_1, 0)$ never equals $(1, 2)$, so there is no zero vector and this is not a vector space.
@@ -1828,6 +1831,9 @@ The zero vector is unique, and the additive inverse of each vector is unique. Bo
     content: `Working from axioms rather than from specific examples is the mechanism that makes linear algebra so broadly applicable.
 
 Every theorem about [linear independence](!/linear-algebra/vector-spaces/linear-independence) applies to vectors in $\\mathbb{R}^n$, to polynomials in $\\mathcal{P}_n$, to matrices in $\\mathbb{R}^{m \\times n}$, and to functions in $C[a, b]$. Every theorem about [span](!/linear-algebra/vector-spaces/span) and [basis](!/linear-algebra/vector-spaces) applies identically in all these settings. The rank-nullity theorem, the theory of [subspaces](!/linear-algebra/vector-spaces/subspaces), the classification by [dimension](!/linear-algebra/vector-spaces/dimension) — none of these need to be reproved when the objects change from column vectors to polynomials.
+
+@academic[fact,aside:true,width:35%:Nine axioms let scaling erase everything
+Ordinary addition paired with $c\\mathbf{v} = \\mathbf{0}$ for every scalar and every vector satisfies all the axioms except $1\\mathbf{v} = \\mathbf{v}$. Without that one, $2\\mathbf{v} = \\mathbf{0}$ for a nonzero $\\mathbf{v}$, and the rule against zero divisors collapses.]@
 
 The axioms also make clear what is not a vector space. Attempting to apply basis theory, dimension counting, or rank arguments to a set that fails the axioms produces nonsense. Checking the axioms first is a prerequisite for using any of the tools of linear algebra.
 
@@ -2110,6 +2116,7 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+          `@academic[punchline:A single failed axiom rules a set out, and closure and the zero vector are where natural candidates usually fail.]@`,
         ]
     },
     {
@@ -2123,6 +2130,7 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+          `@academic[punchline:Rules such as $0\\mathbf{v} = \\mathbf{0}$ and $(-1)\\mathbf{v} = -\\mathbf{v}$ are not extra assumptions: the ten axioms already force them.]@`,
         ]
     },
     {

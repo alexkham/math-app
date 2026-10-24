@@ -193,7 +193,12 @@ The terms approach zero as $n \\to \\infty$, since the denominators grow without
 
 @academic[rule_theorem_plain:Unlike arithmetic and geometric sequences, harmonic sequences have no closed-form expression for their partial sums.]@
 
-The sum $\\sum_{k=1}^{n} \\frac{1}{k}$ cannot be written as a simple formula in $n$. This absence is not a gap in technique — it is a fundamental property. The partial sums, known as harmonic numbers $H_n$, grow roughly as $\\ln n$ but involve no elementary closed form.`,
+The sum $\\sum_{k=1}^{n} \\frac{1}{k}$ cannot be written as a simple formula in $n$. This absence is not a gap in technique — it is a fundamental property. The partial sums, known as harmonic numbers $H_n$, grow roughly as $\\ln n$ but involve no elementary closed form.
+
+@academic[fact,aside:true,width:35%:Never a whole number after $H_1$
+For every $n \\geq 2$, $H_n$ is not an integer. Over a common denominator, every term except $\\frac{1}{2^k}$, the largest power of $2$ up to $n$, gets an even numerator, so the total numerator is odd while the denominator is even.]@
+
+Written as reduced fractions, the first harmonic numbers are $H_1 = 1$, $H_2 = \\frac{3}{2}$, $H_3 = \\frac{11}{6}$, $H_4 = \\frac{25}{12}$, $H_5 = \\frac{137}{60}$ and $H_6 = \\frac{49}{20}$. The numerators and denominators follow no visible pattern, and they grow quickly: already $H_{10} = \\frac{7381}{2520}$. Each value has to be built by adding one more fraction to the one before.`,
     before: ``,
     after: ``,
     link: '',
@@ -213,6 +218,9 @@ The proof by grouping (attributed to Oresme, 14th century) is among the most ele
 $$1 + \\frac{1}{2} + \\left(\\frac{1}{3} + \\frac{1}{4}\\right) + \\left(\\frac{1}{5} + \\frac{1}{6} + \\frac{1}{7} + \\frac{1}{8}\\right) + \\cdots$$]@
 
 The first group contains $1$ term summing to at least $\\frac{1}{2}$. The next group contains $2$ terms, each at least $\\frac{1}{4}$, summing to at least $\\frac{1}{2}$. The next contains $4$ terms, each at least $\\frac{1}{8}$, again summing to at least $\\frac{1}{2}$. Each doubling block contributes at least $\\frac{1}{2}$, and there are infinitely many blocks.
+
+@academic[fact,aside:true,width:35%:Drop every 9 and it converges
+Remove each term whose denominator contains the digit $9$, and the sum stays below $80$ (it is about $22.92$). There are $8 \\cdot 9^{d-1}$ such numbers with $d$ digits, each term at most $\\frac{1}{10^{d-1}}$, so the $d$-digit block adds at most $8 \\cdot 0.9^{d-1}$, a geometric series with total $80$.]@
 
 The harmonic series grows slowly — its partial sums approximate $\\ln n + \\gamma$, where $\\gamma \\approx 0.5772$ is the Euler–Mascheroni constant. To reach a partial sum exceeding $10$, you need over $12{,}000$ terms. But slowly is not the same as bounded: the sum eventually surpasses any finite threshold.
 
@@ -561,6 +569,7 @@ export default function HarmonicSequencesPage({meanOrderLevels, seoData, section
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@academic[punchline:Every harmonic-mean question turns into an arithmetic one: take reciprocals, work there, then take reciprocals back.]@`,
         ]
     },
     {

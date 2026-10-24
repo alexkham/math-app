@@ -946,6 +946,11 @@ Different scenarios produce different kinds of sample spaces. They generally fal
   $\\Omega = [0,\\infty)$
 
 These categories help determine how probabilities are assigned and what tools are used to work with the sample space.
+
+@academic[fact,aside:true,width:35%:No fair draw from all whole numbers
+A whole number picked with every value equally likely cannot exist. Equal chances $p$ for $1, 2, 3, \\ldots$ add up to $0$ when $p = 0$ and grow past $1$ when $p > 0$, never to exactly $1$.]@
+
+Each type calls for its own way of spreading probability over the outcomes. On a finite space the simplest choice gives every outcome the same share, such as $\\frac{1}{6}$ for each face of a die. On $\\{1, 2, 3, \\ldots\\}$, the number of tosses until the first head, the shares are $\\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}, \\ldots$, which shrink fast enough to add up to $1$. On an interval such as $[0, \\infty)$, probability is given to stretches of time or length rather than listed outcome by outcome.
 `,
       before:``,
       after:``,
@@ -1017,6 +1022,8 @@ Using $\\Omega = \\{2, 3, \\ldots, 12\\}$ for the sum of two dice gives $P(\\tex
 [Read more](!#mistakes)]@
 
 Applying the formula takes two counts: the outcomes in $A$ and the outcomes in $\\Omega$. For one die, both come straight from the list $\\{1, 2, 3, 4, 5, 6\\}$. For two dice, the list is the grid of 36 ordered pairs from the definition above, each with probability $\\frac{1}{36}$.
+
+@academic[punchline:Every result of the experiment must land in exactly one outcome; only then do the outcome probabilities add to 1.]@
 `,
       before:``,
       after:``,
@@ -1051,6 +1058,11 @@ Different situations lead to different forms of sample spaces. A few common exam
 • Choosing two items without replacement: outcomes are ordered pairs of objects
 
 These examples show how the structure of $\\Omega$ changes with the scenario, but the idea remains the same: it captures every outcome the situation can produce.
+
+@academic[fact,aside:true,width:35%:Why 10 beats 9 with three dice
+Gamblers noticed that a total of $10$ turns up more often than $9$. Counted as ordered triples, $27$ of the $216$ outcomes give $10$ and only $25$ give $9$; Galileo settled the puzzle this way in the early 1600s.]@
+
+Rolling three dice gives a sample space of $6^3 = 216$ ordered triples $(x_1, x_2, x_3)$. Questions about the total are answered by counting triples, not by counting the ways to write the total as a sum. The sum $9$ can be written as $1 + 2 + 6$, $1 + 3 + 5$, $1 + 4 + 4$, $2 + 2 + 5$, $2 + 3 + 4$ or $3 + 3 + 3$, and the sum $10$ as $1 + 3 + 6$, $1 + 4 + 5$, $2 + 2 + 6$, $2 + 3 + 5$, $2 + 4 + 4$ or $3 + 3 + 4$: six ways each.
 `,
       before:``,
       after:``,

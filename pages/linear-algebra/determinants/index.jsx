@@ -957,9 +957,14 @@ A crucial fact is that the expansion need not use the first row.
 
 @academic[rule_theorem_plain:Expanding along any row or any column gives the same result.]@
 
+@academic[fact,aside:true,width:35%:Drop the signs and it gets hard
+Fully expanded, the determinant is a sum of $n!$ signed products. Remove every minus sign and the result is the permanent: row additions now change its value, elimination fails, and the best known methods still take more than $2^n$ steps against the determinant's $n^3$.]@
+
 The signed sub-determinants $(-1)^{i+j} M_{ij}$ are called [cofactors](!/linear-algebra/determinants/cofactors), and the freedom to choose the expansion axis is what makes the formula practical: a row or column with many zeros dramatically reduces the number of terms.
 
-The recursive nature of this definition means the computational cost grows factorially. An $n \\times n$ determinant via cofactor expansion requires on the order of $n!$ arithmetic operations. For $n = 5$ that is $120$ operations; for $n = 10$ it is over $3.6$ million. This explosion is what motivates the row-reduction approach, which accomplishes the same task in $O(n^3)$ operations by exploiting how [row operations](!/linear-algebra/determinants/properties) affect the determinant.`,
+The recursive nature of this definition means the computational cost grows factorially. An $n \\times n$ determinant via cofactor expansion requires on the order of $n!$ arithmetic operations. For $n = 5$ that is $120$ operations; for $n = 10$ it is over $3.6$ million. This explosion is what motivates the row-reduction approach, which accomplishes the same task in $O(n^3)$ operations by exploiting how [row operations](!/linear-algebra/determinants/properties) affect the determinant.
+
+@academic[punchline:Cofactor expansion defines the determinant in every size, but its cost grows like $n!$, so large ones are computed by row reduction.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1093,6 +1098,9 @@ Rotation matrices always have determinant $+1$. Reflection matrices always have 
   obj10: {
     title: `Determinant-Based Formulas`,
     content: `The determinant is not only a diagnostic tool — it provides closed-form expressions for quantities that might otherwise require iterative procedures.
+
+@academic[fact,aside:true,width:35%:Determinants came before matrices
+Seki Takakazu in Japan in 1683 and Leibniz in Europe in 1693 each found them while eliminating unknowns from systems of equations, as the expression that decides whether the equations can hold together. Matrices became objects of their own only in the 1850s, more than 150 years later.]@
 
 Cramer's rule solves a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ by expressing each component of the solution as a ratio of two determinants: $x_i = \\det(A_i)/\\det(A)$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$. The adjugate formula gives the inverse of $A$ as $A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$, writing every entry of the inverse explicitly in terms of cofactors. In the $2 \\times 2$ case, this reduces to the familiar swap-and-negate formula.
 

@@ -1430,6 +1430,10 @@ export default function CoinTossPage({
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          `@academic[fact,aside:true,width:35%:Real coins favour their starting face
+A flipped coin wobbles as it spins, so a coin caught in the hand shows the face it started on slightly more often: Diaconis, Holmes and Montgomery predicted about 51% in 2007. In 2023, 350,757 recorded flips gave 50.8%, while heads and tails overall still came out at 50.0% each.]@
+
+A real toss is a mechanical event. The coin leaves the thumb with some upward speed and some spin, and from that moment its flight is fixed by physics: which face is up when it is caught depends only on those starting conditions. Differences in speed and spin too small for a hand to control decide the result, and this is why the outcome looks random. The model keeps none of this, only two labels and the probabilities given to them.`,
         ]
     },
     {
@@ -1468,6 +1472,10 @@ Events can also be described toss by toss. "Heads on the first toss" holds for t
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@academic[fact,aside:true,width:35%:A fair toss from any biased coin
+Toss the coin twice: call HT heads, call TH tails, and start again after HH or TT. The two mixed results are equally likely, so the outcome is exactly fair for every $0 < p < 1$, even when $p$ is unknown. The trick is von Neumann's, from 1951.]@
+
+A biased coin with $P(H) = p$ still keeps one symmetry. Tossed twice, it gives HH with probability $p^2$ and TT with probability $(1 - p)^2$, and these differ whenever $p \\neq \\frac{1}{2}$. The two mixed sequences behave differently: HT has probability $p(1 - p)$ and TH has probability $(1 - p)p$, the same number for every value of $p$.`,
         ]
     },
     {
@@ -1516,6 +1524,7 @@ Treating 5 heads, the most likely count, as the usual result of ten fair tosses 
 
 The binomial bars for ten tosses are tallest at 5, the count equal to half the number of tosses. The neighbouring counts 4 and 6 are close behind, and the five bars from 3 to 7 together carry $\\frac{912}{1024} \\approx 0.89$ of the probability. The count of heads is spread over several values around the middle, not fixed at one.`,
           `Longer runs approximate continuous behaviour, as the next section shows.`,
+          `@academic[punchline:Counting, waiting and pattern-spotting on the same tosses give different distributions: the measurement shapes the result, not the coin.]@`,
         ]
     },
     {
@@ -1526,6 +1535,7 @@ The binomial bars for ten tosses are tallest at 5, the count equal to half the n
           sectionsContent.obj9.content,
                   <div key={'unit-coinNormal'} dangerouslySetInnerHTML={{ __html: demoUnits.coinNormal }} />,
           `With more tosses, rescaled to the standardized count, the bars match the curve ever more closely.`,
+          `@academic[punchline:Continuous randomness can be approached as closely as needed with nothing but repeated two-way choices.]@`,
         ]
     },
     {

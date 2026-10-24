@@ -973,6 +973,11 @@ This distribution is appropriate when the experiment consists of one selection f
 
 Due to this simplicity, the discrete uniform distribution often serves as a baseline model. More complex [discrete distributions](!/probability/distributions/discrete) can frequently be understood as deviations from uniformity caused by repetition, conditioning, or structural constraints.
 
+@academic[fact,aside:true,width:35%:No loading makes the sum flat
+However two dice are weighted, their total is never uniform on $2$ to $12$. With face probabilities $p_i$ and $q_i$, a flat total needs $p_1 q_1 = p_6 q_6 = \\frac{1}{11}$, and then $P(7) \\geq p_1 q_6 + p_6 q_1 \\geq 2\\sqrt{\\frac{1}{11} \\cdot \\frac{1}{11}} = \\frac{2}{11}$.]@
+
+Two dice show the effect of repetition. Each die on its own is uniform on $1$ to $6$, but their total runs from $2$ to $12$ and crowds toward the middle, because a total of $7$ can be made in six ways and a total of $2$ in only one. A natural question is whether some other weighting of the faces could bring the totals back to equal footing.
+
       `,
       before:``,
       after:``,
@@ -980,7 +985,7 @@ Due to this simplicity, the discrete uniform distribution often serves as a base
       example:`
       @academic[example:Example
 
-Rolling a [fair six-sided die](!/probability/models/dice-roll) once. The possible outcomes are $\{1,2,3,4,5,6\}$, and each value has the same probability. No outcome is favored over another by the mechanism of the experiment.]@
+Rolling a [fair six-sided die](!/probability/models/dice-roll) once. The possible outcomes are $\\{1,2,3,4,5,6\\}$, and each value has the same probability. No outcome is favored over another by the mechanism of the experiment.]@
       `,
   
   
@@ -1167,6 +1172,11 @@ $$E[X] = \\frac{1 + 6}{2} = 3.5$$]@
 
 The expected value is 3.5, which is the arithmetic mean of all possible outcomes $\\{1, 2, 3, 4, 5, 6\\}$. Note that the expected value need not be a possible outcome of the random variable.
 
+@academic[fact,aside:true,width:35%:Counting tanks by serial number
+In World War II, Allied statisticians read captured German serial numbers as draws from $1$ to $N$ and estimated $N$ from the largest numbers seen. For tanks built in August 1942 they got 327, intelligence reports said 1,550, and German records later showed 342.]@
+
+The formula also works in reverse. When the values are numbered $1$ to $N$ and $N$ itself is unknown, every observed value is a draw from that range, and the largest values seen, together with how many were seen, show how far the range must reach. Serial numbers stamped on manufactured items form exactly such a range.
+
 To compute the expected value of a discrete uniform distribution for your own parameters, step by step, use the [discrete uniform expected value calculator](!/probability/calculators/expected-value/discrete-uniform).
   `,
   before: ``,
@@ -1286,7 +1296,7 @@ Any value between $\\frac{a + b - 1}{2}$ and $\\frac{a + b + 1}{2}$ can be consi
 
 **Properties of the median:**
 • The median equals the [expected value](!/probability/expected-value) $\\frac{a + b}{2}$ when the range has an odd number of values
-• For symmetric distributions, median = mode = mean (when appropriately defined)
+• For symmetric distributions, median = mean; when there is a single peak, the mode equals them too
 • The median represents the center of the distribution
 
 @academic[example:Example
@@ -1713,6 +1723,7 @@ export default function DiscreteUniformDistributionPage({
           sectionsContent.links.decide,
           sectionsContent.obj1.example,
           sectionsContent.links.example,
+          `@academic[punchline:A discrete uniform is pure symmetry: once the range is fixed, nothing else is left to choose.]@`,
         ]
     },
      {
@@ -1759,6 +1770,7 @@ export default function DiscreteUniformDistributionPage({
           </div>,        
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `The cumulative form is a regular staircase.`,
+          `@academic[punchline:Every discrete uniform probability is one over a count, so the whole calculation rests on counting the values correctly.]@`,
         ]
     },
     {

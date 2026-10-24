@@ -339,6 +339,9 @@ Only $x = 4$ solves the original equation. The value $x = -1$ is extraneous.`,
     title: `Why Extraneous Solutions Appear`,
     content: `Squaring is not a reversible operation. Both $5$ and $-5$ square to $25$. When an equation is squared, information about sign is lost.
 
+@academic[fact,aside:true,width:35%:An endless radical that equals 2
+If $x = \\sqrt{2 + \\sqrt{2 + \\sqrt{2 + \\cdots}}}$, the part under the outer root is again $2 + x$, so $x = \\sqrt{2 + x}$. Squaring gives $x^2 - x - 2 = 0$ with candidates $2$ and $-1$; a square root is never negative, so $-1$ is extraneous and the value is exactly $2$.]@
+
 If the original equation requires a radical to equal a negative value, squaring hides this impossibility. The squared equation accepts values that the original rejects.
 
 Similarly, if the original equation has domain restrictions — the radicand must be non-negative for even roots — squaring may produce solutions outside this domain.
@@ -354,6 +357,11 @@ Odd-index equations rarely produce extraneous solutions because odd roots accept
   obj6: {
     title: `Equations with Two Radicals`,
     content: `When two radicals appear, isolate one and square. Then isolate the remaining radical and square again.
+
+@academic[fact,aside:true,width:35%:Solved with one conjugate
+Multiplying $\\sqrt{x + 5} - \\sqrt{x}$ by $\\sqrt{x + 5} + \\sqrt{x}$ gives $(x + 5) - x = 5$, so if the difference is $1$, the sum is $5$. Adding the two equations gives $2\\sqrt{x + 5} = 6$, so $x + 5 = 9$ and $x = 4$, with no second squaring.]@
+
+Squaring twice works for every equation of this kind, though each round adds terms to keep track of. In the example below, the radicands $x + 5$ and $x$ differ only by the constant $5$, and the left side is a difference of their square roots: the same shape that appears when a denominator is rationalized.
 
 @academic[formula_callout:Equations with Two Radicals
 $$\\sqrt{x + 5} - \\sqrt{x} = 1$$]@
@@ -437,7 +445,9 @@ Square again and solve. Check all candidates.
 Squaring $\\sqrt{x - 5} = \\sqrt{2x - 9}$ gives $x - 5 = 2x - 9$, so $x = 4$, and the answer is accepted unchecked. At $x = 4$ both radicands equal $-1$, so neither side exists: the equation has no solution.
 [Read more](!#pitfalls)]@
 
-In both configurations, squaring once or twice turns the radicals into ordinary expressions, and the equation that remains is solved like any other linear or quadratic equation. The candidates it produces still belong to the original equation. There, each square root is defined only where its radicand is non-negative, and each side must take the same value.`,
+In both configurations, squaring once or twice turns the radicals into ordinary expressions, and the equation that remains is solved like any other linear or quadratic equation. The candidates it produces still belong to the original equation. There, each square root is defined only where its radicand is non-negative, and each side must take the same value.
+
+@academic[punchline:Squaring removes the radicals, not their conditions: every radicand under an even root must stay non-negative.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -503,7 +513,7 @@ Domain: $x - 2 \\geq 0$, so $x \\geq 2$
 
 Intersection: $2 \\leq x \\leq 18$.
 
-For inequalities, direction may reverse when both sides are squared — but only if squaring a negative. Since principal roots are non-negative, squaring inequalities involving isolated radicals typically preserves direction.
+For inequalities, squaring keeps the direction when both sides are non-negative; with a negative side it can go either way, as $-1 < 2$ gives $1 < 4$ but $-3 < 2$ gives $9 > 4$. Since principal roots are non-negative, squaring inequalities involving isolated radicals typically preserves direction.
 
 The [properties](!/algebra/roots/properties) page details domain restrictions. Full treatment of inequalities extends beyond radical equations into broader inequality techniques.
 
@@ -865,6 +875,7 @@ export default function RootEquationsPage({radicalEquationCases, seoData, sectio
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:Squaring forgets signs, so the squared equation can accept answers the original equation rejects.]@`,
         ]
     },
     {

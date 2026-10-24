@@ -238,6 +238,8 @@ Completing the square is the move for a quadratic that does not factor. The disc
 
 @academic[formula_callout:Recognizing Standard Forms
 $$\\int \\frac{1}{\\sqrt{9 - x^2}}\\, dx = \\int \\frac{1}{\\sqrt{3^2 - x^2}}\\, dx = \\arcsin\\frac{x}{3} + C$$]@
+
+@academic[punchline:Many integrals that look new are standard forms in disguise; completing the square or rewriting a constant reveals them.]@
 `,
     before: ``,
     after: ``,
@@ -343,6 +345,13 @@ Seeing $x^3$ in $\\int_{-2}^{2} (x^3 + 1)\\, dx$ and answering $0$ ignores the e
 [Read more](!#7)]@
 
 Both shortcuts rest on comparing $f(-x)$ with $f(x)$. In the first example $(-x)^3 = -x^3$, so the region on $[-3, 0]$ is the region on $[0, 3]$ reflected below the axis. In the second $(-x)^4 = x^4$, and the two halves are equal. Replacing $x$ by $-x$ takes one line and settles which shortcut, if any, applies.
+
+The same comparison works for any interval, with the reflection taken about its midpoint. On $[a, b]$ the substitution $x \\to a + b - x$ swaps the two endpoints and covers the same points in reverse order, so $\\int_a^b f(x)\\, dx = \\int_a^b f(a + b - x)\\, dx$. Adding the two forms gives $2\\int_a^b f(x)\\, dx = \\int_a^b \\left[f(x) + f(a + b - x)\\right] dx$.
+
+@academic[fact,aside:true,width:35%:A Putnam integral solved by reflection
+Putnam 1980 asked for $\\int_0^{\\pi/2} \\frac{dx}{1 + (\\tan x)^{\\sqrt{2}}}$. Since $\\tan\\left(\\frac{\\pi}{2} - x\\right) = \\frac{1}{\\tan x}$, the reflection turns the integrand $g$ into $1 - g$, so twice the integral is $\\frac{\\pi}{2}$ and the answer is $\\frac{\\pi}{4}$.]@
+
+When $f(x) + f(a + b - x)$ is simpler than $f(x)$, for example a constant, the right-hand side is easy to evaluate even when $f$ alone is not. Halving it gives the integral without any antiderivative of $f$, in the same way as the odd and even shortcuts give theirs. Such pairings are rare, but checking for one costs a single substitution, and it is worth doing whenever the integrand is built from functions that trade places under the reflection, such as $\\sin x$ and $\\cos x$ on $\\left[0, \\frac{\\pi}{2}\\right]$.
 `,
     before: ``,
     after: ``,
@@ -423,6 +432,11 @@ How to check: test $f(-x) = -f(x)$ for the whole integrand at one point. For $f(
 **Estimate:** For definite integrals, check that the answer is reasonable. A positive integrand on $[a,b]$ with $a < b$ should yield a positive result. The value should lie between $m(b-a)$ and $M(b-a)$ where $m$ and $M$ bound the integrand.
 
 **Numerical check:** When possible, compare to a calculator or numerical approximation.
+
+@academic[fact,aside:true,width:35%:Simpson's rule is exact for cubics
+Built to be exact for parabolas, the rule is exact for every cubic too: the cubic term, written as $(x - m)^3$, is odd about $m$, so its integral and its share of the formula are both $0$. For $x^4$ on $[0, 2]$ it gives $\\frac{20}{3}$ instead of $\\frac{32}{5}$.]@
+
+A numerical check can be done by hand with only three values of the integrand. Simpson's rule estimates $\\int_a^b f(x)\\, dx$ as $\\frac{b - a}{6}\\left[f(a) + 4f(m) + f(b)\\right]$, where $m$ is the midpoint of $[a, b]$. For the area under $y = x^2$ on $[0, 3]$ from the setup example it gives $\\frac{3}{6}\\left(0 + 4 \\cdot 2.25 + 9\\right) = 9$, the exact value. For a curve far from a parabola, the interval is cut into several pieces and the rule is applied to each, and the estimate improves quickly as the pieces get shorter.
 `,
     before: ``,
     after: ``,
@@ -673,6 +687,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj6.content,
           <div key={'unit-oddCancel'} dangerouslySetInnerHTML={{ __html: demoUnits.oddCancel }} />,
           `The shortcut needs a symmetric interval: over [−3, 2] the halves no longer match.`,
+          `@academic[punchline:Check symmetry before integrating: on $[-a, a]$ odd parts cancel to zero and even parts need only half the interval.]@`,
           <div key={'obj6-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj6Table }} />,
         ]

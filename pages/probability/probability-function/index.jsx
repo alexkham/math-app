@@ -1074,6 +1074,11 @@ In these cases:
 • every outcome gets the same chance
 • the probability function spreads probability evenly across all possible values
 
+@academic[fact,aside:true,width:35%:Three fair chords, three answers
+Ask how likely a random chord of a circle is to be longer than a side of the inscribed equilateral triangle. Random endpoints give $\\frac{1}{3}$, a random distance from the center gives $\\frac{1}{2}$, a random midpoint gives $\\frac{1}{4}$: each symmetry is a different probability function (Bertrand, 1889).]@
+
+Symmetry only works once it is clear which outcomes are the equally likely ones. For a coin or a die the faces settle it, but a continuous setup can leave room for choice. To draw a random chord of a circle, one can pick its two endpoints at random on the circle, pick its distance from the center at random, or pick its midpoint at random inside the disc, and each of these sounds like the fair way to do it.
+
 **2. Using Counting** ([Combinatorics](!/probability/combinatorics))
 When outcomes are equally likely but involve structure (drawing balls, cards, forming groups), we use counting.
 We figure out the probability function by:
@@ -1502,6 +1507,7 @@ export default function ProbabilityFunctionPage({pmfPdfTree,
           sectionsContent.ways.content,
           <div key={'ways-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: waysTable }} />,
+          `@academic[punchline:A probability function is never handed to us: symmetry, counting, a standard model or data has to supply it.]@`,
         ]
     },
    

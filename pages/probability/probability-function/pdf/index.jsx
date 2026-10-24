@@ -263,6 +263,11 @@ The total area under the density curve must equal exactly 1.
 
 This is your total probability budget. The entire curve must integrate to 1—no more, no less.
 
+@academic[fact,aside:true,width:35%:A density need not fade far out
+Let $f(x) = n$ on $\\left[n, n + \\frac{1}{n \\cdot 2^n}\\right]$ for each whole number $n \\geq 1$ and $0$ elsewhere. The rectangles have areas $\\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}, \\ldots$, which add up to $1$, so $f$ is a valid density whose peaks grow without bound far out.]@
+
+On an unbounded support the budget is spread over an infinitely long stretch of the line. The area out there is a sum of infinitely many pieces, one for each unit of length, and normalization only asks that these pieces add up to 1. It says nothing directly about how tall the curve may be at any particular place, near the center or far out in the tail.
+
 @academic[example:Example
 [Uniform distribution](!/probability/distributions/continuous/uniform) on $[0, 2]$ has $f(x) = \\frac{1}{2}$ for $x \\in [0,2]$.
 
@@ -570,7 +575,7 @@ The mode is the value where the PDF reaches its maximum.
 @academic[formula_callout:Derived Properties: Location Measures
 $$\\text{mode} = \\arg\\max_x f_X(x)$$]@
 
-Found by solving $f'_X(x) = 0$ and checking the second derivative.
+Found by solving $f'_X(x) = 0$ and checking the second derivative, or at an end of the support when the density is highest there.
 
 Example: [Normal distribution](!/probability/distributions/continuous/normal) with mean $\\mu$ and standard deviation $\\sigma$. The mode is $\\mu$, where the bell curve peaks.
 
@@ -734,6 +739,11 @@ Example: $Y = X^2$ for $X > 0$. Then $g^{-1}(y) = \\sqrt{y}$ and $\\frac{d}{dy}\
 
 @academic[formula_callout:Transformations (Change of Variables)
 $$f_Y(y) = f_X(\\sqrt{y}) \\cdot \\frac{1}{2\\sqrt{y}}$$]@
+
+@academic[fact,aside:true,width:35%:Squares pile up near zero
+If $X$ is uniform on $[0, 1]$, then $Y = X^2$ has density $\\frac{1}{2\\sqrt{y}}$, which grows without bound as $y \\to 0$. A tenth of all the probability lands in $[0, 0.01]$, because $Y \\leq 0.01$ exactly when $X \\leq 0.1$, yet the total area is still $\\int_0^1 \\frac{1}{2\\sqrt{y}}\\,dy = 1$.]@
+
+Take $X$ uniform on $[0, 1]$, so that $f_X = 1$ there and $Y = X^2$ also stays inside $[0, 1]$. Squaring moves every value strictly between $0$ and $1$ downward, and it squeezes the values near $0$ hardest: $0.1$ becomes $0.01$, and $0.01$ becomes $0.0001$. Probability that was spread over a stretch of $x$ values now sits on a much shorter stretch of $y$ values.
 
 Another route to the same density goes through the CDF of $Y$: find $F_Y$ first, then differentiate.
 
@@ -1259,6 +1269,7 @@ export default function PDFPage({pdfViewTree, seoData, sectionsContent, introCon
           sectionsContent.obj1.content,
                   <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
           `The notation for all of this is fixed next.`,
+          `@academic[punchline:For a continuous variable a single point carries no probability; probability is the area under the density over an interval.]@`,
         ]
     },
     // {

@@ -267,6 +267,11 @@ $$\\sqrt[4]{48} = \\sqrt[4]{16 \\cdot 3} = \\sqrt[4]{16} \\cdot \\sqrt[4]{3} = 2
 
 The process uses the product rule from [radical rules](!/algebra/roots/radical-rules). Factor the radicand, separate into two radicals, simplify the perfect power.
 
+@academic[fact,aside:true,width:35%:Most square roots are already simplest
+Of the numbers from $1$ to $100$, $61$ have no square factor other than $1$, so their square roots cannot be simplified. Over all whole numbers the share tends to $\\frac{6}{\\pi^2} \\approx 0.608$: each prime $p$ rules out the multiples of $p^2$, and the product of all the factors $1 - \\frac{1}{p^2}$ equals $\\frac{6}{\\pi^2}$.]@
+
+Not every radicand contains a perfect power to extract. In $30 = 2 \\cdot 3 \\cdot 5$ no prime appears twice, so no factor of $30$ other than $1$ is a perfect square, and $\\sqrt{30}$ is already in simplest form. A square root can be simplified exactly when some prime appears at least twice in the factorization of its radicand.
+
 When multiple perfect power factors exist, extract them all:
 
 @academic[formula_callout:Factoring Out Perfect Powers
@@ -436,6 +441,11 @@ The result:
 @academic[formula_callout:Rationalizing Higher-Index Denominators
 $$\\frac{\\sqrt[3]{4} - \\sqrt[3]{2} + 1}{3}$$]@
 
+@academic[fact,aside:true,width:35%:A reciprocal with no fraction left
+When $a - b^n = 1$, the denominator disappears entirely. For $\\sqrt[3]{2} - 1$ the product is $2 - 1 = 1$, so $\\frac{1}{\\sqrt[3]{2} - 1} = \\sqrt[3]{4} + \\sqrt[3]{2} + 1 \\approx 3.85$, a plain sum of roots.]@
+
+The same idea works for any index. The factorization $x^n - b^n = (x - b)(x^{n-1} + x^{n-2}b + \\cdots + b^{n-1})$ supplies a multiplier for a denominator $\\sqrt[n]{a} - b$: with $x = \\sqrt[n]{a}$, the product becomes the rational number $a - b^n$. The multiplier has $n$ terms, so the higher the index, the longer the numerator.
+
 These patterns are algebraically intensive. Converting to [rational exponents](!/algebra/roots/rational-exponents) sometimes offers a cleaner path.
 
 The table below collects every rationalization pattern covered above — monomial and binomial denominators, square roots and higher-index roots — with the multiplying factor that does the work and a representative example.`,
@@ -456,7 +466,7 @@ The index dropped from 6 to 3 because 4 and 6 share a common factor of 2.
 @academic[formula_callout:Reducing the Index
 $$\\sqrt[4]{a^2} = a^{2/4} = a^{1/2} = \\sqrt{a}$$]@
 
-The fourth root of a square is just a square root.
+For $a \\geq 0$, the fourth root of a square is just a square root.
 
 Converting to [rational exponents](!/algebra/roots/rational-exponents) makes this process mechanical: write the exponent as a fraction, reduce it, convert back if desired.
 
@@ -784,6 +794,7 @@ export default function SimplifyingPage({
           sectionsContent.obj6.content,
           <div key={'unit-conjugateArea'} dangerouslySetInnerHTML={{ __html: demoUnits.conjugateArea }} />,
           `Multiplying by a + √b instead would add a cross term 2a√b and keep the radical.`,
+          `@academic[punchline:Multiplying by the conjugate makes a difference of squares, and squaring is what removes a square root.]@`,
         ]
     },
     {
@@ -794,6 +805,7 @@ export default function SimplifyingPage({
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          `@academic[punchline:Each index needs its own identity: squares clear square roots, cubes clear cube roots, $n$th powers clear $n$th roots.]@`,
         ]
     },
     {

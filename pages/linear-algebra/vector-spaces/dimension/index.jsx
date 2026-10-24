@@ -2905,6 +2905,9 @@ The space $C[a, b]$ of continuous functions on $[a, b]$ is also infinite-dimensi
 
 In finite-dimensional spaces, the theory is clean and complete. Every independent set can be extended to a basis. Every spanning set can be reduced to one. The dimension is a finite integer that governs the entire structure of the space.
 
+@academic[fact,aside:true,width:35%:Sequences need uncountably many directions
+A real sequence has one entry for each of $1, 2, 3, \\ldots$, yet the space of all real sequences has no countable basis. The sequences $(1, t, t^2, \\ldots)$, one for each real $t$, are independent by the Vandermonde determinant, and no independent set is larger than a basis.]@
+
 In infinite-dimensional spaces, the situation is more delicate. Bases still exist (assuming the axiom of choice), but they are called Hamel bases and are often unwieldy — a Hamel basis for $C[0, 1]$ is uncountable and cannot be written down explicitly. In practice, infinite-dimensional spaces are handled with topological tools: Schauder bases (which allow infinite convergent sums), Hilbert space theory, and functional analysis.
 
 On this site, all vector spaces are finite-dimensional unless explicitly stated otherwise. The finite-dimensional theory covers $\\mathbb{R}^n$, $\\mathcal{P}_n$, $\\mathbb{R}^{m \\times n}$, and solution spaces of linear ODEs with constant coefficients — the spaces that appear in a standard linear algebra course.`,
@@ -3016,7 +3019,12 @@ $$V = W_1 \\oplus W_2 \\Rightarrow \\dim(V) = \\dim(W_1) + \\dim(W_2)$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-For example, in $\\mathbb{R}^3$, let $W_1$ be the $xy$-plane (dimension $2$) and $W_2$ be the $z$-axis (dimension $1$). Their intersection is $\\{\\mathbf{0}\\}$, so $\\dim(W_1 + W_2) = 2 + 1 - 0 = 3$. The sum is all of $\\mathbb{R}^3$, and the decomposition $\\mathbb{R}^3 = W_1 \\oplus W_2$ splits every vector into its $xy$-component and its $z$-component.`,
+@academic[fact,aside:true,width:35%:Three lines in a plane break the count
+Three different lines through the origin of $\\mathbb{R}^2$ meet pairwise only at $\\mathbf{0}$, so the set pattern predicts $1 + 1 + 1 - 0 - 0 - 0 + 0 = 3$. Their sum is the plane, of dimension $2$: any two of the lines already span it, third line included.]@
+
+For example, in $\\mathbb{R}^3$, let $W_1$ be the $xy$-plane (dimension $2$) and $W_2$ be the $z$-axis (dimension $1$). Their intersection is $\\{\\mathbf{0}\\}$, so $\\dim(W_1 + W_2) = 2 + 1 - 0 = 3$. The sum is all of $\\mathbb{R}^3$, and the decomposition $\\mathbb{R}^3 = W_1 \\oplus W_2$ splits every vector into its $xy$-component and its $z$-component.
+
+For finite sets, inclusion-exclusion continues to three sets: add the three sizes, subtract the three pairwise overlaps, then add back the part shared by all three. The same pattern can be tried on three subspaces, with dimensions in place of sizes and intersections in place of overlaps. The simplest test case is three different lines through the origin in $\\mathbb{R}^2$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3053,7 +3061,9 @@ The forward direction is straightforward: an isomorphism maps a [basis](!/linear
 
 This means dimension is the single complete invariant for finite-dimensional vector spaces. It captures everything about the linear-algebraic structure — independence, span, basis size, subspace behavior — in a single integer. Two spaces with the same dimension may contain very different objects (polynomials vs. matrices vs. functions), but from the perspective of linear algebra, they are indistinguishable.
 
-$\\mathbb{R}^3$, $\\mathcal{P}_2$, and the solution space of a third-order homogeneous linear ODE are all three-dimensional. They are isomorphic as vector spaces. Every theorem that holds in one holds in all three — that is the payoff of the axiomatic approach.`,
+$\\mathbb{R}^3$, $\\mathcal{P}_2$, and the solution space of a third-order homogeneous linear ODE are all three-dimensional. They are isomorphic as vector spaces. Every theorem that holds in one holds in all three — that is the payoff of the axiomatic approach.
+
+@academic[punchline:Over one field, the dimension alone decides whether two finite-dimensional spaces are the same space with renamed vectors.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -3441,6 +3451,7 @@ export default function DimensionPage({setSizeLevels, subspaceDimLevels, seoData
           >
             <Hierarchy data={subspaceDimLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
           </DiagramFrameV2>,
+          `@academic[punchline:A subspace can only be smaller by whole dimensions, and one with the full dimension is the whole space.]@`,
         ]
     },
     {

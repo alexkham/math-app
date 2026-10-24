@@ -1474,6 +1474,11 @@ The eigenvectors are generally different. If $\\mathbf{v}$ is a right eigenvecto
 
 [Diagonal](!/linear-algebra/matrix/types) and [triangular](!/linear-algebra/matrix/types) matrices have their eigenvalues on the diagonal — immediately visible.
 
+@academic[fact,aside:true,width:35%:Gershgorin's discs locate the eigenvalues
+Every eigenvalue lies within $R_i$ of some diagonal entry $a_{ii}$, where $R_i$ is the sum of $|a_{ij}|$ over the rest of row $i$: look at the row where its eigenvector has the largest entry. For the matrix beside, the discs $|z - 10| \\leq 1$ and $|z + 5| \\leq 2$ do not meet, so each holds one eigenvalue, found without solving anything.]@
+
+Away from these two types the diagonal entries are no longer the eigenvalues, but they are often close to them. For $A = \\begin{pmatrix} 10 & 1 \\\\ 2 & -5 \\end{pmatrix}$ the characteristic polynomial is $\\lambda^2 - 5\\lambda - 52$, with roots $\\frac{5 \\pm \\sqrt{233}}{2}$, about $10.13$ and $-5.13$. The small entries off the diagonal move each eigenvalue only about $0.13$ away from its diagonal entry.
+
 Real [symmetric](!/linear-algebra/matrix/types) matrices have all real eigenvalues, and eigenvectors for distinct eigenvalues are [orthogonal](!/linear-algebra/orthogonality). This is the spectral theorem&apos;s prerequisite.
 
 Real [skew-symmetric](!/linear-algebra/matrix/types) matrices have eigenvalues that are zero or purely imaginary — they come in conjugate pairs $\\pm bi$.
@@ -1517,7 +1522,12 @@ Concluding similarity from equal eigenvalues fails for $\\begin{pmatrix} 2 & 1 \
 
 The eigenvalues stay the same; the eigenvectors transform by $P^{-1}$. This is consistent with the interpretation that eigenvalues are properties of the [transformation](!/linear-algebra/transformations), not of the matrix. Changing the basis changes the matrix and the eigenvector coordinates, but the eigenvalues — the intrinsic scaling factors — are invariant.
 
-The [trace](!/linear-algebra/matrix/trace) and [determinant](!/linear-algebra/determinants) are derivable from the eigenvalues, and the [rank](!/linear-algebra/matrix/rank) is $n$ minus the geometric multiplicity of $0$, so their invariance under similarity is a corollary of the theorem above.`,
+The [trace](!/linear-algebra/matrix/trace) and [determinant](!/linear-algebra/determinants) are derivable from the eigenvalues, and the [rank](!/linear-algebra/matrix/rank) is $n$ minus the geometric multiplicity of $0$, so their invariance under similarity is a corollary of the theorem above.
+
+@academic[fact,aside:true,width:35%:$AB$ and $BA$ share eigenvalues anyway
+$AB$ and $BA$ have the same characteristic polynomial for any two square matrices, similar or not: replace $A$ by the invertible $A + tI$ and let $t \\to 0$. For the pair beside, $AB$ and $BA$ both have eigenvalues $0, 0$.]@
+
+Products of two matrices are a natural place to apply the theorem. When $A$ is invertible, $BA = A^{-1}(AB)A$, so $BA$ is similar to $AB$ and the two share every spectral property listed above. When neither factor is invertible, the argument fails, and so can the similarity: for $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$, the products are $AB = B$ and $BA = 0$, and the only matrix similar to the zero matrix is the zero matrix itself.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1800,6 +1810,7 @@ export default function EigenvaluePropertiesPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `@academic[punchline:The determinant multiplies all $n$ eigenvalues, so a matrix is singular exactly when zero is one of them.]@`,
         ]
     },
     {
@@ -1850,6 +1861,7 @@ export default function EigenvaluePropertiesPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@academic[punchline:Any polynomial applied to a matrix is applied to each of its eigenvalues, while the eigenvectors stay where they are.]@`,
         ]
     },
     {

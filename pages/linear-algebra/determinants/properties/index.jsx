@@ -2303,7 +2303,9 @@ Swapping the rows of $\\begin{pmatrix} 0 & 1 \\\\ 2 & 3 \\end{pmatrix}$ to reach
 
 Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.
 
-Swaps enter elimination whenever a pivot position holds a zero. No multiple of that row can clear the entries below it, so a lower row with a nonzero entry in that column is moved up first. The swap only reorders the rows, and every row of the matrix is still present afterwards.`,
+Swaps enter elimination whenever a pivot position holds a zero. No multiple of that row can clear the entries below it, so a lower row with a nonzero entry in that column is moved up first. The swap only reorders the rows, and every row of the matrix is still present afterwards.
+
+@academic[punchline:Every swap of two rows or two columns flips the sign, so two equal rows force the determinant to zero.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2359,6 +2361,9 @@ This is a single-row rule, not a whole-matrix rule. Scaling the entire matrix $A
 @academic[formulas_link:/linear-algebra/formulas#determinant_of_scalar_multiple]@
 
 for an $n \\times n$ matrix. A common error is to write $\\det(kA) = k \\det(A)$, forgetting that the scalar passes through each of the $n$ rows independently.
+
+@academic[fact,aside:true,width:35%:Determinant $10^{-100}$, nowhere near singular
+The matrix $0.1 I_{100}$ has determinant $0.1^{100} = 10^{-100}$, one factor $0.1$ from each of its $100$ rows. Yet it only shrinks space evenly, and its inverse $10 I_{100}$ is exact, so a tiny determinant alone does not mean a matrix is close to singular.]@
 
 Factoring works in reverse as well: if every entry in some row shares a common factor, that factor can be pulled out in front of the determinant. For instance, if row $2$ of a $3 \\times 3$ matrix is $(6, 12, 18)$, then $6$ can be extracted to give a row of $(1, 2, 3)$ and a factor of $6$ multiplying the determinant. This often simplifies hand computations before beginning a cofactor or elimination approach.
 
@@ -2513,7 +2518,12 @@ $$A = \\begin{pmatrix} 3 & 1 & 0 & 0 & 0 \\\\ 2 & 5 & 0 & 0 & 0 \\\\ 0 & 0 & 1 &
 
 This is block upper triangular with a $2 \\times 2$ block $A_{11} = \\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$ and a $3 \\times 3$ upper triangular block $A_{22} = \\begin{pmatrix} 1 & 4 & -2 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & 7 \\end{pmatrix}$. The determinant is $\\det(A_{11}) \\cdot \\det(A_{22}) = (15 - 2)(1 \\cdot 3 \\cdot 7) = 13 \\cdot 21 = 273$.
 
-This rule does not hold for general block matrices where the off-diagonal blocks are nonzero on both sides of the diagonal. The triangular structure is essential.`,
+@academic[fact,aside:true,width:35%:Commuting blocks act like numbers
+For square blocks of equal size, $\\det\\begin{pmatrix} P & Q \\\\ R & S \\end{pmatrix} = \\det(PS - QR)$ whenever $RS = SR$, whatever $P$ and $Q$ are. Clearing $R$ by block elimination leaves $\\det(PS - QS^{-1}RS)$, and $RS = SR$ cancels the $S^{-1}$.]@
+
+This rule does not hold for general block matrices where the off-diagonal blocks are nonzero on both sides of the diagonal. The triangular structure is essential.
+
+For a full block matrix $\\begin{pmatrix} P & Q \\\\ R & S \\end{pmatrix}$ made of four square blocks of the same size, it is tempting to treat the blocks as numbers and apply the $2 \\times 2$ formula, giving $\\det(PS - QR)$. Matrix products depend on the order of the factors, so there is no reason for this to work in general, and for most choices of blocks it gives the wrong value.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2799,6 +2809,7 @@ const schemas = {
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:The determinant of a product is the product of the determinants, a rule with no counterpart for sums.]@`,
         ]
     },
     {

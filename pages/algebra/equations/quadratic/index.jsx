@@ -493,7 +493,12 @@ Setting each factor of $x(x - 1) = 6$ equal to $6$ gives $x = 6$ or $x = 7$, but
 
 When the leading coefficient is not $1$, factoring requires more care. The equation $6x^2 + x - 2 = 0$ factors as $(2x - 1)(3x + 2) = 0$, giving $x = \\frac{1}{2}$ or $x = -\\frac{2}{3}$. Finding these factors involves searching for two binomials whose product reconstructs the original trinomial — a process that amounts to finding two numbers whose product is $ac$ and whose sum is $b$.
 
-Factoring is efficient when it works, but it has a fundamental limitation: not every quadratic with rational coefficients factors into binomials with rational entries. The equation $x^2 - 2 = 0$ has solutions $x = \\pm\\sqrt{2}$, which are irrational, so no factorization over the rationals exists. A method that handles every quadratic without exception requires a different approach.`,
+Factoring is efficient when it works, but it has a fundamental limitation: not every quadratic with rational coefficients factors into binomials with rational entries. The equation $x^2 - 2 = 0$ has solutions $x = \\pm\\sqrt{2}$, which are irrational, so no factorization over the rationals exists. A method that handles every quadratic without exception requires a different approach.
+
+@academic[fact,aside:true,width:35%:Three odd coefficients, no rational roots
+If $a$, $b$ and $c$ are all odd, $ax^2 + bx + c = 0$ has no rational root. An odd $b^2$ leaves remainder $1$ on division by $8$ and $4ac$ leaves $4$, so $b^2 - 4ac$ leaves $5$, a remainder no perfect square has.]@
+
+Whether a search for factors can succeed is decided before it starts. With integer coefficients, a quadratic factors over the rationals exactly when $b^2 - 4ac$, the quantity under the square root in the formula derived below, is a perfect square. For $x^2 - 5x + 6$ it is $25 - 24 = 1$, and the factors exist; for $x^2 - 2$ it is $8$, and no factors with rational entries exist.`,
     before: ``,
     after: ``,
     link: '',
@@ -624,6 +629,9 @@ Second, they construct equations from known roots. If a quadratic equation must 
 
 @academic[rule_corollary_plain:The roots determine the equation uniquely up to a constant multiple.]@
 
+@academic[fact,aside:true,width:35%:A number and its reciprocal share decimals
+The golden ratio $\\varphi \\approx 1.618$ solves $x^2 - x - 1 = 0$, whose roots multiply to $-1$ and add to $1$. So the other root is $-\\frac{1}{\\varphi}$, and $\\varphi - \\frac{1}{\\varphi} = 1$ gives $\\frac{1}{\\varphi} \\approx 0.618$, with exactly the decimals of $\\varphi$.]@
+
 Third — and often overlooked — they can be used to solve quadratic equations directly when the roots are simple integers. Instead of factoring or applying the formula, the question becomes: which two numbers sum to $-\\frac{b}{a}$ and multiply to $\\frac{c}{a}$? For $x^2 - 7x + 10 = 0$, this asks for two numbers summing to $7$ and multiplying to $10$ — namely $2$ and $5$. The roots are read off by inspection. This approach is fastest when applicable but limited: it works only when the roots are obvious enough to spot, which restricts it to quadratics with integer or simple rational solutions. For irrational or complex roots, the formula remains necessary. In practice, Vieta's inspection is essentially a special case of factoring — finding the factorization $(x - x_1)(x - x_2)$ by going through the roots rather than the trinomial — but it is fast enough on simple cases to deserve recognition as a method in its own right.`,
     before: ``,
     after: ``,
@@ -658,7 +666,7 @@ When $\\Delta > 0$, the parabola crosses the $x$-axis at two distinct points, an
 
 When $\\Delta = 0$, the parabola is tangent to the $x$-axis — it touches at exactly one point and turns back. The vertex of the parabola sits on the axis, and the double root $x = -\\frac{b}{2a}$ is the $x$-coordinate of that vertex.
 
-When $\\Delta < 0$, the parabola lies entirely above the $x$-axis (if $a > 0$) or entirely below it (if $a < 0$). It never reaches the axis, so no real intersection exists and the equation has no real solutions. The vertex is the closest the parabola comes to the axis, and the gap between them reflects how negative the discriminant is.
+When $\\Delta < 0$, the parabola lies entirely above the $x$-axis (if $a > 0$) or entirely below it (if $a < 0$). It never reaches the axis, so no real intersection exists and the equation has no real solutions. The vertex is the closest the parabola comes to the axis, and the gap between them is $\\frac{|\\Delta|}{4|a|}$, so it grows with how negative the discriminant is.
 
 The sign of $a$ determines the parabola's orientation — opening upward when $a > 0$ and downward when $a < 0$ — but it does not affect the number of solutions. That role belongs exclusively to the discriminant.`,
     before: ``,
@@ -1122,6 +1130,7 @@ export default function QuadraticEquationsPage({quadraticFormulaAnatomy, quadMet
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          `@academic[punchline:The coefficients already hold the sum and product of the roots, so roots can be checked, built or guessed without solving.]@`,
         ]
     },
     {
@@ -1135,6 +1144,7 @@ export default function QuadraticEquationsPage({quadraticFormulaAnatomy, quadMet
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:An equation that is quadratic in some expression is solved for that expression first, then each value is turned back into $x$.]@`,
         ]
     },
     {

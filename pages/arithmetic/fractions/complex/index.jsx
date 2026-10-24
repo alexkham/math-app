@@ -990,6 +990,11 @@ Start with the innermost: $\\frac{1}{\\frac{1}{2}} = 1 \\times \\frac{2}{1} = 2$
 
 Substitute back: $\\frac{1}{2}$.
 
+@academic[fact,aside:true,width:35%:Three levels of nesting nearly give $\\pi$
+Simplified from the inside out, $3 + \\frac{1}{7 + \\frac{1}{15 + \\frac{1}{1}}}$ equals $\\frac{355}{113} = 3.1415929\\ldots$, matching $\\pi$ to six decimal places. The next level of $\\pi$'s own staircase holds $292$, so stopping before it loses very little.]@
+
+Nesting can also run down the denominator level after level, each level a whole number plus a new fraction, as in $2 + \\frac{1}{3 + \\frac{1}{4}}$. Working from the bottom, $3 + \\frac{1}{4} = \\frac{13}{4}$, its reciprocal is $\\frac{4}{13}$, and the whole expression is $2 + \\frac{4}{13} = \\frac{30}{13}$. Stacks of this staircase shape are called continued fractions, and the inside-out rule simplifies them at any depth.
+
 Most practical problems involve at most one level of nesting. The strategy remains the same regardless of depth: resolve the innermost structure first, then work outward until only a simple fraction remains.`,
     before: ``,
     after: ``,
@@ -1293,6 +1298,7 @@ export default function ComplexFractionsPage({seoData, sectionsContent, introCon
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
                   <div key={'unit-halfOverThreeQuarters'} dangerouslySetInnerHTML={{ __html: demoUnits.halfOverThreeQuarters }} />,
             `Method 1 agrees: 1/2 ÷ 3/4 = 1/2 × 4/3 = 4/6 = 2/3.`,
+          `@academic[punchline:Multiplying top and bottom by the same number never changes a fraction, so one well-chosen multiplier clears every inner denominator at once.]@`,
         ]
     },
     {

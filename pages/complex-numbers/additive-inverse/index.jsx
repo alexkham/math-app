@@ -1296,6 +1296,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/complexAddSubDiagrams'
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import renderComplexPoints from '@/app/utils/illustrations/complex-numbers/plane/complexPoints'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1822,6 +1823,31 @@ export async function getStaticProps(){
 
 
 // formulas-optimized: v1 | 2026-06-11 | 1 callout (obj2)
+// Concept introduction (section 2, "Additive Inverse of a Complex Number") —
+// template G, exclusion. Running instance: z = −2 − 5i, the number in the
+// section's pitfall aside. Old obj2 text is kept in sectionsContent.obj2,
+// unused; its four formula boxes and link, the pitfall aside and six passages
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCandTable = ciTableOpen(['rule', 'partner for −2 − 5i']) +
+  ciRow(['flip the sign of the imaginary part', '−2 + 5i']) +
+  ciRow(['flip the sign of the real part', '2 − 5i'], { shade: true }) +
+  ciRow(['make both parts negative', '−2 − 5i']) +
+  ciRow(['flip the sign of both parts', '2 + 5i'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciSortTable = ciTableOpen(['partner', '(−2 − 5i) + partner', 'zero?']) +
+  ciRow(['−2 + 5i', '−4', 'no']) +
+  ciRow(['2 − 5i', '−10i', 'no'], { shade: true }) +
+  ciRow(['−2 − 5i', '−4 − 10i', 'no']) +
+  ciRow(['2 + 5i', '0', 'yes'], { shade: true, last: true, color: '#2563EB' }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
     obj0: {
@@ -2330,6 +2356,11 @@ const schemas = {
     svgTitle: 'z = 3 + 2i and -z = -3 - 2i, a half turn apart about 0',
   };
 
+  const conceptIntroFigures = {
+    candTable: ciCandTable,
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     negation: demoUnitFrame({
       svg: complexAddSubDiagrams.sub,
@@ -2355,6 +2386,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -2385,10 +2417,89 @@ export default function AdditiveInversePage({
   obj10Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Undoing z = −2 − 5i needs a partner that adds to 0 — and several sign rules look like they would give it.`,
+        content: [
+          `For a real number the answer is simply "change the sign". A complex number has two signs, one on each part, so there are several ways to change them. Here are four rules that all sound reasonable.`,
+          ciTable('candTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Adding each partner to −2 − 5i: only one sum is 0.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `Real parts add to real parts and imaginary parts to imaginary parts, so both must cancel on their own.`,
+        content: [
+          `Flipping only the imaginary sign cancels the $-5i$ but doubles the $-2$. Flipping only the real sign does the opposite. "Make both parts negative" sounds like flipping both, but $-2 - 5i$ is already negative in both parts, so it is left unchanged and the sum simply doubles.`,
+          `@academic[pitfall,aside:true,width:35%:Making both parts negative
+Reading $-z$ as the number whose two parts are negative leaves $z = -2 - 5i$ unchanged, and $z + z = -4 - 10i \\neq 0$. Flipping each sign gives $-z = 2 + 5i$.
+[Read more](!#10)]@`,
+          `The real components cancel and the imaginary components cancel, leaving zero.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: replace each part by its own opposite.`,
+        content: [
+          `Think of $-2 - 5i$ as a walk: 2 steps west and 5 steps south. To get back to the start you walk 2 east and 5 north — every leg reversed, not just one, and not "both legs southward".`,
+          `Both the real part and the imaginary part are negated. The defining property remains unchanged:`,
+          `@academic[formula_callout:Additive Inverse of a Complex Number
+$$z + (-z) = 0$$]@`,
+          `Verification is straightforward. Adding $z = a + bi$ to $-z = -a - bi$ gives:`,
+          `@academic[formula_callout:Additive Inverse of a Complex Number
+$$(a + bi) + (-a - bi) = (a + (-a)) + (b + (-b))i = 0 + 0i = 0$$]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [additive inverse](!/complex-numbers/definitions#additive_inverse) of a complex number $z$, written $-z$, is the complex number that adds to $z$ to give $0$.`,
+        formula: [
+          `The additive inverse of a complex number follows the same principle as real numbers: find the number that sums to zero. For a complex number $z = a + bi$, the additive inverse is:`,
+          `@academic[formula_callout:Additive Inverse
+$$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
+/complex-numbers/formulas#additive_inverse]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+        ],
+        footer: `So the additive inverse of $-2 - 5i$ is $2 + 5i$.`,
+      },
+      {
+        id: 'kind',
+        lead: `−z is a complex number again: for a real number it is the familiar −a from the section above.`,
+        content: [
+          `Consider $z = 3 + 2i$. The additive inverse is $-z = -3 - 2i$. Adding them: $(3 + 2i) + (-3 - 2i) = 0$. For $z = -4 + 5i$, the inverse is $-z = 4 - 5i$. The signs of both components flip. For $z = -1 - 7i$, the inverse is $-z = 1 + 7i$. A number in the third quadrant has its inverse in the first quadrant, and vice versa.`,
+          `The pattern is consistent: whatever signs the real and imaginary parts carry, the additive inverse reverses both.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rejected rule that flips only the imaginary sign is not useless: it is the complex conjugate.`,
+        content: `$-2 + 5i$ does not undo $-2 - 5i$, but it is its [complex conjugate](!/complex-numbers/complex-conjugate), with uses of its own — sums and products with it come out real. The two operations are easy to mix up; the section [additive inverse vs. complex conjugate](!/complex-numbers/additive-inverse#6) sets them side by side.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the picture of $-z$ as a half turn about the origin, the properties, the comparison with the conjugate, the zero case, subtraction and uniqueness.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2413,7 +2524,7 @@ export default function AdditiveInversePage({
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

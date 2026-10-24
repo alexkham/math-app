@@ -1436,6 +1436,9 @@ Two of these classes land on the same number. Skew-symmetric and nilpotent matri
 @academic[formula_callout:trace_cyclic_property|Trace Cyclic Property|$$\\text{tr}(AB) = \\text{tr}(BA)$$]@
 @academic[formulas_link:/linear-algebra/formulas#trace_cyclic_property]@
 
+@academic[fact,aside:true,width:35%:No other function has this property
+Every linear function $f$ on $n \\times n$ matrices with $f(AB) = f(BA)$ is a multiple of the trace. Applying the rule to matrices with a single entry $1$ forces every off-diagonal entry to count $0$ and every diagonal entry to count the same.]@
+
 Note that $AB$ and $BA$ need not even have the same dimensions — if $A$ is $m \\times n$ and $B$ is $n \\times m$, then $AB$ is $m \\times m$ and $BA$ is $n \\times n$. The traces of these differently-sized matrices are nevertheless equal.
 
 The proof is a direct computation. The $(i,i)$ entry of $AB$ is $\\sum_k a_{ik} b_{ki}$, so $\\text{tr}(AB) = \\sum_i \\sum_k a_{ik} b_{ki}$. The $(k,k)$ entry of $BA$ is $\\sum_i b_{ki} a_{ik}$, so $\\text{tr}(BA) = \\sum_k \\sum_i b_{ki} a_{ik}$. Both double sums range over the same index pairs and contain the same terms.
@@ -1467,7 +1470,9 @@ A companion identity links the determinant to the product of eigenvalues: $\\det
 Reading the eigenvalues of $\\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ off its diagonal gives $1$ and $1$. Only the sums agree: the eigenvalues are $3$ and $-1$, and $3 + (-1) = 2 = 1 + 1$.
 [Read more](!#pitfalls)]@
 
-For a $3 \\times 3$ matrix with eigenvalues $2, -1, 4$, the trace is $5$ and the determinant is $-8$. Neither the trace nor the determinant individually determines the eigenvalues, but together they constrain them heavily. For a $2 \\times 2$ matrix, the trace and determinant determine the eigenvalues completely via the quadratic formula.`,
+For a $3 \\times 3$ matrix with eigenvalues $2, -1, 4$, the trace is $5$ and the determinant is $-8$. Neither the trace nor the determinant individually determines the eigenvalues, but together they constrain them heavily. For a $2 \\times 2$ matrix, the trace and determinant determine the eigenvalues completely via the quadratic formula.
+
+@academic[punchline:Adding the diagonal gives the sum of the eigenvalues without finding a single one of them.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1489,7 +1494,9 @@ Concluding that matrices with equal traces are similar fails for $\\text{diag}(1
 
 Invariance under similarity means the trace is a property of the transformation itself, not of any particular matrix representation. No matter which basis is chosen, the trace comes out the same. The eigenvalues share this invariance (similar matrices have the same eigenvalues), and indeed $\\text{tr}(A) = \\sum \\lambda_i$ is an eigenvalue identity, so trace invariance and eigenvalue invariance are two sides of the same coin.
 
-The determinant is also a similarity invariant: $\\det(P^{-1}AP) = \\det(A)$. Together with the trace, it forms the beginning of a sequence of similarity invariants — the coefficients of the characteristic polynomial — that collectively determine the eigenvalue structure of the transformation.`,
+The determinant is also a similarity invariant: $\\det(P^{-1}AP) = \\det(A)$. Together with the trace, it forms the beginning of a sequence of similarity invariants — the coefficients of the characteristic polynomial — that collectively determine the eigenvalue structure of the transformation.
+
+@academic[punchline:The trace belongs to the linear map, not to its matrix: every choice of basis gives the same number.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1529,9 +1536,14 @@ Regardless of what $A$ and $B$ are, the commutator always has trace zero:
 @academic[formula_callout:trace_of_commutator|Trace of Commutator|$$\\text{tr}(AB - BA) = 0$$]@
 @academic[formulas_link:/linear-algebra/formulas#trace_of_commutator]@
 
+@academic[fact,aside:true,width:35%:Possible once matrices are infinite
+On polynomials, the derivative $D$ and the map $M$ that multiplies by $x$ satisfy $DM - MD = I$, because $(xf)' - xf' = f$. Quantum mechanics' position and momentum obey the same rule up to the constant $i\\hbar$, which is why no finite matrices can represent them.]@
+
 The cancellation follows from the cyclic property: $\\text{tr}(AB - BA) = \\text{tr}(AB) - \\text{tr}(BA) = 0$. This means the identity matrix $I$ can never be a commutator, since $\\text{tr}(I) = n \\neq 0$. In particular, there exist no $n \\times n$ matrices $A, B$ satisfying $AB - BA = I$ when working over the real or complex numbers with finite-dimensional matrices.
 
-The converse also holds, though it is harder: in the space of $n \\times n$ matrices over a field, every traceless matrix can in fact be written as a commutator — a result that requires proof beyond the trace identity itself.`,
+The converse also holds, though it is harder: in the space of $n \\times n$ matrices over a field, every traceless matrix can in fact be written as a commutator — a result that requires proof beyond the trace identity itself.
+
+@academic[punchline:The commutators are exactly the matrices with trace zero, so the identity can never be one.]@`,
     before: ``,
     after: ``,
     link: ``,

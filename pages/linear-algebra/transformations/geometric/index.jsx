@@ -2434,7 +2434,12 @@ Copying the top-right $-\\sin\\theta$ of $R_x$ and $R_z$ into $R_y$ gives $R_y(-
 
 Each of these matrices can be checked one column at a time, exactly as in the plane: column $j$ is the image of $\\mathbf{e}_j$. The direction of turn comes from the right-hand rule. With the thumb along the positive $y$-axis, the fingers curl from the positive $z$-axis toward the positive $x$-axis, so in the $xz$-plane the turn runs from $z$ to $x$ rather than from $x$ to $z$.
 
-The axis of rotation is the [eigenvector](!/linear-algebra/eigen) with eigenvalue $1$ — the direction that remains fixed. Any rotation in $\\mathbb{R}^3$ can be decomposed into rotations about the coordinate axes (Euler angles), though the decomposition is not unique.`,
+The axis of rotation is the [eigenvector](!/linear-algebra/eigen) with eigenvalue $1$ — the direction that remains fixed. Any rotation in $\\mathbb{R}^3$ can be decomposed into rotations about the coordinate axes (Euler angles), though the decomposition is not unique.
+
+@academic[fact,aside:true,width:35%:Two quarter turns, one third of a turn
+The product $R_z(90°)\\,R_x(90°)$ is a single turn by $120°$ about the diagonal line through $(1, 1, 1)$. Every rotation of space has such an axis (Euler's rotation theorem): for a rotation $\\det(R - I) = \\det(I - R)$, and in odd dimension that forces the value $0$.]@
+
+Products of these matrices are where the templates stop helping. Turning by $90°$ about the $x$-axis and then by $90°$ about the $z$-axis gives $R_z(90°)\\,R_x(90°) = \\begin{pmatrix} 0 & 0 & 1 \\\\ 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{pmatrix}$. None of the coordinate axes is left in place, since the columns send $\\mathbf{e}_1$ to $\\mathbf{e}_2$, $\\mathbf{e}_2$ to $\\mathbf{e}_3$ and $\\mathbf{e}_3$ to $\\mathbf{e}_1$. The matrix is still orthogonal with determinant $+1$, yet none of the three templates above describes the motion it performs.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2535,9 +2540,14 @@ A vertical shear shifts the $y$-coordinate by $k$ times the $x$-coordinate:
 @academic[formula_callout:Shears
 $$T(x, y) = (x, \\; kx + y), \\quad \\text{matrix } \\begin{pmatrix} 1 & 0 \\\\ k & 1 \\end{pmatrix}$$]@
 
+@academic[fact,aside:true,width:35%:Three shears make a rotation
+For $\\theta \\neq 180°$, $R_\\theta$ equals a horizontal shear by $-\\tan\\frac{\\theta}{2}$, then a vertical shear by $\\sin\\theta$, then the first shear again. Paeth's 1986 method rotates digital images this way, since each shear only slides whole rows or columns of pixels.]@
+
 Both are [triangular](!/linear-algebra/matrix/types) matrices with determinant $1$: shears are area-preserving and orientation-preserving. They are not orthogonal — angles are distorted. A square sheared horizontally becomes a parallelogram of the same area but with tilted sides.
 
 In $\\mathbb{R}^3$, there are six possible shear directions (each coordinate shifted by a multiple of each other coordinate). Each is represented by an identity matrix with one off-diagonal entry replaced by $k$.
+
+Shears and rotations look like opposites. A rotation keeps every length and every angle, while a shear tilts the grid and changes the angle at the corners of every square. Yet both have determinant $1$, and the tilt that one shear puts in can be taken out again by a shear acting in the other direction.
 
 @academic[rule_theorem_plain:Shears are fundamental building blocks — any invertible matrix with determinant $1$ can be written as a product of shears.]@`,
     before: ``,
@@ -2922,6 +2932,7 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          `@academic[punchline:A rotation of space is a plane rotation around a fixed axis: the axis stays put while everything turns around it.]@`,
         ]
     },
     {
@@ -2949,6 +2960,7 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[punchline:A reflection keeps its mirror fixed and reverses only the one direction perpendicular to it.]@`,
         ]
     },
     {

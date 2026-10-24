@@ -1417,7 +1417,7 @@ $$f(x) \\approx f(a) + f'(a)(x - a) \\qquad \\Delta y \\approx f'(a)\\, \\Delta 
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-This is the linearization of $f$ at $x$. Given a known value $f(x)$ and the slope $f'(x)$, the tangent line estimates $f$ at nearby points.
+This is the linearization of $f$ at $a$. Given a known value $f(a)$ and the slope $f'(a)$, the tangent line estimates $f$ at nearby points.
 
 To approximate $\\sqrt{4.03}$: take $f(x) = \\sqrt{x}$, $x = 4$, $dx = 0.03$. Then $f(4) = 2$ and $f'(x) = \\frac{1}{2\\sqrt{x}}$, so $f'(4) = \\frac{1}{4}$. The estimate is $2 + \\frac{1}{4}(0.03) = 2.0075$. The actual value is $\\sqrt{4.03} \\approx 2.00749...$—the approximation agrees to four decimal places, with an error of about $0.000014$.
 
@@ -1426,6 +1426,8 @@ Stopping at $dy = \\frac{1}{4}(0.03) = 0.0075$ gives only the change in $f$, not
 [Read more](!#pitfalls)]@
 
 The linearization can also be written as $L(x) = f(a) + f'(a)(x - a)$, the tangent line at $x = a$ used as a function. For $x$ near $a$, $L(x) \\approx f(x)$. The quality of the approximation depends on two factors: the size of $|x - a|$ and the magnitude of $f''$ near $a$, which controls how quickly the curve diverges from its tangent.
+
+@academic[punchline:Near a known point, the tangent line turns a hard function value into one multiplication and one addition.]@
 `,
     before: ``,
     after: ``,
@@ -1439,7 +1441,12 @@ If a quantity $x$ is measured with error $dx$, the computed value $f(x)$ inherit
 @academic[formula_callout:Error Estimation
 $$\\text{absolute error in } f \\approx |dy| = |f'(x)| \\cdot |dx|$$]@
 
+@academic[fact,aside:true,width:35%:Kepler's barrels sat at the maximum
+In 1615 Kepler found that Austrian wine barrels were built close to the shape that holds the most wine for a given diagonal rod measurement. Near that maximum the volume barely responds to the shape: a barrel 10% off in its height-to-diameter ratio holds less than 1% less wine.]@
+
 The derivative acts as an error amplification factor. Where $|f'(x)|$ is large, small measurement errors in $x$ produce large errors in $f(x)$. Where $|f'(x)|$ is small, errors are suppressed.
+
+The extreme case is a point where $f'(x) = 0$, such as the top of a maximum. There the differential predicts no change at all: to first order, an error in $x$ does not reach $f(x)$. The change that remains is proportional to $(dx)^2$, far smaller than $dx$ itself when $dx$ is small.
 
 The relative error normalizes by the function value:
 
@@ -1462,6 +1469,8 @@ For $x = 10 \\pm 0.1$, taking the error in $x^2$ as $2(0.1) = 0.2$ applies the r
 [Read more](!#pitfalls)]@
 
 In practice the rule is applied in three steps. A measured value comes with an absolute uncertainty, a $\\pm$ figure such as $\\pm 0.1$, and dividing it by the value turns it into a relative error. The rule scales that relative error by $|n|$, and multiplying the result by the computed value $x^n$ turns it back into a $\\pm$ figure for the output. For a cube, $n = 3$, and the same steps give the uncertainty in a volume computed from a measured edge.
+
+@academic[punchline:The derivative is the exchange rate between input error and output error; for a power, relative errors scale by the exponent.]@
 `,
     before: ``,
     after: ``,
@@ -1533,7 +1542,12 @@ Higher-order differentials extend the approximation. The second-order estimate o
 @academic[formula_callout:Higher-Order Differentials
 $$\\Delta y \\approx f'(x)\\,dx + \\frac{1}{2}f''(x)(dx)^2$$]@
 
+@academic[fact,aside:true,width:35%:Einstein's energy contains $\\frac{1}{2}mv^2$
+In relativity a body's energy is $E(v) = \\frac{mc^2}{\\sqrt{1 - v^2/c^2}}$, with $E'(0) = 0$ and $E''(0) = m$. The second-order estimate at $v = 0$ gives $E \\approx mc^2 + \\frac{1}{2}mv^2$: the rest energy plus Newton's kinetic energy.]@
+
 This is the beginning of the Taylor expansion written in differential notation: $f(x + dx) \\approx f(x) + f'(x)\\,dx + \\frac{1}{2}f''(x)(dx)^2 + \\cdots$. Each additional term uses a higher-order derivative and a higher power of $dx$, improving the approximation at the cost of more computation.
+
+When $f'(x) = 0$, the first term drops out and the second-order term is the whole estimate: $\\Delta y \\approx \\frac{1}{2}f''(x)(dx)^2$. The change then grows with the square of the step rather than with the step itself, and the flat tangent line, which predicts no change at all, misses it entirely.
 `,
     before: ``,
     after: ``,
@@ -1864,6 +1878,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          `@academic[punchline:With differentials defined, the fraction-like moves of Leibniz notation are genuine algebra, not lucky shorthand.]@`,
         ]
     },
     {

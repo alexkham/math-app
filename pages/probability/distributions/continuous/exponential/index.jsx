@@ -1386,7 +1386,7 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{
 
 **Key Properties**:
 • $F(0) = 0$ (no probability mass below zero)
-• $F(x) \\to 1$ as $x \\to \\infty$ (all probability is non-negative)
+• $F(x) \\to 1$ as $x \\to \\infty$ (the total probability is 1)
 • The CDF increases from 0 to 1, starting slowly and approaching 1 asymptotically
 • For any $x \\geq 0$, $P(X > x) = 1 - F(x) = e^{-\\lambda x}$ (survival function)
 
@@ -1463,6 +1463,8 @@ Using $E[X] = \\lambda$, as for a Poisson count, gives a mean wait of $3$ hours 
 The expected time until the next customer arrives is 20 minutes. If the rate increases to $\\lambda = 6$ customers per hour, the expected wait drops to $\\frac{1}{6}$ hours, or 10 minutes.
 
 To compute the expected value of a exponential distribution for your own parameters, step by step, use the [exponential expected value calculator](!/probability/calculators/expected-value/exponential).
+
+@academic[punchline:The average wait is the reciprocal of the rate: twice as many events per hour means half as long a wait.]@
   `,
   before: ``,
   after: ``,
@@ -1719,6 +1721,8 @@ Computing $x_{0.25} = \\frac{-\\ln(0.25)}{3}$ for $\\lambda = 3$ gives $0.462$ h
 **99th percentile:** $x_{0.99} = \\frac{-\\ln(0.01)}{\\lambda} = \\frac{4.605}{\\lambda}$ (only 1% of waits exceed this)
 
 The exponential distribution's right skew means that while most observations cluster near zero, the upper percentiles can be quite large relative to the [mean](!/probability/expected-value) $\\frac{1}{\\lambda}$.
+
+@academic[punchline:Every exponential percentile is a fixed multiple of the mean wait $\\frac{1}{\\lambda}$, read straight off a logarithm.]@
   `,
   before: ``,
   after: ``,
@@ -1843,7 +1847,12 @@ If $X_1 \\sim \\text{Exp}(\\lambda_1)$ and $X_2 \\sim \\text{Exp}(\\lambda_2)$ a
 @academic[formula_callout:Special Cases
 $$\\min(X_1, X_2) \\sim \\text{Exp}(\\lambda_1 + \\lambda_2)$$]@
 
+@academic[fact,aside:true,width:35%:Last of 100 bulbs: 5.2 years
+Give 100 bulbs independent exponential lifetimes with a mean of 1 year. The first fails after $\\frac{1}{100}$ of a year on average, the 99 survivors are then as good as new, and the later gaps average $\\frac{1}{99}, \\frac{1}{98}, \\ldots, 1$ year, so the last bulb goes out after $1 + \\frac{1}{2} + \\cdots + \\frac{1}{100} \\approx 5.19$ years.]@
+
 The minimum waiting time has rate equal to the sum of rates. This property is crucial in reliability theory (system fails when first component fails).
+
+With $n$ identical components of rate $\\lambda$ running side by side, the first failure therefore comes at rate $n\\lambda$, after only $\\frac{1}{n\\lambda}$ on average. A large batch loses its first member quickly. How long the whole batch takes to die out is a separate question: after each failure the remaining parts keep running, and the next failure is again a minimum over the parts still working.
 
 **Memoryless Property:**
 The exponential distribution is the **only continuous distribution** with the memoryless property:
@@ -1977,7 +1986,12 @@ This relationship (mean = standard deviation) holds for every exponential distri
 @academic[formula_callout:Properties
 $$E[X - t \\mid X > t] = E[X] = \\frac{1}{\\lambda}$$]@
 
+@academic[fact,aside:true,width:35%:You land in a double-length bus gap
+Where buses arrive as a Poisson process, 10 minutes apart on average, a passenger turning up at a random moment waits 10 minutes on average, not 5. The previous bus also left 10 minutes earlier on average, so the gap the passenger lands in averages 20 minutes: long gaps cover more of the clock and catch more arrivals.]@
+
 The expected remaining waiting time equals the original expected waiting time—knowing you've already waited $t$ time units doesn't change your expectation.
+
+A bus stop puts this formula to work. When buses come at random, as a Poisson process, the timetable promises only an average gap between them. A passenger who turns up at an arbitrary moment has no idea when the last bus left, and the natural guess is that the wait should be about half of an average gap.
 
 **Survival Function:**
 @academic[formula_callout:Properties

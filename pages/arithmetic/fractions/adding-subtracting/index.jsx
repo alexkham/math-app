@@ -913,7 +913,12 @@ Visually, a bar divided into thirds and a bar divided into fourths have differen
 
 The least common denominator (LCD) is the smallest such number, keeping arithmetic manageable. The LCD of 3 and 4 is 12. The LCD of 6 and 8 is 24.
 
-Finding the LCD uses the [least common multiple](!/arithmetic/divisibility/lcm). List multiples of each denominator until a match appears, or use prime factorization for larger numbers. For denominators 4 and 6: multiples of 4 are 4, 8, 12, 16... and multiples of 6 are 6, 12, 18... The first common multiple is 12.`,
+@academic[fact,aside:true,width:35%:Ninety-nine fractions that sum to $\\frac{99}{100}$
+$\\frac{1}{1 \\times 2} + \\frac{1}{2 \\times 3} + \\cdots + \\frac{1}{99 \\times 100} = \\frac{99}{100}$. Consecutive denominators share no factor, so each term equals $\\frac{1}{n} - \\frac{1}{n + 1}$ and in the long sum every middle term cancels, leaving $1 - \\frac{1}{100}$.]@
+
+Finding the LCD uses the [least common multiple](!/arithmetic/divisibility/lcm). List multiples of each denominator until a match appears, or use prime factorization for larger numbers. For denominators 4 and 6: multiples of 4 are 4, 8, 12, 16... and multiples of 6 are 6, 12, 18... The first common multiple is 12.
+
+When the denominators share no common factor, the LCD is simply their product, as $3 \\times 4 = 12$. Any two consecutive whole numbers are like this, so $\\frac{1}{3} - \\frac{1}{4} = \\frac{4}{12} - \\frac{3}{12} = \\frac{1}{12}$ and $\\frac{1}{4} - \\frac{1}{5} = \\frac{5}{20} - \\frac{4}{20} = \\frac{1}{20}$. The difference of two such unit fractions is again a unit fraction, with the product of the denominators below the line.`,
     before: ``,
     after: ``,
     link: '',
@@ -996,7 +1001,10 @@ To check a sum or difference that mixes whole numbers, mixed numbers and fractio
 
   obj8: {
     title: `Common Mistakes`,
-    content: `Adding denominators is the most frequent error. The sum $\\frac{1}{2} + \\frac{1}{3}$ does not equal $\\frac{2}{5}$. Only numerators are added after finding a common denominator: $\\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$.
+    content: `@academic[fact,aside:true,width:35%:Where tops plus bottoms is right
+A batter with $1$ hit in $2$ at-bats one day and $1$ hit in $3$ the next has $2$ hits in $5$: pooling two ratios does add tops and bottoms. So $\\frac{2}{5}$ is the combined rate of the two days, while $\\frac{1}{2} + \\frac{1}{3} = \\frac{5}{6}$ adds two amounts.]@
+
+Adding denominators is the most frequent error. The sum $\\frac{1}{2} + \\frac{1}{3}$ does not equal $\\frac{2}{5}$. Only numerators are added after finding a common denominator: $\\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$.
 
 Forgetting to convert all fractions to the LCD leads to incorrect results. Each fraction must be rewritten before combining.
 
@@ -1311,6 +1319,7 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
           sectionsContent.obj4.content,
                   <div key={'unit-unlikeAdd'} dangerouslySetInnerHTML={{ __html: demoUnits.unlikeAdd }} />,
           `11/12 is already in simplest form, since 11 and 12 share no factor.`,
+          `@academic[punchline:Rewriting a fraction over a new denominator changes the size of its pieces, never its value.]@`,
         ]
     },
     {
@@ -1329,6 +1338,7 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
           sectionsContent.obj6.content,
           <div key={'obj6-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          `@academic[punchline:Borrowing trades one whole for a full set of pieces, just as column subtraction trades a ten for ten ones.]@`,
         ]
     },
     {

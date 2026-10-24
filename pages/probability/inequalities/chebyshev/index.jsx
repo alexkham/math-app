@@ -963,6 +963,9 @@ In a problem, the two forms are fed with whatever numbers it supplies: a mean, a
 @academic[rule_theorem:Chebyshev's inequality
 Chebyshev's inequality states that a random variable with small variance cannot stray far from its mean very often.]@
 
+@academic[fact,aside:true,width:35%:The bound is reached exactly
+Take $X = -2, 0, 2$ with probabilities $\\frac{1}{8}, \\frac{3}{4}, \\frac{1}{8}$: the mean is $0$, the variance is $1$, and $\\mathbb{P}(|X| \\ge 2) = \\frac{1}{4}$, exactly the bound for $k = 2$. Knowing only the mean and the variance, no smaller bound is safe.]@
+
 The variance measures how spread out the values of the variable are. If this spread is limited, then large deviations from the mean must be rare. The inequality makes this idea precise by turning variability into a bound on deviation probabilities.
 
 The result does not predict where values will cluster.  
@@ -1035,6 +1038,9 @@ In this role, Chebyshev's inequality acts as a bridge between basic moment infor
       content:`
 Although Chebyshev's inequality is widely applicable, the bounds it provides are often conservative.
 
+@academic[fact,aside:true,width:35%:One peak puts 95% within three sigma
+For a distribution with a single peak, the Vysochanskij–Petunin inequality lowers the bound to $\\frac{4}{9k^2}$ when $k \\ge \\sqrt{8/3} \\approx 1.63$. At $k = 3$ that is under $5\\%$, against about $11\\%$ from Chebyshev, whose worst case splits its mass into three spikes.]@
+
 Because it depends only on variance, the inequality ignores finer features of the distribution such as shape, symmetry, or tail behavior. As a result, the bound may be much larger than the true probability, especially for well-behaved distributions.
 
 Chebyshev's inequality is also insensitive to how deviations occur. Two random variables with the same variance but very different distributions receive the same bound, even if one is far more concentrated than the other.
@@ -1054,6 +1060,8 @@ Chebyshev's inequality is the first probability bound that explicitly connects v
 By using variance, it shows that knowing how spread out a random variable is already imposes strong restrictions on how often extreme values can occur. This insight is fundamental in probability theory and underlies many results about stability and convergence.
 
 Because it makes no assumptions about distribution shape, Chebyshev's inequality remains broadly applicable while still being strong enough to support key theoretical arguments.
+
+@academic[punchline:A single number for spread, with nothing said about shape, already limits how often extremes can occur.]@
 `,
       before:``,
       after:``,
@@ -1226,7 +1234,7 @@ The result is deliberately general. It applies without assuming any particular d
     u_2_0: demoUnitFrame({
       svg: chebyshevDiagrams['chebyshev-normal'],
       caption: 'Chebyshev bound for a normal variable, mean 10, variance 4, deviation 3',
-      text: 'The bound is the variance divided by the square of the deviation, here 4 over 9, and the shaded tails show the true probability of deviating by at least 3, which is much smaller. Two units of standard deviation against a deviation of three produces the same ratio for every distribution. Change the variance or the deviation and watch the bound move on the',
+      text: 'The bound is the variance divided by the square of the deviation, here 4 over 9, and the shaded tails show the true probability of deviating by at least 3, which is much smaller. Two units of standard deviation against a deviation of three produce the same ratio for every distribution. Change the variance or the deviation and watch the bound move on the',
       href: '/probability/visual-tools/inequalities/chebyshev',
       linkText: 'Chebyshev inequality visualizer',
     }),

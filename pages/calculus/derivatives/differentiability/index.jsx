@@ -426,7 +426,12 @@ Rewrite $f(x) - f(a)$ as
 @academic[formula_callout:Differentiability Implies Continuity
 $$f(x) - f(a) = \\frac{f(x) - f(a)}{x - a} \\cdot (x - a)$$]@
 
+@academic[fact,aside:true,width:35%:Differentiable at one point only
+Let $f(x) = x^2$ for rational $x$ and $f(x) = 0$ for irrational $x$. Its difference quotient at $0$ is at most $|h|$ in size, so $f'(0) = 0$, yet $f$ is not continuous at any other point.]@
+
 As $x \\to a$, the first factor approaches $f'(a)$ (which exists by assumption) and the second factor approaches $0$. Their product approaches $f'(a) \\cdot 0 = 0$, so $\\lim_{x \\to a} f(x) = f(a)$.
+
+The argument is local. It starts from the derivative at the single point $a$ and ends with continuity at that same point, and at no step does it look at the values of $f$ at points near $a$. A derivative at one point is a statement about that point alone.
 
 This establishes a hierarchy: differentiability is a stronger condition than continuity. Every differentiable function is continuous, but the reverse implication fails. The functions that are continuous but not differentiable at a point form a significant and instructive class.
 `,
@@ -548,6 +553,9 @@ For piecewise functions defined on adjacent intervals, differentiability at each
     title: `Pathological Examples`,
     content: `
 The gap between continuity and differentiability extends further than isolated points. The Weierstrass function, constructed in 1872, is continuous at every real number but differentiable at none. Its graph is an infinitely jagged curve with no smooth segments anywhere.
+
+@academic[fact,aside:true,width:35%:A tangent anywhere is the exception
+In 1931 Banach and Mazurkiewicz proved that, in the sense of Baire category, a typical continuous function on $[0, 1]$ has a derivative at no point. The reason: zigzags with huge slopes can be added to any continuous graph while moving it as little as you like.]@
 
 This is not an isolated curiosity. Entire families of continuous-but-nowhere-differentiable functions exist, and they arise naturally in fractal geometry and stochastic processes. Brownian motion paths, for instance, are almost surely continuous everywhere and differentiable nowhere.
 
@@ -1040,6 +1048,7 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          `@academic[punchline:Two pieces join differentiably only when they meet and their slopes agree at the join.]@`,
         ]
     },
     {

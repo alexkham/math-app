@@ -1548,6 +1548,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -2174,6 +2175,28 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-11 | 4 callouts (obj3, obj7, obj10 ×2)
+// Concept introduction (section 7, "The Trigonometric Form") — template F,
+// two descriptions shown to agree. Running instance: z = 1 + i, the number of
+// section 1's (1 + i)^10. Old obj7 text is kept in sectionsContent.obj7,
+// unused; its six formula boxes and link, the pitfall aside, two headings and
+// seven passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBothTable = ciTableOpen(['description of 1 + i', 'the two numbers', 'across', 'up']) +
+  ciRow(['across and up', 'a = 1, b = 1', '1', '1']) +
+  ciRow(['distance and angle', 'r = √2, θ = π/4', '√2 · cos(π/4) = 1', '√2 · sin(π/4) = 1'], { shade: true, last: true, color: '#2563EB', cols: [2, 3] }) +
+  '</tbody></table>'
+const ciWhenTable = ciTableOpen(['task', 'easier in', 'why']) +
+  ciRow(['add or subtract', 'algebraic form', 'add the parts']) +
+  ciRow(['multiply or divide', 'trigonometric form', 'multiply the moduli, add the angles'], { shade: true }) +
+  ciRow(['powers such as (1 + i)¹⁰', 'trigonometric form', 'raise r, multiply θ'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
       obj0: {
@@ -2831,6 +2854,11 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    bothTable: ciBothTable,
+    whenTable: ciWhenTable,
+  };
+
   const demoUnits = {
     modulus: demoUnitFrame({
       svg: polarRectangularDiagrams.qi,
@@ -2872,6 +2900,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -2890,9 +2919,97 @@ const schemas = {
 }
    }
 
-export default function TrigoFormPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function TrigoFormPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 7 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The algebraic form finds a point by going across and then up.`,
+        content: [
+          `$1 + i$ means: one unit along the real axis, then one unit up. The two numbers $a = 1$ and $b = 1$ are directions for reaching the point at $(1, 1)$.`,
+        ],
+      },
+      {
+        id: 'second',
+        lead: `The same point can be found another way: by how far away it is and in which direction.`,
+        content: [
+          `Stand at the origin, turn to face the point, and walk to it. That takes two numbers as well: the distance, which is the modulus $r$, and the angle turned from the positive real axis, which is the argument $\\theta$. For $1 + i$ the distance is $\\sqrt{1^2 + 1^2} = \\sqrt{2}$ and the angle is $\\frac{\\pi}{4}$, halfway between the two axes.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Both descriptions of 1 + i lead to the same place.`,
+        content: [
+          `Turn the distance and angle back into across and up with cosine and sine, and the first description comes out exactly.`,
+          ciTable('bothTable'),
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree: across, up and the distance form one right triangle.`,
+        content: [
+          `The arrow from the origin to any point is the long side of a right triangle whose other two sides are the across part $a$ and the up part $b$. With the angle $\\theta$ at the origin, cosine and sine say exactly $a = r\\cos\\theta$ and $b = r\\sin\\theta$ — for every point, not just $1 + i$.`,
+          `This formula encodes the relationship between polar and Cartesian coordinates. The real part is $a = r\\cos\\theta$ and the imaginary part is $b = r\\sin\\theta$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Writing $a + bi$ through its modulus and argument, $z = r(\\cos\\theta + i\\sin\\theta)$, gives the [trigonometric form](!/complex-numbers/definitions#trigonometric_form) of the complex number.`,
+        formula: [
+          `With modulus $r$ and argument $\\theta$ defined, the trigonometric form expresses a complex number as:`,
+          `@academic[formula_callout:Trigonometric Form
+$$z = r(\\cos\\theta + i\\sin\\theta)$$
+/complex-numbers/formulas#trigonometric_form]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+        ],
+        footer: `So $1 + i = \\sqrt{2}\\left(\\cos\\frac{\\pi}{4} + i\\sin\\frac{\\pi}{4}\\right)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is the same number in a different notation, and the notation has shorter versions.`,
+        content: [
+          `## The cis Notation`,
+          `Because the combination $\\cos\\theta + i\\sin\\theta$ appears constantly, an abbreviated notation exists:`,
+          `@academic[formula_callout:The Trigonometric Form
+$$\\text{cis}\\,\\theta = \\cos\\theta + i\\sin\\theta$$]@`,
+          `Using this shorthand, the trigonometric form becomes:`,
+          `@academic[formula_callout:The Trigonometric Form
+$$z = r\\,\\text{cis}\\,\\theta$$]@`,
+          `The notation "cis" stands for "cosine + i sine." It appears frequently in precalculus and engineering contexts.`,
+          `## Connection to Exponential Form`,
+          `The trigonometric form leads directly to the [exponential form](!/complex-numbers/exponential-form) through Euler's formula:`,
+          `@academic[formula_callout:The Trigonometric Form
+$$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$$]@`,
+          `This identity shows that $\\text{cis}\\,\\theta = e^{i\\theta}$, so the trigonometric and exponential forms are two notations for the same representation.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which description to reach for depends on the job — and the trigonometric one has a strict shape.`,
+        content: [
+          `Adding is easiest across and up; multiplying and taking powers are easiest by distance and angle, which is how $(1 + i)^{10}$ becomes quick. The section on [multiplication and division in trigonometric form](!/complex-numbers/trigonometric-form#10) shows how.`,
+          ciTable('whenTable'),
+          `The form only reads correctly as written: $r$ positive, the same angle in both places, and a plus sign between them.`,
+          `@academic[pitfall,aside:true,width:35%:Reading the argument through a minus sign
+Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argument $\\frac{\\pi}{3}$ ignores the minus sign; the form needs a plus. Since cosine is even and sine is odd, the number is $2\\left(\\cos\\left(-\\frac{\\pi}{3}\\right) + i\\sin\\left(-\\frac{\\pi}{3}\\right)\\right)$, with argument $-\\frac{\\pi}{3}$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, converting between the algebraic and trigonometric forms in both directions, and multiplying and dividing in trigonometric form.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2975,7 +3092,7 @@ export default function TrigoFormPage({seoData, sectionsContent, introContent, o
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
-          sectionsContent.obj7.content,
+          <ConceptIntro key={'obj7-intro'} data={conceptIntro} />,
         ]
     },
     {

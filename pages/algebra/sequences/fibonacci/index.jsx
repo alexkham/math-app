@@ -278,7 +278,12 @@ obj4: {
 $$F_{n-1} F_{n+1} - F_n^2 = (-1)^n$$
 /algebra/formulas#cassinis_identity]@
 
+@academic[fact,aside:true,width:35%:A chessboard that gains a square
+Cut an $8 \\times 8$ chessboard into two triangles and two trapezoids, and the pieces seem to refill a $5 \\times 13$ rectangle of area $65$. The extra square is a thin gap along the diagonal, where the slopes $\\frac{3}{8}$ and $\\frac{2}{5}$ of the cut edges differ by only $\\frac{1}{40}$.]@
+
 The product of the neighbors minus the square of the middle term alternates between $+1$ and $-1$. For $n = 6$: $F_5 \\cdot F_7 - F_6^2 = 5 \\cdot 13 - 8^2 = 65 - 64 = 1$.
+
+Read as areas, the identity compares a rectangle with sides $F_{n-1}$ and $F_{n+1}$ against a square with side $F_n$. Their areas always differ by exactly one unit square: for $n = 6$ the rectangle is larger, and for $n = 5$ the square is, since $3 \\cdot 8 - 5^2 = 24 - 25 = -1$. As $n$ grows, both shapes grow without bound, while the difference stays a single square.
 
 **Sum of the first n Fibonacci numbers:**
 
@@ -344,7 +349,14 @@ $$L_n = \\phi^n + \\psi^n$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-Where Fibonacci's formula subtracts powers of the two roots and divides by $\\sqrt{5}$, Lucas's formula adds them directly. The complementary structure — one sequence from the difference, the other from the sum — is a consequence of both sequences satisfying the same characteristic equation.`,
+@academic[fact,aside:true,width:35%:Primes leave a mark on Lucas numbers
+For every prime $p$, $L_p$ is one more than a multiple of $p$, as in $L_7 = 29 = 4 \\cdot 7 + 1$: expanding $(\\phi + \\psi)^p = 1$ leaves $L_p$ plus middle terms that all carry the factor $p$. The first composite number $n$ with the same property is $705$.]@
+
+Where Fibonacci's formula subtracts powers of the two roots and divides by $\\sqrt{5}$, Lucas's formula adds them directly. The complementary structure — one sequence from the difference, the other from the sum — is a consequence of both sequences satisfying the same characteristic equation.
+
+The same holds for any pair of starting values: a sequence that follows the rule $a_n = a_{n-1} + a_{n-2}$ is always $A\\phi^n + B\\psi^n$, with $A$ and $B$ fixed by its first two terms. Fibonacci has $A = \\frac{1}{\\sqrt{5}}$ and $B = -\\frac{1}{\\sqrt{5}}$; Lucas has $A = B = 1$.
+
+@academic[punchline:Whatever the starting values, the Fibonacci rule builds the sequence from $\\phi^n$ and $\\psi^n$; only the mix changes.]@`,
     before: ``,
     after: ``,
     link: '',

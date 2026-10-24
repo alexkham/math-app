@@ -1146,6 +1146,11 @@ $7^4 = 3 \\cdot 7 = 21 \\to 21 \\bmod 10 = 1$
 
 The answer is $1$. The largest intermediate number was $63$ — far smaller than $7^4 = 2{,}401$.
 
+@academic[fact,aside:true,width:35%:Exponents with 600 digits
+RSA encryption computes $c^d \\bmod n$ with an exponent $d$ of about $600$ digits. Squaring and reducing gets there in fewer than $4{,}100$ multiplications, while $c^d$ written out in full would have more digits than there are atoms in the universe.]@
+
+The same power can be reached faster by squaring. Squaring $7$ gives $7^2 = 49 \\to 9$, and squaring again gives $7^4 = 9^2 = 81 \\to 1$: two multiplications instead of three. Each squaring doubles the exponent, so $a^{1024}$ takes only ten squarings, and any other power is a product of these squares, chosen by the binary digits of the exponent.
+
 For $3^{10} \\bmod 7$:
 
 $3^1 = 3$, $3^2 = 9 \\to 2$, $3^3 = 6$, $3^4 = 18 \\to 4$, $3^5 = 12 \\to 5$, $3^6 = 15 \\to 1$.
@@ -1253,6 +1258,9 @@ Larger spans work identically. What day is it $1{,}000$ days from a Tuesday (day
 obj12: {
   title: `Why Divisibility Rules Work`,
   content: `The familiar [divisibility rules](!/arithmetic/divisibility/rules) are modular arithmetic in disguise. Each rule exploits a congruence property of $10$ — the base of our number system.
+
+@academic[fact,aside:true,width:35%:One test for 7, 11 and 13
+Because $1001 = 7 \\cdot 11 \\cdot 13$, $1000 \\equiv -1$ modulo all three, so the alternating sum of three-digit blocks tests $7$, $11$ and $13$ at once. For $1{,}234{,}567$ it is $567 - 234 + 1 = 334$, which none of them divides, so neither does the number.]@
 
 The digit-sum rule for $9$ works because $10 \\equiv 1 \\pmod{9}$. Every [power](!/algebra/powers) of $10$ is congruent to $1$: $10^0 = 1$, $10^1 \\equiv 1$, $10^2 \\equiv 1$, and so on. A digit $d$ in the $k$th place contributes $d \\cdot 10^k \\equiv d \\cdot 1 = d \\pmod{9}$. The place value drops away, and only the digit itself matters. So the entire number is congruent to the sum of its digits modulo $9$.
 
@@ -1604,6 +1612,7 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
                   <div key={'unit-powCycle'} dangerouslySetInnerHTML={{ __html: demoUnits.powCycle }} />,
             `A power of 2 is never a multiple of 7, so only 6 remainders are possible, and a repeat must come within the first 7 powers.`,
+          `@academic[punchline:Powers modulo $n$ always fall into a cycle, so even a huge exponent matters only through its place in that cycle.]@`,
         ]
     },
     {
@@ -1612,6 +1621,7 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@academic[punchline:Remainders can be added, subtracted and multiplied freely, but never divided directly: dividing by $b$ means multiplying by an inverse of $b$.]@`,
         ]
     },
     {

@@ -1517,7 +1517,7 @@ Tomorrow will be sunny, cloudy, or rainy with probabilities 0.6, 0.3, and 0.1. Y
 
 What's the probability you go running tomorrow?
 
-Cases: $B₁ =$ sunny, $B₂ = $cloudy, $B₃ =$ rainy
+Cases: $B₁ =$ sunny, $B₂ =$ cloudy, $B₃ =$ rainy
 • $P(B₁) = 0.6, P(B₂) = 0.3, P(B₃) = 0.1$
 • $P(\\text{run} | B₁) = 0.8$
 • $P(\\text{run} | B₂) = 0.5$
@@ -1825,6 +1825,9 @@ Classification algorithms compute P(class | features) using Bayes, which require
 
 **In medicine and public health:**
 
+@academic[fact,aside:true,width:35%:Better in each group, worse overall
+In a 1986 kidney-stone study, open surgery beat the keyhole method on small stones ($93$% against $87$%) and on large stones ($73$% against $69$%), yet lost overall ($78$% against $83$%). Surgery was given mostly to the harder large stones, so its overall rate put far more weight on the worse case.]@
+
 Disease prevalence varies across demographics. Treatment effectiveness differs by patient subgroup. Risk assessment requires accounting for multiple pathways to an outcome. Total probability combines these conditional effects to give population-level estimates.
 
 **In reliability and engineering:**
@@ -1876,6 +1879,11 @@ Total probability decomposes $P(A)$ into pieces $P(A ∩ Bᵢ)$. It marginalizes
 
 **[Law of total expectation](!/probability/expected-value):**
 The expectation version states $E[X] = ∑ E[X | Bᵢ]·P(Bᵢ)$. Same structure, different quantity.
+
+@academic[fact,aside:true,width:35%:HH takes longer to appear than HT
+A fair coin needs $6$ tosses on average to show two heads in a row, but only $4$ to show heads then tails. After a first head, a miss on HH (a tail) starts the wait over, while a miss on HT (another head) still leaves a head in place.]@
+
+Waiting times are a natural use of the expectation version. To find the expected number of fair-coin tosses until a pattern such as HH or HT first appears, split on the first toss: heads or tails, each with probability $\\frac{1}{2}$. Each case leaves a smaller waiting problem, and the expected waits of those cases, weighted by $\\frac{1}{2}$, add up to the overall expected wait.
 
 **[Independence](!/probability/independence):**
 If $A$ is independent of all $Bᵢ$, then $P(A | Bᵢ) = P(A)$ for all $i$, and total probability becomes trivial: $P(A) = P(A)·∑ P(Bᵢ) = P(A)$. The interesting cases involve dependence.
@@ -2089,6 +2097,7 @@ export default function TotalProbabilityPage({
                dangerouslySetInnerHTML={{ __html: examplesTable }} />,
                   <div key={'unit-totalRun'} dangerouslySetInnerHTML={{ __html: demoUnits.totalRun }} />,
             `Averaging the three navy bars without weights, (0.8 + 0.5 + 0.1)/3 ≈ 0.47, gives the wrong answer.`,
+          `@academic[punchline:Each case counts in proportion to its probability, so a rare case barely moves the total, however extreme its rate.]@`,
         ]
     },
     {

@@ -1040,9 +1040,14 @@ For indicator random variables, this means:
 • The expectation of a sum equals the sum of expectations
 • No independence assumptions are required
 
+@academic[fact,aside:true,width:35%:One match on average, any deck size
+Shuffle $n$ cards numbered $1$ to $n$: card $i$ lands in position $i$ with probability $\\frac{1}{n}$, so the expected number of matches is $n \\cdot \\frac{1}{n} = 1$. The answer is the same for $3$ cards and for a million.]@
+
 As a result, counting problems can be solved by expressing the quantity of interest as a sum of indicator variables and taking expectations term by term.
 
 This technique avoids direct probability calculations and remains valid even when the indicators are dependent.
+
+Matching problems are the classic test. When a deck is shuffled, the events "card $i$ lands in position $i$" are dependent: if every card but one is in place, the last one is forced into place as well. The full distribution of the number of matches takes inclusion–exclusion to compute, but its expectation needs only one probability per card.
 `,
       before:``,
       after:``,
@@ -1102,6 +1107,11 @@ They commonly appear in:
 • Random structures, where indicators isolate local events
 
 Indicators function as a structural tool rather than as a probability model of their own.
+
+@academic[fact,aside:true,width:35%:Only about 5 records in 100 draws
+The $k$-th value is the largest of the first $k$ with probability $\\frac{1}{k}$, so the expected number of records is $1 + \\frac{1}{2} + \\dots + \\frac{1}{100} \\approx 5.19$. A thousand draws raise it only to about $7.49$.]@
+
+Records are a small example of such a structure. Values are drawn one at a time from the same continuous distribution, and a value is called a record when it is larger than every value drawn before it. Whether the $k$-th value is a record depends only on how the first $k$ values are ordered among themselves, so each draw carries its own record indicator. The number of records is the sum of these indicators, and its expectation is the sum of their probabilities, whatever the distribution of the values.
 `,
       before:``,
       after:``,
@@ -1322,6 +1332,7 @@ export default function IndicatorsPage({
           sectionsContent.obj1.content,
                   <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
           `The formal definition follows.`,
+          `@academic[punchline:An indicator turns an event into a number, so events can be added, multiplied and averaged.]@`,
         ]
     },
     {
@@ -1383,6 +1394,7 @@ export default function IndicatorsPage({
           sectionsContent.obj6.content,
                   <div key={'unit-countSixes'} dangerouslySetInnerHTML={{ __html: demoUnits.countSixes }} />,
           `With n dice the same sum of n indicators gives n/6 expected sixes.`,
+          `@academic[punchline:The expected number of events that occur is the sum of their probabilities, overlaps or not.]@`,
         ]
     },
     {

@@ -252,7 +252,12 @@ $$\\frac{0}{0} \\qquad \\frac{\\infty}{\\infty} \\qquad 0 \\cdot \\infty \\qquad
 @academic[formula_callout:Indeterminate Forms
 $$0^0 \\qquad 1^\\infty \\qquad \\infty^0$$]@
 
+@academic[fact,aside:true,width:35%:A rule bought from Bernoulli
+The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Johann Bernoulli. In 1694 the Marquis de L'Hôpital agreed to pay Bernoulli 300 livres a year for his discoveries, and in 1696 he printed the rule in his textbook, the first on differential calculus.]@
+
 Each form represents a competition between opposing tendencies. In $0/0$, both numerator and denominator vanish—which vanishes faster determines the limit. In $\\infty - \\infty$, both terms grow without bound—their difference depends on relative growth rates.
+
+The techniques on this page settle the competition by algebra: they rewrite the expression until the competing parts can be compared directly. Once derivatives are available, one more tool handles most $\\frac{0}{0}$ and $\\frac{\\infty}{\\infty}$ forms at once. When $f$ and $g$ both tend to $0$, or both to $\\infty$, and the limit of $\\frac{f'(x)}{g'(x)}$ exists, the limit of $\\frac{f(x)}{g(x)}$ equals it. This is L'Hôpital's rule.
 
 Indeterminate forms require transformation. The goal is to rewrite the expression so that substitution or [limit rules](!/calculus/limits/rules) apply.
 `,
@@ -858,6 +863,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj2.content,
           <div key={'unit-holeLimit'} dangerouslySetInnerHTML={{ __html: demoUnits.holeLimit }} />,
           `Factoring in section 4 removes the common factor x − 2 and fills in the value 4.`,
+          `@academic[punchline:A $0/0$ from substitution decides nothing: the limit has to be read from the values near the point.]@`,
         ]
     },
     {
@@ -893,6 +899,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@academic[punchline:Cancelling is allowed because a limit never uses the value at the point, only the values around it.]@`,
         ]
     },
     {
@@ -955,6 +962,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           `Because the two sides disagree, the two-sided limit at 3 does not exist, not even as ∞.`,
           <div key={'obj11-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj11Table }} />,
+          `@academic[punchline:A nonzero number over a vanishing denominator always blows up; the signs on each side decide which infinity.]@`,
         ]
     },
     {

@@ -881,7 +881,12 @@ The mnemonic "keep, change, flip" summarizes the steps: keep the first fraction 
 
 Multiplying by the reciprocal produces this result: $\\frac{1}{2} \\times \\frac{4}{1} = \\frac{4}{2} = 2$.
 
-The method works because multiplying by a reciprocal undoes multiplication. If $\\frac{a}{b} \\times \\frac{c}{d} = x$, then $x \\div \\frac{c}{d} = x \\times \\frac{d}{c}$ returns to $\\frac{a}{b}$. Division by a fraction and multiplication by its reciprocal are the same operation.`,
+@academic[fact,aside:true,width:35%:A supercomputer with no divide circuit
+The Cray-1 of 1976 had no unit for division. To find $a \\div b$ it built the reciprocal $\\frac{1}{b}$ from multiplications and subtractions, then multiplied by $a$, since multiplication could be streamed through its fast pipelines and long division could not.]@
+
+The method works because multiplying by a reciprocal undoes multiplication. If $\\frac{a}{b} \\times \\frac{c}{d} = x$, then $x \\div \\frac{c}{d} = x \\times \\frac{d}{c}$ returns to $\\frac{a}{b}$. Division by a fraction and multiplication by its reciprocal are the same operation.
+
+Read the other way, the rule says that any division can be done with one reciprocal and one multiplication. Dividing by $8$ is multiplying by $\\frac{1}{8} = 0.125$, and dividing by $\\frac{2}{5}$ is multiplying by $\\frac{5}{2} = 2.5$. Once the reciprocal of a divisor is known, every division by that divisor becomes a multiplication.`,
     before: ``,
     after: ``,
     link: '',
@@ -936,7 +941,9 @@ $$\\frac{7}{2} \\div \\frac{7}{4} = \\frac{7}{2} \\times \\frac{4}{7} = \\frac{2
 
 Cross-canceling before multiplying simplifies the work. The 7s cancel, leaving $\\frac{1}{2} \\times \\frac{4}{1} = 2$.
 
-To verify a mixed-number division, use the [fraction calculator](!/calculators/fraction-calculator). It applies keep-change-flip and shows the full working.`,
+To verify a mixed-number division, use the [fraction calculator](!/calculators/fraction-calculator). It applies keep-change-flip and shows the full working.
+
+@academic[punchline:A mixed number is a sum in disguise, so it must become one improper fraction before any division.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -955,7 +962,9 @@ $$\\frac{8}{9} \\times \\frac{3}{4} = \\frac{2}{3} \\times \\frac{1}{1} = \\frac
 Canceling the $3$ and $6$ in $\\frac{3}{4} \\div \\frac{5}{6}$ gives $\\frac{1}{4} \\times \\frac{2}{5} = \\frac{1}{10}$. Flipped first, $\\frac{3}{4} \\times \\frac{6}{5}$ cancels $6$ with $4$: $\\frac{3}{2} \\times \\frac{3}{5} = \\frac{9}{10}$.
 [Read more](!#pitfalls)]@
 
-Without cross-canceling, the product $\\frac{24}{36}$ requires reduction using the [GCD](!/arithmetic/divisibility/gcd). Canceling first avoids larger numbers entirely.`,
+Without cross-canceling, the product $\\frac{24}{36}$ requires reduction using the [GCD](!/arithmetic/divisibility/gcd). Canceling first avoids larger numbers entirely.
+
+@academic[punchline:Cancel only after the flip: once the division has become a multiplication, any top factor may cancel any bottom factor.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -963,11 +972,16 @@ Without cross-canceling, the product $\\frac{24}{36}$ requires reduction using t
 
   obj8: {
     title: `Word Problems and Applications`,
-    content: `Division by a fraction answers "how many groups of this size fit into that amount?" The expression $\\frac{3}{4} \\div \\frac{1}{4}$ asks how many quarters are in three-quarters. The answer is 3.
+    content: `@academic[fact,aside:true,width:35%:One teacher in 23 wrote the story
+In Liping Ma's 1999 study, only one of 23 U.S. teachers wrote a correct word problem for $1\\frac{3}{4} \\div \\frac{1}{2}$, and a common story took half of $1\\frac{3}{4}$, which divides by $2$. Of 72 Chinese teachers, 65 wrote a correct one.]@
+
+Division by a fraction answers "how many groups of this size fit into that amount?" The expression $\\frac{3}{4} \\div \\frac{1}{4}$ asks how many quarters are in three-quarters. The answer is 3.
 
 Practical applications include portioning and measurement. If a recipe uses $\\frac{2}{3}$ cup of flour per batch, and you have 4 cups, how many batches can you make? Compute $4 \\div \\frac{2}{3} = 4 \\times \\frac{3}{2} = 6$ batches.
 
-Rate problems also use fraction division. If a pipe fills $\\frac{1}{4}$ of a tank in $\\frac{1}{2}$ hour, the rate is $\\frac{1}{4} \\div \\frac{1}{2} = \\frac{1}{4} \\times 2 = \\frac{1}{2}$ tank per hour.`,
+Rate problems also use fraction division. If a pipe fills $\\frac{1}{4}$ of a tank in $\\frac{1}{2}$ hour, the rate is $\\frac{1}{4} \\div \\frac{1}{2} = \\frac{1}{4} \\times 2 = \\frac{1}{2}$ tank per hour.
+
+@academic[punchline:Any question of how many of one amount fit into another, or how much goes with a single unit, is a division.]@`,
     before: ``,
     after: ``,
     link: '',

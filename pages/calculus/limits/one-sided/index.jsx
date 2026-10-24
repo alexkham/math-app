@@ -2363,9 +2363,14 @@ The [two-sided limit](!/calculus/limits/two-sided) exists if and only if both on
 @academic[formula_callout:The Connection to Two-Sided Limits
 $$\\lim_{x \\to a} f(x) = L \\quad \\Longleftrightarrow \\quad \\lim_{x \\to a^-} f(x) = L \\;\\text{ and }\\; \\lim_{x \\to a^+} f(x) = L$$]@
 
+@academic[fact,aside:true,width:35%:Bounded, yet no limit from either side
+On $(0, 0.001)$ alone, $\\frac{1}{x}$ runs from $1000$ up to infinity, so $\\sin\\frac{1}{x}$ takes every value in $[-1, 1]$ infinitely often. The same happens on $(-0.001, 0)$, so neither one-sided limit at $0$ exists.]@
+
 One-sided limits decompose the two-sided limit into its directional components. Checking whether a two-sided limit exists often begins with computing the one-sided limits separately.
 
 If the one-sided limits exist but differ, the two-sided limit does not exist. If either one-sided limit fails to exist (due to oscillation or unbounded behavior), the two-sided limit also fails.
+
+Oscillation is the less familiar of the two failures. A function can stay bounded near $a$, never running off to infinity, and still never settle on one height from either side: as $x$ closes in on $a$, its values keep sweeping up and down without end.
 `,
     before: ``,
     after: ``,
@@ -2562,6 +2567,8 @@ Calling the step $f(x) = x$ for $x < 0$, $f(x) = x + 1$ for $x \\geq 0$ continuo
 [Read more](!#pitfalls)]@
 
 Full continuity at $a$ requires both. On a closed interval $[a, b]$, continuity means: continuous on the open interval $(a, b)$, continuous from the right at $a$, and continuous from the left at $b$.
+
+@academic[punchline:Continuity at a point is two one-sided checks against $f(a)$; at an endpoint of an interval only one of them exists.]@
 `,
     before: ``,
     after: ``,
@@ -2582,7 +2589,12 @@ Determining whether a discontinuity is a jump, removable, or infinite requires c
 
 ## Piecewise Models
 
+@academic[fact,aside:true,width:35%:A higher bracket never cuts your pay
+Each bracket's rate applies only to the income above its threshold, so the tax owed has equal one-sided limits at every threshold: its graph bends there but never jumps. A raise that crosses into a higher bracket always leaves more after tax.]@
+
 Real-world models often switch formulas at threshold values—tax brackets, shipping rates, material phase changes. One-sided limits detect whether the transition is smooth or abrupt.
+
+Income tax is a familiar case. In a bracket system the income scale is cut at a few thresholds, and each bracket carries its own tax rate. The tax owed is then a piecewise function of income, with a new formula taking over at every threshold, and the question is what happens to the amount owed just below and just above each one.
 
 ## One-Sided Derivatives
 

@@ -1745,7 +1745,9 @@ Written out in components, this reads $\\mathbf{v} \\cdot \\mathbf{v} = v_1^2 + 
 
 This observation has practical consequences. Several norm properties that would otherwise demand their own proofs fall out as corollaries of dot product rules. Scalar factoring implies $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$ with no extra work. The triangle inequality $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ follows once we control the size of $\\mathbf{a} \\cdot \\mathbf{b}$ through Cauchy–Schwarz — again, a statement framed entirely in dot product language.
 
-The dependence runs both ways. The geometric formula $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$ rebuilds the dot product from two norms and an angle. Neither concept stands alone: the dot product encodes magnitude, and magnitude participates in the dot product's geometric interpretation. Separating them into unrelated topics conceals the single algebraic mechanism they both rely on.`,
+The dependence runs both ways. The geometric formula $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$ rebuilds the dot product from two norms and an angle. Neither concept stands alone: the dot product encodes magnitude, and magnitude participates in the dot product's geometric interpretation. Separating them into unrelated topics conceals the single algebraic mechanism they both rely on.
+
+@academic[punchline:Length is not a separate idea: it is the dot product of a vector with itself, under a square root.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -1771,7 +1773,12 @@ The right-hand side is the dot product of the two normalized vectors $\\hat{\\ma
 
 @academic[rule_corollary_plain:The cosine of the angle between two vectors depends solely on their directions, not on how long they are.]@
 
-In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, this formula can be verified against the angle measured with a protractor. In higher dimensions, where geometric angles cannot be visualized, the formula serves as the definition of the angle between two vectors — extending a geometric concept into spaces where geometry alone cannot reach.`,
+@academic[fact,aside:true,width:35%:Methane's bond angle is a dot product
+In methane the four hydrogens sit at alternate corners of a cube around the carbon, along $(1, 1, 1)$ and $(1, -1, -1)$ for example. The dot product is $-1$ and each length is $\\sqrt{3}$, so $\\cos\\theta = -\\frac{1}{3}$ and $\\theta \\approx 109.5^\\circ$, the bond angle of chemistry books.]@
+
+In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, this formula can be verified against the angle measured with a protractor. In higher dimensions, where geometric angles cannot be visualized, the formula serves as the definition of the angle between two vectors — extending a geometric concept into spaces where geometry alone cannot reach.
+
+Even in $\\mathbb{R}^3$ the formula often does better than a protractor. Take a cube centred at the origin with corners at $(\\pm 1, \\pm 1, \\pm 1)$, and draw arrows from the centre to two corners that share no edge, such as $(1, 1, 1)$ and $(1, -1, -1)$. Measuring the angle between them on a model is awkward; the formula needs only one dot product and two lengths.`,
     before: ``,
     after: ``,
     link: '',
@@ -1802,6 +1809,9 @@ $$\\mathbf{a} \\cdot \\mathbf{b} = 0 \\iff \\mathbf{a} \\perp \\mathbf{b}$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
+@academic[fact,aside:true,width:35%:Random arrows are almost perpendicular
+Fill two vectors in $\\mathbb{R}^{10000}$ with random entries $\\pm 1$: more than 99.9% of the time they meet at between $88^\\circ$ and $92^\\circ$. The 10,000 products $\\pm 1$ mostly cancel, leaving a dot product typically about $100$ in size, while the two lengths multiply to $10000$.]@
+
 In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicularity — the vectors meet at a right angle. In $\\mathbb{R}^n$ for $n > 3$, perpendicularity cannot be visualized, but the algebraic condition $\\mathbf{a} \\cdot \\mathbf{b} = 0$ still serves as its definition. Orthogonality is the generalization of "right angle" to any number of dimensions.
 
 The zero vector occupies a special position: $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for every vector $\\mathbf{v}$, so the zero vector is orthogonal to everything. This is a convention that simplifies many statements — without it, theorems about orthogonal sets would need to exclude the zero vector as a separate case.
@@ -1826,7 +1836,9 @@ The geometric angle formula offers the most transparent explanation. Writing $\\
 
 An entirely coordinate-based proof exists as well, requiring no notion of angle. Consider the expression $\\|\\mathbf{a} - t\\mathbf{b}\\|^2$ for a variable scalar $t$. Because a squared norm is never negative, this expression defines a quadratic in $t$ with no negative values. A real quadratic that stays non-negative must have a non-positive discriminant, and writing out that discriminant condition yields exactly the Cauchy–Schwarz bound. This argument extends to any setting where an inner product is defined, even when angles lack geometric substance.
 
-The inequality plays a structural role beyond bounding computations. Without it, the angle formula would be ill-posed: feeding $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|}$ into $\\arccos$ requires the fraction to land in $[-1, 1]$, and Cauchy–Schwarz is what guarantees this. The norm's triangle inequality likewise depends on it — establishing $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ involves controlling the mixed term $\\mathbf{a} \\cdot \\mathbf{b}$, which is exactly the job Cauchy–Schwarz performs.`,
+The inequality plays a structural role beyond bounding computations. Without it, the angle formula would be ill-posed: feeding $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|}$ into $\\arccos$ requires the fraction to land in $[-1, 1]$, and Cauchy–Schwarz is what guarantees this. The norm's triangle inequality likewise depends on it — establishing $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ involves controlling the mixed term $\\mathbf{a} \\cdot \\mathbf{b}$, which is exactly the job Cauchy–Schwarz performs.
+
+@academic[punchline:Cauchy–Schwarz is what lets the dot product define angles and keeps lengths obeying the triangle inequality, in any dimension.]@`,
     before: ``,
     after: ``,
     link: '',

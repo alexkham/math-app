@@ -929,6 +929,9 @@ possible.
       title:`What a Random Variable Is`,
       content:`
 
+@academic[fact,aside:true,width:35%:Same distribution, never equal
+On a die, the face on top, $X$, and the face underneath, $Y$, both take the values $1$ to $6$ with probability $\\frac{1}{6}$ each, so they have the same distribution. Yet $X = Y$ never happens: opposite faces add up to $7$, so $Y = 7 - X$, and $X = Y$ would need $X = 3.5$.]@
+
 Random variables provide a means to quantify and manipulate probabilities using mathematical tools such as calculus. They offer a flexible and powerful framework for modeling various real-world phenomena that exhibit randomness. For example, consider rolling a [six-sided die](!/probability/models/dice-roll): the outcome of this event can be represented by a random variable X, which takes on values ranging from 1 to 6 with equal probability.
 
 Random variables are essential in probability theory and statistics, as they allow for the development of [probability distributions](!/probability/distributions), such as the binomial distribution, normal distribution, and Poisson distribution. These distributions describe the likelihood of various outcomes occurring and provide important insights into the behavior of random [events](!/probability/events).
@@ -1048,6 +1051,7 @@ The sum of two dice is a case where several outcomes share one value. The experi
 
 In many models, simple indicator variables are used, taking the value 1 when an event
 occurs and 0 when it does not.
+
 `,
       before:``,
       after:``,
@@ -1438,6 +1442,7 @@ possible.`,
             sectionsContent.probability.content,
                   <div key={'unit-u_probability_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_probability_2 }} />,
           `Why this numerical language matters is the next question.`,
+          `@academic[punchline:Every condition on a random variable names a set of outcomes, and its probability is the probability of that set.]@`,
         ]
     },
     {

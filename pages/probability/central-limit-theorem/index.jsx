@@ -1143,8 +1143,13 @@ Rather than focusing on formulas, this section shows how distributions change as
 * **Different starting distributions, same outcome**  
   Whether the original data are uniform, skewed, or discrete, the averaging process drives the sample mean toward the same normal pattern.
 
+@academic[fact,aside:true,width:35%:Twelve flat numbers make a bell
+Adding 12 random numbers from $[0, 1]$ and subtracting $6$ was once a standard way for computers to make normal values: each number has variance $\\frac{1}{12}$, so the total has variance exactly $1$. The result can never pass $\\pm 6$, yet every probability $P(Z \\le z)$ it gives is within $0.003$ of the bell's.]@
+
 These visuals highlight the core message of the theorem:  
 **it is the act of averaging that produces normality**, not the nature of the original data.
+
+A flat starting distribution shows the effect at its plainest. A number drawn uniformly from $[0, 1]$ has no peak at all: every value in the interval is equally likely. The sum of two such numbers is already triangular, most likely near $1$, because a total near the middle can come from many pairs, while a total near $0$ or $2$ needs both numbers near the same end. Each further term rounds the corners of the shape a little more.
 `,
       before:``,
       after:``,
@@ -1166,6 +1171,8 @@ The factor $\\sigma / \\sqrt{n}$ reflects how uncertainty decreases with sample 
 
 This scaling does not change the shape of the distribution.  
 It allows the limiting normal behavior to be observed and compared across different sample sizes.
+
+@academic[punchline:The spread of an average shrinks like $\\frac{\\sigma}{\\sqrt{n}}$, and dividing by exactly that keeps the bell from collapsing to a point.]@
 `,
       before:``,
       after:``,
@@ -1280,6 +1287,9 @@ How to check: the answer must depend on $n$. With $\\sigma$ in the denominator t
 The Central Limit Theorem and the [Law of Large Numbers](!/probability/large-numbers-law) are often confused because both involve sample means and large sample sizes. However, they answer fundamentally different questions.
 
 The **Law of Large Numbers (LLN)** tells us that as we collect more observations, the sample mean gets closer and closer to the true population mean. This is a statement about **convergence to a specific value**. If you flip a fair coin many times, the proportion of heads approaches 0.5—that's the LLN at work.
+
+@academic[fact,aside:true,width:35%:The bell curve began with coin tosses
+In 1733 Abraham de Moivre found that the chance of $x$ heads more or fewer than $\\frac{n}{2}$ in $n$ fair tosses falls off like $e^{-2x^2/n}$: the bell curve, first met as a shortcut for counting heads. It was the first central limit theorem, 76 years before Gauss used the curve for measurement errors.]@
 
 The **Central Limit Theorem (CLT)** tells us something else entirely: it describes the **shape of the distribution** that sample means follow. Even if individual observations are far from normal, the CLT guarantees that the distribution of sample means will be approximately normal, centered at the population mean, with spread determined by the sample size.
 

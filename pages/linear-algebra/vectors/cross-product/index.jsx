@@ -2453,6 +2453,9 @@ Swapping the two factors in any of these pairs flips the sign:
 @academic[formula_callout:Standard Basis Cross Products
 $$\\mathbf{j} \\times \\mathbf{i} = -\\mathbf{k}, \\quad \\mathbf{k} \\times \\mathbf{j} = -\\mathbf{i}, \\quad \\mathbf{i} \\times \\mathbf{k} = -\\mathbf{j}$$]@
 
+@academic[fact,aside:true,width:35%:Dot and cross began as one product
+Hamilton's quaternion units obey this same table, $ij = k$ and $ji = -k$, except that $i^2 = -1$ instead of $0$. Multiplying two quaternions with no real part gives $-\\mathbf{a} \\cdot \\mathbf{b}$ plus $\\mathbf{a} \\times \\mathbf{b}$; the dot and cross products were later split out of that one product.]@
+
 The organizing principle is a directed loop $\\mathbf{i} \\to \\mathbf{j} \\to \\mathbf{k} \\to \\mathbf{i}$. Traversing it in the forward direction yields a positive basis vector; going against the loop negates the outcome. Any basis vector crossed with a copy of itself gives $\\mathbf{0}$: $\\mathbf{i} \\times \\mathbf{i} = \\mathbf{j} \\times \\mathbf{j} = \\mathbf{k} \\times \\mathbf{k} = \\mathbf{0}$.
 
 Every cross product in $\\mathbb{R}^3$ can be traced back to these nine cases. Expressing both input vectors as [linear combinations](!/linear-algebra/vectors/linear-combinations) of $\\mathbf{i}$, $\\mathbf{j}$, $\\mathbf{k}$ and distributing the cross product over the resulting sums reduces the computation to a collection of basis-pair cross products. Gathering terms afterward recovers the component formula.
@@ -2638,7 +2641,9 @@ $$\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c}) = \\begin{vmatrix} a_1 & 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-A zero determinant means the parallelepiped has been flattened — the three vectors are coplanar, all confined to a single plane with no volume between them.`,
+A zero determinant means the parallelepiped has been flattened — the three vectors are coplanar, all confined to a single plane with no volume between them.
+
+@academic[punchline:The scalar triple product is a $3 \\times 3$ determinant read as a volume: its size is the space three vectors span, its sign their handedness.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -2646,6 +2651,9 @@ A zero determinant means the parallelepiped has been flattened — the three vec
   obj8: {
     title: `Dot Product vs Cross Product`,
     content: `The two multiplication operations available for vectors occupy complementary niches, and contrasting them sharpens the purpose of each.
+
+@academic[fact,aside:true,width:35%:Only 3 and 7 dimensions allow it
+A product that distributes over sums, stands perpendicular to both factors and has length $\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ exists only in $\\mathbb{R}^3$ and $\\mathbb{R}^7$. By a theorem of Hurwitz, such products come from number systems of dimension 4 and 8, the quaternions and the octonions.]@
 
 At the most basic level, they differ in what comes out: the dot product delivers a number, while the cross product delivers a vector. They also differ in scope — the component-wise sum of products behind the dot product generalizes to any $\\mathbb{R}^n$, whereas the cross product's reliance on three-component determinants confines it to $\\mathbb{R}^3$.
 

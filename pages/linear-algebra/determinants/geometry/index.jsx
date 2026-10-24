@@ -1236,6 +1236,9 @@ When $\\det(A) = 0$, the map collapses at least one dimension entirely. The imag
 
 @academic[rule_plain:A positive determinant means the linear map preserves the orientation of $\\mathbb{R}^n$; a negative determinant means it reverses orientation.]@
 
+@academic[fact,aside:true,width:35%:A left hand turns right through 4D
+No rotation of space turns a left glove into a right one, since every rotation has determinant $+1$ and a mirror has $-1$. With a fourth axis it works: the half-turn $\\operatorname{diag}(-1, 1, 1, -1)$ in the plane of axes $1$ and $4$ has determinant $+1$, yet on ordinary space it acts as the mirror $x_1 \\mapsto -x_1$.]@
+
 In two dimensions, orientation is the sense of rotation. A positively oriented pair of vectors goes counterclockwise; a negatively oriented pair goes clockwise. A linear map with $\\det(A) > 0$ sends every counterclockwise pair to another counterclockwise pair. A map with $\\det(A) < 0$ flips counterclockwise to clockwise.
 
 In three dimensions, orientation is handedness. The standard basis is right-handed. A transformation with positive determinant sends right-handed triples to right-handed triples; a transformation with negative determinant sends them to left-handed triples.
@@ -1324,9 +1327,14 @@ Given four vertices in $\\mathbb{R}^3$, pick one as the origin and form the thre
 @academic[formula_callout:tetrahedron_volume_via_determinant|Tetrahedron Volume via Determinant|$$V = \\frac{1}{6} \\left| \\det\\!\\begin{pmatrix} \\mathbf{e}_1 & \\mathbf{e}_2 & \\mathbf{e}_3 \\end{pmatrix} \\right|$$]@
 @academic[formulas_link:/linear-algebra/formulas#tetrahedron_volume_via_determinant]@
 
+@academic[fact,aside:true,width:35%:Empty of grid points, yet any volume
+A triangle whose only points with whole-number coordinates are its three corners always has area $\\frac{1}{2}$. In space this fails: the tetrahedron with corners $(0,0,0)$, $(1,0,0)$, $(0,1,0)$, $(1,1,r)$ holds no other such point, yet its determinant is $r$ and its volume $\\frac{r}{6}$, as large as wanted.]@
+
 where $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$ are the edge vectors arranged as columns. The factor $\\frac{1}{6}$ arises because a tetrahedron occupies one-sixth of the parallelepiped spanned by its three edges.
 
 For vertices at $(0,0,0)$, $(1,0,0)$, $(0,2,0)$, $(0,0,3)$: the edge vectors are the standard-scaled basis vectors, the determinant is $6$, and the tetrahedron volume is $1$.
+
+When all the vertices have whole-number coordinates, every edge vector has whole-number entries, so the determinant is a whole number and the volume is a multiple of $\\frac{1}{6}$. One dimension down the same holds with $\\frac{1}{2}$: a triangle with whole-number corners has an area that is a multiple of $\\frac{1}{2}$, as the area $\\frac{11}{2}$ found above shows.
 
 ## Parallelepiped Volume
 
@@ -1754,6 +1762,7 @@ export default function DeterminantGeometryPage({signedAreaCases, detSignCases, 
           >
             <CaseSplit data={detScaleCases} variant="poster" proseStyle="cards" theme={figureTheme} />
           </DiagramFrameV2>,
+          `@academic[punchline:A linear map multiplies every volume by the same factor, $|\\det(A)|$, whatever the shape or size of the region.]@`,
         ]
     },
     {
@@ -1787,6 +1796,7 @@ export default function DeterminantGeometryPage({signedAreaCases, detSignCases, 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[punchline:The Jacobian determinant is the local area or volume factor, and every change of variables in an integral must include it.]@`,
         ]
     },
     {

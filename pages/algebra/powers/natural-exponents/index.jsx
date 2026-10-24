@@ -239,6 +239,11 @@ The base $a$ can be any real number — positive, negative, or zero. The exponen
 
 Concrete examples anchor the definition. $2^4 = 2 \\cdot 2 \\cdot 2 \\cdot 2 = 16$. $5^3 = 5 \\cdot 5 \\cdot 5 = 125$. $(-3)^2 = (-3)(-3) = 9$. $(-3)^3 = (-3)(-3)(-3) = -27$.
 
+@academic[fact,aside:true,width:35%:The fifth power keeps the last digit
+For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 = 32$, $3^5 = 243$, $7^5 = 16807$. The last digits of powers repeat in cycles of length $1$, $2$ or $4$, so four steps after $n^1$ the cycle is back at its start.]@
+
+The last digit of a power depends only on the last digit of the base, because only the last digits of two factors decide the last digit of their product. Running through the exponents $1, 2, 3, \\ldots$, the last digits of the powers of $2$ go $2, 4, 8, 6, 2, 4, 8, 6, \\ldots$, those of $3$ go $3, 9, 7, 1, 3, 9, 7, 1, \\ldots$, and those of $9$ alternate between $9$ and $1$. Powers of $5$ end in $5$ every time, and powers of $6$ end in $6$.
+
 @academic[rule_corollary_plain:Two special cases follow immediately. When $n = 1$, there is only one copy of the base: $a^1 = a$ for any $a$. When the base is $1$, repeated multiplication changes nothing: $1^n = 1$ for any $n$.]@
 
 A note on convention: whether the natural numbers include $0$ varies by source. In this section, natural exponents start at $n = 1$. The case $a^0$ arises naturally from the quotient rule and is addressed on the [negative exponents](!/algebra/powers/negative-exponents) page, where the extension below $n = 1$ is developed.`,
@@ -434,7 +439,12 @@ Each factor in the product acquires the exponent independently. This extends to 
 Applying the rule to $(2 + 3)^2$ gives $2^2 + 3^2 = 13$. The rule covers products only; a sum is added first: $(2 + 3)^2 = 5^2 = 25$.
 [Read more](!#pitfalls)]@
 
-The rule works because multiplication is commutative and associative — the order in which factors are grouped does not affect the product. Rewriting $(ab)(ab)(ab)$ as $(a \\cdot a \\cdot a)(b \\cdot b \\cdot b)$ is valid precisely because factors can be rearranged freely.`,
+The rule works because multiplication is commutative and associative — the order in which factors are grouped does not affect the product. Rewriting $(ab)(ab)(ab)$ as $(a \\cdot a \\cdot a)(b \\cdot b \\cdot b)$ is valid precisely because factors can be rearranged freely.
+
+@academic[fact,aside:true,width:35%:Digits of $2^n$ and $5^n$ total $n + 1$
+For every $n \\geq 1$, the digits of $2^n$ and of $5^n$ number $n + 1$ in all, as with $1024$ and $9765625$ for $n = 10$. If they have $a$ and $b$ digits, their product $10^n$ lies strictly between $10^{a+b-2}$ and $10^{a+b}$, so $n = a + b - 1$.]@
+
+Read from right to left, the rule also combines powers: $a^n \\cdot b^n = (ab)^n$. With the bases $2$ and $5$ this always produces a power of ten, since $2^n \\cdot 5^n = (2 \\cdot 5)^n = 10^n$. For $n = 10$ the product $2^{10} \\cdot 5^{10} = 1024 \\cdot 9765625$ is exactly $10^{10}$, a $1$ followed by ten zeros, even though neither factor looks anything like a round number.`,
   before: ``,
   after: ``,
   link: '',
@@ -878,6 +888,7 @@ export default function NaturalExponentsPage({seoData, sectionsContent, introCon
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[punchline:An exponent passes through a product to each factor, because factors can be regrouped; it never passes through a sum.]@`,
         ]
     },
     {

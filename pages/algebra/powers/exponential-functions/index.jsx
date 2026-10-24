@@ -321,6 +321,9 @@ obj2: {
   title: `Basic Shape`,
   content: `The graph of $f(x) = a^x$ takes one of two forms, depending on whether the base is greater than $1$ or between $0$ and $1$.
 
+@academic[fact,aside:true,width:35%:Every base draws one curve
+Since $8^x = 2^{3x}$, the graph of $8^x$ is the graph of $2^x$ squeezed sideways by a factor of $3$. Every base works this way, $a^x = 2^{kx}$ for one fixed $k$, negative for decay, so all exponential graphs are a single shape rescaled.]@
+
 When $a > 1$, the function grows. For large negative values of $x$, $a^x$ is close to zero — positive but tiny. At $x = 0$, the function passes through $(0, 1)$ because $a^0 = 1$. As $x$ increases, $a^x$ rises with accelerating steepness. The curve climbs slowly at first, then explosively.
 
 When $0 < a < 1$, the function decays. The curve is a mirror image — high on the left, passing through $(0, 1)$, and falling toward zero on the right. Each step to the right multiplies by a fraction, shrinking the output.
@@ -374,7 +377,12 @@ For small positive values of $x$, the polynomial can dominate. At $x = 2$, $x^2 
 
 But exponential growth eventually overtakes any polynomial, no matter the degree. At $x = 10$, $x^2 = 100$ while $2^x = 1024$. At $x = 20$, $x^2 = 400$ while $2^x = 1{,}048{,}576$. The gap does not just widen — it accelerates.
 
-This holds for polynomials of any degree. The function $2^x$ eventually surpasses $x^{10}$, $x^{100}$, even $x^{1000}$. Exponential growth multiplies by a fixed factor at each step, while polynomial growth adds a fixed power. Repeated multiplication always wins in the long run.`,
+@academic[fact,aside:true,width:35%:Eventually can mean $x = 59$
+The polynomial gains faster than $2^x$ until $x = 14$, and that lead lasts: $2^x$ passes $x^{10}$ for good only between $x = 58$ and $x = 59$. Against $x^{100}$ it waits until just past $x = 996$.]@
+
+This holds for polynomials of any degree. The function $2^x$ eventually surpasses $x^{10}$, $x^{100}$, even $x^{1000}$. Exponential growth multiplies by a fixed factor at each step, while polynomial growth adds a fixed power. Repeated multiplication always wins in the long run.
+
+How long "eventually" takes depends on the degree. A step from $x$ to $x + 1$ multiplies $2^x$ by $2$, but it multiplies $x^{10}$ by $\\left(1 + \\frac{1}{x}\\right)^{10}$. For small $x$ that second factor is the larger one, so the polynomial first pulls further ahead, and the exponential has to win back the whole lead before it can pass.`,
   before: ``,
   after: ``,
   link: '',
@@ -759,6 +767,7 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+          `@academic[punchline:Every exponential graph passes through $(0, 1)$; the base only decides whether it rises or falls, and how steeply.]@`,
         ]
     },
 

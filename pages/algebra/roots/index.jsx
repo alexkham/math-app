@@ -284,10 +284,20 @@ A square root ($n = 2$) undoes squaring. It appears constantly — in the Pythag
 @academic[formula_callout:Square Roots, Cube Roots, and Beyond
 $$\\sqrt{49} = 7, \\quad \\sqrt{144} = 12, \\quad \\sqrt{2} \\approx 1.414$$]@
 
+@academic[fact,aside:true,width:35%:Guess, divide, average
+$\\sqrt{2}$ always lies between a guess $g$ and $\\frac{2}{g}$, so their average is a better guess. Starting from $g = 1$ gives $1.5$, $\\frac{17}{12}$, then $\\frac{577}{408}$, within $0.000003$ of $\\sqrt{2}$; each round roughly squares the error, so the next is within $0.000000000002$.]@
+
+Most radicands are not perfect squares, and their roots can only be approximated. Since $1.4^2 = 1.96$ and $1.5^2 = 2.25$, the value $\\sqrt{2}$ lies between $1.4$ and $1.5$. Squaring $1.41$ and $1.42$ gives $1.9881$ and $2.0164$, which narrows it to between those two: one more decimal for each round of trial squaring.
+
 A cube root ($n = 3$) undoes cubing. It arises in volume problems, certain equations, and throughout higher mathematics.
 
 @academic[formula_callout:Square Roots, Cube Roots, and Beyond
 $$\\sqrt[3]{27} = 3, \\quad \\sqrt[3]{-64} = -4, \\quad \\sqrt[3]{1000} = 10$$]@
+
+@academic[fact,aside:true,width:35%:Doubling the cube defeated the Greeks
+Greek geometers tried for centuries to construct a side of $\\sqrt[3]{2}$ with straightedge and compass. In 1837 Pierre Wantzel proved it impossible: those tools give only lengths built from whole numbers with arithmetic and square roots, and $\\sqrt[3]{2}$ cannot be written that way.]@
+
+Volume shows the difference between the two roots. Doubling the area of a square multiplies its side by $\\sqrt{2}$, and that length is already in the picture: it is the square's diagonal. Doubling the volume of a cube multiplies its side by $\\sqrt[3]{2} \\approx 1.26$, since $1.26^3 \\approx 2.0004$, and none of the cube's edges or diagonals has that length.
 
 Higher roots follow the same pattern. Fourth roots undo fourth powers, fifth roots undo fifth powers, and so on.
 
@@ -521,7 +531,7 @@ Mathematics extends beyond the reals. The imaginary unit $i$ is defined by $i^2 
 @academic[formula_callout:When Radicands Are Negative
 $$\\sqrt{-4} = 2i$$]@
 
-This opens the door to complex numbers, where every polynomial has roots and the square root function extends to negative inputs.
+This opens the door to complex numbers, where every non-constant polynomial has roots and the square root function extends to negative inputs.
 
 The connection between radicals and complex numbers is developed in radicals and complex numbers.
 
@@ -851,6 +861,7 @@ export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFuncti
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          `@academic[punchline:Every root is a power: the index of the radical becomes the denominator of the exponent.]@`,
         ]
     },
     {
@@ -861,6 +872,7 @@ export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFuncti
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          `@academic[punchline:Roots split over multiplication and division; addition and subtraction have no such rule.]@`,
         ]
     },
     {
@@ -903,6 +915,7 @@ export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFuncti
           sectionsContent.obj9.content,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          `@academic[punchline:Odd roots accept every real number; even roots of negative numbers leave the reals and need $i$.]@`,
         ]
     },
     {

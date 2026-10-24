@@ -969,6 +969,11 @@ Common high-level categories include:
 These categories are not rigid.  
 They reflect increasing levels of available information, with stronger assumptions generally leading to tighter bounds.
 
+@academic[fact,aside:true,width:35%:From 1 in 40 to 2 in a billion
+For at least $600$ heads in $1000$ fair tosses, Chebyshev's inequality allows up to $\\frac{250}{100^2} = 0.025$. Hoeffding's inequality, which also uses that the tosses are independent and each is $0$ or $1$, gives $e^{-20} \\approx 2 \\times 10^{-9}$; the exact chance is about $1.4 \\times 10^{-10}$.]@
+
+The distance between the first categories and the last one can be very large. Take $1000$ tosses of a fair coin and the event of at least $600$ heads, $100$ above the expected $500$. A variance-based bound sees only the spread of the total, a variance of $1000 \\cdot \\frac{1}{4} = 250$. A concentration inequality also uses how the total is built: as a sum of many independent tosses, each adding either $0$ or $1$.
+
 The categories above can be lined up with the kind of information each one consumes and where each is typically most useful.
 `,
       before:``,
@@ -1020,6 +1025,11 @@ This illustrates a general trade-off:
 • more assumptions → sharper bounds
 
 Many other inequalities fit into this pattern, refining earlier ones by incorporating additional structure or moments.
+
+@academic[fact,aside:true,width:35%:The tenth power beats the variance
+For $X$ exponential with mean $1$ and $a = 10$, Markov gives $0.1$ and Chebyshev $\\frac{1}{81} \\approx 0.012$. Markov applied to $X^{10}$, with $E[X^{10}] = 10!$, gives $\\frac{10!}{10^{10}} \\approx 0.00036$, about $34$ times smaller; the true tail is $e^{-10} \\approx 0.000045$.]@
+
+The same step works with any power. Because $X^k$ is never negative when $X \\geq 0$, Markov's inequality applied to $X^k$ gives $P(X \\geq a) \\leq \\frac{E[X^k]}{a^k}$, a bound that falls like $\\frac{1}{a^k}$ instead of $\\frac{1}{a}$. Chebyshev's inequality is the case $k = 2$, applied to the deviation $X - \\mu$, and each further moment that is known adds one more bound to choose from.
 `,
       before:``,
       after:``,
@@ -1329,6 +1339,7 @@ export default function ProbabilityInequalitiesPage({
           sectionsContent.obj6.content,
                   <div key={'unit-iqCompare'} dangerouslySetInnerHTML={{ __html: demoUnits.iqCompare }} />,
           `Neither bound uses the exponential shape; only the true curve does.`,
+          `@academic[punchline:Each added assumption rules out distributions, so the worst case a bound must cover can only get smaller.]@`,
         ]
     },
     {

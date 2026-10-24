@@ -736,7 +736,7 @@ Bounded between 0 and 1, perfect for modeling probabilities, proportions, and pe
 Generalizes the exponential distribution to model waiting time for multiple events. Common in queuing theory and rainfall modeling.
 
 **Chi-Squared Distribution**
-Sum of squared normal variables. Fundamental in hypothesis testing, confidence intervals, and goodness-of-fit tests.
+Sum of squared independent standard normal variables. Fundamental in hypothesis testing, confidence intervals, and goodness-of-fit tests.
 
 **Student's t-Distribution**
 Similar to normal but with heavier tails. Used when sample sizes are small or population variance is unknown.
@@ -818,6 +818,9 @@ Some distributions are generalizations of others. The gamma distribution general
 
 **Transformations and Derived Distributions**
 New distributions arise from transforming existing ones. If X follows a [normal](!/probability/distributions/continuous#normal) distribution, then e^X follows a lognormal distribution—the transformation creates a fundamentally different shape. The chi-squared distribution emerges when you sum squared standard normal variables. Taking the ratio of two chi-squared variables (each divided by its degrees of freedom) yields an F-distribution, and a standard normal divided by the square root of a scaled chi-squared variable yields a Student's t-distribution. These connections explain why certain distributions appear in statistical testing.
+
+@academic[fact,aside:true,width:35%:One degree of freedom, no mean
+With one degree of freedom, Student's t has density $\\frac{1}{\\pi(1 + x^2)}$, and its tails are so heavy that $\\int x f(x)\\,dx$ diverges: there is no mean. The average of 1,000 such values is spread exactly as widely as a single one.]@
 
 **Limiting Behaviors**
 As parameters change, distributions can converge to others. The Student's t-distribution approaches the [normal](!/probability/distributions/continuous#normal) distribution as degrees of freedom increase—its heavier tails gradually thin out. The binomial distribution (discrete) approaches the normal distribution under certain conditions, bridging the discrete-continuous divide. The Poisson process generates exponential waiting times, linking discrete event counts to continuous time intervals.
@@ -917,6 +920,9 @@ Each match runs through the formula that ties the parameter to the moment. For t
 MLE finds parameter values that make the observed data most probable. You construct a likelihood function—the probability of seeing your data given certain parameters—and maximize it. For many standard distributions, MLE formulas are well-established. For the normal distribution, MLE actually gives the same estimates as the method of moments. For others like the Weibull distribution, MLE requires numerical optimization but provides more accurate estimates, especially with smaller samples.
 
 **Choosing Your Method**
+
+@academic[fact,aside:true,width:35%:A moment estimate the data rule out
+Fitting $U(0, b)$ to the data $1, 2, 9$ by matching the mean $\\frac{b}{2}$ to $\\bar{x} = 4$ gives $\\hat{b} = 8$, an upper bound below the observed $9$. Maximum likelihood takes $\\hat{b} = 9$, the largest value, which never contradicts the data.]@
 
 Method of moments is quick and works well for simple distributions and large samples. MLE is preferred when you need optimal estimates, work with complex distributions, or have limited data. Modern statistical software handles both methods automatically, but understanding the principles helps you interpret results and recognize when estimates might be unreliable.`,
       before:``,
@@ -1497,6 +1503,7 @@ export default function ContinuousDistributionsPage({continuousFamilyOutline, se
           sectionsContent.working.content,
                   <div key={'unit-u_working_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_working_2 }} />,
           `Fitting the parameters to data comes next.`,
+          `@academic[punchline:A density value is never a probability; probabilities are areas, and the CDF delivers them by subtraction.]@`,
         ]
     },
     {

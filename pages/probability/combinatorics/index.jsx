@@ -908,6 +908,11 @@ Standard probability experiments require explicit outcome definitions.
 
 The same physical experiment can require different counting rules depending on how outcomes are defined.  
 Probability errors often originate from defining the outcome space incorrectly before counting.
+
+@academic[fact,aside:true,width:35%:Photons count without order
+Two photons in two states behave as if the three unordered arrangements were equally likely, each $\\frac{1}{3}$ instead of $\\frac{1}{4}$, $\\frac{1}{2}$, $\\frac{1}{4}$, because identical particles have no first and second (Bose–Einstein statistics). Electrons go further: two of them never share a state.]@
+
+The choice becomes sharper when the objects themselves cannot be told apart. Put two particles into two possible states. Listed in order there are four arrangements, (first, first), (first, second), (second, first) and (second, second); listed without order only three remain: both in the first state, one in each, or both in the second. Coins and dice can always be told apart, at least in principle, so for them the four ordered arrangements are the equally likely ones.
 `,
       before:``,
       after:``,
@@ -1246,6 +1251,7 @@ export default function CombinatoricsPage({
           sectionsContent.obj1.content,
                   <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
           `How outcomes are organised for counting is taken up next.`,
+          `@academic[punchline:Favourable over possible is a probability only when every possible outcome is equally likely.]@`,
         ]
     },
     {
@@ -1266,6 +1272,7 @@ export default function CombinatoricsPage({
           `With two dice the 21 unordered results are not equally likely; the 36 ordered pairs are.`,
                   <div key={'unit-u_3_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_1 }} />,
           `Repeating such counts across trials produces the distributions of the next section.`,
+          `@academic[punchline:The question, not the physical experiment, decides what counts as one outcome, and that decision comes before any counting.]@`,
         ]
     },
     {
@@ -1275,6 +1282,10 @@ export default function CombinatoricsPage({
         content:[
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj4Table}}/>,
+          `@academic[fact,aside:true,width:35%:Three right of four proves nothing
+A taster guessing at random picks all $4$ milk-first cups with probability $\\frac{1}{70}$, since $\\binom{8}{4} = 70$, but gets at least $3$ right with probability $\\frac{17}{70}$, about one time in four. R. A. Fisher used this count in 1935 to argue that only a perfect score is convincing.]@
+
+The hypergeometric count also judges claims of skill. In a tasting test, $8$ cups of tea are prepared, $4$ with the milk poured in first and $4$ with the tea poured in first, and the taster, told that there are four of each, picks out the $4$ cups believed to be milk-first. Each possible answer is an unordered selection of $4$ cups out of $8$, and the number of milk-first cups among them is the hypergeometric count of the second row of the table: $4$ items drawn without replacement from $8$, of which $4$ are of the marked type.`,
         ]
     },
     {

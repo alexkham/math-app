@@ -570,7 +570,14 @@ Writing $(3^2)^3$ as $3^{2+3} = 3^5$ gives $243$. The value is $9^3 = 729 = 3^6$
 
 Counting factors shows why the exponents multiply. The power $(x^3)^4$ is four copies of the block $x^3$, and each block holds three factors of $x$, so the total is $4 \\cdot 3 = 12$ factors.
 
-This rule must not be confused with stacked exponents. The notation $a^{m^n}$ means $a^{(m^n)}$, evaluated from the top down — it is not the same as $(a^m)^n = a^{mn}$. For example, $2^{3^2} = 2^9 = 512$, while $(2^3)^2 = 2^6 = 64$.`,
+This rule must not be confused with stacked exponents. The notation $a^{m^n}$ means $a^{(m^n)}$, evaluated from the top down — it is not the same as $(a^m)^n = a^{mn}$. For example, $2^{3^2} = 2^9 = 512$, while $(2^3)^2 = 2^6 = 64$.
+
+@academic[fact,aside:true,width:35%:A tower of five 2s
+Grouped from the bottom, five $2$s give $(((2^2)^2)^2)^2 = 2^{16} = 65536$. Stacked as a tower, the same five $2$s give $2^{65536}$, a number with 19,729 digits: each level becomes the exponent of the next.]@
+
+The gap between the two readings widens quickly as more exponents are stacked. With four $2$s, grouping from the bottom gives $((2^2)^2)^2 = 2^{2 \\cdot 2 \\cdot 2} = 2^8 = 256$, because the power of a power rule only multiplies the exponents. Read from the top, the stack gives $2^{2^{2^2}} = 2^{2^4} = 2^{16} = 65536$, because each result becomes the exponent of the level below it.
+
+@academic[punchline:Exponents add when groups of factors are joined and multiply when one group is copied.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -597,7 +604,9 @@ Writing $(2x)^3$ as $2x^3$ leaves the $2$ unraised: at $x = 1$ it gives $2$, but
 
 The distribution works because multiplication is commutative — the factors can be rearranged so that all copies of $a$ group together and all copies of $b$ group together.
 
-A critical warning: this rule applies to products only. It does not extend to sums. The expression $(a + b)^n$ is not equal to $a^n + b^n$. Expanding a sum raised to a power requires the binomial theorem or direct multiplication.`,
+A critical warning: this rule applies to products only. It does not extend to sums. The expression $(a + b)^n$ is not equal to $a^n + b^n$. Expanding a sum raised to a power requires the binomial theorem or direct multiplication.
+
+@academic[punchline:An exponent distributes over multiplication, factor by factor, but not over addition.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -675,7 +684,9 @@ The rule requires $a \\neq 0$. The result follows from the quotient rule: $a^0 =
 
 This holds for every nonzero base — positive, negative, large, small, fractional. The expressions $7^0$, $(-3)^0$, and $(0.001)^0$ all equal $1$.
 
-The case $a = 0$ is excluded. The expression $0^0$ is not covered by this rule — it is addressed separately on the [zero powers](!/algebra/powers/zero-powers) page.`,
+The case $a = 0$ is excluded. The expression $0^0$ is not covered by this rule — it is addressed separately on the [zero powers](!/algebra/powers/zero-powers) page.
+
+@academic[punchline:For any nonzero base, $a^0 = 1$ is the only value that keeps the quotient rule true.]@`,
     before: ``,
     after: ``,
     link: '',

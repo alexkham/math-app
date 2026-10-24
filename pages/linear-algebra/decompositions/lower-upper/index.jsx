@@ -3255,7 +3255,12 @@ The factorization captures the entire elimination process in a reusable form. In
   },
   obj2: {
     title: `Construction from Gaussian Elimination`,
-    content: `Forward elimination on $A$ applies a sequence of row-addition [operations](!/linear-algebra/matrix/operations), each represented by an [elementary matrix](!/linear-algebra/matrix/operations) $E_i$. The product $E_k \\cdots E_2 E_1 A = U$ reduces $A$ to upper triangular form.
+    content: `@academic[fact,aside:true,width:35%:An astronomer saw the product first
+Elimination was in use for centuries before anyone wrote it as a product of two triangular matrices. The Polish astronomer Tadeusz Banachiewicz did so in 1938, and Alan Turing's 1948 paper on rounding errors recast elimination as $A = LDU$.]@
+
+Gaussian elimination is usually carried out as a list of row operations on an augmented matrix, used once to reach a solution and then set aside. Read as matrix multiplications instead, the same operations turn the procedure into a statement about $A$ itself: a product of two triangular matrices.
+
+Forward elimination on $A$ applies a sequence of row-addition [operations](!/linear-algebra/matrix/operations), each represented by an [elementary matrix](!/linear-algebra/matrix/operations) $E_i$. The product $E_k \\cdots E_2 E_1 A = U$ reduces $A$ to upper triangular form.
 
 Rearranging: $A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$. Each $E_i$ is a lower triangular matrix that adds a multiple of one row to a row below. Its inverse simply negates the multiplier. The product $L = E_1^{-1} E_2^{-1} \\cdots E_k^{-1}$ is lower triangular, with the multipliers sitting in the sub-diagonal positions.
 
@@ -3716,6 +3721,7 @@ export default function LUDecompositionPage({
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@academic[punchline:Row additions can never turn a zero pivot into a usable one; for an invertible matrix, only a row swap can.]@`,
         ]
     },
     {
@@ -3726,6 +3732,12 @@ export default function LUDecompositionPage({
           sectionsContent.obj5.content,
                   <div key={'unit-pivoting'} dangerouslySetInnerHTML={{ __html: demoUnits.pivoting }} />,
           `In practice pivoting is used even when it is not strictly required, because small pivots damage accuracy long before they reach zero.`,
+          `@academic[fact,aside:true,width:35%:The doubling bound is reached
+For the matrix with $1$ on the diagonal and in the last column and $-1$ everywhere below the diagonal, partial pivoting never swaps, and the last pivot doubles at every step to $2^{n-1}$. At $n = 60$, solving with it in double precision gives answers wrong in the first digit, although the matrix is well conditioned.]@
+
+Bounding the multipliers is not the same as bounding the entries. Each elimination step replaces an entry by itself minus a multiplier times an entry of the pivot row, and with every multiplier at most $1$ in size, the largest entry in the remaining rows can at most double. Over the $n - 1$ steps of an $n \\times n$ factorization, that allows growth by a factor of up to $2^{n-1}$.
+
+Large entries in $U$ matter because rounding errors are made relative to the numbers being handled. When the entries grow, the errors committed along the way grow with them, and the computed factors reproduce $PA$ less accurately.`,
         ]
     },
     {
@@ -3734,6 +3746,7 @@ export default function LUDecompositionPage({
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[punchline:The cubic cost is paid once per matrix; every right-hand side after that costs only two triangular solves.]@`,
         ]
     },
     {

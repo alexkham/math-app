@@ -358,7 +358,12 @@ $$\\int [f(x) \\pm g(x)]\\, dx = \\int f(x)\\, dx \\pm \\int g(x)\\, dx$$
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
 
+@academic[fact,aside:true,width:35%:Two hopeless integrals, one easy sum
+Neither $\\int e^{x^2}\\, dx$ nor $\\int 2x^2 e^{x^2}\\, dx$ can be written with elementary functions, yet their sum is easy: $\\int (1 + 2x^2)\\, e^{x^2}\\, dx = x e^{x^2} + C$, because the product rule gives $(x e^{x^2})' = e^{x^2} + 2x^2 e^{x^2}$.]@
+
 These rules apply to both definite and indefinite integrals. They allow complex integrands to be broken into simpler pieces, each handled separately.
+
+The rule can be read in either direction. From left to right it breaks one integral into several; from right to left it gathers several integrals into one. A split helps only when every piece can be integrated on its own, so the pieces are worth checking before the integral is taken apart.
 
 For example:
 
@@ -572,7 +577,12 @@ $$m \\leq f(x) \\leq M \\text{ on } [a, b] \\implies m(b - a) \\leq \\int_a^b f(
 @academic[formulas_link:Browse all integral formulas
 /calculus/formulas]@
 
+@academic[fact,aside:true,width:35%:$\\pi$ falls just short of $\\frac{22}{7}$
+$\\int_0^1 \\frac{x^4(1 - x)^4}{1 + x^2}\\, dx = \\frac{22}{7} - \\pi$. Since $\\frac{1}{2} \\leq \\frac{1}{1 + x^2} \\leq 1$ on $[0, 1]$, monotonicity traps this integral between $\\frac{1}{1260}$ and $\\frac{1}{630}$, so $\\pi$ is smaller than $\\frac{22}{7}$, but only just.]@
+
 These properties enable estimation when exact computation is difficult or impossible.
+
+Comparison can also settle questions that do not look like questions about area. If a number can be written as the integral of an integrand whose sign is known, the sign of the number follows at once, and bounding the integrand from above and below tells how large the number is. The work lies in finding such an integral; checking the inequalities is usually easy.
 `,
     before: ``,
     after: ``,
@@ -902,6 +912,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          `@academic[punchline:Because differentiation and integration undo each other, every derivative formula read backwards is an integration formula.]@`,
         ]
     },
     {
@@ -912,6 +923,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
           sectionsContent.obj8.content,
           <div key={'unit-bounds'} dangerouslySetInnerHTML={{ __html: demoUnits.bounds }} />,
           `Splitting [1, 4] and bounding each piece separately would tighten both estimates.`,
+          `@academic[punchline:An integral that cannot be computed can still be trapped between integrals that can.]@`,
         ]
     },
     {

@@ -2227,7 +2227,12 @@ The projection $\\hat{\\mathbf{b}}$ is the closest point in $W$ to $\\mathbf{b}$
 @academic[formula_callout:The Orthogonal Decomposition
 $$\\|\\mathbf{b} - \\mathbf{w}\\|^2 = \\|\\mathbf{z}\\|^2 + \\|\\hat{\\mathbf{b}} - \\mathbf{w}\\|^2 \\geq \\|\\mathbf{z}\\|^2 = \\|\\mathbf{b} - \\hat{\\mathbf{b}}\\|^2$$]@
 
-The inequality follows from the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product): $\\mathbf{z}$ is orthogonal to $\\hat{\\mathbf{b}} - \\mathbf{w}$ (both $\\hat{\\mathbf{b}}$ and $\\mathbf{w}$ are in $W$, so their difference is in $W$, and $\\mathbf{z} \\in W^\\perp$). The minimum distance $\\|\\mathbf{z}\\|$ is achieved uniquely at $\\mathbf{w} = \\hat{\\mathbf{b}}$.`,
+@academic[fact,aside:true,width:35%:Closest, yet 9% too high
+The Fourier partial sums of a square wave are its projections onto more and more waves, yet beside each jump they overshoot by about 9% of the jump, however many terms are taken. Closest means least total squared error, and the spike narrows as terms are added, so its share of that error shrinks to zero.]@
+
+The inequality follows from the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product): $\\mathbf{z}$ is orthogonal to $\\hat{\\mathbf{b}} - \\mathbf{w}$ (both $\\hat{\\mathbf{b}}$ and $\\mathbf{w}$ are in $W$, so their difference is in $W$, and $\\mathbf{z} \\in W^\\perp$). The minimum distance $\\|\\mathbf{z}\\|$ is achieved uniquely at $\\mathbf{w} = \\hat{\\mathbf{b}}$.
+
+The argument uses nothing but the Pythagorean theorem, so it holds in any inner product space, including spaces of functions where the dot product is the integral of a product. There, projecting a function onto the span of $1, \\cos x, \\sin x, \\dots, \\cos nx, \\sin nx$ gives the combination of those waves with the least total squared error, and that projection is exactly the Fourier partial sum of the function.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2310,6 +2315,9 @@ The [eigenvalues](!/linear-algebra/eigen) of $P$ are $0$ and $1$: vectors in $W$
 @academic[formulas_link:/linear-algebra/formulas#projection_matrix_properties]@
 
 Idempotence ($P^2 = P$): once a vector has been projected, projecting again changes nothing. Every vector in $W$ is a fixed point of $P$. This distinguishes projections from other [linear transformations](!/linear-algebra/transformations) — most transformations continue to change vectors on repeated application.
+
+@academic[fact,aside:true,width:35%:An evening shadow outgrows its pole
+With the sun lower than $45°$, a pole casts a shadow longer than itself: sunlight projects onto the ground along a slanted direction, an oblique projection with $P^2 = P$ but $P^T \\neq P$. An orthogonal projection never lengthens a vector, and a projection that never lengthens one is always orthogonal.]@
 
 Symmetry ($P^T = P$): the projection is self-adjoint with respect to the dot product. This means $P\\mathbf{u} \\cdot \\mathbf{v} = \\mathbf{u} \\cdot P\\mathbf{v}$ for all $\\mathbf{u}, \\mathbf{v}$. The symmetry condition is what makes the projection orthogonal rather than oblique — it ensures the residual is perpendicular to $W$, not merely non-parallel.
 
@@ -2701,6 +2709,7 @@ export default function ProjectionsPage({
           >
             <PropertyLawCard data={projectionProperties} theme="navy" />
           </DiagramFrame>,
+          `@academic[punchline:Squaring to itself makes a matrix a projection; symmetry is what makes it drop straight down, onto the closest point.]@`,
         ]
     },
     {

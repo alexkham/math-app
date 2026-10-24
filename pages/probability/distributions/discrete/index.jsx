@@ -1233,6 +1233,9 @@ The mathematical signature of a discrete distribution is the [probability mass f
 1. **Non-negativity**: $P(X = k) \\geq 0$ for all $k$
 2. **Normalization**: $\\sum_{\\text{all } k} P(X = k) = 1$
 
+@academic[fact,aside:true,width:35%:A discrete variable with no gaps
+List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n$ probability $\\frac{1}{2^n}$. The masses add up to $1$, so this is a discrete distribution, yet between any two of its possible values lie infinitely many more.]@
+
 The support of a discrete distribution — the set of values where $P(X = k) > 0$ — can be **finite** (like rolling a die: $\\{1, 2, 3, 4, 5, 6\\}$) or **countably infinite** (like counting trials until success: $\\{1, 2, 3, \\ldots\\}$). What matters is that you can list the outcomes, even if that list never ends.
 
 This discreteness fundamentally shapes how we calculate probabilities: summing over points rather than integrating over intervals.`,
@@ -1244,15 +1247,15 @@ This discreteness fundamentally shapes how we calculate probabilities: summing o
   
       title:`Discrete vs Continuous Distributions`,
       content:`
-Probability [distributions](!/probability/distributions) — whether discrete or [continuous](!/probability/distributions/continuous) — share certain fundamental features and properties: they have support (the set of possible values), a methods for assigning probabilities, and a [cumulative distribution function](!/probability/cdf). However, these features behave differently depending on whether the distribution is discrete or [continuous](!/probability/distributions/continuous), and it is precisely these differences in how we define and calculate these shared aspects that create the fundamental distinction between the two types.
+Probability [distributions](!/probability/distributions) — whether discrete or [continuous](!/probability/distributions/continuous) — share certain fundamental features and properties: they have support (the set of possible values), a method for assigning probabilities, and a [cumulative distribution function](!/probability/cdf). However, these features behave differently depending on whether the distribution is discrete or [continuous](!/probability/distributions/continuous), and it is precisely these differences in how we define and calculate these shared aspects that create the fundamental distinction between the two types.
 
-The most fundamental difference lies in the **support structure**,or the set of values the underlying random variable can be equal to. Discrete distributions have countable values with gaps — $\\{0, 1, 2, \\ldots\\}$ or $\\{1, 2, 3, 4, 5, 6\\}$. You can enumerate every possible outcome, even if the list is infinite. [Continuous distributions](!/probability/distributions/continuous), on the other hand, have uncountable intervals where every point in $(a, b)$ is reachable, with no gaps between values.
+The most fundamental difference lies in the **support structure**, or the set of values the underlying random variable can be equal to. Discrete distributions have countable values, usually with gaps — $\\{0, 1, 2, \\ldots\\}$ or $\\{1, 2, 3, 4, 5, 6\\}$. You can enumerate every possible outcome, even if the list is infinite. [Continuous distributions](!/probability/distributions/continuous), on the other hand, have uncountable intervals where every point in $(a, b)$ is reachable, with no gaps between values.
 
 This structural difference directly affects how **probability is assigned at specific points**.
 
 @academic[rule_plain:For discrete distributions, $P(X = k)$ can be positive — probabilities are assigned to exact values. For continuous distributions, $P(X = x) = 0$ for all $x$.]@
 
-This happens because there are uncountably many points in any interval, so the probability must be spread infinitely thin across them. If any single point had positive probability, the total probability would exceed 1. Only intervals have positive probability in the continuous case.
+This happens because there are uncountably many points in any interval, so the probability must be spread infinitely thin across them. If every single point had the same positive probability, the total probability would exceed 1. Only intervals have positive probability in the continuous case.
 
 The mathematical tools used to describe probabilities also differ. Discrete distributions use the [probability mass function (PMF)](!/probability/probability-function), denoted $P(X = k)$, which directly gives the probability at each point. Continuous distributions use the [probability density function (PDF)](!/probability/probability-function), denoted $f(x)$, where $f(x) \\geq 0$ but importantly, $f(x)$ itself is not a probability — it's a density that must be integrated over an interval to yield probability.
 
@@ -1813,7 +1816,7 @@ Discrete distributions are probability models for random variables that can take
 
 Understanding discrete distributions is fundamental to probability theory and problem-solving. Each distribution arises from a specific probabilistic mechanism—whether sampling with or without replacement, counting trials until an event occurs, or modeling rare occurrences. Recognizing these underlying structures allows you to match problems to their appropriate models.
 
-The distinctions matter mathematically.The simplest case—the [discrete uniform distribution](!/probability/distributions/discrete#uniform)—assigns equal probability to each outcome in a finite set, serving as the foundation for understanding more complex models. At the other end, the [negative binomial](!/probability/distributions/discrete#negative_binomial) distribution generalizes the [geometric](!/probability/distributions/discrete#geometric) case by counting trials until a specified number of successes rather than just the first. A [binomial](!/probability/distributions/discrete#binomial) distribution assumes a fixed number of independent trials, while a [geometric](!/probability/distributions/discrete#geometric) distribution counts trials until the first success—superficially similar setups that yield entirely different probability mass functions, moments, and analytical properties. Misidentifying the mechanism leads to incorrect calculations and invalid conclusions.
+The distinctions matter mathematically. The simplest case—the [discrete uniform distribution](!/probability/distributions/discrete#uniform)—assigns equal probability to each outcome in a finite set, serving as the foundation for understanding more complex models. At the other end, the [negative binomial](!/probability/distributions/discrete#negative_binomial) distribution generalizes the [geometric](!/probability/distributions/discrete#geometric) case by counting trials until a specified number of successes rather than just the first. A [binomial](!/probability/distributions/discrete#binomial) distribution assumes a fixed number of independent trials, while a [geometric](!/probability/distributions/discrete#geometric) distribution counts trials until the first success—superficially similar setups that yield entirely different probability mass functions, moments, and analytical properties. Misidentifying the mechanism leads to incorrect calculations and invalid conclusions.
 The [Poisson](!/probability/distributions/discrete#poisson) distribution, meanwhile, models the occurrence of rare events over a continuous interval—time, space, or volume—making it distinct from the trial-based counting distributions.
 
 This page systematically presents six fundamental discrete distributions, detailing their support, parameters, probability functions, and key statistical properties. Mastering these models equips you to tackle a wide range of probabilistic questions with precision and confidence.
@@ -1932,6 +1935,7 @@ export default function DiscreteDistributionsPage({discreteFamilyTree, seoData,s
           sectionsContent.vs.content,
                   <div key={'unit-u_vs_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_vs_1 }} />,
           `The families themselves are surveyed next.`,
+          `@academic[punchline:Discrete and continuous distributions share the same features; whether the values can be listed decides how each one works.]@`,
         ]
     },
     {

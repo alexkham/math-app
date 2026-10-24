@@ -1155,7 +1155,12 @@ Additivity: $T(\\mathbf{u} + \\mathbf{v}) = T(\\mathbf{u}) + T(\\mathbf{v})$
 
 Homogeneity: $T(c\\mathbf{v}) = cT(\\mathbf{v})$
 
-Both conditions must hold for every choice of vectors and scalars — not just for specific examples. Verifying linearity on a few particular vectors does not suffice. Disproving linearity requires only a single counterexample: one pair of vectors where additivity fails, or one scalar where homogeneity fails.`,
+@academic[fact,aside:true,width:35%:Linear over $\\mathbb{R}$, not over $\\mathbb{C}$
+With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps every real multiple, yet $T(i \\cdot 1) = -i$ while $i\\,T(1) = i$. With only real scalars, the same map is the reflection $(a, b) \\mapsto (a, -b)$ of the plane, and it is linear.]@
+
+Both conditions must hold for every choice of vectors and scalars — not just for specific examples. Verifying linearity on a few particular vectors does not suffice. Disproving linearity requires only a single counterexample: one pair of vectors where additivity fails, or one scalar where homogeneity fails.
+
+Which numbers count as scalars is part of the definition. On this page the scalars are real numbers, but vector spaces with complex scalars are just as common, and there the $c$ in the homogeneity condition can be $i$ or any other complex number. Additivity does not mention scalars at all, so it reads the same in both settings; homogeneity has to be checked for the larger set of scalars.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1352,9 +1357,16 @@ The inverse, when it exists, is itself linear. If $T^{-1}(\\mathbf{w}_1) = \\mat
 Calling $T(x, y) = (x, y, 0)$ from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ invertible because its kernel is $\\{\\mathbf{0}\\}$ skips surjectivity: no $\\mathbf{v}$ has $T(\\mathbf{v}) = (0, 0, 1)$. Since $2 \\neq 3$, no linear map $\\mathbb{R}^2 \\to \\mathbb{R}^3$ is invertible.
 [Read more](!#9)]@
 
-When $\\dim(V) = \\dim(W)$, these two conditions are equivalent — checking either one establishes both. For [matrix](!/linear-algebra/matrix) transformations, invertibility of $T$ corresponds to [invertibility](!/linear-algebra/matrix/inverse) of the matrix $A$.
+When $\\dim(V) = \\dim(W)$ is finite, these two conditions are equivalent — checking either one establishes both. For [matrix](!/linear-algebra/matrix) transformations, invertibility of $T$ corresponds to [invertibility](!/linear-algebra/matrix/inverse) of the matrix $A$.
 
-An invertible linear transformation between spaces of the same [dimension](!/linear-algebra/vector-spaces/dimension) is called an isomorphism. It establishes that the two spaces are structurally identical as vector spaces.`,
+An invertible linear transformation between spaces of the same [dimension](!/linear-algebra/vector-spaces/dimension) is called an isomorphism. It establishes that the two spaces are structurally identical as vector spaces.
+
+The equivalence for equal dimensions is a counting argument. A trivial kernel gives $\\dim \\operatorname{im}(T) = \\dim(V)$ by rank–nullity, and a subspace of $W$ with $\\dim(W)$ dimensions must be all of $W$.
+
+@academic[fact,aside:true,width:35%:Hilbert's hotel as a linear map
+Moving every guest up one room is the shift $(x_1, x_2, \\ldots) \\mapsto (0, x_1, x_2, \\ldots)$. Its kernel is $\\{\\mathbf{0}\\}$, yet room 1 stays empty: $(1, 0, 0, \\ldots)$ is never reached. The map is injective but not surjective, from a space to itself.]@
+
+Counting of this kind needs the dimensions to be finite numbers. The space of all infinite sequences $(x_1, x_2, x_3, \\ldots)$ of real numbers has no finite basis, and for maps of that space into itself the argument has nothing to count. Polynomials of every degree and continuous functions on an interval form further spaces with no finite basis, and the same caution applies to each of them.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1624,6 +1636,7 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          `@academic[punchline:One concrete failure disproves linearity: test zero first, then a single sum or a single multiple.]@`,
         ]
     },
     {
@@ -1660,6 +1673,7 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@academic[punchline:Linear maps between two spaces are themselves vectors, so the whole theory of vector spaces applies to them too.]@`,
         ]
     },
     {
