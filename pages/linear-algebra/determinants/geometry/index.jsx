@@ -807,7 +807,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
@@ -1308,7 +1308,8 @@ Given three vertices $(x_1, y_1)$, $(x_2, y_2)$, $(x_3, y_3)$ in the plane, the 
 
 The $2 \\times 2$ matrix has as its columns the edge vectors from vertex $1$ to the other two vertices. The determinant gives the signed area of the parallelogram spanned by these edges, and the triangle occupies exactly half of that parallelogram.
 
-For the vertices $(1, 2)$, $(4, 6)$, $(3, 1)$: the edge vectors are $(3, 4)$ and $(2, -1)$, the determinant is $3(-1) - 4(2) = -11$, and the area is $\\frac{11}{2}$.
+@academic[example:Example
+For the vertices $(1, 2)$, $(4, 6)$, $(3, 1)$: the edge vectors are $(3, 4)$ and $(2, -1)$, the determinant is $3(-1) - 4(2) = -11$, and the area is $\\frac{11}{2}$.]@
 
 @academic[pitfall,aside:true,width:35%:Using the vertices instead of edge vectors
 Putting the vertices $(4, 6)$ and $(3, 1)$ in as columns gives $\\frac{1}{2}|4 \\cdot 1 - 3 \\cdot 6| = 7$, the area of the triangle with corners $(0, 0)$, $(4, 6)$, $(3, 1)$. The edge vectors $(3, 4)$ and $(2, -1)$ give the true area $\\frac{11}{2}$.
@@ -1332,7 +1333,8 @@ A triangle whose only points with whole-number coordinates are its three corners
 
 where $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$ are the edge vectors arranged as columns. The factor $\\frac{1}{6}$ arises because a tetrahedron occupies one-sixth of the parallelepiped spanned by its three edges.
 
-For vertices at $(0,0,0)$, $(1,0,0)$, $(0,2,0)$, $(0,0,3)$: the edge vectors are the standard-scaled basis vectors, the determinant is $6$, and the tetrahedron volume is $1$.
+@academic[example:Example
+For vertices at $(0,0,0)$, $(1,0,0)$, $(0,2,0)$, $(0,0,3)$: the edge vectors are the standard-scaled basis vectors, the determinant is $6$, and the tetrahedron volume is $1$.]@
 
 When all the vertices have whole-number coordinates, every edge vector has whole-number entries, so the determinant is a whole number and the volume is a multiple of $\\frac{1}{6}$. One dimension down the same holds with $\\frac{1}{2}$: a triangle with whole-number corners has an area that is a multiple of $\\frac{1}{2}$, as the area $\\frac{11}{2}$ found above shows.
 

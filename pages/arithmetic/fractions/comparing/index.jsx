@@ -985,7 +985,8 @@ The shortcut is the common denominator method with one step skipped. Over the de
     title: `Benchmark Fractions`,
     content: `Benchmark fractions like 0, $\\frac{1}{2}$, and 1 provide quick reference points for estimation and comparison without calculation.
 
-To compare $\\frac{3}{8}$ and $\\frac{5}{9}$: note that $\\frac{3}{8} < \\frac{1}{2}$ (since $3 < 4$) while $\\frac{5}{9} > \\frac{1}{2}$ (since $5 > 4.5$). Therefore $\\frac{5}{9} > \\frac{3}{8}$ without any cross-multiplication.
+@academic[example:Example
+To compare $\\frac{3}{8}$ and $\\frac{5}{9}$: note that $\\frac{3}{8} < \\frac{1}{2}$ (since $3 < 4$) while $\\frac{5}{9} > \\frac{1}{2}$ (since $5 > 4.5$). Therefore $\\frac{5}{9} > \\frac{3}{8}$ without any cross-multiplication.]@
 
 Other useful benchmarks include $\\frac{1}{4}$ and $\\frac{3}{4}$. With practice, recognizing whether a fraction is close to 0, near $\\frac{1}{2}$, or approaching 1 speeds up many comparisons.`,
     before: ``,
@@ -1031,7 +1032,10 @@ Judging $4\\frac{7}{8}$ larger than $5\\frac{1}{8}$ because $\\frac{7}{8} > \\fr
 
 Five wholes exceed four wholes regardless of the fractional parts.
 
-When whole parts are equal, compare the fractional parts using any method from this page. For $3\\frac{2}{5}$ versus $3\\frac{3}{7}$, cross-multiply the fractions: $2 \\times 7 = 14$ and $5 \\times 3 = 15$. Since $15 > 14$, we have $\\frac{3}{7} > \\frac{2}{5}$, so $3\\frac{3}{7} > 3\\frac{2}{5}$.`,
+When whole parts are equal, compare the fractional parts using any method from this page.
+
+@academic[example:Example
+For $3\\frac{2}{5}$ versus $3\\frac{3}{7}$, cross-multiply the fractions: $2 \\times 7 = 14$ and $5 \\times 3 = 15$. Since $15 > 14$, we have $\\frac{3}{7} > \\frac{2}{5}$, so $3\\frac{3}{7} > 3\\frac{2}{5}$.]@`,
     before: ``,
     after: ``,
     link: '',

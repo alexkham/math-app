@@ -2090,9 +2090,11 @@ Taking the reference angle of $120°$ as $120° - 90° = 30°$ measures to the $
 
 This reduces every trigonometric evaluation to two steps: (1) find the reference angle and evaluate the function there (using the known values from the [special right triangles](!/trigonometry/right-triangle)), and (2) attach the correct sign based on the quadrant.
 
-For example, to evaluate $\\sin(225°)$: the angle is in Quadrant III, so the reference angle is $225° - 180° = 45°$. The sine of $45°$ is $\\frac{\\sqrt{2}}{2}$. Sine is negative in Quadrant III, so $\\sin(225°) = -\\frac{\\sqrt{2}}{2}$.
+@academic[example:Example
+For example, to evaluate $\\sin(225°)$: the angle is in Quadrant III, so the reference angle is $225° - 180° = 45°$. The sine of $45°$ is $\\frac{\\sqrt{2}}{2}$. Sine is negative in Quadrant III, so $\\sin(225°) = -\\frac{\\sqrt{2}}{2}$.]@
 
-To evaluate $\\cos\\left(\\frac{5\\pi}{6}\\right)$: the angle is in Quadrant II (between $\\frac{\\pi}{2}$ and $\\pi$), so the reference angle is $\\pi - \\frac{5\\pi}{6} = \\frac{\\pi}{6}$. The cosine of $\\frac{\\pi}{6}$ is $\\frac{\\sqrt{3}}{2}$. Cosine is negative in Quadrant II, so $\\cos\\left(\\frac{5\\pi}{6}\\right) = -\\frac{\\sqrt{3}}{2}$.
+@academic[example:Example
+To evaluate $\\cos\\left(\\frac{5\\pi}{6}\\right)$: the angle is in Quadrant II (between $\\frac{\\pi}{2}$ and $\\pi$), so the reference angle is $\\pi - \\frac{5\\pi}{6} = \\frac{\\pi}{6}$. The cosine of $\\frac{\\pi}{6}$ is $\\frac{\\sqrt{3}}{2}$. Cosine is negative in Quadrant II, so $\\cos\\left(\\frac{5\\pi}{6}\\right) = -\\frac{\\sqrt{3}}{2}$.]@
 
 Reference angles work because the unit circle has reflective symmetry across both axes. Points in different quadrants that share the same reference angle are mirror images of each other, differing only in the signs of their coordinates.
 
@@ -2121,7 +2123,12 @@ Copying the first-quadrant value unchanged gives $\\cos 240° = \\cos 60° = \\f
 
 A useful observation: only five magnitudes ever appear as coordinates on the unit circle at standard angles: $0$, $\\frac{1}{2}$, $\\frac{\\sqrt{2}}{2}$, $\\frac{\\sqrt{3}}{2}$, and $1$. The entire unit circle diagram, with all sixteen labeled points, is built from just these five values with appropriate sign changes. Recognizing this pattern — rather than memorizing sixteen separate pairs — is the efficient path to fluency.
 
-The sine values at $0°, 30°, 45°, 60°, 90°$ follow an ascending pattern: $\\frac{\\sqrt{0}}{2}, \\frac{\\sqrt{1}}{2}, \\frac{\\sqrt{2}}{2}, \\frac{\\sqrt{3}}{2}, \\frac{\\sqrt{4}}{2}$ — that is, $0, \\frac{1}{2}, \\frac{\\sqrt{2}}{2}, \\frac{\\sqrt{3}}{2}, 1$. Cosine follows the same values in reverse order. This mnemonic, while not a proof, provides a quick reconstruction of the first-quadrant values.`,
+@academic[fact,aside:true,width:35%:Rational sines only at $0°$, $30°$, $90°$
+Among whole-degree angles from $0°$ to $90°$, every other sine is irrational. The reason (Niven, 1956): at such angles $2\\cos\\theta$ solves an integer equation with leading coefficient 1, so a rational value must be a whole number from $-2$ to $2$.]@
+
+The sine values at $0°, 30°, 45°, 60°, 90°$ follow an ascending pattern: $\\frac{\\sqrt{0}}{2}, \\frac{\\sqrt{1}}{2}, \\frac{\\sqrt{2}}{2}, \\frac{\\sqrt{3}}{2}, \\frac{\\sqrt{4}}{2}$ — that is, $0, \\frac{1}{2}, \\frac{\\sqrt{2}}{2}, \\frac{\\sqrt{3}}{2}, 1$. Cosine follows the same values in reverse order. This mnemonic, while not a proof, provides a quick reconstruction of the first-quadrant values.
+
+Beyond the standard angles, exact values quickly grow more complicated. The sine of $15°$ is $\\frac{\\sqrt{6} - \\sqrt{2}}{4}$, obtained from $45° - 30°$, and $\\sin 18° = \\frac{\\sqrt{5} - 1}{4}$ comes from the regular pentagon. For angles such as $1°$ or $20°$, exact forms are impractical, and a calculator supplies a decimal approximation instead.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2661,6 +2668,7 @@ $$x^2 + y^2 = 1$$]@`,
           sectionsContent.obj7.content,
                   <div key={'unit-pythagoreanCircle'} dangerouslySetInnerHTML={{ __html: demoUnits.pythagoreanCircle }} />,
           `In the other quadrants the legs carry signs, but their squares still add to 1.`,
+          `@academic[punchline:Sine and cosine are never independent: either one fixes the other, up to its sign.]@`,
         ]
     },
     {
@@ -2681,6 +2689,7 @@ $$x^2 + y^2 = 1$$]@`,
           sectionsContent.obj9.content,
                   <div key={'unit-sineWave'} dangerouslySetInnerHTML={{ __html: demoUnits.sineWave }} />,
           `The other five functions arise the same way, each from a different quantity read off the same rotating point.`,
+          `@academic[punchline:Sine and cosine are circular motion seen from the side, which is why oscillations are written in them.]@`,
         ]
     },
     {

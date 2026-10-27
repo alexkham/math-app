@@ -2573,8 +2573,9 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2697,6 +2698,23 @@ const keyWords = [
 </table>
 `
 
+// Concept introduction (section 1, "Definition of Cardinality") — template F,
+// two descriptions shown to agree. Running instance: A = {a, b, c} against
+// {1, 2, 3} and {1, 2}. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its formula box, pitfall aside and five passages are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBothTable = ciTableOpen(['compare {a, b, c} with', 'by counting', 'by pairing', 'same size?']) +
+  ciRow(['{1, 2, 3}', '3 and 3', 'a–1, b–2, c–3, nothing left', 'yes']) +
+  ciRow(['{1, 2}', '3 and 2', 'a–1, b–2, c left over', 'no'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
     obj0: {
   title: `Key Terms`,
@@ -2780,7 +2798,8 @@ $$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C
 Stopping after the pairs gives $4 + 3 + 3 - 2 - 1 - 2 = 5$: the element 4 is added three times and subtracted three times, so it is not counted. Adding $|A \\cap B \\cap C| = 1$ back gives $6$.
 [Read more](!#pitfalls)]@
 
-For a concrete case, take $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$. The singles are $4$, $3$ and $3$, and the pairwise intersections $\\{2, 4\\}$, $\\{4\\}$ and $\\{4, 5\\}$ have sizes $2$, $1$ and $2$. The element $4$ is the only one that lies in all three sets. The union is $\\{1, 2, 3, 4, 5, 6\\}$, with six elements, and each of the seven terms of the formula uses one of these counts.
+@academic[example:Example
+For a concrete case, take $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$. The singles are $4$, $3$ and $3$, and the pairwise intersections $\\{2, 4\\}$, $\\{4\\}$ and $\\{4, 5\\}$ have sizes $2$, $1$ and $2$. The element $4$ is the only one that lies in all three sets. The union is $\\{1, 2, 3, 4, 5, 6\\}$, with six elements, and each of the seven terms of the formula uses one of these counts.]@
 
 When the sets share no elements, the correction terms vanish and the cardinality simply adds:
 
@@ -3178,6 +3197,21 @@ const schemas = {
     verdict: 'x is on no row — the list was not complete',
   };
 
+  const seCiPairs = {style: { primary: '#2563EB', primaryLight: '#E3ECFD', secondary: '#06357A', secondaryLight: '#DCE4F0', result: '#B45309', resultFill: '#FDF3E3', text: '#1E3A5F' },
+    kind: 'pairing', width: 560, height: 300,
+    svgTitle: 'Pairing {a, b, c} with {1, 2, 3} uses everything; with {1, 2} it leaves c over',
+    panels: [
+      { leftName: '{a, b, c}', rightName: '{1, 2, 3}', left: ['a', 'b', 'c'], right: ['1', '2', '3'],
+        pairs: [[0, 0], [1, 1], [2, 2]], verdict: 'every element has one partner', ok: true },
+      { leftName: '{a, b, c}', rightName: '{1, 2}', left: ['a', 'b', 'c'], right: ['1', '2'],
+        pairs: [[0, 0], [1, 1]], verdict: 'c has no partner', ok: false },
+    ],
+  };
+  const conceptIntroFigures = {
+    pairs: renderSetElementsV2(seCiPairs),
+    bothTable: ciBothTable,
+  };
+
   const demoUnits = {
     inclusionExclusion: demoUnitFrame({
       svg: [twoSetsVennDiagrams.union, twoSetsVennDiagrams.disjoint],
@@ -3231,6 +3265,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Cardinality of Sets: Finite, Countable & Uncountable | Learn Math Class",
       description: "Learn about cardinality: measuring set size, finite vs infinite sets, countable vs uncountable infinities, Cantor's diagonal argument, and comparing cardinalities.",
@@ -3245,9 +3280,80 @@ const schemas = {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function CardinalityPage({cardinalityLevels, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function CardinalityPage({cardinalityLevels, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The obvious way to measure a set is to count its elements.`,
+        content: [
+          `The cardinality of a set $A$, denoted $|A|$, measures the number of elements in $A$. This bar notation is one of several [cardinality symbols](!/math-symbols/set-theory) in standard use.`,
+          `For finite sets, cardinality is determined by counting. If $A = \\{a, b, c\\}$, then $|A| = 3$. If $B = \\{1, 2, 3, 4, 5\\}$, then $|B| = 5$.`,
+        ],
+      },
+      {
+        id: 'second',
+        lead: `There is another way that never uses a number: pair the elements off.`,
+        content: [
+          `To see whether a theatre has as many seats as people, nobody needs to count — ask everyone to sit down. If every person has a seat and no seat is empty, the two match. Sets can be compared the same way: join each element of one to its own element of the other, and see whether anything is left over.`,
+        ],
+        visual: ciSvg('pairs'),
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `On the same sets, counting and pairing give the same verdict.`,
+        content: [
+          ciTable('bothTable'),
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree: counting is pairing, with the numbers 1, 2, 3, … as the partners.`,
+        content: [
+          `Counting $\\{a, b, c\\}$ means pointing at $a$ and saying "one", at $b$ and saying "two", at $c$ and saying "three" — pairing the set with $\\{1, 2, 3\\}$. Two sets with the same count are both paired with the same $\\{1, \\dots, n\\}$, so they can be paired with each other.`,
+          `Two sets have the same cardinality when a bijection (one-to-one correspondence) exists between them. For finite sets, this simply means they have the same count. For infinite sets, this definition becomes the primary tool for comparing sizes.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [cardinality](!/set-theory/definitions#cardinality) of a set $A$, written $|A|$, is its size: the number of its elements for a finite set, and in general what all sets that can be paired with $A$ have in common.`,
+        formula: [
+          `The empty set contains no elements:`,
+          `@academic[formula_callout:Definition of Cardinality
+$$|\\emptyset| = 0$$]@`,
+        ],
+        footer: `So $|\\{a, b, c\\}| = 3$, and $|\\{1, 2\\}| = 2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Cardinality is a property of the set as a whole — and every element counts once, whatever it is.`,
+        content: [
+          `The elements being counted can be of any kind: numbers, letters, words, or other sets. A set whose elements are themselves sets is written with braces inside braces, as in $\\{\\{1, 2\\}, 3\\}$ or $\\{\\emptyset\\}$. Such sets are counted by the same rule as every other set, and they come up throughout this page once power sets appear, since every element of a power set is itself a set.`,
+          `@academic[pitfall,aside:true,width:35%:Counting the elements inside an element
+Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts what is inside the inner braces. Each inner set is one element: $|\\{\\emptyset\\}| = 1$ and $|\\{\\{1, 2\\}, 3\\}| = 2$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which description to use: counting for finite sets, pairing for everything else.`,
+        content: `Counting needs a last number, so it stops working the moment a set is infinite. Pairing does not need one, which is why it is the tool that compares infinite sets — and where it gives surprising answers, as the section on [infinite sets](!/set-theory/cardinality#3) shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers finite, infinite, countable and uncountable sets, the notation, and how cardinalities are compared.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -3263,7 +3369,7 @@ export default function CardinalityPage({cardinalityLevels, seoData, sectionsCon
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

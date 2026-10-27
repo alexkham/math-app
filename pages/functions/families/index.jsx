@@ -1638,8 +1638,8 @@ import functionTypesDiagrams from '@/app/components/functions/types/functionType
 import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 
 
 export async function getStaticProps(){
@@ -2454,7 +2454,12 @@ $$f(x) = ax^2 + bx + c$$
 
 where $a \\neq 0$. The [graph](!/functions/graphs) is a parabola.
 
+@academic[fact,aside:true,width:35%:All parabolas are one shape
+Shrinking $y = x^2$ to $\\frac{1}{100}$ of its size in both directions gives exactly $y = 100x^2$, since $(x, x^2)$ lands on $\\left(\\frac{x}{100}, \\frac{x^2}{100}\\right)$. A narrow parabola is a wide one seen from farther away.]@
+
 When $a > 0$, the parabola opens upward with a minimum at the vertex. When $a < 0$, it opens downward with a maximum at the vertex. Larger $|a|$ makes the parabola narrower; smaller $|a|$ makes it wider.
+
+The effect of $a$ shows in a table of values. At $x = 1$ and $x = 2$, the parabola $y = x^2$ has heights $1$ and $4$, while $y = 4x^2$ has heights $4$ and $16$. Each height of $x^2$ is reached by $4x^2$ at half the distance from the axis of symmetry, so its graph looks narrower and climbs faster.
 
 The vertex sits on the axis of symmetry:
 
@@ -2493,7 +2498,7 @@ $$h = -\\frac{b}{2a}, \\quad k = f(h)$$
 
 [Range](!/functions/range): $[k, \\infty)$ when $a > 0$; $(-\\infty, k]$ when $a < 0$.
 
-Quadratics have axis of symmetry — the vertical line through the vertex. They are not one-to-one on their natural domain but become one-to-one when restricted to one side of the vertex.
+Quadratics have an axis of symmetry — the vertical line through the vertex. They are not one-to-one on their natural domain but become one-to-one when restricted to one side of the vertex.
 
 Zeros (if real) are found by factoring, completing the square, or the quadratic formula.
 
@@ -2518,6 +2523,9 @@ When $a > 0$, the function falls on the far left and rises on the far right. Whe
 @academic[rule_theorem_plain:Every cubic has at least one real zero — the S-curve must cross the $x$-axis somewhere.]@
 
 It may have one, two, or three real zeros depending on its specific coefficients.
+
+@academic[fact,aside:true,width:35%:Only three cubic shapes
+Every transformation $a(b(x - h))^3 + k$ of $x^3$ is flat at its centre and never turns, so neither $x^3 - 3x$ nor $x^3 + x$ comes from the parent. After stretches, shifts and reflections, every cubic is one of three: $x^3$, $x^3 - x$ or $x^3 + x$.]@
 
 Cubics have at most two turning points (local maximum and minimum). Some cubics, like $f(x) = x^3$, have no turning points — they increase throughout.
 
@@ -2853,7 +2861,7 @@ Domain comparison:
 - Restricted: even-root functions ($x \\geq 0$), logarithms ($x > 0$), rational (excludes zeros of denominator)
 
 Invertibility:
-- Always one-to-one: linear (non-constant), exponential, logarithmic, cubic (if monotonic), odd roots
+- Always one-to-one: linear (non-constant), exponential, logarithmic, monotonic cubics, odd roots
 - Not one-to-one without restriction: quadratic, absolute value, even powers, sine, cosine
 
 Periodicity:
@@ -3285,6 +3293,7 @@ export default function FamiliesPage({familyOutline, familyGrowthLevels, rationa
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+          `@academic[punchline:An equation, a graph and a table each carry the family's signature: the defining operation, the shape, the pattern of change.]@`,
         ]
     },
     {
@@ -3331,6 +3340,7 @@ export default function FamiliesPage({familyOutline, familyGrowthLevels, rationa
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@academic[punchline:The degree caps the zeros and the turns, and together with the leading coefficient's sign it fixes both ends.]@`,
         ]
     },
     {

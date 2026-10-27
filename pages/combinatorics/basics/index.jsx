@@ -1019,7 +1019,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 
 
 
@@ -1462,6 +1462,11 @@ A **permutation** is an ordered arrangement of items. Arranging $n$ distinct ite
 $$P(n,r) = \\frac{n!}{(n-r)!}.$$]@
 
 Variants of the basic problem cover arrangements with repetition allowed, arrangements containing identical items, circular arrangements, and arrangements with positional constraints.
+
+@academic[fact,aside:true,width:35%:A shuffled deck is almost surely new
+A deck has $52! \\approx 8 \\times 10^{67}$ orders. Even a billion shuffles a second since the Big Bang would deal fewer than $10^{27}$ decks, so a well-shuffled deck is almost certainly in an order no deck has ever had.]@
+
+Factorials grow faster than any exponential $c^n$. Each item added to a row multiplies the number of arrangements by the new length of the row: $5! = 120$, $10! = 3{,}628{,}800$, and $20!$ is already above $2 \\times 10^{18}$. A standard deck of cards is a row of $52$ distinct items, and every shuffle produces one of its $52!$ orders.
 
 A **combination** is an unordered selection of items. Choosing $r$ items from $n$ without regard to order gives
 
@@ -1917,6 +1922,7 @@ export default function CombinatoricsBasicsPage({scenarioOutline, permCombCases,
           >
             <CaseSplit data={permCombCases} variant="poster" proseStyle="cards" theme={figureTheme} />
           </DiagramFrame>,
+          `@academic[punchline:Whether order matters splits every counting formula in two: arrangements count each order, selections divide the orders out.]@`,
         ]
     },
     {

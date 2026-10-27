@@ -1677,7 +1677,12 @@ $$\\binom{m+n}{r} = \\sum_{k=0}^{r} \\binom{m}{k} \\binom{n}{r-k}.$$
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
+@academic[fact,aside:true,width:35%:Found in China in 1303
+Zhu Shijie wrote this identity in his Jade Mirror of the Four Unknowns in 1303, together with a drawing of the triangle. Vandermonde published it in 1772, about 470 years later, and the name stayed with him.]@
+
 Choosing $r$ items from the disjoint union of an $m$-set and an $n$-set partitions according to how many of the chosen items come from each side.
+
+Take $m = n = 3$ and $r = 3$. The $3$ chosen items can include $0$, $1$, $2$ or $3$ from the first group, so $\\binom{6}{3} = 1 \\cdot 1 + 3 \\cdot 3 + 3 \\cdot 3 + 1 \\cdot 1 = 20$. With $m = n = r$ in general, the identity becomes $\\binom{2n}{n} = \\sum_{k} \\binom{n}{k}^2$: the squares of the entries of row $n$ add up to the middle entry of row $2n$.
 
 ## Hockey Stick Identity
 
@@ -1732,9 +1737,14 @@ The diagonals of the triangle hold familiar sequences:
 • The third contains the triangular numbers $1, 3, 6, 10, \\ldots$
 • The fourth contains the tetrahedral numbers $1, 4, 10, 20, \\ldots$
 
+@academic[fact,aside:true,width:35%:Odd entries draw Sierpiński's triangle
+Shade the odd entries and the triangle fills with blank triangles inside blank triangles, the fractal Sierpiński described in 1915. By Lucas' theorem, $\\binom{n}{k}$ is odd exactly when every binary digit $1$ of $k$ is also a $1$ of $n$, so in row $64 = 1000000_2$ only the two end entries are odd.]@
+
 Sums along the shallow diagonals — diagonals that move one step down and one step left at each entry — produce the Fibonacci numbers.
 
 The row sums double at each step, since $\\sum_k \\binom{n}{k} = 2^n$.
+
+Parity follows a pattern of its own. Pascal's rule adds the two entries above, and odd plus even is odd while odd plus odd and even plus even are even, so the odd entries of each row are fixed by those of the row before. Marking only whether each entry is odd or even, row after row, turns the array into a picture in two colours.
 
 ## Computing Coefficients
 
@@ -1775,9 +1785,16 @@ The multinomial coefficient counts the number of distinct arrangements of $n$ it
 Using $\\binom{6}{2, 2, 2} = 90$ for the ways to split $6$ people into $3$ pairs counts each split $3! = 6$ times, once for every way of naming the pairs. The number of pairings is $90 / 6 = 15$.
 [Read more](!#pitfalls)]@
 
-In the group reading, each group has its own size and its own name: group $1$ receives $k_1$ items, group $2$ receives $k_2$ items, and so on. Splitting $6$ people into a team for Monday, a team for Tuesday and a team for Wednesday, two people each, is counted by $\\binom{6}{2, 2, 2} = \\frac{6!}{2!\\,2!\\,2!} = 90$. It is the same number as the arrangements of the letters $A, A, B, B, C, C$: line the people up and write under each one the letter of that person's team.
+In the group reading, each group has its own size and its own name: group $1$ receives $k_1$ items, group $2$ receives $k_2$ items, and so on.
+
+@academic[example:Example
+Splitting $6$ people into a team for Monday, a team for Tuesday and a team for Wednesday, two people each, is counted by $\\binom{6}{2, 2, 2} = \\frac{6!}{2!\\,2!\\,2!} = 90$.]@
+
+It is the same number as the arrangements of the letters $A, A, B, B, C, C$: line the people up and write under each one the letter of that person's team.
 
 The multinomial coefficient is also the natural coefficient in the [multinomial theorem](!/combinatorics/binomial-theorem), which expands $(x_1 + x_2 + \\cdots + x_r)^n$.
+
+@academic[punchline:Sharing items among named groups and arranging a word with repeated letters are one count, $\\frac{n!}{k_1! \\, k_2! \\cdots k_r!}$.]@
 `,
     before: ``,
     between: ``,
@@ -2157,6 +2174,7 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
           sectionsContent.obj2.content,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          `@academic[punchline:A binomial identity is usually a statement about subsets, and counting those subsets two ways is the shortest proof.]@`,
         ]
     },
     {
@@ -2168,7 +2186,7 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
                   <div key={'unit-symmetry'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetry }} />,
-          `The diagonals and the shallow-diagonal sums below are read off the same array, so each one is another identity that the arrangement makes obvious.`,
+          `The diagonals and the shallow-diagonal sums above are read off the same array, so each one is another identity that the arrangement makes obvious.`,
         ]
     },
     {

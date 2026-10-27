@@ -1785,11 +1785,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import choleskyDiagrams from '@/app/components/linear-algebra copy/matrix/choleskyDiagrams'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 

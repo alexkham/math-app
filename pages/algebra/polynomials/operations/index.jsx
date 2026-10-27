@@ -454,7 +454,8 @@ const sectionsContent = {
     title: `Adding Polynomials`,
     content: `Adding two polynomials reduces to a single principle: combine like terms. Two terms are like terms when they share the same variable raised to the same exponent — $3x^2$ and $5x^2$ are like terms, while $3x^2$ and $5x^3$ are not.
 
-Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ terms are $2x^2$ and $x^2$, the $x$ terms are $3x$ and $-5x$, and the constants are $-1$ and $4$. Adding each group gives $3x^2 - 2x + 3$.
+@academic[example:Example
+Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ terms are $2x^2$ and $x^2$, the $x$ terms are $3x$ and $-5x$, and the constants are $-1$ and $4$. Adding each group gives $3x^2 - 2x + 3$.]@
 
 The process works identically for any number of terms and any degree. Align terms by matching exponents, add their coefficients, and write the result. Terms with no counterpart in the other polynomial pass through unchanged — adding $x^3 + 2x$ and $3x^2 - x + 5$ produces $x^3 + 3x^2 + x + 5$, where $x^3$ and $3x^2$ each carried over directly.
 
@@ -470,7 +471,8 @@ Adding $2x^3 + x - 1$ and $-2x^3 + 4x + 7$ eliminates the cubic terms entirely, 
     title: `Subtracting Polynomials`,
     content: `Subtraction follows the same logic as addition, with one extra step: distribute the negative sign across every term of the polynomial being subtracted before combining like terms.
 
-For $(2x^2 + 3x - 1) - (x^2 - 5x + 4)$, first negate the second polynomial: $-x^2 + 5x - 4$. Then add: $(2x^2 + 3x - 1) + (-x^2 + 5x - 4) = x^2 + 8x - 5$. Every term inside the parentheses changes sign — including terms that were already negative. The $-5x$ becomes $+5x$ and the $+4$ becomes $-4$.
+@academic[example:Example
+For $(2x^2 + 3x - 1) - (x^2 - 5x + 4)$, first negate the second polynomial: $-x^2 + 5x - 4$. Then add: $(2x^2 + 3x - 1) + (-x^2 + 5x - 4) = x^2 + 8x - 5$. Every term inside the parentheses changes sign — including terms that were already negative. The $-5x$ becomes $+5x$ and the $+4$ becomes $-4$.]@
 
 This is where most errors occur. Negating only the first term of the subtracted polynomial while leaving the rest untouched is the single most common mistake in polynomial subtraction. The expression $(5x^2 + 2x - 3) - (x^2 - 4x + 1)$ is sometimes incorrectly computed as $4x^2 - 2x - 2$ when only $x^2$ gets negated. The correct result is $4x^2 + 6x - 4$.
 
@@ -484,7 +486,8 @@ Like addition, subtraction always produces a polynomial. The degree of the resul
     title: `Multiplying Polynomials`,
     content: `Multiplication requires every term of one polynomial to be multiplied by every term of the other. For each pair, multiply the coefficients and add the exponents on matching variables, then combine like terms in the resulting expression.
 
-For $(x + 2)(x^2 - 3x + 1)$, distribute each term of the binomial across the trinomial. The term $x$ produces $x \\cdot x^2 = x^3$, $x \\cdot (-3x) = -3x^2$, and $x \\cdot 1 = x$. The term $2$ produces $2 \\cdot x^2 = 2x^2$, $2 \\cdot (-3x) = -6x$, and $2 \\cdot 1 = 2$. Collecting everything: $x^3 - 3x^2 + x + 2x^2 - 6x + 2$. Combining like terms gives $x^3 - x^2 - 5x + 2$.
+@academic[example:Example
+For $(x + 2)(x^2 - 3x + 1)$, distribute each term of the binomial across the trinomial. The term $x$ produces $x \\cdot x^2 = x^3$, $x \\cdot (-3x) = -3x^2$, and $x \\cdot 1 = x$. The term $2$ produces $2 \\cdot x^2 = 2x^2$, $2 \\cdot (-3x) = -6x$, and $2 \\cdot 1 = 2$. Collecting everything: $x^3 - 3x^2 + x + 2x^2 - 6x + 2$. Combining like terms gives $x^3 - x^2 - 5x + 2$.]@
 
 @academic[rule_theorem_plain:The degree of a product equals the sum of the degrees of the factors — always, without exception.]@
 
@@ -562,7 +565,8 @@ Each pairs a linear factor with a quadratic factor to produce a two-term cubic. 
     title: `FOIL Method`,
     content: `FOIL is a mnemonic for multiplying two binomials: First, Outer, Inner, Last. It names the four products that arise when each term of one binomial is distributed across the other.
 
-For $(2x + 3)(x - 4)$, the four steps produce: First $2x \\cdot x = 2x^2$, Outer $2x \\cdot (-4) = -8x$, Inner $3 \\cdot x = 3x$, Last $3 \\cdot (-4) = -12$. Combining the middle terms gives $2x^2 - 5x - 12$.
+@academic[example:Example
+For $(2x + 3)(x - 4)$, the four steps produce: First $2x \\cdot x = 2x^2$, Outer $2x \\cdot (-4) = -8x$, Inner $3 \\cdot x = 3x$, Last $3 \\cdot (-4) = -12$. Combining the middle terms gives $2x^2 - 5x - 12$.]@
 
 @academic[fact,aside:true,width:35%:Three products are enough
 FOIL makes four products, but in $(ax + b)(cx + d)$ the middle coefficient $ad + bc$ equals $(a + b)(c + d) - ac - bd$, so three multiplications suffice. Applied over and over, this trick (Karatsuba, 1960) multiplies huge numbers faster than school long multiplication.]@
@@ -582,7 +586,8 @@ The method does not extend beyond binomials. Attempting to apply FOIL to a binom
 @academic[formula_callout:Polynomial Long Division
 $$\\text{dividend} = (\\text{divisor} \\times \\text{quotient}) + \\text{remainder}$$]@
 
-To divide $x^3 - 2x^2 + 5x - 3$ by $x - 1$, begin by dividing the leading term of the dividend by the leading term of the divisor: $x^3 \\div x = x^2$. Multiply $x^2$ by the entire divisor: $x^2(x - 1) = x^3 - x^2$. Subtract this from the dividend to get $-x^2 + 5x - 3$. Repeat: $-x^2 \\div x = -x$, multiply $-x(x - 1) = -x^2 + x$, subtract to get $4x - 3$. One more pass: $4x \\div x = 4$, multiply $4(x - 1) = 4x - 4$, subtract to get $1$. The quotient is $x^2 - x + 4$ with remainder $1$.
+@academic[example:Example
+To divide $x^3 - 2x^2 + 5x - 3$ by $x - 1$, begin by dividing the leading term of the dividend by the leading term of the divisor: $x^3 \\div x = x^2$. Multiply $x^2$ by the entire divisor: $x^2(x - 1) = x^3 - x^2$. Subtract this from the dividend to get $-x^2 + 5x - 3$. Repeat: $-x^2 \\div x = -x$, multiply $-x(x - 1) = -x^2 + x$, subtract to get $4x - 3$. One more pass: $4x \\div x = 4$, multiply $4(x - 1) = 4x - 4$, subtract to get $1$. The quotient is $x^2 - x + 4$ with remainder $1$.]@
 
 The process terminates when the degree of what remains is less than the degree of the divisor.
 
@@ -603,7 +608,8 @@ To divide your own polynomials by long or synthetic division with each step show
 @academic[fact,aside:true,width:35%:No method uses fewer multiplications
 Each step of synthetic division is one multiplication and one addition, so a polynomial of degree $n$ is evaluated with only $n$ of each. For coefficients not known in advance, V. Pan proved in 1966 that no method can use fewer multiplications.]@
 
-To divide $x^3 - 2x^2 + 5x - 3$ by $(x - 1)$, write the coefficients $1, -2, 5, -3$ in a row and place $c = 1$ to the left. Bring down the first coefficient: $1$. Multiply by $c$: $1 \\cdot 1 = 1$. Add to the next coefficient: $-2 + 1 = -1$. Multiply by $c$: $-1 \\cdot 1 = -1$. Add: $5 + (-1) = 4$. Multiply: $4 \\cdot 1 = 4$. Add: $-3 + 4 = 1$. The bottom row reads $1, -1, 4, 1$ — giving a quotient of $x^2 - x + 4$ with remainder $1$, matching the long division result exactly.
+@academic[example:Example
+To divide $x^3 - 2x^2 + 5x - 3$ by $(x - 1)$, write the coefficients $1, -2, 5, -3$ in a row and place $c = 1$ to the left. Bring down the first coefficient: $1$. Multiply by $c$: $1 \\cdot 1 = 1$. Add to the next coefficient: $-2 + 1 = -1$. Multiply by $c$: $-1 \\cdot 1 = -1$. Add: $5 + (-1) = 4$. Multiply: $4 \\cdot 1 = 4$. Add: $-3 + 4 = 1$. The bottom row reads $1, -1, 4, 1$ — giving a quotient of $x^2 - x + 4$ with remainder $1$, matching the long division result exactly.]@
 
 The connection to polynomial evaluation is immediate.
 

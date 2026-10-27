@@ -325,7 +325,8 @@ $$\\log_a(x) = \\frac{\\ln(x)}{\\ln(a)}$$]@
 Putting the base on top, $\\log_2(10) = \\frac{\\ln(2)}{\\ln(10)} \\approx 0.301$, gives $2^{0.301} \\approx 1.23$, not $10$. The argument goes on top: $\\frac{\\ln(10)}{\\ln(2)} \\approx 3.322$.
 [Read more](!#pitfalls)]@
 
-For example, $\\log_2(10) = \\frac{\\ln(10)}{\\ln(2)} = \\frac{2.303}{0.693} \\approx 3.322$. Verification: $2^{3.322} \\approx 10$.
+@academic[example:Example
+For example, $\\log_2(10) = \\frac{\\ln(10)}{\\ln(2)} = \\frac{2.303}{0.693} \\approx 3.322$. Verification: $2^{3.322} \\approx 10$.]@
 
 Converting between common and natural logarithms directly uses $\\ln(10) \\approx 2.303$:
 

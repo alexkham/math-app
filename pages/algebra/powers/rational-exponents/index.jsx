@@ -12,6 +12,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -366,13 +368,15 @@ obj7: {
   title: `Simplifying Expressions`,
   content: `Converting radicals to exponent form often makes simplification more straightforward, because the [laws of exponents](!/algebra/powers/exponent-rules/) apply directly to fractional exponents just as they do to integers.
 
-Simplify $x^{3/4} \\cdot x^{1/2}$. The product rule adds exponents: $x^{3/4 + 1/2} = x^{3/4 + 2/4} = x^{5/4}$. In radical form, this is $\\sqrt[4]{x^5} = x\\sqrt[4]{x}$.
+@academic[example:Example
+Simplify $x^{3/4} \\cdot x^{1/2}$. The product rule adds exponents: $x^{3/4 + 1/2} = x^{3/4 + 2/4} = x^{5/4}$. In radical form, this is $\\sqrt[4]{x^5} = x\\sqrt[4]{x}$.]@
 
 Simplify $\\frac{a^{5/3}}{a^{2/3}}$. The quotient rule subtracts: $a^{5/3 - 2/3} = a^{3/3} = a$.
 
 Simplify $\\sqrt{x} \\cdot \\sqrt[3]{x}$. Convert to exponent form: $x^{1/2} \\cdot x^{1/3} = x^{5/6} = \\sqrt[6]{x^5}$. The radical form with different indices resists simplification, but the exponent form handles it cleanly.
 
-Simplify $\\left(\\frac{x^{1/2}}{y^{-1/3}}\\right)^6$. The negative exponent in the denominator moves $y$ to the numerator: $\\left(x^{1/2} \\cdot y^{1/3}\\right)^6 = x^3 y^2$.
+@academic[example:Example
+Simplify $\\left(\\frac{x^{1/2}}{y^{-1/3}}\\right)^6$. The negative exponent in the denominator moves $y$ to the numerator: $\\left(x^{1/2} \\cdot y^{1/3}\\right)^6 = x^3 y^2$.]@
 
 @academic[pitfall,aside:true,width:35%:Adding the fractions straight across
 Adding $\\frac{1}{2} + \\frac{1}{3}$ top and bottom gives $x^{1/2} \\cdot x^{1/3} = x^{2/5}$. Over the common denominator $6$ the sum is $\\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$, so the product is $x^{5/6}$.
@@ -641,8 +645,30 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj7): the section's √x · ∛x, simplified through exponent form
+  const radicalProductSteps = {
+    header: {
+      kicker: 'Rational exponents',
+      title: 'Multiplying roots with different indices',
+      lede: 'The radical form with different indices resists simplification, but the exponent form handles it cleanly.',
+    },
+    steps: [
+      { id: 'radicals', label: 'Radical form', stamp: 'Before', expr: '$\\sqrt{x} \\cdot \\sqrt[3]{x}$',
+        move: { label: 'Convert to exponent form', note: 'the index becomes the denominator' } },
+      { id: 'exponents', label: 'Exponent form', expr: '$x^{1/2} \\cdot x^{1/3}$',
+        move: { label: 'Product rule: add the exponents', note: 'over the common denominator 6: 3/6 + 2/6 = 5/6' } },
+      { id: 'power', label: 'Single power', expr: '$x^{5/6}$',
+        detailsLabel: 'Why not 2/5?',
+        detailsTitle: '',
+        details: 'Adding $\\frac{1}{2} + \\frac{1}{3}$ top and bottom gives $x^{2/5}$. Over the common denominator $6$ the sum is $\\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$, so the product is $x^{5/6}$.',
+        move: { label: 'Convert back', note: 'the denominator 6 becomes the index' } },
+      { id: 'radical', label: 'Single radical', stamp: 'After', expr: '$\\sqrt[6]{x^5}$' },
+    ],
+  };
+
 return {
   props: {
+    radicalProductSteps,
     sectionsContent,
     introContent,
     obj3Table,
@@ -663,7 +689,7 @@ return {
    }
 
 // export default function RationalExponentsPage({seoData,sectionsContent , introContent}) {
-export default function RationalExponentsPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RationalExponentsPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, radicalProductSteps}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -766,6 +792,20 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="radical-product-steps"
+            title="Simplifying √x · ∛x"
+            source="/algebra/powers/rational-exponents"
+            before={"The section's third example, one move at a time. The only real work happens in exponent form."}
+            after={"In exponent form the product is ordinary arithmetic on fractions: the product rule adds the exponents, and the common denominator becomes the index of the single radical. The roots page [combines √2 and ∛4](!/algebra/roots/rational-exponents#combine-radicals-steps) the same way."}
+          >
+            <BeforeAfter
+              data={radicalProductSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
 

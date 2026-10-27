@@ -918,6 +918,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1274,6 +1275,24 @@ const summaryTable = `
 // };
 
 // formulas-optimized: v1 | 2026-06-09 | 4 callouts (obj2, obj4, obj5, obj6)
+// Concept introduction (section 2, "The Differential dy") — template A,
+// definition last. Running instance: y = x³ at x = 2 (the section's pitfall
+// numbers). Section 1 (the increment dx) is left as is. Old obj2 text is kept
+// in sectionsContent.obj2, unused; its formula box with link, pitfall aside,
+// rule box and four passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciStepTable = ciTableOpen(['step dx', 'along the tangent: 12 · dx', 'actual change (2 + dx)³ − 8']) +
+  ciRow(['0.5', '6', '7.625']) +
+  ciRow(['0.1', '1.2', '1.261'], { shade: true, color: '#2563EB', cols: [1] }) +
+  ciRow(['0.01', '0.12', '0.120601'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/derivatives/differentials ──────────────────────────────────
 
@@ -1419,7 +1438,8 @@ $$f(x) \\approx f(a) + f'(a)(x - a) \\qquad \\Delta y \\approx f'(a)\\, \\Delta 
 
 This is the linearization of $f$ at $a$. Given a known value $f(a)$ and the slope $f'(a)$, the tangent line estimates $f$ at nearby points.
 
-To approximate $\\sqrt{4.03}$: take $f(x) = \\sqrt{x}$, $x = 4$, $dx = 0.03$. Then $f(4) = 2$ and $f'(x) = \\frac{1}{2\\sqrt{x}}$, so $f'(4) = \\frac{1}{4}$. The estimate is $2 + \\frac{1}{4}(0.03) = 2.0075$. The actual value is $\\sqrt{4.03} \\approx 2.00749...$—the approximation agrees to four decimal places, with an error of about $0.000014$.
+@academic[example:Example
+To approximate $\\sqrt{4.03}$: take $f(x) = \\sqrt{x}$, $x = 4$, $dx = 0.03$. Then $f(4) = 2$ and $f'(x) = \\frac{1}{2\\sqrt{x}}$, so $f'(4) = \\frac{1}{4}$. The estimate is $2 + \\frac{1}{4}(0.03) = 2.0075$. The actual value is $\\sqrt{4.03} \\approx 2.00749...$—the approximation agrees to four decimal places, with an error of about $0.000014$.]@
 
 @academic[pitfall,aside:true,width:35%:Reporting the change as the value
 Stopping at $dy = \\frac{1}{4}(0.03) = 0.0075$ gives only the change in $f$, not $\\sqrt{4.03}$. The estimate adds the known value: $f(4) + dy = 2 + 0.0075 = 2.0075$.
@@ -1490,7 +1510,8 @@ $$dz = \\frac{\\partial z}{\\partial x}\\, dx + \\frac{\\partial z}{\\partial y}
 
 Each partial derivative weights the contribution of the corresponding variable's error. The total differential estimates how $z$ responds to simultaneous small changes in all inputs.
 
-For the area of a rectangle $A = lw$: $dA = w\\,dl + l\\,dw$. If $l = 10 \\pm 0.1$ and $w = 5 \\pm 0.05$, then $dA = 5(0.1) + 10(0.05) = 1.0$. The area is approximately $50 \\pm 1.0$.
+@academic[example:Example
+For the area of a rectangle $A = lw$: $dA = w\\,dl + l\\,dw$. If $l = 10 \\pm 0.1$ and $w = 5 \\pm 0.05$, then $dA = 5(0.1) + 10(0.05) = 1.0$. The area is approximately $50 \\pm 1.0$.]@
 
 @academic[pitfall,aside:true,width:35%:Adding the input errors unweighted
 Adding the errors directly gives $dA = 0.1 + 0.05 = 0.15$ and $A \\approx 50 \\pm 0.15$. Each error has to be multiplied by its partial derivative: $dA = 5(0.1) + 10(0.05) = 1.0$, so $A \\approx 50 \\pm 1.0$.
@@ -1530,12 +1551,12 @@ If $dx$ is held constant (treated as a fixed increment), the second differential
 @academic[formula_callout:Higher-Order Differentials
 $$d^2 y = f''(x) \\cdot (dx)^2$$]@
 
-The notation $d^2 y / dx^2$ for the [second derivative](!/calculus/derivatives/higher-order) arises from dividing both sides by $(dx)^2$:
+The notation $d^2 y / dx^2$ for the [second derivative](!/calculus/derivatives/higher-order) mirrors this: only while $dx$ is held constant does dividing both sides by $(dx)^2$ give
 
 @academic[formula_callout:Higher-Order Differentials
 $$\\frac{d^2 y}{dx^2} = \\frac{d^2 y}{(dx)^2} = f''(x)$$]@
 
-This explains the Leibniz notation for higher derivatives. The superscript on $d^2 y$ counts the number of times the differential operator $d$ has been applied. The square on $dx^2$ means $(dx)^2$—the differential $dx$ appearing as a factor twice—not the differential $d(x^2)$.
+This motivates the Leibniz notation for higher derivatives. The superscript on $d^2 y$ counts the number of times the differential operator $d$ has been applied. The square on $dx^2$ means $(dx)^2$—the differential $dx$ appearing as a factor twice—not the differential $d(x^2)$.
 
 Higher-order differentials extend the approximation. The second-order estimate of the change in $y$ is
 
@@ -1755,6 +1776,19 @@ const schemas = {
     points: [{ x: 1, y: 1 }],
     notes: [{ x: 2.2, y: 4.1, text: 'Δy = 3 (curve)', pos: 'e', color: 'f' }, { x: 2.2, y: 3.45, text: 'error 1', pos: 'e', color: 'r' }, { x: 2.2, y: 2.0, text: 'dy = 2 (tangent)', pos: 'e', color: 'g' }],
     caption: 'dy follows the tangent, Δy follows the curve; the gap is the error' };
+  const fpCiTangent = { kind: 'pieces', svgTitle: 'y = x^3 and its tangent line y = 12x - 16 at x = 2',
+    xRange: [1.5, 2.5], yRange: [2, 16], xStep: 0.25, yStep: 2,
+    pieces: [
+      { fn: (x) => x * x * x, from: 1.5, to: 2.5, ends: [null, null], color: 'f', label: { text: 'y = x³', x: 2.42, y: 14.17, pos: 'w' } },
+      { fn: (x) => 12 * x - 16, from: 1.5, to: 2.5, ends: [null, null], color: 'g', label: { text: 'tangent, slope 12', x: 2.12, y: 9.2, pos: 'se' } },
+    ],
+    points: [{ x: 2, y: 8, label: '(2, 8)', pos: 'nw' }],
+    caption: 'near x = 2 the tangent line hugs the curve' }
+  const conceptIntroFigures = {
+    tangent: renderFunctionPlotV4(fpCiTangent),
+    stepTable: ciStepTable,
+  };
+
   const demoUnits = {
     linear: demoUnitFrame({
       svg: functionTangentLineDiagrams.pos,
@@ -1773,6 +1807,7 @@ const schemas = {
   return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1792,9 +1827,79 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj3Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj3Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `To estimate how much y changes when x moves a little, the slope at the starting point is often enough.`,
+        content: [
+          `Driving at 60 km/h, you expect to cover about 1 km in the next minute without knowing exactly how the speed will vary. The rate now, times the step, gives a good estimate.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For y = x³ at x = 2 the slope is 12, so a step of 0.1 should change y by about 12 × 0.1 = 1.2.`,
+        content: [
+          `The actual change is $(2.1)^3 - 8 = 1.261$. The estimate is close, and gets closer as the step shrinks.`,
+          ciTable('stepTable'),
+        ],
+        visual: ciSvg('tangent'),
+      },
+      {
+        id: 'forcing',
+        lead: `The estimate is forced by the tangent line: it rises at rate f′(x), so a step dx lifts it by f′(x) · dx.`,
+        content: [
+          `Geometrically, $dy$ is the vertical change along the tangent line at $x$ when the horizontal position shifts by $dx$. The tangent line rises (or falls) at rate $f'(x)$, so a horizontal shift of $dx$ produces a vertical shift of $f'(x) \\cdot dx$.`,
+          `The differential $dy$ depends on two things: the point $x$ (which determines the slope $f'(x)$) and the increment $dx$ (which determines the scale). For fixed $x$, $dy$ is a linear function of $dx$—doubling $dx$ doubles $dy$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [differential](!/calculus/definitions#differential) $dy$ of $y = f(x)$ is the change along the tangent line for a step $dx$: $dy = f'(x)\\,dx$.`,
+        formula: [
+          `Given $y = f(x)$ where $f$ is [differentiable](!/calculus/derivatives/differentiability), the differential of $y$ is defined as`,
+          `@academic[formula_callout:Differential
+$$dy = f'(x)\\, dx$$
+/calculus/formulas#differential]@`,
+          `@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@`,
+        ],
+        footer: `So for $y = x^3$ at $x = 2$ with $dx = 0.1$: $dy = 3(2)^2(0.1) = 1.2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `dy is a number that depends on both the point and the step — and it is not the same as the actual change.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Dropping the dx
+Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$ for any step. With $dx = 0.1$, $dy = 3(2)^2(0.1) = 1.2$, close to the actual $\\Delta y = 1.261$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What generalizes and what does not: dy is exact only for straight lines.`,
+        content: [
+          `@academic[rule_plain:For a linear function $f(x) = mx + b$, the differential $dy = m \\cdot dx$ equals the actual change in $f$ exactly, because the tangent line to a linear function is the function itself.]@`,
+          `For nonlinear functions, $dy$ is an approximation—exact in the limit as $dx \\to 0$, and increasingly approximate as $dx$ grows.`,
+          `The gap between $dy$ and the actual change is measured in the [next section](!/calculus/derivatives/differentials#3).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page compares dy with the actual change, covers the notation, and uses differentials for linear approximation, error estimation and functions of several variables.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1810,7 +1915,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

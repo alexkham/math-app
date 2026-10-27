@@ -10,6 +10,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -699,8 +701,25 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj2): the section's unlike-looking radicals, simplified into like radicals and combined
+  const likeRadicalsSteps = {
+    header: {
+      kicker: 'Adding radicals',
+      title: 'Simplify first, then combine',
+      lede: 'Simplifying first is what reveals a common factor when the radicals do not look alike at the start.',
+    },
+    steps: [
+      { id: 'unlike', label: 'Unlike radicals', stamp: 'Before', expr: '$\\sqrt{12} + \\sqrt{27}$',
+        move: { label: 'Simplify each radical', note: '√12 = 2√3 and √27 = 3√3' } },
+      { id: 'like', label: 'Like radicals', expr: '$2\\sqrt{3} + 3\\sqrt{3}$',
+        move: { label: 'Combine the coefficients', note: '(2 + 3)√3, just as 2x + 3x = 5x' } },
+      { id: 'single', label: 'Single term', stamp: 'After', expr: '$5\\sqrt{3}$' },
+    ],
+  };
+
 return {
   props: {
+    likeRadicalsSteps,
     sectionsContent,
     introContent,
     obj1Table,
@@ -723,7 +742,7 @@ return {
 // export default function OperationsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function OperationsPage({seoData, sectionsContent, introContent, obj1Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function OperationsPage({seoData, sectionsContent, introContent, obj1Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, likeRadicalsSteps}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -755,6 +774,20 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-diagram'}
+            id="like-radicals-steps"
+            title="Adding √12 and √27"
+            source="/algebra/roots/operations"
+            before={"The section's example of radicals that look unlike but are not, one move at a time."}
+            after={"Before the first move, $\\sqrt{12} + \\sqrt{27}$ looks as final as $\\sqrt{2} + \\sqrt{3}$, which really cannot be combined. Only simplifying each radical shows whether the radical parts match."}
+          >
+            <BeforeAfter
+              data={likeRadicalsSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

@@ -249,7 +249,7 @@ export async function getStaticProps() {
       ]
     },
     '¬P→¬Q': {
-      text: "Double negation [implication](!/logic/propositional-logic/semantics/implication) ¬P→¬Q means &quot;if not P then not Q&quot;. Formula: ¬P→¬Q ≡ P∨¬Q. Not equivalent to original P→Q, demonstrating how negation placement fundamentally alters logical relationships. Truth table shows distinct behavior from basic [implication](!/logic/propositional-logic/semantics/implication). Important in contrapositive reasoning and proof strategies.",
+      text: "Inverse [implication](!/logic/propositional-logic/semantics/implication) ¬P→¬Q means &quot;if not P then not Q&quot;. Formula: ¬P→¬Q ≡ P∨¬Q. Not equivalent to original P→Q, demonstrating how negation placement fundamentally alters logical relationships. Truth table shows distinct behavior from basic [implication](!/logic/propositional-logic/semantics/implication). Not to be confused with the contrapositive ¬Q→¬P, which is equivalent to P→Q.",
       links: [
         { title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
         { title: "Check our logic equivalence validator", link: "/logic/propositional-logic/semantics/equivalence-validator" },
@@ -269,7 +269,10 @@ export async function getStaticProps() {
   const sectionsContent = {
     obj1: {
       title: `What Is a Logical Implication?`,
-      content: `A logical [implication](!/logic/propositional-logic/semantics/implication) is a compound proposition of the form P → Q, read "if P then Q." The proposition P is the antecedent (or hypothesis) and Q is the consequent (or conclusion). The implication asserts that whenever P is true, Q must also be true.
+      content: `@academic[fact,aside:true,width:35%:Even the crows argued about it
+Around 300 BC, Philo of Megara ruled that "if P then Q" is false only when P is true and Q is false, the rule behind today's table. His teacher Diodorus Cronus rejected it, and the poet Callimachus joked that even the crows on the roofs cawed about which conditionals are true.]@
+
+A logical [implication](!/logic/propositional-logic/semantics/implication) is a compound proposition of the form P → Q, read "if P then Q." The proposition P is the antecedent (or hypothesis) and Q is the consequent (or conclusion). The implication asserts that whenever P is true, Q must also be true.
 
 The material conditional is false in exactly one case: when the antecedent is true and the consequent is false. In every other case — including when the antecedent is false — the implication is true. This is the defining property of material implication in classical logic, and it is equivalent to the disjunction ¬P ∨ Q.
 
@@ -324,14 +327,19 @@ Material implication is used throughout mathematics to express theorems, definit
 
 The converse is false when Q is true and P is false — the opposite falsifying case from the original.
 
-A common logical error is confusing an implication with its converse: assuming that because P → Q is true, Q → P must also be true. The truth tables on this page show precisely why this reasoning fails. However, when both P → Q and Q → P hold, the result is the [biconditional](!/logic/truth-tables/biconditionals) P ↔ Q.`,
+A common logical error is confusing an implication with its converse: assuming that because P → Q is true, Q → P must also be true. The truth tables on this page show precisely why this reasoning fails. However, when both P → Q and Q → P hold, the result is the [biconditional](!/logic/truth-tables/biconditionals) P ↔ Q.
+
+@academic[punchline:An implication runs one way only: knowing P → Q says nothing about Q → P.]@`,
       before: ``,
       after: ``,
       link: ``,
     },
     obj5: {
       title: `¬P → Q: Negated Antecedent`,
-      content: `The [implication](!/logic/propositional-logic/semantics/implication) ¬P → Q reads "if not P then Q." By material implication, ¬P → Q ≡ ¬(¬P) ∨ Q ≡ P ∨ Q. So the negated-antecedent implication is equivalent to a simple disjunction.
+      content: `@academic[fact,aside:true,width:35%:Every one-F table is an arrow
+Of the 16 truth tables on two letters, exactly 4 have a single F, and each is an implication: the F at (T, F) gives P → Q, at (F, T) Q → P, at (F, F) ¬P → Q and at (T, T) P → ¬Q. So "or" and "not both" are arrows in disguise.]@
+
+The [implication](!/logic/propositional-logic/semantics/implication) ¬P → Q reads "if not P then Q." By material implication, ¬P → Q ≡ ¬(¬P) ∨ Q ≡ P ∨ Q. So the negated-antecedent implication is equivalent to a simple disjunction.
 
 This form appears in reasoning where the absence of one condition guarantees another. For example, "if I don&apos;t take the bus, I walk" expresses ¬P → Q where P = "take the bus" and Q = "walk."
 
@@ -380,7 +388,9 @@ Forming the contrapositive by negating both parts but keeping their order gives 
 
 The equivalence P → Q ≡ ¬Q → ¬P is one of the most used results in mathematical proof. Proof by contrapositive works by proving ¬Q → ¬P instead of P → Q directly, which is often easier when the negated forms are simpler to work with.
 
-For example, to prove "if n² is even then n is even," it is simpler to prove the contrapositive: "if n is odd then n² is odd." The [truth table](!/logic/truth-tables) confirms that these two statements are logically identical.`,
+For example, to prove "if n² is even then n is even," it is simpler to prove the contrapositive: "if n is odd then n² is odd." The [truth table](!/logic/truth-tables) confirms that these two statements are logically identical.
+
+@academic[punchline:A statement and its contrapositive are one claim in two forms, so prove whichever is easier.]@`,
       before: ``,
       after: ``,
       link: ``,

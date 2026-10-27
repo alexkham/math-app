@@ -1176,19 +1176,25 @@ Multiplying real parts and imaginary parts separately, as in addition, gives $(1
 
 The real part of the product is $ac - bd$. The imaginary part is $ad + bc$. Both involve contributions from all four original values.
 
-Step-by-step example: Compute $(2 + 3i)(4 - i)$.
+@academic[example:Step-by-step example
+Compute $(2 + 3i)(4 - i)$.
 
 Expand: $2 \\cdot 4 + 2 \\cdot (-i) + 3i \\cdot 4 + 3i \\cdot (-i) = 8 - 2i + 12i - 3i^2$
 
 Substitute $i^2 = -1$: $= 8 - 2i + 12i - 3(-1) = 8 - 2i + 12i + 3$
 
-Combine: $= (8 + 3) + (-2 + 12)i = 11 + 10i$
+Combine: $= (8 + 3) + (-2 + 12)i = 11 + 10i$]@
 
 @academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
 Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12i - 3 = 5 + 10i$. Since $i^2 = -1$, the term is $+3$ and the product is $11 + 10i$.
 [Read more](!#7)]@
 
-Multiplying by a pure real number scales both components proportionally. The product $3(2 + 5i) = 6 + 15i$ stretches the number by factor $3$ without rotating it. Multiplying by $i$ rotates $90°$ counterclockwise: $i(2 + 5i) = 2i + 5i^2 = -5 + 2i$. The [trigonometric form](!/complex-numbers/trigonometric-form) reveals multiplication's full geometric meaning — moduli multiply, arguments add.`,
+Multiplying by a pure real number scales both components proportionally. The product $3(2 + 5i) = 6 + 15i$ stretches the number by factor $3$ without rotating it. Multiplying by $i$ rotates $90°$ counterclockwise: $i(2 + 5i) = 2i + 5i^2 = -5 + 2i$. The [trigonometric form](!/complex-numbers/trigonometric-form) reveals multiplication's full geometric meaning — moduli multiply, arguments add.
+
+@academic[fact,aside:true,width:35%:Squaring builds Pythagorean triples
+For whole numbers $a > b > 0$, the parts of $(a + bi)^2$ are the legs of a right triangle with hypotenuse $a^2 + b^2$, since $|z^2| = |z|^2$: hence $3, 4, 5$ and $5, 12, 13$. Every primitive Pythagorean triple arises from such a square.]@
+
+Squaring is the special case $z_1 = z_2$. For $z = a + bi$ the formula gives $z^2 = (a^2 - b^2) + 2abi$: the real part is a difference of two squares, and the imaginary part is twice the product of the two parts. With whole numbers this gives $(2 + i)^2 = 3 + 4i$, $(3 + 2i)^2 = 5 + 12i$ and $(4 + i)^2 = 15 + 8i$, and the [modulus](!/complex-numbers/absolute-value) of each square is the square of the original modulus: $5$, $13$ and $17$.`,
   after: ``,
   link: '',
 },
@@ -1299,7 +1305,14 @@ Taking $z^{-1} = \\bar{z}$ for $z = 2 - i$ gives $2 + i$, but $(2 - i)(2 + i) = 
 
 The inverse exists precisely when $|z|^2 \\neq 0$, which occurs exactly when $z \\neq 0$. Division by zero remains undefined in $\\mathbb{C}$ as in $\\mathbb{R}$ — the number $0$ has no multiplicative inverse.
 
-Geometrically, $z^{-1}$ lies on the same ray from the origin as $\\bar{z}$, but at distance $1/|z|$ rather than $|z|$. Inversion reflects across the real axis and rescales the [modulus](!/complex-numbers/absolute-value) to its reciprocal.`,
+Geometrically, $z^{-1}$ lies on the same ray from the origin as $\\bar{z}$, but at distance $1/|z|$ rather than $|z|$. Inversion reflects across the real axis and rescales the [modulus](!/complex-numbers/absolute-value) to its reciprocal.
+
+@academic[fact,aside:true,width:35%:Reciprocals bend lines into circles
+Inverting every number $1 + ti$ on a vertical line gives points of one circle: $\\frac{1}{1 + ti} - \\frac{1}{2} = \\frac{(1 - ti)^2}{2(1 + t^2)}$ always has modulus $\\frac{1}{2}$. In general, taking reciprocals sends lines and circles to lines and circles.]@
+
+Inversion moves whole sets of points, not only single numbers. Take the vertical line of numbers $1 + ti$, with $t$ running through all real values, and invert each one. The point $1$ stays where it is, $1 + i$ goes to $\\frac{1}{2} - \\frac{1}{2}i$ and $1 - i$ goes to $\\frac{1}{2} + \\frac{1}{2}i$, while points far up or far down the line land ever closer to $0$.
+
+@academic[punchline:Inverting a nonzero complex number is a reflection plus a rescaling: take the conjugate, then divide by $|z|^2$.]@`,
   after: ``,
   link: '',
 },
@@ -1449,7 +1462,7 @@ const faqQuestions = {
   },
   obj2: {
     question: "Why isn't (a + bi)(c + di) just ac + bdi?",
-    answer: "Because multiplication expands over all four pairs, not component by component. Every term multiplies every other, and the product of the two imaginary terms contains i squared, which collapses to −1 and moves into the real part. That extra contribution is exactly what makes complex multiplication a rotation rather than a stretch.",
+    answer: "Because multiplication expands over all four pairs, not component by component. Every term multiplies every other, and the product of the two imaginary terms contains i squared, which collapses to −1 and moves into the real part. That extra contribution is exactly what makes complex multiplication a rotation combined with a stretch, not a stretch alone.",
     sectionId: "3"
   },
   obj3: {

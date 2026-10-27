@@ -388,7 +388,7 @@ By treating [events](!/probability/events) as sets, we gain access to the full p
         between:`However, this intuitive picture presents a fundamental challenge: if we treat each outcome as a geometric point, it has zero area by definition.
         @academic[example:Consider the classical probability formula:
          $P(E) = \\frac{\\text{Number of favorable outcomes for event E}}{\\text{Total number of possible outcomes in the sample space S}}$.
-         If we literally counted individual points (dots), each with zero "probability mass," we'd face the paradox that every single outcome has probability zero, yet their sum must equal one.]@`,
+         It gives each of the $n$ outcomes a mass of $\\frac{1}{n}$. If instead we treated outcomes as geometric points (dots), each with zero "probability mass," we'd face the paradox that every single outcome has probability zero, yet their sum must equal one.]@`,
         after:`To visualize these relationships between events-as-sets, we use [Venn diagrams](!/set-theory/visual-tools/venn-generator)—powerful tools that illustrate unions, intersections, complements, and other set operations that form the algebraic backbone of probability theory.`,
         svg:``
 
@@ -396,7 +396,7 @@ By treating [events](!/probability/events) as sets, we gain access to the full p
       axioms:{
         title:`Basic Axioms of Probability`,
         link:'/probability/axioms',
-        description:`The three Kolmogorov axioms provide a minimal yet complete framework for assigning consistent probabilities to events, laying the groundwork for all of probability theory.  From these principles flow essential rules—such as the addition rule for disjoint events, the definition of conditional probability, and Bayes’ theorem—as well as many useful corollaries that drive rigorous problem‐solving in statistics, science, and engineering.
+        description:`The three Kolmogorov axioms provide a minimal yet complete framework for assigning consistent probabilities to events, laying the groundwork for all of probability theory.  From these principles flow essential rules—such as the addition rule for disjoint events and Bayes’ theorem—as well as many useful corollaries that drive rigorous problem‐solving in statistics, science, and engineering.
 `
 
       },

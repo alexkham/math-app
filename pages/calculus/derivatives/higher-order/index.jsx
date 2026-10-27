@@ -1230,7 +1230,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -1847,7 +1847,10 @@ The second derivative $s''(t)$ is acceleration: the rate of change of velocity. 
 Taking $s''(t) < 0$ to mean slowing down fails for $s(t) = -t^2$: at $t = 1$, $s''(1) = -2$, yet the speed $|s'(t)| = 2t$ grows from $2$ at $t = 1$ to $4$ at $t = 2$. Velocity $-2$ and acceleration $-2$ have the same sign, so the object is speeding up.
 [Read more](!#pitfalls)]@
 
-For the position $s(t) = t^3$ from the first section, the velocity is $3t^2$ and the acceleration is $6t$. At $t = 2$ the velocity is $12$ and the acceleration is $12$, both positive, and the table of values there shows the object covering more ground in each second than in the one before. Speed is the size of the velocity, $|s'(t)|$; it carries no direction, while velocity and acceleration both do.
+@academic[example:Example
+For the position $s(t) = t^3$ from the first section, the velocity is $3t^2$ and the acceleration is $6t$. At $t = 2$ the velocity is $12$ and the acceleration is $12$, both positive, and the table of values there shows the object covering more ground in each second than in the one before.]@
+
+Speed is the size of the velocity, $|s'(t)|$; it carries no direction, while velocity and acceleration both do.
 
 The third derivative $s'''(t)$ is jerk: the rate of change of acceleration. Jerk is felt physically as a sudden push or lurch—smooth motion has low jerk, while abrupt starts and stops produce high jerk. Elevator design, roller coaster engineering, and vehicle ride comfort all involve controlling jerk.
 
@@ -2020,7 +2023,10 @@ The connection between higher-order derivatives and Taylor series gives these de
   obj9: {
     title: `Existence and Smoothness Classes`,
     content: `
-A function may be differentiable once but not twice. The function $f(x) = x|x|$ has $f'(x) = 2|x|$, which is continuous but not differentiable at $x = 0$. So $f$ is in class $C^1$ (continuously differentiable) but not $C^2$.
+A function may be differentiable once but not twice.
+
+@academic[example:Example
+The function $f(x) = x|x|$ has $f'(x) = 2|x|$, which is continuous but not differentiable at $x = 0$. So $f$ is in class $C^1$ (continuously differentiable) but not $C^2$.]@
 
 The smoothness classes organize functions by how many continuous derivatives they possess. A function belongs to $C^n$ if $f, f', f'', \\ldots, f^{(n)}$ all exist and are continuous. Class $C^0$ is simply continuous functions. Class $C^\\infty$ consists of infinitely differentiable functions—called smooth functions—where derivatives of all orders exist and are continuous.
 

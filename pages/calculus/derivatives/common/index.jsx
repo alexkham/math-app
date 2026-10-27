@@ -14,7 +14,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -521,7 +521,7 @@ $$\\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$
 
 For $\\tan x = \\frac{\\sin x}{\\cos x}$, the quotient rule gives $\\frac{\\cos x \\cdot \\cos x - \\sin x \\cdot (-\\sin x)}{\\cos^2 x} = \\frac{\\cos^2 x + \\sin^2 x}{\\cos^2 x} = \\frac{1}{\\cos^2 x} = \\sec^2 x$.
 
-A pattern runs through the six derivatives: the cofunctions—$\\cos$, $\\cot$, $\\csc$—each carry a negative sign in their derivatives, while $\\sin$, $\\tan$, $\\sec$ do not. This sign pattern is worth noting as a memory aid rather than a coincidence.
+A pattern runs through the six derivatives: the cofunctions—$\\cos$, $\\cot$, $\\csc$—each carry a negative sign in their derivatives, while $\\sin$, $\\tan$, $\\sec$ do not. This sign pattern is not a coincidence, and it makes a useful memory aid.
 
 Each derivative is valid on the domain of the original function. The derivatives of $\\tan x$ and $\\sec x$ are undefined at $x = \\pi/2 + k\\pi$ (where $\\cos x = 0$). The derivatives of $\\cot x$ and $\\csc x$ are undefined at $x = k\\pi$ (where $\\sin x = 0$).
 `,

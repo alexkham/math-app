@@ -1451,6 +1451,11 @@ times by the right-hand side. By the [binomial theorem](!/combinatorics/binomial
 $$\\sum_{k=0}^{m} (-1)^k \\binom{m}{k} = 0,$$]@
 
 so $\\binom{m}{0} = 1$ minus the alternating sum from $k=1$ to $m$ gives $1$. Every element in the union is counted exactly once, as required.
+
+@academic[fact,aside:true,width:35%:Every cut-off point is a bound
+Stopping after an odd level always overcounts the union, and stopping after an even level always undercounts it. After level $k$, an element in $m$ sets has been counted $1 + \\binom{m-1}{k}$ times if $k$ is odd and $1 - \\binom{m-1}{k}$ times if $k$ is even.]@
+
+With many sets the full formula is long: ten sets already give $2^{10} - 1 = 1023$ terms. In practice the sum is often cut off after the first few levels, keeping only the singles, or the singles and the pairs, and dropping the rest. For the integers from 1 to 100 and the primes 2, 3 and 5, the singles alone give $50 + 33 + 20 = 103$, the singles and the pairs give $103 - 32 = 71$, and only the full sum gives the true count $74$.
 `,
     before: ``,
     between: ``,
@@ -1545,6 +1550,9 @@ These are the integers from 1 to 100 that share no prime factor with 30.
 ## Surjective Functions
 
 How many functions from a set of size $n$ to a set of size $k$ are surjective (every element of the codomain has at least one preimage)?
+
+@academic[fact,aside:true,width:35%:A sum of powers that equals $k!$
+When $n = k$, a surjection between two sets of the same size is a bijection, so the sum below must equal $k!$: for $k = 3$ it is $27 - 24 + 3 - 0 = 6$. When $n < k$ no surjection exists, and the same alternating sum of powers is exactly $0$.]@
 
 For each element $i$ of the codomain, let $A_i$ be the set of functions that miss $i$ — that is, no element of the domain maps to $i$. A surjective function avoids every $A_i$. The size of any $j$-fold intersection $A_{i_1} \\cap \\cdots \\cap A_{i_j}$ is $(k-j)^n$, since the domain elements may map freely to the remaining $k-j$ codomain elements. The total count of functions is $k^n$. By inclusion–exclusion:
 
@@ -1858,6 +1866,7 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
           sectionsContent.obj1.content,
           <div key={'unit-languages'} dangerouslySetInnerHTML={{ __html: demoUnits.languages }} />,
           `The 4 outside both circles are 30 - 26: the complementary count, taken up again in the complementary form below.`,
+          `@academic[punchline:Adding the sizes counts the overlap twice; subtracting it once leaves every element counted exactly once.]@`,
         ]
     },
     {
@@ -1896,6 +1905,7 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
           sectionsContent.obj5.content,
           <div key={'unit-derangeSets'} dangerouslySetInnerHTML={{ __html: demoUnits.derangeSets }} />,
           `Each k-fold intersection has (3 − k)! permutations, which is why the terms are 3!, 3·2!, 3·1! and 0!.`,
+          `@academic[punchline:When every k-fold intersection has the same size, inclusion–exclusion shrinks to a single sum over k.]@`,
         ]
     },
     {

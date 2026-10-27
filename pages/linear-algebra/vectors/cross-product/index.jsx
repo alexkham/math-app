@@ -1959,11 +1959,12 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/crossProductDiagrams'
 import renderVectorArrowsV5 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v5'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2364,6 +2365,29 @@ export async function getStaticProps(){
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj2 aggregation, obj5 aggregation, obj8 comparison, obj9 summary capstone)
 
 // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "Algebraic Definition") — template B,
+// definition first. Running instance: (1, 2, 3) × (4, 5, 6) = (−3, 6, −3),
+// the pair in the section's pitfall aside. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its two formula boxes with links, the pitfall
+// aside, five passages and the determinant demo frame with its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCompTable = ciTableOpen(['component', 'formula', 'with a = (1, 2, 3), b = (4, 5, 6)', 'value']) +
+  ciRow(['first', 'a₂b₃ − a₃b₂', '2·6 − 3·5', '−3']) +
+  ciRow(['second', 'a₃b₁ − a₁b₃', '3·4 − 1·6', '6'], { shade: true }) +
+  ciRow(['third', 'a₁b₂ − a₂b₁', '1·5 − 2·4', '−3'], { last: true }) +
+  '</tbody></table>'
+const ciCheckTable = ciTableOpen(['dot product with (−3, 6, −3)', 'work', 'result']) +
+  ciRow(['a = (1, 2, 3)', '−3 + 12 − 9', '0']) +
+  ciRow(['b = (4, 5, 6)', '−12 + 30 − 18', '0'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -2844,6 +2868,11 @@ const schemas = {
     caption: 'swap the order and the cross product turns around',
   };
 
+  const conceptIntroFigures = {
+    compTable: ciCompTable,
+    checkTable: ciCheckTable,
+  };
+
   const demoUnits = {
     determinant: demoUnitFrame({
       svg: crossProductDiagrams.determinant,
@@ -2869,6 +2898,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -2897,9 +2927,85 @@ export default function CrossProductPage({
   summaryTable,
   faqQuestions,
   schemas,
-demoUnits}) {
+demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `In three dimensions you often need a direction perpendicular to two given vectors — and nothing so far produces one.`,
+        content: [
+          `Two vectors in space lie in a plane, and many problems need the direction that stands straight out of it, the way a nail stands up from a table top: the normal of a surface, the axis of a turn. The dot product of the two vectors gives a number, not a direction, so a new operation is needed.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [cross product](!/linear-algebra/definitions#cross_product) of two vectors in $\\mathbb{R}^3$, written $\\mathbf{a} \\times \\mathbf{b}$, is the vector whose components are the three mixed differences below.`,
+        formula: [
+          `Given $\\mathbf{a} = (a_1, a_2, a_3)$ and $\\mathbf{b} = (b_1, b_2, b_3)$ in $\\mathbb{R}^3$, their cross product is a new three-component vector built from pairwise differences of mixed products:`,
+          `@academic[formula_callout:Cross Product (Component Form)
+$$\\mathbf{a} \\times \\mathbf{b} = (a_2 b_3 - a_3 b_2,\\ a_3 b_1 - a_1 b_3,\\ a_1 b_2 - a_2 b_1)$$
+/linear-algebra/formulas#cross_product_component_form]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `The result is a vector in $\\mathbb{R}^3$, perpendicular to both $\\mathbf{a}$ and $\\mathbf{b}$, as the check below confirms.`,
+      },
+      {
+        id: 'kind',
+        lead: `The cross product takes two vectors and returns a vector — unlike the dot product, which returns a number.`,
+        content: [
+          `The indices rotate cyclically. To obtain the first component, cover the first entries of both vectors and cross-multiply the remaining pairs: $a_2b_3 - a_3b_2$. For the second component, cover the second entries and cross-multiply with a sign reversal: $a_3b_1 - a_1b_3$. The third component follows the same logic with the third entries hidden: $a_1b_2 - a_2b_1$.`,
+          `A convenient way to package the computation uses a symbolic $3 \\times 3$ [determinant](!/linear-algebra/determinants) whose first row holds the standard basis vectors:`,
+          `@academic[formula_callout:Cross Product (Determinant Form)
+$$\\mathbf{a} \\times \\mathbf{b} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\end{vmatrix}$$
+/linear-algebra/formulas#cross_product_determinant_form]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+          `Placing vectors rather than numbers in the top row makes this a notational device rather than a genuine determinant. Still, applying cofactor expansion along that top row reproduces the component formula term by term. The determinant layout keeps the six constituent products and their signs organized in a form that is easy to remember and hard to scramble.`,
+          <div key={'unit-determinant'} dangerouslySetInnerHTML={{ __html: demoUnits.determinant }} />,
+          `That determinant layout is also the quickest way to see why swapping the two vectors flips the sign of the whole product.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For a = (1, 2, 3) and b = (4, 5, 6), the three components come out −3, 6 and −3.`,
+        content: [
+          ciTable('compTable'),
+          `@academic[pitfall,aside:true,width:35%:Dropping the minus on the middle component
+Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) = (-3, -6, -3)$. The cofactor signs are $+, -, +$, so the $\\mathbf{j}$ term is $-(1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j} = 6\\mathbf{j}$, and the result is $(-3, 6, -3)$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'verify',
+        lead: `The definition promised a perpendicular vector, and it delivers: both dot products are zero.`,
+        content: [
+          `A dot product of $0$ means two vectors meet at a right angle. Dotting $(-3, 6, -3)$ with each of the original vectors gives exactly that.`,
+          ciTable('checkTable'),
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Scope: three dimensions only, and the order matters.`,
+        content: [
+          `The formula needs exactly three components, so there is no cross product of two plane vectors in the same sense. Swapping the factors reverses the result, $\\mathbf{b} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{b})$, and parallel vectors give the zero vector. The sections on the [geometric interpretation](!/linear-algebra/vectors/cross-product#3) and the [properties of the cross product](!/linear-algebra/vectors/cross-product#5) work these out.`,
+          `To compute the cross product of two specific vectors, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the basis-vector products, the geometric meaning of length and direction, the right-hand rule, the properties, parallel vectors and the scalar triple product.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2907,9 +3013,7 @@ demoUnits}) {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-determinant'} dangerouslySetInnerHTML={{ __html: demoUnits.determinant }} />,
-          `That determinant layout is also the quickest way to see why swapping the two vectors flips the sign of the whole product.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

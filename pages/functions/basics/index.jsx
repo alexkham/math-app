@@ -895,7 +895,7 @@ import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationsh
 import renderLineTest from '@/app/utils/illustrations/functions/graphs/lineTest'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 
 
 export async function getStaticProps(){
@@ -1171,6 +1171,9 @@ export async function getStaticProps(){
     title: `What is a Function`,
     content: `A function is a rule that assigns exactly one output to each input. The input is a value chosen from some allowed set, the output is the value the rule produces, and the defining requirement is uniqueness: each input yields one and only one output.
 
+@academic[fact,aside:true,width:35%:Almost no function has a formula
+Formulas are finite strings of symbols, so they can be listed one by one; the functions from $\\mathbb{R}$ to $\\mathbb{R}$ cannot. Nearly every function pairs inputs with outputs in a way no formula can write.]@
+
 This uniqueness is what separates functions from more general relationships. A relationship might associate a single input with multiple outputs — given a person's age, there could be many people with that age. A function cannot do this. Given an input, the output is determined completely. There is no ambiguity, no choice, no list of possibilities.
 
 The notation $f(x) = x^2 + 1$ defines a function. The rule says: take the input $x$, square it, add one. For $x = 3$, the output is $f(3) = 10$. For $x = -2$, the output is $f(-2) = 5$. Each input produces exactly one result.
@@ -1188,6 +1191,9 @@ Multiple inputs can share the same output — both $f(2)$ and $f(-2)$ equal $5$ 
 @academic[rule_corollary_plain:Every function is a relation, but not every relation is a function.]@
 
 The relation $\\{(1, 2), (1, 3), (2, 5)\\}$ is not a function because the input $1$ is paired with two different outputs, $2$ and $3$. There is no single answer to "what output does $1$ produce?" The relation $\\{(1, 2), (2, 3), (3, 5)\\}$ is a function because each input appears exactly once.
+
+@academic[fact,aside:true,width:35%:Only 27 of 512 relations are functions
+On the set $\\{1, 2, 3\\}$ a relation may include any of the $9$ possible pairs, so there are $2^9 = 512$ relations. A function picks exactly one output for each of the $3$ inputs, which leaves $3^3 = 27$, about one in nineteen.]@
 
 The equation $x^2 + y^2 = 1$ defines a relation: the set of all points on the unit circle. But it is not a function of $x$, because most $x$-values correspond to two $y$-values. At $x = 0$, both $y = 1$ and $y = -1$ satisfy the equation. A function would have to choose one or the other.
 
@@ -1767,6 +1773,7 @@ export default function FunctionsBasicsPage({functionTopicsOutline, representati
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+          `@academic[punchline:A function is a relation that keeps one promise: every input gets exactly one output.]@`,
         ]
     },
     {
@@ -1846,6 +1853,7 @@ export default function FunctionsBasicsPage({functionTopicsOutline, representati
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+          `@academic[punchline:Every test, in every representation, asks the same question: does some input have more than one output?]@`,
         ]
     },
     {

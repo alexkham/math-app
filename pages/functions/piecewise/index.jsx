@@ -983,6 +983,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1188,6 +1191,25 @@ export async function getStaticProps(){
 `
 
 
+  // Concept introduction (section 1, "What is a Piecewise Function") —
+  // template C, failure first. Running instance: the section's own rule, x + 1
+  // for x < 0 and x² for x ≥ 0. Old obj1 text is kept in sectionsContent.obj1,
+  // unused; its formula box, five passages and the twoRules demo frame with
+  // its line are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciTryTable = ciTableOpen(['x', 'the rule gives', 'try x + 1', 'try x²']) +
+    ciRow(['−3', '−2', '−2 ✓', '9 ✗']) +
+    ciRow(['−1', '0', '0 ✓', '1 ✗'], { shade: true }) +
+    ciRow(['0', '0', '1 ✗', '0 ✓']) +
+    ciRow(['2', '4', '3 ✗', '4 ✓'], { shade: true, last: true }) +
+    '</tbody></table>'
+
   const sectionsContent = {
 
     obj0 : {
@@ -1276,17 +1298,20 @@ Step 2: Use the corresponding formula to compute the output.
 
 Only one piece applies to each input. The other formulas are irrelevant for that evaluation.
 
+@academic[example:Example
 Let $f(x) = \\begin{cases} 3x + 2 & \\text{if } x < 1 \\\\ x^2 - 1 & \\text{if } x \\geq 1 \\end{cases}$
 
 Find $f(-2)$: Since $-2 < 1$, use $3x + 2$. $f(-2) = 3(-2) + 2 = -4$.
 
 Find $f(1)$: Since $1 \\geq 1$, use $x^2 - 1$. $f(1) = 1 - 1 = 0$.
 
-Find $f(4)$: Since $4 \\geq 1$, use $x^2 - 1$. $f(4) = 16 - 1 = 15$.
+Find $f(4)$: Since $4 \\geq 1$, use $x^2 - 1$. $f(4) = 16 - 1 = 15$.]@
 
 Boundary points require attention. The condition that includes the boundary (with $\\leq$ or $\\geq$) determines which formula to use. At $x = 1$ above, the condition $x \\geq 1$ applies, not $x < 1$.
 
-Errors often occur at boundaries when the wrong piece is selected. Always check the inequality symbols carefully.`,
+Errors often occur at boundaries when the wrong piece is selected. Always check the inequality symbols carefully.
+
+@academic[punchline:Evaluating a piecewise function is a lookup first and a calculation second: the input picks the formula.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -1328,11 +1353,12 @@ If the pieces cover all real numbers without gaps, the domain is $(-\\infty, \\i
 
 If the pieces leave gaps, the domain excludes those intervals.
 
+@academic[example:Example
 For $f(x) = \\begin{cases} x^2 & \\text{if } x \\leq -1 \\\\ \\sqrt{x} & \\text{if } x \\geq 0 \\end{cases}$:
 
 The first piece covers $(-\\infty, -1]$. The second covers $[0, \\infty)$. The interval $(-1, 0)$ is not covered by either piece.
 
-Domain: $(-\\infty, -1] \\cup [0, \\infty)$.
+Domain: $(-\\infty, -1] \\cup [0, \\infty)$.]@
 
 Additionally, each piece must be valid on its interval. A piece involving $\\sqrt{x - 3}$ on $[0, 5]$ would require $x \\geq 3$ for the formula to work, potentially reducing the effective domain of that piece to $[3, 5]$.
 
@@ -1348,13 +1374,14 @@ The domain is determined by both the stated conditions and the natural restricti
 
 Each piece contributes outputs from its portion of the domain. The combined range collects all these outputs.
 
+@academic[example:Example
 For $f(x) = \\begin{cases} 2 & \\text{if } x < 0 \\\\ x + 1 & \\text{if } x \\geq 0 \\end{cases}$:
 
 The first piece is constant at $2$ for all $x < 0$. It contributes $\\{2\\}$ to the range.
 
 The second piece is linear starting at $x = 0$. At $x = 0$, output is $1$. As $x \\to \\infty$, output $\\to \\infty$. This piece contributes $[1, \\infty)$ to the range.
 
-Combined range: $\\{2\\} \\cup [1, \\infty) = [1, \\infty)$ (since $2$ is already in $[1, \\infty)$).
+Combined range: $\\{2\\} \\cup [1, \\infty) = [1, \\infty)$ (since $2$ is already in $[1, \\infty)$).]@
 
 @academic[pitfall,aside:true,width:35%:Taking the range of the whole formula
 Taking all outputs of $x + 1$ gives the second piece, and the whole function, the range $(-\\infty, \\infty)$. On its interval $x \\geq 0$ the piece only reaches $[1, \\infty)$, so the range is $[1, \\infty)$.
@@ -1379,17 +1406,19 @@ $$\\lim_{x \\to c^-} f(x) = \\lim_{x \\to c^+} f(x) = f(c)$$]@
 
 The left piece's limit, the right piece's limit, and the actual value at $c$ must all agree.
 
+@academic[example:Example
 For $f(x) = \\begin{cases} x^2 & \\text{if } x \\leq 2 \\\\ 4x - 4 & \\text{if } x > 2 \\end{cases}$:
 
 At $x = 2$: Left piece gives $2^2 = 4$. Right piece as $x \\to 2^+$ gives $4(2) - 4 = 4$. Both equal $4$.
 
-The function is continuous at $x = 2$. The pieces connect.
+The function is continuous at $x = 2$. The pieces connect.]@
 
+@academic[example:Example
 For $g(x) = \\begin{cases} x + 1 & \\text{if } x < 3 \\\\ 2x - 3 & \\text{if } x \\geq 3 \\end{cases}$:
 
 At $x = 3$: Left piece as $x \\to 3^-$ gives $3 + 1 = 4$. Right piece gives $2(3) - 3 = 3$.
 
-The limits differ ($4 \\neq 3$), so the function is discontinuous at $x = 3$. There is a jump.
+The limits differ ($4 \\neq 3$), so the function is discontinuous at $x = 3$. There is a jump.]@
 
 The table below collects both cases — the continuous example and the discontinuous example — with the three values that must agree for continuity and the verdict at each boundary.`,
     before: ``,
@@ -1404,9 +1433,14 @@ The table below collects both cases — the continuous example and the discontin
 @academic[formula_callout:Absolute Value as Piecewise
 $$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$$]@
 
+@academic[fact,aside:true,width:35%:One formula for any broken line
+A continuous graph made of finitely many straight pieces needs no cases: it equals $a + bx$ plus one term $c\\,|x - k|$ for each corner $k$, with $c$ half the change of slope there. For example, $\\frac{x + |x|}{2}$ is $0$ for $x < 0$ and $x$ for $x \\geq 0$.]@
+
 For non-negative inputs, the output equals the input. For negative inputs, the output equals the negation of the input (making it positive).
 
 The [graph](!/functions/graphs) is V-shaped with vertex at the origin. The right arm has slope $1$; the left arm has slope $-1$. The pieces meet at $(0, 0)$ and connect continuously — both pieces give $0$ at $x = 0$.
+
+The corner at the origin is the only place where the slope changes, from $-1$ on the left to $1$ on the right, a change of $2$. Moving the corner to $x = k$ gives $|x - k|$, and a constant factor $c$ in front of it makes the change of slope $2c$ instead.
 
 Transformed absolute value functions shift the V:
 
@@ -1451,7 +1485,12 @@ $$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -1.3 \\rceil = -1, \\quad \\lceil 5 \\
 
 The segments cover $(n-1, n]$ — open on the left, closed on the right.
 
+@academic[fact,aside:true,width:35%:Halves round to the even neighbour
+Python's round function and the default rounding of the IEEE 754 floating-point standard send $2.5$ to $2$ and $3.5$ to $4$: each half goes to the even integer. Always rounding halves up would push long sums upward; this way about half of them go down.]@
+
 Both functions have jump discontinuities at every integer. The [domain](!/functions/domain) is all real numbers; the [range](!/functions/range) is all integers $\\mathbb{Z}$.
+
+Rounding to the nearest integer is a step function as well. Its jumps sit halfway between integers, at $0.5, 1.5, 2.5, \\ldots$, and at each jump a rule has to decide which neighbour the half itself goes to. The rule taught in school sends every half up, so $2.5$ becomes $3$.
 
 Step functions model situations with discrete jumps: postage rates by weight, tax brackets, rounding rules. The table below pairs the floor and ceiling functions side by side to highlight the small but important differences between them.`,
     before: ``,
@@ -1779,6 +1818,10 @@ const faqQuestions = {
     caption: 'The rule changes at t = 1 hour; the cost C does not jump',
   };
 
+  const conceptIntroFigures = {
+    tryTable: ciTryTable,
+  };
+
   const demoUnits = {
     jump: demoUnitFrame({
       svg: functionPiecewiseDiagrams.jump,
@@ -1828,9 +1871,32 @@ const faqQuestions = {
     }),
   };
 
+  // BeforeAfter (obj8): the section's |x − 3| + 2 rewritten as two linear pieces
+  const absPiecewiseSteps = {
+    header: {
+      kicker: 'Absolute value as piecewise',
+      title: 'Removing the bars',
+      lede: 'A transformed absolute value is two linear formulas, one on each side of the vertex.',
+    },
+    steps: [
+      { id: 'abs', label: 'Absolute value form', stamp: 'Before', expr: '$f(x) = |x - 3| + 2$',
+        move: { label: 'Split at the vertex', note: '|x − 3| is x − 3 for x ≥ 3 and −(x − 3) for x < 3' } },
+      { id: 'split', label: 'Two pieces, unsimplified',
+        expr: '$\\begin{cases} (x - 3) + 2 & \\text{if } x \\geq 3 \\\\ -(x - 3) + 2 & \\text{if } x < 3 \\end{cases}$',
+        move: { label: 'Simplify each piece', note: 'each one is an ordinary linear formula' } },
+      { id: 'pieces', label: 'Piecewise form', stamp: 'After',
+        expr: '$\\begin{cases} x - 1 & \\text{if } x \\geq 3 \\\\ -x + 5 & \\text{if } x < 3 \\end{cases}$',
+        detailsLabel: 'Where they meet',
+        detailsTitle: '',
+        details: 'Both pieces give $2$ at $x = 3$, so the graph has no jump: the vertex moves to $(3, 2)$.' },
+    ],
+  };
+
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
+    absPiecewiseSteps,
          sectionsContent,
          introContent,
          obj7Table,
@@ -1861,10 +1927,74 @@ export default function PiecewisePage({
   obj12Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures, absPiecewiseSteps
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Most functions met so far come as one formula: f(x) = 2x + 5, g(x) = x², and so on.`,
+        content: [
+          `So it is natural to expect that any rule turning inputs into outputs can be written as a single formula in $x$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Take the rule "add 1 to a negative number, square any other": no single formula from the rule matches it.`,
+        content: [
+          `Try each of the two formulas the rule mentions across all inputs. Each one is right on some inputs and wrong on others.`,
+          ciTable('tryTable'),
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The failure was visible in the wording: the rule says "if".`,
+        content: [
+          `The rule changes at $0$: one formula is in charge to the left, another from $0$ on. A single formula has to fit every input at once, so it cannot switch partway. Postage and tax brackets work the same way — the charge is worked out one way up to a limit and another way beyond it.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [piecewise function](!/functions/definitions#piecewise_function) is one whose rule is given by different formulas on different parts of its domain; which formula to use depends on where the input lies.`,
+        formula: [
+          `A simple example:`,
+          `@academic[formula_callout:What is a Piecewise Function
+$$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq 0 \\end{cases}$$]@`,
+        ],
+        footer: `So the rule above is a piecewise function with two pieces, split at $x = 0$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is still a single function: one input, one output.`,
+        content: [
+          `A piecewise function is defined by multiple formulas, each applying to a different part of the [domain](!/functions/domain). Rather than one rule governing all inputs, separate rules govern separate intervals.`,
+          `The function remains a function — each input still produces exactly one output. But which formula produces that output depends on where the input falls.`,
+          `For negative inputs, use $x + 1$. For non-negative inputs, use $x^2$. At $x = -3$, the output is $-3 + 1 = -2$. At $x = 2$, the output is $2^2 = 4$. At $x = 0$, the boundary, the condition $x \\geq 0$ applies, giving $0^2 = 0$.`,
+          <div key={'unit-twoRules'} dangerouslySetInnerHTML={{ __html: demoUnits.twoRules }} />,
+          `Which formula applies is decided by the input, never by choice.`,
+          `Each piece can be any type of function — linear, quadratic, constant, radical, or otherwise. The pieces join together at boundary points, sometimes connecting smoothly, sometimes jumping abruptly.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the definition gives a test: every input must fall under exactly one condition.`,
+        content: `If two conditions both claim an input, or none does, the rule is not a function at all — which is why $x < 0$ and $x \\geq 0$ hand the boundary $0$ to exactly one piece. And a single symbol can still hide pieces: $|x|$ is $-x$ for negative $x$ and $x$ otherwise. The section on [evaluating piecewise functions](!/functions/piecewise#3) puts the test to work.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, evaluating and graphing piecewise functions, their domain, range and continuity, absolute value and step functions, real-world uses, and writing piecewise functions.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1880,9 +2010,7 @@ export default function PiecewisePage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-twoRules'} dangerouslySetInnerHTML={{ __html: demoUnits.twoRules }} />,
-          `Which formula applies is decided by the input, never by choice.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1965,6 +2093,20 @@ export default function PiecewisePage({
           sectionsContent.obj8.content,
                   <div key={'unit-abs'} dangerouslySetInnerHTML={{ __html: demoUnits.abs }} />,
           `Most functions with a corner are piecewise in this same quiet way.`,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="abs-piecewise-steps"
+            title="Writing |x − 3| + 2 piecewise"
+            source="/functions/piecewise"
+            before={"The section's transformed V, from bars to pieces, one move at a time."}
+            after={"Each piece is valid only on its own side of $x = 3$. The same split is what solves equations such as $|x - 2| = 5$: one linear equation per piece."}
+          >
+            <BeforeAfter
+              data={absPiecewiseSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1993,6 +2135,7 @@ export default function PiecewisePage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+          `@academic[punchline:Wherever a charge or a rate changes at a threshold, a piecewise function describes it exactly.]@`,
         ]
     },
     {

@@ -11,6 +11,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
+import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -181,6 +183,29 @@ Unlike ordinary propositions that may be true or false depending on circumstance
 This page explores contradictions in detail, examining their properties, relationship to [tautologies](!/logic/propositional-logic/semantics/tautology), and applications in logical reasoning and formal proofs.`
   }
 
+  // Concept introduction ("Definition" section) — template B, definition
+  // first. Running instance: P ∧ ¬P, then (P ∨ Q) ∧ ¬P ∧ ¬Q. Old definition
+  // text is kept in contradictionContent.definition, unused; its paragraphs,
+  // example box, pitfall aside and the nonContradiction demo frame with its
+  // line are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciOneTable = ciTableOpen(['P', '¬P', 'P ∧ ¬P']) +
+    ciRow(['T', 'F', 'F'], { color: '#a4243b', cols: [2] }) +
+    ciRow(['F', 'T', 'F'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+    '</tbody></table>'
+  const ciTwoTable = ciTableOpen(['P', 'Q', 'P ∨ Q', '¬P ∧ ¬Q', '(P ∨ Q) ∧ ¬P ∧ ¬Q']) +
+    ciRow(['T', 'T', 'T', 'F', 'F'], { color: '#a4243b', cols: [4] }) +
+    ciRow(['T', 'F', 'T', 'F', 'F'], { shade: true, color: '#a4243b', cols: [4] }) +
+    ciRow(['F', 'T', 'T', 'F', 'F'], { color: '#a4243b', cols: [4] }) +
+    ciRow(['F', 'F', 'F', 'T', 'F'], { shade: true, last: true, color: '#a4243b', cols: [4] }) +
+    '</tbody></table>'
+
   const contradictionContent={
       
     definition:{
@@ -276,6 +301,8 @@ In each of these formulas the negation sign stands in front of a parenthesis, so
           Visit corresponding page to learn more about [propositional logic laws](!/logic/propositional-logic/laws).
           
           Use this tool to evaluate [truth tables](!/logic/truth-tables).
+
+@academic[punchline:Negate any law of logic and the result is a formula that no assignment can make true.]@
           `
 
     },
@@ -283,6 +310,8 @@ In each of these formulas the negation sign stands in front of a parenthesis, so
       title:'Contradictions that are not laws',
       description: `While some contradictions are negations of fundamental logical laws, not all **contradictions** represent the negation of logical laws. A law in logic is a fundamental principle that defines how logical operations behave, often used in formal proofs and reasoning systems.
           
+@academic[fact,aside:true,width:35%:Twenty-four entries, one formula
+$P \\land \\neg P$ and $Q \\land \\neg Q$ share no letter, yet they are equivalent: in all four rows of $(P, Q)$ both columns read F. Up to equivalence, all 24 entries of the table below are one and the same formula, $\\bot$.]@
       However, some **contradictions** are simply well-formed logical statements that always evaluate to false without being the direct negation of a fundamental principle.
       
       These non-law contradictions may still be useful in proofs, particularly in proof by contradiction methods (reductio ad absurdum), but they do not represent the negation of core logical rules like De Morgan's Laws or the Law of Excluded Middle. Instead, they are often the result of specific logical constructions or transformations that yield contradictory results.
@@ -293,7 +322,9 @@ In each of these formulas the negation sign stands in front of a parenthesis, so
     },
     contradiction_vs_tautology:{
       title:'Contradiction vs Tautology',
-      description: `In propositional logic, tautologies and contradictions represent opposite ends of logical certainty. 
+      description: `@academic[fact,aside:true,width:35%:From a contradiction, anything follows
+$(P \\land \\neg P) \\to Q$ is a tautology whatever $Q$ says, even "the moon is made of cheese": its left side is never true, so no row can make the implication false. This is the principle of explosion, ex falso quodlibet.]@
+In propositional logic, tautologies and contradictions represent opposite ends of logical certainty. 
       While [tautology](!/logic/propositional-logic/semantics/tautology) is a logical formula that always evaluates to true, no matter what truth values are assigned to its variables, a contradiction, in contrast, is always false regardless of its variables' values.
       These concepts are perfect mirrors of each other - applying negation to a [tautology](!/logic/propositional-logic/semantics/tautology) produces a contradiction, and negating a contradiction creates a [tautology](!/logic/propositional-logic/semantics/tautology). 
       This relationship is not just a curiosity but forms the foundation of logical reasoning. Tautologies tell us what must be true in all possible worlds, while contradictions show us what cannot be true under any circumstances. Together, they establish the boundaries of logical possibility and impossibility, providing the framework for all logical deduction in propositional logic.`,
@@ -425,6 +456,11 @@ const faqQuestions = {
   }
 }
 
+  const conceptIntroFigures = {
+    oneTable: ciOneTable,
+    twoTable: ciTwoTable,
+  };
+
   const demoUnits = {
     nonContradiction: demoUnitFrame({
       svg: vennTruthTableDiagrams['contradiction'],
@@ -439,6 +475,7 @@ const faqQuestions = {
     props:{
 
       demoUnits,
+      conceptIntroFigures,
       contradictions,
       introContent,
       contradictionContent,
@@ -456,7 +493,7 @@ const faqQuestions = {
   }
 }
 
-export default function ContradictionPage({demoUnits, 
+export default function ContradictionPage({demoUnits, conceptIntroFigures,
   seoData,
   contradictions,
   introContent,
@@ -469,14 +506,79 @@ export default function ContradictionPage({demoUnits,
 
  
 
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // "Definition" section concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Some statements cannot be true, however the world turns out.`,
+        content: [
+          `"The light is on and the light is not on" needs no checking: whatever the light is doing, the sentence fails. It is like a contract whose second clause cancels the first — it defeats itself, and no facts can rescue it. Logic needs a name for formulas of this kind.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [contradiction](!/logic/definitions#contradiction) is a formula that is false under every assignment of truth values to its variables.`,
+        formula: [
+          `@academic[example:Example
+
+\t\t\t\t\t$P∧¬P$
+
+(The [law](!/logic/propositional-logic/laws) of non-contradiction: "P and not P" is always false.)]@`,
+        ],
+        footer: `So $P \\land \\neg P$ is a contradiction: it is false whether $P$ is true or false.`,
+      },
+      {
+        id: 'kind',
+        lead: `Being a contradiction is a property of a formula's shape, not of its content.`,
+        content: [
+          `A **contradiction** is a proposition that is always false, regardless of the truth values of its components. In [propositional logic](!/logic/propositional-logic), a contradiction is a formula that evaluates to false under all possible truth assignments.`,
+          <div key={'unit-nonContradiction'} dangerouslySetInnerHTML={{ __html: demoUnits.nonContradiction }} />,
+          `Its negation, ¬(P ∧ ¬P), shades everything: the negation of a contradiction is a tautology.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Truth tables show it row by row: P ∧ ¬P in two rows, a longer formula in four.`,
+        content: [
+          `To decide whether a formula is a contradiction, build its full truth table: a formula with $n$ variables has $2^n$ rows, one for each assignment of truth values. The verdict is read from the column under the main connective. $P \\land \\neg P$ has a single variable and two rows, and its column reads F, F.`,
+          ciTable('oneTable'),
+          `With two variables there are four rows to check. In $(P \\lor Q) \\land \\neg P \\land \\neg Q$, the first part needs at least one of $P$, $Q$ true and the second needs both false, so every row fails.`,
+          ciTable('twoTable'),
+        ],
+      },
+      {
+        id: 'verify',
+        lead: `The definition promised false in every row — so one false row proves nothing.`,
+        content: [
+          `Both tables kept the promise: the last column is F all the way down. A formula that is F in some rows and T in others is not a contradiction, however many F's it shows.`,
+          `@academic[pitfall,aside:true,width:35%:Judging from a single row
+Calling $P \\land Q$ a contradiction because it is F at $P = T$, $Q = F$ ignores the row $P = T$, $Q = T$, where it is T. A contradiction is F in every row; $P \\land Q$ is a contingency.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Scope: contradictions are one of three kinds of formula, and most formulas are none of the extremes.`,
+        content: `A formula is a tautology (T in every row), a contradiction (F in every row) or a contingency (some of each). Negation swaps the first two, turning any contradiction into a [tautology](!/logic/propositional-logic/semantics/tautology) and back. Some contradictions are negated laws of logic and some are not, as the section on [contradictions that are not laws](!/logic/propositional-logic/semantics/contradiction#other_contradictions) shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, contradictions as negated laws, other contradictions, and how contradictions mirror tautologies.`,
+      },
+    ],
+  }
+
     const contradictionSections=[
             {
             id:'definition',
             title: contradictionContent.definition.title,
             content:[
-              contradictionContent.definition.description,
-              <div key={'unit-nonContradiction'} dangerouslySetInnerHTML={{ __html: demoUnits.nonContradiction }} />,
-              `Its negation, ¬(P ∧ ¬P), shades everything: the negation of a contradiction is a tautology.`,
+              <ConceptIntro key={'definition-intro'} data={conceptIntro} />,
             ]
           },
           {

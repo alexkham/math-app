@@ -13,6 +13,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
 export async function getStaticProps(){
@@ -391,14 +392,19 @@ $$a^x = a^y \\implies x = y \\qquad (a > 0,\\; a \\neq 1)$$]@
 
 This works because [exponential functions](!/algebra/powers/exponential-functions) with base $a > 0$, $a \\neq 1$ are one-to-one — different exponents always produce different outputs.
 
-For $2^x = 8$, recognize that $8 = 2^3$. The equation becomes $2^x = 2^3$, so $x = 3$.
+@academic[example:Example
+For $2^x = 8$, recognize that $8 = 2^3$. The equation becomes $2^x = 2^3$, so $x = 3$.]@
 
 @academic[fact,aside:true,width:35%:$3^x + 4^x = 5^x$ has one solution
 It holds at $x = 2$, the $3$-$4$-$5$ right triangle, and nowhere else. Dividing by $5^x$ gives $\\left(\\frac{3}{5}\\right)^x + \\left(\\frac{4}{5}\\right)^x = 1$, and a sum of two falling powers meets each level only once.]@
 
-The method extends to cases where the connection between bases is less obvious. The equation $4^x = 8$ involves different bases, but both are [powers of 2](!/algebra/powers/natural-exponents): $4 = 2^2$ and $8 = 2^3$. Rewriting gives $(2^2)^x = 2^3$, which by the [power of a power rule](!/algebra/powers/exponent-rules/) becomes $2^{2x} = 2^3$. Matching exponents: $2x = 3$, so $x = \\frac{3}{2}$.
+The method extends to cases where the connection between bases is less obvious.
 
-The equation $9^{x+1} = 27$ works the same way. Both bases are powers of $3$: $9 = 3^2$ and $27 = 3^3$. Rewriting: $(3^2)^{x+1} = 3^3$, giving $3^{2(x+1)} = 3^3$. So $2(x+1) = 3$, and $x = \\frac{1}{2}$.
+@academic[example:Example
+The equation $4^x = 8$ involves different bases, but both are [powers of 2](!/algebra/powers/natural-exponents): $4 = 2^2$ and $8 = 2^3$. Rewriting gives $(2^2)^x = 2^3$, which by the [power of a power rule](!/algebra/powers/exponent-rules/) becomes $2^{2x} = 2^3$. Matching exponents: $2x = 3$, so $x = \\frac{3}{2}$.]@
+
+@academic[example:Example
+The equation $9^{x+1} = 27$ works the same way. Both bases are powers of $3$: $9 = 3^2$ and $27 = 3^3$. Rewriting: $(3^2)^{x+1} = 3^3$, giving $3^{2(x+1)} = 3^3$. So $2(x+1) = 3$, and $x = \\frac{1}{2}$.]@
 
 @academic[pitfall,aside:true,width:35%:Matching exponents of different bases
 Writing $4^x = 8$ as $4^x = 2^3$ and setting $x = 3$ compares exponents of two different bases, and $4^3 = 64$, not $8$. With one base, $2^{2x} = 2^3$, so $x = \\frac{3}{2}$.
@@ -414,11 +420,13 @@ The key skill is recognizing when two numbers share a common base. Familiarity w
     title: `Method: Using Exponent Laws`,
     content: `Some exponential equations require algebraic manipulation before the bases can be matched. The [laws of exponents](!/algebra/powers/exponent-rules/) provide the tools for restructuring these expressions.
 
+@academic[example:Example
 Consider $2^{x+1} + 2^x = 12$. The term $2^{x+1}$ can be rewritten using the [product rule](!/algebra/powers/exponent-rules/): $2^{x+1} = 2^x \\cdot 2^1 = 2 \\cdot 2^x$. The equation becomes $2 \\cdot 2^x + 2^x = 12$.
 
-Now $2^x$ is a common factor: $2^x(2 + 1) = 12$, which simplifies to $3 \\cdot 2^x = 12$, so $2^x = 4 = 2^2$, giving $x = 2$.
+Now $2^x$ is a common factor: $2^x(2 + 1) = 12$, which simplifies to $3 \\cdot 2^x = 12$, so $2^x = 4 = 2^2$, giving $x = 2$.]@
 
-Consider $3^{x+2} - 3^x = 72$. Rewrite $3^{x+2} = 3^x \\cdot 3^2 = 9 \\cdot 3^x$. The equation becomes $9 \\cdot 3^x - 3^x = 72$, then $3^x(9 - 1) = 72$, so $8 \\cdot 3^x = 72$ and $3^x = 9 = 3^2$. Thus $x = 2$.
+@academic[example:Example
+Consider $3^{x+2} - 3^x = 72$. Rewrite $3^{x+2} = 3^x \\cdot 3^2 = 9 \\cdot 3^x$. The equation becomes $9 \\cdot 3^x - 3^x = 72$, then $3^x(9 - 1) = 72$, so $8 \\cdot 3^x = 72$ and $3^x = 9 = 3^2$. Thus $x = 2$.]@
 
 @academic[pitfall,aside:true,width:35%:Adding exponents across a sum
 Combining $2^{x+1} + 2^x = 12$ into $2^{2x+1} = 12$ gives $x \\approx 1.29$, and then $2^{x+1} + 2^x \\approx 7.35$, not $12$. Factoring instead gives $3 \\cdot 2^x = 12$, so $x = 2$.
@@ -436,11 +444,14 @@ The general strategy is to express every exponential term as a product involving
 
 The core identity is $\\log(a^x) = x \\cdot \\log(a)$. Taking the **logarithm** of both sides brings the exponent down from its position as a [power](!/algebra/powers) to the position of a multiplier, where it can be isolated algebraically.
 
-For $2^x = 5$, no integer or simple [rational power](!/algebra/powers/rational-exponents) of $2$ equals $5$. Take the **logarithm** of both sides: $x \\cdot \\log(2) = \\log(5)$. Divide: $x = \\frac{\\log(5)}{\\log(2)} \\approx 2.322$.
+@academic[example:Example
+For $2^x = 5$, no integer or simple [rational power](!/algebra/powers/rational-exponents) of $2$ equals $5$. Take the **logarithm** of both sides: $x \\cdot \\log(2) = \\log(5)$. Divide: $x = \\frac{\\log(5)}{\\log(2)} \\approx 2.322$.]@
 
-For $3^{x+1} = 7$, take **logarithms**: $(x+1) \\cdot \\log(3) = \\log(7)$. Then $x + 1 = \\frac{\\log(7)}{\\log(3)}$ and $x = \\frac{\\log(7)}{\\log(3)} - 1 \\approx 0.771$.
+@academic[example:Example
+For $3^{x+1} = 7$, take **logarithms**: $(x+1) \\cdot \\log(3) = \\log(7)$. Then $x + 1 = \\frac{\\log(7)}{\\log(3)}$ and $x = \\frac{\\log(7)}{\\log(3)} - 1 \\approx 0.771$.]@
 
-For $2^x = 3^{x-1}$, both sides are exponential with different bases. Take **logarithms**: $x \\cdot \\log(2) = (x - 1) \\cdot \\log(3)$. Distribute: $x \\cdot \\log(2) = x \\cdot \\log(3) - \\log(3)$. Collect $x$: $x(\\log(2) - \\log(3)) = -\\log(3)$. Solve: $x = \\frac{\\log(3)}{\\log(3) - \\log(2)} \\approx 2.710$.
+@academic[example:Example
+For $2^x = 3^{x-1}$, both sides are exponential with different bases. Take **logarithms**: $x \\cdot \\log(2) = (x - 1) \\cdot \\log(3)$. Distribute: $x \\cdot \\log(2) = x \\cdot \\log(3) - \\log(3)$. Collect $x$: $x(\\log(2) - \\log(3)) = -\\log(3)$. Solve: $x = \\frac{\\log(3)}{\\log(3) - \\log(2)} \\approx 2.710$.]@
 
 @academic[pitfall,aside:true,width:35%:Turning a quotient of logs into one log
 Rewriting $x = \\frac{\\log(5)}{\\log(2)}$ as $\\log\\left(\\frac{5}{2}\\right)$ gives, in base $10$, $x \\approx 0.398$, and $2^{0.398} \\approx 1.32$, not $5$. The quotient stays a quotient: $x \\approx 2.322$.
@@ -469,7 +480,10 @@ Substituting back: $2^x = 1$ gives $x = 0$ (since [any positive base raised to z
 
 The substitution works whenever the equation involves two exponential terms where one exponent is double the other — $a^{2x}$ and $a^x$, or $a^{4x}$ and $a^{2x}$. The doubled exponent creates a perfect square under substitution, converting the exponential equation into a polynomial one.
 
-More complex examples follow the same pattern. The equation $9^x + 2 \\cdot 3^x - 15 = 0$ becomes $t^2 + 2t - 15 = 0$ with $t = 3^x$, factoring as $(t + 5)(t - 3) = 0$. Since $3^x > 0$ for all real $x$ (the [exponential function](!/algebra/powers/exponential-functions) is always positive), the solution $t = -5$ is rejected, leaving $3^x = 3$ and $x = 1$.`,
+More complex examples follow the same pattern.
+
+@academic[example:Example
+The equation $9^x + 2 \\cdot 3^x - 15 = 0$ becomes $t^2 + 2t - 15 = 0$ with $t = 3^x$, factoring as $(t + 5)(t - 3) = 0$. Since $3^x > 0$ for all real $x$ (the [exponential function](!/algebra/powers/exponential-functions) is always positive), the solution $t = -5$ is rejected, leaving $3^x = 3$ and $x = 1$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -484,9 +498,11 @@ The equation $x^{2/3} = 4$ asks: what value of $x$, when raised to the power $\\
 @academic[formula_callout:Equations with Rational and Negative Exponents
 $$x = \\pm 4^{3/2} = \\pm(\\sqrt{4})^3 = \\pm 8$$]@
 
-The equation $x^{-2} = 9$ translates to $\\frac{1}{x^2} = 9$ using the [negative exponent definition](!/algebra/powers/negative-exponents), so $x^2 = \\frac{1}{9}$, giving $x = \\pm\\frac{1}{3}$.
+@academic[example:Example
+The equation $x^{-2} = 9$ translates to $\\frac{1}{x^2} = 9$ using the [negative exponent definition](!/algebra/powers/negative-exponents), so $x^2 = \\frac{1}{9}$, giving $x = \\pm\\frac{1}{3}$.]@
 
-The equation $x^{3/4} = 27$ is solved by raising both sides to the power $\\frac{4}{3}$: $x = 27^{4/3} = (\\sqrt[3]{27})^4 = 3^4 = 81$.
+@academic[example:Example
+The equation $x^{3/4} = 27$ is solved by raising both sides to the power $\\frac{4}{3}$: $x = 27^{4/3} = (\\sqrt[3]{27})^4 = 3^4 = 81$.]@
 
 @academic[pitfall,aside:true,width:35%:Losing the negative root
 Raising $x^{-2} = 9$ to the power $-\\frac{1}{2}$ gives only $x = 9^{-1/2} = \\frac{1}{3}$. But $\\left(-\\frac{1}{3}\\right)^{-2} = 9$ as well, so $x = \\pm\\frac{1}{3}$.
@@ -745,9 +761,46 @@ const schemas = {
     ],
   };
 
+  // BeforeAfter (obj3): the section's third priority, rewriting both sides over a common base
+  const commonBaseBeforeAfter = {
+    header: {
+      kicker: 'Exponential equations',
+      title: 'Rewriting over a common base',
+      lede: 'The equation looks like it has different bases, but both are powers of $2$.',
+    },
+    before: {
+      form: 'Different bases',
+      expr: '$8^x = 4^{x+3}$',
+      meta: 'The exponents cannot be compared yet',
+    },
+    after: {
+      form: 'Common base',
+      expr: '$2^{3x} = 2^{2(x+3)}$',
+      meta: 'Ready for base matching',
+    },
+    operation: {
+      name: 'Rewrite the bases',
+      desc: '$8 = 2^3$ and $4 = 2^2$, then the power of a power rule',
+      detailsLabel: 'Bases to spot',
+      detailsTitle: 'Powers worth recognizing',
+      details: [
+        '$2, 4, 8, 16, 32, 64$ are all powers of $2$.',
+        '$3, 9, 27, 81$ are powers of $3$.',
+        '$5, 25, 125$ are powers of $5$.',
+      ],
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'Only how the bases are written: $8^x = (2^3)^x = 2^{3x}$ and $4^{x+3} = (2^2)^{x+3} = 2^{2(x+3)}$.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The value of each side, so the equation and its solutions are unchanged.' },
+    ],
+  };
+
 return {
   props:{
     expEquationTree,
+    commonBaseBeforeAfter,
     sectionsContent,
     introContent,
     obj4Table,
@@ -770,7 +823,7 @@ return {
    }
 
 // export default function ExponentialEquationsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialEquationsPage({expEquationTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ExponentialEquationsPage({expEquationTree, commonBaseBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -805,6 +858,19 @@ export default function ExponentialEquationsPage({expEquationTree, seoData, sect
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="common-base-before-after"
+            title="Rewriting 8ˣ = 4ˣ⁺³ over base 2"
+            source="/algebra/powers/exponential-equations"
+            before={"The third priority of this section on its own example. Compare what the two forms let you do with the exponents."}
+            after={"With one base on both sides, the exponents can be set equal. That step is the [matching bases](!#5) method."}
+          >
+            <BeforeAfter
+              data={commonBaseBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
 

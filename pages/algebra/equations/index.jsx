@@ -12,6 +12,7 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 export async function getStaticProps(){
 const keyWords = [
@@ -293,6 +294,34 @@ const summaryTable = `
 
 
 // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "What an Equation Is") — template G,
+// exclusion. Running instance: 2x + 1 = 9, among six lines of mathematics.
+// Old obj1 text is kept in sectionsContent.obj1, unused; its three paragraphs
+// and the oneValue demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCandTable = ciTableOpen(['line', 'written']) +
+  ciRow(['A', '3 + 4 = 7']) +
+  ciRow(['B', '3 + 4 = 8'], { shade: true }) +
+  ciRow(['C', '2x + 1']) +
+  ciRow(['D', '2x + 1 = 9'], { shade: true }) +
+  ciRow(['E', 'x + x = 2x']) +
+  ciRow(['F', '2x + 1 > 9'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciSortTable = ciTableOpen(['line', 'two sides joined by =?', 'what it claims', 'equation?']) +
+  ciRow(['A: 3 + 4 = 7', 'yes', 'true, always', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['B: 3 + 4 = 8', 'yes', 'false, always', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['C: 2x + 1', 'no', 'nothing: it is a quantity', 'no']) +
+  ciRow(['D: 2x + 1 = 9', 'yes', 'true only when x = 4', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['E: x + x = 2x', 'yes', 'true for every x', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['F: 2x + 1 > 9', 'no, joined by >', 'a comparison, not an equality', 'no'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
 
@@ -706,6 +735,11 @@ const schemas = {
     points: [{ x: 1 - Math.sqrt(15), y: 1, label: 'x = 1 − √15', pos: 'ne' }, { x: 1 + Math.sqrt(15), y: 1, label: 'x = 1 + √15', pos: 'sw' }],
     caption: 'Rule out x = 1 and x = −4 first; y = 1 is met at x = 1 ± √15' };
 
+  const conceptIntroFigures = {
+    candTable: ciCandTable,
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     linear: demoUnitFrame({
       svg: equationVisualizerDiagrams['lin-steep'],
@@ -824,6 +858,7 @@ const schemas = {
     beyondAlgebraTree,
     equationFamilyTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -857,10 +892,74 @@ export default function EquationsPage({beyondAlgebraTree, equationFamilyTree,
   obj10Table,
   obj11Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six lines of mathematics, all built from the same few symbols. Which of them are equations?`,
+        content: [
+          `Some contain an unknown, some do not; some look like statements, some like formulas. On the page they are easy to confuse.`,
+          ciTable('candTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Four are equations — A, B, D and E — whether true, false or true only sometimes; C and F are not.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `C has no equals sign, so it claims nothing; F has a sign, but the wrong one. A false line like B still counts.`,
+        content: [
+          `An expression like $2x + 1$ is not an equation. It has no equality sign and makes no claim. It can be evaluated, simplified, or factored, but it cannot be "solved" because there is no condition to satisfy. The distinction matters: solving requires an equation, not just an expression.`,
+          `$2x + 1 > 9$ makes a claim too, but it compares sizes instead of asserting sameness — it is an inequality. And B is an equation even though it is false: being an equation is about the form of the claim, not about whether the claim holds.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: two expressions joined by an equals sign, asserting that they have the same value.`,
+        content: [
+          `Think of a balance scale: an equation says the two pans weigh the same. Whether the scale actually balances is a separate question.`,
+          `An equation consists of two expressions joined by an equality sign. The expression to the left of $=$ is the left-hand side, and the expression to the right is the right-hand side. Together they form a single assertion: whatever the left side evaluates to, the right side evaluates to the same thing.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [equation](!/algebra/definitions#equation) is a statement that two expressions are equal, written with the equality sign $=$ between them.`,
+        footer: `So $2x + 1 = 9$ is an equation; $2x + 1$ on its own and $2x + 1 > 9$ are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `An equation is a claim: always true, always false, or true only for certain values of the unknown.`,
+        content: [
+          `The statement $3 + 4 = 7$ is an equation that is unconditionally true. The statement $3 + 4 = 8$ is an equation that is unconditionally false. Neither of these involves an unknown — they are simply claims about arithmetic facts. The equations that drive algebra are different: they contain one or more unknowns (typically denoted $x$, $y$, $z$), and their truth depends on what values those unknowns take. The equation $2x + 1 = 9$ is true when $x = 4$ and false for every other value of $x$.`,
+          <div key={'unit-oneValue'} dangerouslySetInnerHTML={{ __html: demoUnits.oneValue }} />,
+          `Solving an equation means finding every input at which its assertion is true.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rejected lines are not useless: each belongs to its own toolkit.`,
+        content: `An expression like $2x + 1$ is simplified, factored or evaluated, but never solved. An inequality like $2x + 1 > 9$ is solved too, with an answer that is usually a whole range of values — the subject of the [inequalities](!/algebra/inequalities) pages. For equations, the next section on [solutions and solution sets](!/algebra/equations#2) says what "solved" means.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers solutions and solution sets, types of equations by how many solutions they have, equivalent equations, and the main families of algebraic equations.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -877,9 +976,7 @@ export default function EquationsPage({beyondAlgebraTree, equationFamilyTree,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-oneValue'} dangerouslySetInnerHTML={{ __html: demoUnits.oneValue }} />,
-          `Solving an equation means finding every input at which its assertion is true.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

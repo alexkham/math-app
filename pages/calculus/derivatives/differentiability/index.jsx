@@ -470,7 +470,8 @@ The graph comes to a sharp point where the curve doubles back on itself with ver
 For $f(x) = x^{4/5}$ at $0$, checking only $h > 0$ gives the quotient $h^{-1/5} \\to +\\infty$ and suggests a vertical tangent. For $h < 0$ the quotient is negative and tends to $-\\infty$, so the point is a cusp.
 [Read more](!#pitfalls)]@
 
-The standard example is $f(x) = x^{2/3}$ at $x = 0$. The derivative $f'(x) = \\frac{2}{3}x^{-1/3}$ tends to $+\\infty$ from the right and $-\\infty$ from the left. The graph has a pointed tip at the origin, sharper than any corner. The function is continuous at $x = 0$, but the infinite and opposing slopes prevent differentiability.
+@academic[example:Example
+The standard example is $f(x) = x^{2/3}$ at $x = 0$. The derivative $f'(x) = \\frac{2}{3}x^{-1/3}$ tends to $+\\infty$ from the right and $-\\infty$ from the left. The graph has a pointed tip at the origin, sharper than any corner. The function is continuous at $x = 0$, but the infinite and opposing slopes prevent differentiability.]@
 `,
     before: ``,
     after: ``,
@@ -481,7 +482,8 @@ The standard example is $f(x) = x^{2/3}$ at $x = 0$. The derivative $f'(x) = \\f
     content: `
 A vertical tangent occurs when the two-sided limit of the difference quotient exists but equals $+\\infty$ or $-\\infty$. Both sides agree on the direction—unlike a cusp—but the slope is infinite.
 
-The standard example is $f(x) = x^{1/3}$ at $x = 0$. The derivative formula $f'(x) = \\frac{1}{3}x^{-2/3}$ gives $f'(x) \\to +\\infty$ as $x \\to 0$ from either side. The graph passes smoothly through the origin with no sharp point, but the tangent line there is the vertical line $x = 0$.
+@academic[example:Example
+The standard example is $f(x) = x^{1/3}$ at $x = 0$. The derivative formula $f'(x) = \\frac{1}{3}x^{-2/3}$ gives $f'(x) \\to +\\infty$ as $x \\to 0$ from either side. The graph passes smoothly through the origin with no sharp point, but the tangent line there is the vertical line $x = 0$.]@
 
 A vertical tangent line has undefined slope, so the derivative does not exist in the usual sense. The function is continuous and the graph is smooth, yet the rate of change is unbounded at that point. This is the mildest form of non-differentiability—the geometry is clean, but the numerical value of the derivative is not finite.
 `,

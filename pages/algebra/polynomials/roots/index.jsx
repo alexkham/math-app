@@ -15,6 +15,7 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
 
@@ -258,7 +259,8 @@ obj0: {
   title: `What is a Root?`,
   content: `A root of a polynomial $P(x)$ is a value $r$ such that $P(r) = 0$. The terms "root," "zero," and "solution" all refer to the same thing — an input that makes the polynomial vanish.
 
-Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. Testing $x = 3$ gives $P(3) = 9 - 15 + 6 = 0$. Both values produce zero, so both are roots. Any other input — say $x = 1$ — yields $P(1) = 1 - 5 + 6 = 2 \\neq 0$, confirming that $1$ is not a root.
+@academic[example:Example
+Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. Testing $x = 3$ gives $P(3) = 9 - 15 + 6 = 0$. Both values produce zero, so both are roots. Any other input — say $x = 1$ — yields $P(1) = 1 - 5 + 6 = 2 \\neq 0$, confirming that $1$ is not a root.]@
 
 Verification is always available through direct substitution. Claim that $r$ is a root, substitute it into $P(x)$, and check whether the result is zero. This test is definitive — no ambiguity, no approximation. A value either satisfies $P(r) = 0$ or it does not.
 
@@ -410,7 +412,10 @@ $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
 Writing $x = \\frac{6 \\pm \\sqrt{16}}{2}$ for $x^2 + 6x + 5$ uses $b$ instead of $-b$ and gives $5$ and $1$, which are not roots. With $-b = -6$: $x = \\frac{-6 \\pm 4}{2}$, so $x = -1$ and $x = -5$.
 [Read more](!#12)]@
 
-This formula works universally — it finds roots whether the quadratic factors cleanly or not. For $x^2 - 5x + 6$, applying the formula with $a = 1$, $b = -5$, $c = 6$ gives $x = \\frac{5 \\pm \\sqrt{25 - 24}}{2} = \\frac{5 \\pm 1}{2}$, yielding $x = 3$ and $x = 2$.
+This formula works universally — it finds roots whether the quadratic factors cleanly or not.
+
+@academic[example:Example
+For $x^2 - 5x + 6$, applying the formula with $a = 1$, $b = -5$, $c = 6$ gives $x = \\frac{5 \\pm \\sqrt{25 - 24}}{2} = \\frac{5 \\pm 1}{2}$, yielding $x = 3$ and $x = 2$.]@
 
 The expression under the square root, $\\Delta = b^2 - 4ac$, is called the discriminant. It determines the nature of the roots without computing them.
 
@@ -451,9 +456,10 @@ The theorem does not guarantee that rational roots exist — only that if they d
   title: `Finding Roots — Synthetic Division`,
   content: `[Synthetic division](!/algebra/polynomials/operations) provides an efficient method for testing root candidates and extracting factors simultaneously.
 
+@academic[example:Example
 To test whether $x = 2$ is a root of $P(x) = x^3 - 6x^2 + 11x - 6$, set up synthetic division with $2$ and the coefficients $1, -6, 11, -6$. The process yields a remainder of $0$, confirming that $x = 2$ is a root, and produces the quotient $x^2 - 4x + 3$.
 
-The quotient $x^2 - 4x + 3$ is a quadratic that factors as $(x - 1)(x - 3)$. Combined with the known root $x = 2$, the complete factorization is $(x - 2)(x - 1)(x - 3)$, and all three roots are found: $x = 1$, $x = 2$, and $x = 3$.
+The quotient $x^2 - 4x + 3$ is a quadratic that factors as $(x - 1)(x - 3)$. Combined with the known root $x = 2$, the complete factorization is $(x - 2)(x - 1)(x - 3)$, and all three roots are found: $x = 1$, $x = 2$, and $x = 3$.]@
 
 This strategy applies generally. Start with a polynomial of degree $n$, find one root (perhaps using the Rational Root Theorem), divide it out via synthetic division to obtain a polynomial of degree $n - 1$, and repeat. Each successful division lowers the degree by one. Eventually the quotient reaches degree $2$, where the quadratic formula finishes the job.
 
@@ -478,7 +484,8 @@ A polynomial with real coefficients may have complex roots, but they always arri
 
 This pairing is not optional — it follows directly from the algebra of conjugates applied to the polynomial's coefficients.
 
-The polynomial $x^2 + 2x + 5$ illustrates this. The discriminant is $4 - 20 = -16 < 0$, so the roots are complex. Applying the quadratic formula gives $x = -1 + 2i$ and $x = -1 - 2i$ — a conjugate pair. The real parts match, and the imaginary parts differ only in sign.
+@academic[example:Example
+The polynomial $x^2 + 2x + 5$ illustrates this. The discriminant is $4 - 20 = -16 < 0$, so the roots are complex. Applying the quadratic formula gives $x = -1 + 2i$ and $x = -1 - 2i$ — a conjugate pair. The real parts match, and the imaginary parts differ only in sign.]@
 
 For higher-degree polynomials, real and complex roots can mix. The polynomial $x^3 - x^2 + x - 1$ factors as $(x - 1)(x^2 + 1)$, giving one real root $x = 1$ and two complex roots $x = i$ and $x = -i$. The degree is $3$, and there are three roots total — one real, two complex.
 
@@ -810,9 +817,56 @@ const schemas = {
     ],
   };
 
+  // BeforeAfter (obj5): the section's cubic factored in two moves
+  const cubicFactoringSteps = {
+    header: {
+      kicker: 'Finding roots',
+      title: 'Factoring $x^3 - 4x$ completely',
+      lede: 'Two moves turn the cubic into a product, and each factor names one of its three roots: $0$, $2$ and $-2$.',
+    },
+    steps: [
+      { id: 'expanded', label: 'Expanded', stamp: 'Before', expr: '$x^3 - 4x$',
+        move: { label: 'Extract the common factor', note: 'take out $x$' } },
+      { id: 'common', label: 'Common factor out', expr: '$x(x^2 - 4)$',
+        move: { label: 'Difference of squares', note: '$x^2 - 4 = (x - 2)(x + 2)$' } },
+      { id: 'factored', label: 'Fully factored', stamp: 'After', expr: '$x(x - 2)(x + 2)$' },
+    ],
+  };
+
+  // BeforeAfter (obj9): a cubic whose factors separate the real root from the complex pair
+  const realComplexBeforeAfter = {
+    header: {
+      kicker: 'Real vs. complex roots',
+      title: 'One real root, one conjugate pair',
+      lede: 'Factored, the cubic shows which of its three roots lie on the number line and which do not.',
+    },
+    before: {
+      form: 'Expanded cubic',
+      expr: '$x^3 - x^2 + x - 1$',
+      meta: 'Degree 3: three roots in total',
+    },
+    after: {
+      form: 'Linear × quadratic',
+      expr: '$(x - 1)(x^2 + 1)$',
+      meta: 'Real root $x = 1$; complex roots $x = i$ and $x = -i$',
+    },
+    operation: {
+      name: 'Factor',
+      desc: 'into a linear factor and a quadratic with no real roots',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'Each factor sorts the roots: $x - 1$ gives the real root $1$, and $x^2 + 1$ gives the complex pair $i$ and $-i$.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The count: three roots for degree 3. Complex roots come in conjugate pairs, so an odd degree always leaves at least one real root.' },
+    ],
+  };
+
   return {
   props:{
     rootMethodTree,
+    cubicFactoringSteps,
+    realComplexBeforeAfter,
     demoUnits,
     sectionsContent,
     introContent,
@@ -833,7 +887,7 @@ const schemas = {
 }
    }
 
-export default function RootsPage({rootMethodTree, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RootsPage({rootMethodTree, cubicFactoringSteps, realComplexBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -918,6 +972,20 @@ export default function RootsPage({rootMethodTree, seoData, sectionsContent, int
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="cubic-factoring-steps"
+            title="Factoring x³ − 4x completely"
+            source="/algebra/polynomials/roots"
+            before={"The section's cubic, one move at a time. Watch what each move exposes."}
+            after={"Setting each factor equal to zero gives the three roots $0$, $2$ and $-2$. Dividing by $x$ instead of factoring it out would lose the root $0$."}
+          >
+            <BeforeAfter
+              data={cubicFactoringSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
 
@@ -960,6 +1028,19 @@ export default function RootsPage({rootMethodTree, seoData, sectionsContent, int
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="real-complex-before-after"
+            title="Factoring x³ − x² + x − 1"
+            source="/algebra/polynomials/roots"
+            before={"The section's cubic in its two forms. Compare what each panel tells you about the three roots."}
+            after={"The quadratic factor $x^2 + 1$ has no real roots, so its two roots form a [conjugate pair](!/complex-numbers/complex-conjugate). The linear factor carries the one real root an odd-degree polynomial must have."}
+          >
+            <BeforeAfter
+              data={realComplexBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

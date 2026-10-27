@@ -3178,7 +3178,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/matrixAdditionDiagrams'
@@ -3188,6 +3188,8 @@ import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplicatio
 import matrixScalarDiagrams from '@/app/components/linear-algebra copy/matrix/matrixScalarDiagrams'
 import matrixLinCombDiagrams from '@/app/components/linear-algebra copy/matrix/matrixLinCombDiagrams'
 import powerDiagrams from '@/app/components/linear-algebra copy/matrix/powerDiagrams'
+import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -4241,8 +4243,58 @@ const schemas = {
     }),
   };
 
+  const matrixAdditionStrip = {
+    operation: 'add',
+    A: [[1, 4], [-2, 3], [0, 5]],
+    B: [[3, -1], [6, 0], [2, -4]],
+    intro: 'Same shape in, same shape out: each entry of the sum is the two entries in that position added, one position at a time.',
+  };
+
+  const scalarMultipleStrip = {
+    operation: 'scalar',
+    scalar: -2,
+    A: [[1, 3, -4], [0, 5, 2]],
+    intro: 'The scalar reaches every entry alike: each one is multiplied by −2, and the shape and the zero stay where they were.',
+  };
+
+  const matrixProductAnatomy = {
+    kicker: 'Matrix operations · the product',
+    title: 'One entry, formed in full',
+    intro: 'Row 1 of $A$ meets column 2 of $B$: three products, added, give the entry 19. Each of the other three entries is the same operation on a different row and column.',
+    operation: 'multiply',
+    A: [[1, 0, 3], [2, -1, 4]],
+    B: [[5, 1], [2, -3], [0, 6]],
+    feature: [0, 1],
+    noteLabel: 'What it costs',
+    note: 'Each entry takes $n = 3$ multiplications and $2$ additions, and there are $m \\times p = 4$ entries. Straight from the definition an $m \\times n$ by $n \\times p$ product takes $mnp$ multiplications: $12$ here.',
+    anchor: '#5',
+  };
+
+  const matrixProductOrder = {
+    kicker: 'Matrix operations · order',
+    title: 'AB and BA are not the same object',
+    intro: 'A 2×3 matrix and a 3×2 matrix can be multiplied in either order, but $AB$ is 2×2 and $BA$ is 3×3. The two products cannot even be compared entry by entry.',
+    operation: 'multiply',
+    A: [[1, 0, 3], [2, -1, 4]],
+    B: [[5, 1], [2, -3], [0, 6]],
+    noteLabel: 'Why commutativity fails',
+    note: 'For square matrices both orders have the same size and the failure shows only in the entries, as in the example above. With different shapes it shows before a single entry is computed.',
+    anchor: '#6',
+  };
+
+  const transposeStrip = {
+    operation: 'transpose',
+    A: [[1, 2, 3], [4, 5, 6]],
+    intro: 'Rows become columns: the 2×3 matrix turns into a 3×2, and the diagonal entries 1 and 5 stay in place.',
+  };
+
    return {
   props: {
+    transposeStrip,
+    matrixProductOrder,
+    matrixProductAnatomy,
+    scalarMultipleStrip,
+    matrixAdditionStrip,
     demoUnits,
     sectionsContent,
     introContent,
@@ -4264,7 +4316,7 @@ const schemas = {
    }
 
 
-   export default function MatrixOperationsPage({seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+   export default function MatrixOperationsPage({transposeStrip, matrixProductOrder, matrixProductAnatomy, scalarMultipleStrip, matrixAdditionStrip, seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4277,6 +4329,14 @@ const schemas = {
           sectionsContent.obj1.content,
                   <div key={'unit-addition'} dangerouslySetInnerHTML={{ __html: demoUnits.addition }} />,
           `Subtraction and scaling in the next two sections work the same way, one position at a time, which is why they share addition's shape rules.`,
+          <DiagramFrameV2
+            key={'obj1-diagram'}
+            id="matrix-addition-strip"
+            title="Matrix addition, entry by entry"
+            source="/linear-algebra/matrix/operations"
+          >
+            <MatrixOperation data={matrixAdditionStrip} theme="navy" variant="strip" />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -4314,6 +4374,14 @@ const schemas = {
           sectionsContent.obj3.content,
           <div key={'unit-scalarDone'} dangerouslySetInnerHTML={{ __html: demoUnits.scalarDone }} />,
           `Because the scalar reaches every entry alike, scaling never changes a matrix's shape or the pattern of its zeros.`,
+          <DiagramFrameV2
+            key={'obj3-diagram'}
+            id="scalar-multiple-strip"
+            title="Scalar multiplication, entry by entry"
+            source="/linear-algebra/matrix/operations"
+          >
+            <MatrixOperation data={scalarMultipleStrip} theme="navy" variant="strip" />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -4334,6 +4402,14 @@ const schemas = {
           sectionsContent.obj5.content,
                   <div key={'unit-multiplication'} dangerouslySetInnerHTML={{ __html: demoUnits.multiplication }} />,
           `This single-entry view is the definition; the column and row readings later on the page are the same arithmetic grouped differently.`,
+          <DiagramFrameV2
+            key={'obj5-diagram'}
+            id="matrix-product-anatomy"
+            title="One entry, formed in full"
+            source="/linear-algebra/matrix/operations"
+          >
+            <MatrixOperation data={matrixProductAnatomy} theme="navy" variant="anatomy" />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -4350,6 +4426,14 @@ const schemas = {
           >
             <PropertyLawCard data={multiplicationLaws} theme="navy" variant="plate" />
           </DiagramFrame>,
+          <DiagramFrameV2
+            key={'obj6-diagram'}
+            id="matrix-product-order"
+            title="AB and BA are not the same object"
+            source="/linear-algebra/matrix/operations"
+          >
+            <MatrixOperation data={matrixProductOrder} theme="navy" variant="pair" />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -4379,6 +4463,14 @@ const schemas = {
           sectionsContent.obj8.content,
                   <div key={'unit-transpose'} dangerouslySetInnerHTML={{ __html: demoUnits.transpose }} />,
           `Because the diagonal is fixed, a matrix equal to its own transpose is exactly one that is symmetric about that line.`,
+          <DiagramFrameV2
+            key={'obj8-diagram'}
+            id="transpose-strip"
+            title="The transpose, rows into columns"
+            source="/linear-algebra/matrix/operations"
+          >
+            <MatrixOperation data={transposeStrip} theme="navy" variant="strip" />
+          </DiagramFrameV2>,
         ]
     },
     {

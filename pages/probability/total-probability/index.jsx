@@ -1475,7 +1475,7 @@ All three diagrams show the same phenomenon: $A$'s probability distributes acros
   
       title:`Examples`,
       content:`
-@academic[example:Example 1: Medical testing
+**Example 1: Medical testing**
 
 A disease affects 1% of the population. A test is 95% accurate for infected people (true positive rate) and 90% accurate for healthy people (true negative rate, so 10% false positive rate).
 
@@ -1491,9 +1491,9 @@ $P(\\text{positive}) = P(\\text{positive} | B₁)·P(B₁) + P(\\text{positive} 
             $= 0.0095 + 0.099$
             $= 0.1085$
 
-About $10.85$% of tests come back positive.]@
+About $10.85$% of tests come back positive.
 
-@academic[example:Example 2: Manufacturing defects
+**Example 2: Manufacturing defects**
 
 A factory has three machines producing parts. Machine A makes 50% of parts with 2% defect rate. Machine B makes 30% with 3% defect rate. Machine C makes 20% with 5% defect rate.
 
@@ -1509,9 +1509,9 @@ $P(\\text{defective}) = 0.02 × 0.50 + 0.03 × 0.30 + 0.05 × 0.20$
              $= 0.010 + 0.009 + 0.010$
              $= 0.029$
 
-$2.9$% of all parts are defective.]@
+$2.9$% of all parts are defective.
 
-@academic[example:Example 3: Weather scenarios
+**Example 3: Weather scenarios**
 
 Tomorrow will be sunny, cloudy, or rainy with probabilities 0.6, 0.3, and 0.1. You'll go running with probability 0.8 if sunny, 0.5 if cloudy, and 0.1 if rainy.
 
@@ -1527,7 +1527,7 @@ $P(\\text{run}) = 0.8 × 0.6 + 0.5 × 0.3 + 0.1 × 0.1$
        $= 0.48 + 0.15 + 0.01$
        $= 0.64$
 
-$64$% chance you'll go running.]@
+$64$% chance you'll go running.
 
 @academic[pitfall,aside:true,width:35%:Leaving out a case
 Counting only the infected group gives $P(\\text{positive}) = 0.95 \\times 0.01 = 0.0095$. The healthy group tests positive too, $0.10 \\times 0.99 = 0.099$, so $P(\\text{positive}) = 0.1085$, more than eleven times as large.

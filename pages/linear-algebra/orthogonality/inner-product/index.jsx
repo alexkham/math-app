@@ -915,7 +915,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
@@ -1271,7 +1271,8 @@ $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = \\mat
 
 The result is a scalar, not a [vector](!/linear-algebra/vectors). The matrix form $\\mathbf{u}^T\\mathbf{v}$ treats $\\mathbf{u}$ as a $1 \\times n$ row and $\\mathbf{v}$ as an $n \\times 1$ column, making the dot product a $1 \\times 1$ [matrix multiplication](!/linear-algebra/matrix/operations).
 
-For $\\mathbf{u} = (2, -1, 3, 0)$ and $\\mathbf{v} = (1, 4, -2, 5)$: $\\mathbf{u} \\cdot \\mathbf{v} = 2(1) + (-1)(4) + 3(-2) + 0(5) = 2 - 4 - 6 + 0 = -8$.
+@academic[example:Example
+For $\\mathbf{u} = (2, -1, 3, 0)$ and $\\mathbf{v} = (1, 4, -2, 5)$: $\\mathbf{u} \\cdot \\mathbf{v} = 2(1) + (-1)(4) + 3(-2) + 0(5) = 2 - 4 - 6 + 0 = -8$.]@
 
 The dot product is the standard inner product on $\\mathbb{R}^n$. It is the measuring tool that defines lengths, angles, distances, and perpendicularity throughout finite-dimensional linear algebra.`,
     before: ``,
@@ -1349,7 +1350,8 @@ When $\\cos\\theta = 1$ ($\\theta = 0$), the vectors point in the same direction
 
 The orthogonality condition $\\mathbf{u} \\cdot \\mathbf{v} = 0$ is the case $\\theta = 90°$. The dot product encodes the full metric geometry of $\\mathbb{R}^n$: length from $\\mathbf{v} \\cdot \\mathbf{v}$, angle from $\\mathbf{u} \\cdot \\mathbf{v}$, and distance from $(\\mathbf{u} - \\mathbf{v}) \\cdot (\\mathbf{u} - \\mathbf{v})$.
 
-For $\\mathbf{u} = (1, 2, 3)$ and $\\mathbf{v} = (4, -1, 2)$: $\\mathbf{u} \\cdot \\mathbf{v} = 4 - 2 + 6 = 8$, $\\|\\mathbf{u}\\| = \\sqrt{14}$, $\\|\\mathbf{v}\\| = \\sqrt{21}$. So $\\cos\\theta = 8/\\sqrt{294} \\approx 0.467$, giving $\\theta \\approx 62.2°$.
+@academic[example:Example
+For $\\mathbf{u} = (1, 2, 3)$ and $\\mathbf{v} = (4, -1, 2)$: $\\mathbf{u} \\cdot \\mathbf{v} = 4 - 2 + 6 = 8$, $\\|\\mathbf{u}\\| = \\sqrt{14}$, $\\|\\mathbf{v}\\| = \\sqrt{21}$. So $\\cos\\theta = 8/\\sqrt{294} \\approx 0.467$, giving $\\theta \\approx 62.2°$.]@
 
 @academic[punchline:Length, distance and angle are all read off from one product, so choosing the product chooses the geometry.]@`,
     before: ``,

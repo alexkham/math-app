@@ -449,7 +449,8 @@ Finding the first term: if $a_6 = 96$ and $r = 2$, then $96 = a_1 \\cdot 2^5$, s
 
 Finding the position of a term: if $a_1 = 4$, $r = 3$, and some term equals $2916$, then $2916 = 4 \\cdot 3^{n-1}$, so $3^{n-1} = 729 = 3^6$ and $n = 7$. When the arithmetic does not produce a clean [power](!/algebra/powers), solving for $n$ requires [logarithms](!/algebra/logarithms): $n - 1 = \\frac{\\ln(a_n / a_1)}{\\ln r}$.
 
-When two non-consecutive terms are given — say $a_2 = 6$ and $a_5 = 162$ — write both in terms of $a_1$ and $r$: $a_1 r = 6$ and $a_1 r^4 = 162$. Dividing gives $r^3 = 27$, so $r = 3$, and back-substituting gives $a_1 = 2$.
+@academic[example:Example
+When two non-consecutive terms are given — say $a_2 = 6$ and $a_5 = 162$ — write both in terms of $a_1$ and $r$: $a_1 r = 6$ and $a_1 r^4 = 162$. Dividing gives $r^3 = 27$, so $r = 3$, and back-substituting gives $a_1 = 2$.]@
 
 To find any term of your own geometric sequence, use the [geometric sequence calculator](!/algebra/calculators/sequences/geometric-sequence).`,
     before: ``,
@@ -539,9 +540,13 @@ $$S = \\frac{a_1}{1 - r} \\quad (|r| < 1)$$
 @academic[fact,aside:true,width:35%:Achilles catches the tortoise after all
 In Zeno's paradox, Achilles runs ten times as fast as a tortoise that starts $100$ m ahead, and must first reach where it was, by which time it has moved on, without end. His stages $100 + 10 + 1 + \\cdots$ form a series with $r = \\frac{1}{10}$, so he draws level after exactly $\\frac{1000}{9} = 111.\\overline{1}$ m.]@
 
-The series $\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots$ has $a_1 = \\frac{1}{2}$ and $r = \\frac{1}{2}$, so $S = \\frac{1/2}{1 - 1/2} = 1$. Adding half of the remaining distance at each step comes as close to the full unit as desired, and the infinite sum is exactly $1$.
+@academic[example:Example
+The series $\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots$ has $a_1 = \\frac{1}{2}$ and $r = \\frac{1}{2}$, so $S = \\frac{1/2}{1 - 1/2} = 1$. Adding half of the remaining distance at each step comes as close to the full unit as desired, and the infinite sum is exactly $1$.]@
 
-Repeating decimals provide another illustration. The decimal $0.333\\ldots = \\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots$ is a geometric series with $a_1 = \\frac{3}{10}$ and $r = \\frac{1}{10}$, summing to $\\frac{3/10}{9/10} = \\frac{1}{3}$.
+Repeating decimals provide another illustration.
+
+@academic[example:Example
+The decimal $0.333\\ldots = \\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots$ is a geometric series with $a_1 = \\frac{3}{10}$ and $r = \\frac{1}{10}$, summing to $\\frac{3/10}{9/10} = \\frac{1}{3}$.]@
 
 @academic[rule_plain:When $|r| \\geq 1$, the terms do not diminish (or grow in magnitude), and the partial sums do not settle to a limit. The series diverges and no finite sum exists.]@
 

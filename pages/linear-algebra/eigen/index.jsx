@@ -834,13 +834,13 @@ For the matrix $\\begin{pmatrix} 3 & 0 \\\\ 0 & -2 \\end{pmatrix}$, the standard
 
 For a [triangular](!/linear-algebra/matrix/types) matrix, the eigenvalues are still the diagonal entries (since $\\det(A - \\lambda I)$ is the product of the diagonal entries of $A - \\lambda I$), but the eigenvectors generally require computation.
 
-@academic[example:Worked Example
+## Worked Example
 
 For $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$, the characteristic equation is $\\det(A - \\lambda I) = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5) = 0$. The eigenvalues are $\\lambda_1 = 2$ and $\\lambda_2 = 5$.
 
 For $\\lambda_1 = 2$: $(A - 2I)\\mathbf{v} = \\begin{pmatrix} 2 & 2 \\\\ 1 & 1 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$ gives $\\mathbf{v}_1 = (-1, 1)^T$.
 
-For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\begin{pmatrix} -1 & 2 \\\\ 1 & -2 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$ gives $\\mathbf{v}_2 = (2, 1)^T$.]@
+For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\begin{pmatrix} -1 & 2 \\\\ 1 & -2 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$ gives $\\mathbf{v}_2 = (2, 1)^T$.
 
 @academic[pitfall,aside:true,width:35%:Reading eigenvalues off the diagonal
 Taking the diagonal entries $4$ and $3$ of $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$ as its eigenvalues fails: $\\det(A - 4I) = 0 \\cdot (-1) - 2 \\cdot 1 = -2 \\neq 0$. The eigenvalues are $2$ and $5$; the diagonal gives them only for diagonal and triangular matrices.

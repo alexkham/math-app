@@ -1106,9 +1106,11 @@ obj51: {
   title: `How to Compute a Remainder`,
   content: `To find $a \\bmod n$, divide $a$ by $n$, discard the fractional part of the quotient, multiply back, and subtract. The gap between the original number and the nearest multiple of $n$ at or below it is the remainder.
 
-For $47 \\bmod 5$: divide $47 \\div 5 = 9.4$. The integer part is $9$. Multiply back: $9 \\times 5 = 45$. Subtract: $47 - 45 = 2$. The remainder is $2$.
+@academic[example:Example
+For $47 \\bmod 5$: divide $47 \\div 5 = 9.4$. The integer part is $9$. Multiply back: $9 \\times 5 = 45$. Subtract: $47 - 45 = 2$. The remainder is $2$.]@
 
-For $123 \\bmod 7$: divide $123 \\div 7 = 17.57\\ldots$. The integer part is $17$. Multiply back: $17 \\times 7 = 119$. Subtract: $123 - 119 = 4$. The remainder is $4$.
+@academic[example:Example
+For $123 \\bmod 7$: divide $123 \\div 7 = 17.57\\ldots$. The integer part is $17$. Multiply back: $17 \\times 7 = 119$. Subtract: $123 - 119 = 4$. The remainder is $4$.]@
 
 @academic[pitfall,aside:true,width:35%:Reading the decimal part as the remainder
 Taking the $4$ in $47 \\div 5 = 9.4$ as the remainder gives $47 \\bmod 5 = 4$. The $0.4$ is a fraction of $5$, not a count of units: $0.4 \\cdot 5 = 2$, so $47 \\bmod 5 = 2$.

@@ -20,6 +20,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -228,6 +229,24 @@ const pfLcmObj4 = renderPrimeFactorization({
   ]},
 })
 
+    // Concept introduction (section 1, "What is LCM?") — template I, naming.
+    // Running instance: 4 and 6, lcm 12, met in three everyday settings. Old
+    // obj1 text is kept in sectionsContent.obj1, unused; its two paragraphs,
+    // the multiples-line figure obj1SvgCommon and the afterFigure paragraphs
+    // are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciPlacesTable = ciTableOpen(['situation', 'the question', 'answer']) +
+      ciRow(['buses every 4 and every 6 minutes, both leaving now', 'when do they leave together again?', 'in 12 minutes'], { color: '#2563EB', cols: [2] }) +
+      ciRow(['sausages in packs of 4, rolls in packs of 6', 'fewest of each with none left over?', '12 of each'], { shade: true, color: '#2563EB', cols: [2] }) +
+      ciRow(['adding 1/4 + 1/6', 'smallest denominator both fit into?', '12, giving 3/12 + 2/12'], { last: true, color: '#2563EB', cols: [2] }) +
+      '</tbody></table>'
+
     const sectionsContent={
 
    
@@ -349,13 +368,14 @@ obj3: {
   title: `Method 1: Listing Multiples`,
   content: `The most direct approach lists multiples of each number and identifies the first overlap.
 
+@academic[example:Example
 For $\\text{lcm}(6, 8)$:
 
 Multiples of $6$: $6, 12, 18, 24, 30, 36, \\ldots$
 
 Multiples of $8$: $8, 16, 24, 32, 40, \\ldots$
 
-The first number appearing in both lists is $24$, so $\\text{lcm}(6, 8) = 24$.`,
+The first number appearing in both lists is $24$, so $\\text{lcm}(6, 8) = 24$.]@`,
   afterFigure: `The method is intuitive and works well for small inputs. It becomes tedious when the LCM is much larger than the inputs — for $\\text{lcm}(7, 13) = 91$, listing multiples of $7$ up to $91$ requires thirteen entries. The methods that follow avoid this exhaustive search.`,
   before: ``,
   after: ``,
@@ -503,13 +523,14 @@ obj9: {
 @academic[formula_callout:LCM of More Than Two Numbers
 $$\\text{lcm}(a, b, c) = \\text{lcm}(\\text{lcm}(a, b), \\; c)$$]@
 
+@academic[example:Example
 For $\\text{lcm}(4, 6, 9)$:
 
 $\\text{lcm}(4, 6) = 12$.
 
 $\\text{lcm}(12, 9)$: factoring gives $12 = 2^2 \\cdot 3$ and $9 = 3^2$. Maximum exponents: $2^2 \\cdot 3^2 = 36$.
 
-So $\\text{lcm}(4, 6, 9) = 36$.
+So $\\text{lcm}(4, 6, 9) = 36$.]@
 
 @academic[pitfall,aside:true,width:35%:Dividing the product of three by their GCD
 Stretching the two-number formula to $\\frac{4 \\cdot 6 \\cdot 9}{\\gcd(4, 6, 9)} = \\frac{216}{1} = 216$ gives a common multiple six times too large. Pairing the numbers step by step gives $\\text{lcm}(4, 6, 9) = 36$.
@@ -540,7 +561,10 @@ Alternatively, factor all three numbers at once and take the maximum exponent fo
 
 obj10: {
   title: `Applications of LCM`,
-  content: `Adding **fractions** with different denominators requires a common denominator, and the LCM of the denominators is the smallest one that works. To add $\\frac{1}{4} + \\frac{1}{6}$: $\\text{lcm}(4, 6) = 12$, so $\\frac{1}{4} = \\frac{3}{12}$ and $\\frac{1}{6} = \\frac{2}{12}$, giving $\\frac{5}{12}$.
+  content: `Adding **fractions** with different denominators requires a common denominator, and the LCM of the denominators is the smallest one that works.
+
+@academic[example:Example
+To add $\\frac{1}{4} + \\frac{1}{6}$: $\\text{lcm}(4, 6) = 12$, so $\\frac{1}{4} = \\frac{3}{12}$ and $\\frac{1}{6} = \\frac{2}{12}$, giving $\\frac{5}{12}$.]@
 
 Scheduling problems are natural LCM applications. If Bus A arrives every $12$ minutes and Bus B every $18$ minutes, and both just arrived simultaneously, they next coincide in $\\text{lcm}(12, 18) = 36$ minutes.`,
   afterFigure: `@academic[fact,aside:true,width:35%:Two cicada broods meet every 221 years
@@ -779,6 +803,10 @@ const schemas = {
     { kind: 'list', label: 'multiples of 7:', items: '7, 14, 21, … 56, 63', role: 'primary' },
     { kind: 'list', label: 'multiples of 9:', items: '9, 18, 27, … 54, 63', role: 'secondary' },
     { kind: 'note', text: 'no meeting before 7 · 9', italic: true }] } };
+  const conceptIntroFigures = {
+    placesTable: ciPlacesTable,
+  };
+
   const demoUnits = {
     multiples: demoUnitFrame({
       svg: divisibilityTableDiagrams.d6,
@@ -813,6 +841,7 @@ return {
   props:{
     lcmMethodTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -841,9 +870,66 @@ export default function LCMPage({lcmMethodTree, seoData, sectionsContent,
    faqQuestions, schemas,
   obj1SvgCommon,
 obj3SvgListing,
-obj10SvgBuses,pfLcmObj4, demoUnits}) {
+obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `You already solve this whenever two repeating things have to line up.`,
+        content: [
+          `Two buses leave a stop together, one returning every 4 minutes and the other every 6. Counting forward in 4s and in 6s, you look for the first time the two counts meet.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The same question turns up with timetables, with packs in a shop and with fractions.`,
+        content: [
+          `Each situation asks for the first number reached by counting in 4s and also by counting in 6s.`,
+          ciTable('placesTable'),
+        ],
+      },
+      {
+        id: 'shared',
+        lead: `What they share: the smallest number that both 4 and 6 divide into evenly.`,
+        content: [
+          `The [multiples](!/arithmetic/divisibility/factors) of $4$ are $4, 8, 12, 16, 20, 24, \\ldots$ The multiples of $6$ are $6, 12, 18, 24, 30, \\ldots$ The numbers appearing in both lists — the common multiples — are $12, 24, 36, \\ldots$ The smallest is $12$, so $\\text{lcm}(4, 6) = 12$.`,
+          <div key={'obj1-svg'} style={{ maxWidth: '800px', margin: '20px auto' }} dangerouslySetInnerHTML={{ __html: obj1SvgCommon }} />,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [least common multiple](!/arithmetic/definitions#least_common_multiple) of two positive integers $a$ and $b$, written $\\text{lcm}(a, b)$, is the smallest positive integer divisible by both.`,
+        formula: [
+          `The least common multiple of two positive integers $a$ and $b$, written $\\text{lcm}(a, b)$, is the smallest positive integer divisible by both.`,
+        ],
+        footer: `So $\\text{lcm}(4, 6) = 12$ — the bus meeting time, the pack count and the common denominator all at once.`,
+      },
+      {
+        id: 'kind',
+        lead: `The LCM is a single whole number, trapped between the larger input and the product.`,
+        content: [
+          sectionsContent.obj1.afterFigure,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What the name buys: one answer, and one set of methods, for every one of those situations.`,
+        content: `Once the timetable, the shopping and the fractions are seen as the same question, a single way of finding the LCM settles all of them. Listing multiples works for small numbers; for larger ones the page shows faster routes through [prime factorization](!/arithmetic/divisibility/lcm#4) and through the greatest common divisor.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the basic properties, three methods for finding the LCM, and its relationship with the GCD.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -890,11 +976,7 @@ obj10SvgBuses,pfLcmObj4, demoUnits}) {
     title:sectionsContent.obj1.title,
     link:sectionsContent.obj1.link,
     content:[
-      sectionsContent.obj1.content,
-      <div key={'obj1-svg'}
-           style={{ maxWidth: '800px', margin: '20px auto' }}
-           dangerouslySetInnerHTML={{ __html: obj1SvgCommon }} />,
-      sectionsContent.obj1.afterFigure,
+      <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
     ]
 },
     {

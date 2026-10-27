@@ -908,7 +908,10 @@ $$\\frac{\\frac{3}{4}}{\\frac{5}{6}} = \\frac{3}{4} \\div \\frac{5}{6} = \\frac{
 Multiplying straight across, $\\frac{3}{4} \\times \\frac{5}{6} = \\frac{15}{24} = \\frac{5}{8}$, skips the reciprocal. Turning the divisor over first gives $\\frac{3}{4} \\times \\frac{6}{5} = \\frac{9}{10}$.
 [Read more](!#7)]@
 
-When only the numerator or only the denominator contains a fraction, the same approach works. For $\\frac{\\frac{2}{3}}{4}$, rewrite 4 as $\\frac{4}{1}$ and proceed: $\\frac{2}{3} \\div \\frac{4}{1} = \\frac{2}{3} \\times \\frac{1}{4} = \\frac{2}{12} = \\frac{1}{6}$.`,
+When only the numerator or only the denominator contains a fraction, the same approach works.
+
+@academic[example:Example
+For $\\frac{\\frac{2}{3}}{4}$, rewrite 4 as $\\frac{4}{1}$ and proceed: $\\frac{2}{3} \\div \\frac{4}{1} = \\frac{2}{3} \\times \\frac{1}{4} = \\frac{2}{12} = \\frac{1}{6}$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -937,11 +940,12 @@ This method is especially efficient when the numerator or denominator contains s
     title: `Complex Fractions with Sums or Differences`,
     content: `When the numerator or denominator of a complex fraction contains addition or subtraction, simplify that part first using [adding and subtracting fractions](!/arithmetic/fractions/adding-subtracting) rules, then proceed with either method.
 
+@academic[example:Example
 Simplify $\\frac{\\frac{1}{2} + \\frac{1}{3}}{\\frac{1}{4}}$:
 
 First, combine the numerator: $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$.
 
-The complex fraction becomes $\\frac{\\frac{5}{6}}{\\frac{1}{4}} = \\frac{5}{6} \\times \\frac{4}{1} = \\frac{20}{6} = \\frac{10}{3}$.
+The complex fraction becomes $\\frac{\\frac{5}{6}}{\\frac{1}{4}} = \\frac{5}{6} \\times \\frac{4}{1} = \\frac{20}{6} = \\frac{10}{3}$.]@
 
 Alternatively, multiply by the LCD of 2, 3, and 4, which is 12. Both approaches reach the same answer.
 
@@ -984,11 +988,12 @@ Converting first turns each mixed number into a single fraction, so the main bar
     title: `Nested Complex Fractions`,
     content: `Occasionally, a complex fraction appears within another complex fraction. Simplify from the innermost fraction outward.
 
+@academic[example:Example
 Simplify $\\frac{1}{\\frac{1}{\\frac{1}{2}}}$:
 
 Start with the innermost: $\\frac{1}{\\frac{1}{2}} = 1 \\times \\frac{2}{1} = 2$.
 
-Substitute back: $\\frac{1}{2}$.
+Substitute back: $\\frac{1}{2}$.]@
 
 @academic[fact,aside:true,width:35%:Three levels of nesting nearly give $\\pi$
 Simplified from the inside out, $3 + \\frac{1}{7 + \\frac{1}{15 + \\frac{1}{1}}}$ equals $\\frac{355}{113} = 3.1415929\\ldots$, matching $\\pi$ to six decimal places. The next level of $\\pi$'s own staircase holds $292$, so stopping before it loses very little.]@

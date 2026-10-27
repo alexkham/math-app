@@ -16,7 +16,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionMVTDiagrams from '@/app/components/functions/mvt/functionMVTDiagrams'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -622,7 +622,7 @@ The chain rule extends to deeper compositions. For $f(g(h(x)))$: differentiate t
 Differentiating only the outer function gives $\\frac{d}{dx}[\\sin(x^2)] = \\cos(x^2)$, without the factor from $x^2$. The chain rule multiplies by $(x^2)' = 2x$: the derivative is $2x\\cos(x^2)$.
 [Read more](!#pitfalls)]@
 
-This is the most powerful of the basic rules. Without it, [composite functions](!/calculus/derivatives/common)—$\\sin(x^2)$, $e^{3x}$, $\\ln(\\cos x)$—cannot be differentiated. Most applications of differentiation involve the chain rule at some level.
+This is the most powerful of the basic rules. Without it, [composite functions](!/functions/composition)—$\\sin(x^2)$, $e^{3x}$, $\\ln(\\cos x)$—cannot be differentiated. Most applications of differentiation involve the chain rule at some level.
 
 @academic[punchline:However deep the composition, its derivative is the product of the derivatives of its layers, each taken at its own input.]@
 `,

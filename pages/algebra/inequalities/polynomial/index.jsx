@@ -12,6 +12,8 @@ import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -355,7 +357,8 @@ A factor $(x - r)^1$ is negative to the left of $r$ and positive to the right, s
 
 A factor $(x - r)^2$ is positive on both sides of $r$ (and zero at $r$ itself), so crossing it does not flip the sign of the product.
 
-Consider $(x + 1)(x - 3)^2 > 0$. The roots are $x = -1$ (multiplicity $1$) and $x = 3$ (multiplicity $2$). In $(-\\infty, -1)$: $(x + 1)$ is negative and $(x - 3)^2$ is positive — product is negative. In $(-1, 3)$: $(x + 1)$ is positive and $(x - 3)^2$ is positive — product is positive. In $(3, \\infty)$: both are positive — product is positive. The sign changes at $x = -1$ (odd multiplicity) but not at $x = 3$ (even multiplicity). The solution is $(-1, 3) \\cup (3, \\infty)$, which simplifies to $(-1, \\infty) \\setminus \\{3\\}$ — all $x > -1$ except $x = 3$, where the expression equals zero.
+@academic[example:Example
+Consider $(x + 1)(x - 3)^2 > 0$. The roots are $x = -1$ (multiplicity $1$) and $x = 3$ (multiplicity $2$). In $(-\\infty, -1)$: $(x + 1)$ is negative and $(x - 3)^2$ is positive — product is negative. In $(-1, 3)$: $(x + 1)$ is positive and $(x - 3)^2$ is positive — product is positive. In $(3, \\infty)$: both are positive — product is positive. The sign changes at $x = -1$ (odd multiplicity) but not at $x = 3$ (even multiplicity). The solution is $(-1, 3) \\cup (3, \\infty)$, which simplifies to $(-1, \\infty) \\setminus \\{3\\}$ — all $x > -1$ except $x = 3$, where the expression equals zero.]@
 
 @academic[pitfall,aside:true,width:35%:Flipping the sign at a double root
 Alternating the signs at every root of $(x + 1)(x - 3)^2 > 0$ makes $(-1, 3)$ negative and gives $(-\\infty, -1) \\cup (3, \\infty)$. The double root $3$ keeps the sign, so the answer is $(-1, 3) \\cup (3, \\infty)$.
@@ -398,7 +401,8 @@ Knowing the outermost signs and applying the multiplicity rule inward determines
     title: `Polynomials That Do Not Factor Over the Rationals`,
     content: `The sign chart method requires knowing the real roots, but it does not require those roots to be rational. When the polynomial has no rational roots — when the [rational root theorem](!/algebra/polynomials/rules) produces no valid candidates — irrational or approximate roots still serve as valid boundary points.
 
-The polynomial $x^3 - 2 = 0$ has the single real root $x = \\sqrt[3]{2} \\approx 1.26$. For the inequality $x^3 - 2 > 0$, this root divides the number line into two intervals. Since the leading coefficient is positive and the degree is odd, the polynomial is negative for $x < \\sqrt[3]{2}$ and positive for $x > \\sqrt[3]{2}$. The solution is $(\\sqrt[3]{2}, \\infty)$.
+@academic[example:Example
+The polynomial $x^3 - 2 = 0$ has the single real root $x = \\sqrt[3]{2} \\approx 1.26$. For the inequality $x^3 - 2 > 0$, this root divides the number line into two intervals. Since the leading coefficient is positive and the degree is odd, the polynomial is negative for $x < \\sqrt[3]{2}$ and positive for $x > \\sqrt[3]{2}$. The solution is $(\\sqrt[3]{2}, \\infty)$.]@
 
 When multiple irrational roots exist and exact values are unavailable, numerical approximations from graphing or iterative methods (bisection, Newton's method) identify the boundary points to whatever precision is needed. The sign chart is then constructed using these approximate values. The logical structure — roots create intervals, signs are constant within intervals — holds regardless of whether the roots are rational, irrational, or only known approximately.
 
@@ -649,8 +653,43 @@ const schemas = {
     }),
   };
 
+  const factorSignProfile = {
+    header: { kicker: 'sign analysis by factors', title: 'Profile of a factored cubic', formula: '$P(x) = (x + 2)(x - 1)(x - 5)$' },
+    quickStats: [ { n: '3', label: 'roots' }, { n: '4', label: 'intervals' } ],
+    graph: {
+      xRange: [-3.5, 6.5], yRange: [-26, 20],
+      points: Array.from({ length: 501 }, (_, i) => { const x = -3.5 + i * 0.02; return [Number(x.toFixed(2)), Number(((x + 2) * (x - 1) * (x - 5)).toFixed(4))]; }),
+      xTicks: [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6], yTicks: [-20, -10, 0, 10, 20],
+    },
+    features: [
+      { id: 'roots', points: [{ x: -2, y: 0 }, { x: 1, y: 0 }, { x: 5, y: 0 }] },
+    ],
+    intervals: [
+      { label: 'x + 2', spans: [ { from: null, to: -2, kind: 'neg', sign: '−' }, { from: -2, to: null, kind: 'pos', sign: '+' } ] },
+      { label: 'x − 1', spans: [ { from: null, to: 1, kind: 'neg', sign: '−' }, { from: 1, to: null, kind: 'pos', sign: '+' } ] },
+      { label: 'x − 5', spans: [ { from: null, to: 5, kind: 'neg', sign: '−' }, { from: 5, to: null, kind: 'pos', sign: '+' } ] },
+      { label: 'product', spans: [
+        { from: null, to: -2, kind: 'neg', sign: '−' },
+        { from: -2, to: 1, kind: 'pos', sign: '+' },
+        { from: 1, to: 5, kind: 'neg', sign: '−' },
+        { from: 5, to: null, kind: 'pos', sign: '+' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'roots', label: 'Roots', value: 'x = −2, 1, 5' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Negative on', value: '$(-\\infty, -2) \\cup (1, 5)$', sub: 'an odd number of negative factors' },
+        { label: 'Positive on', value: '$(-2, 1) \\cup (5, \\infty)$', sub: 'an even number of negative factors' },
+        { label: 'Solves', value: '$(x + 2)(x - 1)(x - 5) < 0$', sub: 'the negative intervals' },
+      ] },
+    ],
+  };
+
    return {
   props: {
+    factorSignProfile,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -673,7 +712,7 @@ const schemas = {
 
 
 
-   export default function PolynomialInequalitiesPage({
+   export default function PolynomialInequalitiesPage({factorSignProfile, 
   seoData,
   sectionsContent,
   introContent,
@@ -808,6 +847,16 @@ $$P(x) > 0$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `The same sign tracking, drawn: one strip for each factor of $(x + 2)(x - 1)(x - 5)$, each switching from $-$ to $+$ at its own root, and a last strip for the product, under the graph of the cubic itself.`,
+          <DiagramFrameV2
+            key={'obj3-profile'}
+            id="factor-sign-profile"
+            title="Profile of (x + 2)(x − 1)(x − 5)"
+            source="/algebra/inequalities/polynomial"
+          >
+            <FunctionAnalysis data={factorSignProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrameV2>,
+          `Read any column of strips from top to bottom: count the minus signs in the three factor rows and the product row follows, negative for an odd count and positive for an even one. The solution of $< 0$ is the two columns where the product is negative, $(-\\infty, -2) \\cup (1, 5)$, and the graph dips below the axis on exactly those intervals.`,
         ]
     },
 

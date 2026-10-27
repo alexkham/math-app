@@ -938,11 +938,12 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import traceDiagrams from '@/app/components/linear-algebra copy/matrix/traceDiagrams'
 import renderMatrixGridV3 from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid.v3'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1315,6 +1316,29 @@ export async function getStaticProps(){
   
 
 // formulas-injected: v1 | 2026-06-16 | 11 callouts (obj1 trace_definition direct, obj2 trace_linearity + trace_of_transpose inline-promote, obj4 trace_cyclic_property direct, obj5 trace_sum_of_eigenvalues direct, obj6 trace_similarity_invariance direct, obj7 frobenius_inner_product + frobenius_norm direct, obj8 trace_of_commutator direct, obj9 trace_symmetric_skew_zero inline-promote + trace_orthonormal_basis direct)
+
+// Concept introduction (section 1, "Definition") — template A, definition
+// last. Running instance: the section's 3 × 3 matrix with diagonal 3, 5, 5,
+// then a 2 × 2 pair whose products differ but share a diagonal sum. Old obj1
+// text is kept in sectionsContent.obj1, unused; its formula box with link,
+// four passages and the definition demo frame with its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciDiagTable = ciTableOpen(['matrix (rows)', 'main diagonal', 'sum']) +
+  ciRow(['(3, 1, 4), (1, 5, 9), (2, 6, 5)', '3, 5, 5', '13'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['(3, 0, 0), (7, 5, 0), (−8, 1, 5)', '3, 5, 5', '13'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['(1, 0, 0), (0, 1, 0), (0, 0, 1)', '1, 1, 1', '3'], { last: true }) +
+  '</tbody></table>'
+const ciSwapTable = ciTableOpen(['product', 'rows', 'diagonal sum']) +
+  ciRow(['AB', '(2, 1), (4, 3)', '2 + 3 = 5']) +
+  ciRow(['BA', '(3, 4), (1, 2)', '3 + 2 = 5'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1798,6 +1822,11 @@ const schemas = {
     caption: 'different sizes, different entries, the same trace',
   };
 
+  const conceptIntroFigures = {
+    diagTable: ciDiagTable,
+    swapTable: ciSwapTable,
+  };
+
   const demoUnits = {
     definition: demoUnitFrame({
       svg: traceDiagrams.sweep,
@@ -1816,6 +1845,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1835,9 +1865,72 @@ const schemas = {
    }
 
 
-export default function MatrixTracePage({seoData, sectionsContent, introContent, obj2Table, obj3Table, traceProperties, faqQuestions, schemas, demoUnits}) {
+export default function MatrixTracePage({seoData, sectionsContent, introContent, obj2Table, obj3Table, traceProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A square matrix has one special line of entries: the main diagonal, running from top left to bottom right.`,
+        content: [
+          `The entry $a_{ii}$ on that diagonal is where row $i$ meets column $i$ — the part of the matrix that sends each coordinate back to itself. Adding those entries gives a single number.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For the matrix with rows (3, 1, 4), (1, 5, 9), (2, 6, 5), the diagonal is 3, 5, 5 and its sum is 13.`,
+        content: [
+          `The off-diagonal entries can be anything: a second matrix with the same diagonal and different entries elsewhere gives the same sum.`,
+          ciTable('diagTable'),
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `The sum earns a name because it survives where the matrix itself does not.`,
+        content: [
+          `Take $A$ with rows $(1, 2), (3, 4)$ and $B$ with rows $(0, 1), (1, 0)$. The products $AB$ and $BA$ are different matrices, yet their diagonal sums are equal. Facts like this — and the link to eigenvalues — make the diagonal sum one of the few numbers that describe a matrix rather than one particular way of writing it.`,
+          ciTable('swapTable'),
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [trace](!/linear-algebra/definitions#trace) of a square matrix $A$, written $\\text{tr}(A)$, is the sum of the entries on its main diagonal.`,
+        formula: [
+          `For an $n \\times n$ matrix $A$, the trace is the sum of the entries on the main diagonal:`,
+          `@academic[formula_callout:trace_definition|Trace Definition|$$\\text{tr}(A) = \\sum_{i=1}^{n} a_{ii} = a_{11} + a_{22} + \\cdots + a_{nn}$$]@
+@academic[formulas_link:/linear-algebra/formulas#trace_definition]@`,
+        ],
+        footer: `So the trace of the first matrix above is $3 + 5 + 5 = 13$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The trace is a single number, and only square matrices have one.`,
+        content: [
+          `The trace is defined only for square matrices — a rectangular matrix has no trace.`,
+          `For example, if $A = \\begin{pmatrix} 3 & 1 & 4 \\\\ 1 & 5 & 9 \\\\ 2 & 6 & 5 \\end{pmatrix}$, then $\\text{tr}(A) = 3 + 5 + 5 = 13$. The off-diagonal entries play no role.`,
+          `The trace of the $n \\times n$ [identity matrix](!/linear-algebra/matrix/types) is $\\text{tr}(I_n) = n$, since there are $n$ ones on the diagonal. The trace of the zero matrix is $0$.`,
+          <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `Everything that follows — linearity, the cyclic property, the link to eigenvalues — is a consequence of the trace being this simple a sum.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What the trace keeps is very little: many different matrices share one.`,
+        content: `The first two matrices in the table have trace $13$ and almost nothing else in common, and every matrix with zeros on the diagonal has trace $0$. The trace cannot tell matrices apart; its value lies in what it keeps when matrices are multiplied or rewritten, as the sections on the [cyclic property](!/linear-algebra/matrix/trace#4) and [trace and eigenvalues](!/linear-algebra/matrix/trace#5) show.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers trace notation, linearity, the trace of special matrices, the cyclic property, the links to eigenvalues and similarity, and the Frobenius inner product.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1845,9 +1938,7 @@ export default function MatrixTracePage({seoData, sectionsContent, introContent,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
-          `Everything that follows — linearity, the cyclic property, the link to eigenvalues — is a consequence of the trace being this simple a sum.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

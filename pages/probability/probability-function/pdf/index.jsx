@@ -203,15 +203,15 @@ Example: [Uniform distribution](!/probability/distributions/continuous/uniform) 
 
 Example: Beta [distribution](!/probability/distributions) on $[0, 1]$. All probability density concentrates within the unit interval.
 
-**Unbounded Support:** The random variable can take values extending to infinity in one or both directions.
+**Unbounded Support:** The random variable can take values extending to infinity in both directions.
 
 Example: [Normal distribution](!/probability/distributions/continuous/normal) on $(-\\infty, \\infty)$. Support is the entire real line. Density never truly reaches zero, though it becomes negligible far from the mean.
 
-Example: [Exponential distribution](!/probability/distributions/continuous/exponential) on $[0, \\infty)$. Support starts at 0 and extends infinitely rightward.
-
 **Half-Bounded Support:** Bounded on one side, unbounded on the other.
 
-Example: Exponential, Gamma distributions on $[0, \\infty)$.
+Example: [Exponential distribution](!/probability/distributions/continuous/exponential) on $[0, \\infty)$. Support starts at 0 and extends infinitely rightward.
+
+Example: Gamma distribution on $[0, \\infty)$.
 
 ## Why Support Matters
 

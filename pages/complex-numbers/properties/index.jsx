@@ -1945,7 +1945,9 @@ The field axioms divide into several groups:
 
 • **Distributivity:** Multiplication distributes over addition
 
-The next section lists these axioms precisely and confirms that $\\mathbb{C}$ satisfies each one.`,
+The next section lists these axioms precisely and confirms that $\\mathbb{C}$ satisfies each one.
+
+@academic[punchline:Whatever follows from the field rules alone holds in $\\mathbb{C}$; rules that need order or real square roots must be checked again.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -2211,6 +2213,11 @@ $$\\arg(z^n) = n \\cdot \\arg(z)$$
 
 Raising to the $n$th power multiplies the argument by $n$. This property underlies [De Moivre's theorem](!/complex-numbers/demoivre-theorem).
 
+@academic[fact,aside:true,width:35%:Machin's $\\pi$ in one product
+Multiplying out gives $(5 + i)^4(239 - i) = 114244(1 + i)$, so the angles add up to that of $1 + i$: $4\\arctan\\frac{1}{5} - \\arctan\\frac{1}{239} = \\frac{\\pi}{4}$. John Machin used this in 1706 to compute $\\pi$ to 100 decimal places.]@
+
+The power rule turns sums of angles into products of numbers. The number $5 + i$ has argument $\\arctan\\frac{1}{5}$, so $(5 + i)^4$ has argument $4\\arctan\\frac{1}{5}$, and a further factor $239 - i$ subtracts $\\arctan\\frac{1}{239}$. Whatever such a combination of angles adds up to can be read off the single number that the product produces.
+
 ## Argument of a Conjugate
 
 @academic[formula_callout:Argument of Conjugate
@@ -2299,6 +2306,11 @@ Then $i \\cdot i > 0$, so $i^2 > 0$, meaning $-1 > 0$. But this contradicts $1 >
 Then $-i > 0$, so $(-i)(-i) > 0$, meaning $i^2 > 0$, so $-1 > 0$. Same contradiction.
 
 Neither case works. The number $i$ cannot be consistently placed relative to $0$, and this single case already rules out any ordering of $\\mathbb{C}$ compatible with the field operations.
+
+@academic[fact,aside:true,width:35%:A dictionary order that fails at $i$
+Complex numbers can be put in a line: compare real parts, and break ties by imaginary parts, as a dictionary sorts words. This order even survives adding the same number to both sides, but not multiplying: $i > 0$ in it, yet $i \\cdot i = -1 < 0$.]@
+
+The argument uses only two rules that every ordered field must follow: adding the same number to both sides keeps an inequality, and the product of two positive numbers is positive. Lining up the points of the plane is not the problem in itself; the problem is doing it while keeping both rules.
 
 ## What We Can Compare
 

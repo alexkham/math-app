@@ -9,6 +9,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
@@ -190,6 +191,30 @@ const keyWords = [
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 3, "Definition of Negative Exponents") —
+    // template B, definition first. Running instance: 2^-3 = 1/8. Section 1
+    // (the motivating pattern) is left as is. Old obj3 text is kept in
+    // sectionsContent.obj3, unused; its formula box, pitfall and fact asides,
+    // five passages and the punchline are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciPowersTable = ciTableOpen(['power of 2', 'by the definition', 'value']) +
+      ciRow(['2⁻¹', '1 / 2¹', '0.5']) +
+      ciRow(['2⁻²', '1 / 2²', '0.25'], { shade: true }) +
+      ciRow(['2⁻³', '1 / 2³', '0.125'], { color: '#2563EB', cols: [2] }) +
+      ciRow(['2⁻⁴', '1 / 2⁴', '0.0625'], { shade: true, last: true }) +
+      '</tbody></table>'
+    const ciLawsTable = ciTableOpen(['product', 'by the definition', 'by adding exponents', 'agree?']) +
+      ciRow(['2³ · 2⁻³', '8 · 1/8 = 1', '2⁰ = 1', 'yes']) +
+      ciRow(['2⁵ · 2⁻³', '32 · 1/8 = 4', '2² = 4', 'yes'], { shade: true }) +
+      ciRow(['2⁻² · 2⁻³', '1/4 · 1/8 = 1/32', '2⁻⁵ = 1/32', 'yes'], { last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 obj0: {
@@ -637,6 +662,10 @@ const schemas = {
 
 return {
   props: {
+    conceptIntroFigures: {
+      powersTable: ciPowersTable,
+      lawsTable: ciLawsTable,
+    },
     sectionsContent,
     introContent,
     obj1Table,
@@ -657,9 +686,78 @@ return {
 
 // export default function NegativeExponentsPage({seoData,sectionsContent , introContent}) {
 
-export default function NegativeExponentsPage({seoData, sectionsContent, introContent, obj1Table, obj5Table, summaryTable, faqQuestions, schemas}) {
+export default function NegativeExponentsPage({seoData, sectionsContent, introContent, obj1Table, obj5Table, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 3 concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `"Multiply 2 by itself −3 times" means nothing — yet expressions like 2⁻³ turn up constantly.`,
+        content: [
+          `Counting copies works for $2^3 = 2 \\cdot 2 \\cdot 2$, but there is no way to write down minus three copies of anything. Scientific notation, decimals and the exponent rules all produce negative exponents anyway, so they need a meaning — like a thermometer scale that has to keep going below zero.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [negative exponent](!/algebra/definitions#negative_exponent) gives the reciprocal of the matching positive power: for nonzero $a$ and natural $n$, $a^{-n}$ is $\\dfrac{1}{a^n}$.`,
+        formula: [
+          `For any nonzero $a$ and any natural number $n$:`,
+          `@academic[formula_callout:Definition of Negative Exponents
+$$a^{-n} = \\frac{1}{a^n}$$]@`,
+        ],
+        footer: `So $2^{-3} = \\dfrac{1}{2^3} = \\dfrac{1}{8}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A negative power is an ordinary positive number — a fraction, not a negative.`,
+        content: [
+          `A negative exponent produces the reciprocal of the corresponding positive power. The expression $2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$. The expression $5^{-1} = \\frac{1}{5}$. The expression $10^{-4} = \\frac{1}{10000} = 0.0001$.`,
+          `@academic[pitfall,aside:true,width:35%:Making the result negative
+Reading the minus in $2^{-3}$ as a sign gives $-8$ or $-\\frac{1}{8}$. The minus asks only for a reciprocal: $2^{-3} = \\frac{1}{8}$, a positive number.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each step down in the exponent halves the value, from 2⁻¹ = 0.5 to 2⁻⁴ = 0.0625.`,
+        content: [
+          ciTable('powersTable'),
+          `Negative powers of $10$ are the place values of decimals: $0.375 = 3 \\cdot 10^{-1} + 7 \\cdot 10^{-2} + 5 \\cdot 10^{-3}$. Computers store numbers the same way in base $2$, whose places are $2^{-1} = 0.5$, $2^{-2} = 0.25$, $2^{-3} = 0.125$ and so on, each half of the one before. The number $0.375$ fits this system exactly, as $2^{-2} + 2^{-3}$.`,
+          `@academic[fact,aside:true,width:35%:Why $0.1 + 0.2$ misses $0.3$
+No finite sum of negative powers of $2$ equals $\\frac{1}{10}$: such a sum is a fraction over a power of $2$, which can never cancel the factor $5$ in $10$. Stored in base $2$, both $0.1$ and $0.2$ are rounded, and JavaScript or Python report $0.1 + 0.2$ as $0.30000000000000004$.]@`,
+        ],
+      },
+      {
+        id: 'verify',
+        lead: `The definition promised to keep the exponent rules working — and products of powers still add their exponents.`,
+        content: [
+          `This definition is not arbitrary — it is the only one compatible with the product rule. The product $a^3 \\cdot a^{-3}$ must equal $a^{3+(-3)} = a^0 = 1$. For that to hold, $a^{-3}$ must be the value that multiplies with $a^3$ to give $1$ — which is $\\frac{1}{a^3}$.`,
+          ciTable('lawsTable'),
+          `@academic[punchline:A negative exponent stands for a reciprocal, and the product rule leaves no other choice.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Scope: the base must not be zero, and with a fractional base the reciprocal flips the fraction.`,
+        content: [
+          `$0^{-1}$ would be $\\frac{1}{0}$, which does not exist, so the definition needs $a \\neq 0$.`,
+          `When the base is itself a fraction, the reciprocal interpretation applies in full. The expression $\\left(\\frac{1}{3}\\right)^{-2}$ means the reciprocal of $\\left(\\frac{1}{3}\\right)^2 = \\frac{1}{9}$, which is $9$. Equivalently, $\\left(\\frac{1}{3}\\right)^{-2} = 3^2 = 9$. A negative exponent on a fraction flips it before raising to the positive power.`,
+          `Two minus signs at once — a negative exponent in a denominator, or a negative power of a negative number — are sorted out in [double negatives and reciprocals](!/algebra/powers/negative-exponents#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, double negatives and reciprocals, a check that every exponent law still holds, and worked examples.`,
+      },
+    ],
+  }
     
   const genericSections=[
       {
@@ -698,8 +796,7 @@ export default function NegativeExponentsPage({seoData, sectionsContent, introCo
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
-          sectionsContent.obj3.content,
-          `@academic[punchline:A negative exponent stands for a reciprocal, and the product rule leaves no other choice.]@`,
+          <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
         ]
     },
     {

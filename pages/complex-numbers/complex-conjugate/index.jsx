@@ -1278,6 +1278,8 @@ import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbe
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1854,6 +1856,9 @@ notation: {
   before: ``,
   content: `The [complex plane](!/complex-numbers/geometric-representation) transforms the conjugate from an algebraic rule into a visible action. If $z = a + bi$ corresponds to the point $(a, b)$, then $\\bar{z} = a - bi$ corresponds to $(a, -b)$. The horizontal coordinate stays fixed while the vertical coordinate negates. This is reflection across the real axis.
 
+@academic[fact,aside:true,width:35%:The mirror has no complex derivative
+The map $z \\mapsto \\bar{z}$ is differentiable at no point: its difference quotient $\\frac{\\overline{z + h} - \\bar{z}}{h} = \\frac{\\bar{h}}{h}$ is $1$ for real $h$ and $-1$ for imaginary $h$. A complex derivative can only rotate and scale small shapes, and a mirror turns them over.]@
+
 Picture the real axis as a horizontal mirror. Every point above the axis has a mirror image below; every point below has an image above. The conjugate operation sends each complex number to its reflection. The point $2 + 3i$ at coordinates $(2, 3)$ reflects to $2 - 3i$ at $(2, -3)$. The point $-1 - 4i$ at $(-1, -4)$ reflects to $-1 + 4i$ at $(-1, 4)$.
 
 Points lying directly on the mirror remain stationary. These are precisely the real numbers — they have no vertical displacement to reverse, so conjugation leaves them unchanged. The number $5$ sits at $(5, 0)$ on the real axis, and its reflection lands at the same spot. This geometric fact corresponds to the algebraic observation that $\\bar{a} = a$ for any real $a$.
@@ -1979,6 +1984,9 @@ $$z \\in \\mathbb{R} \\iff z = \\overline{z}$$
 
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
+
+@academic[fact,aside:true,width:35%:Half of a real signal's spectrum is spare
+For real samples $x_n$, the Fourier transform satisfies $X_{N-k} = \\overline{X_k}$: conjugation leaves each $x_n$ alone and only flips the sign in $e^{-2\\pi i kn/N}$. So $N$ real samples need only about $\\frac{N}{2}$ of the outputs, and fast routines compute just those.]@
 
 For the forward direction, suppose $z$ is real, meaning $z = a + 0i = a$ for some $a \\in \\mathbb{R}$. Then $\\bar{z} = a - 0i = a = z$. The conjugate equals the original.
 
@@ -2406,10 +2414,29 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj7): the section's complete example, a quotient brought to standard form by the conjugate
+  const conjugateDivisionSteps = {
+    header: {
+      kicker: 'Applications to division',
+      title: 'Dividing by multiplying with the conjugate',
+      lede: 'The identity $z \\cdot \\bar{z} = |z|^2$ guarantees the denominator becomes real.',
+    },
+    steps: [
+      { id: 'quotient', label: 'Complex denominator', stamp: 'Before', expr: '$\\dfrac{3 + 2i}{1 - 4i}$',
+        move: { label: 'Multiply by the conjugate', note: 'numerator and denominator both by 1 + 4i' } },
+      { id: 'conjugate', label: 'Conjugate in', expr: '$\\dfrac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)}$',
+        move: { label: 'Multiply out', note: 'denominator 1 − 16i² = 17, numerator 3 + 14i + 8i² = −5 + 14i' } },
+      { id: 'real', label: 'Real denominator', expr: '$\\dfrac{-5 + 14i}{17}$',
+        move: { label: 'Divide each part by 17', note: 'a real denominator only scales the two components' } },
+      { id: 'standard', label: 'Standard form', stamp: 'After', expr: '$-\\dfrac{5}{17} + \\dfrac{14}{17}\\,i$' },
+    ],
+  };
+
   return {
   props:{
     demoUnits,
     conceptIntroFigures,
+    conjugateDivisionSteps,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2440,7 +2467,7 @@ export default function ComplexConjugatePage({
   obj5Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits, conceptIntroFigures
+  schemas, demoUnits, conceptIntroFigures, conjugateDivisionSteps
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2573,6 +2600,7 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          `@academic[punchline:Conjugation passes through every arithmetic operation, so conjugating an expression means conjugating each of its pieces.]@`,
         ]
     },
     {
@@ -2616,6 +2644,20 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
           sectionsContent.obj7.content,
                   <div key={'unit-division'} dangerouslySetInnerHTML={{ __html: demoUnits.division }} />,
           `Without the conjugate there would be no way to write a quotient in standard form.`,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="conjugate-division-steps"
+            title="Dividing (3 + 2i) by (1 − 4i)"
+            source="/complex-numbers/complex-conjugate"
+            before={"The section's complete example, one move at a time. Watch the denominator: the conjugate turns it into the real number $17$."}
+            after={"The same moves work for any quotient: the denominator always becomes $|z|^2$, here $1^2 + 4^2 = 17$, and the result lands in [standard form](!/complex-numbers/algebraic-form) $a + bi$."}
+          >
+            <BeforeAfter
+              data={conjugateDivisionSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2624,6 +2666,7 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@academic[punchline:Real coefficients force non-real roots into mirror pairs, and each pair multiplies into a real quadratic factor.]@`,
         ]
     },
     {

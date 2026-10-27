@@ -1573,8 +1573,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
 import renderCurveFeatureV3 from '@/app/utils/illustrations/trigonometry/curves/curveFeature.v3'
 import renderRelationMap from '@/app/utils/illustrations/trigonometry/relations/relationMap'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
 export async function getStaticProps(){
@@ -2243,8 +2244,6 @@ const sectionsContent={
 - [Unit Circle](!/trigonometry/definitions#unit_circle) — the circle $x^2 + y^2 = 1$ that defines the functions for all angles
 - [Periodic Function](!/trigonometry/definitions#periodic_function) — a function repeating at regular intervals
 
-## Formulas Used 
-
 ## Reciprocal Identities
  
 - [Cosecant Reciprocal Identity](!/trigonometry/formulas#cosecant_reciprocal_identity) — $\\csc\\theta = \\frac{1}{\\sin\\theta}$
@@ -2295,6 +2294,9 @@ $$\\sin\\theta = \\frac{\\text{side opposite to }\\theta}{\\text{hypotenuse}}$$
 /trigonometry/formulas]@
 
 This ratio is bounded above by 1 (the hypotenuse is always the longest side) and is positive for any acute angle. The right-triangle definition is restricted to $0 < \\theta < \\frac{\\pi}{2}$; the [unit circle](!/trigonometry/unit-circle) extends the function to every real number by reinterpreting $\\sin\\theta$ as the $y$-coordinate of the point on the circle at angle $\\theta$.
+
+@academic[fact,aside:true,width:35%:Sine began as half a bowstring
+Indian astronomers tabulated the half-chord of a circle, the vertical leg in the unit circle picture, and called it jyā, a bowstring. Arabic copied it as jb, written without vowels and later read as jayb, a fold or pocket, which Latin translated as sinus.]@
 
 Once extended, the domain of sine becomes the entire real line, and its range is the closed interval $[-1, 1]$. The function equals zero whenever the terminal side of $\\theta$ lies on the $x$-axis — at $\\theta = n\\pi$ for every integer $n$. It reaches its maximum of $1$ at $\\theta = \\frac{\\pi}{2} + 2n\\pi$ and its minimum of $-1$ at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$.
 
@@ -2524,6 +2526,9 @@ The range of secant mirrors that of cosecant: $(-\\infty, -1] \\cup [1, \\infty)
 
 Secant is an even function: $\\sec(-\\theta) = \\frac{1}{\\cos(-\\theta)} = \\frac{1}{\\cos\\theta} = \\sec\\theta$, since cosine is even. Its period is $2\\pi$.
 
+@academic[fact,aside:true,width:35%:Named after lines on the circle
+For an acute $\\theta$, the line tangent to the unit circle at $(1, 0)$ meets the terminal side at height $\\tan\\theta$, and the segment from the centre to that point, part of a secant line, has length $\\sec\\theta$. Thomas Fincke named both functions after these lines in 1583. Their right triangle, with legs $1$ and $\\tan\\theta$, is where $1 + \\tan^2\\theta = \\sec^2\\theta$ comes from.]@
+
 The Pythagorean identity $1 + \\tan^2\\theta = \\sec^2\\theta$ connects secant directly to tangent. This relationship is heavily used in the simplification of [identities](!/trigonometry/identities) and in calculus, where $\\sec^2\\theta$ appears as the derivative of $\\tan\\theta$ and $\\sec\\theta\\tan\\theta$ appears as the derivative of $\\sec\\theta$.
 
 For acute angles, the right-triangle definition always gives a value greater than 1, reflecting that the hypotenuse exceeds any other side. Like cosecant, secant always has absolute value at least 1.`,
@@ -2741,7 +2746,12 @@ $$\\csc\\theta = \\frac{1}{\\sin\\theta} = \\frac{5}{3}$$]@
 
 The quadrant information is essential. Without it, $\\cos\\theta$ could be $+\\frac{4}{5}$ or $-\\frac{4}{5}$, and half the remaining values would change sign. The Pythagorean identity determines the magnitude; the quadrant determines the sign.
 
-This process also works starting from tangent. If $\\tan\\theta = -\\frac{7}{24}$ and $\\cos\\theta > 0$ (placing $\\theta$ in Quadrant IV), then a right triangle with legs 7 and 24 has hypotenuse $\\sqrt{7^2 + 24^2} = 25$. In Quadrant IV, sine is negative and cosine is positive, so $\\sin\\theta = -\\frac{7}{25}$ and $\\cos\\theta = \\frac{24}{25}$. The reciprocals and remaining ratios follow immediately.
+This process also works starting from tangent.
+
+@academic[example:Example
+If $\\tan\\theta = -\\frac{7}{24}$ and $\\cos\\theta > 0$ (placing $\\theta$ in Quadrant IV), then a right triangle with legs 7 and 24 has hypotenuse $\\sqrt{7^2 + 24^2} = 25$. In Quadrant IV, sine is negative and cosine is positive, so $\\sin\\theta = -\\frac{7}{25}$ and $\\cos\\theta = \\frac{24}{25}$.]@
+
+The reciprocals and remaining ratios follow immediately.
 
 The technique extends to starting from secant, cosecant, or cotangent — the Pythagorean [identities](!/trigonometry/identities) $1 + \\tan^2\\theta = \\sec^2\\theta$ and $1 + \\cot^2\\theta = \\csc^2\\theta$ play the analogous role.`,
     before: ``,
@@ -2996,9 +3006,42 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
     ],
   };
 
+  // BeforeAfter (obj7): the section's sec θ tan θ, rewritten in sine and cosine
+  const sineCosineBeforeAfter = {
+    header: {
+      kicker: 'Reciprocal and quotient relationships',
+      title: 'Write everything in sine and cosine',
+      lede: 'One of the most reliable first steps when simplifying a trigonometric expression.',
+    },
+    before: {
+      form: 'Mixed functions',
+      expr: '$\\sec\\theta\\,\\tan\\theta$',
+      meta: 'Two different functions, neither of them sine or cosine',
+    },
+    after: {
+      form: 'Sine and cosine only',
+      expr: '$\\dfrac{\\sin\\theta}{\\cos^2\\theta}$',
+      meta: 'One fraction in the two base functions',
+    },
+    operation: {
+      name: 'Rewrite',
+      desc: 'reciprocal for secant, quotient for tangent',
+      detailsLabel: 'Show working',
+      detailsTitle: '',
+      details: '$$\\sec\\theta\\,\\tan\\theta = \\frac{1}{\\cos\\theta} \\cdot \\frac{\\sin\\theta}{\\cos\\theta} = \\frac{\\sin\\theta}{\\cos^2\\theta}$$',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'Each function was replaced by its form in sine and cosine, and the product collapsed into one fraction.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The value, at every angle where both secant and tangent are defined.' },
+    ],
+  };
+
    return {
       props:{
     sixTrigOutline,
+    sineCosineBeforeAfter,
     demoUnits,
          sectionsContent,
          introContent,
@@ -3035,7 +3078,7 @@ Whether you are analyzing waveforms, studying rotations, or decomposing function
     }
    }
 
-export default function FunctionsPage({sixTrigOutline, seoData,sectionsContent , introContent, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function FunctionsPage({sixTrigOutline, sineCosineBeforeAfter, seoData,sectionsContent , introContent, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3143,6 +3186,19 @@ export default function FunctionsPage({sixTrigOutline, seoData,sectionsContent ,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="sine-cosine-before-after"
+            title="Rewriting sec θ tan θ in sine and cosine"
+            source="/trigonometry/functions"
+            before={"The table lists the relationships; here they are used once, on the section's example."}
+            after={"Any expression in the six functions can be rewritten this way, which is why a proof can usually be finished in terms of $\\sin\\theta$ and $\\cos\\theta$ alone. The [identities](!/trigonometry/identities) page builds on the same two functions."}
+          >
+            <BeforeAfter
+              data={sineCosineBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
 
@@ -3175,6 +3231,7 @@ export default function FunctionsPage({sixTrigOutline, seoData,sectionsContent ,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+          `@academic[punchline:Every angle is evaluated at an acute reference angle; the quadrant only decides the sign.]@`,
         ]
     },
     {

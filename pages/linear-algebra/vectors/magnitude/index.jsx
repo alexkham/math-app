@@ -809,11 +809,13 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magnitudeDiagrams'
 import renderVectorArrowsV3 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v3'
+import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1108,6 +1110,25 @@ const summaryTable = `
 // tables-optimized: v4 | 2026-05-22 | 2 tables (obj3 aggregation, obj7 summary capstone)
 
 // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "Magnitude in Two and Three Dimensions") —
+// template A, definition last. Running instance: v = (4, 3), length 5. Old
+// obj1 text is kept in sectionsContent.obj1, unused; its two formula boxes,
+// pitfall aside, six passages and the norm demo frame with its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciLegsTable = ciTableOpen(['vector', 'legs', 'legs squared and added', 'length']) +
+  ciRow(['(4, 3)', '4 and 3', '16 + 9 = 25', '5'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['(1, 1)', '1 and 1', '1 + 1 = 2', '√2 ≈ 1.414'], { shade: true }) +
+  ciRow(['(0, −2)', '0 and 2', '0 + 4 = 4', '2']) +
+  ciRow(['(5, 12)', '5 and 12', '25 + 144 = 169', '13'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1511,6 +1532,20 @@ const schemas = {
     caption: 'every unit vector ends on the unit circle',
   };
 
+  const vaCiLegs = {
+    kind: 'copies', vector: [4, 3], nx: 6, ny: 5,
+    style: { vector: '#2563EB', negation: '#C0392B', text: '#1E3A5F' },
+    svgTitle: 'The vector (4, 3) with its legs 4 and 3: the arrow is the hypotenuse, length 5',
+    tails: [[1, 1]],
+    labels: [['v = (4, 3), length 5', 1.6, 3.4]],
+    note: 'legs 4 across and 3 up; the arrow is the hypotenuse',
+    caption: 'a vector and the right triangle its components make',
+  };
+  const conceptIntroFigures = {
+    legs: renderVectorArrows(vaCiLegs),
+    legsTable: ciLegsTable,
+  };
+
   const demoUnits = {
     norm: demoUnitFrame({
       svg: magnitudeDiagrams.root,
@@ -1537,6 +1572,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     normProperties,
@@ -1553,9 +1589,81 @@ const schemas = {
   }
 }
    }
-export default function VectorMagnitudePage({seoData, sectionsContent, introContent, normProperties, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function VectorMagnitudePage({seoData, sectionsContent, introContent, normProperties, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Every arrow has a length — but a vector is given by its components, not by a length.`,
+        content: [
+          `$\\mathbf{v} = (4, 3)$ says "4 across, 3 up". How long is the arrow from its tail to its tip? The components do not say so directly.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For v = (4, 3) the components are the legs of a right triangle, and the arrow is its hypotenuse: length 5.`,
+        content: [
+          `Going 4 across and then 3 up traces two sides of a right triangle; the arrow cuts straight across. With legs 4 and 3 the long side is $\\sqrt{16 + 9} = 5$. The same works for any vector in the plane.`,
+          ciTable('legsTable'),
+        ],
+        visual: ciSvg('legs'),
+      },
+      {
+        id: 'forcing',
+        lead: `The length is forced by the Pythagorean theorem, because the two components are always perpendicular.`,
+        content: [
+          `This is a direct application of the Pythagorean theorem — the horizontal component $v_1$ and the vertical component $v_2$ form the two legs, and the vector itself is the hypotenuse.`,
+          `In $\\mathbb{R}^3$, the same reasoning applies in two stages. A vector $\\mathbf{v} = (v_1, v_2, v_3)$ can be decomposed into a component in the $xy$-plane with length $\\sqrt{v_1^2 + v_2^2}$ and a vertical component $v_3$. Applying the Pythagorean theorem a second time gives:`,
+          `@academic[formula_callout:Magnitude in Two and Three Dimensions
+$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + v_3^2}$$]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [magnitude](!/linear-algebra/definitions#magnitude) (or norm) of a vector $\\mathbf{v}$, written $\\|\\mathbf{v}\\|$, is its length: the square root of the sum of the squares of its components.`,
+        formula: [
+          `In $\\mathbb{R}^2$, the magnitude of a vector $\\mathbf{v} = (v_1, v_2)$ is the length of the hypotenuse of the right triangle formed by its components:`,
+          `@academic[formula_callout:Magnitude in Two and Three Dimensions
+$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2}$$]@`,
+        ],
+        footer: `So $\\|(4, 3)\\| = 5$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The magnitude is a single number, never negative, that ignores direction.`,
+        content: [
+          `For a concrete case in three dimensions, the vector $\\mathbf{v} = (2, -1, 2)$ has magnitude $\\sqrt{2^2 + (-1)^2 + 2^2} = \\sqrt{4 + 1 + 4} = \\sqrt{9} = 3$. Every component enters the sum as a square, so the sign of the middle entry plays no part in the length.`,
+          `The geometric intuition is the same in both cases: the magnitude is the straight-line distance from the tail of the vector to its tip. The only difference is the number of perpendicular components being combined.`,
+          <div key={'unit-norm'} dangerouslySetInnerHTML={{ __html: demoUnits.norm }} />,
+          `The same sum-of-squares pattern is what the next section generalises to any number of dimensions.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The square root goes over the whole sum, not over each term.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Taking the root term by term
+Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4 = 7$, gives the wrong length for $(3, -4)$. The root applies to the whole sum: $\\|(3, -4)\\| = \\sqrt{9 + 16} = \\sqrt{25} = 5$.
+[Read more](!#pitfalls)]@`,
+          `Taking roots term by term just adds up the absolute values of the components, which is a different measure of size. The [general norm](!/linear-algebra/vectors/magnitude#2) carries the correct formula to $\\mathbb{R}^n$.`,
+          `To compute the magnitude of a specific vector, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers norm notation, the general norm in $n$ dimensions, its properties, distance between vectors, unit vectors and normalization.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1563,9 +1671,7 @@ export default function VectorMagnitudePage({seoData, sectionsContent, introCont
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-norm'} dangerouslySetInnerHTML={{ __html: demoUnits.norm }} />,
-          `The same sum-of-squares pattern is what the next section generalises to any number of dimensions.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

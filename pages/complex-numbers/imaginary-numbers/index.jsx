@@ -1098,7 +1098,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
 import iPowersDiagrams from '@/app/components/calculators/complex-numbers/iPowersDiagrams'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
@@ -1587,7 +1587,13 @@ The negative sign transforms into the imaginary unit, while the magnitude passes
 Simplifying $\\sqrt{-9}$ to $-3$ moves the minus sign outside the root, but $(-3)^2 = 9$, not $-9$. The root is $\\sqrt{-9} = i\\sqrt{9} = 3i$, since $(3i)^2 = 9i^2 = -9$.
 [Read more](!#pitfalls)]@
 
-Consider $\\sqrt{-4}$. Applying the rule: $\\sqrt{-4} = i\\sqrt{4} = i \\cdot 2 = 2i$. The answer $2i$ satisfies verification, since $(2i)^2 = 4i^2 = 4(-1) = -4$. For $\\sqrt{-7}$, where the radicand has no perfect square factor, we obtain $\\sqrt{-7} = i\\sqrt{7}$, leaving the irrational portion intact. A more involved example: $\\sqrt{-12} = i\\sqrt{12} = i\\sqrt{4 \\cdot 3} = 2i\\sqrt{3}$, combining the extraction of $i$ with standard simplification of the remaining radical.
+@academic[example:Example
+Consider $\\sqrt{-4}$. Applying the rule: $\\sqrt{-4} = i\\sqrt{4} = i \\cdot 2 = 2i$. The answer $2i$ satisfies verification, since $(2i)^2 = 4i^2 = 4(-1) = -4$.]@
+
+For $\\sqrt{-7}$, where the radicand has no perfect square factor, we obtain $\\sqrt{-7} = i\\sqrt{7}$, leaving the irrational portion intact. A more involved example: $\\sqrt{-12} = i\\sqrt{12} = i\\sqrt{4 \\cdot 3} = 2i\\sqrt{3}$, combining the extraction of $i$ with standard simplification of the remaining radical.
+
+@academic[fact,aside:true,width:35%:Even Euler multiplied the roots
+In his 1770 algebra textbook, Euler wrote $\\sqrt{-1} \\cdot \\sqrt{-4} = \\sqrt{4} = 2$. Taking out $i$ first gives $i \\cdot 2i = 2i^2 = -2$: the product rule for roots misled even him.]@
 
 One critical warning accompanies this technique: the familiar product rule for radicals, $\\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{ab}$, fails when both radicands are negative. A naive calculation might proceed as $\\sqrt{-1} \\cdot \\sqrt{-1} = \\sqrt{(-1)(-1)} = \\sqrt{1} = 1$. But this contradicts the definition — we know $\\sqrt{-1} = i$, and $i \\cdot i = i^2 = -1$, not $+1$. The error arises because the product rule assumes non-negative radicands. When negatives appear, extract $i$ from each factor first, then multiply: $\\sqrt{-1} \\cdot \\sqrt{-1} = i \\cdot i = i^2 = -1$. This trap catches many students; the safest practice converts all negative square roots to $i$-form before performing any multiplication.`,
   after: ``,
@@ -1699,7 +1705,10 @@ Taking $i^{100} = -1$ because $100$ is even treats the powers like $(-1)^n$, whi
 
 The computational shortcut exploits this four-cycle through division with remainder. To evaluate $i^k$ for any positive integer $k$, divide $k$ by $4$ and examine the remainder $r$. The answer matches $i^r$: remainder $0$ yields $1$, remainder $1$ yields $i$, remainder $2$ yields $-1$, and remainder $3$ yields $-i$.
 
-Consider $i^{323}$. Dividing $323$ by $4$ produces $80$ with remainder $3$. Therefore $i^{323} = i^3 = -i$. The enormous exponent collapses to a single-digit calculation. Similarly, $i^{500}$ has remainder $0$ when divided by $4$, so $i^{500} = i^0 = 1$. For $i^{67}$, the division $67 ÷ 4$ leaves remainder $3$, giving $i^{67} = -i$.
+@academic[example:Example
+Consider $i^{323}$. Dividing $323$ by $4$ produces $80$ with remainder $3$. Therefore $i^{323} = i^3 = -i$.]@
+
+The enormous exponent collapses to a single-digit calculation. Similarly, $i^{500}$ has remainder $0$ when divided by $4$, so $i^{500} = i^0 = 1$. For $i^{67}$, the division $67 ÷ 4$ leaves remainder $3$, giving $i^{67} = -i$.
 
 @academic[pitfall,aside:true,width:35%:Ignoring the sign of the exponent
 Evaluating $i^{-3}$ as $i^3 = -i$ drops the minus sign of the exponent. In fact $i^{-3} = \\frac{1}{i^3} = \\frac{1}{-i} = i$; adding $4$ to the exponent gives the same, $i^{-3} = i^{1} = i$.
@@ -1716,7 +1725,10 @@ Negative exponents follow the same logic after one preliminary step. Recall that
     obj6: {
   title: `Geometric Visualization: The Imaginary Axis`,
   before: ``,
-  content: `Numbers become tangible when we can see them. The real numbers arrange themselves along a horizontal line — the familiar number line from elementary mathematics, stretching from negative infinity on the left through zero to positive infinity on the right. Pure imaginary numbers demand their own territory, and they claim the perpendicular direction: a vertical axis passing through zero.
+  content: `@academic[fact,aside:true,width:35%:Gauss would have called it lateral
+Descartes named such roots imaginary in 1637, and the name stuck. In 1831 Gauss wrote that calling $+1$, $-1$ and $\\sqrt{-1}$ the direct, inverse and lateral units would have removed the mystery: $i$ simply points sideways.]@
+
+Numbers become tangible when we can see them. The real numbers arrange themselves along a horizontal line — the familiar number line from elementary mathematics, stretching from negative infinity on the left through zero to positive infinity on the right. Pure imaginary numbers demand their own territory, and they claim the perpendicular direction: a vertical axis passing through zero.
 
 The [complex plane](!/complex-numbers/geometric-representation) combines these two axes into a unified coordinate system. The horizontal axis carries real numbers, while the vertical axis carries pure imaginary numbers. Every point in this plane represents a complex number, with its horizontal position indicating the real part and its vertical position indicating the imaginary part.
 
@@ -1724,7 +1736,9 @@ Pure imaginary numbers occupy the vertical axis exclusively. The number $3i$ sit
 
 This geometric arrangement reveals a beautiful symmetry in the structure of complex numbers. Real numbers provide the "width" of the system, extending left and right from the origin. Imaginary numbers provide the "height," extending up and down. Together they span every direction, allowing complex numbers to fill the entire plane rather than merely a line. A general complex number $a + bi$ appears at coordinates $(a, b)$, combining horizontal and vertical components.
 
-The origin deserves special attention in this picture. Located at $(0, 0)$, it represents the number $0 = 0 + 0i$. This single point lies on both axes simultaneously — it belongs to the real numbers (being located on the horizontal axis) and to the pure imaginary numbers (being located on the vertical axis). No other point shares this property; every other location commits to one category or exists off both axes entirely as a genuinely complex number with nonzero parts.`,
+The origin deserves special attention in this picture. Located at $(0, 0)$, it represents the number $0 = 0 + 0i$. This single point lies on both axes simultaneously — it belongs to the real numbers (being located on the horizontal axis) and to the pure imaginary numbers (being located on the vertical axis). No other point shares this property; every other location commits to one category or exists off both axes entirely as a genuinely complex number with nonzero parts.
+
+@academic[punchline:Pure imaginary numbers form a second number line at right angles to the real one, meeting it only at 0.]@`,
   after: ``,
   link: '',
 },

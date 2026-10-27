@@ -2023,7 +2023,10 @@ Negation and [conjugation](!/complex-numbers/complex-conjugate) commute:
 @academic[formula_callout:Properties of Additive Inverse
 $$-\\overline{z} = \\overline{-z}$$]@
 
-It does not matter whether you conjugate first and then negate, or negate first and then conjugate. For $z = 3 + 2i$, we have $\\overline{z} = 3 - 2i$ and $-\\overline{z} = -3 + 2i$. Alternatively, $-z = -3 - 2i$ and $\\overline{-z} = -3 + 2i$. Both paths arrive at the same destination.
+It does not matter whether you conjugate first and then negate, or negate first and then conjugate.
+
+@academic[example:Example
+For $z = 3 + 2i$, we have $\\overline{z} = 3 - 2i$ and $-\\overline{z} = -3 + 2i$. Alternatively, $-z = -3 - 2i$ and $\\overline{-z} = -3 + 2i$. Both paths arrive at the same destination.]@
 
 The [modulus](!/complex-numbers/absolute-value) is unchanged:
 
@@ -2079,13 +2082,18 @@ For $z = 0 = 0 + 0i$, the additive inverse is:
 @academic[formula_callout:The Zero Case
 $$-0 = -0 - 0i = 0 + 0i = 0$$]@
 
+@academic[fact,aside:true,width:35%:Floating point keeps a minus zero
+The IEEE 754 standard stores $-0$ apart from $0$: the two compare equal, but the sign stays. Its designer William Kahan kept it so complex functions know which side of a cut a value came from: in Python, the square root of $-4 + 0i$ is $2i$, but that of $-4 - 0i$ is $-2i$.]@
+
 Negating zero returns zero. The equation $0 + 0 = 0$ confirms the defining property: zero added to its inverse yields zero.
 
 No other complex number shares this property. For any $z \\neq 0$, the additive inverse $-z$ differs from $z$. If $z = a + bi$ with at least one of $a$ or $b$ nonzero, then $-z = -a - bi$ cannot equal $z$ because either $-a \\neq a$ or $-b \\neq b$ (or both).
 
 Zero also serves as the additive identity — the unique complex number satisfying $z + 0 = z$ for every $z$. These two roles are connected. The additive identity must be its own inverse: if $0 + 0 = 0$ follows from the identity property, and $0 + (-0) = 0$ follows from the inverse property, then $0 = -0$.
 
-Geometrically, zero sits at the origin of the complex plane. Reflection through the origin maps the origin to itself. Every other point moves to a different location; the origin alone stays fixed.`,
+Geometrically, zero sits at the origin of the complex plane. Reflection through the origin maps the origin to itself. Every other point moves to a different location; the origin alone stays fixed.
+
+@academic[punchline:Zero is the only complex number that is its own opposite, the one point a half turn about the origin leaves in place.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -2113,7 +2121,9 @@ This matches the component-wise subtraction rule: subtract real parts and subtra
 
 The connection explains why subtraction inherits certain behaviors. Subtraction is not commutative: $z_1 - z_2 \\neq z_2 - z_1$ in general, because $z_1 + (-z_2) \\neq z_2 + (-z_1)$ unless $z_1 = z_2$. Subtraction is not associative in the usual sense, but the expression $z_1 - z_2 - z_3$ is unambiguous when read left to right as $(z_1 - z_2) - z_3 = z_1 + (-z_2) + (-z_3)$.
 
-For detailed coverage of subtraction and other arithmetic, see [operations](!/complex-numbers/operations).`,
+For detailed coverage of subtraction and other arithmetic, see [operations](!/complex-numbers/operations).
+
+@academic[punchline:Subtraction is never a new operation: subtracting a number means adding its opposite, and every rule for differences follows from that.]@`,
   before: ``,
   after: ``,
   link: '',

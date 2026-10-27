@@ -12,7 +12,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 
@@ -112,7 +112,7 @@ const keyWords = [
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a; text-align: center;">3.14</td>
       <td style="padding: 12px 15px; color: #34495e; text-align: center;">3.15</td>
       <td style="padding: 12px 15px; color: #34495e; text-align: center;">≈ 8.815</td>
-      <td style="padding: 12px 15px; color: #34495e; text-align: center;">≈ 8.876</td>
+      <td style="padding: 12px 15px; color: #34495e; text-align: center;">≈ 8.877</td>
       <td style="padding: 12px 15px; color: #34495e; text-align: center;">≈ 0.06</td>
     </tr>
   </tbody>
@@ -196,7 +196,7 @@ $\\pi$ lies between $3$ and $4$. So $2^\\pi$ lies between $2^3 = 8$ and $2^4 = 1
 
 Narrowing: $\\pi$ lies between $3.1$ and $3.2$. So $2^\\pi$ lies between $2^{3.1} \\approx 8.574$ and $2^{3.2} \\approx 9.190$.
 
-Narrowing further: $\\pi$ lies between $3.14$ and $3.15$. So $2^\\pi$ lies between $2^{3.14} \\approx 8.815$ and $2^{3.15} \\approx 8.876$.
+Narrowing further: $\\pi$ lies between $3.14$ and $3.15$. So $2^\\pi$ lies between $2^{3.14} \\approx 8.815$ and $2^{3.15} \\approx 8.877$.
 
 Each rational approximation of $\\pi$ gives a value of $2^x$ that we already know how to compute — using [rational exponents](!/algebra/powers/rational-exponents). As the rational bounds squeeze closer to $\\pi$, the corresponding powers squeeze closer to a single value.
 
@@ -516,14 +516,14 @@ const schemas = {
       { x: 3.2, y: 2 ** 3.2, label: '2^3.2 ≈ 9.190', pos: 'se' }],
     notes: [{ x: 3.003, y: 9.85, text: '3 < π < 4 gives 8 < 2^π < 16', pos: 'e' },
       { x: 3.003, y: 9.7, text: '3.1 < π < 3.2 gives 8.574 < 2^π < 9.190', pos: 'e' },
-      { x: 3.003, y: 9.55, text: '3.14 < π < 3.15 gives 8.815 < 2^π < 8.876', pos: 'e', color: 'r' }],
+      { x: 3.003, y: 9.55, text: '3.14 < π < 3.15 gives 8.815 < 2^π < 8.877', pos: 'e', color: 'r' }],
     caption: 'Rational brackets around π squeeze 2ˣ to one value, 2^π ≈ 8.825' };
 
   const demoUnits = {
     squeeze: demoUnitFrame({
       svg: renderFunctionPlotV4(fpSqueezePi),
       caption: 'Filling in the point at x = &#960;',
-      text: 'A close-up of y = 2&#739; between x = 3 and x = 3.3. The rational exponents 3.1 and 3.2 lie on either side of &#960;, so 2^&#960; sits between 2^3.1 &#8776; 8.574 and 2^3.2 &#8776; 9.190; tighter brackets, 3.14 and 3.15, pin it between 8.815 and 8.876. Because the curve through the rational points has no gaps or jumps, the brackets close in on exactly one height, 2^&#960; &#8776; 8.825.',
+      text: 'A close-up of y = 2&#739; between x = 3 and x = 3.3. The rational exponents 3.1 and 3.2 lie on either side of &#960;, so 2^&#960; sits between 2^3.1 &#8776; 8.574 and 2^3.2 &#8776; 9.190; tighter brackets, 3.14 and 3.15, pin it between 8.815 and 8.877. Because the curve through the rational points has no gaps or jumps, the brackets close in on exactly one height, 2^&#960; &#8776; 8.825.',
     }),
   };
 

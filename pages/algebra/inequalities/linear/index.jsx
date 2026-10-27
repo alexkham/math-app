@@ -423,7 +423,8 @@ This connection is not a coincidence. The equation $ax + b = 0$ identifies the s
     title: `Compound Linear Inequalities`,
     content: `A compound inequality joins two linear inequalities into a single condition. The conjunction (AND) and disjunction (OR) produce fundamentally different solution sets.
 
-A three-part chain like $-3 < 2x + 1 \\leq 7$ is a conjunction: both $-3 < 2x + 1$ and $2x + 1 \\leq 7$ must hold. Operations are applied to all three parts simultaneously. Subtract $1$: $-4 < 2x \\leq 6$. Divide by $2$: $-2 < x \\leq 3$. The solution is the half-open interval $(-2, 3]$.
+@academic[example:Example
+A three-part chain like $-3 < 2x + 1 \\leq 7$ is a conjunction: both $-3 < 2x + 1$ and $2x + 1 \\leq 7$ must hold. Operations are applied to all three parts simultaneously. Subtract $1$: $-4 < 2x \\leq 6$. Divide by $2$: $-2 < x \\leq 3$. The solution is the half-open interval $(-2, 3]$.]@
 
 @academic[pitfall,aside:true,width:35%:Changing only the middle of a chain
 Subtracting $1$ from the middle alone turns $-3 < 2x + 1 \\leq 7$ into $-3 < 2x \\leq 7$, so $-\\frac{3}{2} < x \\leq \\frac{7}{2}$. All three parts change, which gives $-2 < x \\leq 3$.
@@ -431,7 +432,8 @@ Subtracting $1$ from the middle alone turns $-3 < 2x + 1 \\leq 7$ into $-3 < 2x 
 
 The chain is solved as one statement, with $x$ in the middle part. Each step is chosen to undo something around $x$, and after the last step $x$ stands alone between two numbers that are read off directly as the endpoints of the interval.
 
-A disjunction like $x + 3 < -1$ or $x + 3 > 5$ requires solving each part independently. From the first: $x < -4$. From the second: $x > 2$. The solution is the union $(-\\infty, -4) \\cup (2, \\infty)$ — two separate rays with a gap between them.
+@academic[example:Example
+A disjunction like $x + 3 < -1$ or $x + 3 > 5$ requires solving each part independently. From the first: $x < -4$. From the second: $x > 2$. The solution is the union $(-\\infty, -4) \\cup (2, \\infty)$ — two separate rays with a gap between them.]@
 
 The choice between AND and OR depends on the problem's structure. Conjunctions narrow the solution set by requiring both conditions; the result is the intersection of two rays, which is a bounded interval or empty when the rays point in opposite directions, and a single ray when they point the same way. Disjunctions broaden it by accepting either condition; the result is the union of two rays, which is two separate rays or the entire line when the rays point in opposite directions, and a single ray when they point the same way.`,
     before: ``,
@@ -463,7 +465,10 @@ Opening $4x - 3(x + 2)$ as $4x - 3x + 6$ gives $x + 6 > 12$, so $x > 6$. The $-3
 
 The solution is $(18, \\infty)$. The multiplication by $12$ is safe because $12 > 0$, so the direction is preserved.
 
-Decimal coefficients are cleared in the same way, by multiplying by the appropriate power of $10$. The inequality $0.4x - 1.5 \\leq 0.1x + 3$ becomes $4x - 15 \\leq x + 30$ after multiplying by $10$, which simplifies to $3x \\leq 45$ and then $x \\leq 15$.
+Decimal coefficients are cleared in the same way, by multiplying by the appropriate power of $10$.
+
+@academic[example:Example
+The inequality $0.4x - 1.5 \\leq 0.1x + 3$ becomes $4x - 15 \\leq x + 30$ after multiplying by $10$, which simplifies to $3x \\leq 45$ and then $x \\leq 15$.]@
 
 If the variable appeared in a denominator, the inequality would no longer be linear — it would be a [rational inequality](!/algebra/inequalities/rational), requiring sign analysis rather than simple clearing.
 
@@ -477,9 +482,15 @@ If the variable appeared in a denominator, the inequality would no longer be lin
     title: `Special Cases`,
     content: `@academic[rule_corollary_plain:When the variable terms cancel during simplification, the inequality reduces to a comparison between two constants. The result is either universally true or universally false.]@
 
-An always-true inequality arises when the remaining statement is valid. The inequality $2(x + 4) > 2x + 3$ distributes to $2x + 8 > 2x + 3$. Subtracting $2x$ gives $8 > 3$, which holds regardless of $x$. Every real number satisfies the original inequality, and the solution set is $(-\\infty, \\infty)$.
+An always-true inequality arises when the remaining statement is valid.
 
-A never-true inequality arises when the remaining statement is false. The inequality $5(x - 1) \\leq 5x - 9$ distributes to $5x - 5 \\leq 5x - 9$. Subtracting $5x$ gives $-5 \\leq -9$, which fails for every $x$. The solution set is empty — no real number satisfies the inequality.
+@academic[example:Example
+The inequality $2(x + 4) > 2x + 3$ distributes to $2x + 8 > 2x + 3$. Subtracting $2x$ gives $8 > 3$, which holds regardless of $x$. Every real number satisfies the original inequality, and the solution set is $(-\\infty, \\infty)$.]@
+
+A never-true inequality arises when the remaining statement is false.
+
+@academic[example:Example
+The inequality $5(x - 1) \\leq 5x - 9$ distributes to $5x - 5 \\leq 5x - 9$. Subtracting $5x$ gives $-5 \\leq -9$, which fails for every $x$. The solution set is empty — no real number satisfies the inequality.]@
 
 These cases parallel the identity and contradiction outcomes in [linear equations](!/algebra/equations/linear). The mechanism is the same: the variable disappears, and the truth or falsity of the resulting constant statement determines whether the solution set is everything or nothing.`,
     before: ``,

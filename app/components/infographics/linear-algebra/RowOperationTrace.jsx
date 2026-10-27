@@ -79,6 +79,15 @@ function buildCss() {
   'position:relative;}' +
   '.rot-mast::after{content:\'\';position:absolute;left:32px;right:32px;bottom:0;height:3px;' +
   'background:var(--rot-accent);}' +
+  /* light header (matches MatrixOperation): pale blue band, navy text */
+  '.rot-mast{background:#eef4fc;color:#06357A;border-bottom:1px solid #d6e2f3;}' +
+  '.rot-mast::after{display:none;}' +
+  '.rot-mast .rot-kicker{color:#2563EB;opacity:1;}' +
+  '.rot-mast .rot-title,.rot-mast h2,.rot-mast h3{font-family:Inter,system-ui,sans-serif;font-weight:600;letter-spacing:-.01em;font-size:21px;line-height:1.2;color:#06357A;}' +
+  '.rot-mast .rot-intro{color:#4a6285;opacity:1;}' +
+  '.rot-mast .rot-tally b{color:#06357A;font-size:22px;}' +
+  '.rot-mast .rot-tally span{color:#4a6285;opacity:1;}' +
+  '.rot-mast a{color:#2563EB;border-color:#c3d0e4;}' +
   '.rot-kicker{font-family:\'JetBrains Mono\',ui-monospace,monospace;font-size:9px;font-weight:800;' +
   'letter-spacing:.22em;text-transform:uppercase;opacity:.6;}' +
   '.rot-title{font-family:\'Bricolage Grotesque\',sans-serif;font-weight:800;font-size:28px;' +

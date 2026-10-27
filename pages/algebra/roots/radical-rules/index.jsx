@@ -668,7 +668,7 @@ Ignoring domain restrictions:
 @academic[formula_callout:Common Errors
 $$\\sqrt{-3} \\cdot \\sqrt{-3} \\neq \\sqrt{9} = 3$$]@
 
-Each factor on the left is non-real, although their product $(i\\sqrt{3})^2 = -3$ is real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in radicals and complex numbers.
+Each factor on the left is non-real, although their product $(i\\sqrt{3})^2 = -3$ is real. The product rule cannot be applied because the restriction $a, b \\geq 0$ fails. This error is addressed in [radicals and complex numbers](!/complex-numbers/imaginary-numbers#2).
 
 Dropping absolute values:
 

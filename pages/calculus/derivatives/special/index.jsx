@@ -13,7 +13,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -635,7 +635,8 @@ The challenge lies at the boundaries.
 
 @academic[rule_plain:At a point $x = c$ where the formula changes, the derivative exists only if three conditions hold: the function is continuous at $c$ (the pieces connect), the left-hand derivative exists, and the right-hand derivative exists and equals the left-hand derivative.]@
 
-Consider $f(x) = x^2$ for $x \\leq 1$ and $f(x) = 2x - 1$ for $x > 1$. Continuity at $x = 1$: $f(1) = 1$ from the left, $2(1) - 1 = 1$ from the right—they match. Left derivative at $1$: $\\frac{d}{dx}[x^2]\\big|_{x=1} = 2$. Right derivative at $1$: $\\frac{d}{dx}[2x - 1]\\big|_{x=1} = 2$. Both derivatives match, so $f'(1) = 2$.
+@academic[example:Example
+Consider $f(x) = x^2$ for $x \\leq 1$ and $f(x) = 2x - 1$ for $x > 1$. Continuity at $x = 1$: $f(1) = 1$ from the left, $2(1) - 1 = 1$ from the right—they match. Left derivative at $1$: $\\frac{d}{dx}[x^2]\\big|_{x=1} = 2$. Right derivative at $1$: $\\frac{d}{dx}[2x - 1]\\big|_{x=1} = 2$. Both derivatives match, so $f'(1) = 2$.]@
 
 @academic[pitfall,aside:true,width:35%:Comparing slopes without checking continuity
 For $f(x) = x^2$ when $x \\leq 1$ and $f(x) = 2x$ when $x > 1$, both pieces have slope $2$ at $x = 1$, which suggests $f'(1) = 2$. But the pieces give the values $1$ and $2$ there: the graph jumps, and $f'(1)$ does not exist.

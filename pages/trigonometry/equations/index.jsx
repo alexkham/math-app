@@ -1309,6 +1309,9 @@ For tangent, which has period $\\pi$ and only one solution per period, the gener
 @academic[formula_callout:General Solutions vs Restricted Solutions
 $$x = \\frac{\\pi}{4} + n\\pi, \\quad n \\in \\mathbb{Z}$$]@
 
+@academic[fact,aside:true,width:35%:Close to 2, but never 2
+With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\sin(\\sqrt{2}\\,x)$ comes as close to $2$ as you like, yet equals $2$ nowhere. Both sines would have to be $1$ at the same $x$, and that would make $\\sqrt{2}$ a fraction.]@
+
 A restricted solution lists only the solutions within a specified interval — most commonly $[0, 2\\pi)$ or $[0°, 360°)$. For $\\sin(x) = \\frac{1}{2}$ on $[0, 2\\pi)$, the answer is simply $x = \\frac{\\pi}{6}$ and $x = \\frac{5\\pi}{6}$.
 
 The problem statement determines which format is required. When no interval is specified and the problem says "find all solutions" or "solve," a general solution is expected. When an interval is given, only those solutions falling within it should be listed.
@@ -1494,21 +1497,28 @@ On $[0, 2\\pi)$: $x = -\\frac{\\pi}{4} + \\pi = \\frac{3\\pi}{4}$ and $x = -\\fr
   },
   obj5: {
     title: `Equations Requiring Algebraic Manipulation`,
-    content: `Many trigonometric equations cannot be solved by direct inversion — they require algebraic manipulation first. The goal is to reduce the equation to one or more basic equations of the form $\\sin(x) = a$, $\\cos(x) = a$, or $\\tan(x) = a$.
+    content: `@academic[fact,aside:true,width:35%:Press cos until the display stops
+Some equations never reduce to a basic one, such as $\\cos x = x$. It still has exactly one solution, because $x - \\cos x$ only increases, and a calculator finds it: in radian mode, press cos over and over from any start and the display settles on $0.739085\\ldots$]@
+
+Many trigonometric equations cannot be solved by direct inversion — they require algebraic manipulation first. The goal is to reduce the equation to one or more basic equations of the form $\\sin(x) = a$, $\\cos(x) = a$, or $\\tan(x) = a$.
 
 **Factoring.** When a product equals zero, at least one factor must be zero.
 
+@academic[example:Example
 $\\sin(x)\\cos(x) = 0 \\quad \\Rightarrow \\quad \\sin(x) = 0 \\quad \\text{or} \\quad \\cos(x) = 0$
 
-These are two separate basic equations, each solved independently. On $[0, 2\\pi)$: $\\sin(x) = 0$ gives $x = 0, \\pi$; $\\cos(x) = 0$ gives $x = \\frac{\\pi}{2}, \\frac{3\\pi}{2}$. All four are solutions.
+These are two separate basic equations, each solved independently. On $[0, 2\\pi)$: $\\sin(x) = 0$ gives $x = 0, \\pi$; $\\cos(x) = 0$ gives $x = \\frac{\\pi}{2}, \\frac{3\\pi}{2}$. All four are solutions.]@
 
 **Grouping and factoring.** When terms share a common factor:
 
+@academic[example:Example
 $\\sin(x)\\cos(x) + \\sin(x) = 0 \\quad \\Rightarrow \\quad \\sin(x)[\\cos(x) + 1] = 0$
 
-This gives $\\sin(x) = 0$ or $\\cos(x) = -1$. On $[0, 2\\pi)$: $x = 0, \\pi$ from the first, and $x = \\pi$ from the second. The combined solution set is $\\{0, \\pi\\}$.
+This gives $\\sin(x) = 0$ or $\\cos(x) = -1$. On $[0, 2\\pi)$: $x = 0, \\pi$ from the first, and $x = \\pi$ from the second. The combined solution set is $\\{0, \\pi\\}$.]@
 
-**A critical warning about division.** It is tempting to "simplify" $\\sin(x)\\tan(x) = \\sin(x)$ by dividing both sides by $\\sin(x)$. This discards the solutions where $\\sin(x) = 0$. The correct approach is to rearrange to $\\sin(x)\\tan(x) - \\sin(x) = 0$, factor as $\\sin(x)[\\tan(x) - 1] = 0$, and solve each factor. Dividing by a trigonometric expression is valid only if that expression is provably nonzero — and in an equation where any value of $x$ might be a solution, this condition is rarely guaranteed.`,
+**A critical warning about division.** It is tempting to "simplify" $\\sin(x)\\tan(x) = \\sin(x)$ by dividing both sides by $\\sin(x)$. This discards the solutions where $\\sin(x) = 0$. The correct approach is to rearrange to $\\sin(x)\\tan(x) - \\sin(x) = 0$, factor as $\\sin(x)[\\tan(x) - 1] = 0$, and solve each factor. Dividing by a trigonometric expression is valid only if that expression is provably nonzero — and in an equation where any value of $x$ might be a solution, this condition is rarely guaranteed.
+
+@academic[punchline:Move every term to one side and factor: each factor becomes a basic equation, while dividing by one throws solutions away.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1550,7 +1560,9 @@ The double angle [formulas](!/trigonometry/formulas) are another frequent source
 Replacing $\\cos(2x)$ by $2\\cos(x)$ turns $\\cos(2x) = \\sin(x)$ into $\\tan(x) = 2$, whose roots fail the original. With $\\cos(2x) = 1 - 2\\sin^2(x)$ it becomes $(2\\sin x - 1)(\\sin x + 1) = 0$, so $x = \\frac{\\pi}{6}, \\frac{5\\pi}{6}, \\frac{3\\pi}{2}$ on $[0, 2\\pi)$.
 [Read more](!#pitfalls)]@
 
-Not every identity substitution leads to a cleaner equation. If one substitution creates a more complicated expression, try a different form. The three versions of $\\cos(2\\theta)$ — $\\cos^2\\theta - \\sin^2\\theta$, $2\\cos^2\\theta - 1$, and $1 - 2\\sin^2\\theta$ — each serve different purposes depending on whether the target variable is sine or cosine.`,
+Not every identity substitution leads to a cleaner equation. If one substitution creates a more complicated expression, try a different form. The three versions of $\\cos(2\\theta)$ — $\\cos^2\\theta - \\sin^2\\theta$, $2\\cos^2\\theta - 1$, and $1 - 2\\sin^2\\theta$ — each serve different purposes depending on whether the target variable is sine or cosine.
+
+@academic[punchline:Use an identity to leave one function of one angle; only then do the basic solving steps apply.]@`,
     before: ``,
     after: ``,
     link: ``,

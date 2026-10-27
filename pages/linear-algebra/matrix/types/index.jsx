@@ -885,7 +885,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixTypesDiagrams from '@/app/components/matrices/matrixTypesDiagrams'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 

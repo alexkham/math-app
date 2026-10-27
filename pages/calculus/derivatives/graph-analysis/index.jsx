@@ -17,6 +17,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
 import functionOptimizationDiagrams from '@/app/components/functions/optimization/functionOptimizationDiagrams'
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1070,8 +1072,56 @@ const schemas = {
     }),
   };
 
+  const cubicDirectionProfile = {
+    header: {
+      kicker: 'one function, sign of the derivative',
+      title: 'Where x³ − 3x rises and falls',
+      formula: "$f'(x) = 3x^2 - 3$",
+    },
+    quickStats: [
+      { n: '2', label: 'critical points' },
+      { n: '3', label: 'intervals' },
+    ],
+    graph: {
+      xRange: [-2.4, 2.4], yRange: [-4.2, 4.2],
+      points: Array.from({ length: 241 }, (_, i) => {
+        const x = -2.4 + i * 0.02;
+        return [Number(x.toFixed(2)), Number((x * x * x - 3 * x).toFixed(4))];
+      }),
+      xTicks: [-2, -1, 0, 1, 2], yTicks: [-4, -2, 0, 2, 4],
+    },
+    features: [
+      { id: 'crit', kind: 'warm', points: [{ x: -1, y: 2 }, { x: 1, y: -2 }] },
+      { id: 'test', points: [{ x: -2, y: -2 }, { x: 0, y: 0 }, { x: 2, y: 2 }] },
+    ],
+    intervals: [
+      { label: "sign of f'", spans: [
+        { from: null, to: -1, kind: 'pos', sign: '+' },
+        { from: -1, to: 1, kind: 'neg', sign: '−' },
+        { from: 1, to: null, kind: 'pos', sign: '+' },
+      ] },
+      { label: 'direction', spans: [
+        { from: null, to: -1, kind: 'pos', text: 'increasing', arrow: 'right' },
+        { from: -1, to: 1, kind: 'neg', text: 'decreasing' },
+        { from: 1, to: null, kind: 'pos', text: 'increasing', arrow: 'right' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'crit', label: "f' = 0 at", value: 'x = −1, x = 1', tone: 'warm' },
+        { featureId: 'test', label: 'Test values', value: 'x = −2, 0, 2' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Test results', value: "$f'(-2) = 9,\\; f'(0) = -3,\\; f'(2) = 9$" },
+        { label: 'Increasing on', value: '$(-\\infty, -1)$ and $(1, \\infty)$' },
+        { label: 'Decreasing on', value: '$(-1, 1)$' },
+      ] },
+    ],
+  };
+
   return {
   props: {
+    cubicDirectionProfile,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1091,7 +1141,7 @@ const schemas = {
   }
 }
    }
-export default function PageTemplate({
+export default function PageTemplate({cubicDirectionProfile, 
   seoData,
   sectionsContent,
   introContent,
@@ -1149,6 +1199,16 @@ export default function PageTemplate({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `The same test, carried out in full for $f(x) = x^3 - 3x$. Its derivative $f'(x) = 3x^2 - 3$ is zero at $x = -1$ and $x = 1$, and those two points split the line into three intervals. One test value in each settles the sign: $f'(-2) = 9$, $f'(0) = -3$ and $f'(2) = 9$.`,
+          <DiagramFrameV2
+            key={'obj3-profile'}
+            id="cubic-direction-profile"
+            title="Where x³ − 3x rises and falls"
+            source="/calculus/derivatives/graph-analysis"
+          >
+            <FunctionAnalysis data={cubicDirectionProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrameV2>,
+          `Read the two strips together: wherever the sign of $f'$ is $+$, the curve directly above it climbs, and wherever it is $-$, the curve falls. The direction can change only at the critical points $x = \\pm 1$, which is why the graph turns there and nowhere else.`,
         ]
     },
     {

@@ -14,8 +14,9 @@ import completeTheSquareDiagrams from '@/app/components/algebra/visualizers/equa
 import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
 
@@ -616,7 +617,8 @@ For $6x^3 + 9x^2 - 3x$, each term is divisible by $3x$. Factoring it out gives $
 
 @academic[rule_plain:When variables carry different exponents, the GCF takes the lowest power present across all terms.]@
 
-In $4x^2y + 8xy^2$, the numerical GCF is $4$, the lowest power of $x$ is $x^1$, and the lowest power of $y$ is $y^1$, so the GCF is $4xy$. Factoring yields $4xy(x + 2y)$.
+@academic[example:Example
+In $4x^2y + 8xy^2$, the numerical GCF is $4$, the lowest power of $x$ is $x^1$, and the lowest power of $y$ is $y^1$, so the GCF is $4xy$. Factoring yields $4xy(x + 2y)$.]@
 
 @academic[pitfall,aside:true,width:35%:Losing the term that equals the GCF
 Writing $6x^3 + 9x^2 - 3x$ as $3x(2x^2 + 3x)$ drops the last term: that product is only $6x^3 + 9x^2$. The term $-3x$ leaves $-1$ behind, so the factorization is $3x(2x^2 + 3x - 1)$.
@@ -632,7 +634,8 @@ Extracting the GCF should become automatic — it simplifies the remaining expre
     title: `Factoring by Grouping`,
     content: `When a polynomial has four or more terms and no single GCF spans all of them, grouping offers a path forward. The idea is to split the polynomial into pairs of terms, factor each pair separately, and then look for a common binomial factor across the groups.
 
-Take $x^3 + 2x^2 + 3x + 6$. Grouping the first two terms and the last two gives $(x^3 + 2x^2) + (3x + 6)$. Factoring each group produces $x^2(x + 2) + 3(x + 2)$. The binomial $(x + 2)$ now appears in both pieces, so it factors out: $(x^2 + 3)(x + 2)$.
+@academic[example:Example
+Take $x^3 + 2x^2 + 3x + 6$. Grouping the first two terms and the last two gives $(x^3 + 2x^2) + (3x + 6)$. Factoring each group produces $x^2(x + 2) + 3(x + 2)$. The binomial $(x + 2)$ now appears in both pieces, so it factors out: $(x^2 + 3)(x + 2)$.]@
 
 The method depends on the right grouping — and the original order of terms does not always produce one that works. Rearranging may be necessary. For $ax + by + ay + bx$, the natural left-to-right pairing yields $(ax + by) + (ay + bx)$, which leads nowhere useful. Rearranging to $ax + bx + ay + by$ and grouping as $(ax + bx) + (ay + by)$ gives $x(a + b) + y(a + b) = (x + y)(a + b)$.
 
@@ -655,7 +658,8 @@ $$x^2 + (a + b)x + ab = (x + a)(x + b)$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-For $x^2 + 7x + 12$, the task is to find two numbers that multiply to $12$ and add to $7$. The pair $3$ and $4$ satisfies both conditions: $3 \\cdot 4 = 12$ and $3 + 4 = 7$. So $x^2 + 7x + 12 = (x + 3)(x + 4)$.
+@academic[example:Example
+For $x^2 + 7x + 12$, the task is to find two numbers that multiply to $12$ and add to $7$. The pair $3$ and $4$ satisfies both conditions: $3 \\cdot 4 = 12$ and $3 + 4 = 7$. So $x^2 + 7x + 12 = (x + 3)(x + 4)$.]@
 
 @academic[pitfall,aside:true,width:35%:Choosing the wrong signs
 Writing $x^2 - 5x + 6$ as $(x + 2)(x - 3)$ gets the sizes $2$ and $3$ right but not the signs: it expands to $x^2 - x - 6$. With $c > 0$ and $b < 0$ both numbers are negative: $(x - 2)(x - 3)$.
@@ -677,7 +681,8 @@ Not every trinomial of this form factors over the integers. The polynomial $x^2 
 
 Multiply $a$ and $c$ to get the product $ac$. Then find two numbers $m$ and $n$ such that $m \\cdot n = ac$ and $m + n = b$. Use these numbers to split the middle term into two terms, creating a four-term polynomial that can be factored by grouping.
 
-For $6x^2 + 11x + 4$, compute $ac = 6 \\cdot 4 = 24$. The pair $3$ and $8$ satisfies $3 \\cdot 8 = 24$ and $3 + 8 = 11$. Rewrite the middle term: $6x^2 + 3x + 8x + 4$. Group and factor: $3x(2x + 1) + 4(2x + 1) = (3x + 4)(2x + 1)$.
+@academic[example:Example
+For $6x^2 + 11x + 4$, compute $ac = 6 \\cdot 4 = 24$. The pair $3$ and $8$ satisfies $3 \\cdot 8 = 24$ and $3 + 8 = 11$. Rewrite the middle term: $6x^2 + 3x + 8x + 4$. Group and factor: $3x(2x + 1) + 4(2x + 1) = (3x + 4)(2x + 1)$.]@
 
 @academic[pitfall,aside:true,width:35%:Using the AC pair as the factors
 Writing $6x^2 + 11x + 4$ as $(x + 3)(x + 8)$ treats the pair for $ac = 24$ as if $a$ were $1$; that product is $x^2 + 11x + 24$. The pair only splits the middle term, and grouping gives $(3x + 4)(2x + 1)$.
@@ -728,9 +733,11 @@ $$a^2 - 2ab + b^2 = (a - b)^2$$]@
 
 The test for a perfect square trinomial has three parts: the first term must be a perfect square, the last term must be a perfect square, and the middle term must equal twice the product of their square roots. If all three conditions hold, the trinomial is the square of a binomial.
 
-For $x^2 + 10x + 25$, the first term is $x^2$, the last is $5^2$, and the middle term $10x = 2 \\cdot x \\cdot 5$. All conditions are met, so $x^2 + 10x + 25 = (x + 5)^2$.
+@academic[example:Example
+For $x^2 + 10x + 25$, the first term is $x^2$, the last is $5^2$, and the middle term $10x = 2 \\cdot x \\cdot 5$. All conditions are met, so $x^2 + 10x + 25 = (x + 5)^2$.]@
 
-For $4x^2 - 12x + 9$, the first term is $(2x)^2$, the last is $3^2$, and the middle term $12x = 2 \\cdot 2x \\cdot 3$. The subtraction sign carries through: $4x^2 - 12x + 9 = (2x - 3)^2$.
+@academic[example:Example
+For $4x^2 - 12x + 9$, the first term is $(2x)^2$, the last is $3^2$, and the middle term $12x = 2 \\cdot 2x \\cdot 3$. The subtraction sign carries through: $4x^2 - 12x + 9 = (2x - 3)^2$.]@
 
 A common error is assuming any trinomial with perfect square first and last terms must be a perfect square trinomial. The expression $x^2 + 7x + 9$ has $x^2$ and $3^2$ at the ends, but the middle term $7x$ does not equal $2 \\cdot x \\cdot 3 = 6x$. This trinomial is not a perfect square.`,
     before: ``,
@@ -759,9 +766,11 @@ Each factors a two-term cubic into a linear factor and a quadratic factor. The l
 Writing $x^3 + 27$ as $(x + 3)(x^2 + 3x + 9)$ copies the plus sign into the quadratic factor; that product is $x^3 + 6x^2 + 18x + 27$. The middle sign is the opposite one: $(x + 3)(x^2 - 3x + 9)$.
 [Read more](!#12)]@
 
-For $x^3 + 8$, recognize $8 = 2^3$. The sum of cubes formula gives $x^3 + 2^3 = (x + 2)(x^2 - 2x + 4)$. The linear factor $(x + 2)$ takes the same sign as the original sum. The quadratic factor has a negative middle term (opposite) and a positive constant (always positive).
+@academic[example:Example
+For $x^3 + 8$, recognize $8 = 2^3$. The sum of cubes formula gives $x^3 + 2^3 = (x + 2)(x^2 - 2x + 4)$. The linear factor $(x + 2)$ takes the same sign as the original sum. The quadratic factor has a negative middle term (opposite) and a positive constant (always positive).]@
 
-For $27x^3 - 1$, recognize $27x^3 = (3x)^3$ and $1 = 1^3$. The difference of cubes formula gives $(3x - 1)(9x^2 + 3x + 1)$. The linear factor takes the minus sign (same as the original difference), the middle term is positive (opposite), and the constant remains positive.
+@academic[example:Example
+For $27x^3 - 1$, recognize $27x^3 = (3x)^3$ and $1 = 1^3$. The difference of cubes formula gives $(3x - 1)(9x^2 + 3x + 1)$. The linear factor takes the minus sign (same as the original difference), the middle term is positive (opposite), and the constant remains positive.]@
 
 @academic[rule_theorem_plain:The quadratic factors $a^2 - ab + b^2$ and $a^2 + ab + b^2$ that arise from these formulas are irreducible over the reals.]@
 
@@ -777,7 +786,10 @@ The three named patterns introduced across this and the preceding sections — d
     title: `Factoring Higher-Degree Polynomials`,
     content: `Polynomials of degree four and above often yield to the same techniques used on quadratics and cubics, provided the right structure is recognized.
 
-A common pattern is the quadratic in disguise. The polynomial $x^4 + 5x^2 + 6$ contains only even powers of $x$, which means substituting $u = x^2$ transforms it into $u^2 + 5u + 6$. This factors as $(u + 2)(u + 3)$, and substituting back gives $(x^2 + 2)(x^2 + 3)$. Neither quadratic factor has real [roots](!/algebra/polynomials/roots), so the factorization is complete over the reals.
+A common pattern is the quadratic in disguise.
+
+@academic[example:Example
+The polynomial $x^4 + 5x^2 + 6$ contains only even powers of $x$, which means substituting $u = x^2$ transforms it into $u^2 + 5u + 6$. This factors as $(u + 2)(u + 3)$, and substituting back gives $(x^2 + 2)(x^2 + 3)$. Neither quadratic factor has real [roots](!/algebra/polynomials/roots), so the factorization is complete over the reals.]@
 
 Repeated application of earlier techniques handles layered structures. The polynomial $x^4 - 16$ is a difference of squares: $(x^2 + 4)(x^2 - 4)$. The second factor is itself a difference of squares: $(x^2 + 4)(x + 2)(x - 2)$. The first factor $x^2 + 4$ is irreducible over the reals, so the process stops here.
 
@@ -1100,9 +1112,26 @@ const schemas = {
     ],
   };
 
+  // BeforeAfter (obj2): the section's closing cubic, GCF first, then a perfect square
+  const gcfFactoringSteps = {
+    header: {
+      kicker: 'Greatest common factor',
+      title: 'Taking out the GCF first',
+      lede: 'A cubic that looks difficult becomes a recognizable pattern once the GCF of $2x$ is removed.',
+    },
+    steps: [
+      { id: 'cubic', label: 'Cubic', stamp: 'Before', expr: '$2x^3 + 8x^2 + 8x$',
+        move: { label: 'Remove the GCF', note: '$2x$ divides every term' } },
+      { id: 'gcf', label: 'GCF out', expr: '$2x(x^2 + 4x + 4)$',
+        move: { label: 'Perfect square trinomial', note: '$x^2 + 4x + 4 = (x + 2)^2$' } },
+      { id: 'factored', label: 'Fully factored', stamp: 'After', expr: '$2x(x + 2)^2$' },
+    ],
+  };
+
   return {
   props:{
     factorOutline,
+    gcfFactoringSteps,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1123,7 +1152,7 @@ const schemas = {
 }
    }
 
-export default function FactoringPage({factorOutline, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function FactoringPage({factorOutline, gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -1154,6 +1183,20 @@ export default function FactoringPage({factorOutline, seoData, sectionsContent, 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-diagram'}
+            id="gcf-factoring-steps"
+            title="Factoring 2x³ + 8x² + 8x"
+            source="/algebra/polynomials/factoring"
+            before={"The closing example of this section, one move at a time. The GCF comes out first."}
+            after={"After the GCF is removed, the trinomial left behind is a [perfect square trinomial](!#7), and the cubic is fully factored in one more move."}
+          >
+            <BeforeAfter
+              data={gcfFactoringSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

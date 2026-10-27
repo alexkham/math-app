@@ -550,9 +550,15 @@ $$P(x) = (x - c) \\cdot Q(x) + P(c)$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-This means the remainder can be found without performing any division at all. To find the remainder when $P(x) = x^3 - 4x + 2$ is divided by $(x - 3)$, simply compute $P(3) = 27 - 12 + 2 = 17$. The remainder is $17$.
+This means the remainder can be found without performing any division at all.
 
-The theorem applies to any polynomial and any value of $c$. If $P(x) = 2x^4 - x^2 + 5$ and the divisor is $(x + 1)$, read $(x + 1)$ as $(x - (-1))$ and evaluate $P(-1) = 2(1) - 1 + 5 = 6$. The remainder is $6$, confirmed instantly without setting up [long division or synthetic division](!/algebra/polynomials/operations).
+@academic[example:Example
+To find the remainder when $P(x) = x^3 - 4x + 2$ is divided by $(x - 3)$, simply compute $P(3) = 27 - 12 + 2 = 17$. The remainder is $17$.]@
+
+The theorem applies to any polynomial and any value of $c$.
+
+@academic[example:Example
+If $P(x) = 2x^4 - x^2 + 5$ and the divisor is $(x + 1)$, read $(x + 1)$ as $(x - (-1))$ and evaluate $P(-1) = 2(1) - 1 + 5 = 6$. The remainder is $6$, confirmed instantly without setting up [long division or synthetic division](!/algebra/polynomials/operations).]@
 
 @academic[pitfall,aside:true,width:35%:Using the wrong sign of c
 Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x + 3)$, $P(3) = 17$ is the remainder for $(x - 3)$. Here $c = -3$, so the remainder is $P(-3) = -13$.
@@ -601,7 +607,8 @@ The logic is immediate. If the remainder when dividing by $(x - c)$ is zero, the
 
 This creates a bridge between [roots](!/algebra/polynomials/roots) and [factors](!/algebra/polynomials/factoring). The value $c$ is a root of $P(x)$ precisely when $(x - c)$ is a factor of $P(x)$. Finding one gives the other automatically.
 
-To test whether $(x - 2)$ is a factor of $x^3 - 6x^2 + 11x - 6$, evaluate $P(2) = 8 - 24 + 22 - 6 = 0$. Since the result is zero, $(x - 2)$ is indeed a factor, and $2$ is a root.`,
+@academic[example:Example
+To test whether $(x - 2)$ is a factor of $x^3 - 6x^2 + 11x - 6$, evaluate $P(2) = 8 - 24 + 22 - 6 = 0$. Since the result is zero, $(x - 2)$ is indeed a factor, and $2$ is a root.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -611,7 +618,10 @@ To test whether $(x - 2)$ is a factor of $x^3 - 6x^2 + 11x - 6$, evaluate $P(2) 
     title: `Using the Factor Theorem`,
     content: `The Factor Theorem works in both directions — it can verify suspected factors and it can build polynomials from known roots.
 
-To test potential roots, substitute each candidate into $P(x)$ and check for zero. For $P(x) = x^3 - 7x + 6$, testing $x = 1$ gives $P(1) = 1 - 7 + 6 = 0$, confirming that $(x - 1)$ is a factor. Dividing out this factor via [synthetic division](!/algebra/polynomials/operations) yields the quotient $x^2 + x - 6$, which factors further as $(x + 3)(x - 2)$. The complete factorization is $(x - 1)(x + 3)(x - 2)$.
+To test potential roots, substitute each candidate into $P(x)$ and check for zero.
+
+@academic[example:Example
+For $P(x) = x^3 - 7x + 6$, testing $x = 1$ gives $P(1) = 1 - 7 + 6 = 0$, confirming that $(x - 1)$ is a factor. Dividing out this factor via [synthetic division](!/algebra/polynomials/operations) yields the quotient $x^2 + x - 6$, which factors further as $(x + 3)(x - 2)$. The complete factorization is $(x - 1)(x + 3)(x - 2)$.]@
 
 To construct a polynomial from its roots, reverse the process. If a cubic polynomial has roots $1$, $-2$, and $4$, the Factor Theorem guarantees that $(x - 1)$, $(x + 2)$, and $(x - 4)$ are all factors. Their product gives:
 
@@ -660,9 +670,10 @@ Twelve candidates replace infinitely many possibilities. Each can be tested by s
 
 Start by listing all divisors of the constant term $a_0$ — these are the possible values of $p$. Then list all divisors of the leading coefficient $a_n$ — these are the possible values of $q$. Form every fraction $\\pm \\frac{p}{q}$ and reduce to lowest terms to eliminate duplicates.
 
+@academic[example:Example
 For $2x^3 + x^2 - 13x + 6$, begin testing with the simplest candidates. $P(1) = 2 + 1 - 13 + 6 = -4$, so $1$ is not a root. $P(2) = 16 + 4 - 26 + 6 = 0$, so $2$ is a root. By the Factor Theorem, $(x - 2)$ is a factor. Synthetic division gives a quotient of $2x^2 + 5x - 3$, which factors as $(2x - 1)(x + 3)$.
 
-The complete factorization is $(x - 2)(2x - 1)(x + 3)$, giving roots $2$, $\\frac{1}{2}$, and $-3$ — all members of the candidate list.
+The complete factorization is $(x - 2)(2x - 1)(x + 3)$, giving roots $2$, $\\frac{1}{2}$, and $-3$ — all members of the candidate list.]@
 
 Testing via synthetic division is often more efficient than direct substitution, since each test simultaneously produces the quotient polynomial if the candidate turns out to be a root.`,
     before: ``,
@@ -674,7 +685,8 @@ Testing via synthetic division is often more efficient than direct substitution,
     title: `Limitations of the Rational Root Theorem`,
     content: `The Rational Root Theorem identifies only rational roots. Irrational roots and [complex roots](!/complex-numbers/equations-polynomials) lie entirely outside its reach.
 
-The polynomial $x^2 - 2$ illustrates this clearly. Its constant term is $-2$ and its leading coefficient is $1$, producing candidates $\\pm 1, \\pm 2$. Testing each: $P(1) = -1$, $P(-1) = -1$, $P(2) = 2$, $P(-2) = 2$. None equals zero. The actual roots are $\\pm\\sqrt{2}$, both irrational — invisible to the theorem.
+@academic[example:Example
+The polynomial $x^2 - 2$ illustrates this clearly. Its constant term is $-2$ and its leading coefficient is $1$, producing candidates $\\pm 1, \\pm 2$. Testing each: $P(1) = -1$, $P(-1) = -1$, $P(2) = 2$, $P(-2) = 2$. None equals zero. The actual roots are $\\pm\\sqrt{2}$, both irrational — invisible to the theorem.]@
 
 A polynomial may have no rational roots at all. The polynomial $x^4 + x^3 + x^2 + x + 1$ has integer coefficients and candidates $\\pm 1$, but neither works. All four of its roots are complex, and no amount of rational testing will find them.
 
@@ -691,9 +703,10 @@ The theorem is best understood as a first filter, not a complete solution. When 
 @academic[rule_theorem:Integer Root Theorem
 So all rational roots of a monic polynomial are integers, and they must divide the constant term.]@
 
+@academic[example:Example
 For $x^3 - 6x^2 + 11x - 6$, the only candidates are the divisors of $-6$: $\\pm 1, \\pm 2, \\pm 3, \\pm 6$. No fractions need to be considered.
 
-Testing: $P(1) = 1 - 6 + 11 - 6 = 0$, so $1$ is a root. Dividing out $(x - 1)$ leaves $x^2 - 5x + 6 = (x - 2)(x - 3)$. All three roots — $1$, $2$, $3$ — are integers dividing $6$, exactly as the theorem predicts.
+Testing: $P(1) = 1 - 6 + 11 - 6 = 0$, so $1$ is a root. Dividing out $(x - 1)$ leaves $x^2 - 5x + 6 = (x - 2)(x - 3)$. All three roots — $1$, $2$, $3$ — are integers dividing $6$, exactly as the theorem predicts.]@
 
 @academic[fact,aside:true,width:35%:A square root is whole or irrational
 For a whole number $n$, the polynomial $x^2 - n$ is monic, so any rational root it has is an integer. Hence $\\sqrt{n}$ is either a whole number or irrational: no fraction squares to exactly $2$, though $\\left(\\frac{7}{5}\\right)^2 = 1.96$ comes close.]@
@@ -733,7 +746,8 @@ The upper bound test works as follows: divide $P(x)$ by $(x - c)$ where $c > 0$ 
 
 The lower bound test is similar but uses a negative value of $c$. Divide $P(x)$ by $(x - c)$ where $c < 0$. If the entries in the bottom row alternate in sign (with zeros counting as either sign), then $c$ is a lower bound — no real root is less than $c$.
 
-For $P(x) = x^3 - 4x^2 + x + 6$, synthetic division by $(x - 5)$ produces the row $1, 1, 6, 36$ — all non-negative, so $5$ is an upper bound. Synthetic division by $(x + 2)$, meaning $c = -2$, produces $1, -6, 13, -20$ — the signs alternate, so $-2$ is a lower bound. All real roots of this polynomial lie in the interval $[-2, 5]$.
+@academic[example:Example
+For $P(x) = x^3 - 4x^2 + x + 6$, synthetic division by $(x - 5)$ produces the row $1, 1, 6, 36$ — all non-negative, so $5$ is an upper bound. Synthetic division by $(x + 2)$, meaning $c = -2$, produces $1, -6, 13, -20$ — the signs alternate, so $-2$ is a lower bound. All real roots of this polynomial lie in the interval $[-2, 5]$.]@
 
 These bounds are especially useful when combined with the Rational Root Theorem, eliminating candidates that fall outside the established range before any testing begins.`,
     before: ``,
@@ -791,7 +805,12 @@ The pattern extends to any degree: the $k$-th elementary symmetric polynomial of
 Reading the sum of the roots of $x^2 - 5x + 6$ as $b = -5$ clashes with its roots $2$ and $3$. The sum is $-b = 5$ and the product is $c = 6$.
 [Read more](!#13)]@
 
-These relationships are useful for verifying [factorizations](!/algebra/polynomials/factoring). After finding roots $1$, $2$, and $3$ for $x^3 - 6x^2 + 11x - 6$, Vieta's formulas confirm: $1 + 2 + 3 = 6 = -(-6)$, $1 \\cdot 2 + 1 \\cdot 3 + 2 \\cdot 3 = 11$, and $1 \\cdot 2 \\cdot 3 = 6 = -(-6)$. All three match the coefficients. They also allow solving problems where individual roots are not needed — for instance, finding the sum of the squares of the roots using $(r_1 + r_2 + r_3)^2 - 2(r_1r_2 + r_1r_3 + r_2r_3) = 36 - 22 = 14$.`,
+These relationships are useful for verifying [factorizations](!/algebra/polynomials/factoring).
+
+@academic[example:Example
+After finding roots $1$, $2$, and $3$ for $x^3 - 6x^2 + 11x - 6$, Vieta's formulas confirm: $1 + 2 + 3 = 6 = -(-6)$, $1 \\cdot 2 + 1 \\cdot 3 + 2 \\cdot 3 = 11$, and $1 \\cdot 2 \\cdot 3 = 6 = -(-6)$. All three match the coefficients.]@
+
+They also allow solving problems where individual roots are not needed — for instance, finding the sum of the squares of the roots using $(r_1 + r_2 + r_3)^2 - 2(r_1r_2 + r_1r_3 + r_2r_3) = 36 - 22 = 14$.`,
     before: ``,
     after: ``,
     link: '',

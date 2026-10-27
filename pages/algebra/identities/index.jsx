@@ -10,7 +10,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 export async function getStaticProps() {

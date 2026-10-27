@@ -1481,7 +1481,10 @@ This reduces the problem to two subset proofs: show every element of $A$ belongs
 Showing $A \\subseteq B$ for $A = \\{1, 2\\}$ and $B = \\{1, 2, 3\\}$ and stopping there would conclude $A = B$, yet $3 \\in B$ and $3 \\notin A$. Equality needs $B \\subseteq A$ as well, and here it fails.
 [Read more](!#pitfalls)]@
 
-Each direction is a separate argument that starts from an arbitrary element. For $A = \\{x \\in \\mathbb{Z} : x^2 = 1\\}$ and $B = \\{-1, 1\\}$, the first direction takes $x \\in A$, solves $x^2 = 1$ and finds $x = 1$ or $x = -1$, so $x \\in B$. The second direction takes each element of $B$ and checks it: $(-1)^2 = 1$ and $1^2 = 1$, so both lie in $A$.
+Each direction is a separate argument that starts from an arbitrary element.
+
+@academic[example:Example
+For $A = \\{x \\in \\mathbb{Z} : x^2 = 1\\}$ and $B = \\{-1, 1\\}$, the first direction takes $x \\in A$, solves $x^2 = 1$ and finds $x = 1$ or $x = -1$, so $x \\in B$. The second direction takes each element of $B$ and checks it: $(-1)^2 = 1$ and $1^2 = 1$, so both lie in $A$.]@
     `,
     before: ``,
     after: ``,
@@ -1586,9 +1589,17 @@ Examples:
 Accepting $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}, \\emptyset\\}$ as a partition of $\\{1, 2, 3, 4, 5\\}$ checks only disjointness and the union, which both hold. The block $\\emptyset$ breaks $A_i \\neq \\emptyset$, so the collection is not a partition.
 [Read more](!#pitfalls)]@
 
-To test a proposed collection, each of the three conditions is checked on its own. In the first example, the blocks $\\{1, 3\\}$, $\\{2, 4\\}$ and $\\{5\\}$ each contain at least one element, no two of them share an element, and together they contain $1$, $2$, $3$, $4$ and $5$. All three conditions hold, so the collection is a partition.
+To test a proposed collection, each of the three conditions is checked on its own.
+
+@academic[example:Example
+In the first example, the blocks $\\{1, 3\\}$, $\\{2, 4\\}$ and $\\{5\\}$ each contain at least one element, no two of them share an element, and together they contain $1$, $2$, $3$, $4$ and $5$. All three conditions hold, so the collection is a partition.]@
 
 Partitions arise naturally in classification problems and connect to equivalence relations. The [law of total probability](!/probability/total-probability) relies on partitions: if events $B_1, B_2, \\ldots, B_n$ partition the sample space, probabilities can be computed by summing over the partition.
+
+@academic[fact,aside:true,width:35%:Fifty-two answers in an incense game
+In the Japanese game Genji-kō, players smell five incense samples and mark which were the same: a partition of a 5-element set. All 52 possible answers are named after chapters of The Tale of Genji.]@
+
+Even small sets have more partitions than a first glance suggests. The set $\\{1, 2\\}$ has two: $\\{\\{1, 2\\}\\}$, with a single block, and $\\{\\{1\\}, \\{2\\}\\}$, with two singletons. The set $\\{1, 2, 3\\}$ has five: one with a single block, three that split off one element, such as $\\{\\{1\\}, \\{2, 3\\}\\}$, and one made of three singletons. For the five-element set of the first example, the partition $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}\\}$ is only one of many. Each new element can join any block already formed or start a block of its own, so the number of partitions grows quickly with the size of the set.
     `,
     before: ``,
     after: ``,

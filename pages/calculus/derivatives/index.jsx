@@ -17,8 +17,9 @@ import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/f
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 
 
 export async function getStaticProps(){
@@ -335,7 +336,8 @@ The sign of the derivative at a point reveals whether the function is increasing
 Treating $f'(c) = 0$ as proof of a peak or valley makes $x = 0$ an extremum of $f(x) = x^3$, since $f'(0) = 0$. But $f'(x) = 3x^2$ is positive on both sides, so $x^3$ keeps rising and $x = 0$ is neither.
 [Read more](!#pitfalls)]@
 
-For $f(x) = x^3 - 3x$, the derivative $f'(x) = 3x^2 - 3$ is zero at $x = -1$ and $x = 1$. It is positive to the left of $-1$, negative between the two points and positive to the right of $1$. The graph rises, falls and rises again, so $x = -1$ is a local maximum and $x = 1$ a local minimum.
+@academic[example:Example
+For $f(x) = x^3 - 3x$, the derivative $f'(x) = 3x^2 - 3$ is zero at $x = -1$ and $x = 1$. It is positive to the left of $-1$, negative between the two points and positive to the right of $1$. The graph rises, falls and rises again, so $x = -1$ is a local maximum and $x = 1$ a local minimum.]@
 
 The second derivative adds another layer. Where $f''(x) > 0$, the graph is concave up; where $f''(x) < 0$, the graph is concave down. Points where concavity changes are inflection points. Together, the first and second derivatives determine the complete shape of a curve: its direction, its turning points, and its bending.
 
@@ -724,8 +726,47 @@ const schemas = {
     ],
   };
 
+  const derivativeShapeProfile = {
+    header: { kicker: 'first and second derivative', title: 'Shape of a cubic from its derivatives', formula: "$f'(x) = 3x^2 - 3,\\; f''(x) = 6x$" },
+    quickStats: [ { n: '2', label: 'critical points' }, { n: '1', label: 'inflection' } ],
+    graph: {
+      xRange: [-2.4, 2.4], yRange: [-4.2, 4.2],
+      points: Array.from({ length: 241 }, (_, i) => { const x = -2.4 + i * 0.02; return [Number(x.toFixed(2)), Number((x * x * x - 3 * x).toFixed(4))]; }),
+      xTicks: [-2, -1, 0, 1, 2], yTicks: [-4, -2, 0, 2, 4],
+    },
+    features: [
+      { id: 'max', kind: 'warm', points: [{ x: -1, y: 2 }] },
+      { id: 'infl', points: [{ x: 0, y: 0 }] },
+      { id: 'min', kind: 'warm', points: [{ x: 1, y: -2 }] },
+    ],
+    intervals: [
+      { label: "sign of f'", spans: [
+        { from: null, to: -1, kind: 'pos', sign: '+' },
+        { from: -1, to: 1, kind: 'neg', sign: '−' },
+        { from: 1, to: null, kind: 'pos', sign: '+' },
+      ] },
+      { label: "sign of f''", spans: [
+        { from: null, to: 0, kind: 'neg', text: '− concave down' },
+        { from: 0, to: null, kind: 'pos', text: '+ concave up' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'max', label: 'Local maximum', value: '(−1, 2)', tone: 'warm' },
+        { featureId: 'infl', label: 'Inflection', value: '(0, 0)' },
+        { featureId: 'min', label: 'Local minimum', value: '(1, −2)', tone: 'warm' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Critical points', value: "$f'(x) = 0$ at $x = \\pm 1$" },
+        { label: 'Direction', value: 'rises, falls, rises', sub: "from the sign of $f'$" },
+        { label: 'Bending', value: 'down, then up', sub: "from the sign of $f'' = 6x$" },
+      ] },
+    ],
+  };
+
    return {
   props: {
+    derivativeShapeProfile,
     derivRoadmapOutline,
     demoUnits,
     conceptIntroFigures,
@@ -747,7 +788,7 @@ const schemas = {
    }
 
 
-   export default function DerivativesPage({derivRoadmapOutline, 
+   export default function DerivativesPage({derivativeShapeProfile, derivRoadmapOutline, 
      seoData,
      sectionsContent,
      introContent,
@@ -864,6 +905,16 @@ Working from the definition always takes the same three steps: write out $f(a + 
           sectionsContent.obj3.content,
                   <div key={'unit-critical'} dangerouslySetInnerHTML={{ __html: demoUnits.critical }} />,
           `The critical points are where the analysis starts; the sign of the derivative on either side finishes it.`,
+          `Both layers of the analysis for the example $f(x) = x^3 - 3x$. The first derivative $f'(x) = 3x^2 - 3$ gives the direction and the turning points at $x = \\pm 1$. The second derivative $f''(x) = 6x$ is negative for $x < 0$ and positive for $x > 0$, so the graph is concave down on the left, concave up on the right, and has an inflection point at $(0, 0)$.`,
+          <DiagramFrame
+            key={'obj3-profile'}
+            id="derivative-shape-profile"
+            title="Shape of x³ − 3x from its derivatives"
+            source="/calculus/derivatives"
+          >
+            <FunctionAnalysis data={derivativeShapeProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The two strips answer different questions about the same curve: the top one says where it goes up or down, the bottom one says which way it bends. The maximum sits where it is concave down and the minimum where it is concave up, which is the second-derivative test seen on the graph.`,
         ]
     },
     {

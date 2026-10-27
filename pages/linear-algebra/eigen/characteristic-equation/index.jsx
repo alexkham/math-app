@@ -844,7 +844,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
@@ -1210,7 +1210,7 @@ The characteristic equation transforms the geometric question "which directions 
         read: `A v equals lambda v`,
         means: `$\\lambda$ is the subject's reserved letter — eigenvalues are $\\lambda$ in every textbook on earth, enumerated $\\lambda_1, \\lambda_2, \\ldots$ when there are several. The defining equation reads as a balance: matrix action on the left, plain scaling on the right, same vector both sides.`,
         cases: `The full set of eigenvalues has its own mark in advanced texts: the spectrum $\\sigma(A)$ — a set-valued operator, sibling to $\\text{Col}$ and $\\text{Null}$.`,
-        alsoWritten: `$\\mu$ when $\\lambda$ is spoken for, in perturbation and two-matrix arguments; German texts historically used $\\lambda$ from the start — the letter is Hilbert-era and stuck.`,
+        alsoWritten: `$\\mu$ when $\\lambda$ is spoken for, in perturbation and two-matrix arguments.`,
         confusedWith: `A matrix. $\\lambda$ is a **scalar** — which is exactly why $A - \\lambda$ is illegal and the next entry's $I$ exists.`,
       },
       {

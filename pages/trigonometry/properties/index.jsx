@@ -1742,11 +1742,9 @@ const sectionsContent={
 - [Sine](!/trigonometry/definitions#sine) — $y$-coordinate; odd, bounded, period $2\\pi$
 - [Cosine](!/trigonometry/definitions#cosine) — $x$-coordinate; even, bounded, period $2\\pi$
 - [Tangent](!/trigonometry/definitions#tangent) — $\\frac{y}{x}$; odd, unbounded, period $\\pi$
-- [Cosecant](!/trigonometry/definitions#cosecant) — $\\frac{1}{\\sin\\theta}$; odd, unbounded below $|1|$
-- [Secant](!/trigonometry/definitions#secant) — $\\frac{1}{\\cos\\theta}$; even, unbounded below $|1|$
+- [Cosecant](!/trigonometry/definitions#cosecant) — $\\frac{1}{\\sin\\theta}$; odd, unbounded, never strictly between $-1$ and $1$
+- [Secant](!/trigonometry/definitions#secant) — $\\frac{1}{\\cos\\theta}$; even, unbounded, never strictly between $-1$ and $1$
 - [Cotangent](!/trigonometry/definitions#cotangent) — $\\frac{\\cos\\theta}{\\sin\\theta}$; odd, unbounded, period $\\pi$
-
-## Formulas Used
 
 ## Even-Odd Identities
  
@@ -1866,6 +1864,9 @@ On the [graphs](!/trigonometry/graphs), even symmetry (cosine, secant) produces 
 @academic[formula_callout:Boundedness
 $$-1 \\leq \\sin(\\theta) \\leq 1, \\quad -1 \\leq \\cos(\\theta) \\leq 1$$]@
 
+@academic[fact,aside:true,width:35%:Cosine reaches 2 off the real line
+No real angle has $\\cos x = 2$, yet $x = i\\ln(2 + \\sqrt{3}) \\approx 1.317i$ does, because $\\cos(iy) = \\cosh y = \\frac{e^y + e^{-y}}{2}$. The bound $|\\cos x| \\leq 1$ comes from the unit circle, so it holds only for real angles.]@
+
 This follows directly from the [unit circle](!/trigonometry/unit-circle). The coordinates of any point on a circle of radius 1 satisfy $x^2 + y^2 = 1$, which forces $|x| \\leq 1$ and $|y| \\leq 1$. No amount of rotation will ever produce a sine or cosine value outside $[-1, 1]$. The bounds are achieved: $\\sin\\theta = 1$ at $\\theta = \\frac{\\pi}{2}$ and $\\sin\\theta = -1$ at $\\theta = \\frac{3\\pi}{2}$, with analogous extremes for cosine.
 
 Cosecant and secant are bounded away from zero but unbounded overall:
@@ -1979,6 +1980,9 @@ The principal intervals of monotonicity are precisely the domains used to constr
     title: `Extrema`,
     content: `The maximum and minimum values of a trigonometric function — if they exist — occur at specific, predictable points determined by the [unit circle](!/trigonometry/unit-circle) geometry.
 
+@academic[fact,aside:true,width:35%:Whole numbers almost hit the top
+No whole number $n$ gives $\\sin n = 1$: that would need $n = \\frac{\\pi}{2} + 2k\\pi$, and $\\pi$ is irrational. Yet $\\sin 33 \\approx 0.99991$, because $33$ lies within $0.014$ of $\\frac{21\\pi}{2}$.]@
+
 **Sine** achieves its maximum value of $1$ at $\\theta = \\frac{\\pi}{2} + 2n\\pi$ — the top of the unit circle, where the $y$-coordinate is as large as it can be. It achieves its minimum of $-1$ at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$ — the bottom of the circle. These are global (absolute) extrema, and they recur with period $2\\pi$.
 
 **Cosine** achieves its maximum of $1$ at $\\theta = 2n\\pi$ — the rightmost point of the unit circle. Its minimum of $-1$ occurs at $\\theta = \\pi + 2n\\pi$ — the leftmost point.
@@ -1998,7 +2002,12 @@ $$\\text{maximum} = D + |A|, \\quad \\text{minimum} = D - |A|$$]@
 For $y = -2\\sin x + 1$, taking $D + A = 1 + (-2) = -1$ as the maximum gives the minimum instead. With $|A| = 2$, the maximum is $1 + 2 = 3$, reached where $\\sin x = -1$.
 [Read more](!#pitfalls)]@
 
-To apply the formula, read $A$ and $D$ off the equation. For $y = 3\\sin(2x) - 4$, $A = 3$ and $D = -4$, so the outputs run from $-4 - 3 = -7$ up to $-4 + 3 = -1$. The line $y = D$ is the midline halfway between the two extremes, and the amplitude $|A|$ is the distance from the midline to either one.
+To apply the formula, read $A$ and $D$ off the equation.
+
+@academic[example:Example
+For $y = 3\\sin(2x) - 4$, $A = 3$ and $D = -4$, so the outputs run from $-4 - 3 = -7$ up to $-4 + 3 = -1$.]@
+
+The line $y = D$ is the midline halfway between the two extremes, and the amplitude $|A|$ is the distance from the midline to either one.
 
 These occur at the same relative positions within each period as for the standard function, shifted according to the phase shift and compressed or stretched according to the period.`,
     before: ``,
@@ -2444,6 +2453,7 @@ Writing the solutions of $\\tan x = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ misses 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@academic[punchline:Every sinusoid swings exactly $|A|$ above and below its midline $y = D$, whatever its period or phase shift.]@`,
         ]
     },
     {

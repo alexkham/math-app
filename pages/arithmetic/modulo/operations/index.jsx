@@ -1078,9 +1078,11 @@ obj3: {
 @academic[formula_callout:Addition
 $$(a + b) \\bmod n = ((a \\bmod n) + (b \\bmod n)) \\bmod n$$]@
 
-For $(47 + 38) \\bmod 10$: reduce $47$ to $7$ and $38$ to $8$. Add: $7 + 8 = 15$. Reduce: $15 \\bmod 10 = 5$.
+@academic[example:Example
+For $(47 + 38) \\bmod 10$: reduce $47$ to $7$ and $38$ to $8$. Add: $7 + 8 = 15$. Reduce: $15 \\bmod 10 = 5$.]@
 
-For $(123 + 456) \\bmod 7$: reduce $123$ to $4$ and $456$ to $1$. Add: $4 + 1 = 5$. Since $5 < 7$, no further reduction is needed.
+@academic[example:Example
+For $(123 + 456) \\bmod 7$: reduce $123$ to $4$ and $456$ to $1$. Add: $4 + 1 = 5$. Since $5 < 7$, no further reduction is needed.]@
 
 The final reduction is necessary because the sum of two remainders can reach as high as $2(n - 1)$. For $\\bmod 10$, the largest possible intermediate sum is $9 + 9 = 18$, which still needs one more reduction. But it can never reach $2n$, so a single reduction always suffices.`,
   before: ``,
@@ -1096,9 +1098,10 @@ obj4: {
 @academic[formula_callout:Subtraction
 $$(a - b) \\bmod n = ((a \\bmod n) - (b \\bmod n)) \\bmod n$$]@
 
+@academic[example:Example
 For $(23 - 47) \\bmod 10$: reduce $23$ to $3$ and $47$ to $7$. Subtract: $3 - 7 = -4$. The result is negative, so add $n$: $-4 + 10 = 6$.
 
-The alternative is to compute the full subtraction first: $23 - 47 = -24$, then $-24 \\bmod 10 = 6$ (using the floored convention). Either route gives $6$.
+The alternative is to compute the full subtraction first: $23 - 47 = -24$, then $-24 \\bmod 10 = 6$ (using the floored convention). Either route gives $6$.]@
 
 @academic[pitfall,aside:true,width:35%:Ignoring the minus sign
 Reducing $-24$ as if it were $24$ gives $-24 \\bmod 10 = 4$, yet $-24 - 4 = -28$ is not a multiple of $10$. Going down to $-30$ gives $-24 = 10 \\cdot (-3) + 6$, so the result is $6$.
@@ -1118,9 +1121,11 @@ obj5: {
 @academic[formula_callout:Multiplication
 $$(a \\cdot b) \\bmod n = ((a \\bmod n) \\cdot (b \\bmod n)) \\bmod n$$]@
 
-For $(23 \\cdot 17) \\bmod 5$: reduce $23$ to $3$ and $17$ to $2$. Multiply: $3 \\cdot 2 = 6$. Reduce: $6 \\bmod 5 = 1$.
+@academic[example:Example
+For $(23 \\cdot 17) \\bmod 5$: reduce $23$ to $3$ and $17$ to $2$. Multiply: $3 \\cdot 2 = 6$. Reduce: $6 \\bmod 5 = 1$.]@
 
-For $(89 \\cdot 76) \\bmod 9$: reduce $89$ to $8$ and $76$ to $4$. Multiply: $8 \\cdot 4 = 32$. Reduce: $32 \\bmod 9 = 5$.
+@academic[example:Example
+For $(89 \\cdot 76) \\bmod 9$: reduce $89$ to $8$ and $76$ to $4$. Multiply: $8 \\cdot 4 = 32$. Reduce: $32 \\bmod 9 = 5$.]@
 
 The savings are dramatic for large numbers. The product $89 \\times 76 = 6{,}764$ is never needed — the same answer emerges from the product $8 \\times 4 = 32$, a computation simple enough to do mentally.
 
@@ -1134,6 +1139,7 @@ The principle chains through multiple factors. For $(13 \\cdot 17 \\cdot 19) \\b
   title: `Powers`,
   content: `Computing $a^k \\bmod n$ by first calculating $a^k$ and then reducing is impractical — the intermediate number grows exponentially. Instead, reduce after every multiplication.
 
+@academic[example:Example
 For $7^4 \\bmod 10$, build the [power](!/algebra/powers) step by step:
 
 $7^1 \\bmod 10 = 7$
@@ -1144,18 +1150,21 @@ $7^3 = 9 \\cdot 7 = 63 \\to 63 \\bmod 10 = 3$
 
 $7^4 = 3 \\cdot 7 = 21 \\to 21 \\bmod 10 = 1$
 
-The answer is $1$. The largest intermediate number was $63$ — far smaller than $7^4 = 2{,}401$.
+The answer is $1$.]@
+
+The largest intermediate number was $63$ — far smaller than $7^4 = 2{,}401$.
 
 @academic[fact,aside:true,width:35%:Exponents with 600 digits
 RSA encryption computes $c^d \\bmod n$ with an exponent $d$ of about $600$ digits. Squaring and reducing gets there in fewer than $4{,}100$ multiplications, while $c^d$ written out in full would have more digits than there are atoms in the universe.]@
 
 The same power can be reached faster by squaring. Squaring $7$ gives $7^2 = 49 \\to 9$, and squaring again gives $7^4 = 9^2 = 81 \\to 1$: two multiplications instead of three. Each squaring doubles the exponent, so $a^{1024}$ takes only ten squarings, and any other power is a product of these squares, chosen by the binary digits of the exponent.
 
+@academic[example:Example
 For $3^{10} \\bmod 7$:
 
 $3^1 = 3$, $3^2 = 9 \\to 2$, $3^3 = 6$, $3^4 = 18 \\to 4$, $3^5 = 12 \\to 5$, $3^6 = 15 \\to 1$.
 
-At $3^6$, the remainder returns to $1$. From here: $3^{10} = 3^6 \\cdot 3^4 \\equiv 1 \\cdot 4 = 4 \\pmod{7}$.`,
+At $3^6$, the remainder returns to $1$. From here: $3^{10} = 3^6 \\cdot 3^4 \\equiv 1 \\cdot 4 = 4 \\pmod{7}$.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -1169,13 +1178,15 @@ Once a remainder reappears, the entire pattern cycles from that point forward.
 
 Powers of $2 \\bmod 7$ produce the sequence: $2, 4, 1, 2, 4, 1, 2, 4, 1, \\ldots$ The cycle $\\{2, 4, 1\\}$ has length $3$ and repeats indefinitely.
 
-To compute $2^{100} \\bmod 7$, divide the exponent by the cycle length: $100 = 3 \\cdot 33 + 1$. The remainder is $1$, so $2^{100}$ lands at the same position as $2^1$ in the cycle. The answer is $2$.
+@academic[example:Example
+To compute $2^{100} \\bmod 7$, divide the exponent by the cycle length: $100 = 3 \\cdot 33 + 1$. The remainder is $1$, so $2^{100}$ lands at the same position as $2^1$ in the cycle. The answer is $2$.]@
 
 @academic[pitfall,aside:true,width:35%:Reducing the exponent by the modulus
 Reducing the exponent of $2^{100}$ modulo $7$ gives $100 \\bmod 7 = 2$ and $2^2 = 4$. The powers repeat every $3$ steps, not every $7$: $100 \\bmod 3 = 1$, so $2^{100} \\bmod 7 = 2$.
 [Read more](!#pitfalls)]@
 
-Powers of $3 \\bmod 10$ cycle through $\\{3, 9, 7, 1\\}$ with length $4$. For $3^{75} \\bmod 10$: $75 = 4 \\cdot 18 + 3$, so $3^{75}$ matches $3^3 = 7$. The answer is $7$.
+@academic[example:Example
+Powers of $3 \\bmod 10$ cycle through $\\{3, 9, 7, 1\\}$ with length $4$. For $3^{75} \\bmod 10$: $75 = 4 \\cdot 18 + 3$, so $3^{75}$ matches $3^3 = 7$. The answer is $7$.]@
 
 The cycle always closes once the remainder $1$ appears (assuming it does), because $a^k \\equiv 1$ implies $a^{k+j} \\equiv a^j$ for any $j$ — the sequence restarts.`,
   before: ``,
@@ -1204,15 +1215,17 @@ obj9: {
 
 Finding the last digit of a large [power](!/algebra/powers) reduces to modular exponentiation with $n = 10$.
 
+@academic[example:Example
 Find the last digit of $7^{100}$. The powers of $7 \\bmod 10$ cycle: $7, 9, 3, 1, 7, 9, 3, 1, \\ldots$ with period $4$.
 
-Divide the exponent by the cycle length: $100 = 4 \\cdot 25 + 0$. A remainder of $0$ means the exponent aligns with the end of a full cycle — the position of $7^4$, whose last digit is $1$.
+Divide the exponent by the cycle length: $100 = 4 \\cdot 25 + 0$. A remainder of $0$ means the exponent aligns with the end of a full cycle — the position of $7^4$, whose last digit is $1$.]@
 
 @academic[pitfall,aside:true,width:35%:Reading remainder 0 as the first place
 Reading the remainder $0$ in $20 = 4 \\cdot 5 + 0$ as the first place of the cycle $2, 4, 8, 6$ gives $2$ as the last digit of $2^{20}$. A remainder of $0$ points to the last place, so the last digit is $6$.
 [Read more](!#pitfalls)]@
 
-Find the last digit of $3^{75}$. The powers of $3 \\bmod 10$ cycle: $3, 9, 7, 1$ with period $4$. Divide: $75 = 4 \\cdot 18 + 3$. The remainder $3$ points to the third position in the cycle: $7$.
+@academic[example:Example
+Find the last digit of $3^{75}$. The powers of $3 \\bmod 10$ cycle: $3, 9, 7, 1$ with period $4$. Divide: $75 = 4 \\cdot 18 + 3$. The remainder $3$ points to the third position in the cycle: $7$.]@
 
 The method works for any base. Identify the cycle of last digits, find the exponent's position within that cycle, and read off the answer — no need to compute the full power.`,
   before: ``,
@@ -1239,9 +1252,11 @@ The same logic handles backward calculations. If it is $3{:}00$ now, what time w
   title: `Day of Week Problems`,
   content: `Days of the week cycle with period $7$, making them a $\\bmod 7$ system. Assign numbers: Sunday $= 0$, Monday $= 1$, Tuesday $= 2$, Wednesday $= 3$, Thursday $= 4$, Friday $= 5$, Saturday $= 6$.
 
-Today is Wednesday (day $3$). What day is it in $100$ days? Compute $(3 + 100) \\bmod 7 = 103 \\bmod 7$. Divide: $103 = 7 \\cdot 14 + 5$. Day $5$ is Friday.
+@academic[example:Example
+Today is Wednesday (day $3$). What day is it in $100$ days? Compute $(3 + 100) \\bmod 7 = 103 \\bmod 7$. Divide: $103 = 7 \\cdot 14 + 5$. Day $5$ is Friday.]@
 
-January $1$ is a Monday (day $1$). What day is March $15$? Count the days: $31$ (remaining in January) $+ 28$ (February) $+ 14$ (first $14$ days of March) $= 73$ days later. Compute $(1 + 73) \\bmod 7 = 74 \\bmod 7$. Divide: $74 = 7 \\cdot 10 + 4$. Day $4$ is Thursday.
+@academic[example:Example
+January $1$ is a Monday (day $1$). What day is March $15$? Count the days: $31$ (remaining in January) $+ 28$ (February) $+ 14$ (first $14$ days of March) $= 73$ days later. Compute $(1 + 73) \\bmod 7 = 74 \\bmod 7$. Divide: $74 = 7 \\cdot 10 + 4$. Day $4$ is Thursday.]@
 
 @academic[pitfall,aside:true,width:35%:Counting the days off by one
 Counting $31 - 1 = 30$ days for the rest of January gives $72$ days and $(1 + 72) \\bmod 7 = 3$, a Wednesday. January 1 to February 1 is $31$ days, so the count is $73$ and March 15 is a Thursday.
@@ -1249,7 +1264,10 @@ Counting $31 - 1 = 30$ days for the rest of January gives $72$ days and $(1 + 72
 
 In date problems the reduction modulo $7$ is the easy step; the work lies in the day count. The number added to the starting day is the number of days that pass between the two dates, and it is built from the month lengths before any reduction is done.
 
-Larger spans work identically. What day is it $1{,}000$ days from a Tuesday (day $2$)? Compute $(2 + 1000) \\bmod 7 = 1002 \\bmod 7$. Divide: $1002 = 7 \\cdot 143 + 1$. Day $1$ is Monday.`,
+Larger spans work identically.
+
+@academic[example:Example
+What day is it $1{,}000$ days from a Tuesday (day $2$)? Compute $(2 + 1000) \\bmod 7 = 1002 \\bmod 7$. Divide: $1002 = 7 \\cdot 143 + 1$. Day $1$ is Monday.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -1420,7 +1438,7 @@ const schemas = {
     "@type": "LearningResource",
     "name": "Modular Arithmetic",
     "description": "Master modular arithmetic: addition, subtraction, multiplication, and exponentiation mod n. Solve last digit problems, clock calculations, and day of week questions with power cycles.",
-    "url": "https://www.learnmathclass.com/arithmetic/modulo",
+    "url": "https://www.learnmathclass.com/arithmetic/modulo/operations",
     "inLanguage": "en-US",
     "learningResourceType": "Explanation",
     "educationalLevel": "High School, College",
@@ -1482,7 +1500,7 @@ const schemas = {
         "@type": "ListItem",
         "position": 4,
         "name": "Modular Arithmetic",
-        "item": "https://www.learnmathclass.com/arithmetic/modulo"
+        "item": "https://www.learnmathclass.com/arithmetic/modulo/operations"
       }
     ]
   }
@@ -1530,7 +1548,7 @@ return {
       title: "Modular Arithmetic: Operations, Power Cycles & Applications | Learn Math Class",
       description: "Master modular arithmetic: addition, subtraction, multiplication, and exponentiation mod n. Solve last digit problems, clock calculations, and day of week questions with power cycles.",
       keywords: keyWords.join(", "),
-      url: "/arithmetic/modulo",
+      url: "/arithmetic/modulo/operations",
       name: "Modular Arithmetic"
     },
   }

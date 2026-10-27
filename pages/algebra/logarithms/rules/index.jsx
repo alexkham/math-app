@@ -12,7 +12,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 
 
 export async function getStaticProps(){

@@ -456,7 +456,10 @@ When $k = 0$, the inequality $|f(x)| < 0$ asks for the [absolute value](!/algebr
 
 @academic[rule_corollary_plain:When $k < 0$, both $|f(x)| < k$ and $|f(x)| \\leq k$ have empty solution sets. Absolute value is never negative, so it can never be less than a negative number.]@
 
-For linear $f(x)$, the double inequality is a three-part chain solved by isolating $x$ in the middle. The inequality $|2x - 3| < 5$ becomes $-5 < 2x - 3 < 5$. Adding $3$ throughout: $-2 < 2x < 8$. Dividing by $2$: $-1 < x < 4$. The solution is the open interval $(-1, 4)$.`,
+For linear $f(x)$, the double inequality is a three-part chain solved by isolating $x$ in the middle.
+
+@academic[example:Example
+The inequality $|2x - 3| < 5$ becomes $-5 < 2x - 3 < 5$. Adding $3$ throughout: $-2 < 2x < 8$. Dividing by $2$: $-1 < x < 4$. The solution is the open interval $(-1, 4)$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -474,7 +477,8 @@ When $k = 0$, the inequality $|f(x)| > 0$ asks where $f(x)$ is nonzero. The solu
 
 The solution is $(-\\infty, \\infty)$.
 
-For a linear example: $|4x + 1| \\geq 7$ becomes $4x + 1 \\leq -7$ or $4x + 1 \\geq 7$. From the first: $4x \\leq -8$, so $x \\leq -2$. From the second: $4x \\geq 6$, so $x \\geq \\frac{3}{2}$. The solution is $(-\\infty, -2] \\cup [\\frac{3}{2}, \\infty)$.
+@academic[example:Example
+For a linear example: $|4x + 1| \\geq 7$ becomes $4x + 1 \\leq -7$ or $4x + 1 \\geq 7$. From the first: $4x \\leq -8$, so $x \\leq -2$. From the second: $4x \\geq 6$, so $x \\geq \\frac{3}{2}$. The solution is $(-\\infty, -2] \\cup [\\frac{3}{2}, \\infty)$.]@
 
 @academic[pitfall,aside:true,width:35%:Writing the greater-than form as a chain
 Writing $|4x + 1| \\geq 7$ as $-7 \\leq 4x + 1 \\leq 7$ gives $-2 \\leq x \\leq \\frac{3}{2}$, the points where $|4x + 1| \\leq 7$. The greater-than form splits instead: $x \\leq -2$ or $x \\geq \\frac{3}{2}$.
@@ -514,13 +518,14 @@ To solve your own absolute value inequality with each step shown, use the [absol
     title: `Absolute Value Inequalities with Quadratic or Other Expressions`,
     content: `When the expression inside the absolute value is not linear, the compound inequality after conversion requires more powerful methods — typically the sign chart.
 
+@academic[example:Example
 Solve $|x^2 - 4| < 5$. Convert to $-5 < x^2 - 4 < 5$. This is two simultaneous inequalities: $x^2 - 4 > -5$ and $x^2 - 4 < 5$.
 
 From $x^2 - 4 > -5$: $x^2 > -1$. Since $x^2 \\geq 0$ for all real $x$, this holds everywhere. It imposes no restriction.
 
 From $x^2 - 4 < 5$: $x^2 < 9$, which gives $-3 < x < 3$.
 
-The intersection of "all real numbers" and "$-3 < x < 3$" is simply $(-3, 3)$.
+The intersection of "all real numbers" and "$-3 < x < 3$" is simply $(-3, 3)$.]@
 
 Solve $|x^2 - 7x + 10| \\geq 2$. Convert to $x^2 - 7x + 10 \\leq -2$ or $x^2 - 7x + 10 \\geq 2$.
 
@@ -553,7 +558,8 @@ $$(g(x) - f(x))(g(x) + f(x)) > 0$$]@
 
 This is a [polynomial inequality](!/algebra/inequalities/polynomial) solvable by sign chart. The critical points are the roots of $g(x) - f(x) = 0$ and $g(x) + f(x) = 0$.
 
-For $|2x - 1| < |x + 3|$, square both sides: $(2x - 1)^2 < (x + 3)^2$. Rearrange: $(x + 3)^2 - (2x - 1)^2 > 0$. Factor: $((x + 3) - (2x - 1))((x + 3) + (2x - 1)) > 0$, which gives $(4 - x)(3x + 2) > 0$. The roots are $x = 4$ and $x = -\\frac{2}{3}$. The sign chart yields the solution $\\left(-\\frac{2}{3}, 4\\right)$.
+@academic[example:Example
+For $|2x - 1| < |x + 3|$, square both sides: $(2x - 1)^2 < (x + 3)^2$. Rearrange: $(x + 3)^2 - (2x - 1)^2 > 0$. Factor: $((x + 3) - (2x - 1))((x + 3) + (2x - 1)) > 0$, which gives $(4 - x)(3x + 2) > 0$. The roots are $x = 4$ and $x = -\\frac{2}{3}$. The sign chart yields the solution $\\left(-\\frac{2}{3}, 4\\right)$.]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the bars on both sides
 Dropping the bars in $|2x - 1| < |x + 3|$ gives $2x - 1 < x + 3$, so $x < 4$. That keeps $x = -1$, where $|-3| = 3$ is not less than $|2| = 2$. Squaring gives $\\left(-\\frac{2}{3}, 4\\right)$.

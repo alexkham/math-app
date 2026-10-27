@@ -305,7 +305,10 @@ $$6x - 15 = 4x + 1$$]@
 
 From here, the procedure is identical to any multi-step equation. Subtract $4x$ from both sides to get $2x - 15 = 1$, add $15$ to get $2x = 16$, and divide by $2$ to reach $x = 8$.
 
-Nested parentheses require working from the innermost grouping outward. The equation $2[3(x + 1) - 4] = 10$ simplifies as follows: first distribute the $3$ inside the brackets to get $2[3x + 3 - 4] = 10$, then simplify inside the brackets to $2[3x - 1] = 10$, then distribute the $2$ to obtain $6x - 2 = 10$, and finally solve to get $x = 2$.
+Nested parentheses require working from the innermost grouping outward.
+
+@academic[example:Example
+The equation $2[3(x + 1) - 4] = 10$ simplifies as follows: first distribute the $3$ inside the brackets to get $2[3x + 3 - 4] = 10$, then simplify inside the brackets to $2[3x - 1] = 10$, then distribute the $2$ to obtain $6x - 2 = 10$, and finally solve to get $x = 2$.]@
 
 A persistent source of error is the negative sign preceding parentheses. In the expression $-(x + 4)$, the negative distributes to every term inside, producing $-x - 4$. Writing $-x + 4$ instead is one of the most common algebraic mistakes, and it changes the solution entirely.
 
@@ -379,9 +382,17 @@ The choice of multiplier depends on the finest decimal present. If the most deci
     title: `Special Cases`,
     content: `The procedure for solving a linear equation assumes that the variable survives the simplification process. When it does not, two outcomes are possible, and neither produces a finite solution set.
 
-An identity arises when simplification eliminates the variable and leaves a true numerical statement. The equation $2(x + 3) = 2x + 6$ distributes to $2x + 6 = 2x + 6$. Subtracting $2x$ from both sides gives $6 = 6$, which is true regardless of $x$. Every real number satisfies the original equation, and the solution set is $\\mathbb{R}$. The equation was not conditional — it was a restatement of an algebraic identity.
+An identity arises when simplification eliminates the variable and leaves a true numerical statement.
 
-A contradiction arises when simplification eliminates the variable and leaves a false numerical statement. The equation $3(x + 1) = 3x + 8$ distributes to $3x + 3 = 3x + 8$. Subtracting $3x$ from both sides gives $3 = 8$, which is false for every value of $x$. No real number satisfies the equation, and the solution set is empty.
+@academic[example:Example
+The equation $2(x + 3) = 2x + 6$ distributes to $2x + 6 = 2x + 6$. Subtracting $2x$ from both sides gives $6 = 6$, which is true regardless of $x$. Every real number satisfies the original equation, and the solution set is $\\mathbb{R}$.]@
+
+The equation was not conditional — it was a restatement of an algebraic identity.
+
+A contradiction arises when simplification eliminates the variable and leaves a false numerical statement.
+
+@academic[example:Example
+The equation $3(x + 1) = 3x + 8$ distributes to $3x + 3 = 3x + 8$. Subtracting $3x$ from both sides gives $3 = 8$, which is false for every value of $x$. No real number satisfies the equation, and the solution set is empty.]@
 
 @academic[rule_plain:Both situations are recognizable during solving: the variable terms cancel completely, and the remaining constant equation decides between identity and contradiction. If the constants match, every value works. If they clash, nothing does.]@
 

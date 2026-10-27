@@ -1217,6 +1217,9 @@ The graphical method is especially useful for transformed functions — $2\\sin(
     title: `The Unit Circle Method`,
     content: `The [unit circle](!/trigonometry/unit-circle) provides a geometric alternative to the graphical method, particularly effective for basic inequalities involving $\\sin(x)$ and $\\cos(x)$.
 
+@academic[fact,aside:true,width:35%:One whole number in three
+Of the first million whole numbers, 333,336 satisfy $\\sin n > \\frac{1}{2}$, almost exactly one in three: the share of the circle taken by the arc from $\\frac{\\pi}{6}$ to $\\frac{5\\pi}{6}$. Because $\\pi$ is irrational, the angles $n$ never land on the same point twice and spread evenly round the circle.]@
+
 **For sine inequalities:** since $\\sin\\theta$ is the $y$-coordinate on the unit circle, the inequality $\\sin(x) > a$ asks: for which angles is the $y$-coordinate above the line $y = a$?
 
 Draw the horizontal line $y = a$ across the unit circle. It intersects the circle at two points (assuming $|a| < 1$), dividing the circle into two arcs. The arc where points have $y$-coordinates above $a$ is the solution. Reading off the angles at the intersection points gives the interval boundaries.
@@ -1677,6 +1680,7 @@ export default function InequalitiesPage({
           `Whether each endpoint belongs to the answer is then decided by whether the inequality is strict.`,
           <div key={'obj1-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          `@academic[punchline:An inequality is answered by whole stretches of angles, not by points, and the stretches repeat with the function's period.]@`,
         ]
     },
     {
@@ -1727,6 +1731,7 @@ export default function InequalitiesPage({
           sectionsContent.obj6.content,
           <div key={'unit-compoundInequality'} dangerouslySetInnerHTML={{ __html: demoUnits.compoundInequality }} />,
           `Each of those intervals then repeats every $2\\pi$ in the general solution.`,
+          `@academic[punchline:A compound inequality is two inequalities at once: solve each on its own, then keep only the overlap.]@`,
         ]
     },
     {

@@ -3283,6 +3283,9 @@ $$\\cot(\\theta) = \\frac{\\text{adjacent}}{\\text{opposite}} = \\frac{1}{\\tan(
 
 These three functions — cosecant, secant, and cotangent — do not introduce new information. They repackage the same side relationships in inverted form. If $\\sin(\\theta) = \\frac{3}{5}$, then $\\csc(\\theta) = \\frac{5}{3}$. If $\\cos(\\theta) = \\frac{4}{5}$, then $\\sec(\\theta) = \\frac{5}{4}$.
 
+@academic[fact,aside:true,width:35%:Pyramid builders worked in cotangents
+Egyptian scribes gave a pyramid's slope as its seked: the run, in palms, for each cubit of rise, with 7 palms to the cubit. That is $7\\cot\\theta$, and a seked of $5\\frac{1}{2}$ palms gives $\\theta \\approx 51.8°$, the slope of the Great Pyramid.]@
+
 In basic triangle-solving problems, the reciprocal functions appear less frequently than sine, cosine, and tangent. Their importance grows substantially in the study of [identities](!/trigonometry/identities), where expressions involving $\\sec^2\\theta$ and $\\csc^2\\theta$ arise from the Pythagorean identity and its variants. They also appear naturally in calculus — the derivatives and integrals of tangent and cotangent involve secant and cosecant — and in various formulas throughout physics and engineering.
 
 Since the hypotenuse is always longer than either leg, $\\csc(\\theta) > 1$ and $\\sec(\\theta) > 1$ for all acute angles. Cotangent, like tangent, is unbounded: $\\cot(\\theta) = \\frac{\\cos(\\theta)}{\\sin(\\theta)}$ can take any positive value.
@@ -3856,6 +3859,7 @@ export default function RightTrianglePage({
           sectionsContent.obj3.content,
           <div key={'obj3-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          `@academic[punchline:Cosecant, secant and cotangent add no new information: each is sine, cosine or tangent turned upside down.]@`,
         ]
     },
     {
@@ -3929,6 +3933,7 @@ export default function RightTrianglePage({
           `The same argument pairs tangent with cotangent, and secant with cosecant.`,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          `@academic[punchline:Each cofunction is the original function evaluated at the other acute angle, which is what the prefix co- records.]@`,
         ]
     },
     {

@@ -693,6 +693,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -859,6 +860,24 @@ const keyWords = [
 `
 
 
+    // Concept introduction (section 2, "Why Common Denominators Are
+    // Required") — template C, failure first. Running instance: 1/3 + 1/4.
+    // Old obj2 text (three paragraphs, no widgets) is kept in
+    // sectionsContent.obj2, unused, and reused verbatim.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciDecTable = ciTableOpen(['quantity', 'as a decimal']) +
+      ciRow(['1/3', '≈ 0.333']) +
+      ciRow(['1/4', '0.25'], { shade: true }) +
+      ciRow(['"tops plus tops, bottoms plus bottoms": 2/7', '≈ 0.286 — less than 1/3 alone'], { color: '#a4243b', cols: [1] }) +
+      ciRow(['the real total, 0.333 + 0.25', '≈ 0.583'], { shade: true, last: true, color: '#2563EB', cols: [1] }) +
+      '</tbody></table>'
+
     const sectionsContent={
 
    obj0: {
@@ -916,7 +935,10 @@ The least common denominator (LCD) is the smallest such number, keeping arithmet
 @academic[fact,aside:true,width:35%:Ninety-nine fractions that sum to $\\frac{99}{100}$
 $\\frac{1}{1 \\times 2} + \\frac{1}{2 \\times 3} + \\cdots + \\frac{1}{99 \\times 100} = \\frac{99}{100}$. Consecutive denominators share no factor, so each term equals $\\frac{1}{n} - \\frac{1}{n + 1}$ and in the long sum every middle term cancels, leaving $1 - \\frac{1}{100}$.]@
 
-Finding the LCD uses the [least common multiple](!/arithmetic/divisibility/lcm). List multiples of each denominator until a match appears, or use prime factorization for larger numbers. For denominators 4 and 6: multiples of 4 are 4, 8, 12, 16... and multiples of 6 are 6, 12, 18... The first common multiple is 12.
+Finding the LCD uses the [least common multiple](!/arithmetic/divisibility/lcm). List multiples of each denominator until a match appears, or use prime factorization for larger numbers.
+
+@academic[example:Example
+For denominators 4 and 6: multiples of 4 are 4, 8, 12, 16... and multiples of 6 are 6, 12, 18... The first common multiple is 12.]@
 
 When the denominators share no common factor, the LCD is simply their product, as $3 \\times 4 = 12$. Any two consecutive whole numbers are like this, so $\\frac{1}{3} - \\frac{1}{4} = \\frac{4}{12} - \\frac{3}{12} = \\frac{1}{12}$ and $\\frac{1}{4} - \\frac{1}{5} = \\frac{5}{20} - \\frac{4}{20} = \\frac{1}{20}$. The difference of two such unit fractions is again a unit fraction, with the product of the denominators below the line.`,
     before: ``,
@@ -945,7 +967,10 @@ Changing only the bottoms turns $\\frac{2}{3} + \\frac{1}{4}$ into $\\frac{2}{12
 
 Each factor is the LCD divided by the original denominator: $12 \\div 3 = 4$ for the thirds and $12 \\div 4 = 3$ for the quarters. Multiplying a fraction by $\\frac{4}{4}$ or $\\frac{3}{3}$ multiplies it by $1$, so its value stays the same; only the size of the pieces it is counted in changes.
 
-For subtraction, the process is identical. To compute $\\frac{5}{6} - \\frac{1}{4}$ with LCD 12: convert to $\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}$.`,
+For subtraction, the process is identical.
+
+@academic[example:Example
+To compute $\\frac{5}{6} - \\frac{1}{4}$ with LCD 12: convert to $\\frac{10}{12} - \\frac{3}{12} = \\frac{7}{12}$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -955,9 +980,13 @@ For subtraction, the process is identical. To compute $\\frac{5}{6} - \\frac{1}{
     title: `Adding Mixed Numbers`,
     content: `Two methods handle addition of [mixed numbers](!/arithmetic/fractions/mixed-numbers). The first adds whole parts and fractional parts separately. The second converts everything to improper fractions.
 
-Using the first method for $2\\frac{1}{3} + 4\\frac{1}{4}$: add wholes $2 + 4 = 6$, then add fractions $\\frac{1}{3} + \\frac{1}{4} = \\frac{4}{12} + \\frac{3}{12} = \\frac{7}{12}$. The result is $6\\frac{7}{12}$.
+@academic[example:Example
+Using the first method for $2\\frac{1}{3} + 4\\frac{1}{4}$: add wholes $2 + 4 = 6$, then add fractions $\\frac{1}{3} + \\frac{1}{4} = \\frac{4}{12} + \\frac{3}{12} = \\frac{7}{12}$. The result is $6\\frac{7}{12}$.]@
 
-When the fractional sum exceeds 1, regroup. For $3\\frac{3}{4} + 2\\frac{1}{2}$: wholes give $3 + 2 = 5$, fractions give $\\frac{3}{4} + \\frac{2}{4} = \\frac{5}{4} = 1\\frac{1}{4}$. Combine: $5 + 1\\frac{1}{4} = 6\\frac{1}{4}$.`,
+When the fractional sum exceeds 1, regroup.
+
+@academic[example:Example
+For $3\\frac{3}{4} + 2\\frac{1}{2}$: wholes give $3 + 2 = 5$, fractions give $\\frac{3}{4} + \\frac{2}{4} = \\frac{5}{4} = 1\\frac{1}{4}$. Combine: $5 + 1\\frac{1}{4} = 6\\frac{1}{4}$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -967,13 +996,15 @@ When the fractional sum exceeds 1, regroup. For $3\\frac{3}{4} + 2\\frac{1}{2}$:
     title: `Subtracting Mixed Numbers`,
     content: `Subtraction of mixed numbers also works by handling parts separately, but borrowing may be necessary when the first fractional part is smaller than the second.
 
-For $5\\frac{3}{4} - 2\\frac{1}{4}$: subtract wholes $5 - 2 = 3$, subtract fractions $\\frac{3}{4} - \\frac{1}{4} = \\frac{2}{4} = \\frac{1}{2}$. The result is $3\\frac{1}{2}$.
+@academic[example:Example
+For $5\\frac{3}{4} - 2\\frac{1}{4}$: subtract wholes $5 - 2 = 3$, subtract fractions $\\frac{3}{4} - \\frac{1}{4} = \\frac{2}{4} = \\frac{1}{2}$. The result is $3\\frac{1}{2}$.]@
 
 @academic[pitfall,aside:true,width:35%:Subtracting the fractions the wrong way round
 Subtracting the smaller fraction from the larger, $\\frac{4}{5} - \\frac{1}{5}$, turns $6\\frac{1}{5} - 3\\frac{4}{5}$ into $3\\frac{3}{5}$. Borrowing first gives $5\\frac{6}{5} - 3\\frac{4}{5} = 2\\frac{2}{5}$.
 [Read more](!#8)]@
 
-For $5\\frac{1}{4} - 2\\frac{3}{4}$: the fraction $\\frac{1}{4}$ is smaller than $\\frac{3}{4}$, so borrow 1 from the 5. Rewrite as $4\\frac{5}{4} - 2\\frac{3}{4}$. Now subtract: $4 - 2 = 2$ and $\\frac{5}{4} - \\frac{3}{4} = \\frac{2}{4} = \\frac{1}{2}$. The result is $2\\frac{1}{2}$.`,
+@academic[example:Example
+For $5\\frac{1}{4} - 2\\frac{3}{4}$: the fraction $\\frac{1}{4}$ is smaller than $\\frac{3}{4}$, so borrow 1 from the 5. Rewrite as $4\\frac{5}{4} - 2\\frac{3}{4}$. Now subtract: $4 - 2 = 2$ and $\\frac{5}{4} - \\frac{3}{4} = \\frac{2}{4} = \\frac{1}{2}$. The result is $2\\frac{1}{2}$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -985,7 +1016,8 @@ For $5\\frac{1}{4} - 2\\frac{3}{4}$: the fraction $\\frac{1}{4}$ is smaller than
 
 For $5 + \\frac{3}{4}$: the result is simply $5\\frac{3}{4}$.
 
-For $5 - \\frac{3}{4}$: rewrite 5 as $4\\frac{4}{4}$, then subtract $4\\frac{4}{4} - \\frac{3}{4} = 4\\frac{1}{4}$.
+@academic[example:Example
+For $5 - \\frac{3}{4}$: rewrite 5 as $4\\frac{4}{4}$, then subtract $4\\frac{4}{4} - \\frac{3}{4} = 4\\frac{1}{4}$.]@
 
 @academic[pitfall,aside:true,width:35%:Putting the whole number over the denominator
 Writing $3$ as $\\frac{3}{5}$ turns $3 + \\frac{2}{5}$ into $\\frac{3}{5} + \\frac{2}{5} = 1$, less than the $3$ it started from. In fifths $3 = \\frac{15}{5}$, and the sum is $\\frac{17}{5} = 3\\frac{2}{5}$.
@@ -1233,6 +1265,13 @@ const schemas = {
     notes: [{ text: 'twelfths fit both thirds and quarters (LCD 12)' }, { text: '8 twelfths + 3 twelfths = 11 twelfths' }], caption: 'Unlike denominators: convert, then add' };
   const fbAddMistake = { kind: 'bars', svgTitle: 'Adding denominators: 1/2 plus 1/3 is not 2/5 but 5/6', labelWidth: 80, rows: [{ n: 2, k: 1, label: '1/2', partLabels: true }, { n: 3, k: 1, label: '+ 1/3', color: 'f', partLabels: true }, { n: 5, k: 2, label: '≠ 2/5', color: 'g', partLabels: true }, { n: 6, k: 5, label: '= 5/6', color: 'r', partLabels: true }],
     notes: [{ text: '2/5 is shorter than 1/2 alone: a sum cannot shrink' }, { text: 'correct: 3/6 + 2/6 = 5/6', color: 'r' }], caption: 'Never add the denominators' };
+  const fbCiThirdsFourths = { kind: 'bars', svgTitle: '1/3 plus 1/4 is not 2/7; in twelfths it is 4/12 plus 3/12, which makes 7/12', labelWidth: 80,
+    rows: [{ n: 3, k: 1, label: '1/3', partLabels: true }, { n: 4, k: 1, label: '+ 1/4', color: 'r', partLabels: true }, { n: 7, k: 2, label: '≠ 2/7', color: 'f', partLabels: true }, { n: 12, k: 7, label: '= 7/12', color: 'g' }] }
+  const conceptIntroFigures = {
+    bars: renderFractionBar(fbCiThirdsFourths),
+    decTable: ciDecTable,
+  };
+
   const demoUnits = {
     sameDenAdd: demoUnitFrame({
       svg: renderFractionBar(fbSameDenAdd),
@@ -1260,6 +1299,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Adding & Subtracting Fractions: Common Denominators | Learn Math Class",
       description: "Learn to add and subtract fractions: same and different denominators, finding LCD, mixed numbers, borrowing, and avoiding common mistakes. Step-by-step examples.",
@@ -1272,9 +1312,66 @@ return {
    }
 
 
-export default function AddingSubtractingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function AddingSubtractingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Same-denominator fractions add top to top — so it is tempting to add top to top and bottom to bottom every time.`,
+        content: [
+          `By that rule $\\frac{1}{3} + \\frac{1}{4}$ would be $\\frac{1 + 1}{3 + 4} = \\frac{2}{7}$. It looks tidy and uses every number once.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The answer 2/7 is smaller than 1/3 — adding something positive made the total shrink.`,
+        content: [
+          ciTable('decTable'),
+        ],
+        visual: ciSvg('bars'),
+      },
+      {
+        id: 'diagnosis',
+        lead: `The failure was predictable: thirds and fourths are pieces of different sizes, and counting them together mixes units.`,
+        content: [
+          `Fractions with different denominators represent pieces of different sizes. Adding $\\frac{1}{3}$ and $\\frac{1}{4}$ directly makes no sense because thirds and fourths are not the same unit.`,
+          `Consider the analogy of adding 2 feet and 5 inches. The numbers cannot be combined until both are expressed in the same unit — either all inches or all feet. Similarly, $\\frac{1}{3}$ and $\\frac{1}{4}$ must be rewritten as [equivalent fractions](!/arithmetic/fractions/equivalent) with matching denominators before the numerators can be added.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [common denominator](!/arithmetic/definitions#common_denominator) is a denominator two or more fractions can all be rewritten with. Fractions can be added or subtracted by working on the numerators exactly when they share a denominator.`,
+        footer: `So $\\frac{1}{3} + \\frac{1}{4} = \\frac{4}{12} + \\frac{3}{12} = \\frac{7}{12}$, with $12$ as the common denominator.`,
+      },
+      {
+        id: 'kind',
+        lead: `A common denominator is a shared unit: a piece size that both fractions can be measured in.`,
+        content: [
+          `Visually, a bar divided into thirds and a bar divided into fourths have different segment sizes. Only by subdividing both bars into twelfths — a common unit — can the shaded regions be meaningfully combined.`,
+          `Any number that both denominators divide into works — $12$, $24$ or $36$ for thirds and fourths — and the smallest is their [least common multiple](!/arithmetic/divisibility/lcm).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the rule gives a quick test: a sum of positive fractions can never be smaller than either part.`,
+        content: `If an answer comes out below one of the fractions being added, the denominators were not matched first. Finding a good common denominator is the real work, as the next section, [finding a common denominator](!/arithmetic/fractions/adding-subtracting#3), shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers finding a common denominator, converting fractions to it, adding and subtracting mixed numbers and whole numbers, and common mistakes.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1300,7 +1397,7 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

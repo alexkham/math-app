@@ -1607,7 +1607,7 @@ $$\\binom{n}{r} = \\frac{n!}{r! \\, (n-r)!}.$$
 @academic[formulas_link:Browse all combinatorics formulas
 /combinatorics/formulas]@
 
-If $n$ is the total number of distinct items and $r$ is the number of items to select, then order doesn't matter and repetition isn't allowed.
+Here $n$ is the total number of distinct items and $r$ is the number of items to select; order doesn't matter and repetition isn't allowed.
 
  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=6) →@
 
@@ -1652,7 +1652,7 @@ $$\\frac{n!}{n_1! \\, n_2! \\cdots n_k!}, \\quad n_1 + n_2 + \\cdots + n_k = n.$
 Splitting $6$ people into $3$ pairs with no names as $\\frac{6!}{2! \\, 2! \\, 2!} = 90$ counts each split once for every one of the $3! = 6$ ways to name the pairs. The number of splits is $\\frac{90}{3!} = 15$.
 [Read more](!#pitfalls)]@
 
-If $n$ is the total number of distinct items to partition into $k$ groups of sizes $n_1, n_2, \\ldots, n_k$ respectively, where the groups are labeled (distinguishable) and the order within each group does not matter.
+Here $n$ is the total number of distinct items to partition into $k$ groups of sizes $n_1, n_2, \\ldots, n_k$ respectively, where the groups are labeled (distinguishable) and the order within each group does not matter.
 
 The groups count as labeled when each one has its own name or role, such as Team A and Team B, or a morning shift and an evening shift. Exchanging the members of two such groups then gives a different split. When the groups are told apart only by who is in them, as with tables at an event, exchanging two whole groups of the same size leaves the split as it was.
      
@@ -1662,7 +1662,12 @@ The groups count as labeled when each one has its own name or role, such as Team
 `,
       between:  `
       **Partition into Groups — Examples**:
-Dividing students into study groups, splitting employees into project teams, grouping tasks into phases of a project, dividing guests into tables at an event, forming clusters of data points in analysis.`,
+Dividing students into study groups, splitting employees into project teams, grouping tasks into phases of a project, dividing guests into tables at an event, forming clusters of data points in analysis.
+
+@academic[fact,aside:true,width:35%:A perfect bridge deal is hardly ever luck
+The partition formula gives $\\frac{52!}{(13!)^4} \\approx 5.36 \\times 10^{28}$ bridge deals, and only $4! = 24$ of them hand each seat a complete suit, a chance of about $4.5 \\times 10^{-28}$. A reported deal of four whole suits is far more likely a new deck, sorted by suit, that was barely shuffled.]@
+
+A game of bridge starts with exactly this kind of split. The $52$ cards are dealt into four hands of $13$, and the hands are labeled by the seats North, East, South and West, so the same cards in a different seat make a different deal. The order in which the cards arrive in a hand does not matter, only which $13$ cards it holds. In the formula below, $n = 52$, $k = 4$ and every group size is $13$.`,
   
     },
   
@@ -1694,7 +1699,7 @@ $$r^n.$$
 Assigning $5$ employees to $3$ projects as $5^3 = 125$ treats each project as picking one employee. Each employee picks one of $3$ projects, so the count is $3^5 = 243$.
 [Read more](!#pitfalls)]@
 
-If $n$ is the total number of distinct items to assign and $r$ is the number of labeled containers, where each item can go into any container and containers can be empty.
+Here $n$ is the total number of distinct items to assign and $r$ is the number of labeled containers, where each item can go into any container and containers can be empty.
 
 The count comes from the [multiplication rule](!/combinatorics/counting-principles) applied item by item. The first item has $r$ containers to go to, the second item again has $r$, and so on, because a container can take any number of items. With $n$ items this is a product of $n$ equal factors $r \\cdot r \\cdots r$, one factor for each item.
       
@@ -1740,7 +1745,7 @@ $$\\left(\\!\\!\\binom{r}{n}\\!\\!\\right) = \\binom{n + r - 1}{r - 1}.$$
 For $7$ identical candies and $3$ children, putting $n = 3$ and $r = 7$ into the formula gives $\\binom{9}{6} = 84$. With $n = 7$ candies and $r = 3$ children, the count is $\\binom{7 + 3 - 1}{3 - 1} = \\binom{9}{2} = 36$.
 [Read more](!#pitfalls)]@
 
-If $n$ is the total number of identical items to distribute into $r$ labeled containers, where empty containers are allowed and only the count in each container matters.
+Here $n$ is the total number of identical items to distribute into $r$ labeled containers, where empty containers are allowed and only the count in each container matters.
 
 The two numbers in the formula do different jobs. The $n$ items are the units being shared out, and since they are identical, a distribution is fixed by how many units each container receives. Picture the items as a row of $n$ stars split into $r$ containers by $r - 1$ bars: the $n + r - 1$ symbols in the row give the top of the binomial coefficient, and the $r - 1$ bars give the bottom.
       
@@ -1766,11 +1771,11 @@ Distributing identical coins into numbered boxes, allocating identical resources
       `,
       after:`
        **Notation**:
-       The notation for **Strong Composition** is:
+       There is no standard symbol for **Strong Composition**; the count is written directly as:
 
-\t\t\t$\\left\\langle\\binom{n}{r}\\right\\rangle$ or $\\left\\langle\\left\\langle\\binom{n}{r}\\right\\rangle\\right\\rangle$
+\t\t\t$\\binom{n-1}{r-1}$
 
-This represents the number of ways to place n identical objects into r labeled bins where each bin must contain at least one object. It's also written as $\\binom{n-1}{r-1}$ but the angle brackets notation specifically indicates strong compositions.
+This represents the number of ways to place n identical objects into r labeled bins where each bin must contain at least one object.
 
 
       @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
@@ -1779,7 +1784,7 @@ This represents the number of ways to place n identical objects into r labeled b
       The total number of strong compositions is 
 
 @academic[formula_callout:Strong Composition
-$$\\left\\langle \\binom{n}{r} \\right\\rangle = \\binom{n - 1}{r - 1}.$$
+$$\\binom{n - 1}{r - 1}.$$
 /combinatorics/formulas#strong_composition]@
 
 @academic[formulas_link:Browse all combinatorics formulas
@@ -1789,7 +1794,7 @@ $$\\left\\langle \\binom{n}{r} \\right\\rangle = \\binom{n - 1}{r - 1}.$$
 Counting $7$ identical candies for $3$ children as $\\binom{7 + 3 - 1}{3 - 1} = 36$ includes splits like $7 + 0 + 0$, where a child gets nothing. With at least one candy each, the count is $\\binom{7 - 1}{3 - 1} = \\binom{6}{2} = 15$.
 [Read more](!#pitfalls)]@
 
-If $n$ is the total number of identical items to distribute into $r$ labeled containers, where each container must receive at least one item and only the count in each container matters.
+Here $n$ is the total number of identical items to distribute into $r$ labeled containers, where each container must receive at least one item and only the count in each container matters.
 
 The requirement changes what is counted, not the items or the containers. One way to see the link with weak composition is to hand one unit to every container first; the remaining $n - r$ units can then be shared out freely, with empty containers allowed. The condition also needs $n \\geq r$, since with fewer units than containers some container has to stay empty.
      
@@ -1801,6 +1806,11 @@ The requirement changes what is counted, not the items or the containers. One wa
       between:`
      **Strong Composition — Examples**:
 Distributing identical items to departments where each department must receive at least one, allocating identical resources among teams ensuring none are left empty, dividing identical tasks across several workers with no one unassigned. Like weak composition, this type of experiment is quite specific — it focuses on counts in labeled containers with no empties allowed — making it largely self‑explanatory and less common in everyday situations.
+
+@academic[fact,aside:true,width:35%:A whole number $n$ has $2^{n-1}$ ordered sums
+Counted over every number of parts, the ways to write $n$ as an ordered sum of positive whole numbers total $2^{n-1}$: line up $n$ stars and decide for each of the $n - 1$ gaps whether a bar goes in. The number $4$ has $8$ of them, from $4$ itself to $1 + 1 + 1 + 1$.]@
+
+A strong composition can also be read as a way of writing $n$ as an ordered sum of positive whole numbers, one summand for each container. With $n = 4$ and $r = 2$ the sums are $1 + 3$, $2 + 2$ and $3 + 1$, and the formula below agrees: $\\binom{3}{1} = 3$. Since $1 + 3$ and $3 + 1$ fill the two containers differently, they count as different sums. Letting $r$ run through $1, 2, 3$ and $4$ lists every such sum for $n = 4$.
 
 
       `,
@@ -2112,7 +2122,7 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
         lead: `Everything rests on one fact: every group is counted the same number of times.`,
         content: [
           `Dividing by $r!$ is honest only because each group of $r$ distinct items has exactly $r!$ orderings. That is what the conditions buy:`,
-          `If $n$ is the total number of distinct items and $r$ is the number of items to select, then order doesn't matter and repetition isn't allowed.`,
+          `Here $n$ is the total number of distinct items and $r$ is the number of items to select; order doesn't matter and repetition isn't allowed.`,
           `Break them and the single division fails. If some items are identical, or an item may be chosen more than once, different groups have different numbers of orderings, and the counts on the rest of this page take over.`,
         ],
       },
@@ -2170,7 +2180,8 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
   layout='horizontal'
   splitRatio={'0.7'}
  />
- </div>
+ </div>,
+          `@academic[punchline:Only who shares a group counts, so the orders inside each labeled group are divided out of $n!$.]@`,
         ]
     },
    
@@ -2191,7 +2202,8 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
   layout='horizontal'
   splitRatio={'0.7'}
  />
- </div>
+ </div>,
+          `@academic[punchline:Identical items in labeled containers become a row of stars and bars, so the count is a choice of where the bars go.]@`,
         ]
     },
     {

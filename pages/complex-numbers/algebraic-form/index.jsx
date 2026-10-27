@@ -1815,6 +1815,9 @@ $$a + bi = c + di \\iff a = c \\;\\text{ and }\\; b = d$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
+@academic[fact,aside:true,width:35%:$i^2 = -1$ as a theorem about pairs
+In 1837 Hamilton defined a complex number as a pair of reals $(a, b)$, equal only when both entries match, with $(a, b)(c, d) = (ac - bd, ad + bc)$. Then $i = (0, 1)$ and $(0, 1)(0, 1) = (-1, 0)$, so $i^2 = -1$ is proved, not assumed.]@
+
 This principle seems obvious yet carries profound implications. The equation $a + bi = c + di$ splits into two separate real equations: $a = c$ from comparing real parts, and $b = d$ from comparing imaginary parts. A single complex equation yields two real constraints. This doubling of information proves invaluable for solving problems.
 
 Consider the equation $z^2 = 3 + 4i$ where we seek $z = x + yi$ with real unknowns $x$ and $y$. Expanding: $(x + yi)^2 = x^2 + 2xyi + y^2i^2 = (x^2 - y^2) + 2xyi$. For this to equal $3 + 4i$, we need $x^2 - y^2 = 3$ and $2xy = 4$. The original complex equation has transformed into a system of two real equations in two real unknowns — a problem with familiar solution techniques.
@@ -1859,6 +1862,9 @@ The conjugate appears throughout complex analysis — in [division](!/complex-nu
 
 Taking the conjugate twice returns the original number: $\\overline{\\bar{z}} = z$. Reflection across the real axis, performed twice, brings every point back to its starting location. This involution property guarantees that conjugation is reversible.
 
+@academic[fact,aside:true,width:35%:Algebra cannot tell $i$ from $-i$
+Apart from doing nothing, conjugation is the only rule on $\\mathbb{C}$ that keeps every real number fixed and respects sums and products. Such a rule must send $i$ to a number whose square is $-1$, and only $i$ and $-i$ qualify.]@
+
 Conjugation distributes over addition: $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$. The conjugate of a sum equals the sum of the conjugates. The same holds for subtraction. This linearity means we can conjugate term by term when facing complicated expressions.
 
 Conjugation also distributes over multiplication: $\\overline{z_1 \\cdot z_2} = \\bar{z_1} \\cdot \\bar{z_2}$. The conjugate of a product equals the product of the conjugates. Extending to division: $\\overline{z_1 / z_2} = \\bar{z_1} / \\bar{z_2}$, valid when $z_2 \\neq 0$. Powers follow naturally: $\\overline{z^n} = (\\bar{z})^n$ for any integer $n$.
@@ -1873,7 +1879,7 @@ These rules prove essential when simplifying expressions, verifying identities, 
 
 
     obj6: {
-  title: `Existence Theorems`,
+  title: `Classification Theorems`,
   before: ``,
   content: `The conjugate provides algebraic tests for classifying complex numbers. Two theorems characterize when a complex number belongs to special subcategories — the real numbers and the [pure imaginary numbers](!/complex-numbers/imaginary-numbers).
 
@@ -1903,7 +1909,9 @@ Writing $z \\cdot \\bar{z} = a^2 - b^2$ forgets that $(bi)^2 = -b^2$: for $z = 3
 
 The product identity is the one used most often in practice, because it turns a complex expression into a single real number. In a division by $c + di$, numerator and denominator are both multiplied by $c - di$, and the new denominator is the product of a number with its own conjugate, the case worked out above with $c$ and $d$ in place of $a$ and $b$. Every quotient in standard form passes through this step.
 
-Additional identities and applications appear in the [complex conjugate](!/complex-numbers/complex-conjugate) dedicated page.`,
+Additional identities and applications appear in the [complex conjugate](!/complex-numbers/complex-conjugate) dedicated page.
+
+@academic[punchline:Pairing a number with its conjugate always lands on an axis: the sum and the product are real, the difference pure imaginary.]@`,
   after: ``,
   link: '',
 },
@@ -2483,6 +2491,7 @@ Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the po
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          `@academic[punchline:Every complex equation is two real equations in disguise: one for the real parts, one for the imaginary parts.]@`,
         ]
     },
     {

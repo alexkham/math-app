@@ -1461,6 +1461,8 @@ If $A = \\{a, b\\}$ and $B = \\{a, b, c\\}$, then $A \\subset B$ because $c \\in
 @academic[rule_corollary_plain:The empty set satisfies $\\emptyset \\subset A$ for every non-empty set $A$, since $\\emptyset \\subseteq A$ and $\\emptyset \\neq A$.]@
 
 However, $\\emptyset \\subset \\emptyset$ is false because $\\emptyset = \\emptyset$.
+
+@academic[punchline:A proper subset must leave out at least one element, so no set is a proper subset of itself.]@
     `,
     before: ``,
     after: ``,
@@ -1986,6 +1988,10 @@ The claim is checked the way the candidates above were: take the set on the left
           sectionsContent.obj4.content,
           <div key={'unit-subsetChoices'} dangerouslySetInnerHTML={{ __html: demoUnits.subsetChoices }} />,
           `Adding one more element doubles the tree, which is why the count doubles with every element: $2^{n+1} = 2 \\cdot 2^n$.`,
+          `@academic[fact,aside:true,width:35%:Every subset, one change at a time
+Write the second copy in reverse, and each subset differs from the one before it by a single element: $\\emptyset$, $\\{a\\}$, $\\{a, b\\}$, $\\{b\\}$, $\\{b, c\\}$, $\\{a, b, c\\}$, $\\{a, c\\}$, $\\{c\\}$. Repeating the step lists the subsets of any finite set this way; Frank Gray patented the order in 1953, and rotary encoders still use it.]@
+
+The doubling can also be followed in a written list. Take the four subsets of $\\{a, b\\}$ in the order $\\emptyset$, $\\{a\\}$, $\\{a, b\\}$, $\\{b\\}$, and write the list out twice: once as it stands, and once with $c$ added to every subset. The first copy holds the four subsets of $\\{a, b, c\\}$ that leave out $c$, the second copy holds the four that contain $c$, and together the two copies hold all eight. A fourth element doubles the list to sixteen subsets in the same way, and every further element doubles it again.`,
           <div
             key={'obj4-table'}
             style={tableWrapStyle}
@@ -1996,6 +2002,7 @@ Removing $\\emptyset$ as well as the set itself gives $2^3 - 2 = 6$ proper subse
 [Read more](!#pitfalls)]@
 
 The two columns of the table differ by exactly $1$ in every row, because a set has only one subset that is equal to it: the set itself. The first row follows the same pattern. The empty set has a single subset, $\\emptyset$, and that subset is the set itself, so the empty set has $2^0 - 1 = 0$ proper subsets. Further down, the gap stays at $1$ while the counts double, from $32$ and $31$ at $n = 5$ to $1024$ and $1023$ at $n = 10$.`,
+          `@academic[punchline:Each element is a separate in-or-out choice, so every new element doubles the number of subsets.]@`,
         ]
     },
     {

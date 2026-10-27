@@ -1321,7 +1321,7 @@ $$F(x) = P(X \\leq x)$$]@
 
 This gives the probability of observing a value up to and including some threshold $x$. Unlike [continuous distributions](!/probability/distributions/continuous) where the CDF forms a smooth curve, discrete [CDFs](!/probability/cdf) climb in distinct jumps — flat between values, then leaping upward by $P(X = k)$ at each point $k$ in the support.
 
-Every discrete distribution has an [expected value (mean)](!/probability/expected-value) and [variance](!probability/variance). The [expected value](!/probability/expected-value) for discrete distributions is calculated as 
+Every discrete distribution has an [expected value (mean)](!/probability/expected-value) and [variance](!/probability/variance). The [expected value](!/probability/expected-value) for discrete distributions is calculated as 
 
 @academic[formula_callout:Shared Properties Across Discrete Distributions
 $$E[X] = \\sum_k k \\cdot P(X = k)$$]@
@@ -1445,7 +1445,7 @@ Some distributions have analytical expressions for their mode:
 - **Unimodal:** One clear maximum (most common case)
 - **Bimodal:** Two values tied for maximum probability
 - **Multimodal:** Three or more values sharing the maximum
-- **No mode:** All probabilities equal (like discrete uniform)
+- **No unique mode:** All probabilities equal, so every value is a mode (like discrete uniform)
 
 The mode provides intuition about where probability concentrates, but unlike the mean, it doesn't account for the distribution's overall shape or spread.
   `,
@@ -1873,11 +1873,11 @@ This page systematically presents six fundamental discrete distributions, detail
          sectionsContent,
          introContent,
           seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
+        title: "Discrete Distributions: Binomial, Geometric, Poisson & More | Learn Math Class",
+        description: "Learn the six fundamental discrete distributions: uniform, binomial, geometric, negative binomial, hypergeometric and Poisson. Compare their support, parameters, probability mass functions and key properties.",
         keywords: keyWords.join(", "),
         url: "/probability/distributions/discrete",
-         name: "name"
+         name: "Discrete Distributions"
       },
       uniformTable,
       binomialTable,

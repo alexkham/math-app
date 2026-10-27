@@ -1654,6 +1654,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionCompositionDiagrams from '@/app/components/functions/compositions/functionCompositionDiagrams'
 import renderCompositionSteps from '@/app/utils/illustrations/functions/composition/compositionSteps'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2510,6 +2511,31 @@ export async function getStaticProps(){
 
 // }
 
+// Concept introduction (section 1, "What is Function Composition") —
+// template B, definition first. Running instance: g(x) = 3x − 2 then
+// f(x) = x² + 1, the pair the page evaluates in section 3. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its formula box and link, five
+// passages and the compose demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciChainTable = ciTableOpen(['x', 'g(x) = 3x − 2', 'f(g(x)) = g(x)² + 1']) +
+  ciRow(['0', '−2', '5']) +
+  ciRow(['1', '1', '2'], { shade: true }) +
+  ciRow(['2', '4', '17']) +
+  ciRow(['4', '10', '101'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciCheckTable = ciTableOpen(['x', 'two steps: f(g(x))', 'one rule: 9x² − 12x + 5']) +
+  ciRow(['0', '5', '0 − 0 + 5 = 5']) +
+  ciRow(['1', '2', '9 − 12 + 5 = 2'], { shade: true }) +
+  ciRow(['2', '17', '36 − 24 + 5 = 17']) +
+  ciRow(['4', '101', '144 − 48 + 5 = 101'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj0 : {
   title: `Key Terms`,
@@ -2599,25 +2625,27 @@ Step 1: Evaluate the inner function: compute $g(a)$.
 
 Step 2: Evaluate the outer function at that result: compute $f(g(a))$.
 
+@academic[example:Example
 Let $f(x) = x^2 + 1$ and $g(x) = 3x - 2$. Find $(f \\circ g)(4)$.
 
 Step 1: $g(4) = 3(4) - 2 = 10$
 
 Step 2: $f(10) = 10^2 + 1 = 101$
 
-Therefore $(f \\circ g)(4) = 101$.
+Therefore $(f \\circ g)(4) = 101$.]@
 
 @academic[pitfall,aside:true,width:35%:Multiplying instead of composing
 Reading $\\circ$ as a product gives $f(4) \\cdot g(4) = 17 \\cdot 10 = 170$. Composition feeds the output of $g$ into $f$: $(f \\circ g)(4) = f(g(4)) = f(10) = 101$.
 [Read more](!#pitfalls)]@
 
+@academic[example:Example
 Now find $(g \\circ f)(4)$ — the composition in the opposite order.
 
 Step 1: $f(4) = 4^2 + 1 = 17$
 
 Step 2: $g(17) = 3(17) - 2 = 49$
 
-Therefore $(g \\circ f)(4) = 49$.
+Therefore $(g \\circ f)(4) = 49$.]@
 
 The two results differ: $101 \\neq 49$. The order of composition matters — $f \\circ g$ and $g \\circ f$ are generally different functions.`,
     before: ``,
@@ -2679,6 +2707,7 @@ Two conditions must be satisfied:
 
 2. $g(x)$ must be in the domain of $f$ — the output of $g$ must be a valid input for $f$.
 
+@academic[example:Example
 Let $f(x) = \\sqrt{x}$ with domain $[0, \\infty)$ and $g(x) = x - 3$ with domain $(-\\infty, \\infty)$.
 
 For $(f \\circ g)(x) = \\sqrt{x - 3}$:
@@ -2687,8 +2716,9 @@ Condition 1: $g$ accepts all real $x$ — no restriction here.
 
 Condition 2: $f$ requires $g(x) \\geq 0$, so $x - 3 \\geq 0$, meaning $x \\geq 3$.
 
-The domain of $f \\circ g$ is $[3, \\infty)$.
+The domain of $f \\circ g$ is $[3, \\infty)$.]@
 
+@academic[example:Example
 Let $f(x) = 1/x$ with domain $x \\neq 0$ and $g(x) = x^2 - 1$.
 
 For $(f \\circ g)(x) = \\dfrac{1}{x^2 - 1}$:
@@ -2697,7 +2727,7 @@ Condition 1: $g$ accepts all real $x$.
 
 Condition 2: $f$ requires $g(x) \\neq 0$, so $x^2 - 1 \\neq 0$, meaning $x \\neq \\pm 1$.
 
-The domain of $f \\circ g$ is $\\{x : x \\neq -1 \\text{ and } x \\neq 1\\}$.
+The domain of $f \\circ g$ is $\\{x : x \\neq -1 \\text{ and } x \\neq 1\\}$.]@
 
 @academic[pitfall,aside:true,width:35%:Reading the domain from the simplified formula
 With $f(x) = x^2$ and $g(x) = \\sqrt{x}$, the formula $f(g(x)) = (\\sqrt{x})^2 = x$ seems to accept every $x$, but $g(-4)$ does not exist. Condition 1 removes all $x < 0$, so the domain is $[0, \\infty)$.
@@ -2717,17 +2747,23 @@ The table below collects these worked examples side by side so the two-condition
 
 The order of the functions determines the result.
 
+@academic[example:Example
 Let $f(x) = x + 5$ and $g(x) = x^2$.
 
 $(f \\circ g)(x) = f(g(x)) = f(x^2) = x^2 + 5$
 
-$(g \\circ f)(x) = g(f(x)) = g(x + 5) = (x + 5)^2 = x^2 + 10x + 25$
+$(g \\circ f)(x) = g(f(x)) = g(x + 5) = (x + 5)^2 = x^2 + 10x + 25$]@
 
 These are different functions with different [graphs](!/functions/graphs) and different values at most inputs. Only at specific points might they coincide by accident.
 
-Non-commutativity reflects the asymmetry of chained processes. Converting Celsius to Fahrenheit, then to Rankine produces a different result than converting Celsius to Rankine, then to Fahrenheit — if such a path even made sense.
+Non-commutativity reflects the asymmetry of chained processes. Converting Celsius to Fahrenheit means multiplying by $1.8$ and then adding $32$, which sends $100$ to $212$; adding $32$ first and then multiplying gives $(100 + 32) \\cdot 1.8 = 237.6$, a wrong reading.
+
+@academic[fact,aside:true,width:35%:$2x + 1$ and $3x + 2$ commute
+Both send $-1$ to $-1$, and both orders give $6x + 5$. Two linear functions with slopes other than $1$ commute exactly when they share a fixed point, the input each one leaves unchanged.]@
 
 In rare cases, $f \\circ g = g \\circ f$. When both functions are shifts $x + p$ and $x + q$, for example, or when one function is the identity. But these are special cases, not the general rule.
+
+Linear functions show how narrow these cases are. For $f(x) = ax + b$ and $g(x) = cx + d$, the two orders give $(f \\circ g)(x) = acx + ad + b$ and $(g \\circ f)(x) = acx + bc + d$. The slopes always agree, so everything rests on the two constant terms, and for most choices of $a$, $b$, $c$, $d$ they differ.
 
 The table below sets $f \\circ g$ and $g \\circ f$ side by side for this pair to make the asymmetry concrete.`,
     before: ``,
@@ -2746,6 +2782,7 @@ $$(f \\circ g \\circ h)(x) = f(g(h(x)))$$]@
 
 The function $h$ acts first on $x$, producing $h(x)$. Then $g$ acts on that result, producing $g(h(x))$. Finally $f$ acts, producing $f(g(h(x)))$.
 
+@academic[example:Example
 Let $f(x) = x^2$, $g(x) = x + 1$, and $h(x) = 2x$. Find $(f \\circ g \\circ h)(3)$.
 
 Step 1: $h(3) = 6$
@@ -2754,7 +2791,7 @@ Step 2: $g(6) = 7$
 
 Step 3: $f(7) = 49$
 
-So $(f \\circ g \\circ h)(3) = 49$.
+So $(f \\circ g \\circ h)(3) = 49$.]@
 
 The algebraic formula:
 
@@ -2798,7 +2835,12 @@ Squaring twice yields the fourth power.
 
 The notation $f^2$ sometimes denotes $f \\circ f$, meaning $f$ composed with itself — not $f$ squared as a multiplication. Context determines the meaning. When clarity is needed, write $f \\circ f$ or $f(f(x))$ explicitly.
 
-Iterated composition leads to sequences and dynamical systems. Starting with $x_0$, define $x_1 = f(x_0)$, $x_2 = f(x_1) = f(f(x_0))$, and so on. The behavior of these iterates reveals long-term dynamics of the function.`,
+@academic[fact,aside:true,width:35%:Every step doubles the error
+Writing $x = \\sin^2\\theta$ turns $4x(1 - x)$ into $\\sin^2 2\\theta$, so each step doubles the angle, and with it any error in the starting value. A computer's 16-digit start is used up after about 50 steps; from there its iterates no longer track the true ones.]@
+
+Iterated composition leads to sequences and dynamical systems. Starting with $x_0$, define $x_1 = f(x_0)$, $x_2 = f(x_1) = f(f(x_0))$, and so on. The behavior of these iterates reveals long-term dynamics of the function.
+
+A rule as simple as $f(x) = 4x(1 - x)$ shows how far this can go. It sends every number in $[0, 1]$ back into $[0, 1]$, so it can be applied again and again: starting from $x_0 = 0.3$, the iterates are $0.84$, $0.5376$, $0.99434\\ldots$, $0.02249\\ldots$, and they never settle into a repeating pattern.`,
     before: ``,
     after: ``,
     link: '',
@@ -2808,21 +2850,23 @@ Iterated composition leads to sequences and dynamical systems. Starting with $x_
     title: `Decomposing Functions`,
     content: `Decomposition reverses composition: given a function $h$, express it as $h = f \\circ g$ for simpler functions $f$ and $g$.
 
+@academic[example:Example
 Consider $h(x) = \\sqrt{x^2 + 1}$. This function squares the input, adds one, then takes the square root. Identify the inner and outer operations:
 
 Inner function: $g(x) = x^2 + 1$
 
 Outer function: $f(x) = \\sqrt{x}$
 
-Check: $f(g(x)) = f(x^2 + 1) = \\sqrt{x^2 + 1} = h(x)$. ✓
+Check: $f(g(x)) = f(x^2 + 1) = \\sqrt{x^2 + 1} = h(x)$. ✓]@
 
+@academic[example:Example
 Consider $h(x) = (3x - 7)^5$. The structure is: form $3x - 7$, then raise to the fifth power.
 
 Inner function: $g(x) = 3x - 7$
 
 Outer function: $f(x) = x^5$
 
-Check: $f(g(x)) = (3x - 7)^5 = h(x)$. ✓
+Check: $f(g(x)) = (3x - 7)^5 = h(x)$. ✓]@
 
 Decomposition is not unique. The function $h(x) = (x + 1)^2$ can be written as $f \\circ g$ with $f(x) = x^2$ and $g(x) = x + 1$, or as $f \\circ g$ with $f(x) = (x + 1)^2$ and $g(x) = x$ (trivial decomposition). Choose the decomposition that serves the purpose — simplifying analysis, enabling substitution in calculus, or revealing structure.
 
@@ -3123,6 +3167,11 @@ const faqQuestions = {
     f: { fn: (x) => x * x + 1, xRange: [-3, 3], yRange: [-1, 10], title: 'step 2 · graph of f(x) = x² + 1' },
   };
 
+  const conceptIntroFigures = {
+    chainTable: ciChainTable,
+    checkTable: ciCheckTable,
+  };
+
   const demoUnits = {
     compose: demoUnitFrame({
       svg: functionCompositionDiagrams.quadratic,
@@ -3160,6 +3209,7 @@ const faqQuestions = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj5Table,
@@ -3188,10 +3238,79 @@ export default function CompositionPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Many rules come in two steps, and keeping them as two separate functions means carrying the middle value by hand.`,
+        content: [
+          `"Triple the number and subtract 2, then square the result and add 1" is one process, but written as two functions you must work out the first answer, write it down, and feed it to the second. It is like an assembly line where each station hands its part to the next: what matters is the finished product, not the part in between.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [composition](!/functions/definitions#composition_of_functions) of $f$ with $g$, written $f \\circ g$, is the function that sends $x$ to $f(g(x))$: apply $g$ first, then apply $f$ to its output.`,
+        formula: [
+          `If $g$ takes an input $x$ and produces $g(x)$, and $f$ then takes $g(x)$ and produces $f(g(x))$, the composition $f \\circ g$ captures this two-step process as a single function:`,
+          `@academic[formula_callout:Composition of Functions
+$$(f \\circ g)(x) = f(g(x))$$
+/functions/formulas#composition_of_functions]@`,
+          `@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@`,
+        ],
+        footer: `Read it inside out: $g$ is written on the right, but it acts first.`,
+      },
+      {
+        id: 'kind',
+        lead: `f ∘ g is a function in its own right — one input, one output — built from two others.`,
+        content: [
+          `Function composition connects two functions in sequence: the output of the first becomes the input of the second. The result is a new function that combines both operations.`,
+          <div key={'unit-compose'} dangerouslySetInnerHTML={{ __html: demoUnits.compose }} />,
+          `The function $g$ acts first, transforming the original input. The function $f$ acts second, transforming the intermediate result. The final output depends on both functions working in sequence.`,
+          `Composition differs fundamentally from [arithmetic](!/functions/arithmetic). Adding functions combines their outputs at the same input: $(f + g)(x) = f(x) + g(x)$. Composing functions chains their operations: $(f \\circ g)(x) = f(g(x))$. The input to $f$ in composition is not $x$ but $g(x)$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `With g(x) = 3x − 2 and f(x) = x² + 1, each input passes through g and then through f.`,
+        content: [
+          `The middle column is the value handed from $g$ to $f$; the last column is $(f \\circ g)(x)$.`,
+          ciTable('chainTable'),
+        ],
+      },
+      {
+        id: 'verify',
+        lead: `The definition promised a single function, and it delivers one: the two steps collapse into one rule.`,
+        content: [
+          `Substituting $g(x)$ into $f$ gives $(f \\circ g)(x) = (3x - 2)^2 + 1 = 9x^2 - 12x + 5$, a formula with no middle step at all. It gives the same outputs as the two-step chain.`,
+          ciTable('checkTable'),
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Two limits on the definition: the order is fixed, and not every x gets through.`,
+        content: [
+          `The order of the two functions is part of the definition, not a detail.`,
+          `Here $g \\circ f$ sends $4$ to $g(17) = 49$, not $101$ — see [non-commutativity](!/functions/composition#6). And $x$ belongs to $f \\circ g$ only if $g(x)$ is something $f$ accepts, which the section on the [domain of composite functions](!/functions/composition#5) works through.`,
+          `Composition creates new functions with potentially different [domains](!/functions/domain), [ranges](!/functions/range), and [properties](!/functions/properties) than either component.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, evaluating compositions at a point and algebraically, the domain, the order, longer chains, composing a function with itself, decomposing, inverses and reading compositions off graphs.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -3207,9 +3326,7 @@ export default function CompositionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-compose'} dangerouslySetInnerHTML={{ __html: demoUnits.compose }} />,
-          `The order of the two functions is part of the definition, not a detail.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -3257,6 +3374,7 @@ export default function CompositionPage({
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          `@academic[punchline:An input survives a composition only if every step accepts it: $g$ must take $x$, and $f$ must take $g(x)$.]@`,
         ]
     },
     {
@@ -3275,6 +3393,7 @@ export default function CompositionPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@academic[punchline:Any chain runs from the innermost function outward: regrouping the brackets is harmless, reordering the functions is not.]@`,
         ]
     },
     {

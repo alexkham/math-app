@@ -1578,7 +1578,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexEigenDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/complex-eigen/complexEigenDiagrams'
@@ -1728,7 +1728,7 @@ const complexEigenvalues = {
         },
         {
           name: 'Odd dimension',
-          anchor: '#6',
+          anchor: '#2',
           formula: '$n$ odd $\\Rightarrow$ at least one real $\\lambda$',
           condition: 'real matrices only',
           note: 'Complex roots come in pairs, so an odd number of them cannot pair off entirely and at least one must be real. This is why a rotation in $\\mathbb{R}^3$ has an axis while a rotation in $\\mathbb{R}^2$ has none \u2014 the eigenvector of the leftover real eigenvalue spans the axis.',

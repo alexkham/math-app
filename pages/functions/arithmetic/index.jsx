@@ -1219,6 +1219,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
 export async function getStaticProps(){
@@ -1838,6 +1839,11 @@ Division introduces a critical restriction: the denominator cannot be zero. Even
 
 The quotient $f/g$ differs from $g/f$ except at inputs where $f(x) = \\pm g(x)$, where both quotients equal $1$ or both equal $-1$.
 
+@academic[fact,aside:true,width:35%:Two $2\\pi$ waves, a quotient of period $\\pi$
+Sine and cosine each repeat every $2\\pi$, yet $\\tan x = \\frac{\\sin x}{\\cos x}$ repeats every $\\pi$. A shift by $\\pi$ flips the sign of both outputs, and the two minus signs cancel in the quotient.]@
+
+The tangent function is itself a quotient of two functions: $\\tan x = \\dfrac{\\sin x}{\\cos x}$. Sine and cosine are both defined for every real number, so the only inputs removed from its domain are the zeros of the cosine, the odd multiples of $\\dfrac{\\pi}{2}$. At every other input, the value of the tangent is read off from the two outputs at that same input.
+
 Quotients of functions model rates and ratios. Average cost is total cost divided by quantity. Speed is distance divided by time. Efficiency is output divided by input.`,
     before: ``,
     after: ``,
@@ -1955,6 +1961,9 @@ The table below collects the domain rule for each of the four operations, making
 For the sum $f + g$, the height of the combined graph at any $x$ equals the sum of the heights of $f$ and $g$ at that $x$. If $f(3) = 2$ and $g(3) = 5$, then $(f + g)(3) = 7$. The point $(3, 7)$ lies on the graph of $f + g$.
 
 Where both functions are positive, the sum is higher than either. Where one is positive and one is negative, they partially cancel. Where both are negative, the sum is more negative than either.
+
+@academic[fact,aside:true,width:35%:Two rising functions, a falling product
+Both $f(x) = x$ and $g(x) = x$ rise across all of $\\mathbb{R}$, yet their product $x^2$ falls on $(-\\infty, 0)$. There both heights are negative and shrink toward $0$, so their positive product shrinks too.]@
 
 For the product $fg$, the height at $x$ is $f(x) \\cdot g(x)$. Where both are positive or both are negative, the product is positive. Where they have opposite signs, the product is negative. Where either equals zero, the product equals zero — the [zeros](!/functions/properties) of $f$ and $g$ are zeros of $fg$.
 
@@ -2285,9 +2294,29 @@ const faqQuestions = {
     ],
   };
 
+  // BeforeAfter (obj10): the section's quotient, factored and reduced, with the excluded point kept
+  const quotientReduceSteps = {
+    header: {
+      kicker: 'Algebraic simplification',
+      title: 'Factor and reduce, keep the restriction',
+      lede: 'Simplification makes evaluation easier and reveals structure, but it must respect the domain.',
+    },
+    steps: [
+      { id: 'quotient', label: 'Quotient', stamp: 'Before', expr: '$\\dfrac{x^2 - 9}{x + 3}$',
+        move: { label: 'Factor the numerator', note: 'x² − 9 = (x − 3)(x + 3)' } },
+      { id: 'factored', label: 'Factored', expr: '$\\dfrac{(x - 3)(x + 3)}{x + 3}$',
+        move: { label: 'Reduce', note: 'cancel the common factor x + 3, and record x ≠ −3' } },
+      { id: 'reduced', label: 'Simplified form', stamp: 'After', expr: '$x - 3 \\quad (x \\neq -3)$',
+        detailsLabel: 'The hole',
+        detailsTitle: '',
+        details: 'The reduced form $x - 3$ appears defined everywhere, but the original quotient excludes $x = -3$. The simplified function still has a hole at that point.' },
+    ],
+  };
+
    return {
       props:{
     functionArithTree,
+    quotientReduceSteps,
          sectionsContent,
          introContent,
          obj6Table,
@@ -2308,7 +2337,7 @@ const faqQuestions = {
     }
    }
 
-export default function ArithmeticPage({functionArithTree, 
+export default function ArithmeticPage({functionArithTree, quotientReduceSteps,
   seoData,
   sectionsContent,
   introContent,
@@ -2396,6 +2425,7 @@ export default function ArithmeticPage({functionArithTree,
           sectionsContent.obj7.content,
           <div key={'unit-domainOverlap'} dangerouslySetInnerHTML={{ __html: demoUnits.domainOverlap }} />,
           `For a quotient f/g, also remove the inputs where g(x) = 0 from this overlap.`,
+          `@academic[punchline:A combined function is defined only where every one of its pieces is defined.]@`,
         ]
     },
     {
@@ -2416,6 +2446,7 @@ export default function ArithmeticPage({functionArithTree,
           sectionsContent.obj9.content,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          `@academic[punchline:A combined graph is built one vertical line at a time, from two heights at the same x.]@`,
         ]
     },
     {
@@ -2424,6 +2455,20 @@ export default function ArithmeticPage({functionArithTree,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-diagram'}
+            id="quotient-reduce-steps"
+            title="Reducing (x² − 9)/(x + 3)"
+            source="/functions/arithmetic"
+            before={"The section's quotient example, one move at a time. Watch what happens to the restriction."}
+            after={"The reduced form makes zeros and values easy to read. It equals the original quotient only once $x = -3$ is left out of its domain, which is why the restriction travels with it."}
+          >
+            <BeforeAfter
+              data={quotientReduceSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

@@ -1089,6 +1089,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1184,6 +1185,28 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // normal distribution") — template A, definition last. Running instance:
+    // ten fair coin-flip nudges (heads count), against the normal curve with
+    // mean 5 and variance 2.5. Old obj1 text is kept in sectionsContent.obj1,
+    // unused; its four paragraphs, the example box and the examples link chip
+    // are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciHeadsTable = ciTableOpen(['heads in 10 flips', 'ways', 'probability']) +
+      ciRow(['0 or 10', '1', '0.001']) +
+      ciRow(['1 or 9', '10', '0.010'], { shade: true }) +
+      ciRow(['2 or 8', '45', '0.044']) +
+      ciRow(['3 or 7', '120', '0.117'], { shade: true }) +
+      ciRow(['4 or 6', '210', '0.205']) +
+      ciRow(['5', '252', '0.246'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1362,7 +1385,10 @@ $$\\Phi(z) = P(Z \\leq z) = \\int_{-\\infty}^{z} \\frac{1}{\\sqrt{2\\pi}} e^{-\\
 • The CDF is strictly increasing and S-shaped
 • Any normal CDF can be expressed using the standard normal: $F(x) = \\Phi\\left(\\frac{x-\\mu}{\\sigma}\\right)$
 
-**Practical Use:** The normal CDF has no closed-form expression, so we use tables, calculators, or software. To find $P(X \\leq 180)$ when $X \\sim N(175, 49)$, convert to standard normal: $Z = (180-175)/7 \\approx 0.714$, then look up $\\Phi(0.714) \\approx 0.762$, meaning about 76.2% of values fall below 180.
+**Practical Use:** The normal CDF has no closed-form expression, so we use tables, calculators, or software.
+
+@academic[example:Example
+To find $P(X \\leq 180)$ when $X \\sim N(175, 49)$, convert to standard normal: $Z = (180-175)/7 \\approx 0.714$, then look up $\\Phi(0.714) \\approx 0.762$, meaning about 76.2% of values fall below 180.]@
 
 @academic[pitfall,aside:true,width:35%:Reading the table value as the upper tail
 Taking $\\Phi(0.714) \\approx 0.762$ as $P(X > 180)$ reports the share of heights below 180 cm as the share above it. The upper tail is $1 - 0.762 = 0.238$, about 23.8%.
@@ -1721,11 +1747,11 @@ The [Central Limit Theorem](!/probability/central-limit-theorem) explains why th
 
 This makes it the natural model for aggregate phenomena.
 
-@academic[example:Example Application
+### Example Application
 
 A factory produces bolts with target diameter 10 mm. Due to manufacturing variation, actual diameters follow $N(10, 0.1^2)$. Quality standards require diameters between 9.8 mm and 10.2 mm.
 
-Using the normal distribution, we can calculate that approximately 95.4% of bolts meet specifications, helping determine acceptable defect rates and production costs.]@
+Using the normal distribution, we can calculate that approximately 95.4% of bolts meet specifications, helping determine acceptable defect rates and production costs.
   `,
   before: ``,
   after: ``,
@@ -2212,6 +2238,19 @@ How to check: work with the standard deviation, which is in the same units as th
     yBars: noBars,
     notes: [{ x: 131, y: 0.062, text: 'blue: within 1σ, 160–180 cm, about 68%', pos: 'e', color: 'f' }, { x: 131, y: 0.0575, text: 'navy: 1σ to 2σ, together about 95%', pos: 'e', color: 'g' }, { x: 131, y: 0.053, text: 'amber: beyond 2σ, about 5%', pos: 'e', color: 'r' }],
     caption: 'Heights N(170, 10²): the 68–95 rule as shaded areas' };
+  const ciBinom10 = [1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1].map((c) => c / 1024)
+  const fpCiBell = { kind: 'pieces', svgTitle: 'Heads in 10 fair flips (dots) and the normal curve with mean 5, variance 2.5',
+    xRange: [0, 10], yRange: [0, 0.3], xStep: 1, yStep: 0.125, xLetter: 'k', yLetter: 'P',
+    pieces: [
+      { fn: (x) => Math.exp(-((x - 5) ** 2) / 5) / Math.sqrt(5 * Math.PI), from: 0, to: 10, ends: [null, null], color: 'f', label: { text: 'normal curve, mean 5', x: 7.3, y: 0.15, pos: 'e' } },
+    ],
+    points: ciBinom10.map((y, k) => ({ x: k, y })),
+    caption: 'the coin-flip counts sit almost on the bell' }
+  const conceptIntroFigures = {
+    bell: renderFunctionPlotV4(fpCiBell),
+    headsTable: ciHeadsTable,
+  };
+
   const demoUnits = {
     u_5_0: demoUnitFrame({
       svg: continuousPdfDiagrams['normal-pdf'],
@@ -2242,6 +2281,7 @@ How to check: work with the standard deviation, which is in the same units as th
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          summaryTable,
@@ -2265,10 +2305,69 @@ export default function NormalDistributionPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Many quantities are the sum of lots of small, independent pushes up and down.`,
+        content: [
+          `The probabilistic experiment underlying the normal distribution arises when an outcome is shaped by many small, independent influences, none of which dominates the result. Each influence nudges the outcome slightly upward or downward, and the final value reflects the combined effect of all these contributions.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Ten coin flips, each a nudge of one step: the total piles up in the middle and thins out toward the ends.`,
+        content: [
+          `Count the heads in 10 fair flips. Each count can happen in many ways or few, and the probabilities follow the number of ways.`,
+          ciTable('headsTable'),
+        ],
+        visual: ciSvg('bell'),
+      },
+      {
+        id: 'forcing',
+        lead: `That shape is forced: extremes need every nudge to agree, the middle can be reached in hundreds of ways.`,
+        content: [
+          `Ten heads needs all ten flips to land the same way — one sequence out of 1,024. Five heads can be reached by 252 different sequences. Add more and smaller influences and the dots fill in a smooth, symmetric bell.`,
+          `This experiment is not defined by repetition of identical trials, but by aggregation. The core assumption is that deviations occur naturally in both directions, are roughly symmetric, and tend to cancel out when added together. Extreme outcomes are possible, but increasingly unlikely because they require many influences to align in the same direction.`,
+          `The normal distribution emerges as a consequence of stability: when numerous independent factors interact, the resulting variability concentrates around a central value. The spread reflects how strong those individual influences are, while the center reflects their average balance point.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The normal distribution with mean $\\mu$ and standard deviation $\\sigma$ is the continuous distribution with the bell-shaped density $f(x) = \\dfrac{1}{\\sigma\\sqrt{2\\pi}}\\, e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$, written $X \\sim N(\\mu, \\sigma^2)$.`,
+        footer: `So the heads count in 10 flips is close to $N(5, 2.5)$: the curve in the picture is that density.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a continuous, symmetric distribution set by two numbers: where the centre is and how wide the bell is.`,
+        content: [
+          `This experiment explains why many natural and measurement-based quantities cluster around a typical value with gradual falloff on both sides.`,
+          sectionsContent.obj1.example,
+          sectionsContent.links.examples,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What generalizes, and what does not.`,
+        content: `The coin was particular; the bell is not — sums of many small independent effects of almost any kind end up close to normal. But quantities driven by one large factor, or that cannot go below zero and have long right tails, such as incomes or waiting times, are not normal. The [probability density function](!/probability/distributions/continuous/normal#5) section studies the curve itself.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the parameters, the density and CDF, the mean, variance, mode and median, and the 68–95 rule.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2285,9 +2384,7 @@ export default function NormalDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          sectionsContent.obj1.example,
-          sectionsContent.links.examples,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

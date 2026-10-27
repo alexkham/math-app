@@ -1966,6 +1966,9 @@ $$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$$
 
 The formula asserts an equality between an exponential expression and a trigonometric one. On the left, the base $e$ — the fundamental constant of calculus, approximately $2.71828$ — is raised to an imaginary power $i\\theta$. On the right, ordinary cosine and sine combine with the [imaginary unit](!/complex-numbers/imaginary-numbers) to form a complex number.
 
+@academic[fact,aside:true,width:35%:$i^i$ is a real number
+Raising both sides of $e^{i\\pi/2} = i$ to the power $i$ gives $i^i = e^{i \\cdot i\\pi/2} = e^{-\\pi/2} \\approx 0.2079$. The other angles of $i$, $\\frac{\\pi}{2} + 2\\pi k$, give infinitely many values $e^{-\\pi/2 - 2\\pi k}$, and every one of them is real.]@
+
 The equation holds for every real value of $\\theta$. When $\\theta = 0$, both sides equal $1$. When $\\theta = \\pi/2$, the left side is $e^{i\\pi/2}$ and the right side is $\\cos(\\pi/2) + i\\sin(\\pi/2) = 0 + i = i$. The formula claims these are equal, and they are.
 
 Euler's formula bridges two mathematical worlds. Exponential functions describe growth and decay — populations, radioactive isotopes, compound interest. Trigonometric functions describe oscillation and rotation — waves, circles, periodic phenomena. The formula reveals these as two faces of the same underlying structure, connected through the imaginary unit.
@@ -2029,6 +2032,9 @@ $$e^{i\\pi} + 1 = 0$$
 This equation — Euler's identity — connects five of mathematics' most fundamental constants in a single statement. The number $e$, base of natural logarithms and central to calculus. The number $i$, foundation of complex arithmetic. The number $\\pi$, ratio of circumference to diameter and key to circular geometry. The number $1$, the multiplicative identity. The number $0$, the additive identity.
 
 Each constant emerged from different mathematical needs: $e$ from growth and limits, $i$ from algebraic completeness, $\\pi$ from measurement of circles, $1$ and $0$ from the structure of arithmetic itself. That a single equation links all five suggests deep unity beneath apparently disparate branches of mathematics.
+
+@academic[fact,aside:true,width:35%:The logarithm of $-1$ was once disputed
+Leibniz and Johann Bernoulli argued in letters over $\\ln(-1)$, and Bernoulli held that it was $0$, like $\\ln 1$. Euler settled it with this identity: $e^{i\\pi} = -1$ makes $\\ln(-1) = i\\pi$, and adding full turns gives infinitely many values $i\\pi + 2\\pi k i$.]@
 
 Mathematicians and physicists routinely cite Euler's identity as the most beautiful formula ever discovered. Richard Feynman called its parent, Euler's formula, "the most remarkable formula in mathematics." The equation appears on countless posters, t-shirts, and tattoos — a rare piece of abstract mathematics that captures popular imagination.
 
@@ -2751,6 +2757,7 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj2Table }}
           />,
+          `@academic[punchline:Feed an imaginary number into the series for $e^x$ and it splits exactly into the series for cosine and sine.]@`,
         ]
     },
     {
@@ -2844,6 +2851,7 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj9Table }}
           />,
+          `@academic[punchline:The full turns hidden in a number's angle are where its $n$ different $n$-th roots come from.]@`,
         ]
     },
     {

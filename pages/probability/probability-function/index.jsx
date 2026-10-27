@@ -1046,7 +1046,7 @@ export async function getStaticProps(){
           id: 'pmf-pdf-letters',
           tex: `$p(x)$ · $f(x)$`,
           read: `little p of x; f of x`,
-          means: `Two letters mark the great divide: $p(x)$ is the discrete probability mass — an actual chance — while $f(x)$ is the continuous density, a rate rather than a probability. **How the Probability Function Behaves** below works the distinction.`,
+          means: `Two letters mark the great divide: $p(x)$ is the discrete probability mass — an actual chance — while $f(x)$ is the continuous density, a rate rather than a probability. **The Two Forms of a Probability Function** below works the distinction.`,
           cases: `The split has teeth: $p(x)$ may be read straight off, while $f(x)$ must be integrated over an interval before it means anything — for a continuous variable $P(X = x) = 0$ at every single point.`,
           alsoWritten: `Subscripts disambiguate when several variables share a page — $p_X(x)$, $f_X(x)$ — standard in multivariable work and mandatory once joint and marginal functions appear together.`,
           confusedWith: `$f(x)$ as a probability. A density can exceed $1$ without contradiction — only its area is bounded; reading a tall curve as "more than certain" is the classic misstep the continuous case invites.`,
@@ -1189,7 +1189,7 @@ The PDF is used when the random variable ranges over a continuous interval (like
 • The total area under the entire density curve must be 1.
 Examples: waiting times, heights, lengths, measurement errors, anything that can take any real value in an interval.
 
-3. How They Relate
+**3. How They Relate**
 • Both PMF and PDF describe where probability is located.
 • PMF handles individual points; PDF handles intervals.
 • PMF assigns probabilities directly; PDF requires integration to get probabilities.
@@ -1205,15 +1205,15 @@ These two forms are simply two versions of the same concept — the probability 
   title: `Connection to Other Probability Concepts`,
   content: `The probability function does not stand alone. It connects directly to other major ideas in probability, forming the backbone of the entire subject.
 
- [Random Variables](!/probability/random-variables)
+**1. [Random Variables](!/probability/random-variables)**
 • The probability function describes how a [random variable](!/probability/random-variables) behaves.
 • Once we know the PF, we fully understand the variable's distribution.
 
-[Distributions](!/probability/distributions)
+**2. [Distributions](!/probability/distributions)**
 • Every probability distribution is built from its probability function.
 • The PF tells us how probability is spread out; the distribution summarizes that spread.
 
-[The Cumulative Distribution Function (CDF)](!/probability/cdf)
+**3. [The Cumulative Distribution Function (CDF)](!/probability/cdf)**
 • The CDF adds up probability from negative infinity up to a value.
 • It is built directly from the PF:
   – by summing the PMF in the discrete case,
@@ -1263,7 +1263,7 @@ The **Probability Density Function (PDF)** is how we work with continuous random
 
 Here's the core problem: if a variable can be literally any value between 0 and 10, there are infinitely many possibilities. So asking "what's the probability it equals exactly 7.3528492...?" gives you zero. With infinite options, any single point has zero probability.
 
-The PDF $f(x)$ solves this by measuring probability concentration rather than probability itself. Where $f(x)$ is high, values cluster. Where it's low, they're sparse. But $f(x) = 0.8$ doesn't mean "80% probability"—it means that region has high density compared to other regions.
+The PDF $f(x)$ solves this by measuring probability concentration rather than probability itself. Where $f(x)$ is high, values cluster. Where it's low, they're sparse. But $f(x) = 0.8$ doesn't mean "80% probability"—it means probability is packed around that point at a rate of $0.8$ per unit length.
 
 To get actual probabilities, you need intervals. Integration gives you the area under the curve:
 @academic[formula_callout:Probability of Interval Continuous

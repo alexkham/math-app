@@ -1510,6 +1510,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionTransformationsDiagrams from '@/app/components/functions/transformations/functionTransformationsDiagrams'
 import functionReflectionsDiagrams from '@/app/components/functions/reflections/functionReflectionsDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2155,6 +2156,25 @@ export async function getStaticProps(){
 
 // }
 
+// Concept introduction (section 2, "Transformations Overview") — template A,
+// definition last. Running instance: f(x) = x² against x² + 3 and (x − 3)².
+// Old obj2 text is kept in sectionsContent.obj2, unused; its rule box,
+// formula box and link, eight passages and the general demo frame with its
+// line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPointsTable = ciTableOpen(['point on y = x²', 'on y = x² + 3', 'on y = (x − 3)²']) +
+  ciRow(['(0, 0)', '(0, 3)', '(3, 0)']) +
+  ciRow(['(1, 1)', '(1, 4)', '(4, 1)'], { shade: true }) +
+  ciRow(['(2, 4)', '(2, 7)', '(5, 4)']) +
+  ciRow(['move', '3 up', '3 right'], { shade: true, last: true, color: '#2563EB' }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
 
@@ -2413,6 +2433,11 @@ For $f(x) = x^2$, the function $g(x) = 3x^2$ stretches the parabola vertically b
 
 For $f(x) = \\sin(x)$, the function $g(x) = \\frac{1}{2}\\sin(x)$ compresses the wave vertically. The amplitude decreases from $1$ to $\\frac{1}{2}$.
 
+@academic[fact,aside:true,width:35%:Stretching an exponential slides it
+Since $8 \\cdot 2^x = 2^{x + 3}$, stretching $y = 2^x$ vertically by $8$ gives the same graph as moving it $3$ units left. For an exponential, every vertical scaling by a positive factor is a horizontal shift.]@
+
+For $f(x) = 2^x$, the function $g(x) = 8 \\cdot 2^x$ stretches the curve vertically by a factor of $8$. The $y$-intercept moves from $(0, 1)$ to $(0, 8)$ and every height is multiplied by $8$, while the horizontal asymptote $y = 0$ stays where it is, since $8 \\cdot 0 = 0$.
+
 Vertical scaling affects the [range](!/functions/range). If $f$ has range $[m, M]$, then $a \\cdot f$ has range $[am, aM]$ when $a > 0$, or $[aM, am]$ when $a < 0$.
 
 The $x$-intercepts remain fixed — scaling zero still yields zero. The $y$-intercept scales: if $f(0) = c$, then $g(0) = ac$.`,
@@ -2479,6 +2504,7 @@ $a$: vertical stretch ($|a| > 1$), compression ($0 < |a| < 1$), and reflection (
 
 $b$: horizontal compression ($|b| > 1$), stretch ($0 < |b| < 1$), and reflection ($b < 0$)
 
+@academic[example:Example
 For example, $g(x) = -2(x + 3)^2 + 5$ transforms the parent $f(x) = x^2$:
 
 Shift left $3$ units (since $x + 3 = x - (-3)$, so $h = -3$)
@@ -2489,7 +2515,7 @@ Reflect across the $x$-axis (negative coefficient)
 
 Shift up $5$ units
 
-The vertex moves from $(0, 0)$ to $(-3, 5)$, and the parabola opens downward.`,
+The vertex moves from $(0, 0)$ to $(-3, 5)$, and the parabola opens downward.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -2572,7 +2598,10 @@ Horizontal scaling divides the domain. If $f$ has domain $[a, b]$, then $f(cx)$ 
 
 Vertical reflection negates the range. Horizontal reflection negates the domain.
 
-Tracking these effects ensures the transformed function is described correctly. The domain and range of $g(x) = 2\\sqrt{x - 3} + 1$ follow from the parent $f(x) = \\sqrt{x}$ with domain $[0, \\infty)$ and range $[0, \\infty)$: shift domain to $[3, \\infty)$, then range becomes $[0, \\infty)$ scaled to $[0, \\infty)$, then shifted to $[1, \\infty)$.
+Tracking these effects ensures the transformed function is described correctly.
+
+@academic[example:Example
+The domain and range of $g(x) = 2\\sqrt{x - 3} + 1$ follow from the parent $f(x) = \\sqrt{x}$ with domain $[0, \\infty)$ and range $[0, \\infty)$: shift domain to $[3, \\infty)$, then range becomes $[0, \\infty)$ scaled to $[0, \\infty)$, then shifted to $[1, \\infty)$.]@
 
 The table below collects each transformation's effect on domain and range in one place — a quick reference when determining the domain and range of a transformed function.`,
     before: ``,
@@ -2786,6 +2815,20 @@ const faqQuestions = {
     notes: [{ x: 3, y: -7.4, text: '1 right, 2 down: |a| = 2', pos: 'n', color: 'g' }, { x: 3, y: 1, text: 'y = −2(x − 3)² − 2', pos: 'n', color: 'f' }],
     caption: 'The vertex gives h and k; one more point gives a' };
 
+  const fpCiShifts = { kind: 'pieces', svgTitle: 'y = x^2, y = x^2 + 3 and y = (x - 3)^2: the same parabola moved up and moved right',
+    xRange: [-4, 7], yRange: [-1, 10], yStep: 2,
+    pieces: [
+      { fn: (x) => x * x, from: -3.16, to: 3.16, ends: [null, null], color: 'g', label: { text: 'y = x²', x: -2.8, y: 7.84, pos: 'w' } },
+      { fn: (x) => x * x + 3, from: -2.64, to: 2.64, ends: [null, null], color: 'f', label: { text: 'y = x² + 3', x: 0.3, y: 9.6, pos: 'e' } },
+      { fn: (x) => (x - 3) * (x - 3), from: -0.16, to: 6.16, ends: [null, null], color: 'r', label: { text: 'y = (x − 3)²', x: 5.3, y: 5.29, pos: 'e' } },
+    ],
+    points: [{ x: 0, y: 0 }, { x: 0, y: 3 }, { x: 3, y: 0 }],
+    caption: 'One shape, three positions: vertex at (0, 0), (0, 3) and (3, 0)' }
+  const conceptIntroFigures = {
+    shifts: renderFunctionPlotV4(fpCiShifts),
+    pointsTable: ciPointsTable,
+  };
+
   const demoUnits = {
     vertShift: demoUnitFrame({
       svg: functionTransformationsDiagrams.k,
@@ -2851,6 +2894,7 @@ const faqQuestions = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj1Table,
@@ -2879,10 +2923,82 @@ export default function TransformationsPage({
   obj12Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A small change to a formula often leaves the shape of its graph alone and only moves it.`,
+        content: [
+          `Adding $3$ to $x^2$, or replacing $x$ by $x - 3$, gives new functions — but their graphs still look like the familiar parabola.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `y = x² + 3 is the parabola lifted 3 units; y = (x − 3)² is the parabola moved 3 units right.`,
+        content: [
+          `Track a few points of $y = x^2$ into each new graph. Every point travels the same distance in the same direction.`,
+          ciTable('pointsTable'),
+        ],
+        visual: ciSvg('shifts'),
+      },
+      {
+        id: 'forcing',
+        lead: `Those moves are forced by the formulas, not chosen.`,
+        content: [
+          `For $x^2 + 3$, each output is the old output plus $3$, so every point rises by $3$. For $(x - 3)^2$, the new function at $x$ does what the old one did at $x - 3$, so each old value turns up $3$ units further right. A change outside the function acts on outputs; a change inside acts on inputs.`,
+          `These transformations arise from modifying the function's equation.`,
+          `@academic[rule_plain:Changes outside the function — operations applied to $f(x)$ — produce vertical effects. Changes inside the function — operations applied to $x$ — produce horizontal effects.]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [transformation](!/functions/definitions#transformation) of a function is a change to its formula that moves, flips, stretches or compresses its graph while keeping the basic shape recognisable.`,
+        formula: [
+          `The general transformed function takes the form:`,
+          `@academic[formula_callout:General Transformation
+$$g(x) = a \\cdot f(b(x - h)) + k$$
+/functions/formulas#general_transformation]@`,
+          `@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@`,
+          `Here $a$ controls vertical stretch and reflection, $b$ controls horizontal stretch and reflection, $h$ controls horizontal shift, and $k$ controls vertical shift. Understanding each parameter's effect enables both graphing from equations and writing equations from graphs.`,
+        ],
+        footer: `So $x^2 + 3$ is the transformation with $k = 3$, and $(x - 3)^2$ the one with $h = 3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Transformations come in four basic kinds, and each one has a parameter.`,
+        content: [
+          `Transformations alter a function's graph in predictable ways. Four basic types cover most modifications:`,
+          `Translation shifts the graph horizontally or vertically without changing its shape or orientation.`,
+          `Reflection flips the graph across an axis, reversing its orientation.`,
+          `Stretch pulls the graph away from an axis, making it taller or wider.`,
+          `Compression pushes the graph toward an axis, making it shorter or narrower.`,
+          <div key={'unit-general'} dangerouslySetInnerHTML={{ __html: demoUnits.general }} />,
+          `Every transformation on this page is one of these four parameters at work.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Inside changes run against intuition: (x − 3)² moves right, not left.`,
+        content: `The minus sign in $x - 3$ points the opposite way to the move, because the new graph needs a larger $x$ to reach the same value. The same reversal affects horizontal stretches and the order in which several transformations are applied. The section on [horizontal translations](!/functions/transformations#4) works through it.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation and then each transformation in turn — translations, reflections, stretches and compressions — before combining them.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2911,9 +3027,7 @@ export default function TransformationsPage({
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-          <div key={'unit-general'} dangerouslySetInnerHTML={{ __html: demoUnits.general }} />,
-          `Every transformation on this page is one of these four parameters at work.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2933,8 +3047,6 @@ export default function TransformationsPage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
-                  <div key={'unit-vertShift'} dangerouslySetInnerHTML={{ __html: demoUnits.vertShift }} />,
-          `The vertical shift is the one transformation that leaves the x-coordinates of every feature alone.`,
         ]
     },
     {
@@ -2943,6 +3055,8 @@ export default function TransformationsPage({
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+                  <div key={'unit-vertShift'} dangerouslySetInnerHTML={{ __html: demoUnits.vertShift }} />,
+          `The vertical shift is the one transformation that leaves the x-coordinates of every feature alone.`,
         ]
     },
     {
@@ -3016,6 +3130,7 @@ export default function TransformationsPage({
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          `@academic[punchline:Order matters: in $a \\cdot f(b(x - h)) + k$, each direction is scaled first and shifted second.]@`,
         ]
     },
     {
@@ -3039,6 +3154,7 @@ export default function TransformationsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
+          `@academic[punchline:Horizontal changes reshape only the domain and vertical changes only the range; neither reaches the other.]@`,
         ]
     },
     {

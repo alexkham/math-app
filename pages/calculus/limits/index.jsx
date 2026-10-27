@@ -612,7 +612,7 @@ Calculus begins with a deceptively simple question: what value does a function a
 
 Limits formalize the intuition of "getting arbitrarily close." The notation
 
-@academic[formula_callout:Summary: Navigating the Limits Subtree
+@academic[formula_callout:Limit Notation
 $$\\lim_{x \\to a} f(x) = L$$]@
 
 @academic[fact,aside:true,width:35%:Ghosts of departed quantities

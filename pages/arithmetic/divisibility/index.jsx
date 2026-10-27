@@ -462,7 +462,7 @@ Counting the factors of $84 = 2^2 \\cdot 3 \\cdot 7$ as $2 \\cdot 1 \\cdot 1 = 2
 
 A factor of $n$ is built by deciding how many copies of each prime to take, from none up to the exponent. For $84 = 2^2 \\cdot 3 \\cdot 7$, a factor takes $0$, $1$ or $2$ twos, $0$ or $1$ three and $0$ or $1$ seven: for example $2^1 \\cdot 3^0 \\cdot 7^1 = 14$. Different choices give different factors, by the uniqueness of the factorization.
 
-Factorization also underpins the computation of [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm). The GCD takes the minimum exponent of each shared prime; the LCM takes the maximum. These connections are developed on the prime factorization page.
+Factorization also underpins the computation of [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm). The GCD takes the minimum exponent of each shared prime; the LCM takes the maximum. These connections are developed in the prime factorization methods on the [GCD](!/arithmetic/divisibility/gcd#4) and [LCM](!/arithmetic/divisibility/lcm#4) pages.
 
 To find the prime factorization or all factors of a specific number, use the [factoring calculator](!/algebra/calculators/factoring).`,
   before: ``,
@@ -475,7 +475,10 @@ obj9: {
   title: `GCD and LCM`,
   content: `Two numbers may share common factors, and the largest of these is their greatest common divisor. The numbers $48$ and $36$ are both divisible by $1, 2, 3, 4, 6$, and $12$. The largest — $12$ — is $\\gcd(48, 36)$.
 
-The least common multiple runs in the opposite direction. It is the smallest positive integer that both numbers divide into. For $4$ and $6$, the multiples of $4$ are $4, 8, 12, 16, \\ldots$ and the multiples of $6$ are $6, 12, 18, \\ldots$. The smallest number in both lists is $12$, so $\\text{lcm}(4, 6) = 12$.
+The least common multiple runs in the opposite direction. It is the smallest positive integer that both numbers divide into.
+
+@academic[example:Example
+For $4$ and $6$, the multiples of $4$ are $4, 8, 12, 16, \\ldots$ and the multiples of $6$ are $6, 12, 18, \\ldots$. The smallest number in both lists is $12$, so $\\text{lcm}(4, 6) = 12$.]@
 
 The two quantities are linked by a clean identity:
 

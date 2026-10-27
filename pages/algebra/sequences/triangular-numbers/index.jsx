@@ -242,7 +242,10 @@ Solving $m = \\frac{n(n+1)}{2}$ for $n$ gives $n = \\frac{-1 + \\sqrt{1 + 8m}}{2
 For $m = 15$, taking $\\sqrt{121} = 11$ as the position gives $T_{11} = 66$, not $15$. The position is $n = \\frac{-1 + 11}{2} = 5$, and $T_5 = 15$.
 [Read more](!#pitfalls)]@
 
-The same formula answers a second question: which triangular number $m$ is. For $m = 55$, $8(55) + 1 = 441 = 21^2$, so $55$ is triangular, and its position is $n = \\frac{-1 + 21}{2} = 10$: indeed $T_{10} = 55$.
+The same formula answers a second question: which triangular number $m$ is.
+
+@academic[example:Example
+For $m = 55$, $8(55) + 1 = 441 = 21^2$, so $55$ is triangular, and its position is $n = \\frac{-1 + 21}{2} = 10$: indeed $T_{10} = 55$.]@
 
 The sum of the first $n$ triangular numbers produces the tetrahedral numbers:
 

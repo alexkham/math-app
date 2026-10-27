@@ -863,6 +863,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 export async function getStaticProps(){
 
@@ -947,6 +948,27 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // Poisson distribution") — template H, open question. Running instance:
+    // emails at a support desk, 4 per hour on average. Old obj1 text is kept in
+    // sectionsContent.obj1, unused; its paragraphs, fact aside, the example
+    // box, both link chips and the poApprox demo frame with its line are
+    // carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciSlotsTable = ciTableOpen(['slots in the hour n', 'chance per slot p = 4/n', 'P(no email)', 'P(exactly one)']) +
+      ciRow(['10', '0.4', '0.0060', '0.0403']) +
+      ciRow(['100', '0.04', '0.0169', '0.0703'], { shade: true }) +
+      ciRow(['1,000', '0.004', '0.0182', '0.0730']) +
+      ciRow(['10,000', '0.0004', '0.0183', '0.0732'], { shade: true }) +
+      ciRow(['limit', '—', 'e⁻⁴ ≈ 0.0183', '4e⁻⁴ ≈ 0.0733'], { last: true, color: '#2563EB', cols: [2, 3] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1663,6 +1685,10 @@ const poissonExplanations = {
   const fpPoTie = { ...base, xRange: [-0.5, 14], svgTitle: 'Poisson PMF with lambda = 5: the bars at 4 and 5 are equal, two modes', yRange: [0, 0.22], yBars: poTieBars,
     notes: [{ x: 7.6, y: 0.2, text: 'P(X = 4) = P(X = 5) ≈ 0.175', pos: 'e', color: 'r' }, { x: 7.6, y: 0.18, text: 'ratio of neighbours: λ/k', pos: 'e' }, { x: 7.6, y: 0.16, text: 'k = 5: ratio 5/5 = 1', pos: 'e' }],
     caption: 'λ = 5, an integer: two equal tallest bars at 4 and 5' };
+  const conceptIntroFigures = {
+    slotsTable: ciSlotsTable,
+  };
+
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.poisson,
@@ -1698,6 +1724,7 @@ const poissonExplanations = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          poissonExplanations,
@@ -1723,10 +1750,75 @@ export default function PoissonDistributionPage({
   poissonExplanations,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A support desk gets 4 emails an hour on average. What is the chance of exactly 2 next hour — or none at all?`,
+        content: [
+          `Anyone who runs a queue, a phone line or a website asks this. Only the average rate is known; the emails themselves arrive whenever they like.`,
+        ],
+      },
+      {
+        id: 'deadend',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The usual tool, the binomial distribution, has nothing to grip: there are no trials to count.`,
+        content: [
+          `A binomial count needs a fixed number of trials $n$ and a success probability $p$. An hour of email has neither — an email can arrive at any instant, so there is no list of attempts, only a rate.`,
+        ],
+      },
+      {
+        id: 'approach',
+        lead: `Invent the trials: cut the hour into n tiny slots, give each slot chance 4/n, and let n grow.`,
+        content: [
+          `With many short slots, two emails almost never share one, so each slot is a yes-or-no trial and the binomial applies. The expected count stays $n \\cdot \\frac{4}{n} = 4$ however finely the hour is cut. Watch the probabilities settle as $n$ grows.`,
+          ciTable('slotsTable'),
+          `Like a polygon with more and more sides closing in on a circle, the answer stops changing once the slots are fine enough — and the values it settles on are $e^{-4}$ and $4e^{-4}$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [Poisson distribution](!/probability/definitions#poisson_distribution) with rate $\\lambda$ is the distribution of the number of events in an interval when events occur independently at an average rate $\\lambda$: $P(X = k) = \\dfrac{e^{-\\lambda}\\lambda^k}{k!}$ for $k = 0, 1, 2, \\dots$`,
+        footer: `So the hourly email count is Poisson with $\\lambda = 4$: $P(X = 0) = e^{-4} \\approx 0.018$ and $P(X = 2) = 8e^{-4} \\approx 0.147$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a distribution of counts in a stretch of time or space, fixed by one number: the rate.`,
+        content: [
+          `The Poisson distribution models the number of events occurring in a fixed interval of time or space, when [events](!/probability/events) happen [independently](!/probability/independence) at a constant average rate. Unlike other [discrete distributions](!/probability/distributions/discrete), it does not rely on repeated [Bernoulli trials](!/probability/distributions/discrete#bernoulli) or success–failure experiments.`,
+          `The defining idea is event intensity, not trial structure. [Events](!/probability/events) are assumed to occur randomly but with a stable long-run average frequency. The [random variable](!/probability/random-variables) represents the number of events that occur in any given interval of time, regardless of when they occur within it.`,
+          `@academic[fact,aside:true,width:35%:Horse kicks follow the formula
+In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 122 deaths in 200 corps-years, $0.61$ per corps per year. With $\\lambda = 0.61$ the formula predicts $108.7$ corps-years with no death and $66.3$ with one; the records show $109$ and $65$.]@`,
+          `The Poisson distribution is especially effective for representing rare or spontaneous events, and it often arises as an approximation to the [binomial distribution](!/probability/distributions/discrete/binomial) when the number of trials is large and the probability of success is small.`,
+          `A typical source of such counts is a large group exposed to a small risk: many drivers on one road, many atoms in a radioactive sample, many soldiers in an army. Each member adds an event only rarely and independently of the others, so the number of members and the risk of each one are seldom known exactly. What is recorded is the number of events per year, per hour or per square kilometre, and its long-run average is the only number the model needs.`,
+          <div key={'unit-poApprox'} dangerouslySetInnerHTML={{ __html: demoUnits.poApprox }} />,
+          `The rule of thumb: n large, p small, and λ = np kept moderate.`,
+          sectionsContent.links.decide,
+          sectionsContent.obj1.example,
+          sectionsContent.links.example,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The table is persuasive, not a proof — and the model leans on two assumptions.`,
+        content: `Four rows of a table suggest a limit; showing that $\\binom{n}{k}\\left(\\frac{\\lambda}{n}\\right)^k\\left(1 - \\frac{\\lambda}{n}\\right)^{n-k}$ really tends to $\\frac{e^{-\\lambda}\\lambda^k}{k!}$ takes an argument with limits. And the model only fits when events are independent and the rate stays constant: emails that arrive in bursts, or a busier morning, break it. The [probability mass function](!/probability/distributions/discrete/poisson#4) section works with the formula itself.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the parameter, the PMF and CDF, the mean, variance, mode and median, key properties and applications.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1743,12 +1835,7 @@ export default function PoissonDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-           sectionsContent.obj1.content,
-                  <div key={'unit-poApprox'} dangerouslySetInnerHTML={{ __html: demoUnits.poApprox }} />,
-           `The rule of thumb: n large, p small, and λ = np kept moderate.`,
-          sectionsContent.links.decide,
-          sectionsContent.obj1.example,
-          sectionsContent.links.example,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
      {

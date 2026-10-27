@@ -687,6 +687,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -900,6 +902,9 @@ const keyWords = [
     title: `What Is a Mixed Number`,
     content: `A mixed number consists of two parts written together: a whole number and a proper fraction. The whole number counts complete units, while the fraction accounts for the remaining partial unit. In $5\\frac{2}{3}$, the whole part is 5 and the fractional part is $\\frac{2}{3}$.
 
+@academic[fact,aside:true,width:35%:Wall Street priced in mixed numbers
+Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25\\frac{3}{8}$, in eighths and from 1997 in sixteenths. When the New York Stock Exchange finished its switch to decimals on 29 January 2001, its smallest price step fell from $\\frac{1}{16}$ of a dollar, 6.25 cents, to 1 cent.]@
+
 Mixed numbers arise naturally in measurement and everyday contexts. A length of $3\\frac{1}{2}$ inches, a recipe calling for $2\\frac{1}{4}$ cups, or a time of $1\\frac{1}{2}$ hours all use mixed number notation because it communicates quantity more intuitively than the equivalent improper fractions $\\frac{7}{2}$, $\\frac{9}{4}$, and $\\frac{3}{2}$.
 
 The fractional part of a mixed number must be a proper fraction. If someone writes $3\\frac{5}{4}$, this is not standard form because $\\frac{5}{4}$ exceeds one. The correct mixed number is $4\\frac{1}{4}$, obtained by absorbing the extra whole unit from the improper fractional part.`,
@@ -960,9 +965,11 @@ On a number line, improper fractions appear at or beyond the point marked 1. The
     title: `Converting Improper Fractions to Mixed Numbers`,
     content: `Converting an improper fraction to a mixed number involves dividing the numerator by the denominator. The quotient becomes the whole number, the remainder becomes the new numerator, and the denominator stays unchanged.
 
-To convert $\\frac{17}{5}$, divide 17 by 5. The quotient is 3 with a remainder of 2. The mixed number is $3\\frac{2}{5}$, meaning three whole units and two-fifths of another.
+@academic[example:Example
+To convert $\\frac{17}{5}$, divide 17 by 5. The quotient is 3 with a remainder of 2. The mixed number is $3\\frac{2}{5}$, meaning three whole units and two-fifths of another.]@
 
-Another example: convert $\\frac{23}{4}$. Dividing 23 by 4 gives a quotient of 5 and a remainder of 3. The result is $5\\frac{3}{4}$.
+@academic[example:Example
+Another example: convert $\\frac{23}{4}$. Dividing 23 by 4 gives a quotient of 5 and a remainder of 3. The result is $5\\frac{3}{4}$.]@
 
 @academic[pitfall,aside:true,width:35%:Swapping quotient and remainder
 Using the remainder as the whole part turns $\\frac{17}{5}$ into $2\\frac{3}{5}$, which equals $\\frac{13}{5}$. The quotient $3$ is the whole part and the remainder $2$ the numerator: $3\\frac{2}{5}$.
@@ -980,9 +987,11 @@ When the numerator is exactly divisible by the denominator, the result is a whol
     title: `Converting Mixed Numbers to Improper Fractions`,
     content: `Converting a mixed number to an improper fraction reverses the division process. Multiply the whole number by the denominator, add the numerator, and place the result over the original denominator.
 
-To convert $4\\frac{2}{7}$, compute $(4 \\times 7) + 2 = 30$. The improper fraction is $\\frac{30}{7}$.
+@academic[example:Example
+To convert $4\\frac{2}{7}$, compute $(4 \\times 7) + 2 = 30$. The improper fraction is $\\frac{30}{7}$.]@
 
-Another example: convert $6\\frac{5}{8}$. Compute $(6 \\times 8) + 5 = 53$. The result is $\\frac{53}{8}$.
+@academic[example:Example
+Another example: convert $6\\frac{5}{8}$. Compute $(6 \\times 8) + 5 = 53$. The result is $\\frac{53}{8}$.]@
 
 @academic[pitfall,aside:true,width:35%:Adding the whole to the numerator
 Adding $4$ straight onto the numerator turns $4\\frac{2}{7}$ into $\\frac{6}{7}$, a value below $1$. The wholes must first become sevenths: $4 \\times 7 + 2 = 30$, giving $\\frac{30}{7}$.
@@ -1006,7 +1015,10 @@ When whole parts are equal, comparison shifts to the fractional parts. Between $
 Judging $7\\frac{2}{3}$ and $7\\frac{3}{5}$ by the numerators alone makes $7\\frac{3}{5}$ the larger. In fifteenths, $\\frac{2}{3} = \\frac{10}{15}$ beats $\\frac{3}{5} = \\frac{9}{15}$, so $7\\frac{2}{3}$ is larger.
 [Read more](!#pitfalls)]@
 
-Comparing fractional parts sometimes requires finding a common denominator or using other methods from [comparing fractions](!/arithmetic/fractions/comparing). For $7\\frac{3}{4}$ versus $7\\frac{5}{6}$, convert both fractions to twelfths: $\\frac{3}{4} = \\frac{9}{12}$ and $\\frac{5}{6} = \\frac{10}{12}$. Since $\\frac{10}{12} > \\frac{9}{12}$, the value $7\\frac{5}{6}$ is greater.`,
+Comparing fractional parts sometimes requires finding a common denominator or using other methods from [comparing fractions](!/arithmetic/fractions/comparing).
+
+@academic[example:Example
+For $7\\frac{3}{4}$ versus $7\\frac{5}{6}$, convert both fractions to twelfths: $\\frac{3}{4} = \\frac{9}{12}$ and $\\frac{5}{6} = \\frac{10}{12}$. Since $\\frac{10}{12} > \\frac{9}{12}$, the value $7\\frac{5}{6}$ is greater.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -1016,7 +1028,12 @@ Comparing fractional parts sometimes requires finding a common denominator or us
     title: `Operations with Mixed Numbers`,
     content: `Arithmetic with mixed numbers follows two general strategies. The first converts all mixed numbers to improper fractions, performs the operation, and converts back. The second handles whole and fractional parts separately, which works well for addition and subtraction but poorly for multiplication and division.
 
-[Adding and subtracting mixed numbers](!/arithmetic/fractions/adding-subtracting) can use either strategy. Adding $2\\frac{1}{3} + 4\\frac{1}{2}$ by parts means adding $2 + 4 = 6$ for wholes and $\\frac{1}{3} + \\frac{1}{2} = \\frac{5}{6}$ for fractions, giving $6\\frac{5}{6}$. Subtraction sometimes requires borrowing when the first fractional part is smaller than the second.
+[Adding and subtracting mixed numbers](!/arithmetic/fractions/adding-subtracting) can use either strategy.
+
+@academic[example:Example
+Adding $2\\frac{1}{3} + 4\\frac{1}{2}$ by parts means adding $2 + 4 = 6$ for wholes and $\\frac{1}{3} + \\frac{1}{2} = \\frac{5}{6}$ for fractions, giving $6\\frac{5}{6}$.]@
+
+Subtraction sometimes requires borrowing when the first fractional part is smaller than the second.
 
 @academic[pitfall,aside:true,width:35%:Subtracting the fractions in reverse
 Taking $\\frac{1}{4}$ from $\\frac{3}{4}$ in $5\\frac{1}{4} - 2\\frac{3}{4}$ gives $3\\frac{2}{4} = 3\\frac{1}{2}$, one whole too much. Borrowing first, $4\\frac{5}{4} - 2\\frac{3}{4} = 2\\frac{2}{4} = 2\\frac{1}{2}$.
@@ -1024,7 +1041,17 @@ Taking $\\frac{1}{4}$ from $\\frac{3}{4}$ in $5\\frac{1}{4} - 2\\frac{3}{4}$ giv
 
 Borrowing is needed when the fraction being subtracted is larger than the fraction it is taken from. One whole is taken from the whole part, rewritten as a fraction with the same denominator, such as $1 = \\frac{4}{4}$, and added to the fractional part. The value of the mixed number does not change, only its spelling, and the fractional parts can then be subtracted directly.
 
-[Multiplying mixed numbers](!/arithmetic/fractions/multiplying) requires conversion to improper fractions. To compute $2\\frac{1}{2} \\times 3\\frac{1}{3}$, convert to $\\frac{5}{2} \\times \\frac{10}{3} = \\frac{50}{6} = 8\\frac{2}{6} = 8\\frac{1}{3}$. Attempting to multiply whole parts and fractional parts separately produces incorrect results.
+[Multiplying mixed numbers](!/arithmetic/fractions/multiplying) requires conversion to improper fractions.
+
+@academic[example:Example
+To compute $2\\frac{1}{2} \\times 3\\frac{1}{3}$, convert to $\\frac{5}{2} \\times \\frac{10}{3} = \\frac{50}{6} = 8\\frac{2}{6} = 8\\frac{1}{3}$.]@
+
+Attempting to multiply whole parts and fractional parts separately produces incorrect results.
+
+@academic[fact,aside:true,width:35%:Squaring $7\\frac{1}{2}$ in your head
+Multiply $7$ by the next whole number, $8$, and attach $\\frac{1}{4}$: $7\\frac{1}{2} \\times 7\\frac{1}{2} = 56\\frac{1}{4}$. It works for every whole $n$, because the two cross terms add up to one more $n$: $(n + \\frac{1}{2})^2 = n(n + 1) + \\frac{1}{4}$.]@
+
+The four terms of such a product show up clearly when both factors are the same. In $7\\frac{1}{2} \\times 7\\frac{1}{2} = (7 + \\frac{1}{2})(7 + \\frac{1}{2})$, the wholes give $7 \\times 7 = 49$, the halves give $\\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}$, and each of the two cross terms $7 \\times \\frac{1}{2}$ gives $3\\frac{1}{2}$.
 
 [Dividing mixed numbers](!/arithmetic/fractions/dividing) also demands improper form. Convert both values, apply the reciprocal rule, and simplify. The expression $4\\frac{1}{2} \\div 1\\frac{1}{2}$ becomes $\\frac{9}{2} \\div \\frac{3}{2} = \\frac{9}{2} \\times \\frac{2}{3} = \\frac{18}{6} = 3$.
 
@@ -1311,8 +1338,41 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj6): borrowing, the section's 5 1/4 rewritten so 3/4 can be taken from its fraction part
+  const borrowingBeforeAfter = {
+    header: {
+      kicker: 'Subtracting mixed numbers',
+      title: 'Borrowing changes the spelling, not the value',
+      lede: 'To take $2\\frac{3}{4}$ from $5\\frac{1}{4}$, one whole is moved into the fraction part first.',
+    },
+    before: {
+      form: 'Standard mixed number',
+      expr: '$5\\frac{1}{4}$',
+      meta: 'Fraction part $\\frac{1}{4}$ is smaller than $\\frac{3}{4}$',
+    },
+    after: {
+      form: 'Borrowed form',
+      expr: '$4\\frac{5}{4}$',
+      meta: 'Now $\\frac{5}{4} - \\frac{3}{4}$ can be done directly',
+    },
+    operation: {
+      name: 'Borrow 1',
+      desc: 'take one whole and rewrite it as $\\frac{4}{4}$',
+      detailsLabel: 'Finish the subtraction',
+      detailsTitle: '',
+      details: '$$4\\tfrac{5}{4} - 2\\tfrac{3}{4} = 2\\tfrac{2}{4} = 2\\tfrac{1}{2}$$',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'One whole moved from the whole part into the fraction part, as $\\frac{4}{4}$.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The value: $5\\frac{1}{4}$ and $4\\frac{5}{4}$ are the same number.' },
+    ],
+  };
+
 return {
   props: {
+    borrowingBeforeAfter,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1336,7 +1396,7 @@ return {
 
 
 
-export default function MixedNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function MixedNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, borrowingBeforeAfter}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1392,6 +1452,7 @@ export default function MixedNumbersPage({seoData, sectionsContent, introContent
           sectionsContent.obj3.content,
                   <div key={'unit-seventeenFifths'} dangerouslySetInnerHTML={{ __html: demoUnits.seventeenFifths }} />,
           `Going back, 3 · 5 + 2 = 17 counts the fifths again: 3 2/5 = 17/5.`,
+          `@academic[punchline:Converting to a mixed number is division with remainder: the quotient counts whole units, the remainder the parts left over.]@`,
         ]
     },
     {
@@ -1420,6 +1481,20 @@ export default function MixedNumbersPage({seoData, sectionsContent, introContent
           sectionsContent.obj6.content,
           <div key={'obj6-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="borrowing-before-after"
+            title="Borrowing in 5¼ − 2¾"
+            source="/arithmetic/fractions/mixed-numbers"
+            before={"Subtraction by parts needs borrowing when the fraction being subtracted is larger. Here is the section's $5\\frac{1}{4} - 2\\frac{3}{4}$, before and after the borrow."}
+            after={"Taking $\\frac{1}{4}$ from $\\frac{3}{4}$ instead, the slip shown beside the prose above, gives $3\\frac{1}{2}$, one whole too much. Borrowing first gives $2\\frac{1}{2}$."}
+          >
+            <BeforeAfter
+              data={borrowingBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
+          `@academic[punchline:Mixed numbers can be added and subtracted part by part; for multiplying and dividing, convert them to improper fractions first.]@`,
         ]
     },
     {

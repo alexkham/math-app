@@ -820,7 +820,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
@@ -1238,7 +1238,7 @@ $$W \\subseteq V \\text{ is a subspace} \\iff \\begin{cases} W \\neq \\emptyset 
 
 Closure under addition: for all $\\mathbf{u}, \\mathbf{v} \\in W$, the sum $\\mathbf{u} + \\mathbf{v}$ is in $W$.
 
-Closure under scalar multiplication: for all $c \\in \\mathbb{R}$ and all $\\mathbf{v} \\in W$, the product $c\\mathbf{v}$ is in $W$.
+Closure under scalar multiplication: for all $c \\in \\mathbb{F}$ and all $\\mathbf{v} \\in W$, the product $c\\mathbf{v}$ is in $W$.
 
 These two conditions can be compressed into a single closure-under-linear-combinations condition:
 

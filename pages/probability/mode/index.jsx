@@ -538,7 +538,7 @@ This often indicates a mixture of two underlying populations or processes. Data 
 
 Rare in simple probability models but common in complex real-world data. Multiple subgroups or cyclical patterns can create many modes.
 
-**No mode (Uniform)**: All values have equal probability or density.
+**Every value is a mode (no unique mode)**: Uniform distributions, where all values have equal probability or density.
 
 Examples: [Discrete Uniform](!/probability/distributions/discrete/uniform), [Continuous Uniform](!/probability/distributions/continuous/uniform)
 
@@ -701,7 +701,7 @@ This differs from [variance](!/probability/variance), which scales by $a^2$, not
 
 Unlike [mean](!/probability/expected-value), which always produces a single value, the mode may not be unique:
 
-• **No mode**: [Uniform distributions](!/probability/distributions/discrete/uniform) where all probabilities equal
+• **Every value is a mode (no unique mode)**: [Uniform distributions](!/probability/distributions/discrete/uniform) where all probabilities equal
 • **One mode**: Most standard distributions (unimodal)
 • **Two modes**: [Binomial](!/probability/distributions/discrete/binomial) when $(n+1)p$ is integer
 • **Many modes**: Complex mixture distributions or uniform discrete cases
@@ -1133,7 +1133,7 @@ The mode works best when probability genuinely concentrates at identifiable peak
       read:`the modes of X — plural, as a set`,
       means:`When several values tie for the highest probability, the operator returns a set: braces signal that "the" mode is not unique. Prose carries the same information as vocabulary — unimodal, bimodal, multimodal — where formulas use the braces.`,
       cases:`A uniform distribution is the degenerate extreme: every value ties, and the set-valued answer becomes the whole support — which is why "the mode" is only quoted for distributions with an actual peak; the [mean and median](!/probability/median#12) never need this escape hatch, since averaging and halving always produce one number.`,
-      confusedWith:`A mode that does not exist versus modes that are many. An empty peak (nothing stands out) and a shared peak (several values stand out equally) both break uniqueness, but only the second returns a usable set — flattening the distinction misreads uniform data as "having modes".`,
+      confusedWith:`A flat top versus modes that are many. A flat top (every value tied) and a shared peak (several values stand out equally) both mean no unique mode, but only the second singles out a few values — on uniform data every value is a mode, so the set says nothing about where values concentrate.`,
     },
   ],
   symbolsHref: `/math-symbols/probability`,
@@ -1207,7 +1207,7 @@ The mode is still the maximum of $f(x)$, even when $f(x) > 1$.
 
 ## Assuming Mode + Median + Mean Always Have Fixed Order
 
-The relationship mode < [median](!/probability/median) < [mean](!/probability/expected-value) holds only for right-skewed distributions.
+The relationship mode < [median](!/probability/median) < [mean](!/probability/expected-value) typically holds for right-skewed distributions.
 
 Symmetric unimodal distributions have all three equal.
 
@@ -1407,7 +1407,7 @@ const faqQuestions = {
   },
   obj2: {
     question: "Does a uniform distribution have a mode?",
-    answer: "Not a useful one. Every value ties for the highest probability, so the set-valued answer becomes the entire support — a distribution with no peak rather than one with many peaks. Those two failures of uniqueness differ: a shared peak returns a usable set of modes, an absent peak does not. Treating uniform data as having modes flattens the distinction.",
+    answer: "Every value is a mode, so there is no unique mode. Every value ties for the highest probability, so the set-valued answer becomes the entire support — a flat top, every value tied, rather than a few separate peaks. Those two cases of no unique mode differ: a shared peak singles out a few values, a flat top does not.",
     sectionId: "11"
   },
   obj3: {

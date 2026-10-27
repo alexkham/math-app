@@ -118,6 +118,8 @@ This logical system finds applications across mathematics, computer science (cir
       link: '/logic/propositional-logic/laws',
       content:        
 `### Understanding Propositional Logic Laws
+@academic[fact,aside:true,width:35%:Relay circuits obey these laws
+In his 1937 master's thesis at MIT, Claude Shannon showed that switches in series behave like $\\land$ and switches in parallel like $\\lor$. The laws of Boole's 1854 algebra of logic could then simplify a relay circuit on paper before it was built.]@
 Propositional logic provides a powerful framework for formal reasoning, and at its core are several fundamental laws that help us manipulate logical expressions. 
 On this [page](!/logic/propositional-logic/laws) we aggregated a summary of these laws and rules.
 They may be  grouped into families based on their logical functions:
@@ -296,7 +298,16 @@ A proof is a finite sequence of formulas where each formula is either:
 - A premise (axiom or assumption)
 - Derived from previous formulas by Modus Ponens
 
-The system is complete (proves all tautologies) and sound (proves only tautologies).`
+The system is complete (proves all tautologies) and sound (proves only tautologies).
+
+Even a formula as plain as $A \\to A$ is not an axiom here, so it has to be derived. Every line of the derivation must be an instance of A1, A2 or A3, or follow from two earlier lines by modus ponens; nothing else may be written down, however obvious it looks.
+
+@academic[fact,aside:true,width:35%:Five lines to prove $A \\to A$
+The usual derivation of $A \\to A$ in this system takes five lines: one instance of A2, with $A \\to A$ in place of $B$ and $A$ in place of $C$, two instances of A1, and modus ponens twice. With three axioms and one rule, even the most obvious tautology is built step by step.]@
+
+A proof in this system may be long, but checking it is mechanical. Each line is compared with the three axiom patterns, or with two earlier lines and the shape of modus ponens. No idea of what the formulas mean is needed for the check, which is why such proofs can be verified by a computer.
+
+@academic[punchline:Three axiom patterns and one rule are enough to prove every tautology, and nothing but tautologies.]@`
           }
           ,{
             id:'pitfalls',

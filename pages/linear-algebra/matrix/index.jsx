@@ -670,7 +670,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import renderMatrixGrid from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid'
 import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -864,6 +865,24 @@ export async function getStaticProps(){
 `
 
   // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "What a Matrix Is") — template I, naming.
+// Running instance: the coefficient table of 2x + 3y = 5, x − y = 1, beside
+// two other rectangular tables of numbers. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box, fact aside and four
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPlacesTable = ciTableOpen(['situation', 'rows mean', 'columns mean', 'the numbers']) +
+  ciRow(['sales in 2 shops of 3 products', 'shops', 'products', '(12, 7, 30), (9, 15, 22)']) +
+  ciRow(['the system 2x + 3y = 5, x − y = 1', 'equations', 'unknowns x, y', '(2, 3), (1, −1)'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['a tiny 2 × 3 grey image', 'pixel rows', 'pixel columns', '(0, 128, 255), (64, 192, 32)'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1186,6 +1205,10 @@ const schemas = {
   // the use site; the shipped module is not edited.
   const columnPictureFrame = vectorPictureDiagrams.columns.allPieces.replace(/url\(#vpd-c-/g, 'url(#vpd-c4-');
 
+  const conceptIntroFigures = {
+    placesTable: ciPlacesTable,
+  };
+
   const demoUnits = {
     // Hub page: one unit, on the section that reframes a matrix as an
     // action rather than a table. That view needs the geometric tool.
@@ -1243,6 +1266,7 @@ const schemas = {
   props: {
     matrixShapesOutline,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -1263,9 +1287,73 @@ const schemas = {
 
 
 
-   export default function MatricesPage({matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits}) {
+   export default function MatricesPage({matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `You already organise numbers in rows and columns whenever two kinds of label meet.`,
+        content: [
+          `A sales sheet lists shops down the side and products across the top; each number sits where a shop meets a product. Move a number to another cell and it means something else.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The same layout turns up in a sales sheet, in a system of equations and in a digital image.`,
+        content: [
+          `Each situation stores numbers in a rectangle, and the position of each number carries its meaning.`,
+          ciTable('placesTable'),
+        ],
+      },
+      {
+        id: 'shared',
+        lead: `What they share: a rectangle of numbers, located by a row and a column.`,
+        content: [
+          `Strip away the labels and only the grid of numbers is left — for the system, just $2, 3$ on the first row and $1, -1$ on the second. Everything that can be done with these tables can be done with that bare grid.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [matrix](!/linear-algebra/definitions#matrix) is a rectangular array of numbers arranged in rows and columns; the entry in row $i$ and column $j$ is written $a_{ij}$.`,
+        formula: [
+          `In full generality, an $m \\times n$ matrix looks like`,
+          `@academic[formula_callout:What a Matrix Is
+$$A = \\begin{pmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{21} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} \\end{pmatrix}$$]@`,
+        ],
+        footer: `So the system $2x + 3y = 5$, $x - y = 1$ has the $2 \\times 2$ coefficient matrix with rows $(2, 3)$ and $(1, -1)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A matrix is a single object made of many numbers, each with an address.`,
+        content: [
+          `A matrix is a rectangular array of numbers arranged in rows and columns. The standard notation uses a capital letter for the matrix and a lowercase letter with two subscripts for its entries: the matrix $A$ has entry $a_{ij}$ in row $i$ and column $j$. The shorthand $A = (a_{ij})$ means "the matrix whose $(i,j)$ entry is $a_{ij}$."`,
+          `@academic[fact,aside:true,width:35%:A matrix is named after a womb
+J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw the array as the parent from which many determinants are born, one for every choice of an equal number of rows and columns.]@`,
+          `The entries can be real numbers, complex numbers, or elements of any algebraic field. Throughout this site, entries are real unless explicitly stated otherwise.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What the name buys: the whole table can be added, scaled and multiplied as one thing.`,
+        content: [
+          `The idea of the array is much older than its name. Rectangular tables of coefficients were used to solve systems of equations long before anyone treated the table itself as a mathematical object, and for a long time such an array mattered mainly as a source of determinants, numbers computed from a square block of its entries.`,
+          `Treating the table as an object in its own right is what lets one rule handle every system of equations, every image and every sheet of data. The [next section](!/linear-algebra/matrix#2) describes a matrix by its shape.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers dimensions, equality and the zero matrix, matrices as collections of vectors, matrix arithmetic, special shapes, the inverse, rank and trace, and systems of equations.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1273,7 +1361,7 @@ const schemas = {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

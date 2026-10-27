@@ -13,6 +13,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -356,6 +357,23 @@ const summaryTable = `
 
 
 
+// Concept introduction (section 2, "The Basic Equation") — template C,
+// failure first. Running instance: |2x − 3| = 7, the section's own example.
+// Old obj2 text is kept in sectionsContent.obj2, unused; its formula box with
+// link, pitfall aside, seven passages, obj2Table and the punchline are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCheckTable = ciTableOpen(['x', '2x − 3', '|2x − 3|', 'equals 7?']) +
+  ciRow(['5', '7', '7', 'yes — found by dropping the bars']) +
+  ciRow(['−2', '−7', '7', 'yes — missed'], { shade: true, last: true, color: '#a4243b', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -481,7 +499,10 @@ Each equation is solved independently using whatever method the form of $f(x)$ r
 
 When $f(x)$ is linear, each case produces a [linear equation](!/algebra/equations/linear) with exactly one solution, so the original absolute value equation has exactly two solutions (assuming $k > 0$). The equation $|3x + 5| = 11$ yields $3x + 5 = 11$ (so $x = 2$) and $3x + 5 = -11$ (so $x = -\\frac{16}{3}$).
 
-When $f(x)$ is quadratic, each case is a [quadratic equation](!/algebra/equations/quadratic) that may contribute zero, one, or two solutions. The equation $|x^2 - 4| = 5$ splits into $x^2 - 4 = 5$ and $x^2 - 4 = -5$. The first gives $x^2 = 9$, so $x = \\pm 3$. The second gives $x^2 = -1$, which has no real solutions. The complete solution set is $\\{-3, 3\\}$.
+When $f(x)$ is quadratic, each case is a [quadratic equation](!/algebra/equations/quadratic) that may contribute zero, one, or two solutions.
+
+@academic[example:Example
+The equation $|x^2 - 4| = 5$ splits into $x^2 - 4 = 5$ and $x^2 - 4 = -5$. The first gives $x^2 = 9$, so $x = \\pm 3$. The second gives $x^2 = -1$, which has no real solutions. The complete solution set is $\\{-3, 3\\}$.]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the negative case
 Solving $|3x + 5| = 11$ only as $3x + 5 = 11$ gives $x = 2$ and stops there. The case $3x + 5 = -11$ adds $x = -\\frac{16}{3}$, so the solution set is $\\left\\{-\\frac{16}{3}, 2\\right\\}$.
@@ -504,7 +525,8 @@ $$f(x) = g(x) \\quad \\text{or} \\quad f(x) = -g(x)$$]@
 
 Each case is solved separately, and the results are combined.
 
-The equation $|2x - 1| = |x + 4|$ produces two equations. From $2x - 1 = x + 4$: $x = 5$. From $2x - 1 = -(x + 4)$: $2x - 1 = -x - 4$, so $3x = -3$ and $x = -1$. Both candidates should be verified: $|2(5) - 1| = |9| = 9$ and $|5 + 4| = |9| = 9$, confirming $x = 5$. Similarly, $|2(-1) - 1| = |-3| = 3$ and $|-1 + 4| = |3| = 3$, confirming $x = -1$. The solution set is $\\{-1, 5\\}$.
+@academic[example:Example
+The equation $|2x - 1| = |x + 4|$ produces two equations. From $2x - 1 = x + 4$: $x = 5$. From $2x - 1 = -(x + 4)$: $2x - 1 = -x - 4$, so $3x = -3$ and $x = -1$. Both candidates should be verified: $|2(5) - 1| = |9| = 9$ and $|5 + 4| = |9| = 9$, confirming $x = 5$. Similarly, $|2(-1) - 1| = |-3| = 3$ and $|-1 + 4| = |3| = 3$, confirming $x = -1$. The solution set is $\\{-1, 5\\}$.]@
 
 @academic[pitfall,aside:true,width:35%:Negating only the first term
 Writing the second case of $|2x - 1| = |x + 4|$ as $2x - 1 = -x + 4$ gives $x = \\frac{5}{3}$, where the sides are $\\frac{7}{3}$ and $\\frac{17}{3}$. Negating the whole side, $-(x + 4) = -x - 4$, gives $x = -1$.
@@ -549,9 +571,12 @@ The solution set is $\\{-5, 3\\}$. The interval method is systematic: identify c
     title: `Absolute Value and Extraneous Solutions`,
     content: `The case-splitting method, when applied correctly, does not generate extraneous solutions. Each case defines a condition under which the absolute value expression takes a specific sign, and solving within that condition produces only valid results — provided the solution is checked against the interval constraint.
 
-Extraneous solutions enter through a different route: squaring. The equation $|x - 2| = 3x - 4$ can be solved by case-splitting (the reliable method) or by squaring both sides to obtain $(x - 2)^2 = (3x - 4)^2$. Squaring eliminates the absolute value but is not reversible — it treats $|A| = B$ and $|A| = -B$ identically, and if $B$ takes negative values for some $x$, those values may appear as solutions to the squared equation without satisfying the original.
+Extraneous solutions enter through a different route: squaring.
 
-For this equation, case-splitting gives two cases. From $x - 2 = 3x - 4$: $x = 1$. Check: $|1 - 2| = 1$ and $3(1) - 4 = -1$. Since $1 \\neq -1$, this candidate is extraneous. From $-(x - 2) = 3x - 4$: $-x + 2 = 3x - 4$, so $x = \\frac{3}{2}$. Check: $|\\frac{3}{2} - 2| = \\frac{1}{2}$ and $3(\\frac{3}{2}) - 4 = \\frac{1}{2}$. This one holds. The only solution is $x = \\frac{3}{2}$.
+@academic[example:Example
+The equation $|x - 2| = 3x - 4$ can be solved by case-splitting (the reliable method) or by squaring both sides to obtain $(x - 2)^2 = (3x - 4)^2$. Squaring eliminates the absolute value but is not reversible — it treats $|A| = B$ and $|A| = -B$ identically, and if $B$ takes negative values for some $x$, those values may appear as solutions to the squared equation without satisfying the original.
+
+For this equation, case-splitting gives two cases. From $x - 2 = 3x - 4$: $x = 1$. Check: $|1 - 2| = 1$ and $3(1) - 4 = -1$. Since $1 \\neq -1$, this candidate is extraneous. From $-(x - 2) = 3x - 4$: $-x + 2 = 3x - 4$, so $x = \\frac{3}{2}$. Check: $|\\frac{3}{2} - 2| = \\frac{1}{2}$ and $3(\\frac{3}{2}) - 4 = \\frac{1}{2}$. This one holds. The only solution is $x = \\frac{3}{2}$.]@
 
 The first candidate failed because the right-hand side $3x - 4$ was negative at $x = 1$.
 
@@ -811,6 +836,19 @@ const schemas = {
     notes: [{ x: 1.38, y: 0.3, text: 'x = 3/2', pos: 'w', color: 'r' }, { x: 1, y: 0.85, text: '|x − 2| = 1', pos: 'w', color: 'f' }, { x: 1, y: -1, text: '3x − 4 = −1', pos: 'w', color: 'g' }],
     caption: 'Squaring keeps x = 1, but there |x − 2| = 1 while 3x − 4 = −1' };
 
+  const fpCiAbs = { kind: 'pieces', svgTitle: 'y = |2x - 3| meets y = 7 at x = -2 and x = 5',
+    xRange: [-4, 7], yRange: [-1, 11],
+    pieces: [
+      { fn: (x) => Math.abs(2 * x - 3), from: -4, to: 7, ends: [null, null], color: 'f', label: { text: 'y = |2x − 3|', x: 3.4, y: 1.3, pos: 'e' } },
+      { fn: () => 7, from: -4, to: 7, ends: [null, null], color: 'g', label: { text: 'y = 7', x: 6.4, y: 7, pos: 'n' } },
+    ],
+    points: [{ x: -2, y: 7, label: 'x = −2', pos: 'sw' }, { x: 5, y: 7, label: 'x = 5', pos: 'se' }],
+    caption: 'the V shape reaches height 7 twice' }
+  const conceptIntroFigures = {
+    abs: renderFunctionPlotV4(fpCiAbs),
+    checkTable: ciCheckTable,
+  };
+
   const demoUnits = {
     basic: demoUnitFrame({
       svg: equationVisualizerDiagrams['abs-two'],
@@ -846,6 +884,7 @@ const schemas = {
 return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -875,10 +914,85 @@ export default function AbsoluteValueEquationsPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The obvious move with |2x − 3| = 7 is to drop the bars and solve what is left.`,
+        content: [
+          `Without the bars, $2x - 3 = 7$ gives $2x = 10$ and $x = 5$. Checking it: $|2 \\cdot 5 - 3| = |7| = 7$. It works, so the job looks done.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `But x = −2 works too — and dropping the bars never finds it.`,
+        content: [
+          `At $x = -2$ the inside is $-7$, and the bars turn it into $7$. The graph shows the problem: the V shape reaches height $7$ in two places, and the shortcut found only one.`,
+          ciTable('checkTable'),
+        ],
+        visual: ciSvg('abs'),
+      },
+      {
+        id: 'diagnosis',
+        lead: `The loss was predictable: absolute value forgets the sign, so two numbers have absolute value 7.`,
+        content: [
+          `Being "7 kilometres from home" does not say in which direction — east or west both qualify. In the same way $|p| = 7$ allows $p = 7$ and $p = -7$, and dropping the bars keeps only the first.`,
+          `The equation $|A| = B$, where $A$ is an expression and $B$ is a constant, has three possible structures depending on the sign of $B$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An absolute value equation has the unknown inside [absolute value](!/algebra/definitions#absolute_value) bars. For a positive constant $b$: $|p| = b$ exactly when $p = b$ or $p = -b$; $|p| = 0$ exactly when $p = 0$; and $|p| = b$ with $b < 0$ has no solution.`,
+        formula: [
+          `When $B > 0$, the equation splits into two cases:`,
+          `@academic[formula_callout:Absolute Value Equation
+$$|p| = b \\implies p = b \\text{ or } p = -b \\quad (b > 0)$$
+/algebra/formulas#absolute_value_equation]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+        ],
+        footer: `So $|2x - 3| = 7$ means $2x - 3 = 7$ or $2x - 3 = -7$: $x = 5$ or $x = -2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is an equation that splits into cases — usually two, sometimes one or none.`,
+        content: [
+          `Both must be solved, and both solutions (if they exist) belong to the solution set. The equation $|2x - 3| = 7$ becomes $2x - 3 = 7$ or $2x - 3 = -7$, giving $x = 5$ or $x = -2$.`,
+          `When $B = 0$, the equation reduces to a single case: $A = 0$. There is no split because zero is its own opposite. The equation $|4x + 1| = 0$ gives $4x + 1 = 0$, so $x = -\\frac{1}{4}$.`,
+          <div key={'obj2-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          `@academic[punchline:The sign of the right-hand side decides the split: two cases when positive, one when zero, none when negative.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the cases give a test to run first: look at the sign of the right-hand side.`,
+        content: [
+          `When $B < 0$, no solution exists. The equation $|x + 3| = -2$ asks for a non-negative quantity to equal $-2$, which is impossible. The solution set is empty, and no algebra is needed to determine this.`,
+          `@academic[pitfall,aside:true,width:35%:Splitting a negative right-hand side
+Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x = -1$, but both make $|x + 3| = 2$, not $-2$. The equation has no solution.
+[Read more](!#pitfalls)]@`,
+          `Checking the sign of the right-hand side before proceeding is not a shortcut — it is the logical first step. A negative right-hand side eliminates the equation immediately, and recognizing this saves the effort of setting up cases that cannot produce valid solutions.`,
+          `When the inside is a longer expression, the same split applies to it as a whole, as the [next section](!/algebra/equations/absolute-value#3) shows.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers equations of the form |f(x)| = k, absolute values on both sides, several absolute value terms, and extraneous solutions.`,
+      },
+    ],
+  }
 
   const genericSections=[
 
@@ -927,13 +1041,7 @@ export default function AbsoluteValueEquationsPage({
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
-          `@academic[punchline:The sign of the right-hand side decides the split: two cases when positive, one when zero, none when negative.]@`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

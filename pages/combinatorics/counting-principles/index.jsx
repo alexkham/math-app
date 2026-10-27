@@ -1435,6 +1435,9 @@ Here every outcome uses all three steps: a meal has one main, one drink and one 
  
 ## The Independence Condition
  
+@academic[fact,aside:true,width:35%:A cube with 43 quintillion positions
+A Rubik's Cube has $8!$ corner placements, $3^7$ corner twists, $12!$ edge placements and $2^{11}$ edge flips, halved by a parity rule: about $4.3 \\times 10^{19}$ positions. The last twist and the last flip are forced by the others, so they contribute a factor of $1$.]@
+
 The rule requires that the number of options at each step not depend on the choices made at earlier steps. When the option count at a later step shifts based on earlier choices, the multiplication rule does not apply directly and the count must be broken down further — usually by splitting into cases via the addition rule.
  
 The multiplication rule is the engine behind every [permutation](!/combinatorics/permutations) formula. Arranging $n$ distinct items in a line uses the rule with decreasing counts at each step: $n$ choices for the first position AND $(n-1)$ for the second AND $(n-2)$ for the third, down to $1$, yielding $n!$ total arrangements. [Combinations](!/combinatorics/combinations) build on the same product, with a division step to remove the ordering.
@@ -1474,6 +1477,8 @@ A condition of the form "at least one" hides many cases at once: exactly one, ex
 ## Structural Note
  
 In [set-theoretic notation](!/math-symbols/set-theory), complementary counting expresses $|A| = |U| - |A^c|$, where $A^c$ is the complement of $A$ in the universe. This is the addition rule applied to the partition $A \\cup A^c = U$ — complementary counting is a strategic application of the addition rule rather than an independent principle.
+
+@academic[punchline:An "at least one" count is usually one subtraction away: count the outcomes with none and take them from the total.]@
 `,
     before: ``,
     between: ``,
@@ -1508,6 +1513,8 @@ The lemma is easiest to use when every person's count is known. If each of $n$ p
 ## Combinatorial Identities
  
 Many of the identities involving the [binomial coefficient](!/combinatorics/binomial-coefficient) — including Vandermonde&apos;s identity and the hockey stick identity — are most naturally proved by double counting. A subset count is interpreted in two ways: by selecting members directly, and by partitioning the selection into stages or cases. The two expressions for the same subset count then equate to produce the identity. Algebraic proofs of these identities exist, but the combinatorial proofs are typically shorter and more illuminating.
+
+@academic[punchline:Counting one set in two different ways proves that the two answers are equal, with no algebra needed.]@
 `,
     before: ``,
     between: ``,
@@ -1560,6 +1567,9 @@ Among any 5 integers chosen from $\\{1, 2, \\ldots, 8\\}$, at least two come fro
  
 ## One-Sided Nature
  
+@academic[fact,aside:true,width:35%:No compressor shrinks every file
+There are $2^n$ files of $n$ bits but only $2^n - 1$ shorter bit strings, the empty one included. If every file got shorter, two files would share a compressed form, and unpacking could not tell them apart.]@
+
 The pigeonhole principle is asymmetric. It proves that a collision must occur, but says nothing about which container holds it or how to find it. The principle yields existence proofs in number theory, geometry, and combinatorics, often in settings where direct construction is hard or impossible.
  
 In the language of [functions](!/functions), the principle states that no injection exists from a finite set into a strictly smaller finite set — any function from a larger finite set to a smaller one must map at least two elements of the domain to the same target.
@@ -1912,7 +1922,8 @@ export default function CountingPrinciplesPage({seoData, sectionsContent, introC
         content:[
           sectionsContent.obj5.content,
                   <div key={'unit-pigeonhole'} dangerouslySetInnerHTML={{ __html: demoUnits.pigeonhole }} />,
-          `The generalized form below is the same argument with the threshold raised: push enough items in and some container must hold not just two but many.`,
+          `The generalized form above is the same argument with the threshold raised: push enough items in and some container must hold not just two but many.`,
+          `@academic[punchline:When items outnumber containers, a collision is certain, even when no one can say where it happens.]@`,
         ]
     },
     {

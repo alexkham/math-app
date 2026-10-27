@@ -856,6 +856,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 export async function getStaticProps(){
 
@@ -945,6 +946,29 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // hypergeometric distribution") — template C, failure first. Running
+    // instance: a bag of 5 balls, 2 red, draw 2 without replacement. Old obj1
+    // text is kept in sectionsContent.obj1, unused; its three paragraphs, the
+    // example box and both link chips are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciBreakTable = ciTableOpen(['red balls in 2 draws', 'binomial guess, p = 2/5', 'actual, without replacement']) +
+      ciRow(['0', '(3/5)² = 0.36', '(3/5)(2/4) = 0.30'], { color: '#a4243b', cols: [1] }) +
+      ciRow(['1', '2(2/5)(3/5) = 0.48', '0.60'], { shade: true, color: '#a4243b', cols: [1] }) +
+      ciRow(['2', '(2/5)² = 0.16', '(2/5)(1/4) = 0.10'], { last: true, color: '#a4243b', cols: [1] }) +
+      '</tbody></table>'
+    const ciShiftTable = ciTableOpen(['bag before the draw', 'chance the next ball is red']) +
+      ciRow(['first draw: 2 red, 3 white', '2/5 = 0.40']) +
+      ciRow(['after a red: 1 red, 3 white', '1/4 = 0.25'], { shade: true }) +
+      ciRow(['after a white: 2 red, 2 white', '2/4 = 0.50'], { last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1635,6 +1659,11 @@ const hypergeometricExplanations = {
     yBars: hgBars,
     notes: [{ x: 6.2, y: 0.37, text: 'blue: binomial, n = 10, p = 0.4', pos: 'e', color: 'f' }, { x: 6.2, y: 0.34, text: 'amber: 10 of N = 20, K = 8', pos: 'e', color: 'r' }, { x: 6.2, y: 0.31, text: 'same mean 4', pos: 'e' }, { x: 6.2, y: 0.28, text: 'variance 2.4 vs 1.26', pos: 'e' }],
     caption: 'Without replacement the counts bunch closer to the mean' };
+  const conceptIntroFigures = {
+    breakTable: ciBreakTable,
+    shiftTable: ciShiftTable,
+  };
+
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.hypergeometric,
@@ -1660,6 +1689,7 @@ const hypergeometricExplanations = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          hypergeometricExplanations,
@@ -1685,10 +1715,70 @@ export default function HypergeometricDistributionPage({
   hypergeometricExplanations,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Counting successes in a fixed number of draws sounds like a job for the binomial distribution.`,
+        content: [
+          `A bag holds 5 balls, 2 of them red. Draw 2 and count the reds. Each draw is red with chance $\\frac{2}{5}$, there are 2 draws — so the natural move is a binomial with $n = 2$ and $p = \\frac{2}{5}$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `If the balls are not put back, the binomial answers are wrong in every row.`,
+        content: [
+          `Work out the real probabilities draw by draw and set them beside the binomial guess.`,
+          ciTable('breakTable'),
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The failure was predictable: the binomial assumes every draw has the same chance, and here it does not.`,
+        content: [
+          `Once a ball is out, the bag is different. A red first draw leaves fewer reds; a white one leaves relatively more. It is like a bag of sweets: once the red one is eaten, it cannot come out again. The warning sign is visible before any calculation — a small population, and draws that are not returned.`,
+          ciTable('shiftTable'),
+          `Unlike the [binomial distribution](!/probability/distributions/discrete/binomial), trials are not [independent](!/probability/independence). The probability of success changes after each draw because items are not returned. The number of draws is fixed in advance, and the [random variable](!/probability/random-variables) counts how many successes appear in the sample.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [hypergeometric distribution](!/probability/definitions#hypergeometric_distribution) is the distribution of the number of successes in $n$ draws without replacement from a population of $N$ items, $K$ of them successes: $P(X = k) = \\dfrac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}}$.`,
+        footer: `So for the bag, $N = 5$, $K = 2$, $n = 2$: $P(X = 2) = \\dfrac{\\binom{2}{2}\\binom{3}{0}}{\\binom{5}{2}} = \\dfrac{1}{10}$, matching the table.`,
+      },
+      {
+        id: 'kind',
+        lead: `It counts successes in a sample, like the binomial — but the sample is taken from a fixed, shrinking stock.`,
+        content: [
+          `The hypergeometric distribution counts the number of successes obtained when sampling without replacement from a finite population. The population contains a fixed number of successes and failures, and each draw permanently alters the composition of the population.`,
+          `This distribution captures situations where resources are limited or where selection without replacement is intrinsic to the experiment. It reflects dependence between outcomes — a key distinction from trial-based models.`,
+          sectionsContent.links.decide,
+          sectionsContent.obj1.example,
+          sectionsContent.links.example,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the diagnosis is a test: the smaller the population compared with the sample, the more the binomial misleads.`,
+        content: `With 5 balls, removing one changes the odds a lot. With thousands of items and a handful of draws, removing a few hardly changes anything, and the binomial becomes a good approximation. The section on [variance](!/probability/distributions/discrete/hypergeometric#7) compares the two side by side.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the parameters, the PMF and CDF, the mean, variance, mode and median, and further properties.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1705,10 +1795,7 @@ export default function HypergeometricDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-           sectionsContent.obj1.content,
-          sectionsContent.links.decide,
-          sectionsContent.obj1.example,
-          sectionsContent.links.example,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
      {

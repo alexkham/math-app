@@ -13,6 +13,8 @@ import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -318,7 +320,8 @@ Step 5: Select the intervals matching the inequality.
 
 Step 6: Handle endpoints. Numerator zeros are included for $\\leq$ or $\\geq$, excluded for $<$ or $>$. Denominator zeros are excluded always. Mark included endpoints with square brackets and excluded ones with parentheses.
 
-For $\\frac{x - 2}{x + 1} > 0$, the critical points are $x = 2$ (numerator) and $x = -1$ (denominator). Three intervals arise. In $(-\\infty, -1)$: $(x - 2)$ is negative, $(x + 1)$ is negative — quotient is positive. In $(-1, 2)$: $(x - 2)$ is negative, $(x + 1)$ is positive — quotient is negative. In $(2, \\infty)$: both positive — quotient is positive. The solution to $> 0$ is $(-\\infty, -1) \\cup (2, \\infty)$. Both critical points are excluded: $x = -1$ because it is a denominator zero, $x = 2$ because the inequality is strict.`,
+@academic[example:Example
+For $\\frac{x - 2}{x + 1} > 0$, the critical points are $x = 2$ (numerator) and $x = -1$ (denominator). Three intervals arise. In $(-\\infty, -1)$: $(x - 2)$ is negative, $(x + 1)$ is negative — quotient is positive. In $(-1, 2)$: $(x - 2)$ is negative, $(x + 1)$ is positive — quotient is negative. In $(2, \\infty)$: both positive — quotient is positive. The solution to $> 0$ is $(-\\infty, -1) \\cup (2, \\infty)$. Both critical points are excluded: $x = -1$ because it is a denominator zero, $x = 2$ because the inequality is strict.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -681,10 +684,32 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj5): the section's inequality brought into sign-chart form without cross-multiplying
+  const oneSideSteps = {
+    header: {
+      kicker: 'Rational inequalities',
+      title: 'One side, one fraction, compared with zero',
+      lede: 'Instead of multiplying by $x + 2$, whose sign changes, move everything to one side and combine it into a single fraction.',
+    },
+    steps: [
+      { id: 'vsone', label: 'Fraction compared with 1', stamp: 'Before', expr: '$\\dfrac{x - 3}{x + 2} > 1$',
+        move: { label: 'Move everything to one side', note: 'subtract 1 from both sides' } },
+      { id: 'vszero', label: 'Compared with zero', expr: '$\\dfrac{x - 3}{x + 2} - 1 > 0$',
+        move: { label: 'Combine into a single fraction', note: 'over the common denominator x + 2' } },
+      { id: 'single', label: 'Single fraction', expr: '$\\dfrac{x - 3 - (x + 2)}{x + 2} > 0$',
+        move: { label: 'Simplify the numerator', note: 'x − 3 − x − 2 = −5' } },
+      { id: 'chart', label: 'Ready for the sign chart', stamp: 'After', expr: '$\\dfrac{-5}{x + 2} > 0$',
+        detailsLabel: 'Read the signs',
+        detailsTitle: '',
+        details: 'One critical point, $x = -2$. The numerator $-5$ is always negative, so the fraction is positive exactly where $x + 2 < 0$. The solution is $(-\\infty, -2)$.' },
+    ],
+  };
+
 return {
   props: {
     demoUnits,
     conceptIntroFigures,
+    oneSideSteps,
     sectionsContent,
     introContent,
     obj2Table,
@@ -712,7 +737,7 @@ export default function RationalInequalitiesPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits, conceptIntroFigures
+  schemas, demoUnits, conceptIntroFigures, oneSideSteps
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -859,6 +884,20 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
           sectionsContent.obj5.content,
           <div key={'unit-crossMult'} dangerouslySetInnerHTML={{ __html: demoUnits.crossMult }} />,
           `Moving everything to one side and using a sign chart avoids the case split entirely.`,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="one-side-steps"
+            title="Rewriting (x − 3)/(x + 2) > 1 for the sign chart"
+            source="/algebra/inequalities/rational"
+            before={"The correct route for the section's inequality, one move at a time. No move multiplies by $x + 2$, so the direction of the inequality never has to be tracked."}
+            after={"Every move keeps the inequality exactly equivalent, and the last form has a single critical point, $x = -2$. The next section uses the same moves to bring any rational inequality into standard form."}
+          >
+            <BeforeAfter
+              data={oneSideSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

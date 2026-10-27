@@ -11,6 +11,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -152,6 +155,26 @@ const keyWords = [
 </table>
 `
 
+
+// Concept introduction (section 1, "The Basic Shape") — template F, two
+// descriptions shown to agree. Running instance: y = log₂ x, plotted from its
+// values and as the mirror image of y = 2^x. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its paragraphs, fact aside, rule box and the
+// doubling demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBothTable = ciTableOpen(['point on y = 2^x', 'swap the coordinates', 'check: log₂ of x']) +
+  ciRow(['(−1, 1/2)', '(1/2, −1)', 'log₂(1/2) = −1']) +
+  ciRow(['(0, 1)', '(1, 0)', 'log₂(1) = 0'], { shade: true }) +
+  ciRow(['(1, 2)', '(2, 1)', 'log₂(2) = 1']) +
+  ciRow(['(2, 4)', '(4, 2)', 'log₂(4) = 2'], { shade: true }) +
+  ciRow(['(3, 8)', '(8, 3)', 'log₂(8) = 3'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -607,6 +630,20 @@ const schemas = {
     points: [{ x: 2, y: -1, label: '(2, −1)', pos: 'ne' }, { x: -2, y: 1, label: '(−2, 1)', pos: 'sw' }],
     caption: '−log₂ x flips across the x-axis; log₂(−x) flips across the y-axis' };
 
+  const fpCiMirror = { kind: 'pieces', svgTitle: 'y = 2^x and y = log2 x are mirror images in the line y = x',
+    xRange: [-3, 8], yRange: [-3, 8],
+    pieces: [
+      { fn: (x) => Math.pow(2, x), from: -3, to: 3, ends: [null, null], color: 'g', label: { text: 'y = 2ˣ', x: 2.6, y: 6.06, pos: 'w' } },
+      { fn: (x) => Math.log2(x), from: 0.125, to: 8, ends: [null, null], color: 'f', label: { text: 'y = log₂ x', x: 6, y: 2.58, pos: 's' } },
+      { fn: (x) => x, from: -3, to: 8, ends: [null, null], color: 'r', label: { text: 'y = x', x: 7, y: 7, pos: 'e' } },
+    ],
+    points: [{ x: 1, y: 2 }, { x: 2, y: 1 }, { x: 2, y: 4 }, { x: 4, y: 2 }],
+    caption: 'each point (p, q) of 2ˣ reappears as (q, p) on log₂ x' }
+  const conceptIntroFigures = {
+    mirror: renderFunctionPlotV4(fpCiMirror),
+    bothTable: ciBothTable,
+  };
+
   const demoUnits = {
     doubling: demoUnitFrame({
       svg: renderFunctionPlotV4(fpLogDoubling),
@@ -640,8 +677,47 @@ const schemas = {
     }),
   };
 
+  const shiftedLogProfile = {
+    header: { kicker: 'a shift to the right', title: 'Profile of the shifted logarithm', formula: '$y = \\log_2(x - 3)$' },
+    quickStats: [ { n: 'x > 3', label: 'domain' }, { n: '3', label: 'shift right' } ],
+    graph: {
+      xRange: [1.5, 12], yRange: [-3, 3.6],
+      points: Array.from({ length: 451 }, (_, i) => { const x = 3.02 + i * 0.02; return [Number(x.toFixed(2)), Number((Math.log(x - 3) / Math.LN2).toFixed(4))]; }),
+      xTicks: [2, 3, 4, 5, 7, 11], yTicks: [-2, -1, 0, 1, 2, 3],
+      asymptotes: [{ x: 3 }],
+    },
+    features: [
+      { id: 'va', kind: 'warm', points: [{ x: 3, y: -2.6, r: 0 }] },
+      { id: 'zero', points: [{ x: 4, y: 0 }] },
+      { id: 'one', points: [{ x: 5, y: 1 }] },
+    ],
+    intervals: [
+      { label: 'domain', spans: [
+        { from: null, to: 3, kind: 'soft', text: 'undefined' },
+        { from: 3, to: null, kind: 'pos', text: 'defined, x > 3' },
+      ] },
+      { label: 'sign', spans: [
+        { from: 3, to: 4, kind: 'neg', sign: '−' },
+        { from: 4, to: null, kind: 'pos', sign: '+' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'va', label: 'Asymptote', value: 'x = 3', tone: 'warm' },
+        { featureId: 'zero', label: 'x-intercept', value: '(4, 0)' },
+        { featureId: 'one', label: 'Point', value: '(5, 1)' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Domain', value: '$x > 3$', sub: 'moved with the graph' },
+        { label: 'From $\\log_2 x$', value: 'shifted 3 right', sub: '$(1, 0)$ moves to $(4, 0)$' },
+        { label: 'Not allowed', value: '$x = 2$', sub: '$\\log_2(-1)$ is undefined' },
+      ] },
+    ],
+  };
+
 return {
   props: {
+    shiftedLogProfile,
     sectionsContent,
     introContent,
     obj4Table,
@@ -650,6 +726,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Logarithmic Graphs: Transformations & Key Features | Learn Math Class",
       description: "Learn to graph logarithmic functions: basic shape, domain/range, vertical asymptotes, key points, transformations (shifts, stretches, reflections), and inverse relationship with exponentials.",
@@ -664,7 +741,7 @@ return {
 // export default function GraphsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function GraphsPage({
+export default function GraphsPage({shiftedLogProfile, 
   seoData,
   sectionsContent,
   introContent,
@@ -674,9 +751,81 @@ export default function GraphsPage({
   faqQuestions,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `One way to draw y = log₂ x: work out values and plot them.`,
+        content: [
+          `$\\log_2(1) = 0$, $\\log_2(2) = 1$, $\\log_2(4) = 2$, $\\log_2(8) = 3$, and $\\log_2(\\frac{1}{2}) = -1$. Joined up, the points climb more and more slowly to the right and plunge as $x$ shrinks toward $0$.`,
+          `The graph of $y = \\log_a(x)$ for $a > 1$ rises slowly from left to right. Starting from extreme negative $y$-values near the $y$-axis, the curve crosses through $(1, 0)$, continues through $(a, 1)$, and extends upward without bound as $x$ increases.`,
+        ],
+      },
+      {
+        id: 'second',
+        lead: `Another way: take the familiar graph of y = 2^x and flip it across the line y = x.`,
+        content: [
+          `Reflecting in $y = x$ swaps the two coordinates of every point. The steep exponential curve, hugging the $x$-axis on the left, turns into a slow curve hugging the $y$-axis at the bottom.`,
+        ],
+        visual: ciSvg('mirror'),
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Point for point, the flipped exponential lands exactly on the plotted logarithm values.`,
+        content: [
+          ciTable('bothTable'),
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree: log₂ x undoes 2^x, so its graph is the exponential's graph with inputs and outputs swapped.`,
+        content: [
+          `$2^q = p$ and $\\log_2(p) = q$ say the same thing. So $(q, p)$ is on the exponential exactly when $(p, q)$ is on the logarithm.`,
+          `@academic[rule_plain:Each multiplication of $x$ by $a$ adds exactly $1$ to the output.]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [logarithmic function](!/algebra/definitions#logarithmic_function) with base $a$ ($a > 0$, $a \\neq 1$) is $f(x) = \\log_a(x)$ for $x > 0$; its graph is the reflection of $y = a^x$ in the line $y = x$.`,
+        footer: `So the graph of $y = \\log_2 x$ passes through $(1, 0)$ and $(2, 1)$ and is $y = 2^x$ seen in a mirror.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a slowly rising, bending curve that keeps climbing without bound.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:A googol to reach height 100
+Height $100$ on $y = \\log_{10}(x)$ is reached only at $x = 10^{100}$, a googol, since $\\log_{10}(10^{100}) = 100$. That $x$ is far beyond the roughly $10^{80}$ atoms estimated in the observable universe.]@`,
+          `The curve is concave down throughout — it bends toward the $x$-axis. Growth slows as $x$ increases: the gap between $\\log_a(10)$ and $\\log_a(100)$ equals the gap between $\\log_a(1)$ and $\\log_a(10)$.`,
+          `In base $10$ the steps are easy to read off the axis: $\\log_{10}(10) = 1$, $\\log_{10}(100) = 2$ and $\\log_{10}(1000) = 3$. Each new unit of height needs one more zero on $x$, so the horizontal distance covered by each unit grows from $9$ to $90$ to $900$.`,
+          <div key={'unit-doubling'} dangerouslySetInnerHTML={{ __html: demoUnits.doubling }} />,
+          `Concave down everywhere: each step up costs more x than the one before.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which description to use: the table for exact values, the mirror for the overall shape.`,
+        content: [
+          `The mirror explains features at a glance: $2^x$ only gives positive outputs, so the logarithm only takes positive inputs; $2^x$ flattens toward the $x$-axis, so the logarithm plunges along the $y$-axis — the [vertical asymptote](!/algebra/logarithms/graphs#3).`,
+          `For $0 < a < 1$, the shape mirrors vertically. The curve descends from upper left toward lower right, still passing through $(1, 0)$ but now through $(a, 1)$ where $a < 1$ means this point lies to the left of $x = 1$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers domain and range on the graph, the vertical asymptote, key points, the effect of the base, and shifts, stretches and reflections.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -692,9 +841,7 @@ export default function GraphsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-doubling'} dangerouslySetInnerHTML={{ __html: demoUnits.doubling }} />,
-          `Concave down everywhere: each step up costs more x than the one before.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -750,6 +897,16 @@ export default function GraphsPage({
           sectionsContent.obj6.content,
           <div key={'unit-shiftRight'} dangerouslySetInnerHTML={{ __html: demoUnits.shiftRight }} />,
           `Subtracting inside the logarithm moves the graph right, not left.`,
+          `The first example, drawn out: $y = \\log_2(x - 3)$ with its asymptote at $x = 3$, its intercept at $(4, 0)$, the point $(5, 1)$, and the domain $x > 3$ that came along with the shift.`,
+          <DiagramFrameV2
+            key={'obj6-profile'}
+            id="shifted-log-profile"
+            title="Profile of the shifted logarithm"
+            source="/algebra/logarithms/graphs"
+          >
+            <FunctionAnalysis data={shiftedLogProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrameV2>,
+          `Everything that defined $y = \\log_2 x$ moved three units right together: the asymptote from $x = 0$ to $x = 3$, the intercept from $(1, 0)$ to $(4, 0)$, and the edge of the domain with them. The second example, $y = \\ln(x + 2)$, moves the same features two units left.`,
         ]
     },
     {

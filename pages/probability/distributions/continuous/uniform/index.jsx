@@ -1353,7 +1353,8 @@ $$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 0 & 
 @academic[formula_callout:Probability Density Function (PDF) and Support (Range)
   $$\\int_{a}^{b} \\frac{1}{b-a}\\,dx = \\frac{1}{b-a} \\cdot (b-a) = 1$$]@
 
-**Practical Example:** A bus arrives at a stop every 10 minutes. If you arrive at a random time, your wait time $X$ follows $U(0, 10)$. The PDF is $f(x) = \\frac{1}{10} = 0.1$ for $0 \\leq x \\leq 10$. Any 2-minute interval within this range has the same probability: $P(3 \\leq X \\leq 5) = P(7 \\leq X \\leq 9) = 0.1 \\times 2 = 0.2$.
+@academic[example:Practical Example
+A bus arrives at a stop every 10 minutes. If you arrive at a random time, your wait time $X$ follows $U(0, 10)$. The PDF is $f(x) = \\frac{1}{10} = 0.1$ for $0 \\leq x \\leq 10$. Any 2-minute interval within this range has the same probability: $P(3 \\leq X \\leq 5) = P(7 \\leq X \\leq 9) = 0.1 \\times 2 = 0.2$.]@
       `,
       before:``,
       after:``,
@@ -1382,7 +1383,12 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if 
 Using $\\frac{x-a}{b-a}$ beyond $b$ gives $F(15) = 1.5$ for $U(0, 10)$, so $P(8 \\leq X \\leq 15) = 1.5 - 0.8 = 0.7$. Above $b$ the CDF stays at $1$: $P(8 \\leq X \\leq 15) = 1 - 0.8 = 0.2$.
 [Read more](!#pitfalls)]@
 
-**Practical Use:** The [CDF (Cumulative Distribution Function)](!/probability/cdf) for the uniform distribution is particularly simple. To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3. For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.
+**Practical Use:** The [CDF (Cumulative Distribution Function)](!/probability/cdf) for the uniform distribution is particularly simple.
+
+@academic[example:Example
+To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3.]@
+
+For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.
       `,
       before:``,
       after:``,
@@ -1769,11 +1775,11 @@ The uniform distribution represents maximum entropy—when you know only the min
 
 It also serves as the foundation for generating other distributions: by transforming uniform $[0,1]$ random variables using inverse [CDF](!/probability/cdf) methods, any continuous distribution can be simulated.
 
-@academic[example:Example Application
+### Example Application
 
 A digital clock displays time in whole minutes. When you glance at it, the actual time has passed some fraction into the current minute. This fraction is uniformly distributed on $[0, 1)$ minutes, with [mean](!/probability/expected-value) 30 seconds.
 
-For scheduling, if a bus arrives "sometime between 2:00 and 2:30" with no further information, modeling arrival time as $\\text{Uniform}(0, 30)$ minutes reflects complete uncertainty, giving an expected wait of 15 minutes.]@
+For scheduling, if a bus arrives "sometime between 2:00 and 2:30" with no further information, modeling arrival time as $\\text{Uniform}(0, 30)$ minutes reflects complete uncertainty, giving an expected wait of 15 minutes.
   `,
   before: ``,
   after: ``,

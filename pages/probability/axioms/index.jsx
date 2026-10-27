@@ -1118,8 +1118,6 @@ $$P(A) \\ge 0 \\quad \\text{for every event } A$$
 /probability/formulas]@
 
 Non-negativity is a structural constraint, not a computational rule. Any assignment that violates it cannot represent a valid probability model, regardless of how the probabilities were obtained.
-
-These two axioms (non-negativity and normalization) are fundamental for both [Probability Mass Functions (PMF)](!/probability/probability-function/pmf#3) in the discrete case and [Probability Density Functions (PDF)](!/probability/probability-function/pdf#3) in the continuous case.
 `,
   before:``,
   after:``,

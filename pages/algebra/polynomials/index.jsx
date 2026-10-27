@@ -11,6 +11,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualizers/polynomials/polynomialMultiplicationDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -383,7 +385,10 @@ Standard form offers several advantages. The leading term appears first, making 
 
 When a term is missing, standard form reveals the gap. The polynomial $x^3 + 5x - 2$ skips degree $2$ — there is no $x^2$ term. In standard form, this absence is clear. Some contexts require writing missing terms explicitly with zero coefficients: $x^3 + 0x^2 + 5x - 2$. This expanded form proves useful in [long division and synthetic division](!/algebra/polynomials/operations), where alignment by degree matters.
 
-Converting to standard form is mechanical. Identify the degree of each term, then reorder from highest to lowest. For $7 - 3x^2 + x^4 + x$, the terms have degrees $0$, $2$, $4$, and $1$. Sorted descending: $x^4 - 3x^2 + x + 7$. The polynomial is now in standard form.`,
+Converting to standard form is mechanical. Identify the degree of each term, then reorder from highest to lowest.
+
+@academic[example:Example
+For $7 - 3x^2 + x^4 + x$, the terms have degrees $0$, $2$, $4$, and $1$. Sorted descending: $x^4 - 3x^2 + x + 7$. The polynomial is now in standard form.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -744,9 +749,39 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj8): the section's own factoring example, expanded vs factored form
+  const factoringBeforeAfter = {
+    header: {
+      kicker: 'Polynomials',
+      title: 'Factoring turns a sum into a product',
+      lede: 'The same polynomial in two forms. The factored form shows what the expanded form hides.',
+    },
+    before: {
+      form: 'Expanded form',
+      expr: '$x^2 - 5x + 6$',
+      meta: 'One sum: the structure is hidden',
+    },
+    after: {
+      form: 'Factored form',
+      expr: '$(x - 2)(x - 3)$',
+      meta: 'Each factor $(x - r)$ names a root at $x = r$',
+    },
+    operation: {
+      name: 'Factor',
+      desc: 'Multiplying back gives $x^2 - 5x + 6$',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'A single sum became a product of lower-degree polynomials.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The polynomial itself: multiplying the factors back confirms the result.' },
+    ],
+  };
+
   return {
   props:{
     demoUnits,
+    factoringBeforeAfter,
     sectionsContent,
     introContent,
     obj1Table,
@@ -767,7 +802,7 @@ const schemas = {
 
 
 
-export default function PolynomialsPage({seoData, sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits}) {
+export default function PolynomialsPage({seoData, sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits, factoringBeforeAfter}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -864,6 +899,19 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="factoring-before-after"
+            title="Factoring x² − 5x + 6"
+            source="/algebra/polynomials"
+            before={"The section's example in its two forms. Compare what each panel lets you read off."}
+            after={"In factored form each factor $(x - r)$ marks a root at $x = r$, so the roots of $x^2 - 5x + 6$ are $x = 2$ and $x = 3$. The [roots page](!/algebra/polynomials/roots) works this reading for every degree."}
+          >
+            <BeforeAfter
+              data={factoringBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

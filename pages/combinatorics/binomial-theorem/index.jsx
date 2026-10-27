@@ -1613,6 +1613,9 @@ Write $(a+b)^n$ as the product
 @academic[formula_callout:The Theorem
 $$\\underbrace{(a+b)(a+b)\\cdots(a+b)}_{n \\text{ factors}}.$$]@
 
+@academic[fact,aside:true,width:35%:A prime exponent divides the middle
+For a prime $p$, every coefficient of $(a + b)^p$ except the two end $1$s is a multiple of $p$: rotating the $p$ factors in a circle sorts the choices of $k$ factors into groups of exactly $p$. Row $7$ reads $1, 7, 21, 35, 35, 21, 7, 1$.]@
+
 Expanding the product means forming every possible term by choosing either $a$ or $b$ from each factor and multiplying the selections. A term equal to $a^{n-k} b^k$ arises whenever exactly $k$ of the $n$ factors contribute a $b$, and there are $\\binom{n}{k}$ ways to make that selection. Summing over all $k$ gives the theorem.
 
 This is a [double counting](!/combinatorics/counting-principles#double) argument in its purest form: the product $(a+b)^n$, viewed both as an algebraic expression and as an enumeration of choice-sequences, has the same value either way.
@@ -1694,7 +1697,12 @@ The alternating row sum is zero, which means the number of even-sized subsets of
 @academic[formula_callout:Special Cases
 $$(1+x)^n = \\sum_{k=0}^{n} \\binom{n}{k} x^k.$$]@
 
+@academic[fact,aside:true,width:35%:Powers of 11 spell out the rows
+$11^4 = (1 + 10)^4 = 14641$ reads row $4$, $1, 4, 6, 4, 1$, as digits. From row $5$ on, entries of $10$ or more carry into the next digit, so $11^5 = 161051$ hides the row $1, 5, 10, 10, 5, 1$.]@
+
 This is the form most commonly encountered in algebra. The right side is the generating function for the binomial coefficients of row $n$ — a polynomial whose coefficients encode the entire row.
+
+Substituting a number for $x$ adds up the whole row with weights. With $x = 2$ the entries of row $n$ are weighted by $1, 2, 4, \\ldots$ and the total is $3^n$. With $x = 10$ they are weighted by $1, 10, 100, \\ldots$, the place values of decimal digits.
 
 ## Derived Identities
 
@@ -2167,6 +2175,7 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
           sectionsContent.obj1.content,
           <div key={'unit-choicesN3'} dangerouslySetInnerHTML={{ __html: demoUnits.choicesN3 }} />,
           `The coefficients 1, 3, 3, 1 are row 3 of Pascal's triangle; with four factors the same sorting gives 1, 4, 6, 4, 1.`,
+          `@academic[punchline:Each coefficient of $(a + b)^n$ counts the ways to choose which factors supply the $b$'s.]@`,
         ]
     },
     {

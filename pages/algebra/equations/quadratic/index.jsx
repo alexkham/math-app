@@ -16,7 +16,8 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 
 
 export async function getStaticProps(){
@@ -391,6 +392,27 @@ const summaryTable = `
 // };
 
 
+// Concept introduction (section 1, "Definition and Standard Form") —
+// template E, widening. Running instance: x² − 5x + 6 = 0 (the section's
+// x² = 5x − 6). Old obj1 text is kept in sectionsContent.obj1, unused; its
+// formula box, four passages and the notStandard demo frame with its line
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciValuesTable = ciTableOpen(['x', 'x² − 5x + 6', 'is it 0?']) +
+  ciRow(['0', '6', 'no']) +
+  ciRow(['1', '2', 'no'], { shade: true }) +
+  ciRow(['2', '0', 'yes'], { color: '#2563EB', cols: [1, 2] }) +
+  ciRow(['3', '0', 'yes'], { shade: true, color: '#2563EB', cols: [1, 2] }) +
+  ciRow(['4', '2', 'no']) +
+  ciRow(['5', '6', 'no'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -485,7 +507,8 @@ The equation $x^2 = 5x - 6$, for instance, is not in standard form but is still 
     content: `@academic[rule:Zero-product property
 When the quadratic expression $ax^2 + bx + c$ can be decomposed into a product of two first-degree factors, the equation reduces to a pair of [linear equations](!/algebra/equations/linear) through the zero-product property: if a product of two factors equals zero, at least one of the factors must be zero.]@
 
-Consider $x^2 - 5x + 6 = 0$. The left side factors as $(x - 2)(x - 3) = 0$. Setting each factor equal to zero gives $x - 2 = 0$ or $x - 3 = 0$, so $x = 2$ or $x = 3$. Both values satisfy the original equation.
+@academic[example:Example
+Consider $x^2 - 5x + 6 = 0$. The left side factors as $(x - 2)(x - 3) = 0$. Setting each factor equal to zero gives $x - 2 = 0$ or $x - 3 = 0$, so $x = 2$ or $x = 3$. Both values satisfy the original equation.]@
 
 @academic[pitfall,aside:true,width:35%:Factoring before the right side is zero
 Setting each factor of $x(x - 1) = 6$ equal to $6$ gives $x = 6$ or $x = 7$, but $6 \\cdot 5 = 30$. Moving the $6$ first gives $x^2 - x - 6 = (x - 3)(x + 2) = 0$, so $x = 3$ or $x = -2$.
@@ -543,7 +566,8 @@ Taking only the positive root of $(x - 2)^2 = 9$ gives $x - 2 = 3$, so $x = 5$ a
 
 Taking the square root of both sides and isolating $x$ gives the two solutions. The expression under the square root, $b^2 - 4ac$, determines whether those solutions are real or complex.
 
-As a concrete example, consider $x^2 + 6x + 2 = 0$. Move the constant: $x^2 + 6x = -2$. Half of $6$ is $3$, and $3^2 = 9$. Add $9$ to both sides: $x^2 + 6x + 9 = 7$. Factor: $(x + 3)^2 = 7$. Take roots: $x + 3 = \\pm\\sqrt{7}$. The solutions are $x = -3 + \\sqrt{7}$ and $x = -3 - \\sqrt{7}$.`,
+@academic[example:Example
+As a concrete example, consider $x^2 + 6x + 2 = 0$. Move the constant: $x^2 + 6x = -2$. Half of $6$ is $3$, and $3^2 = 9$. Add $9$ to both sides: $x^2 + 6x + 9 = 7$. Factor: $(x + 3)^2 = 7$. Take roots: $x + 3 = \\pm\\sqrt{7}$. The solutions are $x = -3 + \\sqrt{7}$ and $x = -3 - \\sqrt{7}$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -625,7 +649,10 @@ These identities follow from factoring the quadratic as $a(x - x_1)(x - x_2) = 0
 
 Vieta's formulas serve three purposes. First, they verify solutions: after solving $x^2 - 7x + 10 = 0$ and obtaining $x_1 = 2$, $x_2 = 5$, check that $2 + 5 = 7 = -\\frac{-7}{1}$ and $2 \\cdot 5 = 10 = \\frac{10}{1}$. Both match, confirming the answers.
 
-Second, they construct equations from known roots. If a quadratic equation must have roots $x_1 = -3$ and $x_2 = 4$, then $x_1 + x_2 = 1$ and $x_1 \\cdot x_2 = -12$, so the equation is $x^2 - x - 12 = 0$ (taking $a = 1$).
+Second, they construct equations from known roots.
+
+@academic[example:Example
+If a quadratic equation must have roots $x_1 = -3$ and $x_2 = 4$, then $x_1 + x_2 = 1$ and $x_1 \\cdot x_2 = -12$, so the equation is $x^2 - x - 12 = 0$ (taking $a = 1$).]@
 
 @academic[rule_corollary_plain:The roots determine the equation uniquely up to a constant multiple.]@
 
@@ -644,7 +671,8 @@ Third — and often overlooked — they can be used to solve quadratic equations
 
 The most common case is the bi-quadratic equation $ax^4 + bx^2 + c = 0$. Setting $u = x^2$ transforms it into $au^2 + bu + c = 0$, a standard quadratic in $u$. Solving for $u$ yields up to two values, and each positive value of $u$ produces two values of $x$ via $x = \\pm\\sqrt{u}$. A negative value of $u$ contributes no real solutions for $x$.
 
-For example, $x^4 - 5x^2 + 4 = 0$ becomes $u^2 - 5u + 4 = 0$ with $u = x^2$. Factoring gives $(u - 1)(u - 4) = 0$, so $u = 1$ or $u = 4$. Back-substituting: $x^2 = 1$ gives $x = \\pm 1$, and $x^2 = 4$ gives $x = \\pm 2$. The original quartic has four real solutions.
+@academic[example:Example
+For example, $x^4 - 5x^2 + 4 = 0$ becomes $u^2 - 5u + 4 = 0$ with $u = x^2$. Factoring gives $(u - 1)(u - 4) = 0$, so $u = 1$ or $u = 4$. Back-substituting: $x^2 = 1$ gives $x = \\pm 1$, and $x^2 = 4$ gives $x = \\pm 2$. The original quartic has four real solutions.]@
 
 @academic[pitfall,aside:true,width:35%:Stopping at the substitute variable
 Giving $u = 4$ and $u = -1$ as the solutions of $x^4 - 3x^2 - 4 = 0$ answers for $u$, not for $x$. Back-substituting, $x^2 = 4$ gives $x = \\pm 2$ and $x^2 = -1$ gives no real $x$, so the real solutions are $x = \\pm 2$.
@@ -878,6 +906,10 @@ const schemas = {
   notes: [{ x: -1.05, y: -1.6, text: '3/4 − 7/4 = −1', pos: 'w', color: 'r' }, { x: 2.55, y: -1.6, text: '3/4 + 7/4 = 5/2', pos: 'e', color: 'r' }],
   caption: 'Roots = −b/2a ± √Δ/2a: 7/4 either side of the axis' };
 
+  const conceptIntroFigures = {
+    valuesTable: ciValuesTable,
+  };
+
   const demoUnits = {
     complete: demoUnitFrame({
       svg: completeTheSquareDiagrams['step-vertex'],
@@ -988,6 +1020,7 @@ const schemas = {
     quadraticFormulaAnatomy,
     quadMethodTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -1019,10 +1052,73 @@ export default function QuadraticEquationsPage({quadraticFormulaAnatomy, quadMet
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Linear equations are solved by undoing operations one at a time.`,
+        content: [
+          `In $5x - 6 = 4$, add $6$, then divide by $5$: $x = 2$. Each step peels one operation off $x$, and the answer is a single number.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `x² = 5x − 6 cannot be peeled that way — and it has two solutions, not one.`,
+        content: [
+          `The unknown appears twice, once squared and once not. Moving terms around gives $x^2 - 5x + 6 = 0$, but no single "undo" step frees $x$. Trying values shows why one answer could never be enough: the left side hits zero twice.`,
+          ciTable('valuesTable'),
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A quadratic equation is an equation in one unknown that can be rearranged so the highest power of the unknown is $2$ — the form $ax^2 + bx + c = 0$ with $a \\neq 0$.`,
+        formula: [
+          `A quadratic equation in one variable is any equation that can be written as`,
+          `@academic[formula_callout:Definition and Standard Form
+$$ax^2 + bx + c = 0$$]@`,
+          `where $a$, $b$, and $c$ are real constants and $a \\neq 0$. The requirement $a \\neq 0$ is what makes the equation genuinely quadratic — if $a$ were zero, the $x^2$ term would vanish and the equation would reduce to a [linear equation](!/algebra/equations/linear).`,
+        ],
+        footer: `So $x^2 = 5x - 6$ is quadratic, with $a = 1$, $b = -5$, $c = 6$ — the next step up from linear, the way a square's area is one step up from a side's length.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is an equation recognized by its form, however it is first written.`,
+        content: [
+          `The word "quadratic" derives from the Latin word for square, reflecting the presence of $x^2$ as the highest-degree term. The coefficient $a$ is the leading coefficient, $b$ is the linear coefficient, and $c$ is the constant term. Every quadratic equation can be brought into standard form by rearranging: moving all terms to one side and ordering by descending powers of $x$.`,
+          `The equation $x^2 = 5x - 6$, for instance, is not in standard form but is still quadratic. Subtracting $5x$ and adding $6$ to both sides yields $x^2 - 5x + 6 = 0$, with $a = 1$, $b = -5$, and $c = 6$. Recognition is the first step — any equation reducible to the form above, regardless of how it is initially presented, is quadratic and amenable to the methods on this page.`,
+          <div key={'unit-notStandard'} dangerouslySetInnerHTML={{ __html: demoUnits.notStandard }} />,
+          `Bringing an equation to standard form never changes its solutions, only how they are read.`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost: drop the x² term and the linear equation is back.`,
+        content: [
+          `With $a = 0$, the form $ax^2 + bx + c = 0$ becomes $bx + c = 0$, solved by the old undoing steps. Every linear technique still applies inside the new methods — factoring and the quadratic formula both end in small linear equations.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What is lost is the one-step answer: a quadratic can have two solutions, one, or none among the real numbers.`,
+        content: `Undoing operations no longer works on its own, so new methods are needed — factoring, completing the square and the quadratic formula — and the number of solutions has to be found, not assumed. The section on [solving by factoring](!/algebra/equations/quadratic#2) starts with the most direct one.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, solving by factoring, by completing the square and by the quadratic formula, the discriminant, Vieta's formulas and reducible equations.`,
+      },
+    ],
+  }
 
   const genericSections=[
 
@@ -1040,9 +1136,7 @@ export default function QuadraticEquationsPage({quadraticFormulaAnatomy, quadMet
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-notStandard'} dangerouslySetInnerHTML={{ __html: demoUnits.notStandard }} />,
-          `Bringing an equation to standard form never changes its solutions, only how they are read.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

@@ -2947,7 +2947,10 @@ $$A \\cap B = \\emptyset$$]@
 Writing $A \\cap B = \\{\\emptyset\\}$ for $A = \\{1, 2\\}$ and $B = \\{3, 4\\}$ names a set with one element, the empty set itself, so $|\\{\\emptyset\\}| = 1$. The intersection is $\\emptyset$, also written $\\{\\}$, with $0$ elements.
 [Read more](!#pitfalls)]@
 
-Disjointness is read off the intersection directly. For $A = \\{1, 2\\}$ and $B = \\{3, 4\\}$, no element of $A$ is also an element of $B$, so the membership condition "$x \\in A$ and $x \\in B$" is never met. The intersection is then the set with no elements at all, and its cardinality is $0$.
+Disjointness is read off the intersection directly.
+
+@academic[example:Example
+For $A = \\{1, 2\\}$ and $B = \\{3, 4\\}$, no element of $A$ is also an element of $B$, so the membership condition "$x \\in A$ and $x \\in B$" is never met. The intersection is then the set with no elements at all, and its cardinality is $0$.]@
 
 Intersection is commutative and associative:
 
@@ -2968,6 +2971,11 @@ For multiple sets:
 $$\\bigcap_{i=1}^{n} A_i = A_1 \\cap A_2 \\cap \\cdots \\cap A_n$$]@
 
 This contains only elements that appear in every one of the sets $A_1, A_2, \\ldots, A_n$.
+
+@academic[fact,aside:true,width:35%:Nested, infinite, yet nothing shared
+The intervals $(0, 1)$, $(0, \\frac{1}{2})$, $(0, \\frac{1}{3})$, $\\ldots$ each hold infinitely many numbers and each lies inside the one before, yet their intersection is $\\emptyset$: any $x > 0$ drops out once $\\frac{1}{n} \\le x$. With $[0, \\frac{1}{n}]$ instead, the point $0$ survives.]@
+
+The definition does not stop at finitely many sets. A family $A_1, A_2, A_3, \\ldots$ with one set for every natural number $n$ has an intersection too: the elements that belong to $A_n$ for every $n$, with no exception. When each set lies inside the one before it, the family shrinks step by step. Each new set can only remove elements from the intersection, never add any, so the intersection is contained in every member of the family.
     `,
     before: ``,
     after: ``,
@@ -3052,6 +3060,11 @@ $$A \\setminus B = A \\cap B^c$$
 /set-theory/formulas]@
 
 This expresses difference as an intersection with a complement.
+
+@academic[fact,aside:true,width:35%:Difference builds intersection, not union
+The $\\{3, 4\\}$ left over is exactly $A \\cap B$: in general $A \\setminus (A \\setminus B) = A \\cap B$. Union is out of reach, though: a formula built only from differences stays inside its first set, and $A \\cup B$ usually does not.]@
+
+Differences can also be stacked, with one difference taken out of a set. In the example, $A \\setminus B = \\{1, 2\\}$, and removing these two elements from $A$ in turn leaves $A \\setminus (A \\setminus B) = \\{3, 4\\}$. Each stacked difference is still worked out one element at a time, by asking at every step whether the element lies in the set being removed, and no complement or universal set is needed along the way.
     `,
     before: ``,
     after: ``,

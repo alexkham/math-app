@@ -176,7 +176,7 @@ const sectionsContent = {
     content: `
 Differentiation follows mechanical rules: the derivative of any elementary function can be computed by applying chain, product, and quotient rules systematically.
 
-Integration has no such universal algorithm.
+Integration has no comparable set of rules that always works by hand.
 
 @academic[rule_theorem_plain:Some elementary functions have no elementary antiderivative.]@
 

@@ -1107,13 +1107,15 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
-import DiagramFrame from '../../../../app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
 import projectionDiagrams from '@/app/components/linear-algebra copy/matrix/projectionDiagrams'
 import renderVectorArrowsV4 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2158,8 +2160,21 @@ const schemas = {
 
 
 
+  const dotProductAnatomy = {
+    kicker: 'Dot product · as a matrix product',
+    title: 'Two vectors, one number',
+    intro: 'Written as a 1×2 row times a 2×1 column, the dot product of $(3, 4)$ and $(1, -2)$ is a matrix product with a single entry: $3(1) + 4(-2) = -5$.',
+    operation: 'multiply',
+    A: [[3, 4]],
+    B: [[1], [-2]],
+    noteLabel: 'Why the result is a scalar',
+    note: 'The products are added, not kept. $(3, -8)$ is a stop halfway; the dot product is the single number $-5$, which is why it is also called the scalar product.',
+    anchor: '#1',
+  };
+
   return {
   props: {
+    dotProductAnatomy,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2181,7 +2196,7 @@ const schemas = {
   }
 }
    }
-export default function DotProductPage({seoData, sectionsContent, introContent, obj2Table, dotProductLaws, obj6Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function DotProductPage({dotProductAnatomy, seoData, sectionsContent, introContent, obj2Table, dotProductLaws, obj6Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2265,6 +2280,14 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          <DiagramFrameV2
+            key={'obj1-diagram'}
+            id="dot-product-anatomy"
+            title="Two vectors, one number"
+            source="/linear-algebra/vectors/dot-product"
+          >
+            <MatrixOperation data={dotProductAnatomy} theme="navy" variant="anatomy" />
+          </DiagramFrameV2>,
         ]
     },
     {

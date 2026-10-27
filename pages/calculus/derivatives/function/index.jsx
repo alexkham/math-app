@@ -16,6 +16,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -327,6 +328,30 @@ const summaryTable = `
 // formulas-optimized: v1 | 2026-06-09 | 1 callout (obj1)
 
 
+
+// Concept introduction (section 1, "The Derivative Function Defined") —
+// template E, widening. Running instance: f(x) = x², the derivative tool's
+// quadratic state. Old obj1 text is kept in sectionsContent.obj1, unused; its
+// formula box with link, corollary box and three passages are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPointsTable = ciTableOpen(['point a', 'limit worked out at a', 'slope f′(a)']) +
+  ciRow(['−1', '((−1 + h)² − 1) / h → −2', '−2']) +
+  ciRow(['1', '((1 + h)² − 1) / h → 2', '2'], { shade: true }) +
+  ciRow(['2', '((2 + h)² − 4) / h → 4', '4']) +
+  ciRow(['3', '((3 + h)² − 9) / h → 6', '6'], { shade: true }) +
+  ciRow(['every other a', 'one more limit each time', '…'], { last: true, color: '#a4243b', cols: [1, 2] }) +
+  '</tbody></table>'
+const ciKeepTable = ciTableOpen(['a', 'from the function f′(x) = 2x', 'from the limit at a']) +
+  ciRow(['−1', '2 · (−1) = −2', '−2']) +
+  ciRow(['3', '2 · 3 = 6', '6'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   // ─── /calculus/derivatives/function ───────────────────────────────────────
@@ -723,6 +748,12 @@ const schemas = {
     points: [{ x: 1.5, y: 5.25 }, { x: 1.5, y: 2.25 }, { x: 1.5, y: 0.25 }],
     notes: [{ x: 0.08, y: 2.45, text: 'x² + 3', pos: 'e', color: 'g' }, { x: 0.08, y: -0.6, text: 'x²', pos: 'e', color: 'f' }, { x: 0.08, y: -2.6, text: 'x² − 2', pos: 'e', color: 'r' }, { x: 0.95, y: -2.0, text: 'same slope 3 at x = 1.5', pos: 'e', color: 'r' }],
     caption: 'f′ fixes every slope but not the height: f is known only up to + C' };
+  const conceptIntroFigures = {
+    quadratic: functionDerivativeDiagrams.quadratic,
+    pointsTable: ciPointsTable,
+    keepTable: ciKeepTable,
+  };
+
   const demoUnits = {
     fAndFp: demoUnitFrame({
       svg: functionDerivativeDiagrams.cubic,
@@ -757,6 +788,7 @@ const schemas = {
   props: {
     smoothNest,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj6Table,
@@ -775,9 +807,79 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The derivative at a point already gives the slope of a graph at one chosen place.`,
+        content: [
+          `For $f(x) = x^2$ at $a = 3$, the difference quotient $\\frac{(3 + h)^2 - 9}{h} = 6 + h$ tends to $6$, so the tangent at $x = 3$ has slope $6$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `To know the slope everywhere, that limit would have to be worked out again at every single point.`,
+        content: [
+          `Each point needs its own calculation, and there are infinitely many points. Doing them one by one never finishes, and the answers sit in a list rather than in one rule.`,
+          ciTable('pointsTable'),
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [derivative](!/calculus/definitions#derivative) of $f$ as a function, $f'$, takes the limit at a variable point $x$ instead of a fixed $a$: its input is $x$ and its output is the slope of $f$ there.`,
+        formula: [
+          `Fix a function $f$ and consider the limit`,
+          `@academic[formula_callout:Derivative Limit Definition
+$$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{f(t) - f(x)}{t - x}$$
+/calculus/formulas#derivative_limit_definition]@`,
+          `@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@`,
+          `evaluated not at a single point $a$ but at a variable $x$. Wherever this limit produces a finite value, $f'(x)$ is defined. The result is a function $f'$ whose input is $x$ and whose output is the slope of $f$ at $x$.`,
+        ],
+        footer: `So for $f(x) = x^2$, one calculation with $x$ in place of $a$ gives $f'(x) = 2x$ — every row of the table at once, like a speedometer that shows the speed at every moment instead of one reading taken by hand.`,
+      },
+      {
+        id: 'kind',
+        lead: `f′ is a function in its own right, with its own graph drawn beside the graph of f.`,
+        content: [
+          `Where $x^2$ falls, the slope is negative and $2x$ lies below the axis; at the bottom of the parabola the slope is $0$; where $x^2$ rises, $2x$ is positive.`,
+        ],
+        visual: ciSvg('quadratic'),
+        caption: `$f(x) = x^2$ and its derivative $f'(x) = 2x$. The same state is on the [derivative visualizer](!/calculus/visual-tools/derivative).`,
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost: each slope at a point is still there, as a value of f′.`,
+        content: [
+          `To get the slope at $a$, evaluate the new function at $a$. The numbers agree with the limits worked out one point at a time.`,
+          ciTable('keepTable'),
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What can be lost: f′ may be defined at fewer points than f.`,
+        content: [
+          `@academic[rule_corollary_plain:The domain of $f'$ is a subset of the domain of $f$.]@`,
+          `Every point where $f$ is [differentiable](!/calculus/derivatives/differentiability) belongs to the domain of $f'$; every point where the limit fails—corners, cusps, vertical tangents, discontinuities—is excluded. For a polynomial, the domains of $f$ and $f'$ coincide. For $f(x) = |x|$, the domain of $f$ is all reals, but $x = 0$ is missing from the domain of $f'$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page computes derivative functions from the definition, compares the notation for functions and points, graphs f′ from f and back, and reads f′ as a rate of change.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -785,7 +887,7 @@ export default function PageTemplate({smoothNest, seoData, sectionsContent, intr
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

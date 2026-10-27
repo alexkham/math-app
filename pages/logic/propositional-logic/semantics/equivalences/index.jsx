@@ -436,6 +436,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
+import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 export async function getStaticProps(){
 
@@ -599,6 +601,30 @@ const logicalEquivalences = [
   }
 ];
 
+// Concept introduction ("Definition" section) — template A, definition last.
+// Running instance: P → Q against ¬P ∨ Q, the Venn truth-table tool's
+// "named" state, with Q → P as the near-miss. Old definition text is kept in
+// sectionsContent.definition, unused, and reused verbatim.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSameTable = ciTableOpen(['P', 'Q', 'P → Q', '¬P', '¬P ∨ Q']) +
+  ciRow(['T', 'T', 'T', 'F', 'T'], { color: '#2563EB', cols: [2, 4] }) +
+  ciRow(['T', 'F', 'F', 'F', 'F'], { shade: true, color: '#2563EB', cols: [2, 4] }) +
+  ciRow(['F', 'T', 'T', 'T', 'T'], { color: '#2563EB', cols: [2, 4] }) +
+  ciRow(['F', 'F', 'T', 'T', 'T'], { shade: true, last: true, color: '#2563EB', cols: [2, 4] }) +
+  '</tbody></table>'
+const ciMissTable = ciTableOpen(['P', 'Q', 'P → Q', 'Q → P', 'agree?']) +
+  ciRow(['T', 'T', 'T', 'T', 'yes']) +
+  ciRow(['T', 'F', 'F', 'T', 'no'], { shade: true, color: '#a4243b', cols: [4] }) +
+  ciRow(['F', 'T', 'T', 'F', 'no'], { color: '#a4243b', cols: [4] }) +
+  ciRow(['F', 'F', 'T', 'T', 'yes'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
   definition:{
@@ -661,7 +687,7 @@ const sectionsContent={
 
     title:'Fundamental Equivalences (Laws)',
     content:``,
-    before: `Some logical equivalences are considered [laws of logic](!/logic/propositional-logic/laws).A law is a fundamental equivalence—one that is taken as a basic principle, rather than something that needs to be proven from other rules. 
+    before: `Some logical equivalences are considered [laws of logic](!/logic/propositional-logic/laws). A law is a fundamental equivalence—one that is taken as a basic principle, rather than something that needs to be proven from other rules. 
     On the other hand, many of logical equivalences, while being valid transformations, are not considered fundamental laws because they depend on definitions, are derived from the laws, or are specific to certain logical systems.
     
     `,
@@ -825,6 +851,12 @@ const faqQuestions = {
   }
 }
 
+  const conceptIntroFigures = {
+    named: vennTruthTableDiagrams['named'],
+    sameTable: ciSameTable,
+    missTable: ciMissTable,
+  };
+
   const demoUnits = {
     absorption: demoUnitFrame({
       svg: vennTruthTableDiagrams['independent'],
@@ -838,6 +870,7 @@ const faqQuestions = {
   return {
     props:{
       demoUnits,
+      conceptIntroFigures,
        verify,
        biconditionalEquivalences,
        logicalLaws,
@@ -850,16 +883,76 @@ const faqQuestions = {
   }
 }
 
-export default function EquivalencesPage({demoUnits, verify ,biconditionalEquivalences ,logicalLaws ,logicalEquivalences,
+export default function EquivalencesPage({demoUnits, conceptIntroFigures, verify ,biconditionalEquivalences ,logicalLaws ,logicalEquivalences,
   sectionsContent,keyWords ,introContent ,faqQuestions}) {
 
+
+    const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+    const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+    // "Definition" section concept introduction — template A (definition last).
+    const conceptIntro = {
+      beats: [
+        {
+          id: 'intuition',
+          lead: `Two formulas can look different and still say the same thing.`,
+          content: [
+            `"If it rains, the ground is wet" and "it does not rain, or the ground is wet" are worded differently, yet it is hard to imagine a situation where one is true and the other false. Logic can check that suspicion exactly.`,
+          ],
+        },
+        {
+          id: 'example',
+          kind: 'instance',
+          lead: `P → Q and ¬P ∨ Q have the same column in every row of their truth table.`,
+          content: [
+            `List all four assignments of $P$ and $Q$ and evaluate both formulas. The two highlighted columns match row for row.`,
+            ciTable('sameTable'),
+          ],
+          visual: ciSvg('named'),
+          caption: `With circle A for the cases where $P$ is true and B for $Q$, the shaded region is $A^c \\cup B$ — the cases where $\\neg P \\lor Q$ holds, which are exactly the cases where $P \\to Q$ holds. The same state is on the [Venn truth-table explorer](!/set-theory/visual-tools/venn-truth-table).`,
+        },
+        {
+          id: 'forcing',
+          lead: `Matching in every row means no situation can tell them apart — and a single mismatch would.`,
+          content: [
+            `Because the rows cover every possible case, two formulas with identical columns can replace each other anywhere without changing any truth value. Like two routes to the same address, it does not matter which one is taken. Compare $P \\to Q$ with its converse $Q \\to P$: they agree in two rows and disagree in two, so they are not interchangeable.`,
+            ciTable('missTable'),
+          ],
+        },
+        {
+          id: 'definition',
+          kind: 'definition',
+          statement: `Two formulas are [logically equivalent](!/logic/definitions#equivalence), written $P \\equiv Q$, when they have the same truth value under every assignment of truth values to their variables.`,
+          formula: [
+            `Two logical statements (or propositions) are logically equivalent if they **always** have the same truth value, regardless of the truth values of their individual components. This means that no matter what, both expressions will evaluate to either true or false together in every possible case.`,
+          ],
+          footer: `So $P \\to Q \\equiv \\neg P \\lor Q$, while $P \\to Q$ and $Q \\to P$ are not equivalent.`,
+        },
+        {
+          id: 'kind',
+          lead: `Equivalence is a relation between two formulas — a claim about them, not a formula itself.`,
+          content: `$P \\equiv Q$ says something about $P$ and $Q$ across all cases at once; it is simply true or false. The biconditional $P \\leftrightarrow Q$ is different: it is a formula whose truth changes from row to row. The two are linked — $P \\equiv Q$ holds exactly when $P \\leftrightarrow Q$ is a tautology — and the [notation](!/logic/propositional-logic/semantics/equivalences#notation) section keeps them apart.`,
+        },
+        {
+          id: 'caveat',
+          lead: `It takes every row: agreement in most rows is not enough.`,
+          content: `$P \\to Q$ and $Q \\to P$ agree half the time, and that is exactly why they are easy to confuse. To claim an equivalence, all $2^n$ rows must match; to refute one, a single row is enough. The section on [how to verify logical equivalence](!/logic/propositional-logic/semantics/equivalences#verify) gives the methods.`,
+        },
+        {
+          id: 'exit',
+          content: `The rest of the page covers the notation, ways to verify an equivalence, the laws of logic, and equivalences involving the conditional and the biconditional.`,
+        },
+      ],
+    }
 
     const equivalencesSections=[
         {
           id:'definition',
           title:sectionsContent.definition.title,
 
-          content:sectionsContent.definition.content,
+          content:[
+            <ConceptIntro key={'definition-intro'} data={conceptIntro} />,
+          ],
         },
         {
           id:'notation',
@@ -888,6 +981,7 @@ export default function EquivalencesPage({demoUnits, verify ,biconditionalEquiva
             key={4}
             boxed={true} color={'blue'} compact={true} type={'number'} />,
             sectionsContent.pitfallBoxes.verify,
+            `@academic[punchline:Every method tests the same claim, agreement in all $2^n$ rows, and one mismatched row is enough to refute it.]@`,
         ]
           },
          
@@ -905,6 +999,9 @@ key={1}
  sectionsContent.laws.after,
  <div key={'unit-absorption'} dangerouslySetInnerHTML={{ __html: demoUnits.absorption }} />,
  `Equivalent formulas always shade the same region: that is equivalence seen as a picture.`,
+ `@academic[fact,aside:true,width:35%:Every law has a mirror image
+In any valid equivalence built from $\\neg$, $\\land$ and $\\lor$, swapping $\\land$ with $\\lor$ and $\\text{true}$ with $\\text{false}$ gives another valid equivalence. Negating both sides and pushing the negations inward with De Morgan's laws turns a law into its mirror, so every law proved gives a second one free.]@
+Most of the laws in the list come in pairs. The identity, domination, idempotent, commutative, associative, distributive and absorption laws, and De Morgan's laws, each have one version with $\\lor$ and one with $\\land$, and inside each pair the constants $\\text{true}$ and $\\text{false}$ trade places as well. The law of excluded middle and the law of non-contradiction form such a pair too, even though they carry different names. Only the double negation law, which contains neither connective, stands alone.`,
 
 ]
           },
@@ -919,6 +1016,9 @@ copyableFields={'equivalence'}
 includedFields={['name','equivalence','explanation']}/>,
 sectionsContent.pitfallBoxes.conditional,
 sectionsContent.conditional.after,
+`@academic[fact,aside:true,width:35%:One connective is enough
+NAND, $p \\uparrow q \\equiv \\neg (p \\land q)$, can express every other connective: $\\neg p \\equiv p \\uparrow p$ and $p \\land q \\equiv (p \\uparrow q) \\uparrow (p \\uparrow q)$, and $\\neg$ with $\\land$ already give the rest. Peirce found this around 1880 but never published it; today it lets whole chips be built from NAND gates alone.]@
+Rows 1, 3 and 4 of the table translate between the arrow and the other connectives: $p \\to q$ becomes $\\neg p \\lor q$, $p \\lor q$ becomes $\\neg p \\to q$, and $p \\land q$ becomes $\\neg (p \\to \\neg q)$. With these rewrites, any formula can be expressed using only $\\neg$ and $\\to$, and the remaining connectives become shorthand for longer formulas. Many logic textbooks start from such a small set of connectives and define all the others through equivalences like these. The fewer connectives a system starts from, the fewer cases its proofs about formulas have to cover.`,
 ]
           },
           {

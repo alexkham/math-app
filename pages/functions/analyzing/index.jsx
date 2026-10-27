@@ -994,7 +994,7 @@ import functionSymmetryDiagrams from '@/app/components/functions/symmetry/functi
 import functionAsymptotesDiagrams from '@/app/components/functions/asymptotes/functionAsymptotesDiagrams'
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
-import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -1367,7 +1367,8 @@ A function is negative where its output is less than zero. On the graph, these a
 
 A function equals zero at its $x$-intercepts — the points where the curve crosses the horizontal axis. Zeros where the curve crosses the axis (rather than just touching it) separate positive and negative intervals.
 
-For $f(x) = x^2 - 4$, the zeros occur at $x = -2$ and $x = 2$. The parabola opens upward, so it dips below the axis between the zeros and rises above the axis outside them. The function is positive on $(-\\infty, -2) \\cup (2, \\infty)$ and negative on $(-2, 2)$.
+@academic[example:Example
+For $f(x) = x^2 - 4$, the zeros occur at $x = -2$ and $x = 2$. The parabola opens upward, so it dips below the axis between the zeros and rises above the axis outside them. The function is positive on $(-\\infty, -2) \\cup (2, \\infty)$ and negative on $(-2, 2)$.]@
 
 @academic[pitfall,aside:true,width:35%:Closing the brackets at the zeros
 Writing $x^2 - 4$ as positive on $(-\\infty, -2] \\cup [2, \\infty)$ includes $x = \\pm 2$, where the output is $0$, not positive. For $f(x) > 0$ the zeros stay out: $(-\\infty, -2) \\cup (2, \\infty)$.
@@ -1386,6 +1387,9 @@ The table below collects the three sign cases with their graphical and algebraic
   obj5: {
     title: `Locating Extrema from Graph`,
     content: `Extrema are the high and low points of a function — the peaks and valleys where the output reaches notable values.
+
+@academic[fact,aside:true,width:35%:A local maximum at every point
+The floor function $\\lfloor x \\rfloor$, which rounds down to a whole number, never decreases, yet every input is a local maximum. Between whole numbers the graph is flat, and near a whole number $n$ the values are $n - 1$ and $n$, none above $\\lfloor n \\rfloor = n$.]@
 
 A local maximum occurs at $x = c$ if $f(c)$ is greater than or equal to all nearby function values. On the graph, this appears as a peak — the curve rises to a high point and then descends. The value $f(c)$ is the local maximum value.
 
@@ -1848,7 +1852,7 @@ const faqQuestions = {
   const cubicProfile = {
     header: {
       kicker: 'one function, every feature',
-      title: 'The profile of $f(x) = x^3 - 3x$',
+      title: 'Profile of a cubic',
       formula: '$f(x) = x^3 - 3x = x(x^2 - 3)$',
     },
     quickStats: [
@@ -1885,8 +1889,8 @@ const faqQuestions = {
         { label: 'Range', value: '$(-\\infty, \\infty)$', sub: 'the two arms run off without bound' },
       ] },
       { letter: 'B', name: 'Intercepts', rows: [
-        { featureId: 'xint', label: 'x-intercepts', value: '$x = -\\sqrt{3},\\; 0,\\; \\sqrt{3}$', sub: 'from $x(x^2 - 3) = 0$' },
-        { featureId: 'xint', label: 'y-intercept', value: '$(0, 0)$' },
+        { featureId: 'xint', label: 'x-intercepts', value: 'x = −√3, 0, √3' },
+        { label: 'y-intercept', value: '$(0, 0)$' },
       ] },
       { letter: 'C', name: 'Increase, decrease, extrema', rows: [
         { featureId: 'max', label: 'Local maximum', value: '$(-1, 2)$', tone: 'warm' },
@@ -1907,8 +1911,49 @@ const faqQuestions = {
     },
   };
 
+  const signProfile = {
+    header: {
+      kicker: 'sign analysis',
+      title: 'Where x² − 4 is positive and negative',
+      formula: '$f(x) = x^2 - 4$',
+    },
+    quickStats: [
+      { n: '2', label: 'zeros' },
+      { n: '3', label: 'sign intervals' },
+    ],
+    graph: {
+      xRange: [-3.4, 3.4], yRange: [-4.8, 6.2],
+      points: Array.from({ length: 341 }, (_, i) => {
+        const x = -3.4 + i * 0.02;
+        return [Number(x.toFixed(2)), Number((x * x - 4).toFixed(4))];
+      }),
+      xTicks: [-3, -2, -1, 0, 1, 2, 3], yTicks: [-4, -2, 0, 2, 4, 6],
+    },
+    features: [
+      { id: 'zeros', points: [{ x: -2, y: 0 }, { x: 2, y: 0 }] },
+    ],
+    intervals: [
+      { label: 'sign of f', spans: [
+        { from: null, to: -2, kind: 'pos', text: 'positive' },
+        { from: -2, to: 2, kind: 'neg', text: 'negative' },
+        { from: 2, to: null, kind: 'pos', text: 'positive' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'zeros', label: 'Zeros', value: 'x = −2, x = 2' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Positive on', value: '$(-\\infty, -2) \\cup (2, \\infty)$', sub: 'above the axis' },
+        { label: 'Negative on', value: '$(-2, 2)$', sub: 'below the axis' },
+        { label: 'Shape', value: 'opens upward' },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    signProfile,
     demoUnits,
     cubicProfile,
          sectionsContent,
@@ -1932,12 +1977,17 @@ const faqQuestions = {
     }
    }
 
+/* FunctionAnalysis colours: site blues only (no amber or gold) */
+const profileTheme = {
+  title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1',
+}
+
 const siteTheme = {
   title: '#06357A', accent: '#2563EB', warm: '#B45309',
   panelSoft: '#eff6ff', panelSofter: '#f8fafc', indigoSoft: '#dbeafe', warmSoft: '#fef3c7',
 }
 
-export default function AnalyzingFunctionsPage({
+export default function AnalyzingFunctionsPage({signProfile, 
   seoData,
   cubicProfile,
   sectionsContent,
@@ -1976,7 +2026,7 @@ export default function AnalyzingFunctionsPage({
             title="The profile of f(x) = x³ − 3x"
             source="/functions/analyzing"
           >
-            <FunctionAnalysis data={cubicProfile} variant="full" theme={siteTheme} />
+            <FunctionAnalysis data={cubicProfile} theme={profileTheme} />
           </DiagramFrame>,
           `Each row of the profile is one of the questions the sections below take up in turn. The numbered badges tie every fact to the spot on the graph where it shows, and the two strips under the graph make the sign of $f$ and its direction readable at a glance. That picture, all features together and none missing, is what a complete analysis produces.`,
         ]
@@ -1999,6 +2049,7 @@ export default function AnalyzingFunctionsPage({
           sectionsContent.obj3.content,
           <div key={'unit-monotoneSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.monotoneSquare }} />,
           `At the turning point itself the function is neither increasing nor decreasing: the intervals are open at x = 0.`,
+          `@academic[punchline:Rising and falling are always read with x growing, and reported as intervals of x.]@`,
         ]
     },
     {
@@ -2009,6 +2060,16 @@ export default function AnalyzingFunctionsPage({
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          `The worked example as a picture: $f(x) = x^2 - 4$ crosses the axis at $x = -2$ and $x = 2$, and those two zeros cut the line into three intervals, one negative between them and two positive outside.`,
+          <DiagramFrame
+            key={'obj4-profile'}
+            id="quadratic-sign-profile"
+            title="Where x² − 4 is positive and negative"
+            source="/functions/analyzing"
+          >
+            <FunctionAnalysis data={signProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The strip under the graph is the answer to $f(x) > 0$ and $f(x) < 0$ read straight off the curve. The zeros themselves belong to neither interval, which is why both ends stay open.`,
         ]
     },
     {
@@ -2039,6 +2100,7 @@ export default function AnalyzingFunctionsPage({
           sectionsContent.obj7.content,
           <div key={'unit-sinePeriod'} dangerouslySetInnerHTML={{ __html: demoUnits.sinePeriod }} />,
           `A shorter shift never lands on a matching point everywhere at once, which is why 2π is the smallest such p.`,
+          `@academic[punchline:A period must carry the whole graph onto itself; two points at the same height are not enough.]@`,
         ]
     },
     {
@@ -2061,6 +2123,7 @@ export default function AnalyzingFunctionsPage({
           sectionsContent.obj9.content,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          `@academic[punchline:On an applied graph every feature answers a question, and each answer needs its units.]@`,
         ]
     },
     // {

@@ -982,7 +982,10 @@ The definition extends the descending pattern below $a^0$. From $3^1 = 3$ and $3
 Reading $2^{-3}$ as $-2^3 = -8$ moves the minus sign onto the result. A negative exponent means a reciprocal: $2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$.
 [Read more](!#pitfalls)]@
 
-Evaluating a negative power takes two moves: compute the positive power, then take its reciprocal. For $5^{-2}$, the positive power is $5^2 = 25$, so $5^{-2} = \\frac{1}{25} = 0.04$.
+Evaluating a negative power takes two moves: compute the positive power, then take its reciprocal.
+
+@academic[example:Example
+For $5^{-2}$, the positive power is $5^2 = 25$, so $5^{-2} = \\frac{1}{25} = 0.04$.]@
 
 Negative exponents rewrite fractions without denominators: $1/a^3 = a^{-3}$. This notational flexibility is essential when applying the laws of exponents. The [negative exponents](!/algebra/powers/negative-exponents) page covers the full treatment.`,
     before: ``,
@@ -997,7 +1000,10 @@ Negative exponents rewrite fractions without denominators: $1/a^3 = a^{-3}$. Thi
 @academic[formula_callout:Rational Exponents
 $$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
-This equivalence bridges exponents and [roots](!/algebra/roots). Computing $8^{2/3}$: the denominator 3 means cube root, the numerator 2 means square. So $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$.
+This equivalence bridges exponents and [roots](!/algebra/roots).
+
+@academic[example:Example
+Computing $8^{2/3}$: the denominator 3 means cube root, the numerator 2 means square. So $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$.]@
 
 @academic[rule_plain:For even denominators, the base must be non-negative in real numbers — $(-4)^{1/2}$ has no real value. Odd denominators accept any real base.]@
 

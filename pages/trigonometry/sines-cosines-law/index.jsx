@@ -916,7 +916,7 @@ import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDia
 import renderTriangleLabelV2 from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel.v2'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 
 
 export async function getStaticProps(){
@@ -1293,6 +1293,9 @@ $$a^2 = b^2 + c^2 - 2bc\\cos A$$]@
 @academic[formula_callout:The Law of Cosines
 $$b^2 = a^2 + c^2 - 2ac\\cos B$$]@
 
+@academic[fact,aside:true,width:35%:Euclid had this law without cosines
+Book II of Euclid's Elements, about 300 BC, states it as Propositions 12 and 13, for obtuse and acute angles separately. In place of $-2ab\\cos C$ it adds or subtracts twice a rectangle: one side times the projection of the other side onto it.]@
+
 Each form involves one angle and all three sides. The formula generalizes the Pythagorean theorem: when $C = 90°$, $\\cos C = 0$, and the equation reduces to $c^2 = a^2 + b^2$. The correction term $-2ab\\cos C$ accounts for the deviation from a right angle. When $C < 90°$ (acute), $\\cos C > 0$, and $c^2 < a^2 + b^2$. When $C > 90°$ (obtuse), $\\cos C < 0$, and $c^2 > a^2 + b^2$.
 
 The derivation uses coordinate geometry. Place the triangle with vertex $C$ at the origin, side $a$ along the positive $x$-axis. Then $B = (a, 0)$ and $A = (b\\cos C, b\\sin C)$. The distance from $A$ to $B$ is:
@@ -1431,9 +1434,9 @@ A triangle with sides $a = 5$, $b = 7$, $c = 9$.
 
 $$s = \\frac{5 + 7 + 9}{2} = \\frac{21}{2} = 10.5$$
 
-$$A = \\sqrt{10.5 \\times 5.5 \\times 3.5 \\times 1.5} = \\sqrt{10.5 \\times 5.5 \\times 3.5 \\times 1.5}$$
+$$A = \\sqrt{10.5 \\times 5.5 \\times 3.5 \\times 1.5} = \\sqrt{303.1875}$$
 
-$$= \\sqrt{303.1875} \\approx 17.41$$]@
+$$\\approx 17.41$$]@
 
 Heron&apos;s formula can be derived from the trigonometric area formula $\\frac{1}{2}ab\\sin C$ combined with the Law of Cosines. Express $\\cos C$ in terms of the sides, use $\\sin^2 C = 1 - \\cos^2 C$ to find $\\sin C$, substitute into the area formula, and simplify. The algebra is substantial but the result is elegant.
 
@@ -1457,6 +1460,9 @@ The two area formulas — the SAS form and Heron&apos;s formula — sit side by 
 **Surveying and land measurement.** A surveyor measures two distances and the angle between them (SAS) to determine the third distance — for example, the width of a river or the length of a property boundary obscured by terrain. Alternatively, from two known positions a measured distance apart, a surveyor observes the angles to a remote point (ASA) and computes the distance to it.
 
 **Navigation.** A ship or aircraft determines its position by measuring bearings (angles) to two known landmarks. The triangle formed by the vessel and the two landmarks is solved using the Law of Sines (typically an AAS or ASA configuration), yielding the distances from the vessel to each landmark.
+
+@academic[fact,aside:true,width:35%:Everest was measured from 100 miles away
+In 1849–50 the Great Trigonometrical Survey of India sighted Peak XV from six stations on the plains of Bihar, more than 100 miles off, and its triangles gave 29,002 feet, announced in 1856. The modern height, 8,848.86 m or about 29,032 feet, is only 30 feet more.]@
 
 **Physics and engineering.** Forces acting at angles are resolved using the Law of Cosines. Two forces of known magnitudes acting at a known angle produce a resultant whose magnitude is computed by treating the force vectors as sides of a triangle — the Law of Cosines gives the resultant magnitude, and the Law of Sines gives the angle the resultant makes with each component force.
 
@@ -1829,6 +1835,7 @@ export default function SinesCosinesLawPage({heronAnatomy, lawChoiceCases,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[punchline:The Law of Cosines opens any problem lacking a side-angle pair, and its sign exposes obtuse angles that arcsine misses.]@`,
         ]
     },
     {

@@ -980,9 +980,11 @@ Until its 1999 standard, C let each compiler choose, so $(-7) \\% \\; 3$ could l
 
 Under truncated division, the quotient is obtained by dividing and discarding the fractional part — rounding toward zero. The remainder takes whatever sign is needed to satisfy $a = n \\cdot q + r$.
 
-For $(-7) \\bmod 3$: divide $-7 \\div 3 = -2.33\\ldots$. Truncate toward zero to get $q = -2$. Compute the remainder: $r = -7 - (3 \\times -2) = -7 + 6 = -1$. The result is $-1$.
+@academic[example:Example
+For $(-7) \\bmod 3$: divide $-7 \\div 3 = -2.33\\ldots$. Truncate toward zero to get $q = -2$. Compute the remainder: $r = -7 - (3 \\times -2) = -7 + 6 = -1$. The result is $-1$.]@
 
-For $(-23) \\bmod 5$: divide $-23 \\div 5 = -4.6$. Truncate to $q = -4$. Remainder: $r = -23 - (5 \\times -4) = -23 + 20 = -3$. The result is $-3$.
+@academic[example:Example
+For $(-23) \\bmod 5$: divide $-23 \\div 5 = -4.6$. Truncate to $q = -4$. Remainder: $r = -23 - (5 \\times -4) = -23 + 20 = -3$. The result is $-3$.]@
 
 The remainder under this convention shares the sign of the dividend. A negative dividend always produces a non-positive remainder ($r \\leq 0$). This behavior matches how hardware division works on most processors, which is why many compiled languages adopt it.`,
   before: ``,
@@ -995,9 +997,11 @@ obj4: {
   title: `Floored Division (Round Toward $-\\infty$)`,
   content: `Under floored division, the quotient is rounded down — toward negative infinity, not toward zero. This guarantees a non-negative remainder.
 
-For $(-7) \\bmod 3$: divide $-7 \\div 3 = -2.33\\ldots$. Floor to $q = -3$. Compute the remainder: $r = -7 - (3 \\times -3) = -7 + 9 = 2$. The result is $2$.
+@academic[example:Example
+For $(-7) \\bmod 3$: divide $-7 \\div 3 = -2.33\\ldots$. Floor to $q = -3$. Compute the remainder: $r = -7 - (3 \\times -3) = -7 + 9 = 2$. The result is $2$.]@
 
-For $(-23) \\bmod 5$: divide $-23 \\div 5 = -4.6$. Floor to $q = -5$. Remainder: $r = -23 - (5 \\times -5) = -23 + 25 = 2$. The result is $2$.
+@academic[example:Example
+For $(-23) \\bmod 5$: divide $-23 \\div 5 = -4.6$. Floor to $q = -5$. Remainder: $r = -23 - (5 \\times -5) = -23 + 25 = 2$. The result is $2$.]@
 
 @academic[pitfall,aside:true,width:35%:Flooring toward zero
 Taking the floor of $-3.4$ as $-3$ in $(-17) \\bmod 5$ gives $r = -17 + 15 = -2$, a negative remainder. The floor is $-4$, the next integer down: $r = -17 + 20 = 3$.

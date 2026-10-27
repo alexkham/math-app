@@ -902,6 +902,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDomainDiagrams from '@/app/components/functions/domain/functionDomainDiagrams'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1125,6 +1126,41 @@ export async function getStaticProps(){
 
   // ---------- SECTIONS ----------
 
+  // Concept introduction (section 1, "What is Domain") — template G,
+  // exclusion. Running instance: f(x) = 1/x, tried on five inputs. Old obj1
+  // text (five paragraphs) is kept in sectionsContent.obj1, unused; the
+  // paragraphs and the allReals demo frame with its line are carried in
+  // unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciCandTable = ciTableOpen(['input x', 'what f(x) = 1/x asks for']) +
+    ciRow(['−2', '1 ÷ (−2)']) +
+    ciRow(['0.5', '1 ÷ 0.5'], { shade: true }) +
+    ciRow(['0', '1 ÷ 0']) +
+    ciRow(['3', '1 ÷ 3'], { shade: true }) +
+    ciRow(['100', '1 ÷ 100'], { last: true }) +
+    '</tbody></table>'
+  const ciSortTable = ciTableOpen(['input x', 'f(x)', 'gets an output?']) +
+    ciRow(['−2', '−0.5', 'yes']) +
+    ciRow(['0.5', '2', 'yes'], { shade: true }) +
+    ciRow(['0', 'undefined', 'no'], { color: '#a4243b', cols: [1, 2] }) +
+    ciRow(['3', '0.333…', 'yes'], { shade: true }) +
+    ciRow(['100', '0.01', 'yes'], { last: true }) +
+    '</tbody></table>'
+  const fpCiDomain = {
+    kind: 'domainOpen', svgTitle: 'Domain of 1/x: every real number except 0', range: [-3, 3],
+    rows: [
+      { label: 'Dom f(x) = 1/x', color: 'f', segs: [[null, 0, false, true], [0, null, true]], tag: { text: 'x ≠ 0', x: 2 } },
+    ],
+    includedNote: 'allowed input', excludedNote: 'left out',
+    caption: 'The whole line with one point removed',
+  };
+
   const sectionsContent = {
 
     obj0 :{
@@ -1198,6 +1234,9 @@ The domain is distinct from the [range](!/functions/range), which describes outp
     title: `Natural Domain vs Restricted Domain`,
     content: `The natural domain of a function is the largest set of real numbers for which the formula produces real output. It is determined entirely by the algebraic expression — no external constraints, no contextual limitations.
 
+@academic[fact,aside:true,width:35%:One root or two changes the domain
+$\\sqrt{x - 1}\\,\\sqrt{x + 1}$ needs both radicands non-negative, so its natural domain is $[1, \\infty)$. Written as one root, $\\sqrt{x^2 - 1}$, it needs only the product to be non-negative, and the domain gains the whole ray $(-\\infty, -1]$.]@
+
 For $f(x) = \\sqrt{x - 3}$, the natural domain is $[3, \\infty)$ because the radicand $x - 3$ must be non-negative. For $g(x) = \\ln(x)$, the natural domain is $(0, \\infty)$ because logarithms require positive arguments. The natural domain follows from the mathematics alone.
 
 A restricted domain is a deliberate limitation imposed beyond what the formula requires. The function $f(x) = x^2$ has natural domain $(-\\infty, \\infty)$, but restricting to $[0, \\infty)$ makes the function one-to-one, which is necessary for constructing an [inverse](!/functions/inverse).
@@ -1250,7 +1289,12 @@ Some rational functions have a factor shared by the numerator and the denominato
 
 Negative numbers have no real even roots. For $f(x) = \\sqrt{x - 5}$, the radicand $x - 5$ must satisfy $x - 5 \\geq 0$, giving $x \\geq 5$. The domain is $[5, \\infty)$.
 
+@academic[fact,aside:true,width:35%:$x^x$ has a domain full of holes
+For negative $x$, $x^x$ is real only when $x$ is a fraction whose denominator in lowest terms is odd: $(-\\frac{1}{3})^{-1/3} = -\\sqrt[3]{3}$, but $(-\\frac{1}{2})^{-1/2}$ needs the square root of a negative number. Both kinds of input lie between any two negative numbers, so on that side the domain contains no interval at all.]@
+
 Odd roots (cube root, fifth root) accept any real number. The cube root of $-8$ is $-2$, a perfectly valid real number. For $g(x) = \\sqrt[3]{x - 5}$, no restriction applies. The domain is $(-\\infty, \\infty)$.
+
+Fractional exponents follow the same rule, because $x^{\\frac{1}{n}}$ is another way to write $\\sqrt[n]{x}$. With the fraction in lowest terms, an odd denominator, as in $x^{\\frac{2}{3}}$, lets negative inputs through, while an even one, as in $x^{\\frac{3}{4}}$, shuts them out. When the exponent itself changes with the input, the denominator has to be checked again for every single $x$.
 
 More complex radicands require solving inequalities. For $f(x) = \\sqrt{6 - 2x}$, set $6 - 2x \\geq 0$:
 
@@ -1267,7 +1311,10 @@ Solving $6 - 2x \\geq 0$ as $-2x \\geq -6$ and then $x \\geq 3$ keeps the sign w
 
 The direction of the inequality carries the whole answer here: it decides whether the domain runs to the left or to the right of the boundary point $x = 3$. The boundary point itself is included, because a radicand of $0$ gives $\\sqrt{0} = 0$, a valid output.
 
-Nested radicals compound the restrictions. For $f(x) = \\sqrt{\\sqrt{x} - 1}$, both layers impose conditions. The inner radical requires $x \\geq 0$. The outer radical requires $\\sqrt{x} - 1 \\geq 0$, which means $\\sqrt{x} \\geq 1$, so $x \\geq 1$. The domain is $[1, \\infty)$.`,
+Nested radicals compound the restrictions.
+
+@academic[example:Example
+For $f(x) = \\sqrt{\\sqrt{x} - 1}$, both layers impose conditions. The inner radical requires $x \\geq 0$. The outer radical requires $\\sqrt{x} - 1 \\geq 0$, which means $\\sqrt{x} \\geq 1$, so $x \\geq 1$. The domain is $[1, \\infty)$.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -1338,11 +1385,14 @@ The table below collects the six basic trigonometric functions with where each b
     title: `Finding Domain: Combined Functions`,
     content: `@academic[rule_plain:When multiple operations appear in a single function, every restriction applies simultaneously. The domain is the intersection of all individual requirements.]@
 
-For $f(x) = \\dfrac{\\sqrt{x}}{x - 3}$, two restrictions arise. The square root requires $x \\geq 0$. The denominator requires $x \\neq 3$. Both must hold, so the domain is $[0, 3) \\cup (3, \\infty)$.
+@academic[example:Example
+For $f(x) = \\dfrac{\\sqrt{x}}{x - 3}$, two restrictions arise. The square root requires $x \\geq 0$. The denominator requires $x \\neq 3$. Both must hold, so the domain is $[0, 3) \\cup (3, \\infty)$.]@
 
-For $g(x) = \\ln(x - 1) + \\sqrt{5 - x}$, the logarithm requires $x - 1 > 0$, giving $x > 1$. The square root requires $5 - x \\geq 0$, giving $x \\leq 5$. The intersection is $(1, 5]$.
+@academic[example:Example
+For $g(x) = \\ln(x - 1) + \\sqrt{5 - x}$, the logarithm requires $x - 1 > 0$, giving $x > 1$. The square root requires $5 - x \\geq 0$, giving $x \\leq 5$. The intersection is $(1, 5]$.]@
 
-For $h(x) = \\dfrac{1}{\\sqrt{x - 2}}$, the square root requires $x - 2 \\geq 0$, and the denominator requires $\\sqrt{x-2} \\neq 0$. Together these demand $x - 2 > 0$, so $x > 2$. The domain is $(2, \\infty)$.
+@academic[example:Example
+For $h(x) = \\dfrac{1}{\\sqrt{x - 2}}$, the square root requires $x - 2 \\geq 0$, and the denominator requires $\\sqrt{x-2} \\neq 0$. Together these demand $x - 2 > 0$, so $x > 2$. The domain is $(2, \\infty)$.]@
 
 @academic[pitfall,aside:true,width:35%:Joining restrictions with or
 Combining $x > 1$ and $x \\leq 5$ for $g(x) = \\ln(x - 1) + \\sqrt{5 - x}$ with "or" gives all real numbers. At $x = 6$, $\\sqrt{5 - 6} = \\sqrt{-1}$ is not real; both conditions must hold, so the domain is $(1, 5]$.
@@ -1607,6 +1657,12 @@ const faqQuestions = {
     caption: 'All restrictions at once: keep only inputs that pass every one',
   };
 
+  const conceptIntroFigures = {
+    candTable: ciCandTable,
+    sortTable: ciSortTable,
+    line: renderFunctionPlotV2(fpCiDomain),
+  };
+
   const demoUnits = {
     rational: demoUnitFrame({
       svg: functionDomainDiagrams.reciprocal,
@@ -1651,6 +1707,7 @@ const faqQuestions = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1679,10 +1736,80 @@ export default function DomainPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Feed some numbers into f(x) = 1/x: they all look like reasonable inputs.`,
+        content: [
+          `Negative, fractional, zero, small, large — nothing about these five numbers suggests that any of them should be refused.`,
+          ciTable('candTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Four of them come back with an output; one does not.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `0 fails because 1 ÷ 0 has no answer; the others pass because division by anything else is fine.`,
+        content: [
+          `$1 \\div 0$ would have to be a number that gives $1$ when multiplied by $0$, and every number times $0$ is $0$. Nothing about the size or sign of an input matters here: $-2$ and $100$ pass just as easily as $0.5$. The only thing $\\frac{1}{x}$ cannot survive is a zero in its denominator.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: an input is allowed exactly when the formula can be carried out on it.`,
+        content: [
+          `Think of a ticket barrier: it does not care who you are, only whether your ticket works. For $\\frac{1}{x}$ every ticket works except $0$.`,
+          `For $f(x) = 1/x$, the input $x = 0$ fails because division by zero is undefined. Every other real number works. The domain is all real numbers except zero: $(-\\infty, 0) \\cup (0, \\infty)$.`,
+        ],
+        visual: ciSvg('line'),
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [domain](!/functions/definitions#domain) of a function is the set of all inputs for which it produces a valid output.`,
+        footer: `So the domain of $f(x) = \\frac{1}{x}$ is every real number except $0$: $(-\\infty, 0) \\cup (0, \\infty)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A domain is a set of numbers, and it is part of the function itself.`,
+        content: [
+          `The domain of a function is the set of all inputs for which the function produces a valid output. It includes every value that can be substituted into the function and yield a real number result.`,
+          `A function is not just a rule — it is a rule together with a domain. The expression $f(x) = x^2$ describes a rule, but the function is not complete until the domain is specified. Often the domain is implicit: all real numbers for which the formula makes sense. Sometimes it is explicitly restricted to match a context or application.`,
+          `The domain answers a simple question: what can go in? For $f(x) = 2x + 5$, any real number works — there are no divisions, no roots, no restrictions. The domain is all real numbers, written $(-\\infty, \\infty)$ in interval notation or $\\mathbb{R}$ in set notation.`,
+          <div key={'unit-allReals'} dangerouslySetInnerHTML={{ __html: demoUnits.allReals }} />,
+          `For f(x) = 1/x the picture changes: a single gap at x = 0 is all that is missing.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rejected input is not lost for good: a different function can take it in.`,
+        content: [
+          `$0$ is outside the domain of $\\frac{1}{x}$, but nothing stops a new function from using the same formula for $x \\neq 0$ and a separate value at $0$ — it is simply a different function, with a different domain. Domains can also be cut down on purpose, as the next sections on [natural and restricted domains](!/functions/domain#3) show.`,
+          `The domain is distinct from the [range](!/functions/range), which describes outputs rather than inputs. Together they frame the complete input-output picture of a function.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers domain notation, natural and restricted domains, finding the domain of rational, radical, logarithmic, trigonometric and combined functions, and reading the domain from a graph or a context.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1698,9 +1825,7 @@ export default function DomainPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-allReals'} dangerouslySetInnerHTML={{ __html: demoUnits.allReals }} />,
-          `For f(x) = 1/x the picture changes: a single gap at x = 0 is all that is missing.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1752,6 +1877,7 @@ export default function DomainPage({
           sectionsContent.obj5.content,
                   <div key={'unit-radical'} dangerouslySetInnerHTML={{ __html: demoUnits.radical }} />,
           `Whether the endpoint is included is the difference between the closed dot here and the open one for the logarithm.`,
+          `@academic[punchline:The index decides: even roots refuse negative radicands, odd roots accept every real number.]@`,
         ]
     },
     {
@@ -1772,6 +1898,7 @@ export default function DomainPage({
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          `@academic[punchline:Sine and cosine take every input; the other four fail exactly where the sine or cosine they divide by is zero.]@`,
         ]
     },
     {
@@ -1792,6 +1919,7 @@ export default function DomainPage({
           sectionsContent.obj9.content,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          `@academic[punchline:On a graph, the domain is the shadow the curve casts on the x-axis.]@`,
         ]
     },
     {

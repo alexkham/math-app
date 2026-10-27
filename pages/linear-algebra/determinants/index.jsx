@@ -1073,7 +1073,8 @@ This approach requires on the order of $n^3$ arithmetic operations — a dramati
 Dividing row $1$ of $\\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$ by $2$ and then clearing below the pivot gives $\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$, with diagonal product $1$. That division halved the determinant, so $\\det(A) = 2 \\cdot 1 = 2$.
 [Read more](!#pitfalls)]@
 
-Starting from $A =\\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, subtract $\\frac{3}{2}$ times row $1$ from row $2$ (this does not change the determinant) to get $\\begin{pmatrix} 2 & 4 \\\\ 0 & 1 \\end{pmatrix}$. The product of the diagonal is $2 \\cdot 1 = 2$, which matches $\\det(A) = 2 \\cdot 7 - 4 \\cdot 3 = 2$.
+@academic[example:Example
+Starting from $A =\\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, subtract $\\frac{3}{2}$ times row $1$ from row $2$ (this does not change the determinant) to get $\\begin{pmatrix} 2 & 4 \\\\ 0 & 1 \\end{pmatrix}$. The product of the diagonal is $2 \\cdot 1 = 2$, which matches $\\det(A) = 2 \\cdot 7 - 4 \\cdot 3 = 2$.]@
 
 The complete set of algebraic [properties](!/linear-algebra/determinants/properties) — including the multiplicative rule $\\det(AB) = \\det(A)\\det(B)$, transpose invariance, and the full invertibility equivalence — is developed on the properties page. The three rules above collect into a compact reference:`,
     before: ``,

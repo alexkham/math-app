@@ -1,5 +1,17 @@
 [
   {
+    "id": "abs-piecewise-steps",
+    "title": null,
+    "source": "/functions/piecewise",
+    "section": "functions",
+    "width": 933,
+    "height": 844,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "algebraic-identities-outline",
     "title": null,
     "source": "/algebra/identities",
@@ -20,6 +32,45 @@
     "height": 730,
     "formats": [
       "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "arccosine-profile",
+    "title": null,
+    "source": "/trigonometry/inverse-functions",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 579,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "arcsine-profile",
+    "title": null,
+    "source": "/trigonometry/inverse-functions",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 578,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "arctangent-profile",
+    "title": null,
+    "source": "/trigonometry/inverse-functions",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 648,
+    "formats": [
+      "png",
+      "svg",
       "pdf"
     ]
   },
@@ -72,12 +123,24 @@
     ]
   },
   {
+    "id": "borrowing-before-after",
+    "title": null,
+    "source": "/arithmetic/fractions/mixed-numbers",
+    "section": "arithmetic",
+    "width": 933,
+    "height": 582,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "canonical-forms",
-    "title": "How simple the matrix can be made",
+    "title": null,
     "source": "/linear-algebra/transformations/basis-change",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1015,
+    "width": 933,
+    "height": 981,
     "formats": [
       "png",
       "pdf"
@@ -109,11 +172,11 @@
   },
   {
     "id": "characteristic-polynomial",
-    "title": "What the polynomial encodes",
+    "title": null,
     "source": "/linear-algebra/eigen/characteristic-equation",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1490,
+    "width": 933,
+    "height": 1455,
     "formats": [
       "png",
       "pdf"
@@ -121,11 +184,11 @@
   },
   {
     "id": "cholesky-outcomes",
-    "title": "What the algorithm does with each matrix",
+    "title": null,
     "source": "/linear-algebra/decompositions/cholesky",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 995,
+    "width": 933,
+    "height": 978,
     "formats": [
       "png",
       "pdf"
@@ -133,11 +196,11 @@
   },
   {
     "id": "cofactor-chain",
-    "title": "The cofactor construction chain",
+    "title": null,
     "source": "/linear-algebra/determinants/cofactors",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1116,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -145,11 +208,35 @@
   },
   {
     "id": "combination-forms",
-    "title": "One construction, chosen coefficients",
+    "title": null,
     "source": "/linear-algebra/vectors/linear-combinations",
     "section": "linear-algebra",
-    "width": 783,
+    "width": 933,
     "height": 1138,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "combine-radicals-steps",
+    "title": null,
+    "source": "/algebra/roots/rational-exponents",
+    "section": "algebra",
+    "width": 933,
+    "height": 964,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "common-base-before-after",
+    "title": null,
+    "source": "/algebra/powers/exponential-equations",
+    "section": "algebra",
+    "width": 933,
+    "height": 600,
     "formats": [
       "png",
       "pdf"
@@ -169,11 +256,11 @@
   },
   {
     "id": "complex-eigenvalues",
-    "title": "Reading a conjugate pair",
+    "title": null,
     "source": "/linear-algebra/eigen/complex",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1403,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "svg",
@@ -266,6 +353,18 @@
     ]
   },
   {
+    "id": "conjugate-division-steps",
+    "title": null,
+    "source": "/complex-numbers/complex-conjugate",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 990,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "connective-precedence-pyramid",
     "title": null,
     "source": "/logic/propositional-logic/syntax",
@@ -286,6 +385,19 @@
     "height": 827,
     "formats": [
       "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "cosine-profile",
+    "title": null,
+    "source": "/trigonometry/graphs",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 580,
+    "formats": [
+      "png",
+      "svg",
       "pdf"
     ]
   },
@@ -315,11 +427,48 @@
   },
   {
     "id": "cross-product-laws",
-    "title": "Properties of the cross product",
+    "title": null,
     "source": "/linear-algebra/vectors/cross-product",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1486,
+    "width": 933,
+    "height": 1398,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "cube-root-profile",
+    "title": null,
+    "source": "/algebra/roots/functions",
+    "section": "algebra",
+    "width": 933,
+    "height": 578,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "cubic-direction-profile",
+    "title": null,
+    "source": "/calculus/derivatives/graph-analysis",
+    "section": "calculus",
+    "width": 933,
+    "height": 600,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "cubic-factoring-steps",
+    "title": null,
+    "source": "/algebra/polynomials/roots",
+    "section": "algebra",
+    "width": 933,
+    "height": 761,
     "formats": [
       "png",
       "pdf"
@@ -351,11 +500,11 @@
   },
   {
     "id": "definiteness-classes",
-    "title": "Definiteness, read from the signs",
+    "title": null,
     "source": "/linear-algebra/decompositions/spectral",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 797,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -363,13 +512,26 @@
   },
   {
     "id": "definiteness-tests",
-    "title": "Four criteria, four prices",
+    "title": null,
     "source": "/linear-algebra/decompositions/cholesky",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 731,
+    "width": 933,
+    "height": 732,
     "formats": [
       "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "demoivre-power-steps",
+    "title": null,
+    "source": "/complex-numbers/demoivre-theorem",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 960,
+    "formats": [
+      "png",
+      "svg",
       "pdf"
     ]
   },
@@ -398,6 +560,19 @@
     ]
   },
   {
+    "id": "derivative-shape-profile",
+    "title": null,
+    "source": "/calculus/derivatives",
+    "section": "calculus",
+    "width": 933,
+    "height": 617,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
     "id": "derivatives-roadmap-outline",
     "title": null,
     "source": "/calculus/derivatives",
@@ -411,11 +586,11 @@
   },
   {
     "id": "determinant-applications",
-    "title": "Six places a determinant does the work",
+    "title": null,
     "source": "/linear-algebra/determinants/applications",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1210,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -423,11 +598,11 @@
   },
   {
     "id": "determinant-geometry",
-    "title": "What the determinant measures, by dimension",
+    "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1033,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -435,11 +610,11 @@
   },
   {
     "id": "determinant-invertibility-ring",
-    "title": "One question, twelve answers",
+    "title": null,
     "source": "/linear-algebra/determinants/properties",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1316,
+    "width": 933,
+    "height": 989,
     "formats": [
       "png",
       "svg",
@@ -448,11 +623,11 @@
   },
   {
     "id": "determinant-properties",
-    "title": "What each operation does to the determinant",
+    "title": null,
     "source": "/linear-algebra/determinants/properties",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1845,
+    "width": 933,
+    "height": 1755,
     "formats": [
       "png",
       "pdf"
@@ -475,8 +650,8 @@
     "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 748,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -487,8 +662,8 @@
     "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 748,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -511,8 +686,8 @@
     "title": null,
     "source": "/linear-algebra/determinants/geometry",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 788,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -520,11 +695,11 @@
   },
   {
     "id": "diagonalizability-cases",
-    "title": "Which matrices diagonalize",
+    "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1168,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -532,11 +707,11 @@
   },
   {
     "id": "diagonalization-kinds",
-    "title": "Ordinary and spectral, compared",
+    "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 577,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -591,12 +766,24 @@
     ]
   },
   {
-    "id": "dot-product-laws",
-    "title": "Properties of the dot product",
+    "id": "dot-product-anatomy",
+    "title": null,
     "source": "/linear-algebra/vectors/dot-product",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1403,
+    "width": 933,
+    "height": 804,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "dot-product-laws",
+    "title": null,
+    "source": "/linear-algebra/vectors/dot-product",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 1369,
     "formats": [
       "png",
       "pdf"
@@ -616,11 +803,11 @@
   },
   {
     "id": "elimination-stages",
-    "title": "Gaussian elimination, stage by stage",
+    "title": null,
     "source": "/linear-algebra/linear-systems/gaussian-elimination",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1059,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -668,8 +855,8 @@
     "title": null,
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 688,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -749,6 +936,31 @@
     ]
   },
   {
+    "id": "factor-sign-profile",
+    "title": null,
+    "source": "/algebra/inequalities/polynomial",
+    "section": "algebra",
+    "width": 933,
+    "height": 658,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "factoring-before-after",
+    "title": null,
+    "source": "/algebra/polynomials",
+    "section": "algebra",
+    "width": 933,
+    "height": 613,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "factoring-decision-outline",
     "title": null,
     "source": "/algebra/polynomials/factoring",
@@ -762,11 +974,11 @@
   },
   {
     "id": "four-subspace-card",
-    "title": "The four fundamental subspaces",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1135,
+    "width": 933,
+    "height": 1116,
     "formats": [
       "png",
       "pdf"
@@ -838,9 +1050,10 @@
     "source": "/functions/analyzing",
     "section": "functions",
     "width": 933,
-    "height": 1522,
+    "height": 771,
     "formats": [
       "png",
+      "svg",
       "pdf"
     ]
   },
@@ -905,12 +1118,24 @@
     ]
   },
   {
+    "id": "gcf-factoring-steps",
+    "title": null,
+    "source": "/algebra/polynomials/factoring",
+    "section": "algebra",
+    "width": 933,
+    "height": 760,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "gram-schmidt-settings",
-    "title": "The same algorithm across settings",
+    "title": null,
     "source": "/linear-algebra/orthogonality/gram-schmidt",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1155,
+    "width": 933,
+    "height": 1120,
     "formats": [
       "png",
       "pdf"
@@ -942,23 +1167,36 @@
   },
   {
     "id": "homogeneous-appearances",
-    "title": "Where Ax = 0 turns up",
+    "title": null,
     "source": "/linear-algebra/linear-systems/homogeneous",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1130,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
     ]
   },
   {
+    "id": "horizontal-asymptote-profile",
+    "title": null,
+    "source": "/calculus/limits/infinity",
+    "section": "calculus",
+    "width": 933,
+    "height": 556,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
     "id": "image-kernel-pairs",
-    "title": "Image and kernel, side by side",
+    "title": null,
     "source": "/linear-algebra/transformations/image-kernel",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1220,
+    "width": 933,
+    "height": 1203,
     "formats": [
       "png",
       "pdf"
@@ -978,11 +1216,11 @@
   },
   {
     "id": "independence-properties",
-    "title": "What operations do to an independent set",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/linear-independence",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1533,
+    "width": 933,
+    "height": 1419,
     "formats": [
       "png",
       "pdf"
@@ -1002,11 +1240,11 @@
   },
   {
     "id": "inner-product-axioms",
-    "title": "The three axioms",
+    "title": null,
     "source": "/linear-algebra/orthogonality/inner-product",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1330,
+    "width": 933,
+    "height": 1261,
     "formats": [
       "png",
       "pdf"
@@ -1037,6 +1275,18 @@
     ]
   },
   {
+    "id": "inverse-2x2-strip",
+    "title": null,
+    "source": "/linear-algebra/matrix/inverse",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 165,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "inverse-pairs-outline",
     "title": null,
     "source": "/functions/inverse",
@@ -1050,11 +1300,11 @@
   },
   {
     "id": "inverse-properties",
-    "title": "Properties of the inverse",
+    "title": null,
     "source": "/linear-algebra/matrix/inverse",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1605,
+    "width": 933,
+    "height": 1532,
     "formats": [
       "png",
       "pdf"
@@ -1074,11 +1324,11 @@
   },
   {
     "id": "invertibility-equivalence",
-    "title": "The invertibility equivalence",
+    "title": null,
     "source": "/linear-algebra/matrix/inverse",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1336,
+    "width": 933,
+    "height": 1008,
     "formats": [
       "png",
       "svg",
@@ -1111,11 +1361,23 @@
   },
   {
     "id": "least-squares-methods",
-    "title": "Four ways to compute the same solution",
+    "title": null,
     "source": "/linear-algebra/orthogonality/least-squares",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 977,
+    "width": 933,
+    "height": 925,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "like-radicals-steps",
+    "title": null,
+    "source": "/algebra/roots/operations",
+    "section": "algebra",
+    "width": 933,
+    "height": 760,
     "formats": [
       "png",
       "pdf"
@@ -1135,11 +1397,11 @@
   },
   {
     "id": "linear-map-combinations",
-    "title": "How linear maps combine",
+    "title": null,
     "source": "/linear-algebra/transformations/properties",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1457,
+    "width": 933,
+    "height": 1405,
     "formats": [
       "png",
       "pdf"
@@ -1166,6 +1428,19 @@
     "height": 688,
     "formats": [
       "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "local-extrema-profile",
+    "title": null,
+    "source": "/functions/properties",
+    "section": "functions",
+    "width": 933,
+    "height": 558,
+    "formats": [
+      "png",
+      "svg",
       "pdf"
     ]
   },
@@ -1207,11 +1482,11 @@
   },
   {
     "id": "lu-factors",
-    "title": "What each factor holds",
+    "title": null,
     "source": "/linear-algebra/decompositions/lower-upper",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 652,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -1219,11 +1494,11 @@
   },
   {
     "id": "lu-readings",
-    "title": "What LU computes, and at what cost",
+    "title": null,
     "source": "/linear-algebra/decompositions/lower-upper",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 891,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -1254,12 +1529,36 @@
     ]
   },
   {
+    "id": "matrix-addition-strip",
+    "title": null,
+    "source": "/linear-algebra/matrix/operations",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 184,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "matrix-powers-by-hand",
     "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
+    "width": 48,
+    "height": 48,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "matrix-product-anatomy",
+    "title": null,
+    "source": "/linear-algebra/matrix/operations",
+    "section": "linear-algebra",
     "width": 933,
-    "height": 631,
+    "height": 839,
     "formats": [
       "png",
       "pdf"
@@ -1267,11 +1566,23 @@
   },
   {
     "id": "matrix-product-laws",
-    "title": "Which laws survive the product",
+    "title": null,
     "source": "/linear-algebra/matrix/operations",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1651,
+    "width": 933,
+    "height": 1600,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "matrix-product-order",
+    "title": null,
+    "source": "/linear-algebra/matrix/operations",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 712,
     "formats": [
       "png",
       "pdf"
@@ -1291,11 +1602,11 @@
   },
   {
     "id": "matrix-type-profiles",
-    "title": "Eleven types and what each one forces",
+    "title": null,
     "source": "/linear-algebra/matrix/types",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1925,
+    "width": 933,
+    "height": 1906,
     "formats": [
       "png",
       "pdf"
@@ -1328,11 +1639,11 @@
   },
   {
     "id": "norm-properties",
-    "title": "Properties of the norm",
+    "title": null,
     "source": "/linear-algebra/vectors/magnitude",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1446,
+    "width": 933,
+    "height": 1375,
     "formats": [
       "png",
       "pdf"
@@ -1403,8 +1714,20 @@
     "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
+    "width": 48,
+    "height": 48,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "one-side-steps",
+    "title": null,
+    "source": "/algebra/inequalities/rational",
+    "section": "algebra",
     "width": 933,
-    "height": 729,
+    "height": 1033,
     "formats": [
       "png",
       "pdf"
@@ -1412,11 +1735,11 @@
   },
   {
     "id": "orthonormal-operations",
-    "title": "Operations in an orthonormal basis",
+    "title": null,
     "source": "/linear-algebra/orthogonality/orthogonal-sets",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1169,
+    "width": 933,
+    "height": 1152,
     "formats": [
       "png",
       "pdf"
@@ -1477,6 +1800,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 775,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "phase-shift-before-after",
+    "title": null,
+    "source": "/trigonometry/graphs",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 613,
     "formats": [
       "png",
       "pdf"
@@ -1544,11 +1879,11 @@
   },
   {
     "id": "product-comparison",
-    "title": "Dot against cross",
+    "title": null,
     "source": "/linear-algebra/vectors/cross-product",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 589,
+    "width": 933,
+    "height": 579,
     "formats": [
       "png",
       "pdf"
@@ -1556,11 +1891,11 @@
   },
   {
     "id": "product-interpretations",
-    "title": "Four ways to read the same product",
+    "title": null,
     "source": "/linear-algebra/matrix/operations",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1003,
+    "width": 933,
+    "height": 984,
     "formats": [
       "png",
       "pdf"
@@ -1568,10 +1903,10 @@
   },
   {
     "id": "projection-formulas",
-    "title": "Four formulas, one operation",
+    "title": null,
     "source": "/linear-algebra/orthogonality/projections",
     "section": "linear-algebra",
-    "width": 783,
+    "width": 933,
     "height": 1017,
     "formats": [
       "png",
@@ -1580,11 +1915,11 @@
   },
   {
     "id": "projection-properties",
-    "title": "Properties of orthogonal projections",
+    "title": null,
     "source": "/linear-algebra/orthogonality/projections",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1651,
+    "width": 933,
+    "height": 1543,
     "formats": [
       "png",
       "pdf"
@@ -1592,11 +1927,11 @@
   },
   {
     "id": "qr-forms",
-    "title": "Thin QR and full QR",
+    "title": null,
     "source": "/linear-algebra/decompositions/qr",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 590,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -1604,11 +1939,11 @@
   },
   {
     "id": "qr-from-gram-schmidt",
-    "title": "Where each factor comes from",
+    "title": null,
     "source": "/linear-algebra/orthogonality/gram-schmidt",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 579,
+    "width": 933,
+    "height": 561,
     "formats": [
       "png",
       "pdf"
@@ -1619,8 +1954,8 @@
     "title": null,
     "source": "/linear-algebra/decompositions/qr",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 691,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -1628,11 +1963,11 @@
   },
   {
     "id": "qr-routes",
-    "title": "Four routes to the same factorization",
+    "title": null,
     "source": "/linear-algebra/decompositions/qr",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 938,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -1663,6 +1998,44 @@
     ]
   },
   {
+    "id": "quadratic-sign-profile",
+    "title": null,
+    "source": "/functions/analyzing",
+    "section": "functions",
+    "width": 933,
+    "height": 557,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "quadratic-sketch-profile",
+    "title": null,
+    "source": "/functions/graphs",
+    "section": "functions",
+    "width": 933,
+    "height": 617,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "quotient-reduce-steps",
+    "title": null,
+    "source": "/functions/arithmetic",
+    "section": "functions",
+    "width": 933,
+    "height": 813,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "radical-equation-index-cases",
     "title": null,
     "source": "/algebra/roots/equations",
@@ -1687,12 +2060,36 @@
     ]
   },
   {
+    "id": "radical-product-steps",
+    "title": null,
+    "source": "/algebra/powers/rational-exponents",
+    "section": "algebra",
+    "width": 933,
+    "height": 964,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "radical-rules-tree",
     "title": null,
     "source": "/algebra/roots/radical-rules",
     "section": "algebra",
     "width": 933,
     "height": 592,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "radical-strategy-profile",
+    "title": null,
+    "source": "/algebra/roots/functions",
+    "section": "algebra",
+    "width": 933,
+    "height": 599,
     "formats": [
       "png",
       "pdf"
@@ -1724,11 +2121,11 @@
   },
   {
     "id": "rank-properties",
-    "title": "Properties of rank",
+    "title": null,
     "source": "/linear-algebra/matrix/rank",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1789,
+    "width": 933,
+    "height": 1681,
     "formats": [
       "png",
       "pdf"
@@ -1771,6 +2168,42 @@
     ]
   },
   {
+    "id": "rationalize-binomial-steps",
+    "title": null,
+    "source": "/algebra/roots/simplifying",
+    "section": "algebra",
+    "width": 933,
+    "height": 835,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "rationalize-monomial-before-after",
+    "title": null,
+    "source": "/algebra/roots/simplifying",
+    "section": "algebra",
+    "width": 933,
+    "height": 660,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "real-complex-before-after",
+    "title": null,
+    "source": "/algebra/polynomials/roots",
+    "section": "algebra",
+    "width": 933,
+    "height": 632,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "real-inverse-distance-cases",
     "title": null,
     "source": "/complex-numbers/multiplicative-inverse",
@@ -1795,11 +2228,23 @@
     ]
   },
   {
+    "id": "reduce-index-steps",
+    "title": null,
+    "source": "/algebra/roots/simplifying",
+    "section": "algebra",
+    "width": 933,
+    "height": 959,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "reflection-cases",
-    "title": "Reflections in the plane",
+    "title": null,
     "source": "/linear-algebra/transformations/geometric",
     "section": "linear-algebra",
-    "width": 783,
+    "width": 933,
     "height": 1046,
     "formats": [
       "png",
@@ -1847,8 +2292,8 @@
     "title": null,
     "source": "/linear-algebra/linear-systems/gaussian-elimination",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 675,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -1856,11 +2301,11 @@
   },
   {
     "id": "rref-readings",
-    "title": "Everything readable from the RREF",
+    "title": null,
     "source": "/linear-algebra/linear-systems/echelon-form",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1308,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -1873,6 +2318,18 @@
     "section": "probability",
     "width": 933,
     "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "scalar-multiple-strip",
+    "title": null,
+    "source": "/linear-algebra/matrix/operations",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 165,
     "formats": [
       "png",
       "pdf"
@@ -1899,6 +2356,44 @@
     "height": 586,
     "formats": [
       "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "shifted-log-profile",
+    "title": null,
+    "source": "/algebra/logarithms/graphs",
+    "section": "algebra",
+    "width": 933,
+    "height": 580,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "sine-cosine-before-after",
+    "title": null,
+    "source": "/trigonometry/functions",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 619,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "sine-profile",
+    "title": null,
+    "source": "/trigonometry/graphs",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 580,
+    "formats": [
+      "png",
+      "svg",
       "pdf"
     ]
   },
@@ -1940,11 +2435,11 @@
   },
   {
     "id": "solvability-questions",
-    "title": "Every solvability question, answered by rank",
+    "title": null,
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1145,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -1952,11 +2447,11 @@
   },
   {
     "id": "span-diagnostics",
-    "title": "Four questions, one reduction",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/span",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 905,
+    "width": 933,
+    "height": 867,
     "formats": [
       "png",
       "pdf"
@@ -1988,11 +2483,11 @@
   },
   {
     "id": "special-inverses",
-    "title": "When structure makes the inverse cheap",
+    "title": null,
     "source": "/linear-algebra/matrix/inverse",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1297,
+    "width": 933,
+    "height": 1298,
     "formats": [
       "png",
       "pdf"
@@ -2012,11 +2507,11 @@
   },
   {
     "id": "special-ranks",
-    "title": "Ranks readable from structure",
+    "title": null,
     "source": "/linear-algebra/matrix/rank",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1155,
+    "width": 933,
+    "height": 1136,
     "formats": [
       "png",
       "pdf"
@@ -2027,8 +2522,8 @@
     "title": null,
     "source": "/linear-algebra/decompositions/spectral",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 771,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -2036,11 +2531,11 @@
   },
   {
     "id": "spectral-properties",
-    "title": "Spectral properties at a glance",
+    "title": null,
     "source": "/linear-algebra/eigen/properties",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1943,
+    "width": 933,
+    "height": 1834,
     "formats": [
       "png",
       "pdf"
@@ -2048,11 +2543,11 @@
   },
   {
     "id": "spectral-readings",
-    "title": "What the decomposition gives you",
+    "title": null,
     "source": "/linear-algebra/decompositions/spectral",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1199,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -2060,11 +2555,23 @@
   },
   {
     "id": "spiral-regimes",
-    "title": "Three regimes, set by the modulus",
+    "title": null,
     "source": "/linear-algebra/eigen/complex",
     "section": "linear-algebra",
-    "width": 458,
-    "height": 1397,
+    "width": 48,
+    "height": 48,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "square-root-profile",
+    "title": null,
+    "source": "/algebra/roots/functions",
+    "section": "algebra",
+    "width": 933,
+    "height": 682,
     "formats": [
       "png",
       "pdf"
@@ -2075,8 +2582,8 @@
     "title": null,
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 758,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -2084,11 +2591,11 @@
   },
   {
     "id": "standard-bases",
-    "title": "The default basis of each space",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/basis",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 913,
+    "width": 933,
+    "height": 895,
     "formats": [
       "png",
       "pdf"
@@ -2096,11 +2603,11 @@
   },
   {
     "id": "standard-dimensions",
-    "title": "Dimensions of the standard spaces",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/dimension",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1187,
+    "width": 933,
+    "height": 1188,
     "formats": [
       "png",
       "pdf"
@@ -2132,11 +2639,11 @@
   },
   {
     "id": "subspace-recognition",
-    "title": "Subspace or not, and which clause decides",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/subspaces",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1347,
+    "width": 933,
+    "height": 1312,
     "formats": [
       "png",
       "pdf"
@@ -2144,11 +2651,11 @@
   },
   {
     "id": "subspace-sums",
-    "title": "Sum and direct sum",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/dimension",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 724,
+    "width": 933,
+    "height": 705,
     "formats": [
       "png",
       "pdf"
@@ -2156,10 +2663,10 @@
   },
   {
     "id": "subspaces-by-type",
-    "title": "The four subspaces, by matrix type",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
     "section": "linear-algebra",
-    "width": 783,
+    "width": 933,
     "height": 651,
     "formats": [
       "png",
@@ -2168,11 +2675,11 @@
   },
   {
     "id": "svd-forms",
-    "title": "Three forms, one factorization",
+    "title": null,
     "source": "/linear-algebra/decompositions/svd",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 999,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -2183,8 +2690,8 @@
     "title": null,
     "source": "/linear-algebra/decompositions/svd",
     "section": "linear-algebra",
-    "width": 933,
-    "height": 791,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -2192,11 +2699,11 @@
   },
   {
     "id": "svd-readings",
-    "title": "What the SVD reveals",
+    "title": null,
     "source": "/linear-algebra/decompositions/svd",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1294,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
@@ -2204,23 +2711,36 @@
   },
   {
     "id": "system-shapes",
-    "title": "What the shape of A predicts",
+    "title": null,
     "source": "/linear-algebra/linear-systems/solvability",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 736,
+    "width": 48,
+    "height": 48,
     "formats": [
       "png",
       "pdf"
     ]
   },
   {
+    "id": "tangent-profile",
+    "title": null,
+    "source": "/trigonometry/graphs",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 580,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
     "id": "trace-properties",
-    "title": "Trace properties at a glance",
+    "title": null,
     "source": "/linear-algebra/matrix/trace",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1644,
+    "width": 933,
+    "height": 1574,
     "formats": [
       "png",
       "pdf"
@@ -2228,11 +2748,11 @@
   },
   {
     "id": "transformation-dictionary",
-    "title": "Transformation ↔ matrix",
+    "title": null,
     "source": "/linear-algebra/transformations/matrix-representation",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1291,
+    "width": 933,
+    "height": 1274,
     "formats": [
       "png",
       "pdf"
@@ -2240,13 +2760,51 @@
   },
   {
     "id": "transformation-signatures",
-    "title": "Recognising a family from its matrix",
+    "title": null,
     "source": "/linear-algebra/transformations/geometric",
     "section": "linear-algebra",
-    "width": 783,
+    "width": 933,
     "height": 1004,
     "formats": [
       "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "transformed-sine-profile",
+    "title": null,
+    "source": "/trigonometry/graphs",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 617,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "transpose-strip",
+    "title": null,
+    "source": "/linear-algebra/matrix/operations",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 184,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "triangle-method-steps",
+    "title": null,
+    "source": "/trigonometry/inverse-functions",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 790,
+    "formats": [
+      "png",
+      "svg",
       "pdf"
     ]
   },
@@ -2300,11 +2858,11 @@
   },
   {
     "id": "vector-operation-laws",
-    "title": "The eight laws the operations obey",
+    "title": null,
     "source": "/linear-algebra/vectors/basic-operations",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1554,
+    "width": 933,
+    "height": 1522,
     "formats": [
       "png",
       "pdf"
@@ -2312,11 +2870,11 @@
   },
   {
     "id": "vector-properties",
-    "title": "Properties at a glance",
+    "title": null,
     "source": "/linear-algebra/vectors/properties",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1461,
+    "width": 933,
+    "height": 1372,
     "formats": [
       "png",
       "pdf"
@@ -2324,11 +2882,11 @@
   },
   {
     "id": "vector-space-axioms",
-    "title": "The ten axioms",
+    "title": null,
     "source": "/linear-algebra/vector-spaces/axioms",
     "section": "linear-algebra",
-    "width": 783,
-    "height": 1804,
+    "width": 933,
+    "height": 1212,
     "formats": [
       "png",
       "pdf"

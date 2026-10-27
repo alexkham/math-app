@@ -12,6 +12,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -794,8 +796,138 @@ const schemas = {
     }),
   };
 
+  const sqrtProfile = {
+    header: {
+      kicker: 'parent function',
+      title: 'Profile of the square root',
+      formula: '$f(x) = \\sqrt{x}$',
+    },
+    quickStats: [
+      { n: '[0, ∞)', label: 'domain' },
+      { n: '1-to-1', label: 'invertible' },
+    ],
+    graph: {
+      xRange: [-2, 17.5], yRange: [-0.6, 4.6],
+      points: Array.from({ length: 351 }, (_, i) => {
+        const x = i * 0.05;
+        return [Number(x.toFixed(2)), Number(Math.sqrt(x).toFixed(4))];
+      }),
+      xTicks: [0, 1, 4, 9, 16], yTicks: [1, 2, 3, 4],
+    },
+    features: [
+      { id: 'start', points: [{ x: 0, y: 0 }] },
+      { id: 'keys', points: [{ x: 1, y: 1 }, { x: 4, y: 2 }, { x: 9, y: 3 }, { x: 16, y: 4 }] },
+    ],
+    intervals: [
+      { label: 'domain', spans: [
+        { from: null, to: 0, kind: 'soft', text: 'undefined' },
+        { from: 0, to: null, kind: 'pos', text: 'defined, x ≥ 0' },
+      ] },
+      { label: 'direction', spans: [
+        { from: 0, to: null, kind: 'pos', text: 'increasing', arrow: 'right' },
+      ] },
+      { label: 'concavity', spans: [
+        { from: 0, to: null, kind: 'neg', text: 'concave down' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'start', label: 'Starts at', value: '(0, 0)' },
+        { featureId: 'keys', label: 'Squares', value: '(1,1) to (16,4)' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Domain', value: '$[0, \\infty)$', sub: 'only non-negative inputs' },
+        { label: 'Range', value: '$[0, \\infty)$', sub: 'principal root is never negative' },
+        { label: 'Direction', value: 'increasing throughout' },
+        { label: 'Shape', value: 'concave down', sub: 'the rise slows' },
+        { label: 'One-to-one', value: 'yes', sub: 'passes the horizontal line test' },
+      ] },
+    ],
+  };
+
+  const cbrtProfile = {
+    header: {
+      kicker: 'parent function',
+      title: 'Profile of the cube root',
+      formula: '$f(x) = \\sqrt[3]{x}$',
+    },
+    quickStats: [
+      { n: 'ℝ', label: 'domain' },
+      { n: '1-to-1', label: 'invertible' },
+    ],
+    graph: {
+      xRange: [-9, 9], yRange: [-2.6, 2.6],
+      points: Array.from({ length: 361 }, (_, i) => {
+        const x = -9 + i * 0.05;
+        return [Number(x.toFixed(2)), Number(Math.cbrt(x).toFixed(4))];
+      }),
+      xTicks: [-8, -4, -1, 0, 1, 4, 8], yTicks: [-2, -1, 0, 1, 2],
+    },
+    features: [
+      { id: 'origin', points: [{ x: 0, y: 0 }] },
+      { id: 'keys', points: [{ x: -8, y: -2 }, { x: -1, y: -1 }, { x: 1, y: 1 }, { x: 8, y: 2 }] },
+    ],
+    intervals: [
+      { label: 'sign', spans: [
+        { from: null, to: 0, kind: 'neg', sign: '−' },
+        { from: 0, to: null, kind: 'pos', sign: '+' },
+      ] },
+      { label: 'direction', spans: [
+        { from: null, to: null, kind: 'pos', text: 'increasing everywhere', arrow: 'right' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'origin', label: 'Through', value: '(0, 0)' },
+        { featureId: 'keys', label: 'Perfect cubes', value: '(±1, ±1) (±8, ±2)' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Domain', value: '$(-\\infty, \\infty)$', sub: 'every real number has a real cube root' },
+        { label: 'Range', value: '$(-\\infty, \\infty)$' },
+        { label: 'Sign', value: 'preserved', sub: 'negative in, negative out' },
+        { label: 'One-to-one', value: 'yes', sub: 'inverse: the cubing function' },
+      ] },
+    ],
+  };
+
+  const radicalStrategyProfile = {
+    header: { kicker: 'the worked example', title: 'Profile of a transformed root', formula: 'f(x) = −√(x + 2) + 4' },
+    quickStats: [ { n: 'x ≥ −2', label: 'domain' }, { n: '√x', label: 'parent' } ],
+    graph: {
+      xRange: [-4, 17], yRange: [-1.6, 4.8],
+      points: Array.from({ length: 381 }, (_, i) => { const x = -2 + i * 0.05; return [Number(x.toFixed(2)), Number((-Math.sqrt(Math.max(0, x + 2)) + 4).toFixed(4))]; }),
+      xTicks: [-2, 0, 2, 7, 14], yTicks: [0, 1, 2, 3, 4],
+    },
+    features: [
+      { id: 'start', kind: 'warm', points: [{ x: -2, y: 4 }] },
+      { id: 'pt', points: [{ x: 2, y: 2 }] },
+      { id: 'zero', points: [{ x: 14, y: 0 }] },
+    ],
+    intervals: [
+      { label: 'domain', spans: [ { from: null, to: -2, kind: 'soft', text: 'undefined' }, { from: -2, to: null, kind: 'pos', text: 'defined, x ≥ −2' } ] },
+      { label: 'direction', spans: [ { from: -2, to: null, kind: 'neg', text: 'decreasing (reflected)' } ] },
+      { label: 'concavity', spans: [ { from: -2, to: null, kind: 'pos', text: 'concave up (reflected)' } ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'start', label: 'Starts at', value: '(−2, 4)', tone: 'warm' },
+        { featureId: 'pt', label: 'Point', value: '(2, 2)' },
+        { featureId: 'zero', label: 'x-intercept', value: '(14, 0)' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Parent', value: '$\\sqrt{x}$', sub: 'even index: start point, not centre' },
+        { label: 'Domain', value: '$x \\geq -2$', sub: 'from $x + 2 \\geq 0$' },
+        { label: 'Range', value: '$(-\\infty, 4]$', sub: 'the start is the highest point' },
+        { label: 'Transformations', value: 'left 2, reflect, up 4' },
+      ] },
+    ],
+  };
+
 return {
   props: {
+    radicalStrategyProfile,
+    cbrtProfile,
+    sqrtProfile,
     sectionsContent,
     introContent,
     obj7Table,
@@ -816,7 +948,7 @@ return {
    }
 
 // export default function FunctionsPage({seoData,sectionsContent , introContent}) {
-export default function FunctionsPage({seoData, sectionsContent, introContent, obj7Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function FunctionsPage({radicalStrategyProfile, cbrtProfile, sqrtProfile, seoData, sectionsContent, introContent, obj7Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -835,6 +967,16 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          `Everything above, in one picture: the graph of $f(x) = \\sqrt{x}$ with its starting point and the four perfect-square points, the strips for where it is defined, its direction and its bend, and the domain, range and one-to-one property beneath.`,
+          <DiagramFrameV2
+            key={'obj1-profile'}
+            id="square-root-profile"
+            title="Profile of the square root"
+            source="/algebra/roots/functions"
+          >
+            <FunctionAnalysis data={sqrtProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrameV2>,
+          `The perfect squares are the easy points to plot because their roots are whole numbers, and their spacing shows the slowing rise: each step of $1$ in height needs a longer run along $x$, from $1$ to $3$ to $5$ to $7$.`,
         ]
     },
     {
@@ -854,6 +996,16 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `The cube root's profile, side by side with what the square root allowed: $f(x) = \\sqrt[3]{x}$ is defined on the whole line, passes through the origin, and takes the perfect-cube points $(-8, -2)$, $(-1, -1)$, $(1, 1)$ and $(8, 2)$.`,
+          <DiagramFrameV2
+            key={'obj3-profile'}
+            id="cube-root-profile"
+            title="Profile of the cube root"
+            source="/algebra/roots/functions"
+          >
+            <FunctionAnalysis data={cbrtProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrameV2>,
+          `The sign strip is the rule above made visible: everything left of $0$ maps below the axis and everything right of it maps above, so the graph never leaves the lower-left and upper-right quarters of the plane.`,
         ]
     },
     {
@@ -930,6 +1082,16 @@ export default function FunctionsPage({seoData, sectionsContent, introContent, o
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+          `The example, carried one step further. The graph of $f(x) = -\\sqrt{x + 2} + 4$ starts at $(-2, 4)$, passes through $(2, 2)$, and crosses the $x$-axis where $\\sqrt{x + 2} = 4$, that is at $x = 14$. Its domain is $x \\geq -2$ and, since it only falls from its start, its range is $(-\\infty, 4]$.`,
+          <DiagramFrameV2
+            key={'obj10-profile'}
+            id="radical-strategy-profile"
+            title="Profile of −√(x + 2) + 4"
+            source="/algebra/roots/functions"
+          >
+            <FunctionAnalysis data={radicalStrategyProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrameV2>,
+          `Each step of the strategy shows up in the profile: the parent and its index fix the start point instead of a centre, the radicand fixes the domain strip, and the reflection over the $x$-axis turns the rising, concave-down $\\sqrt{x}$ into a falling, concave-up curve.`,
         ]
     },
     {

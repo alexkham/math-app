@@ -814,7 +814,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
@@ -1230,7 +1230,7 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-for all vectors $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c, d \\in \\mathbb{R}$. Setting $c = d = 1$ recovers additivity. Setting $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity. So the combined condition implies both individual conditions, and the converse is straightforward.
+for all vectors $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c, d \\in \\mathbb{R}$. Setting $c = d = 1$ recovers additivity. Setting $c = d = 0$ gives $T(\\mathbf{0}) = \\mathbf{0}$, and then setting $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity. So the combined condition implies both individual conditions, and the converse is straightforward.
 
 The one-step test extends to arbitrary linear combinations: if $T$ is linear, then
 
@@ -1279,7 +1279,12 @@ Every line of the computation holds for all choices of $\\mathbf{u}$, $\\mathbf{
 
 The fastest first check is $T(\\mathbf{0}) = \\mathbf{0}$. Every linear transformation sends $\\mathbf{0}$ to $\\mathbf{0}$, so if $T(\\mathbf{0}) \\neq \\mathbf{0}$, the function is immediately disqualified. This eliminates translations ($T(\\mathbf{v}) = \\mathbf{v} + \\mathbf{b}$), constant functions ($T(\\mathbf{v}) = \\mathbf{c}$), and any formula with a constant term.
 
-If $T(\\mathbf{0}) = \\mathbf{0}$ passes, test additivity or homogeneity with specific inputs. For $T(x, y) = (x^2, y)$: $T(1, 0) + T(1, 0) = (1, 0) + (1, 0) = (2, 0)$, but $T((1, 0) + (1, 0)) = T(2, 0) = (4, 0) \\neq (2, 0)$. One failure is enough.
+If $T(\\mathbf{0}) = \\mathbf{0}$ passes, test additivity or homogeneity with specific inputs.
+
+@academic[example:Example
+For $T(x, y) = (x^2, y)$: $T(1, 0) + T(1, 0) = (1, 0) + (1, 0) = (2, 0)$, but $T((1, 0) + (1, 0)) = T(2, 0) = (4, 0) \\neq (2, 0)$.]@
+
+One failure is enough.
 
 For $T(x) = x + 1$: $T(0) = 1 \\neq 0$. Done — no need to check anything else.
 
@@ -1458,7 +1463,7 @@ const faqQuestions = {
   },
   obj2: {
     question: "Is the single-line linearity condition shorthand for the two separate ones?",
-    answer: "It is genuinely equivalent rather than an abbreviation. Setting $c = d = 1$ recovers additivity and setting $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity, so the one line implies both and both imply it. Read it as a hypothesis to be tested about a particular $T$, not an identity to be simplified.",
+    answer: "It is genuinely equivalent rather than an abbreviation. Setting $c = d = 1$ recovers additivity, and setting $c = d = 0$ (which gives $T(\\mathbf{0}) = \\mathbf{0}$) and then $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity, so the one line implies both and both imply it. Read it as a hypothesis to be tested about a particular $T$, not an identity to be simplified.",
     sectionId: "notation"
   },
   obj3: {

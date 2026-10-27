@@ -623,9 +623,11 @@ obj11: {
   title: `Combining Rules`,
   content: `@academic[rule_plain:Divisibility by a composite number can be tested by checking its coprime factors separately.]@
 
-Is $2{,}340$ divisible by $12$? Since $12 = 4 \\times 3$ and $\\gcd(4, 3) = 1$, check each factor independently. Last two digits: $40$, and $40 \\div 4 = 10$ exactly — divisible by $4$. Digit sum: $2 + 3 + 4 + 0 = 9$, divisible by $3$. Both conditions hold, so $12 \\mid 2340$.
+@academic[example:Example
+Is $2{,}340$ divisible by $12$? Since $12 = 4 \\times 3$ and $\\gcd(4, 3) = 1$, check each factor independently. Last two digits: $40$, and $40 \\div 4 = 10$ exactly — divisible by $4$. Digit sum: $2 + 3 + 4 + 0 = 9$, divisible by $3$. Both conditions hold, so $12 \\mid 2340$.]@
 
-Is $8{,}910$ divisible by $15$? Since $15 = 5 \\times 3$ and $\\gcd(5, 3) = 1$, check both. Last digit: $0$ — divisible by $5$. Digit sum: $8 + 9 + 1 + 0 = 18$ — divisible by $3$. Both pass, so $15 \\mid 8910$.
+@academic[example:Example
+Is $8{,}910$ divisible by $15$? Since $15 = 5 \\times 3$ and $\\gcd(5, 3) = 1$, check both. Last digit: $0$ — divisible by $5$. Digit sum: $8 + 9 + 1 + 0 = 18$ — divisible by $3$. Both pass, so $15 \\mid 8910$.]@
 
 The coprimality condition is essential. Testing divisibility by $12$ as "$\\text{divisible by } 2$ and $\\text{divisible by } 6$" is not sufficient, because $\\gcd(2, 6) = 2 \\neq 1$. The factorization must split $12$ into coprime components — $4$ and $3$ — for the combined test to work.`,
   before: ``,

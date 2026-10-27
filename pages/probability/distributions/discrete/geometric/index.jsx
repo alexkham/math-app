@@ -864,6 +864,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -954,6 +955,27 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // geometric distribution") — template A, definition last. Running instance:
+    // rolling a fair die until the first 6, p = 1/6. Old obj1 text is kept in
+    // sectionsContent.obj1, unused; its paragraphs, formula box and link,
+    // pitfall aside, the example box, both link chips, the geoMemory demo frame
+    // with its line and the punchline are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciWaitTable = ciTableOpen(['first 6 on roll k', 'what must happen', 'probability']) +
+      ciRow(['1', '6', '1/6 ≈ 0.167']) +
+      ciRow(['2', 'not 6, then 6', '(5/6)(1/6) ≈ 0.139'], { shade: true }) +
+      ciRow(['3', 'not 6, not 6, then 6', '(5/6)²(1/6) ≈ 0.116']) +
+      ciRow(['4', 'three misses, then 6', '(5/6)³(1/6) ≈ 0.096'], { shade: true }) +
+      ciRow(['k', 'k − 1 misses, then 6', '(5/6)ᵏ⁻¹(1/6)'], { last: true, color: '#2563EB', cols: [2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1665,6 +1687,10 @@ const geometricExplanations = {
     vlines: [{ x: 2.5, label: 'after 2 failures' }],
     notes: [{ x: 6.8, y: 0.3, text: 'blue: P(X = k)', pos: 'e', color: 'f' }, { x: 6.8, y: 0.27, text: 'amber: given X > 2', pos: 'e', color: 'r' }, { x: 6.8, y: 0.24, text: 'same bars, 2 steps later', pos: 'e' }],
     caption: 'After failures the count restarts: no memory of the past' };
+  const conceptIntroFigures = {
+    waitTable: ciWaitTable,
+  };
+
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.geometric,
@@ -1695,6 +1721,7 @@ const geometricExplanations = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          geometricExplanations,
@@ -1720,10 +1747,87 @@ export default function GeometricDistributionPage({
   geometricExplanations,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Some experiments are repeated until something finally happens.`,
+        content: [
+          `Roll a die until a 6 comes up, shoot free throws until one goes in, call customers until one says yes. Nobody fixes the number of attempts in advance; the question is how many it takes.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Rolling a fair die until the first 6: the first roll succeeds with probability 1/6, and each later roll is a little less likely to be the one.`,
+        content: [
+          `For the first 6 to arrive on roll $k$, the first $k - 1$ rolls must all miss and roll $k$ must hit.`,
+          ciTable('waitTable'),
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `Those probabilities are forced: each miss has probability 5/6, the rolls are independent, so the factors multiply.`,
+        content: [
+          `Every row is $k - 1$ factors of $\\frac{5}{6}$ followed by one factor of $\\frac{1}{6}$. Nothing else could happen — the first success has to come after a run of failures, and independence turns that run into a product.`,
+          `Each trial is a [Bernoulli experiment](!/probability/distributions/discrete#bernoulli): two outcomes, constant success probability, and [independence](!/probability/independence) between trials. The [random variable](!/probability/random-variables) counts when success occurs, not how many successes occur in total. This makes the geometric distribution fundamentally about waiting time rather than accumulation.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [geometric distribution](!/probability/definitions#geometric_distribution) with success probability $p$ is the distribution of the number of independent trials needed to get the first success: $P(X = k) = (1 - p)^{k-1} p$ for $k = 1, 2, 3, \\dots$`,
+        footer: `So the number of rolls until the first 6 is geometric with $p = \\frac{1}{6}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a waiting-time distribution: X counts when the first success comes, not how many successes there are.`,
+        content: [
+          `The geometric distribution serves to count the number of trials required until the first success occurs. Unlike the [binomial distribution](!/probability/distributions/discrete/binomial), the number of trials is not fixed in advance. Instead, trials continue indefinitely until success happens for the first time.`,
+          sectionsContent.links.decide,
+          sectionsContent.obj1.example,
+          sectionsContent.links.example,
+        ],
+      },
+      {
+        id: 'memoryless',
+        lead: `Its signature feature: a run of failures changes nothing about the wait still ahead.`,
+        content: [
+          `A defining characteristic of the geometric distribution is the memoryless property: the probability that success occurs in future trials does not depend on how many failures have already occurred. The process effectively "restarts" after each failure.`,
+          `In symbols:`,
+          `@academic[formula_callout:Geometric Memoryless
+$$P(X > m + n \\mid X > m) = P(X > n)$$
+/probability/formulas#geometric_memoryless]@`,
+          `@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@`,
+          `@academic[pitfall,aside:true,width:35%:Expecting a success to be due
+For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chance that flip six is a tail too makes heads look $\\frac{63}{64}$ likely. Given the five tails, $P(X = 6 \\mid X > 5) = \\frac{1}{2}$, as on the first flip.
+[Read more](!#pitfalls)]@`,
+          `Read the identity with $m$ as the number of trials that have already failed and $n$ as a number of trials still to come. The left side is the chance of waiting more than $n$ further trials after those failures; the right side is the chance of waiting more than $n$ trials from the very start. The two are equal for every $m$: the trials already played are spent, and each new trial succeeds with the same probability $p$.`,
+          <div key={'unit-geoMemory'} dangerouslySetInnerHTML={{ __html: demoUnits.geoMemory }} />,
+          `This is the discrete counterpart of the exponential distribution's memoryless property.`,
+          `@academic[punchline:However many trials have failed, the wait still ahead is a fresh geometric wait with the same $p$.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What generalizes and what was particular — and one convention to check.`,
+        content: `Any success probability $p$ between $0$ and $1$ works the same way; $\\frac{1}{6}$ was particular to the die. Some books count the failures before the first success instead of the trials, which shifts everything by one: $Y = X - 1$ takes the values $0, 1, 2, \\dots$ Check which count a formula uses before applying it; this page counts trials, as the [probability mass function](!/probability/distributions/discrete/geometric#4) section shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the parameter, the PMF and CDF, the mean, variance, mode and median, and the moment generating function.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1740,13 +1844,7 @@ export default function GeometricDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-geoMemory'} dangerouslySetInnerHTML={{ __html: demoUnits.geoMemory }} />,
-          `This is the discrete counterpart of the exponential distribution's memoryless property.`,
-          sectionsContent.links.decide,
-          sectionsContent.obj1.example,
-          sectionsContent.links.example,
-          `@academic[punchline:However many trials have failed, the wait still ahead is a fresh geometric wait with the same $p$.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
 

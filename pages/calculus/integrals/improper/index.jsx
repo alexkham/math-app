@@ -423,7 +423,10 @@ Since $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x^2}$ and $\\int_1^{\\infty} \\dfrac{1}{
 @academic[fact,aside:true,width:35%:Finite volume, infinite surface area
 Spinning $y = \\frac{1}{x}$ for $x \\geq 1$ about the $x$-axis gives a horn of volume $\\pi \\int_1^{\\infty} \\frac{dx}{x^2} = \\pi$. Its surface integrand $\\frac{2\\pi}{x}\\sqrt{1 + \\frac{1}{x^4}}$ lies above $\\frac{2\\pi}{x}$, so by comparison its surface area is infinite (Torricelli, 1644).]@
 
-The second half of the test runs the other way. To show that an integral diverges, look for a smaller integrand whose integral is already known to diverge, usually $\\frac{1}{x}$ or another power with $p \\leq 1$. For example, $\\sqrt{x^2 + 1} > x$, so $\\frac{\\sqrt{x^2 + 1}}{x^2} > \\frac{1}{x}$ on $[1, \\infty)$, and $\\int_1^{\\infty} \\frac{\\sqrt{x^2 + 1}}{x^2}\\, dx$ diverges by comparison with $\\int_1^{\\infty} \\frac{1}{x}\\, dx$.
+The second half of the test runs the other way. To show that an integral diverges, look for a smaller integrand whose integral is already known to diverge, usually $\\frac{1}{x}$ or another power with $p \\leq 1$.
+
+@academic[example:Example
+For example, $\\sqrt{x^2 + 1} > x$, so $\\frac{\\sqrt{x^2 + 1}}{x^2} > \\frac{1}{x}$ on $[1, \\infty)$, and $\\int_1^{\\infty} \\frac{\\sqrt{x^2 + 1}}{x^2}\\, dx$ diverges by comparison with $\\int_1^{\\infty} \\frac{1}{x}\\, dx$.]@
 
 Nothing here needs an antiderivative. The square root never has to be integrated: one inequality between the integrands settles the verdict, as long as it holds for every $x \\geq 1$.
 `,

@@ -1191,6 +1191,9 @@ Complex numbers expressed differently may occupy the same point. The number $\\f
   before: ``,
   content: `Points in the plane sit motionless at fixed locations. Vectors capture something more dynamic — they encode magnitude and direction, representing displacement rather than mere position. Complex numbers admit both interpretations, and the vector viewpoint proves especially powerful for understanding arithmetic operations.
 
+@academic[fact,aside:true,width:35%:A surveyor drew the plane first
+Caspar Wessel, a surveyor in Denmark, added such arrows tip to tail and multiplied them by adding their angles in a paper read in 1797. Written in Danish, it went unnoticed for a century, so English names the plane after Argand (1806) and German after Gauss (1831).]@
+
 The complex number $z = a + bi$ can be viewed as an arrow beginning at the origin and ending at the point $(a, b)$. The horizontal component $a$ describes rightward displacement; the vertical component $b$ describes upward displacement. Together they determine both where the vector points and how long it extends. The number $4 + 3i$ becomes an arrow reaching to $(4, 3)$, angled upward and to the right with a length computable from its components.
 
 Vector addition follows the parallelogram rule, also known as tip-to-tail addition. Given two vectors $z_1$ and $z_2$, place the tail of $z_2$ at the head of $z_1$. The sum $z_1 + z_2$ stretches from the origin to the final endpoint. Algebraically, $(a + bi) + (c + di) = (a + c) + (b + d)i$ adds components separately — and geometrically, this matches exactly how vectors combine through the parallelogram construction.
@@ -1221,7 +1224,7 @@ Concrete examples illustrate the reflection. The number $z = 2 + 3i$ sits at $(2
 Placing the conjugate of $2 + 3i$ at $(-2, 3)$ negates the real part instead; that point is $-2 + 3i = -\\bar{z}$. Only the imaginary part flips: $\\bar{z} = 2 - 3i$, at $(2, -3)$.
 [Read more](!#pitfalls)]@
 
-The reflection perspective explains several algebraic facts geometrically. Taking the conjugate twice returns to the original point — reflecting across the same mirror twice restores every point to its starting position, confirming $\\overline{\\bar{z}} = z$. A number equals its own conjugate precisely when reflection leaves it unchanged, which happens only for points on the mirror itself — the real numbers. A number equals the negative of its conjugate when it lies on the imaginary axis, equidistant above and below the origin.`,
+The reflection perspective explains several algebraic facts geometrically. Taking the conjugate twice returns to the original point — reflecting across the same mirror twice restores every point to its starting position, confirming $\\overline{\\bar{z}} = z$. A number equals its own conjugate precisely when reflection leaves it unchanged, which happens only for points on the mirror itself — the real numbers. A number equals the negative of its conjugate when it lies on the imaginary axis.`,
   after: ``,
   link: '',
 },
@@ -1242,9 +1245,11 @@ The question "Is $3 + 2i$ greater than $1 + 5i$?" has no meaningful answer. Neit
 Writing $2i > i$ because $2 > 1$ leads to nonsense: subtracting $i$ gives $i > 0$, and multiplying by this positive $i$ gives $i^2 > 0$, that is $-1 > 0$. Only real quantities compare, such as the moduli $|2i| = 2 > |i| = 1$.
 [Read more](!#pitfalls)]@
 
-The geometry reveals why ordering fails. Real numbers occupy a one-dimensional line where direction determines comparison — rightward means greater, leftward means lesser. Complex numbers fill a two-dimensional plane where points spread in all directions. No single direction consistently represents "greater than" without privileging some numbers arbitrarily over others. Should $3 + 2i$ exceed $1 + 5i$ because it lies further right, or should $1 + 5i$ exceed $3 + 2i$ because it lies further up? Neither choice maintains logical consistency across all pairs.
+The geometry reveals why ordering fails. Real numbers occupy a one-dimensional line where direction determines comparison — rightward means greater, leftward means lesser. Complex numbers fill a two-dimensional plane where points spread in all directions. No single direction consistently represents "greater than" without privileging some numbers arbitrarily over others. Should $3 + 2i$ exceed $1 + 5i$ because it lies further right, or should $1 + 5i$ exceed $3 + 2i$ because it lies further up? Either choice can be made consistent on its own, but no such ordering agrees with multiplication.
 
-One meaningful comparison survives: the [modulus](!/complex-numbers/absolute-value) provides a measure of size. The modulus $|z| = \\sqrt{a^2 + b^2}$ gives the distance from the origin to the point. We can legitimately say $|3 + 4i| = 5$ exceeds $|1 + i| = \\sqrt{2}$ because $5 > \\sqrt{2}$. But modulus compares magnitudes, not the numbers themselves. Multiple complex numbers share the same modulus — every point on a circle centered at the origin has identical modulus — so comparing distances cannot substitute for a full ordering.`,
+One meaningful comparison survives: the [modulus](!/complex-numbers/absolute-value) provides a measure of size. The modulus $|z| = \\sqrt{a^2 + b^2}$ gives the distance from the origin to the point. We can legitimately say $|3 + 4i| = 5$ exceeds $|1 + i| = \\sqrt{2}$ because $5 > \\sqrt{2}$. But modulus compares magnitudes, not the numbers themselves. Multiple complex numbers share the same modulus — every point on a circle centered at the origin has identical modulus — so comparing distances cannot substitute for a full ordering.
+
+@academic[punchline:Moduli of complex numbers can be compared, but no ordering of the numbers themselves respects their arithmetic.]@`,
   after: ``,
   link: '',
 },
@@ -1256,6 +1261,9 @@ One meaningful comparison survives: the [modulus](!/complex-numbers/absolute-val
   content: `Arithmetic operations on complex numbers translate into geometric actions on the plane. This correspondence provides visual intuition that algebraic manipulation alone cannot offer, and it foreshadows the deeper connections explored in [trigonometric](!/complex-numbers/trigonometric-form) and [exponential](!/complex-numbers/exponential-form) forms.
 
 Addition performs vector combination. Given $z_1$ and $z_2$ as arrows from the origin, their sum $z_1 + z_2$ completes the parallelogram formed by the two arrows. Equivalently, translate $z_2$ so its tail sits at the head of $z_1$; the sum extends from the origin to the new head of $z_2$. This tip-to-tail construction matches the component-wise addition $(a + c) + (b + d)i$ with perfect precision.
+
+@academic[fact,aside:true,width:35%:A treasure map without its gallows
+In a puzzle from Gamow's 1947 book, the map starts at a gallows that no longer stands: walk to an oak, turn a right angle, walk as far again; repeat at a pine, turning the other way; dig midway. With the turns written as multiplying by $i$ and $-i$, the gallows cancels from the sum, so the treasure is found anyway.]@
 
 Subtraction measures displacement between points. The difference $z_1 - z_2$ represents the vector pointing from $z_2$ to $z_1$. Its modulus $|z_1 - z_2|$ gives the distance between the two complex numbers. In navigation terms, subtraction answers "how far and in what direction must I travel from $z_2$ to reach $z_1$?"
 

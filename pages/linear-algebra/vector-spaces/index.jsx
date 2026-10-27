@@ -992,9 +992,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 
 
 export async function getStaticProps(){
@@ -1210,6 +1211,24 @@ const summaryTable = `
 `
 
 // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "What a Vector Space Is") — template I,
+// naming. Running instance: plane vectors, polynomials of degree at most 2
+// and 2 × 2 matrices, each added and scaled. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its fact aside and two paragraphs are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPlacesTable = ciTableOpen(['objects', 'adding two', 'scaling by 3', 'the zero object']) +
+  ciRow(['vectors in the plane', '(1, 2) + (3, 0) = (4, 2)', '3 · (1, 2) = (3, 6)', '(0, 0)']) +
+  ciRow(['polynomials of degree ≤ 2', '(x² + 1) + (2x − 3) = x² + 2x − 2', '3 · (x² + 1) = 3x² + 3', 'the zero polynomial'], { shade: true }) +
+  ciRow(['2 × 2 matrices', 'add entry by entry', 'multiply every entry by 3', 'the zero matrix'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1514,6 +1533,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    placesTable: ciPlacesTable,
+  };
+
   const demoUnits = {
     // Hub page: one unit, on the section where the two ideas the rest
     // of the cluster depends on are finally put together.
@@ -1578,6 +1601,7 @@ return {
     vectorSpaceExamplesOutline,
     vectorSpaceChainLevels,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj7Table,
@@ -1598,9 +1622,65 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits}) {
+export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `You already add and scale things that are not arrows at all.`,
+        content: [
+          `Adding two polynomials term by term, or doubling every entry of a matrix, feels just like adding and stretching arrows in the plane. The objects look different; the moves do not.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Plane vectors, polynomials and matrices can all be added, scaled, and have a zero.`,
+        content: [
+          `Each kind of object has its own way of writing a sum and a multiple, but the rules those operations follow are the same.`,
+          ciTable('placesTable'),
+        ],
+      },
+      {
+        id: 'shared',
+        lead: `What they share: two operations, addition and scaling, obeying the same rules.`,
+        content: [
+          `In all three, order does not matter when adding, there is a zero that changes nothing, every object has an opposite, and scaling spreads over sums. Once those rules hold, it no longer matters what the objects look like.`,
+          `Vectors in $\\mathbb{R}^n$ can be added and scaled. So can polynomials, [matrices](!/linear-algebra/matrix), and continuous functions. A vector space is the formal name for any collection of objects where these two operations — addition and scalar multiplication — satisfy ten algebraic [axioms](!/linear-algebra/vector-spaces/axioms): closure, commutativity, associativity, the existence of a zero element, additive inverses, and the expected distributive and identity laws for scalars.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [vector space](!/linear-algebra/definitions#vector_space) is a set of objects with an addition and a scalar multiplication that satisfy the ten vector space axioms; its elements are called vectors.`,
+        footer: `So the plane, the polynomials of degree at most $2$ and the $2 \\times 2$ matrices are all vector spaces.`,
+      },
+      {
+        id: 'kind',
+        lead: `A vector space is a whole collection with its rules — and anything in it counts as a vector.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:Written in 1888, taken up in the 1920s
+Peano gave the first axiomatic definition of a vector space in 1888 and already noted that the polynomials of degree at most $n$ form a space of $n + 1$ dimensions. His book had little influence, and the axioms caught on only after Banach's 1920 dissertation.]@`,
+          `The objects in a vector space are called vectors regardless of whether they look like arrows, columns of numbers, polynomials, or functions. The power of the abstraction is that every theorem proved from the axioms alone applies to every vector space simultaneously. [Linear independence](!/linear-algebra/vector-spaces/linear-independence), [span](!/linear-algebra/vector-spaces/span), basis, [dimension](!/linear-algebra/vector-spaces/dimension), and [subspaces](!/linear-algebra/vector-spaces/subspaces) are all defined from the axioms, and their properties carry over to any setting where the axioms hold.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What the name buys: prove a fact once from the rules, and it holds in every vector space.`,
+        content: `Span, independence, basis and dimension mean the same thing for polynomials as for arrows, because they are built from the operations alone. But not every set of objects qualifies — the line $x + y = 1$ in the plane fails, since it misses $(0, 0)$ — and the [axioms](!/linear-algebra/vector-spaces#2) section shows how to check.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the axioms, subspaces, span, linear independence, basis, dimension, the four fundamental subspaces, and coordinates and change of basis.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1608,7 +1688,7 @@ export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpac
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

@@ -403,7 +403,8 @@ Finding the first term: if $a_{12} = 50$ and $d = 4$, then $50 = a_1 + 11 \\cdot
 
 Finding the position of a term: if $a_1 = 7$, $d = 5$, and some term equals $52$, then $52 = 7 + (n-1) \\cdot 5$, so $n - 1 = 9$ and $n = 10$. The value $52$ is the $10$th term. If the equation yields a non-integer $n$, the value does not appear in the sequence.
 
-When two non-consecutive terms are given — say $a_3 = 11$ and $a_9 = 35$ — write both in terms of $a_1$ and $d$: $a_1 + 2d = 11$ and $a_1 + 8d = 35$. Subtracting gives $6d = 24$, so $d = 4$, and back-substituting gives $a_1 = 3$.
+@academic[example:Example
+When two non-consecutive terms are given — say $a_3 = 11$ and $a_9 = 35$ — write both in terms of $a_1$ and $d$: $a_1 + 2d = 11$ and $a_1 + 8d = 35$. Subtracting gives $6d = 24$, so $d = 4$, and back-substituting gives $a_1 = 3$.]@
 
 @academic[fact,aside:true,width:35%:One square brings infinitely many
 If an arithmetic sequence of whole numbers with $d > 0$ contains one perfect square $x^2$, it contains infinitely many. The reason: $(x + d)^2 = x^2 + d(2x + d)$, so $(x + d)^2$ lies a whole number of steps further along, and the same step repeats forever.]@
@@ -473,7 +474,8 @@ $$S_n = \\frac{n}{2}(2a_1 + (n-1)d)$$]@
 
 This version is useful when $a_n$ is not known directly.
 
-The sum of the first $100$ natural numbers, famously attributed to the young Gauss: $a_1 = 1$, $a_{100} = 100$, so $S_{100} = \\frac{100}{2}(1 + 100) = 5050$.
+@academic[example:Example
+The sum of the first $100$ natural numbers, famously attributed to the young Gauss: $a_1 = 1$, $a_{100} = 100$, so $S_{100} = \\frac{100}{2}(1 + 100) = 5050$.]@
 
 @academic[fact,aside:true,width:35%:Only powers of $2$ resist
 Every whole number except $1, 2, 4, 8, 16, \\ldots$ is a sum of two or more consecutive positive integers. Such a sum is $\\frac{k(2a + k - 1)}{2}$, where one of $k$ and $2a + k - 1$ is odd and larger than $1$, so a power of $2$ can never be one.]@
@@ -504,7 +506,8 @@ This follows directly from the constant-difference property: since $a_n - a_{n-1
 
 Inserting arithmetic means between two values is the reverse problem: given endpoints $a$ and $b$, place $k$ terms between them so that the resulting $k + 2$ values form an arithmetic sequence. The common difference must be $d = \\frac{b - a}{k + 1}$, and the inserted terms are $a + d, a + 2d, \\ldots, a + kd$.
 
-For example, inserting $3$ arithmetic means between $5$ and $25$ requires $d = \\frac{25 - 5}{4} = 5$, producing the sequence $5, 10, 15, 20, 25$.
+@academic[example:Example
+For example, inserting $3$ arithmetic means between $5$ and $25$ requires $d = \\frac{25 - 5}{4} = 5$, producing the sequence $5, 10, 15, 20, 25$.]@
 
 @academic[pitfall,aside:true,width:35%:Dividing by the number of means
 Dividing $25 - 5$ by $3$ gives $d = \\frac{20}{3}$ and the list $5, \\frac{35}{3}, \\frac{55}{3}, 25$, with only two means. Three means make four steps: $d = \\frac{20}{4} = 5$.

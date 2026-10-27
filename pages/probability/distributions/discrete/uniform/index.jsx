@@ -869,6 +869,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 export async function getStaticProps(){
 
@@ -948,6 +949,34 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // Discrete Uniform distribution") — template G, exclusion. Running
+    // instance: one roll of a fair die, among five candidate experiments. Old
+    // obj1 text is kept in sectionsContent.obj1, unused; its paragraphs, fact
+    // aside, example box, both link chips, the duDice demo frame with its line
+    // and the punchline are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciCandTable = ciTableOpen(['experiment', 'possible values']) +
+      ciRow(['roll one fair die', '1 to 6']) +
+      ciRow(['roll two fair dice, add them', '2 to 12'], { shade: true }) +
+      ciRow(['roll a die loaded toward 6', '1 to 6']) +
+      ciRow(['draw a card from a shuffled deck, read its rank', '1 (ace) to 13 (king)'], { shade: true }) +
+      ciRow(['flip three fair coins, count heads', '0 to 3'], { last: true }) +
+      '</tbody></table>'
+    const ciSortTable = ciTableOpen(['experiment', 'probabilities', 'all equal?']) +
+      ciRow(['one fair die', '1/6 each', 'yes'], { color: '#2563EB', cols: [2] }) +
+      ciRow(['sum of two dice', '1/36 for 2, up to 6/36 for 7', 'no'], { shade: true }) +
+      ciRow(['loaded die', '6 more likely than the rest', 'no']) +
+      ciRow(['card rank', '4/52 = 1/13 each', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+      ciRow(['heads in three flips', '1/8, 3/8, 3/8, 1/8', 'no'], { last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1642,6 +1671,11 @@ const discreteUniformExplanations = {
   const fpDuWidth = { ...base, svgTitle: 'Two discrete uniforms centred at 5: three values with variance 2/3, nine values with variance 20/3', xRange: [-0.5, 10], yRange: [0, 0.4], xLetter: 'x', yBars: duWidthBars,
     notes: [{ x: 6.6, y: 0.37, text: 'amber: n = 3, Var ≈ 0.67', pos: 'e', color: 'r' }, { x: 6.6, y: 0.34, text: 'blue: n = 9, Var ≈ 6.67', pos: 'e', color: 'f' }, { x: 6.6, y: 0.31, text: 'both: mean 5', pos: 'e' }],
     caption: '3 times as many values, 10 times the variance' };
+  const conceptIntroFigures = {
+    candTable: ciCandTable,
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.discreteUniform,
@@ -1672,6 +1706,7 @@ const discreteUniformExplanations = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          discreteUniformExplanations,
@@ -1697,10 +1732,83 @@ export default function DiscreteUniformDistributionPage({
   discreteUniformExplanations,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Five experiments, each with a short list of whole-number results. In which of them is every result equally likely?`,
+        content: [
+          `All five produce a value from a known finite range, and several involve fair dice or coins, so it is tempting to say "all of them".`,
+          ciTable('candTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Only two spread their probability evenly: the single fair die and the card rank.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `The loaded die fails on symmetry; the sum and the head count fail because they combine several picks.`,
+        content: [
+          `The loaded die is one pick, but its mechanism prefers one face. The sum of two dice and the number of heads are built from fair parts, yet some totals can be made in more ways than others — a total of 7 in six ways, a total of 2 in one. The card rank passes even though the deck has 52 cards, because every rank appears exactly four times.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: a single pick from a finite set, by a mechanism that treats every value alike.`,
+        content: [
+          `Think of a raffle drum full of identical tickets: nothing about a ticket makes it easier or harder to draw.`,
+          `The discrete uniform distribution represents situations where a random experiment produces outcomes from a finite set, and every outcome is equally likely. There is no preference, weighting, or bias toward any value in the set. The defining feature is not randomness alone, but symmetry: the mechanism that generates outcomes treats all possibilities identically.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [discrete uniform distribution](!/probability/definitions#uniform_distribution_discrete) on the integers $a, a + 1, \\dots, b$ gives each of the $n = b - a + 1$ values the same probability: $P(X = k) = \\dfrac{1}{n}$.`,
+        footer: `So one roll of a fair die is discrete uniform on $1$ to $6$, with $P(X = k) = \\frac{1}{6}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is the simplest discrete distribution: fixed entirely by its range.`,
+        content: [
+          `This distribution is appropriate when the experiment consists of one selection from a known finite collection and there is no additional structure such as repeated trials, success–failure outcomes, or [dependence](!/probability/independence) between selections. Once the range of possible values is fixed, the distribution is fully determined. There are no hidden dynamics — probability is spread evenly across the entire support.`,
+          sectionsContent.links.decide,
+          sectionsContent.obj1.example,
+          sectionsContent.links.example,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rejected experiments are not far away: they are built from uniform pieces.`,
+        content: [
+          `The 36 ordered pairs of two fair dice are themselves discrete uniform; only adding them up makes the totals uneven.`,
+          `Due to this simplicity, the discrete uniform distribution often serves as a baseline model. More complex [discrete distributions](!/probability/distributions/discrete) can frequently be understood as deviations from uniformity caused by repetition, conditioning, or structural constraints.`,
+          `@academic[fact,aside:true,width:35%:No loading makes the sum flat
+However two dice are weighted, their total is never uniform on $2$ to $12$. With face probabilities $p_i$ and $q_i$, a flat total needs $p_1 q_1 = p_6 q_6 = \\frac{1}{11}$, and then $P(7) \\geq p_1 q_6 + p_6 q_1 \\geq 2\\sqrt{\\frac{1}{11} \\cdot \\frac{1}{11}} = \\frac{2}{11}$.]@`,
+          `Two dice show the effect of repetition. Each die on its own is uniform on $1$ to $6$, but their total runs from $2$ to $12$ and crowds toward the middle, because a total of $7$ can be made in six ways and a total of $2$ in only one. A natural question is whether some other weighting of the faces could bring the totals back to equal footing.`,
+          <div key={'unit-duDice'} dangerouslySetInnerHTML={{ __html: demoUnits.duDice }} />,
+          `Flat over single picks, uneven over their sums: one source of the other discrete shapes.`,
+          `@academic[punchline:A discrete uniform is pure symmetry: once the range is fixed, nothing else is left to choose.]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the parameters, the PMF and CDF, the mean, variance, mode and median, and further properties.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1717,13 +1825,7 @@ export default function DiscreteUniformDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-           sectionsContent.obj1.content,
-                  <div key={'unit-duDice'} dangerouslySetInnerHTML={{ __html: demoUnits.duDice }} />,
-           `Flat over single picks, uneven over their sums: one source of the other discrete shapes.`,
-          sectionsContent.links.decide,
-          sectionsContent.obj1.example,
-          sectionsContent.links.example,
-          `@academic[punchline:A discrete uniform is pure symmetry: once the range is fixed, nothing else is left to choose.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
      {

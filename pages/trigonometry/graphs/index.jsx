@@ -1043,6 +1043,8 @@ import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFuncti
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
 export async function getStaticProps(){
@@ -1417,6 +1419,9 @@ Five key points define one period of the sine curve:
 - $\\left(\\frac{3\\pi}{2}, -1\\right)$ — minimum
 - $(2\\pi, 0)$ — ending zero
 
+@academic[fact,aside:true,width:35%:A slanted cut through a paper tube
+Roll a sheet of paper into a tube, cut through it with one straight slanted cut, and unroll it: the cut edge is a sine wave. Around the tube the height of the cut rises and falls as the sine of the angle, and unrolling turns each angle $\\theta$ into a distance $r\\theta$ along the paper.]@
+
 These five points, evenly spaced at intervals of $\\frac{\\pi}{2}$, are the skeleton of the graph. Connecting them with a smooth curve (not straight lines — the curve has a specific rounded shape, concave down from $0$ to $\\pi$ and concave up from $\\pi$ to $2\\pi$) produces the sine wave.
 
 The graph confirms several [properties](!/trigonometry/properties) at a glance. The period is $2\\pi$ — the horizontal length of one complete cycle. The amplitude is $1$ — the vertical distance from the midline ($y = 0$) to either extreme. The function is odd: the graph is symmetric about the origin, meaning the portion for negative $x$ is a $180°$ rotation of the portion for positive $x$. The zeros occur at every integer multiple of $\\pi$: $\\ldots, -2\\pi, -\\pi, 0, \\pi, 2\\pi, \\ldots$`,
@@ -1521,6 +1526,9 @@ For tangent and cotangent, the form is the same — $y = A\\tan(Bx - C) + D$ —
 @academic[rule_plain:For $y = A\\sin(Bx - C) + D$, the amplitude is $|A|$.]@
 
 When $|A| > 1$, the wave is stretched vertically — it oscillates over a larger range. When $0 < |A| < 1$, the wave is compressed — it oscillates over a smaller range. The maximum value of the function is $D + |A|$ and the minimum is $D - |A|$.
+
+@academic[fact,aside:true,width:35%:Silence from an upside-down copy
+Noise-cancelling headphones pick up the outside sound with a microphone and play it back with $A = -1$. Every peak of the noise meets an equal valley, since $\\sin x + (-\\sin x) = 0$, so the two cancel; steady low hums cancel best, because a tiny electronic delay is a small part of their long period.]@
 
 When $A$ is negative, the graph is reflected across the midline. The wave is inverted: what was a peak becomes a valley, and vice versa. For sine, this means the graph starts by going downward instead of upward. For cosine, it starts at a minimum instead of a maximum. The amplitude is still $|A|$ — amplitude measures distance, which is always non-negative.
 
@@ -1687,6 +1695,7 @@ The result is not unique. The equation $y = 3\\sin(2x - \\frac{\\pi}{2}) + 1$ an
 
 **For tangent**: the pattern is asymptote → $-1$ (quarter point) → zero (midpoint) → $+1$ (three-quarter point) → asymptote. The curve is increasing throughout, passing through the midline at the center of the period.
 
+@academic[example:Example
 To graph a transformed function like $y = -2\\sin\\left(\\frac{\\pi}{3}x - \\frac{\\pi}{6}\\right) + 1$:
 
 1. Identify the parameters: $A = -2$, $B = \\frac{\\pi}{3}$, $C = \\frac{\\pi}{6}$, $D = 1$.
@@ -1694,7 +1703,7 @@ To graph a transformed function like $y = -2\\sin\\left(\\frac{\\pi}{3}x - \\fra
 3. The cycle starts at $x = \\frac{1}{2}$ and ends at $x = \\frac{1}{2} + 6 = \\frac{13}{2}$.
 4. Divide into four equal parts: $x = \\frac{1}{2}, 2, \\frac{7}{2}, 5, \\frac{13}{2}$.
 5. Since $A < 0$ (inverted), the pattern becomes: midline → min → midline → max → midline, with $y$-values $1, -1, 1, 3, 1$.
-6. Plot and connect with a smooth curve.
+6. Plot and connect with a smooth curve.]@
 
 @academic[pitfall,aside:true,width:35%:Starting the cycle at zero
 Placing the key points at $x = 0, \\frac{3}{2}, 3, \\frac{9}{2}, 6$ puts the midline value $1$ at $x = 0$, but $y(0) = -2\\sin\\left(-\\frac{\\pi}{6}\\right) + 1 = 2$. The cycle starts at the phase shift, $x = \\frac{1}{2}$.
@@ -2009,8 +2018,206 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     ],
   };
 
+  const sineKeyPointProfile = {
+    header: {
+      kicker: 'one period, five key points',
+      title: 'Profile of a transformed sine',
+      formula: '$y = -2\\sin\\left(\\frac{\\pi}{3}x - \\frac{\\pi}{6}\\right) + 1$',
+    },
+    quickStats: [
+      { n: '6', label: 'period' },
+      { n: '2', label: 'amplitude' },
+    ],
+    graph: {
+      xRange: [0, 7], yRange: [-1.6, 3.6],
+      points: Array.from({ length: 351 }, (_, i) => {
+        const x = i * 0.02;
+        return [Number(x.toFixed(2)), Number((-2 * Math.sin(Math.PI / 3 * x - Math.PI / 6) + 1).toFixed(4))];
+      }),
+      xTicks: [0.5, 2, 3.5, 5, 6.5], yTicks: [-1, 0, 1, 2, 3],
+    },
+    features: [
+      { id: 'mid', points: [{ x: 0.5, y: 1 }, { x: 3.5, y: 1 }, { x: 6.5, y: 1 }] },
+      { id: 'min', kind: 'warm', points: [{ x: 2, y: -1 }] },
+      { id: 'max', kind: 'warm', points: [{ x: 5, y: 3 }] },
+    ],
+    intervals: [
+      { label: 'vs midline', spans: [
+        { from: 0.5, to: 3.5, kind: 'neg', text: 'below y = 1' },
+        { from: 3.5, to: 6.5, kind: 'pos', text: 'above y = 1' },
+      ] },
+      { label: 'direction', spans: [
+        { from: 0.5, to: 2, kind: 'neg', text: 'falling' },
+        { from: 2, to: 5, kind: 'pos', text: 'rising', arrow: 'right' },
+        { from: 5, to: 6.5, kind: 'neg', text: 'falling' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'mid', label: 'On the midline', value: 'x = ½, 7⁄2, 13⁄2' },
+        { featureId: 'min', label: 'Minimum', value: '(2, −1)', tone: 'warm' },
+        { featureId: 'max', label: 'Maximum', value: '(5, 3)', tone: 'warm' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Amplitude', value: '2', sub: '|A| with A = −2' },
+        { label: 'Period', value: '6', sub: '$2\\pi / (\\pi/3)$' },
+        { label: 'Phase shift', value: '$\\frac{1}{2}$', sub: 'the cycle starts at x = 1/2' },
+        { label: 'Midline', value: '$y = 1$' },
+        { label: 'Reflected', value: 'yes', sub: 'A < 0: midline, min, midline, max, midline' },
+      ] },
+    ],
+  };
+
+  const sineProfile = {
+    header: { kicker: 'one period', title: 'Profile of the sine', formula: '$y = \\sin(x)$' },
+    quickStats: [ { n: '2π', label: 'period' }, { n: '1', label: 'amplitude' } ],
+    graph: {
+      xRange: [0, 6.45], yRange: [-1.4, 1.4],
+      points: Array.from({ length: 323 }, (_, i) => { const x = i * 0.02; return [Number(x.toFixed(2)), Number(Math.sin(x).toFixed(4))]; }),
+      xTicks: [], yTicks: [-1, 0, 1],
+    },
+    features: [
+      { id: 'zeros', points: [{ x: 0, y: 0 }, { x: Math.PI, y: 0 }, { x: 2 * Math.PI, y: 0 }] },
+      { id: 'max', kind: 'warm', points: [{ x: Math.PI / 2, y: 1 }] },
+      { id: 'min', kind: 'warm', points: [{ x: 3 * Math.PI / 2, y: -1 }] },
+    ],
+    intervals: [
+      { label: 'sign', spans: [ { from: 0, to: Math.PI, kind: 'pos', sign: '+' }, { from: Math.PI, to: 2 * Math.PI, kind: 'neg', sign: '−' } ] },
+      { label: 'concavity', spans: [ { from: 0, to: Math.PI, kind: 'neg', text: 'concave down' }, { from: Math.PI, to: 2 * Math.PI, kind: 'pos', text: 'concave up' } ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'zeros', label: 'Zeros', value: 'x = 0, π, 2π' },
+        { featureId: 'max', label: 'Maximum', value: '(π/2, 1)', tone: 'warm' },
+        { featureId: 'min', label: 'Minimum', value: '(3π/2, −1)', tone: 'warm' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Period', value: '$2\\pi$' },
+        { label: 'Amplitude', value: '$1$', sub: 'midline $y = 0$' },
+        { label: 'Range', value: '$[-1, 1]$' },
+        { label: 'Symmetry', value: 'odd', sub: 'symmetric about the origin' },
+        { label: 'All zeros', value: '$x = n\\pi$', sub: 'every integer multiple of $\\pi$' },
+      ] },
+    ],
+  };
+
+  const cosineProfile = {
+    header: { kicker: 'one period', title: 'Profile of the cosine', formula: '$y = \\cos(x)$' },
+    quickStats: [ { n: '2π', label: 'period' }, { n: 'even', label: 'symmetry' } ],
+    graph: {
+      xRange: [0, 6.45], yRange: [-1.4, 1.4],
+      points: Array.from({ length: 323 }, (_, i) => { const x = i * 0.02; return [Number(x.toFixed(2)), Number(Math.cos(x).toFixed(4))]; }),
+      xTicks: [], yTicks: [-1, 0, 1],
+    },
+    features: [
+      { id: 'max', kind: 'warm', points: [{ x: 0, y: 1 }, { x: 2 * Math.PI, y: 1 }] },
+      { id: 'zeros', points: [{ x: Math.PI / 2, y: 0 }, { x: 3 * Math.PI / 2, y: 0 }] },
+      { id: 'min', kind: 'warm', points: [{ x: Math.PI, y: -1 }] },
+    ],
+    intervals: [
+      { label: 'sign', spans: [
+        { from: 0, to: Math.PI / 2, kind: 'pos', sign: '+' },
+        { from: Math.PI / 2, to: 3 * Math.PI / 2, kind: 'neg', sign: '−' },
+        { from: 3 * Math.PI / 2, to: 2 * Math.PI, kind: 'pos', sign: '+' },
+      ] },
+      { label: 'direction', spans: [
+        { from: 0, to: Math.PI, kind: 'neg', text: 'decreasing' },
+        { from: Math.PI, to: 2 * Math.PI, kind: 'pos', text: 'increasing', arrow: 'right' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'max', label: 'Maximum', value: '(0, 1), (2π, 1)', tone: 'warm' },
+        { featureId: 'zeros', label: 'Zeros', value: 'x = π/2, 3π/2' },
+        { featureId: 'min', label: 'Minimum', value: '(π, −1)', tone: 'warm' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Period', value: '$2\\pi$', sub: 'the same as sine' },
+        { label: 'Amplitude', value: '$1$' },
+        { label: 'Symmetry', value: 'even: $\\cos(-x) = \\cos(x)$', sub: 'symmetric about the $y$-axis' },
+        { label: 'Shift from sine', value: '$\\cos(x) = \\sin\\left(x + \\frac{\\pi}{2}\\right)$' },
+        { label: 'All zeros', value: 'odd multiples of $\\frac{\\pi}{2}$' },
+      ] },
+    ],
+  };
+
+  const tangentProfile = {
+    header: { kicker: 'principal period', title: 'Profile of the tangent', formula: '$y = \\tan(x)$' },
+    quickStats: [ { n: 'π', label: 'period' }, { n: 'odd', label: 'symmetry' } ],
+    graph: {
+      xRange: [-2.6, 2.6], yRange: [-4, 4],
+      points: Array.from({ length: 521 }, (_, i) => { const x = -2.6 + i * 0.01; return [Number(x.toFixed(2)), Number(Math.tan(x).toFixed(4))]; }),
+      xTicks: [], yTicks: [-4, -2, -1, 0, 1, 2, 4],
+      asymptotes: [{ x: -Math.PI / 2 }, { x: Math.PI / 2 }],
+    },
+    features: [
+      { id: 'zero', points: [{ x: 0, y: 0 }] },
+      { id: 'quarter', points: [{ x: -Math.PI / 4, y: -1 }, { x: Math.PI / 4, y: 1 }] },
+      { id: 'va', kind: 'warm', points: [{ x: -Math.PI / 2, y: 3.6, r: 0 }, { x: Math.PI / 2, y: 3.6, r: 0 }] },
+    ],
+    intervals: [
+      { label: 'sign', spans: [
+        { from: -Math.PI / 2, to: 0, kind: 'neg', sign: '−' },
+        { from: 0, to: Math.PI / 2, kind: 'pos', sign: '+' },
+      ] },
+      { label: 'direction', spans: [
+        { from: null, to: -Math.PI / 2, kind: 'pos', text: '↗' },
+        { from: -Math.PI / 2, to: Math.PI / 2, kind: 'pos', text: 'increasing', arrow: 'right' },
+        { from: Math.PI / 2, to: null, kind: 'pos', text: '↗' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'zero', label: 'Zero', value: '(0, 0)' },
+        { featureId: 'quarter', label: 'Quarter points', value: '(±π/4, ±1)' },
+        { featureId: 'va', label: 'Asymptotes', value: 'x = ±π/2', tone: 'warm' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Period', value: '$\\pi$, not $2\\pi$' },
+        { label: 'Range', value: '$(-\\infty, \\infty)$', sub: 'unbounded, so no amplitude' },
+        { label: 'All asymptotes', value: '$x = \\frac{\\pi}{2} + n\\pi$', sub: 'where $\\cos x = 0$' },
+        { label: 'Symmetry', value: 'odd' },
+        { label: 'Each branch', value: 'strictly increasing', sub: 'concavity flips at each zero' },
+      ] },
+    ],
+  };
+
+  // BeforeAfter (obj8): the section's sin(2x − π), with B factored out so the phase shift can be read off
+  const phaseShiftBeforeAfter = {
+    header: {
+      kicker: 'Phase shift',
+      title: 'Factoring B out of the argument',
+      lede: 'The shift of $y = \\sin(2x - \\pi)$ is $\\frac{\\pi}{2}$, not $\\pi$. The factored form makes that visible.',
+    },
+    before: {
+      form: 'General form',
+      expr: '$y = \\sin(2x - \\pi)$',
+      meta: 'Reading $C = \\pi$ as the shift is the common error',
+    },
+    after: {
+      form: 'Factored form',
+      expr: '$y = \\sin\\left(2\\left(x - \\frac{\\pi}{2}\\right)\\right)$',
+      meta: 'Shift $\\frac{\\pi}{2}$ to the right, read straight off',
+    },
+    operation: {
+      name: 'Factor out B',
+      desc: 'take $B = 2$ out of the argument',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'The argument becomes $B$ times a bracket, and the shift $\\frac{C}{B}$ sits inside that bracket.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The function and its graph: the standard cycle still starts where the argument is zero, at $x = \\frac{\\pi}{2}$.' },
+    ],
+  };
+
    return {
       props:{
+    phaseShiftBeforeAfter,
+    tangentProfile,
+    cosineProfile,
+    sineProfile,
+    sineKeyPointProfile,
     reciprocalGraphTree,
     demoUnits,
          sectionsContent,
@@ -2033,7 +2240,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     }
    }
 
-export default function GraphsPage({reciprocalGraphTree, seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits}) {
+export default function GraphsPage({phaseShiftBeforeAfter, tangentProfile, cosineProfile, sineProfile, sineKeyPointProfile, reciprocalGraphTree, seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2055,6 +2262,16 @@ export default function GraphsPage({reciprocalGraphTree, seoData,sectionsContent
           sectionsContent.obj1.content,
                   <div key={'unit-sinGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.sinGraph }} />,
           `Every property of the sine function has a visible counterpart on this curve.`,
+          `The same period with every property attached: the five key points of $y = \\sin(x)$ on $[0, 2\\pi]$, where the sign changes, where the bend changes, and the period, amplitude, range and symmetry the section reads off the graph.`,
+          <DiagramFrame
+            key={'obj1-profile'}
+            id="sine-profile"
+            title="Profile of the sine"
+            source="/trigonometry/graphs"
+          >
+            <FunctionAnalysis data={sineProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The two strips change together at $x = \\pi$: the wave is positive exactly where it bends down and negative exactly where it bends up. That pairing holds for every period, since the pattern repeats every $2\\pi$.`,
         ]
     },
     {
@@ -2065,6 +2282,16 @@ export default function GraphsPage({reciprocalGraphTree, seoData,sectionsContent
           sectionsContent.obj2.content,
                   <div key={'unit-cosGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.cosGraph }} />,
           `The two curves are one shape read from two starting points, which is the cofunction identity in graphical form.`,
+          `One period of $y = \\cos(x)$ with its five key points: the maximum at both ends, the zeros at $\\frac{\\pi}{2}$ and $\\frac{3\\pi}{2}$, and the minimum at $(\\pi, -1)$, together with its sign, its direction and its even symmetry.`,
+          <DiagramFrame
+            key={'obj2-profile'}
+            id="cosine-profile"
+            title="Profile of the cosine"
+            source="/trigonometry/graphs"
+          >
+            <FunctionAnalysis data={cosineProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `Set beside the sine profile above, every feature has moved $\\frac{\\pi}{2}$ to the left: the maximum that sine reaches at $\\frac{\\pi}{2}$, cosine reaches at $0$. That shift is the identity $\\cos(x) = \\sin\\left(x + \\frac{\\pi}{2}\\right)$ in graphical form.`,
         ]
     },
     {
@@ -2075,6 +2302,16 @@ export default function GraphsPage({reciprocalGraphTree, seoData,sectionsContent
           sectionsContent.obj3.content,
                   <div key={'unit-tanGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.tanGraph }} />,
           `The asymptotes and the half period are what set tangent apart from the two bounded waves.`,
+          `The principal branch of $y = \\tan(x)$ between its asymptotes at $x = \\pm\\frac{\\pi}{2}$, with the zero at the origin, the quarter points $\\left(\\pm\\frac{\\pi}{4}, \\pm 1\\right)$, and the period, range and symmetry listed with it.`,
+          <DiagramFrame
+            key={'obj3-profile'}
+            id="tangent-profile"
+            title="Profile of the tangent"
+            source="/trigonometry/graphs"
+          >
+            <FunctionAnalysis data={tangentProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The direction strip reads "increasing" on every branch, yet the function as a whole is not increasing: each asymptote resets it from $+\\infty$ to $-\\infty$. That is what a period of $\\pi$ looks like on a function with no bound.`,
         ]
     },
 
@@ -2110,6 +2347,7 @@ export default function GraphsPage({reciprocalGraphTree, seoData,sectionsContent
           sectionsContent.obj5.content,
           <div key={'unit-generalForm'} dangerouslySetInnerHTML={{ __html: demoUnits.generalForm }} />,
           `The rest of this page takes the four parameters one at a time, in the order the form presents them.`,
+          `@academic[punchline:Numbers inside the function reshape the graph sideways; numbers outside reshape it up and down.]@`,
         ]
     },
     {
@@ -2140,6 +2378,19 @@ export default function GraphsPage({reciprocalGraphTree, seoData,sectionsContent
           sectionsContent.obj8.content,
           <div key={'unit-phaseShift'} dangerouslySetInnerHTML={{ __html: demoUnits.phaseShift }} />,
           `Factoring $B$ out of the argument makes the shift readable without dividing.`,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="phase-shift-before-after"
+            title="Phase shift of y = sin(2x − π)"
+            source="/trigonometry/graphs"
+            before={"The section's example in its two written forms. The graph above shows where the cycle starts; the two panels show which form lets you read that position off."}
+            after={"In general, $A\\sin(Bx - C) + D$ factors to $A\\sin\\left(B\\left(x - \\frac{C}{B}\\right)\\right) + D$, so the number inside the bracket is the phase shift $\\frac{C}{B}$."}
+          >
+            <BeforeAfter
+              data={phaseShiftBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
 
@@ -2210,6 +2461,16 @@ export default function GraphsPage({reciprocalGraphTree, seoData,sectionsContent
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj11Table }}
           />,
+          `The five key points of the example, plotted and joined: one period of $y = -2\\sin\\left(\\frac{\\pi}{3}x - \\frac{\\pi}{6}\\right) + 1$ from $x = \\frac{1}{2}$ to $x = \\frac{13}{2}$, with the midline crossings, the minimum at $(2, -1)$ and the maximum at $(5, 3)$.`,
+          <DiagramFrame
+            key={'obj11-profile'}
+            id="transformed-sine-profile"
+            title="Profile of a transformed sine"
+            source="/trigonometry/graphs"
+          >
+            <FunctionAnalysis data={sineKeyPointProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `Because $A$ is negative, the curve dips below the midline first and rises above it second, the reverse of a plain sine. The two strips show that order at a glance, and the rows hold the four numbers that fixed every point: amplitude, period, phase shift and midline.`,
         ]
     },
     {

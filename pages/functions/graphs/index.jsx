@@ -935,8 +935,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionTypesDiagrams from '@/app/components/functions/types/functionTypesDiagrams'
 import renderFunctionPlotV3 from '@/app/utils/illustrations/functions/graphs/functionPlot.v3'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 
 
 export async function getStaticProps(){
@@ -1217,6 +1218,9 @@ const sectionsContent = {
 
 Every point in the plane is identified by an ordered pair $(x, y)$. The first coordinate gives the horizontal position: positive to the right of the origin, negative to the left. The second coordinate gives the vertical position: positive above the origin, negative below.
 
+@academic[fact,aside:true,width:35%:The Cartesian plane began with one axis
+In La Géométrie of 1637, Descartes measured lengths from a single reference line, with no second axis, and Fermat, working independently, did the same. A pair of axes came later, after Frans van Schooten and his students translated the book into Latin in 1649.]@
+
 The axes divide the plane into four quadrants. Quadrant I contains points where both coordinates are positive. Quadrant II has negative $x$ and positive $y$. Quadrant III has both coordinates negative. Quadrant IV has positive $x$ and negative $y$.
 
 Plotting a point means locating it on this grid. To plot $(3, -2)$, move $3$ units right from the origin, then $2$ units down. The point lies in Quadrant IV.
@@ -1434,9 +1438,12 @@ The table below collects these and a few more parent shapes side by side — use
     title: `Graphing Technology`,
     content: `Graphing calculators and software automate the plotting process. Enter the function's equation, and the tool generates the graph instantly.
 
-Setting the viewing window determines what portion of the graph is visible. The default window may miss important features — a function with zeros at $x = 100$ and $x = -100$ will appear flat if the window shows only $-10 \\leq x \\leq 10$. Adjusting the window to capture all relevant behavior is essential.
+Setting the viewing window determines what portion of the graph is visible. The default window may miss important features — a function with zeros at $x = 100$ and $x = -100$ will show neither zero if the window spans only $-10 \\leq x \\leq 10$. Adjusting the window to capture all relevant behavior is essential.
 
 Trace features allow reading coordinates of points on the graph. Moving along the curve displays the $x$ and $y$ values at each position. This answers questions like "what is $f(2.5)$?" directly.
+
+@academic[fact,aside:true,width:35%:A fast wave disguised as a slow one
+A plotter that computes points every $0.1$ units and joins them draws $\\sin(x + 20\\pi x)$ exactly like $\\sin x$: at each $x = 0.1k$ the extra $20\\pi x = 2\\pi k$ is a whole number of turns. The true graph swings about ten times per unit.]@
 
 Built-in tools find intercepts, maxima, minima, and intersections. These calculations may be numerical approximations rather than exact answers, but they provide valuable information quickly.
 
@@ -1718,8 +1725,56 @@ const faqQuestions = {
     ],
   };
 
+  const quadraticSketchProfile = {
+    header: {
+      kicker: 'point plotting, then the full picture',
+      title: 'Profile of a quadratic',
+      formula: '$f(x) = x^2 - 4x + 3$',
+    },
+    quickStats: [
+      { n: '2', label: 'x-intercepts' },
+      { n: 'up', label: 'opens' },
+    ],
+    graph: {
+      xRange: [-0.6, 4.6], yRange: [-1.6, 3.6],
+      points: Array.from({ length: 261 }, (_, i) => {
+        const x = -0.6 + i * 0.02;
+        return [Number(x.toFixed(2)), Number((x * x - 4 * x + 3).toFixed(4))];
+      }),
+      xTicks: [0, 1, 2, 3, 4], yTicks: [-1, 0, 1, 2, 3],
+    },
+    features: [
+      { id: 'yint', points: [{ x: 0, y: 3 }] },
+      { id: 'zeros', points: [{ x: 1, y: 0 }, { x: 3, y: 0 }] },
+      { id: 'vertex', kind: 'warm', points: [{ x: 2, y: -1 }] },
+    ],
+    intervals: [
+      { label: 'sign of f', spans: [
+        { from: null, to: 1, kind: 'pos', sign: '+' },
+        { from: 1, to: 3, kind: 'neg', sign: '−' },
+        { from: 3, to: null, kind: 'pos', sign: '+' },
+      ] },
+      { label: 'direction', spans: [
+        { from: null, to: 2, kind: 'neg', text: 'decreasing' },
+        { from: 2, to: null, kind: 'pos', text: 'increasing', arrow: 'right' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'yint', label: 'y-intercept', value: '(0, 3)' },
+        { featureId: 'zeros', label: 'x-intercepts', value: '(1, 0) and (3, 0)' },
+        { featureId: 'vertex', label: 'Minimum', value: '(2, −1)', tone: 'warm' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Shape', value: 'parabola, opens upward' },
+        { label: 'Between points', value: '$f(1.5) = -0.75$', sub: 'a smooth curve, not straight segments' },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    quadraticSketchProfile,
     curveOutline,
     demoUnits,
          sectionsContent,
@@ -1743,7 +1798,7 @@ const faqQuestions = {
     }
    }
 
-export default function GraphsPage({curveOutline, 
+export default function GraphsPage({quadraticSketchProfile, curveOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1814,6 +1869,16 @@ export default function GraphsPage({curveOutline,
       <div key={'obj3-mini-table'} style={tableWrapStyle}
            dangerouslySetInnerHTML={{ __html: obj3MiniTable }} />,
       sectionsContent.obj3.contentAfter,
+      `The plotted points, joined into the full picture of $f(x) = x^2 - 4x + 3$: the $y$-intercept at $(0, 3)$, the $x$-intercepts at $(1, 0)$ and $(3, 0)$, and the minimum at $(2, -1)$ of a parabola that opens upward.`,
+      <DiagramFrame
+        key={'obj3-profile'}
+        id="quadratic-sketch-profile"
+        title="Profile of a quadratic"
+        source="/functions/graphs"
+      >
+        <FunctionAnalysis data={quadraticSketchProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+      </DiagramFrame>,
+      `Every point in the table sits on this curve, and the strategic ones are the numbered features: the $y$-intercept from $x = 0$, the intercepts from $f(x) = 0$, and the vertex where the direction turns from falling to rising.`,
     ]
 },
 
@@ -1849,6 +1914,7 @@ export default function GraphsPage({curveOutline,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          `@academic[punchline:Each intercept sets one coordinate to zero: the input for the $y$-intercept, the output for the $x$-intercepts.]@`,
         ]
     },
     {

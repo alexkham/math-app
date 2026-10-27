@@ -1221,7 +1221,10 @@ Writing $(5 + i) - (2 - 3i)$ as $5 + i - 2 - 3i$ takes away only the $2$ and giv
 
 Subtraction uses the same bookkeeping: real parts are subtracted from real parts, and imaginary parts from imaginary parts. For the same pair, the real parts give $3 - 1 = 2$ and the imaginary parts give $2 - (-5) = 7$, so $z_1 - z_2 = 2 + 7i$, the value listed in the table below. A negative imaginary part in $z_2$ turns that second subtraction into an addition.
 
-[Multiplication](!/complex-numbers/operations) demands more attention. We apply the distributive property as with any binomial product, but one crucial substitution changes everything: wherever $i^2$ appears, we replace it with $-1$. The product $(2 + 3i)(4 - i)$ expands to $8 - 2i + 12i - 3i^2$, and since $i^2 = -1$, this simplifies to $8 + 10i + 3 = 11 + 10i$.
+[Multiplication](!/complex-numbers/operations) demands more attention. We apply the distributive property as with any binomial product, but one crucial substitution changes everything: wherever $i^2$ appears, we replace it with $-1$.
+
+@academic[example:Example
+The product $(2 + 3i)(4 - i)$ expands to $8 - 2i + 12i - 3i^2$, and since $i^2 = -1$, this simplifies to $8 + 10i + 3 = 11 + 10i$.]@
 
 [Division](!/complex-numbers/operations) presents the only genuine challenge. A complex number in the denominator violates standard mathematical convention — we need real denominators for final answers. The solution employs the [conjugate](!/complex-numbers/complex-conjugate): multiply both numerator and denominator by the conjugate of the denominator. This works because $z \\cdot \\bar{z}$ always produces a real number. The fraction $\\frac{3 + 2i}{1 - 4i}$ transforms through multiplication by $\\frac{1 + 4i}{1 + 4i}$, converting the denominator to the real value $1 + 16 = 17$ and allowing us to express the result in standard $a + bi$ form.
 
@@ -1266,11 +1269,14 @@ Geometrically, this says the direct path from $-z_2$ to $z_1$ never exceeds the 
 
 The verification proceeds systematically. Addition in $\\mathbb{C}$ is commutative: $z_1 + z_2 = z_2 + z_1$ for any pair of complex numbers. It is also associative: $(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3)$. An additive identity exists — the number $0 + 0i$ satisfies $z + 0 = z$ for every $z$. Every complex number possesses an additive inverse: the negative $-z = -a - bi$ fulfills $z + (-z) = 0$.
 
+@academic[fact,aside:true,width:35%:Pairs multiply, triples cannot
+Hamilton spent years trying to multiply triples $a + bi + cj$ the way $\\mathbb{C}$ multiplies pairs, and it cannot be done: any product of triples that distributes over sums and real multiples has two nonzero factors whose product is $0$. In 1843 he succeeded with four parts, the quaternions, whose products depend on the order of the factors.]@
+
 Multiplication follows parallel rules. The operation is commutative and associative. The multiplicative identity $1 + 0i$ satisfies $z \\cdot 1 = z$. Every nonzero complex number has a multiplicative inverse $z^{-1}$ such that $z \\cdot z^{-1} = 1$. The formula for this inverse employs the [conjugate](!/complex-numbers/complex-conjugate): $z^{-1} = \\frac{\\bar{z}}{|z|^2} = \\frac{a - bi}{a^2 + b^2}$.
 
 The distributive law bridges addition and multiplication: $z_1 \\cdot (z_2 + z_3) = z_1 \\cdot z_2 + z_1 \\cdot z_3$. With all eleven axioms confirmed, $\\mathbb{C}$ earns its status as a field — an algebraic structure where arithmetic behaves predictably and division by any nonzero element remains possible.
 
-Yet $\\mathbb{C}$ differs from $\\mathbb{R}$ in one critical respect: it lacks order. No definition of "less than" or "greater than" extends consistently to complex numbers. We cannot arrange them on a line from smallest to largest. The complex field trades this linear ordering for something arguably more powerful — algebraic completeness, where every polynomial equation finds its solutions.`,
+Yet $\\mathbb{C}$ differs from $\\mathbb{R}$ in one critical respect: it lacks order. No definition of "less than" or "greater than" extends consistently to complex numbers. We cannot arrange them from smallest to largest in a way that agrees with their addition and multiplication. The complex field trades this linear ordering for something arguably more powerful — algebraic completeness, where every polynomial equation finds its solutions.`,
   after: ``,
   link: '',
 },
@@ -1302,6 +1308,9 @@ Division works inversely — moduli divide, arguments subtract. These elegant ru
   before: ``,
   content: `The [trigonometric form](!/complex-numbers/trigonometric-form) $r\\text{cis}\\theta$ simplifies multiplication beautifully, but an even more elegant representation exists. In the eighteenth century, Leonhard Euler discovered a remarkable connection between exponential functions and trigonometry that would reshape mathematics forever: the identity $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$.
 
+@academic[fact,aside:true,width:35%:Compounding at an imaginary rate
+The number $e$ is the limit of $(1 + \\frac{1}{n})^n$, and the same recipe with $i\\pi$ gives $(1 + \\frac{i\\pi}{n})^n \\to -1$. Each factor turns the point by an angle close to $\\frac{\\pi}{n}$ and barely stretches it, so $n$ factors make a half-turn; for $n = 100$ the result is already about $-1.05$.]@
+
 This equation appears almost magical at first glance. The left side involves raising a real number to an imaginary power — an operation with no obvious meaning. Yet when we extend the exponential function into the complex domain through its infinite series expansion, the formula emerges naturally. The real parts collect to form cosine, the imaginary parts assemble into sine, and the equality holds for every real angle $\\theta$.
 
 From Euler's formula flows the [exponential form](!/complex-numbers/exponential-form) of a complex number: $z = re^{i\\theta}$, where $r$ is the modulus and $\\theta$ is the argument. This notation is mathematically equivalent to $r\\text{cis}\\theta$ but carries computational advantages. Standard exponent rules now apply directly to complex arithmetic. Multiplication becomes $z_1 \\cdot z_2 = r_1 r_2 e^{i(\\theta_1 + \\theta_2)}$ — we simply multiply the coefficients and add the exponents. Division follows as $\\frac{z_1}{z_2} = \\frac{r_1}{r_2}e^{i(\\theta_1 - \\theta_2)}$.
@@ -1318,7 +1327,12 @@ One specialization of Euler's formula achieves legendary status among mathematic
   before: ``,
   content: `The [exponential form](!/complex-numbers/exponential-form) hints at a powerful pattern: raising $z = r\\text{cis}\\theta$ to the $n$-th power multiplies the argument by $n$ while raising the modulus to that power. Abraham de Moivre formalized this observation into the theorem bearing his name: $(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)$ for any integer $n$. In compact notation, $(\\text{cis}\\theta)^n = \\text{cis}(n\\theta)$.
 
-The practical formula extends to any complex number in [trigonometric form](!/complex-numbers/trigonometric-form): $z^n = r^n\\text{cis}(n\\theta)$. Computing $(1 + i)^{20}$ through algebraic expansion would require enormous effort, but [De Moivre's theorem](!/complex-numbers/demoivre-theorem) reduces it to routine calculation. First convert: $1 + i = \\sqrt{2}\\text{cis}(45°)$. Then apply the formula: $(\\sqrt{2})^{20}\\text{cis}(20 \\cdot 45°) = 1024\\text{cis}(900°) = 1024\\text{cis}(180°) = -1024$. What could have been pages of algebra becomes three lines.
+The practical formula extends to any complex number in [trigonometric form](!/complex-numbers/trigonometric-form): $z^n = r^n\\text{cis}(n\\theta)$.
+
+@academic[example:Example
+Computing $(1 + i)^{20}$ through algebraic expansion would require enormous effort, but [De Moivre's theorem](!/complex-numbers/demoivre-theorem) reduces it to routine calculation. First convert: $1 + i = \\sqrt{2}\\text{cis}(45°)$. Then apply the formula: $(\\sqrt{2})^{20}\\text{cis}(20 \\cdot 45°) = 1024\\text{cis}(900°) = 1024\\text{cis}(180°) = -1024$.]@
+
+What could have been pages of algebra becomes three lines.
 
 The theorem's true depth emerges when we reverse direction and seek roots rather than powers. Given a complex number $w$, what values of $z$ satisfy $z^n = w$? The answer reveals geometric elegance: exactly $n$ distinct roots exist, and they distribute themselves evenly around a circle centered at the origin.
 
@@ -1796,6 +1810,7 @@ export default function ComplexNumbersBasicsPage({numberSystemNest, complexFormT
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          `@academic[punchline:Complex arithmetic is real arithmetic plus one rule, $i^2 = -1$, with the conjugate to clear denominators.]@`,
         ]
     },
     {

@@ -1031,6 +1031,8 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { renderState as renderInverseState } from '@/app/components/trigonometry/inverseFunctionDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
 export async function getStaticProps(){
@@ -1475,7 +1477,12 @@ $$\\arccos(-x) = \\pi - \\arccos x$$
 Copying the arcsine rule gives $\\arccos\\left(-\\frac{1}{2}\\right) = -\\frac{\\pi}{3}$, a negative angle that arccosine never returns. The supplement rule gives $\\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$.
 [Read more](!#pitfalls)]@
 
-For a negative input, this identity turns the work into a lookup at a positive one. To find $\\arccos\\left(-\\frac{\\sqrt{3}}{2}\\right)$, start from the known value $\\arccos\\left(\\frac{\\sqrt{3}}{2}\\right) = \\frac{\\pi}{6}$ and subtract it from $\\pi$, which gives $\\frac{5\\pi}{6}$. Every negative input lands this way in $\\left(\\frac{\\pi}{2}, \\pi\\right]$, the Quadrant II part of the range.
+For a negative input, this identity turns the work into a lookup at a positive one.
+
+@academic[example:Example
+To find $\\arccos\\left(-\\frac{\\sqrt{3}}{2}\\right)$, start from the known value $\\arccos\\left(\\frac{\\sqrt{3}}{2}\\right) = \\frac{\\pi}{6}$ and subtract it from $\\pi$, which gives $\\frac{5\\pi}{6}$.]@
+
+Every negative input lands this way in $\\left(\\frac{\\pi}{2}, \\pi\\right]$, the Quadrant II part of the range.
 
 The graph of $y = \\arccos(x)$ is a decreasing curve from $(−1, \\pi)$ to $(1, 0)$, passing through $(0, \\frac{\\pi}{2})$. It is the reflection of the restricted cosine graph over $y = x$.`,
     before: ``,
@@ -1510,6 +1517,11 @@ $$\\arctan(-x) = -\\arctan x$$
 
 @academic[formulas_link:Browse all trigonometry formulas
 /trigonometry/formulas]@
+
+@academic[fact,aside:true,width:35%:Three arctangents add up to $\\pi$
+$\\arctan 2$ and $\\arctan 3$, about $63.43°$ and $71.57°$, are no rational fraction of $\\pi$, yet $\\arctan 1 + \\arctan 2 + \\arctan 3 = \\pi$ exactly. The tangent addition formula gives $\\tan(\\arctan 2 + \\arctan 3) = \\frac{2 + 3}{1 - 6} = -1$, so those two make $135°$.]@
+
+Beyond the table of exact values, arctangent outputs are rarely tidy. A calculator gives $\\arctan 2 \\approx 1.1071$ and $\\arctan 3 \\approx 1.2490$ in radians, decimals with no recognizable pattern. Untidy angles like these can still combine with each other through the tangent addition formula.
 
 As $x \\to \\infty$, $\\arctan(x) \\to \\frac{\\pi}{2}$. As $x \\to -\\infty$, $\\arctan(x) \\to -\\frac{\\pi}{2}$. These are horizontal asymptotes of the arctangent graph — a feature unique among the three primary inverse functions.
 
@@ -1610,7 +1622,7 @@ $\\arctan(-1) = -\\frac{\\pi}{4}$ because $\\tan\\left(-\\frac{\\pi}{4}\\right) 
 
 **A common trap:** $\\arcsin\\left(\\frac{1}{2}\\right) \\neq \\frac{5\\pi}{6}$, even though $\\sin\\left(\\frac{5\\pi}{6}\\right) = \\frac{1}{2}$. The angle $\\frac{5\\pi}{6}$ is outside the range $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, so it is not the arcsine output. The correct answer is $\\frac{\\pi}{6}$.
 
-**For non-standard inputs** — values like $\\arcsin(0.7)$ or $\\arctan(3.5)$ — a calculator is required. Ensure the calculator is in the correct angle mode ([degrees or radians](!/trigonometry/degrees-radians)) for the desired output format. Most calculators return radians by default for inverse trigonometric functions.
+**For non-standard inputs** — values like $\\arcsin(0.7)$ or $\\arctan(3.5)$ — a calculator is required. Ensure the calculator is in the correct angle mode ([degrees or radians](!/trigonometry/degrees-radians)) for the desired output format. A calculator returns inverse trigonometric values in whatever angle mode it is set to.
 
 The standard arcsine and arccosine values across the shared input domain $[-1, 1]$ collect into a single reference table, where the cofunction sum identity $\\arcsin x + \\arccos x = \\frac{\\pi}{2}$ is visible row-by-row.`,
     before: ``,
@@ -1636,6 +1648,9 @@ These hold universally within the domain — applying a function to its inverse 
 
 @academic[formula_callout:Compositions of Trigonometric and Inverse Trigonometric Functions
 $$\\arcsin(\\sin(x)) = x \\quad \\text{only if } x \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$$]@
+
+@academic[fact,aside:true,width:35%:Folding turns sine into a zigzag
+The graph of $\\arcsin(\\sin x)$ is made of straight segments with slopes $1$ and $-1$, a zigzag between $-\\frac{\\pi}{2}$ and $\\frac{\\pi}{2}$ that repeats every $2\\pi$. Each fold reflects $x$ back into the range, and a reflected copy of $y = x$ is still a straight line.]@
 
 If $x$ is outside this range, the arcsine "folds" the result back into the restricted range. For example, $\\arcsin\\left(\\sin\\left(\\frac{5\\pi}{6}\\right)\\right) = \\arcsin\\left(\\frac{1}{2}\\right) = \\frac{\\pi}{6}$, not $\\frac{5\\pi}{6}$. The same caution applies to $\\arccos(\\cos(x))$ (valid only on $[0, \\pi]$) and $\\arctan(\\tan(x))$ (valid only on $(-\\frac{\\pi}{2}, \\frac{\\pi}{2})$).
 
@@ -1695,7 +1710,7 @@ $y = \\arctan(x)$ : An increasing S-shaped curve with horizontal asymptotes.
 - Horizontal asymptote at $y = -\\frac{\\pi}{2}$ as $x \\to -\\infty$
 - Increasing throughout — the only primary inverse trig function defined on all of $\\mathbb{R}$
 
-All three primary inverse functions are continuous on their domains. Arcsine and arccosine have bounded domains (closed intervals), so their graphs are finite curves with endpoints. Arctangent, with its infinite domain, extends without bound horizontally but is squeezed vertically between the asymptotes — a distinctive shape that appears in probability (the Cauchy distribution), physics (the arctangent potential), and many other contexts.`,
+All three primary inverse functions are continuous on their domains. Arcsine and arccosine have bounded domains (closed intervals), so their graphs are finite curves with endpoints. Arctangent, with its infinite domain, extends without bound horizontally but is squeezed vertically between the asymptotes — a distinctive shape that appears in probability (the Cauchy distribution) and many other contexts.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1956,8 +1971,136 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
     ],
   };
 
+  const arcsineProfile = {
+    header: { kicker: 'inverse of the restricted sine', title: 'Profile of arcsine', formula: '$y = \\arcsin(x)$' },
+    quickStats: [ { n: '[−1, 1]', label: 'domain' }, { n: 'odd', label: 'symmetry' } ],
+    graph: {
+      xRange: [-1.4, 1.4], yRange: [-1.85, 1.85],
+      points: Array.from({ length: 201 }, (_, i) => { const x = -1 + i * 0.01; return [Number(x.toFixed(2)), Number(Math.asin(Math.max(-1, Math.min(1, x))).toFixed(4))]; }),
+      xTicks: [-1, -0.5, 0, 0.5, 1], yTicks: [],
+    },
+    features: [
+      { id: 'ends', kind: 'warm', points: [{ x: -1, y: -Math.PI / 2 }, { x: 1, y: Math.PI / 2 }] },
+      { id: 'origin', points: [{ x: 0, y: 0 }] },
+      { id: 'half', points: [{ x: -0.5, y: -Math.PI / 6 }, { x: 0.5, y: Math.PI / 6 }] },
+    ],
+    intervals: [
+      { label: 'domain', spans: [
+        { from: null, to: -1, kind: 'soft', text: '—' },
+        { from: -1, to: 1, kind: 'pos', text: 'defined on [−1, 1]' },
+        { from: 1, to: null, kind: 'soft', text: '—' },
+      ] },
+      { label: 'direction', spans: [ { from: -1, to: 1, kind: 'pos', text: 'increasing', arrow: 'right' } ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'ends', label: 'Endpoints', value: '(±1, ±π/2)', tone: 'warm' },
+        { featureId: 'origin', label: 'Through', value: '(0, 0)' },
+        { featureId: 'half', label: 'At x = ±½', value: 'y = ±π/6' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Domain', value: '$[-1, 1]$', sub: 'the range of sine' },
+        { label: 'Range', value: '$\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$' },
+        { label: 'Symmetry', value: 'odd: $\\arcsin(-x) = -\\arcsin x$' },
+        { label: 'Shape', value: 'increasing S-curve', sub: 'the restricted sine reflected over $y = x$' },
+      ] },
+    ],
+  };
+
+  const arccosineProfile = {
+    header: { kicker: 'inverse of the restricted cosine', title: 'Profile of arccosine', formula: '$y = \\arccos(x)$' },
+    quickStats: [ { n: '[−1, 1]', label: 'domain' }, { n: '[0, π]', label: 'range' } ],
+    graph: {
+      xRange: [-1.4, 1.4], yRange: [-0.4, 3.5],
+      points: Array.from({ length: 201 }, (_, i) => { const x = -1 + i * 0.01; return [Number(x.toFixed(2)), Number(Math.acos(Math.max(-1, Math.min(1, x))).toFixed(4))]; }),
+      xTicks: [-1, -0.5, 0, 0.5, 1], yTicks: [],
+    },
+    features: [
+      { id: 'ends', kind: 'warm', points: [{ x: -1, y: Math.PI }, { x: 1, y: 0 }] },
+      { id: 'mid', points: [{ x: 0, y: Math.PI / 2 }] },
+      { id: 'half', points: [{ x: -0.5, y: 2 * Math.PI / 3 }, { x: 0.5, y: Math.PI / 3 }] },
+    ],
+    intervals: [
+      { label: 'domain', spans: [
+        { from: null, to: -1, kind: 'soft', text: '—' },
+        { from: -1, to: 1, kind: 'pos', text: 'defined on [−1, 1]' },
+        { from: 1, to: null, kind: 'soft', text: '—' },
+      ] },
+      { label: 'direction', spans: [ { from: -1, to: 1, kind: 'neg', text: 'decreasing' } ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'ends', label: 'Endpoints', value: '(−1, π), (1, 0)', tone: 'warm' },
+        { featureId: 'mid', label: 'Middle', value: '(0, π/2)' },
+        { featureId: 'half', label: 'At x = ±½', value: '2π/3 and π/3' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Domain', value: '$[-1, 1]$' },
+        { label: 'Range', value: '$[0, \\pi]$', sub: 'never a negative angle' },
+        { label: 'Negative inputs', value: '$\\arccos(-x) = \\pi - \\arccos x$', sub: 'not odd: the output is supplemented' },
+        { label: 'With arcsine', value: '$\\arcsin x + \\arccos x = \\frac{\\pi}{2}$' },
+      ] },
+    ],
+  };
+
+  const arctangentProfile = {
+    header: { kicker: 'inverse of the restricted tangent', title: 'Profile of arctangent', formula: '$y = \\arctan(x)$' },
+    quickStats: [ { n: 'ℝ', label: 'domain' }, { n: '2', label: 'horizontal asymptotes' } ],
+    graph: {
+      xRange: [-8, 8], yRange: [-2, 2],
+      points: Array.from({ length: 321 }, (_, i) => { const x = -8 + i * 0.05; return [Number(x.toFixed(2)), Number(Math.atan(x).toFixed(4))]; }),
+      xTicks: [-8, -4, -1, 0, 1, 4, 8], yTicks: [],
+      asymptotes: [{ y: Math.PI / 2 }, { y: -Math.PI / 2 }],
+    },
+    features: [
+      { id: 'origin', points: [{ x: 0, y: 0 }] },
+      { id: 'unit', points: [{ x: -1, y: -Math.PI / 4 }, { x: 1, y: Math.PI / 4 }] },
+      { id: 'ha', kind: 'warm', points: [{ x: -7, y: -Math.PI / 2, r: 0 }, { x: 7, y: Math.PI / 2, r: 0 }] },
+    ],
+    intervals: [
+      { label: 'sign', spans: [ { from: null, to: 0, kind: 'neg', sign: '−' }, { from: 0, to: null, kind: 'pos', sign: '+' } ] },
+      { label: 'direction', spans: [ { from: null, to: null, kind: 'pos', text: 'increasing everywhere', arrow: 'right' } ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'origin', label: 'Through', value: '(0, 0)' },
+        { featureId: 'unit', label: 'At x = ±1', value: 'y = ±π/4' },
+        { featureId: 'ha', label: 'Asymptotes', value: 'y = ±π/2', tone: 'warm' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Domain', value: '$(-\\infty, \\infty)$', sub: "tangent's range is unbounded" },
+        { label: 'Range', value: '$\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$', sub: 'open: the ends are never reached' },
+        { label: 'Symmetry', value: 'odd: $\\arctan(-x) = -\\arctan x$' },
+        { label: 'Far ends', value: '$\\arctan x \\to \\pm\\frac{\\pi}{2}$ as $x \\to \\pm\\infty$' },
+      ] },
+    ],
+  };
+
+  // BeforeAfter (obj8): sin(arccos x) turned into an algebraic expression by the triangle method
+  const triangleMethodSteps = {
+    header: {
+      kicker: 'Mixed compositions',
+      title: 'The triangle method',
+      lede: 'It converts the problem from inverse trigonometric territory back to right triangle ratios.',
+    },
+    steps: [
+      { id: 'composition', label: 'Mixed composition', stamp: 'Before', expr: '$\\sin(\\arccos x)$',
+        move: { label: 'Name the angle', note: 'let θ = arccos x' } },
+      { id: 'angle', label: 'One angle, one ratio', expr: '$\\cos\\theta = \\dfrac{x}{1}$',
+        move: { label: 'Build the triangle', note: 'adjacent x, hypotenuse 1, so the opposite side is √(1 − x²); sine is opposite over hypotenuse' } },
+      { id: 'algebraic', label: 'Algebraic form', stamp: 'After', expr: '$\\sin(\\arccos x) = \\sqrt{1 - x^2}$',
+        detailsLabel: 'Where it holds',
+        detailsTitle: '',
+        details: 'Valid for $x \\in [-1, 1]$. The result is never negative, because $\\arccos x$ lies in $[0, \\pi]$, where sine is non-negative.' },
+    ],
+  };
+
    return {
       props:{
+    triangleMethodSteps,
+    arctangentProfile,
+    arccosineProfile,
+    arcsineProfile,
     inverseReciprocalTree,
     demoUnits,
     conceptIntroFigures,
@@ -1981,7 +2124,7 @@ The resulting functions — $\\arcsin$, $\\arccos$, $\\arctan$, and their recipr
     }
    }
 
-export default function InverseFunctionsPage({inverseReciprocalTree, 
+export default function InverseFunctionsPage({triangleMethodSteps, arctangentProfile, arccosineProfile, arcsineProfile, inverseReciprocalTree, 
   seoData,
   demoUnits,
   sectionsContent,
@@ -2089,6 +2232,16 @@ export default function InverseFunctionsPage({inverseReciprocalTree,
           sectionsContent.obj2.content,
           <div key={'unit-arcsine'} dangerouslySetInnerHTML={{ __html: demoUnits.arcsine }} />,
           `Every exact value of $\\arcsin$ can therefore be read off the sine table backwards.`,
+          `The arcsine graph with the values above placed on it: it starts at $\\left(-1, -\\frac{\\pi}{2}\\right)$, passes through the origin and the points for $\\pm\\frac{1}{2}$, and ends at $\\left(1, \\frac{\\pi}{2}\\right)$, defined on $[-1, 1]$ and nowhere else.`,
+          <DiagramFrame
+            key={'obj2-profile'}
+            id="arcsine-profile"
+            title="Profile of arcsine"
+            source="/trigonometry/inverse-functions"
+          >
+            <FunctionAnalysis data={arcsineProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The domain strip is the range of sine turned on its side, and the curve's height never leaves $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, the interval sine was restricted to. The point pairs on either side of the origin are the odd symmetry: each negative input gives the negative of its partner's output.`,
         ]
     },
     {
@@ -2099,6 +2252,16 @@ export default function InverseFunctionsPage({inverseReciprocalTree,
           sectionsContent.obj3.content,
           <div key={'unit-arccosine'} dangerouslySetInnerHTML={{ __html: demoUnits.arccosine }} />,
           `This is why $\\arccos$ never returns a negative angle, while $\\arcsin$ freely does.`,
+          `The arccosine graph runs the other way: it falls from $(-1, \\pi)$ through $\\left(0, \\frac{\\pi}{2}\\right)$ to $(1, 0)$, with the values at $\\pm\\frac{1}{2}$ marked, over the same domain $[-1, 1]$ as arcsine but with range $[0, \\pi]$.`,
+          <DiagramFrame
+            key={'obj3-profile'}
+            id="arccosine-profile"
+            title="Profile of arccosine"
+            source="/trigonometry/inverse-functions"
+          >
+            <FunctionAnalysis data={arccosineProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The two points at $\\pm\\frac{1}{2}$ show the supplement rule directly: their heights $\\frac{2\\pi}{3}$ and $\\frac{\\pi}{3}$ add up to $\\pi$, where arcsine's matching pair would add up to $0$. Every pair of mirrored inputs does the same, which is why the graph is symmetric about the point $\\left(0, \\frac{\\pi}{2}\\right)$ rather than the origin.`,
         ]
     },
     {
@@ -2109,6 +2272,16 @@ export default function InverseFunctionsPage({inverseReciprocalTree,
           sectionsContent.obj4.content,
           <div key={'unit-arctangent'} dangerouslySetInnerHTML={{ __html: demoUnits.arctangent }} />,
           `That boundedness is what makes $\\arctan$ the best behaved of the three.`,
+          `Of the three inverse functions, only arctangent covers the whole $x$-axis. Its profile shows the S-curve through the origin and through $\\left(\\pm 1, \\pm\\frac{\\pi}{4}\\right)$, flattening toward the two horizontal asymptotes $y = \\pm\\frac{\\pi}{2}$.`,
+          <DiagramFrame
+            key={'obj4-profile'}
+            id="arctangent-profile"
+            title="Profile of arctangent"
+            source="/trigonometry/inverse-functions"
+          >
+            <FunctionAnalysis data={arctangentProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The dashed lines are the open ends of the range: the curve keeps climbing toward $\\frac{\\pi}{2}$ and falling toward $-\\frac{\\pi}{2}$ without ever arriving. They are the vertical asymptotes of the restricted tangent, laid on their side by the reflection over $y = x$.`,
         ]
     },
     {
@@ -2156,6 +2329,7 @@ export default function InverseFunctionsPage({inverseReciprocalTree,
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          `@academic[punchline:An inverse trigonometric function returns the one angle in its restricted range, not every angle with that value.]@`,
         ]
     },
     {
@@ -2168,6 +2342,21 @@ export default function InverseFunctionsPage({inverseReciprocalTree,
           `The same caution applies to $\\arccos(\\cos x)$ and $\\arctan(\\tan x)$ on their own intervals.`,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="triangle-method-steps"
+            title="sin(arccos x) by the triangle method"
+            source="/trigonometry/inverse-functions"
+            before={"The table gives all six results; here is how one of them is found, one move at a time, using the section's own example."}
+            after={"The same moves give every row of the table: name the angle, read its known ratio as a fraction over $1$, complete the [right triangle](!/trigonometry/right-triangle), and read the ratio you need. For $\\cos(\\arctan x)$ the hypotenuse is $\\sqrt{1 + x^2}$."}
+          >
+            <BeforeAfter
+              data={triangleMethodSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
+          `@academic[punchline:A function always undoes its inverse, but an inverse undoes its function only inside the restricted range.]@`,
         ]
     },
     {

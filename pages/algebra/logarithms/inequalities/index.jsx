@@ -10,6 +10,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -121,6 +122,26 @@ const keyWords = [
 </table>
 `
 
+
+// Concept introduction (section 1, "Base Greater Than One: Direction
+// Preserved") — template C, failure first. Running instance: log₂(x) < 3.
+// Old obj1 text is kept in sectionsContent.obj1, unused; its theorem box, two
+// formula boxes with their lead-ins, two example boxes and two passages are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTestTable = ciTableOpen(['x', 'claimed by "x < 8"?', 'log₂(x)', 'really log₂(x) < 3?']) +
+  ciRow(['−1', 'yes', 'undefined', 'no'], { color: '#a4243b', cols: [2, 3] }) +
+  ciRow(['0', 'yes', 'undefined', 'no'], { shade: true, color: '#a4243b', cols: [2, 3] }) +
+  ciRow(['4', 'yes', '2', 'yes']) +
+  ciRow(['8', 'no', '3', 'no'], { shade: true }) +
+  ciRow(['10', 'no', '≈ 3.32', 'no'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   
@@ -551,6 +572,10 @@ const schemas = {
     notes: [{ x: 2.2, y: 2.6, text: 'log₂ x > 1 for x > 2', pos: 'e', color: 'f' }, { x: 0.6, y: -1.6, text: 'log₁/₂ x > 1 for 0 < x < 1/2', pos: 'e', color: 'g' }],
     caption: 'Same inequality, opposite sides: the base decides the direction' };
 
+  const conceptIntroFigures = {
+    testTable: ciTestTable,
+  };
+
   const demoUnits = {
     domainEdge: demoUnitFrame({
       svg: renderFunctionPlotV4(fpLogIneqDomain),
@@ -577,6 +602,7 @@ return {
     summaryTable,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Logarithmic Inequalities: Solving by Base Type | Learn Math Class",
       description: "Learn to solve logarithmic inequalities: when to preserve or reverse direction based on base, domain restrictions, compound inequalities, and graphical interpretation.",
@@ -599,9 +625,86 @@ export default function InequalitiesPage({
   summaryTable,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A logarithmic equation is solved by switching to exponential form — so an inequality should work the same way.`,
+        content: [
+          `$\\log_2(x) = 3$ becomes $x = 2^3 = 8$. By the same move, $\\log_2(x) < 3$ would become $x < 8$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Test a few numbers: "x < 8" lets in values the original inequality cannot even evaluate.`,
+        content: [
+          `Every number below 8 is claimed as a solution — including $-1$ and $0$, where $\\log_2$ is not defined at all.`,
+          ciTable('testTable'),
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The failure was predictable: converting forgot that a logarithm only accepts positive inputs.`,
+        content: [
+          `Two separate facts are at work. The direction of the sign survives because $\\log_2$ is increasing, the way a higher reading on a thermometer always means a warmer day. But the conversion says nothing about the domain, and that has to be added back by hand.`,
+          `@academic[rule_theorem_plain:When $a > 1$, the function $f(x) = \\log_a(x)$ is strictly increasing.]@`,
+          `Larger inputs produce larger outputs, so inequality direction is preserved when converting between logarithmic and exponential forms.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [logarithmic inequality](!/algebra/definitions#logarithmic_inequality) compares a logarithm of the unknown with a value using $<$, $\\leq$, $>$ or $\\geq$. For a base $a > 1$: $\\log_a(x) < k$ exactly when $0 < x < a^k$, and $\\log_a(x) > k$ exactly when $x > a^k$.`,
+        formula: [
+          `For $\\log_a(x) > k$ with $a > 1$:
+@academic[formula_callout:Base Greater Than One: Direction Preserved
+$$\\log_a(x) > k \\implies x > a^k$$]@`,
+          `For $\\log_a(x) < k$ with $a > 1$:
+@academic[formula_callout:Base Greater Than One: Direction Preserved
+$$\\log_a(x) < k \\implies x < a^k$$]@`,
+        ],
+        footer: `So $\\log_2(x) < 3$ has the solution $0 < x < 8$, not $x < 8$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Its solution is an interval of positive numbers, bounded by a power of the base.`,
+        content: [
+          `@academic[example:Example
+Solve $\\log_2(x) > 3$.
+$$x > 2^3$$
+$$x > 8$$
+
+Combined with the domain requirement $x > 0$, the solution is $x > 8$.]@`,
+          `@academic[example:Example
+Solve $\\log_5(x) \\leq 2$.
+$$x \\leq 5^2$$
+$$x \\leq 25$$
+
+With domain: $0 < x \\leq 25$.]@`,
+          `To solve your own logarithmic inequality with each step shown, use the [logarithmic inequality solver](!/algebra/calculators/inequalities/logarithmic).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the diagnosis becomes a test: check the domain, and check whether the base keeps the direction.`,
+        content: `Any proposed solution can be tested by putting a value back in; a value that makes the argument zero or negative is out. And the direction is kept only because the base is greater than $1$ — with a base between $0$ and $1$ the logarithm decreases and the sign flips, as the next section, [base between zero and one](!/algebra/logarithms/inequalities#2), shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers bases below one, logarithms on both sides, domain considerations, compound inequalities, combined logarithms and the graphical view.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -617,7 +720,7 @@ export default function InequalitiesPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

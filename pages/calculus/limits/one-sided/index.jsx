@@ -2525,10 +2525,10 @@ The same [techniques](!/calculus/limits/evaluating) used for two-sided limits ap
 Sign analysis becomes critical. For the expression $\\dfrac{|x|}{x}$:
 
 @academic[formula_callout:Evaluating One-Sided Limits
-$$\\lim_{x \\to 0^+} \\frac{|x|}{x} = \\frac{x}{x} = 1$$]@
+$$\\lim_{x \\to 0^+} \\frac{|x|}{x} = \\lim_{x \\to 0^+} \\frac{x}{x} = 1$$]@
 
 @academic[formula_callout:Evaluating One-Sided Limits
-$$\\lim_{x \\to 0^-} \\frac{|x|}{x} = \\frac{-x}{x} = -1$$]@
+$$\\lim_{x \\to 0^-} \\frac{|x|}{x} = \\lim_{x \\to 0^-} \\frac{-x}{x} = -1$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the absolute value bars
 Treating $|x - 2|$ as $x - 2$ in $\\lim_{x \\to 2^-} \\frac{x^2 - 4}{|x - 2|}$ cancels to $x + 2$ and gives $4$. For $x < 2$, $|x - 2| = 2 - x$, so the quotient is $-(x + 2)$ and the limit is $-4$.

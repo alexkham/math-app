@@ -10,6 +10,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
 
 
@@ -296,7 +298,7 @@ The table below collects the perfect powers for each common index with a worked 
     content: `Variables under radicals follow the same process: extract perfect powers.
 
 @academic[formula_callout:Simplifying with Variables
-$$\\sqrt{x^6} = x^3$$]@
+$$\\sqrt{x^6} = |x^3|$$]@
 
 The exponent 6 divides evenly by the index 2, so the entire power extracts.
 
@@ -472,6 +474,8 @@ Converting to [rational exponents](!/algebra/roots/rational-exponents) makes thi
 
 @academic[formula_callout:Reducing the Index
 $$\\sqrt[8]{y^6} = y^{6/8} = y^{3/4} = \\sqrt[4]{y^3}$$]@
+
+This holds for $y \\geq 0$.
 
 Index reduction is a form of simplification — smaller indices are generally preferred when mathematically equivalent.`,
     before: ``,
@@ -695,8 +699,83 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj5): the section's square-root example, radical denominator vs rational denominator
+  const rationalizeMonomial = {
+    header: {
+      kicker: 'Simplest form',
+      title: 'Rationalizing a monomial denominator',
+      lede: 'A radical in the denominator violates simplest form. One multiplication removes it without changing the value.',
+    },
+    before: {
+      form: 'Radical in the denominator',
+      expr: '$\\dfrac{5}{\\sqrt{3}}$',
+      meta: 'Not in simplest form',
+    },
+    after: {
+      form: 'Rational denominator',
+      expr: '$\\dfrac{5\\sqrt{3}}{3}$',
+      meta: 'Simplest form: the denominator is the rational number $3$',
+    },
+    operation: {
+      name: 'Rationalize',
+      desc: 'Multiply by $\\dfrac{\\sqrt{3}}{\\sqrt{3}}$',
+      detailsLabel: 'Cube roots',
+      detailsTitle: 'Higher roots need a perfect power',
+      details: [
+        'For a cube root, the multiplier must turn the denominator into a perfect cube:',
+        '$$\\frac{2}{\\sqrt[3]{5}} \\cdot \\frac{\\sqrt[3]{25}}{\\sqrt[3]{25}} = \\frac{2\\sqrt[3]{25}}{\\sqrt[3]{125}} = \\frac{2\\sqrt[3]{25}}{5}$$',
+      ],
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'The denominator: √3 · √3 = √9 = 3, a rational number.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The value: the multiplier goes into both the numerator and the denominator, so only the form changes.' },
+    ],
+  };
+
+  // BeforeAfter (obj6): the section's binomial example, rationalized by the conjugate
+  const rationalizeBinomialSteps = {
+    header: {
+      kicker: 'Simplest form',
+      title: 'Rationalizing with the conjugate',
+      lede: 'Multiplying by the conjugate makes a difference of squares below the bar, and the radical leaves the denominator.',
+    },
+    steps: [
+      { id: 'binomial', label: 'Binomial denominator', stamp: 'Before', expr: '$\\dfrac{3}{2 + \\sqrt{5}}$',
+        move: { label: 'Multiply by the conjugate', note: '(2 + √5)(2 − √5) = 4 − 5 = −1' } },
+      { id: 'minusone', label: 'Denominator is −1', expr: '$\\dfrac{3(2 - \\sqrt{5})}{-1}$',
+        move: { label: 'Clear the −1', note: 'every sign flips: −3(2 − √5)' } },
+      { id: 'rational', label: 'Rational denominator', stamp: 'After', expr: '$-6 + 3\\sqrt{5}$',
+        detailsLabel: 'Check the sign',
+        detailsTitle: '',
+        details: 'The original fraction is positive, and $-6 + 3\\sqrt{5} \\approx 0.71$ is positive too. Dropping the $-1$ without changing signs would give $6 - 3\\sqrt{5} \\approx -0.71$.' },
+    ],
+  };
+
+  // BeforeAfter (obj8): the section's first example, index 6 reduced to index 3 through exponent form
+  const reduceIndexSteps = {
+    header: {
+      kicker: 'Simplest form',
+      title: 'Reducing the index',
+      lede: 'Converting to a rational exponent makes the reduction mechanical: write the exponent as a fraction, reduce it, convert back.',
+    },
+    steps: [
+      { id: 'index6', label: 'Radical, index 6', stamp: 'Before', expr: '$\\sqrt[6]{x^4}$',
+        move: { label: 'Write as a rational exponent', note: 'the index becomes the denominator' } },
+      { id: 'exp46', label: 'Exponent form', expr: '$x^{4/6}$',
+        move: { label: 'Reduce the fraction', note: '4 and 6 share a common factor of 2' } },
+      { id: 'exp23', label: 'Reduced exponent', expr: '$x^{2/3}$',
+        move: { label: 'Convert back', note: 'the denominator 3 is the new index' } },
+      { id: 'index3', label: 'Radical, index 3', stamp: 'After', expr: '$\\sqrt[3]{x^2}$' },
+    ],
+  };
+
 return {
   props: {
+    rationalizeMonomial,
+    rationalizeBinomialSteps,
+    reduceIndexSteps,
     sectionsContent,
     introContent,
     obj1Table,
@@ -729,6 +808,9 @@ export default function SimplifyingPage({
   faqQuestions,
   schemas,
   demoUnits,
+  rationalizeMonomial,
+  rationalizeBinomialSteps,
+  reduceIndexSteps,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -784,6 +866,19 @@ export default function SimplifyingPage({
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="rationalize-monomial-before-after"
+            title="Rationalizing 5 over the square root of 3"
+            source="/algebra/roots/simplifying"
+            before={"The square-root example of this section as two forms of one number. Compare the denominators."}
+            after={"The same move works for any index: the multiplier must make a perfect power under the radical in the denominator. With two terms in the denominator, the next section multiplies by the conjugate instead."}
+          >
+            <BeforeAfter
+              data={rationalizeMonomial}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -794,6 +889,20 @@ export default function SimplifyingPage({
           sectionsContent.obj6.content,
           <div key={'unit-conjugateArea'} dangerouslySetInnerHTML={{ __html: demoUnits.conjugateArea }} />,
           `Multiplying by a + √b instead would add a cross term 2a√b and keep the radical.`,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="rationalize-binomial-steps"
+            title="Rationalizing 3 over 2 plus the square root of 5"
+            source="/algebra/roots/simplifying"
+            before={"The section's example, one move at a time. Watch the denominator: it turns into $-1$ before it disappears."}
+            after={"The $-1$ appears because the radicand $5$ is larger than $a^2 = 4$. Whenever that happens the last move flips every sign, and a quick estimate confirms the result is still positive."}
+          >
+            <BeforeAfter
+              data={rationalizeBinomialSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
           `@academic[punchline:Multiplying by the conjugate makes a difference of squares, and squaring is what removes a square root.]@`,
         ]
     },
@@ -814,6 +923,20 @@ export default function SimplifyingPage({
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="reduce-index-steps"
+            title="Reducing the index of ⁶√(x⁴)"
+            source="/algebra/roots/simplifying"
+            before={"The section's first example, one move at a time. The detour through exponent form is what makes the reduction mechanical."}
+            after={"The index dropped from $6$ to $3$ because $4$ and $6$ share a common factor of $2$. The same three moves turn $\\sqrt[4]{a^2}$ into $\\sqrt{a}$ and $\\sqrt[8]{y^6}$ into $\\sqrt[4]{y^3}$."}
+          >
+            <BeforeAfter
+              data={reduceIndexSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

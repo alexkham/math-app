@@ -941,9 +941,7 @@ $$\\frac{7}{2} \\div \\frac{7}{4} = \\frac{7}{2} \\times \\frac{4}{7} = \\frac{2
 
 Cross-canceling before multiplying simplifies the work. The 7s cancel, leaving $\\frac{1}{2} \\times \\frac{4}{1} = 2$.
 
-To verify a mixed-number division, use the [fraction calculator](!/calculators/fraction-calculator). It applies keep-change-flip and shows the full working.
-
-@academic[punchline:A mixed number is a sum in disguise, so it must become one improper fraction before any division.]@`,
+To verify a mixed-number division, use the [fraction calculator](!/calculators/fraction-calculator). It applies keep-change-flip and shows the full working.`,
     before: ``,
     after: ``,
     link: '',
@@ -977,9 +975,15 @@ In Liping Ma's 1999 study, only one of 23 U.S. teachers wrote a correct word pro
 
 Division by a fraction answers "how many groups of this size fit into that amount?" The expression $\\frac{3}{4} \\div \\frac{1}{4}$ asks how many quarters are in three-quarters. The answer is 3.
 
-Practical applications include portioning and measurement. If a recipe uses $\\frac{2}{3}$ cup of flour per batch, and you have 4 cups, how many batches can you make? Compute $4 \\div \\frac{2}{3} = 4 \\times \\frac{3}{2} = 6$ batches.
+Practical applications include portioning and measurement.
 
-Rate problems also use fraction division. If a pipe fills $\\frac{1}{4}$ of a tank in $\\frac{1}{2}$ hour, the rate is $\\frac{1}{4} \\div \\frac{1}{2} = \\frac{1}{4} \\times 2 = \\frac{1}{2}$ tank per hour.
+@academic[example:Example
+If a recipe uses $\\frac{2}{3}$ cup of flour per batch, and you have 4 cups, how many batches can you make? Compute $4 \\div \\frac{2}{3} = 4 \\times \\frac{3}{2} = 6$ batches.]@
+
+Rate problems also use fraction division.
+
+@academic[example:Example
+If a pipe fills $\\frac{1}{4}$ of a tank in $\\frac{1}{2}$ hour, the rate is $\\frac{1}{4} \\div \\frac{1}{2} = \\frac{1}{4} \\times 2 = \\frac{1}{2}$ tank per hour.]@
 
 @academic[punchline:Any question of how many of one amount fit into another, or how much goes with a single unit, is a division.]@`,
     before: ``,

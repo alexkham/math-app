@@ -2296,12 +2296,12 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -3022,7 +3022,8 @@ $$V = W_1 \\oplus W_2 \\Rightarrow \\dim(V) = \\dim(W_1) + \\dim(W_2)$$
 @academic[fact,aside:true,width:35%:Three lines in a plane break the count
 Three different lines through the origin of $\\mathbb{R}^2$ meet pairwise only at $\\mathbf{0}$, so the set pattern predicts $1 + 1 + 1 - 0 - 0 - 0 + 0 = 3$. Their sum is the plane, of dimension $2$: any two of the lines already span it, third line included.]@
 
-For example, in $\\mathbb{R}^3$, let $W_1$ be the $xy$-plane (dimension $2$) and $W_2$ be the $z$-axis (dimension $1$). Their intersection is $\\{\\mathbf{0}\\}$, so $\\dim(W_1 + W_2) = 2 + 1 - 0 = 3$. The sum is all of $\\mathbb{R}^3$, and the decomposition $\\mathbb{R}^3 = W_1 \\oplus W_2$ splits every vector into its $xy$-component and its $z$-component.
+@academic[example:Example
+For example, in $\\mathbb{R}^3$, let $W_1$ be the $xy$-plane (dimension $2$) and $W_2$ be the $z$-axis (dimension $1$). Their intersection is $\\{\\mathbf{0}\\}$, so $\\dim(W_1 + W_2) = 2 + 1 - 0 = 3$. The sum is all of $\\mathbb{R}^3$, and the decomposition $\\mathbb{R}^3 = W_1 \\oplus W_2$ splits every vector into its $xy$-component and its $z$-component.]@
 
 For finite sets, inclusion-exclusion continues to three sets: add the three sizes, subtract the three pairwise overlaps, then add back the part shared by all three. The same pattern can be tried on three subspaces, with dimensions in place of sizes and intersections in place of overlaps. The simplest test case is three different lines through the origin in $\\mathbb{R}^2$.`,
     before: ``,

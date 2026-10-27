@@ -274,7 +274,10 @@ $$x = -3$$]@
 
 Checking: $\\frac{-3}{-3 - 3} = \\frac{-3}{-6} = \\frac{1}{2}$ and $\\frac{9}{-3 - 3} + 2 = \\frac{9}{-6} + 2 = -\\frac{3}{2} + 2 = \\frac{1}{2}$. The value $x = -3$ checks out.
 
-Now consider $\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$. Multiply by $(x - 3)$: $x - 3 = x - 3$, which simplifies to $0 = 0$. This is an identity — yet $x = 3$ is not a valid solution because it was excluded from the domain. Every real number except $3$ satisfies the original equation. Without the domain check, $x = 3$ would appear to be among the solutions.
+@academic[example:Example
+Now consider $\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$. Multiply by $(x - 3)$: $x - 3 = x - 3$, which simplifies to $0 = 0$. This is an identity — yet $x = 3$ is not a valid solution because it was excluded from the domain. Every real number except $3$ satisfies the original equation.]@
+
+Without the domain check, $x = 3$ would appear to be among the solutions.
 
 @academic[pitfall,aside:true,width:35%:Skipping the domain check
 Taking $0 = 0$ from $\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$ to mean every real number keeps $x = 3$, where both fractions are undefined. The solution set is every real number except $3$.
@@ -375,7 +378,8 @@ $$\\frac{A}{B} = \\frac{C}{D}$$]@
 
 This is a special case of clearing denominators — the LCD is $BD$, and multiplying both sides by $BD$ produces $AD = BC$ directly.
 
-For example, $\\frac{x + 1}{x - 2} = \\frac{3}{4}$ becomes $4(x + 1) = 3(x - 2)$, which simplifies to $4x + 4 = 3x - 6$, giving $x = -10$. Since $-10 \\neq 2$, the solution is valid.
+@academic[example:Example
+For example, $\\frac{x + 1}{x - 2} = \\frac{3}{4}$ becomes $4(x + 1) = 3(x - 2)$, which simplifies to $4x + 4 = 3x - 6$, giving $x = -10$. Since $-10 \\neq 2$, the solution is valid.]@
 
 Cross-multiplication is fast but limited to equations already in the form of two equal fractions. When more than two fractions appear, or when fractions are added or subtracted, the general LCD method is required. Even in the proportional case, domain restrictions must be stated and checked: if the variable appears in $B$ or $D$, any value that zeros out either denominator is excluded.
 

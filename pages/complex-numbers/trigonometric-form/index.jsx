@@ -2307,7 +2307,12 @@ Two conventions exist:
 
 - **Convention 2:** $\\text{Arg}(z) \\in [0, 2\\pi)$
 
+@academic[fact,aside:true,width:35%:Every angle choice jumps somewhere
+No rule that picks one argument for every nonzero $z$ can avoid a jump. Follow a point once around the origin and its angle grows by $2\\pi$, so a single-valued choice must drop back by $2\\pi$ somewhere; a convention only decides where.]@
+
 The first convention is more common in advanced mathematics. Under this convention, arguments range from just above $-\\pi$ (pointing almost directly left, slightly below the axis) through $\\pi$ (pointing directly left).
+
+The two ends of the interval meet on the negative real axis. A point just above that axis has principal argument close to $\\pi$, while a point just below it has principal argument close to $-\\pi$, even though the two points almost touch. Under the second convention the same break sits on the positive real axis, between angles near $0$ and angles near $2\\pi$.
 
 ## Examples Using $(-\\pi, \\pi]$
 
@@ -2581,7 +2586,11 @@ Step 3: $z = -\\sqrt{3} + i$]@
 Evaluating $4\\cos 60°$ with the calculator set to radians computes $4\\cos(60 \\text{ rad}) \\approx -3.81$ and $4\\sin(60 \\text{ rad}) \\approx -1.22$. In degree mode the parts are $a = 2$ and $b = 2\\sqrt{3}$, as in Example 1.
 [Read more](!#pitfalls)]@
 
-The three examples use both angle units: the first angle is given in degrees, the other two in radians. The cosine and sine are evaluated at the angle exactly as written, and the modulus then scales both results. Exact values such as $\\cos 60° = \\frac{1}{2}$ or $\\sin\\frac{3\\pi}{2} = -1$ keep the answer exact.`,
+The three examples use both angle units: the first angle is given in degrees, the other two in radians. The cosine and sine are evaluated at the angle exactly as written, and the modulus then scales both results. Exact values such as $\\cos 60° = \\frac{1}{2}$ or $\\sin\\frac{3\\pi}{2} = -1$ keep the answer exact.
+
+This direction needs no quadrant check. Cosine and sine already carry the right signs: in Example 3 the negative real part $-\\sqrt{3}$ comes out of $\\cos\\frac{5\\pi}{6}$ by itself and places the point in the second quadrant.
+
+@academic[punchline:From angle to coordinates is plain evaluation; only the trip from coordinates back to an angle needs care with quadrants.]@`,
   before: ``,
   after: ``,
   link: '',
@@ -2603,6 +2612,11 @@ $$z_1 \\cdot z_2 = r_1 r_2\\,\\text{cis}(\\theta_1 + \\theta_2)$$
 /complex-numbers/formulas]@
 
 Multiply the moduli and add the arguments. Geometrically, multiplying by $z_2$ scales distances by $r_2$ and rotates by angle $\\theta_2$.
+
+@academic[fact,aside:true,width:35%:Two trig formulas in one product
+The rule says the same product is $\\cos(\\alpha + \\beta) + i\\sin(\\alpha + \\beta)$, so its two parts are the angle-addition formulas of trigonometry. One complex multiplication carries both, and rebuilds them whenever they are forgotten.]@
+
+For two numbers of modulus $1$, the rule can be set against ordinary expansion. Multiplying out $(\\cos\\alpha + i\\sin\\alpha)(\\cos\\beta + i\\sin\\beta)$ term by term, with $i^2 = -1$, gives the real part $\\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta$ and the imaginary part $\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta$. Nothing about angles was used in this expansion, only the algebra of brackets.
 
 ## Division Rule
 

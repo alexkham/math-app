@@ -859,6 +859,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 export async function getStaticProps(){
 
@@ -943,6 +944,27 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // negative binomial distribution") — template E, widening. Running
+    // instance: flipping a fair coin until the third head. Old obj1 text is
+    // kept in sectionsContent.obj1, unused; its three paragraphs, corollary
+    // box, example box, both link chips and the punchline are carried in
+    // unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciThirdTable = ciTableOpen(['third head on flip k', 'ways to place the first 2 heads in k − 1 flips', 'probability']) +
+      ciRow(['3', '1', '1/8 = 0.125']) +
+      ciRow(['4', '3', '3/16 ≈ 0.188'], { shade: true }) +
+      ciRow(['5', '6', '6/32 ≈ 0.188']) +
+      ciRow(['6', '10', '10/64 ≈ 0.156'], { shade: true }) +
+      ciRow(['7', '15', '15/128 ≈ 0.117'], { last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
       obj0: {
@@ -1633,6 +1655,10 @@ const negativeBinomialExplanations = {
       { fn: () => 0.4, from: 5.6, to: 9.4, ends: [null, null], color: 'g', label: { text: 'wait 3: 4', x: 7.5, y: 0.4, pos: 'n' } }]),
     notes: [{ x: 0.6, y: 1.1, text: 'filled: success, hollow: failure', pos: 'e' }, { x: 0.6, y: 0.98, text: 'X = 3 + 2 + 4 = 9 trials for r = 3', pos: 'e' }, { x: 0.6, y: 0.86, text: 'each wait is geometric: mean 1/p, variance (1 − p)/p²', pos: 'e' }],
     caption: 'r successes = r independent geometric waits, end to end' };
+  const conceptIntroFigures = {
+    thirdTable: ciThirdTable,
+  };
+
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.negativeBinomial,
@@ -1663,6 +1689,7 @@ const negativeBinomialExplanations = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          negativeBinomialExplanations,
@@ -1688,10 +1715,71 @@ export default function NegativeBinomialDistributionPage({
   negativeBinomialExplanations,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The geometric distribution already answers one waiting question: how many flips until the first head.`,
+        content: [
+          `For a fair coin the first head arrives on flip $k$ with probability $\\left(\\frac{1}{2}\\right)^{k-1} \\cdot \\frac{1}{2}$: a run of tails, then a head.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Ask instead how many flips until the third head, and the geometric formula has no answer.`,
+        content: [
+          `Before the third head there are two earlier heads, and they can sit anywhere among the earlier flips. A single run of tails followed by one head no longer describes the sequence, so the waiting time has to be counted afresh.`,
+          ciTable('thirdTable'),
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [negative binomial distribution](!/probability/definitions#negative_binomial_distribution) with parameters $r$ and $p$ is the distribution of the number of independent trials needed to reach $r$ successes: $P(X = k) = \\binom{k-1}{r-1} p^r (1 - p)^{k-r}$ for $k = r, r + 1, \\dots$`,
+        footer: `So the flips until the third head form a negative binomial with $r = 3$, $p = \\frac{1}{2}$ — like a game played until someone has won three rounds, not until the first round is won.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a waiting time again — now for several successes rather than one.`,
+        content: [
+          `The negative binomial distribution generalizes the [geometric distribution](!/probability/distributions/discrete/geometric) by counting the number of trials required until a fixed number of successes is reached, rather than just the first success. Trials are independent [Bernoulli experiments](!/probability/distributions/discrete#bernoulli) with constant success probability, and the process continues until the target number of successes is achieved.`,
+          `Here, the [random variable](!/probability/random-variables) counts the total number of trials, including both successes and failures. The number of successes is fixed in advance, while the number of failures — and thus the total length of the experiment — is random.`,
+          `This distribution is useful when success must occur multiple times before stopping, and the timing of those successes is uncertain.`,
+          sectionsContent.links.decide,
+          sectionsContent.obj1.example,
+          sectionsContent.links.example,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost: with r = 1 the new distribution is the old one.`,
+        content: [
+          `Setting $r = 1$ in the formula leaves $\\binom{k-1}{0} p (1 - p)^{k-1} = (1 - p)^{k-1} p$, the geometric distribution exactly.`,
+          `@academic[rule_corollary_plain:When the required number of successes is $1$, the negative binomial distribution reduces exactly to the [geometric distribution](!/probability/distributions/discrete/geometric).]@`,
+          `@academic[punchline:The negative binomial fixes the number of successes and leaves the number of trials to chance.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What changes: the formula needs a count of arrangements, and books disagree on what X counts.`,
+        content: `The factor $\\binom{k-1}{r-1}$ is the price of waiting for more than one success — it counts where the earlier successes can fall. And some texts let $X$ count only the failures before the $r$-th success, which shifts the values down by $r$; this page counts all trials, as the [probability mass function](!/probability/distributions/discrete/negative-binomial#4) section shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the parameters, the PMF and CDF, the mean, variance, mode and median, and further properties.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1708,11 +1796,7 @@ export default function NegativeBinomialDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-           sectionsContent.obj1.content,
-          sectionsContent.links.decide,
-          sectionsContent.obj1.example,
-          sectionsContent.links.example,
-          `@academic[punchline:The negative binomial fixes the number of successes and leaves the number of trials to chance.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
      {

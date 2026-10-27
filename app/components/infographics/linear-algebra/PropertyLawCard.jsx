@@ -4156,6 +4156,15 @@ function buildCss() {
   'position:relative;}' +
   '.plc-mast::after{content:\'\';position:absolute;left:24px;right:24px;bottom:0;height:3px;' +
   'background:var(--plc-accent);}' +
+  /* light header (matches MatrixOperation): pale blue band, navy text */
+  '.plc-mast{background:#eef4fc;color:#06357A;border-bottom:1px solid #d6e2f3;}' +
+  '.plc-mast::after{display:none;}' +
+  '.plc-mast .plc-kicker{color:#2563EB;opacity:1;}' +
+  '.plc-mast .plc-title,.plc-mast h2,.plc-mast h3{font-family:Inter,system-ui,sans-serif;font-weight:600;letter-spacing:-.01em;font-size:21px;line-height:1.2;color:#06357A;}' +
+  '.plc-mast .plc-intro{color:#4a6285;opacity:1;}' +
+  '.plc-mast .plc-tally b{color:#06357A;font-size:22px;}' +
+  '.plc-mast .plc-tally span{color:#4a6285;opacity:1;}' +
+  '.plc-mast a{color:#2563EB;border-color:#c3d0e4;}' +
   '.plc-kicker{font-family:\'JetBrains Mono\',ui-monospace,monospace;font-size:9px;' +
   'font-weight:800;letter-spacing:.22em;text-transform:uppercase;opacity:.68;}' +
   '.plc-title{font-family:\'Bricolage Grotesque\',sans-serif;font-weight:800;font-size:22px;' +

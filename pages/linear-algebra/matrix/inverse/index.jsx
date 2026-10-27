@@ -3025,11 +3025,13 @@ import NotationSection from '@/app/components/page-components/content-components
 import EquivalenceRing from '@/app/components/infographics/linear-algebra/EquivalenceRing'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inverseDiagrams from '@/app/components/linear-algebra copy/matrix/inverseDiagrams'
 import renderMatrixGridV2 from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid.v2'
+import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -4002,8 +4004,15 @@ const schemas = {
     }),
   };
 
+  const inverse2x2Strip = {
+    operation: 'inverse',
+    A: [[3, 1], [5, 2]],
+    intro: 'Swap the diagonal, negate the off-diagonal, divide by the determinant. Here det = 1, so every entry of the inverse is an integer.',
+  };
+
   return {
   props: {
+    inverse2x2Strip,
     demoUnits,
     sectionsContent,
     introContent,
@@ -4026,7 +4035,7 @@ const schemas = {
    }
 
 
-export default function MatrixInversePage({seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function MatrixInversePage({inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4066,6 +4075,14 @@ export default function MatrixInversePage({seoData, sectionsContent, introConten
           sectionsContent.obj2.content,
           <div key={'unit-inverseRecipe'} dangerouslySetInnerHTML={{ __html: demoUnits.inverseRecipe }} />,
           `Three moves and one division: the 2 × 2 inverse is the one case simple enough to carry out by eye.`,
+          <DiagramFrameV2
+            key={'obj2-diagram'}
+            id="inverse-2x2-strip"
+            title="The 2×2 inverse, one example"
+            source="/linear-algebra/matrix/inverse"
+          >
+            <MatrixOperation data={inverse2x2Strip} theme="navy" variant="strip" />
+          </DiagramFrameV2>,
         ]
     },
     {

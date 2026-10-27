@@ -761,10 +761,14 @@ export async function getStaticProps(){
     obj0: {
   title: `Key Terms`,
   content: `
-- [Random Variable](!/probability/definitions#random_variable) — an indicator is a binary-valued random variable
-- [Bernoulli Distribution](!/probability/definitions#bernoulli_distribution) — an indicator follows a Bernoulli distribution
-- [Expected Value](!/probability/definitions#expected_value) — $E[\\mathbf{1}_A] = P(A)$
-- [Event](!/probability/definitions#event) — the event $A$ that the indicator tracks`,
+- [Sample Space](!/probability/definitions#sample_space) — the set of all possible outcomes of a random experiment
+- [Event](!/probability/definitions#event) — a subset of the sample space
+- [Elementary Event](!/probability/definitions#elementary_event) — an event consisting of exactly one outcome
+- [Union of Sets](!/probability/definitions#union_of_sets) — the event that at least one of $A$ or $B$ occurs
+- [Intersection of Sets](!/probability/definitions#intersection_of_sets) — the event that both $A$ and $B$ occur simultaneously
+- [Complement of a Set](!/probability/definitions#complement_of_set) — all outcomes in the sample space that are not in $A$
+- [Mutual Exclusiveness](!/probability/definitions#mutual_exclusiveness) — $A$ and $B$ cannot happen at the same time: $A \\cap B = \\emptyset$
+- [Venn Diagram](!/probability/definitions#venn_diagram) — overlapping circles that depict events and their relationships within a sample space`,
   before: ``,
   after: `
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Definitions](!/probability/definitions) →@`,

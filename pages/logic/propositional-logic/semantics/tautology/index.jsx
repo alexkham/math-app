@@ -135,13 +135,13 @@ export async function getStaticProps(){
     },
     {
       id: "19",
-      name: "Double Negation Implication",
+      name: "Reductio ad Absurdum",
       expression: "((P → Q) ∧ (P → ¬Q)) → ¬P",
       explanation: "If P implies both Q and not-Q, then P must be false"
     },
     {
       id: "20",
-      name: "Triple Negation Implication",
+      name: "Negation Introduction",
       expression: "(P → Q) → ((P → ¬Q) → ¬P)",
       explanation: "If P implies contradictory results, P must be false"
     },
@@ -159,7 +159,7 @@ export async function getStaticProps(){
     },
     {
       id: "23",
-      name: "Hypothetical Syllogism Disjunctive Form",
+      name: "Constructive Dilemma",
       expression: "((P → Q) ∧ (R → S) ∧ (P ∨ R)) → (Q ∨ S)",
       explanation: "Complex syllogism with disjunctive conclusion"
     },
@@ -276,12 +276,12 @@ To test a formula, list every truth assignment of its variables in a truth table
 \t\t\t\t\t\t$(P→Q)≡(¬P∨Q)$
 
 (Material implication rewritten in disjunctive form.)
-As long as the equivalence is valid -its biconditional $(P→Q)↔(¬P∨Q)$ evaluates to true in every valuation and falls under [definition](!/logic/propositional-logic/semantics/tautology#definition) of tautology.
+As long as the equivalence is valid, its biconditional $(P→Q)↔(¬P∨Q)$ evaluates to true in every valuation and falls under [definition](!/logic/propositional-logic/semantics/tautology#definition) of tautology.
 So the final answer to that question is **YES** , as long as equivalence is valid- its biconditional form ($A↔B$) is a tautology.]@
 
 ## Are all tautologies logical equivalences?
 According to [definition](!/logic/propositional-logic/semantics/tautology#definition), a tautology is about a **single proposition that is always true**, while [equivalence](!/logic/propositional-logic/semantics/equivalences) is a relationship between two propositions that always have the same truth value.
-A tautology must always evaluate to true, but it does not necessarily have to express a relationship between two statements.In fact, there are numerous tautologies that are unilateral expressions that evaluate to true in all possible valuations but don't express a relationship of equality between two propositions.
+A tautology must always evaluate to true, but it does not necessarily have to express a relationship between two statements. In fact, there are numerous tautologies that are unilateral expressions that evaluate to true in all possible valuations but don't express a relationship of equality between two propositions.
 **Examples**:
 Law of Excluded Middle:
 \t\t\t\t\t\t $P∨¬P$
@@ -339,6 +339,8 @@ This means that the biconditionals $A↔B$ of all logical equivalences form a su
       content:`As discussed in previous [section](!/logic/propositional-logic/semantics/tautology#tautology_vs_equivalence), a valid equivalence $A≡B$ means its biconditional $A↔B$ is a **tautology**.
             Since all [propositional logic laws](!/logic/propositional-logic/laws) apart from inference rules (such as resolution) and non-equivalences (such as the inverse law) are either [equivalences](!/logic/propositional-logic/semantics/equivalences) or directly tautological statements, we conclude that all these laws yield tautologies.
 ## Propositional Logic Laws as Equivalences
+@academic[fact,aside:true,width:35%:Named for saying nothing
+Wittgenstein brought tautology, an old word for needless repetition, into logic in his Tractatus of 1921, where he held that every law of logic is one. A formula true in every row rules out no case, so it tells nothing about the world, and that is why it can never fail.]@
            Many fundamental laws of propositional logic are expressed as equivalences, meaning both sides of the equation always yield the same truth value. Since the equivalence must always hold, the biconditional joining its two sides is a **tautology**.
            **Examples**:
            **De Morgan’s Laws**:
@@ -353,7 +355,7 @@ This means that the biconditionals $A↔B$ of all logical equivalences form a su
 
 \t\t\t\t\t\t$P∧Q≡Q∧P$
 
-The biconditionals of these laws are always true, making them **tautologies**.See more examples of basic propositional logic laws [here](!/logic/propositional-logic/laws).
+The biconditionals of these laws are always true, making them **tautologies**. See more examples of basic propositional logic laws [here](!/logic/propositional-logic/laws).
 
 ## Propositional Logic Laws That Are Directly Tautologies
 Some laws are one-sided expressions that are true in all cases without establishing an equivalence. These are still tautologies.
@@ -677,6 +679,7 @@ Calling $P \\to (P \\land Q)$ a tautology after the rows $P = T$, $Q = T$ and $P
             sectionsContent.tautology_contradiction.after,
             sectionsContent.tautology_contradiction.svg,
             sectionsContent.tautology_contradiction.table,
+            `@academic[punchline:Negation swaps the two extremes, so showing a formula is always true is the same task as showing its negation is never true.]@`,
 
 
 

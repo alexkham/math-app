@@ -2201,7 +2201,8 @@ $$p_X(k) = F_X(k) - F_X(k^-)$$]@
 
 where $k^-$ represents the value just before $k$ in the support.
 
-For the fair die: $p_X(3) = F_X(3) - F_X(2) = \\frac{3}{6} - \\frac{2}{6} = \\frac{1}{6}$
+@academic[example:Example
+For the fair die: $p_X(3) = F_X(3) - F_X(2) = \\frac{3}{6} - \\frac{2}{6} = \\frac{1}{6}$]@
 
 ## Why Both Exist
 

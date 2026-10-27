@@ -15,7 +15,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -307,7 +307,7 @@ $N(0, 1)$ — the standard normal distribution ($\\mu = 0, \\sigma = 1$).
 $Z \\sim N(0, 1)$ — conventional notation for a standard normal [random variable](!/probability/random-variables)
 .
 
-**Note:** Some texts use $N(\\mu, \\sigma)$ with standard deviation instead of variance. Always check which convention is being used. Statistical software often defaults to variance notation.
+**Note:** Some texts use $N(\\mu, \\sigma)$ with standard deviation instead of variance. Always check which convention is being used. Statistical software often takes the standard deviation instead.
 
 Full account of these marks, including the reserved letters $Z$, $\\varphi$ and $\\Phi$: [normal distribution notation](!/probability/distributions/continuous/normal#2).
 
@@ -489,10 +489,10 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if 
 **Key Properties**:
 * $F(a) = 0$ (no probability mass below the lower bound)
 * $F(b) = 1$ (all probability mass is within [a, b])
-* The [CDF(Cumulative Density Function)](!/probability/cdf) increases linearly from 0 to 1 within the interval [a, b]
+* The [CDF(Cumulative Distribution Function)](!/probability/cdf) increases linearly from 0 to 1 within the interval [a, b]
 * For any $x$ in [a, b], $F(x)$ represents the fraction of the interval covered from $a$ to $x$
 
-**Practical Use:** The [CDF(Cumulative Density Function)](!/probability/cdf) for the uniform distribution is particularly simple. To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3. For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.`,
+**Practical Use:** The [CDF(Cumulative Distribution Function)](!/probability/cdf) for the uniform distribution is particularly simple. To find $P(X \\leq x)$ when $X \\sim U(0, 10)$ and $x = 3$: $F(3) = \\frac{3-0}{10-0} = 0.3$, meaning 30% of values fall below 3. For any probability calculation: $P(c \\leq X \\leq d) = F(d) - F(c) = \\frac{d-a}{b-a} - \\frac{c-a}{b-a} = \\frac{d-c}{b-a}$.`,
 
   meanVariance:`<h3 style="color: #1e3a8a;">Mean and Variance</h3>
 **Expected Value (Mean)**:
@@ -615,7 +615,7 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{
 **Key Properties**:
 * $F(0) = 0$ (no probability mass below zero)
 * $F(x) \\to 1$ as $x \\to \\infty$ (all probability is non-negative)
-* The CDF increases from 0 to 1, starting slowly and approaching 1 asymptotically
+* The CDF increases from 0 to 1, rising fastest at the start and approaching 1 asymptotically
 * For any $x \\geq 0$, $P(X > x) = 1 - F(x) = e^{-\\lambda x}$ (survival function)
 
 **Memoryless Property**: The exponential distribution is the only continuous distribution with the memoryless property: $P(X > s + t \\mid X > s) = P(X > t)$. In terms of the CDF: knowing that $X > s$ doesn't change the probability that $X > s + t$ relative to waiting an additional time $t$ from the start.
@@ -1209,11 +1209,11 @@ This section organizes continuous distributions, highlights their shared structu
          exponentialTable,
          continuousUniformTable,
           seoData: {
-        title: "Title | Learn Math Class",
-        description: "Metadescription",
+        title: "Continuous Distributions: Normal, Exponential, Uniform & More | Learn Math Class",
+        description: "Learn the main continuous probability distributions: normal, exponential and uniform. Compare their density functions, parameters, CDFs and key properties, and see how to choose the right model.",
         keywords: keyWords.join(", "),
         url: "/probability/distributions/continuous",
-         name: "name"
+         name: "Continuous Distributions"
       },
         
        }

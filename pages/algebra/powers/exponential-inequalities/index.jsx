@@ -12,6 +12,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -191,6 +192,26 @@ const keyWords = [
 </table>
 `
 
+    // Concept introduction (section 1, "Key Principle: Base Determines
+    // Direction") — template C, failure first. Running instance:
+    // (1/2)^x > 1/8 against 2^x > 8. Old obj1 text is kept in
+    // sectionsContent.obj1, unused; its rule box, three paragraphs and
+    // obj1Table are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciTestTable = ciTableOpen(['x', 'claimed by "x > 3"?', '(1/2)ˣ', 'really greater than 1/8?']) +
+      ciRow(['0', 'no', '1', 'yes'], { color: '#a4243b', cols: [3] }) +
+      ciRow(['2', 'no', '1/4', 'yes'], { shade: true, color: '#a4243b', cols: [3] }) +
+      ciRow(['3', 'no', '1/8', 'no (equal)']) +
+      ciRow(['4', 'yes', '1/16', 'no'], { shade: true, color: '#a4243b', cols: [3] }) +
+      ciRow(['5', 'yes', '1/32', 'no'], { last: true, color: '#a4243b', cols: [3] }) +
+      '</tbody></table>'
+
     const sectionsContent={
 
     obj0: {
@@ -230,7 +251,8 @@ obj2: {
 
 The inequality $2^x > 8$ rewrites as $2^x > 2^3$. Since the base $2$ is greater than $1$, the function is increasing and the inequality preserves direction: $x > 3$.
 
-The inequality $\\left(\\frac{1}{3}\\right)^x > 9$ requires more care. Rewrite $9$ as a power of $\\frac{1}{3}$: since $\\left(\\frac{1}{3}\\right)^{-2} = 3^2 = 9$, the inequality becomes $\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$. The base $\\frac{1}{3}$ is between $0$ and $1$, so the function is decreasing and the inequality flips: $x < -2$.
+@academic[example:Example
+The inequality $\\left(\\frac{1}{3}\\right)^x > 9$ requires more care. Rewrite $9$ as a power of $\\frac{1}{3}$: since $\\left(\\frac{1}{3}\\right)^{-2} = 3^2 = 9$, the inequality becomes $\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$. The base $\\frac{1}{3}$ is between $0$ and $1$, so the function is decreasing and the inequality flips: $x < -2$.]@
 
 The inequality $5^{x-1} \\leq 125$ rewrites as $5^{x-1} \\leq 5^3$. Base greater than $1$, direction preserved: $x - 1 \\leq 3$, so $x \\leq 4$.
 
@@ -256,9 +278,11 @@ $2^{300}$ and $3^{200}$ share no base, but they can share an exponent: $2^{300} 
 
 The inequality $4^x < 32$ involves $4 = 2^2$ and $32 = 2^5$. Rewriting: $(2^2)^x < 2^5$, so $2^{2x} < 2^5$. Base $2 > 1$, direction preserved: $2x < 5$, giving $x < \\frac{5}{2}$.
 
-The inequality $9^{x+1} \\geq 27^x$ involves $9 = 3^2$ and $27 = 3^3$. Rewriting: $3^{2(x+1)} \\geq 3^{3x}$, which gives $3^{2x+2} \\geq 3^{3x}$. Base $3 > 1$, direction preserved: $2x + 2 \\geq 3x$, so $2 \\geq x$, meaning $x \\leq 2$.
+@academic[example:Example
+The inequality $9^{x+1} \\geq 27^x$ involves $9 = 3^2$ and $27 = 3^3$. Rewriting: $3^{2(x+1)} \\geq 3^{3x}$, which gives $3^{2x+2} \\geq 3^{3x}$. Base $3 > 1$, direction preserved: $2x + 2 \\geq 3x$, so $2 \\geq x$, meaning $x \\leq 2$.]@
 
-The inequality $\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2$ requires converting both bases. Since $\\frac{1}{4} = 2^{-2}$ and $\\frac{1}{8} = 2^{-3}$, the inequality becomes $(2^{-2})^x > (2^{-3})^2$, or $2^{-2x} > 2^{-6}$. Base $2 > 1$: $-2x > -6$, so $x < 3$.
+@academic[example:Example
+The inequality $\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2$ requires converting both bases. Since $\\frac{1}{4} = 2^{-2}$ and $\\frac{1}{8} = 2^{-3}$, the inequality becomes $(2^{-2})^x > (2^{-3})^2$, or $2^{-2x} > 2^{-6}$. Base $2 > 1$: $-2x > -6$, so $x < 3$.]@
 
 @academic[pitfall,aside:true,width:35%:Skipping the flip in the exponent step
 Dividing $-2x > -6$ by $-2$ without reversing the sign gives $x > 3$. But $x = 4$ gives $\\left(\\frac{1}{4}\\right)^4 = \\frac{1}{256}$, less than $\\left(\\frac{1}{8}\\right)^2 = \\frac{1}{64}$. The solution is $x < 3$.
@@ -301,7 +325,12 @@ The inequality $\\frac{1}{4} < 2^x < 16$ sets lower and upper bounds on $2^x$. R
 
 The inequality $\\frac{1}{27} \\leq 3^{x-1} \\leq 81$ rewrites as $3^{-3} \\leq 3^{x-1} \\leq 3^4$. Preserving direction: $-3 \\leq x - 1 \\leq 4$, so $-2 \\leq x \\leq 5$.
 
-With a base between $0$ and $1$, both inequality directions flip. The inequality $\\frac{1}{9} < \\left(\\frac{1}{3}\\right)^x < 3$ rewrites as $\\left(\\frac{1}{3}\\right)^{2} < \\left(\\frac{1}{3}\\right)^x < \\left(\\frac{1}{3}\\right)^{-1}$. Since $\\frac{1}{3} < 1$, the function is decreasing, so both comparisons reverse: $2 > x > -1$. Copied carelessly as $2 < x < -1$ it looks empty; read left to right it is $-1 < x < 2$. Care with the direction at each step prevents this kind of error.
+With a base between $0$ and $1$, both inequality directions flip.
+
+@academic[example:Example
+The inequality $\\frac{1}{9} < \\left(\\frac{1}{3}\\right)^x < 3$ rewrites as $\\left(\\frac{1}{3}\\right)^{2} < \\left(\\frac{1}{3}\\right)^x < \\left(\\frac{1}{3}\\right)^{-1}$. Since $\\frac{1}{3} < 1$, the function is decreasing, so both comparisons reverse: $2 > x > -1$. Copied carelessly as $2 < x < -1$ it looks empty; read left to right it is $-1 < x < 2$.]@
+
+Care with the direction at each step prevents this kind of error.
 
 Systems involving multiple exponential inequalities with different bases are handled by solving each inequality independently and then intersecting the solution sets.`,
   before: ``,
@@ -575,6 +604,10 @@ const schemas = {
     notes: [{ x: -2.8, y: 9, text: 'solution −2 < x < 4: 2⁻² < 2ˣ < 2⁴', pos: 'e', color: 'r' }],
     caption: '1/4 < 2ˣ < 16 is 2⁻² < 2ˣ < 2⁴, so −2 < x < 4' };
 
+  const conceptIntroFigures = {
+    testTable: ciTestTable,
+  };
+
   const demoUnits = {
     expFlip: demoUnitFrame({
       svg: renderFunctionPlotV4(fpExpFlip),
@@ -603,6 +636,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Exponential Inequalities: When to Flip the Sign | Learn Math Class",
       description: "Learn to solve exponential inequalities: when to preserve vs flip inequality direction based on base, rewriting with common bases, compound inequalities, and domain considerations.",
@@ -615,9 +649,73 @@ return {
    }
 
 // export default function InequalitiesPage({seoData,sectionsContent , introContent}) {
-export default function InequalitiesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function InequalitiesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `With matching bases, it seems enough to compare the exponents and keep the sign.`,
+        content: [
+          `$2^x > 8$ is $2^x > 2^3$, and comparing exponents gives $x > 3$ — which is right. So $\\left(\\frac{1}{2}\\right)^x > \\frac{1}{8}$, which is $\\left(\\frac{1}{2}\\right)^x > \\left(\\frac{1}{2}\\right)^3$, should give $x > 3$ as well.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Test it: every value that "x > 3" claims fails, and every value it rejects below 3 works.`,
+        content: [
+          ciTable('testTable'),
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The failure was predictable: halving again and again makes the value smaller, so a larger exponent gives a smaller result.`,
+        content: [
+          `With base $2$ the powers climb; with base $\\frac{1}{2}$ they fall, like walking downhill — the further you go, the lower you are. Comparing exponents tells which number is further along, and whether "further" means bigger or smaller depends on the base.`,
+          `The behavior of an exponential inequality depends entirely on whether the base is greater than $1$ or between $0$ and $1$. This is the central idea on this page, and every solving method flows from it.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [exponential inequality](!/algebra/definitions#exponential_inequality) has the unknown in an exponent and compares with $<$, $\\leq$, $>$ or $\\geq$. With a common base: for $a > 1$, $a^x > a^y$ exactly when $x > y$; for $0 < a < 1$, $a^x > a^y$ exactly when $x < y$.`,
+        formula: [
+          `@academic[rule_plain:When $a > 1$, the function $a^x$ is increasing — larger exponents produce larger values. So the inequality $a^x > a^y$ holds exactly when $x > y$. The direction of the inequality is preserved.
+
+When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce smaller values. So the inequality $a^x > a^y$ holds exactly when $x < y$. The direction of the inequality flips.]@`,
+        ],
+        footer: `So $\\left(\\frac{1}{2}\\right)^x > \\frac{1}{8}$ has the solution $x < 3$, while $2^x > 8$ has $x > 3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Its answer is a range of exponents, and the base alone decides which side of the boundary it lies on.`,
+        content: [
+          `This directional rule replaces the familiar "multiply or divide by a negative flips the inequality" from linear algebra. In exponential inequalities, it is not the sign of a multiplier but the size of the base that governs whether the inequality reverses.`,
+          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the diagnosis is a test: look at the base before writing the inequality between exponents.`,
+        content: [
+          `A base above $1$ keeps the sign, a base between $0$ and $1$ reverses it, and any answer can be checked by putting one value back in.`,
+          `The base $a = 1$ is excluded because $1^x = 1$ for all $x$ — no inequality between distinct powers is possible.`,
+          `The next section, [solving basic exponential inequalities](!/algebra/powers/exponential-inequalities#2), applies the test to rewritten bases.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers solving basic exponential inequalities, inequalities that need simplifying, domain and sign considerations, and compound inequalities.`,
+      },
+    ],
+  }
     
   const genericSections=[
       {
@@ -635,12 +733,7 @@ export default function InequalitiesPage({seoData, sectionsContent, introContent
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

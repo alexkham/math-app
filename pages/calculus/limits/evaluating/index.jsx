@@ -14,6 +14,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -185,6 +186,35 @@ const summaryTable = `
   </tbody>
 </table>
 `
+
+// Concept introduction (section 3, "Indeterminate Forms") — template G,
+// exclusion. Running instance: six shapes a limit can take on substitution,
+// each tried on several limits. Old obj3 text is kept in
+// sectionsContent.obj3, unused; its two formula boxes, fact aside and four
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCandTable = ciTableOpen(['shape after substitution', 'reads as']) +
+  ciRow(['0 / 5', 'something tiny over 5']) +
+  ciRow(['1 / 0', '1 over something tiny'], { shade: true }) +
+  ciRow(['∞ + ∞', 'huge plus huge']) +
+  ciRow(['0 / 0', 'tiny over tiny'], { shade: true }) +
+  ciRow(['∞ / ∞', 'huge over huge']) +
+  ciRow(['∞ − ∞', 'huge minus huge'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciSortTable = ciTableOpen(['shape', 'limits with that shape', 'results', 'one answer?']) +
+  ciRow(['0 / 5', 'x / 5 as x → 0', '0', 'yes']) +
+  ciRow(['1 / 0', '1 / x² as x → 0', 'grows without bound', 'yes'], { shade: true }) +
+  ciRow(['∞ + ∞', 'x + x² as x → ∞', 'grows without bound', 'yes']) +
+  ciRow(['0 / 0', 'x / x, 2x / x, x² / x as x → 0', '1, 2, 0', 'no'], { shade: true, color: '#a4243b', cols: [2, 3] }) +
+  ciRow(['∞ / ∞', 'x / x, x² / x, x / x² as x → ∞', '1, ∞, 0', 'no'], { color: '#a4243b', cols: [2, 3] }) +
+  ciRow(['∞ − ∞', '(x + 1) − x, 2x − x, x − x² as x → ∞', '1, ∞, −∞', 'no'], { shade: true, last: true, color: '#a4243b', cols: [2, 3] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   // ─── /calculus/limits/evaluating ──────────────────────────────────────────
@@ -555,7 +585,7 @@ $$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\frac{1}{2}$$
 @academic[formulas_link:Browse all calculus formulas
 /calculus/formulas]@
 
-This follows from the [special limit](!/calculus/limits/special) $\\lim_{x \\to 0} \\dfrac{1 - \\cos x}{x^2} = \\dfrac{1}{2}$.
+This follows from the [special limit](!/calculus/limits/special) $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$: multiplying top and bottom by $1 + \\cos x$ gives $\\dfrac{\\sin^2 x}{x^2(1 + \\cos x)}$, which tends to $1 \\cdot \\dfrac{1}{2}$.
 
 ## Example 4: Combining Fractions
 
@@ -799,6 +829,11 @@ const schemas = {
     vlines: [{ x: 3, label: 'x = 3' }],
     notes: [{ x: 3.8, y: 10.2, text: '4 / (small +) → +∞', pos: 'e', color: 'r' }, { x: -1.9, y: -10.2, text: '4 / (small −) → −∞', pos: 'e', color: 'r' }],
     caption: 'The sign of the small denominator decides +∞ or −∞' };
+  const conceptIntroFigures = {
+    candTable: ciCandTable,
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     onesided: demoUnitFrame({
       svg: functionLimitDiagrams.jump,
@@ -822,6 +857,7 @@ const schemas = {
 return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -840,9 +876,80 @@ return {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 3 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Plugging in the limit point can leave several odd-looking shapes. Which of them already tell you the answer?`,
+        content: [
+          `Each shape below records what the top and bottom, or the two terms, are doing as $x$ approaches the point. Some look harmless, some look alarming.`,
+          ciTable('candTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Try several limits of each shape: three shapes always give the same result, three give different results.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `0/0, ∞/∞ and ∞ − ∞ fail because the shape leaves out how fast each part moves; 1/0 looks alarming but is settled.`,
+        content: [
+          `In $\\frac{x}{x}$, $\\frac{2x}{x}$ and $\\frac{x^2}{x}$ the top and bottom both go to $0$, but at different rates, and the rates decide the answer. By contrast $\\frac{1}{0}$-type limits always blow up — the shape is frightening, yet it fixes the outcome — and $0/5$ and $\\infty + \\infty$ leave nothing to argue about.`,
+          `Each form represents a competition between opposing tendencies. In $0/0$, both numerator and denominator vanish—which vanishes faster determines the limit. In $\\infty - \\infty$, both terms grow without bound—their difference depends on relative growth rates.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: a shape is indeterminate when limits of that shape can come out to different values.`,
+        content: [
+          `It is like a tug-of-war reported only as "two teams pulling hard": the report cannot say who wins. The shape names a contest, not its result.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [indeterminate form](!/calculus/definitions#indeterminate_form) is a shape such as $\\frac{0}{0}$ that a limit can take on direct substitution without the shape fixing the value of the limit.`,
+        formula: [
+          `Several forms signal that [limit rules](!/calculus/limits/rules) cannot be applied directly:`,
+          `@academic[formula_callout:Indeterminate Forms
+$$\\frac{0}{0} \\qquad \\frac{\\infty}{\\infty} \\qquad 0 \\cdot \\infty \\qquad \\infty - \\infty$$]@`,
+          `@academic[formula_callout:Indeterminate Forms
+$$0^0 \\qquad 1^\\infty \\qquad \\infty^0$$]@`,
+        ],
+        footer: `So $0/0$, $\\infty/\\infty$ and $\\infty - \\infty$ from the table are indeterminate forms; $0/5$, $1/0$ and $\\infty + \\infty$ are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `An indeterminate form is a signal about a limit, not a value: it says "more work needed".`,
+        content: [
+          `@academic[fact,aside:true,width:35%:A rule bought from Bernoulli
+The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Johann Bernoulli. In 1694 the Marquis de L'Hôpital agreed to pay Bernoulli 300 livres a year for his discoveries, and in 1696 he printed the rule in his textbook, the first on differential calculus.]@`,
+          `The techniques on this page settle the competition by algebra: they rewrite the expression until the competing parts can be compared directly. Once derivatives are available, one more tool handles most $\\frac{0}{0}$ and $\\frac{\\infty}{\\infty}$ forms at once. When $f$ and $g$ both tend to $0$, or both to $\\infty$, and the limit of $\\frac{f'(x)}{g'(x)}$ exists, the limit of $\\frac{f(x)}{g(x)}$ equals it. This is L'Hôpital's rule.`,
+          `Indeterminate forms require transformation. The goal is to rewrite the expression so that substitution or [limit rules](!/calculus/limits/rules) apply.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rejected shapes are useful too: they finish a limit on the spot.`,
+        content: `Seeing $0/5$ or $\\infty + \\infty$ after substitution means the limit is already known; seeing $1/0$ means it blows up, and only the sign is left to check. Only the indeterminate shapes send you to algebra — starting with [factoring and canceling](!/calculus/limits/evaluating#4).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation of indeterminate forms and the techniques that resolve them: factoring, rationalizing, expanding, and others.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -871,7 +978,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
-          sectionsContent.obj3.content,
+          <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
         ]
     },
     {

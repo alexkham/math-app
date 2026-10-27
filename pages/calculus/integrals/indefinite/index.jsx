@@ -597,7 +597,7 @@ Differentiation takes a function and produces its rate of change. The indefinite
 
 If $F'(x) = f(x)$, then $F$ is an antiderivative of $f$. The indefinite integral collects all such antiderivatives:
 
-@academic[formula_callout:Summary: The Indefinite-Integration Workflow
+@academic[formula_callout:Indefinite Integral
 $$\\int f(x)\\, dx = F(x) + C$$]@
 
 The constant $C$ reflects a fundamental ambiguity. Since the derivative of any constant is zero, functions differing by a constant share the same derivative. The family $F(x) + C$ captures every function whose derivative equals $f(x)$.

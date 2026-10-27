@@ -565,7 +565,7 @@ import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/ou
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennTwoSetDiagrams'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 

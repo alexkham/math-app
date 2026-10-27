@@ -574,7 +574,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 

@@ -699,7 +699,7 @@ import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fr
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
@@ -1102,7 +1102,10 @@ The fraction $\\frac{1}{8}$ is smaller than $\\frac{1}{4}$ because dividing some
 Adding numerators and denominators gives $\\frac{1}{2} + \\frac{1}{4} = \\frac{2}{6} = \\frac{1}{3}$, less than $\\frac{1}{2}$ alone. In quarters, $\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$.
 [Read more](!#pitfalls)]@
 
-A shared denominator turns both fractions into pieces of one size, so the pieces can be counted together. For $\\frac{1}{2} + \\frac{1}{3}$, halves and thirds both fit into sixths: $\\frac{1}{2} = \\frac{3}{6}$ and $\\frac{1}{3} = \\frac{2}{6}$. Three sixths and two sixths make $\\frac{5}{6}$.
+A shared denominator turns both fractions into pieces of one size, so the pieces can be counted together.
+
+@academic[example:Example
+For $\\frac{1}{2} + \\frac{1}{3}$, halves and thirds both fit into sixths: $\\frac{1}{2} = \\frac{3}{6}$ and $\\frac{1}{3} = \\frac{2}{6}$. Three sixths and two sixths make $\\frac{5}{6}$.]@
 
 [Multiplying fractions](!/arithmetic/fractions/multiplying) follows a direct rule: multiply the numerators together and multiply the denominators together. The product $\\frac{2}{3} \\times \\frac{4}{5}$ equals $\\frac{2 \\times 4}{3 \\times 5} = \\frac{8}{15}$. No common denominator is needed.
 

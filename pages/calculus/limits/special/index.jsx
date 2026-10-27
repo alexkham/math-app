@@ -12,7 +12,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -601,7 +601,7 @@ $$\\frac{d}{dx} e^x \\bigg|_{x=0} = \\lim_{h \\to 0} \\frac{e^{0+h} - e^0}{h} = 
 
 This limit is the cornerstone of that property.
 
-An equivalent form:
+The same limit, written in $h$:
 
 @academic[formula_callout:The Natural Exponential Limit
 $$\\lim_{h \\to 0} \\frac{e^h - 1}{h} = 1$$]@

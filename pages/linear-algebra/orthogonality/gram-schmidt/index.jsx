@@ -1841,7 +1841,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
@@ -2242,7 +2242,7 @@ The coefficient in front of $\\mathbf{u}_1$ is a ratio of two dot products. The 
 $$\\mathbf{u}_1 = \\mathbf{v}_1$$]@
 
 @academic[formula_callout:gram_schmidt_process|Gram-Schmidt Process|$$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\mathbf{u}_i \\cdot \\mathbf{v}_j}{\\mathbf{u}_i \\cdot \\mathbf{u}_i}\\,\\mathbf{u}_i \\quad \\text{for } j = 2, 3, \\dots, k$$]@
-@academic[formulas_link:/linear-algebra/formulas#gram_schmidt_process]@
+@academic[formulas_link:/linear-algebra/formulas#gram-schmidt_process]@
 
 @academic[pitfall,aside:true,width:35%:Projecting onto the original vectors
 Projecting $\\mathbf{v}_3 = (0, 1, 1)$ onto $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$ instead of onto $\\mathbf{u}_1, \\mathbf{u}_2$ gives $(-1, \\frac{1}{2}, \\frac{1}{2})$, whose dot product with $\\mathbf{u}_1$ is $-\\frac{1}{2}$. Projecting onto the $\\mathbf{u}_i$ gives $\\mathbf{u}_3 = (-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3})$.
@@ -2359,7 +2359,7 @@ The span is preserved at each step. Each $\\mathbf{u}_j$ is a linear combination
 $$A = QR$$
 /linear-algebra/formulas#qr_decomposition]@
 
-@academic[formulas_link:/linear-algebra/formulas#gram_schmidt_process]@
+@academic[formulas_link:/linear-algebra/formulas#gram-schmidt_process]@
 
 $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns (the normalized $\\mathbf{q}_i$&apos;s). $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.
 

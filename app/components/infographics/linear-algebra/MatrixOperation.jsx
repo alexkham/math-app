@@ -345,6 +345,8 @@ function buildCss() {
     '.mop-root.mop-v-strip .mop-mx{padding:3px 9px;}' +
     '.mop-root.mop-v-strip .mop-cell{font-size:11.5px;padding:2px 6px;min-width:26px;}' +
     '.mop-root.mop-v-strip .mop-glyph{font-size:15px;padding-bottom:0;}' +
+    ".mop-root.mop-v-strip .mop-post{font-family:'STIX Two Text','Times New Roman',serif;" +
+    'font-size:15px;color:var(--mop-ink);align-self:flex-start;margin-left:-12px;margin-top:2px;}' +
     '.mop-root.mop-v-strip .say{font-size:12.5px;color:var(--mop-muted);' +
     'margin-left:auto;max-width:300px;text-align:right;line-height:1.35;}' +
 
@@ -1139,7 +1141,14 @@ export default function MatrixOperation(props) {
     return (
       <div className={rootClass} style={rootStyle}>
         <style dangerouslySetInnerHTML={{ __html: MOP_CSS }} />
+        {/* one-operand operations need their mark, or the strip reads A = result */}
+        {op === 'scalar' && k != null ? (
+          <span className="mop-glyph">{String(k).replace('-', '−')}</span>
+        ) : null}
         {matrixNode(A, {})}
+        {op === 'transpose' ? <span className="mop-post">T</span> : null}
+        {op === 'inverse' ? <span className="mop-post">{'−1'}</span> : null}
+        {op === 'power' ? <span className="mop-post">{powers}</span> : null}
         {isBinary(op) && isMatrix(B) ? (
           <>
             <span className="mop-glyph">{opGlyph(op)}</span>
@@ -1411,9 +1420,14 @@ export default function MatrixOperation(props) {
           },
           {
             dt: 'Same size when',
-            dd: dA && dB && dA.r === dB.c ? 'here, yes' : 'm = n',
+            /* AB is m×m and BA is n×n, so they match exactly when A is square */
+            dd: 'm = n',
             hot: true,
-            sm: 'and only then can the entries be compared at all',
+            sm: dA
+              ? dA.r === dA.c
+                ? 'here yes, so the entries can be compared'
+                : 'here ' + dA.r + ' ≠ ' + dA.c + ', so the entries cannot be compared'
+              : 'and only then can the entries be compared at all',
           },
           {
             dt: 'Shared invariant',

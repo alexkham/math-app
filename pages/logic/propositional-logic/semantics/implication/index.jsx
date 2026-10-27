@@ -88,7 +88,7 @@ export async function getStaticProps(){
     `**Reflexivity**:
 $p→p$ is always true for any proposition $p$.
 This follows from the [truth table](!/logic/propositional-logic/semantics/implication#tt_self) because whenever 
-the **antecedent** and the **consequent** are the same-$p→p$ is always true since implication is only false when the antecedent is true and the consequent is false, and that simply can not happen here.
+the **antecedent** and the **consequent** are the same: $p→p$ is always true, since implication is only false when the antecedent is true and the consequent is false, and that simply can not happen here.
 The expression is always true ([tautology](!/logic/propositional-logic/semantics/tautology)).`,
 `**Transitivity**:
 If $p→q$ and $q→r$, then $p→r$.
@@ -232,7 +232,7 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
 
             Logical implication ($p→q$) is a conditional statement meaning "if $p$, then $q$." It asserts that whenever $p$ (the antecedent or hypothesis) is true, $q$ (the consequent or conclusion) must also be true.
             **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the consequent**.
-            However, if $p$ is false, the implication is still considered to be true regardless of $q$. This is very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table).
+            However, if $p$ is false, the implication is still considered to be true regardless of $q$. This is a very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table).
             `,
         ]
           },
@@ -284,10 +284,13 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
           `<table border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse; width: 100%; margin: 15px 0;'><tr style='background-color: #eef2f7;'><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P</th><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>Q</th><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P → Q</th><th style='padding: 10px; text-align: left; border: 1px solid #bdc9d9;'>Explanation</th></tr><tr><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is true and Q is true, the implication is true.</td></tr><tr style='background-color: #f8f9fa;'><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #c62828;'>F</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is true but Q is false, the implication is false.</td></tr><tr><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is false and Q is true, the implication is true.</td></tr><tr style='background-color: #f8f9fa;'><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is false and Q is false, the implication is true.</td></tr></table>`,
           
           `The counterintuitive aspect is that P → Q is true whenever P is false, regardless of Q's value. This is called **"vacuous truth"**. A helpful way to understand this is with a promise analogy: "If it rains, I'll bring an umbrella." If it doesn't rain, the promise remains unbroken whether I bring an umbrella or not.
-          Promise may be broken only if it has been given. In case it had been never given (last 2 rows, when $P$ is equal to false)- it can not be broken and the whole statement evaluates to true.`,
+          Promise may be broken only if its condition has happened. In case the condition did not happen (last 2 rows, when $P$ is equal to false)- it can not be broken and the whole statement evaluates to true.`,
           `And to conclude this discussion, **the rule of thumb with logical implication is that whenever the hypothesis is false-the overall expression evaluates to true.**`,
           <div key={'unit-impliesRegion'} dangerouslySetInnerHTML={{ __html: demoUnits.impliesRegion }} />,
           `The only unshaded piece is P true and Q false: the one row of the table where P → Q is false.`,
+          `@academic[fact,aside:true,width:35%:Most people turn the wrong cards
+In Wason's 1966 card test, four cards show E, K, 4 and 7, and the rule says that a card with a vowel on one side has an even number on the other. Only E and 7 can hide a broken rule, yet fewer than 1 person in 10 picks that pair; the usual choice is E alone, or E and 4.]@
+This single false row also decides how a conditional is tested. To check a claim of the form "if $P$, then $Q$" against real cases, the only cases worth examining are those that could turn out to have $P$ true and $Q$ false: cases where $P$ is known to hold, and cases where $Q$ is known to fail. A case with $P$ false, or with $Q$ already true, cannot break the claim, whatever it turns out to contain. Looking for cases that agree with the claim proves nothing; only a search for the false row can test it.`,
           `<br id='tt_self'></br>`,
           `A special case worth noting is $p \\rightarrow p$, where the **antecedent** and the **consequent** are the same proposition. This implication is always true  (it is a [tautology](!/logic/propositional-logic/semantics/tautology)), as seen directly in the truth table:`,
 `<table  border='1' cellpadding='10' cellspacing='0' style='border-collapse: collapse; width: 100%; margin: 15px 0;'><tr style='background-color: #eef2f7;'><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P</th><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P</th><th style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>P → P</th><th style='padding: 10px; text-align: left; border: 1px solid #bdc9d9;'>Explanation</th></tr><tr><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>T</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is true, P → P is true.</td></tr><tr style='background-color: #f8f9fa;'><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9;'>F</td><td style='padding: 10px; text-align: center; border: 1px solid #bdc9d9; color: #2e7d32;'>T</td><td style='padding: 10px; border: 1px solid #bdc9d9;'>When P is false, P → P is still true.</td></tr></table>`
@@ -299,7 +302,7 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
       {
             id:'properties',
             title:'Properties of Implication',
-            content:[`Logical implications have several important properties that define how it behaves in reasoning and formal logic. These properties help establish relationships between statements, simplify logical expressions, and form the basis for proofs. Understanding these properties—such as transitivity, contraposition, and material implication—is essential for working with logical arguments and mathematical reasoning.
+            content:[`Logical implications have several important properties that define how they behave in reasoning and formal logic. These properties help establish relationships between statements, simplify logical expressions, and form the basis for proofs. Understanding these properties—such as transitivity, contraposition, and material implication—is essential for working with logical arguments and mathematical reasoning.
             **Here are some important properties of logical implication**:            
             `,
             <MyList data={properties}
@@ -363,7 +366,8 @@ To prove "If $n^2$ is even, then $n$ is even," one may instead prove the contrap
               `@academic[pitfall,aside:true,width:35%:Negating the implication as another implication
 Taking $p \\to \\neg q$ as the negation of $p \\to q$ fails at $p = F$: in both rows with $p = F$, $p \\to q$ and $p \\to \\neg q$ are T together. The negation is $p \\land \\neg q$, which is T only at $p = T$, $q = F$.
 [Read more](!#misconceptions)]@
-Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be valid.`
+Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be valid.`,
+              `@academic[punchline:Every proof of an implication rules out the same single case: the antecedent true and the consequent false.]@`
             ]
           },
           {
@@ -378,6 +382,9 @@ Logical implication also underpins **proof by contradiction**, where the assumpt
                 key={3}
                 copyableFields="formula"
               />,
+              `@academic[fact,aside:true,width:35%:One direction always holds
+For any two statements, $(p \\to q) \\lor (q \\to p)$ is a tautology: if $q$ is true, $p \\to q$ is true, and if $q$ is false, $q \\to p$ is true. So of "the Moon is made of cheese" and "Paris is in France", one implies the other.]@
+Rows 1 and 3 of the table compare an implication with its rearrangements: the contrapositive $\\neg q \\to \\neg p$ always agrees with $p \\to q$, while the inverse $\\neg p \\to \\neg q$ can be false when $p \\to q$ is true. The arrow is not a statement about causes, or about any connection between the meanings of $p$ and $q$. Its truth value depends only on the truth values of its two parts. That is what makes it easy to compute, and it also leads to laws that sound strange when read in everyday language.`,
               `These rules are particularly useful for transforming, simplifying, or interpreting logical statements involving conditional relationships.`,
               `Read more about [laws of propositional logic](!/logic/propositional-logic/laws) on dedicated page.`
             ]

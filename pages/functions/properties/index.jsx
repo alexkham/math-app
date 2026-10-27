@@ -1564,8 +1564,9 @@ import functionTypesDiagrams from '@/app/components/functions/types/functionType
 import functionRangeDiagrams from '@/app/components/functions/range/functionRangeDiagrams'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 
 
 export async function getStaticProps(){
@@ -1839,7 +1840,7 @@ export async function getStaticProps(){
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Periodic</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x + p) = f(x) for some smallest period p</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x + p) = f(x) for some p &gt; 0</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a single pattern repeats unchanged every p units</td>
     </tr>
     <tr style="background: #f8f9fa;">
@@ -2330,6 +2331,9 @@ The table below collects the three possible outcomes with the algebraic test, th
     title: `Symmetry`,
     content: `Symmetry describes when one part of a graph determines another through reflection or rotation.
 
+@academic[fact,aside:true,width:35%:Every function is even plus odd
+On a symmetric domain, $f(x) = \\frac{f(x) + f(-x)}{2} + \\frac{f(x) - f(-x)}{2}$, and the first part is even, the second odd. The split is unique, since $0$ is the only function that is both; for $e^x$ the two parts are $\\cosh x$ and $\\sinh x$.]@
+
 A graph symmetric about the $y$-axis has the property that the point $(x, y)$ lies on the graph if and only if $(-x, y)$ does. Every point on the right has a mirror image on the left. This is the graphical signature of even functions.
 
 A graph symmetric about the origin has the property that $(x, y)$ lies on the graph if and only if $(-x, -y)$ does. Every point has a counterpart obtained by rotating $180°$ around the origin. This is the graphical signature of odd functions.
@@ -2601,6 +2605,9 @@ End behavior provides the frame for the entire graph — knowing where the curve
     title: `Periodicity`,
     content: `A function is periodic if it repeats its values at regular intervals. There exists a positive number $p$ such that $f(x + p) = f(x)$ for all $x$ in the domain. The graph shows the same pattern cycling endlessly.
 
+@academic[fact,aside:true,width:35%:Periodic with no smallest period
+The function equal to $1$ at rational $x$ and $0$ at irrational $x$ has every positive fraction $p$ as a period, because adding a fraction never changes whether $x$ is rational. So it repeats endlessly, yet has no smallest period.]@
+
 The smallest such $p$ is called the fundamental period (or simply the period). The function $f(x) = \\sin(x)$ has period $2\\pi$: the wave from $0$ to $2\\pi$ repeats identically thereafter.
 
 Periodic functions that are continuous on all of $\\mathbb{R}$ have bounded [range](!/functions/range) — the repeating pattern confines outputs to a fixed interval. The sine and cosine functions have range $[-1, 1]$.
@@ -2621,7 +2628,10 @@ Not all functions are periodic. Non-constant polynomials, exponentials, and loga
 
 Graphically, zeros are $x$-intercepts — points where the curve crosses or touches the horizontal axis.
 
-Finding zeros means solving the equation $f(x) = 0$. For $f(x) = x^2 - 5x + 6$, the zeros are the solutions to $x^2 - 5x + 6 = 0$. Factoring gives $(x - 2)(x - 3) = 0$, so the zeros are $x = 2$ and $x = 3$.
+Finding zeros means solving the equation $f(x) = 0$.
+
+@academic[example:Example
+For $f(x) = x^2 - 5x + 6$, the zeros are the solutions to $x^2 - 5x + 6 = 0$. Factoring gives $(x - 2)(x - 3) = 0$, so the zeros are $x = 2$ and $x = 3$.]@
 
 The multiplicity of a zero refers to how many times the corresponding factor appears. If $f(x) = (x - 2)^3(x + 1)$, then $x = 2$ is a zero of multiplicity $3$ and $x = -1$ is a zero of multiplicity $1$.
 
@@ -3053,8 +3063,43 @@ const faqQuestions = {
     ],
   };
 
+  const localExtremaProfile = {
+    header: { kicker: 'peaks and valleys, nearby only', title: 'Local extrema of a cubic', formula: '$f(x) = x^3 - 3x$' },
+    quickStats: [ { n: '1', label: 'local max' }, { n: '1', label: 'local min' } ],
+    graph: {
+      xRange: [-2.6, 2.6], yRange: [-4.8, 4.8],
+      points: Array.from({ length: 261 }, (_, i) => { const x = -2.6 + i * 0.02; return [Number(x.toFixed(2)), Number((x * x * x - 3 * x).toFixed(4))]; }),
+      xTicks: [-2, -1, 0, 1, 2], yTicks: [-4, -2, 0, 2, 4],
+    },
+    features: [
+      { id: 'max', kind: 'warm', points: [{ x: -1, y: 2 }] },
+      { id: 'min', kind: 'warm', points: [{ x: 1, y: -2 }] },
+      { id: 'match', points: [{ x: 2, y: 2 }] },
+    ],
+    intervals: [
+      { label: 'direction', spans: [
+        { from: null, to: -1, kind: 'pos', text: 'increasing', arrow: 'right' },
+        { from: -1, to: 1, kind: 'neg', text: 'decreasing' },
+        { from: 1, to: null, kind: 'pos', text: 'increasing', arrow: 'right' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'max', label: 'Local maximum', value: 'f(−1) = 2', tone: 'warm' },
+        { featureId: 'min', label: 'Local minimum', value: 'f(1) = −2', tone: 'warm' },
+        { featureId: 'match', label: 'Same height', value: 'f(2) = 2' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Peak', value: 'rise, then fall', sub: 'at $x = -1$' },
+        { label: 'Valley', value: 'fall, then rise', sub: 'at $x = 1$' },
+        { label: 'Absolute extrema', value: 'none', tone: 'na', sub: 'the arms run off to $\\pm\\infty$' },
+      ] },
+    ],
+  };
+
    return {
       props:{
+    localExtremaProfile,
     functionPropertiesOutline,
     demoUnits,
          sectionsContent,
@@ -3078,7 +3123,7 @@ const faqQuestions = {
     }
    }
 
-export default function PropertiesPage({functionPropertiesOutline, 
+export default function PropertiesPage({localExtremaProfile, functionPropertiesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -3159,6 +3204,7 @@ export default function PropertiesPage({functionPropertiesOutline,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
+          `@academic[punchline:A bijection is a perfect pairing of two sets, so it can be read in either direction.]@`,
         ]
     },
     {
@@ -3199,6 +3245,16 @@ export default function PropertiesPage({functionPropertiesOutline,
           sectionsContent.obj9.content,
           <div key={'unit-localPeaks'} dangerouslySetInnerHTML={{ __html: demoUnits.localPeaks }} />,
           `Local extrema sit exactly where the function changes between increasing and decreasing.`,
+          `The example on a graph: $f(x) = x^3 - 3x$ rises to a peak at $(-1, 2)$, falls to a valley at $(1, -2)$, and rises again. Already at $x = 2$ it is back to height $2$, since $f(2) = 8 - 6 = 2$, and beyond that it climbs past every value of the peak.`,
+          <DiagramFrame
+            key={'obj9-profile'}
+            id="local-extrema-profile"
+            title="Local extrema of x³ − 3x"
+            source="/functions/properties"
+          >
+            <FunctionAnalysis data={localExtremaProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The third marked point is the reason for the word "local": the peak at $x = -1$ is the highest value only among its neighbours, and the same height comes back at $x = 2$. Both extrema sit exactly where the direction strip changes, which is the turning-point rule above in one picture.`,
         ]
     },
     {
@@ -3233,6 +3289,7 @@ export default function PropertiesPage({functionPropertiesOutline,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
+          `@academic[punchline:Only a hole can be repaired by changing a single value; jumps, infinite breaks and oscillation cannot.]@`,
         ]
     },
     {

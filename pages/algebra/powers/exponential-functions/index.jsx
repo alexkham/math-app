@@ -12,6 +12,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -249,6 +250,35 @@ export async function getStaticProps(){
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 1, "The Conceptual Shift") — template G,
+    // exclusion. Running instance: f(x) = 2^x, among six expressions with a
+    // power in them. Old obj1 text is kept in sectionsContent.obj1, unused;
+    // its four paragraphs and the twoToX demo frame with its line are carried
+    // in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciCandTable = ciTableOpen(['expression', 'base', 'exponent']) +
+      ciRow(['2⁵', '2', '5']) +
+      ciRow(['x²', 'x', '2'], { shade: true }) +
+      ciRow(['2ˣ', '2', 'x']) +
+      ciRow(['(1/2)ˣ', '1/2', 'x'], { shade: true }) +
+      ciRow(['1ˣ', '1', 'x']) +
+      ciRow(['(−2)ˣ', '−2', 'x'], { shade: true, last: true }) +
+      '</tbody></table>'
+    const ciSortTable = ciTableOpen(['expression', 'what happens as x varies', 'exponential function?']) +
+      ciRow(['2⁵', 'nothing varies: it is the number 32', 'no']) +
+      ciRow(['x²', 'the base varies; a parabola', 'no'], { shade: true }) +
+      ciRow(['2ˣ', '1, 2, 4, 8, … rising steadily', 'yes'], { color: '#2563EB', cols: [2] }) +
+      ciRow(['(1/2)ˣ', '1, 1/2, 1/4, … falling steadily', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+      ciRow(['1ˣ', 'always 1: no growth at all', 'no']) +
+      ciRow(['(−2)ˣ', 'undefined at x = 1/2: no real square root of −2', 'no'], { shade: true, last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 obj0: {
@@ -676,6 +706,11 @@ const schemas = {
     notes: [{ x: -1.9, y: 6.4, text: 'dashed: tangent lines', pos: 'e', color: 'r' }],
     caption: 'eˣ is the base whose slope equals its height at every point' };
 
+  const conceptIntroFigures = {
+    candTable: ciCandTable,
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     twoToX: demoUnitFrame({
       svg: renderFunctionPlotV4(fpTwoToX),
@@ -700,6 +735,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Exponential Functions: Growth, Decay & Euler's e | Learn Math Class",
       description: "Understand exponential functions f(x) = aˣ: growth vs decay, domain and range, horizontal asymptotes, comparison with polynomials, and Euler's number e.",
@@ -712,9 +748,76 @@ return {
    }
 
 // export default function ExponentialFunctionsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialFunctionsPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ExponentialFunctionsPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six expressions, each a base raised to a power. Which of them describe steady multiplicative growth or decay as x changes?`,
+        content: [
+          `All six look alike on the page — a number with a small raised number beside it. They differ in which part is allowed to change.`,
+          ciTable('candTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Only two of them behave as exponential functions: 2^x and (1/2)^x.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `2⁵ and x² fail on which part varies; 1^x and (−2)^x fail on the base.`,
+        content: [
+          `The expression $2^5$ is a computation — it takes a fixed base and a fixed exponent and produces the number $32$. The expression $x^2$ is a [polynomial](!/algebra/polynomials) — the base varies while the exponent stays at $2$.`,
+          `$1^x$ has the right shape but a useless base: multiplying by $1$ never changes anything. $(-2)^x$ has a variable exponent, but a negative base cannot be raised to every real power — $(-2)^{1/2}$ is not a real number.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: a fixed base, positive and different from 1, with the variable in the exponent.`,
+        content: [
+          `It is like money in an account that grows by the same percentage each year: the growth factor stays put, and time — the exponent — is what moves.`,
+          `The expression $2^x$ is something different. The base is locked at $2$ and the exponent $x$ is free to be any real number. As $x$ changes, $2^x$ traces out a curve: $2^0 = 1$, $2^1 = 2$, $2^2 = 4$, $2^3 = 8$, $2^{-1} = \\frac{1}{2}$, $2^{1/2} = \\sqrt{2}$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [exponential function](!/algebra/definitions#exponential_function) is a function $f(x) = a^x$ with a constant base $a > 0$, $a \\neq 1$, defined for every real $x$.`,
+        formula: [
+          `This is the defining feature of an exponential function: a constant base raised to a variable exponent. The function $f(x) = a^x$, with $a > 0$ and $a \\neq 1$, assigns to every real number $x$ a positive output determined by the [laws of exponents](!/algebra/powers/exponent-rules/).`,
+        ],
+        footer: `So $2^x$ and $\\left(\\frac{1}{2}\\right)^x$ are exponential functions; $2^5$, $x^2$, $1^x$ and $(-2)^x$ are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a whole curve rather than a single calculation: every real x gets a positive output.`,
+        content: [
+          `The shift from "evaluate $a^n$ for a specific $n$" to "study $a^x$ as $x$ ranges over all reals" is the transition from arithmetic to function behavior — from individual calculations to a complete curve.`,
+          <div key={'unit-twoToX'} dangerouslySetInnerHTML={{ __html: demoUnits.twoToX }} />,
+          `Every positive base a gives its own such curve through (0, 1).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rejected expressions are still useful — just not as exponential functions.`,
+        content: `$2^5$ is an ordinary number, $1^x$ is the constant function $1$, and $(-2)^x$ makes sense for whole-number $x$, as an alternating sequence $1, -2, 4, -8, \\dots$ And $x^2$ is a power function, a different family that grows far more slowly in the long run, as the section on [exponential vs power functions](!/algebra/powers/exponential-functions#4) shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the basic shape, the key properties, the comparison with power functions, and Euler's number $e$.`,
+      },
+    ],
+  }
     
   const genericSections=[
       {
@@ -730,9 +833,7 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-twoToX'} dangerouslySetInnerHTML={{ __html: demoUnits.twoToX }} />,
-          `Every positive base a gives its own such curve through (0, 1).`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

@@ -266,7 +266,8 @@ Turning $-x^2 + x + 6 > 0$ into $x^2 - x - 6 > 0$ keeps the sign and gives $x < 
 
 If $a < 0$, the parabola opens downward. The signs are reversed: the quadratic is negative on the outer intervals and positive on the inner interval $(r_1, r_2)$. The expression rises above zero only between the roots.
 
-To solve $x^2 - 5x + 4 > 0$, find the roots of $x^2 - 5x + 4 = 0$. Factoring gives $(x - 1)(x - 4) = 0$, so $r_1 = 1$ and $r_2 = 4$. Since $a = 1 > 0$, the expression is positive outside the roots. The solution is $(-\\infty, 1) \\cup (4, \\infty)$.
+@academic[example:Example
+To solve $x^2 - 5x + 4 > 0$, find the roots of $x^2 - 5x + 4 = 0$. Factoring gives $(x - 1)(x - 4) = 0$, so $r_1 = 1$ and $r_2 = 4$. Since $a = 1 > 0$, the expression is positive outside the roots. The solution is $(-\\infty, 1) \\cup (4, \\infty)$.]@
 
 To solve $x^2 - 5x + 4 \\leq 0$ instead, select the interval where the expression is non-positive: $[1, 4]$. The endpoints are included because the inequality is non-strict and the expression equals zero at the roots.`,
     before: ``,
@@ -288,7 +289,8 @@ Reading $(x - 2)^2 \\leq 0$ as "a square is never negative, so no solution" drop
 
 If $a < 0$: the expression is negative everywhere except at $x = r$, where it is zero. The inequality $ax^2 + bx + c < 0$ is satisfied by all $x \\neq r$, and the non-strict version $ax^2 + bx + c \\leq 0$ holds for all real $x$. The inequality $ax^2 + bx + c > 0$ has no solution — a negative times a non-negative square is never positive.
 
-Consider $x^2 - 6x + 9 > 0$. The discriminant is $36 - 36 = 0$, and the expression factors as $(x - 3)^2$. This is positive for all $x \\neq 3$ and zero at $x = 3$. The solution is $(-\\infty, 3) \\cup (3, \\infty)$, the entire real line minus one point.
+@academic[example:Example
+Consider $x^2 - 6x + 9 > 0$. The discriminant is $36 - 36 = 0$, and the expression factors as $(x - 3)^2$. This is positive for all $x \\neq 3$ and zero at $x = 3$. The solution is $(-\\infty, 3) \\cup (3, \\infty)$, the entire real line minus one point.]@
 
 @academic[fact,aside:true,width:35%:Why the square wins on area
 A rectangle with perimeter $20$ and one side $x$ has area $x(10 - x)$, and $25 - x(10 - x) = (x - 5)^2 \\geq 0$. So no rectangle with that perimeter beats the $5 \\times 5$ square, and only the square reaches $25$.]@
@@ -311,7 +313,8 @@ If $a < 0$: the expression is negative everywhere. The inequality $ax^2 + bx + c
 Concluding from $\\Delta = 4 - 20 = -16$ that $x^2 + 2x + 5 > 0$ has no solution answers the equation, not the inequality. With $a = 1 > 0$ the expression is always positive, so every real $x$ is a solution.
 [Read more](!#pitfalls)]@
 
-The equation $x^2 + x + 1 = 0$ has $\\Delta = 1 - 4 = -3 < 0$, and since $a = 1 > 0$, the expression $x^2 + x + 1$ is positive for every real $x$. The inequality $x^2 + x + 1 > 0$ is universally true. The inequality $x^2 + x + 1 < 0$ is universally false.
+@academic[example:Example
+The equation $x^2 + x + 1 = 0$ has $\\Delta = 1 - 4 = -3 < 0$, and since $a = 1 > 0$, the expression $x^2 + x + 1$ is positive for every real $x$. The inequality $x^2 + x + 1 > 0$ is universally true. The inequality $x^2 + x + 1 < 0$ is universally false.]@
 
 No sign chart is needed in this case. The absence of real roots means no critical points exist, so there is only one interval — the entire number line — and its sign is determined by $a$.
 
@@ -367,7 +370,8 @@ The vertex of the parabola, located at $x = -\\frac{b}{2a}$, is the point of max
     title: `Reducible Inequalities`,
     content: `Certain inequalities of degree higher than two can be reduced to quadratic inequalities through substitution, following the same strategy used for [reducible equations](!/algebra/equations/quadratic).
 
-The bi-quadratic inequality $x^4 - 5x^2 + 4 > 0$ becomes $u^2 - 5u + 4 > 0$ with the substitution $u = x^2$. The quadratic factors as $(u - 1)(u - 4) > 0$, which is satisfied when $u < 1$ or $u > 4$. Back-substituting: $x^2 < 1$ gives $-1 < x < 1$, and $x^2 > 4$ gives $x < -2$ or $x > 2$. The complete solution is $(-\\infty, -2) \\cup (-1, 1) \\cup (2, \\infty)$.
+@academic[example:Example
+The bi-quadratic inequality $x^4 - 5x^2 + 4 > 0$ becomes $u^2 - 5u + 4 > 0$ with the substitution $u = x^2$. The quadratic factors as $(u - 1)(u - 4) > 0$, which is satisfied when $u < 1$ or $u > 4$. Back-substituting: $x^2 < 1$ gives $-1 < x < 1$, and $x^2 > 4$ gives $x < -2$ or $x > 2$. The complete solution is $(-\\infty, -2) \\cup (-1, 1) \\cup (2, \\infty)$.]@
 
 @academic[pitfall,aside:true,width:35%:Taking only the positive square root
 Turning $x^2 > 9$ into $x > 3$ loses half the answer: $x = -4$ also works, since $(-4)^2 = 16 > 9$. The solution is $x < -3$ or $x > 3$.

@@ -2246,6 +2246,9 @@ No complex number $w$ satisfies $0 \\cdot w = 1$.
 
 The reason is fundamental: zero times any number equals zero, never one. Regardless of what $w$ might be, the product $0 \\cdot w$ vanishes. The equation $0 \\cdot w = 1$ has no solution.
 
+@academic[fact,aside:true,width:35%:On a sphere, inverting is a half-turn
+Complex analysis often adds one point $\\infty$ with $\\frac{1}{0} = \\infty$ and draws $\\mathbb{C}$ as a sphere with $\\infty$ at the top. There $z \\mapsto \\frac{1}{z}$ is a half-turn of the sphere about the axis through $1$ and $-1$, swapping $0$ and $\\infty$. The extended system is no field: $0 \\cdot \\infty$ stays undefined.]@
+
 The formula $z^{-1} = \\frac{\\overline{z}}{|z|^2}$ reveals the problem algebraically. For $z = 0$, the modulus is $|z| = 0$, so $|z|^2 = 0$ appears in the denominator. Division by zero is undefined, and the formula produces no result.
 
 This exception is unavoidable in any field. The [field axioms](!/complex-numbers/properties) guarantee multiplicative inverses for all nonzero elements, but explicitly exclude zero. The additive identity cannot have a multiplicative inverse — the two roles are incompatible.
@@ -2785,7 +2788,7 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
             theme={'navy'}
           />,
                   <div key={'unit-geom'} dangerouslySetInnerHTML={{ __html: demoUnits.geom }} />,
-          `Points inside the unit circle have inverses outside it, and the circle itself is fixed.`,
+          `Points inside the unit circle have inverses outside it, and the circle itself maps onto itself, although only 1 and -1 stay in place.`,
         ]
     },
     {
@@ -2828,6 +2831,7 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:The inverse and the conjugate always point the same way; they differ only in length, and agree only on the unit circle.]@`,
         ]
     },
     {

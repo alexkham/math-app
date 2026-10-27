@@ -272,11 +272,16 @@ The analyze button forces a fresh parse and rebuild of the syntax tree and truth
 
     obj7: {
       title: `What Is a Syntax Tree in Logic?`,
-      content: `A syntax tree, also called a parse tree or formation tree, is a data structure that represents the grammatical structure of a well-formed formula. In **propositional logic**, every compound proposition can be decomposed into a tree whose internal nodes are logical connectives and whose leaves are atomic propositions.
+      content: `@academic[fact,aside:true,width:35%:Frege's formulas branched like trees
+In his 1879 Begriffsschrift, Frege wrote formulas not in a line but as diagrams of strokes, each conditional splitting into an upper and a lower branch. The nesting showed at a glance, yet readers found it hard, and the one-line notation of Peano and Russell replaced it.]@
+
+A syntax tree, also called a parse tree or formation tree, is a data structure that represents the grammatical structure of a well-formed formula. In **propositional logic**, every compound proposition can be decomposed into a tree whose internal nodes are logical connectives and whose leaves are atomic propositions.
 
 The tree captures exactly how sub-expressions nest inside one another. Two formulas that look similar as strings, such as $P \\wedge Q \\vee R$ versus $P \\wedge (Q \\vee R)$, produce different trees because their main connectives differ. The tree therefore disambiguates expressions that would otherwise be ambiguous without explicit parentheses.
 
-Syntax trees are foundational in computer science as well. Compilers and interpreters build analogous structures, called abstract syntax trees, when parsing programming languages. Understanding parse trees in logic provides a direct bridge to these computational applications.`,
+Syntax trees are foundational in computer science as well. Compilers and interpreters build analogous structures, called abstract syntax trees, when parsing programming languages. Understanding parse trees in logic provides a direct bridge to these computational applications.
+
+@academic[punchline:What a formula says is fixed by its tree, not by how its symbols happen to line up.]@`,
       before: ``,
       after: ``,
       link: '',

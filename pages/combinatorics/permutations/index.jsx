@@ -2108,12 +2108,19 @@ When applied to full permutations, apparently $r=n$ (because we use all the item
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
 
 **Formula**:
-      The number of possible results is calculated by the formula :      
-@academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@
+      The number of possible results is calculated by the formula :
+@academic[formula_callout:Full Permutation
+$$P(n)=n!$$
+/combinatorics/formulas#full_permutation]@
  Product of all integers from $n$ down to $1$.
        Where $n$ is the number of items to arrange. 
 
        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=1) →@
+
+@academic[fact,aside:true,width:35%:$\\pi$ and $e$ estimate $10!$ within 1%
+Stirling's formula $n! \\approx \\sqrt{2\\pi n}\\left(\\frac{n}{e}\\right)^n$ gives about $3{,}598{,}696$ for $n = 10$, less than $1\\%$ below $10! = 3{,}628{,}800$. Its relative error is close to $\\frac{1}{12n}$, so it keeps shrinking as $n$ grows.]@
+
+The factorial soon outgrows every everyday quantity. Each new item multiplies the count by a larger number than the item before it did, so $n!$ eventually overtakes $2^n$, $10^n$ and any other fixed number raised to the power $n$. Already $13! = 6{,}227{,}020{,}800$ is more than six billion, and $20!$ has $19$ digits. Most pocket calculators give up at $70!$, the first factorial above $10^{100}$, because they show only two digits for the power of ten.
 
       `,
       between:`
@@ -2140,9 +2147,11 @@ formula:`@academic[example:&nbsp \t\t\t\t\t\t$P(n)=n!$]@`
 
       **Formula**:
 
-       To calculate the number of possible arrangements 
-      @academic[example:&nbsp\t\t\t\t\t\t$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$]@ 
-      Where multinomial coefficient: counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.
+       To calculate the number of possible arrangements
+      @academic[formula_callout:Permutation with Identical Items
+$$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$$
+/combinatorics/formulas#permutation_with_identical_items]@
+      The multinomial coefficient counts distinct arrangements of $n$ items split into groups of sizes $n_{1},n_{2},\\dots,n_{k}$.
       
        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=2) →@
 
@@ -2184,8 +2193,10 @@ Most common:
  @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Learn more about combinatorial notations and symbols here](!/math-symbols/combinatorics) →@
      
  **Formula**:      
-      The number of arrangements for Partial Permutation without Repetition is 
-       @academic[example:&nbsp\t\t\t\t\t\t$P(n,r) = \\frac{n!}{(n-r)!}$]@ 
+      The number of arrangements for Partial Permutation without Repetition is
+       @academic[formula_callout:Partial Permutation without Repetition
+$$P(n,r) = \\frac{n!}{(n-r)!}$$
+/combinatorics/formulas#partial_permutation]@
       Where $n!$ counts all arrangements, dividing by $(n-r)!$ removes the unused positions.
       
        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=3) →@
@@ -2252,7 +2263,6 @@ Circular permutation
 \n\t\t\t\t\t\t$P_{\\text{circ}}(n)$
 
 Alternative notations
-\n\t\t\t\t\t\t$C_n$
 \n\t\t\t\t\t\t$P_{\\text{cyclic}}(n)$
 \n\t\t\t\t\t\t$\\frac{n!}{n}$
 
@@ -2261,7 +2271,9 @@ Alternative notations
       **Formula**:
 
       The total number of possible circular arrangements is
-      @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{circ}}(n) = (n-1)!$]@ 
+      @academic[formula_callout:Circular Permutation
+$$P_{\\text{circ}}(n) = (n-1)!$$
+/combinatorics/formulas#circular_permutation]@
       If $n$ is a total number of items to arrange then fixing one item reduces circular arrangements to $(n-1)!$ linear ones.
       
        @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use combinatorics calculator](!/combinatorics/calculator?scenario=5) →@
@@ -2304,7 +2316,9 @@ Alternative notations:
 
 **Formula**:
       Total number of permutations with repetition allowed, filling $r$ positions from $n$ items, is:
-     @academic[example:&nbsp\t\t\t\t\t\t$P_{\\text{rep}}(n,r)=n^{r}$]@
+     @academic[formula_callout:Permutation with Repetition
+$$P_{\\text{rep}}(n,r)=n^{r}$$
+/combinatorics/formulas#permutation_with_repetition]@
      Where each of the $r$ positions can be filled in $n$ ways.
 
 
@@ -2321,6 +2335,11 @@ A 4-digit PIN is the standard example. Each of the $r = 4$ positions can hold an
 between:`
 **Permutation with Repetition — Examples**:
 Generating PIN codes from digits, creating letter sequences for passwords, setting the dials of a combination lock, composing license plate numbers, assigning seats with multiple people allowed in the same category.
+
+@academic[fact,aside:true,width:35%:A combination lock counts permutations
+A lock set to 4-7-2 does not open at 2-7-4, and two dials may show the same digit, so its codes are ordered and may repeat: three dials give $10^3 = 1000$ codes. A true combination of three different digits would leave only $\\binom{10}{3} = 120$.]@
+
+The combination lock in this list is a small case of the same count. A padlock with three dials, each showing the digits 0 to 9, has one position for every dial and one option for every digit, so it fits the formula below with $n = 10$ and $r = 3$. Nothing stops two dials, or all three, from showing the same digit, and a code such as 0-0-0 is as valid as any other.
 `,
   
     },
@@ -2748,7 +2767,8 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
         content: [
           `Fill the three places of the row in turn. The first place can take any of the $3$ letters. Once it is filled, $2$ letters are left for the second place. Then $1$ letter is left for the third. Every first choice combines with every second choice and every third, so the counts multiply.`,
           ciFit("Permutations of ABC: STEP-by-Step"),
-          `@academic[example:&nbsp\t\t\t\t\t\t$3\\times 2 \\times 1 = 6 (n!)$]@`,
+          `@academic[formula_callout:Factorial of 3
+$$3\\times 2 \\times 1 = 6 (n!)$$]@`,
           `Six orders: ABC, ACB, BAC, BCA, CAB, CBA — exactly the list above, with nothing missed and nothing repeated.`,
         ],
       },
@@ -2764,7 +2784,9 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
         id: 'definition',
         kind: 'definition',
         statement: `A [permutation](!/combinatorics/definitions#permutation) of a set of distinct items is an arrangement of all of them in a definite order. For $n$ distinct objects, the number of permutations is:`,
-        formula: `@academic[example:&nbsp\t\t\t\t\t\t$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$]@`,
+        formula: `@academic[formula_callout:Factorial
+$$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
+/combinatorics/formulas#factorial]@`,
         footer: `The product $n \\times (n - 1) \\times \\dots \\times 1$ is the factorial $n!$; for $3$ letters, $3! = 6$.`,
       },
       {
@@ -2857,6 +2879,7 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
                     }} />,
                     
           scenariosData["Permutations with Identical Items"].svg,
+          `@academic[punchline:Swapping identical items changes nothing, so each group's factorial in the denominator removes exactly those swaps.]@`,
         ]
     },
     {
@@ -2870,6 +2893,7 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
           sectionsContent.without.after,
           scenariosData["Partial Permutations without Repetition"].svg,
           scenariosData["Permutation without Repetition (Partial)"].svg,
+          `@academic[punchline:Filling only $r$ places keeps the first $r$ factors of $n!$ and drops the rest.]@`,
 
         ]
     },
@@ -2918,7 +2942,8 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
         sectionsContent.circular.after,
         scenariosData["Circular Permutation"].svg,
         scenariosData["Circular Permutation 2"].svg,
-        scenariosData["Circular Permutation 3"].svg
+        scenariosData["Circular Permutation 3"].svg,
+        `@academic[punchline:A circle has no first seat, so fixing one item turns the circle into a row of the remaining $n - 1$.]@`,
 
       ]
   },
@@ -2931,6 +2956,7 @@ export default function PermutationsPage({seoData, sectionsContent, introContent
           sectionsContent.obj8.content,
           <div key={'unit-hatCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.hatCheck }} />,
           `Both derangements are rotations: in B C A every hat moves one seat one way, in C A B one seat the other way.`,
+          `@academic[punchline:Beyond a handful of items, the share of orders that move every item settles near $1$ in $e$, about $37\\%$.]@`,
         ]
     },
     {

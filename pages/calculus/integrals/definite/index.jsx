@@ -616,7 +616,7 @@ The definite integral answers a concrete question: what is the total accumulated
 
 The notation
 
-@academic[formula_callout:Summary: Three Lenses on the Definite Integral
+@academic[formula_callout:Definite Integral Notation
 $$\\int_a^b f(x)\\, dx$$]@
 
 specifies the integrand $f(x)$, the variable of integration $x$, and the bounds from $a$ to $b$. The result is a single number, not a function. This number represents net accumulation: the sum of infinitely many infinitesimal contributions $f(x)\\, dx$ as $x$ traverses the interval.
@@ -847,8 +847,6 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
-                  <div key={'unit-signed'} dangerouslySetInnerHTML={{ __html: demoUnits.signed }} />,
-          `Total unsigned area needs the integrand split at its zeros; the integral itself does not.`,
         ]
     },
     {
@@ -859,6 +857,8 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj3.content,
           <div key={'unit-signedArea'} dangerouslySetInnerHTML={{ __html: demoUnits.signedArea }} />,
           `Over [0, π] alone the integral is 2: only a full period cancels.`,
+                  <div key={'unit-signed'} dangerouslySetInnerHTML={{ __html: demoUnits.signed }} />,
+          `Total unsigned area needs the integrand split at its zeros; the integral itself does not.`,
           `@academic[punchline:A definite integral measures net accumulation, not area: to count every region as positive, integrate $|f|$.]@`,
         ]
     },

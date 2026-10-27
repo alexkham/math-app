@@ -1540,7 +1540,7 @@ import tripleAngleDiagrams from '@/app/components/trigonometry/tripleAngleDiagra
 import pythagoreanDiagrams from '@/app/components/trigonometry/identities/pythagorean/pythagoreanDiagrams'
 import negativeAngleDiagrams from '@/app/components/trigonometry/identities/negative-angle/negativeAngleDiagrams'
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 export async function getStaticProps(){
@@ -1698,8 +1698,6 @@ Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\
  
 - [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$, the basis of cofunction identities
 - [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$
-
-## Formulas Used
 
 ## Supplement & Shift Identities
  
@@ -1926,7 +1924,10 @@ Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\
 
      product_sum:{
       title:'Product-to-Sum Identities',
-      before:`Product-to-Sum Identities transform products of trigonometric functions into sums or differences of simpler trigonometric expressions. They're special because they convert multiplication (which is complex) into addition (which is simpler), essentially "unpacking" products into linear combinations. These identities arise from algebraically manipulating angle sum and difference formulas.
+      before:`@academic[fact,aside:true,width:35%:Multiplying with cosines
+In the 1580s, before logarithms, Tycho Brahe's observatory multiplied long numbers with $\\cos a \\cos b = \\frac{1}{2}\\left(\\cos(a - b) + \\cos(a + b)\\right)$. Each factor is read as a cosine from a table; two look-ups, an addition and a halving then give the product.]@
+
+Product-to-Sum Identities transform products of trigonometric functions into sums or differences of simpler trigonometric expressions. They're special because they convert multiplication (which is complex) into addition (which is simpler), essentially "unpacking" products into linear combinations. These identities arise from algebraically manipulating angle sum and difference formulas.
       
       `,
       after:`
@@ -1938,7 +1939,10 @@ Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\
 
      sum_product:{
       title:`Sum-to-Product Identities`,
-      before:`Sum-to-Product Identities convert sums and differences of trigonometric functions into products of simpler expressions. They're special because they perform the reverse operation of product-to-sum identities, transforming linear combinations into multiplicative forms. These identities emerge from reversing the algebraic manipulation of angle sum formulas. They're valuable for factoring trigonometric expressions, solving equations where products reveal common factors, analyzing wave interference where constructive and destructive patterns create amplitude modulation, and in acoustics for understanding how combined frequencies create beats and harmonics.
+      before:`@academic[fact,aside:true,width:35%:Piano tuners listen to this identity
+Notes of $440$ and $444$ hertz played together give $2\\cos(4\\pi t)\\sin(884\\pi t)$: one $442$-hertz tone whose loudness swells and fades $4$ times a second. Tuners count these beats and turn the peg until they stop.]@
+
+Sum-to-Product Identities convert sums and differences of trigonometric functions into products of simpler expressions. They're special because they perform the reverse operation of product-to-sum identities, transforming linear combinations into multiplicative forms. These identities emerge from reversing the algebraic manipulation of angle sum formulas. They're valuable for factoring trigonometric expressions, solving equations where products reveal common factors, analyzing wave interference where constructive and destructive patterns create amplitude modulation, and in acoustics for understanding how combined frequencies create beats and harmonics.
       
       `,
       after:`
@@ -1980,7 +1984,12 @@ These rules are needed whenever a negative angle appears, for example after a di
 Splitting $\\sin(30^\\circ + 60^\\circ)$ into $\\sin 30^\\circ + \\sin 60^\\circ$ gives $\\frac{1 + \\sqrt{3}}{2} \\approx 1.366$, above the maximum $1$. The sum identity gives $\\frac{1}{4} + \\frac{3}{4} = 1 = \\sin 90^\\circ$.
 [Read more](!#pitfalls)]@
 
-Applying a sum identity starts by splitting the angle into two parts whose values are known, and then expanding. For example, $75^\\circ = 45^\\circ + 30^\\circ$ gives $\\sin 75^\\circ = \\sin 45^\\circ \\cos 30^\\circ + \\cos 45^\\circ \\sin 30^\\circ = \\frac{\\sqrt{6} + \\sqrt{2}}{4}$. The result is exact, with no calculator needed, and the same split works for cosine and tangent.`,
+Applying a sum identity starts by splitting the angle into two parts whose values are known, and then expanding.
+
+@academic[example:Example
+For example, $75^\\circ = 45^\\circ + 30^\\circ$ gives $\\sin 75^\\circ = \\sin 45^\\circ \\cos 30^\\circ + \\cos 45^\\circ \\sin 30^\\circ = \\frac{\\sqrt{6} + \\sqrt{2}}{4}$.]@
+
+The result is exact, with no calculator needed, and the same split works for cosine and tangent.`,
       difference:`@academic[pitfall,aside:true,width:35%:Keeping the minus sign in a cosine difference
 Writing $\\cos(60^\\circ - 30^\\circ)$ as $\\cos 60^\\circ \\cos 30^\\circ - \\sin 60^\\circ \\sin 30^\\circ$ gives $0$. The correct expansion gives $\\frac{\\sqrt{3}}{4} + \\frac{\\sqrt{3}}{4} = \\frac{\\sqrt{3}}{2} = \\cos 30^\\circ$.
 [Read more](!#pitfalls)]@
@@ -1995,7 +2004,12 @@ Using a half-angle formula takes two separate decisions: the size of the value, 
 Pulling the $2$ out of $\\sin 60^\\circ = \\sin(2 \\cdot 30^\\circ)$ gives $2\\sin 30^\\circ = 1$. The identity gives $2\\sin 30^\\circ \\cos 30^\\circ = 2 \\cdot \\frac{1}{2} \\cdot \\frac{\\sqrt{3}}{2} = \\frac{\\sqrt{3}}{2}$.
 [Read more](!#pitfalls)]@
 
-Each double-angle formula rebuilds a value at $2\\theta$ from the values at $\\theta$. For example, with $\\sin\\theta = \\frac{3}{5}$ and $\\cos\\theta = \\frac{4}{5}$, the sine formula gives $\\sin 2\\theta = 2 \\cdot \\frac{3}{5} \\cdot \\frac{4}{5} = \\frac{24}{25}$, and the cosine formula gives $\\cos 2\\theta = \\frac{16}{25} - \\frac{9}{25} = \\frac{7}{25}$. The three cosine forms give the same value; the choice depends on which of $\\sin\\theta$ and $\\cos\\theta$ is known.`,
+Each double-angle formula rebuilds a value at $2\\theta$ from the values at $\\theta$.
+
+@academic[example:Example
+For example, with $\\sin\\theta = \\frac{3}{5}$ and $\\cos\\theta = \\frac{4}{5}$, the sine formula gives $\\sin 2\\theta = 2 \\cdot \\frac{3}{5} \\cdot \\frac{4}{5} = \\frac{24}{25}$, and the cosine formula gives $\\cos 2\\theta = \\frac{16}{25} - \\frac{9}{25} = \\frac{7}{25}$.]@
+
+The three cosine forms give the same value; the choice depends on which of $\\sin\\theta$ and $\\cos\\theta$ is known.`,
     },
 
     pitfalls:{
@@ -3139,6 +3153,7 @@ export default function TrigoIdentitiesPage({trigIdentityOutline, trigIdentities
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.power_reducing.after,
+         `@academic[punchline:Squaring trades a power for a doubled angle: $\\sin^2\\theta$ and $\\cos^2\\theta$ are waves in $2\\theta$ around the level one half.]@`,
        
         
       ]
@@ -3158,6 +3173,7 @@ export default function TrigoIdentitiesPage({trigIdentityOutline, trigIdentities
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.product_sum.after,
+         `@academic[punchline:A product of two waves is always a sum of two waves, at the sum and the difference of the angles.]@`,
 
         
         

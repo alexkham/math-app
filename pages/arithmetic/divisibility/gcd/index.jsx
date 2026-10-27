@@ -383,6 +383,7 @@ obj3: {
   title: `Method 1: Listing Factors`,
   content: `The most direct approach finds all factors of each number, identifies the overlap, and selects the largest.
 
+@academic[example:Example
 For $\\gcd(24, 36)$:
 
 Factors of $24$: $\\{1, 2, 3, 4, 6, 8, 12, 24\\}$.
@@ -391,7 +392,7 @@ Factors of $36$: $\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$.
 
 Common factors: $\\{1, 2, 3, 4, 6, 12\\}$.
 
-The largest is $12$, so $\\gcd(24, 36) = 12$.`,
+The largest is $12$, so $\\gcd(24, 36) = 12$.]@`,
   afterFigure: `The method is transparent and reliable for small numbers. For large numbers it becomes impractical — finding all factors of a number like $1{,}764$ requires systematic testing up to $\\sqrt{1764} = 42$, and doing this for two numbers is tedious. The methods that follow avoid listing factors entirely.`,
   before: ``,
   after: ``,
@@ -440,6 +441,7 @@ Run on $89$ and $55$, the algorithm walks down the Fibonacci numbers $34, 21, 13
 
 The Euclidean algorithm computes the GCD without factoring either number. It relies on a single property: $\\gcd(a, b) = \\gcd(b, \\; a \\bmod b)$. Replacing the larger number with the remainder of their division preserves the GCD while shrinking the problem.
 
+@academic[example:Example
 For $\\gcd(252, 105)$:
 
 $252 = 105 \\cdot 2 + 42$, so $\\gcd(252, 105) = \\gcd(105, 42)$.
@@ -448,7 +450,7 @@ $105 = 42 \\cdot 2 + 21$, so $\\gcd(105, 42) = \\gcd(42, 21)$.
 
 $42 = 21 \\cdot 2 + 0$, so $\\gcd(42, 21) = 21$.
 
-The last nonzero remainder is $21$, which is $\\gcd(252, 105)$.`,
+The last nonzero remainder is $21$, which is $\\gcd(252, 105)$.]@`,
   afterFigure: `@academic[pitfall,aside:true,width:35%:Keeping the larger number
 Dividing $252$ by the remainder $42$ gives $252 = 42 \\cdot 6 + 0$ and the answer $42$, which does not divide $105$. The remainder divides $105$: $105 = 42 \\cdot 2 + 21$, so the GCD is $21$.
 [Read more](!#pitfalls)]@
@@ -468,14 +470,16 @@ obj6: {
 
 Compute $r = a \\bmod b$. Replace $a$ with $b$ and $b$ with $r$. Repeat until $b = 0$. The value of $a$ at that point is the GCD.
 
+@academic[example:Example
 For $\\gcd(462, 198)$:
 
 $462 = 198 \\cdot 2 + 66 \\quad \\to \\quad a = 198, \\; b = 66$
 
 $198 = 66 \\cdot 3 + 0 \\quad \\to \\quad b = 0$
 
-$\\gcd(462, 198) = 66$.`,
-  afterFigure: `For $\\gcd(1{,}071, 462)$:
+$\\gcd(462, 198) = 66$.]@`,
+  afterFigure: `@academic[example:Example
+For $\\gcd(1{,}071, 462)$:
 
 $1071 = 462 \\cdot 2 + 147 \\quad \\to \\quad a = 462, \\; b = 147$
 
@@ -483,7 +487,7 @@ $462 = 147 \\cdot 3 + 21 \\quad \\to \\quad a = 147, \\; b = 21$
 
 $147 = 21 \\cdot 7 + 0 \\quad \\to \\quad b = 0$
 
-$\\gcd(1071, 462) = 21$.`,
+$\\gcd(1071, 462) = 21$.]@`,
   afterFigure2: `The algorithm always terminates because the remainder $r$ satisfies $0 \\leq r < b$, so $b$ strictly decreases at each step. A sequence of positive integers that strictly decreases must eventually reach zero.`,
   before: ``,
   after: `
@@ -540,21 +544,23 @@ $$\\gcd(a, b, c) = \\gcd(\\gcd(a, b), \\; c)$$]@
 
 Compute the GCD of the first two numbers, then take the GCD of that result with the third number. The process chains to any length.
 
+@academic[example:Example
 For $\\gcd(24, 36, 60)$:
 
 $\\gcd(24, 36) = 12$.
 
 $\\gcd(12, 60) = 12$.
 
-So $\\gcd(24, 36, 60) = 12$.
+So $\\gcd(24, 36, 60) = 12$.]@
 
+@academic[example:Example
 For $\\gcd(18, 30, 42)$:
 
 $\\gcd(18, 30) = 6$.
 
 $\\gcd(6, 42) = 6$.
 
-So $\\gcd(18, 30, 42) = 6$.
+So $\\gcd(18, 30, 42) = 6$.]@
 
 @academic[rule_plain:The order of pairing does not matter — the GCD is associative and commutative, so any grouping produces the same result.]@`,
   before: ``,
@@ -588,7 +594,10 @@ Dividing $\\frac{18}{24}$ by the common factor $2$ and stopping gives $\\frac{9}
 Any common factor of the numerator and denominator can be cancelled, and every cancellation gives a fraction of the same value. What differs is how far a single cancellation goes: the larger the common factor, the smaller the numbers that remain.
 
 Ratios simplify the same way. A rectangle with dimensions $48 \\times 80$ has an aspect ratio of $48:80$. Dividing both by $\\gcd(48, 80) = 16$ gives $3:5$, as the figure below shows.`,
-  afterFigure: `Tiling problems use the GCD geometrically. The largest square tile that fits perfectly into a $48 \\times 80$ rectangle has side length $\\gcd(48, 80) = 16$. The rectangle is then covered by $3 \\times 5 = 15$ such tiles with no gaps or overlaps, as shown below.`,
+  afterFigure: `Tiling problems use the GCD geometrically.
+
+@academic[example:Example
+The largest square tile that fits perfectly into a $48 \\times 80$ rectangle has side length $\\gcd(48, 80) = 16$. The rectangle is then covered by $3 \\times 5 = 15$ such tiles with no gaps or overlaps, as shown below.]@`,
   afterFigure2: `The GCD also connects to the [LCM](!/arithmetic/divisibility/lcm) through a clean identity: $a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$. Knowing the GCD gives the LCM for free, and vice versa.`,
   before: ``,
   after: ``,

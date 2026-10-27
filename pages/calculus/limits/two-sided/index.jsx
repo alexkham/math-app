@@ -613,7 +613,7 @@ When we write the limit notation without any superscript—just $x \\to a$—we 
 
 The formal statement
 
-@academic[formula_callout:Summary: Where Two-Sided Limits Appear in Calculus
+@academic[formula_callout:Two-Sided Limit
 $$\\lim_{x \\to a} f(x) = L$$]@
 
 requires that $f(x)$ approach $L$ as $x$ approaches $a$ through values both less than and greater than $a$. Neither direction gets special treatment. If the function behaves differently on the left than on the right, no two-sided limit exists.

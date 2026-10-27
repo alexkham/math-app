@@ -425,7 +425,8 @@ A useful mnemonic: factors fit into a number (they are smaller), multiples multi
     title: `Common Factors`,
     content: `A common factor of two numbers $m$ and $n$ is a number that divides both. Finding common factors means intersecting the two factor sets.
 
-The factors of $12$ are $\\{1, 2, 3, 4, 6, 12\\}$. The factors of $18$ are $\\{1, 2, 3, 6, 9, 18\\}$. The common factors — numbers appearing in both sets — are $\\{1, 2, 3, 6\\}$.`,
+@academic[example:Example
+The factors of $12$ are $\\{1, 2, 3, 4, 6, 12\\}$. The factors of $18$ are $\\{1, 2, 3, 6, 9, 18\\}$. The common factors — numbers appearing in both sets — are $\\{1, 2, 3, 6\\}$.]@`,
     afterFigure: `Every pair of positive integers shares at least one common factor: $1$ divides both, always. The question is whether they share anything larger.
 
 The greatest common factor is the largest member of the common factor set. For $12$ and $18$, it is $6$. This value — the [GCD](!/arithmetic/divisibility/gcd) — plays a central role in simplifying **fractions**, solving equations, and determining whether two numbers are coprime.`,
@@ -440,7 +441,8 @@ The greatest common factor is the largest member of the common factor set. For $
     title: `Common Multiples`,
     content: `A common multiple of two numbers $m$ and $n$ is a number divisible by both. Where common factors are drawn from finite sets, common multiples form an infinite sequence.
 
-The multiples of $4$ are $4, 8, 12, 16, 20, 24, 28, 32, 36, \\ldots$ The multiples of $6$ are $6, 12, 18, 24, 30, 36, \\ldots$ The common multiples are $12, 24, 36, 48, \\ldots$ — every value that appears in both lists.
+@academic[example:Example
+The multiples of $4$ are $4, 8, 12, 16, 20, 24, 28, 32, 36, \\ldots$ The multiples of $6$ are $6, 12, 18, 24, 30, 36, \\ldots$ The common multiples are $12, 24, 36, 48, \\ldots$ — every value that appears in both lists.]@
 
 @academic[pitfall,aside:true,width:35%:Multiplying to get the LCM
 Taking $6 \\cdot 8 = 48$ as the smallest common multiple of $6$ and $8$ skips $24$, which both divide: $24 = 6 \\cdot 4 = 8 \\cdot 3$. The product is the least common multiple only when the two numbers share no factor except $1$, as $4$ and $9$ do.
@@ -471,7 +473,8 @@ Counting the factors of $12 = 2^2 \\cdot 3$ as $2 \\cdot 1 = 2$ misses most of t
 
 Each prime factor $p_i$ can appear in a divisor $0, 1, 2, \\ldots, a_i$ times — that is $a_i + 1$ independent choices. The total number of divisors is the product of all these choices.
 
-The number $72 = 2^3 \\cdot 3^2$ has $(3+1)(2+1) = 12$ factors. Listing them confirms: $1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72$ — exactly twelve.`,
+@academic[example:Example
+The number $72 = 2^3 \\cdot 3^2$ has $(3+1)(2+1) = 12$ factors. Listing them confirms: $1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72$ — exactly twelve.]@`,
     afterFigure: `@academic[pitfall,aside:true,width:35%:Counting with factors that are not prime
 Reading $36 = 4 \\cdot 9$ as two factors with exponent $1$ gives $(1 + 1)(1 + 1) = 4$, but $36$ has $9$ factors. The formula needs primes: $36 = 2^2 \\cdot 3^2$ gives $(2 + 1)(2 + 1) = 9$.
 [Read more](!#pitfalls)]@
@@ -497,11 +500,13 @@ A number with more factors than every smaller number is called highly composite.
     title: `Sum of Factors`,
     content: `The sum of all positive divisors of $n$ is denoted $\\sigma(n)$. Like the divisor count, it can be computed directly from the prime factorization.
 
-For $n = 12$: the divisors are $1, 2, 3, 4, 6, 12$, and $\\sigma(12) = 1 + 2 + 3 + 4 + 6 + 12 = 28$.`,
+@academic[example:Example
+For $n = 12$: the divisors are $1, 2, 3, 4, 6, 12$, and $\\sigma(12) = 1 + 2 + 3 + 4 + 6 + 12 = 28$.]@`,
     afterFigure: `@academic[fact,aside:true,width:35%:Every even perfect number has one shape
 When $2^p - 1$ is prime, $n = 2^{p-1}(2^p - 1)$ is perfect, since $\\sigma(n) = (2^p - 1) \\cdot 2^p = 2n$; this gives $6$, $28$, $496$ and $8{,}128$. Euclid proved this around 300 BC, and about 2,000 years later Euler showed that every even perfect number has this shape.]@
 
-For $n = 6$: the divisors are $1, 2, 3, 6$, and $\\sigma(6) = 1 + 2 + 3 + 6 = 12$. The sum of all divisors is twice the number — but more revealing is that the sum of the proper divisors is $1 + 2 + 3 = 6$, equal to $n$ itself. This makes $6$ a perfect number.
+@academic[example:Example
+For $n = 6$: the divisors are $1, 2, 3, 6$, and $\\sigma(6) = 1 + 2 + 3 + 6 = 12$. The sum of all divisors is twice the number — but more revealing is that the sum of the proper divisors is $1 + 2 + 3 = 6$, equal to $n$ itself. This makes $6$ a perfect number.]@
 
 The next perfect number, $28 = 2^2 \\cdot 7$, has the same shape as $6 = 2 \\cdot 3$: a power of $2$ times an odd prime. For a number $2^k \\cdot q$ of this shape, the divisors are the powers $1, 2, \\ldots, 2^k$ together with those same powers times $q$, so $\\sigma(2^k q) = (1 + 2 + \\cdots + 2^k)(1 + q) = (2^{k+1} - 1)(q + 1)$. For $28$ this gives $7 \\cdot 8 = 56 = 2 \\cdot 28$.
 

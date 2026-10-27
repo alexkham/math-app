@@ -855,7 +855,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
@@ -1205,7 +1205,8 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
 
 For example, $\\{(1, 0, 0), (0, 2, 0), (0, 0, -3)\\}$ is orthogonal in $\\mathbb{R}^3$: every pair of distinct vectors has dot product zero. The vectors need not have the same length, and their lengths can be anything nonzero.
 
-A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1)(1) + (1)(-2) + (1)(1) = 0$, $(1)(1) + (1)(0) + (1)(-1) = 0$, $(1)(1) + (-2)(0) + (1)(-1) = 0$. All three pairwise products vanish — the set is orthogonal despite none of the vectors being aligned with the coordinate axes.`,
+@academic[example:Example
+A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1)(1) + (1)(-2) + (1)(1) = 0$, $(1)(1) + (1)(0) + (1)(-1) = 0$, $(1)(1) + (-2)(0) + (1)(-1) = 0$. All three pairwise products vanish — the set is orthogonal despite none of the vectors being aligned with the coordinate axes.]@`,
     before: ``,
     after: ``,
     link: ``,

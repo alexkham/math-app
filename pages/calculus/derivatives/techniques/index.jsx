@@ -359,7 +359,10 @@ Given an equation relating $x$ and $y$—such as $x^2 + y^2 = 25$—implicit dif
 
 The method: differentiate both sides of the equation with respect to $x$. Every term involving only $x$ is differentiated normally. Every term involving $y$ is differentiated using the [chain rule](!/calculus/derivatives/rules), treating $y$ as a function of $x$. This introduces a factor of $\\frac{dy}{dx}$ wherever $y$ appears. After differentiation, solve the resulting equation algebraically for $\\frac{dy}{dx}$.
 
-For $x^2 + y^2 = 25$: differentiating gives $2x + 2y\\frac{dy}{dx} = 0$. Solving yields $\\frac{dy}{dx} = -\\frac{x}{y}$. The result depends on both $x$ and $y$—this is typical and expected. The formula gives the slope at any point $(x, y)$ on the curve with $y \\neq 0$, without choosing a branch.
+@academic[example:Example
+For $x^2 + y^2 = 25$: differentiating gives $2x + 2y\\frac{dy}{dx} = 0$. Solving yields $\\frac{dy}{dx} = -\\frac{x}{y}$.]@
+
+The result depends on both $x$ and $y$—this is typical and expected. The formula gives the slope at any point $(x, y)$ on the curve with $y \\neq 0$, without choosing a branch.
 
 @academic[pitfall,aside:true,width:35%:Dropping the dy/dx factor
 Differentiating $y^2$ as $2y$ turns $x^2 + y^2 = 25$ into $2x + 2y = 0$, an equation with no $\\frac{dy}{dx}$ to solve for. With $\\frac{d}{dx}[y^2] = 2y\\frac{dy}{dx}$, the slope is $-\\frac{x}{y}$, which is $-\\frac{3}{4}$ at $(3, 4)$.
@@ -444,7 +447,10 @@ $$y = f(x) \\implies \\ln y = \\ln f(x) \\implies \\frac{y'}{y} = \\frac{d}{dx}[
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-For $y = x^x$: taking $\\ln$ gives $\\ln y = x \\ln x$. Differentiating: $\\frac{1}{y}\\frac{dy}{dx} = \\ln x + 1$. Solving: $\\frac{dy}{dx} = x^x(\\ln x + 1)$. No standard rule handles $x^x$ directly—the base and exponent both vary. Logarithmic differentiation is the natural approach.
+@academic[example:Example
+For $y = x^x$: taking $\\ln$ gives $\\ln y = x \\ln x$. Differentiating: $\\frac{1}{y}\\frac{dy}{dx} = \\ln x + 1$. Solving: $\\frac{dy}{dx} = x^x(\\ln x + 1)$.]@
+
+No standard rule handles $x^x$ directly—the base and exponent both vary. Logarithmic differentiation is the natural approach.
 
 @academic[pitfall,aside:true,width:35%:Forgetting to multiply by y
 Stopping at $\\frac{1}{y}\\frac{dy}{dx} = \\ln x + 1$ gives $\\ln x + 1$ as the derivative of $x^x$, about $1.69$ at $x = 2$. Multiplying by $y = x^x$ gives $x^x(\\ln x + 1) \\approx 6.77$ there.
@@ -517,7 +523,8 @@ $$\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt} \\quad \\text{when } x = x(t), \\, y = y
 
 provided $\\frac{dx}{dt} \\neq 0$. Each coordinate is differentiated with respect to the parameter $t$, and the ratio gives the slope.
 
-For a circle parametrized by $x = \\cos t$, $y = \\sin t$: $\\frac{dx}{dt} = -\\sin t$ and $\\frac{dy}{dt} = \\cos t$, so $\\frac{dy}{dx} = \\frac{\\cos t}{-\\sin t} = -\\cot t$. At $t = \\pi/4$, the slope is $-1$.
+@academic[example:Example
+For a circle parametrized by $x = \\cos t$, $y = \\sin t$: $\\frac{dx}{dt} = -\\sin t$ and $\\frac{dy}{dt} = \\cos t$, so $\\frac{dy}{dx} = \\frac{\\cos t}{-\\sin t} = -\\cot t$. At $t = \\pi/4$, the slope is $-1$.]@
 
 @academic[pitfall,aside:true,width:35%:Flipping the parametric ratio
 Dividing $\\frac{dx}{dt}$ by $\\frac{dy}{dt}$ gives $\\frac{-\\sin t}{\\cos t} = -\\tan t$, which is $-\\frac{1}{\\sqrt{3}} \\approx -0.577$ at $t = \\frac{\\pi}{6}$. The slope is $\\frac{dy/dt}{dx/dt} = -\\cot t = -\\sqrt{3} \\approx -1.732$.

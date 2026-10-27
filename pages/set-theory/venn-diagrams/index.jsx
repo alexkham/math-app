@@ -779,6 +779,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import threeSetsVennDiagrams from '@/app/components/venn-diagrams/3-sets/threeSetsVennDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 
@@ -939,6 +940,26 @@ const keyWords = [
 </table>
 `
 
+  // Concept introduction (section 1, "What Are Venn Diagrams") — template D,
+  // comparison. Running instance: U = {1, …, 8}, A = {1, 2, 3, 4},
+  // B = {3, 4, 5, 6}. Old obj1 text is kept in sectionsContent.obj1, unused;
+  // its seven passages and the anatomy demo frame with its line are carried in
+  // unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciWasteTable = ciTableOpen(['question about the lists', 'answer', 'checks: 8 elements × 2 lists']) +
+    ciRow(['in both A and B?', '{3, 4}', '16']) +
+    ciRow(['in A or B?', '{1, 2, 3, 4, 5, 6}', '16'], { shade: true }) +
+    ciRow(['in A but not B?', '{1, 2}', '16']) +
+    ciRow(['in neither?', '{7, 8}', '16'], { shade: true }) +
+    ciRow(['total', '', '64 — every list scanned again for every question'], { last: true, color: '#a4243b', cols: [2] }) +
+    '</tbody></table>'
+
   const sectionsContent = {
     obj0: {
   title: `Key Terms`,
@@ -1058,21 +1079,23 @@ To shade a region for a given set expression, work from the inside out:
 
 3. Combine according to the outer operation
 
+@academic[example:Example
 For $A \\cup (B \\cap C)$:
 
 - First shade $B \\cap C$ — the region where circles $B$ and $C$ overlap
 
 - Then shade all of $A$
 
-- The union combines both shaded areas
+- The union combines both shaded areas]@
 
+@academic[example:Example
 For $(A \\cup B) \\cap C$:
 
 - First shade $A \\cup B$ — both circles $A$ and $B$
 
 - Then identify which parts lie inside $C$
 
-- The intersection keeps only the shaded region that falls within $C$
+- The intersection keeps only the shaded region that falls within $C$]@
 
 @academic[pitfall,aside:true,width:35%:Shading the operations in the wrong order
 Combining $A$ and $B$ first in $A \\cup (B \\cap C)$ shades $(A \\cup B) \\cap C$ instead. With $A = \\{1\\}$, $B = \\{2\\}$, $C = \\{2, 3\\}$ that gives $\\{2\\}$; the bracket comes first, $B \\cap C = \\{2\\}$, and the answer is $\\{1, 2\\}$.
@@ -1097,13 +1120,14 @@ Venn diagrams provide a visual method for verifying [set identities](!/set-theor
 
 3. If the shaded regions match exactly, the identity holds
 
+@academic[example:Example
 Verifying [De Morgan's law](!/set-theory/rules#de-morgans-laws) $(A \\cup B)^c = A^c \\cap B^c$:
 
 - Left side: shade $A \\cup B$ (both circles), then take the complement (shade everything outside)
 
 - Right side: $A^c$ is outside circle $A$; $B^c$ is outside circle $B$; their intersection is the region outside both circles
 
-- Both sides produce the same shaded region — the area outside both circles
+- Both sides produce the same shaded region — the area outside both circles]@
 
 @academic[pitfall,aside:true,width:35%:Keeping the union under the complement
 Writing $(A \\cup B)^c = A^c \\cup B^c$ moves the complement inside but keeps the union. With $U = \\{1, 2, 3, 4\\}$, $A = \\{1, 2\\}$, $B = \\{2, 3\\}$ the right side is $\\{1, 3, 4\\}$, but $(A \\cup B)^c = \\{4\\}$, which equals $A^c \\cap B^c$.
@@ -1111,15 +1135,21 @@ Writing $(A \\cup B)^c = A^c \\cup B^c$ moves the complement inside but keeps th
 
 The two sides of the law build the same region in a different order. The left side combines the two sets first and takes a single complement at the end. The right side takes the complement of each set first and combines the two complements afterwards. Identities that move a complement inside brackets are where a side-by-side shading helps most, because each side can be shaded step by step and compared region by region.
 
+@academic[example:Example
 Verifying the [distributive law](!/set-theory/rules#distributive-laws) $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$:
 
 - Left side: shade $B \\cup C$, then restrict to the part inside $A$
 
 - Right side: shade $A \\cap B$ and $A \\cap C$, then take their union
 
-- Both produce the same shaded regions within circle $A$
+- Both produce the same shaded regions within circle $A$]@
 
 This method works for any identity involving a finite number of sets, though it constitutes a verification rather than a formal proof.
+
+@academic[fact,aside:true,width:35%:Venn drew them to test arguments
+John Venn introduced them in 1880 to check reasoning in Boole's logic, drawing every overlap and shading the ones an argument ruled out. Euler's circles, in 1761 letters to a German princess, showed only the overlaps a statement allowed.]@
+
+Checking an identity this way needs no algebra and no list of laws to remember. Each side is shaded with the inside-out steps of the previous section, and the two pictures are compared region by region. Two circles cover identities in two sets, such as De Morgan's laws, and three circles cover identities in three sets, such as the distributive law above. When the two shadings differ in even one region, that region names the elements on which the two sides disagree.
     `,
     before: ``,
     after: ``,
@@ -1291,6 +1321,11 @@ const schemas = {
 }
 
  
+  const conceptIntroFigures = {
+    intersection: twoSetsVennDiagrams.intersection,
+    wasteTable: ciWasteTable,
+  };
+
   const demoUnits = {
     anatomy: demoUnitFrame({
       svg: twoSetsVennDiagrams.plain,
@@ -1332,6 +1367,7 @@ const schemas = {
   return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1350,9 +1386,76 @@ const schemas = {
    }
 
 
-export default function VennDiagramsPage({demoUnits, seoData, sectionsContent, introContent, obj2Table, obj3Table, faqQuestions, schemas}) {
+export default function VennDiagramsPage({demoUnits, seoData, sectionsContent, introContent, obj2Table, obj3Table, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Listing elements in braces already describes any set completely.`,
+        content: [
+          `With $U = \\{1, 2, \\dots, 8\\}$, $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$, every fact about these sets is there in the lists. Nothing is missing, so a picture has to earn its place.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Every question about how the sets relate means scanning both lists again.`,
+        content: [
+          `To find what is in both, in either, in one only, or in neither, each of the eight elements has to be looked up in both lists — and the same lookups are repeated for the next question.`,
+          ciTable('wasteTable'),
+          `It is like a guest list versus a seating chart: the list says who is coming, but only the chart shows at a glance who is sitting together.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A Venn diagram draws each set as a closed curve, usually a circle, inside a rectangle that stands for the universal set; where curves overlap, the region holds the elements the sets share.`,
+        footer: `Here: two overlapping circles $A$ and $B$ inside the rectangle $U$, with $3$ and $4$ in the overlap.`,
+      },
+      {
+        id: 'kind',
+        lead: `A Venn diagram is a picture of membership: where an element sits says which sets it belongs to.`,
+        content: [
+          `A Venn diagram represents sets as closed curves — typically circles — drawn inside a rectangle that represents the universal set $U$. The interior of each curve contains the elements of that set.`,
+          `When curves overlap, the overlapping region represents elements belonging to multiple sets simultaneously. Each distinct region of the diagram corresponds to a unique combination of set memberships.`,
+          <div key={'unit-anatomy'} dangerouslySetInnerHTML={{ __html: demoUnits.anatomy }} />,
+          `Everything a Venn diagram will ever say is said with these ingredients — curves, overlaps, and the rectangle that bounds them.`,
+        ],
+      },
+      {
+        id: 'free',
+        lead: `Once each element is placed, every one of those questions is answered by looking.`,
+        content: [
+          `Put $3$ and $4$ in the overlap, $1$ and $2$ in the rest of $A$, $5$ and $6$ in the rest of $B$, and $7$ and $8$ outside both circles — eight placements, done once. "In both" is the shaded lens below; "in either", "in $A$ only" and "in neither" are other regions of the same picture.`,
+          `The purpose of Venn diagrams is to visualize:`,
+          `- Relationships between sets (subset, disjoint, overlapping)
+
+- Results of [operations](!/set-theory/operations) like union, intersection, and complement
+
+- The logical structure of set expressions`,
+          `Every point in the diagram belongs to a specific region, and every region represents elements with a particular membership pattern — in some sets and not in others.`,
+        ],
+        visual: ciSvg('intersection'),
+        caption: `$A \\cap B$ shaded: the region inside both circles. The same state is on the [two-set Venn diagram tool](!/set-theory/visual-tools/two-sets-basic-venn).`,
+      },
+      {
+        id: 'caveat',
+        lead: `All of it comes from one feature — one region for each pattern of membership — and that feature has a limit.`,
+        content: `Two circles make four regions and three circles make eight, one for each in-or-out pattern. With four sets, circles can no longer be drawn to give all sixteen patterns, so other curves are needed and the picture loses its ease. And a bare diagram shows which regions exist, not how many elements are in them, unless the elements or counts are written in. The section on [three-set Venn diagrams](!/set-theory/venn-diagrams#3) shows the largest case circles handle.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers two-set and three-set diagrams, shading regions, and using diagrams to check set identities.`,
+      },
+    ],
+  }
     
   const genericSections=[
     {
@@ -1368,9 +1471,7 @@ export default function VennDiagramsPage({demoUnits, seoData, sectionsContent, i
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-anatomy'} dangerouslySetInnerHTML={{ __html: demoUnits.anatomy }} />,
-          `Everything a Venn diagram will ever say is said with these ingredients — curves, overlaps, and the rectangle that bounds them.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
 
@@ -1404,6 +1505,10 @@ export default function VennDiagramsPage({demoUnits, seoData, sectionsContent, i
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
           <div key={'unit-three-sets'} dangerouslySetInnerHTML={{ __html: demoUnits.threeSets }} />,
+          `@academic[fact,aside:true,width:35%:Symmetric only for a prime number of sets
+A Venn diagram for $n$ sets that lands on itself after a $\\frac{1}{n}$ turn exists exactly when $n$ is prime. Turning moves the regions inside exactly $k$ curves around in groups of $n$, and $n$ divides $\\binom{n}{k}$ for every $0 < k < n$ only when $n$ is prime.]@
+
+Ellipses and other closed curves do give Venn diagrams for four, five and more sets. The three-circle picture has a property worth noticing: turned through a third of a full turn about its centre, it lands on itself, with each circle moving into the place of the next. A diagram with this kind of turning symmetry treats all of its sets alike, and finding such diagrams for larger numbers of sets became a research question of its own.`,
           `Eight regions for three sets, sixteen for four: the doubling is exactly why circles run out of room beyond three, and why the three-set diagram is the workhorse of the genre.`,
         ]
     },

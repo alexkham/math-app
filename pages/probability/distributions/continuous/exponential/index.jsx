@@ -1129,6 +1129,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1224,6 +1225,25 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // exponential distribution") — template F, two descriptions shown to agree.
+    // Running instance: calls at 2 per hour. Old obj1 text is kept in
+    // sectionsContent.obj1, unused; its four paragraphs, the example box and
+    // the examples link chip are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciBothTable = ciTableOpen(['t (hours)', 'counting: P(no call in t), Poisson mean 2t', 'waiting: P(wait > t)', 'value']) +
+      ciRow(['0.25', 'e^(−0.5)', 'e^(−2 · 0.25)', '0.607']) +
+      ciRow(['0.5', 'e^(−1)', 'e^(−2 · 0.5)', '0.368'], { shade: true }) +
+      ciRow(['1', 'e^(−2)', 'e^(−2 · 1)', '0.135']) +
+      ciRow(['2', 'e^(−4)', 'e^(−2 · 2)', '0.018'], { shade: true, last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1363,7 +1383,8 @@ $$f(x) = \\begin{cases} \\lambda e^{-\\lambda x} & \\text{if } x \\geq 0 \\\\ 0 
 @academic[formula_callout:Probability Density Function (PDF) and Support (Range)
   $$\\int_{0}^{\\infty} \\lambda e^{-\\lambda x}\\,dx = \\lambda \\left[-\\frac{1}{\\lambda}e^{-\\lambda x}\\right]_{0}^{\\infty} = 1$$]@
 
-**Practical Example:** Customer service calls arrive at a help desk at an average rate of 5 per hour, so $\\lambda = 5$. The time $X$ (in hours) until the next call follows $\\text{Exp}(5)$. The PDF is $f(x) = 5e^{-5x}$ for $x \\geq 0$. The probability of waiting less than 6 minutes (0.1 hours) is $P(X \\leq 0.1) = 1 - e^{-5(0.1)} \\approx 0.393$, or about 39.3%.
+@academic[example:Practical Example
+Customer service calls arrive at a help desk at an average rate of 5 per hour, so $\\lambda = 5$. The time $X$ (in hours) until the next call follows $\\text{Exp}(5)$. The PDF is $f(x) = 5e^{-5x}$ for $x \\geq 0$. The probability of waiting less than 6 minutes (0.1 hours) is $P(X \\leq 0.1) = 1 - e^{-5(0.1)} \\approx 0.393$, or about 39.3%.]@
 
       `,
       before:``,
@@ -1387,7 +1408,7 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{
 **Key Properties**:
 • $F(0) = 0$ (no probability mass below zero)
 • $F(x) \\to 1$ as $x \\to \\infty$ (the total probability is 1)
-• The CDF increases from 0 to 1, starting slowly and approaching 1 asymptotically
+• The CDF increases from 0 to 1, rising fastest at the start and approaching 1 asymptotically
 • For any $x \\geq 0$, $P(X > x) = 1 - F(x) = e^{-\\lambda x}$ (survival function)
 
 **Memoryless Property**: The exponential distribution is the only continuous distribution with the memoryless property: $P(X > s + t \\mid X > s) = P(X > t)$. In terms of the CDF: knowing that $X > s$ doesn't change the probability that $X > s + t$ relative to waiting an additional time $t$ from the start.
@@ -1396,7 +1417,9 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{
 Using $F(x) = 1 - e^{-\\lambda x}$ for $P(X > x)$: with calls at $\\lambda = 5$ per hour it gives $P(X > 0.1) \\approx 0.393$, the chance of waiting at most 6 minutes. A wait longer than 6 minutes has probability $e^{-0.5} \\approx 0.607$.
 [Read more](!#pitfalls)]@
 
-**Practical Use:** The exponential CDF is one of the simplest to work with. To find $P(X \\leq x)$ when $X \\sim \\text{Exp}(3)$ and $x = 2$: $F(2) = 1 - e^{-3(2)} = 1 - e^{-6} \\approx 0.9975$, meaning about 99.75% of values fall below 2. The complementary probability $P(X > 2) = e^{-6} \\approx 0.0025$.
+**Practical Use:** The exponential CDF is one of the simplest to work with.
+@academic[example:Example
+To find $P(X \\leq x)$ when $X \\sim \\text{Exp}(3)$ and $x = 2$: $F(2) = 1 - e^{-3(2)} = 1 - e^{-6} \\approx 0.9975$, meaning about 99.75% of values fall below 2. The complementary probability $P(X > 2) = e^{-6} \\approx 0.0025$.]@
       `,
       before:``,
       after:``,
@@ -1773,11 +1796,11 @@ The exponential distribution is the continuous analog of the [geometric distribu
 
 The **memoryless property** makes it unique: $P(X > s + t \\mid X > s) = P(X > t)$. Past waiting time provides no information about future waiting time.
 
-@academic[example:Example Application
+### Example Application
 
 A web server receives requests at an average rate of 120 per hour ($\\lambda = 2$ per minute). The time between consecutive requests follows $\\text{Exp}(2)$.
 
-The [median](!/probability/median) wait between requests is $\\frac{\\ln(2)}{2} \\approx 0.35$ minutes (21 seconds). However, 10% of inter-arrival times exceed $\\frac{2.3}{2} = 1.15$ minutes, requiring server capacity planning for occasional gaps.]@
+The [median](!/probability/median) wait between requests is $\\frac{\\ln(2)}{2} \\approx 0.35$ minutes (21 seconds). However, 10% of inter-arrival times exceed $\\frac{2.3}{2} = 1.15$ minutes, requiring server capacity planning for occasional gaps.
   `,
   before: ``,
   after: ``,
@@ -2250,6 +2273,19 @@ How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so th
     vlines: [{ x: 1, label: 's = 1' }],
     notes: [{ x: 2.4, y: 1.05, text: 'same shape, just shifted:', pos: 'e', color: 'r' }, { x: 2.4, y: 0.95, text: 'the wait so far is forgotten', pos: 'e', color: 'r' }],
     caption: 'Memoryless: after waiting 1, the remaining wait is Exp(1) again' };
+  const fpCiSurvival = { kind: 'pieces', svgTitle: 'P(wait > t) = e^(-2t) for calls at 2 per hour',
+    xRange: [0, 2.5], yRange: [0, 1.1], xStep: 0.5, yStep: 0.25, xLetter: 't', yLetter: 'P',
+    pieces: [
+      { fn: (t) => Math.exp(-2 * t), from: 0, to: 2.5, ends: [null, null], color: 'f', label: { text: 'P(wait > t) = e^(−2t)', x: 0.9, y: 0.32, pos: 'e' } },
+    ],
+    points: [{ x: 0.5, y: Math.exp(-1) }, { x: 1, y: Math.exp(-2) }],
+    notes: [{ x: 0.55, y: 0.42, text: '0.368 at half an hour', pos: 'e', color: 'g' }, { x: 1.05, y: 0.19, text: '0.135 at one hour', pos: 'e', color: 'g' }],
+    caption: 'short waits are common, long waits rare' }
+  const conceptIntroFigures = {
+    survival: renderFunctionPlotV4(fpCiSurvival),
+    bothTable: ciBothTable,
+  };
+
   const demoUnits = {
     u_5_0: demoUnitFrame({
       svg: continuousPdfDiagrams['exponential-pdf'],
@@ -2280,6 +2316,7 @@ How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so th
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          summaryTable,
@@ -2303,10 +2340,75 @@ export default function ExponentialDistributionPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `One way to describe a quiet call centre: time how long you wait for the next call.`,
+        content: [
+          `The probabilistic experiment behind the exponential distribution focuses on waiting time rather than counts or measurements. The experiment observes how long it takes until a particular event happens, under the assumption that the event occurs continuously and unpredictably, but at a steady average rate.`,
+          `The exponential distribution captures the idea that short waiting times are common, while long waits are possible but become progressively more rare.`,
+        ],
+        visual: ciSvg('survival'),
+      },
+      {
+        id: 'second',
+        lead: `Another way: count the calls that arrive in a window of time.`,
+        content: [
+          `If calls come in at an average of 2 per hour, independently of one another, the number of calls in $t$ hours is [Poisson](!/probability/distributions/discrete/poisson) with mean $2t$. The chance of no call at all in that window is the Poisson probability of zero, $e^{-2t}$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For every window length, the two descriptions give the same number.`,
+        content: [
+          ciTable('bothTable'),
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree: "the wait is longer than t" and "no call arrives in the first t hours" are the same event.`,
+        content: [
+          `Waiting more than half an hour means exactly that the first half hour passed without a call. One process, two questions — how many, and how long — so the waiting probabilities are forced by the counting ones: $P(\\text{wait} > t) = e^{-\\lambda t}$ for a rate $\\lambda$.`,
+          `This framework applies when [events](!/probability/events) occur [independently](!/probability/independence), one at a time, and without buildup or anticipation. Time is continuous, and probability accumulates smoothly as time passes.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [exponential distribution](!/probability/definitions#exponential_distribution) with rate $\\lambda$ is the distribution of the waiting time until the next event when events occur independently at average rate $\\lambda$: it has density $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$, and $P(X > x) = e^{-\\lambda x}$.`,
+        footer: `So the wait for the next call is exponential with $\\lambda = 2$ per hour: $P(\\text{wait} > 1) = e^{-2} \\approx 0.135$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a continuous distribution of a waiting time — and it has no memory.`,
+        content: [
+          `A defining characteristic of this experiment is lack of memory. The process does not "age": the chance that the [event](!/probability/events) occurs in the next instant does not depend on how much time has already passed. Waiting longer provides no advantage or disadvantage—the system resets at every moment.`,
+          sectionsContent.obj1.example,
+          sectionsContent.links.examples,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which description to reach for: counts per window are Poisson, gaps between events are exponential — and check how the parameter is given.`,
+        content: `Both rest on the same rate $\\lambda$ and the same assumptions: independent events, constant rate. Some texts and software give the exponential a scale $\\beta = 1/\\lambda$, the mean wait, instead of the rate; the [notation](!/probability/distributions/continuous/exponential#2) section shows how to tell which is meant.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, the parameter, the density and CDF, the mean, variance, mode and median, and the memoryless property in detail.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2323,9 +2425,7 @@ export default function ExponentialDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          sectionsContent.obj1.example,
-          sectionsContent.links.examples,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

@@ -920,6 +920,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1103,6 +1104,27 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 2, "What Covariance Describes") — template
+  // A, definition last. Running instance: four students, hours studied and
+  // test score, each pair equally likely. Old obj2 text is kept in
+  // sectionsContent.obj2, unused; its four paragraphs, formula box with link,
+  // the covSign demo frame with its line and the punchline are carried in
+  // unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciDevTable = ciTableOpen(['student', 'hours x', 'score y', 'x − 2.5', 'y − 65', 'product']) +
+    ciRow(['A', '1', '50', '−1.5', '−15', '22.5']) +
+    ciRow(['B', '2', '60', '−0.5', '−5', '2.5'], { shade: true }) +
+    ciRow(['C', '3', '65', '0.5', '0', '0']) +
+    ciRow(['D', '4', '85', '1.5', '20', '30'], { shade: true }) +
+    ciRow(['average', '2.5', '65', '', '', '55 ÷ 4 = 13.75'], { last: true, color: '#2563EB', cols: [5] }) +
+    '</tbody></table>'
 
   const sectionsContent={
     obj0: {
@@ -1500,6 +1522,10 @@ variable.
     pieces: [{ fn: (x) => x * x, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[-2.2, 2.2]] }, ...cvParab],
     notes: [{ x: 2.45, y: 4.5, text: 'Y = X²: dependent', pos: 'e', color: 'r' }, { x: 2.45, y: 4.0, text: 'yet Cov(X, Y) = 0', pos: 'e', color: 'f' }, { x: 2.45, y: 3.5, text: 'the halves cancel', pos: 'e' }],
     caption: 'Zero covariance yet total dependence: only linear trends count' };
+  const conceptIntroFigures = {
+    devTable: ciDevTable,
+  };
+
   const demoUnits = {
     covSign: demoUnitFrame({
       svg: renderFunctionPlotV4(fpCovSign),
@@ -1560,6 +1586,7 @@ variable.
       faqQuestions,
       schemas,
       demoUnits,
+      conceptIntroFigures,
       seoData: {
         title: "Covariance: Joint Behavior of Random Variables | Learn Math Class",
         description: "Learn how covariance measures joint behavior of random variables. Understand positive, negative, and zero covariance, independence relationships, and applications.",
@@ -1576,9 +1603,81 @@ const siteTheme = {
   panelSoft: '#eff6ff', panelSofter: '#f8fafc',
 }
 
-export default function CovariancePage({seoData, sectionsContent, introContent, covarianceSignCases, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function CovariancePage({seoData, sectionsContent, introContent, covarianceSignCases, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `When two quantities are measured on the same people, the interesting question is whether they move together.`,
+        content: [
+          `Hours studied and test score, height and weight, temperature and ice-cream sales: each observation gives a pair. Variance describes each quantity separately; it says nothing about whether a high value of one tends to come with a high value of the other.`,
+          `For each [random variable](!/probability/random-variables), values fluctuate around an average level.  
+Covariance examines how the positions of two variables relative to their own averages
+compare across the same observations.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Four students: those who studied longer than average mostly scored above average too.`,
+        content: [
+          `Measure each value from its own average — 2.5 hours and 65 points — and multiply the two deviations. When both are above average or both below, the product is positive; when they point opposite ways, it is negative.`,
+          ciTable('devTable'),
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `The sign of each product is forced by agreement, so their average reports the overall tendency.`,
+        content: [
+          `Here every product is positive or zero, because no student was above average on one measure and below on the other. Averaging the products gives $13.75$: a positive number, saying the two quantities rise together.`,
+          `If both variables tend to be above their averages at the same time, or below them at
+the same time, the covariance reflects this alignment.  
+If one variable tends to be above its average while the other is below, the covariance
+reflects an opposing pattern.`,
+          `In this way, covariance summarizes the directional relationship between the deviations
+of two [random variables](!/probability/random-variables).`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [covariance](!/probability/definitions#covariance) of two random variables $X$ and $Y$ is the expected value of the product of their deviations from their means.`,
+        formula: [
+          `Formally, covariance is the average product of the two deviations from the means:`,
+          `@academic[formula_callout:Covariance Definition
+$$\\operatorname{Cov}(X, Y) = E\\!\\left[(X - \\mu_X)(Y - \\mu_Y)\\right]$$
+/probability/formulas#covariance_definition]@`,
+          `@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@`,
+        ],
+        footer: `So for the four equally likely students, $\\operatorname{Cov}(X, Y) = 13.75$ hour-points.`,
+      },
+      {
+        id: 'kind',
+        lead: `Covariance is a single number attached to a pair of random variables, with the units of both multiplied together.`,
+        content: [
+          <div key={'unit-covSign'} dangerouslySetInnerHTML={{ __html: demoUnits.covSign }} />,
+          `If the amber points dominated instead, the covariance would be negative.`,
+          `@academic[punchline:Covariance is positive when two deviations tend to share a sign and negative when they tend to oppose.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The sign generalizes; the size does not.`,
+        content: `A positive covariance always means "together", a negative one "opposite". But $13.75$ depends on the units: measure study time in minutes and the covariance becomes $825$, with nothing about the students changed. Covariance gives the direction of a relationship, not its strength, as the next section on [interpreting the sign](!/probability/covariance#3) explains.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the sign of covariance, its link to independence, why it matters, common examples and the notation.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1603,10 +1702,7 @@ export default function CovariancePage({seoData, sectionsContent, introContent, 
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-          <div key={'unit-covSign'} dangerouslySetInnerHTML={{ __html: demoUnits.covSign }} />,
-          `If the amber points dominated instead, the covariance would be negative.`,
-          `@academic[punchline:Covariance is positive when two deviations tend to share a sign and negative when they tend to oppose.]@`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

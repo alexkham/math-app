@@ -874,7 +874,12 @@ Adding $2$ to both parts of $\\frac{3}{5}$ gives $\\frac{5}{7}$, a larger value:
 
 This process works because multiplying by $\\frac{n}{n}$ is the same as multiplying by 1, which does not change a value. The equation $\\frac{3}{5} \\times \\frac{2}{2} = \\frac{6}{10}$ shows that the transformation preserves quantity.
 
-Creating equivalent fractions with a specific denominator is essential for [adding and subtracting fractions](!/arithmetic/fractions/adding-subtracting). To rewrite $\\frac{2}{3}$ with denominator 12, determine what multiplies 3 to get 12. Since $3 \\times 4 = 12$, multiply both parts by 4: $\\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$.`,
+Creating equivalent fractions with a specific denominator is essential for [adding and subtracting fractions](!/arithmetic/fractions/adding-subtracting). To rewrite $\\frac{2}{3}$ with denominator 12, determine what multiplies 3 to get 12. Since $3 \\times 4 = 12$, multiply both parts by 4: $\\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$.
+
+@academic[fact,aside:true,width:35%:One seventh over six nines
+No power of $10$ is a multiple of $7$, but $999999 = 7 \\times 142857$ is, so $\\frac{1}{7} = \\frac{142857}{999999}$. That numerator is the repeating block of $\\frac{1}{7} = 0.142857142857\\ldots$, and every fraction whose denominator has no factor $2$ or $5$ can be written over a run of nines.]@
+
+Not every target denominator can be reached. For a fraction in simplest form, the new denominator must be a multiple of the old one, so $\\frac{1}{3}$ cannot be rewritten over $10$, $100$ or $1000$: no power of $10$ is a multiple of $3$. The same holds for $\\frac{1}{7}$, and for every fraction in simplest form whose denominator has a prime factor other than $2$ and $5$. Simplifying first matters: $\\frac{3}{6}$ can be rewritten over $10$, because it equals $\\frac{1}{2} = \\frac{5}{10}$.`,
     before: ``,
     after: ``,
     link: '',
@@ -884,7 +889,13 @@ Creating equivalent fractions with a specific denominator is essential for [addi
     title: `Simplifying Fractions`,
     content: `Simplifying a fraction means dividing both numerator and denominator by a common factor. The fraction $\\frac{12}{18}$ simplifies to $\\frac{6}{9}$ by dividing both parts by 2, and further to $\\frac{2}{3}$ by dividing by 3.
 
-The most efficient approach uses the [greatest common factor](!/arithmetic/divisibility/gcd). For $\\frac{12}{18}$, the GCF of 12 and 18 is 6. Dividing both parts by 6 in one step gives $\\frac{12 \\div 6}{18 \\div 6} = \\frac{2}{3}$.
+@academic[fact,aside:true,width:35%:Cancelling the 6s in $\\frac{16}{64}$ works
+Striking out the two 6s in $\\frac{16}{64}$ leaves $\\frac{1}{4}$, which is correct only by luck: the real common factor is $16$. Among fractions below $1$ with two-digit parts, apart from pairs like $\\frac{30}{60}$, just four survive this false cancelling: $\\frac{16}{64}$, $\\frac{19}{95}$, $\\frac{26}{65}$ and $\\frac{49}{98}$.]@
+
+The most efficient approach uses the [greatest common factor](!/arithmetic/divisibility/gcd).
+
+@academic[example:Example
+For $\\frac{12}{18}$, the GCF of 12 and 18 is 6. Dividing both parts by 6 in one step gives $\\frac{12 \\div 6}{18 \\div 6} = \\frac{2}{3}$.]@
 
 Simplifying does not change the fraction's value. It produces the same quantity written with smaller numbers, making further calculations easier and results cleaner.
 
@@ -904,7 +915,11 @@ Dividing $\\frac{12}{18}$ by $2$ and stopping at $\\frac{6}{9}$ leaves the commo
 
 To verify simplest form, check whether any integer greater than 1 divides both parts evenly. If none exists, the fraction is fully simplified. Alternatively, compute the GCF; if it equals 1, the fraction is in simplest form.
 
-Simplest form is also called lowest terms or reduced form. Final answers are typically expected in this form unless a specific denominator is required.`,
+Simplest form is also called lowest terms or reduced form. Final answers are typically expected in this form unless a specific denominator is required.
+
+Every fraction in a family of equivalent fractions reduces to the same simplest form: $\\frac{4}{6}$, $\\frac{6}{9}$ and $\\frac{12}{18}$ all reduce to $\\frac{2}{3}$. This makes simplest form the standard name of the value, and two fractions are equivalent exactly when they reduce to the same simplest form.
+
+@academic[punchline:Every family of equivalent fractions has exactly one member in simplest form, the one whose parts have GCF 1.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -914,9 +929,11 @@ Simplest form is also called lowest terms or reduced form. Final answers are typ
     title: `Testing for Equivalence`,
     content: `The cross-multiplication test determines whether two fractions are equivalent. For fractions $\\frac{a}{b}$ and $\\frac{c}{d}$, compute the cross products $a \\times d$ and $b \\times c$. If the products are equal, the fractions are equivalent.
 
-Testing $\\frac{3}{4}$ and $\\frac{9}{12}$: compute $3 \\times 12 = 36$ and $4 \\times 9 = 36$. The products match, confirming equivalence.
+@academic[example:Example
+Testing $\\frac{3}{4}$ and $\\frac{9}{12}$: compute $3 \\times 12 = 36$ and $4 \\times 9 = 36$. The products match, confirming equivalence.]@
 
-Testing $\\frac{2}{5}$ and $\\frac{3}{7}$: compute $2 \\times 7 = 14$ and $5 \\times 3 = 15$. The products differ, so the fractions are not equivalent.
+@academic[example:Example
+Testing $\\frac{2}{5}$ and $\\frac{3}{7}$: compute $2 \\times 7 = 14$ and $5 \\times 3 = 15$. The products differ, so the fractions are not equivalent.]@
 
 @academic[pitfall,aside:true,width:35%:Pairing a product with the wrong fraction
 Crediting $15 = 5 \\times 3$ to $\\frac{2}{5}$ because it contains the $5$ makes $\\frac{2}{5}$ look larger than $\\frac{3}{7}$. Each product goes with the fraction whose numerator it uses: $14$ with $\\frac{2}{5}$, $15$ with $\\frac{3}{7}$, so $\\frac{3}{7}$ is larger.
@@ -944,7 +961,10 @@ The density of equivalent fractions is unlimited. Between any two distinct point
     title: `Common Denominators`,
     content: `Finding a common denominator means rewriting two or more fractions as equivalent fractions that share the same denominator. This process is necessary for [adding and subtracting fractions](!/arithmetic/fractions/adding-subtracting) with different denominators.
 
-Any common multiple of the denominators can serve as a common denominator. For $\\frac{1}{3}$ and $\\frac{1}{4}$, the denominators 3 and 4 share multiples 12, 24, 36, and so on. Using 12: $\\frac{1}{3} = \\frac{4}{12}$ and $\\frac{1}{4} = \\frac{3}{12}$.
+Any common multiple of the denominators can serve as a common denominator.
+
+@academic[example:Example
+For $\\frac{1}{3}$ and $\\frac{1}{4}$, the denominators 3 and 4 share multiples 12, 24, 36, and so on. Using 12: $\\frac{1}{3} = \\frac{4}{12}$ and $\\frac{1}{4} = \\frac{3}{12}$.]@
 
 @academic[pitfall,aside:true,width:35%:Changing only the denominator
 Writing $\\frac{1}{3}$ as $\\frac{1}{12}$ changes the value: $\\frac{1}{12}$ is only a quarter of $\\frac{1}{3}$. The numerator takes the same factor $4$: $\\frac{1}{3} = \\frac{4}{12}$.
@@ -1328,6 +1348,7 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
           sectionsContent.obj7.content,
                   <div key={'unit-commonDen'} dangerouslySetInnerHTML={{ __html: demoUnits.commonDen }} />,
           `In twelfths, 4/12 > 3/12 shows at once that 1/3 > 1/4.`,
+          `@academic[punchline:A common denominator turns fractions into counts of same-sized parts, and the LCD keeps those counts smallest.]@`,
         ]
     },
     {

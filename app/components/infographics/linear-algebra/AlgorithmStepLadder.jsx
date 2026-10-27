@@ -37,6 +37,15 @@ function buildCss() {
   'position:relative;}' +
   '.asl-mast::after{content:\'\';position:absolute;left:32px;right:32px;bottom:0;height:3px;' +
   'background:var(--asl-accent);}' +
+  /* light header (matches MatrixOperation): pale blue band, navy text */
+  '.asl-mast{background:#eef4fc;color:#06357A;border-bottom:1px solid #d6e2f3;}' +
+  '.asl-mast::after{display:none;}' +
+  '.asl-mast .asl-kicker{color:#2563EB;opacity:1;}' +
+  '.asl-mast .asl-title,.asl-mast h2,.asl-mast h3{font-family:Inter,system-ui,sans-serif;font-weight:600;letter-spacing:-.01em;font-size:21px;line-height:1.2;color:#06357A;}' +
+  '.asl-mast .asl-intro{color:#4a6285;opacity:1;}' +
+  '.asl-mast .asl-tally b{color:#06357A;font-size:22px;}' +
+  '.asl-mast .asl-tally span{color:#4a6285;opacity:1;}' +
+  '.asl-mast a{color:#2563EB;border-color:#c3d0e4;}' +
   '.asl-kicker{font-family:\'JetBrains Mono\',ui-monospace,monospace;font-size:9px;font-weight:800;' +
   'letter-spacing:.22em;text-transform:uppercase;opacity:.6;}' +
   '.asl-title{font-family:\'Bricolage Grotesque\',sans-serif;font-weight:800;font-size:28px;' +

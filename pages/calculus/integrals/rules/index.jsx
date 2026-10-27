@@ -678,7 +678,7 @@ Integration obeys algebraic rules that mirror those of differentiation. Sums spl
 
 The deepest result is the Fundamental Theorem of Calculus, which bridges the two faces of integration. Part 1 says differentiation undoes integration. Part 2 says definite integrals can be computed via antiderivatives:
 
-@academic[formula_callout:Summary: All Integration Rules at a Glance
+@academic[formula_callout:Fundamental Theorem of Calculus, Part 2
 $$\\int_a^b f(x)\\, dx = F(b) - F(a)$$]@
 
 This theorem converts area computation—a limiting process involving infinite sums—into simple evaluation of an antiderivative at two points. It explains why mastering indefinite integration unlocks definite integration as well.

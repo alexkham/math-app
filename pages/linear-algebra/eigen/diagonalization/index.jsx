@@ -2806,7 +2806,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -3058,7 +3058,7 @@ const diagonalizabilityCases = {
 const matrixPowersByHand = {
   kicker: 'Eigen \u00B7 matrix powers',
   title: 'Four powers, computed the long way',
-  intro: 'Each state is the previous one multiplied by $A$ again. Three multiplications to reach $A$⁴, and every one of them depends on the one before it.',
+  intro: 'Each state is the previous one multiplied by $A$ again. Three multiplications to reach $A^4$, and every one of them depends on the one before it.',
   operation: 'power',
   A: [[1, 2], [4, 3]],
   powers: 4,
@@ -3242,7 +3242,8 @@ As $n \\to \\infty$, the term $c_i \\lambda_i^n \\mathbf{v}_i$ with the largest 
 @academic[fact,aside:true,width:35%:Rounding gives every Fibonacci number
 Since $|\\hat{\\phi}^n| \\leq 1$ and $\\sqrt{5} > 2$, the term $\\hat{\\phi}^n/\\sqrt{5}$ is always smaller than $\\frac{1}{2}$ in size. So $F_n$ is simply $\\phi^n/\\sqrt{5}$ rounded to the nearest whole number: $\\phi^{10}/\\sqrt{5} \\approx 55.004$, and $F_{10} = 55$.]@
 
-The [Fibonacci sequence](!/algebra/sequences/fibonacci) provides a classic application. The recurrence $F_{n+1} = F_n + F_{n-1}$ translates to $\\begin{pmatrix} F_{n+1} \\\\ F_n \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}^n \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$. The matrix has eigenvalues $\\phi = \\frac{1 + \\sqrt{5}}{2}$ and $\\hat{\\phi} = \\frac{1 - \\sqrt{5}}{2}$. Diagonalization gives the Binet formula: $F_n = \\frac{\\phi^n - \\hat{\\phi}^n}{\\sqrt{5}}$, a closed-form expression for the $n$-th Fibonacci number.
+@academic[example:Example
+The [Fibonacci sequence](!/algebra/sequences/fibonacci) provides a classic application. The recurrence $F_{n+1} = F_n + F_{n-1}$ translates to $\\begin{pmatrix} F_{n+1} \\\\ F_n \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}^n \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$. The matrix has eigenvalues $\\phi = \\frac{1 + \\sqrt{5}}{2}$ and $\\hat{\\phi} = \\frac{1 - \\sqrt{5}}{2}$. Diagonalization gives the Binet formula: $F_n = \\frac{\\phi^n - \\hat{\\phi}^n}{\\sqrt{5}}$, a closed-form expression for the $n$-th Fibonacci number.]@
 
 The second eigenvalue is $\\hat{\\phi} \\approx -0.618$, smaller than $1$ in size, so $\\hat{\\phi}^n$ shrinks toward zero with alternating sign while $\\phi^n$ grows. The dominant eigenvalue takes over within a few steps: already $F_{11}/F_{10} = 89/55 \\approx 1.618$ agrees with $\\phi$ to three decimals.`,
     before: ``,

@@ -13,6 +13,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
 export async function getStaticProps(){
@@ -1066,9 +1067,31 @@ const schemas = {
     ],
   };
 
+  // BeforeAfter (obj8): radicals with different indices combined through exponent form
+  const combineRadicalsSteps = {
+    header: {
+      kicker: 'Rational exponents',
+      title: 'Combining radicals with different indices',
+      lede: 'Direct combination is impossible when the indices differ. Converting to exponents provides a path.',
+    },
+    steps: [
+      { id: 'radicals', label: 'Different indices', stamp: 'Before', expr: '$\\sqrt{2} \\cdot \\sqrt[3]{4}$',
+        move: { label: 'Convert', note: 'to exponents over one base: $4^{1/3} = (2^2)^{1/3} = 2^{2/3}$' } },
+      { id: 'onebase', label: 'Exponent form, one base', expr: '$2^{1/2} \\cdot 2^{2/3}$',
+        move: { label: 'Add exponents', note: '3/6 + 4/6 = 7/6' } },
+      { id: 'power', label: 'Single power', expr: '$2^{7/6}$',
+        move: { label: 'Convert back', note: 'the denominator 6 becomes the index' } },
+      { id: 'radical', label: 'Single radical', stamp: 'After', expr: '$\\sqrt[6]{128}$',
+        detailsLabel: 'Division',
+        detailsTitle: 'Division works the same way',
+        details: '$$\\frac{\\sqrt[3]{x}}{\\sqrt[4]{x}} = \\frac{x^{1/3}}{x^{1/4}} = x^{4/12 - 3/12} = x^{1/12} = \\sqrt[12]{x}$$' },
+    ],
+  };
+
 return {
   props: {
     ratExpDomainCases,
+    combineRadicalsSteps,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1093,7 +1116,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RationalExponentsPage({ratExpDomainCases, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RationalExponentsPage({ratExpDomainCases, combineRadicalsSteps, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1185,6 +1208,20 @@ export default function RationalExponentsPage({ratExpDomainCases, seoData, secti
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="combine-radicals-steps"
+            title="Combining √2 and ∛4"
+            source="/algebra/roots/rational-exponents"
+            before={"The section's product, one move at a time. Every move happens in exponent form; radical notation comes back only at the end."}
+            after={"The common denominator $6$ of the exponents becomes the index of the result. The same detour handles quotients, and it is the arithmetic behind the twelve equal steps of a piano octave."}
+          >
+            <BeforeAfter
+              data={combineRadicalsSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

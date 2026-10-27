@@ -913,7 +913,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
@@ -1400,7 +1400,8 @@ The proof is one line: $A\\mathbf{v} = \\lambda\\mathbf{v}$ implies $\\mathbf{v}
 
 The eigenvalues of $A^{-1}$ are the reciprocals of the eigenvalues of $A$, and the eigenvectors are unchanged. This requires $\\lambda \\neq 0$, which is guaranteed by the invertibility of $A$.
 
-If $A$ has eigenvalues $2, -3, 5$, then $A^{-1}$ has eigenvalues $1/2, -1/3, 1/5$. The [trace](!/linear-algebra/matrix/trace) of $A^{-1}$ is $1/2 - 1/3 + 1/5 = 11/30$, and $\\det(A^{-1}) = 1/(2 \\cdot (-3) \\cdot 5) = -1/30$.`,
+@academic[example:Example
+If $A$ has eigenvalues $2, -3, 5$, then $A^{-1}$ has eigenvalues $1/2, -1/3, 1/5$. The [trace](!/linear-algebra/matrix/trace) of $A^{-1}$ is $1/2 - 1/3 + 1/5 = 11/30$, and $\\det(A^{-1}) = 1/(2 \\cdot (-3) \\cdot 5) = -1/30$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1426,7 +1427,8 @@ This follows by expansion:
 @academic[formula_callout:Eigenvalues of Powers and Polynomials
 $$q(A)\\mathbf{v} = (c_0 I + c_1 A + \\cdots + c_m A^m)\\mathbf{v} = (c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m)\\mathbf{v} = q(\\lambda)\\mathbf{v}$$]@
 
-If $A$ has eigenvalue $3$, then $2A^2 - A + 4I$ has eigenvalue $2(9) - 3 + 4 = 19$ for the same eigenvector.`,
+@academic[example:Example
+If $A$ has eigenvalue $3$, then $2A^2 - A + 4I$ has eigenvalue $2(9) - 3 + 4 = 19$ for the same eigenvector.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -1477,7 +1479,12 @@ The eigenvectors are generally different. If $\\mathbf{v}$ is a right eigenvecto
 @academic[fact,aside:true,width:35%:Gershgorin's discs locate the eigenvalues
 Every eigenvalue lies within $R_i$ of some diagonal entry $a_{ii}$, where $R_i$ is the sum of $|a_{ij}|$ over the rest of row $i$: look at the row where its eigenvector has the largest entry. For the matrix beside, the discs $|z - 10| \\leq 1$ and $|z + 5| \\leq 2$ do not meet, so each holds one eigenvalue, found without solving anything.]@
 
-Away from these two types the diagonal entries are no longer the eigenvalues, but they are often close to them. For $A = \\begin{pmatrix} 10 & 1 \\\\ 2 & -5 \\end{pmatrix}$ the characteristic polynomial is $\\lambda^2 - 5\\lambda - 52$, with roots $\\frac{5 \\pm \\sqrt{233}}{2}$, about $10.13$ and $-5.13$. The small entries off the diagonal move each eigenvalue only about $0.13$ away from its diagonal entry.
+Away from these two types the diagonal entries are no longer the eigenvalues, but they are often close to them.
+
+@academic[example:Example
+For $A = \\begin{pmatrix} 10 & 1 \\\\ 2 & -5 \\end{pmatrix}$ the characteristic polynomial is $\\lambda^2 - 5\\lambda - 52$, with roots $\\frac{5 \\pm \\sqrt{233}}{2}$, about $10.13$ and $-5.13$.]@
+
+The small entries off the diagonal move each eigenvalue only about $0.13$ away from its diagonal entry.
 
 Real [symmetric](!/linear-algebra/matrix/types) matrices have all real eigenvalues, and eigenvectors for distinct eigenvalues are [orthogonal](!/linear-algebra/orthogonality). This is the spectral theorem&apos;s prerequisite.
 

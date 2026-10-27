@@ -245,7 +245,8 @@ The process stops once the current prime exceeds $\\sqrt{n}$. Any composite numb
 Starting the list at $1$ leaves $1$ standing, since it is not a multiple of any prime, and the count up to $30$ comes out as $11$. The list starts at $2$ because $1$ is not prime: there are $10$ primes up to $30$.
 [Read more](!#pitfalls)]@
 
-For $n = 30$: start with $2, 3, 4, 5, \\ldots, 30$. After sieving by $2$: all even numbers $> 2$ are removed. After $3$: $9, 15, 21, 27$ are removed. After $5$: $25$ is removed. Since $\\sqrt{30} < 6$, the process ends. The surviving numbers $2, 3, 5, 7, 11, 13, 17, 19, 23, 29$ are all primes up to $30$.
+@academic[example:Example
+For $n = 30$: start with $2, 3, 4, 5, \\ldots, 30$. After sieving by $2$: all even numbers $> 2$ are removed. After $3$: $9, 15, 21, 27$ are removed. After $5$: $25$ is removed. Since $\\sqrt{30} < 6$, the process ends. The surviving numbers $2, 3, 5, 7, 11, 13, 17, 19, 23, 29$ are all primes up to $30$.]@
 
 To list primes in any range up to 104,729, use the [prime numbers calculator](!/algebra/calculators/sequences/prime-numbers).`,
     before: ``,
@@ -260,9 +261,11 @@ The bound $\\sqrt{n}$ is sufficient because if $n = ab$ with $a \\leq b$, then $
 
 Efficiency improves by skipping even numbers after checking $2$: if $n$ is not divisible by $2$, it cannot be divisible by $4, 6, 8, \\ldots$. Checking only $2$ and odd numbers up to $\\sqrt{n}$ cuts the work roughly in half. Further savings come from checking only $2, 3$, and numbers of the form $6k \\pm 1$, since every prime greater than $3$ has this form.
 
-Is $97$ prime? $\\sqrt{97} < 10$, so check divisibility by $2, 3, 5, 7$. None divide $97$, so it is prime.
+@academic[example:Example
+Is $97$ prime? $\\sqrt{97} < 10$, so check divisibility by $2, 3, 5, 7$. None divide $97$, so it is prime.]@
 
-Is $91$ prime? Check $2$ (no), $3$ (no), $5$ (no), $7$: $91 = 7 \\times 13$. It is composite.
+@academic[example:Example
+Is $91$ prime? Check $2$ (no), $3$ (no), $5$ (no), $7$: $91 = 7 \\times 13$. It is composite.]@
 
 @academic[pitfall,aside:true,width:35%:Stopping the trial division too early
 Testing only $2, 3, 5, 7$ and calling $143$ prime stops short of $\\sqrt{143} \\approx 11.96$. Testing $11$ as well gives $143 = 11 \\cdot 13$, composite.
@@ -284,7 +287,10 @@ $$60 = 2^2 \\cdot 3 \\cdot 5, \\quad 360 = 2^3 \\cdot 3^2 \\cdot 5, \\quad 1001 
 
 No matter how the factorization is carried out — whether starting by dividing out $2$s or by noticing that $1001 = 7 \\times 143$ — the final set of prime factors and their multiplicities is always the same.
 
-Finding the factorization uses repeated division by the smallest available prime. Divide $n$ by $2$ as many times as possible, then by $3$, then by $5$, and so on. For $252$: $252 \\div 2 = 126$, $126 \\div 2 = 63$, $63 \\div 3 = 21$, $21 \\div 3 = 7$, and $7$ is prime. So $252 = 2^2 \\cdot 3^2 \\cdot 7$.
+Finding the factorization uses repeated division by the smallest available prime. Divide $n$ by $2$ as many times as possible, then by $3$, then by $5$, and so on.
+
+@academic[example:Example
+For $252$: $252 \\div 2 = 126$, $126 \\div 2 = 63$, $63 \\div 3 = 21$, $21 \\div 3 = 7$, and $7$ is prime. So $252 = 2^2 \\cdot 3^2 \\cdot 7$.]@
 
 Prime factorization connects directly to the [GCD](!/arithmetic/divisibility/gcd) and [LCM](!/arithmetic/divisibility/lcm).
 

@@ -1949,7 +1949,12 @@ $$|z_1 \\cdot z_2| = |z_1| \\cdot |z_2|$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
+@academic[fact,aside:true,width:35%:Sums of two squares multiply
+$5 = 1^2 + 2^2$ and $13 = 2^2 + 3^2$, so $65$ is one too: $(1 + 2i)(2 + 3i) = -4 + 7i$ gives $65 = 4^2 + 7^2$, and $(1 + 2i)(2 - 3i) = 8 + i$ gives $65 = 8^2 + 1^2$. Diophantus noted both ways of writing $65$ in the 3rd century, long before complex numbers.]@
+
 The modulus of a product equals the product of the moduli. This property, impossible to guess from the definition, emerges from the algebra of complex multiplication and finds its natural explanation in [trigonometric form](!/complex-numbers/trigonometric-form), where multiplication multiplies lengths.
+
+Written out in coordinates, the rule becomes a statement about ordinary real numbers. With $z_1 = a + bi$ and $z_2 = c + di$, the product is $z_1 z_2 = (ac - bd) + (ad + bc)i$, and squaring both sides of the product rule gives $(a^2 + b^2)(c^2 + d^2) = (ac - bd)^2 + (ad + bc)^2$. No $i$ is left in this identity. Expanding both sides confirms it, but the product rule explains why it has to hold.
 
 Division obeys the corresponding quotient rule:
 
@@ -2079,7 +2084,12 @@ The geometric interpretation: $|z_1 - z_2|$ measures the distance between two po
   before: ``,
   content: `The modulus and its inequalities serve practical purposes throughout complex analysis, from routine calculations to sophisticated proofs.
 
+@academic[fact,aside:true,width:35%:Ptolemy's theorem in one line
+The triangle inequality applied to the four-point identity below gives $|a - c||b - d| \\leq |a - b||c - d| + |a - d||b - c|$. Equality holds exactly when the points lie in this order on a circle or a line; the circle case is Ptolemy's theorem, which he used around 150 AD for his table of chords.]@
+
 Bounding provides estimates when exact computation proves difficult. Suppose we need to show that some complicated expression stays small. Rather than evaluating it precisely, apply the triangle inequality to bound its modulus by a sum of simpler terms. The product rule $|z_1 z_2| = |z_1||z_2|$ often simplifies factors further. Such estimates form the backbone of convergence proofs and error analysis.
+
+The same two rules prove facts of plane geometry once points are written as complex numbers. For any four points $a$, $b$, $c$, $d$, multiplying out the brackets shows that $(a - b)(c - d) + (a - d)(b - c) = (a - c)(b - d)$. By the product rule, the modulus of each of these products is a product of two distances between the points.
 
 Distance measurement follows immediately from modulus. The quantity $|z_1 - z_2|$ gives the Euclidean distance between points $z_1$ and $z_2$ in the [complex plane](!/complex-numbers/geometric-representation). Formally:
 
@@ -2566,6 +2576,7 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj4Table }}
           />,
+          `@academic[punchline:The modulus respects multiplication exactly: when complex numbers multiply, divide or take powers, their lengths do the same.]@`,
         ]
     },
     {
@@ -2584,6 +2595,7 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@academic[punchline:The whole proof rests on one fact: the real part of a complex number never exceeds its modulus.]@`,
         ]
     },
     {

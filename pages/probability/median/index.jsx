@@ -2150,7 +2150,7 @@ For small $\\lambda$, numerical evaluation of the [CDF](!/probability/cdf) is ne
 
 ## Non-Uniqueness
 
-Discrete distributions can have multiple medians when the CDF jumps from below 0.5 to above 0.5 in a single step, landing on exactly 0.5 at the jump point.
+Discrete distributions can have multiple medians when the CDF lands on exactly 0.5 at some value and stays flat there until the next jump.
 
 @academic[example:Example
 [Discrete Uniform](!/probability/distributions/discrete/uniform) on $\\{1, 2, 3, 4\\}$ has CDF values $0.25, 0.5, 0.75, 1.0$. Both $2$ and $3$ satisfy the median conditions. Either value is a valid median.]@
@@ -2319,7 +2319,7 @@ The median behaves differently for discrete and continuous distributions due to 
 
 [Continuous distributions](!/probability/distributions/continuous): The median is unique. The [CDF](!/probability/cdf) is smooth and crosses 0.5 at exactly one point.
 
-[Discrete distributions](!/probability/distributions/discrete): Multiple values may satisfy the median conditions when the CDF jumps from below 0.5 to above 0.5 in a single step.
+[Discrete distributions](!/probability/distributions/discrete): Multiple values may satisfy the median conditions when the CDF equals exactly 0.5 at some value.
 
 @academic[example:Example
 Discrete uniform on $\\{1, 2, 3, 4\\}$ has both 2 and 3 as valid medians.]@
@@ -2546,7 +2546,7 @@ This makes the median ideal for data with contamination or measurement errors in
 
 [Continuous distributions](!/probability/distributions/continuous) with strictly increasing [CDFs](!/probability/cdf) have exactly one median. The smoothness eliminates ambiguity.
 
-[Discrete distributions](!/probability/distributions/discrete) may have multiple medians when the CDF jumps across 0.5.
+[Discrete distributions](!/probability/distributions/discrete) may have multiple medians when the CDF equals exactly 0.5 at some value.
 
 ## Relationship to Symmetry
 
@@ -2557,7 +2557,7 @@ $$\\text{median}(X) = c = \\text{mean}(X)$$]@
 
 Symmetry forces the 50th percentile and the balance point to coincide at the center of symmetry.
 
-Skewed distributions separate median from [mean](!/probability/expected-value), with the median positioned between the [mode](!/probability/mode) and mean.
+Skewed distributions separate median from [mean](!/probability/expected-value), with the median usually positioned between the [mode](!/probability/mode) and mean.
 
 ## Independence from Distribution Spread
 
@@ -2895,7 +2895,7 @@ Lognormal: Highly right-skewed with median $< $ mean. The median is $e^\\mu$ whi
 @academic[example:Example
 Uniform on $\\{1,2,3,4\\}$ has medians at both $2$ and $3$ since the [CDF](!/probability/cdf) equals exactly $0.5$ at $2$.]@
 
-[Binomial](!/probability/distributions/discrete/binomial) can have two medians when the CDF jumps from below $0.5$ to above $0.5$ while passing through exactly $0.5$.
+[Binomial](!/probability/distributions/discrete/binomial) can have two medians when the CDF equals exactly $0.5$ at some value.
 
 ## Distributions with No Mean but Well-Defined Median
 
@@ -2942,7 +2942,7 @@ The median falls near $5$ (the midpoint between the two [modes](!/probability/mo
 Distributions with gaps in the support (missing values) require careful [CDF](!/probability/cdf) evaluation.
 
 @academic[example:Example
-Support $\\{1, 2, 5, 6\\}$ with equal probabilities. The CDF jumps from $0.5$ at $k=2$ to $0.75$ at $k=5$. The median is $2$ since it's the smallest value where $F(k) \\geq 0.5$.]@
+Support $\\{1, 2, 5, 6\\}$ with equal probabilities. The CDF jumps from $0.5$ at $k=2$ to $0.75$ at $k=5$. Every value in $[2, 5]$ meets the median conditions; reported as the smallest qualifying value, the median is $2$.]@
 
 ## When Median Analysis Fails
 

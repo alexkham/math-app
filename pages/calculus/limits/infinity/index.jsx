@@ -14,8 +14,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 
 
 export async function getStaticProps(){
@@ -860,8 +861,40 @@ const schemas = {
     ],
   };
 
+  const horizontalAsymptoteProfile = {
+    header: { kicker: 'a horizontal asymptote, both ends', title: 'Profile of the example', formula: '$f(x) = \\frac{2x + 1}{x - 3}$' },
+    quickStats: [ { n: '2', label: 'limit at ±∞' }, { n: '0', label: 'crossings' } ],
+    graph: {
+      xRange: [-10, 16], yRange: [-4, 8],
+      points: Array.from({ length: 521 }, (_, i) => { const x = -10 + i * 0.05; return [Number(x.toFixed(2)), Math.abs(x - 3) < 1e-9 ? null : Number(((2 * x + 1) / (x - 3)).toFixed(4))]; }),
+      xTicks: [-10, -5, 0, 3, 5, 10, 15], yTicks: [-4, 0, 2, 4, 8],
+      asymptotes: [{ y: 2 }],
+    },
+    features: [
+      { id: 'ha', kind: 'warm', points: [{ x: -9, y: 2, r: 0 }, { x: 15, y: 2, r: 0 }] },
+    ],
+    intervals: [
+      { label: 'vs y = 2', spans: [
+        { from: null, to: 3, kind: 'neg', text: 'below the line' },
+        { from: 3, to: null, kind: 'pos', text: 'above the line' },
+      ] },
+    ],
+    properties: [
+      { name: 'Key points', rows: [
+        { featureId: 'ha', label: 'Asymptote', value: 'y = 2, both ends', tone: 'warm' },
+      ] },
+      { name: 'Global', rows: [
+        { label: 'Limits', value: '$\\lim_{x \\to \\pm\\infty} f(x) = 2$' },
+        { label: 'Gap to the line', value: '$f(x) - 2 = \\frac{7}{x - 3}$' },
+        { label: 'Side', value: 'above for $x > 3$, below for $x < 3$' },
+        { label: 'Crossings', value: 'none', tone: 'na', sub: '$\\frac{7}{x - 3}$ is never zero' },
+      ] },
+    ],
+  };
+
 return {
   props: {
+    horizontalAsymptoteProfile,
     growthRateLevels,
     demoUnits,
     sectionsContent,
@@ -885,7 +918,7 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function InfinityPage({growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function InfinityPage({horizontalAsymptoteProfile, growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -914,6 +947,16 @@ export default function InfinityPage({growthRateLevels, seoData, sectionsContent
           sectionsContent.obj3.content,
           <div key={'unit-horizAsym'} dangerouslySetInnerHTML={{ __html: demoUnits.horizAsym }} />,
           `A graph may cross its horizontal asymptote; the asymptote only describes the far ends.`,
+          `The example as a full picture: $f(x) = \\frac{2x + 1}{x - 3}$ against its horizontal asymptote $y = 2$, with the side of the line it keeps on each end and the gap $\\frac{7}{x - 3}$ that decides it.`,
+          <DiagramFrame
+            key={'obj3-profile'}
+            id="horizontal-asymptote-profile"
+            title="Profile of (2x + 1)/(x − 3)"
+            source="/calculus/limits/infinity"
+          >
+            <FunctionAnalysis data={horizontalAsymptoteProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The strip makes the sign of the gap visible: left of $x = 3$ the graph approaches $y = 2$ from below, right of it from above, and on neither side does it touch the line. A different function could cross its asymptote many times; this one, with a gap that is never zero, cannot.`,
         ]
     },
     {

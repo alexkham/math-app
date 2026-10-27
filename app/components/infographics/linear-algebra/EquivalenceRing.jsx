@@ -352,6 +352,15 @@ function buildCss() {
   'position:relative;}' +
   '.eqr-mast::after{content:\'\';position:absolute;left:26px;right:26px;bottom:0;height:3px;' +
   'background:var(--eqr-accent);}' +
+  /* light header (matches MatrixOperation): pale blue band, navy text */
+  '.eqr-mast{background:#eef4fc;color:#06357A;border-bottom:1px solid #d6e2f3;}' +
+  '.eqr-mast::after{display:none;}' +
+  '.eqr-mast .eqr-kicker{color:#2563EB;opacity:1;}' +
+  '.eqr-mast .eqr-title,.eqr-mast h2,.eqr-mast h3{font-family:Inter,system-ui,sans-serif;font-weight:600;letter-spacing:-.01em;font-size:21px;line-height:1.2;color:#06357A;}' +
+  '.eqr-mast .eqr-intro{color:#4a6285;opacity:1;}' +
+  '.eqr-mast .eqr-tally b{color:#06357A;font-size:22px;}' +
+  '.eqr-mast .eqr-tally span{color:#4a6285;opacity:1;}' +
+  '.eqr-mast a{color:#2563EB;border-color:#c3d0e4;}' +
   '.eqr-kicker{font-family:\'JetBrains Mono\',ui-monospace,monospace;font-size:9px;font-weight:800;' +
   'letter-spacing:.22em;text-transform:uppercase;opacity:.6;}' +
   '.eqr-title{font-family:\'Bricolage Grotesque\',sans-serif;font-weight:800;font-size:24px;' +

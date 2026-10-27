@@ -1122,11 +1122,12 @@ import NotationSection from '@/app/components/page-components/content-components
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1630,6 +1631,23 @@ const summaryTable = `
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Definition") — template F, two
+// descriptions shown to agree. Running instance: {(1, 0), (0, 1), (1, 1)}
+// against {(1, 2), (3, 1)}. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its two formula boxes with link, corollary box and four passages
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBothTable = ciTableOpen(['set', 'a redundant vector?', 'a combination with weights not all 0 that gives 0?', 'verdict']) +
+  ciRow(['{(1, 0), (0, 1), (1, 1)}', 'yes: (1, 1) = (1, 0) + (0, 1)', 'yes: 1·(1, 0) + 1·(0, 1) − 1·(1, 1) = 0', 'dependent'], { color: '#a4243b', cols: [3] }) +
+  ciRow(['{(1, 2), (3, 1)}', 'no: neither is a multiple of the other', 'no: only 0·(1, 2) + 0·(3, 1)', 'independent'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -2039,6 +2057,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    bothTable: ciBothTable,
+  };
+
   const demoUnits = {
     geometry: demoUnitFrame({
       svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.nearDependent],
@@ -2059,6 +2081,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     independenceProperties,
@@ -2079,9 +2102,82 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function LinearIndependencePage({seoData, sectionsContent, introContent, independenceProperties, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function LinearIndependencePage({seoData, sectionsContent, introContent, independenceProperties, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `One way to judge a set of vectors: is any of them redundant — already buildable from the others?`,
+        content: [
+          `In $\\{(1, 0), (0, 1), (1, 1)\\}$ the third vector adds nothing new: it is the sum of the first two. A set with no such spare vector is the kind worth naming.`,
+        ],
+      },
+      {
+        id: 'second',
+        lead: `Another way: ask whether some mix of the vectors, not all with weight zero, cancels out to the zero vector.`,
+        content: [
+          `Weights of zero always give the zero vector; that tells nothing. The question is whether any other choice of weights also lands on $\\mathbf{0}$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `On both sets the two questions get the same answer.`,
+        content: [
+          ciTable('bothTable'),
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree: a cancelling combination can be solved for one of its vectors, and a redundant vector gives a cancelling combination.`,
+        content: [
+          `Dependence means at least one vector in the set can be expressed as a linear combination of the others. If $c_j \\neq 0$ in a nontrivial relation, then dividing by $c_j$ isolates $\\mathbf{v}_j$:`,
+          `@academic[formula_callout:Definition
+$$\\mathbf{v}_j = -\\frac{c_1}{c_j}\\mathbf{v}_1 - \\cdots - \\frac{c_{j-1}}{c_j}\\mathbf{v}_{j-1} - \\frac{c_{j+1}}{c_j}\\mathbf{v}_{j+1} - \\cdots - \\frac{c_k}{c_j}\\mathbf{v}_k$$]@`,
+          `In the other direction, $\\mathbf{v}_j = a_1\\mathbf{v}_1 + \\cdots$ rearranges to $a_1\\mathbf{v}_1 + \\cdots - \\mathbf{v}_j = \\mathbf{0}$, a combination whose weight on $\\mathbf{v}_j$ is $-1$, not zero.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A set of vectors is [linearly independent](!/linear-algebra/definitions#linear_independence) when the only linear combination equal to the zero vector is the one with every weight zero; otherwise it is linearly dependent.`,
+        formula: [
+          `A set of vectors $\\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k\\}$ in a vector space $V$ is linearly independent when the only linear combination producing the zero vector is the trivial one:`,
+          `@academic[formula_callout:Linear Independence Equation
+$$\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} \\text{ is independent} \\iff \\bigl(c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0} \\Rightarrow c_1 = \\cdots = c_k = 0\\bigr)$$
+/linear-algebra/formulas#linear_independence_equation]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+          `If a nontrivial solution exists — any assignment of scalars, not all zero, that produces $\\mathbf{0}$ — the set is linearly dependent.`,
+        ],
+        footer: `So $\\{(1, 2), (3, 1)\\}$ is independent and $\\{(1, 0), (0, 1), (1, 1)\\}$ is dependent.`,
+      },
+      {
+        id: 'kind',
+        lead: `Independence is a property of the set as a whole, not of any single vector in it.`,
+        content: [
+          `@academic[rule_corollary_plain:A single nonzero vector is always independent — the equation $c\\mathbf{v} = \\mathbf{0}$ with $\\mathbf{v} \\neq \\mathbf{0}$ forces $c = 0$.]@
+
+The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mathbf{0}$ is a nontrivial relation. Any set containing the zero vector is therefore dependent.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which description to use: redundancy for intuition, the zero-combination test for computing.`,
+        content: `Spotting a redundant vector by eye works for small sets; for larger ones the zero-combination test turns into a system of equations that can be solved mechanically, as the section on [testing with the homogeneous system](!/linear-algebra/vector-spaces/linear-independence#3) shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the geometric picture, testing by the homogeneous system and by the determinant, properties of independent sets, dependence relations and the Wronskian test.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2089,7 +2185,7 @@ export default function LinearIndependencePage({seoData, sectionsContent, introC
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

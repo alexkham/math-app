@@ -635,9 +635,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderJointRectangle from '@/app/utils/illustrations/probability/areas/jointRectangle'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
-import Hierarchy from '@/app/components/infographics/Hierarchy'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 
 
 export async function getStaticProps(){

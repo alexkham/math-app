@@ -13,6 +13,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -204,6 +205,24 @@ const keyWords = [
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 1, "Definition") — template I, naming.
+    // Running instance: 2³ = 8, met with 5³ and 10⁴ in three everyday counts.
+    // Old obj1 text is kept in sectionsContent.obj1, unused; its formula box,
+    // fact aside, corollary box, five passages and the definition demo frame
+    // with its line are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciPlacesTable = ciTableOpen(['situation', 'worked out', 'result', 'written as a power']) +
+      ciRow(['a cell splits in two every hour; cells after 3 hours', '2 · 2 · 2', '8', '2³'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['volume of a cube with 5 cm sides', '5 · 5 · 5', '125 cm³', '5³'], { shade: true, color: '#2563EB', cols: [3] }) +
+      ciRow(['number of 4-digit PIN codes', '10 · 10 · 10 · 10', '10,000', '10⁴'], { last: true, color: '#2563EB', cols: [3] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -761,6 +780,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    placesTable: ciPlacesTable,
+  };
+
   const demoUnits = {
     definition: demoUnitFrame({
       svg: powersTableDiagrams['b2-default'],
@@ -781,6 +804,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -800,9 +824,77 @@ return {
    }
 
 // export default function NaturalExponentsPage({seoData,sectionsContent , introContent}) {
-export default function NaturalExponentsPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function NaturalExponentsPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `You already multiply a number by itself over and over whenever something doubles, triples or repeats.`,
+        content: [
+          `A cell splits in two, then each half splits again, then again: after three hours there are $2 \\cdot 2 \\cdot 2 = 8$ cells. Nobody thinks of that as three separate multiplications — it is one repeated step.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The same pattern turns up in growth, in geometry and in counting.`,
+        content: [
+          `Each situation multiplies one number by itself a fixed number of times.`,
+          ciTable('placesTable'),
+        ],
+      },
+      {
+        id: 'shared',
+        lead: `What they share: one repeated factor, and a count of how many times it appears.`,
+        content: [
+          `Writing out $10 \\cdot 10 \\cdot 10 \\cdot 10$ quickly gets long; all that matters is which number repeats and how often. Those two numbers are exactly what a power records.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `For a natural number $n$, the [power](!/algebra/definitions#power) $a^n$ is the product of $n$ copies of $a$; $a$ is the base and $n$ the [exponent](!/algebra/definitions#exponent).`,
+        formula: [
+          `For a natural number $n \\geq 1$, the expression $a^n$ means the product of $n$ copies of $a$:`,
+          `@academic[formula_callout:Definition
+$$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$]@`,
+        ],
+        footer: `So the cells after three hours are $2^3 = 8$, the cube's volume is $5^3 = 125$, and the PIN codes number $10^4$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A power is a single number, written compactly — and the base can be any real number.`,
+        content: [
+          `The base $a$ can be any real number — positive, negative, or zero. The exponent $n$ counts the repetitions.`,
+          `Concrete examples anchor the definition. $2^4 = 2 \\cdot 2 \\cdot 2 \\cdot 2 = 16$. $5^3 = 5 \\cdot 5 \\cdot 5 = 125$. $(-3)^2 = (-3)(-3) = 9$. $(-3)^3 = (-3)(-3)(-3) = -27$.`,
+          <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `@academic[fact,aside:true,width:35%:The fifth power keeps the last digit
+For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 = 32$, $3^5 = 243$, $7^5 = 16807$. The last digits of powers repeat in cycles of length $1$, $2$ or $4$, so four steps after $n^1$ the cycle is back at its start.]@`,
+          `The last digit of a power depends only on the last digit of the base, because only the last digits of two factors decide the last digit of their product. Running through the exponents $1, 2, 3, \\ldots$, the last digits of the powers of $2$ go $2, 4, 8, 6, 2, 4, 8, 6, \\ldots$, those of $3$ go $3, 9, 7, 1, 3, 9, 7, 1, \\ldots$, and those of $9$ alternate between $9$ and $1$. Powers of $5$ end in $5$ every time, and powers of $6$ end in $6$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What the name buys: rules that work on the count instead of on long products.`,
+        content: [
+          `The five laws below are bookkeeping for these lists of factors.`,
+          `@academic[rule_corollary_plain:Two special cases follow immediately. When $n = 1$, there is only one copy of the base: $a^1 = a$ for any $a$. When the base is $1$, repeated multiplication changes nothing: $1^n = 1$ for any $n$.]@`,
+          `A note on convention: whether the natural numbers include $0$ varies by source. In this section, natural exponents start at $n = 1$. The case $a^0$ arises naturally from the quotient rule and is addressed on the [negative exponents](!/algebra/powers/negative-exponents) page, where the extension below $n = 1$ is developed.`,
+          `The first thing the notation makes easy to see is the sign: a negative base gives alternating signs, as the section on [sign behavior](!/algebra/powers/natural-exponents#2) shows.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the notation, sign behavior, and the product, quotient, power-of-a-power and power-of-a-product rules.`,
+      },
+    ],
+  }
     
   const genericSections=[
       {
@@ -818,9 +910,7 @@ export default function NaturalExponentsPage({seoData, sectionsContent, introCon
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
-          `The five laws below are bookkeeping for these lists of factors.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

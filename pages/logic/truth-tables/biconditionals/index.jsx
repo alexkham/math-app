@@ -11,9 +11,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderVennRegions from '@/app/utils/illustrations/logic/venn/vennRegions'
+import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
-export default function BiconditionalsTruthTablesPage({demoUnits,  keyWords, biconditionalExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
+export default function BiconditionalsTruthTablesPage({demoUnits, conceptIntroFigures, keyWords, biconditionalExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
 
     const biconditionalOperators = {
         'P ↔ Q': { 
@@ -104,12 +106,73 @@ export default function BiconditionalsTruthTablesPage({demoUnits,  keyWords, bic
         }
       };
 
+    const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+    // Section 1 concept introduction — template I (naming).
+    const conceptIntro = {
+      beats: [
+        {
+          id: 'intuition',
+          lead: `You already use statements that tie two facts together so tightly that neither can hold alone.`,
+          content: [
+            `"The lamp is lit exactly when the switch is on" rules out a lit lamp with the switch off, and a dark lamp with the switch on. Either both facts hold or neither does.`,
+          ],
+        },
+        {
+          id: 'example',
+          kind: 'instance',
+          lead: `The same tie turns up in arithmetic, in geometry and in everyday life.`,
+          content: [
+            `Each statement joins two parts, and in each one the parts stand or fall together.`,
+            ciTable('placesTable'),
+          ],
+        },
+        {
+          id: 'shared',
+          lead: `What they share: the whole statement is true exactly when its two parts have the same truth value.`,
+          content: [
+            `Both true: fine. Both false: also fine — an odd number with an odd last digit does not break the rule. Only a mismatch, one part true and the other false, makes the statement false.`,
+            ciTable('iffTable'),
+          ],
+        },
+        {
+          id: 'definition',
+          kind: 'definition',
+          statement: `The [biconditional](!/logic/definitions#biconditional) $P \\leftrightarrow Q$, read "P if and only if Q", is the connective that is true exactly when $P$ and $Q$ have the same truth value.`,
+          footer: `So "n is even ↔ the last digit of n is even" is a biconditional: true for every whole number n.`,
+        },
+        {
+          id: 'kind',
+          lead: `It is one of the five connectives: it builds a new formula from two, with its own truth table.`,
+          content: [
+            `The biconditional P ↔ Q (read "P if and only if Q") is a compound proposition that is true exactly when P and Q have the same truth value — both true or both false. It is false when they differ.`,
+            `@academic[pitfall,aside:true,width:35%:Reading P ↔ Q as both true
+Taking P ↔ Q to mean "P and Q are both true" marks the FF row F, which is the table of P ∧ Q. At P = F, Q = F, P ∧ Q is F but P ↔ Q is T, because the two values match.
+[Read more](!#pitfalls)]@`,
+            `The truth table for P ↔ Q has two true rows (TT and FF) and two false rows (TF and FT). This symmetric structure reflects the fact that the biconditional treats P and Q identically — P ↔ Q is the same as Q ↔ P.`,
+          ],
+        },
+        {
+          id: 'caveat',
+          lead: `What the name buys: one symbol that carries two implications at once.`,
+          content: [
+            `The biconditional is equivalent to the conjunction of two conditionals: P ↔ Q ≡ (P → Q) ∧ (Q → P). This means P is both sufficient and necessary for Q. In mathematics, "if and only if" (abbreviated iff) signals that a definition or characterization is being given — the two sides are interchangeable.`,
+            `So proving a biconditional always means proving two things, and once proved it lets either side replace the other. The next section, [biconditionals and logical equivalence](!/logic/truth-tables/biconditionals#2), shows when that replacement is guaranteed.`,
+          ],
+        },
+        {
+          id: 'exit',
+          content: `The rest of the page builds the truth tables of the basic biconditional and of the biconditional laws: negation, mutual implication, transitivity, decomposition, the contrapositive, double negation and De Morgan's law.`,
+        },
+      ],
+    }
+
     const genericSections = [
       {
         id: '1',
         title: sectionsContent.obj1.title,
         link: sectionsContent.obj1.link,
-        content: [sectionsContent.obj1.content]
+        content: [<ConceptIntro key={'obj1-intro'} data={conceptIntro} />]
       },
       {
         id: '2',
@@ -124,6 +187,7 @@ export default function BiconditionalsTruthTablesPage({demoUnits,  keyWords, bic
         content: [sectionsContent.obj3.content,
           <div key={'unit-biconditionalRegions'} dangerouslySetInnerHTML={{ __html: demoUnits.biconditionalRegions }} />,
           `Shading the two crescents instead gives ¬(P ↔ Q), exclusive or.`,
+          `@academic[punchline:A biconditional asks only whether two statements agree, never whether either of them is true.]@`,
         ]
       },
       {
@@ -364,6 +428,29 @@ export async function getStaticProps() {
     }
   };
 
+  // Concept introduction (section 1, "What Is a Biconditional?") — template I,
+  // naming. Running instance: P ↔ Q, recognised in three everyday "exactly
+  // when" statements. Old obj1 text is kept in sectionsContent.obj1, unused;
+  // its three paragraphs and pitfall aside are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciPlacesTable = ciTableOpen(['statement', 'first part', 'second part', 'can one hold without the other?']) +
+    ciRow(['a whole number is even exactly when its last digit is even', 'n is even', 'last digit even', 'no']) +
+    ciRow(['a triangle is equilateral exactly when all its angles are 60°', 'equilateral', 'all angles 60°', 'no'], { shade: true }) +
+    ciRow(['the lamp is lit exactly when the switch is on', 'lamp lit', 'switch on', 'no'], { last: true }) +
+    '</tbody></table>'
+  const ciIffTable = ciTableOpen(['P', 'Q', 'P ↔ Q', 'the two parts']) +
+    ciRow(['T', 'T', 'T', 'agree'], { color: '#2563EB', cols: [2] }) +
+    ciRow(['T', 'F', 'F', 'differ'], { shade: true }) +
+    ciRow(['F', 'T', 'F', 'differ']) +
+    ciRow(['F', 'F', 'T', 'agree'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+    '</tbody></table>'
+
   const sectionsContent = {
     obj1: {
       title: `What Is a Biconditional?`,
@@ -437,7 +524,9 @@ Showing P → Q and concluding P ↔ Q misses the row P = F, Q = T: there P → 
 
 This equivalence is the standard definition of the biconditional in many logic textbooks. It also provides the standard proof strategy for biconditional statements: prove the forward direction (P → Q) and the backward direction (Q → P) separately.
 
-The truth table confirms that both sides agree in all four rows. When P and Q match (TT or FF), both implications hold and the biconditional is true. When they differ (TF or FT), one implication fails and both the conjunction and the biconditional are false.`,
+The truth table confirms that both sides agree in all four rows. When P and Q match (TT or FF), both implications hold and the biconditional is true. When they differ (TF or FT), one implication fails and both the conjunction and the biconditional are false.
+
+@academic[punchline:An if-and-only-if claim is two implications in one, and proving it means proving both.]@`,
       before: ``,
       after: ``,
       link: ``,
@@ -446,9 +535,14 @@ The truth table confirms that both sides agree in all four rows. When P and Q ma
       title: `((P ↔ Q) ∧ (Q ↔ R)) → (P ↔ R): Transitivity`,
       content: `This [tautology](!/logic/propositional-logic/semantics/tautology) establishes that logical equivalence is transitive: if P is equivalent to Q and Q is equivalent to R, then P is equivalent to R.
 
+@academic[fact,aside:true,width:35%:A ↔ chain counts its false letters
+Grouping does not matter, since (P ↔ Q) ↔ R ≡ P ↔ (Q ↔ R), yet at P = T, Q = R = F the chain P ↔ Q ↔ R is T. Because X ↔ T is X and X ↔ F is ¬X, each false letter flips the result: a chain of ↔ is true exactly when an even number of its letters are false.]@
+
 The reasoning is straightforward. P ↔ Q means P and Q share a truth value. Q ↔ R means Q and R share a truth value. Therefore P and R share a truth value, giving P ↔ R.
 
-Transitivity allows chaining equivalences in proofs: if you show A ↔ B, then B ↔ C, then C ↔ D, you can conclude A ↔ D. This is one of the most common proof patterns in mathematics — simplifying a complex statement step by step through a chain of equivalent forms.`,
+Transitivity allows chaining equivalences in proofs: if you show A ↔ B, then B ↔ C, then C ↔ D, you can conclude A ↔ D. This is one of the most common proof patterns in mathematics — simplifying a complex statement step by step through a chain of equivalent forms.
+
+Such a chain is a list of separate claims, A ↔ B, B ↔ C and C ↔ D, joined by "and". Writing the letters in one line with the connective repeated, as in P ↔ Q ↔ R, makes a single formula instead, and that formula has to be read from its own truth table, not as a list.`,
       before: ``,
       after: ``,
       link: ``,
@@ -487,7 +581,12 @@ Negating a proposition twice returns it to its original truth value.
 
 The truth table is trivial: when P is true, ¬P is false and ¬¬P is true — matching P. When P is false, ¬P is true and ¬¬P is false — again matching P.
 
-Double negation elimination (from ¬¬P infer P) is accepted in classical logic but not in intuitionistic logic, where proving ¬¬P does not constructively establish P. This distinction is fundamental to the philosophy of mathematics and the debate between classical and constructive foundations.`,
+@academic[fact,aside:true,width:35%:Three negations shrink to one
+Intuitionistic logic refuses ¬¬P → P, yet it proves ¬¬¬P ↔ ¬P. The contrapositive of P → ¬¬P gives ¬¬¬P → ¬P, and P → ¬¬P applied to ¬P gives the converse.]@
+
+Double negation elimination (from ¬¬P infer P) is accepted in classical logic but not in intuitionistic logic, where proving ¬¬P does not constructively establish P. This distinction is fundamental to the philosophy of mathematics and the debate between classical and constructive foundations.
+
+Intuitionistic logic does keep the opposite step, from P infer ¬¬P: once P is established, any claim that P leads to a contradiction is refuted. What it refuses is only the removal of a double negation, and it accepts contraposition, from P → Q infer ¬Q → ¬P.`,
       before: ``,
       after: ``,
       link: ``,
@@ -676,6 +775,11 @@ How to check: test a row where P and Q differ, such as P = T, Q = F. The origina
   }
 
   const vrBiconditional = { kind: 'two', id: 'vrBic', test: (p, q) => p === q, formula: 'P ↔ Q', svgTitle: 'P if and only if Q: the overlap and the region outside both circles are shaded, the two crescents are not', caption: 'True when P and Q agree: both, or neither' };
+  const conceptIntroFigures = {
+    placesTable: ciPlacesTable,
+    iffTable: ciIffTable,
+  };
+
   const demoUnits = {
     biconditionalRegions: demoUnitFrame({
       svg: renderVennRegions(vrBiconditional),
@@ -687,6 +791,7 @@ How to check: test a row where P and Q differ, such as P = T, Q = F. The origina
   return {
     props: {
       demoUnits,
+      conceptIntroFigures,
       keyWords,
       biconditionalExplanations,
       menuItems,

@@ -622,7 +622,7 @@ import diagrams from '@/app/api/db/svg/set-theory/svg'
 import summaries from '@/app/api/db/tables/set-theory/summaries'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
@@ -706,7 +706,12 @@ In mathematics, a set is defined as an **unordered collection of unique items**.
 
 - **Unique** — each member of the set is distinct; no two identical items are present.
 
+@academic[fact,aside:true,width:35%:Not every collection can be a set
+The collection of all sets that are not members of themselves would contain itself exactly when it does not. Russell found this in 1901 and wrote to Frege in 1902, as Frege's book founding arithmetic on such collections went to press.]@
+
 What kinds of items or entities can be members of a mathematical set? Whatever they are, it does not matter. Mathematics is all about abstraction, and in the abstract world things can be of any type — so the famous 'apples and oranges' problem does not apply here. Entities of completely different kinds can live together as parts of the same set.
+
+Members can even be sets themselves. The set $\\{1, \\{2, 3\\}\\}$ has two elements: the number $1$ and the set $\\{2, 3\\}$. A set can also be described by a property alone, as in the set of all even numbers, without listing a single member.
     `,
     before: ``,
     after: ``,
@@ -770,6 +775,9 @@ Taking $|\\{1, 2, 2, 3\\}| = 4$ counts the entry 2 twice. The listing names only
 [Read more](!#pitfalls)]@
 
 To find a cardinality from a listing, read off the members one by one and count them. The order in which they are written plays no part, so {3, 1, 2} gives the same count as {1, 2, 3}, and a member that is itself a word, a number or a symbol counts in the same way as any other. For a finite set the counting always comes to an end, and its result is the cardinality: 0 for the empty set and a positive whole number for any other finite set.
+
+@academic[fact,aside:true,width:35%:Whole numbers built from the empty set
+In 1923 von Neumann defined $0$ as $\\varnothing$ and each next whole number as the set of all numbers before it: $1 = \\{\\varnothing\\}$, $2 = \\{\\varnothing, \\{\\varnothing\\}\\}$. Each number $n$ is then a set with exactly $n$ elements.]@
 
 Based on cardinality, mathematical sets are classified into groups:
 
@@ -1144,6 +1152,7 @@ export default function SetTheoryBasicsPage({setTypesOutline, seoData, sectionsC
         content:[
           sectionsContent.obj1.content,
           <div key={'fig-any-objects'} dangerouslySetInnerHTML={{ __html: figs.anyObjects }} />,
+          `@academic[punchline:A set is decided by its members alone: listing them in another order or repeating one never changes it.]@`,
         ]
     },
     {

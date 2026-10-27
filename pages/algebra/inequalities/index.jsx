@@ -497,7 +497,8 @@ A conjunction (AND) requires both conditions to hold simultaneously. The compoun
 
 A disjunction (OR) requires at least one condition to hold. The compound inequality $x < -1$ OR $x > 4$ has a solution set that is the union of two rays: $(-\\infty, -1) \\cup (4, \\infty)$. Any value satisfying either condition qualifies.
 
-Three-part chains like $2 \\leq 3x - 1 < 8$ are conjunctions in disguise. They are solved by applying operations to all three parts at once: add $1$ to get $3 \\leq 3x < 9$, then divide by $3$ to get $1 \\leq x < 3$. The solution is the half-open interval $[1, 3)$.
+@academic[example:Example
+Three-part chains like $2 \\leq 3x - 1 < 8$ are conjunctions in disguise. They are solved by applying operations to all three parts at once: add $1$ to get $3 \\leq 3x < 9$, then divide by $3$ to get $1 \\leq x < 3$. The solution is the half-open interval $[1, 3)$.]@
 
 The distinction between AND and OR is structural, not cosmetic. AND narrows the solution set (intersection), OR expands it (union). Confusing the two changes the answer entirely.`,
     before: ``,

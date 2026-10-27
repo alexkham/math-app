@@ -420,7 +420,10 @@ The simplest contradiction is P ∧ ¬P — a proposition and its negation conjo
     },
     obj2: {
       title: `Contradictions in Proofs and Reasoning`,
-      content: `Contradictions are not just logical curiosities — they are a powerful proof tool. Proof by [contradiction](!/logic/propositional-logic/semantics/contradiction) (reductio ad absurdum) works by assuming the negation of the desired conclusion and showing that this assumption leads to a contradiction. Since contradictions cannot be true, the assumption must be false, and the original statement must be true.
+      content: `@academic[fact,aside:true,width:35%:Logics that survive a contradiction
+Paraconsistent logics, first built by Stanisław Jaśkowski in 1948, give up explosion: from P and ¬P they do not let an arbitrary Q follow. A contradiction then stays local instead of making everything provable, which suits reasoning from records that conflict.]@
+
+Contradictions are not just logical curiosities — they are a powerful proof tool. Proof by [contradiction](!/logic/propositional-logic/semantics/contradiction) (reductio ad absurdum) works by assuming the negation of the desired conclusion and showing that this assumption leads to a contradiction. Since contradictions cannot be true, the assumption must be false, and the original statement must be true.
 
 Contradictions also serve as a diagnostic tool for consistency. If a set of premises conjoined produces a contradiction, the premises are mutually inconsistent — they cannot all be true simultaneously. Identifying the source of the contradiction reveals which premises conflict.
 
@@ -472,7 +475,9 @@ By De Morgan&apos;s law, ¬P ∧ ¬Q is equivalent to ¬(P ∨ Q). So the formul
 Rewriting ¬P ∧ ¬Q as ¬(P ∧ Q) turns the formula into (P ∨ Q) ∧ ¬(P ∧ Q), which is T at P = T, Q = F, so it is not a contradiction. De Morgan's law flips the connective: ¬P ∧ ¬Q ≡ ¬(P ∨ Q).
 [Read more](!#pitfalls)]@
 
-Reducing a formula to the pattern X ∧ ¬X is a quick way to recognise a contradiction without writing out the whole truth table. Each step of the reduction has to be an equivalence, so that the new formula agrees with the old one in every row. Only then does the verdict for X ∧ ¬X carry over to the formula the reduction started from.`,
+Reducing a formula to the pattern X ∧ ¬X is a quick way to recognise a contradiction without writing out the whole truth table. Each step of the reduction has to be an equivalence, so that the new formula agrees with the old one in every row. Only then does the verdict for X ∧ ¬X carry over to the formula the reduction started from.
+
+@academic[punchline:Reach X ∧ ¬X through equivalences alone, and the contradiction is proved without writing a single row.]@`,
       before: ``,
       after: ``,
       link: ``,
@@ -502,6 +507,9 @@ The truth table has four rows, and the result is false in all of them. In the on
     obj8: {
       title: `(P → Q) ∧ (Q → R) ∧ P ∧ ¬R: Broken Implication Chain`,
       content: `This [contradiction](!/logic/propositional-logic/semantics/contradiction) constructs a chain of [implications](!/logic/propositional-logic/semantics/implication) (P → Q → R) while asserting the start of the chain (P is true) and denying its end (R is false).
+
+@academic[fact,aside:true,width:35%:Arrow chains skip the truth table
+Formulas built only from arrows like P → Q, bare letters like P and denials like ¬R, a kind of Horn formula, need no 2ⁿ rows. Mark true whatever the arrows force from the bare letters: if a denied letter gets marked, the formula is a contradiction; if not, the marking itself is a satisfying row.]@
 
 The chain forces a cascade: P is true, so Q must be true (by P → Q). Q is true, so R must be true (by Q → R). But the formula also asserts ¬R — R is false. This is irreconcilable.
 
@@ -538,7 +546,9 @@ This pattern generalizes: asserting equivalence with both a proposition and its 
 
 Extracting Q from the first conjunct and ¬Q from the second gives Q ∧ ¬Q — the basic contradiction. The presence of P in both conjuncts is a red herring; the real conflict is between Q and ¬Q.
 
-The formula can be rewritten as P ∧ (Q ∧ ¬Q) by factoring out P. Since Q ∧ ¬Q is always false, the entire conjunction is always false regardless of P.`,
+The formula can be rewritten as P ∧ (Q ∧ ¬Q) by factoring out P. Since Q ∧ ¬Q is always false, the entire conjunction is always false regardless of P.
+
+@academic[punchline:One contradiction inside a conjunction sinks the whole conjunction, whatever else is conjoined beside it.]@`,
       before: ``,
       after: ``,
       link: ``,

@@ -620,7 +620,7 @@ import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/ou
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
-import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 

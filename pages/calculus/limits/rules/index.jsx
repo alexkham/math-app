@@ -785,8 +785,8 @@ A failed condition only silences the rule. The rule then gives no value for the 
 
 Indeterminate forms signal this breakdown:
 
-- $\\dfrac{0}{0}$ — quotient rule fails
-- $\\dfrac{\\infty}{\\infty}$ — quotient rule fails
+- $\\frac{0}{0}$ — quotient rule fails
+- $\\frac{\\infty}{\\infty}$ — quotient rule fails
 - $0 \\cdot \\infty$ — product rule fails
 - $\\infty - \\infty$ — difference rule fails
 - $0^0$, $1^\\infty$, $\\infty^0$ — power rule fails

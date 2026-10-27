@@ -783,7 +783,7 @@ export async function getStaticProps(){
       "@type": "LearningResource",
       "name": "Combinatorics in Probability",
       "description": "Learn how combinatorics and counting methods form the foundation of classical probability. Understand finite sample spaces, equally likely outcomes, and the classical probability formula.",
-      "url": "https://www.learnmathclass.com/combinatorics",
+      "url": "https://www.learnmathclass.com/probability/combinatorics",
       "inLanguage": "en-US",
       "learningResourceType": "Explanation",
       "educationalLevel": "High School, College",
@@ -832,7 +832,7 @@ export async function getStaticProps(){
           "@type": "ListItem",
           "position": 2,
           "name": "Combinatorics in Probability",
-          "item": "https://www.learnmathclass.com/combinatorics"
+          "item": "https://www.learnmathclass.com/probability/combinatorics"
         }
       ]
     }

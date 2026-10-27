@@ -1369,7 +1369,7 @@ import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationsh
 import renderInverseMirror from '@/app/utils/illustrations/functions/inverse/inverseMirror'
 import renderCompositionSteps from '@/app/utils/illustrations/functions/composition/compositionSteps'
 import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTest.v2'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
@@ -2125,7 +2125,9 @@ Step 4: $f^{-1}(x) = \\dfrac{3x + 1}{x - 2}$]@
 Undoing "multiply by $3$, then subtract $7$" in that order gives $\\frac{x}{3} + 7$, which sends $f(1) = -4$ to $\\frac{17}{3}$ instead of back to $1$. The last step comes off first: add $7$, then divide by $3$, so $f^{-1}(x) = \\frac{x + 7}{3}$.
 [Read more](!#pitfalls)]@
 
-Step 3 carries the real work of finding an inverse. The equation from Step 2 shows every operation that $f$ applies to its input: in $x = 3y - 7$, the input $y$ is multiplied by $3$, and then $7$ is subtracted. Solving for $y$ removes these operations one at a time until $y$ stands alone. In the second example the same idea needs one extra move, collecting both $y$-terms on one side before factoring $y$ out.`,
+Step 3 carries the real work of finding an inverse. The equation from Step 2 shows every operation that $f$ applies to its input: in $x = 3y - 7$, the input $y$ is multiplied by $3$, and then $7$ is subtracted. Solving for $y$ removes these operations one at a time until $y$ stands alone. In the second example the same idea needs one extra move, collecting both $y$-terms on one side before factoring $y$ out.
+
+@academic[punchline:To invert a function, solve for its input: undo its operations in reverse order until the input stands alone.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -2282,9 +2284,14 @@ A horizontal asymptote of $f$ becomes a vertical asymptote of $f^{-1}$.
 
 A vertical asymptote of $f$ becomes a horizontal asymptote of $f^{-1}$.
 
+@academic[fact,aside:true,width:35%:Increasing graphs cross their inverse on $y = x$
+When $f$ is increasing, $f$ and $f^{-1}$ meet only on the mirror: a crossing at $(a, b)$ off it means $f(a) = b$ and $f(b) = a$, so the larger input would give the smaller output. The decreasing $-x^3$ does meet its inverse off the line, at $(1, -1)$ and $(-1, 1)$.]@
+
 If $f$ is increasing, $f^{-1}$ is increasing. If $f$ is decreasing, $f^{-1}$ is decreasing.
 
-The graphs of $f$ and $f^{-1}$ intersect on the line $y = x$ at points where $f(a) = a$, called fixed points — though they can also intersect off that line.`,
+The graphs of $f$ and $f^{-1}$ intersect on the line $y = x$ at points where $f(a) = a$, called fixed points — though they can also intersect off that line.
+
+Crossings on the mirror can be found without computing $f^{-1}$ at all: they are the solutions of $f(x) = x$. For $f(x) = x^3$ this gives $x^3 = x$, so the graphs of $x^3$ and $\\sqrt[3]{x}$ meet at $(-1, -1)$, $(0, 0)$ and $(1, 1)$. Whether this one equation finds every crossing depends on the shape of $f$.`,
     before: ``,
     after: ``,
     link: '',
@@ -2338,6 +2345,11 @@ Recognizing these pairs accelerates both finding inverses and verifying that two
 Temperature conversion: $F(C) = \\frac{9}{5}C + 32$ converts Celsius to Fahrenheit. The inverse $C(F) = \\frac{5}{9}(F - 32)$ converts Fahrenheit back to Celsius.
 
 Encoding and decoding: An encryption function scrambles data; the decryption function (its inverse) recovers the original. Without an inverse, decryption would be impossible.
+
+@academic[fact,aside:true,width:35%:ROT13 decodes itself
+A shift of $13$ is its own inverse: two shifts move each letter $26$ places, once round the alphabet. One rule both hides and reveals a text, which is why Usenet readers used ROT13 to hide spoilers and joke punchlines.]@
+
+A simple example is the shift cipher, used by Julius Caesar. Each letter moves a fixed number of places along the alphabet, wrapping from Z back to A, so with a shift of $3$ the word CAT becomes FDW. Decoding is the inverse function: it moves every letter $3$ places back.
 
 Unit conversion: Any reversible unit conversion involves inverse functions. Miles to kilometers and kilometers to miles; pounds to kilograms and back.
 
@@ -2918,6 +2930,7 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
       <div key={'obj11-inv-table'} style={tableWrapStyle}
            dangerouslySetInnerHTML={{ __html: obj11InverseTable }} />,
       sectionsContent.obj11.contentAfter,
+      `@academic[punchline:Swapping the columns of a table inverts it, as long as no output appears twice.]@`,
     ]
 },
     {

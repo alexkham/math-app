@@ -1052,7 +1052,8 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 
 
 export async function getStaticProps(){
@@ -1290,9 +1291,14 @@ const sectionsContent={
 
 The [trigonometric form](!/complex-numbers/trigonometric-form) offers rescue. When $z = r\\text{cis}\\theta$, multiplication becomes elegant: multiply moduli, add arguments. Squaring gives $z^2 = r^2\\text{cis}(2\\theta)$. Cubing gives $z^3 = r^3\\text{cis}(3\\theta)$. The pattern suggests a general rule — and De Moivre's theorem confirms it.
 
+@academic[fact,aside:true,width:35%:A degree-45 equation solved by angles
+In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 45x^{43} + 945x^{41} - \\cdots + 45x = A$. Viète saw that the left side is $2\\sin 45\\theta$ written in terms of $x = 2\\sin\\theta$, the identity this theorem gives for $n = 45$, and listed 23 positive solutions.]@
+
 Abraham de Moivre, a French mathematician living in England, discovered this relationship in the early eighteenth century. Though he never stated the theorem in its modern form, his work on probability and trigonometric identities laid the foundation. The theorem bearing his name connects complex exponentiation to the simple operation of multiplying an angle by an integer.
 
-De Moivre's theorem stands among the most useful results in complex analysis. It reduces high powers to trivial calculations, enables extraction of roots, derives trigonometric identities, and appears throughout physics and engineering wherever oscillations and rotations arise.`,
+De Moivre's theorem stands among the most useful results in complex analysis. It reduces high powers to trivial calculations, enables extraction of roots, derives trigonometric identities, and appears throughout physics and engineering wherever oscillations and rotations arise.
+
+The identities come from computing the same power in two ways. Expanding $(\\cos\\theta + i\\sin\\theta)^3$ term by term gives the real part $\\cos^3\\theta - 3\\cos\\theta\\sin^2\\theta$, while De Moivre's theorem says the real part is $\\cos 3\\theta$. Replacing $\\sin^2\\theta$ by $1 - \\cos^2\\theta$ turns this into $\\cos 3\\theta = 4\\cos^3\\theta - 3\\cos\\theta$, and the same comparison for any $n$ writes $\\cos n\\theta$ and $\\sin n\\theta$ as polynomials in $\\cos\\theta$ and $\\sin\\theta$.`,
   after: ``,
   link: '',
 },
@@ -1478,6 +1484,9 @@ Three roots: $2$, $-1 + \\sqrt{3}i$, and $-1 - \\sqrt{3}i$. Each cubes to $8$.`,
 All $n$ roots share the same modulus $R^{1/n}$, placing them on a circle centered at the origin with that radius. They do not cluster or scatter randomly — they distribute themselves at equal angular intervals around this circle.
 
 The angular separation between consecutive roots is exactly $\\frac{360°}{n}$ (or $\\frac{2\\pi}{n}$ radians). The cube roots of any nonzero number sit $120°$ apart. Fourth roots sit $90°$ apart. Fifth roots sit $72°$ apart. This uniform spacing holds regardless of which nonzero number we take roots of — only the radius and starting angle vary.
+
+@academic[fact,aside:true,width:35%:A polygon's chords multiply to $n$
+In a regular $n$-gon drawn in a circle of radius $1$, the $n - 1$ segments from one corner to all the others multiply to exactly $n$: for a square, $\\sqrt{2} \\cdot 2 \\cdot \\sqrt{2} = 4$. The corners are the roots of $z^n - 1$; dividing out $z - 1$ leaves $1 + z + \\cdots + z^{n-1}$, the product of $z$ minus each other corner, and at $z = 1$ it equals $n$.]@
 
 For $n \\geq 3$, the roots form vertices of a regular $n$-gon inscribed in the circle. Cube roots give an equilateral triangle. Fourth roots give a square. Fifth roots give a regular pentagon. The polygon may appear rotated depending on the argument of the original number, but its shape is always perfectly regular.
 
@@ -1955,10 +1964,29 @@ const schemas = {
     ],
   };
 
+  // BeforeAfter (obj4): the section's (1 + i)^10, through trigonometric form and back
+  const demoivrePowerSteps = {
+    header: {
+      kicker: "De Moivre's theorem",
+      title: 'A tenth power in a few lines',
+      lede: 'Multiplying $1 + i$ by itself ten times is tedious and error-prone. In trigonometric form the power is one multiplication of the angle.',
+    },
+    steps: [
+      { id: 'algebraic', label: 'Algebraic form', stamp: 'Before', expr: '$(1 + i)^{10}$',
+        move: { label: 'Convert to trigonometric form', note: 'modulus √2, argument 45° (first quadrant)' } },
+      { id: 'trig', label: 'Trigonometric form', expr: '$\\left(\\sqrt{2}\\,\\text{cis}\\,45°\\right)^{10}$',
+        move: { label: "Apply De Moivre's theorem", note: 'modulus to the 10th power, angle times 10: (√2)¹⁰ = 32, 10 × 45° = 450°' } },
+      { id: 'power', label: 'Power in trigonometric form', expr: '$32\\,\\text{cis}\\,450°$',
+        move: { label: 'Reduce the angle and convert back', note: '450° = 360° + 90°, and cis 90° = i' } },
+      { id: 'result', label: 'Algebraic form', stamp: 'After', expr: '$32i$' },
+    ],
+  };
+
   return {
   props:{
     nthRootsAnatomy,
     unityParityCases,
+    demoivrePowerSteps,
     demoUnits,
     sectionsContent,
     introContent,
@@ -1983,7 +2011,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases, 
+export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases, demoivrePowerSteps,
   seoData,
   sectionsContent,
   introContent,
@@ -2046,6 +2074,20 @@ export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases,
           />,
                   <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
           `Converting back to algebraic form is the only step with any arithmetic in it.`,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="demoivre-power-steps"
+            title="(1 + i)¹⁰ by De Moivre's theorem"
+            source="/complex-numbers/demoivre-theorem"
+            before={"The section's first example, one move at a time: out of algebraic form, the power, and back."}
+            after={"The power itself is a single move in trigonometric form; the conversions at either end carry the work. The section's second example, $(\\sqrt{3} - i)^6 = -64$, follows the same three moves."}
+          >
+            <BeforeAfter
+              data={demoivrePowerSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2087,6 +2129,7 @@ export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          `@academic[punchline:Whatever the nonzero number, its $n$-th roots cut one circle into $n$ equal arcs.]@`,
         ]
     },
     {
@@ -2100,6 +2143,7 @@ export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj8Table }}
           />,
+          `@academic[punchline:One number, $\\omega$, generates every $n$-th root of unity: its powers walk the unit circle in equal steps.]@`,
         ]
     },
     {

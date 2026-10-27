@@ -40,6 +40,15 @@ function buildCss() {
   'position:relative;}' +
   '.csp-mast::after{content:\'\';position:absolute;left:32px;right:32px;bottom:0;height:3px;' +
   'background:var(--csp-accent);}' +
+  /* light header (matches MatrixOperation): pale blue band, navy text */
+  '.csp-mast{background:#eef4fc;color:#06357A;border-bottom:1px solid #d6e2f3;}' +
+  '.csp-mast::after{display:none;}' +
+  '.csp-mast .csp-kicker{color:#2563EB;opacity:1;}' +
+  '.csp-mast .csp-title,.csp-mast h2,.csp-mast h3{font-family:Inter,system-ui,sans-serif;font-weight:600;letter-spacing:-.01em;font-size:21px;line-height:1.2;color:#06357A;}' +
+  '.csp-mast .csp-intro{color:#4a6285;opacity:1;}' +
+  '.csp-mast .csp-tally b{color:#06357A;font-size:22px;}' +
+  '.csp-mast .csp-tally span{color:#4a6285;opacity:1;}' +
+  '.csp-mast a{color:#2563EB;border-color:#c3d0e4;}' +
   '.csp-kicker{font-family:\'JetBrains Mono\',ui-monospace,monospace;font-size:9px;font-weight:800;' +
   'letter-spacing:.22em;text-transform:uppercase;opacity:.6;}' +
   '.csp-q{font-family:\'Bricolage Grotesque\',sans-serif;font-weight:800;font-size:29px;' +

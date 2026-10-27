@@ -965,11 +965,12 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -1305,6 +1306,25 @@ const spanDiagnostics = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Definition") — template A, definition
+// last. Running instance: u = (1, 2) and v = (3, 1) in the plane, against
+// w = (2, 4) on its own. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its two formula boxes with links, four passages and the punchline
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciReachTable = ciTableOpen(['target', 'weights a, b', 'check: a·(1, 2) + b·(3, 1)']) +
+  ciRow(['(5, 5)', '2, 1', '(2, 4) + (3, 1) = (5, 5)']) +
+  ciRow(['(7, 4)', '1, 2', '(1, 2) + (6, 2) = (7, 4)'], { shade: true }) +
+  ciRow(['(1, −3)', '−2, 1', '(−2, −4) + (3, 1) = (1, −3)']) +
+  ciRow(['(0, 0)', '0, 0', '(0, 0)'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -1317,7 +1337,7 @@ $$\\text{Span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} = \\left\\{c_1\\mathbf
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Every choice of scalars $c_1, \\dots, c_k$ produces one vector in the span. As the scalars range over all real numbers, the span sweeps out an entire [subspace](!/linear-algebra/vector-spaces/subspaces) of $V$.
+Every choice of scalars $c_1, \\dots, c_k$ produces one vector in the span. As the scalars range over all of $\\mathbb{F}$, the span sweeps out an entire [subspace](!/linear-algebra/vector-spaces/subspaces) of $V$.
 
 The span is always a subspace — in fact, the smallest subspace of $V$ that contains all of $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$:
 
@@ -1514,7 +1534,8 @@ The span of $1, x, x^2, x^3, \\ldots$ holds only polynomials, because a linear c
 
 In the polynomial space $\\mathcal{P}_2$, the span of $\\{1, x, x^2\\}$ is all of $\\mathcal{P}_2$, since every polynomial $a + bx + cx^2$ of degree at most $2$ is a linear combination of these three. The set is independent and has the right count ($3 = \\dim(\\mathcal{P}_2)$), so it is the standard basis.
 
-A subtler example is $\\text{Span}\\{1, \\sin^2 x, \\cos^2 x\\}$ in the space of continuous functions. This set has three elements, but the identity $\\sin^2 x + \\cos^2 x = 1$ provides a dependence relation: $1 \\cdot 1 + (-1)\\sin^2 x + (-1)\\cos^2 x = 0$. The span is therefore two-dimensional, not three-dimensional. Any two of the three functions form a basis for the span — the third is redundant.
+@academic[example:Example
+A subtler example is $\\text{Span}\\{1, \\sin^2 x, \\cos^2 x\\}$ in the space of continuous functions. This set has three elements, but the identity $\\sin^2 x + \\cos^2 x = 1$ provides a dependence relation: $1 \\cdot 1 + (-1)\\sin^2 x + (-1)\\cos^2 x = 0$. The span is therefore two-dimensional, not three-dimensional. Any two of the three functions form a basis for the span — the third is redundant.]@
 
 In abstract spaces, the column-matrix approach is unavailable. Testing whether a specific vector lies in a span, or whether a set spans the whole space, requires working directly from the definition: write the target as a combination and check whether the resulting equation has a solution. The algebraic structure of the particular space — polynomial coefficients, function identities, matrix entries — determines how this check proceeds.`,
     before: ``,
@@ -1718,6 +1739,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    reachTable: ciReachTable,
+  };
+
   const demoUnits = {
     geometry: demoUnitFrame({
       svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
@@ -1747,6 +1772,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1767,9 +1793,79 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function SpanPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits}) {
+export default function SpanPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Given a few vectors, which points can be reached by stretching them and adding the results?`,
+        content: [
+          `Think of the vectors as the only moves allowed: each one can be taken any number of times, forwards or backwards, including fractions of a move. The question is where those moves can take you.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `With u = (1, 2) and v = (3, 1), every target tried in the plane can be reached.`,
+        content: [
+          `For each target, some weights $a$ and $b$ make $a\\mathbf{u} + b\\mathbf{v}$ land exactly on it.`,
+          ciTable('reachTable'),
+          `With the single vector $\\mathbf{w} = (2, 4)$ the story is different: its multiples only cover the line through the origin in its direction, and a point like $(5, 5)$ is out of reach.`,
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `What can be reached is forced to be a complete subspace: combining reachable points never leads anywhere new.`,
+        content: [
+          `Adding two linear combinations of these vectors produces another linear combination, and scaling a linear combination by a scalar produces another, so both closure conditions hold automatically.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [span](!/linear-algebra/definitions#span) of vectors $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ is the set of all their linear combinations — every point reachable by scaling and adding them.`,
+        formula: [
+          `Given vectors $\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k$ in a vector space $V$, their span is the set of all linear combinations:`,
+          `@academic[formula_callout:Span (Set Definition)
+$$\\text{Span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} = \\left\\{c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k \\mid c_i \\in \\mathbb{F}\\right\\}$$
+/linear-algebra/formulas#span_set_definition]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `So $\\text{Span}\\{(1, 2), (3, 1)\\}$ is the whole plane, while $\\text{Span}\\{(2, 4)\\}$ is a line.`,
+      },
+      {
+        id: 'kind',
+        lead: `A span is a subspace: the smallest one that contains the given vectors.`,
+        content: [
+          `Every choice of scalars $c_1, \\dots, c_k$ produces one vector in the span. As the scalars range over all of $\\mathbb{F}$, the span sweeps out an entire [subspace](!/linear-algebra/vector-spaces/subspaces) of $V$.`,
+          `The span is always a subspace — in fact, the smallest subspace of $V$ that contains all of $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$:`,
+          `@academic[formula_callout:Span Is Smallest Subspace
+$$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W}} W$$
+/linear-algebra/formulas#span_is_smallest_subspace]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+          `By convention, the span of the empty set is $\\{\\mathbf{0}\\}$. With no vectors to combine, the only reachable point is the zero vector (the combination with no terms).`,
+          `@academic[punchline:The span of a set is the smallest subspace containing it: everything its vectors can build, and nothing more.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What generalizes and what was particular: two vectors filled the plane only because they pointed in different directions.`,
+        content: `Two vectors on the same line span just that line, and two vectors in three-dimensional space span at most a plane. How big a span is depends on how many genuinely different directions the vectors supply, as the [geometric interpretation](!/linear-algebra/vector-spaces/span#2) section shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers span notation, the geometric picture, spanning sets, testing whether a vector or a set spans, span and column space, and removing redundant vectors.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1777,7 +1873,7 @@ export default function SpanPage({seoData, sectionsContent, introContent, obj2Ta
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

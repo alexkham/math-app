@@ -1921,8 +1921,6 @@ const sectionsContent={
 - [Complementary Angles](!/trigonometry/definitions#complementary_angles) — two angles summing to $90°$
 - [Supplementary Angles](!/trigonometry/definitions#supplementary_angles) — two angles summing to $180°$
 
-## Formulas Used
-
 ## Measurement & Conversion
  
 - [Degree-Radian Conversion](!/trigonometry/formulas#degree-radian_conversion) — $\\theta_{\\text{rad}} = \\theta_{\\text{deg}} \\times \\frac{\\pi}{180}$
@@ -1947,7 +1945,10 @@ const sectionsContent={
 
      obj1: {
     title: `Degree Measurement`,
-    content: `A degree is $\\frac{1}{360}$ of a full rotation. The number 360 has no deep geometric significance — it persists because it is highly divisible (by 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, and more), which makes it convenient for subdividing rotations into equal parts without fractions. A right angle is $90°$, a straight angle is $180°$, and a complete rotation returns to the starting position at $360°$.
+    content: `@academic[fact,aside:true,width:35%:Why a nautical mile is 1,852 metres
+The metre was first defined so that the quarter meridian from the North Pole to the equator measures 10,000 km. That quarter turn holds $90 \\times 60 = 5400$ minutes of arc, and 10,000 km divided by 5,400 is about 1,852 m: one minute of latitude, the nautical mile still used at sea and in the air.]@
+
+A degree is $\\frac{1}{360}$ of a full rotation. The number 360 has no deep geometric significance — it persists because it is highly divisible (by 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, and more), which makes it convenient for subdividing rotations into equal parts without fractions. A right angle is $90°$, a straight angle is $180°$, and a complete rotation returns to the starting position at $360°$.
 
 For precision beyond whole degrees, two conventions exist. The older system uses minutes and seconds of arc: $1° = 60'$ (sixty minutes) and $1' = 60''$ (sixty seconds). A measurement like $41°24'36''$ is common in navigation, cartography, and astronomy. The modern alternative is decimal degrees — for example, $41.41°$ — which is simpler for computation. Converting between the two is arithmetic: divide the minutes by 60 and the seconds by 3600, then add.
 
@@ -2142,9 +2143,15 @@ Every angle has infinitely many coterminal partners. The angle $50°$ is cotermi
 
 @academic[rule_corollary_plain:Coterminal angles produce identical trigonometric values.]@
 
+@academic[fact,aside:true,width:35%:A day is a turn of about 361°
+From one noon to the next, the Earth spins about $360.99°$, not $360°$. During that day it also moves about $\\frac{1}{365}$ of its orbit, so it has to turn roughly one degree more before the Sun is back in the same place in the sky.]@
+
 Since the terminal side determines the intersection point with the [unit circle](!/trigonometry/unit-circle), and the coordinates of that point define sine and cosine, all coterminal angles yield the same sine, cosine, tangent, and so on. This is the geometric source of periodicity: $\\sin(\\theta + 2\\pi) = \\sin(\\theta)$ because adding $2\\pi$ brings the terminal side back to where it started.
 
-A standard task is finding the coterminal angle within $[0°, 360°)$ or $[0, 2\\pi)$. This amounts to dividing by $360°$ (or $2\\pi$) and taking the remainder. For example, $\\theta = 850°$: dividing $850$ by $360$ gives quotient 2 with remainder $130$, so the coterminal angle in $[0°, 360°)$ is $130°$. For negative angles, add full rotations until the result falls in the desired range: $\\theta = -200°$ becomes $-200° + 360° = 160°$.`,
+A standard task is finding the coterminal angle within $[0°, 360°)$ or $[0, 2\\pi)$. This amounts to dividing by $360°$ (or $2\\pi$) and taking the remainder.
+
+@academic[example:Example
+For example, $\\theta = 850°$: dividing $850$ by $360$ gives quotient 2 with remainder $130$, so the coterminal angle in $[0°, 360°)$ is $130°$. For negative angles, add full rotations until the result falls in the desired range: $\\theta = -200°$ becomes $-200° + 360° = 160°$.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2518,6 +2525,7 @@ export default function DegreesRadiansPage({anglePairTree, seoData,sectionsConte
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          `@academic[punchline:Every conversion is one multiplication by a fraction worth exactly $1$, built from $180° = \\pi$.]@`,
         ]
     },
     {

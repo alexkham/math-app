@@ -365,14 +365,6 @@ export async function getStaticProps() {
         { title: "Read Full Explanation", link: "/logic/truth-tables/tautologies#10" }
       ]
     },
-    '(P ↔ Q) → ((P → Q) ∧ (Q → P)': {
-      text: "This formula is a [tautology](!/logic/propositional-logic/semantics/tautology) that defines the structure of logical equivalence. It shows that if P is logically equivalent to Q, then P implies Q and Q implies P. This bidirectional implication is essential in constructing definitions and proving equivalences between statements in formal logic.",
-      links: [
-        { title: "Generate Your Own Logical Expressions and See the Truth Tables", link: "/logic/truth-tables" },
-        { title: "Check our logic equivalence validator", link: validatorLink },
-        { title: "Read Full Explanation", link: "/logic/truth-tables/tautologies#11" }
-      ]
-    },
     '(P ↔ Q) → ((P → Q) ∧ (Q → P))': {
       text: "This [tautology](!/logic/propositional-logic/semantics/tautology) demonstrates that logical equivalence (↔) can be expressed as the conjunction of two implications. If P is equivalent to Q, then P implies Q and Q implies P. This formal representation of biconditional logic is foundational in mathematical proofs and logical analysis, establishing that equivalence requires mutual implication in both directions.",
       links: [
@@ -400,7 +392,9 @@ Three marks travel with the idea and do not appear in truth tables themselves. T
 Calling P → Q a tautology after the rows P = T, Q = T and P = F, Q = F, where it is T, misses the row P = T, Q = F, where it is F. A tautology must be T in all 2ⁿ rows.
 [Read more](!#pitfalls)]@
 
-Deciding whether a formula is a tautology is a finite task. A formula with n variables has 2ⁿ rows: two for a formula in P alone, four for one in P and Q, eight once R is added. Each row is evaluated on its own, and the verdict is read from the final column as a whole.`,
+Deciding whether a formula is a tautology is a finite task. A formula with n variables has 2ⁿ rows: two for a formula in P alone, four for one in P and Q, eight once R is added. Each row is evaluated on its own, and the verdict is read from the final column as a whole.
+
+@academic[punchline:A tautology is true by its form alone, and checking all 2ⁿ rows of its truth table settles the question.]@`,
       before: ``,
       after: ``,
       link: ``,
@@ -435,7 +429,12 @@ This is the law of excluded middle (tertium non datur), one of the three classic
 
 The truth table has only two rows (P = T and P = F), and the result is T in both. When P is true, the first disjunct holds. When P is false, ¬P is true and the second disjunct holds.
 
-The law of excluded middle is accepted in classical logic but rejected in intuitionistic logic, where asserting P ∨ ¬P requires a constructive proof of one disjunct. This distinction is fundamental to the philosophy of mathematics and the foundations of constructive reasoning.`,
+@academic[fact,aside:true,width:35%:Intuitionists cannot refute it
+Intuitionistic logic does not prove P ∨ ¬P, yet it proves ¬¬(P ∨ ¬P): if P ∨ ¬P were false, P would be false, and then ¬P would make P ∨ ¬P true. Glivenko showed in 1929 that every tautology of propositional logic survives in this form, with ¬¬ in front.]@
+
+The law of excluded middle is accepted in classical logic but rejected in intuitionistic logic, where asserting P ∨ ¬P requires a constructive proof of one disjunct. This distinction is fundamental to the philosophy of mathematics and the foundations of constructive reasoning.
+
+Declining a law is not the same as denying it. An intuitionist who will not assert P ∨ ¬P for an open problem makes no claim that the problem has some third answer. The law is withheld as a general principle, and each of its instances waits for a proof of one side or the other.`,
       before: ``,
       after: ``,
       link: ``,
@@ -477,7 +476,9 @@ Hypothetical syllogism is the logical basis for chain reasoning in mathematics: 
 From P → Q and R → Q, concluding P → R fails at P = T, Q = T, R = F: both premises are T, but P → R is F. Q must be the consequent of the first link and the antecedent of the second, as in P → Q and Q → R.
 [Read more](!#pitfalls)]@
 
-In a longer proof the links of a chain are often established far apart, in separate lemmas or steps, and joined only at the end. Joining them means keeping the outer propositions, P and R, and dropping the middle one, Q, that the two links share.`,
+In a longer proof the links of a chain are often established far apart, in separate lemmas or steps, and joined only at the end. Joining them means keeping the outer propositions, P and R, and dropping the middle one, Q, that the two links share.
+
+@academic[punchline:Implications chain end to end: prove each link on its own, and the first antecedent implies the last consequent.]@`,
       before: ``,
       after: ``,
       link: ``,
@@ -503,6 +504,9 @@ Modus ponens is the engine of forward reasoning. Given a known fact P and a rule
     obj8: {
       title: `P → (Q → P): Positive Antecedent Principle`,
       content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that if P is true, then P is implied by any proposition Q. The nested [implication](!/logic/propositional-logic/semantics/implication) Q → P holds whenever P is true, regardless of Q&apos;s truth value, because a true consequent makes any conditional true.
+
+@academic[fact,aside:true,width:35%:A tautology that is also a program
+Read as a type, P → (Q → P) describes a function that takes a value x, then a second value y, ignores y and returns x. Haskell's built-in const has exactly this type, a -> b -> a: under the Curry–Howard correspondence, proofs of implications are programs.]@
 
 When P is true, Q → P is true (true consequent). When P is false, the outer implication P → (Q → P) is vacuously true (false antecedent). Either way, the formula holds.
 

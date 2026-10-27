@@ -935,7 +935,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrame'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import leastSquaresDiagrams from '@/app/components/linear-algebra copy/matrix/leastSquaresDiagrams'
@@ -1374,7 +1374,7 @@ These are the normal equations. They form a square $n \\times n$ system regardle
 When $A$ has full column rank (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving a unique least-squares solution:
 
 @academic[formula_callout:least_squares_solution|Least Squares Solution|$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$$]@
-@academic[formulas_link:/linear-algebra/formulas#least_squares_solution]@
+@academic[formulas_link:/linear-algebra/formulas#least-squares_solution]@
 
 @academic[pitfall,aside:true,width:35%:Splitting the inverse into two factors
 Writing $(A^TA)^{-1} = A^{-1}(A^T)^{-1}$ collapses the formula to $\\hat{\\mathbf{x}} = A^{-1}\\mathbf{b}$, but the $4 \\times 2$ matrix $A$ of the line fit below has no inverse. Only the square matrix $A^TA$, there $\\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}$, is inverted, as one matrix.
@@ -1479,7 +1479,7 @@ When $A$ does not have full column rank, the Moore-Penrose pseudoinverse $A^+$ i
 Substituting $A = QR$ into $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ gives $R^TQ^TQR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Since $Q^TQ = I$, this simplifies to $R^TR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Multiplying both sides by $(R^T)^{-1}$:
 
 @academic[formula_callout:least_squares_via_qr|Least Squares via QR|$$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$]@
-@academic[formulas_link:/linear-algebra/formulas#least_squares_via_qr]@
+@academic[formulas_link:/linear-algebra/formulas#least-squares_via_qr]@
 
 The right-hand side $Q^T\\mathbf{b}$ is a vector of $n$ dot products. The left-hand side is an upper [triangular](!/linear-algebra/matrix/types) system, solved by back substitution.
 

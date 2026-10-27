@@ -907,7 +907,12 @@ You can check any product of mixed numbers with the [fraction calculator](!/calc
 @academic[formula_callout:Multiplying More Than Two Fractions
 $$\\frac{2}{3} \\times \\frac{3}{4} \\times \\frac{4}{5} = \\frac{2 \\times 3 \\times 4}{3 \\times 4 \\times 5} = \\frac{24}{60} = \\frac{2}{5}$$]@
 
-Cross-canceling across all fractions before multiplying is particularly efficient here. In the example above, the 3 in the first denominator cancels with the 3 in the second numerator; the 4 in the second denominator cancels with the 4 in the third numerator. What remains is $\\frac{2}{5}$ with no multiplication needed.`,
+@academic[fact,aside:true,width:35%:Factors below 1, a product above $\\frac{1}{2}$
+Every factor of $\\frac{3}{4} \\times \\frac{8}{9} \\times \\frac{15}{16} \\times \\frac{24}{25} \\times \\cdots$ is less than 1, yet the product never falls to $\\frac{1}{2}$. Written as $\\frac{1 \\times 3}{2 \\times 2} \\times \\frac{2 \\times 4}{3 \\times 3} \\times \\cdots$, nearly everything cancels, and the first $n$ factors leave $\\frac{n + 2}{2n + 2}$.]@
+
+Cross-canceling across all fractions before multiplying is particularly efficient here. In the example above, the 3 in the first denominator cancels with the 3 in the second numerator; the 4 in the second denominator cancels with the 4 in the third numerator. What remains is $\\frac{2}{5}$ with no multiplication needed.
+
+The same canceling works for chains of any length. In $\\frac{1}{2} \\times \\frac{2}{3} \\times \\frac{3}{4} \\times \\cdots \\times \\frac{9}{10}$, every numerator from the second on cancels with the denominator just before it, so the nine fractions multiply to $\\frac{1}{10}$ without any multiplication at all.`,
     before: ``,
     after: ``,
     link: '',
@@ -924,7 +929,16 @@ $$\\frac{2}{3} \\times 12 = \\frac{2 \\times 12}{3} = \\frac{24}{3} = 8$$]@
 Taking $\\frac{1}{3}$ off a price of $30$ as $\\frac{1}{3} \\times 30 = 10$ finds the discount, not the new price. The price left is $30 - 10 = 20$, which is $\\frac{2}{3}$ of $30$.
 [Read more](!#pitfalls)]@
 
-This interpretation appears constantly in applications. A recipe asks for $\\frac{3}{4}$ of a cup. A sale offers $\\frac{1}{3}$ off the original price. A problem states that $\\frac{2}{5}$ of the students are absent. Each "of" translates to multiplication.`,
+This interpretation appears constantly in applications. A recipe asks for $\\frac{3}{4}$ of a cup. A sale offers $\\frac{1}{3}$ off the original price. A problem states that $\\frac{2}{5}$ of the students are absent. Each "of" translates to multiplication.
+
+A fraction of a fraction is read the same way. $\\frac{1}{2}$ of $\\frac{2}{3}$ of $12$ is $\\frac{1}{2}$ of $8$, which is $4$, and multiplying the fractions first gives the same result: $\\frac{1}{2} \\times \\frac{2}{3} = \\frac{1}{3}$, and $\\frac{1}{3}$ of $12$ is $4$.
+
+@academic[fact,aside:true,width:35%:The O in BODMAS can mean of
+In BODMAS, the order-of-operations rule taught in Britain, the O can stand for "of", ranked before division, so $10 \\div \\frac{1}{2}$ of $10$ is $10 \\div 5 = 2$. Read with a plain $\\times$ from left to right, $10 \\div \\frac{1}{2} \\times 10$ is $200$.]@
+
+Phrases with "of" are read as whole amounts. "A third of the class" or "half of the price" is worked out first and then used as one number in the rest of the problem. When such a phrase is written in symbols, brackets keep it together, as in $12 \\div \\left(\\frac{1}{3} \\times 6\\right)$, where the third of $6$ is found before the division.
+
+@academic[punchline:A fraction "of" an amount is a product, worked out as one number before anything around it.]@`,
     before: ``,
     after: ``,
     link: '',

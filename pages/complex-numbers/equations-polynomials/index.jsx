@@ -1203,7 +1203,7 @@ The pattern holds universally: every polynomial equation of degree $n$ has exact
     obj2: {
   title: `The Fundamental Theorem of Algebra`,
   before: ``,
-  content: `The cornerstone of polynomial theory makes a sweeping guarantee: every non-constant polynomial with complex coefficients has at least one complex root. This is the Fundamental Theorem of Algebra, first rigorously proved by Carl Friedrich Gauss in 1799.
+  content: `The cornerstone of polynomial theory makes a sweeping guarantee: every non-constant polynomial with complex coefficients has at least one complex root. This is the Fundamental Theorem of Algebra, first proved in essence by Carl Friedrich Gauss in 1799; a gap in his argument was closed only in 1920.
 
 The statement seems modest — just one root guaranteed. But its consequences are profound. If polynomial $p(z)$ of degree $n \\geq 1$ has a root $z_1$, then $p(z) = (z - z_1)q(z)$ where $q(z)$ has degree $n - 1$. If $n - 1 \\geq 1$, the theorem applies again: $q(z)$ has a root $z_2$, so $q(z) = (z - z_2)r(z)$. Continue until only a constant remains.
 
@@ -1217,6 +1217,9 @@ $$p(z) = a_n(z - z_1)(z - z_2) \\cdots (z - z_n)$$
 /complex-numbers/formulas]@
 
 where $a_n$ is the leading coefficient and $z_1, z_2, \\ldots, z_n$ are the $n$ roots (possibly with repetitions). A polynomial of degree $n$ has exactly $n$ roots in $\\mathbb{C}$, counted with multiplicity.
+
+@academic[fact,aside:true,width:35%:Gauss stated it with real factors only
+Gauss's 1799 doctoral thesis, written at 22, states the theorem without complex numbers: every real polynomial splits into real factors of degree one or two. Pairing each non-real root with its conjugate gives exactly those quadratic factors.]@
 
 This completeness property means $\\mathbb{C}$ is algebraically closed. Every polynomial equation solvable anywhere is solvable in $\\mathbb{C}$. No further extension of the number system is needed to find polynomial roots — complex numbers are the final destination.
 
@@ -1483,6 +1486,11 @@ This geometric approach often simplifies what algebraic manipulation would make 
 **Signal Processing:** The transfer function of a linear filter is a ratio of polynomials in a complex variable. The filter's frequency response — which frequencies pass through and which are attenuated — depends directly on where the polynomial roots lie. Roots near the unit circle create sharp peaks or nulls in the response. Filter design amounts to placing roots strategically in the complex plane.
 
 **Control Theory:** A dynamical system's stability hinges on the roots of its characteristic polynomial. If all roots have negative real parts (lying in the left half-plane), the system is stable — disturbances decay over time. Roots with positive real parts indicate instability — small perturbations grow without bound. Control engineers reshape root locations through feedback to achieve desired stability margins.
+
+@academic[fact,aside:true,width:35%:Three roots share every border point
+Run Newton's method on $z^3 = 1$ and colour each starting point by the root it reaches. Cayley settled the case of two roots in 1879, where a straight line splits the plane; with three roots the regions meet in a fractal, and every border point touches all three.]@
+
+**Numerical Root Finding:** Software finds the roots of a polynomial $p$ by iteration rather than by formula. Newton's method starts from a guess $z_0$ and repeats $z_{k+1} = z_k - \\frac{p(z_k)}{p'(z_k)}$; close to a simple root, each step roughly doubles the number of correct digits. The rule works unchanged with complex numbers, so a complex starting point can lead to a complex root.
 
 **Geometry:** Regular polygons emerge as roots of unity. The $n$-th roots of unity form the vertices of a regular $n$-gon inscribed in the unit circle. Solving $z^n = 1$ constructs the polygon automatically. More generally, the roots of $z^n = w$ ($w \\neq 0$) form a regular $n$-gon of radius $|w|^{1/n}$.
 
@@ -1901,6 +1909,7 @@ export default function EquationsPolynomialsPage({
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `@academic[punchline:One guaranteed root, used again and again, splits every polynomial of degree $n$ into exactly $n$ linear factors over $\\mathbb{C}$.]@`,
         ]
     },
     {

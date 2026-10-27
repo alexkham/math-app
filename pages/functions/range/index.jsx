@@ -875,8 +875,9 @@ import functionRangeDiagrams from '@/app/components/functions/range/functionRang
 import functionTransformationsDiagrams from '@/app/components/functions/transformations/functionTransformationsDiagrams'
 import functionInverseDiagrams from '@/app/components/functions/inverse/functionInverseDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
-import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline'
+import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1105,6 +1106,33 @@ export async function getStaticProps(){
 `
 
 
+  // Concept introduction (section 1, "What is Range") — template H, open
+  // question. Running instance: f(x) = x². Old obj1 text (five paragraphs) is
+  // kept in sectionsContent.obj1, unused; the paragraphs and the restricted
+  // demo frame with its line are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciTriesTable = ciTableOpen(['input x', 'output x²']) +
+    ciRow(['−3', '9']) +
+    ciRow(['−1', '1'], { shade: true }) +
+    ciRow(['0', '0']) +
+    ciRow(['0.5', '0.25'], { shade: true }) +
+    ciRow(['2', '4'], { last: true }) +
+    '</tbody></table>'
+  const ciTargetTable = ciTableOpen(['target output y', 'an input with x² = y', 'reached?']) +
+    ciRow(['9', '3', 'yes']) +
+    ciRow(['5', '√5 ≈ 2.236', 'yes'], { shade: true }) +
+    ciRow(['0.25', '0.5', 'yes']) +
+    ciRow(['0', '0', 'yes'], { shade: true }) +
+    ciRow(['−1', 'none', 'no'], { color: '#a4243b', cols: [1, 2] }) +
+    ciRow(['−4', 'none', 'no'], { shade: true, last: true, color: '#a4243b', cols: [1, 2] }) +
+    '</tbody></table>'
+
   const sectionsContent = {
 
     obj0 : {
@@ -1245,7 +1273,12 @@ On a restricted domain $[a, b]$, the two endpoint outputs $f(a)$ and $f(b)$ alwa
 
 End behavior determines whether the range extends to infinity. If $f(x) \\to \\infty$ as $x \\to \\infty$, the range has no upper bound. If $f(x) \\to -\\infty$ as $x \\to -\\infty$, the range has no lower bound.
 
-Horizontal asymptotes suggest range boundaries. If $f(x) \\to 2$ as $x \\to \\infty$, the value $2$ is approached but may or may not be achieved. Whether $2$ is in the range requires further analysis — checking if any $x$ actually produces $f(x) = 2$.`,
+@academic[fact,aside:true,width:35%:Never zero, yet no smallest output
+The two-variable polynomial $x^2 + (xy - 1)^2$ is never $0$: $x = 0$ leaves $(-1)^2 = 1$, and $x \\neq 0$ makes $x^2 > 0$. Yet $y = \\frac{1}{x}$ with $x \\to 0$ drives it toward $0$, so its range is $(0, \\infty)$, which no one-variable polynomial can have.]@
+
+Horizontal asymptotes suggest range boundaries. If $f(x) \\to 2$ as $x \\to \\infty$, the value $2$ is approached but may or may not be achieved. Whether $2$ is in the range requires further analysis — checking if any $x$ actually produces $f(x) = 2$.
+
+A lower bound that is approached but never reached leaves the range open at that end. The exponential $2^x$ behaves this way at $0$: its outputs get smaller than any positive number, yet $0$ itself never appears, so its range is written $(0, \\infty)$, with a parenthesis.`,
     before: ``,
     after: ``,
     link: '',
@@ -1258,6 +1291,9 @@ Horizontal asymptotes suggest range boundaries. If $f(x) \\to 2$ as $x \\to \\in
 Trace the graph and observe: what is the lowest point? What is the highest point? Does the graph extend upward or downward without bound?
 
 Solid dots at endpoints indicate included values. If the highest point on the graph is a solid dot at $y = 5$, then $5$ is in the range. Use a bracket.
+
+@academic[fact,aside:true,width:35%:Every interval reaches every number
+Conway's base-13 function takes every real value on every interval, however short, so cutting its domain down to $(0, 0.001)$ leaves its range all of $\\mathbb{R}$. It reads its output from the tail of the input's base-13 digits, and every interval holds numbers with every possible tail.]@
 
 Open dots indicate excluded values. If the graph approaches but never reaches $y = 5$, the range excludes $5$. Use a parenthesis.
 
@@ -1339,7 +1375,7 @@ Percentages lie between $0$ and $100$. Temperatures may have physical lower boun
 
 Context can also reveal the range conceptually. If $C(x)$ represents the cost of producing $x$ items and includes a fixed startup cost of 500 dollars, then the range begins at $500$ or higher, not at zero.
 
-Interpreting the range means translating mathematical bounds into real-world meaning. "The range is $[0, 256]$" might mean "the brightness level varies from completely dark to maximum intensity."`,
+Interpreting the range means translating mathematical bounds into real-world meaning. "The range is $\\{0, 1, \\ldots, 255\\}$" might mean "the brightness level varies from completely dark to maximum intensity."`,
     before: ``,
     after: ``,
     link: '',
@@ -1544,6 +1580,11 @@ const faqQuestions = {
     caption: 'Same rule, smaller domain: the outputs fill exactly [1, 9]',
   };
 
+  const conceptIntroFigures = {
+    triesTable: ciTriesTable,
+    targetTable: ciTargetTable,
+  };
+
   const demoUnits = {
     fromGraph: demoUnitFrame({
       svg: functionRangeDiagrams.quadratic,
@@ -1638,6 +1679,7 @@ const faqQuestions = {
       props:{
     rangeByTypeOutline,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1666,10 +1708,72 @@ export default function RangePage({rangeByTypeOutline,
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Which numbers can come out of f(x) = x²?`,
+        content: [
+          `Can it give $5$? $0.25$? $-1$? The formula says what to do with an input, but not which outputs are possible.`,
+        ],
+      },
+      {
+        id: 'deadend',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Trying inputs one at a time never settles it.`,
+        content: [
+          `Plug in a few numbers and record what comes out. Every new input gives another output, but no list of inputs can be finished — there are infinitely many — so the list can never show that some value is missing.`,
+          ciTable('triesTable'),
+        ],
+      },
+      {
+        id: 'approach',
+        lead: `Turn the question around: pick an output and ask whether some input reaches it.`,
+        content: [
+          `Instead of throwing darts and noting where they land, choose a target and check whether it can be hit. For $x^2 = y$ that means looking for a number whose square is $y$.`,
+          ciTable('targetTable'),
+          `Every target from $0$ upward is reached, by its square root; every negative target is missed, because no square is negative.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [range](!/functions/definitions#range) of a function is the set of all outputs it actually produces as the input runs through the domain.`,
+        footer: `So the range of $f(x) = x^2$ on all real numbers is $[0, \\infty)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A range is a set of numbers, and it depends on both the rule and the domain.`,
+        content: [
+          `The range of a function is the set of all output values the function produces. As the input varies across the entire [domain](!/functions/domain), the range collects every resulting output.`,
+          `Consider $f(x) = x^2$ with domain $(-\\infty, \\infty)$. Squaring any real number produces a non-negative result: $0, 1, 4, 9, 0.25$, and so on. Negative outputs never appear. The range is $[0, \\infty)$.`,
+          `Consider $g(x) = 2x + 1$ with domain $(-\\infty, \\infty)$. As $x$ takes every real value, $2x + 1$ also takes every real value — there is no output this linear function cannot reach. The range is $(-\\infty, \\infty)$.`,
+          `The range depends on both the rule and the domain. The same formula with different domains can produce different ranges. If $f(x) = x^2$ is restricted to domain $[1, 3]$, the outputs span from $1^2 = 1$ to $3^2 = 9$, giving range $[1, 9]$.`,
+          <div key={'unit-restricted'} dangerouslySetInnerHTML={{ __html: demoUnits.restricted }} />,
+          `Change the domain and the range changes with it, even when the rule stays the same.`,
+          `Range answers the question: what values can this function actually produce? It is the complete collection of outputs, nothing more and nothing less.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The table is persuasive, but six targets are not a proof.`,
+        content: `It checked six values. To be sure of $[0, \\infty)$, it must be shown that every $y \\geq 0$ is reached (take $x = \\sqrt{y}$) and that no negative $y$ ever is (a square is never negative). Arguments of that kind are what [finding the range algebraically](!/functions/range#4) is about.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers range notation, range versus codomain, finding the range algebraically, by behaviour and from a graph, and the ranges of common function types.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1685,9 +1789,7 @@ export default function RangePage({rangeByTypeOutline,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-restricted'} dangerouslySetInnerHTML={{ __html: demoUnits.restricted }} />,
-          `Change the domain and the range changes with it, even when the rule stays the same.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1798,6 +1900,7 @@ export default function RangePage({rangeByTypeOutline,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          `@academic[punchline:A formula says which outputs are possible; the situation decides which of them can actually occur.]@`,
         ]
     },
     {

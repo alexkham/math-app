@@ -698,6 +698,7 @@ import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -891,6 +892,26 @@ const keyWords = [
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 1, "What is a Logarithm?") — template H,
+    // open question. Running instance: 2 to what power gives 10? Old obj1 text
+    // is kept in sectionsContent.obj1, unused; its paragraphs, pitfall aside
+    // and the powers-table demo frame with its line are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciNarrowTable = ciTableOpen(['exponent tried', '2 to that power', 'compared with 10']) +
+      ciRow(['3', '8', 'too small']) +
+      ciRow(['4', '16', 'too big'], { shade: true }) +
+      ciRow(['3.5', '11.31', 'too big']) +
+      ciRow(['3.3', '9.85', 'too small'], { shade: true }) +
+      ciRow(['3.32', '9.987', 'too small']) +
+      ciRow(['3.322', '10.0005', 'just over'], { shade: true, last: true, color: '#2563EB', cols: [1] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1326,6 +1347,10 @@ const schemas = {
     notes: [{ x: 4.7, y: 4.7, text: 'y = x', pos: 'e', color: 'g' }],
     caption: 'log₂(2ˣ) = x: (2, 4) on 2ˣ becomes (4, 2) on log₂ x' };
 
+  const conceptIntroFigures = {
+    narrowTable: ciNarrowTable,
+  };
+
   const demoUnits = {
     table: demoUnitFrame({
       svg: powersTableDiagrams['b2-default'],
@@ -1378,6 +1403,7 @@ const schemas = {
   props: {
     logInequalityCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1406,10 +1432,74 @@ export default function LogarithmsPage({logInequalityCases,
   obj6Table,
   obj7Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `2 to what power gives 10?`,
+        content: [
+          `Questions like this come up whenever something doubles: how many doublings turn 1 into 10? For 8 the answer is easy, $2^3 = 8$, and for 16 it is $4$. For 10 nothing obvious comes to mind.`,
+        ],
+      },
+      {
+        id: 'deadend',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The table of powers of 2 has no row for 10: it jumps from 8 straight to 16.`,
+        content: [
+          <div key={'unit-table'} dangerouslySetInnerHTML={{ __html: demoUnits.table }} />,
+          `Values between the rows are what make logarithms more than a lookup, and the rest of the page is about them.`,
+        ],
+      },
+      {
+        id: 'approach',
+        lead: `Close in on the answer: try exponents between 3 and 4 and watch 2 to that power approach 10.`,
+        content: [
+          `Each try says whether the exponent is too small or too big, so the gap keeps shrinking — the way a guessing game of "higher, lower" homes in on a number.`,
+          ciTable('narrowTable'),
+          `The exponent settles near $3.3219$: a definite number, even though no row of the table shows it.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [logarithm](!/algebra/definitions#logarithm) $\\log_a(b)$ is the exponent $c$ for which $a^c = b$: the power the base must be raised to in order to produce the number.`,
+        formula: [
+          `A logarithm answers the question: to what power must a base be raised to produce a given number? The expression $\\log_a(b)$ asks for the exponent that satisfies $a^{?} = b$.`,
+          `The notation $\\log_a(b) = c$ is read as "log base $a$ of $b$ equals $c$." This statement is equivalent to the exponential form $a^c = b$. The two expressions encode identical information — one solved for the exponent, the other presenting the complete power relationship.`,
+        ],
+        footer: `So $\\log_2(10) \\approx 3.3219$, because $2^{3.3219} \\approx 10$ — and $\\log_2(8) = 3$ exactly.`,
+      },
+      {
+        id: 'kind',
+        lead: `A logarithm is a number — an exponent — and it is read back as a power.`,
+        content: [
+          `Consider $\\log_2(8) = 3$. This asks: what power of $2$ gives $8$? Since $2^3 = 8$, the answer is $3$. Similarly, $\\log_{10}(1000) = 3$ because $10^3 = 1000$, and $\\log_5(25) = 2$ because $5^2 = 25$.`,
+          `@academic[pitfall,aside:true,width:35%:Swapping base and exponent
+Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 9$, not $8$. The base stays the base: $2^3 = 8$.
+[Read more](!#pitfalls)]@`,
+          `The base sits as a subscript, the argument sits inside parentheses, and the output is the exponent. Every logarithm can be rewritten as an exponential equation, and every exponential equation can be rewritten using logarithms. This duality is the foundation of all logarithmic work — converting between forms is often the first step in solving problems.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The table is persuasive, not a proof that the exponent exists.`,
+        content: `Six tries suggest a value near $3.3219$; that such a number really exists, and only one, comes from $2^x$ growing steadily with no gaps or repeats. That also explains the limits on what a logarithm accepts: with a positive base other than $1$, only positive numbers can be reached, as the section on [restrictions on base and argument](!/algebra/logarithms#2) shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the restrictions on base and argument, key values, inverse identities, common and natural logarithms, and the properties and rules of logarithms.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1425,9 +1515,7 @@ export default function LogarithmsPage({logInequalityCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-table'} dangerouslySetInnerHTML={{ __html: demoUnits.table }} />,
-          `Values between the rows are what make logarithms more than a lookup, and the rest of the page is about them.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

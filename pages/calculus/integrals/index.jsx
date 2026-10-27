@@ -13,6 +13,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 import functionRiemannDiagrams from '@/app/components/functions/riemann/functionRiemannDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
@@ -227,6 +228,27 @@ const summaryTable = `
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "The Idea of Accumulation") — template H,
+// open question. Running instance: speed v(t) = t² m/s for 3 seconds, the
+// Riemann tool's default (x² on [0, 3]). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box and six passages are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSumsTable = ciTableOpen(['pieces n', 'length of each', 'estimated distance (m)']) +
+  ciRow(['3', '1 s', '5']) +
+  ciRow(['6', '0.5 s', '6.875'], { shade: true }) +
+  ciRow(['8', '0.375 s', '7.383']) +
+  ciRow(['30', '0.1 s', '8.555'], { shade: true }) +
+  ciRow(['300', '0.01 s', '8.955']) +
+  ciRow(['more and more', '→ 0', '→ 9'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   // ─── /calculus/integrals (hub) ────────────────────────────────────────────
@@ -592,12 +614,12 @@ The integral sign $\\int$ represents summation taken to its limit—adding infin
 
 Two distinct but related concepts share this notation. The definite integral
 
-@academic[formula_callout:Summary: A Map of the Integrals Subtree
+@academic[formula_callout:Definite Integral
 $$\\int_a^b f(x)\\, dx$$]@
 
 computes a number—the signed area under a curve, the accumulated quantity between two bounds. The indefinite integral
 
-@academic[formula_callout:Summary: A Map of the Integrals Subtree
+@academic[formula_callout:Indefinite Integral
 $$\\int f(x)\\, dx$$]@
 
 finds a function—the antiderivative whose derivative returns the original integrand. The Fundamental Theorem of Calculus reveals these as two faces of the same idea.
@@ -717,6 +739,11 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    left: functionRiemannDiagrams.left,
+    sumsTable: ciSumsTable,
+  };
+
   const demoUnits = {
     twoTypes: demoUnitFrame({
       svg: functionFTCDiagrams.cubic,
@@ -752,6 +779,7 @@ const schemas = {
   props: {
     integralTypeTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -771,9 +799,79 @@ const schemas = {
 }
    }
 
-export default function IntegralsPage({integralTypeTree, seoData, sectionsContent, introContent, obj2Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function IntegralsPage({integralTypeTree, seoData, sectionsContent, introContent, obj2Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A car speeds up for 3 seconds, its speed at time t being t² metres per second. How far does it travel?`,
+        content: [
+          `Speedometers and sensors report a rate at each moment; the question is what all those rates add up to.`,
+          `Integration answers questions about totals. Given how fast something changes at each moment, what is the cumulative effect over an interval?`,
+        ],
+      },
+      {
+        id: 'deadend',
+        kind: 'instance',
+        tone: 'break',
+        lead: `"Distance = speed × time" needs a single speed, and here the speed never stays the same.`,
+        content: [
+          `Using the starting speed, $0$ m/s, gives $0$ metres. Using the final speed, $9$ m/s, gives $27$ metres. The true answer is somewhere in between, and the formula cannot say where.`,
+        ],
+      },
+      {
+        id: 'approach',
+        lead: `Cut the 3 seconds into short pieces, treat the speed as constant on each, and add up — then use more and more pieces.`,
+        content: [
+          `On each piece, take the speed at its start and multiply by the piece's length. The estimates creep upward and settle as the pieces shrink, the way an odometer adds up tiny stretches of road.`,
+          ciTable('sumsTable'),
+          `The totals close in on $9$ metres.`,
+        ],
+        visual: ciSvg('left'),
+        caption: `Eight pieces under $t^2$ on $[0, 3]$: each rectangle is a speed times a time. The same state is on the [Riemann sum visualizer](!/calculus/visual-tools/riemann-sum).`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [definite integral](!/calculus/definitions#definite_integral) $\\int_a^b f(t)\\,dt$ is the value these sums approach as the pieces become arbitrarily small: the total accumulated from a rate $f$ between $a$ and $b$.`,
+        formula: [
+          `Consider velocity. If $v(t)$ gives your speed at time $t$, then the integral`,
+          `@academic[formula_callout:The Idea of Accumulation
+$$\\int_a^b v(t)\\, dt$$]@`,
+          `computes the total distance traveled from time $a$ to time $b$. The function $v(t)$ describes instantaneous rates; the integral accumulates those rates into a total.`,
+        ],
+        footer: `So the car travels $\\int_0^3 t^2\\,dt = 9$ metres.`,
+      },
+      {
+        id: 'kind',
+        lead: `An integral is a total — one number built from infinitely many tiny contributions.`,
+        content: [
+          `This pattern appears throughout mathematics and science:`,
+          `• Integrate force over distance to get work
+• Integrate density over volume to get mass
+• Integrate a probability density to get probability
+• Integrate marginal cost to get total cost`,
+          `The integral formalizes "continuous summation"—adding contributions that vary smoothly rather than in discrete chunks.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The table is persuasive, not a proof: it shows the sums settling, not why the limit is exactly 9.`,
+        content: `Showing that the sums really approach $9$ — and computing integrals without adding thousands of pieces — needs the link between integrals and antiderivatives, which the sections on the [two types of integrals](!/calculus/integrals#2) and [definite integrals](!/calculus/integrals#4) set out.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the two types of integrals, the notation, definite and indefinite integrals, the integration rules and techniques, special integrals and improper integrals.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -781,7 +879,7 @@ export default function IntegralsPage({integralTypeTree, seoData, sectionsConten
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

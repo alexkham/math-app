@@ -622,6 +622,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vectorAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
 import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
@@ -793,6 +794,24 @@ const summaryTable = `
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "What Is a Vector") — template F, two
+// descriptions shown to agree. Running instance: v = (3, 2), as an arrow and
+// as a pair of numbers. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its formula box with link, fact aside and four passages are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBothTable = ciTableOpen(['arrow from', 'to', 'across', 'up', 'as numbers']) +
+  ciRow(['(0, 0)', '(3, 2)', '3', '2', '(3, 2)']) +
+  ciRow(['(4, 1)', '(7, 3)', '3', '2', '(3, 2)'], { shade: true }) +
+  ciRow(['(−2, 5)', '(1, 7)', '3', '2', '(3, 2)'], { last: true, color: '#2563EB', cols: [4] }) +
+  '</tbody></table>'
 
  const sectionsContent = {
   obj1: {
@@ -1138,6 +1157,20 @@ const schemas = {
     caption: 'same components, same vector, wherever it is drawn',
   };
 
+  const vaCiArrow = {
+    kind: 'copies', vector: [3, 2], nx: 5, ny: 4,
+    style: { vector: '#2563EB', negation: '#C0392B', text: '#1E3A5F' },
+    svgTitle: 'The arrow for v = (3, 2): three across, two up',
+    tails: [[1, 1]],
+    labels: [['v: 3 across, 2 up', 1.3, 3.4]],
+    note: 'length and direction fixed by the arrow',
+    caption: 'a vector drawn as an arrow',
+  };
+  const conceptIntroFigures = {
+    arrow: renderVectorArrows(vaCiArrow),
+    bothTable: ciBothTable,
+  };
+
   const demoUnits = {
     // Hub page: one unit only. The operations section is the single
     // place a live demo adds more than the summary prose does.
@@ -1182,6 +1215,7 @@ const schemas = {
   props: {
     vectorTypeTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1197,9 +1231,81 @@ const schemas = {
   }
 }
    }
-export default function VectorsPage({vectorTypeTree, seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits}) {
+export default function VectorsPage({vectorTypeTree, seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `One way to describe a displacement: draw an arrow, whose length is how far and whose direction is which way.`,
+        content: [
+          `At its core, a vector is a mathematical object defined by two attributes: a magnitude (a non-negative number representing size) and a direction (an orientation in space). A scalar, by contrast, is fully specified by a single number — temperature, mass, or area require no directional component. A vector demands both.`,
+          `Geometrically, a vector appears as a directed line segment: an arrow drawn from an initial point to a terminal point. The arrow's length encodes the magnitude, and the way it points encodes the direction. Two arrows that share the same length and orientation represent the same vector, regardless of where in space they are positioned. This is the concept of a free vector — identity is determined entirely by magnitude and direction, never by location.`,
+        ],
+        visual: ciSvg('arrow'),
+      },
+      {
+        id: 'second',
+        lead: `Another way: list how far it goes along each axis.`,
+        content: [
+          `"Three across, two up" is just the pair of numbers $(3, 2)$ — no drawing needed. In three dimensions the list has three numbers; in general it has $n$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Arrows drawn in different places all turn into the same pair of numbers, (3, 2).`,
+        content: [
+          ciTable('bothTable'),
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree: the numbers are exactly the arrow's movement along each axis, and nothing else.`,
+        content: [
+          `Subtracting the tail from the tip gives the across and up amounts, so every arrow produces a list of numbers; walking those amounts from any starting point draws the arrow back. Where the arrow starts never enters — which is why the three arrows above are one vector.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [vector](!/linear-algebra/definitions#vector) in $\\mathbb{R}^n$ is an ordered list of $n$ real numbers, its components; drawn in the plane or in space, it is an arrow with a length and a direction.`,
+        formula: [
+          `Algebraically, a vector in $\\mathbb{R}^n$ is an ordered $n$-tuple of real numbers:`,
+          `@academic[formula_callout:Vector Component Form
+$$\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$$
+/linear-algebra/formulas#vector_component_form]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `So $\\mathbf{v} = (3, 2)$ is the arrow "three across, two up", wherever it is drawn.`,
+      },
+      {
+        id: 'kind',
+        lead: `A vector is one object with two faces: a size-and-direction arrow and a list of components.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:A photo is a single vector
+A 12-megapixel colour photo stores three brightness values per pixel, for red, green and blue, so the whole picture is one vector in $\\mathbb{R}^{36{,}000{,}000}$. Dimming it to half brightness is scalar multiplication by $\\frac{1}{2}$.]@`,
+          `Each entry $v_i$ is called a component. In $\\mathbb{R}^2$, a vector has two components and can be plotted on a coordinate plane. In $\\mathbb{R}^3$, three components place it in three-dimensional space. For $n > 3$, direct visualization is no longer possible, but the algebraic framework continues to function identically. The components of a vector encode both its magnitude and its direction numerically, linking the geometric and algebraic viewpoints into a single coherent object.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which description to use: arrows to see, numbers to compute — and only numbers beyond three dimensions.`,
+        content: `In the plane and in space, arrows show at a glance what addition or scaling does. Past three dimensions no arrow can be drawn, but the list of components works exactly the same way. The [notation](!/linear-algebra/vectors#2) section shows the ways of writing both.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, types of vectors, their properties, the basic operations, magnitude, the dot and cross products, and linear combinations.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1207,7 +1313,7 @@ export default function VectorsPage({vectorTypeTree, seoData, sectionsContent, i
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

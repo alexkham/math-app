@@ -11,6 +11,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -156,6 +157,23 @@ const keyWords = [
 </table>
 `
 
+
+// Concept introduction (section 1, "Basic Form: Logarithm Equals a
+// Constant") — template B, definition first. Running instance: log₂(x) = 5.
+// Old obj1 text is kept in sectionsContent.obj1, unused; its four example
+// boxes, pitfall aside and six passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCheckTable = ciTableOpen(['equation', 'solution', 'put it back', 'holds?']) +
+  ciRow(['log₂(x) = 5', 'x = 32', 'log₂(32) = 5, since 2⁵ = 32', 'yes']) +
+  ciRow(['log₃(x) = −2', 'x = 1/9', 'log₃(1/9) = −2, since 3⁻² = 1/9', 'yes'], { shade: true }) +
+  ciRow(['log₅(2x − 1) = 2', 'x = 13', 'log₅(25) = 2, since 5² = 25', 'yes'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -667,6 +685,19 @@ const schemas = {
     notes: [{ x: 0.1, y: 280, text: 'x = (ln 5 + 3 ln 2)/(ln 5 − ln 2) ≈ 4.026', pos: 'e', color: 'r' }],
     caption: '2ˣ⁺³ = 5ˣ⁻¹: the faster-growing 5ˣ⁻¹ overtakes at x ≈ 4.026' };
 
+  const fpCiMeet = { kind: 'pieces', svgTitle: 'y = log2 x meets the level y = 5 at x = 32',
+    xRange: [0, 40], yRange: [-2, 7], xStep: 8,
+    pieces: [
+      { fn: (x) => Math.log2(x), from: 0.25, to: 40, ends: [null, null], color: 'f', label: { text: 'y = log₂ x', x: 12, y: 3.1, pos: 'se' } },
+      { fn: () => 5, from: 0, to: 40, ends: [null, null], color: 'g', label: { text: 'y = 5', x: 38, y: 5, pos: 'n' } },
+    ],
+    points: [{ x: 32, y: 5, label: '(32, 5)', pos: 'se' }],
+    caption: 'the solution of log₂(x) = 5 is where the curve reaches height 5' }
+  const conceptIntroFigures = {
+    meet: renderFunctionPlotV4(fpCiMeet),
+    checkTable: ciCheckTable,
+  };
+
   const demoUnits = {
     combined: demoUnitFrame({
       svg: renderFunctionPlotV4(fpLogCombined),
@@ -695,6 +726,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Logarithmic Equations: Solving Methods & Examples | Learn Math Class",
       description: "Learn to solve logarithmic equations: convert to exponential form, use one-to-one property, combine logs, handle domain restrictions, and solve exponential equations with logs.",
@@ -717,9 +749,90 @@ export default function EquationsPage({
   faqQuestions,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `When the unknown sits inside a logarithm, the usual moves cannot reach it.`,
+        content: [
+          `In $\\log_2(x) = 5$, adding, subtracting, multiplying or dividing both sides leaves $x$ locked inside the logarithm. It is like a box that only one key opens: the key here is the exponential with the same base.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [logarithmic equation](!/algebra/definitions#logarithmic_equation) is an equation in which the unknown appears inside the argument of a logarithm; the simplest kind sets one logarithm equal to a constant.`,
+        formula: [
+          `The simplest logarithmic equation has the form $\\log_a(x) = k$, where $k$ is a constant.`,
+          `Convert to exponential form using the definition: $\\log_a(x) = k$ means $a^k = x$.`,
+        ],
+        visual: ciSvg('meet'),
+        caption: `$\\log_2(x) = 5$ asks where the graph of $y = \\log_2 x$ reaches the height $5$: at $x = 32$.`,
+        footer: `So $\\log_2(x) = 5$ means $2^5 = x$, and $x = 32$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is an equation in which one conversion removes the logarithm and leaves plain arithmetic.`,
+        content: [
+          `In each of these examples the conversion uses the same three numbers: the base, the value of the logarithm, and the argument. The base of the logarithm becomes the base of the power, the value $k$ becomes the exponent, and the argument is what that power equals.`,
+          `Once the equation is in exponential form, the logarithm is gone and only arithmetic remains. For $\\ln(x) = 4$ the base is $e$, so the answer is a power of $e$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The same conversion settles each case, whatever the base or the sign of the constant.`,
+        content: [
+          `@academic[example:Example
+Solve $\\log_2(x) = 5$.
+$$x = 2^5 = 32$$]@`,
+          `@academic[example:Example
+Solve $\\log_3(x) = -2$.
+$$x = 3^{-2} = \\frac{1}{9}$$]@`,
+          `@academic[example:Example
+Solve $\\ln(x) = 4$.
+$$x = e^4 \\approx 54.598$$]@`,
+          `@academic[pitfall,aside:true,width:35%:Swapping the base and the exponent
+Rewriting $\\log_2(x) = 5$ as $x = 5^2 = 25$ raises the wrong number to the wrong power, and $\\log_2(25) \\approx 4.64$, not $5$. The correct answer is $x = 2^5 = 32$.
+[Read more](!#pitfalls)]@`,
+          `When the argument is an expression, solve the resulting equation:`,
+          `@academic[example:Example
+Solve $\\log_5(2x - 1) = 2$.
+$$2x - 1 = 5^2 = 25$$
+$$2x = 26$$
+$$x = 13$$]@`,
+        ],
+      },
+      {
+        id: 'verify',
+        lead: `The definition promised that converting gives the solution — putting each answer back confirms it.`,
+        content: [
+          ciTable('checkTable'),
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Scope: this is the simplest form, and harder forms bring a new danger.`,
+        content: [
+          `When logarithms appear on both sides or have to be combined first, solving can produce numbers that make some argument zero or negative — values the original equation never allowed. The section on [domain restrictions](!/algebra/logarithms/equations#4) shows how to catch them.`,
+          `To solve your own logarithmic equation with each step shown, use the [logarithmic equation solver](!/algebra/calculators/equations/logarithmic).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers logarithms on both sides, combining logarithms, domain restrictions, extraneous solutions, substitution, and solving exponential equations with logarithms.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -735,7 +848,7 @@ export default function EquationsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
