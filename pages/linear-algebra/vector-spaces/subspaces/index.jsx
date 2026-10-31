@@ -1211,7 +1211,7 @@ const sectionsContent = {
     title: `Definition`,
     content: `A subspace of a vector space $V$ is a nonempty subset $W \\subseteq V$ that is itself a vector space when equipped with the same addition and scalar multiplication as $V$.
 
-Most of the ten axioms — commutativity, associativity, distributivity, the identity $1\\mathbf{v} = \\mathbf{v}$ — hold automatically in $W$ because they hold for all vectors in $V$, and vectors in $W$ are vectors in $V$. The properties that can fail are the closure conditions: the sum of two vectors in $W$ might land outside $W$, or scaling a vector in $W$ might produce something not in $W$. These are the only things that need checking.`,
+Most of the ten axioms — commutativity, associativity, distributivity, the identity $1\\mathbf{v} = \\mathbf{v}$ — hold automatically in $W$ because they hold for all vectors in $V$, and vectors in $W$ are vectors in $V$. The properties that can fail are the closure conditions: the sum of two vectors in $W$ might land outside $W$, or scaling a vector in $W$ might produce something not in $W$. [These are the only things that need checking](https://linearalgebranotes.com/spaces/subspace#rule-subspace-test).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1271,7 +1271,7 @@ Closure under addition: for all $\\mathbf{u}, \\mathbf{v} \\in W$, the sum $\\ma
 
 Closure under scalar multiplication: for all $c \\in \\mathbb{F}$ and all $\\mathbf{v} \\in W$, the product $c\\mathbf{v}$ is in $W$.
 
-These two conditions can be compressed into a single closure-under-linear-combinations condition:
+These two conditions can be [compressed into a single closure-under-linear-combinations condition](https://linearalgebranotes.com/spaces/subspace#rule-one-condition):
 
 @academic[formula_callout:Subspace Test Combined
 $$W \\subseteq V \\text{ is a subspace} \\iff W \\neq \\emptyset \\text{ and } c\\mathbf{u} + d\\mathbf{v} \\in W \\text{ for all } \\mathbf{u}, \\mathbf{v} \\in W,\\ c, d \\in \\mathbb{F}$$
@@ -1331,7 +1331,7 @@ $$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{
 
 the set of all vectors that $A$ maps to the zero vector. This is a subspace of $\\mathbb{R}^n$.
 
-Verification is direct. The zero vector satisfies $A\\mathbf{0} = \\mathbf{0}$, so $\\mathbf{0} \\in \\text{Null}(A)$. If $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = A\\mathbf{u} + A\\mathbf{v} = \\mathbf{0} + \\mathbf{0} = \\mathbf{0}$, so $\\mathbf{u} + \\mathbf{v} \\in \\text{Null}(A)$. If $A\\mathbf{v} = \\mathbf{0}$, then $A(c\\mathbf{v}) = cA\\mathbf{v} = c\\mathbf{0} = \\mathbf{0}$, so $c\\mathbf{v} \\in \\text{Null}(A)$. Both closure conditions hold.
+[Verification is direct](https://linearalgebranotes.com/maps/kernel#rule-subspace). The zero vector satisfies $A\\mathbf{0} = \\mathbf{0}$, so $\\mathbf{0} \\in \\text{Null}(A)$. If $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = A\\mathbf{u} + A\\mathbf{v} = \\mathbf{0} + \\mathbf{0} = \\mathbf{0}$, so $\\mathbf{u} + \\mathbf{v} \\in \\text{Null}(A)$. If $A\\mathbf{v} = \\mathbf{0}$, then $A(c\\mathbf{v}) = cA\\mathbf{v} = c\\mathbf{0} = \\mathbf{0}$, so $c\\mathbf{v} \\in \\text{Null}(A)$. Both closure conditions hold.
 
 The dimension of the null space is the nullity. By the [rank-nullity theorem](!/linear-algebra/matrix/rank), $\\text{rank}(A) + \\text{nullity}(A) = n$. When $A$ has full column [rank](!/linear-algebra/matrix/rank) ($\\text{rank} = n$), the null space is $\\{\\mathbf{0}\\}$ and the map $\\mathbf{x} \\mapsto A\\mathbf{x}$ is injective. When the rank is less than $n$, the null space is nontrivial and the map collapses some directions to zero.
 
@@ -1339,7 +1339,7 @@ The dimension of the null space is the nullity. By the [rank-nullity theorem](!/
 For $A = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ of rank $2$, using its $2$ rows gives nullity $2 - 2 = 0$, yet $(-1, -1, 1)$ solves $A\\mathbf{x} = \\mathbf{0}$. With $n = 3$ columns, the nullity is $3 - 2 = 1$.
 [Read more](!#pitfalls)]@
 
-The count can be read off the reduced form of $A$. Every column holds either a pivot or a free variable, the pivot columns number $\\text{rank}(A)$, and each free variable contributes one vector to a basis of the null space. With $n$ columns in all, that leaves $n - \\text{rank}(A)$ free variables.`,
+[The count can be read off the reduced form](https://calculatematrix.com/matrix-calculators/nullspace#rank-nullity) of $A$. Every column holds either a pivot or a free variable, the pivot columns number $\\text{rank}(A)$, and each free variable contributes one vector to a basis of the null space. With $n$ columns in all, that leaves $n - \\text{rank}(A)$ free variables.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1357,9 +1357,9 @@ The column space is a subspace because the span of any set of vectors is always 
 
 @academic[rule_theorem_plain:The column space answers the solvability question: the system $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b}$ lies in $\\text{Col}(A)$.]@
 
-If $\\mathbf{b}$ is a linear combination of the columns of $A$, the coefficients in that combination are a solution vector $\\mathbf{x}$. If $\\mathbf{b}$ is not in the column space, no solution exists.
+If $\\mathbf{b}$ is a linear combination of the columns of $A$, [the coefficients in that combination are a solution vector](https://linearalgebranotes.com/systems/consistency#rule-column-space) $\\mathbf{x}$. If $\\mathbf{b}$ is not in the column space, no solution exists.
 
-To find a [basis](!/linear-algebra/vector-spaces/basis) for the column space, row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ — not the echelon form — form a basis for $\\text{Col}(A)$.`,
+To find a [basis](!/linear-algebra/vector-spaces/basis) for the column space, row reduce $A$ and [identify the pivot columns](https://calculatematrix.com/matrix-calculators/column-space#method). The corresponding columns of the original matrix $A$ — not the echelon form — form a basis for $\\text{Col}(A)$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1386,14 +1386,14 @@ The row space and the null space together account for all of $\\mathbb{R}^n$. Th
     title: `Subspaces from Operations`,
     content: `New subspaces can be built from existing ones through set-theoretic operations, though not all operations preserve the subspace property.
 
-The intersection of two subspaces $W_1$ and $W_2$ is always a subspace. If $\\mathbf{u}$ and $\\mathbf{v}$ both lie in $W_1 \\cap W_2$, then $\\mathbf{u} + \\mathbf{v}$ lies in $W_1$ (since $W_1$ is a subspace) and in $W_2$ (since $W_2$ is a subspace), so it lies in $W_1 \\cap W_2$. The same argument works for scalar multiples. The intersection can be anything from $\\{\\mathbf{0}\\}$ (if the two subspaces share only the zero vector) to one of the original subspaces (if one contains the other).
+The intersection of two subspaces $W_1$ and $W_2$ [is always a subspace](https://linearalgebranotes.com/spaces/subspace#rule-intersection). If $\\mathbf{u}$ and $\\mathbf{v}$ both lie in $W_1 \\cap W_2$, then $\\mathbf{u} + \\mathbf{v}$ lies in $W_1$ (since $W_1$ is a subspace) and in $W_2$ (since $W_2$ is a subspace), so it lies in $W_1 \\cap W_2$. The same argument works for scalar multiples. The intersection can be anything from $\\{\\mathbf{0}\\}$ (if the two subspaces share only the zero vector) to one of the original subspaces (if one contains the other).
 
 @academic[fact,aside:true,width:35%:Finitely many subspaces never fill $\\mathbb{R}^n$
 Not even a million proper subspaces cover $\\mathbb{R}^n$: each is a flat slice of zero volume, and finitely many zero volumes add up to zero. With scalars $0$ and $1$ and arithmetic mod $2$ this fails, since that plane has only four points and its three lines through the origin cover them all.]@
 
-The union of two subspaces is almost never a subspace. If $\\mathbf{u} \\in W_1 \\setminus W_2$ and $\\mathbf{v} \\in W_2 \\setminus W_1$, the sum $\\mathbf{u} + \\mathbf{v}$ always lies in neither $W_1$ nor $W_2$, violating closure. The only exception is when one subspace contains the other.
+[The union of two subspaces is almost never a subspace](https://linearalgebranotes.com/spaces/subspace#rule-union). If $\\mathbf{u} \\in W_1 \\setminus W_2$ and $\\mathbf{v} \\in W_2 \\setminus W_1$, the sum $\\mathbf{u} + \\mathbf{v}$ always lies in neither $W_1$ nor $W_2$, violating closure. The only exception is when one subspace contains the other.
 
-The sum $W_1 + W_2 = \\{\\mathbf{w}_1 + \\mathbf{w}_2 : \\mathbf{w}_1 \\in W_1, \\mathbf{w}_2 \\in W_2\\}$ is always a subspace — it is the smallest subspace containing both $W_1$ and $W_2$. Its dimension satisfies
+The sum $W_1 + W_2 = \\{\\mathbf{w}_1 + \\mathbf{w}_2 : \\mathbf{w}_1 \\in W_1, \\mathbf{w}_2 \\in W_2\\}$ is always a subspace — it is the smallest subspace containing both $W_1$ and $W_2$. [Its dimension satisfies](https://calculatematrix.com/matrix-calculators/subspace-intersection#algorithm)
 
 @academic[formula_callout:Dimension Sum Formula
 $$\\dim(W_1 + W_2) = \\dim(W_1) + \\dim(W_2) - \\dim(W_1 \\cap W_2)$$
@@ -1421,7 +1421,7 @@ In that case, the solution set is the null space of $A$, which passes the subspa
 
 When $\\mathbf{b} \\neq \\mathbf{0}$, the solution set is not a subspace. It does not contain $\\mathbf{0}$ (since $A\\mathbf{0} = \\mathbf{0} \\neq \\mathbf{b}$), and it is not closed under addition or scalar multiplication in general. However, the solution set has a clean geometric description in terms of subspaces.
 
-If $\\mathbf{x}_p$ is any one particular solution to $A\\mathbf{x} = \\mathbf{b}$, then every solution has the form
+If $\\mathbf{x}_p$ is any one particular solution to $A\\mathbf{x} = \\mathbf{b}$, then [every solution has the form](https://linearalgebranotes.com/systems/structure-of-the-solution-set#rule-complete-solution)
 
 @academic[formula_callout:Solution Sets and Subspaces
 $$\\mathbf{x} = \\mathbf{x}_p + \\mathbf{x}_h$$]@

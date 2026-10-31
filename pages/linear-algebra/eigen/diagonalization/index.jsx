@@ -3099,7 +3099,7 @@ $$A = PDP^{-1}$$]@
 
 The columns of $P$ are eigenvectors of $A$. The diagonal entries of $D$ are the corresponding eigenvalues, in the same order. The factorization says that in the [basis](!/linear-algebra/vector-spaces) of eigenvectors, the [transformation](!/linear-algebra/transformations) acts by pure scaling along each axis — the most transparent possible description.
 
-Equivalently, $A$ is diagonalizable if and only if $\\mathbb{R}^n$ has a basis consisting entirely of eigenvectors of $A$. The matrix $P$ converts between the standard basis and this eigenvector basis, and $D$ is the matrix of the transformation in the eigenvector basis.`,
+Equivalently, $A$ is diagonalizable if and only if $\\mathbb{R}^n$ has [a basis consisting entirely of eigenvectors](https://linearalgebranotes.com/eigen/diagonalization#rule-diagonalizable-iff) of $A$. The matrix $P$ converts between the standard basis and this eigenvector basis, and $D$ is the matrix of the transformation in the eigenvector basis.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3146,7 +3146,7 @@ Equivalently, $A$ is diagonalizable if and only if $\\mathbb{R}^n$ has a basis c
 
   obj2: {
     title: `Constructing the Diagonalization`,
-    content: `The procedure has three steps.
+    content: `[The procedure has three steps](https://calculatematrix.com/matrix-calculators/diagonalization#walkthrough).
 
 Find all eigenvalues by solving the [characteristic equation](!/linear-algebra/eigen/characteristic-equation) $\\det(A - \\lambda I) = 0$.
 
@@ -3180,7 +3180,7 @@ A sufficient condition that is easier to check:
 @academic[formula_callout:distinct_eigenvalues_imply_diagonalizable|Distinct Eigenvalues Imply Diagonalizable|$$A \\text{ has } n \\text{ distinct eigenvalues} \\Rightarrow A \\text{ is diagonalizable}$$]@
 @academic[formulas_link:/linear-algebra/formulas#distinct_eigenvalues_imply_diagonalizable]@
 
-Eigenvectors for distinct eigenvalues are [linearly independent](!/linear-algebra/vector-spaces/linear-independence), so $n$ distinct eigenvalues produce $n$ independent eigenvectors — exactly enough for a basis.
+Eigenvectors for distinct eigenvalues are [linearly independent](!/linear-algebra/vector-spaces/linear-independence), so $n$ distinct eigenvalues produce $n$ independent eigenvectors — [exactly enough for a basis](https://linearalgebranotes.com/eigen/diagonalization#rule-distinct-diagonalizable).
 
 When eigenvalues repeat, diagonalizability depends on the eigenspaces. A repeated eigenvalue $\\lambda$ with algebraic multiplicity $k$ must have a $k$-dimensional eigenspace. If the eigenspace falls short — dimension less than $k$ — there are not enough eigenvectors, and the matrix cannot be diagonalized.
 
@@ -3192,7 +3192,7 @@ $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda 
 Calling $A = \\begin{pmatrix} 3 & 1 & 1 \\\\ 1 & 3 & 1 \\\\ 1 & 1 & 3 \\end{pmatrix}$ defective because its eigenvalues $5, 2, 2$ repeat skips the eigenspace check. Here $A - 2I$ has rank $1$, so $m_g(2) = 2 = m_a(2)$ and $A$ is diagonalizable.
 [Read more](!#pitfalls)]@
 
-The test therefore runs one eigenvalue at a time. For each repeated eigenvalue $\\lambda$, the dimension of its eigenspace is $n - \\text{rank}(A - \\lambda I)$, and this number is compared with the multiplicity of $\\lambda$ as a root of the characteristic polynomial. An eigenvalue that occurs only once needs no check, since its eigenspace always has dimension exactly $1$.`,
+The test therefore runs one eigenvalue at a time. For each repeated eigenvalue $\\lambda$, [the dimension of its eigenspace](https://linearalgebranotes.com/eigen/algebraic-and-geometric-multiplicity#rule-gm-rank) is $n - \\text{rank}(A - \\lambda I)$, and this number is compared with the multiplicity of $\\lambda$ as a root of the characteristic polynomial. An eigenvalue that occurs only once needs no check, since its eigenspace always has dimension exactly $1$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3220,7 +3220,7 @@ $$= \\frac{1}{3}\\begin{pmatrix} 625 & -1 \\\\ 1250 & 1 \\end{pmatrix}\\begin{pm
 Raising each entry of $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ to the fourth power gives $\\begin{pmatrix} 1 & 16 \\\\ 256 & 81 \\end{pmatrix}$, which is not $A^4$. Only the diagonal factor $D$ is powered entry by entry, and $PD^4P^{-1} = \\begin{pmatrix} 209 & 208 \\\\ 416 & 417 \\end{pmatrix}$.
 [Read more](!#pitfalls)]@
 
-Without diagonalization, computing $A^4$ requires three sequential matrix multiplications.
+Without diagonalization, computing $A^4$ requires [three sequential matrix multiplications](https://calculatematrix.com/matrix-calculators/matrix-power#algorithm).
 
 Those multiplications are still the quickest check on the result. Squaring $A$ gives $A^2 = \\begin{pmatrix} 9 & 8 \\\\ 16 & 17 \\end{pmatrix}$, and squaring $A^2$ lands on the same $A^4$ as the diagonal route. Each entry of these products combines a whole row with a whole column, so every entry of $A$ has a share in every entry of $A^4$.`,
     before: ``,
@@ -3242,7 +3242,7 @@ Each eigenvalue determines the behavior along its eigenvector direction. Positiv
 With $A$ from section $2$ and $\\mathbf{x}(0) = (1, 0)^T$, taking $c_1 = 1$, $c_2 = 0$ from the entries gives a solution that starts at $(1, 2)^T$. Solving $c_1(1, 2)^T + c_2(-1, 1)^T = (1, 0)^T$ gives $c_1 = \\frac{1}{3}$, $c_2 = -\\frac{2}{3}$.
 [Read more](!#pitfalls)]@
 
-The constants $c_1, \\dots, c_n$ are determined by the initial condition $\\mathbf{x}(0)$: express $\\mathbf{x}(0)$ as a linear combination of the eigenvectors and read off the coefficients.
+The constants $c_1, \\dots, c_n$ are determined by the initial condition $\\mathbf{x}(0)$: express $\\mathbf{x}(0)$ as a linear combination of the eigenvectors and [read off the coefficients](https://calculatematrix.com/vector-calculators/linear-combination#algorithm).
 
 In matrix form, finding the constants is a single linear system. Collecting them in a vector $\\mathbf{c} = (c_1, \\dots, c_n)^T$, the solution at $t = 0$ reads $P\\mathbf{c} = \\mathbf{x}(0)$, so $\\mathbf{c} = P^{-1}\\mathbf{x}(0)$ holds the coordinates of the starting point in the eigenvector basis. This is the same change of basis that the factorization $A = PDP^{-1}$ performs, applied to one vector.`,
     before: ``,
@@ -3258,7 +3258,7 @@ $$\\mathbf{x}_n = PD^nP^{-1}\\mathbf{x}_0 = c_1 \\lambda_1^n \\mathbf{v}_1 + c_2
 
 @academic[rule_plain:The dominant eigenvalue — the eigenvalue with the largest absolute value — determines the long-term growth rate.]@
 
-As $n \\to \\infty$, the term $c_i \\lambda_i^n \\mathbf{v}_i$ with the largest $|\\lambda_i|$ dominates all others.
+As $n \\to \\infty$, the term $c_i \\lambda_i^n \\mathbf{v}_i$ with the largest $|\\lambda_i|$ [dominates all others](https://linearalgebranotes.com/eigen/power-method#rule-convergence).
 
 @academic[fact,aside:true,width:35%:Rounding gives every Fibonacci number
 Since $|\\hat{\\phi}^n| \\leq 1$ and $\\sqrt{5} > 2$, the term $\\hat{\\phi}^n/\\sqrt{5}$ is always smaller than $\\frac{1}{2}$ in size. So $F_n$ is simply $\\phi^n/\\sqrt{5}$ rounded to the nearest whole number: $\\phi^{10}/\\sqrt{5} \\approx 55.004$, and $F_{10} = 55$.]@
@@ -3293,7 +3293,7 @@ Putting the eigenvectors $(1, 1)$ and $(1, -1)$ of $A = \\begin{pmatrix} 2 & 1 \
 
 Each term $\\lambda_i \\mathbf{q}_i\\mathbf{q}_i^T$ is the eigenvalue times the [projection](!/linear-algebra/orthogonality/projections) matrix onto the line spanned by $\\mathbf{q}_i$, which is the whole eigenspace only when $\\lambda_i$ is a simple eigenvalue. The matrix $A$ is decomposed into a sum of rank-one projections, weighted by eigenvalues.
 
-The spectral theorem is the most powerful diagonalization result in real linear algebra. It guarantees real eigenvalues, orthogonal eigenvectors, and a decomposition that simultaneously diagonalizes and orthogonalizes.`,
+The spectral theorem is the most powerful diagonalization result in real linear algebra. It guarantees real eigenvalues, [orthogonal eigenvectors](https://linearalgebranotes.com/eigen/spectral-theorem#rule-orthogonal-eigenvectors), and a decomposition that simultaneously diagonalizes and orthogonalizes.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3305,7 +3305,7 @@ The spectral theorem is the most powerful diagonalization result in real linear 
 @academic[formula_callout:matrix_exponential|Matrix Exponential|$$e^{At} = P\\, e^{Dt}\\, P^{-1} = P \\,\\text{diag}(e^{\\lambda_1 t}, \\ldots, e^{\\lambda_n t})\\, P^{-1}$$]@
 @academic[formulas_link:/linear-algebra/formulas#matrix_exponential]@
 
-The exponential of a diagonal matrix is the diagonal matrix of exponentials. The full matrix exponential is computed from $n$ scalar exponentials, one per eigenvalue.
+The exponential of a diagonal matrix is the diagonal matrix of exponentials. [The full matrix exponential is computed](https://calculatematrix.com/matrix-calculators/matrix-exponential#algorithm) from $n$ scalar exponentials, one per eigenvalue.
 
 The solution to $\\mathbf{x}' = A\\mathbf{x}$ with initial condition $\\mathbf{x}(0) = \\mathbf{x}_0$ is then $\\mathbf{x}(t) = e^{At}\\mathbf{x}_0$. This is the matrix-level analogue of the scalar solution $x(t) = e^{at}x_0$ to $x' = ax$.
 
@@ -3316,7 +3316,7 @@ When $A$ has [complex](!/linear-algebra/eigen/complex) eigenvalues $a \\pm bi$, 
   },
   obj9: {
     title: `When Diagonalization Fails`,
-    content: `When a matrix is not diagonalizable — when some eigenvalue has geometric multiplicity strictly less than its algebraic multiplicity — the best achievable form under [similarity](!/linear-algebra/transformations/basis-change) is the Jordan normal form.
+    content: `When a matrix is not diagonalizable — when some eigenvalue has geometric multiplicity strictly less than its algebraic multiplicity — the best achievable form under [similarity](!/linear-algebra/transformations/basis-change) is [the Jordan normal form](https://linearalgebranotes.com/eigen/jordan-normal-form#definition).
 
 The Jordan form is block diagonal, with each block a Jordan block:
 

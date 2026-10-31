@@ -3282,11 +3282,11 @@ The factorization captures the entire elimination process in a reusable form. In
     content: `@academic[fact,aside:true,width:35%:An astronomer saw the product first
 Elimination was in use for centuries before anyone wrote it as a product of two triangular matrices. The Polish astronomer Tadeusz Banachiewicz did so in 1938, and Alan Turing's 1948 paper on rounding errors recast elimination as $A = LDU$.]@
 
-Gaussian elimination is usually carried out as a list of row operations on an augmented matrix, used once to reach a solution and then set aside. Read as matrix multiplications instead, the same operations turn the procedure into a statement about $A$ itself: a product of two triangular matrices.
+Gaussian elimination is usually carried out as a list of row operations on an augmented matrix, used once to reach a solution and then set aside. [Read as matrix multiplications instead](https://linearalgebranotes.com/matrices/lu-decomposition#rule-existence), the same operations turn the procedure into a statement about $A$ itself: a product of two triangular matrices.
 
 Forward elimination on $A$ applies a sequence of row-addition [operations](!/linear-algebra/matrix/operations), each represented by an [elementary matrix](!/linear-algebra/matrix/operations) $E_i$. The product $E_k \\cdots E_2 E_1 A = U$ reduces $A$ to upper triangular form.
 
-Rearranging: $A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$. Each $E_i$ is a lower triangular matrix that adds a multiple of one row to a row below. Its inverse simply negates the multiplier. The product $L = E_1^{-1} E_2^{-1} \\cdots E_k^{-1}$ is lower triangular, with the multipliers sitting in the sub-diagonal positions.
+Rearranging: $A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$. Each $E_i$ is a lower triangular matrix that adds a multiple of one row to a row below. [Its inverse simply negates the multiplier](https://linearalgebranotes.com/matrices/elementary-matrix#rule-inverses). The product $L = E_1^{-1} E_2^{-1} \\cdots E_k^{-1}$ is lower triangular, with the multipliers sitting in the sub-diagonal positions.
 
 ## Worked Example
 
@@ -3311,7 +3311,7 @@ Verification: $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \
 Writing $-2$, $1$, $3$ below the diagonal because those are the amounts added gives $L = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & 3 & 1 \\end{pmatrix}$ and $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ -4 & -4 & 6 \\\\ 2 & -5 & 25 \\end{pmatrix} \\neq A$. The entries of $L$ are the multipliers $m_{21} = 2$, $m_{31} = -1$, $m_{32} = -3$.
 [Read more](!#pitfalls)]@
 
-Reading $L$ off the elimination takes no extra arithmetic. Each multiplier is filed at the position of the zero it created: $m_{21}$ at $(2, 1)$, $m_{31}$ at $(3, 1)$ and $m_{32}$ at $(3, 2)$. Multiplying $L$ by $U$ then reverses the row operations one by one, which is why the product rebuilds $A$ exactly.
+Reading $L$ off the elimination takes no extra arithmetic. [Each multiplier is filed at the position of the zero it created](https://calculatematrix.com/matrix-calculators/lu-decomposition#algorithm): $m_{21}$ at $(2, 1)$, $m_{31}$ at $(3, 1)$ and $m_{32}$ at $(3, 2)$. Multiplying $L$ by $U$ then reverses the row operations one by one, which is why the product rebuilds $A$ exactly.
 
 To compute the LU decomposition of your own matrix, use the [matrix calculator](!/linear-algebra/calculators/matrix).`,
     before: ``,
@@ -3333,9 +3333,9 @@ The two factors compare cleanly on the same set of attributes — diagonal, belo
   },
   obj4: {
     title: `When LU Exists Without Pivoting`,
-    content: `For an [invertible](!/linear-algebra/matrix/inverse) matrix $A$, the factorization $A = LU$ without row swaps exists if and only if every leading principal submatrix of $A$ is nonsingular. The $k$-th leading principal submatrix is the upper-left $k \\times k$ block of $A$, and its [determinant](!/linear-algebra/determinants) must be nonzero for $k = 1, 2, \\dots, n$.
+    content: `For an [invertible](!/linear-algebra/matrix/inverse) matrix $A$, the factorization $A = LU$ without row swaps [exists if and only if every leading principal submatrix](https://linearalgebranotes.com/matrices/lu-decomposition#facts) of $A$ is nonsingular. The $k$-th leading principal submatrix is the upper-left $k \\times k$ block of $A$, and its [determinant](!/linear-algebra/determinants) must be nonzero for $k = 1, 2, \\dots, n$.
 
-When a zero appears in a pivot position during elimination of an invertible matrix, no row-addition operation can produce a nonzero pivot — a row swap is required. The simple $A = LU$ factorization breaks down, and the pivoted version $PA = LU$ is needed.
+When a zero appears in a pivot position during elimination of an invertible matrix, no row-addition operation can produce a nonzero pivot — a row swap is required. The simple $A = LU$ factorization breaks down, and [the pivoted version](https://linearalgebranotes.com/matrices/lu-decomposition#rule-pa-lu) $PA = LU$ is needed.
 
 For example, $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has no $LU$ factorization without pivoting: the $(1,1)$ entry is zero, and no multiple of row $1$ can create a nonzero pivot. But after swapping the two rows, elimination proceeds immediately.`,
     before: ``,
@@ -3357,7 +3357,7 @@ where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra
 In a pivot column holding $2$ and $-5$, keeping $2$ because $2 > -5$ gives the multiplier $-5/2$, larger than $1$ in size. Partial pivoting compares $|2|$ with $|-5|$, swaps the $-5$ row up, and the multiplier becomes $2/(-5) = -2/5$.
 [Read more](!#pitfalls)]@
 
-Partial pivoting also improves numerical stability. Small pivots amplify rounding errors (dividing by a number near zero magnifies imprecision), and selecting the largest available pivot keeps the multipliers in $L$ bounded by $1$ in absolute value, limiting error accumulation.
+Partial pivoting also improves numerical stability. Small pivots amplify rounding errors (dividing by a number near zero magnifies imprecision), and [selecting the largest available pivot](https://linearalgebranotes.com/systems/partial-pivoting#rule-multipliers-bounded) keeps the multipliers in $L$ bounded by $1$ in absolute value, limiting error accumulation.
 
 In numerical software, LU with partial pivoting is the default — the unpivoted version $A = LU$ is a theoretical simplification that is rarely used in practice.`,
     before: ``,
@@ -3366,7 +3366,7 @@ In numerical software, LU with partial pivoting is the default — the unpivoted
   },
   obj6: {
     title: `Solving Systems with LU`,
-    content: `Given $PA = LU$, the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is solved in two steps:
+    content: `Given $PA = LU$, the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is [solved in two steps](https://linearalgebranotes.com/matrices/lu-decomposition#rule-two-solves):
 
 @academic[formula_callout:lu_solve_steps|LU Solve Steps|$$A\\mathbf{x} = \\mathbf{b} \\;\\Longleftrightarrow\\; \\begin{cases} L\\mathbf{y} = P\\mathbf{b} & (\\text{forward sub}) \\\\ U\\mathbf{x} = \\mathbf{y} & (\\text{back sub}) \\end{cases}$$]@
 @academic[formulas_link:/linear-algebra/formulas#lu_solve_steps]@
@@ -3397,14 +3397,14 @@ where $s$ is the number of row swaps recorded in $P$. Without pivoting ($s = 0$)
 For $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, one swap gives $U = I$, and multiplying its pivots alone gives $\\det A = 1$. With $s = 1$, $\\det A = (-1)^1 \\cdot 1 = -1$, which matches $0 \\cdot 0 - 1 \\cdot 1$.
 [Read more](!#pitfalls)]@
 
-This makes determinant computation essentially free once LU is available — just multiply the diagonal of $U$ and account for the sign. It is far more efficient than cofactor expansion, and it is the method every numerical library uses.`,
+This makes determinant computation essentially free once LU is available — [just multiply the diagonal](https://calculatematrix.com/matrix-calculators/determinant#methods) of $U$ and account for the sign. It is far more efficient than cofactor expansion, and it is the method every numerical library uses.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj8: {
     title: `LU and the Inverse`,
-    content: `To compute $A^{-1}$, solve $A\\mathbf{x}_j = \\mathbf{e}_j$ for each standard basis vector $\\mathbf{e}_j$, $j = 1, \\dots, n$. The solutions $\\mathbf{x}_1, \\dots, \\mathbf{x}_n$ are the columns of $A^{-1}$.
+    content: `To compute $A^{-1}$, solve $A\\mathbf{x}_j = \\mathbf{e}_j$ [for each standard basis vector](https://calculatematrix.com/matrix-calculators/matrix-inverse#methods) $\\mathbf{e}_j$, $j = 1, \\dots, n$. The solutions $\\mathbf{x}_1, \\dots, \\mathbf{x}_n$ are the columns of $A^{-1}$.
 
 With LU: factor $A$ once ($\\frac{2}{3}n^3$), then solve $n$ systems ($n \\times O(n^2) = O(n^3)$). Total cost: roughly $\\frac{8}{3}n^3$ counted directly, or $2n^3$ when the zeros in the columns of $I$ are used — cheaper than $n$ independent eliminations.
 
@@ -3427,7 +3427,7 @@ Eliminate below the $(1,1)$ pivot. Multipliers: $m_{21} = 1/3$, $m_{31} = 0$, $m
 @academic[formula_callout:Worked Example: 4×4 with Pivoting
 $$\\begin{pmatrix} 3 & 1 & 0 & 2 \\\\ 0 & -1/3 & 3 & -5/3 \\\\ 0 & 2 & 1 & 3 \\\\ 0 & 7/3 & 1 & -4/3 \\end{pmatrix}$$]@
 
-The largest entry in column $2$ below position $(2,2)$ is $7/3$ in row $4$. Swap rows $2$ and $4$. Continue elimination on columns $2$ and $3$ with the appropriate multipliers.
+The largest entry in column $2$ below position $(2,2)$ is $7/3$ in row $4$. Swap rows $2$ and $4$. [Continue elimination](https://calculatematrix.com/matrix-calculators/lu-decomposition#walkthrough) on columns $2$ and $3$ with the appropriate multipliers.
 
 After completing all steps, the factorization $PA = LU$ is assembled with $P$ recording all three row swaps (column $3$ needs one too, since $22/7 > 1/7$), $L$ storing all multipliers, and $U$ storing the final upper triangular result. Verification: $LU = PA$.`,
     before: ``,

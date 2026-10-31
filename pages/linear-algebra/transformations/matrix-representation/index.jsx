@@ -1114,7 +1114,7 @@ $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mat
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-This is not an optional representation — it is forced by linearity. Any vector $\\mathbf{x} = x_1\\mathbf{e}_1 + \\cdots + x_n\\mathbf{e}_n$ maps to $T(\\mathbf{x}) = x_1T(\\mathbf{e}_1) + \\cdots + x_nT(\\mathbf{e}_n)$, and this is exactly the matrix-vector product $A\\mathbf{x}$ with $A = [T(\\mathbf{e}_1) \\; T(\\mathbf{e}_2) \\; \\cdots \\; T(\\mathbf{e}_n)]$.
+This is not an optional representation — [it is forced by linearity](https://linearalgebranotes.com/maps/linear-transformation#rule-matrix-form). Any vector $\\mathbf{x} = x_1\\mathbf{e}_1 + \\cdots + x_n\\mathbf{e}_n$ maps to $T(\\mathbf{x}) = x_1T(\\mathbf{e}_1) + \\cdots + x_nT(\\mathbf{e}_n)$, and this is exactly the matrix-vector product $A\\mathbf{x}$ with $A = [T(\\mathbf{e}_1) \\; T(\\mathbf{e}_2) \\; \\cdots \\; T(\\mathbf{e}_n)]$.
 
 The converse is equally immediate: every $m \\times n$ matrix $A$ defines a linear transformation $\\mathbf{x} \\mapsto A\\mathbf{x}$. The correspondence is one-to-one — different matrices define different transformations, and different transformations produce different matrices. Linear maps $\\mathbb{R}^n \\to \\mathbb{R}^m$ and $m \\times n$ matrices are the same objects viewed from two perspectives.`,
     before: ``,
@@ -1164,7 +1164,7 @@ The converse is equally immediate: every $m \\times n$ matrix $A$ defines a line
 
   obj2: {
     title: `Constructing the Standard Matrix`,
-    content: `The recipe is direct: apply $T$ to each standard basis vector $\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n$ and arrange the results as columns:
+    content: `[The recipe is direct](https://linearalgebranotes.com/maps/matrix-of-a-linear-map#definition): apply $T$ to each standard basis vector $\\mathbf{e}_1, \\mathbf{e}_2, \\dots, \\mathbf{e}_n$ and arrange the results as columns:
 
 @academic[formula_callout:Standard Matrix
 $$A = \\bigl[\\,T(\\mathbf{e}_1) \\;\\; T(\\mathbf{e}_2) \\;\\; \\cdots \\;\\; T(\\mathbf{e}_n)\\,\\bigr]$$
@@ -1201,7 +1201,7 @@ Each image $T(\\mathbf{e}_j)$ lies in $\\mathbb{R}^2$, so it supplies a column o
     title: `Reading the Matrix`,
     content: `Every piece of information about a linear transformation is encoded in its matrix.
 
-Column $j$ tells you where $\\mathbf{e}_j$ goes. If the first column of a $2 \\times 2$ matrix is $(3, -1)^T$, then $(1, 0)$ maps to $(3, -1)$. The matrix is a complete lookup table: the image of any vector is computed by multiplication.
+Column $j$ tells you where $\\mathbf{e}_j$ goes. If the first column of a $2 \\times 2$ matrix is $(3, -1)^T$, then $(1, 0)$ maps to $(3, -1)$. The matrix is a complete lookup table: the image of any vector is [computed by multiplication](https://calculatematrix.com/matrix-calculators/matrix-multiplication#about).
 
 The size $m \\times n$ records the dimensions of codomain ($m$ rows) and domain ($n$ columns). A $3 \\times 2$ matrix represents a map from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ — it embeds a plane into three-dimensional space. A $2 \\times 3$ matrix represents a map from $\\mathbb{R}^3$ to $\\mathbb{R}^2$ — it compresses three dimensions down to two.
 
@@ -1218,7 +1218,7 @@ A square matrix ($m = n$) represents a transformation from a space to itself —
     title: `Matrices for Abstract Vector Spaces`,
     content: `For a linear transformation $T: V \\to W$ between abstract [vector spaces](!/linear-algebra/vector-spaces), the matrix depends on a choice of [basis](!/linear-algebra/vector-spaces) for both $V$ and $W$.
 
-Fix a basis $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ for $V$ and a basis $\\mathcal{C} = \\{\\mathbf{w}_1, \\dots, \\mathbf{w}_m\\}$ for $W$. Column $j$ of the matrix $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the $\\mathcal{C}$-coordinate vector of $T(\\mathbf{v}_j)$ — the scalars needed to express $T(\\mathbf{v}_j)$ as a linear combination of $\\mathbf{w}_1, \\dots, \\mathbf{w}_m$. In compact form:
+Fix a basis $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ for $V$ and a basis $\\mathcal{C} = \\{\\mathbf{w}_1, \\dots, \\mathbf{w}_m\\}$ for $W$. Column $j$ of the matrix $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the $\\mathcal{C}$-coordinate vector of $T(\\mathbf{v}_j)$ — [the scalars needed to express](https://calculatematrix.com/vector-calculators/linear-combination#about) $T(\\mathbf{v}_j)$ as a linear combination of $\\mathbf{w}_1, \\dots, \\mathbf{w}_m$. In compact form:
 
 @academic[formula_callout:Matrix Representation Abstract Bases
 $$[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\bigl[\\,[T(\\mathbf{v}_1)]_{\\mathcal{C}} \\;\\; \\cdots \\;\\; [T(\\mathbf{v}_n)]_{\\mathcal{C}}\\,\\bigr]$$
@@ -1230,7 +1230,7 @@ $$[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}} = \\bigl[\\,[T(\\mathbf{v}_1)]_{\\
 @academic[fact,aside:true,width:35%:Differentiation is a quarter-turn
 With the basis $\\{\\cos x, \\sin x\\}$, the derivative has matrix $\\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}$, a quarter-turn of the coefficient plane. Two quarter-turns give $-I$, which is $f'' = -f$, and four give $I$: the fourth derivative of $\\sin x$ is $\\sin x$ again.]@
 
-Different bases generally give different matrices for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces an equally valid, and generally different, matrix representation.
+[Different bases generally give different matrices](https://linearalgebranotes.com/spaces/change-of-basis#rule-map-change) for the same transformation. The standard matrix for maps between $\\mathbb{R}^n$ and $\\mathbb{R}^m$ is the special case where both bases are standard. For abstract spaces like polynomial or function spaces, there is no "standard" basis in the same sense — every basis choice produces an equally valid, and generally different, matrix representation.
 
 Spaces of functions work the same way. The functions $a\\cos x + b\\sin x$ form a two-dimensional space, and differentiation maps this space to itself, because the derivative of each such function is again a combination of $\\cos x$ and $\\sin x$. Its matrix is built by the same column recipe, one column for each basis function.`,
     before: ``,
@@ -1266,13 +1266,13 @@ Differentiation can also be treated as a map from $\\mathcal{P}_3$ to itself, wi
     title: `Composition Corresponds to Matrix Multiplication`,
     content: `@academic[rule_theorem_plain:If $T: U \\to V$ has matrix $A$ (relative to appropriate bases) and $S: V \\to W$ has matrix $B$, then the composition $S \\circ T: U \\to W$ has matrix $BA$.]@
 
-The order matches the composition: $S$ acts after $T$, and $B$ multiplies from the left. This is why [matrix multiplication](!/linear-algebra/matrix/operations) is defined as it is — the row-times-column rule encodes function composition.
+[The order matches the composition](https://linearalgebranotes.com/maps/composition-of-linear-maps#rule-matrix): $S$ acts after $T$, and $B$ multiplies from the left. This is why [matrix multiplication](!/linear-algebra/matrix/operations) is defined as it is — the row-times-column rule encodes function composition.
 
 @academic[pitfall,aside:true,width:35%:Multiplying in the order of application
 Writing $AB$ for $S \\circ T$ applies $S$ first. With $T$ the quarter-turn $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and $S$ the projection $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$, $AB\\mathbf{e}_1 = (0, 1)$, but $S(T(\\mathbf{e}_1)) = S(0, 1) = (0, 0)$, which is $BA\\mathbf{e}_1$.
 [Read more](!#pitfalls)]@
 
-Associativity of matrix multiplication $(BC)A = B(CA)$ mirrors associativity of composition $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. Non-commutativity of multiplication $AB \\neq BA$ mirrors non-commutativity of composition $S \\circ T \\neq T \\circ S$.
+Associativity of matrix multiplication $(BC)A = B(CA)$ [mirrors associativity of composition](https://linearalgebranotes.com/maps/composition-of-linear-maps#rule-associative) $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. Non-commutativity of multiplication $AB \\neq BA$ mirrors non-commutativity of composition $S \\circ T \\neq T \\circ S$.
 
 The identity transformation $I: V \\to V$ has the [identity matrix](!/linear-algebra/matrix/types) $I_n$ in any basis, and $I_n A = AI_n = A$ — the identity matrix is the multiplicative identity precisely because the identity transformation is the compositional identity.`,
     before: ``,
@@ -1285,7 +1285,7 @@ The identity transformation $I: V \\to V$ has the [identity matrix](!/linear-alg
 
 @academic[rule_theorem_plain:If $T$ has matrix $A$ and $T$ is invertible, then $T^{-1}$ has matrix $A^{-1}$. The transformation $T$ is invertible if and only if $A$ is [invertible](!/linear-algebra/matrix/inverse) — the geometric and algebraic conditions coincide exactly.]@
 
-Composing $T$ with $T^{-1}$ gives the identity, and multiplying $A$ by $A^{-1}$ gives $I$. The [determinant](!/linear-algebra/determinants) test ($\\det(A) \\neq 0$) simultaneously answers whether the transformation is bijective and whether the matrix has an inverse.`,
+Composing $T$ with $T^{-1}$ gives the identity, and multiplying $A$ by $A^{-1}$ gives $I$. The [determinant](!/linear-algebra/determinants) test ($\\det(A) \\neq 0$) simultaneously answers whether the transformation is bijective and [whether the matrix has an inverse](https://calculatematrix.com/matrix-calculators/matrix-inverse#about).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1294,7 +1294,7 @@ Composing $T$ with $T^{-1}$ gives the identity, and multiplying $A$ by $A^{-1}$ 
     title: `The Matrix Encodes Everything`,
     content: `Once a linear transformation is represented by a matrix, every property of the transformation becomes a matrix computation.
 
-The [rank](!/linear-algebra/matrix/rank) of $A$ equals the dimension of the [image](!/linear-algebra/transformations/image-kernel) of $T$. The nullity equals the dimension of the kernel. The [determinant](!/linear-algebra/determinants) (for square matrices) tells whether $T$ is invertible and how it scales volumes. The [eigenvalues](!/linear-algebra/eigen) reveal the scaling factors along invariant directions. The [trace](!/linear-algebra/matrix/trace) equals the sum of the eigenvalues. The [singular values](!/linear-algebra/decompositions/svd) measure the maximum stretching in each orthogonal direction.
+The [rank](!/linear-algebra/matrix/rank) of $A$ equals the dimension of the [image](!/linear-algebra/transformations/image-kernel) of $T$. [The nullity equals the dimension of the kernel](https://linearalgebranotes.com/maps/matrix-of-a-linear-map#rule-rank-nullity-match). The [determinant](!/linear-algebra/determinants) (for square matrices) tells whether $T$ is invertible and how it scales volumes. The [eigenvalues](!/linear-algebra/eigen) reveal the scaling factors along invariant directions. The [trace](!/linear-algebra/matrix/trace) equals [the sum of the eigenvalues](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-trace-sum). The [singular values](!/linear-algebra/decompositions/svd) measure the maximum stretching in each orthogonal direction.
 
 This is why matrices dominate computational linear algebra. Abstract transformations are conceptually powerful, but matrices are what computers operate on. The matrix representation converts every question about a linear map into a question about an array of numbers — and arrays of numbers are what algorithms are designed to handle.`,
     before: ``,

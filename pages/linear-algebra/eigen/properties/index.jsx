@@ -1310,7 +1310,7 @@ const ciTwoMatricesTable = ciTableOpen(['matrix', 'characteristic polynomial', '
 const sectionsContent = {
   obj1: {
     title: `Trace and Eigenvalues`,
-    content: `The [trace](!/linear-algebra/matrix/trace) of $A$ equals the sum of its eigenvalues, counted with algebraic multiplicity:
+    content: `The [trace](!/linear-algebra/matrix/trace) of $A$ [equals the sum of its eigenvalues](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-trace-sum), counted with algebraic multiplicity:
 
 @academic[formula_callout:Trace and Eigenvalues
 $$\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$$]@
@@ -1321,14 +1321,14 @@ This follows from the [characteristic polynomial](!/linear-algebra/eigen/charact
 Taking the diagonal entries $1, 3$ of $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ as its eigenvalues passes the trace test, $1 + 3 = 4$, but their product $3$ is not $\\det(A) = -5$. The eigenvalues are $5$ and $-1$.
 [Read more](!#pitfalls)]@
 
-The trace provides a quick consistency check. A $3 \\times 3$ matrix with diagonal entries $7, -2, 4$ has trace $9$. If the eigenvalues are computed as $5, 3, 1$, the sum is $9$ — consistent. If the sum does not match the trace, a computation error has occurred.`,
+The trace provides [a quick consistency check](https://calculatematrix.com/matrix-calculators/eigenvalues#properties). A $3 \\times 3$ matrix with diagonal entries $7, -2, 4$ has trace $9$. If the eigenvalues are computed as $5, 3, 1$, the sum is $9$ — consistent. If the sum does not match the trace, a computation error has occurred.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj2: {
     title: `Determinant and Eigenvalues`,
-    content: `The [determinant](!/linear-algebra/determinants) of $A$ equals the product of its eigenvalues:
+    content: `The [determinant](!/linear-algebra/determinants) of $A$ [equals the product of its eigenvalues](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-det-product):
 
 @academic[formula_callout:Determinant Product of Eigenvalues
 $$\\det(A) = \\lambda_1 \\cdot \\lambda_2 \\cdots \\lambda_n$$
@@ -1358,7 +1358,7 @@ These two numbers always satisfy
 @academic[formula_callout:multiplicity_inequality|Multiplicity Inequality|$$1 \\leq m_g(\\lambda) \\leq m_a(\\lambda)$$]@
 @academic[formulas_link:/linear-algebra/formulas#multiplicity_inequality]@
 
-The geometric multiplicity is at least $1$ because the eigenspace must contain at least one nonzero eigenvector. It cannot exceed the algebraic multiplicity — a fact whose proof requires the Jordan normal form or the theory of invariant subspaces.
+The geometric multiplicity is at least $1$ because the eigenspace must contain at least one nonzero eigenvector. [It cannot exceed the algebraic multiplicity](https://linearalgebranotes.com/eigen/algebraic-and-geometric-multiplicity#rule-bounds) — a fact whose proof requires the Jordan normal form or the theory of invariant subspaces.
 
 When $m_g = m_a$ for every eigenvalue, the matrix is [diagonalizable](!/linear-algebra/eigen/diagonalization) — there are enough independent eigenvectors to form a [basis](!/linear-algebra/vector-spaces). When $m_g < m_a$ for any eigenvalue, the matrix is defective and cannot be diagonalized.
 
@@ -1413,7 +1413,7 @@ For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the eigenvalue $\\la
   },
   obj4: {
     title: `Eigenvalues of the Inverse`,
-    content: `If $\\lambda$ is an eigenvalue of an invertible matrix $A$ with eigenvector $\\mathbf{v}$, then the eigenvector is preserved and the eigenvalue inverts:
+    content: `If $\\lambda$ is an eigenvalue of an invertible matrix $A$ with eigenvector $\\mathbf{v}$, then [the eigenvector is preserved and the eigenvalue inverts](https://linearalgebranotes.com/eigen/eigenvalue-and-eigenvector#rule-inverse):
 
 @academic[formula_callout:eigenvalue_of_inverse|Eigenvalue of Inverse|$$A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow A^{-1}\\mathbf{v} = \\frac{1}{\\lambda}\\mathbf{v}$$]@
 @academic[formulas_link:/linear-algebra/formulas#eigenvalue_of_inverse]@
@@ -1520,7 +1520,7 @@ Real [skew-symmetric](!/linear-algebra/matrix/types) matrices have eigenvalues t
 
 [Involutory](!/linear-algebra/matrix/types) matrices ($A^2 = I$) have eigenvalues satisfying $\\lambda^2 = 1$, so $\\lambda = \\pm 1$.
 
-Positive definite [symmetric](!/linear-algebra/matrix/types) matrices have all eigenvalues strictly positive.`,
+Positive definite [symmetric](!/linear-algebra/matrix/types) matrices [have all eigenvalues strictly positive](https://linearalgebranotes.com/matrices/positive-definite-matrix#rule-eigenvalue-test).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1532,7 +1532,7 @@ Positive definite [symmetric](!/linear-algebra/matrix/types) matrices have all e
 @academic[formula_callout:independence_of_distinct_eigenvectors|Independence of Distinct Eigenvectors|$$\\lambda_1, \\ldots, \\lambda_k \\text{ distinct} \\Rightarrow \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} \\text{ linearly independent}$$]@
 @academic[formulas_link:/linear-algebra/formulas#independence_of_distinct_eigenvectors]@
 
-The proof proceeds by induction. For a single eigenvector, independence is trivial (one nonzero vector is independent). Suppose $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{k-1}\\}$ are independent eigenvectors with distinct eigenvalues. If $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$, multiply both sides by $A$ to get $c_1\\lambda_1\\mathbf{v}_1 + \\cdots + c_k\\lambda_k\\mathbf{v}_k = \\mathbf{0}$. Subtract $\\lambda_k$ times the original equation: $c_1(\\lambda_1 - \\lambda_k)\\mathbf{v}_1 + \\cdots + c_{k-1}(\\lambda_{k-1} - \\lambda_k)\\mathbf{v}_{k-1} = \\mathbf{0}$. By the induction hypothesis, all coefficients $c_i(\\lambda_i - \\lambda_k) = 0$. Since the eigenvalues are distinct, $\\lambda_i - \\lambda_k \\neq 0$, forcing $c_i = 0$ for all $i < k$. Then the original equation gives $c_k\\mathbf{v}_k = \\mathbf{0}$, so $c_k = 0$.
+[The proof proceeds by induction](https://linearalgebranotes.com/eigen/diagonalization#rule-distinct-independent). For a single eigenvector, independence is trivial (one nonzero vector is independent). Suppose $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{k-1}\\}$ are independent eigenvectors with distinct eigenvalues. If $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$, multiply both sides by $A$ to get $c_1\\lambda_1\\mathbf{v}_1 + \\cdots + c_k\\lambda_k\\mathbf{v}_k = \\mathbf{0}$. Subtract $\\lambda_k$ times the original equation: $c_1(\\lambda_1 - \\lambda_k)\\mathbf{v}_1 + \\cdots + c_{k-1}(\\lambda_{k-1} - \\lambda_k)\\mathbf{v}_{k-1} = \\mathbf{0}$. By the induction hypothesis, all coefficients $c_i(\\lambda_i - \\lambda_k) = 0$. Since the eigenvalues are distinct, $\\lambda_i - \\lambda_k \\neq 0$, forcing $c_i = 0$ for all $i < k$. Then the original equation gives $c_k\\mathbf{v}_k = \\mathbf{0}$, so $c_k = 0$.
 
 The immediate consequence: a matrix with $n$ distinct eigenvalues has $n$ independent eigenvectors and is automatically [diagonalizable](!/linear-algebra/eigen/diagonalization). Distinctness of eigenvalues is a sufficient condition for diagonalizability, though not a necessary one.`,
     before: ``,
@@ -1582,7 +1582,7 @@ Power iteration turns this into an algorithm. Start with any vector having $c_1 
 @academic[formula_callout:The Dominant Eigenvalue and Power Iteration
 $$R(\\mathbf{x}) = \\frac{\\mathbf{x}^T A\\,\\mathbf{x}}{\\mathbf{x}^T \\mathbf{x}}$$]@
 
-which equals $\\lambda$ whenever $\\mathbf{x}$ is an eigenvector for $\\lambda$, and for a [symmetric matrix](!/linear-algebra/decompositions/spectral) always lies between the smallest and largest eigenvalues. Convergence is geometric with ratio $|\\lambda_2 / \\lambda_1|$: a wide gap between the top two eigenvalues means fast convergence, a narrow one means slow.
+which equals $\\lambda$ whenever $\\mathbf{x}$ is an eigenvector for $\\lambda$, and for a [symmetric matrix](!/linear-algebra/decompositions/spectral) always lies between the smallest and largest eigenvalues. [Convergence is geometric](https://linearalgebranotes.com/eigen/power-method#rule-convergence) with ratio $|\\lambda_2 / \\lambda_1|$: a wide gap between the top two eigenvalues means fast convergence, a narrow one means slow.
 
 Two things break the method. If $|\\lambda_1| = |\\lambda_2|$, as with a real matrix whose top eigenvalues form a complex conjugate pair, or with eigenvalues $\\lambda$ and $-\\lambda$, the iterates never settle. And if the starting vector has no $\\mathbf{v}_1$ component, the theory sends the iterates to the next eigenvector instead, though rounding error usually reintroduces a small $\\mathbf{v}_1$ component and rescues the method. Applying the same idea to $A^{-1}$ finds the eigenvalue of smallest modulus, and applying it to $(A - \\mu I)^{-1}$ finds the eigenvalue nearest a chosen shift $\\mu$, using the inverse and shift rules from earlier on this page.
 
@@ -1601,7 +1601,7 @@ The trace is the sum of the diagonal entries and also the sum of the eigenvalues
 
 Wrong working: for $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$, the eigenvalues are read as $1$ and $3$.
 
-Right working: solve the characteristic equation.
+Right working: [solve the characteristic equation](https://calculatematrix.com/matrix-calculators/characteristic-polynomial#walkthrough).
 $$\\det(A - \\lambda I) = (1 - \\lambda)(3 - \\lambda) - 8 = \\lambda^2 - 4\\lambda - 5 = (\\lambda - 5)(\\lambda + 1)$$
 so the eigenvalues are $5$ and $-1$.
 
@@ -1649,7 +1649,7 @@ so the only matrix similar to $2I$ is $2I$ itself, and $A \\neq 2I$. The geometr
 
 Why it happens: the theorem lists many quantities that similar matrices share, and it is natural to expect such a long list to pin the matrix down. The characteristic polynomial does not record the geometric multiplicities.
 
-How to check: compare the geometric multiplicities as well as the eigenvalues. For two diagonalizable matrices, the same eigenvalues with the same multiplicities do imply similarity, since both are similar to the same diagonal matrix.`,
+How to check: [compare the geometric multiplicities](https://calculatematrix.com/matrix-calculators/jordan-form#properties) as well as the eigenvalues. For two diagonalizable matrices, the same eigenvalues with the same multiplicities do imply similarity, since both are similar to the same diagonal matrix.`,
     before: ``,
     after: ``,
     link: ``,

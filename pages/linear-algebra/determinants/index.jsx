@@ -963,7 +963,7 @@ Fully expanded, the determinant is a sum of $n!$ signed products. Remove every m
 
 The signed sub-determinants $(-1)^{i+j} M_{ij}$ are called [cofactors](!/linear-algebra/determinants/cofactors), and the freedom to choose the expansion axis is what makes the formula practical: a row or column with many zeros dramatically reduces the number of terms.
 
-The recursive nature of this definition means the computational cost grows factorially. An $n \\times n$ determinant via cofactor expansion requires on the order of $n!$ arithmetic operations. For $n = 5$ that is $120$ operations; for $n = 10$ it is over $3.6$ million. This explosion is what motivates the row-reduction approach, which accomplishes the same task in $O(n^3)$ operations by exploiting how [row operations](!/linear-algebra/determinants/properties) affect the determinant.
+The recursive nature of this definition means the computational cost grows factorially. An $n \\times n$ determinant via cofactor expansion requires on the order of $n!$ arithmetic operations. For $n = 5$ that is $120$ operations; for $n = 10$ it is over $3.6$ million. This explosion is what motivates [the row-reduction approach](https://calculatematrix.com/matrix-calculators/determinant#methods), which accomplishes the same task in $O(n^3)$ operations by exploiting how [row operations](!/linear-algebra/determinants/properties) affect the determinant.
 
 @academic[punchline:Cofactor expansion defines the determinant in every size, but its cost grows like $n!$, so large ones are computed by row reduction.]@`,
     before: ``,
@@ -976,7 +976,7 @@ The recursive nature of this definition means the computational cost grows facto
 
 @academic[rule_theorem_plain:When $\\det(A) = 0$, the columns of $A$ are [linearly dependent](!/linear-algebra/vector-spaces/linear-independence) — at least one column can be written as a linear combination of the others.]@
 
-The homogeneous system $Ax = \\mathbf{0}$ has nontrivial solutions, the rank of $A$ is strictly less than $n$, and the matrix maps $\\mathbb{R}^n$ onto a lower-dimensional subspace. Geometrically, the transformation collapses at least one dimension, flattening regions of positive volume down to zero volume.
+The homogeneous system $Ax = \\mathbf{0}$ [has nontrivial solutions](https://linearalgebranotes.com/systems/homogeneous-systems#rule-nontrivial-iff), the rank of $A$ is strictly less than $n$, and the matrix maps $\\mathbb{R}^n$ onto a lower-dimensional subspace. Geometrically, the transformation collapses at least one dimension, flattening regions of positive volume down to zero volume.
 
 When $\\det(A) \\neq 0$, everything works. The columns of $A$ form a [basis](!/linear-algebra/vector-spaces/basis) for $\\mathbb{R}^n$. The system $Ax = \\mathbf{b}$ has exactly one solution for every right-hand side $\\mathbf{b}$. The matrix has an inverse $A^{-1}$, and the linear map $x \\mapsto Ax$ is a bijection from $\\mathbb{R}^n$ to itself that stretches or compresses volumes by the factor $|\\det(A)|$ without collapsing any dimension.
 
@@ -1036,7 +1036,7 @@ $$C_{ij} = (-1)^{i+j} M_{ij}$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The sign factor $(-1)^{i+j}$ follows a checkerboard pattern starting with $+$ at position $(1,1)$:
+The sign factor $(-1)^{i+j}$ [follows a checkerboard pattern](https://calculatematrix.com/matrix-calculators/cofactor#sign-pattern) starting with $+$ at position $(1,1)$:
 
 @academic[formula_callout:Expanding by Minors and Cofactors
 $$\\begin{pmatrix} + & - & + & - & \\cdots \\\\ - & + & - & + & \\cdots \\\\ + & - & + & - & \\cdots \\\\ \\vdots & & & & \\ddots \\end{pmatrix}$$]@
@@ -1058,13 +1058,13 @@ Both give the same result regardless of which row or column is chosen. Collectin
   },
   obj8: {
     title: `How Row Operations Affect the Determinant`,
-    content: `The three elementary row operations interact with the determinant in simple, predictable ways. Swapping two rows multiplies the determinant by $-1$. Multiplying a row by a nonzero scalar $k$ multiplies the determinant by $k$. Adding a scalar multiple of one row to a different row leaves the determinant unchanged.
+    content: `The three elementary row operations [interact with the determinant in simple, predictable ways](https://linearalgebranotes.com/matrices/elementary-matrix#rule-determinants). Swapping two rows multiplies the determinant by $-1$. Multiplying a row by a nonzero scalar $k$ multiplies the determinant by $k$. Adding a scalar multiple of one row to a different row leaves the determinant unchanged.
 
 @academic[pitfall,aside:true,width:35%:Scaling the whole matrix once
 Writing $\\det(2A) = 2\\det(A)$ for $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$ gives $4$. Doubling $A$ doubles both rows, so $\\det(2A) = 2^2 \\cdot 2 = 8$; in general $\\det(kA) = k^n \\det(A)$.
 [Read more](!#pitfalls)]@
 
-These three rules turn [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) into a determinant-computing algorithm. Reduce $A$ to upper triangular form using row operations, tracking every swap and every scaling. The determinant of the resulting triangular matrix is the product of its diagonal entries. Adjusting for the tracked sign flips and scale factors gives $\\det(A)$.
+These three rules turn [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) into a determinant-computing algorithm. Reduce $A$ to upper triangular form [using row operations](https://calculatematrix.com/matrix-calculators/ref#about), tracking every swap and every scaling. The determinant of the resulting triangular matrix is the product of its diagonal entries. Adjusting for the tracked sign flips and scale factors gives $\\det(A)$.
 
 This approach requires on the order of $n^3$ arithmetic operations — a dramatic improvement over the $n!$ cost of cofactor expansion. For any matrix larger than $4 \\times 4$, row reduction is the practical method.
 
@@ -1086,7 +1086,7 @@ The complete set of algebraic [properties](!/linear-algebra/determinants/propert
     title: `Area, Volume, and Orientation`,
     content: `The determinant has a direct geometric meaning: it measures how a matrix, viewed as a [linear transformation](!/linear-algebra/transformations), distorts size and orientation.
 
-In two dimensions, $|\\det(A)|$ equals the area of the parallelogram spanned by the columns of $A$. In three dimensions, $|\\det(A)|$ equals the volume of the parallelepiped spanned by the three column vectors, which also equals the scalar triple product $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$.
+In two dimensions, $|\\det(A)|$ equals the area of the parallelogram spanned by the columns of $A$. In three dimensions, $|\\det(A)|$ equals [the volume of the parallelepiped spanned by the three column vectors](https://linearalgebranotes.com/vectors/scalar-triple-product#rule-volume), which also equals the scalar triple product $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$.
 
 @academic[rule_theorem_plain:In $n$ dimensions, $|\\det(A)|$ is the factor by which the map $x \\mapsto Ax$ scales $n$-dimensional volumes.]@
 
@@ -1104,7 +1104,7 @@ Rotation matrices always have determinant $+1$. Reflection matrices always have 
 @academic[fact,aside:true,width:35%:Determinants came before matrices
 Seki Takakazu in Japan in 1683 and Leibniz in Europe in 1693 each found them while eliminating unknowns from systems of equations, as the expression that decides whether the equations can hold together. Matrices became objects of their own only in the 1850s, more than 150 years later.]@
 
-Cramer's rule solves a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ by expressing each component of the solution as a ratio of two determinants: $x_i = \\det(A_i)/\\det(A)$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$. The adjugate formula gives the inverse of $A$ as $A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$, writing every entry of the inverse explicitly in terms of cofactors. In the $2 \\times 2$ case, this reduces to the familiar swap-and-negate formula.
+[Cramer's rule](https://linearalgebranotes.com/systems/cramers-rule#rule-cramer) solves a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ by expressing each component of the solution as a ratio of two determinants: $x_i = \\det(A_i)/\\det(A)$, where $A_i$ is $A$ with its $i$-th column replaced by $\\mathbf{b}$. [The adjugate formula](https://linearalgebranotes.com/matrices/adjugate#rule-inverse-formula) gives the inverse of $A$ as $A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$, writing every entry of the inverse explicitly in terms of cofactors. In the $2 \\times 2$ case, this reduces to the familiar swap-and-negate formula.
 
 The [cross product](!/linear-algebra/vectors/cross-product) $\\mathbf{a} \\times \\mathbf{b}$ in $\\mathbb{R}^3$ can be computed as a symbolic $3 \\times 3$ determinant with the unit vectors $\\hat{i}, \\hat{j}, \\hat{k}$ in the first row. The characteristic polynomial $\\det(A - \\lambda I)$ defines the [eigenvalues](!/linear-algebra/eigen) of $A$ — its roots are precisely the scalars $\\lambda$ for which $A - \\lambda I$ is singular. The Wronskian, a determinant built from functions and their derivatives, tests linear independence in the setting of differential equations.
 
@@ -1461,7 +1461,7 @@ export default function DeterminantsPage({faqQuestions, detRowOpTree, singularCa
       {
         id: 'formula',
         lead: `The other account is a short calculation on the four entries.`,
-        content: `Multiply the two entries on the main diagonal, multiply the other two, and subtract: $ad - bc = 3 \\cdot 5 - 1 \\cdot 2 = 13$. No drawing, no geometry — four numbers and one subtraction. Section 2 takes this formula as its starting point.`,
+        content: `[Multiply the two entries on the main diagonal, multiply the other two, and subtract](https://calculatematrix.com/matrix-calculators/determinant#formula): $ad - bc = 3 \\cdot 5 - 1 \\cdot 2 = 13$. No drawing, no geometry — four numbers and one subtraction. Section 2 takes this formula as its starting point.`,
       },
       {
         id: 'example',
@@ -1496,7 +1496,7 @@ export default function DeterminantsPage({faqQuestions, detRowOpTree, singularCa
       {
         id: 'caveat',
         lead: `Use the formula to compute and the area to understand.`,
-        content: `The formula is what you calculate with, and for larger matrices it grows into the expansions of the sections below. The area is what explains the results. A zero determinant means the columns have collapsed onto a line (a plane, in 3D), so the map $x \\mapsto Ax$ squashes space flat and cannot be undone: $A$ is [invertible](!/linear-algebra/matrix/inverse) if and only if $\\det(A) \\neq 0$. The determinant also determines whether that map preserves or reverses orientation, and appears in explicit formulas for eigenvalues, matrix inverses, and solutions to linear systems.`,
+        content: `The formula is what you calculate with, and for larger matrices it grows into the expansions of the sections below. The area is what explains the results. A zero determinant means the columns have collapsed onto a line (a plane, in 3D), so the map $x \\mapsto Ax$ squashes space flat and [cannot be undone](https://linearalgebranotes.com/matrices/determinant#rule-invertible): $A$ is [invertible](!/linear-algebra/matrix/inverse) if and only if $\\det(A) \\neq 0$. The determinant also determines whether that map preserves or reverses orientation, and appears in explicit formulas for eigenvalues, matrix inverses, and solutions to linear systems.`,
       },
       {
         id: 'exit',

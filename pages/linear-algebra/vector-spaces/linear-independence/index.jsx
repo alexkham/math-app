@@ -1721,7 +1721,7 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
     title: `Geometric Interpretation in Rⁿ`,
     content: `In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, independence has clean geometric meaning.
 
-Two vectors in $\\mathbb{R}^2$ are dependent if and only if they are parallel — one is a scalar multiple of the other. They point along the same line through the origin, so neither adds a direction that the other does not already cover. Two non-parallel vectors are independent and [span](!/linear-algebra/vector-spaces/span) all of $\\mathbb{R}^2$.
+Two vectors in $\\mathbb{R}^2$ [are dependent if and only if they are parallel](https://linearalgebranotes.com/vectors/linear-independence#rule-two-vectors) — one is a scalar multiple of the other. They point along the same line through the origin, so neither adds a direction that the other does not already cover. Two non-parallel vectors are independent and [span](!/linear-algebra/vector-spaces/span) all of $\\mathbb{R}^2$.
 
 @academic[pitfall,aside:true,width:35%:Checking only pairs
 Calling $(1, 0, 0)$, $(0, 1, 0)$, $(1, 1, 0)$ independent because no two are parallel misses $(1, 1, 0) = (1, 0, 0) + (0, 1, 0)$. All three lie in the plane $z = 0$, so the set is dependent.
@@ -1731,14 +1731,14 @@ Three vectors in $\\mathbb{R}^3$ are dependent if and only if they are coplanar 
 
 @academic[rule_theorem_plain:In $\\mathbb{R}^n$, at most $n$ vectors can be independent. A set of $n + 1$ or more vectors in $\\mathbb{R}^n$ is automatically dependent, regardless of what the vectors are.]@
 
-This is because $\\mathbb{R}^n$ has [dimension](!/linear-algebra/vector-spaces/dimension) $n$, and no independent set can exceed the dimension.`,
+This is because $\\mathbb{R}^n$ has [dimension](!/linear-algebra/vector-spaces/dimension) $n$, and [no independent set can exceed the dimension](https://linearalgebranotes.com/vectors/linear-independence#rule-too-many).`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj3: {
     title: `Testing Independence: The Homogeneous System`,
-    content: `For vectors in $\\mathbb{R}^m$, independence can be tested by row reduction. Arrange $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ as columns of an $m \\times k$ [matrix](!/linear-algebra/matrix) $A$. The independence equation $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ is equivalent to the homogeneous system $A\\mathbf{c} = \\mathbf{0}$:
+    content: `For vectors in $\\mathbb{R}^m$, [independence can be tested by row reduction](https://calculatematrix.com/vector-calculators/linear-independence#algorithm). Arrange $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ as columns of an $m \\times k$ [matrix](!/linear-algebra/matrix) $A$. The independence equation $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ is equivalent to the homogeneous system $A\\mathbf{c} = \\mathbf{0}$:
 
 @academic[formula_callout:Linear Independence Matrix Test
 $$\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} \\subset \\mathbb{R}^m \\text{ is independent} \\iff A\\mathbf{c} = \\mathbf{0} \\text{ has only the trivial solution}$$
@@ -1747,7 +1747,7 @@ $$\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} \\subset \\mathbb{R}^m \\text{ is 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Row reduce $A$. The vectors are independent if and only if every column contains a pivot — that is, there are no free variables. If any column lacks a pivot, the corresponding variable is free, a nontrivial solution exists, and the set is dependent.
+Row reduce $A$. The vectors are independent if and only if every column contains a pivot — that is, there are no free variables. If any column lacks a pivot, the corresponding variable is free, [a nontrivial solution exists](https://linearalgebranotes.com/systems/homogeneous-systems#rule-nontrivial-iff), and the set is dependent.
 
 ## Worked Example: Independent Set
 
@@ -1773,7 +1773,7 @@ Test $\\mathbf{v}_1 = (1, 0, 2)$, $\\mathbf{v}_2 = (3, 1, 4)$, $\\mathbf{v}_3 = 
   },
   obj4: {
     title: `Testing Independence: The Determinant`,
-    content: `When the number of vectors equals the dimension of the space, the independence question reduces to a single number. Arrange $n$ vectors in $\\mathbb{R}^n$ as columns of an $n \\times n$ matrix $A$. The set is independent precisely when this matrix has nonzero determinant:
+    content: `When the number of vectors equals the dimension of the space, the independence question reduces to a single number. Arrange $n$ vectors in $\\mathbb{R}^n$ as columns of an $n \\times n$ matrix $A$. The set is independent precisely when [this matrix has nonzero determinant](https://calculatematrix.com/matrix-calculators/determinant#about):
 
 @academic[formula_callout:Linear Independence Determinant Test
 $$\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\subset \\mathbb{R}^n \\text{ is independent} \\iff \\det[\\mathbf{v}_1\\ \\cdots\\ \\mathbf{v}_n] \\neq 0$$
@@ -1802,14 +1802,14 @@ The determinant test applies only to the square case — exactly $n$ vectors in 
     title: `Properties of Independent Sets`,
     content: `Several structural facts constrain how independence behaves under set operations.
 
-Every subset of an independent set is independent. If no nontrivial combination of $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ gives $\\mathbf{0}$, then no nontrivial combination of a subset can either — fewer vectors means fewer coefficients, all of which must still be zero.
+[Every subset of an independent set is independent](https://linearalgebranotes.com/vectors/linear-independence#rule-subsets). If no nontrivial combination of $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ gives $\\mathbf{0}$, then no nontrivial combination of a subset can either — fewer vectors means fewer coefficients, all of which must still be zero.
 
-Adding a vector $\\mathbf{w}$ to an independent set $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ preserves independence if and only if $\\mathbf{w} \\notin \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$. If $\\mathbf{w}$ is already in the span, it can be written as a combination of the existing vectors, creating a dependence relation. If it is outside the span, no such relation exists.
+Adding a vector $\\mathbf{w}$ to an independent set $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ [preserves independence if and only if](https://linearalgebranotes.com/vectors/linear-independence#rule-adding-vector) $\\mathbf{w} \\notin \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$. If $\\mathbf{w}$ is already in the span, it can be written as a combination of the existing vectors, creating a dependence relation. If it is outside the span, no such relation exists.
 
 @academic[fact,aside:true,width:35%:Infinitely many, any three independent
 The vectors $(1, t, t^2)$, one for each real $t$, point in infinitely many directions of $\\mathbb{R}^3$, yet any three with different $t$ are independent. For $t = a, b, c$ their determinant is $(b - a)(c - a)(c - b)$, never zero.]@
 
-In an $n$-dimensional space, any independent set has at most $n$ elements. An independent set with exactly $n$ elements is automatically a [basis](!/linear-algebra/vector-spaces/basis) — the spanning condition comes for free once the count reaches the dimension. An independent set with fewer than $n$ elements can always be extended to a basis by adding more vectors.
+In an $n$-dimensional space, any independent set has at most $n$ elements. An independent set with exactly $n$ elements is automatically a [basis](!/linear-algebra/vector-spaces/basis) — the spanning condition comes for free once the count reaches the dimension. An independent set with fewer than $n$ elements [can always be extended to a basis](https://calculatematrix.com/vector-calculators/extend-to-basis#algorithm) by adding more vectors.
 
 Removing a vector from a dependent set may or may not restore independence. It depends on which vector is removed and which vectors participate in the dependence relation.`,
     before: ``,
@@ -1820,7 +1820,7 @@ Removing a vector from a dependent set may or may not restore independence. It d
     title: `Dependence Relations`,
     content: `When a set is dependent, the nontrivial solution $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ is called a dependence relation. It identifies which vectors participate in the redundancy: those with nonzero coefficients.
 
-A common misconception is that dependence means every vector in the set is a combination of the others. This is false. Consider $\\{(1, 0), (2, 0), (0, 1)\\}$ in $\\mathbb{R}^2$. The set is dependent because $(2, 0) = 2(1, 0)$, but $(0, 1)$ is not a combination of the other two — every combination of $(1, 0)$ and $(2, 0)$ has second entry $0$.
+[A common misconception](https://linearalgebranotes.com/vectors/linear-independence#rule-one-is-combination) is that dependence means every vector in the set is a combination of the others. This is false. Consider $\\{(1, 0), (2, 0), (0, 1)\\}$ in $\\mathbb{R}^2$. The set is dependent because $(2, 0) = 2(1, 0)$, but $(0, 1)$ is not a combination of the other two — every combination of $(1, 0)$ and $(2, 0)$ has second entry $0$.
 
 The dependence relation $2(1, 0) + (-1)(2, 0) + 0(0, 1) = (0, 0)$ gives $(0, 1)$ the coefficient $0$, so it does not participate. Only a participating vector can be "removed" without shrinking the span: here $(1, 0)$ or $(2, 0)$, but never $(0, 1)$, whose removal shrinks the span to the $x$-axis.
 

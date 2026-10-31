@@ -2589,7 +2589,7 @@ A $5 \\times 3$ matrix with rank $3$ uses all three of its column directions. A 
 
 The row rank is the dimension of the row space — the subspace of $\\mathbb{R}^n$ spanned by the rows. It counts the maximum number of linearly independent rows.
 
-A fundamental theorem states that these two numbers are always equal:
+[A fundamental theorem](https://linearalgebranotes.com/matrices/rank#rule-row-column) states that these two numbers are always equal:
 
 @academic[formula_callout:Column Rank and Row Rank
 $$\\text{column rank of } A = \\text{row rank of } A$$]@
@@ -2599,7 +2599,7 @@ This common value is called the rank of $A$, written $\\text{rank}(A)$ or $\\tex
 @academic[fact,aside:true,width:35%:A million entries, rank 2
 The $1000 \\times 1000$ matrix holding $1, 2, \\ldots, 1{,}000{,}000$ in reading order has rank $2$. Each row is the first row plus a multiple of the all-ones row, and each column is the first column plus a multiple of the all-ones column.]@
 
-The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows live in $\\mathbb{R}^n$ — two different spaces, potentially of different dimensions. The proof goes through row reduction: elementary row operations do not change the row space, and in [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form), the number of nonzero rows (row rank) equals the number of pivot columns (column rank). Since row operations preserve both counts, the equality holds for the original matrix.
+The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows live in $\\mathbb{R}^n$ — two different spaces, potentially of different dimensions. The proof goes through row reduction: [elementary row operations do not change the row space](https://linearalgebranotes.com/spaces/row-space#rule-elimination-keeps), and in [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form), the number of nonzero rows (row rank) equals the number of pivot columns (column rank). Since row operations preserve both counts, the equality holds for the original matrix.
 
 @academic[punchline:Rows and columns live in different spaces, yet they always hold the same number of independent directions.]@`,
     before: ``,
@@ -2608,7 +2608,7 @@ The equality is not obvious. The columns live in $\\mathbb{R}^m$ and the rows li
   },
   obj3: {
     title: `Computing Rank via Row Reduction`,
-    content: `The standard method for finding the rank of a matrix is to reduce it to row echelon form and count the pivot positions.
+    content: `The standard method for finding the rank of a matrix is to [reduce it to row echelon form and count the pivot positions](https://calculatematrix.com/matrix-calculators/matrix-rank#formula).
 
 ## Worked Example
 
@@ -2650,7 +2650,7 @@ There are four pivots, in columns $1$, $3$, $4$, and $5$. So $\\text{rank}(A) = 
 
 Full column rank means $\\text{rank}(A) = n$ — all $n$ columns are independent. When $A$ has full column rank, the system $Ax = \\mathbf{b}$ has at most one solution for any $\\mathbf{b}$, because no free variables exist. The null space is $\\{\\mathbf{0}\\}$.
 
-Full row rank means $\\text{rank}(A) = m$ — all $m$ rows are independent. When $A$ has full row rank, the system $Ax = \\mathbf{b}$ has at least one solution for every $\\mathbf{b}$, because the column space is all of $\\mathbb{R}^m$.
+Full row rank means $\\text{rank}(A) = m$ — all $m$ rows are independent. When $A$ has full row rank, the system $Ax = \\mathbf{b}$ has at least one solution for every $\\mathbf{b}$, [because the column space is all of](https://linearalgebranotes.com/spaces/column-space#rule-full-row-rank) $\\mathbb{R}^m$.
 
 When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simultaneously: the system has exactly one solution for every right-hand side, and $A$ is [invertible](!/linear-algebra/matrix/inverse).
 
@@ -2661,7 +2661,7 @@ When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simulta
   },
   obj5: {
     title: `Rank and Linear Systems`,
-    content: `The solvability of a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ is determined entirely by comparing the rank of the coefficient matrix $A$ with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$.
+    content: `The solvability of a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ is determined entirely by [comparing the rank of the coefficient matrix](https://calculatematrix.com/linear-systems/consistency-checker#algorithm) $A$ with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$.
 
 @academic[rule_theorem_plain:A solution exists if and only if $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$.]@
 
@@ -2691,13 +2691,13 @@ $$\\text{rank}(A) + \\text{nullity}(A) = n$$]@
 Using the number of rows gives a $2 \\times 4$ matrix of rank $2$ a nullity of $2 - 2 = 0$. But $A\\mathbf{x} = \\mathbf{0}$ has $4$ unknowns, so the nullity is $4 - 2 = 2$.
 [Read more](!#pitfalls)]@
 
-The $n$ columns of $A$ partition into two groups: the pivot columns, which contribute to the column space and drive the rank, and the free columns, which contribute to the null space and drive the nullity. Every column does exactly one of these things.
+The $n$ columns of $A$ partition into two groups: the pivot columns, which contribute to the column space and drive the rank, and the free columns, which contribute to the null space and drive the nullity. [Every column does exactly one of these things](https://calculatematrix.com/matrix-calculators/nullspace#rank-nullity).
 
 For a $3 \\times 5$ matrix with rank $2$, the nullity is $3$. The column space is a two-dimensional subspace of $\\mathbb{R}^3$ (a plane through the origin), and the null space is a three-dimensional subspace of $\\mathbb{R}^5$.
 
 For a square $n \\times n$ matrix, the theorem says $\\text{rank}(A) + \\text{nullity}(A) = n$. If the rank is $n$ (full rank), the nullity is $0$ — the null space contains only $\\mathbf{0}$, and $A$ is invertible. If the rank is less than $n$, the null space is nontrivial, the [determinant](!/linear-algebra/determinants) is zero, and $A$ is singular.
 
-The rank-nullity theorem is sometimes called the dimension theorem for linear maps. If $A$ defines a [linear transformation](!/linear-algebra/transformations) $T: \\mathbb{R}^n \\to \\mathbb{R}^m$, then the rank is the dimension of the image (range) of $T$, and the nullity is the dimension of the kernel. Their sum equals the dimension of the domain.`,
+The rank-nullity theorem is sometimes called [the dimension theorem for linear maps](https://linearalgebranotes.com/spaces/rank-nullity-theorem#rule-linear-maps). If $A$ defines a [linear transformation](!/linear-algebra/transformations) $T: \\mathbb{R}^n \\to \\mathbb{R}^m$, then the rank is the dimension of the image (range) of $T$, and the nullity is the dimension of the kernel. Their sum equals the dimension of the domain.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2715,7 +2715,7 @@ Transposition preserves rank:
 
 This is a restatement of the equality of row rank and column rank.
 
-The rank of a product can only decrease:
+[The rank of a product can only decrease](https://linearalgebranotes.com/matrices/rank#rule-product):
 
 @academic[formula_callout:rank_product_inequality|Rank Product Inequality|$$\\text{rank}(AB) \\leq \\min(\\text{rank}(A), \\text{rank}(B))$$]@
 @academic[formulas_link:/linear-algebra/formulas#rank_product_inequality]@
@@ -2752,7 +2752,7 @@ The identity matrix $I_n$ has rank $n$ — all columns are standard basis vector
 
 A [diagonal](!/linear-algebra/matrix/types) matrix has rank equal to the number of nonzero diagonal entries. The zero entries correspond to collapsed coordinate directions.
 
-A rank-$1$ matrix has the form of an outer product of two nonzero vectors:
+A rank-$1$ matrix has [the form of an outer product of two nonzero vectors](https://linearalgebranotes.com/matrices/rank#rule-rank-one):
 
 @academic[formula_callout:rank_one_outer_product|Rank-One Outer Product|$$A = \\mathbf{u}\\mathbf{v}^T, \\quad \\text{rank}(A) = 1$$]@
 @academic[formulas_link:/linear-algebra/formulas#rank-one_outer_product]@
@@ -2769,7 +2769,7 @@ The rank of $A^T A$ equals the rank of $A$:
 @academic[fact,aside:true,width:35%:Complex entries break this identity
 For $A = \\begin{pmatrix} 1 \\\\ i \\end{pmatrix}$, $A^T A = 1 + i^2 = 0$, so the rank drops from $1$ to $0$. The step $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2$ needs real entries; complex matrices use the conjugate transpose instead, with $\\text{rank}(A^* A) = \\text{rank}(A)$.]@
 
-This follows from the fact that the null spaces of $A$ and $A^T A$ are identical: $A\\mathbf{x} = \\mathbf{0}$ implies $A^T A \\mathbf{x} = \\mathbf{0}$, and conversely $A^T A \\mathbf{x} = \\mathbf{0}$ implies $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2 = 0$, so $A\\mathbf{x} = \\mathbf{0}$. By the rank-nullity theorem, equal nullities with the same $n$ give equal ranks.
+[This follows from the fact](https://linearalgebranotes.com/matrices/rank#rule-gram) that the null spaces of $A$ and $A^T A$ are identical: $A\\mathbf{x} = \\mathbf{0}$ implies $A^T A \\mathbf{x} = \\mathbf{0}$, and conversely $A^T A \\mathbf{x} = \\mathbf{0}$ implies $\\mathbf{x}^T A^T A \\mathbf{x} = \\|A\\mathbf{x}\\|^2 = 0$, so $A\\mathbf{x} = \\mathbf{0}$. By the rank-nullity theorem, equal nullities with the same $n$ give equal ranks.
 
 The identity is what makes the [least squares](!/linear-algebra/orthogonality/least-squares) normal equations $A^T A \\mathbf{x} = A^T \\mathbf{b}$ dependable. When the columns of $A$ are independent, $A^T A$ is an invertible $n \\times n$ matrix, so the best-fit $\\mathbf{x}$ exists and is unique, even when the original system $A\\mathbf{x} = \\mathbf{b}$ has no solution at all.`,
     before: ``,
@@ -2778,7 +2778,7 @@ The identity is what makes the [least squares](!/linear-algebra/orthogonality/le
   },
   obj9: {
     title: `Rank and the Four Fundamental Subspaces`,
-    content: `Every $m \\times n$ matrix $A$ gives rise to four [subspaces](!/linear-algebra/vector-spaces/fundamental-spaces), and the rank governs all of their dimensions.
+    content: `Every $m \\times n$ matrix $A$ gives rise to four [subspaces](!/linear-algebra/vector-spaces/fundamental-spaces), and [the rank governs all of their dimensions](https://linearalgebranotes.com/spaces/rank-nullity-theorem#rule-four-subspaces).
 
 The column space of $A$ is the span of the columns, a subspace of $\\mathbb{R}^m$ with dimension equal to $\\text{rank}(A)$. The row space of $A$ is the span of the rows, a subspace of $\\mathbb{R}^n$ also with dimension $\\text{rank}(A)$. The null space of $A$ consists of all solutions to $A\\mathbf{x} = \\mathbf{0}$, a subspace of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$. The left null space consists of all solutions to $A^T\\mathbf{y} = \\mathbf{0}$, a subspace of $\\mathbb{R}^m$ with dimension $m - \\text{rank}(A)$.
 
@@ -3059,7 +3059,8 @@ const schemas = {
         example: 'a $5 \\times 3$ matrix with rank $2$ has one redundant column, in the span of the other two',
       },
     ],
-  };  // TheoremCard data (rank-nullity-apply); every fact is from the section text
+  };
+  // TheoremCard data (rank-nullity-apply); every fact is from the section text
   const rankNullityApply = {
     header: { kicker: 'Rank', title: 'The Rank–Nullity Theorem', lede: 'Pivot columns and free columns share the $n$ columns of $A$.' },
     theorem: {
@@ -3253,7 +3254,8 @@ Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6
         content:[
           sectionsContent.obj6.content,
           <div key={'unit-rankNullity'} dangerouslySetInnerHTML={{ __html: demoUnits.rankNullity }} />,
-          `Every input dimension is accounted for exactly once: it either survives into the image or collapses into the kernel.`,          <DiagramFrame
+          `Every input dimension is accounted for exactly once: it either survives into the image or collapses into the kernel.`,
+          <DiagramFrame
             key={'obj6-theorem'}
             id="rank-nullity-apply"
             title="Rank–nullity, applied"

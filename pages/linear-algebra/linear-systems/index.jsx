@@ -882,9 +882,9 @@ $$[A \\mid \\mathbf{b}] = \\left(\\begin{array}{cccc|c} a_{11} & a_{12} & \\cdot
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The vertical bar separates the coefficients from the constants but is purely notational — the augmented matrix is an $m \\times (n+1)$ matrix on which row operations are performed. Every row operation on $[A \\mid \\mathbf{b}]$ corresponds to a legal algebraic manipulation of the equations: swapping two equations, multiplying an equation by a nonzero scalar, or adding a multiple of one equation to another. None of these changes the solution set.
+The vertical bar separates the coefficients from the constants but is purely notational — the augmented matrix is an $m \\times (n+1)$ matrix on which row operations are performed. Every row operation on $[A \\mid \\mathbf{b}]$ corresponds to a legal algebraic manipulation of the equations: swapping two equations, multiplying an equation by a nonzero scalar, or adding a multiple of one equation to another. [None of these changes the solution set](https://linearalgebranotes.com/systems/elementary-row-operations#rule-solution-set).
 
-The augmented matrix is the object that [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) operates on, and comparing its [rank](!/linear-algebra/matrix/rank) to the rank of $A$ alone determines whether the system is consistent.`,
+The augmented matrix is the object that [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) operates on, and comparing its [rank](!/linear-algebra/matrix/rank) to the rank of $A$ alone [determines whether the system is consistent](https://linearalgebranotes.com/systems/consistency#rule-rank-test).`,
     before: ``,
     after: ``,
     link: ``,
@@ -903,13 +903,13 @@ There is no fourth option.
 
 @academic[rule_theorem_plain:A linear system never has exactly two solutions, or ten, or any finite number greater than one.]@
 
-The proof is simple: if $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are both solutions with $\\mathbf{x}_1 \\neq \\mathbf{x}_2$, then $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ is a solution for every $t \\in \\mathbb{R}$, producing infinitely many.
+[The proof is simple](https://linearalgebranotes.com/systems/system-of-linear-equations#rule-three-outcomes): if $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are both solutions with $\\mathbf{x}_1 \\neq \\mathbf{x}_2$, then $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ is a solution for every $t \\in \\mathbb{R}$, producing infinitely many.
 
 @academic[pitfall,aside:true,width:35%:Treating a zero row as a contradiction
 Reading the zero row of $\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$ as a sign of inconsistency gives no solution. The row says $0 = 0$, true for every $\\mathbf{x}$; with $y$ free, $x = 3 - 2y$, and there are infinitely many solutions.
 [Read more](!#pitfalls)]@
 
-In practice the outcome is read from the augmented matrix after row reduction, working up from the bottom row. Rows whose coefficients have all been eliminated often appear there, because one equation of the system was a combination of the others or contradicted them. The table below collects what each outcome looks like in the reduced matrix.`,
+In practice [the outcome is read from the augmented matrix after row reduction](https://calculatematrix.com/linear-systems/consistency-checker#algorithm), working up from the bottom row. Rows whose coefficients have all been eliminated often appear there, because one equation of the system was a combination of the others or contradicted them. The table below collects what each outcome looks like in the reduced matrix.`,
     before: ``,
     after: ``,
     link: ``,
@@ -953,9 +953,9 @@ Each row operation corresponds to left-multiplication by an [elementary matrix](
     title: `Row Echelon Form and Reduced Row Echelon Form`,
     content: `Row operations aim to reduce the augmented matrix to a standard shape from which the solution can be read.
 
-Row echelon form (REF) has a staircase pattern: the leading entry of each row is to the right of the leading entry of the row above, and all entries below each leading entry are zero. In REF, the solution is obtained by back substitution — solving from the bottom row upward.
+Row echelon form (REF) has a staircase pattern: the leading entry of each row is to the right of the leading entry of the row above, and all entries below each leading entry are zero. In REF, [the solution is obtained by back substitution](https://linearalgebranotes.com/systems/gaussian-elimination#rule-back-substitution) — solving from the bottom row upward.
 
-Reduced row echelon form (RREF) goes further: each leading entry is $1$ and is the only nonzero entry in its column. In RREF, the solution is visible by inspection — each pivot variable is already isolated.
+Reduced row echelon form (RREF) goes further: each leading entry is $1$ and is the only nonzero entry in its column. In RREF, [the solution is visible by inspection](https://calculatematrix.com/matrix-calculators/rref#example) — each pivot variable is already isolated.
 
 @academic[rule_theorem_plain:The RREF of any matrix is unique. Different sequences of row operations always arrive at the same RREF.]@
 
@@ -968,7 +968,7 @@ This uniqueness makes the pivot positions intrinsic to the matrix: the [rank](!/
     title: `Homogeneous Systems`,
     content: `The special case $A\\mathbf{x} = \\mathbf{0}$ — where every right-hand side entry is zero — is called a [homogeneous](!/linear-algebra/linear-systems/homogeneous) system. It is always consistent, since $\\mathbf{x} = \\mathbf{0}$ satisfies every equation. The question is whether nontrivial solutions exist.
 
-Nontrivial solutions exist if and only if the rank of $A$ is less than $n$. If the system has more unknowns than equations ($n > m$), nontrivial solutions are guaranteed — the rank cannot exceed $m$, which is less than $n$.
+Nontrivial solutions exist if and only if the rank of $A$ is less than $n$. If the system has more unknowns than equations ($n > m$), [nontrivial solutions are guaranteed](https://linearalgebranotes.com/systems/homogeneous-systems#rule-more-unknowns) — the rank cannot exceed $m$, which is less than $n$.
 
 @academic[rule_theorem_plain:The solution set of a homogeneous system is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$ with dimension $n - \\text{rank}(A)$.]@
 
@@ -978,7 +978,7 @@ The superposition principle holds — any linear combination of solutions is aga
 Adding two solutions of $x + y = 2$, such as $(2, 0)$ and $(0, 2)$, gives $(2, 2)$, where $x + y = 4$; in general $A(\\mathbf{x}_1 + \\mathbf{x}_2) = 2\\mathbf{b}$. Superposition holds only when $\\mathbf{b} = \\mathbf{0}$; here the difference $(2, -2)$ solves $x + y = 0$.
 [Read more](!#pitfalls)]@
 
-A system with a nonzero right-hand side, $A\\mathbf{x} = \\mathbf{b}$, is tied to the homogeneous system $A\\mathbf{x} = \\mathbf{0}$ with the same coefficient matrix. When it is consistent, its solution set is one particular solution plus every solution of the homogeneous system: the null space moved away from the origin. It is a point, line, plane or higher flat that does not pass through the origin, so it is not a subspace.`,
+A system with a nonzero right-hand side, $A\\mathbf{x} = \\mathbf{b}$, is tied to the homogeneous system $A\\mathbf{x} = \\mathbf{0}$ with the same coefficient matrix. When it is consistent, its solution set is [one particular solution plus every solution of the homogeneous system](https://linearalgebranotes.com/systems/structure-of-the-solution-set#rule-complete-solution): the null space moved away from the origin. It is a point, line, plane or higher flat that does not pass through the origin, so it is not a subspace.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1010,7 +1010,7 @@ For a singular square matrix the outcome depends on $\\mathbf{b}$ as well as on 
 
 The [inverse](!/linear-algebra/matrix/inverse) formula $\\mathbf{x} = A^{-1}\\mathbf{b}$ applies when $A$ is square and invertible. It is elegant but rarely the most efficient approach — computing $A^{-1}$ costs roughly three times as much as solving by elimination.
 
-[LU decomposition](!/linear-algebra/decompositions/lower-upper) factors $A$ into a lower triangular matrix $L$ and an upper triangular matrix $U$. Once the factorization is computed, solving $A\\mathbf{x} = \\mathbf{b}$ reduces to two cheap triangular solves. This is the method of choice when multiple systems share the same coefficient matrix $A$ but have different right-hand sides.
+[LU decomposition](!/linear-algebra/decompositions/lower-upper) factors $A$ into a lower triangular matrix $L$ and an upper triangular matrix $U$. Once the factorization is computed, solving $A\\mathbf{x} = \\mathbf{b}$ reduces to [two cheap triangular solves](https://calculatematrix.com/matrix-calculators/lu-decomposition#uses). This is the method of choice when multiple systems share the same coefficient matrix $A$ but have different right-hand sides.
 
 Iterative methods — Jacobi, Gauss-Seidel, conjugate gradient — generate a sequence of approximations converging to the solution. They are preferred for very large sparse systems where direct methods would require too much memory or time. These methods lie at the boundary between linear algebra and numerical analysis.
 

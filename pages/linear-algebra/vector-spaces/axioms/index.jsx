@@ -1592,7 +1592,7 @@ const sectionsContent = {
     title: `The Idea of Abstraction`,
     content: `[Vectors](!/linear-algebra/vectors) in $\\mathbb{R}^n$ can be added entry by entry and scaled by real numbers. Polynomials can be added and scaled. [Matrices](!/linear-algebra/matrix) can be added and scaled. Continuous functions on an interval can be added and scaled. In each case, the same algebraic patterns appear: addition is commutative and associative, scaling distributes over sums, adding a zero element changes nothing, and scaling by $1$ leaves every object unchanged.
 
-A vector space is the formal extraction of these patterns. Rather than proving results separately for columns, polynomials, matrices, and functions, the axioms identify the common thread. Anything proved from the axioms alone — and that includes the entire theory of [linear independence](!/linear-algebra/vector-spaces/linear-independence), [span](!/linear-algebra/vector-spaces/span), [basis](!/linear-algebra/vector-spaces), and [dimension](!/linear-algebra/vector-spaces/dimension) — holds in every setting where the axioms are satisfied.`,
+A vector space is the formal extraction of these patterns. Rather than proving results separately for columns, polynomials, matrices, and functions, the axioms identify the common thread. [Anything proved from the axioms alone](https://linearalgebranotes.com/spaces/vector-space#facts) — and that includes the entire theory of [linear independence](!/linear-algebra/vector-spaces/linear-independence), [span](!/linear-algebra/vector-spaces/span), [basis](!/linear-algebra/vector-spaces), and [dimension](!/linear-algebra/vector-spaces/dimension) — holds in every setting where the axioms are satisfied.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1707,7 +1707,7 @@ Over the field $\\{0, 1\\}$, in which $1 + 1 = 0$, the subsets of a set form a v
 
 The scalars in a vector space come from a field — a set where addition, subtraction, multiplication, and division (by nonzero elements) all work and satisfy the standard arithmetic laws. The real numbers $\\mathbb{R}$ and the [complex numbers](!/complex-numbers) $\\mathbb{C}$ are the two fields that appear most often in linear algebra.
 
-A vector space over $\\mathbb{R}$ is called a real vector space. A vector space over $\\mathbb{C}$ is called a complex vector space. The choice of field determines what scalars are available for multiplication, and this affects the structure of the space. For instance, every real [symmetric](!/linear-algebra/matrix/types) matrix has real [eigenvalues](!/linear-algebra/eigen), but a general real matrix may have complex eigenvalues — a phenomenon visible only when the scalar field extends from $\\mathbb{R}$ to $\\mathbb{C}$.
+A vector space over $\\mathbb{R}$ is called a real vector space. A vector space over $\\mathbb{C}$ is called a [complex vector space](https://linearalgebranotes.com/spaces/complex-vector-space#definition). The choice of field determines what scalars are available for multiplication, and this affects the structure of the space. For instance, every real [symmetric](!/linear-algebra/matrix/types) matrix has real [eigenvalues](!/linear-algebra/eigen), but a general real matrix may have complex eigenvalues — a phenomenon visible only when the scalar field extends from $\\mathbb{R}$ to $\\mathbb{C}$.
 
 On this site, the scalar field is $\\mathbb{R}$ unless explicitly stated otherwise. The axioms and definitions carry over to $\\mathbb{C}$ without modification.`,
     before: ``,
@@ -1721,7 +1721,7 @@ On this site, the scalar field is $\\mathbb{R}$ unless explicitly stated otherwi
 @academic[formula_callout:The Standard Example: Rⁿ
 $$\\mathbb{R}^n = \\{(v_1, v_2, \\dots, v_n) : v_i \\in \\mathbb{R}\\}$$]@
 
-Addition and scalar multiplication are defined entry by entry:
+[Addition and scalar multiplication are defined entry by entry](https://calculatematrix.com/vector-calculators/vector-addition-subtraction#about):
 
 @academic[formula_callout:The Standard Example: Rⁿ
 $$(u_1, \\dots, u_n) + (v_1, \\dots, v_n) = (u_1 + v_1, \\dots, u_n + v_n)$$]@
@@ -1753,13 +1753,13 @@ The set $\\mathcal{P}$ of all polynomials (with no degree restriction) is also a
   },
   obj6: {
     title: `Matrix Spaces`,
-    content: `The set $\\mathbb{R}^{m \\times n}$ of all $m \\times n$ real [matrices](!/linear-algebra/matrix) is a vector space with entry-by-entry [operations](!/linear-algebra/matrix/operations). Addition adds corresponding entries, and scalar multiplication scales every entry by the same scalar.
+    content: `The set $\\mathbb{R}^{m \\times n}$ of all $m \\times n$ real [matrices](!/linear-algebra/matrix) is a vector space with entry-by-entry [operations](!/linear-algebra/matrix/operations). [Addition adds corresponding entries](https://calculatematrix.com/matrix-calculators/matrix-addition#about), and scalar multiplication scales every entry by the same scalar.
 
 The zero vector is the $m \\times n$ zero matrix $O$. The additive inverse of $A = (a_{ij})$ is $-A = (-a_{ij})$. All ten axioms reduce to the corresponding properties of real number arithmetic applied to each of the $mn$ entries independently.
 
 This space has dimension $mn$. The standard basis consists of the $mn$ matrix units $E_{ij}$, each with a single $1$ in position $(i,j)$ and zeros elsewhere. Every matrix is a unique linear combination of these basis elements, with the matrix entries as coefficients.
 
-The fact that matrices form a vector space means that the concepts of linear independence, span, and basis apply to sets of matrices — not just to column vectors. For example, the set $\\{I, A, A^2\\}$ might be independent or dependent in $\\mathbb{R}^{n \\times n}$, depending on the specific matrix $A$, and answering this question uses exactly the same abstract framework as for vectors in $\\mathbb{R}^n$.`,
+The fact that matrices form a vector space means that the concepts of linear independence, span, and basis apply to sets of matrices — not just to column vectors. For example, the set $\\{I, A, A^2\\}$ might be independent or dependent in $\\mathbb{R}^{n \\times n}$, depending on the specific matrix $A$, and [answering this question uses exactly the same abstract framework](https://linearalgebranotes.com/spaces/coordinates-in-a-basis#rule-test-in-coordinates) as for vectors in $\\mathbb{R}^n$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1784,7 +1784,7 @@ This space is infinite-dimensional. A more structured example is the solution sp
   },
   obj8: {
     title: `Non-Examples`,
-    content: `The axioms are genuine constraints, not automatic properties. Several natural-looking sets fail them.
+    content: `The axioms are genuine constraints, not automatic properties. [Several natural-looking sets fail them](https://linearalgebranotes.com/spaces/vector-space#examples).
 
 The set of polynomials of degree exactly $n$ is not a vector space. Adding two polynomials of degree $n$ can cancel the leading terms — for instance, $(x^2 + x) + (-x^2 + 3) = x + 3$, which has degree $1$, not $2$. Closure under addition fails.
 
@@ -1822,7 +1822,7 @@ $$0\\mathbf{v} = \\mathbf{0}, \\quad c\\mathbf{0} = \\mathbf{0}$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The proof of the first uses distributivity: $0\\mathbf{v} = (0 + 0)\\mathbf{v} = 0\\mathbf{v} + 0\\mathbf{v}$, and adding $-(0\\mathbf{v})$ to both sides gives $\\mathbf{0} = 0\\mathbf{v}$. The second is similar: $c\\mathbf{0} = c(\\mathbf{0} + \\mathbf{0}) = c\\mathbf{0} + c\\mathbf{0}$.
+[The proof of the first uses distributivity](https://linearalgebranotes.com/spaces/vector-space#rule-zero-products): $0\\mathbf{v} = (0 + 0)\\mathbf{v} = 0\\mathbf{v} + 0\\mathbf{v}$, and adding $-(0\\mathbf{v})$ to both sides gives $\\mathbf{0} = 0\\mathbf{v}$. The second is similar: $c\\mathbf{0} = c(\\mathbf{0} + \\mathbf{0}) = c\\mathbf{0} + c\\mathbf{0}$.
 
 Scaling by $-1$ produces the additive inverse:
 
@@ -1835,7 +1835,7 @@ $$(-1)\\mathbf{v} = -\\mathbf{v}$$
 
 This follows from $\\mathbf{v} + (-1)\\mathbf{v} = 1\\mathbf{v} + (-1)\\mathbf{v} = (1 + (-1))\\mathbf{v} = 0\\mathbf{v} = \\mathbf{0}$.
 
-If $c\\mathbf{v} = \\mathbf{0}$, then $c = 0$ or $\\mathbf{v} = \\mathbf{0}$. A nonzero scalar cannot annihilate a nonzero vector — there are no zero divisors in a vector space.
+If $c\\mathbf{v} = \\mathbf{0}$, then $c = 0$ or $\\mathbf{v} = \\mathbf{0}$. A nonzero scalar cannot annihilate a nonzero vector — [there are no zero divisors in a vector space](https://linearalgebranotes.com/spaces/vector-space#rule-no-zero-divisors).
 
 @academic[pitfall,aside:true,width:35%:Dividing by a vector
 Dividing both sides of $c\\mathbf{v} = d\\mathbf{v}$ by $\\mathbf{v}$ to get $c = d$ uses an operation the axioms never define, and it fails for $\\mathbf{v} = \\mathbf{0}$: $2 \\cdot \\mathbf{0} = 5 \\cdot \\mathbf{0}$ although $2 \\neq 5$. The correct conclusion is $c = d$ or $\\mathbf{v} = \\mathbf{0}$.
@@ -1859,7 +1859,7 @@ Ordinary addition paired with $c\\mathbf{v} = \\mathbf{0}$ for every scalar and 
 
 The axioms also make clear what is not a vector space. Attempting to apply basis theory, dimension counting, or rank arguments to a set that fails the axioms produces nonsense. Checking the axioms first is a prerequisite for using any of the tools of linear algebra.
 
-The ten axioms are not arbitrary — they are a compact set of conditions that support the concepts of independence, span, and basis. Every axiom is used in at least one proof along the way from the definition of a vector space to the classification theorem that says two spaces are isomorphic if and only if they have the same dimension.`,
+The ten axioms are not arbitrary — they are a compact set of conditions that support the concepts of independence, span, and basis. Every axiom is used in at least one proof along the way from the definition of a vector space to [the classification theorem](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-classification) that says two spaces are isomorphic if and only if they have the same dimension.`,
     before: ``,
     after: ``,
     link: ``,

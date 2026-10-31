@@ -1032,7 +1032,7 @@ The space $V$ is the domain and $W$ is the codomain, both vector spaces over the
     title: `Examples in Rⁿ`,
     content: `The prototypical example is [matrix](!/linear-algebra/matrix) multiplication: $T(\\mathbf{x}) = A\\mathbf{x}$ for a fixed $m \\times n$ matrix $A$. Linearity follows from the distributive properties of matrix-vector multiplication: $A(c\\mathbf{u} + d\\mathbf{v}) = cA\\mathbf{u} + dA\\mathbf{v}$.
 
-Several familiar operations are special cases. The zero transformation $T(\\mathbf{v}) = \\mathbf{0}$ sends every vector to the origin — it corresponds to the zero matrix. The identity transformation $T(\\mathbf{v}) = \\mathbf{v}$ leaves every vector unchanged — it corresponds to the [identity matrix](!/linear-algebra/matrix/types). The projection $T(x, y) = (x, 0)$ drops the second coordinate — it corresponds to $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$. Rotation by a fixed angle $\\theta$ in $\\mathbb{R}^2$ is linear, with matrix $\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$.
+Several familiar operations are special cases. The zero transformation $T(\\mathbf{v}) = \\mathbf{0}$ sends every vector to the origin — it corresponds to the zero matrix. The identity transformation $T(\\mathbf{v}) = \\mathbf{v}$ leaves every vector unchanged — it corresponds to the [identity matrix](!/linear-algebra/matrix/types). The projection $T(x, y) = (x, 0)$ drops the second coordinate — it corresponds to $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$. [Rotation by a fixed angle](https://calculatematrix.com/matrix-calculators/rotation-matrix#about) $\\theta$ in $\\mathbb{R}^2$ is linear, with matrix $\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$.
 
 In each case, linearity can be verified directly from the definition. The matrix formulation makes the verification automatic — every matrix-vector product is linear by construction.`,
     before: ``,
@@ -1041,7 +1041,7 @@ In each case, linearity can be verified directly from the definition. The matrix
   },
   obj3: {
     title: `Non-Examples`,
-    content: `Translation $T(\\mathbf{v}) = \\mathbf{v} + \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$ is the most common non-example. It fails immediately: $T(\\mathbf{0}) = \\mathbf{b} \\neq \\mathbf{0}$, but every linear transformation must send $\\mathbf{0}$ to $\\mathbf{0}$.
+    content: `Translation $T(\\mathbf{v}) = \\mathbf{v} + \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$ is the most common non-example. [It fails immediately](https://linearalgebranotes.com/maps/linear-transformation#rule-origin): $T(\\mathbf{0}) = \\mathbf{b} \\neq \\mathbf{0}$, but every linear transformation must send $\\mathbf{0}$ to $\\mathbf{0}$.
 
 @academic[pitfall,aside:true,width:35%:Trusting the zero test alone
 Calling $T(x, y) = (x, xy)$ linear because $T(\\mathbf{0}) = \\mathbf{0}$ skips the real test: $T(2(1, 1)) = (2, 4)$, but $2T(1, 1) = (2, 2)$. Passing the zero test does not prove linearity, and this map is not linear.
@@ -1077,7 +1077,7 @@ These examples show that the concept reaches far beyond columns of numbers. When
   },
   obj5: {
     title: `Determined by Action on a Basis`,
-    content: `A linear transformation is completely determined by what it does to a [basis](!/linear-algebra/vector-spaces). If $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ is a basis for $V$ and the images $T(\\mathbf{v}_1), \\dots, T(\\mathbf{v}_n)$ are specified, then $T(\\mathbf{v})$ is determined for every vector $\\mathbf{v} \\in V$.
+    content: `A linear transformation is [completely determined by what it does](https://linearalgebranotes.com/maps/linear-transformation#rule-decided-by-basis) to a [basis](!/linear-algebra/vector-spaces). If $\\mathcal{B} = \\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$ is a basis for $V$ and the images $T(\\mathbf{v}_1), \\dots, T(\\mathbf{v}_n)$ are specified, then $T(\\mathbf{v})$ is determined for every vector $\\mathbf{v} \\in V$.
 
 The reason is that every vector in $V$ has a unique expression $\\mathbf{v} = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$, and linearity forces
 
@@ -1099,7 +1099,7 @@ This is the bridge to [matrix representation](!/linear-algebra/transformations/m
     title: `Properties`,
     content: `Linearity has immediate consequences that go beyond the defining condition. The zero vector always maps to zero: $T(\\mathbf{0}) = \\mathbf{0}$. Negation is preserved: $T(-\\mathbf{v}) = -T(\\mathbf{v})$. Arbitrary linear combinations are preserved: $T(\\sum c_i \\mathbf{v}_i) = \\sum c_i T(\\mathbf{v}_i)$.
 
-The composition of two linear transformations is linear. If $T: U \\to V$ and $S: V \\to W$ are both linear, then $S \\circ T: U \\to W$ satisfies $(S \\circ T)(c\\mathbf{u} + d\\mathbf{v}) = c(S \\circ T)(\\mathbf{u}) + d(S \\circ T)(\\mathbf{v})$. When both maps are represented by matrices, composition corresponds to matrix multiplication.
+The composition of two linear transformations is linear. If $T: U \\to V$ and $S: V \\to W$ are both linear, then $S \\circ T: U \\to W$ satisfies $(S \\circ T)(c\\mathbf{u} + d\\mathbf{v}) = c(S \\circ T)(\\mathbf{u}) + d(S \\circ T)(\\mathbf{v})$. When both maps are represented by matrices, [composition corresponds to matrix multiplication](https://calculatematrix.com/matrix-calculators/matrix-multiplication#about).
 
 @academic[pitfall,aside:true,width:35%:Reversing the order of a composition
 Writing the matrix of $S \\circ T$ as $AB$, with $A$ for $T$ = rotation by $90^\\circ$ and $B$ for $S$ = reflection across the x-axis, gives $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$. $T$ acts first, so the matrix is $BA = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$.
@@ -1107,7 +1107,7 @@ Writing the matrix of $S \\circ T$ as $AB$, with $A$ for $T$ = rotation by $90^\
 
 The order of the two maps needs care here. In $S \\circ T$ the map written second acts first: a vector is sent through $T$, and $S$ is then applied to the result. When both maps are given by matrices, the matrix of the composition is found by following a vector through the two steps in that order.
 
-A linear transformation is invertible if and only if it is bijective — both injective (trivial kernel) and surjective (image equals the codomain). The inverse of a linear transformation is itself linear. The full development of these [properties](!/linear-algebra/transformations/properties), including strategies for proving and disproving linearity, is on its own page.`,
+A linear transformation is invertible if and only if it is bijective — both injective (trivial kernel) and surjective (image equals the codomain). [The inverse of a linear transformation is itself linear](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-inverse-linear). The full development of these [properties](!/linear-algebra/transformations/properties), including strategies for proving and disproving linearity, is on its own page.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1120,9 +1120,9 @@ A linear transformation is invertible if and only if it is bijective — both in
 For $T(x, y) = (2x + y, 3y)$, writing $T(\\mathbf{e}_1) = (2, 0)$ and $T(\\mathbf{e}_2) = (1, 3)$ as rows gives $\\begin{pmatrix} 2 & 0 \\\\ 1 & 3 \\end{pmatrix}$, which sends $(0, 1)$ to $(0, 3)$ instead of $(1, 3)$. As columns they give $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix}$.
 [Read more](!#pitfalls)]@
 
-This gives a one-to-one correspondence between linear maps $\\mathbb{R}^n \\to \\mathbb{R}^m$ and $m \\times n$ matrices. Every property of the transformation — its [rank](!/linear-algebra/matrix/rank), [determinant](!/linear-algebra/determinants) (when square), [eigenvalues](!/linear-algebra/eigen), [image and kernel](!/linear-algebra/transformations/image-kernel) — can be read from the matrix. And every matrix operation — multiplication, inversion, decomposition — has a transformation-level interpretation.
+This gives [a one-to-one correspondence](https://linearalgebranotes.com/maps/linear-transformation#rule-matrix-form) between linear maps $\\mathbb{R}^n \\to \\mathbb{R}^m$ and $m \\times n$ matrices. Every property of the transformation — its [rank](!/linear-algebra/matrix/rank), [determinant](!/linear-algebra/determinants) (when square), [eigenvalues](!/linear-algebra/eigen), [image and kernel](!/linear-algebra/transformations/image-kernel) — can be read from the matrix. And every matrix operation — multiplication, inversion, decomposition — has a transformation-level interpretation.
 
-For transformations between abstract vector spaces, the matrix depends on the choice of bases for both domain and codomain. Changing the bases changes the matrix but not the transformation. The relationship between different matrix representations of the same map is governed by [similarity](!/linear-algebra/transformations/basis-change).`,
+For transformations between abstract vector spaces, the matrix depends on the choice of bases for both domain and codomain. [Changing the bases changes the matrix](https://linearalgebranotes.com/spaces/change-of-basis#rule-map-change) but not the transformation. The relationship between different matrix representations of the same map is governed by [similarity](!/linear-algebra/transformations/basis-change).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1131,9 +1131,9 @@ For transformations between abstract vector spaces, the matrix depends on the ch
     title: `Geometry`,
     content: `In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, linear transformations have vivid [geometric](!/linear-algebra/transformations/geometric) meanings. Rotations spin every vector around the origin by a fixed angle. Reflections mirror across a line or plane through the origin. Projections flatten space onto a subspace. Shears tilt one axis relative to another. Scalings stretch or compress along coordinate directions.
 
-Each of these transformations has an explicit matrix that encodes its geometric action. The [determinant](!/linear-algebra/determinants/geometry) of the matrix measures how the transformation scales areas or volumes: $|\\det(A)|$ is the scaling factor, and the sign of $\\det(A)$ indicates whether orientation is preserved ($+$) or reversed ($-$). Orthogonal matrices ($Q^TQ = I$, which forces $\\det = \\pm 1$) preserve all lengths and angles — they are the rigid motions of linear algebra.
+Each of these transformations has an explicit matrix that encodes its geometric action. The [determinant](!/linear-algebra/determinants/geometry) of the matrix measures how the transformation scales areas or volumes: $|\\det(A)|$ is the scaling factor, and the sign of $\\det(A)$ indicates whether orientation is preserved ($+$) or reversed ($-$). Orthogonal matrices ($Q^TQ = I$, which forces $\\det = \\pm 1$) [preserve all lengths and angles](https://linearalgebranotes.com/matrices/orthogonal-matrix#rule-lengths) — they are the rigid motions of linear algebra.
 
-The singular value decomposition reveals the hidden geometry of any matrix: every linear transformation is a rotation or reflection, followed by a coordinate-axis scaling, followed by another rotation or reflection. Even the most complicated-looking matrix is just three simple geometric operations composed together.`,
+[The singular value decomposition](https://calculatematrix.com/matrix-calculators/svd#about) reveals the hidden geometry of any matrix: every linear transformation is a rotation or reflection, followed by a coordinate-axis scaling, followed by another rotation or reflection. Even the most complicated-looking matrix is just three simple geometric operations composed together.`,
     before: ``,
     after: ``,
     link: ``,

@@ -2221,9 +2221,9 @@ Symmetry means $A = A^T$. Positive definiteness means $\\mathbf{x}^TA\\mathbf{x}
 Testing only positivity passes $B = \\begin{pmatrix} 4 & 0 \\\\ 2 & 5 \\end{pmatrix}$: its eigenvalues $4, 5$ and leading minors $4, 20$ are all positive. But $B \\neq B^T$, so no $L$ exists; the formulas still return an $L$, with $LL^T = \\begin{pmatrix} 4 & 2 \\\\ 2 & 5 \\end{pmatrix} \\neq B$.
 [Read more](!#pitfalls)]@
 
-Several equivalent conditions characterize positive definiteness: all [eigenvalues](!/linear-algebra/eigen) of $A$ are strictly positive; all leading principal minors (the [determinants](!/linear-algebra/determinants) of the upper-left $k \\times k$ submatrices) are positive; all pivots in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) (without pivoting) are positive.
+[Several equivalent conditions characterize positive definiteness](https://linearalgebranotes.com/matrices/positive-definite-matrix#rules): all [eigenvalues](!/linear-algebra/eigen) of $A$ are strictly positive; all leading principal minors (the [determinants](!/linear-algebra/determinants) of the upper-left $k \\times k$ submatrices) are positive; all pivots in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) (without pivoting) are positive.
 
-If either symmetry or positive definiteness fails, there is no Cholesky factor. A non-symmetric matrix has no $LL^T$ form. A symmetric matrix that is positive semi-definite (some eigenvalue is zero) produces a zero on the diagonal of $L$. An indefinite matrix (eigenvalues of both signs) produces a negative number under the square root, halting the algorithm.
+If either symmetry or positive definiteness fails, there is no Cholesky factor. A non-symmetric matrix has no $LL^T$ form. A symmetric matrix that is positive semi-definite (some eigenvalue is zero) produces a zero on the diagonal of $L$. An indefinite matrix (eigenvalues of both signs) produces a negative number under the square root, [halting the algorithm](https://linearalgebranotes.com/matrices/cholesky-decomposition#failure-modes).
 
 These equivalent characterizations differ in computational cost and in when each is the practical tool of choice.`,
     before: ``,
@@ -2232,7 +2232,7 @@ These equivalent characterizations differ in computational cost and in when each
   },
   obj3: {
     title: `The Algorithm`,
-    content: `The Cholesky factor $L$ is computed column by column, from left to right.
+    content: `The Cholesky factor $L$ is [computed column by column](https://calculatematrix.com/matrix-calculators/cholesky-decomposition#algorithm), from left to right.
 
 For column $j$, the diagonal entry is
 
@@ -2244,7 +2244,7 @@ and the sub-diagonal entries (for $i > j$) are
 @academic[formula_callout:cholesky_off_diagonal_formula|Cholesky Off-Diagonal Formula|$$l_{ij} = \\frac{1}{l_{jj}}\\left(a_{ij} - \\sum_{k=1}^{j-1} l_{ik}l_{jk}\\right)$$]@
 @academic[formulas_link:/linear-algebra/formulas#cholesky_off-diagonal_formula]@
 
-The square root in the diagonal formula is always real and positive because positive definiteness guarantees that the expression under the root is strictly positive at every step.
+The square root in the diagonal formula is always real and positive because [positive definiteness guarantees](https://linearalgebranotes.com/matrices/cholesky-decomposition#rule-existence) that the expression under the root is strictly positive at every step.
 
 ## Worked Example
 
@@ -2272,7 +2272,7 @@ Each entry of $L$ is built from the matching entry of $A$ and from entries of $L
   },
   obj4: {
     title: `Solving Systems with Cholesky`,
-    content: `Given $A = LL^T$, the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is solved in two steps:
+    content: `Given $A = LL^T$, the [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ is [solved in two steps](https://linearalgebranotes.com/matrices/lu-decomposition#rule-two-solves):
 
 Forward substitution: solve $L\\mathbf{y} = \\mathbf{b}$ for $\\mathbf{y}$. Cost: $O(n^2)$.
 
@@ -2289,7 +2289,7 @@ The structure is identical to [LU](!/linear-algebra/decompositions/lower-upper),
   },
   obj5: {
     title: `Computational Cost`,
-    content: `The Cholesky factorization requires roughly $\\frac{1}{3}n^3$ arithmetic operations — exactly half the cost of [LU](!/linear-algebra/decompositions/lower-upper) factorization ($\\frac{2}{3}n^3$). The saving comes from symmetry: the lower triangle of $A$ determines the upper triangle ($a_{ij} = a_{ji}$), so only half the entries need processing.
+    content: `The Cholesky factorization requires roughly $\\frac{1}{3}n^3$ arithmetic operations — [exactly half the cost](https://linearalgebranotes.com/matrices/cholesky-decomposition#cost) of [LU](!/linear-algebra/decompositions/lower-upper) factorization ($\\frac{2}{3}n^3$). The saving comes from symmetry: the lower triangle of $A$ determines the upper triangle ($a_{ij} = a_{ji}$), so only half the entries need processing.
 
 Each triangular solve costs $O(n^2)$. For a single system, the total is $\\frac{1}{3}n^3 + O(n^2)$. For $k$ systems sharing the same coefficient matrix, the cost is $\\frac{1}{3}n^3 + 2kn^2$.
 
@@ -2307,7 +2307,7 @@ The diagonal of $LL^T = A$ reads $a_{ii} = l_{i1}^2 + l_{i2}^2 + \\cdots + l_{ii
 
 This makes the algorithm simpler (no [permutation matrix](!/linear-algebra/matrix/types#12) to track), more stable (no near-zero pivots to amplify errors), and more predictable (the algorithm either runs to completion or breaks down, with no ambiguity).
 
-If the algorithm encounters a non-positive value under the square root, the matrix is not positive definite. The breakdown happens at the first index $j$ where the leading $j \\times j$ principal submatrix fails to be positive definite. This makes Cholesky an efficient positive definiteness test: attempt the factorization and check whether it succeeds.
+If the algorithm encounters a non-positive value under the square root, the matrix is not positive definite. The breakdown happens at the first index $j$ where the leading $j \\times j$ principal submatrix fails to be positive definite. This makes Cholesky an efficient positive definiteness test: [attempt the factorization and check whether it succeeds](https://calculatematrix.com/matrix-calculators/cholesky-decomposition#how-to-use).
 
 @academic[punchline:Positive definiteness does the job that pivoting does in LU: every pivot is positive, so no row ever has to move.]@`,
     before: ``,
@@ -2334,7 +2334,7 @@ The test is binary: the factorization either succeeds or fails. When it succeeds
 @academic[fact,aside:true,width:35%:Invented for surveyors' least squares
 André-Louis Cholesky, a French artillery officer and surveyor, devised the method by 1910 to solve the normal equations of least-squares adjustments in map-making. He was killed in the First World War in 1918, and a fellow officer published the method in 1924.]@
 
-The [normal equations](!/linear-algebra/orthogonality/least-squares) $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ produce a symmetric positive definite matrix $A^TA$ (when $A$ has full column [rank](!/linear-algebra/matrix/rank)). Cholesky on $A^TA$ solves least squares, though [QR](!/linear-algebra/decompositions/qr) is preferred for numerical stability.
+The [normal equations](!/linear-algebra/orthogonality/least-squares) $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ produce a symmetric positive definite matrix $A^TA$ (when $A$ has full column [rank](!/linear-algebra/matrix/rank)). Cholesky on $A^TA$ [solves least squares](https://calculatematrix.com/linear-systems/least-squares-solver#algorithm), though [QR](!/linear-algebra/decompositions/qr) is preferred for numerical stability.
 
 Covariance matrices in statistics are symmetric positive semi-definite (positive definite when no variable is a linear combination of the others). Cholesky is used to sample from multivariate normal distributions: if $\\Sigma = LL^T$, then $L\\mathbf{z}$ (with $\\mathbf{z}$ standard normal) has distribution $\\mathcal{N}(\\mathbf{0}, \\Sigma)$.
 
@@ -2351,7 +2351,7 @@ This is the $LDL^T$ decomposition.
 
 The Cholesky factor is $L_{\\text{Chol}} = L_U D^{1/2}$ — the unit lower triangular factor with $\\sqrt{D}$ absorbed into it. Equivalently, $A = (L_U D^{1/2})(L_U D^{1/2})^T = LL^T$.
 
-Cholesky is the symmetric-positive-definite specialization of LU. It exploits $A = A^T$ to halve the work and the storage, and it exploits positive definiteness to eliminate the need for pivoting. The $LDL^T$ variant avoids square roots entirely (computing $D$ and $L_U$ separately) and is sometimes preferred when the square roots are expensive or when the matrix is only positive semi-definite.`,
+Cholesky is [the symmetric-positive-definite specialization of LU](https://linearalgebranotes.com/matrices/lu-decomposition#rule-ldu). It exploits $A = A^T$ to halve the work and the storage, and it exploits positive definiteness to eliminate the need for pivoting. The $LDL^T$ variant [avoids square roots entirely](https://calculatematrix.com/matrix-calculators/ldu-decomposition#symmetric) (computing $D$ and $L_U$ separately) and is sometimes preferred when the square roots are expensive or when the matrix is only positive semi-definite.`,
     before: ``,
     after: ``,
     link: ``,

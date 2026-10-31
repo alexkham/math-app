@@ -1263,7 +1263,7 @@ The identity is simultaneously diagonal, symmetric, orthogonal, upper triangular
 @academic[formula_callout:diagonal_matrix_definition|Diagonal Matrix Definition|$$D = \\text{diag}(d_1, d_2, \\dots, d_n) = \\begin{pmatrix} d_1 & 0 & \\cdots & 0 \\\\ 0 & d_2 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 0 & 0 & \\cdots & d_n \\end{pmatrix}$$]@
 @academic[formulas_link:/linear-algebra/formulas#diagonal_matrix_definition]@
 
-Diagonal matrices are the easiest matrices to work with. Their arithmetic reduces to operations on the diagonal entries alone:
+Diagonal matrices are the easiest matrices to work with. [Their arithmetic reduces to operations on the diagonal entries alone](https://linearalgebranotes.com/matrices/diagonal-matrix#rule-product):
 
 @academic[formula_callout:Diagonal Matrices
 $$\\text{diag}(d_1, \\dots, d_n) \\cdot \\text{diag}(e_1, \\dots, e_n) = \\text{diag}(d_1 e_1, \\dots, d_n e_n)$$]@
@@ -1303,13 +1303,13 @@ Triangular matrices share several convenient properties with diagonal matrices. 
 @academic[formula_callout:triangular_matrix_determinant|Triangular Matrix Determinant|$$\\det(T) = \\prod_{i=1}^{n} t_{ii}$$]@
 @academic[formulas_link:/linear-algebra/formulas#triangular_matrix_determinant]@
 
-The eigenvalues are the diagonal entries.
+[The eigenvalues are the diagonal entries](https://linearalgebranotes.com/matrices/triangular-matrix#rule-eigenvalues).
 
 @academic[rule_plain:The product of two upper triangular matrices is upper triangular, and the same holds for lower triangular matrices.]@
 
-The inverse of an invertible upper triangular matrix is also upper triangular.
+[The inverse of an invertible upper triangular matrix is also upper triangular](https://linearalgebranotes.com/matrices/triangular-matrix#rule-inverse).
 
-These properties make triangular matrices the natural endpoint of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Row reduction converts a general matrix into upper triangular form, and the LU [decomposition](!/linear-algebra/decompositions/lower-upper) factors a matrix into lower and upper triangular components, reducing system-solving to two simple back-substitution passes.`,
+These properties make triangular matrices the natural endpoint of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). [Row reduction converts a general matrix into upper triangular form](https://calculatematrix.com/matrix-calculators/ref#algorithm), and the LU [decomposition](!/linear-algebra/decompositions/lower-upper) factors a matrix into lower and upper triangular components, reducing system-solving to two simple back-substitution passes.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1380,7 +1380,7 @@ Symmetric matrices arise constantly in practice. Covariance matrices, Hessians i
 
 @academic[rule_plain:Any product of the form $A^T A$ or $AA^T$ is symmetric regardless of the shape of $A$, since $(A^T A)^T = A^T (A^T)^T = A^T A$.]@
 
-The spectral properties of real symmetric matrices are exceptionally clean. Every eigenvalue is real — no complex eigenvalues can appear. Eigenvectors corresponding to distinct eigenvalues are automatically orthogonal. And the spectral theorem guarantees that every real symmetric matrix can be diagonalized by an orthogonal matrix: $A = Q D Q^T$ where $Q$ is orthogonal and $D$ is diagonal. This is a much stronger conclusion than ordinary diagonalizability, which requires only an invertible change-of-basis matrix.
+The spectral properties of real symmetric matrices are exceptionally clean. Every eigenvalue is real — no complex eigenvalues can appear. Eigenvectors corresponding to distinct eigenvalues are automatically orthogonal. And [the spectral theorem guarantees](https://linearalgebranotes.com/eigen/spectral-theorem#definition) that every real symmetric matrix can be diagonalized by an orthogonal matrix: $A = Q D Q^T$ where $Q$ is orthogonal and $D$ is diagonal. This is a much stronger conclusion than ordinary diagonalizability, which requires only an invertible change-of-basis matrix.
 
 A symmetric matrix is called positive definite if $\\mathbf{x}^T A \\mathbf{x} > 0$ for every nonzero vector $\\mathbf{x}$. Positive definiteness is equivalent to all eigenvalues being strictly positive, and it guarantees the existence of the [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) $A = LL^T$.`,
     before: ``,
@@ -1396,7 +1396,7 @@ A symmetric matrix is called positive definite if $\\mathbf{x}^T A \\mathbf{x} >
 
 Setting $i = j$ forces $a_{ii} = -a_{ii}$, so every diagonal entry must be zero.
 
-Every square matrix admits a unique decomposition into a symmetric part and a skew-symmetric part:
+Every square matrix admits [a unique decomposition into a symmetric part and a skew-symmetric part](https://linearalgebranotes.com/matrices/symmetric-matrix#rule-decomposition):
 
 @academic[formula_callout:symmetric_skew_decomposition|Symmetric Skew Decomposition|$$A = \\frac{1}{2}(A + A^T) + \\frac{1}{2}(A - A^T)$$]@
 @academic[formulas_link:/linear-algebra/formulas#symmetric_skew_decomposition]@
@@ -1429,7 +1429,7 @@ This reformulates the cross product as a matrix-vector multiplication.`,
 @academic[formula_callout:orthogonal_matrix_definition|Orthogonal Matrix Definition|$$Q^T Q = QQ^T = I \\iff Q^{-1} = Q^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#orthogonal_matrix_definition]@
 
-This means the columns of $Q$ form an [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) set: each column has unit length, and distinct columns are perpendicular. The same is true of the rows.
+This means the columns of $Q$ form an [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) set: each column has unit length, and distinct columns are perpendicular. [The same is true of the rows](https://linearalgebranotes.com/matrices/orthogonal-matrix#rule-rows).
 
 The determinant of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^T Q) = \\det(Q)^2$:
 
@@ -1440,7 +1440,7 @@ When $\\det(Q) = +1$, the matrix is a rotation. When $\\det(Q) = -1$, it involve
 
 @academic[rule_plain:The defining geometric property is that orthogonal matrices preserve lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every vector $\\mathbf{x}$.]@
 
-They also preserve dot products ($Q\\mathbf{x} \\cdot Q\\mathbf{y} = \\mathbf{x} \\cdot \\mathbf{y}$) and therefore angles between vectors. A transformation that preserves all distances and angles is called an isometry, and the orthogonal matrices are precisely the linear isometries.
+They also preserve dot products ($Q\\mathbf{x} \\cdot Q\\mathbf{y} = \\mathbf{x} \\cdot \\mathbf{y}$) and therefore angles between vectors. A transformation that preserves all distances and angles is called an isometry, and [the orthogonal matrices are precisely the linear isometries](https://linearalgebranotes.com/matrices/orthogonal-matrix#rule-length-converse).
 
 @academic[pitfall,aside:true,width:35%:Orthogonal columns without unit length
 Taking $Q^T$ as the inverse of $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, whose columns are perpendicular but of length $\\sqrt{2}$, gives $Q^T Q = 2I$, not $I$. Here $Q^{-1} = \\frac{1}{2}Q^T$; dividing $Q$ by $\\sqrt{2}$ makes it orthogonal.
@@ -1463,7 +1463,7 @@ The smallest such $k$ is called the index of nilpotency.
 @academic[fact,aside:true,width:35%:Squares to zero with no zero entry
 $\\begin{pmatrix} 1 & 1 \\\\ -1 & -1 \\end{pmatrix}^2 = O$, though none of its four entries is zero. Both columns lie on the line through $(1, -1)$, and that line is exactly what the matrix sends to $\\mathbf{0}$, so a second application wipes out everything.]@
 
-The examples that come to mind first are strictly upper triangular, with zeros on and below the diagonal. Each multiplication by such a matrix pushes the nonzero entries at least one diagonal further up and to the right, so after at most $n$ steps nothing is left. Seen this way, nilpotency looks like one more pattern of zeros, like the diagonal and triangular conditions earlier on this page, with the zeros spreading a little further at every power.
+The examples that come to mind first are [strictly upper triangular](https://linearalgebranotes.com/matrices/triangular-matrix#rule-nilpotent), with zeros on and below the diagonal. Each multiplication by such a matrix pushes the nonzero entries at least one diagonal further up and to the right, so after at most $n$ steps nothing is left. Seen this way, nilpotency looks like one more pattern of zeros, like the diagonal and triangular conditions earlier on this page, with the zeros spreading a little further at every power.
 
 @academic[rule_theorem_plain:Every eigenvalue of a nilpotent matrix is zero, which forces both the determinant and the trace to vanish.]@
 
@@ -1534,7 +1534,7 @@ Any matrix type can be singular or nonsingular depending on its entries. A diago
 Calling $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ nonsingular because no diagonal entry is zero misses $\\det = 1 \\cdot 4 - 2 \\cdot 2 = 0$. The diagonal test holds only for diagonal and triangular matrices; this one is singular, its second column twice the first.
 [Read more](!#pitfalls)]@
 
-Most matrices met in practice have no special pattern at all. For them, deciding whether the matrix is singular takes a computation: evaluating the determinant, finding the rank by row reduction, or spotting a dependence among the columns. Which of the three is quickest depends on the size of the matrix and on how its entries are related.`,
+Most matrices met in practice have no special pattern at all. For them, deciding whether the matrix is singular takes a computation: evaluating the determinant, [finding the rank by row reduction](https://calculatematrix.com/matrix-calculators/matrix-rank#formula), or spotting a dependence among the columns. Which of the three is quickest depends on the size of the matrix and on how its entries are related.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1549,7 +1549,7 @@ Three are defined by a relation to the transpose. Symmetric matrices ($A = A^T$)
 
 Three are defined by a power condition. Nilpotent matrices ($A^k = O$) have all eigenvalues zero. Idempotent matrices ($A^2 = A$) are projections with $\\text{rank} = \\text{tr}$. Involutory matrices ($A^2 = I$) are their own inverse.
 
-These categories are not mutually exclusive, and the three axes cut across each other freely. The identity matrix is diagonal, symmetric, orthogonal, triangular, idempotent, involutory, and a permutation simultaneously. A $1 \\times 1$ zero matrix is diagonal, symmetric, skew-symmetric, triangular, nilpotent, and singular. Permutation matrices are all orthogonal, but only the ones built from disjoint swaps are involutory. Recognizing which types a given matrix belongs to is often the fastest route to understanding its behavior.`,
+These categories are not mutually exclusive, and the three axes cut across each other freely. The identity matrix is diagonal, symmetric, orthogonal, triangular, idempotent, involutory, and a permutation simultaneously. A $1 \\times 1$ zero matrix is diagonal, symmetric, skew-symmetric, triangular, nilpotent, and singular. Permutation matrices are all orthogonal, but only the ones built from disjoint swaps are involutory. [Recognizing which types a given matrix belongs to](https://calculatematrix.com/matrix-calculators/matrix-properties#algorithm) is often the fastest route to understanding its behavior.`,
     before: ``,
     after: ``,
     link: ``,

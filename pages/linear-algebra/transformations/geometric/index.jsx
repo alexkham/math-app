@@ -2335,7 +2335,7 @@ Column $1$ is the image of $\\mathbf{e}_1 = (1, 0)$ in $\\mathbb{R}^2$ or $(1, 0
 
 @academic[rule_plain:The absolute value $|\\det(A)|$ measures how the transformation scales areas (in $\\mathbb{R}^2$) or volumes (in $\\mathbb{R}^3$).]@
 
-The sign of $\\det(A)$ indicates orientation: positive means the transformation preserves handedness, negative means it reverses it. An [orthogonal](!/linear-algebra/matrix/types) matrix ($\\det = \\pm 1$) preserves all lengths and angles — it is a rigid motion.
+The sign of $\\det(A)$ indicates orientation: positive means the transformation preserves handedness, negative means it reverses it. An [orthogonal](!/linear-algebra/matrix/types) matrix ($\\det = \\pm 1$) [preserves all lengths and angles](https://linearalgebranotes.com/matrices/orthogonal-matrix#rule-lengths) — it is a rigid motion.
 
 @academic[pitfall,aside:true,width:35%:Mistaking area-preserving for rigid
 Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$: its determinant is $1$, yet it sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$. A rigid motion needs $A^T A = I$; here $A^T A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix}$.
@@ -2416,13 +2416,13 @@ $$R_\\theta = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & 
 
 The first column $R_\\theta \\mathbf{e}_1 = (\\cos\\theta, \\sin\\theta)$ is the image of $(1, 0)$ — the point on the unit circle at angle $\\theta$. The second column $R_\\theta \\mathbf{e}_2 = (-\\sin\\theta, \\cos\\theta)$ is the image of $(0, 1)$ — the point at angle $\\theta + 90°$.
 
-The determinant is $\\cos^2\\theta + \\sin^2\\theta = 1$ for every $\\theta$: rotations preserve areas and orientation. The matrix is [orthogonal](!/linear-algebra/matrix/types): $R_\\theta^T R_\\theta = I$, so lengths and angles are preserved. The inverse is $R_\\theta^{-1} = R_{-\\theta} = R_\\theta^T$ — rotating backward by the same angle.
+The determinant is $\\cos^2\\theta + \\sin^2\\theta = 1$ for every $\\theta$: [rotations preserve areas and orientation](https://linearalgebranotes.com/maps/rotation-matrix#rule-det). The matrix is [orthogonal](!/linear-algebra/matrix/types): $R_\\theta^T R_\\theta = I$, so lengths and angles are preserved. The inverse is $R_\\theta^{-1} = R_{-\\theta} = R_\\theta^T$ — rotating backward by the same angle.
 
 @academic[rule_plain:Rotations compose by adding angles: $R_\\alpha R_\\beta = R_{\\alpha + \\beta}$.]@
 
-This follows from the trigonometric addition formulas and corresponds to the fact that rotating by $\\beta$ then by $\\alpha$ is the same as rotating by $\\alpha + \\beta$.
+[This follows from the trigonometric addition formulas](https://linearalgebranotes.com/maps/rotation-matrix#rule-addition) and corresponds to the fact that rotating by $\\beta$ then by $\\alpha$ is the same as rotating by $\\alpha + \\beta$.
 
-Common cases: $R_{90°} = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$, $R_{180°} = \\begin{pmatrix} -1 & 0 \\\\ 0 & -1 \\end{pmatrix}$, $R_{45°} = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & -1 \\\\ 1 & 1 \\end{pmatrix}$.`,
+[Common cases](https://calculatematrix.com/matrix-calculators/rotation-matrix#exact-values): $R_{90°} = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$, $R_{180°} = \\begin{pmatrix} -1 & 0 \\\\ 0 & -1 \\end{pmatrix}$, $R_{45°} = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & -1 \\\\ 1 & 1 \\end{pmatrix}$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2474,7 +2474,7 @@ Reflection across the $y$-axis flips the $x$-coordinate: matrix $\\begin{pmatrix
 
 Reflection across the line $y = x$ swaps coordinates: matrix $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$.
 
-Reflection across an arbitrary line through the origin at angle $\\alpha$ has matrix
+[Reflection across an arbitrary line through the origin](https://linearalgebranotes.com/maps/reflection-matrix#rule-double-angle) at angle $\\alpha$ has matrix
 
 @academic[formula_callout:Reflection Across Line 2D
 $$H_\\alpha = \\begin{pmatrix} \\cos 2\\alpha & \\sin 2\\alpha \\\\ \\sin 2\\alpha & -\\cos 2\\alpha \\end{pmatrix}$$
@@ -2503,18 +2503,18 @@ $$H = I - 2\\,\\mathbf{n}\\mathbf{n}^T$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-This matrix subtracts twice the component of each vector in the direction of $\\mathbf{n}$, effectively mirroring across the plane perpendicular to $\\mathbf{n}$. Householder reflections are orthogonal, have determinant $-1$, and satisfy $H^2 = I$. They are the building blocks of the [QR decomposition](!/linear-algebra/decompositions/qr) and are widely used in numerical algorithms.`,
+This matrix [subtracts twice the component](https://linearalgebranotes.com/maps/reflection-matrix#rule-from-projection) of each vector in the direction of $\\mathbf{n}$, effectively mirroring across the plane perpendicular to $\\mathbf{n}$. Householder reflections are orthogonal, have determinant $-1$, and satisfy $H^2 = I$. They are the building blocks of the [QR decomposition](!/linear-algebra/decompositions/qr) and are widely used in numerical algorithms.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj7: {
     title: `Projections`,
-    content: `Orthogonal [projection](!/linear-algebra/orthogonality/projections) onto a subspace collapses each vector onto its nearest point in the subspace, discarding the perpendicular component.
+    content: `Orthogonal [projection](!/linear-algebra/orthogonality/projections) onto a subspace [collapses each vector onto its nearest point in the subspace](https://linearalgebranotes.com/orthogonality/orthogonal-projection#rule-closest), discarding the perpendicular component.
 
 Projection onto the $x$-axis in $\\mathbb{R}^2$: $T(x, y) = (x, 0)$, with matrix $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$.
 
-Projection onto a line through the origin in direction $\\mathbf{u}$:
+[Projection onto a line through the origin](https://calculatematrix.com/matrix-calculators/projection-matrix#about) in direction $\\mathbf{u}$:
 
 @academic[formula_callout:Projection onto Line
 $$P = \\frac{\\mathbf{u}\\mathbf{u}^T}{\\mathbf{u}^T\\mathbf{u}}$$
@@ -2565,7 +2565,7 @@ $$T(x, y) = (x, \\; kx + y), \\quad \\text{matrix } \\begin{pmatrix} 1 & 0 \\\\ 
 @academic[fact,aside:true,width:35%:Three shears make a rotation
 For $\\theta \\neq 180°$, $R_\\theta$ equals a horizontal shear by $-\\tan\\frac{\\theta}{2}$, then a vertical shear by $\\sin\\theta$, then the first shear again. Paeth's 1986 method rotates digital images this way, since each shear only slides whole rows or columns of pixels.]@
 
-Both are [triangular](!/linear-algebra/matrix/types) matrices with determinant $1$: shears are area-preserving and orientation-preserving. They are not orthogonal — angles are distorted. A square sheared horizontally becomes a parallelogram of the same area but with tilted sides.
+Both are [triangular](!/linear-algebra/matrix/types) matrices with determinant $1$: [shears are area-preserving and orientation-preserving](https://linearalgebranotes.com/maps/shear-matrix#rule-det). They are not orthogonal — angles are distorted. A square sheared horizontally becomes a parallelogram of the same area but with tilted sides.
 
 In $\\mathbb{R}^3$, there are six possible shear directions (each coordinate shifted by a multiple of each other coordinate). Each is represented by an identity matrix with one off-diagonal entry replaced by $k$.
 
@@ -2590,7 +2590,7 @@ Writing rotate by $90°$, then reflect across the $x$-axis, as $R_{90°} H$ with
 
 Turning a description into a matrix is therefore a matter of placement. The step named first in the description stands at the far right, next to the vector it acts on, and each later step is written to the left of the steps before it. A three-step description such as scale, then rotate, then shear becomes $\\text{Shear} \\cdot R_\\theta \\cdot S_k$.
 
-The [singular value decomposition](!/linear-algebra/decompositions/svd) reveals the hidden geometric structure of any matrix: $A = U\\Sigma V^T$, where $V^T$ is a rotation (or rotation-reflection), $\\Sigma$ is a coordinate-axis scaling, and $U$ is another rotation (or rotation-reflection). Every linear transformation is a rotation or reflection, followed by a scaling along the coordinate axes, followed by another rotation or reflection. The singular values in $\\Sigma$ measure the maximum stretching in each orthogonal direction.
+The [singular value decomposition](!/linear-algebra/decompositions/svd) reveals the hidden geometric structure of any matrix: $A = U\\Sigma V^T$, where $V^T$ is a rotation (or rotation-reflection), $\\Sigma$ is a coordinate-axis scaling, and $U$ is another rotation (or rotation-reflection). Every linear transformation is a rotation or reflection, followed by a scaling along the coordinate axes, followed by another rotation or reflection. [The singular values](https://calculatematrix.com/matrix-calculators/svd#about) in $\\Sigma$ measure the maximum stretching in each orthogonal direction.
 
 This decomposition means no linear transformation is truly exotic — even the most complex-looking matrix is just three simple geometric operations composed together.`,
     before: ``,

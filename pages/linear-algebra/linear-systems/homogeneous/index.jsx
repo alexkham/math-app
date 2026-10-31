@@ -1247,11 +1247,11 @@ The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the 
 @academic[fact,aside:true,width:35%:Balancing a reaction is a homogeneous system
 Balancing $a\\,\\text{C}_3\\text{H}_8 + b\\,\\text{O}_2 \\to c\\,\\text{CO}_2 + d\\,\\text{H}_2\\text{O}$ gives one equation per element and one unknown per molecule. Three elements against four unknowns force a nontrivial solution, and its smallest whole-number point $(1, 5, 3, 4)$ is the balanced equation.]@
 
-When $\\text{rank}(A) < n$, at least one free variable appears in the [echelon form](!/linear-algebra/linear-systems/echelon-form), and that free variable parametrizes a family of nonzero solutions.
+When $\\text{rank}(A) < n$, at least one free variable appears in the [echelon form](!/linear-algebra/linear-systems/echelon-form), and that free variable [parametrizes a family of nonzero solutions](https://linearalgebranotes.com/systems/homogeneous-systems#rule-nontrivial-iff).
 
 For a square $n \\times n$ matrix, nontrivial solutions exist if and only if $\\det(A) = 0$. A nonzero [determinant](!/linear-algebra/determinants) means full rank, which means no free variables, which means only the trivial solution.
 
-One case is automatic: if the system has more unknowns than equations ($n > m$), nontrivial solutions always exist:
+[One case is automatic](https://linearalgebranotes.com/systems/homogeneous-systems#rule-more-unknowns): if the system has more unknowns than equations ($n > m$), nontrivial solutions always exist:
 
 @academic[formula_callout:underdetermined_homogeneous_has_nontrivial|Underdetermined Homogeneous Has Nontrivial|$$m < n \\Rightarrow A\\mathbf{x} = \\mathbf{0} \\text{ has nontrivial solutions}$$]@
 @academic[formulas_link:/linear-algebra/formulas#underdetermined_homogeneous_has_nontrivial]@
@@ -1292,7 +1292,7 @@ When the nullity is $0$, the null space is $\\{\\mathbf{0}\\}$ and only the triv
   },
   obj4: {
     title: `Finding the Null Space`,
-    content: `The algorithm is a direct application of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Row reduce $A$ to echelon form (reducing just $A$ — the zero augmented column adds nothing). Identify the pivot variables and the free variables. For each free variable, set it to $1$ with all other free variables at $0$, and solve for the pivot variables by back substitution. Each setting produces one basis vector for the null space.
+    content: `The algorithm is a direct application of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination). Row reduce $A$ to echelon form (reducing just $A$ — the zero augmented column adds nothing). [Identify the pivot variables and the free variables](https://calculatematrix.com/matrix-calculators/nullspace#method). For each free variable, set it to $1$ with all other free variables at $0$, and solve for the pivot variables by back substitution. [Each setting produces one basis vector for the null space](https://linearalgebranotes.com/spaces/null-space#rule-special-solutions-basis).
 
 ## Worked Example
 
@@ -1323,7 +1323,7 @@ Each basis vector can be tested against the original matrix $A$, since row opera
   },
   obj5: {
     title: `Parametric Vector Form`,
-    content: `The general solution to $A\\mathbf{x} = \\mathbf{0}$ is a linear combination of the null-space basis vectors:
+    content: `The general solution to $A\\mathbf{x} = \\mathbf{0}$ is [a linear combination of the null-space basis vectors](https://calculatematrix.com/linear-systems/homogeneous-system-solver#about):
 
 @academic[formula_callout:Parametric Vector Form
 $$\\mathbf{x} = t_1\\mathbf{v}_1 + t_2\\mathbf{v}_2 + \\cdots + t_k\\mathbf{v}_k$$]@
@@ -1347,12 +1347,12 @@ There is no particular solution $\\mathbf{x}_p$ to add because the right-hand si
 @academic[formula_callout:The Superposition Principle
 $$A(c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2) = c_1 A\\mathbf{x}_1 + c_2 A\\mathbf{x}_2 = c_1\\mathbf{0} + c_2\\mathbf{0} = \\mathbf{0}$$]@
 
-This is precisely the statement that the solution set is a [subspace](!/linear-algebra/vector-spaces/subspaces) — it is closed under addition and scalar multiplication. The superposition principle is the reason the general solution is a linear combination of basis vectors, and it is the reason the null space has the clean structure of a [vector space](!/linear-algebra/vector-spaces) rather than an arbitrary collection of points.
+This is precisely the statement that the solution set is a [subspace](!/linear-algebra/vector-spaces/subspaces) — it is closed under addition and scalar multiplication. [The superposition principle](https://linearalgebranotes.com/systems/system-of-linear-equations#rule-superposition) is the reason the general solution is a linear combination of basis vectors, and it is the reason the null space has the clean structure of a [vector space](!/linear-algebra/vector-spaces) rather than an arbitrary collection of points.
 
 @academic[rule:Superposition principle
 Superposition holds only for homogeneous systems.]@
 
-For a non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$, the sum of two solutions is generally not a solution: $A(\\mathbf{x}_1 + \\mathbf{x}_2) = \\mathbf{b} + \\mathbf{b} = 2\\mathbf{b} \\neq \\mathbf{b}$.
+For a non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\neq \\mathbf{0}$, [the sum of two solutions is generally not a solution](https://linearalgebranotes.com/systems/structure-of-the-solution-set#rule-not-subspace): $A(\\mathbf{x}_1 + \\mathbf{x}_2) = \\mathbf{b} + \\mathbf{b} = 2\\mathbf{b} \\neq \\mathbf{b}$.
 
 @academic[punchline:Solutions of $A\\mathbf{x} = \\mathbf{0}$ can be added and scaled freely, so a few basis solutions describe every one of them.]@`,
     before: ``,
@@ -1361,7 +1361,7 @@ For a non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ with $\\mathbf{b} \\ne
   },
   obj7: {
     title: `Homogeneous vs. Non-Homogeneous`,
-    content: `The homogeneous system $A\\mathbf{x} = \\mathbf{0}$ and the non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ are deeply connected. If $\\mathbf{x}_p$ is any particular solution to $A\\mathbf{x} = \\mathbf{b}$, then every solution has the form
+    content: `The homogeneous system $A\\mathbf{x} = \\mathbf{0}$ and the non-homogeneous system $A\\mathbf{x} = \\mathbf{b}$ are deeply connected. If $\\mathbf{x}_p$ is any particular solution to $A\\mathbf{x} = \\mathbf{b}$, then [every solution has the form](https://linearalgebranotes.com/systems/structure-of-the-solution-set#rule-complete-solution)
 
 @academic[formula_callout:Homogeneous vs. Non-Homogeneous
 $$\\mathbf{x} = \\mathbf{x}_p + \\mathbf{x}_h$$]@
@@ -1383,7 +1383,7 @@ The [solution set](!/linear-algebra/linear-systems/solvability) of $A\\mathbf{x}
 
 The equation $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ is literally the system $A\\mathbf{c} = \\mathbf{0}$. If the null space of $A$ is trivial, the only solution is $\\mathbf{c} = \\mathbf{0}$ and the vectors are independent. If the null space is nontrivial, some nonzero $\\mathbf{c}$ satisfies the equation, providing an explicit dependence relation — the entries of $\\mathbf{c}$ are the coefficients that express one vector as a combination of the others.
 
-This is the computational link between homogeneous systems and independence. Row reducing $A$ and checking for free variables is the standard algorithm for deciding independence, and the null-space basis vectors encode the dependence relations when they exist.`,
+This is the computational link between homogeneous systems and independence. Row reducing $A$ and checking for free variables is [the standard algorithm for deciding independence](https://calculatematrix.com/vector-calculators/linear-independence#algorithm), and the null-space basis vectors encode the dependence relations when they exist.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1403,7 +1403,7 @@ This is a homogeneous system with coefficient matrix $A - \\lambda I$. Eigenvect
 
 The values of $\\lambda$ satisfying this [determinant](!/linear-algebra/determinants) condition are the eigenvalues. For each eigenvalue $\\lambda$, the set of all solutions to $(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$ is the eigenspace — the null space of $A - \\lambda I$. The dimension of this eigenspace is the nullity of $A - \\lambda I$, which equals $n - \\text{rank}(A - \\lambda I)$.
 
-This rewriting connects homogeneous systems directly to spectral theory. Every eigenvalue problem is, at its core, a question about when a particular homogeneous system has nontrivial solutions. The machinery of row reduction, null spaces, and rank that governs homogeneous systems is the same machinery that computes eigenvectors and eigenspaces.`,
+This rewriting connects homogeneous systems directly to spectral theory. Every eigenvalue problem is, at its core, a question about when a particular homogeneous system has nontrivial solutions. The machinery of row reduction, null spaces, and rank that governs homogeneous systems is the same machinery that [computes eigenvectors and eigenspaces](https://calculatematrix.com/matrix-calculators/eigenvectors#algorithm).`,
     before: ``,
     after: ``,
     link: ``,

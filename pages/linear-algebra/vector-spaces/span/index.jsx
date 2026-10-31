@@ -1407,7 +1407,7 @@ The span of two non-parallel vectors is a plane through the origin — a two-dim
 
 The span of three vectors in $\\mathbb{R}^3$ that do not all lie in a single plane is all of $\\mathbb{R}^3$. If the three vectors are coplanar, the span is a plane. If two of the three are parallel, the span may be only a line.
 
-The pattern is consistent: the dimension of the span equals the largest number of independent vectors in the set, regardless of how many total vectors are present. Redundant vectors — those already in the span of the others — add nothing to the reach.`,
+The pattern is consistent: [the dimension of the span](https://calculatematrix.com/matrix-calculators/matrix-rank#about) equals the largest number of independent vectors in the set, regardless of how many total vectors are present. Redundant vectors — those already in the span of the others — add nothing to the reach.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1422,7 +1422,7 @@ The pattern is consistent: the dimension of the span equals the largest number o
 Calling $(1, 2)$, $(2, 4)$, $(3, 6)$ a spanning set of $\\mathbb{R}^2$ because there are at least two of them ignores that all three are multiples of $(1, 2)$. Their span is the line $y = 2x$, and $(1, 0)$ is never reached.
 [Read more](!#pitfalls)]@
 
-Fewer than $n$ vectors cannot reach every direction — their span is a proper subspace of [dimension](!/linear-algebra/vector-spaces/dimension) less than $n$. A spanning set with exactly $n$ independent vectors is a [basis](!/linear-algebra/vector-spaces/basis). A spanning set with more than $n$ vectors contains redundancies that can be removed.
+Fewer than $n$ vectors [cannot reach every direction](https://linearalgebranotes.com/spaces/dimension#rule-size-bounds) — their span is a proper subspace of [dimension](!/linear-algebra/vector-spaces/dimension) less than $n$. A spanning set with exactly $n$ independent vectors is a [basis](!/linear-algebra/vector-spaces/basis). A spanning set with more than $n$ vectors contains redundancies that can be removed.
 
 The standard basis $\\{\\mathbf{e}_1, \\dots, \\mathbf{e}_n\\}$ spans $\\mathbb{R}^n$ with no redundancy. The set $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_1 + \\mathbf{e}_2\\}$ also spans $\\mathbb{R}^2$, but the third vector is redundant — it lies in the span of the first two. Removing it leaves a basis.`,
     before: ``,
@@ -1440,7 +1440,7 @@ $$\\mathbf{b} \\in \\text{Span}\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} \\iff
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Row reduce the augmented matrix $[A \\mid \\mathbf{b}]$. If a row of the form $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ appears, the system is inconsistent and $\\mathbf{b}$ is not in the span.
+[Row reduce the augmented matrix](https://calculatematrix.com/vector-calculators/linear-combination#span) $[A \\mid \\mathbf{b}]$. If a row of the form $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ appears, the system is inconsistent and $\\mathbf{b}$ is not in the span.
 
 ## Example: Not in the Span
 
@@ -1473,7 +1473,7 @@ Both examples use the same two vectors, so the first two columns reduce in exact
     title: `Testing Whether a Set Spans Rⁿ`,
     content: `The question "Does $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ span $\\mathbb{R}^n$?" asks whether $A\\mathbf{c} = \\mathbf{b}$ is consistent for every possible right-hand side $\\mathbf{b} \\in \\mathbb{R}^n$, where $A$ is the matrix with the vectors as columns.
 
-Row reduce $A$. The columns span $\\mathbb{R}^n$ if and only if every row of the echelon form contains a pivot. If any row is entirely zero, then for some choices of $\\mathbf{b}$ the augmented system will produce a $[0 \\; \\cdots \\; 0 \\mid d]$ contradiction, meaning those $\\mathbf{b}$ are unreachable.
+Row reduce $A$. The columns span $\\mathbb{R}^n$ if and only if [every row of the echelon form contains a pivot](https://linearalgebranotes.com/spaces/column-space#rule-full-row-rank). If any row is entirely zero, then for some choices of $\\mathbf{b}$ the augmented system will produce a $[0 \\; \\cdots \\; 0 \\mid d]$ contradiction, meaning those $\\mathbf{b}$ are unreachable.
 
 @academic[pitfall,aside:true,width:35%:Looking for pivots in the columns
 Saying $(1, 0)$, $(0, 1)$, $(1, 1)$ fail to span $\\mathbb{R}^2$ because column $3$ of $\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ has no pivot reads the wrong direction. Both rows have a pivot, so the set spans $\\mathbb{R}^2$.
@@ -1496,9 +1496,9 @@ $$\\text{Col}(A) = \\text{Span}\\{\\mathbf{a}_1, \\mathbf{a}_2, \\dots, \\mathbf
 @academic[fact,aside:true,width:35%:Three in four Lights Out boards are hopeless
 In the $5 \\times 5$ Lights Out puzzle, pressing a light flips it and its edge neighbours. A starting pattern can be cleared exactly when it lies in the column space of a $25 \\times 25$ matrix with arithmetic mod $2$, and that matrix has rank $23$, so only $1$ pattern in $4$ is solvable.]@
 
-This identity connects the abstract concept of span to the concrete question of system solvability. The system $A\\mathbf{x} = \\mathbf{b}$ has a solution if and only if $\\mathbf{b}$ lies in the column space of $A$ — that is, if and only if $\\mathbf{b}$ is in the span of the columns.
+This identity connects the abstract concept of span to the concrete question of system solvability. The system $A\\mathbf{x} = \\mathbf{b}$ [has a solution if and only if](https://linearalgebranotes.com/systems/consistency#rule-column-space) $\\mathbf{b}$ lies in the column space of $A$ — that is, if and only if $\\mathbf{b}$ is in the span of the columns.
 
-The rank of $A$ equals the dimension of the column space, which equals the number of independent columns. The pivot columns of the echelon form identify which original columns form a [basis](!/linear-algebra/vector-spaces/basis) for the column space. The non-pivot columns are redundant — they lie in the span of the pivot columns.
+The rank of $A$ [equals the dimension of the column space](https://linearalgebranotes.com/spaces/column-space#rule-dimension-is-rank), which equals the number of independent columns. The pivot columns of the echelon form identify which original columns form a [basis](!/linear-algebra/vector-spaces/basis) for the column space. The non-pivot columns are redundant — they lie in the span of the pivot columns.
 
 This also explains why row reduction is the universal computational tool for span questions. Every question about span — membership, spanning, independence — translates into a question about the column space of some matrix, and row reduction answers all of them.`,
     before: ``,
@@ -1512,9 +1512,9 @@ This also explains why row reduction is the universal computational tool for spa
 @academic[formula_callout:Redundancy and Reduction
 $$\\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} = \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}, \\mathbf{v}_{j+1}, \\dots, \\mathbf{v}_k\\}$$]@
 
-This happens exactly when $\\mathbf{v}_j$ is already a linear combination of the other vectors — it contributes no new directions.
+This happens exactly when $\\mathbf{v}_j$ [is already a linear combination of the other vectors](https://linearalgebranotes.com/vectors/span#rule-redundant) — it contributes no new directions.
 
-Removing redundant vectors from a spanning set one at a time, until none is left, produces a basis: a minimal spanning set with no waste. The process can be carried out systematically via row reduction. Arrange the vectors as columns, reduce, and identify the pivot columns. The original vectors corresponding to pivot positions form a basis for the span. The non-pivot columns are redundant: removing all of them leaves the span unchanged.
+Removing redundant vectors from a spanning set one at a time, until none is left, produces a basis: a minimal spanning set with no waste. The process can be carried out systematically via row reduction. [Arrange the vectors as columns, reduce, and identify the pivot columns](https://calculatematrix.com/matrix-calculators/column-space#method). The original vectors corresponding to pivot positions form a basis for the span. The non-pivot columns are redundant: removing all of them leaves the span unchanged.
 
 @academic[pitfall,aside:true,width:35%:Using the echelon columns as the basis
 For $(1, 0, 1)$, $(0, 1, 2)$, $(1, 1, 3)$ the pivot columns of the echelon form are $(1, 0, 0)$ and $(0, 1, 0)$, which span the plane $z = 0$ and miss $(1, 0, 1)$. The basis is the original pair $(1, 0, 1)$, $(0, 1, 2)$.
@@ -1522,7 +1522,7 @@ For $(1, 0, 1)$, $(0, 1, 2)$, $(1, 1, 3)$ the pivot columns of the echelon form 
 
 For example, if four vectors in $\\mathbb{R}^3$ are given and row reduction reveals pivots in columns $1$, $2$, and $4$, then the original first, second, and fourth vectors form a basis for the span. The third vector is a combination of the first two.
 
-This reduction process is always possible in finite-dimensional spaces: every spanning set can be trimmed to a basis, and every independent set can be extended to one. The basis sits at the exact boundary between "too few vectors to span" and "too many vectors to be independent."`,
+This reduction process is always possible in finite-dimensional spaces: [every spanning set can be trimmed to a basis](https://linearalgebranotes.com/spaces/basis#rule-shrink-to-basis), and every independent set can be extended to one. The basis sits at the exact boundary between "too few vectors to span" and "too many vectors to be independent."`,
     before: ``,
     after: ``,
     link: ``,

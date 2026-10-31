@@ -2121,7 +2121,7 @@ The matrix $R$ stores the coefficients: each column of $A$ is a linear combinati
   },
   obj2: {
     title: `QR via Gram-Schmidt`,
-    content: `Applying the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) to the columns $\\mathbf{a}_1, \\dots, \\mathbf{a}_n$ of $A$ produces orthonormal vectors $\\mathbf{q}_1, \\dots, \\mathbf{q}_n$. These become the columns of $Q$.
+    content: `Applying the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) to the columns $\\mathbf{a}_1, \\dots, \\mathbf{a}_n$ of $A$ [produces orthonormal vectors](https://calculatematrix.com/matrix-calculators/gram-schmidt#algorithm) $\\mathbf{q}_1, \\dots, \\mathbf{q}_n$. These become the columns of $Q$.
 
 The entries of $R$ are the dot products computed during Gram-Schmidt:
 
@@ -2143,7 +2143,7 @@ For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$: Gram-Schm
 Putting $\\mathbf{u}_1 = (1, 0, 1)^T$ into $Q$ without dividing by its length gives $Q^TQ \\neq I$, and with $R_{11} = \\sqrt{2}$ the first column of $QR$ becomes $(\\sqrt{2}, 0, \\sqrt{2})^T$ instead of $\\mathbf{a}_1$. With $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T$ it is $(1, 0, 1)^T$.
 [Read more](!#pitfalls)]@
 
-Two quantities come out of every step of the computation: the leftover vector $\\mathbf{u}_j$, whose length becomes the diagonal entry $R_{jj}$, and the unit vector $\\mathbf{q}_j = \\mathbf{u}_j / \\|\\mathbf{u}_j\\|$ that becomes a column of $Q$. In the example, $\\mathbf{u}_1 = (1, 0, 1)^T$ has length $\\sqrt{2}$, and $\\mathbf{u}_2 = (1/2, 1, -1/2)^T$ has length $\\sqrt{3/2} = 3/\\sqrt{6}$, the entry in the bottom-right corner of $R$. The entry above it, $1/\\sqrt{2}$, is the dot product of $\\mathbf{q}_1$ with the second column $(1, 1, 0)^T$.`,
+[Two quantities come out of every step of the computation](https://calculatematrix.com/matrix-calculators/qr-decomposition#algorithm): the leftover vector $\\mathbf{u}_j$, whose length becomes the diagonal entry $R_{jj}$, and the unit vector $\\mathbf{q}_j = \\mathbf{u}_j / \\|\\mathbf{u}_j\\|$ that becomes a column of $Q$. In the example, $\\mathbf{u}_1 = (1, 0, 1)^T$ has length $\\sqrt{2}$, and $\\mathbf{u}_2 = (1/2, 1, -1/2)^T$ has length $\\sqrt{3/2} = 3/\\sqrt{6}$, the entry in the bottom-right corner of $R$. The entry above it, $1/\\sqrt{2}$, is the dot product of $\\mathbf{q}_1$ with the second column $(1, 1, 0)^T$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2169,7 +2169,7 @@ Householder QR is more numerically stable than Gram-Schmidt. It achieves backwar
     title: `Thin QR vs. Full QR`,
     content: `The thin (reduced) QR factorization has $Q_1$ of size $m \\times n$ with orthonormal columns and $R_1$ of size $n \\times n$ upper triangular: $A = Q_1 R_1$. This is the version produced by Gram-Schmidt and is sufficient for most applications.
 
-The full QR factorization extends $Q_1$ to a square $m \\times m$ orthogonal matrix $Q$ by appending $m - n$ columns forming an orthonormal basis for $\\text{Col}(A)^\\perp$. The factor $R$ is extended to $m \\times n$ by appending $m - n$ rows of zeros: $A = QR$.
+[The full QR factorization extends](https://linearalgebranotes.com/orthogonality/gram-schmidt#rule-extension) $Q_1$ to a square $m \\times m$ orthogonal matrix $Q$ by appending $m - n$ columns forming an orthonormal basis for $\\text{Col}(A)^\\perp$. The factor $R$ is extended to $m \\times n$ by appending $m - n$ rows of zeros: $A = QR$.
 
 The full version is needed when the [orthogonal complement](!/linear-algebra/orthogonality) of the column space is required — for instance, when extracting a basis for the [left null space](!/linear-algebra/vector-spaces/fundamental-spaces). The thin version is more economical for system solving and [least squares](!/linear-algebra/orthogonality/least-squares).
 
@@ -2182,7 +2182,7 @@ The two variants compare cleanly on the dimensions of their factors and what eac
     title: `Existence and Uniqueness`,
     content: `@academic[rule_theorem_plain:Every $m \\times n$ matrix with $m \\geq n$ and linearly independent columns has a thin QR factorization. Every $m \\times n$ matrix (regardless of rank) has a full QR factorization.]@
 
-The thin QR factorization with positive diagonal entries on $R$ is unique. If negative diagonal entries are permitted, the factorization is not unique — signs can be redistributed between $Q$ and $R$ (multiplying a column of $Q$ by $-1$ and the corresponding row of $R$ by $-1$ preserves the product). The convention of positive diagonal entries on $R$ resolves this ambiguity.`,
+The thin QR factorization with positive diagonal entries on $R$ is unique. If negative diagonal entries are permitted, the factorization is not unique — [signs can be redistributed](https://linearalgebranotes.com/matrices/qr-decomposition#rule-uniqueness) between $Q$ and $R$ (multiplying a column of $Q$ by $-1$ and the corresponding row of $R$ by $-1$ preserves the product). The convention of positive diagonal entries on $R$ resolves this ambiguity.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2194,13 +2194,13 @@ The thin QR factorization with positive diagonal entries on $R$ is unique. If ne
 @academic[formula_callout:Solving Least Squares with QR
 $$R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$$]@
 
-The right-hand side $Q^T\\mathbf{b}$ is computed by $n$ [dot products](!/linear-algebra/vectors/dot-product). The system $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$ is upper triangular, solved by back substitution in $O(n^2)$ operations.
+The right-hand side $Q^T\\mathbf{b}$ is computed by $n$ [dot products](!/linear-algebra/vectors/dot-product). The system $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$ is upper triangular, [solved by back substitution](https://linearalgebranotes.com/matrices/qr-decomposition#rule-least-squares) in $O(n^2)$ operations.
 
 The critical advantage over the normal equations is numerical.
 
 @academic[rule_plain:Forming $A^TA$ squares the [condition number](!/linear-algebra/matrix/rank): $\\kappa(A^TA) = \\kappa(A)^2$.]@
 
-If $A$ has condition number $10^6$, the normal equations work with condition number $10^{12}$, losing $12$ digits of accuracy in double precision. QR avoids this squaring and works with the original condition number $10^6$.
+If $A$ has condition number $10^6$, the normal equations work with condition number $10^{12}$, losing $12$ digits of accuracy in double precision. [QR avoids this squaring](https://linearalgebranotes.com/matrices/condition-number#rule-normal-equations) and works with the original condition number $10^6$.
 
 @academic[punchline:Least squares through QR needs one triangular solve and keeps the accuracy that forming $A^TA$ throws away.]@`,
     before: ``,
@@ -2219,7 +2219,7 @@ If $A$ has condition number $10^6$, the normal equations work with condition num
 @academic[fact,aside:true,width:35%:Its inventor never saw it take over
 John Francis published the QR algorithm in 1961, and Vera Kublanovskaya found it independently the same year. Francis left numerical analysis soon after and learned only in 2007 that his method had been named one of the ten most important algorithms of the 20th century.]@
 
-The convergence is driven by the fact that $A_{k+1} = Q_k^T A_k Q_k$ — each iteration is a [similarity](!/linear-algebra/transformations/basis-change) transformation that preserves the eigenvalues while driving the sub-diagonal entries toward zero.
+The convergence is driven by the fact that $A_{k+1} = Q_k^T A_k Q_k$ — each iteration is a [similarity](!/linear-algebra/transformations/basis-change) transformation that [preserves the eigenvalues](https://linearalgebranotes.com/maps/similar-matrices#rule-eigenvalues) while driving the sub-diagonal entries toward zero.
 
 With shifts (replacing $A_k$ by $A_k - \\sigma_k I$ before factoring and adding $\\sigma_k I$ back), convergence accelerates dramatically — cubic convergence for symmetric matrices with the Wilkinson shift. The QR algorithm computes eigenvalues without ever forming the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation), avoiding the severe numerical instability of polynomial root-finding.
 
@@ -2232,7 +2232,7 @@ With shifts (replacing $A_k$ by $A_k - \\sigma_k I$ before factoring and adding 
     title: `Properties of the Factors`,
     content: `The orthonormality of $Q$'s columns ($Q^TQ = I_n$) has several immediate consequences.
 
-The matrix $QQ^T$ is the [projection](!/linear-algebra/orthogonality/projections) matrix onto $\\text{Col}(A)$. For any $\\mathbf{b}$, $QQ^T\\mathbf{b}$ is the orthogonal projection of $\\mathbf{b}$ onto the column space.
+The matrix $QQ^T$ is the [projection](!/linear-algebra/orthogonality/projections) matrix onto $\\text{Col}(A)$. For any $\\mathbf{b}$, $QQ^T\\mathbf{b}$ is [the orthogonal projection](https://calculatematrix.com/matrix-calculators/projection-matrix#algorithm) of $\\mathbf{b}$ onto the column space.
 
 @academic[pitfall,aside:true,width:35%:Treating QQᵀ as the identity
 Replacing $QQ^T$ by $I$ for a thin $Q$ claims $QQ^T\\mathbf{b} = \\mathbf{b}$ for every $\\mathbf{b}$. For the worked example and $\\mathbf{b} = (1, 1, 1)^T$, the product is $(4/3, 2/3, 2/3)^T$; only $Q^TQ = I_2$ holds.
@@ -2242,14 +2242,14 @@ For the matrix of the worked example, $m = 3$ and $n = 2$, so $QQ^T$ is a $3 \\t
 
 Orthogonal multiplication preserves norms: $\\|A\\mathbf{x}\\| = \\|QR\\mathbf{x}\\| = \\|R\\mathbf{x}\\|$, since $\\|Q\\mathbf{y}\\| = \\|\\mathbf{y}\\|$ for any $\\mathbf{y}$. This means $R$ captures all the "size" information of $A$ — the orthogonal factor contributes nothing to stretching or compressing.
 
-$R$ is invertible when $A$ has full column rank (the diagonal entries are the norms of the Gram-Schmidt vectors, all positive). The [singular values](!/linear-algebra/decompositions/svd) of $A$ equal the singular values of $R$, since the orthogonal factor does not affect them.`,
+$R$ is invertible when $A$ has full column rank (the diagonal entries are the norms of the Gram-Schmidt vectors, all positive). The [singular values](!/linear-algebra/decompositions/svd) of $A$ equal the singular values of $R$, since [the orthogonal factor does not affect them](https://linearalgebranotes.com/eigen/singular-values#rule-orthogonal-invariance).`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj9: {
     title: `Gram-Schmidt vs. Householder`,
-    content: `Classical Gram-Schmidt can lose orthogonality in floating-point arithmetic when the columns of $A$ are nearly [dependent](!/linear-algebra/vector-spaces/linear-independence). The computed $\\mathbf{q}_i$'s may fail to be perpendicular to machine precision, and the errors accumulate with each step.
+    content: `Classical Gram-Schmidt can [lose orthogonality in floating-point arithmetic](https://linearalgebranotes.com/orthogonality/gram-schmidt#failure-modes) when the columns of $A$ are nearly [dependent](!/linear-algebra/vector-spaces/linear-independence). The computed $\\mathbf{q}_i$'s may fail to be perpendicular to machine precision, and the errors accumulate with each step.
 
 Modified Gram-Schmidt improves stability by updating the remaining vectors in place after each [projection](!/linear-algebra/orthogonality/projections) subtraction, rather than using the original columns throughout. The mathematical result is identical in exact arithmetic, but the numerical behavior is significantly better.
 

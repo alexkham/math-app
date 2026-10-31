@@ -1683,7 +1683,7 @@ $$\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\t
 
 The right-hand side multiplies the [magnitudes](!/linear-algebra/vectors/magnitude) of both vectors and adjusts the product by $\\cos\\theta$. That cosine factor does all the interpretive work: it equals $1$ when $\\theta = 0$ (full alignment), drops to $0$ at $\\theta = \\frac{\\pi}{2}$ (no alignment at all), and reaches $-1$ at $\\theta = \\pi$ (complete opposition).
 
-Why does this agree with the component-wise formula? Place $\\mathbf{a}$ and $\\mathbf{b}$ tail to tail and form the triangle completed by $\\mathbf{a} - \\mathbf{b}$. The law of cosines gives the squared length of the third side:
+[Why does this agree with the component-wise formula?](https://linearalgebranotes.com/vectors/dot-product#rule-geometric) Place $\\mathbf{a}$ and $\\mathbf{b}$ tail to tail and form the triangle completed by $\\mathbf{a} - \\mathbf{b}$. [The law of cosines](https://linearalgebranotes.com/vectors/angle-between-vectors#rule-law-of-cosines) gives the squared length of the third side:
 
 @academic[formula_callout:Geometric Definition
 $$\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2 - 2\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$$]@
@@ -1729,7 +1729,7 @@ A scalar multiplied into one of the vectors can be pulled out of the dot product
 @academic[formula_callout:Properties of the Dot Product
 $$\\mathbf{a} \\cdot \\mathbf{a} = \\|\\mathbf{a}\\|^2 \\geq 0, \\quad \\text{with equality if and only if } \\mathbf{a} = \\mathbf{0}$$]@
 
-The dot product of a vector with itself is the sum of squared components — always non-negative, and zero only for the zero vector. This property ties the dot product directly to the norm and ensures that the geometric notion of length is consistent with the algebraic framework.`,
+The dot product of a vector with itself is the sum of squared components — [always non-negative, and zero only for the zero vector](https://linearalgebranotes.com/vectors/dot-product#rule-positive). This property ties the dot product directly to the norm and ensures that the geometric notion of length is consistent with the algebraic framework.`,
     before: ``,
     after: ``,
     link: '',
@@ -1758,7 +1758,7 @@ The dependence runs both ways. The geometric formula $\\mathbf{a} \\cdot \\mathb
   },
   obj5: {
     title: `The Angle Between Vectors`,
-    content: `Rearranging the geometric formula isolates the angle:
+    content: `[Rearranging the geometric formula isolates the angle](https://calculatematrix.com/vector-calculators/angle-between-vectors#algorithm):
 
 @academic[formula_callout:Angle Between Vectors
 $$\\cos\\theta = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|}$$
@@ -1780,7 +1780,7 @@ The right-hand side is the dot product of the two normalized vectors $\\hat{\\ma
 @academic[fact,aside:true,width:35%:Methane's bond angle is a dot product
 In methane the four hydrogens sit at alternate corners of a cube around the carbon, along $(1, 1, 1)$ and $(1, -1, -1)$ for example. The dot product is $-1$ and each length is $\\sqrt{3}$, so $\\cos\\theta = -\\frac{1}{3}$ and $\\theta \\approx 109.5^\\circ$, the bond angle of chemistry books.]@
 
-In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, this formula can be verified against the angle measured with a protractor. In higher dimensions, where geometric angles cannot be visualized, the formula serves as the definition of the angle between two vectors — extending a geometric concept into spaces where geometry alone cannot reach.
+In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, this formula can be verified against the angle measured with a protractor. In higher dimensions, where geometric angles cannot be visualized, the formula serves as [the definition of the angle between two vectors](https://linearalgebranotes.com/vectors/angle-between-vectors#definition) — extending a geometric concept into spaces where geometry alone cannot reach.
 
 Even in $\\mathbb{R}^3$ the formula often does better than a protractor. Take a cube centred at the origin with corners at $(\\pm 1, \\pm 1, \\pm 1)$, and draw arrows from the centre to two corners that share no edge, such as $(1, 1, 1)$ and $(1, -1, -1)$. Measuring the angle between them on a model is awkward; the formula needs only one dot product and two lengths.`,
     before: ``,
@@ -1804,7 +1804,7 @@ This three-way classification is a fast diagnostic tool. Checking whether a dot 
   },
   obj7: {
     title: `Orthogonality`,
-    content: `Two vectors are orthogonal when their dot product is zero:
+    content: `[Two vectors are orthogonal](https://linearalgebranotes.com/orthogonality/orthogonal-vectors#definition) when their dot product is zero:
 
 @academic[formula_callout:Orthogonality Test
 $$\\mathbf{a} \\cdot \\mathbf{b} = 0 \\iff \\mathbf{a} \\perp \\mathbf{b}$$
@@ -1836,11 +1836,11 @@ $$|\\mathbf{a} \\cdot \\mathbf{b}| \\leq \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The geometric angle formula offers the most transparent explanation. Writing $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$ and noting that $|\\cos\\theta|$ never surpasses $1$, the absolute dot product is automatically bounded by the product of the norms. This ceiling is reached only when $\\cos\\theta$ hits $\\pm 1$ — at $\\theta = 0$ or $\\theta = \\pi$ — so equality corresponds to [parallel](!/linear-algebra/vectors/properties) vectors pointing along or against each other.
+The geometric angle formula offers the most transparent explanation. Writing $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$ and noting that $|\\cos\\theta|$ never surpasses $1$, the absolute dot product is automatically bounded by the product of the norms. [This ceiling is reached only](https://linearalgebranotes.com/vectors/cauchy-schwarz-inequality#rule-equality) when $\\cos\\theta$ hits $\\pm 1$ — at $\\theta = 0$ or $\\theta = \\pi$ — so equality corresponds to [parallel](!/linear-algebra/vectors/properties) vectors pointing along or against each other.
 
 An entirely coordinate-based proof exists as well, requiring no notion of angle. Consider the expression $\\|\\mathbf{a} - t\\mathbf{b}\\|^2$ for a variable scalar $t$. Because a squared norm is never negative, this expression defines a quadratic in $t$ with no negative values. A real quadratic that stays non-negative must have a non-positive discriminant, and writing out that discriminant condition yields exactly the Cauchy–Schwarz bound. This argument extends to any setting where an inner product is defined, even when angles lack geometric substance.
 
-The inequality plays a structural role beyond bounding computations. Without it, the angle formula would be ill-posed: feeding $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|}$ into $\\arccos$ requires the fraction to land in $[-1, 1]$, and Cauchy–Schwarz is what guarantees this. The norm's triangle inequality likewise depends on it — establishing $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ involves controlling the mixed term $\\mathbf{a} \\cdot \\mathbf{b}$, which is exactly the job Cauchy–Schwarz performs.
+The inequality plays a structural role beyond bounding computations. Without it, the angle formula would be ill-posed: feeding $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|}$ into $\\arccos$ requires the fraction to land in $[-1, 1]$, and [Cauchy–Schwarz is what guarantees this](https://linearalgebranotes.com/vectors/cauchy-schwarz-inequality#rule-cosine-range). The norm's triangle inequality likewise depends on it — establishing $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ involves controlling the mixed term $\\mathbf{a} \\cdot \\mathbf{b}$, which is exactly the job Cauchy–Schwarz performs.
 
 @academic[punchline:Cauchy–Schwarz is what lets the dot product define angles and keeps lengths obeying the triangle inequality, in any dimension.]@`,
     before: ``,
@@ -1866,7 +1866,7 @@ When this quantity comes out positive, $\\mathbf{a}$ tilts toward $\\mathbf{b}$.
 
 ## Vector Projection
 
-To obtain an actual vector rather than a bare number, the scalar projection is re-embedded along $\\mathbf{b}$:
+To obtain an actual vector rather than a bare number, [the scalar projection is re-embedded](https://calculatematrix.com/vector-calculators/vector-projection#algorithm) along $\\mathbf{b}$:
 
 @academic[formula_callout:Vector Projection
 $$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|^2}\\,\\mathbf{b}$$
@@ -1897,7 +1897,7 @@ Together, the two pieces reconstruct the original:
 @academic[formula_callout:Orthogonal Projection
 $$\\mathbf{a} = \\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} + \\mathbf{a}_{\\perp}$$]@
 
-The parallel component lies along $\\mathbf{b}$; the perpendicular component satisfies $\\mathbf{a}_{\\perp} \\cdot \\mathbf{b} = 0$, a fact that follows by substituting the formula and simplifying. These two constituents are geometrically independent — adjusting one leaves the other unchanged, and each accounts for information the other entirely misses.
+The parallel component lies along $\\mathbf{b}$; the perpendicular component satisfies $\\mathbf{a}_{\\perp} \\cdot \\mathbf{b} = 0$, [a fact that follows by substituting the formula and simplifying](https://linearalgebranotes.com/vectors/vector-projection#rule-perpendicular-error). These two constituents are geometrically independent — adjusting one leaves the other unchanged, and each accounts for information the other entirely misses.
 
 This two-part split reappears in more sophisticated forms throughout linear algebra. Projection onto a line generalizes to projection onto multi-dimensional subspaces. The Gram–Schmidt procedure repeats the same splitting step iteratively, peeling off parallel components one vector at a time to produce an orthogonal collection. Least-squares fitting identifies the closest approximation inside a subspace by projecting onto it. Each of these techniques, covered in the [orthogonality](!/linear-algebra/orthogonality) section, traces back to the same principle at work here: partition a vector into what runs along a chosen direction and what runs across it.`,
     before: ``,
@@ -2270,7 +2270,7 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
         kind: 'instance',
         lead: `On numbers, the rule is the same in every dimension.`,
         content: [
-          `This definition works in any dimension. In $\\mathbb{R}^2$, the dot product of $(3, 4)$ and $(1, -2)$ is $3(1) + 4(-2) = -5$. In $\\mathbb{R}^5$, the same rule applies with five terms instead of two. The computation is mechanical, but the meaning it carries — revealed by the geometric definition — is what makes the dot product central to the rest of linear algebra.`,
+          `This definition works in any dimension. In $\\mathbb{R}^2$, the dot product of $(3, 4)$ and $(1, -2)$ is $3(1) + 4(-2) = -5$. In $\\mathbb{R}^5$, the same rule applies with five terms instead of two. [The computation is mechanical](https://calculatematrix.com/vector-calculators/dot-product#algorithm), but the meaning it carries — revealed by the geometric definition — is what makes the dot product central to the rest of linear algebra.`,
           ciTable('examplesTable'),
           `Two pairs give positive numbers, one gives a negative number, and a vector dotted with itself gives $10$. What those signs and sizes mean is the next thing to check.`,
           <div key={'unit-dot'} dangerouslySetInnerHTML={{ __html: demoUnits.dot }} />,

@@ -951,7 +951,7 @@ $$A\\mathbf{x} = x_1 \\mathbf{a}_1 + x_2 \\mathbf{a}_2 + \\cdots + x_n \\mathbf{
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The product $A\\mathbf{x}$ is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the columns of $A$, weighted by the entries of $\\mathbf{x}$. This single observation underlies the theory of linear systems, transformations, and virtually everything else involving matrices.`,
+The product $A\\mathbf{x}$ is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the columns of $A$, weighted by the entries of $\\mathbf{x}$. [This single observation](https://linearalgebranotes.com/matrices/matrix#rule-column-picture) underlies the theory of linear systems, transformations, and virtually everything else involving matrices.`,
     before: ``,
     after: ``,
     link: ``,
@@ -962,7 +962,7 @@ The product $A\\mathbf{x}$ is a [linear combination](!/linear-algebra/vectors/li
 
 Addition is entry-by-entry: $(A + B)_{ij} = a_{ij} + b_{ij}$. Both matrices must have the same dimensions. Scalar multiplication scales every entry: $(cA)_{ij} = c \\cdot a_{ij}$. These two operations together give the set of all $m \\times n$ matrices the structure of a vector space of dimension $mn$.
 
-Matrix multiplication is more involved. For $A$ of size $m \\times n$ and $B$ of size $n \\times p$, the product $AB$ has size $m \\times p$, with each entry computed as the dot product of a row of $A$ with a column of $B$: $(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} b_{kj}$. The number of columns of $A$ must equal the number of rows of $B$; otherwise the product is undefined.
+Matrix multiplication is more involved. For $A$ of size $m \\times n$ and $B$ of size $n \\times p$, the product $AB$ has size $m \\times p$, with each entry [computed as the dot product of a row](https://calculatematrix.com/matrix-calculators/matrix-multiplication#algorithm) of $A$ with a column of $B$: $(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} b_{kj}$. The number of columns of $A$ must equal the number of rows of $B$; otherwise the product is undefined.
 
 @academic[pitfall,aside:true,width:35%:Multiplying entry by entry
 Multiplying matching positions turns $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$ into $\\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$. Each entry of $AB$ needs a row times a column, which gives $\\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$.
@@ -974,7 +974,7 @@ The transpose $A^T$ swaps rows and columns: $(A^T)_{ij} = a_{ji}$. An $m \\times
 
 @academic[rule_plain:One property that distinguishes matrix arithmetic from ordinary arithmetic is that multiplication is not commutative.]@
 
-In general, $AB \\neq BA$, even when both products are defined. This asymmetry has far-reaching consequences throughout linear algebra.`,
+In general, $AB \\neq BA$, even when both products are defined. [This asymmetry](https://linearalgebranotes.com/matrices/matrix-multiplication#rule-noncommutative) has far-reaching consequences throughout linear algebra.`,
     before: ``,
     after: ``,
     link: ``,
@@ -985,7 +985,7 @@ In general, $AB \\neq BA$, even when both products are defined. This asymmetry h
 
 A symmetric matrix satisfies $A = A^T$, meaning it is unchanged by transposition. Symmetric matrices have the remarkable property that all their eigenvalues are real and their eigenvectors can be chosen to be mutually orthogonal. A triangular matrix has all entries either above or below the diagonal equal to zero, making its determinant and eigenvalues readable directly from the diagonal.
 
-An orthogonal matrix satisfies $Q^T Q = I$, meaning its columns form an orthonormal set and its transpose is its inverse. Orthogonal matrices preserve lengths and angles, making them the algebraic counterpart of rotations and reflections.
+An orthogonal matrix satisfies $Q^T Q = I$, meaning its columns form an orthonormal set and its transpose is its inverse. [Orthogonal matrices preserve lengths and angles](https://linearalgebranotes.com/matrices/orthogonal-matrix#rule-dot-products), making them the algebraic counterpart of rotations and reflections.
 
 These and several other [types](!/linear-algebra/matrix/types) — including skew-symmetric, nilpotent, idempotent, and permutation matrices — each carry structural guarantees that simplify computation and deepen understanding.`,
     before: ``,
@@ -1003,7 +1003,7 @@ For a $2 \\times 2$ matrix $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}
 @academic[formula_callout:The Inverse of a Matrix
 $$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$]@
 
-which breaks down precisely when $ad - bc = 0$. For larger matrices, the inverse can be computed by row reduction or through the adjugate formula, though in practice solving $Ax = \\mathbf{b}$ directly is almost always more efficient than computing $A^{-1}$.
+which breaks down precisely when $ad - bc = 0$. For larger matrices, the inverse [can be computed by row reduction or through the adjugate formula](https://calculatematrix.com/matrix-calculators/matrix-inverse#methods), though in practice solving $Ax = \\mathbf{b}$ directly is almost always more efficient than computing $A^{-1}$.
 
 @academic[pitfall,aside:true,width:35%:Swapping the wrong pair
 Swapping $b$ and $c$ instead of $a$ and $d$ turns $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$, with $ad - bc = 1$, into $\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$, and $A$ times that is $\\begin{pmatrix} 3 & -7 \\\\ 7 & -16 \\end{pmatrix}$, not $I$. The inverse is $\\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$.
@@ -1020,9 +1020,9 @@ Applying the formula to a particular matrix takes three steps: compute $ad - bc$
     title: `Rank and Trace`,
     content: `Two scalar quantities extracted from a matrix appear throughout linear algebra.
 
-The [rank](!/linear-algebra/matrix/rank) of an $m \\times n$ matrix is the number of linearly independent rows, which always equals the number of linearly independent columns. It measures the "effective dimensionality" of the matrix — how many of its rows or columns carry genuinely new information. The rank satisfies $0 \\leq \\text{rank}(A) \\leq \\min(m, n)$. When $\\text{rank}(A) = \\min(m, n)$, the matrix is said to have full rank, meaning no row or column is redundant.
+The [rank](!/linear-algebra/matrix/rank) of an $m \\times n$ matrix is the number of linearly independent rows, which [always equals the number of linearly independent columns](https://linearalgebranotes.com/matrices/rank#rule-row-column). It measures the "effective dimensionality" of the matrix — how many of its rows or columns carry genuinely new information. The rank satisfies $0 \\leq \\text{rank}(A) \\leq \\min(m, n)$. When $\\text{rank}(A) = \\min(m, n)$, the matrix is said to have full rank, meaning no row or column is redundant.
 
-The [trace](!/linear-algebra/matrix/trace) is defined only for square matrices: $\\text{tr}(A) = a_{11} + a_{22} + \\cdots + a_{nn}$, the sum of the diagonal entries. Despite its simplicity, the trace encodes deep information. It equals the sum of the eigenvalues, it is invariant under changes of basis, and it satisfies the cyclic property $\\text{tr}(AB) = \\text{tr}(BA)$, which makes it a fundamental tool in both theoretical and applied contexts.`,
+The [trace](!/linear-algebra/matrix/trace) is defined only for square matrices: $\\text{tr}(A) = a_{11} + a_{22} + \\cdots + a_{nn}$, the sum of the diagonal entries. Despite its simplicity, the trace encodes deep information. It equals the sum of the eigenvalues, it is invariant under changes of basis, and it satisfies [the cyclic property](https://linearalgebranotes.com/matrices/trace#rule-cyclic) $\\text{tr}(AB) = \\text{tr}(BA)$, which makes it a fundamental tool in both theoretical and applied contexts.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1036,7 +1036,7 @@ $$Ax = \\mathbf{b}$$]@
 
 where $A$ is the $m \\times n$ coefficient matrix, $\\mathbf{x}$ is the $n \\times 1$ vector of unknowns, and $\\mathbf{b}$ is the $m \\times 1$ vector of right-hand sides. The augmented matrix $[A \\mid \\mathbf{b}]$ appends $\\mathbf{b}$ as an extra column, creating the compact representation used in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination).
 
-Whether the system has no solution, exactly one solution, or infinitely many solutions depends entirely on how the rank of $A$ compares with the rank of the augmented matrix $[A \\mid \\mathbf{b}]$ and with the number of unknowns $n$. When $A$ is square and invertible, the unique solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires the [rank](!/linear-algebra/matrix/rank) and the structure of the null space.
+Whether the system has no solution, exactly one solution, or infinitely many solutions depends entirely on how the rank of $A$ compares with [the rank of the augmented matrix](https://calculatematrix.com/linear-systems/consistency-checker#algorithm) $[A \\mid \\mathbf{b}]$ and with the number of unknowns $n$. When $A$ is square and invertible, the unique solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires the [rank](!/linear-algebra/matrix/rank) and the structure of the null space.
 
 @academic[punchline:A whole linear system fits in the single equation $A\\mathbf{x} = \\mathbf{b}$, and ranks decide how many solutions it has.]@`,
     before: ``,
@@ -1376,7 +1376,7 @@ $$A = \\begin{pmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{21} & a_{22} &
         id: 'kind',
         lead: `A matrix is a single object made of many numbers, each with an address.`,
         content: [
-          `A matrix is a rectangular array of numbers arranged in rows and columns. The standard notation uses a capital letter for the matrix and a lowercase letter with two subscripts for its entries: the matrix $A$ has entry $a_{ij}$ in row $i$ and column $j$. The shorthand $A = (a_{ij})$ means "the matrix whose $(i,j)$ entry is $a_{ij}$."`,
+          `A matrix is [a rectangular array of numbers arranged in rows and columns](https://linearalgebranotes.com/matrices/matrix#definition). The standard notation uses a capital letter for the matrix and a lowercase letter with two subscripts for its entries: the matrix $A$ has entry $a_{ij}$ in row $i$ and column $j$. The shorthand $A = (a_{ij})$ means "the matrix whose $(i,j)$ entry is $a_{ij}$."`,
           `@academic[fact,aside:true,width:35%:A matrix is named after a womb
 J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw the array as the parent from which many determinants are born, one for every choice of an equal number of rows and columns.]@`,
           `The entries can be real numbers, complex numbers, or elements of any algebraic field. Throughout this site, entries are real unless explicitly stated otherwise.`,

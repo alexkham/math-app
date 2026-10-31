@@ -1203,7 +1203,7 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
 
 @academic[rule_theorem_plain:The image is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $W$.]@
 
-It contains $T(\\mathbf{0}) = \\mathbf{0}$, and if $T(\\mathbf{u})$ and $T(\\mathbf{v})$ are in the image, then so is $cT(\\mathbf{u}) + dT(\\mathbf{v}) = T(c\\mathbf{u} + d\\mathbf{v})$ — closure under both operations follows from linearity.
+It contains $T(\\mathbf{0}) = \\mathbf{0}$, and if $T(\\mathbf{u})$ and $T(\\mathbf{v})$ are in the image, then so is $cT(\\mathbf{u}) + dT(\\mathbf{v}) = T(c\\mathbf{u} + d\\mathbf{v})$ — [closure under both operations follows from linearity](https://linearalgebranotes.com/maps/image#rule-subspace).
 
 When $T(\\mathbf{x}) = A\\mathbf{x}$ for a [matrix](!/linear-algebra/matrix) $A$, the image is the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: the set of all vectors expressible as linear combinations of the columns. The [dimension](!/linear-algebra/vector-spaces/dimension) of the image equals the [rank](!/linear-algebra/matrix/rank) of $A$.
 
@@ -1227,7 +1227,7 @@ $$\\ker(T) = \\{\\mathbf{v} \\in V : T(\\mathbf{v}) = \\mathbf{0}\\} \\subseteq 
 
 It contains $\\mathbf{0}$ (since $T(\\mathbf{0}) = \\mathbf{0}$), and if $T(\\mathbf{u}) = \\mathbf{0}$ and $T(\\mathbf{v}) = \\mathbf{0}$, then $T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v}) = \\mathbf{0}$, so $c\\mathbf{u} + d\\mathbf{v} \\in \\ker(T)$.
 
-When $T(\\mathbf{x}) = A\\mathbf{x}$, the kernel is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: all solutions to the [homogeneous](!/linear-algebra/linear-systems/homogeneous) system $A\\mathbf{x} = \\mathbf{0}$. Its dimension is the nullity, equal to $n - \\text{rank}(A)$.
+When $T(\\mathbf{x}) = A\\mathbf{x}$, the kernel is the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: all solutions to the [homogeneous](!/linear-algebra/linear-systems/homogeneous) system $A\\mathbf{x} = \\mathbf{0}$. [Its dimension is the nullity](https://calculatematrix.com/matrix-calculators/nullspace#rank-nullity), equal to $n - \\text{rank}(A)$.
 
 @academic[pitfall,aside:true,width:35%:Placing the kernel in the codomain
 Reading the kernel as the zero output gives $\\ker(T) = \\{(0, 0)\\}$ for $T(x, y, z) = (x, y)$, so $T$ looks injective. The kernel is a set of inputs in $\\mathbb{R}^3$: solving $T(\\mathbf{v}) = \\mathbf{0}$ gives the line $\\text{Span}\\{(0, 0, 1)\\}$.
@@ -1289,7 +1289,7 @@ $$T \\text{ injective} \\iff \\ker(T) = \\{\\mathbf{0}\\}$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The proof is short. If $T(\\mathbf{u}) = T(\\mathbf{v})$, then $T(\\mathbf{u} - \\mathbf{v}) = T(\\mathbf{u}) - T(\\mathbf{v}) = \\mathbf{0}$, so $\\mathbf{u} - \\mathbf{v} \\in \\ker(T)$. If the kernel is trivial, $\\mathbf{u} - \\mathbf{v} = \\mathbf{0}$ and $\\mathbf{u} = \\mathbf{v}$.
+[The proof is short](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-kernel-test). If $T(\\mathbf{u}) = T(\\mathbf{v})$, then $T(\\mathbf{u} - \\mathbf{v}) = T(\\mathbf{u}) - T(\\mathbf{v}) = \\mathbf{0}$, so $\\mathbf{u} - \\mathbf{v} \\in \\ker(T)$. If the kernel is trivial, $\\mathbf{u} - \\mathbf{v} = \\mathbf{0}$ and $\\mathbf{u} = \\mathbf{v}$.
 
 @academic[rule_theorem_plain:For matrix transformations, injectivity is equivalent to full column rank: $\\text{rank}(A) = n$.]@
 
@@ -1330,7 +1330,7 @@ $$\\dim V = \\dim W \\Rightarrow \\bigl(T \\text{ injective} \\iff T \\text{ sur
 Calling $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ an isomorphism because it maps $\\mathbb{R}^2$ to $\\mathbb{R}^2$ fails: $A(-2, 1) = \\mathbf{0}$, so it is neither injective nor surjective. Its kernel is the line $\\text{Span}\\{(-2, 1)\\}$ and its image only the line $\\text{Span}\\{(1, 2)\\}$.
 [Read more](!#pitfalls)]@
 
-Checking any one of the three establishes the other two. This is because the rank-nullity theorem forces $\\dim(\\text{Im}(T)) + \\dim(\\ker(T)) = n$ (where $n = \\dim(V) = \\dim(W)$), and $\\dim(\\text{Im}(T)) \\leq n$. If the kernel is trivial (injective), the image has dimension $n$ and must equal all of $W$ (surjective). If the image is all of $W$ (surjective), the kernel must have dimension $0$ (injective).
+[Checking any one of the three establishes the other two](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-equal-dimensions). This is because the rank-nullity theorem forces $\\dim(\\text{Im}(T)) + \\dim(\\ker(T)) = n$ (where $n = \\dim(V) = \\dim(W)$), and $\\dim(\\text{Im}(T)) \\leq n$. If the kernel is trivial (injective), the image has dimension $n$ and must equal all of $W$ (surjective). If the image is all of $W$ (surjective), the kernel must have dimension $0$ (injective).
 
 For matrix transformations between spaces of the same dimension, bijectivity is equivalent to the matrix being square and [invertible](!/linear-algebra/matrix/inverse).`,
     before: ``,
@@ -1348,7 +1348,7 @@ $$\\dim\\text{Im}(T) + \\dim\\ker(T) = \\dim V$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The domain dimensions split between what the map preserves and what it destroys. The image captures the dimensions that survive; the kernel captures the dimensions that are annihilated.
+[The domain dimensions split](https://linearalgebranotes.com/spaces/rank-nullity-theorem#rule-linear-maps) between what the map preserves and what it destroys. The image captures the dimensions that survive; the kernel captures the dimensions that are annihilated.
 
 For [matrix](!/linear-algebra/matrix) transformations $T(\\mathbf{x}) = A\\mathbf{x}$, this becomes $\\text{rank}(A) + \\text{nullity}(A) = n$ — the familiar [rank-nullity theorem](!/linear-algebra/matrix/rank) in concrete language.
 
@@ -1365,7 +1365,7 @@ The theorem constrains the interplay between injectivity and surjectivity. If $\
     title: `Dimension Constraints`,
     content: `The rank-nullity theorem imposes hard limits on what a linear transformation can achieve.
 
-$T: V \\to W$ can be injective only if $\\dim(V) \\leq \\dim(W)$. A map from a larger space to a smaller one must collapse some directions — the kernel is forced to be nontrivial.
+$T: V \\to W$ [can be injective only if](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-dimension-limits) $\\dim(V) \\leq \\dim(W)$. A map from a larger space to a smaller one must collapse some directions — the kernel is forced to be nontrivial.
 
 $T: V \\to W$ can be surjective only if $\\dim(V) \\geq \\dim(W)$. A map from a smaller space to a larger one cannot cover all directions — the image is a proper subspace.
 
@@ -1380,9 +1380,9 @@ These constraints apply to all linear maps, not just matrix transformations. The
     title: `Computing the Image and Kernel`,
     content: `For a matrix transformation $T(\\mathbf{x}) = A\\mathbf{x}$, the image and kernel are computed by [row reduction](!/linear-algebra/linear-systems/gaussian-elimination).
 
-The kernel is the null space of $A$: solve $A\\mathbf{x} = \\mathbf{0}$, reduce to [echelon form](!/linear-algebra/linear-systems/echelon-form), and express the solution in parametric vector form. Each free variable contributes one [basis](!/linear-algebra/vector-spaces) vector for $\\ker(T)$.
+[The kernel is the null space of](https://calculatematrix.com/matrix-calculators/nullspace#method) $A$: solve $A\\mathbf{x} = \\mathbf{0}$, reduce to [echelon form](!/linear-algebra/linear-systems/echelon-form), and express the solution in parametric vector form. Each free variable contributes one [basis](!/linear-algebra/vector-spaces) vector for $\\ker(T)$.
 
-The image is the column space of $A$: row reduce $A$, identify the pivot columns, and take the corresponding columns of the original matrix $A$ as a basis for $\\text{Im}(T)$.
+The image is the column space of $A$: row reduce $A$, [identify the pivot columns](https://calculatematrix.com/matrix-calculators/column-space#method), and take the corresponding columns of the original matrix $A$ as a basis for $\\text{Im}(T)$.
 
 @academic[example:Worked Example
 
@@ -1411,9 +1411,9 @@ Every vector $\\mathbf{v} \\in V$ splits as $\\mathbf{v} = \\mathbf{v}_k + \\mat
 @academic[fact,aside:true,width:35%:The $+ C$ of calculus is a kernel
 On functions defined on an interval, differentiation is linear, and its kernel is the constant functions, since only constants have derivative $0$. So two antiderivatives of the same $f$ differ by a kernel element, and the $+ C$ in $\\int f\\,dx = F + C$ is that kernel added to one answer.]@
 
-For matrix transformations, the [four fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces) provide the natural complement: the row space of $A$ is the orthogonal complement of the null space in $\\mathbb{R}^n$, and $A$ maps the row space bijectively onto the column space. The null-space component is destroyed; the row-space component survives intact.
+For matrix transformations, the [four fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces) provide the natural complement: the row space of $A$ is [the orthogonal complement of the null space](https://linearalgebranotes.com/orthogonality/orthogonal-complement#rule-fundamental) in $\\mathbb{R}^n$, and $A$ maps the row space bijectively onto the column space. The null-space component is destroyed; the row-space component survives intact.
 
-The same split governs equations. If $T(\\mathbf{v}_0) = \\mathbf{w}$, then every $\\mathbf{v}_0 + \\mathbf{k}$ with $\\mathbf{k} \\in \\ker(T)$ is also a solution of $T(\\mathbf{v}) = \\mathbf{w}$, and any two solutions differ by a vector of the kernel. The complete solution set is therefore one particular solution shifted by the whole kernel: a single point when the kernel is trivial, a line, a plane or a larger flat piece when it is not.`,
+The same split governs equations. If $T(\\mathbf{v}_0) = \\mathbf{w}$, then every $\\mathbf{v}_0 + \\mathbf{k}$ with $\\mathbf{k} \\in \\ker(T)$ is also a solution of $T(\\mathbf{v}) = \\mathbf{w}$, and [any two solutions differ by a vector of the kernel](https://linearalgebranotes.com/maps/kernel#rule-same-output). The complete solution set is therefore one particular solution shifted by the whole kernel: a single point when the kernel is trivial, a line, a plane or a larger flat piece when it is not.`,
     before: ``,
     after: ``,
     link: ``,

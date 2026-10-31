@@ -1431,7 +1431,7 @@ For a $4 \\times 4$ matrix, each minor is a $3 \\times 3$ determinant. For a $5 
 @academic[formula_callout:cofactor_definition|Cofactor Definition|$$C_{ij} = (-1)^{i+j} \\, M_{ij}$$]@
 @academic[formulas_link:/linear-algebra/formulas#cofactor_definition]@
 
-The exponent $i + j$ determines whether the sign is positive or negative. When $i + j$ is even, the cofactor equals the minor; when $i + j$ is odd, the cofactor is the negative of the minor. This produces a checkerboard of signs across the matrix:
+The exponent $i + j$ determines whether the sign is positive or negative. When $i + j$ is even, the cofactor equals the minor; when $i + j$ is odd, the cofactor is the negative of the minor. This produces [a checkerboard of signs](https://calculatematrix.com/matrix-calculators/cofactor#sign-pattern) across the matrix:
 
 @academic[formula_callout:Cofactors and the Sign Pattern
 $$\\begin{pmatrix} + & - & + & - \\\\ - & + & - & + \\\\ + & - & + & - \\\\ - & + & - & + \\end{pmatrix}$$]@
@@ -1515,7 +1515,7 @@ Expanded with the explicit sign factor: $\\det(A) = \\sum_{i=1}^{n} (-1)^{i+j} \
 
 That column expansion gives the same result as row expansion follows from [transpose invariance](!/linear-algebra/determinants/properties): since $\\det(A^T) = \\det(A)$, expanding $A$ along column $j$ is the same as expanding $A^T$ along row $j$.
 
-The practical consequence is that before starting any cofactor expansion, the first step should be to scan the matrix for the row or column containing the most zeros. Each zero entry eliminates an entire sub-determinant from the sum.
+The practical consequence is that before starting any cofactor expansion, the first step should be to [scan the matrix for the row or column containing the most zeros](https://linearalgebranotes.com/matrices/determinant#examples). Each zero entry eliminates an entire sub-determinant from the sum.
 
 ## Worked Example
 
@@ -1571,7 +1571,7 @@ The cofactor matrix encodes every possible cofactor expansion simultaneously —
   },
   obj6: {
     title: `The Adjugate`,
-    content: `The adjugate (also called the classical adjoint) of $A$ is the transpose of the cofactor matrix:
+    content: `The adjugate (also called the classical adjoint) of $A$ is [the transpose of the cofactor matrix](https://calculatematrix.com/matrix-calculators/adjugate#formula):
 
 @academic[formula_callout:adjugate_definition|Adjugate Definition|$$\\operatorname{adj}(A) = \\operatorname{cof}(A)^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#adjugate_definition]@
@@ -1592,7 +1592,7 @@ The adjugate satisfies
 Using $\\operatorname{cof}(A)$ itself as the adjugate pairs row $1$ of $A$ with column $1$ of $\\operatorname{cof}(A)$: $2(20) + 5(-29) + 1(-13) = -118$, not $-12$. After the transpose, row $1$ meets its own cofactors: $2(20) + 5(-8) + 1(-12) = -12$.
 [Read more](!#pitfalls)]@
 
-To see why, consider the $(i,k)$ entry of the product $A \\cdot \\operatorname{adj}(A)$. This is $\\sum_{j=1}^{n} a_{ij} \\cdot [\\operatorname{adj}(A)]_{jk} = \\sum_{j=1}^{n} a_{ij} \\, C_{kj}$. When $i = k$, this sum is exactly the Laplace expansion of $\\det(A)$ along row $i$, so the diagonal entries equal $\\det(A)$. When $i \\neq k$, the sum pairs the entries of row $i$ with the cofactors of a different row $k$. This is equivalent to computing the determinant of a matrix with two identical rows (row $i$ appears in both its own position and row $k$'s), which is always zero. So the off-diagonal entries vanish.
+[To see why](https://linearalgebranotes.com/matrices/adjugate#rule-key-identity), consider the $(i,k)$ entry of the product $A \\cdot \\operatorname{adj}(A)$. This is $\\sum_{j=1}^{n} a_{ij} \\cdot [\\operatorname{adj}(A)]_{jk} = \\sum_{j=1}^{n} a_{ij} \\, C_{kj}$. When $i = k$, this sum is exactly the Laplace expansion of $\\det(A)$ along row $i$, so the diagonal entries equal $\\det(A)$. When $i \\neq k$, the sum pairs the entries of row $i$ with the cofactors of a different row $k$. This is equivalent to computing the determinant of a matrix with two identical rows (row $i$ appears in both its own position and row $k$'s), which is always zero. So the off-diagonal entries vanish.
 
 ## Verification
 
@@ -1604,7 +1604,7 @@ $$A \\cdot \\operatorname{adj}(A) = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \
 @academic[fact,aside:true,width:35%:A singular adjugate has rank 1 or 0
 When $\\det(A) = 0$, the identity says $A \\cdot \\operatorname{adj}(A) = O$, so every column of $\\operatorname{adj}(A)$ lies in the null space of $A$. If that null space is a single line, $\\operatorname{adj}(A)$ has rank exactly $1$; if it is larger, every cofactor is $0$.]@
 
-This identity is the foundation of the [adjugate inverse formula](!/linear-algebra/determinants/applications): dividing both sides by $\\det(A)$ gives $A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$, valid whenever $\\det(A) \\neq 0$.`,
+This identity is the foundation of the [adjugate inverse formula](!/linear-algebra/determinants/applications): [dividing both sides by](https://linearalgebranotes.com/matrices/adjugate#rule-inverse-formula) $\\det(A)$ gives $A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$, valid whenever $\\det(A) \\neq 0$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1613,11 +1613,11 @@ This identity is the foundation of the [adjugate inverse formula](!/linear-algeb
     title: `Computational Cost`,
     content: `Cofactor expansion is a recursive algorithm. Each $n \\times n$ determinant spawns $n$ sub-problems of size $(n-1) \\times (n-1)$. Without any zero entries to prune terms, the total number of multiplications satisfies the recurrence $T(n) = n \\cdot T(n-1)$, which gives $T(n) = O(n!)$.
 
-To put this in concrete terms: a $10 \\times 10$ determinant via cofactor expansion requires roughly $10! \\approx 3.6$ million multiplications. A $20 \\times 20$ determinant would require over $2 \\times 10^{18}$ — well beyond the reach of any computer running a naive recursive implementation. Row reduction, by contrast, computes the same determinant in roughly $\\frac{2}{3}n^3$ operations: about $670$ for $n = 10$ and about $5300$ for $n = 20$.
+To put this in concrete terms: a $10 \\times 10$ determinant via cofactor expansion requires roughly $10! \\approx 3.6$ million multiplications. A $20 \\times 20$ determinant would require over $2 \\times 10^{18}$ — well beyond the reach of any computer running a naive recursive implementation. [Row reduction, by contrast, computes the same determinant](https://calculatematrix.com/matrix-calculators/determinant#methods) in roughly $\\frac{2}{3}n^3$ operations: about $670$ for $n = 10$ and about $5300$ for $n = 20$.
 
 This cost difference does not make cofactor expansion useless. For matrices up to $4 \\times 4$, the expansion is fast enough to do by hand and gives the exact symbolic result. For matrices with many zero entries, the effective cost drops dramatically because each zero eliminates an entire recursive branch. In symbolic computation — where entries are polynomials or formal expressions rather than numbers — cofactor expansion preserves structure that row reduction would obscure.
 
-The Laplace expansion is best understood as a theoretical instrument. It defines what the determinant is, establishes its algebraic properties, and produces the adjugate and the cofactor structure. For numerical computation on anything larger than a small matrix, the [row-reduction approach](!/linear-algebra/determinants/properties) is the practical choice.`,
+The Laplace expansion is best understood as a theoretical instrument. It defines what the determinant is, [establishes its algebraic properties](https://linearalgebranotes.com/matrices/determinant#properties), and produces the adjugate and the cofactor structure. For numerical computation on anything larger than a small matrix, the [row-reduction approach](!/linear-algebra/determinants/properties) is the practical choice.`,
     before: ``,
     after: ``,
     link: ``,

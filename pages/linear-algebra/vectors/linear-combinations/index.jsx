@@ -1154,7 +1154,7 @@ A single nonzero vector $\\mathbf{v}$ generates all its scalar multiples: $c\\ma
 @academic[fact,aside:true,width:35%:Nearly parallel, huge coefficients
 $(1, 0)$ and $(1, 0.001)$ are not parallel, so they span $\\mathbb{R}^2$. But reaching $(0, 1)$ takes $-1000(1, 0) + 1000(1, 0.001)$: the two vectors differ by only $0.001$ sideways, so that difference has to be scaled up a thousand times.]@
 
-Two vectors $\\mathbf{u}$ and $\\mathbf{v}$ that are not [parallel](!/linear-algebra/vectors/properties) generate all combinations $c_1\\mathbf{u} + c_2\\mathbf{v}$. Varying both coefficients independently fills a plane through the origin — the plane that contains both $\\mathbf{u}$ and $\\mathbf{v}$. In $\\mathbb{R}^2$, two non-parallel vectors already span the entire space. In $\\mathbb{R}^3$, they span a flat sheet passing through the origin, leaving one dimension unreached.
+Two vectors $\\mathbf{u}$ and $\\mathbf{v}$ that are not [parallel](!/linear-algebra/vectors/properties) generate all combinations $c_1\\mathbf{u} + c_2\\mathbf{v}$. Varying both coefficients independently [fills a plane through the origin](https://linearalgebranotes.com/vectors/span#intuition) — the plane that contains both $\\mathbf{u}$ and $\\mathbf{v}$. In $\\mathbb{R}^2$, two non-parallel vectors already span the entire space. In $\\mathbb{R}^3$, they span a flat sheet passing through the origin, leaving one dimension unreached.
 
 Three vectors in $\\mathbb{R}^3$ that do not all lie in the same plane span the full space: every point in $\\mathbb{R}^3$ is reachable as $c_1\\mathbf{u} + c_2\\mathbf{v} + c_3\\mathbf{w}$ for some choice of coefficients. If the three vectors are coplanar, however, the third contributes nothing new — the span remains a plane rather than expanding to fill three dimensions.
 
@@ -1180,7 +1180,7 @@ Saying that $(3, -2)$ is not in $\\text{Span}\\{(1, 0), (0, 1)\\}$ because it is
 
 The span is a subset of $\\mathbb{R}^n$ that contains all vectors reachable through linear combinations — and no others. It always contains the zero vector, since setting every coefficient to zero produces $\\mathbf{0}$.
 
-The geometric shape of the span reflects the structure of the input vectors. A single nonzero vector spans a line. Two non-parallel vectors span a plane. In general, the span of $k$ vectors that are "sufficiently independent" is a $k$-dimensional flat subspace passing through the origin. What "sufficiently independent" means precisely is the subject of linear independence, but the intuition is clear: each new vector expands the span by one dimension only if it points in a direction not already covered.
+The geometric shape of the span reflects the structure of the input vectors. A single nonzero vector spans a line. Two non-parallel vectors span a plane. In general, the span of $k$ vectors that are "sufficiently independent" is a $k$-dimensional [flat subspace passing through the origin](https://linearalgebranotes.com/vectors/span#rule-subspace). What "sufficiently independent" means precisely is the subject of linear independence, but the intuition is clear: [each new vector expands the span by one dimension only if it points in a direction not already covered](https://linearalgebranotes.com/vectors/linear-independence#rule-adding-vector).
 
 The span of the standard basis $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\ldots, \\mathbf{e}_n\\}$ is all of $\\mathbb{R}^n$, since any vector $(v_1, v_2, \\ldots, v_n)$ equals $v_1\\mathbf{e}_1 + v_2\\mathbf{e}_2 + \\cdots + v_n\\mathbf{e}_n$. The span of a proper subset of the standard basis is a coordinate subspace — a lower-dimensional slice of $\\mathbb{R}^n$ aligned with the coordinate axes.
 
@@ -1193,7 +1193,7 @@ The formal theory of span, including its relationship to [subspaces](!/linear-al
     title: `Spanning Sets`,
     content: `A set of vectors spans a space if every vector in that space belongs to the span of the set. Equivalently, the set spans $\\mathbb{R}^n$ if for every vector $\\mathbf{b}$ in $\\mathbb{R}^n$, there exist coefficients $c_1, c_2, \\ldots, c_k$ such that $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{b}$.
 
-The standard basis $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\ldots, \\mathbf{e}_n\\}$ spans $\\mathbb{R}^n$ with exactly $n$ vectors and no redundancy. But spanning sets need not be this efficient. The set $\\{(1, 0),\\ (0, 1),\\ (1, 1)\\}$ also spans $\\mathbb{R}^2$, because any vector $(a, b)$ can be written as $a(1, 0) + b(0, 1) + 0(1, 1)$. The third vector is unnecessary — it is already a linear combination of the first two — yet its presence does not prevent the set from spanning. A spanning set with redundant vectors is larger than it needs to be but still reaches every point in the space.
+The standard basis $\\{\\mathbf{e}_1, \\mathbf{e}_2, \\ldots, \\mathbf{e}_n\\}$ spans $\\mathbb{R}^n$ with exactly $n$ vectors and no redundancy. But spanning sets need not be this efficient. The set $\\{(1, 0),\\ (0, 1),\\ (1, 1)\\}$ also spans $\\mathbb{R}^2$, because any vector $(a, b)$ can be written as $a(1, 0) + b(0, 1) + 0(1, 1)$. [The third vector is unnecessary](https://linearalgebranotes.com/vectors/span#rule-redundant) — it is already a linear combination of the first two — yet its presence does not prevent the set from spanning. A spanning set with redundant vectors is larger than it needs to be but still reaches every point in the space.
 
 The question of which vectors in a spanning set are genuinely needed and which are superfluous is answered by the concept of linear independence. A spanning set with no redundancy is called a basis — the smallest possible spanning set for a given space. Both ideas are formalized in the [vector spaces](!/linear-algebra/vector-spaces) section.`,
     before: ``,
@@ -1209,13 +1209,13 @@ $$0\\mathbf{v}_1 + 0\\mathbf{v}_2 + \\cdots + 0\\mathbf{v}_k = \\mathbf{0}$$]@
 
 This produces the zero vector for any choice of $\\mathbf{v}_1, \\ldots, \\mathbf{v}_k$. It is called trivial because it carries no information about the vectors themselves — it works automatically, without engaging with the actual components.
 
-A non-trivial combination is one in which at least one coefficient is nonzero. The distinction between trivial and non-trivial combinations is the key to defining linear independence. A set of vectors is linearly independent if the only combination that produces $\\mathbf{0}$ is the trivial one — there is no way to combine the vectors with nonzero coefficients and arrive back at the origin. If a non-trivial combination does produce $\\mathbf{0}$, then at least one vector in the set can be written as a linear combination of the others, revealing redundancy.
+A non-trivial combination is one in which at least one coefficient is nonzero. The distinction between trivial and non-trivial combinations is the key to defining linear independence. A set of vectors is linearly independent if the only combination that produces $\\mathbf{0}$ is the trivial one — there is no way to combine the vectors with nonzero coefficients and arrive back at the origin. If a non-trivial combination does produce $\\mathbf{0}$, then [at least one vector in the set can be written as a linear combination of the others](https://linearalgebranotes.com/vectors/linear-independence#rule-one-is-combination), revealing redundancy.
 
 @academic[pitfall,aside:true,width:35%:Testing one combination only
 Trying $c_1 = c_2 = 1$ on $(1, 2)$ and $(2, 4)$ gives $(3, 6) \\neq \\mathbf{0}$, which does not show independence. Other coefficients reach zero, $2(1, 2) - 1(2, 4) = \\mathbf{0}$, so the pair is dependent.
 [Read more](!#pitfalls)]@
 
-This characterization is developed formally in the [linear independence](!/linear-algebra/vector-spaces/linear-independence) section, but the computational meaning is accessible now: if the equation $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ has only the solution $c_1 = c_2 = \\cdots = c_k = 0$, the vectors are independent. If it has other solutions, they are dependent.`,
+This characterization is developed formally in the [linear independence](!/linear-algebra/vector-spaces/linear-independence) section, but [the computational meaning is accessible now](https://calculatematrix.com/vector-calculators/linear-independence#algorithm): if the equation $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ has only the solution $c_1 = c_2 = \\cdots = c_k = 0$, the vectors are independent. If it has other solutions, they are dependent.`,
     before: ``,
     after: ``,
     link: '',
@@ -1240,7 +1240,7 @@ $$A\\mathbf{x} = \\mathbf{b}$$
 To reach $\\mathbf{b} = (3, 7)$ from $(1, 2)$ and $(0, 1)$, rows give $c_1 + 2c_2 = 3$ and $c_2 = 7$, so $c_1 = -11$, but $-11(1, 2) + 7(0, 1) = (-11, -15) \\neq \\mathbf{b}$. As columns, $c_1 = 3$ and $c_2 = 1$.
 [Read more](!#pitfalls)]@
 
-The linear combination question and the system-of-equations question are identical — they are two descriptions of the same problem. The combination exists if and only if the system has a solution. Solving the system finds the coefficients; the coefficients reconstruct the combination.
+The linear combination question and the system-of-equations question are identical — they are two descriptions of the same problem. The combination exists if and only if the system has a solution. [Solving the system finds the coefficients](https://calculatematrix.com/vector-calculators/linear-combination#algorithm); the coefficients reconstruct the combination.
 
 This connection transforms a geometric question (does $\\mathbf{b}$ lie in the span of the columns?) into a computational one (does the augmented matrix $[A \\mid \\mathbf{b}]$ reduce to a consistent system?). The tools for answering the computational question — row reduction, echelon forms, pivot analysis — belong to the [linear systems](!/linear-algebra/linear-systems) section, but the conceptual link originates here, in the definition of a linear combination.`,
     before: ``,
@@ -1251,7 +1251,7 @@ This connection transforms a geometric question (does $\\mathbf{b}$ lie in the s
     title: `Toward Independence and Basis`,
     content: `Linear combinations open two questions that this page has raised but not resolved. The first: given a set of vectors, can any of them be removed without shrinking the span? A vector that is a linear combination of the others in the set contributes nothing new — every point it helps reach is already reachable without it. A set where no vector is redundant in this sense is called linearly independent. Independence is a property of the set as a whole, not of any individual vector, and it is characterized by the trivial-combination criterion: the only way to combine the vectors into $\\mathbf{0}$ is with all-zero coefficients.
 
-The second question: what is the smallest set of vectors whose span equals the entire space? Such a set must span $\\mathbb{R}^n$ (reaching every vector) and be linearly independent (containing no excess). A set with both properties is a basis for $\\mathbb{R}^n$, and every basis of $\\mathbb{R}^n$ contains exactly $n$ vectors — a fact that defines the dimension of the space.
+The second question: what is the smallest set of vectors whose span equals the entire space? Such a set must span $\\mathbb{R}^n$ (reaching every vector) and be linearly independent (containing no excess). A set with both properties is a basis for $\\mathbb{R}^n$, and every basis of $\\mathbb{R}^n$ contains exactly $n$ vectors — a fact that [defines the dimension of the space](https://linearalgebranotes.com/spaces/dimension#definition).
 
 Both concepts — [linear independence](!/linear-algebra/vector-spaces/linear-independence) and [basis](!/linear-algebra/vector-spaces) — are developed rigorously in the vector spaces section. The machinery of linear combinations built on this page provides the raw material from which those definitions are constructed.`,
     before: ``,
@@ -1296,7 +1296,7 @@ A non-trivial combination reaches $\\mathbf{0}$, so the pair is dependent.
 
 Why it happens: one failed attempt feels like evidence, but independence is a statement about every possible choice of coefficients, and a single trial cannot cover them all.
 
-How to check: for two vectors, look for a scalar multiple. Here $(2, 4) = 2(1, 2)$, so the vectors are parallel and therefore dependent. For more vectors, solve the system instead of sampling it.
+How to check: for two vectors, look for a scalar multiple. Here $(2, 4) = 2(1, 2)$, so the vectors are parallel and therefore dependent. For more vectors, [solve the system instead of sampling it](https://calculatematrix.com/vector-calculators/linear-independence#example).
 
 **Writing the vectors as rows**
 
@@ -1564,7 +1564,7 @@ $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$
           `@academic[fact,aside:true,width:35%:Some colours need negative red
 In the colour-matching experiments of the late 1920s behind the 1931 CIE colour standard, observers mixed red, green and blue lights to copy pure colours from a prism. Blue-green light could be matched only by adding red to the target itself, so its recipe has a negative coefficient of red.]@`,
           `The expression is a linear combination of those vectors. The scalars $c_i$ are called the coefficients or weights of the combination. Each term $c_i\\mathbf{v}_i$ is a [scaled](!/linear-algebra/vectors/basic-operations) copy of $\\mathbf{v}_i$, and the full expression adds all the scaled copies together.`,
-          `The definition imposes no restrictions on the coefficients — they can be positive, negative, or zero. Setting all coefficients to $1$ reduces the linear combination to ordinary vector addition. Using a single vector with one coefficient gives scalar multiplication. Setting all coefficients to zero produces the zero vector. These familiar operations are not separate concepts; they are boundary cases of the same construction.`,
+          `The definition imposes no restrictions on the coefficients — they can be positive, negative, or zero. Setting all coefficients to $1$ reduces the linear combination to ordinary vector addition. Using a single vector with one coefficient gives scalar multiplication. Setting all coefficients to zero produces the zero vector. These familiar operations are not separate concepts; they are [boundary cases of the same construction](https://linearalgebranotes.com/vectors/linear-combination#special-cases).`,
           `@academic[rule_plain:A linear combination always produces a vector in the same $\\mathbb{R}^n$ as the inputs.]@`,
           `Both scalar multiplication and addition preserve the dimension, so no matter how many vectors are combined or what coefficients are chosen, the result remains in the original space.`,
         ],

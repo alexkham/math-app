@@ -245,7 +245,7 @@ const contentWithAcademicPlaceholders = content.replace(/@academic\[[\s\S]*?\]@/
       const linkMatch = part.match(/\[(.+?)\]\((!)?(.+?)\)/);
       if (linkMatch) {
         const [, text, sameTab, url] = linkMatch;
-        return <a key={`link-${index}`} href={url} className={styles?.markdownLink || "markdown-link"} data-markdown-link="true" {...(!sameTab && { target: "_blank", rel: "noopener noreferrer" })}>{decodeEntities(text)}</a>;
+        return <a key={`link-${index}`} href={url} className={styles?.markdownLink || "markdown-link"} data-markdown-link="true" {...(!sameTab && { target: "_blank", rel: /^https:\/\/(linearalgebranotes|calculatematrix)\.com\//.test(url) ? "noopener" : "noopener noreferrer" })}>{decodeEntities(text)}</a>;
       }
     }
 

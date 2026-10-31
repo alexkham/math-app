@@ -1209,7 +1209,7 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2} = \\sqrt{\\sum_{i=
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-This quantity is called the Euclidean norm, or equivalently the $\\ell^2$ norm. The superscript distinguishes it from other ways of measuring vector size — the $\\ell^1$ norm sums absolute values, the $\\ell^\\infty$ norm takes the largest absolute component — but when "norm" appears without qualification in this section, it always refers to the Euclidean norm.
+This quantity is called [the Euclidean norm](https://linearalgebranotes.com/vectors/norm#definition), or equivalently the $\\ell^2$ norm. The superscript distinguishes it from other ways of measuring vector size — the $\\ell^1$ norm sums absolute values, the $\\ell^\\infty$ norm takes the largest absolute component — but when "norm" appears without qualification in this section, it always refers to the Euclidean norm.
 
 The double-bar notation $\\|\\mathbf{v}\\|$ is standard for the norm. Single bars $|x|$ are reserved for the absolute value of a scalar. The distinction matters: magnitude is a property of vectors, absolute value is a property of numbers, and the notational separation keeps the two from being confused.
 
@@ -1258,7 +1258,7 @@ $$\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$$
 Taking $\\|\\mathbf{a} + \\mathbf{b}\\| = \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (-3, 4)$ gives $5 + 5 = 10$. The sum is $(0, 8)$, so $\\|\\mathbf{a} + \\mathbf{b}\\| = 8$.
 [Read more](!#pitfalls)]@
 
-The length of a sum never exceeds the sum of the individual lengths. Geometrically, in the tip-to-tail picture of vector addition, the direct path from start to finish (the sum) is never longer than the path that follows both vectors end to end. Equality holds only when one of $\\mathbf{a}$, $\\mathbf{b}$ is $\\mathbf{0}$ or they point in the same direction — when the path is already straight. The triangle inequality is proved using the Cauchy–Schwarz inequality, which is developed on the [dot product](!/linear-algebra/vectors/dot-product) page.`,
+[The length of a sum never exceeds the sum of the individual lengths](https://linearalgebranotes.com/vectors/norm#rule-triangle). Geometrically, in the tip-to-tail picture of vector addition, the direct path from start to finish (the sum) is never longer than the path that follows both vectors end to end. Equality holds only when one of $\\mathbf{a}$, $\\mathbf{b}$ is $\\mathbf{0}$ or they point in the same direction — when the path is already straight. The triangle inequality is [proved using the Cauchy–Schwarz inequality](https://linearalgebranotes.com/vectors/cauchy-schwarz-inequality#purpose), which is developed on the [dot product](!/linear-algebra/vectors/dot-product) page.`,
     before: ``,
     after: ``,
     link: '',
@@ -1274,7 +1274,7 @@ $$d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a} - \\mathbf{b}\\| = \\sqrt{(a_1 - 
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-When $\\mathbf{a}$ and $\\mathbf{b}$ are interpreted as position vectors — arrows from the origin to points in space — this formula gives the straight-line distance between those points. In $\\mathbb{R}^2$, it reduces to the familiar distance formula from coordinate geometry. In $\\mathbb{R}^3$, it extends to three-dimensional Euclidean distance. In higher dimensions, the algebraic expression remains identical even though the geometry can no longer be drawn.
+When $\\mathbf{a}$ and $\\mathbf{b}$ are interpreted as position vectors — arrows from the origin to points in space — this formula gives [the straight-line distance between those points](https://calculatematrix.com/vector-calculators/vector-magnitude#uses). In $\\mathbb{R}^2$, it reduces to the familiar distance formula from coordinate geometry. In $\\mathbb{R}^3$, it extends to three-dimensional Euclidean distance. In higher dimensions, the algebraic expression remains identical even though the geometry can no longer be drawn.
 
 @academic[pitfall,aside:true,width:35%:Subtracting the lengths
 Computing $\\|\\mathbf{a}\\| - \\|\\mathbf{b}\\|$ for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (4, 3)$ gives $5 - 5 = 0$, as if the two points coincided. The distance is the length of the difference: $\\|(-1, 1)\\| = \\sqrt{2}$.
@@ -1304,7 +1304,7 @@ Measured by $\\|\\mathbf{v}\\|_1 = |v_1| + |v_2|$, the unit circle is a square w
 
 Each has exactly one component equal to $1$ and the rest equal to $0$, giving a norm of $1$. These unit vectors point along the coordinate axes, and any vector can be decomposed as a [linear combination](!/linear-algebra/vectors/linear-combinations) of them: $\\mathbf{v} = v_1\\mathbf{e}_1 + v_2\\mathbf{e}_2 + v_3\\mathbf{e}_3$.
 
-But unit vectors are not confined to the coordinate directions. Any direction in $\\mathbb{R}^n$ has a corresponding unit vector. The vector $\\left(\\frac{1}{\\sqrt{2}}, \\frac{1}{\\sqrt{2}}\\right)$ is a unit vector in $\\mathbb{R}^2$ pointing at $45°$ to both axes. The set of all unit vectors in $\\mathbb{R}^2$ traces the unit circle; in $\\mathbb{R}^3$, the unit sphere.`,
+But unit vectors are not confined to the coordinate directions. Any direction in $\\mathbb{R}^n$ has a corresponding unit vector. The vector $\\left(\\frac{1}{\\sqrt{2}}, \\frac{1}{\\sqrt{2}}\\right)$ is a unit vector in $\\mathbb{R}^2$ pointing at $45°$ to both axes. [The set of all unit vectors](https://linearalgebranotes.com/vectors/unit-vector#rule-plane) in $\\mathbb{R}^2$ traces the unit circle; in $\\mathbb{R}^3$, the unit sphere.`,
     before: ``,
     after: ``,
     link: '',
@@ -1320,7 +1320,7 @@ $$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|} = \\frac{1}{\\|\\m
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-This divides every component by the same positive scalar $\\|\\mathbf{v}\\|$, which is a special case of scalar multiplication by $\\frac{1}{\\|\\mathbf{v}\\|}$. The scaling property of the norm guarantees that the result has magnitude $1$:
+This divides every component by the same positive scalar $\\|\\mathbf{v}\\|$, which is a special case of scalar multiplication by $\\frac{1}{\\|\\mathbf{v}\\|}$. [The scaling property of the norm guarantees that the result has magnitude](https://linearalgebranotes.com/vectors/unit-vector#rule-normalise) $1$:
 
 @academic[formula_callout:Normalization
 $$\\left\\|\\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}\\right\\| = \\frac{\\|\\mathbf{v}\\|}{\\|\\mathbf{v}\\|} = 1$$]@
@@ -1329,7 +1329,7 @@ $$\\left\\|\\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}\\right\\| = \\frac{\\|\\mathbf
 Dividing $\\mathbf{v} = (1, 2, 2)$ by $1 + 4 + 4 = 9$ gives $\\left(\\frac{1}{9}, \\frac{2}{9}, \\frac{2}{9}\\right)$, whose length is $\\frac{1}{3}$, not $1$. Dividing by $\\|\\mathbf{v}\\| = \\sqrt{9} = 3$ gives $\\hat{\\mathbf{v}} = \\left(\\frac{1}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$.
 [Read more](!#pitfalls)]@
 
-In a computation, normalization comes down to two steps. The length is found first, from the components of $\\mathbf{v}$, and then every component is divided by that one number. The identity above doubles as a check on the result: the squares of the new components must add up to exactly $1$.
+In a computation, [normalization comes down to two steps](https://calculatematrix.com/vector-calculators/unit-vector#algorithm). The length is found first, from the components of $\\mathbf{v}$, and then every component is divided by that one number. The identity above doubles as a check on the result: the squares of the new components must add up to exactly $1$.
 
 Because the scalar $\\frac{1}{\\|\\mathbf{v}\\|}$ is positive, the direction of $\\mathbf{v}$ is preserved — the normalized vector $\\hat{\\mathbf{v}}$ points exactly the same way as $\\mathbf{v}$, just with unit length.
 
@@ -1394,7 +1394,7 @@ $$\\mathbf{a} - \\mathbf{b} = (-1, 1), \\qquad d(\\mathbf{a}, \\mathbf{b}) = \\s
 
 Why it happens: the two expressions differ only in where the bars close, and the word "difference" suggests subtracting the two lengths that are already known.
 
-How to check: a distance of $0$ means the two vectors are identical, and $(3, 4) \\neq (4, 3)$, so $0$ cannot be right. In general the difference of the lengths is only a lower bound for the distance, by the reverse triangle inequality.
+How to check: a distance of $0$ means the two vectors are identical, and $(3, 4) \\neq (4, 3)$, so $0$ cannot be right. In general the difference of the lengths is only a lower bound for the distance, by [the reverse triangle inequality](https://linearalgebranotes.com/vectors/norm#rule-reverse-triangle).
 
 **Dividing by the squared length**
 
@@ -1671,7 +1671,7 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2}$$]@`,
         id: 'kind',
         lead: `The magnitude is a single number, never negative, that ignores direction.`,
         content: [
-          `For a concrete case in three dimensions, the vector $\\mathbf{v} = (2, -1, 2)$ has magnitude $\\sqrt{2^2 + (-1)^2 + 2^2} = \\sqrt{4 + 1 + 4} = \\sqrt{9} = 3$. Every component enters the sum as a square, so the sign of the middle entry plays no part in the length.`,
+          `For [a concrete case in three dimensions](https://calculatematrix.com/vector-calculators/vector-magnitude#example), the vector $\\mathbf{v} = (2, -1, 2)$ has magnitude $\\sqrt{2^2 + (-1)^2 + 2^2} = \\sqrt{4 + 1 + 4} = \\sqrt{9} = 3$. Every component enters the sum as a square, so the sign of the middle entry plays no part in the length.`,
           `The geometric intuition is the same in both cases: the magnitude is the straight-line distance from the tail of the vector to its tip. The only difference is the number of perpendicular components being combined.`,
           <div key={'unit-norm'} dangerouslySetInnerHTML={{ __html: demoUnits.norm }} />,
           `The same sum-of-squares pattern is what the next section generalises to any number of dimensions.`,

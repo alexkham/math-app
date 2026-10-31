@@ -1174,16 +1174,16 @@ const ciCoordsTable = ciTableOpen(['standard coordinates', 'B-coordinates', 'reb
 const sectionsContent = {
   obj1: {
     title: `The Problem`,
-    content: `A linear transformation $T: V \\to V$ is a fixed geometric object — it sends each vector to a definite image regardless of how coordinates are assigned. But the [matrix](!/linear-algebra/transformations/matrix-representation) that represents $T$ depends on the choice of [basis](!/linear-algebra/vector-spaces). Different bases assign different coordinates to the same vectors, and the matrix that converts input coordinates to output coordinates changes accordingly.
+    content: `A linear transformation $T: V \\to V$ is a fixed geometric object — it sends each vector to a definite image regardless of how coordinates are assigned. But the [matrix](!/linear-algebra/transformations/matrix-representation) that represents $T$ depends on the choice of [basis](!/linear-algebra/vector-spaces). [Different bases assign different coordinates](https://calculatematrix.com/matrix-calculators/change-of-basis#about) to the same vectors, and the matrix that converts input coordinates to output coordinates changes accordingly.
 
-This raises a natural question: if $T$ has matrix $A$ in one basis and matrix $A'$ in another, how are $A$ and $A'$ related? The answer is the similarity relation $A' = P^{-1}AP$, where $P$ is the change-of-basis matrix. Understanding this relation is the key to choosing bases strategically — picking the basis that makes the matrix as simple as possible.`,
+This raises a natural question: if $T$ has matrix $A$ in one basis and matrix $A'$ in another, how are $A$ and $A'$ related? The answer is [the similarity relation](https://linearalgebranotes.com/maps/similar-matrices#rule-same-map) $A' = P^{-1}AP$, where $P$ is the change-of-basis matrix. Understanding this relation is the key to choosing bases strategically — picking the basis that makes the matrix as simple as possible.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj2: {
     title: `The Change-of-Basis Matrix`,
-    content: `If $\\mathcal{B}$ and $\\mathcal{C}$ are two bases for $V$, the change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ converts $\\mathcal{B}$-coordinates to $\\mathcal{C}$-coordinates:
+    content: `If $\\mathcal{B}$ and $\\mathcal{C}$ are two bases for $V$, [the change-of-basis matrix](https://linearalgebranotes.com/spaces/change-of-basis#rule-change-matrix) $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ converts $\\mathcal{B}$-coordinates to $\\mathcal{C}$-coordinates:
 
 @academic[formula_callout:Change of Basis Formula
 $$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}} \\, [\\mathbf{v}]_\\mathcal{B}$$
@@ -1267,14 +1267,14 @@ $$A' = P^{-1}AP$$
 
 where $P = P_{\\mathcal{B} \\leftarrow \\mathcal{C}}$ is the change-of-basis matrix from $\\mathcal{C}$ to $\\mathcal{B}$: $[\\mathbf{v}]_\\mathcal{B} = P[\\mathbf{v}]_\\mathcal{C}$, and its columns are the $\\mathcal{C}$ basis vectors written in $\\mathcal{B}$-coordinates.
 
-The derivation is direct. For any vector $\\mathbf{v}$, the transformation in $\\mathcal{B}$-coordinates reads $[T(\\mathbf{v})]_\\mathcal{B} = A[\\mathbf{v}]_\\mathcal{B}$. Converting to $\\mathcal{C}$-coordinates with $P^{-1} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$: $[T(\\mathbf{v})]_\\mathcal{C} = P^{-1}[T(\\mathbf{v})]_\\mathcal{B} = P^{-1}A[\\mathbf{v}]_\\mathcal{B} = P^{-1}AP[\\mathbf{v}]_\\mathcal{C}$. Since this holds for every $\\mathbf{v}$, the matrix of $T$ in basis $\\mathcal{C}$ is $P^{-1}AP$.
+[The derivation is direct](https://linearalgebranotes.com/spaces/change-of-basis#rule-map-change). For any vector $\\mathbf{v}$, the transformation in $\\mathcal{B}$-coordinates reads $[T(\\mathbf{v})]_\\mathcal{B} = A[\\mathbf{v}]_\\mathcal{B}$. Converting to $\\mathcal{C}$-coordinates with $P^{-1} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$: $[T(\\mathbf{v})]_\\mathcal{C} = P^{-1}[T(\\mathbf{v})]_\\mathcal{B} = P^{-1}A[\\mathbf{v}]_\\mathcal{B} = P^{-1}AP[\\mathbf{v}]_\\mathcal{C}$. Since this holds for every $\\mathbf{v}$, the matrix of $T$ in basis $\\mathcal{C}$ is $P^{-1}AP$.
 
 @academic[fact,aside:true,width:35%:Every matrix is similar to its transpose
 For every square $A$ there is an invertible $P$ with $A^T = P^{-1}AP$, even though rows and columns trade places. Transposing does not change the rank of $A - \\lambda I$ or of any of its powers, and those ranks are exactly what decides similarity.]@
 
 Two matrices related by $A' = P^{-1}AP$ for some invertible $P$ are called similar. Similarity is an equivalence relation: every matrix is similar to itself ($P = I$), similarity is symmetric ($A' = P^{-1}AP$ implies $A = PA'P^{-1}$), and it is transitive.
 
-Similarity can join matrices whose entries look nothing alike. Because $P$ may be any invertible matrix, a triangular matrix can be similar to one with no zero entries at all. Deciding whether two given matrices are similar means finding such a $P$, and the entries alone give little hint of where to look.
+Similarity can join matrices whose entries look nothing alike. Because $P$ may be any invertible matrix, a triangular matrix can be similar to one with no zero entries at all. [Deciding whether two given matrices are similar](https://linearalgebranotes.com/eigen/jordan-normal-form#rule-similar-iff) means finding such a $P$, and the entries alone give little hint of where to look.
 
 @academic[punchline:$P^{-1}AP$ translates new coordinates into old ones, applies $A$, and translates the answer back.]@`,
     before: ``,
@@ -1300,7 +1300,7 @@ The [determinant](!/linear-algebra/determinants) is preserved: $\\det(P^{-1}AP) 
 
 The [trace](!/linear-algebra/matrix/trace) is preserved: $\\text{tr}(P^{-1}AP) = \\text{tr}(APP^{-1}) = \\text{tr}(A)$ by the cyclic property.
 
-The [eigenvalues](!/linear-algebra/eigen) are preserved: $\\det(P^{-1}AP - \\lambda I) = \\det(P^{-1}(A - \\lambda I)P) = \\det(A - \\lambda I)$, so the characteristic polynomial — and therefore all eigenvalues with their multiplicities — is the same.
+The [eigenvalues](!/linear-algebra/eigen) are preserved: $\\det(P^{-1}AP - \\lambda I) = \\det(P^{-1}(A - \\lambda I)P) = \\det(A - \\lambda I)$, so [the characteristic polynomial](https://linearalgebranotes.com/maps/similar-matrices#rule-char-poly) — and therefore all eigenvalues with their multiplicities — is the same.
 
 The [rank](!/linear-algebra/matrix/rank) is preserved: multiplying by invertible matrices cannot change the rank.
 
@@ -1329,7 +1329,7 @@ $$A = PDP^{-1}, \\quad D = \\operatorname{diag}(\\lambda_1, \\ldots, \\lambda_n)
 
 Equivalently, $D = P^{-1}AP$.
 
-[Diagonalization](!/linear-algebra/eigen/diagonalization) is the most powerful application of basis change. It reduces matrix powers to diagonal powers: $A^k = PD^kP^{-1} = P\\,\\text{diag}(\\lambda_1^k, \\dots, \\lambda_n^k)\\,P^{-1}$. It simplifies differential equations, recurrence relations, and any computation involving repeated application of the same transformation.`,
+[Diagonalization](!/linear-algebra/eigen/diagonalization) is the most powerful application of basis change. It [reduces matrix powers to diagonal powers](https://calculatematrix.com/matrix-calculators/matrix-power#algorithm): $A^k = PD^kP^{-1} = P\\,\\text{diag}(\\lambda_1^k, \\dots, \\lambda_n^k)\\,P^{-1}$. It simplifies differential equations, recurrence relations, and any computation involving repeated application of the same transformation.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1340,7 +1340,7 @@ Equivalently, $D = P^{-1}AP$.
 
 @academic[rule_theorem_plain:A transformation may not have $n$ linearly independent eigenvectors — this happens when the geometric multiplicity of some eigenvalue is strictly less than its algebraic multiplicity.]@
 
-For example, $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with algebraic multiplicity $2$, but the eigenspace is one-dimensional (spanned by $(1, 0)$). There is no basis of eigenvectors, so $A$ cannot be diagonalized.
+For example, $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ has eigenvalue $\\lambda = 2$ with algebraic multiplicity $2$, but the eigenspace is one-dimensional (spanned by $(1, 0)$). [There is no basis of eigenvectors](https://linearalgebranotes.com/eigen/diagonalization#rule-diagonalizable-iff), so $A$ cannot be diagonalized.
 
 @academic[pitfall,aside:true,width:35%:Blaming the repeated eigenvalue
 Ruling out diagonalization because $\\lambda = 2$ is repeated would also rule out $2I$, which has the same repeated eigenvalue and is already diagonal. What fails for $A$ is the eigenspace: dimension $1$, below the multiplicity $2$.
@@ -1371,7 +1371,7 @@ The eigenvectors of a symmetric matrix can be chosen [orthonormal](!/linear-alge
   },
   obj8: {
     title: `Worked Example: Full Basis Change`,
-    content: `Let $A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}$. Find a diagonalization $A = PDP^{-1}$.
+    content: `Let $A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}$. [Find a diagonalization](https://calculatematrix.com/matrix-calculators/diagonalization#walkthrough) $A = PDP^{-1}$.
 
 The characteristic polynomial is $\\det(A - \\lambda I) = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$. Eigenvalues: $\\lambda_1 = 2$, $\\lambda_2 = 5$.
 
@@ -1399,7 +1399,7 @@ Application: $A^{10} = PD^{10}P^{-1} = P\\begin{pmatrix} 2^{10} & 0 \\\\ 0 & 5^{
 
 An [eigenvector](!/linear-algebra/eigen) basis diagonalizes the matrix, reducing powers and exponentials to operations on diagonal entries. A system of differential equations $\\mathbf{x}' = A\\mathbf{x}$ decouples into independent scalar equations when $A$ is diagonal.
 
-An [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) basis simplifies [projections](!/linear-algebra/orthogonality/projections) and [least-squares](!/linear-algebra/orthogonality/least-squares) computations. Coordinates relative to an orthonormal basis are computed by dot products rather than by solving systems, and numerical errors are minimized because the change-of-basis matrix has condition number $1$.
+An [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) basis simplifies [projections](!/linear-algebra/orthogonality/projections) and [least-squares](!/linear-algebra/orthogonality/least-squares) computations. [Coordinates relative to an orthonormal basis are computed by dot products](https://linearalgebranotes.com/orthogonality/orthonormal-basis#rule-coordinates) rather than by solving systems, and numerical errors are minimized because the change-of-basis matrix has condition number $1$.
 
 A Jordan basis achieves the simplest possible form for non-diagonalizable matrices, isolating the defective eigenvalues into small blocks.
 

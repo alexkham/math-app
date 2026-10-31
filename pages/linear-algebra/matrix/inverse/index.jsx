@@ -3559,7 +3559,7 @@ const sectionsContent = {
 
 Both products must equal the identity. A matrix possessing an inverse is called invertible or nonsingular. A matrix with no inverse is called singular.
 
-Uniqueness follows from a short argument. Suppose both $B$ and $C$ satisfy $AB = I$ and $CA = I$. Then $B = IB = (CA)B = C(AB) = CI = C$, so $B$ and $C$ must be the same matrix. This means a matrix either has no inverse or has exactly one.
+[Uniqueness follows from a short argument](https://linearalgebranotes.com/matrices/inverse#rule-unique). Suppose both $B$ and $C$ satisfy $AB = I$ and $CA = I$. Then $B = IB = (CA)B = C(AB) = CI = C$, so $B$ and $C$ must be the same matrix. This means a matrix either has no inverse or has exactly one.
 
 The inverse is defined only for square matrices. A rectangular matrix cannot satisfy $AA^{-1} = A^{-1}A = I$ because $\\text{rank}(A) \\le \\min(m, n)$, so at least one of the products ($m \\times m$ or $n \\times n$) has rank too low to be an identity. One-sided inverses (left or right) can exist for rectangular matrices with full column or full row [rank](!/linear-algebra/matrix/rank), but the two-sided inverse is a strictly square concept.`,
     before: ``,
@@ -3611,7 +3611,7 @@ The inverse is defined only for square matrices. A rectangular matrix cannot sat
 @academic[formula_callout:inverse_2x2_formula|Inverse 2x2 Formula|$$\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}^{-1} = \\frac{1}{ad - bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$]@
 @academic[formulas_link:/linear-algebra/formulas#inverse_2x2_formula]@
 
-The recipe is: swap the diagonal entries, negate the off-diagonal entries, and divide everything by the [determinant](!/linear-algebra/determinants) $ad - bc$.
+The recipe is: [swap the diagonal entries, negate the off-diagonal entries](https://linearalgebranotes.com/matrices/inverse#rule-two-by-two), and divide everything by the [determinant](!/linear-algebra/determinants) $ad - bc$.
 
 ## Worked Examples
 
@@ -3632,7 +3632,7 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 2 & 7 \\end{pmatrix}$, the determinant is $
   },
   obj3: {
     title: `When Does the Inverse Exist?`,
-    content: `The invertible matrix theorem collects a list of conditions that are all equivalent for an $n \\times n$ matrix $A$. Each approaches invertibility from a different angle — algebraic, geometric, computational, spectral — but they are all either simultaneously true or simultaneously false.
+    content: `The invertible matrix theorem [collects a list of conditions that are all equivalent](https://linearalgebranotes.com/matrices/invertible-matrix-theorem#rule-imt) for an $n \\times n$ matrix $A$. Each approaches invertibility from a different angle — algebraic, geometric, computational, spectral — but they are all either simultaneously true or simultaneously false.
 
 @academic[formula_callout:invertible_matrix_theorem|Invertible Matrix Theorem|$$\\begin{aligned} \\text{For } A \\in \\mathbb{R}^{n \\times n}, \\text{ the following are equivalent:} & \\\\ (1)\\ A \\text{ is invertible} \\quad (2)\\ \\det(A) \\neq 0 \\quad (3)\\ \\operatorname{rank}(A) = n & \\\\ (4)\\ \\text{columns of } A \\text{ are linearly independent} & \\\\ (5)\\ \\text{rows of } A \\text{ are linearly independent} & \\\\ (6)\\ \\text{columns of } A \\text{ span } \\mathbb{R}^n \\quad (7)\\ \\text{columns form a basis of } \\mathbb{R}^n & \\\\ (8)\\ A\\mathbf{x} = \\mathbf{0} \\text{ has only the trivial solution} & \\\\ (9)\\ A\\mathbf{x} = \\mathbf{b} \\text{ has a unique solution for every } \\mathbf{b} & \\\\ (10)\\ \\operatorname{Null}(A) = \\{\\mathbf{0}\\} & \\\\ (11)\\ \\operatorname{rref}(A) = I \\quad (12)\\ A \\text{ is a product of elementary matrices} & \\\\ (13)\\ 0 \\text{ is not an eigenvalue of } A & \\end{aligned}$$]@
 @academic[formulas_link:/linear-algebra/formulas#invertible_matrix_theorem]@
@@ -3649,12 +3649,12 @@ The power of this theorem is that proving any one condition automatically establ
   },
   obj4: {
     title: `Computing the Inverse by Row Reduction`,
-    content: `The standard algorithm for computing the inverse of an $n \\times n$ matrix $A$ is to form the $n \\times 2n$ augmented matrix $[A \\mid I]$ and apply row operations to reduce the left half to the identity. If the reduction succeeds, the right half becomes $A^{-1}$:
+    content: `The standard algorithm for computing the inverse of an $n \\times n$ matrix $A$ is to form the $n \\times 2n$ augmented matrix $[A \\mid I]$ and [apply row operations to reduce the left half to the identity](https://calculatematrix.com/matrix-calculators/matrix-inverse#methods). If the reduction succeeds, the right half becomes $A^{-1}$:
 
 @academic[formula_callout:inverse_via_row_reduction|Inverse via Row Reduction|$$[A \\mid I] \\xrightarrow{\\text{row ops}} [I \\mid A^{-1}]$$]@
 @academic[formulas_link:/linear-algebra/formulas#inverse_via_row_reduction]@
 
-Each row operation is left-multiplication by an elementary matrix. If the sequence of operations is $E_1, E_2, \\dots, E_k$, then $E_k \\cdots E_2 E_1 A = I$, which means $A^{-1} = E_k \\cdots E_2 E_1$. Applying the same operations to $I$ produces exactly this product.
+[Each row operation is left-multiplication by an elementary matrix](https://linearalgebranotes.com/matrices/elementary-matrix#rule-left-multiplication). If the sequence of operations is $E_1, E_2, \\dots, E_k$, then $E_k \\cdots E_2 E_1 A = I$, which means $A^{-1} = E_k \\cdots E_2 E_1$. Applying the same operations to $I$ produces exactly this product.
 
 ## Worked Example
 
@@ -3698,7 +3698,7 @@ To compute the inverse of a specific matrix with each step shown, use the [matri
   },
   obj5: {
     title: `Computing the Inverse via the Adjugate`,
-    content: `The [adjugate](!/linear-algebra/determinants/cofactors) identity $A \\cdot \\operatorname{adj}(A) = \\det(A) \\cdot I$ gives an explicit formula when $\\det(A) \\neq 0$:
+    content: `The [adjugate](!/linear-algebra/determinants/cofactors) identity $A \\cdot \\operatorname{adj}(A) = \\det(A) \\cdot I$ gives [an explicit formula](https://linearalgebranotes.com/matrices/adjugate#rule-inverse-formula) when $\\det(A) \\neq 0$:
 
 @academic[formula_callout:inverse_via_adjugate|Inverse via Adjugate|$$A^{-1} = \\frac{1}{\\det(A)}\\, \\operatorname{adj}(A)$$]@
 @academic[formulas_link:/linear-algebra/formulas#inverse_via_adjugate]@
@@ -3711,7 +3711,7 @@ Dividing the cofactor matrix itself by $\\det(A)$ for $A = \\begin{pmatrix} 3 & 
 
 For the $2 \\times 2$ case, the adjugate formula reduces to the swap-and-negate formula from section $2$. The cofactor matrix of $\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$ is $\\begin{pmatrix} d & -c \\\\ -b & a \\end{pmatrix}$, and transposing gives $\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$, which is exactly the numerator matrix in the $2 \\times 2$ inverse formula.
 
-For $3 \\times 3$ and larger matrices, the adjugate formula remains exact and fully symbolic — it shows explicitly how each entry of $A^{-1}$ depends on the entries of $A$. This makes it valuable for theoretical work and for deriving sensitivity formulas. For numerical computation, however, it is vastly more expensive than row reduction: computing the adjugate requires $n^2$ cofactors, each of which is an $(n-1) \\times (n-1)$ determinant.`,
+For $3 \\times 3$ and larger matrices, [the adjugate formula remains exact and fully symbolic](https://calculatematrix.com/matrix-calculators/adjugate#formula) — it shows explicitly how each entry of $A^{-1}$ depends on the entries of $A$. This makes it valuable for theoretical work and for deriving sensitivity formulas. For numerical computation, however, it is vastly more expensive than row reduction: computing the adjugate requires $n^2$ cofactors, each of which is an $(n-1) \\times (n-1)$ determinant.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3725,7 +3725,7 @@ Applying the inverse twice recovers the original:
 @academic[formula_callout:inverse_involution|Inverse Involution|$$(A^{-1})^{-1} = A$$]@
 @academic[formulas_link:/linear-algebra/formulas#inverse_involution]@
 
-The inverse of a product reverses the order:
+[The inverse of a product reverses the order](https://linearalgebranotes.com/matrices/inverse#rule-product):
 
 @academic[formula_callout:inverse_of_product|Inverse of Product|$$(AB)^{-1} = B^{-1} A^{-1}$$]@
 @academic[formulas_link:/linear-algebra/formulas#inverse_of_product]@
@@ -3738,7 +3738,7 @@ This generalizes to any number of factors — $(A_1 A_2 \\cdots A_k)^{-1} = A_k^
 
 The reason is the order in which the matrices act. In $AB\\mathbf{x}$, the matrix $B$ acts on $\\mathbf{x}$ first and $A$ acts second, so getting $\\mathbf{x}$ back means removing $A$ first and $B$ second: $B^{-1}A^{-1}(AB)\\mathbf{x} = B^{-1}(A^{-1}A)B\\mathbf{x} = B^{-1}B\\mathbf{x} = \\mathbf{x}$.
 
-Transpose and inverse commute:
+[Transpose and inverse commute](https://linearalgebranotes.com/matrices/transpose#rule-inverse):
 
 @academic[formula_callout:inverse_of_transpose|Inverse of Transpose|$$(A^T)^{-1} = (A^{-1})^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#inverse_of_transpose]@
@@ -3776,9 +3776,9 @@ This follows immediately from the [multiplicative property](!/linear-algebra/det
 
 This is the matrix analogue of dividing both sides by $A$. Multiplying both sides on the left by $A^{-1}$ gives $A^{-1}A\\mathbf{x} = A^{-1}\\mathbf{b}$, which simplifies to $\\mathbf{x} = A^{-1}\\mathbf{b}$.
 
-In principle, this solves the system in one matrix-vector multiplication — but only if $A^{-1}$ is already known. Computing $A^{-1}$ from scratch requires about three times as much work as solving the system once by [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination), and the elimination approach is more numerically stable. Even when multiple systems share the same coefficient matrix $A$ with different right-hand sides, the LU decomposition is preferred: factor $A = LU$ once, then solve each system with two cheap triangular substitutions.
+In principle, this solves the system in one matrix-vector multiplication — but only if $A^{-1}$ is already known. Computing $A^{-1}$ from scratch requires about three times as much work as solving the system once by [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination), and the elimination approach is more numerically stable. Even when multiple systems share the same coefficient matrix $A$ with different right-hand sides, [the LU decomposition is preferred](https://calculatematrix.com/matrix-calculators/lu-decomposition#uses): factor $A = LU$ once, then solve each system with two cheap triangular substitutions.
 
-The formula $\\mathbf{x} = A^{-1}\\mathbf{b}$ is most valuable as a theoretical tool. It proves that an invertible system always has a unique solution, and it makes the dependence of $\\mathbf{x}$ on $\\mathbf{b}$ explicit and linear.`,
+The formula $\\mathbf{x} = A^{-1}\\mathbf{b}$ is most valuable as a theoretical tool. It proves that [an invertible system always has a unique solution](https://linearalgebranotes.com/matrices/inverse#rule-solution), and it makes the dependence of $\\mathbf{x}$ on $\\mathbf{b}$ explicit and linear.`,
     before: ``,
     after: ``,
     link: ``,

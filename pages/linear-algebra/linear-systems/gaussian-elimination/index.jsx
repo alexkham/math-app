@@ -1310,7 +1310,7 @@ const sectionsContent = {
     content: `@academic[fact,aside:true,width:35%:Elimination on a counting board
 The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century AD, lays out a system as columns of rods on a board, in effect an augmented matrix, and eliminates column against column, some 1,700 years before Gauss. The subtractions produce negative numbers, so the same chapter gives rules for them.]@
 
-The input is an augmented matrix $[A \\mid \\mathbf{b}]$ representing a linear system $A\\mathbf{x} = \\mathbf{b}$. The output is an equivalent system — one with exactly the same solution set — in a form simple enough that the solution can be read off directly or obtained with minimal effort.
+The input is an augmented matrix $[A \\mid \\mathbf{b}]$ representing a linear system $A\\mathbf{x} = \\mathbf{b}$. The output is an equivalent system — [one with exactly the same solution set](https://linearalgebranotes.com/systems/elementary-row-operations#rule-solution-set) — in a form simple enough that the solution can be read off directly or obtained with minimal effort.
 
 The "simple form" is [echelon form](!/linear-algebra/linear-systems/echelon-form): a staircase pattern where the leading entry of each row is to the right of the leading entry of the row above, and everything below each leading entry is zero. Once the augmented matrix is in echelon form, the solution is extracted by back substitution — solving from the last equation upward.
 
@@ -1326,7 +1326,7 @@ Optionally, the reduction can continue to reduced row echelon form (RREF), where
 @academic[formula_callout:elementary_row_operations|Elementary Row Operations|$$\\begin{aligned} R_i &\\leftrightarrow R_j \\quad \\text{(swap)} \\\\ kR_i &\\to R_i, \\quad k \\neq 0 \\quad \\text{(scaling)} \\\\ R_i + cR_j &\\to R_i \\quad \\text{(addition)} \\end{aligned}$$]@
 @academic[formulas_link:/linear-algebra/formulas#elementary_row_operations]@
 
-Row swap ($R_i \\leftrightarrow R_j$): interchange two rows. This reorders the equations — a cosmetic change that is sometimes necessary to place a nonzero entry in the pivot position.
+Row swap ($R_i \\leftrightarrow R_j$): interchange two rows. This reorders the equations — a cosmetic change that is [sometimes necessary to place a nonzero entry in the pivot position](https://linearalgebranotes.com/systems/gaussian-elimination#rule-exchanges-suffice).
 
 Row scaling ($kR_i \\to R_i$, $k \\neq 0$): multiply every entry in a row by a nonzero scalar. This rescales one equation. Multiplying by zero is forbidden because it would destroy information.
 
@@ -1389,7 +1389,7 @@ Doing $R_1 - R_2 \\to R_1$ and $R_2 - R_1 \\to R_2$ in one step on $x_1 + x_2 = 
 
 Move one column to the right and one row down, and repeat the process on the submatrix below and to the right of the current pivot. Continue until no rows or columns remain to process.
 
-The result is a matrix in row echelon form: a staircase of pivots descending from upper-left to lower-right, with zeros filling in below and to the left of each pivot. Any rows that are entirely zero sit at the bottom.`,
+[The result is a matrix in row echelon form](https://calculatematrix.com/matrix-calculators/ref#walkthrough): a staircase of pivots descending from upper-left to lower-right, with zeros filling in below and to the left of each pivot. Any rows that are entirely zero sit at the bottom.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1409,7 +1409,7 @@ The distinction between pivot and free columns is the structural core of the alg
   },
   obj5: {
     title: `Back Substitution`,
-    content: `Once the augmented matrix is in row echelon form, the solution is obtained by solving from the bottom row upward.
+    content: `Once the augmented matrix is in row echelon form, the solution is obtained by [solving from the bottom row upward](https://linearalgebranotes.com/systems/gaussian-elimination#rule-back-substitution).
 
 The last nonzero row contains the fewest unknowns — typically one pivot variable in terms of free variables and a constant. Solve for that pivot variable. Substitute the result into the row above, which now also becomes solvable for its pivot variable. Continue upward until every pivot variable is expressed in terms of the free variables and the constants from $\\mathbf{b}$.
 
@@ -1429,7 +1429,7 @@ Each step required only previously solved variables. The process terminates in $
     title: `Gauss-Jordan Elimination`,
     content: `Gauss-Jordan elimination extends the forward pass with a backward pass that creates zeros above each pivot as well, and scales each pivot to $1$. The result is [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form) (RREF), where every pivot variable is already isolated in its row.
 
-After forward elimination produces REF, continue by working from the bottom pivot upward. For each pivot, add appropriate multiples of its row to the rows above to eliminate all entries above the pivot. Then scale the pivot row so the pivot entry becomes $1$.
+After forward elimination produces REF, continue by working from the bottom pivot upward. For each pivot, add appropriate multiples of its row to the rows above to [eliminate all entries above the pivot](https://calculatematrix.com/matrix-calculators/rref#algorithm). Then scale the pivot row so the pivot entry becomes $1$.
 
 @academic[pitfall,aside:true,width:35%:Reading the answer off echelon form
 Reading the last column of the echelon form in the back substitution example as the solution gives $(9, 6, 10)$, and already the bottom row fails: $5 \\cdot 10 \\neq 10$. That matrix is in REF, not RREF; the solution is $(11/4, 5/2, 2)$.
@@ -1449,7 +1449,7 @@ For hand computation, the choice between back substitution (stop at REF) and Gau
 @academic[formula_callout:Worked Example: Unique Solution
 $$x_1 + 2x_2 - x_3 = 3, \\quad 2x_1 + 5x_2 + x_3 = 8, \\quad 3x_1 + 8x_2 + 2x_3 = 13$$]@
 
-Form the augmented matrix and apply forward elimination:
+Form the augmented matrix and [apply forward elimination](https://calculatematrix.com/linear-systems/gaussian-elimination-calculator#walkthrough):
 
 @academic[formula_callout:Worked Example: Unique Solution
 $$\\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 2 & 5 & 1 & 8 \\\\ 3 & 8 & 2 & 13 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1,\\; R_3 - 3R_1} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 2 \\\\ 0 & 2 & 5 & 4 \\end{array}\\right)$$]@
@@ -1477,7 +1477,7 @@ To run the same elimination on your own system, use the [linear systems calculat
 @academic[formula_callout:Worked Example: Infinitely Many Solutions
 $$x_1 - x_2 + 2x_3 + x_4 = 3, \\quad 2x_1 - 2x_2 + 5x_3 + 4x_4 = 8$$]@
 
-Two equations in four unknowns — more unknowns than equations, so the solution (if it exists) cannot be unique. Form and reduce:
+Two equations in four unknowns — more unknowns than equations, so the solution (if it exists) [cannot be unique](https://linearalgebranotes.com/systems/overdetermined-and-underdetermined-systems#rule-wide-not-unique). Form and reduce:
 
 @academic[formula_callout:Worked Example: Infinitely Many Solutions
 $$\\left(\\begin{array}{cccc|c} 1 & -1 & 2 & 1 & 3 \\\\ 2 & -2 & 5 & 4 & 8 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cccc|c} 1 & -1 & 2 & 1 & 3 \\\\ 0 & 0 & 1 & 2 & 2 \\end{array}\\right)$$]@
@@ -1520,14 +1520,14 @@ The system is inconsistent. Geometrically, the two equations represent parallel 
 For $x_1 + x_2 = 2$, $2x_1 + 2x_2 = 4$, $R_2 - 2R_1$ leaves the row $[0 \\; 0 \\mid 0]$. Reading it as no solution is wrong: it says $0 = 0$, true for every pair, and the system has infinitely many solutions $(2 - s, s)$.
 [Read more](!#pitfalls)]@
 
-Inconsistency is always detectable in echelon form: a row $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ means $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$, and by the [Rouché-Capelli theorem](!/linear-algebra/linear-systems/solvability), no solution exists.`,
+[Inconsistency is always detectable in echelon form](https://linearalgebranotes.com/systems/consistency#rule-elimination-test): a row $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ means $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$, and by the [Rouché-Capelli theorem](!/linear-algebra/linear-systems/solvability), no solution exists.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj10: {
     title: `Computational Cost`,
-    content: `Forward elimination on an $n \\times n$ system requires roughly $\\frac{2}{3}n^3$ arithmetic operations (multiplications and additions). The cost comes from the nested loop structure: for each of the $n$ pivot columns, elimination involves $O(n)$ rows, each requiring $O(n)$ operations.
+    content: `Forward elimination on an $n \\times n$ system requires roughly $\\frac{2}{3}n^3$ arithmetic operations (multiplications and additions). [The cost comes from the nested loop structure](https://linearalgebranotes.com/systems/gaussian-elimination#cost): for each of the $n$ pivot columns, elimination involves $O(n)$ rows, each requiring $O(n)$ operations.
 
 Back substitution requires roughly $n^2$ operations — a negligible addition compared to forward elimination. Gauss-Jordan elimination (continuing to RREF) raises the total to roughly $n^3$, because, in the classical form that clears above each pivot during the sweep, the backward pass adds about half the work of the forward pass.
 
@@ -1543,7 +1543,7 @@ These costs are dramatically better than the alternatives for large systems. [Cr
 @academic[fact,aside:true,width:35%:One tiny pivot, a wrong answer
 Solve $10^{-20}x_1 + x_2 = 1$, $x_1 + x_2 = 2$ in double precision without a swap: the multiplier $10^{20}$ swamps the second row, and the computer returns $x_1 = 0$, although the true value is $1$ to twenty decimal places. Swapping the rows first gives $x_1 = x_2 = 1$.]@
 
-Partial pivoting addresses this by modifying the pivot selection step. At each stage, instead of using whatever nonzero entry happens to sit in the pivot position, the algorithm scans the entries below (and including) the current position in the pivot column and swaps the row with the largest absolute value into the pivot position. This keeps the multipliers $-a_{ij}/a_{pj}$ small, which limits the accumulation of rounding error.
+Partial pivoting addresses this by modifying the pivot selection step. At each stage, instead of using whatever nonzero entry happens to sit in the pivot position, the algorithm scans the entries below (and including) the current position in the pivot column and swaps the row with the largest absolute value into the pivot position. [This keeps the multipliers](https://linearalgebranotes.com/systems/partial-pivoting#rule-multipliers-bounded) $-a_{ij}/a_{pj}$ small, which limits the accumulation of rounding error.
 
 Partial pivoting does not change the mathematical structure of Gaussian elimination — it only changes which row swaps are performed. The pivot positions, the rank, and the solution are the same in exact arithmetic; only the echelon form and the pivot values can differ. The difference is entirely numerical: partial pivoting makes the computation stable.
 
