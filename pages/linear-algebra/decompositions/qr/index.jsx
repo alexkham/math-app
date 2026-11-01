@@ -2342,7 +2342,9 @@ How to check: compare sizes and rank. $QQ^T$ is $m \\times m$ but has rank only 
 
 const introContent = {
   title: `Orthogonal Times Triangular`,
-  content: `The QR decomposition factors a matrix into an orthogonal factor Q and an upper triangular factor R. It is the matrix form of the Gram-Schmidt process, the standard method for least-squares computation, and the foundation of the most widely used eigenvalue algorithm. The orthogonal factor preserves lengths and condition numbers, making QR the numerically safest of the triangular factorizations.`,
+  content: `The QR decomposition factors a matrix into an orthogonal factor Q and an upper triangular factor R. It is the matrix form of the Gram-Schmidt process, the standard method for least-squares computation, and the foundation of the most widely used eigenvalue algorithm. The orthogonal factor preserves lengths and condition numbers, making QR the numerically safest of the triangular factorizations.
+
+For step-by-step results on your own numbers, use the [QR decomposition](https://calculatematrix.com/matrix-calculators/qr-decomposition) calculator on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept obj1 and obj3. Rewrote obj2 from "Is the QR

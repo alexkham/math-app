@@ -669,7 +669,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder that [linear combinations](!/linear-algebra/vectors/linear-combinations#1) are built from [scalar](!/linear-algebra/vectors#1) multiplication plus [vector addition](!/linear-algebra/vectors/basic-operations#1)
 • Press play or step manually through the scene player
 • The animation walks three phases in order: scale $u$ by $\\alpha$, scale $v$ by $\\beta$, then add the scaled vectors into $w$
-• The scalars $\\alpha$ and $\\beta$ are shown symbolically — the visualizer focuses on structure, not specific numeric values`,
+• The scalars $\\alpha$ and $\\beta$ are shown symbolically — the visualizer focuses on structure, not specific numeric values
+
+For exact step-by-step results on your own input, use the [linear combination](https://calculatematrix.com/vector-calculators/linear-combination) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

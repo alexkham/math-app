@@ -70,7 +70,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of what orthogonality means and implies
 • Press play or step manually; the step log on the right keeps every stage
 
-A matrix that fails the test stops early, with the diagnosis: perpendicular columns of the wrong length, which normalizing fixes, or columns that are not perpendicular at all.`,
+A matrix that fails the test stops early, with the diagnosis: perpendicular columns of the wrong length, which normalizing fixes, or columns that are not perpendicular at all.
+
+For exact step-by-step results on your own input, use the [matrix properties](https://calculatematrix.com/matrix-calculators/matrix-properties) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

@@ -1175,7 +1175,9 @@ How to check: dot the result with every earlier $\\mathbf{u}_j$. The wrong vecto
 
 const introContent = {
   title: `Perpendicularity and Its Consequences`,
-  content: `Orthogonality — the condition that two vectors are perpendicular — is the geometric idea that makes linear algebra computationally clean. Orthogonal bases turn coordinate-finding into dot products. Projections onto subspaces become explicit formulas. Least-squares approximation reduces to a single matrix equation. Every simplification traces back to the same root: when vectors are perpendicular, their interactions vanish and problems decouple.`,
+  content: `Orthogonality — the condition that two vectors are perpendicular — is the geometric idea that makes linear algebra computationally clean. Orthogonal bases turn coordinate-finding into dot products. Projections onto subspaces become explicit formulas. Least-squares approximation reduces to a single matrix equation. Every simplification traces back to the same root: when vectors are perpendicular, their interactions vanish and problems decouple.
+
+For step-by-step results on your own numbers, use the [Gram–Schmidt](https://calculatematrix.com/matrix-calculators/gram-schmidt) and [vector projection](https://calculatematrix.com/vector-calculators/vector-projection) calculators on CalculateMatrix.`,
 }
 
 

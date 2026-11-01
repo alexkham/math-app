@@ -64,7 +64,9 @@ The [Vector Calculator](!/linear-algebra/calculators/vectors) handles everything
 
 The [Linear Systems Calculator](!/linear-algebra/calculators/linear-systems) solves up to 10×10 systems using Gaussian Elimination, Gauss-Jordan, Cramer's Rule, or the Inverse Method. It renders the full augmented matrix, shows row operations step by step, and plots the solution graphically for two-variable systems.
 
-All three tools are free, require no sign-up, and work on any device.`,
+All three tools are free, require no sign-up, and work on any device.
+
+For operations beyond these three tools — eigenvalues, diagonalization, QR, SVD, Jordan form, null space and more — see the [matrix calculators](https://calculatematrix.com/matrix-calculators), [vector calculators](https://calculatematrix.com/vector-calculators) and [linear systems calculators](https://calculatematrix.com/linear-systems) on CalculateMatrix.`,
 },
     },
   };

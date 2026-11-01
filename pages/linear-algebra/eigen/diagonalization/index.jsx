@@ -3440,7 +3440,9 @@ How to check: compute $Q^TQ$ before using $Q^T$. It must be $I$; here the unnorm
 const introContent = {
   id: "intro",
   title: `Reducing a Matrix to Its Eigenvalue Skeleton`,
-  content: `A diagonalizable matrix can be factored as PDP⁻¹, where D is the diagonal matrix of eigenvalues and P is the matrix of eigenvectors. This factorization strips away the complexity of the original matrix, reducing powers, exponentials, and differential equations to operations on individual eigenvalues. Diagonalization is possible when and only when the eigenvectors form a basis — and for symmetric matrices, this is always the case.`,
+  content: `A diagonalizable matrix can be factored as PDP⁻¹, where D is the diagonal matrix of eigenvalues and P is the matrix of eigenvectors. This factorization strips away the complexity of the original matrix, reducing powers, exponentials, and differential equations to operations on individual eigenvalues. Diagonalization is possible when and only when the eigenvectors form a basis — and for symmetric matrices, this is always the case.
+
+For step-by-step results on your own numbers, use the [diagonalization](https://calculatematrix.com/matrix-calculators/diagonalization) calculator on CalculateMatrix.`,
 }
 
 

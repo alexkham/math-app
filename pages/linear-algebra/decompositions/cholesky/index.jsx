@@ -2440,7 +2440,9 @@ How to check: forward substitution starts at the top with $y_1$, back substituti
 
 const introContent = {
   title: `The Square Root of a Symmetric Positive Definite Matrix`,
-  content: `The Cholesky decomposition factors a symmetric positive definite matrix as A = LLᵀ, where L is lower triangular with positive diagonal entries. It exploits symmetry to achieve half the cost of LU, requires no pivoting, and doubles as a positive definiteness test. It is the fastest direct solver for the class of matrices that appears most often in optimization, statistics, and simulation.`,
+  content: `The Cholesky decomposition factors a symmetric positive definite matrix as A = LLᵀ, where L is lower triangular with positive diagonal entries. It exploits symmetry to achieve half the cost of LU, requires no pivoting, and doubles as a positive definiteness test. It is the fastest direct solver for the class of matrices that appears most often in optimization, statistics, and simulation.
+
+For step-by-step results on your own numbers, use the [Cholesky decomposition](https://calculatematrix.com/matrix-calculators/cholesky-decomposition) calculator on CalculateMatrix.`,
 }
 
 

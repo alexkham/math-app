@@ -550,7 +550,9 @@ export async function getStaticProps(){
 • Use the **Dimension** steppers to set the size of $A$ from $2 \\times 2$ up to $10 \\times 10$ — both [dimensions](!/linear-algebra/vector-spaces/dimension#1) move together because $A$ must be square
 • Hover the **?** icon for a reminder that trace requires a [square matrix](!/linear-algebra/matrix/types#1)
 • The scene player starts by posing the question with no highlights, then reveals the main diagonal, then sweeps the diagonal entry by entry
-• Use the speed selector and step log to control the pace and review prior steps`,
+• Use the speed selector and step log to control the pace and review prior steps
+
+For exact step-by-step results on your own input, use the [matrix trace](https://calculatematrix.com/matrix-calculators/matrix-trace) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

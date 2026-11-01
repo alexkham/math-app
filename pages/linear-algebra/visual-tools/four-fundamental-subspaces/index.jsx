@@ -69,7 +69,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of the four spaces and their dimensions
 • Press play or step manually; the step log on the right keeps every stage
 
-Each subspace scene shows a basis and, for the two null spaces, the product that proves the basis vectors are in the space. The last two scenes show the orthogonality between the pairs and the [dimension](!/linear-algebra/vector-spaces/dimension#1) count.`,
+Each subspace scene shows a basis and, for the two null spaces, the product that proves the basis vectors are in the space. The last two scenes show the orthogonality between the pairs and the [dimension](!/linear-algebra/vector-spaces/dimension#1) count.
+
+For exact step-by-step results on your own input, use the [column space](https://calculatematrix.com/matrix-calculators/column-space), [row space](https://calculatematrix.com/matrix-calculators/row-space), [null space](https://calculatematrix.com/matrix-calculators/nullspace) and [left null space](https://calculatematrix.com/matrix-calculators/left-nullspace) calculators on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

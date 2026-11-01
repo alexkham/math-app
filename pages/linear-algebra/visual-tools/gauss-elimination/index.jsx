@@ -718,7 +718,9 @@ export async function getStaticProps() {
 
 **Read the entries**: coefficients on the left, constants on the right in amber, separated by the bar. Values may be typed as integers or decimals; results are displayed as exact fractions wherever one exists, so a third reads $1/3$ rather than a string of digits.
 
-**Step the run**: **Back** and **Next** move one operation at a time, **Play** advances automatically at the speed set in the dropdown, and any entry in the step log on the right can be clicked to jump straight to it.`,
+**Step the run**: **Back** and **Next** move one operation at a time, **Play** advances automatically at the speed set in the dropdown, and any entry in the step log on the right can be clicked to jump straight to it.
+
+For exact step-by-step results on your own input, use the [Gaussian elimination](https://calculatematrix.com/linear-systems/gaussian-elimination-calculator) and [RREF](https://calculatematrix.com/matrix-calculators/rref) calculators on CalculateMatrix.`,
       before: ``,
       after: `The still above is the opening scene of the default preset, the system $2y + z = 4$, $2x + 4y + z = 9$, $x + y + 3z = 8$. Nothing has been touched yet: the bar marks the split between the coefficients and the right-hand side, and everything to the right of it is what each equation equals.
 

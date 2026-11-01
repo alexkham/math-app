@@ -1501,7 +1501,9 @@ How to check: compute $M^TM$. A diagonal result with entries other than $1$ mean
 
 const introContent = {
   title: `Bases Where Coordinates Come Free`,
-  content: `An orthogonal set consists of vectors that are pairwise perpendicular. An orthonormal set adds the requirement that each vector has unit length. These sets are automatically linearly independent, and when they form a basis, coordinates are computed by dot products alone — no system solving, no row reduction, no matrix inversion.`,
+  content: `An orthogonal set consists of vectors that are pairwise perpendicular. An orthonormal set adds the requirement that each vector has unit length. These sets are automatically linearly independent, and when they form a basis, coordinates are computed by dot products alone — no system solving, no row reduction, no matrix inversion.
+
+For step-by-step results on your own numbers, use the [Gram–Schmidt](https://calculatematrix.com/matrix-calculators/gram-schmidt) and [orthogonal complement](https://calculatematrix.com/vector-calculators/orthogonal-complement) calculators on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added the zero

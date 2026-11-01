@@ -64,7 +64,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of what a [scalar](!/linear-algebra/vectors#1) is and why the shape is preserved
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 
-The scalar $k$ is shown symbolically in front of $A$. The visualizer focuses on the structural rule — every cell of $A$ gets multiplied by the same $k$ — not on any specific numerical value of $k$.`,
+The scalar $k$ is shown symbolically in front of $A$. The visualizer focuses on the structural rule — every cell of $A$ gets multiplied by the same $k$ — not on any specific numerical value of $k$.
+
+For exact step-by-step results on your own input, use the [scalar multiplication](https://calculatematrix.com/matrix-calculators/scalar-multiplication) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

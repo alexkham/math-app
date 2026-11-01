@@ -2756,7 +2756,9 @@ How to check: go back to the magnitude formula. $\\|\\mathbf{a} \\times \\mathbf
  const introContent = {
      id: `intro`,
   title: `A Product That Builds Perpendicular Vectors`,
-  content: `The cross product stands apart from every other operation in this section. It takes two vectors and returns a new vector — one that is perpendicular to both inputs. Its magnitude measures the area of the parallelogram the two vectors span, and its direction is determined by a handedness convention that introduces orientation into three-dimensional space. Unlike the [dot product](!/linear-algebra/vectors/dot-product), which works in any $\\mathbb{R}^n$ and produces a scalar, the cross product is defined exclusively in $\\mathbb{R}^3$ and produces a vector. It is anti-commutative, not associative, and zero precisely when the two inputs are parallel. These departures from familiar algebraic patterns are not defects — they reflect the geometric nature of perpendicularity and area in three dimensions.`,
+  content: `The cross product stands apart from every other operation in this section. It takes two vectors and returns a new vector — one that is perpendicular to both inputs. Its magnitude measures the area of the parallelogram the two vectors span, and its direction is determined by a handedness convention that introduces orientation into three-dimensional space. Unlike the [dot product](!/linear-algebra/vectors/dot-product), which works in any $\\mathbb{R}^n$ and produces a scalar, the cross product is defined exclusively in $\\mathbb{R}^3$ and produces a vector. It is anti-commutative, not associative, and zero precisely when the two inputs are parallel. These departures from familiar algebraic patterns are not defects — they reflect the geometric nature of perpendicularity and area in three dimensions.
+
+For step-by-step results on your own numbers, use the [cross product](https://calculatematrix.com/vector-calculators/cross-product) calculator on CalculateMatrix.`,
 };
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added other

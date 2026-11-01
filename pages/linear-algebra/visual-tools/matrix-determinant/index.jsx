@@ -94,7 +94,9 @@ export async function getStaticProps(){
 • Below the panel, the scene player animates the recipe. Play, step back and forward, reset, and choose a speed. The caption above the [matrix](!/linear-algebra/matrix#1) states the general formula for the strategy, and the **Step explanations** log on the right keeps every step you have passed, with the running formula growing one term at a time
 • Everything is symbolic: the entries of $A$ stay as $a_{i,j}$ and each term is written out, so what you see is the formula, not a numerical example
 
-Every strategy produces the same number. They differ only in how the terms are grouped and what is highlighted while they are collected. For the theory behind the tool, see the [determinants theory page](!/linear-algebra/determinants); for minors and cofactors in depth, the [cofactors theory page](!/linear-algebra/determinants/cofactors).`,
+Every strategy produces the same number. They differ only in how the terms are grouped and what is highlighted while they are collected. For the theory behind the tool, see the [determinants theory page](!/linear-algebra/determinants); for minors and cofactors in depth, the [cofactors theory page](!/linear-algebra/determinants/cofactors).
+
+For exact step-by-step results on your own input, use the [determinant](https://calculatematrix.com/matrix-calculators/determinant) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

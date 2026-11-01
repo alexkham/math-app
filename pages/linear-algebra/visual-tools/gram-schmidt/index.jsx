@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 • Everything is symbolic: the coefficients are named $c_{k,j}$ and the lengths $\\|\\mathbf{u}_k\\|$, so each row of $U$ shows the structure of the formula rather than a numerical result
 
-Choosing $3$ vectors of length $2$ is allowed and instructive: three vectors in the plane cannot be independent, and the caption points out that the third would reduce to zero.`,
+Choosing $3$ vectors of length $2$ is allowed and instructive: three vectors in the plane cannot be independent, and the caption points out that the third would reduce to zero.
+
+For exact step-by-step results on your own input, use the [Gram–Schmidt](https://calculatematrix.com/matrix-calculators/gram-schmidt) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

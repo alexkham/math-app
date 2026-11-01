@@ -1613,7 +1613,9 @@ How to check: count the columns, one per unknown coefficient. With a column of o
 
 const introContent = {
   title: `The Best Approximate Solution`,
-  content: `When a linear system has no solution, the least-squares method finds the vector that comes closest — the one minimizing the squared distance between Ax and b. The answer is a projection: the least-squares solution produces the point in the column space nearest to b, and the normal equations encode the orthogonality condition that defines "nearest."`,
+  content: `When a linear system has no solution, the least-squares method finds the vector that comes closest — the one minimizing the squared distance between Ax and b. The answer is a projection: the least-squares solution produces the point in the column space nearest to b, and the normal equations encode the orthogonality condition that defines "nearest."
+
+For step-by-step results on your own numbers, use the [least squares](https://calculatematrix.com/linear-systems/least-squares-solver) calculator on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added outliers

@@ -1492,7 +1492,9 @@ How to check: test each proposed basis vector $\\mathbf{w}$ by solving $A\\mathb
 
 const introContent = {
   title: `What a Transformation Hits and What It Kills`,
-  content: `Every linear transformation partitions its domain into two complementary pieces: the kernel, consisting of everything that maps to zero, and a complement that maps bijectively onto the image. The dimensions of the kernel and image are locked together by the rank-nullity theorem, and their relationship determines whether the transformation is injective, surjective, or neither.`,
+  content: `Every linear transformation partitions its domain into two complementary pieces: the kernel, consisting of everything that maps to zero, and a complement that maps bijectively onto the image. The dimensions of the kernel and image are locked together by the rank-nullity theorem, and their relationship determines whether the transformation is injective, surjective, or neither.
+
+For step-by-step results on your own numbers, use the [null space](https://calculatematrix.com/matrix-calculators/nullspace) and [column space](https://calculatematrix.com/matrix-calculators/column-space) calculators on CalculateMatrix.`,
 }
 
 

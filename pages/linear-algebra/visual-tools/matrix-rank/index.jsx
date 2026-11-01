@@ -70,7 +70,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of what rank is and why row operations preserve it
 • Press play or step manually; the step log on the right lists every row operation performed
 
-This is the one tool in the section that works with actual numbers, because rank cannot be read off a symbolic matrix: it depends on which entries happen to cancel.`,
+This is the one tool in the section that works with actual numbers, because rank cannot be read off a symbolic matrix: it depends on which entries happen to cancel.
+
+For exact step-by-step results on your own input, use the [matrix rank](https://calculatematrix.com/matrix-calculators/matrix-rank) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

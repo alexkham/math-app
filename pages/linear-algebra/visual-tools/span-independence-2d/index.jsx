@@ -66,7 +66,9 @@ Try this sequence to build intuition:
 &bull; Drag the tip of $\\mathbf{b}$ toward the line through $\\mathbf{a}$. The parallelogram thins, its area in the live card shrinks, and the moment $\\mathbf{b}$ lands on that line the fill vanishes, a dashed red span line appears, and the label switches to span $=$ line.
 &bull; Press **play** in the animation panel. $\\mathbf{b}$ orbits the origin at fixed length while the determinant [traces](!/linear-algebra/matrix/trace#1) a sine wave below; watch it cross zero exactly when $\\mathbf{b}$ is parallel or anti-parallel to $\\mathbf{a}$.
 
-The point: independence is not about the vectors being perpendicular or long. It is about whether they point in genuinely different directions.`,
+The point: independence is not about the vectors being perpendicular or long. It is about whether they point in genuinely different directions.
+
+For exact step-by-step results on your own input, use the [linear independence](https://calculatematrix.com/vector-calculators/linear-independence) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

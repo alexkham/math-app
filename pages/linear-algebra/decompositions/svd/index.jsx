@@ -9076,7 +9076,9 @@ How to check: one vector is enough. $A\\mathbf{e}_2 = (2, 1)^T$ has length $\\sq
 
 const introContent = {
   title: `The Universal Matrix Factorization`,
-  content: `The singular value decomposition, written SVD, factors any matrix of any shape as UΣVᵀ — two orthogonal matrices sandwiching a diagonal matrix of non-negative singular values. It exists for every matrix, reveals the rank, provides orthonormal bases for all four fundamental subspaces, computes the pseudoinverse, yields the best low-rank approximation, and decomposes every linear transformation into a rotation or reflection, a scaling, and another rotation or reflection. No other single factorization provides this much information.`,
+  content: `The singular value decomposition, written SVD, factors any matrix of any shape as UΣVᵀ — two orthogonal matrices sandwiching a diagonal matrix of non-negative singular values. It exists for every matrix, reveals the rank, provides orthonormal bases for all four fundamental subspaces, computes the pseudoinverse, yields the best low-rank approximation, and decomposes every linear transformation into a rotation or reflection, a scaling, and another rotation or reflection. No other single factorization provides this much information.
+
+For step-by-step results on your own numbers, use the [SVD](https://calculatematrix.com/matrix-calculators/svd) calculator on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added the sign

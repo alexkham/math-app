@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of what the factorization is and why it is the standard way to solve linear systems
 • Press play or step manually; the step log on the right lists every row operation
 
-The layout reads $A = L \\cdot U$ throughout. $L$ starts with its ones and zeros already drawn, since they are known before any arithmetic, and $U$ starts as a copy of $A$ that the row operations turn triangular.`,
+The layout reads $A = L \\cdot U$ throughout. $L$ starts with its ones and zeros already drawn, since they are known before any arithmetic, and $U$ starts as a copy of $A$ that the row operations turn triangular.
+
+For exact step-by-step results on your own input, use the [LU decomposition](https://calculatematrix.com/matrix-calculators/lu-decomposition) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

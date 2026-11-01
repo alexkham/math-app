@@ -2522,7 +2522,9 @@ How to check: compute one inner product of the result with an earlier vector, us
 
  const introContent = {
   title: `Converting Any Basis into an Orthogonal One`,
-  content: `The Gram-Schmidt process takes a set of linearly independent vectors and produces an orthogonal (or orthonormal) set spanning the same subspace. It works by sequentially stripping each vector of its components along previously computed directions, leaving only the perpendicular remainder. The result is a constructive proof that orthonormal bases always exist — and the matrix version of this process is the QR decomposition.`,
+  content: `The Gram-Schmidt process takes a set of linearly independent vectors and produces an orthogonal (or orthonormal) set spanning the same subspace. It works by sequentially stripping each vector of its components along previously computed directions, leaving only the perpendicular remainder. The result is a constructive proof that orthonormal bases always exist — and the matrix version of this process is the QR decomposition.
+
+For step-by-step results on your own numbers, use the [Gram–Schmidt](https://calculatematrix.com/matrix-calculators/gram-schmidt) calculator on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added dependent

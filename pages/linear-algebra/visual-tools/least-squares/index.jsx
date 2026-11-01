@@ -69,7 +69,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of why the residual must be perpendicular to the columns
 • Press play or step manually; the step log on the right keeps every stage
 
-When $A$ is a design matrix the captions translate everything into the fit: the fitted line or parabola, the fitted values at the data points, and the errors.`,
+When $A$ is a design matrix the captions translate everything into the fit: the fitted line or parabola, the fitted values at the data points, and the errors.
+
+For exact step-by-step results on your own input, use the [least squares](https://calculatematrix.com/linear-systems/least-squares-solver) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

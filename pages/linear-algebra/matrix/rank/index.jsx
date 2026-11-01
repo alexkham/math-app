@@ -2880,7 +2880,9 @@ How to check: the rank can never exceed $\\min(m, n)$. A rank of $4$ for a $2 \\
 const introContent = {
     id: "intro",
   title: `Measuring the Effective Size of a Matrix`,
-  content: `A matrix may have many rows and columns, but some of them may carry redundant information — expressible as combinations of others. The rank strips away this redundancy and counts the number of truly independent directions the matrix uses, revealing its effective dimensionality and governing the solvability of every linear system it defines.`,
+  content: `A matrix may have many rows and columns, but some of them may carry redundant information — expressible as combinations of others. The rank strips away this redundancy and counts the number of truly independent directions the matrix uses, revealing its effective dimensionality and governing the solvability of every linear system it defines.
+
+For step-by-step results on your own numbers, use the [matrix rank](https://calculatematrix.com/matrix-calculators/matrix-rank) calculator on CalculateMatrix.`,
 }
 
 

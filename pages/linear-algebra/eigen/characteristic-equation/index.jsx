@@ -1495,7 +1495,9 @@ How to check: multiply $A$ by the candidate and compare with $\\lambda$ times th
  const introContent = {
    id: "intro",
   title: `The Polynomial Whose Roots Are the Eigenvalues`,
-  content: `The eigenvalue problem Av = λv converts into a determinant condition: det(A − λI) = 0. This determinant is a polynomial in λ whose roots are the eigenvalues. Computing the characteristic polynomial and factoring it is the standard method for finding eigenvalues of small matrices — and the polynomial's coefficients encode the trace, determinant, and other invariants of the matrix.`,
+  content: `The eigenvalue problem Av = λv converts into a determinant condition: det(A − λI) = 0. This determinant is a polynomial in λ whose roots are the eigenvalues. Computing the characteristic polynomial and factoring it is the standard method for finding eigenvalues of small matrices — and the polynomial's coefficients encode the trace, determinant, and other invariants of the matrix.
+
+For step-by-step results on your own numbers, use the [characteristic polynomial](https://calculatematrix.com/matrix-calculators/characteristic-polynomial) and [eigenvalue](https://calculatematrix.com/matrix-calculators/eigenvalues) calculators on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added polynomial

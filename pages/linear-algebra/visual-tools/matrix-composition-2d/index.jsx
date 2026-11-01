@@ -69,7 +69,9 @@ Try this sequence to build intuition:
 &bull; Switch to **Two rotations** and flip the toggle again. Now both orders land in the same place: rotations commute.
 &bull; Drag $\\mathbf{v}$ in either view. The trail and both endpoints follow it.
 
-The point: [matrix multiplication](!/linear-algebra/matrix/operations#5) is composition of transformations, and composition depends on order.`,
+The point: [matrix multiplication](!/linear-algebra/matrix/operations#5) is composition of transformations, and composition depends on order.
+
+For exact step-by-step results on your own input, use the [matrix multiplication](https://calculatematrix.com/matrix-calculators/matrix-multiplication) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

@@ -1602,7 +1602,9 @@ How to check: compute $\\mathbf{u} \\cdot \\mathbf{v}$ first. Only when it is $0
 
  const introContent = {
   title: `Measuring Length, Angle, and Distance`,
-  content: `The dot product assigns a scalar to every pair of vectors, encoding their lengths, the angle between them, and whether they are perpendicular. It is one instance of a broader concept — the inner product — that carries the same geometric structure into polynomial spaces, function spaces, and matrix spaces. Every notion of orthogonality on this site traces back to an inner product.`,
+  content: `The dot product assigns a scalar to every pair of vectors, encoding their lengths, the angle between them, and whether they are perpendicular. It is one instance of a broader concept — the inner product — that carries the same geometric structure into polynomial spaces, function spaces, and matrix spaces. Every notion of orthogonality on this site traces back to an inner product.
+
+For step-by-step results on your own numbers, use the [dot product](https://calculatematrix.com/vector-calculators/dot-product) and [angle between vectors](https://calculatematrix.com/vector-calculators/angle-between-vectors) calculators on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added the taxicab

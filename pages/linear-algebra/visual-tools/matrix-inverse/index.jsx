@@ -65,7 +65,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of what the inverse is and how the adjugate formula relates to row reduction
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 • The run computes every cofactor, transposes them into the adjugate, expands the [determinant](!/linear-algebra/determinants#1) along the first row, and divides — the same four moves at either size
-• Everything is symbolic: the entries of $A$ stay as $a_{i,j}$, so what you see is the formula, not a numerical example`,
+• Everything is symbolic: the entries of $A$ stay as $a_{i,j}$, so what you see is the formula, not a numerical example
+
+For exact step-by-step results on your own input, use the [matrix inverse](https://calculatematrix.com/matrix-calculators/matrix-inverse) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

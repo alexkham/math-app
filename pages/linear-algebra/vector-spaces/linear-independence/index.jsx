@@ -1941,7 +1941,9 @@ How to check: work out $W$ as an expression in $x$ before substituting anything.
 
  const introContent = {
   title: `When No Vector Is Redundant`,
-  content: `A set of vectors is linearly independent if none of them can be built from the others. This is the formal way of saying that every vector in the set contributes something genuinely new — remove any one of them and the span shrinks. Independence is one half of what makes a basis: the half that eliminates waste.`,
+  content: `A set of vectors is linearly independent if none of them can be built from the others. This is the formal way of saying that every vector in the set contributes something genuinely new — remove any one of them and the span shrinks. Independence is one half of what makes a basis: the half that eliminates waste.
+
+For step-by-step results on your own numbers, use the [linear independence](https://calculatematrix.com/vector-calculators/linear-independence) calculator on CalculateMatrix.`,
 }
 
 

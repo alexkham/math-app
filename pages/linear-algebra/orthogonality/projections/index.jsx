@@ -2476,7 +2476,9 @@ How to check: test the basis first, $(1, 0, 1) \\cdot (0, 1, 1) = 1 \\neq 0$. Or
 
 const introContent = {
   title: `The Closest Point in a Subspace`,
-  content: `The orthogonal projection of a vector onto a subspace is the point in the subspace closest to the original vector. The residual — the difference between the vector and its projection — is perpendicular to the subspace. This orthogonal decomposition is the geometric engine behind least squares, the QR decomposition, and every approximation problem in linear algebra.`,
+  content: `The orthogonal projection of a vector onto a subspace is the point in the subspace closest to the original vector. The residual — the difference between the vector and its projection — is perpendicular to the subspace. This orthogonal decomposition is the geometric engine behind least squares, the QR decomposition, and every approximation problem in linear algebra.
+
+For step-by-step results on your own numbers, use the [vector projection](https://calculatematrix.com/vector-calculators/vector-projection) and [projection matrix](https://calculatematrix.com/matrix-calculators/projection-matrix) calculators on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added oblique

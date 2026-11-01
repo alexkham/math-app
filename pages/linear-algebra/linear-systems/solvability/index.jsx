@@ -2453,7 +2453,9 @@ How to check: set every parameter to $0$. The result must solve $A\\mathbf{x} = 
 
  const introContent = {
   title: `When Solutions Exist and When They Are Unique`,
-  content: `Two separate questions govern every linear system: does at least one solution exist, and if so, is that solution the only one? The rank of the coefficient matrix answers both. A single integer determines whether the system is inconsistent, uniquely solvable, or infinitely underdetermined — and characterizes the geometry of the solution set in each case.`,
+  content: `Two separate questions govern every linear system: does at least one solution exist, and if so, is that solution the only one? The rank of the coefficient matrix answers both. A single integer determines whether the system is inconsistent, uniquely solvable, or infinitely underdetermined — and characterizes the geometry of the solution set in each case.
+
+For step-by-step results on your own numbers, use the [consistency](https://calculatematrix.com/linear-systems/consistency-checker) calculator on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added exactly two

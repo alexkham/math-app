@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of the three outcomes and how the reduced form reveals them
 • Press play or step manually; the step log on the right lists every row operation
 
-The run has a forward pass, a consistency check, and a backward pass, and it ends in one of three final scenes. The constants stay in amber throughout, so the right-hand side is always distinguishable from the coefficients.`,
+The run has a forward pass, a consistency check, and a backward pass, and it ends in one of three final scenes. The constants stay in amber throughout, so the right-hand side is always distinguishable from the coefficients.
+
+For exact step-by-step results on your own input, use the [system of equations](https://calculatematrix.com/linear-systems/system-of-equations-solver) and [consistency](https://calculatematrix.com/linear-systems/consistency-checker) calculators on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

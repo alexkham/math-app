@@ -4111,7 +4111,9 @@ const introContent = {
 
     id: "intro",
   title: `Manipulating Matrices`,
-  content: `Matrices support a family of operations — addition, scalar multiplication, matrix multiplication, transposition, and exponentiation — each with its own rules and dimension requirements. Matrix multiplication stands apart from the rest: it is not commutative, it demands compatible dimensions, and it admits several geometric and algebraic interpretations that make it one of the richest operations in all of mathematics.`,
+  content: `Matrices support a family of operations — addition, scalar multiplication, matrix multiplication, transposition, and exponentiation — each with its own rules and dimension requirements. Matrix multiplication stands apart from the rest: it is not commutative, it demands compatible dimensions, and it admits several geometric and algebraic interpretations that make it one of the richest operations in all of mathematics.
+
+For step-by-step results on your own numbers, use the [matrix multiplication](https://calculatematrix.com/matrix-calculators/matrix-multiplication), [matrix addition](https://calculatematrix.com/matrix-calculators/matrix-addition) and [transpose](https://calculatematrix.com/matrix-calculators/matrix-transpose) calculators on CalculateMatrix.`,
 }
 
 

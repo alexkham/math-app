@@ -89,7 +89,9 @@ export async function getStaticProps() {
 • Below it, a short explanation states the rule in words and in symbols, lists the properties that follow from it, and links to a fuller reference
 • **Clear** empties the display so a fresh type or size can be generated
 
-Generate the same type at two or three sizes in a row. The pattern is what stays fixed; the numbers are incidental, and for the random type they are the whole point.`,
+Generate the same type at two or three sizes in a row. The pattern is what stays fixed; the numbers are incidental, and for the random type they are the whole point.
+
+For exact step-by-step results on your own input, use the [matrix properties](https://calculatematrix.com/matrix-calculators/matrix-properties) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

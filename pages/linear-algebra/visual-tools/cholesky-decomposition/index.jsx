@@ -68,7 +68,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of what the factorization is and why it doubles as a test
 • Press play or step manually; the step log on the right lists every entry computed
 
-Two presets stop early on purpose. The not-symmetric one stops before any arithmetic; the not-positive-definite one runs until a square root of a negative number is demanded and stops there with the explanation.`,
+Two presets stop early on purpose. The not-symmetric one stops before any arithmetic; the not-positive-definite one runs until a square root of a negative number is demanded and stops there with the explanation.
+
+For exact step-by-step results on your own input, use the [Cholesky decomposition](https://calculatematrix.com/matrix-calculators/cholesky-decomposition) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

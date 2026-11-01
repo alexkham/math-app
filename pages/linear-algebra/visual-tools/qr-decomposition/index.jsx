@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • The layout reads $A = Q \\cdot R$ throughout: $A$ on the left stays fixed, $Q$ fills column by column, and $R$ fills entry by entry as each coefficient and length is produced
 • Everything is symbolic: the coefficients are named $r_{j,k}$ and the working columns $\\mathbf{u}_k$, so the cells show the structure of the formula rather than numbers
 
-Choosing more columns than rows is allowed and instructive: the columns then cannot be independent, and the caption points out that a working column would reduce to zero.`,
+Choosing more columns than rows is allowed and instructive: the columns then cannot be independent, and the caption points out that a working column would reduce to zero.
+
+For exact step-by-step results on your own input, use the [QR decomposition](https://calculatematrix.com/matrix-calculators/qr-decomposition) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

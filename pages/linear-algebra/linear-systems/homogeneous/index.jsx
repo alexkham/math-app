@@ -1481,7 +1481,9 @@ How to check: test the value found. $A - \\frac{3}{2}I = \\begin{pmatrix} 1/2 & 
 
  const introContent = {
   title: `Systems with Zero Right-Hand Side`,
-  content: `A homogeneous system Ax = 0 always has the trivial solution x = 0. The real question is whether nontrivial solutions exist — and when they do, the solution set is a subspace of Rⁿ whose structure is governed entirely by the rank of the coefficient matrix.`,
+  content: `A homogeneous system Ax = 0 always has the trivial solution x = 0. The real question is whether nontrivial solutions exist — and when they do, the solution set is a subspace of Rⁿ whose structure is governed entirely by the rank of the coefficient matrix.
+
+For step-by-step results on your own numbers, use the [homogeneous system](https://calculatematrix.com/linear-systems/homogeneous-system-solver) calculator on CalculateMatrix.`,
 }
 
 

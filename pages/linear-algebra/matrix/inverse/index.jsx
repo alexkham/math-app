@@ -3898,7 +3898,9 @@ The inverse is the right object when $A^{-1}$ itself — the entire matrix, not 
 const introContent = {
   id: "intro",
   title: `Undoing a Matrix`,
-  content: `For real numbers, dividing by a means multiplying by 1/a. Matrices have no division operation, but invertible matrices have an inverse that plays the same role — multiplying by A⁻¹ reverses the effect of multiplying by A. Not every matrix has an inverse, and understanding when one exists, how to compute it, and what properties it carries is central to linear algebra.`,
+  content: `For real numbers, dividing by a means multiplying by 1/a. Matrices have no division operation, but invertible matrices have an inverse that plays the same role — multiplying by A⁻¹ reverses the effect of multiplying by A. Not every matrix has an inverse, and understanding when one exists, how to compute it, and what properties it carries is central to linear algebra.
+
+For step-by-step results on your own numbers, use the [matrix inverse](https://calculatematrix.com/matrix-calculators/matrix-inverse) calculator on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the B/A and A^{-T} questions. Rewrote the

@@ -1364,7 +1364,9 @@ How to check: apply the product to $\\mathbf{e}_1$ and compare it with $S(T(\\ma
 
   const introContent = {
   title: `Encoding a Transformation as a Matrix`,
-  content: `Every linear transformation between finite-dimensional spaces can be represented by a matrix, and every matrix defines a linear transformation. The columns of the matrix are the images of the basis vectors — this single recipe converts an abstract function into a concrete array of numbers from which every property of the transformation can be extracted.`,
+  content: `Every linear transformation between finite-dimensional spaces can be represented by a matrix, and every matrix defines a linear transformation. The columns of the matrix are the images of the basis vectors — this single recipe converts an abstract function into a concrete array of numbers from which every property of the transformation can be extracted.
+
+For step-by-step results on your own numbers, use the [linear transformation](https://calculatematrix.com/matrix-calculators/linear-transformation) calculator on CalculateMatrix.`,
 }
 
 

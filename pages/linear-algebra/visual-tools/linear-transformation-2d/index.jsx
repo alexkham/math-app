@@ -557,7 +557,9 @@ The fundamental workflow:
 &bull; **Drag the t slider** under the canvas &mdash; manually scrub through the morph at any speed.
 &bull; **Edit the matrix A** on the right &mdash; the visualization updates instantly. The scenario indicator clears since you are now in custom mode.
 
-The matrix $M(t) = (1 - t) I + t A$ blends linearly from the identity at $t = 0$ to the full transformation at $t = 1$, so the canvas shows the transformation actually happening rather than just its end state.`,
+The matrix $M(t) = (1 - t) I + t A$ blends linearly from the identity at $t = 0$ to the full transformation at $t = 1$, so the canvas shows the transformation actually happening rather than just its end state.
+
+For exact step-by-step results on your own input, use the [linear transformation](https://calculatematrix.com/matrix-calculators/linear-transformation) calculator on CalculateMatrix.`,
       before:``,
       after:``,
       link:'',

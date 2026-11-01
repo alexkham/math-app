@@ -1625,7 +1625,9 @@ How to check: before reading anything off the diagonal, confirm that every entry
 const introContent = {
     id: "intro",
   title: `Special Forms and Their Properties`,
-  content: `Certain matrices satisfy a condition strong enough to determine their behavior in advance. The conditions fall into three kinds: a prescribed pattern of zeros, a relation to the transpose, or an equation in the powers of the matrix. Which kind a type belongs to predicts what can be said about its determinant, its eigenvalues, and its inverse — so the grouping is a tool rather than a filing scheme. Recognizing the pattern often turns a difficult computation into a straightforward one and settles which theorems apply.`,
+  content: `Certain matrices satisfy a condition strong enough to determine their behavior in advance. The conditions fall into three kinds: a prescribed pattern of zeros, a relation to the transpose, or an equation in the powers of the matrix. Which kind a type belongs to predicts what can be said about its determinant, its eigenvalues, and its inverse — so the grouping is a tool rather than a filing scheme. Recognizing the pattern often turns a difficult computation into a straightforward one and settles which theorems apply.
+
+For step-by-step results on your own numbers, use the [matrix properties](https://calculatematrix.com/matrix-calculators/matrix-properties) calculator on CalculateMatrix.`,
 }
 
 const faqQuestions = {

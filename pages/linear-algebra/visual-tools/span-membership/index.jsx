@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of how membership becomes a linear system
 • Press play or step manually; the step log on the right keeps every stage
 
-The three questions are: how big is the span, is $\\mathbf{w}$ in it, and if so what are its coordinates. The answers come from the rank of $V$, the consistency of $[V \\mid \\mathbf{w}]$, and its solution.`,
+The three questions are: how big is the span, is $\\mathbf{w}$ in it, and if so what are its coordinates. The answers come from the rank of $V$, the consistency of $[V \\mid \\mathbf{w}]$, and its solution.
+
+For exact step-by-step results on your own input, use the [linear combination](https://calculatematrix.com/vector-calculators/linear-combination) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

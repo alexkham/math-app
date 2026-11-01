@@ -63,7 +63,9 @@ export async function getStaticProps(){
 • Use the **Dimensions** stepper to set the length of $\\mathbf{u}$ and $\\mathbf{v}$ (1 to 5 components)
 • Hover the **?** icon for a reminder of what the projection is and why the remainder is perpendicular to $\\mathbf{v}$
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
-• Everything is symbolic — the coefficient is shown as $c$ once it has been defined, so the later phases stay readable`,
+• Everything is symbolic — the coefficient is shown as $c$ once it has been defined, so the later phases stay readable
+
+For exact step-by-step results on your own input, use the [vector projection](https://calculatematrix.com/vector-calculators/vector-projection) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

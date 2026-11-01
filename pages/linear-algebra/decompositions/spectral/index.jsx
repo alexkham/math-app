@@ -2418,7 +2418,9 @@ How to check: test a vector whose components have opposite signs, or, for a $2 \
 
  const introContent = {
   title: `A Symmetric Matrix as a Sum of Projections`,
-  content: `The spectral decomposition factors a real symmetric matrix as QDQᵀ — an orthogonal matrix of eigenvectors times a diagonal matrix of eigenvalues times the transpose. In outer product form, this becomes a sum of rank-one projections weighted by eigenvalues. The decomposition is the factorization form of the spectral theorem and the foundation of principal component analysis, quadratic form classification, and positive definiteness testing.`,
+  content: `The spectral decomposition factors a real symmetric matrix as QDQᵀ — an orthogonal matrix of eigenvectors times a diagonal matrix of eigenvalues times the transpose. In outer product form, this becomes a sum of rank-one projections weighted by eigenvalues. The decomposition is the factorization form of the spectral theorem and the foundation of principal component analysis, quadratic form classification, and positive definiteness testing.
+
+For step-by-step results on your own numbers, use the [orthogonal diagonalization](https://calculatematrix.com/matrix-calculators/orthogonal-diagonalization) calculator on CalculateMatrix.`,
 }
 
 // FAQ pass 2026-10-31: kept the three notation questions. Added the

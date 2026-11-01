@@ -1119,7 +1119,9 @@ How to check: multiply by $A$. The wrong answer gives $\\begin{pmatrix} 2 & 1 \\
 const introContent = {
     id: "intro",
   title: `Rectangular Arrays of Numbers`,
-  content: `A matrix is one of the most versatile objects in mathematics. It encodes systems of equations, represents linear transformations, stores data in structured form, and serves as the computational backbone of nearly every topic in linear algebra. Understanding what matrices are, how to read them, and how their parts relate to one another is the starting point for everything that follows.`,
+  content: `A matrix is one of the most versatile objects in mathematics. It encodes systems of equations, represents linear transformations, stores data in structured form, and serves as the computational backbone of nearly every topic in linear algebra. Understanding what matrices are, how to read them, and how their parts relate to one another is the starting point for everything that follows.
+
+For step-by-step results on your own numbers, use the [matrix](https://calculatematrix.com/matrix-calculators) calculators on CalculateMatrix.`,
 }
 
 
