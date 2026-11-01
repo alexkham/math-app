@@ -1451,7 +1451,9 @@ How to check: compare the dimensions first. If $\\dim(V) \\neq \\dim(W)$, $T$ is
 
 const introContent = {
   title: `What Linearity Gives You and How to Verify It`,
-  content: `The two linearity conditions — preservation of addition and scalar multiplication — are the gateway to the entire theory. Proving them unlocks every tool of linear algebra; failing them shuts the door. This page covers how to verify linearity, what consequences follow from it, and how linear transformations interact through composition and inversion.`,
+  content: `The two linearity conditions — preservation of addition and scalar multiplication — are the gateway to the entire theory. Proving them unlocks every tool of linear algebra; failing them shuts the door. This page covers how to verify linearity, what consequences follow from it, and how linear transformations interact through composition and inversion.
+
+For step-by-step results on your own numbers, use the [linear transformation](https://calculatematrix.com/matrix-calculators/linear-transformation) calculator on CalculateMatrix.`,
 }
 
 

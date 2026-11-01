@@ -1662,7 +1662,9 @@ How to check: every diagonal entry of $A$ times the candidate adjugate is a Lapl
 const introContent = {
     id: "intro",
   title: `Expanding Along Any Row or Column`,
-  content: `The cofactor expansion generalizes the recursive pattern seen in the 3×3 case to matrices of arbitrary size. By systematically pairing each entry with a signed sub-determinant, it reduces an n×n determinant to n determinants of size (n−1)×(n−1), with complete freedom in choosing which row or column drives the expansion.`,
+  content: `The cofactor expansion generalizes the recursive pattern seen in the 3×3 case to matrices of arbitrary size. By systematically pairing each entry with a signed sub-determinant, it reduces an n×n determinant to n determinants of size (n−1)×(n−1), with complete freedom in choosing which row or column drives the expansion.
+
+For step-by-step results on your own numbers, use the [cofactor](https://calculatematrix.com/matrix-calculators/cofactor), [matrix of minors](https://calculatematrix.com/matrix-calculators/matrix-of-minors) and [adjugate](https://calculatematrix.com/matrix-calculators/adjugate) calculators on CalculateMatrix.`,
 }
 
 

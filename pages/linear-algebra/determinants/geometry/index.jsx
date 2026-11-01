@@ -1422,7 +1422,9 @@ How to check: shift all three vertices by the same amount; the area must not cha
 const introContent = {
   id: "intro",
   title: `Area, Volume, and Orientation`,
-  content: `The determinant measures how a linear transformation scales regions and whether it preserves or reverses their orientation. This geometric reading connects an algebraic formula to spatial intuition, turning abstract sign patterns and products into statements about parallelograms, parallelepipeds, and higher-dimensional volumes.`,
+  content: `The determinant measures how a linear transformation scales regions and whether it preserves or reverses their orientation. This geometric reading connects an algebraic formula to spatial intuition, turning abstract sign patterns and products into statements about parallelograms, parallelepipeds, and higher-dimensional volumes.
+
+For step-by-step results on your own numbers, use the [determinant](https://calculatematrix.com/matrix-calculators/determinant) calculator on CalculateMatrix.`,
 }
 
 

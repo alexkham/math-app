@@ -1639,7 +1639,9 @@ How to check: compare the geometric multiplicities as well as the eigenvalues. F
 const introContent = {
    id: "intro",
   title: `How Eigenvalues Behave Under Matrix Operations`,
-  content: `Eigenvalues interact in predictable ways with the trace, determinant, transpose, inverse, powers, and special matrix structures. These relationships provide shortcuts for computing eigenvalues, constraints on what eigenvalues are possible for a given matrix type, and structural connections between the eigenvalue spectrum and the algebraic properties of the matrix.`,
+  content: `Eigenvalues interact in predictable ways with the trace, determinant, transpose, inverse, powers, and special matrix structures. These relationships provide shortcuts for computing eigenvalues, constraints on what eigenvalues are possible for a given matrix type, and structural connections between the eigenvalue spectrum and the algebraic properties of the matrix.
+
+For step-by-step results on your own numbers, use the [eigenvalue](https://calculatematrix.com/matrix-calculators/eigenvalues) and [Cayley–Hamilton](https://calculatematrix.com/matrix-calculators/cayley-hamilton) calculators on CalculateMatrix.`,
 }
 
 

@@ -1419,7 +1419,9 @@ How to check: square and add the components of the result. The wrong answer give
 const introContent = {
      id: `intro`,
   title: `Measuring Length and Extracting Direction`,
-  content: `Every nonzero vector carries two pieces of information: how long it is and which way it points. The norm isolates the first piece — it assigns a single non-negative number to each vector, measuring its length in a way that is consistent across any dimension. Once the norm is defined, distance between vectors follows immediately, and normalization provides a way to strip away length entirely, leaving behind a unit vector that encodes pure direction. The concepts on this page underpin nearly everything that follows in the section, from the angle formula in the [dot product](!/linear-algebra/vectors/dot-product) to the area interpretation of the [cross product](!/linear-algebra/vectors/cross-product).`,
+  content: `Every nonzero vector carries two pieces of information: how long it is and which way it points. The norm isolates the first piece — it assigns a single non-negative number to each vector, measuring its length in a way that is consistent across any dimension. Once the norm is defined, distance between vectors follows immediately, and normalization provides a way to strip away length entirely, leaving behind a unit vector that encodes pure direction. The concepts on this page underpin nearly everything that follows in the section, from the angle formula in the [dot product](!/linear-algebra/vectors/dot-product) to the area interpretation of the [cross product](!/linear-algebra/vectors/cross-product).
+
+For step-by-step results on your own numbers, use the [vector magnitude](https://calculatematrix.com/vector-calculators/vector-magnitude) and [unit vector](https://calculatematrix.com/vector-calculators/unit-vector) calculators on CalculateMatrix.`,
 };
 
 const faqQuestions = {

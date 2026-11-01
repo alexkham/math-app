@@ -1716,7 +1716,9 @@ How to check: expand $\\text{tr}(AX)$ for a $2 \\times 2$ case and place the coe
 const introContent = {
      id: "intro",
   title: `The Simplest Matrix Invariant`,
-  content: `The trace of a square matrix is the sum of its diagonal entries — an operation so simple it barely seems worth naming. Yet this single number equals the sum of the eigenvalues, remains unchanged under similarity transformations, and turns up in inner products, commutator identities, and optimization gradients. Its simplicity is precisely what makes it powerful.`,
+  content: `The trace of a square matrix is the sum of its diagonal entries — an operation so simple it barely seems worth naming. Yet this single number equals the sum of the eigenvalues, remains unchanged under similarity transformations, and turns up in inner products, commutator identities, and optimization gradients. Its simplicity is precisely what makes it powerful.
+
+For step-by-step results on your own numbers, use the [matrix trace](https://calculatematrix.com/matrix-calculators/matrix-trace) calculator on CalculateMatrix.`,
 }
 
 

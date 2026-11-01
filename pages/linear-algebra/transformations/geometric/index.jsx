@@ -2687,7 +2687,9 @@ How to check: follow one basis vector through the steps by hand, then compare th
 
  const introContent = {
   title: `Rotations, Reflections, Projections, and More`,
-  content: `In R² and R³, linear transformations have concrete geometric meanings. Each has an explicit matrix encoding its action: rotations spin, reflections mirror, projections flatten, shears skew, and scalings stretch or compress. The determinant of the matrix classifies the transformation by how it affects area, volume, and orientation.`,
+  content: `In R² and R³, linear transformations have concrete geometric meanings. Each has an explicit matrix encoding its action: rotations spin, reflections mirror, projections flatten, shears skew, and scalings stretch or compress. The determinant of the matrix classifies the transformation by how it affects area, volume, and orientation.
+
+For step-by-step results on your own numbers, use the [rotation matrix](https://calculatematrix.com/matrix-calculators/rotation-matrix) calculator on CalculateMatrix.`,
 }
 
 const faqQuestions = {

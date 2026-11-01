@@ -1670,7 +1670,9 @@ How to check: every column of $A$ must be a combination of the basis vectors. Co
 
  const introContent = {
   title: `The Staircase That Reveals Everything`,
-  content: `Row echelon form and reduced row echelon form are the standard targets of Gaussian elimination. The staircase pattern of pivots immediately exposes the rank, the free variables, and the solvability of the system. RREF goes one step further — it is unique for every matrix, making it a canonical form from which the solution can be read without any back substitution.`,
+  content: `Row echelon form and reduced row echelon form are the standard targets of Gaussian elimination. The staircase pattern of pivots immediately exposes the rank, the free variables, and the solvability of the system. RREF goes one step further — it is unique for every matrix, making it a canonical form from which the solution can be read without any back substitution.
+
+For step-by-step results on your own numbers, use the [REF](https://calculatematrix.com/matrix-calculators/ref) and [RREF](https://calculatematrix.com/matrix-calculators/rref) calculators on CalculateMatrix.`,
 }
 
 const faqQuestions = {

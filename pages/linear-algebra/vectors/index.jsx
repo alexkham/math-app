@@ -1070,7 +1070,9 @@ How to check: the result must be perpendicular to both inputs. $(-3, 6, -3) \\cd
  const introContent = {
    id: `intro`,
   title: `Where Algebra Meets Geometry`,
-  content: `A vector captures two pieces of information in a single mathematical object: how far and which way. This dual nature — part algebraic, part geometric — makes vectors the natural language for describing anything that requires both a size and an orientation. In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, vectors are arrows that can be drawn, measured, and rotated. In $\\mathbb{R}^n$, they generalize beyond visual intuition into ordered lists of numbers that still obey the same algebraic rules. This section develops vectors from the ground up: what they are, how they behave, and the operations that give them structure.`,
+  content: `A vector captures two pieces of information in a single mathematical object: how far and which way. This dual nature — part algebraic, part geometric — makes vectors the natural language for describing anything that requires both a size and an orientation. In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, vectors are arrows that can be drawn, measured, and rotated. In $\\mathbb{R}^n$, they generalize beyond visual intuition into ordered lists of numbers that still obey the same algebraic rules. This section develops vectors from the ground up: what they are, how they behave, and the operations that give them structure.
+
+For step-by-step results on your own numbers, use the [vector](https://calculatematrix.com/vector-calculators) calculators on CalculateMatrix.`,
 };
 
 const schemas = {

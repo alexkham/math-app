@@ -3784,7 +3784,9 @@ How to check: partners must live in the same space. For the $3 \\times 4$ runnin
 
   const introContent = {
   title: `The Complete Structural Portrait of a Matrix`,
-  content: `Every matrix defines four subspaces — two in the domain and two in the codomain — whose dimensions and orthogonality relationships form a complete picture of the linear map. The rank governs all four dimensions, and the four subspaces together account for every vector in both spaces.`,
+  content: `Every matrix defines four subspaces — two in the domain and two in the codomain — whose dimensions and orthogonality relationships form a complete picture of the linear map. The rank governs all four dimensions, and the four subspaces together account for every vector in both spaces.
+
+For step-by-step results on your own numbers, use the [column space](https://calculatematrix.com/matrix-calculators/column-space), [row space](https://calculatematrix.com/matrix-calculators/row-space), [null space](https://calculatematrix.com/matrix-calculators/nullspace) and [left null space](https://calculatematrix.com/matrix-calculators/left-nullspace) calculators on CalculateMatrix.`,
 }
 
 const faqQuestions = {

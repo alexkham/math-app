@@ -1471,7 +1471,9 @@ How to check: trace and determinant do not catch this, since the wrong matrix al
 
  const introContent = {
   title: `Same Transformation, Different Matrix`,
-  content: `The same linear transformation has different matrix representations in different bases. Changing the basis changes the numbers but not the map itself. The relationship between two matrix representations of the same transformation is similarity — and choosing the right basis is how difficult matrices become simple ones.`,
+  content: `The same linear transformation has different matrix representations in different bases. Changing the basis changes the numbers but not the map itself. The relationship between two matrix representations of the same transformation is similarity — and choosing the right basis is how difficult matrices become simple ones.
+
+For step-by-step results on your own numbers, use the [change of basis](https://calculatematrix.com/matrix-calculators/change-of-basis) calculator on CalculateMatrix.`,
 }
 
 const faqQuestions = {

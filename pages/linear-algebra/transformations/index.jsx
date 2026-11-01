@@ -1206,7 +1206,9 @@ How to check: multiply the matrix by $\\mathbf{e}_2 = (0, 1)$. The result must b
 
 const introContent = {
   title: `Functions That Preserve Linear Structure`,
-  content: `A linear transformation is a function between vector spaces that respects addition and scalar multiplication. Every matrix defines one, and every linear transformation between finite-dimensional spaces can be encoded as a matrix. This correspondence is the bridge between abstract maps and concrete computation — it turns geometric questions into algebraic ones and algebraic results into geometric insight.`,
+  content: `A linear transformation is a function between vector spaces that respects addition and scalar multiplication. Every matrix defines one, and every linear transformation between finite-dimensional spaces can be encoded as a matrix. This correspondence is the bridge between abstract maps and concrete computation — it turns geometric questions into algebraic ones and algebraic results into geometric insight.
+
+For step-by-step results on your own numbers, use the [linear transformation](https://calculatematrix.com/matrix-calculators/linear-transformation) calculator on CalculateMatrix.`,
 }
 
 

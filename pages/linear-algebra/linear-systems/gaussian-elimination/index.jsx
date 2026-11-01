@@ -1626,7 +1626,9 @@ How to check: look behind the bar before deciding. Here $\\text{rank}(A) = \\tex
 
  const introContent = {
   title: `The Workhorse Algorithm of Linear Algebra`,
-  content: `Gaussian elimination transforms a linear system into a simpler equivalent form by systematically applying row operations. Forward elimination creates zeros below each pivot, producing row echelon form. Back substitution then solves from the bottom up. The algorithm handles every case — unique solutions, infinitely many solutions, and inconsistent systems — within a single unified framework.`,
+  content: `Gaussian elimination transforms a linear system into a simpler equivalent form by systematically applying row operations. Forward elimination creates zeros below each pivot, producing row echelon form. Back substitution then solves from the bottom up. The algorithm handles every case — unique solutions, infinitely many solutions, and inconsistent systems — within a single unified framework.
+
+For step-by-step results on your own numbers, use the [Gaussian elimination](https://calculatematrix.com/linear-systems/gaussian-elimination-calculator) calculator on CalculateMatrix.`,
 }
 
 const faqQuestions = {

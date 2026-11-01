@@ -1884,7 +1884,9 @@ How to check: the characteristic polynomial of an $n \\times n$ matrix has degre
 const introContent = {
   id: "intro",
   title: `Solving Problems with Determinants`,
-  content: `Beyond characterizing invertibility, determinants provide explicit closed-form tools for solving systems, computing inverses, and testing function independence. Each formula trades computational efficiency for structural transparency — the expressions are exact, symbolic, and reveal how solutions depend on the entries of the matrix.`,
+  content: `Beyond characterizing invertibility, determinants provide explicit closed-form tools for solving systems, computing inverses, and testing function independence. Each formula trades computational efficiency for structural transparency — the expressions are exact, symbolic, and reveal how solutions depend on the entries of the matrix.
+
+For step-by-step results on your own numbers, use the [Cramer's rule](https://calculatematrix.com/linear-systems/cramers-rule-calculator) and [matrix inverse](https://calculatematrix.com/matrix-calculators/matrix-inverse) calculators on CalculateMatrix.`,
 }
 
 

@@ -1338,7 +1338,9 @@ How to check: take the other route and add first. $(1, 0) + (0, 3) = (1, 3)$, an
  const introContent = {
      id: `intro`,
   title: `What Vectors Have and How They Relate`,
-  content: `Before diving into operations and products, it is worth stepping back to ask what a vector possesses simply by existing and how two vectors can be compared. Every vector in $\\mathbb{R}^n$ carries intrinsic attributes — magnitude, direction, and a fixed number of components — that belong to the vector itself, independent of any operation performed on it. Vectors also stand in structural relationships to one another: they may be equal, parallel, or orthogonal. This page collects both the intrinsic and relational properties in a single reference, with each developed fully on the page where it naturally belongs.`,
+  content: `Before diving into operations and products, it is worth stepping back to ask what a vector possesses simply by existing and how two vectors can be compared. Every vector in $\\mathbb{R}^n$ carries intrinsic attributes — magnitude, direction, and a fixed number of components — that belong to the vector itself, independent of any operation performed on it. Vectors also stand in structural relationships to one another: they may be equal, parallel, or orthogonal. This page collects both the intrinsic and relational properties in a single reference, with each developed fully on the page where it naturally belongs.
+
+For step-by-step results on your own numbers, use the [angle between vectors](https://calculatematrix.com/vector-calculators/angle-between-vectors) calculator on CalculateMatrix.`,
 };
 
 

@@ -1454,7 +1454,9 @@ How to check: count the columns without a pivot in the echelon form. Here column
 
  const introContent = {
   title: `The Abstract Structure Behind Linear Algebra`,
-  content: `Vectors in the plane can be added and scaled. So can polynomials, matrices, and functions. A vector space is any collection of objects where these two operations make sense and obey a consistent set of rules. By isolating this common structure, results proved once in the abstract apply to every concrete setting — from coordinate geometry to differential equations to signal processing.`,
+  content: `Vectors in the plane can be added and scaled. So can polynomials, matrices, and functions. A vector space is any collection of objects where these two operations make sense and obey a consistent set of rules. By isolating this common structure, results proved once in the abstract apply to every concrete setting — from coordinate geometry to differential equations to signal processing.
+
+For step-by-step results on your own numbers, use the [linear independence](https://calculatematrix.com/vector-calculators/linear-independence) calculator on CalculateMatrix.`,
 }
 
 

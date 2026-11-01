@@ -1457,7 +1457,9 @@ How to check: a subspace can never have a larger dimension than the space it lie
 
  const introContent = {
   title: `Vector Spaces Inside Vector Spaces`,
-  content: `A subspace is a subset of a vector space that is itself a vector space under the same operations. Lines and planes through the origin in R³, null spaces and column spaces of matrices, and solution sets of homogeneous systems are all subspaces. A simple two-condition test determines whether a given subset qualifies.`,
+  content: `A subspace is a subset of a vector space that is itself a vector space under the same operations. Lines and planes through the origin in R³, null spaces and column spaces of matrices, and solution sets of homogeneous systems are all subspaces. A simple two-condition test determines whether a given subset qualifies.
+
+For step-by-step results on your own numbers, use the [subspace intersection](https://calculatematrix.com/matrix-calculators/subspace-intersection) calculator on CalculateMatrix.`,
 }
 
 const faqQuestions = {

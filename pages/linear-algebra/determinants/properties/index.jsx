@@ -2600,7 +2600,9 @@ How to check: for every step, look at the coefficient of the row being replaced.
 const introContent = {
     id: "intro",
   title: `How Row Operations and Algebra Shape the Determinant`,
-  content: `The determinant obeys a small set of algebraic rules that govern how it responds to matrix operations. These rules make the determinant computable without cofactor expansion, connect it to Gaussian elimination, and establish the multiplicative structure that links determinants to matrix products, inverses, and transposes.`,
+  content: `The determinant obeys a small set of algebraic rules that govern how it responds to matrix operations. These rules make the determinant computable without cofactor expansion, connect it to Gaussian elimination, and establish the multiplicative structure that links determinants to matrix products, inverses, and transposes.
+
+For step-by-step results on your own numbers, use the [determinant](https://calculatematrix.com/matrix-calculators/determinant) calculator on CalculateMatrix.`,
 }
 
 

@@ -2193,7 +2193,9 @@ How to check: ask what the system does to the part of $\\mathbf{x}$ along an eig
 const introContent = {
    id: "intro",
   title: `When No Real Direction Survives`,
-  content: `A real matrix can have complex eigenvalues — this happens when the characteristic polynomial has no real roots. Geometrically, no real direction is mapped to a scalar multiple of itself; the transformation involves rotation. Complex eigenvalues of real matrices always come in conjugate pairs, and each pair corresponds to a rotation-scaling action on a two-dimensional subspace.`,
+  content: `A real matrix can have complex eigenvalues — this happens when the characteristic polynomial has no real roots. Geometrically, no real direction is mapped to a scalar multiple of itself; the transformation involves rotation. Complex eigenvalues of real matrices always come in conjugate pairs, and each pair corresponds to a rotation-scaling action on a two-dimensional subspace.
+
+For step-by-step results on your own numbers, use the [eigenvalue](https://calculatematrix.com/matrix-calculators/eigenvalues) and [eigenvector](https://calculatematrix.com/matrix-calculators/eigenvectors) calculators on CalculateMatrix.`,
 }
 
 const faqQuestions = {

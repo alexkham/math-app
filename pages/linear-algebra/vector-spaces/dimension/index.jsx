@@ -3155,7 +3155,9 @@ How to check: count free variables. Every column without a pivot gives one free 
 
 const introContent = {
   title: `The Number That Classifies a Vector Space`,
-  content: `Every basis for a given vector space has the same number of elements. This number — the dimension — is the single most important invariant of the space. It governs how many vectors can be independent, how large a spanning set must be, how subspaces nest inside one another, and whether two spaces are structurally identical.`,
+  content: `Every basis for a given vector space has the same number of elements. This number — the dimension — is the single most important invariant of the space. It governs how many vectors can be independent, how large a spanning set must be, how subspaces nest inside one another, and whether two spaces are structurally identical.
+
+For step-by-step results on your own numbers, use the [matrix rank](https://calculatematrix.com/matrix-calculators/matrix-rank) and [null space](https://calculatematrix.com/matrix-calculators/nullspace) calculators on CalculateMatrix.`,
 }
 
 const faqQuestions = {

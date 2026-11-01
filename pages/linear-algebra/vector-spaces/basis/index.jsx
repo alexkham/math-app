@@ -1400,7 +1400,9 @@ How to check: count first. Fewer than $n$ vectors can never span an $n$-dimensio
 
 const introContent = {
   title: `The Abstract Structure Behind Linear Algebra`,
-  content: `A vector space is any collection of objects where addition and scalar multiplication obey a consistent set of rules. The concept of a basis — a minimal set of vectors from which every other vector can be built uniquely — is the central organizing idea. Choosing a basis assigns coordinates to every vector, connects abstract spaces to concrete computation in Rⁿ, and determines the dimension that classifies the space up to isomorphism.`,
+  content: `A vector space is any collection of objects where addition and scalar multiplication obey a consistent set of rules. The concept of a basis — a minimal set of vectors from which every other vector can be built uniquely — is the central organizing idea. Choosing a basis assigns coordinates to every vector, connects abstract spaces to concrete computation in Rⁿ, and determines the dimension that classifies the space up to isomorphism.
+
+For step-by-step results on your own numbers, use the [extend to a basis](https://calculatematrix.com/vector-calculators/extend-to-basis) and [coordinate vector](https://calculatematrix.com/vector-calculators/coordinate-vector) calculators on CalculateMatrix.`,
 };
 
 

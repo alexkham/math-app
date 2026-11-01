@@ -1621,7 +1621,9 @@ How to check: test a basis vector against the original set. Every vector in the 
 
  const introContent = {
   title: `Everything Reachable by Linear Combinations`,
-  content: `The span of a set of vectors is the collection of all their linear combinations — every vector that can be built by adding scaled copies of the given vectors. It is always a subspace, and it is the smallest subspace containing the original set. Span is the other half of what makes a basis: the half that guarantees complete coverage.`,
+  content: `The span of a set of vectors is the collection of all their linear combinations — every vector that can be built by adding scaled copies of the given vectors. It is always a subspace, and it is the smallest subspace containing the original set. Span is the other half of what makes a basis: the half that guarantees complete coverage.
+
+For step-by-step results on your own numbers, use the [linear combination](https://calculatematrix.com/vector-calculators/linear-combination) calculator on CalculateMatrix.`,
 }
 
 const faqQuestions = {

@@ -1993,7 +1993,9 @@ How to check: a projection is never longer than the vector projected. The wrong 
  const introContent = {
      id: `intro`,
   title: `The Product That Reveals Angles`,
-  content: `The dot product is unlike any operation encountered so far in this section. It takes two vectors and returns not a vector but a single number — a scalar. That number encodes something geometric: the degree to which the two vectors point in the same direction. Through its algebraic definition, the dot product is a straightforward computation — multiply corresponding components and sum. Through its geometric definition, it connects directly to the angle between the vectors, opening the door to orthogonality, projection, and the Cauchy–Schwarz inequality. Both definitions are equivalent, and both are essential.`,
+  content: `The dot product is unlike any operation encountered so far in this section. It takes two vectors and returns not a vector but a single number — a scalar. That number encodes something geometric: the degree to which the two vectors point in the same direction. Through its algebraic definition, the dot product is a straightforward computation — multiply corresponding components and sum. Through its geometric definition, it connects directly to the angle between the vectors, opening the door to orthogonality, projection, and the Cauchy–Schwarz inequality. Both definitions are equivalent, and both are essential.
+
+For step-by-step results on your own numbers, use the [dot product](https://calculatematrix.com/vector-calculators/dot-product) calculator on CalculateMatrix.`,
 };
 
 const faqQuestions = {

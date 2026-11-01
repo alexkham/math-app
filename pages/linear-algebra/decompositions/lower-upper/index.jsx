@@ -3496,7 +3496,9 @@ How to check: count the swaps, or compute $\\det P$, which is $+1$ or $-1$. For 
 
  const introContent = {
   title: `Gaussian Elimination as a Matrix Factorization`,
-  content: `The LU decomposition factors a square matrix into a lower triangular factor L and an upper triangular factor U. The upper factor is the row echelon form; the lower factor stores the multipliers used to get there. Once computed, the factorization converts every subsequent system solve into two cheap triangular substitutions — making LU the workhorse of direct linear system solvers.`,
+  content: `The LU decomposition factors a square matrix into a lower triangular factor L and an upper triangular factor U. The upper factor is the row echelon form; the lower factor stores the multipliers used to get there. Once computed, the factorization converts every subsequent system solve into two cheap triangular substitutions — making LU the workhorse of direct linear system solvers.
+
+For step-by-step results on your own numbers, use the [LU decomposition](https://calculatematrix.com/matrix-calculators/lu-decomposition) and [LDU decomposition](https://calculatematrix.com/matrix-calculators/ldu-decomposition) calculators on CalculateMatrix.`,
 }
 
 

@@ -948,7 +948,9 @@ How to check: use the product instead of the sum. The eigenvalues must multiply 
 const introContent = {
    id: "intro",
   title: `The Directions a Matrix Preserves`,
-  content: `Most vectors change direction when multiplied by a matrix. The rare exceptions — vectors that emerge scaled but not rotated — are eigenvectors, and their scaling factors are eigenvalues. These special directions and values encode the deepest structural information about a linear transformation: how it stretches, compresses, and orients space. They are the key to diagonalization, stability analysis, and the spectral theory that unifies much of applied mathematics.`,
+  content: `Most vectors change direction when multiplied by a matrix. The rare exceptions — vectors that emerge scaled but not rotated — are eigenvectors, and their scaling factors are eigenvalues. These special directions and values encode the deepest structural information about a linear transformation: how it stretches, compresses, and orients space. They are the key to diagonalization, stability analysis, and the spectral theory that unifies much of applied mathematics.
+
+For step-by-step results on your own numbers, use the [eigenvalue](https://calculatematrix.com/matrix-calculators/eigenvalues) and [eigenvector](https://calculatematrix.com/matrix-calculators/eigenvectors) calculators on CalculateMatrix.`,
 }
 
 

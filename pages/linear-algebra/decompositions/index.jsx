@@ -318,7 +318,9 @@ How to check: rank $0$ belongs only to the zero matrix. A matrix with any nonzer
 
 const introContent = {
   title: `Factoring Matrices into Simpler Pieces`,
-  content: `A matrix decomposition writes a matrix as a product of simpler matrices — triangular, diagonal, orthogonal, or some combination — whose structure makes subsequent computation cheap. The upfront cost of factoring is repaid every time the factors are used to solve a system, compute eigenvalues, approximate data, or analyze stability. Decompositions are the computational backbone of applied linear algebra.`,
+  content: `A matrix decomposition writes a matrix as a product of simpler matrices — triangular, diagonal, orthogonal, or some combination — whose structure makes subsequent computation cheap. The upfront cost of factoring is repaid every time the factors are used to solve a system, compute eigenvalues, approximate data, or analyze stability. Decompositions are the computational backbone of applied linear algebra.
+
+For step-by-step results on your own numbers, use the [LU](https://calculatematrix.com/matrix-calculators/lu-decomposition), [QR](https://calculatematrix.com/matrix-calculators/qr-decomposition), [Cholesky](https://calculatematrix.com/matrix-calculators/cholesky-decomposition) and [SVD](https://calculatematrix.com/matrix-calculators/svd) calculators on CalculateMatrix.`,
 }
 
 const schemas = {

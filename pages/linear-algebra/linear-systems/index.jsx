@@ -1078,7 +1078,9 @@ How to check: compare $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}]
 
 const introContent = {
   title: `Solving Ax = b`,
-  content: `A linear system is a collection of linear equations in several unknowns. Writing it in matrix form as Ax = b transforms the problem into a question about matrices: is b in the column space of A, and if so, what are the weights? Row reduction answers both questions systematically, and the rank of the coefficient matrix determines whether the solution exists, whether it is unique, and what the solution set looks like.`,
+  content: `A linear system is a collection of linear equations in several unknowns. Writing it in matrix form as Ax = b transforms the problem into a question about matrices: is b in the column space of A, and if so, what are the weights? Row reduction answers both questions systematically, and the rank of the coefficient matrix determines whether the solution exists, whether it is unique, and what the solution set looks like.
+
+For step-by-step results on your own numbers, use the [system of equations](https://calculatematrix.com/linear-systems/system-of-equations-solver) calculator on CalculateMatrix.`,
 }
 
 

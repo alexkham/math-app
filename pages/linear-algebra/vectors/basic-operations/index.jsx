@@ -1420,7 +1420,9 @@ How to check: a length is never negative. Compute the components of $c\\mathbf{a
  const introContent = {
      id: `intro`,
   title: `The Three Operations That Define Vector Algebra`,
-  content: `Addition, subtraction, and scalar multiplication are the operations that give vectors their algebraic structure. Each works component by component, each preserves the dimension of the input, and each carries a geometric interpretation that reinforces the computation. Together, they satisfy a precise set of rules — commutativity, associativity, distributivity — that make vector algebra predictable and consistent. Every other operation in this section, from the [dot product](!/linear-algebra/vectors/dot-product) to [linear combinations](!/linear-algebra/vectors/linear-combinations), is built on top of these three.`,
+  content: `Addition, subtraction, and scalar multiplication are the operations that give vectors their algebraic structure. Each works component by component, each preserves the dimension of the input, and each carries a geometric interpretation that reinforces the computation. Together, they satisfy a precise set of rules — commutativity, associativity, distributivity — that make vector algebra predictable and consistent. Every other operation in this section, from the [dot product](!/linear-algebra/vectors/dot-product) to [linear combinations](!/linear-algebra/vectors/linear-combinations), is built on top of these three.
+
+For step-by-step results on your own numbers, use the [vector addition and subtraction](https://calculatematrix.com/vector-calculators/vector-addition-subtraction) calculator on CalculateMatrix.`,
 };
 
 const faqQuestions = {

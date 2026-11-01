@@ -1217,7 +1217,9 @@ How to check: keep a running factor beside the reduction and multiply by it at t
 const introContent = {
     id: "intro",
   title: `A Single Number from a Square Matrix`,
-  content: `Every square matrix maps to a single scalar called its determinant. This value captures whether the matrix is invertible, how it scales geometric regions, and whether it preserves or reverses orientation. The determinant appears throughout linear algebra — in eigenvalue equations, system-solving formulas, and volume computations — making it one of the most information-dense quantities attached to a matrix.`,
+  content: `Every square matrix maps to a single scalar called its determinant. This value captures whether the matrix is invertible, how it scales geometric regions, and whether it preserves or reverses orientation. The determinant appears throughout linear algebra — in eigenvalue equations, system-solving formulas, and volume computations — making it one of the most information-dense quantities attached to a matrix.
+
+For step-by-step results on your own numbers, use the [determinant](https://calculatematrix.com/matrix-calculators/determinant) calculator on CalculateMatrix.`,
 }
 
 
