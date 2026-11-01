@@ -68,7 +68,9 @@ export async function getStaticProps(){
 • A summary strip at the right of the tab bar always shows the current shape and active method
 • The scene player below the controls supports playback speed, step indicator, and a scrollable step log
 
-Every method produces the identical $A^T$ — they differ only in how the operation is broken into steps and what is highlighted at each step.`,
+Every method produces the identical $A^T$ — they differ only in how the operation is broken into steps and what is highlighted at each step.
+
+For exact step-by-step results on your own input, use the [transpose](https://calculatematrix.com/matrix-calculators/matrix-transpose) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

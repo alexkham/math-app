@@ -69,7 +69,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of the definition and why the eigenvalues are roots of a polynomial
 • Press play or step manually; the step log on the right keeps every stage
 
-The run is always the same four moves: form $A - \\lambda I$, expand its determinant, find the roots, and row reduce once per real eigenvalue. If the roots are complex the run stops after finding them, with an explanation, since there are then no real eigenvectors to show.`,
+The run is always the same four moves: form $A - \\lambda I$, expand its determinant, find the roots, and row reduce once per real eigenvalue. If the roots are complex the run stops after finding them, with an explanation, since there are then no real eigenvectors to show.
+
+For exact step-by-step results on your own input, use the [eigenvalue](https://calculatematrix.com/matrix-calculators/eigenvalues) and [eigenvector](https://calculatematrix.com/matrix-calculators/eigenvectors) calculators on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

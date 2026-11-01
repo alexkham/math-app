@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
 • From $A^3$ upward the cells switch to a $\\Sigma$ summary; **hover any cell** to see its full expansion as a tooltip, with the number of terms in its header
 
-Everything is symbolic. The entries of $A$ stay as $a_{i,j}$, so what you see is the structure of each entry of $A^n$, not a numerical result.`,
+Everything is symbolic. The entries of $A$ stay as $a_{i,j}$, so what you see is the structure of each entry of $A^n$, not a numerical result.
+
+For exact step-by-step results on your own input, use the [matrix power](https://calculatematrix.com/matrix-calculators/matrix-power) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

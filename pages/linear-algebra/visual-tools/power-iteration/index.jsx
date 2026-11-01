@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of why repeated multiplication finds the dominant eigenvector
 • Press play or step manually; the step log on the right keeps every estimate
 
-The final scene compares the last estimate with the exact dominant eigenvalue from the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2), reports the error, and gives the convergence ratio $|\\lambda_2 / \\lambda_1|$ that explains how fast the estimates moved.`,
+The final scene compares the last estimate with the exact dominant eigenvalue from the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2), reports the error, and gives the convergence ratio $|\\lambda_2 / \\lambda_1|$ that explains how fast the estimates moved.
+
+For exact step-by-step results on your own input, use the [power method](https://calculatematrix.com/matrix-calculators/power-method) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

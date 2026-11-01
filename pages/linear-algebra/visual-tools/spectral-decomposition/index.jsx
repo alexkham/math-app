@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of the theorem and what the pieces mean
 • Press play or step manually; the step log on the right keeps every stage
 
-The eigenvalues are reported rather than derived, since the eigenvalue visualizer shows that derivation. This tool concentrates on what symmetry adds: perpendicular eigenvectors, a transpose in place of an inverse, and the rank-one expansion.`,
+The eigenvalues are reported rather than derived, since the eigenvalue visualizer shows that derivation. This tool concentrates on what symmetry adds: perpendicular eigenvectors, a transpose in place of an inverse, and the rank-one expansion.
+
+For exact step-by-step results on your own input, use the [orthogonal diagonalization](https://calculatematrix.com/matrix-calculators/orthogonal-diagonalization) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

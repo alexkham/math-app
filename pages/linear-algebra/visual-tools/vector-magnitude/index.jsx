@@ -63,7 +63,9 @@ export async function getStaticProps(){
 • Use the **Dimensions** stepper to set the length of $\\mathbf{v}$ (1 to 6 components)
 • Hover the **?** icon for a reminder of what the magnitude is and why normalization keeps the direction
 • Press play or step manually through the scene player; the speed selector and step log let you control pace and review
-• The components are shown symbolically — the visualizer focuses on the structure of the computation, not on specific numbers`,
+• The components are shown symbolically — the visualizer focuses on the structure of the computation, not on specific numbers
+
+For exact step-by-step results on your own input, use the [vector magnitude](https://calculatematrix.com/vector-calculators/vector-magnitude) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

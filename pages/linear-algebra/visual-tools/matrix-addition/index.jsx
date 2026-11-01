@@ -64,7 +64,9 @@ export async function getStaticProps(){
 • Set the shared shape of $A$ and $B$ with the **Dimensions** steppers — rows and columns each range from 1 to 5
 • Click play on the scene player to step through each cell of $C$, or use the speed selector to slow down or speed up the animation
 
-The hover **?** icon next to the [dimensions](!/linear-algebra/vector-spaces/dimension#1) label explains why $A$ and $B$ must share the same shape. Because the operation is element-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and shape alone.`,
+The hover **?** icon next to the [dimensions](!/linear-algebra/vector-spaces/dimension#1) label explains why $A$ and $B$ must share the same shape. Because the operation is element-wise, no other configuration is needed — the visualizer fully determines the symbolic flow from the operation and shape alone.
+
+For exact step-by-step results on your own input, use the [matrix addition](https://calculatematrix.com/matrix-calculators/matrix-addition) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

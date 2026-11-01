@@ -67,7 +67,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of the formula and its precondition
 • Press play or step manually; the step log on the right lists every determinant
 
-The first scene after the system is always $\\det A$, because everything depends on it. If it is zero the run ends there with an explanation; otherwise one scene per unknown follows, and the last scene checks the solution by multiplying it back.`,
+The first scene after the system is always $\\det A$, because everything depends on it. If it is zero the run ends there with an explanation; otherwise one scene per unknown follows, and the last scene checks the solution by multiplying it back.
+
+For exact step-by-step results on your own input, use the [Cramer's rule](https://calculatematrix.com/linear-systems/cramers-rule-calculator) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

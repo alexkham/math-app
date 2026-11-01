@@ -557,7 +557,9 @@ Three quick experiments:
 &bull; **Drag $v$ onto the green dashed line** &mdash; the two vectors snap to amber and the status strip announces the eigenvalue.
 &bull; **Drag $v$ to the perpendicular eigendirection** (in the diagonal preset) &mdash; same alignment, different $\\lambda$.
 
-The green dashed lines are cheat sheets. The whole canvas is a search for the moments when $v$ and $Av$ are collinear.`,
+The green dashed lines are cheat sheets. The whole canvas is a search for the moments when $v$ and $Av$ are collinear.
+
+For exact step-by-step results on your own input, use the [eigenvector](https://calculatematrix.com/matrix-calculators/eigenvectors) calculator on CalculateMatrix.`,
       before:``,
       after:``,
       link:'',

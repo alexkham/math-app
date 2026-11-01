@@ -69,7 +69,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of what diagonalization is and when it works
 • Press play or step manually; the step log on the right keeps every stage
 
-The eigenvalues and eigenvectors are reported, not derived, since the eigenvalue visualizer shows that derivation. This tool picks up where it stops: assembling $P$ and $D$, inverting $P$, checking the product, and using the factorization for a power. Defective and complex cases stop early with an explanation.`,
+The eigenvalues and eigenvectors are reported, not derived, since the eigenvalue visualizer shows that derivation. This tool picks up where it stops: assembling $P$ and $D$, inverting $P$, checking the product, and using the factorization for a power. Defective and complex cases stop early with an explanation.
+
+For exact step-by-step results on your own input, use the [diagonalization](https://calculatematrix.com/matrix-calculators/diagonalization) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

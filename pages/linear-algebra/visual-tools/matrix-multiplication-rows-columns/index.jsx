@@ -343,7 +343,9 @@ The reason there are exactly two is that a product has two sides and they play d
 
 A [vector](!/linear-algebra/vectors#1) product shows only one half of this at a time, because one of its sides is a vector. With two matrices both halves are visible at once, and the figure here is arranged so you can watch the roles change hands rather than take the statement on trust.
 
-If the question is how to compute, either sibling page answers it. If the question is why the same numbers can be assembled two different ways, this is the page.`,
+If the question is how to compute, either sibling page answers it. If the question is why the same numbers can be assembled two different ways, this is the page.
+
+For exact step-by-step results on your own input, use the [matrix multiplication](https://calculatematrix.com/matrix-calculators/matrix-multiplication) calculator on CalculateMatrix.`,
       after: ``,
       link: '',
     },

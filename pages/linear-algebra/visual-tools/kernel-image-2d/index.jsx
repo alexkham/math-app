@@ -553,7 +553,9 @@ export async function getStaticProps(){
 &bull; **Right canvas** &mdash; shows $Av$ in cyan. A green line marks the image of $A$.
 &bull; **Center** &mdash; the four-cell matrix $A$, an explanation of the current preset, a properties card with [rank](!/linear-algebra/matrix/rank#1) and [determinant](!/linear-algebra/determinants#1), and a sweep playback panel.
 
-The fundamental relationship: every vector you place on the left has a counterpart on the right computed by $Av$. The kernel is the set of inputs that get sent to the origin; the image is the set of all reachable outputs.`,
+The fundamental relationship: every vector you place on the left has a counterpart on the right computed by $Av$. The kernel is the set of inputs that get sent to the origin; the image is the set of all reachable outputs.
+
+For exact step-by-step results on your own input, use the [null space](https://calculatematrix.com/matrix-calculators/nullspace) and [column space](https://calculatematrix.com/matrix-calculators/column-space) calculators on CalculateMatrix.`,
       before:``,
       after:``,
       link:'',

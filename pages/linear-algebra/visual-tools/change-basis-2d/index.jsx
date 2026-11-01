@@ -555,7 +555,9 @@ Try this sequence to build intuition:
 &bull; Drag the purple $b_2$ handle. The parallelogram cells of the basis grid shift accordingly.
 &bull; Drag the amber $v$ handle. Its standard coordinates change, and its decomposition along $b_1$ and $b_2$ updates.
 
-The point: $v$ is a fixed geometric object. Only its numerical address changes when you switch bases.`,
+The point: $v$ is a fixed geometric object. Only its numerical address changes when you switch bases.
+
+For exact step-by-step results on your own input, use the [change of basis](https://calculatematrix.com/matrix-calculators/change-of-basis) calculator on CalculateMatrix.`,
       before:``,
       after:``,
       link:'',

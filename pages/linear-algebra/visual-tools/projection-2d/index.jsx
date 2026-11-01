@@ -69,7 +69,9 @@ Try this sequence to build intuition:
 &bull; Press **play** in the animation panel. The grid and unit square morph from the identity to $P$, flattening the whole plane onto the line, which is what a rank-$1$ map does to space.
 &bull; Move the **$\\theta$ slider** in the matrix card and watch the four entries of $P$ change while $\\det P$ stays $0$ and $\\operatorname{tr} P$ stays $1$.
 
-The point: a projection is a [linear transformation](!/linear-algebra/transformations#1) like any other, with a matrix, an image and a kernel, but one that throws away a [dimension](!/linear-algebra/vector-spaces/dimension#1) and then leaves what remains alone.`,
+The point: a projection is a [linear transformation](!/linear-algebra/transformations#1) like any other, with a matrix, an image and a kernel, but one that throws away a [dimension](!/linear-algebra/vector-spaces/dimension#1) and then leaves what remains alone.
+
+For exact step-by-step results on your own input, use the [vector projection](https://calculatematrix.com/vector-calculators/vector-projection) and [projection matrix](https://calculatematrix.com/matrix-calculators/projection-matrix) calculators on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

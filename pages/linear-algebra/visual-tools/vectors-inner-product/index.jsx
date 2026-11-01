@@ -63,7 +63,9 @@ export async function getStaticProps(){
 • Hover the **?** icons for explanations of the inner product itself and the same-shape requirement
 • Use the scene player below to step, play, pause, change speed, and scroll the step log
 
-This page runs the vectors scenario. The same tool also has a matrices scenario, the Frobenius inner product, described below: same operation, different operands.`,
+This page runs the vectors scenario. The same tool also has a matrices scenario, the Frobenius inner product, described below: same operation, different operands.
+
+For exact step-by-step results on your own input, use the [dot product](https://calculatematrix.com/vector-calculators/dot-product) and [angle between vectors](https://calculatematrix.com/vector-calculators/angle-between-vectors) calculators on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

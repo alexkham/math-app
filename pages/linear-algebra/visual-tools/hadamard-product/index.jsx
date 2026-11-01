@@ -557,7 +557,9 @@ export async function getStaticProps(){
 • Press play on the scene player or step manually with the back and next buttons
 • Adjust speed and use the step log on the right to scroll through completed cells
 
-There is no operation toggle — the Hadamard product is a single operation, fully determined by the shape of the operands.`,
+There is no operation toggle — the Hadamard product is a single operation, fully determined by the shape of the operands.
+
+For exact step-by-step results on your own input, use the [Hadamard product](https://calculatematrix.com/matrix-calculators/hadamard-product) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

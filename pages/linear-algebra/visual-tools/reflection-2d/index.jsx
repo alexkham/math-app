@@ -69,7 +69,9 @@ Try this sequence to build intuition:
 &bull; Press **play** in the animation panel. The grid and unit square morph from the identity to $R$; halfway through, at $t = 0.5$, the picture is the projection onto the mirror, and at $t = 1$ the square has flipped over.
 &bull; Move the **$\\theta$ slider** in the matrix card and watch the four entries of $R$ change while $\\det R$ stays $-1$ and $\\operatorname{tr} R$ stays $0$.
 
-The point: a reflection is a rigid motion of the plane that cannot be achieved by turning, and $\\det R = -1$ is the algebraic fingerprint of that.`,
+The point: a reflection is a rigid motion of the plane that cannot be achieved by turning, and $\\det R = -1$ is the algebraic fingerprint of that.
+
+For exact step-by-step results on your own input, use the [linear transformation](https://calculatematrix.com/matrix-calculators/linear-transformation) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

@@ -420,7 +420,9 @@ The result is a row vector with one entry per column of $A$, which is worth noti
 
 If the row by column rule itself is still unfamiliar, the [matrix multiplication calculator](!/visual-tools/matrix-multiplication) works through it entry by entry first.
 
-The sentence the page argues is: **a row vector times a matrix is a weighted sum of the rows of that matrix**.`,
+The sentence the page argues is: **a row vector times a matrix is a weighted sum of the rows of that matrix**.
+
+For exact step-by-step results on your own input, use the [matrix multiplication](https://calculatematrix.com/matrix-calculators/matrix-multiplication) calculator on CalculateMatrix.`,
       after: ``,
       link: '',
     },

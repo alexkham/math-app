@@ -422,7 +422,9 @@ The colours carry one meaning each and never two. Blue is $A$ and anything built
 
 If the row by column rule is not yet second nature, the [matrix multiplication calculator](!/visual-tools/matrix-multiplication) runs it entry by entry. This page begins where that one stops.
 
-The claim the whole page argues is short. **A matrix times a vector is a weighted sum of the columns of the matrix**, and the vector supplies nothing but the weights.`,
+The claim the whole page argues is short. **A matrix times a vector is a weighted sum of the columns of the matrix**, and the vector supplies nothing but the weights.
+
+For exact step-by-step results on your own input, use the [matrix multiplication](https://calculatematrix.com/matrix-calculators/matrix-multiplication) calculator on CalculateMatrix.`,
       after: ``,
       link: '',
     },

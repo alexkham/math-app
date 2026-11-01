@@ -69,7 +69,9 @@ export async function getStaticProps(){
 • Hover the **?** icon for a reminder of what the pieces mean geometrically
 • Press play or step manually; the step log on the right keeps every stage
 
-The computation is the hand method: [eigenvalues](!/linear-algebra/eigen#2) and [eigenvectors](!/linear-algebra/eigen#2) of $A^TA$, square roots for the singular values, $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$, and completion of $U$ when the rank is less than $m$. The eigenvalues of $A^TA$ are reported rather than derived, since the eigenvalue visualizer shows that derivation.`,
+The computation is the hand method: [eigenvalues](!/linear-algebra/eigen#2) and [eigenvectors](!/linear-algebra/eigen#2) of $A^TA$, square roots for the singular values, $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$, and completion of $U$ when the rank is less than $m$. The eigenvalues of $A^TA$ are reported rather than derived, since the eigenvalue visualizer shows that derivation.
+
+For exact step-by-step results on your own input, use the [SVD](https://calculatematrix.com/matrix-calculators/svd) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',

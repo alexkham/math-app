@@ -69,7 +69,9 @@ Try this sequence to build intuition:
 • Press **Play** and watch the cyan arrow sweep the spiral continuously; the dots are where it lands at whole steps
 • Choose **Spiral in** and **Spiral out**, then drag $\\mathbf{x}_0$ around: the shape of the spiral never depends on where you start
 • Edit an entry of $A$ in the [matrix](!/linear-algebra/matrix#1) card until the [determinant](!/linear-algebra/determinants#1) drops below $\\operatorname{tr}^2/4$; the eigenvalues turn real and the rotation disappears
-• Move the **steps** slider to see more or fewer laps`,
+• Move the **steps** slider to see more or fewer laps
+
+For exact step-by-step results on your own input, use the [eigenvalue](https://calculatematrix.com/matrix-calculators/eigenvalues) calculator on CalculateMatrix.`,
       before: ``,
       after: ``,
       link: '',
