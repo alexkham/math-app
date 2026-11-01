@@ -16,6 +16,9 @@ import discretePmfDiagrams from '@/app/components/visualizations/probability/dis
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -539,6 +542,26 @@ const occurenceMatrix=`
 
 
 
+
+    // Concept introduction (section "what", "What Makes a Distribution
+    // Discrete") — template A, definition last. Running instance: the number
+    // of heads in three coin tosses. Old what text is kept in
+    // sectionsContent.what, unused; its five passages, the fact aside, the
+    // u_what_0 demo frame and its line are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciHeadsTable = ciTableOpen(['number of heads', 'tosses that give it', 'probability']) +
+      ciRow(['0', 'TTT', '1/8']) +
+      ciRow(['1', 'HTT, THT, TTH', '3/8'], { shade: true }) +
+      ciRow(['2', 'HHT, HTH, THH', '3/8']) +
+      ciRow(['3', 'HHH', '1/8'], { shade: true }) +
+      ciRow(['total', '8 equally likely tosses', '1'], { last: true, color: '#2563EB', cols: [2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
       obj0: {
@@ -1831,6 +1854,10 @@ This page systematically presents six fundamental discrete distributions, detail
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    headsTable: ciHeadsTable,
+  };
+
   const demoUnits = {
     u_what_0: demoUnitFrame({
       svg: discretePmfDiagrams.discreteUniform,
@@ -1866,10 +1893,40 @@ This page systematically presents six fundamental discrete distributions, detail
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the no-gaps fact box (What Makes a
+  // Distribution Discrete), the treating-the-draws-as-independent pitfall
+  // (Hypergeometric), the Mode row of the attributes table, and the building-
+  // block list under Bernoulli Trial.
+  const faqQuestions = {
+    obj1: {
+      question: "Can a discrete distribution have no gaps between its values?",
+      answer: "Yes. Discrete means the values can be listed, not that they are spaced apart. List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n$ probability $\\frac{1}{2^n}$. The masses add up to $\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots = 1$, so this is a discrete distribution, yet between any two of its possible values lie infinitely many more.",
+      sectionId: "what"
+    },
+    obj2: {
+      question: "What is the difference between the binomial and the hypergeometric distribution?",
+      answer: "Whether a drawn item goes back. The binomial counts successes in $n$ independent trials with the same $p$ each time; the hypergeometric counts successes in $n$ draws without replacement, where each draw changes what is left. For two cards from a deck with the aces as successes, the binomial gives $\\left(\\frac{4}{52}\\right)^2 = \\frac{1}{169} \\approx 0.0059$, while the true value is $\\frac{\\binom{4}{2}}{\\binom{52}{2}} = \\frac{1}{221} \\approx 0.0045$. The binomial is a fair stand-in only when $n$ is a small fraction of $N$.",
+      sectionId: "hypergeometric"
+    },
+    obj3: {
+      question: "When does a binomial or Poisson distribution have two modes?",
+      answer: "When the formula for the mode lands on a whole number. The binomial mode is $\\lfloor (n+1)p \\rfloor$, and if $(n+1)p$ is a whole number, the values $(n+1)p$ and $(n+1)p - 1$ tie: for $n = 5$, $p = 0.5$, $P(X = 2) = P(X = 3) = \\frac{10}{32}$. The Poisson mode is $\\lfloor \\lambda \\rfloor$, and if $\\lambda$ is a whole number, $\\lambda - 1$ and $\\lambda$ tie: for $\\lambda = 2$, $P(X = 1) = P(X = 2) = 2e^{-2} \\approx 0.271$. The geometric mode is always $1$.",
+      sectionId: "attributes"
+    },
+    obj4: {
+      question: "How are the binomial, geometric and negative binomial distributions related?",
+      answer: "All three repeat the same Bernoulli trial independently, with a constant success probability $p$; they differ in when the trials stop. The binomial runs a fixed number $n$ of trials and counts the successes. The geometric runs until the first success and counts the trials, and the negative binomial runs until the $r$-th success. So the binomial fixes the number of trials and lets the successes vary, while the other two fix the successes and let the number of trials vary.",
+      sectionId: "bernoulli"
+    }
+  }
+
    return {
       props:{
+    faqQuestions,
     discreteFamilyTree,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
           seoData: {
@@ -1902,8 +1959,72 @@ export default function DiscreteDistributionsPage({discreteFamilyTree, seoData,s
       poissonTable,
     occurenceMatrix,
     discreteDistributionsOverviewData,
-    discreteDistributionsAttributesData, demoUnits
+    discreteDistributionsAttributesData, demoUnits, conceptIntroFigures, faqQuestions
   }) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "what" concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Toss a coin three times and count the heads: the answer is 0, 1, 2 or 3 — nothing in between.`,
+        content: [
+          `A count jumps from one whole number to the next. A measurement such as a height can land anywhere in a range.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each of the four possible counts gets its own probability.`,
+        content: [
+          ciTable('headsTable'),
+          `The four probabilities add up to $1$. A question such as "at least two heads" is answered by adding rows: $\\frac{3}{8} + \\frac{1}{8} = \\frac{1}{2}$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The probability sits on separate points, and every question is answered by adding up points.`,
+        content: [
+          `This discreteness fundamentally shapes how we calculate probabilities: summing over points rather than integrating over intervals.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A distribution is **discrete** when it belongs to a [discrete random variable](!/probability/definitions#discrete_random_variable): one that takes countably many values, each with its own probability $P(X = k)$.`,
+        formula: [
+          `A distribution is **discrete** when the [random variable](!/probability/random-variables) can only take on **countable values** — typically integers or a finite set of distinct outcomes. Unlike measurements that flow [continuously](!/probability/distributions/continuous) (like height or temperature), discrete [random variables](!/probability/random-variables) represent things you can count: the number of defective items in a batch, the number of customers arriving per hour, or the result of [rolling a die](!/probability/models/dice-roll).`,
+          `The mathematical signature of a discrete distribution is the [probability mass function (PMF)](!/probability/probability-function#pdf_pmf), denoted $P(X = k)$, which assigns a probability to each specific value $k$ in the support. These probabilities must satisfy two conditions:`,
+          `1. **Non-negativity**: $P(X = k) \\geq 0$ for all $k$
+2. **Normalization**: $\\sum_{\\text{all } k} P(X = k) = 1$`,
+        ],
+        footer: `So the number of heads in three tosses has a discrete distribution: $P(X = k)$ is $\\frac{1}{8}, \\frac{3}{8}, \\frac{3}{8}, \\frac{1}{8}$ for $k = 0, 1, 2, 3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A discrete distribution is fully described by its list of values and their probabilities.`,
+        content: [
+          <div key={'unit-u_what_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_what_0 }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Countable does not mean finite, and it does not mean spaced apart.`,
+        content: [
+          `The support of a discrete distribution — the set of values where $P(X = k) > 0$ — can be **finite** (like rolling a die: $\\{1, 2, 3, 4, 5, 6\\}$) or **countably infinite** (like counting trials until success: $\\{1, 2, 3, \\ldots\\}$). What matters is that you can list the outcomes, even if that list never ends.`,
+          `@academic[fact,aside:true,width:35%:A discrete variable with no gaps
+List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n$ probability $\\frac{1}{2^n}$. The masses add up to $1$, so this is a discrete distribution, yet between any two of its possible values lie infinitely many more.]@`,
+          `The contrast with continuous distributions makes this explicit.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers discrete against continuous distributions, the main discrete families from Bernoulli to Poisson, how to identify which one fits, their shared attributes and properties, and common pitfalls.`,
+      },
+    ],
+  }
 
     
   const genericSections=[
@@ -1922,9 +2043,7 @@ export default function DiscreteDistributionsPage({discreteFamilyTree, seoData,s
         title:sectionsContent.what.title,
         link:'',
         content:[
-          sectionsContent.what.content,
-                  <div key={'unit-u_what_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_what_0 }} />,
-          `The contrast with continuous distributions makes this explicit.`,
+          <ConceptIntro key={'what-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2223,8 +2342,24 @@ export default function DiscreteDistributionsPage({discreteFamilyTree, seoData,s
           sectionsContent.obj6.content,
         ]
     },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Discrete Distributions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
-   
+
     // {
     //     id:'shared',
     //     title:sectionsContent.shared.title,

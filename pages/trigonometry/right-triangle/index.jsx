@@ -2591,6 +2591,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDiagrams'
 import renderTriangleLabel from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 
 
 export async function getStaticProps(){
@@ -2806,6 +2808,11 @@ export async function getStaticProps(){
   // Five questions. Those restating a section heading ("Finding Missing Sides",
   // "Angles of Elevation and Depression") were cut; the rest target the
   // confusions the page creates but never states as questions.
+  // FAQ pass 2026-10-31: kept the five questions (the earlier pass had
+  // already sorted out the heading ones). Added scale independence (theorem
+  // box under Defining Sine, Cosine, and Tangent), the Egyptian seked (fact
+  // box), elevation equals depression (one paragraph under Angles of
+  // Elevation and Depression) and cancelling sin (notation box).
   const faqQuestions = {
     obj1: {
       question: "What is SOH CAH TOA?",
@@ -2831,6 +2838,26 @@ export async function getStaticProps(){
       question: "Why do sine and cosine of complementary angles swap?",
       answer: "Because the two acute angles share the same sides under opposite labels. What is opposite one angle is adjacent to the other, so the ratio defining sine for the first defines cosine for the second. That gives sin of an angle equal to cos of its complement, which is where the name cofunction comes from. Explore it in the [angle explorer](!/trigonometry/visual-tools/angle-explorer).",
       sectionId: "8"
+    },
+    obj6: {
+      question: "Why don't the trigonometric ratios depend on the size of the triangle?",
+      answer: "Because two right triangles with the same acute angle are similar: every side of one is the same multiple of the matching side of the other, and that common factor cancels in any ratio of two sides. A 3-4-5 triangle and a 30-40-50 triangle both give $\\sin\\theta = \\frac{3}{5}$ for the angle opposite the shortest side. That is why sine, cosine and tangent are properties of the angle alone.",
+      sectionId: "2"
+    },
+    obj7: {
+      question: "How did the Egyptians measure the slope of a pyramid?",
+      answer: "With the seked: the horizontal run, in palms, for each cubit of rise, with 7 palms to the cubit. That is a cotangent, $7\\cot\\theta$, where $\\theta$ is the angle between the face and the ground. A seked of $5\\frac{1}{2}$ palms gives $\\cot\\theta = \\frac{5.5}{7}$, so $\\theta = \\arctan\\frac{7}{5.5} \\approx 51.8°$, the slope of the Great Pyramid.",
+      sectionId: "3"
+    },
+    obj8: {
+      question: "Is the angle of elevation equal to the angle of depression?",
+      answer: "Yes, when both are measured along the same line of sight. The horizontal through the observer and the horizontal through the target are parallel, and the line of sight crosses both, so the angle up from the lower point and the angle down from the upper point are alternate interior angles. A problem can therefore be set up from either end, with tangent relating the height difference to the horizontal distance.",
+      sectionId: "9"
+    },
+    obj9: {
+      question: "Can you cancel the sin in $\\frac{\\sin\\alpha}{\\sin\\beta}$?",
+      answer: "No. $\\sin$ is the name of a function, not a factor: $\\sin\\alpha$ applies the function to $\\alpha$ the way $f(x)$ does, and nothing is multiplied. Cancelling it to get $\\frac{\\alpha}{\\beta}$ fails at once: $\\frac{\\sin 90°}{\\sin 30°} = \\frac{1}{1/2} = 2$, while $\\frac{90°}{30°} = 3$. An operator without its argument is not a quantity.",
+      sectionId: "sin-cos-tan"
     }
   }
 
@@ -3878,6 +3905,11 @@ export default function RightTrianglePage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={trigonometryNotationSheet}
+            current={'/trigonometry/right-triangle'}
           />,
         ]
     },

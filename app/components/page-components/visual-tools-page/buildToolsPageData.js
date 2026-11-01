@@ -324,6 +324,11 @@ export async function buildToolIndexData(route, options = {}) {
   if (!fs.existsSync(root)) return { items: [] };
 
   const items = [];
+  // A [view].jsx directly in the root folder (geometry/visual-tools/[view].jsx):
+  // its views are tools of this section with no folder of their own, one
+  // leaf each at <route>/<slug>. Sections without such a file are unaffected.
+  const rootViewFile = findViewFile(root);
+  if (rootViewFile) items.push(...extractViewLeaves(rootViewFile, route));
   // Don't emit the root route itself as a leaf (it's the hub page rendering this list).
   for (const sub of listSubdirs(root)) {
     walk(path.join(root, sub), `${route}/${sub}`, items, skip);

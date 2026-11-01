@@ -1103,6 +1103,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1565,6 +1568,25 @@ const summaryTable = `
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "The Idea of Abstraction") — template F,
+// several descriptions shown to agree. Running instance: adding, scaling and
+// the zero element in R², polynomials, 2 × 2 matrices and functions. Old obj1
+// text is kept in sectionsContent.obj1, unused; its two passages are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciKindsTable = ciTableOpen(['kind of object', 'u + v', '3u', 'zero element']) +
+  ciRow(['vectors in R²', '(1, 2) + (3, −1) = (4, 1)', '(3, 6)', '(0, 0)']) +
+  ciRow(['polynomials', '(1 + x) + (x² − x) = 1 + x²', '3 + 3x', 'the zero polynomial'], { shade: true }) +
+  ciRow(['2 × 2 matrices', 'add entry by entry', 'triple every entry', 'the zero matrix']) +
+  ciRow(['functions on [0, 1]', 'sin x + x²', '3 sin x', 'f(x) = 0 for every x'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Idea of Abstraction`,
@@ -1902,6 +1924,11 @@ How to check: substitute $\\mathbf{v} = \\mathbf{0}$. Then $2 \\cdot \\mathbf{0}
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the 1v = v
+// axiom (fact box under "Why Axioms Matter"), cancelling v from cv = dv
+// (pitfall under "Immediate Consequences"), the positive reals (non-example
+// and pitfall box) and subsets over {0, 1} (fact box under "The Field of
+// Scalars"). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Is $0\\mathbf{v} = \\mathbf{0}$ one of the axioms?",
@@ -1917,6 +1944,26 @@ const faqQuestions = {
     question: "Does defining addition and scaling on a set make it a vector space?",
     answer: "Not on its own. Supplying the operations is only the first step, since closure still has to be verified: the result of adding or scaling must land back inside the set. That is why continuity is a genuine hypothesis for $C[a,b]$ rather than decoration, and why the non-examples fail despite having perfectly sensible operations.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is the axiom $1\\mathbf{v} = \\mathbf{v}$ redundant?",
+    answer: "No, it is the one axiom the other nine cannot replace. Keep ordinary addition and define scaling so that $c\\mathbf{v} = \\mathbf{0}$ for every scalar and every vector: closure, both distributive laws and $c(d\\mathbf{v}) = (cd)\\mathbf{v}$ all still hold, and only $1\\mathbf{v} = \\mathbf{v}$ fails. Without it, $2\\mathbf{v} = \\mathbf{0}$ for a nonzero $\\mathbf{v}$, and the rule that $c\\mathbf{v} = \\mathbf{0}$ forces $c = 0$ or $\\mathbf{v} = \\mathbf{0}$ breaks.",
+    sectionId: "10"
+  },
+  obj5: {
+    question: "Can you cancel $\\mathbf{v}$ from both sides of $c\\mathbf{v} = d\\mathbf{v}$?",
+    answer: "Only when $\\mathbf{v} \\neq \\mathbf{0}$. The axioms never define division by a vector, and the step loses a case: $2 \\cdot \\mathbf{0} = 5 \\cdot \\mathbf{0}$ although $2 \\neq 5$. The correct route collects everything on one side as $(c - d)\\mathbf{v} = \\mathbf{0}$ and then uses the fact that a vector space has no zero divisors, so either $c = d$ or $\\mathbf{v} = \\mathbf{0}$.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "Are the positive real numbers a vector space?",
+    answer: "Not under ordinary addition and scaling. There is no zero vector, since no positive $z$ satisfies $x + z = x$, and scaling leaves the set as well: $(-1) \\cdot 3 = -3$ and $0 \\cdot 3 = 0$ are not positive. Testing closure with $c = 2$ or $c = \\frac{1}{2}$ hides this, because the scalars are all of $\\mathbb{R}$, not only its positive part. Always try $c = -1$ and $c = 0$.",
+    sectionId: "8"
+  },
+  obj7: {
+    question: "Can the subsets of a set form a vector space?",
+    answer: "Yes, over the field $\\{0, 1\\}$ in which $1 + 1 = 0$. The sum $A + B$ keeps the elements that lie in exactly one of the two sets, the empty set is the zero vector, and scaling by $0$ or $1$ gives $\\varnothing$ or the set itself. Every vector is then its own negative, since $A + A = \\varnothing$, which over $\\mathbb{R}$ only the zero vector can do.",
+    sectionId: "3"
   }
 }
 
@@ -1996,6 +2043,10 @@ const schemas = {
 
 
 
+const conceptIntroFigures = {
+    kindsTable: ciKindsTable,
+  };
+
 return {
   props:{
     sectionsContent,
@@ -2006,6 +2057,7 @@ return {
     summaryTable,
     faqQuestions,
     schemas,
+    conceptIntroFigures,
     seoData: {
       title: "Vector Space Axioms: The Ten Rules | Learn Math Class",
       description: "The ten vector space axioms: addition and scalar multiplication rules, Rⁿ and abstract examples, polynomial and matrix spaces, non-examples, consequences of axioms, and why abstraction matters.",
@@ -2017,9 +2069,67 @@ return {
 }
    }
 
-export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introContent, vectorSpaceAxioms, obj8Table, obj9Table, summaryTable, faqQuestions, schemas}) {
+export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introContent, vectorSpaceAxioms, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Columns of numbers, polynomials, matrices and functions look like different kinds of object.`,
+        content: [
+          `Yet each can be added to another of its kind and multiplied by a number, and the result is again of the same kind.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The same two moves work on all four, and each has a zero that changes nothing.`,
+        content: [
+          ciTable('kindsTable'),
+          `In every row, adding the zero element leaves an object as it was, and scaling by $1$ does too.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `The rules of adding and scaling are identical in all four.`,
+        content: [
+          `[Vectors](!/linear-algebra/vectors) in $\\mathbb{R}^n$ can be added entry by entry and scaled by real numbers. Polynomials can be added and scaled. [Matrices](!/linear-algebra/matrix) can be added and scaled. Continuous functions on an interval can be added and scaled. In each case, the same algebraic patterns appear: addition is commutative and associative, scaling distributes over sums, adding a zero element changes nothing, and scaling by $1$ leaves every object unchanged.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [vector space](!/linear-algebra/definitions#vector_space) is a set of objects that can be added and multiplied by scalars, with the two operations obeying ten axioms.`,
+        formula: [
+          `A vector space is the formal extraction of these patterns. Rather than proving results separately for columns, polynomials, matrices, and functions, the axioms identify the common thread. Anything proved from the axioms alone — and that includes the entire theory of [linear independence](!/linear-algebra/vector-spaces/linear-independence), [span](!/linear-algebra/vector-spaces/span), [basis](!/linear-algebra/vector-spaces), and [dimension](!/linear-algebra/vector-spaces/dimension) — holds in every setting where the axioms are satisfied.`,
+        ],
+        footer: `So $\\mathbb{R}^2$, the polynomials, the $2 \\times 2$ matrices and the functions on $[0, 1]$ are all vector spaces.`,
+      },
+      {
+        id: 'kind',
+        lead: `Prove a result once from the axioms, and it holds in every vector space.`,
+        content: [
+          `Facts about independence, span, basis and dimension never need to be proved again for polynomials or functions. The axioms themselves are listed in [the ten axioms](!/linear-algebra/vector-spaces/axioms#2).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Having an addition and a scaling is not enough.`,
+        content: [
+          `The positive real numbers can be added, but they contain no zero element, and $-1 \\cdot 2$ falls outside the set. With the ordinary operations they are not a vector space. More cases are in [non-examples](!/linear-algebra/vector-spaces/axioms#8).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the ten axioms, notation, the field of scalars, the standard example Rⁿ, polynomial, matrix and function spaces, non-examples, immediate consequences, why axioms matter, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2027,7 +2137,7 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2062,6 +2172,11 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSpacesNotationSheet}
+            current={'/linear-algebra/vector-spaces/axioms'}
           />,
         ]
     },

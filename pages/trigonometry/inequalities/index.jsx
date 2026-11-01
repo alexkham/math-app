@@ -877,6 +877,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import renderCircleArc from '@/app/utils/illustrations/trigonometry/circle/circleArc'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1075,31 +1078,58 @@ export async function getStaticProps(){
 </table>
 `
 
+// FAQ pass 2026-10-31: cut "Why are the solutions to trigonometric
+// inequalities intervals rather than points?" (restates the h2 "Solutions as
+// Intervals") and "How do you use the unit circle to solve a trigonometric
+// inequality?" (restates the h2 "The Unit Circle Method"); keys renumbered.
+// The multiply-by-a-negative question now points to section 8, where the sign
+// split is worked. The write-the-solution question now says nπ for tangent
+// and cotangent (it gave 2nπ for all) and points to section 1. Added: arcsin
+// of both sides (pitfall in section 1), open and closed endpoints (rule box
+// in section 1), why cos x > 1/2 comes in two pieces (Read more under "The
+// Graphical Method"), no solution or every x (edge-case table in "Solving
+// Sine Inequalities") and sin n > 1/2 for whole numbers (fact box under "The
+// Unit Circle Method").
 const faqQuestions = {
   obj1: {
-    question: "Why are the solutions to trigonometric inequalities intervals rather than points?",
-    answer: "An equation asks where a function hits one exact value, which happens at isolated angles. An inequality asks where it stays above or below that value, which holds across whole stretches between those angles. Because the functions repeat, each stretch reappears once per period, giving infinitely many intervals rather than a single one.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "How do you use the unit circle to solve a trigonometric inequality?",
-    answer: "Find the boundary angles where equality holds, then read which arc of the circle satisfies the inequality. For sine, compare heights above or below a horizontal cut; for cosine, compare positions left or right of a vertical one. The chosen arc translates directly into the interval of solutions.",
-    sectionId: "3"
-  },
-  obj3: {
     question: "What happens to the inequality sign when you multiply by a negative?",
     answer: "The direction reverses, exactly as in ordinary algebra. The trigonometric part changes nothing about this rule. The trap is subtler: dividing by a trigonometric expression means dividing by something whose sign varies with the angle, so the interval has to be split by sign before dividing at all.",
-    sectionId: "5"
+    sectionId: "8"
   },
-  obj4: {
+  obj2: {
     question: "How do you write the solution of a trigonometric inequality?",
-    answer: "Give one representative interval, then add a whole number of periods to cover the rest. Writing the interval with 2nπ added to both endpoints captures every repetition in one line. If the problem restricts the angle to a stated range, list only the intervals falling inside that range instead.",
-    sectionId: "4"
+    answer: "Give one representative interval, then add a whole number of periods to cover the rest. Adding $2n\\pi$ to both endpoints captures every repetition for sine, cosine, secant and cosecant; tangent and cotangent repeat every $\\pi$, so they take $n\\pi$. If the problem restricts the angle to a stated range, list only the intervals falling inside that range instead.",
+    sectionId: "1"
   },
-  obj5: {
+  obj3: {
     question: "Why do reciprocal function inequalities need extra care?",
     answer: "Because cosecant, secant, cotangent and tangent are undefined wherever their denominator is zero. Those angles must be excluded from the answer even when the surrounding interval satisfies the inequality. The function also jumps from arbitrarily large to arbitrarily small across each asymptote, so intervals break there rather than continuing through.",
     sectionId: "8"
+  },
+  obj4: {
+    question: "Can you take arcsin of both sides of a trig inequality?",
+    answer: "No. Arcsine returns a single angle and says nothing about where sine stays above a level. Applied to $\\sin(x) > \\frac{1}{2}$, it gives $x > \\frac{\\pi}{6}$, which wrongly includes $x = \\pi$, where $\\sin(\\pi) = 0$. Sine is increasing only on $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, so the step that works for increasing functions in algebra fails here. The right answer on $[0, 2\\pi)$ is $\\frac{\\pi}{6} < x < \\frac{5\\pi}{6}$.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "When is the endpoint of a trig inequality included?",
+    answer: "When the inequality is non-strict and the function is defined there. With $>$ or $<$ the boundary angles are left out and the interval is open; with $\\geq$ or $\\leq$ they are included, as in $\\sin(x) \\geq \\frac{\\sqrt{2}}{2}$, solved by $\\left[\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right]$. A vertical asymptote is always excluded, whatever the sign, because the function has no value there.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Why does the answer to cos x > 1/2 on [0, 2π) come in two pieces?",
+    answer: "Because the stretch where cosine is above $\\frac{1}{2}$ runs across $0$. It goes from $-\\frac{\\pi}{3}$ to $\\frac{\\pi}{3}$, and on $[0, 2\\pi)$ its left half reappears at the far end as $\\left(\\frac{5\\pi}{3}, 2\\pi\\right)$. The answer is $\\left[0, \\frac{\\pi}{3}\\right) \\cup \\left(\\frac{5\\pi}{3}, 2\\pi\\right)$. Writing $\\left(\\frac{\\pi}{3}, \\frac{5\\pi}{3}\\right)$ instead gives the solution of $\\cos(x) < \\frac{1}{2}$.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "Can a trigonometric inequality have no solution or be true for every x?",
+    answer: "Yes, when the bound lies at or beyond the range of sine or cosine. Since sine never exceeds $1$, $\\sin(x) > 1$ has no solution and $\\sin(x) \\leq 1$ holds for every $x$; $\\sin(x) > a$ with $a < -1$ is also true everywhere. At the edge itself the answer can be isolated points: $\\sin(x) \\geq 1$ holds only at $x = \\frac{\\pi}{2} + 2n\\pi$. Comparing $a$ with $[-1, 1]$ first saves the solving.",
+    sectionId: "4"
+  },
+  obj8: {
+    question: "How often is sin n > 1/2 for whole numbers n?",
+    answer: "About one time in three. Of the first million whole numbers, $333{,}336$ satisfy it. The arc from $\\frac{\\pi}{6}$ to $\\frac{5\\pi}{6}$ where the inequality holds is $\\frac{2\\pi}{3}$ long, a third of the full circle. Because $\\pi$ is irrational, the angles $n$ radians never land on the same point twice and spread evenly round the circle, so each arc collects its fair share.",
+    sectionId: "3"
   }
 }
 
@@ -1142,6 +1172,26 @@ const faqQuestions = {
       ]
     },
   }
+
+    // Concept introduction (section 1, "Solutions as Intervals") — template
+    // D, comparison. Running instance: sin x = 1/2 against sin x > 1/2 on
+    // [0, 2π). Old obj1 text is kept in sectionsContent.obj1, unused; its five
+    // passages, pitfall, rule box, the solutionsAsIntervals demo frame, its
+    // line, obj1Table and the punchline are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciAnglesTable = ciTableOpen(['angle x', 'sin x', 'sin x = 1/2?', 'sin x > 1/2?']) +
+      ciRow(['π/6', '0.5', 'yes', 'no']) +
+      ciRow(['π/3', 'about 0.87', 'no', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+      ciRow(['π/2', '1', 'no', 'yes'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['5π/6', '0.5', 'yes', 'no'], { shade: true }) +
+      ciRow(['π', '0', 'no', 'no'], { last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1249,7 +1299,7 @@ Set side by side, the two methods differ less in what they yield than in what th
 **Case** $|a| < 1$: The equation $\\sin(x) = a$ has two solutions per period: $x_1$ and $x_2 = \\pi - x_1$ (where $x_1 = \\arcsin(a)$). The sign of $a$ determines the quadrants. Within one period $[0, 2\\pi)$:
 
 - $\\sin(x) > a$ when $a > 0$: the solution is $(x_1, x_2)$ — the arc where sine exceeds $a$, passing through the maximum.
-- $\\sin(x) > a$ when $a < 0$: the solution is $[0, x_1) \\cup (x_2, 2\\pi)$ where $x_1 = \\pi - \\arcsin(a)$ and $x_2 = \\arcsin(a) + 2\\pi$ — the larger arc that includes the maximum. More carefully: the two boundary angles are $\\pi + |\\arcsin(a)|$ and $2\\pi - |\\arcsin(a)|$ (in Quadrants III and IV), and sine exceeds $a$ on the arc that does not pass through the minimum.
+- $\\sin(x) > a$ when $a < 0$: the solution is $[0, \\pi + |\\arcsin(a)|) \\cup (2\\pi - |\\arcsin(a)|, 2\\pi)$ — the larger arc that includes the maximum. The two boundary angles $\\pi + |\\arcsin(a)|$ and $2\\pi - |\\arcsin(a)|$ lie in Quadrants III and IV, and sine exceeds $a$ on the arc that does not pass through the minimum.
 
 **Case** $a = 1$: $\\sin(x) \\geq 1$ is satisfied only at $x = \\frac{\\pi}{2} + 2n\\pi$ (a single point per period). $\\sin(x) > 1$ has no solution.
 
@@ -1591,6 +1641,10 @@ Two methods dominate. The graphical approach plots the function and a horizontal
     notes: [{ text: 'same two angles, same answer', x: 322, y: 282, color: 'text', size: 12 }],
   };
 
+  const conceptIntroFigures = {
+    anglesTable: ciAnglesTable,
+  };
+
   const demoUnits = {
     graphical: demoUnitFrame({
       svg: trigFunctionsGraphDiagrams.sin,
@@ -1623,9 +1677,49 @@ Two methods dominate. The graphical approach plots the function and a horizontal
     }),
   };
 
+  // DecisionMaker + DecisionWalker (obj9): trig-inequality-decision
+  const trigInequalityDecision = {
+    header: {
+      kicker: 'trigonometric inequalities',
+      title: 'What is the first step?',
+      lede: 'Reduce the inequality to a basic one, then let the size of a decide its shape.',
+    },
+    start: 'recip',
+    nodes: {
+      recip: { question: 'Reciprocal function: sec or csc?', answers: [
+        { label: 'yes', to: 'reciprocal' },
+        { label: 'no', to: 'compound' },
+      ] },
+      compound: { question: 'Compound: a ⋛ f(x) ⋛ b?', answers: [
+        { label: 'yes', to: 'split' },
+        { label: 'no', to: 'transformed' },
+      ] },
+      transformed: { question: 'Transformed: A·f(Bx + C) + D?', answers: [
+        { label: 'yes', to: 'subst' },
+        { label: 'no', to: 'size' },
+      ] },
+      size: { question: 'How large is |a|?', hint: 'for sin or cos; tan takes every value', answers: [
+        { label: 'more than 1', to: 'outside' },
+        { label: 'exactly 1', to: 'edge' },
+        { label: 'less than 1', to: 'basic' },
+      ] },
+    },
+    outcomes: {
+      reciprocal: { title: 'Split by the sign of f(x)', action: 'take the reciprocal carefully on each branch; asymptotes are always excluded', link: { label: 'Reciprocal functions', href: '/trigonometry/inequalities#8' } },
+      split: { title: 'Solve each side separately', action: 'the solution is the intersection of the two sets', link: { label: 'Compound inequalities', href: '/trigonometry/inequalities#6' } },
+      subst: { title: 'Isolate f, let u = Bx + C', action: 'solve the basic form in u, then scale by 1/|B| and shift', link: { label: 'Transformed functions', href: '/trigonometry/inequalities#7' } },
+      outside: { title: 'All reals or empty', action: 'no boundary equation needed', tone: 'done', link: { label: 'Sine inequalities', href: '/trigonometry/inequalities#4' } },
+      edge: { title: 'Isolated points, all reals or empty', action: 'compare a with the range [−1, 1]', tone: 'done', link: { label: 'Sine inequalities', href: '/trigonometry/inequalities#4' } },
+      basic: { title: 'Solve f(x) = a for the boundaries', action: 'a union of intervals, open or closed by strictness', link: { label: 'Sine inequalities', href: '/trigonometry/inequalities#4' } },
+    },
+    last: [{ label: 'Then', text: 'Repeat the pattern with the period: 2π for sin, cos, sec and csc; π for tan and cot.' }],
+  };
+
    return {
       props:{
+    trigInequalityDecision,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj1Table,
@@ -1646,7 +1740,7 @@ Two methods dominate. The graphical approach plots the function and a horizontal
     }
    }
 
-export default function InequalitiesPage({
+export default function InequalitiesPage({trigInequalityDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -1655,10 +1749,78 @@ export default function InequalitiesPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Solving sin x = 1/2 means finding angles. Solving sin x > 1/2 asks something different.`,
+        content: [
+          `Test a few angles between $0$ and $\\pi$ against both questions.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `The equation is met at two angles; the inequality at every angle between them.`,
+        content: [
+          ciTable('anglesTable'),
+          `The equation's two solutions become the endpoints of the inequality's interval $\\frac{\\pi}{6} < x < \\frac{5\\pi}{6}$.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Between two crossings a continuous function cannot change sides, so solutions come in whole stretches.`,
+        content: [
+          `This shift from points to intervals is a consequence of continuity. Since sine is continuous, if $\\sin(a) > \\frac{1}{2}$ and $\\sin(b) > \\frac{1}{2}$ and there is no point between $a$ and $b$ where $\\sin(x) = \\frac{1}{2}$, then $\\sin(x) > \\frac{1}{2}$ for every $x$ between $a$ and $b$. The boundary points — the solutions of the corresponding equation — are where the function crosses the threshold, and the intervals between them are where the inequality holds.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **solution set of a trigonometric inequality** is a union of intervals of angles, bounded by solutions of the matching equation and repeated with the function's period.`,
+        formula: [
+          `The solution to a trigonometric inequality is fundamentally different from the solution to an equation. An equation like $\\sin(x) = \\frac{1}{2}$ produces isolated points: $x = \\frac{\\pi}{6}, \\frac{5\\pi}{6}$, plus their periodic repetitions. An inequality like $\\sin(x) > \\frac{1}{2}$ produces intervals: the entire stretch of angles between $\\frac{\\pi}{6}$ and $\\frac{5\\pi}{6}$ (exclusive), plus periodic repetitions.`,
+        ],
+        footer: `So on $[0, 2\\pi)$, $\\sin(x) > \\frac{1}{2}$ holds exactly for $\\frac{\\pi}{6} < x < \\frac{5\\pi}{6}$, and in general for $\\frac{\\pi}{6} + 2k\\pi < x < \\frac{5\\pi}{6} + 2k\\pi$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The intervals repeat with the period, and their endpoints depend on whether the inequality is strict.`,
+        content: [
+          `On a restricted interval like $[0, 2\\pi)$, the solution is a finite union of intervals. In general solution form, the pattern repeats: each interval shifts by $2\\pi$ (for sine, cosine, cosecant, secant) or $\\pi$ (for tangent, cotangent) to produce the complete solution set.`,
+          `@academic[rule_plain:Strict inequalities ($>$, $<$) produce open intervals at the boundary points — the boundary is not included. Non-strict inequalities ($\\geq$, $\\leq$) produce closed intervals at boundary points — the boundary is included (provided the function is defined there).]@`,
+          `At vertical asymptotes, the interval is always open, since the function is undefined. Open and closed endpoints are exactly what the brackets and parentheses of [interval notation](!/math-symbols/functions) record.`,
+          <div key={'unit-solutionsAsIntervals'} dangerouslySetInnerHTML={{ __html: demoUnits.solutionsAsIntervals }} />,
+          `Whether each endpoint belongs to the answer is then decided by whether the inequality is strict.`,
+          `The two regimes — equation and inequality — contrast on every structural attribute that matters for how the solution is built and written, as the comparison below makes explicit.`,
+          <div key={'obj1-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          `@academic[punchline:An inequality is answered by whole stretches of angles, not by points, and the stretches repeat with the function's period.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `An inverse function alone does not solve a trigonometric inequality.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Taking arcsin of both sides
+Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\pi}{6}$, which keeps $x = \\pi$, where $\\sin(\\pi) = 0$. On $[0, 2\\pi)$ the answer is $\\frac{\\pi}{6} < x < \\frac{5\\pi}{6}$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the graphical and unit circle methods, sine, cosine and tangent inequalities, compound inequalities, transformed functions, domain restrictions for reciprocal and quotient functions, a summary of approaches and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1675,12 +1837,7 @@ export default function InequalitiesPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-solutionsAsIntervals'} dangerouslySetInnerHTML={{ __html: demoUnits.solutionsAsIntervals }} />,
-          `Whether each endpoint belongs to the answer is then decided by whether the inequality is strict.`,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
-          `@academic[punchline:An inequality is answered by whole stretches of angles, not by points, and the stretches repeat with the function's period.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1769,6 +1926,16 @@ export default function InequalitiesPage({
           sectionsContent.obj9.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          `The six forms as a checklist. The first three checks peel off the structure around the function; what is left is a basic inequality, and the size of $a$ decides its shape.`,
+          <DiagramFrameV2
+            key={'obj9-decision'}
+            id="trig-inequality-decision"
+            title="First step for a trigonometric inequality"
+            source="/trigonometry/inequalities"
+          >
+            <DecisionBox data={trigInequalityDecision} />
+          </DiagramFrameV2>,
+          `Two of the exits need no solving at all. When $|a| > 1$ or $|a| = 1$ for sine or cosine, comparing $a$ with the range $[-1, 1]$ already gives the answer, and the [table of edge cases](!#4) lists every one of them.`,
         ]
     },
     // {

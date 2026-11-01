@@ -2788,6 +2788,9 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 
 
 export async function getStaticProps(){
@@ -2867,6 +2870,25 @@ const keyWords = [
 
 
 // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "Union") — template C, failure first.
+// Running instance: one list of everyone in a chess club or a music club that
+// share one member. Old obj1 text is kept in sectionsContent.obj1, unused; its
+// seven passages, five formula boxes, link, the union demo frame and its line
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciClubsTable = ciTableOpen(['list', 'names', 'count']) +
+  ciRow(['chess club', 'Ana, Ben, Cara', '3']) +
+  ciRow(['music club', 'Cara, Dan, Eve', '3'], { shade: true }) +
+  ciRow(['both lists joined end to end', 'Ana, Ben, Cara, Cara, Dan, Eve', '6'], { color: '#a4243b', cols: [2] }) +
+  ciRow(['everyone in either club, once each', 'Ana, Ben, Cara, Dan, Eve', '5'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -3229,6 +3251,11 @@ Set operations combine [sets](!/set-theory) to form new sets. These operations �
 
 // Five questions. The five that merely restated a section heading were cut;
 // three were invented from confusions the notation section names explicitly.
+// FAQ pass 2026-10-31: kept the four. Added the empty intersection of nested
+// infinite intervals (fact box under "Intersection"), why union cannot be
+// built from differences (fact box under "Set Difference") and what a
+// three-set symmetric difference holds (pitfall under "Symmetric
+// Difference"). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "What is the difference between union and intersection?",
@@ -3249,6 +3276,21 @@ const faqQuestions = {
     question: "How does set difference relate to complement?",
     answer: "Every difference is an intersection in disguise: A \\ B = A ∩ Bᶜ. Removing the elements of B from A is the same as keeping the elements of A that lie in the complement of B. The identity matters because it turns difference, the one non-commutative operation, into intersection, whose algebra is already familiar.",
     sectionId: "4"
+  },
+  obj5: {
+    question: "Can an intersection of infinitely many infinite sets be empty?",
+    answer: "Yes. The intervals $(0, 1)$, $(0, \\frac{1}{2})$, $(0, \\frac{1}{3})$, and so on each hold infinitely many numbers, and each lies inside the one before, yet no number is in all of them. Any $x > 0$ drops out as soon as $\\frac{1}{n} \\le x$, and no $x \\le 0$ was ever in. With the closed intervals $[0, \\frac{1}{n}]$ instead, the point $0$ survives and the intersection is $\\{0\\}$.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Can union be written using only set difference?",
+    answer: "No. Every difference $X \\setminus Y$ is a subset of $X$, so any formula built only from differences stays inside its first set, while $A \\cup B$ usually reaches outside $A$. Intersection, by contrast, can be built this way: $A \\setminus (A \\setminus B) = A \\cap B$. With $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5\\}$, removing $A \\setminus B = \\{1, 2\\}$ from $A$ leaves $\\{3, 4\\}$.",
+    sectionId: "4"
+  },
+  obj7: {
+    question: "What does $A \\triangle B \\triangle C$ contain?",
+    answer: "The elements that lie in an odd number of the three sets: exactly one of them, or all three. It is not just the elements in exactly one set. With $A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$ and $C = \\{3, 5, 6\\}$, the result is $\\{1, 2, 3, 4, 6\\}$: the $3$ is in all three sets and stays, while the $5$ is in two and drops out. The grouping does not matter, since the operation is associative.",
+    sectionId: "5"
   }
 }
 
@@ -3321,6 +3363,10 @@ const schemas = {
   // Operation A demonstration units: frozen tool state + attached explanation
   // panel + tool link, one frame. Rendered as content-array items.
   const VENN_TOOL = '/set-theory/visual-tools/two-sets-basic-venn';
+  const conceptIntroFigures = {
+    clubsTable: ciClubsTable,
+  };
+
   const demoUnits = {
     union: demoUnitFrame({
       svg: twoSetsVennDiagrams.union,
@@ -3367,6 +3413,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Set Operations: Union, Intersection, Complement & More | Learn Math Class",
       description: "Learn set operations: union, intersection, complement, set difference, and symmetric difference. Understand notation, properties, and how to combine sets.",
@@ -3377,9 +3424,87 @@ const schemas = {
   }
 }
    }
-export default function SetOperationsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function SetOperationsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A school wants one list of everyone in the chess club or the music club.`,
+        content: [
+          `The obvious move is to put the two club lists together.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Joining the two lists end to end gives 6 names for 5 people.`,
+        content: [
+          ciTable('clubsTable'),
+          `Cara is in both clubs. A list of everyone in either club names her once.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Pooling two collections means taking each member once, whether it is in one collection or in both.`,
+        content: [
+          `The word "or" here is inclusive — elements belonging to both sets are included. If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then:`,
+          `@academic[formula_callout:Union
+$$A \\cup B = \\{1, 2, 3, 4, 5\\}$$]@`,
+          `The element $3$ appears in both sets but is listed only once in the union.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [union](!/set-theory/definitions#union) of sets $A$ and $B$ is the set $A \\cup B$ of elements that belong to $A$, to $B$, or to both.`,
+        formula: [
+          `The union of two sets $A$ and $B$ is the set of elements that belong to $A$ or $B$ or both:`,
+          `@academic[formula_callout:Union
+$$A \\cup B = \\{x : x \\in A \\text{ or } x \\in B\\}$$]@`,
+        ],
+        footer: `So the union of the two clubs is the set of $5$ people: Ana, Ben, Cara, Dan and Eve.`,
+      },
+      {
+        id: 'kind',
+        lead: `Union behaves like addition: order and grouping do not matter, and it extends to any number of sets.`,
+        content: [
+          `Union is commutative and associative:`,
+          `@academic[formula_callout:Commutative Law - Union
+$$A \\cup B = B \\cup A$$
+/set-theory/formulas#commutative_law_-_union]@`,
+          `@academic[formula_callout:Associative Law - Union
+$$(A \\cup B) \\cup C = A \\cup (B \\cup C)$$
+/set-theory/formulas#associative_law_-_union]@`,
+          `@academic[formulas_link:Browse all set theory formulas
+/set-theory/formulas]@`,
+          `For multiple sets, the union extends naturally:`,
+          `@academic[formula_callout:Union
+$$\\bigcup_{i=1}^{n} A_i = A_1 \\cup A_2 \\cup \\cdots \\cup A_n$$]@`,
+          `This contains every element that appears in at least one of the sets $A_1, A_2, \\ldots, A_n$.`,
+          <div key={'unit-union'} dangerouslySetInnerHTML={{ __html: demoUnits.union }} />,
+          `Everything that follows in set algebra — distributive laws, De Morgan's laws, inclusion–exclusion — begins with this simplest act of pooling two collections into one.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `When sets overlap, the size of the union is not the sum of the sizes.`,
+        content: [
+          `$|A \\cup B| = |A| + |B| - |A \\cap B|$, here $3 + 3 - 1 = 5$. The overlap is itself the next operation, [intersection](!/set-theory/operations#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers intersection, complement, set difference, symmetric difference and a summary of all five operations.`,
+      },
+    ],
+  }
     
   const genericSections=[
     {
@@ -3395,9 +3520,7 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-union'} dangerouslySetInnerHTML={{ __html: demoUnits.union }} />,
-          `Everything that follows in set algebra — distributive laws, De Morgan's laws, inclusion–exclusion — begins with this simplest act of pooling two collections into one.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -3457,6 +3580,11 @@ export default function SetOperationsPage({seoData, sectionsContent, introConten
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={setTheoryNotationSheet}
+            current={'/set-theory/operations'}
           />,
         ]
     },

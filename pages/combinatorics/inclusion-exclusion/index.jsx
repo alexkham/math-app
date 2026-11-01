@@ -989,6 +989,7 @@ import inclusionExclusionDiagrams from '@/app/components/diagrams/set-theory/inc
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import renderFixedPoints from '@/app/utils/illustrations/combinatorics/permutations/fixedPoints'
 import renderVennCount from '@/app/utils/illustrations/combinatorics/counting/vennCount'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1337,6 +1338,27 @@ export async function getStaticProps(){
 
 
 // formulas-optimized: v1 | 2026-06-11 | 5 callouts (obj1, obj2, obj3 compact-form, obj4 canonical, obj6)
+// Concept introduction (section 1, "Two Sets") — template C, failure first.
+// Running instance: the section's 30 students, 18 French, 15 Spanish, 7 both;
+// adding the lists gives 33, more than the class. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box, formulas link, example box,
+// pitfall aside, three passages, the languages demo frame, its line and the
+// punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciListTable = ciTableOpen(['count', 'value', 'what it counts']) +
+  ciRow(['French list', '18', 'everyone taking French']) +
+  ciRow(['Spanish list', '15', 'everyone taking Spanish'], { shade: true }) +
+  ciRow(['18 + 15', '33', 'more than the 30 students in the class'], { color: '#a4243b', cols: [1, 2] }) +
+  ciRow(['on both lists', '7', 'counted once in 18 and again in 15'], { shade: true }) +
+  ciRow(['33 − 7', '26', 'each student taking a language, once'], { last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Two Sets`,
@@ -1691,6 +1713,13 @@ This page builds the principle from the two-set case to the general formula, the
 `,
 };
 
+// FAQ pass 2026-10-31: cut "Why do the signs alternate in the general
+// formula?" (restates the h2 "Why the Alternating Signs Work") and "How are
+// derangements counted using inclusion-exclusion?" (restates the h2
+// "Application: Counting Derangements"); kept the other two, renumbered. Added
+// stopping early (only in the cut-off fact box), the 2^n - 1 term count (under
+// "Structure of the Formula") and the onto-function count (the surjection
+// example and its fact box).
 const faqQuestions = {
   obj1: {
     question: "Why do you subtract the overlap when counting two sets?",
@@ -1698,19 +1727,24 @@ const faqQuestions = {
     sectionId: "1"
   },
   obj2: {
-    question: "Why do the signs alternate in the general formula?",
-    answer: "Because each correction overshoots and needs correcting in turn. Subtracting all the pairwise overlaps removes the triple overlaps too many times, so they are added back, which then overshoots at the next level. The pattern of adding odd-sized intersections and subtracting even-sized ones is what makes every item finish counted once.",
-    sectionId: "3"
-  },
-  obj3: {
     question: "When should you use the complementary form instead?",
     answer: "When the question asks how many items satisfy none of the conditions. Counting the total and subtracting everything that satisfies at least one is usually shorter than counting the exceptions directly. Problems phrased with none, no, or not any are the signal that this version fits better.",
     sectionId: "4"
   },
+  obj3: {
+    question: "What happens if you stop inclusion-exclusion early?",
+    answer: "You get a bound instead of the answer. Stopping after an odd level, such as the singles, can only overcount the union, and stopping after an even level, such as the pairs, can only undercount it. For the integers from 1 to 100 divisible by 2, 3 or 5, the singles give $103$, the singles and pairs give $71$, and only the full sum gives $74$. The error comes only from elements lying in more sets than the last level kept.",
+    sectionId: "3"
+  },
   obj4: {
-    question: "How are derangements counted using inclusion-exclusion?",
-    answer: "A derangement is an arrangement where nothing sits in its original position, so the conditions to exclude are the cases where at least one item does. Applying the principle across those conditions and alternating signs produces the derangement formula, which converges quickly toward a fixed fraction of all arrangements.",
-    sectionId: "5"
+    question: "How many terms does the inclusion-exclusion formula have?",
+    answer: "$2^n - 1$ for $n$ sets, one for each non-empty subset of the sets. Level $k$ has $\\binom{n}{k}$ terms, one per $k$-fold intersection, so three sets give $3 + 3 + 1 = 7$ terms and ten sets already give $1023$. The complementary form adds one more term, $|U|$, for $2^n$ in all.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "How many onto functions are there from a 4-element set to a 3-element set?",
+    answer: "$36$. Of the $3^4 = 81$ functions, inclusion-exclusion removes those that miss some element of the codomain: $81 - \\binom{3}{1} 2^4 + \\binom{3}{2} 1^4 - \\binom{3}{3} 0^4 = 81 - 48 + 3 - 0 = 36$. The general count is $\\sum_{j=0}^{k} (-1)^j \\binom{k}{j} (k-j)^n$. With $n = k$ it gives $k!$, the bijections, and with $n < k$ it gives $0$.",
+    sectionId: "6"
   }
 }
 
@@ -1797,6 +1831,10 @@ const schemas = {
     both: 7, total: 30, unit: 'students', neitherNote: 'take neither',
   };
 
+  const conceptIntroFigures = {
+    listTable: ciListTable,
+  };
+
   const demoUnits = {
     centreEmptied: demoUnitFrame({
       svg: inclusionExclusionDiagrams['centre-emptied'],
@@ -1833,6 +1871,7 @@ const schemas = {
          faqQuestions,
          schemas,
          demoUnits,
+         conceptIntroFigures,
           seoData: {
         title: "Inclusion-Exclusion Formula & Examples | Learn Math Class",
         description: "Inclusion-exclusion principle for counting unions of overlapping sets. Two-set, three-set, and general n-set formulas with derangement and surjection examples.",
@@ -1845,9 +1884,87 @@ const schemas = {
     }
    }
 
-export default function InclusionExclusionPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function InclusionExclusionPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `In a class of 30, 18 take French and 15 take Spanish. How many take at least one language? Adding the two lists seems the obvious way.`,
+        content: [
+          `Two class lists, two numbers: put them together and count.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Adding gives 33 — more students than the class has.`,
+        content: [
+          ciTable('listTable'),
+          `The $7$ students on both lists were counted twice. Taking them off once gives $26$, and the other $4$ students take neither language.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Adding the sizes counts every element of the overlap twice; one subtraction puts it right.`,
+        content: [
+          `Every element of $A \\cup B$ should be counted once on the left side. On the right, an element belonging to only $A$ is counted once (by $|A|$), an element belonging to only $B$ is counted once (by $|B|$), and an element in both is counted twice — once by $|A|$ and once by $|B|$. Subtracting $|A \\cap B|$ removes that extra count, restoring the correct total.`,
+          `Each number in the calculation describes a different group of students. The 18 and the 15 are full class lists, and the 7 students who take both languages appear on each of them. The 26 is the number of different names across the two lists, which is what taking at least one of the two languages means. The 4 students who take neither language appear on no list at all.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [inclusion-exclusion principle](!/combinatorics/definitions#inclusion_exclusion_principle) counts a union by adding the sizes of the sets and correcting for the overlaps; for two sets, $|A \\cup B| = |A| + |B| - |A \\cap B|$.`,
+        formula: [
+          `For two sets $A$ and $B$, the size of the union is`,
+          `@academic[formula_callout:Inclusion-Exclusion Principle (Two Sets)
+$$|A \\cup B| = |A| + |B| - |A \\cap B|.$$
+/combinatorics/formulas#inclusion-exclusion_principle_two_sets]@`,
+          `@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@`,
+          `The [set symbols](!/math-symbols/set-theory) in the formula read naturally: $\\cup$ is union, $\\cap$ is intersection, and $|A|$ is the number of elements in $A$.`,
+        ],
+        footer: `So the number of students taking at least one language is $18 + 15 - 7 = 26$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a counting rule: include every set, exclude what was counted too often.`,
+        content: [
+          `@academic[example:Example
+
+In a group of 30 students, 18 take French and 15 take Spanish, with 7 taking both. The number taking at least one of the two languages is
+
+$$18 + 15 - 7 = 26.$$
+
+The remaining 4 students take neither.]@`,
+          <div key={'unit-languages'} dangerouslySetInnerHTML={{ __html: demoUnits.languages }} />,
+          `The 4 outside both circles are 30 - 26: the complementary count, taken up again in the complementary form below.`,
+          `@academic[punchline:Adding the sizes counts the overlap twice; subtracting it once leaves every element counted exactly once.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Subtract the overlap once, not twice — and with three or more sets, the corrections keep alternating.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Subtracting the overlap twice
+Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages altogether: 19 is the number taking exactly one ($11 + 8$). The 7 are counted twice in $18 + 15$, so subtracting them once gives $26$.
+[Read more](!#pitfalls)]@`,
+          `With three sets, subtracting the pairwise overlaps takes the triple overlap away too often, so it has to be added back, as [three sets](!/combinatorics/inclusion-exclusion#2) shows.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers three sets, the general formula, the complementary form, counting derangements, and worked examples.`,
+      },
+    ],
+  }
 
   const genericSections=[
     // {
@@ -1863,10 +1980,7 @@ export default function InclusionExclusionPage({seoData, sectionsContent, introC
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-languages'} dangerouslySetInnerHTML={{ __html: demoUnits.languages }} />,
-          `The 4 outside both circles are 30 - 26: the complementary count, taken up again in the complementary form below.`,
-          `@academic[punchline:Adding the sizes counts the overlap twice; subtracting it once leaves every element counted exactly once.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

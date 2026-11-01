@@ -1130,6 +1130,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 
 
 export async function getStaticProps(){
@@ -2152,6 +2154,13 @@ How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so th
   // consequence, which is exponential-specific. Kept the Poisson link —
   // "Related Distributions" names no distribution — and led with the rate
   // versus scale convention, the analogue of geometric's trials/failures split.
+  // FAQ pass 2026-10-31: kept all four. Rewrote the Poisson answer: the count
+  // in a window of length t is Pois(λt), not Pois(λ), and its sectionId moved
+  // from 16 (Related Distributions renders empty) to 1, where the call-centre
+  // table shows the link. This page owns the Poisson/exponential question.
+  // Added the bus waiting-time paradox (fact box under Properties), the
+  // minimum of exponentials and the last of 100 bulbs (Special Cases, a
+  // sub-heading and a fact box; no h2 asks them).
   const faqQuestions = {
     obj1: {
       question: "Is the exponential parameter a rate or a mean?",
@@ -2160,8 +2169,8 @@ How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so th
     },
     obj2: {
       question: "What is the relationship between the exponential and Poisson distributions?",
-      answer: "They describe one process from two angles. If events arrive as a Poisson process with rate λ, then the count in a fixed window is [Pois(λ)](!/probability/distributions/discrete/poisson#15) and the gap between consecutive events is Exp(λ) — the same λ, unchanged. Count the events or time the wait: same phenomenon, different question.",
-      sectionId: "16"
+      answer: "They describe one process from two angles. If events arrive as a Poisson process with rate λ, the count in a window of length $t$ is [Poisson](!/probability/distributions/discrete/poisson#15) with mean $\\lambda t$, and the gap between consecutive events is Exp(λ), the same λ. The two meet in one event: the wait is longer than $t$ exactly when no event arrives in the first $t$, so $P(X > t) = e^{-\\lambda t}$, the Poisson chance of zero.",
+      sectionId: "1"
     },
     obj3: {
       question: "Does memorylessness mean a used component is as good as new?",
@@ -2172,6 +2181,21 @@ How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so th
       question: "What is the difference between the exponential density and its tail probability?",
       answer: "A single factor of λ. The density is f(x) = λe^(−λx); the survival probability is P(X > x) = e^(−λx), the bare exponential. Dropping or doubling that leading λ swaps a density for a probability mid-computation, and nothing in the expression flags it — only whether you are integrating or evaluating says which object you hold.",
       sectionId: "2"
+    },
+    obj5: {
+      question: "Why is the average wait for a random bus not half the average gap?",
+      answer: "Because random buses have no memory. When they arrive as a Poisson process 10 minutes apart on average, the wait from any moment is again exponential with mean 10 minutes, however long ago the last bus left. Half a gap would hold only if you landed in a typical gap, but long gaps cover more of the clock and catch more arrivals: the gap you land in averages 20 minutes. Buses exactly 10 minutes apart give a [uniform](!/probability/distributions/continuous/uniform#5) wait with mean 5.",
+      sectionId: "15"
+    },
+    obj6: {
+      question: "What is the minimum of independent exponential random variables?",
+      answer: "Another exponential, with the rates added: $\\min(X_1, X_2) \\sim \\operatorname{Exp}(\\lambda_1 + \\lambda_2)$ for independent $X_1 \\sim \\operatorname{Exp}(\\lambda_1)$ and $X_2 \\sim \\operatorname{Exp}(\\lambda_2)$. The minimum exceeds $t$ only if both do, and $e^{-\\lambda_1 t} \\cdot e^{-\\lambda_2 t} = e^{-(\\lambda_1 + \\lambda_2) t}$. So with $n$ identical parts of rate $\\lambda$, the first failure comes after only $\\frac{1}{n\\lambda}$ on average.",
+      sectionId: "14"
+    },
+    obj7: {
+      question: "How long until the last of 100 light bulbs burns out?",
+      answer: "About $5.19$ mean lifetimes, if the lifetimes are independent exponentials. With a mean of 1 year, the first of 100 bulbs fails after $\\frac{1}{100}$ year on average; by memorylessness the 99 survivors are then as good as new, so the next gap averages $\\frac{1}{99}$, and so on down to $1$ year for the last bulb alone. The total is $1 + \\frac{1}{2} + \\cdots + \\frac{1}{100} \\approx 5.19$ years.",
+      sectionId: "14"
     }
   }
 
@@ -2444,6 +2468,11 @@ export default function ExponentialDistributionPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/continuous/exponential'}
           />,
         ]
     },

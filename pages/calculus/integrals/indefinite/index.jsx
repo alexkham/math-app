@@ -16,6 +16,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
 
 
 export async function getStaticProps(){
@@ -282,6 +285,25 @@ const summaryTable = `
 // };
 
 // formulas-optimized: v1 | 2026-06-09 | 1 callout (obj2)
+// Concept introduction (section 2, "The Constant of Integration") —
+// template A, definition last. Running instance: the antiderivatives of 2x,
+// x² − 2, x² and x² + 3, one parabola shifted. Old obj2 text is kept in
+// sectionsContent.obj2, unused; its formula box, formulas link, fact aside
+// and five passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciFamilyTable = ciTableOpen(['function', 'derivative', 'slope at x = 1', 'value at x = 0']) +
+  ciRow(['x² − 2', '2x', '2', '−2']) +
+  ciRow(['x²', '2x', '2', '0'], { shade: true }) +
+  ciRow(['x² + 3', '2x', '2', '3']) +
+  ciRow(['x² + C', '2x', '2', 'C'], { shade: true, last: true, color: '#2563EB' }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/integrals/indefinite ───────────────────────────────────────
 
@@ -612,6 +634,11 @@ Finding antiderivatives is the central challenge. Unlike differentiation, which 
 // "What is an antiderivative?": the h2 answers it, so no page needs the
 // entry. Replaced with the theorem behind + C, the initial-condition
 // procedure, and the three notation traps.
+// FAQ pass 2026-10-31: kept all five. Added whether every antiderivative is
+// an accumulation function (the figure card under "Antiderivatives") and
+// ln x as the power rule's limit at n = -1 (the fact box under "The Constant
+// of Integration"). Left the separate constants of ln|x| + C to the special
+// page, whose 1/x answer already states them.
 const faqQuestions = {
   obj1: {
     question: "Why do all antiderivatives of a function differ by a constant?",
@@ -637,6 +664,16 @@ const faqQuestions = {
     question: "Why is an antiderivative written with a capital F?",
     answer: "It is a case convention that carries a claim: writing F for an antiderivative of f asserts F′ = f without saying so in words. The same pairing works for G and g, or H and h. It is what makes the Fundamental Theorem readable as F(b) − F(a) — the capital signals which function is the antiderivative.",
     sectionId: "3"
+  },
+  obj6: {
+    question: "Is every antiderivative of the form $\\int_a^x f(t)\\, dt$?",
+    answer: "No. Moving the starting point $a$ shifts the accumulation function by a constant, but not always by every constant. For $f(x) = 2x$, $\\int_a^x 2t\\, dt = x^2 - a^2$, so the starting point only reaches $x^2 + C$ with $C \\le 0$; $x^2 + 5$ is an antiderivative that no choice of $a$ produces. What always holds is that every antiderivative is one accumulation function plus a constant.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "How is $\\ln x$ connected to the power rule?",
+    answer: "It is the power rule's limit at $n = -1$. Choosing the constant so that $F(1) = 0$ turns $\\int x^n\\, dx$ into $\\frac{x^{n+1} - 1}{n+1}$, and as $n \\to -1$ this approaches $\\ln x$ for every $x > 0$. At $n = -0.999$ and $x = 2$ it gives about $0.6934$, against $\\ln 2 \\approx 0.6931$. Without the $-1$ that the constant supplies, $\\frac{x^{n+1}}{n+1}$ blows up instead.",
+    sectionId: "2"
   }
 }
 
@@ -729,6 +766,20 @@ const schemas = {
     points: [{ x: 1, y: 1 }, { x: 2, y: 4 }, { x: 1, y: 3 }, { x: 2, y: 6 }],
     notes: [{ x: 2.12, y: 2.4, text: '4 − 1 = 3', pos: 'e', color: 'f' }, { x: 1.45, y: 6.6, text: '6 − 3 = 3', pos: 'e', color: 'g' }],
     caption: 'Any antiderivative gives the same F(b) − F(a): the + C cancels' };
+  const fpCiFamily = { kind: 'pieces', svgTitle: 'x squared minus 2, x squared and x squared plus 3: the same parabola shifted, all with slope 2 at x = 1', xRange: [-2.2, 3.4], yRange: [-3, 8.5], xStep: 1, yStep: 1,
+    pieces: [
+      { fn: (x) => x * x + 3, from: -2.2, to: 2.1, ends: [null, null], color: 'r', label: { text: 'x² + 3', x: 2.1, y: 7.41, pos: 'e' } },
+      { fn: (x) => x * x, from: -2.2, to: 2.1, ends: [null, null], color: 'f', label: { text: 'x²', x: 2.1, y: 4.41, pos: 'e' } },
+      { fn: (x) => x * x - 2, from: -2.2, to: 2.1, ends: [null, null], color: 'g', label: { text: 'x² − 2', x: 2.1, y: 2.41, pos: 'e' } },
+    ],
+    points: [{ x: 1, y: 4 }, { x: 1, y: 1 }, { x: 1, y: -1 }],
+    notes: [{ x: 1.15, y: -2.2, text: 'at x = 1 every curve has slope 2', pos: 'e' }],
+    caption: 'One parabola, shifted up and down: all have derivative 2x' };
+  const conceptIntroFigures = {
+    familyTable: ciFamilyTable,
+    family: renderFunctionPlotV4(fpCiFamily),
+  };
+
   const demoUnits = {
     anti: demoUnitFrame({
       svg: functionFTCDiagrams.quadratic,
@@ -747,6 +798,7 @@ const schemas = {
   return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -764,9 +816,78 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Differentiation turns x² into 2x. Going backwards, from 2x to the function it came from, has more than one answer.`,
+        content: [
+          `$x^2$, $x^2 + 5$ and $x^2 - 17$ all have derivative $2x$, as the previous section showed. So the question "which function has derivative $2x$?" is answered not by one function but by a whole family.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The family is one parabola slid up and down: at every x, all its members have the same slope.`,
+        content: [
+          ciTable('familyTable'),
+        ],
+        visual: ciSvg('family'),
+      },
+      {
+        id: 'pattern',
+        lead: `One answer plus a free constant describes the whole family.`,
+        content: [
+          `If $F(x)$ is one antiderivative of $f(x)$, then every antiderivative has the form:`,
+          `$$F(x) + C$$`,
+          `where $C$ is an arbitrary constant. This follows from a basic fact: if two functions have the same derivative on an interval, they differ by a constant.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [indefinite integral](!/calculus/definitions#indefinite_integral) of $f$, written $\\int f(x)\\, dx$, is the whole family of its [antiderivatives](!/calculus/definitions#antiderivative): $F(x) + C$, where $F'(x) = f(x)$ and $C$ is any constant.`,
+        formula: [
+          `@academic[formula_callout:Antiderivative Family
+$$\\int f(x)\\, dx = F(x) + C \\quad \\text{where } F'(x) = f(x)$$
+/calculus/formulas#antiderivative_family]@`,
+          `@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@`,
+        ],
+        footer: `So $\\int 2x\\, dx = x^2 + C$.`,
+      },
+      {
+        id: 'kind',
+        lead: `An indefinite integral is a family of functions — not a single function, and not a number.`,
+        content: [
+          `The "$+ C$" in indefinite integrals is not optional notation—it represents the complete answer. Omitting it gives only one member of the family when infinitely many exist.`,
+          `A definite integral, by contrast, is a single number; there the $+ C$ cancels, as [connection to definite integrals](!/calculus/integrals/indefinite#7) shows.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `To single out one member of the family, one more fact is needed: the function's value at some point.`,
+        content: [
+          `Initial conditions pin down $C$. If you know that $F(0) = 3$, for instance, you can solve for the specific constant that satisfies this requirement.`,
+          `One condition can also fix $C$ for a whole family of integrands at once. For $f(x) = x^n$ with $n \\neq -1$, the condition $F(1) = 0$ gives $C = -\\frac{1}{n+1}$ and the antiderivative $\\frac{x^{n+1} - 1}{n+1}$. At $n = -1$ the power rule itself breaks down, since its denominator $n + 1$ is $0$.`,
+          `@academic[fact,aside:true,width:35%:The power rule's limit is $\\ln x$
+As $n$ approaches $-1$, the antiderivative $\\frac{x^{n+1} - 1}{n+1}$ approaches $\\ln x$ for every $x > 0$, the very function the power rule cannot give at $n = -1$. The constant does the work: at $n = -0.999$ and $x = 2$ it gives $0.6934$, against $\\ln 2 \\approx 0.6931$, while $\\frac{x^{n+1}}{n+1}$ alone blows up.]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the basic antiderivative formulas, linearity, verifying antiderivatives, and the connection to definite integrals.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -784,7 +905,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -803,6 +924,11 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={integralsNotationSheet}
+            current={'/calculus/integrals/indefinite'}
           />,
         ]
     },

@@ -599,6 +599,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderJointRectangle from '@/app/utils/illustrations/probability/areas/jointRectangle'
 import waffleChartDiagrams from '@/app/components/probability/conditional-probability-demo/waffleChartDiagrams'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -756,6 +759,9 @@ export async function getStaticProps(){
   // probability, and the one confusion no heading serves. Added the
   // collection-level traps from the notation section. Uncorrelated versus
   // independent defers to /probability/covariance, which owns correlation.
+  // FAQ pass 2026-10-31: kept all five. Added self-independence (fact box
+  // under the formal definition) and two events from one die roll (fact box
+  // under How Independence Fails); no heading asks either.
   const faqQuestions = {
     obj1: {
       question: "What's the difference between independent and disjoint events?",
@@ -781,6 +787,16 @@ export async function getStaticProps(){
       question: "What does i.i.d. mean?",
       answer: "Independent and identically distributed — one tag making two separate claims. Independent: the whole collection is mutually independent, not merely pairwise. Identically distributed: every variable follows the same distribution. Breaking either half breaks the abbreviation, and both together are what license results such as the [law of large numbers](!/probability/large-numbers-law).",
       sectionId: "notation"
+    },
+    obj6: {
+      question: "Can an event be independent of itself?",
+      answer: "Only if its probability is 0 or 1. Taking $B = A$, the product rule asks for $P(A \\cap A) = P(A)^2$, and since $A \\cap A = A$ this reads $P(A) = P(A)^2$, whose only solutions are 0 and 1. In words, learning that $A$ occurred makes $A$ certain, so the information changes nothing only when $A$ was already certain or impossible.",
+      sectionId: "definition"
+    },
+    obj7: {
+      question: "Can two events from the same roll of a die be independent?",
+      answer: "Yes. Coming from one roll is a reason to check, not a verdict. On a fair die, “even” has probability $\\frac{1}{2}$ and “at most 2” has $\\frac{1}{3}$; both happen only on a 2, with probability $\\frac{1}{6} = \\frac{1}{2} \\cdot \\frac{1}{3}$, so they are independent. Change the second event to “at most 3” and the product becomes $\\frac{1}{4}$, while both still happen only on a 2, so the events are dependent.",
+      sectionId: "patterns"
     }
   }
 
@@ -851,6 +867,25 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section "meaning", "What Independence Means for
+  // Events") — template A, definition last. Running instance: one card from a
+  // deck; how P(ace) changes after learning its suit, colour or that it is a
+  // face card. Old meaning text is kept in sectionsContent.meaning, unused;
+  // its three passages are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciCardTable = ciTableOpen(['what you learn about the card', 'P(ace) after learning it']) +
+    ciRow(['nothing yet', '4/52 = 1/13']) +
+    ciRow(['it is a heart', '1/13 — unchanged'], { shade: true, color: '#2563EB', cols: [1] }) +
+    ciRow(['it is red', '2/26 = 1/13 — unchanged'], { color: '#2563EB', cols: [1] }) +
+    ciRow(['it is a face card', '0 — changed'], { shade: true, last: true, color: '#a4243b', cols: [1] }) +
+    '</tbody></table>'
 
   const sectionsContent={
     obj0: {
@@ -1168,6 +1203,10 @@ The rest of the page develops what independence means, how it is expressed forma
     pA: 0.3, pBgivenA: 0.9, pBgivenNotA: 0.2, labelA: 'rain', labelNotA: 'no rain',
     notes: [{ text: 'B: the ground is wet' }, { text: '' }, { text: 'P(wet | rain) = 0.9', color: 'f' }, { text: 'P(wet | no rain) = 0.2', color: 'r' }, { text: '' }, { text: 'P(wet) = 0.27 + 0.14' }, { text: '= 0.41', indent: true }, { text: 'P(rain ∩ wet) = 0.27', color: 'f' }, { text: '≠ 0.3 · 0.41 ≈ 0.12', color: 'f', indent: true }],
     caption: 'Dependent: the wet share changes from column to column' };
+  const conceptIntroFigures = {
+    cardTable: ciCardTable,
+  };
+
   const demoUnits = {
     u_visual_0: demoUnitFrame({
       svg: waffleChartDiagrams.allEqual,
@@ -1198,6 +1237,7 @@ The rest of the page develops what independence means, how it is expressed forma
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       examplesTable,
@@ -1224,10 +1264,66 @@ export default function IndependencePage({
   mistakesTable,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "meaning" concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Draw a card, and someone tells you one fact about it. Does that change the chance that it is an ace?`,
+        content: [
+          `Before introducing any formal definition, it helps to understand the basic idea. Two events do not influence each other when the occurrence of one provides no information about the other. Learning that one situation happened does not change how we think about the likelihood of the second.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Learning the suit or the colour leaves the chance at 1/13; learning that it is a face card drops it to 0.`,
+        content: [
+          ciTable('cardTable'),
+          `A heart is as likely to be an ace as any card: $1$ ace among $13$ hearts. Face cards contain no aces at all.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Independence is the absence of an update.`,
+        content: [
+          `This is an information-based view: independence is about the absence of update. If seeing one event occur leaves our expectations about the other exactly as they were before, then the two events behave independently.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Two events are [independent](!/probability/definitions#independent_events) when learning that one of them occurred leaves the probability of the other unchanged.`,
+        footer: `So "ace" and "heart" are independent events, while "ace" and "face card" are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `Independence is a statement about information, not about physical separation.`,
+        content: [
+          `The suit and the rank in the second row belong to the same card, yet neither tells anything about the other.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Independent is not the same as mutually exclusive.`,
+        content: [
+          `"Ace" and "face card" can never happen together, and that is exactly why they are dependent: learning one rules the other out.`,
+          `This perspective captures the core intuition and prepares the ground for the formal definition that follows.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the formal definition, notation, the independence formula, visual representations, examples, how independence fails, conditional independence, problem solving, common mistakes and connections to other concepts.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1244,7 +1340,7 @@ export default function IndependencePage({
         title:sectionsContent.meaning.title,
         link:'',
         content:[
-            sectionsContent.meaning.content,
+          <ConceptIntro key={'meaning-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1271,6 +1367,11 @@ export default function IndependencePage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probEventsNotationSheet}
+            current={'/probability/independence'}
           />,
         ]
     },

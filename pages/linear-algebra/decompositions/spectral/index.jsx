@@ -1772,6 +1772,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spectralDiagrams from '@/app/components/linear-algebra copy/matrix/spectralDiagrams'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
 
 
 
@@ -2109,6 +2112,24 @@ const keyWords = [
 //   their matching data-file entries (Spectral Theorem, Spectral Decomposition) target
 //   /linear-algebra/eigen/diagonalization#7, not this page.
 
+// Concept introduction (section 1, "What the Spectral Decomposition Is") —
+// template D, comparison. Running instance: the non-symmetric B with rows
+// (1, 1), (0, 2), eigenvectors at 45°, against the symmetric A with rows
+// (2, 1), (1, 2), eigenvectors at 90°. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box, fact aside and three
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciEigTable = ciTableOpen(['matrix (rows)', 'symmetric?', 'eigenvalues', 'eigenvectors', 'angle between them']) +
+  ciRow(['B = (1, 1), (0, 2)', 'no', '1, 2', '(1, 0), (1, 1)', '45°']) +
+  ciRow(['A = (2, 1), (1, 2)', 'yes', '3, 1', '(1, 1), (1, −1)', '90°'], { shade: true, last: true, color: '#2563EB', cols: [4] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `What the Spectral Decomposition Is`,
@@ -2400,6 +2421,11 @@ How to check: test a vector whose components have opposite signs, or, for a $2 \
   content: `The spectral decomposition factors a real symmetric matrix as QDQᵀ — an orthogonal matrix of eigenvectors times a diagonal matrix of eigenvalues times the transpose. In outer product form, this becomes a sum of rank-one projections weighted by eigenvalues. The decomposition is the factorization form of the spectral theorem and the foundation of principal component analysis, quadratic form classification, and positive definiteness testing.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the
+// repeated-eigenvalue case of orthogonal eigenvectors (pitfall box under
+// "The Spectral Theorem"), the symmetric square root (summary card text
+// only) and the origin of the name (fact box under "What the Spectral
+// Decomposition Is"); no heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Why is it written $QDQ^{T}$ rather than $QDQ^{-1}$?",
@@ -2415,6 +2441,21 @@ const faqQuestions = {
     question: "Are singular values the same as eigenvalues?",
     answer: "They coincide only for symmetric positive semi-definite matrices and for nothing else. Singular values are never negative, so where an eigenvalue is negative you get $\\sigma_i = |\\lambda_i|$ and the discarded sign is stored by negating the matching column elsewhere in the factorisation. The absolute value is doing bookkeeping, not measurement.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Are all eigenvectors of a symmetric matrix orthogonal?",
+    answer: "No, only eigenvectors belonging to different eigenvalues are orthogonal automatically. Inside the eigenspace of a repeated eigenvalue every nonzero vector is an eigenvector, so the basis row reduction gives can be slanted: for the $3 \\times 3$ matrix with $2$ on the diagonal and $1$ elsewhere, $(1, -1, 0)$ and $(1, 0, -1)$ both belong to $\\lambda = 1$ and have dot product $1$. Gram-Schmidt inside that eigenspace makes them orthogonal.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "How do you find the square root of a symmetric matrix?",
+    answer: "Take the square root of each eigenvalue: $A^{1/2} = QD^{1/2}Q^T$. Squaring it gives $QD^{1/2}Q^TQD^{1/2}Q^T = QDQ^T = A$, since $Q^TQ = I$. This needs every eigenvalue to be non-negative, so a symmetric square root exists exactly when $A$ is positive semi-definite, and it is then the only positive semi-definite matrix whose square is $A$. It is the root used to whiten a covariance matrix.",
+    sectionId: "10"
+  },
+  obj6: {
+    question: "Why is it called the spectral decomposition?",
+    answer: "Because the set of eigenvalues is called the spectrum, a word mathematicians borrowed from light by the early 1900s. The name later turned out to be literal: in 1926 Schrödinger found the energy levels of hydrogen as the eigenvalues of a symmetric operator, and the gaps between those levels give the frequencies of its spectral lines. Decomposing a matrix by its eigenvalues is decomposing it by its spectrum.",
+    sectionId: "1"
   }
 }
 
@@ -2499,6 +2540,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    eigTable: ciEigTable,
+  };
+
   const demoUnits = {
     outer: demoUnitFrame({
       svg: spectralDiagrams.rankone,
@@ -2542,6 +2587,7 @@ const schemas = {
   props:{
     spectralNest,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     definitenessClasses,
@@ -2569,10 +2615,71 @@ export default function SpectralDecompositionPage({spectralNest,
   definitenessClasses,
   spectralReadings,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A diagonalizable matrix comes with a set of eigenvector directions — and usually they meet at awkward angles.`,
+        content: [
+          `Diagonalizing as $A = PDP^{-1}$ puts those directions into the columns of $P$, and then needs the inverse $P^{-1}$, which takes real work to compute.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `Side by side, the non-symmetric B has eigenvectors 45° apart; the symmetric A has them at exactly 90°.`,
+        content: [
+          ciTable('eigTable'),
+          `$A$ equals its own transpose; $B$ does not. That single difference is what separates a slanted pair of eigenvectors from a perpendicular one.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Symmetry is what makes the eigenvectors perpendicular — always, for every real symmetric matrix.`,
+        content: [
+          `Scaled to length $1$, the eigenvectors $\\frac{1}{\\sqrt{2}}(1, 1)$ and $\\frac{1}{\\sqrt{2}}(1, -1)$ of $A$ form an orthonormal pair. A matrix $Q$ with these columns satisfies $Q^{-1} = Q^T$, so the hard inverse is replaced by a transpose.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [spectral decomposition](!/linear-algebra/definitions#spectral_decomposition) of a real symmetric matrix writes it as $A = QDQ^T$, with $Q$ orthogonal, its columns orthonormal eigenvectors, and $D$ diagonal, holding the eigenvalues.`,
+        formula: [
+          `Every real [symmetric](!/linear-algebra/matrix/types) [matrix](!/linear-algebra/matrix) $A$ factors as`,
+          `@academic[formula_callout:What the Spectral Decomposition Is
+$$A = QDQ^T$$]@`,
+          `where $Q$ is [orthogonal](!/linear-algebra/matrix/types) ($Q^TQ = QQ^T = I$) and $D = \\text{diag}(\\lambda_1, \\dots, \\lambda_n)$ is the diagonal matrix of [eigenvalues](!/linear-algebra/eigen). The columns of $Q$ are orthonormal eigenvectors: $Q = [\\mathbf{q}_1 \\; \\mathbf{q}_2 \\; \\cdots \\; \\mathbf{q}_n]$ with $A\\mathbf{q}_i = \\lambda_i\\mathbf{q}_i$ and $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.`,
+        ],
+        footer: `So for $A$ with rows $(2, 1)$, $(1, 2)$: $D = \\text{diag}(3, 1)$, and $Q$ has columns $\\frac{1}{\\sqrt{2}}(1, 1)$ and $\\frac{1}{\\sqrt{2}}(1, -1)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The spectral decomposition is diagonalization with a bonus that symmetry guarantees.`,
+        content: [
+          `This is the [diagonalization](!/linear-algebra/eigen/diagonalization) $A = PDP^{-1}$ specialized to symmetric matrices, where the crucial bonus is that $P$ can be chosen orthogonal — so $P^{-1} = P^T$. The orthogonality of $Q$ is not a convenience; it is a structural guarantee that holds for every real symmetric matrix, regardless of eigenvalue multiplicities.`,
+          `@academic[fact,aside:true,width:35%:The spectrum turned out to be literal
+Mathematicians were calling the set of eigenvalues a spectrum by the early 1900s, a word borrowed from light. In 1926 Schrödinger found the energy levels of hydrogen as the eigenvalues of a symmetric operator, and the gaps between them give the frequencies of its spectral lines.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The guarantee holds for symmetric matrices only.`,
+        content: `$B$ with rows $(1, 1)$, $(0, 2)$ can be diagonalized, but its eigenvectors are not perpendicular, so no orthogonal $Q$ works for it. Why symmetry is enough is the content of [the spectral theorem](!/linear-algebra/decompositions/spectral#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the spectral theorem, the outer product form, computing the decomposition, the properties of the factors, quadratic forms, principal component analysis, and the comparison with eigendecomposition and SVD.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2580,7 +2687,7 @@ export default function SpectralDecompositionPage({spectralNest,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2599,6 +2706,11 @@ export default function SpectralDecompositionPage({spectralNest,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDecompNotationSheet}
+            current={'/linear-algebra/decompositions/spectral'}
           />,
         ]
     },

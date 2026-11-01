@@ -19,6 +19,8 @@ import functionOptimizationDiagrams from '@/app/components/functions/optimizatio
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 
 
 export async function getStaticProps(){
@@ -894,6 +896,11 @@ This page develops the full framework: from the derivative at a single point thr
 // rates. Replaced with six results the headings hide: the normal line, the
 // two "candidate is not a verdict" traps, the independence of direction and
 // bending, the choice between the tests, and the related-rates timing rule.
+// FAQ pass 2026-10-31: kept all six. Added -1/x, positive derivative yet not
+// increasing (pitfall box under "Increasing and Decreasing Functions"), the
+// minimum the first derivative test cannot read (fact box under "The First
+// Derivative Test"), and the bell curve's inflection points at one standard
+// deviation (fact box under "Inflection Points").
 const faqQuestions = {
   obj1: {
     question: "How do you find the equation of the normal line?",
@@ -924,6 +931,21 @@ const faqQuestions = {
     question: "Why can't you substitute values before differentiating in a related rates problem?",
     answer: "Because substituting a value first turns a variable into a constant, and constants have zero rate of change — the term you needed disappears from the differentiated equation. Set up a relation that holds at every instant, differentiate it with respect to t using [implicit differentiation](!/calculus/derivatives/techniques), and only then plug in the values true at that moment.",
     sectionId: "11"
+  },
+  obj7: {
+    question: "Can a function have a positive derivative everywhere and not be increasing?",
+    answer: "Yes, if its domain has a break. For $f(x) = -\\frac{1}{x}$, $f'(x) = \\frac{1}{x^2} > 0$ for every $x \\neq 0$, yet $-1 < 1$ while $f(-1) = 1 > f(1) = -1$. The sign test speaks about one open interval at a time, so $f$ is increasing on $(-\\infty, 0)$ and on $(0, \\infty)$ separately, but not on their union.",
+    sectionId: "3"
+  },
+  obj8: {
+    question: "Can the first derivative test fail?",
+    answer: "Yes, when $f'$ has no single sign on either side of the point. For $f(x) = x^2\\left(2 + \\sin\\frac{1}{x}\\right)$ with $f(0) = 0$, the point $0$ is a strict minimum, since $f(x) \\geq x^2$. Yet $f'(x) = 2x\\left(2 + \\sin\\frac{1}{x}\\right) - \\cos\\frac{1}{x}$ takes both signs on every interval beside $0$, so the test has no sign to read. When the test does give a verdict, the verdict is right.",
+    sectionId: "5"
+  },
+  obj9: {
+    question: "Where are the inflection points of the bell curve?",
+    answer: "One standard deviation from the center. For the standard bell curve $f(x) = e^{-x^2/2}$, the second derivative is $f''(x) = (x^2 - 1)e^{-x^2/2}$, which changes sign at $x = \\pm 1$. Between them the curve is a cap, outside them a cup. So $\\sigma$ can be read off a drawn bell curve as the distance from the peak to the point where the bending changes.",
+    sectionId: "8"
   }
 }
 
@@ -1190,6 +1212,11 @@ export default function PageTemplate({cubicDirectionProfile,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={derivativesNotationSheet}
+            current={'/calculus/derivatives/graph-analysis'}
           />,
         ]
     },

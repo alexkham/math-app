@@ -14,6 +14,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -280,6 +281,25 @@ export async function getStaticProps(){
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "What is an Exponential Equation") —
+// template D, comparison. Running instance: x³ = 8 (x = 2) against 2ˣ = 8
+// (x = 3). Old obj1 text is kept in sectionsContent.obj1, unused; its fact
+// aside and three paragraphs are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCompareTable = ciTableOpen(['', 'x³ = 8', '2ˣ = 8']) +
+  ciRow(['where x stands', 'in the base', 'in the exponent'], { color: '#2563EB', cols: [1, 2] }) +
+  ciRow(['question asked', 'which number, cubed, gives 8?', 'how many 2s multiply to 8?'], { shade: true }) +
+  ciRow(['trying values', '1 → 1, 2 → 8', '1 → 2, 2 → 4, 3 → 8']) +
+  ciRow(['answer', 'x = 2', 'x = 3'], { shade: true }) +
+  ciRow(['tool that solves it', 'a cube root', 'matching bases, or logarithms'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -623,9 +643,13 @@ How to check: substitute the negative value. $\\left(-\\frac{1}{3}\\right)^{-2} 
   const introContent = {
   id: "intro",
   title: "Solving for the Exponent",
-  content: `In a [polynomial](!/algebra/polynomials) equation like $x^2 = 9$, the unknown is the base and the exponent is fixed. In an exponential equation, the roles reverse — the base is known and the unknown sits in the exponent. The equation $2^x = 8$ asks not "what number squared gives $9$?" but "how many times must $2$ be multiplied by itself to reach $8$?" That shift demands a different set of solving techniques, all grounded in the [laws of exponents](!/algebra/powers/exponent-rules/).`
+  content: `In a [polynomial](!/algebra/polynomials) equation like $x^2 = 9$, the unknown is the base and the exponent is fixed. In an exponential equation, the roles reverse — the base is known and the unknown sits in the exponent. The equation $2^x = 8$ asks not "what number squared gives $9$?" but "how many factors of $2$ multiply to make $8$?" That shift demands a different set of solving techniques, all grounded in the [laws of exponents](!/algebra/powers/exponent-rules/).`
 }
 
+// FAQ pass 2026-10-31: kept all four questions. Added the three solutions of
+// 2^x = x^2 (fact box under "What is an Exponential Equation"), the single
+// solution of 3^x + 4^x = 5^x (fact box under "Method: Matching Bases") and
+// merging 5 * 3^x into 15^x (coefficient pitfall).
 const faqQuestions = {
   obj1: {
     question: "Which solving method should you try first?",
@@ -646,6 +670,21 @@ const faqQuestions = {
     question: "Why can correct algebra produce answers that do not work?",
     answer: "Two steps manufacture false roots. Squaring is one: $x^{1/2} = -3$ has no solution because a square root is never negative, yet squaring both sides yields $x = 9$. Substituting $t = a^x$ is the other, since a quadratic in $t$ can return a negative root even though $a^x$ is always positive. Test every candidate in the original equation.",
     sectionId: "10"
+  },
+  obj5: {
+    question: "How many solutions does $2^x = x^2$ have?",
+    answer: "Three real ones: $x = 2$, $x = 4$, and $x \\approx -0.767$. The first two are easy to check, since $2^4 = 16 = 4^2$. The third lies on the negative side, where $x^2$ falls toward $0$ while $2^x$ rises from $0$, so the curves cross exactly once there. With $x$ in both the exponent and the base, neither matching bases nor logarithms can isolate that third value; it is found numerically.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Does $3^x + 4^x = 5^x$ have any solution besides $x = 2$?",
+    answer: "No. $x = 2$ works because $9 + 16 = 25$, the $3$-$4$-$5$ right triangle. Dividing both sides by $5^x$ gives $\\left(\\frac{3}{5}\\right)^x + \\left(\\frac{4}{5}\\right)^x = 1$. Both bases on the left are below $1$, so the sum is strictly decreasing and meets the level $1$ only once. That makes $x = 2$ the only real solution.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Can you combine $5 \\cdot 3^x$ into $15^x$?",
+    answer: "No. The exponent belongs to the $3$ alone, so $5 \\cdot 3^x$ means $5 \\cdot (3^x)$, while $15^x = 5^x \\cdot 3^x$. At $x = 2$ the first is $45$ and the second $225$. Solving $5 \\cdot 3^x = 245$ the merged way gives $x \\approx 2.03$, which fails the check; dividing out the $5$ first gives $3^x = 49$ and $x \\approx 3.54$.",
+    sectionId: "3"
   }
 }
 
@@ -733,6 +772,19 @@ const schemas = {
     notes: [{ x: -1.9, y: 12.4, text: '2ˣ only rises, so it meets each level once', pos: 'e', color: 'r' }],
     caption: '2ˣ = 2³ forces x = 3: equal powers of one base have equal exponents' };
 
+  const fpCiTwoEquations = { kind: 'pieces', svgTitle: 'y = x cubed meets y = 8 at x = 2; y = 2 to the x meets y = 8 at x = 3', xRange: [-0.5, 4], yRange: [-1, 10], xStep: 1, yStep: 2,
+    pieces: [
+      { fn: () => 8, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[-0.5, 4]], label: { text: 'y = 8', x: 3.7, y: 8, pos: 'n' } },
+      { fn: (x) => x ** 3, from: -0.5, to: 2.15, ends: [null, null], color: 'g', label: { text: 'y = x³', x: 1.75, y: 5.36, pos: 'w' } },
+      { fn: (x) => 2 ** x, from: -0.5, to: 3.3, ends: [null, null], color: 'f', label: { text: 'y = 2ˣ', x: 2.5, y: 5.66, pos: 'se' } },
+    ],
+    points: [{ x: 2, y: 8, label: 'x = 2', pos: 'nw' }, { x: 3, y: 8, label: 'x = 3', pos: 'n' }],
+    caption: 'Same level 8, different unknown: x³ reaches it at 2, 2ˣ at 3' };
+  const conceptIntroFigures = {
+    compareTable: ciCompareTable,
+    twoGraphs: renderFunctionPlotV4(fpCiTwoEquations),
+  };
+
   const demoUnits = {
     matchBases: demoUnitFrame({
       svg: renderFunctionPlotV4(fpMatchBases),
@@ -811,6 +863,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Exponential Equations: Solve for the Exponent | Learn Math Class",
       description: "Learn to solve exponential equations: matching bases, using exponent laws, substitution for quadratic forms, rational and negative exponent cases, and checking for extraneous solutions.",
@@ -823,9 +876,70 @@ return {
    }
 
 // export default function ExponentialEquationsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialEquationsPage({expEquationTree, commonBaseBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ExponentialEquationsPage({expEquationTree, commonBaseBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Two equations look almost the same: x³ = 8 and 2ˣ = 8.`,
+        content: [
+          `Both use the numbers $2$, $3$ and $8$, and both ask for $x$. The only difference is where $x$ stands — in the base, or up in the exponent.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `Side by side they ask different questions and have different answers.`,
+        content: [
+          ciTable('compareTable'),
+        ],
+        visual: ciSvg('twoGraphs'),
+      },
+      {
+        id: 'diagnosis',
+        lead: `Where the unknown sits decides the question being asked — and which tools can answer it.`,
+        content: [
+          `What makes these equations distinct from polynomial equations is the position of the variable. In $x^3 = 8$, the variable is the base and the exponent is a fixed number — this is a polynomial equation, solved by taking a [root](!/algebra/powers/rational-exponents). In $2^x = 8$, the base is fixed and the exponent is the variable — this is an exponential equation, and roots alone will not solve it.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [exponential equation](!/algebra/definitions#exponential_equation) is an equation in which the variable appears in an exponent.`,
+        formula: [
+          `An exponential equation is any equation in which the variable appears in an exponent. The equation $2^x = 16$ is exponential — the unknown $x$ controls how many times the base is applied. The equation $3^{2x-1} = 27$ is exponential. The equation $5 \\cdot 4^x = 320$ is exponential.`,
+        ],
+        footer: `So $2^x = 8$ is an exponential equation; $x^3 = 8$ is a polynomial equation.`,
+      },
+      {
+        id: 'kind',
+        lead: `Exponential equations form a family of their own, with their own solving methods.`,
+        content: [
+          `The distinction matters because the techniques are entirely different. Polynomial equations are solved by [factoring](!/algebra/polynomials/factoring), applying the quadratic formula, or extracting roots. Exponential equations require rewriting expressions using the [laws of exponents](!/algebra/powers/exponent-rules/), matching bases, or — when those approaches fail — **logarithms**.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `When x stands in both places at once, neither family's methods apply cleanly.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:Three solutions to $2^x = x^2$
+With $x$ in the exponent on one side and in the base on the other, this equation is neither kind. It has three real solutions: $x = 2$, $x = 4$, and $x \\approx -0.767$, where the falling $x^2$ meets the rising $2^x$. Neither matching bases nor logarithms can isolate the third one.]@`,
+          `The shapes that the standard methods do handle are listed in [forms of exponential equations](!/algebra/powers/exponential-equations#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the forms of exponential equations, preparing them, the solving methods — matching bases, exponent laws, logarithms, substitution — rational and negative exponents, and checking solutions.`,
+      },
+    ],
+  }
     
   const genericSections=[
       {
@@ -841,7 +955,7 @@ export default function ExponentialEquationsPage({expEquationTree, commonBaseBef
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

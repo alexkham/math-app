@@ -581,7 +581,7 @@ $$\\frac{d}{dx}[\\operatorname{csch} x] = -\\operatorname{csch} x \\coth x$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-The critical difference from trigonometric derivatives: $(\\cosh x)' = \\sinh x$ carries no negative sign, whereas $(\\cos x)' = -\\sin x$ does. This single sign difference propagates through all six formulas.
+The critical difference from trigonometric derivatives: $(\\cosh x)' = \\sinh x$ carries no negative sign, whereas $(\\cos x)' = -\\sin x$ does. The same sign difference shows up in $(\\operatorname{sech} x)' = -\\operatorname{sech} x \\tanh x$, against $(\\sec x)' = \\sec x \\tan x$; $\\sinh$, $\\tanh$, $\\coth$ and $\\operatorname{csch}$ keep the trigonometric signs.
 
 @academic[pitfall,aside:true,width:35%:Copying the sign of sec x
 Taking over $(\\sec x)' = \\sec x \\tan x$ gives $(\\operatorname{sech} x)' = \\operatorname{sech} x \\tanh x$, positive for $x > 0$. But $\\operatorname{sech} x = \\frac{1}{\\cosh x}$ falls there as $\\cosh x$ grows; the derivative is $-\\operatorname{sech} x \\tanh x$.
@@ -764,6 +764,12 @@ Most of these derivatives are established through [implicit differentiation or t
 // the piecewise-boundary one, now owned by the differentiability page. Kept
 // and extended arcsin and arctan; added the |x| in arcsec, the cosh sign
 // contrast, and arcsinh so the inverse-hyperbolic section is represented.
+// FAQ pass 2026-10-31: rewrote the last sentence of obj4 — "propagates
+// through all six" was loose: only cosh and sech change sign against cos and
+// sec; the other four keep the trigonometric signs. Added the chain rule on
+// arcsin(2x) (pitfall box), the arctangent series for pi (fact box) and
+// arctanh in the Mercator map (fact box). Pattern and piecewise questions
+// stay cut.
 const faqQuestions = {
   obj1: {
     question: "What is the derivative of arcsin x?",
@@ -782,12 +788,27 @@ const faqQuestions = {
   },
   obj4: {
     question: "Why is the derivative of cosh x positive when the derivative of cos x is negative?",
-    answer: "Because the hyperbolic functions are built from e^x and e^(−x) rather than from rotation. Differentiating cosh x = (e^x + e^(−x))/2 gives (e^x − e^(−x))/2, which is sinh x — no sign flip appears anywhere. The trigonometric minus sign comes from the circle; the hyperbola produces none. That one difference propagates through all six hyperbolic formulas.",
+    answer: "Because the hyperbolic functions are built from e^x and e^(−x) rather than from rotation. Differentiating cosh x = (e^x + e^(−x))/2 gives (e^x − e^(−x))/2, which is sinh x — no sign flip appears anywhere. The trigonometric minus sign comes from the circle; the hyperbola produces none. The same difference shows up in sech x, whose derivative −sech x tanh x carries a minus sign where sec x tan x does not; sinh, tanh, coth and csch keep the trigonometric signs.",
     sectionId: "5"
   },
   obj5: {
     question: "What is the derivative of arcsinh x?",
     answer: "The derivative of arcsinh x is 1/√(x² + 1), valid for all real x. Compare arcsin, whose derivative is 1/√(1 − x²): the signs inside the radical flip, which is the general relationship between inverse trigonometric and inverse hyperbolic derivatives. It follows from the logarithmic form arcsinh x = ln(x + √(x² + 1)) differentiated by the chain rule.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "What is the derivative of arcsin(2x)?",
+    answer: "It is $\\frac{2}{\\sqrt{1 - 4x^2}}$, for $|x| < \\frac{1}{2}$. Put the inner $2x$ into the arcsine formula and then multiply by its derivative, $2$: with $u = 2x$, $\\frac{d}{dx}[\\arcsin u] = \\frac{u'}{\\sqrt{1 - u^2}}$. Leaving out the factor $2$ gives half the true slope. At $x = 0.25$ the slope is $\\frac{2}{\\sqrt{0.75}} \\approx 2.309$, not $1.155$. Every formula on this page works this way.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "How does the derivative of arctan x give a formula for pi?",
+    answer: "Expand the derivative as a geometric series, $\\frac{1}{1 + x^2} = 1 - x^2 + x^4 - \\cdots$, and undo the derivative term by term: $\\arctan x = x - \\frac{x^3}{3} + \\frac{x^5}{5} - \\cdots$. At $x = 1$ this gives $\\frac{\\pi}{4} = 1 - \\frac{1}{3} + \\frac{1}{5} - \\cdots$, found by Madhava around 1400 and by Gregory and Leibniz in the 1670s. It converges slowly: a thousand terms still leave $\\pi$ off by about $0.001$.",
+    sectionId: "2"
+  },
+  obj8: {
+    question: "What does arctanh have to do with the Mercator map?",
+    answer: "The Mercator map places latitude $\\varphi$ at height $\\operatorname{arctanh}(\\sin \\varphi)$, measured in Earth radii. By the chain rule its rate of growth is $\\frac{\\cos \\varphi}{1 - \\sin^2 \\varphi} = \\sec \\varphi$, exactly the factor by which the map stretches east-west at that latitude. Stretching north-south by the same factor keeps small shapes in their true proportions, which is why the map preserves angles and why Greenland looks so large.",
     sectionId: "6"
   }
 }

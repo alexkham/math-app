@@ -835,6 +835,11 @@ Beyond computational rules, three theorems govern the behavior of derivatives on
 // chain and Mean Value Theorem, each with its own rule-named h2. Kept the
 // L'Hôpital conditions and the product-vs-quotient comparison, both extended;
 // invented two from caveats buried in closing paragraphs.
+// FAQ pass 2026-10-31: kept all four. Added the square root (rewriting a
+// root as a power, a closing paragraph of the power rule), why the product
+// rule is not f′g′ (the growing-rectangle card and the Leibniz fact), the
+// circle that breaks the Mean Value Theorem (fact box) and roots of f′
+// between roots of f (one sentence under Rolle's Theorem).
 const faqQuestions = {
   obj1: {
     question: "When can you use L'Hôpital's rule?",
@@ -855,6 +860,26 @@ const faqQuestions = {
     question: "How do you apply the chain rule to three nested functions?",
     answer: "Work from the outside in, with each layer contributing one factor. For f(g(h(x))) the derivative is f′(g(h(x))) · g′(h(x)) · h′(x): differentiate the outermost function at its argument, multiply by the derivative of the next layer at its argument, and continue until the innermost function is reached. Any depth of nesting follows the same pattern.",
     sectionId: "7"
+  },
+  obj5: {
+    question: "What is the derivative of the square root of x?",
+    answer: "It is $\\frac{1}{2\\sqrt{x}}$. Rewrite the root as a power, $\\sqrt{x} = x^{1/2}$, and apply the power rule: the exponent comes down and drops by one, giving $\\frac{1}{2}x^{-1/2}$, which is written back as $\\frac{1}{2\\sqrt{x}}$. At $x = 4$ the slope is $\\frac{1}{4}$. The formula holds for $x > 0$; at $x = 0$ the root is defined but the derivative is not.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Why is the derivative of a product not the product of the derivatives?",
+    answer: "Because each factor changes while the other stays put. Picture $fg$ as a rectangle with sides $f$ and $g$: a small step in $x$ adds a strip $g\\,\\Delta f$, a strip $f\\,\\Delta g$ and a tiny corner $\\Delta f\\,\\Delta g$. Divided by $\\Delta x$, the strips give $f'g + fg'$ and the corner vanishes. For $x \\cdot x$ the guess $f'g'$ gives $1$, not $2x$; Leibniz himself made that guess in 1675 and corrected it ten days later.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Does the Mean Value Theorem work for vector-valued functions?",
+    answer: "No, it needs a real-valued function. A point moving round the unit circle as $(\\cos t, \\sin t)$ for $0 \\leq t \\leq 2\\pi$ ends where it started, so its average velocity is zero, yet its velocity $(-\\sin t, \\cos t)$ has length $1$ at every moment and is never zero. What survives is an inequality: the straight-line distance from start to end is at most $(b - a)$ times the largest speed.",
+    sectionId: "8"
+  },
+  obj8: {
+    question: "Why is there a root of f′ between any two roots of f?",
+    answer: "Because of Rolle's Theorem. If $f(r_1) = f(r_2) = 0$ and $f$ is differentiable on the interval between them, the endpoint values are equal, so $f'(c) = 0$ for some $c$ strictly between $r_1$ and $r_2$. On a full period of $\\sin x$, $\\cos x$ is zero at $\\frac{\\pi}{2}$, between the roots $0$ and $\\pi$. Turned around, if $f'$ is never zero, $f$ has at most one root: $x^3 + x$ has only $x = 0$.",
+    sectionId: "9"
   }
 }
 

@@ -17,6 +17,11 @@ import NotationSection from '@/app/components/page-components/content-components
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -40,6 +45,26 @@ export async function getStaticProps(){
       'distribution functions'
     ]
     
+    // Concept introduction (section "what", "What a Probability Distribution
+    // Is") — template A, definition last. Running instance: the total of two
+    // fair dice. Old what text is kept in sectionsContent.what, unused; its
+    // formula box, five passages and the punchline are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciDiceTable = ciTableOpen(['total of two dice', 'ways out of 36', 'probability']) +
+      ciRow(['2 or 12', '1 each', '1/36 each']) +
+      ciRow(['3 or 11', '2 each', '2/36 each'], { shade: true }) +
+      ciRow(['4 or 10', '3 each', '3/36 each']) +
+      ciRow(['5 or 9', '4 each', '4/36 each'], { shade: true }) +
+      ciRow(['6 or 8', '5 each', '5/36 each']) +
+      ciRow(['7', '6', '6/36 — the most likely'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+      '</tbody></table>'
+
     const sectionsContent={
       obj0: {
   title: `Key Terms`,
@@ -537,6 +562,10 @@ This page serves as a conceptual map of probability distributions. It explains h
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    diceTable: ciDiceTable,
+  };
+
   const demoUnits = {
     u_function_0: demoUnitFrame({
       svg: discretePmfDiagrams.binomial,
@@ -554,9 +583,44 @@ This page serves as a conceptual map of probability distributions. It explains h
     }),
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the traffic-light fact box (2 Basic Types),
+  // the moments fact box (What All Distributions Have in Common), and three
+  // notation cards: the probability space, the distribution as a measure
+  // (its "do not confuse" note) and equality in distribution.
+  const faqQuestions = {
+    obj1: {
+      question: "Can a random variable be neither discrete nor continuous?",
+      answer: "Yes. At a light that is red for $60$ seconds and green for $60$, a driver arriving at a random moment waits exactly $0$ seconds with probability $\\frac{1}{2}$, and otherwise any time up to $60$ seconds, spread evenly. The value $0$ carries positive probability, so the wait is not continuous; the other values fill an interval, so it is not discrete either. Such a mixed variable has neither a PMF nor a PDF, but it still has a CDF: it jumps to $\\frac{1}{2}$ at $0$ and then climbs in a straight line to $1$ at $60$.",
+      sectionId: "basic"
+    },
+    obj2: {
+      question: "Do the moments of a distribution determine it?",
+      answer: "Not always. If $\\ln X$ is standard normal, the density $f$ of $X$ and the wavy density $f(x)\\,(1 + \\sin(2\\pi \\ln x))$ give the same $\\mathbb{E}[X^k]$ for every whole number $k$, yet they are different distributions (Heyde, 1963). For a variable confined to a bounded interval such as $[0, 1]$, the moments do fix the distribution. The CDF always does, which is why the CDF, not the list of moments, is the complete description.",
+      sectionId: "common"
+    },
+    obj3: {
+      question: "Is a probability distribution the same thing as its PMF or PDF?",
+      answer: "No. The distribution is the measure $\\mathbb{P}_X(A) = \\mathbb{P}(X \\in A)$, which gives a probability to every set of values. The PMF, the PDF and the CDF are ways of writing it down. Every distribution has a CDF, but a PMF exists only for discrete variables and a PDF only for continuous ones, and some distributions have neither. A distribution has a CDF; it is not the CDF itself.",
+      sectionId: "notation"
+    },
+    obj4: {
+      question: "What does the d over an equals sign mean in probability?",
+      answer: "It means equal in distribution: $X \\overset{d}{=} Y$ says that $X$ and $Y$ have the same law, $\\mathbb{P}(X \\in A) = \\mathbb{P}(Y \\in A)$ for every set $A$. It says nothing about their values. Two independent fair dice are equal in distribution, yet they show the same face only $\\frac{1}{6}$ of the time; the plain $X = Y$ would claim they always agree. The related $X_n \\xrightarrow{d} X$ is convergence in distribution, the form in which the central limit theorem is stated.",
+      sectionId: "notation"
+    },
+    obj5: {
+      question: "What is the probability space $(\\Omega, \\mathcal{F}, \\mathbb{P})$?",
+      answer: "It is the standard setting of formal probability, three objects in three fonts. $\\Omega$ is the set of outcomes, the calligraphic $\\mathcal{F}$ is the collection of events that are allowed to receive probabilities (a σ-algebra), and $\\mathbb{P}$ is the measure that assigns them. The blackboard $\\mathbb{P}$ is the same object as the plain $P$ of elementary texts. Script $\\mathcal{F}$ and the CDF $F_X$ share a letter and are told apart by font alone.",
+      sectionId: "notation"
+    }
+  }
+
       return {
         props:{
+    faqQuestions,
     demoUnits,
+    conceptIntroFigures,
           sectionsContent,
           introContent,
           distributionsData,
@@ -578,7 +642,69 @@ This page serves as a conceptual map of probability distributions. It explains h
 
 export default function DistributionsPage({sectionsContent,introContent,
   distributionsData,discreteDistributionsTypesData,fundamentalPropertiesData,
-continuousDistributionsTypesData, seoData, demoUnits}) {
+continuousDistributionsTypesData, seoData, demoUnits, conceptIntroFigures, faqQuestions}) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "what" concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Roll two dice and add them. Some totals turn up far more often than others.`,
+        content: [
+          `A $7$ is common; a $2$ or a $12$ is rare. Knowing which totals are possible says little — what matters is how the probability is shared out among them.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Counting the 36 equally likely rolls gives every total its probability.`,
+        content: [
+          ciTable('diceTable'),
+          `The probabilities add up to $\\frac{36}{36} = 1$. Any question about the total — say, "at least $10$" — is answered by adding rows: $\\frac{3 + 2 + 1}{36} = \\frac{1}{6}$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `A full description lists every possible value together with its probability.`,
+        content: [
+          `That list says everything there is to know about the random total, without mentioning the dice at all.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **probability distribution** of a random variable assigns probabilities to its possible values: it says how the total probability $1$ is shared out among them.`,
+        formula: [
+          `A probability distribution is a mathematical model that assigns probabilities to the possible values of a [random variable](!/probability/random-variables), thereby encoding the structure of uncertainty associated with a random process. It provides the complete probabilistic characterization of a random phenomenon, specifying not just what outcomes can occur, but how probability is allocated across them.`,
+          `Formally, given a [probability space](!/probability/sample-space) $(\\Omega, \\mathcal{F}, \\mathbb{P})$ and a [random variable](!/probability/random-variables) $X : \\Omega \\to \\mathbb{R}$, the probability distribution of $X$ is the probability measure induced by $X$ on the measurable subsets of $\\mathbb{R}$, defined by`,
+          `@academic[formula_callout:What a Probability Distribution Is
+$$\\mathbb{P}_X(A) = \\mathbb{P}(X \\in A)$$ ]@`,
+          `for all measurable sets $A$. This induced measure encapsulates all probabilistic information about $X$ and serves as the primary object of analysis in statistical inference and probabilistic modeling.`,
+        ],
+        footer: `So the distribution of the total of two dice gives $\\frac{6}{36}$ to $7$, $\\frac{1}{36}$ to $2$ and to $12$, and so on, as in the table.`,
+      },
+      {
+        id: 'kind',
+        lead: `A distribution describes how a random variable behaves, not any single outcome.`,
+        content: [
+          `The relationship between [random variable](!/probability/random-variables) and distribution is foundational. A [random variable](!/probability/random-variables) is a function that maps outcomes from the [sample space](!/probability/sample-space) to real numbers—it translates abstract [events](!/probability/events) into measurable quantities. The distribution captures how probability flows through this mapping. While the [random variable](!/probability/random-variables) provides the mechanism for quantification, the distribution describes the probabilistic behavior of those quantities. Two random variables defined on different probability spaces may share the same distribution if they exhibit identical probabilistic structure, making the distribution the essential mathematical object for analysis.`,
+          `The distribution functions as a model that captures the regularities of randomness in quantitative form. It abstracts from individual realizations and describes the law governing the occurrence of outcomes. Distributions provide the foundation for defining [expectation](!/probability/expected-value), [variance](!/probability/variance), moments, and limit theorems, forming the central organizing concept of probability theory.`,
+          `@academic[punchline:A distribution records how likely each value of a variable is and forgets which outcomes produced it.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Different experiments can lead to the same distribution.`,
+        content: `Two spinners with sectors $1$ to $6$ give totals with exactly the dice's distribution, although no dice are involved. The two broad kinds of distribution are set out in [2 basic types of distributions](!/probability/distributions#basic).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the two basic types of distributions, discrete and continuous distributions, and the probability function.`,
+      },
+    ],
+  }
    
     
   const distributionsSections=[
@@ -598,7 +724,7 @@ continuousDistributionsTypesData, seoData, demoUnits}) {
         title:sectionsContent.what.title,
         link:sectionsContent.what.link,
         content:[
-          sectionsContent.what.content,
+          <ConceptIntro key={'what-intro'} data={conceptIntro} />,
         ]
     },
      {
@@ -617,6 +743,11 @@ continuousDistributionsTypesData, seoData, demoUnits}) {
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions'}
           />,
         ]
     },
@@ -753,7 +884,23 @@ continuousDistributionsTypesData, seoData, demoUnits}) {
           sectionsContent.obj6.content,
         ]
     },
-    
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Probability Distributions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
+
      // {
     //     id:'1',
     //     title:sectionsContent.obj1.title,

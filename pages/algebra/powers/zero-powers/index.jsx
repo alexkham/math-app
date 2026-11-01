@@ -273,7 +273,7 @@ $$0^1 = 0 \\qquad 0^2 = 0 \\qquad 0^3 = 0 \\qquad 0^{100} = 0$$]@
 
 Each multiplication introduces another factor of $0$, and a single zero factor is enough to force the entire product to $0$. This holds whether the exponent is a [natural number](!/algebra/powers/natural-exponents), a positive [rational](!/algebra/powers/rational-exponents), or a positive irrational.
 
-The pattern is absolute: $0^n = 0$ for every $n > 0$. Among all real bases, zero is the only one that produces the same output regardless of the positive exponent applied to it.`,
+The pattern is absolute: $0^n = 0$ for every $n > 0$. Among all real bases, only zero and $1$ produce the same output regardless of the positive exponent applied to them.`,
   before: ``,
   after: ``,
   link: '',
@@ -664,6 +664,10 @@ How to check: evaluate the expression at a small $x$. At $x = 0.1$, $\\left(e^{-
 // "Is $0^0$ 0 or 1?") were the same question twice. Kept the empty product,
 // which no heading names, and added the reconciliation question the page
 // sets up across three sections but never asks.
+// FAQ pass 2026-10-31: kept all four. Added the coefficient and minus-sign
+// pitfall ($5x^0$, $-3^0$), the $(e^{-1/x})^x$ limit pitfall, the $x^x$ dip
+// fact box (analysis) and the IEEE 754 pow/powr fact box (0^0 section). No
+// heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Why do different fields give different answers for $0^0$?",
@@ -684,6 +688,26 @@ const faqQuestions = {
     question: "How many functions are there from the empty set to the empty set?",
     answer: "Exactly one — the empty function, which assigns nothing to nothing. This matters because the number of functions from a set of size $n$ to a set of size $m$ is $m^n$, so the empty-to-empty case counts $0^0$. Since the answer is one, combinatorics takes $0^0 = 1$: the convention falls out of the counting rather than being imposed on it.",
     sectionId: "5"
+  },
+  obj5: {
+    question: "Does $5x^0$ equal 1?",
+    answer: "No, it equals $5$ for any $x \\neq 0$. The exponent belongs only to the symbol it is attached to, so $5x^0 = 5 \\cdot x^0 = 5 \\cdot 1 = 5$. The same reading gives $-3^0 = -(3^0) = -1$. Only parentheses widen the base: $(5x)^0 = 1$ for $x \\neq 0$, and $(-3)^0 = 1$. With $x = 2$, $5x^0 = 5$ while $(5x)^0 = 10^0 = 1$.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Does a limit of the form $0^0$ always equal 1?",
+    answer: "No. When the base and the exponent both approach $0$, how fast each gets there decides the limit. For every $x > 0$, $\\left(e^{-1/x}\\right)^x = e^{-1}$ exactly, so its limit as $x \\to 0^+$ is $e^{-1} \\approx 0.368$, even though the base and the exponent both head to $0$. By contrast $x^x \\to 1$ and $0^x \\to 0$. The convention $0^0 = 1$ belongs to algebra and counting, not to limits.",
+    sectionId: "pitfalls"
+  },
+  obj7: {
+    question: "Does $x^x$ approach 1 steadily as $x$ goes to 0?",
+    answer: "No, it dips first. Going from $x = 1$ down toward $0$, $x^x$ falls to a minimum of about $0.692$ at $x = \\frac{1}{e} \\approx 0.368$, where the derivative $x^x(\\ln x + 1)$ is zero, and only then rises back toward $1$. The minimum value is $e^{-1/e}$. So $x^x$ does approach $1$ near $0$, but from below and after a detour.",
+    sectionId: "6"
+  },
+  obj8: {
+    question: "What do computers return for $0^0$?",
+    answer: "It depends on which power function is called. The floating-point standard IEEE 754 defines two: **pow** returns $0^0 = 1$, matching the algebra convention, while **powr** is built from $e^{y \\ln x}$ and reports $0^0$ as an invalid operation, because $0 \\cdot \\ln 0$ has no value. So both answers mathematics gives for $0^0$ sit side by side in the same standard.",
+    sectionId: "4"
   }
 }
 
@@ -903,7 +927,7 @@ Applying the exponent to the whole term gives $-3^0 = 1$ and $5x^0 = 1$. The exp
       },
       {
         id: 'exit',
-        content: `The rest of the page takes up $0^0$, where the two patterns collide, then the zero exponent in the exponent laws, in polynomials and in other contexts.`,
+        content: `The rest of the page takes up $0^0$, where the two patterns collide, and how discrete mathematics and analysis each treat it, then how zero gets excluded as a base as the exponent types widen.`,
       },
     ],
   }

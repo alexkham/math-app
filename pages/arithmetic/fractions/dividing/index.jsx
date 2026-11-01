@@ -693,6 +693,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -823,6 +824,25 @@ const keyWords = [
 </table>
 `
 
+
+    // Concept introduction (section 2, "Dividing Fractions — Basic Rule") —
+    // template A, definition last. Running instance: 2/3 ÷ 4/5 = 5/6 from the
+    // section's example, after 6 ÷ 2, 3 ÷ 1/2 and 3/4 ÷ 3. Old obj2 text is
+    // kept in sectionsContent.obj2, unused; its formula box, pitfall aside and
+    // four paragraphs are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciPairTable = ciTableOpen(['division', 'the same as multiplying by', 'result']) +
+      ciRow(['6 ÷ 2', '6 × 1/2', '3']) +
+      ciRow(['3 ÷ 1/2', '3 × 2', '6'], { shade: true }) +
+      ciRow(['3/4 ÷ 3', '3/4 × 1/3', '1/4']) +
+      ciRow(['2/3 ÷ 4/5', '2/3 × 5/4', '10/12 = 5/6'], { shade: true, last: true, color: '#2563EB', cols: [1, 2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1125,6 +1145,11 @@ How to check: multiply the answer by the divisor. $\\frac{9}{10} \\times \\frac{
 // "What is 1/2 ÷ 1/4?" as a calculator-shaped one-off. Kept the mnemonic and
 // the cross-cancel caveat, both extended; invented the bigger-result question,
 // which is the confusion this page creates and never addresses head-on.
+// FAQ pass 2026-10-31: kept the three questions. Added checking an answer by
+// multiplying back (the "How to check" lines under Common Pitfalls) and
+// writing a word problem for 1 3/4 ÷ 1/2 (fact box under "Word Problems and
+// Applications"). Skipped dividing by a half as halving: obj2 already
+// answers it with 6 ÷ 1/2 = 12.
 const faqQuestions = {
   obj1: {
     question: "What does 'keep, change, flip' mean?",
@@ -1140,6 +1165,16 @@ const faqQuestions = {
     question: "Can you cross-cancel when dividing fractions?",
     answer: "Yes, but only after flipping the second fraction. Cross-canceling belongs to multiplication, so it is valid the moment the problem has been rewritten. For 8/9 ÷ 4/3, first rewrite as 8/9 × 3/4, then cancel 8 against 4 and 9 against 3 to get 2/3 directly. Canceling before the flip produces a wrong answer.",
     sectionId: "7"
+  },
+  obj4: {
+    question: "How do you check an answer when dividing fractions?",
+    answer: "Multiply the answer by the divisor: the result must be the first fraction, because division undoes multiplication. For $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{5}{6}$, the check is $\\frac{5}{6} \\times \\frac{4}{5} = \\frac{20}{30} = \\frac{2}{3}$. The wrong answer $\\frac{6}{5}$, which comes from flipping the first fraction, fails it: $\\frac{6}{5} \\times \\frac{4}{5} = \\frac{24}{25}$, not $\\frac{2}{3}$.",
+    sectionId: "pitfalls"
+  },
+  obj5: {
+    question: "How do you write a word problem for dividing by a fraction?",
+    answer: "Ask how many groups of the divisor fit into the amount. For $1\\frac{3}{4} \\div \\frac{1}{2}$: with $1\\frac{3}{4}$ cups of flour and $\\frac{1}{2}$ cup per batch, how many batches can be made? The answer is $\\frac{7}{4} \\times 2 = \\frac{7}{2} = 3\\frac{1}{2}$. A story that takes half of $1\\frac{3}{4}$ is a common mistake: it divides by $2$, not by $\\frac{1}{2}$. In Liping Ma's 1999 study, only one of 23 U.S. teachers wrote a correct story for this division.",
+    sectionId: "8"
   }
 }
 
@@ -1222,6 +1257,13 @@ const schemas = {
     notes: [{ text: 'two quarters cover the same length as one half' }, { text: '1/2 ÷ 1/4 = 1/2 × 4 = 2', color: 'r' }], labelWidth: 84, caption: 'Division counts how many pieces fit' };
   const fbHalveFraction = { kind: 'bars', svgTitle: '3/4 divided by 2: each quarter split in half, 3 of the 8 eighths, 3/8', rows: [{ n: 4, k: 3, label: '3/4', partLabels: true }, { n: 8, k: 3, label: '÷ 2 = 3/8', color: 'r', partLabels: true }],
     notes: [{ text: 'halving 3 quarters leaves 3 parts half as big' }, { text: '3/4 × 1/2 = 3/8', color: 'r' }], labelWidth: 84, caption: 'Dividing by a whole number greater than 1 makes the parts smaller' };
+  const fbCiThreeHalves = { kind: 'bars', svgTitle: 'Three wholes cut into halves: 6 halves fit, so 3 divided by 1/2 is 6', rows: [{ n: 2, k: 6, label: '3', partLabels: true }],
+    notes: [{ text: '3 wholes, each cut into 2 halves' }, { text: '6 halves fit: 3 ÷ 1/2 = 3 × 2 = 6', color: 'f' }], caption: 'Dividing by 1/2 counts halves' };
+  const conceptIntroFigures = {
+    bars: renderFractionBar(fbCiThreeHalves),
+    pairTable: ciPairTable,
+  };
+
   const demoUnits = {
     howManyQuarters: demoUnitFrame({
       svg: renderFractionBar(fbHowManyQuarters),
@@ -1243,6 +1285,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Dividing Fractions: Keep Change Flip Method | Learn Math Class",
       description: "Learn to divide fractions using keep-change-flip: reciprocals, dividing by whole numbers, mixed numbers, cross-canceling, and real-world applications with examples.",
@@ -1255,9 +1298,75 @@ return {
    }
 
 
-export default function DividingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function DividingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Dividing by 2 is the same as taking half: 6 ÷ 2 = 6 × 1/2 = 3.`,
+        content: [
+          `Every division by a whole number has a multiplication twin: dividing by $4$ is multiplying by $\\frac{1}{4}$, dividing by $10$ is multiplying by $\\frac{1}{10}$. The divisor is swapped for its [reciprocal](!/arithmetic/fractions/dividing#1).`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The same swap works when the divisor is a fraction: 3 ÷ 1/2 asks how many halves fit in 3, and the answer is 3 × 2 = 6.`,
+        content: [
+          ciTable('pairTable'),
+          `For example, $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$.`,
+        ],
+        visual: ciSvg('bars'),
+      },
+      {
+        id: 'pattern',
+        lead: `In every row the divisor was flipped and the division became a multiplication.`,
+        content: [
+          `The mnemonic "keep, change, flip" summarizes the steps: keep the first fraction as is, change division to multiplication, flip the second fraction to its reciprocal.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `To divide by a fraction, multiply by its [reciprocal](!/arithmetic/definitions#reciprocal): $\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$.`,
+        formula: [
+          `To divide one fraction by another, multiply the first fraction by the reciprocal of the second. For fractions $\\frac{a}{b}$ and $\\frac{c}{d}$:`,
+          `@academic[formula_callout:Dividing Fractions — Basic Rule
+$$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{a \\times d}{b \\times c}$$]@`,
+        ],
+        footer: `So $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{2}{3} \\times \\frac{5}{4} = \\frac{5}{6}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Dividing fractions is not a new operation: it is multiplication by a reciprocal.`,
+        content: [
+          `Nothing new has to be learned about multiplying: once the divisor is flipped, the rule for [multiplying fractions](!/arithmetic/fractions/multiplying) does the rest.`,
+          `The division sign $\\div$ is one of three spellings for the same operation: $a \\div b$, the slash $a / b$, and the stacked $\\frac{a}{b}$. Writing a fraction over a fraction produces the [complex fraction](!/arithmetic/fractions/complex) form of this same rule, where the longer bar shows which division is the main one.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Only the divisor is flipped — and the divisor can never be zero.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Flipping the first fraction
+Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\frac{4}{5} = \\frac{12}{10} = \\frac{6}{5}$, the reciprocal of the true answer. Only the divisor is flipped: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{5}{6}$.
+[Read more](!#pitfalls)]@`,
+          `Zero has no reciprocal, so division by $0$ stays undefined. Why flipping the divisor gives the right answer is explained in [why multiply by the reciprocal](!/arithmetic/fractions/dividing#3).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers why the rule works, dividing fractions by whole numbers and whole numbers by fractions, dividing mixed numbers, cross-canceling, and word problems.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1281,7 +1390,7 @@ export default function DividingPage({seoData, sectionsContent, introContent, ca
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

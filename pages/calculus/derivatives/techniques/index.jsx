@@ -16,6 +16,10 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -338,6 +342,24 @@ const keyWords = [
 // };
 
 // formulas-optimized: v1 | 2026-06-09 | 4 callouts (obj3, obj4, obj6)
+// Concept introduction (section 1, "Implicit Differentiation") — template C,
+// failure first. Running instance: solving for y in x² + y² = 25 (two
+// branches) and in x³ + y³ = 6xy (no usable formula). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four passages, example, pitfall, the
+// circleTangent demo frame, its line, obj1Table and the punchline are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSolveTable = ciTableOpen(['equation', 'solving for y first', 'outcome']) +
+  ciRow(['x² + y² = 25', 'y = √(25 − x²) or y = −√(25 − x²)', 'two formulas, one per half of the circle']) +
+  ciRow(['x³ + y³ = 6xy', 'no usable formula for y', 'stuck'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/derivatives/techniques ─────────────────────────────────────
 
@@ -402,7 +424,7 @@ The technique works because the equation defines $y$ as a function of $x$ locall
         tex: `$\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}$`,
         read: `d y d x equals d y d t over d x d t`,
         means: `The parametric slope: differentiate each coordinate with respect to the parameter, then divide. A literal fraction manipulation — the cancellation of $dt$ is licensed by [differentials](!/calculus/derivatives/differentials#notation).`,
-        cases: `Valid while $\\frac{dx}{dt} \\neq 0$; where it vanishes the tangent turns vertical. Physics writes the same ratio with Newton dots: $\\frac{\\dot{y}}{\\dot{x}}$.`,
+        cases: `Valid while $\\frac{dx}{dt} \\neq 0$; where it vanishes while $\\frac{dy}{dt} \\neq 0$, the tangent turns vertical. Physics writes the same ratio with Newton dots: $\\frac{\\dot{y}}{\\dot{x}}$.`,
         alsoWritten: `$\\frac{y'(t)}{x'(t)}$ — prime-with-argument, safe because the argument names the variable.`,
         confusedWith: `The false twin $\\frac{d^2y}{dx^2} = \\frac{d^2y/dt^2}{d^2x/dt^2}$. Second derivatives do **not** divide — the correct chain is in **Parametric Differentiation** below, and [second-order differentials](!/calculus/derivatives/higher-order) explain why the cancellation stops working past first order.`,
       },
@@ -683,6 +705,11 @@ Each situation calls for a technique that adapts the core rules to a nonstandard
 // them), plus the log-differentiation timing question, also served by the
 // when-to-use heading. Kept the parametric formula; invented three from the
 // notation section, which names each trap explicitly.
+// FAQ pass 2026-10-31: kept all four. Added why an implicit slope contains y
+// (the circle card and the note after the first example), the derivative of
+// x^x (the worked example and the "two wrong rules" fact box) and the slope
+// of an inverse with no formula (the x^5 + x fact box). The cut
+// log-differentiation timing question stays cut.
 const faqQuestions = {
   obj1: {
     question: "Why does d/dx[y²] equal 2y·dy/dx and not 2y?",
@@ -696,13 +723,28 @@ const faqQuestions = {
   },
   obj3: {
     question: "How do you find dy/dx for a parametric curve?",
-    answer: "Differentiate each coordinate with respect to the parameter and divide: dy/dx = (dy/dt)/(dx/dt). The cancellation of dt is legitimate here, licensed by [differentials](!/calculus/derivatives/differentials#notation). The formula holds wherever dx/dt ≠ 0; where dx/dt vanishes the tangent turns vertical. Physics writes the same ratio with Newton dots, as ẏ/ẋ.",
+    answer: "Differentiate each coordinate with respect to the parameter and divide: dy/dx = (dy/dt)/(dx/dt). The cancellation of dt is legitimate here, licensed by [differentials](!/calculus/derivatives/differentials#notation). The formula holds wherever dx/dt ≠ 0; where dx/dt vanishes while dy/dt ≠ 0, the tangent turns vertical. Physics writes the same ratio with Newton dots, as ẏ/ẋ.",
     sectionId: "6"
   },
   obj4: {
     question: "How do you find the second derivative of a parametric curve?",
     answer: "Not by dividing d²y/dt² by d²x/dt² — second derivatives do not divide that way. Instead differentiate the first-derivative expression dy/dx with respect to t, then divide by dx/dt once more. The dt cancellation that licenses the first-derivative ratio stops working past first order, which is exactly why the naive formula fails.",
     sectionId: "6"
+  },
+  obj5: {
+    question: "Why does implicit differentiation give a slope with y in it?",
+    answer: "Because the curve is usually not the graph of one function, and the $y$ tells the formula which point is meant. On the circle $x^2 + y^2 = 25$, every $x$ inside $(-5, 5)$ has two points, and $\\frac{dy}{dx} = -\\frac{x}{y}$ covers both: $-\\frac{3}{4}$ at $(3, 4)$ and $\\frac{3}{4}$ at $(3, -4)$. Where $y = 0$, as at $(5, 0)$, the formula breaks down and the tangent is vertical.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "What is the derivative of x^x?",
+    answer: "It is $x^x(\\ln x + 1)$, for $x > 0$. Neither the power rule nor the exponential rule fits, since base and exponent both vary, so take logarithms: $\\ln y = x \\ln x$, then $\\frac{1}{y}\\frac{dy}{dx} = \\ln x + 1$, and multiply by $y$. The power rule alone would give $x^x$ and the exponential rule $x^x \\ln x$; the true derivative is their sum. At $x = 2$ it is $4(\\ln 2 + 1) \\approx 6.77$.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "Can you find the derivative of an inverse function without a formula for the inverse?",
+    answer: "Yes, as long as you can find one input of $f$. The formula $(f^{-1})'(b) = \\frac{1}{f'(a)}$ with $b = f(a)$ uses only $f$. For $f(x) = x^5 + x$, whose inverse has no formula in roots, $f(1) = 2$ and $f'(x) = 5x^4 + 1$ gives $f'(1) = 6$, so $(f^{-1})'(2) = \\frac{1}{6}$ exactly. The only search is for the $a$ with $f(a) = b$, often found by trying simple values.",
+    sectionId: "4"
   }
 }
 
@@ -799,6 +841,10 @@ const schemas = {
     ],
     points: [{ x: teL2, y: 2, label: 'slope 2', pos: 'nw' }, { x: 2, y: teL2, label: 'slope 1/2', pos: 'se' }],
     caption: 'Mirrored points, reciprocal slopes: 2 on eˣ, 1/2 on ln x' };
+  const conceptIntroFigures = {
+    solveTable: ciSolveTable,
+  };
+
   const demoUnits = {
     circleTangent: demoUnitFrame({
       svg: renderFunctionPlotV4(fpCircleTangent),
@@ -832,9 +878,26 @@ const schemas = {
     ],
   };
 
+  // BeforeAfter (obj3): a product-and-quotient function turned into a sum of logarithms before differentiating
+  const logDiffSteps = {
+    header: {
+      kicker: 'Logarithmic differentiation',
+      title: 'Taking ln before differentiating',
+      lede: 'Logarithms turn products, quotients and powers into sums, and sums are the easiest thing to differentiate.',
+    },
+    steps: [
+      { id: 'quotient', label: 'Product and quotient', stamp: 'Before', expr: '$y = \\dfrac{x^2 \\sqrt{x + 1}}{(x - 3)^4}$',
+        move: { label: 'Take ln of both sides', note: 'products become sums, quotients become differences' } },
+      { id: 'split', label: 'Sum and difference of logs', expr: '$\\ln y = \\ln x^2 + \\ln \\sqrt{x + 1} - \\ln (x - 3)^4$',
+        move: { label: 'Bring down the exponents', note: 'exponents become multipliers; √(x + 1) is (x + 1) to the power ½' } },
+      { id: 'sum', label: 'Sum ready to differentiate', stamp: 'After', expr: '$\\ln y = 2\\ln x + \\tfrac{1}{2}\\ln(x + 1) - 4\\ln(x - 3)$' },
+    ],
+  };
+
   return {
   props:{
     differentiationTechniqueTree,
+    logDiffSteps,
     sectionsContent,
     introContent,
     obj1Table,
@@ -843,6 +906,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Differentiation Techniques: Implicit & More | Learn Math Class",
       description: "Master implicit, logarithmic, and parametric differentiation plus inverse function derivatives. Techniques for equations, variable exponents, and parametric curves.",
@@ -855,7 +919,7 @@ const schemas = {
 
    }
 
-export default function PageTemplate({differentiationTechniqueTree, 
+export default function PageTemplate({differentiationTechniqueTree, logDiffSteps,
   seoData,
   sectionsContent,
   introContent,
@@ -864,10 +928,79 @@ export default function PageTemplate({differentiationTechniqueTree,
   overviewTable,
   faqQuestions,
   schemas,
-  demoUnits
+  demoUnits,
+  conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `To find a slope, the usual route is to write y = f(x) and differentiate.`,
+        content: [
+          `Many curves, though, are given by an equation in $x$ and $y$ together.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `For some equations solving for y is clumsy; for others it is impossible.`,
+        content: [
+          ciTable('solveTable'),
+          `The circle splits into two halves with two formulas. The curve $x^3 + y^3 = 6xy$ has no simple formula for $y$ at all, yet it has a tangent at almost every point.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Differentiate the equation as it stands, treating y as a function of x.`,
+        content: [
+          `The method: differentiate both sides of the equation with respect to $x$. Every term involving only $x$ is differentiated normally. Every term involving $y$ is differentiated using the [chain rule](!/calculus/derivatives/rules), treating $y$ as a function of $x$. This introduces a factor of $\\frac{dy}{dx}$ wherever $y$ appears. After differentiation, solve the resulting equation algebraically for $\\frac{dy}{dx}$.`,
+          `@academic[example:Example
+For $x^2 + y^2 = 25$: differentiating gives $2x + 2y\\frac{dy}{dx} = 0$. Solving yields $\\frac{dy}{dx} = -\\frac{x}{y}$.]@`,
+          `The result depends on both $x$ and $y$—this is typical and expected. The formula gives the slope at any point $(x, y)$ on the curve with $y \\neq 0$, without choosing a branch.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Implicit differentiation** finds $\\frac{dy}{dx}$ from an equation in $x$ and $y$ by differentiating both sides with respect to $x$, using the chain rule on every term that contains $y$, and solving for $\\frac{dy}{dx}$.`,
+        formula: [
+          `Given an equation relating $x$ and $y$—such as $x^2 + y^2 = 25$—implicit differentiation finds $\\frac{dy}{dx}$ without solving for $y$.`,
+        ],
+        footer: `So $x^2 + y^2 = 25$ gives $\\frac{dy}{dx} = -\\frac{x}{y}$, which is $-\\frac{3}{4}$ at $(3, 4)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `One formula serves the whole curve, without choosing a branch.`,
+        content: [
+          `The technique works because the equation defines $y$ as a function of $x$ locally (by the Implicit Function Theorem, near points where $\\frac{\\partial F}{\\partial y} \\neq 0$ for the equation written as $F(x, y) = 0$), even when no global explicit formula exists. Differentiating the equation preserves the relationship while extracting the rate of change. The table below collects this procedure as a four-step recipe.`,
+          <div key={'unit-circleTangent'} dangerouslySetInnerHTML={{ __html: demoUnits.circleTangent }} />,
+          `At (5, 0) the formula divides by y = 0: the tangent there is vertical.`,
+          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj1Table}}/>,
+          `@academic[punchline:The slope of a curve comes straight from its equation; there is no need to solve for $y$ first.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Every term with y carries a factor of dy/dx.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Dropping the dy/dx factor
+Differentiating $y^2$ as $2y$ turns $x^2 + y^2 = 25$ into $2x + 2y = 0$, an equation with no $\\frac{dy}{dx}$ to solve for. With $\\frac{d}{dx}[y^2] = 2y\\frac{dy}{dx}$, the slope is $-\\frac{x}{y}$, which is $-\\frac{3}{4}$ at $(3, 4)$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, applications of implicit differentiation, logarithmic differentiation, inverse functions and inverse trigonometric derivatives, parametric differentiation and when to use which technique.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -875,11 +1008,7 @@ export default function PageTemplate({differentiationTechniqueTree,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-circleTangent'} dangerouslySetInnerHTML={{ __html: demoUnits.circleTangent }} />,
-          `At (5, 0) the formula divides by y = 0: the tangent there is vertical.`,
-          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj1Table}}/>,
-          `@academic[punchline:The slope of a curve comes straight from its equation; there is no need to solve for $y$ first.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -899,6 +1028,11 @@ export default function PageTemplate({differentiationTechniqueTree,
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={derivativesNotationSheet}
+            current={'/calculus/derivatives/techniques'}
+          />,
         ]
     },
     {
@@ -915,6 +1049,20 @@ export default function PageTemplate({differentiationTechniqueTree,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="log-diff-steps"
+            title="Taking ln of x²√(x + 1)/(x − 3)⁴"
+            source="/calculus/derivatives/techniques"
+            before={"The section's second example, where the product and quotient rules together would produce unwieldy algebra. Here are the two moves that turn it into a sum."}
+            after={"Differentiating the last line is straightforward, one term at a time; the left side gives $\\frac{1}{y}\\frac{dy}{dx}$, and multiplying by $y$ gives the derivative."}
+          >
+            <BeforeAfter
+              data={logDiffSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

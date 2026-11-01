@@ -18,6 +18,9 @@ import functionLimitDiagrams from '@/app/components/functions/limit/functionLimi
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
 
 
 export async function getStaticProps(){
@@ -565,6 +568,9 @@ Some infinite regions have finite area. The region under $1/x^2$ from $1$ to $\\
 // hub's deferred "What are improper integrals?": the h2 answers it, so no
 // page needs the entry. Replaced with the traps — impropriety you have to
 // notice, limits that must not be tied together, and the two divergences.
+// FAQ pass 2026-10-31: kept all five. Added Torricelli's horn (fact box under
+// "Comparison Test") and sin x / x against |sin x| / x with absolute
+// convergence (fact box and last paragraph under "Limit Comparison Test").
 const faqQuestions = {
   obj1: {
     question: "How do you know an integral is improper if it looks normal?",
@@ -590,6 +596,16 @@ const faqQuestions = {
     question: "Why does the p-test flip between infinity and zero?",
     answer: "Because the danger sits at opposite ends. Out at infinity, ∫₁^∞ (1/xᵖ) dx converges when p > 1 — the integrand has to decay fast enough. Near zero, ∫₀¹ (1/xᵖ) dx converges when p < 1 — the blow-up has to be mild enough. Larger p helps at infinity and hurts at zero. At p = 1 both diverge.",
     sectionId: "5"
+  },
+  obj6: {
+    question: "How can a shape have finite volume but infinite surface area?",
+    answer: "When its volume integral converges and its surface integral does not. Spinning $y = \\frac{1}{x}$ for $x \\geq 1$ about the $x$-axis gives a horn of volume $\\pi \\int_1^{\\infty} \\frac{dx}{x^2} = \\pi$. Its surface area is $\\int_1^{\\infty} \\frac{2\\pi}{x}\\sqrt{1 + \\frac{1}{x^4}}\\, dx$, and that integrand lies above $\\frac{2\\pi}{x}$, whose integral diverges, so by comparison the area is infinite. Torricelli found this in 1644.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "Can an integral converge when the integral of its absolute value diverges?",
+    answer: "Yes. $\\int_0^{\\infty} \\frac{\\sin x}{x}\\, dx = \\frac{\\pi}{2}$, but $\\int_0^{\\infty} \\frac{|\\sin x|}{x}\\, dx$ diverges: each arch from $k\\pi$ to $(k + 1)\\pi$ adds at least $\\frac{2}{(k + 1)\\pi}$, and these add up like $1 + \\frac{1}{2} + \\frac{1}{3} + \\cdots$. The first integral stays finite only because its positive and negative arches cancel. The reverse cannot happen: if $\\int_a^{\\infty} |f(x)|\\, dx$ converges, so does $\\int_a^{\\infty} f(x)\\, dx$, which is called converging absolutely.",
+    sectionId: "7"
   }
 }
 
@@ -744,8 +760,30 @@ const schemas = {
     ],
   };
 
+  // ComparisonTable2 (obj4): improper-convergence-comparison
+  const improperConvergenceComparison = {
+    kicker: 'improper integrals',
+    title: 'Converging and diverging, side by side',
+    intro: 'The same kind of integral, two outcomes: it all depends on how fast the integrand decays.',
+    tallyLabel: 'compared',
+    subjects: [
+      { name: 'Converges', sub: '$\\int_1^{\\infty} \\frac{1}{x^2}\\,dx$' },
+      { name: 'Diverges', sub: '$\\int_1^{\\infty} \\frac{1}{x}\\,dx$' },
+    ],
+    features: [
+      { label: 'The defining limit', values: ['exists and is finite', 'is infinite or does not exist'] },
+      { label: 'Example', values: ['$\\lim_{b \\to \\infty}\\left(1 - \\frac{1}{b}\\right) = 1$', '$\\lim_{b \\to \\infty} \\ln b = \\infty$'] },
+      { label: 'Integrand at one hundred', values: ['$\\frac{1}{x^2} = 0.0001$', '$\\frac{1}{x} = 0.01$, a hundred times larger'],
+        note: 'The ratio between the two integrands is $x$ itself, so the gap keeps widening as $x$ grows.' },
+      { label: 'Decay', values: ['fast enough', 'not fast enough, although $\\frac{1}{x} \\to 0$'],
+        note: 'A vanishing integrand is not enough: $\\frac{1}{\\sqrt{x}}$ also tends to $0$, and its integral diverges too.' },
+    ],
+    footnote: 'The p-test turns this comparison into a rule for every power of $x$.',
+  };
+
   return {
   props: {
+    improperConvergenceComparison,
     improperTestTree,
     demoUnits,
     conceptIntroFigures,
@@ -767,7 +805,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({improperTestTree, seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({improperConvergenceComparison, improperTestTree, seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -875,6 +913,11 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={integralsNotationSheet}
+            current={'/calculus/integrals/improper'}
+          />,
         ]
     },
     {
@@ -896,6 +939,16 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
           sectionsContent.obj4.content,
           <div key={'unit-areaSoFar'} dangerouslySetInnerHTML={{ __html: demoUnits.areaSoFar }} />,
           `1/x is the boundary case p = 1 of the p-test: any power above 1 levels off.`,
+          `The two examples above, row by row: the same kind of integral, one with a finite limit and one without.`,
+          <DiagramFrame
+            key={'obj4-comparison'}
+            id="improper-convergence-comparison"
+            title="Converging and diverging, side by side"
+            source="/calculus/integrals/improper"
+          >
+            <ComparisonTable2 data={improperConvergenceComparison} />
+          </DiagramFrame>,
+          `Both integrands shrink to $0$; only the speed differs. That is the whole difference between the columns, and the [p-test](!#5) makes it exact for every power of $x$.`,
         ]
     },
     {

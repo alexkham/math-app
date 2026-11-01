@@ -14,6 +14,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -410,6 +412,24 @@ const summaryTable = `
 // };
 
 // formulas-optimized: v1 | 2026-06-09 | 19 callouts (obj2, obj3, obj4, obj5, obj6, obj7)
+// Concept introduction (section 1, "Why Memorize Special Integrals?") —
+// template A, definition last. Running instance: four familiar derivatives
+// read backwards as integrals. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its three passages and list are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciReverseTable = ciTableOpen(['derivative you know', 'integral it gives']) +
+  ciRow(['(x³/3)′ = x²', '∫ x² dx = x³/3 + C']) +
+  ciRow(['(sin x)′ = cos x', '∫ cos x dx = sin x + C'], { shade: true }) +
+  ciRow(['(eˣ)′ = eˣ', '∫ eˣ dx = eˣ + C']) +
+  ciRow(['(arctan x)′ = 1/(1 + x²)', '∫ 1/(1 + x²) dx = arctan x + C'], { shade: true, last: true, color: '#2563EB', cols: [1] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/integrals/special ──────────────────────────────────────────
 
@@ -772,6 +792,11 @@ Memorizing these forms accelerates computation and provides reference points for
 // replaced the listy multi-formula questions with the single formulas
 // people actually search for, each carrying the reason its sign, factor,
 // or absolute value is there.
+// FAQ pass 2026-10-31: kept all six. Added the 1/a in the arctangent form
+// but not the arcsine form (paragraph under "Inverse Trigonometric Forms"),
+// ln x and factorials (fact box under "Logarithmic Integrals") and the two
+// printed forms of the cosecant integral (formula under "Integrals Leading
+// to Logarithms").
 const faqQuestions = {
   obj1: {
     question: "What is the power rule for integration?",
@@ -801,6 +826,21 @@ const faqQuestions = {
   obj6: {
     question: "What is the integral of sec x?",
     answer: "∫sec x dx = ln|sec x + tan x| + C. It is the least obvious of the standard trigonometric integrals, because you get there by multiplying by a clever form of 1: sec x · (sec x + tan x)/(sec x + tan x). The numerator then becomes the derivative of the denominator, turning it into the f′/f pattern.",
+    sectionId: "7"
+  },
+  obj7: {
+    question: "Why does the arctangent form have a 1/a in front but the arcsine form does not?",
+    answer: "Because of what the substitution $x = au$, $dx = a\\, du$ leaves over. In $\\int \\frac{dx}{a^2 + x^2}$ the denominator becomes $a^2(1 + u^2)$, and only one factor $a$ cancels against $dx$, so $\\frac{1}{a}\\arctan\\frac{x}{a}$ remains. In $\\int \\frac{dx}{\\sqrt{a^2 - x^2}}$ the radical becomes $a\\sqrt{1 - u^2}$, a single $a$ that cancels completely, leaving $\\arcsin\\frac{x}{a}$. Writing the arctangent form in the arcsine's shape gives twice the right answer when $a = 2$.",
+    sectionId: "5"
+  },
+  obj8: {
+    question: "What does the integral of ln x have to do with factorials?",
+    answer: "It approximates their logarithm. The sum $\\ln 1 + \\ln 2 + \\cdots + \\ln n$ is $\\ln n!$, and it stays close to $\\int_1^n \\ln x\\, dx = n\\ln n - n + 1$: for $n = 100$ the two are $363.7$ and $361.5$. Taking exponentials, $n!$ grows roughly like $e^{n\\ln n - n} = \\left(\\frac{n}{e}\\right)^n$, the main factor in Stirling's formula.",
+    sectionId: "6"
+  },
+  obj9: {
+    question: "Why are there two different answers for the integral of csc x?",
+    answer: "Because the two are the same function written differently. $(\\csc x + \\cot x)(\\csc x - \\cot x) = \\csc^2 x - \\cot^2 x = 1$, so $\\csc x - \\cot x$ is the reciprocal of $\\csc x + \\cot x$, and $-\\ln|\\csc x + \\cot x| = \\ln|\\csc x - \\cot x|$. Tables print either one. The tangent integral has the same double form: $-\\ln|\\cos x| = \\ln|\\sec x|$, since $\\sec x = \\frac{1}{\\cos x}$.",
     sectionId: "7"
   }
 }
@@ -889,6 +929,10 @@ const schemas = {
     points: [{ x: -2, y: Math.log(2) }, { x: -2, y: -0.5 }],
     notes: [{ x: -3.9, y: -2.2, text: 'slope of ln|x| at −2: −1/2', pos: 'e', color: 'r' }],
     caption: 'ln|x| is an antiderivative of 1/x on both sides of 0' };
+  const conceptIntroFigures = {
+    reverseTable: ciReverseTable,
+  };
+
   const demoUnits = {
     lnAbs: demoUnitFrame({
       svg: renderFunctionPlotV4(fpLnAbs),
@@ -945,9 +989,27 @@ const schemas = {
     ],
   };
 
+  // BeforeAfter (obj7): ∫ sec x dx, given an f'/f shape by a clever form of 1
+  const secantIntegralSteps = {
+    header: {
+      kicker: 'Integrals leading to logarithms',
+      title: 'The secant integral',
+      lede: 'Nothing in sec x suggests a logarithm. Multiplying by a clever form of 1 creates the f′/f pattern.',
+    },
+    steps: [
+      { id: 'secant', label: 'No pattern yet', stamp: 'Before', expr: '$\\displaystyle\\int \\sec x\\, dx$',
+        move: { label: 'Multiply by a form of 1', note: '(sec x + tan x)/(sec x + tan x)' } },
+      { id: 'pattern', label: 'Numerator is the derivative of the denominator',
+        expr: '$\\displaystyle\\int \\frac{\\sec^2 x + \\sec x \\tan x}{\\sec x + \\tan x}\\, dx$',
+        move: { label: 'Integrate f′/f', note: '∫ f′/f dx = ln|f| + C, with f = sec x + tan x' } },
+      { id: 'log', label: 'Logarithm', stamp: 'After', expr: '$\\ln|\\sec x + \\tan x| + C$' },
+    ],
+  };
+
   return {
   props: {
     specialIntegralsOutline,
+    secantIntegralSteps,
     sectionsContent,
     introContent,
     obj4Table,
@@ -956,6 +1018,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Special Integrals: Essential Formulas | Learn Math Class",
       description: "Essential integration formulas: power rule, exponential, trigonometric, inverse trig (arctan, arcsin), and logarithmic integrals. Standard forms every calculus student should memorize.",
@@ -967,9 +1030,69 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({specialIntegralsOutline, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({specialIntegralsOutline, secantIntegralSteps, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Every derivative you know, read backwards, is an integral you know.`,
+        content: [
+          `Since the derivative of $\\sin x$ is $\\cos x$, an antiderivative of $\\cos x$ is $\\sin x$ — no technique needed.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Reversing four familiar derivatives gives four integrals at once.`,
+        content: [
+          ciTable('reverseTable'),
+          `Each entry on the right can be checked by differentiating it back to the integrand.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Harder integrals are worked until they look like one of these.`,
+        content: [
+          `Integration techniques transform unfamiliar integrals into recognizable ones. These standard forms are the targets.`,
+          `Each formula inverts a differentiation rule. Mastery of derivatives implies knowledge of these integrals.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **special integral** is an integral whose antiderivative is known directly, because it reverses a basic differentiation rule.`,
+        footer: `So $\\int \\frac{1}{1 + x^2}\\,dx = \\arctan x + C$ is a special integral: it reverses the derivative of $\\arctan x$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Knowing them by heart pays off in four ways.`,
+        content: [
+          `Knowing them provides:`,
+          `- Speed—instant recognition eliminates derivation
+- Building blocks—complex integrals reduce to combinations of simple ones
+- Verification—differentiate to confirm correctness
+- Pattern anchors—guide technique selection by identifying what form to aim for`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A small change in the integrand can move it out of the list.`,
+        content: [
+          `$\\int \\frac{1}{1 + x^2}\\,dx$ is a special integral, but $\\int \\frac{x}{1 + x^2}\\,dx = \\frac{1}{2}\\ln(1 + x^2) + C$ comes from a different form, and $\\int \\frac{1}{1 + x^3}\\,dx$ matches none of them without partial fractions first. The full list is in the [master reference](!/calculus/integrals/special#8).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers power, exponential, trigonometric and inverse trigonometric forms, logarithmic integrals and integrals leading to logarithms, a master reference and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -977,7 +1100,7 @@ export default function PageTemplate({specialIntegralsOutline, seoData, sections
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1033,6 +1156,20 @@ export default function PageTemplate({specialIntegralsOutline, seoData, sections
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="secant-integral-steps"
+            title="Integrating sec x"
+            source="/calculus/integrals/special"
+            before={"The section's secant integral, one move at a time. The whole trick is the choice of the form of $1$."}
+            after={"The step is easy to check once it is written down: the derivative of $\\sec x + \\tan x$ is $\\sec x\\tan x + \\sec^2 x$, exactly the numerator. The cosecant integral needs the same kind of form of $1$."}
+          >
+            <BeforeAfter
+              data={secantIntegralSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

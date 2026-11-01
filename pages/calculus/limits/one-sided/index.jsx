@@ -1951,6 +1951,8 @@ import functionLimitDiagrams from '@/app/components/functions/limit/functionLimi
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 
 
 export async function getStaticProps(){
@@ -2466,6 +2468,8 @@ Substituting $x = 2$ gives $\\lfloor 2 \\rfloor = 2$ as the left-hand limit. Jus
 [Read more](!#pitfalls)]@
 
 The left-hand limit gives the integer below, while the right-hand limit gives the integer itself. The function jumps by $1$ at each integer. No two-sided limit exists at these points because the one-sided limits disagree.
+
+The floor function itself, including its values at negative numbers, is covered on the [integer and fractional part](!/arithmetic/integer-part) page.
 `,
     before: ``,
     after: ``,
@@ -2720,6 +2724,9 @@ One-sided limits serve as the building blocks for two-sided limits. The two-side
 // to Two-Sided Limits", so it needs no entry on either page.) Kept the
 // piecewise and square-root questions, both extended; invented two from the
 // notation section, whose entries no heading surfaces.
+// FAQ pass 2026-10-31: kept all four. Added the x ↑ a arrow form (notation
+// card, "Do not confuse" line on the arrow pairing) and the tax-bracket fact
+// box under "Piecewise Models", neither asked by a heading.
 const faqQuestions = {
   obj1: {
     question: "What does x → 0⁻ mean?",
@@ -2740,6 +2747,16 @@ const faqQuestions = {
     question: "Why do square roots require one-sided limits?",
     answer: "Because a square root restricts the domain, and a limit can only approach through points where the function is defined. The expression √(4 − x) needs x ≤ 4, so at x = 4 nothing lies to the right and only the left-hand limit is meaningful. Mirror image for √(x − 4): only the right-hand limit exists at 4.",
     sectionId: "8"
+  },
+  obj5: {
+    question: "What does x ↑ a mean in a limit?",
+    answer: "It means the same as $x \\to a^{-}$: $x$ approaches $a$ from below. The arrow describes how $x$ travels, climbing toward $a$, while the minus superscript names the side it comes from. So $\\uparrow$ pairs with $a^{-}$ and $\\downarrow$ with $a^{+}$, the opposite of what many readers expect. The arrow form is common in analysis and measure theory, where it stresses that $x$ increases toward $a$.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Can moving into a higher tax bracket lower your take-home pay?",
+    answer: "No, not in a bracket system where each rate applies only to the income above its threshold. The tax owed is then a piecewise function of income whose one-sided limits agree at every threshold, so its graph bends there but never jumps. Crossing a threshold raises the rate on the extra income only, and as long as that rate is below 100%, a raise always leaves more after tax.",
+    sectionId: "11"
   }
 }
 
@@ -3017,6 +3034,11 @@ $$\\lim_{x \\to a^-} f(x)$$]@`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={limitsNotationSheet}
+            current={'/calculus/limits/one-sided'}
           />,
         ]
     },

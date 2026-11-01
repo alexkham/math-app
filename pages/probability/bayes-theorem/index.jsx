@@ -638,6 +638,9 @@ import totalProbabilityDiagrams from '@/app/components/probability/total-probabi
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 
 
 export async function getStaticProps(){
@@ -774,6 +777,11 @@ export async function getStaticProps(){
   // posterior — no heading uses either word — and added the base-rate
   // failure, the denominator's provenance, the odds form, and sequential
   // updating, none of which any heading surfaces.
+  // FAQ pass 2026-10-31: kept all five; obj2's last sentence rewritten, since
+  // the notation section names the swap the transposed conditional and keeps
+  // "prosecutor's fallacy" for its courtroom form. Added the Monty Hall fact
+  // box and "posterior proportional to likelihood times prior" (an Also
+  // written line in the notation section); no heading asks either.
   const faqQuestions = {
     obj1: {
       question: "What is the difference between prior and posterior probability?",
@@ -782,7 +790,7 @@ export async function getStaticProps(){
     },
     obj2: {
       question: "Why doesn't a 99% accurate test mean a 99% chance of having the disease?",
-      answer: "Because 99% accuracy is P(positive | disease), the likelihood, while what you want is P(disease | positive), the posterior. They point in opposite directions. When the disease is rare, the few true positives are swamped by false positives drawn from a much larger healthy population, so the posterior stays small. Ignoring the base rate this way is the prosecutor's fallacy.",
+      answer: "Because 99% accuracy is P(positive | disease), the likelihood, while what you want is P(disease | positive), the posterior. They point in opposite directions. When the disease is rare, the few true positives are swamped by false positives drawn from a much larger healthy population, so the posterior stays small. Swapping the two is called the transposed conditional; in a courtroom it is the prosecutor's fallacy.",
       sectionId: "notation"
     },
     obj3: {
@@ -798,6 +806,16 @@ export async function getStaticProps(){
     obj5: {
       question: "Can you apply Bayes' theorem more than once?",
       answer: "Yes — that is the standard way to handle several pieces of evidence. Apply the formula to the first observation, then use the resulting posterior as the prior for the next round; the same number is the posterior of one step and the prior of the next. In odds form, [independent](!/probability/independence) pieces of evidence simply multiply their likelihood ratios.",
+      sectionId: "notation"
+    },
+    obj6: {
+      question: "Why does switching doors win two times in three in the Monty Hall problem?",
+      answer: "Because the host's choice is evidence. You pick door 1, and the host, who knows where the car is, opens door 3. If the car is behind door 2 he had to open door 3; if it is behind door 1 he could open either and picks door 3 only half the time; a car behind door 3 rules it out. Bayes gives $P(\\text{car 2} \\mid \\text{opens 3}) = \\frac{\\frac{1}{3} \\cdot 1}{\\frac{1}{3} \\cdot \\frac{1}{2} + \\frac{1}{3} \\cdot 1 + \\frac{1}{3} \\cdot 0} = \\frac{2}{3}$.",
+      sectionId: "situation"
+    },
+    obj7: {
+      question: "What does “posterior is proportional to likelihood times prior” mean?",
+      answer: "It is Bayes' theorem with the division postponed: $P(A \\mid B) \\propto P(B \\mid A)\\,P(A)$. The denominator $P(B)$ is the same for every hypothesis, so it does not change how they compare. Compute likelihood times prior for each hypothesis, then divide by their total at the end so the posteriors sum to 1. For the two machines the products $0.018$ and $0.010$ become $\\frac{9}{14}$ and $\\frac{5}{14}$.",
       sectionId: "notation"
     }
   }
@@ -868,6 +886,26 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section "situation", "How Information Changes
+  // Probability") — template H, open question. Running instance: the page's
+  // own test numbers, P(D) = 0.01, P(+ | D) = 0.99, P(+ | not D) = 0.05,
+  // counted out of 10,000 people; P(D | +) = 99/594 = 1/6. Old situation text
+  // is kept in sectionsContent.situation, unused; its fact aside and three
+  // passages are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciCountTable = ciTableOpen(['out of 10,000 people', 'how many', 'test positive']) +
+    ciRow(['have the disease (1%)', '100', '99 (the test catches 99%)']) +
+    ciRow(['do not have it (99%)', '9,900', '495 (5% false alarms)'], { shade: true }) +
+    ciRow(['all positives', '', '594']) +
+    ciRow(['positives who are sick', '', '99 out of 594 = 1/6 ≈ 17%'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+    '</tbody></table>'
 
   const sectionsContent={
     obj0: {
@@ -1178,6 +1216,10 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
     notes: [{ text: 'coloured parts: tested +' }, { text: 'blue: sick and +', color: 'f' }, { text: '0.1 × 0.9 = 0.09', color: 'f', indent: true }, { text: 'amber: healthy and +', color: 'r' }, { text: '0.9 × 0.1 = 0.09', color: 'r', indent: true },
       {}, { text: 'P(+ | sick) = 0.9', color: 'f' }, { text: 'P(sick | +)', color: 'r' }, { text: '= 0.09 / 0.18 = 0.5', color: 'r', indent: true }],
     caption: 'P(sick | +) is the blue share of the coloured area: one half' };
+  const conceptIntroFigures = {
+    countTable: ciCountTable,
+  };
+
   const demoUnits = {
     u_conditional_0: demoUnitFrame({
       svg: conditionalTreeDiagrams.subtreeGivenA,
@@ -1265,6 +1307,7 @@ This idea is not an add-on to probability theory. Bayes' theorem sits at the int
     bayesAnatomy,
     bayesFoundationLevels,
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       formulaTable,
@@ -1293,10 +1336,69 @@ export default function BayesPage({bayesAnatomy, bayesFoundationLevels,
   mistakesTable,
   overviewTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "situation" concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `A test catches 99% of people who have a disease, and the disease affects 1 person in 100. You test positive. How likely is it that you are sick?`,
+        content: [
+          `Most people answer about $99\\%$. But that figure is the chance of a positive result for someone who is sick — the question asks for the reverse.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Counting 10,000 people settles it: only about 1 positive in 6 is actually sick.`,
+        content: [
+          ciTable('countTable'),
+          `The healthy people are so many that their $5\\%$ false alarms, $495$ of them, outnumber the $99$ true positives. The test is good; the disease is rare.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `What is easy to know runs one way, from cause to evidence; what is wanted runs the other way, from evidence to cause.`,
+        content: [
+          `Bayes' theorem appears in situations where we observe something directly, but care about something that is not directly visible. We see evidence, data, or outcomes, while the underlying cause or explanation remains uncertain.`,
+          `In many problems, the probability of observing evidence given a cause is easier to assess than the probability of the cause given the evidence. This asymmetry creates a gap: we know how likely the evidence is under different scenarios, but we want to reason in the opposite direction.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Bayes' theorem** turns the probability of the evidence given a cause into the probability of the cause given the evidence: $P(A \\mid B) = \\dfrac{P(B \\mid A)\\,P(A)}{P(B)}$.`,
+        formula: [
+          `Bayes' theorem provides the bridge between these two perspectives. It shows how information flows from what we can observe to what we want to infer, allowing probabilities to be updated in a principled and consistent way.`,
+        ],
+        footer: `So with $P(D) = 0.01$, $P(+ \\mid D) = 0.99$ and $P(+) = 0.0594$, the chance of disease after a positive test is $P(D \\mid +) = \\frac{0.0099}{0.0594} = \\frac{1}{6}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Bayes' theorem is a rule for updating a probability when evidence arrives.`,
+        content: [
+          `Before the test, the chance of disease was $1\\%$; after a positive result it is about $17\\%$. The same kind of update decides the well-known game-show puzzle below, where the host's choice of door is the evidence.`,
+          `@academic[fact,aside:true,width:35%:Switching doors wins two times in three
+You pick door 1 of three, and the host, who knows where the car is, opens door 3 to show a goat. Switching to door 2 wins with probability $\\frac{2}{3}$: a car behind door 2 forces him to open door 3, while a car behind door 1 leaves him a free choice he makes only half the time.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The starting probability cannot be skipped: a rare cause can stay fairly unlikely even after strong evidence.`,
+        content: `Here the test is $99\\%$ accurate on the sick, yet the answer is only $17\\%$, because the starting point was $1\\%$. The update is put into words in [Bayes' theorem explained in words](!/probability/bayes-theorem#words), and into symbols in [the formula](!/probability/bayes-theorem#formula).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the theorem in words, its connection to conditional probability, notation, the formula, the law of total probability, the chain rule, independence, examples, and common mistakes.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1313,7 +1415,7 @@ export default function BayesPage({bayesAnatomy, bayesFoundationLevels,
         title:sectionsContent.situation.title,
         link:'',
         content:[
-          sectionsContent.situation.content,
+          <ConceptIntro key={'situation-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1357,6 +1459,11 @@ Both quantities are built from the same joint probability $P(A \\cap B)$, but ea
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probEventsNotationSheet}
+            current={'/probability/bayes-theorem'}
           />,
         ]
     },

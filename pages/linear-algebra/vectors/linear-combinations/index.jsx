@@ -1326,6 +1326,11 @@ How to check: substitute the coefficients back into the combination; the result 
   content: `Every operation in this section — addition, subtraction, scalar multiplication — is a special case of one unifying construction: the linear combination. Scale a collection of vectors by chosen coefficients, then add the results. The output is a single vector assembled from the pieces. This idea is deceptively simple, but it reaches into every corner of linear algebra. Asking which vectors can be built from a given set leads to the concept of span. Asking whether a set contains redundant vectors leads to linear independence. Asking whether a particular vector can be expressed as a combination of others turns out to be equivalent to solving a [system of linear equations](!/linear-algebra/linear-systems). The definitions introduced here are developed formally in the [vector spaces](!/linear-algebra/vector-spaces) section, but their computational foundation belongs here, grounded in the concrete algebra of $\\mathbb{R}^n$.`,
 };
 
+// FAQ pass 2026-10-31: kept the three span questions. Added negative
+// coefficients (sentence and colour fact box under "Definition"), rows versus
+// columns (pitfall under "Linear Combinations and Systems of Equations") and
+// huge coefficients for nearly parallel vectors (fact box under "Geometric
+// Interpretation"). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Does the span of a set always contain the zero vector?",
@@ -1341,6 +1346,21 @@ const faqQuestions = {
     question: "Can a spanning set contain unnecessary vectors?",
     answer: "Yes, spanning and efficiency are separate questions. The set $\\{(1,0), (0,1), (1,1)\\}$ spans $\\mathbb{R}^2$ even though the third vector is already a combination of the first two: every point is still reachable, just with a redundant option. A spanning set carrying no redundancy at all is what gets called a basis.",
     sectionId: "4"
+  },
+  obj4: {
+    question: "Can a linear combination have negative coefficients?",
+    answer: "Yes, the coefficients may be any real numbers: positive, negative or zero. A negative weight takes a vector in reverse, which is why subtraction is simply the combination with weights $1$ and $-1$. Real recipes need it too: in the colour-matching experiments behind the 1931 CIE standard, blue-green light could be matched only by adding red to the target itself, so its recipe has a negative coefficient of red.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "When writing a linear combination as $A\\mathbf{x} = \\mathbf{b}$, do the vectors go in rows or columns?",
+    answer: "In columns, because each equation must collect one component from every vector. To reach $\\mathbf{b} = (3, 7)$ from $(1, 2)$ and $(0, 1)$, the columns give $c_1 = 3$ and $2c_1 + c_2 = 7$, so $3(1, 2) + 1(0, 1) = (3, 7)$. Putting the vectors in rows still gives a solvable system, $c_1 = -11$ and $c_2 = 7$, but $-11(1, 2) + 7(0, 1) = (-11, -15)$, which is not $\\mathbf{b}$.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "Why do nearly parallel vectors need huge coefficients?",
+    answer: "Because the only new direction they offer is their small difference, and that has to be scaled up. $(1, 0)$ and $(1, 0.001)$ are not parallel, so they span $\\mathbb{R}^2$, but reaching $(0, 1)$ takes $-1000(1, 0) + 1000(1, 0.001)$. The closer two vectors come to parallel, the larger the coefficients grow, until at exactly parallel the target cannot be reached at all.",
+    sectionId: "2"
   }
 }
 

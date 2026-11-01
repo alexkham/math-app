@@ -717,6 +717,11 @@ Each formula below is provable from the [limit definition](!/calculus/derivative
 // headings ("Exponential Functions") while people search by formula, so the
 // specific formulas kept below match no heading. Two invented from the
 // general-base results buried in closing paragraphs.
+// FAQ pass 2026-10-31: kept all four. Added the base-10 logarithm (the
+// general-logarithm formula and its pitfall) and the minus signs on the
+// cofunction derivatives (one sentence under the tangent-to-cosecant
+// section says the pattern is no coincidence but never says why). Radians
+// left to /trigonometry/degrees-radians, which already asks it.
 const faqQuestions = {
   obj1: {
     question: "What is the derivative of e^x?",
@@ -736,6 +741,16 @@ const faqQuestions = {
   obj4: {
     question: "What is the derivative of tan x?",
     answer: "It is sec²x. Writing tan x as sin x / cos x and applying the quotient rule gives (cos x · cos x − sin x · (−sin x)) / cos²x, whose numerator collapses to cos²x + sin²x = 1 by the Pythagorean identity, leaving 1/cos²x = sec²x. The companion results are cot′ = −csc²x, sec′ = sec x tan x and csc′ = −csc x cot x.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "What is the derivative of log base 10 of x?",
+    answer: "It is $\\frac{1}{x \\ln 10}$, about $\\frac{0.434}{x}$. By the change of base formula $\\log_{10} x = \\frac{\\ln x}{\\ln 10}$, so it is the natural logarithm times the constant $\\frac{1}{\\ln 10}$, and its derivative is $\\frac{1}{x}$ times the same constant. Writing just $\\frac{1}{x}$ gives slope $1$ at $x = 1$ instead of $0.434$; only base $e$ has no extra factor.",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "Why do the derivatives of cos, cot and csc have a minus sign?",
+    answer: "Because each cofunction is its partner with the angle reflected: $\\cos x = \\sin\\left(\\frac{\\pi}{2} - x\\right)$, $\\cot x = \\tan\\left(\\frac{\\pi}{2} - x\\right)$ and $\\csc x = \\sec\\left(\\frac{\\pi}{2} - x\\right)$. The chain rule multiplies by the derivative of $\\frac{\\pi}{2} - x$, which is $-1$. So $(\\cos x)' = -\\cos\\left(\\frac{\\pi}{2} - x\\right) = -\\sin x$, and the same step turns $\\sec^2$ into $-\\csc^2$ and $\\sec \\tan$ into $-\\csc \\cot$.",
     sectionId: "5"
   }
 }

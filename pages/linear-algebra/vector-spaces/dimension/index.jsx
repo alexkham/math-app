@@ -2301,8 +2301,12 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 
 
 export async function getStaticProps(){
@@ -2811,6 +2815,26 @@ const summaryTable = `
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Definition") — template A, definition
+// last. Running instance: three different bases of the plane, all of size 2,
+// against sets that are too small or too large. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box with link, three passages and
+// the definition demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBasesTable = ciTableOpen(['set of vectors in the plane', 'reaches every point?', 'no spare vector?', 'basis?', 'size']) +
+  ciRow(['(1, 0), (0, 1)', 'yes', 'yes', 'yes', '2'], { color: '#2563EB', cols: [4] }) +
+  ciRow(['(1, 2), (3, 1)', 'yes', 'yes', 'yes', '2'], { shade: true, color: '#2563EB', cols: [4] }) +
+  ciRow(['(1, 1), (1, −1)', 'yes', 'yes', 'yes', '2'], { color: '#2563EB', cols: [4] }) +
+  ciRow(['(1, 2)', 'no — only a line', 'yes', 'no', '1'], { shade: true }) +
+  ciRow(['(1, 0), (0, 1), (1, 1)', 'yes', 'no — (1, 1) is spare', 'no', '3'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -3158,6 +3182,13 @@ const introContent = {
   content: `Every basis for a given vector space has the same number of elements. This number — the dimension — is the single most important invariant of the space. It governs how many vectors can be independent, how large a spanning set must be, how subspaces nest inside one another, and whether two spaces are structurally identical.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the zero
+// space (one paragraph under "Definition"), the P_n offset and symmetric
+// matrices (figure cards under "Dimensions of Standard Spaces"), n vectors
+// in R^n (pitfall box under "Dimension and Independence") and three
+// subspaces breaking inclusion-exclusion (fact box under "The Dimension
+// Formula for Subspace Sums"). Rank-nullity left to the rank and
+// image-kernel pages.
 const faqQuestions = {
   obj1: {
     question: "Does $\\mathbb{C}$ have dimension $1$ or $2$?",
@@ -3173,6 +3204,31 @@ const faqQuestions = {
     question: "Why can any $n$-dimensional space be treated as $\\mathbb{R}^n$?",
     answer: "Because every $n$-dimensional space over $\\mathbb{F}$ is isomorphic to $\\mathbb{F}^n$, so once a basis is fixed the two are interchangeable for computation. Choosing the basis is what supplies the translation, and coordinate vectors are that isomorphism written down. Without a chosen basis the correspondence exists but has no concrete form.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "What is the dimension of the zero vector space?",
+    answer: "Zero. The zero vector cannot belong to a basis, because $\\{\\mathbf{0}\\}$ is dependent on its own: $1 \\cdot \\mathbf{0} = \\mathbf{0}$ is a nontrivial relation. The basis of $\\{\\mathbf{0}\\}$ is therefore the empty set, which is independent vacuously and spans $\\{\\mathbf{0}\\}$ because the empty linear combination is $\\mathbf{0}$. A basis with no vectors gives $\\dim(\\{\\mathbf{0}\\}) = 0$, not $1$.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Why does $\\mathcal{P}_2$ have dimension $3$ and not $2$?",
+    answer: "Because the constant term is a basis direction too. A general element $a_0 + a_1 x + a_2 x^2$ has three free coefficients, and the basis $\\{1, x, x^2\\}$ has three elements. Reading the subscript as the count leaves out $1$: no combination $ax + bx^2$ equals the constant $5$, since every such combination is $0$ at $x = 0$. In general $\\dim(\\mathcal{P}_n) = n + 1$.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "What is the dimension of the space of symmetric matrices?",
+    answer: "For real $n \\times n$ symmetric matrices it is $\\frac{n(n+1)}{2}$. The condition $A = A^{T}$ ties each entry below the diagonal to its mirror above it, so only the diagonal and one triangle can be chosen freely: $n$ diagonal entries plus $\\frac{n(n-1)}{2}$ above them. For $n = 3$ that gives $6$, against $9$ for the space of all $3 \\times 3$ matrices.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "Are any $n$ vectors in $\\mathbb{R}^n$ a basis?",
+    answer: "No, the count alone settles nothing. The vectors $(1, 2, 3)$, $(2, 4, 6)$ and $(0, 0, 1)$ are three vectors in $\\mathbb{R}^3$, but $(2, 4, 6) = 2(1, 2, 3)$, their matrix has only $2$ pivots, and they span a plane. What the right count buys is that one check is enough: $n$ independent vectors span automatically and $n$ spanning vectors are independent, so a nonzero determinant decides it.",
+    sectionId: "5"
+  },
+  obj8: {
+    question: "Does inclusion-exclusion work for three subspaces?",
+    answer: "No, the three-set pattern breaks. Three different lines through the origin of $\\mathbb{R}^2$ meet pairwise, and all together, only at $\\mathbf{0}$, so the pattern predicts $1 + 1 + 1 - 0 - 0 - 0 + 0 = 3$. Their sum is the plane, of dimension $2$, since any two of the lines already span it. The three coordinate axes of $\\mathbb{R}^3$ have the same dimensions and intersections but a sum of dimension $3$, so no formula built from those numbers can work.",
+    sectionId: "8"
   }
 }
 
@@ -3272,6 +3328,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    basesTable: ciBasesTable,
+  };
+
   const demoUnits = {
     definition: demoUnitFrame({
       svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
@@ -3320,11 +3380,33 @@ const schemas = {
     ],
   };
 
+  // ComparisonTable2 (obj4): finite-infinite-dimension
+  const finiteInfiniteDimension = {
+    kicker: 'dimension',
+    title: 'Finite and infinite dimension, side by side',
+    intro: 'The finite case is clean and complete; the infinite case needs other tools.',
+    tallyLabel: 'compared',
+    subjects: [
+      { name: 'Finite-dimensional' },
+      { name: 'Infinite-dimensional' },
+    ],
+    features: [
+      { label: 'Definition', values: ['has a finite basis', 'has no finite basis'] },
+      { label: 'Bases', values: ['every independent set extends to a basis; every spanning set reduces to one', 'exist (with the axiom of choice) as Hamel bases, often unwieldy'] },
+      { label: 'Dimension', values: ['a finite integer that governs the whole structure', 'not a finite number: a Hamel basis for $C[0, 1]$ is uncountable'] },
+      { label: 'Working tools', values: ['the theory on this site', 'Schauder bases, Hilbert spaces, functional analysis'] },
+      { label: 'Examples', values: ['$\\mathbb{R}^n$, $\\mathcal{P}_n$, $\\mathbb{R}^{m \\times n}$, solution spaces of linear ODEs with constant coefficients', '$C[0, 1]$; the space of all real sequences'] },
+    ],
+    footnote: 'On this site every vector space is finite-dimensional unless stated otherwise.',
+  };
+
 return {
   props:{
+    finiteInfiniteDimension,
     setSizeLevels,
     subspaceDimLevels,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     standardDimensions,
@@ -3348,9 +3430,72 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DimensionPage({setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function DimensionPage({finiteInfiniteDimension, setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A line needs one number to locate a point, a plane two, space three — that count feels like the "size" of the space.`,
+        content: [
+          `A point on a road is fixed by one distance, a spot on a map by two coordinates, a position in a room by three. Linear algebra makes that count precise using bases: sets of vectors that reach everything with nothing spare.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `In the plane, every basis that turns up has exactly two vectors.`,
+        content: [
+          `Three quite different pairs all reach every point without redundancy. A single vector reaches only a line; three vectors always carry a spare one.`,
+          ciTable('basesTable'),
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `The number 2 is not an accident of the bases tried: every basis of the plane must have two vectors.`,
+        content: [
+          `This definition relies on a nontrivial fact: all bases for $V$ have the same size. Without this guarantee, "the number of vectors in a basis" would depend on which basis was chosen, and the definition would be meaningless. The basis size theorem, proved in the next section, ensures that the count is intrinsic to the space itself.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [dimension](!/linear-algebra/definitions#dimension) of a vector space $V$, written $\\dim(V)$, is the number of vectors in any basis of $V$.`,
+        formula: [
+          `The dimension of a vector space $V$, written $\\dim(V)$, is the number of vectors in any [basis](!/linear-algebra/vector-spaces) for $V$.`,
+          `@academic[formula_callout:Dimension Definition
+$$\\dim(V) = |\\mathcal{B}| \\quad \\text{for any basis } \\mathcal{B} \\text{ of } V$$
+/linear-algebra/formulas#dimension_definition]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `So $\\dim(\\mathbb{R}^2) = 2$, whichever basis is used to count.`,
+      },
+      {
+        id: 'kind',
+        lead: `Dimension is a single whole number belonging to the space itself, not to any one basis.`,
+        content: [
+          `By convention, the zero space $\\{\\mathbf{0}\\}$ has dimension $0$. Its only "basis" is the empty set, which contains no vectors, is vacuously independent, and spans $\\{\\mathbf{0}\\}$ since the empty linear combination produces $\\mathbf{0}$.`,
+          <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `Every result later on this page is a consequence of that one distinction between counting vectors and counting directions.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What generalizes and what does not: count independent directions, not vectors.`,
+        content: `Three vectors in the plane still give dimension $2$, because one is spare; two vectors on the same line give dimension $1$. Only a basis gives the right count, and the fact that every basis gives the same count is the [basis size theorem](!/linear-algebra/vector-spaces/dimension#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the basis size theorem, the dimensions of standard spaces, finite and infinite dimension, and how dimension relates to independence, spanning and subspaces.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -3358,9 +3503,7 @@ export default function DimensionPage({setSizeLevels, subspaceDimLevels, seoData
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
-          `Every result later on this page is a consequence of that one distinction between counting vectors and counting directions.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -3379,6 +3522,11 @@ export default function DimensionPage({setSizeLevels, subspaceDimLevels, seoData
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSpacesNotationSheet}
+            current={'/linear-algebra/vector-spaces/dimension'}
           />,
         ]
     },
@@ -3412,6 +3560,16 @@ export default function DimensionPage({setSizeLevels, subspaceDimLevels, seoData
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `The two cases side by side, as this section describes them.`,
+          <DiagramFrame
+            key={'obj4-comparison'}
+            id="finite-infinite-dimension"
+            title="Finite and infinite dimension, side by side"
+            source="/linear-algebra/vector-spaces/dimension"
+          >
+            <ComparisonTable2 data={finiteInfiniteDimension} />
+          </DiagramFrame>,
+          `Everything in the left-hand column is what the rest of this page relies on: a finite basis, a dimension that is a whole number, sets that extend or reduce to bases. The right-hand column marks where that stops working and other tools take over.`,
         ]
     },
     {

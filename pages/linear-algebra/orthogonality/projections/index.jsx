@@ -1858,6 +1858,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import projectionDiagrams from '@/app/components/linear-algebra copy/matrix/projectionDiagrams'
 import projection2dDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/projection/projectionDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
 
 
 export async function getStaticProps(){
@@ -2078,7 +2081,7 @@ const projectionProperties = {
     },
     {
       name: 'Minimal distance',
-      anchor: '#7',
+      anchor: '#2',
       statement: '$\\|\\mathbf{b} - P\\mathbf{b}\\| \\leq \\|\\mathbf{b} - \\mathbf{w}\\|$ for all $\\mathbf{w} \\in W$',
       verdict: 'conditional',
       holdsWhen: 'equality iff $\\mathbf{w} = P\\mathbf{b}$',
@@ -2143,6 +2146,26 @@ const summaryTable = `
 
 
 // formulas-injected: v1 | 2026-06-16 | 6 callouts (obj2 orthogonal_decomposition direct, obj3 projection_onto_orthonormal_basis direct, obj4 projection_onto_subspace direct, obj5 orthonormal_columns_projection inline-promote + complementary_projection prose-insert, obj6 projection_matrix_properties prose-insert)
+
+// Concept introduction (section 1, "Projection onto a Vector") — template
+// H, open question. Running instance: the point on the line through
+// a = (1, 1) closest to b = (3, 4), found at (3.5, 3.5). Old obj1 text is
+// kept in sectionsContent.obj1, unused; its four formula boxes, pitfall
+// aside, five passages, the heading line and the ontovector demo frame with
+// its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciNearTable = ciTableOpen(['point t·(1, 1) on the line', 'leftover b − point', 'distance to b', 'leftover · (1, 1)']) +
+  ciRow(['(2, 2)', '(1, 2)', '2.24', '3']) +
+  ciRow(['(3, 3)', '(0, 1)', '1', '1'], { shade: true }) +
+  ciRow(['(3.5, 3.5)', '(−0.5, 0.5)', '0.71 — the smallest', '0'], { color: '#2563EB', cols: [2, 3] }) +
+  ciRow(['(4, 4)', '(−1, 0)', '1', '−1'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -2456,6 +2479,11 @@ const introContent = {
   content: `The orthogonal projection of a vector onto a subspace is the point in the subspace closest to the original vector. The residual — the difference between the vector and its projection — is perpendicular to the subspace. This orthogonal decomposition is the geometric engine behind least squares, the QR decomposition, and every approximation problem in linear algebra.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added oblique
+// projections (the witness card and shadow fact box under "Properties of
+// Orthogonal Projections"), the eigenvalues and trace of P (table under "The
+// Projection Matrix") and the Fourier overshoot (fact box under "The
+// Orthogonal Decomposition").
 const faqQuestions = {
   obj1: {
     question: "Is a projection matrix invertible?",
@@ -2471,6 +2499,21 @@ const faqQuestions = {
     question: "Does the hat in $\\hat{\\mathbf{b}}$ mean the vector has length $1$?",
     answer: "Not here. Two hat conventions coexist in linear algebra: on a vector like $\\hat{\\mathbf{u}}$ it usually promises unit length, but in projection and least squares it marks an approximation or estimate instead. Statistics uses the same hat for estimators, which is where this second meaning comes from rather than a coincidence.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is every matrix with $P^2 = P$ an orthogonal projection?",
+    answer: "No. Squaring to itself makes a matrix a projection, but only the extra condition $P^{T} = P$ makes it drop straight down. The matrix with rows $(1, 1)$ and $(0, 0)$ satisfies $P^2 = P$ and projects onto the $x$-axis, but along the line $y = -x$, and it sends $(1, 1)$ to $(2, 0)$, which is longer. Such oblique projections can lengthen vectors, like an evening shadow outgrowing its pole; an orthogonal projection never does.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "What are the eigenvalues of a projection matrix?",
+    answer: "Only $0$ and $1$. If $P\\mathbf{v} = \\lambda\\mathbf{v}$ for a nonzero $\\mathbf{v}$, then $P^2 = P$ gives $\\lambda^2\\mathbf{v} = \\lambda\\mathbf{v}$, so $\\lambda^2 = \\lambda$. Vectors in $W$ are kept, with eigenvalue $1$, and vectors in $W^{\\perp}$ go to $\\mathbf{0}$, with eigenvalue $0$. The trace counts the ones, so $\\operatorname{tr}(P) = \\operatorname{rank}(P) = \\dim W$: for the plane spanned by $(1, 0, 1)$ and $(0, 1, 1)$ the trace is $\\frac{2 + 2 + 2}{3} = 2$.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Why does a Fourier series overshoot at a jump if it is the closest approximation?",
+    answer: "Because closest means least total squared error, not least error at every point. The Fourier partial sums are projections onto $1, \\cos x, \\sin x, \\ldots$, and beside each jump of a square wave they overshoot by about 9% of the jump however many terms are taken, which is known as the Gibbs phenomenon. The spike gets narrower as terms are added, so its share of the squared error still shrinks to zero.",
+    sectionId: "2"
   }
 }
 
@@ -2552,6 +2595,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    nearTable: ciNearTable,
+  };
+
   const demoUnits = {
     ontovector: demoUnitFrame({
       svg: projectionDiagrams.scale,
@@ -2581,6 +2628,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     projectionFormulas,
@@ -2610,10 +2658,83 @@ export default function ProjectionsPage({
   summaryTable,
   projectionProperties,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `Which point on the line through a = (1, 1) is closest to b = (3, 4)?`,
+        content: [
+          `Picture a light shining straight down onto the line: the shadow of the tip of $\\mathbf{b}$ falls on one point of it. The question is how to find that point with numbers alone.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Trying points t·(1, 1) along the line, the distance to b is smallest at (3.5, 3.5).`,
+        content: [
+          ciTable('nearTable'),
+          `The last column is the telling one: only at the closest point is the dot product of the leftover with $(1, 1)$ equal to $0$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The closest point is the one whose leftover piece is perpendicular to the line.`,
+        content: [
+          `Anywhere else, the leftover leans along the line, and sliding toward it shortens the distance. Only when the leftover meets the line at a right angle is there nothing left to gain — which is why the shadow falls straight down.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The orthogonal [projection](!/linear-algebra/definitions#vector_projection) of $\\mathbf{b}$ onto a nonzero vector $\\mathbf{a}$ is the point on the line through $\\mathbf{a}$ nearest to $\\mathbf{b}$: $\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a}$.`,
+        formula: [
+          `The orthogonal projection of $\\mathbf{b}$ onto a nonzero vector $\\mathbf{a}$ is the point on the line through $\\mathbf{a}$ nearest to $\\mathbf{b}$:`,
+          `@academic[formula_callout:Projection onto a Vector
+$$\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a}$$]@`,
+          `The scalar $\\hat{c} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}$ is the component of $\\mathbf{b}$ in the direction of $\\mathbf{a}$. The projection $\\hat{c}\\,\\mathbf{a}$ lies on the line through $\\mathbf{a}$, and the residual $\\mathbf{b} - \\hat{c}\\,\\mathbf{a}$ is [orthogonal](!/linear-algebra/orthogonality) to $\\mathbf{a}$:`,
+          `@academic[formula_callout:Projection onto a Vector
+$$(\\mathbf{b} - \\hat{c}\\,\\mathbf{a}) \\cdot \\mathbf{a} = \\mathbf{b} \\cdot \\mathbf{a} - \\hat{c}(\\mathbf{a} \\cdot \\mathbf{a}) = \\mathbf{b} \\cdot \\mathbf{a} - \\mathbf{b} \\cdot \\mathbf{a} = 0$$]@`,
+        ],
+        footer: `So with $\\mathbf{a} \\cdot \\mathbf{b} = 7$ and $\\mathbf{a} \\cdot \\mathbf{a} = 2$, the projection of $(3, 4)$ onto $(1, 1)$ is $\\frac{7}{2}(1, 1) = (3.5, 3.5)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A projection is a vector on the line, and it splits b into a part along a and a part perpendicular to a.`,
+        content: [
+          `## Worked Example`,
+          `Project $\\mathbf{b} = (3, 4, 0)$ onto $\\mathbf{a} = (1, 1, 1)$:`,
+          `@academic[formula_callout:Projection onto a Vector
+$$\\hat{c} = \\frac{3 + 4 + 0}{1 + 1 + 1} = \\frac{7}{3}, \\quad \\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{7}{3}(1, 1, 1) = \\left(\\frac{7}{3}, \\frac{7}{3}, \\frac{7}{3}\\right)$$]@`,
+          `Residual: $\\mathbf{b} - \\text{proj}_{\\mathbf{a}}\\mathbf{b} = (\\frac{2}{3}, \\frac{5}{3}, -\\frac{7}{3})$. Check: $(\\frac{2}{3})(1) + (\\frac{5}{3})(1) + (-\\frac{7}{3})(1) = 0$.`,
+          <div key={'unit-ontovector'} dangerouslySetInnerHTML={{ __html: demoUnits.ontovector }} />,
+          `Projecting onto a subspace rather than a single vector is this same step repeated once per basis direction, provided the basis is orthogonal.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The classic slip is dividing by the length instead of its square — and the residual check catches it.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Dividing by the length instead of its square
+Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$ instead of $\\mathbf{a} \\cdot \\mathbf{a} = 3$ gives $\\frac{7}{\\sqrt{3}}(1, 1, 1)$, of length $7$, more than $\\|\\mathbf{b}\\| = 5$. The projection is $\\frac{7}{3}(1, 1, 1)$.
+[Read more](!#pitfalls)]@`,
+          `The residual check is the quickest test of a computed projection. Only one multiple of $\\mathbf{a}$ leaves a remainder perpendicular to $\\mathbf{a}$, so a slip in the coefficient shows up as a nonzero dot product. A second test is size: the projection and the residual are the two legs of a right triangle whose hypotenuse is $\\mathbf{b}$, so the projection is never longer than $\\mathbf{b}$.`,
+          `Splitting a vector against a whole plane or subspace is the subject of [the orthogonal decomposition](!/linear-algebra/orthogonality/projections#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the orthogonal decomposition, projection with orthogonal and arbitrary bases, the projection matrix, the properties of projections, least squares, and a worked example.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2621,9 +2742,7 @@ export default function ProjectionsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-ontovector'} dangerouslySetInnerHTML={{ __html: demoUnits.ontovector }} />,
-          `Projecting onto a subspace rather than a single vector is this same step repeated once per basis direction, provided the basis is orthogonal.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2642,6 +2761,11 @@ export default function ProjectionsPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laOrthoNotationSheet}
+            current={'/linear-algebra/orthogonality/projections'}
           />,
         ]
     },

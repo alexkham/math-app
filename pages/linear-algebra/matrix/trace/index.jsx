@@ -944,6 +944,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import traceDiagrams from '@/app/components/linear-algebra copy/matrix/traceDiagrams'
 import renderMatrixGridV3 from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid.v3'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
 
 
 export async function getStaticProps(){
@@ -1073,7 +1075,7 @@ export async function getStaticProps(){
       },
       {
         name: 'Transpose invariance',
-        anchor: '#9',
+        anchor: '#2',
         statement: '$\\operatorname{tr}(A^{\\mathsf{T}}) = \\operatorname{tr}(A)$',
         verdict: 'holds',
         requires: '$A$ square',
@@ -1720,6 +1722,11 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the trace of
+// a product (Common Pitfalls), zero trace read as singular (pitfall box in
+// section 3), AB - BA = I (fact box and paragraph in section 8) and the
+// transpose in the gradient of tr(AX) (pitfall box in section 10); no
+// heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Is $\\operatorname{tr}(ABC)$ the same as $\\operatorname{tr}(BAC)$?",
@@ -1735,6 +1742,26 @@ const faqQuestions = {
     question: "Why is $\\operatorname{tr}$ set in upright type rather than italics?",
     answer: "The roman type marks it as an operator name rather than a product of two variables $t$ and $r$, the same convention that sets $\\det$ and $\\operatorname{rank}$ upright. Spellings vary by field: physics capitalises it as $\\operatorname{Tr}$, while German and older Russian texts write $\\operatorname{sp}$, from the word Spur.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is $\\operatorname{tr}(AB)$ equal to $\\operatorname{tr}(A)\\operatorname{tr}(B)$?",
+    answer: "No. The trace is additive but not multiplicative; the product rule belongs to the determinant. With $A$ rows $(1, 2), (0, 1)$ and $B$ rows $(1, 0), (3, 1)$, both traces are $2$, yet $AB$ has rows $(7, 2), (3, 1)$ and trace $8$, not $4$. The diagonal of $AB$ uses the off-diagonal entries of $A$ and $B$, which their traces never see.",
+    sectionId: "pitfalls"
+  },
+  obj5: {
+    question: "Does a trace of zero mean the matrix is singular?",
+    answer: "No. A zero trace says only that the eigenvalues add up to $0$. The matrix $\\text{diag}(1, -1)$ has trace $1 + (-1) = 0$, yet its determinant is $-1$ and it is its own inverse, since its square is $I$. Nilpotent and skew-symmetric matrices do have trace $0$, but the statement does not run backwards; singularity is tested with the determinant.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Can $AB - BA$ equal the identity matrix?",
+    answer: "Not for $n \\times n$ matrices over the real or complex numbers. The commutator always has trace $0$, because $\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$, while $\\operatorname{tr}(I) = n$. In infinite dimensions it becomes possible: on polynomials, differentiation $D$ and multiplication by $x$, called $M$, satisfy $DM - MD = I$, since $(xf)' - xf' = f$. That is why quantum position and momentum cannot be finite matrices.",
+    sectionId: "8"
+  },
+  obj7: {
+    question: "Why is the derivative of $\\operatorname{tr}(AX)$ equal to $A^{T}$ rather than $A$?",
+    answer: "Because $\\operatorname{tr}(AX) = \\sum_i \\sum_j a_{ij}x_{ji}$ pairs each $a_{ij}$ with the entry of $X$ in the transposed position. The derivative with respect to $x_{ji}$ is $a_{ij}$, so the gradient holds $a_{ij}$ at position $(j, i)$, which is $A^{T}$. With $A$ rows $(1, 2), (3, 4)$, the coefficient of $x_{12}$ is $3$. For a symmetric $A$ the two answers agree, so the slip often goes unnoticed.",
+    sectionId: "10"
   }
 }
 
@@ -1957,6 +1984,11 @@ export default function MatrixTracePage({seoData, sectionsContent, introContent,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laMatrixNotationSheet}
+            current={'/linear-algebra/matrix/trace'}
           />,
         ]
     },

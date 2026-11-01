@@ -1033,6 +1033,8 @@ import { renderState as renderInverseState } from '@/app/components/trigonometry
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 
 
 export async function getStaticProps(){
@@ -1238,7 +1240,7 @@ export async function getStaticProps(){
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">[−π/2, 0) ∪ (0, π/2]</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">decreasing on each piece</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">arccsc x = arcsin(1/x)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">undefined for |x| &lt; 1; gap in graph at x = 0</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">undefined for |x| &lt; 1; gap in graph on (−1, 1)</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="#5" style="${linkStyle}">arcsec</a></td>
@@ -1260,31 +1262,55 @@ export async function getStaticProps(){
 </table>
 `
 
+// FAQ pass 2026-10-31: cut "Why do trigonometric functions need restricted
+// domains to have inverses?" (restates the h2 "Why Restriction Is
+// Necessary"); keys renumbered. The arctan-quadrant question now points to
+// section 6, where atan2 is explained. This page owns the sin⁻¹ versus
+// 1/sin notation question; the near-copy on /trigonometry/identities was cut.
+// Added: arcsin x + arccos x = π/2 (formula box under "The Arccosine
+// Function"), arccos of a negative input (pitfall there), the zigzag graph of
+// arcsin(sin x) (fact box under "Compositions") and arccot of a negative
+// input (pitfall under "Inverse Reciprocal Functions").
 const faqQuestions = {
   obj1: {
-    question: "Why do trigonometric functions need restricted domains to have inverses?",
-    answer: "Because a function can only be inverted if each output comes from exactly one input, and the trigonometric functions repeat forever. Sine takes the value 0.5 at infinitely many angles, so an unrestricted inverse would have no way to choose among them. Cutting the domain to one stretch where the function never repeats fixes this.",
-    sectionId: "1"
-  },
-  obj2: {
     question: "What is the difference between sin⁻¹(x) and 1/sin(x)?",
     answer: "The first is the inverse function, returning the angle whose sine is x. The second is the reciprocal, whose proper name is cosecant. The notation collides because positive exponents do mean powers, so −1 looks like it should too. Writing the reciprocal unambiguously takes brackets, as (sin x)⁻¹, or simply 1 over sin x.",
     sectionId: "6"
   },
-  obj3: {
+  obj2: {
     question: "Why does arcsine only return angles between −π/2 and π/2?",
     answer: "That is the interval chosen as sine's restricted domain, so it becomes arcsine's range. It works because sine rises steadily across it, hitting every value from −1 to 1 exactly once. Arccosine uses 0 to π for the same reason. Angles outside these ranges have the right sine but are not what the inverse returns.",
     sectionId: "2"
   },
-  obj4: {
+  obj3: {
     question: "How do you evaluate something like sin(arccos(x))?",
     answer: "Treat the inner part as an angle in a right triangle. If the cosine of that angle is x, label the adjacent side x and the hypotenuse 1, then use the Pythagorean theorem for the third side. Reading the sine off that triangle gives the square root of 1 minus x squared, with no inverse function left.",
     sectionId: "8"
   },
-  obj5: {
+  obj4: {
     question: "Why does arctan sometimes give the wrong quadrant?",
     answer: "Because it takes a single ratio and cannot distinguish opposite directions: a point in the third quadrant produces the same ratio as one in the first. The result always lands between −π/2 and π/2. The two-argument form atan2, which receives both coordinates separately, exists to resolve exactly this ambiguity.",
-    sectionId: "7"
+    sectionId: "6"
+  },
+  obj5: {
+    question: "Why does arcsin x + arccos x always equal π/2?",
+    answer: "Because sine and cosine are cofunctions. If $\\theta = \\arcsin x$, then $\\sin\\theta = x$, and $\\cos\\left(\\frac{\\pi}{2} - \\theta\\right) = \\sin\\theta = x$ as well. Since $\\theta$ lies in $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, the angle $\\frac{\\pi}{2} - \\theta$ lies in $[0, \\pi]$, the range of arccosine, so it is exactly $\\arccos x$. For $x = \\frac{1}{2}$: $\\frac{\\pi}{6} + \\frac{\\pi}{3} = \\frac{\\pi}{2}$. Knowing one of the two values gives the other.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Is arccos(−x) equal to −arccos(x)?",
+    answer: "No, arccosine is not odd, because it never returns a negative angle. The correct rule is $\\arccos(-x) = \\pi - \\arccos x$. For example, $\\arccos\\left(-\\frac{1}{2}\\right) = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$, and indeed $\\cos\\frac{2\\pi}{3} = -\\frac{1}{2}$. Every negative input lands in $\\left(\\frac{\\pi}{2}, \\pi\\right]$. Arcsine and arctangent are the odd ones, which is why the minus-sign habit gets carried over by mistake.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "What does the graph of arcsin(sin x) look like?",
+    answer: "A zigzag of straight lines. On $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$ the two functions cancel and the graph is $y = x$. Beyond that, arcsine folds each angle back into its range, so on $\\left[\\frac{\\pi}{2}, \\frac{3\\pi}{2}\\right]$ the graph is $y = \\pi - x$, with slope $-1$. The pattern repeats every $2\\pi$ and never leaves the band from $-\\frac{\\pi}{2}$ to $\\frac{\\pi}{2}$. For example, $\\arcsin\\left(\\sin\\frac{5\\pi}{6}\\right) = \\frac{\\pi}{6}$.",
+    sectionId: "8"
+  },
+  obj8: {
+    question: "How do you find arccot of a negative number?",
+    answer: "Use $\\operatorname{arccot} x = \\frac{\\pi}{2} - \\arctan x$, which holds for every $x$. The shortcut $\\arctan\\left(\\frac{1}{x}\\right)$ works only for $x > 0$; for a negative input it gives a negative angle, outside the range $(0, \\pi)$. So $\\operatorname{arccot}(-1) = \\frac{\\pi}{2} + \\frac{\\pi}{4} = \\frac{3\\pi}{4}$, not $-\\frac{\\pi}{4}$. Adding $\\pi$ to the shortcut's answer gives the same result.",
+    sectionId: "5"
   }
 }
 
@@ -2201,7 +2227,7 @@ export default function InverseFunctionsPage({triangleMethodSteps, arctangentPro
       },
       {
         id: 'exit',
-        content: `The rest of the page defines arcsine, arccosine and arctangent with their intervals, then the reciprocal inverses, their graphs, the composition rules, solving equations with inverse functions, and their derivatives.`,
+        content: `The rest of the page defines arcsine, arccosine and arctangent with their intervals, then the reciprocal inverses, their graphs, and the composition rules.`,
       },
     ],
   }
@@ -2316,6 +2342,11 @@ export default function InverseFunctionsPage({triangleMethodSteps, arctangentPro
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={trigonometryNotationSheet}
+            current={'/trigonometry/inverse-functions'}
           />,
           <div key={'obj6-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj6Table }} />,

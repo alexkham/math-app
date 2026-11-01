@@ -16,6 +16,9 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 
 
 
@@ -226,6 +229,26 @@ export async function getStaticProps(){
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 1, "What is a Root?") — template A,
+    // definition last. Running instance: P(x) = x² − 5x + 6 from the section's
+    // example, roots 2 and 3. Old obj1 text is kept in sectionsContent.obj1,
+    // unused; its example box, four passages and the rootCheck demo frame with
+    // its line are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciInputTable = ciTableOpen(['input x', 'P(x) = x² − 5x + 6', 'output is 0?']) +
+      ciRow(['0', '0 − 0 + 6 = 6', 'no']) +
+      ciRow(['1', '1 − 5 + 6 = 2', 'no'], { shade: true }) +
+      ciRow(['2', '4 − 10 + 6 = 0', 'yes'], { color: '#2563EB', cols: [1, 2] }) +
+      ciRow(['3', '9 − 15 + 6 = 0', 'yes'], { shade: true, color: '#2563EB', cols: [1, 2] }) +
+      ciRow(['4', '16 − 20 + 6 = 2', 'no'], { last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -655,6 +678,13 @@ How to check: the factored form shows the signs. $x^2 + 7x + 10 = (x + 2)(x + 5)
   content: `The roots of a polynomial are the values that make it equal zero. These special inputs reveal the polynomial's structure, connect its algebraic and geometric properties, and stand at the center of solving polynomial equations. Finding roots is one of the most fundamental tasks in algebra.`
 }
 
+// FAQ pass 2026-10-31: kept the two notation questions. Cut "Why must complex
+// roots come in conjugate pairs?": complex-numbers/complex-conjugate asks the
+// same question under its own heading "Conjugate Pairs in Polynomials".
+// Added the sensitivity of roots to one coefficient (Wilkinson fact box under
+// "Number of Roots"), the root lost by dividing by x (pitfall under factoring)
+// and spotting complex roots from Vieta's formulas (fact box under "Sum and
+// Product of Roots"). No heading asks them. Keys renumbered.
 const faqQuestions = {
   obj1: {
     question: "What is the degree of the zero polynomial?",
@@ -667,9 +697,19 @@ const faqQuestions = {
     sectionId: "notation"
   },
   obj3: {
-    question: "Why must complex roots come in conjugate pairs?",
-    answer: "Because the coefficients are real. If $2 + 3i$ is a root of a polynomial with real coefficients, then $2 - 3i$ must be one too, since the imaginary parts have to cancel for the coefficients to come out real. Listing one without the other describes a polynomial that cannot have real coefficients at all.",
-    sectionId: "9"
+    question: "Can a tiny change in one coefficient change a polynomial's roots a lot?",
+    answer: "Yes, enormously. Wilkinson's polynomial $(x - 1)(x - 2)\\cdots(x - 20)$ has twenty well-separated real roots, yet lowering its $x^{19}$ coefficient $-210$ by $2^{-23}$, about one ten-millionth, turns ten of them into complex pairs such as $16.73 \\pm 2.81i$. Near $x = 16$ that nudge times $x^{19}$ is about $9 \\times 10^{15}$, hundreds of times the polynomial's own values there, so the roots cannot stay put.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "Why does dividing both sides by $x$ lose a root?",
+    answer: "Because $x$ itself may be zero, and dividing by it throws exactly that case away. Dividing $x^3 - 4x = 0$ by $x$ leaves $x^2 = 4$, which gives only $2$ and $-2$. Factoring out $x$ keeps it instead: $x(x - 2)(x + 2) = 0$, and the zero-product property gives all three roots, $0$, $2$ and $-2$. A cubic with only two roots found and no repeated factor is missing one.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Can you tell a polynomial has complex roots without finding them?",
+    answer: "Sometimes, from the coefficients alone. For $x^3 + x + 1$, Vieta's formulas give a root sum of $0$ and pairwise products adding up to $1$, so the squares of the roots add up to $0^2 - 2 \\cdot 1 = -2$. Squares of real numbers never sum to a negative number, so the three roots cannot all be real: one is real and the other two form a complex conjugate pair.",
+    sectionId: "11"
   }
 }
 
@@ -766,6 +806,10 @@ const schemas = {
     notes: [{ x: 0.3, y: 3.6, text: 'P(x) = x³ − 6x² + 11x − 6', pos: 'e', color: 'f' },
       { x: 0.3, y: 3.0, text: 'dashed: quotient x² − 4x + 3 after dividing by x − 2', pos: 'e', color: 'g' }],
     caption: 'Dividing out x − 2 leaves a quotient with the other roots, 1 and 3' };
+
+  const conceptIntroFigures = {
+    inputTable: ciInputTable,
+  };
 
   const demoUnits = {
     factors: demoUnitFrame({
@@ -868,6 +912,7 @@ const schemas = {
     cubicFactoringSteps,
     realComplexBeforeAfter,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -887,9 +932,69 @@ const schemas = {
 }
    }
 
-export default function RootsPage({rootMethodTree, cubicFactoringSteps, realComplexBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RootsPage({rootMethodTree, cubicFactoringSteps, realComplexBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A polynomial turns each input into an output — and some inputs give exactly 0.`,
+        content: [
+          `Take $P(x) = x^2 - 5x + 6$ and feed it the whole numbers from $0$ to $4$, one at a time, watching what comes out.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Two of the five inputs, 2 and 3, make the output vanish; the others do not.`,
+        content: [
+          ciTable('inputTable'),
+          <div key={'unit-rootCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.rootCheck }} />,
+          `Substitution can confirm a claimed root but cannot find one on its own.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The inputs that give 0 are where the graph meets the x-axis — and exactly the solutions of the equation P(x) = 0.`,
+        content: [
+          `Roots answer a precise question: for which values of $x$ does $P(x) = 0$? This question drives equation-solving throughout algebra. Setting a polynomial equal to zero and finding its roots is equivalent to solving the corresponding polynomial equation.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [root](!/algebra/definitions#root) of a polynomial $P(x)$ is a number $r$ with $P(r) = 0$; it is also called a zero of the polynomial, or a solution of $P(x) = 0$.`,
+        formula: [
+          `A root of a polynomial $P(x)$ is a value $r$ such that $P(r) = 0$. The terms "root," "zero," and "solution" all refer to the same thing — an input that makes the polynomial vanish.`,
+          `@academic[example:Example
+Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. Testing $x = 3$ gives $P(3) = 9 - 15 + 6 = 0$. Both values produce zero, so both are roots. Any other input — say $x = 1$ — yields $P(1) = 1 - 5 + 6 = 2 \\neq 0$, confirming that $1$ is not a root.]@`,
+        ],
+        footer: `So $2$ and $3$ are the roots of $x^2 - 5x + 6$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A root is a single number, and one substitution settles whether a number is a root.`,
+        content: [
+          `Verification is always available through direct substitution. Claim that $r$ is a root, substitute it into $P(x)$, and check whether the result is zero. This test is definitive — no ambiguity, no approximation. A value either satisfies $P(r) = 0$ or it does not.`,
+          `To find the roots of a specific polynomial of degree four or less, use the [polynomial equation solver](!/algebra/calculators/equations/polynomial).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Testing can confirm a root but not find one — and some polynomials have no real roots at all.`,
+        content: `$x^2 + 1$ is at least $1$ for every real $x$, so it never reaches $0$. Finding roots needs methods of its own, starting from [roots and factors](!/algebra/polynomials/roots#2); polynomials without real roots are the subject of [real vs. complex roots](!/algebra/polynomials/roots#9).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, roots and factors, the number of roots, multiplicity, four methods for finding roots, real and complex roots, roots and graphs, and the sum and product of roots.`,
+      },
+    ],
+  }
     
   const genericSections=[
      {
@@ -907,9 +1012,7 @@ export default function RootsPage({rootMethodTree, cubicFactoringSteps, realComp
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-rootCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.rootCheck }} />,
-          `Substitution can confirm a claimed root but cannot find one on its own.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -928,6 +1031,11 @@ export default function RootsPage({rootMethodTree, cubicFactoringSteps, realComp
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={polyEqIneqNotationSheet}
+            current={'/algebra/polynomials/roots'}
           />,
                   <div key={'unit-factors'} dangerouslySetInnerHTML={{ __html: demoUnits.factors }} />,
           `The Factor Theorem in the rules page is this correspondence stated as a theorem.`,

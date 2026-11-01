@@ -848,6 +848,10 @@ export async function getStaticProps(){
   // mistakes, when they are useful. Replaced with the multiply/add
   // justification deferred here from the total-probability page, plus three
   // of the mistake bullets, which the page lists without unpacking.
+  // FAQ pass 2026-10-31: kept all four. Added paths of unequal length (the
+  // best-of-seven fact box under Components) and ordered paths (the poker
+  // fact box under Tree Diagrams vs Other Representations); no heading asks
+  // either.
   const faqQuestions = {
     obj1: {
       question: "Why do you multiply along a path but add across paths?",
@@ -868,6 +872,16 @@ export async function getStaticProps(){
       question: "How do you read a tree diagram after you learn the outcome?",
       answer: "Keep only the paths consistent with what you observed, then compare them against each other. The branch probabilities were written for the forward direction, so you cannot read an answer straight off a branch; you divide the matching path's probability by the total of all surviving paths. That division is Bayes' theorem, done on the diagram.",
       sectionId: "6"
+    },
+    obj5: {
+      question: "Does every path in a tree diagram have to be the same length?",
+      answer: "No. A path can stop as soon as the result is settled while other branches keep splitting. In a best-of-seven series a path ends when one side reaches 4 wins, so the tree has 70 leaves rather than $2^7 = 128$, sitting after game 4, 5, 6 or 7. Each leaf is still one complete outcome; with evenly matched sides, the series ends in game 6 or in game 7 with the same probability, $\\frac{5}{16}$.",
+      sectionId: "2"
+    },
+    obj6: {
+      question: "Does a tree diagram count ordered or unordered outcomes?",
+      answer: "Ordered. Each stage is one step of the process, so a path records the order in which things happened, and different orders are different paths. Dealing 5 cards one at a time gives $52 \\cdot 51 \\cdot 50 \\cdot 49 \\cdot 48 = 311{,}875{,}200$ paths, yet there are only $2{,}598{,}960$ different hands: each hand sits on $5! = 120$ paths. An unordered event, such as one red ball and one blue, adds every path that leads to it.",
+      sectionId: "7"
     }
   }
 

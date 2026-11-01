@@ -811,6 +811,7 @@ import { renderMultiplesLine } from '@/app/utils/illustrations/arithmetic/divisi
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -990,6 +991,25 @@ const summaryTable = `
 </table>
 `
 
+    // Concept introduction (section 1, "What is Modulo?") — template A,
+    // definition last. Running instance: 9 o'clock plus 17 hours, 26 mod 12 = 2.
+    // Old obj1 text is kept in sectionsContent.obj1, unused; its formula box,
+    // six passages, the obj1Table and the wrap demo frame with its line are
+    // carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciClockTable = ciTableOpen(['hours counted from 12 o\'clock', 'full turns of 12', 'hours left over', 'the clock shows']) +
+      ciRow(['26', '2', '2', '2 o\'clock'], { color: '#2563EB', cols: [2, 3] }) +
+      ciRow(['15', '1', '3', '3 o\'clock'], { shade: true }) +
+      ciRow(['30', '2', '6', '6 o\'clock']) +
+      ciRow(['36', '3', '0', '12 o\'clock'], { shade: true, last: true }) +
+      '</tbody></table>'
+
     const sectionsContent={
 
    obj0: {
@@ -1125,6 +1145,8 @@ $$a \\bmod n = a - n \\cdot \\left\\lfloor \\frac{a}{n} \\right\\rfloor$$]@
 
 This captures the three-step process in a single expression: divide, truncate to an integer, subtract the product.
 
+The floor function, and why it differs from dropping the decimals when the quotient is negative, is covered on the [integer and fractional part](!/arithmetic/integer-part) page.
+
 To get the remainder for any pair of numbers instantly, use the [modulo calculator](!/calculators/modulo-calculator).`,
   before: ``,
   after: ``,
@@ -1145,7 +1167,7 @@ Here the division equation takes the form $a = n \\cdot 0 + a$. The quotient is 
 
 When $n = 1$, every integer is a multiple of $1$, so the remainder is always $0$. The expression $a \\bmod 1 = 0$ for any integer $a$. The remainder set $\\{0, 1, \\ldots, n-1\\}$ collapses to $\\{0\\}$.
 
-When $n = 0$, the operation is undefined. Division by zero has no meaning, and "the remainder when dividing by zero" inherits that meaninglessness. Every $q$ satisfies $a = 0 \\cdot q + r$ with $r = a$, because $0 \\cdot q = 0$ regardless of $q$, so the quotient is not unique, and no remainder can satisfy $0 \\leq r < 0$. In programming, attempting $a \\% \\; 0$ raises a runtime error.`,
+When $n = 0$, the operation is undefined. Division by zero has no meaning, and "the remainder when dividing by zero" inherits that meaninglessness. Every $q$ satisfies $a = 0 \\cdot q + r$ with $r = a$, because $0 \\cdot q = 0$ regardless of $q$, so the quotient is not unique, and no remainder can satisfy $0 \\leq r < 0$. In programming, $a \\% \\; 0$ has no valid result: Python raises an error, C leaves the behavior undefined, and JavaScript returns $\\texttt{NaN}$.`,
   before: ``,
   after: ``,
   link: '',
@@ -1389,6 +1411,12 @@ How to check: a remainder is always less than the modulus. An answer equal to $n
 // question (owned by /arithmetic/divisibility/rules) and the Euclidean
 // algorithm question (owned by /arithmetic/divisibility/gcd). Kept four
 // buried-content questions, three of them extended.
+// FAQ pass 2026-10-31: kept the four questions; the even/odd answer now says
+// "non-negative" for the last-digit claim and points to The Range of
+// Remainders (section 4), where parity and last digits are. Added mod 0 (one
+// paragraph under Edge Cases), the ISBN X (fact box under The Range of
+// Remainders), 24 mod 12 (pitfall under The Clock Analogy) and Friday the
+// 13th (fact box under The Clock Analogy).
 const faqQuestions = {
   obj1: {
     question: "What is the difference between mod and % operators?",
@@ -1397,8 +1425,8 @@ const faqQuestions = {
   },
   obj2: {
     question: "How do you test if a number is even or odd using modulo?",
-    answer: "A number is even if n mod 2 = 0, and odd if n mod 2 = 1 — evenness is exact divisibility by 2, so the remainder decides. Similarly, n mod 10 gives the last digit of any number, and n mod 100 gives the last two digits.",
-    sectionId: "3"
+    answer: "A number is even if n mod 2 = 0, and odd if n mod 2 = 1 — evenness is exact divisibility by 2, so the remainder decides. Similarly, for a non-negative number n mod 10 gives the last digit, and n mod 100 gives the last two digits.",
+    sectionId: "4"
   },
   obj3: {
     question: "What is a congruence class?",
@@ -1409,6 +1437,26 @@ const faqQuestions = {
     question: "What is the difference between a mod n and a ≡ b (mod n)?",
     answer: "a mod n is an operation that produces a number: the remainder. a ≡ b (mod n) is a relationship stating that a and b leave the same remainder when divided by n. The first computes a value, the second asserts a fact — 17 mod 5 = 2 is a computation, while 17 ≡ 2 (mod 5) is a true statement about two numbers.",
     sectionId: "2"
+  },
+  obj5: {
+    question: "What is a number mod 0?",
+    answer: "It is undefined. Division by zero has no meaning, and the division equation cannot pin down a remainder either: $a = 0 \\cdot q + a$ holds for every $q$, so the quotient is not unique, and no remainder can satisfy $0 \\leq r < 0$. In code, Python and Java stop with an error, and JavaScript returns NaN. The smallest allowed modulus is $1$, and $a \\bmod 1 = 0$ for every integer $a$.",
+    sectionId: "61"
+  },
+  obj6: {
+    question: "Why do some ISBNs end in X?",
+    answer: "Because the check character can need the value $10$. A 10-digit ISBN is valid when $10d_1 + 9d_2 + \\ldots + 1 \\cdot d_{10}$ is divisible by $11$, so the last character is whichever value from $0$ to $10$ makes that happen. A single digit place holds only $0$ to $9$, so $10$ is written X. Because $11$ is prime, any single wrong digit, and any swap of two different digits, breaks the check.",
+    sectionId: "4"
+  },
+  obj7: {
+    question: "Is 24 mod 12 equal to 12 or 0?",
+    answer: "It is $0$. Since $24 = 12 \\cdot 2 + 0$, nothing is left after two full turns, and a remainder modulo $12$ must lie in $\\{0, 1, \\ldots, 11\\}$, so $12$ is never a possible answer. The dial shows 12 at that position only because everyday clocks have no 0; in modulo arithmetic the top of the dial is the remainder $0$, and $36 \\bmod 12 = 0$ as well.",
+    sectionId: "7"
+  },
+  obj8: {
+    question: "Does the 13th of the month fall on a Friday more often than on other days?",
+    answer: "Yes, slightly. The Gregorian calendar repeats every $400$ years: $146{,}097$ days, exactly $20{,}871$ weeks, so the weekday pattern comes back unchanged forever. The cycle holds $4800$ thirteenths, which is not a multiple of $7$, so the weekdays cannot share them equally. The count is Friday $688$, Sunday and Wednesday $687$, Monday and Tuesday $685$, Thursday and Saturday $684$.",
+    sectionId: "7"
   }
 }
 
@@ -1491,6 +1539,10 @@ const schemas = {
   const mlMod47 = { kind: 'single-track', range: [0, 50], step: 5, target: 47, mode: 'remainder', style: prStyle, info: { lines: [
     { kind: 'formula', text: '47 = 5 · 9 + 2' }, { kind: 'separator' },
     { kind: 'note', text: '47 ÷ 5 = 9.4, keep 9' }, { kind: 'note', text: '9 jumps of 5 reach 45' }, { kind: 'formula', text: '47 mod 5 = 2', role: 'result' }] } };
+  const conceptIntroFigures = {
+    clockTable: ciClockTable,
+  };
+
   const demoUnits = {
     wrap: demoUnitFrame({
       svg: modPieWheelDiagrams.running,
@@ -1554,6 +1606,7 @@ return {
   props:{
     moduloDivisibilityCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -1578,9 +1631,74 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function ModuloPage({moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ModuloPage({moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `It is 9 o'clock. What time will it be in 17 hours?`,
+        content: [
+          `Counting on goes past 12 and starts again. From 12 o'clock that is $9 + 17 = 26$ hours, which is two full turns of the clock and then $2$ hours more: 2 o'clock. The full turns do not matter — only what is left over after them.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Every count of hours lands on the clock at what is left after removing full turns of 12.`,
+        content: [
+          ciTable('clockTable'),
+          `The clock remembers only the leftover. A count that is an exact number of turns, like $36$, lands back on 12 — a leftover of $0$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Removing whole groups and keeping the leftover is division with remainder.`,
+        content: [
+          `The answer comes from the division equation that connects any integer $a$ to a divisor $n$:`,
+          `@academic[formula_callout:What is Modulo?
+$$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
+          `The integer $q$ is the quotient — how many complete copies of $n$ fit inside $a$. The integer $r$ is the remainder — what remains after those copies are removed. Modulo gives $r$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `For integers $a$ and $n > 0$, $a \\bmod n$ is the [remainder](!/arithmetic/definitions#remainder) left when $a$ is divided by $n$: the $r$ in $a = n \\cdot q + r$ with $0 \\leq r < n$.`,
+        formula: [
+          `The modulo operation takes two integers and returns the remainder of their division. Given integers $a$ and $n$ (with $n > 0$), "$a \\bmod n$" answers one question: what is left over when $a$ is divided by $n$?`,
+        ],
+        footer: `So $26 \\bmod 12 = 2$, and 9 o'clock plus 17 hours is 2 o'clock.`,
+      },
+      {
+        id: 'kind',
+        lead: `Modulo is an operation, like + or ×: two numbers in, one number out.`,
+        content: [
+          `The expression $17 \\bmod 5 = 2$ because $17 = 5 \\cdot 3 + 2$. Three complete groups of $5$ account for $15$, leaving $2$.`,
+          `The expression $23 \\bmod 7 = 2$ because $23 = 7 \\cdot 3 + 2$. Three complete groups of $7$ account for $21$, leaving $2$.`,
+          `The expression $12 \\bmod 4 = 0$ because $12 = 4 \\cdot 3 + 0$. The division is exact — nothing remains.`,
+          <div key={'obj1-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <div key={'unit-wrap'} dangerouslySetInnerHTML={{ __html: demoUnits.wrap }} />,
+          `Modulo is the arithmetic of the slot, not of the number.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `For positive numbers the answer is always between 0 and n − 1; for negative numbers two conventions give different answers.`,
+        content: `$(-7) \\bmod 3$ comes out as $-1$ under one convention and $2$ under the other, and programming languages disagree about which to use. The difference is explained in [negative dividends](!/arithmetic/modulo#71).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, modulo and divisibility, the range of remainders, computing a remainder, edge cases, negative dividends, congruence and its properties, the clock analogy, and why modulo matters.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1596,11 +1714,7 @@ export default function ModuloPage({moduloDivisibilityCases, seoData, sectionsCo
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
-                  <div key={'unit-wrap'} dangerouslySetInnerHTML={{ __html: demoUnits.wrap }} />,
-          `Modulo is the arithmetic of the slot, not of the number.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

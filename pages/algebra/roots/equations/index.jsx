@@ -13,6 +13,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -195,6 +196,27 @@ const summaryTable = `
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "What is a Radical Equation") — template
+// G, exclusion. Running instance: six equations A–F, three of them radical
+// equations (the formula boxes' three). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its three formula boxes and three passages
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSortTable = ciTableOpen(['equation', 'under the root sign', 'is x under it?', 'radical equation?']) +
+  ciRow(['A', 'x', 'yes', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['B', '2 — √2 is just a number, about 1.414', 'no', 'no'], { shade: true }) +
+  ciRow(['C', 'x + 3', 'yes', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['D', 'no root sign at all', 'no', 'no'], { shade: true }) +
+  ciRow(['E', '2x − 1 (a cube root)', 'yes', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['F', '9 — √9 is just 3, so this is 3 + x = 7', 'no', 'no'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -416,7 +438,7 @@ $$x = 4$$]@
 
 Check: $\\sqrt{11} = \\sqrt{11}$. Valid.
 
-This configuration rarely produces extraneous solutions because both sides have the same structure — both are principal roots, both non-negative.
+In this configuration squaring cannot mix up signs, because both sides are principal roots, both non-negative — but a candidate can still make the radicands negative, so the domain check remains.
 
 More complex cases:
 
@@ -627,6 +649,11 @@ Solving radical equations requires both algebraic manipulation and verification.
 }
 
 
+// FAQ pass 2026-10-31: kept the four existing questions. Added checking in
+// the squared equation (the "Common Pitfalls" walk-through), the endless
+// radical that equals 2 (fact box under "Why Extraneous Solutions Appear")
+// and the one-conjugate shortcut (fact box under "Equations with Two
+// Radicals"); no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "When can you skip checking for extraneous solutions?",
@@ -647,6 +674,21 @@ const faqQuestions = {
     question: "Does squaring an inequality flip its direction?",
     answer: "Only if you square something negative, and an isolated principal root never is. Because square roots return non-negative values, squaring an inequality with the radical alone on one side preserves the direction: $\\sqrt{x} > 3$ becomes $x > 9$. The flip rule you remember comes from multiplying by a negative number, which is a different situation.",
     sectionId: "9"
+  },
+  obj5: {
+    question: "Why can't you check answers in the squared equation?",
+    answer: "Because every candidate passes there automatically. The candidates were found by solving the squared equation, so substituting them back into it can only confirm them. For $\\sqrt{2x + 1} = x - 1$, squaring gives $2x + 1 = (x - 1)^2$ with roots $x = 0$ and $x = 4$, and both satisfy it. Only the original equation rejects $x = 0$: there $\\sqrt{1} = 1$, while $0 - 1 = -1$.",
+    sectionId: "pitfalls"
+  },
+  obj6: {
+    question: "What does $\\sqrt{2 + \\sqrt{2 + \\sqrt{2 + \\cdots}}}$ equal?",
+    answer: "Exactly $2$. Call the value $x$: the part under the outer root is again $2 + x$, so $x = \\sqrt{2 + x}$. Squaring gives $x^2 - x - 2 = 0$, which factors as $(x - 2)(x + 1) = 0$. The candidate $-1$ is extraneous, because a square root is never negative, which leaves $x = 2$, and indeed $\\sqrt{2 + 2} = 2$.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Can you solve $\\sqrt{x + 5} - \\sqrt{x} = 1$ without squaring twice?",
+    answer: "Yes, with one conjugate. Multiplying $\\sqrt{x + 5} - \\sqrt{x}$ by $\\sqrt{x + 5} + \\sqrt{x}$ gives $(x + 5) - x = 5$, so if the difference is $1$, the sum must be $5$. Adding the two equations gives $2\\sqrt{x + 5} = 6$, so $x + 5 = 9$ and $x = 4$, which checks: $3 - 2 = 1$. The shortcut works because the two radicands differ only by a constant.",
+    sectionId: "6"
   }
 }
 
@@ -746,6 +788,10 @@ const schemas = {
         vlines: [{ x: 18 }],
     notes: [{ x: 0.4, y: 5.4, text: 'solution 2 ≤ x ≤ 18: curve exists and stays ≤ 4', pos: 'e', color: 'r' }, { x: 0.4, y: -0.6, text: 'x < 2: √ undefined', pos: 'e' }, { x: 2.3, y: 0.35, text: 'x = 2', pos: 'e' }, { x: 17.6, y: 4.4, text: '(18, 4)', pos: 'w' }],
     caption: '√(x − 2) ≤ 4 needs x ≥ 2 (domain) and x ≤ 18 (squared)' };
+  const conceptIntroFigures = {
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     extraneous: demoUnitFrame({
       svg: renderFunctionPlotV4(fpExtraneous),
@@ -797,6 +843,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Radical Equations: Solve & Check for Extraneous Solutions | Learn Math Class",
       description: "Learn to solve radical equations: isolate radicals, square both sides, handle extraneous solutions, solve equations with multiple radicals, and verify all answers.",
@@ -812,9 +859,70 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RootEquationsPage({radicalEquationCases, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RootEquationsPage({radicalEquationCases, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six equations, most of them with a root sign. Which of them are radical equations?`,
+        content: [
+          `A: $\\sqrt{x} = 5$ $\\quad$ B: $x\\sqrt{2} = 6$ $\\quad$ C: $\\sqrt{x + 3} = x - 1$ $\\quad$ D: $x^2 = 9$ $\\quad$ E: $\\sqrt[3]{2x - 1} = 3$ $\\quad$ F: $\\sqrt{9} + x = 7$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Looking under each root sign settles it: in A, C and E the unknown sits under the radical; in B, D and F it does not.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `B and F have root signs, but only around known numbers — √2 and √9 are just numbers, and the equations are ordinary linear ones.`,
+        content: [
+          `Radical equations differ from expressions involving radicals with known values. Here the radicand contains the unknown, making the radical an obstacle to finding $x$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [radical equation](!/algebra/definitions#radical_equation) is an equation in which the variable appears under a radical sign.`,
+        formula: [
+          `A radical equation contains a variable under a radical sign.`,
+          `@academic[formula_callout:What is a Radical Equation
+$$\\sqrt{x} = 5$$]@`,
+          `@academic[formula_callout:What is a Radical Equation
+$$\\sqrt{x + 3} = x - 1$$]@`,
+          `@academic[formula_callout:What is a Radical Equation
+$$\\sqrt[3]{2x - 1} = 3$$]@`,
+        ],
+        footer: `So A, C and E are radical equations; B, D and F are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `Radical equations come in several shapes, and one strategy handles them all.`,
+        content: [
+          `The variable may appear only under the radical, or both under and outside. It may appear under multiple radicals. Each configuration requires slightly different handling, but the core strategy remains: isolate and eliminate.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Getting rid of the radical can add answers that do not solve the original equation.`,
+        content: `Squaring both sides of $\\sqrt{x} = -2$ gives $x = 4$, but $\\sqrt{4} = 2$, not $-2$. Every answer has to be checked in the original equation, as [extraneous solutions](!/algebra/roots/equations#4) explains.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the basic strategy, why isolation comes first, extraneous solutions, equations with two radicals or radicals on both sides, cube roots and higher, radical inequalities, and verification.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -830,7 +938,7 @@ export default function RootEquationsPage({radicalEquationCases, seoData, sectio
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

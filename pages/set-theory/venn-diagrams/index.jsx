@@ -1228,6 +1228,12 @@ Venn diagrams provide a visual representation of [sets](!/set-theory) and their 
 
 // Five questions. Those that merely restated a section heading were cut; the
 // remaining ones surface facts the prose states only in passing.
+// FAQ pass 2026-10-31: kept the five. Added whether union or intersection
+// goes first without brackets (pitfall under "Shading Regions"), whether a
+// matching shading is a proof (one sentence under "Using Venn Diagrams to
+// Verify Set Identities"), Venn versus Euler diagrams (fact box in the same
+// section) and the four-set symmetric diagram (fact box under "Three-Set
+// Venn Diagrams"). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "How many regions does a Venn diagram have?",
@@ -1253,6 +1259,26 @@ const faqQuestions = {
     question: "How do you verify De Morgan's law with a Venn diagram?",
     answer: "Shade each side separately and compare. For (A ∪ B)ᶜ, shade both circles then invert, leaving the area outside both. For Aᶜ ∩ Bᶜ, shade outside A, shade outside B, and keep only the overlap — again the area outside both. Matching shading confirms the identity. Step through it on the [two-set laws explorer](!/set-theory/visual-tools/two-sets-laws-venn).",
     sectionId: "5"
+  },
+  obj6: {
+    question: "Does union or intersection come first when there are no brackets?",
+    answer: "Neither has a fixed priority: no rule about $\\cup$ and $\\cap$ is followed by all books, so the brackets are the only guide, and an expression mixing the two should always carry them. The difference is real: with $A = \\{1\\}$, $B = \\{2\\}$ and $C = \\{2, 3\\}$, $A \\cup (B \\cap C) = \\{1, 2\\}$ but $(A \\cup B) \\cap C = \\{2\\}$. On the diagram, shade the bracket first and then apply the operation outside it.",
+    sectionId: "4"
+  },
+  obj7: {
+    question: "Is a Venn diagram a proof of a set identity?",
+    answer: "Not a formal one. Matching shadings are a verification: they check the identity region by region and show why it should hold. A written proof argues with elements, for example by showing each side is a subset of the other, as in [proving two sets are equal](!/set-theory/relationships). A mismatch, though, settles the question at once, since the region shaded on only one side names the elements on which the two sides disagree.",
+    sectionId: "5"
+  },
+  obj8: {
+    question: "What is the difference between a Venn diagram and an Euler diagram?",
+    answer: "A Venn diagram draws every possible overlap and then shades the regions that an argument rules out; an Euler diagram draws only the overlaps the statement allows. For the statement “all A are B”, Euler puts circle A inside circle B, while Venn keeps two overlapping circles and marks the part of A outside B as empty. Euler used his circles in letters of 1761; John Venn introduced his diagrams in 1880 to check reasoning in Boole's logic.",
+    sectionId: "5"
+  },
+  obj9: {
+    question: "Can a four-set Venn diagram be rotationally symmetric?",
+    answer: "No. A Venn diagram for $n$ sets that lands on itself after a $\\frac{1}{n}$ turn exists exactly when $n$ is prime. A quarter turn would have to move the regions lying inside exactly two of the four curves around in groups of $4$, but there are $\\binom{4}{2} = 6$ such regions, and $6$ is not a multiple of $4$. Three-set and five-set symmetric diagrams do exist; the familiar three-circle picture is one.",
+    sectionId: "3"
   }
 }
 const schemas = {

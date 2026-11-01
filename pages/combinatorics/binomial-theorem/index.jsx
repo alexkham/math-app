@@ -1153,6 +1153,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 import partitionIntoGroupsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/partitionIntoGroupsDiagrams'
 import renderBinomialExpansion from '@/app/utils/illustrations/combinatorics/binomial/binomialExpansion'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1585,6 +1588,25 @@ export async function getStaticProps(){
  // URL: /combinatorics/binomial-theorem
 
 // formulas-optimized: v1 | 2026-06-11 | 5 callouts (obj1, obj2 ×2, obj3, obj4)
+// Concept introduction (section 1, "The Theorem") — template A, definition
+// last. Running instance: (a + b)^n expanded for n = 1 to 4. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its two headings, six passages, the
+// formula boxes and link, the corollary, pitfall and fact, the choicesN3 demo
+// frame, its line and the punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPowersTable = ciTableOpen(['n', '(a + b)ⁿ expanded', 'coefficients']) +
+  ciRow(['1', 'a + b', '1, 1']) +
+  ciRow(['2', 'a² + 2ab + b²', '1, 2, 1'], { shade: true }) +
+  ciRow(['3', 'a³ + 3a²b + 3ab² + b³', '1, 3, 3, 1']) +
+  ciRow(['4', 'a⁴ + 4a³b + 6a²b² + 4ab³ + b⁴', '1, 4, 6, 4, 1'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Theorem`,
@@ -2008,6 +2030,13 @@ Counting subsets and expanding powers turn out to be the same problem viewed fro
 `,
 };
 
+// FAQ pass 2026-10-31: kept obj1. Rewrote obj2 to the page's T_{k+1}
+// notation (it used r), obj3 from the even middle term (restated the h2 "The
+// Middle Term") to the odd case (only in the at-a-glance table), and obj4 to
+// say (-b)^k plainly, sectionId 3 -> 5 (Worked Expansions). Added the prime
+// exponent and the powers of 11 (both only in fact boxes) and a missing power
+// (one sentence under the term-independent-of-x example). The multinomial term
+// count was left out: the h2 "Number of Terms" answers it.
 const faqQuestions = {
   obj1: {
     question: "How many terms does the expansion of (a + b) to the n have?",
@@ -2016,18 +2045,33 @@ const faqQuestions = {
   },
   obj2: {
     question: "How do you find one specific term without expanding everything?",
-    answer: "Use the general term formula, which gives any term directly from its position. Be careful with indexing: the term numbered r plus one carries the exponent r, so asking for the fifth term means setting r to four. Off-by-one errors here are the most common mistake in the whole topic.",
+    answer: "Use the general term $T_{k+1} = \\binom{n}{k} a^{n-k} b^k$, which gives any term directly from its position. Be careful with indexing: term number $k + 1$ carries $b^k$, so asking for the fifth term means setting $k = 4$. Off-by-one errors here are among the most common mistakes in the topic.",
     sectionId: "2"
   },
   obj3: {
-    question: "How do you find the middle term of a binomial expansion?",
-    answer: "When the exponent is even there is a single middle term, sitting at position n over two plus one. When the exponent is odd the count of terms is even and there are two middle terms instead. Checking the parity of the exponent before hunting for the position avoids looking for a term that does not exist.",
-    sectionId: "5"
+    question: "Does an expansion with an odd power have a middle term?",
+    answer: "It has two. An odd $n$ gives an even number of terms, $n + 1$, so no single term sits in the middle; the two central ones are $T_{(n+1)/2}$ and $T_{(n+3)/2}$, and their coefficients are equal by symmetry. In $(a + b)^5$ they are $T_3 = 10a^3b^2$ and $T_4 = 10a^2b^3$. Only an even $n$ has one middle term, $T_{n/2+1}$.",
+    sectionId: "7"
   },
   obj4: {
     question: "What happens to the signs when you expand (a − b) to the n?",
-    answer: "They alternate, starting positive. Treating the expression as a plus negative b means each term picks up a factor of negative one raised to the term's index, so odd-numbered powers of b come out negative. The coefficients themselves are unchanged; only the signs differ from the sum case.",
+    answer: "They alternate, starting positive. Treating $a - b$ as $a + (-b)$ means each term carries $(-b)^k$, so the terms with odd powers of $b$ come out negative. The coefficients themselves are unchanged; only the signs differ from the sum case.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Why are the middle coefficients of $(a + b)^p$ multiples of $p$ when $p$ is prime?",
+    answer: "Because turning the $p$ factors around a circle sorts the choices into groups of exactly $p$. The coefficient $\\binom{p}{k}$ counts the ways to choose which $k$ factors supply a $b$. For $0 < k < p$ no choice is unchanged by a turn, and with $p$ prime each choice returns only after all $p$ turns, so the count is a multiple of $p$. Row $7$ reads $1, 7, 21, 35, 35, 21, 7, 1$; for $n = 4$ it fails, as $\\binom{4}{2} = 6$.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Why do powers of 11 look like rows of Pascal's triangle?",
+    answer: "Because $11^n = (1 + 10)^n$, which is row $n$ weighted by $1, 10, 100, \\ldots$, the place values of decimal digits. While every entry is a single digit, the row shows directly: $11^4 = 14641$ reads $1, 4, 6, 4, 1$. From row $5$ on, entries of $10$ or more carry into the next digit, so $11^5 = 161051$ hides the row $1, 5, 10, 10, 5, 1$.",
     sectionId: "3"
+  },
+  obj7: {
+    question: "Can a power of x be missing from a binomial expansion?",
+    answer: "Yes. In $\\left(x + \\frac{1}{x}\\right)^{10}$ the general term is $\\binom{10}{k} x^{10-2k}$, so only even powers from $x^{10}$ down to $x^{-10}$ occur. To test a power, set the exponent of $x$ equal to it and solve for $k$: $x^3$ needs $10 - 2k = 3$, so $k = 3.5$, which is not a whole number from $0$ to $10$. That power does not appear, so its coefficient is $0$.",
+    sectionId: "5"
   }
 }
 
@@ -2110,6 +2154,10 @@ const schemas = {
     svgTitle: 'The 8 picks from (a + b)(a + b)(a + b), grouped by the number of b’s',
   };
 
+  const conceptIntroFigures = {
+    powersTable: ciPowersTable,
+  };
+
   const demoUnits = {
     rowsum: demoUnitFrame({
       svg: pascalTriangleDiagrams.rowsum,
@@ -2132,9 +2180,30 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj5): the section's second worked example, a power of a difference expanded with its signs
+  const differenceExpansionSteps = {
+    header: {
+      kicker: 'Binomial theorem',
+      title: 'Expanding a power of a difference',
+      lede: 'A difference is a sum with a negative second summand: the coefficients are still a row of Pascal\'s triangle, and the signs come from the powers of $-3b$.',
+    },
+    steps: [
+      { id: 'power', label: 'Power of a difference', stamp: 'Before', expr: '$(2a - 3b)^3$',
+        move: { label: 'Substitute into row 3', note: 'bases 2a and −3b, coefficients 1, 3, 3, 1' } },
+      { id: 'terms', label: 'Term by term', expr: '$(2a)^3 + 3(2a)^2(-3b) + 3(2a)(-3b)^2 + (-3b)^3$',
+        move: { label: 'Simplify each term', note: 'work out each power of −3b, sign included, before multiplying' } },
+      { id: 'expanded', label: 'Expanded polynomial', stamp: 'After', expr: '$8a^3 - 36a^2 b + 54ab^2 - 27b^3$',
+        detailsLabel: 'Why +54ab²?',
+        detailsTitle: '',
+        details: 'The third term holds $(-3b)^2 = 9b^2$, which is positive, so it is $+54ab^2$. Writing a minus before every term after the first gives the wrong $-54ab^2$.' },
+    ],
+  };
+
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
+    differenceExpansionSteps,
          sectionsContent,
          introContent,
          obj3Table,
@@ -2154,9 +2223,87 @@ const schemas = {
     }
    }
 
-export default function BinomialTheoremPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function BinomialTheoremPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, capstoneTable, faqQuestions, schemas, demoUnits, differenceExpansionSteps, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Multiplying out (a + b)² is quick; (a + b)¹⁰ by hand is not. Is there a pattern?`,
+        content: [
+          `Expand the first few powers and look only at the numbers in front of each term.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The coefficients of the first few powers form the rows of Pascal's triangle.`,
+        content: [
+          ciTable('powersTable'),
+          `Each row of coefficients comes from the row above by adding neighbours: $1, 3, 3, 1$ gives $1, 4, 6, 4, 1$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The coefficient of aⁿ⁻ᵏbᵏ counts the ways to pick the k factors that supply a b.`,
+        content: [
+          `## Combinatorial Proof`,
+          `Write $(a+b)^n$ as the product`,
+          `@academic[formula_callout:The Theorem
+$$\\underbrace{(a+b)(a+b)\\cdots(a+b)}_{n \\text{ factors}}.$$]@`,
+          `Expanding the product means forming every possible term by choosing either $a$ or $b$ from each factor and multiplying the selections. A term equal to $a^{n-k} b^k$ arises whenever exactly $k$ of the $n$ factors contribute a $b$, and there are $\\binom{n}{k}$ ways to make that selection. Summing over all $k$ gives the theorem.`,
+          <div key={'unit-choicesN3'} dangerouslySetInnerHTML={{ __html: demoUnits.choicesN3 }} />,
+          `The coefficients 1, 3, 3, 1 are row 3 of Pascal's triangle; with four factors the same sorting gives 1, 4, 6, 4, 1.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **binomial theorem** expands any whole-number power of a sum, with [binomial coefficients](!/combinatorics/definitions#binomial_coefficient) as the coefficients: $(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k$.`,
+        formula: [
+          `For any non-negative integer $n$ and any values $a$ and $b$,`,
+          `@academic[formula_callout:Binomial Theorem
+$$(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k.$$
+/combinatorics/formulas#binomial_theorem]@`,
+          `@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@`,
+          `@academic[rule_corollary_plain:The expansion has exactly $n+1$ terms, indexed by $k$ from $0$ through $n$.]@`,
+        ],
+        footer: `So $(a + b)^4 = a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4$, with coefficients $\\binom{4}{0}, \\ldots, \\binom{4}{4} = 1, 4, 6, 4, 1$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The theorem joins algebra and counting.`,
+        content: [
+          `The coefficients $\\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}$ are precisely the entries of row $n$ of Pascal's triangle — so the row of the triangle reads as the row of coefficients in the expansion. The $\\sum$ summation sign and the rest of the theorem's notation are collected among the [combinatorics symbols](!/math-symbols/combinatorics).`,
+          `This is a [double counting](!/combinatorics/counting-principles#double) argument in its purest form: the product $(a+b)^n$, viewed both as an algebraic expression and as an enumeration of choice-sequences, has the same value either way.`,
+          `@academic[fact,aside:true,width:35%:A prime exponent divides the middle
+For a prime $p$, every coefficient of $(a + b)^p$ except the two end $1$s is a multiple of $p$: rotating the $p$ factors in a circle sorts the choices of $k$ factors into groups of exactly $p$. Row $7$ reads $1, 7, 21, 35, 35, 21, 7, 1$.]@`,
+          `@academic[punchline:Each coefficient of $(a + b)^n$ counts the ways to choose which factors supply the $b$'s.]@`,
+          `## Algebraic Proof`,
+          `An induction on $n$ also works, using Pascal's rule to advance from row $n$ to row $n+1$. Both proofs are standard; the combinatorial one is the more direct explanation of why binomial coefficients appear.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The middle terms are the heart of the expansion, not a detail.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Dropping the middle terms
+Writing $(a + b)^2$ as $a^2 + b^2$ keeps only the two end terms. With $a = 2$ and $b = 3$ that gives $4 + 9 = 13$, but $(2 + 3)^2 = 25$; the missing middle term is $2ab = 12$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the general term, special cases, notation, the multinomial theorem, worked expansions and related concepts.`,
+      },
+    ],
+  }
 
   const genericSections=[
     // {
@@ -2172,10 +2319,7 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-choicesN3'} dangerouslySetInnerHTML={{ __html: demoUnits.choicesN3 }} />,
-          `The coefficients 1, 3, 3, 1 are row 3 of Pascal's triangle; with four factors the same sorting gives 1, 4, 6, 4, 1.`,
-          `@academic[punchline:Each coefficient of $(a + b)^n$ counts the ways to choose which factors supply the $b$'s.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2235,6 +2379,20 @@ export default function BinomialTheoremPage({seoData, sectionsContent, introCont
           sectionsContent.obj5.content,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="difference-expansion-steps"
+            title="Expanding (2a − 3b)³"
+            source="/combinatorics/binomial-theorem"
+            before={"The second worked example of this section, (2a − 3b)³, one move at a time. Watch where each sign comes from."}
+            after={"Odd powers of $-3b$ are negative and even powers positive, so the signs alternate. Any $(a - b)^n$ works the same way: it is $(a + (-b))^n$, with the coefficients from row $n$."}
+          >
+            <BeforeAfter
+              data={differenceExpansionSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

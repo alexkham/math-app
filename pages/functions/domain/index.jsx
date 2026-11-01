@@ -903,6 +903,10 @@ import functionDomainDiagrams from '@/app/components/functions/domain/functionDo
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 
 
 export async function getStaticProps(){
@@ -1540,6 +1544,13 @@ The domain is the complete set of inputs for which the function produces valid o
 
 
 
+// FAQ pass 2026-10-31: cut the even-root question (restates the h2 Finding
+// Domain: Radical Functions) and the fraction-plus-square-root question
+// (restates the h2 Finding Domain: Combined Functions); renumbered. Kept the
+// other three. Added one root against two (fact box under Natural Domain vs
+// Restricted Domain), fractional exponents (one paragraph) and x^x for
+// negative x (fact box, both under Radical Functions), and the empty domain
+// (one sentence under Combined Functions).
 const faqQuestions = {
   obj1: {
     question: "Why can't the denominator be zero when finding a domain?",
@@ -1547,24 +1558,34 @@ const faqQuestions = {
     sectionId: "4"
   },
   obj2: {
-    question: "What is the domain of a radical function with an even root?",
-    answer: "Everything that keeps the expression under the root non-negative. Even roots of negative numbers have no real value, so you set the radicand greater than or equal to zero and solve. Odd roots have no such restriction, since cube roots of negatives exist, which is why the parity of the root matters.",
-    sectionId: "5"
-  },
-  obj3: {
     question: "Why does the domain of a logarithm exclude zero and negative numbers?",
     answer: "Because a logarithm asks what power produces a given value, and raising a positive base to any real power always yields a positive result. No exponent produces zero or a negative number, so the question has no answer there. The argument of the log must therefore be strictly greater than zero.",
     sectionId: "6"
   },
-  obj4: {
-    question: "How do you find the domain of a function with both a fraction and a square root?",
-    answer: "Apply every restriction and keep only what survives all of them. Set the even radicand to be non-negative, set each denominator to be non-zero, and take the intersection of the resulting sets. Missing one condition is the usual failure, since each part of the expression restricts the domain independently.",
-    sectionId: "8"
-  },
-  obj5: {
+  obj3: {
     question: "What is the difference between interval notation and set-builder notation?",
     answer: "Interval notation lists the endpoints with brackets, using square brackets when the endpoint is included and round ones when it is not. Set-builder states a condition instead, as the set of all x satisfying some inequality. Both describe the same collection; interval notation is more compact, set-builder more flexible for scattered exclusions.",
     sectionId: "2"
+  },
+  obj4: {
+    question: "Is $\\sqrt{x - 1}\\,\\sqrt{x + 1}$ the same function as $\\sqrt{x^2 - 1}$?",
+    answer: "No, they agree only where both are defined. The product of two roots needs each radicand non-negative, $x \\geq 1$ and $x \\geq -1$, so its domain is $[1, \\infty)$. The single root needs only $x^2 - 1 \\geq 0$, which also holds for $x \\leq -1$, giving $(-\\infty, -1] \\cup [1, \\infty)$. At $x = -2$ the single root is $\\sqrt{3}$, while the product would need $\\sqrt{-3}$ and $\\sqrt{-1}$.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Do fractional exponents restrict the domain?",
+    answer: "It depends on the denominator, with the fraction in lowest terms. Since $x^{\\frac{1}{n}}$ is $\\sqrt[n]{x}$, an odd denominator, as in $x^{\\frac{2}{3}}$, lets negative inputs through: $(-8)^{\\frac{2}{3}} = (\\sqrt[3]{-8})^2 = 4$. An even denominator, as in $x^{\\frac{3}{4}}$, needs $x \\geq 0$. Some calculators and programming languages still give an error or a complex number for a negative base, so it is worth stating the convention.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Is $x^x$ defined for negative $x$?",
+    answer: "Only at some of them. For negative $x$, $x^x$ is real exactly when $x$ is a fraction whose denominator in lowest terms is odd: $(-\\frac{1}{3})^{-1/3} = -\\sqrt[3]{3}$, but $(-\\frac{1}{2})^{-1/2}$ needs the square root of a negative number. Both kinds of number lie between any two negatives, so on that side the domain contains no interval at all, which is why the graph is usually drawn for $x > 0$ only.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Can the domain of a function be empty?",
+    answer: "Yes, when the restrictions contradict each other. In $\\sqrt{x - 5} + \\sqrt{1 - x}$ the first root needs $x \\geq 5$ and the second needs $x \\leq 1$. Both must hold at the same input, and no number does both, so the intersection is empty and the formula gives a real output nowhere. Joining the two conditions with or would wrongly give $(-\\infty, 1] \\cup [5, \\infty)$, where one of the roots always fails.",
+    sectionId: "8"
   }
 }
 
@@ -1704,8 +1725,29 @@ const faqQuestions = {
     }),
   };
 
+  // ComparisonTable2 (obj3): natural-restricted-domain
+  const domainKindsComparison = {
+    kicker: 'domain',
+    title: 'Natural and restricted domain, side by side',
+    intro: 'One comes from the formula alone; the other is a choice made on top of it.',
+    tallyLabel: 'compared',
+    subjects: [
+      { name: 'Natural domain' },
+      { name: 'Restricted domain' },
+    ],
+    features: [
+      { label: 'What it is', values: ['the largest set of real inputs giving real output', 'a deliberate limitation beyond what the formula requires'] },
+      { label: 'Set by', values: ['the algebraic expression alone', 'a purpose or the context'] },
+      { label: 'Example', values: ['$\\sqrt{x - 3}$: $[3, \\infty)$; $\\ln x$: $(0, \\infty)$', '$x^2$ on $[0, \\infty)$, to make it one-to-one'] },
+      { label: 'From context', values: ['$h(t) = -16t^2 + 64t$ accepts any real $t$', 'launch at $t = 0$, landing at $t = 4$: $[0, 4]$'] },
+      { label: 'When nothing is stated', values: ['assumed: the implied domain', 'only if context or instruction says so'],
+        note: 'A restricted domain can never be larger than the natural one: it only removes inputs the formula would otherwise accept.' },
+    ],
+  };
+
    return {
       props:{
+    domainKindsComparison,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -1727,7 +1769,7 @@ const faqQuestions = {
     }
    }
 
-export default function DomainPage({
+export default function DomainPage({domainKindsComparison, 
   seoData,
   sectionsContent,
   introContent,
@@ -1845,6 +1887,11 @@ export default function DomainPage({
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={functionsNotationSheet}
+            current={'/functions/domain'}
+          />,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
         ]
@@ -1857,6 +1904,16 @@ export default function DomainPage({
           sectionsContent.obj3.content,
           <div key={'unit-naturalRestricted'} dangerouslySetInnerHTML={{ __html: demoUnits.naturalRestricted }} />,
           `A restricted domain can never be larger than the natural one: it only removes inputs the formula would otherwise accept.`,
+          `The two kinds of domain side by side, with the examples from this section.`,
+          <DiagramFrameV2
+            key={'obj3-comparison'}
+            id="natural-restricted-domain"
+            title="Natural and restricted domain, side by side"
+            source="/functions/domain"
+          >
+            <ComparisonTable2 data={domainKindsComparison} />
+          </DiagramFrameV2>,
+          `Read down the right-hand column and every entry is a choice: one-to-one for an inverse, or a physical time window. The left-hand column involves no choice at all, which is why it is the one assumed when nothing is said.`,
         ]
     },
     {

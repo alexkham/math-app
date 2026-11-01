@@ -840,6 +840,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1016,6 +1017,25 @@ const summaryTable = `
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 1, "Operating Within a Modulus") —
+    // template E, widening. Running instance: four operations done ordinarily,
+    // mod 10 and mod 12. Old obj1 text is kept in sectionsContent.obj1,
+    // unused; its four passages and the within demo frame with its line are
+    // carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciWrapTable = ciTableOpen(['operation', 'ordinary answer', 'mod 10', 'mod 12 (a clock)']) +
+      ciRow(['9 + 7', '16', '6', '4']) +
+      ciRow(['10 + 5', '15', '5', '3'], { shade: true }) +
+      ciRow(['7 · 8', '56', '6', '8']) +
+      ciRow(['3 − 8', '−5', '5', '7'], { shade: true, last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1414,6 +1434,11 @@ How to check: test the count on a short span. From January 1 to January 8 is $8 
 // Detecting Cycles in Powers, Why Division Is Different, Last Digit Problems,
 // Clock Problems, Day of Week Problems, and Why Divisibility Rules Work
 // verbatim). Kept three whose queries have no matching heading.
+// FAQ pass 2026-10-31: kept the three questions. Added nonzero numbers whose
+// product is 0 (one line in the opening section, Operating Within a
+// Modulus), reducing the exponent by n (pitfall under Detecting Cycles in
+// Powers) and 600-digit RSA exponents (fact box and squaring paragraph under
+// Powers).
 const faqQuestions = {
   obj1: {
     question: "What is modular arithmetic?",
@@ -1429,6 +1454,21 @@ const faqQuestions = {
     question: "How do you find the last two digits of a power?",
     answer: "The last two digits are the number mod 100. Find when the powers cycle mod 100. For 7⁵⁰ mod 100: since 7⁴ = 2401 ≡ 1 (mod 100), and 50 = 4×12 + 2, we get 7⁵⁰ ≡ 7² = 49 (mod 100). The last two digits are 49.",
     sectionId: "13"
+  },
+  obj4: {
+    question: "Can two nonzero numbers multiply to zero in modular arithmetic?",
+    answer: "Yes, when the modulus is not prime. Modulo $10$, $2 \\cdot 5 = 10 \\equiv 0$ although neither factor is $0$, and modulo $12$, $3 \\cdot 4 \\equiv 0$. This is why division does not carry over: $2 \\cdot 5 \\equiv 2 \\cdot 0 \\pmod{10}$, yet cancelling the $2$ would give $5 \\equiv 0$, which is false. Modulo a prime it never happens, because a prime cannot divide a product without dividing one of its factors.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Can you reduce the exponent modulo n?",
+    answer: "No, the exponent is reduced by the length of the cycle of powers, not by $n$. The exponent counts multiplications, and that count repeats with the cycle. For $2^{100} \\bmod 7$ the powers run $2, 4, 1$ and repeat, so the cycle length is $3$, and $100 = 3 \\cdot 33 + 1$ gives $2^{100} \\equiv 2$. Reducing by $7$ instead gives $2^2 = 4$, which is wrong. A quick test: $2^7 = 128 \\equiv 2$, not $2^0 = 1$.",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "How can a computer raise a number to a 600-digit power?",
+    answer: "By squaring and reducing after every step. Each squaring doubles the exponent, so ten squarings reach $a^{1024}$, and any exponent is built from such squares by its binary digits. A $600$-digit exponent has about $2{,}000$ binary digits, so RSA encryption computes $c^d \\bmod n$ in fewer than $4{,}100$ multiplications, each result reduced below $n$. Written out in full, $c^d$ would have more digits than there are atoms in the universe.",
+    sectionId: "6"
   }
 }
 
@@ -1519,6 +1559,10 @@ const schemas = {
     pieces: mdPow,
     notes: [{ x: 1.2, y: 6.1, text: '2, 4, 1, 2, 4, 1, 2, 4, 1, …', pos: 'e' }, { x: 1.2, y: 5.4, text: 'amber: each new cycle starts', pos: 'e', color: 'r' }, { x: 1.2, y: 4.7, text: '2¹⁰⁰: 100 = 3 · 33 + 1, so 2', pos: 'e', color: 'f' }],
     caption: 'Finitely many remainders force the powers to cycle' };
+  const conceptIntroFigures = {
+    wrapTable: ciWrapTable,
+  };
+
   const demoUnits = {
     within: demoUnitFrame({
       svg: modPieWheelDiagrams.idle,
@@ -1537,6 +1581,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj7Table,
@@ -1557,9 +1602,69 @@ return {
 
 
 
-export default function OperationsPage({seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function OperationsPage({seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Ordinary arithmetic runs along an endless number line: 9 + 7 = 16, and results can grow without limit.`,
+        content: [
+          `A clock does not work that way. Its hand wraps round after $12$, so $5$ hours after $10$ o'clock it is $3$ o'clock, not $15$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Keeping only the remainder after dividing by n turns each answer into one of n slots.`,
+        content: [
+          ciTable('wrapTable'),
+          `Each entry in the last two columns is the remainder of the ordinary answer: $16 = 10 + 6$, $56 = 12 \\cdot 4 + 8$, and $-5 = 10 \\cdot (-1) + 5$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Modular arithmetic** with modulus $n$ works only with the [remainders](!/arithmetic/definitions#remainder) $0, 1, \\dots, n - 1$: every sum, difference and product is replaced by its remainder on division by $n$.`,
+        formula: [
+          `Standard arithmetic works on the full number line — results can grow without bound. Modular arithmetic restricts the playing field. Every number is reduced to one of $n$ possible remainders, and every operation stays within that set.`,
+        ],
+        footer: `So $9 + 7 \\equiv 6 \\pmod{10}$ and $7 \\cdot 8 \\equiv 6 \\pmod{10}$, while on a $12$-hour clock $10 + 5 \\equiv 3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is an arithmetic of its own, on a finite set of numbers.`,
+        content: [
+          `Add $9 + 7$ in ordinary arithmetic and the answer is $16$. Add $9 + 7$ modulo $10$ and the answer is $6$ — the sum wraps past $9$ and cycles back. The number $16$ and the number $6$ are different on the number line, but they are the same in the world of $\\bmod 10$.`,
+          `The mental model is a clock with $n$ hours. On a $10$-hour clock, moving $7$ steps forward from $9$ lands on $6$, not $16$. On a $12$-hour clock, $10 + 5 = 3$, not $15$. The numbers wrap around whenever they reach the modulus.`,
+          `This wrap-around is not an approximation or a shortcut — it is a self-contained arithmetic system with its own rules, and those rules are precise enough to produce exact answers to problems that would be impractical to solve on the full number line.`,
+          <div key={'unit-within'} dangerouslySetInnerHTML={{ __html: demoUnits.within }} />,
+          `The core principle in the next section is why reducing early and reducing late give the same slot.`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost for addition, subtraction and multiplication: reducing early gives the same answer as reducing at the end.`,
+        content: [
+          `For $89 \\cdot 76 \\bmod 9$, replacing $89$ by $8$ and $76$ by $4$ gives $32$, which leaves $5$; the full product $6{,}764$ leaves $5$ too. Why this always works is set out in [the core principle](!/arithmetic/modulo/operations#2).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What is lost: division does not carry over so simply.`,
+        content: `Modulo $10$, $2 \\cdot 5 \\equiv 0$ although neither factor is $0$, so dividing by $2$ cannot always be undone. The details are in [why division is different](!/arithmetic/modulo/operations#8).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the core principle, addition, subtraction, multiplication and powers, cycles in powers, division, and last-digit, clock and day-of-week problems.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1575,9 +1680,7 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-within'} dangerouslySetInnerHTML={{ __html: demoUnits.within }} />,
-          `The core principle in the next section is why reducing early and reducing late give the same slot.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

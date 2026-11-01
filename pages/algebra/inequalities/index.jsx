@@ -14,6 +14,11 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -439,14 +444,42 @@ Set-builder notation provides a formal way to write solution sets: $\\{x \\in \\
   },
 
   obj3: {
-    title: `Interval Notation`,
-    content: `Interval notation describes subsets of the number line using endpoints and brackets. A parenthesis indicates that the endpoint is excluded, and a square bracket indicates it is included.
-
-The open interval $(a, b)$ contains all real numbers strictly between $a$ and $b$: every $x$ with $a < x < b$. The closed interval $[a, b]$ includes the endpoints as well: every $x$ with $a \\leq x \\leq b$. Half-open intervals mix the two: $[a, b)$ includes $a$ but excludes $b$, and $(a, b]$ excludes $a$ but includes $b$.
-
-Unbounded intervals extend to infinity in one or both directions. The interval $(a, \\infty)$ represents all $x > a$, and $(-\\infty, a]$ represents all $x \\leq a$. The symbol $\\infty$ is not a number and is never paired with a square bracket — writing $[a, \\infty]$ is meaningless because infinity cannot be reached or included. The entire real line is $(-\\infty, \\infty)$.
-
-When a solution set consists of two or more disconnected pieces, union notation joins them. The solution to $x < -2$ or $x > 5$ is $(-\\infty, -2) \\cup (5, \\infty)$. The union symbol $\\cup$ means "together with," combining disjoint intervals into a single solution set.`,
+    title:`Interval Notation`,
+    lead:`Brackets and parentheses that turn a condition on $x$ into a set on the number line — the bracket shape says whether each endpoint belongs. All are catalogued among the [algebra symbols](!/math-symbols/algebra).`,
+    inherited:`The inequality signs $<$, $\\leq$, $>$, $\\geq$ themselves come from [linear inequality notation](!/algebra/inequalities/linear#notation).`,
+    entries:[
+      {
+        id:'open-interval',
+        tex:`$(a, b)$`,
+        read:`the open interval from a to b`,
+        means:`All real numbers strictly between $a$ and $b$: every $x$ with $a < x < b$. A parenthesis leaves its endpoint out.`,
+        cases:`Half-open intervals mix the two ends: $[a, b)$ includes $a$ but excludes $b$; $(a, b]$ excludes $a$ but includes $b$.`,
+      },
+      {
+        id:'closed-interval',
+        tex:`$[a, b]$`,
+        read:`the closed interval from a to b`,
+        means:`All $x$ with $a \\leq x \\leq b$ — the endpoints included. A square bracket keeps its endpoint in.`,
+      },
+      {
+        id:'unbounded',
+        tex:`$(a, \\infty)$ · $(-\\infty, a]$`,
+        read:`from a to infinity; from minus infinity to a`,
+        means:`Intervals that run on without end: $(a, \\infty)$ is all $x > a$, $(-\\infty, a]$ is all $x \\leq a$, and $(-\\infty, \\infty)$ is the whole real line.`,
+        confusedWith:`A bracket on infinity. $\\infty$ is not a number and is never paired with a square bracket — $[a, \\infty]$ is meaningless, because infinity cannot be reached or included.`,
+      },
+      {
+        id:'interval-union',
+        tex:`$\\cup$`,
+        read:`union — together with`,
+        means:`Joins disconnected pieces into one solution set: $x < -2$ or $x > 5$ is $(-\\infty, -2) \\cup (5, \\infty)$.`,
+      },
+    ],
+    symbolsHref:`/math-symbols/algebra`,
+    symbolsLabel:`All algebra symbols`,
+    parentHref:`/algebra`,
+    parentLabel:`Algebra`,
+    content: ``,
     before: ``,
     after: ``,
     link: '',
@@ -941,8 +974,69 @@ const schemas = {
     legend: [{ label: 'family' }, { label: 'a trap to watch', tone: 'warn' }],
   };
 
+  // PropertySheet (obj5): inequality-moves
+  const inequalityMoveProperties = {
+    header: {
+      kicker: 'inequalities',
+      title: 'What each move does to the direction',
+      lede: 'Most moves keep the inequality as it is; a few flip it, and squaring cannot be trusted.',
+    },
+    labels: { more: 'Example', detailsTitle: '' },
+    verdicts: {
+      keeps: { label: 'Keeps direction', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+      flips: { label: 'Flips direction', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+      unreliable: { label: 'Unreliable', color: '#475569', bg: '#e2e8f0', mark: 'cross' },
+    },
+    groups: [{ properties: [
+      { id: 'add', name: 'Add or subtract', verdict: 'keeps', statement: '$a < b \\Rightarrow a + c < b + c$', note: 'for any real $c$, exactly as with equations' },
+      { id: 'mulpos', name: 'Multiply or divide by a positive', verdict: 'keeps', statement: '$a < b,\\ c > 0 \\Rightarrow ac < bc$', condition: '$c > 0$' },
+      { id: 'mulneg', name: 'Multiply or divide by a negative', verdict: 'flips', statement: '$a < b,\\ c < 0 \\Rightarrow ac > bc$', condition: '$c < 0$',
+        note: 'the one rule that sets inequalities apart from equations',
+        details: '$3 < 5$, but multiplying by $-1$ gives $-3 > -5$: negation mirrors the number line.' },
+      { id: 'recip', name: 'Take reciprocals', verdict: 'flips', statement: '$2 < 3 \\Rightarrow \\frac{1}{2} > \\frac{1}{3}$', condition: 'both sides of the same sign',
+        details: 'With opposite signs it does not flip: $-1 < 2$ and $-1 < \\frac{1}{2}$.' },
+      { id: 'trans', name: 'Transitivity', verdict: 'keeps', statement: '$a < b,\\ b < c \\Rightarrow a < c$', note: 'why a chain like $1 < x < 7$ is allowed' },
+      { id: 'square', name: 'Square both sides', verdict: 'unreliable', statement: '$-5 < 2$ but $25 > 4$', note: 'squaring is not monotone: it can keep, flip or destroy the inequality' },
+    ] }],
+  };
+
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+  // so the questions are ones only it answers: the equation's roots as borders
+  // (intro), the reciprocal fact box under Properties, choosing a method by type
+  // (summary table), multiplying by an expression in x (Equivalent Inequalities)
+  // and how the non-algebraic types are solved (Inequalities Beyond Algebra).
+  const faqQuestions = {
+    obj1: {
+      question: "How are the solutions of an equation related to the solutions of the matching inequality?",
+      answer: "They are its borders, not its answer. The roots of $(x + 2)(x - 3) = 0$ are $-2$ and $3$. They cut the line into three pieces, and on each piece the expression keeps one sign, so one test value per piece decides the whole piece. For $(x + 2)(x - 3) < 0$ only the middle piece passes, giving $(-2, 3)$. The borders join the answer only for $\\leq$ or $\\geq$: $(x + 2)(x - 3) \\leq 0$ gives $[-2, 3]$.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Does taking reciprocals reverse an inequality?",
+      answer: "Yes, when both sides have the same sign: $2 < 3$ gives $\\frac{1}{2} > \\frac{1}{3}$, and $-3 < -2$ gives $-\\frac{1}{3} > -\\frac{1}{2}$. The reason is that $\\frac{1}{x}$ falls as $x$ grows on each side of $0$, and a step that reverses the order of numbers flips the symbol, just as multiplying by a negative does. With opposite signs there is no flip: $-1 < 2$ and $-1 < \\frac{1}{2}$, because a negative number stays below a positive one.",
+      sectionId: "5"
+    },
+    obj3: {
+      question: "How do you choose a method for solving an inequality?",
+      answer: "By its type. A [linear inequality](!/algebra/inequalities/linear) is solved like an equation, flipping the sign when dividing by a negative, and gives one ray. Quadratic, polynomial and rational inequalities are solved with a sign chart on the factored form: for a quadratic the discriminant settles the shape first, for a polynomial root multiplicity decides where the sign changes, and for a rational inequality the denominator zeros join the chart but never the answer. An [absolute value inequality](!/algebra/inequalities/absolute-value) is first converted to a compound one: AND for $<$, OR for $>$.",
+      sectionId: "15"
+    },
+    obj4: {
+      question: "Can you multiply both sides of an inequality by an expression containing $x$?",
+      answer: "Not safely, unless its sign is known. Multiplying by a positive keeps the direction and multiplying by a negative flips it, so an expression that is positive for some $x$ and negative for others would need both at once. Clearing $\\frac{x}{x - 1} > 0$ by multiplying by $x - 1$ as if it were positive gives $x > 0$, which keeps $x = \\frac{1}{2}$, where the fraction is $-1$, and loses $x = -1$, where it is $\\frac{1}{2}$. A sign chart gives the right answer, $(-\\infty, 0) \\cup (1, \\infty)$.",
+      sectionId: "7"
+    },
+    obj5: {
+      question: "Are exponential and logarithmic inequalities solved with a sign chart?",
+      answer: "Usually not. A single exponential or logarithm is always increasing or always decreasing, so the inequality passes straight to the exponent or the argument: $2^x > 8$ is $2^x > 2^3$, so $x > 3$. A base above $1$ keeps the direction and a base between $0$ and $1$ reverses it. A logarithm also adds a domain condition: $\\log_2(x - 1) < 3$ needs $x - 1 < 8$ and $x - 1 > 0$, so $1 < x < 9$. A sign chart comes back only if what is left is a polynomial or rational inequality.",
+      sectionId: "14"
+    }
+  }
+
    return {
   props: {
+    faqQuestions,
+    inequalityMoveProperties,
     inequalityFamilyTree,
     demoUnits,
     conceptIntroFigures,
@@ -967,7 +1061,7 @@ const schemas = {
 }
    }
 
-export default function InequalitiesPage({inequalityFamilyTree, 
+export default function InequalitiesPage({inequalityMoveProperties, inequalityFamilyTree, faqQuestions,
   seoData,
   sectionsContent,
   introContent,
@@ -1084,6 +1178,23 @@ export default function InequalitiesPage({inequalityFamilyTree,
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          <NotationSection
+            key={'notation-obj3'}
+            title={sectionsContent.obj3.title}
+            lead={sectionsContent.obj3.lead}
+            inherited={sectionsContent.obj3.inherited}
+            entries={sectionsContent.obj3.entries}
+            symbolsHref={sectionsContent.obj3.symbolsHref}
+            symbolsLabel={sectionsContent.obj3.symbolsLabel}
+            parentHref={sectionsContent.obj3.parentHref}
+            parentLabel={sectionsContent.obj3.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={polyEqIneqNotationSheet}
+            current={'/algebra/inequalities'}
+          />,
           sectionsContent.obj3.content,
           <div key={'unit-closedEnds'} dangerouslySetInnerHTML={{ __html: demoUnits.closedEnds }} />,
           `Filled circle, bracket and the non-strict symbol always travel together.`,
@@ -1118,6 +1229,16 @@ export default function InequalitiesPage({inequalityFamilyTree,
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
           `@academic[punchline:Any step that keeps the order of numbers is safe; a step that reverses the order flips the symbol.]@`,
+          `The moves above side by side, each marked by what it does to the direction of the inequality.`,
+          <DiagramFrame
+            key={'obj5-propsheet'}
+            id="inequality-moves"
+            title="What each move does to the direction"
+            source="/algebra/inequalities"
+          >
+            <PropertySheet data={inequalityMoveProperties} />
+          </DiagramFrame>,
+          `Every flip comes from the same place: the move reverses the order of the number line, as negation does and as $\\frac{1}{x}$ does on each side of $0$. Squaring has no single direction at all, which is why it is not a safe step when solving an inequality.`,
         ]
     },
 
@@ -1254,6 +1375,22 @@ export default function InequalitiesPage({inequalityFamilyTree,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

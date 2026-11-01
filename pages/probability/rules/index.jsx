@@ -444,6 +444,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -764,8 +767,80 @@ How to check: count ordered pairs directly. There are $52 \\cdot 51 = 2652$ orde
     }),
   };
 
+  // DecisionMaker + DecisionWalker (summary): probability-rule-decision
+  const probabilityRuleDecision = {
+    header: {
+      kicker: 'probability rules',
+      title: 'Which rule?',
+      lede: 'Start from what the problem asks for; unions need one more question.',
+    },
+    start: 'want',
+    nodes: {
+      want: { question: 'What is wanted?', hint: 'the probability of …', answers: [
+        { label: 'complement', to: 'complement' },
+        { label: 'union', to: 'union' },
+        { label: 'intersection', to: 'multiplication' },
+        { label: 'by cases', to: 'total' },
+        { label: 'reversed', to: 'bayes' },
+        { label: 'compare', to: 'monotonicity' },
+      ] },
+      union: { question: 'Which kind of union?', answers: [
+        { label: 'disjoint', to: 'mutex' },
+        { label: 'overlap', to: 'addition' },
+        { label: 'n events', to: 'ie' },
+        { label: 'bound', to: 'boole' },
+      ] },
+    },
+    outcomes: {
+      complement: { title: 'Complement rule', action: '$P(A^c) = 1 - P(A)$', link: { label: 'Set-operation rules', href: '/probability/rules#set' } },
+      mutex: { title: 'Mutual exclusivity', action: '$P(A \\cup B) = P(A) + P(B)$', link: { label: 'Set-operation rules', href: '/probability/rules#set' } },
+      addition: { title: 'Addition rule', action: '$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$', link: { label: 'Additive rules', href: '/probability/rules#additive' } },
+      ie: { title: 'Inclusion–exclusion', action: 'alternating sums of pairwise, triple, … intersections', link: { label: 'Additive rules', href: '/probability/rules#additive' } },
+      boole: { title: "Boole's inequality", action: 'an upper bound: P(∪ Aᵢ) ≤ Σ P(Aᵢ)', link: { label: 'Additive rules', href: '/probability/rules#additive' } },
+      multiplication: { title: 'Multiplication rule', action: '$P(A \\cap B) = P(B)\\,P(A \\mid B)$', link: { label: 'Multiplicative rules', href: '/probability/rules#multy' } },
+      total: { title: 'Law of total probability', action: 'over a partition {Bᵢ}: P(A) = Σ P(A | Bᵢ) P(Bᵢ)', link: { label: 'Multiplicative rules', href: '/probability/rules#multy' } },
+      bayes: { title: "Bayes' theorem", action: '$P(B \\mid A) = P(A \\mid B)\\,P(B) / P(A)$', link: { label: 'Multiplicative rules', href: '/probability/rules#multy' } },
+      monotonicity: { title: 'Monotonicity', action: 'when A ⊆ B: P(A) ≤ P(B)', link: { label: 'Additive rules', href: '/probability/rules#additive' } },
+    },
+  };
+
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the de Mere fact box, the two-dice figure,
+  // and the triple-intersection and adding-the-chances pitfalls (all under
+  // Additive & Inequality Rules), and the note under the swapping-the-condition
+  // pitfall that the two forms of the multiplication rule give the Bayes theorem.
+  const faqQuestions = {
+    obj1: {
+      question: "Why is one six in four rolls more likely than a double six in 24 rolls?",
+      answer: "Because the chance of at least one hit does not grow in proportion to the number of tries. Gamblers expected equal odds, since $\\frac{4}{6} = \\frac{24}{36}$, but those sums only bound the probabilities from above. The complement rule gives the true values: $1 - \\left(\\frac{5}{6}\\right)^4 \\approx 0.518$ for a six in $4$ rolls of one die, and $1 - \\left(\\frac{35}{36}\\right)^{24} \\approx 0.491$ for a double six in $24$ rolls of two dice. This puzzle of the Chevalier de Méré reached Pascal in 1654.",
+      sectionId: "additive"
+    },
+    obj2: {
+      question: "Do you need the triple intersection in inclusion–exclusion?",
+      answer: "Yes, with three events the formula ends with $+\\,P(A \\cap B \\cap C)$. An outcome in all three events is added by the three single terms and removed by the three pairwise ones, so without the last term it is not counted at all. Draw a number from $1$ to $30$, with $A$, $B$, $C$ = divisible by $2$, $3$, $5$: stopping after the pairwise terms gives $\\frac{21}{30}$, and adding back the number $30$ gives the correct $\\frac{22}{30} = \\frac{11}{15}$.",
+      sectionId: "additive"
+    },
+    obj3: {
+      question: "When does adding probabilities only give an upper bound?",
+      answer: "Whenever the events can happen together. Boole's inequality says $P\\left(\\bigcup_i A_i\\right) \\le \\sum_i P(A_i)$, with equality only when no two of the events overlap. Adding $\\frac{1}{6}$ for each of four die rolls gives $\\frac{2}{3}$ for at least one six, while the true value is $\\frac{671}{1296} \\approx 0.518$. With seven rolls the sum reaches $\\frac{7}{6}$, more than any probability can be.",
+      sectionId: "additive"
+    },
+    obj4: {
+      question: "What is the probability that the first die is a six or the two dice match?",
+      answer: "$\\frac{11}{36}$. The first die shows $6$ in $6$ of the $36$ outcomes, and a double comes up in another $6$. Adding $\\frac{6}{36} + \\frac{6}{36}$ counts the outcome $(6,6)$ twice, since it belongs to both events, so the addition rule subtracts $P(A \\cap B) = \\frac{1}{36}$ once: $\\frac{6 + 6 - 1}{36} = \\frac{11}{36}$.",
+      sectionId: "additive"
+    },
+    obj5: {
+      question: "How does the multiplication rule lead to the Bayes theorem?",
+      answer: "The rule can start from either event: $P(A \\cap B) = P(A)\\,P(B \\mid A) = P(B)\\,P(A \\mid B)$. Setting the two forms equal and dividing by $P(A)$ gives $P(B \\mid A) = \\frac{P(A \\mid B)\\,P(B)}{P(A)}$. For one card, with $K$ = king and $F$ = face card, $P(F \\mid K) = 1$ turns into $P(K \\mid F) = \\frac{1 \\cdot \\frac{4}{52}}{\\frac{12}{52}} = \\frac{1}{3}$.",
+      sectionId: "multy"
+    }
+  }
+
       return {
         props:{
+    faqQuestions,
+    probabilityRuleDecision,
           sectionsContent,
           introContent,
           probabilityRulesData,
@@ -776,10 +851,10 @@ How to check: count ordered pairs directly. There are $52 \\cdot 51 = 2652$ orde
     }
     
 
-export default function ProbabilityRulesPage({ sectionsContent,
+export default function ProbabilityRulesPage({probabilityRuleDecision,  sectionsContent,
     introContent,
     probabilityRulesData,
-    summaryTable, demoUnits }) {
+    summaryTable, demoUnits, faqQuestions }) {
 
   
     const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1030,6 +1105,16 @@ Each factor in the chain rule is conditioned on everything that came before it. 
                 sectionsContent.summary.content,
                 <div key={'summary-table'} style={tableWrapStyle}
                      dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+                `The same nine rules, sorted by the question to ask about the problem rather than listed side by side.`,
+                <DiagramFrameV2
+                  key={'summary-decision'}
+                  id="probability-rule-decision"
+                  title="Which probability rule?"
+                  source="/probability/rules"
+                >
+                  <DecisionBox data={probabilityRuleDecision} variant="tree" />
+                </DiagramFrameV2>,
+                `Unions are the one branch that needs a second look: the plain sum $P(A) + P(B)$ is exact only for disjoint events. With overlap it must be corrected, or kept only as an upper bound, which is Boole's inequality. The [pitfalls](!#pitfalls) below show what happens when that correction is left out.`,
             ]
         },
         {
@@ -1038,6 +1123,22 @@ Each factor in the chain rule is conditioned on everything that came before it. 
             link:'',
             content:[
                 sectionsContent.pitfalls.content,
+            ]
+        },
+        // faq: rendered component — must be built here, not in getStaticProps
+        {
+            id:'faq',
+            title:`Rules of Probability FAQ`,
+            link:``,
+            content:[
+              <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+                <FAQSection
+                  faqQuestions={faqQuestions}
+                  theme={'leftBorder'}
+                  width={'100%'}
+                  openFirst={false}
+                />
+              </div>,
             ]
         }
     ]

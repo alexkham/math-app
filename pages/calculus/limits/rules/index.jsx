@@ -15,6 +15,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -460,6 +461,25 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 13 callouts (obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10, obj11, obj12, obj13, obj14)
+// Concept introduction (section 1, "Why Limit Rules Matter") — template A,
+// definition last. Running instance: the limit of x² + 3x as x approaches 2,
+// built from two basic limits. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its three passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBuildTable = ciTableOpen(['step', 'limit as x → 2', 'reason']) +
+  ciRow(['basic limit', 'lim x = 2', 'identity function']) +
+  ciRow(['basic limit', 'lim 3 = 3', 'constant'], { shade: true }) +
+  ciRow(['multiply', 'lim x² = 2 · 2 = 4', 'product rule']) +
+  ciRow(['multiply', 'lim 3x = 3 · 2 = 6', 'constant multiple rule'], { shade: true }) +
+  ciRow(['add', 'lim (x² + 3x) = 4 + 6 = 10', 'sum rule'], { last: true, color: '#2563EB', cols: [1] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/limits/rules ───────────────────────────────────────────────
 
@@ -873,6 +893,9 @@ That final condition is crucial. Every rule listed here requires the individual 
 // mapped 1:1 to a rule-named h2 that states the answer in its first line.
 // Invented three from the caveats buried in closing paragraphs — the
 // conditions under which each rule stops working, which no heading mentions.
+// FAQ pass 2026-10-31: kept all three. Added the sum of two missing limits
+// (fact box under "When Rules Fail") and the converse of the absolute value
+// rule (closing paragraph of "Absolute Value Rule"), neither asked by a heading.
 const faqQuestions = {
   obj1: {
     question: "What happens if the limit of the denominator is zero?",
@@ -888,6 +911,16 @@ const faqQuestions = {
     question: "When should you use the Squeeze Theorem?",
     answer: "Use it when a limit resists direct evaluation but the function can be trapped between two simpler ones sharing the same limit. If g(x) ≤ f(x) ≤ h(x) near a, and both g and h approach L, then f has nowhere to go but L. The classic application proves the [special limit](!/calculus/limits/special) sin(x)/x → 1 by bounding it between cos x and 1.",
     sectionId: "14"
+  },
+  obj4: {
+    question: "Can the sum of two functions have a limit when neither function does?",
+    answer: "Yes. Neither $\\lfloor x \\rfloor$ nor $\\lfloor -x \\rfloor$ has a limit at $0$, since both jump there, yet their sum equals $-1$ for every non-integer $x$, so the sum tends to $-1$. The sum rule simply gives no verdict when its parts have no limits. One missing limit cannot be rescued this way: if $f$ and $f + g$ both have limits, so does $g = (f + g) - f$.",
+    sectionId: "15"
+  },
+  obj5: {
+    question: "If |f(x)| has a limit, does f(x) have one too?",
+    answer: "Not in general. The rule runs one way: a limit of $f$ gives a limit of $|f|$, but not the reverse. For $\\frac{|x|}{x}$ at $0$, the absolute value is $1$ on both sides, while the function itself is $-1$ on the left and $1$ on the right, so it has no limit. The one exception is the limit $0$: if $|f(x)| \\to 0$, then $f(x) \\to 0$, because $-|f(x)| \\leq f(x) \\leq |f(x)|$.",
+    sectionId: "10"
   }
 }
 
@@ -978,6 +1011,10 @@ const schemas = {
     points: [{ x: 0, y: 0 }],
     notes: [{ x: 0.03, y: 0.115, text: 'f(x) = x² sin(1/x)', pos: 'e', color: 'f' }, { x: 0.03, y: -0.11, text: 'trapped: f → 0 as x → 0', pos: 'e', color: 'r' }],
     caption: 'The bounds close in on 0, and the trapped function has to follow' };
+  const conceptIntroFigures = {
+    buildTable: ciBuildTable,
+  };
+
   const demoUnits = {
     squeeze: demoUnitFrame({
       svg: renderFunctionPlotV4(fpSqueeze),
@@ -1031,6 +1068,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Limit Rules: Laws & Theorems | Learn Math Class",
       description: "Complete guide to limit laws: sum, difference, product, quotient, power, and root rules. Plus polynomial limits, rational function limits, composition rule, and the Squeeze Theorem.",
@@ -1044,9 +1082,64 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RulesPage({seoData, sectionsContent, introContent, quotientRuleCases, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RulesPage({seoData, sectionsContent, introContent, quotientRuleCases, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Proving a limit straight from the definition is slow work, even for x² + 3x.`,
+        content: [
+          `Without rules, evaluating even simple limits would require returning to the definition each time. The definition asks whether $f(x)$ can be made arbitrarily close to $L$ by taking $x$ sufficiently close to $a$. Proving this directly for each new function is tedious.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Two basic limits and three rules give the limit of x² + 3x at 2 without touching the definition.`,
+        content: [
+          ciTable('buildTable'),
+          `Only the two basic limits needed proof. Every later step combines limits already known.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The limit of a combination is the same combination of the limits.`,
+        content: [
+          `Limit rules provide shortcuts. Once you establish that basic limits exist—constants, the identity function, standard functions—you can combine them using algebraic rules to handle complex expressions.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Limit rules** say how the limit of a sum, difference, product, quotient, power or root is obtained from the limits of its parts, provided those limits exist.`,
+        footer: `So $\\lim_{x \\to 2} (x^2 + 3x) = 4 + 6 = 10$, found with the product, constant multiple and sum rules.`,
+      },
+      {
+        id: 'kind',
+        lead: `The rules make limits behave like ordinary algebra.`,
+        content: [
+          `The rules also reveal structure. They show that limits behave like algebraic operations in many ways, which is why calculus meshes so naturally with algebra.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rules apply only when the limits of the parts exist, and a quotient also needs a nonzero limit below.`,
+        content: [
+          `At $x = 0$, $\\frac{1}{x}$ has no limit, yet $x \\cdot \\frac{1}{x} = 1$ has limit $1$; the product rule cannot be used there. Cases like this are collected in [when rules fail](!/calculus/limits/rules#15).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the basic limits, the sum, constant multiple, product, quotient, power, root and absolute value rules, polynomials and rational functions, composition, the squeeze theorem, when the rules fail, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1054,7 +1147,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, quoti
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

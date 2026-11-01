@@ -12,6 +12,9 @@ import identityDiagrams from '@/app/components/algebra/identities/identityDiagra
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import MistakeFix from '@/app/components/infographics/MistakeFix'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
 
 export async function getStaticProps() {
 
@@ -209,6 +212,26 @@ const summaryTable = `
 </table>
 `
 
+
+  // Concept introduction (section 1, "Squares of Binomials") — template C,
+  // failure first. Running instance: (a + b)² against a² + b² and
+  // a² + 2ab + b² at four pairs of values. Old obj1 text is kept in
+  // sectionsContent.obj1, unused; its fact aside, pitfall aside, four
+  // passages, the obj1Table and the square demo frame with its line are
+  // carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciTestTable = ciTableOpen(['a, b', '(a + b)²', 'a² + b²', 'a² + 2ab + b²']) +
+    ciRow(['3, 4', '49', '25 — wrong', '49']) +
+    ciRow(['1, 1', '4', '2 — wrong', '4'], { shade: true }) +
+    ciRow(['5, −2', '9', '29 — wrong', '9']) +
+    ciRow(['0, 7', '49', '49', '49'], { shade: true, last: true }) +
+    '</tbody></table>'
 
   const sectionsContent = {
 
@@ -444,79 +467,9 @@ For every identity in one searchable list, see the [algebraic identities table](
 
     obj8: {
       title: `Common Pitfalls`,
-      content: `Most wrong expansions and factorizations come from a handful of slips. The first is described in the section on squares; the others are marked where they happen in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Dropping the middle term**
-
-A binomial is squared term by term, as if the square could be shared out over a sum the way it is over a product, and the cross term disappears.
-
-Wrong working:
-$$(x + 5)^2 = x^2 + 25$$
-
-Right working: with $a = x$ and $b = 5$, the identity gives $a^2 + 2ab + b^2$:
-$$(x + 5)^2 = x^2 + 2 \\cdot x \\cdot 5 + 25 = x^2 + 10x + 25$$
-
-Why it happens: powers do spread over products, $(ab)^2 = a^2b^2$, and the same move looks natural for a sum.
-
-How to check: substitute a value. At $x = 1$, $(1 + 5)^2 = 36$; the wrong form gives $1 + 25 = 26$, the right form $1 + 10 + 25 = 36$.
-
-**Squaring only the letter**
-
-The first term of the binomial carries a number, as in $2x$, but the square is applied to the letter alone and the number is left as it was.
-
-Wrong working:
-$$(2x + 3)^2 = 2x^2 + 2 \\cdot 2x \\cdot 3 + 9 = 2x^2 + 12x + 9$$
-
-Right working: the first term is $a = 2x$, so $a^2 = (2x)^2 = 4x^2$:
-$$(2x + 3)^2 = 4x^2 + 12x + 9$$
-
-Why it happens: the identity is learned with single letters, and $a^2$ is read as "the letter squared" instead of "the whole first term squared".
-
-How to check: substitute a value. At $x = 1$, $(2 + 3)^2 = 25$; the wrong form gives $2 + 12 + 9 = 23$, the right form $4 + 12 + 9 = 25$.
-
-**Making every sign negative**
-
-In the cube of a difference, the minus sign of the binomial is carried to every term after the first instead of alternating.
-
-Wrong working:
-$$(x - 2)^3 = x^3 - 6x^2 - 12x - 8$$
-
-Right working: with $a = x$ and $b = 2$, the identity $a^3 - 3a^2b + 3ab^2 - b^3$ gives
-$$(x - 2)^3 = x^3 - 3 \\cdot x^2 \\cdot 2 + 3 \\cdot x \\cdot 4 - 8 = x^3 - 6x^2 + 12x - 8$$
-
-Why it happens: a minus in the binomial suggests a minus everywhere. But the third term contains $(-b)^2$, which is positive.
-
-How to check: substitute a value. At $x = 3$, $(3 - 2)^3 = 1$; the wrong form gives $27 - 54 - 36 - 8 = -71$, the right form $27 - 54 + 36 - 8 = 1$.
-
-**Using the binomial coefficient alone**
-
-Asked for one term of an expansion, the binomial coefficient is read off Pascal's triangle and taken as the whole coefficient, even though $b$ is a number other than $1$ and its power adds a factor.
-
-Wrong working: the term with $x^3$ in $(x + 2)^5$ has $k = 2$, so its coefficient is $\\binom{5}{2} = 10$.
-
-Right working: the general term is $\\binom{n}{k} a^{n-k} b^k$ with $a = x$ and $b = 2$:
-$$\\binom{5}{2} x^3 \\cdot 2^2 = 10 \\cdot 4 \\cdot x^3 = 40x^3$$
-The coefficient is $40$.
-
-Why it happens: in $(a + b)^n$ with plain letters the binomial coefficients are the whole coefficients, and that habit carries over when $b$ is a number.
-
-How to check: the coefficients of the full expansion add up to the value at $x = 1$, here $(1 + 2)^5 = 243$. The full expansion $x^5 + 10x^4 + 40x^3 + 80x^2 + 80x + 32$ adds up to $243$; the binomial coefficients alone add up to only $2^5 = 32$.
-
-**Copying the sign into the quadratic factor**
-
-When a sum of cubes is factored, the plus sign of the binomial factor is copied into the middle term of the quadratic factor.
-
-Wrong working:
-$$x^3 + 8 = (x + 2)(x^2 + 2x + 4)$$
-
-Right working: with $a = x$ and $b = 2$, the identity $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$ gives
-$$x^3 + 8 = (x + 2)(x^2 - 2x + 4)$$
-
-Why it happens: the binomial factor has the same sign as the original expression, and it seems natural for the quadratic factor to follow it.
-
-How to check: expand the answer. $(x + 2)(x^2 + 2x + 4) = x^3 + 4x^2 + 8x + 8$, while $(x + 2)(x^2 - 2x + 4) = x^3 - 2x^2 + 4x + 2x^2 - 4x + 8 = x^3 + 8$. At $x = 1$ the original gives $9$, the wrong form $3 \\cdot 7 = 21$, the right form $3 \\cdot 3 = 9$.`,
+      content: `Most wrong expansions and factorizations come from a handful of slips. The first is described in the section on squares; the others are marked where they happen in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
       before: ``,
-      after: ``,
+      after: `All five checks come down to one move: give $x$ a small value, work out the original expression and the result, and compare the two numbers. A mismatch proves the working wrong. A match is only evidence, since two different expressions can agree at a single point, so when the result matters, try a second value as well.`,
       link: '',
     },
 
@@ -533,6 +486,11 @@ The identities below are grouped by shape: squares first, then cubes, then highe
   }
 
 
+  // FAQ pass 2026-10-31: kept the three questions. Added mental
+  // multiplication (fact box under "Squares of Binomials"), n^4 + 4 almost
+  // never prime and the a^2 + b^2 + c^2 >= ab + bc + ca proof (fact box and
+  // one sentence under "Useful Specials"), and checking an expansion by
+  // substitution (the "How to check" lines in "Common Pitfalls").
   const faqQuestions = {
     obj1: {
       question: "What is the Sophie Germain identity?",
@@ -548,6 +506,26 @@ The identities below are grouped by shape: squares first, then cubes, then highe
       question: "How do you pull $ab$ out of $a + b$ and $a - b$?",
       answer: "Square both and subtract: $(a+b)^2 - (a-b)^2 = 4ab$, so the product falls out as a quarter of the difference. Adding instead gives the companion identity $(a+b)^2 + (a-b)^2 = 2(a^2 + b^2)$, which strips the cross term entirely. The pair is worth recognising whenever a sum and a difference appear together.",
       sectionId: "6"
+    },
+    obj4: {
+      question: "How do you work out $49 \\times 51$ in your head?",
+      answer: "Use the difference of squares. The two numbers sit the same distance either side of $50$, so $49 \\cdot 51 = (50 - 1)(50 + 1) = 50^2 - 1^2 = 2499$. Any pair placed evenly around an easy square works the same way: $38 \\cdot 42 = 40^2 - 2^2 = 1600 - 4 = 1596$. The multiplication turns into one square and one subtraction.",
+      sectionId: "1"
+    },
+    obj5: {
+      question: "Is $n^4 + 4$ ever prime?",
+      answer: "Only for $n = 1$, where it equals $5$. The Sophie Germain identity with $a = n$ and $b = 1$ gives $n^4 + 4 = (n^2 + 2n + 2)(n^2 - 2n + 2)$, and the smaller factor equals $(n - 1)^2 + 1$, which is greater than $1$ for every whole number $n \\geq 2$. For $n = 3$, for example, $85 = 17 \\cdot 5$.",
+      sectionId: "6"
+    },
+    obj6: {
+      question: "How do you prove $a^2 + b^2 + c^2 \\geq ab + bc + ca$?",
+      answer: "Move everything to one side and use the identity $a^2 + b^2 + c^2 - ab - ac - bc = \\frac{1}{2}\\left[(a-b)^2 + (b-c)^2 + (a-c)^2\\right]$. The right side is half a sum of squares, so it is never negative for real $a$, $b$, $c$. It is zero only when all three squares are zero, that is when $a = b = c$, so that is the only case of equality.",
+      sectionId: "6"
+    },
+    obj7: {
+      question: "How can you check an expansion quickly?",
+      answer: "Substitute a number into both sides. An identity holds for every value, so one value where the sides disagree proves a mistake: at $x = 1$, $(x + 5)^2 = 36$, while the slip $x^2 + 25$ gives $26$. Choosing $x = 1$ also adds up the coefficients, so those of $(x + 2)^5$ must total $3^5 = 243$. Agreement at one value is not a proof, but disagreement always exposes an error.",
+      sectionId: "pitfalls"
     }
   }
 
@@ -624,6 +602,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    testTable: ciTestTable,
+  };
+
   const demoUnits = {
     trinomial: demoUnitFrame({
       svg: identityDiagrams['tri-3'],
@@ -686,10 +668,56 @@ const schemas = {
     ],
   };
 
+  // MistakeFix pilot 2026-11-01: the "Common Pitfalls" entries, moved word for
+  // word out of sectionsContent.obj8 into the MistakeFix data (trace layout:
+  // each formula is broken into steps at its = signs; errorAt is the first
+  // step that goes wrong).
+  const identityPitfalls = {
+    mistakes: [
+      { id: 'middle-term', name: `Dropping the middle term`, errorAt: 1,
+        what: `A binomial is squared term by term, as if the square could be shared out over a sum the way it is over a product, and the cross term disappears.`,
+        wrong: [`$$(x + 5)^2$$`, `$$= x^2 + 25$$`],
+        right: [`$$(x + 5)^2$$`, `With $a = x$ and $b = 5$, the identity gives $a^2 + 2ab + b^2$:
+$$= x^2 + 2 \\cdot x \\cdot 5 + 25$$`, `$$= x^2 + 10x + 25$$`],
+        why: `Powers do spread over products, $(ab)^2 = a^2b^2$, and the same move looks natural for a sum.`,
+        check: `Substitute a value. At $x = 1$, $(1 + 5)^2 = 36$; the wrong form gives $1 + 25 = 26$, the right form $1 + 10 + 25 = 36$.` },
+      { id: 'only-the-letter', name: `Squaring only the letter`, errorAt: 1,
+        what: `The first term of the binomial carries a number, as in $2x$, but the square is applied to the letter alone and the number is left as it was.`,
+        wrong: [`$$(2x + 3)^2$$`, `$$= 2x^2 + 2 \\cdot 2x \\cdot 3 + 9$$`, `$$= 2x^2 + 12x + 9$$`],
+        right: [`$$(2x + 3)^2$$`, `The first term is $a = 2x$, so $a^2 = (2x)^2 = 4x^2$:
+$$= 4x^2 + 12x + 9$$`],
+        why: `The identity is learned with single letters, and $a^2$ is read as "the letter squared" instead of "the whole first term squared".`,
+        check: `Substitute a value. At $x = 1$, $(2 + 3)^2 = 25$; the wrong form gives $2 + 12 + 9 = 23$, the right form $4 + 12 + 9 = 25$.` },
+      { id: 'every-sign-negative', name: `Making every sign negative`, errorAt: 1,
+        what: `In the cube of a difference, the minus sign of the binomial is carried to every term after the first instead of alternating.`,
+        wrong: [`$$(x - 2)^3$$`, `$$= x^3 - 6x^2 - 12x - 8$$`],
+        right: [`$$(x - 2)^3$$`, `With $a = x$ and $b = 2$, the identity $a^3 - 3a^2b + 3ab^2 - b^3$ gives
+$$= x^3 - 3 \\cdot x^2 \\cdot 2 + 3 \\cdot x \\cdot 4 - 8$$`, `$$= x^3 - 6x^2 + 12x - 8$$`],
+        why: `A minus in the binomial suggests a minus everywhere. But the third term contains $(-b)^2$, which is positive.`,
+        check: `Substitute a value. At $x = 3$, $(3 - 2)^3 = 1$; the wrong form gives $27 - 54 - 36 - 8 = -71$, the right form $27 - 54 + 36 - 8 = 1$.` },
+      { id: 'binomial-coefficient-alone', name: `Using the binomial coefficient alone`, errorAt: 1,
+        what: `Asked for one term of an expansion, the binomial coefficient is read off Pascal's triangle and taken as the whole coefficient, even though $b$ is a number other than $1$ and its power adds a factor.`,
+        wrong: [`The term with $x^3$ in $(x + 2)^5$ has $k = 2$,`, `so its coefficient is $\\binom{5}{2} = 10$.`],
+        right: [`The term with $x^3$ in $(x + 2)^5$ has $k = 2$,`, `The general term is $\\binom{n}{k} a^{n-k} b^k$ with $a = x$ and $b = 2$:
+$$\\binom{5}{2} x^3 \\cdot 2^2 = 10 \\cdot 4 \\cdot x^3 = 40x^3$$`, `The coefficient is $40$.`],
+        why: `In $(a + b)^n$ with plain letters the binomial coefficients are the whole coefficients, and that habit carries over when $b$ is a number.`,
+        check: `The coefficients of the full expansion add up to the value at $x = 1$, here $(1 + 2)^5 = 243$. The full expansion $x^5 + 10x^4 + 40x^3 + 80x^2 + 80x + 32$ adds up to $243$; the binomial coefficients alone add up to only $2^5 = 32$.` },
+      { id: 'sign-in-quadratic-factor', name: `Copying the sign into the quadratic factor`, errorAt: 1,
+        what: `When a sum of cubes is factored, the plus sign of the binomial factor is copied into the middle term of the quadratic factor.`,
+        wrong: [`$$x^3 + 8$$`, `$$= (x + 2)(x^2 + 2x + 4)$$`],
+        right: [`$$x^3 + 8$$`, `With $a = x$ and $b = 2$, the identity $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$ gives
+$$= (x + 2)(x^2 - 2x + 4)$$`],
+        why: `The binomial factor has the same sign as the original expression, and it seems natural for the quadratic factor to follow it.`,
+        check: `Expand the answer. $(x + 2)(x^2 + 2x + 4) = x^3 + 4x^2 + 8x + 8$, while $(x + 2)(x^2 - 2x + 4) = x^3 - 2x^2 + 4x + 2x^2 - 4x + 8 = x^3 + 8$. At $x = 1$ the original gives $9$, the wrong form $3 \\cdot 7 = 21$, the right form $3 \\cdot 3 = 9$.` },
+    ],
+  };
+
   return {
   props: {
+    identityPitfalls,
     identitiesOutline,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -709,7 +737,7 @@ const schemas = {
 }
 }
 
-export default function AlgebraicIdentitiesPage({identitiesOutline, 
+export default function AlgebraicIdentitiesPage({identitiesOutline, identityPitfalls,
   seoData,
   sectionsContent,
   introContent,
@@ -718,8 +746,81 @@ export default function AlgebraicIdentitiesPage({identitiesOutline,
   obj5Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
+
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Squaring a product works factor by factor: (ab)² = a²b². It is tempting to square a sum the same way.`,
+        content: [
+          `By that habit $(a + b)^2$ would simply be $a^2 + b^2$ — square each piece and add.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Trying numbers shows the habit fails — while a third expression matches every time.`,
+        content: [
+          ciTable('testTable'),
+          `$a^2 + b^2$ is right only when one of the two is $0$. The column $a^2 + 2ab + b^2$ agrees with $(a + b)^2$ in every row, and would in any row added.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The habit drops the cross term 2ab, the two rectangles left over in the square of side a + b.`,
+        content: [
+          `The middle term is what gets missed most often. Squaring $(a+b)$ does not give $a^2 + b^2$ — the cross term $2ab$ comes from the two outer-and-inner products that survive distribution. The conjugate product $(a+b)(a-b)$ is the exception: there the cross terms cancel, leaving a clean [difference of squares](!/algebra/polynomials/factoring#6) — the most heavily used factoring pattern in algebra.`,
+          `Geometrically, $(a+b)^2$ is the area of a square with side $a+b$, dissected into one $a \\times a$ square, one $b \\times b$ square, and two $a \\times b$ rectangles. The cross term $2ab$ counts those two rectangles. Once that picture is in working memory, the formula becomes unforgettable. The reverse direction — recognizing $a^2 + 2ab + b^2$ as a [perfect square trinomial](!/algebra/polynomials/factoring#7) — is what lets you collapse three terms into one squared binomial on sight.`,
+          <div
+            key={'obj1-table'}
+            style={{ margin: '20px auto', width: '100%' }}
+            dangerouslySetInnerHTML={{ __html: obj1Table }}
+          />,
+          <div key={'unit-square'} dangerouslySetInnerHTML={{ __html: demoUnits.square }} />,
+          `The square of a difference and the conjugate product are the same picture with one side shortened or one piece removed.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [identity](!/algebra/definitions#identity) is an equation that holds for every value of its variables, such as $(a + b)^2 = a^2 + 2ab + b^2$.`,
+        formula: [
+          `Three identities form the foundation of nearly all polynomial work. Squaring a sum, squaring a difference, and multiplying conjugate binomials produce predictable results that appear constantly in [factoring](!/algebra/polynomials/factoring), [completing the square](!/algebra/equations/quadratic#3), simplifying rational expressions, and solving [quadratic equations](!/algebra/equations/quadratic).`,
+        ],
+        footer: `So $(a + b)^2 = a^2 + 2ab + b^2$ is an identity, while $(a + b)^2 = a^2 + b^2$ is not: it fails at $a = 3$, $b = 4$.`,
+      },
+      {
+        id: 'kind',
+        lead: `An identity is a rewriting rule: either side may replace the other, whatever the values.`,
+        content: [
+          `In practice, $a$ and $b$ are rarely single letters. Expanding $(2x + 3)^2$ means applying the identity with $a = 2x$ and $b = 3$, and each of the three terms $a^2$, $2ab$ and $b^2$ is built from those whole expressions. The same substitution works for any binomial, whatever its two terms look like.`,
+          `@academic[fact,aside:true,width:35%:A shortcut for mental multiplication
+$49 \\cdot 51 = (50 - 1)(50 + 1) = 50^2 - 1 = 2499$. Any two numbers the same distance from an easy square multiply this way, in your head.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Each letter stands for a whole term, coefficient included.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Squaring only the letter
+Writing $(2x + 3)^2$ as $2x^2 + 12x + 9$ squares the $x$ but not the $2$; at $x = 1$ that gives $23$ instead of $5^2 = 25$. The first term is $a = 2x$, so $a^2 = 4x^2$ and $(2x + 3)^2 = 4x^2 + 12x + 9$.
+[Read more](!#pitfalls)]@`,
+          `Cubes work the same way with more cross terms, as [cubes of binomials](!/algebra/identities#2) shows.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers cubes of binomials, higher powers and the binomial theorem, trinomial expansions, and the factoring identities.`,
+      },
+    ],
+  }
 
   const genericSections = [
     {
@@ -735,15 +836,8 @@ export default function AlgebraicIdentitiesPage({identitiesOutline,
       title: sectionsContent.obj1.title,
       link: sectionsContent.obj1.link,
       content: [
-        sectionsContent.obj1.content,
-        <div
-          key={'obj1-table'}
-          style={{ margin: '20px auto', width: '100%' }}
-          dangerouslySetInnerHTML={{ __html: obj1Table }}
-        />,
-                <div key={'unit-square'} dangerouslySetInnerHTML={{ __html: demoUnits.square }} />,
-          `The square of a difference and the conjugate product are the same picture with one side shortened or one piece removed.`,
-        ]
+        <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+      ]
     },
     {
       id: '2',
@@ -830,6 +924,15 @@ export default function AlgebraicIdentitiesPage({identitiesOutline,
       link: sectionsContent.obj8.link,
       content: [
         sectionsContent.obj8.content,
+        <DiagramFrame
+          key={'obj8-mistakes'}
+          id="identity-pitfalls"
+          title="Common pitfalls with algebraic identities"
+          source="/algebra/identities"
+          after={sectionsContent.obj8.after}
+        >
+          <MistakeFix data={identityPitfalls} variant="trace" />
+        </DiagramFrame>,
       ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

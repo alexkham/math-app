@@ -771,6 +771,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -907,6 +909,25 @@ const summaryTable = `
 </table>
 `
 
+
+// Concept introduction (section 1, "What Orthogonality Means") — template E,
+// widening. Running instance: pairs in R², R³ and R⁴; (1, 1, 1, 1) and
+// (1, −1, 1, −1) are orthogonal though nothing can be drawn. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its formula box and three passages
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPairTable = ciTableOpen(['pair', 'space', 'can be drawn?', 'dot product', 'at right angles?']) +
+  ciRow(['(1, 2) and (−2, 1)', 'R²', 'yes', '0', 'yes']) +
+  ciRow(['(3, 1) and (1, 2)', 'R²', 'yes', '5', 'no'], { shade: true }) +
+  ciRow(['(1, 0, 1) and (0, 1, 0)', 'R³', 'yes, with care', '0', 'yes']) +
+  ciRow(['(1, 1, 1, 1) and (1, −1, 1, −1)', 'R⁴', 'no', '0', 'yes, by the dot product'], { shade: true, last: true, color: '#2563EB', cols: [3, 4] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1245,6 +1266,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    pairTable: ciPairTable,
+  };
+
   const demoUnits = {
     // Hub page: one unit, on the section where orthogonality stops
     // being a property of pairs and becomes a property of whole spaces.
@@ -1271,10 +1296,45 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+  // so only what this page holds and no child page asks: orthogonal versus
+  // perpendicular (intro), the (a, b) / (-b, a) rule and the cube-diagonal fact
+  // box under R2 and R3, and the complement pitfall and the double-complement
+  // fact box under Orthogonal Complements.
+  const faqQuestions = {
+    obj1: {
+      question: "Is orthogonal the same as perpendicular?",
+      answer: "In the plane and in space, yes: two nonzero vectors are orthogonal exactly when they meet at $90°$. Beyond three dimensions there is no picture to check, so the dot product becomes the definition: $(1, 1, 1, 1)$ and $(1, -1, 1, -1)$ are orthogonal in $\\mathbb{R}^4$ because $1 - 1 + 1 - 1 = 0$. One difference remains: by convention the zero vector is orthogonal to every vector, although it has no direction to be perpendicular to.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "How do you find a vector perpendicular to a given vector?",
+      answer: "In the plane, swap the two entries and change one sign: $(a, b)$ is orthogonal to $(-b, a)$, since $a(-b) + ba = 0$. This is the vector turned through $90°$; for example, $(1, 2)$ gives $(-2, 1)$. In $\\mathbb{R}^3$ a single vector has a whole plane of perpendicular partners, and the cross product $\\mathbf{a} \\times \\mathbf{b}$ gives one vector perpendicular to two non-parallel vectors at once.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "Are any two diagonals of a cube perpendicular?",
+      answer: "No. With the cube's centre at the origin, the long diagonals point along $(\\pm 1, \\pm 1, \\pm 1)$, and the dot product of two of them is a sum of three terms $\\pm 1$. A sum of three odd numbers is odd, so it is never $0$. A four-dimensional cube does have four mutually perpendicular diagonals, along $(1, 1, 1, 1)$, $(1, 1, -1, -1)$, $(1, -1, 1, -1)$ and $(1, -1, -1, 1)$, because four terms $\\pm 1$ can cancel.",
+      sectionId: "2"
+    },
+    obj4: {
+      question: "Is a subspace perpendicular to $W$ always its orthogonal complement?",
+      answer: "No. $W^\\perp$ holds every vector perpendicular to $W$, and a perpendicular subspace may hold only some of them. In $\\mathbb{R}^3$ the $y$-axis is perpendicular to the $x$-axis, but the complement of the $x$-axis is the whole $yz$-plane, all vectors $(0, b, c)$. A dimension count catches the error: $\\dim W + \\dim W^\\perp$ must equal $n$, and $1 + 1 = 2$ falls short of $3$. Two perpendicular lines in $\\mathbb{R}^2$ pass the count, which is why the mistake looks safe there.",
+      sectionId: "3"
+    },
+    obj5: {
+      question: "Is the orthogonal complement of $W^\\perp$ always $W$?",
+      answer: "In $\\mathbb{R}^n$, yes: $(W^\\perp)^\\perp = W$ for every subspace. In infinite-dimensional spaces it can fail. In the space of sequences with $x_1^2 + x_2^2 + \\cdots$ finite, let $W$ hold the sequences with only finitely many nonzero entries. Every $(0, \\ldots, 0, 1, 0, \\ldots)$ lies in $W$, so only $\\mathbf{0}$ is perpendicular to all of $W$, and $(W^\\perp)^\\perp$ is the whole space. It contains $(1, \\frac{1}{2}, \\frac{1}{3}, \\ldots)$, which is not in $W$.",
+      sectionId: "3"
+    }
+  }
+
 return {
   props:{
+    faqQuestions,
     orthoNest,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1293,17 +1353,78 @@ return {
    }
 
 // export default function OrthogonalityPage({seoData,sectionsContent , introContent}) {
-export default function OrthogonalityPage({orthoNest, 
+export default function OrthogonalityPage({faqQuestions, orthoNest,
   seoData,
   sectionsContent,
   introContent,
   obj4Table,
   obj6Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `In the plane, two arrows are perpendicular when they meet at a right angle — something a set square can check.`,
+        content: [
+          `The test works as long as the arrows can be drawn. In four or more dimensions there is nothing to put a set square against.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `In R⁴ the picture is gone — yet the dot product still gives a clear answer.`,
+        content: [
+          ciTable('pairTable'),
+          `In the rows that can be drawn, the dot product agrees with the picture: it is $0$ exactly when the angle is $90°$. That makes it a test that works where pictures do not.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Two vectors are [orthogonal](!/linear-algebra/definitions#orthogonal_vectors) when their dot product is $0$.`,
+        formula: [
+          `Two vectors $\\mathbf{u}$ and $\\mathbf{v}$ in $\\mathbb{R}^n$ are orthogonal if their [dot product](!/linear-algebra/vectors/dot-product) is zero:`,
+          `@academic[formula_callout:What Orthogonality Means
+$$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@`,
+        ],
+        footer: `So $(1, 1, 1, 1)$ and $(1, -1, 1, -1)$ are orthogonal in $\\mathbb{R}^4$: $1 - 1 + 1 - 1 = 0$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Orthogonality is perpendicularity carried into any number of dimensions.`,
+        content: [
+          `Geometrically, this means the angle between the two vectors is $90°$. The vectors are perpendicular — pointing in completely independent directions with no component of one lying along the other.`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost in the plane and in space: there, orthogonal means exactly "at a right angle".`,
+        content: [
+          `$(1, 2)$ and $(-2, 1)$ are orthogonal and also visibly perpendicular. More examples in two and three dimensions are in [orthogonality in R² and R³](!/linear-algebra/orthogonality#2).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What is new: the zero vector counts as orthogonal to every vector.`,
+        content: [
+          `The zero vector is orthogonal to every vector, since $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for all $\\mathbf{v}$. This is a convention that keeps the theory clean, not a geometric statement — the zero vector has no direction. Orthogonality is defined relative to an [inner product](!/linear-algebra/orthogonality/inner-product), and on this site the standard dot product is used unless stated otherwise.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers orthogonality in two and three dimensions, orthogonal complements, the four fundamental subspaces, why orthogonality matters, and inner products.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1311,7 +1432,7 @@ export default function OrthogonalityPage({orthoNest,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1417,6 +1538,22 @@ export default function OrthogonalityPage({orthoNest,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Orthogonality FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 ]

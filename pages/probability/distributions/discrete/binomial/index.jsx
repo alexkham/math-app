@@ -25,6 +25,9 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -115,6 +118,25 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // binomial distribution") — template G, exclusion. Running instance: four
+    // repeated experiments, only one of which gives a binomial count. Old obj1
+    // text is kept in sectionsContent.obj1, unused; its three passages, the
+    // example, the two link chips and the punchline are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciCountsTable = ciTableOpen(['what is counted', 'trials fixed?', 'same p?', 'independent?', 'binomial?']) +
+      ciRow(['heads in 10 coin flips', 'yes', 'yes', 'yes', 'yes'], { color: '#2563EB', cols: [4] }) +
+      ciRow(['hearts in 5 cards dealt without replacement', 'yes', 'no', 'no', 'no'], { shade: true, color: '#a4243b', cols: [2, 3] }) +
+      ciRow(['flips until the first head', 'no', 'yes', 'yes', 'no'], { color: '#a4243b', cols: [1] }) +
+      ciRow(['baskets in 20 shots by a tiring player', 'yes', 'no', 'yes', 'no'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -705,6 +727,11 @@ How to check: the PMF values must add up to $1$. Without the coefficients, the s
   // this one gives the mean and the variance their own headings, so the
   // formula queries are case A here. Replaced with the notation section's
   // reading traps, which no heading covers.
+  // FAQ pass 2026-10-31: kept the four notation questions. Added exactly half
+  // heads getting rarer (fact box under Mode and Median) and
+  // when the binomial is symmetric (figure card under Parameters and the CDF
+  // explanation). No normal-approximation question: no heading here covers it.
+  // Count spreading while the share settles is left to large-numbers-law.
   const faqQuestions = {
     obj1: {
       question: "What does q mean in binomial formulas?",
@@ -725,6 +752,16 @@ How to check: the PMF values must add up to $1$. Without the coefficients, the s
       question: "Why does the pmf line include “k = 0, …, n”?",
       answer: "Because the support is part of the statement, not decoration. The clause declares exactly which values the variable can take; outside that list the probability is zero by convention. Dropping it leaves the formula looking as though it applies to any k, including negative values or values above n, where the model breaks down.",
       sectionId: "15"
+    },
+    obj5: {
+      question: "Why does getting exactly half heads become less likely with more flips?",
+      answer: "Because the probability spreads over more counts. Exactly $50$ heads in $100$ fair flips is still the single most likely count, yet it happens only about 8% of the time, and exactly $5{,}000$ heads in $10{,}000$ flips less than 1% of the time. The spread of the count grows like $\\sqrt{n}$, so the tallest bar shrinks like $\\frac{1}{\\sqrt{n}}$, even while the share of heads closes in on one half.",
+      sectionId: "8"
+    },
+    obj6: {
+      question: "When is the binomial distribution symmetric?",
+      answer: "Only when $p = 0.5$, setting aside the trivial $p = 0$ and $p = 1$. With $p < 0.5$ the mass piles up on the low counts with a tail to the right; with $p > 0.5$ the picture is the mirror image, because counting failures instead of successes turns $\\operatorname{Bin}(n, p)$ into $\\operatorname{Bin}(n, 1 - p)$. For $n = 10$, $p = 0.2$ peaks at $2$ and $p = 0.8$ at $8$. The lean weakens as $n$ grows.",
+      sectionId: "2"
     }
   }
 
@@ -830,6 +867,10 @@ How to check: the PMF values must add up to $1$. Without the coefficients, the s
     yBars: biStems,
     notes: [{ x: 6.3, y: 0.27, text: '(n + 1)p = 5 is an integer:', pos: 'e', color: 'r' }, { x: 6.3, y: 0.25, text: 'modes 4 and 5, 0.246 each', pos: 'e', color: 'r' }],
     caption: 'n = 9, p = 0.5: two equal tallest bars, two modes' };
+  const conceptIntroFigures = {
+    countsTable: ciCountsTable,
+  };
+
   const demoUnits = {
     u_4_0: demoUnitFrame({
       svg: discretePmfDiagrams.binomial,
@@ -867,6 +908,7 @@ How to check: the PMF values must add up to $1$. Without the coefficients, the s
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          binomialExplanations,
@@ -892,10 +934,73 @@ export default function BinomialDistributionPage({
   binomialExplanations,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Four experiments each count successes. Which of the counts behaves like the number of heads in coin flips?`,
+        content: [
+          `Each one repeats a try whose result is yes or no, and counts the yeses.`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Only the coin flips meet every condition.`,
+        content: [
+          ciTable('countsTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Each failure breaks one condition: a changing p, trials that affect each other, or a number of trials not fixed in advance.`,
+        content: [
+          `Without replacement, the chance of a heart changes after every card. Flipping until the first head lets the coin decide how many trials there are. A tiring player's chance falls from shot to shot.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [binomial distribution](!/probability/definitions#binomial_distribution) gives the number of successes in $n$ independent trials, each with the same probability $p$ of success.`,
+        formula: [
+          `The binomial distribution models the number of successes obtained when the same experiment is repeated a fixed number of times under identical conditions. Each repetition — called a [Bernoulli trial](!/probability/distributions/discrete#bernoulli) — has only two outcomes (success or failure), and the probability of success remains constant across trials. Crucially, the trials are independent.`,
+          sectionsContent.links.decide,
+        ],
+        footer: `So the number of heads in $10$ flips of a fair coin has a binomial distribution with $n = 10$ and $p = \\frac{1}{2}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A binomial count records how many successes occur, never when.`,
+        content: [
+          `What distinguishes the binomial distribution is that the number of trials is fixed in advance, and the [random variable](!/probability/random-variables) counts how many successes occur, not when they occur. The order of outcomes does not matter, only the total count does. This makes the binomial distribution a natural model for controlled, repeatable processes.`,
+          sectionsContent.obj1.example,
+          sectionsContent.links.example,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The model breaks as soon as one condition fails.`,
+        content: [
+          `The binomial distribution captures variability caused by chance alone when conditions are stable. It breaks down if probabilities change from trial to trial, if trials influence each other, or if the number of trials is not predetermined.`,
+          `@academic[punchline:The binomial needs all four: a fixed number of trials, two outcomes, a constant $p$ and independence.]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the parameters, the PMF and support, and the distribution's properties, examples and calculations.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -912,12 +1017,7 @@ export default function BinomialDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          sectionsContent.links.decide,
-          sectionsContent.obj1.example,
-          sectionsContent.links.example,
-          `@academic[punchline:The binomial needs all four: a fixed number of trials, two outcomes, a constant $p$ and independence.]@`,
-
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
      {
@@ -936,6 +1036,11 @@ export default function BinomialDistributionPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/discrete/binomial'}
           />,
         ]
     },

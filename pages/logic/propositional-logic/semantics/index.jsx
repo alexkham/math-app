@@ -7,6 +7,9 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import Head from 'next/head'
 import { createContentHtml } from '@/app/utils/utils-functions'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 export async function getStaticProps() {
  const { default: logicFormulasList } = await import('@/app/api/db/formulas/logic/logicFormulasList')
@@ -111,8 +114,37 @@ Each section is supported by examples, truth tables, and conceptual explanations
    }
  }
 
+ // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+ // so only what this page holds and no child page asks: the row count and the
+ // sixty-letters fact box and the checking-only-some-rows pitfall under Logical
+ // Equivalences, and the search paragraph and the NP-complete fact box under
+ // Contingency, Tautology or Contradiction.
+ const faqQuestions = {
+   obj1: {
+     question: "How many rows does a truth table have?",
+     answer: "$2^n$ for a formula with $n$ letters, since each letter can be T or F independently of the others: two letters give $4$ rows and three give $8$. Every new letter doubles the count, so $30$ letters already give $2^{30} = 1{,}073{,}741{,}824$ rows, and $60$ letters give more than $10^{18}$. Checked at a million rows a second, that table would take about $36{,}500$ years.",
+     sectionId: "equivalences"
+   },
+   obj2: {
+     question: "Are two formulas equivalent if they agree on a few rows?",
+     answer: "No. Equivalence needs the same truth value in every one of the $2^n$ rows, and one row where they differ settles it. $p \\to q$ and $q \\to p$ agree at $p = q = T$ and at $p = q = F$, but at $p = T$, $q = F$ the first is F and the second is T. Their full columns, T, F, T, T against T, T, F, T, differ in two rows. Two formulas are equivalent exactly when their biconditional is a tautology.",
+     sectionId: "equivalences"
+   },
+   obj3: {
+     question: "Why is it easier to show a formula is satisfiable than unsatisfiable?",
+     answer: "Because the first needs one row and the second needs every row. A single assignment that makes the formula T proves it satisfiable, and once found, that row is checked in moments: for $p \\land q$, the row $p = T$, $q = T$ is enough. Proving a formula unsatisfiable means showing that all $2^n$ rows come out F, and the number of rows doubles with each new letter.",
+     sectionId: "contigency"
+   },
+   obj4: {
+     question: "What was the first NP-complete problem?",
+     answer: "Satisfiability: deciding whether a propositional formula is true in at least one row of its truth table. Stephen Cook proved it NP-complete in 1971. A fast method for it would give a fast method for every problem whose answers can be checked quickly, and none is known. Trying every row is not fast: a formula with $n$ letters has $2^n$ rows.",
+     sectionId: "contigency"
+   }
+ }
+
  return {
    props: {
+     faqQuestions,
      sectionContent,
      logicFormulasList,
      logicTermsList,
@@ -128,6 +160,7 @@ Each section is supported by examples, truth tables, and conceptual explanations
 }
 
 export default function LogicPage({
+ faqQuestions,
  sectionContent,
  logicFormulasList,
  logicTermsList,
@@ -156,6 +189,116 @@ export default function LogicPage({
     // Additional tools can be added here
   ]
 
+// Concept introduction (section "contigency", "Contingency, Tautology or
+// Contradiction") — template A, definition last. Running instance: the
+// truth-table columns of p ∨ ¬p, p ∧ ¬p, p ∨ q and p ∧ q. Every passage,
+// both boxes and the category diagram of the old section are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciColumnTable = ciTableOpen(['formula', 'p = T, q = T', 'p = T, q = F', 'p = F, q = T', 'p = F, q = F', 'column']) +
+  ciRow(['p ∨ ¬p', 'T', 'T', 'T', 'T', 'all T']) +
+  ciRow(['p ∧ ¬p', 'F', 'F', 'F', 'F', 'all F'], { shade: true }) +
+  ciRow(['p ∨ q', 'T', 'T', 'T', 'F', 'mixed']) +
+  ciRow(['p ∧ q', 'T', 'F', 'F', 'F', 'mixed'], { shade: true, last: true, color: '#2563EB', cols: [5] }) +
+  '</tbody></table>'
+
+const conceptIntro = {
+  beats: [
+    {
+      id: 'intuition',
+      lead: `Some formulas are true whatever their letters stand for, some can never be true, and most depend on the facts.`,
+      content: [
+        `In classical **propositional logic**, every proposition falls into **one of three categories** based on its truth value across all possible interpretations:`,
+      ],
+    },
+    {
+      id: 'example',
+      kind: 'instance',
+      lead: `The truth-table column of a formula shows which of the three it is.`,
+      content: [
+        <div key={'ci-columnTable'} dangerouslySetInnerHTML={{ __html: ciColumnTable }} />,
+        `Only the whole column decides. $p \\land q$ is F in three rows, but it is T in the first one, so it is not always false.`,
+      ],
+    },
+    {
+      id: 'pattern',
+      lead: `All T, all F, or a mixture — there is no fourth possibility.`,
+      content: [
+        `**These three categories exhaust all possibilities** for a proposition in classical logic. Every proposition must be one of these.`,
+      ],
+    },
+    {
+      id: 'definition',
+      kind: 'definition',
+      statement: `A proposition is a [tautology](!/logic/definitions#tautology) when it is true in every row of its truth table, a [contradiction](!/logic/definitions#contradiction) when it is false in every row, and a [contingency](!/logic/definitions#contingency) when it is true in some rows and false in others.`,
+      formula: [
+        `To place a formula in one of the three categories, evaluate it in every row of its truth table and look at the whole column of results. A column with T in every row marks a tautology, and a column with F in every row marks a contradiction. Any mixture of T and F, however uneven, marks a contingency.`,
+      ],
+      footer: `So $p \\lor \\neg p$ is a tautology, $p \\land \\neg p$ is a contradiction, and $p \\lor q$ and $p \\land q$ are contingencies.`,
+    },
+    {
+      id: 'kind',
+      lead: `Each category matches a property: tautologies are valid, contradictions are unsatisfiable, contingencies are satisfiable.`,
+      content: [
+        `## 1. [Tautology](!/logic/propositional-logic/semantics/tautology) 
+A proposition that is **always true**, no matter what.
+@academic[example:Example
+\t\t\t\t\t\t$p \\lor \\neg p$
+("Either it will rain or it won’t"—this is always true.)]@
+**Validity and Tautologies**
+A proposition is valid if it is true in all possible interpretations—in other words, if it is a [tautology](!/logic/propositional-logic/semantics/tautology).
+If a proposition is valid, it means there is no possible scenario where it is false.
+
+\t\t\t\t\t\t$p∨¬p$
+(Law of the Excluded Middle) is valid because it’s always true.`,
+        `## 2. [Contradiction](!/logic/propositional-logic/semantics/contradiction) 
+A proposition that is **always false**, no matter what. 
+@academic[example:Example
+\t\t\t\t\t\t$p \\land \\neg p$   
+("It is raining and it is not raining"—this is never true.)]@
+**Unsatisfiability and Contradictions**
+A proposition is unsatisfiable if it is false in every possible interpretation—which means it is a contradiction.
+
+$p∧¬p$ is unsatisfiable because there is no way to make it true.`,
+        `## 3. **Contingency** 
+A proposition that is **sometimes true and sometimes false**, depending on the values of its variables. Example:  
+
+\t\t\t\t\t\t$p \\lor q$   
+(If **p** is "It will rain" and **q** is "It will snow," this can be true or false depending on the weather.)
+**Satisfiability and Contingencies**
+A proposition is satisfiable if there is at least one interpretation where it is true. Otherwise it would be a [contradiction](!/logic/propositional-logic/semantics/contradiction).
+A contingent proposition (one that is sometimes true and sometimes false) is always satisfiable because it has at least one true case.
+
+$p∨q$ is satisfiable because it’s true in cases where either $p$ or $q$ is true.`,
+        `<svg width="680" height="616" viewBox="0 0 880 716" style="fill:none;margin-left:200px; stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;
+" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style class="text-font-style fontImports" data-font-family="Roboto">@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block');</style><g id="items" style="isolation: isolate"><g id="blend" style="mix-blend-mode: normal"><g id="g-root-cp_3_g-3_8x5a5q17m6kg1-fill" data-item-order="-367190" transform="translate(182, 87)"><g id="cp_3_g-3_8x5a5q17m6kg1-fill" stroke="none" fill="url(#gradient-ffed4b-499785973)"><g><path d="M 130 10C 157.015 10 181.944 18.9267 202 33.9912C 231.147 55.8842 250 90.7404 250 130C 250 134.944 249.701 139.818 249.12 144.605C 234.654 138.422 218.727 135 202 135C 185.273 135 169.346 138.422 154.88 144.605C 116.304 161.091 88.1202 197.206 82.8798 240.395C 40.0287 222.081 10 179.547 10 130C 10 63.7258 63.7258 10 130 10Z"></path></g></g></g><g id="g-root-cp_2_g-2_1lrsalq17m6jgr-fill" data-item-order="-367186" transform="translate(254, 221.60498046875)"><g id="cp_2_g-2_1lrsalq17m6jgr-fill" stroke="none" fill="url(#gradient-fe8884-413551779)"><g><path d="M 202 115.395C 218.727 115.395 234.654 111.973 249.12 105.7903C 249.701 110.577 250 115.451 250 120.395C 250 186.669 196.274 240.395 130 240.395C 63.7258 240.395 10 186.669 10 120.395C 10 115.451 10.299 110.577 10.8798 105.7903C 16.1202 62.6008 44.3044 26.4865 82.8798 10C 86.9114 43.2278 104.5236 72.2679 130 91.4039C 150.056 106.4685 174.985 115.395 202 115.395Z"></path></g></g></g><g id="g-root-cp_1_g-1_18gy9bi17m6hvx-fill" data-item-order="-367182" transform="translate(374, 87.00100708007812)"><defs><linearGradient id="gradient-ffed4b-499785973" x2="0" y2="1"><stop offset="0" stop-color="#fff282"></stop><stop offset="1" stop-color="#ffe714"></stop></linearGradient><linearGradient id="gradient-fe8884-413551779" x2="0" y2="1"><stop offset="0" stop-color="#ffa6a3"></stop><stop offset="1" stop-color="#fd6a65"></stop></linearGradient><linearGradient id="gradient-64edab-240055791" x2="0" y2="1"><stop offset="0" stop-color="#83fac1"></stop><stop offset="1" stop-color="#44e095"></stop></linearGradient></defs><g id="cp_1_g-1_18gy9bi17m6hvx-fill" stroke="none" fill="url(#gradient-64edab-240055791)"><g><path d="M 57.1202 144.605C 57.701 139.818 58 134.944 58 130C 58 90.7404 39.1467 55.8842 10 33.9912C 30.0559 18.9267 54.9855 10 82 10C 148.274 10 202 63.7258 202 130C 202 179.547 171.971 222.081 129.12 240.395C 114.654 246.578 98.7267 250 82 250C 54.9855 250 30.0559 241.073 10 226.009C 35.4764 206.873 53.0885 177.833 57.1202 144.605Z"></path></g></g></g><g id="g-root-tx_understa_v5hqy617m6jgv-fill" data-item-order="0" transform="translate(164, 38)"><g id="tx_understa_v5hqy617m6jgv-fill" stroke="none" fill="#484848"><g><text style="font: 20px Roboto, sans-serif; white-space: pre;" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.1" y="34" dominant-baseline="ideographic">Understanding Propositional Logic Categories</tspan></text></g></g></g><g id="g-root-tx_continge_mah7se17m6hvk-fill" data-item-order="0" transform="translate(14, 140)"><g id="tx_continge_mah7se17m6hvk-fill" stroke="none" fill="#e0cb15"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="15.21" y="34" dominant-baseline="ideographic">Contingency</tspan></text></g></g></g><g id="g-root-ic_warn_1lvj54e17m6hhi-fill" data-item-order="0" transform="translate(266, 135)"></g><g id="g-root-tx_tautolog_1ltnpv217m6ih6-fill" data-item-order="0" transform="translate(590, 140)"><g id="tx_tautolog_1ltnpv217m6ih6-fill" stroke="none" fill="#3cc583"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">Tautology</tspan></text></g></g></g><g id="g-root-tx_proposit_8z0pf217m6jgh-fill" data-item-order="0" transform="translate(14, 176)"><g id="tx_proposit_8z0pf217m6jgh-fill" stroke="none" fill="#484848"><g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="25.58" y="28" dominant-baseline="ideographic">Propositions that </tspan><tspan x="11.88" y="46" dominant-baseline="ideographic">can be true or false</tspan></text></g></g></g><g id="g-root-ic_disp_4o6zzi17m7x1c-fill" data-item-order="0" transform="translate(458, 183)"></g><g id="g-root-tx_proposit_18i77hq17m6k23-fill" data-item-order="0" transform="translate(590, 176)"><g id="tx_proposit_18i77hq17m6k23-fill" stroke="none" fill="#484848"><g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="28" dominant-baseline="ideographic">Propositions that are </tspan><tspan x="12" y="46" dominant-baseline="ideographic">always true</tspan></text></g></g></g><g id="g-root-ic_grou_meuje617m6kg7-fill" data-item-order="0" transform="translate(327, 339)"></g><g id="g-root-tx_contradi_hvwnu617m6k24-fill" data-item-order="0" transform="translate(302, 476)"><g id="tx_contradi_hvwnu617m6k24-fill" stroke="none" fill="#e55753"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="15.2" y="34" dominant-baseline="ideographic">Contradiction</tspan></text></g></g></g><g id="g-root-tx_proposit_594fi17m6j9h-fill" data-item-order="0" transform="translate(302, 512)"><g id="tx_proposit_594fi17m6j9h-fill" stroke="none" fill="#484848"><g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="17.45" y="28" dominant-baseline="ideographic">Propositions that are </tspan><tspan x="45.84" y="46" dominant-baseline="ideographic">always false</tspan></text></g></g></g><g id="g-root-cp_3_g-3_8x5a5q17m6kg1-stroke" data-item-order="-367190" transform="translate(182, 87)"><g id="cp_3_g-3_8x5a5q17m6kg1-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 130 10C 157.0145 10 181.9442 18.9267 202 33.9912C 231.1467 55.8842 250 90.7404 250 130C 250 134.9438 249.701 139.8178 249.1202 144.6049C 234.6541 138.4223 218.7267 135 202 135C 185.2733 135 169.3459 138.4223 154.8798 144.6049C 116.3044 161.0914 88.1202 197.2057 82.8798 240.3952C 40.0287 222.0813 10 179.5475 10 130C 10 63.7258 63.7258 10 130 10Z"></path></g></g></g><g id="g-root-cp_2_g-2_1lrsalq17m6jgr-stroke" data-item-order="-367186" transform="translate(254, 221.60498046875)"><g id="cp_2_g-2_1lrsalq17m6jgr-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 202 115.3951C 218.7267 115.3951 234.6541 111.9729 249.1202 105.7903C 249.701 110.5774 250 115.4513 250 120.3951C 250 186.6693 196.2742 240.3951 130 240.3951C 63.7258 240.3951 10 186.6693 10 120.3951C 10 115.4513 10.299 110.5774 10.8798 105.7903C 16.1202 62.6008 44.3044 26.4865 82.8798 10C 86.9114 43.2278 104.5236 72.2679 130 91.4039C 150.0558 106.4685 174.9855 115.3951 202 115.3951Z"></path></g></g></g><g id="g-root-cp_1_g-1_18gy9bi17m6hvx-stroke" data-item-order="-367182" transform="translate(374, 87.00100708007812)"><g id="cp_1_g-1_18gy9bi17m6hvx-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 57.1202 144.6049C 57.701 139.8178 58 134.9438 58 130C 58 90.7404 39.1467 55.8842 10 33.9912C 30.0559 18.9267 54.9855 10 82 10C 148.2742 10 202 63.7258 202 130C 202 179.5475 171.9713 222.0813 129.1202 240.3952C 114.6541 246.5777 98.7267 250 82 250C 54.9855 250 30.0559 241.0733 10 226.0088C 35.4764 206.8727 53.0885 177.8327 57.1202 144.6049Z"></path></g></g></g><g id="g-root-tx_understa_v5hqy617m6jgv-stroke" data-item-order="0" transform="translate(164, 38)"></g><g id="g-root-tx_continge_mah7se17m6hvk-stroke" data-item-order="0" transform="translate(14, 140)"></g><g id="g-root-ic_warn_1lvj54e17m6hhi-stroke" data-item-order="0" transform="translate(266, 135)"><g id="ic_warn_1lvj54e17m6hhi-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 11.5 11.5L 11.5 56.5M 42.5 11.5L 42.5 26.5M 26.5 11.5L 26.5 16.5M 26.5 38.5L 26.5 43.5M 26.5 51.5L 26.5 56.5M 18.900021 56.5L 18.900021 41.299999C 18.900021 39.099998 19.69998 37.099998 21.29998 35.700001L 36.5 20.5M 30.700001 20.5L 36.5 20.5L 36.5 26.1M 44.799999 50.699799C 45.200001 50.699799 45.599998 51.0998 45.599998 51.499802C 45.599998 51.899799 45.200001 52.299801 44.799999 52.299801M 44.800201 50.699799C 44.4002 50.699799 44.000401 51.0998 44.000401 51.499802C 44.000401 51.899799 44.4002 52.299801 44.800201 52.299801M 44.799999 45.699799L 44.799999 42.699799M 46.300201 34.299801C 45.9002 33.699799 45.300201 33.299801 44.700199 33.299801C 44.100201 33.299801 43.299999 33.699799 43.099998 34.299801L 33.300201 54.299801C 33.300201 54.299801 33.099998 54.699799 33.099998 54.899799C 33.099998 55.699799 33.9002 56.499802 34.700199 56.499802L 54.900002 56.499802C 55.700001 56.499802 56.500198 55.699799 56.500198 54.899799C 56.500198 54.699799 56.300201 54.299801 56.300201 54.299801L 46.300201 34.299801Z"></path></g></g></g><g id="g-root-tx_tautolog_1ltnpv217m6ih6-stroke" data-item-order="0" transform="translate(590, 140)"></g><g id="g-root-tx_proposit_8z0pf217m6jgh-stroke" data-item-order="0" transform="translate(14, 176)"></g><g id="g-root-ic_disp_4o6zzi17m7x1c-stroke" data-item-order="0" transform="translate(458, 183)"><g id="ic_disp_4o6zzi17m7x1c-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 12.89996 21.299801L 12.89996 36.299801M 12.89996 45.299801C 12.34768 45.299801 11.899964 44.852001 11.899964 44.299801C 11.899964 43.747601 12.34768 43.299801 12.89996 43.299801M 12.90002 45.299801C 13.4523 45.299801 13.90002 44.852001 13.90002 44.299801C 13.90002 43.747601 13.4523 43.299801 12.90002 43.299801M 28.899981 43.299801C 26.29998 40.499802 24.89994 36.499802 25.499939 32.299801C 25.69994 29.6998 26.89996 27.299801 28.299959 25.299801M 50.700001 25.8999C 52.5 28.499901 53.5 31.899799 53.099998 35.499802C 52.700001 38.899799 51.099998 41.899799 48.700001 44.0998M 10 10M 49.099998 31.4998L 50.299999 25.299801L 56.099998 27.69982M 10 10M 49.099998 31.4998L 50.299999 25.299801L 56.099998 27.69982M 10 10M 22.89996 41.299999L 28.89996 43.499802L 29.699961 37.0998M 10 10M 34 27.17478L 37.4958 13.19136C 37.676598 12.46852 38.326 11.961426 39.071198 11.961426L 39.071198 11.961426C 39.8162 11.961426 40.465599 12.46852 40.6464 13.19136L 44.1422 27.17478M 35.267799 22.103661L 42.874401 22.103661M 10 10M 39.8494 40.2994L 39.8494 55.2202M 10 10M 36.119202 44.029598L 36.314201 44.029598C 38.266602 44.029598 39.8494 42.4468 39.8494 40.494202L 39.8494 40.2994M 10 10M 43.579601 55.220001L 36.119202 55.220001"></path></g></g></g><g id="g-root-tx_proposit_18i77hq17m6k23-stroke" data-item-order="0" transform="translate(590, 176)"></g><g id="g-root-ic_grou_meuje617m6kg7-stroke" data-item-order="0" transform="translate(327, 339)"><g id="ic_grou_meuje617m6kg7-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 16.5 49C 13.73858 49 11.5 46.761398 11.5 44C 11.5 41.238602 13.73858 39 16.5 39C 19.261421 39 21.5 41.238602 21.5 44C 21.5 46.761398 19.261421 49 16.5 49ZM 25.06134 55.993599C 23.587421 53.0336 20.5312 51 17 51C 14.928761 51 13.02094 51.6996 11.5 52.875599M 51.5 49C 54.261398 49 56.5 46.761398 56.5 44C 56.5 41.238602 54.261398 39 51.5 39C 48.738602 39 46.5 41.238602 46.5 44C 46.5 46.761398 48.738602 49 51.5 49ZM 42.9384 55.993599C 44.412399 53.0336 47.468601 51 50.999802 51C 53.070999 51 54.978802 51.6996 56.499802 52.875599M 34 49C 37.865997 49 41 45.866001 41 42C 41 38.134003 37.865997 35 34 35C 30.134001 35 27 38.134003 27 42C 27 45.866001 30.134001 49 34 49ZM 24.63184 56.5C 26.83102 53.756599 30.2104 52 33.999802 52C 37.789398 52 41.1688 53.756599 43.368 56.5M 10 10M 26 11.5L 42 27.5M 10 10M 26 27.5L 42 11.5"></path></g></g></g><g id="g-root-tx_contradi_hvwnu617m6k24-stroke" data-item-order="0" transform="translate(302, 476)"></g><g id="g-root-tx_proposit_594fi17m6j9h-stroke" data-item-order="0" transform="translate(302, 512)"></g></g></g></svg>`,
+      ],
+    },
+    {
+      id: 'caveat',
+      lead: `Not always true does not mean always false — and proving "never true" takes every row.`,
+      content: [
+        `@academic[pitfall,aside:true,width:35%:Treating not always true as always false
+Calling $p \\land q$ a contradiction because it is F in three of its four rows ignores the row $p = T$, $q = T$, where it is T. Not a tautology only means F in at least one row; $p \\land q$ is a contingency.
+[Read more](!#pitfalls)]@`,
+        `Sorting a formula into its category is a search over assignments. A single row with T is enough to show that a formula is satisfiable, and that row is checked in moments once it has been found. Showing that a formula is unsatisfiable is harder: every one of the $2^n$ rows has to come out F, and the number of rows doubles with each new variable.`,
+        `@academic[fact,aside:true,width:35%:The first NP-complete problem
+Deciding whether a formula is satisfiable was the first problem proved NP-complete, by Stephen Cook in 1971. A fast method for it would give a fast method for every problem whose answers can be checked quickly, and none is known.]@`,
+      ],
+    },
+    {
+      id: 'exit',
+      content: `The rest of the page covers [logical implication](!/logic/propositional-logic/semantics#implication) and common pitfalls.`,
+    },
+  ],
+}
+
  const logicSections = [
   {
     id:'equivalences',
@@ -180,7 +323,10 @@ Check our [equivalence validator](!/logic/propositional-logic/semantics/equivale
   {
     id:'contigency',
     title:'Contingency, Tautology or Contradiction',
-    content:`In classical **propositional logic**, every proposition falls into **one of three categories** based on its truth value across all possible interpretations:
+    content:[
+      <ConceptIntro key={'contigency-intro'} data={conceptIntro} />,
+    ],
+    contentOld:`In classical **propositional logic**, every proposition falls into **one of three categories** based on its truth value across all possible interpretations:
 
 ## 1. [Tautology](!/logic/propositional-logic/semantics/tautology) 
 A proposition that is **always true**, no matter what.
@@ -275,8 +421,24 @@ Right working: the column of $p \\land q$ for $(T, T)$, $(T, F)$, $(F, T)$, $(F,
 Why it happens: tautology and contradiction are presented as a pair of opposites, so the middle category is easy to forget. A column that is mostly F also looks like a column that is all F.
 
 How to check: look for one row with T and one row with F. If both exist, the formula is a contingency; only a column with no T at all marks a contradiction.`
+  },
+  // faq: rendered component — must be built here, not in getStaticProps
+  {
+      id:'faq',
+      title:`Semantics FAQ`,
+      link:``,
+      content:[
+        <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+          <FAQSection
+            faqQuestions={faqQuestions}
+            theme={'leftBorder'}
+            width={'100%'}
+            openFirst={false}
+          />
+        </div>,
+      ]
   }
-  
+
   //  {
   //    id: 'formulas',
   //    title: sectionContent.formulas.title,

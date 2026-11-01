@@ -695,6 +695,11 @@ This theorem converts area computation—a limiting process involving infinite s
 // the linearity question states what linearity does NOT cover, which the
 // two linearity sections never say. Piecewise integration is owned by the
 // evaluating page, whose h2 names it outright.
+// FAQ pass 2026-10-31: kept all five. Added the two non-elementary integrals
+// with an easy sum (fact box under "Sum and Difference Rules"), the missing
+// lower limit in Part 1 (pitfall under Part 1), and pi < 22/7 by comparison
+// (fact box under "Comparison Properties"). Left Part 2 evaluation to the
+// definite and evaluating pages.
 const faqQuestions = {
   obj1: {
     question: "What is the Fundamental Theorem of Calculus?",
@@ -719,6 +724,21 @@ const faqQuestions = {
   obj5: {
     question: "How can you estimate an integral without computing it?",
     answer: "Bound the integrand. If m ≤ f(x) ≤ M on [a, b], then m(b − a) ≤ ∫ₐᵇ f(x) dx ≤ M(b − a) — the integral is trapped between the areas of two rectangles. Comparison works the same way: if f ≤ g on the interval then ∫f ≤ ∫g, so a function you can integrate bounds one you cannot.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "Can two integrals with no formula add up to one that has a formula?",
+    answer: "Yes. Neither $\\int e^{x^2}\\, dx$ nor $\\int 2x^2 e^{x^2}\\, dx$ can be written with elementary functions, yet $\\int (1 + 2x^2)\\, e^{x^2}\\, dx = x e^{x^2} + C$, because the product rule gives $(x e^{x^2})' = e^{x^2} + 2x^2 e^{x^2}$. The sum rule works in both directions, so splitting an easy integrand can leave two impossible pieces; a split is worth making only when every piece can be integrated.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "Why doesn't the lower limit appear in the derivative of $\\int_a^x f(t)\\, dt$?",
+    answer: "Because changing the lower limit only shifts the accumulation function by a constant, and a constant differentiates to $0$. With $a = 1$, $\\int_1^x t^2\\, dt = \\frac{x^3}{3} - \\frac{1}{3}$; with $a = 0$ it is $\\frac{x^3}{3}$; both have derivative $x^2$. Writing $x^2 - 1^2$, as if Part 1 subtracted endpoint values the way Part 2 does, is a common slip.",
+    sectionId: "5"
+  },
+  obj8: {
+    question: "How can an integral prove that $\\pi$ is less than $\\frac{22}{7}$?",
+    answer: "By writing the gap as an integral of a positive function: $\\int_0^1 \\frac{x^4(1 - x)^4}{1 + x^2}\\, dx = \\frac{22}{7} - \\pi$. On $[0, 1]$, $\\frac{1}{2} \\le \\frac{1}{1 + x^2} \\le 1$, so monotonicity traps the integral between $\\frac{1}{1260}$ and $\\frac{1}{630}$. The lower bound shows $\\pi < \\frac{22}{7}$; the upper bound shows the gap is less than $0.0016$.",
     sectionId: "8"
   }
 }
@@ -816,7 +836,7 @@ const schemas = {
   const demoUnits = {
     ftc1: demoUnitFrame({
       svg: functionFTCDiagrams.cubic,
-      caption: 'F(x) = &#8747;&#8320;&#710;x t&#179; dt with x = 2: F&#8242;(2) = f(2) = 8',
+      caption: 'F(x) = &#8747;&#8320;&#739; t&#179; dt with x = 2: F&#8242;(2) = f(2) = 8',
       text: 'The accumulation function is the upper curve; at the right edge x = 2 its slope equals the height of the integrand there, 8. Nudging x to the right adds a thin strip of area whose height is f(x) and whose width is the nudge, so the rate at which area accumulates is f(x) itself. Move the edge and compare the slope above with the height below on the',
       href: '/calculus/visual-tools/fundamental-theorem',
       linkText: 'fundamental theorem of calculus visualizer',

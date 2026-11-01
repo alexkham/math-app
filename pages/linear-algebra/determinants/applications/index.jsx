@@ -1005,11 +1005,14 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import cramerDiagrams from '@/app/components/linear-algebra copy/matrix/cramerDiagrams'
 import inverseDiagrams from '@/app/components/linear-algebra copy/matrix/inverseDiagrams'
 import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/crossProductDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
 
 
 export async function getStaticProps(){
@@ -1888,6 +1891,10 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the cost of
+// Cramer's rule (sentence under "Theoretical Significance"), determinant as
+// the product of the eigenvalues (under "Two Identities") and the discriminant
+// as a squared Vandermonde (fact box under "Why It Matters"); no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "In Cramer's rule, is $A_i$ a smaller matrix?",
@@ -1903,6 +1910,21 @@ const faqQuestions = {
     question: "How many factors does a Vandermonde determinant have?",
     answer: "One for every pair of nodes, so $\\binom{n}{2}$ rather than $n$. Four nodes give six factors, not four, and miscounting is the first thing to check when a hand computation disagrees. The ordering matters too: each difference is written with the larger index first, since swapping one factor flips the sign of the whole product.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Why is Cramer's rule not used to solve large systems?",
+    answer: "Because it costs far more than elimination. Solving an $n \\times n$ system this way takes $n + 1$ separate determinants, and computing each one well is itself about as much work as one full elimination, so the total is roughly $n + 1$ times what Gaussian elimination needs for the whole system. The rule earns its place as a closed form instead: it writes each $x_i$ as an explicit ratio of the entries, which is what proofs and sensitivity analysis use.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Is the determinant the product of the eigenvalues?",
+    answer: "Yes, for every square matrix, as long as each eigenvalue is counted as often as its algebraic multiplicity and complex eigenvalues are included. Setting $\\lambda = 0$ in $p(\\lambda) = \\det(A - \\lambda I)$ gives $p(0) = \\det(A)$, and that constant term is the product of the roots. A companion identity says the eigenvalues add up to the trace: in the $2 \\times 2$ example the eigenvalues $2$ and $5$ multiply to $10 = \\det(A)$ and add to $7 = 4 + 3$.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Why is the discriminant zero exactly when there is a repeated root?",
+    answer: "Because the discriminant is a squared Vandermonde determinant of the roots. For $x^2 + bx + c$ with roots $r_1, r_2$, the coefficients are $b = -(r_1 + r_2)$ and $c = r_1 r_2$, so $b^2 - 4c = (r_1 + r_2)^2 - 4r_1 r_2 = (r_2 - r_1)^2$. A Vandermonde determinant vanishes exactly when two nodes coincide, so the discriminant is zero exactly when $r_1 = r_2$. The same holds for every polynomial with leading coefficient $1$.",
+    sectionId: "6"
   }
 }
 
@@ -2008,8 +2030,28 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj5): the section's Wronskian of e^x, e^2x, e^3x, one move at a time
+  const wronskianSteps = {
+    header: {
+      kicker: 'The Wronskian',
+      title: 'Testing eˣ, e²ˣ, e³ˣ for independence',
+      lede: 'A Wronskian that is nonzero at some point proves the functions linearly independent; this one is nonzero everywhere.',
+    },
+    steps: [
+      { id: 'matrix', label: 'Wronskian matrix', stamp: 'Before', expr: '$W = \\det\\begin{pmatrix} e^x & e^{2x} & e^{3x} \\\\ e^x & 2e^{2x} & 3e^{3x} \\\\ e^x & 4e^{2x} & 9e^{3x} \\end{pmatrix}$',
+        move: { label: 'Factor each column', note: 'eˣ from column 1, e²ˣ from column 2, e³ˣ from column 3' } },
+      { id: 'vandermonde', label: 'Vandermonde matrix, nodes 1, 2, 3', expr: '$W = e^{6x} \\det\\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 2 & 3 \\\\ 1 & 4 & 9 \\end{pmatrix}$',
+        move: { label: 'Vandermonde determinant', note: '(2 − 1)(3 − 1)(3 − 2) = 2' } },
+      { id: 'result', label: 'Never zero', stamp: 'After', expr: '$W = 2e^{6x} \\neq 0$',
+        detailsLabel: 'A zero would not prove dependence',
+        detailsTitle: '',
+        details: 'The test runs one way. A Wronskian that vanishes everywhere does not imply dependence unless the functions are known to be solutions of a single linear ordinary differential equation; without that, counterexamples exist.' },
+    ],
+  };
+
    return {
   props: {
+    wronskianSteps,
     demoUnits,
     sectionsContent,
     introContent,
@@ -2038,7 +2080,7 @@ const schemas = {
      obj6Table,
      determinantApplications,
      faqQuestions,
-     schemas, demoUnits
+     schemas, demoUnits, wronskianSteps
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -2075,6 +2117,11 @@ const schemas = {
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDeterminantsNotationSheet}
+            current={'/linear-algebra/determinants/applications'}
           />,
         ]
     },
@@ -2113,6 +2160,20 @@ const schemas = {
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="wronskian-steps"
+            title="The Wronskian of three exponentials"
+            source="/linear-algebra/determinants/applications"
+            before={"The section's worked example, one move at a time: factor the columns, then read off a Vandermonde determinant."}
+            after={"Since 2e⁶ˣ is never zero, the Wronskian test confirms that eˣ, e²ˣ and e³ˣ are linearly independent."}
+          >
+            <BeforeAfter
+              data={wronskianSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

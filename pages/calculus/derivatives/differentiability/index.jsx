@@ -19,6 +19,8 @@ import functionContinuityDiagrams from '@/app/components/functions/continuity/fu
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 
 
 export async function getStaticProps(){
@@ -120,7 +122,7 @@ const obj8Table = `
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Closed interval [a, b]</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">differentiable on (a, b); right-hand derivative at a; left-hand derivative at b</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">required hypothesis for MVT and Rolle&apos;s Theorem</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">more than MVT and Rolle&apos;s Theorem need — they ask only for differentiability on (a, b) and continuity on [a, b]</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Piecewise boundary at a</td>
@@ -399,7 +401,7 @@ If the limit does not exist, or if it equals $\\pm\\infty$, or if $f(a)$ itself 
         tex: `$f$ differentiable on $[a,b]$`,
         read: `f is differentiable on the closed interval from a to b`,
         means: `A convention, not just a quantifier: two-sided derivatives throughout $(a,b)$, plus $f'_{+}(a)$ and $f'_{-}(b)$ at the ends — mirroring [continuity on a closed interval](!/calculus/limits/continuity#notation).`,
-        cases: `Open $(a,b)$ — two-sided everywhere, no endpoint clause. The closed-interval convention is what lets Rolle and the Mean Value Theorem state their hypotheses on $[a,b]$ at all.`,
+        cases: `Open $(a,b)$ — two-sided everywhere, no endpoint clause. Rolle and the Mean Value Theorem need less than the closed-interval convention: differentiability on $(a,b)$ plus continuity on $[a,b]$, no endpoint derivatives.`,
         alsoWritten: `$f \\in C^1[a,b]$ when $f'$ is moreover continuous — one rung up the [smoothness ladder](!/calculus/derivatives/higher-order#9).`,
         confusedWith: `Two-sided differentiability at every point of $[a,b]$ — impossible at the endpoints, where one side of the quotient has nothing to stand on.`,
       },
@@ -454,6 +456,8 @@ Seeing $|x|$ in $f(x) = x|x|$ and declaring a corner at $0$ skips the computatio
 [Read more](!#pitfalls)]@
 
 The standard example is $f(x) = |x|$ at $x = 0$. The left-hand derivative is $-1$ and the right-hand derivative is $+1$. The graph forms a V-shape, and no single straight line can serve as a tangent. More generally, any piecewise linear function with a slope change at a junction has a corner there.
+
+The [absolute value](!/algebra/absolute-value) page collects the other calculus facts about $|x|$, including its derivative $\\frac{x}{|x|}$ for $x \\neq 0$ and the antiderivative $\\frac{x|x|}{2} + C$.
 `,
     before: ``,
     after: ``,
@@ -543,7 +547,7 @@ One-sided derivatives appear naturally at endpoints of closed intervals, where o
     content: `
 A function is differentiable on an open interval $(a, b)$ if it is differentiable at every point in $(a, b)$. No endpoint conditions are needed because open intervals exclude their endpoints.
 
-On a closed interval $[a, b]$, the convention is: $f$ is differentiable on $(a, b)$ and possesses a right-hand derivative at $a$ and a left-hand derivative at $b$. This mirrors the definition of [continuity on a closed interval](!/calculus/limits/continuity) and ensures that derivative-based theorems—the Mean Value Theorem, Rolle's Theorem—apply on $[a, b]$.
+On a closed interval $[a, b]$, the convention is: $f$ is differentiable on $(a, b)$ and possesses a right-hand derivative at $a$ and a left-hand derivative at $b$. This mirrors the definition of [continuity on a closed interval](!/calculus/limits/continuity). Derivative-based theorems—the Mean Value Theorem, Rolle's Theorem—ask for less: differentiability on $(a, b)$ and continuity on $[a, b]$, with no condition on the endpoint derivatives.
 
 For piecewise functions defined on adjacent intervals, differentiability at each interior boundary requires two conditions: continuity at the boundary (the pieces connect) and agreement of the one-sided derivatives (the pieces connect smoothly). Continuity alone is not sufficient—$f(x) = |x|$ is continuous at $x = 0$ but not differentiable there.
 `,
@@ -652,6 +656,11 @@ Each failure mode has a distinct geometric signature, and recognizing them is es
 // derivatives, intervals. Replaced with the two notation traps, the
 // corner/cusp contrast (only the summary table draws it), the piecewise
 // boundary test, and Weierstrass, whose h2 reads "Pathological Examples".
+// FAQ pass 2026-10-31: kept all five. Added differentiable at one point only
+// (fact box under "Differentiability Implies Continuity"), x|x| at 0 (pitfall
+// box under "Corners"), whether repairing a removable discontinuity gives a
+// derivative (one sentence under "Discontinuities"), and the Banach-Mazurkiewicz
+// typical-function fact (fact box under "Pathological Examples").
 const faqQuestions = {
   obj1: {
     question: "Can a derivative be infinite?",
@@ -677,6 +686,26 @@ const faqQuestions = {
     question: "Does the one-sided derivative equal the one-sided limit of f′?",
     answer: "Not necessarily — they are different objects. The right-hand derivative limits the difference quotient at the single point a, while the one-sided limit of f′ asks what the derivative function approaches near a. For x²sin(1/x) at 0 the right-hand derivative exists and equals 0, yet f′ has no limit there because it oscillates.",
     sectionId: "notation"
+  },
+  obj6: {
+    question: "Can a function be differentiable at only one point?",
+    answer: "Yes. Take $f(x) = x^2$ for rational $x$ and $f(x) = 0$ for irrational $x$. At $0$ the difference quotient $\\frac{f(h)}{h}$ is at most $|h|$ in size, so $f'(0) = 0$. At every other point $f$ is not even continuous, because inputs arbitrarily close to $x$ give values near $x^2$ and values equal to $0$. A derivative at one point says nothing about the points around it.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "Is x|x| differentiable at 0?",
+    answer: "Yes, and $f'(0) = 0$. The difference quotient is $\\frac{h|h|}{h} = |h|$, which tends to $0$ from both sides. Piece by piece the function is $x^2$ for $x \\geq 0$ and $-x^2$ for $x < 0$, and both pieces have slope $0$ at the join. An absolute value in a formula does not by itself make a corner: the extra factor $x$ flattens the graph near $0$.",
+    sectionId: "3"
+  },
+  obj8: {
+    question: "Does fixing a removable discontinuity make a function differentiable?",
+    answer: "Not always. Redefining $f(a)$ as the limit restores continuity, which is only the first condition. If $f(x) = x$ for $x \\neq 0$ and $f(0) = 1$, setting $f(0) = 0$ gives the line $y = x$, differentiable with slope $1$. If instead $f(x) = |x|$ for $x \\neq 0$ and $f(0) = 1$, the repair gives $|x|$, which is continuous at $0$ but still has a corner there.",
+    sectionId: "6"
+  },
+  obj9: {
+    question: "Are most continuous functions differentiable?",
+    answer: "No, in a precise sense the opposite holds. In 1931 Banach and Mazurkiewicz proved that, measured by Baire category, a typical continuous function on $[0, 1]$ has a derivative at no point. The reason is that zigzags with huge slopes can be added to any continuous graph while moving it as little as you like. The smooth functions met in a calculus course are the exception, not the rule.",
+    sectionId: "9"
   }
 }
 
@@ -981,6 +1010,11 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={derivativesNotationSheet}
+            current={'/calculus/derivatives/differentiability'}
           />,
         ]
     },

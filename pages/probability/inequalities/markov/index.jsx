@@ -672,6 +672,9 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import markovDiagrams from '@/app/components/probability/inequalities/markovDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
 
 
 export async function getStaticProps(){
@@ -763,6 +766,9 @@ export async function getStaticProps(){
   // inequalities hub, which owns it — it spans both child pages. Replaced
   // with the notation section's traps and the concrete version of the
   // "loose bound" problem the hub states in general terms.
+  // FAQ pass 2026-10-31: kept all four. Added that the bound cannot be
+  // improved (fact box under "Limitations") and the existence proof from an
+  // expected count (fact box and paragraph under "Typical Use Cases").
   const faqQuestions = {
     obj1: {
       question: "What is the 1/k form of Markov's inequality?",
@@ -783,6 +789,16 @@ export async function getStaticProps(){
       question: "Does it matter whether Markov's inequality uses ≥ or >?",
       answer: "Only for discrete variables. The two spellings differ by the atom P(X = a) sitting exactly at the threshold, which is zero for a continuous variable and can be substantial for a discrete one. Markov is normally stated with ≥, so the boundary value is included; switching to > gives a smaller left side and the bound still holds.",
       sectionId: "notation"
+    },
+    obj5: {
+      question: "If Markov's bound is so loose, can it be improved?",
+      answer: "Not without more information than the mean. For any mean $m$ and threshold $a \\ge m$, the variable equal to $a$ with probability $\\frac{m}{a}$ and to $0$ otherwise has mean $m$ and $P(X \\ge a) = \\frac{m}{a}$ exactly. The waiting-time example is this case: $0$ minutes three quarters of the time and $20$ minutes otherwise gives mean $5$ and a tail of exactly $\\frac{1}{4}$.",
+      sectionId: "7"
+    },
+    obj6: {
+      question: "How is Markov's inequality used to prove that something exists?",
+      answer: "Through a count. If $N$ counts objects of some kind, then $N \\ge 0$, and the threshold $a = 1$ gives $P(N \\ge 1) \\le E[N]$. When the expected count is below $1$, there is a positive chance of none, so an outcome with none exists. Erdős's 1947 argument works this way: coin-toss colourings of the links among $1024$ points expect about $7 \\times 10^{-16}$ single-coloured $20$-point groups, so some colouring has none.",
+      sectionId: "5"
     }
   }
 
@@ -859,6 +875,25 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 2, "Statement of Markov's Inequality") —
+  // template H, open question. Running instance: waiting times with mean
+  // 5 minutes; P(wait >= 20) <= 5/20 = 1/4, reached by waits of 0 (3/4) or
+  // 20 (1/4). Old obj2 text is kept in sectionsContent.obj2, unused; its
+  // formula box, pitfall aside, four passages and the u_2_0 demo frame with
+  // its line are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciWaitTable = ciTableOpen(['waiting times (mean 5 min)', 'chance of waiting 20 min or more']) +
+    ciRow(['always exactly 5 min', '0']) +
+    ciRow(['0 min or 10 min, half the time each', '0'], { shade: true }) +
+    ciRow(['0 min (3/4 of the time) or 20 min (1/4)', '1/4 — as high as it can go'], { last: true, color: '#2563EB', cols: [1] }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -1226,6 +1261,10 @@ The result is deliberately simple and broadly applicable. It trades precision fo
       { fn: (a) => Math.exp(-a / 2), from: 0, to: 10, ends: [null, null], color: 'f', label: { text: 'exponential, mean 2', x: 2.6, y: Math.exp(-1.3), pos: 'ne' } }],
     notes: [{ x: 5.2, y: 0.95, text: 'any X ≥ 0 with E[X] = 2', pos: 'e' }, { x: 5.2, y: 0.87, text: 'a = 6: bound 0.33, true 0.05', pos: 'e', color: 'g' }, { x: 5.2, y: 0.79, text: 'a ≤ 2: bound ≥ 1 says nothing', pos: 'e' }],
     caption: 'Larger thresholds, smaller bounds, never below the truth' };
+  const conceptIntroFigures = {
+    waitTable: ciWaitTable,
+  };
+
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: markovDiagrams['markov-exponential'],
@@ -1267,6 +1306,7 @@ The result is deliberately simple and broadly applicable. It trades precision fo
     props: {
     markovFamilyLevels,
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       summaryTable,
@@ -1291,10 +1331,76 @@ export default function MarkovInequalityPage({markovFamilyLevels,
   introContent,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `The average wait at a counter is 5 minutes. Knowing nothing else, how likely can a wait of 20 minutes or more be?`,
+        content: [
+          `Waits are never negative, so a long wait has to be balanced by many short ones to keep the average at $5$. That alone limits how often long waits can happen.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Different waiting patterns with the same mean give different chances — but none goes above 1/4.`,
+        content: [
+          ciTable('waitTable'),
+          `If more than a quarter of customers waited $20$ minutes or more, those customers alone would push the average above $5$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The ceiling is the mean divided by the threshold: 5/20 = 1/4.`,
+        content: [
+          `This inequality provides an upper bound on the probability that $X$ exceeds a given threshold, expressed solely in terms of its expectation.`,
+          `No additional assumptions on the distribution of $X$ are required.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Markov's inequality** says that a non-negative random variable $X$ with finite mean satisfies $\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$ for every $a > 0$.`,
+        formula: [
+          `Let $X$ be a non-negative random variable with finite expected value $\\mathbb{E}[X]$.`,
+          `For any real number $a > 0$, Markov's inequality states:`,
+          `@academic[formula_callout:Statement of Markov's Inequality
+$$\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$$]@`,
+        ],
+        footer: `So with $\\mathbb{E}[X] = 5$, $\\mathbb{P}(X \\ge 20) \\le \\frac{5}{20} = \\frac{1}{4}$, whatever the distribution.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a guaranteed upper bound, not an estimate: often loose, never wrong.`,
+        content: [
+          <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
+          `What the inequality says in words is spelled out next.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The variable must be non-negative: negative values can pull the mean down without shrinking the tail.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Applying it to a variable that can be negative
+For $X$ equal to $-10$ or $10$ with probability $\\frac{1}{2}$ each, the bound gives $\\mathbb{P}(X \\ge 5) \\le \\frac{0}{5} = 0$, yet the true probability is $\\frac{1}{2}$. Negative values pull the mean down without shrinking the tail; the bound holds only for $X \\ge 0$.
+[Read more](!#pitfalls)]@`,
+          `The conditions are listed in [what Markov's inequality applies to](!/probability/inequalities/markov#1).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, what the inequality says, when the bound is tight, and its connection to Chebyshev's inequality.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1319,9 +1425,7 @@ export default function MarkovInequalityPage({markovFamilyLevels,
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-                  <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
-          `What the inequality says in words is spelled out next.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1340,6 +1444,11 @@ export default function MarkovInequalityPage({markovFamilyLevels,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probLimitsNotationSheet}
+            current={'/probability/inequalities/markov'}
           />,
         ]
     },

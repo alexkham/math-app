@@ -888,6 +888,7 @@ import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/Obje
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1201,6 +1202,24 @@ export async function getStaticProps(){
 
 
 // formulas-injected: v1 | 2026-06-16 | 18 callouts (obj2 identity_matrix_definition prose-insert + identity_matrix_property inline-promote, obj3 diagonal_matrix_definition + diagonal_matrix_power direct + diagonal_matrix_determinant inline-promote, obj4 triangular_matrix_determinant prose-insert, obj5 symmetric_matrix_definition inline-promote, obj6 skew_symmetric_matrix_definition inline-promote + symmetric_skew_decomposition + cross_product_skew_matrix direct, obj7 orthogonal_matrix_definition direct + orthogonal_matrix_determinant inline-promote, obj8 nilpotent_matrix_definition inline-promote + neumann_series_nilpotent direct + idempotent_matrix_definition + idempotent_rank_trace inline-promote, obj9 involutory_matrix_definition inline-promote, obj10 singular_matrix_definition prose-insert)
+
+// Concept introduction (section 1, "Square Matrices") — template C, failure
+// first. Running instance: a 2 × 3 matrix, for which A · A, the determinant
+// and the eigenvalues are not defined, against 2 × 2 and 3 × 3 matrices. Old
+// obj1 text is kept in sectionsContent.obj1, unused; its two passages are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciShapeTable = ciTableOpen(['shape of A', 'A · A', 'determinant', 'eigenvalues', 'inverse']) +
+  ciRow(['2 × 3', 'not defined: 3 columns, 2 rows', 'not defined', 'not defined', 'not defined'], { color: '#a4243b', cols: [1, 2, 3, 4] }) +
+  ciRow(['2 × 2', 'a 2 × 2 matrix', 'a number', '2 of them, with repeats', 'possible'], { shade: true }) +
+  ciRow(['3 × 3', 'a 3 × 3 matrix', 'a number', '3 of them, with repeats', 'possible'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1737,6 +1756,10 @@ const schemas = {
   // Demonstration units (Operation A, 2026-09-13), lost when the page was rewritten and
   // re-planted 2026-09-28 from the archive above; diagonal and skewSymmetric added by the
   // illustration pass from the same tool.
+  const conceptIntroFigures = {
+    shapeTable: ciShapeTable,
+  };
+
   const demoUnits = {
     identity: demoUnitFrame({
       svg: matrixTypesDiagrams.identity,
@@ -1794,6 +1817,7 @@ return {
   props: {
     permNest,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj8Table,
@@ -1814,9 +1838,68 @@ return {
 }
 
 
-export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsContent, introContent, obj8Table, obj12Table, matrixTypeProfiles, faqQuestions, schemas}) {
+export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsContent, introContent, obj8Table, obj12Table, matrixTypeProfiles, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Some things can be asked of any number: square it, ask whether it has an inverse. Ask the same of a matrix.`,
+        content: [
+          `For a $2 \\times 2$ matrix, $A \\cdot A$ and the determinant are routine. Try them on a matrix with two rows and three columns.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `With 2 rows and 3 columns, A · A cannot even be formed.`,
+        content: [
+          ciTable('shapeTable'),
+          `A product $A \\cdot B$ needs as many columns in $A$ as rows in $B$. For $A \\cdot A$ that means as many columns as rows, and a $2 \\times 3$ matrix has $3$ columns but only $2$ rows.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Every operation that fails in the first row needs the same number of rows and columns.`,
+        content: [
+          `Only square matrices have a [determinant](!/linear-algebra/determinants). Only square matrices can be [invertible](!/linear-algebra/matrix/inverse). Only square matrices have [eigenvalues](!/linear-algebra/eigen) and a [trace](!/linear-algebra/matrix/trace). Powers $A^k$ are defined only when $A$ is square, since the product $A \\cdot A$ requires the number of columns to equal the number of rows. Every type discussed on this page is a square matrix with additional structure imposed on top.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [square matrix](!/linear-algebra/definitions#square_matrix) is a matrix with as many rows as columns; an $n \\times n$ matrix has order $n$.`,
+        formula: [
+          `A matrix with equal numbers of rows and columns — $n$ rows and $n$ columns — is called square, and is said to have order $n$. Square matrices occupy a privileged position in linear algebra because several fundamental concepts are defined exclusively for them.`,
+        ],
+        footer: `So $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ is square of order $2$, with determinant $1 \\cdot 4 - 2 \\cdot 3 = -2$, while a $2 \\times 3$ matrix has no determinant at all.`,
+      },
+      {
+        id: 'kind',
+        lead: `Square is the starting condition: each type that follows adds one more condition on the entries.`,
+        content: [
+          `The first of them, the [identity matrix](!/linear-algebra/matrix/types#2), comes next. All eleven are compared side by side in the [summary of matrix types](!/linear-algebra/matrix/types#11).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Being square does not make a matrix invertible.`,
+        content: [
+          `$\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ is square, yet its determinant is $1 \\cdot 4 - 2 \\cdot 2 = 0$ and it has no inverse. Square is needed for an inverse but does not guarantee one; the split is set out in [singular and nonsingular matrices](!/linear-algebra/matrix/types#10).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the identity, diagonal, triangular, permutation, symmetric, skew-symmetric, orthogonal, nilpotent and idempotent, involutory, and singular and nonsingular matrices, a summary, and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1824,7 +1907,7 @@ export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsC
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

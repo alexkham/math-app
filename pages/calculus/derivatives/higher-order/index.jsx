@@ -1232,6 +1232,8 @@ import functionDerivativeDiagrams from '@/app/components/functions/derivative/fu
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 
 
 export async function getStaticProps(){
@@ -2141,6 +2143,11 @@ Each successive derivative captures a finer layer of a function's behavior. The 
 // "Specific Forms") and refocused the kinematics one onto jerk, since
 // "Physical Interpretation" surfaces none of the names. Added two
 // superscript traps from the notation section and the non-analytic case.
+// FAQ pass 2026-10-31: kept all five. Added f'' versus (f')^2 (pitfall box
+// under "The Second Derivative"), negative acceleration that speeds an object
+// up (pitfall box under "Physical Interpretation") and the half derivative
+// (fact box and the L'Hopital letter under "The nth Derivative of Specific
+// Forms").
 const faqQuestions = {
   obj1: {
     question: "Why is the nth derivative written f⁽ⁿ⁾ with parentheses?",
@@ -2166,6 +2173,21 @@ const faqQuestions = {
     question: "Is every smooth function equal to its Taylor series?",
     answer: "No. A function can have derivatives of every order and still not be analytic. The standard example is f(x) = e^(−1/x²) with f(0) = 0: every derivative at the origin is zero, so its Taylor series there is identically zero, yet the function is positive everywhere else. Smooth guarantees the series exists, not that it converges to f.",
     sectionId: "9"
+  },
+  obj6: {
+    question: "Is the second derivative the square of the first derivative?",
+    answer: "No. $f''(x)$ means differentiating $f'$ once more, not multiplying it by itself. For $y = x^3$ the first derivative is $3x^2$, and squaring it gives $9x^4$, which is never negative. Differentiating again gives $6x$, which is $-6$ at $x = -1$, so the curve bends down there. A quick check: each differentiation lowers a polynomial's degree by one, so the second derivative of $x^3$ has degree $1$.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "Does negative acceleration mean slowing down?",
+    answer: "Not always. A negative acceleration only says the velocity is decreasing. For $s(t) = -t^2$, the acceleration is $s''(t) = -2$, yet the speed $|s'(t)| = 2t$ grows from $2$ at $t = 1$ to $4$ at $t = 2$. The object speeds up whenever velocity and acceleration have the same sign, and slows down when their signs differ.",
+    sectionId: "3"
+  },
+  obj8: {
+    question: "Can you take half a derivative?",
+    answer: "Yes, once factorials are extended to fractions by the gamma function. The power formula $\\frac{d^n}{dx^n}[x^m] = \\frac{m!}{(m-n)!}x^{m-n}$ with $\\left(\\frac{1}{2}\\right)! = \\frac{\\sqrt{\\pi}}{2}$ gives $\\frac{d^{1/2}}{dx^{1/2}}[x] = \\frac{2\\sqrt{x}}{\\sqrt{\\pi}}$, and applying the same half derivative again gives exactly $1$, the ordinary derivative of $x$. L'Hôpital first asked Leibniz about it in a letter of 1695.",
+    sectionId: "7"
   }
 }
 
@@ -2475,6 +2497,11 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={derivativesNotationSheet}
+            current={'/calculus/derivatives/higher-order'}
           />,
           <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj1Table}}/>,
                   <div key={'unit-second'} dangerouslySetInnerHTML={{ __html: demoUnits.second }} />,

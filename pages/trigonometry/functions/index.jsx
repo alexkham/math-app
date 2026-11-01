@@ -1576,6 +1576,8 @@ import renderRelationMap from '@/app/utils/illustrations/trigonometry/relations/
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 
 
 export async function getStaticProps(){
@@ -1597,6 +1599,13 @@ export async function getStaticProps(){
     'odd even trig functions'
   ]
 
+// FAQ pass 2026-10-31: cut "How do you find all six values from one known
+// value?" (restates the h2 Finding All Function Values from One Known Value)
+// and "Why do sine and cosine never exceed 1?" (properties asks it, with its
+// Boundedness h2). The n question now points at the notation section, which
+// holds the answer, instead of "9". Added the origin of the word sine and of
+// the names tangent and secant (fact boxes) and tangent as the slope of the
+// terminal side (one sentence under The Tangent Function).
 const faqQuestions = {
   obj1: {
     question: "Why is secant the reciprocal of cosine and not of sine?",
@@ -1609,19 +1618,24 @@ const faqQuestions = {
     sectionId: "8"
   },
   obj3: {
-    question: "How do you find all six trigonometric values from one known value?",
-    answer: "Use the Pythagorean identity to get the partner function, then take reciprocals and quotients for the rest. If sine is known, solve for cosine, then tangent is their quotient and the remaining three are reciprocals. The quadrant decides each sign, so a known value alone is not enough without it.",
-    sectionId: "10"
-  },
-  obj4: {
     question: "What does the n in a general solution stand for?",
     answer: "It is not an unknown to solve for. The letter ranges over every integer, negative values included, and each choice names one member of an infinite family of angles. Dropping the qualifier collapses infinitely many solutions into a single one, which is why the phrase \"for all integers n\" has to stay attached.",
-    sectionId: "9"
+    sectionId: "notation"
+  },
+  obj4: {
+    question: "Where does the word sine come from?",
+    answer: "From a misreading. Indian astronomers tabulated the half-chord of a circle and called it jyā, a bowstring. Arabic copied the word as jb, written without vowels, and it was later read as jayb, a fold or pocket, which Latin translated as sinus. The half-chord is the vertical leg in the unit circle picture, the same length sine measures today.",
+    sectionId: "1"
   },
   obj5: {
-    question: "Why do sine and cosine never exceed 1?",
-    answer: "Because they are coordinates of a point on a circle of radius 1, and no point on that circle sits further than one unit from the centre in either direction. The bound falls straight out of the Pythagorean identity: if the squares of the two values sum to 1, neither can exceed 1 on its own.",
-    sectionId: "8"
+    question: "Why are they called tangent and secant?",
+    answer: "After two lines on the unit circle. For an acute $\\theta$, the line tangent to the circle at $(1, 0)$ meets the terminal side at height $\\tan\\theta$, and the segment from the centre to that point, part of a secant line, has length $\\sec\\theta$. Thomas Fincke named both in 1583. Their right triangle, with legs $1$ and $\\tan\\theta$ and hypotenuse $\\sec\\theta$, is where $1 + \\tan^2\\theta = \\sec^2\\theta$ comes from.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Is tangent the slope of the terminal side?",
+    answer: "Yes. On the unit circle $\\tan\\theta = \\frac{y}{x}$, rise over run for the line from the origin to the point $(\\cos\\theta, \\sin\\theta)$, which is the slope of the terminal side. At $50°$ the point is about $(0.643, 0.766)$, so $\\tan 50° \\approx 1.192$. As the terminal side turns toward vertical, $x$ shrinks to $0$ and the slope grows without bound; at $90°$ neither the slope nor the tangent exists.",
+    sectionId: "3"
   }
 }
 
@@ -3170,6 +3184,11 @@ export default function FunctionsPage({sixTrigOutline, sineCosineBeforeAfter, se
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={trigonometryNotationSheet}
+            current={'/trigonometry/functions'}
           />,
         ]
     },

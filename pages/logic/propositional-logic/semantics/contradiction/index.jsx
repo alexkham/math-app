@@ -438,6 +438,10 @@ How to check: negation flips every entry of the column. A contradiction needs a 
 // inconsistent premises and explosion. These target buried content: the ⊥
 // symbol, proof by contradiction (reserved for this page when it was cut from
 // the truth-tables page) and the false-vs-contradictory confusion.
+// FAQ pass 2026-10-31: kept the three questions. Added that all
+// contradictions are equivalent (fact box under Contradictions that are not
+// laws) and joining a contradiction with AND versus OR (pitfall box in the
+// same section). Explosion skipped: the truth-tables page owns it.
 const faqQuestions = {
   obj1: {
     question: "What does the symbol ⊥ mean in logic?",
@@ -453,6 +457,16 @@ const faqQuestions = {
     question: "Is every false statement a contradiction?",
     answer: "No. An ordinary false statement is false under the particular circumstances at hand but could be true under others — its truth table contains both values. A contradiction is false under every possible assignment: no circumstances whatever make it true. 'It is raining' may happen to be false; 'it is raining and it is not raining' cannot be true at all. Test any formula in the [truth table generator](!/logic/truth-tables).",
     sectionId: "definition"
+  },
+  obj4: {
+    question: "Are all contradictions equivalent to each other?",
+    answer: "Yes. Two formulas are equivalent when their columns agree in every row, and every contradiction has a column of F only. So $P \\land \\neg P$ and $Q \\land \\neg Q$ are equivalent even though they share no letter: in all four rows of $(P, Q)$ both read F. Up to equivalence there is only one contradiction, the constant $\\bot$.",
+    sectionId: "other_contradictions"
+  },
+  obj5: {
+    question: "Does joining a contradiction with another statement keep it a contradiction?",
+    answer: "Only when the join is AND. $P \\land \\neg P \\land Q$ is a contradiction, because a conjunction with a part that is false in every row is false in every row. With OR it fails: $(P \\land \\neg P) \\lor Q$ has the value of $F \\lor Q$, which is just $Q$, so it is T whenever $Q$ is T. The formula is a contingency, equivalent to $Q$.",
+    sectionId: "other_contradictions"
   }
 }
 

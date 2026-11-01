@@ -986,6 +986,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 
 
 export async function getStaticProps(){
@@ -1449,6 +1451,8 @@ $$f(x) = |x - 3| + 2 = \\begin{cases} (x - 3) + 2 & \\text{if } x \\geq 3 \\\\ -
 
 The vertex moves to $(3, 2)$.
 
+With more than one absolute value, each term adds its own split point. The [absolute value](!/algebra/absolute-value) page works through $|x - 2| + |x + 1|$, which becomes three pieces.
+
 Equations involving absolute values often require piecewise analysis. Solving $|x - 2| = 5$ means considering both pieces: $x - 2 = 5$ (giving $x = 7$) and $-(x - 2) = 5$ (giving $x = -3$).
 
 @academic[pitfall,aside:true,width:35%:Solving only the positive case
@@ -1476,7 +1480,7 @@ Dropping the decimal part of $-2.5$ gives $\\lfloor -2.5 \\rfloor = -2$, but $-2
 
 Negative inputs follow the same definition as positive ones. The integers less than or equal to $-1.3$ are $-2, -3, -4, \\ldots$, and the greatest of them is $-2$. On the number line, the floor always moves left to the nearest integer, or stays put when the input is already an integer.
 
-The graph has horizontal segments at each integer height, jumping up at each integer input. The segment at height $n$ covers $[n, n+1)$ — closed on the left, open on the right.
+The graph has horizontal segments at each integer height, jumping up at each integer input. The segment at height $n$ covers $[n, n+1)$ — closed on the left, open on the right. Subtracting this staircase from $x$ leaves the fractional part $\\{x\\} = x - \\lfloor x \\rfloor$; both are covered on the [integer and fractional part](!/arithmetic/integer-part) page.
 
 The ceiling function $\\lceil x \\rceil$ returns the least integer greater than or equal to $x$:
 
@@ -1678,31 +1682,33 @@ A piecewise function divides its [domain](!/functions/domain) into intervals, as
 
 
 
+// FAQ pass 2026-10-31: kept the open/filled circle question, rewritten (it
+// tied filled circles to "less-than-or-equal" only; the page's pieces use
+// both ≤ and ≥). Cut four questions that restate h2s: evaluating, continuity,
+// absolute value as piecewise and the domain. Added the broken line written
+// without cases (fact box under Absolute Value as Piecewise), two pieces
+// sharing a boundary (Piecewise Notation card) and the first-hour charge
+// (pitfall box under Writing Piecewise Functions).
 const faqQuestions = {
   obj1: {
-    question: "How do you evaluate a piecewise function at a point?",
-    answer: "Find which condition the input satisfies, then use only that branch. Check the inequalities carefully at boundary values, since one branch usually includes the endpoint and the other excludes it. Substituting into the wrong piece, or into several pieces at once, is the usual mistake.",
-    sectionId: "3"
-  },
-  obj2: {
     question: "When do you use an open circle and when a filled one?",
-    answer: "A filled circle marks an endpoint the branch includes, matching a condition written with less-than-or-equal. An open circle marks one it excludes, matching a strict inequality. At any boundary exactly one branch owns the point, so exactly one circle is filled, which is what keeps the rule single-valued.",
+    answer: "A filled circle marks an endpoint the piece includes, matching a condition written with $\\leq$ or $\\geq$. An open circle marks one it excludes, matching a strict $<$ or $>$. At a jump exactly one piece owns the boundary, so one dot is filled and the other open on the same vertical line, which is what keeps the rule single-valued.",
     sectionId: "4"
   },
-  obj3: {
-    question: "How do you check whether a piecewise function is continuous?",
-    answer: "Look only at the boundaries, since each branch is usually continuous on its own. At each boundary, evaluate the branch approaching from the left and the branch approaching from the right. Matching values mean the graph connects; different values mean a jump. A single value defined there is not enough on its own.",
-    sectionId: "7"
-  },
-  obj4: {
-    question: "How is the absolute value function a piecewise function?",
-    answer: "It is defined by two branches: the input itself when it is non-negative, and the negated input when it is negative. This is why the graph is a V, with the corner sitting where the two branches meet at zero. Rewriting absolute values this way is how equations containing them are usually solved.",
+  obj2: {
+    question: "Can a piecewise linear function be written without cases?",
+    answer: "Yes, if its graph is continuous. A broken line made of finitely many straight pieces equals $a + bx$ plus one term $c\\,|x - k|$ for each corner $k$, where $c$ is half the change of slope there, since $|x - k|$ turns from slope $-1$ to slope $1$. For example, $\\frac{x + |x|}{2}$ is $0$ for $x < 0$ and $x$ for $x \\geq 0$: the slope changes by $1$ at $0$, so $c = \\frac{1}{2}$.",
     sectionId: "8"
   },
-  obj5: {
-    question: "What is the domain of a piecewise function?",
-    answer: "The union of the intervals its branches cover, minus any gap none of them account for. If the conditions leave a value unassigned the function is simply undefined there. Overlapping conditions are worse: they assign two outputs to one input, which stops the rule being a function at all.",
-    sectionId: "5"
+  obj3: {
+    question: "Can two pieces both include the same boundary point?",
+    answer: "Only if their formulas agree there. Writing $x \\leq 2$ and $x \\geq 2$ hands $x = 2$ to both pieces; with $x^2$ and $4x - 4$ both give $4$, so the output is still a single value. If the formulas give different values, one input has two outputs and the rule is not a function. Pairing $\\leq$ with $>$, or $<$ with $\\geq$, avoids the question entirely.",
+    sectionId: "2"
+  },
+  obj4: {
+    question: "How do you write a first-hour fee plus an hourly rate as a piecewise function?",
+    answer: "Give the first block its own piece and charge the rate only on what lies beyond it. For 50 dollars for the first hour and 30 dollars for each additional hour, $C(t) = 50$ for $0 < t \\leq 1$ and $C(t) = 50 + 30(t - 1) = 30t + 20$ for $t > 1$. Writing $50 + 30t$ charges the first hour twice: it gives $C(2) = 110$ instead of $80$, and jumps by $30$ at $t = 1$.",
+    sectionId: "11"
   }
 }
 
@@ -1839,7 +1845,7 @@ const faqQuestions = {
     }),
     step: demoUnitFrame({
       svg: functionPiecewiseDiagrams.heaviside,
-      caption: 'The Heaviside step: &#8722;1 then 1',
+      caption: 'A two-piece step: &#8722;1 then 1',
       text: 'Each piece is a constant, so the graph is two horizontal segments with a jump of 2 at x = 0; the open and closed dots record which piece owns the boundary. Every step function is built this way, one flat piece per interval. Try the three-piece sign function on the',
       href: '/functions/visual-tools/piecewise',
       linkText: 'piecewise function explorer',
@@ -2029,6 +2035,11 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={functionsNotationSheet}
+            current={'/functions/piecewise'}
           />,
         ]
     },

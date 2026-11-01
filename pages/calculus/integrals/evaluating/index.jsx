@@ -12,6 +12,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 
 
 export async function getStaticProps(){
@@ -474,6 +477,11 @@ For definite integrals, setup matters as much as computation. Identify the corre
 // question belongs to no FAQ block, and why the entry I had put on the
 // rules page has been swapped out. Replaced with four results the headings
 // state without explaining.
+// FAQ pass 2026-10-31: kept all four. Added the boundary point of a piecewise
+// function (one sentence under "Piecewise Functions"), the x -> a + b - x
+// reflection with the Putnam integral (paragraph and fact box under "Symmetry
+// Shortcuts") and Simpson's rule on cubics (fact box under "Checking Your
+// Answer").
 const faqQuestions = {
   obj1: {
     question: "How do you integrate a fraction like (x³ + 1)/x?",
@@ -494,6 +502,21 @@ const faqQuestions = {
     question: "Why is the integral of an odd function over a symmetric interval zero?",
     answer: "Because the two halves cancel exactly. An odd function satisfies f(−x) = −f(x), so whatever signed area accumulates on [0, a] is matched by the negative of it on [−a, 0], and the sum is 0 for every a. Even functions do the opposite: the halves match in sign, so the integral is twice the half.",
     sectionId: "6"
+  },
+  obj5: {
+    question: "Does it matter which piece the boundary point belongs to in a piecewise integral?",
+    answer: "No. Changing a function's value at a single point does not change its integral: that point touches at most two rectangles of a Riemann sum, and their width shrinks to $0$. For the page's $f$, giving $x = 1$ to $x^2$ or to $2x$ leaves $\\frac{1}{3} + 3 = \\frac{10}{3}$ either way. What matters is cutting the integral at $x = 1$, so that each piece is integrated with its own formula.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How can the substitution $x \\to a + b - x$ solve an integral without an antiderivative?",
+    answer: "By pairing the integrand with its mirror image. The substitution covers $[a, b]$ in reverse, so $\\int_a^b f(x)\\, dx = \\int_a^b f(a + b - x)\\, dx$, and adding the two forms gives $2\\int_a^b f(x)\\, dx = \\int_a^b \\left[f(x) + f(a + b - x)\\right] dx$. When that sum is simple, the integral follows. In Putnam 1980, $\\int_0^{\\pi/2} \\frac{dx}{1 + (\\tan x)^{\\sqrt{2}}}$, the reflection turns the integrand $g$ into $1 - g$, so the answer is $\\frac{\\pi}{4}$.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "Why is Simpson's rule exact for cubics?",
+    answer: "Because the cubic part cancels on both sides. Written about the midpoint $m$ of $[a, b]$, the cubic term $(x - m)^3$ is odd about $m$, so its integral is $0$; in $\\frac{b - a}{6}\\left[f(a) + 4f(m) + f(b)\\right]$ its values at $a$ and $b$ are opposite and its value at $m$ is $0$. What is left is a parabola, which the rule integrates exactly. A fourth power already breaks it: for $x^4$ on $[0, 2]$ the rule gives $\\frac{20}{3}$ instead of $\\frac{32}{5}$.",
+    sectionId: "8"
   }
 }
 
@@ -611,8 +634,97 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj1): a fraction split into standard forms before integrating
+  const splitFractionSteps = {
+    header: {
+      kicker: 'Evaluating integrals',
+      title: 'Splitting a fraction into standard forms',
+      lede: 'Expand, simplify, and separate before reaching for techniques.',
+    },
+    steps: [
+      { id: 'fraction', label: 'One fraction', stamp: 'Before', expr: '$\\displaystyle\\int \\frac{x^3 + 1}{x}\\, dx$',
+        move: { label: 'Split the fraction', note: 'a single-term denominator: (x³ + 1)/x = x³/x + 1/x' } },
+      { id: 'powers', label: 'Sum of powers of x', expr: '$\\displaystyle\\int \\left(x^2 + \\frac{1}{x}\\right) dx$',
+        move: { label: 'Integrate term by term', note: 'the standard forms ∫ xⁿ dx and ∫ 1/x dx, by linearity' } },
+      { id: 'antiderivative', label: 'Antiderivative', stamp: 'After', expr: '$\\dfrac{x^3}{3} + \\ln|x| + C$',
+        detailsLabel: 'Not top and bottom separately',
+        detailsTitle: '',
+        details: 'Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^2}{2} + \\frac{2}{x}$, whose derivative at $x = 1$ is $-1$, while the integrand there is $2$.' },
+    ],
+  };
+
+  // BeforeAfter (obj2): a quadratic denominator that does not factor, completed to a square to match a standard form
+  const completeSquareIntegral = {
+    header: {
+      kicker: 'Evaluating integrals',
+      title: 'Completing the square to reveal a standard form',
+      lede: 'Many integrals that look new are standard forms in disguise; completing the square reveals this one.',
+    },
+    before: {
+      form: 'Quadratic that does not factor',
+      expr: '$\\displaystyle\\int \\frac{1}{x^2 + 4x + 8}\\, dx$',
+      meta: 'Discriminant 16 − 32 = −16 < 0: no real roots to split the fraction with',
+    },
+    after: {
+      form: 'Standard form ∫ du/(u² + a²)',
+      expr: '$\\displaystyle\\int \\frac{1}{(x + 2)^2 + 4}\\, dx$',
+      meta: 'Matches with u = x + 2 and a = 2',
+    },
+    operation: {
+      name: 'Complete the square',
+      desc: '$x^2 + 4x + 8 = (x + 2)^2 + 4$',
+      detailsLabel: 'Finish the integral',
+      detailsTitle: '',
+      details: [
+        '$$\\int \\frac{du}{u^2 + a^2} = \\frac{1}{a}\\arctan\\frac{u}{a} + C$$',
+        'With $u = x + 2$ and $a = 2$ the answer is $\\frac{1}{2}\\arctan\\frac{x + 2}{2} + C$.',
+      ],
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'The variable part went into u² = (x + 2)², and the constant 4 = 2² became a².' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The integrand: x² + 4x + 8 and (x + 2)² + 4 are the same quadratic.' },
+    ],
+  };
+
+  // DecisionMaker + DecisionWalker (obj9): integral-ladder-decision
+  const integralLadderDecision = {
+    header: {
+      kicker: 'evaluating integrals',
+      title: 'How far up the ladder?',
+      lede: 'Start with the lightest move and climb only when it does not close the gap.',
+    },
+    first: [{ label: 'First', text: 'Simplify the integrand: expand, split fractions, separate terms.' }],
+    start: 'standard',
+    nodes: {
+      standard: { question: 'Matches a standard form?', hint: 'a basic antiderivative applies as it stands', answers: [
+        { label: 'yes', to: 'direct' },
+        { label: 'no', to: 'disguised' },
+      ] },
+      disguised: { question: 'A standard form in disguise?', hint: 'complete the square, rewrite constants', answers: [
+        { label: 'yes', to: 'rewrite' },
+        { label: 'no', to: 'special' },
+      ] },
+      special: { question: 'Special structure?', hint: 'absolute value, piecewise, symmetry', answers: [
+        { label: 'yes', to: 'shortcut' },
+        { label: 'no', to: 'technique' },
+      ] },
+    },
+    outcomes: {
+      direct: { title: 'Antidifferentiate directly', action: 'the fastest path when it works', link: { label: 'Direct antidifferentiation', href: '/calculus/integrals/evaluating#1' } },
+      rewrite: { title: 'Rewrite, then integrate', action: 'catches near-misses before the heavier tools', link: { label: 'Recognizing standard forms', href: '/calculus/integrals/evaluating#2' } },
+      shortcut: { title: 'Use the dedicated shortcut', action: 'split at the sign change or the break; an odd function on [−a, a] gives 0', link: { label: 'Absolute values', href: '/calculus/integrals/evaluating#4' } },
+      technique: { title: 'Reach for a technique', action: 'substitution, parts, partial fractions, trigonometric substitution', link: { label: 'Integration techniques', href: '/calculus/integrals/techniques' } },
+    },
+    last: [{ label: 'Finally', text: 'Verify: differentiate the antiderivative; for a definite integral, check the sign and the size.' }],
+  };
+
   return {
   props: {
+    integralLadderDecision,
+    splitFractionSteps,
+    completeSquareIntegral,
     sectionsContent,
     introContent,
     obj6Table,
@@ -632,7 +744,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({integralLadderDecision, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, splitFractionSteps, completeSquareIntegral}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -643,6 +755,20 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <DiagramFrame
+            key={'obj1-diagram'}
+            id="split-fraction-steps"
+            title="Integrating (x³ + 1)/x"
+            source="/calculus/integrals/evaluating"
+            before={"The section's second example, one move at a time. No technique is needed: one algebraic split turns the integrand into standard forms."}
+            after={"Because the denominator is a single term, the fraction breaks into one fraction per term of the numerator, and each piece is a power of $x$."}
+          >
+            <BeforeAfter
+              data={splitFractionSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -651,6 +777,19 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-diagram'}
+            id="complete-square-integral"
+            title="Rewriting ∫ 1/(x² + 4x + 8) dx"
+            source="/calculus/integrals/evaluating"
+            before={"The section's first example in its two forms. Compare which one a standard formula can be read from."}
+            after={"Once the integrand matches, the arctangent formula finishes it. The factor $\\frac{1}{a} = \\frac{1}{2}$ in front is the part most often dropped: $\\arctan(x + 2) + C$ is the answer for $a = 1$, not for this integral."}
+          >
+            <BeforeAfter
+              data={completeSquareIntegral}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -720,6 +859,16 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
           sectionsContent.obj9.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          `The six-step ladder as a checklist. Each question asks whether the current move already finishes the integral; only a no sends the work one step up.`,
+          <DiagramFrame
+            key={'obj9-decision'}
+            id="integral-ladder-decision"
+            title="How far up the evaluation ladder?"
+            source="/calculus/integrals/evaluating"
+          >
+            <DecisionBox data={integralLadderDecision} />
+          </DiagramFrame>,
+          `The bottom exit is meant to be reached last: going for a heavy technique before the lighter moves is the most common way an integral goes wrong. Whichever exit is taken, the verification step below the map still applies: differentiating the answer is the [check](!#8) that catches algebra and sign errors.`,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

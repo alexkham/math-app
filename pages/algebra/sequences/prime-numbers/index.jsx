@@ -14,6 +14,11 @@ import { renderFactorSet } from '@/app/utils/illustrations/arithmetic/divisibili
 import { renderPrimeFactorization } from '@/app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 
 
 export async function getStaticProps(){
@@ -194,6 +199,28 @@ export async function getStaticProps(){
 // /algebra/sequences/prime-numbers — sectionsContent v2
 // 1 callout: obj6 (1). All other sections untouched.
 
+// Concept introduction (section 1, "Definition") — template G, exclusion.
+// Running instance: piles of 1, 2, 4, 7, 9, 11 and 12 tiles, sorted by
+// whether they can be laid out in a rectangle of two or more rows. Old obj1
+// text is kept in sectionsContent.obj1, unused; its formula box, theorem box
+// and four passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTilesTable = ciTableOpen(['tiles', 'rectangle layouts', 'positive divisors', 'only a single row?']) +
+  ciRow(['1', '1 × 1', '1', 'one tile — a special case']) +
+  ciRow(['2', '1 × 2', '1, 2', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['4', '1 × 4, 2 × 2', '1, 2, 4', 'no']) +
+  ciRow(['7', '1 × 7', '1, 7', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['9', '1 × 9, 3 × 3', '1, 3, 9', 'no']) +
+  ciRow(['11', '1 × 11', '1, 11', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['12', '1 × 12, 2 × 6, 3 × 4', '1, 2, 3, 4, 6, 12', 'no'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -213,6 +240,45 @@ The exclusion of $1$ is not arbitrary. If $1$ were prime, the fundamental theore
     after: ``,
     link: '',
   },
+    notation:{
+      title:`Prime Number Notation`,
+      lead:`A letter that promises a prime, subscripts that list primes in two different senses, and a function named like the constant it is not.`,
+      inherited:`Divisibility and $\\gcd$ follow [divisibility notation](!/arithmetic/divisibility#2) and [GCD notation](!/arithmetic/divisibility/gcd#notation); $\\ln n$ follows [logarithm notation](!/algebra/logarithms/common-natural#notation).`,
+      entries:[
+        {
+          id:'prime-letter',
+          tex:`$p$`,
+          read:`p — a prime`,
+          means:`The standing letter for a prime: in a statement about $p$, only primes are meant. Composite numbers usually get $n$ or $m$.`,
+          cases:`$2$ is the only even value $p$ can take; $1$ is never a $p$.`,
+          confusedWith:`$p$ as a probability or a polynomial — outside number theory, the letter promises nothing.`,
+        },
+        {
+          id:'prime-list',
+          tex:`$p_1, p_2, \\ldots, p_k$`,
+          read:`p sub one up to p sub k`,
+          means:`Subscripts name primes in order. In [Euclid's proof](!#2) the list is every prime there is, assumed finite: $N = p_1 p_2 \\cdots p_k + 1$.`,
+          cases:`In a factorization $n = p_1^{a_1} p_2^{a_2} \\cdots p_k^{a_k}$ the same letters list only the primes of $n$, each with its exponent ([section 5](!#5)).`,
+          confusedWith:`The two readings. In a factorization $p_1$ is the smallest prime of $n$, not necessarily $2$: for $1001 = 7 \\cdot 11 \\cdot 13$, $p_1 = 7$.`,
+        },
+        {
+          id:'prime-counting',
+          tex:`$\\pi(n)$`,
+          read:`pi of n — the number of primes up to n`,
+          means:`The prime-counting function: $\\pi(10) = 4$, $\\pi(100) = 25$. The [prime number theorem](!#6) says $\\pi(n) \\approx \\frac{n}{\\ln n}$.`,
+          cases:`Counts primes less than or equal to $n$: $\\pi(7) = 4$ includes $7$ itself.`,
+          alsoWritten:`$\\pi(x)$ — with a real input, a step function that jumps by $1$ at each prime.`,
+          sameGlyphElsewhere:`$\\pi \\approx 3.14159$, the circle constant — unrelated. The parentheses are the only signal: $\\pi(n)$ is a count, $\\pi n$ a product.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/algebra`,
+      symbolsLabel:`All algebra symbols`,
+      parentHref:`/algebra/sequences`,
+      parentLabel:`Sequences`,
+      before:``,
+      after:``,
+    },
+
   obj2: {
     title: `Infinitude of Primes`,
     content: `@academic[rule_theorem_plain:There are infinitely many prime numbers.]@
@@ -408,7 +474,11 @@ How to check: the GCD must divide both numbers. $60 \\div 36$ is not a whole num
   content: `The prime numbers are the building blocks of the integers: every integer greater than $1$ is either prime or can be expressed as a product of primes. Unlike every other sequence in this section, the primes obey no algebraic formula — there is no expression that computes the $n$-th prime from $n$. What is known about their distribution comes from deep results in number theory rather than from explicit pattern recognition.`,
 }
 
-
+// FAQ pass 2026-10-31: kept the three types-of-primes questions. Added
+// Euclid's N not always prime (the 30031 paragraph under "Infinitude of
+// Primes"), the 6k ± 1 form (one sentence under "Primality Testing"), long
+// prime gaps (fact box under "The Prime Number Theorem") and the 17-gon
+// (fact box under "Types of Primes").
 const faqQuestions = {
   obj1: {
     question: "Is $2^p - 1$ prime whenever $p$ is prime?",
@@ -423,6 +493,26 @@ const faqQuestions = {
   obj3: {
     question: "Are there infinitely many twin primes?",
     answer: "Nobody knows, and it is one of the oldest open problems in mathematics. Twin primes are pairs differing by $2$, such as $(11, 13)$ and $(29, 31)$, and they keep appearing as far as anyone has searched. That contrasts sharply with primes themselves, where infinitude was proved in antiquity. The twin prime conjecture is widely believed but unproven.",
+    sectionId: "7"
+  },
+  obj4: {
+    question: "Is $p_1 p_2 \\cdots p_k + 1$ always prime?",
+    answer: "No, and Euclid's proof never claims it is. The number $N = p_1 p_2 \\cdots p_k + 1$ leaves remainder $1$ on division by each listed prime, so its prime factors lie outside the list, but $N$ itself can be composite. The primes up to $13$ give $2 \\cdot 3 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13 + 1 = 30031 = 59 \\cdot 509$. The smaller cases $3, 7, 31, 211, 2311$ happen to be prime, which is why the claim looks plausible.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Is every number of the form $6k \\pm 1$ prime?",
+    answer: "No; the rule only runs one way. Every prime greater than $3$ has the form $6k \\pm 1$, because $6k$, $6k + 2$ and $6k + 4$ are even and $6k + 3$ is a multiple of $3$. But many numbers of that form are composite, such as $25 = 6 \\cdot 4 + 1$ and $35 = 6 \\cdot 6 - 1$. The form shortens the list of trial divisors; it does not replace trial division.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Can gaps between primes be as long as you like?",
+    answer: "Yes. The numbers $101! + 2, 101! + 3, \\ldots, 101! + 101$ are $100$ consecutive composites, because each $k$ from $2$ to $101$ divides both $101!$ and $k$, and therefore divides $101! + k$. Replacing $101$ by a larger number gives a longer run. This fits the prime number theorem: near $n$ the average gap between primes is about $\\ln n$, which grows without bound.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "Why can a regular 17-gon be drawn with ruler and compass but not a 7-gon?",
+    answer: "Because $17$ is a Fermat prime and $7$ is not. A regular polygon with a prime number $p$ of sides can be constructed with ruler and compass exactly when $p - 1$ is a power of $2$, which makes $p$ a Fermat prime $2^{2^n} + 1$. Here $17 - 1 = 16 = 2^4$, while $7 - 1 = 6$ is not a power of $2$. Gauss found the $17$-gon construction at $18$.",
     sectionId: "7"
   }
 }
@@ -516,6 +606,10 @@ const schemas = {
     { kind: 'formula', text: '252 = 2\u00B2 \u00B7 3\u00B2 \u00B7 7', role: 'primary' }, { kind: 'separator' },
     { kind: 'note', text: 'every branch ends in a prime' }, { kind: 'note', text: 'any splitting order gives' }, { kind: 'note', text: 'the same leaves' }] } };
 
+  const conceptIntroFigures = {
+    tilesTable: ciTilesTable,
+  };
+
   const demoUnits = {
     trialPairs: demoUnitFrame({
       svg: renderFactorSet(pfPairs91),
@@ -569,6 +663,7 @@ const schemas = {
      faqQuestions,
      schemas,
      demoUnits,
+     conceptIntroFigures,
      seoData: {
        title: "Prime Numbers: Sieve, Factorization & PNT | Learn Math Class",
 description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve of Eratosthenes, primality testing, prime factorization, and the prime number theorem.",
@@ -580,7 +675,69 @@ description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve 
 }
    }
 
-export default function PrimeNumbersPage({primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+export default function PrimeNumbersPage({primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Seven piles of tiles: 1, 2, 4, 7, 9, 11 and 12. Which of them can only be laid out as a single row?`,
+        content: [
+          `Every pile can be laid as one long line. Some can also be arranged as a rectangle with two or more rows; others refuse.`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Trying every rectangle settles it: 2, 7 and 11 allow only a single row; 4, 9 and 12 allow more.`,
+        content: [
+          ciTable('tilesTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `4, 9 and 12 have extra layouts because they split into smaller factors: 4 = 2 · 2, 9 = 3 · 3, 12 = 3 · 4.`,
+        content: [
+          `Each extra rectangle is an extra pair of divisors. The single-row piles have exactly two divisors, $1$ and the number itself — while $1$ is the odd one out, with only one divisor.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [prime number](!/arithmetic/definitions#prime_number) is an integer greater than $1$ whose only positive divisors are $1$ and itself; an integer greater than $1$ with more divisors is composite.`,
+        formula: [
+          `A **prime number** is an integer greater than $1$ whose only positive [divisors](!/arithmetic/divisibility) are $1$ and itself. A **composite number** is an integer greater than $1$ that has at least one positive divisor other than $1$ and itself. Every integer greater than $1$ is exactly one of these two types.`,
+        ],
+        footer: `So $2$, $7$ and $11$ are prime; $4$, $9$ and $12$ are composite; and $1$ is neither.`,
+      },
+      {
+        id: 'kind',
+        lead: `The primes form a sequence of their own, with no simple formula for the next one.`,
+        content: [
+          `The first primes are:`,
+          `@academic[formula_callout:Definition
+$$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@`,
+          `@academic[rule_theorem_plain:The number $2$ is the only even prime — every other even number is divisible by $2$ and therefore composite.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `1 is not a prime — and that is a deliberate choice.`,
+        content: [
+          `The number $1$ is neither prime nor composite: it has exactly one positive divisor (itself), while primes are required to have exactly two.`,
+          `The exclusion of $1$ is not arbitrary. If $1$ were prime, the fundamental theorem of arithmetic would fail: $12$ could be factored as $2^2 \\cdot 3$ or $1 \\cdot 2^2 \\cdot 3$ or $1^5 \\cdot 2^2 \\cdot 3$, and uniqueness of prime factorization would be lost.`,
+          `Whether the primes ever run out is answered in [infinitude of primes](!/algebra/sequences/prime-numbers#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers why there are infinitely many primes, the sieve of Eratosthenes, primality testing, prime factorization, the prime number theorem, and types of primes.`,
+      },
+    ],
+  }
     
   const genericSections=[
     // {
@@ -596,7 +753,31 @@ export default function PrimeNumbersPage({primeTypeTree, seoData, sectionsConten
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation-notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={sequencesNotationSheet}
+            current={'/algebra/sequences/prime-numbers'}
+          />,
         ]
     },
     {

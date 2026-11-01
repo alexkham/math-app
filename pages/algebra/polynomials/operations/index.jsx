@@ -622,7 +622,7 @@ Dividing $x^3 - 2x^2 + 5x - 3$ by $x + 1$ with $c = 1$ actually divides by $x - 
 
 This is the Remainder Theorem in action, and it means synthetic division doubles as a fast way to compute $P(c)$ without substituting into every term. If $P(c) = 0$, then $(x - c)$ divides the polynomial evenly and $c$ is a [root](!/algebra/polynomials/roots).
 
-The limitation is strict: synthetic division works only for divisors of the form $(x - c)$. Dividing by $x^2 + 1$, by $2x - 3$, or by any polynomial of degree two or higher requires the full long division procedure.`,
+The limitation is strict: synthetic division works only for divisors of the form $(x - c)$. Dividing by $x^2 + 1$, or by any polynomial of degree two or higher, requires the full long division procedure. A divisor like $2x - 3$ is usually handled by long division too, though synthetic division with $c = \\frac{3}{2}$ also works once its quotient is divided by $2$.`,
     before: ``,
     after: ``,
     link: '',
@@ -733,6 +733,10 @@ How to check: by the Remainder Theorem, the remainder must equal the dividend ev
 Some of these operations are simple: adding polynomials amounts to collecting like terms. Others demand more care — polynomial long division mirrors its numerical counterpart but requires tracking multiple terms across multiple steps. Together, these operations provide the machinery behind [factoring](!/algebra/polynomials/factoring), solving [polynomial equations](!/algebra/polynomials/roots), and simplifying complex algebraic expressions.`
 }
 
+// FAQ pass 2026-10-31: kept the three questions. Added FOIL on longer
+// factors (one paragraph under "FOIL Method"), the three-product shortcut
+// (fact box under FOIL) and the fewest multiplications to evaluate a
+// polynomial (fact box under synthetic division). No heading asks them.
 const faqQuestions = {
   obj1: {
     question: "Why isn't $(5x^2 + 2x - 3) - (x^2 - 4x + 1)$ equal to $4x^2 - 2x - 2$?",
@@ -748,6 +752,21 @@ const faqQuestions = {
     question: "How do you handle missing terms in polynomial long division?",
     answer: "Write them in with zero coefficients so the columns line up. Dividing $x^3 + 4$ by $x + 1$ means treating the dividend as $x^3 + 0x^2 + 0x + 4$. A missing power is a zero coefficient rather than an absent slot, and leaving the gap open causes terms to misalign during the subtraction steps and corrupts the quotient.",
     sectionId: "6"
+  },
+  obj4: {
+    question: "Does FOIL work for a binomial times a trinomial?",
+    answer: "No, FOIL only names the four products of two binomials. A binomial times a trinomial needs six products, so FOIL misses two of them. For $(x + 2)(x^2 - 3x + 1)$, distribute each term of the binomial across all three terms of the trinomial, then combine like terms to get $x^3 - x^2 - 5x + 2$. In general an $m$-term polynomial times an $n$-term one gives $m \\times n$ products.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Can two binomials be multiplied with fewer than four multiplications?",
+    answer: "Yes, three are enough. In $(ax + b)(cx + d)$ the middle coefficient $ad + bc$ equals $(a + b)(c + d) - ac - bd$, and $ac$ and $bd$ are needed anyway for the first and last terms. For $(2x + 3)(x - 4)$ that is $(2 + 3)(1 - 4) - 2 - (-12) = -5$, the middle coefficient of $2x^2 - 5x - 12$. Applied over and over, this trick (Karatsuba, 1960) multiplies huge numbers faster than school long multiplication.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How many multiplications does it take to evaluate a polynomial?",
+    answer: "Only $n$ for a polynomial of degree $n$, using synthetic division. Each step is one multiplication by $c$ and one addition, and by the Remainder Theorem the last number is $P(c)$: for $x^3 - 2x^2 + 5x - 3$ at $c = 1$, three of each give $1$. V. Pan proved in 1966 that, for coefficients not known in advance, no method can use fewer multiplications. The same scheme is often called Horner's method.",
+    sectionId: "7"
   }
 }
 

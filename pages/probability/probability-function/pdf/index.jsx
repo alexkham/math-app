@@ -15,6 +15,11 @@ import continuousCdfDiagrams from '@/app/components/visualizations/probability/c
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 export async function getStaticProps(){
@@ -66,6 +71,26 @@ const keyWords = [
 
 
 
+
+// Concept introduction (section 1, "Definition & Physical Intuition") —
+// template C, failure first. Running instance: X uniform on [0, 0.5], whose
+// density is 2 everywhere. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its three headings, nine passages, three formula boxes, link, two
+// examples, the u_1_0 demo frame, its line and the punchline are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciUniformTable = ciTableOpen(['interval', 'width', 'probability = 2 × width']) +
+  ciRow(['[0.1, 0.2]', '0.1', '0.2']) +
+  ciRow(['[0.1, 0.11]', '0.01', '0.02'], { shade: true }) +
+  ciRow(['the single point 0.1', '0', '0'], { color: '#a4243b', cols: [2] }) +
+  ciRow(['the whole of [0, 0.5]', '0.5', '1'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -138,32 +163,37 @@ The PDF is the continuous analog of mass in the discrete case. Where mass concen
  
 
   obj3: {
-    title: `Notation`,
-    content: `
-The PDF uses specific notation to represent density functions.
-
-For [random variable](!/probability/random-variables) $X$:
-
-@academic[formula_callout:Notation
+    title:`PDF Notation`,
+    lead:`A function name with a subscript for the variable, and an integral wherever a probability is wanted — the notation itself says that a density is not a probability. All are catalogued among the [probability symbols](!/math-symbols/probability).`,
+    inherited:`The full account of these marks — including the density-may-exceed-one warning — lives at [probability function notation](!/probability/probability-function#notation); the mass function $p_X(x)$ at [PMF notation](!/probability/probability-function/pmf#13).`,
+    entries:[
+      {
+        id:'density',
+        tex:`$f_X(x)$`,
+        read:`f sub X of x — the density of X at x`,
+        means:`The PDF of the random variable $X$ evaluated at the value $x$: a probability density at that point, not a probability.`,
+        cases:`The subscript keeps several variables apart — $f_X(x)$, $f_Y(y)$, $f_T(t)$. With only one variable in play it can be dropped: $f(x)$.`,
+        confusedWith:`The PMF $p(x)$. One needs integrating to give a probability; the other gives the probability directly.`,
+      },
+      {
+        id:'interval-probability',
+        tex:`$P(a \\leq X \\leq b)$`,
+        read:`the probability that X lies between a and b`,
+        means:`Probability comes from integrating the density over an interval: $P(a \\leq X \\leq b) = \\int_a^b f_X(x)\\,dx$.`,
+      },
+      {
+        id:'point-probability',
+        tex:`$P(X = a) = 0$`,
+        read:`the probability that X equals a is zero`,
+        means:`Point probabilities are always zero: $\\int_a^a f_X(x)\\,dx = 0$, whatever the density at $a$.`,
+      },
+    ],
+    symbolsHref:`/math-symbols/probability`,
+    symbolsLabel:`All probability symbols`,
+    parentHref:`/probability`,
+    parentLabel:`Probability`,
+    content: `@academic[formula_callout:Notation
 $$f_X(x)$$]@
-
-$f_X(x)$: The PDF of random variable $X$ evaluated at value $x$.
-
-This gives the probability density at point $x$, not the probability itself.
-
-## Why the Subscript?
-
-When working with multiple random variables, the subscript keeps them distinct:
-
-• $f_X(x)$: PDF of variable $X$
-• $f_Y(y)$: PDF of variable $Y$
-• $f_T(t)$: PDF of variable $T$
-
-With only one variable in context, you can drop the subscript and write $f(x)$.
-
-## Relationship to Probability
-
-The PDF connects to probability through integration:
 
 @academic[formula_callout:Probability of Interval Continuous
 $$P(a \\leq X \\leq b) = \\int_a^b f_X(x)dx$$
@@ -172,14 +202,7 @@ $$P(a \\leq X \\leq b) = \\int_a^b f_X(x)dx$$
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
-The density function $f_X(x)$ must be integrated over an interval to yield probability.
-
-Point probabilities are always zero: $P(X = a) = \\int_a^a f_X(x)dx = 0$
-
-The notation emphasizes that $f(x)$ is fundamentally different from the PMF notation $p(x)$—one requires integration to get probability, the other gives probability directly. The full account of these marks — including the density-may-exceed-one warning — lives at [probability function notation](!/probability/probability-function#notation).
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-    `,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@`,
     before: ``,
     after: ``,
     link: '',
@@ -1060,6 +1083,10 @@ The goal is not to catalog distributions, but to understand what a PDF is, how i
 // bridge pages that were carrying them (probability/sets and the parent
 // probability-function). Anchors avoid obj2 and obj14, which exist in
 // sectionsContent but are commented out of the render array.
+// FAQ pass 2026-10-31: kept all five. Added the density that does not fade
+// far out (fact box under "The Two Fundamental Axioms") and the unbounded
+// density of X squared (fact box under "Transformations"); no heading asks
+// either. The three pitfalls are calculus slips, not searched questions.
 const faqQuestions = {
   obj1: {
     question: "Why is the probability at a single point zero for a continuous variable?",
@@ -1084,6 +1111,16 @@ const faqQuestions = {
   obj5: {
     question: "Why does the change-of-variables formula need an absolute value?",
     answer: "To keep the density non-negative. Transforming a variable multiplies the density by the derivative of the inverse map, and that derivative is negative whenever the transformation reverses direction. Without the absolute value the result would be a negative density, violating the [axioms](!/probability/axioms). The bars record that only the magnitude of the stretch matters, not its orientation.",
+    sectionId: "11"
+  },
+  obj6: {
+    question: "Does a PDF have to approach zero far out in the tails?",
+    answer: "No. Normalization only asks that the total area be $1$; it says nothing about the height at any particular place. Let $f(x) = n$ on $\\left[n, n + \\frac{1}{n \\cdot 2^n}\\right]$ for each whole number $n \\geq 1$ and $0$ elsewhere. The rectangles have areas $\\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}, \\ldots$, which add up to $1$, so $f$ is a valid density whose peaks grow without bound far out.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Can a PDF go to infinity and still be valid?",
+    answer: "Yes, as long as the area stays $1$. If $X$ is uniform on $[0, 1]$, then $Y = X^2$ has density $\\frac{1}{2\\sqrt{y}}$, which grows without bound as $y \\to 0$, yet $\\int_0^1 \\frac{1}{2\\sqrt{y}}\\,dy = 1$. Squaring crowds the values toward $0$: a tenth of all the probability lands in $[0, 0.01]$, because $Y \\leq 0.01$ exactly when $X \\leq 0.1$.",
     sectionId: "11"
   },
 }
@@ -1181,6 +1218,10 @@ const schemas = {
     pieces: [].concat(pfBox(1, 0, 1, 'f'), pfBox(1 / 3, 0, 3, 'r')),
     notes: [{ x: 1.1, y: 1.0, text: 'X uniform on [0, 1]: f = 1', pos: 'e', color: 'f' }, { x: 1.1, y: 0.8, text: 'Y = 3X on [0, 3]: f = 1/3', pos: 'e', color: 'r' }, { x: 1.1, y: 0.6, text: 'both areas equal 1', pos: 'e' }],
     caption: 'Stretching by 3 divides the density by 3' };
+  const conceptIntroFigures = {
+    uniformTable: ciUniformTable,
+  };
+
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: continuousPdfDiagrams['normal-pdf'],
@@ -1234,6 +1275,7 @@ const schemas = {
   props:{
     pdfViewTree,
     demoUnits,
+    conceptIntroFigures,
      sectionsContent,
      introContent,
      faqQuestions,
@@ -1249,7 +1291,86 @@ const schemas = {
 }
    }
 
-export default function PDFPage({pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+export default function PDFPage({pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `For a discrete variable the probability function gives P(X = x). Try the same reading for a continuous one.`,
+        content: [
+          `## What is a PDF?`,
+          `A PDF (Probability Density Function) describes how probability is distributed across a continuous [random variable](!/probability/random-variables). Unlike discrete variables where probability sits at specific points, continuous variables spread probability across intervals.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Uniform on [0, 0.5] has f(x) = 2 at every point — and a probability of 2 is impossible.`,
+        content: [
+          ciTable('uniformTable'),
+          `Read as an area, height times width, the same $2$ gives sensible probabilities, and the whole interval gets exactly $1$.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `A single point has no width, so it carries no probability; only intervals do.`,
+        content: [
+          `## The Zero Probability Paradox`,
+          `For any specific value $a$:`,
+          `@academic[formula_callout:Definition & Physical Intuition
+$$P(X = a) = 0$$]@`,
+          `This seems impossible. How can every individual outcome have zero probability, yet something must happen?`,
+          `The resolution: Probability for continuous variables lives in intervals, not points. A single point is infinitesimally thin—it has no width, so it captures no probability mass. Just as a geometric point on a line has zero length, a single value in a continuous distribution has zero probability.`,
+          `@academic[example:Example
+Pick a random number between 0 and 1. What's $P(X = 0.5)$? Exactly zero. What's $P(0.49 < X < 0.51)$? Positive. Probability only exists across ranges.]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [probability density function](!/probability/definitions#probability_density_function) $f$ of a continuous random variable gives probabilities as areas: $P(a \\le X \\le b) = \\int_a^b f(x)\\,dx$.`,
+        formula: [
+          `## Density ≠ Probability`,
+          `The PDF value $f(x)$ is **not** a probability. It's a density—a rate of probability per unit.`,
+          `@academic[formula_callout:Probability of Interval Continuous
+$$P(a \\leq X \\leq b) = \\int_a^b f(x)dx$$
+/probability/formulas#probability_of_interval_continuous]@`,
+          `@academic[formulas_link:Browse all probability formulas
+/probability/formulas]@`,
+          `Probability is the **area** under the curve, not the height. This means $f(x)$ can exceed 1, unlike a PMF where $p(x) \\leq 1$ always.`,
+        ],
+        footer: `So for the uniform variable on $[0, 0.5]$, $P(0.1 \\le X \\le 0.2) = 2 \\times 0.1 = 0.2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Density is probability per unit length, as a rod has mass per unit length.`,
+        content: [
+          `Think of it like the density of a material. A steel rod doesn't have "weight at a point"—it has density (mass per unit length). Similarly, a continuous random variable doesn't have "probability at a point"—it has probability density.`,
+          `The PDF is the continuous analog of mass in the discrete case. Where mass concentrates at points, density spreads across regions.`,
+          <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+          `@academic[punchline:For a continuous variable a single point carries no probability; probability is the area under the density over an interval.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A density can be larger than 1; only its total area is fixed.`,
+        content: [
+          `@academic[example:Example
+Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$. The density is 2, but the total probability integrates to 1.]@`,
+          `The notation for all of this is fixed next.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the support, the two axioms, the three views of a PDF, building one from a story, calculations, location and spread measures, change of variables, the link with the CDF and the densities of common distributions.`,
+      },
+    ],
+  }
     
   const genericSections=[
      {
@@ -1266,10 +1387,7 @@ export default function PDFPage({pdfViewTree, seoData, sectionsContent, introCon
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
-          `The notation for all of this is fixed next.`,
-          `@academic[punchline:For a continuous variable a single point carries no probability; probability is the area under the density over an interval.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     // {
@@ -1285,6 +1403,23 @@ export default function PDFPage({pdfViewTree, seoData, sectionsContent, introCon
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          <NotationSection
+            key={'notation-obj3'}
+            title={sectionsContent.obj3.title}
+            lead={sectionsContent.obj3.lead}
+            inherited={sectionsContent.obj3.inherited}
+            entries={sectionsContent.obj3.entries}
+            symbolsHref={sectionsContent.obj3.symbolsHref}
+            symbolsLabel={sectionsContent.obj3.symbolsLabel}
+            parentHref={sectionsContent.obj3.parentHref}
+            parentLabel={sectionsContent.obj3.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probRandomVarsNotationSheet}
+            current={'/probability/probability-function/pdf'}
+          />,
           sectionsContent.obj3.content,
         ]
     },

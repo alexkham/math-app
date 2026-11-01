@@ -1220,6 +1220,10 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1678,6 +1682,24 @@ export async function getStaticProps(){
 // }
 
 
+// Concept introduction (section 1, "Combining Functions with Operations") —
+// template F, two descriptions shown to agree. Running instance: f(x) = x²
+// and g(x) = 3x added row by row and as one formula. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its five passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSumTable = ciTableOpen(['x', 'f(x) = x²', 'g(x) = 3x', 'f(x) + g(x)', 'x² + 3x']) +
+  ciRow(['0', '0', '0', '0', '0']) +
+  ciRow(['1', '1', '3', '4', '4'], { shade: true }) +
+  ciRow(['2', '4', '6', '10', '10']) +
+  ciRow(['3', '9', '9', '18', '18'], { shade: true, last: true, color: '#2563EB', cols: [3, 4] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
 
@@ -1712,6 +1734,54 @@ These combinations differ from [composition](!/functions/composition), which cha
     after: ``,
     link: '',
   },
+
+    notation:{
+      title:`Function Arithmetic Notation`,
+      lead:`Four marks that wrap an operation in parentheses and hand it an input — each one names a new function, built pointwise from the outputs of two others. All are catalogued among the [function symbols](!/math-symbols/functions).`,
+      inherited:`$f(x)$, the output of $f$ at the input $x$, comes from [function notation](!/functions/basics#5); the composition ring $\\circ$, which these marks are most often mistaken for, from [composition notation](!/functions/composition#2).`,
+      entries:[
+        {
+          id:'sum-function',
+          tex:`$(f + g)(x)$`,
+          read:`f plus g, of x`,
+          means:`The sum function: at each input, evaluate both functions and add the outputs — $(f + g)(x) = f(x) + g(x)$.`,
+          cases:`The two forms are the same value: $(f + g)(x)$ stresses that $f + g$ is itself a function, $f(x) + g(x)$ the operation on outputs. Order and grouping are free: $f + g = g + f$.`,
+          alsoWritten:`$f(x) + g(x)$`,
+        },
+        {
+          id:'difference-function',
+          tex:`$(f - g)(x)$`,
+          read:`f minus g, of x`,
+          means:`The difference function: $(f - g)(x) = f(x) - g(x)$, the second output subtracted from the first.`,
+          cases:`Order matters: $(g - f)(x) = -(f - g)(x)$, and subtraction is neither commutative nor associative.`,
+          confusedWith:`Subtracting only the first term of $g$. With $g(x) = 2x + 1$, the whole of $g$ goes: $x^2 - (2x + 1) = x^2 - 2x - 1$, not $x^2 - 2x + 1$ — as **Notation and Evaluation at a Point** works through.`,
+        },
+        {
+          id:'product-function',
+          tex:`$(fg)(x)$`,
+          read:`f times g, of x`,
+          means:`The product function: $(fg)(x) = f(x) \\cdot g(x)$, the two outputs multiplied at the same input.`,
+          cases:`The product of two linear functions is a quadratic: $(x + 2)(x - 3) = x^2 - x - 6$.`,
+          alsoWritten:`$(f \\cdot g)(x)$`,
+          confusedWith:`Composition. Read as $f(g(x))$, the same pair gives $x - 1$ instead of $x^2 - x - 6$: juxtaposition here multiplies outputs, it does not feed one function into the other.`,
+        },
+        {
+          id:'quotient-function',
+          tex:`$\\left(\\dfrac{f}{g}\\right)(x)$`,
+          read:`f over g, of x`,
+          means:`The quotient function: $\\left(\\frac{f}{g}\\right)(x) = \\frac{f(x)}{g(x)}$, defined only where $g(x) \\neq 0$.`,
+          cases:`Its domain is the shared domain minus the zeros of the denominator: $\\left(\\text{Dom}(f) \\cap \\text{Dom}(g)\\right) \\setminus \\{x : g(x) = 0\\}$.`,
+          alsoWritten:`$(f/g)(x)$`,
+          confusedWith:`The simplified formula. $\\frac{x^2 - 1}{x + 1}$ reduces to $x - 1$, but the quotient keeps a hole at $x = -1$, where $g$ is zero — the restriction outlives the cancellation.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/functions`,
+      symbolsLabel:`All function symbols`,
+      parentHref:`/functions`,
+      parentLabel:`Functions`,
+      before:``,
+      after:``,
+    },
 
   obj2: {
     title: `Sum of Functions`,
@@ -2140,6 +2210,13 @@ These operations extend the toolkit for constructing and analyzing functions. A 
 
 
 
+// FAQ pass 2026-10-31: kept composing-vs-combining and simplifying. Cut the
+// domain-of-a-sum and quotient-restriction questions (they restate the h2s
+// "Domain of Combined Functions" and "Additional Restrictions for Quotient").
+// Added the increasing product (fact box under Graphical Interpretation), the
+// empty combined domain (one sentence under Domain of Combined Functions),
+// tables and graphs (one sentence under Notation and Evaluation at a Point)
+// and where a quotient is zero (pitfall box under the quotient restriction).
 const faqQuestions = {
   obj1: {
     question: "How is combining functions different from composing them?",
@@ -2147,19 +2224,29 @@ const faqQuestions = {
     sectionId: "1"
   },
   obj2: {
-    question: "What is the domain of a sum or product of two functions?",
-    answer: "The overlap of the two individual domains. Both functions have to produce a value at an input before those values can be combined, so anything excluded from either is excluded from the result. This holds for sums, differences, and products alike, with quotients carrying one extra restriction.",
-    sectionId: "7"
-  },
-  obj3: {
-    question: "Why does the quotient of two functions need an extra restriction?",
-    answer: "Because the denominator function may hit zero at inputs that are perfectly valid for both functions separately. Those points must be removed on top of the usual domain overlap. Finding them means solving for the zeros of the bottom function, which is a step the other three operations never require.",
-    sectionId: "8"
-  },
-  obj4: {
     question: "Does simplifying a combined function change its domain?",
     answer: "The formula may simplify but the domain does not follow. If a factor cancels, the input it excluded is still excluded, because the original expression was undefined there. The domain must be determined from the unsimplified form, otherwise the simplification silently adds points that were never in the function.",
     sectionId: "10"
+  },
+  obj3: {
+    question: "Is the product of two increasing functions always increasing?",
+    answer: "No. Both $f(x) = x$ and $g(x) = x$ rise across all of $\\mathbb{R}$, yet their product $x^2$ falls on $(-\\infty, 0)$: there both heights are negative and shrink toward $0$, so their positive product shrinks too. Sums behave better, since adding two increasing functions always gives an increasing function, and a product of two increasing functions does increase on any interval where both stay positive.",
+    sectionId: "9"
+  },
+  obj4: {
+    question: "Can the domain of a combined function be empty?",
+    answer: "Yes. The combined domain is the intersection of the two domains, and two domains need not overlap. If $f$ is defined only for $x > 0$ and $g$ only for $x < 0$, as with $\\ln x$ and $\\ln(-x)$, no input works in both, so $f + g$, $f - g$, $fg$ and $f/g$ are defined nowhere. The formula still looks reasonable on paper; it simply has no input to act on.",
+    sectionId: "7"
+  },
+  obj5: {
+    question: "How do you combine functions given as tables or graphs?",
+    answer: "Point by point: evaluate each function first, then combine, because there is no formula to combine. Look up $f(a)$ and $g(a)$ at the same input and add, subtract, multiply or divide the two values. On a graph, read the two heights above $x = a$; that is how $f(3) = 2$ and $g(3) = 5$ put the point $(3, 7)$ on $f + g$. The result exists only at inputs where both values are known.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "Where is a quotient of two functions equal to zero?",
+    answer: "Where the numerator is zero and the denominator is not. For $f(x) = x + 3$ over $g(x) = x^2 - 4$, the input $x = -3$ gives $\\frac{0}{5} = 0$, so it is a zero of $f/g$ and stays in the domain; only $x = 2$ and $x = -2$, the zeros of the denominator, are removed. Where both are zero, as at $x = -1$ in $\\frac{x^2 - 1}{x + 1}$, the quotient has no value at all.",
+    sectionId: "8"
   }
 }
 
@@ -2255,6 +2342,10 @@ const faqQuestions = {
     caption: 'Only inputs in both domains survive: the overlap [0, 4]',
   };
 
+  const conceptIntroFigures = {
+    sumTable: ciSumTable,
+  };
+
   const demoUnits = {
     sumStack: demoUnitFrame({
       svg: renderFunctionPlot(fpSum),
@@ -2326,6 +2417,7 @@ const faqQuestions = {
          faqQuestions,
          schemas,
          demoUnits,
+         conceptIntroFigures,
           seoData: {
         title: "Function Arithmetic: Operations on Functions | Learn Math Class",
         description: "Learn function arithmetic: adding, subtracting, multiplying, and dividing functions. Master combined function domains, sum of functions, quotient of functions, and real-world applications.",
@@ -2347,10 +2439,71 @@ export default function ArithmeticPage({functionArithTree, quotientReduceSteps,
   summaryTable,
   faqQuestions,
   schemas,
-  demoUnits
+  demoUnits,
+  conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Numbers can be added. Can functions?`,
+        content: [
+          `With $f(x) = x^2$ and $g(x) = 3x$, the natural guess is to add what the two functions give at each input.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Adding the outputs at each input gives the same values as the single formula x² + 3x.`,
+        content: [
+          ciTable('sumTable'),
+          `Each row adds two numbers computed at the same input.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `The sum of two functions is computed one input at a time.`,
+        content: [
+          `The operations act on outputs, not on inputs. To find $(f + g)(3)$, evaluate $f(3)$ and $g(3)$ separately, then add the results. The input $3$ passes through both functions; their outputs combine.`,
+          `This pointwise definition means that combining functions produces new functions. If $f(x) = x^2$ and $g(x) = 3x$, then $(f + g)(x) = x^2 + 3x$ is a single function with its own formula, [graph](!/functions/graphs), and [properties](!/functions/properties).`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **sum, difference, product and quotient** of functions $f$ and $g$ are the functions whose values at each $x$ are $f(x) + g(x)$, $f(x) - g(x)$, $f(x)g(x)$ and $\\frac{f(x)}{g(x)}$.`,
+        formula: [
+          `Functions combine through arithmetic operations just as numbers do. Given two functions $f$ and $g$, their sum, difference, product, and quotient are new functions defined pointwise — by performing the operation on the outputs at each input.`,
+        ],
+        footer: `So with $f(x) = x^2$ and $g(x) = 3x$, $(f + g)(x) = x^2 + 3x$ and $(f + g)(3) = 9 + 9 = 18$.`,
+      },
+      {
+        id: 'kind',
+        lead: `All four operations follow one rule: operate on the outputs, keep the input.`,
+        content: [
+          `The four arithmetic operations — addition, subtraction, multiplication, and division — each have their own notation and rules. All share the principle: operate on outputs while the input remains the same.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Combining outputs is not the same as chaining functions.`,
+        content: [
+          `These combinations differ from [composition](!/functions/composition), which chains functions together rather than combining their outputs. Arithmetic combines outputs at the same input; composition feeds the output of one function into the input of another.`,
+          `With the same $f$ and $g$, $f(g(3)) = f(9) = 81$, while $(f + g)(3) = 18$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the sum, difference, product and quotient, evaluation at a point, domains of combined functions, the extra restriction for quotients, the graphical picture, simplification, building complex functions, applications and an overview of the four operations.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2366,7 +2519,31 @@ export default function ArithmeticPage({functionArithTree, quotientReduceSteps,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={functionsNotationSheet}
+            current={'/functions/arithmetic'}
+          />,
         ]
     },
     {

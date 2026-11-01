@@ -834,6 +834,9 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import kernelImageDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
 
 
 export async function getStaticProps(){
@@ -1166,6 +1169,26 @@ const imageKernelPairs = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "The Image") — template A, definition
+// last. Running instance: the projection T(x, y) = (x, 0), whose outputs fill
+// only the horizontal axis. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its formula box with link, theorem box, three passages and the image
+// demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciOutTable = ciTableOpen(['input (x, y)', 'output T(x, y) = (x, 0)']) +
+  ciRow(['(1, 2)', '(1, 0)']) +
+  ciRow(['(−3, 5)', '(−3, 0)'], { shade: true }) +
+  ciRow(['(0, 4)', '(0, 0)']) +
+  ciRow(['(2.5, −1)', '(2.5, 0)'], { shade: true }) +
+  ciRow(['any input at all', 'second coordinate always 0'], { last: true, color: '#2563EB', cols: [1] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Image`,
@@ -1225,7 +1248,7 @@ The kernel measures the information lost by $T$. Vectors in the kernel are colla
         tex: `$\\ker(T)$ · $\\text{Im}(T)$`,
         read: `The kernel and image of T`,
         means: `Both defined above — the notational quirk is the mismatched capitalization, faithfully mirroring the literature: lowercase $\\ker$, from the German **Kern** of Emmy Noether's school, against a usually-capitalized $\\text{Im}$.`,
-        cases: `The capital on $\\text{Im}$ is partly self-defense: lowercase $\\operatorname{im}$ exists, but $\\text{Im}$ has a double life — $\\text{Im}(z)$ is the [imaginary part](!/complex-numbers/algebraic-form) of a complex number, and in complex vector spaces both readings can occur in one paragraph.`,
+        cases: `The capital on $\\text{Im}$ is mostly habit, and the lowercase $\\operatorname{im}$ is the safer form: $\\text{Im}$ has a double life — $\\text{Im}(z)$ is the [imaginary part](!/complex-numbers/algebraic-form) of a complex number, and in complex vector spaces both readings can occur in one paragraph.`,
         alsoWritten: `$\\operatorname{im}(T)$, $\\operatorname{ran}(T)$, or the word “range” — with range itself ambiguous, as the $R(A)$ wars at the [four subspaces](!/linear-algebra/vector-spaces/fundamental-spaces#notation) attest.`,
         confusedWith: `Each other's habitat. $\\ker(T) \\subseteq V$ lives in the **domain**, $\\text{Im}(T) \\subseteq W$ in the **codomain** — swapping the homes is the commonest conceptual slip the notation guards against.`,
       },
@@ -1474,6 +1497,12 @@ const introContent = {
 
 
 
+// FAQ pass 2026-10-31: kept obj1 and obj3. Rewrote obj2: it said the capital
+// keeps Im apart from the imaginary part, when the capital is the form that
+// clashes. Added equal dimensions without an isomorphism (pitfall under
+// "Bijectivity and Isomorphisms"), rows or columns in rank-nullity (pitfall
+// under "The Rank-Nullity Theorem for Maps") and the + C of integration as a
+// kernel (fact box under "The Fundamental Decomposition").
 const faqQuestions = {
   obj1: {
     question: "Does the kernel live in the domain or the codomain?",
@@ -1482,13 +1511,28 @@ const faqQuestions = {
   },
   obj2: {
     question: "Why is $\\text{Im}$ capitalised?",
-    answer: "Partly self-defence. Lowercase $\\operatorname{im}$ does exist, but $\\text{Im}$ leads a double life as the imaginary part of a complex number, and in a complex vector space both meanings can appear within a paragraph. The capital keeps them visually apart where confusing them would be easy and costly.",
+    answer: "Mostly by habit: the capitalised form is the more common one in the literature, while the kernel's $\\ker$, from the German Kern, stays lowercase. The habit has a cost. $\\text{Im}$ also names the imaginary part of a complex number, and in a complex vector space both meanings can appear within a paragraph, so the lowercase $\\operatorname{im}$ is the safer choice where the two could meet.",
     sectionId: "notation"
   },
   obj3: {
     question: "Why can you write $T\\mathbf{v}$ without parentheses?",
     answer: "Linearity licenses it. Because $T$ behaves exactly like the matrix product it secretly is, the juxtaposition of $A\\mathbf{x}$ carries over. General functions keep their parentheses. Watch the colon too, which does two jobs on adjacent lines: in $T : V \\to W$ it binds a name, while in $\\{\\mathbf{v} : T(\\mathbf{v}) = \\mathbf{0}\\}$ it means \"such that\".",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is every linear map between spaces of the same dimension an isomorphism?",
+    answer: "No. Equal dimensions only make injective, surjective and bijective stand or fall together, and all three can fail at once. The matrix $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ maps $\\mathbb{R}^2$ to $\\mathbb{R}^2$, yet it sends $(-2, 1)$ to $\\mathbf{0}$ and reaches only the line through $(1, 2)$. One real test is still needed: a trivial kernel, full rank, or a nonzero determinant.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Does rank-nullity count the rows or the columns?",
+    answer: "The columns. The theorem splits the domain, $\\dim\\text{Im}(T) + \\dim\\ker(T) = \\dim V$, and for a matrix $\\dim V = n$, the number of columns. A $3 \\times 5$ matrix of rank $3$ therefore has nullity $5 - 3 = 2$, not $3 - 3 = 0$. The codomain plays no part in the count, which is also why no linear map from $\\mathbb{R}^5$ to $\\mathbb{R}^3$ can be injective.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "What does the kernel have to do with the $+ C$ in integration?",
+    answer: "The constants are the kernel of differentiation. On functions defined on an interval, differentiation is linear and sends exactly the constant functions to $0$. Any two antiderivatives of $f$ therefore differ by a kernel element, and $\\int f\\,dx = F + C$ is one answer plus the whole kernel. It is the same pattern as for any linear equation $T(\\mathbf{v}) = \\mathbf{w}$: one particular solution shifted by every vector of $\\ker(T)$.",
+    sectionId: "9"
   }
 }
 
@@ -1573,6 +1617,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    outTable: ciOutTable,
+  };
+
   const demoUnits = {
     image: demoUnitFrame({
       svg: kernelImageDiagrams.full,
@@ -1593,6 +1641,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1611,9 +1660,76 @@ return {
 }
    }
 
-export default function ImageKernelPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, imageKernelPairs, faqQuestions, schemas, demoUnits}) {
+export default function ImageKernelPage({seoData, sectionsContent, introContent, obj4Table, obj7Table, imageKernelPairs, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A transformation sends vectors into a target space, but it need not reach every vector there.`,
+        content: [
+          `Like a printer that can only print in black, a map may have a big target space and still produce only part of it. Which outputs actually occur is a question about the map, not about the target.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The projection T(x, y) = (x, 0) lands in the plane, yet every output lies on the horizontal axis.`,
+        content: [
+          `Feed in any vectors you like: the first coordinate passes through and the second is replaced by $0$. A target such as $(2, 1)$ is never produced.`,
+          ciTable('outTable'),
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `The outputs are forced to form a subspace: sums and multiples of outputs are again outputs.`,
+        content: [
+          `@academic[rule_theorem_plain:The image is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $W$.]@`,
+          `It contains $T(\\mathbf{0}) = \\mathbf{0}$, and if $T(\\mathbf{u})$ and $T(\\mathbf{v})$ are in the image, then so is $cT(\\mathbf{u}) + dT(\\mathbf{v}) = T(c\\mathbf{u} + d\\mathbf{v})$ — closure under both operations follows from linearity.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [image](!/linear-algebra/definitions#image) of a linear transformation $T: V \\to W$ is the set of all its outputs $T(\\mathbf{v})$ — the part of $W$ that $T$ actually reaches.`,
+        formula: [
+          `The image (or range) of a linear transformation $T: V \\to W$ is the set of all outputs:`,
+          `@academic[formula_callout:Image Definition
+$$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
+/linear-algebra/formulas#image_definition]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `So the image of $T(x, y) = (x, 0)$ is the horizontal axis, a line inside the plane.`,
+      },
+      {
+        id: 'kind',
+        lead: `The image is a subspace of the codomain — for a matrix, the span of its columns.`,
+        content: [
+          `When $T(\\mathbf{x}) = A\\mathbf{x}$ for a [matrix](!/linear-algebra/matrix) $A$, the image is the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$: the set of all vectors expressible as linear combinations of the columns. The [dimension](!/linear-algebra/vector-spaces/dimension) of the image equals the [rank](!/linear-algebra/matrix/rank) of $A$.`,
+          <div key={'unit-image'} dangerouslySetInnerHTML={{ __html: demoUnits.image }} />,
+          `Whether the image fills the codomain is precisely the question of surjectivity dealt with below.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What generalizes: the image can be the whole codomain, a smaller subspace, or just the zero vector.`,
+        content: [
+          `The image answers the reachability question: a vector $\\mathbf{w} \\in W$ is in the image if and only if the equation $T(\\mathbf{v}) = \\mathbf{w}$ — equivalently, $A\\mathbf{x} = \\mathbf{w}$ — has a solution.`,
+          `A rotation reaches the whole plane, the projection only a line, the zero map only $\\mathbf{0}$. The inputs that are sent to $\\mathbf{0}$ form the companion subspace, the [kernel](!/linear-algebra/transformations/image-kernel#2), and the image filling everything is the subject of [surjectivity](!/linear-algebra/transformations/image-kernel#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the kernel, the notation, injectivity, surjectivity, isomorphisms, the rank-nullity theorem for maps, and dimension constraints.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1621,9 +1737,7 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-image'} dangerouslySetInnerHTML={{ __html: demoUnits.image }} />,
-          `Whether the image fills the codomain is precisely the question of surjectivity dealt with below.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1652,6 +1766,11 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laTransformNotationSheet}
+            current={'/linear-algebra/transformations/image-kernel'}
           />,
         ]
     },
@@ -1733,7 +1852,7 @@ export default function ImageKernelPage({seoData, sectionsContent, introContent,
             <IdentitySheet data={imageKernelPairs} theme="navy" variant="ledger" />
           </DiagramFrame>,
           `The clearest break is at the extremes. A trivial kernel is the best case — the map destroys nothing and is injective — while a trivial image is the worst, since the map sends everything to zero. Reverse them and the same reversal happens: a full image means surjectivity, a full kernel means the zero map again. The kernel column runs from ideal to degenerate; the image column runs the other way.`,
-          `What ties them together is dimension rather than structure. Rank-nullity says the two dimensions sum to $\\dim V$, so neither can be chosen independently of the other — every direction in the domain is accounted for exactly once, surviving into the image or collapsing into the kernel. Note the sum is over the domain: the codomain plays no part, which is why a map can have a small image without having a large kernel.`,
+          `What ties them together is dimension rather than structure. Rank-nullity says the two dimensions sum to $\\dim V$, so neither can be chosen independently of the other — every direction in the domain is accounted for exactly once, surviving into the image or collapsing into the kernel. Note the sum is over the domain: the codomain plays no part, which is why a map can have an image much smaller than its codomain and still have a trivial kernel.`,
         ]
     },
     {

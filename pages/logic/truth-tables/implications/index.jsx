@@ -13,9 +13,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 
-export default function ImplicationsTruthTablesPage({conditionalFormTree, demoUnits,  seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
+export default function ImplicationsTruthTablesPage({conditionalFormTree, contrapositiveBeforeAfter, demoUnits,  seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
 
     const implicationOperators = {
         'P→Q': { symbol: 'P→Q', func: (a, b) => !a || b },
@@ -84,7 +85,22 @@ export default function ImplicationsTruthTablesPage({conditionalFormTree, demoUn
         id: '8',
         title: sectionsContent.obj8.title,
         link: sectionsContent.obj8.link,
-        content: [sectionsContent.obj8.content]
+        content: [
+          sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="contrapositive-before-after"
+            title="The contrapositive of “if n² is even, then n is even”"
+            source="/logic/truth-tables/implications"
+            before={"The section's proof example in its two forms. Compare which one is easier to prove."}
+            after={"Proving the right panel proves the left one: the two statements have identical truth tables, false only when the condition holds and the conclusion fails."}
+          >
+            <BeforeAfter
+              data={contrapositiveBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
+        ]
       },
       {
         id: 'pitfalls',
@@ -589,9 +605,42 @@ How to check: the contrapositive must be F in the same row as the original, P = 
     legend: [{ label: 'equivalent' }, { label: 'not equivalent', tone: 'warn' }],
   };
 
+  // BeforeAfter (obj8): the section's proof example rewritten as its contrapositive
+  const contrapositiveBeforeAfter = {
+    header: {
+      kicker: 'The contrapositive',
+      title: 'One claim in two forms',
+      lede: 'A statement and its contrapositive are one claim in two forms, so prove whichever is easier.',
+    },
+    before: {
+      form: 'Statement P → Q',
+      expr: 'If n² is even, then n is even',
+      meta: 'The statement to prove',
+    },
+    after: {
+      form: 'Contrapositive ¬Q → ¬P',
+      expr: 'If n is odd, then n² is odd',
+      meta: 'Simpler to prove: the negated forms are easier to work with',
+    },
+    operation: {
+      name: 'Take the contrapositive',
+      desc: 'negate both parts and swap them',
+      detailsLabel: 'Swap, not just negate',
+      detailsTitle: '',
+      details: 'Negating both parts but keeping their order gives the inverse ¬P → ¬Q, which differs from P → Q at P = F, Q = T. The parts must also swap: ¬Q → ¬P.',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'Both parts were negated, and the condition and the conclusion traded places.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The claim: P → Q ≡ ¬Q → ¬P, with identical truth tables.' },
+    ],
+  };
+
   return {
     props: {
     conditionalFormTree,
+    contrapositiveBeforeAfter,
       demoUnits,
       keyWords,
       implicationExplanations,

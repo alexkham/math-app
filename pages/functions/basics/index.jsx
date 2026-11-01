@@ -896,6 +896,9 @@ import renderLineTest from '@/app/utils/illustrations/functions/graphs/lineTest'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 
 
 export async function getStaticProps(){
@@ -1111,6 +1114,27 @@ export async function getStaticProps(){
 </table>
 `
 
+
+  // Concept introduction (section 1, "What is a Function") — template G,
+  // exclusion. Running instance: six rules sorted by whether each input gets
+  // exactly one output. Old obj1 text is kept in sectionsContent.obj1, unused;
+  // its fact aside, four passages and the functionOrNot demo frame with its
+  // line are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciRuleTable = ciTableOpen(['rule', 'outputs for one input', 'function?']) +
+    ciRow(['A: each country → its capital', 'exactly one', 'yes'], { color: '#2563EB', cols: [2] }) +
+    ciRow(['B: each age → a person of that age', 'many people, no single answer', 'no'], { shade: true }) +
+    ciRow(['C: x → x² + 1', 'exactly one', 'yes'], { color: '#2563EB', cols: [2] }) +
+    ciRow(['D: x → a number whose square is x', 'two for x = 4: 2 and −2', 'no'], { shade: true }) +
+    ciRow(['E: each person → their birthday', 'exactly one', 'yes'], { color: '#2563EB', cols: [2] }) +
+    ciRow(['F: x → a number bigger than x', 'infinitely many', 'no'], { shade: true, last: true }) +
+    '</tbody></table>'
 
   const sectionsContent = {
     obj0 : {
@@ -1517,6 +1541,11 @@ The notation $f(x)$ names both the rule and its output. The letter $f$ identifie
 
 
 
+// FAQ pass 2026-10-31: cut "How does the vertical line test work?" (restates
+// the h2 The Vertical Line Test) and renumbered. Kept the other four. Added
+// the circle (figure card under the vertical line test), functions with no
+// formula (fact box in What is a Function) and f(x + 1) against f(x) + 1
+// (notation card).
 const faqQuestions = {
   obj1: {
     question: "Does f(x) mean f multiplied by x?",
@@ -1534,14 +1563,24 @@ const faqQuestions = {
     sectionId: "2"
   },
   obj4: {
-    question: "How does the vertical line test work?",
-    answer: "Sweep an imaginary vertical line across the graph. If it ever crosses the curve at two points, that x-value has two outputs and the graph is not a function. The test works because a vertical line collects every point sharing one x-value, which is exactly the condition the definition forbids.",
-    sectionId: "3"
-  },
-  obj5: {
     question: "What is the difference between the independent and dependent variable?",
     answer: "The independent variable is the input you choose freely, usually written x. The dependent variable is the output the rule produces, usually written y or f(x), and its value depends on the choice made. Which is which is a statement about the direction of the relationship, not about the letters used.",
     sectionId: "7"
+  },
+  obj5: {
+    question: "Is a circle the graph of a function?",
+    answer: "No. A vertical line through the inside of a circle meets it twice: on $x^2 + y^2 = 4$ the line $x = 1$ hits $y = \\sqrt{3}$ and $y = -\\sqrt{3}$, so one input has two outputs. Cutting the circle along the $x$-axis fixes this. The upper half $y = \\sqrt{4 - x^2}$ and the lower half $y = -\\sqrt{4 - x^2}$ each pass the vertical line test and are functions.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Does every function have a formula?",
+    answer: "No, almost none do. A formula is a finite string of symbols, so all formulas can be listed one after another, but the functions from $\\mathbb{R}$ to $\\mathbb{R}$ are far too many to list. Nearly every function pairs inputs with outputs in a way no formula can write. A table, a graph or a rule in words, such as each person → their birthday, defines a function just as well.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "Is f(x + 1) the same as f(x) + 1?",
+    answer: "No, not in general. $f(x + 1)$ feeds the new input $x + 1$ into the rule, while $f(x) + 1$ runs the rule on $x$ and adds $1$ to the result. For $f(x) = x^2 + 1$, $f(x + 1) = (x + 1)^2 + 1 = x^2 + 2x + 2$, but $f(x) + 1 = x^2 + 2$, and the two agree only at $x = 0$. The brackets mean application, so nothing distributes over them.",
+    sectionId: "5"
   }
 }
 
@@ -1640,6 +1679,10 @@ const faqQuestions = {
     caption: 'Two crossings on one vertical line = one input with two outputs',
   };
 
+  const conceptIntroFigures = {
+    ruleTable: ciRuleTable,
+  };
+
   const demoUnits = {
     functionOrNot: demoUnitFrame({
       svg: renderSetElementsV2(seFunctionOrNot),
@@ -1715,6 +1758,7 @@ const faqQuestions = {
          faqQuestions,
          schemas,
          demoUnits,
+         conceptIntroFigures,
           seoData: {
         title: "Functions Basics: Definition, Notation & Tests | Learn Math Class",
         // Surfaced on the /functions hub via buildSectionData extraction.
@@ -1738,10 +1782,73 @@ export default function FunctionsBasicsPage({functionTopicsOutline, representati
   summaryTable,
   faqQuestions,
   schemas,
-  demoUnits
+  demoUnits,
+  conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six rules that match inputs to outputs. Which of them can be relied on to give one definite answer?`,
+        content: [
+          `A: country → capital. B: age → a person of that age. C: $x \\to x^2 + 1$. D: $x \\to$ a number whose square is $x$. E: person → birthday. F: $x \\to$ a number bigger than $x$.`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Counting the outputs for one input settles it: A, C and E always give exactly one; B, D and F do not.`,
+        content: [
+          ciTable('ruleTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `B, D and F leave a choice: given the input, the output is still not decided.`,
+        content: [
+          `This uniqueness is what separates functions from more general relationships. A relationship might associate a single input with multiple outputs — given a person's age, there could be many people with that age. A function cannot do this. Given an input, the output is determined completely. There is no ambiguity, no choice, no list of possibilities.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [function](!/functions/definitions#function) is a rule that assigns exactly one output to each allowed input.`,
+        formula: [
+          `A function is a rule that assigns exactly one output to each input. The input is a value chosen from some allowed set, the output is the value the rule produces, and the defining requirement is uniqueness: each input yields one and only one output.`,
+        ],
+        footer: `So A, C and E are functions; B, D and F are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `A function is a rule written as f(x): name the input, and the output follows.`,
+        content: [
+          `The notation $f(x) = x^2 + 1$ defines a function. The rule says: take the input $x$, square it, add one. For $x = 3$, the output is $f(3) = 10$. For $x = -2$, the output is $f(-2) = 5$. Each input produces exactly one result.`,
+          <div key={'unit-functionOrNot'} dangerouslySetInnerHTML={{ __html: demoUnits.functionOrNot }} />,
+          `The test is only about arrows leaving an input: several arrows arriving at one output are fine.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rule works in one direction only: one input gives one output, but one output may come from many inputs.`,
+        content: [
+          `Multiple inputs can share the same output — both $f(2)$ and $f(-2)$ equal $5$ in the example above — and this is perfectly acceptable. The restriction runs only one direction: one input, one output. The reverse, one output coming from multiple inputs, is allowed.`,
+          `@academic[fact,aside:true,width:35%:Almost no function has a formula
+Formulas are finite strings of symbols, so they can be listed one by one; the functions from $\\mathbb{R}$ to $\\mathbb{R}$ cannot. Nearly every function pairs inputs with outputs in a way no formula can write.]@`,
+          `Rules that allow several outputs are relations, compared with functions in [functions vs relations](!/functions/basics#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers functions and relations, domain and range, notation, ways of representing functions, and the main types of functions.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1757,9 +1864,7 @@ export default function FunctionsBasicsPage({functionTopicsOutline, representati
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-functionOrNot'} dangerouslySetInnerHTML={{ __html: demoUnits.functionOrNot }} />,
-          `The test is only about arrows leaving an input: several arrows arriving at one output are fine.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1823,6 +1928,11 @@ export default function FunctionsBasicsPage({functionTopicsOutline, representati
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={functionsNotationSheet}
+            current={'/functions/basics'}
           />,
         ]
     },

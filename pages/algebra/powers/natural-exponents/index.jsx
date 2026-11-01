@@ -14,6 +14,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 
 
 
@@ -265,7 +267,7 @@ The last digit of a power depends only on the last digit of the base, because on
 
 @academic[rule_corollary_plain:Two special cases follow immediately. When $n = 1$, there is only one copy of the base: $a^1 = a$ for any $a$. When the base is $1$, repeated multiplication changes nothing: $1^n = 1$ for any $n$.]@
 
-A note on convention: whether the natural numbers include $0$ varies by source. In this section, natural exponents start at $n = 1$. The case $a^0$ arises naturally from the quotient rule and is addressed on the [negative exponents](!/algebra/powers/negative-exponents) page, where the extension below $n = 1$ is developed.`,
+A note on convention: whether the natural numbers include $0$ varies by source. In this section, natural exponents start at $n = 1$. The case $a^0$ arises naturally from the quotient rule and is addressed on the [zero powers](!/algebra/powers/zero-powers) page; the [negative exponents](!/algebra/powers/negative-exponents) page continues the extension below $n = 0$.`,
   before: ``,
   after: ``,
   link: '',
@@ -676,6 +678,10 @@ How to check: put $x = 1$. Then $(2 \\cdot 1^3)^4 = 2^4 = 16$, while $2 \\cdot 1
   content: `Before powers can be extended to negative, fractional, or irrational exponents, they must first be grounded in the simplest case: a positive whole number telling you how many times to multiply a base by itself. This is where the notation $a^n$ acquires its first meaning, where the [laws of exponents](!/algebra/powers/exponent-rules/) are first derived from concrete arithmetic, and where the patterns emerge that every later extension is built to preserve.`
 }
 
+// FAQ pass 2026-10-31: kept all four. Added why the quotient rule needs
+// m > n here (one paragraph under the quotient rule) and the two fact boxes:
+// the fifth power keeping the last digit (Definition) and the digit count of
+// 2^n and 5^n (Power of a Product). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "What is the difference between $(-3)^2$ and $-3^2$?",
@@ -696,6 +702,21 @@ const faqQuestions = {
     question: "Does $2^3$ mean 2 times 3?",
     answer: "No. $2^3 = 8$, not $6$. The exponent counts factors rather than multiplying the base, so $2^3$ is $2 \\cdot 2 \\cdot 2$. The raised position is itself the operator, which is why no symbol appears between the base and the exponent. In plain text the same thing is written @[2^3]@ or @[2**3]@.",
     sectionId: "notation"
+  },
+  obj5: {
+    question: "Why does the quotient rule require $m > n$ for natural exponents?",
+    answer: "Because the answer has to stay a natural power. With $m > n$, cancelling leaves $m - n \\geq 1$ factors, as in $\\frac{2^5}{2^3} = 2^2$. With $m = n$ everything cancels to $1$, which would have to be written $a^0$, and with $m < n$ a fraction is left over. Neither has a natural exponent, the first sign that the definition needs extending to [zero powers](!/algebra/powers/zero-powers) and [negative exponents](!/algebra/powers/negative-exponents).",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Why does $n^5$ always end in the same digit as $n$?",
+    answer: "Because the last digits of powers repeat in short cycles. The last digit of a power depends only on the last digit of the base, and as the exponent runs $1, 2, 3, \\ldots$ those digits cycle with length $1$, $2$ or $4$: powers of $2$ end $2, 4, 8, 6$, powers of $9$ alternate $9, 1$, powers of $5$ always end in $5$. Every cycle length divides $4$, so $n^5 = n^{1+4}$ lands back on the last digit of $n^1$, as in $7^5 = 16807$.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "How many digits do $2^n$ and $5^n$ have together?",
+    answer: "Exactly $n + 1$, for every $n \\geq 1$. For $n = 10$, $2^{10} = 1024$ has four digits and $5^{10} = 9765625$ has seven, eleven in all. The reason is that $2^n \\cdot 5^n = (2 \\cdot 5)^n = 10^n$, the power of a product rule read backwards. If the two factors have $a$ and $b$ digits, their product lies strictly between $10^{a+b-2}$ and $10^{a+b}$, which forces $n = a + b - 1$.",
+    sectionId: "6"
   }
 }
 
@@ -885,7 +906,7 @@ For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 
         content: [
           `The five laws below are bookkeeping for these lists of factors.`,
           `@academic[rule_corollary_plain:Two special cases follow immediately. When $n = 1$, there is only one copy of the base: $a^1 = a$ for any $a$. When the base is $1$, repeated multiplication changes nothing: $1^n = 1$ for any $n$.]@`,
-          `A note on convention: whether the natural numbers include $0$ varies by source. In this section, natural exponents start at $n = 1$. The case $a^0$ arises naturally from the quotient rule and is addressed on the [negative exponents](!/algebra/powers/negative-exponents) page, where the extension below $n = 1$ is developed.`,
+          `A note on convention: whether the natural numbers include $0$ varies by source. In this section, natural exponents start at $n = 1$. The case $a^0$ arises naturally from the quotient rule and is addressed on the [zero powers](!/algebra/powers/zero-powers) page; the [negative exponents](!/algebra/powers/negative-exponents) page continues the extension below $n = 0$.`,
           `The first thing the notation makes easy to see is the sign: a negative base gives alternating signs, as the section on [sign behavior](!/algebra/powers/natural-exponents#2) shows.`,
         ],
       },
@@ -928,6 +949,11 @@ For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={powersRootsLogsNotationSheet}
+            current={'/algebra/powers/natural-exponents'}
           />,
         ]
     },

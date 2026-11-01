@@ -17,6 +17,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -552,6 +554,26 @@ const keyWords = [
   
 //   }
 
+// Concept introduction (section 1, "What is Factoring?") — template F, two
+// descriptions shown to agree. Running instance: x² + 5x + 6 and
+// (x + 2)(x + 3) evaluated side by side. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four passages, the grid demo frame and
+// its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTwoFormsTable = ciTableOpen(['x', 'x² + 5x + 6', '(x + 2)(x + 3)']) +
+  ciRow(['−3', '9 − 15 + 6 = 0', '(−1)(0) = 0'], { color: '#2563EB', cols: [1, 2] }) +
+  ciRow(['−2', '4 − 10 + 6 = 0', '(0)(1) = 0'], { shade: true, color: '#2563EB', cols: [1, 2] }) +
+  ciRow(['0', '6', '(2)(3) = 6']) +
+  ciRow(['1', '12', '(3)(4) = 12'], { shade: true }) +
+  ciRow(['2', '20', '(4)(5) = 20'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -603,7 +625,7 @@ Consider $x^2 + 5x + 6$. Written this way, the polynomial is a sum of three term
 
 A polynomial is fully factored when none of its factors can be broken down further. The expression $2x(x^2 - 9)$ is not fully factored because $x^2 - 9$ splits into $(x + 3)(x - 3)$. The complete factorization is $2x(x + 3)(x - 3)$.
 
-What counts as "fully factored" depends on the number system in play. Over the integers, $x^2 + 1$ cannot be factored — no pair of integer-coefficient linear factors multiplies to give $x^2 + 1$. Over the reals, it remains irreducible for the same reason. Over the [complex numbers](!/complex-numbers), however, $x^2 + 1 = (x + i)(x - i)$, and every polynomial of degree $n$ factors into exactly $n$ linear factors.`,
+What counts as "fully factored" depends on the number system in play. Over the integers, $x^2 + 1$ cannot be factored — no pair of integer-coefficient linear factors multiplies to give $x^2 + 1$. Over the reals, it remains irreducible because it has no real roots. Over the [complex numbers](!/complex-numbers), however, $x^2 + 1 = (x + i)(x - i)$, and every polynomial of degree $n$ factors into exactly $n$ linear factors.`,
     before: ``,
     after: ``,
     link: '',
@@ -669,7 +691,7 @@ The signs of $b$ and $c$ guide the search. When $c$ is positive and $b$ is posit
 
 Not every trinomial of this form factors over the integers. The polynomial $x^2 + x + 1$ requires two integers that multiply to $1$ and add to $1$ — no such pair exists.
 
-@academic[rule_theorem_plain:The discriminant $b^2 - 4c$ determines factorability: when it is a perfect square, the trinomial factors over the integers.]@`,
+@academic[rule_theorem_plain:The discriminant $b^2 - 4c$ determines factorability: with integer $b$ and $c$, the trinomial factors over the integers exactly when $b^2 - 4c$ is a perfect square.]@`,
     before: ``,
     after: ``,
     link: '',
@@ -949,6 +971,13 @@ How to check: expand the answer. $(x + 3)(x + 8) = x^2 + 11x + 24$ has leading c
 That reverse process is factoring, and it underpins much of algebra. Solving [polynomial equations](!/algebra/polynomials/roots), simplifying rational expressions, and analyzing how polynomials behave all depend on the ability to decompose a polynomial into simpler multiplicative pieces. The sections that follow develop the methods for doing so, from extracting common factors through recognizing special patterns to handling polynomials of any degree.`
 }
 
+// FAQ pass 2026-10-31: kept the three questions; obj2's sectionId moved from
+// "11" to "6", where the sum-of-squares theorem sits. Added the discriminant
+// test for integer factoring (theorem boxes under the two trinomial sections),
+// the irreducible quadratic factor of the cube formulas (theorem box under
+// cubes), x^4 + 1 factoring with no real roots (fact box under irreducible
+// polynomials) and the coefficients of the pieces of x^n - 1 (fact box under
+// higher-degree polynomials). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "What is the most common factoring mistake?",
@@ -958,12 +987,32 @@ const faqQuestions = {
   obj2: {
     question: "Why doesn't $a^2 + b^2$ factor over the reals?",
     answer: "Because there is no pair of real factors whose product returns a sum of squares. The tempting move is to borrow the difference of squares and write $(a + b)(a - b)$, but expanding that gives $a^2 - b^2$, the wrong sign entirely. A sum of squares is irreducible over the reals, and only factors once complex numbers are allowed.",
-    sectionId: "11"
+    sectionId: "6"
   },
   obj3: {
     question: "How do you know when a factorization is finished?",
     answer: "When no factor can be broken down further, which is easy to declare too early. Factoring $x^4 - 16$ as $(x^2 + 4)(x^2 - 4)$ looks complete, but the second factor is itself a difference of squares and splits again into $(x + 2)(x - 2)$. Inspect every factor you produce, not just the original expression.",
     sectionId: "12"
+  },
+  obj4: {
+    question: "How can you tell whether a trinomial factors over the integers?",
+    answer: "Check the discriminant before hunting for the pair. With integer coefficients, $ax^2 + bx + c$ factors into integer linear factors exactly when $b^2 - 4ac$ is a perfect square, $0$ included; otherwise no pair of numbers exists and the search can only fail. For $6x^2 + 11x + 4$ it is $121 - 96 = 25 = 5^2$, so it factors, while for $x^2 + x + 1$ it is $-3$, so it does not.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Can the quadratic factor in a sum or difference of cubes be factored further?",
+    answer: "No, not over the reals. Read as quadratics in $a$, both $a^2 - ab + b^2$ and $a^2 + ab + b^2$ have discriminant $b^2 - 4b^2 = -3b^2$, which is negative for every $b \\neq 0$, so neither has a real root. That is why $x^3 + 8$ stops at $(x + 2)(x^2 - 2x + 4)$: splitting the quadratic factor would take complex numbers.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "Can a polynomial with no real roots still be factored over the reals?",
+    answer: "Yes, whenever its degree is $4$ or more. $x^4 + 1$ is never zero, yet adding and taking away $2x^2$ makes a difference of squares: $(x^2 + 1)^2 - (\\sqrt{2}x)^2 = (x^2 + \\sqrt{2}x + 1)(x^2 - \\sqrt{2}x + 1)$. No real roots only rules out linear factors; quadratic pieces with negative discriminant are still allowed. Over the integers, $x^4 + 1$ does not factor at all.",
+    sectionId: "11"
+  },
+  obj7: {
+    question: "Do the factors of $x^n - 1$ always have coefficients $0$, $1$ or $-1$?",
+    answer: "No, but the first exception comes late. For every $n$ up to $104$, each irreducible piece of $x^n - 1$ over the integers uses only $0$, $1$ and $-1$, as in $x^6 - 1 = (x - 1)(x + 1)(x^2 + x + 1)(x^2 - x + 1)$. At $n = 105 = 3 \\cdot 5 \\cdot 7$, the first $n$ with three different odd prime factors, the piece of degree $48$ contains the coefficient $-2$.",
+    sectionId: "9"
   }
 }
 
@@ -1058,6 +1107,10 @@ const schemas = {
       { x: -2.9, y: -2.6, text: 'x² − 2 = (x + √2)(x − √2): roots ±√2, not rational', pos: 'e', color: 'f' }],
     caption: 'x² − 2 factors over ℝ but not over ℤ; x² + 1 factors over neither' };
 
+  const conceptIntroFigures = {
+    twoFormsTable: ciTwoFormsTable,
+  };
+
   const demoUnits = {
     perfect: demoUnitFrame({
       svg: completeTheSquareDiagrams['step-corner'],
@@ -1128,11 +1181,52 @@ const schemas = {
     ],
   };
 
+  // DecisionMaker + DecisionWalker (obj10): the section's own strategy, step by step
+  const factoringDecision = {
+    header: {
+      kicker: 'factoring strategy',
+      title: 'Which factoring technique?',
+      lede: 'Count the terms after taking out the GCF; the count points to the technique.',
+    },
+    first: [{ label: 'Always first', text: 'Take out the greatest common factor, even a lone $2$ or $x$.' }],
+    last: [
+      { label: 'Then', text: 'Check every factor: $x^4 - 81 = (x^2 + 9)(x^2 - 9)$ still hides $(x + 3)(x - 3)$.' },
+      { label: 'Finally', text: 'Multiply the factors back together; the product must be the original polynomial.' },
+    ],
+    start: 'terms',
+    nodes: {
+      terms: { question: 'How many terms?', hint: 'after the GCF is out', answers: [
+        { label: '2', to: 'pattern' },
+        { label: '3', to: 'lead' },
+        { label: '4 or more', to: 'grouping' },
+      ] },
+      pattern: { question: 'Which pattern?', answers: [
+        { label: 'a² − b²', to: 'dos' },
+        { label: 'a³ ± b³', to: 'cubes' },
+        { label: 'neither', to: 'irreducible' },
+      ] },
+      lead: { question: 'Leading coefficient 1?', answers: [
+        { label: 'yes', to: 'simple' },
+        { label: 'no', to: 'ac' },
+      ] },
+    },
+    outcomes: {
+      dos: { title: 'Difference of squares', action: '$a^2 - b^2 = (a - b)(a + b)$', link: { label: 'Difference of squares', href: '/algebra/polynomials/factoring#6' } },
+      cubes: { title: 'Sum or difference of cubes', action: '$a^3 \\pm b^3 = (a \\pm b)(a^2 \\mp ab + b^2)$', link: { label: 'Cubes', href: '/algebra/polynomials/factoring#8' } },
+      simple: { title: 'Simple trinomial', action: 'find two numbers that multiply to $c$ and add to $b$', link: { label: 'Simple case', href: '/algebra/polynomials/factoring#4' } },
+      ac: { title: 'AC method', action: 'split the middle term using $ac$, then group', link: { label: 'General case', href: '/algebra/polynomials/factoring#5' } },
+      grouping: { title: 'Grouping', action: 'pair the terms and factor each pair', link: { label: 'Grouping', href: '/algebra/polynomials/factoring#3' } },
+      irreducible: { title: 'Maybe irreducible', action: 'no integer factors; try roots over the reals', tone: 'stop', link: { label: 'Irreducible polynomials', href: '/algebra/polynomials/factoring#11' } },
+    },
+  };
+
   return {
   props:{
+    factoringDecision,
     factorOutline,
     gcfFactoringSteps,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1152,9 +1246,70 @@ const schemas = {
 }
    }
 
-export default function FactoringPage({factorOutline, gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function FactoringPage({factoringDecision, factorOutline,gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The same polynomial can be written as a sum of terms or as a product of factors.`,
+        content: [
+          `$x^2 + 5x + 6$ and $(x + 2)(x + 3)$ look nothing alike. Do they describe the same thing?`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Evaluated at the same inputs, the two forms agree every time.`,
+        content: [
+          ciTable('twoFormsTable'),
+          `The values match row by row. Only the product form shows at a glance why $x = -3$ and $x = -2$ give $0$: one of its factors is $0$ there.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `A product is zero exactly when one of its factors is zero, so the factored form puts the roots on display.`,
+        content: [
+          `Consider $x^2 + 5x + 6$. Written this way, the polynomial is a sum of three terms. Factored as $(x + 2)(x + 3)$, the same expression becomes a product of two linear factors, making it immediately clear that the polynomial equals zero when $x = -2$ or $x = -3$. This connection between factors and [roots](!/algebra/polynomials/roots) is one of the main reasons factoring matters.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `To [factor](!/algebra/definitions#factoring) a polynomial is to write it as a product of polynomials of lower degree, equal to it for every input.`,
+        formula: [
+          `To factor a polynomial means to write it as a product of two or more polynomials of lower degree. The original polynomial and its factored form are equivalent expressions — they produce the same value for every input — but the factored form reveals structure that the expanded form conceals.`,
+        ],
+        footer: `So $x^2 + 5x + 6 = (x + 2)(x + 3)$ is a factorization: two linear factors whose product equals the original at every $x$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Factoring is multiplication run backwards.`,
+        content: [
+          <div key={'unit-grid'} dangerouslySetInnerHTML={{ __html: demoUnits.grid }} />,
+          `Every factoring technique on this page reverses one way of filling such a grid.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `When a polynomial counts as fully factored depends on the numbers allowed in the factors.`,
+        content: [
+          `A polynomial is fully factored when none of its factors can be broken down further. The expression $2x(x^2 - 9)$ is not fully factored because $x^2 - 9$ splits into $(x + 3)(x - 3)$. The complete factorization is $2x(x + 3)(x - 3)$.`,
+          `What counts as "fully factored" depends on the number system in play. Over the integers, $x^2 + 1$ cannot be factored — no pair of integer-coefficient linear factors multiplies to give $x^2 + 1$. Over the reals, it remains irreducible because it has no real roots. Over the [complex numbers](!/complex-numbers), however, $x^2 + 1 = (x + i)(x - i)$, and every polynomial of degree $n$ factors into exactly $n$ linear factors.`,
+          `Polynomials that cannot be split further are treated in [irreducible polynomials](!/algebra/polynomials/factoring#11).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the greatest common factor, grouping, trinomials, the special patterns, higher-degree polynomials, a factoring strategy, irreducible polynomials, common mistakes and a decision tree.`,
+      },
+    ],
+  }
     
   const genericSections=[
      {
@@ -1172,9 +1327,7 @@ export default function FactoringPage({factorOutline, gcfFactoringSteps, seoData
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-grid'} dangerouslySetInnerHTML={{ __html: demoUnits.grid }} />,
-          `Every factoring technique on this page reverses one way of filling such a grid.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1279,6 +1432,21 @@ export default function FactoringPage({factorOutline, gcfFactoringSteps, seoData
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-diagram'}
+            id="factoring-strategy-decision"
+            title="Which factoring technique?"
+            source="/algebra/polynomials/factoring"
+            before={"The same strategy as a map. The GCF comes out first, and from there the number of terms decides the route. Switch to Walk it to answer one question at a time for a polynomial of your own."}
+            after={"Every route ends with the same two checks: inspect each factor again, then multiply back. A route that ends at Maybe irreducible is not a dead end; whether a polynomial factors depends on the numbers allowed, as the [next section](!#11) shows."}
+          >
+            <DecisionBox
+              data={factoringDecision}
+              theme={{ title: '#06357A', navy: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }}
+              variant="tree"
+              direction="vertical"
+            />
+          </DiagramFrame>,
         ]
     },
     {

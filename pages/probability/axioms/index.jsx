@@ -714,6 +714,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -885,6 +886,9 @@ export async function getStaticProps(){
   // in its more searched form (fair coin) and added the consequences the
   // page states in one direction only. This also settles the sample-space
   // page's deferral of P(Ω) = 1, answered here as the scale question.
+  // FAQ pass 2026-10-31: kept all five. Added who wrote the axioms (fact box
+  // under "What Are Axioms") and the set with no probability (Vitali fact box
+  // under Axiom 3); no heading asks either.
   const faqQuestions = {
     obj1: {
       question: "Does probability zero mean an event is impossible?",
@@ -910,6 +914,16 @@ export async function getStaticProps(){
       question: "Are the complement and monotonicity rules extra axioms?",
       answer: "No — they are consequences, proved from the three axioms rather than assumed alongside them. The same goes for the impossible event having probability zero and for the two-event union rule that corrects for overlap. Only non-negativity, normalization, and additivity for disjoint events are taken as given; everything else is derived.",
       sectionId: "consequences"
+    },
+    obj6: {
+      question: "Who came up with the axioms of probability?",
+      answer: "Andrei Kolmogorov, in his book of 1933. Euclid had set out axioms for geometry around 300 BC, and Hilbert asked for axioms of probability in 1900, but the tool they needed, measure theory, was only built around that time. Kolmogorov's step was to treat probability as a measure, in the same way as length or area, and the three axioms on this page are his.",
+      sectionId: "why"
+    },
+    obj7: {
+      question: "Can every set of outcomes be given a probability?",
+      answer: "Not always. On a finite or countable sample space every subset can be an event, but on a continuous one this can fail. For a point picked uniformly on a circle, Giuseppe Vitali in 1905 cut the circle into countably many rotated copies of one set. A uniform model gives every copy the same probability, and countable additivity needs these to add up to $1$, yet countably many equal values add up to $0$ or to infinity. That set can have no probability at all.",
+      sectionId: "axiom3"
     }
   }
 
@@ -978,6 +992,26 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section "axioms", "The Probability Axioms
+  // (Overview)") — template G, exclusion. Running instance: four proposed
+  // assignments for a red/green/blue spinner, three of which fail. Old axioms
+  // text is kept in sectionsContent.axioms, unused; its five passages, the
+  // image, axiomsTable, the u_axioms_0 demo frame and its line are carried in
+  // unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciProposalTable = ciTableOpen(['proposal', 'red', 'green', 'blue', 'red or green', 'what goes wrong']) +
+    ciRow(['A', '0.5', '0.3', '0.2', '0.8', 'nothing'], { color: '#2563EB', cols: [5] }) +
+    ciRow(['B', '0.7', '0.5', '−0.2', '1.2', 'a negative chance'], { shade: true, color: '#a4243b', cols: [3, 5] }) +
+    ciRow(['C', '0.4', '0.3', '0.2', '0.7', 'the colours total 0.9, not 1'], { color: '#a4243b', cols: [5] }) +
+    ciRow(['D', '0.5', '0.3', '0.2', '0.9', '0.5 + 0.3 is not 0.9'], { shade: true, last: true, color: '#a4243b', cols: [4, 5] }) +
+    '</tbody></table>'
 
   const sectionsContent={
     obj0: {
@@ -1393,6 +1427,10 @@ Everything that follows in probability — conditional probability, independence
     events: [{ label: 'A: sum is 7', test: (a, b) => a + b === 7, color: 'f' }, { label: 'B: doubles', test: (a, b) => a === b, color: 'r' }],
     notes: [{ text: 'no shared cell: A ∩ B = ∅' }, { text: 'P(A ∪ B) = 6/36 + 6/36', color: 'r' }, { text: '= 12/36 = 1/3', color: 'r' }],
     caption: 'Disjoint events: no overlap, so the probabilities simply add' };
+  const conceptIntroFigures = {
+    proposalTable: ciProposalTable,
+  };
+
   const demoUnits = {
     u_axioms_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.none,
@@ -1411,6 +1449,7 @@ Everything that follows in probability — conditional probability, independence
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       axiomsTable,
@@ -1439,10 +1478,86 @@ export default function AxiomsPage({
   assumeTable,
   overviewTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "axioms" concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `A spinner lands on red, green or blue. Four people propose probabilities for it.`,
+        content: [
+          `Each proposal gives a number to every colour and to the event "red or green". Which of them could be probabilities at all?`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Only proposal A survives a check against what probability is supposed to mean.`,
+        content: [
+          ciTable('proposalTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Each failure breaks a different expectation: no negative chances, certainty counts as 1, separate cases add up.`,
+        content: [
+          `B gives blue a negative chance. In C the three colours — everything that can happen — total only $0.9$. In D, red and green cannot both occur, yet "red or green" does not get $0.5 + 0.3$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **probability axioms** are the three rules every probability assignment must satisfy: non-negativity, normalization ($P(\\Omega) = 1$) and additivity for disjoint events.`,
+        formula: [
+          `The foundations of probability are given by a small set of rules that every valid probability assignment must satisfy. These are known as the **probability axioms**. Each axiom expresses a basic constraint that reflects how probability is expected to behave.`,
+          `**Non-negativity**  
+Probabilities cannot be negative. Every event is assigned a value that is zero or greater.`,
+          `**Normalization**  
+The event that represents "something happens" — the entire sample space — is assigned probability one. This fixes the scale of probability.`,
+          `**Additivity for Disjoint Events**  
+When two events cannot occur together, the probability that one or the other occurs is the sum of their probabilities. Disjoint situations contribute separately to the total.`,
+        ],
+        footer: `So only proposal A is a valid assignment: B breaks non-negativity, C breaks normalization and D breaks additivity.`,
+      },
+      {
+        id: 'kind',
+        lead: `Every further rule of probability follows from these three.`,
+        content: [
+          `Together, these axioms define what it means for a probability assignment to be valid. All further probability rules are consequences of these basic constraints. The table below collects them in compact form — the formal statement, in standard [probability notation](!/math-symbols/probability), and the meaning behind each.`,
+          <div key={'axioms1'} style={{width:'60%',margin:'auto'}} >
+          <Image
+          src='/probability/3 axioms of probability.jpg'
+           alt="Description"
+          width={600}
+          height={600}
+          />
+          </div>,
+          <div key={'axioms-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: axiomsTable}}/>,
+          <div key={'unit-u_axioms_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_axioms_0 }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The axioms say which assignments are allowed, not which one is right.`,
+        content: [
+          `Proposal A passes, but so would $0.2$, $0.2$ and $0.6$. Choosing among valid assignments is the job of a [probability model](!/probability/models).`,
+          `Each axiom is now stated separately.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers each axiom in turn, their immediate consequences, what they do not assume, how they lead to all probability rules, why they matter in practice, and their connections to other concepts.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1481,18 +1596,7 @@ export default function AxiomsPage({
         title:sectionsContent.axioms.title,
         link:'',
         content:[
-            sectionsContent.axioms.content,
-             <div key={'axioms1'} style={{width:'60%',margin:'auto'}} >
-            <Image
-            src='/probability/3 axioms of probability.jpg'
-             alt="Description"
-            width={600}
-            height={600}
-            />
-            </div>,
-            <div key={'axioms-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: axiomsTable}}/>,
-                  <div key={'unit-u_axioms_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_axioms_0 }} />,
-          `Each axiom is now stated separately.`,
+          <ConceptIntro key={'axioms-intro'} data={conceptIntro} />,
         ]
     },
     {

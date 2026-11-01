@@ -8,6 +8,7 @@ import '../../../../pages/pages.css'
 import Head from 'next/head'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/visualizer/inequalityVisualizerDiagrams'
@@ -236,6 +237,25 @@ const keyWords = [
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 3, "End Behavior") — template C, failure
+    // first. Running instance: P(x) = −2x⁵ + 100x⁴ − 3x + 7, positive at
+    // x = 10 but overtaken by its leading term further out. Old obj3 text is
+    // kept in sectionsContent.obj3, unused; its five passages, two rule boxes,
+    // obj3Table and the punchline are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciEndsTable = ciTableOpen(['x', 'P(x) = −2x⁵ + 100x⁴ − 3x + 7', 'leading term −2x⁵']) +
+      ciRow(['10', '799 977', '−200 000'], { color: '#a4243b', cols: [1] }) +
+      ciRow(['50', '−143', '−625 000 000'], { shade: true }) +
+      ciRow(['100', 'about −10 000 000 000', '−20 000 000 000']) +
+      ciRow(['1000', 'about −1.9 × 10¹⁵', '−2 × 10¹⁵'], { shade: true, last: true, color: '#2563EB', cols: [1, 2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -593,6 +613,13 @@ How to check: with $a > 0$ the vertex is the lowest point, but $P(1) = -4$ lies 
 Translating between the equation and the picture is a skill that runs both ways. The algebra predicts the geometry, and the geometry confirms the algebra. The sections that follow develop the tools for moving fluently between $P(x)$ as a formula and $P(x)$ as a curve in the coordinate plane.`
 }
 
+// FAQ pass 2026-10-31: kept obj1 and obj3. Rewrote obj2: the two quartics
+// share x-values of their turning points, not the points themselves, and the
+// flip moves the y-intercept from 1 to -1, so "without moving a single
+// intercept" became "without moving a single root". Added the polynomial
+// that shadows |x| (fact box under "The Graph of a Polynomial"), large middle
+// coefficients and end behavior (one sentence under "End Behavior") and the
+// half-turn symmetry of every cubic (fact box under cubics).
 const faqQuestions = {
   obj1: {
     question: "Why are polynomial graphs always smooth?",
@@ -601,13 +628,28 @@ const faqQuestions = {
   },
   obj2: {
     question: "Do two polynomials with the same roots have the same graph?",
-    answer: "No, because the leading coefficient decides the orientation. The polynomials $x^4 - 3x^2 + 1$ and $-x^4 + 3x^2 - 1$ share every root and every turning point, yet one rises at both extremes while the other falls. Flipping the sign of the leading coefficient reflects the whole curve without moving a single intercept.",
+    answer: "No, because the leading coefficient decides the orientation. The polynomials $x^4 - 3x^2 + 1$ and $-x^4 + 3x^2 - 1$ share every root and have their turning points at the same $x$-values, yet one rises at both extremes while the other falls. Flipping the sign of the leading coefficient reflects the whole curve across the $x$-axis without moving a single root.",
     sectionId: "12"
   },
   obj3: {
     question: "Does a cubic always have two turning points?",
     answer: "No. The bound of $n - 1$ is a maximum, not a promise. A cubic has at most two turning points, and $x^3 - 3x$ achieves that, but $x^3$ has none at all: it rises steadily with an inflection at the origin and never reverses direction. Drawing more than $n - 1$ turns is impossible; drawing fewer is common.",
     sectionId: "4"
+  },
+  obj4: {
+    question: "Can a polynomial graph look like it has a corner?",
+    answer: "Yes, closely enough that the eye cannot tell. No polynomial graph has a true corner, but Weierstrass proved in 1885 that any unbroken curve over a closed interval can be shadowed as closely as you like by a polynomial; some polynomial stays within $0.001$ of the V-shaped graph of $|x|$ for every $x$ from $-1$ to $1$. The corner becomes a bend too tight to see.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Can large middle coefficients change a polynomial's end behavior?",
+    answer: "No, they only reshape the middle of the graph. In $-2x^5 + 100x^4 - 3x + 7$ the $100x^4$ term outweighs $-2x^5$ whenever $|x| < 50$, so on the right the curve climbs to a peak near $x = 40$ before turning down. Further out the leading term dominates every other term, so the left end still rises and the right end still falls, as odd degree with a negative leading coefficient demands.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Is the graph of a cubic symmetric?",
+    answer: "Yes, every cubic is symmetric about its inflection point. Shifting $x$ by $-\\frac{b}{3a}$ removes the $x^2$ term and leaves $at^3 + pt$ plus a constant, and $at^3 + pt$ is an odd function, so a half-turn about the inflection point maps the curve onto itself. When a cubic has two turning points they are mirror images through that point, like the peak $(-1, 2)$ and valley $(1, -2)$ of $x^3 - 3x$ about the origin.",
+    sectionId: "9"
   }
 }
 
@@ -707,6 +749,10 @@ const schemas = {
       { x: -1.9, y: 6.6, text: 'quintic x⁵ − 5x³ + 4x: 4 turns, ends opposite', pos: 'e', color: 'r' }],
     caption: 'Even degree: ends agree; odd degree: ends disagree' };
 
+  const conceptIntroFigures = {
+    endsTable: ciEndsTable,
+  };
+
   const demoUnits = {
     roots: demoUnitFrame({
       svg: inequalityVisualizerDiagrams['poly-double'],
@@ -771,6 +817,7 @@ return {
   props:{
     linearPolyCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -794,9 +841,78 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function GraphingPage({linearPolyCases, seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function GraphingPage({linearPolyCases, seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 3 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `To see where a graph is heading, plot a few points and follow the trend.`,
+        content: [
+          `For $P(x) = -2x^5 + 100x^4 - 3x + 7$, the trend for positive $x$ looks clear at first: the big $100x^4$ term pushes the values up.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `At x = 10 the value is large and positive — by x = 100 it is hugely negative.`,
+        content: [
+          ciTable('endsTable'),
+          `$100x^4$ wins for moderate $x$, but $-2x^5$ grows faster and takes over. By $x = 1000$ the value is within about $5\\%$ of the leading term alone.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `For large |x| only the leading term matters.`,
+        content: [
+          `Two properties control the outcome: the degree $n$ and the sign of the leading coefficient $a_n$.`,
+          `The polynomial $-2x^5 + 100x^4 - 3x + 7$ has odd degree and a negative leading coefficient, so its left end rises and its right end falls — regardless of how large the other coefficients are. At extreme values of $x$, the $-2x^5$ term overwhelms everything else.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [end behavior](!/algebra/definitions#end_behavior) of a polynomial is what $P(x)$ does as $x \\to +\\infty$ and as $x \\to -\\infty$; the leading term $a_nx^n$ alone decides it.`,
+        formula: [
+          `End behavior describes what happens to $P(x)$ as $x$ grows without bound in both directions. It is determined entirely by the leading term $a_nx^n$ — for extreme values of $x$, the highest-degree term dominates all others.`,
+        ],
+        footer: `So $-2x^5 + 100x^4 - 3x + 7$ rises on the left and falls on the right, exactly as $-2x^5$ does.`,
+      },
+      {
+        id: 'kind',
+        lead: `Two facts decide it: whether the degree is even or odd, and the sign of the leading coefficient.`,
+        content: [
+          `@academic[rule_plain:When the degree is even and $a_n > 0$, both ends of the graph rise — the curve heads upward as $x \\to +\\infty$ and as $x \\to -\\infty$. When the degree is even and $a_n < 0$, both ends fall.]@`,
+          `In either case, the two ends move in the same direction because an even power of $x$ is positive regardless of the sign of $x$.`,
+          `@academic[rule_plain:When the degree is odd and $a_n > 0$, the left end falls while the right end rises. When the degree is odd and $a_n < 0$, the left end rises and the right end falls.]@`,
+          `Odd powers preserve the sign of $x$, so the two ends always move in opposite directions.`,
+          <div
+            key={'obj3-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj3Table }}
+          />,
+          `@academic[punchline:Far from the origin a polynomial behaves like its leading term, so the parity of the degree and one sign fix both ends.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `End behavior says nothing about the middle of the graph.`,
+        content: [
+          `The polynomial above climbs to about $51$ million at $x = 40$ before it turns down. Bends like that come from [turning points](!/algebra/polynomials/graphing#4), not from the leading term.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers turning points, behavior at roots, symmetry, graphing polynomials degree by degree, a sketching strategy, common mistakes and a reference card.`,
+      },
+    ],
+  }
     
   const genericSections=[
      {
@@ -832,13 +948,7 @@ export default function GraphingPage({linearPolyCases, seoData, sectionsContent,
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
-          sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
-          `@academic[punchline:Far from the origin a polynomial behaves like its leading term, so the parity of the degree and one sign fix both ends.]@`,
+          <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
         ]
     },
     {

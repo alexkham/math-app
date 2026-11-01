@@ -971,6 +971,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 
 
 
@@ -1624,6 +1626,12 @@ How to check: test a basis vector against the original set. Every vector in the 
   content: `The span of a set of vectors is the collection of all their linear combinations — every vector that can be built by adding scaled copies of the given vectors. It is always a subspace, and it is the smallest subspace containing the original set. Span is the other half of what makes a basis: the half that guarantees complete coverage.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the span of
+// the empty set (one sentence under "Definition"), pivots in columns vs rows
+// (pitfall box under "Testing Whether a Set Spans"), Lights Out (fact box
+// under "Span and Column Space") and e^x outside the span of the powers of x
+// (fact box under "Span in Abstract Vector Spaces"). Echelon columns as a
+// basis left to fundamental-spaces.
 const faqQuestions = {
   obj1: {
     question: "Is $\\text{Span}\\{\\mathbf{v}_1, \\mathbf{v}_2\\}$ the same as $\\{\\mathbf{v}_1, \\mathbf{v}_2\\}$?",
@@ -1639,6 +1647,26 @@ const faqQuestions = {
     question: "What is $\\mathbb{F}$ in these definitions?",
     answer: "A placeholder for whichever field the scalars come from, usually $\\mathbb{R}$ or $\\mathbb{C}$. It joins the blackboard-bold family in appearance but differs in kind: $\\mathbb{R}$ and $\\mathbb{Z}$ name fixed sets, whereas $\\mathbb{F}$ names none. Writing definitions over $\\mathbb{F}$ states the real and complex cases in a single line.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "What is the span of the empty set?",
+    answer: "The zero subspace $\\{\\mathbf{0}\\}$, not the empty set. With no vectors to combine, the only linear combination is the one with no terms, and that empty combination is $\\mathbf{0}$. The convention also matches the span being the smallest subspace containing the given vectors: every subspace contains the empty set, and the smallest subspace of all is $\\{\\mathbf{0}\\}$.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Does a column without a pivot mean the vectors do not span?",
+    answer: "No. Spanning $\\mathbb{R}^n$ is read from the rows: the set spans exactly when every row of the echelon form holds a pivot. A column without a pivot says something else, that its vector is redundant. For $(1, 0)$, $(0, 1)$, $(1, 1)$ the third column has no pivot, yet both rows do, so the set spans $\\mathbb{R}^2$ and $(1, 1) = (1, 0) + (0, 1)$ is simply spare.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Can every Lights Out puzzle be solved?",
+    answer: "No, on the $5 \\times 5$ board only $1$ starting pattern in $4$ can be cleared. Pressing a light flips it and its edge neighbours, and pressing twice undoes itself, so the arithmetic is mod $2$. A pattern is clearable exactly when it lies in the column space of a $25 \\times 25$ matrix, and that matrix has rank $23$, so its column space holds $2^{23}$ of the $2^{25}$ patterns.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "Is $e^x$ in the span of $1, x, x^2, \\ldots$?",
+    answer: "No. A linear combination has finitely many terms, so the span of all the powers of $x$ holds only polynomials. The series $e^x = 1 + x + \\frac{x^2}{2} + \\cdots$ uses nothing but these powers, but it is an infinite sum, not a linear combination, and $e^x$ is not a polynomial. Reaching it needs limits, which the definition of span does not include.",
+    sectionId: "8"
   }
 }
 
@@ -1892,6 +1920,11 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSpacesNotationSheet}
+            current={'/linear-algebra/vector-spaces/span'}
           />,
         ]
     },

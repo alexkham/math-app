@@ -4367,7 +4367,7 @@ $x^2 + x + 1 = 0$: $\\Delta = 1 - 4 = -3 < 0$ — no real roots`,
 {
   name: "Absolute Value",
   formula: "The distance of a number from zero on the number line: $|x| = x$ if $x \\geq 0$, and $|x| = -x$ if $x < 0$.",
-  link: { label: "Absolute Value Equations", url: "/algebra/equations/absolute-value" },
+  link: { label: "Absolute Value", url: "/algebra/absolute-value" },
   fields: {
     "properties": `Always non-negative: $|x| \\geq 0$ for all $x$
 $|x| = 0$ only when $x = 0$
@@ -4375,6 +4375,7 @@ $|ab| = |a| \\cdot |b|$
 $|a + b| \\leq |a| + |b|$ (triangle inequality)`,
     "in equations": `$|f(x)| = k$ splits into $f(x) = k$ and $f(x) = -k$ when $k > 0$. When $k = 0$, solve $f(x) = 0$. When $k < 0$, no solution exists.`,
     "related concepts": `
+- [Absolute Value Page](!/algebra/absolute-value)
 - [Principal Root](!/algebra/definitions#principal_root) — $\\sqrt{x^2} = |x|$
 - [Absolute Value Equations](!/algebra/equations#10)
 - [Absolute Value Equations Page](!/algebra/equations/absolute-value)

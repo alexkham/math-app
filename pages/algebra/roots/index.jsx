@@ -13,6 +13,11 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 
 
 export async function getStaticProps(){
@@ -204,6 +209,25 @@ const keyWords = [
 
   // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "What is a Root") — template H, open
+// question. Running instance: which number squared gives 49, cubed gives 8,
+// to the fourth gives 81, squared gives 2. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its five formula boxes and four passages are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciAskTable = ciTableOpen(['question', 'power run backwards', 'answer', 'check']) +
+  ciRow(['? squared = 49', 'square', '7', '7 · 7 = 49']) +
+  ciRow(['? cubed = 8', 'cube', '2', '2 · 2 · 2 = 8'], { shade: true }) +
+  ciRow(['? to the 4th = 81', '4th power', '3', '3 · 3 · 3 · 3 = 81']) +
+  ciRow(['? squared = 2', 'square', 'about 1.414 — no whole number works', '1.414 · 1.414 ≈ 2'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
  const sectionsContent = {
   // ============================================================
 // obj0 Key Terms — /algebra/roots (hub)
@@ -345,19 +369,43 @@ The principal root convention allows radicals to behave predictably in equations
   },
 
   obj4: {
-    title: `Radical and Exponent Notation`,
-    content: `Roots can be written two ways: as radicals or as fractional exponents. Both notations represent the same operation.
-
-@academic[formula_callout:Radical to Exponent Conversion
+    title:`Radical and Exponent Notation`,
+    lead:`One operation, two spellings: a root can be written under a radical sign or as a fractional exponent, and the index becomes the denominator. All are catalogued among the [algebra symbols](!/math-symbols/algebra).`,
+    inherited:`The radical sign $\\sqrt[n]{a}$ and its parts come from [radical notation](!/algebra/roots/properties#notation); the full account of $a^{m/n}$ from [rational exponent notation](!/algebra/powers/rational-exponents#notation).`,
+    entries:[
+      {
+        id:'root-as-exponent',
+        tex:`$a^{1/n}$`,
+        read:`a to the one over n`,
+        means:`The $n$th root written as a power: $\\sqrt[n]{a} = a^{1/n}$.`,
+        cases:`Square root is $a^{1/2}$, cube root $a^{1/3}$, fourth root $a^{1/4}$ — the index of the radical is the denominator of the exponent.`,
+        alsoWritten:`$\\sqrt[n]{a}$`,
+      },
+      {
+        id:'power-over-index',
+        tex:`$a^{m/n}$`,
+        read:`a to the m over n`,
+        means:`A radical whose radicand carries a power: $\\sqrt[n]{a^m} = a^{m/n}$ — the two exponents combine into one fraction.`,
+        cases:`$\\sqrt[3]{8^2} = 8^{2/3} = 4$.`,
+      },
+      {
+        id:'root-then-power',
+        tex:`$\\left(\\sqrt[n]{a}\\right)^m$`,
+        read:`the nth root of a, raised to the m`,
+        means:`The same value as $\\sqrt[n]{a^m}$, computed in the other order: root first, then power.`,
+        cases:`$\\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$ — taking the root first keeps the numbers small. Exponent notation is easier to manipulate; radical notation is clearer for computing.`,
+      },
+    ],
+    symbolsHref:`/math-symbols/algebra`,
+    symbolsLabel:`All algebra symbols`,
+    parentHref:`/algebra`,
+    parentLabel:`Algebra`,
+    content: `@academic[formula_callout:Radical to Exponent Conversion
 $$\\sqrt[n]{a} = a^{1/n}$$
 /algebra/formulas#radical_to_exponent_conversion]@
 
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
-
-The index becomes the denominator of the exponent. Square root is $a^{1/2}$, cube root is $a^{1/3}$, fourth root is $a^{1/4}$.
-
-When the radicand itself has a power, the two exponents combine:
 
 @academic[formula_callout:Power Rule (Radicals)
 $$\\sqrt[n]{a^m} = a^{m/n}$$
@@ -366,19 +414,11 @@ $$\\sqrt[n]{a^m} = a^{m/n}$$
 @academic[formulas_link:Browse all algebra formulas
 /algebra/formulas]@
 
-This can also be computed as:
-
 @academic[formula_callout:Radical and Exponent Notation
 $$\\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$$]@
 
-For example:
-
 @academic[formula_callout:Radical and Exponent Notation
-$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$]@
-
-Exponent notation often simplifies algebraic manipulation, while radical notation is clearer for computation. Converting between forms is a key technique in [simplifying radicals](!/algebra/roots/simplifying). The full treatment appears in [rational exponents](!/algebra/roots/rational-exponents).
-
-The table below collects the two notations side by side with their direct correspondences and worked examples.`,
+$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -713,6 +753,10 @@ const schemas = {
     notes: [{ x: -6.8, y: -3.6, text: 'x² = 25 has two solutions; √ returns only the non-negative one', pos: 'e', color: 'r' }],
     caption: '√25 = 5, not ±5: the radical names one value so it can be a function' };
 
+  const conceptIntroFigures = {
+    askTable: ciAskTable,
+  };
+
   const demoUnits = {
     principal: demoUnitFrame({
       svg: renderFunctionPlotV4(fpPrincipal),
@@ -777,8 +821,36 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Overview-only
+  // questions: trial squaring, the guess-divide-average fact box and the
+  // doubling-the-cube fact box (all under "Square Roots, Cube Roots, and
+  // Beyond"), and the reading order of the roots pages (subtree outline).
+  const faqQuestions = {
+    obj1: {
+      question: "How do you estimate a square root that is not a whole number?",
+      answer: "Trap it between squares and narrow the gap. For $\\sqrt{2}$: $1.4^2 = 1.96$ and $1.5^2 = 2.25$, so the root lies between $1.4$ and $1.5$. Squaring $1.41$ and $1.42$ gives $1.9881$ and $2.0164$, so it lies between those two. Each round of trial squaring adds one correct decimal. The decimals of $\\sqrt{2}$ never end, because no whole number or fraction squares to exactly $2$, so the root can only be approximated.",
+      sectionId: "2"
+    },
+    obj2: {
+      question: "What is the fastest way to work out $\\sqrt{2}$ by hand?",
+      answer: "Guess, divide, average. For any guess $g$, the root lies between $g$ and $\\frac{2}{g}$, so their average is a better guess. Starting from $g = 1$ gives $1.5$, then $\\frac{17}{12} \\approx 1.4167$, then $\\frac{577}{408} \\approx 1.414216$, already within $0.000003$ of $\\sqrt{2}$. Each round roughly squares the error, so the number of correct digits about doubles every step. For $\\sqrt{a}$, average $g$ and $\\frac{a}{g}$ instead.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "Why can't a cube be doubled with straightedge and compass?",
+      answer: "Because doubling a cube's volume multiplies its side by $\\sqrt[3]{2} \\approx 1.26$, and straightedge and compass give only lengths built from whole numbers with arithmetic and square roots, which $\\sqrt[3]{2}$ is not. Greek geometers searched for a construction for centuries; Pierre Wantzel proved it impossible in 1837. Doubling a square is easy by contrast: the new side is $\\sqrt{2}$ times the old one, and that length is already there as the square's diagonal.",
+      sectionId: "2"
+    },
+    obj4: {
+      question: "In what order should the roots pages be read?",
+      answer: "Rules first, then working with radicals, then applications. [Properties of radicals](!/algebra/roots/properties), [radical rules](!/algebra/roots/radical-rules) and [rational exponents](!/algebra/roots/rational-exponents) say when a radical is defined and how it splits and converts. [Simplifying radicals](!/algebra/roots/simplifying) and [operations with radicals](!/algebra/roots/operations) put those rules to work. [Radical equations](!/algebra/roots/equations), [radical functions](!/algebra/roots/functions) and radicals with complex numbers apply them. Each page also stands on its own when one question sends you there.",
+      sectionId: "11"
+    }
+  }
+
    return {
   props: {
+    faqQuestions,
     rootsSubtreeOutline,
     radicalFunctionCases,
     sectionsContent,
@@ -789,6 +861,7 @@ const schemas = {
     summaryTable,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Roots & Radicals: Square, Cube & Nth Roots | Learn Math Class",
       description: "Learn roots and radicals: square roots, cube roots, principal roots, radical notation, rational exponents, simplification rules, radical equations, and functions.",
@@ -804,7 +877,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFunctionCases, 
+export default function RootsAndRadicalsPage({faqQuestions, rootsSubtreeOutline, radicalFunctionCases,
   seoData,
   sectionsContent,
   introContent,
@@ -814,9 +887,71 @@ export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFuncti
   summaryTable,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `Squaring 5 gives 25. Which number, squared, gives 49? Which number, cubed, gives 8?`,
+        content: [
+          `Each question runs a power backwards: the result is known and the base is missing. Powers have a symbol, $a^n$, for the forward direction; the backward direction needs one too.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Some answers are easy to guess, but the last one is not a whole number at all.`,
+        content: [
+          ciTable('askTable'),
+          `A number whose square is exactly $2$ exists, but it cannot be written as a whole number or a fraction. To talk about it, it needs a name and a symbol of its own.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The $n$th [root](!/algebra/definitions#root) of $b$ is the number $a$ that, raised to the power $n$, gives $b$: $\\sqrt[n]{b} = a$ exactly when $a^n = b$.`,
+        formula: [
+          `A root reverses exponentiation. When a number $a$ is raised to power $n$ and produces $b$, the $n$th root of $b$ returns $a$.`,
+          `@academic[formula_callout:What is a Root
+$$a^n = b \\quad \\Longleftrightarrow \\quad \\sqrt[n]{b} = a$$]@`,
+          `The radical symbol $\\sqrt{\\phantom{x}}$ denotes a root. The small number tucked into the upper left is the index — it specifies which root. The expression under the radical is the radicand.`,
+          `@academic[formula_callout:What is a Root
+$$\\sqrt[n]{b}$$]@`,
+          `Here $n$ is the index and $b$ is the radicand. When no index appears, square root (index 2) is assumed.`,
+        ],
+        footer: `So $\\sqrt{49} = 7$, $\\sqrt[3]{8} = 2$, $\\sqrt[4]{81} = 3$, and $\\sqrt{2} \\approx 1.414$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A root is an operation that undoes a power: behind every root there is a power that checks it.`,
+        content: [
+          `@academic[formula_callout:What is a Root
+$$\\sqrt{25} = 5 \\quad \\text{because} \\quad 5^2 = 25$$]@`,
+          `@academic[formula_callout:What is a Root
+$$\\sqrt[3]{8} = 2 \\quad \\text{because} \\quad 2^3 = 8$$]@`,
+          `@academic[formula_callout:What is a Root
+$$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@`,
+          `Every root operation poses a question: what base, raised to this power, yields the radicand?`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Going backwards is not always clean: 5 and −5 both square to 25, and no real number squares to −25.`,
+        content: `The radical sign picks one answer, the non-negative one, as [principal roots](!/algebra/roots#3) explains. What happens with a negative number under the radical is covered in [when radicands are negative](!/algebra/roots#9).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers square, cube and higher roots, principal roots, radical and exponent notation, the rules for radicals, simplifying, equations and functions with radicals, negative radicands, and the connection to powers.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -832,7 +967,7 @@ export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFuncti
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -858,6 +993,23 @@ export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFuncti
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
+          <NotationSection
+            key={'notation-obj4'}
+            title={sectionsContent.obj4.title}
+            lead={sectionsContent.obj4.lead}
+            inherited={sectionsContent.obj4.inherited}
+            entries={sectionsContent.obj4.entries}
+            symbolsHref={sectionsContent.obj4.symbolsHref}
+            symbolsLabel={sectionsContent.obj4.symbolsLabel}
+            parentHref={sectionsContent.obj4.parentHref}
+            parentLabel={sectionsContent.obj4.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={powersRootsLogsNotationSheet}
+            current={'/algebra/roots'}
+          />,
           sectionsContent.obj4.content,
           <div key={'obj4-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj4Table }} />,
@@ -950,6 +1102,22 @@ export default function RootsAndRadicalsPage({rootsSubtreeOutline, radicalFuncti
           >
             <TaxonomyOutline data={rootsSubtreeOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
           </DiagramFrame>,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Roots (Radicals) FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

@@ -1012,6 +1012,7 @@ import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagr
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderSetElements from '@/app/utils/illustrations/set-theory/relationships/setElements'
 import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationships/setElements.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1438,6 +1439,27 @@ const keyWords = [
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Equal Sets") — template F, several
+// descriptions shown to agree. Running instance: five ways of writing the set
+// of 1, 2 and 3, against {1, 2, 3, 4}. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its seven passages, two formula boxes, link,
+// pitfall, example, the equalSets demo frame and its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciWritingsTable = ciTableOpen(['written as', 'members', 'the same set as {1, 2, 3}?']) +
+  ciRow(['{1, 2, 3}', '1, 2, 3', 'yes']) +
+  ciRow(['{3, 1, 2}', '1, 2, 3', 'yes'], { shade: true }) +
+  ciRow(['{1, 2, 2, 3}', '1, 2, 3', 'yes']) +
+  ciRow(['{x ∈ ℤ : 0 &lt; x &lt; 4}', '1, 2, 3', 'yes'], { shade: true }) +
+  ciRow(['{1, 2, 3, 4}', '1, 2, 3, 4', 'no'], { last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj0: {
     title: `Key Terms`,
@@ -1701,6 +1723,11 @@ Beyond [subset](!/set-theory/subsets) containment, sets can relate to one anothe
 
 // Five questions. Those restating a section heading were cut. This page owns
 // the disjoint-sets question for the whole section.
+// FAQ pass 2026-10-31: kept the five. Added nested sets versus overlapping
+// sets (pitfall under "Overlapping Sets"), the empty block in a partition
+// (pitfall under "Partitions") and how many partitions a small set has (the
+// Genji-ko fact box and the counts after it). Same size as a proper part is
+// left to /set-theory/cardinality, which owns it under "Infinite Sets".
 const faqQuestions = {
   obj1: {
     question: "What is the difference between equal and equivalent sets?",
@@ -1725,6 +1752,21 @@ const faqQuestions = {
   obj5: {
     question: "What is a partition of a set?",
     answer: "A partition splits a set into non-empty pieces that are pairwise disjoint and together cover everything, so each element lands in exactly one piece. The even and odd integers partition the integers; residue classes mod n partition them into n pieces. The [law of total probability](!/probability/total-probability) is built directly on this idea.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Do a set and its subset count as overlapping sets?",
+    answer: "No, they are nested. Overlapping sets share at least one element, and each also has an element the other lacks. The sets $\\{1, 2\\}$ and $\\{1, 2, 3\\}$ share $1$ and $2$, but $\\{1, 2\\} \\setminus \\{1, 2, 3\\} = \\emptyset$, so the first lies inside the second. By contrast $\\{1, 2, 3\\}$ and $\\{2, 3, 4\\}$ overlap: their differences are $\\{1\\}$ and $\\{4\\}$, and their intersection $\\{2, 3\\}$ is non-empty.",
+    sectionId: "4"
+  },
+  obj7: {
+    question: "Can a partition include the empty set?",
+    answer: "No. Every block of a partition must be non-empty. The empty set slips past the other two tests, since it shares nothing with any block and adds nothing to the union, so $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}, \\emptyset\\}$ looks like a partition of $\\{1, 2, 3, 4, 5\\}$. The non-empty condition rules it out; removing $\\emptyset$ leaves the genuine partition $\\{\\{1, 3\\}, \\{2, 4\\}, \\{5\\}\\}$.",
+    sectionId: "5"
+  },
+  obj8: {
+    question: "How many ways can a set be partitioned?",
+    answer: "More than a first glance suggests. The set $\\{1, 2\\}$ has $2$ partitions, $\\{1, 2, 3\\}$ has $5$, a four-element set has $15$, and a five-element set has $52$. The counts grow quickly because each new element can join any block already formed or start a block of its own. The $52$ partitions of five elements are the answers of the Japanese incense game Genji-kō, each named after a chapter of The Tale of Genji.",
     sectionId: "5"
   }
 }
@@ -1823,6 +1865,10 @@ const schemas = {
     note: 'every element in exactly one block \u2014 no gaps, no overlaps',
   };
 
+  const conceptIntroFigures = {
+    writingsTable: ciWritingsTable,
+  };
+
   const demoUnits = {
     equalSets: demoUnitFrame({
       svg: twoSetsVennDiagrams.equalSets,
@@ -1860,6 +1906,7 @@ const schemas = {
   return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     summaryTable,
@@ -1879,9 +1926,83 @@ const schemas = {
 
  
 
-export default function SetRelationshipsPage({demoUnits, seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas}) {
+export default function SetRelationshipsPage({demoUnits, seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `{1, 2, 3}, {3, 1, 2} and "the whole numbers between 0 and 4" look different on the page. Are they different sets?`,
+        content: [
+          `Compare what each one contains, not how it is written.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Four ways of writing, one collection of members.`,
+        content: [
+          ciTable('writingsTable'),
+          `Order, repetition and the style of description change from row to row; the members $1$, $2$ and $3$ do not. The last row adds a member, and that alone makes it a different set.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `Only membership counts.`,
+        content: [
+          `Order does not matter: $\\{1, 2, 3\\} = \\{3, 1, 2\\}$. Repetition does not matter: $\\{1, 2, 2, 3\\} = \\{1, 2, 3\\}$. Only membership determines equality.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Two sets are [equal](!/set-theory/definitions#equal_sets) when they have exactly the same elements.`,
+        formula: [
+          `Two sets $A$ and $B$ are equal if they contain exactly the same elements:`,
+          `@academic[formula_callout:Equal Sets
+$$A = B \\iff \\forall x\\,(x \\in A \\iff x \\in B)$$]@`,
+          `The two [logic symbols](!/math-symbols/math-logic) in this criterion read naturally: $\\forall$ means 'for all' and $\\iff$ means 'if and only if'.`,
+        ],
+        footer: `So $\\{1, 2, 3\\} = \\{3, 1, 2\\} = \\{x \\in \\mathbb{Z} : 0 < x < 4\\}$, but $\\{1, 2, 3\\} \\neq \\{1, 2, 3, 4\\}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Equality is proved one direction at a time: each set inside the other.`,
+        content: [
+          `The standard method for proving two sets are equal is to show mutual [subset](!/set-theory/subsets) containment:`,
+          `@academic[formula_callout:Set Equality Criterion
+$$A = B \\iff (A \\subseteq B) \\land (B \\subseteq A)$$
+/set-theory/formulas#set_equality_criterion]@`,
+          `@academic[formulas_link:Browse all set theory formulas
+/set-theory/formulas]@`,
+          `This reduces the problem to two subset proofs: show every element of $A$ belongs to $B$, then show every element of $B$ belongs to $A$.`,
+          `Each direction is a separate argument that starts from an arbitrary element.`,
+          `@academic[example:Example
+For $A = \\{x \\in \\mathbb{Z} : x^2 = 1\\}$ and $B = \\{-1, 1\\}$, the first direction takes $x \\in A$, solves $x^2 = 1$ and finds $x = 1$ or $x = -1$, so $x \\in B$. The second direction takes each element of $B$ and checks it: $(-1)^2 = 1$ and $1^2 = 1$, so both lie in $A$.]@`,
+          <div key={'unit-equal-sets'} dangerouslySetInnerHTML={{ __html: demoUnits.equalSets }} />,
+          `Equality is the strictest of all set relationships — everything that follows on this page relaxes it in one direction or another.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `One inclusion is not enough.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Proving only one inclusion
+Showing $A \\subseteq B$ for $A = \\{1, 2\\}$ and $B = \\{1, 2, 3\\}$ and stopping there would conclude $A = B$, yet $3 \\in B$ and $3 \\notin A$. Equality needs $B \\subseteq A$ as well, and here it fails.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers equivalent, disjoint and overlapping sets, partitions, and a summary of how sets relate.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1897,9 +2018,7 @@ export default function SetRelationshipsPage({demoUnits, seoData, sectionsConten
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-equal-sets'} dangerouslySetInnerHTML={{ __html: demoUnits.equalSets }} />,
-          `Equality is the strictest of all set relationships — everything that follows on this page relaxes it in one direction or another.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

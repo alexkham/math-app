@@ -673,6 +673,7 @@ import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplicatio
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1262,8 +1263,47 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+  // so only what the overview itself holds: the Sylvester fact box (What a
+  // Matrix Is), the vector-as-matrix sentence, the square-only RULE box and the
+  // non-square diagonal (Dimensions), the column/row views (Collections of
+  // Vectors) and the Cayley fact box (Linear Transformations).
+  const faqQuestions = {
+    obj1: {
+      question: "Why is it called a matrix?",
+      answer: "Because J. J. Sylvester, who introduced the word in 1850, saw the array as a parent. Matrix is Latin for womb, and from one rectangular array many determinants are born, one for every choice of an equal number of rows and columns. The arrays themselves are much older: tables of coefficients were used to solve systems of equations long before anyone treated the table as a mathematical object of its own.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Is a vector a kind of matrix?",
+      answer: "Yes, once it is given a shape. A column vector in $\\mathbb{R}^n$ is an $n \\times 1$ matrix and a row vector is a $1 \\times n$ matrix; even a single number can be read as a $1 \\times 1$ matrix. That is why the matrix rules cover vectors too: in $A\\mathbf{x}$, an $m \\times n$ matrix times an $n \\times 1$ matrix gives an $m \\times 1$ column. Every row and every column of a matrix is itself a vector.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "Which matrix quantities exist only for square matrices?",
+      answer: "The determinant, the inverse, the eigenvalues and the trace. The trace, for example, adds the diagonal entries $a_{11} + a_{22} + \\cdots + a_{nn}$, and an inverse must satisfy both $AA^{-1} = I$ and $A^{-1}A = I$. Other tools work for any shape: the rank of an $m \\times n$ matrix is always defined and is at most $\\min(m, n)$, and the transpose simply turns an $m \\times n$ matrix into an $n \\times m$ one.",
+      sectionId: "2"
+    },
+    obj4: {
+      question: "Does a non-square matrix have a main diagonal?",
+      answer: "Yes. The main diagonal is made of the entries whose row and column numbers agree, $a_{11}, a_{22}, \\ldots, a_{kk}$, and it stops at $k = \\min(m, n)$. On a $3 \\times 4$ matrix it holds $a_{11}$, $a_{22}$ and $a_{33}$, and the fourth column has no entry on it. The diagonal is used most for square matrices, where its sum is the trace and, for a triangular matrix, its entries give the determinant and the eigenvalues.",
+      sectionId: "2"
+    },
+    obj5: {
+      question: "When should a matrix be read as columns instead of rows?",
+      answer: "When the question is about combining vectors. Read as $n$ columns in $\\mathbb{R}^m$, the matrix connects to span, linear independence and the column space, and $A\\mathbf{x} = x_1\\mathbf{a}_1 + \\cdots + x_n\\mathbf{a}_n$ is a linear combination of the columns weighted by the entries of $\\mathbf{x}$. Read as $m$ rows in $\\mathbb{R}^n$, it connects to the equations of a linear system and to the row space: each row of $A\\mathbf{x} = \\mathbf{b}$ is one equation.",
+      sectionId: "4"
+    },
+    obj6: {
+      question: "Why is matrix multiplication done row times column?",
+      answer: "Because the product was designed to chain two maps. Arthur Cayley set down the rule in 1858 so that the product of two matrices is the matrix of two linear substitutions carried out one after the other, and composing them produces exactly the row-times-column sums $(AB)_{ij} = \\sum_{k} a_{ik}b_{kj}$. The same origin explains why $AB \\neq BA$ in general: two motions done in reverse order usually end in different places.",
+      sectionId: "10"
+    }
+  }
+
   return {
   props: {
+    faqQuestions,
     matrixShapesOutline,
     demoUnits,
     conceptIntroFigures,
@@ -1287,7 +1327,7 @@ const schemas = {
 
 
 
-   export default function MatricesPage({matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
+   export default function MatricesPage({matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1472,6 +1512,22 @@ J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw t
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Matrices FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

@@ -694,6 +694,10 @@ How to check: test a smaller candidate. $216 \\div 6 = 36$, and $36$ is divisibl
 // also lives on the /arithmetic/divisibility hub). Kept the two application
 // questions (buried under the generic Applications h2) and reframed the
 // bounds question to the confusion people actually have.
+// FAQ pass 2026-10-31: kept the three. Added the three-number product
+// formula (pitfall under LCM of More Than Two Numbers), the 13- and 17-year
+// cicadas (fact box under Applications) and dividing before multiplying in
+// code (one sentence under Method 3).
 const faqQuestions = {
   obj1: {
     question: "How is LCM used for adding fractions?",
@@ -709,6 +713,21 @@ const faqQuestions = {
     question: "Is the LCM always bigger than both numbers?",
     answer: "The LCM is never smaller than either number, but it need not exceed both: max(a, b) ≤ lcm(a, b) ≤ a × b. When one number divides the other, the LCM simply equals the larger one — lcm(4, 12) = 12. The other extreme occurs for coprime numbers, where the LCM is the full product: lcm(7, 9) = 63.",
     sectionId: "2"
+  },
+  obj4: {
+    question: "Does the GCD–LCM formula work for three numbers?",
+    answer: "No. For two numbers $\\text{lcm}(a, b) = \\frac{ab}{\\gcd(a, b)}$, but dividing the product of three numbers by the GCD of all three overshoots. For $4$, $6$ and $9$ it gives $\\frac{216}{1} = 216$, while $\\text{lcm}(4, 6, 9) = 36$: $4$ and $6$ share a $2$ and $6$ and $9$ share a $3$, yet no factor is common to all three, so the division removes nothing. Pair the numbers instead: $\\text{lcm}(\\text{lcm}(4, 6), 9) = \\text{lcm}(12, 9) = 36$.",
+    sectionId: "9"
+  },
+  obj5: {
+    question: "How often do 13-year and 17-year cicadas emerge together?",
+    answer: "Every $221$ years. A brood that emerges every $13$ years and one that emerges every $17$ years come out in the same year only at common multiples of their periods, and since $13$ and $17$ are coprime, the least of these is the full product $13 \\cdot 17 = 221$. Broods XIII and XIX did exactly that in Illinois in 2024, for the first time since 1803.",
+    sectionId: "10"
+  },
+  obj6: {
+    question: "Why divide before multiplying when computing the LCM in code?",
+    answer: "To keep the intermediate number small. The product $a \\cdot b$ can exceed the largest value a fixed-size integer type holds even when the LCM itself fits, and the overflow corrupts the result. Computing $\\frac{a}{\\gcd(a, b)} \\cdot b$ divides first; since $\\gcd(a, b)$ divides $a$ exactly, nothing is lost, the answer is the same, and no step produces a number larger than the LCM.",
+    sectionId: "5"
   }
 }
 

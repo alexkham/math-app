@@ -677,6 +677,11 @@ import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 
 
 export async function getStaticProps(){
@@ -852,6 +857,25 @@ const keyWords = [
 </table>
 `
 
+// Concept introduction (section 1, "Definition and Terminology") — template
+// I, naming. Running instance: 2 · 2 · 2 · 2 · 2 = 2^5 = 32, beside 3^4, 10^6
+// and 4^3; picture: the powers table tool's frozen b10 state. Old obj1 text
+// is kept in sectionsContent.obj1, unused; its formula box, pitfall aside and
+// four passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciShortTable = ciTableOpen(['written out', 'how many factors', 'shorthand', 'value']) +
+  ciRow(['2 · 2 · 2 · 2 · 2', 'five 2s', '2⁵', '32'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['3 · 3 · 3 · 3', 'four 3s', '3⁴', '81'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['10 · 10 · 10 · 10 · 10 · 10', 'six 10s', '10⁶', '1,000,000'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['4 · 4 · 4', 'three 4s', '4³', '64'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj0: {
   title: `Key Terms`,
@@ -911,23 +935,43 @@ Two exponents have special names. The exponent 2 gives "squared": $a^2$ is "a sq
   },
 
   obj2: {
-    title: `Notation and Conventions`,
-    content: `Parentheses determine what the exponent applies to. Without parentheses, the exponent binds only to the symbol immediately before it:
-
-@academic[formula_callout:Notation and Conventions
+    title:`Notation and Conventions`,
+    lead:`Where an exponent attaches decides what gets raised — parentheses and stacking order are the whole grammar of a power. All are catalogued among the [algebra symbols](!/math-symbols/algebra).`,
+    inherited:`$a^n$ itself and its reading come from [natural exponent notation](!/algebra/powers/natural-exponents#notation); negative and fractional exponents from [negative exponents](!/algebra/powers/negative-exponents#notation) and [rational exponents](!/algebra/powers/rational-exponents#notation).`,
+    entries:[
+      {
+        id:'minus-unbracketed',
+        tex:`$-2^2$`,
+        read:`the negative of two squared`,
+        means:`Without parentheses the exponent binds only to the symbol right before it: $-2^2 = -(2^2) = -4$. The minus sign is applied afterwards.`,
+        confusedWith:`$(-2)^2$. Dropping the parentheses changes the answer from $4$ to $-4$.`,
+      },
+      {
+        id:'minus-bracketed',
+        tex:`$(-2)^2$`,
+        read:`negative two, squared`,
+        means:`The parentheses make $-2$ the base: $(-2)^2 = (-2) \\cdot (-2) = 4$.`,
+      },
+      {
+        id:'stacked',
+        tex:`$a^{2^3}$`,
+        read:`a to the two cubed`,
+        means:`Stacked exponents are read from the top down: $2^3 = 8$ is computed first, so $a^{2^3} = a^8$.`,
+        confusedWith:`$(a^2)^3 = a^6$. The parenthesised form is a power of a power, whose rules are on the [exponent rules](!/algebra/powers/exponent-rules) page.`,
+      },
+    ],
+    symbolsHref:`/math-symbols/algebra`,
+    symbolsLabel:`All algebra symbols`,
+    parentHref:`/algebra`,
+    parentLabel:`Algebra`,
+    content: `@academic[formula_callout:Notation and Conventions
 $$-2^2 = -(2^2) = -4$$]@
 
 @academic[formula_callout:Notation and Conventions
 $$(-2)^2 = (-2) \\cdot (-2) = 4$$]@
 
-In the first expression, the exponent applies to 2 alone; the negative sign is applied afterward. In the second, the parentheses force the exponent to apply to $-2$ as a whole.
-
-Stacked exponents are read from the top down:
-
 @academic[formula_callout:Notation and Conventions
-$$a^{2^3} = a^8$$]@
-
-This is not the same as $(a^2)^3 = a^6$. Without parentheses, $2^3$ is computed first to produce the exponent 8. The full rules governing expressions like $(a^m)^n$ appear on the [exponent rules](!/algebra/powers/exponent-rules) page.`,
+$$a^{2^3} = a^8$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -1272,6 +1316,11 @@ const schemas = {
     notes: [{ x: -2.3, y: 22, text: 'each step to the left divides by 3', pos: 'e', color: 'r' }],
     caption: '3⁰ = 1 and 3⁻ⁿ = 1/3ⁿ continue the same divide-by-3 pattern' };
 
+  const conceptIntroFigures = {
+    shortTable: ciShortTable,
+    tens: powersTableDiagrams['b10'],
+  };
+
   const demoUnits = {
     natural: demoUnitFrame({
       svg: powersTableDiagrams['b2-default'],
@@ -1321,10 +1370,40 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Overview-only
+  // questions: power versus exponent (Definition and Terminology), how
+  // non-counting exponents get a meaning (end of the definition section and
+  // Laws of Exponents), and the polynomial-versus-exponential table and the
+  // e^x versus x^e fact box (both under Exponential Functions).
+  const faqQuestions = {
+    obj1: {
+      question: "Is the exponent the same thing as the power?",
+      answer: "No. The power is the whole expression $a^n$; the exponent is only the raised number $n$ that counts the factors. So $2^5$ is a power of $2$, and $5$ is its exponent. Calling $5$ the power is a common but imprecise shortcut. The base $a$ is the factor being repeated, and the two exponents with their own names are $2$, read squared, and $3$, read cubed.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "How can an exponent be zero, negative or a fraction if it counts factors?",
+      answer: "Counting only works for positive whole numbers, so the other exponents are defined, one type at a time, in the one way that keeps the laws of exponents true. The quotient rule forces $2^0 = \\frac{2^3}{2^3} = 1$; continuing the pattern of dividing by $2$ gives $2^{-1} = \\frac{1}{2}$; and $2^{1/2}$ is $\\sqrt{2}$, because the power rule makes its square $\\left(2^{1/2}\\right)^2 = 2^1 = 2$. Each extension tightens the allowed bases, ending with $a > 0$ for irrational exponents.",
+      sectionId: "8"
+    },
+    obj3: {
+      question: "What is the difference between $x^3$ and $3^x$?",
+      answer: "In $x^3$ the base varies and the exponent is fixed, which makes it a polynomial; in $3^x$ the base is fixed and the exponent varies, which makes it an exponential function. Each step of $1$ in $x$ multiplies $3^x$ by $3$, while $x^3$ grows by a factor that keeps shrinking toward $1$. Both equal $27$ at $x = 3$, but at $x = 10$, $x^3 = 1000$ while $3^x = 59{,}049$.",
+      sectionId: "11"
+    },
+    obj4: {
+      question: "Which is bigger, $e^{\\pi}$ or $\\pi^e$?",
+      answer: "$e^{\\pi} \\approx 23.14$ is bigger than $\\pi^e \\approx 22.46$. This is no accident: for every $x > 0$, $e^x \\geq x^e$, with equality only at $x = e$, because $\\frac{\\ln x}{x}$ is largest at $x = e$. No other base has this property; with $3$ instead of $e$, $3^{2.9} \\approx 24.19$ is smaller than $2.9^3 \\approx 24.39$.",
+      sectionId: "11"
+    }
+  }
+
    return {
   props: {
+    faqQuestions,
     exponentTypeCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj10Table,
@@ -1345,9 +1424,69 @@ const schemas = {
 
  const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PowersAndExponentsPage({exponentTypeCases, seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits}) {
+export default function PowersAndExponentsPage({faqQuestions, exponentTypeCases,seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Some products repeat one factor again and again: 2 · 2 · 2 · 2 · 2, or six 10s multiplied together.`,
+        content: [
+          `Written out, such products are long and easy to miscount. Repeated addition already has a shorthand — $2 + 2 + 2 + 2 + 2 = 5 \\cdot 2$ — and repeated multiplication needs one too.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Writing the factor once, with the count as a small raised number, shrinks every one of them.`,
+        content: [
+          ciTable('shortTable'),
+          `For base $10$ the count is simply the number of zeros. Other bases can be tried in the [powers table](!/algebra/visual-tools/powers-table).`,
+        ],
+        visual: ciSvg('tens'),
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [power](!/algebra/definitions#power) $a^n$ is the product of $n$ factors, each equal to $a$; $a$ is the base and $n$ is the [exponent](!/algebra/definitions#exponent).`,
+        formula: [
+          `The expression $a^n$ is called a power. The number $a$ is the base — the quantity being repeatedly multiplied. The number $n$ is the exponent — it controls how many times the base appears as a factor.`,
+          `@academic[formula_callout:Definition and Terminology
+$$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$]@`,
+          `This definition works when $n$ is a positive integer. The expression $2^5$ means $2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 = 32$. Five factors of 2.`,
+        ],
+        footer: `So $2^5 = 32$, $3^4 = 81$, $10^6 = 1{,}000{,}000$ and $4^3 = 64$.`,
+      },
+      {
+        id: 'kind',
+        lead: `"Power" names the whole expression; the exponent is only the count.`,
+        content: [
+          `The word "power" refers to the entire expression, not just the exponent. Saying "$2^5$ is a power of 2" is correct. Saying "5 is the power" is imprecise — 5 is the exponent.`,
+          `Two exponents have special names. The exponent 2 gives "squared": $a^2$ is "a squared." The exponent 3 gives "cubed": $a^3$ is "a cubed." All other exponents use the general form: $a^n$ is "a to the power of n" or "a to the nth."`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The exponent counts factors, it is not a factor — and counting only works for positive whole numbers.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Multiplying the base by the exponent
+Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent counts factors: $4^3 = 4 \\cdot 4 \\cdot 4 = 64$.
+[Read more](!#pitfalls)]@`,
+          `What $2^0$, $2^{-1}$ or $2^{1/2}$ should mean cannot be settled by counting. The page extends the definition one step at a time, starting with [zero as an exponent](!/algebra/powers#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, natural, zero, negative, rational and irrational exponents, the laws of exponents, exponential equations and inequalities, and exponential functions.`,
+      },
+    ],
+  }
     
   const genericSections=[
       {
@@ -1363,7 +1502,7 @@ export default function PowersAndExponentsPage({exponentTypeCases, seoData, sect
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1371,6 +1510,23 @@ export default function PowersAndExponentsPage({exponentTypeCases, seoData, sect
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          <NotationSection
+            key={'notation-obj2'}
+            title={sectionsContent.obj2.title}
+            lead={sectionsContent.obj2.lead}
+            inherited={sectionsContent.obj2.inherited}
+            entries={sectionsContent.obj2.entries}
+            symbolsHref={sectionsContent.obj2.symbolsHref}
+            symbolsLabel={sectionsContent.obj2.symbolsLabel}
+            parentHref={sectionsContent.obj2.parentHref}
+            parentLabel={sectionsContent.obj2.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={powersRootsLogsNotationSheet}
+            current={'/algebra/powers'}
+          />,
           sectionsContent.obj2.content,
         ]
     },
@@ -1493,6 +1649,22 @@ export default function PowersAndExponentsPage({exponentTypeCases, seoData, sect
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Powers FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

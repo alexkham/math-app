@@ -13,6 +13,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import svdDiagrams from '@/app/components/linear-algebra copy/matrix/svdDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -128,6 +131,23 @@ const keyWords = [
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "What a Decomposition Is") — template A,
+// definition last. Running instance: A = [[2, 1], [4, 3]] = LU. Old obj1 text
+// is kept in sectionsContent.obj1, unused; its four passages and the fact
+// aside are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciLuTable = ciTableOpen(['question', 'read from L and U', 'checked on A']) +
+  ciRow(['determinant', '1 · (2 · 1) = 2', '2 · 3 − 1 · 4 = 2']) +
+  ciRow(['solve Ax = b', 'Ly = b, then Ux = y — two substitutions', 'the same x'], { shade: true }) +
+  ciRow(['new right-hand side', 'reuse L and U, no new factoring', 'the same answer'], { last: true, color: '#2563EB', cols: [1] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -394,6 +414,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    luTable: ciLuTable,
+  };
+
   const demoUnits = {
     // Hub page: one unit, on the decomposition that applies to every
     // matrix and therefore anchors the comparison the page is making.
@@ -432,10 +456,78 @@ const schemas = {
     legend: [{ label: 'decomposition' }, { label: 'restricted to special matrices', tone: 'warn' }],
   };
 
+  // DecisionMaker + DecisionWalker (obj8): decomposition-decision
+  const decompositionDecision = {
+    header: {
+      kicker: 'decompositions',
+      title: 'Which decomposition?',
+      lede: 'First the question being asked, then the shape and structure of the matrix.',
+    },
+    start: 'task',
+    nodes: {
+      task: { question: 'What is the question?', answers: [
+        { label: 'Ax = b', to: 'kind' },
+        { label: 'least squares', to: 'qr' },
+        { label: 'eigenvalues', to: 'spectral' },
+        { label: 'rank', to: 'svd' },
+      ] },
+      kind: { question: 'What kind of matrix?', hint: 'SPD = symmetric positive definite', answers: [
+        { label: 'SPD', to: 'cholesky' },
+        { label: 'square', to: 'lu' },
+        { label: 'other', to: 'svd2' },
+      ] },
+    },
+    outcomes: {
+      cholesky: { title: 'Cholesky', action: 'faster and more stable than LU for this case', link: { label: 'Cholesky', href: '/linear-algebra/decompositions#5' } },
+      lu: { title: 'LU', action: 'square and invertible: factor once, then solve cheaply for each right-hand side', link: { label: 'LU', href: '/linear-algebra/decompositions#3' } },
+      svd2: { title: 'SVD', action: 'rectangular or rank-deficient: the SVD handles any shape and rank', link: { label: 'SVD', href: '/linear-algebra/decompositions#7' } },
+      qr: { title: 'QR', action: 'also overdetermined systems; avoids condition-number issues', link: { label: 'QR', href: '/linear-algebra/decompositions#4' } },
+      spectral: { title: 'Spectral', action: 'for a symmetric matrix: real eigenvalues, orthogonal eigenvectors', link: { label: 'Spectral', href: '/linear-algebra/decompositions#6' } },
+      svd: { title: 'SVD', action: 'rank, pseudoinverse and low-rank approximation', link: { label: 'SVD', href: '/linear-algebra/decompositions#7' } },
+    },
+    last: [{ label: 'Very large systems', text: 'Iterative (Krylov subspace) methods avoid an explicit factorization altogether.' }],
+  };
+
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+  // so only what this page holds and no child page asks: the swap-matrix line
+  // and the top-ten fact box (intro), the rank pitfall under the SVD section,
+  // the LDL^T line under Relationships and the requirement column of the
+  // summary table.
+  const faqQuestions = {
+    obj1: {
+      question: "Does every matrix have an LU decomposition?",
+      answer: "No. $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has none: its first pivot is $0$, so elimination cannot start until the rows are swapped, and that gives $PA = LU$ instead. The other factorizations have conditions too: Cholesky needs a symmetric positive definite matrix, and the spectral decomposition a symmetric one. Only the SVD exists for every matrix of every shape and rank.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Which decompositions work for a rectangular matrix?",
+      answer: "The SVD and QR. The SVD $A = U\\Sigma V^T$ accepts any $m \\times n$ matrix of any rank. QR, as used on this page, needs linearly independent columns, the usual case for a tall least-squares matrix. LU is used here for square systems, and Cholesky and the spectral decomposition need square symmetric matrices. A rank-deficient rectangular matrix therefore goes to the SVD, which also gives its rank, pseudoinverse and best low-rank approximation.",
+      sectionId: "10"
+    },
+    obj3: {
+      question: "Can you find the rank of a matrix by counting its nonzero eigenvalues?",
+      answer: "No, not in general; count the nonzero singular values instead. $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has characteristic polynomial $\\lambda^2$, so both eigenvalues are $0$, yet its nonzero column gives rank $1$. Its singular values are $1$ and $0$, and one of them is nonzero. The eigenvalue count does work for symmetric matrices, and for diagonalizable ones in general, which is why it seems reliable on the first examples met.",
+      sectionId: "7"
+    },
+    obj4: {
+      question: "How is the Cholesky decomposition related to LU?",
+      answer: "It is the symmetric positive definite case of LU. For such a matrix the factorization can be written $A = LDL^T$, with $L$ unit lower triangular and $D$ a diagonal of positive pivots, and multiplying $\\sqrt{D}$ into $L$ gives the Cholesky factor. For $\\begin{pmatrix} 4 & 2 \\\\ 2 & 3 \\end{pmatrix}$, $D$ holds $4$ and $2$, and the Cholesky factor has rows $(2, 0)$ and $(1, \\sqrt{2})$. Using the symmetry halves the cost: $\\frac{1}{3}n^3$ against $\\frac{2}{3}n^3$.",
+      sectionId: "9"
+    },
+    obj5: {
+      question: "Is matrix decomposition one of the top ten algorithms of the 20th century?",
+      answer: "Yes, as a way of working rather than a single algorithm. In 2000 the journal Computing in Science and Engineering named the ten algorithms most influential on 20th-century science, and one entry was the decompositional approach to matrix computation, formalized by Alston Householder in 1951: factor the matrix once, then reuse the factors. One LU factorization, for example, solves $A\\mathbf{x} = \\mathbf{b}$ for any right-hand side and gives the determinant from the diagonal of $U$.",
+      sectionId: "1"
+    }
+  }
+
   return {
   props:{
+    faqQuestions,
+    decompositionDecision,
     decompositionTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj8Table,
@@ -453,16 +545,78 @@ const schemas = {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function DecompositionsPage({decompositionTree, 
+export default function DecompositionsPage({faqQuestions, decompositionDecision, decompositionTree,
   seoData,
   sectionsContent,
   introContent,
   obj8Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Some matrices make every job easy: a triangular system is solved by substitution, and its determinant is the product of the diagonal.`,
+        content: [
+          `Most matrices are not like that. $A = \\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}$ has no zeros to exploit.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Yet A is the product of two triangular matrices — and they answer the questions asked of A.`,
+        content: [
+          `$$A = \\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix} \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix} = LU$$`,
+          ciTable('luTable'),
+          `Every answer read from $L$ and $U$ is an answer about $A$, because their product is $A$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Splitting A into structured factors turns hard questions into easy ones, and A itself is unchanged.`,
+        content: [
+          `A decomposition does not change the matrix. It reveals the internal structure of $A$ by splitting it into interpretable components. The product of the factors always reproduces $A$ exactly — the information is rearranged, not altered.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **matrix decomposition** writes a matrix $A$ as a product of matrices with known structure — triangular, diagonal or orthogonal — whose product is exactly $A$.`,
+        formula: [
+          `A matrix decomposition (or factorization) expresses a [matrix](!/linear-algebra/matrix) $A$ as a product of two or more matrices with known, exploitable structure. The factors are typically [triangular](!/linear-algebra/matrix/types), [diagonal](!/linear-algebra/matrix/types), or [orthogonal](!/linear-algebra/matrix/types) — matrices for which solving systems, computing [determinants](!/linear-algebra/determinants), and extracting [eigenvalues](!/linear-algebra/eigen) are either trivial or dramatically simplified.`,
+        ],
+        footer: `So $A = LU$ above is a decomposition: an [LU decomposition](!/linear-algebra/definitions#lu_decomposition), with $L$ lower triangular and $U$ upper triangular.`,
+      },
+      {
+        id: 'kind',
+        lead: `A decomposition is an investment: pay once to factor, then reuse the factors.`,
+        content: [
+          `Every decomposition represents a trade: an upfront cost to compute the factors, followed by cheap operations that use them. The factorization is done once; the payoff is reaped every time the factors are applied.`,
+          `The same factors serve many different questions. A single LU factorization solves a system for any right-hand side, gives the determinant from the diagonal of $U$, and builds the inverse column by column; a single SVD gives the rank, the pseudoinverse and the best low-rank approximation at once. The work goes into finding the structure, and the answers are then read off it.`,
+          `@academic[fact,aside:true,width:35%:A way of working made the top ten
+In 2000 the journal Computing in Science and Engineering named the ten algorithms most influential on 20th-century science. One entry was not a single algorithm but the decompositional approach itself, formalized by Alston Householder in 1951: factor the matrix, then reuse the factors.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Not every matrix has every decomposition.`,
+        content: [
+          `$\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has no LU decomposition without first swapping its rows, Cholesky needs a symmetric positive definite matrix, and the spectral decomposition a symmetric one, while every matrix has an SVD. Which one fits is set out in [choosing the right decomposition](!/linear-algebra/decompositions#8).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers why decompositions matter, the LU, QR, Cholesky, spectral and singular value decompositions, how to choose among them, how they are related, a summary table and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -470,7 +624,7 @@ export default function DecompositionsPage({decompositionTree,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -531,6 +685,16 @@ export default function DecompositionsPage({decompositionTree,
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          `The paragraphs above, as a map: first the question being asked, then what the matrix looks like.`,
+          <DiagramFrame
+            key={'obj8-decision'}
+            id="decomposition-decision"
+            title="Which decomposition?"
+            source="/linear-algebra/decompositions"
+          >
+            <DecisionBox data={decompositionDecision} variant="tree" />
+          </DiagramFrame>,
+          `Two routes end at the SVD. It is the one decomposition that asks nothing of the shape or rank of the matrix, which is why it catches every case the others cannot take. The [relationships between the decompositions](!#9) show how the five connect.`,
         ]
     },
     {
@@ -566,6 +730,22 @@ export default function DecompositionsPage({decompositionTree,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Decompositions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

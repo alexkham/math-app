@@ -1054,6 +1054,9 @@ import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 export async function getStaticProps(){
@@ -1269,6 +1272,25 @@ export async function getStaticProps(){
 
 
 // formulas-optimized: v1 | 2026-06-11 | 4 callouts (obj2, obj6, obj8, obj9)
+// Concept introduction (section 1, "Introduction to De Moivre's Theorem") —
+// template H, open question. Running instance: powers of z = 1 + i, which is
+// √2 cis 45°; z⁸ = 16. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its fact aside and five passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPowerTable = ciTableOpen(['power', 'multiplied out', 'length (modulus)', 'angle (argument)']) +
+  ciRow(['z', '1 + i', '√2', '45°']) +
+  ciRow(['z²', '2i', '2', '90°'], { shade: true }) +
+  ciRow(['z³', '−2 + 2i', '2√2', '135°']) +
+  ciRow(['z⁴', '−4', '4', '180°'], { shade: true }) +
+  ciRow(['z⁸', '16', '16', '360°'], { last: true, color: '#2563EB', cols: [2, 3] }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
    obj0: {
@@ -1752,31 +1774,50 @@ How to check: consecutive roots must differ by $\\frac{360°}{n}$, here $120°$.
   `
 }
 
+// FAQ pass 2026-10-31: cut two heading questions: "What is De Moivre's
+// theorem?" (h2 De Moivre's Formula) and "What are the roots of unity?" (h2
+// Roots of Unity). Rewrote the last sentence of the nth-roots question (real
+// numbers do not have "mostly" non-real roots: 16 has 2 real fourth roots of
+// 4). Added the triple-angle formula (paragraph in the introduction), the
+// product of the roots of unity (Properties of Roots of Unity, not in a
+// heading), the chord product of a regular polygon (fact box under
+// "Geometric Interpretation of Roots") and fractional powers (notation card
+// and the introduction to n-th roots).
 const faqQuestions = {
   obj1: {
-    question: "What is De Moivre's theorem?",
-    answer: "It says that raising a complex number in polar form to a power raises the modulus to that power and multiplies the angle by it. Powers therefore become one multiplication instead of repeated expansion. It works for negative integer exponents too, and with fractional exponents 1/n it yields the n roots once full turns are added to the angle, which is what makes root extraction possible. Watch it on the [De Moivre visualiser](!/complex-numbers/visual-tools/demoivre-visualizer).",
-    sectionId: "2"
-  },
-  obj2: {
     question: "How many nth roots does a complex number have?",
-    answer: "Exactly n of them, all distinct, provided the number is not zero. The reason is that the argument is only determined up to full turns, so dividing it by n produces n genuinely different angles before the values start repeating. Real numbers have the same n complex roots, most of which are not real.",
+    answer: "Exactly n of them, all distinct, provided the number is not zero. The reason is that the argument is only determined up to full turns, so dividing it by n produces n genuinely different angles before the values start repeating. Real numbers are no exception: a nonzero real number has at most two real nth roots, and the rest are not real.",
     sectionId: "6"
   },
-  obj3: {
+  obj2: {
     question: "Why do the nth roots form a regular polygon?",
     answer: "Because all n share the same modulus, placing them on one circle, and their arguments differ by equal steps of a full turn divided by n. Equal radii and equal angular spacing is precisely the definition of a regular polygon inscribed in that circle.",
     sectionId: "7"
   },
-  obj4: {
-    question: "What are the roots of unity?",
-    answer: "The n solutions of z to the power n equals one. They sit evenly around the unit circle starting at 1, forming a regular polygon with a vertex on the positive real axis. They matter well beyond complex arithmetic, appearing in the discrete Fourier transform and throughout number theory.",
-    sectionId: "8"
-  },
-  obj5: {
+  obj3: {
     question: "What is the sum of all the nth roots of unity?",
     answer: "Zero, for every n greater than one. Geometrically the roots are symmetrically placed around the circle, so as vectors they cancel exactly. Algebraically it follows from the polynomial they satisfy, whose second coefficient is zero and therefore forces the sum of the roots to vanish.",
     sectionId: "9"
+  },
+  obj4: {
+    question: "How do you get the triple-angle formula from De Moivre's theorem?",
+    answer: "Compute $(\\cos\\theta + i\\sin\\theta)^3$ in two ways. Expanding the cube gives the real part $\\cos^3\\theta - 3\\cos\\theta\\sin^2\\theta$, while De Moivre's theorem says the real part is $\\cos 3\\theta$. Replacing $\\sin^2\\theta$ with $1 - \\cos^2\\theta$ gives $\\cos 3\\theta = 4\\cos^3\\theta - 3\\cos\\theta$, and the imaginary parts give $\\sin 3\\theta = 3\\sin\\theta - 4\\sin^3\\theta$ the same way. Any $n$ works, writing $\\cos n\\theta$ and $\\sin n\\theta$ as polynomials in $\\cos\\theta$ and $\\sin\\theta$.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "What is the product of all the nth roots of unity?",
+    answer: "$(-1)^{n+1}$: it is $1$ when $n$ is odd and $-1$ when $n$ is even. The roots are exactly the roots of $z^n - 1 = (z - z_0)(z - z_1)\\cdots(z - z_{n-1})$, and comparing constant terms gives $(-1)^n z_0z_1\\cdots z_{n-1} = -1$. For $n = 4$, $1 \\cdot i \\cdot (-1) \\cdot (-i) = -1$; for $n = 3$, the two non-real roots are conjugates whose product is $1$.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "What do the distances from one corner of a regular polygon to all the others multiply to?",
+    answer: "Exactly $n$, for a regular $n$-gon drawn in a circle of radius $1$. Place the corners at the $n$th roots of unity, with the chosen corner at $1$. Dividing $z^n - 1$ by $z - 1$ leaves $1 + z + \\cdots + z^{n-1}$, which is the product of $z$ minus each other corner, and at $z = 1$ it equals $n$. For a square the three distances are $\\sqrt{2}$, $2$ and $\\sqrt{2}$, with product $4$.",
+    sectionId: "7"
+  },
+  obj7: {
+    question: "Does De Moivre's theorem work for fractional powers?",
+    answer: "Not as a single formula. It holds for integer powers, where $z^n$ has one value. For the power $\\frac{1}{n}$, dividing the angle gives only one of the $n$ roots, because $\\theta$ can be replaced by $\\theta + 2\\pi k$ before dividing. With $-1 = \\text{cis}\\,\\pi$ and $n = 2$, the angle $\\pi$ gives $\\text{cis}\\,\\frac{\\pi}{2} = i$, while the same number written as $\\text{cis}\\,3\\pi$ gives $\\text{cis}\\,\\frac{3\\pi}{2} = -i$; both square to $-1$.",
+    sectionId: "5"
   }
 }
 
@@ -1864,6 +1905,10 @@ const schemas = {
     ticks: { re: ['', '−2'], im: ['2i', '−2i'] },
     roots: [{ arg: 0, label: '2' }, { arg: 120, label: '−1 + √3 i' }, { arg: 240, label: '−1 − √3 i' }],
     captionLines: ['z³ = 8 has one real root, 2, and two complex ones —', 'three roots of modulus 2, 120° apart'],
+  };
+
+  const conceptIntroFigures = {
+    powerTable: ciPowerTable,
   };
 
   const demoUnits = {
@@ -1988,6 +2033,7 @@ const schemas = {
     unityParityCases,
     demoivrePowerSteps,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -2020,10 +2066,71 @@ export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases, 
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `What is (1 + i)⁸?`,
+        content: [
+          `Multiplying out eight brackets of $(1 + i)$ is long and easy to get wrong. Watching the length and the angle of each power tells a much simpler story.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each power multiplies the length by √2 and turns the angle by another 45°.`,
+        content: [
+          ciTable('powerTable'),
+          `The lengths go $\\sqrt{2}, 2, 2\\sqrt{2}, 4, \\ldots$ — powers of $\\sqrt{2}$ — and the angles go $45°, 90°, 135°, 180°, \\ldots$ — multiples of $45°$. Eight steps reach length $16$ at angle $360°$, the number $16$.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `In algebraic form, powers drown in computation; in trigonometric form, they follow one simple rule.`,
+        content: [
+          `Raising complex numbers to powers in [algebraic form](!/complex-numbers/algebraic-form) quickly becomes unmanageable. Squaring $z = a + bi$ requires expanding $(a + bi)^2 = a^2 + 2abi + b^2i^2 = (a^2 - b^2) + 2abi$. Cubing demands multiplying this result by $a + bi$ again. By the time we reach $z^{10}$ or $z^{100}$, the algebraic approach drowns in computation.`,
+          `The [trigonometric form](!/complex-numbers/trigonometric-form) offers rescue. When $z = r\\text{cis}\\theta$, multiplication becomes elegant: multiply moduli, add arguments. Squaring gives $z^2 = r^2\\text{cis}(2\\theta)$. Cubing gives $z^3 = r^3\\text{cis}(3\\theta)$. The pattern suggests a general rule — and De Moivre's theorem confirms it.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**De Moivre's theorem** says that for a complex number in trigonometric form and any integer $n$, $(r\\,\\text{cis}\\,\\theta)^n = r^n\\,\\text{cis}(n\\theta)$: raise the modulus to the power, multiply the angle by $n$.`,
+        formula: [
+          `The formula is set out in full, with its special cases, in [De Moivre's formula](!/complex-numbers/demoivre-theorem#2).`,
+        ],
+        footer: `So $(1 + i)^8 = (\\sqrt{2})^8\\,\\text{cis}(8 \\cdot 45°) = 16\\,\\text{cis}\\,360° = 16$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The theorem turns a power into one power of a length and one multiple of an angle.`,
+        content: [
+          `De Moivre's theorem stands among the most useful results in complex analysis. It reduces high powers to trivial calculations, enables extraction of roots, derives trigonometric identities, and appears throughout physics and engineering wherever oscillations and rotations arise.`,
+          `The identities come from computing the same power in two ways. Expanding $(\\cos\\theta + i\\sin\\theta)^3$ term by term gives the real part $\\cos^3\\theta - 3\\cos\\theta\\sin^2\\theta$, while De Moivre's theorem says the real part is $\\cos 3\\theta$. Replacing $\\sin^2\\theta$ by $1 - \\cos^2\\theta$ turns this into $\\cos 3\\theta = 4\\cos^3\\theta - 3\\cos\\theta$, and the same comparison for any $n$ writes $\\cos n\\theta$ and $\\sin n\\theta$ as polynomials in $\\cos\\theta$ and $\\sin\\theta$.`,
+          `Abraham de Moivre, a French mathematician living in England, discovered this relationship in the early eighteenth century. Though he never stated the theorem in its modern form, his work on probability and trigonometric identities laid the foundation. The theorem bearing his name connects complex exponentiation to the simple operation of multiplying an angle by an integer.`,
+          `@academic[fact,aside:true,width:35%:A degree-45 equation solved by angles
+In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 45x^{43} + 945x^{41} - \\cdots + 45x = A$. Viète saw that the left side is $2\\sin 45\\theta$ written in terms of $x = 2\\sin\\theta$, the identity this theorem gives for $n = 45$, and listed 23 positive solutions.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The number must first be in trigonometric form, and the angle is multiplied by n, not raised to the power n.`,
+        content: `$(\\text{cis}\\,45°)^3$ is $\\text{cis}\\,135°$, not an angle of $45^3$ degrees. Turning $a + bi$ into $r\\,\\text{cis}\\,\\theta$ takes the modulus and the argument, as described in [trigonometric form](!/complex-numbers/trigonometric-form).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers De Moivre's formula, its proof, applying it to powers and roots, and the trigonometric identities it produces.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2040,7 +2147,7 @@ export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2162,6 +2269,11 @@ export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases, 
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/demoivre-theorem'}
           />,
         ]
     },

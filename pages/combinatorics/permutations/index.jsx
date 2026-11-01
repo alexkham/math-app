@@ -2582,6 +2582,10 @@ Mastering these permutation types gives you the tools to solve ordering problems
 
 
 
+// FAQ pass 2026-10-31: kept the five existing questions. Added the prefix
+// !n (Permutation Notation card), the combination lock and Stirling's
+// accuracy (both only in fact boxes) and the 1/e chance of no fixed point
+// (under "Derangement"; probability/indicators keeps the expected number).
 const faqQuestions = {
   obj1: {
     question: "What is a permutation?",
@@ -2607,6 +2611,26 @@ const faqQuestions = {
     question: "What is the difference between nPr and n factorial?",
     answer: "Factorial arranges every item, while nPr arranges only r of them chosen from n. Factorial is the special case where r equals n, so all positions are filled. Reading nPr as a factorial of something is a common slip; it is a descending product that stops after r terms rather than continuing to one.",
     sectionId: "notation"
+  },
+  obj6: {
+    question: "What does an exclamation mark before a number mean?",
+    answer: "It is the subfactorial: $!n$ counts the derangements of $n$ items, the orders that leave no item in its original place. Older texts write it $D_n$. The position of the mark is the whole difference, since $!4 = 9$ while $4! = 24$: of the $24$ orders of four items, only $9$ move every item.",
+    sectionId: "notation"
+  },
+  obj7: {
+    question: "Is a combination lock really a combination?",
+    answer: "No, its codes are permutations with repetition. A lock set to 4-7-2 does not open at 2-7-4, so order matters, and two dials may show the same digit. Three dials with the digits 0 to 9 therefore give $10^3 = 1000$ codes. A true combination of three different digits, where only the set of digits counts, would leave just $\\binom{10}{3} = 120$.",
+    sectionId: "with"
+  },
+  obj8: {
+    question: "How accurate is Stirling's formula?",
+    answer: "Very, even for small $n$. Stirling's formula $n! \\approx \\sqrt{2\\pi n}\\left(\\frac{n}{e}\\right)^n$ gives about $3{,}598{,}696$ for $n = 10$, less than $1\\%$ below $10! = 3{,}628{,}800$. It comes out slightly low, with a relative error close to $\\frac{1}{12n}$, so the error keeps shrinking: about $1.7\\%$ at $n = 5$ and $0.4\\%$ at $n = 20$.",
+    sectionId: "full"
+  },
+  obj9: {
+    question: "What is the chance that nobody gets their own hat back?",
+    answer: "About $37\\%$, close to $\\frac{1}{e}$, for any group beyond a handful. The share of orders with no fixed point is $\\frac{!n}{n!}$: $\\frac{9}{24} = 0.375$ for $4$ guests and $\\frac{44}{120} \\approx 0.367$ for $5$, already near $\\frac{1}{e} \\approx 0.3679$. So the chance that at least one guest gets their own hat settles near $63\\%$, almost whatever the number of guests.",
+    sectionId: "8"
   }
 }
 

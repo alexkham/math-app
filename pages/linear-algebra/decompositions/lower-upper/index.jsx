@@ -2833,6 +2833,9 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import luDiagrams from '@/app/components/linear-algebra copy/matrix/luDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
 
 
 
@@ -3184,6 +3187,27 @@ const keyWords = [
 //   obj7 (Determinant via LU) — direct $$ replacement (canonical general form)
 // obj2 worked-example matrix displays preserved (derivation steps)
 
+// Concept introduction (section 1, "What LU Decomposition Is") — template A,
+// definition last. Running instance: A with rows (2, 1), (6, 4); one
+// elimination step with multiplier 3 gives U = (2, 1), (0, 1) and
+// L = (1, 0), (3, 1). Old obj1 text is kept in sectionsContent.obj1, unused;
+// its formula box with link, three passages and the luDone demo frame with
+// its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciElimTable = ciTableOpen(['piece', 'rows', 'where it comes from']) +
+  ciRow(['A', '(2, 1), (6, 4)', 'the matrix to be eliminated']) +
+  ciRow(['row operation', 'row 2 − 3 · row 1', 'the multiplier 3 clears the 6'], { shade: true }) +
+  ciRow(['U', '(2, 1), (0, 1)', 'the result of elimination: upper triangular']) +
+  ciRow(['L', '(1, 0), (3, 1)', 'the multiplier 3 kept below a diagonal of ones'], { shade: true }) +
+  ciRow(['L · U', '(2, 1), (6, 4)', 'multiplying back returns A'], { last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `What LU Decomposition Is`,
@@ -3384,7 +3408,7 @@ This makes determinant computation essentially free once LU is available — jus
 
 With LU: factor $A$ once ($\\frac{2}{3}n^3$), then solve $n$ systems ($n \\times O(n^2) = O(n^3)$). Total cost: roughly $\\frac{8}{3}n^3$ counted directly, or $2n^3$ when the zeros in the columns of $I$ are used — cheaper than $n$ independent eliminations.
 
-In practice, computing $A^{-1}$ explicitly is rarely the right approach. Solving $A\\mathbf{x} = \\mathbf{b}$ via LU is faster than multiplying $A^{-1}\\mathbf{b}$, and more numerically stable. The [inverse](!/linear-algebra/matrix/inverse) formula is primarily a theoretical tool; for computation, LU solves are preferred.`,
+In practice, computing $A^{-1}$ explicitly is rarely the right approach. Solving $A\\mathbf{x} = \\mathbf{b}$ via LU costs about the same per right-hand side as multiplying $A^{-1}\\mathbf{b}$ (about $2n^2$ each), but it never forms $A^{-1}$, which costs about $2n^3$ against $\\frac{2}{3}n^3$ for the factorization, and it is more numerically stable. The [inverse](!/linear-algebra/matrix/inverse) formula is primarily a theoretical tool; for computation, LU solves are preferred.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3500,6 +3524,11 @@ How to check: count the swaps, or compute $\\det P$, which is $+1$ or $-1$. For 
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added LU versus
+// Gaussian elimination (one sentence under "Computational Cost"), the
+// growth limit of partial pivoting (fact box under "Partial Pivoting") and
+// inverse versus solving (a paragraph under "LU and the Inverse"); no
+// heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Do both $L$ and $U$ have ones on the diagonal?",
@@ -3515,6 +3544,21 @@ const faqQuestions = {
     question: "Is $UL$ the same as $LU$?",
     answer: "No, they are different products describing different matrices, and the order in $A = LU$ is fixed by the elimination that produced it: the lower factor records what was done, the upper factor what was left. The pair is also meant to be kept and reused, so multiplying back to $A$ is only ever a check.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "What is the difference between LU decomposition and Gaussian elimination?",
+    answer: "None in the arithmetic: LU is Gaussian elimination with the multipliers kept instead of thrown away. $U$ is the echelon form that elimination reaches, and $L$ stores each multiplier at the position of the zero it created. For a single system both cost about $\\frac{2}{3}n^3$ operations. The difference shows with the next right-hand side, which costs only two triangular solves, about $2n^2$, instead of a fresh elimination.",
+    sectionId: "10"
+  },
+  obj5: {
+    question: "Does partial pivoting guarantee an accurate LU factorization?",
+    answer: "No, though it rarely fails in practice. Pivoting keeps every multiplier in $L$ at most $1$ in size, but an entry can still double at each step, so the entries of $U$ can grow by a factor of up to $2^{n-1}$, and rounding errors grow with them. The bound is reached by the matrix with ones on the diagonal and in the last column and $-1$ below the diagonal; at $n = 60$ that growth ruins a double-precision solution.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Should you compute the inverse to solve $A\\mathbf{x} = \\mathbf{b}$?",
+    answer: "No, solve with the LU factors unless the inverse itself is the answer wanted. Forming $A^{-1}$ costs about $2n^3$ operations, three times the $\\frac{2}{3}n^3$ of the factorization, and multiplying $A^{-1}\\mathbf{b}$ afterwards costs as much as the two triangular solves it replaces while being less accurate. With the factors stored, every new right-hand side is just a forward and a back substitution.",
+    sectionId: "8"
   }
 }
 
@@ -3599,6 +3643,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    elimTable: ciElimTable,
+  };
+
   const demoUnits = {
     construction: demoUnitFrame({
       svg: luDiagrams.eliminate,
@@ -3626,6 +3674,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     luFactors,
@@ -3653,10 +3702,70 @@ export default function LUDecompositionPage({
   obj10Table,
   luReadings,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Gaussian elimination solves Ax = b — but every new right-hand side b starts the elimination over from the beginning.`,
+        content: [
+          `When the same matrix $A$ meets many different right-hand sides — the same structure under different loads, the same circuit under different voltages — the row operations on $A$ are identical every time. Only $\\mathbf{b}$ changes, yet the whole elimination is repeated.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For A with rows (2, 1), (6, 4), one row operation does all the work: subtract 3 times row 1 from row 2.`,
+        content: [
+          ciTable('elimTable'),
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The multiplier and the result are all that elimination produces — keep both, and A is rebuilt as their product.`,
+        content: [
+          `Row 1 of $L \\cdot U$ is $1 \\cdot (2, 1) = (2, 1)$; row 2 is $3 \\cdot (2, 1) + 1 \\cdot (0, 1) = (6, 4)$. The elimination has been stored as two triangular matrices, ready to be reused for any $\\mathbf{b}$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [LU decomposition](!/linear-algebra/definitions#lu_decomposition) writes a square matrix as $A = LU$, with $L$ unit lower triangular, holding the elimination multipliers, and $U$ upper triangular, the result of elimination.`,
+        formula: [
+          `The LU decomposition writes an $n \\times n$ [matrix](!/linear-algebra/matrix) $A$ as`,
+          `@academic[formula_callout:lu_decomposition|LU Decomposition|$$A = LU$$]@
+@academic[formulas_link:/linear-algebra/formulas#lu_decomposition]@`,
+          `where $L$ is lower [triangular](!/linear-algebra/matrix/types) with ones on the diagonal (unit lower triangular) and $U$ is upper triangular. The matrix $U$ is the [row echelon form](!/linear-algebra/linear-systems/echelon-form) of $A$, and $L$ stores the multipliers that [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) used to produce it.`,
+        ],
+        footer: `So $A$ with rows $(2, 1)$, $(6, 4)$ is $LU$ with $L$ rows $(1, 0)$, $(3, 1)$ and $U$ rows $(2, 1)$, $(0, 1)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `LU is elimination saved for reuse.`,
+        content: [
+          `The factorization captures the entire elimination process in a reusable form. Instead of performing elimination from scratch for every new right-hand side $\\mathbf{b}$, the work is done once (producing $L$ and $U$) and reused cheaply for each solve.`,
+          <div key={'unit-luDone'} dangerouslySetInnerHTML={{ __html: demoUnits.luDone }} />,
+          `Everything elimination does is recorded in these two triangles, so it never has to be done twice.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Not every matrix has an LU decomposition without row swaps.`,
+        content: `For the matrix with rows $(0, 1)$, $(1, 0)$ the first pivot is $0$, so elimination cannot even start. Swapping the rows first fixes it, and the swap is recorded as described in [partial pivoting](!/linear-algebra/decompositions/lower-upper#5).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, construction from Gaussian elimination, the structure of L and U, when LU exists without pivoting, partial pivoting, solving systems, the determinant and inverse, a worked 4×4 example, and the computational cost.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -3664,9 +3773,7 @@ export default function LUDecompositionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-luDone'} dangerouslySetInnerHTML={{ __html: demoUnits.luDone }} />,
-          `Everything elimination does is recorded in these two triangles, so it never has to be done twice.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -3685,6 +3792,11 @@ export default function LUDecompositionPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDecompNotationSheet}
+            current={'/linear-algebra/decompositions/lower-upper'}
           />,
         ]
     },

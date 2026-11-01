@@ -814,6 +814,9 @@ import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r
 import reflectionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1123,6 +1126,26 @@ const determinantGeometry = {
 
 // formulas-injected: v1 | 2026-06-16 | 5 callouts (obj1 determinant_signed_area_2d direct, obj2 determinant_signed_volume_3d direct, obj3 determinant_volume_scaling_factor prose, obj7 triangle_area_via_determinant direct + tetrahedron_volume_via_determinant direct)
 
+// Concept introduction (section 1, "Signed Area in Two Dimensions") —
+// template F, two descriptions shown to agree. Running instance: four pairs of
+// columns, area measured by geometry against ad − bc. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its five passages, the formula box, the
+// example box, the signed-area diagram, the signedarea demo frame and its line
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciAreaTable = ciTableOpen(['columns u, v', 'area by geometry', 'ad − bc']) +
+  ciRow(['(3, 0), (1, 4)', 'base 3 × height 4 = 12', '12']) +
+  ciRow(['(2, 0), (0, 2)', 'a 2 × 2 square: 4', '4'], { shade: true }) +
+  ciRow(['(2, 1), (4, 2)', 'on one line: 0', '0']) +
+  ciRow(['(1, 4), (3, 0)', 'the first shape again: 12', '−12'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Signed Area in Two Dimensions`,
@@ -1426,6 +1449,11 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added determinant 1
+// versus rotation (pitfall box under "Orientation"), what a zero determinant
+// does not say (summary card and closing paragraph, rank) and the absolute
+// value on the Jacobian (sentence under "The Change-of-Variables Formula");
+// no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "Should you drop the minus sign from a negative determinant?",
@@ -1441,6 +1469,21 @@ const faqQuestions = {
     question: "Does \"the Jacobian\" mean the matrix or the determinant?",
     answer: "Both, depending on the text, which is a genuine source of confusion. Some authors use the word for the matrix of partial derivatives and others for its determinant. The practical rule: an integral asking for the Jacobian always wants the number, since it is the volume scaling factor that the change of variables requires.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Does a determinant of 1 mean the matrix is a rotation?",
+    answer: "No. A determinant of $1$ only says that the map keeps area and orientation; lengths and angles can still change. The shear $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ has determinant $1$ but sends $(0, 1)$ to $(1, 1)$, a vector of length $\\sqrt{2}$. A rotation also needs $A^T A = I$, so that its columns have length $1$ and are perpendicular. The fact that rotations have determinant $1$ does not run backwards.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "Does a zero determinant tell you how much a matrix collapses space?",
+    answer: "No, it only reports that a collapse happened. A matrix that flattens $\\mathbb{R}^3$ onto a plane and one that crushes it to a single point both have determinant $0$, because in either case the image has no three-dimensional volume. How far the collapse went, meaning the dimension of the image, is measured by the rank: $2$ for the plane, $0$ for the point. The determinant detects a collapse; the rank measures it.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "Why is there an absolute value on the Jacobian in a change of variables?",
+    answer: "Because the integral adds up unsigned area or volume. The Jacobian determinant $\\det(J_T)$ is the local scale factor of the map, and its sign only records whether the map reverses orientation near that point. Areas and volumes are never negative, so the formula uses $|\\det(J_T)|$. In polar coordinates the factor is $r$, and leaving it out gives the unit disk an area of $2\\pi$ instead of $\\pi$.",
+    sectionId: "6"
   }
 }
 
@@ -1524,6 +1567,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
+  const conceptIntroFigures = {
+    areaTable: ciAreaTable,
+  };
 
   const demoUnits = {
     signedarea: demoUnitFrame({
@@ -1663,6 +1710,7 @@ const schemas = {
     detSignCases,
     detScaleCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1691,18 +1739,56 @@ export default function DeterminantGeometryPage({signedAreaCases, detSignCases, 
    obj7Table,
    determinantGeometry,
    faqQuestions,
-   schemas, demoUnits
+   schemas, demoUnits, conceptIntroFigures
  }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
-  const genericSections=[
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The columns of a 2×2 matrix are two arrows from the origin, and together they span a parallelogram.`,
+        content: [
+          `How large is that parallelogram — and does the number $ad - bc$ already know?`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Measured by geometry and computed as ad − bc, the areas agree — up to a sign.`,
+        content: [
+          ciTable('areaTable'),
+          `The last row is the first parallelogram with its columns listed in the other order. The shape is the same; only the sign of $ad - bc$ changes.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `The determinant is the area, with a sign that records the order of the columns.`,
+        content: [
+          `The sign encodes orientation. When $\\det(A) > 0$, the pair $(\\mathbf{u}, \\mathbf{v})$ follows the standard counterclockwise ordering — rotating from $\\mathbf{u}$ toward $\\mathbf{v}$ sweeps counterclockwise. When $\\det(A) < 0$, the pair is clockwise. When $\\det(A) = 0$, the two vectors are parallel and the parallelogram degenerates to a line segment with zero area.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The determinant of a $2 \\times 2$ matrix is the **signed area** of the parallelogram spanned by its columns: the area, positive when the columns turn counterclockwise and negative when they turn clockwise.`,
+        formula: [
+          `The columns of a $2 \\times 2$ matrix $A$ define two vectors in $\\mathbb{R}^2$ emanating from the origin. These vectors span a parallelogram, and the determinant of $A$ equals the signed area of that parallelogram.`,
+          `For $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the columns are $\\mathbf{u} = (a, c)$ and $\\mathbf{v} = (b, d)$. The unsigned area of the parallelogram they span can be computed from the [cross product](!/linear-algebra/vectors/cross-product) magnitude in three dimensions by embedding both vectors with a zero third component, but in two dimensions the formula reduces directly to`,
+          `@academic[formula_callout:determinant_signed_area_2d|Determinant Signed Area 2D|$$\\text{signed area}(\\mathbf{u}, \\mathbf{v}) = \\det\\!\\begin{pmatrix} u_1 & v_1 \\\\ u_2 & v_2 \\end{pmatrix}$$]@
+@academic[formulas_link:/linear-algebra/formulas#determinant_signed_area_2d]@`,
+          `For the matrix above, this evaluates to $ad - bc = \\det(A)$.`,
+        ],
+        footer: `So $\\begin{pmatrix} 3 & 1 \\\\ 0 & 4 \\end{pmatrix}$ has signed area $12$, and swapping its columns gives $-12$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A 2×2 determinant is a geometric quantity, not just a formula.`,
+        content: [
           <DiagramFrameV2
             key={'obj1-diagram'}
             id="determinant-signed-area-cases"
@@ -1711,8 +1797,36 @@ export default function DeterminantGeometryPage({signedAreaCases, detSignCases, 
           >
             <CaseSplit data={signedAreaCases} variant="poster" proseStyle="cards" theme={figureTheme} />
           </DiagramFrameV2>,
-                  <div key={'unit-signedarea'} dangerouslySetInnerHTML={{ __html: demoUnits.signedarea }} />,
+          `@academic[example:Example
+
+For $A = \\begin{pmatrix} 3 & 1 \\\\ 0 & 4 \\end{pmatrix}$, the columns are $(3, 0)$ and $(1, 4)$. The determinant is $3 \\cdot 4 - 1 \\cdot 0 = 12$. The parallelogram has area $12$, and since the sign is positive, the columns are counterclockwise-ordered.
+
+For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $1 \\cdot 0 - 3 \\cdot 4 = -12$. The area is still $12$, but the negative sign means the columns are clockwise-ordered — swapping the columns reversed the orientation.]@`,
+          <div key={'unit-signedarea'} dangerouslySetInnerHTML={{ __html: demoUnits.signedarea }} />,
           `The sign of that number, set aside for now, is what the orientation section below is about.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Zero area means the columns are parallel, not that the matrix is zero.`,
+        content: [
+          `$\\begin{pmatrix} 2 & 4 \\\\ 1 & 2 \\end{pmatrix}$ has no zero entries, yet its determinant is $0$: both columns lie on one line. The same reading in three dimensions, with volume in place of area, is in [signed volume in three dimensions](!/linear-algebra/determinants/geometry#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, signed volume in three dimensions, volume scaling in n dimensions, orientation, linear transformations as geometric mappings, the change-of-variables formula, area and volume formulas, a summary and common pitfalls.`,
+      },
+    ],
+  }
+
+  const genericSections=[
+    {
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1731,6 +1845,11 @@ export default function DeterminantGeometryPage({signedAreaCases, detSignCases, 
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDeterminantsNotationSheet}
+            current={'/linear-algebra/determinants/geometry'}
           />,
         ]
     },

@@ -1128,6 +1128,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 
 
 export async function getStaticProps(){
@@ -1694,7 +1696,7 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
         read: `a dependence relation — an explicit witness to dependence`,
         means: `Dependence gets a named object rather than a mere negation: a **dependence relation** is one specific combination with at least one nonzero coefficient, and exhibiting it settles the question — **Dependence Relations** below works with them directly.`,
         cases: `Any single nonzero coefficient lets that vector be solved for in terms of the others, which is the sense in which one of them is redundant; a set can carry many different dependence relations, and the notation names an individual witness, not the whole failure.`,
-        confusedWith: `"Dependent" as a claim about every vector. A dependent set need not have every vector redundant — $\\{\\mathbf{v}, \\mathbf{v}, \\mathbf{w}\\}$ is dependent while $\\mathbf{w}$ may be unrelated to the rest; the relation identifies which vectors participate.`,
+        confusedWith: `"Dependent" as a claim about every vector. A dependent set need not have every vector redundant — the list $(\\mathbf{v}, \\mathbf{v}, \\mathbf{w})$ is dependent while $\\mathbf{w}$ may be unrelated to the rest; the relation identifies which vectors participate.`,
       },
       {
         id: 'wronskian',
@@ -1943,6 +1945,13 @@ How to check: work out $W$ as an expression in $x$ before substituting anything.
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the zero
+// vector in a set (corollary under "Definition"), checking only pairs
+// (pitfall box under "Geometric Interpretation"), a zero row after
+// reduction (pitfall box under the independent-set worked example) and
+// exponentials (fact box under "Independence in Abstract Vector Spaces").
+// Wronskian questions not added: determinants/applications already asks
+// whether a zero Wronskian proves dependence.
 const faqQuestions = {
   obj1: {
     question: "Why is independence stated as an implication rather than an equation?",
@@ -1951,13 +1960,33 @@ const faqQuestions = {
   },
   obj2: {
     question: "Does a dependent set mean every vector in it is redundant?",
-    answer: "No. Dependence is a property of the set, and it only requires that some non-trivial relation exists. In $\\{\\mathbf{v}, \\mathbf{v}, \\mathbf{w}\\}$ the repetition creates dependence while $\\mathbf{w}$ may be entirely unrelated to the others. A dependence relation identifies which vectors take part, and the rest are untouched by it.",
+    answer: "No. Dependence is a property of the whole collection, and it only requires that some non-trivial relation exists. In the list $(\\mathbf{v}, \\mathbf{v}, \\mathbf{w})$ the repetition creates dependence while $\\mathbf{w}$ may be entirely unrelated to the others. A dependence relation identifies which vectors take part, and the rest are untouched by it.",
     sectionId: "notation"
   },
   obj3: {
     question: "Is the Wronskian a number or a function?",
     answer: "A function of $x$, which is easy to miss because it is written as a determinant. Asking whether the Wronskian is zero therefore has no meaning until you attach a point or an interval. That differs from the determinant test for vectors in $\\mathbb{R}^n$, where the entries are constants and the answer is a single number.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can a set containing the zero vector be linearly independent?",
+    answer: "No. The combination $1 \\cdot \\mathbf{0}$, with weight $0$ on every other vector, equals $\\mathbf{0}$ and has a nonzero weight, so it is a nontrivial relation whatever the other vectors are. That is why the zero vector can never belong to a basis. A single nonzero vector, by contrast, is always independent, since $c\\mathbf{v} = \\mathbf{0}$ with $\\mathbf{v} \\neq \\mathbf{0}$ forces $c = 0$.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "If no two vectors are parallel, is the set independent?",
+    answer: "Only when there are just two vectors. With three or more, a dependence can involve several vectors at once while no pair is parallel: $(1, 0, 0)$, $(0, 1, 0)$ and $(1, 1, 0)$ are pairwise non-parallel, yet the third is the sum of the first two and all three lie in the plane $z = 0$. Test the whole set by row reduction, or by the determinant when there are $n$ vectors in $\\mathbb{R}^n$.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Does a zero row after row reduction mean the vectors are dependent?",
+    answer: "No. Independence is read from the columns: the vectors are independent exactly when every column holds a pivot. The vectors $(1, 0, 1)$ and $(0, 1, 2)$ reduce to a $3 \\times 2$ echelon form with a zero last row, yet both columns have pivots, so they are independent. The zero row says something else, that the two vectors do not span $\\mathbb{R}^3$. Only for a square matrix do the two signals always come together.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "Are exponential functions with different rates linearly independent?",
+    answer: "Yes. For rates $a_1 < \\cdots < a_n$, divide a relation $c_1 e^{a_1 x} + \\cdots + c_n e^{a_n x} = 0$ by $e^{a_n x}$ and let $x \\to \\infty$: every other term tends to $0$, which forces $c_n = 0$, and the remaining coefficients vanish in turn. Since there are infinitely many such functions, the continuous functions on the real line have no finite basis.",
+    sectionId: "8"
   }
 }
 
@@ -2204,6 +2233,11 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSpacesNotationSheet}
+            current={'/linear-algebra/vector-spaces/linear-independence'}
           />,
         ]
     },

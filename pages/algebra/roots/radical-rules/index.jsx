@@ -13,6 +13,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 
 
 export async function getStaticProps(){
@@ -761,6 +762,12 @@ These patterns are not arbitrary — they derive from the connection between rad
 }
 
 
+// FAQ pass 2026-10-31: kept the three existing questions; renumbered the
+// third key from obj4 to obj3 (obj3 was missing). Added the cube root from a
+// square-root key (fact box and paragraph under "Radical of a Radical"),
+// adding versus multiplying nested indices (pitfall under the same section)
+// and taking a minus sign out of a radical (the odd-index rule under "When
+// Rules Apply"); no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "Can you distribute a radical over addition?",
@@ -772,9 +779,24 @@ const faqQuestions = {
     answer: "Because the product rule requires non-negative radicands and both of these fail it. Neither factor has a real value, so $\\sqrt{-3} \\cdot \\sqrt{-3} = \\sqrt{9} = 3$ is an illegal move rather than a wrong arithmetic step. This is the classic trap: the rule is not universal, and applying it outside its domain manufactures answers that look reasonable.",
     sectionId: "6"
   },
-  obj4: {
+  obj3: {
     question: "Do the product and quotient rules have the same restrictions?",
     answer: "Almost. Both need matching indices, and with an even index both need non-negative radicands. The quotient rule adds one condition: its denominator must be strictly positive, not merely non-negative, since zero cannot divide. With an odd index the sign restriction disappears entirely and only the nonzero denominator remains.",
+    sectionId: "5"
+  },
+  obj4: {
+    question: "Can you find a cube root with only a square root key?",
+    answer: "Not in any finite number of presses, but in the limit, yes. Stacked square roots give only indices that are powers of $2$: two presses make a fourth root, three an eighth root, and none lands on $3$. Since $\\frac{1}{3} = \\frac{1}{4} + \\frac{1}{16} + \\frac{1}{64} + \\cdots$, the endless product $\\sqrt[4]{a} \\cdot \\sqrt[16]{a} \\cdot \\sqrt[64]{a} \\cdots$ equals $\\sqrt[3]{a}$ for every $a > 0$.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "Do you add or multiply the indices of a root of a root?",
+    answer: "Multiply. $\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$, because in exponent form it is a power of a power, $(a^{1/n})^{1/m} = a^{1/(mn)}$. So $\\sqrt[3]{\\sqrt{64}} = \\sqrt[6]{64} = 2$, which working from the inside confirms: $\\sqrt{64} = 8$ and $\\sqrt[3]{8} = 2$. Adding the indices would give $\\sqrt[5]{64} \\approx 2.30$, not even a whole number.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Can you pull a minus sign out of a radical?",
+    answer: "Only when the index is odd. Then $\\sqrt[n]{-a} = -\\sqrt[n]{a}$, since a negative number raised to an odd power stays negative: $\\sqrt[3]{-27} = -\\sqrt[3]{27} = -3$. With an even index the move fails, because $\\sqrt{-9}$ is not a real number at all, while $-\\sqrt{9} = -3$ is. A minus sign outside an even root makes a different expression, not a rewriting of the one inside.",
     sectionId: "5"
   }
 }
@@ -972,8 +994,48 @@ const schemas = {
     ],
   };
 
+  // PropertySheet (obj5): radical-rule-index
+  const radicalRuleIndexProperties = {
+    header: {
+      kicker: 'radical rules',
+      title: 'Which rule holds for which index',
+      lede: 'Odd roots take any radicand; even roots ask for signs first.',
+    },
+    labels: { property: 'Rule' },
+    verdicts: {
+      exact: { label: 'Always', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+      signs: { label: 'Sign condition', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+      none: { label: 'No real value', color: '#475569', bg: '#e2e8f0', mark: 'cross' },
+    },
+    subjects: [
+      { id: 'even', label: 'Even index' },
+      { id: 'odd', label: 'Odd index' },
+    ],
+    groups: [{ properties: [
+      { id: 'prod', name: 'Product rule', note: '$\\sqrt[n]{a}\\,\\sqrt[n]{b} = \\sqrt[n]{ab}$', cells: {
+        even: { verdict: 'signs', text: 'both factors $\\geq 0$',
+          detailsLabel: 'Why', details: 'Used on negative radicands it "proves" $1 = -1$: $\\sqrt{-1} \\cdot \\sqrt{-1} = \\sqrt{(-1)(-1)} = \\sqrt{1} = 1$, yet squaring $\\sqrt{-1}$ gives $-1$.' },
+        odd: { verdict: 'exact', text: 'any radicands' },
+      } },
+      { id: 'quot', name: 'Quotient rule', note: '$\\sqrt[n]{a} / \\sqrt[n]{b} = \\sqrt[n]{a/b}$', cells: {
+        even: { verdict: 'signs', text: 'numerator $\\geq 0$, denominator $> 0$' },
+        odd: { verdict: 'exact', text: 'any radicands' },
+      } },
+      { id: 'pow', name: 'Power rule', note: '$(\\sqrt[n]{a})^m = \\sqrt[n]{a^m}$', cells: {
+        even: { verdict: 'signs', text: 'base $\\geq 0$' },
+        odd: { verdict: 'exact', text: 'any base' },
+      } },
+      { id: 'neg', name: 'Negative radicand', note: '$\\sqrt[n]{-a}$', cells: {
+        even: { verdict: 'none', text: '$\\sqrt{-4}$ needs complex numbers' },
+        odd: { verdict: 'exact', text: '$-\\sqrt[n]{a}$, e.g. $\\sqrt[3]{-27} = -3$' },
+      } },
+    ] }],
+    footnote: 'All three rules also need the same index on every radical: $\\sqrt{a} \\cdot \\sqrt[3]{b}$ has no single-radical form until both are written as rational exponents.',
+  };
+
    return {
   props: {
+    radicalRuleIndexProperties,
     radicalRuleTree,
     sectionsContent,
     introContent,
@@ -994,7 +1056,7 @@ const schemas = {
 }
    }
 
-export default function RadicalRulesPage({radicalRuleTree, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RadicalRulesPage({radicalRuleIndexProperties, radicalRuleTree, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1053,6 +1115,16 @@ export default function RadicalRulesPage({radicalRuleTree, seoData, sectionsCont
             dangerouslySetInnerHTML={{ __html: obj5Table }}
           />,
           `@academic[punchline:The radical rules hold only for matching indices and, under even roots, non-negative radicands; outside those limits they produce false results.]@`,
+          `The restrictions above, rule by rule and index by index. The even column is where every condition lives.`,
+          <DiagramFrame
+            key={'obj5-propsheet'}
+            id="radical-rule-index"
+            title="Which rule holds for which index"
+            source="/algebra/roots/radical-rules"
+          >
+            <PropertySheet data={radicalRuleIndexProperties} />
+          </DiagramFrame>,
+          `With an odd index the rules never need a check, because an odd root keeps the sign of its radicand. With an even index the signs come first, and skipping that check is how the [common errors](!#6) below begin.`,
         ]
     },
     {

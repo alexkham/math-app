@@ -946,6 +946,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 import partitionVennDiagrams from '@/app/components/probability/conditional-probability-demo/partitionVennDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 
 
 export async function getStaticProps(){
@@ -1194,6 +1197,10 @@ export async function getStaticProps(){
   // which the events page deferred here and which no heading serves, and
   // added the notation section's reading traps. Four, not padded to five:
   // the tree-diagram rule belongs to /probability/tree-diagrams.
+  // FAQ pass 2026-10-31: kept all four. Added the weighted-not-plain average
+  // (the 3.5% versus 3.2% opening example), the kidney-stone fact box
+  // (Simpson's paradox) and the HH-versus-HT fact box under the expectation
+  // version; no heading asks any of them.
   const faqQuestions = {
     obj1: {
       question: "What makes a valid set of cases in total probability?",
@@ -1214,6 +1221,21 @@ export async function getStaticProps(){
       question: "Why does the disjointness condition specify i ≠ j?",
       answer: "Because without it the condition would be self-defeating. Bᵢ ∩ Bⱼ = ∅ is meant to say that any two distinct cases never overlap; if i and j were allowed to be equal it would also demand Bᵢ ∩ Bᵢ = ∅, forcing every case to be empty. The subscript-pair convention is doing real work here.",
       sectionId: "notation"
+    },
+    obj5: {
+      question: "Why can't you just average the case probabilities?",
+      answer: "Because the cases are usually not equally likely, and the law weights each one by its probability. Machine 1 makes 60% of the parts with a 2% defect rate, machine 2 makes 40% with 5%. The plain average, 3.5%, counts both machines equally; the law gives $0.6 \\cdot 0.02 + 0.4 \\cdot 0.05 = 0.032$, or 3.2%. A plain average is right only when every case has the same probability.",
+      sectionId: "cases"
+    },
+    obj6: {
+      question: "How can a treatment do better in every group but worse overall?",
+      answer: "Through unequal weights, an effect known as Simpson's paradox. In a 1986 kidney-stone study, open surgery beat the keyhole method on small stones, 93% against 87%, and on large stones, 73% against 69%, yet lost overall, 78% against 83%. Each overall rate is a weighted average of its group rates, and surgery was given mostly to the harder large stones, so its average leaned on the lower rate.",
+      sectionId: "matters"
+    },
+    obj7: {
+      question: "Why does HH take longer to appear than HT?",
+      answer: "Because a miss costs more on the way to HH. Both patterns need a first head. After it, a tail ruins HH and starts the wait over, while another head does not ruin HT, since a head is still in place. Splitting on the tosses with the expectation version of the law, $E[X] = \\sum E[X \\mid B_i]\\,P(B_i)$, gives an average wait of 6 fair-coin tosses for HH and 4 for HT.",
+      sectionId: "other"
     }
   }
 
@@ -1288,6 +1310,24 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section "cases", "Splitting a Probability Across
+  // Cases") — template H, open question. Running instance: two machines,
+  // 60% of parts at 2% defective and 40% at 5%; overall 3.2%, not 3.5%. Old
+  // cases text is kept in sectionsContent.cases, unused; its nine blocks and
+  // the u_cases_0 demo frame with its line are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciPartsTable = ciTableOpen(['out of 1,000 parts', 'parts made', 'defect rate', 'defective parts']) +
+    ciRow(['machine 1', '600', '2%', '12']) +
+    ciRow(['machine 2', '400', '5%', '20'], { shade: true }) +
+    ciRow(['all parts', '1,000', '32 / 1,000 = 3.2%', '32'], { last: true, color: '#2563EB', cols: [2] }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -1953,6 +1993,10 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
     notes: [{ x: 1, y: 0, text: 'sunny', pos: 's' }, { x: 2, y: 0, text: 'cloudy', pos: 's' }, { x: 3, y: 0, text: 'rainy', pos: 's' }, { x: 5, y: 0, text: 'P(run)', pos: 's', color: 'r' },
       { x: 2.4, y: 0.95, text: 'navy: P(run | case)', pos: 'e', color: 'g' }, { x: 2.4, y: 0.87, text: 'amber: × P(case) = share', pos: 'e', color: 'r' }, { x: 5.15, y: 0.66, text: 'total 0.64', pos: 'e', color: 'r' }, { x: 5.15, y: 0.555, text: '+ 0.15 cloudy', pos: 'e', color: 'f' }, { x: 5.15, y: 0.24, text: '0.48 sunny', pos: 'e', color: 'r' }],
     caption: 'Weight each case, then stack the contributions' };
+  const conceptIntroFigures = {
+    partsTable: ciPartsTable,
+  };
+
   const demoUnits = {
     u_cases_0: demoUnitFrame({
       svg: totalProbabilityDiagrams.overview,
@@ -1985,6 +2029,7 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -2015,10 +2060,75 @@ export default function TotalProbabilityPage({
   examplesTable,
   bayesTable,
   mistakesTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "cases" concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `Machine 1 makes 60% of a factory's parts, 2% of them defective; machine 2 makes the other 40%, 5% defective. What share of all parts is defective?`,
+        content: [
+          `Averaging the two rates gives $3.5\\%$. But machine 1 makes more of the parts, so its lower rate should count for more.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Counting 1,000 parts settles it: 12 + 20 = 32 are defective, so the share is 3.2%, not 3.5%.`,
+        content: [
+          ciTable('partsTable'),
+          `The overall rate comes from adding what each machine contributes: $0.6 \\cdot 0.02 + 0.4 \\cdot 0.05 = 0.012 + 0.020 = 0.032$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Split all outcomes into cases, find the event's share within each case, and add the pieces.`,
+        content: [
+          `The key idea: you can divide all possible outcomes into distinct, non-overlapping scenarios. Each scenario contributes part of the final probability.`,
+          `Think of it like splitting a bill at a restaurant. The total amount comes from adding what each person pays. No overlap — each dollar is counted exactly once.`,
+          `With probability, the sample space gets partitioned into separate cases. An event might occur in Case 1, Case 2, or Case 3. The event's total probability comes from adding its probability within each case.`,
+          `**The core phenomenon:**`,
+          `overall probability = sum of case-specific contributions`,
+          `This isn't a formula yet — it's the conceptual structure. You're breaking one probability question into smaller, manageable pieces.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **law of total probability** says that if cases $B_1, \\dots, B_n$ split the sample space without overlap, then $P(A) = P(A \\mid B_1)P(B_1) + \\cdots + P(A \\mid B_n)P(B_n)$.`,
+        formula: [
+          `The law is stated formally, with its conditions, in [the law of total probability](!/probability/total-probability#law).`,
+        ],
+        footer: `So $P(\\text{defective}) = 0.02 \\cdot 0.6 + 0.05 \\cdot 0.4 = 0.032$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The answer is a weighted average of the case probabilities, each weighted by how likely its case is.`,
+        content: [
+          `**Visual intuition:**`,
+          `Imagine a probability tree where branches split into different scenarios. Or picture blocks of the sample space, each colored differently. The event overlaps multiple blocks, and you add up how much probability it captures from each.`,
+          `Each case contributes its share, and those shares sum to give the complete picture. That's the phenomenon at the heart of total probability.`,
+          <div key={'unit-u_cases_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_cases_0 }} />,
+          `The law states this splitting formally.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The cases must not overlap, and together they must cover every outcome.`,
+        content: `Leaving out machine 2 would give only $1.2\\%$; listing a part under both machines would count it twice. When this splitting is the right tool is described in [when you need total probability](!/probability/total-probability#when).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the law itself, the tree diagram, examples, why it works, and its connection to conditional probability, the chain rule and Bayes' theorem.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2045,9 +2155,7 @@ export default function TotalProbabilityPage({
         title:sectionsContent.cases.title,
         link:'',
         content:[
-          sectionsContent.cases.content,
-                  <div key={'unit-u_cases_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_cases_0 }} />,
-          `The law states this splitting formally.`,
+          <ConceptIntro key={'cases-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2066,6 +2174,11 @@ export default function TotalProbabilityPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probEventsNotationSheet}
+            current={'/probability/total-probability'}
           />,
         ]
     },

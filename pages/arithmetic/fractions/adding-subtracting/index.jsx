@@ -1159,6 +1159,10 @@ How to check: adding a positive fraction to $3$ must give more than $3$, so a re
 // (also owned by /arithmetic/fractions/mixed-numbers), whole numbers, and
 // "most common mistake" (h2 "Common Mistakes"). Kept four whose query wording
 // does not match any heading, all extended past the 40-word floor.
+// FAQ pass 2026-10-31: kept all four. Added pooled ratios, where tops plus
+// bottoms is right (fact box under "Common Mistakes"), and the difference of
+// two unit fractions (consecutive-denominator paragraph and the 99/100 fact
+// box under "Finding a Common Denominator").
 const faqQuestions = {
   obj1: {
     question: "How do you add fractions with different denominators?",
@@ -1179,6 +1183,16 @@ const faqQuestions = {
     question: "Should you simplify after adding fractions?",
     answer: "Yes — a sum is not considered complete until it is in lowest terms. Adding 2/8 + 2/8 gives 4/8, which reduces to 1/2. Divide the numerator and denominator by their greatest common factor to reduce in one step. Using the least common denominator rather than a larger one keeps the numbers small and often leaves nothing to simplify.",
     sectionId: "8"
+  },
+  obj5: {
+    question: "When is adding the tops and the bottoms correct?",
+    answer: "When two ratios are pooled, not when two fractions are added. A batter with $1$ hit in $2$ at-bats one day and $1$ hit in $3$ the next has $2$ hits in $5$, so $\\frac{2}{5}$ is the combined rate. That answers a different question from $\\frac{1}{2} + \\frac{1}{3} = \\frac{5}{6}$, which adds two amounts. The pooled rate always lands between the two rates, never above both, so it can never be their sum.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "Is the difference of two unit fractions always a unit fraction?",
+    answer: "No, only for some pairs. For $a < b$, $\\frac{1}{a} - \\frac{1}{b} = \\frac{b - a}{ab}$. With consecutive denominators the top is $1$, so $\\frac{1}{3} - \\frac{1}{4} = \\frac{1}{12}$, and in general $\\frac{1}{n} - \\frac{1}{n + 1} = \\frac{1}{n(n + 1)}$. That is why the sum $\\frac{1}{1 \\times 2} + \\cdots + \\frac{1}{99 \\times 100}$ collapses to $\\frac{99}{100}$. Wider gaps usually fail: $\\frac{1}{3} - \\frac{1}{5} = \\frac{2}{15}$.",
+    sectionId: "3"
   }
 }
 

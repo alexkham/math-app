@@ -2813,6 +2813,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import diagonalizationDiagrams from '@/app/components/linear-algebra copy/matrix/diagonalizationDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
 
 
 
@@ -3067,6 +3070,24 @@ const matrixPowersByHand = {
   noteLabel: 'What the invariant columns show',
   note: 'The determinant runs $(-5)^k$ and the trace runs $5^k + (-1)^k$ \u2014 the eigenvalues of $A$ raised to the power, and nothing else. Neither reads the entries. That is why a closed form exists at all: the growth was never a property of the sixteen numbers on display, only of the two hiding behind them.',
 }
+
+// Concept introduction (section 1, "What Diagonalization Means") — template
+// H, open question. Running instance: A with rows (4, 1), (2, 3), eigenvalues
+// 5 and 2 with eigenvectors (1, 1) and (1, −2); computing A¹⁰. Old obj1 text
+// is kept in sectionsContent.obj1, unused; its formula box, three passages
+// and the punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPowerTable = ciTableOpen(['', 'A = rows (4, 1), (2, 3)', 'D = diag(5, 2)']) +
+  ciRow(['the matrix', '(4, 1), (2, 3)', '(5, 0), (0, 2)']) +
+  ciRow(['squared', '(18, 7), (14, 11) — a full multiplication', '(25, 0), (0, 4) — square each entry'], { shade: true }) +
+  ciRow(['10th power', 'nine more full multiplications', '(5¹⁰, 0), (0, 2¹⁰) — at once'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -3424,6 +3445,11 @@ const introContent = {
 
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the nonzero
+// nilpotent case (only in the "Which matrices diagonalize" card), the
+// near-shear that diagonalizes (fact box under "When Diagonalization Fails"),
+// eigenvector length in P versus Q (the normalization pitfall) and Fibonacci
+// rounding (fact box under "Recurrence Relations").
 const faqQuestions = {
   obj1: {
     question: "Is $PDP^{-1}$ the same as $P^{-1}DP$?",
@@ -3439,6 +3465,26 @@ const faqQuestions = {
     question: "Does a repeated eigenvalue make a matrix defective?",
     answer: "Not by itself. Repetition is necessary but nowhere near sufficient: the identity matrix repeats an eigenvalue $n$ times and is already diagonal. What defeats the construction is a gap between algebraic and geometric multiplicity, meaning too few independent eigenvectors. Note that defective never means singular or ill-conditioned; such a matrix can be perfectly invertible.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can a nilpotent matrix be diagonalized?",
+    answer: "Only if it is the zero matrix. Every eigenvalue of a nilpotent matrix is $0$, so a diagonalization would force $D = O$ and then $A = PDP^{-1} = O$. A nonzero nilpotent matrix such as $\\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ is therefore always defective: its eigenvalue $0$ has algebraic multiplicity $2$ but only the one eigenvector direction $(1, 0)$.",
+    sectionId: "10"
+  },
+  obj5: {
+    question: "Can a tiny change make a defective matrix diagonalizable?",
+    answer: "Yes, but the result is fragile. Changing the corner entry of the shear $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ to $1.000001$ splits the repeated eigenvalue into $1$ and $1.000001$, and distinct eigenvalues guarantee a diagonalization. The eigenvectors $(1, 0)$ and $(1, 0.000001)$ are almost parallel, so $P$ is barely invertible and $P^{-1}$ has entries of size a million: the missing eigenvector returns only as a near copy of the first.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "Do the eigenvectors in $P$ have to be unit vectors?",
+    answer: "No, not for $A = PDP^{-1}$: scaling a column of $P$ is undone by $P^{-1}$, so any nonzero multiple of each eigenvector works. Unit length matters only when $Q^{T}$ stands in for the inverse in the symmetric form $QDQ^{T}$. For $\\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$, the unnormalized columns $(1, 1)$ and $(1, -1)$ give $Q^{T}Q = 2I$ and $QDQ^{T} = 2A$; dividing each by $\\sqrt{2}$ restores $A$.",
+    sectionId: "pitfalls"
+  },
+  obj7: {
+    question: "Why does rounding $\\phi^n/\\sqrt{5}$ give the Fibonacci numbers?",
+    answer: "Because the second term of the Binet formula $F_n = (\\phi^n - \\hat{\\phi}^n)/\\sqrt{5}$ is always too small to matter. The second eigenvalue $\\hat{\\phi} \\approx -0.618$ is smaller than $1$ in size, so $|\\hat{\\phi}^n| \\leq 1$, and since $\\sqrt{5} > 2$ the term $\\hat{\\phi}^n/\\sqrt{5}$ stays below $\\frac{1}{2}$ in size. For example, $\\phi^{10}/\\sqrt{5} \\approx 55.004$, and $F_{10} = 55$.",
+    sectionId: "6"
   }
 }
 
@@ -3525,6 +3571,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    powerTable: ciPowerTable,
+  };
+
   const demoUnits = {
     assemble: demoUnitFrame({
       svg: diagonalizationDiagrams.assemble,
@@ -3595,6 +3645,7 @@ const schemas = {
   props: {
     odeEigenCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     diagonalizationKinds,
@@ -3626,10 +3677,70 @@ export default function DiagonalizationPage({odeEigenCases,
      diagonalizabilityCases,
      matrixPowersByHand,
      faqQuestions,
-     schemas, demoUnits
+     schemas, demoUnits, conceptIntroFigures
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `What is A¹⁰ for the matrix A with rows (4, 1), (2, 3)?`,
+        content: [
+          `By brute force that is ten matrix multiplications, each one a page of arithmetic. For a diagonal matrix, the same question takes a moment.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Powers of A take full multiplications; powers of a diagonal matrix just raise each diagonal entry.`,
+        content: [
+          ciTable('powerTable'),
+          `If $A$ could somehow be traded for a diagonal matrix, its powers would be just as easy.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Looked at along the right two directions, A is exactly the diagonal matrix diag(5, 2).`,
+        content: [
+          `Along $(1, 1)$, $A$ multiplies by $5$: $A(1, 1) = (5, 5)$. Along $(1, -2)$, it multiplies by $2$: $A(1, -2) = (2, -4)$. In the frame made of these two eigenvectors, $A$ does nothing but stretch by $5$ and by $2$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A square matrix is [diagonalizable](!/linear-algebra/definitions#diagonalizable_matrix) when $A = PDP^{-1}$ for an invertible $P$, whose columns are eigenvectors, and a diagonal $D$, whose entries are the eigenvalues.`,
+        formula: [
+          `An $n \\times n$ [matrix](!/linear-algebra/matrix) $A$ is diagonalizable if there exists an [invertible](!/linear-algebra/matrix/inverse) matrix $P$ and a [diagonal](!/linear-algebra/matrix/types) matrix $D$ such that`,
+          `@academic[formula_callout:What Diagonalization Means
+$$A = PDP^{-1}$$]@`,
+          `The columns of $P$ are eigenvectors of $A$. The diagonal entries of $D$ are the corresponding eigenvalues, in the same order. The factorization says that in the [basis](!/linear-algebra/vector-spaces) of eigenvectors, the [transformation](!/linear-algebra/transformations) acts by pure scaling along each axis — the most transparent possible description.`,
+        ],
+        footer: `So $A$ with rows $(4, 1)$, $(2, 3)$ is $PDP^{-1}$ with $P$ columns $(1, 1)$, $(1, -2)$ and $D = \\text{diag}(5, 2)$ — and then $A^{10} = PD^{10}P^{-1}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A diagonalization is the same transformation, described in a basis made of its own eigenvectors.`,
+        content: [
+          `Equivalently, $A$ is diagonalizable if and only if $\\mathbb{R}^n$ has a basis consisting entirely of eigenvectors of $A$. The matrix $P$ converts between the standard basis and this eigenvector basis, and $D$ is the matrix of the transformation in the eigenvector basis.`,
+          `@academic[punchline:Diagonalizing does not change the map, only the point of view: in the eigenvector basis it is pure stretching.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Not every matrix can be diagonalized: it needs enough independent eigenvectors.`,
+        content: `The matrix with rows $(1, 1)$, $(0, 1)$ has only one eigenvector direction, $(1, 0)$, so no basis of eigenvectors exists and no diagonal $D$ works. The test is set out in [when is a matrix diagonalizable](!/linear-algebra/eigen/diagonalization#3).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, constructing the diagonalization, when a matrix is diagonalizable, matrix powers, differential equations, recurrence relations, the spectral theorem, the matrix exponential, and what happens when diagonalization fails.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -3637,8 +3748,7 @@ export default function DiagonalizationPage({odeEigenCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          `@academic[punchline:Diagonalizing does not change the map, only the point of view: in the eigenvector basis it is pure stretching.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -3657,6 +3767,11 @@ export default function DiagonalizationPage({odeEigenCases,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laEigenNotationSheet}
+            current={'/linear-algebra/eigen/diagonalization'}
           />,
         ]
     },

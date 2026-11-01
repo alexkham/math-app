@@ -41,6 +41,59 @@ import {
 
 export const WALK_VIEWS = ['ladder', 'treeH', 'treeV', 'card'];
 
+/* 2026-10-29: wording and styles the walker uses but DecisionMaker does not ship */
+const WALK_LABELS = {
+  card:       'Card',
+  question:   'Question',
+  result:     'Result',
+  back:       'Back',
+  restart:    'Start over',
+  trailEmpty: 'Your answers will show here',
+  pick:       'Pick an answer on the map',
+};
+
+const WALK_CSS = `
+.dw-root .dw-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin: 12px 0; padding: 8px 12px;
+  background: var(--dm-panel-softer); border: 1px solid var(--dm-line); border-radius: 8px;
+}
+.dw-root .dw-trail { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12.5px; color: var(--dm-ink); min-height: 22px; }
+.dw-root .dw-trail-empty { color: var(--dm-muted); font-style: italic; }
+.dw-root .dw-trail-sep { color: var(--dm-muted); }
+.dw-root .dw-trail-i { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.dw-root .dw-trail-i:hover { color: var(--dm-blue); }
+.dw-root .dw-ctrl { display: flex; gap: 6px; flex-shrink: 0; }
+.dw-root .dw-btn {
+  border: 1px solid var(--dm-line); background: var(--dm-panel); color: var(--dm-title);
+  border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.dw-root .dw-btn:disabled { opacity: 0.45; cursor: default; }
+.dw-root .dw-stage {
+  margin: 12px auto; max-width: 520px; padding: 20px 22px;
+  background: var(--dm-panel); border: 1.5px solid var(--dm-box); border-radius: 10px;
+  text-align: center;
+}
+.dw-root .dw-step-n {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--dm-blue);
+}
+.dw-root .dw-stage-q { margin-top: 6px; font-size: 18px; font-weight: 700; color: var(--dm-title); }
+.dw-root .dw-stage-h { margin-top: 2px; font-size: 13px; color: var(--dm-muted); }
+.dw-root .dw-answers { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
+.dw-root .dw-ans {
+  min-width: 64px; padding: 7px 16px; border-radius: 999px;
+  border: 1.5px solid var(--dm-blue); background: var(--dm-blue-soft); color: var(--dm-title);
+  font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.dw-root .dw-ans:hover { background: var(--dm-blue); color: #ffffff; }
+.dw-root .dw-result { text-align: left; }
+/* stacked layout: the map under the card only follows the answers */
+.dw-root .dw-follow { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--dm-line); }
+.dw-root .dw-follow .dm-tnode, .dw-root .dw-follow .dm-tlabel { cursor: default; }
+`;
+
 /* ------------------------------------------------------------------ */
 /*  route                                                              */
 /* ------------------------------------------------------------------ */
@@ -132,9 +185,10 @@ export default function DecisionWalker({
   switcher = true,
   views = WALK_VIEWS,
   theme,
+  stack = false,
 }) {
   const t = { ...DEFAULT_THEME, ...(theme || {}) };
-  const labels = { ...DEFAULT_LABELS, ...(data.labels || {}) };
+  const labels = { ...DEFAULT_LABELS, ...WALK_LABELS, ...(data.labels || {}) };
   const walk = useRoute(data);
 
   /* which views suit the data, and how wide each needs to be */
@@ -145,7 +199,7 @@ export default function DecisionWalker({
     treeV:  layoutTreeV(data).W,
     card:   0,
   }), [data]);
-  const offered = views.filter((v) => VIEW_COMPONENTS[v] && (v !== 'ladder' || chain));
+  const offered = views.filter((v) => VIEW_COMPONENTS[v] && (v !== 'ladder' || chain) && !(stack && v === 'card'));
 
   /* measure the real body width */
   const bodyRef = useRef(null);
@@ -177,13 +231,16 @@ export default function DecisionWalker({
     view = ['ladder', 'treeV', 'treeH'].find((v) => usable.includes(v)) || 'card';
   }
   if (!usable.includes(view)) view = usable[0] || 'card';
+  /* stacked: the card asks, the map underneath follows (no map if none fits) */
+  const follow = stack && view !== 'card';
 
   const View = VIEW_COMPONENTS[view];
-  const showSwitch = switcher && offered.length > 1;
+  /* stacked with no map that fits: nothing to switch between */
+  const showSwitch = switcher && offered.length > 1 && !(stack && !follow);
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <style dangerouslySetInnerHTML={{ __html: CSS + WALK_CSS }} />
       <div className="dm-root dw-root" style={cssVars(t)}>
         <div className="dm-card">
           {(data.header || showSwitch) && (
@@ -214,9 +271,20 @@ export default function DecisionWalker({
               data={data}
               walk={walk}
               labels={labels}
-              empty={view === 'card' ? labels.trailEmpty : labels.pick}
+              empty={view === 'card' || stack ? labels.trailEmpty : labels.pick}
             />
-            <View data={data} labels={labels} walk={walk} />
+            {stack ? (
+              <>
+                <Card data={data} labels={labels} walk={walk} />
+                {follow && (
+                  <div className="dw-follow">
+                    <View data={data} labels={labels} walk={{ ...walk, readOnly: true }} />
+                  </div>
+                )}
+              </>
+            ) : (
+              <View data={data} labels={labels} walk={walk} />
+            )}
             <Banners items={data.last} />
           </div>
         </div>

@@ -11,6 +11,11 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 
 
 export async function getStaticProps(){
@@ -162,6 +167,25 @@ export async function getStaticProps(){
 // /algebra/sequences/harmonic — sectionsContent v2
 // 3 callouts: obj1 (1), obj4 (1), obj5 (1). obj2/obj3 untouched.
 
+// Concept introduction (section 1, "Definition") — template C, failure
+// first. Running instance: 1, 1/2, 1/3, 1/4, 1/5, which fails both the
+// arithmetic and the geometric test until its terms are flipped. Old obj1
+// text is kept in sectionsContent.obj1, unused; its formula box, formulas
+// link, pitfall aside and three passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTestTable = ciTableOpen(['step', 'difference (arithmetic test)', 'ratio (geometric test)', 'reciprocals']) +
+  ciRow(['1 → 1/2', '−1/2', '1/2', '1 → 2']) +
+  ciRow(['1/2 → 1/3', '−1/6', '2/3', '2 → 3'], { shade: true }) +
+  ciRow(['1/3 → 1/4', '−1/12', '3/4', '3 → 4']) +
+  ciRow(['1/4 → 1/5', '−1/20', '4/5', '4 → 5'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -185,6 +209,45 @@ A harmonic sequence is neither arithmetic nor [geometric](!/algebra/sequences/ge
     after: ``,
     link: '',
   },
+    notation:{
+      title:`Harmonic Sequence Notation`,
+      lead:`Two letters for one sequence — the terms and the arithmetic layer under them — and one letter doing two different jobs.`,
+      inherited:`The subscript as position, the brace form and sigma are set out at [sequence notation](!/algebra/sequences/arithmetic#notation); $\\ln n$ follows [logarithm notation](!/algebra/logarithms/common-natural#notation).`,
+      entries:[
+        {
+          id:'reciprocal-term',
+          tex:`$a_n = \\dfrac{1}{b_n}$`,
+          read:`a sub n is one over b sub n`,
+          means:`Two sequences on one page: $b_n$ is the arithmetic one, with its own $b_1$ and common difference $d$; $a_n$ is the harmonic one built from it. The $d$ belongs to the $b$'s.`,
+          cases:`The $a$'s themselves have no common difference: $\\frac{1}{5} - \\frac{1}{3} \\neq \\frac{1}{7} - \\frac{1}{5}$.`,
+          confusedWith:`Applying $d$ to the terms directly — for $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\ldots$ it predicts $a_{10} = -\\frac{13}{15}$ instead of $\\frac{1}{21}$.`,
+        },
+        {
+          id:'harmonic-number',
+          tex:`$H_n = \\sum_{k=1}^{n} \\dfrac{1}{k}$`,
+          read:`H sub n — the n-th harmonic number`,
+          means:`A partial sum of the harmonic series. No closed form exists; $H_n \\approx \\ln n + \\gamma$, with $\\gamma \\approx 0.5772$ ([section 3](!#3)).`,
+          cases:`The full series $\\sum_{n=1}^{\\infty} \\frac{1}{n}$ diverges, so there is no finite $H_\\infty$ — unlike the geometric $S$.`,
+          alsoWritten:`$1 + \\frac{1}{2} + \\cdots + \\frac{1}{n}$.`,
+          confusedWith:`The harmonic mean $H$ — same letter, no subscript.`,
+        },
+        {
+          id:'harmonic-mean',
+          tex:`$H = \\dfrac{n}{\\frac{1}{a_1} + \\cdots + \\frac{1}{a_n}}$`,
+          read:`H, the harmonic mean`,
+          means:`The reciprocal of the average of the reciprocals; for two numbers, $H = \\frac{2ab}{a + b}$. Each inner term of a harmonic sequence is the harmonic mean of its neighbours ([section 4](!#4)).`,
+          cases:`For positive numbers $H \\leq G \\leq A$ — see the [geometric mean](!/algebra/sequences/geometric#notation).`,
+          confusedWith:`$H_n$. A subscript means a sum of reciprocals; no subscript means a mean.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/algebra`,
+      symbolsLabel:`All algebra symbols`,
+      parentHref:`/algebra/sequences`,
+      parentLabel:`Sequences`,
+      before:``,
+      after:``,
+    },
+
   obj2: {
     title: `Properties`,
     content: `Assuming the underlying arithmetic sequence has positive terms and positive common difference, the harmonic sequence is strictly decreasing: each term is smaller than its predecessor because the denominators grow.
@@ -196,7 +259,7 @@ The terms approach zero as $n \\to \\infty$, since the denominators grow without
 The sum $\\sum_{k=1}^{n} \\frac{1}{k}$ cannot be written as a simple formula in $n$. This absence is not a gap in technique — it is a fundamental property. The partial sums, known as harmonic numbers $H_n$, grow roughly as $\\ln n$ but involve no elementary closed form.
 
 @academic[fact,aside:true,width:35%:Never a whole number after $H_1$
-For every $n \\geq 2$, $H_n$ is not an integer. Over a common denominator, every term except $\\frac{1}{2^k}$, the largest power of $2$ up to $n$, gets an even numerator, so the total numerator is odd while the denominator is even.]@
+For every $n \\geq 2$, $H_n$ is not an integer. Over the least common denominator, every term except $\\frac{1}{2^k}$, the largest power of $2$ up to $n$, gets an even numerator, so the total numerator is odd while the denominator is even.]@
 
 Written as reduced fractions, the first harmonic numbers are $H_1 = 1$, $H_2 = \\frac{3}{2}$, $H_3 = \\frac{11}{6}$, $H_4 = \\frac{25}{12}$, $H_5 = \\frac{137}{60}$ and $H_6 = \\frac{49}{20}$. The numerators and denominators follow no visible pattern, and they grow quickly: already $H_{10} = \\frac{7381}{2520}$. Each value has to be built by adding one more fraction to the one before.`,
     before: ``,
@@ -366,7 +429,11 @@ const introContent = {
   content: `A harmonic sequence is what you get when you take the reciprocals of an arithmetic sequence. The structure is inherited — the spacing of the original arithmetic progression determines everything — but the behavior is fundamentally different. Harmonic sequences have no closed-form partial sums, and the simplest harmonic series diverges despite its terms shrinking to zero.`,
 }
 
-
+// FAQ pass 2026-10-31: kept the three existing questions. Added H_n never
+// an integer (fact box under "Properties"), how slowly the series passes 10
+// and the series without the digit 9 (a sentence and a fact box under "The
+// Harmonic Series"), and G^2 = AH (the three-means figure card under "The
+// Mean Inequality").
 const faqQuestions = {
   obj1: {
     question: "How can the harmonic series diverge when its terms shrink to zero?",
@@ -381,6 +448,26 @@ const faqQuestions = {
   obj3: {
     question: "Which of the three means should you use?",
     answer: "It depends on what the quantities do. Arithmetic mean suits additive processes, geometric mean suits multiplicative ones such as growth rates, and harmonic mean suits rates and reciprocals, like averaging speeds over equal distances. They are ordered $H \\leq G \\leq A$ for positive numbers, with all three equal only when every number is identical.",
+    sectionId: "5"
+  },
+  obj4: {
+    question: "Is a harmonic number ever a whole number?",
+    answer: "Only $H_1 = 1$; for every $n \\geq 2$, $H_n$ is not an integer. Put the terms over their least common denominator: the term $\\frac{1}{2^k}$, where $2^k$ is the largest power of $2$ up to $n$, is the only one that gets an odd numerator, so the total numerator is odd while the denominator is even. The first values $\\frac{3}{2}, \\frac{11}{6}, \\frac{25}{12}, \\frac{137}{60}$ all show it.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "How many terms of the harmonic series does it take to pass 10?",
+    answer: "More than $12{,}000$: the partial sums first exceed $10$ at $n = 12{,}367$. Since $H_n$ grows like $\\ln n + \\gamma$, with $\\gamma \\approx 0.5772$, reaching $10$ needs $n$ near $e^{10 - 0.5772}$, which is about $12{,}370$. Each further unit of sum multiplies the number of terms by about $e \\approx 2.7$, yet the total still passes every bound in the end.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Does the harmonic series converge if every term with a 9 is removed?",
+    answer: "Yes. Dropping each term whose denominator contains the digit $9$ leaves a sum of about $22.92$. There are $8 \\cdot 9^{d-1}$ numbers with $d$ digits and no $9$, each giving a term at most $\\frac{1}{10^{d-1}}$, so the $d$-digit block adds at most $8 \\cdot 0.9^{d-1}$. Those bounds form a geometric series with total $80$, which caps the whole sum. Almost every large number contains a $9$, so most terms are gone.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "How is the geometric mean related to the arithmetic and harmonic means?",
+    answer: "For two positive numbers it is exactly the geometric mean of the other two: $G^2 = A \\cdot H$. Multiplying $A = \\frac{a + b}{2}$ by $H = \\frac{2ab}{a + b}$ cancels the $a + b$ and leaves $ab = G^2$. At $a = 1$, $b = 4$ the means are $A = 2.5$, $G = 2$ and $H = 1.6$, and $2.5 \\cdot 1.6 = 4 = 2^2$. For three or more numbers the identity fails in general.",
     sectionId: "5"
   }
 }
@@ -477,6 +564,10 @@ const schemas = {
     vlines: [{ x: 4 }],
     notes: [{ x: 4.15, y: 0.5, text: 'b = 4: H = 1.6, G = 2, A = 2.5', pos: 'e', color: 'r' }],
     caption: 'With a = 1: H ≤ G ≤ A for every b, with equality only at b = 1' };
+  const conceptIntroFigures = {
+    testTable: ciTestTable,
+  };
+
   const demoUnits = {
     harmonicGrowth: demoUnitFrame({
       svg: renderFunctionPlotV4(fpHarmonicGrowth),
@@ -513,6 +604,7 @@ const schemas = {
      faqQuestions,
      schemas,
      demoUnits,
+     conceptIntroFigures,
      seoData: {
        title: "Harmonic Sequences, Series & Harmonic Mean | Learn Math Class",
        description: "Learn harmonic sequences: definition as reciprocals of arithmetic progressions, divergence of the harmonic series, harmonic mean, and the AM-GM-HM inequality.",
@@ -526,7 +618,74 @@ const schemas = {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function HarmonicSequencesPage({meanOrderLevels, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+export default function HarmonicSequencesPage({meanOrderLevels, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The list 1, 1/2, 1/3, 1/4, 1/5, … looks orderly. Is it arithmetic, or geometric?`,
+        content: [
+          `Those are the two families met so far: a constant step, or a constant ratio. One of them should fit.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Neither test passes: the differences keep shrinking and the ratios creep toward 1.`,
+        content: [
+          ciTable('testTable'),
+          `The first two columns change at every step, so the list is neither arithmetic nor geometric — yet the last column is perfectly regular.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Flip every term and the pattern appears: the reciprocals 1, 2, 3, 4, 5 go up by 1 each time.`,
+        content: [
+          `A harmonic sequence is neither arithmetic nor [geometric](!/algebra/sequences/geometric). The differences between consecutive terms are not constant (they decrease), and the ratios are not constant either (they approach $1$ from below). The defining property is that the reciprocals form an arithmetic progression — the structure lives one layer down.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **harmonic sequence** is a sequence whose terms are the reciprocals of the terms of an [arithmetic sequence](!/algebra/sequences/arithmetic).`,
+        formula: [
+          `A harmonic sequence is a sequence whose terms are the reciprocals of an [arithmetic sequence](!/algebra/sequences/arithmetic). If $b_1, b_2, b_3, \\ldots$ is arithmetic with first term $b_1 > 0$ and common difference $d > 0$, then the harmonic sequence is:`,
+          `@academic[formula_callout:General Term (Harmonic Sequence)
+$$a_n = \\frac{1}{b_n} = \\frac{1}{b_1 + (n-1)d}$$
+/algebra/formulas#general_term_harmonic_sequence]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+        ],
+        footer: `So $1, \\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}, \\ldots$ is harmonic: its reciprocals $1, 2, 3, 4, \\ldots$ form an arithmetic sequence with $d = 1$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A harmonic sequence is an arithmetic sequence seen through reciprocals.`,
+        content: [
+          `The simplest example takes $b_n = n$: the reciprocals $1, \\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}, \\ldots$ form the harmonic sequence of natural number reciprocals. The sequence $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\frac{1}{9}, \\ldots$ is also harmonic — it comes from the arithmetic sequence $3, 5, 7, 9, \\ldots$ with $b_1 = 3$ and $d = 2$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The common difference belongs to the denominators, not to the terms themselves.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Using a common difference of the terms
+Treating $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\ldots$ as arithmetic with $d = \\frac{1}{5} - \\frac{1}{3} = -\\frac{2}{15}$ gives $a_{10} = \\frac{1}{3} + 9 \\cdot \\left(-\\frac{2}{15}\\right) = -\\frac{13}{15}$. The difference $d = 2$ belongs to the denominators: $b_{10} = 3 + 9 \\cdot 2 = 21$, so $a_{10} = \\frac{1}{21}$.
+[Read more](!#pitfalls)]@`,
+          `The arithmetic sequence underneath must also never hit $0$, since $\\frac{1}{0}$ is undefined. What happens when the terms are added up is the subject of [the harmonic series](!/algebra/sequences/harmonic#3).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the properties of harmonic sequences, the harmonic series, the harmonic mean, and the inequality between the means.`,
+      },
+    ],
+  }
     
   const genericSections=[
     // {
@@ -542,7 +701,31 @@ export default function HarmonicSequencesPage({meanOrderLevels, seoData, section
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation-notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={sequencesNotationSheet}
+            current={'/algebra/sequences/harmonic'}
+          />,
         ]
     },
     {

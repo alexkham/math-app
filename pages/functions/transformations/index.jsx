@@ -1511,6 +1511,8 @@ import functionTransformationsDiagrams from '@/app/components/functions/transfor
 import functionReflectionsDiagrams from '@/app/components/functions/reflections/functionReflectionsDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 
 
 export async function getStaticProps(){
@@ -2710,6 +2712,12 @@ Transformations connect algebra to geometry. A change in the equation produces a
 
 
 
+// FAQ pass 2026-10-31: kept the left-shift and the two-reflections questions.
+// Cut three that restate h2s: order of transformations, writing equations
+// from a graph, effect on domain and range. Added why f(2x) is narrower
+// (Horizontal Stretch text), f(2x) vs 2f(x) (pitfall box there), the shift
+// when x has a coefficient (pitfall box under Order of Transformations) and
+// the exponential stretch that is a shift (fact box under Vertical Stretch).
 const faqQuestions = {
   obj1: {
     question: "Why does f(x + 2) shift the graph left instead of right?",
@@ -2722,19 +2730,24 @@ const faqQuestions = {
     sectionId: "5"
   },
   obj3: {
-    question: "What is the correct order of transformations?",
-    answer: "Handle horizontal changes inside the brackets first, then vertical changes outside. Within each group, stretches and reflections come before translations. Applying a shift before a stretch scales the shift too, which lands the graph in the wrong place. The order matters because these operations do not commute.",
-    sectionId: "10"
+    question: "Why does $f(2x)$ make the graph narrower?",
+    answer: "Because the new function reaches each output at half the input. At $x = 1$, $g(x) = f(2x)$ gives $f(2)$, so every height of $f$ arrives twice as early and every point's $x$-coordinate is halved. For $x^2$ the height $4$, reached at $x = 2$, is now reached at $x = 1$; for $\\sin x$ the period drops from $2\\pi$ to $\\pi$. A factor $b$ inside scales $x$-values by $\\frac{1}{b}$, the reverse of what it looks like.",
+    sectionId: "8"
   },
   obj4: {
-    question: "How do you write an equation from a transformed graph?",
-    answer: "Identify the parent function from the overall shape first. Then locate the reference point, such as a vertex, to read the horizontal and vertical translations. Finally compare a second point against the parent to find the stretch factor, and check whether the curve is flipped to determine the sign.",
-    sectionId: "11"
+    question: "Is $f(2x)$ the same as $2f(x)$?",
+    answer: "No. $2f(x)$ doubles every output, a vertical stretch, while $f(2x)$ doubles every input, a horizontal compression. For $f(x) = x^3$, $2f(x) = 2x^3$ but $f(2x) = (2x)^3 = 8x^3$; at $x = 1$ these give $2$ and $8$. For a power function the inside factor can be pulled out, $(bx)^n = b^n x^n$, so for $x^3$ the compression by $2$ draws the same graph as a vertical stretch by $2^3 = 8$, not by $2$.",
+    sectionId: "8"
   },
   obj5: {
-    question: "Do transformations change the domain and range?",
-    answer: "Horizontal changes affect the domain and vertical changes affect the range. A horizontal shift slides the domain, a horizontal stretch scales it, and a vertical shift or stretch does the same to the range. Reflections negate the interval they act on, so [a, b] becomes [−b, −a]: the endpoints change sign and trade places.",
-    sectionId: "12"
+    question: "How do you find the horizontal shift when $x$ has a coefficient?",
+    answer: "Factor the coefficient out of the inside first. In $(2x - 6)^2$ the shift is not $6$: $2x - 6 = 2(x - 3)$, so $b = 2$ and $h = 3$, and the vertex is at $(3, 0)$. Reading $6$ as the shift puts the vertex at $x = 6$, where $(2 \\cdot 6 - 6)^2 = 36$. A quick check is to set the inside to zero: $2x - 6 = 0$ gives $x = 3$, where the parent's vertex lands.",
+    sectionId: "10"
+  },
+  obj6: {
+    question: "Can a vertical stretch be the same as a horizontal shift?",
+    answer: "Yes, for exponential functions. Since $8 \\cdot 2^x = 2^3 \\cdot 2^x = 2^{x + 3}$, stretching $y = 2^x$ vertically by $8$ gives exactly the graph of $2^x$ moved $3$ units left. Any positive factor works the same way: $c \\cdot 2^x = 2^{x + \\log_2 c}$, a shift of $\\log_2 c$ units to the left, or to the right when $c < 1$. The asymptote $y = 0$ stays put under either description.",
+    sectionId: "7"
   }
 }
 
@@ -3046,6 +3059,11 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={functionsNotationSheet}
+            current={'/functions/transformations'}
           />,
         ]
     },

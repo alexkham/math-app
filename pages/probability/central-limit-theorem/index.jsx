@@ -734,6 +734,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
 
 
 export async function getStaticProps(){
@@ -905,6 +908,10 @@ export async function getStaticProps(){
   // the comparison. Kept the normal-data question, which is one of the
   // unheaded misconception bullets, and added its mirror plus the notation
   // section's standard-error and arrow traps.
+  // FAQ pass 2026-10-31: kept all five. Added the CLT for a total and the
+  // standard error read as the spread of single values (two of the three
+  // calculation pitfalls, no heading asks them) and the twelve-uniforms
+  // generator (fact box under Visual Intuition).
   const faqQuestions = {
     obj1: {
       question: "Does the Central Limit Theorem require normal data?",
@@ -930,6 +937,21 @@ export async function getStaticProps(){
       question: "What does the arrow in convergence in distribution mean?",
       answer: "The d above the arrow says that what converges is the distribution — the shape of the histogram — not the values themselves. That distinguishes it from the plain limit arrow of the law of large numbers, which drives the sample mean to a single constant. Convergence in distribution preserves a whole spread-out limit shape.",
       sectionId: "notation"
+    },
+    obj6: {
+      question: "How do you use the Central Limit Theorem for a sum instead of an average?",
+      answer: "Treat the total $S_n$ as approximately $N(n\\mu,\\, n\\sigma^2)$: the means add and so do the variances, so the spread is $\\sigma\\sqrt{n}$, not $n\\sigma$. For 36 packages with $\\mu = 5$ kg and $\\sigma = 2$ kg, the total has mean $180$ kg and spread $\\sqrt{144} = 12$ kg, giving $P(S_{36} > 200) \\approx 0.048$. Taking the spread as $36 \\cdot 2 = 72$ kg gives about $0.39$ instead.",
+      sectionId: "7"
+    },
+    obj7: {
+      question: "Is the standard error the spread of single observations?",
+      answer: "No, it is the spread of the sample mean. Single values keep the spread $\\sigma$ of the original distribution whatever the sample size. For the exponential with $\\mu = \\sigma = 1$ on this page, about 95% of means of 30 fall between $0.63$ and $1.37$, yet only about 28% of single observations do: $e^{-0.63} - e^{-1.37} \\approx 0.28$. An interval that narrows as $n$ grows is describing the mean.",
+      sectionId: "4"
+    },
+    obj8: {
+      question: "Why does adding 12 uniform random numbers give a normal value?",
+      answer: "Because the sum is already close to normal, and the numbers 12 and 6 standardize it. Each draw from $[0, 1]$ has mean $\\frac{1}{2}$ and variance $\\frac{1}{12}$, so the total of 12 has mean $6$ and variance exactly $1$; subtracting $6$ centres it at $0$. The result can never pass $\\pm 6$, so it is not exactly normal, but every probability $P(Z \\le z)$ it gives is within $0.003$ of the bell's.",
+      sectionId: "4"
     }
   }
 
@@ -999,6 +1021,25 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 1, "Formal Statement of the Central Limit
+  // Theorem") — template H, open question. Running instance: averages of 1,
+  // 2 and 10 fair dice; the share of averages between 3 and 4 grows from 1/3
+  // to 16/36 to about two thirds. Old obj1 text is kept in
+  // sectionsContent.obj1, unused; its heading, display formula and three
+  // passages are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciDiceTable = ciTableOpen(['dice averaged', 'possible averages', 'chance the average is between 3 and 4', 'shape']) +
+    ciRow(['1', '1, 2, 3, 4, 5, 6', '2/6 ≈ 33%', 'flat']) +
+    ciRow(['2', '1, 1.5, 2, …, 6', '16/36 ≈ 44%', 'a triangle peaked at 3.5'], { shade: true }) +
+    ciRow(['10', '1, 1.1, 1.2, …, 6', 'about two thirds', 'a narrow bell around 3.5'], { last: true, color: '#2563EB', cols: [3] }) +
+    '</tbody></table>'
 
   const sectionsContent={
     obj0: {
@@ -1438,6 +1479,10 @@ It describes how combining many independent random contributions leads to a stab
     vlines: [{ x: 1, label: 'μ = 1' }],
     notes: [{ x: 1.8, y: 2.2, text: 'original data: skewed', pos: 'e', color: 'r' }, { x: 1.8, y: 1.95, text: 'means of 30: a bell', pos: 'e', color: 'g' }, { x: 1.8, y: 1.7, text: 'spread shrinks like 1/√n', pos: 'e' }],
     caption: 'Averaging a skewed variable: the sample mean turns bell-shaped' };
+  const conceptIntroFigures = {
+    diceTable: ciDiceTable,
+  };
+
   const demoUnits = {
     u_notation_0: demoUnitFrame({
       svg: distributionExplorerDiagrams['normal-pdf'],
@@ -1456,6 +1501,7 @@ It describes how combining many independent random contributions leads to a stab
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       obj3Table,
@@ -1484,10 +1530,71 @@ export default function PageTemplate({
   obj7Table,
   obj8Table,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `One roll of a fair die is equally likely to show 1, 2, 3, 4, 5 or 6 — a flat pattern. What pattern does the average of several rolls follow?`,
+        content: [
+          `Each roll on its own stays flat however often the die is thrown. The question is about the average of a handful of rolls, taken again and again.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `As more dice are averaged, the averages crowd toward 3.5 and take on a bell shape.`,
+        content: [
+          ciTable('diceTable'),
+          `Extreme averages need every die to land high, or every die low, which grows rare as the number of dice grows. Middling averages can happen in many ways.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Averages pile up around the true mean in a bell shape, whatever the shape of a single observation.`,
+        content: [
+          `This result does not depend on the shape of the original distribution.  
+Only [independence](!/probability/independence), identical distribution, and finite [variance](!/probability/variance) are required.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **central limit theorem** says that the average of $n$ independent, identically distributed observations with finite mean $\\mu$ and variance $\\sigma^2$ is approximately normal for large $n$, centred at $\\mu$ with spread $\\frac{\\sigma}{\\sqrt{n}}$.`,
+        formula: [
+          `### Formal Statement of the Central Limit Theorem`,
+          `Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed [random variables](!/probability/random-variables) with finite mean $\\mu$ and finite [variance](!/probability/variance) $\\sigma^2$.  
+Let $\\bar X_n$ denote their sample mean.`,
+          `As the sample size $n$ increases, the standardized sample mean converges in distribution to a normal [random variable](!/probability/random-variables):`,
+          `$\\displaystyle (\\bar X_n - \\mu)\\, / \\, (\\sigma / \\sqrt{n}) \;\\xrightarrow{d}\; \\mathcal{N}(0,1)$`,
+        ],
+        footer: `So the average of many dice is close to a normal distribution centred at $3.5$, with a spread that shrinks as $\\frac{1}{\\sqrt{n}}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The theorem is about the distribution of averages, not about single observations.`,
+        content: [
+          `A single roll never becomes bell-shaped; only the average does. The next section, [what the theorem is really describing](!/probability/central-limit-theorem#2), puts this in words.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The conditions are not decoration: the observations must be independent, share one distribution, and have finite variance.`,
+        content: `When the variance is infinite, averages need not settle into a bell at all. The ingredients are listed one by one in [objects involved in the theorem](!/probability/central-limit-theorem#3).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers what the theorem describes, the objects involved, notation, and how it is used.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1504,7 +1611,7 @@ export default function PageTemplate({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1540,6 +1647,11 @@ export default function PageTemplate({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probLimitsNotationSheet}
+            current={'/probability/central-limit-theorem'}
           />,
           `@academic[pitfall,aside:true,width:35%:Multiplying σ by n for a sum
 Giving the total of 36 packages, each with $\\mu = 5$ kg and $\\sigma = 2$ kg, the spread $36 \\cdot 2 = 72$ kg adds standard deviations and gives $P(S_{36} > 200) \\approx 0.39$. Variances add: $36 \\cdot 2^2 = 144$, so the spread is $\\sqrt{144} = 12$ kg and the probability is about $0.048$.

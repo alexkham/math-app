@@ -14,6 +14,10 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 
 
 export async function getStaticProps(){
@@ -181,6 +185,27 @@ export async function getStaticProps(){
 </table>
 `
 
+// Concept introduction (section 1, "Definition") — template H, open
+// question. Running instance: Fibonacci's rabbit puzzle of 1202, pairs per
+// month 1, 1, 2, 3, 5, 8. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its two formula boxes, formulas link, pitfall aside and seven
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRabbitTable = ciTableOpen(['month', 'adult pairs', 'young pairs', 'total pairs']) +
+  ciRow(['1', '0', '1', '1']) +
+  ciRow(['2', '1', '0', '1'], { shade: true }) +
+  ciRow(['3', '1', '1', '2']) +
+  ciRow(['4', '2', '1', '3'], { shade: true }) +
+  ciRow(['5', '3', '2', '5']) +
+  ciRow(['6', '5', '3', '8'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -215,6 +240,46 @@ To compute any Fibonacci number or list a range of terms, use the [Fibonacci seq
     after: ``,
     link: '',
   },
+    notation:{
+      title:`Fibonacci Notation`,
+      lead:`A capital letter kept for one sequence, two Greek letters for the roots behind it, and a second capital for its twin.`,
+      inherited:`The subscript as position, the brace form and sigma are set out at [sequence notation](!/algebra/sequences/arithmetic#notation); $\\gcd$ in the identities is read as in [GCD notation](!/arithmetic/divisibility/gcd#notation).`,
+      entries:[
+        {
+          id:'fibonacci-term',
+          tex:`$F_n$`,
+          read:`F sub n — the n-th Fibonacci number`,
+          means:`Capital $F$ is reserved for this one sequence, the way $a_n$ serves any sequence. This page counts from $F_1 = F_2 = 1$, and every identity below uses that index.`,
+          cases:`The other convention starts at $F_0 = 0$. Values do not change — $F_{10} = 55$ either way — but the list gains a leading $0$, so its 10th entry is $F_9$.`,
+          alsoWritten:`$F(n)$, $\\text{fib}(n)$ — function and code forms.`,
+          confusedWith:`List position. In a list that starts at $F_0$, the k-th entry is $F_{k-1}$ — read the index, not the place in line.`,
+        },
+        {
+          id:'phi-psi',
+          tex:`$\\phi, \\; \\psi$`,
+          read:`phi and psi — the golden ratio and its conjugate`,
+          means:`The two roots of $x^2 = x + 1$: $\\phi = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$ and $\\psi = \\frac{1 - \\sqrt{5}}{2} \\approx -0.618$. [Binet's formula](!#3) writes $F_n$ from their powers.`,
+          cases:`$\\psi$ is negative — dropping its sign turns Binet's formula into non-integers. The pair satisfies $\\phi + \\psi = 1$ and $\\phi\\psi = -1$.`,
+          alsoWritten:`$\\varphi$ — the curly form of phi, same number. $\\bar{\\phi}$ or $\\phi'$ for the second root in some books.`,
+          confusedWith:`The smaller golden number $\\frac{1}{\\phi} = \\phi - 1 \\approx 0.618$, which some texts also call the golden ratio. Note $\\psi = -\\frac{1}{\\phi}$: same digits, opposite sign.`,
+        },
+        {
+          id:'lucas-term',
+          tex:`$L_n$`,
+          read:`L sub n — the n-th Lucas number`,
+          means:`The same recurrence $L_n = L_{n-1} + L_{n-2}$ with a different start, $L_1 = 1$ and $L_2 = 3$: $1, 3, 4, 7, 11, \\ldots$ ([Lucas Numbers](!#5)). In Binet form the minus becomes a plus: $L_n = \\phi^n + \\psi^n$.`,
+          cases:`Tied to the Fibonacci numbers by $L_n = F_{n-1} + F_{n+1}$: $L_5 = F_4 + F_6 = 11$.`,
+          confusedWith:`$F_n$ itself — the two letters share every step of the rule and differ only in the second starting value.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/algebra`,
+      symbolsLabel:`All algebra symbols`,
+      parentHref:`/algebra/sequences`,
+      parentLabel:`Sequences`,
+      before:``,
+      after:``,
+    },
+
   obj2: {
     title: `The Golden Ratio`,
     content: `The ratio of consecutive Fibonacci numbers $\\frac{F_{n+1}}{F_n}$ settles toward a fixed value as $n$ grows:
@@ -438,7 +503,11 @@ How to check: the answer must divide both numbers and must itself be a Fibonacci
   content: `The Fibonacci sequence is the most famous example of a recursively defined sequence: each term is the sum of the two terms that precede it. From the simplest possible starting values — $1$ and $1$ — this rule produces a sequence whose growth rate, divisibility structure, and algebraic identities have been studied for centuries. Despite its purely recursive origin, the Fibonacci sequence has an explicit closed-form expression involving the golden ratio.`,
 }
 
-
+// FAQ pass 2026-10-31: kept the three identity questions. Added 1.618 versus
+// 0.618 (pitfall under "The Golden Ratio" and the phi entry in the notation
+// panel), the chessboard that gains a square (fact box under "Identities and
+// Properties"), other starting values (closing paragraph of "Lucas Numbers")
+// and the Lucas prime check (fact box under "Lucas Numbers").
 const faqQuestions = {
   obj1: {
     question: "Can every whole number be written as a sum of Fibonacci numbers?",
@@ -454,6 +523,26 @@ const faqQuestions = {
     question: "What is Cassini's identity?",
     answer: "It says that multiplying a Fibonacci number's two neighbours and subtracting the square of the number itself always gives $\\pm 1$: $F_{n-1}F_{n+1} - F_n^2 = (-1)^n$. Taking $n = 6$ gives $5 \\cdot 13 - 8^2 = 65 - 64 = 1$. The result alternates in sign with $n$ and never drifts further from zero.",
     sectionId: "4"
+  },
+  obj4: {
+    question: "Is the golden ratio 1.618 or 0.618?",
+    answer: "The golden ratio is $\\phi = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$, the limit of $\\frac{F_{n+1}}{F_n}$, later term over earlier. The number $0.618$ is its reciprocal: dividing $\\phi^2 = \\phi + 1$ by $\\phi$ gives $\\frac{1}{\\phi} = \\phi - 1$, which some texts also call the golden ratio and which is what $\\frac{F_n}{F_{n+1}}$ approaches. The second root $\\psi \\approx -0.618$ has the same digits with the opposite sign.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "How can cutting up an $8 \\times 8$ square give an area of $65$?",
+    answer: "It cannot; the pieces only seem to fit. An $8 \\times 8$ board of area $64$, cut into two triangles and two trapezoids, appears to refill a $5 \\times 13$ rectangle of area $65$. The cut edges have slopes $\\frac{3}{8}$ and $\\frac{2}{5}$, which differ by only $\\frac{1}{40}$, so a thin gap of area $1$ hides along the diagonal. The sides $5, 8, 13$ are consecutive Fibonacci numbers, and the gap is Cassini's identity: $5 \\cdot 13 - 8^2 = 1$.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Do other starting numbers also lead to the golden ratio?",
+    answer: "Yes. Any sequence that follows the rule $a_n = a_{n-1} + a_{n-2}$ has the form $A\\phi^n + B\\psi^n$, with $A$ and $B$ fixed by its first two terms. Since $|\\psi| < 1$, the $\\psi^n$ part dies away, so the ratio of consecutive terms tends to $\\phi$ whenever $A \\neq 0$, which holds for every whole-number start except $0, 0$. The Lucas numbers $1, 3, 4, 7, 11, \\ldots$ are one example.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Can Lucas numbers tell whether a number is prime?",
+    answer: "Only in one direction. For every prime $p$, $L_p$ is one more than a multiple of $p$, as in $L_7 = 29 = 4 \\cdot 7 + 1$, so any $n$ for which $L_n - 1$ is not divisible by $n$ is certainly composite. Passing the check proves nothing, though: some composite numbers pass it too, the first being $705$.",
+    sectionId: "5"
   }
 }
 
@@ -552,6 +641,10 @@ const schemas = {
     points: [{ x: 10, y: 55, label: 'F₁₀ = 55', pos: 'se' }],
     notes: [{ x: 0.4, y: 85, text: 'φ¹⁰/√5 ≈ 55.004: round it to get F₁₀', pos: 'e', color: 'r' }, { x: 0.4, y: 75, text: 'the ψⁿ/√5 part is always under 1/2', pos: 'e' }],
     caption: 'Fₙ is φⁿ/√5 rounded to the nearest whole number' };
+  const conceptIntroFigures = {
+    rabbitTable: ciRabbitTable,
+  };
+
   const demoUnits = {
     fibRatios: demoUnitFrame({
       svg: renderFunctionPlotV4(fpFibRatios),
@@ -574,6 +667,7 @@ const schemas = {
      faqQuestions,
      schemas,
      demoUnits,
+     conceptIntroFigures,
      seoData: {
        title: "Fibonacci Sequence: Golden Ratio & Binet | Learn Math Class",
        description: "Learn the Fibonacci sequence: recursive definition, golden ratio limit, Binet's closed-form formula, Cassini's identity, Zeckendorf's theorem, and Lucas numbers.",
@@ -585,9 +679,81 @@ const schemas = {
 }
    }
 
-export default function FibonacciSequencePage({seoData, sectionsContent, introContent, obj4Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function FibonacciSequencePage({seoData, sectionsContent, introContent, obj4Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `A pair of young rabbits grows up in a month and from then on produces one new pair every month. How many pairs are there month by month?`,
+        content: [
+          `This puzzle appears in Leonardo of Pisa's book of 1202, the Liber Abaci, and Leonardo is better known today as Fibonacci. No rabbit ever dies in the puzzle; every new pair follows the same rule.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Counting month by month gives 1, 1, 2, 3, 5, 8 pairs.`,
+        content: [
+          ciTable('rabbitTable'),
+          `Every adult pair of one month is still there the next, and every pair that was already adult a month earlier has just added a young pair.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Each month's total is the sum of the two totals before it.`,
+        content: [
+          `The pairs alive last month are all still alive, and the pairs alive two months ago are now old enough to have one new pair each: $8 = 5 + 3$.`,
+          `Each term after the second is the sum of its two immediate predecessors: $2 = 1 + 1$, $3 = 1 + 2$, $5 = 2 + 3$, $8 = 3 + 5$, and so on. Growth accelerates because each new term absorbs the size of both parents.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **Fibonacci sequence** starts with $1, 1$ and continues by adding the two previous terms: $F_n = F_{n-1} + F_{n-2}$.`,
+        formula: [
+          `The Fibonacci sequence is defined by a two-term recurrence with two initial values:`,
+          `@academic[formula_callout:Fibonacci Recurrence
+$$F_1 = 1, \\quad F_2 = 1, \\quad F_n = F_{n-1} + F_{n-2} \\quad (n \\geq 3)$$
+/algebra/formulas#fibonacci_recurrence]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+          `The first terms are:`,
+          `@academic[formula_callout:Definition
+$$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, \\ldots$$]@`,
+        ],
+        footer: `So the rabbit counts $1, 1, 2, 3, 5, 8$ are $F_1$ to $F_6$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The Fibonacci sequence is defined recursively, and it is neither arithmetic nor geometric.`,
+        content: [
+          `The Fibonacci sequence is neither [arithmetic](!/algebra/sequences/arithmetic) (the differences $0, 1, 1, 2, 3, 5, \\ldots$ are not constant) nor [geometric](!/algebra/sequences/geometric) (the ratios $1, 2, 1.5, 1.\\overline{6}, 1.6, \\ldots$ are not constant either, though they converge).`,
+          `To compute any Fibonacci number or list a range of terms, use the [Fibonacci sequence calculator](!/algebra/calculators/sequences/fibonacci-sequence).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Two starting conventions are in use, and they shift every index by one.`,
+        content: [
+          `An alternative convention starts with $F_0 = 0$: the sequence becomes $0, 1, 1, 2, 3, 5, 8, \\ldots$. The same recurrence applies and every $F_n$ keeps its value — only the list gains a $0$ in front, so each term sits one place later in the list. Both conventions appear in the literature, and the choice is a matter of context. This page uses $F_1 = 1$.`,
+          `@academic[pitfall,aside:true,width:35%:Reading the list position as the index
+Taking the 10th entry of $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, \\ldots$ as $F_{10}$ gives $F_{10} = 34$. That list starts at $F_0$, so its 10th entry is $F_9 = 34$, and $F_{10} = 55$.
+[Read more](!#pitfalls)]@`,
+          `The two lists differ only by the extra $0$ in front, and that difference matters as soon as a term is called by its number. Binet's formula and the identities in the sections below are all stated in terms of the index $n$ of $F_n$, with $F_1 = F_2 = 1$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the golden ratio, Binet's formula, identities and properties, and the Lucas numbers.`,
+      },
+    ],
+  }
 
   const genericSections=[
     // {
@@ -603,7 +769,31 @@ export default function FibonacciSequencePage({seoData, sectionsContent, introCo
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation-notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={sequencesNotationSheet}
+            current={'/algebra/sequences/fibonacci'}
+          />,
         ]
     },
     {

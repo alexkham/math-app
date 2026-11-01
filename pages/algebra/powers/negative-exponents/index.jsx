@@ -12,6 +12,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 
 
 export async function getStaticProps(){
@@ -562,6 +564,10 @@ How to check: substitute $a = 1$. The original $(2 \\cdot 1^{-3})^2 = 4$. The ri
 // does "why can't 0 have a negative exponent". Kept the sign confusion —
 // no heading addresses it — and added the notation section's traps, led by
 // the $-1$ superscript that means something different everywhere else.
+// FAQ pass 2026-10-31: kept all four. Added the 0.1 + 0.2 fact box
+// (Definition) and the coefficient-moving pitfall (Worked Examples); no
+// heading asks either, and both stay clear of the zero-exponent and
+// fraction-case topics the note above assigns elsewhere.
 const faqQuestions = {
   obj1: {
     question: "Does a negative exponent make the answer negative?",
@@ -582,6 +588,16 @@ const faqQuestions = {
     question: "Why do scientists write $\\mathrm{m\\,s^{-1}}$ instead of $\\mathrm{m/s}$?",
     answer: "Because slashes stack ambiguously. In $\\mathrm{m/s/s}$ it is unclear whether the second division applies to the metres or to the first quotient, while $\\mathrm{m\\,s^{-2}}$ has exactly one reading. SI style therefore prefers negative exponents for compound units. The exponent does the same job it does in algebra: $\\mathrm{s^{-1}}$ is one over seconds.",
     sectionId: "notation"
+  },
+  obj5: {
+    question: "Why does $0.1 + 0.2$ not equal $0.3$ on a computer?",
+    answer: "Because a computer stores the fractional part of a number as a sum of negative powers of $2$, such as $2^{-1} = 0.5$ and $2^{-2} = 0.25$. A finite sum of these is a fraction over a power of $2$, which can never cancel the factor $5$ in $\\frac{1}{10}$. So $0.1$ and $0.2$ are both stored rounded, and JavaScript or Python report their sum as $0.30000000000000004$. A number like $0.375 = 2^{-2} + 2^{-3}$ is stored exactly.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Is $4a^{-6}$ the same as $\\frac{1}{4a^6}$?",
+    answer: "No. Without brackets an exponent belongs only to the symbol directly before it, so the $-6$ applies to $a$ alone and only $a$ moves below the bar: $4a^{-6} = \\frac{4}{a^6}$. Substituting $a = 1$ shows the difference, $4$ against $\\frac{1}{4}$. The form $\\frac{1}{4a^6}$ is $\\frac{1}{4}a^{-6}$, and with brackets $(4a)^{-6} = \\frac{1}{4^6 a^6}$, a different expression again.",
+    sectionId: "6"
   }
 }
 
@@ -815,6 +831,11 @@ No finite sum of negative powers of $2$ equals $\\frac{1}{10}$: such a sum is a 
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={powersRootsLogsNotationSheet}
+            current={'/algebra/powers/negative-exponents'}
           />,
         ]
     },

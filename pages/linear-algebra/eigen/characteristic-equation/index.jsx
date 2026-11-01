@@ -848,6 +848,9 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
 
 
 
@@ -1184,6 +1187,26 @@ const characteristicPolynomial = {
 
 // formulas-injected: v1 | 2026-06-16 | 4 callouts (obj1 characteristic_equation direct, obj2 characteristic_polynomial inline-promote, obj3 characteristic_polynomial_2x2 inline-promote, obj8 cayley_hamilton direct)
 
+// Concept introduction (section 1, "From Eigenvectors to the Determinant
+// Condition") — template C, failure first. Running instance: A with rows
+// (5, 2), (3, 4), the matrix of the section 3 worked example, eigenvalues 2
+// and 7; picture: the eigenvalue tool's frozen shift state. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its formula box with link and three
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciGuessTable = ciTableOpen(['guess for λ', 'A − λI (rows)', 'det(A − λI)', 'nonzero v with (A − λI)v = 0?']) +
+  ciRow(['1', '(4, 2), (3, 3)', '6', 'no — only v = 0']) +
+  ciRow(['2', '(3, 2), (3, 2)', '0', 'yes: v = (2, −3)'], { shade: true, color: '#2563EB', cols: [2, 3] }) +
+  ciRow(['3', '(2, 2), (3, 1)', '−4', 'no — only v = 0']) +
+  ciRow(['7', '(−2, 2), (3, −3)', '0', 'yes: v = (1, 1)'], { shade: true, last: true, color: '#2563EB', cols: [2, 3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `From Eigenvectors to the Determinant Condition`,
@@ -1475,6 +1498,12 @@ How to check: multiply $A$ by the candidate and compare with $\\lambda$ times th
   content: `The eigenvalue problem Av = λv converts into a determinant condition: det(A − λI) = 0. This determinant is a polynomial in λ whose roots are the eigenvalues. Computing the characteristic polynomial and factoring it is the standard method for finding eigenvalues of small matrices — and the polynomial's coefficients encode the trace, determinant, and other invariants of the matrix.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added polynomial
+// root finding through the companion matrix (fact box under "Larger
+// Matrices"), the inverse from Cayley-Hamilton (one paragraph under "The
+// Cayley-Hamilton Theorem") and whether an equal characteristic polynomial
+// means similar (only in the summary table's card text and the double-root
+// pitfall, no heading asks it).
 const faqQuestions = {
   obj1: {
     question: "Why is it $\\det(A - \\lambda I)$ rather than $\\det(A - \\lambda)$?",
@@ -1490,6 +1519,21 @@ const faqQuestions = {
     question: "What is the difference between $\\mathbf{e}_i$, $E_{ij}$ and $E_{\\lambda}$?",
     answer: "Three different objects sharing one letter, separated only by their decoration. Bold $\\mathbf{e}_i$ is a standard basis vector, $E_{ij}$ with two subscripts is a matrix unit, and $E_{\\lambda}$ with a Greek subscript is an eigenspace, a whole subspace rather than a single vector or array.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "How do NumPy and MATLAB find the roots of a polynomial?",
+    answer: "By computing eigenvalues. Every polynomial $\\lambda^n + c_{n-1}\\lambda^{n-1} + \\cdots + c_0$ is, up to sign, the characteristic polynomial of its companion matrix, which has ones just below the diagonal and $-c_0, \\ldots, -c_{n-1}$ down the last column. The roots functions build such a matrix and return its eigenvalues, found iteratively by the QR algorithm. It is the textbook route run backwards: roots are found as eigenvalues.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "How do you find the inverse of a matrix with the Cayley-Hamilton theorem?",
+    answer: "Rearrange $p(A) = O$ so that $A$ times a polynomial in $A$ equals the identity. If $p(\\lambda) = \\lambda^2 - 5\\lambda + 6$, then $A^2 - 5A + 6I = O$, so $A(5I - A) = 6I$ and $A^{-1} = \\frac{1}{6}(5I - A)$. The constant term of $p$ is $\\det(A)$, so the division works exactly when $\\det(A) \\neq 0$, and $A^{-1}$ always comes out as a polynomial in $A$ of degree at most $n - 1$.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "Are two matrices with the same characteristic polynomial similar?",
+    answer: "Not necessarily. Similar matrices always share the polynomial, but the converse fails: $2I$ and the matrix with rows $(2, 1)$, $(0, 2)$ both have $p(\\lambda) = (\\lambda - 2)^2$, yet $P^{-1}(2I)P = 2I$ for every invertible $P$, so $2I$ is similar only to itself. The polynomial is a test in one direction: different polynomials prove two matrices are not similar, equal ones prove nothing.",
+    sectionId: "10"
   }
 }
 
@@ -1574,6 +1618,11 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    guessTable: ciGuessTable,
+    shift: eigenDiagrams.shift,
+  };
+
   const demoUnits = {
     polynomial: demoUnitFrame({
       svg: eigenDiagrams.expand,
@@ -1608,6 +1657,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1633,10 +1683,73 @@ export default function CharacteristicEquationPage({
   obj5Table,
   characteristicPolynomial,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Eigenvalues are defined by Av = λv, so it seems natural to find them by solving that equation directly.`,
+        content: [
+          `For $A$ with rows $(5, 2)$, $(3, 4)$, that means finding a number $\\lambda$ and a nonzero $\\mathbf{v} = (x, y)$ with $5x + 2y = \\lambda x$ and $3x + 4y = \\lambda y$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The unknowns are tangled: λ multiplies x and y, so this is not a linear system — and guessing λ fails almost every time.`,
+        content: [
+          ciTable('guessTable'),
+          `Out of four guesses only $2$ and $7$ produce an eigenvector. Guessing cannot be how eigenvalues are found.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The guesses that worked are exactly the ones that make A − λI singular: its determinant is 0.`,
+        content: [
+          `For $\\lambda = 2$ and $\\lambda = 7$ the shifted matrix has proportional rows, so $\\det(A - \\lambda I) = 0$ and nonzero solutions appear; for $1$ and $3$ the determinant is not $0$ and only $\\mathbf{v} = \\mathbf{0}$ works. So the search for $\\mathbf{v}$ can wait: first find the values of $\\lambda$ that make one number, the determinant, vanish. The shift is shown step by step on the [eigenvalues and eigenvectors visualizer](!/linear-algebra/visual-tools/eigenvalues-eigenvectors).`,
+        ],
+        visual: ciSvg('shift'),
+        caption: `The same shift on a 3×3 matrix: λ is subtracted from every diagonal entry.`,
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The characteristic equation of a square matrix $A$ is $\\det(A - \\lambda I) = 0$; its left side, a polynomial in $\\lambda$, is the [characteristic polynomial](!/linear-algebra/definitions#characteristic_polynomial).`,
+        formula: [
+          `The equation $A\\mathbf{v} = \\lambda\\mathbf{v}$ rearranges to $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$. This is a [homogeneous system](!/linear-algebra/linear-systems/homogeneous), and eigenvectors are its nontrivial solutions. Nontrivial solutions exist if and only if the coefficient matrix $A - \\lambda I$ is singular:`,
+          `@academic[formula_callout:characteristic_equation|Characteristic Equation|$$\\det(A - \\lambda I) = 0$$]@
+@academic[formulas_link:/linear-algebra/formulas#characteristic_equation]@`,
+          `This is the characteristic equation. It holds for exactly those values of $\\lambda$ that are eigenvalues of $A$. Every other value of $\\lambda$ makes $A - \\lambda I$ [invertible](!/linear-algebra/matrix/inverse), the system has only the trivial solution, and no eigenvector exists for that $\\lambda$.`,
+        ],
+        footer: `So for $A$ with rows $(5, 2)$, $(3, 4)$: $\\det(A - \\lambda I) = \\lambda^2 - 9\\lambda + 14 = (\\lambda - 2)(\\lambda - 7)$, and the eigenvalues are $2$ and $7$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The characteristic equation turns a question about directions into a question about roots.`,
+        content: [
+          `The characteristic equation transforms the geometric question "which directions does $A$ preserve?" into the algebraic question "for which $\\lambda$ is this [determinant](!/linear-algebra/determinants) zero?"`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The equation finds only the eigenvalues; the eigenvectors take a second step.`,
+        content: `Each root $\\lambda$ is put back into $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ and that system is solved, as [finding eigenvectors after finding eigenvalues](!/linear-algebra/eigen/characteristic-equation#7) shows. The polynomial itself, and what its coefficients say about $A$, comes in [the characteristic polynomial](!/linear-algebra/eigen/characteristic-equation#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the characteristic polynomial, computing it for 2×2, 3×3 and larger matrices, algebraic multiplicity, finding eigenvectors, the Cayley-Hamilton theorem, and similarity.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1644,7 +1757,7 @@ export default function CharacteristicEquationPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1663,6 +1776,11 @@ export default function CharacteristicEquationPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laEigenNotationSheet}
+            current={'/linear-algebra/eigen/characteristic-equation'}
           />,
         ]
     },

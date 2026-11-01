@@ -438,6 +438,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 
 export async function getStaticProps(){
 
@@ -828,6 +830,10 @@ How to check: count the negations. A negation on one side flips the value of the
 // Section headings already own "what is logical equivalence" and "how to verify",
 // so these target the buried content: the ≡ vs ↔ notation trap and the three
 // most-searched table-row equivalences.
+// FAQ pass 2026-10-31: kept the four questions. Added the shared-consequent
+// trap (pitfall box under Equivalences with Implications), NAND alone (fact
+// box in the same section) and the duality of the laws (fact box under
+// Fundamental Equivalences).
 const faqQuestions = {
   obj1: {
     question: "What is the difference between ≡ and ↔ in logic?",
@@ -848,6 +854,21 @@ const faqQuestions = {
     question: "What is the negation of a biconditional?",
     answer: "Negating a biconditional produces an exclusive or: ¬(p ↔ q) ≡ p ↔ ¬q, true exactly when p and q have different truth values. A biconditional asserts that both statements match — both true or both false — so its denial asserts a mismatch: one true and the other false. Attaching the negation to either side gives the same equivalent result.",
     sectionId: "biconditional"
+  },
+  obj5: {
+    question: "Is (p → r) ∧ (q → r) equivalent to (p ∧ q) → r?",
+    answer: "No, the antecedents join with OR: $(p \\to r) \\land (q \\to r) \\equiv (p \\lor q) \\to r$. At $p = T$, $q = F$, $r = F$ the left side is F, because $p \\to r$ fails, while $(p \\land q) \\to r$ is T. Rewriting each arrow as $\\neg p \\lor r$ shows why: the antecedents stand under a negation, and De Morgan's law turns the connective over.",
+    sectionId: "conditional"
+  },
+  obj6: {
+    question: "Can every logical connective be built from NAND?",
+    answer: "Yes. With $p \\uparrow q \\equiv \\neg (p \\land q)$, negation is $\\neg p \\equiv p \\uparrow p$ and conjunction is $p \\land q \\equiv (p \\uparrow q) \\uparrow (p \\uparrow q)$, and $\\neg$ with $\\land$ already express every other connective. Peirce found this around 1880 but never published it; today it lets whole chips be built from NAND gates alone.",
+    sectionId: "conditional"
+  },
+  obj7: {
+    question: "What is the duality principle in logic?",
+    answer: "It says that swapping $\\land$ with $\\lor$ and $\\text{true}$ with $\\text{false}$ in a valid equivalence built from $\\neg$, $\\land$ and $\\lor$ gives another valid equivalence. That is why the laws come in pairs, such as the two De Morgan's laws or the two absorption laws, and why proving one law of a pair gives the other free. Only the double negation law, with neither connective, stands alone.",
+    sectionId: "laws"
   }
 }
 
@@ -867,8 +888,30 @@ const faqQuestions = {
     }),
   };
 
+  // BeforeAfter (conditional): the negation of a conditional carried inside, one move at a time
+  const negatedConditionalSteps = {
+    header: {
+      kicker: 'Equivalences with implications',
+      title: 'Negating a conditional',
+      lede: 'To deny "if p, then q" is to describe the cases in which it fails, and the truth table of p → q has exactly one such row.',
+    },
+    steps: [
+      { id: 'start', label: 'Negated implication', stamp: 'Before', expr: '$\\neg (p \\to q)$',
+        move: { label: 'Material implication', note: 'p → q ≡ ¬p ∨ q' } },
+      { id: 'disjunction', label: 'Negated disjunction', expr: '$\\neg (\\neg p \\lor q)$',
+        move: { label: "De Morgan's law", note: 'the negation goes inside and ∨ becomes ∧' } },
+      { id: 'double', label: 'Double negation inside', expr: '$\\neg \\neg p \\land \\neg q$',
+        move: { label: 'Drop the double negation', note: '¬¬p ≡ p' } },
+      { id: 'result', label: 'A single conjunction', stamp: 'After', expr: '$p \\land \\neg q$',
+        detailsLabel: 'Not another arrow',
+        detailsTitle: '',
+        details: 'Writing $\\neg (p \\to q)$ as $p \\to \\neg q$ fails at $p = F$, $q = T$: there $\\neg (p \\to q)$ is F but $p \\to \\neg q$ is T. The negation is a conjunction, $\\neg (p \\to q) \\equiv p \\land \\neg q$.' },
+    ],
+  };
+
   return {
     props:{
+      negatedConditionalSteps,
       demoUnits,
       conceptIntroFigures,
        verify,
@@ -883,7 +926,7 @@ const faqQuestions = {
   }
 }
 
-export default function EquivalencesPage({demoUnits, conceptIntroFigures, verify ,biconditionalEquivalences ,logicalLaws ,logicalEquivalences,
+export default function EquivalencesPage({demoUnits, conceptIntroFigures, negatedConditionalSteps, verify ,biconditionalEquivalences ,logicalLaws ,logicalEquivalences,
   sectionsContent,keyWords ,introContent ,faqQuestions}) {
 
 
@@ -1015,6 +1058,20 @@ key={2}
 copyableFields={'equivalence'}
 includedFields={['name','equivalence','explanation']}/>,
 sectionsContent.pitfallBoxes.conditional,
+<DiagramFrame
+  key={'conditional-diagram'}
+  id="negated-conditional-steps"
+  title="Negating a conditional, step by step"
+  source="/logic/propositional-logic/semantics/equivalences"
+  before={"The negation of a conditional, carried inside by the two moves named above: material implication, then De Morgan's law."}
+  after={"The result, $p \\land \\neg q$, is true in exactly one row, $p = T$, $q = F$: the one row where $p \\to q$ is false."}
+>
+  <BeforeAfter
+    data={negatedConditionalSteps}
+    variant="progression"
+    theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+  />
+</DiagramFrame>,
 sectionsContent.conditional.after,
 `@academic[fact,aside:true,width:35%:One connective is enough
 NAND, $p \\uparrow q \\equiv \\neg (p \\land q)$, can express every other connective: $\\neg p \\equiv p \\uparrow p$ and $p \\land q \\equiv (p \\uparrow q) \\uparrow (p \\uparrow q)$, and $\\neg$ with $\\land$ already give the rest. Peirce found this around 1880 but never published it; today it lets whole chips be built from NAND gates alone.]@

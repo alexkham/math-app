@@ -799,6 +799,10 @@ import discreteExpectedValueDiagrams from '@/app/components/probability/expected
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
 
 export async function getStaticProps(){
@@ -1742,8 +1746,66 @@ const continuousExpectedValueFormulasData = {
     ],
   };
 
+  // PropertySheet (properties): expectation-properties
+  const expectationProperties = {
+    header: {
+      kicker: 'expected value',
+      title: 'Which properties need what',
+      lede: 'Linearity needs nothing; the product rule needs independence; the mean itself must exist.',
+    },
+    labels: { more: 'Example', detailsTitle: '' },
+    verdicts: {
+      always: { label: 'Always', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+      indep: { label: 'If independent', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+      exists: { label: 'If it exists', color: '#475569', bg: '#e2e8f0', mark: 'dot' },
+    },
+    groups: [{ properties: [
+      { id: 'lin', name: 'Linearity', verdict: 'always', statement: '$E(X + Y) = E(X) + E(Y)$', note: 'even when $X$ and $Y$ are dependent' },
+      { id: 'aff', name: 'Scaling and shifting', verdict: 'always', statement: '$E(aX + b) = a\\,E(X) + b$', note: 'changes of units behave predictably' },
+      { id: 'const', name: 'A constant', verdict: 'always', statement: '$E[c] = c$' },
+      { id: 'iter', name: 'Iterated expectation', verdict: 'always', statement: '$E\\big[E[X \\mid Y]\\big] = E[X]$', note: 'averaging the conditional mean gives the mean' },
+      { id: 'prod', name: 'Product', verdict: 'indep', statement: '$E(XY) = E(X)\\,E(Y)$', condition: '$X$, $Y$ independent', note: 'does not hold under dependence' },
+      { id: 'exist', name: 'Existence', verdict: 'exists', statement: 'the sum or integral must converge', note: 'the Cauchy distribution has no finite mean',
+        details: 'Toss a coin until the first head; a head on toss $k$ pays $2^k$ dollars. Every term adds $1$, so $E[X]$ is infinite, yet half of all games pay just 2 dollars.' },
+    ] }],
+  };
+
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the die's 3.5 and the game's 0.10 (intro),
+  // games A and B (intro table), the E[X^2] pitfall, the coin-game fact box
+  // under Properties and the fifteen-rolls fact box under the sum section.
+  const faqQuestions = {
+    obj1: {
+      question: "Does the expected value have to be one of the possible outcomes?",
+      answer: "No. It is a probability-weighted average, so it can fall between the values the variable can take. A fair die has $E[X] = 3.5$, a face it never shows, and a game that pays $10$ dollars with probability $0.1$ and costs $1$ dollar otherwise has $E[X] = 0.10$ dollars, which no single play pays. The word expected names the long-run average over many repetitions, not the result to expect on one try.",
+      sectionId: "intuition"
+    },
+    obj2: {
+      question: "Can two games with the same expected value be very different?",
+      answer: "Yes. A game that pays $10$ dollars with probability $0.1$ and costs $1$ dollar otherwise, and a game that pays $0.10$ dollars every time, both have expected value $0.10$ dollars. The first swings between a rare win and a frequent loss; the second never varies. Expected value only locates the balance point of a distribution; how far results stray from it is measured separately, by the [variance](!/probability/variance).",
+      sectionId: "intuition"
+    },
+    obj3: {
+      question: "Is $E[X^2]$ the same as $(E[X])^2$?",
+      answer: "No. $E[X^2]$ averages the squares, while $(E[X])^2$ squares the average. For a fair die $E[X^2] = \\frac{91}{6} \\approx 15.17$, but $(E[X])^2 = 3.5^2 = 12.25$. The gap $E[X^2] - (E[X])^2$ is exactly the variance, so the two agree only when $X$ is a constant. Only linear functions pass through the average unchanged: $E[aX + b] = aE[X] + b$.",
+      sectionId: "function"
+    },
+    obj4: {
+      question: "How can a game played with a fair coin have an infinite expected value?",
+      answer: "Toss a coin until the first head and pay $2^k$ dollars if it comes on toss $k$, which happens with probability $\\frac{1}{2^k}$. Each outcome adds $2^k \\cdot \\frac{1}{2^k} = 1$ to the sum for $E[X]$, and there are infinitely many outcomes, so the sum has no limit. Yet half of all games pay just $2$ dollars. This is the St. Petersburg paradox: an infinite expected value means no entry price is fair, not that large payouts are common.",
+      sectionId: "properties"
+    },
+    obj5: {
+      question: "How many rolls does it take to see every face of a die?",
+      answer: "About $14.7$ on average. Split the wait into stages, one for each new face: once $k$ faces have appeared, a new one shows with probability $\\frac{6-k}{6}$, so that stage takes $\\frac{6}{6-k}$ rolls on average. Linearity of expectation adds the stage averages: $6\\left(1 + \\frac{1}{2} + \\cdots + \\frac{1}{6}\\right) = 14.7$.",
+      sectionId: "sum"
+    }
+  }
+
    return {
       props:{
+    faqQuestions,
+    expectationProperties,
     expectedValueCases,
     demoUnits,
     conceptIntroFigures,
@@ -1769,7 +1831,7 @@ const continuousExpectedValueFormulasData = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function ExpectedValuePage({expectedValueCases, 
+export default function ExpectedValuePage({expectationProperties, expectedValueCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1778,7 +1840,7 @@ export default function ExpectedValuePage({expectedValueCases,
   continuousExpectedValueFormulasData,
   propertiesTable,
   examplesTable,
-  summaryTable, demoUnits, conceptIntroFigures
+  summaryTable, demoUnits, conceptIntroFigures, faqQuestions
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
@@ -1890,6 +1952,11 @@ value reflects the balance point of that curve.`,
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probSpreadNotationSheet}
+            current={'/probability/expected-value'}
+          />,
         ]
     },
     {
@@ -1963,6 +2030,16 @@ value reflects the balance point of that curve.`,
             sectionsContent.properties.content,
             <div key={'properties-table'} style={tableWrapStyle}
                  dangerouslySetInnerHTML={{ __html: propertiesTable }} />,
+            `The properties above as cards, each marked by what it asks of the random variables.`,
+            <DiagramFrame
+              key={'properties-propsheet'}
+              id="expectation-properties"
+              title="Which properties of expected value need what"
+              source="/probability/expected-value"
+            >
+              <PropertySheet data={expectationProperties} />
+            </DiagramFrame>,
+            `Four of the six ask for nothing at all, which is why expectation is so easy to compute with. The product rule is the one to watch: it holds only for independent variables, while linearity never needs that check. [Variance](!/probability/variance), by contrast, needs independence even to add.`,
         ]
     },
     {
@@ -2018,6 +2095,22 @@ value reflects the balance point of that curve.`,
         link:'',
         content:[
             sectionsContent.obj6.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Expected Value FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

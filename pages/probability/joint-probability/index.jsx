@@ -670,6 +670,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -880,6 +883,10 @@ export async function getStaticProps(){
   // joint-vs-marginal and independence each name their own h2. Replaced
   // with the notation section's traps — including the P(A, B) comma form
   // deferred here from conditional probability notation.
+  // FAQ pass 2026-10-31: kept all five. Added that marginals do not fix the
+  // joint (one sentence under Marginal Probabilities, checked on the page's
+  // own table) and the broken-stick fact box under Ways to Calculate; no
+  // heading asks either.
   const faqQuestions = {
     obj1: {
       question: "What does the comma mean in P(X = x, Y = y)?",
@@ -905,6 +912,16 @@ export async function getStaticProps(){
       question: "How do you find the probability of a rectangle from a joint CDF?",
       answer: "By inclusion–exclusion on the four corners: P(a < X ≤ b, c < Y ≤ d) = F(b, d) − F(a, d) − F(b, c) + F(a, c). Subtracting the two overhanging strips removes the corner region twice, so it has to be added back once. It is the two-variable analogue of F(b) − F(a).",
       sectionId: "notation"
+    },
+    obj6: {
+      question: "Can you rebuild a joint distribution from its marginals?",
+      answer: "Not in general. Marginals keep each variable's own behaviour and drop how the two move together, so many joint tables share the same margins. The table with 0.20, 0.10 in its first row and 0.30, 0.40 in its second has row totals 0.30 and 0.70 and column totals 0.50 and 0.50; so does the table 0.15, 0.15, 0.35, 0.35. Only under independence, where every cell is row total times column total, do the marginals fix the joint.",
+      sectionId: "marginal"
+    },
+    obj7: {
+      question: "What is the probability that a stick broken at two random points forms a triangle?",
+      answer: "One in four. Treat the two cut points as a pair $(X, Y)$ spread uniformly over the unit square, so probability is area. The three pieces form a triangle exactly when every piece is shorter than half the stick, and the pairs that satisfy this cover a quarter of the square. It is a joint probability found by measuring a region rather than by counting cells.",
+      sectionId: "calculate"
     }
   }
 
@@ -975,6 +992,24 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section "definition", "Definition and Meaning of
+  // Joint Probability") — template A, definition last. Running instance: a
+  // survey cross-tabulating smoking and exercise. Old definition text is kept
+  // in sectionsContent.definition, unused; its four passages are carried in
+  // unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciSurveyTable = ciTableOpen(['', 'exercises', 'does not exercise', 'total']) +
+    ciRow(['smoker', '0.10', '0.20', '0.30'], { color: '#2563EB', cols: [1] }) +
+    ciRow(['non-smoker', '0.50', '0.20', '0.70'], { shade: true }) +
+    ciRow(['total', '0.60', '0.40', '1'], { last: true }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -1333,6 +1368,10 @@ The sections below outline how joint probability is represented, how it connects
     events: [{ label: 'A: first die even', test: (a) => a % 2 === 0, color: 'f' }, { label: 'B: sum ≥ 9', test: (a, b) => a + b >= 9, color: 'r' }],
     notes: [{ text: 'A and B: the shared cells' }, { text: '(4,5) (4,6) (6,3)', color: 'g' }, { text: '(6,4) (6,5) (6,6)', color: 'g' }, { text: 'P(A, B) = 6/36 = 1/6', color: 'r' }],
     caption: 'Joint probability by counting combined outcomes' };
+  const conceptIntroFigures = {
+    surveyTable: ciSurveyTable,
+  };
+
   const demoUnits = {
     u_notation_0: demoUnitFrame({
       svg: contingencyTableDiagrams['2x3'],
@@ -1358,6 +1397,7 @@ The sections below outline how joint probability is represented, how it connects
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       calculateTable,
@@ -1386,10 +1426,70 @@ export default function JointProbabilityPage({
   mistakesTable,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "definition" concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A survey records two facts about each person: whether they smoke, and whether they exercise.`,
+        content: [
+          `The share of smokers and the share of people who exercise each describe one fact on its own. Neither says how often the two facts come together.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `A table of both facts at once gives the probability of every combination.`,
+        content: [
+          ciTable('surveyTable'),
+          `The entry $0.10$ is the probability that a person both smokes and exercises. The totals at the edges recover each fact on its own.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Joint probability looks at the whole outcome, not at one part of it.`,
+        content: [
+          `This estimates the likelihood of **combinations rather than isolated outcomes**. When we ask "what is the chance that both A happens and B happens together," we are asking about joint probability. It shows how different outcomes **line up within the same situation** and how they naturally occur **side by side**.`,
+          `In simple terms, it is a way to look at **the whole outcome**, and it is the first place where **any kind of relationship** between variables becomes visible.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **joint probability** of events $A$ and $B$ is the probability that both occur, $P(A \\cap B)$; for random variables, it is the probability that they take given values together.`,
+        formula: [
+          `Joint probability measures the likelihood that two or more events occur simultaneously and that multiple random variables take specific values at the same time.`,
+        ],
+        footer: `So $P(\\text{smoker} \\cap \\text{exercises}) = 0.10$ in the survey above.`,
+      },
+      {
+        id: 'kind',
+        lead: `Joint probabilities show whether outcomes move together.`,
+        content: [
+          `Joint probability also captures how **random quantities behave together**, whether their outcomes **depend on each other or not**, and how their joint behavior forms patterns that cannot be seen by looking at each variable alone. This is the point where **dependence and independence start to show up**: joint probability reveals whether outcomes tend to move together, avoid each other, or behave completely separately.`,
+          `Here $0.30 \\times 0.60 = 0.18$, but the joint probability is only $0.10$: smokers exercise less often than everyone else.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The totals at the edges do not determine the entries inside.`,
+        content: [
+          `Many different tables share the totals $0.30$ and $0.60$; the joint entries carry information that the separate probabilities lack. The totals are the subject of [marginal probability](!/probability/joint-probability#marginal).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, joint probability tables, ways to calculate joint probability, marginal probability, independence, properties, conditional probability, joint distributions, why joint probability matters, common mistakes and related concepts.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1406,7 +1506,7 @@ export default function JointProbabilityPage({
         title:sectionsContent.definition.title,
         link:'',
         content:[
-            sectionsContent.definition.content,
+          <ConceptIntro key={'definition-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1425,6 +1525,11 @@ export default function JointProbabilityPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probEventsNotationSheet}
+            current={'/probability/joint-probability'}
           />,
                   <div key={'unit-u_notation_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_notation_0 }} />,
           `Several methods of computing the entries follow.`,

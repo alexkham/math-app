@@ -12,6 +12,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -567,6 +569,10 @@ How to check: substitute the answer into the original equation. $3^{0.368} \\app
 };
 
 
+// FAQ pass 2026-10-31: kept all three questions. Added the root lost by
+// rewriting ln(x^2) as 2 ln(x) (pitfall in "Logarithms on Both Sides" and
+// its full working in "Common Pitfalls") and why log3(7) is irrational
+// (fact box in "Solving Exponential Equations via Logarithms").
 const faqQuestions = {
   obj1: {
     question: "Do you always reject negative solutions in logarithmic equations?",
@@ -582,6 +588,16 @@ const faqQuestions = {
     question: "Do substitution problems like $(\\log_2 x)^2 - 5\\log_2 x + 6 = 0$ need a domain check?",
     answer: "Rarely, because back-substitution takes care of it. Solving $\\log_2 x = u$ gives $x = 2^u$, which is positive for every real $u$, so the domain condition holds automatically and nothing is rejected. Substitution does not widen the domain the way condensing does. The exception is a substitution that divides, as in $\\ln x + \\frac{6}{\\ln x} = 5$, which needs $\\ln x \\neq 0$.",
     sectionId: "6"
+  },
+  obj4: {
+    question: "Why does rewriting $\\ln(x^2)$ as $2\\ln(x)$ lose a solution?",
+    answer: "Because the power rule $\\log_a(M^p) = p\\log_a(M)$ needs $M > 0$. Writing $\\ln(x^2)$ as $2\\ln(x)$ quietly adds the condition $x > 0$, which the original never had: $\\ln(x^2)$ is defined for every $x \\neq 0$. Solving $\\ln(x^2) = \\ln(9)$ that way gives only $x = 3$, while the one-to-one property gives $x^2 = 9$ and keeps $x = -3$ as well.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Can $\\log_3(7)$ be written as a fraction?",
+    answer: "No, it is irrational. If $\\log_3(7)$ equalled a fraction $\\frac{p}{q}$ of positive whole numbers, then $3^{p/q} = 7$, and raising both sides to the power $q$ gives $3^p = 7^q$. That is impossible: $3^p$ has no factor $7$, while $7^q$ does. This is why the answer to $3^x = 7$ is left as $\\frac{\\log(7)}{\\log(3)}$ or rounded to $1.771$.",
+    sectionId: "7"
   }
 }
 
@@ -716,8 +732,44 @@ const schemas = {
     }),
   };
 
+  // DecisionMaker + DecisionWalker (obj10): log-equation-decision
+  const logEquationDecision = {
+    header: {
+      kicker: 'logarithmic and exponential equations',
+      title: 'Which method?',
+      lede: 'Where the unknown sits decides the family; the form of the equation decides the method.',
+    },
+    start: 'where',
+    nodes: {
+      where: { question: 'Where is the unknown?', answers: [
+        { label: 'inside a log', to: 'logform' },
+        { label: 'in an exponent', to: 'expform' },
+      ] },
+      logform: { question: 'What form?', answers: [
+        { label: 'one log = k', to: 'convert' },
+        { label: 'log = log', to: 'onetoone' },
+        { label: 'sum or difference', to: 'condense' },
+        { label: 'quadratic in log', to: 'subst' },
+      ] },
+      expform: { question: 'Exponentials on both sides?', answers: [
+        { label: 'no', to: 'takelog' },
+        { label: 'yes', to: 'bothsides' },
+      ] },
+    },
+    outcomes: {
+      convert: { title: 'Convert to exponential form', action: 'logₐ(x) = k gives x = aᵏ', example: 'log₂(x) = 5 → x = 32', link: { label: 'Basic form', href: '/algebra/logarithms/equations#1' } },
+      onetoone: { title: 'One-to-one property', action: 'logₐ(M) = logₐ(N) gives M = N', example: 'log₄(3x + 2) = log₄(x + 10) → x = 4', link: { label: 'Logs on both sides', href: '/algebra/logarithms/equations#2' } },
+      condense: { title: 'Condense, then convert', action: 'combine with the logarithm rules into one log', example: 'log₂(x) + log₂(x − 2) = 3 → x = 4', link: { label: 'Combining logarithms', href: '/algebra/logarithms/equations#3' } },
+      subst: { title: 'Substitute u = logₐ(x)', action: 'solve the quadratic in u, then back-substitute', example: '(log₂x)² − 5log₂x + 6 = 0 → x = 4 or 8', link: { label: 'Substitution', href: '/algebra/logarithms/equations#6' } },
+      takelog: { title: 'Take a log of both sides', action: 'aˣ = B: take log or ln, then divide', example: '3ˣ = 7 → x = log(7)/log(3) ≈ 1.771', link: { label: 'Exponential equations', href: '/algebra/logarithms/equations#7' } },
+      bothsides: { title: 'Take logs, collect x', action: 'expand both sides and solve the linear equation in x', example: '2ˣ⁺³ = 5ˣ⁻¹ → x ≈ 4.026', link: { label: 'Exponentials on both sides', href: '/algebra/logarithms/equations#8' } },
+    },
+    last: [{ label: 'Log side', text: 'Check every answer against the domain: the argument of each logarithm must be positive.' }],
+  };
+
 return {
   props: {
+    logEquationDecision,
     sectionsContent,
     introContent,
     obj5Table,
@@ -739,7 +791,7 @@ return {
    }
 
 // export default function EquationsPage({seoData,sectionsContent , introContent}) {
-export default function EquationsPage({
+export default function EquationsPage({logEquationDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -943,6 +995,16 @@ $$x = 13$$]@`,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `The same six forms as a map. The first question splits the page in two, logarithmic equations on one side and exponential equations on the other.`,
+          <DiagramFrameV2
+            key={'obj10-decision'}
+            id="log-equation-decision"
+            title="Which method for a log or exponential equation?"
+            source="/algebra/logarithms/equations"
+          >
+            <DecisionBox data={logEquationDecision} />
+          </DiagramFrameV2>,
+          `On the logarithmic side the last step is always the same. Converting, condensing and substituting can all produce values that make a logarithm's argument zero or negative, so each answer goes back into the original equation; [extraneous solutions](!#5) shows how they arise.`,
         ]
     },
     {

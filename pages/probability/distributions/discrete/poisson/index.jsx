@@ -864,6 +864,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 
 export async function getStaticProps(){
 
@@ -927,7 +929,7 @@ export async function getStaticProps(){
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/variance" style="${linkStyle}">Variance</a></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Var(X) = λ — equal to the mean</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">unique to Poisson; sample mean ≈ sample variance is a diagnostic for fit</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a hallmark of the Poisson; sample mean ≈ sample variance is a diagnostic for fit</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/mode" style="${linkStyle}">Mode</a> and <a href="/probability/median" style="${linkStyle}">median</a></td>
@@ -1238,7 +1240,7 @@ $$\\mathrm{Var}(X) = (\\lambda^2 + \\lambda) - \\lambda^2 = \\lambda$$]@
 @academic[fact,aside:true,width:35%:Flying bombs passed the variance test
 In 1946 R. D. Clarke split 144 square kilometres of south London into 576 squares and counted 537 V-1 flying bomb hits. The mean per square was $0.93$ and the variance $0.97$, so the clusters people saw were no more than pure chance produces.]@
 
-The result $\\mathrm{Var}(X) = \\lambda$ reveals a remarkable property: **the Poisson distribution's variance equals its mean**. This makes the Poisson distribution unique among common distributions. The single parameter $\\lambda$ completely determines both the center and the spread of the distribution.
+The result $\\mathrm{Var}(X) = \\lambda$ reveals a remarkable property: **the Poisson distribution's variance equals its mean**. This equality is a hallmark of the Poisson distribution. The single parameter $\\lambda$ completely determines both the center and the spread of the distribution.
 
 This property provides a practical test: if observed count data has variance approximately equal to its mean, the Poisson distribution may be an appropriate model.
 
@@ -1431,7 +1433,7 @@ $$X \\sim \\text{Poisson}(\\lambda_X),\\; Y \\sim \\text{Poisson}(\\lambda_Y) \\
           read:`lambda — the expected number of events per observation window`,
           means:`A rate wearing a count's clothes: $\\lambda$ is the average number of occurrences in the interval being watched, so it silently carries the window's size — double the window and the model becomes $\\operatorname{Pois}(2\\lambda)$; process texts make the exposure explicit as $\\lambda t$.`,
           cases:`The same $\\lambda$ crosses the discrete/continuous line: counting events per window is Poisson, waiting for the next event is [exponential](!/probability/distributions/continuous/exponential) — one rate, two questions, and the letter travels between the two pages unchanged.`,
-          confusedWith:`A probability. $\\lambda = 4.2$ is perfectly legal — rates are counts, not chances, and live on $[0, \\infty)$; capping $\\lambda$ at 1 imports a constraint from the wrong kind of parameter.`,
+          confusedWith:`A probability. $\\lambda = 4.2$ is perfectly legal — rates are counts, not chances, and live on $(0, \\infty)$; capping $\\lambda$ at 1 imports a constraint from the wrong kind of parameter.`,
           sameGlyphElsewhere:`Linear algebra's [eigenvalue](!/linear-algebra/eigen/characteristic-equation#notation) — the reserved λ of $A\\mathbf{v} = \\lambda\\mathbf{v}$ — is an unrelated tenant of the same letter; context and neighbors decide instantly which is on duty.`,
         },
         {
@@ -1556,6 +1558,11 @@ const poissonExplanations = {
   // whose Special Cases and Related Distributions sections are commented out
   // of the render array and never appear. Added the two λ traps from the
   // notation section.
+  // FAQ pass 2026-10-31: kept all four. Added the sum of independent Poisson
+  // counts (formula under Applications), clusters not proving non-randomness
+  // (the V-1 fact box under Variance) and λ versus √λ for the standard
+  // deviation (pitfall box under Variance). The Poisson-process waiting-time
+  // link is left to the exponential page.
   const faqQuestions = {
     obj1: {
       question: "Why does the Poisson variance equal the mean?",
@@ -1576,6 +1583,21 @@ const poissonExplanations = {
       question: "What happens to λ if you change the time window?",
       answer: "It scales with the window. λ is the average count over the interval being watched, so it silently carries that interval's size: double the window and the model becomes Pois(2λ). Process texts make the exposure explicit by writing λt. Quoting a λ without saying over what period is an incomplete specification.",
       sectionId: "15"
+    },
+    obj5: {
+      question: "Is the sum of two Poisson variables also Poisson?",
+      answer: "Yes, when they are independent: $\\text{Poisson}(\\lambda_X) + \\text{Poisson}(\\lambda_Y)$ is $\\text{Poisson}(\\lambda_X + \\lambda_Y)$. Two desks receiving $4$ and $3$ emails an hour, independently, receive a combined count that is Poisson with $\\lambda = 7$. The same fact is why the rate scales with the window: an hour is two independent half hours. A difference $X - Y$ is not Poisson, since it can be negative.",
+      sectionId: "11"
+    },
+    obj6: {
+      question: "Do clusters of events mean they are not random?",
+      answer: "No, purely random events produce clusters on their own. In 1946 R. D. Clarke split 144 square kilometres of south London into 576 squares and counted 537 V-1 flying bomb hits: a mean of $0.93$ per square and a variance of $0.97$, as close as a Poisson count predicts. The clusters people saw as aimed were what independent hits at a constant rate look like. Clustering is evidence only when the variance clearly exceeds the mean.",
+      sectionId: "7"
+    },
+    obj7: {
+      question: "Is the Poisson standard deviation λ or √λ?",
+      answer: "It is $\\sqrt{\\lambda}$; $\\lambda$ is the variance. With $\\lambda = 16$ calls an hour the standard deviation is $4$, so a typical hour has $12$ to $20$ calls, not $0$ to $32$. The units confirm it: the variance is in calls squared, the standard deviation in calls, like the mean. Relative to the mean the spread is $\\frac{1}{\\sqrt{\\lambda}}$, so counts with a large $\\lambda$ are proportionally steadier.",
+      sectionId: "7"
     }
   }
 
@@ -1601,7 +1623,7 @@ const poissonExplanations = {
       "teaches": [
         "How Poisson distribution models event counts over intervals",
         "The probability mass function with exponential and factorial terms",
-        "The unique property that mean and variance both equal λ",
+        "The hallmark property that mean and variance both equal λ",
         "Poisson as approximation to binomial for rare events",
         "Finding mode and median of Poisson distributions",
         "Real-world applications like arrivals and defect counting"
@@ -1854,6 +1876,11 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/discrete/poisson'}
           />,
         ]
     },

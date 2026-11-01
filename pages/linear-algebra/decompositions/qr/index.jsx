@@ -1733,6 +1733,9 @@ import qrDiagrams from '@/app/components/linear-algebra copy/matrix/qrDiagrams'
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
 
 
 export async function getStaticProps(){
@@ -2013,6 +2016,27 @@ const keyWords = [
 //   obj7 (QR Algorithm for Eigenvalues) — inline-promote of the iteration step
 // obj6 R x̂ = Qᵀb display left intact — its data-file entry (Least-Squares via QR) targets the
 // least-squares page, not this one. Worked-example matrices in obj2 preserved.
+
+// Concept introduction (section 1, "What QR Decomposition Is") — template A,
+// definition last. Running instance: A with columns (3, 4) and (2, 1), which
+// gives Q with columns (0.6, 0.8), (0.8, −0.6) and R with rows (5, 2), (0, 1).
+// Old obj1 text is kept in sectionsContent.obj1, unused; its formula box with
+// link, corollary box, two passages and the qrDone demo frame with its line
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciFrameTable = ciTableOpen(['piece', 'value', 'how it is found']) +
+  ciRow(['q₁', '(0.6, 0.8)', 'column (3, 4) divided by its length 5']) +
+  ciRow(['q₂', '(0.8, −0.6)', 'column (2, 1) minus 2·q₁, which already has length 1'], { shade: true }) +
+  ciRow(['column 1 of A', '5·q₁', 'uses only q₁']) +
+  ciRow(['column 2 of A', '2·q₁ + 1·q₂', 'uses q₁ and q₂'], { shade: true }) +
+  ciRow(['R', 'rows (5, 2), (0, 1)', 'the weights, column by column'], { last: true, color: '#2563EB', cols: [1] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -2321,6 +2345,13 @@ const introContent = {
   content: `The QR decomposition factors a matrix into an orthogonal factor Q and an upper triangular factor R. It is the matrix form of the Gram-Schmidt process, the standard method for least-squares computation, and the foundation of the most widely used eigenvalue algorithm. The orthogonal factor preserves lengths and condition numbers, making QR the numerically safest of the triangular factorizations.`,
 }
 
+// FAQ pass 2026-10-31: kept obj1 and obj3. Rewrote obj2 from "Is the QR
+// factorisation unique?" (the h2 "Existence and Uniqueness" answers it) to
+// the sign mismatch between programs, the part only the notation card has.
+// Added QR versus the normal equations (rule box under "Solving Least
+// Squares with QR"), Givens versus Householder (paragraph and summary card,
+// no heading asks it) and A and R sharing singular values (one sentence
+// under "Properties of the Factors").
 const faqQuestions = {
   obj1: {
     question: "Is a thin $Q$ an orthogonal matrix?",
@@ -2328,14 +2359,29 @@ const faqQuestions = {
     sectionId: "notation"
   },
   obj2: {
-    question: "Is the QR factorisation unique?",
-    answer: "Only once a sign convention is fixed, usually requiring the diagonal of $R$ to be positive. Gram-Schmidt satisfies that automatically since each diagonal entry is a norm, but Householder reflections do not, and numerical libraries rarely enforce it. Two correct factorisations of one matrix can therefore differ by a column of sign flips.",
+    question: "Why do two programs give different QR factors for the same matrix?",
+    answer: "Because of signs, and neither answer is wrong. Flipping the sign of a column of $Q$ together with the matching row of $R$ leaves the product unchanged, so the factors are fixed only once a convention is chosen, usually a positive diagonal on $R$. Gram-Schmidt meets it automatically since each diagonal entry is a norm, but Householder reflections do not, and numerical libraries rarely enforce it.",
     sectionId: "notation"
   },
   obj3: {
     question: "In the QR algorithm, is $R_kQ_k$ a second factorisation?",
     answer: "No, it is a deliberate reversal of the factors just computed, and reversing them changes the matrix rather than undoing anything. Repeating that swap is exactly what drives the sequence toward upper triangular form with the eigenvalues along the diagonal. The subscript $k$ counts iterations rather than rows or columns.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Why use QR instead of the normal equations for least squares?",
+    answer: "Because forming $A^TA$ squares the condition number, $\\kappa(A^TA) = \\kappa(A)^2$, and QR never forms it. Substituting $A = QR$ turns the normal equations into $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$, one triangular system solved by back substitution. With $\\kappa(A) = 10^6$ the normal equations work with $10^{12}$, enough to lose about $12$ of the roughly $16$ digits double precision carries.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "When are Givens rotations used instead of Householder reflections?",
+    answer: "Mainly for sparse matrices. A Givens rotation zeros one entry at a time and touches only two rows, so zeros already in place stay there, whereas a Householder reflection clears a whole column at once and mixes every row below the pivot. On a dense matrix Givens is slower, but it suits sparse matrices, entries that arrive one at a time and parallel work, and it is backward stable as well.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "Do $A$ and $R$ have the same singular values?",
+    answer: "Yes. Since $Q$ has orthonormal columns, $A^TA = R^TQ^TQR = R^TR$, so the two matrices have the same singular values, and therefore the same norm and condition number. Equivalently, $\\|A\\mathbf{x}\\| = \\|R\\mathbf{x}\\|$ for every $\\mathbf{x}$: the orthogonal factor changes no lengths, and all the stretching that $A$ does sits in $R$.",
+    sectionId: "8"
   }
 }
 
@@ -2420,6 +2466,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    frameTable: ciFrameTable,
+  };
+
   const demoUnits = {
     viagram: demoUnitFrame({
       svg: qrDiagrams.subtract,
@@ -2463,6 +2513,7 @@ const schemas = {
   props:{
     qrStabilityLevels,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     qrForms,
@@ -2490,10 +2541,72 @@ export default function QRDecompositionPage({qrStabilityLevels,
   qrForms,
   qrRoutes,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Perpendicular unit vectors make the most convenient frame there is: coordinates come from dot products alone.`,
+        content: [
+          `The columns of a matrix rarely form such a frame. The matrix with columns $(3, 4)$ and $(2, 1)$ has columns of lengths $5$ and $\\sqrt{5}$ that meet at an awkward angle.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Straightening the columns gives a perpendicular unit pair — and a record of how to get the old columns back.`,
+        content: [
+          ciTable('frameTable'),
+          `The new pair checks out: $(0.6, 0.8) \\cdot (0.8, -0.6) = 0$, and both have length $1$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Every column of A is a combination of the new frame, using only the directions found up to that point.`,
+        content: [
+          `Column 1 needs only $\\mathbf{q}_1$; column 2 needs $\\mathbf{q}_1$ and $\\mathbf{q}_2$. Writing the weights as the columns of a matrix leaves a zero below the diagonal — a triangle of weights beside a frame of perpendicular directions.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [QR decomposition](!/linear-algebra/definitions#qr_decomposition) writes a matrix with independent columns as $A = QR$, with $Q$ having orthonormal columns and $R$ upper triangular with positive diagonal entries.`,
+        formula: [
+          `An $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ with $m \\geq n$ and [linearly independent](!/linear-algebra/vector-spaces/linear-independence) columns factors as`,
+          `@academic[formula_callout:qr_decomposition|QR Decomposition|$$A = QR$$]@
+@academic[formulas_link:/linear-algebra/formulas#qr_decomposition]@`,
+          `where $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns and $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.`,
+          `@academic[rule_corollary_plain:The columns of $Q$ form an orthonormal [basis](!/linear-algebra/vector-spaces) for the column space of $A$.]@`,
+        ],
+        footer: `So $A$ with columns $(3, 4)$, $(2, 1)$ is $QR$ with $Q$ columns $(0.6, 0.8)$, $(0.8, -0.6)$ and $R$ rows $(5, 2)$, $(0, 1)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `QR splits a matrix into a frame of perpendicular directions and a triangle of weights.`,
+        content: [
+          `The matrix $R$ stores the coefficients: each column of $A$ is a linear combination of the columns of $Q$ with weights given by the corresponding column of $R$. The upper triangular structure of $R$ reflects the sequential nature of the orthogonalization — each column depends only on the columns that came before it.`,
+          <div key={'unit-qrDone'} dangerouslySetInnerHTML={{ __html: demoUnits.qrDone }} />,
+          `Q carries the geometry and R carries the bookkeeping; together they rebuild A exactly.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The columns must be independent: a column inside the span of earlier ones has nothing new to contribute.`,
+        content: `With columns $(1, 2)$ and $(2, 4)$, the second minus its part along the first is the zero vector, so no unit $\\mathbf{q}_2$ exists. How the factors are built step by step is the subject of [QR via Gram-Schmidt](!/linear-algebra/decompositions/qr#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, QR via Gram-Schmidt and via Householder reflections, thin and full QR, existence and uniqueness, least squares, the QR algorithm for eigenvalues, and the properties of the factors.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2501,9 +2614,7 @@ export default function QRDecompositionPage({qrStabilityLevels,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-qrDone'} dangerouslySetInnerHTML={{ __html: demoUnits.qrDone }} />,
-          `Q carries the geometry and R carries the bookkeeping; together they rebuild A exactly.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2522,6 +2633,11 @@ export default function QRDecompositionPage({qrStabilityLevels,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDecompNotationSheet}
+            current={'/linear-algebra/decompositions/qr'}
           />,
         ]
     },

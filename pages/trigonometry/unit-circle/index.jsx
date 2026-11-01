@@ -1292,6 +1292,8 @@ import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFuncti
 import renderCircleArcV2 from '@/app/utils/illustrations/trigonometry/circle/circleArc.v2'
 import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 
 
 export async function getStaticProps(){
@@ -1509,6 +1511,11 @@ export async function getStaticProps(){
 </table>
 `
 
+// FAQ pass 2026-10-31: cut the quadrant-signs question (restates the h2 The
+// Four Quadrants and Sign Patterns; its "all three" was also loose) and the
+// coterminal question (degrees-radians owns it with its own h2). Added the
+// sine of 150° (Definition and Equation), the reference angle measured from
+// the x-axis (pitfall box) and Niven's rational sines (fact box).
 const faqQuestions = {
   obj1: {
     question: "Why is the unit circle radius exactly 1?",
@@ -1521,19 +1528,24 @@ const faqQuestions = {
     sectionId: "2"
   },
   obj3: {
-    question: "Which trigonometric functions are positive in each quadrant?",
-    answer: "All three are positive in the first quadrant. Only sine stays positive in the second, only tangent in the third, and only cosine in the fourth. The signs follow from the coordinates: x is negative on the left half of the circle and y is negative on the bottom half, and tangent is their quotient.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "What are coterminal angles?",
-    answer: "Two angles are coterminal when they finish at the same terminal side, differing by a whole number of full rotations. So 45 degrees and 405 degrees are coterminal. As rotations they are different motions, but as positions they coincide, which means they produce identical values for every trigonometric function.",
-    sectionId: "8"
-  },
-  obj5: {
     question: "Do you have to memorise the whole unit circle?",
     answer: "No. Three first-quadrant angles carry it: 30, 45 and 60 degrees. Everything else follows by reflecting those values into the other quadrants and attaching the correct sign for that quadrant. Reference angles do the reflecting, so learning three exact values plus the sign pattern replaces memorising sixteen points.",
     sectionId: "5"
+  },
+  obj4: {
+    question: "How can an angle larger than 90° have a sine?",
+    answer: "Through the unit circle rather than a triangle. An angle of $150°$ cannot sit inside a right triangle, so opposite over hypotenuse has nothing to point at. Sine is instead the $y$-coordinate of the point where the terminal side meets the circle. At $150°$ that point is $(-\\frac{\\sqrt{3}}{2}, \\frac{1}{2})$, at the same height as the $30°$ point, so $\\sin 150° = \\frac{1}{2}$ while $\\cos 150° = -\\frac{\\sqrt{3}}{2}$.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Why is the reference angle measured to the x-axis and not the y-axis?",
+    answer: "Because the reference angle stands for the first-quadrant point with the same coordinate sizes, and that point's angle is measured from the $x$-axis, where every angle starts. The gap to the $y$-axis is its complement, so using it swaps sine and cosine. For $120°$ that gap is $30°$ and would give $\\sin 120° = \\frac{1}{2}$; the reference angle is $180° - 120° = 60°$, so $\\sin 120° = \\frac{\\sqrt{3}}{2}$.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Which whole-degree angles have a rational sine?",
+    answer: "From $0°$ to $90°$, only $0°$, $30°$ and $90°$, with sines $0$, $\\frac{1}{2}$ and $1$; every other sine there is irrational (Niven, 1956). At such angles $2\\cos\\theta$ solves an integer equation with leading coefficient 1, so a rational value of it must be a whole number from $-2$ to $2$. Since $\\sin\\theta = \\cos(90° - \\theta)$, the same limit holds for sine, leaving only $0$, $\\pm\\frac{1}{2}$ and $\\pm 1$.",
+    sectionId: "6"
   }
 }
 
@@ -2635,6 +2647,11 @@ $$x^2 + y^2 = 1$$]@`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={trigonometryNotationSheet}
+            current={'/trigonometry/unit-circle'}
           />,
         ]
     },

@@ -477,6 +477,11 @@ const introContent = {
   content: `A quadratic inequality asks not where a parabola crosses the horizontal axis, but where it lies above or below it. The roots of the corresponding quadratic equation mark the boundaries, the leading coefficient determines which way the parabola opens, and the discriminant decides whether there are two boundaries, one, or none. The solution is always readable from the shape of the parabola, and the sign chart formalizes that reading into a systematic procedure.`,
 };
 
+// FAQ pass 2026-10-31: kept the three discriminant questions. Added the
+// a > 0, discriminant <= 0 test for a never-negative quadratic (the "runs
+// backwards" paragraph under the negative-discriminant section), the largest
+// rectangle for a fixed perimeter (fact box, zero-discriminant section) and
+// setting each factor positive (pitfall under "Sign Chart Method").
 const faqQuestions = {
   obj1: {
     question: "Why is the solution to $x^2 - 6x + 9 > 0$ everything except one point?",
@@ -492,6 +497,21 @@ const faqQuestions = {
     question: "If a quadratic has no real roots, do you still need a sign chart?",
     answer: "No. Real roots are what carve the number line into intervals, so without them there is a single interval, the whole line, and one sign to determine. That sign is the sign of the leading coefficient $a$. Evaluate the discriminant, check $a$, and the answer is either all reals or nothing at all.",
     sectionId: "5"
+  },
+  obj4: {
+    question: "How can you tell that a quadratic is never negative?",
+    answer: "Check two numbers: $ax^2 + bx + c \\geq 0$ for every real $x$ exactly when $a > 0$ and $\\Delta = b^2 - 4ac \\leq 0$. With two distinct real roots the expression would dip below zero between them, so $\\Delta$ cannot be positive, and with $a < 0$ it is negative far from the vertex. For example, $x^2 + 2x + 5$ has $a = 1$ and $\\Delta = -16$, and indeed it equals $(x + 1)^2 + 4$.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Why does a square have the largest area of any rectangle with the same perimeter?",
+    answer: "Because the shortfall is a perfect square. With perimeter $20$ and one side $x$, the other side is $10 - x$, and $25 - x(10 - x) = x^2 - 10x + 25 = (x - 5)^2 \\geq 0$. So no such rectangle has area above $25$, and only $x = 5$, the $5 \\times 5$ square, reaches it. Any perimeter $P$ works the same way, with $\\frac{P}{4}$ in place of $5$.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Can you solve $(x + 2)(x - 3) > 0$ by making each factor positive?",
+    answer: "No. A product is positive when both factors share a sign, not when either one is positive. Setting $x + 2 > 0$ or $x - 3 > 0$ gives $x > -2$, which includes $x = 0$, where the product is $(2)(-3) = -6$. Both factors are positive for $x > 3$ and both negative for $x < -2$, so the solution is $(-\\infty, -2) \\cup (3, \\infty)$.",
+    sectionId: "6"
   }
 }
 

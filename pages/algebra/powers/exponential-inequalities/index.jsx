@@ -239,7 +239,7 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
 
 The base $a = 1$ is excluded because $1^x = 1$ for all $x$ — no inequality between distinct powers is possible.
 
-This directional rule replaces the familiar "multiply or divide by a negative flips the inequality" from linear algebra. In exponential inequalities, it is not the sign of a multiplier but the size of the base that governs whether the inequality reverses.`,
+This directional rule sits alongside the familiar "multiply or divide by a negative flips the inequality" from linear inequalities, which still applies once the exponents are compared. At the step that drops the exponentials, it is not the sign of a multiplier but the size of the base that governs whether the inequality reverses.`,
   before: ``,
   after: ``,
   link: '',
@@ -480,11 +480,16 @@ How to check: substitute any value. $x = 0$ gives $2^0 = 1 > -5$, and even $x = 
   content: `[Exponential equations](!/algebra/powers/exponential-equations) ask when two exponential expressions are equal. Exponential inequalities ask when one is larger than the other — and the answer hinges on a single property of the base that changes everything about how the inequality behaves.`
 }
 
+// FAQ pass 2026-10-31: rewrote the first question's answer: it said the
+// negative-multiplier rule is irrelevant, but the page now shows it still
+// applies in the linear step (-2x > -6 example and its pitfall), so the
+// answer and sectionId point there. Kept the other three. Added 2^300 versus
+// 3^200 (fact box under "Inequalities Requiring Simplification").
 const faqQuestions = {
   obj1: {
     question: "Does the rule about flipping when you multiply by a negative apply here?",
-    answer: "No, and expecting it is the usual source of sign errors. In linear inequalities the direction reverses when you multiply or divide by a negative number. In exponential inequalities the multiplier is irrelevant: what governs the direction is the size of the base. Above $1$ the direction is preserved, between $0$ and $1$ it reverses.",
-    sectionId: "1"
+    answer: "Yes, but not at the step that drops the exponentials. There the direction depends only on the base: kept for $a > 1$, reversed for $0 < a < 1$. What remains is an ordinary inequality between the exponents, and the usual rule applies to it: dividing $-2x > -6$ by $-2$ still turns it into $x < 3$. Checking the base first and any negative divisor second, as two separate steps, avoids most sign errors.",
+    sectionId: "3"
   },
   obj2: {
     question: "Can an exponential inequality be true for every real number?",
@@ -500,6 +505,11 @@ const faqQuestions = {
     question: "How do you flip a compound inequality with a fractional base?",
     answer: "Reverse both comparisons and then rewrite the chain so it reads left to right. With $\\frac{1}{3}$ as the base, the exponents $2$ and $-1$ give $2 > x > -1$ after reversing, which looks like the empty set if it is transcribed as $2 < x < -1$; the correct reading is $-1 < x < 2$. Reorder the endpoints after reversing, and check that the smaller bound ends up on the left.",
     sectionId: "5"
+  },
+  obj5: {
+    question: "Which is bigger, $2^{300}$ or $3^{200}$?",
+    answer: "$3^{200}$, by a factor of more than $130{,}000$. The two share no base, but they can share an exponent: $2^{300} = (2^3)^{100} = 8^{100}$ and $3^{200} = (3^2)^{100} = 9^{100}$. With the exponent fixed at $100$, the larger base gives the larger power, since $9 > 8$. The ratio is $\\left(\\frac{9}{8}\\right)^{100} \\approx 130{,}000$.",
+    sectionId: "3"
   }
 }
 
@@ -697,7 +707,7 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
         id: 'kind',
         lead: `Its answer is a range of exponents, and the base alone decides which side of the boundary it lies on.`,
         content: [
-          `This directional rule replaces the familiar "multiply or divide by a negative flips the inequality" from linear algebra. In exponential inequalities, it is not the sign of a multiplier but the size of the base that governs whether the inequality reverses.`,
+          `This directional rule sits alongside the familiar "multiply or divide by a negative flips the inequality" from linear inequalities, which still applies once the exponents are compared. At the step that drops the exponentials, it is not the sign of a multiplier but the size of the base that governs whether the inequality reverses.`,
           <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
         ],
       },

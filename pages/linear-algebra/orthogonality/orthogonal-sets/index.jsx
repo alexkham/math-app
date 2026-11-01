@@ -860,6 +860,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
 import orthogonalDiagrams from '@/app/components/linear-algebra copy/matrix/orthogonalDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
 
 
 export async function getStaticProps(){
@@ -1190,6 +1193,36 @@ const orthonormalOperations = {
 
 // formulas-injected: v1 | 2026-06-16 | 4 callouts (obj2 orthogonal_set_independence prose-insert, obj3 orthonormal_set direct, obj5 coordinates_via_orthonormal_basis direct, obj8 parseval_identity direct)
 
+// Concept introduction (section 1, "Orthogonal Sets") — template G,
+// exclusion. Running instance: {(1, 1, 1), (1, −2, 1), (1, 0, −1)} from the
+// section's example box, among five other sets. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box, fact aside, example box,
+// three passages and the orthset demo frame with its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCandTable = ciTableOpen(['set', 'vectors']) +
+  ciRow(['A', '(1, 0, 0), (0, 2, 0), (0, 0, −3)']) +
+  ciRow(['B', '(1, 1, 1), (1, −2, 1), (1, 0, −1)'], { shade: true }) +
+  ciRow(['C', '(1, 1, 0), (1, −1, 0), (1, 0, 1)']) +
+  ciRow(['D', '(1, 2), (2, −1)'], { shade: true }) +
+  ciRow(['E', '(1, 1), (2, 2)']) +
+  ciRow(['F', '(1, 0), (0, 0)'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciSortTable = ciTableOpen(['set', 'dot products of the pairs', 'orthogonal set?']) +
+  ciRow(['A', '0, 0, 0', 'yes'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['B', '0, 0, 0', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['C', '0, 1, 1 — two pairs fail', 'no']) +
+  ciRow(['D', '2 − 2 = 0', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['E', '2 + 2 = 4 — the vectors are parallel', 'no']) +
+  ciRow(['F', '0, but (0, 0) is the zero vector', 'no'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Orthogonal Sets`,
@@ -1471,6 +1504,11 @@ const introContent = {
   content: `An orthogonal set consists of vectors that are pairwise perpendicular. An orthonormal set adds the requirement that each vector has unit length. These sets are automatically linearly independent, and when they form a basis, coordinates are computed by dot products alone — no system solving, no row reduction, no matrix inversion.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the zero
+// vector (set F under "Orthogonal Sets"), all-sign bases and multiples of 4
+// (fact box under "Orthogonal Sets") and coefficients that do not change when
+// a vector is added (paragraph under "Summary: Operations in an Orthonormal
+// Basis").
 const faqQuestions = {
   obj1: {
     question: "Does an \"orthogonal matrix\" just have orthogonal columns?",
@@ -1486,6 +1524,21 @@ const faqQuestions = {
     question: "If $Q^{T}Q = I$, does $QQ^{T} = I$ as well?",
     answer: "Yes, for square $Q$, and this is one of the few places where such a swap is safe. The equation is a statement about the columns being orthonormal, and it forces the rows to be orthonormal too. Most matrix identities are not symmetric in that way, so the fact is worth noting rather than assuming.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can an orthogonal set contain the zero vector?",
+    answer: "No, the definition requires every vector to be nonzero. The set $\\{(1, 0), (0, 0)\\}$ passes the dot-product test only because $\\mathbf{0}$ is orthogonal to everything, and $\\mathbf{0}$ carries no direction. Allowing it would also break the guarantee that orthogonal sets are independent: $0 \\cdot (1, 0) + 1 \\cdot (0, 0) = \\mathbf{0}$ is a combination with a nonzero coefficient that still gives zero.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "For which $n$ is there an orthogonal basis of $\\mathbb{R}^n$ with every entry $\\pm 1$?",
+    answer: "For $n = 1$, $n = 2$, and otherwise only when $n$ is a multiple of $4$. In $\\mathbb{R}^4$, for example, $(1, 1, 1, 1)$, $(1, -1, 1, -1)$, $(1, 1, -1, -1)$ and $(1, -1, -1, 1)$ are pairwise orthogonal. For $n \\geq 3$, any three such vectors sort the $n$ positions into four equal groups by which signs agree, which forces the multiple of $4$. Whether every multiple of $4$ actually works is still unproved.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Does adding a vector to an orthonormal set change the coefficients already found?",
+    answer: "No. Each coefficient $c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$ uses only $\\mathbf{x}$ and $\\mathbf{q}_i$, so extending the set from $k$ to $k + 1$ vectors adds one new term and leaves the first $k$ untouched. With a set that is not orthogonal, the coefficients come from a linear system that couples every unknown to every other, so one new vector can change all of them.",
+    sectionId: "9"
   }
 }
 
@@ -1583,6 +1636,11 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    candTable: ciCandTable,
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     orthset: demoUnitFrame({
       svg: gramSchmidtDiagrams.done,
@@ -1603,6 +1661,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1631,10 +1690,82 @@ export default function OrthogonalSetsPage({
   obj7Table,
   orthonormalOperations,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six sets of vectors. In which of them does every vector meet every other at a right angle?`,
+        content: [
+          `Some are lined up with the axes, some are tilted, one contains a suspicious vector. From the numbers alone it is hard to tell.`,
+          ciTable('candTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Taking the dot product of every pair settles it: A, B and D pass; C, E and F fail.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `C fails on two pairs, E is parallel, and F only passes the dot-product test because of the zero vector.`,
+        content: [
+          `In C the first two vectors are perpendicular, but the third is not perpendicular to them, and one bad pair is enough to fail. B looks just as tilted as C, yet all three of its pairs give $0$.`,
+          `The vectors in an orthogonal set must all be nonzero — the zero vector is excluded because including it would trivialize the structure (every vector is orthogonal to $\\mathbf{0}$, so $\\mathbf{0}$ carries no directional information).`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: every pair perpendicular, and no zero vector allowed.`,
+        content: [
+          `Think of the edges meeting at the corner of a box: each one is at a right angle to every other. An orthogonal set is a collection of directions arranged like that, possibly with different lengths.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [orthogonal set](!/linear-algebra/definitions#orthogonal_set) is a set of nonzero vectors in which every pair of distinct vectors has dot product zero.`,
+        formula: [
+          `A set of vectors $\\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k\\}$ is orthogonal if every pair has [dot product](!/linear-algebra/vectors/dot-product) zero:`,
+          `@academic[formula_callout:Orthogonal Sets
+$$\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0 \\quad \\text{for all } i \\neq j$$]@`,
+        ],
+        footer: `So sets A, B and D are orthogonal; C, E and F are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `Being orthogonal is a property of the whole set — every pair has to pass.`,
+        content: [
+          `For example, $\\{(1, 0, 0), (0, 2, 0), (0, 0, -3)\\}$ is orthogonal in $\\mathbb{R}^3$: every pair of distinct vectors has dot product zero. The vectors need not have the same length, and their lengths can be anything nonzero.`,
+          `@academic[example:Example
+A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1)(1) + (1)(-2) + (1)(1) = 0$, $(1)(1) + (1)(0) + (1)(-1) = 0$, $(1)(1) + (-2)(0) + (1)(-1) = 0$. All three pairwise products vanish — the set is orthogonal despite none of the vectors being aligned with the coordinate axes.]@`,
+          `@academic[fact,aside:true,width:35%:All-sign bases need a multiple of 4
+$n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exist for $n = 1$ and $n = 2$, and otherwise only when $n$ is a multiple of $4$: any three of them sort the $n$ positions into four equal groups by which signs agree. Whether every multiple of $4$ works is still unproved.]@`,
+          <div key={'unit-orthset'} dangerouslySetInnerHTML={{ __html: demoUnits.orthset }} />,
+          `The zero vector has to be excluded by hand, since it is orthogonal to everything and would wreck the independence it otherwise guarantees.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A rejected set can often be repaired: tilting its vectors into right angles keeps the same span.`,
+        content: `Set C spans the same space as an orthogonal set, which the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) produces step by step. What orthogonality buys in return is shown in the next section: [orthogonal sets are independent](!/linear-algebra/orthogonality/orthogonal-sets#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, why orthogonal sets are independent, orthonormal sets and bases, coordinates via dot products, orthogonal matrices, and matrices with orthonormal columns.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1642,9 +1773,7 @@ export default function OrthogonalSetsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-orthset'} dangerouslySetInnerHTML={{ __html: demoUnits.orthset }} />,
-          `The zero vector has to be excluded by hand, since it is orthogonal to everything and would wreck the independence it otherwise guarantees.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1663,6 +1792,11 @@ export default function OrthogonalSetsPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laOrthoNotationSheet}
+            current={'/linear-algebra/orthogonality/orthogonal-sets'}
           />,
         ]
     },

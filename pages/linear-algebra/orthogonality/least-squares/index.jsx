@@ -941,6 +941,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import leastSquaresDiagrams from '@/app/components/linear-algebra copy/matrix/leastSquaresDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
 
 
 
@@ -1289,6 +1292,26 @@ const leastSquaresMethods = {
 
 // formulas-injected: v1 | 2026-06-16 | 3 callouts (obj3 normal_equations + least_squares_solution direct, obj8 least_squares_via_qr direct)
 
+// Concept introduction (section 1, "The Problem") — template C, failure
+// first. Running instance: the points (0, 1), (1, 2), (2, 2) and the line
+// y = c + mx; no line fits all three, the least-squares line is
+// y = 7/6 + x/2 with sum of squares 1/6. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its fact aside, formula box, four passages
+// and the noExactSolution demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciMissTable = ciTableOpen(['line', 'misses at x = 0, 1, 2', 'sum of squared misses']) +
+  ciRow(['y = 1 + x (through the first two)', '0, 0, 1', '1']) +
+  ciRow(['y = 2 (through the last two)', '1, 0, 0', '1'], { shade: true }) +
+  ciRow(['y = 1 + x/2', '0, 1/2, 0', '1/4']) +
+  ciRow(['y = 7/6 + x/2', '1/6, 1/3, 1/6', '1/6 — the smallest'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Problem`,
@@ -1593,6 +1616,10 @@ const introContent = {
   content: `When a linear system has no solution, the least-squares method finds the vector that comes closest — the one minimizing the squared distance between Ax and b. The answer is a projection: the least-squares solution produces the point in the column space nearest to b, and the normal equations encode the orthogonality condition that defines "nearest."`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added outliers
+// (one sentence under "The Problem"), whether an x^2 term can make the fit
+// worse (fact box and paragraph under "Worked Example: Fitting a Parabola")
+// and residuals summing to zero (the column-of-ones check in Common Pitfalls).
 const faqQuestions = {
   obj1: {
     question: "Does $\\hat{\\mathbf{x}}$ satisfy $A\\hat{\\mathbf{x}} = \\mathbf{b}$?",
@@ -1608,6 +1635,21 @@ const faqQuestions = {
     question: "Why are they called the \"normal\" equations?",
     answer: "Because normal here means perpendicular, pointing at the right angle in the geometry: the residual is orthogonal to the column space at the minimiser. It has nothing to do with ordinary in the everyday sense, and nothing to do with the normal distribution. That second collision is pure accident of vocabulary.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is least squares sensitive to outliers?",
+    answer: "Yes. Squaring weighs big misses heavily: a point that misses by $3$ adds $9$ to the sum, as much as nine points that each miss by $1$, so a single far-off point can pull the whole fit toward it. The squares are a choice, not a law of nature. They are used because they make the best fit computable by linear algebra, through the normal equations.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Can adding an $x^2$ term make a least-squares fit worse?",
+    answer: "No. The parabola model still contains every line, with $c_2 = 0$, so the residual sum of squares cannot increase. It may not drop either: for $(1, 2)$, $(2, 3)$, $(3, 6)$, $(4, 7)$ the best parabola is $y = 1.8x$ again, because the line's residuals $(0.2, -0.6, 0.6, -0.2)$ are already perpendicular to the new column $(1, 4, 9, 16)$. Extra terms can also start fitting noise rather than signal.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Why do least-squares residuals add up to zero?",
+    answer: "Because the model has an intercept. Its column of ones is one of the columns the residual must be perpendicular to, and the dot product of the residual with $(1, 1, \\ldots, 1)$ is exactly the sum of the residuals. The line fit's residuals $0.2 - 0.6 + 0.6 - 0.2$ add to $0$. Leave the column out and the rule fails: fitting $y = 2.6x$ to $(0, 1)$, $(1, 3)$, $(2, 5)$ leaves residuals adding to $1.2$.",
+    sectionId: "pitfalls"
   }
 }
 
@@ -1707,6 +1749,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    missTable: ciMissTable,
+  };
+
   const demoUnits = {
     geometry: demoUnitFrame({
       svg: leastSquaresDiagrams.residual,
@@ -1776,6 +1822,7 @@ const schemas = {
   props:{
     normalEqCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -1805,10 +1852,74 @@ export default function LeastSquaresPage({normalEqCases,
   obj9Table,
   leastSquaresMethods,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Three measured points, (0, 1), (1, 2) and (2, 2), should lie on a line y = c + mx. Which line?`,
+        content: [
+          `Each point gives one equation in the unknowns $c$ and $m$: $c = 1$, $c + m = 2$ and $c + 2m = 2$. That is three equations for two unknowns.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `No line passes through all three: a line through any two of them misses the third.`,
+        content: [
+          ciTable('missTable'),
+          `The first two equations force $c = 1$ and $m = 1$, and then the third fails: $1 + 2 = 3$, not $2$. Every line misses somewhere — but some miss by much less than others.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Since no line is exact, the sensible goal is the line that misses by the least overall.`,
+        content: [
+          `The [system](!/linear-algebra/linear-systems) $A\\mathbf{x} = \\mathbf{b}$ may have no solution — $\\mathbf{b}$ may not lie in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$. This is typical when the system is overdetermined: more equations than unknowns, with the equations imposing contradictory constraints.`,
+          `Overdetermined systems are the normal situation whenever something is measured. An orbit around the Sun is fixed by six numbers, but astronomers record far more than six positions, and each one carries a small measurement error. The equations then disagree slightly with one another, and no single orbit satisfies all of them exactly.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [least-squares solution](!/linear-algebra/definitions#least_squares_solution) of $A\\mathbf{x} = \\mathbf{b}$ is the vector $\\hat{\\mathbf{x}}$ that makes the sum of squared residuals $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ as small as possible.`,
+        formula: [
+          `When no exact solution exists, the goal shifts from solving $A\\mathbf{x} = \\mathbf{b}$ to minimizing the error:`,
+          `@academic[formula_callout:The Problem
+$$\\hat{\\mathbf{x}} = \\arg\\min_{\\mathbf{x}} \\|A\\mathbf{x} - \\mathbf{b}\\|^2$$]@`,
+          `The quantity $\\|A\\mathbf{x} - \\mathbf{b}\\|^2 = \\sum_i (A\\mathbf{x} - \\mathbf{b})_i^2$ is the sum of squared residuals. The vector $\\hat{\\mathbf{x}}$ that minimizes this sum is the least-squares solution.`,
+        ],
+        footer: `So for the three points the least-squares line is $y = \\frac{7}{6} + \\frac{x}{2}$, with sum of squared misses $\\frac{1}{6}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is an approximate solution that always exists — the best available when no exact one does.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:A lost asteroid found again
+Ceres, discovered on 1 January 1801, was followed for about six weeks before it vanished in the Sun's glare. The 24-year-old Gauss fitted an orbit to those few observations, Ceres was found again on 31 December 1801 close to his prediction, and least squares was part of the method he published in 1809.]@`,
+          <div key={'unit-noExactSolution'} dangerouslySetInnerHTML={{ __html: demoUnits.noExactSolution }} />,
+          `An inconsistent system is not the end of the problem; it is the reason least squares exists.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Squaring weighs big misses heavily, so a single far-off point can pull the whole fit toward it.`,
+        content: `Using squares is a choice, not a law of nature; it is the choice that makes the best fit computable by linear algebra, through [the normal equations](!/linear-algebra/orthogonality/least-squares#3).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the geometric picture, the normal equations, fitting a line and a parabola, the projection matrix, the pseudoinverse, least squares via QR, regression, and the minimum error.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1816,9 +1927,7 @@ export default function LeastSquaresPage({normalEqCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-noExactSolution'} dangerouslySetInnerHTML={{ __html: demoUnits.noExactSolution }} />,
-          `An inconsistent system is not the end of the problem; it is the reason least squares exists.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1837,6 +1946,11 @@ export default function LeastSquaresPage({normalEqCases,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laOrthoNotationSheet}
+            current={'/linear-algebra/orthogonality/least-squares'}
           />,
         ]
     },

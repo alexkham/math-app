@@ -821,9 +821,13 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import changeBasisDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/change-basis/changeBasisDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1148,6 +1152,25 @@ const canonicalForms = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 2, "The Change-of-Basis Matrix") — template
+// F, two descriptions shown to agree. Running instance: three vectors given
+// in standard and in B-coordinates, B = {(1, 1), (1, −1)}. Old obj2 text is
+// kept in sectionsContent.obj2, unused; its heading, five passages, two
+// formula boxes and link, pitfall, the matrix demo frame and its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCoordsTable = ciTableOpen(['standard coordinates', 'B-coordinates', 'rebuilt from B']) +
+  ciRow(['(5, 1)', '(3, 2)', '3(1, 1) + 2(1, −1) = (5, 1)']) +
+  ciRow(['(2, 0)', '(1, 1)', '1(1, 1) + 1(1, −1) = (2, 0)'], { shade: true }) +
+  ciRow(['(0, 2)', '(1, −1)', '1(1, 1) − 1(1, −1) = (0, 2)'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Problem`,
@@ -1209,7 +1232,7 @@ To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\math
         means: `Both ends of the arrow name the same space, and that repetition is what makes this page possible. Because input and output live in one space, a single basis choice governs both, so a single $P$ appears twice in the relation — once undoing the choice and once redoing it.`,
         cases: `A map between different spaces, $T: V \\to W$, needs two independent basis choices and the relation becomes $A' = Q^{-1}AP$ with two unrelated matrices. Similarity is the special case in which the two collapse into one.`,
         alsoWritten: `Such a map is called an operator on $V$ rather than a transformation between spaces, and the word carries exactly the information the repeated $V$ does.`,
-        confusedWith: `Reading the two $V$ symbols as decoration. If they differ, $A$ and $A'$ need not even be the same size, the invariants below stop being invariants, and the notation $P^{-1}AP$ does not typecheck.`,
+        confusedWith: `Reading the two $V$ symbols as decoration. If they differ, $A$ and $A'$ need not even be square, the invariants below stop being invariants, and the notation $P^{-1}AP$ does not typecheck.`,
         sameGlyphElsewhere: ``,
       },
       {
@@ -1474,6 +1497,12 @@ How to check: trace and determinant do not catch this, since the wrong matrix al
   content: `The same linear transformation has different matrix representations in different bases. Changing the basis changes the numbers but not the map itself. The relationship between two matrix representations of the same transformation is similarity — and choosing the right basis is how difficult matrices become simple ones.`,
 }
 
+// FAQ pass 2026-10-31: kept obj1 and obj2. Rewrote the last sentence of obj3:
+// for T: V -> W the matrices A and A' are always the same size, so it now
+// says what does survive (only the rank). Added similarity to the transpose
+// (fact box under "The Similarity Relation"), Schur versus Jordan in software
+// (summary card text, no heading asks it). Using P^T before normalizing is
+// left to eigen/diagonalization, which asks it with the same matrix.
 const faqQuestions = {
   obj1: {
     question: "Does similarity preserve symmetry, zeros or sparsity?",
@@ -1487,8 +1516,18 @@ const faqQuestions = {
   },
   obj3: {
     question: "Does similarity apply to maps between two different spaces?",
-    answer: "No. A map $T : V \\to W$ needs an independent basis choice at each end, giving $A' = Q^{-1}AP$ with two unrelated matrices. Similarity is the special case where domain and codomain coincide so the two collapse into one. If the spaces differ, $A$ and $A'$ need not even be the same size.",
+    answer: "No. A map $T : V \\to W$ needs an independent basis choice at each end, giving $A' = Q^{-1}AP$ with two unrelated matrices. Similarity is the special case where domain and codomain coincide so the two collapse into one. With $P$ and $Q$ unrelated, far less survives: only the rank is shared, and any two matrices of the same size and rank represent the same map in suitable bases.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is every matrix similar to its transpose?",
+    answer: "Yes, for every square matrix, even though rows and columns trade places. There is always an invertible $P$ with $A^{T} = P^{-1}AP$, because transposing does not change the rank of $A - \\lambda I$ or of any of its powers, and those ranks are what decide similarity. So $A$ and $A^{T}$ share eigenvalues, determinant, trace and Jordan form; what they generally do not share is eigenvectors.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Why do software libraries compute the Schur form instead of the Jordan form?",
+    answer: "Because the Jordan form is unstable. An arbitrarily small change to the entries can change its block structure: $\\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ is a single Jordan block, but replacing the lower $2$ with $2 + \\epsilon$ gives two distinct eigenvalues and a diagonal form. The Schur form $T = U^{*}AU$ is only triangular, but it exists for every complex square matrix and uses a unitary $U$, which keeps the computation numerically stable.",
+    sectionId: "10"
   }
 }
 
@@ -1572,6 +1611,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    coordsTable: ciCoordsTable,
+  };
+
   const demoUnits = {
     matrix: demoUnitFrame({
       svg: changeBasisDiagrams.nonorth,
@@ -1589,9 +1632,43 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj8): the worked example's matrix before and after the change to its eigenvector basis
+  const diagonalBeforeAfter = {
+    header: {
+      kicker: 'Full basis change',
+      title: 'Same map, diagonal matrix',
+      lede: 'The transformation does not change, only its numerical description does.',
+    },
+    before: {
+      form: 'Standard basis',
+      expr: '$A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}$',
+      meta: 'The map in standard coordinates',
+    },
+    after: {
+      form: 'Eigenvector basis',
+      expr: '$D = \\begin{pmatrix} 2 & 0 \\\\ 0 & 5 \\end{pmatrix}$',
+      meta: 'A = PDP⁻¹, with the eigenvectors in P',
+    },
+    operation: {
+      name: 'Change to the eigenvector basis',
+      desc: 'put the eigenvectors in P, the eigenvalues in D',
+      detailsLabel: 'P on the left',
+      detailsTitle: '',
+      details: 'Recombining as $P^{-1}DP$ instead of $PDP^{-1}$ gives $\\begin{pmatrix} 4 & -1 \\\\ -2 & 3 \\end{pmatrix}$, not $A$. With the eigenvectors as its columns, $P$ stands on the left of $D$: $A = PDP^{-1}$.',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'The basis: in eigenvector coordinates the map only stretches, by 2 along (1, −2) and by 5 along (1, 1).' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The transformation itself. To get A¹⁰, raise only the diagonal entries: 2¹⁰ and 5¹⁰.' },
+    ],
+  };
+
 return {
   props:{
+    diagonalBeforeAfter,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1610,9 +1687,80 @@ return {
 }
    }
 
-export default function BasisChangePage({seoData, sectionsContent, introContent, obj4Table, obj9Table, canonicalForms, faqQuestions, schemas, demoUnits}) {
+export default function BasisChangePage({seoData, sectionsContent, introContent, obj4Table, obj9Table, canonicalForms, faqQuestions, schemas, demoUnits, diagonalBeforeAfter, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The same arrow can be described by different coordinates, depending on which basis vectors it is measured against.`,
+        content: [
+          `Take the basis $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ alongside the standard one.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `One vector, two coordinate lists — and both rebuild the same arrow.`,
+        content: [
+          ciTable('coordsTable'),
+          `Moving from one list to the other takes a single matrix.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `A matrix whose columns are the vectors of B converts B-coordinates into standard coordinates.`,
+        content: [
+          `Column $j$ of $P$ is the $\\mathcal{C}$-coordinate vector of the $j$-th basis vector of $\\mathcal{B}$. The reverse conversion uses the [inverse](!/linear-algebra/matrix/inverse): $P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = P^{-1}$.`,
+          `## Worked Example`,
+          `In $\\mathbb{R}^2$, let $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$ and let $\\mathcal{C}$ be the standard basis. The $\\mathcal{C}$-coordinates of the $\\mathcal{B}$-basis vectors are just their components: $(1, 1)$ and $(1, -1)$. So`,
+          `@academic[formula_callout:The Change-of-Basis Matrix
+$$P = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$]@`,
+          `To find the $\\mathcal{B}$-coordinates of $\\mathbf{v} = (5, 1)$: solve $P\\mathbf{c} = (5, 1)$. Using $P^{-1} = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}$, we get $\\mathbf{c} = (3, 2)$. So $\\mathbf{v} = 3(1, 1) + 2(1, -1)$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [change-of-basis matrix](!/linear-algebra/definitions#change_of_basis_matrix) $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ converts coordinates relative to a basis $\\mathcal{B}$ into coordinates relative to a basis $\\mathcal{C}$; its columns are the $\\mathcal{C}$-coordinates of the vectors of $\\mathcal{B}$.`,
+        formula: [
+          `If $\\mathcal{B}$ and $\\mathcal{C}$ are two bases for $V$, the change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ converts $\\mathcal{B}$-coordinates to $\\mathcal{C}$-coordinates:`,
+          `@academic[formula_callout:Change of Basis Formula
+$$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}} \\, [\\mathbf{v}]_\\mathcal{B}$$
+/linear-algebra/formulas#change_of_basis_formula]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `So with $\\mathcal{B} = \\{(1, 1), (1, -1)\\}$, $P\\,(3, 2) = (5, 1)$: the $\\mathcal{B}$-coordinates $(3, 2)$ become the standard coordinates $(5, 1)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The conversion runs both ways: P in one direction, its inverse in the other.`,
+        content: [
+          <div key={'unit-matrix'} dangerouslySetInnerHTML={{ __html: demoUnits.matrix }} />,
+          `Its inverse is the dictionary read the other way, which is why change of basis always comes as a conjugating pair.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The direction of the conversion is easy to get backwards.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Converting in the wrong direction
+Multiplying $P$ by the standard coordinates of $(3, 1)$ gives $(4, 2)$, but $4(1, 1) + 2(1, -1) = (6, 2)$, not $(3, 1)$. The $\\mathcal{B}$-coordinates come from $P^{-1}$: $P^{-1}(3, 1) = (2, 1)$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the similarity relation, what similarity preserves, diagonalization as a change of basis and when it fails, orthogonal similarity, a full worked example, why the choice of basis matters, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1628,9 +1776,7 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-                  <div key={'unit-matrix'} dangerouslySetInnerHTML={{ __html: demoUnits.matrix }} />,
-          `Its inverse is the dictionary read the other way, which is why change of basis always comes as a conjugating pair.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1649,6 +1795,11 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laTransformNotationSheet}
+            current={'/linear-algebra/transformations/basis-change'}
           />,
         ]
     },
@@ -1702,6 +1853,19 @@ export default function BasisChangePage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="diagonalization-before-after"
+            title="The worked example's matrix in its eigenvector basis"
+            source="/linear-algebra/transformations/basis-change"
+            before={"The matrix from the worked example, before and after the change to its eigenvector basis."}
+            after={"D holds the eigenvalues 2 and 5; P converts eigenvector coordinates back to standard ones, and A = PDP⁻¹ recombines them."}
+          >
+            <BeforeAfter
+              data={diagonalBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

@@ -1569,6 +1569,11 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2012,6 +2017,23 @@ const centralTendencyComparisonData = {
   ]
 };
 
+// Concept introduction (section 1, "Definition and Concept") — template C,
+// failure first. Running instance: five incomes whose mean jumps when one
+// salary becomes extreme, while the middle value stays. Old obj1 text is kept
+// in sectionsContent.obj1, unused; its four headings, eight passages and three
+// lists are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciIncomeTable = ciTableOpen(['incomes (thousands)', 'mean', 'middle value']) +
+  ciRow(['30, 35, 40, 45, 50', '40', '40']) +
+  ciRow(['30, 35, 40, 45, 1000', '230', '40'], { shade: true, last: true, color: '#a4243b', cols: [1] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -2061,7 +2083,7 @@ For income data, housing prices, or any measurement prone to outliers, the media
 The median behaves distinctly from mean and mode:
 
 • **Robustness**: Extreme values beyond the 50% threshold have zero influence
-• **Always unique for continuous distributions**: Unlike the mode, which can be multiple or absent
+• **Unique when the CDF is strictly increasing**: Unlike the mode, which can be multiple or absent
 • **May differ from mean**: Skewed distributions separate median and mean substantially
 • **Interpretability**: Represents an achievable middle value, not an abstract balance point
 
@@ -2412,7 +2434,7 @@ Perfect symmetry forces the probability split, the balance point, and the peak t
 
 ## Skewed Distributions
 
-Asymmetry separates the three measures in consistent patterns.
+Asymmetry typically separates the three measures in a familiar pattern — a rule of thumb, not a guarantee.
 
 Right skew (tail stretches toward larger values):
 
@@ -3299,6 +3321,10 @@ This page introduces the median as the value that divides a distribution into tw
 // multiple-medians question, whose heading reads only "Special Cases and
 // Edge Cases", and added the notation section's conventions — this page
 // has more unsettled notation than any other in the section.
+// FAQ pass 2026-10-31: kept all five. Added the |μ − m| ≤ σ bound (fact box
+// under "Properties of the Median"), the half-life as a median (fact box
+// under "Median, Mean, and Mode Compared") and the median of X² when X can
+// be negative (pitfall under the monotonic-transformation property).
 const faqQuestions = {
   obj1: {
     question: "Can a distribution have multiple medians?",
@@ -3324,6 +3350,21 @@ const faqQuestions = {
     question: "Does the subscript in Q₂ mean the same as in Q₀.₅?",
     answer: "No — the two conventions count different things and happen to name the same value. Q₂ is the second of the three quartiles, so its subscript counts cut points. Q₀.₅ is the 0.5-quantile, so its subscript states a probability. Both land on the median, but reading one subscript as the other misidentifies every quantile except this one.",
     sectionId: "12"
+  },
+  obj6: {
+    question: "How far apart can the mean and the median be?",
+    answer: "At most one standard deviation: $|\\mu - m| \\le \\sigma$ for any variable with finite variance, however skewed. The chain is $|\\mu - m| \\le E|X - m| \\le E|X - \\mu| \\le \\sigma$, where the middle step holds because the median minimizes the average absolute distance. For the exponential with $\\lambda = 1$, the gap is $1 - \\ln 2 \\approx 0.31$, well inside $\\sigma = 1$.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "Is a half-life a median or a mean?",
+    answer: "A median. The half-life of an isotope is the time by which half of a large sample has decayed, which is the median lifetime of one atom, $\\frac{\\ln 2}{\\lambda}$. The mean lifetime is $\\frac{1}{\\lambda}$, about $1.44$ half-lives, because the exponential lifetime has a long right tail: the few atoms that last much longer than the rest pull the average up.",
+    sectionId: "5"
+  },
+  obj8: {
+    question: "Is the median of X² the square of the median of X?",
+    answer: "Only when squaring keeps the order, as it does for $X \\ge 0$; then a median of $5$ gives $25$. When $X$ takes both signs it fails: for $X$ uniform on $[-1, 1]$ the median is $0$, but $P(X^2 \\le t) = \\sqrt{t}$, which reaches $0.5$ at $t = 0.25$. Squaring folds both ends of $X$ onto the top of $X^2$, so the median of $X^2$ is $0.25$, not $0$.",
+    sectionId: "6"
   }
 }
 
@@ -3412,6 +3453,10 @@ const schemas = {
     vlines: [{ x: Math.LN2, label: '' }, { x: 1, label: '' }],
     notes: [{ x: 0.05, y: 1.0, text: 'mode 0', pos: 'e', color: 'f' }, { x: Math.LN2, y: 1.1, text: 'median 0.69', pos: 'w', color: 'r' }, { x: 1, y: 1.1, text: 'mean 1', pos: 'e', color: 'g' }, { x: 1.6, y: 0.75, text: 'half the area left of 0.69', pos: 'e' }, { x: 1.6, y: 0.65, text: 'the long right tail pulls the mean', pos: 'e' }],
     caption: 'Right skew: mode < median < mean' };
+  const conceptIntroFigures = {
+    incomeTable: ciIncomeTable,
+  };
+
   const demoUnits = {
     u_3_0: demoUnitFrame({
       svg: continuousCdfDiagrams.exponential,
@@ -3439,9 +3484,51 @@ const schemas = {
     }),
   };
 
+  // DecisionMaker + DecisionWalker (obj7): median-method-decision
+  const medianMethodDecision = {
+    header: {
+      kicker: 'finding the median',
+      title: 'Which way to the median?',
+      lede: 'Data or a distribution first; for a distribution, discrete or continuous decides the method.',
+    },
+    start: 'what',
+    nodes: {
+      what: { question: 'What is given?', answers: [
+        { label: 'sample data', to: 'odd' },
+        { label: 'a distribution', to: 'kind' },
+      ] },
+      odd: { question: 'Is the sample size n odd?', hint: 'after sorting the values', answers: [
+        { label: 'yes', to: 'middle' },
+        { label: 'no', to: 'average' },
+      ] },
+      kind: { question: 'Discrete or continuous?', answers: [
+        { label: 'discrete', to: 'cdfstep' },
+        { label: 'continuous', to: 'sym' },
+      ] },
+      sym: { question: 'Symmetric?', answers: [
+        { label: 'yes', to: 'centre' },
+        { label: 'no', to: 'closed' },
+      ] },
+      closed: { question: 'Can F(m) = 0.5 be solved by algebra?', answers: [
+        { label: 'yes', to: 'inverse' },
+        { label: 'no', to: 'numeric' },
+      ] },
+    },
+    outcomes: {
+      middle: { title: 'The middle value', action: 'sort, then take $x_{(n+1)/2}$', example: '{3, 7, 1, 9, 5} → sorted {1, 3, 5, 7, 9} → 5', tone: 'done', link: { label: 'How to find the median', href: '/probability/median#7' } },
+      average: { title: 'Average the two middle values', action: 'sort, then take $(x_{n/2} + x_{n/2+1})/2$', example: '{3, 7, 1, 9} → (3 + 7)/2 = 5', tone: 'done', link: { label: 'How to find the median', href: '/probability/median#7' } },
+      cdfstep: { title: 'First k with F(k) ≥ 0.5', action: 'check both P(X ≤ k) ≥ 0.5 and P(X ≥ k) ≥ 0.5', example: 'binomial, n = 10, p = 0.5 → median 5', link: { label: 'Discrete distributions', href: '/probability/median#2' } },
+      centre: { title: 'The centre of symmetry', action: 'no calculation needed', example: 'normal with mean μ → median μ', tone: 'done', link: { label: 'Continuous distributions', href: '/probability/median#3' } },
+      inverse: { title: 'Solve F(m) = 0.5', action: 'use the inverse CDF: m = F⁻¹(0.5)', example: 'exponential with rate λ → m = ln(2)/λ', link: { label: 'Continuous distributions', href: '/probability/median#3' } },
+      numeric: { title: 'Find the root numerically', action: 'bisection, Newton–Raphson, or a software quantile function', link: { label: 'Continuous distributions', href: '/probability/median#3' } },
+    },
+  };
+
    return {
       props:{
+    medianMethodDecision,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          centralTendencyComparisonData,
@@ -3465,7 +3552,7 @@ const schemas = {
     }
    }
 
-export default function MedianPage({
+export default function MedianPage({medianMethodDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -3477,10 +3564,87 @@ export default function MedianPage({
   obj13Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The average income of a group is supposed to describe a typical member.`,
+        content: [
+          `Five people earn $30$, $35$, $40$, $45$ and $50$ thousand. The mean, $40$ thousand, sits right in the middle.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Raise the top salary to 1000 thousand and the mean jumps to 230 — far above what four of the five people earn.`,
+        content: [
+          ciTable('incomeTable'),
+          `One extreme value moved the mean by $190$ thousand. The middle value, $40$, did not move at all.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `A centre found by position ignores how extreme the extremes are.`,
+        content: [
+          `## Median as a Measure of Central Tendency`,
+          `The median is one of three primary measures describing where a distribution centers, alongside the [mean](!/probability/expected-value) and [mode](!/probability/mode).`,
+          `Unlike the mean, which balances all values through weighted averaging, the median simply identifies the middle position. It cares only about ranking values, not their magnitudes—making it resistant to extreme observations that would distort the mean.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **median** of a distribution is a value $m$ that splits its probability in half: $P(X \\le m) \\ge \\frac{1}{2}$ and $P(X \\ge m) \\ge \\frac{1}{2}$.`,
+        formula: [
+          `The **median** is the value that splits a [probability distribution](!/probability/distributions) exactly in half. It's the point where half the probability lies below and half lies above.`,
+          `## What is the Median?`,
+          `For any probability distribution, the median is the 50th percentile—the value $m$ that divides the total probability into two equal parts:`,
+          `• **Discrete distributions**: The value $m$ where cumulative probability reaches or exceeds 0.5 from both directions
+• **Continuous distributions**: The unique value $m$ where $P(X \\leq m) = 0.5$`,
+          `If you draw [random variables](!/probability/random-variables) from the distribution repeatedly, half will fall below the median and half will fall above it.`,
+        ],
+        footer: `So for five equally likely incomes of $30$, $35$, $40$, $45$ and $1000$ thousand, the median is $40$ thousand: two values lie below it and two above.`,
+      },
+      {
+        id: 'kind',
+        lead: `The median reports the centre by position, so outliers cannot drag it.`,
+        content: [
+          `## Why the Median Matters`,
+          `The median provides crucial insight into distribution structure:`,
+          `• **Where is the center?** The median marks the probability midpoint
+• **How symmetric is the distribution?** Comparing median to mean reveals skewness
+• **Are there outliers?** The median stays stable when extreme values appear`,
+          `For income data, housing prices, or any measurement prone to outliers, the median often represents the "typical" value better than the mean does.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The median and the mean answer different questions, and the median is not always a single value.`,
+        content: [
+          `## Median vs Other Measures`,
+          `The median behaves distinctly from mean and mode:`,
+          `• **Robustness**: Extreme values beyond the 50% threshold have zero influence
+• **Unique when the CDF is strictly increasing**: Unlike the mode, which can be multiple or absent
+• **May differ from mean**: Skewed distributions separate median and mean substantially
+• **Interpretability**: Represents an achievable middle value, not an abstract balance point`,
+          `The median complements mean and mode by revealing the distribution's center through probability division rather than probability weighting or probability concentration.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the median for discrete and continuous distributions, how they compare, the median against the mean and mode, its properties, how to find it, the 50th percentile, practical use, common distributions, special cases, common mistakes and related concepts.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -3497,7 +3661,7 @@ export default function MedianPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -3564,6 +3728,16 @@ export default function MedianPage({
         content:[
           sectionsContent.obj7.content,
                   <div key={'unit-u_7_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_7_1 }} />,
+          `The cases above as one map: sample data, a discrete distribution and a continuous one, with the continuous case split by how much algebra it needs.`,
+          <DiagramFrameV2
+            key={'obj7-decision'}
+            id="median-method-decision"
+            title="Which way to the median?"
+            source="/probability/median"
+          >
+            <DecisionBox data={medianMethodDecision} />
+          </DiagramFrameV2>,
+          `Only the discrete route looks for an inequality instead of an equation. A discrete CDF jumps past $0.5$ rather than meeting it, so $F(m) = 0.5$ usually has no solution there; the [common mistakes](!#13) show what goes wrong when the continuous rule is used on a discrete variable.`,
           `The percentile view generalises this from one half to any level.`,
         ]
     },
@@ -3611,6 +3785,11 @@ export default function MedianPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probSpreadNotationSheet}
+            current={'/probability/median'}
           />,
         ]
     },

@@ -624,6 +624,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 
 
 export async function getStaticProps(){
@@ -674,6 +678,27 @@ const keyWords = [
   const cardinalityTable = summaries[1].table
   const relationshipsTable = summaries[2].table
   const operationsTable = summaries[3].table
+
+// Concept introduction (section 1, "What Is a Set? The Definition") —
+// template G, exclusion. Running instance: six descriptions compared with
+// {1, 2, 3}; four describe the same set. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its fact aside, three bullets, three passages,
+// the anyObjects figure and the punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSameTable = ciTableOpen(['description', 'what differs from {1, 2, 3}', 'same set?']) +
+  ciRow(['A: {1, 2, 3}', 'nothing', 'yes'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['B: {3, 1, 2}', 'only the order of writing', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['C: {1, 1, 2, 3, 3}', 'only repeats in the writing', 'yes'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['D: the whole numbers from 1 to 3', 'described by a rule, not a list', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['E: {1, 2}', '3 is missing', 'no']) +
+  ciRow(['F: {1, 2, 3, 4}', '4 is extra', 'no'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
     obj0: {
@@ -970,6 +995,12 @@ Set theory is the language in which much of modern mathematics is written. This 
 // Five questions. This is the survey page, so anything a dedicated page owns
 // was cut: subsets, disjoint sets, and union vs intersection now live on
 // /set-theory/subsets, /set-theory/relationships and /set-theory/operations.
+// FAQ pass 2026-10-31: kept all five. obj2 pointed at sectionId "notation",
+// which this page does not have; now "2". obj5 had no sectionId; now "1".
+// Added Russell's paradox (fact box under "What Is a Set?"), the empty-set
+// sign versus phi and braces versus interval brackets (both "Do not confuse"
+// cards in the notation section), and numbers built from the empty set (fact
+// box under "Cardinality and Types of Sets"). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "What can be an element of a set?",
@@ -979,7 +1010,7 @@ const faqQuestions = {
   obj2: {
     question: "What is the difference between roster and set-builder notation?",
     answer: "Roster notation lists the members outright: {2, 4, 6}. Set-builder states a rule instead: {x | x is a positive even number}, read as the set of all x such that x is even. Roster suits small finite sets; set-builder handles sets too large or awkward to write out. Both describe the same kind of object. See [all set theory symbols](!/math-symbols/set-theory).",
-    sectionId: "notation"
+    sectionId: "2"
   },
   obj3: {
     question: "What is the universal set?",
@@ -993,7 +1024,28 @@ const faqQuestions = {
   },
   obj5: {
     question: "Are {1, 2, 3} and {3, 2, 1, 1} the same set?",
-    answer: "Yes. Sets are unordered, so rearranging the listing changes nothing, and elements are distinct, so repeating one adds nothing. Both expressions name the same three-element set. This is also why cardinality counts distinct members only: the second listing has four entries written down but still has size 3."
+    answer: "Yes. Sets are unordered, so rearranging the listing changes nothing, and elements are distinct, so repeating one adds nothing. Both expressions name the same three-element set. This is also why cardinality counts distinct members only: the second listing has four entries written down but still has size 3.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Can any collection of objects be a set?",
+    answer: "No. Take the collection $R$ of all sets that are not members of themselves and ask whether $R \\in R$. If it is, $R$ fails its own condition, so it is not; if it is not, $R$ meets the condition, so it is. Either answer contradicts itself, so $R$ cannot be a set. Bertrand Russell found this in 1901, and axiomatic set theory now allows new sets to be formed only by stated rules.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "Is the empty set symbol the Greek letter phi?",
+    answer: "No, although handwriting often makes the two look alike. The empty-set sign $\\varnothing$ is a circle with a slash through it, and it names one particular set, the set with no members, also written $\\{\\}$. The Greek letter $\\phi$ is an ordinary letter used for angles and other quantities. Reading $\\varnothing$ aloud as phi is a naming error; say the empty set.",
+    sectionId: "2"
+  },
+  obj8: {
+    question: "Is $\\{2, 7\\}$ the same as $[2, 7]$?",
+    answer: "No. Curly braces list members, so $\\{2, 7\\}$ is a set with exactly two elements, the numbers $2$ and $7$. Square brackets build an interval: $[2, 7]$ holds every real number from $2$ to $7$, endpoints included, so it has infinitely many elements, among them $2.5$ and $\\pi$. A single brace on its own has another job again, grouping the cases of a piecewise definition.",
+    sectionId: "2"
+  },
+  obj9: {
+    question: "How can numbers be built out of sets?",
+    answer: "By starting from the empty set. In 1923 John von Neumann defined $0$ as $\\varnothing$ and each next whole number as the set of all the numbers before it: $1 = \\{\\varnothing\\}$, $2 = \\{\\varnothing, \\{\\varnothing\\}\\}$, and $3 = \\{0, 1, 2\\}$. Each number $n$ is then a set with exactly $n$ elements, so every whole number is itself a ready-made set of that size.",
+    sectionId: "3"
   }
 }
 
@@ -1069,6 +1121,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    sameTable: ciSameTable,
+  };
+
   const demoUnits = {
     subset: demoUnitFrame({
       svg: twoSetsVennDiagrams.subsetAinB,
@@ -1109,6 +1165,7 @@ const schemas = {
   props: {
     setTypesOutline,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     figs,
@@ -1132,9 +1189,74 @@ const schemas = {
    }
 
 
-export default function SetTheoryBasicsPage({setTypesOutline, seoData, sectionsContent, introContent, figs, notationTable, cardinalityTable, relationshipsTable, operationsTable, faqQuestions, schemas, demoUnits}) {
+export default function SetTheoryBasicsPage({setTypesOutline, seoData, sectionsContent, introContent, figs, notationTable, cardinalityTable, relationshipsTable, operationsTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six descriptions of a collection. Which of them describe the same collection as {1, 2, 3}?`,
+        content: [
+          `A: $\\{1, 2, 3\\}$ $\\quad$ B: $\\{3, 1, 2\\}$ $\\quad$ C: $\\{1, 1, 2, 3, 3\\}$ $\\quad$ D: the whole numbers from $1$ to $3$ $\\quad$ E: $\\{1, 2\\}$ $\\quad$ F: $\\{1, 2, 3, 4\\}$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Asking only which objects belong settles it: A, B, C and D are the same collection; E and F are not.`,
+        content: [
+          ciTable('sameTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `E and F differ in membership; B, C and D differ only in how the members are written down.`,
+        content: [
+          `Swapping the order, writing $1$ twice, or describing the members by a rule instead of a list changes the spelling, not the collection.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [set](!/set-theory/definitions#set) is an unordered collection of distinct objects, its [elements](!/set-theory/definitions#element); a set is decided entirely by which objects belong to it.`,
+        formula: [
+          `In mathematics, a set is defined as an **unordered collection of unique items**. This short yet concise definition contains everything needed to understand the essence of the object we call a mathematical set. Let us analyze it in more depth:`,
+          `- **Unordered** — the order of the elements does not matter. Two or more sets containing the same items are identical, no matter how the items are listed.`,
+          `- **Collection** — stands for zero or more items, up to an infinite number of them.`,
+          `- **Unique** — each member of the set is distinct; no two identical items are present.`,
+        ],
+        footer: `So A, B, C and D are all the same set, $\\{1, 2, 3\\}$; E and F are two other sets.`,
+      },
+      {
+        id: 'kind',
+        lead: `Anything can be an element — numbers, words, objects, even other sets.`,
+        content: [
+          `What kinds of items or entities can be members of a mathematical set? Whatever they are, it does not matter. Mathematics is all about abstraction, and in the abstract world things can be of any type — so the famous 'apples and oranges' problem does not apply here. Entities of completely different kinds can live together as parts of the same set.`,
+          `Members can even be sets themselves. The set $\\{1, \\{2, 3\\}\\}$ has two elements: the number $1$ and the set $\\{2, 3\\}$. A set can also be described by a property alone, as in the set of all even numbers, without listing a single member.`,
+          <div key={'fig-any-objects'} dangerouslySetInnerHTML={{ __html: figs.anyObjects }} />,
+          `@academic[punchline:A set is decided by its members alone: listing them in another order or repeating one never changes it.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Not every collection you can describe is allowed to be a set.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:Not every collection can be a set
+The collection of all sets that are not members of themselves would contain itself exactly when it does not. Russell found this in 1901 and wrote to Frege in 1902, as Frege's book founding arithmetic on such collections went to press.]@`,
+          `The symbols used to write sets down are introduced next, in [notation used in set theory](!/set-theory/basics#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, kinds of sets, cardinality, relationships between sets, and the set operations.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1150,9 +1272,7 @@ export default function SetTheoryBasicsPage({setTypesOutline, seoData, sectionsC
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'fig-any-objects'} dangerouslySetInnerHTML={{ __html: figs.anyObjects }} />,
-          `@academic[punchline:A set is decided by its members alone: listing them in another order or repeating one never changes it.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1171,6 +1291,11 @@ export default function SetTheoryBasicsPage({setTypesOutline, seoData, sectionsC
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={setTheoryNotationSheet}
+            current={'/set-theory/basics'}
           />,
           <div
             key={'notation-table'}

@@ -17,6 +17,8 @@ import functionDerivativeDiagrams from '@/app/components/functions/derivative/fu
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 
 
 export async function getStaticProps(){
@@ -631,6 +633,11 @@ Understanding $f'$ as a function—not just a computation applied at isolated po
 // the f/f' relationship, rate of change, and continuity of f' (whose
 // section opens with that exact question). Replaced with three traps from
 // the notation section and the one buried consequence of Darboux's theorem.
+// FAQ pass 2026-10-31: kept all four. Added the smaller domain of f' (the
+// corollary under "The Derivative Function Defined"), positive slope at a
+// point without increase (fact box under "The Relationship Between f and f'")
+// and Volterra's non-integrable derivative (fact box under "Continuity of
+// the Derivative").
 const faqQuestions = {
   obj1: {
     question: "What does the vertical bar in dy/dx|ₓ₌ₐ mean?",
@@ -650,6 +657,21 @@ const faqQuestions = {
   obj4: {
     question: "Can a derivative have a jump discontinuity?",
     answer: "No. Darboux's theorem says every derivative has the intermediate value property: if f′ takes two values on an interval, it takes every value between them, and a jump would skip values. Derivatives can still be discontinuous — x²sin(1/x) is [differentiable](!/calculus/derivatives/differentiability) everywhere yet its derivative oscillates at 0 — but only oscillatory discontinuities are possible.",
+    sectionId: "7"
+  },
+  obj5: {
+    question: "Can the derivative have a smaller domain than the function?",
+    answer: "Yes. The domain of $f'$ is always a subset of the domain of $f$: every point where the limit fails, at a corner, cusp, vertical tangent or discontinuity, drops out. For $f(x) = |x|$ the function is defined for all reals, but $x = 0$ is missing from the domain of $f'$. For a polynomial nothing is lost, and the two domains coincide.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "If f′(a) > 0, is f increasing near a?",
+    answer: "Not necessarily. A positive derivative at a single point does not make $f$ increasing on any interval. For $g(x) = \\frac{x}{2} + x^2 \\sin(1/x)$ with $g(0) = 0$, the slope at $0$ is $g'(0) = \\frac{1}{2}$, yet near $0$ the derivative keeps swinging between about $-\\frac{1}{2}$ and $\\frac{3}{2}$, so $g$ falls again and again on every interval around $0$. A positive derivative throughout an interval is what guarantees increase.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Can every derivative be integrated?",
+    answer: "Not in the Riemann sense. In 1881 Vito Volterra glued copies of $x^2 \\sin(1/x)$ onto a Cantor-like set of positive length. His function is differentiable everywhere with a bounded derivative, yet that derivative is discontinuous on too large a set to have a Riemann integral. When $f'$ is continuous, integrating it from $a$ to $b$ always gives back $f(b) - f(a)$.",
     sectionId: "7"
   }
 }
@@ -914,6 +936,11 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={derivativesNotationSheet}
+            current={'/calculus/derivatives/function'}
           />,
                   <div key={'unit-fAndFp'} dangerouslySetInnerHTML={{ __html: demoUnits.fAndFp }} />,
           `The reverse reading, from f&#8242; back to f, uses the same dictionary in the other direction.`,

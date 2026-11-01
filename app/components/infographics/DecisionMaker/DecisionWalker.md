@@ -3,7 +3,7 @@
 The interactive version of [DecisionMaker](./DecisionMaker.md). It uses the same data and the same look. The reader answers the questions, either on the map or one card at a time, and the route to the outcome lights up.
 
 ```jsx
-import DecisionWalker from '@/app/components/infographics/DecisionWalker';
+import DecisionWalker from '@/app/components/infographics/DecisionMaker/DecisionWalker';
 
 <DecisionWalker data={factoringStrategy} />
 ```
@@ -220,3 +220,9 @@ The walker is a tool rather than an infographic, so place it where the reader ac
 - **Static views:** in DecisionMaker (no `walk`), the Steps and tree views behave as before: hover tracing, no buttons.
 - **Data rules:** the same as DecisionMaker. Each outcome is reached by exactly one answer, there are no loops, and `start` must be a question id.
 - **Keyboard:** live answer pills and card answers are real `<button>`s, so they can be reached and pressed with the keyboard.
+
+---
+
+## `stack` (added 2026-10-29)
+
+`<DecisionWalker data={d} stack />`: the question card on top is the only place to answer; the map view underneath (Steps / Tree → / Tree ↓, whichever fits, switchable) follows the route read-only. Where no map view fits, only the card shows and the view switch is hidden. DecisionBox uses this for Walk it.

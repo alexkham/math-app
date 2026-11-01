@@ -1640,6 +1640,7 @@ import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2322,6 +2323,25 @@ export async function getStaticProps(){
 
 // }
 
+// Concept introduction (section 1, "What is a Function Family") — template
+// A, definition last. Running instance: four members of the linear family
+// against x². Old obj1 text is kept in sectionsContent.obj1, unused; its five
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciLinesTable = ciTableOpen(['function', 'm', 'b', 'graph']) +
+  ciRow(['x', '1', '0', 'a line through the origin']) +
+  ciRow(['2x + 1', '2', '1', 'a steeper line, crossing the y-axis at 1'], { shade: true }) +
+  ciRow(['−x + 3', '−1', '3', 'a falling line, crossing the y-axis at 3']) +
+  ciRow(['0.5x − 2', '0.5', '−2', 'a gentler line, crossing the y-axis at −2'], { shade: true }) +
+  ciRow(['x²', '—', '—', 'a parabola: not of the form mx + b'], { last: true, color: '#a4243b', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
     obj0 : {
@@ -2710,7 +2730,9 @@ Key [properties](!/functions/properties): Even symmetry — $|{-x}| = |x|$. Decr
 
 Transformations: $f(x) = a|x - h| + k$ has vertex at $(h, k)$. The coefficient $a$ controls steepness and direction (opening upward if $a > 0$, downward if $a < 0$).
 
-Equations with absolute values often split into cases: $|x - 3| = 5$ means $x - 3 = 5$ or $x - 3 = -5$, giving $x = 8$ or $x = -2$.`,
+Equations with absolute values often split into cases: $|x - 3| = 5$ means $x - 3 = 5$ or $x - 3 = -5$, giving $x = 8$ or $x = -2$.
+
+The [absolute value](!/algebra/absolute-value) page covers the operation itself: its properties, the distance between numbers, and how to rewrite an expression without the bars.`,
     before: ``,
     after: ``,
     link: '',
@@ -2733,6 +2755,8 @@ $$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -0.3 \\rceil = 0, \\quad \\lceil 4 \\r
 @academic[pitfall,aside:true,width:35%:Truncating negative inputs
 Reading $\\lfloor -2.7 \\rfloor$ as $-2$ drops the decimal part, but $-2$ lies above $-2.7$. The greatest integer at or below $-2.7$ is $-3$, so $\\lfloor -2.7 \\rfloor = -3$, just as $\\lfloor -0.3 \\rfloor = -1$.
 [Read more](!#pitfalls)]@
+
+Floor, ceiling and the fractional part $\\{x\\} = x - \\lfloor x \\rfloor$ are treated as operations on numbers, including rounding, on the [integer and fractional part](!/arithmetic/integer-part) page.
 
 Both functions move a non-integer input to a neighboring integer: the floor to the nearest integer on its left on the number line, the ceiling to the nearest one on its right. Integer inputs are left unchanged by both, which is why $\\lfloor 4 \\rfloor = \\lceil 4 \\rceil = 4$.
 
@@ -2970,6 +2994,11 @@ Recognizing a function's family reveals its behavior before any calculation begi
 
 
 
+// FAQ pass 2026-10-31: kept four questions. Cut "How do you identify which
+// family a function belongs to?" (restates the h2 Identifying Function
+// Families). Added the one shape of all parabolas (fact box under Quadratic
+// Functions), the three cubic shapes (fact box under Cubic Functions) and a
+// function in two families (one sentence under Identifying Function Families).
 const faqQuestions = {
   obj1: {
     question: "What is a parent function?",
@@ -2977,24 +3006,34 @@ const faqQuestions = {
     sectionId: "1"
   },
   obj2: {
-    question: "How do you identify which family a function belongs to?",
-    answer: "Look at where the variable sits. In the base with a constant exponent means polynomial, in the exponent means exponential, under a root sign means radical, in a denominator means rational, and inside a log or trigonometric name means that family. The position of the variable, not its coefficient, decides.",
-    sectionId: "2"
-  },
-  obj3: {
     question: "How do exponential and logarithmic functions relate to each other?",
     answer: "They are inverses, so each undoes the other. That relationship explains their shapes: reflecting one across the line y = x produces the other, which is why the exponential's horizontal asymptote becomes the logarithm's vertical one, and why their domains and ranges are swapped versions of each other.",
     sectionId: "15"
   },
-  obj4: {
+  obj3: {
     question: "How can you tell a quadratic from an exponential by its graph?",
     answer: "A parabola is symmetric and turns around once, falling then rising or the reverse. An exponential never turns; it rises or falls throughout and flattens toward a horizontal asymptote on one side. Exponential growth also overtakes any polynomial eventually, however slow it looks near the origin.",
     sectionId: "17"
   },
-  obj5: {
+  obj4: {
     question: "What is the difference between a power function and an exponential function?",
     answer: "In a power function the variable is the base and the exponent is fixed, as in x cubed. In an exponential the variable is the exponent and the base is fixed, as in 2 to the x. The two behave completely differently despite looking similar, and swapping them is a common error.",
     sectionId: "14"
+  },
+  obj5: {
+    question: "Are all parabolas the same shape?",
+    answer: "Yes. Every parabola is a scaled copy of $y = x^2$, moved and possibly flipped. Shrinking $y = x^2$ to $\\frac{1}{100}$ of its size in both directions sends $(x, x^2)$ to $\\left(\\frac{x}{100}, \\frac{x^2}{100}\\right)$, and those points lie exactly on $y = 100x^2$. A narrow parabola is a wide one seen from farther away: the coefficient $a$ sets the size of the picture, not a different curve.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Is every cubic a transformation of $x^3$?",
+    answer: "No. Every stretch, shift and reflection $a(b(x - h))^3 + k$ of $x^3$ has one flat point at its centre and never turns. So $x^3 - 3x$, with its peak and valley, cannot come from it, and neither can $x^3 + x$, which rises without ever levelling off. Up to stretches, shifts and reflections there are exactly three cubic shapes: $x^3$, $x^3 - x$ and $x^3 + x$.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "Can a function belong to more than one family?",
+    answer: "Yes. $x^4$ is a polynomial of degree four and also a power function, and $|x|$ is both the absolute value function and a piecewise function with the pieces $-x$ and $x$. A constant function is the slope-$0$ member of the linear family, a polynomial of degree $0$ when $c \\neq 0$, and the building block of every step function. The useful label is the one whose features the problem needs.",
+    sectionId: "2"
   }
 }
 
@@ -3062,6 +3101,10 @@ const faqQuestions = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
+  const conceptIntroFigures = {
+    linesTable: ciLinesTable,
+  };
 
   const demoUnits = {
     quadratic: demoUnitFrame({
@@ -3228,6 +3271,7 @@ const faqQuestions = {
     familyGrowthLevels,
     rationalAsymptoteCases,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj2Table,
@@ -3260,10 +3304,70 @@ export default function FamiliesPage({familyOutline, familyGrowthLevels, rationa
   obj17Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `y = 2x + 1, y = −x + 3 and y = 0.5x − 2 are different functions, yet their graphs have something in common.`,
+        content: [
+          `Each is built the same way: $x$ times a number, plus another number.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Changing m and b tilts and shifts the line, but it stays a line.`,
+        content: [
+          ciTable('linesTable'),
+          `The last row is built differently, and its graph is a different shape.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Same formula type, different parameters: the shape is shared.`,
+        content: [
+          `The linear family consists of all functions of the form $f(x) = mx + b$. The parameters $m$ and $b$ vary, but every member is a line. Change $m$, and the slope changes. Change $b$, and the line shifts vertically. The underlying linearity persists.`,
+          `The quadratic family consists of all functions of the form $f(x) = ax^2 + bx + c$ with $a \\neq 0$. Every member is a parabola. The parameters control opening direction, width, and position, but the parabolic shape is fixed.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **function family** is a collection of functions that share one formula type and differ only in the values of its parameters.`,
+        formula: [
+          `A function family is a collection of functions sharing the same fundamental structure. Members of a family are defined by a common formula type, with parameters that vary from one member to another.`,
+        ],
+        footer: `So $2x + 1$, $-x + 3$ and $0.5x - 2$ belong to the linear family $f(x) = mx + b$, while $x^2$ belongs to the quadratic family.`,
+      },
+      {
+        id: 'kind',
+        lead: `Every family has a simplest member, its [parent function](!/functions/definitions#parent_function).`,
+        content: [
+          `Each family has a parent function — the simplest representative, typically with parameters set to produce the most basic shape. For linear functions, the parent is $f(x) = x$. For quadratics, it is $f(x) = x^2$. Other family members arise through [transformations](!/functions/transformations) of the parent.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Membership predicts only what the whole family shares.`,
+        content: [
+          `Recognizing family membership enables prediction. Knowing a function is exponential immediately suggests rapid growth or decay, a horizontal asymptote, and a [domain](!/functions/domain) of all real numbers.`,
+          `Knowing that $2x + 1$ is linear says its graph is a line, not where the line crosses the axes; that still depends on the parameters.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers how to identify a family, the constant, linear, quadratic, cubic and higher-degree polynomial families, rational, radical, absolute value and step functions, exponential, logarithmic and trigonometric functions, and a comparison of the families.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -3279,7 +3383,7 @@ export default function FamiliesPage({familyOutline, familyGrowthLevels, rationa
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

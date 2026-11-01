@@ -16,6 +16,9 @@ import functionRiemannDiagrams from '@/app/components/functions/riemann/function
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
 
 
 export async function getStaticProps(){
@@ -333,29 +336,47 @@ The same symbol serves both purposes. Context determines which interpretation ap
     link: ``
   },
   obj3: {
-    title: `Notation and Terminology`,
-    content: `
-The integral notation carries specific meaning in each component.
-
-@academic[fact,aside:true,width:35%:Before $\\int$, Leibniz wrote omn.
+    title:`Notation and Terminology`,
+    lead:`Every piece of an integral has a job: the sign sums, the integrand says what is summed, the differential names the variable, the limits mark where to start and stop. All are catalogued among the [calculus symbols](!/math-symbols/calculus).`,
+    inherited:`The indefinite form and $+C$ are set out at [indefinite integral notation](!/calculus/integrals/indefinite#3); bounds, the evaluation bar and Riemann sums at [definite integral notation](!/calculus/integrals/definite#2).`,
+    entries:[
+      {
+        id:'integral-sign',
+        tex:`$\\int$`,
+        read:`the integral of`,
+        means:`An elongated S, for \"sum\". It comes from Leibniz, who thought of integration as adding up infinitesimal pieces.`,
+      },
+      {
+        id:'integrand',
+        tex:`$f(x)$`,
+        read:`the integrand`,
+        means:`The function being integrated — what is accumulated at each point.`,
+      },
+      {
+        id:'differential',
+        tex:`$dx$`,
+        read:`d x — the variable of integration`,
+        means:`Names the variable of integration and stands for an infinitesimal width. Together, $f(x)\\,dx$ is one infinitesimal contribution to the total.`,
+      },
+      {
+        id:'limits',
+        tex:`$\\int_a^b f(x)\\,dx$`,
+        read:`the integral from a to b`,
+        means:`A definite integral: the limits of integration mark where accumulation begins and ends.`,
+        cases:`The lower limit $a$ sits at the bottom of the integral sign, the upper limit $b$ at the top.`,
+      },
+    ],
+    symbolsHref:`/math-symbols/calculus`,
+    symbolsLabel:`All calculus symbols`,
+    parentHref:`/calculus`,
+    parentLabel:`Calculus`,
+    content: `@academic[fact,aside:true,width:35%:Before $\\int$, Leibniz wrote omn.
 In his notes Leibniz first summed with "omn.", short for Cavalieri's "omnes lineae", all the lines; on 29 October 1675 he wrote that it would be useful to write $\\int$ instead. The word integral came later: it first appeared in print in 1690, in a paper by Jacob Bernoulli.]@
-
-The integral sign $\\int$ is an elongated S, standing for "sum." It originated with Leibniz, who conceived integration as summing infinitesimal pieces.
-
-The integrand $f(x)$ is the function being integrated. It describes what is accumulated at each point.
-
-The differential $dx$ indicates the variable of integration and represents an infinitesimal width. Together, $f(x)\\, dx$ represents an infinitesimal contribution to the total.
-
-For definite integrals, the limits of integration $a$ and $b$ specify where accumulation begins and ends:
 
 @academic[formula_callout:Notation and Terminology
 $$\\int_a^b f(x)\\, dx$$]@
 
-The lower limit $a$ appears at the bottom of the integral sign, the upper limit $b$ at the top.
-
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
-
-`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@`,
     before: ``,
     after: ``,
     link: ``
@@ -634,6 +655,11 @@ finds a function—the antiderivative whose derivative returns the original inte
 // extended the two genuinely hub-level questions, and added the naming of
 // parts plus the origin of the sign, both buried under "Notation and
 // Terminology", plus the applications list buried inside section one.
+// FAQ pass 2026-10-31: kept all five; obj5 reworded where it called each
+// piece "f(x) dx wide" (the width is dx). Added different-looking answers
+// from two methods (only in the pitfall's "How to check", no subpage has the
+// example) and the first use of the sign (the Leibniz fact box under
+// "Notation and Terminology").
 const faqQuestions = {
   obj1: {
     question: "What is integration in calculus?",
@@ -657,7 +683,17 @@ const faqQuestions = {
   },
   obj5: {
     question: "Why is the integral sign an elongated S?",
-    answer: "Because it stands for “sum”. Leibniz introduced the symbol as a stretched Latin S, short for summa, because he conceived integration as adding up infinitely many infinitesimal pieces, each of them f(x) dx wide. The shape is a direct record of that idea: an integral is a sum whose pieces vary continuously instead of arriving one at a time.",
+    answer: "Because it stands for “sum”. Leibniz introduced the symbol as a stretched Latin S, short for summa, because he conceived integration as adding up infinitely many infinitesimal pieces f(x) dx, each a strip of width dx. The shape is a direct record of that idea: an integral is a sum whose pieces vary continuously instead of arriving one at a time.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Why do two methods give different answers for the same integral?",
+    answer: "Because both can be right. Antiderivatives of one function differ by a constant, and the $+ C$ absorbs it. For $\\int 2\\sin x \\cos x\\, dx$, the substitution $u = \\sin x$ gives $\\sin^2 x + C$, while $u = \\cos x$ gives $-\\cos^2 x + C$; the two differ by $\\sin^2 x + \\cos^2 x = 1$. To compare answers, subtract them: a constant difference means neither is wrong, and differentiating each returns the integrand.",
+    sectionId: "pitfalls"
+  },
+  obj7: {
+    question: "When was the integral sign first used?",
+    answer: "On 29 October 1675, in Leibniz's notes. Until then he had summed with \"omn.\", short for Cavalieri's \"omnes lineae\", all the lines; that day he wrote that it would be useful to write $\\int$ instead. The word integral came later and from someone else: it first appeared in print in 1690, in a paper by Jacob Bernoulli.",
     sectionId: "3"
   }
 }
@@ -907,6 +943,23 @@ $$\\int_a^b v(t)\\, dt$$]@`,
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
+          <NotationSection
+            key={'notation-obj3'}
+            title={sectionsContent.obj3.title}
+            lead={sectionsContent.obj3.lead}
+            inherited={sectionsContent.obj3.inherited}
+            entries={sectionsContent.obj3.entries}
+            symbolsHref={sectionsContent.obj3.symbolsHref}
+            symbolsLabel={sectionsContent.obj3.symbolsLabel}
+            parentHref={sectionsContent.obj3.parentHref}
+            parentLabel={sectionsContent.obj3.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={integralsNotationSheet}
+            current={'/calculus/integrals'}
+          />,
           sectionsContent.obj3.content,
         ]
     },

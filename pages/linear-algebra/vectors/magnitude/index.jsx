@@ -816,6 +816,8 @@ import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magni
 import renderVectorArrowsV3 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v3'
 import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 
 
 export async function getStaticProps(){
@@ -910,8 +912,8 @@ const normProperties = {
       name: 'Triangle inequality',
       anchor: '#3',
       statement: '$\\|\\mathbf{u} + \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$',
-      verdict: 'conditional',
-      holdsWhen: 'equality iff one is $\\mathbf{0}$ or $\\mathbf{u}$ and $\\mathbf{v}$ point the same way',
+      verdict: 'holds',
+      requires: 'any $\\mathbf{u}, \\mathbf{v}$; equality iff one is $\\mathbf{0}$ or $\\mathbf{u}$ and $\\mathbf{v}$ point the same way',
       note: 'The direct path is never longer than the tip-to-tail path. Equality holds exactly when one vector is a non-negative multiple of the other \u2014 the triangle degenerates to a line. This is the axiom that makes [distance](#4) a metric, and it follows from the [Cauchy\u2013Schwarz inequality](!/linear-algebra/orthogonality/inner-product).',
       witness: {
         label: 'Both extremes',
@@ -923,7 +925,7 @@ const normProperties = {
     },
     {
       name: 'Reverse triangle inequality',
-      anchor: '#3',
+      anchor: '#pitfalls',
       statement: '$\\bigl|\\, \\|\\mathbf{u}\\| - \\|\\mathbf{v}\\| \\,\\bigr| \\leq \\|\\mathbf{u} - \\mathbf{v}\\|$',
       verdict: 'holds',
       requires: 'derived, not assumed',
@@ -1422,6 +1424,12 @@ const introContent = {
   content: `Every nonzero vector carries two pieces of information: how long it is and which way it points. The norm isolates the first piece — it assigns a single non-negative number to each vector, measuring its length in a way that is consistent across any dimension. Once the norm is defined, distance between vectors follows immediately, and normalization provides a way to strip away length entirely, leaving behind a unit vector that encodes pure direction. The concepts on this page underpin nearly everything that follows in the section, from the angle formula in the [dot product](!/linear-algebra/vectors/dot-product) to the area interpretation of the [cross product](!/linear-algebra/vectors/cross-product).`,
 };
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added distance
+// versus difference of lengths (pitfall under "Distance Between Vectors"),
+// the equality case of the triangle inequality (properties card and section
+// text), the n-dimensional cube diagonal (fact box under "The General Norm")
+// and the taxicab unit circle (fact box under "Unit Vectors"). No heading
+// asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Why does the norm use double bars instead of single ones?",
@@ -1437,6 +1445,26 @@ const faqQuestions = {
     question: "What does the hat in $\\hat{\\mathbf{u}}$ promise?",
     answer: "That the vector has length exactly $1$. Writing $\\hat{\\mathbf{u}}$ asserts $\\|\\hat{\\mathbf{u}}\\| = 1$ without further comment, which is why normalizing a vector is described as putting a hat on it. Watch the field, though: in statistics the same hat means \"estimate of\" and says nothing about length.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is the distance between two vectors the difference of their lengths?",
+    answer: "No, it is the length of their difference, $\\|\\mathbf{a} - \\mathbf{b}\\|$. For $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (4, 3)$ both lengths are $5$, so $\\|\\mathbf{a}\\| - \\|\\mathbf{b}\\| = 0$, as if the points coincided, yet $\\mathbf{a} - \\mathbf{b} = (-1, 1)$ gives a distance of $\\sqrt{2}$. The difference of the lengths is only a lower bound, $\\bigl|\\, \\|\\mathbf{a}\\| - \\|\\mathbf{b}\\| \\,\\bigr| \\leq \\|\\mathbf{a} - \\mathbf{b}\\|$, the reverse triangle inequality.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "When does the triangle inequality become an equality?",
+    answer: "Exactly when one vector is a non-negative multiple of the other, which includes the case where either is $\\mathbf{0}$. Then the tip-to-tail path is already straight: $(3, 0)$ and $(4, 0)$ give a sum of length $7 = 3 + 4$. Any bend makes the sum shorter: $(3, 0)$ and $(0, 4)$ give $5 < 7$, and $(3, 4)$ with $(-3, 4)$ gives $\\|(0, 8)\\| = 8 < 10$.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "How long is the diagonal of a cube in $n$ dimensions?",
+    answer: "$\\sqrt{n}$ for a unit cube. The diagonal runs from the origin to the corner $(1, 1, \\ldots, 1)$, and the norm adds one squared $1$ per component, giving $\\sqrt{1 + 1 + \\cdots + 1} = \\sqrt{n}$. That is $\\sqrt{2}$ across the unit square and $\\sqrt{3}$ through the unit cube, and it keeps growing: in $\\mathbb{R}^{100}$ a cube whose edges all have length $1$ has a diagonal of length $10$.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "What does a circle look like in the taxicab norm?",
+    answer: "A square standing on a corner. Measured by $\\|\\mathbf{v}\\|_1 = |v_1| + |v_2|$, the points at distance $1$ from the origin form the square with corners $(\\pm 1, 0)$ and $(0, \\pm 1)$. In the same norm each side has length $1 + 1 = 2$, so the circumference is $8$ against a diameter of $2$: in the taxicab plane the ratio that plays the part of $\\pi$ is $4$.",
+    sectionId: "5"
   }
 }
 
@@ -1690,6 +1718,11 @@ Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laVectorsNotationSheet}
+            current={'/linear-algebra/vectors/magnitude'}
           />,
         ]
     },

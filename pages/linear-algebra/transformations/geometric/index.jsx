@@ -1888,6 +1888,9 @@ import projection2dDiagrams from '@/app/components/linear-algebra copy/r2-visual
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
 import renderVectorArrowsV7 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v7'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2088,7 +2091,7 @@ const transformationSignatures = {
           anchor: '#3',
           formula: '$R^{\\mathsf{T}}R = I, \\quad \\det R = 1$',
           condition: 'eigenvalues $e^{\\pm i\\theta}$ \u2014 complex pair',
-          note: 'Orthogonal with positive determinant. Over $\\mathbb{R}$ a plane rotation has no eigenvectors at all, since no direction survives unturned \u2014 which is exactly what the complex pair records. In $\\mathbb{R}^3$ there is one real eigenvalue $1$, and its eigenvector is the axis.',
+          note: 'Orthogonal with positive determinant. Over $\\mathbb{R}$ a plane rotation has no real eigenvectors unless $\\theta$ is $0\u00b0$ or $180\u00b0$, since at any other angle no direction survives unturned \u2014 which is exactly what the complex pair records. In $\\mathbb{R}^3$ there is one real eigenvalue $1$, and its eigenvector is the axis.',
         },
         {
           name: 'Reflection',
@@ -2304,6 +2307,25 @@ const transformationSignatures = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "How to Read a Transformation Matrix") —
+// template A, definition last. Running instance: four 2 × 2 matrices read
+// from their columns and determinants. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four passages, rule box and pitfall are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciReadTable = ciTableOpen(['matrix', '(1, 0) goes to', '(0, 1) goes to', 'det', 'effect']) +
+  ciRow(['(2 0; 0 2)', '(2, 0)', '(0, 2)', '4', 'scales everything by 2']) +
+  ciRow(['(0 −1; 1 0)', '(0, 1)', '(−1, 0)', '1', 'rotates by 90°'], { shade: true }) +
+  ciRow(['(1 0; 0 −1)', '(1, 0)', '(0, −1)', '−1', 'reflects in the x-axis']) +
+  ciRow(['(1 1; 0 1)', '(1, 0)', '(1, 1)', '1', 'shears sideways'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `How to Read a Transformation Matrix`,
@@ -2366,7 +2388,7 @@ Both readings are needed. The determinant is a single number, and it records onl
 
   obj2: {
     title: `Scaling`,
-    content: `Uniform scaling multiplies every coordinate by the same factor: $T(\\mathbf{x}) = c\\mathbf{x}$, with matrix $cI$. When $c > 1$ the transformation enlarges, when $0 < c < 1$ it shrinks, and when $c < 0$ it reflects through the origin and scales.
+    content: `Uniform scaling multiplies every coordinate by the same factor: $T(\\mathbf{x}) = c\\mathbf{x}$, with matrix $cI$. When $c > 1$ the transformation enlarges, when $0 < c < 1$ it shrinks, and when $c < 0$ it flips every vector through the origin and scales (in the plane, that flip is the $180°$ rotation, not a reflection).
 
 Non-uniform scaling stretches each axis independently. In $\\mathbb{R}^2$, $T(x, y) = (c_1 x, c_2 y)$ has matrix $\\text{diag}(c_1, c_2)$. The horizontal axis is scaled by $c_1$ and the vertical by $c_2$. A unit square maps to a rectangle with side lengths $|c_1|$ and $|c_2|$.
 
@@ -2690,6 +2712,11 @@ How to check: follow one basis vector through the steps by hand, then compare th
   content: `In R² and R³, linear transformations have concrete geometric meanings. Each has an explicit matrix encoding its action: rotations spin, reflections mirror, projections flatten, shears skew, and scalings stretch or compress. The determinant of the matrix classifies the transformation by how it affects area, volume, and orientation.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the doubled
+// angle in the reflection matrix and the composition of two reflections (both
+// from the reflections card text and the sentence after it), rotation from
+// three shears (fact box under "Shears") and the axis of every 3D rotation
+// (fact box under "Rotations in R³").
 const faqQuestions = {
   obj1: {
     question: "In $R_{\\theta}S_k$, does the rotation or the scaling happen first?",
@@ -2705,6 +2732,26 @@ const faqQuestions = {
     question: "Why does $P$ mean different things in different places?",
     answer: "It has three unrelated tenants in linear algebra: a projection matrix here, a change-of-basis matrix in coordinate work, and a permutation matrix in factorisations such as $PA = LU$. Only the subscript and the surrounding claim distinguish them, so the letter alone never settles which object is meant.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Why does the reflection matrix use $2\\alpha$ instead of $\\alpha$?",
+    answer: "Because a mirror at angle $\\alpha$ sends $\\mathbf{e}_1$ to the direction at angle $2\\alpha$: the incoming and outgoing directions each make angle $\\alpha$ with the line. That image is the first column of $H_\\alpha$, namely $(\\cos 2\\alpha, \\sin 2\\alpha)$. Substituting $\\alpha = 0$, $\\frac{\\pi}{2}$ and $\\frac{\\pi}{4}$ recovers the reflections in the $x$-axis, the $y$-axis and the line $y = x$.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "What do you get when you compose two reflections?",
+    answer: "A rotation, by twice the angle between the mirrors. Reflecting across the line at angle $\\alpha$ and then across the line at angle $\\beta$ gives $H_\\beta H_\\alpha = R_{2(\\beta - \\alpha)}$, and the determinants agree: $(-1)(-1) = 1$. For example, the $x$-axis mirror followed by the $y = x$ mirror gives $R_{90°}$. Swapping the order of the two mirrors reverses the direction of the turn.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Can a rotation be made out of shears?",
+    answer: "Yes, out of three, for any angle except $180°$. $R_\\theta$ equals a horizontal shear by $-\\tan\\frac{\\theta}{2}$, then a vertical shear by $\\sin\\theta$, then the same horizontal shear again. Each shear only slides whole rows or columns of pixels, which is why Paeth's 1986 method rotates digital images this way. More generally, any invertible matrix with determinant $1$ is a product of shears.",
+    sectionId: "8"
+  },
+  obj7: {
+    question: "Does every rotation in 3D have an axis?",
+    answer: "Yes. By Euler's rotation theorem, every rotation of space leaves one line fixed and turns everything about it. For a rotation $\\det(R - I) = \\det(I - R)$, while in three dimensions $\\det(I - R) = -\\det(R - I)$, so the value is $0$ and $R$ has eigenvalue $1$. The axis need not be a coordinate axis: $R_z(90°)\\,R_x(90°)$ is a single $120°$ turn about the line through $(1, 1, 1)$.",
+    sectionId: "4"
   }
 }
 
@@ -2802,6 +2849,10 @@ const schemas = {
       notes: ['A = [1 1; 0 1]: same base, same height, area still 1'], caption: 'horizontal shear: e\u2081 stays, e\u2082 leans over' },
   };
 
+  const conceptIntroFigures = {
+    readTable: ciReadTable,
+  };
+
   const demoUnits = {
     reflection: demoUnitFrame({
       svg: [reflectionDiagrams.axes, reflectionDiagrams.diagonals],
@@ -2851,6 +2902,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -2872,9 +2924,71 @@ return {
 }
 
 
-export default function GeometricTransformationsPage({seoData, sectionsContent, introContent, obj4Table, reflectionCases, obj10Table, transformationSignatures, faqQuestions, schemas, demoUnits}) {
+export default function GeometricTransformationsPage({seoData, sectionsContent, introContent, obj4Table, reflectionCases, obj10Table, transformationSignatures, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A 2×2 matrix is four numbers. What does it do to the plane?`,
+        content: [
+          `Applying it to vector after vector would answer point by point. Two vectors turn out to be enough.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The columns show where (1, 0) and (0, 1) land, and the determinant shows what happens to area.`,
+        content: [
+          ciTable('readTable'),
+          `Every other vector follows: $(x, y) = x(1, 0) + y(0, 1)$ lands on $x$ times column $1$ plus $y$ times column $2$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The columns carry the shape; the determinant carries area and orientation.`,
+        content: [
+          `Column $1$ is the image of $\\mathbf{e}_1 = (1, 0)$ in $\\mathbb{R}^2$ or $(1, 0, 0)$ in $\\mathbb{R}^3$. Column $2$ is the image of $\\mathbf{e}_2$. The matrix maps the standard grid to the parallelogram (or parallelepiped) spanned by these column vectors.`,
+          `@academic[rule_plain:The absolute value $|\\det(A)|$ measures how the transformation scales areas (in $\\mathbb{R}^2$) or volumes (in $\\mathbb{R}^3$).]@`,
+          `The sign of $\\det(A)$ indicates orientation: positive means the transformation preserves handedness, negative means it reverses it. An [orthogonal](!/linear-algebra/matrix/types) matrix ($\\det = \\pm 1$) preserves all lengths and angles — it is a rigid motion.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **matrix of a linear transformation** of the plane or of space has as its columns the images of the standard basis vectors: column $j$ is $A\\mathbf{e}_j$.`,
+        formula: [
+          `The geometric effect of a [matrix](!/linear-algebra/matrix) $A$ is revealed by two pieces of information: what it does to the standard [basis](!/linear-algebra/vector-spaces) vectors (the columns) and what its [determinant](!/linear-algebra/determinants) is.`,
+        ],
+        footer: `So $\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ sends $(1, 0)$ to $(0, 1)$ and $(0, 1)$ to $(-1, 0)$: it is the rotation by $90°$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Both readings together name the transformation.`,
+        content: [
+          `Both readings are needed. The determinant is a single number, and it records only what happens to area and to orientation. The columns carry the rest of the picture: their lengths and the angle between them show whether each square of the grid keeps its shape or comes out stretched and tilted.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A determinant of ±1 does not make a transformation rigid.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Mistaking area-preserving for rigid
+Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$: its determinant is $1$, yet it sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$. A rigid motion needs $A^T A = I$; here $A^T A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix}$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, scaling, rotations and reflections in two and three dimensions, projections, shears, combining transformations, the determinant as a signature, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2882,7 +2996,7 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2901,6 +3015,11 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laTransformNotationSheet}
+            current={'/linear-algebra/transformations/geometric'}
           />,
         ]
     },

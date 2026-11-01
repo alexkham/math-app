@@ -801,6 +801,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1072,6 +1075,24 @@ const vectorProperties = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Magnitude") — template A, definition
+// last. Running instance: (3, 4), (1, 2, 2) and (1, 1, 1, 1), measured by
+// Pythagoras applied once per extra coordinate. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its three passages and formula box are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciLengthTable = ciTableOpen(['vector', 'space', 'square, add, take the root', 'length']) +
+  ciRow(['(3, 4)', 'R²', '√(9 + 16)', '5']) +
+  ciRow(['(1, 2, 2)', 'R³', '√(1 + 4 + 4)', '3'], { shade: true }) +
+  ciRow(['(1, 1, 1, 1)', 'R⁴', '√(1 + 1 + 1 + 1)', '2'], { last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Magnitude`,
@@ -1342,6 +1363,11 @@ How to check: take the other route and add first. $(1, 0) + (0, 3) = (1, 3)$, an
 };
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added
+// transitivity of parallelism (fact box under "Parallelism"), the arctan
+// quadrant slip (pitfall under "Direction"), pairs that are neither parallel
+// nor orthogonal (pitfall under "Orthogonality") and moving a free vector
+// (paragraph under "Equality"). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Is the zero vector parallel or orthogonal to other vectors?",
@@ -1357,6 +1383,26 @@ const faqQuestions = {
     question: "When does the ratio test for parallel vectors break down?",
     answer: "Whenever a component is zero, because the test divides by it. Comparing $\\frac{a_1}{b_1} = \\frac{a_2}{b_2}$ works only when no denominator vanishes, yet $(0, 3)$ and $(0, 6)$ are plainly parallel while the first ratio cannot even be written. Fall back on the definition and look for a scalar $c$ with $\\mathbf{a} = c\\mathbf{b}$.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is parallelism transitive?",
+    answer: "Only through a nonzero vector. If $\\mathbf{a} = c\\mathbf{b}$ and $\\mathbf{b} = d\\mathbf{w}$, then $\\mathbf{a} = (cd)\\mathbf{w}$, so parallelism passes along the chain. The zero vector breaks it: by convention $\\mathbf{0}$ is parallel to everything, so $(1, 0)$ and $(0, 1)$ are each parallel to $\\mathbf{0}$, yet they meet at a right angle. The chain holds whenever the middle vector is nonzero.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Why does arctan give the wrong angle for $(-1, -1)$?",
+    answer: "Because the ratio $\\frac{-1}{-1} = 1$ has already lost both signs, and the arctangent only returns angles between $-90^\\circ$ and $90^\\circ$. It answers $45^\\circ$, a first-quadrant direction. Both components are negative, so the vector lies in the third quadrant and $180^\\circ$ is added, giving $225^\\circ$. Every vector with a negative first component needs that adjustment; the check is that $\\cos\\alpha$ and $\\sin\\alpha$ carry the signs of $v_1$ and $v_2$.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Can two vectors be neither parallel nor orthogonal?",
+    answer: "Yes, and most pairs are: parallel and orthogonal are the two extremes, with every other angle in between. A nonzero dot product rules out a right angle but does not make the vectors parallel. For $(1, 2)$ and $(3, 1)$ the dot product is $5$, yet no scalar $c$ gives $(1, 2) = c(3, 1)$, since the components would need $c = \\frac{1}{3}$ and $c = 2$; the vectors meet at $45^\\circ$.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "Does moving a vector to another place change it?",
+    answer: "No, a free vector is fixed by its length and direction, not by where it is drawn. An arrow at one corner of a diagram and an identical arrow elsewhere are the same vector, as long as length and orientation agree; only rotating or rescaling changes it. That freedom is what lets the tip-to-tail and parallelogram constructions slide arrows into position without altering the result of an addition.",
+    sectionId: "4"
   }
 }
 
@@ -1438,6 +1484,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    lengthTable: ciLengthTable,
+  };
+
   const demoUnits = {
     // Parallelism IS dependence, and the 2D span tool is the one that
     // draws the collapse. The symbolic vector tools cannot show it.
@@ -1487,6 +1537,7 @@ const schemas = {
   props: {
     parallelCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj6Table,
@@ -1505,9 +1556,70 @@ const schemas = {
    }
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function VectorPropertiesPage({parallelCases, seoData, sectionsContent, introContent, obj6Table, vectorProperties, faqQuestions, schemas, demoUnits}) {
+export default function VectorPropertiesPage({parallelCases, seoData, sectionsContent, introContent, obj6Table, vectorProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The arrow from the origin to (3, 4) is 5 long — the hypotenuse of a 3-4-5 right triangle.`,
+        content: [
+          `Pythagoras measures arrows in the plane. Does the same recipe work with more coordinates?`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Applied once more for each extra coordinate, Pythagoras gives every length.`,
+        content: [
+          ciTable('lengthTable'),
+          `In $\\mathbb{R}^4$ there is no picture, but the recipe still gives a number.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Square the components, add, take the root: one recipe measures a vector in any dimension.`,
+        content: [
+          `Each extra coordinate is one more leg at right angles to all the others, so it adds one more square under the root.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [magnitude](!/linear-algebra/definitions#magnitude) of a vector $\\mathbf{v} = (v_1, \\ldots, v_n)$ is its length, $\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + \\cdots + v_n^2}$.`,
+        formula: [
+          `Every vector has a magnitude — a single non-negative number that measures its size. For a vector $\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$ in $\\mathbb{R}^n$, the magnitude is given by the Euclidean norm:`,
+          `@academic[formula_callout:Magnitude
+$$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@`,
+        ],
+        footer: `So $\\|(3, 4)\\| = 5$, $\\|(1, 2, 2)\\| = 3$ and $\\|(1, 1, 1, 1)\\| = 2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Magnitude belongs to the vector alone: a non-negative number, zero only for the zero vector.`,
+        content: [
+          `Magnitude is an intrinsic property: it belongs to the vector and does not depend on any other vector or operation. It is always non-negative, and the only vector with magnitude zero is the zero vector $\\mathbf{0}$. This makes magnitude a reliable indicator of whether a vector is trivial — a vector is the zero vector if and only if its magnitude vanishes.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Lengths do not simply add.`,
+        content: [
+          `The norm satisfies two additional structural properties. Under [scalar multiplication](!/linear-algebra/vectors/basic-operations), the magnitude scales predictably: $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$. Under addition, it obeys the triangle inequality: $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$. These properties, along with normalization and the distance formula, are developed on the [magnitude](!/linear-algebra/vectors/magnitude) page.`,
+          `For $(3, 0)$ and $(0, 4)$ the lengths are $3$ and $4$, but their sum $(3, 4)$ has length $5$, not $7$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers direction, dimension, notation, equality, parallelism, orthogonality, the algebraic properties, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1515,7 +1627,7 @@ export default function VectorPropertiesPage({parallelCases, seoData, sectionsCo
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1551,6 +1663,11 @@ export default function VectorPropertiesPage({parallelCases, seoData, sectionsCo
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laVectorsNotationSheet}
+            current={'/linear-algebra/vectors/properties'}
           />,
         ]
     },

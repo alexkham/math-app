@@ -17,6 +17,7 @@ import functionLimitDiagrams from '@/app/components/functions/limit/functionLimi
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -222,6 +223,24 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 4 callouts (obj3, obj8, obj11, obj12)
+// Concept introduction (section 1, "Two Distinct Concepts") — template D,
+// comparison. Running instance: 1/x as x grows against 1/x² as x closes in
+// on 0. Old obj1 text is kept in sectionsContent.obj1, unused; its five
+// passages and two formula boxes are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTwoWaysTable = ciTableOpen(['x grows', '1/x', 'x closes in on 0', '1/x²']) +
+  ciRow(['10', '0.1', '0.1', '100']) +
+  ciRow(['100', '0.01', '0.01', '10 000'], { shade: true }) +
+  ciRow(['1000', '0.001', '0.001', '1 000 000']) +
+  ciRow(['x → ∞', '→ 0', 'x → 0', '→ ∞'], { shade: true, last: true, color: '#2563EB', cols: [1, 3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/limits/infinity ────────────────────────────────────────────
 
@@ -699,6 +718,10 @@ Both concepts connect to asymptotes. Horizontal asymptotes arise from finite lim
 // /calculus/limits owns that as the existence question. Kept the two-concepts
 // distinction and the exponential formula query; invented two from the
 // notation section.
+// FAQ pass 2026-10-31: kept all four. Added the long lead of ln x over x^0.1
+// (fact box under "Growth Rates — The Hierarchy"; the h2 says who wins, not
+// when) and the side from which a graph nears its horizontal asymptote (the
+// 7/(x − 3) gap paragraph in "Horizontal Asymptotes").
 const faqQuestions = {
   obj1: {
     question: "What is the difference between limits at infinity and infinite limits?",
@@ -719,6 +742,16 @@ const faqQuestions = {
     question: "What is the limit of e^x as x approaches negative infinity?",
     answer: "It is 0. As x decreases without bound, e^x decays toward zero without ever reaching it, making the x-axis a horizontal asymptote on the left. The other direction reverses completely: as x increases without bound, e^x grows without bound, so there is no horizontal asymptote on the right.",
     sectionId: "11"
+  },
+  obj5: {
+    question: "Is ln x ever larger than x^0.1?",
+    answer: "Yes, for a very long stretch. Past $x \\approx 3$, $\\ln x$ runs ahead of $x^{0.1}$, and the power catches up only near $x \\approx 3.4 \\times 10^{15}$, where both are about $36$. Writing $x = e^t$ turns the race into $t$ against $e^{t/10}$. The limit $\\frac{\\ln x}{x^{0.1}} \\to 0$ still holds: a limit at infinity says who wins in the end, not when.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "Does a graph approach its horizontal asymptote from above or below?",
+    answer: "It depends on the sign of the gap $f(x) - L$, which the limit alone does not fix. For $\\frac{2x + 1}{x - 3}$ the gap to $y = 2$ is $\\frac{7}{x - 3}$: positive for $x > 3$, so the graph sits above the line on the right, and negative for $x < 3$, so it sits below the line on the left. Since the gap is never $0$, this graph never touches its asymptote.",
+    sectionId: "3"
   }
 }
 
@@ -819,6 +852,10 @@ const schemas = {
     ],
     points: [{ x: 4.536, y: 4.536 ** 3, label: 'eˣ passes x³ at x ≈ 4.54', pos: 'nw' }],
     caption: 'Logarithm ≪ power ≪ exponential: the exponential wins in the end' };
+  const conceptIntroFigures = {
+    twoWaysTable: ciTwoWaysTable,
+  };
+
   const demoUnits = {
     vertical: demoUnitFrame({
       svg: functionLimitDiagrams['infinite-pos'],
@@ -897,6 +934,7 @@ return {
     horizontalAsymptoteProfile,
     growthRateLevels,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -918,9 +956,74 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function InfinityPage({horizontalAsymptoteProfile, growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function InfinityPage({horizontalAsymptoteProfile, growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The symbol ∞ can turn up in a limit in two different places.`,
+        content: [
+          `It can sit under the arrow, as in $x \\to \\infty$, or after the equals sign, as in $= \\infty$. The two describe different behaviour.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `In one pair of columns x runs off and the output settles; in the other x settles and the output runs off.`,
+        content: [
+          ciTable('twoWaysTable'),
+          `$\\frac{1}{x}$ shrinks towards $0$ as $x$ grows. $\\frac{1}{x^2}$ grows past every bound as $x$ closes in on $0$.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `What tells them apart is which side escapes: the input or the output.`,
+        content: [
+          `In the first case, $x$ escapes to infinity while we track where $f(x)$ goes. In the second case, $x$ approaches a finite value $a$ while $f(x)$ escapes to infinity.`,
+          `Both use the infinity symbol, but in opposite roles.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **limit at infinity** describes $f(x)$ as the input $x$ grows without bound; an **infinite limit** describes an output $f(x)$ that grows without bound as $x$ approaches a finite value $a$.`,
+        formula: [
+          `The notation distinguishes two cases:`,
+          `**Limits at infinity:** The input grows without bound.`,
+          `@academic[formula_callout:Two Distinct Concepts
+$$\\lim_{x \\to \\infty} f(x) \\qquad \\lim_{x \\to -\\infty} f(x)$$]@`,
+          `**Infinite limits:** The output grows without bound.`,
+          `@academic[formula_callout:Two Distinct Concepts
+$$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
+        ],
+        footer: `So $\\lim_{x \\to \\infty} \\frac{1}{x} = 0$ is a limit at infinity, and $\\lim_{x \\to 0} \\frac{1}{x^2} = \\infty$ is an infinite limit.`,
+      },
+      {
+        id: 'kind',
+        lead: `Limits at infinity describe end behaviour; infinite limits describe a graph shooting up or down.`,
+        content: [
+          `A finite limit at infinity gives a horizontal asymptote, treated in [horizontal asymptotes](!/calculus/limits/infinity#3). An infinite limit at $x = a$ gives a vertical asymptote, treated in [vertical asymptotes](!/calculus/limits/infinity#8).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Both can happen at once.`,
+        content: [
+          `In $\\lim_{x \\to \\infty} x^2 = \\infty$ the input and the output both escape: it is a limit at infinity whose value is infinite.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers limits at infinity and horizontal asymptotes, rational functions, dominant terms and growth rates, infinite limits and vertical asymptotes, sign analysis and one-sided infinite limits, exponentials and logarithms, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -928,7 +1031,7 @@ export default function InfinityPage({horizontalAsymptoteProfile, growthRateLeve
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

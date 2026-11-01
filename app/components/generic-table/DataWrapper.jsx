@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import ExpandableTable from './ExpandableTable';
 
 const ChevronIcon = ({ open }) => (
@@ -298,6 +298,21 @@ export default function DataWrapper({ data }) {
     () => Object.keys(data).filter((key) => Array.isArray(data[key])),
     [data]
   );
+
+  // A link ending in #<group key> (e.g. /math-symbols/algebra#sequences_and_series)
+  // opens the table filtered to that group; several keys joined by commas
+  // (#logarithms,roots_and_radicals) open it filtered to all of them.
+  useEffect(() => {
+    const applyHash = () => {
+      const keys = decodeURIComponent(window.location.hash.replace(/^#/, ''))
+        .split(',')
+        .filter((k) => sections.includes(k));
+      if (keys.length) setSelectedSections(keys);
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, [sections]);
 
   const processedData = useMemo(() => {
     let result = [];

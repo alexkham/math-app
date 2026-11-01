@@ -684,6 +684,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -811,6 +812,25 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "Multiplying Fractions — Basic Rule") —
+    // template C, failure first. Running instance: 2/5 × 3/5, where keeping the
+    // denominator as in addition gives 6/5 instead of 6/25. Old obj1 text is
+    // kept in sectionsContent.obj1, unused; its formula box, pitfall aside,
+    // three passages and the areaProduct demo frame with its line are carried
+    // in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciKeepTable = ciTableOpen(['product', 'keeping the denominator, as in addition', 'what it should be']) +
+      ciRow(['2/5 × 3/5', '6/5 — more than a whole', 'less than 2/5']) +
+      ciRow(['1/2 × 1/2', '1/2 — half of a half would still be a half', 'a quarter'], { shade: true }) +
+      ciRow(['1/3 × 2/3', '2/3 — as big as one of the factors', 'less than 1/3'], { last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1109,6 +1129,10 @@ How to check: the discount and the new price must add up to the original price, 
 // (owned by /arithmetic/fractions/dividing). Kept and extended the two
 // confusions this page creates by following the addition page, and reframed
 // the mixed-numbers entry to the trap rather than the procedure.
+// FAQ pass 2026-10-31: kept the three questions. Added "of" before division
+// in BODMAS (fact box under "The Word Of Means Multiply"), canceling two
+// numerators and the price after a fraction off (pitfall boxes; no heading
+// asks them).
 const faqQuestions = {
   obj1: {
     question: "Do you need a common denominator to multiply fractions?",
@@ -1124,6 +1148,21 @@ const faqQuestions = {
     question: "Why must mixed numbers be converted before multiplying?",
     answer: "Because multiplying whole parts and fractional parts separately gives the wrong answer. For 2⅓ × 1½, pairing 2 × 1 with ⅓ × ½ would suggest 2⅙, but the true product is 3½. Convert each to an improper fraction first — 7/3 and 3/2 — then multiply across: 21/6 = 7/2 = 3½.",
     sectionId: "4"
+  },
+  obj4: {
+    question: "Does 'of' come before division in BODMAS?",
+    answer: "It can. In BODMAS, the order-of-operations rule taught in Britain, the O may stand for \"of\", ranked before division. Read that way, $10 \\div \\frac{1}{2}$ of $10$ is $10 \\div 5 = 2$. Written with a plain $\\times$ and worked from left to right, $10 \\div \\frac{1}{2} \\times 10$ is $20 \\times 10 = 200$. Brackets remove the doubt: $10 \\div \\left(\\frac{1}{2} \\times 10\\right) = 2$.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "Can you cancel two numerators when multiplying fractions?",
+    answer: "No. A factor cancels only between a numerator and a denominator, because dividing both by $2$ divides by $\\frac{2}{2} = 1$ and leaves the value alone. Dividing two numerators by $2$ divides the whole product by $4$: in $\\frac{2}{3} \\times \\frac{4}{5}$ it turns the true $\\frac{8}{15}$ into $\\frac{2}{15}$. The numerator and the denominator may come from different fractions, which is what cross-canceling means.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "How do you find the price after a fraction off?",
+    answer: "Multiply the price by the part that is left, not by the part taken off. A third off $30$ leaves $1 - \\frac{1}{3} = \\frac{2}{3}$ of it, so the new price is $\\frac{2}{3} \\times 30 = 20$. Multiplying by $\\frac{1}{3}$ gives $10$, which is the discount, not the price; subtracting it, $30 - 10 = 20$, reaches the same answer. The discount and the new price always add up to the original.",
+    sectionId: "6"
   }
 }
 
@@ -1208,6 +1247,10 @@ const schemas = {
     notes: [{ text: 'blue columns: 2/3', color: 'f' }, { text: 'navy rows: 4/5', color: 'g' }, { text: '' }, { text: 'overlap: 2 · 4 = 8 cells', color: 'r' }, { text: 'of 3 · 5 = 15 cells', color: 'r' }, { text: '2/3 · 4/5 = 8/15', color: 'r' }], caption: 'Numerators count the overlap, denominators the grid' };
   const fbRepeatedAdd = { kind: 'bars', svgTitle: '4 times 2/3 as four copies of 2/3, together 8 thirds = 2 2/3', rows: [{ n: 3, k: 2, label: '2/3', partLabels: true }, { n: 3, k: 2, label: '+ 2/3', partLabels: true }, { n: 3, k: 2, label: '+ 2/3', partLabels: true }, { n: 3, k: 2, label: '+ 2/3', partLabels: true }, { n: 3, k: 8, label: '= 8/3', color: 'r' }],
     notes: [{ text: '4 copies of 2 thirds = 8 thirds = 2 2/3', color: 'r' }], caption: 'A whole number times a fraction: repeated addition' };
+  const conceptIntroFigures = {
+    keepTable: ciKeepTable,
+  };
+
   const demoUnits = {
     areaProduct: demoUnitFrame({
       svg: renderFractionBar(fbAreaProduct),
@@ -1229,6 +1272,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Multiplying Fractions: Rules, Examples & Cross-Canceling | Learn Math Class",
       description: "Learn how to multiply fractions step by step: basic rule, whole numbers, cross-canceling, mixed numbers, and multiple fractions. Examples and simplification tips.",
@@ -1240,9 +1284,76 @@ return {
 }
    }
 
-export default function MultiplyingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function MultiplyingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Fractions with the same denominator add by keeping it: 2/5 + 3/5 = 5/5. It is tempting to multiply the same way.`,
+        content: [
+          `By that habit, $\\frac{2}{5} \\times \\frac{3}{5}$ would be $\\frac{2 \\times 3}{5} = \\frac{6}{5}$ — multiply the tops, keep the bottom.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The answer 6/5 is more than a whole, but taking 2/5 of something smaller than a whole has to give less.`,
+        content: [
+          ciTable('keepTable'),
+          `Half of a half is a quarter, not a half. Keeping the denominator gets every one of these wrong.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Multiplying takes a part of a part, so the pieces themselves get smaller: the denominators have to multiply too.`,
+        content: [
+          `This rule makes sense geometrically. Taking $\\frac{2}{3}$ of $\\frac{4}{5}$ means subdividing something already divided into fifths, then taking a portion. The product describes the fraction of the original whole that remains.`,
+          <div key={'unit-areaProduct'} dangerouslySetInnerHTML={{ __html: demoUnits.areaProduct }} />,
+          `The product 8/15 is smaller than both factors, as it must be when both are less than 1.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `To multiply [fractions](!/arithmetic/definitions#fraction), multiply the numerators together and the denominators together: $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{a \\times c}{b \\times d}$.`,
+        formula: [
+          `To multiply two fractions, multiply the numerators to get the new numerator and multiply the denominators to get the new denominator. For fractions $\\frac{a}{b}$ and $\\frac{c}{d}$:`,
+          `@academic[formula_callout:Multiplying Fractions — Basic Rule
+$$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{a \\times c}{b \\times d}$$]@`,
+          `For example, $\\frac{2}{3} \\times \\frac{4}{5} = \\frac{2 \\times 4}{3 \\times 5} = \\frac{8}{15}$.`,
+        ],
+        footer: `So $\\frac{2}{5} \\times \\frac{3}{5} = \\frac{6}{25}$, and half of a half is $\\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Multiplying by a fraction means taking that fraction of an amount.`,
+        content: [
+          `$\\frac{2}{3} \\times \\frac{4}{5}$ is two thirds of four fifths, and $\\frac{1}{2} \\times 12$ is half of $12$. The rule counts the pieces of that part; the word "of" in everyday problems is read the same way, as [reading of as multiplication](!/arithmetic/fractions/multiplying#6) shows.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Multiplying does not always make a number smaller: only a factor below 1 shrinks it.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Keeping the denominator
+Keeping the shared denominator, as in addition, turns $\\frac{2}{5} \\times \\frac{3}{5}$ into $\\frac{6}{5}$, more than either factor. The denominators multiply too: $\\frac{2 \\times 3}{5 \\times 5} = \\frac{6}{25}$.
+[Read more](!#pitfalls)]@`,
+          `Multiplying by $\\frac{3}{2}$ makes a number bigger: $\\frac{3}{2} \\times 4 = 6$. Whole numbers follow the same rule once written over $1$, as [multiplying fractions by whole numbers](!/arithmetic/fractions/multiplying#2) shows.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers multiplying by whole numbers, cross-canceling, mixed numbers, products of more than two fractions, the word "of", and special cases.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1258,9 +1369,7 @@ export default function MultiplyingPage({seoData, sectionsContent, introContent,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-areaProduct'} dangerouslySetInnerHTML={{ __html: demoUnits.areaProduct }} />,
-          `The product 8/15 is smaller than both factors, as it must be when both are less than 1.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

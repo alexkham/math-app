@@ -625,6 +625,10 @@ import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -838,39 +842,57 @@ Each entry $v_i$ is called a component. In $\\mathbb{R}^2$, a vector has two com
     link: '',
   },
   obj2: {
-    title: `Notation and Representation`,
-    content: `Several notational conventions exist for vectors, and the choice often depends on context. Boldface lowercase letters are standard in printed text:
-
-@academic[formula_callout:Notation and Representation
+    title:`Notation and Representation`,
+    lead:`A bold letter or an arrow for the whole vector, a row or a column for its entries, and named unit vectors to build it from. All are catalogued among the [linear algebra symbols](!/math-symbols/linear-algebra).`,
+    inherited:`The component form and $\\mathbb{R}^n$ are set out at [vector operation notation](!/linear-algebra/vectors/basic-operations#notation); $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ in products at [cross product notation](!/linear-algebra/vectors/cross-product#notation).`,
+    entries:[
+      {
+        id:'bold-vector',
+        tex:`$\\mathbf{v}$`,
+        read:`vector v`,
+        means:`Boldface lowercase is the printed standard. One bold letter stands for the whole list of components, so one vector equation says as much as $n$ number equations.`,
+        cases:`In $\\mathbb{R}^3$, $\\mathbf{a} + \\mathbf{b} = \\mathbf{c}$ packs together $a_1 + b_1 = c_1$, $a_2 + b_2 = c_2$ and $a_3 + b_3 = c_3$.`,
+        alsoWritten:`$\\vec{v}$ — the arrow is the handwritten form.`,
+      },
+      {
+        id:'point-to-point',
+        tex:`$\\vec{AB}$`,
+        read:`vector A B`,
+        means:`The vector from the point $A$ to the point $B$: the notation records both the direction and the endpoints.`,
+      },
+      {
+        id:'row-column',
+        tex:`$(v_1, \\ldots, v_n)$ · $\\begin{pmatrix} v_1 \\\\ \\vdots \\\\ v_n \\end{pmatrix}$`,
+        read:`row form; column form`,
+        means:`The same components listed horizontally or stacked vertically.`,
+        confusedWith:`Interchangeable everywhere. With [matrices](!/linear-algebra/matrix) the shape matters: matrix multiplication needs a column vector on the right.`,
+      },
+      {
+        id:'standard-basis',
+        tex:`$\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ · $\\mathbf{e}_1, \\ldots, \\mathbf{e}_n$`,
+        read:`the standard basis vectors`,
+        means:`Vectors with a $1$ in one position and $0$ elsewhere: $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ in $\\mathbb{R}^3$, $\\mathbf{e}_1, \\ldots, \\mathbf{e}_n$ in general.`,
+        cases:`Any vector decomposes along them: $\\mathbf{v} = v_1\\mathbf{e}_1 + v_2\\mathbf{e}_2 + \\cdots + v_n\\mathbf{e}_n$ — a [linear combination](!/linear-algebra/vectors/linear-combinations) with the components as weights.`,
+      },
+    ],
+    symbolsHref:`/math-symbols/linear-algebra`,
+    symbolsLabel:`All linear algebra symbols`,
+    parentHref:`/linear-algebra`,
+    parentLabel:`Linear Algebra`,
+    content: `@academic[formula_callout:Notation and Representation
 $$\\mathbf{v},\\quad \\mathbf{u},\\quad \\mathbf{w}$$]@
 
 @academic[fact,aside:true,width:35%:Twenty equations became four
 Maxwell's 1865 theory of electromagnetism was written out component by component, 20 equations in all. In 1884 Heaviside rewrote it in vector notation, where one equation stands for three, and grouped it into the four Maxwell's equations known today.]@
 
-A single bold letter stands for the whole list of components, so one equation between vectors says as much as $n$ equations between numbers. In $\\mathbb{R}^3$, the equation $\\mathbf{a} + \\mathbf{b} = \\mathbf{c}$ packs together $a_1 + b_1 = c_1$, $a_2 + b_2 = c_2$ and $a_3 + b_3 = c_3$.
-
-In handwritten work, an arrow placed above the letter serves the same purpose: $\\vec{v}$, $\\vec{u}$, $\\vec{w}$. When a vector runs from a specific point $A$ to a specific point $B$, the notation $\\vec{AB}$ identifies both the direction and the endpoints explicitly.
-
-The components of a vector can be written as a row or as a column. Row notation lists the entries horizontally:
-
 @academic[formula_callout:Notation and Representation
 $$\\mathbf{v} = (v_1, v_2, \\ldots, v_n)$$]@
-
-Column notation stacks them vertically:
 
 @academic[formula_callout:Notation and Representation
 $$\\mathbf{v} = \\begin{pmatrix} v_1 \\\\ v_2 \\\\ \\vdots \\\\ v_n \\end{pmatrix}$$]@
 
-The distinction matters when vectors interact with [matrices](!/linear-algebra/matrix): matrix multiplication requires column vectors on the right side of the product. Throughout this section, both formats appear depending on which is clearer for the situation at hand.
-
-## Standard Basis Vectors
-
-In any $\\mathbb{R}^n$, the standard basis consists of $n$ vectors, each with a $1$ in exactly one position and $0$ everywhere else. In $\\mathbb{R}^3$, these are commonly written as $\\mathbf{i}$, $\\mathbf{j}$, and $\\mathbf{k}$:
-
 @academic[formula_callout:Notation and Representation
-$$\\mathbf{i} = (1, 0, 0), \\quad \\mathbf{j} = (0, 1, 0), \\quad \\mathbf{k} = (0, 0, 1)$$]@
-
-In general $\\mathbb{R}^n$, the notation $\\mathbf{e}_1, \\mathbf{e}_2, \\ldots, \\mathbf{e}_n$ is used. Any vector can be decomposed as a sum of scaled basis vectors: $\\mathbf{v} = v_1\\mathbf{e}_1 + v_2\\mathbf{e}_2 + \\cdots + v_n\\mathbf{e}_n$. This decomposition makes the components explicit and connects directly to the idea of a [linear combination](!/linear-algebra/vectors/linear-combinations).`,
+$$\\mathbf{i} = (1, 0, 0), \\quad \\mathbf{j} = (0, 1, 0), \\quad \\mathbf{k} = (0, 0, 1)$$]@`,
     before: ``,
     after: ``,
     link: '',
@@ -1211,8 +1233,47 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+  // so only what the overview itself holds: the photo fact box (What Is a
+  // Vector), the bold-letter and row/column notation cards with the Maxwell
+  // fact box, the slot-by-slot note under Basic Operations, the output column
+  // of the summary table, and the cross-product pitfall's perpendicular check.
+  const faqQuestions = {
+    obj1: {
+      question: "Can a vector have millions of components?",
+      answer: "Yes. A vector in $\\mathbb{R}^n$ is an ordered list of $n$ real numbers, and nothing limits $n$. A 12-megapixel colour photo stores a red, a green and a blue value for every pixel, so the whole picture is one vector in $\\mathbb{R}^{36{,}000{,}000}$. No arrow can be drawn past three dimensions, but the algebra works exactly the same: dimming the photo to half brightness is multiplying that vector by $\\frac{1}{2}$.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Why is a whole vector written as one bold letter?",
+      answer: "Because one symbol then stands for the whole list of components, so one vector equation says as much as $n$ equations between numbers. In $\\mathbb{R}^3$, $\\mathbf{a} + \\mathbf{b} = \\mathbf{c}$ packs together $a_1 + b_1 = c_1$, $a_2 + b_2 = c_2$ and $a_3 + b_3 = c_3$. The saving is large: Maxwell's theory of electromagnetism filled 20 equations written component by component, and Heaviside's vector notation regrouped it into the four Maxwell's equations known today. By hand, an arrow $\\vec{v}$ replaces the bold.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "Does it matter whether a vector is written as a row or a column?",
+      answer: "Not for the vector itself: $(v_1, \\ldots, v_n)$ and the same entries stacked vertically are the same vector, and the two forms are interchangeable in sums, scaling, lengths and products. The shape starts to matter once matrices enter. In a matrix-vector product $A\\mathbf{v}$ the vector must be a column standing to the right of the matrix, and the dot product in matrix form, $\\mathbf{a}^{T}\\mathbf{b}$, is a row times a column.",
+      sectionId: "2"
+    },
+    obj4: {
+      question: "What do vector addition, subtraction and scalar multiplication have in common?",
+      answer: "All three work component by component: the operation is applied to each slot on its own, and the slots never interact. That is why adding or subtracting needs two vectors of the same length, and why all three return a vector in the same $\\mathbb{R}^n$. All three are also special cases of a linear combination $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k$. The dot and cross products break this pattern on purpose: both mix the components together.",
+      sectionId: "5"
+    },
+    obj5: {
+      question: "Which vector operations give a number instead of a vector?",
+      answer: "Two of them: the magnitude $\\|\\mathbf{v}\\|$, which is never negative, and the dot product $\\mathbf{a} \\cdot \\mathbf{b}$, which can be positive, negative or zero. Addition, subtraction, scalar multiplication and linear combinations return a vector, and so does the cross product, though it exists only in $\\mathbb{R}^3$. A common slip is stopping the dot product after the multiplications: $(1, 2, 3) \\cdot (4, -5, 6)$ is $4 - 10 + 18 = 12$, not the vector $(4, -10, 18)$.",
+      sectionId: "10"
+    },
+    obj6: {
+      question: "How can you check a cross product answer?",
+      answer: "Dot the result with both inputs: each dot product must be $0$, because $\\mathbf{a} \\times \\mathbf{b}$ is perpendicular to both $\\mathbf{a}$ and $\\mathbf{b}$. For $(1, 2, 3) \\times (4, 5, 6) = (-3, 6, -3)$ the checks give $-3 + 12 - 9 = 0$ and $-12 + 30 - 18 = 0$. The usual error is in the middle component, which is $a_3b_1 - a_1b_3$; writing $a_1b_3 - a_3b_1$ gives $(-3, -6, -3)$, whose dot product with $(1, 2, 3)$ is $-24$.",
+      sectionId: "pitfalls"
+    }
+  }
+
    return {
   props: {
+    faqQuestions,
     vectorTypeTree,
     demoUnits,
     conceptIntroFigures,
@@ -1231,7 +1292,7 @@ const schemas = {
   }
 }
    }
-export default function VectorsPage({vectorTypeTree, seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
+export default function VectorsPage({vectorTypeTree, seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1321,6 +1382,23 @@ A 12-megapixel colour photo stores three brightness values per pixel, for red, g
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          <NotationSection
+            key={'notation-obj2'}
+            title={sectionsContent.obj2.title}
+            lead={sectionsContent.obj2.lead}
+            inherited={sectionsContent.obj2.inherited}
+            entries={sectionsContent.obj2.entries}
+            symbolsHref={sectionsContent.obj2.symbolsHref}
+            symbolsLabel={sectionsContent.obj2.symbolsLabel}
+            parentHref={sectionsContent.obj2.parentHref}
+            parentLabel={sectionsContent.obj2.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laVectorsNotationSheet}
+            current={'/linear-algebra/vectors'}
+          />,
           sectionsContent.obj2.content,
         ]
     },
@@ -1416,6 +1494,22 @@ A 12-megapixel colour photo stores three brightness values per pixel, for red, g
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Vectors FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

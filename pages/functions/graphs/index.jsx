@@ -938,6 +938,7 @@ import renderFunctionPlotV3 from '@/app/utils/illustrations/functions/graphs/fun
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1182,6 +1183,27 @@ const obj4MiniTable = `
   </tbody>
 </table>
 `
+
+// Concept introduction (section 2, "The Graph of a Function") — template A,
+// definition last. Running instance: f(x) = x², input-output pairs turned
+// into points. Old obj2 text is kept in sectionsContent.obj2, unused; its
+// rule box, five passages and the pointsSquare demo frame with its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPairTable = ciTableOpen(['input x', 'output f(x) = x²', 'point (x, f(x))']) +
+  ciRow(['−2', '4', '(−2, 4)']) +
+  ciRow(['−1', '1', '(−1, 1)'], { shade: true }) +
+  ciRow(['0', '0', '(0, 0)']) +
+  ciRow(['0.5', '0.25', '(0.5, 0.25)'], { shade: true }) +
+  ciRow(['1', '1', '(1, 1)']) +
+  ciRow(['2', '4', '(2, 4)'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
 
@@ -1573,26 +1595,43 @@ From a graph, the shape of a function becomes immediate. Where does it rise? Whe
 
 
 
+// FAQ pass 2026-10-31: cut "How do you find the x-intercepts and
+// y-intercept of a function?" (restates the h2 Intercepts) and renumbered.
+// Kept the other three; the hole question now points to section 7, where
+// holes are described (was 8, Types of Curves). Added the number of
+// y-intercepts (rule box under Intercepts), the plotter that draws the wrong
+// wave (fact box under Graphing Technology) and joining points from a table
+// (Sketching Graphs from Tables, with the straight-segment pitfall).
 const faqQuestions = {
   obj1: {
-    question: "How do you find the x-intercepts and y-intercept of a function?",
-    answer: "Set the output to zero and solve for x to find the x-intercepts, which are also the zeros of the function. Substitute zero for x to find the y-intercept. A function has at most one y-intercept, since one input gives one output, but it may have many x-intercepts or none at all.",
-    sectionId: "6"
-  },
-  obj2: {
     question: "How many points do you need to sketch a graph?",
     answer: "It depends on the family rather than on a fixed count. A line needs two points, a parabola needs the vertex plus one point on either side, and anything with asymptotes needs those drawn first. Plotting points blindly without knowing the expected shape is what produces wrong sketches.",
     sectionId: "3"
   },
-  obj3: {
+  obj2: {
     question: "Why does a graph sometimes have a hole instead of an asymptote?",
     answer: "A hole appears when a factor cancels between numerator and denominator, removing a single point while leaving the surrounding curve intact. An asymptote appears when the factor does not cancel, so the function genuinely blows up there. Simplifying before graphing is what reveals which of the two you have.",
-    sectionId: "8"
+    sectionId: "7"
   },
-  obj4: {
+  obj3: {
     question: "Can a graph cross its own asymptote?",
     answer: "A horizontal asymptote yes; a vertical one it meets at most once, and usually not at all. Horizontal asymptotes describe end behaviour far out, so nothing stops the curve crossing them in the middle. A vertical asymptote usually marks an input the function has no value at, so the curve cannot reach it; a function defined there touches the line at only that one point.",
     sectionId: "7"
+  },
+  obj4: {
+    question: "Can a function have more than one y-intercept?",
+    answer: "No, at most one. The $y$-intercept is the point $(0, f(0))$, and the single input $0$ has only one output. A function can also have none: if $0$ is outside the domain, as for $\\frac{1}{x}$ or $\\ln x$, the graph never meets the $y$-axis. The $x$-intercepts are different, because many inputs may share the output $0$: $x^2 + 1$ has none, $x^2$ has one and $\\sin x$ has infinitely many.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "Can a graphing calculator show the wrong graph?",
+    answer: "Yes. A plotter computes points at fixed steps and joins them, so it can miss what happens in between. Sampled every $0.1$ units, $\\sin(x + 20\\pi x)$ looks exactly like $\\sin x$: at each $x = 0.1k$ the extra $20\\pi x = 2\\pi k$ is a whole number of turns, yet the true graph swings about ten times per unit. Holes are usually invisible too, and an asymptote shows only as an ever steeper curve.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "Should you connect the points when graphing from a table?",
+    answer: "Only if the function is continuous. Daily temperatures come from a continuous process, so joining the points makes sense; year-end profits are separate values and are better left as dots. Even then the joining is a guess about the gaps, where a maximum may hide, and a curve should be drawn smooth: $x^2 - 4x + 3$ is $-0.75$ at $x = 1.5$, below the $-0.5$ a straight segment gives.",
+    sectionId: "4"
   }
 }
 
@@ -1675,6 +1714,10 @@ const faqQuestions = {
     output: { y: 0, xs: [-2, 2], label: 'f(x) = 0: two answers, x = −2 and x = 2' },
     fnLabel: { text: 'f(x) = x² − 4', x: -3.9, y: 6.4 },
     caption: 'An input has one output; an output can come from several inputs',
+  };
+
+  const conceptIntroFigures = {
+    pairTable: ciPairTable,
   };
 
   const demoUnits = {
@@ -1777,6 +1820,7 @@ const faqQuestions = {
     quadraticSketchProfile,
     curveOutline,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj6Table,
@@ -1809,10 +1853,73 @@ export default function GraphsPage({quadraticSketchProfile, curveOutline,
   faqQuestions,
   schemas,
   obj3MiniTable,
-  obj4MiniTable, demoUnits
+  obj4MiniTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A function pairs every input with an output — a list of pairs that never ends.`,
+        content: [
+          `For $f(x) = x^2$, the pairs $0 \\to 0$, $1 \\to 1$, $2 \\to 4$, $-1 \\to 1$ go on for every number there is, fractions included. No list can show them all at once.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each input-output pair can be written as a point (x, f(x)) of the coordinate plane.`,
+        content: [
+          ciTable('pairTable'),
+          <div key={'unit-pointsSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.pointsSquare }} />,
+          `The graph is all of these input-output pairs at once.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Plotting every pair as a point turns the endless list into one picture.`,
+        content: [
+          `For $f(x) = x^2$, the graph includes $(0, 0)$, $(1, 1)$, $(2, 4)$, $(-1, 1)$, $(-2, 4)$, and infinitely many other points. Connected together, they form the familiar parabola opening upward.`,
+          `The graph is a visual encoding of the function's behavior. Inputs run along the horizontal axis; outputs are measured vertically. To find $f(3)$ from the graph, locate $x = 3$ on the horizontal axis, move vertically to the curve, and read the $y$-coordinate of that point.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **graph of a function** $f$ is the set of all points $(x, f(x))$ with $x$ in the domain of $f$.`,
+        formula: [
+          `The graph of a function $f$ is the set of all points $(x, f(x))$ where $x$ is in the [domain](!/functions/domain). Each point pairs an input with its corresponding output, and the complete collection of such points forms a curve in the plane.`,
+        ],
+        footer: `So the graph of $f(x) = x^2$ is the parabola through $(0, 0)$, $(\\pm 1, 1)$, $(\\pm 2, 4)$ and every other point $(x, x^2)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A graph is a picture of the whole function, in which its behaviour becomes shape.`,
+        content: [
+          `The graph transforms abstract relationships into geometric objects. Increasing behavior appears as a rising curve. Decreasing behavior appears as a falling curve. Symmetry, periodicity, and boundedness become visible patterns.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Not every curve is the graph of a function: above each input there may be at most one point.`,
+        content: [
+          `@academic[rule:Vertical Line Test
+Because a function assigns exactly one output to each input, the graph has a definitive property: every vertical line intersects it at most once.]@`,
+          `This is the vertical line test — if a vertical line crosses a curve twice, that curve does not represent a function.`,
+          `The plane the points are plotted in is set up in [the coordinate plane](!/functions/graphs#1).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers reading graphs, intercepts, intervals of increase and decrease, symmetry, and the graphs of common functions.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1838,9 +1945,7 @@ export default function GraphsPage({quadraticSketchProfile, curveOutline,
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-          <div key={'unit-pointsSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.pointsSquare }} />,
-          `The graph is all of these input-output pairs at once.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     // {

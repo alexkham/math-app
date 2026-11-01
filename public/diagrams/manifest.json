@@ -255,6 +255,18 @@
     ]
   },
   {
+    "id": "complete-square-integral",
+    "title": null,
+    "source": "/calculus/integrals/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 620,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "complex-eigenvalues",
     "title": null,
     "source": "/linear-algebra/eigen/complex",
@@ -264,6 +276,18 @@
     "formats": [
       "png",
       "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "complex-equation-decision",
+    "title": null,
+    "source": "/complex-numbers/equations-polynomials",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 729,
+    "formats": [
+      "png",
       "pdf"
     ]
   },
@@ -287,6 +311,30 @@
     "section": "complex-numbers",
     "width": 933,
     "height": 764,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "complex-numbers-notation-cheat-sheet",
+    "title": null,
+    "source": "/complex-numbers/basics",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 1744,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "complex-operation-properties",
+    "title": null,
+    "source": "/complex-numbers/properties",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 711,
     "formats": [
       "png",
       "pdf"
@@ -365,6 +413,18 @@
     ]
   },
   {
+    "id": "conjugate-limit-steps",
+    "title": null,
+    "source": "/calculus/limits/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 1047,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "connective-precedence-pyramid",
     "title": null,
     "source": "/logic/propositional-logic/syntax",
@@ -383,6 +443,18 @@
     "section": "probability",
     "width": 909,
     "height": 827,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "contrapositive-before-after",
+    "title": null,
+    "source": "/logic/truth-tables/implications",
+    "section": "logic",
+    "width": 933,
+    "height": 642,
     "formats": [
       "png",
       "pdf"
@@ -487,6 +559,30 @@
     ]
   },
   {
+    "id": "decomposition-decision",
+    "title": null,
+    "source": "/linear-algebra/decompositions",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 740,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "decompositions-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/decompositions/lower-upper",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 1126,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "decompositions-tree",
     "title": null,
     "source": "/linear-algebra/decompositions",
@@ -536,12 +632,36 @@
     ]
   },
   {
+    "id": "denied-disjunction-before-after",
+    "title": null,
+    "source": "/logic/truth-tables/contradictions",
+    "section": "logic",
+    "width": 933,
+    "height": 616,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "derivative-continuity-nesting",
     "title": null,
     "source": "/calculus/derivatives/function",
     "section": "calculus",
     "width": 933,
     "height": 775,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "derivative-matrix-before-after",
+    "title": null,
+    "source": "/linear-algebra/transformations/matrix-representation",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 631,
     "formats": [
       "png",
       "pdf"
@@ -566,6 +686,19 @@
     "section": "calculus",
     "width": 933,
     "height": 617,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "derivatives-notation-cheat-sheet",
+    "title": null,
+    "source": "/calculus/derivatives",
+    "section": "calculus",
+    "width": 933,
+    "height": 1460,
     "formats": [
       "png",
       "svg",
@@ -694,6 +827,18 @@
     ]
   },
   {
+    "id": "determinants-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/determinants/properties",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 1045,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "diagonalizability-cases",
     "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
@@ -706,12 +851,36 @@
     ]
   },
   {
+    "id": "diagonalization-before-after",
+    "title": null,
+    "source": "/linear-algebra/transformations/basis-change",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 627,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "diagonalization-kinds",
     "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
     "section": "linear-algebra",
     "width": 48,
     "height": 48,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "difference-expansion-steps",
+    "title": null,
+    "source": "/combinatorics/binomial-theorem",
+    "section": "combinatorics",
+    "width": 933,
+    "height": 804,
     "formats": [
       "png",
       "pdf"
@@ -754,6 +923,18 @@
     ]
   },
   {
+    "id": "discrete-continuous-comparison",
+    "title": null,
+    "source": "/probability/distributions/continuous",
+    "section": "probability",
+    "width": 909,
+    "height": 925,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "discrete-families-tree",
     "title": null,
     "source": "/probability/distributions/discrete",
@@ -784,6 +965,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 1369,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "eigen-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/eigen/characteristic-equation",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 916,
     "formats": [
       "png",
       "pdf"
@@ -863,6 +1056,30 @@
     ]
   },
   {
+    "id": "expand-simplify-steps",
+    "title": null,
+    "source": "/calculus/limits/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 991,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "expectation-properties",
+    "title": null,
+    "source": "/probability/expected-value",
+    "section": "probability",
+    "width": 933,
+    "height": 494,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "expected-value-type-cases",
     "title": null,
     "source": "/probability/expected-value",
@@ -896,6 +1113,18 @@
     "formats": [
       "png",
       "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "exponent-law-restrictions",
+    "title": null,
+    "source": "/algebra/powers/exponent-rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 653,
+    "formats": [
+      "png",
       "pdf"
     ]
   },
@@ -936,6 +1165,18 @@
     ]
   },
   {
+    "id": "factor-cancel-steps",
+    "title": null,
+    "source": "/calculus/limits/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 839,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "factor-sign-profile",
     "title": null,
     "source": "/algebra/inequalities/polynomial",
@@ -967,6 +1208,30 @@
     "section": "algebra",
     "width": 933,
     "height": 833,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "factoring-strategy-decision",
+    "title": null,
+    "source": "/algebra/polynomials/factoring",
+    "section": "algebra",
+    "width": 933,
+    "height": 838,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "finite-infinite-dimension",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces/dimension",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 742,
     "formats": [
       "png",
       "pdf"
@@ -1094,6 +1359,18 @@
     ]
   },
   {
+    "id": "functions-notation-cheat-sheet",
+    "title": null,
+    "source": "/functions/basics",
+    "section": "functions",
+    "width": 933,
+    "height": 1462,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "fundamental-subspaces-tree",
     "title": null,
     "source": "/linear-algebra/vector-spaces/fundamental-spaces",
@@ -1124,6 +1401,18 @@
     "section": "algebra",
     "width": 933,
     "height": 760,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "general-restricted-solutions",
+    "title": null,
+    "source": "/trigonometry/equations",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 527,
     "formats": [
       "png",
       "pdf"
@@ -1203,6 +1492,19 @@
     ]
   },
   {
+    "id": "improper-convergence-comparison",
+    "title": null,
+    "source": "/calculus/integrals/improper",
+    "section": "calculus",
+    "width": 933,
+    "height": 728,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
     "id": "improper-convergence-tests-tree",
     "title": null,
     "source": "/calculus/integrals/improper",
@@ -1239,6 +1541,18 @@
     ]
   },
   {
+    "id": "inequality-moves",
+    "title": null,
+    "source": "/algebra/inequalities",
+    "section": "algebra",
+    "width": 933,
+    "height": 560,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "inner-product-axioms",
     "title": null,
     "source": "/linear-algebra/orthogonality/inner-product",
@@ -1251,12 +1565,36 @@
     ]
   },
   {
+    "id": "integral-ladder-decision",
+    "title": null,
+    "source": "/calculus/integrals/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 611,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "integral-types-tree",
     "title": null,
     "source": "/calculus/integrals",
     "section": "calculus",
     "width": 933,
     "height": 630,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "integrals-notation-cheat-sheet",
+    "title": null,
+    "source": "/calculus/integrals",
+    "section": "calculus",
+    "width": 933,
+    "height": 1238,
     "formats": [
       "png",
       "pdf"
@@ -1281,6 +1619,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 165,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "inverse-method-decision",
+    "title": null,
+    "source": "/linear-algebra/matrix/inverse",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 581,
     "formats": [
       "png",
       "pdf"
@@ -1332,6 +1682,18 @@
     "formats": [
       "png",
       "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "known-limit-steps",
+    "title": null,
+    "source": "/calculus/limits/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 1017,
+    "formats": [
+      "png",
       "pdf"
     ]
   },
@@ -1396,6 +1758,18 @@
     ]
   },
   {
+    "id": "limits-notation-cheat-sheet",
+    "title": null,
+    "source": "/calculus/limits/two-sided",
+    "section": "calculus",
+    "width": 933,
+    "height": 1297,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "linear-map-combinations",
     "title": null,
     "source": "/linear-algebra/transformations/properties",
@@ -1420,12 +1794,36 @@
     ]
   },
   {
+    "id": "linear-systems-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/linear-systems/gaussian-elimination",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 926,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "literal-inequality-sign-cases",
     "title": null,
     "source": "/algebra/inequalities/linear",
     "section": "algebra",
     "width": 933,
     "height": 688,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "lln-clt-comparison",
+    "title": null,
+    "source": "/probability/large-numbers-law",
+    "section": "probability",
+    "width": 933,
+    "height": 832,
     "formats": [
       "png",
       "pdf"
@@ -1441,6 +1839,42 @@
     "formats": [
       "png",
       "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "log-diff-steps",
+    "title": null,
+    "source": "/calculus/derivatives/techniques",
+    "section": "calculus",
+    "width": 933,
+    "height": 799,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "log-equation-decision",
+    "title": null,
+    "source": "/algebra/logarithms/equations",
+    "section": "algebra",
+    "width": 933,
+    "height": 892,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "log-function-properties",
+    "title": null,
+    "source": "/algebra/logarithms/properties",
+    "section": "algebra",
+    "width": 933,
+    "height": 801,
+    "formats": [
+      "png",
       "pdf"
     ]
   },
@@ -1541,6 +1975,18 @@
     ]
   },
   {
+    "id": "matrix-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/matrix/operations",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 929,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "matrix-powers-by-hand",
     "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
@@ -1626,12 +2072,61 @@
     ]
   },
   {
+    "id": "median-method-decision",
+    "title": null,
+    "source": "/probability/median",
+    "section": "probability",
+    "width": 933,
+    "height": 871,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "modulo-divisibility-cases",
     "title": null,
     "source": "/arithmetic/modulo",
     "section": "arithmetic",
     "width": 933,
     "height": 764,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "natural-restricted-domain",
+    "title": null,
+    "source": "/functions/domain",
+    "section": "functions",
+    "width": 933,
+    "height": 713,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "negated-conditional-steps",
+    "title": null,
+    "source": "/logic/propositional-logic/semantics/equivalences",
+    "section": "logic",
+    "width": 933,
+    "height": 983,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "negated-implication-steps",
+    "title": null,
+    "source": "/logic/truth-tables/contradictions",
+    "section": "logic",
+    "width": 933,
+    "height": 1163,
     "formats": [
       "png",
       "pdf"
@@ -1722,12 +2217,48 @@
     ]
   },
   {
+    "id": "one-minus-cos-steps",
+    "title": null,
+    "source": "/calculus/limits/special",
+    "section": "calculus",
+    "width": 933,
+    "height": 1036,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "one-side-steps",
     "title": null,
     "source": "/algebra/inequalities/rational",
     "section": "algebra",
     "width": 933,
     "height": 1033,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "operation-property-matrix",
+    "title": null,
+    "source": "/arithmetic/properties",
+    "section": "arithmetic",
+    "width": 933,
+    "height": 541,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "orthogonality-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/orthogonality/inner-product",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 1182,
     "formats": [
       "png",
       "pdf"
@@ -1764,6 +2295,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 667,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "parametric-form-before-after",
+    "title": null,
+    "source": "/linear-algebra/linear-systems/echelon-form",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 713,
     "formats": [
       "png",
       "pdf"
@@ -1854,6 +2397,31 @@
     ]
   },
   {
+    "id": "polynomials-equations-inequalities-notation-cheat-sheet",
+    "title": null,
+    "source": "/algebra/polynomials/roots",
+    "section": "algebra",
+    "width": 933,
+    "height": 1326,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "powers-roots-logarithms-notation-cheat-sheet",
+    "title": null,
+    "source": "/algebra/powers",
+    "section": "algebra",
+    "width": 933,
+    "height": 1427,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "prime-types-tree",
     "title": null,
     "source": "/algebra/sequences/prime-numbers",
@@ -1872,6 +2440,78 @@
     "section": "algebra",
     "width": 933,
     "height": 721,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "probability-distributions-notation-cheat-sheet",
+    "title": null,
+    "source": "/probability/distributions",
+    "section": "probability",
+    "width": 933,
+    "height": 1477,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "probability-events-rules-notation-cheat-sheet",
+    "title": null,
+    "source": "/probability/conditional-probability",
+    "section": "probability",
+    "width": 933,
+    "height": 1447,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "probability-expectation-spread-notation-cheat-sheet",
+    "title": null,
+    "source": "/probability/expected-value",
+    "section": "probability",
+    "width": 933,
+    "height": 1184,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "probability-inequalities-limits-notation-cheat-sheet",
+    "title": null,
+    "source": "/probability/large-numbers-law",
+    "section": "probability",
+    "width": 933,
+    "height": 922,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "probability-random-variables-notation-cheat-sheet",
+    "title": null,
+    "source": "/probability/random-variables",
+    "section": "probability",
+    "width": 933,
+    "height": 1144,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "probability-rule-decision",
+    "title": null,
+    "source": "/probability/rules",
+    "section": "probability",
+    "width": 901,
+    "height": 931,
     "formats": [
       "png",
       "pdf"
@@ -2060,12 +2700,36 @@
     ]
   },
   {
+    "id": "radical-operation-decision",
+    "title": null,
+    "source": "/algebra/roots/operations",
+    "section": "algebra",
+    "width": 933,
+    "height": 701,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "radical-product-steps",
     "title": null,
     "source": "/algebra/powers/rational-exponents",
     "section": "algebra",
     "width": 933,
     "height": 964,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "radical-rule-index",
+    "title": null,
+    "source": "/algebra/roots/radical-rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 538,
     "formats": [
       "png",
       "pdf"
@@ -2102,6 +2766,30 @@
     "section": "functions",
     "width": 933,
     "height": 1115,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "range-codomain-comparison",
+    "title": null,
+    "source": "/functions/range",
+    "section": "functions",
+    "width": 933,
+    "height": 800,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "range-method-decision",
+    "title": null,
+    "source": "/functions/range",
+    "section": "functions",
+    "width": 933,
+    "height": 746,
     "formats": [
       "png",
       "pdf"
@@ -2186,6 +2874,18 @@
     "section": "algebra",
     "width": 933,
     "height": 660,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "real-canonical-before-after",
+    "title": null,
+    "source": "/linear-algebra/eigen/complex",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 607,
     "formats": [
       "png",
       "pdf"
@@ -2336,12 +3036,61 @@
     ]
   },
   {
+    "id": "secant-integral-steps",
+    "title": null,
+    "source": "/calculus/integrals/special",
+    "section": "calculus",
+    "width": 933,
+    "height": 791,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "sequences-notation-cheat-sheet",
+    "title": null,
+    "source": "/algebra/sequences/arithmetic",
+    "section": "algebra",
+    "width": 933,
+    "height": 1516,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "set-notation-legend",
+    "title": null,
+    "source": "/probability/sets",
+    "section": "probability",
+    "width": 933,
+    "height": 1005,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "set-size-dimension-pyramid",
     "title": null,
     "source": "/linear-algebra/vector-spaces/dimension",
     "section": "linear-algebra",
     "width": 933,
     "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "set-theory-notation-cheat-sheet",
+    "title": null,
+    "source": "/set-theory/basics",
+    "section": "set-theory",
+    "width": 933,
+    "height": 1042,
     "formats": [
       "png",
       "pdf"
@@ -2566,6 +3315,18 @@
     ]
   },
   {
+    "id": "split-fraction-steps",
+    "title": null,
+    "source": "/calculus/integrals/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 832,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "square-root-profile",
     "title": null,
     "source": "/algebra/roots/functions",
@@ -2608,6 +3369,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 1188,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "strategic-one-steps",
+    "title": null,
+    "source": "/calculus/limits/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 834,
     "formats": [
       "png",
       "pdf"
@@ -2771,6 +3544,18 @@
     ]
   },
   {
+    "id": "transformations-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/transformations/properties",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 1086,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "transformed-sine-profile",
     "title": null,
     "source": "/trigonometry/graphs",
@@ -2809,6 +3594,18 @@
     ]
   },
   {
+    "id": "trig-equation-decision",
+    "title": null,
+    "source": "/trigonometry/equations",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 754,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "trig-identity-families-outline",
     "title": null,
     "source": "/trigonometry/identities",
@@ -2821,12 +3618,36 @@
     ]
   },
   {
+    "id": "trig-inequality-decision",
+    "title": null,
+    "source": "/trigonometry/inequalities",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 744,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "trig-parity-tree",
     "title": null,
     "source": "/trigonometry/properties",
     "section": "trigonometry",
     "width": 933,
     "height": 651,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "trigonometry-notation-cheat-sheet",
+    "title": null,
+    "source": "/trigonometry/right-triangle",
+    "section": "trigonometry",
+    "width": 933,
+    "height": 1505,
     "formats": [
       "png",
       "pdf"
@@ -2851,6 +3672,30 @@
     "section": "calculus",
     "width": 933,
     "height": 647,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "variance-expectation-moves",
+    "title": null,
+    "source": "/probability/variance",
+    "section": "probability",
+    "width": 933,
+    "height": 605,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "variance-shortcut-before-after",
+    "title": null,
+    "source": "/probability/probability-function/pmf",
+    "section": "probability",
+    "width": 933,
+    "height": 634,
     "formats": [
       "png",
       "pdf"
@@ -2917,12 +3762,48 @@
     ]
   },
   {
+    "id": "vector-spaces-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces/axioms",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 1399,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "vector-types-tree",
     "title": null,
     "source": "/linear-algebra/vectors",
     "section": "linear-algebra",
     "width": 933,
     "height": 670,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "vectors-notation-cheat-sheet",
+    "title": null,
+    "source": "/linear-algebra/vectors",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 1157,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "wronskian-steps",
+    "title": null,
+    "source": "/linear-algebra/determinants/applications",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 887,
     "formats": [
       "png",
       "pdf"

@@ -14,6 +14,7 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -687,8 +688,42 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the isolated double root (pitfall under
+  // Worked Examples), the odd-degree fact box under End Behavior, irrational
+  // and approximate roots and the factor with no real roots (both under
+  // Polynomials That Do Not Factor), and the reversed factor (5 - x) pitfall.
+  const faqQuestions = {
+    obj1: {
+      question: "Why is $x = -2$ part of the solution of $(x + 2)^2(x - 1)(x - 4) \\leq 0$?",
+      answer: "Because the product is $0$ there, and $0 \\leq 0$ is true. The double root $-2$ only touches the axis: the polynomial is positive on both sides of it, so it is the endpoint of no negative interval, and reading the answer from the chosen intervals gives just $[1, 4]$. The full solution is $\\{-2\\} \\cup [1, 4]$. For $\\leq$ or $\\geq$, list every root at the end, since each one makes $P(x) = 0$.",
+      sectionId: "7"
+    },
+    obj2: {
+      question: "Can an odd-degree polynomial inequality be true for every $x$?",
+      answer: "No. The two ends of an odd-degree polynomial lie on opposite sides of the axis, and its graph has no breaks, so it must cross zero at least once: every odd-degree polynomial has a real root. So $P(x) > 0$ fails somewhere, unlike $x^2 + 1 > 0$, which holds everywhere. For the same reason the solution is never empty either: $x^3 - 2 > 0$ holds on $(\\sqrt[3]{2}, \\infty)$ and fails to the left of $\\sqrt[3]{2}$.",
+      sectionId: "5"
+    },
+    obj3: {
+      question: "Do you need exact roots to solve a polynomial inequality?",
+      answer: "No. The sign chart only needs the roots in the right order, and irrational or approximate roots cut the line just as well. $x^3 - 2 > 0$ has the single real root $\\sqrt[3]{2} \\approx 1.26$, which the rational root theorem cannot find, and the solution is $(\\sqrt[3]{2}, \\infty)$. For $x^3 - 3x + 1 > 0$, numerical methods give roots near $-1.88$, $0.35$ and $1.53$, and the solution is approximately $(-1.88, 0.35) \\cup (1.53, \\infty)$. Only the precision of the boundaries changes.",
+      sectionId: "6"
+    },
+    obj4: {
+      question: "What does a factor like $x^2 + 1$ do to a sign chart?",
+      answer: "It adds no boundaries. A quadratic factor with a negative discriminant has no real roots, so it creates no critical points and keeps one sign on the whole line. If that sign is positive, as for $x^2 + 1$, the factor can be ignored: $(x - 1)(x^2 + 1) > 0$ has the same solution as $x - 1 > 0$, namely $x > 1$. If the factor is negative everywhere, such as $-x^2 - 1$, it flips the sign of every interval at once.",
+      sectionId: "6"
+    },
+    obj5: {
+      question: "How do you handle a factor like $(5 - x)$ in a sign chart?",
+      answer: "Reverse the usual pattern: $5 - x$ is positive left of $5$ and negative right of it, the opposite of $x - 5$. Charting it like $x - 5$ turns $(x + 2)(x - 1)(5 - x) < 0$ into $(-\\infty, -2) \\cup (1, 5)$, but $x = 3$ gives $5 \\cdot 2 \\cdot 2 = 20 > 0$. Writing $5 - x = -(x - 5)$ and multiplying by $-1$ gives $(x + 2)(x - 1)(x - 5) > 0$, with solution $(-2, 1) \\cup (5, \\infty)$.",
+      sectionId: "3"
+    }
+  }
+
    return {
   props: {
+    faqQuestions,
     factorSignProfile,
     demoUnits,
     conceptIntroFigures,
@@ -712,7 +747,7 @@ const schemas = {
 
 
 
-   export default function PolynomialInequalitiesPage({factorSignProfile, 
+   export default function PolynomialInequalitiesPage({factorSignProfile, faqQuestions,
   seoData,
   sectionsContent,
   introContent,
@@ -933,6 +968,22 @@ $$P(x) > 0$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Polynomial Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

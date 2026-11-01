@@ -857,6 +857,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 
 export async function getStaticProps(){
 
@@ -1540,6 +1542,10 @@ const hypergeometricExplanations = {
   // under a heading reading only "Variance and Standard Deviation" — and
   // added the notation section's three traps: the missing p, the two-level
   // letter case, and the clamped support.
+  // FAQ pass 2026-10-31: kept all four. Added capture-recapture (fact box
+  // under Expected Value), each draw having the same chance K/N (theorem box
+  // under Expected Value, checked on the page's own 5-ball bag) and the 6/49
+  // lottery match counts (fact box under Mode and Median).
   const faqQuestions = {
     obj1: {
       question: "Why is there no p in the hypergeometric formula?",
@@ -1560,6 +1566,21 @@ const hypergeometricExplanations = {
       question: "Why doesn't the hypergeometric support start at 0?",
       answer: "It often does, but not always. The lower bound is max(0, n − (N − K)): once the failures in the population run out, further draws are forced to be successes, so a minimum becomes unavoidable. The top is min(n, K) — you cannot observe more successes than you drew or than exist. Using the binomial's 0 to n assigns probability to impossible draws.",
       sectionId: "15"
+    },
+    obj5: {
+      question: "How do you estimate a population size by capture and recapture?",
+      answer: "Tag $K$ animals and release them, then catch $n$ and count the tagged ones, $k$. The count has mean $n \\cdot \\frac{K}{N}$, so setting $k = n \\cdot \\frac{K}{N}$ and solving gives $N \\approx \\frac{nK}{k}$. With $100$ fish tagged and $5$ tagged fish in a later catch of $50$, the lake holds about $\\frac{50 \\cdot 100}{5} = 1000$ fish. The estimate assumes the tagged fish mix back in and are as easy to catch as the rest.",
+      sectionId: "6"
+    },
+    obj6: {
+      question: "Does every draw have the same chance of success without replacement?",
+      answer: "Yes, before anything is seen: each draw on its own is a success with probability $\\frac{K}{N}$; only the chances given earlier draws change. In the bag with 2 red balls out of 5, the second draw is red with probability $\\frac{2}{5} \\cdot \\frac{1}{4} + \\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{2}{5}$, the same as the first. That is why the mean $n \\cdot \\frac{K}{N}$ matches the binomial's, while the variance, which feels the dependence, does not.",
+      sectionId: "6"
+    },
+    obj7: {
+      question: "What are the chances of matching numbers in a 6-from-49 lottery?",
+      answer: "The number of matches on a ticket is hypergeometric with $N = 49$, $K = 6$, $n = 6$, and the most likely result is none: a ticket matches no drawn number about 43.6% of the time and exactly one about 41.3%. Three matches come up about 1.8% of the time, and all six once in $\\binom{49}{6} = 13{,}983{,}816$ tickets. The mode formula agrees: $\\lfloor \\frac{7 \\cdot 7}{51} \\rfloor = 0$.",
+      sectionId: "8"
     }
   }
 
@@ -1814,6 +1835,11 @@ export default function HypergeometricDistributionPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/discrete/hypergeometric'}
           />,
         ]
     },

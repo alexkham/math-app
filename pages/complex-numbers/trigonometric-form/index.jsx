@@ -1549,6 +1549,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 
@@ -2478,7 +2480,7 @@ notation: {
       read: `capital arg of z — the principal argument`,
       means: `The capital letter buys uniqueness: $\\operatorname{Arg}(z)$ is the single representative of $\\arg(z)$ drawn from one agreed interval — a choice, not a discovery.`,
       cases: `Two rival conventions: $(-\\pi, \\pi]$ in advanced mathematics, $[0, 2\\pi)$ in elementary and computational settings — **The Principal Argument** above works the first. An answer of $-\\frac{3\\pi}{4}$ under one is $\\frac{5\\pi}{4}$ under the other; state the interval before comparing results.`,
-      alsoWritten: `$\\operatorname{atan2}(b, a)$ — the programming spelling, returning the principal value directly; note the argument order, $b$ before $a$, opposite the fraction in $\\tan\\theta = b/a$.`,
+      alsoWritten: `$\\operatorname{atan2}(b, a)$ — the programming spelling, returning the principal value directly; note the argument order, $b$ before $a$, the same order as the fraction in $\\tan\\theta = b/a$.`,
       confusedWith: `$\\arg(z)$ itself. Lowercase is the infinite family, uppercase the chosen one — mixing them silently is how off-by-$2\\pi$ errors enter multi-step calculations.`,
     },
     {
@@ -2761,31 +2763,45 @@ How to check: the signs of $a$ and $b$ must match the quadrant of the angle. An 
   content: `The [algebraic form](!/complex-numbers/algebraic-form) $z = a + bi$ works well for addition and subtraction, but becomes unwieldy when computing powers and roots. Trigonometric form offers an alternative description: instead of specifying horizontal and vertical components, we specify how far a number lies from the origin and at what angle. This polar perspective transforms multiplication into rotation and scaling, making operations that are tedious in algebraic form almost trivial.`
 }
 
+// FAQ pass 2026-10-31: cut three heading questions: "What is the argument"
+// (h2 Argument (Angle)), "find the argument in each quadrant" (h2 Quadrant
+// Considerations; the arctan trap is also asked on linear-algebra/eigen/
+// complex) and "convert from algebraic to trigonometric form" (h2 Converting
+// Algebraic to Trigonometric). Kept non-uniqueness and cis. Added negative r
+// (notation card), the minus-sign look-alike (pitfall under "The
+// Trigonometric Form"), the jump in the principal argument (fact box) and the
+// angle-addition formulas from one product (fact box under "Multiplication
+// and Division"); no heading asks any of them.
 const faqQuestions = {
   obj1: {
-    question: "What is the argument of a complex number?",
-    answer: "The angle from the positive real axis to the line joining the origin to the point, measured counterclockwise. Together with the modulus it locates the number completely, which is what polar coordinates do for any point in the plane. It is undefined at the origin, where no direction exists.",
-    sectionId: "3"
-  },
-  obj2: {
     question: "Why is the argument not unique?",
     answer: "Because adding a full turn returns to the same direction, so every number has infinitely many valid arguments differing by multiples of two pi. To make it single-valued, one is chosen as the principal argument, conventionally the one lying between negative pi and pi. Formulas often need a full turn added or removed to land back inside that range.",
     sectionId: "4"
   },
-  obj3: {
-    question: "How do you find the argument in each quadrant?",
-    answer: "The inverse tangent of the ratio gives the right answer only in the first and fourth quadrants, since it cannot tell opposite directions apart. In the second and third, pi must be added or subtracted to correct it. Sketching the point before trusting the calculator is the reliable way to avoid the error.",
-    sectionId: "5"
-  },
-  obj4: {
+  obj2: {
     question: "What is cis notation?",
     answer: "A shorthand for cosine plus i times sine of the same angle, so cis theta compresses the whole trigonometric form into one symbol. It saves writing but is falling out of use in favour of the exponential form, which conveys the same content and behaves algebraically like an ordinary power. Convert between forms on the [polar-rectangular tool](!/complex-numbers/visual-tools/polar-rectangular).",
     sectionId: "notation"
   },
+  obj3: {
+    question: "Can $r$ be negative in trigonometric form?",
+    answer: "No, $r$ is a distance, so it is never negative. An expression such as $-2\\,\\text{cis}\\,\\frac{\\pi}{6}$ is a valid number but is not written in trigonometric form: since $-1 = \\text{cis}\\,\\pi$, it equals $2\\,\\text{cis}\\,\\frac{7\\pi}{6}$, the same angle turned half way round. Reading $-2$ as the modulus and $\\frac{\\pi}{6}$ as the argument names the opposite point.",
+    sectionId: "notation"
+  },
+  obj4: {
+    question: "Is $r(\\cos\\theta - i\\sin\\theta)$ in trigonometric form?",
+    answer: "No, the form needs a plus sign and the same angle in both places. Because cosine is even and sine is odd, $\\cos\\theta - i\\sin\\theta = \\cos(-\\theta) + i\\sin(-\\theta)$, so the argument is $-\\theta$. For example, $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right) = 1 - \\sqrt{3}i$ lies below the real axis, with argument $-\\frac{\\pi}{3}$, not $\\frac{\\pi}{3}$.",
+    sectionId: "7"
+  },
   obj5: {
-    question: "How do you convert from algebraic to trigonometric form?",
-    answer: "Compute the modulus from the two components using the Pythagorean relationship, then find the angle from their ratio and correct it for the quadrant. Substituting both into the standard form completes the conversion. Going the other way is easier: multiply the modulus by the cosine and sine to recover the components.",
-    sectionId: "8"
+    question: "Why does the principal argument jump on the negative real axis?",
+    answer: "Because some jump is unavoidable, and the $(-\\pi, \\pi]$ convention puts it there. Follow a point once around the origin and its angle grows by $2\\pi$, so any rule that gives one angle per point must drop back by $2\\pi$ somewhere. With $(-\\pi, \\pi]$, a point just above the negative real axis has an argument near $\\pi$ and a point just below it one near $-\\pi$; the $[0, 2\\pi)$ convention moves the break to the positive real axis.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "How does complex multiplication give the angle-addition formulas?",
+    answer: "Multiply $\\text{cis}\\,\\alpha$ by $\\text{cis}\\,\\beta$ in two ways. Expanding the brackets with $i^2 = -1$ gives the real part $\\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta$ and the imaginary part $\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta$. The multiplication rule says the product is $\\text{cis}(\\alpha + \\beta)$, with parts $\\cos(\\alpha + \\beta)$ and $\\sin(\\alpha + \\beta)$. Matching the parts gives both formulas at once, so one product rebuilds them whenever they are forgotten.",
+    sectionId: "10"
   }
 }
 
@@ -3125,6 +3141,11 @@ Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argume
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/trigonometric-form'}
           />,
         ]
     },

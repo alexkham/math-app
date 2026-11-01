@@ -800,7 +800,7 @@ const keyWords = [
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/arithmetic/fractions/mixed-numbers" style="${linkStyle}">Mixed number</a></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">whole number + proper fraction</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">2 3⁄4</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">value ≥ 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">value &gt; 1</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/arithmetic/fractions/equivalent" style="${linkStyle}">Equivalent</a></td>
@@ -1282,6 +1282,11 @@ How to check: multiply the answer by the divisor; it must give the first fractio
 // dividing). Kept the denominator-zero question, extended; invented two from
 // buried content — the division identity in "What Is a Fraction" ¶2 and the
 // vinculum entry in the notation section.
+// FAQ pass 2026-10-31: kept all three. Added the 1/2x reading (the slash's
+// Cases note in the notation section), whether 7/7 is proper or improper (the
+// equal case in "Proper and Improper Fractions", no heading asks it) and sums
+// of unit fractions (the half-plus-a-tenth split and the Egyptian fact box
+// under "Unit Fractions").
 const faqQuestions = {
   obj1: {
     question: "Why can't the denominator be zero?",
@@ -1297,6 +1302,21 @@ const faqQuestions = {
     question: "What is the fraction bar called?",
     answer: "The horizontal line is the vinculum, though \"fraction bar\" is the everyday name. It does more than separate the two numbers: it groups them. Everything above the bar counts as one package, so (a+b)/c needs no brackets when stacked as a fraction. Writing that same expression inline forces the brackets back, which is why display work prefers the bar.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Does 1/2x mean half of x or 1 over 2x?",
+    answer: "It depends on the convention, which is why the expression is a trap. Most conventions read $1/2x$ as $\\frac{1}{2}x$, half of $x$, but some read it as $\\frac{1}{2x}$. The slash has no grouping power, unlike the fraction bar, so brackets settle it: $(1/2)x$ or $1/(2x)$. The difference is not small: with $x = 4$ the two readings give $2$ and $\\frac{1}{8}$.",
+    sectionId: "notation"
+  },
+  obj5: {
+    question: "Is $\\frac{7}{7}$ a proper or an improper fraction?",
+    answer: "Improper. A fraction is improper when its numerator is greater than or equal to its denominator, so $\\frac{7}{7}$, which equals exactly $1$, falls on the improper side. A proper fraction must be strictly less than $1$. The same rule makes every fraction that equals a whole number improper, such as $\\frac{8}{4} = 2$.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Can every fraction be written as a sum of unit fractions?",
+    answer: "Yes, every positive fraction can. The direct way uses copies of one size: $\\frac{a}{b}$ is $a$ copies of $\\frac{1}{b}$, so $\\frac{3}{5} = \\frac{1}{5} + \\frac{1}{5} + \\frac{1}{5}$. Unit fractions of different sizes also work, as in $\\frac{3}{5} = \\frac{1}{2} + \\frac{1}{10}$. Egyptian scribes wrote fractions this way, and the Rhind papyrus lists such sums, among them $\\frac{2}{5} = \\frac{1}{3} + \\frac{1}{15}$.",
+    sectionId: "5"
   }
 }
 

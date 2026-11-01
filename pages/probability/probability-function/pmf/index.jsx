@@ -1316,6 +1316,10 @@ import discreteCdfDiagrams from '@/app/components/visualizations/probability/dis
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1648,6 +1652,25 @@ const keyWords = [
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "Definition & Physical Intuition") —
+// template A, definition last. Running instance: the number of heads in two
+// coin tosses. Old obj1 text is kept in sectionsContent.obj1, unused; its
+// heading, five passages, the point-mass picture, the u_1_0 demo frame and its
+// line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTwoTossTable = ciTableOpen(['value k of X', 'results that give it', 'P(X = k)']) +
+  ciRow(['0', 'TT', '1/4']) +
+  ciRow(['1', 'HT, TH', '1/2'], { shade: true }) +
+  ciRow(['2', 'HH', '1/4']) +
+  ciRow(['total', 'all four results', '1'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -2574,6 +2597,11 @@ This page develops the Probability Mass Function (PMF) as the fundamental object
 // and the parent page owns the comparison since it spans both children.
 // Replaced with discrete-specific traps from Common Mistakes; the notation
 // section here defers to probability-function#notation for the P/p split.
+// FAQ pass 2026-10-31: kept all four. Added the Sicherman dice (fact box
+// under "Representations: The Three Views") and the valid PMF with no mean
+// (fact box under "Derived Properties: Location Measures"); no heading asks
+// either. The complement, weighting, variance and LOTUS pitfalls are left:
+// the first repeats obj1, the rest belong to the moment pages.
 const faqQuestions = {
   obj1: {
     question: "Does P(X > 4) include 4?",
@@ -2594,6 +2622,16 @@ const faqQuestions = {
     question: "When do you need the subscript in p_X(x)?",
     answer: "Only when more than one variable is in play. The subscript names which variable the function belongs to, so p_X(x) and p_Y(y) stay distinct on the same page. With a single variable in context you can drop it and write p(x). It becomes mandatory once joint and marginal functions appear together.",
     sectionId: "13"
+  },
+  obj5: {
+    question: "Can different dice give the same distribution of sums as ordinary dice?",
+    answer: "Yes, and exactly one other pair with positive whole-number faces does: the Sicherman dice, numbered $1, 2, 2, 3, 3, 4$ and $1, 3, 4, 5, 6, 8$. Their $36$ face pairs hit each sum from $2$ to $12$ as often as ordinary dice do, so the PMF table of the sum is identical. The table keeps only the sums and their chances, so it cannot tell the two pairs apart.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Does every PMF have an expected value?",
+    answer: "No. The masses $p_X(k) = \\frac{1}{k(k+1)}$ for $k = 1, 2, 3, \\ldots$ form a valid PMF: each equals $\\frac{1}{k} - \\frac{1}{k+1}$, so the sum telescopes to $1$. But $E[X] = \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\cdots$ is the harmonic series, which grows without bound. The median and the mode still exist, because they come from comparing masses rather than from a weighted sum.",
+    sectionId: "7"
   },
 }
 
@@ -2728,6 +2766,10 @@ const generalTable = `
     yBars: [0.25, 2.25, 6.25].map((y) => ({ from: 0, to: 1 / 3, color: 'r', dx: pfPx(y, 7.5) })),
     notes: [{ x: 0.2, y: 0.36, text: 'faces 3, 4', pos: 'ne', color: 'r' }, { x: 2.25, y: 0.36, text: 'faces 2, 5', pos: 'n', color: 'r' }, { x: 6.25, y: 0.36, text: 'faces 1, 6', pos: 'n', color: 'r' }, { x: 3, y: 0.25, text: 'two faces per value:', pos: 'e' }, { x: 3, y: 0.22, text: '1/6 + 1/6 = 1/3 each', pos: 'e' }],
     caption: 'Six faces, three values: the probabilities pool' };
+  const conceptIntroFigures = {
+    twoTossTable: ciTwoTossTable,
+  };
+
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: discretePmfDiagrams.binomial,
@@ -2777,10 +2819,44 @@ const generalTable = `
     ],
   };
 
+  // BeforeAfter (obj8): the fair die's variance by the definition, then by the shortcut
+  const varianceBeforeAfter = {
+    header: {
+      kicker: 'Variance of a fair die',
+      title: 'Same variance, less work',
+      lede: 'The shortcut needs two averages instead of six separate deviations from the mean.',
+    },
+    before: {
+      form: 'Definition',
+      expr: '$\\displaystyle\\sum (k - 3.5)^2 \\cdot \\dfrac{1}{6} = \\dfrac{35}{12}$',
+      meta: 'Six squared deviations: 6.25, 2.25, 0.25, 0.25, 2.25, 6.25',
+    },
+    after: {
+      form: 'Shortcut',
+      expr: '$\\dfrac{91}{6} - 3.5^2 = \\dfrac{35}{12}$',
+      meta: 'Two averages: 91/6 and 3.5',
+    },
+    operation: {
+      name: 'Use the shortcut',
+      desc: 'average the squares, subtract the squared mean',
+      detailsLabel: 'Square the mean',
+      detailsTitle: '',
+      details: 'Subtracting the mean itself gives $\\frac{91}{6} - 3.5 = \\frac{35}{3} \\approx 11.67$, which is wrong. The shortcut subtracts the squared mean: $\\frac{91}{6} - 3.5^2 = \\frac{35}{12} \\approx 2.92$.',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'Six squared deviations became two averages: the squared faces 1, 4, 9, 16, 25, 36 average to 91/6, and the mean is 3.5.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The variance: 35/12 ≈ 2.92, so SD ≈ 1.71.' },
+    ],
+  };
+
   return {
   props:{
     pmfViewTree,
+    varianceBeforeAfter,
     demoUnits,
+    conceptIntroFigures,
      sectionsContent,
      introContent,
      generalTable,
@@ -2804,7 +2880,7 @@ const generalTable = `
 }
    }
 
-export default function PMFPage({pmfViewTree, 
+export default function PMFPage({pmfViewTree, varianceBeforeAfter,
   seoData,
   sectionsContent,
   introContent,
@@ -2817,10 +2893,82 @@ export default function PMFPage({pmfViewTree,
   mistakesTable,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Toss two coins and count the heads: X is 0, 1 or 2. How likely is each value?`,
+        content: [
+          `The four equally likely results $HH$, $HT$, $TH$ and $TT$ give the answer by counting.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each value of X gets its own probability, and together the values use up all of it.`,
+        content: [
+          ciTable('twoTossTable'),
+          `A rule that takes a value $k$ and returns $P(X = k)$ holds everything there is to know about $X$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Probability sits on single points, like weights placed on a number line.`,
+        content: [
+          `Think of it like placing weights on a number line. Each possible outcome gets a weight equal to its probability. Where you put more weight, that outcome is more likely.`,
+          `Example: Roll a fair die. Put weight $\\frac{1}{6}$ at positions 1, 2, 3, 4, 5, and 6. Each spot has equal probability.`,
+          `Example: Roll a loaded die favoring 6. Put weight $\\frac{1}{2}$ at position 6, and split the remaining $\\frac{1}{2}$ among the other five faces.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [probability mass function](!/probability/definitions#probability_mass_function) of a discrete random variable $X$ is the function $p(k) = P(X = k)$, giving the probability of each value $k$.`,
+        formula: [
+          `## What is a PMF?`,
+          `A PMF gives the probability that a discrete random variable lands on each specific value.`,
+        ],
+        footer: `So for two tosses, $p(0) = \\frac{1}{4}$, $p(1) = \\frac{1}{2}$ and $p(2) = \\frac{1}{4}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The weights must add up to 1.`,
+        content: [
+          `The weights must sum to 1—that's your total probability budget.`,
+          <div key={'mass'} style={{
+              textAlign: 'center',
+              transform: 'scale(0.98)',
+              transformOrigin: 'center',
+              marginTop:'50px',
+              marginLeft:'-150px'
+            }} dangerouslySetInnerHTML={{
+              __html:   pmfData['probability at points'].svg
+            }} />,
+          <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A PMF belongs to discrete variables only.`,
+        content: [
+          `For a continuous variable every single value has probability $0$, so a list of point weights says nothing; a density takes over, as compared in [mass vs. density](!/probability/probability-function/pmf#14).`,
+          `The set of values that carry weight is the support, defined next.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers mass against density, notation, the support, the two axioms, the three views of a PMF, building one from a story, calculations, location and spread measures, transformations, the link with the CDF and common mistakes.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2837,18 +2985,7 @@ export default function PMFPage({pmfViewTree,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                <div key={'mass'} style={{
-                    textAlign: 'center',
-                    transform: 'scale(0.98)',
-                    transformOrigin: 'center',
-                    marginTop:'50px',
-                    marginLeft:'-150px'
-                  }} dangerouslySetInnerHTML={{ 
-                    __html:   pmfData['probability at points'].svg
-                  }} />,
-                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
-          `The set of values that carry weight is the support, defined next.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2895,6 +3032,11 @@ export default function PMFPage({pmfViewTree,
             parentHref={sectionsContent.obj13.parentHref}
             parentLabel={sectionsContent.obj13.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probRandomVarsNotationSheet}
+            current={'/probability/probability-function/pmf'}
           />,
         ]
     },
@@ -2970,6 +3112,19 @@ export default function PMFPage({pmfViewTree,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="variance-shortcut-before-after"
+            title="Variance of a fair die, two ways"
+            source="/probability/probability-function/pmf"
+            before={"The definition and the shortcut, side by side for the fair die."}
+            after={"Both routes give 35/12 ≈ 2.92; the shortcut needs only E[X²] and E[X]."}
+          >
+            <BeforeAfter
+              data={varianceBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
           <div key={'measures-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: measuresTable }} />,
         ]

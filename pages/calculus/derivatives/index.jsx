@@ -20,6 +20,9 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 
 
 export async function getStaticProps(){
@@ -284,45 +287,52 @@ Both forms define the same quantity. The first emphasizes the increment $h$; the
     link: '',
   },
   obj2: {
-    title: `Notation`,
-    content: `
-Several notation systems for derivatives coexist, each suited to different contexts.
-
-## Lagrange Notation
-
-The symbol $f'(x)$ denotes the derivative of $f$ with respect to $x$. Higher derivatives use repeated primes: $f''(x)$, $f'''(x)$. For the $n$th derivative, parenthetical notation avoids stacking primes: $f^{(n)}(x)$. This notation is compact and emphasizes the function itself.
-
-## Leibniz Notation
-
-The symbol $\\frac{dy}{dx}$ denotes the derivative of $y$ with respect to $x$. It suggests a ratio of infinitesimal changes—and while the derivative is defined as a limit rather than a literal fraction, this notation behaves like a fraction in the [chain rule](!/calculus/derivatives/rules) and in [differentials](!/calculus/derivatives/differentials). Higher derivatives follow the pattern $\\frac{d^2y}{dx^2}$, $\\frac{d^3y}{dx^3}$. The operator form $\\frac{d}{dx}[f(x)]$ emphasizes differentiation as an operation applied to an expression.
-
-@academic[pitfall,aside:true,width:35%:Squaring the first derivative
+    title:`Derivative Notation`,
+    lead:`Four systems for one idea, each surviving where it reads best — primes for functions, fractions for rates, an operator for equations, dots for time. All are catalogued among the [calculus symbols](!/math-symbols/calculus).`,
+    inherited:`Each system is set out in full on its own page: primes and orders at [higher-order notation](!/calculus/derivatives/higher-order#notation), the base derivative at [derivative function notation](!/calculus/derivatives/function#notation), $dy$ and $dx$ at [differential notation](!/calculus/derivatives/differentials#notation).`,
+    entries:[
+      {
+        id:'lagrange',
+        tex:`$f'(x)$`,
+        read:`f prime of x — Lagrange`,
+        means:`The derivative of $f$ with respect to $x$. Compact, and it keeps the function in view.`,
+        cases:`Higher derivatives repeat the prime — $f''(x)$, $f'''(x)$ — and the $n$th uses $f^{(n)}(x)$ to avoid a stack of primes.`,
+      },
+      {
+        id:'leibniz',
+        tex:`$\\dfrac{dy}{dx}$`,
+        read:`d y d x — Leibniz`,
+        means:`The derivative of $y$ with respect to $x$. Defined as a limit, not a fraction, yet it behaves like one in the chain rule and in differentials.`,
+        cases:`Higher orders: $\\frac{d^2y}{dx^2}$, $\\frac{d^3y}{dx^3}$; the operator form $\\frac{d}{dx}[f(x)]$ stresses differentiation as something applied to an expression.`,
+        confusedWith:`$\\left(\\frac{dy}{dx}\\right)^2$. The upper $2$ counts how often $\\frac{d}{dx}$ is applied: for $y = x^3$, $\\frac{d^2y}{dx^2} = 6x$, not $(3x^2)^2 = 9x^4$.`,
+      },
+      {
+        id:'euler',
+        tex:`$Df(x)$`,
+        read:`D f of x — Euler`,
+        means:`The operator $D$ (or $D_x$) applied to a function: $Df(x)$ means $f'(x)$.`,
+        cases:`Higher orders take powers of the operator — $D^2 f$, $D^n f$; at home in differential equations and operator theory.`,
+      },
+      {
+        id:'newton',
+        tex:`$\\dot{y}$ · $\\ddot{y}$`,
+        read:`y dot; y double dot — Newton`,
+        means:`A dot above the variable for the first derivative, two dots for the second.`,
+        cases:`Used almost only when the independent variable is time — the dot itself says the derivative is taken with respect to $t$.`,
+      },
+    ],
+    symbolsHref:`/math-symbols/calculus`,
+    symbolsLabel:`All calculus symbols`,
+    parentHref:`/calculus`,
+    parentLabel:`Calculus`,
+    content: `@academic[pitfall,aside:true,width:35%:Squaring the first derivative
 Reading $\\frac{d^2y}{dx^2}$ as $\\left(\\frac{dy}{dx}\\right)^2$ turns $y = x^3$ into $(3x^2)^2 = 9x^4$. Differentiating twice gives $\\frac{d^2y}{dx^2} = 6x$.
 [Read more](!#pitfalls)]@
-
-The symbol $\\frac{d^2y}{dx^2}$ is shorthand for $\\frac{d}{dx}\\left(\\frac{dy}{dx}\\right)$: the operator $\\frac{d}{dx}$ is applied to $y$, and then applied again to the result. The upper $2$ is attached to $d$ and counts the applications; the lower $2$ is attached to $dx$ and records that both are taken with respect to $x$.
-
-## Euler Notation
-
-The operator $D$ or $D_x$ applied to a function: $Df(x)$ means the same as $f'(x)$. Higher orders use powers of the operator: $D^2 f$, $D^n f$. This notation appears in differential equations and operator theory.
-
-## Newton Notation
 
 @academic[fact,aside:true,width:35%:Newton's dots against Leibniz's d
 In 1712 a Royal Society committee ruled that Newton came first; its report was drafted by Newton himself, then the Society's President. British mathematicians kept his dots for a century, until Cambridge students led by Charles Babbage campaigned for "pure D-ism" against "the Dot-age of the University".]@
 
-A dot above the variable: $\\dot{y}$ for the first derivative, $\\ddot{y}$ for the second. Used almost exclusively where the independent variable is time. The notation signals that differentiation is with respect to $t$.
-
-Newton called a derivative a fluxion, the rate at which a flowing quantity, a fluent, changes with time, and he was working with fluxions by 1666. Leibniz reached the same methods independently in the 1670s, wrote $dy$ and $dx$ for infinitely small differences, and published first, in 1684. Which of the two had invented calculus, and whose notation to use, became a bitter dispute between British and continental mathematicians.
-
-In [LaTeX](!/latex) source, the Leibniz form is produced by \\frac{dy}{dx}, the primes by f' directly, and the Newton dots by \\dot{y} and \\ddot{y}.
-
-The table below collects the four systems side by side with their first-derivative and higher-derivative forms and the contexts where each one is most commonly used.
-
-
- @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@
-
-`,
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Calculus Symbols and Notations](!/math-symbols/calculus) →@`,
     before: ``,
     after: ``,
     link: '',
@@ -546,6 +556,10 @@ This single concept—instantaneous rate of change via a limiting process—gene
 // only "The Difference Quotient and Its Limit"; replaced the generic
 // notation question with three specific confusions buried inside that
 // section, none of which any heading surfaces.
+// FAQ pass 2026-10-31: kept all four. Added the straight-line case (the
+// "rise over run still does all the work" note under the difference
+// quotient), Euler's D operator (one notation card, no heading asks it) and
+// the Newton–Leibniz priority dispute (the notation fact box).
 const faqQuestions = {
   obj1: {
     question: "What is a derivative?",
@@ -565,6 +579,21 @@ const faqQuestions = {
   obj4: {
     question: "What does a dot over a variable mean in calculus?",
     answer: "It is Newton’s notation for a derivative with respect to time: ẏ means dy/dt, and ÿ means the second derivative with respect to time. The dot is used almost exclusively when the independent variable is time, which is why it runs throughout physics and mechanics — velocity and acceleration appear as ẋ and ẍ — signalling the variable without naming it.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Is the derivative of a straight line just its slope?",
+    answer: "Yes, and it is the same number at every point. For $f(x) = mx + b$ the difference quotient is $\\frac{m(a + h) + b - (ma + b)}{h} = m$ for every $h$, because every secant is the line itself, so the limit is $m$. The derivative of $2x - 1$ is $2$ everywhere, and a constant function, a line with $m = 0$, has derivative $0$.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "What does D mean in Df(x)?",
+    answer: "It is Euler’s differentiation operator: $Df(x)$ means the same as $f'(x)$, and $D_x$ names the variable when there could be doubt. Because $D$ acts on a whole function, it can be raised to powers, $D^2 f = f''$ and $D^n f = f^{(n)}$, and combined like algebra. That is why it suits differential equations, where $y'' - 3y' + 2y = 0$ is written $(D^2 - 3D + 2)y = 0$.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "Did Newton or Leibniz invent calculus?",
+    answer: "Both, independently. Newton worked out his method of fluxions in the mid-1660s but published it late; Leibniz developed his own version in the 1670s and published first, in 1684. A Royal Society committee ruled in 1712 that Newton came first, but its report was drafted by Newton himself, then the Society’s President. Leibniz’s $\\frac{dy}{dx}$ won out, and Britain kept Newton’s dots for about a century.",
     sectionId: "2"
   }
 }
@@ -893,6 +922,23 @@ Working from the definition always takes the same three steps: write out $f(a + 
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
+          <NotationSection
+            key={'notation-obj2'}
+            title={sectionsContent.obj2.title}
+            lead={sectionsContent.obj2.lead}
+            inherited={sectionsContent.obj2.inherited}
+            entries={sectionsContent.obj2.entries}
+            symbolsHref={sectionsContent.obj2.symbolsHref}
+            symbolsLabel={sectionsContent.obj2.symbolsLabel}
+            parentHref={sectionsContent.obj2.parentHref}
+            parentLabel={sectionsContent.obj2.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={derivativesNotationSheet}
+            current={'/calculus/derivatives'}
+          />,
           sectionsContent.obj2.content,
           <div key={'obj2-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj2Table}}/>,
         ]

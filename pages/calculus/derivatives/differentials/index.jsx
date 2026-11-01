@@ -919,6 +919,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/functionTangentLineDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 
 
 export async function getStaticProps(){
@@ -1658,6 +1660,11 @@ This formalism does more than justify notation. It provides a direct tool for ap
 // notation. Replaced with the "d times x" misreading, the one case where
 // dy and Δy coincide, the power-law error rule, what governs approximation
 // accuracy, and the second-order term. The hub owns "Is dy/dx a fraction?".
+// FAQ pass 2026-10-31: kept all five. Added the error at a maximum, where
+// f'(x) = 0 (a paragraph and the Kepler fact box under "Error Estimation"),
+// and the 1/2 mv^2 term from relativity (fact box under "Higher-Order
+// Differentials"). Skipped dx^2 versus d(x^2): the higher-order page's
+// d^2y/dx^2 question already answers it.
 const faqQuestions = {
   obj1: {
     question: "Does dx mean d times x?",
@@ -1682,6 +1689,16 @@ const faqQuestions = {
   obj5: {
     question: "How do you get a better approximation than the tangent line?",
     answer: "Add the second-order term: Δy ≈ f′(x)dx + ½f″(x)(dx)². The tangent line matches the curve's value and slope at the base point; the quadratic term also matches its bending, so it tracks the curve further out. Continuing this way — each term using one more derivative and one more power of dx — produces the Taylor expansion.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "What happens to a measurement error at a maximum?",
+    answer: "Almost none of it reaches the result. At a maximum $f'(x) = 0$, so the differential $dy = f'(x)\\,dx$ predicts no change at all, and the change that remains is proportional to $(dx)^2$. For a rectangle with perimeter $20$, the area $A = x(10 - x)$ peaks at $x = 5$; an error of $0.1$ in $x$ moves the area only from $25$ to $24.99$. Kepler noticed the same effect in wine barrels built near the best shape.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "How does relativity's energy formula give ½mv²?",
+    answer: "Through the second-order differential estimate. A body's energy is $E(v) = \\frac{mc^2}{\\sqrt{1 - v^2/c^2}}$, with $E'(0) = 0$ and $E''(0) = m$. The estimate $\\Delta E \\approx E'(0)\\,dv + \\frac{1}{2}E''(0)(dv)^2$ at $v = 0$ gives $E \\approx mc^2 + \\frac{1}{2}mv^2$: the rest energy plus Newton's kinetic energy. The tangent line alone is flat at $v = 0$ and would miss the kinetic term entirely.",
     sectionId: "8"
   }
 }
@@ -1946,6 +1963,11 @@ Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={derivativesNotationSheet}
+            current={'/calculus/derivatives/differentials'}
           />,
                   <div key={'unit-linear'} dangerouslySetInnerHTML={{ __html: demoUnits.linear }} />,
           `Linear approximation is therefore nothing more than reading the tangent line instead of the curve.`,

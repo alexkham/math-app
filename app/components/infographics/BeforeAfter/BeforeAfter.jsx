@@ -275,9 +275,12 @@ const CSS = `
 }
 .ba-root .ba-panel.ba-after .ba-expr { color: var(--ba-title); }
 .ba-root .ba-panel .ba-expr .katex { font-size: 1em; }
-/* an expression never breaks across lines (KaTeX would break after = or +) */
+/* an expression never breaks across lines (KaTeX would break after = or +);
+   one too long for a narrow screen scrolls inside its own box instead */
 .ba-root .ba-panel .ba-expr .katex,
 .ba-root .ba-step .ba-cexpr .katex { white-space: nowrap; }
+.ba-root .ba-panel .ba-expr,
+.ba-root .ba-step .ba-cexpr { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
 
 .ba-root .ba-panel .ba-meta {
   font-size: 12px;

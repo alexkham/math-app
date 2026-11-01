@@ -686,6 +686,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
 import chebyshevDiagrams from '@/app/components/probability/inequalities/chebyshevDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -787,6 +788,11 @@ export async function getStaticProps(){
   // own it, and the heading here reads only "Relationship Between Common
   // Inequalities". Added the orientation questions a hub can answer that
   // neither child would: why bounds are loose, and how to choose one.
+  // FAQ pass 2026-10-31: kept all four. Added the independence-based bound
+  // for coin tosses (fact box under "Types of Probability Inequalities") and
+  // Markov applied to higher powers (fact box under "Relationship Between
+  // Common Inequalities") — both span more than one inequality, so the hub
+  // owns them.
   const faqQuestions = {
     obj1: {
       question: "What's the difference between Markov's and Chebyshev's inequality?",
@@ -806,6 +812,16 @@ export async function getStaticProps(){
     obj4: {
       question: "Does a tighter bound always mean a better inequality?",
       answer: "No — tightness and applicability pull against each other. A sharper bound is bought with stronger assumptions, and if those assumptions fail the bound is not merely loose but invalid. The right choice depends on what you actually know: use the tightest inequality whose conditions you can genuinely verify, not the tightest one available.",
+      sectionId: "6"
+    },
+    obj5: {
+      question: "How much sharper is a bound that uses independence?",
+      answer: "It can be many orders of magnitude sharper. For at least $600$ heads in $1000$ fair tosses, Chebyshev's inequality sees only the variance $250$ and allows up to $\\frac{250}{100^2} = 0.025$. Hoeffding's inequality also uses that the tosses are independent and each adds $0$ or $1$, and gives $e^{-20} \\approx 2 \\times 10^{-9}$. The exact chance is about $1.4 \\times 10^{-10}$.",
+      sectionId: "4"
+    },
+    obj6: {
+      question: "Can Markov's inequality be applied to higher powers of X?",
+      answer: "Yes, and that is often how sharper bounds are built. For $X \\ge 0$, $X^k$ is never negative, so $P(X \\ge a) \\le \\frac{E[X^k]}{a^k}$, which falls like $\\frac{1}{a^k}$. Chebyshev's inequality is the case $k = 2$ applied to $X - \\mu$. For an exponential $X$ with mean $1$ and $a = 10$, Markov gives $0.1$, Chebyshev about $0.012$, and the tenth power $\\frac{10!}{10^{10}} \\approx 0.00036$.",
       sectionId: "6"
     }
   }
@@ -877,6 +893,24 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 1, "What Probability Inequalities Do") —
+  // template A, definition last. Running instance: waits with mean 10
+  // minutes; P(wait ≥ 50) for three distributions against the bound 1/5.
+  // Old obj1 text is kept in sectionsContent.obj1, unused; its four passages
+  // are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciBoundTable = ciTableOpen(['waiting time with mean 10', 'exact P(X ≥ 50)', 'bound 10/50']) +
+    ciRow(['exponential', 'about 0.0067', '0.2']) +
+    ciRow(['uniform on 0 to 20', '0', '0.2'], { shade: true }) +
+    ciRow(['0 with probability 0.8, 50 with probability 0.2', '0.2', '0.2'], { last: true, color: '#2563EB', cols: [1, 2] }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -1214,6 +1248,10 @@ These results are deliberately general. They apply across wide classes of random
       { fn: (a) => Math.exp(-a), from: 0, to: 6, ends: [null, null], color: 'f', label: { text: 'true e^(−a)', x: 1.2, y: Math.exp(-1.2), pos: 'ne' } }],
     notes: [{ x: 3.3, y: 0.95, text: 'X exponential: mean 1, variance 1', pos: 'e' }, { x: 3.3, y: 0.87, text: 'Chebyshev wins past a ≈ 2.6', pos: 'e', color: 'r' }, { x: 3.3, y: 0.79, text: 'both stay above the true tail', pos: 'e', color: 'f' }],
     caption: 'More information, a tighter bound, still not exact' };
+  const conceptIntroFigures = {
+    boundTable: ciBoundTable,
+  };
+
   const demoUnits = {
     u_3_0: demoUnitFrame({
       svg: varianceDiagrams.default,
@@ -1239,6 +1277,7 @@ These results are deliberately general. They apply across wide classes of random
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       obj4Table,
@@ -1262,10 +1301,73 @@ export default function ProbabilityInequalitiesPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Waits at a counter average 10 minutes, and nothing else is known about them. How likely is a wait of 50 minutes or more?`,
+        content: [
+          `Without the distribution there is no exact answer. Something can still be said.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Whatever the distribution, the chance cannot exceed 1/5.`,
+        content: [
+          ciTable('boundTable'),
+          `If waits of $50$ minutes or more had probability above $\\frac{1}{5}$, they alone would push the average above $10$. So the bound holds for every non-negative waiting time with that average.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Partial information gives a guarantee: a bound, not an exact value.`,
+        content: [
+          `They do not attempt to compute exact probabilities. Instead, they provide bounds that are guaranteed to hold whenever the stated assumptions are satisfied.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **probability inequality** bounds the probability of an event using only partial information, such as a mean or a variance, and holds for every distribution that meets its assumptions.`,
+        formula: [
+          `Probability inequalities place limits on how likely certain events can be, without requiring full knowledge of the underlying distribution.`,
+        ],
+        footer: `So $P(X \\ge 50) \\le \\frac{10}{50} = \\frac{1}{5}$ for any non-negative $X$ with mean $10$; this is [Markov's inequality](!/probability/inequalities/markov).`,
+      },
+      {
+        id: 'kind',
+        lead: `Inequalities are tools for reasoning when an exact calculation is impossible or unnecessary.`,
+        content: [
+          `In practice, this means they can:
+• bound tail probabilities
+• control the chance of large deviations
+• give worst-case guarantees
+• remain valid even when the distribution is unknown`,
+          `Probability inequalities are therefore tools for reasoning under uncertainty when precise calculation is not possible or not necessary.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A bound can be far from the truth.`,
+        content: [
+          `For exponential waits the true chance is about $0.0067$, thirty times smaller than $\\frac{1}{5}$. The bound is the worst case, reached only by the two-point distribution in the last row. Sharper bounds need more information, as set out in [types of probability inequalities](!/probability/inequalities#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers why inequalities matter, what they depend on, their types, the featured inequalities and how they are related, how they are used, and how they compare with exact distributions.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1290,7 +1392,7 @@ export default function ProbabilityInequalitiesPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

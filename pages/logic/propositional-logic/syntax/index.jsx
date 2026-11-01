@@ -583,6 +583,9 @@ How to check: pick a row and evaluate both the original and the result. One row 
 // These target buried content: syntax vs semantics (definitions ¶2), operator
 // precedence and the φ/ψ metavariables (notation entries), and the five
 // connectives (alphabet ¶3, under a heading that does not match the query).
+// FAQ pass 2026-10-31: kept the four questions. Added the two readings of
+// P → Q → R (parentheses notation card), Polish notation (fact box under the
+// alphabet) and whether a contradiction is a WFF (pitfall box under WFF).
 const faqQuestions = {
   obj1: {
     question: "What is the difference between syntax and semantics in logic?",
@@ -603,6 +606,21 @@ const faqQuestions = {
     question: "What do φ and ψ mean in logic?",
     answer: "φ (phi) and ψ (psi) are metavariables: Greek letters that stand for whole formulas rather than atomic propositions. A rule like 'if φ is well-formed, so is ¬φ' is a template quantifying over every possible formula at once, which is what powers the recursive formation rules. Latin letters P, Q, R name single atomic statements; Greek letters can stand for anything the grammar generates.",
     sectionId: "notation"
+  },
+  obj5: {
+    question: "Does P → Q → R need parentheses?",
+    answer: "Yes, because the bare string has two readings that are different formulas. At $P = F$, $Q = T$, $R = F$, the grouping $(P \\to Q) \\to R$ is $T \\to F$, which is F, while $P \\to (Q \\to R)$ is T because its antecedent is false. Precedence cannot choose between them, since both connectives are the same, so brackets or an agreed convention must say which is meant.",
+    sectionId: "notation"
+  },
+  obj6: {
+    question: "What is Polish notation in logic?",
+    answer: "Polish notation writes each connective before its operands, as Jan Łukasiewicz did in the 1920s. Every such string can be read in only one way, so parentheses are no longer needed: $((P \\wedge Q) \\to \\neg R)$ becomes CKpqNr, with C for implication, K for conjunction and N for negation. Reversed, with the connective last, the idea became the entry method of Hewlett-Packard calculators.",
+    sectionId: "alphabet"
+  },
+  obj7: {
+    question: "Is a contradiction a well-formed formula?",
+    answer: "Yes. Well-formedness is a question of syntax: it asks only how the string is built, not in which rows it is true. $(P \\wedge \\neg P)$ follows the formation rules, with rule 1 giving $P$, rule 2 giving $\\neg P$ and rule 3 joining them, so it is a WFF. That it is F in every row is a separate fact of semantics, and it makes the formula a contradiction.",
+    sectionId: "wff"
   }
 }
 

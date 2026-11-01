@@ -920,6 +920,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
 import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magnitudeDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
 
 
 export async function getStaticProps(){
@@ -1058,31 +1061,31 @@ const summaryTable = `
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Norm (length) of a vector</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">‖v‖ = √⟨v, v⟩</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√(v · v) = √(v<sub>1</sub>² + … + v<sub>n</sub>²)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">obj3 — Length</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">§ 3 — Length</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Unit vector / normalization</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v̂ = v / ‖v‖</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">v / √(v · v)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">obj3 — Length</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">§ 3 — Length</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Distance between vectors</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">d(u, v) = ‖u − v‖</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">√Σ<sub>i</sub> (u<sub>i</sub> − v<sub>i</sub>)²</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">obj4 — Distance</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">§ 4 — Distance</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Angle between vectors</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">cos θ = ⟨u, v⟩ / (‖u‖ · ‖v‖)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(u · v) / (‖u‖ · ‖v‖)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">obj5 — Angle Between Vectors</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">§ 5 — Angle Between Vectors</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/orthogonality" style="${linkStyle}">Orthogonality</a></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">u ⊥ v ⟺ ⟨u, v⟩ = 0</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">u · v = 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">obj5 — Angle Between Vectors (special case θ = π/2)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">§ 5 — Angle Between Vectors (special case θ = π/2)</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;"><a href="/linear-algebra/orthogonality/projections" style="${linkStyle}">Projection</a> of u onto a nonzero v</td>
@@ -1260,6 +1263,25 @@ const summaryTable = `
 // }
 
 // formulas-injected: v1 | 2026-06-16 | 5 callouts (obj4 distance_formula direct, obj6 cauchy_schwarz_inequality direct, obj7 triangle_inequality direct, obj8 inner_product_axioms prose-insert, obj10 pythagorean_theorem direct)
+
+// Concept introduction (section 8, "General Inner Products") — template E,
+// widening. Running instance: polynomials on [0, 1] with
+// <f, g> = integral of f·g, beside the dot product of section 1. Old obj8 text
+// is kept in sectionsContent.obj8, unused; its axioms box with link, theorem
+// box, fact aside, four passages and the axioms PropertyLawCard frame are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPolyTable = ciTableOpen(['pair of polynomials', 'multiply, then take the area under it on [0, 1]', 'result', 'reads as']) +
+  ciRow(['x and x', '∫ x² dx from 0 to 1', '1/3', 'length of x is √(1/3)']) +
+  ciRow(['x and x²', '∫ x³ dx from 0 to 1', '1/4', 'a positive "dot product"'], { shade: true }) +
+  ciRow(['1 and x − 1/2', '∫ (x − 1/2) dx from 0 to 1', '0', 'perpendicular'], { last: true, color: '#2563EB', cols: [2, 3] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1583,6 +1605,11 @@ How to check: compute $\\mathbf{u} \\cdot \\mathbf{v}$ first. Only when it is $0
   content: `The dot product assigns a scalar to every pair of vectors, encoding their lengths, the angle between them, and whether they are perpendicular. It is one instance of a broader concept — the inner product — that carries the same geometric structure into polynomial spaces, function spaces, and matrix spaces. Every notion of orthogonality on this site traces back to an inner product.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the taxicab
+// length (fact box under "General Inner Products"), the complex conjugate (the
+// symmetry card of the axioms figure), weighted orthogonality (pitfall under
+// "Examples of Inner Products") and the sum of 1/n^2 (fact box under "The
+// Pythagorean Theorem").
 const faqQuestions = {
   obj1: {
     question: "Is $\\langle u \\mid v \\rangle$ the same as $\\langle u, v \\rangle$?",
@@ -1598,6 +1625,26 @@ const faqQuestions = {
     question: "Is the $\\perp$ in $W^{\\perp}$ an exponent?",
     answer: "No, it is a label, joining $A^{T}$ and $A^{-1}$ in the crowded superscript corner where none of the marks raise anything to a power. The symbol also scales across species: $\\mathbf{u} \\perp \\mathbf{v}$ relates two vectors, $\\mathbf{v} \\perp W$ a vector to a subspace, and $W^{\\perp}$ names a whole subspace.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Does every way of measuring length come from an inner product?",
+    answer: "No. The taxicab length $|v_1| + |v_2|$ on $\\mathbb{R}^2$ is zero only for $\\mathbf{0}$, scales by $|c|$ and obeys the triangle inequality, yet no inner product produces it. Jordan and von Neumann proved in 1935 that a length comes from an inner product exactly when $\\|\\mathbf{u} + \\mathbf{v}\\|^2 + \\|\\mathbf{u} - \\mathbf{v}\\|^2 = 2\\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{v}\\|^2$ for all $\\mathbf{u}, \\mathbf{v}$. For $(1, 0)$ and $(0, 1)$ the taxicab length gives $8$ on the left and $4$ on the right.",
+    sectionId: "8"
+  },
+  obj5: {
+    question: "Why does a complex inner product need a complex conjugate?",
+    answer: "Because without it lengths could come out negative. Over $\\mathbb{R}$ the symmetry axiom reads $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\langle \\mathbf{v}, \\mathbf{u} \\rangle$, but over $\\mathbb{C}$ that version would give $\\langle i\\mathbf{v}, i\\mathbf{v} \\rangle = i^2\\langle \\mathbf{v}, \\mathbf{v} \\rangle = -\\langle \\mathbf{v}, \\mathbf{v} \\rangle$, breaking positive definiteness. Conjugate symmetry, $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\overline{\\langle \\mathbf{v}, \\mathbf{u} \\rangle}$, turns that factor into $i\\bar{i} = 1$, so $\\|\\mathbf{v}\\|$ stays real and non-negative.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "Can two vectors be orthogonal under one inner product and not another?",
+    answer: "Yes, because orthogonality is measured by whichever inner product the space carries. Under the dot product $(1, 1) \\cdot (1, -2) = -1$, so the pair is not orthogonal. Under the weighted inner product $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 2u_1v_1 + u_2v_2$ the same pair gives $2 - 2 = 0$, so it is. Lengths change too: in that space $(1, 1)$ has length $\\sqrt{3}$, not $\\sqrt{2}$.",
+    sectionId: "9"
+  },
+  obj7: {
+    question: "How does the Pythagorean theorem show that $1 + \\frac{1}{4} + \\frac{1}{9} + \\cdots = \\frac{\\pi^2}{6}$?",
+    answer: "By splitting $x$ into perpendicular pieces. On $(-\\pi, \\pi)$, $x = 2\\left(\\sin x - \\frac{\\sin 2x}{2} + \\frac{\\sin 3x}{3} - \\cdots\\right)$, and the sines are mutually orthogonal under $\\langle f, g \\rangle = \\int_{-\\pi}^{\\pi} f(x)g(x)\\,dx$, each with $\\|\\sin nx\\|^2 = \\pi$. So the $n$-th piece has squared length $\\frac{4}{n^2}\\pi$. Pythagoras makes these add up to $\\|x\\|^2 = \\frac{2\\pi^3}{3}$, and dividing by $4\\pi$ gives $\\frac{\\pi^2}{6}$.",
+    sectionId: "10"
   }
 }
 
@@ -1698,6 +1745,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    polyTable: ciPolyTable,
+  };
+
   const demoUnits = {
     dot: demoUnitFrame({
       svg: innerProductDiagrams.done,
@@ -1718,6 +1769,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     innerProductAxioms,
@@ -1745,10 +1797,79 @@ export default function InnerProductPage({
   obj10Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 8 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `In Rⁿ the dot product already measures lengths, angles and perpendicularity.`,
+        content: [
+          `Multiply matching coordinates and add: from that one number come $\\|\\mathbf{v}\\|$, the angle between two vectors, and the test $\\mathbf{u} \\cdot \\mathbf{v} = 0$ for a right angle — the whole of the earlier sections.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `For polynomials or functions there are no coordinates to multiply, so the dot product has nothing to work on.`,
+        content: [
+          `What is the length of the polynomial $x$, or the angle between $x$ and $x^2$? The recipe "multiply matching entries and add" needs a list of entries, and a function on $[0, 1]$ has one value at every point instead.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [inner product](!/linear-algebra/definitions#inner_product) on a vector space is any rule that takes two vectors and returns a number while obeying three laws — symmetry, linearity and positivity — the same laws the dot product obeys.`,
+        formula: [
+          `An inner product on a [vector space](!/linear-algebra/vector-spaces) $V$ is a function $\\langle \\cdot, \\cdot \\rangle: V \\times V \\to \\mathbb{R}$ satisfying three [axioms](!/linear-algebra/vector-spaces/axioms):`,
+          `@academic[formula_callout:inner_product_axioms|Inner Product Axioms|$$\\begin{aligned} \\text{Symmetry:} \\quad & \\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\langle \\mathbf{v}, \\mathbf{u} \\rangle \\\\ \\text{Linearity:} \\quad & \\langle c\\mathbf{u} + d\\mathbf{w}, \\mathbf{v} \\rangle = c\\langle \\mathbf{u}, \\mathbf{v} \\rangle + d\\langle \\mathbf{w}, \\mathbf{v} \\rangle \\\\ \\text{Positive definiteness:} \\quad & \\langle \\mathbf{v}, \\mathbf{v} \\rangle > 0 \\text{ for all } \\mathbf{v} \\neq \\mathbf{0} \\end{aligned}$$]@
+@academic[formulas_link:/linear-algebra/formulas#inner_product_axioms]@`,
+        ],
+        footer: `So for polynomials, multiplying and taking the area under the product on $[0, 1]$, $\\langle f, g \\rangle = \\int_0^1 f(x)g(x)\\,dx$, is an inner product — the continuous version of "multiply and add".`,
+      },
+      {
+        id: 'kind',
+        lead: `An inner product is a measuring rule attached to a space; the space with it is an inner product space.`,
+        content: [
+          ciTable('polyTable'),
+          `A vector space equipped with an inner product is called an inner product space. Every inner product induces a norm ($\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$), a distance ($d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$), and a notion of orthogonality ($\\mathbf{u} \\perp \\mathbf{v}$ iff $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 0$).`,
+          <DiagramFrame key={'obj8-diagram'} id="inner-product-axioms" title="The three axioms" source="/linear-algebra/orthogonality/inner-product">
+            <PropertyLawCard data={innerProductAxioms} theme="navy" />
+          </DiagramFrame>,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost: the dot product is one inner product, and every theorem built on the three laws still holds for it.`,
+        content: [
+          `The standard dot product on $\\mathbb{R}^n$ is one inner product. But the definition admits many others, each defining a different geometry on the same set of vectors.`,
+          `@academic[rule_theorem_plain:The Cauchy-Schwarz inequality, the triangle inequality, and the Pythagorean theorem all hold in any inner product space.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What changes: length and angle now depend on which inner product is chosen — and some lengths come from no inner product at all.`,
+        content: [
+          `Weighting the first coordinate twice, $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 2u_1v_1 + u_2v_2$, is also an inner product on $\\mathbb{R}^2$, and under it $(1, 0)$ has length $\\sqrt{2}$, not $1$.`,
+          `Each of these geometries brings its own length, $\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$. Lengths can also be defined directly, with no inner product in sight. The taxicab length $|v_1| + |v_2|$ on $\\mathbb{R}^2$ adds the distances travelled along each axis, as on a street grid. It is zero only for $\\mathbf{0}$, scales by $|c|$ when the vector is multiplied by $c$, and satisfies the triangle inequality, just as a length that comes from an inner product does.`,
+          `@academic[fact,aside:true,width:35%:No inner product gives taxicab length
+Jordan and von Neumann proved in 1935 that a length comes from an inner product exactly when $\\|\\mathbf{u} + \\mathbf{v}\\|^2 + \\|\\mathbf{u} - \\mathbf{v}\\|^2 = 2\\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{v}\\|^2$ for all $\\mathbf{u}, \\mathbf{v}$. For $(1, 0)$ and $(0, 1)$ the taxicab length gives $4 + 4 = 8$ on the left and $2 + 2 = 4$ on the right.]@`,
+          `More inner products are collected in [examples of inner products](!/linear-algebra/orthogonality/inner-product#9).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers inner product notation, examples of inner products, and the Pythagorean theorem in any inner product space.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1816,15 +1937,7 @@ export default function InnerProductPage({
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
-          sectionsContent.obj8.content,
-          <DiagramFrame
-            key={'obj8-diagram'}
-            id="inner-product-axioms"
-            title="The three axioms"
-            source="/linear-algebra/orthogonality/inner-product"
-          >
-            <PropertyLawCard data={innerProductAxioms} theme="navy" />
-          </DiagramFrame>,
+          <ConceptIntro key={'obj8-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1843,6 +1956,11 @@ export default function InnerProductPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laOrthoNotationSheet}
+            current={'/linear-algebra/orthogonality/inner-product'}
           />,
         ]
     },

@@ -1045,6 +1045,8 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 
 
 export async function getStaticProps(){
@@ -1066,31 +1068,44 @@ export async function getStaticProps(){
     'sinusoidal transformations'
   ]
 
+// FAQ pass 2026-10-31: kept the parameter and no-amplitude questions
+// (tangent period is left to trigonometry/properties, which asks it); obj1 now says period 2π divided by |B| (the page's formula). Cut
+// "How do you find the equation of a sine wave from its graph?" (restates the
+// h2 "Determining the Equation from a Graph"); keys renumbered. The x-angle
+// question now points to "notation", where that text lives. Added: two
+// equations for one graph (Read more under "Determining the Equation"),
+// inflection points of the sine (a sentence in "Graph of the Sine Function"),
+// noise-cancelling headphones (fact box under "Amplitude").
 const faqQuestions = {
   obj1: {
     question: "What does each parameter in y = A sin(Bx − C) + D control?",
-    answer: "A sets the amplitude, the distance from midline to peak. B controls how fast the wave repeats, with period 2π divided by B. C shifts the graph horizontally once divided by B, giving the phase shift. D raises or lowers the midline. Only A and D are read directly; B and C need dividing first.",
+    answer: "A sets the amplitude, the distance from midline to peak. B controls how fast the wave repeats, with period 2π divided by |B|. C shifts the graph horizontally once divided by B, giving the phase shift. D raises or lowers the midline. Only A and D are read directly; B and C need dividing first.",
     sectionId: "5"
   },
   obj2: {
-    question: "Why is the period of tangent π and not 2π?",
-    answer: "Tangent is the ratio of sine to cosine, and both flip sign together every half rotation, so the ratio returns to its original value twice as fast as either function alone. That makes the period π for tangent and cotangent, while the other four repeat every 2π. Using the wrong formula halves or doubles every cycle count.",
-    sectionId: "3"
-  },
-  obj3: {
-    question: "How do you find the equation of a sine wave from its graph?",
-    answer: "Read the midline first, which gives D. Half the distance between peak and trough gives A. Measure one full cycle to get the period, then solve for B. Finally compare where the cycle starts against a plain sine curve to get the phase shift. The same graph accepts several correct equations.",
-    sectionId: "10"
-  },
-  obj4: {
     question: "Why do cosecant and secant have no amplitude?",
     answer: "Amplitude measures distance from a midline to a peak, and these functions have neither. They are reciprocals of sine and cosine, so wherever those approach zero the reciprocal shoots off toward infinity. The result is a series of U-shaped branches separated by vertical asymptotes, unbounded above and below.",
     sectionId: "4"
   },
-  obj5: {
+  obj3: {
     question: "Is the x in y = sin x an angle or a coordinate?",
     answer: "It is still an angle, measured in radians, and the same quantity previously written as θ. Renaming it x lets the input sit on a horizontal axis like any other function, but nothing about the meaning changes. The unit circle output becomes the height of the wave at that horizontal position.",
+    sectionId: "notation"
+  },
+  obj4: {
+    question: "Can two different equations describe the same sine graph?",
+    answer: "Yes, and that is normal. The equations $y = 3\\sin\\left(2x - \\frac{\\pi}{2}\\right) + 1$ and $y = 3\\cos(2x - \\pi) + 1$ both simplify to $1 - 3\\cos(2x)$, so they draw one and the same curve. Choosing cosine instead of sine, or moving the phase shift by a whole period, changes the letters but not the graph. An equation is correct when its amplitude, period, phase and midline all match the picture.",
+    sectionId: "10"
+  },
+  obj5: {
+    question: "Where are the inflection points of the sine graph?",
+    answer: "At its zeros, $x = n\\pi$. The curve bends downward on $(0, \\pi)$, where $\\sin x$ is positive, and upward on $(\\pi, 2\\pi)$, where it is negative, so the bend changes exactly as the graph crosses the axis. The pattern repeats every $2\\pi$. Tangent behaves the same way: its concavity flips at each of its zeros. This is why the five key points must be joined by a rounded curve, not straight lines.",
     sectionId: "1"
+  },
+  obj6: {
+    question: "How do noise-cancelling headphones use sine waves?",
+    answer: "They play the outside sound back upside down. A microphone picks up the noise and the headphones add a copy with $A = -1$, so every peak meets an equal valley and $\\sin x + (-\\sin x) = 0$. Steady low hums cancel best: their period is long, so the small delay in the electronics shifts the copy by only a tiny part of a cycle.",
+    sectionId: "6"
   }
 }
 
@@ -2428,6 +2443,11 @@ export default function GraphsPage({phaseShiftBeforeAfter, tangentProfile, cosin
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={trigonometryNotationSheet}
+            current={'/trigonometry/graphs'}
           />,
         ]
     },

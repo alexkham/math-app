@@ -168,6 +168,10 @@ const notationSection = {
 // These four target buried content only this page has: the "only if"
 // direction trap, the arrow shafts, antecedent/consequent naming, and
 // proof by contrapositive.
+// FAQ pass 2026-10-31: kept the four questions. Added inverse versus
+// contrapositive (pitfall box under Properties) and the Wason card test (fact
+// box under the truth table). Vacuous truth and (p → q) ∨ (q → p) skipped:
+// /logic/truth-tables/implications and /logic/truth-tables/tautologies ask them.
 const faqQuestions = {
   obj1: {
     question: "What does 'only if' mean in logic?",
@@ -188,6 +192,16 @@ const faqQuestions = {
     question: "How does proof by contrapositive work?",
     answer: "Instead of proving 'if p then q' directly, prove 'if not q then not p' — the contrapositive, which is logically equivalent to the original. To show that n² even implies n even, prove that n odd implies n² odd, which follows in one line from n = 2k + 1. The method pays off whenever the negated statements are simpler to manipulate than the originals.",
     sectionId: "proofs"
+  },
+  obj5: {
+    question: "What is the difference between the inverse and the contrapositive?",
+    answer: "The contrapositive of $p \\to q$ negates both parts and swaps them, giving $\\neg q \\to \\neg p$, which is equivalent to $p \\to q$. The inverse negates both parts but keeps their order, giving $\\neg p \\to \\neg q$, which is not: at $p = F$, $q = T$ the original is T and the inverse is F. The inverse is the contrapositive of the converse $q \\to p$, so it matches the converse instead.",
+    sectionId: "properties"
+  },
+  obj6: {
+    question: "What is the Wason selection task?",
+    answer: "It is a 1966 card test of how people check a conditional. Four cards show E, K, 4 and 7, and the rule says that a card with a vowel on one side has an even number on the other. Only E and 7 can break the rule, since only they can turn out to be a vowel with an odd number. Fewer than 1 person in 10 picks that pair; most choose E alone, or E and 4.",
+    sectionId: "truth_table"
   }
 }
 
@@ -366,7 +380,7 @@ To prove "If $n^2$ is even, then $n$ is even," one may instead prove the contrap
               `@academic[pitfall,aside:true,width:35%:Negating the implication as another implication
 Taking $p \\to \\neg q$ as the negation of $p \\to q$ fails at $p = F$: in both rows with $p = F$, $p \\to q$ and $p \\to \\neg q$ are T together. The negation is $p \\land \\neg q$, which is T only at $p = T$, $q = F$.
 [Read more](!#misconceptions)]@
-Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be valid.`,
+Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be true.`,
               `@academic[punchline:Every proof of an implication rules out the same single case: the antecedent true and the consequent false.]@`
             ]
           },

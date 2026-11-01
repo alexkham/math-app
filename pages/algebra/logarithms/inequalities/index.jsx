@@ -11,6 +11,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -594,8 +595,38 @@ const schemas = {
     }),
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the x < 8 table in the intro, when the
+  // domain changes the answer (the two examples under Domain Considerations),
+  // the checking-only-one-argument pitfall, and negative right sides
+  // (log_0.1(x) <= -2 and log_4(x + 2) < 0). The condensing-widens-the-domain
+  // point is left to the logarithmic equations FAQ, which already asks it.
+  const faqQuestions = {
+    obj1: {
+      question: "Why isn't $x < 8$ the solution of $\\log_2(x) < 3$?",
+      answer: "Because it lets in numbers the logarithm cannot take. Converting to exponential form keeps the direction, since $\\log_2$ is increasing, and gives $x < 2^3 = 8$. But $x = -1$ and $x = 0$ satisfy $x < 8$, while $\\log_2(-1)$ and $\\log_2(0)$ are undefined. The conversion says nothing about the domain, so $x > 0$ has to be added by hand: the solution is $0 < x < 8$.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "When does the domain check change the answer to a logarithmic inequality?",
+      answer: "When the converted inequality bounds the argument only from above. With a base above $1$, $\\log_a(f(x)) > k$ becomes $f(x) > a^k$, which already makes the argument positive: $\\log_2(x - 3) > 1$ gives $x > 5$ either way. But $\\log_a(f(x)) < k$ becomes $f(x) < a^k$, which allows zero and negative arguments: $\\log_4(x + 2) < 0$ gives $x < -1$, and the domain cuts it to $-2 < x < -1$. With a base between $0$ and $1$ the two cases swap.",
+      sectionId: "4"
+    },
+    obj3: {
+      question: "Which argument has to be positive when logarithms are on both sides?",
+      answer: "Both, since each logarithm brings its own condition. Comparing arguments in $\\log_2(x) > \\log_2(3 - x)$ gives $x > 3 - x$, so $x > \\frac{3}{2}$, but that keeps $x = 4$, where $\\log_2(-1)$ is undefined. With $x > 0$ and $3 - x > 0$ the answer is $\\frac{3}{2} < x < 3$. In practice the smaller argument is the one that cuts the answer: once it is positive, the larger one is positive too.",
+      sectionId: "3"
+    },
+    obj4: {
+      question: "Can a logarithmic inequality with a negative number on the right have solutions?",
+      answer: "Yes. A logarithm takes every real value, negative ones included, so a negative right side is no obstacle. With base $4$, $\\log_4(x + 2) < 0$ needs $0 < x + 2 < 1$, so $-2 < x < -1$. With base $0.1$, $\\log_{0.1}(x) \\leq -2$ flips to $x \\geq (0.1)^{-2} = 100$. This is unlike [absolute value inequalities](!/algebra/inequalities/absolute-value), where $|f(x)| < k$ with a negative $k$ has no solution at all.",
+      sectionId: "2"
+    }
+  }
+
 return {
   props: {
+    faqQuestions,
     sectionsContent,
     introContent,
     directionTable,
@@ -618,6 +649,7 @@ return {
 
 
 export default function InequalitiesPage({
+  faqQuestions,
   seoData,
   sectionsContent,
   introContent,
@@ -802,6 +834,22 @@ With domain: $0 < x \\leq 25$.]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Logarithmic Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 

@@ -1103,6 +1103,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 
@@ -1925,6 +1927,10 @@ How to check: multiply the answer by $i^3$. A correct $i^{-3}$ gives $i^{-3} \\c
   `
 }
 
+// FAQ pass 2026-10-31: kept all five; the zero question now points to
+// "Defining Pure Imaginary Numbers", where zero is discussed. Added the name
+// (Descartes and Gauss fact box), negative powers of i (pitfall box in the
+// powers section) and j for engineers (notation card).
 const faqQuestions = {
   obj1: {
     question: "What is the imaginary unit i?",
@@ -1944,12 +1950,27 @@ const faqQuestions = {
   obj4: {
     question: "Is zero a pure imaginary number?",
     answer: "It depends on the convention, which is why the question causes trouble. Zero can be written as 0i, so it satisfies the form, but many texts require a pure imaginary number to have a non-zero imaginary part and exclude it. Zero is the only number that is simultaneously real and imaginary under the looser definition.",
-    sectionId: "4"
+    sectionId: "3"
   },
   obj5: {
     question: "What are imaginary numbers actually used for?",
     answer: "They describe anything that rotates or oscillates. Alternating current, signal processing, control systems, and quantum mechanics all run on them, because rotation in the plane is exactly what multiplication by a complex number does. The name is a historical accident from a period when mathematicians distrusted them; nothing about them is less real than negative numbers.",
     sectionId: "1"
+  },
+  obj6: {
+    question: "Why are imaginary numbers called imaginary?",
+    answer: "Because Descartes called such roots imaginary in 1637, and the name stuck long after the numbers were accepted. Gauss thought it a poor choice: in 1831 he wrote that calling $+1$, $-1$ and $\\sqrt{-1}$ the direct, inverse and lateral units would have removed the mystery. His name describes the picture, since $i$ simply points sideways, at right angles to the real number line.",
+    sectionId: "6"
+  },
+  obj7: {
+    question: "How do you work out i to a negative power?",
+    answer: "Add $4$ to the exponent as many times as needed, since that never changes the value: $i^{-1} = i^{3} = -i$ and $i^{-3} = i^{1} = i$. Directly, $i^{-1} = \\frac{1}{i} = \\frac{i}{i^2} = -i$. The usual error is dropping the minus sign and taking $i^{-3}$ to be $i^3 = -i$. To check, multiply: $i^{-3} \\cdot i^3$ must be $1$, and indeed $i \\cdot (-i) = -i^2 = 1$.",
+    sectionId: "5"
+  },
+  obj8: {
+    question: "Why do engineers write j instead of i?",
+    answer: "Because in electrical engineering $i$ already stands for current, so the imaginary unit is renamed $j$ and circuit texts write $a + jb$. Python uses the same letter: its complex numbers are typed like 3+2j. Only the letter changes: $j^2 = -1$, and every rule on this page holds as written with $j$ in place of $i$.",
+    sectionId: "notation"
   }
 }
 
@@ -2292,6 +2313,11 @@ export default function ImaginaryNumbersPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/imaginary-numbers'}
           />,
         ]
     },

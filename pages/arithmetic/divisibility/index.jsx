@@ -20,6 +20,7 @@ import { renderPrimeFactorization } from '@/app/utils/illustrations/arithmetic/d
 import divisibilityTilesDiagrams from '@/app/components/divisibility/divisibilityTilesDiagrams'
 import eratosthenesSieveDiagrams from '@/app/components/visualizations/arithmetic/eratosthenesSieveDiagrams'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 export async function getStaticProps(){
 
@@ -247,6 +248,28 @@ const fsMainObj6 = renderFactorSet({
     { kind: 'note', text: 'search stops at √24', italic: true },
   ]},
 })
+
+    // Concept introduction (section 1, "What is Divisibility?") — template G,
+    // exclusion. Running instance: six sharing problems (12 among 3, 12 among
+    // 5, 20 among 4, 30 among 7, 3 among 12, 0 among 6). Old obj1 text is kept
+    // in sectionsContent.obj1, unused; its formula box, pitfall aside, three
+    // passages, the two figures and the divisible demo frame with its line are
+    // carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciShareTable = ciTableOpen(['cookies', 'children', 'each gets', 'left over', 'even split?']) +
+      ciRow(['12', '3', '4', '0', 'yes'], { color: '#2563EB', cols: [4] }) +
+      ciRow(['12', '5', '2', '2', 'no'], { shade: true }) +
+      ciRow(['20', '4', '5', '0', 'yes'], { color: '#2563EB', cols: [4] }) +
+      ciRow(['30', '7', '4', '2', 'no'], { shade: true }) +
+      ciRow(['3', '12', '0', '3 — not one each', 'no']) +
+      ciRow(['0', '6', '0', '0', 'yes — nothing to share'], { shade: true, last: true, color: '#2563EB', cols: [4] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -654,6 +677,9 @@ How to check: divide the product by the GCD and test the result. Here $24 \\div 
 // Kept three: the a | b notation (buried in NotationSection), the GCD×LCM
 // identity (a cross-topic fact the hub naturally owns) and why-1-is-not-prime
 // (buried mid-section, big query).
+// FAQ pass 2026-10-31: kept the three. Added 0 | 0 (one line under Basic
+// Properties, which no heading asks) and whether factorization is unique in
+// every number system (the 441 fact box under Prime Factorization).
 const faqQuestions = {
   obj1: {
     question: "What does the notation a | b mean?",
@@ -669,6 +695,16 @@ const faqQuestions = {
     question: "Why is 1 not considered prime?",
     answer: "A prime must have exactly two distinct factors: 1 and itself. The number 1 has only one factor (itself). Excluding 1 preserves the uniqueness of prime factorization — otherwise 12 could be written as 2² × 3 or 1 × 2² × 3 or 1² × 2² × 3, and so on without end.",
     sectionId: "7"
+  },
+  obj4: {
+    question: "Does zero divide zero?",
+    answer: "Yes, under the definition used here. The statement $0 \\mid 0$ asks for an integer $k$ with $0 = 0 \\cdot k$, and every $k$ works. That does not give $0 \\div 0$ a value: divisibility only claims that some $k$ exists, while division needs a single answer, and here no single one exists. Zero divides no other number, since $0 \\cdot k$ is always $0$. Some textbooks require a nonzero divisor and leave $0 \\mid 0$ out.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Is prime factorization unique in every number system?",
+    answer: "No. Among the numbers $1, 5, 9, 13, 17, \\ldots$, each one more than a multiple of $4$, the product of any two stays in the list, yet $441 = 9 \\cdot 49 = 21 \\cdot 21$, and none of $9$, $21$, $49$ splits further inside it. What breaks is the property the integer proof rests on: $21$ divides $9 \\cdot 49$ but divides neither $9$ nor $49$. Among the integers, a prime that divides a product always divides one of the factors.",
+    sectionId: "8"
   }
 }
 
@@ -751,6 +787,10 @@ const schemas = {
   const pfTree360 = { kind: 'tree', n: 360, style: prStyle, info: { lines: [
     { kind: 'formula', text: '360 = 2³ · 3² · 5', role: 'primary' }, { kind: 'separator' },
     { kind: 'note', text: 'exponents 3, 2, 1' }, { kind: 'note', text: 'factors of 360:' }, { kind: 'note', text: '(3+1)(2+1)(1+1) = 24' }] } };
+  const conceptIntroFigures = {
+    shareTable: ciShareTable,
+  };
+
   const demoUnits = {
     divisible: demoUnitFrame({
       svg: divisibilityTilesDiagrams.divisible,
@@ -790,6 +830,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -817,9 +858,85 @@ fsMainObj6,
 
 export default function DivisibilityPage({seoData, sectionsContent, introContent, obj2Table, 
   obj3Table, summaryTable, obj1SvgExact, obj1SvgFails, obj3SvgScale, 
-  obj4SvgRemainder, faqQuestions, schemas,fsMainObj6, demoUnits}) {
+  obj4SvgRemainder, faqQuestions, schemas,fsMainObj6, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six sharing problems, all with whole cookies: which ones split evenly, with nothing left over?`,
+        content: [
+          `$12$ cookies among $3$ children; $12$ among $5$; $20$ among $4$; $30$ among $7$; $3$ among $12$; and $0$ cookies among $6$ children.`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Handing them out settles it: 12 among 3, 20 among 4 and 0 among 6 come out even; the other three do not.`,
+        content: [
+          ciTable('shareTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `Every failure leaves cookies over that could only be shared by breaking them.`,
+        content: [
+          `The expression $3 \\mid 12$ is true because $12 = 3 \\cdot 4$. The expression $5 \\mid 12$ is false because no integer $k$ satisfies $12 = 5 \\cdot k$ — the closest are $5 \\cdot 2 = 10$ and $5 \\cdot 3 = 15$, neither of which equals $12$.`,
+          `The expression $4 \\mid 20$ is true because $20 = 4 \\cdot 5$. The expression $7 \\mid 30$ is false because $30 = 7 \\cdot 4 + 2$ — a remainder of $2$ survives.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `A split is even exactly when the number of cookies is the number of children times a whole number.`,
+        content: [
+          <div key={'obj1-svg-exact'}
+          style={{ maxWidth: '800px', margin: '20px auto' }}
+               dangerouslySetInnerHTML={{ __html: obj1SvgExact }} />,
+          <div key={'obj1-svg-fails'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj1SvgFails }} />,
+          <div key={'unit-divisible'} dangerouslySetInnerHTML={{ __html: demoUnits.divisible }} />,
+          `Divisibility is a statement about rectangles: b tiles can be arranged in rows of exactly a.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An integer $a$ divides an integer $b$, written $a \\mid b$, when $b = a \\cdot k$ for some integer $k$; then $b$ is a [multiple](!/arithmetic/definitions#multiple) of $a$.`,
+        formula: [
+          `An integer $a$ divides an integer $b$ when $b$ equals $a$ multiplied by some integer $k$, with no remainder:`,
+          `@academic[formula_callout:What is Divisibility?
+$$a \\mid b \\quad \\text{means} \\quad b = a \\cdot k \\;\\text{ for some integer } k$$]@`,
+        ],
+        footer: `So $3 \\mid 12$, $4 \\mid 20$ and $6 \\mid 0$ are true; $5 \\mid 12$, $7 \\mid 30$ and $12 \\mid 3$ are false.`,
+      },
+      {
+        id: 'kind',
+        lead: `Divisibility is a yes-or-no relation between two integers — not a number, and not an operation.`,
+        content: [
+          `Divisibility is a yes-or-no question. Either $a$ fits into $b$ a whole number of times, or it does not. There is no "almost divides" or "partially divides."`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The order matters: 3 ∣ 12 is true but 12 ∣ 3 is false — and the bar is not a fraction bar.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Reading the bar as division
+Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. The divisor comes first: $3 \\mid 12$ asks whether $12 \\div 3$ is a whole number, and it is, while $12 \\mid 3$ is false.
+[Read more](!#pitfalls)]@`,
+          `What is left over when the split fails, and how it decides divisibility, is the subject of [divisibility and remainders](!/arithmetic/divisibility#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, basic properties, divisibility and remainders, divisibility rules, factors and multiples, prime numbers, prime factorization, and the GCD and LCM.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -845,15 +962,7 @@ export default function DivisibilityPage({seoData, sectionsContent, introContent
     title:sectionsContent.obj1.title,
     link:sectionsContent.obj1.link,
     content:[
-      sectionsContent.obj1.content,
-      <div key={'obj1-svg-exact'} 
-      // style={tableWrapStyle}
-      style={{ maxWidth: '800px', margin: '20px auto' }}
-           dangerouslySetInnerHTML={{ __html: obj1SvgExact }} />,
-      <div key={'obj1-svg-fails'} style={tableWrapStyle}
-           dangerouslySetInnerHTML={{ __html: obj1SvgFails }} />,
-              <div key={'unit-divisible'} dangerouslySetInnerHTML={{ __html: demoUnits.divisible }} />,
-          `Divisibility is a statement about rectangles: b tiles can be arranged in rows of exactly a.`,
+      <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
 },
     {

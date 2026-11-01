@@ -780,6 +780,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vectorAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/vectorAdditionDiagrams'
 import vectorScalarDiagrams from '@/app/components/linear-algebra copy/matrix/vectorScalarDiagrams'
 import renderVectorArrowsV2 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1154,6 +1157,25 @@ export async function getStaticProps(){
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Vector Addition") — template F, two
+// descriptions shown to agree. Running instance: two walks, (4, 1) then
+// (1, 3), followed on a map and added by components. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four passages, the formula box and link,
+// the pitfall, the addition demo frame and its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciWalkTable = ciTableOpen(['', 'east', 'north']) +
+  ciRow(['first walk a', '4', '1']) +
+  ciRow(['second walk b', '1', '3'], { shade: true }) +
+  ciRow(['end point, arrows placed tip to tail', '5', '4']) +
+  ciRow(['components added, a + b', '4 + 1 = 5', '1 + 3 = 4'], { shade: true, last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Vector Addition`,
@@ -1423,6 +1445,11 @@ How to check: a length is never negative. Compute the components of $c\\mathbf{a
   content: `Addition, subtraction, and scalar multiplication are the operations that give vectors their algebraic structure. Each works component by component, each preserves the dimension of the input, and each carries a geometric interpretation that reinforces the computation. Together, they satisfy a precise set of rules — commutativity, associativity, distributivity — that make vector algebra predictable and consistent. Every other operation in this section, from the [dot product](!/linear-algebra/vectors/dot-product) to [linear combinations](!/linear-algebra/vectors/linear-combinations), is built on top of these three.`,
 };
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added which
+// parallelogram diagonal is the sum (pitfall under "Vector Addition"), the
+// midpoint as an average (paragraph and fact box under "Scalar
+// Multiplication") and commutativity following from the other seven laws
+// (fact box under "The Algebraic Foundation"). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Does $(3, 4)$ mean a point or a vector?",
@@ -1438,6 +1465,21 @@ const faqQuestions = {
     question: "Is $\\mathbb{R}^3$ the real numbers raised to a power?",
     answer: "No. The superscript counts coordinates rather than repeated multiplication: $\\mathbb{R}^3$ is the set of all triples of real numbers, formed by gluing three copies of $\\mathbb{R}$ together. Nothing is being multiplied, since there is no product of a number system by itself in the ordinary sense.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Which diagonal of the parallelogram is $\\mathbf{a} + \\mathbf{b}$?",
+    answer: "The one that starts at the shared tail and runs to the opposite corner. The other diagonal, joining the two tips, is a difference: drawn from the tip of $\\mathbf{b}$ to the tip of $\\mathbf{a}$ it is $\\mathbf{a} - \\mathbf{b}$. For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$ the sum is $(5, 4)$, while the arrow between the tips is $\\pm(3, -2)$. A tip-to-tail walk settles it: $\\mathbf{a}$ and then $\\mathbf{b}$ ends at $(5, 4)$.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "How do you find the midpoint between the tips of two vectors?",
+    answer: "Average them: the midpoint is $\\frac{1}{2}(\\mathbf{a} + \\mathbf{b})$. Walk to the tip of $\\mathbf{a}$, then halfway along $\\mathbf{b} - \\mathbf{a}$, and $\\mathbf{a} + \\frac{1}{2}(\\mathbf{b} - \\mathbf{a}) = \\frac{1}{2}(\\mathbf{a} + \\mathbf{b})$. The same move proves geometry without angles: joining the midpoints of the four sides of any quadrilateral $\\mathbf{a}, \\mathbf{b}, \\mathbf{c}, \\mathbf{d}$ gives a parallelogram, because two opposite sides of the inner figure both equal $\\frac{1}{2}(\\mathbf{c} - \\mathbf{a})$.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Does commutativity of vector addition have to be assumed?",
+    answer: "No, it follows from the other seven laws. Expand $(1 + 1)(\\mathbf{a} + \\mathbf{b})$ two ways: distributing the sum of scalars first gives $\\mathbf{a} + \\mathbf{b} + \\mathbf{a} + \\mathbf{b}$, distributing over the sum of vectors first gives $\\mathbf{a} + \\mathbf{a} + \\mathbf{b} + \\mathbf{b}$. Cancelling the first $\\mathbf{a}$ and the last $\\mathbf{b}$ on both sides, with inverses and associativity, leaves $\\mathbf{a} + \\mathbf{b} = \\mathbf{b} + \\mathbf{a}$.",
+    sectionId: "6"
   }
 }
 
@@ -1535,6 +1577,10 @@ const schemas = {
     caption: 'a \u2212 b runs from the tip of b to the tip of a',
   };
 
+  const conceptIntroFigures = {
+    walkTable: ciWalkTable,
+  };
+
   const demoUnits = {
     // Section 1 defines addition componentwise, so the symbolic
     // tool is the match: it fills one slot at a time.
@@ -1568,6 +1614,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1598,9 +1645,77 @@ export default function BasicVectorOperationsPage({
   operationLaws,
   faqQuestions,
   schemas,
-demoUnits}) {
+demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Walk 4 east and 1 north, then 1 east and 3 north. Where do you end up?`,
+        content: [
+          `Two ways of answering offer themselves: follow the arrows on a map, or add the numbers.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Following the arrows and adding the components give the same point, (5, 4).`,
+        content: [
+          ciTable('walkTable'),
+          `Each component of the end point depends only on the same component of the two walks: the east parts add, and the north parts add.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `Adding vectors means adding them component by component; the picture is placing the arrows tip to tail.`,
+        content: [
+          `Geometrically, vector addition has two equivalent visualizations. In the tip-to-tail method, the tail of $\\mathbf{b}$ is placed at the head of $\\mathbf{a}$, and the sum $\\mathbf{a} + \\mathbf{b}$ is the vector running from the tail of $\\mathbf{a}$ to the head of $\\mathbf{b}$. In the parallelogram method, both vectors share a common tail, and the sum is the diagonal of the parallelogram they form. The two constructions always yield the same result, and each highlights a different aspect of addition: tip-to-tail emphasizes sequential displacement, while the parallelogram makes the symmetry between $\\mathbf{a}$ and $\\mathbf{b}$ visually explicit.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **sum** of two vectors $\\mathbf{a}$ and $\\mathbf{b}$ in $\\mathbb{R}^n$ is the vector whose components are the sums of their components: $\\mathbf{a} + \\mathbf{b} = (a_1 + b_1, \\ldots, a_n + b_n)$.`,
+        formula: [
+          `Adding two vectors means pairing up their components and summing each pair independently. For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$ in the same $\\mathbb{R}^n$:`,
+          `@academic[formula_callout:Vector Addition
+$$\\mathbf{a} + \\mathbf{b} = (a_1 + b_1,\\ a_2 + b_2,\\ \\ldots,\\ a_n + b_n)$$
+/linear-algebra/formulas#vector_addition]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `So $(4, 1) + (1, 3) = (5, 4)$, the end point of the two walks.`,
+      },
+      {
+        id: 'kind',
+        lead: `Addition stays inside one space and never mixes the components.`,
+        content: [
+          `The result is again a vector in $\\mathbb{R}^n$ — addition does not change the dimension. Both inputs must belong to the same space; adding a vector in $\\mathbb{R}^2$ to a vector in $\\mathbb{R}^3$ is undefined because there is no way to match up the components.`,
+          <div key={'unit-addition'} dangerouslySetInnerHTML={{ __html: demoUnits.addition }} />,
+          `Because the components never interact, everything else about addition — its commutativity, its associativity, the zero vector — follows from the arithmetic of a single slot.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The sum is the diagonal from the shared tail, not the line joining the tips.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Taking the diagonal between the tips
+Reading the arrow that joins the two tips as the sum gives, for $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$, the vector $\\pm(3, -2)$, which is a difference. The sum is the diagonal from the shared tail: $\\mathbf{a} + \\mathbf{b} = (5, 4)$.
+[Read more](!#pitfalls)]@`,
+          `Both constructions start from the same two arrows. The parallelogram method in particular puts several segments on the page at once: the two sides drawn from the shared tail, their two translated copies, and two diagonals that cross in the middle. The component formula above is what ties the picture to the algebra, since every segment in the figure can be written in terms of the components of $\\mathbf{a}$ and $\\mathbf{b}$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the properties of addition, subtraction, scalar multiplication and its properties, the algebraic foundation, an overview of the operations and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1608,9 +1723,7 @@ demoUnits}) {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-addition'} dangerouslySetInnerHTML={{ __html: demoUnits.addition }} />,
-          `Because the components never interact, everything else about addition — its commutativity, its associativity, the zero vector — follows from the arithmetic of a single slot.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1628,6 +1741,11 @@ demoUnits}) {
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laVectorsNotationSheet}
+            current={'/linear-algebra/vectors/basic-operations'}
           />,
         ]
     },

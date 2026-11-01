@@ -15,6 +15,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 
 
 export async function getStaticProps(){
@@ -709,6 +713,9 @@ This page covers the core techniques: factoring, rationalizing, and algebraic ma
 // infinity and special limits are owned by their dedicated pages. Kept the
 // 0/0 question, extended; invented three from the notation section, whose
 // entries no heading surfaces.
+// FAQ pass 2026-10-31: kept all four. Added the logarithm method for the
+// three power forms (notation card, "Cases" line) and who found L'Hôpital's
+// rule (fact box under "Indeterminate Forms"), neither asked by a heading.
 const faqQuestions = {
   obj1: {
     question: "What does 0/0 mean when evaluating a limit?",
@@ -729,6 +736,16 @@ const faqQuestions = {
     question: "Do you need to write lim on every line?",
     answer: "Yes, until the substitution step. The algebra rewrites the expression inside the operator, so each intermediate line keeps its own lim; the symbol drops only once a number finally appears. Omitting it makes the middle lines claim that (x² − 4)/(x − 2) equals x + 2, which is false at x = 2 — only their limits agree.",
     sectionId: "notation"
+  },
+  obj5: {
+    question: "How do you evaluate limits of the form 1^∞, 0^0 or ∞^0?",
+    answer: "Take logarithms. Write $f(x)^{g(x)} = e^{g(x) \\ln f(x)}$; in each of the three forms the exponent $g(x) \\ln f(x)$ becomes a $0 \\cdot \\infty$ form, which can be rewritten as a quotient and resolved. Then exponentiate the result. For $\\left(1 + \\frac{2}{x}\\right)^x$ as $x \\to \\infty$, the exponent $x \\ln\\left(1 + \\frac{2}{x}\\right)$ tends to $2$, so the limit is $e^2$.",
+    sectionId: "notation"
+  },
+  obj6: {
+    question: "Who discovered L'Hôpital's rule?",
+    answer: "Johann Bernoulli, L'Hôpital's teacher. In 1694 the Marquis de L'Hôpital agreed to pay Bernoulli 300 livres a year for his discoveries, and in 1696 he printed the rule in his textbook, the first on differential calculus. The rule settles most $\\frac{0}{0}$ and $\\frac{\\infty}{\\infty}$ forms with derivatives; when it applies is covered under [derivative rules](!/calculus/derivatives/rules).",
+    sectionId: "3"
   }
 }
 
@@ -854,10 +871,113 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj4): the section's 0/0 quotient, factored and cancelled so the limit can be read by substitution
+  const factorCancelSteps = {
+    header: {
+      kicker: 'Evaluating limits',
+      title: 'Factoring and canceling',
+      lede: 'When substitution gives $0/0$, numerator and denominator share a factor. Factor both, cancel it, then substitute.',
+    },
+    steps: [
+      { id: 'zero', label: 'Substitution gives 0/0', stamp: 'Before', expr: '$\\lim\\limits_{x \\to 2} \\dfrac{x^2 - 4}{x - 2}$',
+        move: { label: 'Factor the numerator', note: 'x² − 4 = (x − 2)(x + 2)' } },
+      { id: 'factored', label: 'Shared factor visible', expr: '$\\lim\\limits_{x \\to 2} \\dfrac{(x - 2)(x + 2)}{x - 2}$',
+        move: { label: 'Cancel (x − 2)', note: 'allowed: for x near 2 but not at 2 the factor is nonzero' } },
+      { id: 'substitute', label: 'Substitute', stamp: 'After', expr: '$\\lim\\limits_{x \\to 2} (x + 2) = 4$',
+        detailsLabel: 'Cancel factors, not terms',
+        detailsTitle: '',
+        details: 'Striking out an $x$ in $x^2$ and in $x - 2$ turns the quotient into $\\frac{x - 4}{-2}$, which tends to $1$. Factoring first gives $x + 2$, and the limit is $4$.' },
+    ],
+  };
+
+  // BeforeAfter (obj5): the section's radical 0/0, rationalized by the conjugate
+  const conjugateLimitSteps = {
+    header: {
+      kicker: 'Evaluating limits',
+      title: 'Rationalizing with the conjugate',
+      lede: 'Multiplying by the conjugate over itself changes the form, not the value: the radical leaves the numerator and the factor behind 0/0 comes into the open.',
+    },
+    steps: [
+      { id: 'radical', label: 'Substitution gives 0/0', stamp: 'Before', expr: '$\\lim\\limits_{x \\to 0} \\dfrac{\\sqrt{x + 1} - 1}{x}$',
+        move: { label: 'Multiply by the conjugate', note: 'numerator and denominator by √(x + 1) + 1' } },
+      { id: 'conjugate', label: 'Conjugate in', expr: '$\\lim\\limits_{x \\to 0} \\dfrac{(\\sqrt{x + 1} - 1)(\\sqrt{x + 1} + 1)}{x(\\sqrt{x + 1} + 1)}$',
+        move: { label: 'Difference of squares on top', note: '(x + 1) − 1 = x' } },
+      { id: 'exposed', label: 'Factor x exposed', expr: '$\\lim\\limits_{x \\to 0} \\dfrac{x}{x(\\sqrt{x + 1} + 1)}$',
+        move: { label: 'Cancel x', note: 'the factor that caused the 0/0' } },
+      { id: 'substitute', label: 'Substitute', stamp: 'After', expr: '$\\lim\\limits_{x \\to 0} \\dfrac{1}{\\sqrt{x + 1} + 1} = \\dfrac{1}{2}$',
+        detailsLabel: 'Top and bottom, both',
+        detailsTitle: '',
+        details: 'Multiplying only the numerator turns the expression into $\\frac{x}{x} = 1$, a different function, and gives the limit $1$. Multiplying top and bottom keeps the value.' },
+    ],
+  };
+
+  // BeforeAfter (obj6): a factor hidden inside a square, uncovered by expanding
+  const expandSimplifySteps = {
+    header: {
+      kicker: 'Evaluating limits',
+      title: 'Expanding to find the hidden factor',
+      lede: 'The initial form obscured the factor of $(x - 1)$; expansion made it visible.',
+    },
+    steps: [
+      { id: 'hidden', label: 'Factor hidden', stamp: 'Before', expr: '$\\lim\\limits_{x \\to 1} \\dfrac{(x + 1)^2 - 4}{x - 1}$',
+        move: { label: 'Expand the numerator', note: '(x + 1)² − 4 = x² + 2x + 1 − 4 = x² + 2x − 3' } },
+      { id: 'expanded', label: 'Expanded', expr: '$\\lim\\limits_{x \\to 1} \\dfrac{x^2 + 2x - 3}{x - 1}$',
+        move: { label: 'Factor', note: 'x² + 2x − 3 = (x − 1)(x + 3)' } },
+      { id: 'factored', label: 'Shared factor visible', expr: '$\\lim\\limits_{x \\to 1} \\dfrac{(x - 1)(x + 3)}{x - 1}$',
+        move: { label: 'Cancel (x − 1)', note: 'then substitute x = 1' } },
+      { id: 'substitute', label: 'Substitute', stamp: 'After', expr: '$\\lim\\limits_{x \\to 1} (x + 3) = 4$' },
+    ],
+  };
+
+  // BeforeAfter (obj8): a limit at infinity, divided through by the highest power of x
+  const strategicOneSteps = {
+    header: {
+      kicker: 'Evaluating limits',
+      title: 'Dividing by the highest power',
+      lede: 'This technique isolates the dominant terms that control behavior at infinity.',
+    },
+    steps: [
+      { id: 'infinity', label: 'Infinity over infinity', stamp: 'Before', expr: '$\\lim\\limits_{x \\to \\infty} \\dfrac{3x^2 + 5x - 1}{2x^2 - 7}$',
+        move: { label: 'Divide every term by x²', note: 'top and bottom by the same nonzero quantity: the value does not change' } },
+      { id: 'divided', label: 'Divided by x²', expr: '$\\lim\\limits_{x \\to \\infty} \\dfrac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$',
+        move: { label: 'Let x → ∞', note: 'every term with x in the denominator vanishes' } },
+      { id: 'limit', label: 'Leading coefficients', stamp: 'After', expr: '$\\dfrac{3 + 0 - 0}{2 - 0} = \\dfrac{3}{2}$',
+        detailsLabel: 'Why not 1?',
+        detailsTitle: '',
+        details: 'Reading $\\frac{\\infty}{\\infty}$ as $1$ gives the wrong limit $1$. At $x = 1000$ the quotient is already about $1.50$.' },
+    ],
+  };
+
+  // BeforeAfter (obj9): sin 3x / x rewritten to match the special limit sin u / u
+  const knownLimitSteps = {
+    header: {
+      kicker: 'Evaluating limits',
+      title: 'Matching a known limit',
+      lede: 'The factor 3/3 equals 1. Its job is to make the denominator equal to the argument of the sine, so the special limit applies exactly.',
+    },
+    steps: [
+      { id: 'mismatch', label: 'Argument does not match', stamp: 'Before', expr: '$\\lim\\limits_{x \\to 0} \\dfrac{\\sin 3x}{x}$',
+        move: { label: 'Multiply by 3/3', note: 'a form of 1: the form changes, not the value' } },
+      { id: 'matched', label: 'Denominator matches the argument', expr: '$3 \\cdot \\lim\\limits_{x \\to 0} \\dfrac{\\sin 3x}{3x}$',
+        move: { label: 'Substitute u = 3x', note: 'as x → 0, u → 0' } },
+      { id: 'standard', label: 'Standard form', expr: '$3 \\cdot \\lim\\limits_{u \\to 0} \\dfrac{\\sin u}{u}$',
+        move: { label: 'Use the special limit', note: 'sin u / u → 1' } },
+      { id: 'value', label: 'Value', stamp: 'After', expr: '$3 \\cdot 1 = 3$',
+        detailsLabel: 'Why not 1?',
+        detailsTitle: '',
+        details: 'Treating $\\frac{\\sin 3x}{x}$ as $\\frac{\\sin u}{u}$ gives $1$, but the denominator is $x$, not $3x$. At $x = 0.01$ the quotient is about $2.9996$.' },
+    ],
+  };
+
 return {
   props: {
     demoUnits,
     conceptIntroFigures,
+    factorCancelSteps,
+    conjugateLimitSteps,
+    expandSimplifySteps,
+    strategicOneSteps,
+    knownLimitSteps,
     sectionsContent,
     introContent,
     obj1Table,
@@ -876,7 +996,7 @@ return {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures, factorCancelSteps, conjugateLimitSteps, expandSimplifySteps, strategicOneSteps, knownLimitSteps}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -998,6 +1118,11 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={limitsNotationSheet}
+            current={'/calculus/limits/evaluating'}
+          />,
         ]
     },
     {
@@ -1006,6 +1131,20 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="factor-cancel-steps"
+            title="Evaluating lim (x² − 4)/(x − 2) as x → 2"
+            source="/calculus/limits/evaluating"
+            before={"The section's example, one move at a time. The limit is the same at every step; only the form changes, until substitution works."}
+            after={"If substitution still gives $0/0$ after one cancellation, the factor is present again and the step is repeated."}
+          >
+            <BeforeAfter
+              data={factorCancelSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
           `@academic[punchline:Cancelling is allowed because a limit never uses the value at the point, only the values around it.]@`,
         ]
     },
@@ -1015,6 +1154,20 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="conjugate-limit-steps"
+            title="Evaluating lim (√(x + 1) − 1)/x as x → 0"
+            source="/calculus/limits/evaluating"
+            before={"The section's example, one move at a time. Watch the numerator: the radical disappears, and the factor $x$ behind the $0/0$ appears."}
+            after={"Once the shared $x$ is in the open, this is the [factoring and canceling](!#4) case: cancel it, then substitute."}
+          >
+            <BeforeAfter
+              data={conjugateLimitSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1023,6 +1176,20 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-diagram'}
+            id="expand-simplify-steps"
+            title="Evaluating lim ((x + 1)² − 4)/(x − 1) as x → 1"
+            source="/calculus/limits/evaluating"
+            before={"The section's example, one move at a time. The factor $(x - 1)$ is there from the start, but only expanding and factoring show it."}
+            after={"After the first move this is the [factoring and canceling](!#4) case: expanding a product, or simplifying a complex fraction, is often what reveals the cancellation needed."}
+          >
+            <BeforeAfter
+              data={expandSimplifySteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1039,6 +1206,20 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-diagram'}
+            id="strategic-one-steps"
+            title="Evaluating lim (3x² + 5x − 1)/(2x² − 7) as x → ∞"
+            source="/calculus/limits/evaluating"
+            before={"The section's limit at infinity, one move at a time. Dividing by $x^2$ is the strategic form of $1$ here."}
+            after={"After the division the numerator tends to $3$ and the denominator to $2$, the two leading coefficients. More on this in [limits at infinity](!/calculus/limits/infinity)."}
+          >
+            <BeforeAfter
+              data={strategicOneSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1047,6 +1228,20 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-diagram'}
+            id="known-limit-steps"
+            title="Evaluating lim sin 3x / x as x → 0"
+            source="/calculus/limits/evaluating"
+            before={"The section's example, one move at a time. Each move brings the expression closer to the standard form $\\dfrac{\\sin u}{u}$."}
+            after={"The factor $3$ left outside the limit is what carries the answer. The same rewriting works whenever part of an expression matches one of the [special limits](!/calculus/limits/special)."}
+          >
+            <BeforeAfter
+              data={knownLimitSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

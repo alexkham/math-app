@@ -15,6 +15,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 
 
 export async function getStaticProps(){
@@ -325,7 +327,7 @@ The order of operations is flexible. Taking the reciprocal first, then the root 
 
 obj5: {
   title: `Domain Considerations`,
-  content: `Rational exponents introduce the first domain restrictions on the base — a constraint that did not arise with integer exponents.
+  content: `Rational exponents introduce the first domain restriction on negative bases — integer exponents only had to exclude $a = 0$ for zero and negative powers.
 
 Even roots require the base to be non-negative. The expression $(-4)^{1/2} = \\sqrt{-4}$ has no real value, because no real number squared gives $-4$. More generally, $a^{1/n}$ is undefined in the reals when $n$ is even and $a < 0$. Over the [complex numbers](!/complex-numbers), such expressions do have values, but within real-number algebra the restriction $a \\geq 0$ is firm.
 
@@ -533,6 +535,10 @@ How to check: substitute a number with clean roots. With $x = 64$, $64^{1/2} \\c
 // their own h2. Kept the exponent-versus-radical question, which no heading
 // asks, and added the notation section's three traps — the lowest-terms flip
 // being the sharpest thing on the page.
+// FAQ pass 2026-10-31: kept all four. Added the NaN fact box and the
+// negative base with a negative exponent (both under Domain Considerations,
+// whose heading asks neither) and the Kepler fact box (Fractional
+// Exponents). Radical simplification left to /algebra/roots.
 const faqQuestions = {
   obj1: {
     question: "Does $\\frac{2}{6}$ mean the same as $\\frac{1}{3}$ in an exponent?",
@@ -553,6 +559,21 @@ const faqQuestions = {
     question: "Why use exponent form instead of radical form?",
     answer: "Because one set of rules covers every exponent — natural, negative or rational — while radicals need separate procedures for combining indices. $x^{1/2} \\cdot x^{1/3} = x^{5/6}$ is immediate; $\\sqrt{x} \\cdot \\sqrt[3]{x}$ requires finding a common index first. The usual practice is exponent form for the algebra, radical form for the final answer.",
     sectionId: "7"
+  },
+  obj5: {
+    question: "Why does a computer return NaN for $(-8)^{1/3}$?",
+    answer: "Because it never sees $\\frac{1}{3}$. A program can store only binary fractions, so it keeps the nearest one, $\\frac{6004799503160661}{2^{54}}$, which is in lowest terms with an even denominator. By the domain rule, a negative base raised to a power whose reduced denominator is even has no real value, so JavaScript returns NaN and Python a complex number instead of $-2$. Positive bases are unaffected beyond the last few digits.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Can a negative number have a negative fractional exponent?",
+    answer: "Yes, when the exponent's denominator in lowest terms is odd; the base then only has to be nonzero. $(-8)^{-1/3} = \\frac{1}{(-8)^{1/3}} = -\\frac{1}{2}$, and $(-8)^{-2/3} = \\frac{1}{(-2)^2} = \\frac{1}{4}$, positive because the power $2$ is even. With an even denominator there is no real value: $(-16)^{-1/4}$ is undefined, just as $(-16)^{1/4}$ is.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "What does Kepler's third law have to do with rational exponents?",
+    answer: "It is a $\\frac{3}{2}$ power. Kepler found that the square of a planet's year is proportional to the cube of its distance from the Sun, so the year grows as the distance to the power $\\frac{3}{2}$. Jupiter is $5.2$ times as far out as Earth, and $5.2^{3/2} = 5.2\\sqrt{5.2} \\approx 11.9$, so its year lasts about $11.9$ Earth years.",
+    sectionId: "3"
   }
 }
 
@@ -752,6 +773,11 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={powersRootsLogsNotationSheet}
+            current={'/algebra/powers/rational-exponents'}
           />,
         ]
     },

@@ -12,6 +12,7 @@ import { probabilityConceptsData } from '@/app/api/db/diagrams/probability/conce
 import { setsProbabilityData } from '@/app/api/db/diagrams/probability/setsProbability'
 import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/probabilityFunction'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 // Surfaced on the /probability hub via buildSectionData extraction.
 const hubMeta = {
@@ -668,10 +669,43 @@ Probability is widely applied in science, engineering, finance, and everyday dec
 
   const canonicalUrl = 'https://www.learnmathclass.com/probability/basics'
   const lastModified = new Date().toISOString()
-  
+
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the Pascal-Fermat fact box and the list of
+  // reasons to count (Combinatorial Probability), the fractions fact box (Set
+  // Theory), the multiplying-dependent-events pitfall (Conditional Probability)
+  // and the uncorrelated and orthogonal entries of the Key Terms box.
+  const faqQuestions = {
+    obj1: {
+      question: "How did Pascal and Fermat split the stakes of an unfinished game?",
+      answer: "By counting equally likely endings. One player needed $2$ more wins and the other $3$, so at most $4$ more rounds would settle the game. Fermat imagined all $4$ rounds played out, even past the deciding one, which makes the $2^4 = 16$ win-loss sequences equally likely. The first player wins at least $2$ of the $4$ rounds in $6 + 4 + 1 = 11$ of them, so the stakes split $11 : 5$. This exchange of letters in 1654 is often taken as the start of probability theory.",
+      sectionId: "combinatorial"
+    },
+    obj2: {
+      question: "When is counting outcomes easier than using a probability formula?",
+      answer: "When the outcomes are equally likely and there are not too many of them. For a few cards, dice or slots, counting with permutations $P(n,k)$ and combinations $\\binom{n}{k}$ usually takes fewer steps than building a distribution table or applying the Bayes theorem, and it shows where each arrangement comes from. The method rests on one condition: the list being counted must really consist of equally likely cases, which is where most counting mistakes start.",
+      sectionId: "combinatorial"
+    },
+    obj3: {
+      question: "What is the chance that a random number between 0 and 1 is a fraction?",
+      answer: "Zero. The fractions in $[0,1]$ can be listed one by one, each single number has probability $0$ when the number is picked uniformly, and countable additivity adds countably many zeros to $0$. So the number is irrational with probability $1$. This is no contradiction: additivity covers only countable sums, and the uncountably many points of $[0,1]$ can together carry a total of $1$ while each carries nothing. That is why probability is assigned to sets of outcomes rather than to single points.",
+      sectionId: "set"
+    },
+    obj4: {
+      question: "Can you find P(A and B) by multiplying P(A) and P(B)?",
+      answer: "Only when $A$ and $B$ are independent. On one roll of a fair die, take $A$ = even and $B$ = greater than $3$. The product gives $\\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$, but both happen only on $4$ and $6$, so $P(A \\cap B) = \\frac{2}{6} = \\frac{1}{3}$. A quick check: every probability for one roll is a whole number of sixths, and $\\frac{1}{4}$ is not. In general use $P(A \\cap B) = P(B)\\,P(A \\mid B)$, here $\\frac{1}{2} \\cdot \\frac{2}{3} = \\frac{1}{3}$.",
+      sectionId: "conditional"
+    },
+    obj5: {
+      question: "What is the difference between uncorrelated and orthogonal random variables?",
+      answer: "Uncorrelated means $\\operatorname{Cov}(X,Y) = 0$, that is $E[XY] = E[X]\\,E[Y]$; orthogonal means $E[XY] = 0$. Since $\\operatorname{Cov}(X,Y) = E[XY] - E[X]\\,E[Y]$, the two conditions are the same when at least one of the variables has mean $0$; otherwise no pair can satisfy both. Two independent fair dice are uncorrelated, yet $E[XY] = 3.5 \\cdot 3.5 = 12.25$, so they are not orthogonal.",
+      sectionId: "0"
+    }
+  }
 
   return {
     props: {
+      faqQuestions,
       sectionContent,
       introContent,
       keyWords,
@@ -693,6 +727,7 @@ export default function ProbabilityBasicsPage({
   axiomsData,
   probabilityRulesTreeData,
   // probabilityTOCTreeData,
+  faqQuestions,
 
 }) {
   // Reconstruct sections with React components
@@ -851,6 +886,22 @@ export default function ProbabilityBasicsPage({
           width: 8 // full width
         }
       ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Probability Basics FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
     },
 
   ]

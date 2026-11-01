@@ -17,6 +17,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionRiemannDiagrams from '@/app/components/functions/riemann/functionRiemannDiagrams'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
 
 
 export async function getStaticProps(){
@@ -277,6 +280,27 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 2 callouts (obj3, obj7)
+// Concept introduction (section 1, "The Riemann Sum Construction") —
+// template H, open question. Running instance: the area under x² on [0, 3],
+// trapped between left and right sums that close in on 9; picture: the
+// Riemann sum tool's frozen right-endpoint state. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its two formula boxes, theorem box, fact
+// aside, four passages, the obj1Table and the construction demo frame with
+// its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSqueezeTable = ciTableOpen(['number of strips n', 'left heights (too small)', 'right heights (too big)', 'gap']) +
+  ciRow(['3', '5', '14', '9']) +
+  ciRow(['6', '6.875', '11.375', '4.5'], { shade: true }) +
+  ciRow(['12', '7.906', '10.156', '2.25']) +
+  ciRow(['100', '8.865', '9.135', '0.27'], { shade: true, last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/integrals/definite ─────────────────────────────────────────
 
@@ -633,6 +657,10 @@ Riemann sums provide the rigorous foundation. Approximate the region with rectan
 // notation traps, the unsigned-area formula the "signed area" heading hides,
 // the named theorem at the end of the average-value section, and the
 // sample-point question the Riemann construction answers in its last line.
+// FAQ pass 2026-10-31: kept all five. Added the gap between left and right
+// sums (only in the opening strips table), Archimedes' parabolic segment (the
+// fact box under the Riemann construction) and the average value of sin x
+// (a paragraph and the mains-voltage fact box in the average-value section).
 const faqQuestions = {
   obj1: {
     question: "Why is there no + C in a definite integral?",
@@ -657,6 +685,21 @@ const faqQuestions = {
   obj5: {
     question: "What is the Mean Value Theorem for Integrals?",
     answer: "It guarantees that a continuous function actually attains its own average value somewhere on the interval: there is at least one c in (a, b) with f(c) = f_avg, where f_avg = (1/(b − a))∫ₐᵇ f(x) dx. Geometrically, the rectangle of height f(c) over [a, b] has exactly the area under the curve.",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "How far apart are the left and right Riemann sums?",
+    answer: "By exactly $(f(b) - f(a))\\,\\Delta x$, for any function. The two sums use the same heights except one: the left sum has $f(a)$ where the right sum has $f(b)$, and everything else cancels. For $x^2$ on $[0, 3]$ the gap is $9 \\cdot \\frac{3}{n} = \\frac{27}{n}$, so $9$ for $n = 3$ and $0.27$ for $n = 100$. When $f$ only rises or only falls, the integral lies between the two sums, so either one is within that gap of it.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "How did Archimedes find the area of a parabolic segment without calculus?",
+    answer: "By filling it with triangles. He inscribed one triangle in the segment, filled the two gaps beside it with triangles of total area $\\frac{1}{4}$ of the first, the next gaps with $\\frac{1}{16}$, and so on. He proved that $1 + \\frac{1}{4} + \\frac{1}{16} + \\cdots = \\frac{4}{3}$, so the segment has $\\frac{4}{3}$ the area of the first triangle. This method of exhaustion is what a Riemann sum repeats with thin rectangles and a limit.",
+    sectionId: "1"
+  },
+  obj8: {
+    question: "What is the average value of sin x?",
+    answer: "It depends on the interval. Over one arch, $[0, \\pi]$, the area is $2$, so the average value is $\\frac{2}{\\pi} \\approx 0.64$. Over a full period, $[0, 2\\pi]$, the part below the axis cancels the part above and the average value is $0$. That is why alternating voltage is rated by the square root of the average of its square: $\\sin^2 x$ averages $\\frac{1}{2}$ over a cycle, so $230$-volt mains peaks near $230\\sqrt{2} \\approx 325$ volts.",
     sectionId: "7"
   }
 }
@@ -759,6 +802,11 @@ const schemas = {
     points: [{ x: Math.sqrt(3), y: 3, label: 'c = √3', pos: 'nw' }],
     notes: [{ x: 0.15, y: 9.2, text: 'area under x² on [0, 3]: 9 = 3 · 3', pos: 'e' }, { x: 0.15, y: 8.2, text: 'amber excess = navy shortfall', pos: 'e', color: 'r' }],
     caption: 'The average value is the level where excess and shortfall balance' };
+  const conceptIntroFigures = {
+    squeezeTable: ciSqueezeTable,
+    right: functionRiemannDiagrams.right,
+  };
+
   const demoUnits = {
     construction: demoUnitFrame({
       svg: functionRiemannDiagrams.left,
@@ -796,6 +844,7 @@ const schemas = {
     return {
       props: {
     demoUnits,
+    conceptIntroFigures,
         sectionsContent,
         introContent,
         obj1Table,
@@ -813,9 +862,80 @@ const schemas = {
     }
 
    }
-export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `What is the area under y = x² between x = 0 and x = 3?`,
+        content: [
+          `Rectangles, triangles and circles have area formulas; a region with a curved top does not. Measuring it needs a new idea.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Rectangles can trap the area: using the left heights falls short, using the right heights overshoots — and the two close in as the strips get thinner.`,
+        content: [
+          ciTable('squeezeTable'),
+          `Halving the strip width halves the gap. Both sums are squeezed toward the same number, $9$. Change the number of strips and the sample point on the [Riemann sum visualizer](!/calculus/visual-tools/riemann-sum).`,
+        ],
+        visual: ciSvg('right'),
+      },
+      {
+        id: 'pattern',
+        lead: `Each of these approximations is a Riemann sum, and thinner strips give better ones.`,
+        content: [
+          `The definite integral arises as a limit of approximating sums.`,
+          `Partition the interval $[a, b]$ into $n$ subintervals of width $\\Delta x = (b - a)/n$. In each subinterval, choose a sample point $x_i^*$ and form the rectangle with height $f(x_i^*)$ and width $\\Delta x$. The total area of these rectangles is the Riemann sum:`,
+          `@academic[formula_callout:The Riemann Sum Construction
+$$S_n = \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$]@`,
+          <div key={'obj1-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <div key={'unit-construction'} dangerouslySetInnerHTML={{ __html: demoUnits.construction }} />,
+          `The definite integral is the value all of these sums share once n grows without bound.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [definite integral](!/calculus/definitions#definite_integral) of $f$ from $a$ to $b$ is the limit of its Riemann sums as the strips become infinitely thin; when $f \\geq 0$ it is the area under the graph.`,
+        formula: [
+          `As $n \\to \\infty$ and the rectangles become infinitely thin, the Riemann sum approaches the definite integral:`,
+          `@academic[formula_callout:The Riemann Sum Construction
+$$\\int_a^b f(x)\\, dx = \\lim_{n \\to \\infty} \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$]@`,
+          `@academic[rule_theorem_plain:The choice of sample points—left endpoints, right endpoints, midpoints—affects individual Riemann sums but not the limit, provided $f$ is integrable.]@`,
+        ],
+        footer: `So $\\int_0^3 x^2\\, dx = 9$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A definite integral is a number, not a function.`,
+        content: [
+          `$\\int_0^3 x^2\\, dx$ is $9$: no $x$ is left in the answer. The indefinite integral $\\int x^2\\, dx = \\frac{x^3}{3} + C$ is a family of functions instead; the two are linked in [computing definite integrals](!/calculus/integrals/definite#6).`,
+          `Filling a curved region with simpler shapes of known area is far older than the integral sign. Greek geometers did it by what is now called the method of exhaustion: pieces are added until the region left over is smaller than any given amount, and a proposed value is confirmed by showing that the area can be neither larger nor smaller than it. A Riemann sum does the same with thin rectangles, and the limit replaces the two-sided argument with a single step.`,
+          `@academic[fact,aside:true,width:35%:Archimedes summed a parabola first
+In the third century BC Archimedes proved that a parabolic segment has $\\frac{4}{3}$ the area of its inscribed triangle. He filled it with triangles whose areas form $1 + \\frac{1}{4} + \\frac{1}{16} + \\cdots$ times the first one, and he showed that this sum is $\\frac{4}{3}$ exactly.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Area is the picture only where the graph is above the axis; below it, the integral counts area as negative.`,
+        content: `$\\int_{-1}^{1} x\\, dx = 0$: the triangle below the axis cancels the one above it. How this works is the subject of [signed area interpretation](!/calculus/integrals/definite#3).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, signed area, the properties of definite integrals, linearity, computing them, and the average value of a function.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -823,11 +943,7 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
-                  <div key={'unit-construction'} dangerouslySetInnerHTML={{ __html: demoUnits.construction }} />,
-          `The definite integral is the value all of these sums share once n grows without bound.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -846,6 +962,11 @@ export default function PageTemplate({seoData, sectionsContent, introContent, ob
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={integralsNotationSheet}
+            current={'/calculus/integrals/definite'}
           />,
         ]
     },

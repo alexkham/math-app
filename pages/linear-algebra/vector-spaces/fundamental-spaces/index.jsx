@@ -3029,6 +3029,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -3451,6 +3454,25 @@ const fourSubspaceCard = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Overview") — template A, definition
+// last. Running instance: the 3 × 2 rank-1 matrix with rows (1, 2), (2, 4),
+// (3, 6) and its four subspaces. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its seven passages, the formula box and link and the subspace tree
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciFourTable = ciTableOpen(['subspace', 'lives in', 'for this A', 'dimension']) +
+  ciRow(['column space', 'R³', 'multiples of (1, 2, 3)', '1']) +
+  ciRow(['left null space', 'R³', 'the plane y₁ + 2y₂ + 3y₃ = 0', '2'], { shade: true }) +
+  ciRow(['row space', 'R²', 'multiples of (1, 2)', '1']) +
+  ciRow(['null space', 'R²', 'multiples of (−2, 1)', '1'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Overview`,
@@ -3787,6 +3809,13 @@ How to check: partners must live in the same space. For the $3 \\times 4$ runnin
   content: `Every matrix defines four subspaces — two in the domain and two in the codomain — whose dimensions and orthogonality relationships form a complete picture of the linear map. The rank governs all four dimensions, and the four subspaces together account for every vector in both spaces.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the
+// no-solution certificate (fact box under "The Left Null Space"), the wrong
+// complement pairing (pitfall box under "Orthogonal Complements"), echelon
+// rows vs original columns (paragraph under "Continuing the Example" in the
+// row-space section) and A one-to-one on the row space (theorem box under
+// "The Big Picture"). Rank and rank-nullity left to the rank and
+// image-kernel pages.
 const faqQuestions = {
   obj1: {
     question: "Is $\\ker A$ different from the null space?",
@@ -3802,6 +3831,26 @@ const faqQuestions = {
     question: "What is the difference between $\\mapsto$ and $\\to$?",
     answer: "The barred arrow acts on elements and the plain arrow on spaces, so $A : \\mathbb{R}^n \\to \\mathbb{R}^m$ declares the map while $\\mathbf{x} \\mapsto A\\mathbf{x}$ says what it does to each vector. Writing $\\mathbf{x} \\to A\\mathbf{x}$ misuses the space-level arrow, and also collides with the arrow used for limits.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "How can you prove a linear system has no solution?",
+    answer: "Exhibit a vector $\\mathbf{y}$ in the left null space with $\\mathbf{y}^T\\mathbf{b} \\neq 0$. Weighting the $i$-th equation of $A\\mathbf{x} = \\mathbf{b}$ by $y_i$ and adding gives $\\mathbf{y}^T A\\mathbf{x} = \\mathbf{y}^T\\mathbf{b}$, and since $\\mathbf{y}^T A = \\mathbf{0}^T$ every unknown cancels, leaving the false statement $0 = \\mathbf{y}^T\\mathbf{b}$. Every unsolvable system has such a $\\mathbf{y}$, for example the left-null-space part of $\\mathbf{b}$, so the claim can be checked by multiplication alone.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Is the null space the orthogonal complement of the column space?",
+    answer: "No. The null space pairs with the row space, both in $\\mathbb{R}^n$, and the column space pairs with the left null space, both in $\\mathbb{R}^m$. For a non-square matrix, $\\text{Null}(A)$ and $\\text{Col}(A)$ do not even live in the same space. Even for a square one the pairing fails: for $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ both are the line through $(1, 0)$.",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "Why is the row space read from the echelon form but the column space from the original matrix?",
+    answer: "Because row operations preserve one and not the other. Each row operation replaces a row by a combination of rows, so the row space never changes and the nonzero echelon rows are a basis for it. The same operations change the columns themselves, keeping only the relations among them, so the pivot positions only say which columns of $A$ to take. In the running example these are $(1, 2, -1)$ and $(2, 5, 0)$; the echelon pivot columns $(1, 0, 0)$ and $(0, 1, 0)$ span a different plane.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "Is a matrix one-to-one on its row space?",
+    answer: "Yes. Restricted to $\\text{Row}(A)$, the map $\\mathbf{x} \\mapsto A\\mathbf{x}$ is a bijection onto $\\text{Col}(A)$, and both spaces have dimension $r$. Any input splits as $\\mathbf{x} = \\mathbf{x}_r + \\mathbf{x}_n$ with $\\mathbf{x}_r$ in the row space and $\\mathbf{x}_n$ in the null space, and $A\\mathbf{x} = A\\mathbf{x}_r$ because the null-space part is sent to $\\mathbf{0}$. Everything the map loses lies in the null space.",
+    sectionId: "8"
   }
 }
 
@@ -3888,6 +3937,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    fourTable: ciFourTable,
+  };
+
   const demoUnits = {
     colspace: demoUnitFrame({
       svg: subspacesDiagrams.colspace,
@@ -3950,6 +4003,7 @@ return {
   props:{
     fundamentalSpacesTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj7Table,
@@ -3968,17 +4022,60 @@ return {
 }
    }
 
-export default function FundamentalSubspacesPage({fundamentalSpacesTree, seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits}) {
+export default function FundamentalSubspacesPage({fundamentalSpacesTree, seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
-  const genericSections=[
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `To understand a matrix, ask which outputs Ax can reach and which inputs x it sends to zero — then ask the same of its transpose.`,
+        content: [
+          `Take $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\\\ 3 & 6 \\end{pmatrix}$. Every column is a multiple of $(1, 2, 3)$, and every row is a multiple of $(1, 2)$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For this 3 × 2 matrix of rank 1, the four answers are three lines and a plane.`,
+        content: [
+          ciTable('fourTable'),
+          `In $\\mathbb{R}^2$ the row space and the null space are perpendicular: $(1, 2) \\cdot (-2, 1) = 0$. In $\\mathbb{R}^3$ the line through $(1, 2, 3)$ is perpendicular to the plane $y_1 + 2y_2 + 3y_3 = 0$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `One number, the rank, sets all four dimensions.`,
+        content: [
+          `A single integer — the [rank](!/linear-algebra/matrix/rank) $r$ — controls the [dimension](!/linear-algebra/vector-spaces/dimension) of all four. The column space and row space each have dimension $r$:`,
+          `@academic[formula_callout:Row Rank Equals Column Rank
+$$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
+/linear-algebra/formulas#row_rank_equals_column_rank]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+          `The null space has dimension $n - r$. The left null space has dimension $m - r$. These four numbers add up correctly: $r + (n - r) = n$ in the domain, and $r + (m - r) = m$ in the codomain.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **four fundamental subspaces** of an $m \\times n$ matrix $A$ are its [column space](!/linear-algebra/definitions#column_space) and [left null space](!/linear-algebra/definitions#left_null_space) in $\\mathbb{R}^m$, and its [row space](!/linear-algebra/definitions#row_space) and [null space](!/linear-algebra/definitions#null_space) in $\\mathbb{R}^n$.`,
+        formula: [
+          `An $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ gives rise to four [subspaces](!/linear-algebra/vector-spaces/subspaces):`,
+          `The column space $\\text{Col}(A)$ and the left null space $\\text{Null}(A^T)$ live in $\\mathbb{R}^m$.`,
+          `The row space $\\text{Row}(A)$ and the null space $\\text{Null}(A)$ live in $\\mathbb{R}^n$.`,
+        ],
+        footer: `So for the matrix above, with $r = 1$, $m = 3$ and $n = 2$, the dimensions are $1$, $3 - 1 = 2$, $1$ and $2 - 1 = 1$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Together the four subspaces describe the map x ↦ Ax completely.`,
+        content: [
+          `The four subspaces are not independent of each other. They pair off into [orthogonal](!/linear-algebra/orthogonality) complements — the row space and null space are perpendicular in $\\mathbb{R}^n$, while the column space and left null space are perpendicular in $\\mathbb{R}^m$. This structure is the definitive description of what the map $\\mathbf{x} \\mapsto A\\mathbf{x}$ does.`,
           <DiagramFrameV2
             key={'obj1-diagram'}
             id="fundamental-subspaces-tree"
@@ -3987,6 +4084,29 @@ export default function FundamentalSubspacesPage({fundamentalSpacesTree, seoData
           >
             <TopDownTree data={fundamentalSpacesTree} />
           </DiagramFrameV2>,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Equal dimensions do not make two subspaces the same.`,
+        content: [
+          `The column space and the row space both have dimension $r$, but here one is a line in $\\mathbb{R}^3$ and the other a line in $\\mathbb{R}^2$. Each subspace is treated on its own, starting with [the column space](!/linear-algebra/vector-spaces/fundamental-spaces#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the column, row, null and left null spaces, dimension accounting, orthogonal complements, the big picture, examples across matrix types and a reference card.`,
+      },
+    ],
+  }
+
+  const genericSections=[
+    {
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -4005,6 +4125,11 @@ export default function FundamentalSubspacesPage({fundamentalSpacesTree, seoData
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSpacesNotationSheet}
+            current={'/linear-algebra/vector-spaces/fundamental-spaces'}
           />,
         ]
     },

@@ -709,6 +709,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -807,7 +808,7 @@ const keyWords = [
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Benchmark fractions</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one fraction is clearly below 0, ½, or 1 while the other is clearly above</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">one fraction is clearly below a benchmark such as ½ or 1 while the other is clearly above it</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">3⁄8 &lt; ½ &lt; 5⁄9 → 5⁄9 wins</td>
     </tr>
     <tr>
@@ -884,6 +885,25 @@ const keyWords = [
 </table>
 `
 
+
+    // Concept introduction (section 1, "Comparing Fractions with Same
+    // Denominator") — template C, failure first. Running instance: 1/4 against
+    // 1/3, where "bigger numbers win" picks the wrong fraction, then 5/8 against
+    // 3/8 from the section. Old obj1 text is kept in sectionsContent.obj1,
+    // unused; its rule box, formula box and three passages are carried in
+    // unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciHabitTable = ciTableOpen(['pair', '"bigger numbers win" picks', 'actually larger', 'habit right?']) +
+      ciRow(['1/4 or 1/3', '1/4, since 4 > 3', '1/3 (0.333… against 0.25)', 'no'], { color: '#a4243b', cols: [3] }) +
+      ciRow(['3/7 or 3/4', '3/7, since 7 > 4', '3/4 (0.75 against 0.43)', 'no'], { shade: true, color: '#a4243b', cols: [3] }) +
+      ciRow(['5/8 or 3/8', '5/8, since 5 > 3', '5/8 (0.625 against 0.375)', 'yes — same denominator'], { last: true, color: '#2563EB', cols: [3] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1207,6 +1227,11 @@ How to check: a fractional part is always less than $1$, so it can never make up
 // "Common Denominator Method", which no searcher types) and the
 // larger-denominator confusion; invented the method-selection question,
 // whose guidance is scattered across five sections and stated in none.
+// FAQ pass 2026-10-31: kept all three. Added negative denominators in
+// cross-multiplication (the "with positive denominators" condition in that
+// section, which no heading explains), finding a fraction between two others
+// (the 7/16 fact box under "Number Line Visualization") and the longer
+// decimal read as larger (pitfall under "Decimal Conversion Method").
 const faqQuestions = {
   obj1: {
     question: "How do you compare fractions with different denominators?",
@@ -1222,6 +1247,21 @@ const faqQuestions = {
     question: "What is the fastest way to compare two fractions?",
     answer: "Pick the method that fits the shape of the problem. If the denominators already match, compare numerators; if the numerators match, the smaller denominator wins. For any other pair, cross-multiplication is quickest since it needs no common denominator. For a rough call, check each fraction against 1/2. When ordering three or more, convert them all to a common denominator instead.",
     sectionId: "4"
+  },
+  obj4: {
+    question: "Does cross-multiplication work when a denominator is negative?",
+    answer: "Not directly, which is why the rule asks for positive denominators. The cross products are the numerators over $b \\times d$, and when exactly one denominator is negative that product is negative, which reverses the comparison. For $\\frac{1}{-2}$ and $\\frac{1}{3}$ the cross products are $3$ and $-2$, pointing to $\\frac{1}{-2}$, yet $-0.5 < 0.333$. Move the sign to the top first: $\\frac{-1}{2}$ gives $-3$ against $2$, the right order.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "How do you find a fraction between two fractions?",
+    answer: "Add the numerators and add the denominators. With positive denominators, $\\frac{a + c}{b + d}$ always lies between two different fractions $\\frac{a}{b}$ and $\\frac{c}{d}$, so $\\frac{7}{16}$ lies between $\\frac{3}{7}$ and $\\frac{4}{9}$. For this pair it is also the simplest choice: the cross products $27$ and $28$ differ by $1$, and then nothing in between has a denominator below $16$. The same tops-plus-bottoms move is wrong for adding fractions.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "Does a decimal with more digits mean a bigger fraction?",
+    answer: "No. Decimals are compared place by place from the left, not by how many digits they have. For $\\frac{5}{8} = 0.625$ and $\\frac{16}{25} = 0.64$ the tenths are both $6$, and in the hundredths $2 < 4$, so $0.64$ is larger. Padding with a zero makes it plain: $0.625$ against $0.640$. Cross-multiplying agrees, since $5 \\times 25 = 125$ and $16 \\times 8 = 128$.",
+    sectionId: "pitfalls"
   }
 }
 
@@ -1313,6 +1353,13 @@ const schemas = {
     vlines: [{ x: 0.5, label: '' }],
     notes: [{ x: 3 / 8, y: 0.15, text: '3/8', pos: 'n', color: 'f' }, { x: 5 / 9, y: 0.15, text: '5/9', pos: 'n', color: 'r' }, { x: 0.5, y: 1.25, text: 'benchmark 1/2', pos: 'e' }, { x: 0.02, y: -0.55, text: '3 < 4: 3/8 is below one half', pos: 'e', color: 'f' }, { x: 0.02, y: -0.8, text: '5 > 4.5: 5/9 is above one half', pos: 'e', color: 'r' }],
     caption: 'One on each side of 1/2: no calculation needed' };
+  const fbCiThirdQuarter = { kind: 'bars', svgTitle: '1/3 and 1/4 of the same bar: one third is the larger piece', rows: [{ n: 3, k: 1, label: '1/3', partLabels: true }, { n: 4, k: 1, label: '1/4', color: 'r', partLabels: true }],
+    notes: [{ text: 'the bigger denominator cuts smaller pieces' }, { text: '1/3 > 1/4, even though 3 < 4', color: 'r' }], caption: 'Bigger numbers, smaller piece' };
+  const conceptIntroFigures = {
+    habitTable: ciHabitTable,
+    bars: renderFractionBar(fbCiThirdQuarter),
+  };
+
   const demoUnits = {
     sameNumerator: demoUnitFrame({
       svg: renderFractionBar(fbSameNumerator),
@@ -1340,6 +1387,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Comparing Fractions: Methods & Examples | Learn Math Class",
       description: "Learn to compare fractions: same denominator, same numerator, cross-multiplication, benchmark fractions, decimal conversion, and ordering multiple fractions.",
@@ -1352,9 +1400,71 @@ return {
    }
 
 
-export default function ComparingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function ComparingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `With whole numbers, the one written with bigger digits is bigger. It is tempting to compare fractions the same way.`,
+        content: [
+          `By that habit $\\frac{1}{4}$ would beat $\\frac{1}{3}$, because $4 > 3$, and $\\frac{3}{7}$ would beat $\\frac{3}{4}$, because $7 > 4$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Cut the same bar into thirds and into quarters: one third is the bigger piece.`,
+        content: [
+          ciTable('habitTable'),
+          `The habit gets two of the three pairs wrong. It only works in the last row, where both fractions count eighths.`,
+        ],
+        visual: ciSvg('bars'),
+      },
+      {
+        id: 'diagnosis',
+        lead: `Counting pieces only compares amounts when the pieces are the same size — that is, when the denominators match.`,
+        content: [
+          `Both fractions represent eighths. Five eighths is more than three eighths because five pieces exceed three pieces of the same size.`,
+          `The symbol $>$ reads "is greater than" and $<$ reads "is less than" — both belong to the [comparison symbols](!/math-symbols/arithmetic) of arithmetic.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Two fractions with the same denominator compare the way their numerators do: the larger numerator gives the larger fraction.`,
+        formula: [
+          `@academic[rule_plain:When two fractions share a denominator, compare their numerators directly. The fraction with the larger numerator is the larger fraction.]@`,
+          `@academic[formula_callout:Comparing Fractions with Same Denominator
+$$\\frac{5}{8} > \\frac{3}{8}$$]@`,
+        ],
+        footer: `So $\\frac{5}{8} > \\frac{3}{8}$. For $\\frac{1}{4}$ and $\\frac{1}{3}$ the pieces differ in size, and another method is needed.`,
+      },
+      {
+        id: 'kind',
+        lead: `Comparing asks which fraction is the larger amount of the same whole, and the answer is written with < or >.`,
+        content: [
+          `This principle extends to any number of fractions with a common denominator. Arranging $\\frac{2}{9}$, $\\frac{7}{9}$, and $\\frac{4}{9}$ in order requires only sorting the numerators: $\\frac{2}{9} < \\frac{4}{9} < \\frac{7}{9}$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `When the denominators differ, the fractions must first be put into pieces of one size.`,
+        content: `Equal numerators follow a reversed rule, explained in [comparing fractions with same numerator](!/arithmetic/fractions/comparing#2). Otherwise both fractions are rewritten with a [common denominator](!/arithmetic/fractions/comparing#3) and their numerators compared.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers equal numerators, the common denominator and cross-multiplication methods, benchmark fractions, decimal conversion, mixed numbers, ordering several fractions, and the number line.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1370,7 +1480,7 @@ export default function ComparingPage({seoData, sectionsContent, introContent, o
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

@@ -663,6 +663,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import chebyshevDiagrams from '@/app/components/probability/inequalities/chebyshevDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
 
 
 export async function getStaticProps(){
@@ -754,6 +757,11 @@ export async function getStaticProps(){
   // Markov" covers the comparison twice over — the inequalities hub owns it
   // as well. Replaced with the notation section's traps, led by the
   // coverage form and its collision with the 68–95–99.7 rule.
+  // FAQ pass 2026-10-31: kept all four. Added that the bound is reached
+  // exactly (fact box under "What the Inequality Is Saying"), halving the
+  // bound for one tail (pitfall under "Why Chebyshev Improves on Markov")
+  // and the sharper bound for single-peaked distributions (fact box under
+  // "Limitations").
   const faqQuestions = {
     obj1: {
       question: "How much of a distribution lies within two standard deviations?",
@@ -774,6 +782,21 @@ export async function getStaticProps(){
       question: "Does k mean the same thing in Markov's and Chebyshev's inequalities?",
       answer: "No — same letter, different unit. In [Markov's](!/probability/inequalities/markov#notation) normalized form k multiplies the mean, so the threshold is k·E[X]. In Chebyshev's it multiplies the standard deviation, so the threshold is kσ. Carrying a value of k from one to the other silently changes what is being claimed.",
       sectionId: "notation"
+    },
+    obj5: {
+      question: "Can Chebyshev's bound be reached exactly?",
+      answer: "Yes, so it cannot be improved using the mean and variance alone. Take $X = -2, 0, 2$ with probabilities $\\frac{1}{8}, \\frac{3}{4}, \\frac{1}{8}$: the mean is $0$, the variance is $1$, and $P(|X| \\ge 2) = \\frac{1}{4}$, exactly the bound for $k = 2$. The worst case puts its mass in three spikes, one at the mean and two at the threshold, which is why the bound looks loose for smooth distributions.",
+      sectionId: "3"
+    },
+    obj6: {
+      question: "Can you halve Chebyshev's bound to get one tail?",
+      answer: "Not without symmetry. Splitting $\\frac{1}{k^2}$ equally between the tails assumes both carry the same share, and Chebyshev assumes nothing about shape. Take $X = 2$ with probability $0.2$ and $X = -0.5$ with probability $0.8$: then $\\mu = 0$, $\\sigma = 1$, and $P(X - \\mu \\ge 2\\sigma) = 0.2$, more than the halved $0.125$. The full $\\frac{1}{k^2}$ is always a safe bound for a single tail.",
+      sectionId: "4"
+    },
+    obj7: {
+      question: "Is there a tighter version of Chebyshev's inequality for single-peaked distributions?",
+      answer: "Yes. If the distribution has a single peak, the Vysochanskij–Petunin inequality lowers the bound to $\\frac{4}{9k^2}$ for $k \\ge \\sqrt{8/3} \\approx 1.63$. At $k = 3$ that is under $5\\%$, against about $11\\%$ from Chebyshev, so at least $95\\%$ of the mass lies within three standard deviations. Chebyshev's worst case has three separate spikes, which a single-peaked shape rules out.",
+      sectionId: "7"
     }
   }
 
@@ -850,6 +873,26 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 2, "Statement of Chebyshev's Inequality") —
+  // template H, open question. Running instance: exam scores with mean 70 and
+  // standard deviation 10; scores 20 or more points away are at most 1/4.
+  // Old obj2 text is kept in sectionsContent.obj2, unused; its two formula
+  // boxes, pitfall aside, five passages and the u_2_0 demo frame with its
+  // line are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciScoreTable = ciTableOpen(['scores outside', 'distance from 70', 'in standard deviations k', 'at most 1/k² of the class']) +
+    ciRow(['60 to 80', '10', '1', '1 — no information']) +
+    ciRow(['55 to 85', '15', '1.5', '4/9 ≈ 44%'], { shade: true }) +
+    ciRow(['50 to 90', '20', '2', '1/4 = 25%'], { color: '#2563EB', cols: [3] }) +
+    ciRow(['40 to 100', '30', '3', '1/9 ≈ 11%'], { shade: true, last: true }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -1230,6 +1273,10 @@ The result is deliberately general. It applies without assuming any particular d
     pieces: [{ fn: (n) => Math.min(1, 35 / 3 / n), from: 1, to: 100, ends: [null, 'closed'], color: 'r', label: { text: '11.67/n', x: 30, y: 35 / 90, pos: 'ne' } }],
     notes: [{ x: 40, y: 0.95, text: 'average of n die rolls, ε = 0.5', pos: 'e' }, { x: 40, y: 0.87, text: 'σ²/(n ε²) = (35/12)/(0.25 n)', pos: 'e' }, { x: 40, y: 0.79, text: 'n = 100: at most 0.117', pos: 'e', color: 'r' }, { x: 1, y: 1, text: 'n < 12: no information', pos: 'se' }],
     caption: 'The bound for the average falls like 1/n' };
+  const conceptIntroFigures = {
+    scoreTable: ciScoreTable,
+  };
+
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: chebyshevDiagrams['chebyshev-normal'],
@@ -1255,6 +1302,7 @@ The result is deliberately general. It applies without assuming any particular d
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       summaryTable,
@@ -1277,10 +1325,80 @@ export default function ChebyshevInequalityPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `Exam scores have mean 70 and standard deviation 10. Knowing nothing else, what share of the class can score 20 or more points away from 70?`,
+        content: [
+          `The standard deviation measures how far scores typically sit from the mean. Scores far out add a lot to it, so a small spread leaves little room for many far-off scores.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Measured in standard deviations, the share outside k of them is at most 1/k²: at most a quarter of the class lies 2 deviations out.`,
+        content: [
+          ciTable('scoreTable'),
+          `The bound holds for any shape of score distribution — skewed, lumpy or flat — as long as the mean and standard deviation are as given.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The bound uses only the mean and the spread, nothing about the shape.`,
+        content: [
+          `The bound depends only on the variance and makes no assumptions about the form of the distribution.`,
+          `In a problem, the two forms are fed with whatever numbers it supplies: a mean, a measure of spread, and a distance from the mean. The first form needs that distance expressed as a number $k$ of standard deviations, while the second takes the distance $\\varepsilon$ as it stands and compares it with the variance. Both routes lead to the same number, because $\\varepsilon = k\\sigma$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Chebyshev's inequality** says that a random variable with finite mean $\\mu$ and standard deviation $\\sigma$ satisfies $\\mathbb{P}(|X - \\mu| \\ge k\\sigma) \\le \\frac{1}{k^2}$ for every $k > 0$.`,
+        formula: [
+          `Let $X$ be a random variable with finite mean $\\mu$ and finite variance $\\sigma^2$.`,
+          `For any real number $k > 0$, Chebyshev's inequality states:`,
+          `@academic[formula_callout:Statement of Chebyshev's Inequality
+$$\\mathbb{P}\\big(|X - \\mu| \\ge k\\,\\sigma\\big) \\le \\frac{1}{k^2}$$]@`,
+          `Equivalently, for any $\\varepsilon > 0$,`,
+          `@academic[formula_callout:Statement of Chebyshev's Inequality
+$$\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\varepsilon^2}$$]@`,
+        ],
+        footer: `So with $\\mu = 70$ and $\\sigma = 10$, at most $\\frac{1}{4}$ of the scores lie outside $50$ to $90$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is a guaranteed upper bound for every distribution, so it is often far from the true share.`,
+        content: [
+          `For bell-shaped scores the share outside $2$ deviations is only about $5\\%$, well below the guaranteed $25\\%$. The bound pays for working everywhere by being loose in the common cases.`,
+          <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
+          `The next section reads the inequality in words.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Use the standard deviation, not the variance, when counting distances in units of σ.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Treating the variance as the standard deviation
+With variance $4$ and a deviation of $3$, taking $\\sigma = 4$ gives $k = \\frac{3}{4}$ and a bound of $\\frac{16}{9}$, which says nothing. The standard deviation is $\\sigma = \\sqrt{4} = 2$, so $k = \\frac{3}{2}$ and the bound is $\\frac{1}{k^2} = \\frac{4}{9} \\approx 0.44$.
+[Read more](!#pitfalls)]@`,
+          `For $k \\le 1$ the bound is at least $1$ and says nothing. How it improves on its parent result is shown in [why Chebyshev improves on Markov](!/probability/inequalities/chebyshev#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, what the inequality says, why it improves on Markov's inequality, and where it is used.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1305,9 +1423,7 @@ export default function ChebyshevInequalityPage({
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-                  <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
-          `The next section reads the inequality in words.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1326,6 +1442,11 @@ export default function ChebyshevInequalityPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probLimitsNotationSheet}
+            current={'/probability/inequalities/chebyshev'}
           />,
         ]
     },

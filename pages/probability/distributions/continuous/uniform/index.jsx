@@ -1122,6 +1122,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 
 
 export async function getStaticProps(){
@@ -1212,6 +1215,26 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "The Probabilistic Experiment Behind
+    // continuous uniform distribution") — template E, widening. Running
+    // instance: a fair die against a bus arriving at a uniform time in the
+    // next 30 minutes (the lengthProb demo's setting). Old obj1 text is kept
+    // in sectionsContent.obj1, unused; its rule box, five passages, the
+    // lengthProb demo frame with its line, the example box and the examples
+    // link line are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciFairTable = ciTableOpen(['question', 'fair die', 'bus at a random time in the next 30 minutes']) +
+      ciRow(['chance of one exact outcome', '1/6 for each face', '0 for each exact moment'], { color: '#a4243b', cols: [2] }) +
+      ciRow(['chance of a range of outcomes', 'number of faces ÷ 6', 'length of the window ÷ 30'], { shade: true }) +
+      ciRow(['example', '3 or 4: 2/6 = 1/3', 'between minute 10 and 15: 5/30 = 1/6'], { last: true, color: '#2563EB', cols: [2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
       obj0: {
@@ -2128,6 +2151,10 @@ How to check: every quantile must lie inside the interval, and $7.5$ is below $a
   // each of which is the mirror of one on the discrete uniform page: the
   // endpoints-not-centre reading, the missing +1, and the inert bracket.
   // "Can a density exceed 1" is owned by the probability-function pages.
+  // FAQ pass 2026-10-31: kept all three. Added where the 12 in the variance
+  // comes from (one line under the derivation), why no uniform covers the
+  // whole real line (Special Cases) and the inverse-CDF use of U(0, 1)
+  // (one sentence under "Why It Appears").
   const faqQuestions = {
     obj1: {
       question: "Are the numbers in U(a, b) a centre and a spread?",
@@ -2143,6 +2170,21 @@ How to check: every quantile must lie inside the interval, and $7.5$ is below $a
       question: "Does it matter whether the interval is written [a, b] or (a, b)?",
       answer: "Not here. The endpoints are two points in an uncountable interval, so including or excluding them changes no probability — sources use brackets, parentheses or any mix for the same distribution. On the [discrete uniform](!/probability/distributions/discrete/uniform#15) the same edit deletes an outcome and rescales everything. What does matter is a < b: at a = b the width and the density's denominator collapse together.",
       sectionId: "2"
+    },
+    obj4: {
+      question: "Where does the 12 in the uniform variance come from?",
+      answer: "From $\\frac{1}{3} - \\frac{1}{4}$. On $[0, 1]$ the mean is $\\frac{1}{2}$ and $E[X^2] = \\int_0^1 x^2\\,dx = \\frac{1}{3}$, so the variance is $\\frac{1}{3} - \\frac{1}{4} = \\frac{1}{12}$. Stretching the interval to width $b - a$ multiplies every distance from the mean by $b - a$, and the variance by $(b-a)^2$; shifting it changes nothing. That gives $\\frac{(b-a)^2}{12}$ for every uniform.",
+      sectionId: "8"
+    },
+    obj5: {
+      question: "Can a uniform distribution cover the whole real line?",
+      answer: "No, not as a probability distribution. A constant density $c$ over $(-\\infty, \\infty)$ has total area $0$ if $c = 0$ and infinite area if $c > 0$, never $1$. Widening $[a, b]$ shows the same thing: the height $\\frac{1}{b-a}$ falls toward $0$ and the variance $\\frac{(b-a)^2}{12}$ grows without bound. The normal can spread over every real number only because its tails thin out.",
+      sectionId: "14"
+    },
+    obj6: {
+      question: "How are uniform random numbers used to simulate other distributions?",
+      answer: "Through the inverse CDF. If $U \\sim U(0, 1)$ and $F$ is an invertible CDF, then $X = F^{-1}(U)$ has CDF $F$, because $P(F^{-1}(U) \\le x) = P(U \\le F(x)) = F(x)$. For example, the [exponential quantile function](!/probability/distributions/continuous/exponential#10) turns $U$ into $-\\frac{\\ln(1 - U)}{\\lambda}$, an exponential wait with rate $\\lambda$. This is why $U(0, 1)$ sits under nearly all computer-generated randomness.",
+      sectionId: "12"
     }
   }
 
@@ -2239,6 +2281,10 @@ How to check: every quantile must lie inside the interval, and $7.5$ is below $a
     yBars: unBars,
     notes: [{ x: 3.5, y: 0.043, text: '[5, 10]: 5/30 = 1/6', pos: 'e', color: 'f' }, { x: 14.5, y: 0.043, text: '[15, 25]: 10/30 = 1/3', pos: 'e', color: 'r' }],
     caption: 'Twice the length, twice the probability: P = length / 30' };
+  const conceptIntroFigures = {
+    fairTable: ciFairTable,
+  };
+
   const demoUnits = {
     u_5_0: demoUnitFrame({
       svg: continuousPdfDiagrams['uniform-pdf'],
@@ -2264,6 +2310,7 @@ How to check: every quantile must lie inside the interval, and $7.5$ is below $a
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          summaryTable,
@@ -2287,10 +2334,74 @@ export default function ContinuousUniformDistributionPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A fair die gives each face the same chance, 1/6: no outcome is favoured over another.`,
+        content: [
+          `The same kind of fairness can be asked of a value that may land anywhere in an interval — a bus that arrives at some random moment in the next $30$ minutes, with no moment more likely than another.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The die's rule cannot carry over directly: an interval holds infinitely many moments, so no single moment can get a positive share.`,
+        content: [
+          ciTable('fairTable'),
+          `Equal chances for single outcomes give way to equal chances for windows of equal length.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Fairness on an interval means probability proportional to length.`,
+        content: [
+          `This type of experiment arises when the only information available is that a value lies somewhere between two limits, and there is no mechanism that biases one sub-interval over another. The uncertainty is purely geometric: probability corresponds to relative length, not to isolated points. Because the outcomes form a continuum, individual values have zero probability; only ranges matter.`,
+          `The defining feature of this experiment is complete symmetry across the interval.`,
+          `@academic[rule_plain:If one interval is twice as long as another, it is twice as likely to contain the outcome.]@`,
+          `Nothing else distinguishes outcomes.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **continuous uniform distribution** on an interval $[a, b]$ gives every sub-interval a probability equal to its length divided by $b - a$; no position inside the interval is preferred.`,
+        formula: [
+          `The probabilistic experiment behind the continuous uniform distribution begins with the assumption that an outcome can occur anywhere within a fixed interval, and that no location inside that interval is preferred over another. The key idea is not randomness over trials, but randomness over position or value. Once the bounds of the interval are set, the experiment treats every point between them as equally plausible.`,
+        ],
+        footer: `So for a bus due at a uniform time within $30$ minutes, any $5$-minute window has probability $\\frac{5}{30} = \\frac{1}{6}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is the continuous counterpart of the discrete uniform: symmetry over an interval instead of a list.`,
+        content: [
+          `Like the [discrete uniform distribution](!/probability/distributions/discrete/uniform), the continuous uniform distribution is built on the idea of complete symmetry, no outcome is favored over another. The difference lies only in how probability is assigned: [discrete uniform](!/probability/distributions/discrete/uniform) spreads probability across a finite set of distinct values, while continuous uniform spreads it evenly across an entire interval, with probability determined by length rather than individual points.`,
+          <div key={'unit-lengthProb'} dangerouslySetInnerHTML={{ __html: demoUnits.lengthProb }} />,
+          `Any 5-minute window, early or late, has the same probability 1/6.`,
+          sectionsContent.obj1.example,
+          sectionsContent.links.examples,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A single exact value always has probability 0 — only ranges carry probability.`,
+        content: `The bus arriving at exactly minute $7$ is possible, yet its probability is $0$; the arrival falling between minutes $7$ and $8$ has probability $\\frac{1}{30}$. The interval's endpoints are discussed in [parameters](!/probability/distributions/continuous/uniform#3), and the flat density that carries this rule in [probability density function](!/probability/distributions/continuous/uniform#5).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the parameters, the support, the density and the cumulative distribution function, and the properties of the distribution.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2307,11 +2418,7 @@ export default function ContinuousUniformDistributionPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-lengthProb'} dangerouslySetInnerHTML={{ __html: demoUnits.lengthProb }} />,
-          `Any 5-minute window, early or late, has the same probability 1/6.`,
-          sectionsContent.obj1.example,
-          sectionsContent.links.examples,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2330,6 +2437,11 @@ export default function ContinuousUniformDistributionPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/continuous/uniform'}
           />,
         ]
     },

@@ -12,6 +12,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -157,6 +158,24 @@ const summaryTable = `
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Definition") — template A, definition
+// last. Running instance: two pipes filling a tank in 3 and 6 hours,
+// 1/3 + 1/6 = 1/t, t = 2. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its formula box and four passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPipeTable = ciTableOpen(['try t (hours)', 'both pipes per hour: 1/3 + 1/6', 'needed per hour: 1/t', 'equal?']) +
+  ciRow(['1', '1/2', '1', 'no']) +
+  ciRow(['2', '1/2', '1/2', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['4', '1/2', '1/4', 'no']) +
+  ciRow(['0', '1/2', '1/0 — undefined', 'not allowed'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
 obj0: {
@@ -241,7 +260,7 @@ Multiplying only the fractions by $(x - 1)(x + 4)$ and leaving the $1$ as it is 
 
 In this example the right side is the plain number $1$, a term with no visible denominator. When the whole equation is multiplied by the LCD, that term is multiplied as well, and the product $1 \\cdot (x - 1)(x + 4)$ is what supplies the $x^2$ on the right of the cleared equation.
 
-The LCD must include every distinct factor that appears in any denominator, each raised to the highest power at which it occurs. Identifying the LCD accurately is essential — using a smaller common multiple leaves some fractions uncleared, while using an unnecessarily large one introduces extra factors that complicate the resulting polynomial without benefit.
+The LCD must include every distinct factor that appears in any denominator, each raised to the highest power at which it occurs. Identifying the LCD accurately is essential — multiplying by an expression that leaves out a factor of some denominator leaves those fractions uncleared, while using an unnecessarily large one introduces extra factors that complicate the resulting polynomial without benefit.
 
 To solve your own rational equation with each step shown, use the [rational equation solver](!/algebra/calculators/equations/rational).`,
     before: ``,
@@ -487,6 +506,12 @@ How to check: substitute the results. $x = \\frac{1}{2}$ gives $2 + 4 = 6$, and 
   content: `When the unknown appears below a fraction bar, the equation acquires a feature that no polynomial equation possesses: certain values of the variable are forbidden outright, excluded from the domain before any solving begins. A rational equation is defined by this presence of the variable in at least one denominator. The standard solving technique — clearing all denominators by multiplying through — converts the equation into a polynomial one, but the conversion is not always reversible. Values that zero out a denominator may survive the algebra and masquerade as solutions, making verification against the original domain restrictions an unavoidable final step.`,
 };
 
+// FAQ pass 2026-10-31: kept the three existing questions. Added adding rates
+// in the two-pipe problem (the opening example under "Definition"), why
+// 2/(x^2 - 1) = 1/(x - 1) has no solution (example and figure card under
+// "Equations with Polynomial Denominators") and why x + 1/x cannot equal 1
+// (fact box under "Equations Reducible to Rational Form"). Constant versus
+// variable denominators is asked on equations/linear.
 const faqQuestions = {
   obj1: {
     question: "Can a rational equation have infinitely many solutions?",
@@ -495,13 +520,28 @@ const faqQuestions = {
   },
   obj2: {
     question: "Does it have to be the least common denominator, or will any common denominator do?",
-    answer: "Any common multiple clears the fractions, but the least one keeps the resulting polynomial smallest. Choose something too small and some fractions survive the multiplication; choose something needlessly large and you carry extra factors into a messier polynomial for no gain. The LCD takes every distinct factor at the highest power it appears.",
+    answer: "Any common multiple clears the fractions, but the least one keeps the resulting polynomial smallest. Choose something that is not a multiple of every denominator and some fractions survive the multiplication; choose something needlessly large and you carry extra factors into a messier polynomial for no gain. The LCD takes every distinct factor at the highest power it appears.",
     sectionId: "3"
   },
   obj3: {
     question: "How do you spot that an equation is really a proportion?",
     answer: "Combine terms and count the fractions: if exactly one fraction sits on each side, cross-multiplication applies and $\\frac{A}{B} = \\frac{C}{D}$ becomes $AD = BC$. With three or more fractions, or with fractions being added on one side, fall back to the general LCD method. Either way the domain restrictions still have to be checked.",
     sectionId: "7"
+  },
+  obj4: {
+    question: "Why do you add rates, not times, when two pipes fill a tank together?",
+    answer: "Because the work done per hour adds up, while the hours do not. A pipe that fills a tank in $3$ hours does $\\frac{1}{3}$ of it each hour, and one that takes $6$ hours does $\\frac{1}{6}$. Together they do $\\frac{1}{2}$ per hour, so $\\frac{1}{3} + \\frac{1}{6} = \\frac{1}{t}$ gives $t = 2$ hours. Adding the times would give $9$ hours, longer than either pipe alone.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Why does $\\frac{2}{x^2 - 1} = \\frac{1}{x - 1}$ have no solution?",
+    answer: "Because the only candidate is an excluded value. Factoring gives $x^2 - 1 = (x - 1)(x + 1)$, so $x = 1$ and $x = -1$ are ruled out first; clearing denominators then gives $2 = x + 1$, so $x = 1$. That value makes both denominators zero, so it is extraneous, and nothing else is left. The graphs agree: the two sides never meet anywhere in the domain.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "Can $x + \\frac{1}{x}$ equal $1$?",
+    answer: "No, not for any real $x$. Clearing the denominator in $x + \\frac{1}{x} = k$ gives $x^2 - kx + 1 = 0$, whose discriminant is $k^2 - 4$, so real solutions need $k \\geq 2$ or $k \\leq -2$; for $k = 1$ it is $-3$. A positive $x$ makes the sum at least $2$, reached only at $x = 1$, and a negative $x$ makes it at most $-2$.",
+    sectionId: "8"
   }
 }
 
@@ -612,6 +652,10 @@ const schemas = {
       { x: 1.15, y: 4.6, text: 'candidate x = 1 excluded', pos: 'e' }, { x: -1.1, y: 4.6, text: 'x = −1 excluded', pos: 'w' }],
     caption: 'The graphs never meet: the only candidate, x = 1, is excluded' };
 
+  const conceptIntroFigures = {
+    pipeTable: ciPipeTable,
+  };
+
   const demoUnits = {
     domain: demoUnitFrame({
       svg: renderFunctionPlotV4(fpRatDomain),
@@ -657,6 +701,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Rational Equations: Clearing Denominators & Checking | Learn Math Class",
       description: "Master rational equations: domain restrictions, clearing denominators with LCD, extraneous solutions, monomial and polynomial denominators, cross-multiplication for proportions, and equations reducible to rational form.",
@@ -678,9 +723,69 @@ export default function RationalEquationsPage({rationalSubtypeTree,
   faqQuestions,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `One pipe fills a tank in 3 hours, another in 6 hours. Working together, how long do they take?`,
+        content: [
+          `In one hour the first pipe fills $\\frac{1}{3}$ of the tank and the second $\\frac{1}{6}$. If together they need $t$ hours, they fill $\\frac{1}{t}$ of the tank per hour, so $\\frac{1}{3} + \\frac{1}{6} = \\frac{1}{t}$. The unknown has landed below a fraction bar.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Trying values of t, only t = 2 makes the two sides agree — and t = 0 cannot even be tried.`,
+        content: [
+          ciTable('pipeTable'),
+          `Together the pipes fill the tank in $2$ hours. Putting $t = 0$ into $\\frac{1}{t}$ would mean dividing by zero, so that value is ruled out before any arithmetic is done.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `With the unknown in a denominator, some values are forbidden from the start.`,
+        content: [
+          `The distinction matters because a variable denominator can equal zero, and division by zero is undefined. A constant denominator like $3$ is always nonzero and creates no restrictions. The moment $x$ appears below the fraction bar, the equation inherits domain constraints that must be identified and enforced throughout the solving process.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **rational equation** is an equation in which the variable appears in the denominator of at least one fraction.`,
+        formula: [
+          `A rational equation is any equation containing at least one fraction in which the variable appears in the denominator. The equation`,
+          `@academic[formula_callout:Definition
+$$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$]@`,
+          `is rational because the variable $x$ sits inside two denominators. By contrast, the equation $\\frac{x + 1}{3} = 2$ is not rational — its denominator is a constant, and the equation is simply a [linear equation](!/algebra/equations/linear) with a fractional coefficient.`,
+        ],
+        footer: `So $\\frac{1}{3} + \\frac{1}{6} = \\frac{1}{t}$ is a rational equation, and its solution is $t = 2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Rational equations are equations between rational expressions — quotients of polynomials.`,
+        content: [
+          `Rational equations arise naturally from rates, proportions, and any setting where a quantity is expressed as a ratio of two variable expressions. Algebraically, they are equations involving rational expressions — quotients $\\frac{P(x)}{Q(x)}$ where $P(x)$ and $Q(x)$ are [polynomials](!/algebra/polynomials).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Values that make a denominator zero must be excluded before solving and checked again afterwards.`,
+        content: `Multiplying through by the denominators can produce answers that make one of them zero; such answers are rejected, as [extraneous solutions](!/algebra/equations/rational#4) explains. The values to exclude are found first, in [domain restrictions](!/algebra/equations/rational#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers domain restrictions, clearing denominators, extraneous solutions, monomial and polynomial denominators, proportions and cross-multiplication, and equations reducible to rational form.`,
+      },
+    ],
+  }
 
   const genericSections=[
 
@@ -698,7 +803,7 @@ export default function RationalEquationsPage({rationalSubtypeTree,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

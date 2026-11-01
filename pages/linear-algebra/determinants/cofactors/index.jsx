@@ -937,6 +937,9 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
 
 
 
@@ -1328,6 +1331,26 @@ const cofactorChain = {
 
 // formulas-injected: v1 | 2026-06-16 | 7 callouts (obj1 minor_definition prose, obj2 cofactor_definition direct, obj3 laplace_row_expansion direct, obj4 laplace_column_expansion direct, obj5 cofactor_matrix_definition prose, obj6 adjugate_definition direct + adjugate_identity direct)
 
+// Concept introduction (section 2, "Cofactors and the Sign Pattern") —
+// template C, failure first. Running instance: the section-1 matrix with rows
+// (2, 5, 1), (0, 3, −2), (4, 1, 6), determinant −12. Section 1 (minors) is
+// left as is. Old obj2 text is kept in sectionsContent.obj2, unused; its five
+// formula boxes with link, four passages, obj2Table and the signs demo frame
+// with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRowTable = ciTableOpen(['row-1 entry', 'its minor', 'entry × minor', 'with the checkerboard sign']) +
+  ciRow(['a₁₁ = 2', 'M₁₁ = 20', '40', '+40']) +
+  ciRow(['a₁₂ = 5', 'M₁₂ = 8', '40', '−40'], { shade: true }) +
+  ciRow(['a₁₃ = 1', 'M₁₃ = −12', '−12', '−12']) +
+  ciRow(['total', '', '68 — wrong', '−12 — the determinant'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Minors`,
@@ -1666,6 +1689,11 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the adjugate
+// of a singular matrix (fact box and paragraph under "Verification"), why a
+// row against another row's cofactors sums to zero (under "The Fundamental
+// Identity") and when cofactor expansion still wins (under "Computational
+// Cost"); no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "Is the minor $M_{ij}$ a matrix or a number?",
@@ -1681,6 +1709,21 @@ const faqQuestions = {
     question: "Is the adjugate the same thing as the adjoint?",
     answer: "Not in modern usage. In advanced linear algebra the adjoint means the conjugate transpose $A^{*}$, an unrelated operation. The word adjugate exists precisely to escape that collision, since older texts did use adjoint for this cofactor construction. When reading an older source, check which meaning is intended before applying anything.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Does the adjugate exist when the determinant is zero?",
+    answer: "Yes. Every entry of the adjugate is a signed minor, so it can be built for any square matrix, singular or not, and the identity $A \\cdot \\operatorname{adj}(A) = \\det(A) \\, I$ still holds. With $\\det(A) = 0$ it reads $A \\cdot \\operatorname{adj}(A) = O$, so every column of the adjugate lies in the null space of $A$, and its rank drops to $1$ or $0$. Only the step to the inverse fails, since it divides by $\\det(A)$.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "Why does a row times another row's cofactors give zero?",
+    answer: "Because the sum is secretly the determinant of a matrix with two equal rows. The cofactors of row $k$ never look at row $k$ itself, so $\\sum_j a_{ij} C_{kj}$ is exactly the expansion along row $k$ of the matrix in which row $k$ has been overwritten by a copy of row $i$. Two identical rows force that determinant to $0$. This is what makes the off-diagonal entries of $A \\cdot \\operatorname{adj}(A)$ vanish.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "When is cofactor expansion better than row reduction?",
+    answer: "When the matrix is small, sparse or symbolic. Up to about $4 \\times 4$ it is quick enough by hand and gives an exact result; each zero in the chosen row or column removes a whole branch of the recursion; and when the entries are polynomials or letters, it keeps the structure that elimination would bury in fractions. For a general numerical matrix it loses badly: about $10! \\approx 3.6$ million multiplications at $n = 10$, against roughly $670$ operations for row reduction.",
+    sectionId: "7"
   }
 }
 
@@ -1763,6 +1806,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    rowTable: ciRowTable,
+  };
+
   const demoUnits = {
     signs: demoUnitFrame({
       svg: determinantDiagrams["sign-pattern"],
@@ -1790,6 +1837,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1816,10 +1864,85 @@ const schemas = {
      obj7Table,
      cofactorChain,
      faqQuestions,
-     schemas, demoUnits
+     schemas, demoUnits, conceptIntroFigures
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `With the minors in hand, the natural guess is that a determinant is each entry times its minor, added up.`,
+        content: [
+          `Across row 1 of the matrix from the previous section, that means $2 \\cdot M_{11} + 5 \\cdot M_{12} + 1 \\cdot M_{13}$ — every entry weighted by the determinant of what is left when its row and column are removed.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The plain sum comes out to 68, but the determinant is −12.`,
+        content: [
+          ciTable('rowTable'),
+          `Flipping the sign of the middle term turns $68$ into $-12$, the correct value.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The failure was predictable: even the 2 × 2 determinant ad − bc already carries a minus sign.`,
+        content: [
+          `Expanding $\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$ along its first row gives $a \\cdot d$ and $b \\cdot c$, and they must be subtracted, not added. Larger determinants inherit that alternation, like the colours of a chessboard: neighbouring positions always have opposite signs.`,
+          `The exponent $i + j$ determines whether the sign is positive or negative. When $i + j$ is even, the cofactor equals the minor; when $i + j$ is odd, the cofactor is the negative of the minor. This produces a checkerboard of signs across the matrix:`,
+          `@academic[formula_callout:Cofactors and the Sign Pattern
+$$\\begin{pmatrix} + & - & + & - \\\\ - & + & - & + \\\\ + & - & + & - \\\\ - & + & - & + \\end{pmatrix}$$]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [cofactor](!/linear-algebra/definitions#cofactor) $C_{ij}$ is the minor $M_{ij}$ with the sign of position $(i, j)$ on the checkerboard attached: $C_{ij} = (-1)^{i+j} M_{ij}$. Entries times their cofactors add up to the determinant.`,
+        formula: [
+          `The cofactor $C_{ij}$ attaches a prescribed sign to the minor:`,
+          `@academic[formula_callout:cofactor_definition|Cofactor Definition|$$C_{ij} = (-1)^{i+j} \\, M_{ij}$$]@
+@academic[formulas_link:/linear-algebra/formulas#cofactor_definition]@`,
+        ],
+        footer: `So $C_{12} = (-1)^{3} \\cdot 8 = -8$, and $2 \\cdot 20 + 5 \\cdot (-8) + 1 \\cdot (-12) = -12$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A cofactor is a signed minor: one number for each position of the matrix.`,
+        content: [
+          `Using the $3 \\times 3$ matrix from the previous section, the cofactors are:`,
+          `@academic[formula_callout:Cofactors and the Sign Pattern
+$$C_{11} = (+1)(20) = 20, \\quad C_{12} = (-1)(8) = -8, \\quad C_{13} = (+1)(-12) = -12$$]@`,
+          `@academic[formula_callout:Cofactors and the Sign Pattern
+$$C_{21} = (-1)(29) = -29, \\quad C_{22} = (+1)(8) = 8, \\quad C_{23} = (-1)(-18) = 18$$]@`,
+          `@academic[formula_callout:Cofactors and the Sign Pattern
+$$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6) = 6$$]@`,
+          `Comparing cofactors to minors, entries at even-sum positions are unchanged while entries at odd-sum positions flip sign.`,
+          <div key={'obj2-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Read backwards, the sign rule is a test: a sign depends only on position, never on the entries.`,
+        content: [
+          `The pattern always starts with $+$ at position $(1,1)$ and alternates from there. The sign depends entirely on the position — the actual entries of the matrix play no role in determining it.`,
+          <div key={'unit-signs'} dangerouslySetInnerHTML={{ __html: demoUnits.signs }} />,
+          `Because the board never changes, the sign of a cofactor can always be read off its position without any computation.`,
+          `The full expansion of a determinant by cofactors is the subject of the next section, [Laplace expansion along a row](!/linear-algebra/determinants/cofactors#3).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers Laplace expansion along a row and along a column, the cofactor matrix, the adjugate, and the computational cost.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1847,6 +1970,11 @@ const schemas = {
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDeterminantsNotationSheet}
+            current={'/linear-algebra/determinants/cofactors'}
+          />,
         ]
     },
     {
@@ -1854,14 +1982,7 @@ const schemas = {
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
-                  <div key={'unit-signs'} dangerouslySetInnerHTML={{ __html: demoUnits.signs }} />,
-          `Because the board never changes, the sign of a cofactor can always be read off its position without any computation.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

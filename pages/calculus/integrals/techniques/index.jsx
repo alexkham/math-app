@@ -15,6 +15,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
 
 
 export async function getStaticProps(){
@@ -411,7 +413,7 @@ With $t = \\tan\\frac{x}{2}$, $\\sin x = \\frac{2t}{1 + t^2}$, $\\cos x = \\frac
 
 Multiple techniques often combine. A problem might require substitution followed by parts, or partial fractions followed by a trigonometric integral.
 
-Some combinations are planned from the start. An integrand such as $\\frac{1}{2 + \\cos x}$ is a fraction built from $\\cos x$, with no odd power to save and no radical to replace, so none of the trigonometric patterns above fits it directly. A substitution can still turn it into a rational function of a new variable, and partial fractions take over from there.
+Some combinations are planned from the start. An integrand such as $\\frac{1}{2 + \\cos x}$ is a fraction built from $\\cos x$, with no odd power to save and no radical to replace, so none of the trigonometric patterns above fits it directly. A substitution can still turn it into a rational function of a new variable: $t = \\tan\\frac{x}{2}$ gives $\\frac{2}{3 + t^2}$, and since $3 + t^2$ does not factor, an arctangent finishes the integral.
 `,
     before: ``,
     after: ``,
@@ -518,6 +520,10 @@ No single algorithm covers all cases—unlike differentiation, which follows sys
 // deferred "What are the main integration techniques?": every technique has
 // a heading, so no page needs the entry. Replaced with the execution traps,
 // which live almost entirely in the notation section.
+// FAQ pass 2026-10-31: kept all five. Added the parts "proof" of 0 = 1 (fact
+// box under "Integration by Parts") and the t = tan(x/2) substitution for
+// fractions in sin x and cos x (fact box and the 1/(2 + cos x) paragraph
+// under "Choosing the Right Technique").
 const faqQuestions = {
   obj1: {
     question: "Do you have to change the limits when you use u-substitution?",
@@ -543,6 +549,16 @@ const faqQuestions = {
     question: "Why is trigonometric substitution written x = a sin θ instead of u = g(x)?",
     answer: "Because it runs backwards. Ordinary substitution names the new variable as a function of the old one; trigonometric substitution expresses the old variable through the new one, which is what lets a Pythagorean identity collapse the radical. The price is that returning to x needs an inverse trig function, a reference triangle, and a domain restriction on θ.",
     sectionId: "5"
+  },
+  obj6: {
+    question: "Why does integration by parts seem to prove $0 = 1$?",
+    answer: "Because an indefinite integral is a family, not one function. Taking $u = \\frac{1}{x}$ and $dv = dx$ in $\\int \\frac{1}{x}\\, dx$ gives $\\int \\frac{1}{x}\\, dx = 1 + \\int \\frac{1}{x}\\, dx$, and cancelling the integrals leaves $0 = 1$. But each integral stands for $\\ln|x| + C$, and two members of that family may differ by $1$. With limits attached, the $1$ becomes $\\left[x \\cdot \\frac{1}{x}\\right]_a^b = 0$ and nothing goes wrong.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "How do you integrate a fraction built from $\\sin x$ and $\\cos x$?",
+    answer: "With the substitution $t = \\tan\\frac{x}{2}$, which turns $\\sin x$ into $\\frac{2t}{1 + t^2}$, $\\cos x$ into $\\frac{1 - t^2}{1 + t^2}$ and $dx$ into $\\frac{2\\, dt}{1 + t^2}$. Any rational expression in $\\sin x$ and $\\cos x$ becomes a rational function of $t$, which partial fractions can finish. For $\\int \\frac{1}{2 + \\cos x}\\, dx$ it gives $\\int \\frac{2}{3 + t^2}\\, dt = \\frac{2}{\\sqrt{3}}\\arctan\\frac{t}{\\sqrt{3}} + C$, valid for $-\\pi < x < \\pi$.",
+    sectionId: "7"
   }
 }
 
@@ -722,6 +738,11 @@ export default function PageTemplate({integrationTechniqueTree, seoData, section
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={integralsNotationSheet}
+            current={'/calculus/integrals/techniques'}
           />,
         ]
     },

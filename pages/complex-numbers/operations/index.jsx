@@ -1454,6 +1454,10 @@ How to check: multiply $z$ by the answer; the product must be $1$. Here $(2 - i)
   content: `Complex numbers combine real and imaginary components, and arithmetic must handle both parts systematically. Addition and subtraction operate component-wise, just like vector arithmetic. Multiplication requires the distributive property and the fundamental identity $i^2 = -1$. Division introduces the [conjugate](!/complex-numbers/complex-conjugate) as an essential tool for eliminating imaginary denominators. These four operations extend real arithmetic into the complex plane while preserving the algebraic structure that makes calculation predictable.`
 }
 
+// FAQ pass 2026-10-31: kept all four. Added dividing part by part (pitfall
+// box under Division), Pythagorean triples from squares (fact box under
+// Multiplication) and reciprocals turning lines into circles (fact box under
+// The Multiplicative Inverse).
 const faqQuestions = {
   obj1: {
     question: "Why do you multiply by the conjugate when dividing complex numbers?",
@@ -1474,6 +1478,21 @@ const faqQuestions = {
     question: "Do the ordinary rules of algebra apply to complex numbers?",
     answer: "Yes. Addition and multiplication remain commutative and associative, multiplication still distributes over addition, and every non-zero number still has a reciprocal. The one rule that does not carry over is ordering: complex numbers cannot be arranged as greater or smaller, so inequalities have no meaning between them.",
     sectionId: "5"
+  },
+  obj5: {
+    question: "Can you divide complex numbers by dividing the real and imaginary parts separately?",
+    answer: "Only when the divisor is real: $\\frac{4 + 6i}{2} = 2 + 3i$. A complex divisor mixes the parts, as a complex factor does in multiplication, so $\\frac{4 + 6i}{2 + 3i}$ is not $\\frac{4}{2} + \\frac{6}{3}i = 2 + 2i$. Since $4 + 6i = 2(2 + 3i)$, the quotient is $2$. Multiplying back by the divisor exposes the error: $(2 + 2i)(2 + 3i) = -2 + 10i$, not $4 + 6i$.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "How does squaring a complex number give Pythagorean triples?",
+    answer: "For whole numbers $a > b > 0$, the square $(a + bi)^2 = (a^2 - b^2) + 2abi$ has parts that are the legs of a right triangle with hypotenuse $a^2 + b^2$. The reason is $|z^2| = |z|^2$: the length of the square is the square of the length. So $(2 + i)^2 = 3 + 4i$ gives $3, 4, 5$, and $(3 + 2i)^2 = 5 + 12i$ gives $5, 12, 13$. Every primitive triple arises from such a square.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "What happens to a straight line when you take reciprocals?",
+    answer: "A line that misses the origin becomes a circle through it. Inverting every number $1 + ti$ on the vertical line through $1$ gives points of the circle of radius $\\frac{1}{2}$ centred at $\\frac{1}{2}$: the point $1$ stays put, $1 + i$ goes to $\\frac{1}{2} - \\frac{1}{2}i$, and points far up or down the line land ever closer to $0$. In general, taking reciprocals sends lines and circles to lines and circles.",
+    sectionId: "6"
   }
 }
 

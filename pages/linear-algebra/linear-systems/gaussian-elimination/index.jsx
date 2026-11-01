@@ -944,6 +944,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1283,6 +1286,24 @@ const eliminationStages = {
 
 // formulas-injected: v1 | 2026-06-16 | 1 callout (obj2 elementary_row_operations prose-insert/aggregation)
 
+// Concept introduction (section 1, "The Goal") — template A, definition
+// last. Running instance: a full 3 × 3 system and an equivalent staircase
+// system with solution (1, 2, 3). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its three passages and the fact aside are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciStairTable = ciTableOpen(['original system', 'equivalent staircase system']) +
+  ciRow(['x + y + z = 6', 'x + y + z = 6']) +
+  ciRow(['2x + 3y + z = 11', 'y − z = −1'], { shade: true }) +
+  ciRow(['x + 2y + 3z = 14', '3z = 9'], { last: true, color: '#2563EB', cols: [1] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Goal`,
@@ -1416,7 +1437,7 @@ Reading the last column of the echelon form in the back substitution example as 
 
 The payoff is that in RREF, the solution is visible by direct inspection — no back substitution is needed. Each pivot row reads "$x_i = \\text{(expression in free variables and constants)}$." The trade-off is that the backward pass requires additional row operations, raising the total work by up to roughly $50\\%$ compared to forward elimination alone.
 
-For hand computation, the choice between back substitution (stop at REF) and Gauss-Jordan (continue to RREF) is a matter of preference. For computer implementations, both approaches are standard.`,
+For hand computation, the choice between back substitution (stop at REF) and Gauss-Jordan (continue to RREF) is a matter of preference. For computer implementations, back substitution is the standard way to solve a system; Gauss-Jordan is used when the reduced form itself is wanted.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1629,6 +1650,11 @@ How to check: look behind the bar before deciding. Here $\\text{rank}(A) = \\tex
   content: `Gaussian elimination transforms a linear system into a simpler equivalent form by systematically applying row operations. Forward elimination creates zeros below each pivot, producing row echelon form. Back substitution then solves from the bottom up. The algorithm handles every case — unique solutions, infinitely many solutions, and inconsistent systems — within a single unified framework.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added combining
+// row operations in one step (pitfall box under "Forward Elimination"), the
+// tiny-pivot wrong answer (fact box under "Partial Pivoting"), the Nine
+// Chapters origin (fact box under "The Goal") and whether Gauss-Jordan is
+// worth its cost (only in the "stage by stage" summary card).
 const faqQuestions = {
   obj1: {
     question: "What is the bar doing in $[A \\mid \\mathbf{b}]$?",
@@ -1644,6 +1670,26 @@ const faqQuestions = {
     question: "Does the tilde in $A \\sim B$ mean approximately equal?",
     answer: "Not here, where it means row-equivalent: one matrix reaches the other through elementary row operations, so both describe the same solution set. The squiggle leads several lives across mathematics, marking equivalent sets in set theory and \"is distributed as\" in statistics, besides its single-stroke role as a cousin of the approximation sign.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can you do two row operations in one step?",
+    answer: "Only if neither one changes a row the other reads. Worked examples put $R_2 - 2R_1$ and $R_3 - 3R_1$ over one arrow safely, because both read row $1$ and neither alters it. Doing $R_1 - R_2 \\to R_1$ and $R_2 - R_1 \\to R_2$ together on $x_1 + x_2 = 2$, $x_1 - x_2 = 0$ gives the rows $[0 \\; 2 \\mid 2]$ and $[0 \\; {-2} \\mid {-2}]$: the rank drops from $2$ to $1$, and the unique solution $(1, 1)$ looks like one of infinitely many.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Can Gaussian elimination give a wrong answer on a computer?",
+    answer: "Yes, when a tiny pivot is used without a row swap. Solving $10^{-20}x_1 + x_2 = 1$, $x_1 + x_2 = 2$ in double precision with $10^{-20}$ as the pivot needs the multiplier $10^{20}$, which swamps the second row, and the computer returns $x_1 = 0$ although the true value is $1$ to twenty decimal places. Partial pivoting swaps the rows first and gets $x_1 = x_2 = 1$.",
+    sectionId: "11"
+  },
+  obj6: {
+    question: "Did Gauss invent Gaussian elimination?",
+    answer: "No, the method is far older than Gauss. The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century AD, sets out a system as columns of rods on a counting board, in effect an augmented matrix, and eliminates column against column, some 1,700 years before Gauss. Because the subtractions produce negative numbers, the same chapter also gives rules for working with them.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "Is Gauss-Jordan elimination worth the extra work?",
+    answer: "For solving a system, usually not. Back substitution adds only about $n^2$ operations to the forward elimination, while the Gauss-Jordan backward pass raises the total from about $\\frac{2}{3}n^3$ to about $n^3$, roughly $50\\%$ more, for the same solution. It earns its cost when the reduced form itself is wanted: the RREF is unique, so it is the form to read a null space basis from, to invert a matrix through $[A \\mid I]$, or to compare two matrices.",
+    sectionId: "12"
   }
 }
 
@@ -1743,6 +1789,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    stairTable: ciStairTable,
+  };
+
   const demoUnits = {
     forward: demoUnitFrame({
       svg: gaussEliminationDiagrams.eliminate,
@@ -1789,6 +1839,7 @@ return {
   props:{
     rowOperationTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1816,10 +1867,70 @@ export default function GaussianEliminationPage({rowOperationTree,
   obj10Table,
   eliminationStages,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Some systems are easy: the last equation has one unknown, the one above it two, and so on.`,
+        content: [
+          `Such a system is solved by working upward. Most systems do not arrive in that shape.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `A full 3 × 3 system and a staircase system can have exactly the same solution.`,
+        content: [
+          ciTable('stairTable'),
+          `Both systems have the single solution $(1, 2, 3)$. The second gives it at once, from the bottom up: $z = 3$, then $y = 2$, then $x = 1$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The work is turning the first kind of system into the second without changing its solutions.`,
+        content: [
+          `The input is an augmented matrix $[A \\mid \\mathbf{b}]$ representing a linear system $A\\mathbf{x} = \\mathbf{b}$. The output is an equivalent system — one with exactly the same solution set — in a form simple enough that the solution can be read off directly or obtained with minimal effort.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `[Gaussian elimination](!/linear-algebra/definitions#gaussian_elimination) uses row operations to turn the augmented matrix of a linear system into an equivalent one in [row echelon form](!/linear-algebra/definitions#row_echelon_form), which is then solved by back substitution.`,
+        formula: [
+          `The "simple form" is [echelon form](!/linear-algebra/linear-systems/echelon-form): a staircase pattern where the leading entry of each row is to the right of the leading entry of the row above, and everything below each leading entry is zero. Once the augmented matrix is in echelon form, the solution is extracted by back substitution — solving from the last equation upward.`,
+        ],
+        footer: `So the system above becomes $x + y + z = 6$, $y - z = -1$, $3z = 9$, and back substitution gives $(x, y, z) = (1, 2, 3)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Going further, to reduced row echelon form, makes the solution visible without back substitution.`,
+        content: [
+          `Optionally, the reduction can continue to reduced row echelon form (RREF), where each leading entry is $1$ and is the only nonzero entry in its column. In RREF, the solution is visible by inspection.`,
+          `@academic[fact,aside:true,width:35%:Elimination on a counting board
+The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century AD, lays out a system as columns of rods on a board, in effect an augmented matrix, and eliminates column against column, some 1,700 years before Gauss. The subtractions produce negative numbers, so the same chapter gives rules for them.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Not every system ends with a single solution.`,
+        content: [
+          `The same steps can end in a row that says $0 = 5$, meaning there is no solution, or in a row of zeros that leaves an unknown free. Both outcomes are worked through in the examples ending with [worked example: no solution](!/linear-algebra/linear-systems/gaussian-elimination#9).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the three row operations, forward elimination, pivots, back substitution, Gauss–Jordan elimination, three worked examples, computational cost, partial pivoting, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1827,7 +1938,7 @@ export default function GaussianEliminationPage({rowOperationTree,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1868,6 +1979,11 @@ export default function GaussianEliminationPage({rowOperationTree,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSystemsNotationSheet}
+            current={'/linear-algebra/linear-systems/gaussian-elimination'}
           />,
         ]
     },

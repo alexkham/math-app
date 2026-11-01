@@ -10,6 +10,11 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 
 
 export async function getStaticProps(){
@@ -145,6 +150,26 @@ export async function getStaticProps(){
 // /algebra/sequences/triangular-numbers — sectionsContent v2
 // 5 callouts: obj1 (1), obj2 (1), obj3 (1), obj4 (2). All prose preserved exactly.
 
+// Concept introduction (section 1, "Definition") — template A, definition
+// last. Running instance: ten bowling pins in rows of 1, 2, 3, 4 = T4; picture:
+// dot triangles for T1 to T4. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its two formula boxes, formulas link and five passages are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRowsTable = ciTableOpen(['rows', 'new row adds', 'total objects']) +
+  ciRow(['1', '1', '1']) +
+  ciRow(['2', '2', '1 + 2 = 3'], { shade: true }) +
+  ciRow(['3', '3', '3 + 3 = 6']) +
+  ciRow(['4', '4', '6 + 4 = 10 — the bowling pins'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['5', '5', '10 + 5 = 15'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -171,6 +196,45 @@ To compute any triangular number with each step shown, use the [triangular numbe
     after: ``,
     link: '',
   },
+    notation:{
+      title:`Triangular Number Notation`,
+      lead:`One letter for the n-th triangle, a rule that names its neighbour, and the same number written as a count of pairs.`,
+      inherited:`The subscript as position, the brace form and sigma are set out at [sequence notation](!/algebra/sequences/arithmetic#notation); the binomial coefficient follows [binomial coefficient notation](!/combinatorics/binomial-coefficient#notation).`,
+      entries:[
+        {
+          id:'triangular-term',
+          tex:`$T_n = \\dfrac{n(n+1)}{2}$`,
+          read:`T sub n — the n-th triangular number`,
+          means:`The dots in a triangle of $n$ rows, which is also the sum $1 + 2 + \\cdots + n$. The subscript is both the position and the number of rows.`,
+          cases:`Starts at $T_1 = 1$; some lists add $T_0 = 0$, the empty triangle. Its square counts cubes: $1^3 + \\cdots + n^3 = T_n^2$.`,
+          alsoWritten:`$\\sum_{k=1}^{n} k$ — the sum it stands for.`,
+          confusedWith:`$T_n^2$ — the square of the n-th triangular number, not a new sequence.`,
+        },
+        {
+          id:'triangular-recursion',
+          tex:`$T_n = T_{n-1} + n$`,
+          read:`each triangle is the one before plus a row of n dots`,
+          means:`The new row holds as many dots as the index. The rule needs its anchor $T_1 = 1$ ([section 2](!#2)).`,
+          cases:`Two neighbours add up to a square: $T_{n-1} + T_n = n^2$, as in $6 + 10 = 16$.`,
+          confusedWith:`$T_n - 1$. The subscript carries the arithmetic: $T_{4-1} = T_3 = 6$, while $T_4 - 1 = 9$.`,
+        },
+        {
+          id:'pairs-count',
+          tex:`$\\dbinom{n+1}{2}$`,
+          read:`n plus one choose two`,
+          means:`$T_n$ counted another way: the number of pairs that can be picked from $n + 1$ objects. Same value, as a count of handshakes rather than dots.`,
+          cases:`$\\binom{5}{2} = 10 = T_4$ — five people, ten handshakes.`,
+          confusedWith:`$\\binom{n}{2} = T_{n-1}$ — one object fewer moves one place back in the sequence.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/algebra`,
+      symbolsLabel:`All algebra symbols`,
+      parentHref:`/algebra/sequences`,
+      parentLabel:`Sequences`,
+      before:``,
+      after:``,
+    },
+
   obj2: {
     title: `Recursive Form`,
     content: `Each triangular number is the previous one plus a new row of $n$ dots:
@@ -316,6 +380,10 @@ How to check: put the index back in; $T_n$ must equal $m$. Also, $8T_n + 1 = (2n
   content: `The triangular numbers count objects arranged in growing equilateral triangles: one in the first row, two in the second, three in the third. Each triangular number is a partial sum of the natural numbers, giving them a direct connection to arithmetic series. They appear throughout mathematics — in binomial coefficients, in the relationship between consecutive squares, and in counting problems.`,
 }
 
+// FAQ pass 2026-10-31: kept the three properties questions. Added the sum
+// of cubes (fact box under "Recursive Form"), handshakes as T_(n-1)
+// (pitfall under "Derivation of the Closed Form") and Gauss's three
+// triangular numbers (fact box under "Properties").
 const faqQuestions = {
   obj1: {
     question: "How do you test whether a number is triangular?",
@@ -330,6 +398,21 @@ const faqQuestions = {
   obj3: {
     question: "What do you get by adding up triangular numbers?",
     answer: "The tetrahedral numbers, given by $\\sum_{k=1}^{n} T_k = \\frac{n(n+1)(n+2)}{6}$. Where a triangular number counts dots in a flat triangle, stacking those triangles gives a tetrahedron, so the sum extends the figurate idea from two dimensions into three. The formula mirrors the triangular one with an extra factor.",
+    sectionId: "4"
+  },
+  obj4: {
+    question: "What is the sum of the first $n$ cubes?",
+    answer: "The square of the $n$-th triangular number: $1^3 + 2^3 + \\cdots + n^3 = T_n^2$. For $n = 4$, $1 + 8 + 27 + 64 = 100 = 10^2$. Each step adds exactly one cube, because $T_n^2 - T_{n-1}^2 = (T_n - T_{n-1})(T_n + T_{n-1})$ and the two factors are $n$ and $n^2$. So the sum of the first $n$ cubes equals the square of $1 + 2 + \\cdots + n$.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "How many handshakes are there when $n$ people all shake hands?",
+    answer: "$\\frac{n(n-1)}{2}$, which is $\\binom{n}{2} = T_{n-1}$, not $T_n$. Each handshake is an unordered pair of people, and $T_n = \\binom{n+1}{2}$ counts the pairs among $n + 1$ objects, one more than the group. Five people make $\\binom{5}{2} = 10 = T_4$ handshakes: the first shakes $4$ hands, the next $3$ new ones, then $2$, then $1$.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Is every number a sum of three triangular numbers?",
+    answer: "Yes, counting $0$ as triangular and allowing repeats, as in $17 = 1 + 1 + 15$. Gauss found this in 1796 and wrote 'Eureka' in his diary. Since $8T_k + 1 = (2k + 1)^2$, the statement amounts to writing $8m + 3$ as a sum of three odd squares. Two triangular numbers are not always enough: $5$, $8$, $14$ and $17$ cannot be written that way.",
     sectionId: "4"
   }
 }
@@ -417,6 +500,16 @@ const schemas = {
     notes: [{ x: 3.3, y: 2.5, text: 'rows 1 to 4: T₄ = 10', pos: 'e', color: 'f' }, { x: 5.3, y: 5, text: '+5', pos: 'e', color: 'r' },
       { x: 1.6, y: 5.6, text: 'new row of 5: T₅ = 10 + 5 = 15', pos: 'e', color: 'r' }],
     caption: 'Tₙ = Tₙ₋₁ + n: each triangle is the last one plus a row of n dots' };
+  const ciTriDots = (n, cx) => { const out = []; for (let r = 1; r <= n; r++) for (let i = 1; i <= r; i++) out.push({ fn: () => 4.4 - (r - 1) * 0.8, from: cx + (i - (r + 1) / 2) * 0.8, to: cx + (i - (r + 1) / 2) * 0.8, ends: ['closed', 'closed'], color: n === 4 ? 'r' : 'f' }); return out; };
+  const fpCiTriangles = { kind: 'pieces', svgTitle: 'Dots in triangles of 1, 2, 3 and 4 rows: 1, 3, 6 and 10 dots', xRange: [0, 11.2], yRange: [0, 5], xStep: 20, yStep: 20, xLetter: ' ', yLetter: ' ',
+    pieces: [].concat(ciTriDots(1, 1), ciTriDots(2, 3), ciTriDots(3, 5.8), ciTriDots(4, 9.4)),
+    notes: [{ x: 1, y: 1.2, text: 'T₁ = 1', pos: 'n' }, { x: 3, y: 1.2, text: 'T₂ = 3', pos: 'n' }, { x: 5.8, y: 1.2, text: 'T₃ = 6', pos: 'n' }, { x: 9.4, y: 1.2, text: 'T₄ = 10', pos: 'n', color: 'r' }],
+    caption: 'Triangles of 1, 2, 3 and 4 rows' };
+  const conceptIntroFigures = {
+    rowsTable: ciRowsTable,
+    triangles: renderFunctionPlotV4(fpCiTriangles),
+  };
+
   const demoUnits = {
     binomial: demoUnitFrame({
       svg: binomialCoefficientDiagrams['pascal-n5'],
@@ -435,6 +528,7 @@ const schemas = {
    return {
   props:{
     demoUnits,
+    conceptIntroFigures,
      sectionsContent,
      introContent,
      faqQuestions,
@@ -450,7 +544,75 @@ const schemas = {
 }
    }
 
-export default function TriangularNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+export default function TriangularNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Bowling pins stand in a triangle: 1 pin at the front, then rows of 2, 3 and 4 — ten pins in all.`,
+        content: [
+          `Cans stacked in a triangle on a shelf, or snooker balls in their rack, follow the same plan. How many objects fit in a triangle with a given number of rows?`,
+        ],
+        visual: ciSvg('triangles'),
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each new row is one longer than the last, so the totals go 1, 3, 6, 10, 15.`,
+        content: [
+          ciTable('rowsTable'),
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `A triangle with n rows holds 1 + 2 + 3 + ⋯ + n objects.`,
+        content: [
+          `The name comes from a geometric construction: arrange dots in rows of increasing length to form an equilateral triangle. Row $1$ has $1$ dot, row $2$ has $2$, row $3$ has $3$, and the total count after $n$ rows is $T_n$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The $n$-th **triangular number** $T_n$ is the number of dots in a triangle with $n$ rows: the sum $1 + 2 + \\cdots + n$.`,
+        formula: [
+          `The $n$-th triangular number $T_n$ is the sum of the first $n$ positive integers:`,
+          `@academic[formula_callout:Triangular Number Formula
+$$T_n = 1 + 2 + 3 + \\cdots + n = \\frac{n(n+1)}{2}$$
+/algebra/formulas#triangular_number_formula]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+        ],
+        footer: `So the ten bowling pins are $T_4 = 10$, and a triangle with $10$ rows holds $T_{10} = \\frac{10 \\cdot 11}{2} = 55$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The triangular numbers form a sequence that grows by one more at every step.`,
+        content: [
+          `The first triangular numbers are:`,
+          `@academic[formula_callout:Definition
+$$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, \\ldots$$]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Adding 1 + 2 + ⋯ + n term by term is slow for large n; the formula gives the answer in one step.`,
+        content: [
+          `The closed form $\\frac{n(n+1)}{2}$ follows from the [arithmetic series](!/algebra/sequences/arithmetic#5) formula with $a_1 = 1$ and $d = 1$. The Gauss pairing argument applies directly: $T_n = \\frac{n}{2}(1 + n)$.`,
+          `To compute any triangular number with each step shown, use the [triangular numbers calculator](!/algebra/calculators/sequences/triangular-numbers).`,
+          `Why the formula works, step by step, is shown in [derivation of the closed form](!/algebra/sequences/triangular-numbers#3).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the recursive form, the derivation of the closed form, and the properties of triangular numbers.`,
+      },
+    ],
+  }
     
   const genericSections=[
     // {
@@ -466,7 +628,31 @@ export default function TriangularNumbersPage({seoData, sectionsContent, introCo
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation-notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={sequencesNotationSheet}
+            current={'/algebra/sequences/triangular-numbers'}
+          />,
         ]
     },
     {

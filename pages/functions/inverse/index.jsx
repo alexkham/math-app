@@ -1372,6 +1372,8 @@ import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTes
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 
 
 export async function getStaticProps(){
@@ -2467,31 +2469,40 @@ Given a function $f$ that transforms input $a$ into output $b$, the inverse func
 
 
 
+// FAQ pass 2026-10-31: cut all five old questions. Four restate h2s: finding
+// the inverse algebraically, the horizontal line test, the reflection over
+// y = x and verifying by composition. The sin⁻¹ question is asked on
+// trigonometry/inverse-functions (sin⁻¹(x) vs 1/sin(x)) and
+// trigonometry/identities. Added the reverse order of undoing (pitfall box
+// under Finding Inverse Algebraically), the two inverses of x² (Restricting
+// Domain text and pitfall box), increasing inverses and where f meets f⁻¹
+// (Graphing Inverse from Original text and fact box) and self-inverse
+// functions (reciprocal pair and the ROT13 fact box).
 const faqQuestions = {
   obj1: {
-    question: "How do you find an inverse function algebraically?",
-    answer: "Swap the roles of input and output, then solve for the new output. Replace f(x) with y, exchange x and y throughout, rearrange to isolate y, and rename it as the inverse. The swap is what reverses the assignment; the algebra afterwards is only rearranging to get a usable formula.",
+    question: "Why are the steps undone in reverse order when finding an inverse?",
+    answer: "Because the last operation applied is the first one exposed. $f(x) = 3x - 7$ multiplies by $3$ and then subtracts $7$, so the inverse adds $7$ first and then divides by $3$: $f^{-1}(x) = \\frac{x + 7}{3}$. Undoing in the original order gives $\\frac{x}{3} + 7$, which sends $f(1) = -4$ to $\\frac{17}{3}$ instead of back to $1$. It is the order of socks and shoes: what goes on last comes off first.",
     sectionId: "4"
   },
   obj2: {
-    question: "What is the horizontal line test?",
-    answer: "It checks whether a function is one-to-one by sweeping a horizontal line across the graph. Two crossings mean two inputs share an output, so no inverse function exists. It mirrors the vertical line test, which checks whether a graph is a function at all, and the two together confirm invertibility.",
-    sectionId: "7"
+    question: "Is $\\sqrt{x}$ the only inverse of $x^2$?",
+    answer: "No. On all real numbers $x^2$ has no inverse, because $3$ and $-3$ both give $9$. Each way of cutting it down to a one-to-one piece gives its own inverse: on $[0, \\infty)$ the inverse is $\\sqrt{x}$, and on $(-\\infty, 0]$ it is $-\\sqrt{x}$, which sends $4$ back to $-2$. The first is the standard choice only because positive square roots are needed more often.",
+    sectionId: "9"
   },
   obj3: {
-    question: "Why is the inverse a reflection over the line y = x?",
-    answer: "Because inverting swaps each input with its output, and swapping coordinates is exactly what reflecting across that diagonal does. A point at (2, 5) on the original becomes (5, 2) on the inverse. This also explains why the domain and range trade places between a function and its inverse.",
-    sectionId: "3"
+    question: "Is the inverse of an increasing function also increasing?",
+    answer: "Yes, and the inverse of a decreasing function is decreasing. Reflecting in $y = x$ swaps the coordinates of every point, so if larger inputs of $f$ give larger outputs, larger inputs of $f^{-1}$ give larger outputs too, as $e^x$ and $\\ln x$ both rise. A strictly increasing function never turns around, so it never repeats an output and always has an inverse on its range.",
+    sectionId: "10"
   },
   obj4: {
-    question: "How do you verify that two functions are inverses?",
-    answer: "Compose them in both orders and check that each gives back the original input. One direction alone is not enough, since a function can undo another on part of its domain without being a true inverse. Both compositions must simplify to x across the appropriate domains.",
-    sectionId: "6"
+    question: "Do a function and its inverse always meet on the line y = x?",
+    answer: "Not always. When $f$ is increasing they meet only on the mirror, at the solutions of $f(x) = x$, so $x^3$ and $\\sqrt[3]{x}$ meet at $(-1, -1)$, $(0, 0)$ and $(1, 1)$ without the inverse ever being computed. A decreasing function can also meet its inverse off the line: $-x^3$ and its inverse $-\\sqrt[3]{x}$ cross at $(1, -1)$ and $(-1, 1)$ as well as at $(0, 0)$.",
+    sectionId: "10"
   },
   obj5: {
-    question: "Why does sin⁻¹ not mean 1 over sine?",
-    answer: "Because the superscript −1 on a function name denotes inversion rather than a reciprocal power. It is a notational collision: positive exponents on trigonometric functions do mean powers. Writing the reciprocal unambiguously requires brackets around the whole function value, or the dedicated name cosecant.",
-    sectionId: "2"
+    question: "Can a function be its own inverse?",
+    answer: "Yes. A function is its own inverse when applying it twice returns the input, $f(f(x)) = x$, and its graph is then symmetric about the line $y = x$. The reciprocal $\\frac{1}{x}$ is one, since taking the reciprocal twice gives back the original value, and so is $-x$. ROT13, the letter shift by $13$, is another: two shifts move each letter $26$ places, once round the alphabet.",
+    sectionId: "12"
   }
 }
 
@@ -2819,6 +2830,11 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={functionsNotationSheet}
+            current={'/functions/inverse'}
           />,
           <div
             key={'obj2-table'}

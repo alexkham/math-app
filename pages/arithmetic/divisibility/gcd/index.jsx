@@ -20,6 +20,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -269,6 +270,27 @@ const rtGcdObj10Tiles = renderRectangleTile({
     { kind: 'note', text: 'no gaps, no overlaps', italic: true },
   ]},
 })
+
+    // Concept introduction (section 1, "What is GCD?") — template A,
+    // definition last. Running instance: ribbons of 12 cm and 18 cm cut into
+    // equal pieces, longest piece 6 cm = gcd(12, 18). Old obj1 text is kept in
+    // sectionsContent.obj1, unused; its pitfall aside, five passages and the
+    // fsGcdObj1 factor-set figure are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciRibbonTable = ciTableOpen(['piece length (cm)', 'pieces from 12 cm', 'pieces from 18 cm', 'works for both?']) +
+      ciRow(['1', '12', '18', 'yes']) +
+      ciRow(['2', '6', '9', 'yes'], { shade: true }) +
+      ciRow(['3', '4', '6', 'yes']) +
+      ciRow(['4', '3', '4.5 — leftover', 'no'], { shade: true }) +
+      ciRow(['6', '2', '3', 'yes — the longest'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['9', '1.33… — leftover', '2', 'no'], { shade: true, last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -738,6 +760,10 @@ How to check: find the GCD of the new numerator and denominator. $\\gcd(9, 12) =
 // are case A (own h2s and the Three Methods summary answer them); the GCD×LCM
 // relation is owned by the /arithmetic/divisibility hub FAQ. Kept four
 // buried-content questions, all extended.
+// FAQ pass 2026-10-31: kept the four. Added the slowest Euclidean pairs (the
+// Fibonacci fact box under Method 3), the 3-and-5 coin amounts (fact box under
+// Properties of Coprime Numbers) and coprime without being prime (the figure
+// card and pitfall; no heading asks it).
 const faqQuestions = {
   obj1: {
     question: "What is the difference between GCD, HCF, and GCF?",
@@ -758,6 +784,21 @@ const faqQuestions = {
     question: "What is gcd(a, 0)?",
     answer: "gcd(a, 0) = a for any positive integer a. Every positive integer divides 0, so the common divisors of a and 0 are exactly the divisors of a, and the largest is a itself. This identity is what ends the Euclidean algorithm: when the remainder finally reaches zero, the other number is the answer.",
     sectionId: "2"
+  },
+  obj5: {
+    question: "Which numbers make the Euclidean algorithm take the most steps?",
+    answer: "Consecutive Fibonacci numbers. On $89$ and $55$ every division but the last has quotient $1$, so the remainders walk down the Fibonacci numbers $34, 21, 13, \\ldots, 1$ and the algorithm needs $9$ divisions, more than any pair whose smaller number is below $55$. Lamé proved in 1844 that these are the slowest pairs of their size, which caps the count at five divisions per digit of the smaller number.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "What is the largest amount coins of 3 and 5 cannot pay?",
+    answer: "$7$. Coins worth $3$ and $5$ pay $8 = 3 + 5$, $9 = 3 + 3 + 3$ and $10 = 5 + 5$, and adding coins of $3$ to these reaches every larger amount; the only amounts missed are $1$, $2$, $4$ and $7$. This works because $\\gcd(3, 5) = 1$: for coprime values $a$ and $b$ the largest missed amount is $ab - a - b$, here $15 - 3 - 5 = 7$. Coins of $4$ and $6$ share the factor $2$, so they never pay an odd amount.",
+    sectionId: "8"
+  },
+  obj7: {
+    question: "Can two numbers be coprime if neither is prime?",
+    answer: "Yes. Coprime describes a pair, not either number on its own: two numbers are coprime when their GCD is $1$. Neither $8 = 2^3$ nor $15 = 3 \\cdot 5$ is prime, yet they have no prime factor in common, so $\\gcd(8, 15) = 1$. Nor is one prime in the pair enough: $7$ and $14$ share the factor $7$. The test is always the GCD, never the primality of either number.",
+    sectionId: "7"
   }
 }
 
@@ -847,6 +888,10 @@ const schemas = {
   const fsCoprime = { kind: 'two-set', setA: 8, setB: 15, style: prStyle, info: { lines: [
     { kind: 'formula', text: 'factors of 8 and 15', role: 'primary' }, { kind: 'separator' },
     { kind: 'note', text: 'only 1 is shared' }, { kind: 'formula', text: 'gcd(8, 15) = 1', role: 'result' }, { kind: 'note', text: 'coprime, yet neither' }, { kind: 'note', text: 'number is prime' }] } };
+  const conceptIntroFigures = {
+    ribbonTable: ciRibbonTable,
+  };
+
   const demoUnits = {
     euclid: demoUnitFrame({
       svg: euclideanVisualizerDiagrams.classic,
@@ -881,6 +926,7 @@ return {
   props:{
     gcdMethodTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -916,9 +962,74 @@ fsGcdObj3,ecGcdObj5,
 ecGcdObj6a,
 ecGcdObj6b,pfGcdObj4,
 rtGcdObj10Ratio,
-rtGcdObj10Tiles, demoUnits}) {
+rtGcdObj10Tiles, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Two ribbons, 12 cm and 18 cm long, are to be cut into pieces of one equal length with nothing left over. How long can the pieces be?`,
+        content: [
+          `A piece length works only if it fits a whole number of times into both ribbons. Long pieces are better — fewer cuts — so the question is which length is the longest that works.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Trying lengths one by one: 1, 2, 3 and 6 cm work for both ribbons; 4 and 9 cm leave a leftover.`,
+        content: [
+          ciTable('ribbonTable'),
+          `Lengths from $7$ to $11$ cm leave a leftover in the $12$ cm ribbon, and a $12$ cm piece does not fit into $18$ cm a whole number of times, so $6$ cm is the longest length that works.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The lengths that work are exactly the numbers that divide both 12 and 18 — and the answer is the largest of them.`,
+        content: [
+          `The [common factors](!/arithmetic/divisibility/factors) of $12$ and $18$ are $\\{1, 2, 3, 6\\}$. The largest is $6$, so $\\gcd(12, 18) = 6$.`,
+          <div key={'obj1-svg'} style={{ maxWidth: '800px', margin: '20px auto' }}
+               dangerouslySetInnerHTML={{ __html: fsGcdObj1 }} />,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [greatest common divisor](!/arithmetic/definitions#greatest_common_divisor) of two positive integers is the largest positive integer that divides both of them.`,
+        formula: [
+          `The greatest common divisor of two positive integers $a$ and $b$, written $\\gcd(a, b)$, is the largest positive integer that divides both.`,
+        ],
+        footer: `So $\\gcd(12, 18) = 6$: the ribbons are cut into $6$ cm pieces, two from one and three from the other.`,
+      },
+      {
+        id: 'kind',
+        lead: `The GCD is one number attached to a pair of numbers, and every pair has one.`,
+        content: [
+          `The common factors of $20$ and $35$ are $\\{1, 5\\}$. The largest is $5$, so $\\gcd(20, 35) = 5$.`,
+          `The GCD always exists for any pair of positive integers, and it is always at least $1$ — because $1$ divides everything. It can never exceed the smaller of the two numbers, since no factor of $a$ can be larger than $a$ itself.`,
+          `The same concept goes by several names. GCD (greatest common divisor) is standard in most mathematical texts. HCF (highest common factor) is common in British usage. GCF (greatest common factor) appears in some textbooks. All three refer to the same quantity.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The greatest common divisor is not the least common multiple — one divides the numbers, the other is divided by them.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Confusing the GCD with the LCM
+Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least common multiple, a number that $12$ and $18$ both divide. The GCD divides both numbers, so it is $6$.
+[Read more](!#pitfalls)]@`,
+          `For large numbers, listing every divisor is slow; the [Euclidean algorithm](!/arithmetic/divisibility/gcd#5) finds the GCD in a few steps.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, basic properties, three methods — listing factors, prime factorization, the Euclidean algorithm — coprime numbers, the GCD of more than two numbers, and applications.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -943,10 +1054,7 @@ rtGcdObj10Tiles, demoUnits}) {
     title:sectionsContent.obj1.title,
     link:sectionsContent.obj1.link,
     content:[
-      sectionsContent.obj1.content,
-      <div key={'obj1-svg'} style={{ maxWidth: '800px', margin: '20px auto' }}
-           dangerouslySetInnerHTML={{ __html: fsGcdObj1 }} />,
-      sectionsContent.obj1.afterFigure,
+      <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
     ]
 },
     {

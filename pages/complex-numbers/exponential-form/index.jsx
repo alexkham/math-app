@@ -1370,6 +1370,8 @@ import complexMultiplicationDiagrams from '@/app/components/calculators/complex-
 import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoivreDiagrams'
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 export async function getStaticProps(){
@@ -1472,11 +1474,11 @@ export async function getStaticProps(){
   </thead>
   <tbody>
     <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Algebraic → Exponential&nbsp;&nbsp;<span style="font-size: 13px;">(a + bi → re&#x2071;&#x1D52;)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Algebraic → Exponential&nbsp;&nbsp;<span style="font-size: 13px;">(a + bi → re&#x2071;&#x1DBF;)</span></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">
         r = √(a² + b²)<br/>
         θ = arctan(b ⁄ a), adjusted for quadrant<br/>
-        z = re&#x2071;&#x1D52;
+        z = re&#x2071;&#x1DBF;
       </td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">
         z = 1 + i<br/>
@@ -1486,7 +1488,7 @@ export async function getStaticProps(){
       </td>
     </tr>
     <tr>
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Exponential → Algebraic&nbsp;&nbsp;<span style="font-size: 13px;">(re&#x2071;&#x1D52; → a + bi)</span></td>
+      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Exponential → Algebraic&nbsp;&nbsp;<span style="font-size: 13px;">(re&#x2071;&#x1DBF; → a + bi)</span></td>
       <td style="padding: 12px 15px; color: #34495e;">
         a = r · cos θ<br/>
         b = r · sin θ<br/>
@@ -1548,29 +1550,29 @@ export async function getStaticProps(){
     <tr>
       <th style="${tableHeaders.summary}">Operation on z, w</th>
       <th style="${tableHeaders.summary}">Algebraic form<br/><span style="font-weight: normal; font-size: 13px;">z = a + bi,&nbsp;w = c + di</span></th>
-      <th style="${tableHeaders.summary}">Exponential form<br/><span style="font-weight: normal; font-size: 13px;">z = r₁e&#x2071;⁽&#x1D52;¹⁾,&nbsp;w = r₂e&#x2071;⁽&#x1D52;²⁾</span></th>
+      <th style="${tableHeaders.summary}">Exponential form<br/><span style="font-weight: normal; font-size: 13px;">z = r₁e&#x2071;⁽&#x1DBF;¹⁾,&nbsp;w = r₂e&#x2071;⁽&#x1DBF;²⁾</span></th>
     </tr>
   </thead>
   <tbody>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Multiplication&nbsp;&nbsp;z · w</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(ac − bd) + (ad + bc)i&nbsp;&nbsp;<span style="font-size: 13px;">(FOIL + apply i² = −1)</span></td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r₁r₂ · e&#x2071;⁽&#x1D52;¹ ⁺ &#x1D52;²⁾&nbsp;&nbsp;<span style="font-size: 13px;">(moduli multiply, args add)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r₁r₂ · e&#x2071;⁽&#x1DBF;¹ ⁺ &#x1DBF;²⁾&nbsp;&nbsp;<span style="font-size: 13px;">(moduli multiply, args add)</span></td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Division&nbsp;&nbsp;z ⁄ w</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">multiply num and denom by w̄, then expand</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(r₁ ⁄ r₂) · e&#x2071;⁽&#x1D52;¹ ⁻ &#x1D52;²⁾&nbsp;&nbsp;<span style="font-size: 13px;">(moduli divide, args subtract)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">(r₁ ⁄ r₂) · e&#x2071;⁽&#x1DBF;¹ ⁻ &#x1DBF;²⁾&nbsp;&nbsp;<span style="font-size: 13px;">(moduli divide, args subtract)</span></td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Power&nbsp;&nbsp;zⁿ&nbsp;&nbsp;<span style="font-size: 13px;">(integer n)</span></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">binomial expansion + repeated i²-collapse</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r₁ⁿ · e&#x2071;⁽ⁿ&#x1D52;¹⁾&nbsp;&nbsp;<span style="font-size: 13px;">(modulus to nth power, arg × n; De Moivre)</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r₁ⁿ · e&#x2071;⁽ⁿ&#x1DBF;¹⁾&nbsp;&nbsp;<span style="font-size: 13px;">(modulus to nth power, arg × n; De Moivre)</span></td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">n-th root&nbsp;&nbsp;<span style="font-size: 13px;">(zⁿ = w)</span></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">no clean closed-form method</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r₂&#xB9;&#x141;ⁿ · e&#x2071;⁽&#x1D52;² ⁺ ²&#x3C0;&#x1D4F;⁾&#x141;ⁿ&nbsp;&nbsp;<span style="font-size: 13px;">for k = 0, 1, …, n − 1</span></td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r₂&#xB9;/ⁿ · e&#x2071;⁽&#x1DBF;² ⁺ ²&#x3C0;&#x1D4F;⁾/ⁿ&nbsp;&nbsp;<span style="font-size: 13px;">for k = 0, 1, …, n − 1</span></td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Modulus&nbsp;&nbsp;|z|</td>
@@ -1585,7 +1587,7 @@ export async function getStaticProps(){
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">Conjugate&nbsp;&nbsp;z̄</td>
       <td style="padding: 12px 15px; color: #34495e;">a − bi</td>
-      <td style="padding: 12px 15px; color: #34495e;">r₁ · e&#x207B;&#x2071;&#x1D52;¹&nbsp;&nbsp;<span style="font-size: 13px;">(modulus same, argument negates)</span></td>
+      <td style="padding: 12px 15px; color: #34495e;">r₁ · e&#x207B;&#x2071;&#x1DBF;¹&nbsp;&nbsp;<span style="font-size: 13px;">(modulus same, argument negates)</span></td>
     </tr>
   </tbody>
 </table>
@@ -2455,31 +2457,44 @@ How to check: the $n$ roots must be spaced $2\\pi/n$ apart around the circle. If
   content: `The [trigonometric form](!/complex-numbers/trigonometric-form) $r\\text{cis}\\theta$ simplifies multiplication and powers, but notation can be streamlined further. Euler's formula reveals that $e^{i\\theta}$ equals $\\cos\\theta + i\\sin\\theta$, allowing us to write any complex number as $z = re^{i\\theta}$. This exponential form inherits all the advantages of trigonometric representation while invoking the familiar rules of exponents — multiplication adds exponents, division subtracts them, and powers simply multiply.`
 }
 
+// FAQ pass 2026-10-31: cut three heading questions: "What is Euler's
+// formula?" (h2 Euler's Formula), "What is Euler's identity and why is it
+// famous?" (h2 Euler's Identity) and "Why is exponential form useful?" (h2 Why
+// Exponential Form Matters). Kept why the formula works and cis. Added i to
+// the i and ln(-1) (fact boxes under "Euler's Formula" and "Euler's
+// Identity"), degrees in the exponent and adding in exponential form (pitfall
+// and closing paragraph of "The Exponential Form of a Complex Number"); no
+// heading asks any of them.
 const faqQuestions = {
   obj1: {
-    question: "What is Euler's formula?",
-    answer: "It states that e raised to i times an angle equals the cosine of that angle plus i times its sine. The left side is an exponential and the right is a point on the unit circle, so the formula says that imaginary exponents produce rotation rather than growth. See it turn on the [Euler formula tool](!/complex-numbers/visual-tools/euler-formula).",
-    sectionId: "1"
-  },
-  obj2: {
     question: "Why does Euler's formula work?",
     answer: "Because the power series for the exponential, split into its even and odd terms, produces exactly the series for cosine and for sine once i is substituted. Nothing is assumed: the identity falls out of expansions already known for real numbers. Differentiating both sides gives a second, shorter argument.",
     sectionId: "2"
   },
-  obj3: {
-    question: "What is Euler's identity and why is it famous?",
-    answer: "It is the special case at half a turn, linking e, i, pi, one, and zero in a single equation. The fame comes from that collision: five constants from separate corners of mathematics, connected by one statement. It is a direct substitution into Euler's formula rather than a separate result.",
-    sectionId: "3"
-  },
-  obj4: {
-    question: "Why is exponential form useful?",
-    answer: "Because multiplication becomes addition of exponents, so multiplying, dividing, and taking powers reduce to arithmetic on the angles. Raising a number to a power in algebraic form requires repeated expansion; in exponential form it is one multiplication in the exponent. This is why engineering and physics use it almost exclusively.",
-    sectionId: "10"
-  },
-  obj5: {
+  obj2: {
     question: "What is the relationship between cis and the exponential form?",
     answer: "They are the same thing written differently, since cis theta and e to the i theta both denote cosine plus i sine. The exponential spelling is preferred because it obeys the ordinary rules of exponents, making the multiplication and power laws automatic rather than facts to memorise separately.",
     sectionId: "notation"
+  },
+  obj3: {
+    question: "Is $i^i$ a real number?",
+    answer: "Yes. Since $i = e^{i\\pi/2}$, raising it to the power $i$ gives $i^i = e^{i \\cdot i\\pi/2} = e^{-\\pi/2} \\approx 0.2079$. The value is not unique: $i$ also equals $e^{i(\\pi/2 + 2\\pi k)}$ for every integer $k$, and these angles give infinitely many values $e^{-\\pi/2 - 2\\pi k}$. Every one of them is a positive real number; $e^{-\\pi/2}$ is the one that comes from the principal argument.",
+    sectionId: "1"
+  },
+  obj4: {
+    question: "What is $\\ln(-1)$?",
+    answer: "In the complex numbers it is $i\\pi$, because Euler's identity says $e^{i\\pi} = -1$. Adding full turns gives every other value, $i\\pi + 2\\pi k i$ for any integer $k$, so the complex logarithm has infinitely many values. Among the real numbers $\\ln(-1)$ stays undefined, since $e^x$ is positive for every real $x$. Leibniz and Johann Bernoulli argued over it in letters, and Bernoulli held that it was $0$, like $\\ln 1$.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Can the angle in $e^{i\\theta}$ be in degrees?",
+    answer: "No, it must be in radians, because Euler's formula comes from Taylor series in which $\\theta$ is measured in radians. Writing $3 + 4i = 5e^{i \\cdot 53.13}$ with the angle in degrees gives a different point, about $-4.81 + 1.37i$. Converting first, $53.13° \\cdot \\frac{\\pi}{180°} \\approx 0.927$, gives $5e^{i \\cdot 0.927} \\approx 3 + 4i$. Degrees are only safe where the unit is written down, as in $\\text{cis}\\,53.13°$.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "How do you add two complex numbers in exponential form?",
+    answer: "By converting them back to $a + bi$ first. The exponent rules cover products, quotients and powers, but there is no rule for $e^{i\\alpha} + e^{i\\beta}$, so a sum is worked out across and up and then turned back into $re^{i\\theta}$ if needed. For example, $e^{i\\pi/2} + e^{i\\pi} = i + (-1) = -1 + i = \\sqrt{2}e^{i \\cdot 3\\pi/4}$. This is why the algebraic form stays in use beside the exponential one.",
+    sectionId: "4"
   }
 }
 
@@ -2794,6 +2809,11 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/exponential-form'}
           />,
         ]
     },

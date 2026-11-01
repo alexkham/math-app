@@ -625,6 +625,8 @@ import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/co
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 
 
 export async function getStaticProps(){
@@ -760,6 +762,11 @@ export async function getStaticProps(){
   // Replaced with the notation section's reading traps, the sharpest being
   // that a random variable is a function rather than a variable at all.
   // Indicator variables defer to /probability/indicators.
+  // FAQ pass 2026-10-31: kept the four notation questions. Added the
+  // top-and-bottom die faces (fact box under "What a Random Variable Is")
+  // and the unbounded count (pitfall under "Types of Random Variables");
+  // no heading asks either. The less-than, density and two-dice pitfalls
+  // are left to pmf, pdf and models/dice-roll, which already ask them.
   const faqQuestions = {
     obj1: {
       question: "Why is a random variable called a variable if it's a function?",
@@ -780,6 +787,16 @@ export async function getStaticProps(){
       question: "What are the parameters in a distribution declaration?",
       answer: "Whatever the family specifies, in the order that family fixes — and the notation does not say what they mean. Bin(n, p) takes trials then success probability; Exp(λ) takes a rate; N(μ, σ²) takes a centre then a spread. The conventions vary by family and by author, so the [distributions pages](!/probability/distributions) state each one explicitly.",
       sectionId: "notation"
+    },
+    obj5: {
+      question: "Can two random variables have the same distribution but never be equal?",
+      answer: "Yes. On a die, let $X$ be the face on top and $Y$ the face underneath. Both take the values $1$ to $6$ with probability $\\frac{1}{6}$ each, so they have the same distribution. But opposite faces add up to $7$, so $Y = 7 - X$, and $X = Y$ would need $X = 3.5$, which never happens. A distribution records how likely each value is, not which outcome produces it.",
+      sectionId: "definition"
+    },
+    obj6: {
+      question: "Is a random variable with infinitely many values continuous?",
+      answer: "Not necessarily; what matters is whether the values are isolated or fill an interval. The number of tosses of a fair coin until the first head can be $1, 2, 3, \\ldots$ with no upper limit, yet its values can be listed one by one, so it is discrete, with $P(X = k) = \\left(\\frac{1}{2}\\right)^k$. A waiting time in seconds is continuous because it can take every value between $2$ and $3$.",
+      sectionId: "types"
     }
   }
 
@@ -1477,6 +1494,11 @@ possible.`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probRandomVarsNotationSheet}
+            current={'/probability/random-variables'}
           />,
         ]
     },

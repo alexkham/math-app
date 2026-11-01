@@ -689,6 +689,7 @@ import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fr
 import { tableHeaders } from '@/app/styles/theme'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -883,6 +884,24 @@ const keyWords = [
 </table>
 `
 
+
+    // Concept introduction (section 1, "What Is a Mixed Number") — template A,
+    // definition last. Running instance: 2 3/4 cups of flour, which is 11/4.
+    // Old obj1 text is kept in sectionsContent.obj1, unused; its fact aside
+    // and three paragraphs are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciCountTable = ciTableOpen(['amount', 'counted in pieces', 'counted as full units + what is left', 'written']) +
+      ciRow(['flour', '11 quarter cups: 11/4', '2 full cups + 3/4 cup', '2 3/4'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['a length', '7 half inches: 7/2', '3 inches + 1/2 inch', '3 1/2'], { shade: true }) +
+      ciRow(['a time', '3 half hours: 3/2', '1 hour + 1/2 hour', '1 1/2']) +
+      ciRow(['sugar', '9 quarter cups: 9/4', '2 full cups + 1/4 cup', '2 1/4'], { shade: true, last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1226,10 +1245,16 @@ How to check: estimate. $2\\frac{1}{2} \\times 3\\frac{1}{3}$ is more than $2\\f
 // (/arithmetic/fractions/multiplying already answers why mixed numbers must
 // be converted before multiplying). Invented three from the notation section
 // and the improper-fractions section, none of which any heading surfaces.
+// FAQ pass 2026-10-31: kept the three questions; in obj1 "barely half" became
+// "barely more than half" (1 1/2 is 6/11 of 2 3/4, as the notation card
+// says). Added an improper fractional part such as 3 5/4 (notation card) and
+// squaring a number ending in 1/2 (fact box under "Operations with Mixed
+// Numbers"). Borrowing and comparing stay with the adding-subtracting and
+// comparing pages.
 const faqQuestions = {
   obj1: {
     question: "Does 2¾ mean 2 times ¾?",
-    answer: "No. A mixed number is the one place in mathematics where writing two things side by side means addition: 2¾ equals 2 + ¾, or 2.75. Everywhere else adjacency multiplies — 2x, 2π — so importing that habit here yields 1½, barely half the true value. The spoken form keeps the addition audible: two and three quarters.",
+    answer: "No. A mixed number is the one place in mathematics where writing two things side by side means addition: 2¾ equals 2 + ¾, or 2.75. Everywhere else adjacency multiplies — 2x, 2π — so importing that habit here yields 1½, barely more than half the true value. The spoken form keeps the addition audible: two and three quarters.",
     sectionId: "notation"
   },
   obj2: {
@@ -1241,6 +1266,16 @@ const faqQuestions = {
     question: "Why is it called an improper fraction?",
     answer: "The name is a historical label, not a verdict. It flags only that the numerator is at least as large as the denominator, so the value reaches or passes 1. Nothing about 7/4 is incorrect. Improper form is in fact preferred for computation, since [multiplying](!/arithmetic/fractions/multiplying) and [dividing](!/arithmetic/fractions/dividing) are simpler with no whole part to handle separately.",
     sectionId: "2"
+  },
+  obj4: {
+    question: "Can the fraction part of a mixed number be improper?",
+    answer: "Not in a final answer. Standard form needs a proper fractional part, so $3\\frac{5}{4}$ is rewritten as $4\\frac{1}{4}$ by absorbing the extra whole. It is a spelling rule, not an error in value: both name the same number, $\\frac{17}{4}$. During a calculation the rule relaxes, and borrowing in $5\\frac{1}{4} - 2\\frac{3}{4}$ passes through $4\\frac{5}{4}$ on purpose.",
+    sectionId: "notation"
+  },
+  obj5: {
+    question: "How do you square a number ending in ½ in your head?",
+    answer: "Multiply the whole part by the next whole number and attach $\\frac{1}{4}$: $7\\frac{1}{2} \\times 7\\frac{1}{2} = 7 \\times 8 + \\frac{1}{4} = 56\\frac{1}{4}$. It works for every whole $n$, because $(n + \\frac{1}{2})^2 = n^2 + n + \\frac{1}{4} = n(n + 1) + \\frac{1}{4}$: the two cross terms, each $\\frac{n}{2}$, add up to one more $n$. In the same way, $3\\frac{1}{2}$ squared is $12\\frac{1}{4}$.",
+    sectionId: "6"
   }
 }
 
@@ -1325,6 +1360,13 @@ const schemas = {
     pieces: [{ fn: () => 0, from: 0, to: 3, ends: [null, null], color: 'g' }].concat(Array.from({ length: 16 }, (_, i) => ({ fn: () => 0, from: i / 5, to: i / 5, ends: [i === 12 ? 'closed' : 'open', i === 12 ? 'closed' : 'open'], color: i === 12 ? 'r' : 'g' }))),
     notes: [{ x: 2.4, y: 0.2, text: '2 2/5 = 12/5', pos: 'n', color: 'r' }, { x: 0.05, y: 1.15, text: 'each whole cut into fifths', pos: 'e' }, { x: 0.05, y: -0.6, text: '2 wholes and 2 fifths = 12 fifths', pos: 'e', color: 'r' }],
     caption: 'One point, two names' };
+  const fbCiElevenQuarters = { kind: 'bars', svgTitle: '11/4 shaded in quarters: two full bars and 3 quarters of a third, 2 3/4', rows: [{ n: 4, k: 11, label: '11/4' }],
+    notes: [{ text: 'two full cups' }, { text: 'and 3 quarters of another: 2 3/4', color: 'f' }], caption: 'Full units first, then the part left over' };
+  const conceptIntroFigures = {
+    bars: renderFractionBar(fbCiElevenQuarters),
+    countTable: ciCountTable,
+  };
+
   const demoUnits = {
     seventeenFifths: demoUnitFrame({
       svg: renderFractionBar(fbSeventeenFifths),
@@ -1381,6 +1423,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Mixed Numbers & Improper Fractions: Conversions | Learn Math Class",
       description: "Learn mixed numbers and improper fractions: definitions, conversions, comparisons, and operations. Step-by-step methods with examples for adding, multiplying, and dividing.",
@@ -1396,9 +1439,69 @@ return {
 
 
 
-export default function MixedNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, borrowingBeforeAfter}) {
+export default function MixedNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, borrowingBeforeAfter, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A recipe asks for two and three quarters cups of flour: two full cups, then three quarters of one more.`,
+        content: [
+          `Nobody measures that as eleven quarter cups, although that is exactly what it is. People count the full cups first and then say what is left over.`,
+        ],
+        visual: ciSvg('bars'),
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The same amount can be counted two ways: all in pieces, or as full units plus a leftover piece.`,
+        content: [
+          ciTable('countTable'),
+          `Mixed numbers arise naturally in measurement and everyday contexts. A length of $3\\frac{1}{2}$ inches, a recipe calling for $2\\frac{1}{4}$ cups, or a time of $1\\frac{1}{2}$ hours all use mixed number notation because it communicates quantity more intuitively than the equivalent improper fractions $\\frac{7}{2}$, $\\frac{9}{4}$, and $\\frac{3}{2}$.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The leftover piece is always less than one unit — otherwise it would make another full unit.`,
+        content: [
+          `The fractional part of a mixed number must be a proper fraction. If someone writes $3\\frac{5}{4}$, this is not standard form because $\\frac{5}{4}$ exceeds one. The correct mixed number is $4\\frac{1}{4}$, obtained by absorbing the extra whole unit from the improper fractional part.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [mixed number](!/arithmetic/definitions#mixed_number) is a whole number written next to a proper fraction, and it means their sum: $a\\frac{b}{c} = a + \\frac{b}{c}$.`,
+        formula: [
+          `A mixed number consists of two parts written together: a whole number and a proper fraction. The whole number counts complete units, while the fraction accounts for the remaining partial unit. In $5\\frac{2}{3}$, the whole part is 5 and the fractional part is $\\frac{2}{3}$.`,
+        ],
+        footer: `So the flour is $2\\frac{3}{4} = 2 + \\frac{3}{4} = \\frac{11}{4}$ cups.`,
+      },
+      {
+        id: 'kind',
+        lead: `A mixed number is one number in two parts — another way to write an improper fraction.`,
+        content: [
+          `$2\\frac{3}{4}$ and $\\frac{11}{4}$ are the same point on the number line; only the spelling differs. Every improper fraction has exactly one mixed-number spelling, and every mixed number has one improper-fraction spelling.`,
+          `@academic[fact,aside:true,width:35%:Wall Street priced in mixed numbers
+Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25\\frac{3}{8}$, in eighths and from 1997 in sixteenths. When the New York Stock Exchange finished its switch to decimals on 29 January 2001, its smallest price step fell from $\\frac{1}{16}$ of a dollar, 6.25 cents, to 1 cent.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Written side by side, the two parts are added, not multiplied: 2 3/4 is 2 + 3/4, not 2 × 3/4.`,
+        content: `Everywhere else in algebra, $2x$ means $2 \\times x$, so the mixed-number spelling is easy to misread. For calculating, mixed numbers are usually turned into improper fractions first, as shown in [converting mixed numbers to improper fractions](!/arithmetic/fractions/mixed-numbers#4).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, improper fractions, converting in both directions, comparing, operations with mixed numbers, and mixed numbers on the number line.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1414,7 +1517,7 @@ export default function MixedNumbersPage({seoData, sectionsContent, introContent
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

@@ -14,6 +14,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -448,6 +450,25 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 10 callouts (obj2, obj3, obj3, obj3, obj5, obj6, obj7, obj8, obj9, obj9)
+// Concept introduction (section 1, "Why Memorize Special Limits?") —
+// template C, failure first. Running instance: sin x / x near 0, where
+// substitution gives 0/0 but the values close in on 1. Old obj1 text is kept
+// in sectionsContent.obj1, unused; its three passages and list are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSineTable = ciTableOpen(['x (radians)', 'sin x / x']) +
+  ciRow(['0', '0/0 — no value'], { color: '#a4243b', cols: [1] }) +
+  ciRow(['0.5', '0.95885'], { shade: true }) +
+  ciRow(['0.1', '0.99833']) +
+  ciRow(['0.01', '0.99998'], { shade: true, last: true, color: '#2563EB', cols: [1] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/limits/special ─────────────────────────────────────────────
 
@@ -885,6 +906,10 @@ Knowing these limits transforms difficult calculations into straightforward appl
 // using special limits, and x·ln(x). Kept four formula-shaped queries: this
 // page titles its sections descriptively ("The Fundamental Trigonometric
 // Limit"), so the formulas people actually search for match no heading.
+// FAQ pass 2026-10-31: kept all four. Added the value in degrees (figure note
+// and first pitfall), the small-angle replacement with the pendulum fact box
+// (both in "The Fundamental Trigonometric Limit") and the rule of 72 (fact box
+// under "Related Exponential Limits"); no heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "What is the limit of sin(x)/x as x approaches 0?",
@@ -904,6 +929,21 @@ const faqQuestions = {
   obj4: {
     question: "What is the limit of (a^x − 1)/x as x approaches 0?",
     answer: "For any base a > 0, the limit equals ln a. This generalizes the natural exponential limit: setting a = e gives ln e = 1, recovering the familiar result. The appearance of ln a here is why the derivative of a^x is a^x·ln a rather than simply a^x, and why base e is the convenient choice.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "What is the limit of sin(x)/x if x is in degrees?",
+    answer: "It is $\\frac{\\pi}{180} \\approx 0.01745$, not $1$. An angle of $x$ degrees is $\\frac{\\pi x}{180}$ radians, so the quotient is $\\frac{\\pi}{180} \\cdot \\frac{\\sin(\\pi x / 180)}{\\pi x / 180}$, and the second factor tends to $1$. In degree mode a calculator gives $\\frac{\\sin 1}{1} \\approx 0.017452$. The value $1$ holds only in radians, which is why calculus measures angles that way.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Why can sin x be replaced by x for small angles?",
+    answer: "Because $\\frac{\\sin x}{x} \\to 1$: for a small angle in radians the two are nearly the same number. $\\sin 0.1 \\approx 0.09983$, less than 0.2% below $0.1$, and the relative gap shrinks roughly like $\\frac{x^2}{6}$. The pendulum period $2\\pi\\sqrt{L/g}$ rests on this replacement; the exact period is only 0.19% longer for a swing of $10^\\circ$ and about 1.7% longer for $30^\\circ$.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "Where does the rule of 72 come from?",
+    answer: "From the limit $\\frac{\\ln(1 + x)}{x} \\to 1$. Money growing at $r$ percent a year doubles after $\\frac{\\ln 2}{\\ln(1 + r/100)}$ years, and since $\\ln(1 + x) \\approx x$ for small $x$, that is close to $\\frac{69.3}{r}$. The number 72 makes up for $\\ln(1 + x)$ lying a little below $x$. At 8% the exact doubling time is 9.01 years, against the rule's 9.",
     sectionId: "6"
   }
 }
@@ -999,6 +1039,10 @@ const schemas = {
     pieces: [{ fn: () => Math.E, from: 99, to: 99, ends: [null, null], color: 'r', ghost: [[0, 13]], label: { text: 'e ≈ 2.718', x: 12.8, y: Math.E, pos: 'nw' } }, ...slDots],
     notes: [{ x: 1.2, y: 2.0, text: 'n = 1: 2', pos: 'e', color: 'f' }, { x: 2.2, y: 2.22, text: 'n = 2: 2.25', pos: 'e', color: 'f' }, { x: 10.2, y: 2.55, text: 'n = 12: 2.613', pos: 'e', color: 'f' }],
     caption: '(1 + 1/n)ⁿ climbs toward e but never reaches it' };
+  const conceptIntroFigures = {
+    sineTable: ciSineTable,
+  };
+
   const demoUnits = {
     sincSqueeze: demoUnitFrame({
       svg: renderFunctionPlotV4(fpSincSqueeze),
@@ -1050,9 +1094,31 @@ const schemas = {
     ],
   };
 
+  // BeforeAfter (obj4): (1 − cos x)/x turned into a product of two known limits by the conjugate
+  const oneMinusCosSteps = {
+    header: {
+      kicker: 'Special limits',
+      title: 'Deriving (1 − cos x)/x → 0',
+      lede: 'The conjugate turns a quotient that no rule handles directly into a product of two factors whose limits are already known.',
+    },
+    steps: [
+      { id: 'quotient', label: 'No rule applies', stamp: 'Before', expr: '$\\dfrac{1 - \\cos x}{x}$',
+        move: { label: 'Multiply by the conjugate', note: 'top and bottom by 1 + cos x, then 1 − cos²x = sin²x' } },
+      { id: 'fraction', label: 'One fraction', expr: '$\\dfrac{\\sin^2 x}{x(1 + \\cos x)}$',
+        move: { label: 'Rewrite as a product', note: 'split sin²x into sin x · sin x' } },
+      { id: 'product', label: 'Product of known limits', expr: '$\\dfrac{\\sin x}{x} \\cdot \\dfrac{\\sin x}{1 + \\cos x}$',
+        move: { label: 'Let x → 0', note: 'the first factor tends to 1, the second to 0/2 = 0' } },
+      { id: 'limit', label: 'Limit', stamp: 'After', expr: '$\\lim\\limits_{x \\to 0} \\dfrac{1 - \\cos x}{x} = 1 \\cdot 0 = 0$',
+        detailsLabel: 'Why not 1?',
+        detailsTitle: '',
+        details: 'Reading $\\frac{1 - \\cos x}{x}$ as a variant of $\\frac{\\sin x}{x}$ gives the limit $1$. At $x = 0.1$ the quotient is only about $0.05$.' },
+    ],
+  };
+
 return {
   props: {
     specialLimitsOutline,
+    oneMinusCosSteps,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1061,6 +1127,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Special Limits: sin(x)/x, e^x, and More | Learn Math Class",
       description: "Master special limits: sin(x)/x, (e^x-1)/x, definition of e, logarithmic limits, and growth rate comparisons. Essential limits to memorize for calculus.",
@@ -1073,9 +1140,70 @@ return {
 
 }
 
-export default function SpecialPage({specialLimitsOutline, seoData, sectionsContent, introContent, obj3Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function SpecialPage({specialLimitsOutline, oneMinusCosSteps, seoData, sectionsContent, introContent, obj3Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Most limits are found by substituting the value: the limit of x² + 1 as x approaches 2 is 5.`,
+        content: [
+          `Substitution works whenever the function is continuous at the point. Try it on $\\frac{\\sin x}{x}$ at $x = 0$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Substituting x = 0 gives 0/0 — yet the values close in on 1.`,
+        content: [
+          ciTable('sineTable'),
+          `The table suggests the answer, but no algebraic rearrangement of $\\frac{\\sin x}{x}$ removes the $0/0$.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Substitution and algebra give out, so the value has to come from somewhere else.`,
+        content: [
+          `Special limits resist direct computation. Substitution yields indeterminate forms, and algebraic manipulation alone cannot resolve them without circular reasoning or advanced tools.`,
+          `Their values come from geometric arguments, series expansions, or the definitions of the functions involved. Once established, these limits become permanent tools in the calculus toolkit.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **special limit** is a limit that substitution turns into an indeterminate form, whose value is proved once — by geometry, a series or a definition — and from then on used as a known result.`,
+        footer: `So $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$ is a special limit; its proof with the unit circle is in [the fundamental trigonometric limit](!/calculus/limits/special#2).`,
+      },
+      {
+        id: 'kind',
+        lead: `Special limits are proved once and then used as tools.`,
+        content: [
+          `Memorizing them provides immediate payoff:`,
+          `- Faster problem-solving when these forms appear
+- Building blocks for evaluating more complex limits
+- Foundation for understanding derivatives of transcendental functions
+- Recognition of patterns that guide algebraic manipulation`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The sine limit equals 1 only when x is measured in radians.`,
+        content: [
+          `With $x$ in degrees, $\\frac{\\sin x}{x}$ tends to $\\frac{\\pi}{180} \\approx 0.01745$ instead. Radian measure is what makes the value come out as $1$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the trigonometric limits, the exponential limits and the definition of $e$, limits with logarithms, growth rates, how special limits are used, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1083,7 +1211,7 @@ export default function SpecialPage({specialLimitsOutline, seoData, sectionsCont
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1113,6 +1241,20 @@ export default function SpecialPage({specialLimitsOutline, seoData, sectionsCont
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-diagram'}
+            id="one-minus-cos-steps"
+            title="Deriving lim (1 − cos x)/x = 0"
+            source="/calculus/limits/special"
+            before={"The section's derivation, one move at a time. Watch the quotient become a product of two factors with known limits."}
+            after={"The second factor decides the value: its denominator tends to $2$, not to $0$, so it can be found by substitution."}
+          >
+            <BeforeAfter
+              data={oneMinusCosSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

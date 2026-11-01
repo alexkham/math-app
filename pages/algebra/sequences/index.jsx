@@ -11,6 +11,12 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 
 
 export async function getStaticProps(){
@@ -74,6 +80,27 @@ export async function getStaticProps(){
 //                     __html:   sectionContent.distributions.svg,
 //                   }} />
 
+// Concept introduction (section 1, "Definition and Notation") — template H,
+// open question. Running instance: 1, 2, 4, 8, 16, continued as doubling
+// (32) or as regions of a circle cut by chords (31), the section's fact box.
+// Old obj1 text is kept in sectionsContent.obj1, unused; its fact aside and
+// four passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTwoRulesTable = ciTableOpen(['position n', 'rule 1: double each time', 'rule 2: regions of a circle cut by chords']) +
+  ciRow(['1', '1', '1']) +
+  ciRow(['2', '2', '2'], { shade: true }) +
+  ciRow(['3', '4', '4']) +
+  ciRow(['4', '8', '8'], { shade: true }) +
+  ciRow(['5', '16', '16']) +
+  ciRow(['6', '32', '31'], { shade: true, last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
+
  const sectionsContent = {
   obj1: {
     title: `Definition and Notation`,
@@ -91,6 +118,41 @@ Two notations are standard. The brace form $\\{a_n\\}_{n=1}^{\\infty}$ names the
     after: ``,
     link: '',
   },
+    notation:{
+      title:`Sequence Notation`,
+      lead:`A subscript for position, braces for the whole, an ellipsis for the rest — three ways of writing one ordered list. All are catalogued among the [algebra symbols](!/math-symbols/algebra).`,
+      inherited:`The subscripted term $a_n$, the brace form and summation are set out in full at [arithmetic sequence notation](!/algebra/sequences/arithmetic#notation).`,
+      entries:[
+        {
+          id:'term',
+          tex:`$a_n$`,
+          read:`a sub n — the nth term`,
+          means:`The term in position $n$: the input is the index $n$, the output is the term $a_n$. The subscript tells where each term sits.`,
+          cases:`Formally a sequence is a function $f: \\mathbb{N} \\to \\mathbb{R}$, so two sequences are equal exactly when $a_n = b_n$ for every index $n$.`,
+        },
+        {
+          id:'listing',
+          tex:`$a_1, a_2, a_3, \\ldots$`,
+          read:`a one, a two, a three, and so on`,
+          means:`The listing form: individual terms displayed in order. The ellipsis signals that the pattern continues.`,
+          confusedWith:`A pattern that states itself. $1, 2, 4, \\ldots$ could be powers of $2$ or the start of something else entirely — the rule must be given explicitly.`,
+        },
+        {
+          id:'brace',
+          tex:`$\\{a_n\\}_{n=1}^{\\infty}$`,
+          read:`the sequence a sub n, n from one to infinity`,
+          means:`The brace form: names the entire sequence as a single object rather than listing its terms.`,
+          cases:`Used interchangeably with the listing form throughout this section.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/algebra`,
+      symbolsLabel:`All algebra symbols`,
+      parentHref:`/algebra`,
+      parentLabel:`Algebra`,
+      before:``,
+      after:``,
+    },
+
   obj2: {
     title: `Explicit and Recursive Definitions`,
     content: `There are two ways to specify a sequence. An **explicit** (closed-form) definition provides a formula that computes $a_n$ directly from $n$. Given the index, you get the term in one step — no need to know any other terms. The sequence $1, 4, 9, 16, 25, \\ldots$ has the explicit definition $a_n = n^2$.
@@ -433,6 +495,10 @@ const schemas = {
     ],
     notes: [{ x: 0.3, y: 30, text: 'add 3: 2, 5, 8, 11, 14, 17', pos: 'e', color: 'f' }, { x: 0.3, y: 26.5, text: 'double: 1, 2, 4, 8, 16, 32', pos: 'e', color: 'r' }, { x: 0.3, y: 23, text: 'doubling passes adding 3 at n = 5', pos: 'e' }],
     caption: 'Arithmetic grows by equal steps, geometric by equal factors' };
+  const conceptIntroFigures = {
+    twoRulesTable: ciTwoRulesTable,
+  };
+
   const demoUnits = {
     triangular: demoUnitFrame({
       svg: binomialCoefficientDiagrams['pascal-n5'],
@@ -481,10 +547,46 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Overview-only
+  // questions: the 1, 2, 4, 8, 16 table and fact box (Definition and
+  // Notation), the halve-or-triple fact box (Explicit and Recursive), the
+  // equal-steps-against-equal-factors figure (Geometric), how the harmonic,
+  // triangular and square numbers are built from arithmetic sequences, and
+  // the missing formula for the primes.
+  const faqQuestions = {
+    obj1: {
+      question: "What comes after $1, 2, 4, 8, 16$?",
+      answer: "It depends on the rule, not on the list. Doubling gives $32$, from $a_n = 2^{n-1}$. But the same five numbers count the regions a circle falls into when $n$ points on it are joined by every chord, with no three chords meeting at one point, and that count continues with $31$. Its rule is $\\binom{n}{4} + \\binom{n}{2} + 1$, which agrees with $2^{n-1}$ for $n = 1$ to $5$ and then falls behind. A few terms never fix a sequence; only its rule does.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Does every starting number reach $1$ under the halve-or-triple-plus-one rule?",
+      answer: "No one knows. The rule halves an even term and turns an odd term $t$ into $3t + 1$. Every starting value tried so far reaches $1$, but no proof exists that all of them do; the question is known as the Collatz conjecture. Even small starts can wander far: from $27$ the sequence climbs as high as $9232$ and needs $111$ steps to reach $1$. A recursive rule this short can still be beyond anyone's power to predict.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "Does a geometric sequence always overtake an arithmetic one?",
+      answer: "Yes, when the geometric sequence has $a_1 > 0$ and $r > 1$. An arithmetic sequence moves by equal steps $d$, while a geometric one moves by equal factors, so its steps grow with every term and eventually outrun any fixed $d$. Compare $2, 5, 8, 11, \\ldots$, adding $3$, with $1, 2, 4, 8, \\ldots$, doubling: at $n = 4$ the terms are $11$ and $8$, but at $n = 5$ they are $14$ and $16$, and from then on the gap only widens.",
+      sectionId: "4"
+    },
+    obj4: {
+      question: "Which other sequences are built from arithmetic sequences?",
+      answer: "At least three on this page. A harmonic sequence is the reciprocals of an arithmetic one: $1, \\frac{1}{2}, \\frac{1}{3}, \\ldots$ comes from $1, 2, 3, \\ldots$. The triangular numbers are running totals of $1, 2, 3, \\ldots$ (common difference $1$): $T_n = 1 + 2 + \\cdots + n$. The square numbers are running totals of the odd numbers $1, 3, 5, \\ldots$ (common difference $2$): $n^2 = 1 + 3 + \\cdots + (2n - 1)$.",
+      sectionId: "8"
+    },
+    obj5: {
+      question: "Is there a formula for the $n$th prime?",
+      answer: "No practical one is known. Unlike the other sequences on this page, the primes have no common difference, no common ratio and no recurrence, so each prime is found on its own, usually by checking that no integer from $2$ up to $\\sqrt{p}$ divides it. What is known is how they thin out: by the prime number theorem, roughly one integer in every $\\ln n$ near $n$ is prime, so about one in $14$ near a million.",
+      sectionId: "9"
+    }
+  }
+
    return {
   props:{
+    faqQuestions,
     arithmeticDiffCases,
     demoUnits,
+    conceptIntroFigures,
      sectionsContent,
      introContent,
      schemas,
@@ -501,7 +603,66 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function SequencesPage({arithmeticDiffCases, seoData, sectionsContent, introContent, schemas, demoUnits}) {
+export default function SequencesPage({faqQuestions, arithmeticDiffCases, seoData, sectionsContent, introContent, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `What comes after 1, 2, 4, 8, 16?`,
+        content: [
+          `Most people answer $32$: each number doubles the one before. But the same five numbers also count the regions a circle falls into when points on it are joined by chords — and that count continues with $31$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Two rules agree on the first five positions and part at the sixth.`,
+        content: [
+          ciTable('twoRulesTable'),
+          `The first five numbers cannot tell the two apart. What decides the sixth is the rule, not the list.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `A sequence is fixed by its rule: for every position, the rule says which number stands there.`,
+        content: [
+          `A sequence assigns a number to each positive integer. The input is the **index** $n$, the output is the **term** $a_n$. Writing $a_1, a_2, a_3, \\ldots$ lists the terms in order; the subscript tells you where each term sits.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **sequence** is a function that assigns a number $a_n$ to each positive integer $n$; $a_n$ is the term in position $n$.`,
+        formula: [
+          `Formally, a sequence is a function $f: \\mathbb{N} \\to \\mathbb{R}$ — it takes a natural number and returns a real number. The function viewpoint makes precise what "ordered list" means: two sequences are equal exactly when $a_n = b_n$ for every index $n$.`,
+          `Two notations are standard. The brace form $\\{a_n\\}_{n=1}^{\\infty}$ names the entire sequence as a single object. The listing form $a_1, a_2, a_3, \\ldots$ displays individual terms. Both are used interchangeably throughout this section.`,
+        ],
+        footer: `So doubling, $a_n = 2^{n-1}$, and the circle-region count are two different sequences, even though their first five terms are the same.`,
+      },
+      {
+        id: 'kind',
+        lead: `A sequence can stop after finitely many terms or go on forever — and "…" only works once the rule is known.`,
+        content: [
+          `A sequence can be **finite** (a fixed number of terms, such as $3, 7, 11, 15$) or **infinite** (continuing without end, such as $1, 4, 9, 16, \\ldots$). The ellipsis signals that the pattern continues, though what "the pattern" is must be stated explicitly — the sequence $1, 2, 4, \\ldots$ could be [powers](!/algebra/powers) of $2$, or the start of something else entirely.`,
+          `@academic[fact,aside:true,width:35%:$1, 2, 4, 8, 16$, then $31$
+Mark $n$ points on a circle and join every pair by a chord, with no three chords meeting at one point. For $n = 1$ to $5$ the circle falls into $1, 2, 4, 8, 16$ regions, but for $n = 6$ into $31$: the count is $\\binom{n}{4} + \\binom{n}{2} + 1$, not $2^{n-1}$.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A rule can be given as a formula for each term, or as a recipe that builds each term from earlier ones.`,
+        content: `Doubling can be written $a_n = 2^{n-1}$ or as "start at $1$, then double". The two styles are compared in [explicit and recursive definitions](!/algebra/sequences#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers explicit and recursive definitions, arithmetic, geometric and harmonic sequences, and the Fibonacci, triangular, square and prime numbers.`,
+      },
+    ],
+  }
     
   const genericSections=[
     // {
@@ -517,7 +678,31 @@ export default function SequencesPage({arithmeticDiffCases, seoData, sectionsCon
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation-notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={sequencesNotationSheet}
+            current={'/algebra/sequences'}
+          />,
         ]
     },
     {
@@ -602,6 +787,22 @@ export default function SequencesPage({arithmeticDiffCases, seoData, sectionsCon
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Sequences FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

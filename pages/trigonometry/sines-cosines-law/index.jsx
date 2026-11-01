@@ -917,6 +917,8 @@ import renderTriangleLabelV2 from '@/app/utils/illustrations/trigonometry/triang
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 
 
 export async function getStaticProps(){
@@ -1067,31 +1069,55 @@ export async function getStaticProps(){
 </table>
 `
 
+// FAQ pass 2026-10-31: cut three heading questions (choosing between the two
+// laws, the ambiguous case, the area without the height: they restate the
+// h2s Choosing Between the Two Laws, The Ambiguous Case (SSA) and Area of a
+// Triangle Using Trigonometry). Kept the letter pairing and the Pythagorean
+// link. Added the common ratio 2R (one sentence under The Law of Sines),
+// arcsine missing an obtuse angle (pitfall box), why AAA solves nothing (one bullet
+// under Choosing Between the Two Laws), Everest (fact box), the angle that
+// gives the largest area (one sentence under Area) and Heron's formula
+// exposing impossible lengths (validity check under Heron's Formula).
 const faqQuestions = {
   obj1: {
-    question: "How do you choose between the Law of Sines and the Law of Cosines?",
-    answer: "Count what you know. Two angles and any side, or two sides and an angle opposite one of them, call for the Law of Sines. Three sides, or two sides with the angle between them, call for the Law of Cosines. The deciding factor is whether a side sits opposite a known angle.",
-    sectionId: "7"
-  },
-  obj2: {
-    question: "What is the ambiguous case in the Law of Sines?",
-    answer: "It arises with two sides and an angle not between them, where the given measurements can describe two different triangles, one, or none at all. Because sine takes the same value at an angle and its supplement, solving gives two candidate angles, and both may produce a valid triangle. Each must be checked against the angle sum.",
-    sectionId: "4"
-  },
-  obj3: {
     question: "What does the lowercase and uppercase letter pairing mean in triangle notation?",
     answer: "Lowercase a is the side opposite uppercase A, meaning the one side that does not touch that vertex at all. It runs between the other two vertices. Reading the pairing as adjacency inverts the entire convention and makes both laws produce wrong answers, so the opposite relationship is worth checking before substituting.",
     sectionId: "1"
   },
-  obj4: {
+  obj2: {
     question: "How is the Law of Cosines related to the Pythagorean theorem?",
     answer: "It is the same statement with a correction term. When the angle between the two known sides is 90 degrees its cosine is zero, the correction vanishes, and what remains is exactly the Pythagorean theorem. For any other angle the term measures how far the triangle departs from being right-angled.",
     sectionId: "5"
   },
+  obj3: {
+    question: "What does the common ratio in the Law of Sines equal?",
+    answer: "The diameter of the triangle's circumscribed circle: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R$, where $R$ is the radius of the circle through all three vertices. That is why the ratio comes out the same for all three side-angle pairs, and it gives the circumradius directly from any one side and its opposite angle.",
+    sectionId: "2"
+  },
+  obj4: {
+    question: "Can the Law of Sines find an obtuse angle?",
+    answer: "Not on its own, because arcsine returns angles only up to $90°$ and reports an obtuse angle as its acute supplement. With $a = 10$, $b = 4$, $C = 40°$, the third side is $c \\approx 7.40$; the Law of Sines gives $\\sin A \\approx 0.869$ and arcsine says $A \\approx 60.3°$, but the Law of Cosines gives $\\cos A \\approx -0.495$, so $A \\approx 119.7°$. Finding the largest angle first with the Law of Cosines avoids the trap.",
+    sectionId: "6"
+  },
   obj5: {
-    question: "How do you find the area of a triangle without the height?",
-    answer: "Use half the product of two sides times the sine of the angle between them. The sine supplies the height implicitly, since the height equals one side times that sine. If all three sides are known instead but no angle, Heron's formula gives the area from the sides alone.",
+    question: "Why can't a triangle be solved from its three angles?",
+    answer: "Because three angles fix the shape but not the size. Every triangle with angles $40°$, $60°$ and $80°$ is a scaled copy of every other, so no side length follows from them. The third angle also adds nothing, since $A + B + C = 180°$ already decides it from the other two, so AAA is really only two pieces of information.",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "How was the height of Mount Everest first measured?",
+    answer: "By solving triangles from far away. In 1849–50 the Great Trigonometrical Survey of India sighted Peak XV from six stations on the plains of Bihar, more than 100 miles off, and its triangles gave 29,002 feet, announced in 1856. The modern height, 8,848.86 m or about 29,032 feet, is only 30 feet more.",
+    sectionId: "10"
+  },
+  obj7: {
+    question: "Which angle between two fixed sides gives the largest triangle area?",
+    answer: "A right angle. With sides $a$ and $b$ fixed, the area $\\frac{1}{2}ab\\sin C$ depends only on $\\sin C$, which reaches its maximum of $1$ at $C = 90°$. The largest area is then $\\frac{1}{2}ab$, the right triangle with $a$ and $b$ as legs. Opening the angle wider or closing it lowers the height, and the area with it.",
     sectionId: "8"
+  },
+  obj8: {
+    question: "How does Heron's formula show that three lengths cannot form a triangle?",
+    answer: "One of the factors under the root stops being positive. With $s = \\frac{a + b + c}{2}$, the factor $s - c$ equals $\\frac{a + b - c}{2}$, so it is positive exactly when $a + b > c$, the triangle inequality. For lengths 2, 3 and 6, $s = 5.5$ and $s - 6 = -0.5$, so no triangle exists. A factor of exactly zero means the three points lie on one line.",
+    sectionId: "9"
   }
 }
 
@@ -1786,6 +1812,11 @@ export default function SinesCosinesLawPage({heronAnatomy, lawChoiceCases,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={trigonometryNotationSheet}
+            current={'/trigonometry/sines-cosines-law'}
           />,
         ]
     },

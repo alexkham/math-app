@@ -818,6 +818,9 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1146,6 +1149,24 @@ const combinationProperties = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "The Two Linearity Conditions") —
+// template G, exclusion. Running instance: four maps of the plane tested on
+// doubling; two pass, two fail. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its five passages and the fact aside are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciMapsTable = ciTableOpen(['map', 'T(2v) for v = (1, 1)', '2 · T(v)', 'equal?']) +
+  ciRow(['T₁(x, y) = (2x, x + y)', '(4, 4)', '(4, 4)', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['T₂(x, y) = (y, x)', '(2, 2)', '(2, 2)', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['T₃(x, y) = (x + 1, y)', '(3, 2)', '(4, 2)', 'no'], { color: '#a4243b', cols: [3] }) +
+  ciRow(['T₄(x, y) = (x², y)', '(4, 2)', '(2, 2)', 'no'], { shade: true, last: true, color: '#a4243b', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Two Linearity Conditions`,
@@ -1455,6 +1476,11 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added mx + b
+// (pitfall "Calling every straight line linear"), complex conjugation (fact
+// box under "The Two Linearity Conditions"), independence under a linear map
+// (one sentence under "Consequences of Linearity") and the one-to-one shift
+// that is not onto (Hilbert's hotel fact box under "Invertibility").
 const faqQuestions = {
   obj1: {
     question: "Does $T(\\mathbf{0}) = \\mathbf{0}$ prove that a map is linear?",
@@ -1470,6 +1496,26 @@ const faqQuestions = {
     question: "Is $\\mathcal{L}(V, W)$ a set of matrices?",
     answer: "No, its elements are maps, and a matrix appears only after a basis has been chosen at each end. The space is itself a vector space, with dimension $\\dim(V) \\cdot \\dim(W)$, which is exactly the number of entries a representing matrix would have. Its zero element is the map sending everything to $\\mathbf{0}_W$.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is $f(x) = mx + b$ a linear transformation?",
+    answer: "Only when $b = 0$. In school algebra any straight line counts as a linear function, but a linear map must also pass through the origin. For $T(x) = 2x + 3$, additivity fails: $T(1) + T(1) = 10$, while $T(2) = 7$. The constant term is a translation, and translations are not linear. The quickest check is $T(0)$, which here is $3$ rather than $0$.",
+    sectionId: "9"
+  },
+  obj5: {
+    question: "Is complex conjugation a linear map?",
+    answer: "It depends on the scalars. Over $\\mathbb{R}$, yes: conjugation is additive and keeps every real multiple, and as a map of the plane it is the reflection $(a, b) \\mapsto (a, -b)$. Over $\\mathbb{C}$, no: homogeneity must then hold for complex scalars too, and $T(i \\cdot 1) = -i$ while $i\\,T(1) = i$. Which numbers count as scalars is part of what linear means.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Does a linear map keep independent vectors independent?",
+    answer: "Not necessarily. A linear map can destroy independence by collapsing vectors to $\\mathbf{0}$, but it can never create it. A dependence relation $\\sum c_i \\mathbf{v}_i = \\mathbf{0}$ with some $c_i \\neq 0$ maps to $\\sum c_i T(\\mathbf{v}_i) = \\mathbf{0}$ with the same coefficients, so a dependent set always stays dependent. In the other direction, the projection $(x, y) \\mapsto (x, 0)$ sends the independent pair $\\mathbf{e}_1, \\mathbf{e}_2$ to $\\mathbf{e}_1, \\mathbf{0}$.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Can a linear map from a space to itself be one-to-one but not onto?",
+    answer: "Yes, but only in infinite dimensions. The shift $(x_1, x_2, \\ldots) \\mapsto (0, x_1, x_2, \\ldots)$ on infinite sequences has kernel $\\{\\mathbf{0}\\}$, yet $(1, 0, 0, \\ldots)$ is never reached, like the empty first room of Hilbert's hotel. In finite dimensions it cannot happen: a trivial kernel gives an image of dimension $\\dim(V)$ by rank–nullity, and that image must be all of $V$.",
+    sectionId: "7"
   }
 }
 
@@ -1554,6 +1600,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    mapsTable: ciMapsTable,
+  };
+
   const demoUnits = {
     composition: demoUnitFrame({
       svg: [matrixCompositionDiagrams.commute, matrixCompositionDiagrams.noncommute],
@@ -1567,6 +1617,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1585,9 +1636,73 @@ return {
 }
    }
 
-export default function TransformationPropertiesPage({seoData, sectionsContent, introContent, obj4Table, obj5Table, combinationProperties, faqQuestions, schemas, demoUnits}) {
+export default function TransformationPropertiesPage({seoData, sectionsContent, introContent, obj4Table, obj5Table, combinationProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Four rules move the points of the plane. Which of them deserve to be called linear?`,
+        content: [
+          `$T_1(x, y) = (2x, x + y)$, $T_2(x, y) = (y, x)$, $T_3(x, y) = (x + 1, y)$ and $T_4(x, y) = (x^2, y)$. The natural test: does the map respect what vectors do — adding and scaling?`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Doubling the input doubles the output for T₁ and T₂ only.`,
+        content: [
+          ciTable('mapsTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Shifting and squaring break scaling, and they break addition as well.`,
+        content: [
+          `$T_3(0, 0) = (1, 0)$, but a map that respects addition must send $\\mathbf{0}$ to $\\mathbf{0}$. For $T_4$, $T(1, 0) + T(1, 0) = (2, 0)$ while $T(2, 0) = (4, 0)$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [linear transformation](!/linear-algebra/definitions#linear_transformation) is a function $T: V \\to W$ that preserves addition and scalar multiplication: $T(\\mathbf{u} + \\mathbf{v}) = T(\\mathbf{u}) + T(\\mathbf{v})$ and $T(c\\mathbf{v}) = cT(\\mathbf{v})$.`,
+        formula: [
+          `A function $T: V \\to W$ is linear if it satisfies two conditions for all $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c \\in \\mathbb{R}$:`,
+          `Additivity: $T(\\mathbf{u} + \\mathbf{v}) = T(\\mathbf{u}) + T(\\mathbf{v})$`,
+          `Homogeneity: $T(c\\mathbf{v}) = cT(\\mathbf{v})$`,
+        ],
+        footer: `So $T_1$ and $T_2$ are linear, while $T_3$ and $T_4$ are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `One example can disprove linearity; only a general argument proves it.`,
+        content: [
+          `Both conditions must hold for every choice of vectors and scalars — not just for specific examples. Verifying linearity on a few particular vectors does not suffice. Disproving linearity requires only a single counterexample: one pair of vectors where additivity fails, or one scalar where homogeneity fails.`,
+          `A table like the one above can only rule maps out: $T_1$ and $T_2$ passed one test, and passing every test needs the proof in [proving linearity](!/linear-algebra/transformations/properties#3).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Whether a map is linear can depend on which numbers count as scalars.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:Linear over $\\mathbb{R}$, not over $\\mathbb{C}$
+With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps every real multiple, yet $T(i \\cdot 1) = -i$ while $i\\,T(1) = i$. With only real scalars, the same map is the reflection $(a, b) \\mapsto (a, -b)$ of the plane, and it is linear.]@`,
+          `Which numbers count as scalars is part of the definition. On this page the scalars are real numbers, but vector spaces with complex scalars are just as common, and there the $c$ in the homogeneity condition can be $i$ or any other complex number. Additivity does not mention scalars at all, so it reads the same in both settings; homogeneity has to be checked for the larger set of scalars.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the one-step test, proving and disproving linearity, consequences of linearity, composition, invertibility, sums and scalar multiples of maps, common pitfalls and a summary.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1595,7 +1710,7 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1614,6 +1729,11 @@ export default function TransformationPropertiesPage({seoData, sectionsContent, 
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laTransformNotationSheet}
+            current={'/linear-algebra/transformations/properties'}
           />,
         ]
     },

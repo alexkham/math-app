@@ -15,6 +15,7 @@ import { renderDigitRule } from '../../../../app/utils/illustrations/arithmetic/
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 import divisibilityTreeDiagrams from '@/app/components/divisibility/divisibilityTreeDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -299,6 +300,25 @@ const drObj10 = renderDigitRule({
 })
 
 
+
+    // Concept introduction (section 1, "What Are Divisibility Rules?") —
+    // template H, open question. Running instance: is 7,836 divisible by 3?
+    // The digit-sum test against long division on four numbers. Old obj1 text
+    // is kept in sectionsContent.obj1, unused; its three passages are carried
+    // in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciDigitTable = ciTableOpen(['number', 'long division by 3', 'sum of digits', 'digit sum divisible by 3?']) +
+      ciRow(['7,836', '2,612 remainder 0', '7 + 8 + 3 + 6 = 24', 'yes'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['1,234', '411 remainder 1', '1 + 2 + 3 + 4 = 10', 'no'], { shade: true }) +
+      ciRow(['5,001', '1,667 remainder 0', '5 + 0 + 0 + 1 = 6', 'yes'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['98', '32 remainder 2', '9 + 8 = 17', 'no'], { shade: true, last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -771,6 +791,10 @@ How to check: compute the GCD of the two factors before using them. $\\gcd(2, 6)
 // Combining Rules) and the two why-it-works mechanisms, which sit under the
 // generic "Why These Rules Work" heading. No rule for 7 exists on the page,
 // so no question was invented for it (case C).
+// FAQ pass 2026-10-31: kept the three. The page has since gained a fact box
+// on 7 under Why These Rules Work, so the rule-for-7 question now has
+// material. Added it and the swapped-digits error (fact box under
+// Divisibility by 9).
 const faqQuestions = {
   obj1: {
     question: "How do you test divisibility by 12?",
@@ -786,6 +810,16 @@ const faqQuestions = {
     question: "Why does the alternating sum rule work for 11?",
     answer: "Because 10 ≡ -1 (mod 11): powers of 10 alternate, 10⁰ = 1, 10¹ ≡ -1, 10² ≡ 1, 10³ ≡ -1. Each digit's contribution therefore alternates in sign with its position, producing the alternating-sum pattern. For 9,273: from the right, 3 − 7 + 2 − 9 = −11, and 11 divides −11, so 11 | 9273.",
     sectionId: "13"
+  },
+  obj4: {
+    question: "Is there a divisibility rule for 7?",
+    answer: "Yes, though not a digit pattern like the rules for $3$ or $11$. Write the number as $10a + b$, with $b$ its last digit, and compute $a - 2b$: since $10(a - 2b) = (10a + b) - 21b$ and $7$ shares no factor with $10$, $7$ divides the number exactly when it divides $a - 2b$. Repeat until the number is small: for $2{,}401$, $240 - 2 = 238$, then $23 - 16 = 7$, so $7 \\mid 2401$.",
+    sectionId: "13"
+  },
+  obj5: {
+    question: "Why is the error from swapped digits divisible by 9?",
+    answer: "Because swapping two digits leaves the digit sum unchanged, and a number and its digit sum leave the same remainder on division by $9$. The correct and the swapped number therefore leave the same remainder, so their difference is a multiple of $9$: writing $8{,}172$ for $8{,}127$ makes an error of $45 = 9 \\cdot 5$. That is why bookkeepers whose totals are off by a multiple of $9$ look first for two transposed digits.",
+    sectionId: "8"
   }
 }
 
@@ -870,6 +904,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    digitTable: ciDigitTable,
+  };
+
   const demoUnits = {
     byTwo: demoUnitFrame({
       svg: divisibilityTableDiagrams.d2,
@@ -897,6 +935,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj11Table,
@@ -933,9 +972,65 @@ drObj5,
 drObj7,
 drObj8,
 drObj9,
-drObj10, demoUnits}) {
+drObj10, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `Is 7,836 divisible by 3 — and can that be told without doing the division?`,
+        content: [
+          `Long division answers the question, but it takes several steps and is easy to slip on. Perhaps the digits themselves carry a quicker sign.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Adding the digits and testing the small sum gives the same verdict as the division every time.`,
+        content: [
+          ciTable('digitTable'),
+          `In each row the digit sum and the division agree: $7{,}836$ and $5{,}001$ are divisible by $3$, while $1{,}234$ and $98$ are not — and the digit sum took one line instead of a full division.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The verdict can be read from the digits because of the way base-10 numbers are built.`,
+        content: [
+          `Every rule exploits the structure of base-$10$ representation. A number like $5{,}432$ is shorthand for $5 \\cdot 10^3 + 4 \\cdot 10^2 + 3 \\cdot 10 + 2$. The behavior of the [powers](!/algebra/powers) of $10$ under [modulo](!/arithmetic/modulo) determines which digit patterns reveal divisibility — and different divisors respond to different patterns.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **divisibility rule** is a shortcut that decides whether a number is divisible by a given divisor by looking at its digits, without carrying out the division.`,
+        formula: [
+          `A [divisibility](!/arithmetic/divisibility) rule is a shortcut that determines whether a number is divisible by a given divisor without carrying out the division. Instead of computing $7{,}836 \\div 3$ and checking for a remainder, the rule says: add the digits $7 + 8 + 3 + 6 = 24$, and check whether that sum is divisible by $3$. It is, so $3 \\mid 7836$.`,
+        ],
+        footer: `So "add the digits and test the sum" is the divisibility rule for $3$, and it shows that $3 \\mid 7836$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A rule is a fast path to the same yes-or-no answer the definition gives — not a new definition.`,
+        content: [
+          `The rules are shortcuts, not definitions. The definition of divisibility is $a \\mid b$ when $b = a \\cdot k$ for some integer — equivalently, when $b \\bmod a = 0$. The rules provide fast paths to that same conclusion.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Each divisor has its own rule, and a rule for one divisor says nothing about another.`,
+        content: `The digit-sum test works for $3$ and $9$, not for $7$: $16$ has digit sum $7$, yet $7$ does not divide $16$. The rules divisor by divisor start with [divisibility by 2](!/arithmetic/divisibility/rules#2), and the reasons behind them are collected in [why these rules work](!/arithmetic/divisibility/rules#13).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the rules for 2, 3, 4, 5, 6, 8, 9, 10 and 11, combining rules, worked examples, and why the rules work.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -951,7 +1046,7 @@ drObj10, demoUnits}) {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     // {

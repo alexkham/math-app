@@ -9,9 +9,11 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
-export default function ContradictionsTruthTablesPage({ keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
+export default function ContradictionsTruthTablesPage({ keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent, deniedDisjunctionBeforeAfter, negatedImplicationSteps }) {
 
     const contradictionOperators = {
         'P ∧ ¬P': { 
@@ -146,7 +148,22 @@ export default function ContradictionsTruthTablesPage({ keyWords, contradictionE
         id: '5',
         title: sectionsContent.obj5.title,
         link: sectionsContent.obj5.link,
-        content: [sectionsContent.obj5.content]
+        content: [
+          sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="denied-disjunction-before-after"
+            title="(P ∨ Q) ∧ ¬P ∧ ¬Q reduced to X ∧ ¬X"
+            source="/logic/truth-tables/contradictions"
+            before={"The section's formula in its two forms. Compare which one shows the contradiction at a glance."}
+            after={"Because De Morgan's law is an equivalence, the two formulas agree in every row of the truth table, so the verdict for X ∧ ¬X carries over: the original formula is a contradiction too."}
+          >
+            <BeforeAfter
+              data={deniedDisjunctionBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
+        ]
       },
       {
         id: '6',
@@ -188,7 +205,23 @@ export default function ContradictionsTruthTablesPage({ keyWords, contradictionE
         id: '12',
         title: sectionsContent.obj12.title,
         link: sectionsContent.obj12.link,
-        content: [sectionsContent.obj12.content]
+        content: [
+          sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-diagram'}
+            id="negated-implication-steps"
+            title="(¬(P → Q)) ∧ (P ∧ Q) reduced to ⊥"
+            source="/logic/truth-tables/contradictions"
+            before={"The section's reduction, one equivalence at a time. Watch Q meet ¬Q."}
+            after={"Every step is an equivalence, so the original formula is false in every row: it is unsatisfiable. The P that survives the regrouping makes no difference once it is conjoined with ⊥."}
+          >
+            <BeforeAfter
+              data={negatedImplicationSteps}
+              variant="progression"
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
+        ]
       },
       {
         id: 'pitfalls',
@@ -734,10 +767,67 @@ How to check: the negation must be T exactly where P → Q is F, which is only t
     }
   }
 
+  // BeforeAfter (obj5): the denied disjunction rewritten by De Morgan's law into the pattern X ∧ ¬X
+  const deniedDisjunctionBeforeAfter = {
+    header: {
+      kicker: 'Contradictions',
+      title: 'Reducing to X ∧ ¬X',
+      lede: 'Reach X ∧ ¬X through equivalences alone, and the contradiction is proved without writing a single row.',
+    },
+    before: {
+      form: 'Disjunction with both parts denied',
+      expr: '$(P \\lor Q) \\land \\neg P \\land \\neg Q$',
+      meta: 'At least one of P or Q, yet P false and Q false',
+    },
+    after: {
+      form: 'Pattern X ∧ ¬X',
+      expr: '$(P \\lor Q) \\land \\neg(P \\lor Q)$',
+      meta: 'With X = P ∨ Q: the basic contradiction pattern',
+    },
+    operation: {
+      name: "De Morgan's law",
+      desc: '¬P ∧ ¬Q ≡ ¬(P ∨ Q)',
+      detailsLabel: 'Flip the connective',
+      detailsTitle: '',
+      details: 'Keeping the connective gives ¬(P ∧ Q) instead, and (P ∨ Q) ∧ ¬(P ∧ Q) is true at P = T, Q = F, so it is not a contradiction. De Morgan\'s law turns ∧ into ∨.',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'The two separate denials ¬P and ¬Q merged into one negation of the whole disjunction.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The truth value in every row: each step is an equivalence.' },
+    ],
+  };
+
+  // BeforeAfter (obj12): the negated implication conflict reduced step by step to ⊥
+  const negatedImplicationSteps = {
+    header: {
+      kicker: 'Contradictions',
+      title: 'Reducing to ⊥',
+      lede: 'The first conjunct requires Q to be false, the second requires Q to be true. The reduction makes the conflict explicit.',
+    },
+    steps: [
+      { id: 'start', label: 'Negated implication', stamp: 'Before', expr: '$\\neg(P \\to Q) \\land (P \\land Q)$',
+        move: { label: 'Negate the implication', note: 'P → Q ≡ ¬P ∨ Q, so ¬(P → Q) ≡ P ∧ ¬Q' } },
+      { id: 'conjunctions', label: 'Two conjunctions', expr: '$(P \\land \\neg Q) \\land (P \\land Q)$',
+        move: { label: 'Regroup', note: 'P twice is just P; put ¬Q next to Q' } },
+      { id: 'conflict', label: 'Q against ¬Q', expr: '$P \\land (\\neg Q \\land Q)$',
+        move: { label: 'A statement and its negation', note: '¬Q ∧ Q is false outright: ⊥' } },
+      { id: 'bottom', label: 'Conjoined with ⊥', expr: '$P \\land \\bot$',
+        move: { label: 'Anything ∧ ⊥ collapses', note: 'P ∧ ⊥ = ⊥' } },
+      { id: 'false', label: 'False outright', stamp: 'After', expr: '$\\bot$',
+        detailsLabel: 'Not P → ¬Q',
+        detailsTitle: '',
+        details: 'Writing ¬(P → Q) as P → ¬Q fails at P = F, Q = T: there ¬(P → Q) is F but P → ¬Q is T. The negation of an implication is a conjunction, P ∧ ¬Q.' },
+    ],
+  };
+
   return {
     props: {
       keyWords,
       contradictionExplanations,
+      deniedDisjunctionBeforeAfter,
+      negatedImplicationSteps,
       menuItems,
       sectionsContent,
       faqQuestions,

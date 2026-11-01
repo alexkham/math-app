@@ -1321,31 +1321,49 @@ export async function getStaticProps(){
 </table>
 `
 
+// FAQ pass 2026-10-31: cut the even/odd question and the zeros question
+// (they restate the h2s Even and Odd Symmetry and Zeros) and "Where are the
+// trigonometric functions undefined?" (functions asks the same thing, with
+// its Domain and Range Summary h2). Kept period π and boundedness. Added
+// cos x = 2 for a complex x (fact box), sin n never 1 for a whole number
+// (fact box), cosecant's local maximum below its local minimum and 4π as a
+// period that is not the period (both in section text), and why tangent's
+// gaps cannot be filled (Continuity and Discontinuities text).
 const faqQuestions = {
   obj1: {
-    question: "Which trigonometric functions are even and which are odd?",
-    answer: "Cosine and secant are even, meaning a negative angle gives the same value as the positive one. The other four are odd, so a negative angle flips the sign. This follows from the unit circle: reflecting across the horizontal axis leaves the x-coordinate alone and negates the y-coordinate.",
-    sectionId: "2"
-  },
-  obj2: {
     question: "Why do tangent and cotangent have period π while the others have 2π?",
     answer: "Because both sine and cosine change sign together after half a rotation, and their ratio is unaffected by a sign change applied to both. Sine and cosine themselves need a full rotation to return to their starting values, so they and their reciprocals repeat every 2π instead.",
     sectionId: "1"
   },
-  obj3: {
-    question: "Where are the trigonometric functions undefined?",
-    answer: "Wherever a denominator vanishes. Tangent and secant both divide by cosine, so they fail at 90 degrees and every half rotation from there. Cotangent and cosecant divide by sine and fail at 0 degrees and every half rotation from there. Sine and cosine themselves are defined for every angle.",
-    sectionId: "5"
-  },
-  obj4: {
-    question: "What are the zeros of sine, cosine, and tangent?",
-    answer: "Sine is zero at every whole multiple of π, where the circle crosses the horizontal axis. Cosine is zero halfway between those, at odd multiples of π/2. Tangent shares sine's zeros exactly, since a fraction is zero when its numerator is. Cosine's zeros become tangent's asymptotes instead.",
-    sectionId: "4"
-  },
-  obj5: {
+  obj2: {
     question: "Why are sine and cosine bounded but tangent is not?",
     answer: "Sine and cosine are coordinates on a circle of radius 1, so neither can exceed that radius in either direction. Tangent is their quotient, and as cosine approaches zero the quotient grows without limit. That is why tangent covers every real number while the other two stay trapped between −1 and 1.",
     sectionId: "3"
+  },
+  obj3: {
+    question: "Can cos x equal 2?",
+    answer: "Not for any real $x$, but for a complex one it can. Since $\\cos(iy) = \\cosh y = \\frac{e^y + e^{-y}}{2}$, the value $x = i\\ln(2 + \\sqrt{3}) \\approx 1.317i$ gives $\\cos x = \\frac{(2 + \\sqrt{3}) + (2 - \\sqrt{3})}{2} = 2$. The bound $|\\cos x| \\leq 1$ comes from coordinates on the unit circle, so it holds only for real angles.",
+    sectionId: "3"
+  },
+  obj4: {
+    question: "Is there a whole number $n$ with $\\sin n = 1$?",
+    answer: "No. $\\sin n = 1$ needs $n = \\frac{\\pi}{2} + 2k\\pi$ for some integer $k$, and that number is irrational because $\\pi$ is, so no integer qualifies. Whole numbers can come very close, though: $33$ lies within about $0.013$ of $\\frac{21\\pi}{2}$, so $\\sin 33 \\approx 0.99991$.",
+    sectionId: "7"
+  },
+  obj5: {
+    question: "Why is the local maximum of cosecant smaller than its local minimum?",
+    answer: "Because the two values sit on different branches. On the upward-opening branches, where $\\sin\\theta > 0$, cosecant never drops below $1$, so $1$ is a local minimum; on the downward-opening branches, where $\\sin\\theta < 0$, it never rises above $-1$, so $-1$ is a local maximum. Each label describes only nearby points, and an asymptote separates the branches. Secant behaves the same way.",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "Is 4π also a period of sine?",
+    answer: "Yes, in the sense that $\\sin(\\theta + 4\\pi) = \\sin\\theta$ for every $\\theta$, but it is not the period. The period, or fundamental period, is the smallest positive shift that works, and $4\\pi$ is two of them at once. No shorter shift works for every $\\theta$; a shift of $\\pi$, for instance, fails since $\\sin(\\frac{\\pi}{2} + \\pi) = -1$, not $1$.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "Can the gaps in the tangent graph be filled in?",
+    answer: "No. The breaks at $\\frac{\\pi}{2} + n\\pi$ are infinite discontinuities, not removable ones: as $\\theta$ approaches such a point, tangent runs off to $+\\infty$ on one side and comes back from $-\\infty$ on the other, so there is no finite limit to fill the gap with. The asymptotes of secant, cotangent and cosecant behave the same way; between consecutive asymptotes each function is continuous.",
+    sectionId: "5"
   }
 }
 

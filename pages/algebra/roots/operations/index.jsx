@@ -13,6 +13,8 @@ import identityDiagrams from '@/app/components/algebra/identities/identityDiagra
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -192,6 +194,23 @@ const summaryTable = `
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "Like Radicals") — template C, failure
+// first. Running instance: √9 + √16 merged under one root (wrong) against
+// 3√5 + 7√5 (right). Old obj1 text is kept in sectionsContent.obj1, unused;
+// its three passages, the rule box, the three formula boxes and obj1Table are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciMergeTable = ciTableOpen(['sum', 'merged into one radical', 'actual value']) +
+  ciRow(['√9 + √16', '√25 = 5', '3 + 4 = 7'], { color: '#a4243b', cols: [1] }) +
+  ciRow(['3√5 + 7√5', '10√5', '10√5'], { shade: true, last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -590,6 +609,11 @@ Mastering these operations transforms complicated expressions into simpler ones 
 }
 
 
+// FAQ pass 2026-10-31: kept the four existing questions. Added the near-whole
+// power of 1 + √2 (fact box under "Conjugates"), the nested root that comes
+// apart (fact box under "Squaring Radical Expressions") and cancelling a
+// number into the radicand (pitfall under "Dividing Radicals"); no heading
+// asks them.
 const faqQuestions = {
   obj1: {
     question: "Why can't you add $\\sqrt{2} + \\sqrt{3}$?",
@@ -610,6 +634,21 @@ const faqQuestions = {
     question: "Do you still need to simplify after multiplying radicals?",
     answer: "Usually yes, because multiplying tends to create perfect power factors that were not there before. $\\sqrt{3} \\cdot \\sqrt{12} = \\sqrt{36} = 6$ leaves no radical at all, and $\\sqrt{6} \\cdot \\sqrt{10} = \\sqrt{60} = 2\\sqrt{15}$ still needs extracting. Division has the mirror problem: the quotient may leave a radical in the denominator to rationalize.",
     sectionId: "3"
+  },
+  obj5: {
+    question: "Why is $(1 + \\sqrt{2})^{10}$ so close to a whole number?",
+    answer: "Because its conjugate's power is tiny and the two add up to an integer. In the expansions of $(1 + \\sqrt{2})^{10}$ and $(1 - \\sqrt{2})^{10}$, every term carrying $\\sqrt{2}$ appears with opposite signs, so their sum is exactly $6726$. Since $|1 - \\sqrt{2}| \\approx 0.41$, its tenth power is only about $0.00015$, which leaves $(1 + \\sqrt{2})^{10} \\approx 6725.99985$.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "Can $\\sqrt{7 + 2\\sqrt{10}}$ be simplified?",
+    answer: "Yes, to $\\sqrt{5} + \\sqrt{2}$. Squaring that sum gives $5 + 2\\sqrt{10} + 2 = 7 + 2\\sqrt{10}$, so reading the expansion backwards takes the outer root. The root inside a root comes apart because $7 = 5 + 2$ and $10 = 5 \\cdot 2$: the number standing alone is the sum of two radicands and the number under the inner radical is their product.",
+    sectionId: "8"
+  },
+  obj7: {
+    question: "Can you cancel a number outside a radical with the number inside?",
+    answer: "No. In $\\frac{\\sqrt{12}}{2}$ the $2$ stands outside the radical, so dividing it into the radicand to get $\\sqrt{6}$ is wrong: $\\sqrt{6} \\approx 2.45$, while $\\frac{\\sqrt{12}}{2} \\approx 1.73$. Simplify the radical first, then cancel numbers that stand outside it: $\\frac{\\sqrt{12}}{2} = \\frac{2\\sqrt{3}}{2} = \\sqrt{3}$. Only a radical of the same index divides into a radicand, as in $\\frac{\\sqrt{50}}{\\sqrt{2}} = \\sqrt{25}$.",
+    sectionId: "5"
   }
 }
 
@@ -691,6 +730,10 @@ const schemas = {
 
 
 
+  const conceptIntroFigures = {
+    mergeTable: ciMergeTable,
+  };
+
   const demoUnits = {
     squareOfSum: demoUnitFrame({
       svg: identityDiagrams['sum-4'],
@@ -717,8 +760,43 @@ const schemas = {
     ],
   };
 
+  // DecisionMaker + DecisionWalker (obj9): radical-operation-decision
+  const radicalOperationDecision = {
+    header: {
+      kicker: 'operations with radicals',
+      title: 'Which move for this operation?',
+      lede: 'Adding needs like radicals; multiplying and dividing need a matching index.',
+    },
+    start: 'op',
+    nodes: {
+      op: { question: 'Which operation?', answers: [
+        { label: 'add or subtract', to: 'like' },
+        { label: 'multiply or divide', to: 'index' },
+        { label: 'expand a product', to: 'expand' },
+      ] },
+      like: { question: 'Like radicals?', hint: 'after simplifying', answers: [
+        { label: 'yes', to: 'combine' },
+        { label: 'no', to: 'unlike' },
+      ] },
+      index: { question: 'Same index?', answers: [
+        { label: 'yes', to: 'rule' },
+        { label: 'no', to: 'exponents' },
+      ] },
+    },
+    outcomes: {
+      combine: { title: 'Combine the coefficients', action: 'add or subtract the numbers in front; the radical part stays', example: '√12 + √27 = 2√3 + 3√3 = 5√3', link: { label: 'Adding like radicals', href: '/algebra/roots/operations#2' } },
+      unlike: { title: 'Leave as it is', action: 'unlike radicals cannot be combined', example: '√2 + √3 is already final', tone: 'stop', link: { label: 'Like radicals', href: '/algebra/roots/operations#1' } },
+      rule: { title: 'Product or quotient rule', action: 'multiply or divide the radicands under one radical', link: { label: 'Same index', href: '/algebra/roots/operations#3' } },
+      exponents: { title: 'Convert to rational exponents', action: 'bring the indices to a common denominator, then combine', link: { label: 'Different indices', href: '/algebra/roots/operations#4' } },
+      expand: { title: 'Distribute term by term', action: 'track each term, then combine like radicals at the end', link: { label: 'Expanding products', href: '/algebra/roots/operations#7' } },
+    },
+    first: [{ label: 'Before adding', text: 'Simplify each radical; like radicals often appear only after that.' }],
+    last: [{ label: 'After any operation', text: 'Simplify the result, and rationalize a radical left in a denominator.' }],
+  };
+
 return {
   props: {
+    radicalOperationDecision,
     likeRadicalsSteps,
     sectionsContent,
     introContent,
@@ -728,6 +806,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Operations on Radicals: Add, Subtract, Multiply, Divide | Learn Math Class",
       description: "Learn operations with radicals: adding, subtracting, multiplying, and dividing radical expressions. Includes conjugates, expanding products, and squaring radicals.",
@@ -742,9 +821,80 @@ return {
 // export default function OperationsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function OperationsPage({seoData, sectionsContent, introContent, obj1Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, likeRadicalsSteps}) {
+export default function OperationsPage({radicalOperationDecision, seoData, sectionsContent, introContent, obj1Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, likeRadicalsSteps, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `It is tempting to add square roots by adding what is under them: √a + √b = √(a + b).`,
+        content: [
+          `The rule looks as natural as adding fractions or like terms. Test it on numbers whose roots are known.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `√9 + √16 is 7, not √25 = 5 — yet 3√5 + 7√5 really is 10√5.`,
+        content: [
+          ciTable('mergeTable'),
+          `The first sum cannot be merged into one radical. The second can, because both terms carry the same radical $\\sqrt{5}$ and only the coefficients differ.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Radicals combine only when their radical parts match exactly, just as like terms do.`,
+        content: [
+          `The concept parallels like terms in algebra. Just as $3x$ and $7x$ can combine but $3x$ and $7y$ cannot, radicals combine only when their radical parts match exactly.`,
+          `@academic[rule_plain:Only like radicals can be added or subtracted.]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `[Like radicals](!/algebra/definitions#like_radicals) are radicals with the same index and the same radicand.`,
+        formula: [
+          `Like radicals share the same index and the same radicand.`,
+          `@academic[formula_callout:Like Radicals
+$$3\\sqrt{5} \\text{ and } 7\\sqrt{5} \\quad \\text{are like radicals}$$]@`,
+          `@academic[formula_callout:Like Radicals
+$$\\sqrt{3} \\text{ and } \\sqrt{5} \\quad \\text{are not like — different radicands}$$]@`,
+          `@academic[formula_callout:Like Radicals
+$$\\sqrt{2} \\text{ and } \\sqrt[3]{2} \\quad \\text{are not like — different indices}$$]@`,
+        ],
+        footer: `So $3\\sqrt{5}$ and $7\\sqrt{5}$ are like radicals and add to $10\\sqrt{5}$, while $\\sqrt{2} + \\sqrt{3}$ cannot be combined and stays as it is.`,
+      },
+      {
+        id: 'kind',
+        lead: `Two checks decide it: the same index and the same radicand.`,
+        content: [
+          <div
+            key={'obj1-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj1Table }}
+          />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Radicals that look unlike can turn out to be like once they are simplified.`,
+        content: [
+          `Recognizing like radicals sometimes requires [simplification](!/algebra/roots/simplifying) first. Two radicals that appear different may become like after simplifying.`,
+          `The working is shown step by step in [adding and subtracting like radicals](!/algebra/roots/operations#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers adding and subtracting, multiplying with the same and with different indices, dividing, conjugates and expanding products with radicals.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -760,12 +910,7 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -857,6 +1002,16 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `The strategy above, as a map. The operation decides the first check: like radicals for adding, a matching index for multiplying and dividing.`,
+          <DiagramFrame
+            key={'obj9-decision'}
+            id="radical-operation-decision"
+            title="Which move for this radical operation?"
+            source="/algebra/roots/operations"
+          >
+            <DecisionBox data={radicalOperationDecision} />
+          </DiagramFrame>,
+          `Every route ends the same way: simplify what comes out. Multiplication often creates new perfect power factors, and division can leave a radical in the denominator, which [conjugates](!#6) clear.`,
         ]
     },
     {

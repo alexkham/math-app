@@ -19,7 +19,7 @@ export const ArticleBlock = ({ article, theme, compact = false }) => {
   if (!hasArticleContent(article)) return null;
   return (
     <div style={{
-      background: theme.cardBg || '#fff',
+      background: '#fff',
       border: `1px solid ${theme.border}`,
       borderRadius: 12,
       padding: compact ? '20px 24px' : '28px 32px',
@@ -392,7 +392,7 @@ export const ArticleVideoBlock = ({
   // Both — below (default)
   return (
     <div style={{
-      background: theme.cardBg || '#fff',
+      background: '#fff',
       border: `1px solid ${theme.border}`,
       borderRadius: 12,
       padding: compact ? '20px 24px' : '28px 32px',

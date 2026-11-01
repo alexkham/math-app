@@ -149,7 +149,7 @@ Any of these boxes can have an expandable part: a panel, the operation, a note, 
 
 All parts open and close with a short height animation, and each button sets `aria-expanded`. A closed part is out of the tab order and hidden from screen readers.
 
-When the card is narrower than 760px, or the screen narrower than 720px, the panels stack, the arrow points down, and the drawer's caret is hidden. The card's own width counts, not only the window's: on a page with sidebars a wide screen can still leave a narrow column. Expressions in panels and steps never break across lines, and the arrow column is at most 220px wide, so a long move description wraps under the arrow instead of squeezing the panels.
+When the card is narrower than 760px, or the screen narrower than 720px, the panels stack, the arrow points down, and the drawer's caret is hidden. The card's own width counts, not only the window's: on a page with sidebars a wide screen can still leave a narrow column. Expressions in panels and steps never break across lines (one too long for a narrow screen scrolls sideways inside its own box), and the arrow column is at most 220px wide, so a long move description wraps under the arrow instead of squeezing the panels.
 
 ---
 

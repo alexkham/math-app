@@ -918,6 +918,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
 import powerIterationDiagrams from '@/app/components/linear-algebra copy/matrix/powerIterationDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1106,6 +1109,7 @@ const spectralProperties = {
       holdsWhen: 'always for the eigenvalues',
       failsWhen: 'for the eigenvectors \u2014 generally different',
       commonError: 'assuming the eigenvectors carry over because the eigenvalues do',
+      excerpt: 'Same characteristic polynomial, since det(Aᵀ − λI) = det(A − λI).',
       note: 'Same characteristic polynomial, since $\\det(A^{\\mathsf{T}} - \\lambda I) = \\det(A - \\lambda I)$. But the eigenvectors of $A^{\\mathsf{T}}$ are the **left** eigenvectors of $A$, a different set. One of only two entries here where the spectrum survives and the directions do not.',
       witness: {
         label: 'Witness',
@@ -1284,6 +1288,24 @@ const spectralProperties = {
 
 
 // formulas-injected: v1 | 2026-06-16 | 7 callouts (obj3 multiplicity_inequality direct, obj4 eigenvalue_of_inverse inline-promote, obj5 eigenvalue_of_power + eigenvalue_of_polynomial inline-promote, obj6 eigenvalue_shift inline-promote, obj8 special_matrix_eigenvalue_restrictions prose-insert, obj9 independence_of_distinct_eigenvectors prose-insert)
+
+// Concept introduction (section 3, "Algebraic and Geometric Multiplicity") —
+// template D, comparison. Running instance: 2I against the Jordan block with
+// eigenvalue 2, same characteristic polynomial, different eigenspaces. Old
+// obj3 text is kept in sectionsContent.obj3, unused; its five passages, the
+// formula box and link, obj3Table, the defective demo frame and its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTwoMatricesTable = ciTableOpen(['matrix', 'characteristic polynomial', 'eigenvectors for λ = 2', 'their dimension']) +
+  ciRow(['(2 0; 0 2)', '(λ − 2)²', 'every nonzero vector of the plane', '2']) +
+  ciRow(['(2 1; 0 2)', '(λ − 2)²', 'only multiples of (1, 0)', '1'], { shade: true, last: true, color: '#a4243b', cols: [3] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1643,6 +1665,12 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added diagonal
+// entries as eigenvalues (pitfall box under "Trace and Eigenvalues"),
+// Gershgorin's discs (fact box under "Eigenvalues of Special Matrix Types"),
+// AB versus BA (fact box and closing paragraph under "Similar Matrices and
+// Spectral Invariants") and when power iteration fails (one paragraph under
+// "The Dominant Eigenvalue and Power Iteration").
 const faqQuestions = {
   obj1: {
     question: "Do the eigenvalue rules extend to $A + B$ and $AB$?",
@@ -1658,6 +1686,26 @@ const faqQuestions = {
     question: "Do $A$ and $A^{T}$ have the same eigenvectors?",
     answer: "They share every eigenvalue but generally not the eigenvectors. Transposing preserves the characteristic polynomial, so the spectrum is identical, yet the directions differ. The eigenvectors of $A^{T}$ are known as the left eigenvectors of $A$, and the transpose is the one operation here that changes the vector rather than the value.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Are the eigenvalues of a matrix its diagonal entries?",
+    answer: "Only for diagonal and triangular matrices. The diagonal entries always add up to the same total as the eigenvalues, since both sums equal the trace, which is what makes the slip easy to miss. For $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ the entries $1$ and $3$ pass the trace test but multiply to $3$, not $\\det(A) = -5$; the eigenvalues are $5$ and $-1$. Running the determinant check alongside the trace catches it.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "How can you locate eigenvalues without solving the characteristic equation?",
+    answer: "With Gershgorin's discs. Every eigenvalue lies within $R_i$ of some diagonal entry $a_{ii}$, where $R_i$ is the sum of $|a_{ij}|$ over the rest of row $i$. For $\\begin{pmatrix} 10 & 1 \\\\ 2 & -5 \\end{pmatrix}$ the discs $|z - 10| \\leq 1$ and $|z + 5| \\leq 2$ do not meet, so each holds one eigenvalue, found without solving anything; the exact values are about $10.13$ and $-5.13$.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "Do $AB$ and $BA$ have the same eigenvalues?",
+    answer: "Yes, for any two square matrices, because $AB$ and $BA$ have the same characteristic polynomial. When $A$ is invertible they are even similar, since $BA = A^{-1}(AB)A$. Without invertibility the similarity can fail: for $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$, the products $AB = B$ and $BA = O$ share the eigenvalues $0, 0$, yet the only matrix similar to $O$ is $O$ itself.",
+    sectionId: "10"
+  },
+  obj7: {
+    question: "When does power iteration fail to converge?",
+    answer: "When the top two eigenvalues tie in size, $|\\lambda_1| = |\\lambda_2|$, as with a complex conjugate pair or with $\\lambda$ and $-\\lambda$: the iterates then never settle. A start vector with no component along the dominant eigenvector would in theory head for the next one instead, though rounding error usually reintroduces that component. Even when it works, the error shrinks by the ratio $|\\lambda_2 / \\lambda_1|$ each step, so a narrow gap means slow convergence.",
+    sectionId: "12"
   }
 }
 
@@ -1743,6 +1791,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    twoMatricesTable: ciTwoMatricesTable,
+  };
+
   const demoUnits = {
     defective: demoUnitFrame({
       svg: [eigenVectorsDiagrams.repeated, eigenVectorsDiagrams.defective],
@@ -1770,6 +1822,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1797,10 +1850,79 @@ export default function EigenvaluePropertiesPage({
   obj8Table,
   spectralProperties,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 3 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Two matrices can have exactly the same eigenvalues, each counted the same number of times.`,
+        content: [
+          `$\\begin{pmatrix} 2 & 0 \\\\ 0 & 2 \\end{pmatrix}$ and $\\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ both have characteristic polynomial $(\\lambda - 2)^2$: the eigenvalue $2$, twice.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `Same eigenvalue, counted twice in both — yet one matrix has a plane of eigenvectors and the other only a line.`,
+        content: [
+          ciTable('twoMatricesTable'),
+          `The first matrix stretches every vector by $2$; the second does so only along $(1, 0)$.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Counting roots and counting independent eigenvectors are two different counts.`,
+        content: [
+          `These two numbers always satisfy`,
+          `@academic[formula_callout:multiplicity_inequality|Multiplicity Inequality|$$1 \\leq m_g(\\lambda) \\leq m_a(\\lambda)$$]@
+@academic[formulas_link:/linear-algebra/formulas#multiplicity_inequality]@`,
+          `The geometric multiplicity is at least $1$ because the eigenspace must contain at least one nonzero eigenvector. It cannot exceed the algebraic multiplicity — a fact whose proof requires the Jordan normal form or the theory of invariant subspaces.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [algebraic multiplicity](!/linear-algebra/definitions#algebraic_multiplicity) of an eigenvalue $\\lambda$ is the number of times it is a root of the characteristic polynomial; its [geometric multiplicity](!/linear-algebra/definitions#geometric_multiplicity) is the dimension of its eigenspace.`,
+        formula: [
+          `Every eigenvalue $\\lambda$ has two multiplicity measures. The algebraic multiplicity $m_a(\\lambda)$ is the number of times $\\lambda$ appears as a root of the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation). The geometric multiplicity $m_g(\\lambda)$ is the [dimension](!/linear-algebra/vector-spaces/dimension) of the eigenspace $E_\\lambda = \\text{Null}(A - \\lambda I)$.`,
+        ],
+        footer: `So $\\lambda = 2$ has $m_a = 2$ for both matrices, while $m_g = 2$ for the first and $m_g = 1$ for the second.`,
+      },
+      {
+        id: 'kind',
+        lead: `The gap between the two counts decides whether a matrix can be diagonalized.`,
+        content: [
+          `When $m_g = m_a$ for every eigenvalue, the matrix is [diagonalizable](!/linear-algebra/eigen/diagonalization) — there are enough independent eigenvectors to form a [basis](!/linear-algebra/vector-spaces). When $m_g < m_a$ for any eigenvalue, the matrix is defective and cannot be diagonalized.`,
+          `For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the eigenvalue $\\lambda = 2$ has $m_a = 2$ but $m_g = 1$ (the eigenspace is one-dimensional, spanned by $(1, 0)$). This matrix is not diagonalizable.`,
+          <div
+            key={'obj3-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj3Table }}
+          />,
+          <div key={'unit-defective'} dangerouslySetInnerHTML={{ __html: demoUnits.defective }} />,
+          `A defective matrix is precisely one that cannot be diagonalised, which is why this gap is worth naming rather than treating as a curiosity.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Matching eigenvalues do not make two matrices similar.`,
+        content: [
+          `The two matrices above share their characteristic polynomial, trace and determinant, yet no change of basis turns one into the other: the first is diagonal and the second is defective. Shared features of this kind are compared in [similar matrices and spectral invariants](!/linear-algebra/eigen/properties#10).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the eigenvalues of inverses, powers and polynomials, shifting, the transpose, special matrix types, independence of eigenvectors, similar matrices, a summary, the dominant eigenvalue and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1825,14 +1947,7 @@ export default function EigenvaluePropertiesPage({
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
-          sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
-                  <div key={'unit-defective'} dangerouslySetInnerHTML={{ __html: demoUnits.defective }} />,
-          `A defective matrix is precisely one that cannot be diagonalised, which is why this gap is worth naming rather than treating as a curiosity.`,
+          <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1851,6 +1966,11 @@ export default function EigenvaluePropertiesPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laEigenNotationSheet}
+            current={'/linear-algebra/eigen/properties'}
           />,
         ]
     },

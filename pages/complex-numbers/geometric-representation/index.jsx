@@ -1429,6 +1429,9 @@ How to check: a quarter turn keeps the length and makes a right angle with the o
 }
 
 
+// FAQ pass 2026-10-31: kept all five. Added Wessel as the first to draw the
+// plane (fact box under "Complex Numbers as Vectors") and the treasure-map
+// puzzle (fact box under "Visualizing Operations"); no heading asks either.
 const faqQuestions = {
   obj1: {
     question: "What is the complex plane, and what is an Argand diagram?",
@@ -1453,6 +1456,16 @@ const faqQuestions = {
   obj5: {
     question: "What is the geometric meaning of adding two complex numbers?",
     answer: "It is vector addition. Treat each number as an arrow from the origin, place the second arrow at the tip of the first, and the sum lands at the far end. The parallelogram formed by the two arrows has the sum at its opposite corner. See it on the [addition tool](!/complex-numbers/visual-tools/addition-subtraction).",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "Who first drew complex numbers as points in a plane?",
+    answer: "Caspar Wessel, a surveyor working in Denmark, in a paper read in 1797. He added the arrows tip to tail and multiplied them by adding their angles, the same picture this page uses. Written in Danish, the paper went unnoticed for about a century, so the plane carries other names: the Argand diagram in English, after Jean-Robert Argand (1806), and the Gaussian plane in German, after Gauss (1831).",
+    sectionId: "4"
+  },
+  obj7: {
+    question: "How do complex numbers solve the treasure map puzzle with the missing gallows?",
+    answer: "By making the gallows cancel. Put the oak at $a$, the pine at $b$ and the gallows at $g$. One right-angle turn is multiplication by $-i$, the other by $i$, so the two marks land at $a - i(a - g)$ and $b + i(b - g)$. Their midpoint is $\\frac{a + b}{2} + i\\,\\frac{b - a}{2}$, with no $g$ left in it: the treasure is fixed by the two trees alone, at the right-angled corner of the isosceles triangle built on the line between them.",
     sectionId: "7"
   }
 }

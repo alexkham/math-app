@@ -878,6 +878,10 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 
 
 export async function getStaticProps(){
@@ -1481,6 +1485,11 @@ The range is the complete set of output values — every number the function act
 
 
 
+// FAQ pass 2026-10-31: cut "How does shifting a graph vertically change its
+// range?" (restates the h2 Effect of Transformations on Range; transformations
+// asks the same). Kept the other three. Added the asymptote height in the
+// range, endpoint outputs on [a, b] (pitfall box) and the polynomial with
+// range (0, infinity) (fact box), all under Finding Range by Analyzing Behavior.
 const faqQuestions = {
   obj1: {
     question: "Why is the range harder to find than the domain?",
@@ -1498,9 +1507,19 @@ const faqQuestions = {
     sectionId: "7"
   },
   obj4: {
-    question: "How does shifting a graph vertically change its range?",
-    answer: "It moves every output by the same amount, so the range shifts by exactly that amount while keeping its shape. A horizontal shift leaves the range untouched, since it changes which inputs produce the outputs, not the outputs themselves. Vertical stretches scale the range; reflections across the horizontal axis flip it.",
-    sectionId: "8"
+    question: "Is a horizontal asymptote ever part of the range?",
+    answer: "Sometimes. The asymptote describes the ends of the graph, and the curve may still pass through that height elsewhere. $e^x$ never reaches its asymptote $y = 0$, so its range is $(0, \\infty)$. But $\\frac{x}{x^2 + 1}$ also levels off toward $y = 0$ and equals $0$ at $x = 0$, so its range is $[-\\frac{1}{2}, \\frac{1}{2}]$, with $0$ inside. Solving $f(x) = L$ for the asymptote height $L$ decides each case.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Is the range on [a, b] always the interval between f(a) and f(b)?",
+    answer: "No, only for a continuous function that rises the whole way or falls the whole way. A function that turns inside the interval can go above or below both ends: $x^2$ on $[-1, 3]$ has $f(-1) = 1$ and $f(3) = 9$, yet its vertex gives $f(0) = 0$, so the range is $[0, 9]$, not $[1, 9]$. The safe method compares the endpoint outputs with the output at every turning point inside.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Can a polynomial have range $(0, \\infty)$?",
+    answer: "Not in one variable, but in two it can. A one-variable polynomial is constant, takes every real value (odd degree), or reaches a lowest or highest value (even degree), so its range is $\\{c\\}$, $\\mathbb{R}$, $[m, \\infty)$ or $(-\\infty, M]$. $x^2 + (xy - 1)^2$ is never $0$, since $x = 0$ leaves $1$ and $x \\neq 0$ makes $x^2 > 0$, yet $y = \\frac{1}{x}$ with $x \\to 0$ drives it toward $0$: its range is $(0, \\infty)$.",
+    sectionId: "5"
   }
 }
 
@@ -1675,8 +1694,72 @@ const faqQuestions = {
     ],
   };
 
+  // DecisionMaker + DecisionWalker (obj11): range-method-decision
+  const rangeMethodDecision = {
+    header: {
+      kicker: 'finding the range',
+      title: 'Which method for the range?',
+      lede: 'How the function is presented, and what is already known about it, picks the method.',
+    },
+    start: 'graph',
+    nodes: {
+      graph: { question: 'Is the graph given?', answers: [
+        { label: 'yes', to: 'graphical' },
+        { label: 'no', to: 'context' },
+      ] },
+      context: { question: 'An applied or physical problem?', answers: [
+        { label: 'yes', to: 'constraint' },
+        { label: 'no', to: 'inverse' },
+      ] },
+      inverse: { question: 'Is the inverse known or easy to find?', answers: [
+        { label: 'yes', to: 'swap' },
+        { label: 'no', to: 'family' },
+      ] },
+      family: { question: 'Does it match a common parent?', hint: 'possibly shifted or stretched', answers: [
+        { label: 'yes', to: 'parent' },
+        { label: 'no', to: 'solve' },
+      ] },
+      solve: { question: 'Can y = f(x) be solved for x?', hint: 'rational, quadratic, simple radical forms', answers: [
+        { label: 'yes', to: 'inversion' },
+        { label: 'no', to: 'behavior' },
+      ] },
+    },
+    outcomes: {
+      graphical: { title: 'Read it from the graph', action: 'trace the vertical extent; check solid and open dots, and asymptotes', link: { label: 'Range from a graph', href: '/functions/range#6' } },
+      constraint: { title: 'Constrain by meaning', action: 'height ≥ 0, probability in [0, 1], and so on', example: 'a cost with a 500-dollar start-up: the range begins at 500', link: { label: 'Range from context', href: '/functions/range#9' } },
+      swap: { title: 'Swap with the inverse', action: 'the range of f is the domain of f⁻¹', example: 'eˣ: range = domain of ln = (0, ∞)', link: { label: 'Range and invertibility', href: '/functions/range#10' } },
+      parent: { title: 'Look up the family', action: "take the parent's range, then adjust for the transformations", example: 'aˣ has range (0, ∞); shifting up by k gives (k, ∞)', link: { label: 'Common function types', href: '/functions/range#7' } },
+      inversion: { title: 'Solve for x', action: 'the y-values that give a real x form the range', example: 'y = x² → x = ±√y, so y ≥ 0', link: { label: 'Finding range algebraically', href: '/functions/range#4' } },
+      behavior: { title: 'Analyze the behavior', action: 'find the minimum and maximum; check end limits and asymptotes', link: { label: 'Analyzing behavior', href: '/functions/range#5' } },
+    },
+  };
+
+  // ComparisonTable2 (obj3): range-codomain-comparison
+  const rangeCodomainComparison = {
+    kicker: 'range',
+    title: 'Range and codomain, side by side',
+    intro: 'Where outputs are allowed to land, and where they actually land.',
+    tallyLabel: 'compared',
+    subjects: [
+      { name: 'Codomain' },
+      { name: 'Range' },
+    ],
+    features: [
+      { label: 'What it is', values: ['the set where outputs are declared to live', 'the set of outputs actually produced'] },
+      { label: 'Fixed by', values: ['the definition $f: A \\to B$', 'the rule of the function'] },
+      { label: 'Squaring on the reals', values: ['$\\mathbb{R}$', '$[0, \\infty)$'],
+        note: 'Negative numbers are in the codomain but never appear as outputs.' },
+      { label: 'Cubing on the reals', values: ['$\\mathbb{R}$', '$\\mathbb{R}$'],
+        note: 'Every real number is the cube of some real number, so the range fills the codomain: the function is onto.' },
+      { label: 'In elementary algebra', values: ['usually all real numbers, by default', 'the set that is actually asked for'] },
+    ],
+    footnote: 'The range is always a subset of the codomain; the two are equal exactly when the function is onto.',
+  };
+
    return {
       props:{
+    rangeCodomainComparison,
+    rangeMethodDecision,
     rangeByTypeOutline,
     demoUnits,
     conceptIntroFigures,
@@ -1699,7 +1782,7 @@ const faqQuestions = {
     }
    }
 
-export default function RangePage({rangeByTypeOutline, 
+export default function RangePage({rangeCodomainComparison, rangeMethodDecision, rangeByTypeOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1809,6 +1892,11 @@ export default function RangePage({rangeByTypeOutline,
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={functionsNotationSheet}
+            current={'/functions/range'}
+          />,
           <div
             key={'obj2-table'}
             style={tableWrapStyle}
@@ -1824,6 +1912,16 @@ export default function RangePage({rangeByTypeOutline,
           sectionsContent.obj3.content,
           <div key={'unit-cubicOnto'} dangerouslySetInnerHTML={{ __html: demoUnits.cubicOnto }} />,
           `Onto means the range leaves no part of the codomain unused.`,
+          `The two sets side by side, with the squaring and cubing examples from this section.`,
+          <DiagramFrame
+            key={'obj3-comparison'}
+            id="range-codomain-comparison"
+            title="Range and codomain, side by side"
+            source="/functions/range"
+          >
+            <ComparisonTable2 data={rangeCodomainComparison} />
+          </DiagramFrame>,
+          `The two example rows are the whole story: with squaring the range falls short of the codomain, with cubing it fills it. Whether a function is onto is a question about the codomain as much as about the rule, and in elementary algebra, where the codomain is all of $\\mathbb{R}$ by default, the range is the set worth finding.`,
         ]
     },
     {
@@ -1932,6 +2030,16 @@ export default function RangePage({rangeByTypeOutline,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `The six methods from the table, as a checklist: first how the function is given, then what is already known about it.`,
+          <DiagramFrame
+            key={'obj11-decision'}
+            id="range-method-decision"
+            title="Which method for the range?"
+            source="/functions/range"
+          >
+            <DecisionBox data={rangeMethodDecision} />
+          </DiagramFrame>,
+          `The last exit is the general fallback: behavior analysis needs no inverse and no equation solved for $x$, only the extrema, the end behavior and any asymptotes. When one method gives no clean answer, a second one from the table often settles it.`,
         ]
     },
 

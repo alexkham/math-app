@@ -1013,6 +1013,11 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFunctionsGraphDiagrams'
 import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiagrams'
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 
 
 export async function getStaticProps(){
@@ -1034,6 +1039,15 @@ export async function getStaticProps(){
     'periodic solutions trig'
   ]
 
+// FAQ pass 2026-10-31: cut "How do you solve a quadratic trigonometric
+// equation?" (restates the h2 "Quadratic-Type Trigonometric Equations"); keys
+// renumbered. The no-solution question now points to section 2 (the
+// boundedness corollary; it pointed to Extraneous Solutions) and says
+// tan x = a instead of "equations in tangent alone". Added: dividing by sin x
+// (the division warning in "Equations Requiring Algebraic Manipulation"),
+// the solution count of sin(2x) = a (rule box in "Equations with Multiple
+// Angles"), cos x = x (fact box in section 5) and sin x + sin(√2x) never
+// reaching 2 (fact box in section 1).
 const faqQuestions = {
   obj1: {
     question: "Why does a solvable trigonometric equation usually have infinitely many solutions?",
@@ -1046,19 +1060,34 @@ const faqQuestions = {
     sectionId: "2"
   },
   obj3: {
-    question: "How do you solve a quadratic trigonometric equation?",
-    answer: "Substitute a single letter for the trigonometric expression, solve the resulting quadratic by factoring or formula, then substitute back and solve each simple equation separately. Discard any root outside the range of the function, since values above 1 or below −1 are impossible for sine and cosine.",
-    sectionId: "7"
-  },
-  obj4: {
     question: "Why does squaring both sides create extra solutions?",
     answer: "Squaring destroys sign information, so an equation that failed because two sides had opposite signs will pass once both are squared. The extra roots satisfy the squared version but not the original. Every solution must therefore be substituted back into the original equation and discarded if it does not check out.",
     sectionId: "9"
   },
-  obj5: {
+  obj4: {
     question: "When does a trigonometric equation have no solution?",
-    answer: "When it demands a value the function cannot produce. Sine and cosine never leave the interval from −1 to 1, so an equation like cos x = 2 has no solution at all. Tangent has no such bound and can equal any real number, so equations in tangent alone always have solutions.",
-    sectionId: "9"
+    answer: "When it demands a value the function cannot produce. Sine and cosine never leave the interval from −1 to 1, so an equation like cos x = 2 has no solution at all. Tangent has no such bound and can equal any real number, so an equation tan x = a always has solutions.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Can you divide both sides of a trig equation by sin x?",
+    answer: "Not safely, because every solution where $\\sin(x) = 0$ is thrown away. Dividing $\\sin(x)\\tan(x) = \\sin(x)$ by $\\sin(x)$ leaves $\\tan(x) = 1$, with only $\\frac{\\pi}{4}$ and $\\frac{5\\pi}{4}$ on $[0, 2\\pi)$. Moving everything to one side and factoring gives $\\sin(x)[\\tan(x) - 1] = 0$, which also returns $x = 0$ and $x = \\pi$: four solutions, not two. Division is safe only when the divisor cannot be zero.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "How many solutions does sin(2x) = a have on [0, 2π)?",
+    answer: "Four when $|a| < 1$, twice as many as $\\sin(x) = a$. As $x$ runs over $[0, 2\\pi)$, the inner angle $2x$ runs over $[0, 4\\pi)$, two full turns, and each turn gives two solutions. For $\\sin(2x) = \\frac{\\sqrt{3}}{2}$ they are $\\frac{\\pi}{6}, \\frac{\\pi}{3}, \\frac{7\\pi}{6}, \\frac{4\\pi}{3}$. In general $\\sin(nx) = a$ has up to $2n$ solutions on $[0, 2\\pi)$; when $a = \\pm 1$ there is only one per turn.",
+    sectionId: "8"
+  },
+  obj7: {
+    question: "How do you solve cos x = x?",
+    answer: "Numerically, since it never reduces to a basic equation. It has exactly one solution, because $x - \\cos x$ only increases and so crosses zero once. A calculator finds it: in radian mode, press cos over and over from any starting number and the display settles on $0.739085\\ldots$, the one number whose cosine is itself.",
+    sectionId: "5"
+  },
+  obj8: {
+    question: "Can sin x + sin(√2x) ever equal 2?",
+    answer: "No, although it gets as close to $2$ as you like. Reaching $2$ needs both sines to equal $1$ at the same $x$, so $x = \\frac{\\pi}{2} + 2k\\pi$ and $\\sqrt{2}\\,x = \\frac{\\pi}{2} + 2m\\pi$ for whole numbers $k$ and $m$. Dividing gives $\\sqrt{2} = \\frac{1 + 4m}{1 + 4k}$, a fraction, which is impossible. The multiple $\\sqrt{2}$ is not whole, so the sum is not periodic and the usual infinitely-many-solutions argument does not apply.",
+    sectionId: "1"
   }
 }
 
@@ -1264,7 +1293,7 @@ const faqQuestions = {
     </tr>
   </tbody>
 </table>
-// `
+`
 
 
 
@@ -1880,8 +1909,69 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     }),
   };
 
+  // DecisionMaker + DecisionWalker (obj10): trig-equation-decision
+  const trigEquationDecision = {
+    header: {
+      kicker: 'trigonometric equations',
+      title: 'What is the first move?',
+      lede: 'Check the equation against each form in turn; the first match gives the first move.',
+    },
+    start: 'product',
+    nodes: {
+      product: { question: 'A product equal to 0?', hint: 'already factored', answers: [
+        { label: 'yes', to: 'split' },
+        { label: 'no', to: 'mixed' },
+      ] },
+      mixed: { question: 'Two or more functions mixed?', answers: [
+        { label: 'yes', to: 'identity' },
+        { label: 'no', to: 'quad' },
+      ] },
+      quad: { question: 'Quadratic in a single function?', answers: [
+        { label: 'yes', to: 'subst' },
+        { label: 'no', to: 'multi' },
+      ] },
+      multi: { question: 'A multiple angle nx?', answers: [
+        { label: 'yes', to: 'angle' },
+        { label: 'no', to: 'square' },
+      ] },
+      square: { question: 'Needs squaring to reach one function?', answers: [
+        { label: 'yes', to: 'squared' },
+        { label: 'no', to: 'basic' },
+      ] },
+    },
+    outcomes: {
+      split: { title: 'Set each factor to 0', action: 'solve each basic equation, then take the union', link: { label: 'Algebraic manipulation', href: '/trigonometry/equations#5' } },
+      identity: { title: 'Apply an identity', action: 'Pythagorean, double-angle or another identity gives one function', link: { label: 'Identity substitution', href: '/trigonometry/equations#6' } },
+      subst: { title: 'Substitute u = sin x', action: 'factor or use the quadratic formula; reject u outside the range', link: { label: 'Quadratic type', href: '/trigonometry/equations#7' } },
+      angle: { title: 'Let u = nx', action: 'solve in u, divide by n; up to 2n solutions on [0, 2π)', link: { label: 'Multiple angles', href: '/trigonometry/equations#8' } },
+      squared: { title: 'Square, then check', action: 'substitute every candidate into the original to discard extraneous values', tone: 'stop', link: { label: 'Extraneous solutions', href: '/trigonometry/equations#9' } },
+      basic: { title: 'Basic equation', action: 'check |a| against the range, find the reference angle, apply the quadrant rule', tone: 'done', link: { label: 'Basic sine equations', href: '/trigonometry/equations#2' } },
+    },
+    last: [{ label: 'Every route', text: 'ends at a basic equation sin x = a, cos x = a or tan x = a, then the general solution.' }],
+  };
+
+  // ComparisonTable2 (obj1): general-restricted-solutions
+  const generalRestrictedComparison = {
+    kicker: 'trigonometric equations',
+    title: 'General and restricted solutions, side by side',
+    intro: 'The same solutions, written for different questions.',
+    tallyLabel: 'compared',
+    subjects: [
+      { name: 'General solution' },
+      { name: 'Restricted solution' },
+    ],
+    features: [
+      { label: 'What it lists', values: ['every solution, in one expression with an integer $n$', 'only the solutions inside a given interval'] },
+      { label: 'Example: sine equals one half', values: ['$x = \\frac{\\pi}{6} + 2n\\pi$ or $x = \\frac{5\\pi}{6} + 2n\\pi$', 'on $[0, 2\\pi)$: $x = \\frac{\\pi}{6}$ and $x = \\frac{5\\pi}{6}$'] },
+      { label: 'Asked for when', values: ['the problem says "solve" or "find all solutions"', 'an interval is given'] },
+    ],
+    footnote: 'Sine and cosine give two solutions per period $2\\pi$ when $|a| < 1$; tangent gives one per period $\\pi$.',
+  };
+
    return {
       props:{
+    generalRestrictedComparison,
+    trigEquationDecision,
     demoUnits,
          sectionsContent,
          introContent,
@@ -1902,7 +1992,7 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     }
    }
 
-export default function EquationsPage({seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function EquationsPage({generalRestrictedComparison, trigEquationDecision, seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1924,6 +2014,16 @@ export default function EquationsPage({seoData,sectionsContent , introContent, o
           sectionsContent.obj1.content,
                   <div key={'unit-general'} dangerouslySetInnerHTML={{ __html: demoUnits.general }} />,
           `Restricting to an interval simply selects which of these infinitely many crossings to report.`,
+          `The two formats side by side, with the example from this section.`,
+          <DiagramFrameV2
+            key={'obj1-comparison'}
+            id="general-restricted-solutions"
+            title="General and restricted solutions, side by side"
+            source="/trigonometry/equations"
+          >
+            <ComparisonTable2 data={generalRestrictedComparison} />
+          </DiagramFrameV2>,
+          `The restricted solution is the general one with $n$ chosen: here $n = 0$ is the only integer that keeps both families inside $[0, 2\\pi)$. The problem statement decides which format to give.`,
         ]
     },
     {
@@ -1977,6 +2077,11 @@ export default function EquationsPage({seoData,sectionsContent , introContent, o
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={trigonometryNotationSheet}
+            current={'/trigonometry/equations'}
           />,
         ]
     },
@@ -2050,6 +2155,16 @@ export default function EquationsPage({seoData,sectionsContent , introContent, o
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `The table reads by form. The map below asks about the forms one at a time, in the order worth checking, so the first yes gives the first move.`,
+          <DiagramFrameV2
+            key={'obj10-decision'}
+            id="trig-equation-decision"
+            title="First move for a trigonometric equation"
+            source="/trigonometry/equations"
+          >
+            <DecisionBox data={trigEquationDecision} />
+          </DiagramFrameV2>,
+          `Only the squaring route can add answers that are not there: after squaring, $\\sin(x) + \\cos(x) = 1$ and $\\sin(x) + \\cos(x) = -1$ become the same equation. That route therefore ends with a check of every candidate in the original equation, as in [extraneous solutions](!#9).`,
         ]
     },
     // {

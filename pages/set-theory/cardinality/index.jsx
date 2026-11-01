@@ -2576,6 +2576,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 
 
 export async function getStaticProps(){
@@ -3072,6 +3074,12 @@ Cardinality measures the size of a [set](!/set-theory) — how many elements it 
 // Six questions, each 50-60 words, each covering ground the prose above does
 // not state in extractable form. Questions that merely restated a section
 // heading were removed.
+// FAQ pass 2026-10-31: kept the six. Added same size as a proper part (the
+// defining property under "Infinite Sets"), whether countable includes
+// finite (convention note under "Countable Sets"), irrationals versus
+// fractions (fact box under "Uncountable Sets") and why the diagonal
+// argument avoids the digits 0 and 9 (one clause under "Uncountable Sets").
+// No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "How do you find the cardinality of a union of two sets?",
@@ -3102,6 +3110,26 @@ const faqQuestions = {
     question: "Is there a largest infinity?",
     answer: "No. Cantor's theorem says |A| < |P(A)| for every set A — the power set is always strictly larger. Apply it to ℝ to get a bigger infinity, then apply it again, and again. The result is an endless tower of cardinalities with no top. For finite sets the same theorem is just the observation that 2ⁿ > n.",
     sectionId: "6"
+  },
+  obj7: {
+    question: "Can a set be the same size as part of itself?",
+    answer: "Yes, but only an infinite one. The rule $n \\mapsto 2n$ pairs every natural number with exactly one even number and reaches every even number, so $\\mathbb{N}$ and its proper subset $\\{0, 2, 4, \\ldots\\}$ have the same cardinality. A finite set never can: removing even one element leaves fewer elements than before. Being able to pair with a proper part of itself is exactly what separates infinite sets from finite ones.",
+    sectionId: "3"
+  },
+  obj8: {
+    question: "Does countable include finite sets?",
+    answer: "On this site, yes: a set is countable when it is finite or countably infinite, so $\\{1, 2, 3\\}$ and $\\mathbb{Z}$ are both countable. Some authors reserve countable for the infinite case alone, so check a text's convention before relying on it. The unambiguous terms are finite, countably infinite, and uncountable, and only the last describes sets such as $\\mathbb{R}$ that no list can exhaust.",
+    sectionId: "4"
+  },
+  obj9: {
+    question: "Are there more irrational numbers than rational numbers?",
+    answer: "Yes. The rationals are countable and the reals are not, so the irrationals must be uncountable: if they could be listed, merging that list with a list of the rationals would list every real number, which Cantor's diagonal argument rules out. So the fractions, dense as they are on the number line, are only a countable sliver of it, and the irrationals outnumber them.",
+    sectionId: "5"
+  },
+  obj10: {
+    question: "Why does Cantor's diagonal argument avoid the digits 0 and 9?",
+    answer: "Because some numbers have two decimal forms: $0.4999\\ldots$ and $0.5000\\ldots$ differ in every digit, yet both equal $0.5$. A new number built with 0s or 9s could differ from an entry in a digit and still equal it in value, so it might be on the list after all. A number whose digits avoid 0 and 9 has only one decimal form, so differing from the $n$-th entry in the $n$-th digit really makes it a different number.",
+    sectionId: "5"
   }
 }
 
@@ -3439,6 +3467,11 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={setTheoryNotationSheet}
+            current={'/set-theory/cardinality'}
           />,
         ]
     },

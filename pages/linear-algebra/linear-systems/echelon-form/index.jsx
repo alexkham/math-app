@@ -961,10 +961,14 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
 
 
 export async function getStaticProps(){
@@ -1342,6 +1346,27 @@ const rrefReadings = {
 
 // formulas-injected: v1 | 2026-06-16 | 5 callouts (obj1 pivot_definition prose-insert + row_echelon_form_definition direct, obj2 reduced_row_echelon_form_definition direct, obj3 rref_uniqueness prose-insert, obj4 free_variables_count inline-promote)
 
+// Concept introduction (section 1, "Row Echelon Form") — template G,
+// exclusion. Running instance: six matrices A–F, three in row echelon form.
+// Old obj1 text is kept in sectionsContent.obj1, unused; its fact aside,
+// four formula boxes with links, theorem box, four passages and the ref demo
+// frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSortTable = ciTableOpen(['matrix', 'leading entries (row, column)', 'what goes wrong', 'staircase?']) +
+  ciRow(['A', '(1, 1), (2, 2), (3, 3)', 'nothing', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['B', '(1, 1), (2, 3), (3, 2)', 'row 3 steps back to the left', 'no'], { shade: true }) +
+  ciRow(['C', '(1, 1), (3, 2)', 'a zero row sits above a nonzero row', 'no']) +
+  ciRow(['D', '(1, 1), (2, 3)', 'nothing — the zero row is at the bottom', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['E', '(1, 1), (2, 1)', 'the 3 sits under the leading 1', 'no']) +
+  ciRow(['F', '(1, 2), (2, 3)', 'nothing — an empty first column is allowed', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Row Echelon Form`,
@@ -1673,6 +1698,11 @@ How to check: every column of $A$ must be a combination of the basis vectors. Co
   content: `Row echelon form and reduced row echelon form are the standard targets of Gaussian elimination. The staircase pattern of pivots immediately exposes the rank, the free variables, and the solvability of the system. RREF goes one step further — it is unique for every matrix, making it a canonical form from which the solution can be read without any back substitution.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the zero row
+// that is not a contradiction (pitfall box under "Detecting Inconsistency"),
+// column-space basis from the original matrix (pitfall box under "Echelon
+// Form and Rank"), rounding and numerical rank (fact box in the same section)
+// and the origin of the word echelon (fact box under "Row Echelon Form").
 const faqQuestions = {
   obj1: {
     question: "Can you speak of \"the\" echelon form of a matrix?",
@@ -1688,6 +1718,26 @@ const faqQuestions = {
     question: "Are the free parameters unknowns still waiting to be solved for?",
     answer: "No, they range over all scalars, and the expression containing them is the entire solution set written at once rather than an equation left unfinished. Their number is forced even though their names are not: there are $n - \\operatorname{rank}(A)$ of them, and a unique solution is simply the case where that count reaches zero.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Does a row of zeros mean the system has no solution?",
+    answer: "No. A row that is zero all the way across, including after the bar, reads $0 = 0$ and puts no condition on the unknowns. Only a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ is a contradiction. The augmented matrix with rows $[1 \\; 2 \\mid 3]$ and $[0 \\; 0 \\mid 0]$ is consistent, with infinitely many solutions $x_1 = 3 - 2t$, $x_2 = t$.",
+    sectionId: "8"
+  },
+  obj5: {
+    question: "Can the pivot columns of the RREF be used as a basis for the column space?",
+    answer: "No, take the pivot columns of the original matrix instead. Row operations preserve which columns depend on which, but they change the columns themselves, so the reduced columns need not lie in $\\text{Col}(A)$. For $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ the pivot is in column $1$; the reduced column $(1, 0)$ is not in $\\text{Col}(A)$, while column $1$ of $A$, $(1, 2)$, is a basis. For the row space it is the other way round: the reduced rows are the basis.",
+    sectionId: "10"
+  },
+  obj6: {
+    question: "Why can a computer report the wrong rank?",
+    answer: "Because rounding can leave a tiny nonzero entry where elimination should give exactly $0$. The rows $(7, 21)$ and $(9, 27)$ are proportional, so the rank is $1$, yet $R_2 - \\frac{9}{7}R_1$ in double precision leaves an entry of about $3.6 \\times 10^{-15}$ in size where $0$ belongs, since $\\frac{9}{7}$ has no exact binary form. Counted as a pivot, it would make the rank $2$, so numerical software counts a pivot only above a small tolerance.",
+    sectionId: "10"
+  },
+  obj7: {
+    question: "Why is it called echelon form?",
+    answer: "From the French échelon, a rung of a ladder (échelle). Armies use the word for troops drawn up in staggered steps, each unit set off to one side of the one ahead. The pivots of an echelon form make the same offset staircase: each sits strictly to the right of the pivot above it, with only zeros underneath.",
+    sectionId: "1"
   }
 }
 const schemas = {
@@ -1788,6 +1838,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     ref: demoUnitFrame({
       svg: gaussEliminationDiagrams.refDone,
@@ -1819,9 +1873,43 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj7): the section's general solution regrouped into parametric vector form
+  const parametricBeforeAfter = {
+    header: {
+      kicker: 'Parametric vector form',
+      title: 'Four equations, one vector sum',
+      lede: 'Every solution set of a consistent linear system is one particular solution shifted by the whole null space.',
+    },
+    before: {
+      form: 'Read off the RREF',
+      expr: '$\\footnotesize \\begin{aligned} x_1 &= 5 - 2s + t \\\\ x_2 &= s \\\\ x_3 &= -2 - 3t \\\\ x_4 &= t \\end{aligned}$',
+      meta: 'Free variables x₂ = s, x₄ = t',
+    },
+    after: {
+      form: 'Parametric vector form',
+      expr: '$\\footnotesize \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} -2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 1 \\\\ 0 \\\\ -3 \\\\ 1 \\end{pmatrix}$',
+      meta: 'x = particular solution plus null-space directions',
+    },
+    operation: {
+      name: 'Split by parameter',
+      desc: 'one vector each for the constants, s and t',
+      detailsLabel: 'Keep the signs',
+      detailsTitle: '',
+      details: 'The $-2$ in $x_1 = 5 - 2s + t$ comes from moving $2x_2$ to the right side. Copying column $2$ as it stands gives the direction $(2, 1, 0, 0)$, and at $s = 1$ the point $(7, 1, -2, 0)$ fails row $1$: $7 + 2(1) - 0 = 9 \\neq 5$.',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'Four scalar equations became one vector equation, read row by row: each vector holds one kind of term.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The solution set: a 2-dimensional affine subspace of ℝ⁴, the null space shifted by the particular solution.' },
+    ],
+  };
+
 return {
   props:{
+    parametricBeforeAfter,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1847,10 +1935,85 @@ export default function EchelonFormPage({
   obj9Table,
   rrefReadings,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures, parametricBeforeAfter
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six matrices. In which of them do the leading entries step down like a staircase?`,
+        content: [
+          `A: $\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 0 & 0 & 5 \\end{pmatrix}$ $\\quad$ B: $\\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 0 & 4 \\\\ 0 & 1 & 5 \\end{pmatrix}$ $\\quad$ C: $\\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\\\ 0 & 3 \\end{pmatrix}$`,
+          `D: $\\begin{pmatrix} 2 & 1 & 0 \\\\ 0 & 0 & 3 \\\\ 0 & 0 & 0 \\end{pmatrix}$ $\\quad$ E: $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ $\\quad$ F: $\\begin{pmatrix} 0 & 1 & 2 \\\\ 0 & 0 & 3 \\end{pmatrix}$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Marking the first nonzero entry of each row settles it: A, D and F step down cleanly; B, C and E do not.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `B, C and E each break the staircase a different way: a step back to the left, a zero row too high, an entry under a step.`,
+        content: [
+          `The steps may be wider than one column — D and F skip columns — but they may never move back left, and nothing nonzero may sit underneath a step.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: zero rows at the bottom, each leading entry to the right of the one above, zeros under every leading entry.`,
+        content: [
+          `These conditions create a staircase pattern that descends from upper-left to lower-right:`,
+          `@academic[formula_callout:Row Echelon Form
+$$\\begin{pmatrix} \\boxed{2} & 3 & -1 & 4 & 7 \\\\ 0 & \\boxed{1} & 5 & 0 & 2 \\\\ 0 & 0 & 0 & \\boxed{4} & -3 \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@`,
+          `The boxed entries are pivots. Each sits to the right of and below the previous one, with zeros filling in below and to the left. The bottom row is all zeros. In general schematic form, with $\\boxed{\\ast}$ marking pivots and $\\bullet$ any entry:`,
+          `@academic[formula_callout:row_echelon_form_definition|Row Echelon Form Definition|$$\\text{REF: } \\begin{pmatrix} \\boxed{\\ast} & \\bullet & \\bullet & \\bullet & \\bullet \\\\ 0 & \\boxed{\\ast} & \\bullet & \\bullet & \\bullet \\\\ 0 & 0 & 0 & \\boxed{\\ast} & \\bullet \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
+@academic[formulas_link:/linear-algebra/formulas#row_echelon_form_definition]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A matrix is in [row echelon form](!/linear-algebra/definitions#row_echelon_form) when its zero rows are at the bottom, the leading nonzero entry of each row — its [pivot](!/linear-algebra/definitions#pivot) — lies strictly to the right of the pivot above, and every entry below a pivot is zero.`,
+        formula: [
+          `A matrix is in row echelon form (REF) if it satisfies three conditions. Every zero row (a row of all zeros) sits at the bottom of the matrix. The leading entry of each nonzero row — called the pivot — is strictly to the right of the pivot in the row above. Every entry below a pivot is zero.`,
+          `@academic[formula_callout:pivot_definition|Pivot Definition|$$\\text{pivot} = \\text{leading nonzero entry of a row in echelon form}$$]@
+@academic[formulas_link:/linear-algebra/formulas#pivot_definition]@`,
+        ],
+        footer: `So A, D and F are in row echelon form; B, C and E are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `Row echelon form is a shape, and one matrix can be brought into many different shapes of this kind.`,
+        content: [
+          `REF is not unique. Different sequences of row operations applied to the same matrix can produce different echelon forms — the pivots may have different values, and the non-pivot entries above the pivots may differ.`,
+          `@academic[rule_theorem_plain:What remains the same across all echelon forms of a given matrix is the set of pivot positions (which columns contain pivots).]@`,
+          `@academic[fact,aside:true,width:35%:A ladder hides in the name
+Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for troops drawn up in staggered steps, each unit set off to one side of the one ahead: the same offset staircase the pivots form.]@`,
+          <div key={'unit-ref'} dangerouslySetInnerHTML={{ __html: demoUnits.ref }} />,
+          `This is as far as plain Gaussian elimination goes; everything below this section is about what the extra reduction buys.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Echelon form is enough to solve a system, but not to read the answer off at a glance.`,
+        content: `Back-substitution is still needed, working upward from the last pivot. The stricter [reduced row echelon form](!/linear-algebra/linear-systems/echelon-form#2) finishes the job, and unlike row echelon form it is unique.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, reduced row echelon form and its uniqueness, pivot and free columns, reading solutions, parametric vector form, detecting inconsistency, special matrices, and rank.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1858,9 +2021,7 @@ export default function EchelonFormPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-ref'} dangerouslySetInnerHTML={{ __html: demoUnits.ref }} />,
-          `This is as far as plain Gaussian elimination goes; everything below this section is about what the extra reduction buys.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1879,6 +2040,11 @@ export default function EchelonFormPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSystemsNotationSheet}
+            current={'/linear-algebra/linear-systems/echelon-form'}
           />,
         ]
     },
@@ -1938,6 +2104,19 @@ export default function EchelonFormPage({
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-diagram'}
+            id="parametric-form-before-after"
+            title="From scalar equations to parametric vector form"
+            source="/linear-algebra/linear-systems/echelon-form"
+            before={"The section's general solution, read off the RREF, then regrouped by parameter."}
+            after={"The first vector is a particular solution; the two direction vectors span the null space of the coefficient matrix."}
+          >
+            <BeforeAfter
+              data={parametricBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

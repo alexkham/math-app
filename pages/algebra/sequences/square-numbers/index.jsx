@@ -9,6 +9,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 
 
 export async function getStaticProps(){
@@ -161,6 +166,27 @@ export async function getStaticProps(){
 // /algebra/sequences/square-numbers — sectionsContent v2
 // 5 callouts: obj1 (1), obj2 (2), obj4 (1), obj5 (1). obj3 untouched.
 
+// Concept introduction (section 1, "Definition") — template G, exclusion.
+// Running instance: piles of 12, 16, 20, 25, 30 and 36 tiles, three of which
+// lay out as full squares; picture: dot squares 1 to 4. Old obj1 text is kept
+// in sectionsContent.obj1, unused; its two formula boxes, formulas link and
+// four passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTilesTable = ciTableOpen(['tiles', 'closest layout', 'full square?']) +
+  ciRow(['12', '3 rows of 4', 'no']) +
+  ciRow(['16', '4 rows of 4', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['20', '4 rows of 5', 'no']) +
+  ciRow(['25', '5 rows of 5', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['30', '5 rows of 6', 'no']) +
+  ciRow(['36', '6 rows of 6', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -185,6 +211,45 @@ To list square numbers or test whether a number is a perfect square, use the [sq
     after: ``,
     link: '',
   },
+    notation:{
+      title:`Square Number Notation`,
+      lead:`A subscripted letter for the n-th square, a rule that adds the next odd number, and sigma for the running total.`,
+      inherited:`The subscript as position, the brace form and sigma are set out at [sequence notation](!/algebra/sequences/arithmetic#notation); $n^2$ is read as in [exponent notation](!/algebra/powers#2).`,
+      entries:[
+        {
+          id:'square-term',
+          tex:`$S_n = n^2$`,
+          read:`S sub n — the n-th square number`,
+          means:`One term, not a sum: $S_5 = 25$. The page's letter for $1, 4, 9, 16, \\ldots$, the dots in an $n \\times n$ grid.`,
+          cases:`Starts at $S_1 = 1$. A perfect square is any integer equal to some $n^2$; $0$ counts when the list starts at $S_0$.`,
+          alsoWritten:`$n^2$ alone — most texts skip the letter.`,
+          sameGlyphElsewhere:`On the [arithmetic](!/algebra/sequences/arithmetic#5) and [geometric](!/algebra/sequences/geometric#notation) pages $S_n$ is a partial sum. Here it is a single term.`,
+        },
+        {
+          id:'square-recursion',
+          tex:`$S_n = S_{n-1} + (2n - 1)$`,
+          read:`each square is the one before plus the n-th odd number`,
+          means:`Going from $(n-1)^2$ to $n^2$ adds an L-shaped border of $2n - 1$ dots. Unrolled, the rule says the first $n$ odd numbers add up to $n^2$ ([section 2](!#2)).`,
+          cases:`Needs the anchor $S_1 = 1$.`,
+          confusedWith:`$2n + 1$ — the odd number after the n-th one; it builds $S_{n+1}$ from $S_n$.`,
+        },
+        {
+          id:'sum-of-squares',
+          tex:`$\\sum_{k=1}^{n} k^2$`,
+          read:`the sum of k squared, for k from one to n`,
+          means:`Square each term, then add: $1 + 4 + \\cdots + n^2 = \\frac{n(n+1)(2n+1)}{6}$ ([section 4](!#4)).`,
+          alsoWritten:`$1^2 + 2^2 + \\cdots + n^2$; $\\sum k^2$ with the bounds understood.`,
+          confusedWith:`$\\left(\\sum_{k=1}^{n} k\\right)^2$ — add first, then square. For $n = 5$: $55$ against $225$.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/algebra`,
+      symbolsLabel:`All algebra symbols`,
+      parentHref:`/algebra/sequences`,
+      parentLabel:`Sequences`,
+      before:``,
+      after:``,
+    },
+
   obj2: {
     title: `Recursive Form and Odd Number Sums`,
     content: `Each square number can be built from the previous one by adding an L-shaped border — a **gnomon** — containing $2n - 1$ dots:
@@ -357,10 +422,17 @@ How to check: use $n = 2$. $1^2 + 2^2 = 5$, while $(1 + 2)^2 = 9$. The formula g
   content: `The square numbers $1, 4, 9, 16, 25, \\ldots$ are among the most recognizable sequences in mathematics. Each is the product of an integer with itself, each can be visualized as dots filling a square grid, and each is a sum of consecutive odd numbers. Their properties connect to arithmetic sequences, triangular numbers, and divisibility.`,
 }
 
+  // FAQ pass 2026-10-31: kept obj2 and obj3; rewrote the end of obj1 (the
+  // remainder test is a second filter, not a stronger one: 26 passes the
+  // digit test and fails mod 4, 13 the other way round). Added two-digit
+  // endings (paragraph and fact box under "Properties"), the cannonball
+  // pyramid (fact box under "Sum of Squares") and which Pythagorean triples
+  // the generator gives (one sentence under "Connections to Triangular
+  // Numbers").
   const faqQuestions = {
     obj1: {
       question: "How can you tell at a glance that a number is not a perfect square?",
-      answer: "Check its last digit. Perfect squares can only end in $0, 1, 4, 5, 6$ or $9$, so anything ending in $2, 3, 7$ or $8$ is ruled out immediately without computing a root. A stronger test uses remainders: a perfect square is always $0$ or $1$ modulo $4$, and never $2$ or $3$.",
+      answer: "Check its last digit. Perfect squares can only end in $0, 1, 4, 5, 6$ or $9$, so anything ending in $2, 3, 7$ or $8$ is ruled out immediately without computing a root. A second test uses remainders: a perfect square is always $0$ or $1$ modulo $4$, never $2$ or $3$, which catches $26$ even though it ends in $6$.",
       sectionId: "3"
     },
     obj2: {
@@ -372,6 +444,21 @@ How to check: use $n = 2$. $1^2 + 2^2 = 5$, while $(1 + 2)^2 = 9$. The formula g
       question: "Can two consecutive perfect squares share a common factor?",
       answer: "Never, other than $1$. Consecutive squares are always coprime: $\\gcd(n^2, (n+1)^2) = 1$. It follows from the fact that $n$ and $n + 1$ are themselves coprime, since consecutive integers share no factor, and squaring preserves that because the GCD of squares is the square of the GCD.",
       sectionId: "3"
+    },
+    obj4: {
+      question: "Can a perfect square end in any two digits?",
+      answer: "No: only $22$ of the $100$ endings from $00$ to $99$ ever occur. Since $(n + 50)^2 = n^2 + 100n + 2500$, a number and the number $50$ larger have squares with the same last two digits, and so do $n$ and $50 - n$, so the squares of $0$ to $25$ already show every ending. One pattern stands out: a square with an odd tens digit always ends in $6$, as $16$, $196$ and $576$ do.",
+      sectionId: "3"
+    },
+    obj5: {
+      question: "Can a pyramid of cannonballs be laid out as a square?",
+      answer: "Only one can, apart from a single ball. A square pyramid $n$ layers high holds $1^2 + 2^2 + \\cdots + n^2 = \\frac{n(n+1)(2n+1)}{6}$ balls, and for $n = 24$ that is $\\frac{24 \\cdot 25 \\cdot 49}{6} = 4900 = 70^2$, so the pyramid flattens into a $70 \\times 70$ square. G. N. Watson proved in 1918 that no other height above $1$ works.",
+      sectionId: "4"
+    },
+    obj6: {
+      question: "Does $m^2 - n^2$, $2mn$, $m^2 + n^2$ give every Pythagorean triple?",
+      answer: "No, only the primitive ones, when $m > n > 0$ are coprime and of opposite parity: $m = 2$, $n = 1$ gives $(3, 4, 5)$ and $m = 3$, $n = 2$ gives $(5, 12, 13)$. Multiples can be missed. The triple $(9, 12, 15)$ is $3 \\cdot (3, 4, 5)$, yet no $m$ and $n$ produce it, since $15$ is not a sum of two squares. Multiplying a primitive triple by a whole number $k$ covers the rest.",
+      sectionId: "5"
     }
   }
 
@@ -458,6 +545,16 @@ How to check: use $n = 2$. $1^2 + 2^2 = 5$, while $(1 + 2)^2 = 9$. The formula g
     pieces: [{ fn: (x) => x - 0.5, from: 99, to: 99, ends: [null, null], color: 'g', ghost: [[0.6, 4.6]] }, ...sqGrid(4, (i, j) => (j >= i ? 'f' : 'r'))],
     notes: [{ x: 0.3, y: 4.75, text: 'blue: T₄ = 1 + 2 + 3 + 4 = 10', pos: 'e', color: 'f' }, { x: 2.6, y: 0.45, text: 'amber: T₃ = 6', pos: 'e', color: 'r' }],
     caption: '4² = 16 = T₄ + T₃ = 10 + 6: a square is two staircase triangles' };
+  const ciSqDots = (n, x0) => { const out = []; for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) out.push({ fn: () => 4.4 - r * 0.8, from: x0 + c * 0.8, to: x0 + c * 0.8, ends: ['closed', 'closed'], color: n === 4 ? 'r' : 'f' }); return out; };
+  const fpCiSquares = { kind: 'pieces', svgTitle: 'Dots in squares of side 1, 2, 3 and 4: 1, 4, 9 and 16 dots', xRange: [0, 11.6], yRange: [0, 5], xStep: 20, yStep: 20, xLetter: ' ', yLetter: ' ',
+    pieces: [].concat(ciSqDots(1, 0.8), ciSqDots(2, 2.2), ciSqDots(3, 4.4), ciSqDots(4, 7.4)),
+    notes: [{ x: 0.8, y: 1.2, text: '1', pos: 'n' }, { x: 2.6, y: 1.2, text: '4', pos: 'n' }, { x: 5.2, y: 1.2, text: '9', pos: 'n' }, { x: 8.6, y: 1.2, text: '16', pos: 'n', color: 'r' }],
+    caption: 'Squares of side 1, 2, 3 and 4' };
+  const conceptIntroFigures = {
+    tilesTable: ciTilesTable,
+    squares: renderFunctionPlotV4(fpCiSquares),
+  };
+
   const demoUnits = {
     gnomons: demoUnitFrame({
       svg: renderFunctionPlotV4(fpGnomons),
@@ -478,6 +575,7 @@ How to check: use $n = 2$. $1^2 + 2^2 = 5$, while $(1 + 2)^2 = 9$. The formula g
          faqQuestions,
          schemas,
          demoUnits,
+         conceptIntroFigures,
           seoData: {
         title: "Square Numbers: Perfect Squares Formula | Learn Math Class",
         description: "Learn square numbers: perfect squares, sum of consecutive odd numbers, sum of squares formula, divisibility properties, and connections to triangular numbers.",
@@ -490,7 +588,75 @@ How to check: use $n = 2$. $1^2 + 2^2 = 5$, while $(1 + 2)^2 = 9$. The formula g
     }
    }
 
-export default function SquareNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+export default function SquareNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six piles of square tiles: 12, 16, 20, 25, 30 and 36. Which piles can be laid out as one complete square, with no tile left over?`,
+        content: [
+          `Every pile can be laid in rows of some length; the question is whether the rows can be exactly as long as there are rows.`,
+        ],
+        visual: ciSvg('squares'),
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Laying them out settles it: 16, 25 and 36 make full squares; 12, 20 and 30 do not.`,
+        content: [
+          ciTable('tilesTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `12, 20 and 30 make rectangles but never squares: a square needs as many rows as columns.`,
+        content: [
+          `$12 = 3 \\cdot 4$, $20 = 4 \\cdot 5$ and $30 = 5 \\cdot 6$ are each one column too wide. The piles that work are $4 \\cdot 4$, $5 \\cdot 5$ and $6 \\cdot 6$ — a whole number times itself.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The $n$-th **square number** is $S_n = n^2$, the number of dots in a square with $n$ rows and $n$ columns; a number of this form is called a [perfect square](!/algebra/definitions#perfect_square).`,
+        formula: [
+          `The $n$-th square number is:`,
+          `@academic[formula_callout:Square Number Formula
+$$S_n = n^2$$
+/algebra/formulas#square_number_formula]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+        ],
+        footer: `So $16$, $25$ and $36$ are square numbers; $12$, $20$ and $30$ are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `The square numbers form a sequence: 1, 4, 9, 16, 25, …`,
+        content: [
+          `The name reflects the geometric construction: arrange $n^2$ dots in a square grid with $n$ rows and $n$ columns. The first square numbers are:`,
+          `@academic[formula_callout:Definition
+$$1, 4, 9, 16, 25, 36, 49, 64, 81, 100, \\ldots$$]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `For a large number, building squares is impractical; the square root does the test in one step.`,
+        content: [
+          `A positive integer is called a **perfect square** if it equals $n^2$ for some integer $n$. Testing whether a number is a perfect square amounts to checking whether its [square root](!/algebra/roots) is an integer.`,
+          `To list square numbers or test whether a number is a perfect square, use the [square numbers calculator](!/algebra/calculators/sequences/square-numbers).`,
+          `How each square grows from the one before — by an odd number of dots — is shown in [recursive form and odd number sums](!/algebra/sequences/square-numbers#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the recursive form and odd number sums, the properties of square numbers, the sum of squares, and the connection to triangular numbers.`,
+      },
+    ],
+  }
 
 
   const genericSections=[
@@ -507,7 +673,31 @@ export default function SquareNumbersPage({seoData, sectionsContent, introConten
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation-notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={sequencesNotationSheet}
+            current={'/algebra/sequences/square-numbers'}
+          />,
         ]
     },
     {

@@ -1020,6 +1020,8 @@ import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualize
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 
@@ -1395,6 +1397,23 @@ graph TD
 
 // URL: /combinatorics
 
+// Concept introduction (section 1, "Counting Principles") — template D,
+// comparison. Running instance: 3 soups and 4 salads, "soup or salad" (7)
+// against "soup and salad" (12). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its bullet list, pitfall aside and three
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciLunchTable = ciTableOpen(['lunch deal', 'how one lunch is built', 'number of lunches', 'rule']) +
+  ciRow(['a soup or a salad', 'one choice from two separate groups', '3 + 4 = 7', 'addition']) +
+  ciRow(['a soup and a salad', 'one choice at each of two stages', '3 · 4 = 12', 'multiplication'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Counting Principles`,
@@ -1693,6 +1712,10 @@ In this section, we'll explore the fundamental counting principles, dive into pe
 
 
 
+// FAQ pass 2026-10-31: kept the three existing questions. Added the shuffled
+// deck (only in the 52! fact box) and factorial versus exponential growth (one
+// sentence under "Permutations and Combinations"). Topics with their own pages
+// (pigeonhole, derangements, stars and bars, Pascal's triangle) left to them.
 const faqQuestions = {
   obj1: {
     question: "What is combinatorics actually used for?",
@@ -1708,6 +1731,16 @@ const faqQuestions = {
     question: "Why are combinatorics problems hard even when the formulas are simple?",
     answer: "Because the difficulty is recognition, not calculation. The formulas are short, but choosing among them requires deciding whether order matters, whether repetition is allowed, and whether the items are distinguishable. Two problems with almost identical wording can need entirely different approaches, which is why practice focuses on classifying rather than computing.",
     sectionId: "4"
+  },
+  obj4: {
+    question: "Has a shuffled deck of cards ever been in the same order before?",
+    answer: "Almost certainly not, if the shuffle is thorough. A deck of $52$ cards has $52! \\approx 8 \\times 10^{67}$ possible orders. Even a billion shuffles a second since the Big Bang would have dealt fewer than $10^{27}$ decks, a tiny fraction of that total, so a well-shuffled deck is almost surely in an order no deck has ever had.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Do factorials grow faster than exponentials?",
+    answer: "Yes. Going from $n!$ to $(n+1)!$ multiplies by $n + 1$, while each step of $c^n$ multiplies by the same $c$, so once $n + 1$ is larger than $c$ the factorial gains at every step and must overtake. It passes $2^n$ at $n = 4$, where $24 > 16$, and $10^n$ only at $n = 25$, but it always gets there. Already $20!$ is above $2 \\times 10^{18}$.",
+    sectionId: "3"
   }
 }
 
@@ -1784,6 +1817,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    lunchTable: ciLunchTable,
+  };
+
   const demoUnits = {
     pascalRule: demoUnitFrame({
       svg: pascalTriangleDiagrams.identity,
@@ -1855,6 +1892,7 @@ const schemas = {
     scenarioOutline,
     permCombCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     combinatoricsScenariosData,
@@ -1879,7 +1917,74 @@ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', 
 
 export default function CombinatoricsBasicsPage({scenarioOutline, permCombCases, sectionsContent, introContent,
   combinatoricsScenariosData, countingPrinciplesData, countingPrinciplesDiagram,
-  seoData, faqQuestions, schemas, demoUnits}) {
+  seoData, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A lunch menu has 3 soups and 4 salads. How many different lunches are there?`,
+        content: [
+          `The answer depends on the deal: either a soup or a salad, or one soup and one salad together.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `Side by side, "or" gives 7 lunches and "and" gives 12.`,
+        content: [
+          ciTable('lunchTable'),
+          `With "or", each lunch is one of the $3$ soups or one of the $4$ salads. With "and", each of the $3$ soups can be paired with each of the $4$ salads.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Alternatives add; stages multiply.`,
+        content: [
+          `Which of the two rules applies depends on how an outcome is built. When a single choice is made from one of several separate groups, the groups are alternatives and each option belongs to exactly one of them. When an outcome needs one choice at each of several stages, every option at one stage can be combined with every option at the next. The linking word in the problem often shows which structure is present: "or" joins alternatives, "and" joins stages.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **counting principles** are the rules for combining counts: the addition rule for mutually exclusive alternatives and the multiplication rule for successive choices, with three further rules built on these two.`,
+        formula: [
+          `Five logical rules govern how counts combine:`,
+          `• **Addition rule** — when options are mutually exclusive, the counts add. $m$ ways for one method and $n$ ways for another, with no overlap, gives $m + n$ total.
+• **Multiplication rule** — when choices are sequential and independent, the counts multiply. $m$ outcomes for step 1 and $n$ outcomes for step 2 give $m \\cdot n$ combined outcomes.
+• **Complementary counting** — reframes "at least one" problems by counting their negation (the "none" case) and subtracting from the total.
+• **Double counting** — proves identities by counting the same set in two different ways and equating the two expressions.
+• **Pigeonhole principle** — guarantees that when more items are distributed than there are containers, at least one container must hold a repeat.`,
+          `The first two are foundational; the other three extend or apply them.`,
+        ],
+        footer: `So "soup or salad" gives $3 + 4 = 7$ lunches and "soup and salad" gives $3 \\cdot 4 = 12$.`,
+      },
+      {
+        id: 'kind',
+        lead: `These rules are the basic tools behind every count in combinatorics.`,
+        content: [
+          `Permutations, combinations and the binomial coefficient, later on this page, all come from using the multiplication and addition rules over and over. Each rule is treated in full on the [counting principles](!/combinatorics/counting-principles) page.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Using the wrong rule is the commonest counting mistake.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Adding counts of sequential choices
+Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 + 3 = 8$ treats the two choices as alternatives. Each shirt goes with each pair, so there are $5 \\cdot 3 = 15$ outfits.
+[Read more](!#pitfalls)]@`,
+          `Alternatives that overlap need a correction to the addition rule, set out in [when counts overlap](!/combinatorics/basics#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers inclusion-exclusion, permutations and combinations, standard scenarios, the binomial coefficient and the binomial theorem.`,
+      },
+    ],
+  }
 
 
        
@@ -1897,7 +2002,7 @@ export default function CombinatoricsBasicsPage({scenarioOutline, permCombCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

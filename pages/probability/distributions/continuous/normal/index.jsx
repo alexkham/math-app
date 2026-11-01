@@ -1090,6 +1090,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 
 
 export async function getStaticProps(){
@@ -2115,6 +2117,11 @@ How to check: work with the standard deviation, which is in the same units as th
   // named result under a heading reading only "Properties", and took over
   // the σ² versus σ question from the random-variables page, which owns the
   // convention in general but not this family's instance of it.
+  // FAQ pass 2026-10-31: kept all four. Added the sum of dependent normals
+  // (fact box under Properties), 1.96 versus the 95th percentile (pitfall
+  // box under Quantiles) and where the square root of 2π comes from (fact
+  // box under Special Cases). The bell's inflection points are asked on
+  // calculus/derivatives/graph-analysis, not here.
   const faqQuestions = {
     obj1: {
       question: "Does N(μ, σ²) use variance or standard deviation?",
@@ -2135,6 +2142,21 @@ How to check: work with the standard deviation, which is in the same units as th
       question: "What does a negative z-score mean?",
       answer: "Below the mean, by that many standard deviations. z = −2 means two standard deviations below, not a distance of two — the sign carries direction, and dropping it collapses the two tails the score exists to tell apart. Capital Z is the standard normal variable; lowercase z is one computed score.",
       sectionId: "2"
+    },
+    obj5: {
+      question: "Is the sum of two normal random variables always normal?",
+      answer: "No, not without independence. The rule $X_1 + X_2 \\sim N(\\mu_1 + \\mu_2, \\sigma_1^2 + \\sigma_2^2)$ is stated for independent variables. Take $X \\sim N(0, 1)$ and let a fair coin set $Y = X$ or $Y = -X$: $Y$ is also $N(0, 1)$, yet $X + Y$ equals $0$ half the time, a jump no normal variable has. Each variable being bell-shaped on its own says nothing about how the two move together.",
+      sectionId: "15"
+    },
+    obj6: {
+      question: "Is z = 1.96 the 95th percentile of the normal distribution?",
+      answer: "No, $1.96$ is the 97.5th percentile: it leaves 2.5% above it and, with $-1.96$, bounds the middle 95%. The 95th percentile has 5% above it and uses $z_{0.95} = 1.645$. For heights with $\\mu = 170$ cm and $\\sigma = 10$ cm that is $186.45$ cm, not $189.6$ cm. The $1.96$ belongs to two-sided statements such as 95% confidence intervals; a percentile is one-sided.",
+      sectionId: "10"
+    },
+    obj7: {
+      question: "Why does the normal distribution formula contain pi?",
+      answer: "Because $\\sqrt{2\\pi}$ is the area under the bare curve $e^{-z^2/2}$, and dividing by it makes the total area $1$. That area has no ordinary antiderivative, so it is squared instead: $\\iint e^{-(x^2 + y^2)/2}\\,dx\\,dy$ looks the same in every direction around the origin, and added up in rings of radius $r$ it equals $\\int_0^{\\infty} 2\\pi r\\, e^{-r^2/2}\\,dr = 2\\pi$. The $\\pi$ comes from those circles.",
+      sectionId: "14"
     }
   }
 
@@ -2403,6 +2425,11 @@ export default function NormalDistributionPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/continuous/normal'}
           />,
         ]
     },

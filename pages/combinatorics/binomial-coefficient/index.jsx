@@ -1582,7 +1582,7 @@ To evaluate the factorials in this formula for specific values, use the [factori
         tex: `$\\binom{n}{k}$`,
         read: `n choose k`,
         means: `The standard modern form: two numbers stacked in parentheses, no bar between them — the top chooses from, the bottom chooses how many. Reading it as a fraction is the founding error; $\\binom{6}{2} = 15$, not $3$.`,
-        cases: `The same mark survives the definition's stretch: $\\binom{x}{k}$ with real or complex upper index — **Generalization to Real Upper Index** above — and grows extra lower entries in the multinomial form of **The Multinomial Coefficient** below.`,
+        cases: `The same mark survives the definition's stretch: $\\binom{x}{k}$ with real or complex upper index — **Definition** above — and grows extra lower entries in the multinomial form of **The Multinomial Coefficient** below.`,
         sameGlyphElsewhere: `A two-entry [column vector](!/linear-algebra/vectors/basic-operations#notation) wears identical clothing — two stacked numbers in parentheses; context (counting versus coordinates) is the only separator.`,
       },
       {
@@ -1896,6 +1896,11 @@ Treating $\\binom{n}{k}$ as a stand-alone mathematical object — independent of
 `,
 };
 
+// FAQ pass 2026-10-31: cut "What is Pascal's rule?" (restates the h2
+// "Pascal's Rule"); kept the other three, renumbered. Added the odd entries
+// (only in the Sierpinski fact box), the sum of squares of a row (one sentence
+// under "Vandermonde's Identity") and a negative or fractional top index (the
+// generalized formula under "Definition", no heading asks it).
 const faqQuestions = {
   obj1: {
     question: "How do you read the notation n choose k?",
@@ -1908,13 +1913,23 @@ const faqQuestions = {
     sectionId: "2"
   },
   obj3: {
-    question: "What is Pascal's rule?",
-    answer: "It says each binomial coefficient is the sum of the two directly above it. The reason is a case split: either a particular item is included in the selection or it is not, and counting both cases separately gives the two terms. This rule is what builds Pascal's triangle row by row.",
-    sectionId: "3"
-  },
-  obj4: {
     question: "Why is zero factorial equal to one?",
     answer: "Because there is exactly one way to arrange nothing: the empty arrangement. Defining it as one also keeps the formulas consistent, since choosing all n items or choosing none should both give a count of one, and only this convention makes the binomial coefficient formula produce that.",
+    sectionId: "1"
+  },
+  obj4: {
+    question: "Which numbers in Pascal's triangle are odd?",
+    answer: "Lucas' theorem gives the rule: $\\binom{n}{k}$ is odd exactly when every binary digit $1$ of $k$ is also a $1$ of $n$. Row $10 = 1010_2$ has odd entries only at $k = 0, 2, 8, 10$, and row $64 = 1000000_2$ only at its two ends. Shading the odd entries row after row draws Sierpiński's triangle, blank triangles inside blank triangles.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "What do the squares of a row of Pascal's triangle add up to?",
+    answer: "The middle entry of the row twice as far down: $\\sum_{k} \\binom{n}{k}^2 = \\binom{2n}{n}$. It is Vandermonde's identity with $m = n = r$, once $\\binom{n}{r-k}$ is rewritten as $\\binom{n}{k}$ by symmetry. Row $3$ gives $1 + 9 + 9 + 1 = 20 = \\binom{6}{3}$: choosing $3$ of $6$ items means taking some from the first three and the rest from the other three.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Can the top number of a binomial coefficient be negative or a fraction?",
+    answer: "Yes, through the descending-product form $\\binom{x}{k} = \\frac{x(x-1)\\cdots(x-k+1)}{k!}$, which needs only $k$ to be a whole number. Then $\\binom{-1}{2} = \\frac{(-1)(-2)}{2} = 1$ and $\\binom{1/2}{2} = -\\frac{1}{8}$. Such values count nothing, but they are the coefficients of Newton's generalized binomial theorem. The factorial form $\\frac{n!}{k!\\,(n-k)!}$ does not apply, since it needs whole numbers.",
     sectionId: "1"
   }
 }

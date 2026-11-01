@@ -12,6 +12,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -397,6 +398,26 @@ const summaryTable = `
 //   },
 // };
 
+// Concept introduction (section 1, "Definition and Degree") — template E,
+// widening. Running instance: 2x − 6 = 0, x² − 4 = 0, x³ − 3x = 0 (the demo
+// frame's cubic), x³ + x = 0 and x⁴ − 5x² + 4 = 0. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box, theorem box, five passages
+// and the degree demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciDegreeTable = ciTableOpen(['equation', 'highest power of x', 'real roots', 'how many']) +
+  ciRow(['2x − 6 = 0', '1', '3', '1']) +
+  ciRow(['x² − 4 = 0', '2', '−2, 2', '2'], { shade: true }) +
+  ciRow(['x³ − 3x = 0', '3', '−√3, 0, √3', '3']) +
+  ciRow(['x³ + x = 0', '3', '0', '1 — the other two are complex'], { shade: true }) +
+  ciRow(['x⁴ − 5x² + 4 = 0', '4', '−2, −1, 1, 2', '4'], { last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -417,7 +438,7 @@ const sectionsContent = {
 
 ## Formulas Used on This Page
 
-- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + \\cdots + r_n = -a_{n-1}$, $r_1 r_2 \\cdots r_n = (-1)^n a_0$
+- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + \\cdots + r_n = -\\frac{a_{n-1}}{a_n}$, $r_1 r_2 \\cdots r_n = (-1)^n \\frac{a_0}{a_n}$
 `,
     before: ``,
     after: `
@@ -607,7 +628,7 @@ The general pattern is: odd multiplicity means the graph crosses the axis, even 
     content: `Vieta's formulas, introduced for the quadratic case on the [quadratic equations](!/algebra/equations/quadratic) page, extend to polynomials of any degree.
 
 @academic[formula_callout:Vieta's Formulas (General)
-$$r_1 + r_2 + \\cdots + r_n = -a_{n-1} \\qquad r_1 r_2 \\cdots r_n = (-1)^n a_0$$
+$$r_1 + r_2 + \\cdots + r_n = -\\frac{a_{n-1}}{a_n} \\qquad r_1 r_2 \\cdots r_n = (-1)^n \\frac{a_0}{a_n}$$
 /algebra/formulas#vietas_formulas_general]@
 
 @academic[formulas_link:Browse all algebra formulas
@@ -744,6 +765,14 @@ const introContent = {
 
 
 
+// FAQ pass 2026-10-31: kept the three existing questions. Added a quartic
+// with no real roots (figure card under "Solving Quartic Equations"; the
+// odd-degree real root is already asked on complex-numbers/equations-
+// polynomials), Cardano reaching a real root through imaginary numbers (fact
+// box and casus irreducibilis sentence under "Solving Cubic Equations") and
+// how a double root reacts to a small change in the coefficients (one
+// sentence under "Root Multiplicity"). Rational root, factor theorem and
+// Vieta questions left to polynomials/rules and polynomials/roots.
 const faqQuestions = {
   obj1: {
     question: "Does Abel–Ruffini mean fifth-degree equations cannot be solved?",
@@ -759,6 +788,21 @@ const faqQuestions = {
     question: "If there is no formula for high degrees, how are these equations actually solved?",
     answer: "By reduction, then approximation. The rational root theorem finds any rational roots, synthetic division factors them out and drops the degree, and the quadratic formula finishes whatever quadratic remains. When no rational root exists and nothing factors, numerical methods take over: Newton's method and bisection approximate the real roots to any precision required.",
     sectionId: "7"
+  },
+  obj4: {
+    question: "Can a quartic equation have no real roots?",
+    answer: "Yes. $x^4 + 1 = 0$ has none, since $x^4$ is never negative for real $x$; its four roots are two complex conjugate pairs. Counted with multiplicity, a real quartic has zero, two or four real roots: with $u = x^2$, $x^4 - 5x^2 + 4 = 0$ gives four, $\\pm 1$ and $\\pm 2$, and $x^4 - 2x^2 - 3 = 0$ gives two, $\\pm\\sqrt{3}$. A cubic is different: it always crosses the axis at least once.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "How can Cardano's formula reach a real root through imaginary numbers?",
+    answer: "Because the imaginary parts cancel. For $x^3 - 15x - 4 = 0$ the formula gives $\\sqrt[3]{2 + 11i} + \\sqrt[3]{2 - 11i}$, and since $(2 \\pm i)^3 = 2 \\pm 11i$, the two cube roots are $2 + i$ and $2 - i$, whose sum is the real root $4$. Bombelli worked this out in 1572. When all three roots of a cubic are real, the casus irreducibilis, this detour through complex values cannot be avoided.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "What happens to a double root when the coefficients change slightly?",
+    answer: "It splits into two nearby roots, which may be real or complex, whereas a simple root only shifts a little. The equation $(x - 1)^2 = 0$ has the double root $1$; changing the right side to $10^{-6}$ gives the two roots $0.999$ and $1.001$, and changing it to $-10^{-6}$ gives $1 \\pm 0.001i$. A change of one millionth in a coefficient moves the roots by a thousandth.",
+    sectionId: "8"
   }
 }
 
@@ -866,6 +910,10 @@ const schemas = {
       { x: -1.25, y: 5.3, text: 'x⁴ + 1: none', pos: 'e', color: 'r' }],
     caption: 'A quartic can have four, two or no real roots' };
 
+  const conceptIntroFigures = {
+    degreeTable: ciDegreeTable,
+  };
+
   const demoUnits = {
     degree: demoUnitFrame({
       svg: equationVisualizerDiagrams['cubic-three'],
@@ -901,6 +949,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj7Table,
@@ -928,10 +977,73 @@ export default function PolynomialEquationsPage({
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A linear equation has one root and a quadratic up to two, each found by a formula.`,
+        content: [
+          `$2x - 6 = 0$ gives $x = 3$; $x^2 - 4 = 0$ gives $x = \\pm 2$. The pattern suggests that the higher the power of $x$, the more roots become possible.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Raising the highest power of x raises the ceiling on the number of roots — though an equation need not reach it.`,
+        content: [
+          ciTable('degreeTable'),
+          `$x^3 - 3x = 0$ reaches three real roots, while $x^3 + x = x(x^2 + 1) = 0$ has only one: the factor $x^2 + 1$ never vanishes for real $x$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **polynomial equation** in one variable is an equation $a_n x^n + \\cdots + a_1 x + a_0 = 0$ with $a_n \\neq 0$; the highest power $n$ is its [degree](!/algebra/definitions#degree_of_an_equation).`,
+        formula: [
+          `A polynomial equation in one variable has the general form`,
+          `@academic[formula_callout:Definition and Degree
+$$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
+          `where $a_n \\neq 0$ and $n$ is a positive integer. The integer $n$ is the degree of the equation, and $a_n$ is the leading coefficient. The coefficients $a_0, a_1, \\dots, a_n$ are typically real numbers, though the theory extends naturally to complex coefficients.`,
+        ],
+        footer: `So $x^3 - 3x = 0$ is a polynomial equation of degree $3$, and $x^4 - 5x^2 + 4 = 0$ one of degree $4$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The degree caps the number of roots: at most n real roots, and exactly n when complex roots are counted with multiplicity.`,
+        content: [
+          `The degree governs the maximum number of roots.`,
+          `@academic[rule_theorem_plain:A polynomial of degree $n$ has at most $n$ real roots, and when counted with multiplicity over the complex numbers, it has exactly $n$ roots.]@`,
+          `Counted with multiplicity, a cubic may have one or three real roots, a quartic may have zero, two, or four, and the possible counts depend on the specific coefficients involved.`,
+          <div key={'unit-degree'} dangerouslySetInnerHTML={{ __html: demoUnits.degree }} />,
+          `The theorems below say how many roots exist over the complex numbers; the picture shows the real ones.`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost: linear and quadratic equations are the first two members of the family.`,
+        content: [
+          `[Linear equations](!/algebra/equations/linear) correspond to $n = 1$ and [quadratic equations](!/algebra/equations/quadratic) to $n = 2$. Both have complete, closed-form solutions and are treated on their own pages. This page addresses degree three and above, where new phenomena emerge: more roots, more intricate factorizations, and eventually the impossibility of a universal solving formula.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What is lost: from degree five on, no general formula exists.`,
+        content: `Cubic and quartic equations still have formulas, but they are long and rarely used by hand. For degree five and higher no formula in radicals can exist at all, as [degree five and beyond](!/algebra/equations/polynomial#7) explains.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the fundamental theorem of algebra, the factor and remainder theorems, the rational root theorem, solving cubics and quartics, degree five and beyond, root multiplicity, and the relationships between roots and coefficients.`,
+      },
+    ],
+  }
 
   const genericSections=[
 
@@ -949,9 +1061,7 @@ export default function PolynomialEquationsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-degree'} dangerouslySetInnerHTML={{ __html: demoUnits.degree }} />,
-          `The theorems below say how many roots exist over the complex numbers; the picture shows the real ones.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

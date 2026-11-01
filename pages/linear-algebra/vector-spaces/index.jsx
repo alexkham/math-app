@@ -996,6 +996,7 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1596,8 +1597,43 @@ const schemas = {
     ],
   };
 
+// FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+// so only what the overview itself holds: polynomials as vectors and the
+// Peano fact box (What a Vector Space Is), span versus independence (How the
+// Ideas Fit Together, with the example under Linear Independence), the
+// y'' + y = 0 example (Common Examples) and the counting-entries pitfall
+// (Dimension).
+const faqQuestions = {
+    obj1: {
+      question: "Can a polynomial be a vector?",
+      answer: "Yes. In linear algebra a vector is any element of a vector space, whatever it looks like. Polynomials of degree at most $2$ can be added term by term, $(x^2 + 1) + (2x - 3) = x^2 + 2x - 2$, and scaled, $3(x^2 + 1) = 3x^2 + 3$, and these operations obey the same ten axioms as arrows in the plane, with the zero polynomial as the zero vector. So span, independence, basis and dimension carry over to polynomials unchanged.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Who first defined a vector space?",
+      answer: "Giuseppe Peano, in 1888. He gave the first axiomatic definition of a vector space and already noted that the polynomials of degree at most $n$ form a space of $n + 1$ dimensions. His book had little influence at the time, and the axioms caught on only after Stefan Banach's dissertation of 1920. Since then the same short list of rules has been used for arrows, polynomials, matrices and functions alike.",
+      sectionId: "1"
+    },
+    obj3: {
+      question: "What is the difference between span and linear independence?",
+      answer: "Span asks what a set of vectors can reach; independence asks whether any of them is redundant. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ span all of $\\mathbb{R}^2$, yet they are dependent, since $(1, 1) = (1, 0) + (0, 1)$, and dropping any one of them leaves the span unchanged. A basis is a set that does both jobs at once: it spans the space with nothing to spare, and the dimension counts its vectors.",
+      sectionId: "12"
+    },
+    obj4: {
+      question: "Is the solution set of a differential equation a vector space?",
+      answer: "For a homogeneous linear one, yes. Sums and multiples of solutions of $y'' + y = 0$ still solve it, so the solutions form a subspace of the functions, with basis $\\cos x$, $\\sin x$ and dimension $2$: every solution is $a\\cos x + b\\sin x$. The same holds for any $y'' + py' + qy = 0$, where any two independent solutions form a basis. With a nonzero right-hand side the zero function is no longer a solution, so the set is not a subspace.",
+      sectionId: "11"
+    },
+    obj5: {
+      question: "Does a plane through the origin in $\\mathbb{R}^3$ have dimension $3$?",
+      answer: "No, $2$. Its vectors have three entries because the plane sits inside $\\mathbb{R}^3$, but dimension counts basis vectors, not entries. For the plane $x + y + z = 0$, solving $x = -y - z$ writes every member as $y(-1, 1, 0) + z(-1, 0, 1)$, and those two vectors form a basis. A quick check: a subspace with the same dimension as the space around it is the whole space, and $(1, 0, 0)$ is not on this plane.",
+      sectionId: "7"
+    }
+  }
+
 return {
   props:{
+    faqQuestions,
     vectorSpaceExamplesOutline,
     vectorSpaceChainLevels,
     demoUnits,
@@ -1622,7 +1658,7 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
+export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1813,6 +1849,22 @@ Peano gave the first axiomatic definition of a vector space in 1888 and already 
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Vector Spaces FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 ]

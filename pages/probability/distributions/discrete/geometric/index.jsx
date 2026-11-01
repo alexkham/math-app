@@ -865,6 +865,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 
 
 export async function getStaticProps(){
@@ -1562,6 +1564,10 @@ const geometricExplanations = {
   // out of the render array, so no live heading names it — and led with the
   // two rival conventions, which the notation section catalogues and no
   // heading mentions at all.
+  // FAQ pass 2026-10-31: kept all four. Added the rule of three for zero
+  // successes in n trials (fact box under the CDF) and why the median wait is
+  // shorter than the mean (median properties and the mode-median-mean figure
+  // card). "A 6 within six rolls" is left to probability/events, which asks it.
   const faqQuestions = {
     obj1: {
       question: "Does the geometric distribution count trials or failures?",
@@ -1582,6 +1588,16 @@ const geometricExplanations = {
       question: "Is the geometric distribution the only memoryless distribution?",
       answer: "Among discrete distributions, yes — no other discrete distribution satisfies the identity. It has a continuous twin, though: the [exponential](!/probability/distributions/continuous/exponential) owns the same property with real-valued slots, and is likewise the only continuous distribution that does. Memorylessness picks out exactly one distribution on each side of the discrete/continuous line.",
       sectionId: "15"
+    },
+    obj5: {
+      question: "If something never happens in 300 trials, how rare must it be?",
+      answer: "Rarer than about 1 in 100, by the rule of three: after $n$ trials with no success, values of $p$ above $\\frac{3}{n}$ are implausible. Any such $p$ would make an all-failure run less than 5% likely, since $\\left(1 - \\frac{3}{n}\\right)^n < e^{-3} \\approx 0.05$. So no side effect in 300 patients rules out rates above roughly $\\frac{3}{300} = 1\\%$ at the 95% level.",
+      sectionId: "5"
+    },
+    obj6: {
+      question: "Why is the median wait shorter than the mean wait?",
+      answer: "Because the long right tail pulls the mean up. For a die rolled until the first 6 the mean is $6$ rolls, yet the median is $4$: $P(X \\leq 4) = 1 - \\left(\\frac{5}{6}\\right)^4 \\approx 0.518$, while $P(X \\leq 3) \\approx 0.421$. A few very long waits drag the average past the typical one. For small $p$ the median is about $\\frac{\\ln 2}{p} \\approx \\frac{0.69}{p}$, roughly 70% of the mean, and the mode is always $1$.",
+      sectionId: "8"
     }
   }
 
@@ -1864,6 +1880,11 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/discrete/geometric'}
           />,
         ]
     },

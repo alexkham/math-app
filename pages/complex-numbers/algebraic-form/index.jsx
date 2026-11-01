@@ -1212,6 +1212,8 @@ import complexExplorerDiagrams from '@/app/components/calculators/complex-number
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 
@@ -2147,6 +2149,11 @@ faq: {
   `
 }
 
+// FAQ pass 2026-10-31: kept all four (the rectangular-versus-polar question
+// has no polar material on this page; left for the owner). Added the
+// Hamilton pairs proof of i^2 = -1 (fact box under Equality), the Fraktur
+// spellings (notation card) and i versus -i (fact box under Properties of
+// the Conjugate).
 const faqQuestions = {
   obj1: {
     question: "Why is the imaginary part of a complex number a real number?",
@@ -2160,13 +2167,28 @@ const faqQuestions = {
   },
   obj3: {
     question: "What is the difference between rectangular and polar form?",
-    answer: "Rectangular form gives the horizontal and vertical components as a + bi. Polar form gives distance from the origin and angle from the positive real axis instead. They describe the same point using different coordinates, and each suits different work: rectangular for adding, polar for multiplying and taking powers.",
+    answer: "Rectangular form gives the horizontal and vertical components as a + bi. Polar form gives distance from the origin and angle from the positive real axis instead. They describe the same point using different coordinates, and each suits different work: rectangular for adding, polar for multiplying and taking powers. Polar form is taught on the [trigonometric form](!/complex-numbers/trigonometric-form) page.",
     sectionId: "1"
   },
   obj4: {
     question: "When is a complex number purely real or purely imaginary?",
     answer: "It is purely real when its imaginary part is zero, leaving a point on the horizontal axis. It is purely imaginary when its real part is zero, leaving a point on the vertical axis. Zero satisfies both conditions at once, which places it at the origin where the two axes meet.",
     sectionId: "1"
+  },
+  obj5: {
+    question: "Can $i^2 = -1$ be proved instead of assumed?",
+    answer: "Yes, if a complex number is defined as a pair of reals. Hamilton did this in 1837: pairs $(a, b)$ are equal only when both entries match, and they multiply by $(a, b)(c, d) = (ac - bd, ad + bc)$. Taking $i = (0, 1)$ gives $(0, 1)(0, 1) = (-1, 0)$, which is the real number $-1$. So $i^2 = -1$ becomes a calculation, and $a + bi$ is shorthand for the pair $(a, b)$.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "What do $\\Re(z)$ and $\\Im(z)$ mean?",
+    answer: "They are the real part and the imaginary part, the same as $\\operatorname{Re}(z)$ and $\\operatorname{Im}(z)$, written in Fraktur capitals. The style is the 19th-century German convention and is still standard in physics and older analysis texts. Modern print usually spells the operators out, because the Fraktur letters are hard to read at small sizes. Either way, $\\Im(7 + 4i) = 4$, a real number.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "Is there any algebraic difference between $i$ and $-i$?",
+    answer: "No. Both square to $-1$, and conjugation swaps them while keeping every real number fixed and respecting sums and products. So any true statement built from arithmetic and real numbers stays true when $i$ is replaced by $-i$ throughout. Apart from doing nothing, conjugation is the only rule with these properties. Which square root of $-1$ is called $i$ is a convention.",
+    sectionId: "5"
   }
 }
 
@@ -2452,6 +2474,11 @@ Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the po
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/algebraic-form'}
           />,
           <div
             key={'obj2-table'}

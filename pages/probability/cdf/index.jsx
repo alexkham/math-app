@@ -668,6 +668,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 
 
 export async function getStaticProps(){
@@ -832,6 +834,14 @@ export async function getStaticProps(){
   // the discrete/continuous split across three sections. Replaced with the
   // notation section's endpoint questions, which is where every costly CDF
   // error actually lives.
+  // FAQ pass 2026-10-31: kept all four; reworded one sentence of the
+  // survival-function answer, which said the CDF and P(X > x) differ by the
+  // mass at x (they add to 1; it is P(X ≥ x) that differs by that mass).
+  // Added the CDF on values X never takes (callout under "From Events to
+  // Random Variables" and the pitfall under Key Properties), the devil's
+  // staircase (fact box under Mixed Distributions) and F(X) being uniform
+  // (fact box under Why the CDF Matters); no heading asks these. The < vs ≤
+  // question stays on probability-function/pdf.
   const faqQuestions = {
     obj1: {
       question: "Why is the CDF defined with ≤ rather than <?",
@@ -850,8 +860,23 @@ export async function getStaticProps(){
     },
     obj4: {
       question: "What is the survival function?",
-      answer: "The complement of the CDF: P(X > x) = 1 − F(x). Where the CDF accumulates probability up to a point, the survival function measures what is left beyond it. The two differ by exactly the mass sitting at x — invisible for continuous variables, but a real gap at a discrete jump. It is standard in reliability and time-to-event work.",
+      answer: "The complement of the CDF: P(X > x) = 1 − F(x). Where the CDF accumulates probability up to a point, the survival function measures what is left beyond it. It leaves out the point itself, so it differs from P(X ≥ x) by exactly the mass sitting at x — invisible for continuous variables, but a real gap at a discrete jump. It is standard in reliability and time-to-event work.",
       sectionId: "notation"
+    },
+    obj5: {
+      question: "Is the CDF defined for values the variable can never take?",
+      answer: "Yes, for every real number. For a fair die, $F(4.7) = \\frac{4}{6}$, because nothing is added between $4$ and $5$, and $F(-3) = 0$. A CDF given by a formula needs the same care: $1 - e^{-x}$ for a waiting time must be paired with $F(x) = 0$ for $x < 0$, or it gives $F(-1) = 1 - e \\approx -1.72$, a negative probability.",
+      sectionId: "1"
+    },
+    obj6: {
+      question: "Can a CDF have no jumps and no density?",
+      answer: "Yes. Write $X$ in base $3$ with each digit a fair choice of $0$ or $2$. Every single value has probability $0$, so the CDF never jumps, yet $X$ always lies in the Cantor set, of total length $0$, so no density can describe it. Its CDF, the devil's staircase, climbs from $0$ to $1$ while staying flat on gaps of total length $1$ inside $[0, 1]$.",
+      sectionId: "mixed"
+    },
+    obj7: {
+      question: "Why is F(X) uniformly distributed?",
+      answer: "Because of how $F$ accumulates. For a continuous $X$ and any $u$ between $0$ and $1$, the event $F_X(X) \\le u$ means $X$ has not passed the point where $F_X$ reaches $u$, which happens with probability exactly $u$. So $F_X(X)$ is uniform on $[0, 1]$. Run backwards, $F_X^{-1}(U)$ for a uniform $U$ has CDF $F_X$, a standard way to simulate any distribution.",
+      sectionId: "matters"
     }
   }
 
@@ -1036,7 +1061,7 @@ The choice of "less than or equal to" is not arbitrary. It ensures that the CDF 
           read:`the probability that X is at most x`,
           means:`The inequality is a convention, not an accident: writing $\\le$ rather than $<$ includes the point itself, which is what makes the CDF right-continuous and lets one definition serve discrete, continuous and mixed variables alike.`,
           cases:`For continuous variables the choice is invisible — $P(X = x) = 0$, so $\\le$ and $<$ agree; for discrete ones it decides whether a jump belongs to the step before or after it, which is exactly where **Common Mistakes** below finds its errors.`,
-          confusedWith:`A strict inequality. $F(3)$ includes the outcome $3$ — the survival function $P(X > x) = 1 - F(x)$ is what excludes it, and the two differ by exactly the mass sitting at the point.`,
+          confusedWith:`A strict inequality. $F(3)$ includes the outcome $3$ — the strict version $P(X < 3)$ is what excludes it, and the two differ by exactly the mass sitting at the point.`,
         },
         {
           id:'interval-difference',
@@ -1571,6 +1596,11 @@ export default function PageTemplate({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probRandomVarsNotationSheet}
+            current={'/probability/cdf'}
           />,
         ]
     },

@@ -699,6 +699,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1399,8 +1400,42 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Overview-only
+  // questions: the 2-to-what-power-gives-10 table and the swapped-base pitfall
+  // (both under "What is a Logarithm?"), the base-1 and base-0 rows of the
+  // restrictions table, the two points every graph shares (Key Values figure)
+  // and the thirty-questions fact box under Properties.
+  const faqQuestions = {
+    obj1: {
+      question: "What is $\\log_2(10)$?",
+      answer: "About $3.3219$. No whole power of $2$ gives $10$: $2^3 = 8$ is too small and $2^4 = 16$ too big, so the answer lies between $3$ and $4$. Trying exponents in between narrows it down: $2^{3.3} \\approx 9.85$, $2^{3.32} \\approx 9.987$, $2^{3.322} \\approx 10.0005$. On a calculator, the change of base formula gives it directly: $\\log_2(10) = \\frac{\\log(10)}{\\log(2)} = \\frac{1}{0.30103} \\approx 3.3219$.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Is $\\log_2(8) = 3$ the same as $3^2 = 8$?",
+      answer: "No. The base of the logarithm stays the base of the power, and the value of the logarithm becomes the exponent: $\\log_2(8) = 3$ means $2^3 = 8$. Writing $3^2 = 8$ puts the answer in the base, and the check fails at once, since $3^2 = 9$. Read $\\log_a(b) = c$ as the question what power of $a$ gives $b$, and the answer $c$ always lands in the exponent.",
+      sectionId: "1"
+    },
+    obj3: {
+      question: "Why can't a logarithm have base $1$?",
+      answer: "Because every power of $1$ is $1$. The logarithm $\\log_1(7)$ would ask for an exponent with $1^c = 7$, and none exists, while $\\log_1(1)$ would accept every exponent at once, so no single value can be the answer. Base $0$ fails the same way, since $0^c = 0$ for every positive $c$. Bases between $0$ and $1$, such as $\\frac{1}{2}$, are allowed and give decreasing logarithms.",
+      sectionId: "2"
+    },
+    obj4: {
+      question: "Do all logarithm graphs pass through the same point?",
+      answer: "Yes, through $(1, 0)$, because $a^0 = 1$ for every valid base, so $\\log_a(1) = 0$. Each graph also passes through $(a, 1)$, because $a^1 = a$, but that point is different for every base: $(2, 1)$ for $\\log_2(x)$, $(e, 1)$ for $\\ln(x)$ and $(10, 1)$ for $\\log(x)$. The larger the base, the further right that second point sits and the flatter the curve.",
+      sectionId: "3"
+    },
+    obj5: {
+      question: "How many yes-or-no questions does it take to find a number among a billion?",
+      answer: "At most $30$. Each answer halves the possibilities that remain, so the number of questions is the number of halvings that bring a billion down to one, which is $\\log_2(10^9) \\approx 29.9$. Since $2^{30} = 1{,}073{,}741{,}824$ is just over a billion, $30$ halvings always suffice. The slow growth of the logarithm is the point: a thousand times more possibilities need only about $10$ more questions.",
+      sectionId: "6"
+    }
+  }
+
    return {
   props: {
+    faqQuestions,
     logInequalityCases,
     demoUnits,
     conceptIntroFigures,
@@ -1424,7 +1459,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LogarithmsPage({logInequalityCases, 
+export default function LogarithmsPage({faqQuestions, logInequalityCases,
   seoData,
   sectionsContent,
   introContent,
@@ -1637,6 +1672,22 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Logarithms FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 

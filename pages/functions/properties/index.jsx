@@ -1743,7 +1743,7 @@ export async function getStaticProps(){
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Vertical</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">x = a</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) → ±∞ as x → a; cannot be crossed</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) → ±∞ as x → a; met at most once, usually not at all</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">f(x) = 1 ⁄ (x − 2) at x = 2</td>
     </tr>
     <tr>
@@ -2802,31 +2802,52 @@ These traits — symmetry, monotonicity, boundedness, continuity, and others —
 
 
 
+// FAQ pass 2026-10-31: cut three heading questions (even or odd, one-to-one,
+// removable vs non-removable discontinuity: the h2s Even and Odd Functions,
+// One-to-One Functions, Types of Discontinuities) and "Can a function be
+// continuous but not differentiable?" (the page has no differentiability
+// material; calculus/derivatives/differentiability owns it, and
+// algebra/absolute-value asks the |x| case); renumbered. Kept the asymptote
+// question. Added the even plus odd split and x-axis symmetry (fact box and
+// one paragraph under Symmetry), x^3 + 1 (pitfall box under Even and Odd),
+// 1/x not decreasing (pitfall box under Monotonic), why the Extreme Value
+// Theorem needs a closed interval (1/x on (0, 1) under Absolute Extrema) and
+// no smallest period (fact box under Periodicity).
 const faqQuestions = {
   obj1: {
-    question: "How do you determine if a function is even or odd?",
-    answer: "Substitute −x into the formula. Getting the original function back means it is even, and getting the exact negative of it means it is odd. Anything else makes it neither, which is the most common outcome. Even functions are symmetric about the vertical axis, odd ones about the origin.",
-    sectionId: "1"
-  },
-  obj2: {
-    question: "What is a one-to-one function and why does it matter?",
-    answer: "It is a function that never produces the same output twice, so distinct inputs always give distinct outputs. It matters because only one-to-one functions can be inverted: if two inputs shared an output, the reverse assignment would not know which to return. The horizontal line test checks the condition graphically.",
-    sectionId: "3"
-  },
-  obj3: {
-    question: "Can a function be continuous but not differentiable?",
-    answer: "Yes. Continuity only requires the graph to have no breaks, while differentiability additionally requires no sharp corners. The absolute value function is continuous everywhere but has a corner at zero, where no single tangent direction exists. Differentiability implies continuity, but the implication does not run the other way.",
-    sectionId: "11"
-  },
-  obj4: {
-    question: "What is the difference between a removable and a non-removable discontinuity?",
-    answer: "A removable discontinuity is a single missing or misplaced point that could be patched by redefining the function there, showing as a hole. Non-removable ones cannot be fixed by changing one value: a jump has the two sides landing at different heights, and an infinite discontinuity has the function growing without bound.",
-    sectionId: "12"
-  },
-  obj5: {
     question: "Can a function have more than one horizontal asymptote?",
     answer: "Yes, at most two, one for each direction. The behaviour as the input grows large positively can differ from the behaviour as it grows large negatively. Rational functions have the same asymptote both ways, but functions involving absolute values or exponentials can approach different heights on the two sides.",
     sectionId: "13"
+  },
+  obj2: {
+    question: "Can every function be split into an even part and an odd part?",
+    answer: "Yes, on a domain symmetric about $0$: $f(x) = \\frac{f(x) + f(-x)}{2} + \\frac{f(x) - f(-x)}{2}$, where the first part is even and the second odd. The split is unique, because the only function that is both even and odd is $0$: $f(-x) = f(x)$ and $f(-x) = -f(x)$ together force $f(x) = 0$. For $e^x$ the two parts are $\\cosh x$ and $\\sinh x$.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "Can the graph of a function be symmetric about the x-axis?",
+    answer: "Only if it lies on the $x$-axis itself. Symmetry about the $x$-axis puts $(x, -y)$ on the graph whenever $(x, y)$ is, so any point with $y \\neq 0$ comes with a partner directly above or below it. That is one input with two outputs, which fails the vertical line test. Curves such as the circle $x^2 + y^2 = 1$ have this symmetry, but they are relations, not functions.",
+    sectionId: "2"
+  },
+  obj4: {
+    question: "Is a polynomial of odd degree an odd function?",
+    answer: "Not necessarily; every term has to be an odd power. $x^3 + 1$ has degree $3$, but $f(-x) = -x^3 + 1$ equals neither $f(x) = x^3 + 1$ nor $-f(x) = -x^3 - 1$, so it is neither even nor odd. The constant $1$ is the term $1 \\cdot x^0$, an even power, and it keeps its sign. A quick check: $f(1) = 2$ and $f(-1) = 0$, while an odd function would need $f(-1) = -2$.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Is 1/x a decreasing function?",
+    answer: "On each of its two intervals, yes; on its whole domain, no. Falling on $(-\\infty, 0)$ and on $(0, \\infty)$ does not make it decreasing on their union: $-1 < 1$, yet $f(-1) = -1 < 1 = f(1)$. Decreasing on a set needs $f(a) > f(b)$ for every pair $a < b$ in it, including pairs taken from different pieces, so $\\frac{1}{x}$ is not monotonic.",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "Why does the Extreme Value Theorem need a closed interval?",
+    answer: "Because on an open interval a function can approach its best values without reaching them. $\\frac{1}{x}$ is continuous on $(0, 1)$, but it grows without bound near $0$ and only approaches $1$ near $1$, so it has neither a maximum nor a minimum there. On a closed, bounded interval $[a, b]$ continuity is enough, and the extrema sit at turning points inside or at the two endpoints.",
+    sectionId: "10"
+  },
+  obj7: {
+    question: "Can a periodic function have no smallest period?",
+    answer: "Yes. The function equal to $1$ at rational $x$ and $0$ at irrational $x$ has every positive fraction as a period, because adding a fraction never changes whether $x$ is rational. Fractions can be as small as you like, so there is no smallest period and no fundamental period. A constant function is a simpler case: every positive number is a period.",
+    sectionId: "15"
   }
 }
 

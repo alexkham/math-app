@@ -85,6 +85,16 @@ const landingPageData = {
         ]
       },
       {
+        title: 'Integer Part',
+        items: [
+          {
+            name: 'Floor & Ceiling',
+            icon: '⌊⌋',
+            href: '/arithmetic/integer-part'
+          }
+        ]
+      },
+      {
         title: 'Tools',
         items: [
           {
@@ -342,7 +352,22 @@ const landingPageData = {
         link: '/arithmetic/modulo/negative-numbers',
         linkTitle: 'Negative Modulo'
       },
-      
+
+      // Row 8b: [W] Integer and Fractional Part
+      {
+        id: 23,
+        htmlId: 'integer-part',
+        title: 'Integer and Fractional Part',
+        summary: 'Floor, ceiling, fractional part and rounding',
+        content: `Every real number splits into an integer part and a fractional part: $3.7 = 3 + 0.7$. The integer part is the floor $\\lfloor x \\rfloor$, the greatest integer at most $x$; the ceiling $\\lceil x \\rceil$ is the least integer at least $x$; the fractional part is $\\{x\\} = x - \\lfloor x \\rfloor$, always in $[0, 1)$. Negative numbers are where they surprise: $\\lfloor -3.7 \\rfloor = -4$ and $\\{-3.7\\} = 0.3$, because the floor rounds down, not toward zero. The floor also gives quotient and remainder, $r = a - n\\lfloor a/n \\rfloor$, and answers counting questions such as how many buses of $12$ seat $50$ students: $\\lceil 50/12 \\rceil = 5$.`,
+        icon: '⌊⌋',
+        cardWidth: 1280,
+        cardHeight: 320,
+        overflowBehavior: 5,
+        link: '/arithmetic/integer-part',
+        linkTitle: 'Integer and Fractional Part'
+      },
+
 
       // Row 9: [N] GCF Calc | [W] LCM Calc
       {

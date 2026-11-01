@@ -855,6 +855,7 @@ import Head from 'next/head'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -862,6 +863,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 import renderVectorArrowsV6 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v6'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
 
 
 export async function getStaticProps(){
@@ -1163,6 +1166,22 @@ const homogeneousAppearances = {
 
 
 // formulas-injected: v1 | 2026-06-16 | 2 callouts (obj2 underdetermined_homogeneous_has_nontrivial prose-insert, obj3 homogeneous_solution_space_dimension inline-promote)
+
+// Concept introduction (section 1, "Definition") — template A, definition
+// last. Running instance: x + 2y = 0, 2x + 4y = 0 against x + y = 0,
+// x − y = 0. Old obj1 text is kept in sectionsContent.obj1, unused; its
+// formula box, theorem box and three passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTryTable = ciTableOpen(['system', '(0, 0) works?', 'other solutions']) +
+  ciRow(['x + 2y = 0, 2x + 4y = 0', 'yes', '(2, −1), (−4, 2), … — every (2t, −t)'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['x + y = 0, x − y = 0', 'yes', 'none: adding gives 2x = 0, so x = 0 and y = 0'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1466,6 +1485,11 @@ How to check: test the value found. $A - \\frac{3}{2}I = \\begin{pmatrix} 1/2 & 
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added balancing a
+// chemical equation (fact box under "When Do Nontrivial Solutions Exist?"),
+// n - rank versus m - rank (pitfall box under "The Solution Set Is the Null
+// Space") and echelon rows versus null-space vectors (pitfall box under
+// "Finding the Null Space").
 const faqQuestions = {
   obj1: {
     question: "Does \"trivial solution\" mean the easy one?",
@@ -1481,6 +1505,21 @@ const faqQuestions = {
     question: "What is the difference between $\\mathbf{0}$ and $O$?",
     answer: "Shape. Bold $\\mathbf{0}$ is the zero vector, a single column, while $O$ is the zero matrix, a rectangular array. The two letters are reserved separately precisely so an equation can hold both without ambiguity, and the bold face is what distinguishes the vector from the plain scalar zero as well.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "How do you balance a chemical equation with linear algebra?",
+    answer: "Give each molecule an unknown coefficient and write one equation per element; the result is a homogeneous system. For $a\\,\\text{C}_3\\text{H}_8 + b\\,\\text{O}_2 \\to c\\,\\text{CO}_2 + d\\,\\text{H}_2\\text{O}$, carbon gives $3a = c$, hydrogen $8a = 2d$ and oxygen $2b = 2c + d$. Three equations in four unknowns force a nontrivial solution, and its smallest whole-number point, $(1, 5, 3, 4)$, is the balanced equation.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Is the nullity the number of rows or the number of columns minus the rank?",
+    answer: "Columns: the nullity is $n - \\operatorname{rank}(A)$, where $n$ counts the unknowns, because each column without a pivot is one free variable. Using the number of equations instead gives $3 - 3 = 0$ for a $3 \\times 5$ matrix of rank $3$ and wrongly rules out nontrivial solutions; the true nullity is $5 - 3 = 2$. The two formulas agree for square matrices, so the slip shows only on non-square ones.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Are the rows of the echelon form a basis for the null space?",
+    answer: "No, they span the row space, a different subspace. Null-space vectors come only from solving: set each free variable to $1$ in turn, the others to $0$, and solve for the pivot variables. In the worked example, $A(1, 2, -1, 0, 3) = (15, 34, -7)$, not $\\mathbf{0}$, while the solved vectors $(-2, 1, 0, 0, 0)$ and $(-1, 0, -1, 1, 0)$ both give $\\mathbf{0}$. The count differs too: three nonzero rows, but two free variables.",
+    sectionId: "4"
   }
 }
 
@@ -1591,6 +1630,10 @@ const schemas = {
     caption: 'every solution = one particular solution + a null-space vector',
   };
 
+  const conceptIntroFigures = {
+    tryTable: ciTryTable,
+  };
+
   const demoUnits = {
     nontrivial: demoUnitFrame({
       svg: linearSystemDiagrams.infinite,
@@ -1616,6 +1659,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -1644,10 +1688,69 @@ export default function HomogeneousSystemsPage({
   obj7Table,
   homogeneousAppearances,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Some systems of equations ask which combinations of the unknowns balance out to nothing.`,
+        content: [
+          `Every equation has $0$ on the right: forces that cancel, currents that sum to zero at a junction, a mixture with no net change. Such systems behave very differently from ones with numbers on the right.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Two systems with zero right-hand sides: both are solved by (0, 0), but only one has other solutions.`,
+        content: [
+          `In the first system the second equation is just twice the first, so there is really one condition, $x = -2y$, and a whole line of solutions. In the second, the two conditions together pin both unknowns to $0$.`,
+          ciTable('tryTable'),
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `The zero solution is forced: putting zeros into a system whose right side is zero always balances.`,
+        content: [
+          `The augmented matrix is $[A \\mid \\mathbf{0}]$. Since the last column is all zeros, row operations on the augmented matrix never produce a contradictory row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$.`,
+          `@academic[rule_theorem_plain:A homogeneous system is always consistent.]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [homogeneous system](!/linear-algebra/definitions#homogeneous_system) is a linear system in which every equation has zero on the right-hand side, written $A\\mathbf{x} = \\mathbf{0}$.`,
+        formula: [
+          `A homogeneous linear system is one where every equation has zero on the right-hand side:`,
+          `@academic[formula_callout:Definition
+$$A\\mathbf{x} = \\mathbf{0}$$]@`,
+        ],
+        footer: `So both systems in the table are homogeneous, with coefficient matrices having rows $(1, 2), (2, 4)$ and $(1, 1), (1, -1)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A homogeneous system is never inconsistent: it always has at least the trivial solution.`,
+        content: [
+          `The vector $\\mathbf{x} = \\mathbf{0}$ satisfies every equation — this is the trivial solution. It always exists. The central question for a homogeneous system is never &quot;does a solution exist?&quot; but &quot;does a nontrivial solution exist?&quot;`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What generalizes and what does not: (0, 0) always works, but whether anything else does depends on the coefficients.`,
+        content: `The first system had a redundant equation and gained a line of solutions; the second did not. Telling the two cases apart — by free variables, rank or the determinant — is the subject of [when do nontrivial solutions exist](!/linear-algebra/linear-systems/homogeneous#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, when nontrivial solutions exist, the solution set as the null space, finding it, parametric vector form, superposition, and the comparison with non-homogeneous systems.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1655,7 +1758,7 @@ export default function HomogeneousSystemsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1674,6 +1777,11 @@ export default function HomogeneousSystemsPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSystemsNotationSheet}
+            current={'/linear-algebra/linear-systems/homogeneous'}
           />,
         ]
     },

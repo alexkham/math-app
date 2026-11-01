@@ -14,6 +14,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import MistakeFix from '@/app/components/infographics/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 
 
 
@@ -416,7 +420,9 @@ The notation $-x$ in the second case does not mean "a negative number." It means
 
 Geometrically, $|x|$ is the distance from $x$ to the origin on the number line. The number $-7$ sits $7$ units from zero, so $|-7| = 7$. The number $4$ sits $4$ units from zero, so $|4| = 4$. Distance is inherently non-negative, which is why absolute value never produces a negative result.
 
-This non-negativity has an immediate consequence for equations: if $|f(x)| = k$ and $k < 0$, the equation has no solution. No expression inside absolute value bars can produce a negative output. The sign of the right-hand side is the first thing to check before any case analysis begins.`,
+This non-negativity has an immediate consequence for equations: if $|f(x)| = k$ and $k < 0$, the equation has no solution. No expression inside absolute value bars can produce a negative output. The sign of the right-hand side is the first thing to check before any case analysis begins.
+
+The [absolute value](!/algebra/absolute-value) page develops this distance reading and the rules the bars obey, such as $|ab| = |a|\\,|b|$ and $\\sqrt{x^2} = |x|$.`,
     before: ``,
     after: ``,
     link: '',
@@ -624,81 +630,9 @@ These geometric readings do not replace the algebraic method, but they provide a
 
   obj9: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for most wrong answers to absolute value equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Splitting a negative right-hand side**
-
-The right-hand side is a negative constant, but the equation is split into two cases as if it were positive, and the two results are reported as solutions.
-
-Wrong working:
-$$|x + 3| = -2 \\implies x + 3 = -2 \\text{ or } x + 3 = 2 \\implies x = -5 \\text{ or } x = -1$$
-
-Right working: an absolute value is never negative, so $|x + 3|$ cannot equal $-2$ for any $x$. The equation has no solution.
-
-Why it happens: the split into $p = b$ or $p = -b$ becomes a reflex, and it is applied before anyone looks at the condition $b > 0$.
-
-How to check: substitute the results. $x = -5$ gives $|-2| = 2$, and $x = -1$ gives $|2| = 2$; neither equals $-2$.
-
-**Dropping the negative case**
-
-Only the case with the positive right-hand side is solved, so one of the two solutions is missing.
-
-Wrong working:
-$$|3x + 5| = 11 \\implies 3x + 5 = 11 \\implies x = 2$$
-
-Right working: both cases are solved.
-$$3x + 5 = 11 \\implies x = 2 \\qquad 3x + 5 = -11 \\implies 3x = -16 \\implies x = -\\frac{16}{3}$$
-The solution set is $\\left\\{-\\frac{16}{3}, 2\\right\\}$.
-
-Why it happens: removing the bars looks like removing a pair of brackets, and a linear equation is expected to have one answer.
-
-How to check: the inside $3x + 5$ can be $11$ or $-11$, and both have absolute value $11$. Substituting $x = -\\frac{16}{3}$ gives $|-16 + 5| = |-11| = 11$.
-
-**Negating only the first term**
-
-In the second case of $|f(x)| = |g(x)|$, the minus sign is attached to the first term of $g(x)$ instead of to the whole expression.
-
-Wrong working:
-$$|2x - 1| = |x + 4| \\implies 2x - 1 = -x + 4 \\implies 3x = 5 \\implies x = \\frac{5}{3}$$
-
-Right working: the whole expression is negated.
-$$2x - 1 = -(x + 4) = -x - 4 \\implies 3x = -3 \\implies x = -1$$
-Together with $x = 5$ from the first case, the solution set is $\\{-1, 5\\}$.
-
-Why it happens: the brackets around $x + 4$ are dropped when the minus sign is written, so the sign reaches only the $x$.
-
-How to check: substitute. $x = \\frac{5}{3}$ gives $\\frac{7}{3}$ on the left and $\\frac{17}{3}$ on the right, which differ. $x = -1$ gives $3$ on both sides.
-
-**Keeping a candidate outside its interval**
-
-Each interval between the critical points gives its own equation, and the solution of that equation is kept without checking that it lies in the interval.
-
-Wrong working: for $|x - 1| + |x + 3| = 3$, each interval is solved and its result is kept.
-$$x < -3: \\quad -2x - 2 = 3 \\implies x = -\\frac{5}{2}$$
-$$-3 \\leq x \\leq 1: \\quad 4 = 3, \\text{ no solution}$$
-$$x > 1: \\quad 2x + 2 = 3 \\implies x = \\frac{1}{2}$$
-Both values are reported as solutions.
-
-Right working: $-\\frac{5}{2}$ is not less than $-3$, and $\\frac{1}{2}$ is not greater than $1$, so both are rejected. The equation has no solution.
-
-Why it happens: each piece is a plain linear equation whose answer looks final, and the interval it came from is written at the top of the working and forgotten by the end.
-
-How to check: substitute into the original. Both values give $|x - 1| + |x + 3| = 4$, not $3$. The distance reading agrees: the total distance from $x$ to $1$ and to $-3$ is never less than $4$.
-
-**Keeping a root where the right side is negative**
-
-The right-hand side contains $x$, both cases are solved, and both results are kept without checking the sign of the right-hand side.
-
-Wrong working:
-$$|x + 3| = 2x \\implies x + 3 = 2x \\text{ or } x + 3 = -2x \\implies x = 3 \\text{ or } x = -1$$
-
-Right working: $|A| = B$ requires $B \\geq 0$. At $x = 3$ the right side is $6$ and $|3 + 3| = 6$, so $x = 3$ holds. At $x = -1$ the right side is $-2$, so $x = -1$ is extraneous. The only solution is $x = 3$.
-
-Why it happens: with a positive constant on the right, both cases always survive, and that habit carries over to right-hand sides that change sign.
-
-How to check: substitute each candidate into the original equation. $x = -1$ gives $|2| = 2$ on the left and $-2$ on the right.`,
+    content: `Five mistakes account for most wrong answers to absolute value equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Substituting every answer back into the original equation catches four of the five slips, because each of them reports a value that does not satisfy it. Dropping the negative case is different: the answer it gives is correct, and the error is the solution that is missing. So two checks belong at the end of every absolute value equation: each answer satisfies the original equation, and every case that could give an answer has been solved.`,
     link: '',
   },
 };
@@ -712,21 +646,39 @@ How to check: substitute each candidate into the original equation. $x = -1$ giv
   content: `The absolute value function strips a number of its sign, returning its distance from zero on the number line. When this function wraps around an expression containing an unknown, the resulting equation splits into cases — each case a separate equation to solve, each constrained to the interval where that case applies. Absolute value equations are not inherently difficult, but they demand a structured approach. The case-splitting method is the reliable path, and the geometric interpretation as distance often reveals the answer faster than the algebra.`,
 };
 
+// FAQ pass 2026-10-31: cut "Does |a + b| equal |a| + |b|?" (the same question
+// is on algebra/absolute-value, whose h2 "The Triangle Inequality" owns it).
+// Rewrote the squaring answer: for |A| = k with k > 0 squaring is exact, the
+// real risk is a bare expression on one side (section 6's |x - 2| = 3x - 4).
+// Added infinitely many solutions (fact box under "Equations with Multiple
+// Absolute Value Terms"), why |x - 1| = |x - 7| has one solution (theorem box
+// under "Geometric Interpretation") and why |x^2 - 4| = 5 has only two (the
+// example under "Solving Equations of the Form |f(x)| = k").
 const faqQuestions = {
   obj1: {
-    question: "Does $|a + b|$ equal $|a| + |b|$?",
-    answer: "Not in general. The bars are a bracket pair, not a factor that distributes across a sum, so the inside is evaluated first: $|3 + (-5)| = 2$, while $|3| + |-5| = 8$. What always holds is the weaker triangle inequality $|a + b| \\leq |a| + |b|$, with equality only when $a$ and $b$ share a sign.",
-    sectionId: "notation"
-  },
-  obj2: {
     question: "Why do vertical bars mean different things in different places?",
     answer: "They are the most overloaded bracket in mathematics. Some uses keep this meaning: $|z|$ for a [complex number](!/complex-numbers/basics) is still distance to the origin, and $\\|v\\|$ doubles the bars for vector length. Others do not: $|A|$ on a set is [cardinality](!/set-theory/basics), a count, and $|M|$ on a matrix is the [determinant](!/linear-algebra/determinants), which can be negative.",
     sectionId: "notation"
   },
-  obj3: {
+  obj2: {
     question: "Can you get rid of absolute value bars by squaring?",
-    answer: "Yes, when both sides carry bars. Because $|x| = \\sqrt{x^2}$, the equation $|A| = |B|$ is equivalent to $A^2 = B^2$, which turns a case analysis into one polynomial equation. It does not work for $|A| = k$ with a bare constant, where squaring introduces the spurious branch $A = -k$ unless $k \\geq 0$ is checked first.",
+    answer: "Yes, safely when both sides carry bars. Because $|x| = \\sqrt{x^2}$, the equation $|A| = |B|$ is equivalent to $A^2 = B^2$, which turns a case analysis into one polynomial equation. With bars on one side only, squaring can add roots: $|x - 2| = 3x - 4$ squared gives $x = 1$ and $x = \\frac{3}{2}$, but at $x = 1$ the right side is $-1$, so only $x = \\frac{3}{2}$ solves the original.",
     sectionId: "notation"
+  },
+  obj3: {
+    question: "Can an absolute value equation have infinitely many solutions?",
+    answer: "Yes. For any $x$ between $-3$ and $1$, the distances from $x$ to $1$ and to $-3$ add up to $4$, the gap between the two points, so $|x - 1| + |x + 3| = 4$ holds for every $x$ in $[-3, 1]$. In general $|x - a| + |x - b| = d$ has no solution when $d < |a - b|$, the whole interval between $a$ and $b$ when $d = |a - b|$, and two solutions when $d > |a - b|$.",
+    sectionId: "5"
+  },
+  obj4: {
+    question: "Why does $|x - 1| = |x - 7|$ have only one solution?",
+    answer: "Because one of its two cases collapses. The case $x - 1 = x - 7$ reduces to $-1 = -7$, which is false, so it gives nothing; the case $x - 1 = -(x - 7)$ gives $2x = 8$ and $x = 4$. Read as distance, the equation asks for the point equally far from $1$ and $7$, and on the number line the only such point is their midpoint, $4$.",
+    sectionId: "7"
+  },
+  obj5: {
+    question: "Why does $|x^2 - 4| = 5$ have only two solutions?",
+    answer: "Because only one of its two cases has real roots. The case $x^2 - 4 = 5$ gives $x^2 = 9$, so $x = \\pm 3$; the case $x^2 - 4 = -5$ needs $x^2 = -1$, which no real number satisfies. With a quadratic inside, each case can contribute zero, one or two solutions, so the total can be anything from none to four.",
+    sectionId: "3"
   }
 }
 
@@ -881,8 +833,51 @@ const schemas = {
     }),
   };
 
+  // MistakeFix pilot 2026-11-01: the "Common Pitfalls" entries, moved word for
+  // word out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  // Each chain of implications is broken into steps; errorAt is the first
+  // step that goes wrong.
+  const absEquationPitfalls = {
+    mistakes: [
+      { id: 'negative-right-side', name: `Splitting a negative right-hand side`, errorAt: 1,
+        what: `The right-hand side is a negative constant, but the equation is split into two cases as if it were positive, and the two results are reported as solutions.`,
+        wrong: [`$$|x + 3| = -2$$`, `$$\\implies x + 3 = -2 \\text{ or } x + 3 = 2$$`, `$$\\implies x = -5 \\text{ or } x = -1$$`],
+        right: [`$$|x + 3| = -2$$`, `An absolute value is never negative, so $|x + 3|$ cannot equal $-2$ for any $x$. The equation has no solution.`],
+        why: `The split into $p = b$ or $p = -b$ becomes a reflex, and it is applied before anyone looks at the condition $b > 0$.`,
+        check: `Substitute the results. $x = -5$ gives $|-2| = 2$, and $x = -1$ gives $|2| = 2$; neither equals $-2$.` },
+      { id: 'negative-case', name: `Dropping the negative case`, errorAt: 1,
+        what: `Only the case with the positive right-hand side is solved, so one of the two solutions is missing.`,
+        wrong: [`$$|3x + 5| = 11$$`, `$$\\implies 3x + 5 = 11 \\implies x = 2$$`],
+        right: [`$$|3x + 5| = 11$$`, `Both cases are solved.
+$$3x + 5 = 11 \\implies x = 2$$
+$$3x + 5 = -11 \\implies 3x = -16 \\implies x = -\\frac{16}{3}$$`, `The solution set is $\\left\\{-\\frac{16}{3}, 2\\right\\}$.`],
+        why: `Removing the bars looks like removing a pair of brackets, and a linear equation is expected to have one answer.`,
+        check: `The inside $3x + 5$ can be $11$ or $-11$, and both have absolute value $11$. Substituting $x = -\\frac{16}{3}$ gives $|-16 + 5| = |-11| = 11$.` },
+      { id: 'negating-first-term', name: `Negating only the first term`, errorAt: 1,
+        what: `In the second case of $|f(x)| = |g(x)|$, the minus sign is attached to the first term of $g(x)$ instead of to the whole expression.`,
+        wrong: [`$$|2x - 1| = |x + 4|$$`, `$$\\implies 2x - 1 = -x + 4$$`, `$$\\implies 3x = 5 \\implies x = \\frac{5}{3}$$`],
+        right: [`$$|2x - 1| = |x + 4|$$`, `The whole expression is negated.
+$$2x - 1 = -(x + 4) = -x - 4$$`, `$$\\implies 3x = -3 \\implies x = -1$$`, `Together with $x = 5$ from the first case, the solution set is $\\{-1, 5\\}$.`],
+        why: `The brackets around $x + 4$ are dropped when the minus sign is written, so the sign reaches only the $x$.`,
+        check: `Substitute. $x = \\frac{5}{3}$ gives $\\frac{7}{3}$ on the left and $\\frac{17}{3}$ on the right, which differ. $x = -1$ gives $3$ on both sides.` },
+      { id: 'candidate-outside-interval', name: `Keeping a candidate outside its interval`, errorAt: 4,
+        what: `Each interval between the critical points gives its own equation, and the solution of that equation is kept without checking that it lies in the interval.`,
+        wrong: [`$$|x - 1| + |x + 3| = 3$$`, `$$x < -3: \\quad -2x - 2 = 3 \\implies x = -\\frac{5}{2}$$`, `$$-3 \\leq x \\leq 1: \\quad 4 = 3, \\text{ no solution}$$`, `$$x > 1: \\quad 2x + 2 = 3 \\implies x = \\frac{1}{2}$$`, `Each interval is solved and its result is kept. Both values are reported as solutions.`],
+        right: [`$$|x - 1| + |x + 3| = 3$$`, `$$x < -3: \\quad -2x - 2 = 3 \\implies x = -\\frac{5}{2}$$`, `$$-3 \\leq x \\leq 1: \\quad 4 = 3, \\text{ no solution}$$`, `$$x > 1: \\quad 2x + 2 = 3 \\implies x = \\frac{1}{2}$$`, `$-\\frac{5}{2}$ is not less than $-3$, and $\\frac{1}{2}$ is not greater than $1$, so both are rejected. The equation has no solution.`],
+        why: `Each piece is a plain linear equation whose answer looks final, and the interval it came from is written at the top of the working and forgotten by the end.`,
+        check: `Substitute into the original. Both values give $|x - 1| + |x + 3| = 4$, not $3$. The distance reading agrees: the total distance from $x$ to $1$ and to $-3$ is never less than $4$.` },
+      { id: 'root-with-negative-right-side', name: `Keeping a root where the right side is negative`, errorAt: 2,
+        what: `The right-hand side contains $x$, both cases are solved, and both results are kept without checking the sign of the right-hand side.`,
+        wrong: [`$$|x + 3| = 2x$$`, `$$\\implies x + 3 = 2x \\text{ or } x + 3 = -2x$$`, `$$\\implies x = 3 \\text{ or } x = -1$$`],
+        right: [`$$|x + 3| = 2x$$`, `$$\\implies x + 3 = 2x \\text{ or } x + 3 = -2x$$`, `$|A| = B$ requires $B \\geq 0$. At $x = 3$ the right side is $6$ and $|3 + 3| = 6$, so $x = 3$ holds. At $x = -1$ the right side is $-2$, so $x = -1$ is extraneous.`, `The only solution is $x = 3$.`],
+        why: `With a positive constant on the right, both cases always survive, and that habit carries over to right-hand sides that change sign.`,
+        check: `Substitute each candidate into the original equation. $x = -1$ gives $|2| = 2$ on the left and $-2$ on the right.` },
+    ],
+  };
+
 return {
   props: {
+    absEquationPitfalls,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -906,6 +901,7 @@ return {
 }
 
 export default function AbsoluteValueEquationsPage({
+  absEquationPitfalls,
   seoData,
   sectionsContent,
   introContent,
@@ -1032,6 +1028,11 @@ Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x =
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={polyEqIneqNotationSheet}
+            current={'/algebra/equations/absolute-value'}
+          />,
                   <div key={'unit-basic'} dangerouslySetInnerHTML={{ __html: demoUnits.basic }} />,
           `Everything else on this page is this picture with a more complicated expression inside the bars.`,
         ]
@@ -1121,6 +1122,15 @@ Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x =
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="absolute-value-equation-pitfalls"
+            title="Common pitfalls in absolute value equations"
+            source="/algebra/equations/absolute-value"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={absEquationPitfalls} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

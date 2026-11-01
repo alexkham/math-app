@@ -720,6 +720,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -877,6 +878,12 @@ export async function getStaticProps(){
   // Approximation sections state without ever asking. The no-memory
   // assumption defers to the law of large numbers, which owns the
   // gambler's fallacy. Three, not padded.
+  // FAQ pass 2026-10-31: kept all three. Added whether a real toss is 50/50
+  // (fact box under What Is Being Modeled), von Neumann's fair result from a
+  // biased coin (fact box under Probability Assignment) and five heads in ten
+  // tosses (pitfall under Distributions Built from Repeated Coin Tosses); no
+  // heading asks any of them. Streaks under Assumptions left out, as the
+  // no-memory topic stays with the law of large numbers.
   const faqQuestions = {
     obj1: {
       question: "What's the difference between the coin toss model and a Bernoulli trial?",
@@ -892,6 +899,21 @@ export async function getStaticProps(){
       question: "Can coin tosses produce a continuous distribution?",
       answer: "Not exactly, but arbitrarily closely. Combine long sequences of binary outcomes and rescale the result, and the discrete steps get finer until smooth shapes emerge. Continuous distributions can be viewed as limits of experiments built entirely from binary randomness — which is why simulations reach continuous behavior from nothing more than repeated coin flips.",
       sectionId: "9"
+    },
+    obj4: {
+      question: "Is a real coin toss exactly 50/50?",
+      answer: "Not quite. A flipped coin wobbles as it spins, so a coin caught in the hand shows the face it started on slightly more often: Diaconis, Holmes and Montgomery predicted about 51% in 2007, and 350,757 recorded flips in 2023 gave 50.8%. Heads and tails overall still came out at 50.0% each, so the lean is toward the starting face, not toward heads. The model keeps none of this physics, only two labels and their probabilities.",
+      sectionId: "1"
+    },
+    obj5: {
+      question: "How do you get a fair result from a biased coin?",
+      answer: "Toss it twice: call HT heads, call TH tails, and start again after HH or TT. If $P(H) = p$, then HT and TH both have probability $p(1 - p)$, so the result is exactly fair for every $0 < p < 1$, even when $p$ is unknown. The cost is extra tosses, since every HH and TT is thrown away. The trick is John von Neumann's, from 1951.",
+      sectionId: "4"
+    },
+    obj6: {
+      question: "Do ten coin tosses usually give five heads?",
+      answer: "No. Five is the most likely count, but $P(5 \\text{ heads}) = \\frac{252}{1024} \\approx 0.246$, so about three times in four the count is something else. The counts $4$ and $6$ each have probability $\\frac{210}{1024} \\approx 0.205$, almost as much, and the five counts from $3$ to $7$ together carry about $0.89$. The expected count, $5$, marks the centre of the distribution, not a result that usually happens exactly.",
+      sectionId: "8"
     }
   }
 
@@ -970,6 +992,25 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 1, "What Is Being Modeled") — template A,
+  // definition last. Running instance: four two-outcome situations (coin,
+  // free throw, quality check, newborn). Old obj1 text is kept in
+  // sectionsContent.obj1, unused; its three passages and the component's
+  // fact-aside-and-mechanics item are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciTwoTable = ciTableOpen(['situation', 'the two outcomes', 'their probabilities']) +
+    ciRow(['tossing a fair coin', 'heads, tails', '1/2 and 1/2'], { color: '#2563EB', cols: [2] }) +
+    ciRow(['a basketball free throw', 'in, miss', 'about 0.7 and 0.3'], { shade: true }) +
+    ciRow(['checking one part off a line', 'fine, defective', 'about 0.98 and 0.02']) +
+    ciRow(['the sex of a newborn', 'boy, girl', 'about 0.51 and 0.49'], { shade: true, last: true }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -1351,6 +1392,10 @@ From this basic source of randomness, more complex experiments can be constructe
     yBars: mdCoinBars,
     notes: [{ x: 1, y: 0.14, text: '40 tosses: 2⁴⁰ sequences', pos: 'e' }, { x: 1, y: 0.127, text: 'bars: P(k heads)', pos: 'e', color: 'f' }, { x: 1, y: 0.114, text: 'P(20 heads) ≈ 0.125', pos: 'e', color: 'f' }],
     caption: 'Counting heads in many tosses: a smooth bell appears' };
+  const conceptIntroFigures = {
+    twoTable: ciTwoTable,
+  };
+
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: coinSampleSpaceDiagrams.none,
@@ -1383,6 +1428,7 @@ From this basic source of randomness, more complex experiments can be constructe
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1409,10 +1455,72 @@ export default function CoinTossPage({
   schemas,
   assumptionsTable,
   constructionsTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A coin toss, a free throw, a check on one part: each ends in exactly one of two results.`,
+        content: [
+          `The situations have nothing physical in common, yet each asks the same question: which of two things happened, and how likely was each?`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Stripped down, each situation is just two labelled outcomes and a probability for each.`,
+        content: [
+          ciTable('twoTable'),
+          `Only the probabilities differ from row to row. The fair coin is the special case where both are $\\frac{1}{2}$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `What matters is which of the two outcomes occurs and how likely each is; every physical detail drops away.`,
+        content: [
+          `The model does not describe the physical act of tossing a coin.  
+It abstracts away all physical details and retains only the binary nature of the outcome.`,
+          `Each trial produces exactly one outcome, and no additional information is carried over from the process itself.  
+The model is therefore defined entirely by its possible outcomes and their assigned probabilities.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **coin toss model** is a probability model of a single trial with exactly two possible outcomes, each given a probability, the two adding up to $1$.`,
+        formula: [
+          `The coin toss model represents a random mechanism with two possible outcomes produced in a single trial.`,
+        ],
+        footer: `So a free throw that goes in $70\\%$ of the time is a coin toss model with probabilities $0.7$ and $0.3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is the simplest probability model there is, and the building block for repeated trials.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:Real coins favour their starting face
+A flipped coin wobbles as it spins, so a coin caught in the hand shows the face it started on slightly more often: Diaconis, Holmes and Montgomery predicted about 51% in 2007. In 2023, 350,757 recorded flips gave 50.8%, while heads and tails overall still came out at 50.0% each.]@
+
+A real toss is a mechanical event. The coin leaves the thumb with some upward speed and some spin, and from that moment its flight is fixed by physics: which face is up when it is caught depends only on those starting conditions. Differences in speed and spin too small for a hand to control decide the result, and this is why the outcome looks random. The model keeps none of this, only two labels and the probabilities given to them.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The two outcomes need not be equally likely; "coin toss" names the shape of the model, not a fair coin.`,
+        content: `A biased coin, a weighted die read as "six or not six", or a test that is right $95\\%$ of the time all fit the model. Its two outcomes are named in [outcome space](!/probability/models/coin-toss#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the outcome space, events, the probabilities, repeated tosses, and the distributions they lead to.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1429,11 +1537,7 @@ export default function CoinTossPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          `@academic[fact,aside:true,width:35%:Real coins favour their starting face
-A flipped coin wobbles as it spins, so a coin caught in the hand shows the face it started on slightly more often: Diaconis, Holmes and Montgomery predicted about 51% in 2007. In 2023, 350,757 recorded flips gave 50.8%, while heads and tails overall still came out at 50.0% each.]@
-
-A real toss is a mechanical event. The coin leaves the thumb with some upward speed and some spin, and from that moment its flight is fixed by physics: which face is up when it is caught depends only on those starting conditions. Differences in speed and spin too small for a hand to control decide the result, and this is why the outcome looks random. The model keeps none of this, only two labels and the probabilities given to them.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

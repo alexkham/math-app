@@ -14,6 +14,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -485,6 +486,23 @@ const summaryTable = `
 
 // }
 
+// Concept introduction (section 1, "Unit Fraction Exponents") — template E,
+// widening. Running instance: 25^(1/2) = 5, with 4^x at half steps as the
+// check. Old obj1 text is kept in sectionsContent.obj1, unused; its six
+// formula boxes, formulas link, pitfall aside and six passages are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciHalfTable = ciTableOpen(['exponent x', '0', '1/2', '1', '3/2', '2']) +
+  ciRow(['4 to the power x', '1', '2', '4', '8', '16'], { color: '#2563EB', cols: [2, 4] }) +
+  ciRow(['step from the previous value', '', '× 2', '× 2', '× 2', '× 2'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -928,6 +946,11 @@ This equivalence is not merely notational convenience. Exponent form often simpl
 }
 
 
+// FAQ pass 2026-10-31: kept the three existing questions. Added the twelfth
+// root of 2 in piano tuning (fact box and paragraph under "Combining Radicals
+// via Exponents") and the A4 paper sizes (fact box and paragraph under
+// "Converting Between Forms"); no heading asks them. Exponent-view questions
+// are left to algebra/powers/rational-exponents.
 const faqQuestions = {
   obj1: {
     question: "Why does $a^{1/n}$ mean the $n$th root?",
@@ -943,6 +966,16 @@ const faqQuestions = {
     question: "What restricts the base in $a^{-1/2}$?",
     answer: "Two conditions stack, and together they force $a > 0$. The even denominator requires a non-negative base, since no real number squares to a negative. The negative exponent separately requires $a \\neq 0$, because it produces a reciprocal and zero cannot sit in a denominator. Neither restriction alone is enough; combined they rule out zero as well as negatives.",
     sectionId: "5"
+  },
+  obj4: {
+    question: "Why is the twelfth root of $2$ used for piano notes?",
+    answer: "Because a piano splits each octave, a doubling of the frequency, into twelve equal steps, so each step multiplies the frequency by $\\sqrt[12]{2} = 2^{1/12} \\approx 1.0595$, and $k$ steps by $2^{k/12}$. Seven steps give $2^{7/12} \\approx 1.4983$, close to the pure fifth $\\frac{3}{2}$ but never equal to it: that would need $2^{19} = 3^{12}$, an even number equal to an odd one.",
+    sectionId: "8"
+  },
+  obj5: {
+    question: "Why is A4 paper 210 by 297 millimeters?",
+    answer: "Because the A sizes are built from roots of $2$. A0 has an area of $1$ square meter and sides in the ratio $\\sqrt{2}$, which forces sides of $2^{-1/4}$ and $2^{1/4}$ meters. Each halving gives the next size, and four halvings divide each side by $2^2 = 4$, so A4 measures $2^{-9/4}$ by $2^{-7/4}$ meters, that is $\\frac{1}{\\sqrt[4]{512}}$ by $\\frac{1}{\\sqrt[4]{128}}$, about $210$ by $297$ millimeters.",
+    sectionId: "4"
   }
 }
 
@@ -1031,6 +1064,10 @@ const schemas = {
     notes: [{ x: 0.12, y: 0.6, text: 'each +1/3 doubles the value', pos: 'e', color: 'r' },
       { x: 0.06, y: -0.5, text: '±2/3: 4 and 1/4, reciprocals', pos: 'e', color: 'r' }],
     caption: '8^(−2/3) = 1 / 8^(2/3) = 1/4: a negative exponent flips the value' };
+  const conceptIntroFigures = {
+    halfTable: ciHalfTable,
+  };
+
   const demoUnits = {
     thirdSteps: demoUnitFrame({
       svg: renderFunctionPlotV4(fpThirdSteps),
@@ -1100,6 +1137,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Rational Exponents: Fractional Powers & Radicals | Learn Math Class",
       description: "Learn rational exponents: fractional powers as roots, a^(m/n) meaning, negative rational exponents, converting between forms, and applying exponent laws.",
@@ -1116,9 +1154,89 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RationalExponentsPage({ratExpDomainCases, combineRadicalsSteps, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RationalExponentsPage({ratExpDomainCases, combineRadicalsSteps, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A whole-number exponent counts factors: 5² = 5 · 5 = 25 and 2³ = 2 · 2 · 2 = 8.`,
+        content: [
+          `The exponent says how many copies of the base are multiplied. The laws of exponents — add the exponents when multiplying powers, multiply them when raising a power to a power — all come from that counting.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `For 25^(1/2) the counting makes no sense: 25 cannot be multiplied by itself half a time.`,
+        content: [
+          `A fraction is not a number of copies. Yet $25^{1/2}$ has a natural place — halfway between $25^0 = 1$ and $25^1 = 25$ on the exponent scale — so it needs a meaning that does not rely on counting.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [rational exponent](!/algebra/definitions#rational_exponent) with denominator $n$ means an $n$-th root: $a^{1/n} = \\sqrt[n]{a}$.`,
+        formula: [
+          `A unit fraction exponent denotes a root.`,
+          `@academic[formula_callout:Radical–Exponent Conversion
+$$\\sqrt[n]{a} = a^{1/n}$$
+/algebra/formulas#radical_to_exponent_conversion]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+          `The denominator becomes the index. The base remains the radicand.`,
+          `@academic[formula_callout:Unit Fraction Exponents
+$$25^{1/2} = \\sqrt{25} = 5$$]@`,
+          `@academic[formula_callout:Unit Fraction Exponents
+$$8^{1/3} = \\sqrt[3]{8} = 2$$]@`,
+          `@academic[formula_callout:Unit Fraction Exponents
+$$81^{1/4} = \\sqrt[4]{81} = 3$$]@`,
+        ],
+        footer: `So $25^{1/2} = \\sqrt{25} = 5$: the number that, multiplied by itself, gives $25$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The meaning is not arbitrary: it is the only one that keeps the laws of exponents true.`,
+        content: [
+          `This definition is forced by the laws of exponents. If exponent laws hold, then:`,
+          `@academic[formula_callout:Unit Fraction Exponents
+$$(a^{1/2})^2 = a^{(1/2) \\cdot 2} = a^1 = a$$]@`,
+          `The only non-negative number whose square is $a$ is $\\sqrt{a}$. Therefore $a^{1/2} = \\sqrt{a}$.`,
+          `The same reasoning applies for any index: $(a^{1/n})^n = a$, so $a^{1/n}$ must be $\\sqrt[n]{a}$.`,
+          `On the exponent scale, every half step multiplies by the same factor. Two half steps make one whole step, so that factor squared is the base — for base $4$ it is $2 = 4^{1/2}$.`,
+          ciTable('halfTable'),
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost: when the fraction is a whole number, the new rule gives the old answer.`,
+        content: [
+          `$8^{3/1}$ is $8^3 = 512$, and $a^{n/n} = a^1 = a$. Every law that held for whole-number exponents still holds.`,
+          `This connection to the [powers](!/algebra/powers) section shows that rational exponents are not new operations but extensions of integer exponents.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What is new: a denominator in the exponent means a root, not a factor — and even roots of negative bases are not real.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Multiplying the base by the exponent
+Reading $8^{1/3}$ as $8 \\cdot \\frac{1}{3} = \\frac{8}{3}$ treats the exponent as a factor. A denominator in the exponent means a root: $8^{1/3} = \\sqrt[3]{8} = 2$.
+[Read more](!#pitfalls)]@`,
+          `$(-8)^{1/2}$ would be $\\sqrt{-8}$, which is not a real number. Which bases are allowed is set out in [domain restrictions](!/algebra/roots/rational-exponents#5).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers general and negative rational exponents, converting between forms, domain restrictions, the laws of exponents with rationals, simplifying, combining radicals, and when to use which form.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1134,7 +1252,7 @@ export default function RationalExponentsPage({ratExpDomainCases, combineRadical
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

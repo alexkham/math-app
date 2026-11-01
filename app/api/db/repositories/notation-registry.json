@@ -47,6 +47,530 @@
     "anchorLimitation": "DataWrapper (app/components/generic-table/DataWrapper.jsx) filters categories via client state; no URL params, no section anchors. Stage 2 option: additive query-param preselect (e.g. ?category=basic_set_operations) via a new wrapper, without editing existing components."
   },
   "pages": {
+    "algebra/polynomials/rules": {
+      "pagePath": "pages/algebra/polynomials/rules/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Polynomial Rules Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 0 (the definition section, kept)",
+          "entries": [
+            "$P(x) = (x - c)\\\\,Q(x) + R$",
+            "$P(c), \\\\; P(-x)$",
+            "$\\\\pm\\\\dfrac{p}{q}, \\\\quad p \\\\mid a_0, \\\\; q \\\\mid a_n$",
+            "$r_1, r_2, \\\\ldots, r_n$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — page never surveyed before; NotationSection added for the marks this page owns."
+    },
+    "algebra/absolute-value": {
+      "pagePath": "pages/algebra/absolute-value/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/equations/absolute-value#notation). Inherit only."
+    },
+    "algebra/inequalities/absolute-value": {
+      "pagePath": "pages/algebra/inequalities/absolute-value/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/equations/absolute-value#notation). Inherit only."
+    },
+    "algebra/equations/linear": {
+      "pagePath": "pages/algebra/equations/linear/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/inequalities#3). Inherit only."
+    },
+    "algebra/equations/polynomial": {
+      "pagePath": "pages/algebra/equations/polynomial/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/inequalities#3). Inherit only."
+    },
+    "algebra/equations/rational": {
+      "pagePath": "pages/algebra/equations/rational/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/inequalities#3). Inherit only."
+    },
+    "algebra/inequalities/polynomial": {
+      "pagePath": "pages/algebra/inequalities/polynomial/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/inequalities#3). Inherit only."
+    },
+    "algebra/inequalities/quadratic": {
+      "pagePath": "pages/algebra/inequalities/quadratic/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/inequalities#3). Inherit only."
+    },
+    "algebra/inequalities/rational": {
+      "pagePath": "pages/algebra/inequalities/rational/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/inequalities#3). Inherit only."
+    },
+    "algebra/logarithms/equations": {
+      "pagePath": "pages/algebra/logarithms/equations/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/logarithms/common-natural#notation). Inherit only."
+    },
+    "algebra/logarithms/graphs": {
+      "pagePath": "pages/algebra/logarithms/graphs/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/logarithms/common-natural#notation). Inherit only."
+    },
+    "algebra/logarithms/inequalities": {
+      "pagePath": "pages/algebra/logarithms/inequalities/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/logarithms/common-natural#notation). Inherit only."
+    },
+    "algebra/logarithms/properties": {
+      "pagePath": "pages/algebra/logarithms/properties/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/logarithms/common-natural#notation). Inherit only."
+    },
+    "algebra/logarithms/rules": {
+      "pagePath": "pages/algebra/logarithms/rules/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/logarithms/common-natural#notation). Inherit only."
+    },
+    "algebra/polynomials/factoring": {
+      "pagePath": "pages/algebra/polynomials/factoring/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/polynomials/roots#notation). Inherit only."
+    },
+    "algebra/polynomials/graphing": {
+      "pagePath": "pages/algebra/polynomials/graphing/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/polynomials/roots#notation). Inherit only."
+    },
+    "algebra/polynomials/operations": {
+      "pagePath": "pages/algebra/polynomials/operations/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/polynomials/roots#notation). Inherit only."
+    },
+    "algebra/powers/exponent-rules": {
+      "pagePath": "pages/algebra/powers/exponent-rules/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/powers#2). Inherit only."
+    },
+    "algebra/roots/radical-rules": {
+      "pagePath": "pages/algebra/roots/radical-rules/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/algebra/roots#4). Inherit only."
+    },
+    "complex-numbers/operations": {
+      "pagePath": "pages/complex-numbers/operations/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/complex-numbers/complex-conjugate#notation and /complex-numbers/absolute-value#notation). Inherit only."
+    },
+    "complex-numbers/properties": {
+      "pagePath": "pages/complex-numbers/properties/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/complex-numbers/complex-conjugate#notation and /complex-numbers/absolute-value#notation). Inherit only."
+    },
+    "functions/properties": {
+      "pagePath": "pages/functions/properties/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/functions/transformations#notation and /functions/inverse). Inherit only."
+    },
+    "linear-algebra/vectors/linear-combinations": {
+      "pagePath": "pages/linear-algebra/vectors/linear-combinations/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/linear-algebra/vector-spaces/span#notation). Inherit only."
+    },
+    "probability/rules": {
+      "pagePath": "pages/probability/rules/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31 survey: no notation section added — every mark on the page is owned elsewhere (/probability/sets#notation and /probability/conditional-probability#notation). Inherit only."
+    },
+    "arithmetic/integer-part": {
+      "pagePath": "pages/arithmetic/integer-part/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Integer Part Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 3 (the definition section, kept)",
+          "entries": [
+            "$\\\\lfloor x \\\\rfloor$",
+            "$\\\\lceil x \\\\rceil$",
+            "$\\\\{x\\\\}$",
+            "$\\\\text{round}(x) = \\\\left\\\\lfloor x + \\\\tfrac{1}{2} \\\\right\\\\rfloor$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — page never surveyed before; NotationSection added for the marks this page owns."
+    },
+    "algebra/sequences/fibonacci": {
+      "pagePath": "pages/algebra/sequences/fibonacci/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Fibonacci Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 1 (the definition section, kept)",
+          "entries": [
+            "$F_n$",
+            "$\\\\phi, \\\\; \\\\psi$",
+            "$L_n$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — page never surveyed before; NotationSection added for the marks this page owns."
+    },
+    "algebra/sequences/geometric": {
+      "pagePath": "pages/algebra/sequences/geometric/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Geometric Sequence Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 1 (the definition section, kept)",
+          "entries": [
+            "$r = \\\\dfrac{a_{n+1}}{a_n}$",
+            "$S_n$",
+            "$S = \\\\sum_{k=1}^{\\\\infty} a_1 r^{k-1}$",
+            "$G = \\\\sqrt{ab}$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — page never surveyed before; NotationSection added for the marks this page owns."
+    },
+    "algebra/sequences/triangular-numbers": {
+      "pagePath": "pages/algebra/sequences/triangular-numbers/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Triangular Number Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 1 (the definition section, kept)",
+          "entries": [
+            "$T_n = \\\\dfrac{n(n+1)}{2}$",
+            "$T_n = T_{n-1} + n$",
+            "$\\\\dbinom{n+1}{2}$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — page never surveyed before; NotationSection added for the marks this page owns."
+    },
+    "algebra/sequences/harmonic": {
+      "pagePath": "pages/algebra/sequences/harmonic/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Harmonic Sequence Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 1 (the definition section, kept)",
+          "entries": [
+            "$a_n = \\\\dfrac{1}{b_n}$",
+            "$H_n = \\\\sum_{k=1}^{n} \\\\dfrac{1}{k}$",
+            "$H = \\\\dfrac{n}{\\\\frac{1}{a_1} + \\\\cdots + \\\\frac{1}{a_n}}$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — page never surveyed before; NotationSection added for the marks this page owns."
+    },
+    "algebra/sequences/square-numbers": {
+      "pagePath": "pages/algebra/sequences/square-numbers/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Square Number Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 1 (the definition section, kept)",
+          "entries": [
+            "$S_n = n^2$",
+            "$S_n = S_{n-1} + (2n - 1)$",
+            "$\\\\sum_{k=1}^{n} k^2$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — page never surveyed before; NotationSection added for the marks this page owns."
+    },
+    "algebra/sequences/prime-numbers": {
+      "pagePath": "pages/algebra/sequences/prime-numbers/index.jsx",
+      "template": "lesson",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Prime Number Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 1 (the definition section, kept)",
+          "entries": [
+            "$p$",
+            "$p_1, p_2, \\\\ldots, p_k$",
+            "$\\\\pi(n)$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — page never surveyed before; NotationSection added for the marks this page owns."
+    },
+    "algebra/inequalities": {
+      "pagePath": "pages/algebra/inequalities/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "obj3",
+          "sectionTitle": "Interval Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "prose replaced in place (id kept); formula callouts, fact/pitfall boxes, symbol links, tables and demos kept under the card",
+          "entries": [
+            "$(a, b)$",
+            "$[a, b]$",
+            "$(a, \\\\infty)$ · $(-\\\\infty, a]$",
+            "$\\\\cup$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages."
+    },
+    "algebra/powers": {
+      "pagePath": "pages/algebra/powers/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "obj2",
+          "sectionTitle": "Notation and Conventions",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "prose replaced in place (id kept); formula callouts, fact/pitfall boxes, symbol links, tables and demos kept under the card",
+          "entries": [
+            "$-2^2$",
+            "$(-2)^2$",
+            "$a^{2^3}$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages."
+    },
+    "algebra/roots": {
+      "pagePath": "pages/algebra/roots/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "obj4",
+          "sectionTitle": "Radical and Exponent Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "prose replaced in place (id kept); formula callouts, fact/pitfall boxes, symbol links, tables and demos kept under the card",
+          "entries": [
+            "$a^{1/n}$",
+            "$a^{m/n}$",
+            "$\\\\left(\\\\sqrt[n]{a}\\\\right)^m$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages."
+    },
+    "algebra/sequences": {
+      "pagePath": "pages/algebra/sequences/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Sequence Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "new section after section 1 (the definition section, kept)",
+          "entries": [
+            "$a_n$",
+            "$a_1, a_2, a_3, \\\\ldots$",
+            "$\\\\{a_n\\\\}_{n=1}^{\\\\infty}$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages."
+    },
+    "linear-algebra/vectors": {
+      "pagePath": "pages/linear-algebra/vectors/index.jsx",
+      "template": "hub",
+      "sections": [],
+      "spots": [
+        {
+          "sectionId": "obj2",
+          "sectionTitle": "Notation and Representation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "prose replaced in place (id kept); formula callouts, fact/pitfall boxes, symbol links, tables and demos kept under the card",
+          "entries": [
+            "$\\\\mathbf{v}$",
+            "$\\\\vec{AB}$",
+            "$(v_1, \\\\ldots, v_n)$ · $\\\\begin{pmatrix} v_1 \\\\\\\\ \\\\vdots \\\\\\\\ v_n \\\\end{pmatrix}$",
+            "$\\\\mathbf{i}, \\\\mathbf{j}, \\\\mathbf{k}$ · $\\\\mathbf{e}_1, \\\\ldots, \\\\mathbf{e}_n$"
+          ]
+        }
+      ],
+      "recommendations": [],
+      "externalNotationLinks": [],
+      "notes": "2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages."
+    },
     "set-theory": {
       "pagePath": "pages/set-theory/index.jsx",
       "template": "hub",
@@ -1582,9 +2106,42 @@
     "probability/sets": {
       "pagePath": "pages/probability/sets/index.jsx",
       "template": "titled",
-      "sections": ["… notation 'Notation Used for Sets in Probability' …"],
-      "spots": [{"sectionId": "notation", "sectionTitle": "Notation Used for Sets in Probability", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "set symbols as used in probability", "stage2": null}],
-      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "chips ×2"}]
+      "sections": [
+        "… notation 'Notation Used for Sets in Probability' …"
+      ],
+      "spots": [
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Notation Used for Sets in Probability",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "resolved",
+          "quote": "set symbols as used in probability",
+          "stage2": null,
+          "resolution": "2026-10-31: legacy prose list replaced in place by a NotationSection (id 'notation' kept, title kept). Owned marks: the event readings of union, intersection, complement, difference; plain set marks inherited from set-theory/basics, subsets, operations, cardinality and probability/sample-space."
+        },
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Notation Used for Sets in Probability",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "entries": [
+            "A \\cup B (A or B)",
+            "A \\cap B (A and B)",
+            "A^c (not A; also A')",
+            "A \\setminus B (A but not B)"
+          ]
+        }
+      ],
+      "externalNotationLinks": [
+        {
+          "target": "/math-symbols/probability",
+          "state": "live",
+          "note": "chips ×2"
+        }
+      ]
     },
     "probability/expected-value": {
       "pagePath": "pages/probability/expected-value/index.jsx",
@@ -1843,12 +2400,52 @@
     "probability/probability-function/pdf": {
       "pagePath": "pages/probability/probability-function/pdf/index.jsx",
       "template": "untitled",
-      "sections": ["ids numeric; obj3 = legacy 'Notation' body section (KEPT as satellite, pointer woven 2026-08-25)"],
-      "spots": [
-        {"sectionId": "(obj3)", "sectionTitle": "Notation", "field": "content", "kind": "dedicated-section", "status": "existing", "quote": "f_X(x) … P(a ≤ X ≤ b) = ∫ f_X(x)dx … Point probabilities are always zero", "stage2": {"mathSymbols": null, "internal": {"page": "/probability/probability-function", "section": "notation", "anchorText": "probability function notation"}, "added": "2026-08-25", "placement": "pointer sentence woven at the section's end — every mark it teaches is owned by the parent probability-function#notation or calculus (∫ at integrals/definite#2)"}}
+      "sections": [
+        "ids numeric; obj3 = legacy 'Notation' body section (KEPT as satellite, pointer woven 2026-08-25)"
       ],
-      "notes": "NO NotationSection — GATE FAIL (2026-08-25). Marks (f_X(x), subscripts, integration-to-probability, P(X=a)=0) all owned at probability-function#notation + calculus integrals. Legacy 'Notation' body section KEPT as satellite with woven pointer — NOT trimmed (see ASK-6). Page clean on rule-9 greps.",
-      "externalNotationLinks": [{"target": "/math-symbols/probability", "state": "live", "note": "legacy chip retained in the kept section"}]
+      "spots": [
+        {
+          "sectionId": "(obj3)",
+          "sectionTitle": "Notation",
+          "field": "content",
+          "kind": "dedicated-section",
+          "status": "resolved",
+          "quote": "f_X(x) … P(a ≤ X ≤ b) = ∫ f_X(x)dx … Point probabilities are always zero",
+          "stage2": {
+            "mathSymbols": null,
+            "internal": {
+              "page": "/probability/probability-function",
+              "section": "notation",
+              "anchorText": "probability function notation"
+            },
+            "added": "2026-08-25",
+            "placement": "pointer sentence woven at the section's end — every mark it teaches is owned by the parent probability-function#notation or calculus (∫ at integrals/definite#2)"
+          },
+          "resolution": "2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages."
+        },
+        {
+          "sectionId": "obj3",
+          "sectionTitle": "PDF Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "prose replaced in place (id kept); formula callouts, fact/pitfall boxes, symbol links, tables and demos kept under the card",
+          "entries": [
+            "$f_X(x)$",
+            "$P(a \\\\leq X \\\\leq b)$",
+            "$P(X = a) = 0$"
+          ]
+        }
+      ],
+      "notes": "NO NotationSection — GATE FAIL (2026-08-25). Marks (f_X(x), subscripts, integration-to-probability, P(X=a)=0) all owned at probability-function#notation + calculus integrals. Legacy 'Notation' body section KEPT as satellite with woven pointer — NOT trimmed (see ASK-6). Page clean on rule-9 greps. | 2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages.",
+      "externalNotationLinks": [
+        {
+          "target": "/math-symbols/probability",
+          "state": "live",
+          "note": "legacy chip retained in the kept section"
+        }
+      ]
     },
     "probability/distributions/discrete/hypergeometric": {
       "pagePath": "pages/probability/distributions/discrete/hypergeometric/index.jsx",
@@ -2124,9 +2721,34 @@
     "functions/arithmetic": {
       "pagePath": "pages/functions/arithmetic/index.jsx",
       "template": "untitled",
-      "sections": ["incl. 'Notation and Evaluation at a Point' (line ~625); notation table (line ~71)"],
+      "sections": [
+        "incl. 'Notation and Evaluation at a Point' (line ~625); notation table (line ~71)"
+      ],
       "spots": [
-        {"sectionId": "(notation)", "sectionTitle": "Notation and Evaluation at a Point", "field": "content (line ~625)", "kind": "dedicated-section", "status": "existing", "quote": "The notations $(f + g)(x)$ and $f(x) + g(x)$ mean the same thing", "stage2": null}
+        {
+          "sectionId": "(notation)",
+          "sectionTitle": "Notation and Evaluation at a Point",
+          "field": "content (line ~625)",
+          "kind": "dedicated-section",
+          "status": "resolved",
+          "quote": "The notations $(f + g)(x)$ and $f(x) + g(x)$ mean the same thing",
+          "stage2": null,
+          "resolution": "2026-10-31: section 6 kept as a lesson section (evaluation methods, worked example, table); its notation moved to a new NotationSection, id 'notation', placed after section 1 (the defining section)."
+        },
+        {
+          "sectionId": "notation",
+          "sectionTitle": "Function Arithmetic Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "entries": [
+            "(f + g)(x)",
+            "(f - g)(x)",
+            "(fg)(x)",
+            "(f/g)(x)"
+          ]
+        }
       ],
       "externalNotationLinks": []
     },
@@ -2823,19 +3445,51 @@
       "pagePath": "pages/calculus/integrals/index.jsx",
       "template": "hub",
       "sections": [],
-      "spots": [],
+      "spots": [
+        {
+          "sectionId": "obj3",
+          "sectionTitle": "Notation and Terminology",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "prose replaced in place (id kept); formula callouts, fact/pitfall boxes, symbol links, tables and demos kept under the card",
+          "entries": [
+            "$\\\\int$",
+            "$f(x)$",
+            "$dx$",
+            "$\\\\int_a^b f(x)\\\\,dx$"
+          ]
+        }
+      ],
       "recommendations": [],
       "externalNotationLinks": [],
-      "notes": "SKIPPED (2026-08-15, operator no-hubs rule). Family ownership: indefinite = ∫/dx/+C/F-f pairing, definite = bounds/dummy/eval-bracket/Riemann map, techniques = u-du/parts-ledger/reverse substitution, improper = ∞-bound/scaffold/verdicts."
+      "notes": "SKIPPED (2026-08-15, operator no-hubs rule). Family ownership: indefinite = ∫/dx/+C/F-f pairing, definite = bounds/dummy/eval-bracket/Riemann map, techniques = u-du/parts-ledger/reverse substitution, improper = ∞-bound/scaffold/verdicts. | 2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages."
     },
     "calculus/derivatives": {
       "pagePath": "pages/calculus/derivatives/index.jsx",
       "template": "hub",
       "sections": [],
-      "spots": [],
+      "spots": [
+        {
+          "sectionId": "obj2",
+          "sectionTitle": "Derivative Notation",
+          "field": "NotationSection",
+          "kind": "dedicated-section",
+          "status": "written",
+          "date": "2026-10-31",
+          "how": "prose replaced in place (id kept); formula callouts, fact/pitfall boxes, symbol links, tables and demos kept under the card",
+          "entries": [
+            "$f'(x)$",
+            "$\\\\dfrac{dy}{dx}$",
+            "$Df(x)$",
+            "$\\\\dot{y}$ · $\\\\ddot{y}$"
+          ]
+        }
+      ],
       "recommendations": [],
       "externalNotationLinks": [],
-      "notes": "SKIPPED (2026-08-15, operator no-hubs rule). Family ownership: function = base f'/difference quotient/evaluation bar, higher-order = the four order systems, differentials = dx/dy/Δ/quotient reading, differentiability = f'±/f'=∞/interval convention, graph-analysis = c/sign-arrow/function inequality, techniques = implicit convention/(f⁻¹)'/parametric ratio."
+      "notes": "SKIPPED (2026-08-15, operator no-hubs rule). Family ownership: function = base f'/difference quotient/evaluation bar, higher-order = the four order systems, differentials = dx/dy/Δ/quotient reading, differentiability = f'±/f'=∞/interval convention, graph-analysis = c/sign-arrow/function inequality, techniques = implicit convention/(f⁻¹)'/parametric ratio. | 2026-10-31: owner order 'adjust all pages to this pattern' — older prose notation sections converted to NotationSection; the no-hubs rule lifted for these pages."
     },
     "calculus": {
       "pagePath": "pages/calculus/index.jsx",

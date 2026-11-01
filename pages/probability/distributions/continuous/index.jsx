@@ -17,6 +17,10 @@ import distributionExplorerDiagrams from '@/app/components/probability/explorers
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -252,6 +256,25 @@ const continuousUniformTable = `
 </body>
 </html>
 `;
+
+    // Concept introduction (section "what", "What Makes a Distribution
+    // Continuous") — template C, failure first. Running instance: a bus
+    // waiting time spread evenly over 0 to 10 minutes. Old what text is kept
+    // in sectionsContent.what, unused; its four passages are carried in
+    // unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciWaitTable = ciTableOpen(['question about the wait X', 'probability']) +
+      ciRow(['between 4 and 5 minutes', '1/10']) +
+      ciRow(['between 4 and 4.1 minutes', '1/100'], { shade: true }) +
+      ciRow(['between 4 and 4.01 minutes', '1/1000']) +
+      ciRow(['exactly 4 minutes', '0'], { shade: true, last: true, color: '#a4243b', cols: [1] }) +
+      '</tbody></table>'
 
     const sectionsContent={
       obj0: {
@@ -1142,6 +1165,10 @@ This section organizes continuous distributions, highlights their shared structu
     points: [{ x: 7, y: dcNorm(5, 2)(7), label: 'x = 7', pos: 'se' }, { x: 1, y: dcNorm(0, 1)(1), label: 'z = 1', pos: 'se' }],
     notes: [{ x: 5.6, y: 0.43, text: 'Z = (X − 5)/2', pos: 'e', color: 'r' }, { x: 5.6, y: 0.39, text: 'x = 7 is one σ above: z = 1', pos: 'e' }],
     caption: 'Standardizing: shift to mean 0, rescale to spread 1' };
+  const conceptIntroFigures = {
+    waitTable: ciWaitTable,
+  };
+
   const demoUnits = {
     u_vs_0: demoUnitFrame({
       svg: continuousPdfDiagrams['uniform-pdf'],
@@ -1199,10 +1226,63 @@ This section organizes continuous distributions, highlights their shared structu
     ],
   };
 
+  // ComparisonTable2 (vs): discrete-continuous-comparison
+  const discreteContinuousComparison = {
+    kicker: 'distributions',
+    title: 'Discrete and continuous, side by side',
+    intro: 'Counting or measuring decides the type, and the type decides how probabilities are computed.',
+    tallyLabel: 'compared',
+    subjects: [
+      { name: 'Discrete', anchor: '/probability/distributions/discrete', anchorLabel: 'discrete page' },
+      { name: 'Continuous' },
+    ],
+    features: [
+      { label: 'Outcomes', values: ['countable: things you can list one by one', 'a continuum: infinitely many values in any interval'] },
+      { label: 'Data look like', values: ['whole numbers from counting', 'decimals from measuring'] },
+      { label: 'A single value', values: ['has a non-zero probability', 'has probability $0$'] },
+      { label: 'Described by', values: ['a probability mass function (PMF)', 'a probability density function (PDF)'] },
+      { label: 'Probabilities by', values: ['summing probabilities', 'integrating over intervals'],
+        note: 'For $X \\sim U(0, 10)$, $P(X < 3) = P(X \\leq 3) = 0.3$: in a continuous model the boundary point adds nothing.' },
+      { label: 'On a graph', values: ['distinct bars or points', 'a smooth curve where area is probability'] },
+      { label: 'Families', values: ['binomial, Poisson, geometric', 'normal, exponential, uniform'] },
+    ],
+  };
+
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the moment-estimate fact box (Parameter
+  // Estimation), the special cases and the t-distribution notes with their fact
+  // box (Relationships Between Distributions, Types), and the warning about
+  // natural boundaries under Choosing the Right Distribution.
+  const faqQuestions = {
+    obj1: {
+      question: "Can a method-of-moments estimate contradict the data?",
+      answer: "Yes. Fit $U(0, b)$ to the data $1, 2, 9$ by matching the mean $\\frac{b}{2}$ to $\\bar{x} = 4$: the estimate is $\\hat{b} = 8$, an upper bound below the observed $9$, so the fitted model calls a value that was seen impossible. Maximum likelihood takes $\\hat{b} = 9$, the largest value, which never contradicts the data. The method of moments is quick and works well for simple models and large samples; maximum likelihood is preferred with little data or complex models.",
+      sectionId: "parameters"
+    },
+    obj2: {
+      question: "Which continuous distributions are special cases of others?",
+      answer: "Several. The gamma distribution with shape parameter $1$ is the exponential, and the sum of $n$ independent $\\text{Exp}(\\lambda)$ variables is gamma with shape $n$ and rate $\\lambda$. The chi-squared distribution with $\\nu$ degrees of freedom is the gamma with shape $\\frac{\\nu}{2}$ and rate $\\frac{1}{2}$. The beta distribution with parameters $(1, 1)$ is the uniform on $[0, 1]$.",
+      sectionId: "relations"
+    },
+    obj3: {
+      question: "Why shouldn't you model a proportion with a normal distribution?",
+      answer: "Because the normal spreads over the whole real line, so it gives positive probability to values below $0$ and above $1$, which a proportion cannot take. Bounded quantities call for a distribution with bounded support, such as the beta on $[0, 1]$ or a uniform. The same check applies to strictly positive data such as waiting times: there the support $[0, \\infty)$ of the exponential or gamma fits, or a lognormal when the data come from multiplied effects.",
+      sectionId: "decision"
+    },
+    obj4: {
+      question: "When should you use Student's t instead of the normal distribution?",
+      answer: "When the sample is small or the population variance is unknown. The t-distribution is a standard normal divided by the square root of a chi-squared variable scaled by its degrees of freedom, and the extra uncertainty shows as heavier tails. As the degrees of freedom grow, the tails thin out and t approaches the normal. At the other end, with one degree of freedom the density is $\\frac{1}{\\pi(1 + x^2)}$, and its tails are so heavy that it has no mean.",
+      sectionId: "relations"
+    }
+  }
+
    return {
       props:{
+    faqQuestions,
+    discreteContinuousComparison,
     continuousFamilyOutline,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          normalTable,
@@ -1220,11 +1300,71 @@ This section organizes continuous distributions, highlights their shared structu
     }
    }
 
-export default function ContinuousDistributionsPage({continuousFamilyOutline, seoData,sectionsContent , introContent,
+export default function ContinuousDistributionsPage({discreteContinuousComparison, continuousFamilyOutline, seoData,sectionsContent , introContent,
     normalTable,
          exponentialTable,
-         continuousUniformTable, demoUnits
+         continuousUniformTable, demoUnits, conceptIntroFigures, faqQuestions
 }) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "what" concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `For a die, a distribution lists each value with its probability. Try the same for a waiting time.`,
+        content: [
+          `A bus arrives at a random moment in the next $10$ minutes, every moment equally likely. What is the probability of waiting exactly $4$ minutes?`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Every exact waiting time gets probability 0 — yet some wait always happens.`,
+        content: [
+          ciTable('waitTable'),
+          `Each narrower interval holds a tenth as much probability. Squeezed down to the single value $4$, nothing is left, and the same is true of every other value. A list of values and probabilities would be all zeros.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Probability lives on intervals, not on single points.`,
+        content: [
+          `The key characteristic is that the probability of any single exact value is actually zero. This might seem counterintuitive, but consider measuring someone's height: the probability of someone being exactly 170.00000... centimeters tall (with infinite precision) is essentially zero. Instead, we calculate probabilities over intervals—like the probability of someone being between 170 and 171 cm tall.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A distribution is **continuous** when it belongs to a [continuous random variable](!/probability/definitions#continuous_random_variable): one that can take any value in a range, with every single value having probability $0$ and probabilities given by areas under a density curve.`,
+        formula: [
+          `A continuous probability distribution describes the behavior of a continuous [random variable](!/probability/random-variables)—one that can take any value within a given range, rather than being limited to distinct, separate values. Unlike [discrete distributions](!/probability/distributions/discrete) where you can list individual outcomes (like rolling a 1, 2, 3, 4, 5, or 6 on a die), continuous distributions involve measurements that flow seamlessly along a continuum.`,
+          `Mathematically, these distributions are described by a probability density function (PDF), where the area under the curve represents probability. The total area under the PDF always equals 1, representing certainty that some outcome will occur. To find the probability of a value falling within a specific range, we integrate the PDF over that interval—a process closely related to finding expected values and other moments of the distribution.`,
+        ],
+        footer: `So for the bus, the density is $\\frac{1}{10}$ on $[0, 10]$, and $P(4 \\le X \\le 5)$ is the area $1 \\times \\frac{1}{10} = \\frac{1}{10}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Continuous distributions model measurements: time, length, weight, error.`,
+        content: [
+          `Common examples include the normal distribution (describing heights, test scores, measurement errors), the exponential distribution (modeling time between events), and the uniform distribution (representing equally likely outcomes across a range). These distributions are fundamental tools for modeling real-world phenomena involving measurements, time, distance, and other continuous variables.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Probability 0 does not mean impossible.`,
+        content: [
+          `Some waiting time does happen, and whatever it turns out to be had probability $0$ beforehand. For a continuous variable, an impossible outcome and an outcome of probability $0$ are not the same thing. The contrast with [discrete distributions](!/probability/distributions/discrete) is set out next.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers continuous against discrete distributions, the main continuous families, their shared and differing properties, how to choose and work with them, and how to estimate, transform and read them.`,
+      },
+    ],
+  }
 
     
   const genericSections=[
@@ -1243,7 +1383,7 @@ export default function ContinuousDistributionsPage({continuousFamilyOutline, se
         title:sectionsContent.what.title,
         link:'',
         content:[
-          sectionsContent.what.content,
+          <ConceptIntro key={'what-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1254,6 +1394,16 @@ export default function ContinuousDistributionsPage({continuousFamilyOutline, se
           sectionsContent.vs.content,
                   <div key={'unit-u_vs_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_vs_0 }} />,
           `The named families differ in the shape of that density.`,
+          `The practical differences above, row by row.`,
+          <DiagramFrame
+            key={'vs-comparison'}
+            id="discrete-continuous-comparison"
+            title="Discrete and continuous, side by side"
+            source="/probability/distributions/continuous"
+          >
+            <ComparisonTable2 data={discreteContinuousComparison} />
+          </DiagramFrame>,
+          `Most rows follow from the third one. Once a single value has probability $0$, probabilities have to come from intervals, sums become integrals, and bars become a curve whose area is the probability.`,
         ]
     },
     {
@@ -1538,6 +1688,22 @@ export default function ContinuousDistributionsPage({continuousFamilyOutline, se
         link:'',
         content:[
           sectionsContent.obj6.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Continuous Distributions FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

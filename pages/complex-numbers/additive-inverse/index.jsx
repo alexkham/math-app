@@ -1297,6 +1297,8 @@ import complexAddSubDiagrams from '@/app/components/calculators/complex-numbers/
 import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbers/conjugateModulusDiagrams'
 import renderComplexPoints from '@/app/utils/illustrations/complex-numbers/plane/complexPoints'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 export async function getStaticProps(){
@@ -1476,7 +1478,7 @@ export async function getStaticProps(){
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">1 − 4i&nbsp;&nbsp;<span style="font-size: 13px;">(Q4)</span></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−1 − 4i&nbsp;&nbsp;<span style="font-size: 13px;">(Q3)</span></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−z and z̄ are themselves conjugates of each other</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">−z and z̄ are mirror images of each other across the imaginary axis</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">5&nbsp;&nbsp;<span style="font-size: 13px;">(real)</span></td>
@@ -1504,7 +1506,7 @@ export async function getStaticProps(){
       <td style="padding: 12px 15px; color: #34495e;">−2 + 3i&nbsp;&nbsp;<span style="font-size: 13px;">(Q2)</span></td>
       <td style="padding: 12px 15px; color: #34495e;">2 + 3i&nbsp;&nbsp;<span style="font-size: 13px;">(Q1)</span></td>
       <td style="padding: 12px 15px; color: #e74c3c; text-align: center; font-weight: bold; font-size: 18px;">✗</td>
-      <td style="padding: 12px 15px; color: #34495e;">again −z and z̄ are conjugates of each other</td>
+      <td style="padding: 12px 15px; color: #34495e;">again −z and z̄ are mirror images across the imaginary axis</td>
     </tr>
   </tbody>
 </table>
@@ -2262,26 +2264,38 @@ How to check: a modulus is never negative, so any negative value for $|-z|$ is w
   content: `Every complex number has a counterpart that, when added to it, produces zero. This counterpart is called the additive inverse. The concept extends directly from real numbers, where $5$ and $-5$ cancel each other, to complex numbers, where both the real and imaginary parts must be negated. Understanding the additive inverse clarifies the nature of subtraction and reveals a fundamental symmetry in the [complex plane](!/complex-numbers/geometric-representation).`
 }
 
+// FAQ pass 2026-10-31: cut the inverse-versus-conjugate question (h2
+// "Additive Inverse vs. Complex Conjugate") and the subtraction question (h2
+// "Connection to Subtraction"); keys renumbered. Kept the modulus and
+// commuting questions (modulus answer: "needs" reducing became "may need",
+// since the shifted argument is often already in range). Added negative zero
+// (IEEE fact box in The Zero Case), inverses with positive parts (pitfall
+// box in section 2) and the two jobs of the minus sign (notation card).
 const faqQuestions = {
   obj1: {
-    question: "What is the difference between the additive inverse and the conjugate?",
-    answer: "Negation flips both components, sending a + bi to −a − bi, which rotates the point half a turn about the origin. Conjugation flips only the imaginary part, reflecting it across the real axis. The two coincide only for pure imaginary numbers (zero included), where there is no real part left to distinguish them.",
-    sectionId: "6"
-  },
-  obj2: {
     question: "Does negating a complex number change its modulus?",
-    answer: "No. Rotating a point half a turn about the origin leaves its distance from the origin untouched, so a number and its negative always lie on the same circle. What does change is the argument, which shifts by half a turn and then needs reducing back into the principal range.",
+    answer: "No. Rotating a point half a turn about the origin leaves its distance from the origin untouched, so a number and its negative always lie on the same circle. What does change is the argument, which shifts by half a turn and may then need reducing back into the principal range.",
     sectionId: "5"
   },
-  obj3: {
+  obj2: {
     question: "Do negation and conjugation commute?",
     answer: "Yes. Negating then conjugating gives the same result as conjugating then negating, because the two operations act on different components independently. One flips both signs, the other flips only the imaginary sign, and applying them in either order flips the real part once and the imaginary part twice.",
     sectionId: "5"
   },
+  obj3: {
+    question: "Is negative zero different from zero?",
+    answer: "Not as a number: $-0 = -0 - 0i = 0$, and zero is the only complex number that is its own additive inverse. Computers are the exception. The IEEE 754 floating-point standard stores $-0$ apart from $0$; the two compare equal, but the sign is kept. William Kahan designed it so that complex functions can tell which side of a cut a value came from: in Python the square root of $-4 + 0i$ is $2i$, but that of $-4 - 0i$ is $-2i$.",
+    sectionId: "7"
+  },
   obj4: {
-    question: "How is subtraction related to the additive inverse?",
-    answer: "Subtracting is adding the inverse: the difference of two numbers is the first plus the negative of the second. Geometrically this reverses the second arrow before joining them, which is why the difference vector runs from the second point to the first. See the [subtraction tool](!/complex-numbers/visual-tools/addition-subtraction).",
-    sectionId: "8"
+    question: "Does the additive inverse always have negative parts?",
+    answer: "No. The minus in $-z$ changes the sign of each part, whatever that sign was, so for $z = -2 - 5i$ the inverse is $-z = 2 + 5i$, with both parts positive. Reading $-z$ as the number whose parts are both negative would leave $-2 - 5i$ unchanged, and $z + z = -4 - 10i$ is not $0$. Adding the answer to $z$ is the quick check: the sum must be exactly $0$.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Is the minus in $-z$ the same as the minus in $z - w$?",
+    answer: "It is the same stroke doing two jobs. In $-z$ it acts on one number and gives its additive inverse; in $z - w$ it sits between two numbers and subtracts. The two jobs meet in the definition $z - w = z + (-w)$, which moves the minus onto $w$. Calculators give the two separate keys, and programming languages tell them apart by position.",
+    sectionId: "3"
   }
 }
 
@@ -2553,6 +2567,11 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/additive-inverse'}
           />,
                   <div key={'unit-negation'} dangerouslySetInnerHTML={{ __html: demoUnits.negation }} />,
           `Reflection through the origin is the geometric meaning of a change of sign in both parts.`,

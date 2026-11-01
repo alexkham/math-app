@@ -3,7 +3,7 @@
 A static decision infographic. A short set of questions leads the reader to the right method, technique or case. One data object (questions → answers → outcomes) can be shown in six views, and the reader can switch between them from the card header.
 
 ```jsx
-import DecisionMaker from '@/app/components/infographics/DecisionMaker';
+import DecisionMaker from '@/app/components/infographics/DecisionMaker/DecisionMaker';
 
 <DecisionMaker data={factoringData} />
 ```
@@ -296,3 +296,18 @@ Good homes are the strategy, "choosing the right technique" and "summary of meth
 - **Rule: the start must exist.** `start` must be a node id.
 - **Escaping:** in JS strings, escape backslashes in LaTeX (`'$a^3 \\pm b^3$'`).
 - **Text formatting:** all text goes through `processContent`, so `$math$`, `**bold**` and `[label](!/path)` work everywhere, including the labels.
+
+---
+
+## Walk mode (added 2026-10-29)
+
+`Ladder`, `TreeH` and `TreeV` (exported) take an optional `walk` prop. DecisionWalker passes it; DecisionMaker itself never does, so the static map is unchanged.
+
+`walk` = `{ path: [{ node, answer }], current, finished, choose(node, answer), jump(i) }` (DecisionWalker's route).
+
+| View | In walk mode |
+|---|---|
+| Trees | The route so far is blue; everything else is dimmed. The answer pills leaving the current question are buttons; the boxes they lead to are half-dimmed and also clickable. Clicking a box on the route steps back to that question. The reached outcome gets a ring. |
+| Steps | Passed checks show their answer filled; the current check's answers are buttons; later checks are dimmed. A finished walk fills the chosen answer and rings its outcome. Clicking a step number steps back to it. |
+
+Styles: the "walk mode" block in `CSS` (`.dm-pick`, `.dm-walking`, `.dm-w-*`). Board, Table and Rules have no walk mode; DecisionWalker offers Card instead.

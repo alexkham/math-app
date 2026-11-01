@@ -1116,6 +1116,8 @@ import renderVectorArrowsV4 from '@/app/utils/illustrations/linear-algebra/vecto
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 
 
 export async function getStaticProps(){
@@ -1812,13 +1814,13 @@ $$\\mathbf{a} \\cdot \\mathbf{b} = 0 \\iff \\mathbf{a} \\perp \\mathbf{b}$$
 /linear-algebra/formulas]@
 
 @academic[fact,aside:true,width:35%:Random arrows are almost perpendicular
-Fill two vectors in $\\mathbb{R}^{10000}$ with random entries $\\pm 1$: more than 99.9% of the time they meet at between $88^\\circ$ and $92^\\circ$. The 10,000 products $\\pm 1$ mostly cancel, leaving a dot product typically about $100$ in size, while the two lengths multiply to $10000$.]@
+Fill two vectors in $\\mathbb{R}^{10000}$ with random entries $\\pm 1$: more than 99.9% of the time they meet at between $88^\\circ$ and $92^\\circ$. The 10,000 products $\\pm 1$ mostly cancel, leaving a dot product typically about $80$ in size (its standard deviation is $100$), while the two lengths multiply to $10000$.]@
 
 In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicularity — the vectors meet at a right angle. In $\\mathbb{R}^n$ for $n > 3$, perpendicularity cannot be visualized, but the algebraic condition $\\mathbf{a} \\cdot \\mathbf{b} = 0$ still serves as its definition. Orthogonality is the generalization of "right angle" to any number of dimensions.
 
 The zero vector occupies a special position: $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for every vector $\\mathbf{v}$, so the zero vector is orthogonal to everything. This is a convention that simplifies many statements — without it, theorems about orthogonal sets would need to exclude the zero vector as a separate case.
 
-Orthogonality is far more than a geometric curiosity. Orthogonal vectors are algebraically independent in a strong sense — projecting one onto the other yields zero, meaning neither contributes anything in the direction of the other. This idea scales up: orthogonal bases, orthogonal decompositions, and orthogonal complements form a central thread through the [orthogonality](!/linear-algebra/orthogonality) section of linear algebra.`,
+Orthogonality is far more than a geometric curiosity. Nonzero orthogonal vectors are linearly independent — projecting one onto the other yields zero, meaning neither contributes anything in the direction of the other. This idea scales up: orthogonal bases, orthogonal decompositions, and orthogonal complements form a central thread through the [orthogonality](!/linear-algebra/orthogonality) section of linear algebra.`,
     before: ``,
     after: ``,
     link: '',
@@ -1996,6 +1998,11 @@ How to check: a projection is never longer than the vector projected. The wrong 
   content: `The dot product is unlike any operation encountered so far in this section. It takes two vectors and returns not a vector but a single number — a scalar. That number encodes something geometric: the degree to which the two vectors point in the same direction. Through its algebraic definition, the dot product is a straightforward computation — multiply corresponding components and sum. Through its geometric definition, it connects directly to the angle between the vectors, opening the door to orthogonality, projection, and the Cauchy–Schwarz inequality. Both definitions are equivalent, and both are essential.`,
 };
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added
+// cancellation and associativity (both failing entries of the properties
+// card, cancellation also a pitfall), the dropped middle term (pitfall under
+// "Geometric Definition") and near-perpendicular random vectors (fact box
+// under "Orthogonality"). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Can you write $\\mathbf{a}\\mathbf{b}$ without the dot?",
@@ -2011,6 +2018,26 @@ const faqQuestions = {
     question: "Why does the Cauchy–Schwarz inequality mix single and double bars?",
     answer: "Because the two sides measure different species. On the left, $\\mathbf{a} \\cdot \\mathbf{b}$ has already collapsed to a scalar, so it takes ordinary absolute value bars. On the right sit two vectors, which need norm bars. Writing $\\|\\mathbf{a} \\cdot \\mathbf{b}\\|$ is an error: there is no vector left to measure.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "If $\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{a} \\cdot \\mathbf{c}$, does $\\mathbf{b} = \\mathbf{c}$?",
+    answer: "No, not even when $\\mathbf{a} \\neq \\mathbf{0}$. Moving everything to one side gives $\\mathbf{a} \\cdot (\\mathbf{b} - \\mathbf{c}) = 0$, which only says that $\\mathbf{b} - \\mathbf{c}$ is orthogonal to $\\mathbf{a}$. With $\\mathbf{a} = (1, 0)$, $\\mathbf{b} = (2, 5)$ and $\\mathbf{c} = (2, 9)$, both dot products equal $2$, yet $\\mathbf{b} \\neq \\mathbf{c}$. The dot product sees only the part of a vector that lies along $\\mathbf{a}$, so there is nothing to divide by.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Is the dot product associative?",
+    answer: "No, and the question cannot even be posed: $(\\mathbf{a} \\cdot \\mathbf{b}) \\cdot \\mathbf{c}$ is not well formed. The first product $\\mathbf{a} \\cdot \\mathbf{b}$ is already a scalar, and a scalar has no dot product with a vector. The nearest meaningful expression is $(\\mathbf{a} \\cdot \\mathbf{b})\\mathbf{c}$, a scalar multiple of $\\mathbf{c}$, and in general it differs from $\\mathbf{a}(\\mathbf{b} \\cdot \\mathbf{c})$, which points along $\\mathbf{a}$.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Is $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ equal to $\\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2$?",
+    answer: "Only when $\\mathbf{a} \\cdot \\mathbf{b} = 0$, which is the Pythagorean theorem. In general, expanding $(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b})$ leaves a middle term: $\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 - 2(\\mathbf{a} \\cdot \\mathbf{b}) + \\|\\mathbf{b}\\|^2$. For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$ the shortcut gives $17 + 10 = 27$, but $\\mathbf{a} - \\mathbf{b} = (3, -2)$ has squared length $13 = 27 - 2(7)$.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "Why are random vectors in high dimensions almost perpendicular?",
+    answer: "Because their dot product grows far more slowly than their lengths. Fill two vectors in $\\mathbb{R}^{10000}$ with random entries $\\pm 1$: the $10000$ products $\\pm 1$ mostly cancel, leaving a dot product typically about $80$ in size (its standard deviation is $100$), while the two lengths multiply to $10000$. So $\\cos\\theta$ sits near $0.01$, and more than 99.9% of such pairs meet at between $88^\\circ$ and $92^\\circ$.",
+    sectionId: "7"
   }
 }
 
@@ -2306,6 +2333,11 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laVectorsNotationSheet}
+            current={'/linear-algebra/vectors/dot-product'}
           />,
         ]
     },

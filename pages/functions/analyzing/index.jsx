@@ -1683,31 +1683,45 @@ The tools for analysis come from both algebra and geometry. The equation reveals
 
 
 
+// FAQ pass 2026-10-31: cut four heading questions (intervals of increase and
+// decrease, end behaviour, positive or negative, symmetry: the h2s Intervals
+// of Increase and Decrease, End Behavior from Graph, Intervals Where Positive,
+// Negative, or Zero, Identifying Symmetry); renumbered. Kept the first-look
+// question. Added open or closed brackets at a turning point (figure note
+// under Intervals of Increase and Decrease), a local maximum at every point
+// (fact box), maximum as x or y (pitfall box) and the highest point at an
+// endpoint (figure card), all three under Locating Extrema from Graph, and
+// the period from two zeros (pitfall box under Identifying Periodicity).
 const faqQuestions = {
   obj1: {
-    question: "How do you read intervals of increase and decrease from a graph?",
-    answer: "Trace the curve from left to right and note where it rises and where it falls. Increasing and decreasing are stated as intervals of the input, never of the output, so the answer is a set of x-values. The turning points are the boundaries between the intervals.",
-    sectionId: "3"
-  },
-  obj2: {
-    question: "What is end behaviour and how do you read it from a graph?",
-    answer: "It describes where the curve heads as the input runs off toward positive and negative infinity. Read the far left and far right of the graph separately, since the two directions can differ. The curve may rise without bound, fall without bound, or level off toward a horizontal asymptote.",
-    sectionId: "8"
-  },
-  obj3: {
-    question: "How do you tell where a function is positive or negative from its graph?",
-    answer: "Look at which side of the horizontal axis the curve sits on. Above the axis means positive output, below means negative, and touching it means zero. The zeros are the boundaries, so finding them first splits the domain into intervals whose sign can then be read at a glance.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "How do you spot symmetry on a graph?",
-    answer: "Check whether folding along the vertical axis makes the two halves coincide, which indicates an even function. Then check whether rotating the graph half a turn about the origin leaves it unchanged, which indicates an odd one. Most graphs show neither, and symmetry about the horizontal axis is impossible for a function.",
-    sectionId: "6"
-  },
-  obj5: {
     question: "What should you look at first when analysing an unfamiliar graph?",
     answer: "Domain and range, since they bound everything else. Then the intercepts, which anchor the curve to the axes. Then turning points and intervals of increase and decrease, and finally end behaviour. Working in that order means each finding narrows what the next one can be, rather than collecting facts at random.",
     sectionId: "1"
+  },
+  obj2: {
+    question: "Do intervals of increase include the turning point?",
+    answer: "Both ways are in use, as long as the endpoints are $x$-values. By the definition, $x^2$ is increasing on $[0, \\infty)$, since every pair $0 \\leq a < b$ has $a^2 < b^2$. Many courses still write open intervals, $(-\\infty, 0)$ and $(0, \\infty)$ as this page does, because at the turning point itself the function is neither rising nor falling. Follow the convention your course uses.",
+    sectionId: "3"
+  },
+  obj3: {
+    question: "Can a function have a local maximum at every point?",
+    answer: "Yes. The floor function $\\lfloor x \\rfloor$, which rounds down to a whole number, never decreases, yet every input is a local maximum. Between whole numbers the graph is flat, so each point is as high as its neighbours. Near a whole number $n$ the values are $n - 1$ on the left and $n$ on the right, none above $\\lfloor n \\rfloor = n$. The definition uses $\\geq$, so flat stretches count.",
+    sectionId: "5"
+  },
+  obj4: {
+    question: "Is the maximum the x-value or the y-value?",
+    answer: "The maximum is the $y$-value, the output; the $x$-value says where it occurs. For $x^3 - 3x$ the peak sits above $x = -1$, and the local maximum value is $f(-1) = -1 + 3 = 2$, so the peak is the point $(-1, 2)$. A question asking where, or at what $x$, wants the input; a question asking for the maximum wants the height.",
+    sectionId: "5"
+  },
+  obj5: {
+    question: "Is the highest point of a graph always a peak?",
+    answer: "No; on a restricted domain it can be an endpoint. $x^3 - 3x$ on $[-2.2, 2.2]$ has a peak at $(-1, 2)$ and a valley at $(1, -2)$, but its highest and lowest values sit at the ends: $f(2.2) \\approx 4.05$ and $f(-2.2) \\approx -4.05$. On all real numbers it has no highest point at all. Peaks are local extrema; the absolute ones come from comparing them with the endpoint values.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Can you find the period from two zeros?",
+    answer: "Only from matching zeros, not neighbouring ones. $\\sin x$ is zero at $0$ and at $\\pi$, but a shift by $\\pi$ turns the wave upside down, $\\sin(x + \\pi) = -\\sin x$: at $0$ the curve rises through the axis and at $\\pi$ it falls. The next zero where it rises again is $2\\pi$, the true period. Peaks are safer, since each occurs once per cycle.",
+    sectionId: "7"
   }
 }
 
@@ -2048,7 +2062,7 @@ export default function AnalyzingFunctionsPage({signProfile,
         content:[
           sectionsContent.obj3.content,
           <div key={'unit-monotoneSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.monotoneSquare }} />,
-          `At the turning point itself the function is neither increasing nor decreasing: the intervals are open at x = 0.`,
+          `By convention the intervals are written open at x = 0, since at the turning point itself the function is neither rising nor falling; by the definition, closed intervals such as [0, ∞) are also correct.`,
           `@academic[punchline:Rising and falling are always read with x growing, and reported as intervals of x.]@`,
         ]
     },

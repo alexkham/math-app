@@ -13,6 +13,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 
 
 export async function getStaticProps(){
@@ -97,7 +98,7 @@ const keyWords = [
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Zero &amp; <a href="/algebra/powers/negative-exponents" style="${linkStyle}">negative integer</a></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">a ≠ 0</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0⁰ and 0⁻ⁿ involve division by zero</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">0⁻ⁿ involves division by zero; 0⁰ has no single agreed value</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/algebra/powers/rational-exponents" style="${linkStyle}">Rational</a> with even root</td>
@@ -723,7 +724,7 @@ When $m/n$ is negative, the [negative exponent](!/algebra/powers/negative-expone
 
 For [natural exponents](!/algebra/powers/natural-exponents) ($n \\geq 1$), no restriction exists. Any real number — positive, negative, or zero — can serve as the base.
 
-For [zero and negative exponents](!/algebra/powers/negative-exponents), the base must be nonzero: $a \\neq 0$. Division by zero makes $0^{-n}$ and $0^0$ problematic.
+For [zero and negative exponents](!/algebra/powers/negative-exponents), the base must be nonzero: $a \\neq 0$. Division by zero rules out $0^{-n}$, and $0^0$ has no single agreed value.
 
 For [rational exponents](!/algebra/powers/rational-exponents) with even roots, the base must be non-negative: $a \\geq 0$. Even roots of negative numbers are not real.
 
@@ -857,6 +858,10 @@ How to check: square the answer. Since $(9^{1/2})^2 = 9^1 = 9$, the value must s
   content: `The [laws of exponents](!/algebra/powers/exponent-rules/) were derived step by step across the preceding pages — first for [natural exponents](!/algebra/powers/natural-exponents), then verified as the definition extended to [negative](!/algebra/powers/negative-exponents), [rational](!/algebra/powers/rational-exponents), and [irrational](!/algebra/powers/irrational-exponents) exponents. This page collects every rule, its domain restrictions, and the edge cases that require caution.`
 }
 
+// FAQ pass 2026-10-31: kept all four. Added different bases (one paragraph
+// under the product rule; the matching-exponent case is the power of a
+// product rule read backwards) and the order of subtraction in the quotient
+// rule (one sentence under the quotient rule). No heading asks either.
 const faqQuestions = {
   obj1: {
     question: "Does an exponent distribute over addition?",
@@ -877,6 +882,16 @@ const faqQuestions = {
     question: "Do the exponent laws change when the exponent is not a whole number?",
     answer: "No. The product, quotient, and power rules read identically for natural, negative, rational, and irrational exponents, and that invariance is precisely what justifies extending the definition in the first place. What changes is the set of bases each law is valid for, which narrows at every stage. The algebra stays put; only the domain needs checking.",
     sectionId: "9"
+  },
+  obj5: {
+    question: "Can you add exponents when the bases are different?",
+    answer: "No. The product rule needs one shared base, so $2^3 \\cdot 3^4$ cannot be turned into a single power by adding exponents: its value is $8 \\cdot 81 = 648$, nowhere near $6^7 = 279936$. When the exponents match instead, the power of a product rule read backwards does combine the bases: $2^3 \\cdot 3^3 = (2 \\cdot 3)^3 = 6^3 = 216$.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "In the quotient rule, which exponent is subtracted from which?",
+    answer: "The numerator's exponent minus the denominator's, always in that order. In $\\frac{5^3}{5^5}$ that is $3 - 5 = -2$, so the result is $5^{-2} = \\frac{1}{25}$. Subtracting the other way gives $5^2 = 25$, the reciprocal of the right answer. A quick check for a base above $1$: when the larger exponent sits below the bar, the quotient must come out less than $1$.",
+    sectionId: "2"
   }
 }
 
@@ -1007,8 +1022,33 @@ const schemas = {
     ],
   };
 
+  // PropertySheet (obj11): exponent-law-restrictions
+  const exponentLawCards = {
+    header: {
+      kicker: 'laws of exponents',
+      title: 'Each law with its restriction',
+      lede: 'Five of the eight laws always come with a condition, and the other three need one beyond natural exponents; the condition is part of the law.',
+    },
+    labels: { more: 'Example', detailsTitle: '' },
+    verdicts: {
+      always: { label: 'Free for natural exponents', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+      cond: { label: 'Restricted', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+    },
+    groups: [{ properties: [
+      { id: 'prod', name: 'Product', verdict: 'always', statement: '$a^m \\cdot a^n = a^{m+n}$', note: 'the bases must match', condition: '$a \\neq 0$ if an exponent is zero or negative', details: '$x^3 \\cdot x^5 = x^8$' },
+      { id: 'quot', name: 'Quotient', verdict: 'cond', statement: '$\\dfrac{a^m}{a^n} = a^{m-n}$', condition: '$a \\neq 0$', details: '$\\dfrac{x^7}{x^2} = x^5$' },
+      { id: 'pp', name: 'Power of a power', verdict: 'always', statement: '$(a^m)^n = a^{mn}$', note: 'not the stacked $a^{m^n}$', condition: '$a \\neq 0$ if an exponent is zero or negative; $a \\geq 0$ for fractional exponents, since $((-3)^2)^{1/2} = 3$ but $(-3)^1 = -3$', details: '$(x^3)^4 = x^{12}$' },
+      { id: 'pprod', name: 'Power of a product', verdict: 'always', statement: '$(ab)^n = a^n b^n$', note: 'for products only, never sums', condition: '$a, b \\neq 0$ if $n$ is zero or negative; $a, b \\geq 0$ for fractional $n$', details: '$(3x)^4 = 81x^4$' },
+      { id: 'pquot', name: 'Power of a quotient', verdict: 'cond', statement: '$\\left(\\dfrac{a}{b}\\right)^n = \\dfrac{a^n}{b^n}$', condition: '$b \\neq 0$', details: '$\\left(\\dfrac{2}{5}\\right)^3 = \\dfrac{8}{125}$' },
+      { id: 'neg', name: 'Negative exponent', verdict: 'cond', statement: '$a^{-n} = \\dfrac{1}{a^n}$', condition: '$a \\neq 0$', details: '$4^{-2} = \\dfrac{1}{16}$' },
+      { id: 'zero', name: 'Zero exponent', verdict: 'cond', statement: '$a^0 = 1$', condition: '$a \\neq 0$; $0^0$ is excluded', details: '$7^0 = 1$ and $(-3)^0 = 1$' },
+      { id: 'rat', name: 'Rational exponent', verdict: 'cond', statement: '$a^{m/n} = \\sqrt[n]{a^m} = (\\sqrt[n]{a})^m$', condition: '$a \\geq 0$ when $n$ is even', details: '$8^{2/3} = (\\sqrt[3]{8})^2 = 4$' },
+    ] }],
+  };
+
   return {
   props: {
+    exponentLawCards,
     expQuotientCases,
     demoUnits,
     sectionsContent,
@@ -1032,7 +1072,7 @@ const schemas = {
 // export default function RulesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RulesPage({expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RulesPage({exponentLawCards, expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -1162,6 +1202,16 @@ export default function RulesPage({expQuotientCases, seoData, sectionsContent, i
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `The same eight laws as cards, sorted by whether they carry a restriction. Click a verdict in the legend to see only the restricted ones.`,
+          <DiagramFrame
+            key={'obj11-propsheet'}
+            id="exponent-law-restrictions"
+            title="Each exponent law with its restriction"
+            source="/algebra/powers/exponent-rules"
+          >
+            <PropertySheet data={exponentLawCards} />
+          </DiagramFrame>,
+          `Every restriction keeps a division by zero or an even root of a negative number out of the law. That is why $a \\neq 0$ appears whenever $a$ ends up in a denominator, as in the [negative exponent rule](!#6), and why the [rational exponent rule](!#8) asks for $a \\geq 0$ when the root is even.`,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

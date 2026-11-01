@@ -677,6 +677,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -835,6 +836,25 @@ const keyWords = [
 </table>
 `
 
+
+    // Concept introduction (section 1, "What Are Equivalent Fractions") —
+    // template F, two descriptions shown to agree. Running instance: 2/3, 4/6
+    // and 8/12. Old obj1 text is kept in sectionsContent.obj1, unused; its
+    // three paragraphs and the equivBars demo frame with its line are carried
+    // in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciBothTable = ciTableOpen(['fraction', 'shaded part of one bar', 'by arithmetic: numerator ÷ denominator']) +
+      ciRow(['2/3', '2 of 3 equal pieces', '0.666…']) +
+      ciRow(['4/6', '4 of 6 equal pieces', '0.666…'], { shade: true }) +
+      ciRow(['8/12', '8 of 12 equal pieces', '0.666…'], { color: '#2563EB', cols: [2] }) +
+      ciRow(['3/4', '3 of 4 equal pieces', '0.75 — a different amount'], { shade: true, last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1118,21 +1138,46 @@ How to check: cross-multiply the old and new fraction. For $\\frac{1}{3}$ and $\
 // /arithmetic/fractions/adding-subtracting). Kept the specific-denominator
 // rewrite, reframed the LCD question to the choice people actually face
 // (the lcm page owns the plain LCD definition), and invented the n/n question.
+// FAQ pass 2026-10-31: rewrote obj1 — "Do you have to use the least common
+// denominator?" repeated the question on /algebra/equations/rational; it now
+// asks whether multiplying the denominators is enough, keeping the
+// any-common-multiple point (6 and 8: 48 against the LCD 24). Rewrote obj2's
+// last sentence, which said no rewrite exists when the target is not a
+// multiple of the original denominator; the page shows 3/6 over 10 works once
+// simplified. Kept obj3. Added 1/3 over powers of ten (last paragraph and the
+// run-of-nines fact under "Creating Equivalent Fractions"), adding the same
+// number to both parts (the first pitfall) and the 16/64 digit cancelling
+// (fact box under "Simplifying Fractions").
 const faqQuestions = {
   obj1: {
-    question: "Do you have to use the least common denominator?",
-    answer: "No. Any common multiple of the denominators works. For 1/3 and 1/4 you could use 12, 24, or 36 and still get a correct result. The least common denominator — the [least common multiple](!/arithmetic/divisibility/lcm) of the denominators — simply keeps the numbers smallest: 12 rather than 48. Larger choices give the right answer but usually leave a fraction that needs simplifying afterward.",
+    question: "Can you just multiply the denominators to get a common denominator?",
+    answer: "Yes, the product of the denominators is always a common denominator, but not always the least one. For $\\frac{1}{3}$ and $\\frac{1}{4}$ the product $12$ is also the least common denominator. For denominators $6$ and $8$ the product is $48$, while the LCD, their [least common multiple](!/arithmetic/divisibility/lcm), is $24$. The larger choice still gives the right answer, only with bigger numbers that need simplifying afterward.",
     sectionId: "7"
   },
   obj2: {
     question: "How do you rewrite a fraction with a specific denominator?",
-    answer: "Work out what the original denominator must be multiplied by to reach the target, then apply that same factor to the numerator. To write 2/3 with denominator 12: since 3 × 4 = 12, multiply both parts by 4, giving 8/12. If the target is not a multiple of the original denominator, no whole-number rewrite exists.",
+    answer: "Work out what the original denominator must be multiplied by to reach the target, then apply that same factor to the numerator. To write $\\frac{2}{3}$ with denominator $12$: since $3 \\times 4 = 12$, multiply both parts by $4$, giving $\\frac{8}{12}$. If the target is not a multiple of the denominator, simplify first: $\\frac{3}{6}$ cannot be scaled to tenths, but it equals $\\frac{1}{2} = \\frac{5}{10}$. If even the simplest form's denominator does not divide the target, no rewrite exists.",
     sectionId: "2"
   },
   obj3: {
     question: "Why can you multiply the numerator and denominator by the same number?",
     answer: "Because doing so multiplies the fraction by 1. Multiplying 3/5 by 2/2 gives 6/10, and 2/2 equals 1, so the value cannot change — only the way it is written. The same reasoning runs backward when simplifying: dividing both parts by a common factor divides by a disguised 1. Multiplying the two parts by different numbers does change the value.",
     sectionId: "2"
+  },
+  obj4: {
+    question: "Why can't 1/3 be written with a denominator of 10 or 100?",
+    answer: "Because a fraction in simplest form can only be rewritten over a multiple of its own denominator, and no power of $10$ is a multiple of $3$: powers of $10$ have only the prime factors $2$ and $5$. The same holds for $\\frac{1}{7}$ and any simplest-form fraction whose denominator has another prime factor. When the denominator has no factor $2$ or $5$ at all, a run of nines works instead: $\\frac{1}{7} = \\frac{142857}{999999}$.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Does adding the same number to the top and bottom give an equivalent fraction?",
+    answer: "No, apart from a fraction equal to $1$, adding changes the value; multiplying or dividing both parts is what keeps it. Adding $2$ to both parts of $\\frac{3}{5}$ gives $\\frac{5}{7} \\approx 0.71$, while $\\frac{3}{5} = 0.6$: both parts grow by the same amount, but not in the same proportion. Cross-multiplying confirms it, since $3 \\times 7 = 21$ and $5 \\times 5 = 25$ differ. Subtracting the same number from both parts fails the same way.",
+    sectionId: "pitfalls"
+  },
+  obj6: {
+    question: "Why does cancelling the 6s in $\\frac{16}{64}$ give the right answer?",
+    answer: "By luck. Striking out a digit that appears in both parts is not a valid step; only a common factor can be divided out. In $\\frac{16}{64}$ the real common factor is $16$, and $\\frac{1}{4}$ happens to match. The move usually fails: crossing out the 2s in $\\frac{12}{24}$ leaves $\\frac{1}{4}$, but $\\frac{12}{24} = \\frac{1}{2}$. Among two-digit fractions below $1$, apart from pairs like $\\frac{30}{60}$, only $\\frac{16}{64}$, $\\frac{19}{95}$, $\\frac{26}{65}$ and $\\frac{49}{98}$ survive it.",
+    sectionId: "3"
   }
 }
 
@@ -1226,6 +1271,10 @@ const schemas = {
     caption: 'Different labels, one point' };
   const fbCommonDen = { kind: 'bars', svgTitle: '1/3 = 4/12 and 1/4 = 3/12: both rewritten in twelfths', labelWidth: 78, rows: [{ n: 3, k: 1, label: '1/3', partLabels: true }, { n: 12, k: 4, label: '= 4/12' }, { n: 4, k: 1, label: '1/4', color: 'r', partLabels: true }, { n: 12, k: 3, label: '= 3/12', color: 'r' }],
     notes: [{ text: '12 is a multiple of both 3 and 4, so both fit into twelfths' }, { text: 'now the parts have the same size and can be compared or added' }], caption: 'A common denominator: one part size for both' };
+  const conceptIntroFigures = {
+    bothTable: ciBothTable,
+  };
+
   const demoUnits = {
     simplify: demoUnitFrame({
       svg: euclideanVisualizerDiagrams.classic,
@@ -1254,6 +1303,7 @@ const schemas = {
 return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1271,9 +1321,73 @@ return {
 }
    }
 
-export default function EquivalentFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function EquivalentFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `One way to compare fractions: draw them and see how much is shaded.`,
+        content: [
+          `Visually, equivalent fractions cover identical areas. A rectangle split into 3 equal parts with 2 shaded looks different from one split into 6 parts with 4 shaded, but the shaded region is the same size in both cases.`,
+          <div key={'unit-equivBars'} dangerouslySetInnerHTML={{ __html: demoUnits.equivBars }} />,
+          `Every fraction has infinitely many such rows: 16/24, 32/48, and so on.`,
+        ],
+      },
+      {
+        id: 'second',
+        lead: `Another way: divide the numerator by the denominator and compare the numbers.`,
+        content: [
+          `$\\frac{2}{3}$ is $2 \\div 3 = 0.666\\ldots$ and $\\frac{4}{6}$ is $4 \\div 6 = 0.666\\ldots$ — no drawing needed, just arithmetic.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The picture and the arithmetic give the same verdict on every pair.`,
+        content: [
+          ciTable('bothTable'),
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree: cutting every piece into k smaller pieces multiplies both counts by k, and k ÷ k changes nothing.`,
+        content: [
+          `Halving each third makes sixths: twice as many pieces in the bar, and twice as many shaded, so $\\frac{2}{3}$ becomes $\\frac{2 \\cdot 2}{3 \\cdot 2} = \\frac{4}{6}$. The shaded length never moved, and in the division the factor $2$ cancels: $\\frac{4}{6} = \\frac{2 \\cdot 2}{3 \\cdot 2}$, the same quotient as $\\frac{2}{3}$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `Two fractions are [equivalent](!/arithmetic/definitions#equivalent_fractions) when they represent the same amount: the same shaded part of a whole, the same value as a number.`,
+        formula: [
+          `Two fractions are equivalent when they represent the same portion of a whole. The fractions $\\frac{2}{3}$ and $\\frac{4}{6}$ are equivalent because both describe the same quantity, just divided into different numbers of pieces.`,
+        ],
+        footer: `So $\\frac{2}{3}$, $\\frac{4}{6}$ and $\\frac{8}{12}$ are equivalent; $\\frac{3}{4}$ is not one of them.`,
+      },
+      {
+        id: 'kind',
+        lead: `Equivalent fractions are different names for one number — a whole family of them.`,
+        content: [
+          `Every fraction belongs to an infinite family of equivalent fractions. The fraction $\\frac{1}{2}$ is equivalent to $\\frac{2}{4}$, $\\frac{3}{6}$, $\\frac{4}{8}$, $\\frac{5}{10}$, and infinitely many others. All members of this family occupy the same point on the number line.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which description to use: pictures to see why, arithmetic to check.`,
+        content: `Bars make equivalence obvious for small denominators; for fractions like $\\frac{35}{49}$ and $\\frac{45}{63}$ arithmetic is faster, and the section on [testing for equivalence](!/arithmetic/fractions/equivalent#5) gives a check that needs no decimals at all.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers creating equivalent fractions, simplifying to simplest form, testing for equivalence, equivalent fractions on the number line, and common denominators.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1289,9 +1403,7 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-equivBars'} dangerouslySetInnerHTML={{ __html: demoUnits.equivBars }} />,
-          `Every fraction has infinitely many such rows: 16/24, 32/48, and so on.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

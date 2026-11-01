@@ -1655,6 +1655,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionCompositionDiagrams from '@/app/components/functions/compositions/functionCompositionDiagrams'
 import renderCompositionSteps from '@/app/utils/illustrations/functions/composition/compositionSteps'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 
 
 export async function getStaticProps(){
@@ -3061,6 +3063,15 @@ This chaining is composition. Given functions $f$ and $g$, the composition $f \\
 
 
 
+// FAQ pass 2026-10-31: kept "which function is applied first". Cut four
+// questions that restate h2s: f(g(x)) vs g(f(x)) (Non-Commutativity), the
+// composite domain (Domain of Composite Functions; its answer also said the
+// simplified formula hides the second condition, the page shows the first),
+// decomposing (Decomposing Functions) and composing with the inverse
+// (Composition and Inverse Functions). Added the f² notation and the
+// 4x(1 - x) error doubling (Composition with Itself text and fact box), linear
+// functions that commute (fact box under Non-Commutativity) and discount-then-
+// tax order (one sentence under Applications of Composition).
 const faqQuestions = {
   obj1: {
     question: "Which function is applied first in f(g(x))?",
@@ -3068,24 +3079,24 @@ const faqQuestions = {
     sectionId: "3"
   },
   obj2: {
-    question: "Is f(g(x)) the same as g(f(x))?",
-    answer: "Almost never. Composition is not commutative, so reversing the order generally produces a completely different function. Squaring then adding three gives a different result from adding three then squaring. The two coincide only in special cases, most notably when the functions are inverses of each other.",
-    sectionId: "6"
+    question: "Does $f^2(x)$ mean $f(f(x))$ or $f(x)$ squared?",
+    answer: "It depends on the field, so read the context. In iteration and dynamics $f^2$ means $f \\circ f$: for $f(x) = 2x$ that is $f(f(x)) = 4x$. In trigonometry $\\sin^2\\theta$ means $(\\sin\\theta)^2$, the square of the output, and read that way the same $f$ would give $4x^2$. Careful texts avoid the clash by writing $f \\circ f$ or $f(f(x))$ in full.",
+    sectionId: "8"
   },
   obj3: {
-    question: "How do you find the domain of a composite function?",
-    answer: "Two conditions apply at once. The input must be in the domain of the inner function, and the value the inner function produces must be in the domain of the outer one. Simplifying the composite first can hide the second restriction, so the domain must be worked out before simplifying.",
-    sectionId: "5"
+    question: "When do two linear functions commute?",
+    answer: "When they share a fixed point, provided neither slope is $1$. For $f(x) = ax + b$ and $g(x) = cx + d$ both orders have slope $ac$, so only the constants $ad + b$ and $bc + d$ can differ. The functions $2x + 1$ and $3x + 2$ both send $-1$ to $-1$, and both orders give $6x + 5$. Two shifts $x + p$ and $x + q$ always commute, though they have no fixed point.",
+    sectionId: "6"
   },
   obj4: {
-    question: "How do you decompose a function into a composition?",
-    answer: "Look for a self-contained expression appearing inside another operation, and call that the inner function. Whatever is done to it becomes the outer one. For a root of a quadratic, the quadratic is inner and the root is outer. Decompositions are not unique, so several correct answers exist.",
-    sectionId: "9"
+    question: "Does it matter whether a discount or the tax is applied first?",
+    answer: "Not for a percentage discount, but it does for a fixed amount off. A $20\\%$ discount and an $8\\%$ tax are both scalings, so either order gives $0.864p$. With $10$ off instead, discounting first gives $1.08(p - 10) = 1.08p - 10.8$, while taxing first gives $1.08p - 10$. The price is $0.80$ lower when the discount comes first, because the tax is then charged on the smaller amount.",
+    sectionId: "12"
   },
   obj5: {
-    question: "What happens when you compose a function with its inverse?",
-    answer: "You get the input back unchanged, in either order. That is precisely what being an inverse means: one function undoes what the other did. This property is what makes composition the standard way to verify a candidate inverse, and it holds only across the domains where both are defined.",
-    sectionId: "10"
+    question: "Why does iterating $4x(1 - x)$ on a computer go wrong?",
+    answer: "Because every step doubles the error. Writing $x = \\sin^2\\theta$ turns $4x(1 - x)$ into $\\sin^2 2\\theta$, so each application doubles the angle, and any error in the starting value doubles with it. A computer keeps about 16 significant digits and $2^{50}$ is roughly $10^{15}$, so after about 50 steps the computed iterates no longer track the true ones, even though each single step is accurate.",
+    sectionId: "8"
   }
 }
 
@@ -3345,6 +3356,11 @@ $$(f \\circ g)(x) = f(g(x))$$
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={functionsNotationSheet}
+            current={'/functions/composition'}
           />,
         ]
     },

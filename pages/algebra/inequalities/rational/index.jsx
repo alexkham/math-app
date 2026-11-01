@@ -507,21 +507,34 @@ const introContent = {
   content: `A rational inequality asks where a fraction involving the variable is positive, negative, or zero. The sign chart method applies exactly as it does for polynomials, but with an added layer: the denominator contributes critical points of its own. Where the numerator is zero, the expression equals zero. Where the denominator is zero, the expression does not exist. Both types partition the number line into intervals, both affect the sign analysis, but they are treated differently when deciding which boundary points belong to the solution. The temptation to clear the denominator by cross-multiplying must be resisted — the denominator changes sign across the number line, making a single multiplication invalid.`,
 };
 
+// FAQ pass 2026-10-31: cut "Why can a numerator zero be included but a
+// denominator zero never?" (restates the h2 "Endpoint Inclusion Rules") and
+// "Why does cross-multiplying work for rational equations but not
+// inequalities?" (restates the h2s "A Common Error: Cross-Multiplication" and
+// "Connection to Rational Equations"); kept the two-fractions question, now
+// obj1. Added the quotient-versus-product sign rule and the constant
+// denominator that is not rational (both under "Definition"), and changing
+// sign without passing zero (fact box under "Critical Points").
 const faqQuestions = {
   obj1: {
-    question: "Why can a numerator zero be included but a denominator zero never?",
-    answer: "Because they fail for different reasons. At a numerator zero the expression equals zero, which satisfies $\\leq$ or $\\geq$ but not a strict sign, so it is included under non-strict inequalities only. At a denominator zero the expression has no value at all, so it is neither less than, equal to, nor greater than anything, and it is excluded under every inequality sign.",
-    sectionId: "4"
-  },
-  obj2: {
-    question: "Why does cross-multiplying work for rational equations but not inequalities?",
-    answer: "Because an equation has no direction to lose. Multiplying by the denominator $Q(x)$ preserves an equality regardless of sign, but for an inequality it preserves the direction where $Q(x) > 0$ and reverses it where $Q(x) < 0$. One multiplication cannot cover both regions, so a single cross-multiplication silently mixes two contradictory cases.",
-    sectionId: "5"
-  },
-  obj3: {
     question: "What goes wrong if you leave fractions on both sides?",
     answer: "The sign chart has nothing to read. It needs one rational expression compared to zero, so $\\frac{1}{x-3} \\leq \\frac{2}{x+1}$ must first become $\\frac{-x+7}{(x-3)(x+1)} \\leq 0$ by subtracting and combining over a common denominator. Working across two separate fractions leads straight back into the cross-multiplication trap.",
     sectionId: "6"
+  },
+  obj2: {
+    question: "Is $\\frac{P(x)}{Q(x)} > 0$ the same as $P(x)Q(x) > 0$?",
+    answer: "Yes, for a strict inequality. Wherever the fraction is defined it has the same sign as the product, because both are positive exactly when numerator and denominator share a sign. With $\\geq$ or $\\leq$ the swap needs care: the product also equals $0$ at the denominator zeros, so those points have to be removed again, since the fraction does not exist there.",
+    sectionId: "1"
+  },
+  obj3: {
+    question: "Is $\\frac{x + 3}{5} \\leq 1$ a rational inequality?",
+    answer: "No. A rational inequality needs the variable in a denominator, and here the denominator is the constant $5$. Multiplying both sides by $5$, a positive number, keeps the direction and gives $x + 3 \\leq 5$, so $x \\leq 2$: a [linear inequality](!/algebra/inequalities/linear) in disguise. Once $x$ sits in a denominator, that denominator can change sign, and a sign chart takes over.",
+    sectionId: "1"
+  },
+  obj4: {
+    question: "Can an expression change sign without passing through zero?",
+    answer: "Yes, a fraction can, at a zero of its denominator. $\\frac{1}{x}$ is $-1$ at $x = -1$ and $1$ at $x = 1$, yet it is never $0$: it jumps across the wall at $x = 0$. A polynomial cannot do this, because its graph has no breaks. That is why denominator zeros go on the sign chart alongside numerator zeros.",
+    sectionId: "2"
   }
 }
 

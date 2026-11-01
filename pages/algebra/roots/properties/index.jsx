@@ -14,6 +14,9 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 
 
 export async function getStaticProps(){
@@ -448,6 +451,25 @@ const summaryTable = `
 //   },
 
 // }
+
+// Concept introduction (section 3, "Principal Root Convention") — template C,
+// failure first. Running instance: √16, with 4 and −4 both squaring to 16.
+// Old obj3 text is kept in sectionsContent.obj3, unused; its two formula
+// boxes, pitfall aside, seven passages, the principal-root CaseSplit frame
+// and the punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTwoTable = ciTableOpen(['expression', 'if √16 could be 4 or −4', 'number of values']) +
+  ciRow(['√16 + 1', '5 or −3', '2'], { color: '#a4243b', cols: [2] }) +
+  ciRow(['2·√16', '8 or −8', '2'], { shade: true, color: '#a4243b', cols: [2] }) +
+  ciRow(['√16 − √16', '0, 8 or −8', '3'], { color: '#a4243b', cols: [2] }) +
+  ciRow(['√16 · √16', '16 or −16', '2'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
 
@@ -919,6 +941,11 @@ This distinction shapes everything — which inputs are valid, which outputs are
 
 
 
+// FAQ pass 2026-10-31: kept the four existing questions. Added why √16 is
+// only 4 (pitfall under "Principal Root Convention"), the three cube roots of
+// -8 (fact box under "Odd Index Radicals"), the word surd (one line in the
+// radical-sign card under "Radical Notation") and a zero radicand (pitfall
+// under "Domain and Range by Index"); no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "Why does $\\sqrt{x^2} = |x|$ while $\\sqrt[3]{x^3} = x$?",
@@ -939,6 +966,26 @@ const faqQuestions = {
     question: "Does $\\pm$ mean the same thing in science as in algebra?",
     answer: "No. In algebra $x = \\pm 4$ is two statements compressed onto one line, unpacking to $x = 4$ or $x = -4$, and you unpack before computing. In the sciences $5.0 \\pm 0.1$ names an interval of uncertainty, a range rather than two values. Same glyph, unrelated job. Its partner $\\mp$ tracks the opposite choice inside one formula.",
     sectionId: "notation"
+  },
+  obj5: {
+    question: "If $16$ has two square roots, why is $\\sqrt{16}$ only $4$?",
+    answer: "Because the radical sign names one number, the principal root, which is the non-negative one. Both $4$ and $-4$ square to $16$, but if $\\sqrt{16}$ could be either, an expression like $\\sqrt{16} + 1$ would have two values, $5$ and $-3$. The other root is written $-\\sqrt{16}$, and both together $\\pm\\sqrt{16}$, which is how $x^2 = 16$ gives $x = \\pm 4$.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Does $-8$ have only one cube root?",
+    answer: "Only one real cube root, $-2$. Over the complex numbers it has three: $1 + i\\sqrt{3}$ and $1 - i\\sqrt{3}$ also cube to $-8$, and every nonzero number has exactly three cube roots. The graph of $y = x^3$ can show only the real one, and the odd-index radical is defined to return it, which is why $\\sqrt[3]{-8}$ is the single number $-2$.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "What is a surd?",
+    answer: "An irrational root, in the name used by older British texts: $\\sqrt{2}$ and $\\sqrt[3]{5}$ are surds, while $\\sqrt{9}$ is not, since it equals $3$. The word labels the same object as the radical sign $\\sqrt[n]{a}$, which can also be written as the power $a^{1/n}$, so everything on this page about radicals applies to surds unchanged.",
+    sectionId: "notation"
+  },
+  obj8: {
+    question: "Can the number under a square root be zero?",
+    answer: "Yes. $\\sqrt{0} = 0$, so a radicand of zero is allowed, and the domain of an even root is found with $\\geq$, not $>$. For $f(x) = \\sqrt{x - 3}$, solving $x - 3 \\geq 0$ gives the domain $[3, \\infty)$, endpoint included, since $f(3) = \\sqrt{0} = 0$. The strict sign belongs to a denominator or a logarithm, where zero is excluded.",
+    sectionId: "6"
   }
 }
 
@@ -1043,6 +1090,10 @@ const schemas = {
     points: [{ x: -5, y: 5, label: '√((−5)²) = 5', pos: 'ne' }, { x: 5, y: 5, label: '√(5²) = 5', pos: 'nw' }],
     notes: [{ x: -4.8, y: -1.2, text: 'for x < 0, √(x²) = −x', pos: 'e', color: 'r' }],
     caption: '√(x²) = |x|: the root of a square is never negative' };
+  const conceptIntroFigures = {
+    twoTable: ciTwoTable,
+  };
+
   const demoUnits = {
     evenPowers: demoUnitFrame({
       svg: renderFunctionPlotV4(fpEvenPowers),
@@ -1099,6 +1150,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Properties of Radicals: Even & Odd Index, Principal Root | Learn Math Class",
       description: "Learn radical properties: even vs odd index behavior, principal root convention, domain restrictions, √(x²) = |x| identity, sign behavior, and connection to rational exponents.",
@@ -1113,9 +1165,88 @@ return {
 // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PropertiesPage({principalRootCases, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PropertiesPage({principalRootCases, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 3 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `16 has two square roots, 4 and −4, because both square to 16.`,
+        content: [
+          `For even-index radicals, multiple real numbers satisfy the defining equation. Both 4 and $-4$ are square roots of 16, since both square to 16.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `If the symbol √16 stood for both, even simple expressions would stop having one value.`,
+        content: [
+          ciTable('twoTable'),
+          `In the last row, $\\sqrt{16} \\cdot \\sqrt{16}$ could even come out as $-16$ — a "square" that is negative.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The trouble is a symbol with two values: in a formula, every symbol has to name exactly one number.`,
+        content: [
+          `$3 + 5$ is $8$ and nothing else. For $\\sqrt{\\phantom{x}}$ to be used inside formulas the same way, one of the two roots has to be chosen once and for all — and the natural choice is the non-negative one.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [principal root](!/algebra/definitions#principal_root) of a non-negative number is its non-negative root, and the radical sign always means this one: $\\sqrt{16} = 4$.`,
+        formula: [
+          `The principal root convention resolves this ambiguity: the radical symbol denotes the non-negative root.`,
+          `@academic[formula_callout:Principal Root Convention
+$$\\sqrt{16} = 4$$]@`,
+          `This is not a choice between equally valid answers. It is a definition that makes the radical symbol unambiguous. Without it, $\\sqrt{16}$ would have two values, and expressions like $\\sqrt{16} + 1$ would be meaningless — which value is intended?`,
+        ],
+        footer: `So $\\sqrt{16} + 1 = 5$, $2\\sqrt{16} = 8$ and $\\sqrt{16} \\cdot \\sqrt{16} = 16$, each with one value.`,
+      },
+      {
+        id: 'kind',
+        lead: `The other root is not lost: it is written −√16, and both together are ±√16.`,
+        content: [
+          `When both roots are needed, explicit notation indicates this:`,
+          `@academic[formula_callout:Principal Root Convention
+$$x^2 = 16 \\quad \\Longrightarrow \\quad x = \\pm\\sqrt{16} = \\pm 4$$]@`,
+          `The $\\pm$ symbol signals that both positive and negative roots apply. This notation appears frequently when [solving radical equations](!/algebra/roots/equations).`,
+          `Odd-index radicals need no such convention. Each real number has exactly one real odd root, so no ambiguity exists.`,
+          <DiagramFrame
+            key={'obj3-diagram'}
+            id="principal-root-index-cases"
+            title="The principal root: even or odd index"
+            source="/algebra/roots/properties"
+          >
+            <CaseSplit data={principalRootCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrame>,
+          `@academic[punchline:The radical sign names one number, the non-negative root; the other root has to be asked for with $\\pm$.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `√16 has one value, but the equation x² = 16 has two solutions — the two are easy to mix up.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Giving the radical two values
+Writing $\\sqrt{16} = \\pm 4$ mixes the radical with the solutions of $x^2 = 16$. The symbol has one value, $\\sqrt{16} = 4$; the sign $\\pm$ stands in front of it: $x = \\pm\\sqrt{16}$.
+[Read more](!#pitfalls)]@`,
+          `The [root calculator](!/calculators/root-calculator) returns the principal root, following this convention.`,
+          `What the convention does to $\\sqrt{x^2}$ when $x$ is negative is the subject of [the identity for even roots](!/algebra/roots/properties#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the identities for even and odd roots, domain and range by index, sign behaviour, and the connection to rational exponents.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1154,6 +1285,11 @@ export default function PropertiesPage({principalRootCases, seoData, sectionsCon
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={powersRootsLogsNotationSheet}
+            current={'/algebra/roots/properties'}
+          />,
         ]
     },
     {
@@ -1171,16 +1307,7 @@ export default function PropertiesPage({principalRootCases, seoData, sectionsCon
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
-          sectionsContent.obj3.content,
-          <DiagramFrame
-            key={'obj3-diagram'}
-            id="principal-root-index-cases"
-            title="The principal root: even or odd index"
-            source="/algebra/roots/properties"
-          >
-            <CaseSplit data={principalRootCases} variant="poster" proseStyle="cards" theme={figureTheme} />
-          </DiagramFrame>,
-          `@academic[punchline:The radical sign names one number, the non-negative root; the other root has to be asked for with $\\pm$.]@`,
+          <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
         ]
     },
     {

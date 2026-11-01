@@ -216,8 +216,10 @@ const CSS = `
   border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid var(--dm-edge);
 }
 .dm-root .dm-down .dm-pill { justify-self: start; margin-left: 10px; }
-.dm-root .dm-multi { display: grid; gap: 6px; }
-.dm-root .dm-multi-row { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: center; }
+/* 2026-10-29: one shared grid, so the cards line up whatever the pill widths */
+.dm-root .dm-multi { display: grid; grid-template-columns: auto 1fr; gap: 6px 8px; align-items: center; }
+.dm-root .dm-multi-row { display: contents; }
+.dm-root .dm-multi-row > .dm-pill { justify-self: center; }
 
 /* ---------------- trees (shared) ---------------- */
 .dm-root .dm-tree-wrap { overflow-x: auto; }
@@ -333,6 +335,49 @@ const CSS = `
   .dm-root .dm-rule-arrow { text-align: left; }
   .dm-root .dm-rule-arrow::before { content: '\\2193'; }
 }
+
+/* ---------------- walk mode (2026-10-29, DecisionWalker) ---------------- */
+.dm-root .dm-pill.dm-pick,
+.dm-root .dm-tlabel.dm-pick {
+  cursor: pointer; -webkit-appearance: none; appearance: none;
+  border: 1.5px solid var(--dm-blue); background: var(--dm-blue-soft); color: var(--dm-title);
+  box-shadow: 0 0 0 3px var(--dm-blue-softer);
+  transition: background 0.12s, color 0.12s;
+}
+.dm-root .dm-pill.dm-pick { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 700; line-height: 1.5; padding: 2px 10px; }
+.dm-root .dm-pill.dm-pick:hover,
+.dm-root .dm-tlabel.dm-pick:hover { background: var(--dm-blue); color: #ffffff; }
+.dm-root .dm-pill.dm-on { background: var(--dm-blue); color: #ffffff; }
+
+.dm-root .dm-tree.dm-walking .dm-tnode.dm-w-next { opacity: 0.7; }
+.dm-root .dm-tree.dm-walking .dm-tnode.dm-w-next:hover { opacity: 1; }
+.dm-root .dm-tree.dm-walking .dm-tlabel:not(.dm-on):not(.dm-pick) { opacity: 0.4; }
+.dm-root .dm-tnode.dm-w-cur .dm-q,
+.dm-root .dm-tnode.dm-w-chosen .dm-o { box-shadow: 0 0 0 3px var(--dm-blue-soft); border-color: var(--dm-blue); }
+.dm-root .dm-tnode.dm-w-past:hover .dm-q { border-color: var(--dm-blue); }
+
+.dm-root .dm-ladder.dm-walking .dm-w-future { opacity: 0.35; }
+.dm-root .dm-ladder.dm-walking .dm-w-past .dm-yes,
+.dm-root .dm-ladder.dm-walking .dm-w-past .dm-exit,
+.dm-root .dm-ladder.dm-walking .dm-w-past .dm-multi { opacity: 0.35; }
+.dm-root .dm-ladder.dm-walking .dm-w-end .dm-exit:not(.dm-w-chosen) { opacity: 0.35; }
+.dm-root .dm-ladder.dm-walking .dm-w-cur .dm-q { border-color: var(--dm-blue); box-shadow: 0 0 0 3px var(--dm-blue-soft); }
+.dm-root .dm-exit.dm-w-chosen .dm-o { box-shadow: 0 0 0 3px var(--dm-blue-soft); }
+
+/* ---------------- downloads (2026-10-29) ----------------
+   The PNG/PDF generator sets every element to position:static. These
+   heavier !important rules put the tree layout back, and the view
+   switch is left out of the file. */
+.dm-root .dm-tree { position: relative !important; }
+.dm-root .dm-tree svg,
+.dm-root .dm-tree .dm-tlabel,
+.dm-root .dm-tree .dm-tnode { position: absolute !important; }
+.dm-root .dm-board-bus,
+.dm-root .dm-board-bus > div,
+.dm-root .dm-yes,
+.dm-root .dm-down-rail { position: relative !important; }
+.dm-root .dm-board-bus-line { position: absolute !important; }
+.dm-root[data-diagram-export] .dm-sw { display: none !important; }
 `;
 
 /* ================================================================== */
@@ -523,9 +568,24 @@ function layoutTreeH(data) {
     return pos[id].y;
   };
   if (isNode(data, data.start)) walk(data.start, 0);
-  const outX = (maxDepth + 1) * (H.QW + H.GX);
+  /* 2026-10-29: each gap is wide enough for the answer pills that sit in it
+     (the pill is centred between the elbow, 18px out, and the next box).
+     Outcomes form the last column, so only edges from the column just
+     before it count there; longer edges have room to spare. */
+  const col = (p) => (p.leaf ? maxDepth + 1 : p.depth);
+  /* measured: '2' 23px, 'yes' 35px, 'neither' 53px, '4 or more' 67px */
+  const pillW = (label) => (typeof label === 'string' ? label.length : 4) * 5.6 + 18;
+  const gaps = Array.from({ length: maxDepth + 1 }, () => H.GX);
+  edges.forEach((e) => {
+    const d = pos[e.from].depth;
+    if (col(pos[e.to]) !== d + 1) return;
+    gaps[d] = Math.max(gaps[d], Math.ceil(18 + pillW(e.label) + 16));
+  });
+  const colX = [0];
+  for (let d = 0; d <= maxDepth; d += 1) colX.push(colX[d] + H.QW + gaps[d]);
+  const outX = colX[maxDepth + 1];
   Object.values(pos).forEach((p) => {
-    p.x = p.leaf ? outX : p.depth * (H.QW + H.GX);
+    p.x = colX[col(p)];
     p.w = p.leaf ? H.OW : H.QW;
   });
   return { pos, edges, W: outX + H.OW, H: leaf * H.SLOT };
@@ -601,7 +661,33 @@ function minWidths(data) {
 /*  view: ladder (Steps)                                              */
 /* ================================================================== */
 
-function Ladder({ data, labels }) {
+/* 2026-10-29: walk mode. DecisionWalker passes `walk` (path, current,
+   finished, choose, jump). Without it every view is the static map. */
+function walkState(walk) {
+  if (!walk) return null;
+  const nodes = walk.path.map((s) => s.node);
+  const last = walk.path[walk.path.length - 1];
+  return {
+    nodes,
+    on: new Set([...nodes, walk.current]),
+    stepped: (from, to) => walk.path.some((s) => s.node === from && s.answer.to === to),
+    picking: (from) => !walk.readOnly && !walk.finished && from === walk.current,
+    endNode: walk.finished && last ? last.node : null,
+    endTo: walk.finished ? walk.current : null,
+  };
+}
+
+/* an answer pill: a button while it can be picked, a plain label otherwise */
+function Pick({ className, label, onPick }) {
+  if (!onPick) return <span className={className}><R t={label} /></span>;
+  return (
+    <button type="button" className={className + ' dm-pick'} onClick={onPick}>
+      <R t={label} />
+    </button>
+  );
+}
+
+function Ladder({ data, labels, walk }) {
   const rungs = [];
   const seen = new Set();
   let id = data.start;
@@ -614,60 +700,129 @@ function Ladder({ data, labels }) {
     id = cont ? cont.to : null;
   }
 
+  const ws = walkState(walk);
+  const endIdx = ws && ws.endNode ? rungs.findIndex((r) => r.id === ws.endNode) : -1;
+  const curIdx = ws && !walk.finished ? rungs.findIndex((r) => r.id === walk.current) : -1;
+  const stateOf = (i) => {
+    if (!ws) return '';
+    const at = walk.finished ? endIdx : curIdx;
+    if (i < at) return 'past';
+    if (i === at) return walk.finished ? 'end' : 'cur';
+    return 'future';
+  };
+  const pickOn = (r, a) => (ws && ws.picking(r.id) ? () => walk.choose(r.id, a) : null);
+  const exitCls = (r, e) => (ws && ws.endTo === e.to && ws.endNode === r.id ? ' dm-w-chosen' : '');
+
   return (
-    <div className="dm-ladder">
-      {rungs.map((r, i) => (
-        <React.Fragment key={r.id}>
-          <div className="dm-rung">
-            <div className="dm-num">{i + 1}</div>
-            <Question node={r.n} isStart={false} labels={labels} />
-            {r.exits.length === 1 ? (
-              <>
-                <div className="dm-yes"><span className="dm-pill"><R t={r.exits[0].label} /></span></div>
-                <Outcome o={data.outcomes[r.exits[0].to]} />
-              </>
-            ) : (
-              <>
-                <div className="dm-yes" />
-                <div className="dm-multi">
-                  {r.exits.map((e, k) => (
-                    <div className="dm-multi-row" key={k}>
-                      <span className="dm-pill"><R t={e.label} /></span>
-                      <Outcome o={data.outcomes[e.to]} />
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-          {r.cont && (
-            <div className="dm-down">
-              <div className="dm-down-rail" />
-              <span className="dm-pill dm-no"><R t={r.cont.label} /></span>
+    <div className={'dm-ladder' + (ws ? ' dm-walking' : '')}>
+      {rungs.map((r, i) => {
+        const st = stateOf(i);
+        return (
+          <React.Fragment key={r.id}>
+            <div className={'dm-rung' + (st ? ' dm-w-' + st : '')}>
+              <div
+                className="dm-num"
+                onClick={(st === 'past' || st === 'end') && !walk.readOnly ? () => walk.jump(i) : undefined}
+                style={(st === 'past' || st === 'end') && !walk.readOnly ? { cursor: 'pointer' } : undefined}
+              >
+                {i + 1}
+              </div>
+              <Question node={r.n} isStart={false} labels={labels} />
+              {r.exits.length === 1 ? (
+                <>
+                  <div className="dm-yes">
+                    <Pick className={'dm-pill' + (exitCls(r, r.exits[0]) ? ' dm-on' : '')} label={r.exits[0].label} onPick={pickOn(r, r.exits[0])} />
+                  </div>
+                  <div className={'dm-exit' + exitCls(r, r.exits[0])}><Outcome o={data.outcomes[r.exits[0].to]} /></div>
+                </>
+              ) : (
+                <>
+                  <div className="dm-yes" />
+                  <div className="dm-multi">
+                    {r.exits.map((e, k) => (
+                      <div className="dm-multi-row" key={k}>
+                        <Pick className={'dm-pill' + (exitCls(r, e) ? ' dm-on' : '')} label={e.label} onPick={pickOn(r, e)} />
+                        <div className={'dm-exit' + exitCls(r, e)}><Outcome o={data.outcomes[e.to]} /></div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
-          )}
-        </React.Fragment>
-      ))}
+            {r.cont && (
+              <div className={'dm-down' + (st ? ' dm-w-' + st : '')}>
+                <div className="dm-down-rail" />
+                <Pick className={'dm-pill dm-no' + (st === 'past' ? ' dm-on' : '')} label={r.cont.label} onPick={pickOn(r, r.cont)} />
+              </div>
+            )}
+          </React.Fragment>
+        );
+      })}
     </div>
   );
+}
+
+/* tree helpers shared by both directions */
+function treeWalk(data, walk, hl, parents) {
+  const ws = walkState(walk);
+  if (!ws) {
+    const onPath = new Set();
+    for (let c = hl; c; c = parents[c]) onPath.add(c);
+    return {
+      ws: null,
+      nodeOn: (id) => onPath.has(id),
+      edgeOn: (e) => onPath.has(e.from) && onPath.has(e.to),
+      dim: Boolean(hl),
+    };
+  }
+  const next = new Set(
+    !walk.finished && isNode(data, walk.current) ? data.nodes[walk.current].answers.map((a) => a.to) : []
+  );
+  return {
+    ws,
+    next,
+    nodeOn: (id) => ws.on.has(id),
+    edgeOn: (e) => ws.stepped(e.from, e.to),
+    dim: true,
+    answerOf: (e) => data.nodes[e.from].answers.find((a) => a.to === e.to && a.label === e.label),
+  };
+}
+
+function treeNodeProps(data, walk, tw, id, setHl) {
+  if (!tw.ws) {
+    return { onMouseEnter: () => setHl(id), onMouseLeave: () => setHl(null), extra: '' };
+  }
+  const back = tw.ws.nodes.indexOf(id);
+  if (walk.readOnly) {
+    if (back >= 0) return { extra: ' dm-w-past' };
+    if (tw.next.has(id)) return { extra: ' dm-w-next' };
+    if (id === walk.current) return { extra: walk.finished ? ' dm-w-chosen' : ' dm-w-cur' };
+    return { extra: '' };
+  }
+  if (back >= 0) return { onClick: () => walk.jump(back), extra: ' dm-w-past', style: { cursor: 'pointer' } };
+  if (tw.next.has(id)) {
+    const a = data.nodes[walk.current].answers.find((x) => x.to === id);
+    return { onClick: () => walk.choose(walk.current, a), extra: ' dm-w-next', style: { cursor: 'pointer' } };
+  }
+  if (id === walk.current) return { extra: walk.finished ? ' dm-w-chosen' : ' dm-w-cur' };
+  return { extra: '' };
 }
 
 /* ================================================================== */
 /*  view: tree, left to right                                         */
 /* ================================================================== */
 
-function TreeH({ data, labels }) {
+function TreeH({ data, labels, walk }) {
   const L = useMemo(() => layoutTreeH(data), [data]);
   const parents = useMemo(() => parentMap(data), [data]);
   const [hl, setHl] = useState(null);
 
-  const onPath = new Set();
-  for (let c = hl; c; c = parents[c]) onPath.add(c);
-  const edgeOn = (e) => onPath.has(e.from) && onPath.has(e.to);
+  const tw = treeWalk(data, walk, hl, parents);
+  const edgeOn = tw.edgeOn;
 
   return (
     <div className="dm-tree-wrap">
-      <div className={'dm-tree dm-htree' + (hl ? ' dm-has-hl' : '')} style={{ width: L.W, height: L.H }}>
+      <div className={'dm-tree dm-htree' + (tw.dim ? ' dm-has-hl' : '') + (tw.ws ? ' dm-walking' : '')} style={{ width: L.W, height: L.H }}>
         <svg width={L.W} height={L.H} aria-hidden="true">
           {L.edges.map((e, i) => {
             const a = L.pos[e.from];
@@ -686,26 +841,38 @@ function TreeH({ data, labels }) {
           const a = L.pos[e.from];
           const b = L.pos[e.to];
           const lx = (a.x + a.w + 18 + b.x) / 2;
+          const pick = tw.ws && tw.ws.picking(e.from) ? () => walk.choose(e.from, tw.answerOf(e)) : null;
           return (
-            <span key={'l' + i} className={'dm-tlabel' + (edgeOn(e) ? ' dm-on' : '')} style={{ left: lx, top: b.y }}>
+            <span
+              key={'l' + i}
+              className={'dm-tlabel' + (edgeOn(e) ? ' dm-on' : '') + (pick ? ' dm-pick' : '')}
+              style={{ left: lx, top: b.y }}
+              onClick={pick || undefined}
+              role={pick ? 'button' : undefined}
+              tabIndex={pick ? 0 : undefined}
+            >
               <R t={e.label} />
             </span>
           );
         })}
 
-        {Object.entries(L.pos).map(([id, p]) => (
-          <div
-            key={id}
-            className={'dm-tnode' + (onPath.has(id) ? ' dm-on' : '')}
-            style={{ left: p.x, top: p.y, width: p.w }}
-            onMouseEnter={() => setHl(id)}
-            onMouseLeave={() => setHl(null)}
-          >
-            {p.leaf
-              ? <Outcome o={data.outcomes[id]} />
-              : <Question node={data.nodes[id]} isStart={id === data.start} labels={labels} />}
-          </div>
-        ))}
+        {Object.entries(L.pos).map(([id, p]) => {
+          const np = treeNodeProps(data, walk, tw, id, setHl);
+          return (
+            <div
+              key={id}
+              className={'dm-tnode' + (tw.nodeOn(id) ? ' dm-on' : '') + np.extra}
+              style={{ left: p.x, top: p.y, width: p.w, ...(np.style || {}) }}
+              onMouseEnter={np.onMouseEnter}
+              onMouseLeave={np.onMouseLeave}
+              onClick={np.onClick}
+            >
+              {p.leaf
+                ? <Outcome o={data.outcomes[id]} />
+                : <Question node={data.nodes[id]} isStart={id === data.start} labels={labels} />}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -715,7 +882,7 @@ function TreeH({ data, labels }) {
 /*  view: tree, top to bottom                                         */
 /* ================================================================== */
 
-function TreeV({ data, labels }) {
+function TreeV({ data, labels, walk }) {
   const L = useMemo(() => layoutTreeV(data), [data]);
   const parents = useMemo(() => parentMap(data), [data]);
   const [hl, setHl] = useState(null);
@@ -737,14 +904,13 @@ function TreeV({ data, labels }) {
     return () => { cancelled = true; };
   }, [data]);
 
-  const onPath = new Set();
-  for (let c = hl; c; c = parents[c]) onPath.add(c);
-  const edgeOn = (e) => onPath.has(e.from) && onPath.has(e.to);
+  const tw = treeWalk(data, walk, hl, parents);
+  const edgeOn = tw.edgeOn;
   const H = L.outTop + outH;
 
   return (
     <div className="dm-tree-wrap">
-      <div ref={ref} className={'dm-tree dm-vtree' + (hl ? ' dm-has-hl' : '')} style={{ width: L.W, height: H }}>
+      <div ref={ref} className={'dm-tree dm-vtree' + (tw.dim ? ' dm-has-hl' : '') + (tw.ws ? ' dm-walking' : '')} style={{ width: L.W, height: H }}>
         <svg width={L.W} height={H} aria-hidden="true">
           {L.edges.map((e, i) => {
             const a = L.pos[e.from];
@@ -761,26 +927,38 @@ function TreeV({ data, labels }) {
 
         {L.edges.map((e, i) => {
           const b = L.pos[e.to];
+          const pick = tw.ws && tw.ws.picking(e.from) ? () => walk.choose(e.from, tw.answerOf(e)) : null;
           return (
-            <span key={'l' + i} className={'dm-tlabel' + (edgeOn(e) ? ' dm-on' : '')} style={{ left: b.x, top: b.top - 13 }}>
+            <span
+              key={'l' + i}
+              className={'dm-tlabel' + (edgeOn(e) ? ' dm-on' : '') + (pick ? ' dm-pick' : '')}
+              style={{ left: b.x, top: b.top - 13 }}
+              onClick={pick || undefined}
+              role={pick ? 'button' : undefined}
+              tabIndex={pick ? 0 : undefined}
+            >
               <R t={e.label} />
             </span>
           );
         })}
 
-        {Object.entries(L.pos).map(([id, p]) => (
-          <div
-            key={id}
-            className={'dm-tnode' + (p.leaf ? ' dm-vleaf' : '') + (onPath.has(id) ? ' dm-on' : '')}
-            style={{ left: p.x - p.w / 2, top: p.top, width: p.w, height: p.leaf ? undefined : V.QH }}
-            onMouseEnter={() => setHl(id)}
-            onMouseLeave={() => setHl(null)}
-          >
-            {p.leaf
-              ? <Outcome o={data.outcomes[id]} />
-              : <Question node={data.nodes[id]} isStart={id === data.start} labels={labels} />}
-          </div>
-        ))}
+        {Object.entries(L.pos).map(([id, p]) => {
+          const np = treeNodeProps(data, walk, tw, id, setHl);
+          return (
+            <div
+              key={id}
+              className={'dm-tnode' + (p.leaf ? ' dm-vleaf' : '') + (tw.nodeOn(id) ? ' dm-on' : '') + np.extra}
+              style={{ left: p.x - p.w / 2, top: p.top, width: p.w, height: p.leaf ? undefined : V.QH, ...(np.style || {}) }}
+              onMouseEnter={np.onMouseEnter}
+              onMouseLeave={np.onMouseLeave}
+              onClick={np.onClick}
+            >
+              {p.leaf
+                ? <Outcome o={data.outcomes[id]} />
+                : <Question node={data.nodes[id]} isStart={id === data.start} labels={labels} />}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -1067,3 +1245,5 @@ function DecisionMaker({
 
 export default DecisionMaker;
 export { DEFAULT_LABELS, DEFAULT_THEME, ALL_VIEWS };
+/* shared with DecisionWalker */
+export { CSS, R, Outcome, Banners, cssVars, useIsoLayoutEffect, isChain, isNode, isOutcome, layoutTreeH, layoutTreeV, Ladder, TreeH, TreeV, ViewSwitch };

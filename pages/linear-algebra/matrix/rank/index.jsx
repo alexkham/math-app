@@ -2003,6 +2003,9 @@ import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subsp
 import kernelImageDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
 
 
 export async function getStaticProps(){
@@ -2502,6 +2505,25 @@ const keyWords = [
 
 // formulas-injected: v1 | 2026-06-16 | 8 callouts (obj1 rank_bounds direct, obj7 rank_of_transpose inline-promote + rank_product_inequality direct + sylvester_rank_inequality direct + rank_sum_inequality inline-promote + rank_invariance_invertible inline-promote, obj8 gram_rank_identity prose-insert + rank_one_outer_product inline-promote)
 
+// Concept introduction (section 1, "What Rank Measures") — template A,
+// definition last. Running instance: the matrix with rows (1, 2, 3),
+// (4, 5, 6), (7, 8, 9) from the section's pitfall, beside two other 3 × 3
+// matrices. Old obj1 text is kept in sectionsContent.obj1, unused; its formula
+// box with link, pitfall aside, three passages, the CaseSplit diagram and the
+// punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRowsTable = ciTableOpen(['rows of the 3 × 3 matrix', 'rows that repeat information', 'independent rows']) +
+  ciRow(['(1, 0, 0), (0, 1, 0), (0, 0, 1)', 'none', '3']) +
+  ciRow(['(1, 2, 3), (4, 5, 6), (7, 8, 9)', 'row 3 = 2 · row 2 − row 1', '2'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['(1, 2, 3), (2, 4, 6), (3, 6, 9)', 'rows 2 and 3 are multiples of row 1', '1'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `What Rank Measures`,
@@ -2863,6 +2885,10 @@ const introContent = {
 
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the 1000 x 1000
+// rank-2 fact box (section 2), the rank of a sum (Common Pitfalls) and rank(A^T A) for
+// complex matrices (fact box in section 8); no heading asks any of them.
+// The pairwise row test is left to vector-spaces/linear-independence.
 const faqQuestions = {
   obj1: {
     question: "Does \"full rank\" mean the matrix is square?",
@@ -2878,6 +2904,21 @@ const faqQuestions = {
     question: "What does $\\rho(A)$ mean when you meet it?",
     answer: "It depends entirely on the source, so read the surrounding claim. Older and some engineering texts use $\\rho(A)$ for rank, but numerical analysis uses it for the spectral radius and statistics for correlation, and those are unrelated numbers. The unambiguous spellings are $\\operatorname{rank}(A)$ and its short form $\\operatorname{rk}(A)$.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can a very large matrix have a small rank?",
+    answer: "Yes, and its size says nothing about it. The $1000 \\times 1000$ matrix holding $1, 2, \\ldots, 1{,}000{,}000$ in reading order has rank $2$: every row is the first row plus a multiple of the all-ones row, so a million entries are spanned by just two independent rows. Rank counts independent directions, never rows or entries.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Is $\\operatorname{rank}(A + B)$ equal to $\\operatorname{rank}(A) + \\operatorname{rank}(B)$?",
+    answer: "No, the sum of the ranks is only an upper bound: $\\operatorname{rank}(A + B) \\le \\operatorname{rank}(A) + \\operatorname{rank}(B)$. With $A = I_2$ and $B$ the swap matrix with rows $(0, 1)$ and $(1, 0)$, both of rank $2$, the sum has two equal rows $(1, 1)$ and rank $1$. The directions of $A$ and $B$ can overlap or cancel; $A = I$ and $B = -I$ even give $A + B = O$, of rank $0$.",
+    sectionId: "pitfalls"
+  },
+  obj6: {
+    question: "Does $\\operatorname{rank}(A^{T}A) = \\operatorname{rank}(A)$ hold for complex matrices?",
+    answer: "Not with the plain transpose. For the column $A$ with entries $1$ and $i$, $A^{T}A = 1 + i^2 = 0$, so the rank drops from $1$ to $0$. The proof for real matrices uses $\\mathbf{x}^{T}A^{T}A\\mathbf{x} = \\|A\\mathbf{x}\\|^2$, which needs real entries. Complex matrices use the conjugate transpose instead, and $\\operatorname{rank}(A^{*}A) = \\operatorname{rank}(A)$ holds for every complex $A$.",
+    sectionId: "8"
   }
 }
 
@@ -2961,6 +3002,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    rowsTable: ciRowsTable,
+  };
+
   const demoUnits = {
     reduction: demoUnitFrame({
       svg: rankDiagrams.done,
@@ -3017,6 +3062,7 @@ const schemas = {
   props: {
     rankCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -3039,9 +3085,75 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function MatrixRankPage({rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits}) {
+export default function MatrixRankPage({rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Three rows do not always carry three rows' worth of information.`,
+        content: [
+          `If one row of a matrix can be built from the others, it adds nothing new — like a list of three facts where the third follows from the first two. Counting rows overstates how much the matrix really says.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Three 3 × 3 matrices, each with three rows, carry 3, 2 and 1 independent rows.`,
+        content: [
+          `The middle one looks harmless — no row is a multiple of another — yet its third row is $2 \\cdot (4, 5, 6) - (1, 2, 3)$.`,
+          ciTable('rowsTable'),
+        ],
+      },
+      {
+        id: 'forcing',
+        lead: `The count is forced by what can be rebuilt: a row that is a combination of the others can be dropped without losing anything.`,
+        content: [
+          `Drop row 3 from the middle matrix and every combination of its rows can still be made from rows 1 and 2. Rows 1 and 2 cannot be cut further — neither is a multiple of the other — so $2$ is the true count.`,
+          `When $\\text{rank}(A) = \\min(m, n)$, the matrix has full rank — every row and every column contributes something that no combination of the others can reproduce. When $\\text{rank}(A) < \\min(m, n)$, the matrix is rank-deficient, meaning at least one row or column is a [linear combination](!/linear-algebra/vectors/linear-combinations) of the others.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [rank](!/linear-algebra/definitions#rank) of a matrix is the number of independent rows it has — equivalently, the number of independent columns: the number of genuinely different directions the matrix uses.`,
+        formula: [
+          `The rank of an $m \\times n$ matrix $A$ is a single non-negative integer $r$ that captures how much of the matrix's potential dimensionality is actually used. It satisfies`,
+          `@academic[formula_callout:rank_bounds|Rank Bounds|$$0 \\leq \\text{rank}(A) \\leq \\min(m, n)$$]@
+@academic[formulas_link:/linear-algebra/formulas#rank_bounds]@`,
+        ],
+        footer: `So the matrix with rows $(1, 2, 3)$, $(4, 5, 6)$, $(7, 8, 9)$ has rank $2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Rank is a single whole number per matrix, sitting between 0 and the shorter side.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Checking rows only in pairs
+Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9 \\end{pmatrix}$ is a multiple of another misses combinations of several rows. Row $3$ is $2 \\cdot$ row $2 -$ row $1$, so the rank is $2$.
+[Read more](!#pitfalls)]@`,
+          `A $5 \\times 3$ matrix with rank $3$ uses all three of its column directions. A $5 \\times 3$ matrix with rank $2$ has one column that is redundant — it lies in the [span](!/linear-algebra/vector-spaces/span) of the other two. The rank does not say which column is redundant (often more than one subset works), only that the effective column count is $2$.`,
+          <DiagramFrameV2 key={'obj1-diagram'} id="rank-full-deficient-cases" title="Full rank or rank-deficient" source="/linear-algebra/matrix/rank">
+            <CaseSplit data={rankCases} variant="poster" proseStyle="cards" theme={figureTheme} />
+          </DiagramFrameV2>,
+          `@academic[punchline:Rank counts the independent directions a matrix actually uses, not the rows or columns it happens to have.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What generalizes: rows or columns give the same count — a fact that needs proof.`,
+        content: `Counting independent rows and counting independent columns could have given two different numbers; they never do, which is why one word, rank, covers both. The section on [column rank and row rank](!/linear-algebra/matrix/rank#2) explains why.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers rank notation, row and column rank, computing rank by row reduction, and how rank connects to dimension, linear systems, the rank-nullity theorem and the properties of rank.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -3049,16 +3161,7 @@ export default function MatrixRankPage({rankCases, seoData, sectionsContent, int
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <DiagramFrameV2
-            key={'obj1-diagram'}
-            id="rank-full-deficient-cases"
-            title="Full rank or rank-deficient"
-            source="/linear-algebra/matrix/rank"
-          >
-            <CaseSplit data={rankCases} variant="poster" proseStyle="cards" theme={figureTheme} />
-          </DiagramFrameV2>,
-          `@academic[punchline:Rank counts the independent directions a matrix actually uses, not the rows or columns it happens to have.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -3077,6 +3180,11 @@ export default function MatrixRankPage({rankCases, seoData, sectionsContent, int
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laMatrixNotationSheet}
+            current={'/linear-algebra/matrix/rank'}
           />,
         ]
     },

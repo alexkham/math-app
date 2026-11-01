@@ -3190,6 +3190,9 @@ import matrixLinCombDiagrams from '@/app/components/linear-algebra copy/matrix/m
 import powerDiagrams from '@/app/components/linear-algebra copy/matrix/powerDiagrams'
 import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -3680,6 +3683,26 @@ const keyWords = [
 
 // formulas-injected: v1 | 2026-06-16 | 13 callouts (obj1 matrix_addition direct, obj2 matrix_subtraction direct, obj3 scalar_multiplication_of_matrices direct, obj5 matrix_multiplication direct, obj6 matrix_multiplication_associativity + matrix_multiplication_distributivity + matrix_multiplication_non_commutativity inline-promote, obj8 transpose_definition direct + transpose_involution + transpose_of_sum + transpose_of_scalar_multiple inline-promote + transpose_of_product direct, obj9 matrix_power direct)
 
+// Concept introduction (section 1, "Matrix Addition") — template F, two
+// descriptions shown to agree. Running instance: two shops' sales tables
+// combined position by position. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four passages, the two formula boxes and
+// link, the rule box, the addition demo frame, its line and the addition strip
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciShopsTable = ciTableOpen(['product, day', 'shop 1', 'shop 2', 'combined']) +
+  ciRow(['pens, Monday', '4', '3', '7']) +
+  ciRow(['pens, Tuesday', '1', '5', '6'], { shade: true }) +
+  ciRow(['books, Monday', '2', '0', '2']) +
+  ciRow(['books, Tuesday', '6', '2', '8'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Matrix Addition`,
@@ -4092,6 +4115,13 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions; in the (A + B)^2
+// answer, "from AB = AC nothing follows" became "cannot cancel A unless A is
+// invertible", as section 6 states it. Added the zero product of nonzero
+// matrices (section 6 text and laws card), the cost of the bracketing in a
+// triple product (fact box in section 12), Strassen's seven products (fact
+// box in section 5) and the Hadamard product versus AB (section 13 and the
+// pitfall box in section 5); no heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Does $a_{23}$ mean row 2 column 3, or row 3 column 2?",
@@ -4100,13 +4130,33 @@ const faqQuestions = {
   },
   obj2: {
     question: "Is $(A + B)^2$ equal to $A^2 + 2AB + B^2$?",
-    answer: "No. Expanding gives four terms, $A^2 + AB + BA + B^2$, and they cannot be merged because $AB$ and $BA$ are generally different matrices. The same warning applies to cancellation: from $AB = AC$ nothing follows about $B$ and $C$. The notation borrows the look of ordinary algebra without the behaviour.",
+    answer: "No. Expanding gives four terms, $A^2 + AB + BA + B^2$, and they cannot be merged because $AB$ and $BA$ are generally different matrices. The same warning applies to cancellation: from $AB = AC$ you cannot cancel $A$ to get $B = C$ unless $A$ is invertible. The notation borrows the look of ordinary algebra without the behaviour.",
     sectionId: "notation"
   },
   obj3: {
     question: "Why is matrix multiplication written with no symbol at all?",
     answer: "Juxtaposition is the convention: $AB$, with no dot and no cross. The bare notation hides a shape contract, since an $m \\times n$ times an $n \\times p$ works only because the inner dimensions agree, producing $m \\times p$. Note that the $\\times$ in $m \\times n$ is a dimension separator and multiplies nothing.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can the product of two nonzero matrices be the zero matrix?",
+    answer: "Yes. With $A$ rows $(1, 2), (2, 4)$ and $B$ rows $(2, -4), (-1, 2)$, every entry of $AB$ is $0$, although neither factor is zero. Each column of $B$ is a vector that $A$ sends to $\\mathbf{0}$, so the whole product collapses. This cannot happen when either factor is invertible; it is the zero-product rule of ordinary numbers that fails here.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "Does the order of multiplying three matrices change the amount of work?",
+    answer: "Yes, often by a lot, even though $(AB)C = A(BC)$ always gives the same matrix. For $A$ of size $10 \\times 100$, $B$ of $100 \\times 5$ and $C$ of $5 \\times 50$, the route $(AB)C$ passes through a small $10 \\times 5$ matrix and costs $5{,}000 + 2{,}500 = 7{,}500$ multiplications. The route $A(BC)$ builds a $100 \\times 50$ matrix first and costs $25{,}000 + 50{,}000 = 75{,}000$, ten times as many.",
+    sectionId: "12"
+  },
+  obj6: {
+    question: "Can two matrices be multiplied with fewer than $n^3$ multiplications?",
+    answer: "Yes. Straight from the definition, two $n \\times n$ matrices take $n^3$ multiplications, $8$ for $2 \\times 2$. In 1969 Volker Strassen did the $2 \\times 2$ case with $7$, at the cost of extra additions, and his formulas never use $ab = ba$, so they also work on blocks of a large matrix. Applied again and again, they cut a $1024 \\times 1024$ product from about 1.07 billion multiplications to about 282 million.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "What is the difference between the Hadamard product and ordinary matrix multiplication?",
+    answer: "The Hadamard product $A \\circ B$ multiplies entries in matching positions, so it needs two matrices of the same shape and is commutative. The ordinary product $AB$ combines rows of $A$ with columns of $B$. For $A$ rows $(1, 2), (3, 4)$ and $B$ rows $(5, 6), (7, 8)$, $A \\circ B$ has rows $(5, 12), (21, 32)$, while $AB$ has rows $(19, 22), (43, 50)$.",
+    sectionId: "13"
   }
 }
 
@@ -4189,6 +4239,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+
+  const conceptIntroFigures = {
+    shopsTable: ciShopsTable,
+  };
 
   const demoUnits = {
     rowPicture: demoUnitFrame({
@@ -4296,6 +4350,7 @@ const schemas = {
     scalarMultipleStrip,
     matrixAdditionStrip,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     multiplicationLaws,
@@ -4316,18 +4371,58 @@ const schemas = {
    }
 
 
-   export default function MatrixOperationsPage({transposeStrip, matrixProductOrder, matrixProductAnatomy, scalarMultipleStrip, matrixAdditionStrip, seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+   export default function MatrixOperationsPage({transposeStrip, matrixProductOrder, matrixProductAnatomy, scalarMultipleStrip, matrixAdditionStrip, seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
-  const genericSections=[
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-addition'} dangerouslySetInnerHTML={{ __html: demoUnits.addition }} />,
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Two shops record their sales in tables of the same shape. What are the combined sales?`,
+        content: [
+          `Each table has a row for each product and a column for each day.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The combined table comes from adding the two tables position by position.`,
+        content: [
+          ciTable('shopsTable'),
+          `Each combined entry uses only the matching entries of the two shop tables: pens on Monday never mix with books on Tuesday.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `Adding matrices means adding matching entries.`,
+        content: [
+          `For example,`,
+          `@academic[formula_callout:Matrix Addition
+$$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix} 3 & -1 \\\\ 6 & 0 \\\\ 2 & -4 \\end{pmatrix} = \\begin{pmatrix} 4 & 3 \\\\ 4 & 3 \\\\ 2 & 1 \\end{pmatrix}$$]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **sum** of two $m \\times n$ matrices $A$ and $B$ is the $m \\times n$ matrix $A + B$ whose entries are $a_{ij} + b_{ij}$.`,
+        formula: [
+          `Two matrices of the same size can be added entry by entry. If $A$ and $B$ are both $m \\times n$, their sum is the $m \\times n$ matrix with entries`,
+          `@academic[formula_callout:matrix_addition|Matrix Addition|$$(A + B)_{ij} = a_{ij} + b_{ij}$$]@
+@academic[formulas_link:/linear-algebra/formulas#matrix_addition]@`,
+        ],
+        footer: `So the two shop tables, written as matrices, add to the combined table: $\\begin{pmatrix} 4 & 1 \\\\ 2 & 6 \\end{pmatrix} + \\begin{pmatrix} 3 & 5 \\\\ 0 & 2 \\end{pmatrix} = \\begin{pmatrix} 7 & 6 \\\\ 2 & 8 \\end{pmatrix}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Matrix addition inherits the rules of ordinary addition.`,
+        content: [
+          `@academic[rule_plain:Addition is commutative ($A + B = B + A$) and associative ($(A + B) + C = A + (B + C)$).]@`,
+          `The zero matrix $O$ of the same size serves as the additive identity ($A + O = A$), and the additive inverse of $A$ is $-A = (-a_{ij})$, so $A + (-A) = O$.`,
+          <div key={'unit-addition'} dangerouslySetInnerHTML={{ __html: demoUnits.addition }} />,
           `Subtraction and scaling in the next two sections work the same way, one position at a time, which is why they share addition's shape rules.`,
           <DiagramFrameV2
             key={'obj1-diagram'}
@@ -4337,6 +4432,29 @@ const schemas = {
           >
             <MatrixOperation data={matrixAdditionStrip} theme="navy" variant="strip" />
           </DiagramFrameV2>,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Only matrices of the same size can be added.`,
+        content: [
+          `If the dimensions do not match, the sum is undefined — there is no way to add a $2 \\times 3$ matrix to a $3 \\times 2$ matrix.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, subtraction, scalar multiplication, linear combinations, matrix multiplication and its properties and interpretations, the transpose, powers, elementary matrices, decompositions, a dimension summary, the Hadamard and outer products, and common pitfalls.`,
+      },
+    ],
+  }
+
+  const genericSections=[
+    {
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -4355,6 +4473,11 @@ const schemas = {
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laMatrixNotationSheet}
+            current={'/linear-algebra/matrix/operations'}
           />,
         ]
     },

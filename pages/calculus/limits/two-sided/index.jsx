@@ -16,6 +16,9 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 
 
 export async function getStaticProps(){
@@ -274,6 +277,28 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 1 callout (obj2)
+// Concept introduction (section 1, "What is a Two-Sided Limit?") — template
+// D, comparison. Running instance: x² near x = 1 (both sides head to 1)
+// against the step function near x = 0 (0 from the left, 1 from the right),
+// the two cases of the page's limit-explorer frames. Old obj1 text is kept
+// in sectionsContent.obj1, unused; its formula box, fact aside and five
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSidesTable = ciTableOpen(['distance from a', 'x² at x = 1 + distance', 'step at x = 0 + distance']) +
+  ciRow(['−0.1 (left)', '0.81', '0']) +
+  ciRow(['−0.01 (left)', '0.9801', '0'], { shade: true }) +
+  ciRow(['−0.001 (left)', '0.998001', '0']) +
+  ciRow(['+0.001 (right)', '1.002001', '1'], { shade: true }) +
+  ciRow(['+0.01 (right)', '1.0201', '1']) +
+  ciRow(['+0.1 (right)', '1.21', '1'], { shade: true, last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/limits/two-sided ───────────────────────────────────────────
 
@@ -629,6 +654,9 @@ This requirement is stringent but essential. Derivatives, integrals, and continu
 // the derivative definition are owned by their dedicated pages. Invented two
 // from the notation section and reframed the boundary-point question, which is
 // the one place the heading names a topic without answering the yes/no.
+// FAQ pass 2026-10-31: kept all three. Added Thomae's function (fact box in
+// "What is a Two-Sided Limit?") and the history of the arrow (the "Also
+// written" line of the x → a notation card), neither asked by a heading.
 const faqQuestions = {
   obj1: {
     question: "What does DNE mean in calculus?",
@@ -644,6 +672,16 @@ const faqQuestions = {
     question: "Can a two-sided limit exist at the endpoint of a domain?",
     answer: "Not in the full two-sided sense. At a domain endpoint only one direction of approach is available, so the two-sided limit is unavailable there while the one-sided limit remains perfectly meaningful. For √x at 0 nothing lies to the left, so the right-hand limit is the appropriate concept. See [one-sided limits](!/calculus/limits/one-sided) for that treatment.",
     sectionId: "7"
+  },
+  obj4: {
+    question: "Can a function have a limit at every point and still be discontinuous at infinitely many?",
+    answer: "Yes. Thomae's function, from 1875, equals $\\frac{1}{q}$ at each fraction $\\frac{p}{q}$ in lowest terms and $0$ at each irrational number. Near any point only finitely many fractions have a small denominator, so from both sides the values close in on $0$, and the limit is $0$ everywhere. At every fraction the function sits above $0$, so it is discontinuous at every rational point and continuous at every irrational one.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "When did the arrow notation x → a come into use?",
+    answer: "Around 1905. The arrow for a limit is credited to J. G. Leathem in 1905, and it became standard through G. H. Hardy's A Course of Pure Mathematics in 1908. Before that, texts put $x = a$ under the lim, which reads like an instruction to substitute. The arrow says what is meant: $x$ approaches $a$ without ever being set equal to it.",
+    sectionId: "notation"
   }
 }
 
@@ -736,6 +774,10 @@ const schemas = {
     vlines: [{ x: 1 }],
     notes: [{ x: 1.08, y: 3.0, text: 'f(1) = 3', pos: 'e', color: 'r' }, { x: 1.08, y: 0.75, text: 'limit = 1 from both sides', pos: 'e', color: 'f' }, { x: 0.08, y: 4.2, text: 'limit ignores f(1)', pos: 'e', color: 'r' }],
     caption: 'The limit follows the approach, not the plotted point at x = 1' };
+  const conceptIntroFigures = {
+    sidesTable: ciSidesTable,
+  };
+
   const demoUnits = {
     approach: demoUnitFrame({
       svg: functionLimitDiagrams.continuous,
@@ -777,6 +819,7 @@ return {
   props: {
     twoSidedFailTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -795,9 +838,72 @@ return {
    }
 
 
- export default function TwoSidedPage({twoSidedFailTree, seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+ export default function TwoSidedPage({twoSidedFailTree, seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A limit asks where f(x) is heading as x closes in on a point a — and x can close in from two sides.`,
+        content: [
+          `Numbers just below $a$ approach it from the left; numbers just above $a$ approach it from the right. The two approaches need not tell the same story.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `x² near 1 heads to the same height from both sides; a step near 0 heads to two different heights.`,
+        content: [
+          ciTable('sidesTable'),
+          `For $x^2$ the readings close in on $1$ from below and from above. The step function — $0$ for $x < 0$ and $1$ for $x \\geq 0$ — reads $0$ on every left-hand row and $1$ on every right-hand row, however close $x$ gets.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `One function settles on one height from both sides; the other is pulled toward two heights at once.`,
+        content: [
+          `Only the first behaviour deserves a single answer to "where is $f(x)$ heading?". The second has two answers, one per side, and no single one that serves both.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **two-sided limit** $\\lim_{x \\to a} f(x) = L$ means that $f(x)$ gets close to $L$ as $x$ approaches $a$ from the left and from the right; each side on its own gives a [one-sided limit](!/calculus/definitions#one_sided_limit).`,
+        formula: [
+          `The standard limit notation`,
+          `@academic[formula_callout:What is a Two-Sided Limit?
+$$\\lim_{x \\to a} f(x) = L$$]@`,
+          `means $x$ approaches $a$ from both directions. Values slightly less than $a$ and values slightly greater than $a$ must both send $f(x)$ toward the same number $L$.`,
+        ],
+        footer: `So $\\lim_{x \\to 1} x^2 = 1$, while the step function has no two-sided limit at $0$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The two-sided limit is the default: limit notation with no sign on a means both sides.`,
+        content: [
+          `No superscript appears on the $a$—this absence signals the two-sided requirement. The function must exhibit consistent behavior from the left and from the right. When you trace the graph toward $x = a$ from either direction, both traces must converge to the same $y$-value.`,
+          `@academic[fact,aside:true,width:35%:Limit $0$ at every point
+Thomae's function of 1875 is $\\frac{1}{q}$ at each fraction $\\frac{p}{q}$ in lowest terms and $0$ at each irrational. Near any point only finitely many fractions have a small denominator, so from both sides the values close in on $0$ everywhere, though at every fraction the function sits above $0$.]@`,
+          `Tracing with a finger assumes a graph that can be drawn without lifting the pen. The definition itself asks for less: only that the values on both sides come close to $L$, whatever the graph looks like between them and at $a$ itself.`,
+          `The two-sided limit is the default interpretation whenever limit notation appears without further qualification.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Both sides must agree: two one-sided limits that differ give no two-sided limit at all.`,
+        content: `This condition is made exact in [the existence condition](!/calculus/limits/two-sided#2), and the ways a two-sided limit can fail are sorted in [when two-sided limits fail to exist](!/calculus/limits/two-sided#4).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the existence condition, notation, visualizing the approach, when two-sided limits fail, continuity, evaluating limits, boundary points, and derivatives.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -805,7 +911,7 @@ return {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -832,6 +938,11 @@ return {
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={limitsNotationSheet}
+            current={'/calculus/limits/two-sided'}
           />,
                   <div key={'unit-approach'} dangerouslySetInnerHTML={{ __html: demoUnits.approach }} />,
           `The picture is the definition: one target reached from two directions.`,

@@ -966,6 +966,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import varianceDiagrams from '@/app/components/probability/variance/varianceDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
 
 export async function getStaticProps(){
@@ -1163,6 +1167,11 @@ export async function getStaticProps(){
   // how to calculate it, why squaring, variance of a sum, and variance vs
   // standard deviation. Replaced with the non-linearity traps the notation
   // section and Common Mistakes both flag but no heading states.
+  // FAQ pass 2026-10-31: kept all four. Added the largest variance on an
+  // interval (fact box under "What Variance Measures"), why the mean is the
+  // centre (fact box under "Why Squaring the Distance?"), the n − 1 divisor
+  // (one caption under the general case) and Var(X − Y) (pitfall under
+  // "Variance of a Sum").
   const faqQuestions = {
     obj1: {
       question: "Why is Var(aX) = a²Var(X) and not aVar(X)?",
@@ -1183,6 +1192,26 @@ export async function getStaticProps(){
       question: "Can variance be negative?",
       answer: "No. Variance is the average of squared deviations, and squares are never negative, so neither is their weighted average. A negative variance is not an unusual case — it is a signal that something went wrong, most often a sign error or a misapplied shortcut formula. Variance is zero only when the variable is constant.",
       sectionId: "mistakes"
+    },
+    obj5: {
+      question: "What is the largest variance a bounded variable can have?",
+      answer: "For a variable that never leaves $[a, b]$, the variance is at most $\\frac{(b-a)^2}{4}$, so $\\sigma \\le \\frac{b-a}{2}$. No value lies farther than $\\frac{b-a}{2}$ from the midpoint, and the mean can only do better than the midpoint as a centre. The maximum is reached only by a fair coin between the two ends: a score out of $10$ has $\\sigma \\le 5$, with equality only for scores of $0$ and $10$ half the time each.",
+      sectionId: "what"
+    },
+    obj6: {
+      question: "Why is variance measured around the mean and not another point?",
+      answer: "Because the mean is the point with the smallest average squared distance. For any centre $c$, $E[(X - c)^2] = \\operatorname{Var}(X) + (\\mu - c)^2$, so every other choice adds the square of its miss. For the shop's sales, with $\\mu = 1.7$ and variance $0.81$, measuring around $2$ gives $0.81 + 0.09 = 0.90$. With plain distances instead of squared ones, the best centre is the [median](!/probability/median#6).",
+      sectionId: "square"
+    },
+    obj7: {
+      question: "Why does the sample variance divide by n − 1?",
+      answer: "Because the deviations are measured from the sample mean, which is computed from the same data. The sample mean is the point closest to those values in squared distance, closer than the true mean, so the sum of squared deviations comes out too small on average: its expected value is $(n-1)\\sigma^2$, not $n\\sigma^2$. Dividing by $n - 1$ instead of $n$ removes that bias.",
+      sectionId: "general"
+    },
+    obj8: {
+      question: "Is Var(X − Y) equal to Var(X) − Var(Y)?",
+      answer: "No. A difference is the sum of $X$ and $-Y$, and the factor $-1$ comes out of a variance squared, so for independent variables $\\operatorname{Var}(X - Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y)$. With variances $4$ and $9$ that is $13$, not $-5$. For two fair dice it is $\\frac{35}{6}$, not $0$. With dependence the covariance enters with a minus sign: $\\operatorname{Var}(X) + \\operatorname{Var}(Y) - 2\\operatorname{Cov}(X, Y)$.",
+      sectionId: "sum"
     }
   }
 
@@ -2110,8 +2139,51 @@ const continuousVarianceFormulasData = {
     }),
   };
 
+  // PropertySheet (properties): variance-expectation-moves
+  const varianceExpectationMoves = {
+    header: {
+      kicker: 'variance and expected value',
+      title: 'The same moves, done to E and to Var',
+      lede: 'Expectation passes through sums for any variables; variance only for independent ones.',
+    },
+    labels: { property: 'Move', notCovered: 'not on this page' },
+    verdicts: {
+      exact: { label: 'Always', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+      indep: { label: 'If independent', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+    },
+    subjects: [
+      { id: 'e', label: 'Expected value' },
+      { id: 'v', label: 'Variance' },
+    ],
+    groups: [{ properties: [
+      { id: 'const', name: 'A constant', note: '$c$', cells: {
+        e: { verdict: 'exact', text: '$E[c] = c$' },
+        v: { verdict: 'exact', text: '$\\operatorname{Var}(c) = 0$' },
+      } },
+      { id: 'shift', name: 'Shift', note: '$X + b$', cells: {
+        e: { verdict: 'exact', text: '$E[X + b] = E[X] + b$' },
+        v: { verdict: 'exact', text: '$\\operatorname{Var}(X + b) = \\operatorname{Var}(X)$' },
+      } },
+      { id: 'scale', name: 'Scaling', note: '$aX$', cells: {
+        e: { verdict: 'exact', text: '$E[aX] = a\\,E[X]$' },
+        v: { verdict: 'exact', text: '$\\operatorname{Var}(aX) = a^2 \\operatorname{Var}(X)$',
+          detailsLabel: 'Example', details: 'Revenue of 5 dollars per item: $\\operatorname{Var}(5X) = 25 \\cdot 0.81 = 20.25$, not $5 \\cdot 0.81 = 4.05$.' },
+      } },
+      { id: 'sum', name: 'Sum', note: '$X + Y$', cells: {
+        e: { verdict: 'exact', text: '$E[X] + E[Y]$, even if dependent' },
+        v: { verdict: 'indep', text: '$\\operatorname{Var}(X) + \\operatorname{Var}(Y)$',
+          detailsLabel: 'Why', details: 'Dependence introduces additional terms, so variance does not distribute over sums in general.' },
+      } },
+      { id: 'prod', name: 'Product', note: '$XY$', cells: {
+        e: { verdict: 'indep', text: '$E[X]\\,E[Y]$' },
+      } },
+    ] }],
+    footnote: 'Shifting moves the mean but not the spread; scaling by $a$ multiplies the spread by $a^2$.',
+  };
+
   return {
     props: {
+    varianceExpectationMoves,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -2136,7 +2208,7 @@ const continuousVarianceFormulasData = {
   }
 }
 
-export default function VariancePage({
+export default function VariancePage({varianceExpectationMoves, 
   seoData,
   sectionsContent,
   introContent,
@@ -2273,6 +2345,11 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probSpreadNotationSheet}
+            current={'/probability/variance'}
+          />,
                   <div key={'unit-u_notation_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_notation_0 }} />,
           `The formula behind this picture is given next.`,
         ]
@@ -2358,6 +2435,16 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
         link:'',
         content:[
             sectionsContent.properties.content,
+            `The rules above, set beside the matching rules for [expected value](!/probability/expected-value). Each row is one move made on the random variable; the two columns show what it does to the mean and to the spread.`,
+            <DiagramFrameV2
+              key={'properties-propsheet'}
+              id="variance-expectation-moves"
+              title="The same moves, done to E and to Var"
+              source="/probability/variance"
+            >
+              <PropertySheet data={varianceExpectationMoves} />
+            </DiagramFrameV2>,
+            `Only the sum row splits. Expectation adds for any two variables, while variance adds only when they are independent; with dependence the extra terms are the covariance, worked out in the [variance of a sum](!#sum).`,
         ]
     },
     {

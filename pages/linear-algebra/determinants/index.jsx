@@ -682,6 +682,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -1372,8 +1373,42 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+  // so only what the overview itself holds: the area-versus-formula argument
+  // (Scalar Assignment), the elimination origin of ad - bc (2x2 Formula), the
+  // permanent fact box (General n x n), the Seki/Leibniz fact box
+  // (Determinant-Based Formulas) and the 4x4 diagonal-rule pitfall.
+  const faqQuestions = {
+    obj1: {
+      question: "Why does $ad - bc$ always equal the area of the parallelogram?",
+      answer: "Because the two react to the columns in the same ways. Sliding one column along the other is a shear: the parallelogram leans but keeps its base and height, and $ad - bc$ does not change either. Stretching one column stretches both by the same factor, and the unit square gives $1$ for both. Quantities that agree under every such change are one quantity. For columns $(3, 2)$ and $(1, 5)$ both give $13$. The formula can also be negative; the sign records orientation, which plain area ignores.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Where does the formula $ad - bc$ come from?",
+      answer: "From solving a system. Eliminate in $ax + by = v_1$, $cx + dy = v_2$ and the solution comes out as $x = \\frac{dv_1 - bv_2}{ad - bc}$ and $y = \\frac{av_2 - cv_1}{ad - bc}$, with the same number in every denominator. When $ad - bc \\neq 0$ there is exactly one solution for every right-hand side and the matrix has an inverse. When $ad - bc = 0$ there is no solution or there are infinitely many, and the matrix cannot be inverted.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "What is the permanent of a matrix?",
+      answer: "It is the determinant with every minus sign removed. Fully expanded, a determinant is a sum of $n!$ signed products, one entry from each row and each column; the permanent adds the same products with all signs $+$. That small change breaks the tools: adding a multiple of one row to another now changes the value, so elimination fails. The determinant takes about $n^3$ steps by row reduction, while the best known methods for the permanent still take more than $2^n$.",
+      sectionId: "4"
+    },
+    obj4: {
+      question: "Which came first, determinants or matrices?",
+      answer: "Determinants, by more than 150 years. Seki Takakazu in Japan in 1683 and Leibniz in Europe in 1693 each found them while eliminating unknowns from systems of equations, as the expression that decides whether the equations can hold together. Matrices became objects of their own only in the 1850s. That order still shows in the formulas built on determinants, such as Cramer's rule, which solves a system $A\\mathbf{x} = \\mathbf{b}$ with ratios $\\det(A_i)/\\det(A)$.",
+      sectionId: "10"
+    },
+    obj5: {
+      question: "Does the rule of Sarrus work for a $4 \\times 4$ matrix?",
+      answer: "No. A $4 \\times 4$ determinant is a sum of $4! = 24$ products, and the downward and upward diagonals reach only $8$ of them. A diagonal rule of this kind gives $2n$ products against the $n!$ needed, and the two agree only for $n = 3$. On the page's $4 \\times 4$ example the diagonals give $-15$, while expanding along column $2$, which has a single nonzero entry, gives the true value $30$. From $4 \\times 4$ up, use cofactor expansion or row reduction.",
+      sectionId: "pitfalls"
+    }
+  }
+
   return {
   props: {
+    faqQuestions,
     detRowOpTree,
     singularCases,
     demoUnits,
@@ -1396,7 +1431,7 @@ const schemas = {
    }
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeterminantsPage({detRowOpTree, singularCases, 
+export default function DeterminantsPage({faqQuestions, detRowOpTree, singularCases,
   seoData,
   sectionsContent,
   introContent,
@@ -1594,6 +1629,22 @@ export default function DeterminantsPage({detRowOpTree, singularCases,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Determinants FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 

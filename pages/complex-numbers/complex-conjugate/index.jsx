@@ -1280,6 +1280,8 @@ import complexDivisionDiagrams from '@/app/components/calculators/complex-number
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 export async function getStaticProps(){
@@ -2269,6 +2271,11 @@ How to check: look at every coefficient before pairing roots. If one is not real
   `
 }
 
+// FAQ pass 2026-10-31: kept all five. Added conjugate pairs with a non-real
+// coefficient (pitfall under "Conjugate Pairs in Polynomials"), the mirror
+// having no derivative (fact box under "Geometric Interpretation") and the
+// spare half of a real signal's spectrum (fact box under "Classification
+// Theorems"); no heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "What do the notations z̄ and z* mean?",
@@ -2294,6 +2301,21 @@ const faqQuestions = {
     question: "Why do complex roots of real polynomials come in conjugate pairs?",
     answer: "Because conjugation passes through addition and multiplication unchanged, so conjugating the whole polynomial equation leaves the real coefficients alone while turning a root into its conjugate. If one satisfies the equation the other must too. This is why real polynomials always have an even number of non-real roots.",
     sectionId: "8"
+  },
+  obj6: {
+    question: "Do complex roots still come in conjugate pairs if a coefficient is not real?",
+    answer: "No, the pairing needs every coefficient to be real. In $z^2 - 2iz - 1$ the number $i$ is a root, but $-i$ gives $(-i)^2 - 2i(-i) - 1 = -1 - 2 - 1 = -4$, not $0$. The polynomial is $(z - i)^2$, so $i$ is a double root with no partner. The proof breaks at one step: conjugating the coefficient $-2i$ gives $2i$, and the conjugated polynomial is a different one.",
+    sectionId: "8"
+  },
+  obj7: {
+    question: "Is complex conjugation differentiable?",
+    answer: "No, at no point at all, even though it looks as simple as $z \\mapsto z$. Its difference quotient is $\\frac{\\overline{z + h} - \\bar{z}}{h} = \\frac{\\bar{h}}{h}$, which equals $1$ when $h$ is real and $-1$ when $h$ is imaginary, so there is no single limit as $h \\to 0$. Geometrically, a complex derivative can only rotate and scale small shapes, and a mirror turns them over.",
+    sectionId: "2"
+  },
+  obj8: {
+    question: "Why is half of the Fourier transform of a real signal redundant?",
+    answer: "Because of conjugate symmetry. For real samples $x_n$, conjugating the transform leaves each $x_n$ alone and only flips the sign in the exponent of $e^{-2\\pi i kn/N}$, which gives $X_{N-k} = \\overline{X_k}$. The second half of the outputs is then the mirror image of the first, so $N$ real samples need only about $\\frac{N}{2}$ of them, and fast routines for real data compute just those.",
+    sectionId: "5"
   }
 }
 
@@ -2576,6 +2598,11 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/complex-conjugate'}
           />,
                   <div key={'unit-geom'} dangerouslySetInnerHTML={{ __html: demoUnits.geom }} />,
           `Every algebraic property of the conjugate below is a consequence of this reflection.`,

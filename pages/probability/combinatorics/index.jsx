@@ -650,6 +650,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -754,6 +755,13 @@ export async function getStaticProps(){
   // question restates the page title. Kept the classical formula — no
   // heading states P(A) = |A|/|Ω| — and added the ordered/unordered
   // decision, which the page lists as bullets without ever naming it.
+  // FAQ pass 2026-10-31: obj2 rewritten, since its question repeated
+  // /combinatorics/basics ("How do you tell whether order matters…") and
+  // /probability/sample-space; it now asks the probability-side trap, mixing
+  // ordered and unordered counts (pitfall box and worked pitfall). obj3's
+  // answer rewritten: "both are correct" ignored the page's point that only
+  // the 36 ordered pairs are equally likely. Added the tea-tasting fact box
+  // and identical particles (fact box under classical experiments).
   const faqQuestions = {
     obj1: {
       question: "What is the classical probability formula?",
@@ -761,19 +769,29 @@ export async function getStaticProps(){
       sectionId: "1"
     },
     obj2: {
-      question: "How do you decide whether order matters in a counting problem?",
-      answer: "Ask whether two selections containing the same items but arranged differently count as the same outcome. If swapping positions gives a genuinely different result — finishing first versus second, or the sequence HT versus TH — order matters. If the items are merely gathered together, it does not. Decide this before counting; the choice fixes which method applies.",
+      question: "Can the event and the sample space be counted in different ways?",
+      answer: "No, both must use the same structure, ordered or unordered. For two aces in two cards, counting both unordered gives $\\frac{\\binom{4}{2}}{\\binom{52}{2}} = \\frac{6}{1326}$ and counting both ordered gives $\\frac{4 \\cdot 3}{52 \\cdot 51} = \\frac{12}{2652}$, the same $\\frac{1}{221}$. Mixing them, $\\binom{4}{2}$ over $52 \\cdot 51$, gives $\\frac{1}{442}$. An answer off by a factor of 2, or of $k!$ for $k$ items, points to a mixed structure.",
       sectionId: "2"
     },
     obj3: {
       question: "Why can the same experiment need different counting rules?",
-      answer: "Because the counting depends on how you define an outcome, not on the physical setup. Rolling two dice has 36 ordered outcomes but only 21 unordered ones, and both are correct — for different questions. The experiment does not decide; the question does. Most counting errors start here, before any arithmetic, by fixing the wrong outcome space.",
+      answer: "Because the counting depends on how you define an outcome, not on the physical setup: coin tosses are counted as sequences, two cards as ordered draws or unordered hands. The choice is not free when the formula is |A|/|Ω|. Two dice have 21 unordered results, but only the 36 ordered pairs are equally likely, since “a 1 and a 2” covers two pairs and “two 1s” only one. Most counting errors start here, before any arithmetic.",
       sectionId: "3"
     },
     obj4: {
       question: "What happens if outcomes are not equally likely?",
       answer: "The classical formula stops working, and it fails silently — |A|/|Ω| still produces a number, just the wrong one. A loaded die has six outcomes but they do not carry equal probability, so counting them tells you nothing about likelihood. You need a [probability function](!/probability/probability-function) assigning each outcome its own weight instead.",
       sectionId: "1"
+    },
+    obj5: {
+      question: "Why is getting 3 of 4 cups right not convincing in the tea-tasting test?",
+      answer: "Because guessing gets there about one time in four. With 8 cups, 4 of them milk-first, a taster who picks 4 at random chooses one of $\\binom{8}{4} = 70$ equally likely sets. One set is all correct, so a perfect score has probability $\\frac{1}{70}$, but $\\binom{4}{3}\\binom{4}{1} = 16$ sets have exactly 3 right, so at least 3 right has probability $\\frac{17}{70}$. R. A. Fisher used this count in 1935 to argue that only a perfect score is convincing.",
+      sectionId: "4"
+    },
+    obj6: {
+      question: "Are identical particles counted as ordered or unordered outcomes?",
+      answer: "Unordered, and that changes the probabilities. For two particles in two states, objects that can be told apart give four equally likely ordered arrangements, so “one in each” has probability $\\frac{1}{2}$. Photons behave as if the three unordered arrangements were equally likely, $\\frac{1}{3}$ each (Bose–Einstein statistics), and electrons go further: two of them never share a state. Coins and dice can always be told apart, so for them the ordered outcomes are the equally likely ones.",
+      sectionId: "3"
     }
   }
 
@@ -837,6 +855,23 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 1, "Finite Sample Spaces and Counting") —
+  // template C, failure first. Running instance: the total of two dice,
+  // counted as 11 totals (wrong) and as 36 ordered pairs (right). Old obj1
+  // text is kept in sectionsContent.obj1, unused; its five blocks, the u_1_0
+  // demo frame, its line and the punchline are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciCountTable = ciTableOpen(['what is counted as an outcome', 'how many', 'P(total 7)', 'P(total 12)']) +
+    ciRow(['the totals 2, 3, …, 12', '11', '1/11', '1/11 — the same as 7?'], { color: '#a4243b', cols: [2, 3] }) +
+    ciRow(['ordered pairs (first die, second die)', '36', '6/36 = 1/6', '1/36'], { shade: true, last: true, color: '#2563EB', cols: [2, 3] }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -903,7 +938,7 @@ A classical probability uses the chosen structure twice: once to count the outco
 Standard probability experiments require explicit outcome definitions.
 
 • [Coin-toss](!/probability/models/coin-toss) experiments count sequences of results.
-• [Dice-roll](!/probability/models/dice-roll) experiments count ordered or unordered outcomes depending on the question.
+• [Dice-roll](!/probability/models/dice-roll) experiments count ordered outcomes: with two dice, the $36$ ordered pairs are equally likely, while unordered results are not — "a 1 and a 2" is twice as likely as "two 1s".
 • Card draws and urn models count selections with or without replacement.
 
 The same physical experiment can require different counting rules depending on how outcomes are defined.  
@@ -1174,6 +1209,10 @@ This page explains how counting methods connect to probability calculations, fro
     events: [{ label: 'double', test: (a, b) => a === b, color: 'r' }],
     notes: [{ text: 'given at least one 6:' }, { text: '11 outcomes remain' }, { text: 'P(double | a 6) = 1/11', color: 'r' }, { text: 'unconditionally 6/36', color: 'g' }],
     caption: 'Conditioning removes outcomes, then counts again' };
+  const conceptIntroFigures = {
+    countTable: ciCountTable,
+  };
+
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.sum7,
@@ -1204,6 +1243,7 @@ This page explains how counting methods connect to probability calculations, fro
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       obj4Table,
@@ -1228,10 +1268,73 @@ export default function CombinatoricsPage({
   obj4Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `To find a probability, count the favourable outcomes and divide by the possible ones — it seems to work everywhere.`,
+        content: [
+          `With one die, the chance of an even number is $\\frac{3}{6}$: three favourable faces out of six. Try the same recipe on the total of two dice.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Counting the 11 possible totals gives P(7) = P(12) = 1/11 — yet sevens come up six times as often as twelves.`,
+        content: [
+          ciTable('countTable'),
+          `A $12$ needs both dice to show $6$; a $7$ can come from six different pairs, from $(1, 6)$ to $(6, 1)$. The two rows cannot both be right.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The 11 totals are not equally likely; the 36 ordered pairs are — and the recipe needs equally likely outcomes.`,
+        content: [
+          `Read aloud it is **favourable outcomes over possible outcomes**, and that phrasing is where the trouble hides: the equally-likely assumption appears nowhere in the marks. The line looks like a definition of probability and is only a special case of one, so the condition has to travel alongside it in words.`,
+          `When these assumptions fail, counting alone is no longer sufficient and other probability tools are required.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `In a **classical probability model** the sample space is finite and every outcome is equally likely, so the probability of an event $A$ is $P(A) = \\frac{|A|}{|\\Omega|}$.`,
+        formula: [
+          `In classical probability models, probabilities are computed using`,
+          `$P(A)=\\dfrac{|A|}{|\\Omega|}$`,
+          `This formula applies only when the [sample space](!/probability/sample-space) $\\Omega$ is finite and all outcomes are equally likely.
+Under these conditions, probability values are determined entirely by counting — the [cardinality bars](!/set-theory/cardinality#notation) $|A|$ and $|\\Omega|$ measure how many outcomes belong to an [event](!/probability/events) and how many outcomes are possible in total.`,
+        ],
+        footer: `So for two dice, with $\\Omega$ the $36$ ordered pairs, $P(\\text{total } 7) = \\frac{6}{36} = \\frac{1}{6}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `In such models, finding a probability becomes a counting problem.`,
+        content: [
+          <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+          `How outcomes are organised for counting is taken up next.`,
+          `@academic[punchline:Favourable over possible is a probability only when every possible outcome is equally likely.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The right outcomes have to be counted: pairs, not totals; arrangements, not just contents.`,
+        content: `Whether order matters and whether items may repeat decides which outcomes are equally likely. These choices are set out in [counting structures used by probability models](!/probability/combinatorics#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the counting structures probability uses, counting in classical experiments, and the step from counting to distributions.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1248,10 +1351,7 @@ export default function CombinatoricsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
-          `How outcomes are organised for counting is taken up next.`,
-          `@academic[punchline:Favourable over possible is a probability only when every possible outcome is equally likely.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

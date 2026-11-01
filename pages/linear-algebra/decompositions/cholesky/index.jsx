@@ -1791,6 +1791,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import choleskyDiagrams from '@/app/components/linear-algebra copy/matrix/choleskyDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
 
 
 
@@ -2109,6 +2112,24 @@ const keyWords = [
 // 3 callouts injected: obj1 (Cholesky Decomposition), obj3 (Diagonal Formula + Off-Diagonal Formula)
 // Worked example $$ displays in obj3 preserved untouched (derivation steps, not canonical formulas)
 
+// Concept introduction (section 1, "What Cholesky Decomposition Is") —
+// template E, widening. Running instance: A with rows (4, 2), (2, 5), whose
+// Cholesky factor has rows (2, 0), (1, 2). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its formula box with link, theorem box, two
+// passages and the choleskyDone demo frame with its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTryTable = ciTableOpen(['candidate "square root" S', 'S times its transpose', 'equals A = (4, 2), (2, 5)?']) +
+  ciRow(['square root of each entry: (2, √2), (√2, √5)', '(6, 2√2 + √10), (2√2 + √10, 7)', 'no'], { color: '#a4243b', cols: [2] }) +
+  ciRow(['lower triangular L: (2, 0), (1, 2)', '(4, 2), (2, 5)', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `What Cholesky Decomposition Is`,
@@ -2423,6 +2444,10 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added uniqueness
+// and the near-singular silent failure (both only in the summary table's
+// card text, no heading asks them) and multivariate-normal sampling (one
+// sentence under "Where Cholesky Appears").
 const faqQuestions = {
   obj1: {
     question: "Does positive definite mean all the entries are positive?",
@@ -2438,6 +2463,21 @@ const faqQuestions = {
     question: "Why is the pivoting written $PAP^{T}$ here rather than $PA$?",
     answer: "Because symmetry has to survive. The one-sided form used for LU swaps rows only, which destroys the symmetry Cholesky depends on and can leave a matrix with no factorisation at all. Applying the permutation on both sides reorders rows and columns together, and since $P^{T} = P^{-1}$ the result is similar to $A$, preserving eigenvalues and definiteness.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is the Cholesky decomposition unique?",
+    answer: "Yes, for a symmetric positive definite matrix, once the diagonal of $L$ is required to be positive. Every square root in the algorithm is then taken of a strictly positive number, so each entry of $L$ is forced. Uniqueness is lost in the semi-definite case: pivoted Cholesky still produces a factor, but zeros appear on its diagonal and more than one $L$ reproduces $A$.",
+    sectionId: "11"
+  },
+  obj5: {
+    question: "Can Cholesky finish without error and still give a bad answer?",
+    answer: "Yes, when the matrix is positive definite but nearly singular. The algorithm runs to completion, yet the smallest diagonal entries of $L$ are tiny, and they amplify rounding error through the factor and every solve that uses it. The smallest $l_{ii}$ is the warning sign worth reading after factoring; adding a small shift $\\epsilon I$ restores accuracy at the cost of solving a slightly different problem.",
+    sectionId: "11"
+  },
+  obj6: {
+    question: "How is Cholesky used to generate correlated random numbers?",
+    answer: "Factor the covariance matrix as $\\Sigma = LL^{T}$, draw a vector $\\mathbf{z}$ of independent standard normal values, and form $L\\mathbf{z}$. Its covariance is $L I L^{T} = \\Sigma$, so it follows $\\mathcal{N}(\\mathbf{0}, \\Sigma)$; adding a mean vector $\\boldsymbol{\\mu}$ moves it to $\\mathcal{N}(\\boldsymbol{\\mu}, \\Sigma)$. This is the standard way simulations produce correlated inputs.",
+    sectionId: "8"
   }
 }
 
@@ -2524,6 +2564,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    tryTable: ciTryTable,
+  };
+
   const demoUnits = {
     algorithm: demoUnitFrame({
       svg: choleskyDiagrams.diag,
@@ -2567,6 +2611,7 @@ const schemas = {
   props:{
     choleskyLevels,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     definitenessTests,
@@ -2592,10 +2637,73 @@ export default function PageTemplate({choleskyLevels,
   definitenessTests,
   choleskyOutcomes,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A positive number can be split into two equal factors: its square root times itself.`,
+        content: [
+          `$9 = 3 \\cdot 3$ and $5 = \\sqrt{5} \\cdot \\sqrt{5}$. Splitting a number this way makes many calculations easier, because the two halves are simpler than the whole.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `For the matrix A with rows (4, 2), (2, 5), taking the square root of each entry does not work.`,
+        content: [
+          `Matrix products mix rows with columns, so square-rooting the entries and multiplying back does not reproduce $A$. A different kind of "square root" is needed — one built to survive matrix multiplication.`,
+          ciTable('tryTable'),
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [Cholesky decomposition](!/linear-algebra/definitions#cholesky_factorization) writes a symmetric positive definite matrix as $A = LL^T$, with $L$ lower triangular and its diagonal entries positive.`,
+        formula: [
+          `The Cholesky decomposition writes a [symmetric](!/linear-algebra/matrix/types) positive definite [matrix](!/linear-algebra/matrix) $A$ as`,
+          `@academic[formula_callout:cholesky_decomposition|Cholesky Decomposition|$$A = LL^T$$]@
+@academic[formulas_link:/linear-algebra/formulas#cholesky_decomposition]@`,
+          `where $L$ is lower [triangular](!/linear-algebra/matrix/types) with strictly positive diagonal entries. The matrix $L$ is the Cholesky factor — the matrix "square root" of $A$ in the sense that $A$ is reconstructed by multiplying $L$ by its own [transpose](!/linear-algebra/matrix/operations).`,
+        ],
+        footer: `So for $A$ with rows $(4, 2)$, $(2, 5)$, the factor is $L$ with rows $(2, 0)$, $(1, 2)$ — the matrix counterpart of $9 = 3 \\cdot 3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The Cholesky factor is a single matrix, and there is only one of it.`,
+        content: [
+          `@academic[rule_theorem_plain:The factorization is unique: for a given symmetric positive definite $A$, there is exactly one lower triangular $L$ with positive diagonal satisfying $A = LL^T$.]@`,
+          `The convention can also be written $A = R^TR$ with $R = L^T$ upper triangular — the choice between lower and upper is a matter of convention.`,
+          <div key={'unit-choleskyDone'} dangerouslySetInnerHTML={{ __html: demoUnits.choleskyDone }} />,
+          `A symmetric positive definite matrix is exactly one that can be written this way.`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost for ordinary numbers: a 1 × 1 matrix (a) has Cholesky factor (√a).`,
+        content: [
+          `For $a > 0$, $(a) = (\\sqrt{a})(\\sqrt{a})^T$, the ordinary square root in brackets. The decomposition extends square roots to matrices rather than replacing them.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What is lost: like square roots of negative numbers, the factor does not exist for every matrix.`,
+        content: `The matrix has to be symmetric and positive definite — the matrix version of "positive". The matrix with rows $(1, 2)$, $(2, 1)$ is symmetric but not positive definite, and has no Cholesky factor. Which matrices qualify is set out in [existence: symmetric positive definite matrices](!/linear-algebra/decompositions/cholesky#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, existence, the algorithm, solving systems with Cholesky, and the computational cost.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2603,9 +2711,7 @@ export default function PageTemplate({choleskyLevels,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-choleskyDone'} dangerouslySetInnerHTML={{ __html: demoUnits.choleskyDone }} />,
-          `A symmetric positive definite matrix is exactly one that can be written this way.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2624,6 +2730,11 @@ export default function PageTemplate({choleskyLevels,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDecompNotationSheet}
+            current={'/linear-algebra/decompositions/cholesky'}
           />,
         ]
     },

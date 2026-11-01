@@ -1910,6 +1910,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
 
 
 export async function getStaticProps(){
@@ -2604,6 +2606,11 @@ const introContent = {
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the tiny
+// determinant that is not near singular (fact box under "Effect of Row
+// Scaling"), det(AB) = det(BA) (under "Corollaries"), the block ad - bc trap
+// (fact box and paragraph under "Block Triangular Matrices") and the doubled
+// row (pitfall "Doubling a row to avoid fractions"); no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "Why can $|A|$ be negative when $|x|$ and $\\|\\mathbf{v}\\|$ cannot?",
@@ -2619,6 +2626,26 @@ const faqQuestions = {
     question: "In Cramer's rule, does $\\Delta_x$ mean \"change in $x$\"?",
     answer: "No. Despite the shared letter, nothing is changing: $\\Delta_x$ is a fixed determinant of the matrix with the $x$ column replaced by the constants. The symbol holds three unrelated jobs across mathematics, as an increment in calculus, a discriminant in quadratics, and a determinant here. Only context separates them.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Does a very small determinant mean a matrix is nearly singular?",
+    answer: "No, the size of the determinant alone is misleading. The matrix $0.1 I_{100}$ has determinant $0.1^{100} = 10^{-100}$, one factor of $0.1$ from each of its $100$ rows, yet it only shrinks space evenly and its inverse $10 I_{100}$ is exact. Because $\\det(kA) = k^n \\det(A)$, simply rescaling a matrix moves its determinant by a huge factor without bringing it any closer to singular.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Do $AB$ and $BA$ have the same determinant?",
+    answer: "Yes, always, for square matrices of the same size, even when $AB \\neq BA$ as matrices. The product rule gives $\\det(AB) = \\det(A)\\det(B)$, and multiplying two numbers does not depend on their order, so $\\det(A)\\det(B) = \\det(B)\\det(A) = \\det(BA)$. The two products can have quite different entries, yet they scale volume by the same factor.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Can the blocks of a block matrix be treated like numbers in $ad - bc$?",
+    answer: "Not in general. For $\\begin{pmatrix} P & Q \\\\ R & S \\end{pmatrix}$ made of four square blocks of equal size, the copied formula $\\det(PS - QR)$ usually gives the wrong value, because matrix products depend on order. It does hold when $RS = SR$. The safe special case is block triangular: when $Q$ or $R$ is a zero block, the determinant is $\\det(P)\\det(S)$, whatever the other off-diagonal block contains.",
+    sectionId: "8"
+  },
+  obj7: {
+    question: "Does replacing a row with $2R_i - R_k$ change the determinant?",
+    answer: "Yes, it doubles it. The step is a row scaling and a row addition at once: the multiple of $R_k$ is free, but the coefficient $2$ on the row being replaced multiplies the determinant by $2$. In general $R_i \\to aR_i + cR_k$ multiplies the determinant by $a$, whatever $c$ is. In the worked example this shortcut turns $232$ into $464$, so the final diagonal product has to be divided by every such coefficient.",
+    sectionId: "pitfalls"
   }
 }
 
@@ -2771,6 +2798,11 @@ const schemas = {
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDeterminantsNotationSheet}
+            current={'/linear-algebra/determinants/properties'}
           />,
         ]
     },

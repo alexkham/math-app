@@ -870,6 +870,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 
 export async function getStaticProps(){
 
@@ -1028,7 +1030,7 @@ Rolling a [fair six-sided die](!/probability/models/dice-roll) once. The possibl
 
 The uniform discrete distribution assigns equal probability to each integer between $a$ and $b$, inclusive. 
 
-The values must be equally spaced and finite in number. 
+The values must be distinct and finite in number; in the usual integer case, as here, they are also equally spaced. 
 
 The parameters define the range — once $a$ and $b$ are set, every integer in that closed interval has probability $\\frac{1}{b - a + 1}$.
 
@@ -1554,6 +1556,11 @@ const discreteUniformExplanations = {
   // Replaced with the notation section's three traps: the off-by-one
   // denominator, the U(a, b) name collision, and the support-line tell.
   // Three, not padded — the mean and variance both have their own headings.
+  // FAQ pass 2026-10-31: kept the three notation questions. Added the German
+  // tank problem (fact box under Expected Value), loaded dice and a flat sum
+  // (fact box in the experiment section; the dice-roll page asks only about
+  // fair dice), and values that are not consecutive integers (one line in
+  // the PMF section's support list).
   const faqQuestions = {
     obj1: {
       question: "Why is the denominator b − a + 1 and not b − a?",
@@ -1569,6 +1576,21 @@ const discreteUniformExplanations = {
       question: "What does the support line tell you about a distribution?",
       answer: "Often the family, before the formula does. Braces {a, a+1, …, b} mean a stepped integer run; brackets [a, b] mean a real interval. Among the discrete families the shapes differ too: a closed list for the binomial, an open ellipsis for the Poisson, computed clamps for the hypergeometric, a shifted list for the negative binomial.",
       sectionId: "15"
+    },
+    obj4: {
+      question: "What is the German tank problem?",
+      answer: "It is estimating the top of a discrete uniform range from a few draws. In World War II, Allied statisticians treated captured serial numbers as draws from $1$ to $N$ and estimated $N$ from the largest number seen, $m$, and how many were seen, $k$; the usual modern estimate is $m + \\frac{m}{k} - 1$. For tanks built in August 1942 they got 327, against intelligence reports of 1,550; German records later showed 342.",
+      sectionId: "6"
+    },
+    obj5: {
+      question: "Can loaded dice make the sum of two dice uniform?",
+      answer: "No, whatever the weights. Every total from $2$ to $12$ would need probability $\\frac{1}{11}$, so $p_1 q_1 = p_6 q_6 = \\frac{1}{11}$, where $p_i$ and $q_i$ are the face probabilities of the two dice. But a total of $7$ includes the rolls (1, 6) and (6, 1), and $p_1 q_6 + p_6 q_1 \\geq 2\\sqrt{p_1 q_1 \\, p_6 q_6} = \\frac{2}{11}$, already twice the share it is allowed.",
+      sectionId: "1"
+    },
+    obj6: {
+      question: "Do the values of a discrete uniform have to be consecutive integers?",
+      answer: "No, any $n$ distinct values can share probability $\\frac{1}{n}$ each, such as a die whose faces read 2, 3, 5, 7, 11, 13. The family $\\operatorname{DU}(a, b)$ and its formulas, though, assume the consecutive integers from $a$ to $b$. For equally spaced values with step $h$ the mean is still the midpoint and the variance becomes $h^2 \\cdot \\frac{n^2 - 1}{12}$; for an irregular set, compute both from the definition.",
+      sectionId: "4"
     }
   }
 
@@ -1844,6 +1866,11 @@ However two dice are weighted, their total is never uniform on $2$ to $12$. With
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/discrete/uniform'}
           />,
         ]
     },

@@ -826,8 +826,11 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 
 
 
@@ -1175,6 +1178,34 @@ const subspaceRecognition = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Definition") — template G, exclusion.
+// Running instance: six subsets of the plane, with the line y = 2x as the
+// one to keep. Old obj1 text (two paragraphs, no widgets) is kept in
+// sectionsContent.obj1, unused, and reused verbatim.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCandTable = ciTableOpen(['subset of the plane', 'described as']) +
+  ciRow(['A', 'the line y = 2x']) +
+  ciRow(['B', 'the line y = 2x + 1'], { shade: true }) +
+  ciRow(['C', 'the parabola y = x²']) +
+  ciRow(['D', 'the quadrant x ≥ 0, y ≥ 0'], { shade: true }) +
+  ciRow(['E', 'the single point (0, 0)']) +
+  ciRow(['F', 'the whole plane'], { shade: true, last: true }) +
+  '</tbody></table>'
+const ciSortTable = ciTableOpen(['subset', 'add two of its vectors', 'scale one of its vectors', 'subspace?']) +
+  ciRow(['A: y = 2x', '(1, 2) + (2, 4) = (3, 6), on the line', '−5 · (1, 2) = (−5, −10), on the line', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['B: y = 2x + 1', '(0, 1) + (1, 3) = (1, 4), off the line', '0 · (0, 1) = (0, 0), off the line', 'no'], { shade: true }) +
+  ciRow(['C: y = x²', '(1, 1) + (−1, 1) = (0, 2), off', '2 · (1, 1) = (2, 2), off', 'no']) +
+  ciRow(['D: quadrant', 'stays in the quadrant', '−1 · (1, 1) = (−1, −1), out', 'no'], { shade: true }) +
+  ciRow(['E: {(0, 0)}', '(0, 0) + (0, 0) = (0, 0)', 'c · (0, 0) = (0, 0)', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['F: the plane', 'always in the plane', 'always in the plane', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -1360,7 +1391,7 @@ The intersection of two subspaces $W_1$ and $W_2$ is always a subspace. If $\\ma
 @academic[fact,aside:true,width:35%:Finitely many subspaces never fill $\\mathbb{R}^n$
 Not even a million proper subspaces cover $\\mathbb{R}^n$: each is a flat slice of zero volume, and finitely many zero volumes add up to zero. With scalars $0$ and $1$ and arithmetic mod $2$ this fails, since that plane has only four points and its three lines through the origin cover them all.]@
 
-The union of two subspaces is almost never a subspace. If $\\mathbf{u} \\in W_1 \\setminus W_2$ and $\\mathbf{v} \\in W_2 \\setminus W_1$, the sum $\\mathbf{u} + \\mathbf{v}$ typically lies in neither $W_1$ nor $W_2$, violating closure. The only exception is when one subspace contains the other.
+The union of two subspaces is almost never a subspace. If $\\mathbf{u} \\in W_1 \\setminus W_2$ and $\\mathbf{v} \\in W_2 \\setminus W_1$, the sum $\\mathbf{u} + \\mathbf{v}$ always lies in neither $W_1$ nor $W_2$, violating closure. The only exception is when one subspace contains the other.
 
 The sum $W_1 + W_2 = \\{\\mathbf{w}_1 + \\mathbf{w}_2 : \\mathbf{w}_1 \\in W_1, \\mathbf{w}_2 \\in W_2\\}$ is always a subspace — it is the smallest subspace containing both $W_1$ and $W_2$. Its dimension satisfies
 
@@ -1460,6 +1491,12 @@ How to check: a subspace can never have a larger dimension than the space it lie
   content: `A subspace is a subset of a vector space that is itself a vector space under the same operations. Lines and planes through the origin in R³, null spaces and column spaces of matrices, and solution sets of homogeneous systems are all subspaces. A simple two-condition test determines whether a given subset qualifies.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the zero
+// vector not being enough (pitfall box under "The Subspace Test"), the union
+// and finitely many subspaces covering R^n (paragraph and fact box under
+// "Subspaces from Operations") and the first quadrant (summary card).
+// Solution sets of Ax = b left to linear-systems/homogeneous, which already
+// asks it.
 const faqQuestions = {
   obj1: {
     question: "Is every subset of a vector space a subspace?",
@@ -1475,6 +1512,26 @@ const faqQuestions = {
     question: "What does writing $V = W_1 \\oplus W_2$ claim?",
     answer: "More than that the pieces combine to give $V$. The circled plus asserts independence as well as spanning: every vector decomposes in exactly one way, and the two subspaces meet only at $\\mathbf{0}$. That extra content is what licenses adding dimensions directly, with no correction term for overlap.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is a set that contains the zero vector a subspace?",
+    answer: "Not necessarily. Containing $\\mathbf{0}$ is necessary but not sufficient: the parabola $y = x^2$ passes through $(0, 0)$, yet $2 \\cdot (1, 1) = (2, 2)$ is not on it, and neither is $(1, 1) + (-1, 1) = (0, 2)$. The zero-vector check works in one direction only, ruling out sets that miss the origin. A set that passes it still has to be closed under addition and scaling.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Is the union of two subspaces a subspace?",
+    answer: "Almost never. If $\\mathbf{u}$ lies in $W_1$ but not $W_2$, and $\\mathbf{v}$ lies in $W_2$ but not $W_1$, then $\\mathbf{u} + \\mathbf{v}$ lies in neither, so closure fails: the $x$-axis and the $y$-axis contain $(1, 0)$ and $(0, 1)$ but not $(1, 1)$. The only exception is when one subspace contains the other. The intersection and the sum $W_1 + W_2$, by contrast, are always subspaces.",
+    sectionId: "8"
+  },
+  obj6: {
+    question: "Is the first quadrant a subspace of $\\mathbb{R}^2$?",
+    answer: "No, although it passes two of the three checks. The quadrant $x \\geq 0$, $y \\geq 0$ contains the origin, and adding two vectors with non-negative entries gives non-negative entries again. Scaling is what fails: $(-1) \\cdot (1, 1) = (-1, -1)$ leaves the set. Passing most of the test is not passing it, because closure under addition says nothing about closure under scaling.",
+    sectionId: "10"
+  },
+  obj7: {
+    question: "Can finitely many proper subspaces cover $\\mathbb{R}^n$?",
+    answer: "No, not even a million of them. Each proper subspace is a flat slice of zero volume, and finitely many zero volumes add up to zero, so most of $\\mathbb{R}^n$ stays uncovered. The real scalars matter here: over the field with two elements, using arithmetic mod $2$, the plane has only four points, and its three lines through the origin cover all of them.",
+    sectionId: "8"
   }
 }
 
@@ -1553,6 +1610,11 @@ const schemas = {
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
 
+  const conceptIntroFigures = {
+    candTable: ciCandTable,
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     geometry: demoUnitFrame({
       svg: [spanIndependenceDiagrams.independent, spanIndependenceDiagrams.dependent],
@@ -1604,6 +1666,7 @@ return {
   props:{
     subspaceOpNest,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj7Table,
@@ -1623,9 +1686,73 @@ return {
 
    }
 
-export default function SubspacesPage({subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits}) {
+export default function SubspacesPage({subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six subsets of the plane. Which of them are vector spaces in their own right, using the plane's own addition and scaling?`,
+        content: [
+          `Lines, curves, regions and a single point — each is a set of vectors in the plane. The question is whether adding and scaling vectors inside the set keeps you inside it.`,
+          ciTable('candTable'),
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Three pass — the line y = 2x, the origin alone, and the whole plane — and three fail.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `Each failure is a step that leaves the set; the shifted line fails before any step, because it misses (0, 0).`,
+        content: [
+          `The parabola bends, so sums and multiples fall off it. The quadrant survives addition but not multiplication by a negative number. The line $y = 2x + 1$ looks like the good line $y = 2x$, yet scaling by $0$ must give the zero vector, and $(0, 0)$ is not on it.`,
+          `Most of the ten axioms — commutativity, associativity, distributivity, the identity $1\\mathbf{v} = \\mathbf{v}$ — hold automatically in $W$ because they hold for all vectors in $V$, and vectors in $W$ are vectors in $V$. The properties that can fail are the closure conditions: the sum of two vectors in $W$ might land outside $W$, or scaling a vector in $W$ might produce something not in $W$. These are the only things that need checking.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: a nonempty set that stays closed when its vectors are added and scaled.`,
+        content: [
+          `Think of a room with no exits: whatever moves you make with the vectors inside, you never leave. The line $y = 2x$ through the origin is such a room; the shifted line is not.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [subspace](!/linear-algebra/definitions#subspace) of a vector space $V$ is a nonempty subset that is closed under the addition and scalar multiplication of $V$ — and so is a vector space itself.`,
+        formula: [
+          `A subspace of a vector space $V$ is a nonempty subset $W \\subseteq V$ that is itself a vector space when equipped with the same addition and scalar multiplication as $V$.`,
+        ],
+        footer: `So the line $y = 2x$, the set $\\{(0, 0)\\}$ and the whole plane are subspaces of $\\mathbb{R}^2$; the other three are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `A subspace is a vector space sitting inside a bigger one, always passing through the zero vector.`,
+        content: [
+          `In the plane the only subspaces are the origin, the lines through the origin, and the plane itself; in space, planes through the origin join the list. Each is flat and passes through $\\mathbf{0}$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The rejected sets are not useless: the shifted line, in particular, is a subspace moved off the origin.`,
+        content: `$y = 2x + 1$ is the subspace $y = 2x$ slid up by one unit; sets like it describe the solutions of equations with a nonzero right-hand side. The parabola and the quadrant have uses of their own, just not as vector spaces. The [subspace test](!/linear-algebra/vector-spaces/subspaces#2) turns the rule into a quick check.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the subspace test, trivial subspaces, the subspaces of the plane and space, and the null, column and row spaces.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1633,7 +1760,7 @@ export default function SubspacesPage({subspaceOpNest, seoData, sectionsContent,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1652,6 +1779,11 @@ export default function SubspacesPage({subspaceOpNest, seoData, sectionsContent,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSpacesNotationSheet}
+            current={'/linear-algebra/vector-spaces/subspaces'}
           />,
         ]
     },

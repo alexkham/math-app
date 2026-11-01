@@ -1349,6 +1349,8 @@ import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbe
 import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1890,6 +1892,26 @@ export async function getStaticProps(){
 
 
 // formulas-optimized: v1 | 2026-06-11 | 5 callouts (obj6 ×5)
+// Concept introduction (section 2, "Complex Numbers as a Field") — template
+// G, exclusion. Running instance: N, Z, Q, R and C tested on whether
+// subtraction and division stay inside. Old obj2 text is kept in
+// sectionsContent.obj2, unused; its five passages, six bullets and the
+// punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSystemsTable = ciTableOpen(['number system', 'subtraction stays inside?', 'division by nonzero stays inside?', 'a field?']) +
+  ciRow(['natural numbers ℕ', 'no: 2 − 5 = −3', '—', 'no'], { color: '#a4243b', cols: [1] }) +
+  ciRow(['integers ℤ', 'yes', 'no: 1 ÷ 2 = 1/2', 'no'], { shade: true, color: '#a4243b', cols: [2] }) +
+  ciRow(['rationals ℚ', 'yes', 'yes', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['reals ℝ', 'yes', 'yes', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['complex numbers ℂ', 'yes', 'yes', 'yes'], { last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
     obj0: {
@@ -2462,6 +2484,12 @@ How to check: compute the product, here $-i$, and locate it. It lies on the nega
   content: `Complex numbers obey specific rules that determine how they interact under arithmetic operations. Some of these properties arise from the algebraic structure shared with real numbers, while others are unique to the complex number system. Understanding these properties provides the foundation for manipulating complex expressions, simplifying calculations, and recognizing what complex numbers can and cannot do.`
 }
 
+// FAQ pass 2026-10-31: kept the argument and conjugation questions. Cut the
+// reverse triangle inequality (h2 "Reverse Triangle Inequality") and what
+// complex numbers lack (h2 "What Complex Numbers Lack"). Added Machin's
+// formula (fact box under Properties of the Argument), the dictionary order
+// (fact box under What Complex Numbers Lack) and the argument of a sum (the
+// "no simple rule" cells of the summary table).
 const faqQuestions = {
   obj1: {
     question: "How does the argument behave under multiplication and division?",
@@ -2474,14 +2502,19 @@ const faqQuestions = {
     sectionId: "4"
   },
   obj3: {
-    question: "What is the reverse triangle inequality?",
-    answer: "It bounds the difference from below rather than the sum from above: the distance between two points is at least the gap between their distances from the origin. It is the statement that no shortcut can bring two points closer than the difference in their radii allows, and it follows from the ordinary triangle inequality.",
-    sectionId: "5"
+    question: "How do complex numbers prove Machin's formula for $\\pi$?",
+    answer: "By multiplying, since arguments add. The number $5 + i$ has argument $\\arctan\\frac{1}{5}$ and $239 - i$ has argument $-\\arctan\\frac{1}{239}$, and the product works out to $(5 + i)^4(239 - i) = 114244(1 + i)$. A positive multiple of $1 + i$ has argument $\\frac{\\pi}{4}$, so $4\\arctan\\frac{1}{5} - \\arctan\\frac{1}{239} = \\frac{\\pi}{4}$. John Machin used this in 1706 to compute $\\pi$ to 100 decimal places.",
+    sectionId: "6"
   },
   obj4: {
-    question: "What do complex numbers lack compared to real numbers?",
-    answer: "An order. Every algebraic property survives the extension, but no consistent way of saying one complex number is larger than another exists. That loss removes inequalities, monotonic functions, and anything built on them. Moduli can still be compared, since those are real numbers, but the numbers themselves cannot.",
+    question: "Can complex numbers be sorted in dictionary order?",
+    answer: "Yes as a list, but not in a way that respects multiplication. Compare real parts first and break ties with imaginary parts, the way a dictionary sorts words. That order even survives adding the same number to both sides. It fails for products: $i > 0$ in it, since $0 + 1i$ beats $0 + 0i$, yet $i \\cdot i = -1 < 0$, so the product of two positive numbers comes out negative.",
     sectionId: "8"
+  },
+  obj5: {
+    question: "Is the argument of a sum the sum of the arguments?",
+    answer: "No, that rule belongs to products. For $1$ and $i$ the arguments are $0$ and $\\frac{\\pi}{2}$; they add to $\\frac{\\pi}{2}$, the argument of the product $i$, while the sum $1 + i$ has argument $\\frac{\\pi}{4}$. The argument of a sum has no simple rule, because it depends on the lengths of the two numbers as well as their angles. Compute the sum first, then read off its argument.",
+    sectionId: "9"
   }
 }
 
@@ -2562,6 +2595,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    systemsTable: ciSystemsTable,
+  };
+
   const demoUnits = {
     modulus: demoUnitFrame({
       svg: conjugateModulusDiagrams.start,
@@ -2595,10 +2632,68 @@ const schemas = {
     ],
   };
 
+  // PropertySheet (obj9): complex-operation-properties
+  const complexOperationProperties = {
+    header: {
+      kicker: 'complex numbers',
+      title: 'What each operation does to conjugate, modulus and argument',
+      lede: 'The conjugate passes through everything; the modulus and the argument each have their own gaps.',
+    },
+    labels: { property: 'Operation', notCovered: 'no simple rule' },
+    verdicts: {
+      exact: { label: 'Exact law', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+      bound: { label: 'Bound only', color: '#0284C7', bg: '#e0f2fe', mark: 'dot' },
+      mod: { label: 'Up to full turns', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+      none: { label: 'No simple rule', color: '#475569', bg: '#e2e8f0', mark: 'cross' },
+    },
+    subjects: [
+      { id: 'conj', label: 'Conjugate' },
+      { id: 'mod', label: 'Modulus' },
+      { id: 'arg', label: 'Argument' },
+    ],
+    groups: [{ properties: [
+      { id: 'sum', name: 'Sum', note: '$z_1 + z_2$', cells: {
+        conj: { verdict: 'exact', text: '$\\bar{z}_1 + \\bar{z}_2$' },
+        mod: { verdict: 'bound', text: '$|z_1 + z_2| \\leq |z_1| + |z_2|$',
+          detailsLabel: 'Example', details: '$|3 + 4i| = 5$, while $|3| + |4i| = 7$: the triangle inequality is a bound, not an equality.' },
+        arg: { verdict: 'none' },
+      } },
+      { id: 'diff', name: 'Difference', note: '$z_1 - z_2$', cells: {
+        conj: { verdict: 'exact', text: '$\\bar{z}_1 - \\bar{z}_2$' },
+        mod: { verdict: 'bound', text: '$|z_1 - z_2| \\geq \\big||z_1| - |z_2|\\big|$' },
+        arg: { verdict: 'none' },
+      } },
+      { id: 'prod', name: 'Product', note: '$z_1 z_2$', cells: {
+        conj: { verdict: 'exact', text: '$\\bar{z}_1 \\, \\bar{z}_2$' },
+        mod: { verdict: 'exact', text: '$|z_1|\\,|z_2|$' },
+        arg: { verdict: 'mod', text: '$\\arg z_1 + \\arg z_2$',
+          detailsLabel: 'Example', details: '$\\text{Arg}(-1) + \\text{Arg}(i) = \\pi + \\frac{\\pi}{2} = \\frac{3\\pi}{2}$, outside $(-\\pi, \\pi]$; subtracting $2\\pi$ gives $\\text{Arg}(-i) = -\\frac{\\pi}{2}$.' },
+      } },
+      { id: 'quot', name: 'Quotient', note: '$z_1 / z_2$', cells: {
+        conj: { verdict: 'exact', text: '$\\bar{z}_1 / \\bar{z}_2$' },
+        mod: { verdict: 'exact', text: '$|z_1| / |z_2|$' },
+        arg: { verdict: 'mod', text: '$\\arg z_1 - \\arg z_2$' },
+      } },
+      { id: 'pow', name: 'Power', note: '$z^n$', cells: {
+        conj: { verdict: 'exact', text: '$(\\bar{z})^n$' },
+        mod: { verdict: 'exact', text: '$|z|^n$' },
+        arg: { verdict: 'mod', text: '$n \\arg z$ (De Moivre)' },
+      } },
+      { id: 'conjop', name: 'Conjugation', note: '$\\bar{z}$', cells: {
+        conj: { verdict: 'exact', text: '$z$ (conjugating twice)' },
+        mod: { verdict: 'exact', text: '$|z|$, unchanged' },
+        arg: { verdict: 'mod', text: '$-\\arg z$' },
+      } },
+    ] }],
+    footnote: 'Argument laws hold modulo $2\\pi$; with the principal value $\\text{Arg}$, a result may need $2\\pi$ added or subtracted to stay in $(-\\pi, \\pi]$.',
+  };
+
   return {
   props:{
+    complexOperationProperties,
     complexPropertyTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -2618,7 +2713,7 @@ const schemas = {
    }
 
 
-export default function PropertiesPage({complexPropertyTree, 
+export default function PropertiesPage({complexOperationProperties, complexPropertyTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -2626,10 +2721,79 @@ export default function PropertiesPage({complexPropertyTree,
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Five number systems. In which of them can you add, subtract, multiply and divide without ever leaving the system?`,
+        content: [
+          `Addition and multiplication never cause trouble in any of them. Subtraction and division are the real test.`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Three of the five pass every test.`,
+        content: [
+          ciTable('systemsTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The natural numbers fail at subtraction and the integers at division; ℚ, ℝ and ℂ never fail.`,
+        content: [
+          `$2 - 5 = -3$ is not a natural number, and $1 \\div 2 = \\frac{1}{2}$ is not an integer. In the last three systems every such result stays inside.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **field** is a set with addition and multiplication satisfying the field axioms, so that adding, subtracting, multiplying, and dividing by anything nonzero always give a result in the set.`,
+        formula: [
+          `In abstract algebra, a field is a set equipped with two operations — addition and multiplication — that satisfy a specific collection of axioms. These axioms guarantee predictable arithmetic: you can add, subtract, multiply, and divide (except by zero) and always obtain a result within the same set.`,
+          `The field axioms divide into several groups:`,
+          `• **Closure:** Operations keep you inside the set`,
+          `• **Commutativity:** Order of operands does not matter`,
+          `• **Associativity:** Grouping of operands does not matter`,
+          `• **Identity elements:** Zero for addition, one for multiplication`,
+          `• **Inverse elements:** Every number has a negative; every nonzero number has a reciprocal`,
+          `• **Distributivity:** Multiplication distributes over addition`,
+        ],
+        footer: `So $\\mathbb{Q}$, $\\mathbb{R}$ and $\\mathbb{C}$ are fields, while $\\mathbb{N}$ and $\\mathbb{Z}$ are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `Being a field is what lets ordinary algebra carry over to complex numbers.`,
+        content: [
+          `The rational numbers $\\mathbb{Q}$ form a field. So do the real numbers $\\mathbb{R}$. The complex numbers $\\mathbb{C}$ extend this pattern — they too satisfy every field axiom.`,
+          `Why does this matter? Because field structure ensures that algebraic techniques transfer seamlessly. Factoring, expanding, simplifying, solving equations — all the methods that rely only on the field rules work identically for complex numbers. Rules that depend on order or on real square roots, such as $x^2 \\geq 0$ or $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$, do not carry over.`,
+          `@academic[punchline:Whatever follows from the field rules alone holds in $\\mathbb{C}$; rules that need order or real square roots must be checked again.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A field need not have an order.`,
+        content: [
+          `$\\mathbb{C}$ satisfies every field axiom, yet it cannot be ordered in a way that respects its arithmetic; that is taken up in [what complex numbers lack](!/complex-numbers/properties#8).`,
+          `The next section lists these axioms precisely and confirms that $\\mathbb{C}$ satisfies each one.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the field axioms, the properties of the conjugate, modulus and argument, algebraic closure, what complex numbers lack, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2662,7 +2826,7 @@ export default function PropertiesPage({complexPropertyTree,
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2738,6 +2902,16 @@ export default function PropertiesPage({complexPropertyTree,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `The same table as a grid of verdicts. Each cell shows whether the operation passes through as an exact law, gives only a bound, holds only up to a multiple of $2\\pi$, or has no simple rule. Click an operation or a column to focus on it.`,
+          <DiagramFrame
+            key={'obj9-propsheet'}
+            id="complex-operation-properties"
+            title="What each operation does to conjugate, modulus and argument"
+            source="/complex-numbers/properties"
+          >
+            <PropertySheet data={complexOperationProperties} />
+          </DiagramFrame>,
+          `Read down the columns and the three sections above line up. The conjugate passes through every operation. The modulus turns products, quotients and powers into the same operations on lengths, but a sum gives only the [triangle inequality](!#5). The argument turns multiplication into addition, which is what makes [De Moivre's theorem](!/complex-numbers/demoivre-theorem) work, and has nothing simple to say about sums.`,
         ]
     },
     {
@@ -2819,7 +2993,7 @@ export default function PropertiesPage({complexPropertyTree,
    <Breadcrumb/>
    <br/>
    <br/>
-   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Compex Numbers Properties</h1>
+   <h1 className='title' style={{marginTop:'0px',marginBottom:'10px'}}>Complex Numbers Properties</h1>
    <br/>
    <br/>
    <SectionTableOfContents sections={genericSections}

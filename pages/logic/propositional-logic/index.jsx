@@ -391,6 +391,10 @@ How to check: before citing modus ponens, confirm that one of the cited lines is
   // logic/definitions has a version but renders no FAQ block). Consistency
   // was skipped to avoid duplicating the inconsistent-premises answer on
   // /logic/truth-tables/contradictions.
+  // FAQ pass 2026-10-31: kept the four questions. Added invalid versus always
+  // false (pitfall box under Validity & Invalidity, no heading asks it) and
+  // the five-line derivation of A → A (fact box under Proof Construction).
+  // Consistency still skipped, as above.
   const faqQuestions = {
     obj1: {
       question: "What is a proposition in logic?",
@@ -410,6 +414,16 @@ How to check: before citing modus ponens, confirm that one of the cited lines is
     obj4: {
       question: "What is the difference between soundness and completeness?",
       answer: "Soundness says a proof system proves only true things: every formula it derives is valid. Completeness says it proves all of them: every valid formula has a derivation. Together they guarantee that the syntactic notion 'provable' (⊢) and the semantic notion 'valid' (⊨) pick out exactly the same formulas. The two turnstiles are catalogued in [tautology notation](!/logic/propositional-logic/semantics/tautology#notation).",
+      sectionId: "proofs"
+    },
+    obj5: {
+      question: "Does invalid mean always false in logic?",
+      answer: "No. Invalid only means the formula is false in at least one row of its truth table, while a contradiction is false in every row. Most invalid formulas are contingencies: $P \\to Q$ is invalid because it is F at $P = T$, $Q = F$, yet it is T in the other three rows, so it is satisfiable. Invalid covers contingencies and contradictions; unsatisfiable covers contradictions only.",
+      sectionId: "properties"
+    },
+    obj6: {
+      question: "How do you prove A → A in a Hilbert system?",
+      answer: "In five lines, since $A \\to A$ is not an axiom. Take the A2 instance $(A \\to ((A \\to A) \\to A)) \\to ((A \\to (A \\to A)) \\to (A \\to A))$ and the A1 instance $A \\to ((A \\to A) \\to A)$; modus ponens gives $(A \\to (A \\to A)) \\to (A \\to A)$. The A1 instance $A \\to (A \\to A)$ and modus ponens once more give $A \\to A$.",
       sectionId: "proofs"
     }
   }

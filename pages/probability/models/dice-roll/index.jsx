@@ -699,6 +699,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -855,6 +856,13 @@ export async function getStaticProps(){
   // as the generalization rather than the hub, since it is not a symmetric
   // pairing. The biased-die variation and the continuous limit both defer
   // to the coin-toss page, which already carries those lessons.
+  // FAQ pass 2026-10-31: kept all three. Added the loaded-die weights (pitfall
+  // under Probability Assignment; a calculation, not the biased-variation
+  // lesson left to coin toss), the three dice that beat each other in turn
+  // (fact box under Random Variables), a fair die from coin tosses (fact box
+  // under Why the Dice Roll Model Matters) and the maximum of two dice (grid
+  // figure under Distributions Built from Repeated Dice Rolls); no heading
+  // asks any of them.
   const faqQuestions = {
     obj1: {
       question: "How is the dice roll model different from the coin toss model?",
@@ -870,6 +878,26 @@ export async function getStaticProps(){
       question: "Are the numbers on a die ordered, or just labels?",
       answer: "By default they are labels. The model treats the six outcomes as mutually exclusive categories, and nothing in it requires 3 to sit between 2 and 4. Order enters only when you define a random variable that uses it — a maximum, a sum, a comparison. The faces could be colors and the model would be unchanged.",
       sectionId: "2"
+    },
+    obj4: {
+      question: "How do you assign probabilities to a loaded die?",
+      answer: "Turn the description into weights and make them add up to $1$. For a die whose six is twice as likely as each other face, give the faces $1$ to $5$ the weight $q$ and the six $2q$; then $5q + 2q = 1$, so $q = \\frac{1}{7}$ and $P(6) = \\frac{2}{7}$. Keeping $\\frac{1}{6}$ for the other faces and doubling the six instead gives a total of $\\frac{7}{6}$, which is not a valid model.",
+      sectionId: "4"
+    },
+    obj5: {
+      question: "Can three dice each beat the next one in turn?",
+      answer: "Yes. Dice marked 2, 2, 4, 4, 9, 9 and 1, 1, 6, 6, 8, 8 and 3, 3, 5, 5, 7, 7 all have mean $5$, yet the first beats the second, the second beats the third, and the third beats the first, each with probability $\\frac{5}{9}$. A win is decided pair by pair over the $36$ cells of the grid, and $20$ of them favour the winner each time, so the averages say nothing about who wins.",
+      sectionId: "6"
+    },
+    obj6: {
+      question: "Can you simulate a fair die with coin tosses?",
+      answer: "Yes, but not with a fixed number of tosses. Every sequence of $k$ fair tosses has probability $\\frac{1}{2^k}$, so any rule turning $k$ tosses into a face gives it a probability $\\frac{m}{2^k}$, never $\\frac{1}{6}$. Tossing three coins, matching six of the eight results to the faces and starting again on the other two does work, at $4$ tosses on average, but no upper limit can be put on the number of tosses.",
+      sectionId: "10"
+    },
+    obj7: {
+      question: "What is the distribution of the larger of two dice?",
+      answer: "$P(\\max = k) = \\frac{2k - 1}{36}$ for $k = 1, \\ldots, 6$. The maximum is at most $k$ exactly when both dice are, which is a $k$ by $k$ block of $k^2$ cells; removing the $(k - 1)^2$ cells where it is at most $k - 1$ leaves $2k - 1$. Larger faces are therefore more likely: $P(\\max = 1) = \\frac{1}{36}$, while $P(\\max = 6) = \\frac{11}{36}$, the same as the chance of at least one six.",
+      sectionId: "8"
     }
   }
 
@@ -948,6 +976,24 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 1, "What Is Being Modeled") — template D,
+  // comparison. Running instance: a fair coin against a fair six-sided die.
+  // Old obj1 text is kept in sectionsContent.obj1, unused; its three passages
+  // are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciCompareTable = ciTableOpen(['', 'fair coin', 'fair six-sided die']) +
+    ciRow(['possible outcomes', 'heads, tails', '1, 2, 3, 4, 5, 6']) +
+    ciRow(['chance of each outcome', '1/2', '1/6'], { shade: true }) +
+    ciRow(['a typical event', 'heads: 1/2', 'an even number, {2, 4, 6}: 3/6 = 1/2']) +
+    ciRow(['how many different events', '2² = 4', '2⁶ = 64'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+    '</tbody></table>'
 
   const sectionsContent={
     obj0: {
@@ -1321,6 +1367,10 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
     events: [{ label: 'max ≤ 3', test: (a, b) => Math.max(a, b) <= 3, color: 'f' }, { label: 'max = 4', test: (a, b) => Math.max(a, b) === 4, color: 'r' }],
     notes: [{ text: 'P(max ≤ 4) = 16/36' }, { text: 'P(max ≤ 3) = 9/36', color: 'f' }, { text: 'P(max = 4) = 7/36', color: 'r' }, { text: 'in general (2k − 1)/36' }],
     caption: 'The maximum of two rolls: square blocks and L-shaped bands' };
+  const conceptIntroFigures = {
+    compareTable: ciCompareTable,
+  };
+
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: diceSampleSpaceDiagrams.none,
@@ -1353,6 +1403,7 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1379,10 +1430,67 @@ export default function DiceRollPage({
   schemas,
   assumptionsTable,
   constructionsTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A coin has two faces; a die has six. Both are a single trial that ends in exactly one result.`,
+        content: [
+          `Rolling a die is tossing a coin with more possible results. The question is what the extra outcomes change.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `Side by side, the die has more outcomes, smaller chances for each, and far more events to ask about.`,
+        content: [
+          ciTable('compareTable'),
+          `With six outcomes, questions like "even?", "more than 4?" or "a prime?" all make sense; the coin offers almost nothing to ask beyond which face came up.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `What changes is only the number of mutually exclusive outcomes — and with it, how rich the events can be.`,
+        content: [
+          `Each trial produces exactly one outcome, and no two outcomes can occur at the same time. The model does not depend on the physical act of rolling a die; it abstracts away all physical details and keeps only the structure of a finite multi-outcome mechanism.`,
+          `What distinguishes this model from simpler ones is not the presence of numbers, but the existence of several mutually exclusive categories generated by a single random experiment.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **dice roll model** is a probability model of a single trial with a fixed, finite number of mutually exclusive outcomes, each given a probability, the probabilities adding up to $1$.`,
+        formula: [
+          `The dice roll model represents a single random trial with a fixed, finite number of possible outcomes.`,
+        ],
+        footer: `So a fair die is a dice roll model with six outcomes of probability $\\frac{1}{6}$ each, and a spinner with eight equal sectors is one with eight outcomes.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is the general finite model, and the coin toss model is its two-outcome case.`,
+        content: [
+          `Any experiment with a list of possible results — a spinner, a draw from a bag, an answer on a survey — fits it, with the [coin toss model](!/probability/models/coin-toss) as the smallest instance.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The outcomes need not be equally likely, and the labels need not be numbers.`,
+        content: `A loaded die still fits the model, and so does a die with colours instead of dots. The outcomes themselves are listed in [outcome space](!/probability/models/dice-roll#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the outcome space, events, the probabilities, rolling more than one die, and the distributions that follow.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1399,7 +1507,7 @@ export default function DiceRollPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

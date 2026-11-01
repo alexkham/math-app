@@ -1910,6 +1910,9 @@ Mastering these combination types equips you to handle selection and distributio
 }
 
 
+// FAQ pass 2026-10-31: kept the five existing questions. Added the perfect
+// bridge deal and the 2^(n-1) ordered sums (both only in fact boxes) and stars
+// and bars (one sentence under "Weak Composition", no heading names it).
 const faqQuestions = {
   obj1: {
     question: "What is the difference between a permutation and a combination?",
@@ -1935,6 +1938,21 @@ const faqQuestions = {
     question: "Is nCr the same thing as the binomial coefficient?",
     answer: "Yes. The two notations name the same number, counted differently: nCr counts selections of r items from n, while the [binomial coefficient](!/combinatorics/binomial-coefficient) counts the coefficient of a term in an expansion. That they coincide is the reason counting and algebra connect through the binomial theorem.",
     sectionId: "combinations"
+  },
+  obj6: {
+    question: "What are the odds of a perfect bridge deal?",
+    answer: "About $4.5 \\times 10^{-28}$ with a fair shuffle. The partition formula gives $\\frac{52!}{(13!)^4} \\approx 5.36 \\times 10^{28}$ ways to deal four labeled hands of $13$, and only $4! = 24$ of them hand each seat a complete suit. A reported deal of four whole suits is far more likely a new deck, sorted by suit, that was barely shuffled.",
+    sectionId: "partition"
+  },
+  obj7: {
+    question: "What is the stars and bars method?",
+    answer: "A way to count weak compositions. Line up the $n$ identical items as stars and split them among $r$ containers with $r - 1$ bars. Each arrangement of the $n + r - 1$ symbols is one distribution, so the count is the number of ways to place the bars, $\\binom{n+r-1}{r-1}$. For $7$ identical candies and $3$ children that is $\\binom{9}{2} = 36$.",
+    sectionId: "weak"
+  },
+  obj8: {
+    question: "How many ways can a number be written as an ordered sum of positive integers?",
+    answer: "$2^{n-1}$, counting every number of parts. Line up $n$ stars and decide for each of the $n - 1$ gaps whether a bar goes in; each set of choices gives one ordered sum. The number $4$ has $8$: $4$, $1 + 3$, $3 + 1$, $2 + 2$, $1 + 1 + 2$, $1 + 2 + 1$, $2 + 1 + 1$ and $1 + 1 + 1 + 1$. Adding the strong composition counts $\\binom{n-1}{r-1}$ over all $r$ gives the same total.",
+    sectionId: "strong"
   }
 }
 

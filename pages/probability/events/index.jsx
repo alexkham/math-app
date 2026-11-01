@@ -755,6 +755,9 @@ export async function getStaticProps(){
   // h2. Union/intersection defers to the sets page ("Core Set Operations in
   // Probability") and independence to its dedicated page. Replaced with the
   // bullets that carry real weight but are never unpacked.
+  // FAQ pass 2026-10-31: kept all five. Added the number of events, 2^n
+  // (fact box under Set-Theoretic View), and the chance of a six in six
+  // rolls (fact box under Common Event Patterns); no heading asks either.
   const faqQuestions = {
     obj1: {
       question: "How do you handle “at least one” in a probability problem?",
@@ -780,6 +783,16 @@ export async function getStaticProps(){
       question: "What is an elementary event?",
       answer: "An event containing exactly one outcome — the smallest event that is not empty. For a die roll, {4} is an elementary event while {2,4,6} is not. The braces matter: {4} is an event, a subset of the sample space, whereas 4 on its own is an outcome, an element of it.",
       sectionId: "types"
+    },
+    obj6: {
+      question: "How many events does a sample space have?",
+      answer: "For a finite sample space with $n$ outcomes, $2^n$. An event is any subset, so building one is a yes-or-no choice for each outcome: in the event or not. One die has $2^6 = 64$ events, from the empty event to the certain one, while two dice, with $36$ outcomes, have $2^{36}$, about $68.7$ billion. Only a few of them ever get a name such as “the sum is 7”.",
+      sectionId: "sets"
+    },
+    obj7: {
+      question: "What is the chance of at least one six in six rolls of a die?",
+      answer: "About $0.665$, found through the complement: $1 - \\left(\\frac{5}{6}\\right)^6$. A six comes up on one roll in six, so six rolls feel like enough, but $5^6 = 15625$ of the $6^6 = 46656$ possible sequences have no six at all, about one in three. With $n$ rolls of an $n$-sided die the chance falls toward $1 - \\frac{1}{e} \\approx 0.632$ as $n$ grows.",
+      sectionId: "patterns"
     }
   }
 

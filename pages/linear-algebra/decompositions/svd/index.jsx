@@ -8339,6 +8339,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import svdDiagrams from '@/app/components/linear-algebra copy/matrix/svdDiagrams'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
 
 
 
@@ -8787,7 +8789,7 @@ The largest singular value $\\sigma_1$ is the operator norm $\\|A\\|_2 = \\max_{
   },
   obj4: {
     title: `Computing the SVD`,
-    content: `The standard approach computes the SVD through the eigenvalue decomposition of $A^TA$.
+    content: `The standard hand method computes the SVD through the eigenvalue decomposition of $A^TA$.
 
 Form $A^TA$ (symmetric, $n \\times n$). Find its eigenvalues $\\lambda_1 \\geq \\cdots \\geq \\lambda_n \\geq 0$ and orthonormal eigenvectors $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$ using the [spectral decomposition](!/linear-algebra/decompositions/spectral). These are the right singular vectors: $V = [\\mathbf{v}_1 \\; \\cdots \\; \\mathbf{v}_n]$.
 
@@ -8942,7 +8944,7 @@ The Netflix Prize data held about 100 million ratings from 480,189 users of 17,7
 
 Each term $\\sigma_i \\mathbf{u}_i\\mathbf{v}_i^T$ is an $m \\times n$ rank-one matrix. The singular value $\\sigma_i$ weights its contribution. The terms are ordered by importance: the first term captures the most of $A$ (in the norm sense), the second captures the most of the remainder, and so on.
 
-Truncating this sum at $k$ terms gives the best rank-$k$ approximation $A_k$. The fraction of the Frobenius norm captured by the first $k$ terms is $(\\sigma_1^2 + \\cdots + \\sigma_k^2)/(\\sigma_1^2 + \\cdots + \\sigma_r^2)$.
+Truncating this sum at $k$ terms gives the best rank-$k$ approximation $A_k$. The fraction of the squared Frobenius norm captured by the first $k$ terms is $(\\sigma_1^2 + \\cdots + \\sigma_k^2)/(\\sigma_1^2 + \\cdots + \\sigma_r^2)$.
 
 This outer product perspective is the basis of nearly every matrix approximation method: keep the large singular values (signal) and discard the small ones (noise or redundancy).`,
     before: ``,
@@ -9077,6 +9079,11 @@ const introContent = {
   content: `The singular value decomposition, written SVD, factors any matrix of any shape as UΣVᵀ — two orthogonal matrices sandwiching a diagonal matrix of non-negative singular values. It exists for every matrix, reveals the rank, provides orthonormal bases for all four fundamental subspaces, computes the pseudoinverse, yields the best low-rank approximation, and decomposes every linear transformation into a rotation or reflection, a scaling, and another rotation or reflection. No other single factorization provides this much information.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added the sign
+// mismatch from taking U and V separately (pitfall box under "Computing the
+// SVD"), determinant versus conditioning (one paragraph under "Spectral Norm
+// and Condition Number") and why the SVD cannot give matrix powers (end of
+// "What the Singular Value Decomposition Is"); no heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Is the $U$ in the SVD the same kind of matrix as the $U$ in $LU$?",
@@ -9092,6 +9099,21 @@ const faqQuestions = {
     question: "What is the difference between $\\sigma_i$ and $\\sigma(A)$?",
     answer: "The subscript changes the species entirely. A subscripted $\\sigma_i$ is one singular value, a single non-negative number, while a bare $\\sigma(A)$ is the spectrum, meaning the set of eigenvalues. Since singular values and eigenvalues agree only for special matrices, the two notations rarely even hold the same numbers.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can you take $U$ from $AA^T$ and $V$ from $A^TA$ separately?",
+    answer: "Not safely, because each eigenvector is fixed at best up to sign, and the two choices need not match. The factorization depends on the pairing $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$, and an independently chosen $\\mathbf{u}_i$ can be its negative, giving a product that is not $A$. The reliable route takes $V$ from $A^TA$ and sets $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ for each nonzero singular value; only the remaining columns of $U$ are free.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "Can a matrix with determinant 1 be ill-conditioned?",
+    answer: "Yes. Conditioning depends on the ratio of the largest singular value to the smallest, while the determinant, up to sign, is their product, and a product can stay at $1$ while the ratio explodes. The diagonal matrix with entries $10^{6}$ and $10^{-6}$ has determinant $1$ yet condition number $10^{12}$, enough to wipe out most of the digits a computer carries. Only the singular values show this; the determinant hides it.",
+    sectionId: "13"
+  },
+  obj6: {
+    question: "Can the SVD be used to compute powers of a matrix?",
+    answer: "Not in general. Squaring gives $A^2 = U\\Sigma V^TU\\Sigma V^T$, and the middle product $V^TU$ is not the identity, because the input and output bases differ, so nothing cancels. Diagonalization answers questions about powers and long-run behaviour; the SVD answers questions about stretching, rank and approximation. The clean exception is a symmetric positive semi-definite matrix, where $U = V$ and $A^k = U\\Sigma^kU^T$.",
+    sectionId: "1"
   }
 }
 
@@ -9378,6 +9400,11 @@ export default function SVDPage({svdNest,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laDecompNotationSheet}
+            current={'/linear-algebra/decompositions/svd'}
           />,
         ]
     },

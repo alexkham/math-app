@@ -590,6 +590,8 @@ import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiag
 import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -724,6 +726,25 @@ const summaryTable = `
 </table>
 `
 
+
+// Concept introduction (section 1, "The Core Idea") — template A, definition
+// last. Running instance: A with rows (2, 1), (1, 2), which keeps (1, 1)
+// (×3) and (1, −1) (×1) on their lines and turns (1, 0) and (1, 2). Old obj1
+// text is kept in sectionsContent.obj1, unused; its fact aside and three
+// paragraphs are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTryTable = ciTableOpen(['vector x', 'A x, with A = (2, 1), (1, 2)', 'same line as x?', 'stretch factor']) +
+  ciRow(['(1, 0)', '(2, 1)', 'no — turned', '—']) +
+  ciRow(['(1, 1)', '(3, 3)', 'yes', '3'], { shade: true, color: '#2563EB', cols: [2, 3] }) +
+  ciRow(['(1, 2)', '(4, 5)', 'no — turned', '—']) +
+  ciRow(['(1, −1)', '(1, −1)', 'yes', '1'], { shade: true, last: true, color: '#2563EB', cols: [2, 3] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1025,6 +1046,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    tryTable: ciTryTable,
+  };
+
   const demoUnits = {
     homogeneous: demoUnitFrame({
       svg: eigenDiagrams.shift,
@@ -1073,10 +1098,50 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+  // so only what this page holds and no child page asks: the "eigen means own"
+  // fact box, the zero eigenvalue and square-only rule under Definition, the
+  // eigenspace line, the trace/determinant checks from Common Pitfalls and the
+  // PageRank fact box under Why Eigenvalues Matter.
+  const faqQuestions = {
+    obj1: {
+      question: "What does the eigen in eigenvalue mean?",
+      answer: "It is German for own. An eigenvector is a direction that belongs to the matrix itself: the matrix sends it to a multiple of itself, $A\\mathbf{v} = \\lambda\\mathbf{v}$, and the eigenvalue $\\lambda$ is that direction's own stretch factor. The word Eigenwert, own value, comes from Hilbert's 1904 work on integral equations. English writers long said characteristic root, or Sylvester's latent root, instead.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Can an eigenvalue be zero?",
+      answer: "Yes. Only the eigenvector has to be nonzero; the eigenvalue can be any real or complex number, $0$ included. $\\lambda = 0$ means $A\\mathbf{v} = \\mathbf{0}$ for a nonzero $\\mathbf{v}$, so $\\mathbf{v}$ lies in the null space and the transformation collapses that direction to the origin. Since the determinant is the product of the eigenvalues, a zero eigenvalue makes $\\det(A) = 0$: a matrix is invertible exactly when $0$ is not one of its eigenvalues.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "Do non-square matrices have eigenvalues?",
+      answer: "No. The equation $A\\mathbf{v} = \\lambda\\mathbf{v}$ compares $A\\mathbf{v}$ with a multiple of $\\mathbf{v}$, so the two must live in the same space, and that needs $A$ to map $\\mathbb{R}^n$ to $\\mathbb{R}^n$. A $2 \\times 3$ matrix takes vectors in $\\mathbb{R}^3$ to vectors in $\\mathbb{R}^2$, where no output can be a multiple of its input. For rectangular matrices the singular values of the [SVD](!/linear-algebra/decompositions/svd) take over that role.",
+      sectionId: "2"
+    },
+    obj4: {
+      question: "Does an eigenvalue have only one eigenvector?",
+      answer: "No. If $A\\mathbf{v} = \\lambda\\mathbf{v}$, every nonzero multiple $c\\mathbf{v}$ satisfies the equation too, and so does any combination of eigenvectors for the same $\\lambda$. Together with the zero vector they fill a subspace, the eigenspace $E_\\lambda = \\text{Null}(A - \\lambda I)$. For $A$ with rows $(2, 1)$ and $(1, 2)$, every vector on the line through $(1, 1)$ is an eigenvector for $\\lambda = 3$. A stated eigenvector is just one vector of its eigenspace, not the only correct answer.",
+      sectionId: "4"
+    },
+    obj5: {
+      question: "How can you check eigenvalues found by hand?",
+      answer: "Use the trace and the determinant: the eigenvalues must add up to $\\text{tr}(A)$ and multiply to $\\det(A)$. For $A$ with rows $(4, 2)$ and $(1, 3)$, $2 + 5 = 7$ and $2 \\cdot 5 = 10 = 12 - 2$. The product test matters, because the diagonal entries $4$ and $3$ also add up to $7$ but multiply to $12$. Two more checks: an $n \\times n$ matrix needs a characteristic polynomial of degree $n$, and at a true eigenvalue $A - \\lambda I$ reduces to a matrix with a zero row.",
+      sectionId: "pitfalls"
+    },
+    obj6: {
+      question: "Is Google's PageRank an eigenvector?",
+      answer: "Yes. PageRank, the score Google first used to rank web pages, is the eigenvector for eigenvalue $1$ of a matrix with one row and one column per page. With billions of pages, its characteristic polynomial could never be written down, let alone solved. The vector was found instead by multiplying by the matrix over and over, which pulls a starting vector of positive scores toward the eigenvector for eigenvalue $1$, the largest eigenvalue of that matrix.",
+      sectionId: "8"
+    }
+  }
+
    return {
   props: {
+    faqQuestions,
     eigenGrowthCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -1097,17 +1162,75 @@ const schemas = {
 
    const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function EigenvaluesPage({eigenGrowthCases, 
+export default function EigenvaluesPage({faqQuestions, eigenGrowthCases,
      seoData,
      sectionsContent,
      introContent,
      obj5Table,
      obj6Table,
      summaryTable,
-     schemas, demoUnits
+     schemas, demoUnits, conceptIntroFigures
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A matrix moves vectors: multiply x by A, and the arrow usually swings to a new direction.`,
+        content: [
+          `When a [matrix](!/linear-algebra/matrix) $A$ multiplies a vector $\\mathbf{x}$, the result $A\\mathbf{x}$ is usually a vector pointing in a completely different direction. But for certain special vectors, the output $A\\mathbf{x}$ points in the same direction as $\\mathbf{x}$ — it is simply a scaled copy.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Take A with rows (2, 1), (1, 2) and try four vectors: two are turned, two stay on their own line.`,
+        content: [
+          ciTable('tryTable'),
+          `$(1, 1)$ comes back three times as long, and $(1, -1)$ comes back unchanged. The other two are knocked off their lines.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The vectors that stay on their line are the transformation's own directions, and each comes with a stretch factor.`,
+        content: [
+          `These are the vectors that the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$ stretches, compresses, or reverses without deflecting. They are the "natural axes" of the transformation, and the scaling factors measure exactly how the transformation acts along each such axis. Finding these directions and factors is the eigenvalue problem.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An [eigenvector](!/linear-algebra/definitions#eigenvector) of a square matrix $A$ is a nonzero vector $\\mathbf{v}$ that $A$ only scales; the scale factor $\\lambda$ is its [eigenvalue](!/linear-algebra/definitions#eigenvalue).`,
+        formula: [
+          `In symbols, $A\\mathbf{v} = \\lambda\\mathbf{v}$ with $\\mathbf{v} \\neq \\mathbf{0}$. The full statement, and why the zero vector is left out, is given in the next section, [definition](!/linear-algebra/eigen#2).`,
+        ],
+        footer: `So $(1, 1)$ is an eigenvector of $A$ with eigenvalue $3$, and $(1, -1)$ is one with eigenvalue $1$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Eigenvectors belong to the transformation itself, not to the numbers used to write it down.`,
+        content: [
+          `These directions belong to the transformation, not to the way it happens to be written down. In another basis the same transformation gets a different array of numbers, yet it stretches the same lines by the same factors. The eigenvalues are therefore the same numbers whichever basis is used to write the matrix.`,
+          `@academic[fact,aside:true,width:35%:Eigen means own
+The prefix is German for own: an eigenvector is a direction that belongs to the matrix itself. The word Eigenwert, own value, comes from Hilbert's 1904 work on integral equations; English writers long said characteristic root, or Sylvester's latent root, instead.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Not every matrix has a direction it leaves in place: a rotation turns every arrow.`,
+        content: `A quarter-turn of the plane keeps no line fixed, so it has no real eigenvectors; its eigenvalues are complex, as [complex eigenvalues](!/linear-algebra/eigen/complex) explains. In the other direction, every multiple of $(1, 1)$ is an eigenvector of $A$ too — a whole line of them sharing one eigenvalue, which is the idea behind [eigenspaces](!/linear-algebra/eigen#4).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the definition, the homogeneous system, eigenspaces, the geometric meaning, examples, eigenvalues and matrix properties, and why eigenvalues matter.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1115,7 +1238,7 @@ export default function EigenvaluesPage({eigenGrowthCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1216,6 +1339,22 @@ export default function EigenvaluesPage({eigenGrowthCases,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Eigenvalues and Eigenvectors FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 ]

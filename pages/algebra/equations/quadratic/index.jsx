@@ -18,6 +18,8 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 
 
 export async function getStaticProps(){
@@ -482,7 +484,7 @@ The equation $x^2 = 5x - 6$, for instance, is not in standard form but is still 
         tex: `$\\Delta = b^2 - 4ac$`,
         read: `Delta — the discriminant`,
         means: `One number, two letter traditions: $\\Delta$ in most international and university texts — this page's choice, in **The Discriminant** below — and capital $D$ in Russian, German, and much school-level writing. Same definition, same verdicts.`,
-        cases: `The sign is the whole message: $\\Delta > 0$ two real roots, $\\Delta = 0$ a double root, $\\Delta < 0$ a conjugate pair. Nothing else about $\\Delta$ is ever used at this level.`,
+        cases: `The sign gives the verdict: $\\Delta > 0$ two real roots, $\\Delta = 0$ a double root, $\\Delta < 0$ a conjugate pair. Beyond the sign, its size only sets distances on the graph, as **Connection to Graphing** below shows.`,
         alsoWritten: `$D = b^2 - 4ac$ — interchangeable; pick whichever your course uses and stay with it.`,
         confusedWith: `The other deltas. $\\Delta x$ is an [increment](!/calculus/derivatives/differentials#notation) and $\\Delta$ alone often means “change in” — the discriminant $\\Delta$ is a single fixed number computed from coefficients, related to neither.`,
       },
@@ -796,6 +798,13 @@ How to check: substitute the answers into the original equation. $x = 2$ gives $
   content: `When the unknown is squared, equations acquire a new dimension of complexity. A quadratic equation can produce two solutions, one solution, or no real solutions at all — and a single quantity built from its coefficients determines which case applies before any solving begins. Several distinct methods handle the solving itself, each suited to different situations but all ultimately equivalent. Quadratic equations sit at the boundary between elementary algebra and the richer structure of polynomial equations, and the tools developed here — the discriminant, factoring, completing the square, the quadratic formula, and Vieta's formulas — recur throughout mathematics.`,
 };
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added odd
+// coefficients and rational roots (fact box under "Solving by Factoring"),
+// why one side must be zero before factoring (pitfall and figure card, same
+// section), a and c of opposite signs (only in the pitfall's "How to check")
+// and what the size of the discriminant gives (two sentences under
+// "Connection to Graphing"). The perfect-square factoring test is left to
+// polynomials/factoring, which asks it.
 const faqQuestions = {
   obj1: {
     question: "In $x^2 = 5x - 6$, is $b$ equal to $5$ or $-5$?",
@@ -811,6 +820,26 @@ const faqQuestions = {
     question: "What is the difference between $x_2$ and $x^2$?",
     answer: "Position decides: a lowered index enumerates, a raised one operates. So $x_2$ is the second root, a number in its own right, while $x^2$ is $x$ multiplied by itself. A double root is written $x_1 = x_2$, meaning two labels pointing at one value, which is why the subscripts never have to say which root is which.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can a quadratic with all odd coefficients have a rational root?",
+    answer: "No. With integer coefficients, $ax^2 + bx + c = 0$ has rational roots only when $b^2 - 4ac$ is a perfect square. If $a$, $b$ and $c$ are all odd, $b^2$ leaves remainder $1$ on division by $8$ and $4ac$ leaves $4$, so $b^2 - 4ac$ leaves $5$, and no perfect square does. So $3x^2 + 5x + 1 = 0$, for example, can only have irrational or complex roots.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Why must one side be zero before you factor?",
+    answer: "Because the zero-product property works only for zero: a product is $0$ only when one of its factors is $0$. A product of $6$ can come from $2 \\cdot 3$, $12 \\cdot \\frac{1}{2}$ or infinitely many other pairs, so setting each factor of $x(x - 1) = 6$ equal to $6$ gives $x = 6$ or $x = 7$, both wrong. Rearranged, $x^2 - x - 6 = (x - 3)(x + 2) = 0$ gives $x = 3$ or $x = -2$.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Does a quadratic always have real roots when $a$ and $c$ have opposite signs?",
+    answer: "Yes, always two distinct ones. Then $ac < 0$, so $-4ac$ is positive and $\\Delta = b^2 - 4ac$ is greater than $b^2$, which is never negative. That holds whatever $b$ is: $x^2 + 2x - 3 = 0$ has $\\Delta = 16$ and the roots $1$ and $-3$. A negative discriminant in that case means a sign was lost, usually the sign of $c$.",
+    sectionId: "pitfalls"
+  },
+  obj7: {
+    question: "What does the size of the discriminant tell you?",
+    answer: "Distances on the graph; the sign alone gives the number of real roots. When $\\Delta > 0$ the two roots are $\\frac{\\sqrt{\\Delta}}{|a|}$ apart: for $2x^2 - 3x - 5 = 0$, $\\Delta = 49$ and the roots $-1$ and $\\frac{5}{2}$ are $\\frac{7}{2}$ apart. When $\\Delta < 0$ the vertex sits $\\frac{|\\Delta|}{4|a|}$ from the axis: for $x^2 + 4 = 0$, $\\Delta = -16$ and the vertex is $4$ units above it.",
+    sectionId: "8"
   }
 }
 
@@ -1155,6 +1184,11 @@ $$ax^2 + bx + c = 0$$]@`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={polyEqIneqNotationSheet}
+            current={'/algebra/equations/quadratic'}
           />,
         ]
     },

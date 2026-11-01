@@ -2,7 +2,7 @@ const arithmeticTermsList = [
 
 // ============================================
 // Arithmetic Definitions Data
-// 22 terms, 3 categories
+// 25 terms, 4 categories
 // All section anchors verified against page content
 // ============================================
 
@@ -345,8 +345,53 @@ $[0]_3 = \\{\\ldots, -6, -3, 0, 3, 6, \\ldots\\}$, $[1]_3 = \\{\\ldots, -5, -2, 
 - [Modulus](!/arithmetic/definitions#modulus)
 - [Remainder](!/arithmetic/definitions#remainder)`,
 },
-    
-   
+
+
+// ============================================
+// CATEGORY: Integer and Fractional Part
+// ============================================
+
+{
+  id: 'floor',
+  name: 'Floor (Integer Part)',
+  category: 'Integer and Fractional Part',
+  formula: `The floor of a real number $x$, written $\\lfloor x \\rfloor$, is the greatest integer less than or equal to $x$: $\\lfloor x \\rfloor = n$ where $n$ is the integer with $n \\leq x < n + 1$`,
+  link: { url: '/arithmetic/integer-part#1', text: 'The Integer Part (Floor)' },
+  intuition: `The floor rounds down: on the number line it moves left from $x$ to the nearest integer, or stays at $x$ if $x$ is an integer. For negative numbers this moves away from zero.`,
+  examples: `$\\lfloor 3.7 \\rfloor = 3$, $\\lfloor 5 \\rfloor = 5$, $\\lfloor -3.7 \\rfloor = -4$`,
+  'related concepts': `
+- [Ceiling](!/arithmetic/definitions#ceiling)
+- [Fractional Part](!/arithmetic/definitions#fractional_part)
+- [Remainder](!/arithmetic/definitions#remainder)`,
+},
+
+{
+  id: 'ceiling',
+  name: 'Ceiling',
+  category: 'Integer and Fractional Part',
+  formula: `The ceiling of a real number $x$, written $\\lceil x \\rceil$, is the least integer greater than or equal to $x$`,
+  link: { url: '/arithmetic/integer-part#2', text: 'The Ceiling' },
+  intuition: `The ceiling rounds up: on the number line it moves right from $x$ to the nearest integer, or stays at $x$ if $x$ is an integer. It is linked to the floor by $\\lceil x \\rceil = -\\lfloor -x \\rfloor$.`,
+  examples: `$\\lceil 3.2 \\rceil = 4$, $\\lceil 5 \\rceil = 5$, $\\lceil -3.2 \\rceil = -3$`,
+  'related concepts': `
+- [Floor](!/arithmetic/definitions#floor)
+- [Fractional Part](!/arithmetic/definitions#fractional_part)`,
+},
+
+{
+  id: 'fractional_part',
+  name: 'Fractional Part',
+  category: 'Integer and Fractional Part',
+  formula: `The fractional part of a real number $x$ is $\\{x\\} = x - \\lfloor x \\rfloor$, which always satisfies $0 \\leq \\{x\\} < 1$`,
+  link: { url: '/arithmetic/integer-part#3', text: 'The Fractional Part' },
+  intuition: `Every real number splits as $x = \\lfloor x \\rfloor + \\{x\\}$. The fractional part is the distance from $x$ down to the integer just below it, so it is never negative.`,
+  examples: `$\\{3.7\\} = 0.7$, $\\{5\\} = 0$, $\\{-3.7\\} = -3.7 - (-4) = 0.3$`,
+  'related concepts': `
+- [Floor](!/arithmetic/definitions#floor)
+- [Ceiling](!/arithmetic/definitions#ceiling)`,
+},
+
+
 ];
 
 export default arithmeticTermsList;

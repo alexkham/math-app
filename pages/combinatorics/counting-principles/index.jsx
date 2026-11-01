@@ -1726,6 +1726,11 @@ Each principle answers a structural question about a counting problem rather tha
 `,
 };
 
+// FAQ pass 2026-10-31: kept the four existing questions. Added the Rubik's
+// Cube count and the compression limit (both only in fact boxes), multiplying
+// when later options depend on earlier choices (the condition under "The
+// Independence Condition", shown by the 648 example) and the birth-month bound
+// for three people (the "Rounding n/k down" pitfall).
 const faqQuestions = {
   obj1: {
     question: "Do you add or multiply when counting possibilities?",
@@ -1746,6 +1751,26 @@ const faqQuestions = {
     question: "When do you use double counting?",
     answer: "When you want to prove two expressions are equal rather than compute a number. Count the same collection in two different ways and the two answers must agree, which establishes an identity directly. Many binomial coefficient identities are proved this way, and the argument is often shorter than algebraic manipulation.",
     sectionId: "4"
+  },
+  obj5: {
+    question: "How many positions does a Rubik's Cube have?",
+    answer: "About $4.3 \\times 10^{19}$, exactly $43{,}252{,}003{,}274{,}489{,}856{,}000$. The multiplication rule combines $8!$ corner placements, $3^7$ corner twists, $12!$ edge placements and $2^{11}$ edge flips, and a parity rule halves the result. The last corner twist and the last edge flip are forced by the others, which is why the powers are $3^7$ and $2^{11}$ rather than $3^8$ and $2^{12}$.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Can a compression program make every file smaller?",
+    answer: "No. There are $2^n$ files of $n$ bits but only $2^n - 1$ bit strings shorter than $n$ bits, the empty one included. If every $n$-bit file got shorter, the pigeonhole principle would force two files to share one compressed form, and unpacking could not tell them apart. A lossless compressor that shrinks some files must leave others the same size or make them longer.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Can you multiply when the later choices depend on the earlier ones?",
+    answer: "Yes, as long as the number of options at each step stays the same. For 3-digit numbers with distinct digits, which digits are left for the second place depends on the first digit, but there are always $9$ of them, and then always $8$ for the third, so the count is $9 \\times 9 \\times 8 = 648$. When the number of options itself changes, split into cases with the addition rule.",
+    sectionId: "6"
+  },
+  obj8: {
+    question: "How many people guarantee that three share a birth month?",
+    answer: "$25$. With $24$ people the $12$ months can hold exactly $2$ each, so no month needs a third. The $25$th person has to join a month that already has two, which is the generalized pigeonhole principle: $\\lceil 25/12 \\rceil = 3$. In the same way, guaranteeing $m$ people in one month takes $12(m - 1) + 1$ people, and $m = 2$ gives the familiar $13$.",
+    sectionId: "5"
   }
 }
 

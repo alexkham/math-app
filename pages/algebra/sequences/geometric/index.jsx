@@ -11,6 +11,10 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 
 
 export async function getStaticProps(){
@@ -385,6 +389,28 @@ const keyWords = [
 // /algebra/sequences/geometric — sectionsContent v2
 // 7 callouts: obj1 (2), obj4 (1), obj5 (1), obj6 (1), obj7 (2). obj2/obj3/obj8 untouched.
 
+// Concept introduction (section 1, "Definition") — template D, comparison.
+// Running instance: from 10, adding 10 each step (10, 20, 30, 40, …) against
+// doubling each step (10, 20, 40, 80, …). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its two formula boxes, formulas link, five
+// passages, the ratioCases demo frame, its line and the obj1Table are carried
+// in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCompareTable = ciTableOpen(['step n', 'adding 10', 'its differences', 'doubling', 'its ratios']) +
+  ciRow(['1', '10', '', '10', '']) +
+  ciRow(['2', '20', '10', '20', '2'], { shade: true }) +
+  ciRow(['3', '30', '10', '40', '2']) +
+  ciRow(['4', '40', '10', '80', '2'], { shade: true }) +
+  ciRow(['5', '50', '10', '160', '2']) +
+  ciRow(['10', '100', '10', '5120', '2'], { shade: true, last: true, color: '#2563EB', cols: [3, 4] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -412,6 +438,57 @@ Where an [arithmetic sequence](!/algebra/sequences/arithmetic) is linear — its
     after: ``,
     link: '',
   },
+    notation:{
+      title:`Geometric Sequence Notation`,
+      lead:`A letter for the ratio, a subscript that counts the terms summed, a bare letter once the sum runs forever, and a letter for the middle value.`,
+      inherited:`The subscript as position, the brace form and sigma are set out at [sequence notation](!/algebra/sequences/arithmetic#notation); the root in the geometric mean follows [radical notation](!/algebra/roots#4).`,
+      entries:[
+        {
+          id:'common-ratio',
+          tex:`$r = \\dfrac{a_{n+1}}{a_n}$`,
+          read:`r, the common ratio`,
+          means:`The constant factor from each term to the next — the multiplying twin of the common difference $d$. It enters the general term as a power: $a_n = a_1 r^{n-1}$, one less than the position.`,
+          cases:`$r < 0$ alternates the signs, $0 < |r| < 1$ shrinks the terms. $r = 0$ and $a_1 = 0$ are excluded, so the ratio is always defined.`,
+          alsoWritten:`$q$ — the usual letter in many European textbooks.`,
+          confusedWith:`The exponent count. $a_{10} = a_1 r^{9}$, not $a_1 r^{10}$ — the first term already holds place $1$.`,
+        },
+        {
+          id:'partial-sum',
+          tex:`$S_n$`,
+          read:`S sub n — the sum of the first n terms`,
+          means:`A partial sum: the subscript counts the terms added, not the exponent of the last one. $1 + 2 + \\cdots + 2^9$ is $S_{10}$ — exponents $0$ to $9$, ten terms.`,
+          cases:`The closed form $a_1 \\frac{1 - r^n}{1 - r}$ needs $r \\neq 1$; at $r = 1$ every term is $a_1$ and $S_n = n a_1$.`,
+          alsoWritten:`$\\sum_{k=1}^{n} a_1 r^{k-1}$, or $\\sum_{k=0}^{n-1} a_1 r^{k}$ — the same sum with the index starting at $0$.`,
+          confusedWith:`The last exponent. Reading $n = 9$ off $2^9$ drops a term and gives $511$ instead of $1023$.`,
+          sameGlyphElsewhere:`On the [square numbers](!/algebra/sequences/square-numbers#notation) page $S_n$ is the n-th square $n^2$ — one term, not a sum.`,
+        },
+        {
+          id:'infinite-sum',
+          tex:`$S = \\sum_{k=1}^{\\infty} a_1 r^{k-1}$`,
+          read:`S, the sum of the infinite series`,
+          means:`The limit of the partial sums: $S = \\lim_{n \\to \\infty} S_n = \\frac{a_1}{1 - r}$. No subscript — there is no term count left.`,
+          cases:`Exists only for $|r| < 1$. For $|r| \\geq 1$ the symbol names nothing: forcing $\\frac{a_1}{1 - r}$ on $1 + 2 + 4 + \\cdots$ gives $-1$.`,
+          alsoWritten:`$S_\\infty$ — common in school texts, the subscript standing for the endless count.`,
+          confusedWith:`A large $S_n$. Every finite partial sum of $\\frac{1}{2} + \\frac{1}{4} + \\cdots$ falls short of $S = 1$; $S$ is the value they approach.`,
+        },
+        {
+          id:'geometric-mean',
+          tex:`$G = \\sqrt{ab}$`,
+          read:`G, the geometric mean of a and b`,
+          means:`The middle value that makes $a, G, b$ geometric. In a geometric sequence with positive terms, each term is the geometric mean of its two neighbours ([section 7](!#7)).`,
+          cases:`$G \\leq A$, with equality only for equal values; with the [harmonic mean](!/algebra/sequences/harmonic#notation) the chain is $H \\leq G \\leq A$.`,
+          alsoWritten:`$\\text{GM}$; for $n$ numbers, $\\sqrt[n]{a_1 a_2 \\cdots a_n}$.`,
+          confusedWith:`The arithmetic mean $A = \\frac{a + b}{2}$, the value the AM–GM inequality compares it with.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/algebra`,
+      symbolsLabel:`All algebra symbols`,
+      parentHref:`/algebra/sequences`,
+      parentLabel:`Sequences`,
+      before:``,
+      after:``,
+    },
+
   obj2: {
     title: `Identifying Geometric Sequences`,
     content: `To test whether a sequence is geometric, compute the ratio of consecutive terms. If every ratio equals the same value, the sequence is geometric and that value is $r$.
@@ -697,6 +774,11 @@ How to check: count the values strictly between the endpoints in the finished li
   content: `A geometric sequence multiplies each term by the same fixed factor to produce the next. That factor — the common ratio — controls whether the sequence grows, decays, oscillates, or converges. Geometric sequences appear wherever quantities scale by a constant proportion, and their series formulas include one of the few cases where an infinite sum has a finite closed form.`,
 }
 
+// FAQ pass 2026-10-31: kept the three infinite-series questions. Added
+// arithmetic and geometric at once (theorem box under "Identifying
+// Geometric Sequences"), zero as a term (the r = 0 note under
+// "Definition") and Zeno's Achilles (fact box under "Infinite Geometric
+// Series").
 const faqQuestions = {
   obj1: {
     question: "Why does $0.333\\ldots$ equal exactly $\\frac{1}{3}$?",
@@ -711,6 +793,21 @@ const faqQuestions = {
   obj3: {
     question: "What happens to a geometric series when $r = -1$?",
     answer: "It diverges, though not by growing. The terms are $a_1, -a_1, a_1, -a_1, \\ldots$, so the partial sums oscillate between $a_1$ and $0$ forever without approaching any single value. Divergence means the partial sums fail to settle, which covers oscillation as well as unbounded growth. No finite sum exists.",
+    sectionId: "6"
+  },
+  obj4: {
+    question: "Can a sequence be both arithmetic and geometric?",
+    answer: "Yes, but only a constant one such as $5, 5, 5, 5$, which has $d = 0$ and $r = 1$. Any other choice fails: if $a, a + d, a + 2d$ were also geometric, the middle term would satisfy $(a + d)^2 = a(a + 2d)$, which simplifies to $d^2 = 0$. So a nonzero common difference always breaks the constant ratio.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Can a geometric sequence contain zero?",
+    answer: "No. The first term must be nonzero, and so must the ratio: with $r = 0$ every term after the first would be $0$, and the ratio $\\frac{a_{n+1}}{a_n}$ would have nothing to divide by. With $a_1 \\neq 0$ and $r \\neq 0$, every term $a_1 r^{n-1}$ is a product of nonzero numbers, so zero never appears.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Does Achilles ever catch the tortoise?",
+    answer: "Yes, after a finite distance. In Zeno's paradox Achilles runs ten times as fast as a tortoise that starts $100$ m ahead, so each stage of the chase is a tenth of the one before: $100 + 10 + 1 + \\cdots$. That is a geometric series with $r = \\frac{1}{10}$, and its sum is $\\frac{100}{1 - 1/10} = \\frac{1000}{9} = 111.\\overline{1}$ m. Infinitely many stages, but a finite total.",
     sectionId: "6"
   }
 }
@@ -811,6 +908,10 @@ const schemas = {
     yBars: geCols,
     notes: [{ x: 0.6, y: 1.12, text: 'blue: Sₙ = 1/2 + … + 1/2ⁿ   amber: the gap left, 1/2ⁿ', pos: 'e' }],
     caption: 'Each term covers half the remaining gap, so the sums close in on 1' };
+  const conceptIntroFigures = {
+    compareTable: ciCompareTable,
+  };
+
   const demoUnits = {
     ratioCases: demoUnitFrame({
       svg: renderFunctionPlotV4(fpRatioCases),
@@ -834,6 +935,7 @@ const schemas = {
      faqQuestions,
      schemas,
      demoUnits,
+     conceptIntroFigures,
      seoData: {
        title: "Geometric Sequences & Series Formula | Learn Math Class",
        description: "Learn geometric sequences: definition, common ratio, nth term formula, recursive form, finite and infinite geometric series, and geometric mean with examples.",
@@ -845,9 +947,81 @@ const schemas = {
 }
    }
 
-export default function GeometricSequencesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function GeometricSequencesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Two patterns start at 10: one adds 10 at every step, the other doubles at every step.`,
+        content: [
+          `The first gives $10, 20, 30, 40, \\ldots$, the second $10, 20, 40, 80, \\ldots$. After two steps they agree; after that they part company fast.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `By step 10 the adding pattern has reached 100 and the doubling pattern 5120.`,
+        content: [
+          ciTable('compareTable'),
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The adding pattern keeps a constant difference; the doubling pattern keeps a constant ratio.`,
+        content: [
+          `Dividing each doubling term by the one before always gives $2$, even though the differences $10, 20, 40, 80$ keep growing. A constant quotient, rather than a constant gap, is what holds the second pattern together.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **geometric sequence** is a sequence in which each term divided by the term before it is the same nonzero constant $r$, the common ratio.`,
+        formula: [
+          `A geometric sequence is a sequence in which consecutive terms have a constant ratio $r$:`,
+          `@academic[formula_callout:Common Ratio
+$$\\frac{a_{n+1}}{a_n} = r$$
+/algebra/formulas#common_ratio]@`,
+          `Starting from a first term $a_1 \\neq 0$, the sequence unfolds as $a_1, a_1 r, a_1 r^2, a_1 r^3, \\ldots$. The general term is:`,
+          `@academic[formula_callout:General Term (Geometric Sequence)
+$$a_n = a_1 \\cdot r^{n-1}$$
+/algebra/formulas#general_term_geometric_sequence]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+        ],
+        footer: `So $10, 20, 40, 80, \\ldots$ is geometric with $r = 2$, while $10, 20, 30, 40, \\ldots$ is arithmetic, not geometric.`,
+      },
+      {
+        id: 'kind',
+        lead: `The ratio decides the shape: growth, decay or alternation — always exponential, never a straight line.`,
+        content: [
+          `The ratio $r$ determines the sequence's character. When $r > 1$, the terms grow without bound: $2, 6, 18, 54, \\ldots$ with $r = 3$. When $0 < r < 1$, the terms decay toward zero: $81, 27, 9, 3, 1, \\ldots$ with $r = \\frac{1}{3}$. When $r < 0$, the terms alternate in sign: $4, -8, 16, -32, \\ldots$ with $r = -2$.`,
+          <div key={'unit-ratioCases'} dangerouslySetInnerHTML={{ __html: demoUnits.ratioCases }} />,
+          `With −1 < r < 0 the jumps shrink instead: the terms alternate and decay toward 0.`,
+          <div key={'obj1-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          `Where an [arithmetic sequence](!/algebra/sequences/arithmetic) is linear — its terms lie on a straight line when plotted against their indices — a geometric sequence is exponential. The general term $a_1 \\cdot r^{n-1}$ is an [exponential function](!/algebra/powers/exponential-functions) of $n$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Zero cannot appear: a ratio needs a nonzero term to divide by.`,
+        content: [
+          `The case $r = 1$ produces a constant sequence — every term equals $a_1$. The case $r = 0$ is excluded because every term after the first would be zero, and the ratio $\\frac{a_{n+1}}{a_n}$ would be undefined.`,
+          `How to test a list of numbers for a constant ratio is covered in [identifying geometric sequences](!/algebra/sequences/geometric#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers identifying geometric sequences, finding terms, the recursive formula, finite and infinite geometric series, and the geometric mean.`,
+      },
+    ],
+  }
 
   const genericSections=[
     // {
@@ -863,11 +1037,31 @@ export default function GeometricSequencesPage({seoData, sectionsContent, introC
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-ratioCases'} dangerouslySetInnerHTML={{ __html: demoUnits.ratioCases }} />,
-          `With −1 < r < 0 the jumps shrink instead: the terms alternate and decay toward 0.`,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+        ]
+    },
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation-notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={sequencesNotationSheet}
+            current={'/algebra/sequences/geometric'}
+          />,
         ]
     },
     {

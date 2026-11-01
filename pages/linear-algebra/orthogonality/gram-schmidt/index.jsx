@@ -1846,6 +1846,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
 import qrDiagrams from '@/app/components/linear-algebra copy/matrix/qrDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
 
 
 export async function getStaticProps(){
@@ -2190,6 +2193,23 @@ const gramSchmidtSettings = {
 
 // formulas-injected: v1 | 2026-06-16 | 1 callout (obj3 gram_schmidt_process direct)
 
+// Concept introduction (section 1, "The Goal") — template C, failure first.
+// Running instance: v1 = (1, 1, 0) and v2 = (1, 0, 1) from the section 2
+// worked example, which meet at 60°, straightened to u2 = (1/2, −1/2, 1).
+// Old obj1 text is kept in sectionsContent.obj1, unused; its theorem box and
+// three passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciAngleTable = ciTableOpen(['pair', 'dot product', 'angle between them', 'same plane as v₁, v₂?']) +
+  ciRow(['v₁ = (1, 1, 0), v₂ = (1, 0, 1)', '1', '60°', 'yes — they define it'], { color: '#a4243b', cols: [2] }) +
+  ciRow(['v₁ = (1, 1, 0), u₂ = (1/2, −1/2, 1)', '0', '90°', 'yes — u₂ = v₂ − ½v₁'], { shade: true, last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Goal`,
@@ -2353,7 +2373,7 @@ The span is preserved at each step. Each $\\mathbf{u}_j$ is a linear combination
   },
   obj7: {
     title: `The QR Decomposition`,
-    content: `Applying Gram-Schmidt to the columns $\\mathbf{a}_1, \\dots, \\mathbf{a}_n$ of an $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ (with independent columns) produces the [QR decomposition](!/linear-algebra/decompositions/qr):
+    content: `Applying Gram-Schmidt to the columns $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$ of an $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ (with independent columns) produces the [QR decomposition](!/linear-algebra/decompositions/qr):
 
 @academic[formula_callout:QR Decomposition
 $$A = QR$$
@@ -2363,9 +2383,9 @@ $$A = QR$$
 
 $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns (the normalized $\\mathbf{q}_i$&apos;s). $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.
 
-The entries of $R$ are the dot products computed during Gram-Schmidt: $R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{a}_j$ for $i \\leq j$, and $R_{ij} = 0$ for $i > j$ (because $\\mathbf{a}_j$ lies in the span of $\\mathbf{q}_1, \\ldots, \\mathbf{q}_j$, so it is perpendicular to $\\mathbf{q}_i$ when $i > j$).
+The entries of $R$ are the dot products computed during Gram-Schmidt: $R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{v}_j$ for $i \\leq j$, and $R_{ij} = 0$ for $i > j$ (because $\\mathbf{v}_j$ lies in the span of $\\mathbf{q}_1, \\ldots, \\mathbf{q}_j$, so it is perpendicular to $\\mathbf{q}_i$ when $i > j$).
 
-The factorization captures two complementary pieces of information. $Q$ stores the orthonormal directions. $R$ stores the coefficients that express the original columns in terms of those directions: $\\mathbf{a}_j = R_{1j}\\mathbf{q}_1 + R_{2j}\\mathbf{q}_2 + \\cdots + R_{jj}\\mathbf{q}_j$.`,
+The factorization captures two complementary pieces of information. $Q$ stores the orthonormal directions. $R$ stores the coefficients that express the original columns in terms of those directions: $\\mathbf{v}_j = R_{1j}\\mathbf{q}_1 + R_{2j}\\mathbf{q}_2 + \\cdots + R_{jj}\\mathbf{q}_j$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2505,6 +2525,10 @@ How to check: compute one inner product of the result with an earlier vector, us
   content: `The Gram-Schmidt process takes a set of linearly independent vectors and produces an orthogonal (or orthonormal) set spanning the same subspace. It works by sequentially stripping each vector of its components along previously computed directions, leaving only the perpendicular remainder. The result is a constructive proof that orthonormal bases always exist — and the matrix version of this process is the QR decomposition.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added dependent
+// inputs (the (2, 1, 1) example under "The Goal"), the 60-degree floating-point
+// failure (fact box under "Numerical Stability") and the Legendre polynomials
+// (worked example under "Gram-Schmidt on Abstract Inner Product Spaces").
 const faqQuestions = {
   obj1: {
     question: "Why does the sum stop at $j-1$ rather than running over all the vectors?",
@@ -2520,6 +2544,21 @@ const faqQuestions = {
     question: "Why does $R$ come out upper triangular?",
     answer: "Because of what the algorithm builds. Each $\\mathbf{v}_j$ is assembled from only the first $j$ orthogonal vectors, so any coefficient below the diagonal would refer to a vector that never contributed. Those entries are zero not by construction but by absence. Note that italic $R$ here is one triangular matrix, unrelated to blackboard $\\mathbb{R}$.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "What happens in Gram-Schmidt if the vectors are linearly dependent?",
+    answer: "The step for the dependent vector returns the zero vector. With $(1, 1, 0)$, $(1, 0, 1)$ and $(2, 1, 1)$, the third is the sum of the first two, so removing its parts along $\\mathbf{u}_1$ and $\\mathbf{u}_2$ leaves $\\mathbf{0}$. The zero vector cannot belong to an orthogonal basis and cannot be normalised, since its length is $0$. The usual remedy is to discard it and carry on, because it added nothing to the span.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Can Gram-Schmidt give vectors that are not perpendicular?",
+    answer: "Yes, on a computer, when the inputs are nearly dependent. Classical Gram-Schmidt in double precision on $(1, \\varepsilon, 0, 0)$, $(1, 0, \\varepsilon, 0)$, $(1, 0, 0, \\varepsilon)$ with $\\varepsilon = 10^{-8}$ returns $\\mathbf{q}_2 \\cdot \\mathbf{q}_3 = \\frac{1}{2}$, an angle of $60^\\circ$, because $1 + \\varepsilon^2$ rounds to $1$. Modified Gram-Schmidt gives about $10^{-16}$ on the same input, and the default QR routines in LAPACK, NumPy and MATLAB use Householder reflections instead.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "How are the Legendre polynomials related to Gram-Schmidt?",
+    answer: "They are what Gram-Schmidt returns for $1, x, x^2, \\ldots$ under $\\langle p, q \\rangle = \\int_{-1}^{1} p(x)q(x)\\,dx$, up to scaling. The $1$ is kept, and $x$ is already orthogonal to it because $x$ is odd. From $x^2$ the process removes $\\frac{2/3}{2} = \\frac{1}{3}$ times the constant $1$, leaving $x^2 - \\frac{1}{3}$, which is $\\frac{2}{3}P_2(x)$ with $P_2(x) = \\frac{1}{2}(3x^2 - 1)$.",
+    sectionId: "10"
   }
 }
 
@@ -2616,6 +2655,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    angleTable: ciAngleTable,
+  };
+
   const demoUnits = {
     subtract: demoUnitFrame({
       svg: gramSchmidtDiagrams.subtract,
@@ -2643,6 +2686,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     qrFromGramSchmidt,
@@ -2670,10 +2714,69 @@ export default function GramSchmidtsPage({
   obj9Table,
   gramSchmidtSettings,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Perpendicular directions are the easiest to work with: coordinates come straight from dot products, and lengths from Pythagoras.`,
+        content: [
+          `The standard axes $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$ are like that. The vectors a problem actually hands over usually are not.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `The vectors (1, 1, 0) and (1, 0, 1) span a plane, but they meet at 60°, not 90°.`,
+        content: [
+          ciTable('angleTable'),
+          `With a $60°$ angle, the easy formulas for coordinates and lengths no longer apply. The second row shows the same plane described by two perpendicular vectors instead.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Keep the first vector, and remove from the second the part that points along the first.`,
+        content: [
+          `Taking half of $(1, 1, 0)$ away from $(1, 0, 1)$ leaves $(\\frac{1}{2}, -\\frac{1}{2}, 1)$, which is perpendicular to $(1, 1, 0)$ and, being built from $\\mathbf{v}_1$ and $\\mathbf{v}_2$, still lies in their plane. Repeating this step for each further vector straightens out a whole basis.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [Gram-Schmidt process](!/linear-algebra/definitions#gram_schmidt_process) turns linearly independent vectors $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ into an orthogonal set $\\mathbf{u}_1, \\dots, \\mathbf{u}_k$ that spans the same subspace at every step.`,
+        formula: [
+          `The input is a set of [linearly independent](!/linear-algebra/vector-spaces/linear-independence) vectors $\\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_k\\}$ in an [inner product](!/linear-algebra/orthogonality/inner-product) space. The output is an [orthogonal](!/linear-algebra/orthogonality/orthogonal-sets) set $\\{\\mathbf{u}_1, \\mathbf{u}_2, \\dots, \\mathbf{u}_k\\}$ satisfying two conditions: the vectors are pairwise perpendicular ($\\mathbf{u}_i \\cdot \\mathbf{u}_j = 0$ for $i \\neq j$), and they [span](!/linear-algebra/vector-spaces/span) the same subspace ($\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_j\\} = \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_j\\}$ at every step $j$).`,
+          `Optionally, each $\\mathbf{u}_i$ is normalized to unit length, producing an orthonormal set $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$.`,
+        ],
+        footer: `So from $(1, 1, 0)$ and $(1, 0, 1)$ it produces $(1, 1, 0)$ and $(\\frac{1}{2}, -\\frac{1}{2}, 1)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Gram-Schmidt is a procedure, and the fact that it always works is a theorem: every basis can be straightened.`,
+        content: [
+          `The process is the constructive proof that every finite-dimensional inner product space has an orthonormal [basis](!/linear-algebra/vector-spaces).`,
+          `@academic[rule_theorem_plain:Given any basis, Gram-Schmidt produces an orthonormal one for the same space.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The input must be independent: a vector already in the span of the earlier ones leaves nothing over.`,
+        content: `With $(1, 1, 0)$, $(1, 0, 1)$ and $(2, 1, 1)$, the third is the sum of the first two, so removing its parts along them leaves the zero vector — which cannot belong to an orthogonal basis. The single step is spelled out in [the algorithm: two vectors](!/linear-algebra/orthogonality/gram-schmidt#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the algorithm for two vectors and in general, notation, normalization, a worked example in three dimensions, why it works, the QR decomposition and least squares, numerical stability, and abstract inner product spaces.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2681,7 +2784,7 @@ export default function GramSchmidtsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2718,6 +2821,11 @@ export default function GramSchmidtsPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laOrthoNotationSheet}
+            current={'/linear-algebra/orthogonality/gram-schmidt'}
           />,
         ]
     },

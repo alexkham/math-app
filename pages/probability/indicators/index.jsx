@@ -676,6 +676,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 
 
 export async function getStaticProps(){
@@ -762,6 +765,12 @@ export async function getStaticProps(){
   // variables page's deferral of indicator variables: no entry needed for
   // the definition. Kept the dependence question, since its heading names
   // the topic without answering it, and added the notation traps.
+  // FAQ pass 2026-10-31: kept all five. Added the expected number of
+  // matches in a shuffle (fact box under Linearity), expected count vs
+  // at-least-one (pitfall under Counting) and the expected number of
+  // records (fact box under Indicators in Probability Models); no heading
+  // asks these. The union pitfall is left to events, which asks why
+  // overlapping probabilities do not add.
   const faqQuestions = {
     obj1: {
       question: "Do indicator random variables need to be independent?",
@@ -787,6 +796,21 @@ export async function getStaticProps(){
       question: "Is a sum of indicators a probability?",
       answer: "No — it is a random count. The sum ranges over 0, 1, …, n and tells you how many of the events actually occurred on this trial. Only its expectation lands back among probabilities, as the sum of the individual event probabilities. Keeping the random count apart from its average is the whole trick indicator arguments turn on.",
       sectionId: "notation"
+    },
+    obj6: {
+      question: "How many cards land in their own position after a shuffle, on average?",
+      answer: "One, whatever the size of the deck. Shuffle $n$ cards numbered $1$ to $n$ and let $I_i$ indicate that card $i$ lands in position $i$, which has probability $\\frac{1}{n}$. The number of matches is $I_1 + \\cdots + I_n$, so its expectation is $n \\cdot \\frac{1}{n} = 1$. The events are dependent, but linearity of expectation does not care; only the full distribution needs inclusion–exclusion.",
+      sectionId: "5"
+    },
+    obj7: {
+      question: "Is the expected number of events the same as the probability that at least one occurs?",
+      answer: "No. The expected number is the plain sum of the probabilities, with no correction for overlap; the probability of at least one is the union, which subtracts the overlap. For two dice, the expected number of sixes is $\\frac{1}{6} + \\frac{1}{6} = \\frac{1}{3}$, while the chance of at least one six is $\\frac{1}{6} + \\frac{1}{6} - \\frac{1}{36} = \\frac{11}{36}$. The gap is the double six, which counts as $2$.",
+      sectionId: "6"
+    },
+    obj8: {
+      question: "How many records should you expect in a sequence of random draws?",
+      answer: "Very few: about $5.19$ in $100$ draws and only about $7.49$ in $1000$. Draw values one at a time from the same continuous distribution; the $k$-th value is a record, larger than every value before it, with probability $\\frac{1}{k}$. Summing one record indicator per draw gives an expected count of $1 + \\frac{1}{2} + \\cdots + \\frac{1}{n}$, whatever the distribution of the values.",
+      sectionId: "8"
     }
   }
 
@@ -857,6 +881,25 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 1, "From Events to Random Variables") —
+  // template H, open question. Running instance: three coin tosses, the
+  // number of heads as I1 + I2 + I3. Old obj1 text is kept in
+  // sectionsContent.obj1, unused; its three passages, the u_1_0 demo frame,
+  // its line and the punchline are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciTossTable = ciTableOpen(['outcome', 'I₁ (head on toss 1)', 'I₂ (head on toss 2)', 'I₃ (head on toss 3)', 'I₁ + I₂ + I₃']) +
+    ciRow(['HHH', '1', '1', '1', '3']) +
+    ciRow(['HTH', '1', '0', '1', '2'], { shade: true }) +
+    ciRow(['TTH', '0', '0', '1', '1']) +
+    ciRow(['TTT', '0', '0', '0', '0'], { shade: true, last: true }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -1269,6 +1312,10 @@ This makes them a structural tool for counting and for applying linearity of exp
     events: [{ label: 'first die 6: I = 1', test: (a) => a === 6, color: 'f' }, { label: 'second die 6: J = 1', test: (a, b) => b === 6, color: 'r' }],
     notes: [{ text: 'sixes: X = I + J' }, { text: 'E[I] = E[J] = 6/36' }, { text: '(6,6): X = 2', color: 'g' }, { text: 'E[X] = 12/36 = 1/3', color: 'r' }],
     caption: 'Count with indicators: add their expectations' };
+  const conceptIntroFigures = {
+    tossTable: ciTossTable,
+  };
+
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: coinSampleSpaceDiagrams.majority,
@@ -1287,6 +1334,7 @@ This makes them a structural tool for counting and for applying linearity of exp
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       summaryTable,
@@ -1309,10 +1357,73 @@ export default function IndicatorsPage({
   introContent,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `A coin is tossed three times. How can "heads on toss 1" be added to "heads on toss 2"?`,
+        content: [
+          `Events are sets of outcomes, and sets cannot be added. Yet counting the heads in three tosses is exactly a matter of adding up three such events.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Writing 1 when a toss is a head and 0 when it is not, the number of heads is simply the sum.`,
+        content: [
+          ciTable('tossTable'),
+          `Each column is a yes-or-no question answered with a number; adding the columns counts the yes answers.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Replace each event by a number: 1 when the event happens, 0 when it does not.`,
+        content: [
+          `In probability theory, events are sets of outcomes.  
+Sets cannot be added, averaged, or combined algebraically.`,
+          `Random variables assign numerical values to outcomes.  
+An indicator random variable assigns the value $1$ to outcomes in a given event and $0$ to all other outcomes.`,
+          `This construction converts an event into a numerical object defined on the same sample space.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **indicator random variable** $I_A$ of an event $A$ takes the value $1$ on every outcome in $A$ and $0$ on every outcome outside $A$.`,
+        formula: [
+          `The formal statement, with its notation, is given in the next section, [definition of an indicator random variable](!/probability/indicators#2).`,
+        ],
+        footer: `So the number of heads in three tosses is the random variable $I_1 + I_2 + I_3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `An indicator is a random variable, not a probability — but its average is a probability.`,
+        content: [
+          `$E[I_A] = 1 \\cdot P(A) + 0 \\cdot (1 - P(A)) = P(A)$. So for a fair coin the expected number of heads is $\\frac{1}{2} + \\frac{1}{2} + \\frac{1}{2} = \\frac{3}{2}$.`,
+          <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+          `The formal definition follows.`,
+          `@academic[punchline:An indicator turns an event into a number, so events can be added, multiplied and averaged.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `An indicator only ever takes the values 0 and 1 — never 1/2, even when its average is 1/2.`,
+        content: `On any single toss, $I_1$ is $0$ or $1$; the value $\\frac{1}{2}$ is its expected value, not one of its values. Treating $I_A$ as if it were $P(A)$ mixes up a random variable with a number.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the formal definition, notation, the expected value and variance of an indicator, and counting with sums of indicators.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1329,10 +1440,7 @@ export default function IndicatorsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
-          `The formal definition follows.`,
-          `@academic[punchline:An indicator turns an event into a number, so events can be added, multiplied and averaged.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1359,6 +1467,11 @@ export default function IndicatorsPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probRandomVarsNotationSheet}
+            current={'/probability/indicators'}
           />,
         ]
     },

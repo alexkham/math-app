@@ -11,6 +11,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -192,6 +193,28 @@ const summaryTable = `
 
 
 // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "Definition and Standard Form") —
+// template G, exclusion. Running instance: six equations A–F, three of them
+// linear, including the section's 3x − 7 = 2x + 5 and x/4 + 1 = 3. Old obj1
+// text is kept in sectionsContent.obj1, unused; its formula box, theorem box,
+// four passages and the standard demo frame with its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSortTable = ciTableOpen(['equation', 'after collecting terms', 'how x appears', 'linear?']) +
+  ciRow(['A', 'x − 12 = 0', 'to the first power', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['B', 'x/4 − 2 = 0', 'to the first power — 4 is a number', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['C', 'x² − 9 = 0', 'squared', 'no']) +
+  ciRow(['D', '2/x − 6 = 0', 'in a denominator', 'no'], { shade: true }) +
+  ciRow(['E', '2x − 10 = 0', 'to the first power', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['F', '√x − 4 = 0', 'under a root', 'no'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
 
@@ -515,6 +538,12 @@ How to check: substitute any two numbers. $x = 1$ gives $8 = 8$; $x = -10$ gives
 };
 
 
+// FAQ pass 2026-10-31: kept the three existing questions. Added why the
+// equation is called linear (one sentence under "Definition and Standard
+// Form"), numeric denominators against variable ones (the rule box under
+// "Equations with Fractions"), where the word algebra comes from (fact box
+// under "Solving Single-Step and Multi-Step Equations") and choosing 10 or
+// 100 to clear decimals (one sentence under "Equations with Decimals").
 const faqQuestions = {
   obj1: {
     question: "What does it mean when the variable disappears while solving?",
@@ -530,6 +559,26 @@ const faqQuestions = {
     question: "Why is $-(x + 4)$ equal to $-x - 4$ rather than $-x + 4$?",
     answer: "Because the minus sign is a factor of $-1$ distributed across the whole bracket, reaching every term inside rather than only the first. So $-(x + 4) = -x - 4$, and likewise $-(x - 4) = -x + 4$. Getting the second term's sign wrong changes the solution outright, which makes this one of the most common algebra errors.",
     sectionId: "4"
+  },
+  obj4: {
+    question: "Why is it called a linear equation?",
+    answer: "Because of its graph. The standard form $ax + b = 0$ comes from the expression $ax + b$, and $y = ax + b$ is a straight line. Solving the equation finds where that line crosses the $x$-axis, at $x = -\\frac{b}{a}$; for $-x + 5 = 0$ the crossing is $x = 5$. The condition $a \\neq 0$ keeps the line from being horizontal, which is why exactly one crossing exists.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Is an equation with fractions still linear?",
+    answer: "Yes, as long as every denominator is a number. In $\\frac{x}{4} + 1 = 3$ the $4$ is a constant, so multiplying through by it gives $x + 4 = 12$, an ordinary linear equation with solution $x = 8$. Once $x$ itself sits in a denominator, as in $\\frac{2}{x} = 6$, the equation is [rational](!/algebra/equations/rational) instead, and clearing that denominator brings domain restrictions and the chance of extraneous solutions.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Where does the word algebra come from?",
+    answer: "From al-jabr, Arabic for restoring, in al-Khwarizmi's ninth-century book on equations. The word named one move: a subtracted term is removed from one side by adding it to both sides, as when $x - 9 = 4$ becomes $x = 13$. That move is the addition property of equality, still the first tool used to solve a linear equation.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "Do you multiply by 10 or 100 to clear decimals?",
+    answer: "It depends on the decimal with the most places: one place needs $10$, two places need $100$. In $0.3x + 1.25 = 0.8x - 0.5$ the $1.25$ has two places, so multiplying every term by $100$ gives $30x + 125 = 80x - 50$, all integers, and then $x = \\frac{7}{2}$. Multiplying by $10$ would leave $12.5$ behind.",
+    sectionId: "6"
   }
 }
 
@@ -612,6 +661,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     standard: demoUnitFrame({
       svg: equationVisualizerDiagrams['lin-negative'],
@@ -632,6 +685,7 @@ const schemas = {
   return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -661,10 +715,71 @@ export default function LinearEquationsPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six equations in one unknown. Which of them belong to the simplest family of equations?`,
+        content: [
+          `A: $3x - 7 = 2x + 5$ $\\quad$ B: $\\frac{x}{4} + 1 = 3$ $\\quad$ C: $x^2 = 9$ $\\quad$ D: $\\frac{2}{x} = 6$ $\\quad$ E: $5(x - 2) = 3x$ $\\quad$ F: $\\sqrt{x} = 4$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Collecting everything on one side settles it: in A, B and E, x appears only to the first power; in C, D and F it does not.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `C, D and F involve x in some other way: squared, in a denominator, or under a root.`,
+        content: [
+          `Not every linear equation arrives in standard form. The equation $3x - 7 = 2x + 5$ is linear because, after collecting terms, it reduces to $x - 12 = 0$. The equation $\\frac{x}{4} + 1 = 3$ is also linear — the fraction involves only a numerical denominator, not a variable one. Recognition matters: any equation where the variable appears solely to the first power, with no products or compositions involving the variable, is linear regardless of how it is initially presented.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **linear equation** in one variable is an equation that can be rewritten as $ax + b = 0$ with $a \\neq 0$, so that $x$ appears only to the first power.`,
+        formula: [
+          `A linear equation in one variable is any equation that can be written as`,
+          `@academic[formula_callout:Definition and Standard Form
+$$ax + b = 0$$]@`,
+          `where $a$ and $b$ are real constants and $a \\neq 0$. The variable $x$ appears only to the first power — no $x^2$, no $\\sqrt{x}$, no $x$ in a denominator. The word "linear" reflects the geometric fact that the graph of $y = ax + b$ is a straight line, and the solution of $ax + b = 0$ is the point where that line crosses the horizontal axis.`,
+        ],
+        footer: `So A, B and E are linear equations; C, D and F are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `Every linear equation has exactly one solution, x = −b/a — the point where a straight line crosses the axis.`,
+        content: [
+          `The solution is immediate from standard form. Subtracting $b$ and dividing by $a$ gives $x = -\\frac{b}{a}$.`,
+          `@academic[rule_theorem_plain:This single value is the only solution, and it always exists when $a \\neq 0$. Linear equations never produce two solutions, infinitely many solutions, or no solutions — as long as the coefficient of $x$ is genuinely nonzero.]@`,
+          <div key={'unit-standard'} dangerouslySetInnerHTML={{ __html: demoUnits.standard }} />,
+          `Solving is the algebra that locates this crossing without drawing it.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The definition needs a ≠ 0: when the x terms cancel, something different happens.`,
+        content: `$3x + 1 = 3x + 4$ collapses to $1 = 4$ and has no solution, while $2x + 6 = 2(x + 3)$ holds for every $x$. These cases are treated in [special cases](!/algebra/equations/linear#7).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the properties of equality, solving single-step and multi-step equations, equations with parentheses, fractions and decimals, special cases, and literal equations.`,
+      },
+    ],
+  }
 
   const genericSections=[
 
@@ -682,9 +797,7 @@ export default function LinearEquationsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-standard'} dangerouslySetInnerHTML={{ __html: demoUnits.standard }} />,
-          `Solving is the algebra that locates this crossing without drawing it.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

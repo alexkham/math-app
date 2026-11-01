@@ -1579,10 +1579,14 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import complexEigenDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/complex-eigen/complexEigenDiagrams'
 import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1914,6 +1918,25 @@ const complexEigenvalues = {
 
 // formulas-injected: v1 | 2026-06-16 | 3 callouts (obj1 discriminant_classification_2x2 inline-promote, obj2 complex_conjugate_pairs prose-insert, obj5 real_canonical_form_2x2 direct)
 
+// Concept introduction (section 1, "When Complex Eigenvalues Appear") —
+// template C, failure first. Running instance: the 90° rotation, which
+// turns every real vector at right angles to itself. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four passages, the formula box, the
+// noRealEigen demo frame and its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRotateTable = ciTableOpen(['v', 'Rv', 'a multiple of v?']) +
+  ciRow(['(1, 0)', '(0, 1)', 'no']) +
+  ciRow(['(1, 1)', '(−1, 1)', 'no'], { shade: true }) +
+  ciRow(['(1, 2)', '(−2, 1)', 'no']) +
+  ciRow(['(a, b)', '(−b, a), at right angles to v', 'never, unless v = 0'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `When Complex Eigenvalues Appear`,
@@ -2196,6 +2219,11 @@ const introContent = {
   content: `A real matrix can have complex eigenvalues — this happens when the characteristic polynomial has no real roots. Geometrically, no real direction is mapped to a scalar multiple of itself; the transformation involves rotation. Complex eigenvalues of real matrices always come in conjugate pairs, and each pair corresponds to a rotation-scaling action on a two-dimensional subspace.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added odd-size
+// real matrices always having a real eigenvalue (one paragraph under
+// "Conjugate Pairs" and the summary table's card text), reading the angle
+// of a complex eigenvalue (the arctangent pitfall) and why crystals have no
+// fivefold symmetry (fact box in "The 2×2 Case in Detail").
 const faqQuestions = {
   obj1: {
     question: "Does $\\bar{\\lambda}$ pair with $\\mathbf{v}$ or with $\\bar{\\mathbf{v}}$?",
@@ -2211,6 +2239,21 @@ const faqQuestions = {
     question: "Is the real canonical block just a diagonal matrix?",
     answer: "No, and that is exactly why it exists. A real matrix with complex eigenvalues cannot be diagonalised over the reals at all, so the block is the closest real substitute. Written out, it is a scaled rotation, with the eigenvalue's modulus setting the scale and its argument the angle. Treating it as diagonal discards the rotation.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Does every real matrix have at least one real eigenvalue?",
+    answer: "No, but every real matrix of odd size does. Complex eigenvalues of a real matrix come in conjugate pairs, so they use up an even number of the $n$ roots; when $n$ is odd one root is left over, and it must be real. That is why a rotation of $\\mathbb{R}^3$ always has an axis, while the $90°$ rotation of the plane has eigenvalues $\\pm i$ and no real eigenvector at all.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "How do you find the rotation angle of a complex eigenvalue?",
+    answer: "Use $\\cos\\theta = a/r$ and $\\sin\\theta = b/r$ together, with $r = \\sqrt{a^2 + b^2}$. The shortcut $\\theta = \\arctan(b/a)$ only returns angles between $-90°$ and $90°$, so it is right only when $a > 0$. For $\\lambda = -1 + i$ it gives $-45°$, but the cosine is negative and the sine positive, so the angle is $135°$, and only $135°$ rebuilds the matrix's rotation-scaling block.",
+    sectionId: "pitfalls"
+  },
+  obj6: {
+    question: "Why can crystals not have fivefold symmetry?",
+    answer: "Because a rotation that maps a lattice onto itself has integer entries in a basis of lattice vectors, so its trace is an integer. In the plane its eigenvalues are $e^{\\pm i\\theta}$ and the trace is $2\\cos\\theta$, which must be one of $-2, -1, 0, 1, 2$. That leaves only 2-, 3-, 4- and 6-fold turns. A $72°$ turn would need $2\\cos 72° \\approx 0.618$, which is not an integer.",
+    sectionId: "3"
   }
 }
 
@@ -2294,6 +2337,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    rotateTable: ciRotateTable,
+  };
+
   const demoUnits = {
     rotation: demoUnitFrame({
       svg: complexEigenDiagrams.rotation,
@@ -2318,9 +2365,43 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj5): the running example's matrix in its real canonical form
+  const realCanonicalBeforeAfter = {
+    header: {
+      kicker: 'Real canonical form',
+      title: 'A rotation-scaling block',
+      lede: 'Instead of a diagonal matrix with complex entries, a real 2 × 2 block: a rotation by θ scaled by r.',
+    },
+    before: {
+      form: 'Standard basis',
+      expr: '$A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$',
+      meta: 'Eigenvalues 2 ± i',
+    },
+    after: {
+      form: 'Basis w, u',
+      expr: '$\\begin{pmatrix} 2 & -1 \\\\ 1 & 2 \\end{pmatrix}$',
+      meta: 'a = 2, b = 1, so r = √5, θ ≈ 26.6°',
+    },
+    operation: {
+      name: 'Change basis',
+      desc: 'P = [w u]: w = (1, 0), then u = (1, 1)',
+      detailsLabel: 'Imaginary part first',
+      detailsTitle: '',
+      details: 'Taking $P = [\\mathbf{u} \\; \\mathbf{w}] = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}$ gives $P^{-1}AP = \\begin{pmatrix} 2 & 1 \\\\ -1 & 2 \\end{pmatrix}$, a rotation the other way. With $P = [\\mathbf{w} \\; \\mathbf{u}] = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ the result is $\\begin{pmatrix} 2 & -1 \\\\ 1 & 2 \\end{pmatrix}$.',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'The basis: in the basis w, u the map reads as a rotation by θ ≈ 26.6° scaled by r = √5.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The map and its eigenvalues 2 ± i; every entry stays real.' },
+    ],
+  };
+
   return {
   props: {
+    realCanonicalBeforeAfter,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     spiralRegimes,
@@ -2342,6 +2423,7 @@ const schemas = {
 
 
   export default function ComplexEigenvaluesPage({
+    realCanonicalBeforeAfter,
     seoData,
     sectionsContent,
     introContent,
@@ -2349,10 +2431,74 @@ const schemas = {
     obj7Table,
     complexEigenvalues,
     faqQuestions,
-    schemas, demoUnits
+    schemas, demoUnits, conceptIntroFigures
   }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `An eigenvector is a direction that a matrix only stretches. Look for one in a rotation.`,
+        content: [
+          `Take $R = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$, the rotation by $90°$, and test a few vectors.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Every vector comes out at right angles to itself, so no real direction survives.`,
+        content: [
+          ciTable('rotateTable'),
+          `$Rv$ is always perpendicular to $v$, so it is never a multiple of $v$. Yet the equation $\\det(R - \\lambda I) = \\lambda^2 + 1 = 0$ still has solutions: $\\lambda = \\pm i$.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `The characteristic polynomial has no real roots, so the eigenvalues leave the real numbers.`,
+        content: [
+          `For a $2 \\times 2$ matrix, the discriminant of the characteristic polynomial determines the eigenvalue type:`,
+          `@academic[formula_callout:discriminant_classification_2x2|Discriminant Classification 2x2|$$\\Delta = \\text{tr}(A)^2 - 4\\det(A) \\quad \\begin{cases} \\Delta > 0: & \\text{two distinct real eigenvalues} \\\\ \\Delta = 0: & \\text{one repeated real eigenvalue} \\\\ \\Delta < 0: & \\text{complex conjugate pair} \\end{cases}$$]@
+@academic[formulas_link:/linear-algebra/formulas#discriminant_classification_2x2]@`,
+          `Complex eigenvalues appear in the $\\Delta < 0$ case: the quadratic formula produces $\\lambda = \\frac{\\text{tr}(A) \\pm \\sqrt{\\text{negative}}}{2}$, which involves $\\sqrt{-1} = i$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **complex eigenvalue** of a real matrix $A$ is a non-real root $\\lambda$ of its characteristic polynomial; it comes with a complex [eigenvector](!/linear-algebra/definitions#eigenvector) $v$ satisfying $Av = \\lambda v$.`,
+        formula: [
+          `A real matrix with real entries can have complex eigenvalues. This occurs when the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation) — a polynomial with real coefficients — has roots that are not real.`,
+        ],
+        footer: `So the $90°$ rotation has eigenvalues $\\pm i$, and $v = (1, -i)$ satisfies $Rv = iv$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Complex eigenvalues are the algebra's signal of rotation.`,
+        content: [
+          `The geometric interpretation is clear: no real direction in $\\mathbb{R}^2$ is mapped to a scalar multiple of itself. Every vector is rotated, not just stretched or compressed. The simplest example is [rotation](!/linear-algebra/transformations/geometric) by $90°$, with matrix $\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and characteristic polynomial $\\lambda^2 + 1 = 0$. The eigenvalues are $\\pm i$ — purely imaginary, reflecting pure rotation with no scaling.`,
+          <div key={'unit-noRealEigen'} dangerouslySetInnerHTML={{ __html: demoUnits.noRealEigen }} />,
+          `Complex eigenvalues are the algebra's way of reporting that the transformation turns every real direction.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `They come in pairs: a real matrix never has just one.`,
+        content: [
+          `The characteristic polynomial has real coefficients, so if $\\lambda = a + bi$ is a root, so is $\\bar{\\lambda} = a - bi$. For the rotation these are $i$ and $-i$. The pairing is the subject of [conjugate pairs](!/linear-algebra/eigen/complex#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, conjugate pairs, the 2×2 case in detail, complex eigenvectors, the real canonical form, larger matrices, dynamical systems, the link with the fundamental theorem of algebra, and a summary.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2360,9 +2506,7 @@ const schemas = {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-noRealEigen'} dangerouslySetInnerHTML={{ __html: demoUnits.noRealEigen }} />,
-          `Complex eigenvalues are the algebra's way of reporting that the transformation turns every real direction.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2381,6 +2525,11 @@ const schemas = {
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laEigenNotationSheet}
+            current={'/linear-algebra/eigen/complex'}
           />,
         ]
     },
@@ -2427,6 +2576,19 @@ const schemas = {
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="real-canonical-before-after"
+            title="The running example in real canonical form"
+            source="/linear-algebra/eigen/complex"
+            before={"The check the section sets up: the columns w and u of P turn A into its rotation-scaling block."}
+            after={"P⁻¹AP comes out as the block with a = 2 and b = 1, which confirms the eigenvector (1 + i, 1) found above."}
+          >
+            <BeforeAfter
+              data={realCanonicalBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

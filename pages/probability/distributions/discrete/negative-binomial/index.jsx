@@ -860,6 +860,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 
 export async function getStaticProps(){
 
@@ -1401,7 +1403,7 @@ The same stopping rule drives a classic puzzle told about the mathematician Stef
           read:`arrange the first k-minus-one trials; the last one is pinned as the r-th success`,
           means:`The coefficient's double shift is the formula's signature: the final trial **must** be the $r$-th success, so only the first $k{-}1$ trials are free to arrange, and only $r{-}1$ successes go among them — $\\binom{k-1}{r-1}$, not $\\binom{k}{r}$. The [failure abbreviation q](!/probability/distributions/discrete/binomial#15) compresses the tail as usual.`,
           cases:`The failures-counting convention wears a different coat: $\\binom{k+r-1}{k} p^r q^k$ — same pinned-last-trial logic, re-indexed so $k$ counts failures alone; the coefficient's shape (shifted top-and-bottom vs summed top) is itself a fingerprint of which convention is in force.`,
-          confusedWith:`The binomial's unshifted $\\binom{n}{k}$. Restoring the "missing" ones — writing $\\binom{k}{r}$ — counts arrangements where the last trial is a failure, sequences that never stop at $k$; the shift is the mathematics, not a typo.`,
+          confusedWith:`The binomial's unshifted $\\binom{n}{k}$. Restoring the "missing" ones — writing $\\binom{k}{r}$ — counts every arrangement of $r$ successes in $k$ trials, including those whose $r$-th success came earlier, sequences that never stop at $k$; the shift is the mathematics, not a typo.`,
         },
         {
           id:'shifted-support',
@@ -1527,6 +1529,12 @@ const negativeBinomialExplanations = {
   // live heading serves it. The trials-versus-failures ambiguity is
   // explained on the geometric page and only referenced here; what this page
   // owns is the shifted coefficient and the shifted support.
+  // FAQ pass 2026-10-31: kept all four; rewrote the end of the coefficient
+  // answer, which said C(k, r) counts sequences ending in a failure (it
+  // counts all of them, including those, as the pitfall box shows). Added
+  // where the name comes from (fact box in the PMF section) and Banach's
+  // matchboxes (fact box under Applications). No trials-or-failures mean
+  // question: the earlier pass left that ambiguity to the geometric page.
   const faqQuestions = {
     obj1: {
       question: "What is the difference between the binomial and negative binomial?",
@@ -1540,13 +1548,23 @@ const negativeBinomialExplanations = {
     },
     obj3: {
       question: "Why is the coefficient C(k−1, r−1) and not C(k, r)?",
-      answer: "Because the last trial is pinned. The k-th trial must be the r-th success, or the sequence would have stopped earlier — so only the first k−1 trials are free to arrange, and only r−1 successes go among them. Writing C(k, r) counts sequences ending in a failure, which never stop at k. The shift is the mathematics, not a typo.",
+      answer: "Because the last trial is pinned. The k-th trial must be the r-th success, or the sequence would have stopped earlier — so only the first k−1 trials are free to arrange, and only r−1 successes go among them. Writing C(k, r) also counts sequences whose r-th success came earlier, such as HHHTTT for the third head on flip six, which would have stopped before trial k. The shift is the mathematics, not a typo.",
       sectionId: "4"
     },
     obj4: {
       question: "Why does the negative binomial support start at r?",
       answer: "Because r successes need at least r trials — fewer is impossible, so the list opens at k = r and runs upward without bound. Summing the pmf from k = 0 instead feeds negative arguments into the binomial coefficient. Under the failures convention the list starts at 0, which is itself a fingerprint of which convention is in force.",
       sectionId: "15"
+    },
+    obj5: {
+      question: "Why is it called the negative binomial distribution?",
+      answer: "Because its probabilities are the terms of a binomial expansion with a negative exponent. With $q = 1 - p$, Newton's binomial series expands $(1 - q)^{-r}$ into an infinite sum, and multiplying each term by $p^r$ gives exactly the pmf values, one for each possible number of trials. The exponent $-r$ is the negative in the name, and since $(1 - q)^{-r} = p^{-r}$, the terms add up to $p^r \\cdot p^{-r} = 1$.",
+      sectionId: "4"
+    },
+    obj6: {
+      question: "What is Banach's matchbox problem?",
+      answer: "A puzzle about two boxes of $50$ matches, one in each pocket, with a pocket picked at random for every match. When a box is first found empty, the other still holds about $7$ matches on average, and it is empty too only about 8% of the time. A box is found empty on its $51$st pick, a negative binomial wait with $r = 51$ and $p = \\frac{1}{2}$, and a fair coin seldom splits the picks that evenly for so long.",
+      sectionId: "11"
     }
   }
 
@@ -1815,6 +1833,11 @@ export default function NegativeBinomialDistributionPage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probDistNotationSheet}
+            current={'/probability/distributions/discrete/negative-binomial'}
           />,
         ]
     },

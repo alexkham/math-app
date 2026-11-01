@@ -762,6 +762,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -985,6 +987,24 @@ export async function getStaticProps(){
 </table>
 `
 
+
+// Concept introduction (section 1, "What Are Properties of Operations?") —
+// template G, exclusion. Running instance: four true-sounding statements, only
+// one of which is a property. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its four passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciStatementsTable = ciTableOpen(['statement', 'true for every input?', 'what it is']) +
+  ciRow(['a + b = b + a', 'yes', 'a property of addition'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['a − b = b − a', 'no: 5 − 3 = 2, 3 − 5 = −2', 'false in general'], { shade: true, color: '#a4243b', cols: [1] }) +
+  ciRow(['3 + 5 = 8', 'about one computation only', 'a single fact']) +
+  ciRow(['multiply before you add', 'not a statement about results', 'a convention of notation'], { shade: true, last: true }) +
+  '</tbody></table>'
 
  const sectionsContent = {
  
@@ -1412,6 +1432,13 @@ const introContent = {
 // mechanisms sit in final paragraphs under headings that state only the rule.
 // The zero-inverse answer is deliberately the formal angle — the intuitive
 // version belongs to /arithmetic/fractions ("Why can't the denominator be zero?").
+// FAQ pass 2026-10-31: kept the four questions; this page owns the
+// zero-inverse question (its Inverse Elements section has the subheading),
+// so the copy on /complex-numbers/multiplicative-inverse is the one to drop.
+// Added grouping on a computer (fact box under Associative Property), 0 ÷ 0
+// (Brahmagupta fact box under Inverse Elements; the formal 5 ÷ 0 reason stays
+// in the zero-inverse answer), two negatives in a sum (pitfall under Sign
+// Rules) and 10 − 4 + 3 (pitfall under Subtraction as Inverse Addition).
 const faqQuestions = {
   obj1: {
     question: "Why is a negative times a negative a positive?",
@@ -1431,6 +1458,26 @@ const faqQuestions = {
   obj4: {
     question: "How are subtraction and division related to addition and multiplication?",
     answer: "Subtraction is defined as addition of an additive inverse: a − b is shorthand for a + (−b). Division is defined as multiplication by a multiplicative inverse: a ÷ b is shorthand for a · (1/b). Both are derived operations rather than primitive ones, which is why neither inherits commutativity or associativity — a − b is not b − a.",
+    sectionId: "10"
+  },
+  obj5: {
+    question: "Can changing the grouping change a sum on a computer?",
+    answer: "Yes. The associative property holds for exact numbers, but a computer rounds after every single addition, so the grouping decides which rounded partial sums are formed. In double precision $(10^{20} + (-10^{20})) + 1 = 1$, while $10^{20} + (-10^{20} + 1) = 0$: a stored number keeps only about $16$ significant digits, so $-10^{20} + 1$ rounds back to $-10^{20}$ and the $1$ is lost. Whole numbers or fractions written out in full have no such problem.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "What is 0 divided by 0?",
+    answer: "It is undefined, for a different reason than $5 \\div 0$. A quotient $q = 0 \\div 0$ would have to satisfy $q \\cdot 0 = 0$, and every number does, so no single value can be chosen; for $5 \\div 0$, no number works at all. Brahmagupta's rules of 628, the oldest known rules for computing with zero, declared $0 \\div 0 = 0$, but $0$ has no better claim to be the quotient than any other number.",
+    sectionId: "7"
+  },
+  obj7: {
+    question: "Do two negatives make a positive when you add them?",
+    answer: "No, that rule is about products. $(-3)(-4) = 12$, but $(-3) + (-4) = -7$: adding a negative number moves further down the number line, so the sum of two numbers below zero is also below zero. A debt of $3$ plus a debt of $4$ is a debt of $7$, never a gain. The slip comes from remembering the rule as a slogan without the word multiplying.",
+    sectionId: "9"
+  },
+  obj8: {
+    question: "Is 10 − 4 + 3 equal to 3 or 9?",
+    answer: "It is $9$. Subtraction and addition are done left to right, $(10 - 4) + 3 = 6 + 3 = 9$. Getting $3$ means computing $10 - (4 + 3)$, a regrouping that subtraction does not allow because it is not associative. Rewriting the subtraction as adding the opposite removes the trap: $10 + (-4) + 3$ has the terms $10$, $-4$ and $3$, which can be grouped in any way and still add to $9$.",
     sectionId: "10"
   },
 }
@@ -1511,6 +1558,10 @@ const schemas = {
     vlines: [{ x: 4.5, label: '' }],
     notes: [{ x: 2.5, y: 3.6, text: '3 · 4 = 12', pos: 'n', color: 'f' }, { x: 7, y: 3.6, text: '3 · 5 = 15', pos: 'n', color: 'r' }, { x: 5, y: 4.5, text: 'together: 3 · (4 + 5) = 27', pos: 'e' }],
     caption: 'Split the columns, count each part, add' };
+  const conceptIntroFigures = {
+    statementsTable: ciStatementsTable,
+  };
+
   const demoUnits = {
     distribArray: demoUnitFrame({
       svg: renderFunctionPlotV4(fpDistribArray),
@@ -1549,8 +1600,53 @@ const schemas = {
     ],
   };
 
+  // PropertySheet (obj2): operation-property-matrix
+  const operationPropertyMatrix = {
+    header: {
+      kicker: 'properties of operations',
+      title: 'Which operation has which property?',
+      lede: 'Addition and multiplication share every property; subtraction and division lose the first two.',
+    },
+    labels: { property: 'Property', notCovered: 'not on this page' },
+    verdicts: {
+      holds: { label: 'Holds', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+      conditional: { label: 'Conditional', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+      fails: { label: 'Fails', color: '#475569', bg: '#e2e8f0', mark: 'cross' },
+    },
+    subjects: [
+      { id: 'add', label: '$+$' },
+      { id: 'mul', label: '$\\times$' },
+      { id: 'sub', label: '$-$' },
+      { id: 'div', label: '$\\div$' },
+    ],
+    groups: [{ properties: [
+      { id: 'comm', name: 'Commutative', note: 'order does not matter', cells: {
+        add: { verdict: 'holds', text: '$a + b = b + a$' },
+        mul: { verdict: 'holds', text: '$a \\cdot b = b \\cdot a$' },
+        sub: { verdict: 'fails', text: '$7 - 4 \\neq 4 - 7$' },
+        div: { verdict: 'fails', text: '$7 \\div 4 \\neq 4 \\div 7$' },
+      } },
+      { id: 'assoc', name: 'Associative', note: 'grouping does not matter', cells: {
+        add: { verdict: 'holds', text: 'any grouping', detailsLabel: 'Check', details: ['$(2 + 3) + 5 = 10$', '$2 + (3 + 5) = 10$'] },
+        mul: { verdict: 'holds', text: 'any grouping', detailsLabel: 'Check', details: ['$(2 \\cdot 3) \\cdot 5 = 30$', '$2 \\cdot (3 \\cdot 5) = 30$'] },
+        sub: { verdict: 'fails', text: 'grouping matters', detailsLabel: 'Check', details: ['$(8 - 3) - 2 = 3$', '$8 - (3 - 2) = 7$'] },
+        div: { verdict: 'fails', text: 'grouping matters', detailsLabel: 'Check', details: ['$(12 \\div 6) \\div 2 = 1$', '$12 \\div (6 \\div 2) = 4$'] },
+      } },
+      { id: 'ident', name: 'Identity element', note: 'leaves every input unchanged', cells: {
+        add: { verdict: 'holds', text: '$a + 0 = a$' },
+        mul: { verdict: 'holds', text: '$a \\cdot 1 = a$' },
+      } },
+      { id: 'inv', name: 'Inverse element', note: 'undoes the operation', cells: {
+        add: { verdict: 'holds', text: '$a + (-a) = 0$' },
+        mul: { verdict: 'conditional', text: '$\\frac{1}{a}$, for $a \\neq 0$', detailsLabel: 'Why', details: '$0 \\cdot x = 0$ for every $x$, so no number multiplied by $0$ gives $1$: zero has no reciprocal, and division by zero is undefined.' },
+      } },
+    ] }],
+    footnote: 'Subtraction and division are derived operations: $a - b = a + (-b)$ and $\\frac{a}{b} = a \\cdot \\frac{1}{b}$. **Distributive** links the two main ones: $a(b + c) = ab + ac$.',
+  };
+
   return {
   props:{
+    operationPropertyMatrix,
     arithPropOutline,
      sectionsContent,
      introContent,
@@ -1561,6 +1657,7 @@ const schemas = {
      faqQuestions,
      schemas,
      demoUnits,
+     conceptIntroFigures,
      seoData: {
        title: "Properties of Arithmetic Operations | Learn Math Class",
        description: "Learn the properties of arithmetic operations: commutative, associative, distributive, identity, inverse, sign rules, and zero property explained with examples.",
@@ -1572,9 +1669,69 @@ const schemas = {
 }
    }
 
-export default function ArithmeticProperties({arithPropOutline, seoData, sectionsContent, introContent, obj5Table, obj9Table, obj12Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function ArithmeticProperties({operationPropertyMatrix, arithPropOutline, seoData, sectionsContent, introContent, obj5Table, obj9Table, obj12Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Four statements about arithmetic. Which of them is a property of an operation?`,
+        content: [
+          `$a + b = b + a$; $a - b = b - a$; $3 + 5 = 8$; and "multiply before you add".`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Only the first holds for every choice of numbers and describes how an operation behaves.`,
+        content: [
+          ciTable('statementsTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        kind: 'instance',
+        tone: 'break',
+        lead: `One fails for some inputs, one is about a single computation, and one is an agreement about notation.`,
+        content: [
+          `$3 + 5 = 8$ is true but says nothing about other numbers. The order of operations could have been agreed differently without changing what any operation does.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **property of an operation** is a statement about the operation that holds for every choice of inputs.`,
+        formula: [
+          `A property of an operation is a statement that holds for every choice of inputs. The expression $3 + 5$ equals $5 + 3$, and so does $-12 + 0.7$, and so does $\\frac{2}{9} + \\sqrt{11}$. The pattern — that the order of two addends does not affect the sum — is universal. That universality is what makes it a property.`,
+        ],
+        footer: `So $a + b = b + a$ is a property of addition, the commutative property, while $a - b = b - a$ is not a property of subtraction.`,
+      },
+      {
+        id: 'kind',
+        lead: `Properties are facts about how an operation behaves — not definitions, methods or conventions.`,
+        content: [
+          `Properties differ from definitions and from procedural rules. A definition introduces an object: what a [fraction](!/arithmetic/fractions) is, what a [prime number](!/arithmetic/divisibility#7) is. A procedural rule prescribes a method: how to add fractions, how to test [divisibility by 9](!/arithmetic/divisibility/rules). A property states a fact that the operation itself satisfies, independently of any specific computation.`,
+          `Properties are also distinct from conventions. The order of operations — multiply before add, evaluate parentheses first — is a convention agreed upon to disambiguate notation. The commutative property of addition is not a convention. It would remain true under any notational system, because it describes how addition behaves, not how it is written.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Properties are used constantly, usually without being named.`,
+        content: [
+          `The properties on this page are the foundation of arithmetic and algebra. Every manipulation in algebra — combining like terms, factoring, solving equations — relies on them. They are usually applied without being named, but they are always present.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the two main operations, the commutative, associative and distributive properties, identity and inverse elements, the zero property, sign rules, subtraction and division as inverse operations, why the properties matter, related concepts and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1590,7 +1747,7 @@ export default function ArithmeticProperties({arithPropOutline, seoData, section
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1599,6 +1756,16 @@ export default function ArithmeticProperties({arithPropOutline, seoData, section
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `The pairs this page goes through, in one grid: each property checked for all four operations, with the counterexamples the sections below use.`,
+          <DiagramFrame
+            key={'obj2-propsheet'}
+            id="operation-property-matrix"
+            title="Which operation has which property?"
+            source="/arithmetic/properties"
+          >
+            <PropertySheet data={operationPropertyMatrix} />
+          </DiagramFrame>,
+          `The two right-hand columns explain themselves once subtraction is read as adding $-b$ and division as multiplying by $\\frac{1}{b}$: rewritten that way, they borrow every property of [addition](!#10) and [multiplication](!#11), and the asymmetric shorthand is what loses the first two rows.`,
         ]
     },
     {

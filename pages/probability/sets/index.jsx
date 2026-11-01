@@ -507,6 +507,10 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennTwoSetDiagrams'
 import vennThreeSetDiagrams from '@/app/components/probability/venn-explorer/vennThreeSetDiagrams'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -669,6 +673,10 @@ export async function getStaticProps(){
   // Common Mistakes section flags. Proper vs improper subset defers to
   // /set-theory/subsets, and the continuous point-probability question to
   // probability-function/pdf, the dedicated page for densities.
+  // FAQ pass 2026-10-31: kept all three. Added "exactly one of A and B" as a
+  // set (the wrong working of the first worked mistake, {2, 5}) and the
+  // heart-or-king count (pitfall under How Sets Become Events); no heading
+  // asks either.
   const faqQuestions = {
     obj1: {
       question: "Does “A or B” mean union or intersection?",
@@ -684,6 +692,16 @@ export async function getStaticProps(){
       question: "Are sets in probability different from sets in set theory?",
       answer: "Same objects, different job. Set theory treats union, intersection and complement as abstract operations on arbitrary collections. Probability fixes the collections to be outcomes of an experiment, so the same operations acquire meanings: union becomes “at least one happens”, intersection “both happen”, complement “does not happen”. The machinery is borrowed unchanged; only the interpretation is new.",
       sectionId: "operations"
+    },
+    obj4: {
+      question: "How do you write “exactly one of A and B” as an event?",
+      answer: "As $(A \\setminus B) \\cup (B \\setminus A)$: the outcomes of $A$ outside $B$ together with those of $B$ outside $A$. It is the union with the overlap removed, $(A \\cup B) \\setminus (A \\cap B)$, and it matches the everyday exclusive “or”. On a die, with $A = \\{2, 4, 6\\}$ and $B = \\{4, 5, 6\\}$, it is $\\{2, 5\\}$ with probability $\\frac{1}{3}$, against $\\frac{2}{3}$ for the union.",
+      sectionId: "mistakes"
+    },
+    obj5: {
+      question: "What is the probability of drawing a heart or a king?",
+      answer: "$\\frac{16}{52} = \\frac{4}{13}$. “A heart or a king” is the union of the $13$ hearts and the $4$ kings, and the king of hearts belongs to both, so the union holds $13 + 4 - 1 = 16$ cards. Reading the “or” as an intersection leaves only the king of hearts, $\\frac{1}{52}$, and adding $13 + 4$ without the subtraction gives $\\frac{17}{52}$, counting that card twice.",
+      sectionId: "events"
     }
   }
 
@@ -755,6 +773,25 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section "definition", "What Is a Set in
+  // Probability?") — template F, two descriptions shown to agree. Running
+  // instance: statements about a die roll written as sets of faces. Old
+  // definition text is kept in sectionsContent.definition, unused; its four
+  // passages are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciDieSetsTable = ciTableOpen(['statement about the roll', 'as a set of faces', 'probability']) +
+    ciRow(['an even number', '{2, 4, 6}', '3/6']) +
+    ciRow(['at least 5', '{5, 6}', '2/6'], { shade: true }) +
+    ciRow(['any face at all', '{1, 2, 3, 4, 5, 6}', '6/6 = 1']) +
+    ciRow(['a 7', '∅, the empty set', '0'], { shade: true, last: true }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -888,38 +925,50 @@ Sets link directly to every major idea in probability. [Sample spaces](!/probabi
 
 
     notation:{
-  
       title:`Notation Used for Sets in Probability`,
-      content:`
-Notation Used for Sets in Probability
-
-Probability relies on a small collection of symbols to describe outcomes, events, and their relationships inside a sample space. These symbols come from set theory but gain specific meaning when applied to probability models. Here is the notation used most often:
-
-• { } — lists the outcomes inside a set  
-• $∈$ — indicates that an outcome belongs to a set  
-• $∉$ — indicates that an outcome does not belong to a set  
-• $⊆$ — shows that one set is contained inside another  
-• $⊂$ — strict subset (contained but not equal)  
-• $∪$ — union of two sets (either event occurs)  
-• $∩$ — intersection of two sets (both events occur)  
-• \\ — difference of sets (in one event but not the other)  
-• $∅$ — the empty set, containing no outcomes  
-• $Ω$ — the full sample space of all possible outcomes  
-• $Aᶜ$ or $A′$ — the complement of event A  
-• $(a, b), [a, b], (−∞, x]$ — intervals used for continuous outcomes  
-• $|A|$ — the number of elements in a finite set A
-
-These symbols allow us to write [events](!/probability/events) precisely, express how they relate to each other, and apply probability rules consistently.
-
-
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Probability Symbols and Notations](!/math-symbols/probability) →@
-      
-@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[See All Set Theory Symbols and Notations](!/math-symbols/set-theory) →@
-      
-`,
+      lead:`The symbols of set theory, read as statements about events — each operation on sets becomes a sentence about what happens on one trial. All are catalogued among the [probability symbols](!/math-symbols/probability) and the [set theory symbols](!/math-symbols/set-theory).`,
+      inherited:`Braces, $\\in$ and $\\notin$ come from [set basics](!/set-theory/basics#2); $\\subseteq$ and $\\subset$ from [subsets](!/set-theory/subsets#6); the operation symbols themselves from [set operations notation](!/set-theory/operations#notation); $\\Omega$ from [sample space notation](!/probability/sample-space#notation); $|A|$ from [cardinality](!/set-theory/cardinality#notation).`,
+      entries:[
+        {
+          id:'union-event',
+          tex:`$A \\cup B$`,
+          read:`A or B`,
+          means:`The event that at least one of $A$, $B$ happens — every outcome in $A$, in $B$, or in both.`,
+          cases:`On a die, with $A = \\{2, 4, 6\\}$ (even) and $B = \\{4, 5, 6\\}$ (greater than 3), $A \\cup B$ is "even or greater than 3": $\\{2, 4, 5, 6\\}$.`,
+          confusedWith:`The everyday exclusive "or". The union keeps the overlap: dropping $\\{4, 6\\}$ leaves $\\{2, 5\\}$ and a probability of $\\frac{2}{6}$ instead of $\\frac{4}{6}$, as **Common Mistakes and Misunderstandings** below works through.`,
+        },
+        {
+          id:'intersection-event',
+          tex:`$A \\cap B$`,
+          read:`A and B`,
+          means:`The event that both $A$ and $B$ happen — the outcomes the two events share.`,
+          cases:`With the same die events, $A \\cap B$ is "even and greater than 3": $\\{4, 6\\}$.`,
+          confusedWith:`The union. Treating "A or B" as "A and B" is one of the most common slips when sets are first read as events.`,
+        },
+        {
+          id:'complement-event',
+          tex:`$A^c$`,
+          read:`not A — the complement of A`,
+          means:`The event that $A$ does not happen: every outcome of the sample space $\\Omega$ that is not in $A$.`,
+          cases:`For $A = \\{2, 4, 6\\}$ on a die, $A^c$ is "odd": $\\{1, 3, 5\\}$.`,
+          alsoWritten:`$A'$`,
+          confusedWith:`A complement taken within part of the problem. The complement is always relative to the whole sample space $\\Omega$, not to the outcomes currently in view.`,
+        },
+        {
+          id:'difference-event',
+          tex:`$A \\setminus B$`,
+          read:`A but not B`,
+          means:`The outcomes that belong to $A$ but not to $B$ — the event that $A$ happens and $B$ does not.`,
+          cases:`With the same die events, $A \\setminus B$ is "even but not greater than 3": $\\{2\\}$.`,
+          confusedWith:`The complement. $A \\setminus B$ removes only $B$ from $A$; $A^c$ removes $A$ from the whole sample space.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/probability`,
+      symbolsLabel:`All probability symbols`,
+      parentHref:`/probability`,
+      parentLabel:`Probability`,
       before:``,
       after:``,
-  
     },
 
     summary:{
@@ -953,6 +1002,10 @@ Probability starts with sets. Before we talk about events, sample spaces, random
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    dieSetsTable: ciDieSetsTable,
+  };
+
   const demoUnits = {
     u_operations_0: demoUnitFrame({
       svg: vennTwoSetDiagrams.intersectionSelected,
@@ -970,9 +1023,11 @@ Probability starts with sets. Before we talk about events, sample spaces, random
     }),
   };
 
+
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -999,10 +1054,72 @@ export default function SetsInProbabilityPage({
   schemas,
   operationsTable,
   mistakesTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "definition" concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `"Roll an even number" is a sentence. To give it a probability, it helps to say exactly which outcomes it covers.`,
+        content: [
+          `A die has six faces, and each statement about the roll is true for some of them and false for the rest.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Every statement about a die roll picks out a collection of faces.`,
+        content: [
+          ciTable('dieSetsTable'),
+          `Once the collection is written down, the probability for a fair die is a count: the faces in the collection over $6$.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `The words and the set say the same thing; the set is what can be counted and combined.`,
+        content: [
+          `In set theory, a set is an abstract collection of objects with no context attached. In probability, a set always describes "what can happen" when an experiment is run. Its elements are outcomes, and these sets help us form events, define sample spaces, and build probability models.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **set** in probability is a collection of possible outcomes of a random experiment.`,
+        formula: [
+          `A set in probability is simply a collection of possible outcomes of a random experiment. It plays the same structural role as a set in mathematics, but the focus is different.`,
+          `**Examples**:
+•  {H, T}  — the outcomes of a coin toss
+• {1, 2, 3, 4, 5, 6} — the outcomes of a die roll
+• intervals like $[0, 5]$ — possible values of a continuous measurement`,
+        ],
+        footer: `So "an even number" on a die is the set $\\{2, 4, 6\\}$, with probability $\\frac{3}{6} = \\frac{1}{2}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Sets are the language in which outcomes, events and models are written.`,
+        content: [
+          `In probability, sets are not abstract objects — they are the language we use to describe outcomes, events, and everything built on top of them.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A set records which outcomes are included — not their order, and not how often they are listed.`,
+        content: [
+          `$\\{2, 4, 6\\}$ and $\\{6, 2, 4, 4\\}$ are the same set. Experiments in which order matters need outcomes that record it, such as ordered pairs. How sets turn into events is set out in [how sets become events](!/probability/sets#events).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, why sets matter, the types of sets used, the core operations, how sets become events, sets inside probability models, common mistakes and connections to other concepts.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1019,7 +1136,7 @@ export default function SetsInProbabilityPage({
         title:sectionsContent.definition.title,
         link:'',
         content:[
-          sectionsContent.definition.content,
+          <ConceptIntro key={'definition-intro'} data={conceptIntro} />,
         ]
     },
      {
@@ -1027,7 +1144,23 @@ export default function SetsInProbabilityPage({
         title:sectionsContent.notation.title,
         link:'',
         content:[
-          sectionsContent.notation.content,
+          <NotationSection
+            key={'notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probEventsNotationSheet}
+            current={'/probability/sets'}
+          />,
         ]
     },
     {

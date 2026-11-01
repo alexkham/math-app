@@ -1373,6 +1373,8 @@ import complexDivisionDiagrams from '@/app/components/calculators/complex-number
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 
@@ -2409,26 +2411,39 @@ How to check: multiply the answer by the denominator; it must give the numerator
 }
 
 
+// FAQ pass 2026-10-31: cut the conjugate-formula question (h2 "Why the
+// Formula Works"), the geometric-meaning question (h2 "Geometric
+// Interpretation") and the zero question (h2 "Why Zero Has No Multiplicative
+// Inverse"; arithmetic/properties owns it); keys renumbered. Kept the inverse
+// of a product. Added inverting part by part (section 2 opening), numbers
+// that are their own inverse and the parentheses in (3 + 2i)^-1 (notation
+// section and its figure) and 1/0 on the sphere (fact box in the zero
+// section).
 const faqQuestions = {
   obj1: {
-    question: "Why does the formula for the inverse of a complex number use the conjugate?",
-    answer: "Because a number times its conjugate is real, which clears i out of the denominator. Multiplying top and bottom of one over z by the conjugate leaves the value unchanged while turning the bottom into the squared modulus, a plain real number the components can then be divided by.",
-    sectionId: "3"
-  },
-  obj2: {
-    question: "What is the geometric meaning of the multiplicative inverse?",
-    answer: "It inverts the distance and negates the angle. A point twice as far from the origin has an inverse half as far, and the inverse sits on the opposite side of the real axis. Points on the unit circle are the exception: their inverse is simply their conjugate, since the distance is already one.",
-    sectionId: "5"
-  },
-  obj3: {
-    question: "Why does zero have no multiplicative inverse?",
-    answer: "Because the defining requirement is that a number times its inverse gives one, and zero times anything is zero. No complex number can rescue that. The formula shows the same obstruction from another angle: it divides by the squared modulus, which is zero exactly when the number is zero.",
-    sectionId: "8"
-  },
-  obj4: {
     question: "What is the inverse of a product?",
     answer: "The product of the inverses, in either order, since complex multiplication commutes. This mirrors the real case and follows from the moduli multiplying and the arguments adding, so inverting reverses both. It is what makes dividing by a product the same as dividing by each factor in turn. Try it on the [division explorer](!/complex-numbers/visual-tools/division).",
     sectionId: "6"
+  },
+  obj2: {
+    question: "Is $\\frac{1}{3 + 4i}$ equal to $\\frac{1}{3} + \\frac{1}{4}i$?",
+    answer: "No. Inverting each part on its own gives $(3 + 4i)\\left(\\frac{1}{3} + \\frac{1}{4}i\\right) = \\frac{25}{12}i$, not $1$. A sum cannot be inverted piece by piece, just as $\\frac{1}{2 + 3}$ is $\\frac{1}{5}$ and not $\\frac{1}{2} + \\frac{1}{3}$. The inverse has to be found for the number as a whole: $\\frac{1}{3 + 4i} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$.",
+    sectionId: "2"
+  },
+  obj3: {
+    question: "Which complex numbers are their own multiplicative inverse?",
+    answer: "Only $1$ and $-1$. A number with $z \\cdot z = 1$ solves $z^2 = 1$, whose only roots are $\\pm 1$. Every other point of the unit circle keeps its distance from the origin under inversion but moves: there $z^{-1} = \\bar{z}$, its mirror image across the real axis, so $i$ goes to $-i$. Points inside the unit circle have inverses outside it, and points outside have inverses inside.",
+    sectionId: "4"
+  },
+  obj4: {
+    question: "Can $\\frac{1}{0}$ be defined as infinity for complex numbers?",
+    answer: "Yes, at a cost. Complex analysis often adds one point $\\infty$, sets $\\frac{1}{0} = \\infty$, and draws the result as a sphere with $\\infty$ at the top. On that sphere $z \\mapsto \\frac{1}{z}$ is a half-turn about the axis through $1$ and $-1$, swapping $0$ and $\\infty$. The extended system is not a field, though: $0 \\cdot \\infty$ stays undefined, so ordinary algebra does not extend to $\\infty$.",
+    sectionId: "8"
+  },
+  obj5: {
+    question: "Why does $(3 + 2i)^{-1}$ need parentheses?",
+    answer: "Because without them the exponent applies only to the $i$. $3 + 2i^{-1}$ means $3 + 2 \\cdot \\frac{1}{i} = 3 + 2(-i) = 3 - 2i$, a different number, while $(3 + 2i)^{-1} = \\frac{3 - 2i}{13}$. The slash sets the same trap in typed work: $1/3 + 2i$ means $\\frac{1}{3} + 2i$, so an inverse typed on one line is written $1/(3 + 2i)$.",
+    sectionId: "4"
   }
 }
 
@@ -2786,6 +2801,11 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/multiplicative-inverse'}
           />,
                   <div key={'unit-geom'} dangerouslySetInnerHTML={{ __html: demoUnits.geom }} />,
           `Points inside the unit circle have inverses outside it, and the circle itself maps onto itself, although only 1 and -1 stay in place.`,

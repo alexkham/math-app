@@ -1542,6 +1542,7 @@ import negativeAngleDiagrams from '@/app/components/trigonometry/identities/nega
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 export async function getStaticProps(){
 
@@ -1680,6 +1681,26 @@ Inverse trigonometric identities like $\\sin^{-1}(x) + \\cos^{-1}(x) = \\frac{\\
   </tbody>
 </table>
 `
+
+  // Concept introduction (section "definition", "Definition-based
+  // Identities") — template G, exclusion. Running instance: six angle
+  // equations tested at 30° and 60°; four are identities. The section's
+  // before text, ExpandableTable and after text are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciAngleTable = ciTableOpen(['equation', 'at θ = 30°', 'at θ = 60°', 'true for every angle?']) +
+    ciRow(['A: tan θ = sin θ / cos θ', '0.577 = 0.577', '1.732 = 1.732', 'yes'], { color: '#2563EB', cols: [3] }) +
+    ciRow(['B: sin θ = 1/2', '0.5 = 0.5', '0.866 ≠ 0.5', 'no'], { shade: true }) +
+    ciRow(['C: sin²θ + cos²θ = 1', '1 = 1', '1 = 1', 'yes'], { color: '#2563EB', cols: [3] }) +
+    ciRow(['D: sin 2θ = 2 sin θ', '0.866 ≠ 1', '0.866 ≠ 1.732', 'no'], { shade: true }) +
+    ciRow(['E: cot θ = cos θ / sin θ', '1.732 = 1.732', '0.577 = 0.577', 'yes'], { color: '#2563EB', cols: [3] }) +
+    ciRow(['F: sin(θ + 90°) = cos θ', '0.866 = 0.866', '0.5 = 0.5', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+    '</tbody></table>'
 
   const sectionsContent={
     obj0: {
@@ -2473,13 +2494,13 @@ How to check: try $\\theta = 90^\\circ$. The wrong rule gives $\\sin 180^\\circ 
             {
               id: 62,
               law: "Half Angle for Sine",
-              formula: "sin²(θ) = (1 − cos(2θ)) / 2",
+              formula: "sin(θ/2) = ±√[(1 − cos(θ)) / 2]",
               explanation: "Derived from cosine double angle identity"
             },
             {
               id: 63,
               law: "Half Angle for Cosine",
-              formula: "cos²(θ) = (1 + cos(2θ)) / 2",
+              formula: "cos(θ/2) = ±√[(1 + cos(θ)) / 2]",
               explanation: "Derived from cosine double angle identity"
             },
             {
@@ -2677,6 +2698,10 @@ How to check: try $\\theta = 90^\\circ$. The wrong rule gives $\\sin 180^\\circ 
       // panel + tool link, one frame. Rendered as content-array items.
       const shiftFrames = shiftIdentityDiagrams()
       const tripleFrames = tripleAngleDiagrams()
+      const conceptIntroFigures = {
+        angleTable: ciAngleTable,
+      };
+
       const demoUnits = {
         shiftQuarterTurn: demoUnitFrame({
           svg: shiftFrames['sin:halfPi'],
@@ -2748,6 +2773,15 @@ How to check: try $\\theta = 90^\\circ$. The wrong rule gives $\\sin 180^\\circ 
 // Section headings already own "what are Pythagorean identities" and the like,
 // so these target the gaps: proving, notation traps, sign choice, and what to
 // actually memorise.
+// FAQ pass 2026-10-31: cut "Why does sin²θ mean (sin θ)² but sin⁻¹θ does not
+// mean 1/sin θ?" (same question as "What is the difference between sin⁻¹(x)
+// and 1/sin(x)?", owned by /trigonometry/inverse-functions, whose notation
+// section answers it); keys renumbered. Kept the other five. Added testing
+// angles versus proof (the
+// sentence under the opening table of "Definition-based Identities"), the
+// three cos 2θ forms (Read more under "Double Angle Identities"), beats (fact
+// box in "Sum-to-Product Identities") and multiplying with cosines before
+// logarithms (fact box in "Product-to-Sum Identities").
 const faqQuestions = {
   obj1: {
     question: "How do you prove a trigonometric identity?",
@@ -2765,19 +2799,34 @@ const faqQuestions = {
     sectionId: "pythagorean"
   },
   obj4: {
-    question: "Why does sin²θ mean (sin θ)² but sin⁻¹θ does not mean 1/sin θ?",
-    answer: "The superscript is doing two different jobs. A positive exponent applies to the output, so sin²θ is the value squared. The exponent −1 is reserved for the inverse function instead, meaning the angle whose sine is that value. The reciprocal 1/sin θ has its own name: cosecant. See the [inverse function notation note](!/trigonometry/inverse-functions).",
-    sectionId: "pythagorean"
-  },
-  obj5: {
     question: "How do you choose the sign in a half-angle formula?",
     answer: "The formula supplies both signs and the quadrant decides which one applies. Halve the original angle first, locate the result on the circle, then take the sign that the function actually has in that quadrant. Sine is positive in quadrants one and two, cosine in one and four. Step through it on the [half-angle explorer](!/trigonometry/visual-tools/half-angle-identities).",
     sectionId: "half"
   },
-  obj6: {
+  obj5: {
     question: "Which trigonometric identities should you memorise?",
     answer: "Four groups carry almost everything: the reciprocal definitions, the three Pythagorean identities, and the sum and difference formulas for sine and cosine. Double angle, half angle, and power reducing all follow from the sum formulas by substitution, so they can be rebuilt rather than memorised. Product-to-sum and triple angle are worth looking up when needed.",
     sectionId: "summary"
+  },
+  obj6: {
+    question: "Can checking a few angles prove a trigonometric identity?",
+    answer: "No, but one failed angle is enough to disprove one. An equation can hold at the angles tested and still fail elsewhere: $\\sin\\theta = \\frac{1}{2}$ is true at $30^\\circ$ and false at $60^\\circ$. A single counterexample settles the other direction, as $\\sin 2\\theta = 2\\sin\\theta$ already fails at $30^\\circ$, giving $0.866$ against $1$. A proof has to transform one side into the other using identities that hold for every angle.",
+    sectionId: "definition"
+  },
+  obj7: {
+    question: "Why are there three formulas for cos 2θ?",
+    answer: "Because $\\sin^2\\theta + \\cos^2\\theta = 1$ lets one formula be rewritten two ways. Starting from $\\cos 2\\theta = \\cos^2\\theta - \\sin^2\\theta$, replacing $\\sin^2\\theta$ by $1 - \\cos^2\\theta$ gives $2\\cos^2\\theta - 1$, and replacing $\\cos^2\\theta$ gives $1 - 2\\sin^2\\theta$. All three give the same value: with $\\sin\\theta = \\frac{3}{5}$ and $\\cos\\theta = \\frac{4}{5}$ each one returns $\\frac{7}{25}$. Use the form that needs only what is known.",
+    sectionId: "double"
+  },
+  obj8: {
+    question: "Why do two slightly out-of-tune notes make a beating sound?",
+    answer: "Because their sum is a product. By the sum-to-product identity, notes of $440$ and $444$ hertz played together give $2\\cos(4\\pi t)\\sin(884\\pi t)$: a single $442$-hertz tone whose loudness is controlled by the slow factor $\\cos(4\\pi t)$. That factor swells and fades $4$ times a second, the difference of the two frequencies. Piano tuners count these beats and turn the peg until they stop.",
+    sectionId: "sum-product"
+  },
+  obj9: {
+    question: "How did astronomers multiply numbers with cosines before logarithms?",
+    answer: "They used the product-to-sum identity $\\cos a \\cos b = \\frac{1}{2}\\left(\\cos(a - b) + \\cos(a + b)\\right)$, as Tycho Brahe's observatory did in the 1580s. Each factor is read as a cosine from a table, so a multiplication becomes two look-ups, an addition and a halving. For $0.5 \\times 0.866$, take $a = 60^\\circ$ and $b = 30^\\circ$: the result is $\\frac{1}{2}(\\cos 30^\\circ + \\cos 90^\\circ) = 0.433$.",
+    sectionId: "product-sum"
   }
 }
 
@@ -2849,14 +2898,78 @@ const faqQuestions = {
             keyWords,
             summaryTable,
             demoUnits,
+            conceptIntroFigures,
 
         }
     }
 }
 
-export default function TrigoIdentitiesPage({trigIdentityOutline, trigIdentitiesData ,config ,sectionsContent,introContent, summaryTable, demoUnits, faqQuestions}) {
+export default function TrigoIdentitiesPage({trigIdentityOutline, trigIdentitiesData ,config ,sectionsContent,introContent, summaryTable, demoUnits, faqQuestions, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section "definition" concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six equations about an angle θ. Which of them are true whatever θ is?`,
+        content: [
+          `A: $\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}$ $\\quad$ B: $\\sin\\theta = \\frac{1}{2}$ $\\quad$ C: $\\sin^2\\theta + \\cos^2\\theta = 1$ $\\quad$ D: $\\sin 2\\theta = 2\\sin\\theta$ $\\quad$ E: $\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}$ $\\quad$ F: $\\sin(\\theta + 90°) = \\cos\\theta$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Testing two angles already separates them: A, C, E and F hold at both; B and D break.`,
+        content: [
+          ciTable('angleTable'),
+          `Two angles cannot prove that an equation always holds, but one failure is enough to show that it does not.`,
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `B is true for some angles only — it is an equation to solve. D looks plausible but doubling the angle does not double the sine.`,
+        content: [
+          `$\\sin\\theta = \\frac{1}{2}$ holds at $30°$ and fails at $60°$; its solutions are particular angles. The others in the "yes" rows hold because of how sine, cosine and tangent are defined, so they hold at every angle.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **trigonometric identity** is an equation between trigonometric expressions that holds for every angle at which both sides are defined.`,
+        formula: [
+          sectionsContent.definition.before,
+        ],
+        footer: `So A, C, E and F are trigonometric identities; B and D are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `Identities are rewriting rules, and the simplest ones come straight from the definitions of the functions.`,
+        content: [
+          <div key={51} style={{marginLeft:'50px',marginRight:'50px'}}>
+            <ExpandableTable key={1}
+              data={trigIdentitiesData["Definition-based Identities"]}
+              displayColumns={ ["law", "formula", "explanation"]}
+              copyableFields={["formula"]}
+              includedFields={ ["law", "formula", "explanation"]} />
+          </div>,
+          sectionsContent.definition.after,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `"Every angle" means every angle where both sides make sense.`,
+        content: `$\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}$ says nothing at $90°$, where $\\cos\\theta = 0$ and neither side exists. The next family, [reciprocal identities](!/trigonometry/identities#reciprocal), is built from these definitions.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the reciprocal, Pythagorean, triangle, even-odd, co-function and shift identities, and the double, half and triple angle formulas.`,
+      },
+    ],
+  }
 
   const identitiesSections=[
      {
@@ -2874,17 +2987,7 @@ export default function TrigoIdentitiesPage({trigIdentityOutline, trigIdentities
       title:sectionsContent.definition.title,
       link:'',
       content:[
-        sectionsContent.definition.before,
-         
-         <div key={51} style={{marginLeft:'50px',marginRight:'50px'}}>
-    <ExpandableTable key={1}
-    data={trigIdentitiesData["Definition-based Identities"]}
-     displayColumns={ ["law", "formula", "explanation"]}
-     copyableFields={["formula"]}
-     includedFields={ ["law", "formula", "explanation"]} />
-     </div> ,
-     sectionsContent.definition.after
-   
+        <ConceptIntro key={'definition-intro'} data={conceptIntro} />,
       ]
     },
     {

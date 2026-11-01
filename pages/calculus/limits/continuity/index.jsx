@@ -18,6 +18,8 @@ import functionLimitDiagrams from '@/app/components/functions/limit/functionLimi
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 
 
 export async function getStaticProps(){
@@ -877,10 +879,14 @@ Discontinuities occur when something fails. The function might be undefined at t
 // answers in its opening line, and the four discontinuity types, each with its
 // own heading. Invented three from the notation section, whose entries no
 // heading surfaces.
+// FAQ pass 2026-10-31: kept all three; rewrote obj1 in $math$ only because the
+// bracket in C[a,b] swallowed the sentence into its link label (same text).
+// Added the equator-temperature fact box (IVT section) and the fact box on
+// increasing functions (under "Jump Discontinuity"), neither asked by a heading.
 const faqQuestions = {
   obj1: {
     question: "What does f ∈ C[a,b] mean?",
-    answer: "It says f belongs to C[a,b], the set of all functions continuous on the closed interval [a, b]. The brackets are the interval’s own, not arguments to C. Writing it this way shrinks a theorem hypothesis from a sentence to one symbol. The same class is also written C⁰ — the bottom rung of the ladder C¹, C², …, C^∞, which counts [continuous derivatives](!/calculus/derivatives/higher-order#9).",
+    answer: "It says $f$ belongs to $C[a,b]$, the set of all functions continuous on the closed interval $[a, b]$. The brackets are the interval’s own, not arguments to $C$. Writing it this way shrinks a theorem hypothesis from a sentence to one symbol. The same class is also written $C^0$ — the bottom rung of the ladder $C^1, C^2, \\ldots, C^{\\infty}$, which counts [continuous derivatives](!/calculus/derivatives/higher-order#9).",
     sectionId: "notation"
   },
   obj2: {
@@ -892,6 +898,16 @@ const faqQuestions = {
     question: "Can you prove a function is continuous by substitution?",
     answer: "No — that reasoning runs in a circle. Evaluating a limit by substituting the point is something continuity licenses, not something that establishes it; substitution works precisely because the function is already known to be continuous there. To prove continuity, check the three conditions directly or cite a theorem, such as the continuity of polynomials or of sums and products of continuous functions.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Are there always two opposite points on the equator with the same temperature?",
+    answer: "Yes, at any moment, by the Intermediate Value Theorem. Let $g$ be the temperature at a point minus the temperature at the point opposite it. Going halfway round the equator swaps the two points, so $g$ turns into $-g$. A continuous function that is positive at one place and negative at another must be $0$ somewhere in between, and there the two opposite temperatures are equal.",
+    sectionId: "11"
+  },
+  obj5: {
+    question: "What kinds of discontinuity can an increasing function have?",
+    answer: "Only jumps. A function that never decreases has both one-sided limits at every point, so it cannot have an oscillating, infinite or removable discontinuity. It can jump at every fraction, but never at uncountably many points: each jump skips an interval of heights, the skipped intervals never overlap, and each one contains a fraction of its own. The floor function, which steps up at every integer, is the familiar example.",
+    sectionId: "6"
   }
 }
 
@@ -1213,6 +1229,11 @@ export default function ContinuityPage({seoData, sectionsContent, introContent, 
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={limitsNotationSheet}
+            current={'/calculus/limits/continuity'}
           />,
         ]
     },

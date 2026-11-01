@@ -622,6 +622,8 @@ import partitionVennDiagrams from '@/app/components/probability/conditional-prob
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 
 
 export async function getStaticProps(){
@@ -806,6 +808,10 @@ export async function getStaticProps(){
   // Replaced with the specific traps the notation section catalogues.
   // Independence vs disjointness defers to /probability/independence, and
   // the P(A, B) comma form to /probability/joint-probability.
+  // FAQ pass 2026-10-31: kept all five. Added the complement-of-the-condition
+  // trap (pitfall box and worked mistake, no heading asks it), the
+  // both-ways fact box under the formula, and the "at least one six" versus
+  // "first die is six" fact box under Common Patterns.
   const faqQuestions = {
     obj1: {
       question: "Is P(A|B) the same as P(B|A)?",
@@ -831,6 +837,21 @@ export async function getStaticProps(){
       question: "How do you condition on more than one event?",
       answer: "Stack the conditions on the right of the bar, joined by intersection: P(A | B ∩ C) is the probability of A once both B and C are assumed to have happened. The restricted world simply shrinks further. Everything on the right is treated as known; only what stands to the left is being measured.",
       sectionId: "notation"
+    },
+    obj6: {
+      question: "Do P(A|B) and P(A|not B) add up to 1?",
+      answer: "No, they are measured inside two different conditions, so nothing makes them sum to 1. With two dice, $P(\\text{first even} \\mid \\text{sum } 8) = \\frac{3}{5}$ and $P(\\text{first even} \\mid \\text{sum not } 8) = \\frac{15}{31}$, which add to $\\frac{168}{155}$. The pair that does sum to 1 is $P(A \\mid B) + P(A^c \\mid B)$. Across conditions the two values instead average back to $P(A)$, weighted by $P(B)$ and $P(B^c)$.",
+      sectionId: "mistakes"
+    },
+    obj7: {
+      question: "If B makes A more likely, does A make B more likely too?",
+      answer: "Yes, always, when both events have positive probability. $P(A \\mid B) > P(A)$ multiplies out to $P(A \\cap B) > P(A)\\,P(B)$, and so does $P(B \\mid A) > P(B)$, so the two statements are one inequality. With two dice, a sum of 8 raises the chance of an even first die from $\\frac{1}{2}$ to $\\frac{3}{5}$, and an even first die raises the chance of a sum of 8 from $\\frac{5}{36}$ to $\\frac{1}{6}$.",
+      sectionId: "formula"
+    },
+    obj8: {
+      question: "Why do “at least one die is a six” and “the first die is a six” give different answers?",
+      answer: "Because the two conditions keep different outcomes. “At least one six” keeps 11 of the 36 pairs, the last row and the last column, and only (6,6) among them is a double six, so the probability of two sixes is $\\frac{1}{11}$. “The first die is a six” keeps just the 6 pairs of one row, giving $\\frac{1}{6}$. The exact wording of the information fixes the restricted sample space, and with it the answer.",
+      sectionId: "patterns"
     }
   }
 
@@ -1359,6 +1380,11 @@ Under a different condition, a different set of outcomes remains. The probabilit
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probEventsNotationSheet}
+            current={'/probability/conditional-probability'}
           />,
         ]
     },

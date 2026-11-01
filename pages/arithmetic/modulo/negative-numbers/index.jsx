@@ -995,7 +995,7 @@ The remainder under this convention shares the sign of the dividend. A negative 
 
 obj4: {
   title: `Floored Division (Round Toward $-\\infty$)`,
-  content: `Under floored division, the quotient is rounded down — toward negative infinity, not toward zero. This guarantees a non-negative remainder.
+  content: `Under floored division, the quotient is rounded down — toward negative infinity, not toward zero. This guarantees a non-negative remainder. Rounding down is the floor function, explained on the [integer and fractional part](!/arithmetic/integer-part) page.
 
 @academic[example:Example
 For $(-7) \\bmod 3$: divide $-7 \\div 3 = -2.33\\ldots$. Floor to $q = -3$. Compute the remainder: $r = -7 - (3 \\times -3) = -7 + 9 = 2$. The result is $2$.]@
@@ -1208,6 +1208,10 @@ To try these cases with your own numbers, use the [modulo calculator](!/calculat
 // question's shape), "-1 and 2 same class" (no demand), and the JS-non-negative
 // and most-common-mistake questions (duplicates of kept answers). Kept the four
 // distinct programmer queries, two of them extended.
+// FAQ pass 2026-10-31: kept the four questions. Added why Python floors
+// (fact box under Which Convention Is Correct?), why old C compilers
+// disagreed (fact box under Truncated Division) and dropping the minus sign
+// (pitfall under The Problem).
 const faqQuestions = {
   obj1: {
     question: "What is (-7) mod 3?",
@@ -1228,6 +1232,21 @@ const faqQuestions = {
     question: "Why does array indexing fail with negative modulo?",
     answer: "Wrapping backward through a circular buffer relies on the remainder staying non-negative. In Python, (-1) % n = n-1, which correctly lands on the last element. In C, Java, or JavaScript, (-1) % n = -1 — an invalid index that throws or reads out of bounds. Code that steps backward must use ((index % n) + n) % n to guarantee a valid position.",
     sectionId: "10"
+  },
+  obj5: {
+    question: "Why did Python choose floored modulo?",
+    answer: "Because of clocks. Python's creator wanted $t \\bmod 86{,}400$ to give the time of day for a moment $t$ seconds after the start of 1970, including moments before it. At $t = -1$, floored division gives $86{,}399$, which is 23:59:59 on the last day of 1969, while truncation gives $-1$, which is no time of day at all. A floored remainder always lands in $\\{0, 1, \\ldots, n - 1\\}$, a valid position in the cycle.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Why did old C compilers disagree about (-7) % 3?",
+    answer: "Because the C standard left the choice open until 1999. Before C99, when an operand was negative, each compiler could decide whether integer division rounded toward zero or down, so $(-7) \\% \\; 3$ could legally print $-1$ on one machine and $2$ on another. C99 settled on truncation, the rule Fortran already followed, so modern C always gives $-1$.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "Can you drop the minus sign and take 7 mod 3 instead?",
+    answer: "No. Dropping the sign gives $7 \\bmod 3 = 1$, but $-7 - 1 = -8$ is not a multiple of $3$, so $1$ fails the division equation under both conventions. The answers are $-1$ (truncated) and $2$ (floored). The sign can only be carried in front under truncation, which rounds both $\\frac{7}{3}$ and $-\\frac{7}{3}$ toward zero: there $(-7) \\% \\; 3 = -(7 \\% \\; 3) = -1$, not $+1$.",
+    sectionId: "1"
   }
 }
 

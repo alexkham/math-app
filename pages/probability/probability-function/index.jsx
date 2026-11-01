@@ -727,6 +727,8 @@ import discretePmfDiagrams from '@/app/components/visualizations/probability/dis
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 
 
 export async function getStaticProps(){
@@ -916,6 +918,10 @@ export async function getStaticProps(){
   // distinctions this page owns, which the notation sections of six other
   // probability pages inherit from it. "Can a density exceed 1?" moved to
   // probability-function/pdf — the dedicated page for densities wins.
+  // FAQ pass 2026-10-31: kept all three. Added the random-chord paradox
+  // (fact box under symmetry) and the empirical PMF (data method), both in
+  // "Ways to Figure Out the Probability Function", which no heading asks.
+  // The two pitfalls stay with pmf and pdf, which already ask them.
   const faqQuestions = {
     obj1: {
       question: "What is the difference between PMF and PDF?",
@@ -931,6 +937,16 @@ export async function getStaticProps(){
       question: "Why are X and x written differently?",
       answer: "Because they are different objects, not one symbol in two sizes. Capital X is the random variable — the rule; lowercase x is a particular value it might take. The case carries the whole distinction, which is why P(x = x) collapses into a tautology and loses the question being asked. Observed data conventionally arrives lowercase, as x₁, …, xₙ.",
       sectionId: "notation"
+    },
+    obj5: {
+      question: "Can one random experiment have more than one fair probability function?",
+      answer: "Yes, when “at random” leaves room for choice. Ask how likely a random chord of a circle is to be longer than a side of the inscribed equilateral triangle. Picking two random endpoints on the circle gives $\\frac{1}{3}$, a random distance from the centre gives $\\frac{1}{2}$, and a random midpoint inside the disc gives $\\frac{1}{4}$. Each is a different symmetry, and so a different probability function (Bertrand, 1889).",
+      sectionId: "ways"
+    },
+    obj6: {
+      question: "What is an empirical PMF?",
+      answer: "A probability function estimated from data rather than derived from a model. Count how often each value appears among the observations and divide by the total number of observations. The relative frequencies are non-negative and add up to $1$, so they form a valid PMF. For continuous data the counterpart is a histogram or a smoothed curve, which serves as an estimated PDF.",
+      sectionId: "ways"
     }
   }
 
@@ -1572,6 +1588,11 @@ export default function ProbabilityFunctionPage({pmfPdfTree,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probRandomVarsNotationSheet}
+            current={'/probability/probability-function'}
           />,
         ]
     },

@@ -14,6 +14,7 @@ import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTes
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 
 
 export async function getStaticProps(){
@@ -371,6 +372,10 @@ How to check: substitute the answer into the original equation. $x = 8$ gives $\
 };
 
 
+// FAQ pass 2026-10-31: kept all four questions. Added the negative-output
+// confusion (pitfall box in "Range"), the two solutions of
+// log2(x^2 + 1) = 1 (only in the one-to-one figure card) and which
+// properties depend on the base (only in the property cards).
 const faqQuestions = {
   obj1: {
     question: "Why is the logarithm of a negative number undefined?",
@@ -391,6 +396,21 @@ const faqQuestions = {
     question: "Why does $\\log_a(a^x) = x$ hold for every $x$, but $a^{\\log_a(x)} = x$ only for $x > 0$?",
     answer: "Because the two compositions begin in different places. In $\\log_a(a^x)$ the exponential runs first and accepts any real $x$, handing the logarithm a positive number, so nothing is excluded. In $a^{\\log_a(x)}$ the logarithm runs first and demands a positive input, so $x \\leq 0$ never gets in. The restriction belongs to whichever function goes first.",
     sectionId: "7"
+  },
+  obj5: {
+    question: "Can a logarithm be negative?",
+    answer: "Yes. Only the argument has to be positive; the value of the logarithm can be any real number. For a base above $1$, every argument between $0$ and $1$ gives a negative logarithm: $\\log_{10}(0.01) = -2$, because $10^{-2} = 0.01$. So $\\log_2(x) = -3$ is not impossible; it has the solution $x = 2^{-3} = \\frac{1}{8}$, a positive argument.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "If logarithms are one-to-one, why does $\\log_2(x^2 + 1) = 1$ have two solutions?",
+    answer: "Because the one-to-one property is about $\\log_2$, not about the argument. Equating gives $x^2 + 1 = 2$, a valid step, but $x^2 + 1$ takes the same value at $x$ and $-x$, so both $x = 1$ and $x = -1$ solve it. The logarithm itself never turns back; the argument does, falling to its lowest value at $x = 0$ and rising again.",
+    sectionId: "4"
+  },
+  obj7: {
+    question: "Which properties of a logarithm depend on the base?",
+    answer: "Only two, and they are one fact seen twice. For $a > 1$ the logarithm increases and drops toward $-\\infty$ as $x \\to 0^+$; for $0 < a < 1$ it decreases and climbs toward $+\\infty$. The domain $(0, \\infty)$, the range $(-\\infty, \\infty)$, the one-to-one property, continuity and the inverse relationship with $a^x$ are the same for every base.",
+    sectionId: "log-function-properties"
   }
 }
 
@@ -531,8 +551,35 @@ const schemas = {
     ],
   };
 
+  // PropertySheet (obj8): log-function-properties
+  const logPropertyCards = {
+    header: {
+      kicker: 'logarithms',
+      title: 'Properties of the logarithmic function',
+      lede: 'Most of them hold for every base; two depend on whether the base is above or below 1.',
+    },
+    labels: { more: 'Consequence', detailsTitle: '' },
+    verdicts: {
+      always: { label: 'Every base', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+      base: { label: 'Depends on base', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+    },
+    groups: [{ properties: [
+      { id: 'dom', name: 'Domain', verdict: 'always', statement: '$x > 0$', note: 'the argument must be strictly positive',
+        details: 'Check that the argument is positive before accepting any solution.', link: { label: 'Domain', href: '/algebra/logarithms/properties#1' } },
+      { id: 'rng', name: 'Range', verdict: 'always', statement: '$(-\\infty, \\infty)$', note: 'every real value is reached' },
+      { id: 'mono', name: 'Monotonicity', verdict: 'base', statement: 'increasing for $a > 1$', condition: 'decreasing for $0 < a < 1$',
+        details: 'The direction of an inequality between logarithms is set by the base.', link: { label: 'Monotonicity', href: '/algebra/logarithms/properties#3' } },
+      { id: 'one', name: 'One-to-one', verdict: 'always', statement: '$\\log_a M = \\log_a N \\Rightarrow M = N$',
+        details: 'Drop matching logarithms to turn a logarithmic equation into an algebraic one.', link: { label: 'One-to-one property', href: '/algebra/logarithms/properties#4' } },
+      { id: 'cont', name: 'Continuity', verdict: 'always', statement: 'continuous on $(0, \\infty)$', note: 'no jumps, breaks or holes' },
+      { id: 'asym', name: 'Vertical asymptote', verdict: 'base', statement: '$x = 0$', condition: 'the sign of the infinity depends on the base', note: 'near 0 it drops toward $-\\infty$ when $a > 1$ and climbs toward $+\\infty$ when the base is below 1; the graph never touches the y-axis', link: { label: 'Asymptotic behavior', href: '/algebra/logarithms/properties#6' } },
+      { id: 'inv', name: 'Inverse of the exponential', verdict: 'always', statement: '$\\log_a(a^x) = x$, $a^{\\log_a x} = x$', note: 'switch between exponential and logarithmic form', link: { label: 'Inverse relationship', href: '/algebra/logarithms/properties#7' } },
+    ] }],
+  };
+
 return {
   props: {
+    logPropertyCards,
     logMonotonicityCases,
     sectionsContent,
     introContent,
@@ -555,7 +602,7 @@ return {
 // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PropertiesPage({logMonotonicityCases, 
+export default function PropertiesPage({logPropertyCards, logMonotonicityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -662,6 +709,16 @@ export default function PropertiesPage({logMonotonicityCases,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `The seven properties as cards, each marked by whether it holds for every base or depends on it.`,
+          <DiagramFrame
+            key={'obj8-propsheet'}
+            id="log-function-properties"
+            title="Properties of the logarithmic function"
+            source="/algebra/logarithms/properties"
+          >
+            <PropertySheet data={logPropertyCards} />
+          </DiagramFrame>,
+          `The two base-dependent properties are one fact seen twice: for $a > 1$ the logarithm rises and drops to $-\\infty$ near $0$; for $0 < a < 1$ it falls and climbs to $+\\infty$. Everything else, from the domain to the one-to-one property, works the same for every base.`,
         ]
     },
     {

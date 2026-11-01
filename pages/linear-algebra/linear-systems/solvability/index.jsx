@@ -1769,6 +1769,9 @@ import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/li
 import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/spanMembershipDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2119,6 +2122,23 @@ const solvabilityQuestions = {
 
 // formulas-injected: v1 | 2026-06-16 | 2 callouts (obj5 solvability_rank_criterion direct, obj10 solution_structure_decomposition direct)
 
+// Concept introduction (section 1, "The Two Questions") — template D,
+// comparison. Running instance: three look-alike 2 × 2 systems with one,
+// infinitely many and no solutions. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciThreeSystemsTable = ciTableOpen(['system', 'solutions', 'exists?', 'unique?']) +
+  ciRow(['x + y = 2, x − y = 0', 'only (1, 1)', 'yes', 'yes'], { color: '#2563EB', cols: [2, 3] }) +
+  ciRow(['x + y = 2, 2x + 2y = 4', 'every point of the line x + y = 2', 'yes', 'no'], { shade: true }) +
+  ciRow(['x + y = 2, x + y = 3', 'none', 'no', '—'], { last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Two Questions`,
@@ -2436,6 +2456,11 @@ How to check: set every parameter to $0$. The result must solve $A\\mathbf{x} = 
   content: `Two separate questions govern every linear system: does at least one solution exist, and if so, is that solution the only one? The rank of the coefficient matrix answers both. A single integer determines whether the system is inconsistent, uniquely solvable, or infinitely underdetermined — and characterizes the geometry of the solution set in each case.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added exactly two
+// solutions (fact box under "The Three Cases Combined"), a zero determinant
+// (pitfall box under "Square Systems"), full column rank without existence
+// (pitfall box under "The Uniqueness Condition") and the triangular prism
+// (one sentence under "Geometric Interpretation").
 const faqQuestions = {
   obj1: {
     question: "Does having more equations than unknowns mean there is no solution?",
@@ -2451,6 +2476,26 @@ const faqQuestions = {
     question: "What does \"inconsistent\" mean exactly?",
     answer: "That the solution set is empty, which is a precise verdict rather than a loose remark about the equations disagreeing. A system can look entirely reasonable and still be inconsistent. The visual tell during elimination is a row reading all zeros to the left of the bar with a nonzero entry to its right, asserting $0 = d$.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can a linear system have exactly two solutions?",
+    answer: "Not over the real numbers. If $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are different solutions, every point $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ is one too, since $A(\\mathbf{x}_2 - \\mathbf{x}_1) = \\mathbf{0}$, and each value of $t$ gives a new point. The argument needs infinitely many scalars: in arithmetic mod $2$, where $1 + 1 = 0$, the equation $x_1 + x_2 = 1$ has exactly the two solutions $(1, 0)$ and $(0, 1)$.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "Does a zero determinant mean the system has no solution?",
+    answer: "No. It means a solution, when one exists, is not unique; whether one exists depends on $\\mathbf{b}$. The system $x_1 + 2x_2 = 3$, $2x_1 + 4x_2 = 6$ has determinant $0$ and infinitely many solutions, $x_1 = 3 - 2t$, $x_2 = t$. Change the right-hand side to $(3, 5)$, which lies outside $\\text{Col}(A)$, and there is none. After finding $\\det(A) = 0$, compare $\\operatorname{rank}(A)$ with $\\operatorname{rank}([A \\mid \\mathbf{b}])$ to decide.",
+    sectionId: "6"
+  },
+  obj6: {
+    question: "Does $\\operatorname{rank}(A) = n$ guarantee a solution?",
+    answer: "No, it guarantees at most one. Full column rank leaves no free variables, so a solution cannot be shifted, but existence still depends on $\\mathbf{b}$. For $x_1 = 1$, $x_1 = 2$ the coefficient matrix has rank $1 = n$, yet reduction gives the row $[0 \\mid 1]$, so $\\operatorname{rank}([A \\mid \\mathbf{b}]) = 2$ and there is no solution. Full rank is enough on its own only for a square matrix, where it means $\\det(A) \\neq 0$.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "Can three planes have no common point when no two of them are parallel?",
+    answer: "Yes. Three planes in $\\mathbb{R}^3$ can be arranged like the sides of a triangular prism: each pair meets in a line, but the three lines are parallel, so no point lies on all three planes and the system is inconsistent. The planes $x = 0$, $y = 0$ and $x + y = 1$ do this; there $\\operatorname{rank}(A) = 2$ while $\\operatorname{rank}([A \\mid \\mathbf{b}]) = 3$.",
+    sectionId: "9"
   }
 }
 
@@ -2551,6 +2596,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    threeSystemsTable: ciThreeSystemsTable,
+  };
+
   const demoUnits = {
     cases: demoUnitFrame({
       svg: [linearSystemDiagrams.unique, linearSystemDiagrams.none, linearSystemDiagrams.infinite],
@@ -2640,6 +2689,7 @@ return {
     existenceCases,
     squareSystemCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     systemShapes,
@@ -2669,10 +2719,70 @@ export default function SolvabilityPage({existenceCases, squareSystemCases,
   obj10Table,
   solvabilityQuestions,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Solving a system seems to be one question: what is x?`,
+        content: [
+          `Before that question can be answered, two others have to be settled.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `Three systems that look alike have one solution, infinitely many, and none.`,
+        content: [
+          ciTable('threeSystemsTable'),
+          `The second system states the same equation twice; the third contradicts itself.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Whether a solution exists and whether it is the only one are separate questions.`,
+        content: [
+          `Existence: is there at least one vector $\\mathbf{x}$ satisfying $A\\mathbf{x} = \\mathbf{b}$? This asks whether $\\mathbf{b}$ lies in the [column space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$.`,
+          `Uniqueness: if a solution exists, is it the only one? This asks whether the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ is trivial.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A system $A\\mathbf{x} = \\mathbf{b}$ is [consistent](!/linear-algebra/definitions#consistent_system) when at least one solution exists; its solution is **unique** when no other vector satisfies it.`,
+        formula: [
+          `Given the system $A\\mathbf{x} = \\mathbf{b}$ with $A$ of size $m \\times n$, two logically independent questions arise.`,
+        ],
+        footer: `So the first system is consistent with a unique solution, the second is consistent without uniqueness, and the third is inconsistent.`,
+      },
+      {
+        id: 'kind',
+        lead: `Every linear system falls into exactly one of these three cases.`,
+        content: [
+          `The two questions are independent — existence can hold without uniqueness, and non-existence makes uniqueness moot. Both are answered by the [rank](!/linear-algebra/matrix/rank) of $A$.`,
+          `How rank sorts a system into its case is set out in [the three cases combined](!/linear-algebra/linear-systems/solvability#4).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `No linear system has exactly two solutions.`,
+        content: [
+          `If $\\mathbf{x}_1$ and $\\mathbf{x}_2$ both solve the system, so does every point $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ on the line through them. Two solutions always bring infinitely many.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the existence and uniqueness conditions, the three cases combined, the Rouché–Capelli theorem, square, overdetermined and underdetermined systems, the geometric picture, the structure of the solution set, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2680,7 +2790,7 @@ export default function SolvabilityPage({existenceCases, squareSystemCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -2699,6 +2809,11 @@ export default function SolvabilityPage({existenceCases, squareSystemCases,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSystemsNotationSheet}
+            current={'/linear-algebra/linear-systems/solvability'}
           />,
         ]
     },

@@ -964,6 +964,8 @@ import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/
 import renderComplexRootsV2 from '@/app/utils/illustrations/complex-numbers/plane/complexRoots.v2'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 
 
 // Surfaced on the /complex-numbers hub via buildSectionData extraction.
@@ -1626,31 +1628,44 @@ How to check: test $z = 0$ directly in the original equation whenever a factor o
   content: `The real numbers leave many polynomial equations unsolved — $x^2 + 1 = 0$ has no real answer, and neither does $x^4 + 4 = 0$. Complex numbers fill this gap completely. The Fundamental Theorem of Algebra guarantees that every non-constant polynomial equation has solutions in $\\mathbb{C}$, and the number of solutions matches the polynomial's degree exactly. This completeness makes the complex field the natural setting for polynomial theory.`
 }
 
+// FAQ pass 2026-10-31: cut three heading questions: "What is the
+// Fundamental Theorem of Algebra?", "What are Vieta's formulas?" and "How do
+// you solve z to the n equals w?" (h2s The Fundamental Theorem of Algebra,
+// Vieta's Formulas, Solving z^n = w; nth roots are also asked on
+// demoivre-theorem). Kept odd degree and multiplicity. Added roots that the
+// graph does not show (introduction), the square root of -3 + 4i (pitfall
+// under "Quadratic Equations with Complex Coefficients"), Gauss's proof (fact
+// box) and Newton's method on z^3 = 1 (fact box under "Applications").
 const faqQuestions = {
   obj1: {
-    question: "What is the Fundamental Theorem of Algebra?",
-    answer: "It states that every non-constant polynomial with complex coefficients has at least one complex root. Applied repeatedly it means a polynomial of degree n has exactly n roots when multiplicity is counted. This is what completes the number system: no polynomial equation ever demands a further extension beyond the complex numbers.",
-    sectionId: "2"
-  },
-  obj2: {
     question: "Why does every real polynomial of odd degree have a real root?",
     answer: "Because non-real roots of a real polynomial arrive in conjugate pairs, so they always account for an even count. An odd total therefore leaves at least one root unpaired, and an unpaired root must be its own conjugate, which means it is real. The argument needs no calculus at all.",
     sectionId: "5"
   },
-  obj3: {
-    question: "What are Vieta's formulas?",
-    answer: "They connect the coefficients of a polynomial to symmetric expressions in its roots: the sum of the roots, the sum of their pairwise products, and so on down to their full product. They let you answer questions about roots without finding them, which is often far quicker than solving the equation.",
-    sectionId: "4"
-  },
-  obj4: {
-    question: "How do you solve z to the n equals w?",
-    answer: "Convert w to polar form, take the nth root of its modulus, then divide its argument by n and add a full turn divided by n repeatedly to generate all n solutions. Attempting this in algebraic form means expanding an nth power, which is impractical beyond very small exponents.",
-    sectionId: "7"
-  },
-  obj5: {
+  obj2: {
     question: "What is root multiplicity?",
     answer: "The number of times a given root appears as a factor of the polynomial. A double root corresponds to a repeated factor and touches the axis without crossing in the real case. Multiplicity is what makes the count of roots match the degree exactly, rather than falling short when roots coincide.",
     sectionId: "3"
+  },
+  obj3: {
+    question: "If a polynomial's graph never touches the x-axis, does it have no roots?",
+    answer: "No, only no real roots. The graph of $y = p(x)$ is drawn over real $x$, so non-real roots never show on it: $y = x^2 + 1$ stays above the axis, yet $x^2 + 1 = 0$ has the roots $i$ and $-i$. Every polynomial of degree $n \\geq 1$ has $n$ roots in $\\mathbb{C}$, counted with multiplicity; the non-real ones have to be found by algebra or drawn in the complex plane instead.",
+    sectionId: "1"
+  },
+  obj4: {
+    question: "How do you find the square root of a complex number such as $-3 + 4i$?",
+    answer: "Look for $x + yi$ with $(x + yi)^2 = -3 + 4i$, which means $x^2 - y^2 = -3$ and $2xy = 4$. The solutions are $x = 1, y = 2$ and $x = -1, y = -2$, so the square roots are $\\pm(1 + 2i)$; indeed $(1 + 2i)^2 = 1 + 4i - 4 = -3 + 4i$. Splitting the root over the sum, as $\\sqrt{-3} + \\sqrt{4i}$, gives a number whose square is about $-7.90 + 8.90i$. The trigonometric form, with modulus $5$, leads to the same pair.",
+    sectionId: "6"
+  },
+  obj5: {
+    question: "Who proved the Fundamental Theorem of Algebra?",
+    answer: "Carl Friedrich Gauss gave the first proof that holds up in essence, in his 1799 doctoral thesis, written at 22; a gap in his argument was closed only in 1920. He stated the theorem without complex numbers: every real polynomial splits into real factors of degree one or two. That is the same statement, since pairing each non-real root with its conjugate produces exactly those quadratic factors.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "What happens when Newton's method is used on $z^3 = 1$?",
+    answer: "It reaches one of the three cube roots of unity from almost every starting point, but which one depends on the start in an intricate way. Colouring each starting point by the root it reaches splits the plane into three regions whose borders form a fractal, and every border point touches all three regions. With two roots the picture is simple: Cayley showed in 1879 that a straight line divides the plane between them.",
+    sectionId: "10"
   }
 }
 
@@ -1783,8 +1798,44 @@ const schemas = {
     }),
   };
 
+  // DecisionMaker + DecisionWalker (obj11): complex-equation-decision
+  const complexEquationDecision = {
+    header: {
+      kicker: 'equations in ℂ',
+      title: 'Which type of equation?',
+      lede: 'Locate the form; the method and the number of solutions come with it.',
+    },
+    start: 'quad',
+    nodes: {
+      quad: { question: 'Quadratic: az² + bz + c = 0?', hint: 'any complex coefficients', answers: [
+        { label: 'yes', to: 'formula' },
+        { label: 'no', to: 'power' },
+      ] },
+      power: { question: 'A pure power: zⁿ = w?', answers: [
+        { label: 'yes', to: 'roots' },
+        { label: 'no', to: 'conj' },
+      ] },
+      conj: { question: 'A power equal to the conjugate: zⁿ = z̄?', answers: [
+        { label: 'yes', to: 'match' },
+        { label: 'no', to: 'locus' },
+      ] },
+      locus: { question: 'Built from z and z̄?', hint: 'z + z̄ = k, z · z̄ = k, …', answers: [
+        { label: 'yes', to: 'translate' },
+        { label: 'no', to: 'general' },
+      ] },
+    },
+    outcomes: {
+      formula: { title: 'Quadratic formula', action: 'z = (−b ± √Δ)/(2a); for a complex Δ, find √Δ in trigonometric or exponential form', example: '2 solutions (1 repeated if Δ = 0)', link: { label: 'Complex coefficients', href: '/complex-numbers/equations-polynomials#6' } },
+      roots: { title: "De Moivre's root formula", action: 'write w in trigonometric or exponential form, then take the n roots', example: 'exactly n solutions for w ≠ 0, the corners of a regular n-gon', link: { label: 'Solving zⁿ = w', href: '/complex-numbers/equations-polynomials#7' } },
+      match: { title: 'Match moduli and arguments', action: 'write z = re^(iθ) and compare the two sides part by part', example: 'n + 2 solutions for n ≥ 2: the origin and n + 1 on the unit circle', link: { label: 'Solving zⁿ = z̄', href: '/complex-numbers/equations-polynomials#8' } },
+      translate: { title: 'Translate to a locus', action: 'rewrite as conditions on Re(z), Im(z) or |z|; intersect loci for systems', example: 'a line, a circle or an axis, or finitely many points when intersected', link: { label: 'Equations with conjugates', href: '/complex-numbers/equations-polynomials#9' } },
+      general: { title: 'Factor over ℂ', action: 'factor the polynomial, or use numeric methods', example: 'exactly n solutions, counted with multiplicity', tone: 'done', link: { label: 'Factoring over ℂ', href: '/complex-numbers/equations-polynomials#3' } },
+    },
+  };
+
   return {
   props:{
+    complexEquationDecision,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1807,7 +1858,7 @@ const schemas = {
    }
 
 
-export default function EquationsPolynomialsPage({
+export default function EquationsPolynomialsPage({complexEquationDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -2006,6 +2057,16 @@ export default function EquationsPolynomialsPage({
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `The table as a checklist. The special forms are checked first because each has a shortcut; a polynomial that matches none of them falls through to the general case.`,
+          <DiagramFrameV2
+            key={'obj11-decision'}
+            id="complex-equation-decision"
+            title="Which type of complex equation?"
+            source="/complex-numbers/equations-polynomials"
+          >
+            <DecisionBox data={complexEquationDecision} />
+          </DiagramFrameV2>,
+          `Every route ends with a count as well as a method. For a polynomial of degree $n$ the count is fixed in advance by the [Fundamental Theorem of Algebra](!#2): exactly $n$ solutions. Among the power equations, $z^n = \\bar{z}$ is the one whose count is not the power: it has $n + 2$ solutions for $n \\geq 2$.`,
         ]
     },
     {

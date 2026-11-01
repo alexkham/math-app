@@ -831,6 +831,10 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
 import changeBasisDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/change-basis/changeBasisDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 
 
 export async function getStaticProps(){
@@ -1065,6 +1069,27 @@ const keyWords = [
 // URL: /linear-algebra/vector-spaces/
 // (The hub itself functions as the basis page — there is no separate /basis child page)
 
+
+// Concept introduction (section 2, "Basis: Definition") — template G,
+// exclusion. Running instance: six sets of plane vectors A–F, three of them
+// bases for R². Old obj2 text is kept in sectionsContent.obj2, unused; its
+// formula box, formulas link, theorem box, five passages and the definition
+// demo frame with its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSortTable = ciTableOpen(['set', 'reaches every vector of the plane?', 'no spare vector?', 'basis?']) +
+  ciRow(['A', 'yes', 'yes', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['B', 'no — only the x-axis', 'yes', 'no'], { shade: true }) +
+  ciRow(['C', 'yes', 'no — (1, 1) = (1, 0) + (0, 1)', 'no']) +
+  ciRow(['D', 'no — only one line', 'no — (2, 4) = 2·(1, 2)', 'no'], { shade: true }) +
+  ciRow(['E', 'yes', 'yes', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['F', 'yes', 'yes', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1405,6 +1430,11 @@ const introContent = {
 
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added that a space
+// has many bases (one sentence under "Basis: Definition"), JPEG (fact box
+// under "The Standard Basis") and Bezier curves (fact box under "Other
+// Standard Bases"). Echelon columns vs original columns is left to
+// fundamental-spaces, n vectors in an n-dimensional space to dimension.
 const faqQuestions = {
   obj1: {
     question: "Is $[\\mathbf{v}]_{\\mathcal{B}}$ the same thing as $\\mathbf{v}$?",
@@ -1420,6 +1450,21 @@ const faqQuestions = {
     question: "Why is a basis written in script as $\\mathcal{B}$?",
     answer: "The typeface separates the set from the matrix built out of it. Script $\\mathcal{B}$ is a collection with members, while a plain $B$ is an array with columns, and the two carry the same data in different species. Conflating them produces expressions like $\\mathcal{B}\\mathbf{c}$, which multiplies a set by a vector and means nothing.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Does a vector space have only one basis?",
+    answer: "No. A nonzero real space has infinitely many bases: $\\{(1, 0), (0, 1)\\}$, $\\{(1, 1), (1, -1)\\}$ and $\\{(2, 1), (1, 3)\\}$ are three different bases of $\\mathbb{R}^2$. What every basis of a space shares is its size, here two vectors, and that common count is the dimension. Each basis gives a vector exactly one set of coordinates, but different bases give it different numbers.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "How does JPEG use a change of basis?",
+    answer: "It stores coordinates in a better basis instead of pixel values. An $8 \\times 8$ block of a grayscale photo is a vector in $\\mathbb{R}^{64}$, and its pixel values are its coordinates in the standard basis. JPEG rewrites the block in a basis of $64$ cosine patterns, where most of the coordinates are close to zero and can be rounded away, so far fewer numbers need to be kept.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "What basis is a Bézier curve written in?",
+    answer: "A cubic Bézier curve is a polynomial in $\\mathcal{P}_3$ written in the basis $(1 - t)^3$, $3t(1 - t)^2$, $3t^2(1 - t)$, $t^3$ instead of the monomials $1, t, t^2, t^3$. Its coordinates in that basis are the control points a designer drags in a font or drawing tool. Both lists are bases of the same four-dimensional space, so moving between them is an ordinary change of basis.",
+    sectionId: "6"
   }
 }
 
@@ -1498,6 +1543,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     definition: demoUnitFrame({
       svg: spanIndependenceDiagrams.independent,
@@ -1520,6 +1569,7 @@ const schemas = {
   return {
   props:{
     demoUnits,
+    conceptIntroFigures,
      sectionsContent,
      introContent,
      faqQuestions,
@@ -1591,7 +1641,80 @@ const standardBases = {
 }
 
 
-export default function BasisVectorSpacePage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits}) {
+export default function BasisVectorSpacePage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six sets of vectors in the plane. Which of them can serve as a coordinate system for R² — reaching every vector, with nothing extra?`,
+        content: [
+          `A: $\\{(1, 0), (0, 1)\\}$ $\\quad$ B: $\\{(1, 0)\\}$ $\\quad$ C: $\\{(1, 0), (0, 1), (1, 1)\\}$`,
+          `D: $\\{(1, 2), (2, 4)\\}$ $\\quad$ E: $\\{(1, 1), (1, -1)\\}$ $\\quad$ F: $\\{(2, 1), (1, 3)\\}$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Checking both demands settles it: A, E and F pass; B, C and D each fail one way or another.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `B has too few vectors, C has one too many, and D's two vectors point along the same line.`,
+        content: [
+          `B reaches only the multiples of $(1, 0)$. In C, $(1, 1)$ adds nothing that $(1, 0)$ and $(0, 1)$ cannot already make. In D, $(2, 4)$ is twice $(1, 2)$, so the pair still reaches only one line.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: enough vectors to reach everything, and none that the others already produce.`,
+        content: [
+          `The set is [linearly independent](!/linear-algebra/vector-spaces/linear-independence): no vector in the set can be written as a linear combination of the others. Equivalently, the only combination $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n = \\mathbf{0}$ is the trivial one with all scalars equal to zero.`,
+          `The set [spans](!/linear-algebra/vector-spaces/span) $V$: every vector in $V$ can be expressed as some linear combination of $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$.`,
+          `Independence means no vector in the basis is wasted. Spanning means no vector in $V$ is out of reach.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [basis](!/linear-algebra/definitions#basis) for a vector space $V$ is a set of vectors that is [linearly independent](!/linear-algebra/definitions#linear_independence) and [spans](!/linear-algebra/definitions#span) $V$.`,
+        formula: [
+          `A basis for a vector space $V$ is a set of vectors $\\mathcal{B} = \\{\\mathbf{v}_1, \\mathbf{v}_2, \\dots, \\mathbf{v}_n\\}$ that satisfies two conditions simultaneously:`,
+          `@academic[formula_callout:Basis Definition
+$$\\mathcal{B} = \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\text{ is a basis for } V \\iff \\begin{cases} \\mathcal{B} \\text{ is linearly independent} \\\\ \\text{Span}(\\mathcal{B}) = V \\end{cases}$$
+/linear-algebra/formulas#basis_definition]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `So A, E and F are bases for $\\mathbb{R}^2$; B, C and D are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `A basis sits exactly on the boundary between too few vectors and too many.`,
+        content: [
+          `@academic[rule_theorem_plain:A basis is a minimal spanning set — remove any element and the span shrinks.]@`,
+          `It is also a maximal independent set — add any vector from $V$ and independence breaks. These two characterizations are equivalent and place the basis at the exact boundary between "too few" and "too many."`,
+          <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
+          `Independence and spanning are therefore not two separate requirements to check but two ways the same set can fail.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A space has many bases, but every one of them has the same number of vectors.`,
+        content: `A, E and F are three different bases of $\\mathbb{R}^2$, each with two vectors; that common count is the [dimension](!/linear-algebra/vector-spaces/dimension). What a basis gives in return is one and only one way to write each vector, as [unique representation](!/linear-algebra/vector-spaces/basis#3) shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, unique representation, coordinates, the standard bases, finding, extending and reducing bases, change of basis, coordinates and isomorphism, and the fundamental subspaces.`,
+      },
+    ],
+  }
     
   const genericSections=[
     {
@@ -1607,9 +1730,7 @@ export default function BasisVectorSpacePage({seoData, sectionsContent, introCon
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-                  <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
-          `Independence and spanning are therefore not two separate requirements to check but two ways the same set can fail.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1628,6 +1749,11 @@ export default function BasisVectorSpacePage({seoData, sectionsContent, introCon
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laSpacesNotationSheet}
+            current={'/linear-algebra/vector-spaces/basis'}
           />,
         ]
     },

@@ -898,6 +898,9 @@ import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 
 
 export async function getStaticProps(){
@@ -1079,6 +1082,26 @@ export async function getStaticProps(){
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 2, "Algebraic Representation and the
+    // Complex Conjugate") — template E, widening. Running instance: quadratic
+    // equations with and without real solutions; x² − 2x + 5 = 0 has the
+    // complex solutions 1 ± 2i. Old obj2 text is kept in sectionsContent.obj2,
+    // unused; its four formula boxes, formulas link, pitfall aside, nine
+    // passages and the conj demo frame with its line are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciSolveTable = ciTableOpen(['equation', 'real solutions', 'solutions once i is allowed']) +
+      ciRow(['x² − 4 = 0', '−2, 2', '−2, 2']) +
+      ciRow(['x² + 1 = 0', 'none', '−i, i'], { shade: true }) +
+      ciRow(['x² + 4 = 0', 'none', '−2i, 2i']) +
+      ciRow(['x² − 2x + 5 = 0', 'none', '1 − 2i, 1 + 2i'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
       obj0: {
@@ -1516,6 +1539,11 @@ How to check: an equation $z^n = w$ with $w \\neq 0$ has exactly $n$ roots, spac
 }
 
 
+// FAQ pass 2026-10-31: kept the invention and real-numbers questions. Cut
+// the three-forms question (h2 "The Three Forms at a Glance") and the field
+// question (h2 "Complex Numbers as a Field"). Added multiplying triples (the
+// Hamilton fact box), C versus R^2 and negative squares (both only in the
+// notation cards).
 const faqQuestions = {
   obj1: {
     question: "Why were complex numbers invented?",
@@ -1528,14 +1556,19 @@ const faqQuestions = {
     sectionId: "1"
   },
   obj3: {
-    question: "What are the three forms of a complex number and when do you use each?",
-    answer: "Algebraic form a + bi suits addition and subtraction, where components combine directly. Trigonometric form uses modulus and argument and suits multiplication, division, and powers, since those become scaling and rotation. Exponential form compresses the trigonometric one and is preferred in calculus and engineering. All three describe the same number.",
-    sectionId: "10"
+    question: "Is there a number system that multiplies triples the way complex numbers multiply pairs?",
+    answer: "No, not one that keeps division. Any multiplication of triples $a + bi + cj$ that distributes over sums and real multiples has two nonzero factors whose product is $0$, so some numbers cannot be divided by. Hamilton searched for years before finding, in 1843, that four parts work: the quaternions. They keep division but give up commutativity, since their products depend on the order of the factors.",
+    sectionId: "5"
   },
   obj4: {
-    question: "What does it mean that the complex numbers form a field?",
-    answer: "It means the four arithmetic operations behave exactly as they do for real numbers: addition and multiplication are commutative and associative, multiplication distributes over addition, and every number except zero has a reciprocal. This guarantee is why ordinary algebraic manipulation carries over unchanged into the complex setting.",
-    sectionId: "5"
+    question: "Is the complex plane the same as $\\mathbb{R}^2$?",
+    answer: "As a set of points, yes: $a + bi$ is the point $(a, b)$, and adding complex numbers is the same as adding vectors in $\\mathbb{R}^2$. The difference is multiplication. $\\mathbb{R}^2$ has no rule for multiplying two points, while $\\mathbb{C}$ multiplies them using $i^2 = -1$ and divides by any nonzero one. Writing $\\mathbb{C}$ rather than $\\mathbb{R}^2$ says that this multiplication is in use.",
+    sectionId: "notation"
+  },
+  obj5: {
+    question: "Can the square of a complex number be negative?",
+    answer: "Yes. $i^2 = -1$ and $(2i)^2 = -4$: every nonzero pure imaginary number has a negative real square. Most squares are not even real, for example $(1 + i)^2 = 2i$. So the real-number rule $z^2 \\geq 0$ is false for $z = i$ and meaningless for $z = 1 + i$, since complex numbers cannot be ordered. It is one of the habits from real variables that fail silently once $z$ is complex.",
+    sectionId: "notation"
   }
 }
 
@@ -1625,6 +1658,10 @@ const faqQuestions = {
       { arg: 225, label: '(−1 − i)/√2' }, { arg: 315, label: '(1 − i)/√2' },
     ],
     captionLines: ['z⁴ + 1 = 0 has no real root, but exactly 4 complex roots —', 'one per degree, 90° apart on the unit circle, in two conjugate pairs'],
+  };
+
+  const conceptIntroFigures = {
+    solveTable: ciSolveTable,
   };
 
   const demoUnits = {
@@ -1719,6 +1756,7 @@ const faqQuestions = {
     numberSystemNest,
     complexFormTree,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj1Table,
@@ -1741,9 +1779,87 @@ const faqQuestions = {
     }
    }
 
-export default function ComplexNumbersBasicsPage({numberSystemNest, complexFormTree, seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function ComplexNumbersBasicsPage({numberSystemNest, complexFormTree, seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Real numbers solve x² − 4 = 0, but not x² + 1 = 0: no real number squares to a negative.`,
+        content: [
+          `The previous section added one new number, $i$, with $i^2 = -1$. The question is what numbers become available once $i$ is allowed to mix with the real numbers.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Equations with no real solutions get solutions of the form a real number plus a real multiple of i.`,
+        content: [
+          ciTable('solveTable'),
+          `The last solutions, $1 \\pm 2i$, are neither real nor pure imaginary: they have a real part, $1$, and an imaginary part, $\\pm 2$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [complex number](!/complex-numbers/definitions#complex_number) is a number $a + bi$ with $a$ and $b$ real and $i^2 = -1$; $a$ is its real part and $b$ its imaginary part.`,
+        formula: [
+          `Every complex number can be written in [algebraic form](!/complex-numbers/algebraic-form) (also called **standard form**):`,
+          `@academic[formula_callout:Algebraic Form
+$$z = a + bi$$
+/complex-numbers/formulas#algebraic_form]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+          `The variables $a$ and $b$ represent ordinary real numbers, while $i$ is the imaginary unit satisfying:`,
+          `@academic[formula_callout:Algebraic Representation and the Complex Conjugate
+$$i^2 = -1$$]@`,
+        ],
+        footer: `So $1 + 2i$ is a complex number with real part $1$ and imaginary part $2$, and it solves $x^2 - 2x + 5 = 0$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A complex number is a pair of real numbers, a and b, written as a single number.`,
+        content: [
+          `The letters $a$ and $b$ are conventional choices — using $x$ and $y$ or any other symbols works equally well. The symbols this section builds on — $i$, $Re(z)$, $Im(z)$, $\\bar{z}$ and the rest — are catalogued among the [complex number symbols](!/math-symbols/complex-numbers) with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.`,
+          `Mathematicians assigned names to these components. The value $a$ is called the **real part**, and the value $b$ is called the **imaginary part**:`,
+          `@academic[formula_callout:Algebraic Representation and the Complex Conjugate
+$$Re(z) = a \\quad \\text{and} \\quad Im(z) = b$$]@`,
+          `Note that the imaginary part is $b$ itself — a real number — not $bi$. The term "imaginary part" indicates which component of the number the value describes, not the nature of $b$ as a quantity.`,
+          `This representation provides the foundation for arithmetic, comparison, and manipulation of complex numbers. For a complete treatment of the [algebraic form](!/complex-numbers/algebraic-form), including equality conditions, conjugate identities, and classification theorems, see the dedicated page.`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost: every real number is a complex number with imaginary part 0.`,
+        content: [
+          `$-2$ is $-2 + 0i$, so the real solutions in the first row of the table are complex solutions too.`,
+          <div key={'unit-conj'} dangerouslySetInnerHTML={{ __html: demoUnits.conj }} />,
+          `For any $z = a + bi$, we construct its [conjugate](!/complex-numbers/complex-conjugate) by flipping the sign in front of $b$: thus $\\bar{z} = a - bi$. What does this operation actually do? On the [complex plane](!/complex-numbers/geometric-representation), it mirrors the point through the horizontal axis. Studying this picture makes the abstract definition concrete — the conjugate sits at equal distance from the real axis, but on the opposite side.`,
+          `Why does this matter? When $z$ meets $\\bar{z}$ through multiplication, something special occurs: $z \\cdot \\bar{z} = a^2 + b^2$, a value guaranteed to be real and non-negative. From here, two tests emerge for classification: if $z = \\bar{z}$, the number must be real; if $\\bar{z} = -z$, it must be pure imaginary.`,
+          `The conjugate operation carries deep significance throughout complex mathematics. It enables division by eliminating imaginary numbers from denominators. It connects directly to the modulus through the identity $|z|^2 = z \\cdot \\bar{z}$. It preserves arithmetic structure: the conjugate of a sum equals the sum of conjugates, and the conjugate of a product equals the product of conjugates. These properties make the conjugate indispensable for proofs, simplifications, and computations across every branch of complex analysis. A [dedicated section](!/complex-numbers/complex-conjugate) explores the conjugate in full detail — its properties, its geometric meaning, and its applications to solving equations and simplifying expressions.`,
+          `The conjugate is the one operation on this page that is a pure reflection.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The imaginary part is the real number b, sign included — not bi.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Dropping the sign of the imaginary part
+Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -5)$ up to $(4, 5)$, which is the conjugate. Written as $4 + (-5)i$, the number has $Im(z) = -5$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, arithmetic, the complex plane, the polar and exponential forms, and solving equations.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1775,9 +1891,7 @@ export default function ComplexNumbersBasicsPage({numberSystemNest, complexFormT
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-                  <div key={'unit-conj'} dangerouslySetInnerHTML={{ __html: demoUnits.conj }} />,
-          `The conjugate is the one operation on this page that is a pure reflection.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1796,6 +1910,11 @@ export default function ComplexNumbersBasicsPage({numberSystemNest, complexFormT
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={complexNotationSheet}
+            current={'/complex-numbers/basics'}
           />,
         ]
     },

@@ -699,6 +699,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -859,6 +860,27 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "What Is a Complex Fraction") —
+    // template G, exclusion. Running instance: six expressions A–F, four of
+    // them complex fractions, including the formula box's three. Old obj1 text
+    // is kept in sectionsContent.obj1, unused; its formula box, pitfall aside
+    // and four passages are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciSortTable = ciTableOpen(['expression', 'above the main bar', 'below the main bar', 'complex fraction?']) +
+      ciRow(['A', '1/2 — a fraction', '3', 'yes'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['B', '7', '8', 'no'], { shade: true }) +
+      ciRow(['C', '4', '2/5 — a fraction', 'yes'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['D', '3 + 5', '4', 'no — a sum, but no fraction'], { shade: true }) +
+      ciRow(['E', '3/4 — a fraction', '5/6 — a fraction', 'yes'], { color: '#2563EB', cols: [3] }) +
+      ciRow(['F', '1 + 1/2 — contains a fraction', '3', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+      '</tbody></table>'
 
     const sectionsContent={
 
@@ -1135,6 +1157,12 @@ How to check: multiply back. The answer times the denominator must give the nume
 }
 
 
+// FAQ pass 2026-10-31: kept the four questions; rewrote obj2's last sentence
+// (flipping both fractions does not give the inverted answer, only flipping
+// the dividend does). Added the main bar (pitfall under "What Is a Complex
+// Fraction"), the reciprocal of a sum (pitfall under "Complex Fractions with
+// Sums or Differences") and continued fractions (a sentence and the pi fact
+// box under "Nested Complex Fractions").
 const faqQuestions = {
   obj1: {
     question: "Which method is better, division or the LCD?",
@@ -1143,7 +1171,7 @@ const faqQuestions = {
   },
   obj2: {
     question: "Which fraction gets flipped when you divide?",
-    answer: "Only the divisor, never the dividend. In $\\frac{a}{b} \\div \\frac{c}{d}$ the second fraction turns over, so $\\frac{2}{3} \\div \\frac{4}{5}$ becomes $\\frac{2}{3} \\times \\frac{5}{4}$. Flipping the wrong one, or flipping both, gives an inverted answer that still looks plausible, which is what makes the error easy to miss.",
+    answer: "Only the divisor, never the dividend. In $\\frac{a}{b} \\div \\frac{c}{d}$ the second fraction turns over, so $\\frac{2}{3} \\div \\frac{4}{5}$ becomes $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{5}{6}$. Flipping the dividend instead gives $\\frac{3}{2} \\times \\frac{4}{5} = \\frac{6}{5}$, exactly the inverted answer, and it still looks plausible, which is what makes the error easy to miss.",
     sectionId: "7"
   },
   obj3: {
@@ -1155,6 +1183,21 @@ const faqQuestions = {
     question: "Is the answer finished once the stacked fractions are gone?",
     answer: "Usually not. Clearing the complex structure and reducing to simplest form are separate steps, and the first often leaves something that still reduces. Working $\\frac{3}{4} \\times \\frac{6}{5}$ gives $\\frac{18}{20}$, which looks done but is really $\\frac{9}{10}$. Always check the result for a common factor.",
     sectionId: "7"
+  },
+  obj5: {
+    question: "How do you tell which fraction bar is the main one?",
+    answer: "The main bar is the longest one, and it is the division done last. With the main bar under $\\frac{1}{2}$, $\\frac{\\frac{1}{2}}{3}$ is $\\frac{1}{2} \\div 3 = \\frac{1}{6}$; read as $1$ over $\\frac{2}{3}$, the same symbols give $\\frac{3}{2}$, a different number. Rewriting with brackets, $(1 \\div 2) \\div 3$ against $1 \\div (2 \\div 3)$, makes the grouping visible.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Is the reciprocal of a sum the sum of the reciprocals?",
+    answer: "No. $\\frac{1}{\\frac{1}{2} + \\frac{1}{3}}$ is not $2 + 3 = 5$: the denominator combines to $\\frac{5}{6}$ first, so the value is $\\frac{6}{5}$. Turning each piece over separately works only for a product, since $\\frac{1}{\\frac{1}{2} \\times \\frac{1}{3}} = 2 \\times 3 = 6$. A size check catches the slip: the denominator lies between $\\frac{1}{2}$ and $1$, so the value must lie between $1$ and $2$.",
+    sectionId: "4"
+  },
+  obj7: {
+    question: "What is a continued fraction?",
+    answer: "A fraction nested down its denominator level after level, each level a whole number plus a new fraction, as in $2 + \\frac{1}{3 + \\frac{1}{4}}$. It is simplified from the bottom up: $3 + \\frac{1}{4} = \\frac{13}{4}$, its reciprocal is $\\frac{4}{13}$, and the whole is $\\frac{30}{13}$. Short ones can be strikingly accurate: $3 + \\frac{1}{7 + \\frac{1}{15 + \\frac{1}{1}}} = \\frac{355}{113}$ matches $\\pi$ to six decimal places.",
+    sectionId: "6"
   }
 }
 
@@ -1235,6 +1278,10 @@ const schemas = {
 
   const fbHalfOverThreeQuarters = { kind: 'bars', svgTitle: '1/2 over 3/4: one half is 2 of the 3 quarters in 3/4, so the value is 2/3', rows: [{ n: 4, k: 3, label: '3/4', partLabels: true }, { n: 4, k: 2, label: '1/2 = 2/4', color: 'r', partLabels: true }],
     labelWidth: 90, notes: [{ text: '1/2 covers 2 of the 3 quarters that make 3/4' }, { text: '(1/2)/(3/4) = 2/3; × 4/4 gives 2/3 directly', color: 'r' }], caption: 'How much of 3/4 is 1/2? Two thirds of it' };
+  const conceptIntroFigures = {
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     halfOverThreeQuarters: demoUnitFrame({
       svg: renderFractionBar(fbHalfOverThreeQuarters),
@@ -1252,6 +1299,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Complex Fractions: Simplify Stacked Fractions | Learn Math Class",
       description: "Learn to simplify complex fractions using division and LCD methods. Handle fractions within fractions, mixed numbers, nested fractions, and avoid common errors.",
@@ -1264,9 +1312,74 @@ return {
    }
 
 
-export default function ComplexFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function ComplexFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six expressions written with a fraction bar. Which of them have a fraction inside the fraction?`,
+        content: [
+          `A: $\\dfrac{\\frac{1}{2}}{3}$ $\\quad$ B: $\\dfrac{7}{8}$ $\\quad$ C: $\\dfrac{4}{\\frac{2}{5}}$ $\\quad$ D: $\\dfrac{3 + 5}{4}$ $\\quad$ E: $\\dfrac{\\frac{3}{4}}{\\frac{5}{6}}$ $\\quad$ F: $\\dfrac{1 + \\frac{1}{2}}{3}$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Looking above and below the main bar settles it: A, C, E and F contain a fraction; B and D do not.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `D looks busy but holds only whole numbers; F looks almost ordinary but hides 1/2 in its numerator.`,
+        content: [
+          `How crowded an expression looks does not decide it. What counts is whether a smaller fraction bar appears above or below the main one, alone or inside a sum.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [complex fraction](!/arithmetic/definitions#complex_fraction) is a fraction whose numerator, denominator, or both contain a fraction.`,
+        formula: [
+          `A complex fraction has a fraction in its numerator, its denominator, or both. The main fraction bar separates the overall numerator from the overall denominator, while smaller fraction bars appear within.`,
+          `Examples include:`,
+          `@academic[formula_callout:What Is a Complex Fraction
+$$\\frac{\\frac{1}{2}}{3} \\quad \\frac{4}{\\frac{2}{5}} \\quad \\frac{\\frac{3}{4}}{\\frac{5}{6}}$$]@`,
+          `The first has a fraction only in the numerator. The second has a fraction only in the denominator. The third has fractions in both positions.`,
+        ],
+        footer: `So A, C, E and F are complex fractions; B and D are ordinary fractions.`,
+      },
+      {
+        id: 'kind',
+        lead: `A complex fraction is a division of fractions written vertically, and it names a single number.`,
+        content: [
+          `Complex fractions arise naturally in algebra, physics, and rate problems. Any division of fractions can be written as a complex fraction: $\\frac{2}{3} \\div \\frac{4}{5}$ equals $\\frac{\\frac{2}{3}}{\\frac{4}{5}}$.`,
+          `Expression A, for instance, is $\\frac{1}{2} \\div 3 = \\frac{1}{6}$: one number, written with two bars.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The main bar decides the value: read the same symbols with a different main bar and the number changes.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Misreading the main bar
+Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\frac{2}{3} = \\frac{3}{2}$. The main bar sits under $\\frac{1}{2}$, so the value is $\\frac{1}{2} \\div 3 = \\frac{1}{6}$.
+[Read more](!#7)]@`,
+          `Turning a complex fraction into an ordinary one is the subject of the next section, [method 1: division](!/arithmetic/fractions/complex#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers simplifying by division and by the LCD, complex fractions with sums, differences and mixed numbers, nested complex fractions, and common mistakes.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1282,7 +1395,7 @@ export default function ComplexFractionsPage({seoData, sectionsContent, introCon
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

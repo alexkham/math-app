@@ -3030,8 +3030,12 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inverseDiagrams from '@/app/components/linear-algebra copy/matrix/inverseDiagrams'
 import renderMatrixGridV2 from '@/app/utils/illustrations/linear-algebra/matrix/matrixGrid.v2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
 
 
 export async function getStaticProps(){
@@ -3526,6 +3530,25 @@ const keyWords = [
 
 // formulas-injected: v1 | 2026-06-16 | 14 callouts (obj1 inverse_definition direct, obj2 inverse_2x2_formula direct, obj3 invertible_matrix_theorem prose-insert, obj4 inverse_via_row_reduction direct, obj5 inverse_via_adjugate direct, obj6 inverse_involution + inverse_of_product + inverse_of_transpose + inverse_of_scalar_multiple + inverse_of_power + determinant_of_inverse inline-promote, obj7 solve_system_via_inverse direct, obj8 diagonal_matrix_inverse + orthogonal_matrix_inverse inline-promote)
 
+// Concept introduction (section 1, "Definition of the Inverse") — template
+// E, widening. Running instance: A with rows (3, 1), (5, 2), the matrix of
+// the section-2 recipe frame, inverse rows (2, −1), (−5, 3). Old obj1 text is
+// kept in sectionsContent.obj1, unused; its formula box with link and four
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciProductTable = ciTableOpen(['entry of A·B', 'row of A · column of B', 'value']) +
+  ciRow(['row 1, column 1', '3·2 + 1·(−5)', '1'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['row 1, column 2', '3·(−1) + 1·3', '0'], { shade: true }) +
+  ciRow(['row 2, column 1', '5·2 + 2·(−5)', '0']) +
+  ciRow(['row 2, column 2', '5·(−1) + 2·3', '1'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition of the Inverse`,
@@ -3878,6 +3901,12 @@ const introContent = {
   content: `For real numbers, dividing by a means multiplying by 1/a. Matrices have no division operation, but invertible matrices have an inverse that plays the same role — multiplying by A⁻¹ reverses the effect of multiplying by A. Not every matrix has an inverse, and understanding when one exists, how to compute it, and what properties it carries is central to linear algebra.`,
 }
 
+// FAQ pass 2026-10-31: kept the B/A and A^{-T} questions. Rewrote the
+// (AB)^{-1} answer to follow section 6's reading (in ABx, B acts first; the
+// old "multiplying by A then B" wording read the order backwards). Added
+// one-sided inverses of rectangular matrices (a paragraph in section 1), the
+// inverse of a sum (Common Errors), the random-matrix fact box (section 3)
+// and the Hilbert-matrix fact box (section 10); no heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Can you write $\\frac{B}{A}$ for matrices?",
@@ -3886,13 +3915,33 @@ const faqQuestions = {
   },
   obj2: {
     question: "Why is $(AB)^{-1}$ equal to $B^{-1}A^{-1}$ rather than $A^{-1}B^{-1}$?",
-    answer: "Because undoing a sequence means undoing the last step first, the way you remove a coat before a shirt. Multiplying by $A$ then $B$ is reversed by undoing $B$ then $A$. The scalar habit, where order never mattered, produces the wrong version here. The transpose reverses for the same reason: $(AB)^{T} = B^{T}A^{T}$.",
+    answer: "Because undoing a sequence means undoing the last step first, the way you take off a coat before the shirt under it. In $AB\\mathbf{x}$, $B$ acts on $\\mathbf{x}$ first and $A$ second, so getting $\\mathbf{x}$ back means removing $A$ first: $B^{-1}A^{-1}(AB)\\mathbf{x} = \\mathbf{x}$. The scalar habit, where order never mattered, produces the wrong version here. The transpose reverses for the same reason: $(AB)^{T} = B^{T}A^{T}$.",
     sectionId: "notation"
   },
   obj3: {
     question: "What does $A^{-T}$ mean?",
     answer: "It is a compact spelling for the inverse and the transpose together, and the order does not matter: $(A^{-1})^{T} = (A^{T})^{-1}$, so one mark covers both readings. It appears frequently in optimization, statistics and numerical writing, where the combination is common enough to deserve its own abbreviation.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can a non-square matrix have an inverse?",
+    answer: "Not a two-sided one. For an $m \\times n$ matrix with $m \\neq n$, $\\text{rank}(A) \\le \\min(m, n)$, so one of the two products, $m \\times m$ or $n \\times n$, has rank too low to be an identity. What can exist is a one-sided inverse: a left inverse when the columns are independent (full column rank), or a right inverse when the rows are (full row rank).",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Is $(A + B)^{-1}$ equal to $A^{-1} + B^{-1}$?",
+    answer: "No, and there is no general formula for the inverse of a sum. With $A = B = I$, $(A + B)^{-1} = (2I)^{-1} = \\frac{1}{2}I$, while $A^{-1} + B^{-1} = 2I$. The sum need not even be invertible when both terms are: $A = I$ and $B = -I$ are invertible, but $A + B = O$ has no inverse at all.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "Is a randomly chosen matrix invertible?",
+    answer: "Almost surely, if the entries are drawn at random from an interval of real numbers: the probability is $1$. The singular matrices are exactly those with $\\det(A) = 0$, a single equation that cuts out a surface with no volume in the space of entries. With entries restricted to $0$ and $1$ the odds change sharply: only $6$ of the $16$ such $2 \\times 2$ matrices are invertible.",
+    sectionId: "3"
+  },
+  obj7: {
+    question: "Why is the Hilbert matrix so hard to invert on a computer?",
+    answer: "Because its inverse has enormous entries. The Hilbert matrix has entries $\\frac{1}{i + j - 1}$, and its inverse is made entirely of whole numbers; for the $10 \\times 10$ case the largest is $3{,}480{,}673{,}996{,}800$. Rounding errors in the stored fractions get multiplied by numbers that large, so arithmetic carrying about 16 digits can lose about 13 of them.",
+    sectionId: "10"
   }
 }
 
@@ -3982,6 +4031,10 @@ const schemas = {
     caption: 'only possible when ad \u2212 bc \u2260 0',
   };
 
+  const conceptIntroFigures = {
+    productTable: ciProductTable,
+  };
+
   const demoUnits = {
     rowreduce: demoUnitFrame({
       svg: inverseDiagrams.done,
@@ -4010,10 +4063,43 @@ const schemas = {
     intro: 'Swap the diagonal, negate the off-diagonal, divide by the determinant. Here det = 1, so every entry of the inverse is an integer.',
   };
 
+  // DecisionMaker + DecisionWalker (obj11): inverse-method-decision
+  const inverseMethodDecision = {
+    header: {
+      kicker: 'computing the inverse',
+      title: 'Which method for the inverse?',
+      lede: 'Ask first whether the inverse itself is needed; most practical work stops there.',
+    },
+    first: [{ label: 'Exists only if', text: 'det(A) ≠ 0. Every method below assumes an invertible matrix.' }],
+    start: 'only',
+    nodes: {
+      only: { question: 'Only the solution of Ax = b needed?', hint: 'not the matrix A⁻¹ itself', answers: [
+        { label: 'yes', to: 'solve' },
+        { label: 'no', to: 'small' },
+      ] },
+      small: { question: 'Is A a 2 × 2 matrix?', answers: [
+        { label: 'yes', to: 'formula' },
+        { label: 'no', to: 'symbolic' },
+      ] },
+      symbolic: { question: 'Are the entries symbolic?', hint: 'letters or parameters, not numbers', answers: [
+        { label: 'yes', to: 'adjugate' },
+        { label: 'no', to: 'rowred' },
+      ] },
+    },
+    outcomes: {
+      solve: { title: 'Solve Ax = b directly', action: 'Gaussian elimination, about ⅔n³ operations; the LU factors can be reused', link: { label: 'When not to compute the inverse', href: '/linear-algebra/matrix/inverse#10' } },
+      formula: { title: 'Swap-and-negate formula', action: 'swap the diagonal entries, negate the off-diagonal ones, divide by ad − bc', link: { label: 'The 2×2 formula', href: '/linear-algebra/matrix/inverse#2' } },
+      adjugate: { title: 'Adjugate formula', action: 'A⁻¹ = adj(A) / det(A): n² cofactors, each an (n − 1) determinant', link: { label: 'Via the adjugate', href: '/linear-algebra/matrix/inverse#5' } },
+      rowred: { title: 'Row reduction of [A | I]', action: 'reduce to [I | A⁻¹], about 2n³ operations; a singular A shows up during the reduction', link: { label: 'By row reduction', href: '/linear-algebra/matrix/inverse#4' } },
+    },
+  };
+
   return {
   props: {
+    inverseMethodDecision,
     inverse2x2Strip,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     invertibilityRing,
@@ -4035,9 +4121,72 @@ const schemas = {
    }
 
 
-export default function MatrixInversePage({inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function MatrixInversePage({inverseMethodDecision, inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `With numbers, an equation like 3x = 6 is undone by dividing — or, the same thing, multiplying by 1/3.`,
+        content: [
+          `The number $\\frac{1}{3}$ cancels $3$ because $\\frac{1}{3} \\cdot 3 = 1$, and multiplying by $1$ changes nothing. That is all "dividing by 3" means.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `With matrices there is no division: A x = b cannot be "solved" by writing x = b / A.`,
+        content: [
+          `Take $A$ with rows $(3, 1)$ and $(5, 2)$. There is no rule for dividing by a matrix, so the move that settles $3x = 6$ is not available. The question becomes: is there a matrix that does for $A$ what $\\frac{1}{3}$ does for $3$?`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [inverse](!/linear-algebra/definitions#inverse_matrix) of a square matrix $A$ is a matrix $A^{-1}$ whose product with $A$, in either order, is the identity matrix $I$ — the matrix version of $\\frac{1}{3} \\cdot 3 = 1$.`,
+        formula: [
+          `For a square matrix $A$ of order $n$, the inverse — if it exists — is the unique matrix $A^{-1}$ satisfying`,
+          `@academic[formula_callout:inverse_definition|Inverse Definition|$$AA^{-1} = A^{-1}A = I$$]@
+@academic[formulas_link:/linear-algebra/formulas#inverse_definition]@`,
+        ],
+        footer: `So for $A$ with rows $(3, 1)$, $(5, 2)$, the inverse is the matrix with rows $(2, -1)$, $(-5, 3)$; then $A\\mathbf{x} = \\mathbf{b}$ is solved by $\\mathbf{x} = A^{-1}\\mathbf{b}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The inverse is another matrix of the same size, and there is at most one of it.`,
+        content: [
+          ciTable('productTable'),
+          `Both products must equal the identity. A matrix possessing an inverse is called invertible or nonsingular. A matrix with no inverse is called singular.`,
+          `Uniqueness follows from a short argument. Suppose both $B$ and $C$ satisfy $AB = I$ and $CA = I$. Then $B = IB = (CA)B = C(AB) = CI = C$, so $B$ and $C$ must be the same matrix. This means a matrix either has no inverse or has exactly one.`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost for ordinary numbers: a 1 × 1 matrix (a) has inverse (1/a).`,
+        content: [
+          `The identity of size $1$ is $(1)$, and $(a)(\\frac{1}{a}) = (1)$ — the old reciprocal, written in brackets. Matrix inverses extend reciprocals; they do not replace them.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `What is lost: many nonzero matrices have no inverse, and only square matrices can have one.`,
+        content: [
+          `Every nonzero number has a reciprocal, but the matrix with rows $(1, 2)$ and $(2, 4)$ is not zero and still has no inverse — its second row is a multiple of the first. Which matrices are invertible is settled in [when does the inverse exist](!/linear-algebra/matrix/inverse#3).`,
+          `The inverse is defined only for square matrices. A rectangular matrix cannot satisfy $AA^{-1} = A^{-1}A = I$ because $\\text{rank}(A) \\le \\min(m, n)$, so at least one of the products ($m \\times m$ or $n \\times n$) has rank too low to be an identity. One-sided inverses (left or right) can exist for rectangular matrices with full column or full row [rank](!/linear-algebra/matrix/rank), but the two-sided inverse is a strictly square concept.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the 2 × 2 formula, when the inverse exists, computing it by row reduction or the adjugate, its properties, and solving systems with it.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -4045,7 +4194,7 @@ export default function MatrixInversePage({inverse2x2Strip, seoData, sectionsCon
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -4064,6 +4213,11 @@ export default function MatrixInversePage({inverse2x2Strip, seoData, sectionsCon
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laMatrixNotationSheet}
+            current={'/linear-algebra/matrix/inverse'}
           />,
         ]
     },
@@ -4191,6 +4345,16 @@ export default function MatrixInversePage({inverse2x2Strip, seoData, sectionsCon
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          `The table compares the four methods by cost. The map below puts them in the order to ask about them, starting with whether the inverse is needed at all.`,
+          <DiagramFrame
+            key={'obj11-decision'}
+            id="inverse-method-decision"
+            title="Which method for the inverse?"
+            source="/linear-algebra/matrix/inverse"
+          >
+            <DecisionBox data={inverseMethodDecision} />
+          </DiagramFrame>,
+          `The first exit is the one numerical work takes most often. Computing $A^{-1}$ from scratch costs about three times as much as solving the system once, so the other three routes are for when the matrix $A^{-1}$ itself is the goal. [When not to compute the inverse](!#10) goes through the cost in detail.`,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

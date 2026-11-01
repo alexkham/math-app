@@ -108,13 +108,13 @@ const summaries=[
           <tr>
             <td>Finite Sets</td>
             <td>Regular Set Notation (enumerative or descriptive)</td>
-            <td>Sets with a countable number of elements</td>
+            <td>Sets with a finite number of elements: the count is a natural number or 0</td>
             <td>{Monday, ..., Sunday}, {A, ..., Z}</td>
           </tr>
           <tr>
             <td>Infinite Sets</td>
             <td>Regular Set Notation (enumerative or descriptive)</td>
-            <td>Sets with an uncountable number of elements</td>
+            <td>Sets that are not finite: countable, like {1, 2, 3, ...}, or uncountable, like ℝ</td>
             <td>{x | x is a positive even number}, {1, 2, 3, ...}</td>
           </tr>
           <tr>

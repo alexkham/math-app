@@ -577,6 +577,8 @@ import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/co
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 
 
 export async function getStaticProps(){
@@ -738,6 +740,11 @@ export async function getStaticProps(){
   // with the element-versus-subset confusions the notation section catalogues
   // and the ordering question the Common Mistakes list mentions but does not
   // resolve. P(Ω) = 1 is left to the axioms page.
+  // FAQ pass 2026-10-31: kept all five. Added the impossible fair draw from
+  // all whole numbers (fact box under Types), Galileo's 9-versus-10 with
+  // three dice (fact box under Sample Space in Practice) and the total above
+  // 1 as the sign of overlapping outcomes (the "How to check" of the first
+  // worked mistake); no heading asks any of them.
   const faqQuestions = {
     obj1: {
       question: "What is the difference between an outcome and an event?",
@@ -763,6 +770,21 @@ export async function getStaticProps(){
       question: "Why is the sample space written Ω instead of S?",
       answer: "Both are standard and name the same thing. Capital omega is the convention in measure-theoretic and university-level texts, while S — from the words sample space — is common in school textbooks. Older and applied writing sometimes uses U, borrowing the [universal set](!/set-theory/operations#notation) from set theory. The letter carries no mathematical content, only house style.",
       sectionId: "notation"
+    },
+    obj6: {
+      question: "Can you pick a whole number at random with every number equally likely?",
+      answer: "No, no such probability model exists. If each of $1, 2, 3, \\ldots$ gets the same probability $p$, [countable additivity](!/probability/axioms#axiom3) makes the total a sum of infinitely many copies of $p$: $0$ when $p = 0$, and past $1$ when $p > 0$, never exactly $1$. A countably infinite sample space needs shares that shrink, such as $\\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}, \\ldots$ for the toss on which the first head appears.",
+      sectionId: "types"
+    },
+    obj7: {
+      question: "Why does a total of 10 come up more often than 9 with three dice?",
+      answer: "Because the equally likely outcomes are the $216$ ordered triples, not the ways of writing the total. Each total can be written as a sum of three faces in six ways, but a sum like $1 + 3 + 6$ covers six triples, $2 + 2 + 6$ covers three, and $3 + 3 + 3$ only one. Counted as triples, $27$ outcomes give $10$ and $25$ give $9$; Galileo settled the puzzle this way in the early 1600s.",
+      sectionId: "practice"
+    },
+    obj8: {
+      question: "What does it mean if the outcome probabilities add up to more than 1?",
+      answer: "Some result has been counted in two outcomes, so the outcomes are not mutually exclusive. For one card, $\\Omega = \\{\\text{heart}, \\text{king}, \\text{other}\\}$ puts the king of hearts in both of the first two, and the probabilities add to $\\frac{53}{52}$. Moving that card into one group only, with $\\{\\text{heart}, \\text{other king}, \\text{other}\\}$, brings the total to exactly $1$. A total below $1$ means the opposite fault: some result is missing.",
+      sectionId: "mistakes"
     }
   }
 
@@ -1364,6 +1386,11 @@ Rolling a die → {1, 2, 3, 4, 5, 6}
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probEventsNotationSheet}
+            current={'/probability/sample-space'}
           />,
         ]
     },

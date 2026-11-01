@@ -14,6 +14,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -211,6 +212,29 @@ const summaryTable = `
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "The Square Root Function") — template A,
+// definition last. Running instance: f(x) = √x, the side of a square of area
+// x, beside √(x + 4), ∛x and √(2x − 1). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its two formula boxes, seven passages and
+// the square-root FunctionAnalysis frame with its two lines are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciAreaTable = ciTableOpen(['area of the square, x', '0', '1', '4', '9', '16', '2']) +
+  ciRow(['side of the square, √x', '0', '1', '2', '3', '4', '≈ 1.414'], { last: true, color: '#2563EB', cols: [1, 2, 3, 4, 5, 6] }) +
+  '</tbody></table>'
+const ciKinTable = ciTableOpen(['rule', 'question it answers', 'root', 'under the root']) +
+  ciRow(['√x', 'side of a square of area x', 'square root', 'x']) +
+  ciRow(['√(x + 4)', 'side of a square of area x + 4', 'square root', 'x + 4'], { shade: true }) +
+  ciRow(['∛x', 'edge of a cube of volume x', 'cube root', 'x']) +
+  ciRow(['√(2x − 1)', 'side of a square of area 2x − 1', 'square root', '2x − 1'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -625,6 +649,10 @@ Square root functions and cube root functions are the most common, but the patte
 }
 
 
+// FAQ pass 2026-10-31: kept the four existing questions. Added how the index
+// orders roots above and below 1 (a paragraph and fact box under "General Nth
+// Root Functions") and the radical that is its own inverse (fact box under
+// "Finding Inverses of Radical Functions"); no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "Why does the square root graph flatten out as $x$ grows?",
@@ -645,6 +673,16 @@ const faqQuestions = {
     question: "Why does the inverse of $\\sqrt{x}$ need the restriction $x \\geq 0$?",
     answer: "Because $x^2$ on its own is not one-to-one: $3$ and $-3$ both square to $9$, so there is no single value to send $9$ back to. Restricting the squaring function to $x \\geq 0$ makes it one-to-one and gives $\\sqrt{x}$ something to invert. Cube roots need no such restriction, since $x^3$ is already one-to-one over all reals.",
     sectionId: "8"
+  },
+  obj5: {
+    question: "Does a higher index always give a smaller root?",
+    answer: "No, only for inputs above $1$. There $\\sqrt{16} = 4$, $\\sqrt[4]{16} = 2$ and $\\sqrt[8]{16} \\approx 1.41$. Between $0$ and $1$ the order reverses: $\\sqrt{0.0625} = 0.25$, but $\\sqrt[4]{0.0625} = 0.5$. At $x = 1$ every root equals $1$. On both sides a higher index pulls the value toward $1$: the $100$th root of a billion is only about $1.23$.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Is there a radical function that is its own inverse?",
+    answer: "Yes, $f(x) = \\sqrt{1 - x^2}$ on $0 \\leq x \\leq 1$. Swapping $x$ and $y$ gives $x = \\sqrt{1 - y^2}$, squaring gives $x^2 = 1 - y^2$, and solving for $y \\geq 0$ returns $y = \\sqrt{1 - x^2}$, the formula it started from. Its graph is a quarter of the unit circle, which is symmetric across the line $y = x$, exactly the mirror an inverse requires.",
+    sectionId: "9"
   }
 }
 
@@ -768,6 +806,11 @@ const schemas = {
     points: [{ x: 9, y: 2, label: '(9, 2)', pos: 'nw' }, { x: 2, y: 9, label: '(2, 9)', pos: 'w' }],
     notes: [{ x: 4.8, y: 0.6, text: 'starts at (5, 0)', pos: 'w' }, { x: 0.3, y: 4.4, text: 'starts at (0, 5)', pos: 'e' }],
     caption: 'Swapping x and y: f⁻¹ takes inputs x ≥ 0, the outputs of f' };
+  const conceptIntroFigures = {
+    areaTable: ciAreaTable,
+    kinTable: ciKinTable,
+  };
+
   const demoUnits = {
     sqrtRuns: demoUnitFrame({
       svg: renderFunctionPlotV4(fpSqrtRuns),
@@ -936,6 +979,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Radical Functions: Graphs, Domain & Transformations | Learn Math Class",
       description: "Learn radical functions: square root and cube root graphs, domain and range, transformations, inverse relationships with power functions, and graphing strategies.",
@@ -948,9 +992,78 @@ return {
    }
 
 // export default function FunctionsPage({seoData,sectionsContent , introContent}) {
-export default function FunctionsPage({radicalStrategyProfile, cbrtProfile, sqrtProfile, seoData, sectionsContent, introContent, obj7Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function FunctionsPage({radicalStrategyProfile, cbrtProfile, sqrtProfile, seoData, sectionsContent, introContent, obj7Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Squaring turns the side of a square into its area; the square root goes back, from the area to the side.`,
+        content: [
+          `A square of area $9$ has side $3$, a square of area $16$ has side $4$. Feeding in areas and reading off sides is a rule that turns each allowed number into exactly one number — a function.`,
+          ciTable('areaTable'),
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Many rules work the same way: take an expression in x, then take a root of it.`,
+        content: [
+          ciTable('kinTable'),
+          `Each one returns one value per input — the principal root — so each one is a function of $x$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [radical function](!/algebra/definitions#radical_function) is a function whose rule takes a root of an expression containing the variable, $f(x) = \\sqrt[n]{g(x)}$. The simplest one, $f(x) = \\sqrt{x}$, is the parent of the square-root family.`,
+        formula: [
+          `The parent square root function is:`,
+          `@academic[formula_callout:The Square Root Function
+$$f(x) = \\sqrt{x}$$]@`,
+          `For each non-negative input, it returns the principal square root.`,
+        ],
+        footer: `So $\\sqrt{x}$, $\\sqrt{x + 4}$, $\\sqrt[3]{x}$ and $\\sqrt{2x - 1}$ are all radical functions.`,
+      },
+      {
+        id: 'kind',
+        lead: `The parent square root function has a fixed domain, range and shape — the profile every square-root graph is built from.`,
+        content: [
+          `Domain: $[0, \\infty)$ — only non-negative inputs allowed, following the [properties of radicals](!/algebra/roots/properties).`,
+          `Range: $[0, \\infty)$ — outputs are non-negative by the principal root convention.`,
+          `Key points on the graph:`,
+          `@academic[formula_callout:The Square Root Function
+$$(0, 0), \\quad (1, 1), \\quad (4, 2), \\quad (9, 3), \\quad (16, 4)$$]@`,
+          `The graph starts at the origin and rises to the right. It increases throughout its domain but the rate of increase slows — the curve bends downward, concave down.`,
+          `The function is one-to-one. It passes the horizontal line test and has an inverse.`,
+            `Everything above, in one picture: the graph of $f(x) = \\sqrt{x}$ with its starting point and the four perfect-square points, the strips for where it is defined, its direction and its bend, and the domain, range and one-to-one property beneath.`,
+            <DiagramFrameV2
+              key={'obj1-profile'}
+              id="square-root-profile"
+              title="Profile of the square root"
+              source="/algebra/roots/functions"
+            >
+              <FunctionAnalysis data={sqrtProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+            </DiagramFrameV2>,
+            `The perfect squares are the easy points to plot because their roots are whole numbers, and their spacing shows the slowing rise: each step of $1$ in height needs a longer run along $x$, from $1$ to $3$ to $5$ to $7$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `An even root needs a non-negative radicand, so a radical function is not always defined everywhere.`,
+        content: `$\\sqrt{x}$ has no real value at $x = -4$, while $\\sqrt{x + 4}$ starts exactly there, and $\\sqrt[3]{x}$ is defined for every $x$ — see [the cube root function](!/algebra/roots/functions#3). How to find where any radical function is defined is the subject of [domain of radical functions](!/algebra/roots/functions#6).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the graph of the square root, the cube root function and its graph, general nth root functions, domains, transformations, the inverse relationship with power functions, and a graphing strategy.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -966,17 +1079,7 @@ export default function FunctionsPage({radicalStrategyProfile, cbrtProfile, sqrt
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          `Everything above, in one picture: the graph of $f(x) = \\sqrt{x}$ with its starting point and the four perfect-square points, the strips for where it is defined, its direction and its bend, and the domain, range and one-to-one property beneath.`,
-          <DiagramFrameV2
-            key={'obj1-profile'}
-            id="square-root-profile"
-            title="Profile of the square root"
-            source="/algebra/roots/functions"
-          >
-            <FunctionAnalysis data={sqrtProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
-          </DiagramFrameV2>,
-          `The perfect squares are the easy points to plot because their roots are whole numbers, and their spacing shows the slowing rise: each step of $1$ in height needs a longer run along $x$, from $1$ to $3$ to $5$ to $7$.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

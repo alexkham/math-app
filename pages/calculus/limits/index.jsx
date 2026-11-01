@@ -630,6 +630,9 @@ This concept underpins everything that follows in calculus. Derivatives measure 
 // Limit". Invented three the hub genuinely owns: the why-limits-matter framing
 // and two confusions from "Limits That Fail to Exist", the one section of this
 // subtree with no dedicated page of its own.
+// FAQ pass 2026-10-31: kept all three. Added the misleading table of values
+// (the sin(π/x) table in "The Central Idea of a Limit", no heading asks it)
+// and Dirichlet's function (fact box under "Limits That Fail to Exist").
 const faqQuestions = {
   obj1: {
     question: "Why are limits important in calculus?",
@@ -643,7 +646,17 @@ const faqQuestions = {
   },
   obj3: {
     question: "If a limit equals infinity, does the limit exist?",
-    answer: "Not in the usual finite sense. Writing lim f(x) = ∞ records that the function grows without bound, which describes how the limit fails rather than a value it reaches. The notation still carries information, since it distinguishes unbounded growth from oscillation, the other common failure mode. See [limits at infinity](!/calculus/limits/infinity) for the full treatment.",
+    answer: "Not in the usual finite sense. Writing lim f(x) = ∞ records that the function grows without bound, which describes how the limit fails rather than a value it reaches. The notation still carries information, since it distinguishes unbounded growth from the other two common failure modes, oscillation and a jump where the one-sided limits disagree. See [limits at infinity](!/calculus/limits/infinity) for the full treatment.",
+    sectionId: "2"
+  },
+  obj4: {
+    question: "Can a table of values prove a limit?",
+    answer: "No. A table samples only a few inputs, and they can be unlucky choices. For $\\sin(\\pi/x)$ near $0$, the inputs $0.1$, $0.01$ and $0.001$ all give $0$, which suggests a limit of $0$, yet $x = \\frac{1}{10.5} \\approx 0.0952$ gives $1$, and the function keeps swinging between $-1$ and $1$, so the limit does not exist. A table can suggest an answer; an argument such as cancelling a common factor is what confirms it.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Is there a function that has no limit at any point?",
+    answer: "Yes. Dirichlet's function, from 1829, equals $1$ at every rational number and $0$ at every irrational one. Every interval, however small, contains numbers of both kinds, so near any point the values keep jumping between $0$ and $1$ and never settle on one number. The limit fails at every point, an extreme case of the oscillation failure mode.",
     sectionId: "2"
   }
 }

@@ -17,6 +17,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
 
 export async function getStaticProps(){
@@ -146,13 +149,13 @@ export async function getStaticProps(){
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/distributions/discrete/negative-binomial" style="${linkStyle}">Negative Binomial</a>(r, p)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&lfloor;(r&minus;1)(1&minus;p)/p&rfloor; for r &gt; 1</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">r + &lfloor;(r&minus;1)(1&minus;p)/p&rfloor; for r &gt; 1</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">reduces to geometric when r = 1</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/distributions/discrete/hypergeometric" style="${linkStyle}">Hypergeometric</a>(N, K, n)</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">&lfloor;(n+1)(K+1)/(N+2)&rfloor;</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">approximation; small-parameter cases need numerical PMF check</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">exact; bimodal at x and x&minus;1 when x = (n+1)(K+1)/(N+2) is an integer</td>
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/probability/distributions/discrete/poisson" style="${linkStyle}">Poisson</a>(&lambda;)</td>
@@ -338,6 +341,26 @@ const centralTendencyComparisonData = {
     }
   ]
 };
+
+// Concept introduction (section 1, "Definition and Concept") — template A,
+// definition last. Running instance: 60 pairs of shoes sold by size, 38 to
+// 42, mode 40, mean 40.15. Old obj1 text is kept in sectionsContent.obj1,
+// unused; its sixteen blocks (four headings, three bullet lists, nine
+// passages) are carried in unchanged, in four groups joined as written.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciShoeTable = ciTableOpen(['shoe size', 'pairs sold', 'share of sales']) +
+  ciRow(['38', '5', '5/60 ≈ 8%']) +
+  ciRow(['39', '12', '12/60 = 20%'], { shade: true }) +
+  ciRow(['40', '20', '20/60 = 1/3 — the largest'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['41', '15', '15/60 = 25%'], { shade: true }) +
+  ciRow(['42', '8', '8/60 ≈ 13%'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
 
@@ -940,7 +963,7 @@ When $r = 1$, reduces to geometric with mode $1$.
 
 Mode: $\\lfloor \\frac{(n+1)(K+1)}{N+2} \\rfloor$
 
-Exact mode requires numerical evaluation of the [PMF](!/probability/probability-function/pmf) for small parameter values.
+This is exact. When $\\frac{(n+1)(K+1)}{N+2}$ is an integer, that value and the one below it are both modes (bimodal).
 
 [Poisson](!/probability/distributions/discrete/poisson) with parameter $\\lambda$
 
@@ -1399,6 +1422,11 @@ This page introduces the mode as a measure that identifies the value (or values)
 // medians question because its heading reads only "Special Cases and Edge
 // Cases"; here "Multiple Modes (Modality)" names it outright, so it goes.
 // Replaced with the arg max distinction and the degenerate-peak case.
+// FAQ pass 2026-10-31: kept all four. Added when a two-group mixture has two
+// peaks (fact box under "Multiple Modes") and the mean sitting in the dip
+// (the bimodal-mixture figure caption), both in the modality section, and
+// the mode of a transformed continuous variable (one paragraph under the
+// monotonic-transformation property).
 const faqQuestions = {
   obj1: {
     question: "What is the difference between max and arg max?",
@@ -1419,6 +1447,21 @@ const faqQuestions = {
     question: "What is a MAP estimate?",
     answer: "The mode of a posterior distribution. MAP stands for maximum a posteriori: once [Bayes' theorem](!/probability/bayes-theorem#notation) produces a posterior over a parameter, the MAP estimate is the parameter value where that posterior peaks. It is arg max applied to a posterior rather than to a density, so one notation serves both a descriptive statistic and an estimation principle.",
     sectionId: "11"
+  },
+  obj5: {
+    question: "Does mixing two groups always give two modes?",
+    answer: "No. An equal mix of two normal curves with the same spread $\\sigma$ dips in the middle only when their means are more than $2\\sigma$ apart; closer than that, the two humps merge into one peak. Adult heights are the standard example: men and women pooled together give a single hump, because the gap between their average heights is smaller than twice the spread within each group.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Can the mean be one of the least likely values?",
+    answer: "Yes, in a distribution with two peaks. Mix normals centred at $-2$ and $2$, each with $\\sigma = 1$, half and half: the modes are near $-2$ and $2$, and the mean is $0$, exactly between them. But $0$ sits in the dip, where the density is about a quarter of the peak height. The balance point of the distribution is a value it rarely produces.",
+    sectionId: "4"
+  },
+  obj7: {
+    question: "Does the mode move with the variable when you transform it?",
+    answer: "For a discrete variable and a one-to-one $g$, yes: $g$ only relabels the values, so the mode becomes $g$ of the old mode. For a continuous variable it fails in general, because the density of $g(X)$ picks up a stretching factor that can move the peak. If $X$ has density $2x$ on $[0, 1]$, its mode is $1$, yet $X^2$ is uniform on $[0, 1]$. Only linear maps $aX + b$ always carry the mode along.",
+    sectionId: "6"
   }
 }
 
@@ -1506,6 +1549,10 @@ const schemas = {
     points: [{ x: -1.998, y: moMix(-1.998), label: 'mode ≈ −2', pos: 'nw' }, { x: 1.998, y: moMix(1.998), label: 'mode ≈ 2', pos: 'ne' }],
     notes: [{ x: 0, y: 0.285, text: 'mean 0: in the dip', pos: 'e', color: 'g' }, { x: -4.9, y: 0.285, text: '½ N(−2, 1) + ½ N(2, 1)', pos: 'e' }, { x: 3.1, y: 0.2, text: 'dashed: each half', pos: 'e', color: 'g' }],
     caption: 'Bimodal: two peaks, and the mean between them is rare' };
+  const conceptIntroFigures = {
+    shoeTable: ciShoeTable,
+  };
+
   const demoUnits = {
     u_2_0: demoUnitFrame({
       svg: discretePmfDiagrams.poisson,
@@ -1531,6 +1578,7 @@ const schemas = {
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          centralTendencyComparisonData,
@@ -1564,10 +1612,100 @@ export default function ModePage({
   mistakesTable,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A shoe shop has to decide which size to stock most of.`,
+        content: [
+          `The average size sold is no help if it comes out at a size no shoe is made in. What the shop needs is the size customers ask for most often.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Of 60 pairs sold last month, size 40 sold most — 20 pairs, a third of all sales.`,
+        content: [
+          ciTable('shoeTable'),
+          `The mean size is $\\frac{2409}{60} = 40.15$, which no shoe comes in. The most common size, $40$, is an actual size on the shelf.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Turned into probabilities, the answer is the value with the largest probability — the tallest bar.`,
+        content: [
+          `A customer picked at random wants size $40$ with probability $\\frac{1}{3}$, more than any other size. Picking out the most probable value works the same way for any distribution, with bars for a discrete one and the highest point of the curve for a continuous one.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **mode** of a distribution is the value with the highest probability (largest PMF) or, for a continuous distribution, the highest density (largest PDF).`,
+        formula: [
+          `The **mode** identifies where probability concentrates most heavily in a distribution. It's the value (or values) with the highest likelihood of occurring.
+
+## What is the Mode?
+
+For any probability distribution, the mode is the point where the probability function reaches its maximum:
+
+• **Discrete distributions**: The value $k$ where the [PMF](!/probability/probability-function/pmf) $P(X = k)$ is largest
+• **Continuous distributions**: The value $x$ where the [PDF](!/probability/probability-function/pdf) $f(x)$ is largest
+
+If you observe a single random draw from the distribution, the mode tells you which outcome has the best chance of appearing.`,
+        ],
+        footer: `So the mode of the shoe-size distribution is $40$, with probability $\\frac{1}{3}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The mode is one of three measures of the centre — and the only one that still works for categories.`,
+        content: [
+          `## Mode as a Measure of Central Tendency
+
+The mode is one of three primary measures describing where a distribution centers, alongside the [mean](!/probability/expected-value) and [median](!/probability/median).
+
+Unlike the mean, which balances all values through weighted averaging, or the median, which splits probability in half, the mode simply highlights where probability peaks. It reveals nothing about spread or tail behavior—only where the distribution concentrates most.`,
+          `## Why the Mode Matters
+
+The mode provides immediate intuition about a distribution's shape:
+
+• **Where is the peak?** The mode shows the most probable outcome
+• **How many peaks exist?** Multiple modes reveal complex structure
+• **Is probability spread evenly?** No clear mode suggests uniform distribution
+
+For categorical data (eye color, product preference, defect type), the mode is often the only meaningful measure of central tendency since mean and median require numerical values.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The mode need not be unique, and it need not sit anywhere near the mean.`,
+        content: [
+          `## Mode vs Other Measures
+
+The mode behaves differently from mean and median:
+
+• **Independence from tail behavior**: Extreme values don't affect the mode
+• **May not be unique**: Distributions can have multiple modes or none at all
+• **Location need not be central**: The mode can sit at boundaries or far from the mean
+• **Simplest to identify visually**: Just find the tallest bar or highest point on the curve
+
+The mode complements mean and median by revealing where probability actually concentrates, regardless of how the distribution spreads elsewhere.`,
+          `Distributions with two or more peaks are the subject of [multiple modes](!/probability/mode#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the mode for discrete and continuous distributions, multiple modes, and how the mode relates to the other measures of the centre.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1584,7 +1722,7 @@ export default function ModePage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1685,6 +1823,11 @@ export default function ModePage({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probSpreadNotationSheet}
+            current={'/probability/mode'}
           />,
         ]
     },

@@ -13,6 +13,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 
 
 export async function getStaticProps(){
@@ -587,6 +589,11 @@ How to check: substitute $x = 0$. The exponential gives $2^0 = 1$, while the pow
 
 
 
+// FAQ pass 2026-10-31: kept all five questions. Added (-2)^x as a non-example
+// (the opening classification tables), every base drawing one rescaled curve
+// (fact box under "Basic Shape"), which of 0.9^x and 0.5^x decays faster
+// (decay-base pitfall) and when 2^x overtakes x^10 (fact box under
+// "Exponential vs Power Functions").
 const faqQuestions = {
   obj1: {
     question: "Does $\\exp(x)$ mean something different from $e^x$?",
@@ -612,6 +619,26 @@ const faqQuestions = {
     question: "What are the domain and range of an exponential function?",
     answer: "The domain is every real number, since a positive base raised to any real exponent is defined. The range is $(0, \\infty)$: outputs are always strictly positive, never zero and never negative. That is why the line $y = 0$ is a horizontal asymptote the curve approaches but never touches, and why the graph has no x-intercept.",
     sectionId: "3"
+  },
+  obj6: {
+    question: "Is $(-2)^x$ an exponential function?",
+    answer: "No. A negative base cannot be raised to every real power: $(-2)^{1/2}$ would be a square root of $-2$, which is not a real number, and every irrational $x$ fails too, so there is no curve. For whole-number $x$ it still makes sense, as the alternating sequence $1, -2, 4, -8, \\ldots$, but that is a sequence, not an exponential function. The base must be fixed, with $a > 0$ and $a \\neq 1$.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "Do all exponential functions have the same shape?",
+    answer: "Yes, up to a sideways rescaling. Since $8 = 2^3$, the graph of $8^x = 2^{3x}$ is the graph of $2^x$ squeezed toward the y-axis by a factor of $3$. Every base $a > 0$, $a \\neq 1$, equals $2^k$ for one fixed $k$, so $a^x = 2^{kx}$; for decay bases $k$ is negative, which also mirrors the curve. All exponential graphs are one curve rescaled.",
+    sectionId: "2"
+  },
+  obj8: {
+    question: "Which decays faster, $0.9^x$ or $0.5^x$?",
+    answer: "$0.5^x$ does. For decay the base nearer $0$ falls faster, the reverse of the growth rule that a larger base climbs faster. Each step to the right multiplies the output by the base, so after three steps $0.9^3 = 0.729$ keeps about $73\\%$ of the starting value while $0.5^3 = 0.125$ keeps only $12.5\\%$. The base nearer $1$ gives the flatter curve.",
+    sectionId: "2"
+  },
+  obj9: {
+    question: "How long does it take $2^x$ to overtake $x^{10}$?",
+    answer: "Until $x$ is between $58$ and $59$. The polynomial does more than lead early, it pulls further ahead first: a step from $x$ to $x + 1$ doubles $2^x$ but multiplies $x^{10}$ by $\\left(1 + \\frac{1}{x}\\right)^{10}$, which is more than $2$ until $x = 14$. Only then does the exponential start winning back the whole lead. Against $x^{100}$ the crossing comes just past $x = 996$.",
+    sectionId: "4"
   }
 }
 
@@ -852,6 +879,11 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={powersRootsLogsNotationSheet}
+            current={'/algebra/powers/exponential-functions'}
           />,
         ]
     },

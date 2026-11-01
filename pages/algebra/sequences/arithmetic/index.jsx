@@ -12,6 +12,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 
 
 export async function getStaticProps(){
@@ -308,6 +311,28 @@ const keyWords = [
 // /algebra/sequences/arithmetic — sectionsContent v2
 // 6 callouts: obj1 (2), obj4 (1), obj5 (1), obj6 (2). obj2/obj3/obj7 untouched.
 
+// Concept introduction (section 1, "Definition") — template G, exclusion.
+// Running instance: six number patterns A–F, four of them arithmetic,
+// including the section's 3, 7, 11, 15 and 20, 17, 14, 11. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its two formula boxes, formulas link,
+// four passages, the arithLine demo frame, its line and the punchline are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSortTable = ciTableOpen(['pattern', 'terms', 'next minus previous', 'same step every time?']) +
+  ciRow(['A', '3, 7, 11, 15', '4, 4, 4', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['B', '20, 17, 14, 11', '−3, −3, −3', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['C', '1, 4, 9, 16', '3, 5, 7', 'no']) +
+  ciRow(['D', '2, 4, 8, 16', '2, 4, 8', 'no'], { shade: true }) +
+  ciRow(['E', '5, 5, 5, 5', '0, 0, 0', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['F', '1, 1.5, 2, 2.5', '0.5, 0.5, 0.5', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Definition`,
@@ -586,6 +611,11 @@ How to check: count the values strictly between the endpoints in the finished li
   content: `An arithmetic sequence adds the same fixed value to each term to produce the next. That fixed value — the common difference — determines everything: whether the sequence rises or falls, how fast it grows, and what its partial sums look like. Arithmetic sequences are the simplest infinite pattern, and their summation formula is one of the oldest results in mathematics.`,
 }
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added perfect
+// squares in an arithmetic sequence (fact box under "Finding Terms"), sums
+// of consecutive integers (fact box under "Arithmetic Series") and why a
+// few equal steps prove nothing (one paragraph under "Identifying
+// Arithmetic Sequences").
 const faqQuestions = {
   obj1: {
     question: "Should a sequence start at $a_1$ or $a_0$?",
@@ -601,6 +631,21 @@ const faqQuestions = {
     question: "Why isn't $a_n = a_{n-1} + d$ enough to define a sequence?",
     answer: "Because a recurrence without an anchor describes infinitely many sequences at once. The rule says each term exceeds the previous one by $d$, but says nothing about where to begin, so every choice of first term satisfies it equally. Pairing it with an initial value such as $a_1 = 3$ is what pins down one particular sequence.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can an arithmetic sequence contain perfect squares?",
+    answer: "Yes, many do, and a sequence of whole numbers with $d > 0$ that holds one square holds infinitely many. If $x^2$ is a term, then $(x + d)^2 = x^2 + d(2x + d)$ lies a whole number of steps further on, and the same step repeats forever. Some sequences hold none at all: every term of $3, 7, 11, 15, \\ldots$ leaves remainder $3$ on division by $4$, while every square leaves $0$ or $1$.",
+    sectionId: "3"
+  },
+  obj5: {
+    question: "Which numbers can be written as a sum of consecutive positive integers?",
+    answer: "Every positive whole number except the powers of $2$, that is $1, 2, 4, 8, 16, \\ldots$. A run of $k \\geq 2$ consecutive positive integers starting at $a$ adds up to $\\frac{k(2a + k - 1)}{2}$, and one of the factors $k$ and $2a + k - 1$ is odd and larger than $1$, which a power of $2$ never has. Other numbers often split in several ways: $15 = 7 + 8 = 4 + 5 + 6 = 1 + 2 + 3 + 4 + 5$.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Do the first few terms prove that a sequence is arithmetic?",
+    answer: "No. A finite list can only rule the pattern out: one pair of unequal differences disqualifies it, but equal differences so far confirm nothing. The list $2, 4, 6$ could go on as $8, 10, \\ldots$ or as $10, 16, \\ldots$, and $1, 3, 5, 8$ begins with two steps of $2$ before jumping by $3$. Only the rule that generates the sequence settles its type.",
+    sectionId: "2"
   }
 }
 
@@ -695,6 +740,10 @@ const schemas = {
     yBars: arCols,
     notes: [{ x: 5.45, y: 9, text: '2S₅ = 5 · 16', pos: 'e', color: 'r' }, { x: 5.45, y: 7, text: 'S₅ = 40', pos: 'e', color: 'r' }],
     caption: 'Forwards (blue) plus backwards (amber): 5 columns of 16 each' };
+  const conceptIntroFigures = {
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     arithLine: demoUnitFrame({
       svg: renderFunctionPlotV4(fpArithLine),
@@ -717,6 +766,7 @@ const schemas = {
      faqQuestions,
      schemas,
      demoUnits,
+     conceptIntroFigures,
      seoData: {
        title: "Arithmetic Sequences: Formula, Series & Mean | Learn Math Class",
        description: "Learn arithmetic sequences: definition, common difference, nth term formula, recursive form, sum of arithmetic series, and arithmetic mean with examples.",
@@ -728,9 +778,83 @@ const schemas = {
 }
    }
 
-export default function ArithmeticSequencesPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function ArithmeticSequencesPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Six number patterns. In which of them does every step add the same amount?`,
+        content: [
+          `A: $3, 7, 11, 15$ $\\quad$ B: $20, 17, 14, 11$ $\\quad$ C: $1, 4, 9, 16$ $\\quad$ D: $2, 4, 8, 16$ $\\quad$ E: $5, 5, 5, 5$ $\\quad$ F: $1, 1.5, 2, 2.5$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Subtracting each term from the next settles it: A, B, E and F always step by the same amount; C and D do not.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `In C and D the step keeps changing: the squares grow by 3, 5, 7, and the doublings by 2, 4, 8.`,
+        content: [
+          `What counts is only the pattern of differences. Whether the terms go up (A) or down (B), stay put (E), or are not whole numbers (F) makes no difference.`,
+        ],
+      },
+      {
+        id: 'rule',
+        lead: `The rule: next term minus previous term is always the same number.`,
+        content: [
+          `The common difference $d$ can be any real number. When $d > 0$, the sequence increases: $3, 7, 11, 15, \\ldots$ has $d = 4$. When $d < 0$, it decreases: $20, 17, 14, 11, \\ldots$ has $d = -3$. When $d = 0$, every term equals $a_1$ — a constant sequence, which is arithmetic in the trivial sense.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An **arithmetic sequence** is a sequence in which each term minus the term before it is the same constant $d$, the common difference.`,
+        formula: [
+          `An arithmetic sequence is a sequence in which consecutive terms differ by a constant $d$, called the **common difference**:`,
+          `@academic[formula_callout:Common Difference
+$$a_{n+1} - a_n = d$$
+/algebra/formulas#common_difference]@`,
+          `Starting from a first term $a_1$, the sequence unfolds as $a_1, a_1 + d, a_1 + 2d, a_1 + 3d, \\ldots$. The general term is:`,
+          `@academic[formula_callout:General Term (Arithmetic Sequence)
+$$a_n = a_1 + (n - 1)d$$
+/algebra/formulas#general_term_arithmetic_sequence]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+        ],
+        footer: `So A ($d = 4$), B ($d = -3$), E ($d = 0$) and F ($d = 0.5$) are arithmetic; C and D are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `An arithmetic sequence is a linear function read at the whole-number inputs 1, 2, 3, …`,
+        content: [
+          `The explicit formula $a_n = a_1 + (n-1)d$ has the same structure as a linear function $f(x) = mx + b$: the common difference $d$ plays the role of slope, and the sequence's terms lie on a straight line when plotted against their indices.`,
+          <div key={'unit-arithLine'} dangerouslySetInnerHTML={{ __html: demoUnits.arithLine }} />,
+          `A non-arithmetic sequence such as 1, 4, 9, 16 bends away from any line.`,
+          `@academic[punchline:An arithmetic sequence is a linear function read at whole-number inputs, with the common difference as its slope.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A few equal steps at the start are not proof: the pattern can break later.`,
+        content: `$1, 3, 5, 8$ begins with steps of $2$ and $2$, then jumps by $3$. How to check a sequence properly is the subject of [identifying arithmetic sequences](!/algebra/sequences/arithmetic#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, identifying arithmetic sequences, finding terms, the recursive formula, arithmetic series, and the arithmetic mean.`,
+      },
+    ],
+  }
 
   const genericSections=[
     // {
@@ -746,10 +870,7 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-arithLine'} dangerouslySetInnerHTML={{ __html: demoUnits.arithLine }} />,
-          `A non-arithmetic sequence such as 1, 4, 9, 16 bends away from any line.`,
-          `@academic[punchline:An arithmetic sequence is a linear function read at whole-number inputs, with the common difference as its slope.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -767,6 +888,11 @@ export default function ArithmeticSequencesPage({seoData, sectionsContent, intro
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={sequencesNotationSheet}
+            current={'/algebra/sequences/arithmetic'}
           />,
         ]
     },

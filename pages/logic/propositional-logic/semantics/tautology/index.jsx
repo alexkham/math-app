@@ -37,12 +37,12 @@ export async function getStaticProps(){
     //   expression: "P ∨ ¬P",
     //   explanation: "Either P or not P - one must be true"
     // },
-    {
-      id: "3",
-      name: "Non-Contradiction",
-      expression: "¬(P ∧ ¬P)",
-      explanation: "Not both P and not P - contradictions cannot be true"
-    },
+    // {
+    //   id: "3",
+    //   name: "Non-Contradiction",
+    //   expression: "¬(P ∧ ¬P)",
+    //   explanation: "Not both P and not P - contradictions cannot be true"
+    // },
     {
       id: "4",
       name: "Self-Equivalence",
@@ -493,6 +493,11 @@ How to check: before negating, find one row with T and one row with F. If both e
 // tautologies", and /logic/truth-tables/tautologies owns the proof-method and
 // intuitionistic questions. These target buried notation content (⊤, the
 // turnstiles) and the Peirce's law table row.
+// FAQ pass 2026-10-31: kept the three questions. Added the tautological
+// conditional read as an equivalence (pitfall box under Logic Laws as
+// Tautologies), contingencies as the third group (pitfall box under
+// Tautology vs Contradiction; the heading asks only about the two extremes)
+// and the origin of the word (Wittgenstein fact box).
 const faqQuestions = {
   obj1: {
     question: "What does the symbol ⊤ mean in logic?",
@@ -508,6 +513,21 @@ const faqQuestions = {
     question: "What is Peirce's law?",
     answer: "Peirce's law is the tautology ((P → Q) → P) → P: if P follows from the mere assumption that P implies Q, then P holds outright. A truth table confirms it is true in all four rows. Its interest is philosophical — the law is valid in classical logic but not provable in intuitionistic logic, so it serves as a test case separating the two systems. Check it in the [truth table generator](!/logic/truth-tables).",
     sectionId: "other"
+  },
+  obj4: {
+    question: "If A → B is a tautology, are A and B equivalent?",
+    answer: "No, a tautological conditional guarantees one direction only. The modus ponens form $((P \\to Q) \\land P) \\to Q$ is true in all four rows, yet at $P = F$, $Q = T$ the left side $(P \\to Q) \\land P$ is F while $Q$ is T. Equivalence needs the biconditional $A \\leftrightarrow B$ to be a tautology, which means $A \\to B$ and $B \\to A$ both have to be.",
+    sectionId: "laws_as-tautologies"
+  },
+  obj5: {
+    question: "Is every formula either a tautology or a contradiction?",
+    answer: "No, most formulas are neither. A formula that is true in some rows and false in others is a contingency, like $P \\to Q$, which takes the values T, F, T, T. Its negation $\\neg(P \\to Q)$ takes F, T, F, F and is a contingency too: negation turns a tautology into a contradiction and back, but a contingency stays a contingency.",
+    sectionId: "tautology_vs_contradiction"
+  },
+  obj6: {
+    question: "Why is it called a tautology?",
+    answer: "Because it says nothing about the world. Wittgenstein brought tautology, an old word for needless repetition, into logic in his Tractatus of 1921, where he held that every law of logic is one. A formula true in every row rules out no case, so it carries no information about which case holds, and that is exactly why it can never fail.",
+    sectionId: "laws_as-tautologies"
   }
 }
 

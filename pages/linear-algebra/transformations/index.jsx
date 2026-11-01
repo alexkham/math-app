@@ -742,6 +742,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -988,6 +990,24 @@ const summaryTable = `
 `
 
 // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "What a Linear Transformation Is") —
+// template B, definition first. Running instance: the projection
+// T(x, y) = (x, 0), the transformation tool's rankOne state. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its formula box with link and three
+// passages are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCheckTable = ciTableOpen(['check, with u = (1, 2), v = (3, −1)', 'transform first, then combine', 'combine first, then transform', 'equal?']) +
+  ciRow(['addition', 'T(u) + T(v) = (1, 0) + (3, 0) = (4, 0)', 'T(u + v) = T(4, 1) = (4, 0)', 'yes']) +
+  ciRow(['scaling by 3', '3T(u) = (3, 0)', 'T(3u) = T(3, 6) = (3, 0)', 'yes'], { shade: true }) +
+  ciRow(['2u − v', '2T(u) − T(v) = (2, 0) − (3, 0) = (−1, 0)', 'T(2u − v) = T(−1, 5) = (−1, 0)', 'yes'], { last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1282,6 +1302,11 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    projection: linearTransformationDiagrams.rankOne,
+    checkTable: ciCheckTable,
+  };
+
   const demoUnits = {
     // Hub page: one unit, on the geometry section, where the grid
     // makes the definition concrete rather than restating it.
@@ -1294,9 +1319,44 @@ const schemas = {
     }),
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+  // so only what this page holds and no child page asks: the translation
+  // fact box and the norm row under Non-Examples, the p(x^2) fact box under
+  // Examples Beyond Rn, the free choice of basis images and the grid picture
+  // under Geometry.
+  const faqQuestions = {
+    obj1: {
+      question: "Can a translation be written as a matrix?",
+      answer: "No, not in its own dimension: $A\\mathbf{0} = \\mathbf{0}$ for every matrix, while a translation by $\\mathbf{b} \\neq \\mathbf{0}$ moves the origin. One dimension up it can. Store the point $(x, y)$ as $(x, y, 1)$; the shear $(x, y, z) \\mapsto (x + b_1 z, \\; y + b_2 z, \\; z)$ of $\\mathbb{R}^3$ is linear, and on the plane $z = 1$ it moves every point by $(b_1, b_2)$. Graphics software moves 3D objects the same way, with $4 \\times 4$ matrices.",
+      sectionId: "3"
+    },
+    obj2: {
+      question: "Is the length of a vector a linear function?",
+      answer: "No. A linear map must preserve sums, and length does not: $(1, 0)$ and $(0, 1)$ have lengths adding up to $2$, while their sum $(1, 1)$ has length $\\sqrt{2}$. By the triangle inequality, $\\|\\mathbf{u} + \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$, and for the usual length equality holds only when one vector is a non-negative multiple of the other. Scaling fails too: $\\|-\\mathbf{v}\\| = \\|\\mathbf{v}\\|$, not $-\\|\\mathbf{v}\\|$.",
+      sectionId: "3"
+    },
+    obj3: {
+      question: "Is $p(x) \\mapsto p(x^2)$ a linear map?",
+      answer: "Yes, although squaring itself is the standard non-example. The map acts on the polynomial $p$, not on the number $x$: $(p + q)(x^2) = p(x^2) + q(x^2)$ and $(cp)(x^2) = c\\,p(x^2)$, so sums and multiples of polynomials are preserved. For example, $1 + x$ goes to $1 + x^2$. Linearity is judged in the input function, and Koopman used this in 1931 to study nonlinear motion with linear maps.",
+      sectionId: "4"
+    },
+    obj4: {
+      question: "Can the images of the basis vectors be chosen freely?",
+      answer: "Yes. Any $n$ vectors in $W$, with no conditions between them, are the images of a basis $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$ under exactly one linear map. Every $\\mathbf{v}$ is a unique combination $c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$, and linearity fixes $T(\\mathbf{v}) = c_1T(\\mathbf{v}_1) + \\cdots + c_nT(\\mathbf{v}_n)$. With $T(1, 1) = (2, 0)$ and $T(1, -1) = (0, 4)$, the vector $(3, 1) = 2(1, 1) + (1, -1)$ goes to $(4, 4)$.",
+      sectionId: "5"
+    },
+    obj5: {
+      question: "What does a linear transformation do to a grid?",
+      answer: "It keeps it a grid. Lines go to lines (or to single points, when the map flattens space), parallel lines stay parallel, evenly spaced lines stay evenly spaced, and the origin stays put. These four survivals are the picture of the two algebraic conditions. The squares may be stretched, sheared or flipped into parallelograms, or flattened onto a line, as by $T(x, y) = (x, 0)$. A translation moves the origin and a curved rule bends the lines, so neither is linear.",
+      sectionId: "8"
+    }
+  }
+
 return {
   props:{
+    faqQuestions,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1315,9 +1375,73 @@ return {
 }
    }
 
-export default function LinearTransformationsPage({seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas, demoUnits}) {
+export default function LinearTransformationsPage({seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template B (definition first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Most functions on vectors scramble the structure; the useful ones respect adding and scaling.`,
+        content: [
+          `If a function treats sums and multiples well, knowing it on a few vectors tells you everything — the way doubling a recipe doubles every ingredient, so one card covers any batch size. Without that property, every input has to be worked out from scratch.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [linear transformation](!/linear-algebra/definitions#linear_transformation) is a function between vector spaces that preserves addition and scalar multiplication: transforming a combination gives the same combination of the transformed vectors.`,
+        formula: [
+          `A linear transformation is a function $T: V \\to W$ between [vector spaces](!/linear-algebra/vector-spaces) that preserves the two fundamental operations. For all vectors $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c, d$:`,
+          `@academic[formula_callout:Linear Transformation Definition
+$$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
+/linear-algebra/formulas#linear_transformation_definition]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        visual: ciSvg('projection'),
+        caption: `The projection $T(x, y) = (x, 0)$ flattens the whole grid onto the horizontal axis, keeping lines straight and spacing even. The same state is on the [linear transformation explorer](!/linear-algebra/visual-tools/linear-transformation-2d).`,
+        footer: `So $T(x, y) = (x, 0)$, which keeps the first coordinate and drops the second, is linear.`,
+      },
+      {
+        id: 'kind',
+        lead: `A linear transformation is a function — one input vector, one output vector — that respects the vector space structure.`,
+        content: [
+          `This single condition packages two requirements: $T$ preserves addition ($T(\\mathbf{u} + \\mathbf{v}) = T(\\mathbf{u}) + T(\\mathbf{v})$) and $T$ preserves scalar multiplication ($T(c\\mathbf{v}) = cT(\\mathbf{v})$). A function satisfying both is called linear. A function violating either is not.`,
+          `The space $V$ is the domain and $W$ is the codomain, both vector spaces over the same field. The terms "linear map," "linear operator" (when $V = W$), and "linear transformation" are all synonymous. The full set of [properties](!/linear-algebra/transformations/properties) that linearity entails — and the strategies for verifying or disproving it — are developed on their own page.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For the projection, transforming and combining can be done in either order.`,
+        content: [
+          ciTable('checkTable'),
+        ],
+      },
+      {
+        id: 'verify',
+        lead: `The definition promised one rule covering sums, multiples and mixtures — and the last row is exactly that rule.`,
+        content: [
+          `Checking $T(2\\mathbf{u} - \\mathbf{v}) = 2T(\\mathbf{u}) - T(\\mathbf{v})$ tests addition and scaling in one go. Because the rule holds for every choice of vectors and weights, the values $T(1, 0) = (1, 0)$ and $T(0, 1) = (0, 0)$ already fix $T$ on the whole plane.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Scope: linear transformations always send zero to zero, so shifts and curved rules are out.`,
+        content: `Taking all weights zero in the rule forces $T(\\mathbf{0}) = \\mathbf{0}$. A translation such as $T(\\mathbf{v}) = \\mathbf{v} + (1, 0)$ breaks that at once, and squaring or absolute value break the rule in other ways, as the [non-examples](!/linear-algebra/transformations#3) section shows.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers examples inside and beyond Rⁿ, non-examples, how a basis determines a transformation, its properties, the connection with matrices, and the geometry.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1325,7 +1449,7 @@ export default function LinearTransformationsPage({seoData, sectionsContent, int
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1410,6 +1534,22 @@ export default function LinearTransformationsPage({seoData, sectionsContent, int
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Linear Transformations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 ]

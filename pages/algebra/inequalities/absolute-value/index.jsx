@@ -12,6 +12,7 @@ import inequalityVisualizerDiagrams from '@/app/components/algebra/inequalities/
 import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/functionPlot.v2'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -573,7 +574,7 @@ The case-splitting method is the alternative: consider the signs of $f(x)$ and $
 
   obj7: {
     title: `Geometric Interpretation`,
-    content: `Absolute value measures distance on the number line, and this interpretation turns every absolute value inequality into a geometric statement about proximity or separation.
+    content: `Absolute value measures distance on the number line, and this interpretation turns every absolute value inequality into a geometric statement about proximity or separation. The reading of $|a - b|$ as the distance between $a$ and $b$ is set out on the [absolute value](!/algebra/absolute-value) page.
 
 @academic[fact,aside:true,width:35%:Calculus is written in this language
 A function $f$ is continuous at $a$ when every $\\varepsilon > 0$ has a $\\delta > 0$ such that $|x - a| < \\delta$ forces $|f(x) - f(a)| < \\varepsilon$. Both conditions are distance inequalities of exactly this kind: an interval around a centre.]@
@@ -830,8 +831,47 @@ const schemas = {
     }),
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Questions come
+  // from material no heading asks: the negative-k and k = 0 rows of the table
+  // under the greater-than form and the |x - 4| > 0 example, the centre and
+  // width note under the less-than form, the three-piece |x^2 - 7x + 10| >= 2,
+  // why squaring is safe with bars on both sides, and the continuity fact box.
+  const faqQuestions = {
+    obj1: {
+      question: "What happens to $|f(x)| < k$ and $|f(x)| > k$ when $k$ is negative?",
+      answer: "No algebra is needed, because an absolute value is never negative. Then $|f(x)| < k$ and $|f(x)| \\leq k$ have no solution at all: $|5x + 3| < -1$ is empty. And $|f(x)| > k$ and $|f(x)| \\geq k$ hold for every real $x$, since a value that is at least $0$ always exceeds a negative number. Converting anyway gives nonsense: $|5x + 3| < -1$ would become $1 < 5x + 3 < -1$, a chain no number satisfies.",
+      sectionId: "3"
+    },
+    obj2: {
+      question: "Why does $|x - 4| > 0$ leave out only $x = 4$?",
+      answer: "Because an absolute value is positive everywhere except where the inside is zero. So $|f(x)| > 0$ simply asks where $f(x) \\neq 0$: here $x < 4$ or $x > 4$, which is $(-\\infty, 4) \\cup (4, \\infty)$. The non-strict versions go to the extremes: $|f(x)| \\geq 0$ holds for every $x$, and $|f(x)| \\leq 0$ holds only at the roots of $f(x) = 0$, since $0$ is the only absolute value that is not positive.",
+      sectionId: "4"
+    },
+    obj3: {
+      question: "How do you find the centre and width of the solution to $|ax + b| < k$?",
+      answer: "For $k > 0$, the centre is where the inside is zero, $x = -\\frac{b}{a}$, and the interval reaches $\\frac{k}{|a|}$ to each side, so its width is $\\frac{2k}{|a|}$. For $|2x - 3| < 5$ the centre is $\\frac{3}{2}$ and the half-width $\\frac{5}{2}$, which gives $(-1, 4)$, the same as solving $-5 < 2x - 3 < 5$. The greater-than form uses the same two numbers: for $|4x + 1| \\geq 7$ the rays start $\\frac{7}{4}$ either side of $-\\frac{1}{4}$, at $-2$ and $\\frac{3}{2}$.",
+      sectionId: "2"
+    },
+    obj4: {
+      question: "How can an absolute value inequality have a solution in three pieces?",
+      answer: "When the inside is not linear, each half of the conversion can give its own pieces. $|x^2 - 7x + 10| \\geq 2$ splits into $x^2 - 7x + 10 \\geq 2$, which gives two outer rays ending near $1.44$ and $5.56$, and $x^2 - 7x + 10 \\leq -2$, which is $(x - 3)(x - 4) \\leq 0$ and gives $[3, 4]$. The bars fold the dip of the parabola upward, and the folded part rises above $2$ between $3$ and $4$, so the answer has three separate pieces.",
+      sectionId: "5"
+    },
+    obj5: {
+      question: "Why can you square both sides of $|2x - 1| < |x + 3|$ when squaring usually breaks an inequality?",
+      answer: "Because neither side is ever negative. Squaring keeps the order of non-negative numbers: if $0 \\leq A < B$, then $A^2 < B^2$. It fails only when signs are mixed, as in $-5 < 2$ but $25 > 4$. So $|2x - 1| < |x + 3|$ becomes $(x + 3)^2 - (2x - 1)^2 > 0$, which factors as $(4 - x)(3x + 2) > 0$ and gives $\\left(-\\frac{2}{3}, 4\\right)$. Dropping the bars instead gives $x < 4$, which wrongly keeps $x = -1$.",
+      sectionId: "6"
+    },
+    obj6: {
+      question: "What does $|x - a| < \\delta$ mean in calculus?",
+      answer: "That $x$ is less than $\\delta$ away from $a$, so it lies in the open interval $(a - \\delta, a + \\delta)$ centred at $a$, just as $|x - 5| < 3$ is $(2, 8)$. The definition of [continuity](!/calculus/limits/continuity) is written this way: $f$ is continuous at $a$ when every $\\varepsilon > 0$ has a $\\delta > 0$ such that $|x - a| < \\delta$ forces $|f(x) - f(a)| < \\varepsilon$. Both conditions are less-than absolute value inequalities, each an interval around a centre.",
+      sectionId: "7"
+    }
+  }
+
   return {
   props: {
+    faqQuestions,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -852,6 +892,7 @@ const schemas = {
    }
 
 export default function AbsoluteValueInequalitiesPage({
+  faqQuestions,
   seoData,
   sectionsContent,
   introContent,
@@ -1057,6 +1098,22 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Absolute Value Inequalities FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

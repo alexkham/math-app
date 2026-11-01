@@ -339,7 +339,7 @@ The asymptote remains at $x = 0$, and the domain remains $x > 0$.`,
 
 $y = -\\log_a(x)$: reflection across the $x$-axis. The point $(a, 1)$ becomes $(a, -1)$. An increasing logarithm becomes decreasing, and vice versa. This is equivalent to changing the base: $-\\log_a(x) = \\log_{1/a}(x)$.
 
-$y = \\log_a(-x)$: reflection across the $y$-axis. The domain changes from $x > 0$ to $x < 0$. The asymptote moves from $x = 0$ to $x = 0$ (still the $y$-axis, approached from the left). The point $(a, 1)$ becomes $(-a, 1)$.
+$y = \\log_a(-x)$: reflection across the $y$-axis. The domain changes from $x > 0$ to $x < 0$. The asymptote stays at $x = 0$ (still the $y$-axis, now approached from the left). The point $(a, 1)$ becomes $(-a, 1)$.
 
 @academic[pitfall,aside:true,width:35%:Mixing up the two reflections
 Treating $\\log_2(-x)$ like $-\\log_2(x)$ draws the curve at $x > 0$ through $(2, -1)$, where $\\log_2(-2)$ is undefined. A minus inside flips across the $y$-axis: the curve lies at $x < 0$, through points like $(-4, 2)$.
@@ -489,6 +489,10 @@ How to check: set the argument equal to $0$. For $x + 2$ that gives $x = -2$, wh
 }
 
 
+// FAQ pass 2026-10-31: kept all three questions. Added the missing
+// horizontal asymptote (rule box in "Domain and Range on the Graph" and the
+// googol fact box) and whether a^x and log_a(x) cross (fact box and one
+// paragraph in "Inverse Relationship with Exponential Graphs").
 const faqQuestions = {
   obj1: {
     question: "Is $-\\log_2(x)$ the same as $\\log_{1/2}(x)$?",
@@ -504,6 +508,16 @@ const faqQuestions = {
     question: "Why does $\\log_2(-x)$ have a graph at all?",
     answer: "Because $-x$ is positive whenever $x$ is negative, and it is the argument that must be positive, not the variable. The domain becomes $x < 0$, so the curve lies entirely left of the $y$-axis, passing through $(-1, 0)$ and $(-2, 1)$. The asymptote is still the $y$-axis, now approached from the left.",
     sectionId: "9"
+  },
+  obj4: {
+    question: "Does a logarithmic graph level off to a horizontal asymptote?",
+    answer: "No. The curve flattens, but it never stops rising: for $a > 1$ every height is reached somewhere, so there is no horizontal asymptote, unlike the exponential's $y = 0$. On $y = \\log_{10}(x)$ each new unit of height costs ten times as much $x$ as the last, $9$ then $90$ then $900$, yet height $100$ still arrives, at $x = 10^{100}$, a googol.",
+    sectionId: "2"
+  },
+  obj5: {
+    question: "Do the graphs of $a^x$ and $\\log_a(x)$ ever cross?",
+    answer: "It depends on the base. For a base above $1$ both curves rise, and a rising curve can meet its mirror image in $y = x$ only on that line, so the graphs meet exactly where $a^x = x$. Since $2^x > x$ for every $x$, the graphs of $2^x$ and $\\log_2(x)$ never meet. With base $\\sqrt{2}$ they cross twice, at $(2, 2)$ and $(4, 4)$, because $(\\sqrt{2})^2 = 2$ and $(\\sqrt{2})^4 = 4$.",
+    sectionId: "11"
   }
 }
 

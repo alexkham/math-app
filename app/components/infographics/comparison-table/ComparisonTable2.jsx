@@ -179,6 +179,31 @@ function buildCss() {
    * export state
    * ========================================================*/
   '.cmp-root[data-diagram-export] .cmp-go{display:none !important;}' +
+  /* the PNG/PDF generator sets everything static; keep the tally in its corner */
+  '@media (min-width:641px){.cmp-root .cmp-mast{position:relative !important;}' +
+  '.cmp-root .cmp-tally{position:absolute !important;}}' +
+
+  /* ==========================================================
+   * site look (2026-10-30): light header and light bands, as on
+   * MatrixOperation and the other infographics; site blues only
+   * ========================================================*/
+  '.cmp-root .cmp-mast{background:#eef4fc;color:#06357A;border:1px solid var(--cmp-line);}' +
+  '.cmp-root .cmp-mast::after{background:#2563EB;}' +
+  '.cmp-root .cmp-kicker{color:#2563EB;opacity:1;}' +
+  '.cmp-root .cmp-title{font-family:\'Inter\',system-ui,sans-serif;font-weight:600;font-size:21px;' +
+  'letter-spacing:-.01em;color:#06357A;}' +
+  '.cmp-root .cmp-intro{color:#4a6285;opacity:1;}' +
+  '.cmp-root .cmp-tally b{color:#06357A;}' +
+  '.cmp-root .cmp-tally span{color:#4a6285;opacity:1;}' +
+  '.cmp-root .cmp-gband,.cmp-root .cmp-gband.is-alt,' +
+  '.cmp-root .cmp-tbl tr.cmp-band td,.cmp-root .cmp-tbl tr.cmp-band.is-alt td' +
+  '{background:var(--cmp-soft);color:#06357A;border-bottom:1px solid var(--cmp-line);}' +
+  '.cmp-root .cmp-tbl th.cmp-subj,.cmp-root .cmp-tbl th.cmp-corner{background:#eef4fc;color:#06357A;' +
+  'border-left:1px solid var(--cmp-line);}' +
+  '.cmp-root .cmp-block-h,.cmp-root .cmp-block-h.is-alt{background:#eef4fc;color:#06357A;' +
+  'border-bottom:1px solid var(--cmp-line);}' +
+  '.cmp-root .cmp-who{color:#2563EB;}' +
+  '.cmp-root .cmp-go.on-ink{color:#2563EB;border-color:#2563EB;}' +
 
   /* ---------- responsive ---------- */
   '@media (max-width:640px){' +

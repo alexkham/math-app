@@ -16,6 +16,8 @@ import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 
 
 
@@ -339,7 +341,7 @@ Not every linear inequality arrives in standard form. The inequality $3x - 7 > 2
         means: `Solution rays and intervals obey two bracket rules: square means the endpoint belongs, round means it does not — and $\\infty$ **always** takes a round bracket, because an unreachable end cannot belong to anything.`,
         cases: `Strict inequality → round, inclusive → square, matching the marks above. Two rays joined by OR write their union: $(-\\infty, -4) \\cup (2, \\infty)$.`,
         alsoWritten: `Reversed brackets — $\\left]-2, 3\\right]$ — the Bourbaki convention, standard in French and some European texts, where an outward-turned bracket marks the excluded end.`,
-        confusedWith: `The coordinate pair $(4, \\infty)$ versus the point $(4, 7)$ — identical glyphs. Context decides, which is exactly why the Bourbaki school switched to reversed brackets.`,
+        confusedWith: `The open interval $(4, 7)$ versus the point $(4, 7)$ — identical glyphs. Context decides, which is exactly why the Bourbaki school switched to reversed brackets.`,
       },
     ],
     symbolsHref: `/math-symbols/algebra`,
@@ -608,6 +610,10 @@ const introContent = {
 };
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added checking an
+// answer by test values (a passage under "Definition and Standard Form"), no
+// smallest solution of x > 4 (fact box under "Graphing the Solution") and the
+// empty AND / whole-line OR (one paragraph under "Compound Linear Inequalities").
 const faqQuestions = {
   obj1: {
     question: "Is $5 > x < 8$ a valid way to write an inequality?",
@@ -623,6 +629,21 @@ const faqQuestions = {
     question: "Is $\\neq$ an inequality?",
     answer: "Not in this family. The four order marks $<$, $\\leq$, $>$, $\\geq$ each rank two quantities, and the bar underneath is a one-stroke \"or equal\". By contrast $\\neq$ only refuses equality and says nothing about which side is larger, so it has no direction to solve for and cannot be graphed as a ray.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "How do you check the answer to an inequality?",
+    answer: "Test one value from each side of the boundary in the original inequality, then test the boundary itself. For $3x - 2 > 4$, $x = 3$ gives $7 > 4$, true, and $x = 0$ gives $-2 > 4$, false, so the answer $(2, \\infty)$ lies on the correct side. At $x = 2$ both sides equal $4$, and $4 > 4$ is false, so the endpoint stays out.",
+    sectionId: "1"
+  },
+  obj5: {
+    question: "Is there a smallest number greater than 4?",
+    answer: "No. Whatever solution of $x > 4$ you name, the midpoint between it and $4$ is also greater than $4$ and smaller than the one you named, so the solutions never reach a first member. That is why the answer is written with a round bracket, $(4, \\infty)$, and drawn with an open dot: the shading starts at a point that no solution actually reaches.",
+    sectionId: "4"
+  },
+  obj6: {
+    question: "Can a compound inequality have no solution?",
+    answer: "Yes, an AND can. Its solution is the overlap of two rays, and two rays that point away from each other without meeting, such as $x < 1$ and $x > 3$, have no overlap, so the set is empty. An OR goes the other way: two rays pointing in opposite directions that overlap, such as $x < 3$ or $x > 1$, cover the whole number line.",
+    sectionId: "5"
   }
 }
 
@@ -934,6 +955,11 @@ $$ax + b < 0$$]@`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={polyEqIneqNotationSheet}
+            current={'/algebra/inequalities/linear'}
           />,
         ]
     },

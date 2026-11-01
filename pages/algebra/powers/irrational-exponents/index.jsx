@@ -411,6 +411,10 @@ How to check: estimate each factor. $2^{\\pi} \\approx 8.825$ and $2^{1-\\pi} \\
   content: `[Natural exponents](!/algebra/powers/natural-exponents) covered the positive integers. [Negative exponents](!/algebra/powers/negative-exponents) extended through zero and below. [Rational exponents](!/algebra/powers/rational-exponents) filled in every fraction. But the real number line still has gaps — irrational numbers like $\\sqrt{2}$ and $\\pi$ sit between the rationals, and a complete definition of $a^x$ must account for them.`
 }
 
+// FAQ pass 2026-10-31: kept all four questions. Added that the exponent laws
+// alone do not fix 2^pi (fact box under "Why This Works"), an irrational
+// power of an irrational number being rational (fact box under "The Laws
+// Still Hold") and the calculator reading of -2^pi (negative-base pitfall).
 const faqQuestions = {
   obj1: {
     question: "Why must $2^{\\pi}$ have a value at all?",
@@ -431,6 +435,21 @@ const faqQuestions = {
     question: "Why must irrational exponents be defined before exponential functions?",
     answer: "Because an [exponential function](!/algebra/powers/exponential-functions) $f(x) = a^x$ lets $x$ range over all real numbers, and most real numbers are irrational. Without the irrational case its graph would be a dense scatter of points riddled with holes at $\\pi$, $\\sqrt{2}$, and infinitely many others, rather than a curve. Defining $a^x$ for every real $x$ is what makes the function continuous.",
     sectionId: "6"
+  },
+  obj5: {
+    question: "Do the laws of exponents alone decide the value of $2^{\\pi}$?",
+    answer: "No, smoothness does. There are functions that agree with $2^x$ at every rational $x$, satisfy $f(x+y) = f(x)\\,f(y)$ for all real numbers, and still give $f(\\pi)$ any positive value. They can only be built with the axiom of choice and jump everywhere, so none of them is a curve. Asking for a graph without jumps rules them out and leaves $2^{\\pi} \\approx 8.825$ as the only value.",
+    sectionId: "3"
+  },
+  obj6: {
+    question: "Can an irrational number raised to an irrational power be rational?",
+    answer: "Yes. Take $\\sqrt{2}^{\\sqrt{2}}$: if it is rational, it is an example. If it is irrational, raise it to $\\sqrt{2}$ once more, and the power-of-a-power rule gives $\\sqrt{2}^{\\sqrt{2} \\cdot \\sqrt{2}} = \\sqrt{2}^2 = 2$, which is an example. Either way one exists, and the argument never has to know which case holds. In fact $\\sqrt{2}^{\\sqrt{2}}$ is irrational, so the second case is the true one.",
+    sectionId: "5"
+  },
+  obj7: {
+    question: "Why does a calculator give $-8.825$ for $-2^{\\pi}$?",
+    answer: "Because it applies the power before the minus sign, so it computes $-(2^{\\pi})$, which is an ordinary real number. The power $(-2)^{\\pi}$ has no real value: nearby rational exponents give $(-2)^{22/7} \\approx 8.833$, $(-2)^{311/99} \\approx -8.824$, and no real number at all for $(-2)^{157/50}$, so nothing is approached. Typed with parentheses, a calculator reports an error or a non-real result.",
+    sectionId: "pitfalls"
   }
 }
 

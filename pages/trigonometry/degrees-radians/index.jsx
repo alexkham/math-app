@@ -1309,6 +1309,9 @@ import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExpl
 import renderCircleArc from '@/app/utils/illustrations/trigonometry/circle/circleArc'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 
 
 export async function getStaticProps(){
@@ -1330,31 +1333,47 @@ export async function getStaticProps(){
     'radian vs degree'
   ]
 
+// FAQ pass 2026-10-31: cut three heading questions (converting degrees to
+// radians, what a radian measures, the arc length formula: each restates an
+// h2). Kept radians in calculus and the bare-number convention. Added why
+// 360, minutes and seconds to decimal degrees, the nautical mile (Degree
+// Measurement text and fact box), degrees in one radian (one sentence under
+// Radian Measurement) and the 361° day (fact box under Coterminal Angles).
 const faqQuestions = {
   obj1: {
-    question: "How do you convert degrees to radians?",
-    answer: "Multiply by π and divide by 180, since a half rotation is 180 degrees and also π radians. Going the other way, multiply by 180 and divide by π. Remembering the single fact that 180 degrees equals π radians makes both directions recoverable without memorising two separate formulas.",
-    sectionId: "3"
-  },
-  obj2: {
     question: "Why are radians used instead of degrees in calculus?",
     answer: "Because the derivative formulas only come out clean in radians. The derivative of sine is cosine exactly, with no extra constant, and that holds only when the angle is measured in radians. In degrees an awkward factor of π over 180 appears in every derivative and integral, propagating through everything downstream.",
     sectionId: "2"
   },
-  obj3: {
-    question: "What does a radian actually measure?",
-    answer: "It is the angle that cuts an arc equal in length to the radius. Wrapping the radius along the circumference once and joining the ends to the centre produces exactly one radian. Because the definition compares two lengths, the unit cancels out, which is why radians are dimensionless and often written with no symbol at all.",
-    sectionId: "2"
-  },
-  obj4: {
+  obj2: {
     question: "Why does a bare number sometimes mean radians?",
     answer: "Because radians are the default when no unit is written, so sin 2 means the sine of 2 radians. Degrees always carry the degree symbol. On paper the notation resolves it, but a calculator only knows its mode setting, so a degree-mode calculation of sin 2 is silently wrong with no error shown.",
     sectionId: "notation"
   },
+  obj3: {
+    question: "Why are there 360 degrees in a circle?",
+    answer: "Mostly for convenience. The number $360$ divides evenly by 2, 3, 4, 5, 6, 8, 9, 10, 12 and more, so a full turn splits into halves, thirds, quarters or eighths without fractions. The habit goes back to Babylonian base-60 arithmetic and to a year of roughly 360 days. Nothing in the circle itself picks 360, which is why radians, read off the circle's own radius, take over in later mathematics.",
+    sectionId: "1"
+  },
+  obj4: {
+    question: "How do you convert degrees, minutes and seconds to decimal degrees?",
+    answer: "Divide the minutes by 60 and the seconds by 3600, then add both to the whole degrees. So $41°24'36''$ is $41 + \\frac{24}{60} + \\frac{36}{3600} = 41 + 0.4 + 0.01 = 41.41°$. Writing it as $41.2436°$ is the usual slip: minutes and seconds count in sixtieths, like clock time, not in tenths and hundredths.",
+    sectionId: "1"
+  },
   obj5: {
-    question: "What is the arc length formula?",
-    answer: "Arc length equals radius times angle, provided the angle is in radians. The formula is this simple only because a radian is defined by the arc-to-radius ratio in the first place. Converting to radians before applying it is essential, since feeding degrees in gives an answer wrong by a factor of about 57.",
-    sectionId: "4"
+    question: "Why is a nautical mile 1,852 metres?",
+    answer: "Because it is one minute of latitude. The metre was first defined so that the quarter meridian from the North Pole to the equator measures 10,000 km. That quarter turn spans $90 \\times 60 = 5400$ minutes of arc, and 10,000 km divided by 5,400 is about 1,852 m. So a distance measured in minutes on a chart's latitude scale is directly a distance in nautical miles.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "How many degrees is one radian?",
+    answer: "About $57.3°$; exactly $\\frac{180°}{\\pi} \\approx 57.296°$, from dividing $180° = \\pi$ by $\\pi$. One radian is the angle whose arc is as long as the radius, so it is a little less than $60°$: at $60°$ the straight chord equals the radius, and the curved arc is already longer than that chord.",
+    sectionId: "2"
+  },
+  obj7: {
+    question: "Does the Earth turn exactly 360° in a day?",
+    answer: "No, about $360.99°$ from one noon to the next. During the day the Earth also moves about $\\frac{1}{365}$ of its orbit, roughly $1°$, so it has to turn that much further before the Sun is back in the same place in the sky. A plain $360°$ turn, measured against the stars, takes about four minutes less than 24 hours.",
+    sectionId: "7"
   }
 }
 
@@ -1891,6 +1910,25 @@ const faqQuestions = {
 
 //   }
 
+// Concept introduction (section 2, "Radian Measurement") — template H, open
+// question. Running instance: four angles measured as arc ÷ radius on
+// circles of radius 1 and 3. Old obj2 text is kept in sectionsContent.obj2,
+// unused; its formula box, four passages and the oneRadian demo frame with
+// its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciArcTable = ciTableOpen(['angle', 'degrees', 'arc on a circle of radius 1', 'arc on a circle of radius 3', 'arc ÷ radius']) +
+  ciRow(['full turn', '360°', '2π', '6π', '2π']) +
+  ciRow(['half turn', '180°', 'π', '3π', 'π'], { shade: true }) +
+  ciRow(['quarter turn', '90°', 'π/2', '3π/2', 'π/2']) +
+  ciRow(['arc as long as the radius', 'about 57.3°', '1', '3', '1'], { shade: true, last: true, color: '#2563EB', cols: [4] }) +
+  '</tbody></table>'
+
 const sectionsContent={
       obj0: {
     title: `Key Terms`,
@@ -2372,6 +2410,10 @@ How to check: the complement of an angle between $0°$ and $90°$ is again betwe
     ],
   };
 
+  const conceptIntroFigures = {
+    arcTable: ciArcTable,
+  };
+
   const demoUnits = {
     compSupp: demoUnitFrame({
       svg: [angleExplorerDiagrams.concepts.complementary, angleExplorerDiagrams.concepts.supplementary],
@@ -2449,6 +2491,7 @@ The distinction matters far beyond notation. [Arc length](!/trigonometry/degrees
          faqQuestions,
          schemas,
          demoUnits,
+         conceptIntroFigures,
           seoData: {
         title: "Degrees and Radians | Learn Math Class",
         description: "Learn degree and radian angle measurement, convert between the two systems, and apply radians to arc length and sector area formulas with clear explanations.",
@@ -2461,9 +2504,72 @@ The distinction matters far beyond notation. [Arc length](!/trigonometry/degrees
     }
    }
 
-export default function DegreesRadiansPage({anglePairTree, seoData,sectionsContent , introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function DegreesRadiansPage({anglePairTree, seoData,sectionsContent , introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template H (open question).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'question',
+        lead: `Why should a full turn be 360 degrees? Could a circle measure its own angles instead?`,
+        content: [
+          `The number $360$ is a choice handed down from ancient astronomy, not something the circle itself supplies. A measure read off the circle would need no such choice.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Divide the length of the arc by the radius: the result is the same on every circle.`,
+        content: [
+          ciTable('arcTable'),
+          `On the bigger circle every arc is three times as long, but so is the radius, and the ratio does not change. It depends on the angle alone.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Arc length divided by radius measures the angle, whatever the size of the circle.`,
+        content: [
+          `Because both $s$ and $r$ are lengths, their ratio is dimensionless — radians carry no physical unit. This is not a technicality; it is the reason radians integrate seamlessly into formulas where degrees would introduce unwanted conversion factors.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `An angle measures $\\theta$ [radians](!/trigonometry/definitions#radian) when its arc on a circle is $\\theta$ times the radius: $\\theta = \\frac{s}{r}$. One radian is the angle whose arc is exactly as long as the radius.`,
+        formula: [
+          `A radian is defined by a direct geometric relationship: it is the angle subtended at the center of a circle by an arc whose length equals the radius of that circle. If a circle has radius $r$ and an arc of length $s$ is marked along its circumference, the central angle $\\theta$ in radians is:`,
+          `@academic[formula_callout:Radian Measurement
+$$\\theta = \\frac{s}{r}$$]@`,
+        ],
+        footer: `So a full turn is $2\\pi$ radians, a right angle is $\\frac{\\pi}{2}$, and one radian is about $57.3°$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A radian measure is a pure number — the ratio of two lengths.`,
+        content: [
+          `A full circumference has length $2\\pi r$, so a full rotation corresponds to $\\frac{2\\pi r}{r} = 2\\pi$ radians. A half rotation is $\\pi$ radians, a quarter rotation is $\\frac{\\pi}{2}$, and so on. One radian is approximately $57.296°$ — a fact occasionally useful for quick estimation, though exact values in terms of $\\pi$ are always preferred in mathematical work.`,
+          <div key={'unit-oneRadian'} dangerouslySetInnerHTML={{ __html: demoUnits.oneRadian }} />,
+          `Because the ratio has no units, every formula built on it inherits that cleanliness.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Radians are not merely another unit: the formulas of calculus are written for them.`,
+        content: [
+          `The radian is not an arbitrary alternative to degrees. It is the angle measure that makes the core formulas of trigonometry and calculus as clean as possible. Arc length becomes $s = r\\theta$ with no extra constants. Sector area becomes $A = \\frac{1}{2}r^2\\theta$. The Taylor series $\\sin(x) = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\cdots$ holds only for $x$ in radians. The small-angle approximation $\\sin(\\theta) \\approx \\theta$ for $\\theta$ near zero — essential in physics and engineering — relies on radian measure. Every simplification that makes trigonometric calculus workable traces back to defining angle through the ratio of arc to radius.`,
+          `Changing from one measure to the other is covered in [converting between degrees and radians](!/trigonometry/degrees-radians#3).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, converting between degrees and radians, arc length, and the angles used most often.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2488,9 +2594,7 @@ export default function DegreesRadiansPage({anglePairTree, seoData,sectionsConte
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-          <div key={'unit-oneRadian'} dangerouslySetInnerHTML={{ __html: demoUnits.oneRadian }} />,
-          `Because the ratio has no units, every formula built on it inherits that cleanliness.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
 
@@ -2511,6 +2615,11 @@ export default function DegreesRadiansPage({anglePairTree, seoData,sectionsConte
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={trigonometryNotationSheet}
+            current={'/trigonometry/degrees-radians'}
           />,
         ]
     },

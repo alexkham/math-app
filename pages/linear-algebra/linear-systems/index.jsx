@@ -664,6 +664,9 @@ import matrixProductDiagrams from '@/app/components/linear-algebra/multiplicatio
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -800,6 +803,25 @@ const summaryTable = `
 </table>
 `
 
+
+// Concept introduction (section 1, "What a Linear System Is") — template A,
+// definition last. Running instance: 2x + y = 7 and x + 3y = 11 (coffee and
+// muffin prices), solution (2, 3). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four formula boxes and three passages are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPriceTable = ciTableOpen(['coffee x', 'muffin y', '2x + y = 7?', 'x + 3y = 11?']) +
+  ciRow(['3', '1', 'yes', 'no — 6']) +
+  ciRow(['1', '5', 'yes', 'no — 16'], { shade: true }) +
+  ciRow(['5', '2', 'no — 12', 'yes']) +
+  ciRow(['2', '3', 'yes', 'yes'], { shade: true, last: true, color: '#2563EB' }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -1173,6 +1195,18 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const fpCiTwoLines = { kind: 'pieces', svgTitle: 'The lines 2x + y = 7 and x + 3y = 11 cross at the single point (2, 3)', xRange: [-0.5, 5.5], yRange: [-0.5, 7.5], xStep: 1, yStep: 1,
+    pieces: [
+      { fn: (x) => 7 - 2 * x, from: 0, to: 3.5, ends: [null, null], color: 'f', label: { text: '2x + y = 7', x: 0.55, y: 5.9, pos: 'e' } },
+      { fn: (x) => (11 - x) / 3, from: 0, to: 5.5, ends: [null, null], color: 'g', label: { text: 'x + 3y = 11', x: 4.3, y: 2.23, pos: 'n' } },
+    ],
+    points: [{ x: 2, y: 3, label: '(2, 3): both hold', pos: 'ne' }],
+    caption: 'Each equation is a line; the solution is the point on both' };
+  const conceptIntroFigures = {
+    priceTable: ciPriceTable,
+    twoLines: renderFunctionPlotV4(fpCiTwoLines),
+  };
+
   const demoUnits = {
     bothReadings: demoUnitFrame({
       svg: [matrixProductDiagrams.columnsComplete, matrixProductDiagrams.rowsComplete],
@@ -1257,11 +1291,42 @@ const schemas = {
     ],
   };
 
+// FAQ pass 2026-11-01: new FAQ section (the page had none). Section overview,
+// so only what the overview itself holds: what counts as linear (What a
+// Linear System Is), the column-space reading (Matrix Form), the
+// ten-thousandth fact box (Geometric Interpretation) and iterative methods
+// (Beyond Row Reduction). Not asked here: the inverse-versus-elimination cost,
+// already asked on decompositions/lower-upper.
+const faqQuestions = {
+    obj1: {
+      question: "What makes an equation linear?",
+      answer: "Each unknown appears only to the first power, multiplied by a fixed number, and the terms are added: no products of unknowns, no powers higher than $1$, and no functions such as $\\sin$ or $e^{x}$ applied to an unknown. So $3x_1 - 2x_2 + x_3 = 7$ is linear, while $x_1 x_2 + x_3^2 = 1$ is not. In two unknowns a linear equation draws a straight line, and a solution of a system is a point lying on every line.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "How is solving $A\\mathbf{x} = \\mathbf{b}$ a question about the columns of $A$?",
+      answer: "Because $A\\mathbf{x} = x_1\\mathbf{a}_1 + \\cdots + x_n\\mathbf{a}_n$ is a combination of the columns, weighted by the unknowns. Solving asks whether $\\mathbf{b}$ can be assembled from the columns, and with which weights. For $2x + y = 7$, $x + 3y = 11$, the weights $2$ and $3$ work: $2(2, 1) + 3(1, 3) = (7, 11)$. A solution exists exactly when $\\mathbf{b}$ lies in the column space of $A$, which is the condition $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "Why can a tiny change to one equation move the solution far away?",
+      answer: "Because the lines are nearly parallel. $x + y = 2$ and $x + 1.0001y = 2$ meet at $(2, 0)$, but changing the second right-hand side to $2.0001$ moves the crossing to $(1, 1)$. The two lines differ in direction by less than $0.003^\\circ$, so a tiny shift of one slides the meeting point far along the other. A system like this is close to having no solution or infinitely many, and small errors in its numbers can change the answer completely.",
+      sectionId: "5"
+    },
+    obj4: {
+      question: "How are very large linear systems solved?",
+      answer: "Often by iterative methods such as Jacobi, Gauss-Seidel and conjugate gradient. Instead of eliminating unknowns, they build a sequence of approximations that converges to the solution. They are preferred for very large sparse systems, where most entries are zero and direct methods such as Gaussian elimination, at about $\\frac{2}{3}n^3$ operations, would need too much memory or time. Whether and how fast they converge depends on the structure of the matrix.",
+      sectionId: "10"
+    }
+  }
+
 return {
   props:{
+    faqQuestions,
     solutionMethodTree,
     linesGeometryCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1282,17 +1347,84 @@ return {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LinearSystemsPage({solutionMethodTree, linesGeometryCases, 
+export default function LinearSystemsPage({faqQuestions, solutionMethodTree, linesGeometryCases,
   seoData,
   sectionsContent,
   introContent,
   obj4Table,
   obj10Table,
   summaryTable,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Two coffees and a muffin cost 7 dollars; one coffee and three muffins cost 11 dollars. What does each one cost?`,
+        content: [
+          `With $x$ the price of a coffee and $y$ the price of a muffin, the two sentences say $2x + y = 7$ and $x + 3y = 11$. Each sentence alone allows many prices; only together do they pin the answer down.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each condition on its own has many answers; only one pair of prices satisfies both.`,
+        content: [
+          ciTable('priceTable'),
+          `A coffee costs $2$ and a muffin $3$: $2 \\cdot 2 + 3 = 7$ and $2 + 3 \\cdot 3 = 11$.`,
+        ],
+        visual: ciSvg('twoLines'),
+      },
+      {
+        id: 'pattern',
+        lead: `Each condition multiplies the unknowns by fixed numbers and adds them — and the answer has to satisfy all of them at once.`,
+        content: [
+          `"Linear" means no products of unknowns, no powers higher than $1$, and no transcendental functions of unknowns. The expression $3x_1 - 2x_2 + x_3 = 7$ is linear; the expression $x_1 x_2 + x_3^2 = 1$ is not.`,
+          `Drawn in the plane, each such equation in two unknowns is a straight line, and a solution is a point lying on every line.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [system of linear equations](!/linear-algebra/definitions#system_of_linear_equations) is a collection of linear equations in the same unknowns, all to be satisfied at the same time.`,
+        formula: [
+          `A linear system is a set of $m$ equations in $n$ unknowns where each equation is a linear combination of the unknowns equal to a constant:`,
+          `@academic[formula_callout:What a Linear System Is
+$$a_{11}x_1 + a_{12}x_2 + \\cdots + a_{1n}x_n = b_1$$]@
+@academic[formula_callout:What a Linear System Is
+$$a_{21}x_1 + a_{22}x_2 + \\cdots + a_{2n}x_n = b_2$$]@
+@academic[formula_callout:What a Linear System Is
+$$\\vdots$$]@
+@academic[formula_callout:What a Linear System Is
+$$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@`,
+        ],
+        footer: `So $2x + y = 7$, $x + 3y = 11$ is a linear system of two equations in two unknowns, with the solution $x = 2$, $y = 3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `What matters about a system is its solution set: every assignment that satisfies all the equations together.`,
+        content: [
+          `A solution is an assignment of values to $x_1, \\dots, x_n$ that satisfies every equation simultaneously. The solution set is the collection of all solutions. The central question is: what does this set look like?`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A system need not have exactly one solution: it can have none, or infinitely many.`,
+        content: `The lines $2x + y = 7$ and $2x + y = 5$ are parallel and never meet, so that system has no solution; two equations describing the same line share every point on it. These are the only possibilities, as [the three possible outcomes](!/linear-algebra/linear-systems#4) explains.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers matrix form, the augmented matrix, the three possible outcomes, the geometric picture, row operations and echelon forms, homogeneous systems, existence and uniqueness, and other solution methods.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1300,7 +1432,7 @@ export default function LinearSystemsPage({solutionMethodTree, linesGeometryCase
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1429,6 +1561,22 @@ export default function LinearSystemsPage({solutionMethodTree, linesGeometryCase
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Systems of Linear Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 ]

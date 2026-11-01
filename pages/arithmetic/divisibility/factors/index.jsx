@@ -18,6 +18,7 @@ import { renderMultiplesLine } from '../../../../app/utils/illustrations/arithme
 import { renderFactorSet } from '../../../../app/utils/illustrations/arithmetic/divisibility/factorSet'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 
@@ -284,6 +285,27 @@ const fsFactorsObj10 = renderFactorSet({
   ]},
 })
 
+
+// Concept introduction (section 1, "Factors (Divisors)") — template A,
+// definition last. Running instance: 24 chairs set out in equal rows; the
+// row sizes that leave none over are the factors of 24. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its four passages and the
+// fsFactorsObj1 factor-set figure are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciChairsTable = ciTableOpen(['chairs per row', 'full rows', 'chairs left over', 'works?']) +
+  ciRow(['3', '8', '0', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['4', '6', '0', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['5', '4', '4', 'no']) +
+  ciRow(['6', '4', '0', 'yes'], { shade: true, color: '#2563EB', cols: [3] }) +
+  ciRow(['7', '3', '3', 'no']) +
+  ciRow(['8', '3', '0', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -684,6 +706,10 @@ How to check: every base must be prime before the formula is used. The pair sear
 // Divisor Function Notation) answer them directly. Kept perfect numbers and
 // the odd-factor-count puzzle (both buried, no matching heading) and reframed
 // "Is 20 abundant or deficient?" to the query people actually type.
+// FAQ pass 2026-10-31: kept the three. Added odd perfect numbers (one
+// sentence under Proper Divisors, plus the even-perfect fact box), highly
+// composite numbers (end of Counting Factors and its 720720 fact box) and
+// zero as a multiple (one paragraph under Multiples).
 const faqQuestions = {
   obj1: {
     question: "What is a perfect number?",
@@ -699,6 +725,21 @@ const faqQuestions = {
     question: "What are abundant and deficient numbers?",
     answer: "Classify a number by the sum of its proper divisors (all factors except the number itself). If the sum exceeds the number, it is abundant: 20 gives 1+2+4+5+10 = 22 > 20. If the sum falls short, it is deficient: 16 gives 1+2+4+8 = 15 < 16. If the sum lands exactly, the number is perfect. List any number's divisors with the [divisibility calculator](!/arithmetic/calculators/divisibility-calculator).",
     sectionId: "10"
+  },
+  obj4: {
+    question: "Is every perfect number even?",
+    answer: "No one knows. Every perfect number found so far is even, and whether an odd one exists is one of the oldest unsolved problems in mathematics. The even ones are fully understood: Euclid showed that $2^{p-1}(2^p - 1)$ is perfect whenever $2^p - 1$ is prime, which gives $6$, $28$, $496$ and $8{,}128$, and Euler proved that every even perfect number has this shape.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "What is a highly composite number?",
+    answer: "A number with more factors than every smaller number. The first few are $1, 2, 4, 6, 12, 24, 36, 48, 60, 120$. Each uses the smallest primes, with exponents that never increase from one prime to the next, since moving a larger exponent onto a smaller prime keeps the factor count and makes the number smaller. $720720 = 2^4 \\cdot 3^2 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13$ has $240$ factors, more than any smaller number. Ramanujan studied them in 1915.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "Is zero a multiple of every number?",
+    answer: "Yes. Zero equals $a \\cdot 0$ for every integer $a$, so it meets the definition of a multiple of $a$ exactly and stands at the start of every list of multiples: $0, 7, 14, 21, \\ldots$ for $7$. Lists of multiples often leave it out because only positive values are wanted. For the same reason the least common multiple is defined as the smallest positive common multiple; otherwise every LCM would be $0$.",
+    sectionId: "5"
   }
 }
 
@@ -783,6 +824,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    chairsTable: ciChairsTable,
+  };
+
   const demoUnits = {
     multiples: demoUnitFrame({
       svg: divisibilityTableDiagrams.d3,
@@ -796,6 +841,7 @@ const schemas = {
 return {
   props:{
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj6Table,
@@ -828,10 +874,70 @@ export default function FactorsPage({seoData, sectionsContent,
   introContent, obj6Table, obj10Table, summaryTable, faqQuestions,
   schemas, obj5SvgMultiples, obj6SvgSplit,
   fsFactorsObj1, fsFactorsObj2, fsFactorsObj3, fsFactorsObj4,
-  fsFactorsObj7, fsFactorsObj9, fsFactorsObj10, demoUnits}) {
+  fsFactorsObj7, fsFactorsObj9, fsFactorsObj10, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
   const figureWrapStyle = { maxWidth: '800px', margin: '20px auto' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `24 chairs are to be set out in equal rows, with none left over. How many chairs can go in each row?`,
+        content: [
+          `Some row sizes use up every chair; others leave a few standing at the side.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Rows of 3, 4, 6 or 8 use every chair; rows of 5 or 7 leave some over.`,
+        content: [
+          ciTable('chairsTable'),
+          `Adding the trivial cases — one long row of $24$, or $24$ rows of one, and rows of $2$ or $12$ — the row sizes that work are $1, 2, 3, 4, 6, 8, 12$ and $24$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `A row size works exactly when 24 is that size times a whole number of rows.`,
+        content: [
+          `Rows of $4$ work because $24 = 4 \\cdot 6$; rows of $5$ fail because no whole number times $5$ gives $24$. Each working size comes with a partner, the number of rows: $3$ and $8$, $4$ and $6$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [factor](!/arithmetic/definitions#divisor), or divisor, of $n$ is an integer $a$ such that $n = a \\cdot k$ for some integer $k$; this is written $a \\mid n$.`,
+        formula: [
+          `A factor of $n$ is any integer $a$ such that $a \\mid n$ — meaning $n = a \\cdot k$ for some integer $k$. The terms "factor" and "divisor" are interchangeable.`,
+        ],
+        footer: `So the factors of $24$ are $1, 2, 3, 4, 6, 8, 12$ and $24$ — exactly the row sizes that work.`,
+      },
+      {
+        id: 'kind',
+        lead: `The factors of a number form a finite set, running from 1 up to the number itself.`,
+        content: [
+          `Every integer greater than $1$ has at least two factors: $1$ and itself. The number $1$ divides everything, and every number divides itself. Most numbers have additional factors between these two extremes.`,
+          `The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$ — eight in total. The factors of $13$ are just $1$ and $13$ — making it prime.`,
+          <div key={'obj1-svg'} style={figureWrapStyle}
+               dangerouslySetInnerHTML={{ __html: fsFactorsObj1 }} />,
+          `Unlike multiples, which extend infinitely, the factor set of any positive integer is finite. No factor of $n$ can exceed $n$ itself (in absolute value), so the search space is bounded from the start.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Factors and multiples point in opposite directions: 4 is a factor of 24, and 24 is a multiple of 4.`,
+        content: `The two words are easy to swap by mistake. The difference is set out side by side in [factors vs multiples](!/arithmetic/divisibility/factors#6).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers finding all factors, factor pairs, proper divisors, multiples, common factors and multiples, counting and summing factors, and divisor function notation.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -847,10 +953,7 @@ export default function FactorsPage({seoData, sectionsContent,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'obj1-svg'} style={figureWrapStyle}
-               dangerouslySetInnerHTML={{ __html: fsFactorsObj1 }} />,
-          sectionsContent.obj1.afterFigure,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

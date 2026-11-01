@@ -12,6 +12,9 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -151,6 +154,25 @@ const keyWords = [
 </table>
 `
 
+
+// Concept introduction (section 1, "The Common Logarithm") — template A,
+// definition last. Running instance: log of 7, 70, 700 and 7000, where each
+// factor of 10 adds 1. Old obj1 text is kept in sectionsContent.obj1, unused;
+// its four passages and the fact aside are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciTensTable = ciTableOpen(['number', 'as a power of 10', 'power']) +
+  ciRow(['1000', '10³', '3']) +
+  ciRow(['7', '10<sup>0.845</sup>', '0.845'], { shade: true }) +
+  ciRow(['70', '10<sup>1.845</sup>', '1.845']) +
+  ciRow(['700', '10<sup>2.845</sup>', '2.845'], { shade: true }) +
+  ciRow(['7000', '10<sup>3.845</sup>', '3.845'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   
@@ -424,6 +446,10 @@ How to check: for $x > 1$, the natural logarithm is always larger than the commo
   content: `Among infinitely many possible bases, two have earned special notation and widespread use. The common logarithm uses base $10$, aligning with the decimal system and appearing throughout applied sciences. The natural logarithm uses base $e \\approx 2.71828$, emerging from calculus and dominating theoretical mathematics. Understanding when to use each — and how to convert between them — is essential for practical computation.`,
 };
 
+// FAQ pass 2026-10-31: kept the four notation questions. Added counting
+// digits (fact box in "The Common Logarithm"), ln against log below x = 1
+// (the rule box in "Comparing Graphs" covers only x > 1) and the
+// compounding limit (fact box in "The Number e").
 const faqQuestions = {
   obj1: {
     question: "What base does a bare $\\log$ mean?",
@@ -444,6 +470,21 @@ const faqQuestions = {
     question: "Why is the natural logarithm written ln and not nl?",
     answer: "Because the letters are Latin rather than English: **logarithmus naturalis**, so the $l$ leads. The mark is credited to Irving Stringham in 1893. Unlike a bare $\\log$, it carries no dialect at all, meaning base $e$ in every field, which makes it the one logarithm symbol you can move between documents without checking first.",
     sectionId: "notation"
+  },
+  obj5: {
+    question: "How can a logarithm tell you how many digits a number has?",
+    answer: "A whole number has one more digit than the integer part of its common logarithm. A number with $d$ digits is at least $10^{d-1}$ and below $10^d$, so its logarithm is at least $d - 1$ and below $d$. For $2^{100}$, $\\log(2^{100}) = 100 \\cdot \\log(2) \\approx 30.1$, so $2^{100}$ has $31$ digits, found without writing it out.",
+    sectionId: "1"
+  },
+  obj6: {
+    question: "Is $\\ln(x)$ always larger than $\\log(x)$?",
+    answer: "No, only for $x > 1$. Since $\\ln(x) = \\ln(10) \\cdot \\log(x) \\approx 2.303 \\cdot \\log(x)$, the natural logarithm is the common one stretched by $2.303$. For $x > 1$ both are positive and $\\ln(x)$ is larger; at $x = 1$ both are $0$; for $0 < x < 1$ both are negative and $\\ln(x)$ is the more negative, as in $\\log(0.1) = -1$ against $\\ln(0.1) \\approx -2.303$.",
+    sectionId: "7"
+  },
+  obj7: {
+    question: "Does compounding interest more often make the balance grow without limit?",
+    answer: "No. One dollar at $100\\%$ for a year grows to $\\left(1 + \\frac{1}{n}\\right)^n$ dollars with $n$ compounding periods: about $2.613$ monthly, $2.715$ daily and $2.718$ every second. The balance rises as $n$ increases, by less each time, and never passes $e \\approx 2.71828$, the limit of $\\left(1 + \\frac{1}{n}\\right)^n$. That limit is one of the standard definitions of $e$.",
+    sectionId: "3"
   }
 }
 
@@ -532,6 +573,10 @@ const schemas = {
     notes: [{ x: 0.5, y: -1.4, text: 'at every x: ln x ≈ 2.303 · log x', pos: 'e' }],
     caption: 'Same shape: ln x is log x stretched by ln 10 ≈ 2.303' };
 
+  const conceptIntroFigures = {
+    tensTable: ciTensTable,
+  };
+
   const demoUnits = {
     lnVsLog: demoUnitFrame({
       svg: renderFunctionPlotV4(fpLnVsLog),
@@ -550,6 +595,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Common & Natural Logarithms: Log vs Ln Explained | Learn Math Class",
       description: "Learn common logarithm (base 10) and natural logarithm (base e): definitions, the number e, calculator conventions, when to use each, and how to convert between them.",
@@ -572,9 +618,71 @@ export default function PageTemplate({
   faqQuestions,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `To what power must 10 be raised to give a number?`,
+        content: [
+          `For $1000$ the answer is $3$, because $10^3 = 1000$. The question still has an answer for numbers that are not powers of $10$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Multiplying a number by 10 adds exactly 1 to the power.`,
+        content: [
+          ciTable('tensTable'),
+          `The decimal part $0.845$ comes from the digit $7$; the integer part counts the places, one less than the number of digits.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The power measures size in factors of ten.`,
+        content: [
+          `Base $10$ connects directly to the decimal number system. Each power of $10$ corresponds to a place value: $10^1 = 10$, $10^2 = 100$, $10^3 = 1000$. The common logarithm inverts this relationship, reporting how many powers of ten a number contains.`,
+          `For powers of $10$, the values are immediate: $\\log(10) = 1$, $\\log(100) = 2$, $\\log(1000) = 3$, $\\log(0.1) = -1$, $\\log(0.01) = -2$. For other numbers, the integer part indicates the order of magnitude. Since $\\log(500) \\approx 2.699$, the number $500$ lies between $10^2 = 100$ and $10^3 = 1000$, and on a logarithmic scale it sits closer to the latter.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [common logarithm](!/algebra/definitions#common_logarithm) of a positive number $x$ is the power to which $10$ must be raised to give $x$: $\\log(x) = y$ exactly when $10^y = x$.`,
+        formula: [
+          `The common logarithm is the [logarithm](!/algebra/logarithms) with base $10$. It is written $\\log(x)$ without a subscript, or $\\log_{10}(x)$ when clarity is needed.`,
+        ],
+        footer: `So $\\log(1000) = 3$ and $\\log(7000) \\approx 3.845$, because $10^{3.845} \\approx 7000$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Base 10 suits the decimal system and quantities on a human scale.`,
+        content: [
+          `@academic[fact,aside:true,width:35%:Counting digits without writing them
+A whole number has one more digit than the integer part of its common logarithm. Since $\\log(2^{100}) = 100 \\cdot \\log(2) \\approx 30.1$, the number $2^{100}$ has $31$ digits.]@`,
+          `Historically, common logarithms enabled calculation before electronic computers. Logarithm tables converted multiplication into addition — a far simpler operation to perform by hand. Though tables are obsolete, the notation persists, and base $10$ remains natural for human-scale quantities.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A bare "log" does not mean base 10 everywhere.`,
+        content: [
+          `In much of higher mathematics and in many programming languages, $\\log(x)$ means the logarithm with base $e$. The conventions are compared in [logarithm notation](!/algebra/logarithms/common-natural#notation), and base $e$ is introduced in [the natural logarithm](!/algebra/logarithms/common-natural#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the natural logarithm and the number $e$, calculator conventions, when to use which, converting between bases, comparing graphs, a side-by-side summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -590,7 +698,7 @@ export default function PageTemplate({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -609,6 +717,11 @@ export default function PageTemplate({
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={powersRootsLogsNotationSheet}
+            current={'/algebra/logarithms/common-natural'}
           />,
         ]
     },

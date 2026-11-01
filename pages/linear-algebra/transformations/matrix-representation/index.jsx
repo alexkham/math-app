@@ -768,10 +768,14 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
 
 
 
@@ -1078,6 +1082,26 @@ const transformationDictionary = {
 
 // ---------- SECTIONS ----------
 
+// Concept introduction (section 1, "Every Linear Map from Rⁿ to Rᵐ Is
+// Matrix Multiplication") — template F, two descriptions shown to agree.
+// Running instance: the quarter-turn T(x, y) = (−y, x) and its matrix with
+// columns (0, 1), (−1, 0). Old obj1 text is kept in sectionsContent.obj1,
+// unused; its formula box with link and three passages are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciBothTable = ciTableOpen(['input (x, y)', 'by the rule (−y, x)', 'by the matrix: x·(0, 1) + y·(−1, 0)']) +
+  ciRow(['(1, 0)', '(0, 1)', '(0, 1)']) +
+  ciRow(['(0, 1)', '(−1, 0)', '(−1, 0)'], { shade: true }) +
+  ciRow(['(2, 3)', '(−3, 2)', '(0, 2) + (−3, 0) = (−3, 2)']) +
+  ciRow(['(−1, 4)', '(−4, −1)', '(0, −1) + (−4, 0) = (−4, −1)'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `Every Linear Map from Rⁿ to Rᵐ Is Matrix Multiplication`,
@@ -1344,6 +1368,11 @@ How to check: apply the product to $\\mathbf{e}_1$ and compare it with $S(T(\\ma
 }
 
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added
+// differentiation as a quarter-turn (fact box under "Matrices for Abstract
+// Vector Spaces"), the Pascal shift matrix (fact box under "Worked Example:
+// Differentiation") and the matrices that no basis change alters (summary
+// card text for "The Identity and the Inverse", no heading asks it).
 const faqQuestions = {
   obj1: {
     question: "Is $[T]_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ the same thing as $T$?",
@@ -1359,6 +1388,21 @@ const faqQuestions = {
     question: "When can you drop the basis subscripts and just write $[T]$?",
     answer: "Only when both spaces carry the standard basis, which makes it the standard matrix, the one case where a map has a single uncontested array. An operator mapping a space to itself uses one basis twice and is written $[T]_{\\mathcal{B}}$ rather than repeating the label on both sides of the arrow.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Can differentiation be represented by a rotation matrix?",
+    answer: "Yes, on the right space. On the functions $a\\cos x + b\\sin x$ with basis $\\{\\cos x, \\sin x\\}$, the derivative sends $\\cos x$ to $-\\sin x$ and $\\sin x$ to $\\cos x$, so its matrix is $\\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}$, a quarter-turn of the coefficient plane. Two quarter-turns give $-I$, which is $f'' = -f$, and four give $I$: differentiating $\\sin x$ four times returns $\\sin x$.",
+    sectionId: "4"
+  },
+  obj5: {
+    question: "What is the matrix of the shift $p(x) \\mapsto p(x + 1)$?",
+    answer: "In the basis $\\{1, x, x^2, x^3\\}$ of $\\mathcal{P}_3$, its columns are the rows of Pascal's triangle. The shift sends $x^j$ to $(1 + x)^j$, whose coefficients are binomial numbers, so the last column is $(1, 3, 3, 1)$. Taylor's theorem gives the same matrix as $I + D + \\frac{1}{2}D^2 + \\frac{1}{6}D^3$, with $D$ the derivative matrix; the series stops there because four derivatives send every cubic to $0$, so $D^4 = O$.",
+    sectionId: "5"
+  },
+  obj6: {
+    question: "Is there a matrix that stays the same in every basis?",
+    answer: "Yes: the identity, and every scalar multiple $cI$, as long as the same basis is used at both ends. The identity map sends each basis vector to itself, so column $j$ is always $\\mathbf{e}_j$ and the matrix is $I_n$. Since $P^{-1}(cI)P = cI$ for every invertible $P$, no change of basis alters $cI$ either. Every other square matrix changes under some change of basis.",
+    sectionId: "7"
   }
 }
 
@@ -1443,6 +1487,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    bothTable: ciBothTable,
+  };
+
   const demoUnits = {
     standard: demoUnitFrame({
       svg: linearTransformationDiagrams.fullRank,
@@ -1467,9 +1515,43 @@ const schemas = {
     }),
   };
 
+  // BeforeAfter (obj5): the derivative map on P2 and its matrix in the monomial bases
+  const derivativeMatrixBeforeAfter = {
+    header: {
+      kicker: 'Worked example: differentiation',
+      title: 'Differentiation as a matrix',
+      lede: 'With bases fixed, even differentiation becomes a matrix, and calculus on polynomials turns into arithmetic on coordinates.',
+    },
+    before: {
+      form: 'The map',
+      expr: '$\\footnotesize T(a + bx + cx^2) = b + 2cx$',
+      meta: 'Differentiation from P₂ to P₁',
+    },
+    after: {
+      form: 'The matrix',
+      expr: '$\\footnotesize [T] = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$',
+      meta: 'Columns: T(1), T(x), T(x²) in coordinates',
+    },
+    operation: {
+      name: 'Fix bases, read columns',
+      desc: 'bases {1, x, x²} and {1, x}, one column per basis polynomial',
+      detailsLabel: 'Why 2 × 3',
+      detailsTitle: '',
+      details: 'The shape reflects $\\dim(\\mathcal{P}_1) = 2$ rows and $\\dim(\\mathcal{P}_2) = 3$ columns. The rank is $2$, since differentiation maps $\\mathcal{P}_2$ onto all of $\\mathcal{P}_1$, and the null space is spanned by the constant polynomial $1$.',
+    },
+    notes: [
+      { id: 'changed', badge: 'What changed',
+        body: 'A rule on polynomials became a 2 × 3 array: coordinates (a, b, c) go in, (b, 2c) come out.' },
+      { id: 'stayed', badge: 'What stayed', tone: 'warm',
+        body: 'The map: multiplying coordinates by [T] differentiates.' },
+    ],
+  };
+
 return {
   props:{
+    derivativeMatrixBeforeAfter,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1488,9 +1570,76 @@ return {
 }
    }
 
-export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas, demoUnits}) {
+export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas, demoUnits, conceptIntroFigures, derivativeMatrixBeforeAfter}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `One way to describe a linear map: give its rule.`,
+        content: [
+          `A quarter-turn of the plane, anticlockwise, sends $(x, y)$ to $(-y, x)$. The rule says what happens to every input, written as a formula.`,
+        ],
+      },
+      {
+        id: 'second',
+        lead: `Another way: record only where the two axis vectors land, and stack those as the columns of a matrix.`,
+        content: [
+          `The quarter-turn sends $\\mathbf{e}_1 = (1, 0)$ to $(0, 1)$ and $\\mathbf{e}_2 = (0, 1)$ to $(-1, 0)$. Those two outputs, side by side, make the matrix with columns $(0, 1)$ and $(-1, 0)$ — four numbers, no formula.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `On every input tried, the rule and the matrix give the same output.`,
+        content: [
+          ciTable('bothTable'),
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `They had to agree: linearity rebuilds every output from the images of the axis vectors.`,
+        content: [
+          `This is not an optional representation — it is forced by linearity. Any vector $\\mathbf{x} = x_1\\mathbf{e}_1 + \\cdots + x_n\\mathbf{e}_n$ maps to $T(\\mathbf{x}) = x_1T(\\mathbf{e}_1) + \\cdots + x_nT(\\mathbf{e}_n)$, and this is exactly the matrix-vector product $A\\mathbf{x}$ with $A = [T(\\mathbf{e}_1) \\; T(\\mathbf{e}_2) \\; \\cdots \\; T(\\mathbf{e}_n)]$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [matrix representation](!/linear-algebra/definitions#matrix_representation) (standard matrix) of a linear map $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ is the $m \\times n$ matrix whose columns are $T(\\mathbf{e}_1), \\dots, T(\\mathbf{e}_n)$; then $T(\\mathbf{x}) = A\\mathbf{x}$.`,
+        formula: [
+          `If $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ is linear, there exists a unique $m \\times n$ [matrix](!/linear-algebra/matrix) $A$ such that`,
+          `@academic[formula_callout:Linear Map as Matrix Multiplication
+$$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mathbb{R}^n$$
+/linear-algebra/formulas#linear_map_as_matrix_multiplication]@`,
+          `@academic[formulas_link:Browse all linear algebra formulas
+/linear-algebra/formulas]@`,
+        ],
+        footer: `So the quarter-turn is multiplication by the matrix with rows $(0, -1)$ and $(1, 0)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A linear map of Rⁿ and an m × n matrix are the same object written two ways.`,
+        content: [
+          `The converse is equally immediate: every $m \\times n$ matrix $A$ defines a linear transformation $\\mathbf{x} \\mapsto A\\mathbf{x}$. The correspondence is one-to-one — different matrices define different transformations, and different transformations produce different matrices. Linear maps $\\mathbb{R}^n \\to \\mathbb{R}^m$ and $m \\times n$ matrices are the same objects viewed from two perspectives.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which description to use: the rule to understand the map, the matrix to compute with it — and the matrix depends on the basis.`,
+        content: `Composing maps, inverting them or applying them to many vectors is easiest with matrices. The columns above came from the standard axis vectors; with other bases, or in spaces that are not Rⁿ, the same map gets a different matrix, as [matrices for abstract vector spaces](!/linear-algebra/transformations/matrix-representation#4) explains.`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, constructing and reading the standard matrix, matrices for abstract spaces, a worked differentiation example, composition and matrix multiplication, and the identity and inverse.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1498,7 +1647,7 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1517,6 +1666,11 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laTransformNotationSheet}
+            current={'/linear-algebra/transformations/matrix-representation'}
           />,
         ]
     },
@@ -1554,6 +1708,19 @@ export default function MatrixRepresentationPage({seoData, sectionsContent, intr
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-diagram'}
+            id="derivative-matrix-before-after"
+            title="Differentiation on P₂ as a matrix"
+            source="/linear-algebra/transformations/matrix-representation"
+            before={"The section's example: the derivative map, then its matrix in the monomial bases."}
+            after={"Multiplying the coordinates (a, b, c) by [T] gives (b, 2c), the coefficients of the derivative b + 2cx."}
+          >
+            <BeforeAfter
+              data={derivativeMatrixBeforeAfter}
+              theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
+            />
+          </DiagramFrame>,
         ]
     },
     {

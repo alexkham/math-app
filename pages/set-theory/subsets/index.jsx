@@ -1052,6 +1052,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 
 
 export async function getStaticProps(){
@@ -1705,6 +1707,10 @@ A subset relationship describes when one [set](!/set-theory) is entirely contain
 
 // Six questions. Four that merely restated a section heading were cut; two were
 // invented from confusions the notation section names explicitly.
+// FAQ pass 2026-10-31: kept the six. Added listing every subset one change at
+// a time (Gray fact box under "Number of Subsets"), how many subsets contain
+// a given element (side note under the power set diagram) and why the power
+// set is written 2^A (notation card). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "What is the difference between a subset and a proper subset?",
@@ -1735,6 +1741,21 @@ const faqQuestions = {
     question: "Does ⊂ always mean proper subset?",
     answer: "No. This site and most modern texts use ⊂ for proper containment and ⊆ when equality is allowed. But many older and European authors write ⊂ for any subset and reserve ⊊ for the proper case. The symbol alone is not enough — check how a given text defines it before trusting the distinction. See [all set theory symbols](!/math-symbols/set-theory).",
     sectionId: "2"
+  },
+  obj7: {
+    question: "Can you list all subsets so that each differs from the last by one element?",
+    answer: "Yes, for any finite set. List the subsets of $\\{a, b\\}$ as $\\varnothing$, $\\{a\\}$, $\\{a, b\\}$, $\\{b\\}$, then write the same list in reverse with $c$ added: $\\{b, c\\}$, $\\{a, b, c\\}$, $\\{a, c\\}$, $\\{c\\}$. Each step adds or removes a single element, and repeating the trick handles every further element. The order is the Gray code, patented by Frank Gray in 1953.",
+    sectionId: "4"
+  },
+  obj8: {
+    question: "How many subsets contain a given element?",
+    answer: "Exactly half of them, $2^{n-1}$ out of $2^n$. Once the element is put in, each of the other $n - 1$ elements is still a free in-or-out choice. Equivalently, adding the element to each subset that lacks it pairs the two halves off one to one. In $\\mathcal{P}(\\{a, b, c\\})$, each of $a$, $b$ and $c$ appears in $4$ of the $8$ subsets.",
+    sectionId: "5"
+  },
+  obj9: {
+    question: "Why is the power set written $2^A$?",
+    answer: "Because of its size. A set with $n$ elements has $2^n$ subsets, one for each run of in-or-out choices, so $|\\mathcal{P}(A)| = 2^{|A|}$ and the exponent spelling records that count. $2^A$ and $\\mathcal{P}(A)$ name the same set. The same spelling carries over to infinite sets: the size of the real line is written $2^{\\aleph_0}$ because it equals the size of $\\mathcal{P}(\\mathbb{N})$, as the [cardinality](!/set-theory/cardinality) page explains.",
+    sectionId: "6"
   }
 }
 
@@ -2046,6 +2067,11 @@ The eight subsets in the diagram are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={setTheoryNotationSheet}
+            current={'/set-theory/subsets'}
           />,
           <div
             key={'summary-table'}

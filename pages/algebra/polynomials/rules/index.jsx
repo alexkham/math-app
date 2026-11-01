@@ -11,6 +11,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 
 
 
@@ -537,6 +540,53 @@ const sectionsContent = {
     link: '',
   },
 
+    notation:{
+      title:`Polynomial Rules Notation`,
+      lead:`The shorthand the theorems on this page lean on: division written as a product, evaluation in parentheses, a candidate fraction, and roots counted by subscript.`,
+      inherited:`Coefficients $a_n, \\ldots, a_0$, degree and multiplicity follow [polynomial notation](!/algebra/polynomials/roots#notation); $p \\mid a_0$ is read as in [divisibility notation](!/arithmetic/divisibility#2).`,
+      entries:[
+        {
+          id:'division-form',
+          tex:`$P(x) = (x - c)\\,Q(x) + R$`,
+          read:`P of x equals x minus c times Q of x, plus R`,
+          means:`Division written as a product: $P$ the dividend, $(x - c)$ the divisor, $Q(x)$ the quotient, $R$ the remainder — a constant, because the divisor has degree $1$. The [Remainder Theorem](!#1) says $R = P(c)$.`,
+          cases:`When $R = 0$, $(x - c)$ is a factor of $P(x)$ — the [Factor Theorem](!#3).`,
+          alsoWritten:`$\\dfrac{P(x)}{x - c} = Q(x) + \\dfrac{R}{x - c}$ — the fraction form; $P = DQ + R$ with $\\deg R < \\deg D$ for a divisor $D$ of any degree.`,
+          confusedWith:`The sign of $c$. Dividing by $(x + 3)$ means $c = -3$, so the remainder is $P(-3)$, not $P(3)$.`,
+        },
+        {
+          id:'evaluation',
+          tex:`$P(c), \\; P(-x)$`,
+          read:`P of c; P of minus x`,
+          means:`Parentheses after $P$ mean put in, not multiply. $P(c)$ is a number, the value at $x = c$; $P(-x)$ is a new polynomial, with $-x$ put in for every $x$ — [Descartes' rule](!#9) counts its sign changes for the negative roots.`,
+          cases:`In $P(-x)$ only odd powers change sign: $x^3 - 2x^2 - x + 2$ becomes $-x^3 - 2x^2 + x + 2$.`,
+          confusedWith:`$-P(x)$, which flips every sign. $P(-x)$ mirrors the graph across the vertical axis, $-P(x)$ across the horizontal one — see [transformation notation](!/functions/transformations#notation).`,
+        },
+        {
+          id:'candidate-fraction',
+          tex:`$\\pm\\dfrac{p}{q}, \\quad p \\mid a_0, \\; q \\mid a_n$`,
+          read:`plus or minus p over q, with p dividing a sub zero and q dividing a sub n`,
+          means:`The candidate list of the [Rational Root Theorem](!#5): $p$ runs over the divisors of the constant term, $q$ over the divisors of the leading coefficient, the fraction in lowest terms.`,
+          cases:`The $\\pm$ doubles every fraction; for $2x^3 + x^2 - 13x + 6$ the list has twelve candidates, $\\pm\\frac{1}{2}$ and $\\pm\\frac{3}{2}$ among them.`,
+          confusedWith:`$p$ as a prime, as in [prime number notation](!/algebra/sequences/prime-numbers#notation). Here $p$ is any divisor, prime or not: $6$ is a valid $p$.`,
+        },
+        {
+          id:'root-list',
+          tex:`$r_1, r_2, \\ldots, r_n$`,
+          read:`r sub one up to r sub n — the roots`,
+          means:`Roots named by place in a list, with no order implied. [Vieta's formulas](!#12) combine them into symmetric sums: for $x^2 + bx + c$, $r_1 + r_2 = -b$ and $r_1 r_2 = c$.`,
+          cases:`A repeated root is listed once per multiplicity: $(x - 2)^2$ has $r_1 = r_2 = 2$. The sum of the roots is $-b$, not $b$.`,
+          confusedWith:`The coefficient subscripts $a_0, \\ldots, a_n$. Those name a power of $x$; root subscripts only count.`,
+        },
+      ],
+      symbolsHref:`/math-symbols/algebra`,
+      symbolsLabel:`All algebra symbols`,
+      parentHref:`/algebra/polynomials`,
+      parentLabel:`Polynomials`,
+      before:``,
+      after:``,
+    },
+
   obj1: {
     title: `The Remainder Theorem`,
     content: `When a polynomial $P(x)$ is divided by a linear binomial $(x - c)$, the remainder is a constant — and that constant equals $P(c)$, the value of the polynomial evaluated at $x = c$.
@@ -770,7 +820,7 @@ Reading exactly $n$ roots as $n$ real roots: $x^3 - x^2 + x - 1$ would then cros
 
 For polynomials with real coefficients, an additional constraint applies: complex roots come in conjugate pairs. If $a + bi$ is a root, then $a - bi$ is also a root. This means a real polynomial of odd degree must have at least one real root — an odd number of roots cannot be paired off entirely into conjugate pairs.
 
-The theorem guarantees existence but offers no method for finding roots. For degree $5$ and above, no general formula in radicals exists — a result proven by Abel and Galois. Numerical methods, the Rational Root Theorem, and other tools from this page fill the gap between knowing roots exist and actually computing them.`,
+The theorem guarantees existence but offers no method for finding roots. For degree $5$ and above, no general formula in radicals exists — the Abel–Ruffini theorem, with Galois later explaining which equations are solvable by radicals. Numerical methods, the Rational Root Theorem, and other tools from this page fill the gap between knowing roots exist and actually computing them.`,
     before: ``,
     after: ``,
     link: '',
@@ -888,6 +938,11 @@ How to check: look for real roots in each factor. $x^2 + 1 = 0$ needs $x^2 = -1$
 These results connect seemingly separate tasks. Evaluating a polynomial at a point turns out to be the same as finding a division remainder. Knowing one root immediately produces a [factor](!/algebra/polynomials/factoring). The coefficients of a polynomial place strict limits on which rational numbers could possibly be roots. Each theorem removes guesswork and replaces it with structure.`
 }
 
+// FAQ pass 2026-10-31: kept the three questions. Added the irrationality of
+// the square root of 2 (fact box under "The Integer Root Theorem"), the real
+// root limit for polynomials with few terms (fact box under Descartes' rule)
+// and when Descartes' rule gives an exact count (the one-sign-change example
+// in the same section). No heading asks them.
 const faqQuestions = {
   obj1: {
     question: "What is the difference between the Remainder Theorem and the Factor Theorem?",
@@ -903,6 +958,21 @@ const faqQuestions = {
     question: "Why do Vieta's formulas alternate signs?",
     answer: "Because expanding $(x - r_1)(x - r_2)\\cdots$ introduces a factor of $-1$ with each root, giving the pattern $(-1)^k$. So for $x^2 + bx + c$ the sum of roots is $-b$ rather than $b$, and for a cubic $x^3 + bx^2 + cx + d$ the product is $-d$ rather than $d$. Losing track of that alternation is the usual source of error at higher degrees.",
     sectionId: "13"
+  },
+  obj4: {
+    question: "How does the Rational Root Theorem show that $\\sqrt{2}$ is irrational?",
+    answer: "$\\sqrt{2}$ is a root of $x^2 - 2$, which is monic, so any rational root it has must be an integer dividing $-2$: one of $\\pm 1$ and $\\pm 2$. None of them squares to $2$, so $x^2 - 2$ has no rational root and $\\sqrt{2}$ is irrational. The same argument shows that $\\sqrt{n}$, for any whole number $n$, is either a whole number or irrational; $\\left(\\frac{7}{5}\\right)^2 = 1.96$ comes close, but no fraction squares to exactly $2$.",
+    sectionId: "8"
+  },
+  obj5: {
+    question: "How many real roots can a polynomial with only a few terms have?",
+    answer: "At most $2k - 1$ distinct real roots for $k$ nonzero terms, whatever the degree. Descartes' Rule of Signs allows at most $k - 1$ sign changes, so at most $k - 1$ positive roots, as many negative ones, plus possibly the root $0$. That is why $x^{100} - 1$, with two terms, has only two real roots, $1$ and $-1$; the other $98$ of its hundred roots are complex.",
+    sectionId: "9"
+  },
+  obj6: {
+    question: "When does Descartes' Rule of Signs give an exact count?",
+    answer: "When it counts $0$ or $1$ sign changes. The true number of positive roots is the number of sign changes or less by an even number, and neither $0$ nor $1$ can drop by $2$. For $x^3 - 2x^2 - x + 2$, $P(-x) = -x^3 - 2x^2 + x + 2$ has one sign change, so there is exactly one negative root, $-1$; the two changes in $P(x)$ leave $2$ or $0$ positive roots undecided by the rule alone.",
+    sectionId: "9"
   }
 }
 
@@ -1049,6 +1119,30 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
         ]
     },
 
+    {
+        id:'notation',
+        title:sectionsContent.notation.title,
+        link:'',
+        content:[
+          <NotationSection
+            key={'notation-notation'}
+            title={sectionsContent.notation.title}
+            lead={sectionsContent.notation.lead}
+            inherited={sectionsContent.notation.inherited}
+            entries={sectionsContent.notation.entries}
+            symbolsHref={sectionsContent.notation.symbolsHref}
+            symbolsLabel={sectionsContent.notation.symbolsLabel}
+            parentHref={sectionsContent.notation.parentHref}
+            parentLabel={sectionsContent.notation.parentLabel}
+            theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={polyEqIneqNotationSheet}
+            current={'/algebra/polynomials/rules'}
+          />,
+        ]
+    },
     {
         id:'1',
         title:sectionsContent.obj1.title,

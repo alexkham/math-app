@@ -13,6 +13,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 export async function getStaticProps(){
 const keyWords = [
@@ -853,8 +854,42 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Overview-only
+  // questions: the false line B in "What an Equation Is", the empty solution
+  // set of x^2 = -1, the reversible-steps table under Equivalent Equations,
+  // the algebraic-equation definition against 2^x = 16, and the summary
+  // table's open counts for rational and absolute value equations.
+  const faqQuestions = {
+    obj1: {
+      question: "Is a false statement like $3 + 4 = 8$ still an equation?",
+      answer: "Yes. Being an equation is a matter of form: two expressions joined by $=$. The line $3 + 4 = 8$ has that form, so it is an equation, just a false one. An equation can be always true, like $3 + 4 = 7$, always false, like $3 + 4 = 8$, or true only for some values of the unknown, like $2x + 1 = 9$ at $x = 4$. By contrast, $2x + 1 > 9$ is not an equation: it compares sizes with $>$, so it is an inequality.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Does $x^2 = -1$ have a solution?",
+      answer: "Not over the real numbers. No real number squared gives $-1$, so the solution set over $\\mathbb{R}$ is empty, and an empty solution set is a complete answer, not a failure to solve. The answer depends on the number system: over the complex numbers, $x^2 = -1$ has the two solutions $i$ and $-i$. This is why a quadratic with a negative discriminant has no real roots but two complex conjugate roots.",
+      sectionId: "2"
+    },
+    obj3: {
+      question: "Which equations need their solutions checked?",
+      answer: "Any equation solved with a step that cannot be undone. Adding or subtracting the same quantity, and multiplying or dividing by a nonzero constant, keep the solution set. Multiplying by an expression that contains the variable, as when clearing the denominators of a rational equation, and squaring both sides, as in a radical equation, can add extraneous solutions, so every candidate goes back into the original equation. Dividing by the variable does the opposite: $x^2 = 3x$ divided by $x$ loses $x = 0$.",
+      sectionId: "4"
+    },
+    obj4: {
+      question: "Is $2^x = 16$ an algebraic equation?",
+      answer: "No. An algebraic equation uses only addition, subtraction, multiplication, division and integer powers of the unknown, so the unknown can be a base but never an exponent. In $2^x = 16$ the unknown is the exponent, which makes it an exponential equation, solved by matching bases ($16 = 2^4$, so $x = 4$) or with logarithms. Logarithmic and trigonometric equations fall outside the algebraic family for the same reason: the unknown sits inside a function that algebra alone cannot undo.",
+      sectionId: "5"
+    },
+    obj5: {
+      question: "How many solutions can a rational or absolute value equation have?",
+      answer: "It depends on what the equation contains, which is why the summary table gives no fixed maximum. Clearing the denominators of a rational equation leaves a polynomial equation, so unless the variable cancels out entirely, that polynomial's degree caps the count, minus any candidate that is an excluded value: $\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$ becomes $x^2 - 2x - 14 = 0$ and keeps both roots $1 \\pm \\sqrt{15}$. An equation $|f(x)| = k$ with $k > 0$ splits into $f(x) = k$ and $f(x) = -k$, so it has up to two solutions when $f$ is linear and up to four when $f$ is quadratic.",
+      sectionId: "12"
+    }
+  }
+
    return {
   props: {
+    faqQuestions,
     beyondAlgebraTree,
     equationFamilyTree,
     demoUnits,
@@ -881,7 +916,7 @@ const schemas = {
    }
 
 
-export default function EquationsPage({beyondAlgebraTree, equationFamilyTree, 
+export default function EquationsPage({faqQuestions, beyondAlgebraTree, equationFamilyTree,
   seoData,
   sectionsContent,
   introContent,
@@ -1137,6 +1172,22 @@ export default function EquationsPage({beyondAlgebraTree, equationFamilyTree,
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Equations FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
 ]

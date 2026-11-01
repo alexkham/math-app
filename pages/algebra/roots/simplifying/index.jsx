@@ -13,6 +13,7 @@ import identityDiagrams from '@/app/components/algebra/identities/identityDiagra
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -197,6 +198,26 @@ const keyWords = [
 `
 
   // ---------- SECTIONS ----------
+
+// Concept introduction (section 1, "What Simplest Form Means") — template I,
+// naming. Running instance: √72 = 2√18 = 3√8 = 6√2, beside √(1/2) = 1/√2 =
+// √2/2. Old obj1 text is kept in sectionsContent.obj1, unused; its three
+// formula boxes, six passages and the obj1Table are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSpellTable = ciTableOpen(['spelling', 'same number as', 'what can still be improved']) +
+  ciRow(['√72', '√72', 'the perfect square 36 is inside']) +
+  ciRow(['3√8', '√72', 'the perfect square 4 is inside'], { shade: true }) +
+  ciRow(['6√2', '√72', 'nothing — this is the standard spelling'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['√(1/2)', '√(1/2)', 'a fraction is under the root'], { shade: true }) +
+  ciRow(['1/√2', '√(1/2)', 'a root is in the denominator']) +
+  ciRow(['√2/2', '√(1/2)', 'nothing — this is the standard spelling'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj0: {
@@ -587,6 +608,11 @@ Simplification is not cosmetic. Simpler forms reveal structure, enable compariso
 
 
 
+// FAQ pass 2026-10-31: kept the four existing questions. Added the test for
+// whether a square root simplifies (paragraph and fact box under "Factoring
+// Out Perfect Powers"), decimals versus simplest form (one line under "What
+// Simplest Form Means") and the negative conjugate denominator (paragraph and
+// pitfall under "Rationalizing Binomial Denominators"); no heading asks them.
 const faqQuestions = {
   obj1: {
     question: "Why do you have to rationalize the denominator at all?",
@@ -607,6 +633,21 @@ const faqQuestions = {
     question: "Why doesn't the conjugate work for a cube root denominator?",
     answer: "Because the conjugate relies on the difference of squares, which only clears square roots. Multiplying $\\sqrt[3]{2} + 1$ by $\\sqrt[3]{2} - 1$ leaves $\\sqrt[3]{4} - 1$, still irrational. Cube roots need the sum or difference of cubes instead, so the multiplier for $\\sqrt[3]{2} + 1$ is $\\sqrt[3]{4} - \\sqrt[3]{2} + 1$, which yields $2 + 1 = 3$.",
     sectionId: "7"
+  },
+  obj5: {
+    question: "How can you tell whether a square root can be simplified?",
+    answer: "Factor the radicand into primes: a square root simplifies exactly when some prime appears at least twice. $72 = 2^3 \\cdot 3^2$ qualifies, so $\\sqrt{72} = 6\\sqrt{2}$, while $30 = 2 \\cdot 3 \\cdot 5$ repeats nothing, so $\\sqrt{30}$ is already in simplest form. Most radicands are like $30$: of the numbers from $1$ to $100$, $61$ have no square factor other than $1$, and over all whole numbers the share tends to $\\frac{6}{\\pi^2} \\approx 0.608$.",
+    sectionId: "2"
+  },
+  obj6: {
+    question: "Is a decimal like $8.485$ the simplest form of $\\sqrt{72}$?",
+    answer: "No. $\\sqrt{72} \\approx 8.485$ is an approximation, and simplest form stays exact: it is $6\\sqrt{2}$, an agreed spelling of the same number rather than a different value. The decimal also hides structure that the exact form shows, such as $\\sqrt{72} + \\sqrt{8} = 6\\sqrt{2} + 2\\sqrt{2} = 8\\sqrt{2}$, a sum no rounded value can give exactly.",
+    sectionId: "1"
+  },
+  obj7: {
+    question: "Why does the denominator turn negative when rationalizing with the conjugate?",
+    answer: "Because the conjugate product is $a^2 - b$, which is negative whenever the radicand $b$ is larger than $a^2$, even though the original denominator is positive. For $\\frac{3}{2 + \\sqrt{5}}$ it is $4 - 5 = -1$. Clearing that $-1$ flips every sign in the numerator, giving $-6 + 3\\sqrt{5} \\approx 0.71$, and a quick estimate confirms the result is positive, as the original fraction is.",
+    sectionId: "6"
   }
 }
 
@@ -688,6 +729,10 @@ const schemas = {
 
 
 
+
+  const conceptIntroFigures = {
+    spellTable: ciSpellTable,
+  };
 
   const demoUnits = {
     conjugateArea: demoUnitFrame({
@@ -785,6 +830,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Simplifying Radicals: Rationalize & Reduce | Learn Math Class",
       description: "Learn to simplify radicals: factor perfect powers, simplify with variables, rationalize monomial and binomial denominators, reduce indices, and achieve simplest form.",
@@ -808,12 +854,80 @@ export default function SimplifyingPage({
   faqQuestions,
   schemas,
   demoUnits,
+  conceptIntroFigures,
   rationalizeMonomial,
   rationalizeBinomialSteps,
   reduceIndexSteps,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template I (naming).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `One number can be written many ways: √72, 2√18, 3√8 and 6√2 are all the same number.`,
+        content: [
+          `Squaring each one checks it: $(2\\sqrt{18})^2 = 4 \\cdot 18 = 72$, $(3\\sqrt{8})^2 = 9 \\cdot 8 = 72$, $(6\\sqrt{2})^2 = 36 \\cdot 2 = 72$. With so many spellings, it is hard to tell whether two answers agree, or to add $\\sqrt{72}$ to $\\sqrt{8}$, until everything is written one agreed way.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Among the spellings of one number, exactly one has nothing left to improve.`,
+        content: [
+          ciTable('spellTable'),
+          `Written that way, $\\sqrt{72} + \\sqrt{8} = 6\\sqrt{2} + 2\\sqrt{2} = 8\\sqrt{2}$ — a sum that was invisible in the original spelling.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Every spelling that can still be improved has one of three faults.`,
+        content: [
+          `@academic[formula_callout:What Simplest Form Means
+$$\\sqrt{72} \\quad \\text{is not simplified — 36 is a perfect square factor}$$]@`,
+          `@academic[formula_callout:What Simplest Form Means
+$$\\sqrt{\\frac{3}{4}} \\quad \\text{is not simplified — fraction under radical}$$]@`,
+          `@academic[formula_callout:What Simplest Form Means
+$$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominator}$$]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A radical expression is in [simplest form](!/algebra/definitions#simplest_form) when no perfect-power factor remains under the radical, no fraction stands under the radical, and no radical stands in a denominator.`,
+        formula: [
+          `A radical is in simplest form when three conditions hold:`,
+          `No perfect power factors remain under the radical. The radicand contains no factor that could be extracted.`,
+          `No fractions appear under the radical. A radical of a fraction should be rewritten as a fraction of radicals.`,
+          `No radicals appear in denominators. Denominators are rationalized — rewritten without radical signs.`,
+        ],
+        footer: `So $6\\sqrt{2}$ is the simplest form of $\\sqrt{72}$, and $\\frac{\\sqrt{2}}{2}$ is the simplest form of $\\sqrt{\\frac{1}{2}}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Simplest form is an agreed spelling, not a different value.`,
+        content: [
+          `These criteria define the target. The techniques that follow show how to reach it.`,
+          `The table below collects the three criteria as a checklist for verifying simplest form.`,
+          <div key={'obj1-table'} style={tableWrapStyle}
+               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A decimal is not a simpler form: √72 ≈ 8.485 is an approximation, and simplest form stays exact.`,
+        content: `How to pull perfect powers out from under the radical is the subject of the next section, [factoring out perfect powers](!/algebra/roots/simplifying#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers factoring out perfect powers, simplifying with variables, rationalizing monomial, binomial and higher-index denominators, reducing the index, and an overall strategy.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -829,9 +943,7 @@ export default function SimplifyingPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

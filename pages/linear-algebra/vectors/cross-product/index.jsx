@@ -1965,6 +1965,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/crossProductDiagrams'
 import renderVectorArrowsV5 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v5'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 
 
 export async function getStaticProps(){
@@ -2677,7 +2679,7 @@ A zero determinant means the parallelepiped has been flattened — the three vec
     content: `The two multiplication operations available for vectors occupy complementary niches, and contrasting them sharpens the purpose of each.
 
 @academic[fact,aside:true,width:35%:Only 3 and 7 dimensions allow it
-A product that distributes over sums, stands perpendicular to both factors and has length $\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ exists only in $\\mathbb{R}^3$ and $\\mathbb{R}^7$. By a theorem of Hurwitz, such products come from number systems of dimension 4 and 8, the quaternions and the octonions.]@
+A product that distributes over sums, stands perpendicular to both factors and has length $\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ exists, beyond the trivial cases, only in $\\mathbb{R}^3$ and $\\mathbb{R}^7$. By a theorem of Hurwitz, such products come from number systems of dimension 4 and 8, the quaternions and the octonions.]@
 
 At the most basic level, they differ in what comes out: the dot product delivers a number, while the cross product delivers a vector. They also differ in scope — the component-wise sum of products behind the dot product generalizes to any $\\mathbb{R}^n$, whereas the cross product's reliance on three-component determinants confines it to $\\mathbb{R}^3$.
 
@@ -2757,6 +2759,10 @@ How to check: go back to the magnitude formula. $\\|\\mathbf{a} \\times \\mathbf
   content: `The cross product stands apart from every other operation in this section. It takes two vectors and returns a new vector — one that is perpendicular to both inputs. Its magnitude measures the area of the parallelogram the two vectors span, and its direction is determined by a handedness convention that introduces orientation into three-dimensional space. Unlike the [dot product](!/linear-algebra/vectors/dot-product), which works in any $\\mathbb{R}^n$ and produces a scalar, the cross product is defined exclusively in $\\mathbb{R}^3$ and produces a vector. It is anti-commutative, not associative, and zero precisely when the two inputs are parallel. These departures from familiar algebraic patterns are not defects — they reflect the geometric nature of perpendicularity and area in three dimensions.`,
 };
 
+// FAQ pass 2026-10-31: kept the three notation questions. Added other
+// dimensions (fact box under "Dot Product vs Cross Product"), tetrahedron
+// volume and the coplanarity test (both inside "The Scalar Triple Product",
+// coplanarity also a row of the uses table). No heading asks any of them.
 const faqQuestions = {
   obj1: {
     question: "Is $\\times$ between vectors the same as $\\times$ between numbers?",
@@ -2772,6 +2778,21 @@ const faqQuestions = {
     question: "Why do $i$, $j$, $k$ mean basis vectors here but $\\sqrt{-1}$ elsewhere?",
     answer: "The collision is historical rather than coincidental: Hamilton's quaternions $i, j, k$ are the common ancestor of both this basis and the cross product itself. Boldface separates them in print. Note also that $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$ scales to any dimension, while $\\mathbf{i}, \\mathbf{j}, \\mathbf{k}$ runs out of letters past three.",
     sectionId: "notation"
+  },
+  obj4: {
+    question: "Is there a cross product in dimensions other than three?",
+    answer: "Beyond three, only in seven. The component formula on this page needs exactly three entries, but a product that distributes over sums, stands perpendicular to both factors and has length $\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ is also possible in $\\mathbb{R}^7$, and in no other higher dimension. By a theorem of Hurwitz, such products come from the quaternions and octonions. The plane has none; there the number $a_1b_2 - a_2b_1$ records orientation instead.",
+    sectionId: "8"
+  },
+  obj5: {
+    question: "How do you find the volume of a tetrahedron from three vectors?",
+    answer: "Take one sixth of the absolute scalar triple product, $V = \\tfrac{1}{6}|\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})|$, with $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$ the three edges leaving one vertex. The triple product gives the parallelepiped on those edges; the factor is $\\tfrac{1}{3}$ from the pyramid formula times $\\tfrac{1}{2}$, since the triangular base is half the parallelogram. For $\\mathbf{i}$, $\\mathbf{j}$, $\\mathbf{k}$ the triple product is $1$, so the corner tetrahedron of the unit cube has volume $\\tfrac{1}{6}$.",
+    sectionId: "7"
+  },
+  obj6: {
+    question: "How do you test whether three vectors are coplanar?",
+    answer: "Compute the scalar triple product: $\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c}) = 0$ exactly when the three vectors lie in one plane. It equals the $3 \\times 3$ determinant with $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$ as its rows, and a zero value means the parallelepiped they span has been flattened to no volume. For example, $(1, 2, 3)$, $(4, 5, 6)$ and $(7, 8, 9)$ give a determinant of $0$, and indeed $(7, 8, 9) = 2(4, 5, 6) - (1, 2, 3)$.",
+    sectionId: "7"
   }
 }
 
@@ -3032,6 +3053,11 @@ Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) 
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={laVectorsNotationSheet}
+            current={'/linear-algebra/vectors/cross-product'}
           />,
         ]
     },

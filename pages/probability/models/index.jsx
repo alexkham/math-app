@@ -748,6 +748,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -898,6 +899,11 @@ export async function getStaticProps(){
   // That last one also means this page serves "the three parts of a model"
   // structurally, so the entry I had put on /probability/sets is redundant
   // and has been removed there. Replaced with the one-to-many consequences.
+  // FAQ pass 2026-10-31: kept all four. Added the seven-riffle shuffle (fact
+  // box under Models vs Reality) and the binary digits of one uniform point
+  // as endless coin tosses (fact box under One Model, Many Distributions); no
+  // heading asks either. Draws without replacement left to the conditional
+  // probability pages; the maximum of two dice to the dice roll page.
   const faqQuestions = {
     obj1: {
       question: "Can you recover the experiment from its distribution?",
@@ -918,6 +924,16 @@ export async function getStaticProps(){
       question: "Does a more realistic model give better answers?",
       answer: "Not necessarily. Realistic detail does not guarantee correctness, and deliberately unrealistic models are often the useful ones because they isolate the mechanism you care about. What matters is whether the model matches the situation you are applying it to. When it does not, the calculations stay mathematically correct and become practically irrelevant.",
       sectionId: "10"
+    },
+    obj5: {
+      question: "How many shuffles does it take to mix a deck of cards?",
+      answer: "About seven riffle shuffles. Card probabilities assume all $52!$ orders of the deck are equally likely, but a real shuffle starts from the deck's last order and changes it a little at a time. One riffle can produce at most $2^{52}$ orders, so four can reach at most $2^{208}$, far below $52! \\approx 8 \\times 10^{67}$. Bayer and Diaconis showed in 1992 that the deck comes close to the equally likely model only after about $7$ riffles.",
+      sectionId: "10"
+    },
+    obj6: {
+      question: "How can one random number contain infinitely many coin tosses?",
+      answer: "Through its binary digits. Pick a point uniformly from $[0, 1]$ and write it in base $2$: each pattern of the first $k$ digits marks off an interval of length $\\frac{1}{2^k}$, so all $2^k$ patterns are equally likely. That is exactly what $k$ independent fair tosses give, for every $k$, so the digits of a single draw behave as an endless sequence of independent tosses.",
+      sectionId: "6"
     }
   }
 
@@ -990,6 +1006,23 @@ export async function getStaticProps(){
       ]
     }
   }
+
+  // Concept introduction (section 1, "What Is a Probability Model") —
+  // template C, failure first. Running instance: two heads in two tosses,
+  // 1/3 under "number of heads, equally likely" and 1/4 under ordered tosses.
+  // Old obj1 text is kept in sectionsContent.obj1, unused; its three passages,
+  // the u_1_0 demo frame and its line are carried in unchanged.
+  const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+  const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+    cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+  const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+  const ciTwoModelsTable = ciTableOpen(['description', 'outcomes', 'probability of each', 'P(two heads)']) +
+    ciRow(['count the heads', '0, 1, 2', '1/3', '1/3'], { color: '#a4243b', cols: [3] }) +
+    ciRow(['record each toss in order', 'HH, HT, TH, TT', '1/4', '1/4'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+    '</tbody></table>'
 
   const sectionsContent={
 
@@ -1394,6 +1427,10 @@ They provide a controlled setting in which randomness can be analyzed, compared,
     yBars: mdSumMax,
     notes: [{ x: 7.6, y: 0.31, text: 'same 36 outcomes', pos: 'e' }, { x: 7.6, y: 0.285, text: 'blue: X = sum', pos: 'e', color: 'f' }, { x: 7.6, y: 0.26, text: 'amber: Y = maximum', pos: 'e', color: 'r' }, { x: 7.6, y: 0.235, text: 'P(Y = 6) = 11/36', pos: 'e', color: 'r' }],
     caption: 'Two measurements on one model, two distributions' };
+  const conceptIntroFigures = {
+    twoModelsTable: ciTwoModelsTable,
+  };
+
   const demoUnits = {
     u_1_0: demoUnitFrame({
       svg: coinSampleSpaceDiagrams.none,
@@ -1426,6 +1463,7 @@ They provide a controlled setting in which randomness can be analyzed, compared,
   return {
     props: {
     demoUnits,
+    conceptIntroFigures,
       sectionsContent,
       introContent,
       faqQuestions,
@@ -1452,10 +1490,76 @@ export default function ModelsPage({
   schemas,
   componentsTable,
   hierarchyTable,
-  summaryTable, demoUnits
+  summaryTable, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `What is the chance of two heads in two tosses of a fair coin?`,
+        content: [
+          `The question sounds settled before anything else is said. It is not: the answer depends on what counts as an outcome and how probability is spread over the outcomes.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Two reasonable descriptions of the same tosses give 1/3 and 1/4.`,
+        content: [
+          ciTable('twoModelsTable'),
+          `The first description treats "one head" as a single outcome, though it can happen in two ways, $HT$ and $TH$. Real coins agree with the second row.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `A probability is only as definite as the description of outcomes, events and probabilities behind it.`,
+        content: [
+          `The two rows describe the same situation but choose different outcomes and different probabilities. Writing those choices down explicitly is the job of a probability model.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A **probability model** is a mathematical description of a random situation: its [sample space](!/probability/definitions#sample_space) of possible outcomes, the events, and the probabilities assigned to them.`,
+        formula: [
+          `A probability model is a mathematical description of a random situation.`,
+          `It specifies:
+• the set of all possible outcomes
+• which collections of outcomes are considered events
+• how probabilities are assigned to those events`,
+        ],
+        footer: `So for two fair tosses, the model with sample space $\\{HH, HT, TH, TT\\}$ and probability $\\frac{1}{4}$ for each outcome gives $P(\\text{two heads}) = \\frac{1}{4}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A model describes how the randomness is generated, not what is later measured from it.`,
+        content: [
+          `The model defines **how randomness is generated**, not what is later measured from it.  
+Questions about averages, counts, or numerical outcomes arise only after additional structure is placed on the model.`,
+          <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A model is a choice, and a poor choice gives confident wrong answers.`,
+        content: [
+          `Nothing inside the first row of the table looks wrong; only comparison with real tosses shows it. How models are checked against the world is taken up in [models vs reality](!/probability/models#10).`,
+          `Why probability works through such models is the next question.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers why probability uses models, what all models share, how models relate to random variables and distributions, modeling assumptions, simple discrete models and richer ones, models against reality, and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1472,9 +1576,7 @@ export default function ModelsPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-u_1_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_1_0 }} />,
-          `Why probability works through such models is the next question.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

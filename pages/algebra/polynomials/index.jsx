@@ -13,6 +13,8 @@ import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualize
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 
@@ -257,6 +259,29 @@ const keyWords = [
   </tbody>
 </table>
 `
+
+// Concept introduction (section 1, "What is a Polynomial?") — template G,
+// exclusion. Running instance: eight expressions A–H, four of them
+// polynomials, the other four the section's own failures. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its formula box, theorem box, five
+// passages, the obj1Table and the punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSortTable = ciTableOpen(['expression', 'powers of x it uses', 'polynomial?']) +
+  ciRow(['A', '4, 2, 1, 0', 'yes'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['B', '2, 0', 'yes'], { shade: true, color: '#2563EB', cols: [2] }) +
+  ciRow(['C', '0 — the number 5 is 5x⁰', 'yes'], { color: '#2563EB', cols: [2] }) +
+  ciRow(['D', '−2', 'no'], { shade: true }) +
+  ciRow(['E', '1/2 — √x is x to the 1/2', 'no']) +
+  ciRow(['F', '−1 — 1/x is x to the −1', 'no'], { shade: true }) +
+  ciRow(['G', 'x sits in the exponent', 'no']) +
+  ciRow(['H', '3, 1 — the coefficient 1/2 is fine', 'yes'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
    
@@ -729,6 +754,10 @@ const schemas = {
     points: [{ x: 4, y: 21, label: 'P(4) = 21', pos: 'w' }, { x: -2, y: 15, label: 'P(−2) = 15', pos: 'e' }],
     caption: 'Each evaluation is a point on the graph: (4, 21) and (−2, 15)' };
 
+  const conceptIntroFigures = {
+    sortTable: ciSortTable,
+  };
+
   const demoUnits = {
     multiply: demoUnitFrame({
       svg: polynomialMultiplicationDiagrams['ps-foil'],
@@ -778,9 +807,44 @@ const schemas = {
     ],
   };
 
+  // FAQ pass 2026-11-01: new FAQ section (the page had none). Overview-only
+  // questions: the fraction coefficient in expression H and the closure
+  // theorem (both under "What is a Polynomial?"), the nonzero constant under
+  // Degree, the first-term pitfall under Standard Form, and the two-values
+  // fact box under Evaluating Polynomials.
+  const faqQuestions = {
+    obj1: {
+      question: "Can a polynomial have a fraction as a coefficient?",
+      answer: "Yes. Only the exponents are restricted: each power of $x$ must be a whole number $0, 1, 2, \\ldots$. The coefficients are free, so $\\frac{1}{2}x^3 - x$ is a polynomial. What disqualifies an expression is a fraction or negative number in the exponent: $\\sqrt{x} + 1$ uses $x^{1/2}$ and $\\frac{1}{x} + 4$ uses $x^{-1}$, so neither is a polynomial; nor is $2^x$, where $x$ itself is the exponent.",
+      sectionId: "1"
+    },
+    obj2: {
+      question: "Is the quotient of two polynomials always a polynomial?",
+      answer: "No. Adding, subtracting and multiplying polynomials always give a polynomial, but dividing can leave the family: $\\frac{x^2 + 1}{x} = x + \\frac{1}{x}$, and $\\frac{1}{x}$ is $x^{-1}$. A product never has this problem, even when it is not written as a sum: $x(x + 1)$ expands to $x^2 + x$, so it is a polynomial. When a division does not come out even, the result is a quotient and a remainder, as in integer division.",
+      sectionId: "1"
+    },
+    obj3: {
+      question: "Is a constant like $5$ a polynomial?",
+      answer: "Yes. A nonzero constant is a polynomial of degree $0$: it has one term, $5 = 5x^0$, and the exponent $0$ is a whole number. It is the simplest member of the family. Its graph is a horizontal line, and it has no roots, since its value is never zero. The constant $0$ is the one exception to the degree rule: it has no nonzero term, so it has no highest degree.",
+      sectionId: "3"
+    },
+    obj4: {
+      question: "Is the leading term always the first term of a polynomial?",
+      answer: "Only when the polynomial is in standard form. The leading term is the term of highest degree, wherever it is written. In $3 + 2x^2 - x$ the first term is $3$, but the degrees are $0$, $2$ and $1$, so the leading term is $2x^2$, the leading coefficient is $2$ and the degree is $2$. Rewriting it in standard form, $2x^2 - x + 3$, puts the leading term first.",
+      sectionId: "5"
+    },
+    obj5: {
+      question: "Can you find every coefficient of a polynomial from just two of its values?",
+      answer: "Yes, if all the coefficients are non-negative integers. First $P(1)$ gives their sum $S$, so no coefficient is larger than $S$. Then $P(S + 1)$, written in base $S + 1$, lists the coefficients as its digits. For $2x^2 + 3x + 1$, $P(1) = 6$ and $P(7) = 120$, and $120 = 2 \\cdot 49 + 3 \\cdot 7 + 1$ is $231$ in base $7$: the coefficients $2$, $3$, $1$.",
+      sectionId: "6"
+    }
+  }
+
   return {
   props:{
+    faqQuestions,
     demoUnits,
+    conceptIntroFigures,
     factoringBeforeAfter,
     sectionsContent,
     introContent,
@@ -802,9 +866,77 @@ const schemas = {
 
 
 
-export default function PolynomialsPage({seoData, sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits, factoringBeforeAfter}) {
+export default function PolynomialsPage({faqQuestions, seoData,sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits, factoringBeforeAfter, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template G (exclusion).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'candidates',
+        lead: `Eight expressions built from x and numbers. Which of them belong to one family?`,
+        content: [
+          `A: $3x^4 - 2x^2 + 5x - 7$ $\\quad$ B: $x^2 + 1$ $\\quad$ C: $5$ $\\quad$ D: $x^{-2} + 3$`,
+          `E: $\\sqrt{x} + 1$ $\\quad$ F: $\\frac{1}{x} + 4$ $\\quad$ G: $2^x$ $\\quad$ H: $\\frac{1}{2}x^3 - x$`,
+        ],
+      },
+      {
+        id: 'sort',
+        kind: 'instance',
+        lead: `Writing down the powers of x each one uses settles it: A, B, C and H belong; D, E, F and G do not.`,
+        content: [
+          ciTable('sortTable'),
+        ],
+      },
+      {
+        id: 'fault',
+        lead: `Every failure has the same flaw: a power of x that is not a whole number 0, 1, 2, … — or x in the exponent instead of the base.`,
+        content: [
+          `Certain expressions fail to qualify. The expression $x^{-2} + 3$ contains a negative exponent and is not a polynomial. The expression $\\sqrt{x} + 1$ involves a fractional exponent ($x^{1/2}$) and is not a polynomial. The expression $\\frac{1}{x} + 4$ places the variable in a denominator, equivalent to $x^{-1}$, and is not a polynomial. The expression $2^x$ has the variable in the exponent rather than the base and is not a polynomial. Each of these violates the requirement that exponents be non-negative integers.`,
+          <div
+            key={'obj1-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj1Table }}
+          />,
+          `The coefficients are free: the $\\frac{1}{2}$ in H is allowed, because only the exponents are restricted.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [polynomial](!/algebra/definitions#polynomial) is a sum of terms $a x^k$, where each coefficient $a$ is a fixed number and each exponent $k$ is a non-negative integer.`,
+        formula: [
+          `A polynomial in the variable $x$ is an expression of the form:`,
+          `@academic[formula_callout:What is a Polynomial?
+$$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@`,
+          `The components are straightforward. The variable $x$ represents an unknown quantity. The coefficients $a_0, a_1, \\ldots, a_n$ are fixed numbers — typically real numbers, though complex coefficients appear in advanced contexts. The exponents on $x$ must be non-negative integers: $0, 1, 2, 3$, and so on.`,
+        ],
+        footer: `So A, B, C and H are polynomials; D, E, F and G are not.`,
+      },
+      {
+        id: 'kind',
+        lead: `Polynomials form a family that adding, subtracting and multiplying never leave.`,
+        content: [
+          `The expression $3x^4 - 2x^2 + 5x - 7$ is a polynomial. So is $x^2 + 1$. So is the constant $5$, which can be written as $5x^0$. The simplest polynomial is just a number; the most complex have no upper limit on degree or number of terms.`,
+          `@academic[rule_theorem_plain:Polynomials are closed under addition, subtraction, and multiplication — combining two polynomials through these [operations](!/algebra/polynomials/operations) always produces another polynomial.]@`,
+          `Division, however, can break the pattern: $\\frac{x^2 + 1}{x}$ is not a polynomial.`,
+          `@academic[punchline:A polynomial uses only whole-number powers of the variable; a negative, fractional or variable exponent puts an expression outside the family.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Judge an expression by what it simplifies to, not by how it looks.`,
+        content: `$x(x + 1)$ is not written as a sum of terms, yet it is a polynomial: expanding gives $x^2 + x$. The names for the parts of a polynomial — terms, coefficients, leading term — are set out next, in [vocabulary](!/algebra/polynomials#2).`,
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers vocabulary, degree and classification, standard form, evaluating, operations, factoring, roots and zeros, graphing, and the key theorems.`,
+      },
+    ],
+  }
     
   const genericSections=[
      {
@@ -823,13 +955,7 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
-          `@academic[punchline:A polynomial uses only whole-number powers of the variable; a negative, fractional or variable exponent puts an expression outside the family.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
 
@@ -966,6 +1092,22 @@ export default function PolynomialsPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+        ]
+    },
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Polynomials FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
         ]
     },
     // {

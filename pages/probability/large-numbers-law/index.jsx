@@ -723,6 +723,11 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
+import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
+import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -923,6 +928,25 @@ export async function getStaticProps(){
 </table>
 `
 
+
+    // Concept introduction (section 1, "Formal Statement of the Law of Large
+    // Numbers") — template A, definition last. Running instance: the share of
+    // heads in one run of fair coin flips. Old obj1 text is kept in
+    // sectionsContent.obj1, unused; its five passages and three formula boxes
+    // are carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciShareTable = ciTableOpen(['flips', 'heads', 'share of heads']) +
+      ciRow(['10', '7', '0.7']) +
+      ciRow(['100', '46', '0.46'], { shade: true }) +
+      ciRow(['1 000', '508', '0.508']) +
+      ciRow(['10 000', '4 994', '0.4994'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+      '</tbody></table>'
 
     const sectionsContent={
       obj0: {
@@ -1381,6 +1405,11 @@ This page presents the formal statement of the theorem, clarifies what kind of c
   // LLN Is So Important. Replaced with four of the misconceptions the page
   // lists as unheaded bullets, starting with the gambler's fallacy — the
   // most consequential misreading of this theorem anywhere.
+  // FAQ pass 2026-10-31: kept all four; moved obj3's sectionId from 5 to 7,
+  // where the convergence-is-not-equality misconception sits. Added the count
+  // of heads versus the share (pitfall box), the Cauchy failure (only in the
+  // conditions and at-a-glance tables) and the sequences that never converge
+  // (the "almost surely" line of the notation section).
   const faqQuestions = {
     obj1: {
       question: "Does a run of heads make tails more likely?",
@@ -1395,12 +1424,27 @@ This page presents the formal statement of the theorem, clarifies what kind of c
     obj3: {
       question: "Does convergence mean the sample mean eventually equals the true mean?",
       answer: "No. Convergence in probability means the chance of a large deviation shrinks toward zero, not that the gap closes to nothing. For any finite n, the sample mean differs from μ with positive probability. The theorem describes limiting behavior, not finite-sample certainty — there is no point at which the two become equal.",
-      sectionId: "5"
+      sectionId: "7"
     },
     obj4: {
       question: "Are small samples wrong, or just noisy?",
       answer: "Noisy. A sample mean from a small sample is an unbiased estimator — it is centered on the true mean, not systematically off it. What small samples have is higher [variance](!/probability/variance): a wider range of plausible values around the right center. The problem is spread, not bias, and the two get conflated constantly.",
       sectionId: "7"
+    },
+    obj5: {
+      question: "Does the number of heads get closer to half the number of flips?",
+      answer: "No, only the share of heads does. The count $H_n$ has variance $\\frac{n}{4}$, so its typical distance from $\\frac{n}{2}$ is $\\frac{\\sqrt{n}}{2}$: about $5$ heads after $100$ flips and $50$ after $10{,}000$. The share $\\frac{H_n}{n}$ has standard deviation $\\frac{1}{2\\sqrt{n}}$, which falls from $0.05$ to $0.005$ over the same flips. Dividing by $n$ is the step that makes the gap shrink.",
+      sectionId: "7"
+    },
+    obj6: {
+      question: "Does the Law of Large Numbers work for the Cauchy distribution?",
+      answer: "No. The Cauchy distribution has no finite mean, so the law's finite-mean condition fails and there is no value for the sample mean to settle at. Its tails are so heavy that single huge observations keep dragging the average around however large $n$ becomes: the average of $n$ standard Cauchy values is again standard Cauchy, as spread out as one observation. The missing ingredient is the mean, not the variance.",
+      sectionId: "6"
+    },
+    obj7: {
+      question: "Can the share of heads fail to converge to one half?",
+      answer: "Yes, in principle, but with probability zero. A fair coin can land heads forever, and that sequence's share is $1$, not $\\frac{1}{2}$; infinitely many other sequences miss too. The strong law says all such exceptional sequences together carry probability $0$, which is what almost surely means: $P\\big(\\lim_{n \\to \\infty} \\bar{X}_n = \\mu\\big) = 1$. Probability one is not the same as always.",
+      sectionId: "notation"
     }
   }
 
@@ -1489,6 +1533,10 @@ This page presents the formal statement of the theorem, clarifies what kind of c
     pieces: [{ fn: (n) => 0.5 + 5 / n, from: 10, to: 300, ends: ['closed', null], color: 'r', label: { text: '0.5 + 5/n', x: 40, y: 0.625, pos: 'ne' } }, { fn: () => 0.5, from: 0, to: 300, ends: [null, null], color: 'g', ghost: [] }],
     notes: [{ x: 120, y: 1.02, text: 'start: 10 heads in a row', pos: 'e' }, { x: 120, y: 0.94, text: 'every later flip still 50-50', pos: 'e' }, { x: 120, y: 0.86, text: 'expected heads: 10 + (n − 10)/2', pos: 'e', color: 'r' }, { x: 120, y: 0.78, text: 'n = 200: 0.525', pos: 'e', color: 'r' }],
     caption: 'The streak is diluted, not cancelled' };
+  const conceptIntroFigures = {
+    shareTable: ciShareTable,
+  };
+
   const demoUnits = {
     u_8_0: demoUnitFrame({
       svg: distributionExplorerDiagrams['normal-pdf'],
@@ -1509,9 +1557,33 @@ This page presents the formal statement of the theorem, clarifies what kind of c
     }),
   };
 
+  // ComparisonTable2 (obj8): lln-clt-comparison
+  const llnCltComparison = {
+    kicker: 'law of large numbers',
+    title: 'LLN and CLT, side by side',
+    intro: 'Both average large samples, and both are about the sample mean; they answer different questions about it.',
+    tallyLabel: 'compared',
+    subjects: [
+      { name: 'Law of Large Numbers', sub: 'LLN' },
+      { name: 'Central Limit Theorem', sub: 'CLT', anchor: '/probability/central-limit-theorem', anchorLabel: 'CLT page' },
+    ],
+    features: [
+      { label: 'The question', values: ['where does the sample mean go?', 'how are sample means spread around that value?'] },
+      { label: 'Statement', values: ['$\\bar X_n \\xrightarrow{P} \\mu$', '$\\dfrac{\\bar X_n - \\mu}{\\sigma / \\sqrt{n}} \\xrightarrow{d} \\mathcal{N}(0,1)$'] },
+      { label: 'The limit is', values: ['a number, the population mean $\\mu$', 'a distribution, the standard normal'],
+        note: 'One is deterministic behavior emerging from randomness; the other is probabilistic structure revealed by aggregation.' },
+      { label: 'It describes', values: ['one sequence converging', 'many sample means forming a bell curve'] },
+      { label: 'It requires', values: ['a finite mean', 'a finite variance'],
+        note: 'The CLT asks for more: a finite variance, not just a finite mean.' },
+    ],
+    footnote: 'The LLN tells **where** the mean goes; the CLT tells **the shape of the path**.',
+  };
+
    return {
       props:{
+    llnCltComparison,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj5Table,
@@ -1532,7 +1604,7 @@ This page presents the formal statement of the theorem, clarifies what kind of c
     }
    }
 
-export default function LargeNumbersLawPage({
+export default function LargeNumbersLawPage({llnCltComparison, 
   seoData,
   sectionsContent,
   introContent,
@@ -1541,10 +1613,80 @@ export default function LargeNumbersLawPage({
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Flip a fair coin again and again and keep track of the share of heads.`,
+        content: [
+          `After a few flips the share can be almost anything. Does it settle down?`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `In a typical run the share wanders at first and then stays close to 1/2.`,
+        content: [
+          ciTable('shareTable'),
+          `These numbers are one possible run, not a rule. Another run gives other numbers, but the same narrowing around $\\frac{1}{2}$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `The average of many independent tries closes in on the expected value.`,
+        content: [
+          `Each flip is a random variable $X_i$ equal to $1$ for heads and $0$ for tails, with mean $\\mu = \\frac{1}{2}$. The share of heads is their average.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **law of large numbers** states that the sample mean of independent, identically distributed random variables with finite mean $\\mu$ converges in probability to $\\mu$.`,
+        formula: [
+          `Let $X_1, X_2, \\dots, X_n$ be independent and identically distributed [random variables](!/probability/random-variables) with finite mean $\\mu$.  
+Let $\\bar X_n$ denote their sample mean:`,
+          `@academic[formula_callout:Formal Statement of the Law of Large Numbers
+$$\\displaystyle \\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$$]@`,
+          `As the sample size $n$ increases, the sample mean converges to the population mean in probability:`,
+          `@academic[formula_callout:Formal Statement of the Law of Large Numbers
+$$\\displaystyle \\bar X_n \\xrightarrow{P} \\mu$$]@`,
+          `This means that for any $\\varepsilon > 0$, no matter how small:`,
+          `@academic[formula_callout:Formal Statement of the Law of Large Numbers
+$$\\displaystyle \\lim_{n \\to \\infty} P(|\\bar X_n - \\mu| > \\varepsilon) = 0$$]@`,
+          `The probability that the sample mean differs from $\\mu$ by more than any fixed amount approaches zero as the sample size grows.`,
+        ],
+        footer: `So the share of heads, the average of the $X_i$, gets arbitrarily close to $\\frac{1}{2}$ with probability approaching $1$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The law holds whatever the shape of the distribution.`,
+        content: [
+          `This result does not depend on the shape of the original distribution.  
+Only [independence](!/probability/independence), identical distribution, and finite mean are required.  
+Unlike the [Central Limit Theorem](!/probability/central-limit-theorem), finite [variance](!/probability/variance) is not necessary.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The law is about the long-run average, not about the next flip.`,
+        content: [
+          `After $7$ heads in $10$ flips, tails is not due: the next flip is still $\\frac{1}{2}$ either way. The early surplus is diluted by many later flips, not cancelled, as explained in [what the theorem is really describing](!/probability/large-numbers-law#2).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers what the theorem describes, the objects involved, visual intuition, the weak and strong laws, notation, when the law applies, common misconceptions, the comparison with the central limit theorem, why it matters, interactive tools and a summary.`,
+      },
+    ],
+  }
 
   const genericSections=[
 
@@ -1562,7 +1704,7 @@ export default function LargeNumbersLawPage({
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1626,6 +1768,11 @@ The law of large numbers is a statement about the share. Dividing by $n$ is the 
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probLimitsNotationSheet}
+            current={'/probability/large-numbers-law'}
+          />,
         ]
     },
     {
@@ -1658,6 +1805,16 @@ The law of large numbers is a statement about the share. Dividing by $n$ is the 
         content:[
           sectionsContent.obj8.content,
                   <div key={'unit-u_8_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_8_0 }} />,
+          `The key differences above, row by row, with the two theorems side by side.`,
+          <DiagramFrameV2
+            key={'obj8-comparison'}
+            id="lln-clt-comparison"
+            title="LLN and CLT, side by side"
+            source="/probability/large-numbers-law"
+          >
+            <ComparisonTable2 data={llnCltComparison} />
+          </DiagramFrameV2>,
+          `Read across any row and the two theorems split the same way: the LLN fixes the destination, and the CLT describes how sample means scatter around it on the way. The scatter is measured by $\\sigma / \\sqrt{n}$, which is why the CLT needs a finite variance while the LLN does not.`,
           `Why the law matters is set out next.`,
         ]
     },

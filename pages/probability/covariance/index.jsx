@@ -921,6 +921,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
 
 export async function getStaticProps(){
@@ -1016,6 +1018,10 @@ export async function getStaticProps(){
   // notation section already links to as covariance#7 — and reframed the
   // variance comparison around the Cov(X,X) identity. Added correlation,
   // which no heading on this page mentions at all.
+  // FAQ pass 2026-10-31: kept all four. Added that covariance signs do not
+  // chain (fact box under "Interpreting the Sign"), the −1/2 floor for three
+  // equally correlated variables (fact box under "Why Covariance Is
+  // Important") and when E[XY] = E[X]E[Y] (pitfall in the notation section).
   const faqQuestions = {
     obj1: {
       question: "Does zero covariance mean independence?",
@@ -1035,6 +1041,21 @@ export async function getStaticProps(){
     obj4: {
       question: "Is σ_XY the same as σ_X times σ_Y?",
       answer: "No. σ_XY is a single symbol with a two-letter subscript naming a pair — it is the covariance, not a product. The product σ_X σ_Y is a different quantity, and it appears in the denominator of the correlation coefficient. Reading the subscript as multiplication gives something with the wrong units and the wrong value.",
+      sectionId: "7"
+    },
+    obj5: {
+      question: "If X and Y are positively correlated, and Y and Z are too, are X and Z?",
+      answer: "Not necessarily; covariance signs do not chain. Take independent $A$, $B$, $C$ of variance $1$ and set $X = A + B$, $Y = B + C$, $Z = C - A$. Each pair shares a different piece: $\\operatorname{Cov}(X, Y) = 1$ through $B$ and $\\operatorname{Cov}(Y, Z) = 1$ through $C$, yet $\\operatorname{Cov}(X, Z) = -1$ through $A$, which enters $Z$ with a minus sign.",
+      sectionId: "3"
+    },
+    obj6: {
+      question: "Can three variables all be negatively correlated with each other?",
+      answer: "Yes, but not strongly. Two variables can reach correlation $-1$, but if all three pairs share the same correlation $\\rho$, then $\\rho \\ge -\\frac{1}{2}$. The sum of the three standardized variables has variance $3 + 6\\rho$, and a variance cannot be negative. The floor $-\\frac{1}{2}$ is reached when the three standardized variables always add up to a constant.",
+      sectionId: "5"
+    },
+    obj7: {
+      question: "When does E[XY] equal E[X]E[Y]?",
+      answer: "Exactly when the covariance is zero, since $\\operatorname{Cov}(X, Y) = E[XY] - E[X]\\,E[Y]$. Independence is enough, but it is not required: uncorrelated dependent variables satisfy it too. Splitting the product without checking is the mistake: for a fair coin $X \\in \\{0, 1\\}$ and $Y = X$, $E[XY] = \\frac{1}{2}$ while $E[X]\\,E[Y] = \\frac{1}{4}$, and the gap $\\frac{1}{4}$ is the covariance.",
       sectionId: "7"
     }
   }
@@ -1765,6 +1786,11 @@ $$\\operatorname{Cov}(X, Y) = E\\!\\left[(X - \\mu_X)(Y - \\mu_Y)\\right]$$
             parentHref={sectionsContent.obj7.parentHref}
             parentLabel={sectionsContent.obj7.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={probSpreadNotationSheet}
+            current={'/probability/covariance'}
           />,
           `
 Three identities describe how covariance is computed and how it behaves:
