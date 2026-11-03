@@ -3166,7 +3166,7 @@ const faqQuestions = {
     stepHeaviside: demoUnitFrame({
       svg: functionPiecewiseDiagrams.heaviside,
       caption: 'Constant pieces with a jump',
-      text: 'The Heaviside step: 0 for negative inputs, 1 from 0 on. Each piece is a horizontal segment and the graph jumps between them &#8212; the pattern every step function shares, from this single jump to the floor function\'s staircase of jumps at every integer. Build other piecewise functions on the',
+      text: 'A two-piece step: −1 for negative inputs, 1 from 0 on. Each piece is a horizontal segment and the graph jumps between them &#8212; the pattern every step function shares, from this single jump to the floor function\'s staircase of jumps at every integer. Build other piecewise functions on the',
       href: '/functions/visual-tools/piecewise',
       linkText: 'piecewise function visualizer',
     }),

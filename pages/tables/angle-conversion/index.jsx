@@ -10,6 +10,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import Head from 'next/head'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
  export async function getStaticProps(){
@@ -291,8 +293,33 @@ The sidebar to the left of the table holds direct links to the related tools.`,
   }
 
 
+  // ConceptCompare data (degrees-vs-radians-when); every fact is from the section text
+  const degreesVsRadians = {
+    header: { kicker: 'Angles', title: 'When to use degrees vs radians', lede: 'Two unit systems, each with the jobs it is built for.' },
+    concepts: [
+      { id: 'deg', name: 'degrees', uses: [
+        { area: 'Navigation', text: 'Surveying and geographic coordinates: latitude, longitude, bearings.' },
+        { area: 'Engineering', text: 'Drawings, mechanical specifications, and most everyday measurement contexts.' },
+        { area: 'Hand work', text: 'Angles that are simple fractions of a circle: 90°, 45°, 30°.' },
+        { area: 'Audiences', text: 'Non-mathematical audiences: "30 degrees" is intuitive in a way "$\\pi/6$" is not.' },
+      ] },
+      { id: 'rad', name: 'radians', uses: [
+        { area: 'Calculus', text: 'Derivatives, integrals and Taylor series of trig functions all assume radians.' },
+        { area: 'Physics', text: 'Angular velocity, simple harmonic motion, wave equations.' },
+        { area: 'Code', text: 'JavaScript\'s @[Math.sin]@, Python\'s @[math.sin]@ and C\'s @[sin]@ all take radians. Pass degrees in and you get nonsense.' },
+        { area: 'Exact values', text: 'Any work where $\\pi$ should appear symbolically.' },
+      ] },
+    ],
+    workflow: { label: 'A common workflow', steps: [
+      { label: 'Think', text: 'Think and design in degrees' },
+      { label: 'Compute', text: 'Convert to radians when feeding values into a function or formula' },
+      { label: 'Show', text: 'Convert back when displaying results to humans' },
+    ] },
+  };
+
    return {
       props:{
+         degreesVsRadians,
          sectionsContent,
          navigationGroup,
          schemas,
@@ -310,7 +337,9 @@ The sidebar to the left of the table holds direct links to the related tools.`,
     }
    }
 
-export default function AngleConversionTable({seoData, sectionsContent, navigationGroup, schemas}) {
+const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function AngleConversionTable({degreesVsRadians, seoData, sectionsContent, navigationGroup, schemas}) {
 
   const genericSections=[
     { id:'0', title:sectionsContent.obj0.title, link:sectionsContent.obj0.link, content:[sectionsContent.obj0.content] },
@@ -321,7 +350,19 @@ export default function AngleConversionTable({seoData, sectionsContent, navigati
     { id:'5', title:sectionsContent.obj5.title, link:sectionsContent.obj5.link, content:[sectionsContent.obj5.content] },
     { id:'6', title:sectionsContent.obj6.title, link:sectionsContent.obj6.link, content:[sectionsContent.obj6.content] },
     { id:'7', title:sectionsContent.obj7.title, link:sectionsContent.obj7.link, content:[sectionsContent.obj7.content] },
-    { id:'8', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[sectionsContent.obj8.content] },
+    { id:'8', title:sectionsContent.obj8.title, link:sectionsContent.obj8.link, content:[
+        sectionsContent.obj8.content,
+        <DiagramFrame
+          key={'obj8-compare'}
+          id="degrees-vs-radians-when"
+          title="When to use degrees vs radians"
+          source="/tables/angle-conversion"
+          before={`The same lists, laid out by area, with the workflow underneath.`}
+          after={`Degrees for people and drawings, radians for formulas and code; convert at the boundary between them.`}
+        >
+          <ConceptCompare data={degreesVsRadians} variant="when" theme={compareTheme} />
+        </DiagramFrame>,
+      ] },
     { id:'9', title:sectionsContent.obj9.title, link:sectionsContent.obj9.link, content:[sectionsContent.obj9.content] },
     // { id:'10', title:sectionsContent.obj10.title, link:sectionsContent.obj10.link, content:[sectionsContent.obj10.content] },
     // { id:'11', title:sectionsContent.obj11.title, link:sectionsContent.obj11.link, content:[sectionsContent.obj11.content] },

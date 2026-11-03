@@ -15,6 +15,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -231,7 +232,7 @@ The reason is that negative bases produce erratic behavior under dense rational 
 
 @academic[pitfall,aside:true,width:35%:Using a negative base
 Reading $-2^{\\pi} \\approx -8.825$ off a calculator as the value of $(-2)^{\\pi}$ puts the minus sign outside the power. $(-2)^{\\pi}$ has no real value: an irrational power needs a base $a > 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-a-negative-base)]@
 
 For $a > 0$, no such problem arises. The function $a^x$ is positive for all rational $x$, changes smoothly, and extends without ambiguity to every irrational $x$. The restriction $a > 0$ is the price of completeness — it is what allows $a^x$ to be defined for the entire real number line.
 
@@ -253,7 +254,7 @@ The same continuity argument extends every other law — quotient rule, power of
 
 @academic[pitfall,aside:true,width:35%:Multiplying the exponents
 Multiplying the exponents in $2^{\\pi} \\cdot 2^{1-\\pi}$ gives $2^{\\pi(1-\\pi)} = 2^{\\pi - \\pi^2} \\approx 0.0094$. The product rule adds them: $2^{\\pi + (1-\\pi)} = 2^1 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-exponents)]@
 
 No separate derivation is needed. Three rounds of verification — natural, negative, rational — established the laws for all rational exponents. The continuous extension to irrationals carries those laws across the finish line automatically.
 
@@ -369,36 +370,9 @@ This is the foundation on which [exponential functions](!/algebra/powers/exponen
 
 obj16: {
   title: `Common Pitfalls`,
-  content: `Two mistakes account for most wrong answers with irrational exponents. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Using a negative base**
-
-A negative base is given an irrational exponent and a value is produced anyway. Most often the value comes from a calculator: typed as $-2^{\\pi}$, the expression is read as $-(2^{\\pi})$, and that result is taken as the value of $(-2)^{\\pi}$.
-
-Wrong working:
-$$(-2)^{\\pi} = -(2^{\\pi}) \\approx -8.825$$
-
-Right working: $(-2)^{\\pi}$ would have to be the limit of $(-2)^r$ for rationals $r$ close to $\\pi$, and those values do not settle. For $r = \\frac{22}{7}$ the denominator is odd and the numerator even, so $(-2)^{22/7} = 2^{22/7} \\approx 8.833$. For $r = \\frac{311}{99}$ both are odd, so $(-2)^{311/99} = -2^{311/99} \\approx -8.824$. For $r = 3.14 = \\frac{157}{50}$ the denominator is even, and $(-2)^{157/50}$ is not a real number. No single value is approached, so $(-2)^{\\pi}$ is not defined in the reals. Only $a > 0$ gives an irrational power a value.
-
-Why it happens: negative bases work with whole-number exponents, so nothing seems to forbid them here. On a calculator, the power is applied before the minus sign, so $-2^{\\pi}$ quietly becomes $-(2^{\\pi})$.
-
-How to check: look at the base before anything else; if it is negative and the exponent is irrational, there is no real value. A calculator given the parentheses, $(-2)^{\\pi}$, reports an error or a non-real result rather than $-8.825$.
-
-**Multiplying the exponents**
-
-Two powers of the same base are multiplied, and their exponents are multiplied too, as in the power-of-a-power rule.
-
-Wrong working:
-$$2^{\\pi} \\cdot 2^{1-\\pi} = 2^{\\pi(1-\\pi)} = 2^{\\pi - \\pi^2} \\approx 2^{-6.728} \\approx 0.0094$$
-
-Right working: the product rule adds the exponents.
-$$2^{\\pi} \\cdot 2^{1-\\pi} = 2^{\\pi + (1-\\pi)} = 2^1 = 2$$
-
-Why it happens: the product rule $a^m \\cdot a^n = a^{m+n}$ and the power rule $(a^m)^n = a^{mn}$ look alike. With unfamiliar exponents such as $\\pi$, it is easy to match the pattern by its look rather than by what it means.
-
-How to check: estimate each factor. $2^{\\pi} \\approx 8.825$ and $2^{1-\\pi} \\approx 0.227$, and their product is about $2$, not about $0.01$.`,
+  content: `Two mistakes account for most wrong answers with irrational exponents. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
   before: ``,
-  after: ``,
+  after: `The first slip gives a negative base a value it cannot have: an irrational exponent is defined through rational approximations, and for a negative base those approximations do not settle, so the base must be positive. The second multiplies exponents where the product rule adds them; the rule is the same for irrational exponents as for whole ones. A rough estimate of each factor, such as $2^{\\pi} \\approx 8.825$, catches a wrong product at once.`,
   link: '',
 },
 
@@ -577,8 +551,29 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 3, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-a-negative-base', name: `Using a negative base`, errorAt: 1,
+        what: `A negative base is given an irrational exponent and a value is produced anyway. Most often the value comes from a calculator: typed as $-2^{\\pi}$, the expression is read as $-(2^{\\pi})$, and that result is taken as the value of $(-2)^{\\pi}$.`,
+        wrong: [`$$(-2)^{\\pi}$$`, `$$= -(2^{\\pi}) \\approx -8.825$$`],
+        right: [`$$(-2)^{\\pi}$$`, `$(-2)^{\\pi}$ would have to be the limit of $(-2)^r$ for rationals $r$ close to $\\pi$, and those values do not settle. For $r = \\frac{22}{7}$ the denominator is odd and the numerator even, so $(-2)^{22/7} = 2^{22/7} \\approx 8.833$. For $r = \\frac{311}{99}$ both are odd, so $(-2)^{311/99} = -2^{311/99} \\approx -8.824$. For $r = 3.14 = \\frac{157}{50}$ the denominator is even, and $(-2)^{157/50}$ is not a real number. No single value is approached, so $(-2)^{\\pi}$ is not defined in the reals. Only $a > 0$ gives an irrational power a value.`],
+        why: `Negative bases work with whole-number exponents, so nothing seems to forbid them here. On a calculator, the power is applied before the minus sign, so $-2^{\\pi}$ quietly becomes $-(2^{\\pi})$.`,
+        check: `Look at the base before anything else; if it is negative and the exponent is irrational, there is no real value. A calculator given the parentheses, $(-2)^{\\pi}$, reports an error or a non-real result rather than $-8.825$.` },
+      { id: 'multiplying-the-exponents', name: `Multiplying the exponents`, errorAt: 1,
+        what: `Two powers of the same base are multiplied, and their exponents are multiplied too, as in the power-of-a-power rule.`,
+        wrong: [`$$2^{\\pi} \\cdot 2^{1-\\pi}$$`, `$$= 2^{\\pi(1-\\pi)} = 2^{\\pi - \\pi^2} \\approx 2^{-6.728} \\approx 0.0094$$`],
+        right: [`$$2^{\\pi} \\cdot 2^{1-\\pi}$$`, `The product rule adds the exponents.
+$$= 2^{\\pi + (1-\\pi)} = 2^1 = 2$$`],
+        why: `The product rule $a^m \\cdot a^n = a^{m+n}$ and the power rule $(a^m)^n = a^{mn}$ look alike. With unfamiliar exponents such as $\\pi$, it is easy to match the pattern by its look rather than by what it means.`,
+        check: `Estimate each factor. $2^{\\pi} \\approx 8.825$ and $2^{1-\\pi} \\approx 0.227$, and their product is about $2$, not about $0.01$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     exponentNest,
     baseRestrictionLevels,
     sectionsContent,
@@ -604,7 +599,7 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function IrrationalExponentsPage({exponentNest, baseRestrictionLevels, seoData, sectionsContent, introContent, obj2Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function IrrationalExponentsPage({ pitfallData,exponentNest, baseRestrictionLevels, seoData, sectionsContent, introContent, obj2Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -703,6 +698,15 @@ export default function IrrationalExponentsPage({exponentNest, baseRestrictionLe
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="irrational-exponent-pitfalls"
+            title="Common pitfalls with irrational exponents"
+            source="/algebra/powers/irrational-exponents"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

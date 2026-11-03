@@ -13,6 +13,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -258,7 +260,7 @@ The inequality $5^{x-1} \\leq 125$ rewrites as $5^{x-1} \\leq 5^3$. Base greater
 
 @academic[pitfall,aside:true,width:35%:Keeping the direction with a base below 1
 Turning $\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$ into $x > -2$ keeps the sign, as for base $2$. That includes $x = 0$, where $\\left(\\frac{1}{3}\\right)^0 = 1 < 9$. The solution is $x < -2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-the-direction-with-a-base-below-1)]@
 
 The procedure is consistent: rewrite both sides with a common base, then read off the inequality between exponents — preserving direction if the base exceeds $1$, reversing it if the base is a proper fraction.
 
@@ -286,7 +288,7 @@ The inequality $\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2$ r
 
 @academic[pitfall,aside:true,width:35%:Skipping the flip in the exponent step
 Dividing $-2x > -6$ by $-2$ without reversing the sign gives $x > 3$. But $x = 4$ gives $\\left(\\frac{1}{4}\\right)^4 = \\frac{1}{256}$, less than $\\left(\\frac{1}{8}\\right)^2 = \\frac{1}{64}$. The solution is $x < 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-skipping-the-flip-in-the-exponent-step)]@
 
 The algebraic manipulation happens before the directional rule is applied. Simplify first, compare second.`,
   before: ``,
@@ -307,7 +309,7 @@ The inequality $2^x < -1$ has no solution at all, for the same reason.
 
 @academic[pitfall,aside:true,width:35%:Reading a negative side as no solution
 Since no power of $2$ equals $-5$, $2^x > -5$ is declared to have no solution, as if it were $2^x = -5$. But $2^x > 0 > -5$ for every $x$, so every real $x$ is a solution.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-negative-side-as-no-solution)]@
 
 In both inequalities the right side is negative, while the left side is a power of a positive base. Which way the inequality points is what separates the two cases: one asks whether a positive quantity can exceed a negative number, the other whether it can fall below one.
 
@@ -425,49 +427,9 @@ Systems involving multiple exponential inequalities with different bases are han
 
     obj16:{
       title:`Common Pitfalls`,
-      content:`Three mistakes account for many wrong answers to exponential inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Keeping the direction with a base below 1**
-
-The base lies between $0$ and $1$, but the exponents are compared exactly as for a base greater than $1$, so the inequality sign is kept.
-
-Wrong working:
-$$\\left(\\frac{1}{3}\\right)^x > 9 \\implies \\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2} \\implies x > -2$$
-
-Right working: $\\left(\\frac{1}{3}\\right)^x$ is decreasing, so the sign flips when the exponents are compared.
-$$\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2} \\implies x < -2$$
-
-Why it happens: the step "same base, compare the exponents" is first learned with bases like $2$, $3$ and $5$, where it keeps the sign, and the size of the base is not checked.
-
-How to check: test one value from each answer. $x = 0$ lies in the wrong answer, and $\\left(\\frac{1}{3}\\right)^0 = 1$, which is not greater than $9$. A value from the right answer, $x = -3$, gives $\\left(\\frac{1}{3}\\right)^{-3} = 27 > 9$.
-
-**Skipping the flip in the exponent step**
-
-The base is checked, found to be greater than $1$, and the direction is kept. The same direction is then kept again in the linear step that follows, even though that step divides by a negative number.
-
-Wrong working:
-$$\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2 \\implies 2^{-2x} > 2^{-6} \\implies -2x > -6 \\implies x > 3$$
-
-Right working: base $2 > 1$, so $-2x > -6$ is correct. Dividing both sides by $-2$ reverses the sign.
-$$-2x > -6 \\implies x < 3$$
-
-Why it happens: two separate direction rules meet in one problem. The base rule decides the sign when the exponentials are dropped; the ordinary rule for dividing by a negative decides it in the linear step. After "base above $1$, keep the direction", the second rule is easy to skip.
-
-How to check: test a value from the wrong answer. $x = 4$ gives $\\left(\\frac{1}{4}\\right)^4 = \\frac{1}{256}$, which is less than $\\left(\\frac{1}{8}\\right)^2 = \\frac{1}{64}$. A value from the right answer, $x = 2$, gives $\\left(\\frac{1}{4}\\right)^2 = \\frac{1}{16} > \\frac{1}{64}$.
-
-**Reading a negative side as no solution**
-
-The right side is negative, so it cannot be written as a power of the base. The inequality is then treated like the equation with the same two sides, which has no solution.
-
-Wrong working: no exponent gives $2^x = -5$, so $2^x > -5$ is declared to have no solution.
-
-Right working: $2^x > 0$ for every real $x$, and $0 > -5$, so $2^x > -5$ holds for every real $x$. Only the opposite direction, as in $2^x < -5$, has no solution.
-
-Why it happens: equations such as $2^x = -4$ have no solution for exactly this reason, and the same conclusion is carried over to inequalities without looking at which way the sign points.
-
-How to check: substitute any value. $x = 0$ gives $2^0 = 1 > -5$, and even $x = -10$ gives $2^{-10} = \\frac{1}{1024} > -5$.`,
+      content:`Three mistakes account for many wrong answers to exponential inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Two of the three slips lose track of the direction of the sign: it reverses when the exponents are compared under a base between $0$ and $1$, and again when both sides are divided by a negative number. The third forgets that an exponential is always positive, and so greater than every negative number. One test value, substituted into the original inequality, catches all three.`,
       link:'',
     }
   
@@ -636,8 +598,34 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'keeping-the-direction-with-a-base-below-1', name: `Keeping the direction with a base below 1`, errorAt: 2,
+        what: `The base lies between $0$ and $1$, but the exponents are compared exactly as for a base greater than $1$, so the inequality sign is kept.`,
+        wrong: [`$$\\left(\\frac{1}{3}\\right)^x > 9$$`, `$$\\implies \\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$$`, `$$\\implies x > -2$$`],
+        right: [`$$\\left(\\frac{1}{3}\\right)^x > 9$$`, `$$\\implies \\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$$`, `$\\left(\\frac{1}{3}\\right)^x$ is decreasing, so the sign flips when the exponents are compared.`, `$$\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$$`, `$$\\implies x < -2$$`],
+        why: `The step "same base, compare the exponents" is first learned with bases like $2$, $3$ and $5$, where it keeps the sign, and the size of the base is not checked.`,
+        check: `Test one value from each answer. $x = 0$ lies in the wrong answer, and $\\left(\\frac{1}{3}\\right)^0 = 1$, which is not greater than $9$. A value from the right answer, $x = -3$, gives $\\left(\\frac{1}{3}\\right)^{-3} = 27 > 9$.` },
+      { id: 'skipping-the-flip-in-the-exponent-step', name: `Skipping the flip in the exponent step`, errorAt: 3,
+        what: `The base is checked, found to be greater than $1$, and the direction is kept. The same direction is then kept again in the linear step that follows, even though that step divides by a negative number.`,
+        wrong: [`$$\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2$$`, `$$\\implies 2^{-2x} > 2^{-6}$$`, `$$\\implies -2x > -6$$`, `$$\\implies x > 3$$`],
+        right: [`$$\\left(\\frac{1}{4}\\right)^x > \\left(\\frac{1}{8}\\right)^2$$`, `$$\\implies 2^{-2x} > 2^{-6}$$`, `$$\\implies -2x > -6$$`, `Base $2 > 1$, so $-2x > -6$ is correct. Dividing both sides by $-2$ reverses the sign.`, `$$-2x > -6$$`, `$$\\implies x < 3$$`],
+        why: `Two separate direction rules meet in one problem. The base rule decides the sign when the exponentials are dropped; the ordinary rule for dividing by a negative decides it in the linear step. After "base above $1$, keep the direction", the second rule is easy to skip.`,
+        check: `Test a value from the wrong answer. $x = 4$ gives $\\left(\\frac{1}{4}\\right)^4 = \\frac{1}{256}$, which is less than $\\left(\\frac{1}{8}\\right)^2 = \\frac{1}{64}$. A value from the right answer, $x = 2$, gives $\\left(\\frac{1}{4}\\right)^2 = \\frac{1}{16} > \\frac{1}{64}$.` },
+      { id: 'reading-a-negative-side-as-no-solution', name: `Reading a negative side as no solution`, errorAt: 0,
+        what: `The right side is negative, so it cannot be written as a power of the base. The inequality is then treated like the equation with the same two sides, which has no solution.`,
+        wrong: [`No exponent gives $2^x = -5$, so $2^x > -5$ is declared to have no solution.`],
+        right: [`$2^x > 0$ for every real $x$, and $0 > -5$, so $2^x > -5$ holds for every real $x$. Only the opposite direction, as in $2^x < -5$, has no solution.`],
+        why: `Equations such as $2^x = -4$ have no solution for exactly this reason, and the same conclusion is carried over to inequalities without looking at which way the sign points.`,
+        check: `Substitute any value. $x = 0$ gives $2^0 = 1 > -5$, and even $x = -10$ gives $2^{-10} = \\frac{1}{1024} > -5$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     sectionsContent,
     introContent,
     obj1Table,
@@ -659,7 +647,7 @@ return {
    }
 
 // export default function InequalitiesPage({seoData,sectionsContent , introContent}) {
-export default function InequalitiesPage({seoData, sectionsContent, introContent, obj1Table, obj3Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function InequalitiesPage({ pitfallData,seoData, sectionsContent, introContent, obj1Table, obj3Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -813,6 +801,15 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="exponential-inequality-pitfalls"
+            title="Common pitfalls in exponential inequalities"
+            source="/algebra/powers/exponential-inequalities"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -2593,6 +2593,7 @@ import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDia
 import renderTriangleLabel from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -3213,6 +3214,25 @@ export async function getStaticProps(){
 
 //   }
 
+// Concept introduction (section 2, "Defining Sine, Cosine, and Tangent") —
+// template A, definition last. Running instance: three similar right
+// triangles (3-4-5, 6-8-10, 1.5-2-2.5) giving the same side ratios. Old obj2
+// text is kept in sectionsContent.obj2, unused; its eight passages, formula
+// box, rule box, pitfall, the t345 demo frame and its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRatiosTable = ciTableOpen(['opposite, adjacent, hypotenuse', 'opposite ÷ hypotenuse', 'adjacent ÷ hypotenuse', 'opposite ÷ adjacent']) +
+  ciRow(['3, 4, 5', '0.6', '0.8', '0.75']) +
+  ciRow(['6, 8, 10', '0.6', '0.8', '0.75'], { shade: true }) +
+  ciRow(['1.5, 2, 2.5', '0.6', '0.8', '0.75'], { last: true, color: '#2563EB', cols: [1, 2, 3] }) +
+  '</tbody></table>'
+
 const sectionsContent={
 
   obj0: {
@@ -3755,6 +3775,10 @@ Right triangle trigonometry is limited to acute angles: $\\theta$ must satisfy $
     ],
   };
 
+  const conceptIntroFigures = {
+    ratiosTable: ciRatiosTable,
+  };
+
   const demoUnits = {
     t345: demoUnitFrame({
       svg: triangleDiagrams['345'],
@@ -3814,6 +3838,7 @@ Right triangle trigonometry is limited to acute angles: $\\theta$ must satisfy $
    return {
       props:{
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj3Table,
@@ -3843,10 +3868,79 @@ export default function RightTrianglePage({
   obj8Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `The sides of a right triangle depend on its size; its angles do not. Is there anything about the sides that depends only on the angle?`,
+        content: [
+          `Compare three right triangles that share the same acute angle but differ in size.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Three triangles of different sizes with the same angle give the same three ratios.`,
+        content: [
+          ciTable('ratiosTable'),
+          `Doubling or halving every side leaves each ratio unchanged.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Side ratios belong to the angle, not to the triangle.`,
+        content: [
+          `A fundamental observation: these ratios do not depend on the size of the triangle.`,
+          `@academic[rule_theorem_plain:If two right triangles share the same acute angle $\\theta$, they are similar, and all corresponding side ratios are equal.]@`,
+          `A right triangle with legs 3 and 4 and hypotenuse 5 gives $\\sin(\\theta) = \\frac{3}{5}$ for the angle opposite the side of length 3 — and any similar triangle, no matter how large or small, produces the same value. The trigonometric functions are properties of the angle alone.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `For an acute angle $\\theta$ of a right triangle, [sine](!/trigonometry/definitions#sine), [cosine](!/trigonometry/definitions#cosine) and [tangent](!/trigonometry/definitions#tangent) are the side ratios $\\sin\\theta = \\frac{\\text{opposite}}{\\text{hypotenuse}}$, $\\cos\\theta = \\frac{\\text{adjacent}}{\\text{hypotenuse}}$ and $\\tan\\theta = \\frac{\\text{opposite}}{\\text{adjacent}}$.`,
+        formula: [
+          `The three primary trigonometric functions are defined as ratios of the sides of a right triangle relative to an acute angle $\\theta$:`,
+          `@academic[formula_callout:Defining Sine, Cosine, and Tangent
+$$\\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}}, \\quad \\cos(\\theta) = \\frac{\\text{adjacent}}{\\text{hypotenuse}}, \\quad \\tan(\\theta) = \\frac{\\text{opposite}}{\\text{adjacent}}$$]@`,
+          `The mnemonic SOH-CAH-TOA encodes these definitions: Sine = Opposite/Hypotenuse, Cosine = Adjacent/Hypotenuse, Tangent = Opposite/Adjacent.`,
+        ],
+        footer: `So for the angle opposite the side $3$ in a 3-4-5 triangle, $\\sin\\theta = 0.6$, $\\cos\\theta = 0.8$ and $\\tan\\theta = 0.75$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Each ratio measures something different about the angle.`,
+        content: [
+          `Each ratio captures a different geometric relationship. Sine measures how much of the hypotenuse is "projected" onto the vertical direction relative to $\\theta$. Cosine measures the horizontal projection. Tangent measures the steepness — how much vertical rise accompanies a given horizontal run. When $\\theta$ is small, the opposite side is short relative to the adjacent, and $\\tan(\\theta)$ is small. As $\\theta$ approaches $90°$, the opposite side grows relative to the adjacent, and $\\tan(\\theta)$ increases without bound.`,
+          `Because the hypotenuse is always the longest side of a right triangle, both $\\sin(\\theta)$ and $\\cos(\\theta)$ are always between 0 and 1 for acute angles. Tangent has no such restriction — it can take any positive value, approaching infinity as $\\theta$ nears $90°$.`,
+          <div key={'unit-t345'} dangerouslySetInnerHTML={{ __html: demoUnits.t345 }} />,
+          `The mnemonic organises the three ratios; the triangle is where their values come from.`,
+          `The function names themselves are standardized abbreviations — sin, cos, tan and their companions are catalogued among the [trigonometry symbols](!/math-symbols/trigonometry) together with the [LaTeX](!/latex) code for each, and the [mathematical keyboard](!/keyboard) lets you type them directly.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Which leg is adjacent depends on the angle, and the hypotenuse is never the adjacent side.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Taking the hypotenuse as the adjacent side
+Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (opposite 3) gives $\\tan(\\theta) = \\frac{3}{5}$ and even $\\cos(\\theta) = \\frac{5}{5} = 1$. The adjacent side is the leg 4: $\\cos(\\theta) = \\frac{4}{5}$, $\\tan(\\theta) = \\frac{3}{4}$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the reciprocal functions, notation, finding missing sides and angles, the 45-45-90 and 30-60-90 triangles, cofunctions, angles of elevation and depression, limitations, common pitfalls and exact values at the standard angles.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -3873,9 +3967,7 @@ export default function RightTrianglePage({
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-                  <div key={'unit-t345'} dangerouslySetInnerHTML={{ __html: demoUnits.t345 }} />,
-          `The mnemonic organises the three ratios; the triangle is where their values come from.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

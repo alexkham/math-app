@@ -19,6 +19,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -433,7 +434,7 @@ The solution set collects all solutions into one object. For $x > 3$, the soluti
 
 @academic[pitfall,aside:true,width:35%:Taking square roots as in an equation
 Reducing $x^2 < 9$ to $x < 3$ keeps values like $x = -5$, where $x^2 = 25$. Both $-3$ and $3$ bound the set, so the answer is $-3 < x < 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-square-roots-as-in-an-equation)]@
 
 The inequality $x^2 < 9$ is a condition on the square of $x$, not on $x$ itself. Squaring gives the same result for a number and its opposite, so $-3$ and $3$ sit at the same height, $9$, and the boundary of the solution set has a point on each side of $0$.
 
@@ -595,7 +596,7 @@ The discriminant $\\Delta = b^2 - 4ac$ determines the structure before any inter
 
 @academic[pitfall,aside:true,width:35%:Reading no roots as no solution
 For $x^2 + 1 > 0$, $\\Delta = -4 < 0$, and stopping there gives "no solution". But $a = 1 > 0$, so $x^2 + 1$ is positive everywhere: the solution is $(-\\infty, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-no-roots-as-no-solution)]@
 
 The parabola $y = ax^2 + bx + c$ provides a geometric shortcut. The inequality $ax^2 + bx + c > 0$ asks where the parabola lies above the $x$-axis, and $ax^2 + bx + c < 0$ asks where it lies below. The opening direction (upward if $a > 0$, downward if $a < 0$) together with the root locations makes the answer visible.
 
@@ -617,7 +618,7 @@ Root multiplicity plays a decisive role.
 
 @academic[pitfall,aside:true,width:35%:Switching the sign at every root
 Alternating signs for $(x + 2)(x - 1)^2(x - 5) \\leq 0$ gives $(-\\infty, -2] \\cup [1, 5]$, which keeps $x = -3$, where the product is $128$. The double root at $1$ keeps the sign, so the answer is $[-2, 5]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-switching-the-sign-at-every-root)]@
 
 This distinction determines the shape of the solution set near each root.
 
@@ -653,7 +654,7 @@ The inequality $|x + 1| \\geq 4$ becomes $x + 1 \\leq -4$ or $x + 1 \\geq 4$, gi
 
 @academic[pitfall,aside:true,width:35%:Using AND for greater than
 Converting $|x + 1| \\geq 4$ to $-4 \\leq x + 1 \\leq 4$ gives $-5 \\leq x \\leq 3$, which keeps $x = 0$, where $|0 + 1| = 1$. Greater than means OR: $x \\leq -5$ or $x \\geq 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-and-for-greater-than)]@
 
 The geometric reading — absolute value as distance on the number line — provides immediate intuition. The inequality $|x - a| < d$ describes all points within distance $d$ of $a$, forming the interval $(a - d, a + d)$. The inequality $|x - a| > d$ describes all points farther than $d$ from $a$, forming two rays.`,
     before: ``,
@@ -685,90 +686,9 @@ The geometric reading — absolute value as distance on the number line — prov
 
   obj16: {
     title: `Common Pitfalls`,
-    content: `Six mistakes cause most wrong answers in the inequality types on this page. Four of them are marked where they happen in the sections above; the other two are named in the text of their sections. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking square roots as in an equation**
-
-An inequality of the form $x^2 < k$ is solved by taking the square root of both sides, as for the equation $x^2 = k$, and only the positive root is kept.
-
-Wrong working:
-$$x^2 < 9 \\implies x < 3$$
-
-Right working: move everything to one side and factor.
-$$x^2 - 9 < 0 \\implies (x + 3)(x - 3) < 0$$
-The product is negative only between its roots, so $-3 < x < 3$.
-
-Why it happens: for the equation $x^2 = 9$ the step gives $x = \\pm 3$, and the inequality looks like the same problem with a different symbol. Writing $x < \\pm 3$ does not help, because it has no clear meaning as a set.
-
-How to check: test a value from the wrong answer outside the right one. $x = -5$ is less than $3$, but $(-5)^2 = 25$, which is not less than $9$. A value from the right answer, $x = 0$, gives $0 < 9$.
-
-**Forgetting the flip**
-
-Both sides are divided by a negative number, and the inequality symbol is kept as it was.
-
-Wrong working:
-$$-3x \\geq 12 \\implies x \\geq -4$$
-
-Right working: dividing by $-3$ reverses the direction.
-$$-3x \\geq 12 \\implies x \\leq -4$$
-
-Why it happens: the step is copied from equation solving, where dividing by a negative number changes nothing about the $=$ sign.
-
-How to check: test a value from the wrong answer. $x = 0$ satisfies $x \\geq -4$, but $-3 \\cdot 0 = 0$, which is not at least $12$. A value from the right answer, $x = -5$, gives $15 \\geq 12$.
-
-**Reading no roots as no solution**
-
-The discriminant of a quadratic inequality is negative, and the conclusion "no real roots" is turned into "no solution".
-
-Wrong working:
-$$x^2 + 1 > 0, \\quad \\Delta = 0^2 - 4 \\cdot 1 \\cdot 1 = -4 < 0 \\implies \\text{no solution}$$
-
-Right working: with no real roots the expression never changes sign, and the leading coefficient $a = 1 > 0$ makes the parabola open upward, so it lies above the $x$-axis everywhere. The solution is every real number, $(-\\infty, \\infty)$. The opposite inequality $x^2 + 1 < 0$ is the one with no solution.
-
-Why it happens: for the equation $x^2 + 1 = 0$, a negative discriminant does mean there is no real solution, and that habit carries over.
-
-How to check: test any single value. $x = 0$ gives $1 > 0$, so the solution set is not empty.
-
-**Switching the sign at every root**
-
-The sign chart is filled in by changing the sign at each critical point, without looking at the multiplicity of the factors.
-
-Wrong working: for $(x + 2)(x - 1)^2(x - 5) \\leq 0$, starting with $+$ to the right of $5$ and alternating gives $-$ on $(1, 5)$, $+$ on $(-2, 1)$ and $-$ to the left of $-2$, so the answer is taken as $(-\\infty, -2] \\cup [1, 5]$.
-
-Right working: the factor $(x - 1)^2$ has even multiplicity and is never negative, so the sign does not change at $x = 1$. The signs are $+$ to the left of $-2$, $-$ on $(-2, 1)$, $-$ on $(1, 5)$ and $+$ to the right of $5$. With the zeros $-2$, $1$ and $5$ included, the solution is $[-2, 5]$.
-
-Why it happens: for products of distinct linear factors the signs really do alternate, so alternation becomes a reflex.
-
-How to check: test a value in each interval. $x = -3$ gives $(-1)(16)(-8) = 128$, which is not $\\leq 0$; $x = 0$ gives $(2)(1)(-5) = -10 \\leq 0$.
-
-**Cross-multiplying**
-
-The denominator of a rational inequality is cleared by multiplying both sides by it, as if it were a positive number.
-
-Wrong working:
-$$\\frac{x - 2}{x + 1} > 0 \\implies x - 2 > 0 \\implies x > 2$$
-
-Right working: the critical points are $x = 2$ (numerator zero) and $x = -1$ (denominator zero). The quotient is positive to the left of $-1$, negative between $-1$ and $2$, and positive to the right of $2$. The solution is $(-\\infty, -1) \\cup (2, \\infty)$.
-
-Why it happens: multiplying by the denominator is the standard first step for rational equations. For an inequality it is valid only where the denominator is positive; where it is negative the direction would have to flip.
-
-How to check: test a value left of the pole. $x = -2$ gives $\\frac{-4}{-1} = 4 > 0$, so it belongs to the solution, but the wrong working lost it.
-
-**Using AND for greater than**
-
-A "greater than" absolute value inequality is converted with the bounded chain that belongs to the "less than" form.
-
-Wrong working:
-$$|x + 1| \\geq 4 \\implies -4 \\leq x + 1 \\leq 4 \\implies -5 \\leq x \\leq 3$$
-
-Right working: $|x + 1| \\geq 4$ says $x + 1$ is at least $4$ units from zero, which is a disjunction.
-$$x + 1 \\leq -4 \\text{ or } x + 1 \\geq 4 \\implies x \\leq -5 \\text{ or } x \\geq 3$$
-
-Why it happens: the chain $-k < f(x) < k$ is learned first and is the familiar shape. A related slip writes the OR case as a single chain, $-4 \\geq x + 1 \\geq 4$, which no number satisfies.
-
-How to check: test a value from the wrong answer. $x = 0$ gives $|0 + 1| = 1$, which is not at least $4$. A value from the right answer, $x = 4$, gives $|4 + 1| = 5 \\geq 4$.`,
+    content: `Six mistakes cause most wrong answers in the inequality types on this page. Four of them are marked where they happen in the sections above; the other two are named in the text of their sections. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Every check above is the same move: pick one number and substitute it into the original inequality. A value from the wrong answer that fails, or a value from the right answer that the wrong working left out, proves the working wrong. One test value per interval between the critical points is enough, since the sign of the expression cannot change inside an interval.`,
     link: '',
   },
 };
@@ -1033,8 +953,52 @@ const schemas = {
     }
   }
 
+  // MistakeFix 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-square-roots-as-in-an-equation', name: `Taking square roots as in an equation`, errorAt: 1,
+        what: `An inequality of the form $x^2 < k$ is solved by taking the square root of both sides, as for the equation $x^2 = k$, and only the positive root is kept.`,
+        wrong: [`$$x^2 < 9$$`, `$$\\implies x < 3$$`],
+        right: [`$$x^2 < 9$$`, `Move everything to one side and factor.`, `$$x^2 - 9 < 0$$`, `$$\\implies (x + 3)(x - 3) < 0$$`, `The product is negative only between its roots, so $-3 < x < 3$.`],
+        why: `For the equation $x^2 = 9$ the step gives $x = \\pm 3$, and the inequality looks like the same problem with a different symbol. Writing $x < \\pm 3$ does not help, because it has no clear meaning as a set.`,
+        check: `Test a value from the wrong answer outside the right one. $x = -5$ is less than $3$, but $(-5)^2 = 25$, which is not less than $9$. A value from the right answer, $x = 0$, gives $0 < 9$.` },
+      { id: 'forgetting-the-flip', name: `Forgetting the flip`, errorAt: 1,
+        what: `Both sides are divided by a negative number, and the inequality symbol is kept as it was.`,
+        wrong: [`$$-3x \\geq 12$$`, `$$\\implies x \\geq -4$$`],
+        right: [`$$-3x \\geq 12$$`, `Dividing by $-3$ reverses the direction.`, `$$\\implies x \\leq -4$$`],
+        why: `The step is copied from equation solving, where dividing by a negative number changes nothing about the $=$ sign.`,
+        check: `Test a value from the wrong answer. $x = 0$ satisfies $x \\geq -4$, but $-3 \\cdot 0 = 0$, which is not at least $12$. A value from the right answer, $x = -5$, gives $15 \\geq 12$.` },
+      { id: 'reading-no-roots-as-no-solution', name: `Reading no roots as no solution`, errorAt: 1,
+        what: `The discriminant of a quadratic inequality is negative, and the conclusion "no real roots" is turned into "no solution".`,
+        wrong: [`$$x^2 + 1 > 0, \\quad \\Delta = 0^2 - 4 \\cdot 1 \\cdot 1 = -4 < 0$$`, `$$\\implies \\text{no solution}$$`],
+        right: [`$$x^2 + 1 > 0, \\quad \\Delta = 0^2 - 4 \\cdot 1 \\cdot 1 = -4 < 0$$`, `With no real roots the expression never changes sign, and the leading coefficient $a = 1 > 0$ makes the parabola open upward, so it lies above the $x$-axis everywhere. The solution is every real number, $(-\\infty, \\infty)$. The opposite inequality $x^2 + 1 < 0$ is the one with no solution.`],
+        why: `For the equation $x^2 + 1 = 0$, a negative discriminant does mean there is no real solution, and that habit carries over.`,
+        check: `Test any single value. $x = 0$ gives $1 > 0$, so the solution set is not empty.` },
+      { id: 'switching-the-sign-at-every-root', name: `Switching the sign at every root`, errorAt: 0,
+        what: `The sign chart is filled in by changing the sign at each critical point, without looking at the multiplicity of the factors.`,
+        wrong: [`For $(x + 2)(x - 1)^2(x - 5) \\leq 0$, starting with $+$ to the right of $5$ and alternating gives $-$ on $(1, 5)$, $+$ on $(-2, 1)$ and $-$ to the left of $-2$, so the answer is taken as $(-\\infty, -2] \\cup [1, 5]$.`],
+        right: [`The factor $(x - 1)^2$ has even multiplicity and is never negative, so the sign does not change at $x = 1$. The signs are $+$ to the left of $-2$, $-$ on $(-2, 1)$, $-$ on $(1, 5)$ and $+$ to the right of $5$. With the zeros $-2$, $1$ and $5$ included, the solution is $[-2, 5]$.`],
+        why: `For products of distinct linear factors the signs really do alternate, so alternation becomes a reflex.`,
+        check: `Test a value in each interval. $x = -3$ gives $(-1)(16)(-8) = 128$, which is not $\\leq 0$; $x = 0$ gives $(2)(1)(-5) = -10 \\leq 0$.` },
+      { id: 'cross-multiplying', name: `Cross-multiplying`, errorAt: 1,
+        what: `The denominator of a rational inequality is cleared by multiplying both sides by it, as if it were a positive number.`,
+        wrong: [`$$\\frac{x - 2}{x + 1} > 0$$`, `$$\\implies x - 2 > 0$$`, `$$\\implies x > 2$$`],
+        right: [`$$\\frac{x - 2}{x + 1} > 0$$`, `The critical points are $x = 2$ (numerator zero) and $x = -1$ (denominator zero). The quotient is positive to the left of $-1$, negative between $-1$ and $2$, and positive to the right of $2$. The solution is $(-\\infty, -1) \\cup (2, \\infty)$.`],
+        why: `Multiplying by the denominator is the standard first step for rational equations. For an inequality it is valid only where the denominator is positive; where it is negative the direction would have to flip.`,
+        check: `Test a value left of the pole. $x = -2$ gives $\\frac{-4}{-1} = 4 > 0$, so it belongs to the solution, but the wrong working lost it.` },
+      { id: 'using-and-for-greater-than', name: `Using AND for greater than`, errorAt: 1,
+        what: `A "greater than" absolute value inequality is converted with the bounded chain that belongs to the "less than" form.`,
+        wrong: [`$$|x + 1| \\geq 4$$`, `$$\\implies -4 \\leq x + 1 \\leq 4$$`, `$$\\implies -5 \\leq x \\leq 3$$`],
+        right: [`$$|x + 1| \\geq 4$$`, `$|x + 1| \\geq 4$ says $x + 1$ is at least $4$ units from zero, which is a disjunction.`, `$$x + 1 \\leq -4 \\text{ or } x + 1 \\geq 4$$`, `$$\\implies x \\leq -5 \\text{ or } x \\geq 3$$`],
+        why: `The chain $-k < f(x) < k$ is learned first and is the familiar shape. A related slip writes the OR case as a single chain, $-4 \\geq x + 1 \\geq 4$, which no number satisfies.`,
+        check: `Test a value from the wrong answer. $x = 0$ gives $|0 + 1| = 1$, which is not at least $4$. A value from the right answer, $x = 4$, gives $|4 + 1| = 5 \\geq 4$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     faqQuestions,
     inequalityMoveProperties,
     inequalityFamilyTree,
@@ -1061,7 +1025,7 @@ const schemas = {
 }
    }
 
-export default function InequalitiesPage({inequalityMoveProperties, inequalityFamilyTree, faqQuestions,
+export default function InequalitiesPage({ pitfallData,inequalityMoveProperties, inequalityFamilyTree, faqQuestions,
   seoData,
   sectionsContent,
   introContent,
@@ -1375,6 +1339,15 @@ export default function InequalitiesPage({inequalityMoveProperties, inequalityFa
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="inequality-pitfalls"
+            title="Common pitfalls with inequalities"
+            source="/algebra/inequalities"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

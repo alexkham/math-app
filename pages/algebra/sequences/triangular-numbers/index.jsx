@@ -15,6 +15,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -279,7 +281,7 @@ $$T_n = \\binom{n+1}{2}$$
 
 @academic[pitfall,aside:true,width:35%:Using the group size as the index
 Taking $T_5 = 15$ as the number of handshakes among $5$ people counts $5$ as the index. Five people give $\\binom{5}{2} = T_4 = 10$ handshakes: $n$ people make $T_{n-1}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-group-size-as-the-index)]@
 
 In counting problems the binomial form is usually where the work starts: a group of objects is given, and every unordered pair is counted once. The size of the group goes into the top of $\\binom{n+1}{2}$, and the triangular number is read off from there.`,
     before: ``,
@@ -304,7 +306,7 @@ Solving $m = \\frac{n(n+1)}{2}$ for $n$ gives $n = \\frac{-1 + \\sqrt{1 + 8m}}{2
 
 @academic[pitfall,aside:true,width:35%:Reading the square root as the index
 For $m = 15$, taking $\\sqrt{121} = 11$ as the position gives $T_{11} = 66$, not $15$. The position is $n = \\frac{-1 + 11}{2} = 5$, and $T_5 = 15$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-square-root-as-the-index)]@
 
 The same formula answers a second question: which triangular number $m$ is.
 
@@ -334,40 +336,9 @@ A different question asks which whole numbers are sums of a few triangular numbe
   },
   obj5: {
     title: `Common Pitfalls`,
-    content: `Two mistakes come up again and again with triangular numbers, and both put the wrong number in place of the index $n$. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Using the group size as the index**
-
-In a pairing problem the number of objects is used as the index of the triangular number. But $T_n = \\binom{n+1}{2}$ counts the pairs among $n + 1$ objects, so a group of $n$ objects gives $T_{n-1}$ pairs.
-
-Wrong working: handshakes among $5$ people,
-$$T_5 = \\frac{5 \\cdot 6}{2} = 15$$
-
-Right working:
-$$\\binom{5}{2} = \\frac{5 \\cdot 4}{2} = 10 = T_4$$
-The first person shakes $4$ hands, the next $3$ new ones, then $2$, then $1$: $4 + 3 + 2 + 1 = 10$.
-
-Why it happens: the formula $\\frac{n(n+1)}{2}$ is remembered with $n$ as "the number in the problem", and the shift by one between $\\binom{n+1}{2}$ and $T_n$ is easy to overlook.
-
-How to check: try $2$ people. They make $1$ handshake, which is $T_1$, while $T_2 = 3$. In general $n$ people make $\\frac{n(n-1)}{2}$ handshakes.
-
-**Reading the square root as the index**
-
-In the test for triangular numbers, $\\sqrt{8m + 1}$ is taken as the position $n$ of $m$ in the sequence. The square root only decides whether $m$ is triangular; the position needs one more step.
-
-Wrong working: for $m = 15$,
-$$8(15) + 1 = 121 = 11^2 \\implies n = 11$$
-but $T_{11} = \\frac{11 \\cdot 12}{2} = 66$, not $15$.
-
-Right working:
-$$n = \\frac{-1 + \\sqrt{8m + 1}}{2} = \\frac{-1 + 11}{2} = 5$$
-and $T_5 = \\frac{5 \\cdot 6}{2} = 15$.
-
-Why it happens: the test and the formula for $n$ come out of the same calculation, and once the square root turns out to be a whole number, it looks like the answer.
-
-How to check: put the index back in; $T_n$ must equal $m$. Also, $8T_n + 1 = (2n + 1)^2$ for every $n$, so the square root is always odd and a little more than twice the index.`,
+    content: `Two mistakes come up again and again with triangular numbers, and both put the wrong number in place of the index $n$. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Both slips put the wrong number in the index: $n$ people make $T_{n-1}$ handshakes, and the square root of $8m + 1$ is $2n + 1$, not $n$. Putting the index back into $T_n = \\frac{n(n + 1)}{2}$ and comparing with the original number catches either slip at once.`,
     link: '',
   },
 }
@@ -525,8 +496,28 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 4, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj5 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-the-group-size-as-the-index', name: `Using the group size as the index`, errorAt: 1,
+        what: `In a pairing problem the number of objects is used as the index of the triangular number. But $T_n = \\binom{n+1}{2}$ counts the pairs among $n + 1$ objects, so a group of $n$ objects gives $T_{n-1}$ pairs.`,
+        wrong: [`Handshakes among $5$ people,`, `$$T_5 = \\frac{5 \\cdot 6}{2} = 15$$`],
+        right: [`Handshakes among $5$ people,`, `$$\\binom{5}{2} = \\frac{5 \\cdot 4}{2} = 10 = T_4$$`, `The first person shakes $4$ hands, the next $3$ new ones, then $2$, then $1$: $4 + 3 + 2 + 1 = 10$.`],
+        why: `The formula $\\frac{n(n+1)}{2}$ is remembered with $n$ as "the number in the problem", and the shift by one between $\\binom{n+1}{2}$ and $T_n$ is easy to overlook.`,
+        check: `Try $2$ people. They make $1$ handshake, which is $T_1$, while $T_2 = 3$. In general $n$ people make $\\frac{n(n-1)}{2}$ handshakes.` },
+      { id: 'reading-the-square-root-as-the-index', name: `Reading the square root as the index`, errorAt: 2,
+        what: `In the test for triangular numbers, $\\sqrt{8m + 1}$ is taken as the position $n$ of $m$ in the sequence. The square root only decides whether $m$ is triangular; the position needs one more step.`,
+        wrong: [`For $m = 15$,`, `$$8(15) + 1 = 121 = 11^2$$`, `$$\\implies n = 11$$`, `But $T_{11} = \\frac{11 \\cdot 12}{2} = 66$, not $15$.`],
+        right: [`For $m = 15$,`, `$$8(15) + 1 = 121 = 11^2$$`, `$$n = \\frac{-1 + \\sqrt{8m + 1}}{2} = \\frac{-1 + 11}{2} = 5$$`, `And $T_5 = \\frac{5 \\cdot 6}{2} = 15$.`],
+        why: `The test and the formula for $n$ come out of the same calculation, and once the square root turns out to be a whole number, it looks like the answer.`,
+        check: `Put the index back in; $T_n$ must equal $m$. Also, $8T_n + 1 = (2n + 1)^2$ for every $n$, so the square root is always odd and a little more than twice the index.` },
+    ],
+  };
+
    return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
      sectionsContent,
@@ -544,7 +535,7 @@ const schemas = {
 }
    }
 
-export default function TriangularNumbersPage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function TriangularNumbersPage({ pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
@@ -689,6 +680,15 @@ $$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, \\ldots$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-mistakes'}
+            id="triangular-number-pitfalls"
+            title="Common pitfalls with triangular numbers"
+            source="/algebra/sequences/triangular-numbers"
+            after={sectionsContent.obj5.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

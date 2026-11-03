@@ -29,6 +29,7 @@ export default function ProofPlayerMockup({ proofKey = 'angleSum', step = 0 }) {
   const scenes = buildScenes(proof, null);
   const { P } = resolve(proof.model);
   const shown = scenes.slice(0, step + 1);
+  const atEnd = step >= scenes.length - 1;
 
   return (
     <div aria-hidden="true" style={{ fontFamily: 'Arial, sans-serif', fontSize: '13px', pointerEvents: 'none', userSelect: 'none' }}>
@@ -65,9 +66,9 @@ export default function ProofPlayerMockup({ proofKey = 'angleSum', step = 0 }) {
             {proof.readout && <div style={readout} data-pin="readout">{proof.readout(P)}</div>}
           </div>
           <div data-pin="controls" style={{ display: 'flex', justifyContent: 'center', gap: '6px', alignItems: 'center', marginTop: '8px', flexWrap: 'wrap' }}>
-            <span style={{ ...btn('#475569', false), padding: '6px 12px', fontSize: '12px' }}>&larr; Back</span>
-            <span style={{ ...btn('#2563eb'), padding: '6px 12px', fontSize: '12px' }}>▶ Play</span>
-            <span style={{ ...btn('#475569'), padding: '6px 12px', fontSize: '12px' }}>Next &rarr;</span>
+            <span style={{ ...btn('#475569', step > 0), padding: '6px 12px', fontSize: '12px' }}>&larr; Back</span>
+            <span style={{ ...btn('#2563eb'), padding: '6px 12px', fontSize: '12px' }}>{atEnd ? '↻ Replay' : '▶ Play'}</span>
+            <span style={{ ...btn('#475569', !atEnd), padding: '6px 12px', fontSize: '12px' }}>Next &rarr;</span>
             <span style={{ ...btn('#dc2626'), padding: '6px 12px', fontSize: '12px' }}>Reset</span>
             <span data-pin="speed" style={{ ...select, padding: '4px 8px', fontSize: '12px', marginLeft: '6px' }}>Normal ▾</span>
             <span style={{ fontSize: '12px', color: '#64748b', marginLeft: '6px' }}>Step {step + 1} / {scenes.length}</span>
@@ -78,7 +79,8 @@ export default function ProofPlayerMockup({ proofKey = 'angleSum', step = 0 }) {
           <div style={{ padding: '8px 12px', borderBottom: '1px solid #e5e7eb', background: '#f1f5f9' }}>
             <span style={{ fontSize: '14px', fontWeight: 600, color: BLUE }}>Step explanations</span>
           </div>
-          <div style={{ padding: '6px' }}>
+          {/* Same height as the canvas column; like the live log, scrolled to the latest step. */}
+          <div style={{ padding: '6px', height: '318px', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: shown.length > 2 ? 'flex-end' : 'flex-start' }}>
             {shown.map((s, idx) => {
               const isCurrent = idx === step;
               return (

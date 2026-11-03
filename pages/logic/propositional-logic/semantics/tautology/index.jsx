@@ -14,6 +14,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
 
 
 
@@ -662,6 +664,11 @@ Calling $P \\to (P \\land Q)$ a tautology after the rows $P = T$, $Q = T$ and $P
                 parentHref={sectionsContent.notation.parentHref}
                 parentLabel={sectionsContent.notation.parentLabel}
                 theme={'navy'}
+              />,
+              <NotationCheatSheet
+                key={'notation-sheet'}
+                sheet={logicNotationSheet}
+                current={'/logic/propositional-logic/semantics/tautology'}
               />,
             ]
           },

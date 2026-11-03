@@ -15,6 +15,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -422,6 +423,26 @@ const keyWords = [
 
 
 // formulas-optimized: v1 | 2026-06-09 | 15 callouts (obj1, obj2, obj3, obj5, obj6)
+// Concept introduction (section 1, "Inverse Trigonometric Functions —
+// Arcsine and Arccosine") — template A, definition last. Running instance:
+// the slope of arcsin at x = 0, 0.6, 0.8 and 0.99, read through sin y = x.
+// Old obj1 text is kept in sectionsContent.obj1, unused; its six passages,
+// two formula boxes and link, pitfall, the arcsin demo frame and its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciArcTable = ciTableOpen(['x', 'y = arcsin x', 'cos y = √(1 − x²)', 'slope 1 ÷ cos y']) +
+  ciRow(['0', '0', '1', '1']) +
+  ciRow(['0.6', '0.6435', '0.8', '1.25'], { shade: true }) +
+  ciRow(['0.8', '0.9273', '0.6', 'about 1.67']) +
+  ciRow(['0.99', '1.4293', 'about 0.141', 'about 7.09'], { shade: true, last: true, color: '#2563EB', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/derivatives/special ────────────────────────────────────────
 
@@ -913,6 +934,10 @@ const schemas = {
     ],
     notes: [{ x: 1.15, y: 0.6, text: 'both pieces: value 1, slope 2 at x = 1', pos: 'e', color: 'r' }, { x: -0.95, y: 2.0, text: 'x² (x ≤ 1)', pos: 'e', color: 'f' }],
     caption: 'Same value and same slope at the boundary: f′(1) = 2 exists' };
+  const conceptIntroFigures = {
+    arcTable: ciArcTable,
+  };
+
   const demoUnits = {
     arcsin: demoUnitFrame({
       svg: renderFunctionPlotV4(fpArcsin),
@@ -977,6 +1002,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Special Derivatives: Inverse Trig & Hyperbolic | Learn Math Class",
       description: "Derivatives of inverse trigonometric, hyperbolic, inverse hyperbolic, and piecewise functions. Complete formulas with derivations for arcsin, arctan, sinh, cosh, and more.",
@@ -997,10 +1023,83 @@ export default function PageTemplate({specialDerivativesOutline,
   obj8Table,
   faqQuestions,
   schemas,
-  demoUnits
+  demoUnits,
+  conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `arcsin x has no formula in powers or roots. How can its slope be found?`,
+        content: [
+          `Use what is known about sine: $y = \\arcsin x$ means $\\sin y = x$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Read through sin y = x, the slope of arcsin is 1 ÷ cos y, and it grows without bound as x approaches 1.`,
+        content: [
+          ciTable('arcTable'),
+          `Near $x = 1$ the graph of $\\arcsin$ turns vertical.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Differentiating sin y = x implicitly gives the slope without a formula for y.`,
+        content: [
+          `To derive the arcsine formula: let $y = \\arcsin x$, so $\\sin y = x$ with $y \\in [-\\pi/2, \\pi/2]$. Differentiating implicitly: $\\cos y \\cdot \\frac{dy}{dx} = 1$. Since $y$ lies in the first or fourth quadrant, $\\cos y \\geq 0$, so $\\cos y = \\sqrt{1 - \\sin^2 y} = \\sqrt{1 - x^2}$. Solving gives $\\frac{dy}{dx} = \\frac{1}{\\sqrt{1 - x^2}}$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **derivative of arcsine** is $\\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1 - x^2}}$ for $|x| < 1$; arccosine has the same derivative with the opposite sign.`,
+        formula: [
+          `The derivatives of $\\arcsin x$ and $\\arccos x$ are:`,
+          `@academic[formula_callout:Derivative of Arcsine
+$$\\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1 - x^2}}$$
+/calculus/formulas#derivative_of_arcsine]@`,
+          `@academic[formula_callout:Derivative of Arccosine
+$$\\frac{d}{dx}[\\arccos x] = -\\frac{1}{\\sqrt{1 - x^2}}$$
+/calculus/formulas#derivative_of_arccosine]@`,
+          `@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@`,
+        ],
+        footer: `So at $x = 0.6$ the slope of $\\arcsin$ is $\\frac{1}{0.8} = 1.25$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The two formulas differ only in sign, because arcsin x + arccos x is constant.`,
+        content: [
+          `The two derivatives differ only by sign. This follows from the identity $\\arcsin x + \\arccos x = \\frac{\\pi}{2}$: differentiating both sides gives $(\\arcsin x)' + (\\arccos x)' = 0$.`,
+          `The domain restriction $|x| < 1$ reflects the range of $\\sin y$ on $[-\\pi/2, \\pi/2]$. At $x = \\pm 1$, the denominator vanishes—the graph of $\\arcsin x$ has vertical tangents at its endpoints.`,
+          <div key={'unit-arcsin'} dangerouslySetInnerHTML={{ __html: demoUnits.arcsin }} />,
+          `arccos x has the same picture turned over: its derivative is the negative of this one.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `With an inner expression, the chain rule adds a factor.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Forgetting the chain rule
+Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leaves out the derivative of the inner $2x$. The chain rule gives $\\frac{d}{dx}[\\arcsin(2x)] = \\frac{2}{\\sqrt{1 - 4x^2}}$.
+[Read more](!#pitfalls)]@`,
+          `The formulas are stated for the bare variable $x$, but in practice the argument of $\\arcsin$ or $\\arccos$ is often an expression such as $2x$, $x^2$ or $e^x$. The formula is then evaluated at that inner expression, and the [chain rule](!/calculus/derivatives/rules#7) links the result to the rate at which the inner expression changes. The same holds for every formula on this page.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers arctangent, arccotangent, arcsecant and arccosecant, the patterns among these derivatives, hyperbolic and inverse hyperbolic functions, piecewise functions, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1008,9 +1107,7 @@ export default function PageTemplate({specialDerivativesOutline,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-arcsin'} dangerouslySetInnerHTML={{ __html: demoUnits.arcsin }} />,
-          `arccos x has the same picture turned over: its derivative is the negative of this one.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

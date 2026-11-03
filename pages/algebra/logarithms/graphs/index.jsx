@@ -14,6 +14,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -254,7 +256,7 @@ $(1/a, -1)$: Since $\\log_a(1/a) = \\log_a(a^{-1}) = -1$. For $y = \\log_2(x)$, 
 
 @academic[pitfall,aside:true,width:35%:Copying the exponential's key points
 Plotting $(0, 1)$ and $(1, 2)$ for $y = \\log_2(x)$ takes the points of $y = 2^x$, and $\\log_2(0)$ is not even defined. The logarithm swaps the coordinates: $(1, 0)$, $(2, 1)$ and $(0.5, -1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-copying-the-exponential-s-key-points)]@
 
 When sketching, plot these points first. The curve passes through all three, approaching the vertical asymptote as $x \\to 0^+$.`,
     before: ``,
@@ -271,7 +273,7 @@ For $0 < a < 1$: the function decreases. The graph of $y = \\log_{1/2}(x)$ is th
 
 @academic[pitfall,aside:true,width:35%:Expecting a larger base to climb faster
 Carrying over from exponentials that a larger base rises faster puts $\\log_{10}(x)$ above $\\log_2(x)$ for $x > 1$. But $\\log_2(8) = 3$ while $\\log_{10}(8) \\approx 0.903$: the larger base gives the flatter curve.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-expecting-a-larger-base-to-climb-faster)]@
 
 Comparing [common and natural](!/algebra/logarithms/common-natural) logarithms: $\\ln(x)$ rises faster than $\\log(x)$ because $e < 10$. The natural logarithm reaches output $1$ at $x = e \\approx 2.718$, while the common logarithm reaches $1$ at $x = 10$.
 
@@ -292,7 +294,7 @@ Example: $y = \\log_2(x - 3)$ has asymptote at $x = 3$, passes through $(4, 0)$ 
 
 @academic[pitfall,aside:true,width:35%:Keeping the old domain after a shift
 Keeping $x > 0$ for $y = \\log_2(x - 3)$ admits $x = 2$, where $\\log_2(-1)$ is undefined. The asymptote and the domain move with the graph: $x > 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-the-old-domain-after-a-shift)]@
 
 Example: $y = \\ln(x + 2)$ has asymptote at $x = -2$, passes through $(-1, 0)$ and $(e - 2, 1)$, and has domain $x > -2$.`,
     before: ``,
@@ -343,7 +345,7 @@ $y = \\log_a(-x)$: reflection across the $y$-axis. The domain changes from $x > 
 
 @academic[pitfall,aside:true,width:35%:Mixing up the two reflections
 Treating $\\log_2(-x)$ like $-\\log_2(x)$ draws the curve at $x > 0$ through $(2, -1)$, where $\\log_2(-2)$ is undefined. A minus inside flips across the $y$-axis: the curve lies at $x < 0$, through points like $(-4, 2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-mixing-up-the-two-reflections)]@
 
 Example: $y = -\\log_2(x)$ passes through $(1, 0)$, $(2, -1)$, and $(4, -2)$.
 
@@ -373,7 +375,7 @@ Equation: $y = \\log_2(x - 2)$.]@
 
 @academic[pitfall,aside:true,width:35%:Reversing the sign of h
 Writing the asymptote $x = 2$ as $y = \\log_a(x + 2)$ puts it at $x = -2$, and $(3, 0)$ then needs $\\log_a(5) = 0$, which no base gives. The argument is $x - h$: $y = \\log_2(x - 2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reversing-the-sign-of-h)]@
 
 In the example, the asymptote was read first and turned straight into the argument of the logarithm. Every later step built on that argument: the point $(3, 0)$ was checked against it, and the point $(4, 1)$ gave the base.
 
@@ -415,69 +417,9 @@ Graphing both functions on the same axes with the line $y = x$ demonstrates this
   },
   obj13: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for most wrong sketches and wrong equations of logarithmic graphs. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Copying the exponential's key points**
-
-When sketching $y = \\log_a(x)$, the familiar anchor points of $y = a^x$ are plotted instead of the logarithm's own.
-
-Wrong working: for $y = \\log_2(x)$, the points $(0, 1)$, $(1, 2)$ and $(-1, 0.5)$ are plotted, and the curve is drawn through them.
-
-Right working: the logarithm is the inverse of the exponential, so every point $(p, q)$ of $y = 2^x$ becomes $(q, p)$. The anchors are $(1, 0)$, $(2, 1)$ and $(0.5, -1)$.
-
-Why it happens: exponential graphs are usually learned first, and their anchors $(0, 1)$ and $(1, a)$ feel like the natural starting points for any curve with base $a$.
-
-How to check: substitute the $x$-coordinate. $\\log_2(0)$ is undefined, so $(0, 1)$ cannot lie on the curve, and $\\log_2(1) = 0$, not $2$, so neither can $(1, 2)$. For $(2, 1)$: $\\log_2(2) = 1$.
-
-**Expecting a larger base to climb faster**
-
-For exponentials, $10^x$ rises faster than $2^x$. Carried over to logarithms, this puts $\\log_{10}(x)$ above $\\log_2(x)$ for $x > 1$.
-
-Wrong working: since $10 > 2$, the curve $y = \\log_{10}(x)$ is drawn steeper, so $\\log_{10}(8)$ is expected to be more than $\\log_2(8) = 3$.
-
-Right working: $\\log_{10}(8) \\approx 0.903$, far below $3$. In general $\\log_{10}(x) = \\frac{\\log_2(x)}{\\log_2(10)} \\approx \\frac{\\log_2(x)}{3.322}$, so for $x > 1$ the base-$10$ curve is the flatter one.
-
-Why it happens: the logarithm is the inverse of the exponential, and inverting reverses the comparison. A larger base makes the exponential reach a given height sooner, so it makes the logarithm need a larger $x$ to reach the same height.
-
-How to check: use the anchor $(a, 1)$. $\\log_2(x)$ reaches height $1$ at $x = 2$, $\\log_{10}(x)$ only at $x = 10$; the curve that reaches $1$ first is the steeper one.
-
-**Keeping the old domain after a shift**
-
-The graph is shifted horizontally, but the domain $x > 0$ and the asymptote $x = 0$ are copied from $y = \\log_a(x)$.
-
-Wrong working: $y = \\log_2(x - 3)$ is given the domain $x > 0$ and the asymptote $x = 0$, so values like $x = 2$ are plotted.
-
-Right working: the argument must be positive, $x - 3 > 0$, so the domain is $x > 3$ and the asymptote is $x = 3$. At $x = 2$ the argument is $-1$, and $\\log_2(-1)$ is undefined.
-
-Why it happens: "$x > 0$" is remembered as a fact about logarithms, when the condition is really about the argument.
-
-How to check: set the argument equal to $0$ and solve. $x - 3 = 0$ gives $x = 3$, which is the asymptote. A value just to its right is defined: $x = 3.5$ gives $\\log_2(0.5) = -1$.
-
-**Mixing up the two reflections**
-
-The graphs of $y = -\\log_a(x)$ and $y = \\log_a(-x)$ are treated as the same curve.
-
-Wrong working: $y = \\log_2(-x)$ is drawn as the flip across the $x$-axis, through $(1, 0)$, $(2, -1)$ and $(4, -2)$, on the domain $x > 0$.
-
-Right working: the minus inside acts on the input. The argument $-x$ must be positive, so $x < 0$, and the curve passes through $(-1, 0)$, $(-2, 1)$ and $(-4, 2)$, the flip across the $y$-axis. The points $(2, -1)$ and $(4, -2)$ belong to $y = -\\log_2(x)$, where the minus outside acts on the heights.
-
-Why it happens: both formulas contain the same logarithm, the same $x$ and one minus sign. Only the position of the sign differs.
-
-How to check: substitute a point. In $y = \\log_2(-x)$, $x = 2$ gives $\\log_2(-2)$, which is undefined, so the curve cannot lie at $x = 2$. At $x = -4$ it gives $\\log_2(4) = 2$.
-
-**Reversing the sign of h**
-
-An asymptote at $x = h$ is turned into the argument $x + h$ instead of $x - h$. The same slip, in the other direction, shifts the graph of $y = \\log_a(x - 3)$ to the left.
-
-Wrong working: the graph with asymptote $x = 2$ through $(3, 0)$ and $(4, 1)$ is written as $y = \\log_a(x + 2)$. The point $(3, 0)$ then needs $\\log_a(5) = 0$, which no base satisfies, since $a^0 = 1$.
-
-Right working: the argument is $x - 2$. The point $(3, 0)$ gives $\\log_a(1) = 0$, true for every base, and $(4, 1)$ gives $\\log_a(2) = 1$, so $a = 2$ and $y = \\log_2(x - 2)$.
-
-Why it happens: a minus sign usually suggests moving left or down. Inside the argument, the graph moves to where the argument becomes $0$, and $x - 2 = 0$ at $x = 2$, to the right.
-
-How to check: set the argument equal to $0$. For $x + 2$ that gives $x = -2$, which is not where the graph's asymptote is; for $x - 2$ it gives $x = 2$, which is.`,
+    content: `Five mistakes account for most wrong sketches and wrong equations of logarithmic graphs. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Four of the five slips come back to the argument of the logarithm, the expression inside the brackets. It must be positive, which fixes the domain, and it is $0$ exactly on the vertical asymptote. Setting the argument to $1$ and to the base $a$ gives the points where the logarithm equals $0$ and $1$, which is enough to place the curve. The fifth slip, about the base, is settled by the same anchor point: the larger the base, the further right the curve reaches height $1$.`,
     link: '',
   },
 };
@@ -729,8 +671,46 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj13 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'copying-the-exponential-s-key-points', name: `Copying the exponential's key points`, errorAt: 0,
+        what: `When sketching $y = \\log_a(x)$, the familiar anchor points of $y = a^x$ are plotted instead of the logarithm's own.`,
+        wrong: [`For $y = \\log_2(x)$, the points $(0, 1)$, $(1, 2)$ and $(-1, 0.5)$ are plotted, and the curve is drawn through them.`],
+        right: [`The logarithm is the inverse of the exponential, so every point $(p, q)$ of $y = 2^x$ becomes $(q, p)$. The anchors are $(1, 0)$, $(2, 1)$ and $(0.5, -1)$.`],
+        why: `Exponential graphs are usually learned first, and their anchors $(0, 1)$ and $(1, a)$ feel like the natural starting points for any curve with base $a$.`,
+        check: `Substitute the $x$-coordinate. $\\log_2(0)$ is undefined, so $(0, 1)$ cannot lie on the curve, and $\\log_2(1) = 0$, not $2$, so neither can $(1, 2)$. For $(2, 1)$: $\\log_2(2) = 1$.` },
+      { id: 'expecting-a-larger-base-to-climb-faster', name: `Expecting a larger base to climb faster`, errorAt: 0,
+        what: `For exponentials, $10^x$ rises faster than $2^x$. Carried over to logarithms, this puts $\\log_{10}(x)$ above $\\log_2(x)$ for $x > 1$.`,
+        wrong: [`Since $10 > 2$, the curve $y = \\log_{10}(x)$ is drawn steeper, so $\\log_{10}(8)$ is expected to be more than $\\log_2(8) = 3$.`],
+        right: [`$\\log_{10}(8) \\approx 0.903$, far below $3$. In general $\\log_{10}(x) = \\frac{\\log_2(x)}{\\log_2(10)} \\approx \\frac{\\log_2(x)}{3.322}$, so for $x > 1$ the base-$10$ curve is the flatter one.`],
+        why: `The logarithm is the inverse of the exponential, and inverting reverses the comparison. A larger base makes the exponential reach a given height sooner, so it makes the logarithm need a larger $x$ to reach the same height.`,
+        check: `Use the anchor $(a, 1)$. $\\log_2(x)$ reaches height $1$ at $x = 2$, $\\log_{10}(x)$ only at $x = 10$; the curve that reaches $1$ first is the steeper one.` },
+      { id: 'keeping-the-old-domain-after-a-shift', name: `Keeping the old domain after a shift`, errorAt: 0,
+        what: `The graph is shifted horizontally, but the domain $x > 0$ and the asymptote $x = 0$ are copied from $y = \\log_a(x)$.`,
+        wrong: [`$y = \\log_2(x - 3)$ is given the domain $x > 0$ and the asymptote $x = 0$, so values like $x = 2$ are plotted.`],
+        right: [`The argument must be positive, $x - 3 > 0$, so the domain is $x > 3$ and the asymptote is $x = 3$. At $x = 2$ the argument is $-1$, and $\\log_2(-1)$ is undefined.`],
+        why: `"$x > 0$" is remembered as a fact about logarithms, when the condition is really about the argument.`,
+        check: `Set the argument equal to $0$ and solve. $x - 3 = 0$ gives $x = 3$, which is the asymptote. A value just to its right is defined: $x = 3.5$ gives $\\log_2(0.5) = -1$.` },
+      { id: 'mixing-up-the-two-reflections', name: `Mixing up the two reflections`, errorAt: 0,
+        what: `The graphs of $y = -\\log_a(x)$ and $y = \\log_a(-x)$ are treated as the same curve.`,
+        wrong: [`$y = \\log_2(-x)$ is drawn as the flip across the $x$-axis, through $(1, 0)$, $(2, -1)$ and $(4, -2)$, on the domain $x > 0$.`],
+        right: [`The minus inside acts on the input. The argument $-x$ must be positive, so $x < 0$, and the curve passes through $(-1, 0)$, $(-2, 1)$ and $(-4, 2)$, the flip across the $y$-axis. The points $(2, -1)$ and $(4, -2)$ belong to $y = -\\log_2(x)$, where the minus outside acts on the heights.`],
+        why: `Both formulas contain the same logarithm, the same $x$ and one minus sign. Only the position of the sign differs.`,
+        check: `Substitute a point. In $y = \\log_2(-x)$, $x = 2$ gives $\\log_2(-2)$, which is undefined, so the curve cannot lie at $x = 2$. At $x = -4$ it gives $\\log_2(4) = 2$.` },
+      { id: 'reversing-the-sign-of-h', name: `Reversing the sign of h`, errorAt: 0,
+        what: `An asymptote at $x = h$ is turned into the argument $x + h$ instead of $x - h$. The same slip, in the other direction, shifts the graph of $y = \\log_a(x - 3)$ to the left.`,
+        wrong: [`The graph with asymptote $x = 2$ through $(3, 0)$ and $(4, 1)$ is written as $y = \\log_a(x + 2)$. The point $(3, 0)$ then needs $\\log_a(5) = 0$, which no base satisfies, since $a^0 = 1$.`],
+        right: [`The argument is $x - 2$. The point $(3, 0)$ gives $\\log_a(1) = 0$, true for every base, and $(4, 1)$ gives $\\log_a(2) = 1$, so $a = 2$ and $y = \\log_2(x - 2)$.`],
+        why: `A minus sign usually suggests moving left or down. Inside the argument, the graph moves to where the argument becomes $0$, and $x - 2 = 0$ at $x = 2$, to the right.`,
+        check: `Set the argument equal to $0$. For $x + 2$ that gives $x = -2$, which is not where the graph's asymptote is; for $x - 2$ it gives $x = 2$, which is.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     shiftedLogProfile,
     sectionsContent,
     introContent,
@@ -755,7 +735,7 @@ return {
 // export default function GraphsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function GraphsPage({shiftedLogProfile, 
+export default function GraphsPage({ pitfallData,shiftedLogProfile, 
   seoData,
   sectionsContent,
   introContent,
@@ -988,6 +968,15 @@ Height $100$ on $y = \\log_{10}(x)$ is reached only at $x = 10^{100}$, a googol,
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'obj13-mistakes'}
+            id="logarithmic-graph-pitfalls"
+            title="Common pitfalls with logarithmic graphs"
+            source="/algebra/logarithms/graphs"
+            after={sectionsContent.obj13.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

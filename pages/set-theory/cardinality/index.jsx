@@ -2578,6 +2578,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2750,7 +2752,7 @@ $$|\\emptyset| = 0$$]@
 
 @academic[pitfall,aside:true,width:35%:Counting the elements inside an element
 Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts what is inside the inner braces. Each inner set is one element: $|\\{\\emptyset\\}| = 1$ and $|\\{\\{1, 2\\}, 3\\}| = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-the-elements-inside-an-element)]@
 
 The elements being counted can be of any kind: numbers, letters, words, or other sets. A set whose elements are themselves sets is written with braces inside braces, as in $\\{\\{1, 2\\}, 3\\}$ or $\\{\\emptyset\\}$. Such sets are counted by the same rule as every other set, and they come up throughout this page once power sets appear, since every element of a power set is itself a set.
 
@@ -2798,7 +2800,7 @@ $$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C
 
 @academic[pitfall,aside:true,width:35%:Forgetting the triple intersection
 Stopping after the pairs gives $4 + 3 + 3 - 2 - 1 - 2 = 5$: the element 4 is added three times and subtracted three times, so it is not counted. Adding $|A \\cap B \\cap C| = 1$ back gives $6$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-triple-intersection)]@
 
 @academic[example:Example
 For a concrete case, take $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$. The singles are $4$, $3$ and $3$, and the pairwise intersections $\\{2, 4\\}$, $\\{4\\}$ and $\\{4, 5\\}$ have sizes $2$, $1$ and $2$. The element $4$ is the only one that lies in all three sets. The union is $\\{1, 2, 3, 4, 5, 6\\}$, with six elements, and each of the seven terms of the formula uses one of these counts.]@
@@ -2835,7 +2837,7 @@ A defining property of infinite sets: an infinite set can be put into one-to-one
 
 @academic[pitfall,aside:true,width:35%:Treating a proper subset as smaller
 Concluding that the even numbers are fewer than $\\mathbb{N}$, because the odd numbers are missing from them, applies a rule that holds only for finite sets. The pairing $n \\mapsto 2n$ is a bijection, so $|\\{0, 2, 4, \\ldots\\}| = |\\mathbb{N}|$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-a-proper-subset-as-smaller)]@
 
 In the example, every natural number $n$ has exactly one partner $2n$, and every even number $m$ comes from exactly one natural number, $m/2$. The pairing therefore uses up both sets completely, with no element left over on either side. For a finite set, removing even a single element always leaves fewer elements than before, so no such pairing between the set and a part of it is possible.
 
@@ -2864,7 +2866,7 @@ establishes a bijection with $\\mathbb{N}$.
 
 @academic[pitfall,aside:true,width:35%:Listing the positive integers first
 Writing $0, 1, 2, 3, \\ldots$ and planning the negatives after them never reaches $-1$: no finite position is left for it. The alternating list puts $-1$ at position $3$ and $-3$ at position $7$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-listing-the-positive-integers-first)]@
 
 In this listing, positive and negative integers take turns, with $0$ at the start. Each integer has a definite place: counting positions from $1$, the positive integer $n$ is entry number $2n$ and the negative integer $-n$ is entry number $2n + 1$. Reading the list in order, every integer is reached after finitely many steps, and no integer appears twice.
 
@@ -2954,7 +2956,7 @@ Cardinalities are compared using functions between sets:
 
 @academic[pitfall,aside:true,width:35%:Concluding smaller size from one injection
 Taking the injection $n \\mapsto n$ from $\\mathbb{N}$ into $\\mathbb{Q}$, which misses $\\tfrac{1}{2}$ and infinitely many other rationals, as proof that $|\\mathbb{N}| < |\\mathbb{Q}|$ overlooks the listing of the rationals. That listing is a bijection, so $|\\mathbb{N}| = |\\mathbb{Q}|$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-concluding-smaller-size-from-one-injection)]@
 
 Sending each natural number to itself is an injection from $\\mathbb{N}$ into $\\mathbb{Z}$, so $|\\mathbb{N}| \\leq |\\mathbb{Z}|$. In the opposite direction, giving each integer its position in the listing $0, 1, -1, 2, -2, \\ldots$ from the section on countable sets is an injection from $\\mathbb{Z}$ into $\\mathbb{N}$, so $|\\mathbb{Z}| \\leq |\\mathbb{N}|$ as well. Two sets with injections running both ways are exactly the situation of the theorem below.
 
@@ -2980,71 +2982,9 @@ This theorem implies there is no largest cardinality — given any set, its powe
   },
   obj8: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes come up again and again when sets are measured and compared. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Counting the elements inside an element**
-
-When the elements of a set are themselves sets, the members of those inner sets are counted as well, or an inner empty set is read as "nothing". Cardinality counts only the items listed at the outer level of braces.
-
-Wrong working: $|\\{\\{1, 2\\}, 3\\}| = 3$, counting 1, 2 and 3; and $|\\{\\emptyset\\}| = 0$, because the empty set has no elements.
-
-Right working: the outer braces of $\\{\\{1, 2\\}, 3\\}$ hold two items, the set $\\{1, 2\\}$ and the number $3$, so its cardinality is $2$. The outer braces of $\\{\\emptyset\\}$ hold one item, the empty set, so $|\\{\\emptyset\\}| = 1$, while $|\\emptyset| = 0$.
-
-Why it happens: inner braces look like grouping marks, and the numbers inside them catch the eye more than the braces do.
-
-How to check: split the listing only at the commas of the outer level and count the pieces. For a power set this gives the expected $2^n$: $\\mathcal{P}(\\{1\\}) = \\{\\emptyset, \\{1\\}\\}$ has $2^1 = 2$ elements.
-
-**Forgetting the triple intersection**
-
-For three sets, the singles are added, the pairwise intersections are subtracted, and the count stops there. The elements in all three sets are then added three times and subtracted three times, so they are not counted at all.
-
-Wrong working: for $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$, the size of the union is given as $4 + 3 + 3 - 2 - 1 - 2 = 5$.
-
-Right working: add back $|A \\cap B \\cap C| = 1$, the size of $\\{4\\}$: $4 + 3 + 3 - 2 - 1 - 2 + 1 = 6$. This matches the union $\\{1, 2, 3, 4, 5, 6\\}$.
-
-Why it happens: the two-set formula ends with a subtraction, and subtracting the overlaps feels like the complete correction. The over-correction at the centre stays hidden until one element is traced through every term.
-
-How to check: trace an element that is in all three sets, here $4$. It is counted by $|A|$, $|B|$ and $|C|$ and removed by all three pairwise terms, so without the triple term it is counted $3 - 3 = 0$ times. For small sets, writing the union out and counting it settles the answer.
-
-**Treating a proper subset as smaller**
-
-A proper subset of an infinite set is assumed to have a smaller cardinality, because some elements were removed to form it. This holds for finite sets but fails for infinite ones, where sizes are compared by bijections, not by containment.
-
-Wrong working: the even numbers $\\{0, 2, 4, \\ldots\\}$ leave out every odd number, so $|\\{0, 2, 4, \\ldots\\}| < |\\mathbb{N}|$.
-
-Right working: $f(n) = 2n$ pairs each $n \\in \\mathbb{N}$ with exactly one even number and reaches every even number $m$ from $n = m/2$. It is a bijection, so $|\\{0, 2, 4, \\ldots\\}| = |\\mathbb{N}|$.
-
-Why it happens: for finite sets, "part" and "smaller" always go together, and everyday counting is finite.
-
-How to check: before comparing sizes, look for a bijection. If a simple rule such as $n \\mapsto 2n$ or $n \\mapsto n + 1$ pairs the two sets completely, the sizes are equal, however the sets sit inside each other.
-
-**Listing the positive integers first**
-
-To list $\\mathbb{Z}$, the non-negative integers are written first and the negative integers are meant to follow. The first part never ends, so no negative integer ever gets a position.
-
-Wrong working: $0, 1, 2, 3, \\ldots, -1, -2, -3, \\ldots$ is offered as a listing of $\\mathbb{Z}$. There is no natural number $n$ for which $-1$ is the $n$-th entry.
-
-Right working: alternate the signs, $0, 1, -1, 2, -2, 3, -3, \\ldots$. Counting from $1$, the positive integer $n$ is entry $2n$ and $-n$ is entry $2n + 1$, so $-1$ is entry $3$ and $-3$ is entry $7$.
-
-Why it happens: putting like with like is the natural way to arrange a list, and for finite lists it works.
-
-How to check: pick any element, for example $-1$, and name its position as a definite number. If the only answer is "after all the positive integers", the list is not a listing in the sense of the section on countable sets. The same reason explains why the rationals are listed diagonally rather than row by row: a first row that never ends would never let the second row begin.
-
-**Concluding smaller size from one injection**
-
-An injection from $A$ into $B$ that misses some elements of $B$ is taken as proof that $|A| < |B|$. A single injection only shows $|A| \\leq |B|$; the strict inequality needs that no bijection between $A$ and $B$ exists at all.
-
-Wrong working: $n \\mapsto n$ is an injection from $\\mathbb{N}$ into $\\mathbb{Q}$, and it misses $\\tfrac{1}{2}$, so $|\\mathbb{N}| < |\\mathbb{Q}|$.
-
-Right working: the injection gives only $|\\mathbb{N}| \\leq |\\mathbb{Q}|$. The section on countable sets lists the rationals as a sequence, and that listing is a bijection with $\\mathbb{N}$, so $|\\mathbb{N}| = |\\mathbb{Q}|$.
-
-Why it happens: for finite sets, an injection that misses elements does prove strictness, because an injection between two sets of the same finite size always hits every element. Infinite sets do not behave this way.
-
-How to check: try to find a different function that is a bijection, or recall a known one. Even $\\mathbb{N}$ has the injection $n \\mapsto n + 1$ into itself, which misses $0$, and nobody concludes $|\\mathbb{N}| < |\\mathbb{N}|$.
-    `,
+    content: `Five mistakes come up again and again when sets are measured and compared. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `The first two slips miscount a finite set: cardinality counts only the items between the outer braces, and inclusion–exclusion for three sets needs the triple intersection back. The other three compare infinite sets by the wrong test. Size is settled by a bijection, not by containment, not by one injection that misses elements, and not by a listing that never reaches part of the set. Counting the outer pieces, tracing one element, or looking for a bijection catches each slip.`,
     link: '',
   },
   obj7: {
@@ -3281,9 +3221,61 @@ const schemas = {
       { id: 'empty', name: 'Empty', sub: '$0$: $\\varnothing$' },
     ],
   };
+  // TheoremCard data (cantor-schroder-bernstein-card); every fact is from the section text
+  const csbCard = {
+    header: { kicker: 'Cardinality', title: 'The Cantor–Schröder–Bernstein Theorem', lede: 'Click a hypothesis to see what it supplies.' },
+    theorem: {
+      hypotheses: [
+        { text: '$|A| \\leq |B|$: an injection from $A$ to $B$', job: 'Shows $A$ is no larger than $B$. On its own it does not show $|A| < |B|$.' },
+        { text: '$|B| \\leq |A|$: an injection from $B$ to $A$', job: 'Shows $B$ is no larger than $A$.' },
+      ],
+      conclusion: '$|A| = |B|$: a bijection between $A$ and $B$ exists',
+      meaning: 'Sending $n$ to itself injects $\\mathbb{N}$ into $\\mathbb{Z}$; the listing $0, 1, -1, 2, -2, \\ldots$ injects $\\mathbb{Z}$ into $\\mathbb{N}$. So $|\\mathbb{N}| = |\\mathbb{Z}|$.',
+    },
+  };
+
+
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj8 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'counting-the-elements-inside-an-element', name: `Counting the elements inside an element`, errorAt: 0,
+        what: `When the elements of a set are themselves sets, the members of those inner sets are counted as well, or an inner empty set is read as "nothing". Cardinality counts only the items listed at the outer level of braces.`,
+        wrong: [`$|\\{\\{1, 2\\}, 3\\}| = 3$, counting 1, 2 and 3; and $|\\{\\emptyset\\}| = 0$, because the empty set has no elements.`],
+        right: [`The outer braces of $\\{\\{1, 2\\}, 3\\}$ hold two items, the set $\\{1, 2\\}$ and the number $3$, so its cardinality is $2$. The outer braces of $\\{\\emptyset\\}$ hold one item, the empty set, so $|\\{\\emptyset\\}| = 1$, while $|\\emptyset| = 0$.`],
+        why: `Inner braces look like grouping marks, and the numbers inside them catch the eye more than the braces do.`,
+        check: `Split the listing only at the commas of the outer level and count the pieces. For a power set this gives the expected $2^n$: $\\mathcal{P}(\\{1\\}) = \\{\\emptyset, \\{1\\}\\}$ has $2^1 = 2$ elements.` },
+      { id: 'forgetting-the-triple-intersection', name: `Forgetting the triple intersection`, errorAt: 1,
+        what: `For three sets, the singles are added, the pairwise intersections are subtracted, and the count stops there. The elements in all three sets are then added three times and subtracted three times, so they are not counted at all.`,
+        wrong: [`For $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$,`, `The size of the union is given as $4 + 3 + 3 - 2 - 1 - 2 = 5$.`],
+        right: [`For $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$,`, `Add back $|A \\cap B \\cap C| = 1$, the size of $\\{4\\}$: $4 + 3 + 3 - 2 - 1 - 2 + 1 = 6$. This matches the union $\\{1, 2, 3, 4, 5, 6\\}$.`],
+        why: `The two-set formula ends with a subtraction, and subtracting the overlaps feels like the complete correction. The over-correction at the centre stays hidden until one element is traced through every term.`,
+        check: `Trace an element that is in all three sets, here $4$. It is counted by $|A|$, $|B|$ and $|C|$ and removed by all three pairwise terms, so without the triple term it is counted $3 - 3 = 0$ times. For small sets, writing the union out and counting it settles the answer.` },
+      { id: 'treating-a-proper-subset-as-smaller', name: `Treating a proper subset as smaller`, errorAt: 0,
+        what: `A proper subset of an infinite set is assumed to have a smaller cardinality, because some elements were removed to form it. This holds for finite sets but fails for infinite ones, where sizes are compared by bijections, not by containment.`,
+        wrong: [`The even numbers $\\{0, 2, 4, \\ldots\\}$ leave out every odd number, so $|\\{0, 2, 4, \\ldots\\}| < |\\mathbb{N}|$.`],
+        right: [`$f(n) = 2n$ pairs each $n \\in \\mathbb{N}$ with exactly one even number and reaches every even number $m$ from $n = m/2$. It is a bijection, so $|\\{0, 2, 4, \\ldots\\}| = |\\mathbb{N}|$.`],
+        why: `For finite sets, "part" and "smaller" always go together, and everyday counting is finite.`,
+        check: `Before comparing sizes, look for a bijection. If a simple rule such as $n \\mapsto 2n$ or $n \\mapsto n + 1$ pairs the two sets completely, the sizes are equal, however the sets sit inside each other.` },
+      { id: 'listing-the-positive-integers-first', name: `Listing the positive integers first`, errorAt: 0,
+        what: `To list $\\mathbb{Z}$, the non-negative integers are written first and the negative integers are meant to follow. The first part never ends, so no negative integer ever gets a position.`,
+        wrong: [`$0, 1, 2, 3, \\ldots, -1, -2, -3, \\ldots$ is offered as a listing of $\\mathbb{Z}$. There is no natural number $n$ for which $-1$ is the $n$-th entry.`],
+        right: [`Alternate the signs, $0, 1, -1, 2, -2, 3, -3, \\ldots$. Counting from $1$, the positive integer $n$ is entry $2n$ and $-n$ is entry $2n + 1$, so $-1$ is entry $3$ and $-3$ is entry $7$.`],
+        why: `Putting like with like is the natural way to arrange a list, and for finite lists it works.`,
+        check: `Pick any element, for example $-1$, and name its position as a definite number. If the only answer is "after all the positive integers", the list is not a listing in the sense of the section on countable sets. The same reason explains why the rationals are listed diagonally rather than row by row: a first row that never ends would never let the second row begin.` },
+      { id: 'concluding-smaller-size-from-one-injection', name: `Concluding smaller size from one injection`, errorAt: 0,
+        what: `An injection from $A$ into $B$ that misses some elements of $B$ is taken as proof that $|A| < |B|$. A single injection only shows $|A| \\leq |B|$; the strict inequality needs that no bijection between $A$ and $B$ exists at all.`,
+        wrong: [`$n \\mapsto n$ is an injection from $\\mathbb{N}$ into $\\mathbb{Q}$, and it misses $\\tfrac{1}{2}$, so $|\\mathbb{N}| < |\\mathbb{Q}|$.`],
+        right: [`The injection gives only $|\\mathbb{N}| \\leq |\\mathbb{Q}|$. The section on countable sets lists the rationals as a sequence, and that listing is a bijection with $\\mathbb{N}$, so $|\\mathbb{N}| = |\\mathbb{Q}|$.`],
+        why: `For finite sets, an injection that misses elements does prove strictness, because an injection between two sets of the same finite size always hits every element. Infinite sets do not behave this way.`,
+        check: `Try to find a different function that is a bijection, or recall a known one. Even $\\mathbb{N}$ has the injection $n \\mapsto n + 1$ into itself, which misses $0$, and nobody concludes $|\\mathbb{N}| < |\\mathbb{N}|$.` },
+    ],
+  };
 
   return {
   props: {
+    pitfallData,
+      csbCard,
     cardinalityLevels,
     sectionsContent,
     introContent,
@@ -3308,7 +3300,9 @@ const schemas = {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function CardinalityPage({cardinalityLevels, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function CardinalityPage({ pitfallData,csbCard, cardinalityLevels, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3368,7 +3362,7 @@ $$|\\emptyset| = 0$$]@`,
           `The elements being counted can be of any kind: numbers, letters, words, or other sets. A set whose elements are themselves sets is written with braces inside braces, as in $\\{\\{1, 2\\}, 3\\}$ or $\\{\\emptyset\\}$. Such sets are counted by the same rule as every other set, and they come up throughout this page once power sets appear, since every element of a power set is itself a set.`,
           `@academic[pitfall,aside:true,width:35%:Counting the elements inside an element
 Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts what is inside the inner braces. Each inner set is one element: $|\\{\\emptyset\\}| = 1$ and $|\\{\\{1, 2\\}, 3\\}| = 2$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-counting-the-elements-inside-an-element)]@`,
         ],
       },
       {
@@ -3487,6 +3481,16 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
           `@academic[punchline:Infinite sizes are settled by pairings, not by appearances, and there is always a bigger one.]@`,
+          <DiagramFrame
+            key={'obj6-theorem'}
+            id="cantor-schroder-bernstein-card"
+            title="The Cantor–Schröder–Bernstein Theorem"
+            source="/set-theory/cardinality"
+            before={`Two injections running in opposite directions are enough. The card states the theorem hypothesis by hypothesis.`}
+            after={`This is how $|\\mathbb{N}| = |\\mathbb{Z}|$ follows from the two injections above without building the bijection by hand.`}
+          >
+            <TheoremCard data={csbCard} variant="card" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3495,6 +3499,15 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-mistakes'}
+            id="cardinality-pitfalls"
+            title="Common pitfalls with cardinality"
+            source="/set-theory/cardinality"
+            after={sectionsContent.obj8.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 

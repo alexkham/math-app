@@ -75,6 +75,18 @@
     ]
   },
   {
+    "id": "arithmetic-notation-cheat-sheet",
+    "title": null,
+    "source": "/arithmetic/fractions",
+    "section": "arithmetic",
+    "width": 933,
+    "height": 1671,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "arithmetic-properties-outline",
     "title": null,
     "source": "/arithmetic/properties",
@@ -93,6 +105,30 @@
     "section": "algebra",
     "width": 933,
     "height": 730,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "arithmetic-vs-composition",
+    "title": null,
+    "source": "/functions/arithmetic",
+    "section": "functions",
+    "width": 933,
+    "height": 591,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "basis-size-chain",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces/dimension",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 420,
     "formats": [
       "png",
       "pdf"
@@ -123,6 +159,18 @@
     ]
   },
   {
+    "id": "binomial-theorem-apply",
+    "title": null,
+    "source": "/combinatorics/binomial-theorem",
+    "section": "combinatorics",
+    "width": 933,
+    "height": 492,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "borrowing-before-after",
     "title": null,
     "source": "/arithmetic/fractions/mixed-numbers",
@@ -147,12 +195,36 @@
     ]
   },
   {
+    "id": "cantor-schroder-bernstein-card",
+    "title": null,
+    "source": "/set-theory/cardinality",
+    "section": "set-theory",
+    "width": 933,
+    "height": 356,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "cardinality-hierarchy-pyramid",
     "title": null,
     "source": "/set-theory/cardinality",
     "section": "set-theory",
     "width": 933,
     "height": 833,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "cayley-hamilton-apply",
+    "title": null,
+    "source": "/linear-algebra/eigen/characteristic-equation",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 491,
     "formats": [
       "png",
       "pdf"
@@ -213,6 +285,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 1138,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "combinatorics-notation-cheat-sheet",
+    "title": null,
+    "source": "/combinatorics/permutations",
+    "section": "combinatorics",
+    "width": 933,
+    "height": 1024,
     "formats": [
       "png",
       "pdf"
@@ -425,6 +509,18 @@
     ]
   },
   {
+    "id": "conjugate-vs-negation",
+    "title": null,
+    "source": "/complex-numbers/complex-conjugate",
+    "section": "complex-numbers",
+    "width": 933,
+    "height": 572,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "connective-precedence-pyramid",
     "title": null,
     "source": "/logic/propositional-logic/syntax",
@@ -559,6 +655,18 @@
     ]
   },
   {
+    "id": "darboux-theorem-converse",
+    "title": null,
+    "source": "/calculus/derivatives/function",
+    "section": "calculus",
+    "width": 933,
+    "height": 456,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "decomposition-decision",
     "title": null,
     "source": "/linear-algebra/decompositions",
@@ -613,6 +721,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 732,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "degrees-vs-radians-when",
+    "title": null,
+    "source": "/tables/angle-conversion",
+    "section": "tables",
+    "width": 933,
+    "height": 589,
     "formats": [
       "png",
       "pdf"
@@ -971,6 +1091,19 @@
     ]
   },
   {
+    "id": "eckart-young-apply",
+    "title": null,
+    "source": "/linear-algebra/decompositions/svd",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 503,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
     "id": "eigen-notation-cheat-sheet",
     "title": null,
     "source": "/linear-algebra/eigen/characteristic-equation",
@@ -1165,6 +1298,18 @@
     ]
   },
   {
+    "id": "extreme-value-theorem-card",
+    "title": null,
+    "source": "/functions/properties",
+    "section": "functions",
+    "width": 933,
+    "height": 355,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "factor-cancel-steps",
     "title": null,
     "source": "/calculus/limits/evaluating",
@@ -1220,6 +1365,18 @@
     "section": "algebra",
     "width": 933,
     "height": 838,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "fermat-theorem-converse",
+    "title": null,
+    "source": "/calculus/derivatives/graph-analysis",
+    "section": "calculus",
+    "width": 933,
+    "height": 435,
     "formats": [
       "png",
       "pdf"
@@ -1377,6 +1534,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 652,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "fundamental-theorem-chain",
+    "title": null,
+    "source": "/calculus/integrals/rules",
+    "section": "calculus",
+    "width": 933,
+    "height": 411,
     "formats": [
       "png",
       "pdf"
@@ -1686,6 +1855,18 @@
     ]
   },
   {
+    "id": "ivt-converse",
+    "title": null,
+    "source": "/calculus/limits/continuity",
+    "section": "calculus",
+    "width": 933,
+    "height": 440,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "known-limit-steps",
     "title": null,
     "source": "/calculus/limits/evaluating",
@@ -1752,6 +1933,18 @@
     "section": "calculus",
     "width": 933,
     "height": 787,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "limits-at-infinity-vs-infinite-limits",
+    "title": null,
+    "source": "/calculus/limits/infinity",
+    "section": "calculus",
+    "width": 933,
+    "height": 554,
     "formats": [
       "png",
       "pdf"
@@ -1915,6 +2108,18 @@
     ]
   },
   {
+    "id": "logic-notation-cheat-sheet",
+    "title": null,
+    "source": "/logic/propositional-logic/syntax",
+    "section": "logic",
+    "width": 933,
+    "height": 1488,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "lu-factors",
     "title": null,
     "source": "/linear-algebra/decompositions/lower-upper",
@@ -2072,6 +2277,18 @@
     ]
   },
   {
+    "id": "mean-value-theorem-chain",
+    "title": null,
+    "source": "/calculus/derivatives/rules",
+    "section": "calculus",
+    "width": 933,
+    "height": 396,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "median-method-decision",
     "title": null,
     "source": "/probability/median",
@@ -2090,6 +2307,18 @@
     "section": "arithmetic",
     "width": 933,
     "height": 764,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "multinomial-theorem-apply",
+    "title": null,
+    "source": "/combinatorics/binomial-theorem",
+    "section": "combinatorics",
+    "width": 933,
+    "height": 550,
     "formats": [
       "png",
       "pdf"
@@ -2307,6 +2536,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 713,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "pdf-cdf-chain",
+    "title": null,
+    "source": "/probability/probability-function/pdf",
+    "section": "probability",
+    "width": 933,
+    "height": 387,
     "formats": [
       "png",
       "pdf"
@@ -2566,6 +2807,18 @@
     ]
   },
   {
+    "id": "pythagorean-theorem-card",
+    "title": null,
+    "source": "/linear-algebra/orthogonality/inner-product",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 339,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "qr-forms",
     "title": null,
     "source": "/linear-algebra/decompositions/qr",
@@ -2808,6 +3061,18 @@
     ]
   },
   {
+    "id": "rank-nullity-apply",
+    "title": null,
+    "source": "/linear-algebra/matrix/rank",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 510,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "rank-properties",
     "title": null,
     "source": "/linear-algebra/matrix/rank",
@@ -2916,6 +3181,18 @@
     ]
   },
   {
+    "id": "real-vs-complex-eigen",
+    "title": null,
+    "source": "/linear-algebra/eigen/complex",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 630,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "reciprocal-graphs-tree",
     "title": null,
     "source": "/trigonometry/graphs",
@@ -2952,6 +3229,18 @@
     ]
   },
   {
+    "id": "rolle-theorem-card",
+    "title": null,
+    "source": "/calculus/derivatives/rules",
+    "section": "calculus",
+    "width": 933,
+    "height": 410,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "root-finding-methods-tree",
     "title": null,
     "source": "/algebra/polynomials/roots",
@@ -2982,6 +3271,18 @@
     "section": "algebra",
     "width": 933,
     "height": 957,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "rouche-capelli-iff",
+    "title": null,
+    "source": "/linear-algebra/linear-systems/solvability",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 427,
     "formats": [
       "png",
       "pdf"
@@ -3303,6 +3604,18 @@
     ]
   },
   {
+    "id": "spectral-theorem-chain",
+    "title": null,
+    "source": "/linear-algebra/decompositions/spectral",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 508,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "spiral-regimes",
     "title": null,
     "source": "/linear-algebra/eigen/complex",
@@ -3345,6 +3658,18 @@
     "section": "linear-algebra",
     "width": 48,
     "height": 48,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "squeeze-theorem-card",
+    "title": null,
+    "source": "/calculus/limits/rules",
+    "section": "calculus",
+    "width": 933,
+    "height": 356,
     "formats": [
       "png",
       "pdf"
@@ -3804,6 +4129,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 887,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "wronskian-test-converse",
+    "title": null,
+    "source": "/linear-algebra/vector-spaces/linear-independence",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 455,
     "formats": [
       "png",
       "pdf"

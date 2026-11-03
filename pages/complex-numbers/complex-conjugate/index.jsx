@@ -1282,6 +1282,7 @@ import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare'
 
 
 export async function getStaticProps(){
@@ -2453,9 +2454,42 @@ const schemas = {
       { id: 'standard', label: 'Standard form', stamp: 'After', expr: '$-\\dfrac{5}{17} + \\dfrac{14}{17}\\,i$' },
     ],
   };
+  // ConceptCompare data (conjugate-vs-negation); every fact is from the section text
+  const conjugateVsNegation = {
+    header: { kicker: 'Complex conjugate', title: 'Conjugate vs negation', lede: 'Confusing the two operations leads to errors, particularly when simplifying.' },
+    concepts: [
+      { id: 'conj', name: 'Conjugate',
+        values: {
+          rule: '$\\overline{a + bi} = a - bi$',
+          changes: 'Only the sign of the imaginary part; the real part is kept exactly',
+          ex: '$\\overline{3 + 2i} = 3 - 2i$',
+          written: '$\\bar{z}$ in pure mathematics and most textbooks; $z^*$ in physics and engineering',
+        } },
+      { id: 'neg', name: 'Negation',
+        values: {
+          rule: '$-(a + bi) = -a - bi$',
+          changes: 'Both signs: the real part and the imaginary part',
+          ex: '$-(3 + 2i) = -3 - 2i$',
+          written: '$-z$',
+        } },
+    ],
+    aspects: [
+      { id: 'rule', label: 'Rule', key: true },
+      { id: 'changes', label: 'What changes' },
+      { id: 'ex', label: 'Example' },
+      { id: 'written', label: 'Written' },
+    ],
+    verdict: {
+      label: 'Not the same',
+      text: 'The conjugate is not the same as negation: $3 - 2i$ and $-3 - 2i$ are different numbers.',
+      more: 'A real number is its own conjugate, $\\overline{5} = 5$, but not its own negative.',
+    },
+  };
+
 
   return {
   props:{
+      conjugateVsNegation,
     demoUnits,
     conceptIntroFigures,
     conjugateDivisionSteps,
@@ -2480,7 +2514,9 @@ const schemas = {
 
 
 
-export default function ComplexConjugatePage({
+const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function ComplexConjugatePage({conjugateVsNegation, 
   seoData,
   sectionsContent,
   introContent,
@@ -2580,6 +2616,16 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          <DiagramFrame
+            key={'obj1-compare'}
+            id="conjugate-vs-negation"
+            title="Conjugate vs negation"
+            source="/complex-numbers/complex-conjugate"
+            before={`Two sign changes that are easy to mix up. The card shows which sign each one touches.`}
+            after={`Only the imaginary sign flips under the bar; negation flips both.`}
+          >
+            <ConceptCompare data={conjugateVsNegation} variant="confused" theme={compareTheme} />
+          </DiagramFrame>,
         ]
     },
     {

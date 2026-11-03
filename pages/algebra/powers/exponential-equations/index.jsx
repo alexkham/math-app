@@ -15,6 +15,7 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -367,7 +368,7 @@ The first priority is isolating the exponential term. Move additive constants to
 
 @academic[pitfall,aside:true,width:35%:Merging the coefficient into the base
 Writing $5 \\cdot 3^x = 245$ as $15^x = 245$ gives $x \\approx 2.03$, and $5 \\cdot 3^{2.03} \\approx 46.5$, not $245$. The exponent belongs to $3$ alone: $3^x = 49$, so $x \\approx 3.54$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-merging-the-coefficient-into-the-base)]@
 
 In $5 \\cdot 3^x + 7$, three operations are stacked: $3$ is raised to the power $x$, the result is multiplied by $5$, and $7$ is added. Isolating the exponential undoes them from the outside in, so the addition is undone first and the multiplication second.
 
@@ -428,7 +429,7 @@ The equation $9^{x+1} = 27$ works the same way. Both bases are powers of $3$: $9
 
 @academic[pitfall,aside:true,width:35%:Matching exponents of different bases
 Writing $4^x = 8$ as $4^x = 2^3$ and setting $x = 3$ compares exponents of two different bases, and $4^3 = 64$, not $8$. With one base, $2^{2x} = 2^3$, so $x = \\frac{3}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-matching-exponents-of-different-bases)]@
 
 The key skill is recognizing when two numbers share a common base. Familiarity with small powers — $2, 4, 8, 16, 32$; $3, 9, 27, 81$; $5, 25, 125$ — makes this recognition faster.`,
     before: ``,
@@ -450,7 +451,7 @@ Consider $3^{x+2} - 3^x = 72$. Rewrite $3^{x+2} = 3^x \\cdot 3^2 = 9 \\cdot 3^x$
 
 @academic[pitfall,aside:true,width:35%:Adding exponents across a sum
 Combining $2^{x+1} + 2^x = 12$ into $2^{2x+1} = 12$ gives $x \\approx 1.29$, and then $2^{x+1} + 2^x \\approx 7.35$, not $12$. Factoring instead gives $3 \\cdot 2^x = 12$, so $x = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-exponents-across-a-sum)]@
 
 The general strategy is to express every exponential term as a product involving a single exponential expression — the same technique used to [factor polynomials](!/algebra/polynomials/factoring) by pulling out a common term. Factor out that common piece, reduce the equation to a single exponential term equal to a constant, and finish with base matching or **logarithms**.`,
     before: ``,
@@ -475,7 +476,7 @@ For $2^x = 3^{x-1}$, both sides are exponential with different bases. Take **log
 
 @academic[pitfall,aside:true,width:35%:Turning a quotient of logs into one log
 Rewriting $x = \\frac{\\log(5)}{\\log(2)}$ as $\\log\\left(\\frac{5}{2}\\right)$ gives, in base $10$, $x \\approx 0.398$, and $2^{0.398} \\approx 1.32$, not $5$. The quotient stays a quotient: $x \\approx 2.322$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-turning-a-quotient-of-logs-into-one-log)]@
 
 Each example ends with the exponent written as one logarithm divided by another, or as that fraction shifted by a constant. The fraction is the exact answer; the decimal comes from evaluating the two logarithms and then dividing.
 
@@ -526,7 +527,7 @@ The equation $x^{3/4} = 27$ is solved by raising both sides to the power $\\frac
 
 @academic[pitfall,aside:true,width:35%:Losing the negative root
 Raising $x^{-2} = 9$ to the power $-\\frac{1}{2}$ gives only $x = 9^{-1/2} = \\frac{1}{3}$. But $\\left(-\\frac{1}{3}\\right)^{-2} = 9$ as well, so $x = \\pm\\frac{1}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-losing-the-negative-root)]@
 
 The reciprocal exponent works because $(a^{m/n})^{n/m} = a^1 = a$ by the [power of a power rule](!/algebra/powers/exponent-rules/). The exponent and its reciprocal undo each other, leaving the base isolated.`,
     before: ``,
@@ -560,79 +561,9 @@ Substituting each candidate back into the original equation is the reliable fina
 
   obj12: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for many wrong answers to exponential equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Merging the coefficient into the base**
-
-A coefficient stands in front of the exponential, and it is multiplied into the base as if the two numbers formed one power. The exponent then acts on the product instead of on the base alone.
-
-Wrong working:
-$$5 \\cdot 3^x = 245 \\implies 15^x = 245 \\implies x = \\frac{\\log(245)}{\\log(15)} \\approx 2.03$$
-
-Right working: the exponent belongs to $3$ only, so the coefficient is divided out first.
-$$5 \\cdot 3^x = 245 \\implies 3^x = 49 \\implies x = \\frac{\\log(49)}{\\log(3)} \\approx 3.54$$
-
-Why it happens: the $5$ and the $3$ stand side by side, and $5 \\cdot 3 = 15$ looks like a natural simplification. But $5 \\cdot 3^x$ means $5 \\cdot (3^x)$, while $15^x = (5 \\cdot 3)^x = 5^x \\cdot 3^x$ is a different expression.
-
-How to check: compare the two forms at a simple value. At $x = 2$, $5 \\cdot 3^2 = 45$ but $15^2 = 225$. Substituting the wrong answer back also fails: $5 \\cdot 3^{2.03} \\approx 46.5$, far from $245$.
-
-**Matching exponents of different bases**
-
-One side is rewritten as a power, but of a different base from the other side, and the exponents are equated anyway.
-
-Wrong working:
-$$4^x = 8 \\implies 4^x = 2^3 \\implies x = 3$$
-
-Right working: both sides must use the same base before the exponents are compared.
-$$(2^2)^x = 2^3 \\implies 2^{2x} = 2^3 \\implies 2x = 3 \\implies x = \\frac{3}{2}$$
-
-Why it happens: the rule $a^x = a^y \\implies x = y$ is remembered as "equal powers, equal exponents", and the condition that both powers share the base $a$ is dropped.
-
-How to check: substitute the answer. $4^3 = 64$, not $8$, while $4^{3/2} = (\\sqrt{4})^3 = 2^3 = 8$.
-
-**Adding exponents across a sum**
-
-Two exponential terms with the same base are added, and their exponents are added as if the terms were multiplied.
-
-Wrong working:
-$$2^{x+1} + 2^x = 12 \\implies 2^{2x+1} = 12 \\implies 2x + 1 = \\frac{\\log(12)}{\\log(2)} \\approx 3.585 \\implies x \\approx 1.29$$
-
-Right working: split $2^{x+1} = 2 \\cdot 2^x$ and factor out $2^x$.
-$$2 \\cdot 2^x + 2^x = 12 \\implies 3 \\cdot 2^x = 12 \\implies 2^x = 4 \\implies x = 2$$
-
-Why it happens: the [product rule](!/algebra/powers/exponent-rules/) $a^m \\cdot a^n = a^{m+n}$ is used so often that it gets applied to sums too. A sum of powers has no rule of this kind.
-
-How to check: substitute. $x = 2$ gives $2^3 + 2^2 = 8 + 4 = 12$. The wrong value $x \\approx 1.29$ gives $2^{x+1} + 2^x \\approx 4.90 + 2.45 = 7.35$.
-
-**Turning a quotient of logs into one log**
-
-After taking logarithms, the exponent is isolated as one logarithm divided by another, and that fraction is then collapsed into the logarithm of a fraction.
-
-Wrong working:
-$$2^x = 5 \\implies x = \\frac{\\log(5)}{\\log(2)} = \\log\\left(\\frac{5}{2}\\right) \\approx 0.398 \\quad (\\text{base } 10)$$
-
-Right working: the fraction is evaluated as it stands.
-$$x = \\frac{\\log(5)}{\\log(2)} \\approx \\frac{0.699}{0.301} \\approx 2.322$$
-
-Why it happens: the [quotient rule](!/algebra/logarithms/rules) for logarithms looks similar, but it says $\\log(5) - \\log(2) = \\log\\left(\\frac{5}{2}\\right)$. It turns a difference of logs into one log; it says nothing about a quotient of logs.
-
-How to check: raise the base to the answer. $2^{0.398} \\approx 1.32$, not $5$, while $2^{2.322} \\approx 5.00$.
-
-**Losing the negative root**
-
-The variable is in the base and the exponent is a fixed even power, here $-2$. Raising both sides to the reciprocal power returns only the positive value of $x$.
-
-Wrong working:
-$$x^{-2} = 9 \\implies x = 9^{-1/2} = \\frac{1}{3}$$
-
-Right working: rewrite with the negative exponent definition and take both square roots.
-$$x^{-2} = 9 \\implies \\frac{1}{x^2} = 9 \\implies x^2 = \\frac{1}{9} \\implies x = \\pm\\frac{1}{3}$$
-
-Why it happens: the reciprocal exponent undoes the power exactly only when the base is positive. An even power erases the sign of $x$, so $x$ and $-x$ give the same result, and $9^{-1/2}$ returns just the positive one.
-
-How to check: substitute the negative value. $\\left(-\\frac{1}{3}\\right)^{-2} = \\frac{1}{\\left(-\\frac{1}{3}\\right)^2} = \\frac{1}{1/9} = 9$, so $x = -\\frac{1}{3}$ is a solution too.`,
+    content: `Five mistakes account for many wrong answers to exponential equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Every check above is the same move: substitute the answer into the original equation. Four of the slips turn the equation into a different one, by merging a coefficient into the base, comparing exponents of unequal bases, adding exponents across a sum or merging a quotient of logarithms, and the wrong answer then fails the original. The fifth loses an answer instead of producing a wrong one, so the negative value has to be substituted too.`,
     link: '',
   },
 
@@ -849,8 +780,47 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'merging-the-coefficient-into-the-base', name: `Merging the coefficient into the base`, errorAt: 1,
+        what: `A coefficient stands in front of the exponential, and it is multiplied into the base as if the two numbers formed one power. The exponent then acts on the product instead of on the base alone.`,
+        wrong: [`$$5 \\cdot 3^x = 245$$`, `$$\\implies 15^x = 245$$`, `$$\\implies x = \\frac{\\log(245)}{\\log(15)} \\approx 2.03$$`],
+        right: [`$$5 \\cdot 3^x = 245$$`, `The exponent belongs to $3$ only, so the coefficient is divided out first.`, `$$\\implies 3^x = 49$$`, `$$\\implies x = \\frac{\\log(49)}{\\log(3)} \\approx 3.54$$`],
+        why: `The $5$ and the $3$ stand side by side, and $5 \\cdot 3 = 15$ looks like a natural simplification. But $5 \\cdot 3^x$ means $5 \\cdot (3^x)$, while $15^x = (5 \\cdot 3)^x = 5^x \\cdot 3^x$ is a different expression.`,
+        check: `Compare the two forms at a simple value. At $x = 2$, $5 \\cdot 3^2 = 45$ but $15^2 = 225$. Substituting the wrong answer back also fails: $5 \\cdot 3^{2.03} \\approx 46.5$, far from $245$.` },
+      { id: 'matching-exponents-of-different-bases', name: `Matching exponents of different bases`, errorAt: 2,
+        what: `One side is rewritten as a power, but of a different base from the other side, and the exponents are equated anyway.`,
+        wrong: [`$$4^x = 8$$`, `$$\\implies 4^x = 2^3$$`, `$$\\implies x = 3$$`],
+        right: [`$$4^x = 8$$`, `$$\\implies 4^x = 2^3$$`, `Both sides must use the same base before the exponents are compared.`, `$$(2^2)^x = 2^3$$`, `$$\\implies 2^{2x} = 2^3$$`, `$$\\implies 2x = 3$$`, `$$\\implies x = \\frac{3}{2}$$`],
+        why: `The rule $a^x = a^y \\implies x = y$ is remembered as "equal powers, equal exponents", and the condition that both powers share the base $a$ is dropped.`,
+        check: `Substitute the answer. $4^3 = 64$, not $8$, while $4^{3/2} = (\\sqrt{4})^3 = 2^3 = 8$.` },
+      { id: 'adding-exponents-across-a-sum', name: `Adding exponents across a sum`, errorAt: 1,
+        what: `Two exponential terms with the same base are added, and their exponents are added as if the terms were multiplied.`,
+        wrong: [`$$2^{x+1} + 2^x = 12$$`, `$$\\implies 2^{2x+1} = 12$$`, `$$\\implies 2x + 1 = \\frac{\\log(12)}{\\log(2)} \\approx 3.585$$`, `$$\\implies x \\approx 1.29$$`],
+        right: [`$$2^{x+1} + 2^x = 12$$`, `Split $2^{x+1} = 2 \\cdot 2^x$ and factor out $2^x$.`, `$$2 \\cdot 2^x + 2^x = 12$$`, `$$\\implies 3 \\cdot 2^x = 12$$`, `$$\\implies 2^x = 4$$`, `$$\\implies x = 2$$`],
+        why: `The [product rule](!/algebra/powers/exponent-rules/) $a^m \\cdot a^n = a^{m+n}$ is used so often that it gets applied to sums too. A sum of powers has no rule of this kind.`,
+        check: `Substitute. $x = 2$ gives $2^3 + 2^2 = 8 + 4 = 12$. The wrong value $x \\approx 1.29$ gives $2^{x+1} + 2^x \\approx 4.90 + 2.45 = 7.35$.` },
+      { id: 'turning-a-quotient-of-logs-into-one-log', name: `Turning a quotient of logs into one log`, errorAt: 2,
+        what: `After taking logarithms, the exponent is isolated as one logarithm divided by another, and that fraction is then collapsed into the logarithm of a fraction.`,
+        wrong: [`$$2^x = 5$$`, `$$\\implies x = \\frac{\\log(5)}{\\log(2)}$$`, `$$= \\log\\left(\\frac{5}{2}\\right) \\approx 0.398 \\quad (\\text{base } 10)$$`],
+        right: [`$$2^x = 5$$`, `$$\\implies x = \\frac{\\log(5)}{\\log(2)}$$`, `The fraction is evaluated as it stands.
+$$\\approx \\frac{0.699}{0.301} \\approx 2.322$$`],
+        why: `The [quotient rule](!/algebra/logarithms/rules) for logarithms looks similar, but it says $\\log(5) - \\log(2) = \\log\\left(\\frac{5}{2}\\right)$. It turns a difference of logs into one log; it says nothing about a quotient of logs.`,
+        check: `Raise the base to the answer. $2^{0.398} \\approx 1.32$, not $5$, while $2^{2.322} \\approx 5.00$.` },
+      { id: 'losing-the-negative-root', name: `Losing the negative root`, errorAt: 1,
+        what: `The variable is in the base and the exponent is a fixed even power, here $-2$. Raising both sides to the reciprocal power returns only the positive value of $x$.`,
+        wrong: [`$$x^{-2} = 9$$`, `$$\\implies x = 9^{-1/2} = \\frac{1}{3}$$`],
+        right: [`$$x^{-2} = 9$$`, `Rewrite with the negative exponent definition and take both square roots.`, `$$\\implies \\frac{1}{x^2} = 9$$`, `$$\\implies x^2 = \\frac{1}{9}$$`, `$$\\implies x = \\pm\\frac{1}{3}$$`],
+        why: `The reciprocal exponent undoes the power exactly only when the base is positive. An even power erases the sign of $x$, so $x$ and $-x$ give the same result, and $9^{-1/2}$ returns just the positive one.`,
+        check: `Substitute the negative value. $\\left(-\\frac{1}{3}\\right)^{-2} = \\frac{1}{\\left(-\\frac{1}{3}\\right)^2} = \\frac{1}{1/9} = 9$, so $x = -\\frac{1}{3}$ is a solution too.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     expEquationTree,
     commonBaseBeforeAfter,
     sectionsContent,
@@ -876,7 +846,7 @@ return {
    }
 
 // export default function ExponentialEquationsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialEquationsPage({expEquationTree, commonBaseBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ExponentialEquationsPage({ pitfallData,expEquationTree, commonBaseBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1104,6 +1074,15 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="exponential-equation-pitfalls"
+            title="Common pitfalls in exponential equations"
+            source="/algebra/powers/exponential-equations"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

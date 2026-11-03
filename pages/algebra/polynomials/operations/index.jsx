@@ -15,6 +15,8 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -413,6 +415,23 @@ const keyWords = [
   
 //   }
 
+// Concept introduction (section 1, "Adding Polynomials") — template C,
+// failure first. Running instance: 3x² + 5x² merged correctly, 3x² + 5x³
+// merged wrongly, both checked at x = 2. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its four passages, example and theorem box
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciMergeTable = ciTableOpen(['sum', 'merged into one term', 'sum at x = 2', 'merged term at x = 2']) +
+  ciRow(['3x² + 5x²', '8x²', '12 + 20 = 32', '8 · 4 = 32']) +
+  ciRow(['3x² + 5x³', '8x⁵', '12 + 40 = 52', '8 · 32 = 256'], { shade: true, last: true, color: '#a4243b', cols: [1, 3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -493,7 +512,7 @@ For $(x + 2)(x^2 - 3x + 1)$, distribute each term of the binomial across the tri
 
 @academic[pitfall,aside:true,width:35%:Multiplying the exponents
 Multiplying the exponents as well as the coefficients turns $2x^2 \\cdot 3x^3$ into $6x^6$; at $x = 2$ that is $384$, but the product is $8 \\cdot 24 = 192$. Exponents add: $2x^2 \\cdot 3x^3 = 6x^5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-exponents)]@
 
 A degree-$2$ polynomial times a degree-$3$ polynomial produces a degree-$5$ polynomial. This follows from the fact that the highest-degree terms in each factor multiply to produce the highest-degree term in the product, and no other pair of terms can reach that degree.
 
@@ -522,7 +541,7 @@ $$(a - b)^2 = a^2 - 2ab + b^2$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the middle term
 Squaring each term on its own gives $(x + 3)^2 = x^2 + 9$; at $x = 1$ that is $10$, but $(1 + 3)^2 = 16$. The square keeps its middle term: $(x + 3)^2 = x^2 + 6x + 9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-middle-term)]@
 
 Squaring a binomial means multiplying it by itself: $(a + b)^2 = (a + b)(a + b)$. Distributing produces four products, $a^2$, $ab$, $ba$ and $b^2$, and the two middle ones are equal, so they combine into a single term.
 
@@ -618,7 +637,7 @@ The remainder produced by synthetic division equals $P(c)$, the value of the div
 
 @academic[pitfall,aside:true,width:35%:Using the wrong sign for c
 Dividing $x^3 - 2x^2 + 5x - 3$ by $x + 1$ with $c = 1$ actually divides by $x - 1$ and returns remainder $1 = P(1)$. Since $x + 1 = x - (-1)$, use $c = -1$: quotient $x^2 - 3x + 8$, remainder $-11$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-wrong-sign-for-c)]@
 
 This is the Remainder Theorem in action, and it means synthetic division doubles as a fast way to compute $P(c)$ without substituting into every term. If $P(c) = 0$, then $(x - c)$ divides the polynomial evenly and $c$ is a [root](!/algebra/polynomials/roots).
 
@@ -654,63 +673,9 @@ These relationships provide a quick sanity check. If multiplying two quadratics 
 
   obj16: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for most wrong answers in polynomial arithmetic. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Negating only the first term**
-
-In a subtraction, the minus sign in front of the parentheses is applied to the first term of the subtracted polynomial only, and the remaining terms are copied with their original signs.
-
-Wrong working:
-$$(2x^2 + 3x - 1) - (x^2 - 5x + 4) = 2x^2 + 3x - 1 - x^2 - 5x + 4 = x^2 - 2x + 3$$
-
-Right working: every term of the second polynomial changes sign, so it becomes $-x^2 + 5x - 4$.
-$$(2x^2 + 3x - 1) + (-x^2 + 5x - 4) = x^2 + 8x - 5$$
-
-Why it happens: removing parentheses after a plus sign changes nothing, and the same habit is carried over to a minus sign, which then seems to belong only to the term written next to it.
-
-How to check: substitute a value. At $x = 1$ the original is $(2 + 3 - 1) - (1 - 5 + 4) = 4 - 0 = 4$. The wrong result gives $1 - 2 + 3 = 2$; the right one gives $1 + 8 - 5 = 4$.
-
-**Multiplying the exponents**
-
-When two terms are multiplied, the exponents of the variable are multiplied too, in the same way as the coefficients.
-
-Wrong working:
-$$2x^2 \\cdot 3x^3 = 6x^6$$
-
-Right working: the coefficients multiply and the exponents add, because $x^2 \\cdot x^3$ is $(x \\cdot x)(x \\cdot x \\cdot x)$, five factors of $x$.
-$$2x^2 \\cdot 3x^3 = (2 \\cdot 3)x^{2 + 3} = 6x^5$$
-
-Why it happens: the coefficients really are multiplied, and the exponents sit right beside them, so the same operation gets applied to both.
-
-How to check: substitute $x = 2$. The product is $2 \\cdot 2^2 \\cdot 3 \\cdot 2^3 = 8 \\cdot 24 = 192$, which matches $6 \\cdot 2^5 = 192$ but not $6 \\cdot 2^6 = 384$. The degree rule gives the same signal: terms of degree $2$ and $3$ multiply to a term of degree $5$.
-
-**Dropping the middle term**
-
-A binomial is squared by squaring each of its two terms, as if the exponent could be handed out over the sum.
-
-Wrong working:
-$$(x + 3)^2 = x^2 + 3^2 = x^2 + 9$$
-
-Right working: write the square as a product and distribute.
-$$(x + 3)^2 = (x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9$$
-
-Why it happens: an exponent does distribute over a product, $(ab)^2 = a^2b^2$, and the same move is carried over to a sum, where it does not hold.
-
-How to check: substitute $x = 1$. The original gives $(1 + 3)^2 = 16$; the wrong form gives $1 + 9 = 10$, the right one $1 + 6 + 9 = 16$. Counting products works too: a binomial times a binomial makes four products, and $x^2 + 9$ accounts for only two of them.
-
-**Using the wrong sign for c**
-
-Synthetic division needs the divisor in the form $x - c$. For a divisor such as $x + 1$, the number $1$ is read off directly and used as $c$.
-
-Wrong working: dividing $x^3 - 2x^2 + 5x - 3$ by $x + 1$ with $c = 1$ gives the bottom row $1, -1, 4, 1$, that is, quotient $x^2 - x + 4$ and remainder $1$. This is the division by $x - 1$ from the section above.
-
-Right working: $x + 1 = x - (-1)$, so $c = -1$. Bring down $1$; then $1 \\cdot (-1) = -1$ and $-2 + (-1) = -3$; then $-3 \\cdot (-1) = 3$ and $5 + 3 = 8$; then $8 \\cdot (-1) = -8$ and $-3 + (-8) = -11$. The bottom row $1, -3, 8, -11$ gives quotient $x^2 - 3x + 8$ and remainder $-11$.
-
-Why it happens: the divisor shows $+1$, and the number placed to the left of the row is copied from it without first rewriting the divisor as $x - c$.
-
-How to check: by the Remainder Theorem, the remainder must equal the dividend evaluated where the divisor is zero. Here $P(-1) = -1 - 2 - 5 - 3 = -11$. Multiplying back also works: $(x + 1)(x^2 - 3x + 8) - 11 = x^3 - 2x^2 + 5x - 3$.`,
+    content: `Four mistakes account for most wrong answers in polynomial arithmetic. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Three of the four checks are the same move: substitute a small value such as $x = 1$ or $x = 2$ into the original expression and into the result, and compare. Two expressions that are equal as polynomials agree at every value, so a single mismatch proves the working wrong. For division, the Remainder Theorem gives the same kind of test: the remainder must equal the dividend evaluated where the divisor is zero.`,
     link: '',
   },
 
@@ -866,6 +831,10 @@ const schemas = {
       { x: 1.3, y: -4, text: 'dashed: (x − 1)(x² − x + 4)', pos: 'e', color: 'g' }],
     caption: 'Dividend = divisor × quotient + remainder: the gap is 1 everywhere' };
 
+  const conceptIntroFigures = {
+    mergeTable: ciMergeTable,
+  };
+
   const demoUnits = {
     multiply: demoUnitFrame({
       svg: polynomialMultiplicationDiagrams['ps-3x2'],
@@ -916,10 +885,48 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'negating-only-the-first-term', name: `Negating only the first term`, errorAt: 1,
+        what: `In a subtraction, the minus sign in front of the parentheses is applied to the first term of the subtracted polynomial only, and the remaining terms are copied with their original signs.`,
+        wrong: [`$$(2x^2 + 3x - 1) - (x^2 - 5x + 4)$$`, `$$= 2x^2 + 3x - 1 - x^2 - 5x + 4$$
+$$= x^2 - 2x + 3$$`],
+        right: [`$$(2x^2 + 3x - 1) - (x^2 - 5x + 4)$$`, `Every term of the second polynomial changes sign, so it becomes $-x^2 + 5x - 4$.`, `$$(2x^2 + 3x - 1) + (-x^2 + 5x - 4)$$
+$$= x^2 + 8x - 5$$`],
+        why: `Removing parentheses after a plus sign changes nothing, and the same habit is carried over to a minus sign, which then seems to belong only to the term written next to it.`,
+        check: `Substitute a value. At $x = 1$ the original is $(2 + 3 - 1) - (1 - 5 + 4) = 4 - 0 = 4$. The wrong result gives $1 - 2 + 3 = 2$; the right one gives $1 + 8 - 5 = 4$.` },
+      { id: 'multiplying-the-exponents', name: `Multiplying the exponents`, errorAt: 1,
+        what: `When two terms are multiplied, the exponents of the variable are multiplied too, in the same way as the coefficients.`,
+        wrong: [`$$2x^2 \\cdot 3x^3$$`, `$$= 6x^6$$`],
+        right: [`$$2x^2 \\cdot 3x^3$$`, `The coefficients multiply and the exponents add, because $x^2 \\cdot x^3$ is $(x \\cdot x)(x \\cdot x \\cdot x)$, five factors of $x$.
+$$= (2 \\cdot 3)x^{2 + 3} = 6x^5$$`],
+        why: `The coefficients really are multiplied, and the exponents sit right beside them, so the same operation gets applied to both.`,
+        check: `Substitute $x = 2$. The product is $2 \\cdot 2^2 \\cdot 3 \\cdot 2^3 = 8 \\cdot 24 = 192$, which matches $6 \\cdot 2^5 = 192$ but not $6 \\cdot 2^6 = 384$. The degree rule gives the same signal: terms of degree $2$ and $3$ multiply to a term of degree $5$.` },
+      { id: 'dropping-the-middle-term', name: `Dropping the middle term`, errorAt: 1,
+        what: `A binomial is squared by squaring each of its two terms, as if the exponent could be handed out over the sum.`,
+        wrong: [`$$(x + 3)^2$$`, `$$= x^2 + 3^2 = x^2 + 9$$`],
+        right: [`$$(x + 3)^2$$`, `Write the square as a product and distribute.
+$$= (x + 3)(x + 3) = x^2 + 3x + 3x + 9$$
+$$= x^2 + 6x + 9$$`],
+        why: `An exponent does distribute over a product, $(ab)^2 = a^2b^2$, and the same move is carried over to a sum, where it does not hold.`,
+        check: `Substitute $x = 1$. The original gives $(1 + 3)^2 = 16$; the wrong form gives $1 + 9 = 10$, the right one $1 + 6 + 9 = 16$. Counting products works too: a binomial times a binomial makes four products, and $x^2 + 9$ accounts for only two of them.` },
+      { id: 'using-the-wrong-sign-for-c', name: `Using the wrong sign for c`, errorAt: 0,
+        what: `Synthetic division needs the divisor in the form $x - c$. For a divisor such as $x + 1$, the number $1$ is read off directly and used as $c$.`,
+        wrong: [`Dividing $x^3 - 2x^2 + 5x - 3$ by $x + 1$ with $c = 1$ gives the bottom row $1, -1, 4, 1$, that is, quotient $x^2 - x + 4$ and remainder $1$. This is the division by $x - 1$ from the section above.`],
+        right: [`$x + 1 = x - (-1)$, so $c = -1$. Bring down $1$; then $1 \\cdot (-1) = -1$ and $-2 + (-1) = -3$; then $-3 \\cdot (-1) = 3$ and $5 + 3 = 8$; then $8 \\cdot (-1) = -8$ and $-3 + (-8) = -11$. The bottom row $1, -3, 8, -11$ gives quotient $x^2 - 3x + 8$ and remainder $-11$.`],
+        why: `The divisor shows $+1$, and the number placed to the left of the row is copied from it without first rewriting the divisor as $x - c$.`,
+        check: `By the Remainder Theorem, the remainder must equal the dividend evaluated where the divisor is zero. Here $P(-1) = -1 - 2 - 5 - 3 = -11$. Multiplying back also works: $(x + 1)(x^2 - 3x + 8) - 11 = x^3 - 2x^2 + 5x - 3$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     polyOpTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj4Table,
@@ -939,9 +946,70 @@ const schemas = {
    }
 
 
-export default function OperationsPage({polyOpTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function OperationsPage({ pitfallData,polyOpTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Adding polynomials looks like adding numbers: add everything up into one term.`,
+        content: [
+          `Test that on two sums by putting $x = 2$ into both the sum and the merged term.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `3x² + 5x² really is 8x², but 3x² + 5x³ is not 8x⁵.`,
+        content: [
+          ciTable('mergeTable'),
+          `Only terms with the same power of $x$ can be merged; $3x^2$ and $5x^3$ have to stay separate.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Combine like terms; every other term passes through unchanged.`,
+        content: [
+          `The process works identically for any number of terms and any degree. Align terms by matching exponents, add their coefficients, and write the result. Terms with no counterpart in the other polynomial pass through unchanged — adding $x^3 + 2x$ and $3x^2 - x + 5$ produces $x^3 + 3x^2 + x + 5$, where $x^3$ and $3x^2$ each carried over directly.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **sum of two polynomials** is found by adding the coefficients of [like terms](!/algebra/definitions#like_terms), terms with the same variable raised to the same exponent.`,
+        formula: [
+          `Adding two polynomials reduces to a single principle: combine like terms. Two terms are like terms when they share the same variable raised to the same exponent — $3x^2$ and $5x^2$ are like terms, while $3x^2$ and $5x^3$ are not.`,
+        ],
+        footer: `So $(2x^2 + 3x - 1) + (x^2 - 5x + 4) = 3x^2 - 2x + 3$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Grouping the terms by degree makes any sum routine.`,
+        content: [
+          `@academic[example:Example
+Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ terms are $2x^2$ and $x^2$, the $x$ terms are $3x$ and $-5x$, and the constants are $-1$ and $4$. Adding each group gives $3x^2 - 2x + 3$.]@`,
+          `@academic[rule_theorem_plain:The sum of two polynomials is always a polynomial. Its degree is at most the larger of the two input degrees — and in rare cases it can be less, if the leading terms cancel.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The degree can drop when the leading terms cancel.`,
+        content: [
+          `Adding $2x^3 + x - 1$ and $-2x^3 + 4x + 7$ eliminates the cubic terms entirely, leaving $5x + 6$, a polynomial of degree $1$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers subtraction, multiplication, special products, the FOIL method, long and synthetic division, how degree behaves under the operations, a summary and common pitfalls.`,
+      },
+    ],
+  }
     
   const genericSections=[
      {
@@ -959,7 +1027,7 @@ export default function OperationsPage({polyOpTree, seoData, sectionsContent, in
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1073,6 +1141,15 @@ export default function OperationsPage({polyOpTree, seoData, sectionsContent, in
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="polynomial-operation-pitfalls"
+            title="Common pitfalls in polynomial operations"
+            source="/algebra/polynomials/operations"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

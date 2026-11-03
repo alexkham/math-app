@@ -8341,6 +8341,7 @@ import NestedContainment from '@/app/components/infographics/NestedContainment/N
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 
@@ -9240,10 +9241,25 @@ const schemas = {
       { id: 'sq', symbol: 'M_n', name: 'Square', note: 'eigendecomposition may not exist' },
       { id: 'all', symbol: 'M_{m×n}', name: 'All matrices', adds: 'rectangular shapes', note: 'only the [SVD](!/linear-algebra/decompositions/svd) applies' },
     ],
+  };  // TheoremCard data (eckart-young-apply); every fact is from the section text
+  const eckartYoungApply = {
+    header: { kicker: 'Low-rank approximation', title: 'The Eckart–Young–Mirsky Theorem', lede: 'Truncating the SVD gives the closest matrix of lower rank.' },
+    theorem: {
+      statement: 'Among all matrices of rank at most $k$, $A_k$ is the closest to $A$, in the operator norm and in the Frobenius norm.',
+      steps: [
+        { label: 'Truncate', hit: true, text: '$A_k = \\sum_{i=1}^{k} \\sigma_i \\mathbf{u}_i \\mathbf{v}_i^T$: keep the first $k$ singular value triples.' },
+        { label: 'Error, operator norm', text: '$\\|A - A_k\\|_2 = \\sigma_{k+1}$, the first discarded singular value.' },
+        { label: 'Error, Frobenius norm', text: '$\\|A - A_k\\|_F = \\sqrt{\\sigma_{k+1}^2 + \\cdots + \\sigma_r^2}$.' },
+        { label: 'Decide $k$', text: 'When $\\sigma_1 \\gg \\sigma_2 \\gg \\cdots$, a few terms capture most of $A$: image compression, noise reduction, latent semantic analysis.' },
+      ],
+    },
   };
+
+
 
   return {
   props:{
+      eckartYoungApply,
     svdNest,
     demoUnits,
     sectionsContent,
@@ -9266,7 +9282,9 @@ const schemas = {
 }
    }
 
-export default function SVDPage({svdNest, 
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function SVDPage({eckartYoungApply, svdNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -9472,7 +9490,17 @@ export default function SVDPage({svdNest,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          `@academic[punchline:How fast the singular values fall decides how few numbers can stand in for the whole matrix.]@`,
+          `@academic[punchline:How fast the singular values fall decides how few numbers can stand in for the whole matrix.]@`,          <DiagramFrame
+            key={'obj8-theorem'}
+            id="eckart-young-apply"
+            title="Eckart–Young–Mirsky, applied"
+            source="/linear-algebra/decompositions/svd"
+            before={`The theorem as a procedure: truncate, read off the error, decide how many terms to keep.`}
+            after={`The first discarded singular value is the price of the approximation. When the singular values fall fast, that price is small.`}
+          >
+            <TheoremCard data={eckartYoungApply} variant="apply" theme={theoremTheme} />
+          </DiagramFrame>,
+
         ]
     },
     {

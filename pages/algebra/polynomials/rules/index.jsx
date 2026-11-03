@@ -14,6 +14,9 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -502,6 +505,24 @@ const keyWords = [
 //   }
 
 
+// Concept introduction (section 1, "The Remainder Theorem") — template F,
+// two descriptions shown to agree. Running instance: x³ − 4x + 2 divided by
+// x − 1, x − 2 and x − 3, long-division remainders against P(c). Old obj1 text
+// is kept in sectionsContent.obj1, unused; its six passages, formula box and
+// link, two examples and pitfall are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRemTable = ciTableOpen(['divisor', 'remainder by long division', 'P(c)']) +
+  ciRow(['x − 1', '−1', 'P(1) = 1 − 4 + 2 = −1']) +
+  ciRow(['x − 2', '2', 'P(2) = 8 − 8 + 2 = 2'], { shade: true }) +
+  ciRow(['x − 3', '17', 'P(3) = 27 − 12 + 2 = 17'], { last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -612,7 +633,7 @@ If $P(x) = 2x^4 - x^2 + 5$ and the divisor is $(x + 1)$, read $(x + 1)$ as $(x -
 
 @academic[pitfall,aside:true,width:35%:Using the wrong sign of c
 Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x + 3)$, $P(3) = 17$ is the remainder for $(x - 3)$. Here $c = -3$, so the remainder is $P(-3) = -13$.
-[Read more](!#13)]@
+[Read more](!#pitfall-using-the-wrong-sign-of-c)]@
 
 In both examples the whole computation is a single evaluation, and the only choice to make is the value of $c$. The theorem is stated for a divisor written as $(x - c)$, so $c$ is the number that makes the divisor equal to zero.`,
     before: ``,
@@ -816,7 +837,7 @@ Some roots may repeat. The polynomial $x^3 - 3x^2 + 3x - 1 = (x - 1)^3$ has degr
 
 @academic[pitfall,aside:true,width:35%:Expecting all roots to be real
 Reading exactly $n$ roots as $n$ real roots: $x^3 - x^2 + x - 1$ would then cross the x-axis three times. It factors as $(x - 1)(x^2 + 1)$, so it crosses only at $x = 1$; the other roots are $\\pm i$.
-[Read more](!#13)]@
+[Read more](!#pitfall-expecting-all-roots-to-be-real)]@
 
 For polynomials with real coefficients, an additional constraint applies: complex roots come in conjugate pairs. If $a + bi$ is a root, then $a - bi$ is also a root. This means a real polynomial of odd degree must have at least one real root — an odd number of roots cannot be paired off entirely into conjugate pairs.
 
@@ -876,38 +897,9 @@ With the Rational Root Theorem, two errors dominate. The first is forgetting neg
 
 In Descartes' Rule of Signs, the most common error occurs when computing $P(-x)$. Every odd-powered term changes sign while even-powered terms stay the same. Writing $P(-x)$ incorrectly — changing the wrong terms or missing one — corrupts the sign-change count.
 
-With Vieta's formulas, sign errors are persistent. The sum of roots for $x^2 + bx + c$ is $-b$, not $b$. The product of roots for a cubic $x^3 + bx^2 + cx + d$ is $-d$, not $d$. The alternating sign pattern $(-1)^k$ is easy to lose track of, especially at higher degrees.
-
-**Using the wrong sign of c**
-
-The divisor has a plus sign, as in $(x + 3)$, and the number shown in it is substituted directly. The theorem is stated for $(x - c)$, so the evaluation happens at the wrong point.
-
-Wrong working: for $P(x) = x^3 - 4x + 2$ divided by $(x + 3)$,
-$$P(3) = 27 - 12 + 2 = 17$$
-
-Right working: $(x + 3) = (x - (-3))$, so $c = -3$ and
-$$P(-3) = -27 + 12 + 2 = -13$$
-The remainder is $-13$.
-
-Why it happens: the theorem is written with a minus sign in the divisor, so the sign of $c$ is the opposite of the sign that appears there. Reading the number straight off the divisor skips that step.
-
-How to check: $c$ is the value that makes the divisor zero. $x = -3$ gives $x + 3 = 0$; $x = 3$ does not. Synthetic division by $(x + 3)$ gives the bottom row $1, -3, 5, -13$, ending in the same remainder $-13$.
-
-**Expecting all roots to be real**
-
-The Fundamental Theorem of Algebra promises $n$ roots for a polynomial of degree $n$, and that is read as $n$ real roots, so $n$ crossings of the x-axis are expected.
-
-Wrong working: $x^3 - x^2 + x - 1$ has degree $3$, so its graph is expected to cross the x-axis three times. After the root $x = 1$ is found, two more real roots are searched for, and none exists.
-
-Right working: $P(1) = 1 - 1 + 1 - 1 = 0$, and dividing out $(x - 1)$ leaves $x^2 + 1$:
-$$x^3 - x^2 + x - 1 = (x - 1)(x^2 + 1)$$
-The factor $x^2 + 1$ has roots $\\pm i$. The three roots are $1$, $i$ and $-i$: one real, two complex.
-
-Why it happens: the roots met in early work are real numbers, and the theorem's count of roots in the complex numbers is easy to read as a count of x-intercepts.
-
-How to check: look for real roots in each factor. $x^2 + 1 = 0$ needs $x^2 = -1$, which no real number satisfies, and since $x^2 + 1 > 0$ for every $x$, the graph of $x^3 - x^2 + x - 1$ crosses the x-axis only at $x = 1$.`,
+With Vieta's formulas, sign errors are persistent. The sum of roots for $x^2 + bx + c$ is $-b$, not $b$. The product of roots for a cubic $x^3 + bx^2 + cx + d$ is $-d$, not $d$. The alternating sign pattern $(-1)^k$ is easy to lose track of, especially at higher degrees.`,
     before: ``,
-    after: ``,
+    after: `Both slips read a theorem too quickly. The Remainder Theorem evaluates at the value $c$ that makes the divisor zero, so dividing by $(x + 3)$ means $c = -3$. The Fundamental Theorem of Algebra counts complex roots, so degree $3$ guarantees three roots but not three real ones. Synthetic division confirms the first answer, and a look at the factor $x^2 + 1$ confirms the second.`,
     link: '',
   },
 
@@ -1069,6 +1061,10 @@ const schemas = {
       { x: 0.2, y: -3.2, text: 'actual roots: −1, 1, 2', pos: 'e', color: 'r' }],
     caption: 'Descartes allows 2 positive, 1 negative root: here 1, 2 and −1' };
 
+  const conceptIntroFigures = {
+    remTable: ciRemTable,
+  };
+
   const demoUnits = {
     candidates: demoUnitFrame({
       svg: renderFunctionPlotV4(fpCandidatesMiss),
@@ -1082,8 +1078,31 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj13 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-the-wrong-sign-of-c', name: `Using the wrong sign of c`, errorAt: 0,
+        what: `The divisor has a plus sign, as in $(x + 3)$, and the number shown in it is substituted directly. The theorem is stated for $(x - c)$, so the evaluation happens at the wrong point.`,
+        wrong: [`For $P(x) = x^3 - 4x + 2$ divided by $(x + 3)$,
+$$P(3) = 27 - 12 + 2 = 17$$`],
+        right: [`$(x + 3) = (x - (-3))$, so $c = -3$ and
+$$P(-3) = -27 + 12 + 2 = -13$$`, `The remainder is $-13$.`],
+        why: `The theorem is written with a minus sign in the divisor, so the sign of $c$ is the opposite of the sign that appears there. Reading the number straight off the divisor skips that step.`,
+        check: `$c$ is the value that makes the divisor zero. $x = -3$ gives $x + 3 = 0$; $x = 3$ does not. Synthetic division by $(x + 3)$ gives the bottom row $1, -3, 5, -13$, ending in the same remainder $-13$.` },
+      { id: 'expecting-all-roots-to-be-real', name: `Expecting all roots to be real`, errorAt: 0,
+        what: `The Fundamental Theorem of Algebra promises $n$ roots for a polynomial of degree $n$, and that is read as $n$ real roots, so $n$ crossings of the x-axis are expected.`,
+        wrong: [`$x^3 - x^2 + x - 1$ has degree $3$, so its graph is expected to cross the x-axis three times. After the root $x = 1$ is found, two more real roots are searched for, and none exists.`],
+        right: [`$P(1) = 1 - 1 + 1 - 1 = 0$, and dividing out $(x - 1)$ leaves $x^2 + 1$:
+$$x^3 - x^2 + x - 1 = (x - 1)(x^2 + 1)$$`, `The factor $x^2 + 1$ has roots $\\pm i$. The three roots are $1$, $i$ and $-i$: one real, two complex.`],
+        why: `The roots met in early work are real numbers, and the theorem's count of roots in the complex numbers is easy to read as a count of x-intercepts.`,
+        check: `Look for real roots in each factor. $x^2 + 1 = 0$ needs $x^2 = -1$, which no real number satisfies, and since $x^2 + 1 > 0$ for every $x$, the graph of $x^3 - x^2 + x - 1$ crosses the x-axis only at $x = 1$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     sectionsContent,
     introContent,
     obj10Table,
@@ -1093,6 +1112,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Polynomial Theorems: Remainder, Factor & Rational Root | Learn Math Class",
       description: "Master polynomial theorems: Remainder Theorem, Factor Theorem, Rational Root Theorem, Descartes' Rule of Signs, Fundamental Theorem of Algebra, Vieta's formulas, and root bounds.",
@@ -1104,9 +1124,81 @@ const schemas = {
 }
    }
 
-export default function RulesPage({seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RulesPage({ pitfallData,seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Dividing x³ − 4x + 2 by x − 3 by long division takes several steps. Is there a shortcut to the remainder?`,
+        content: [
+          `Compare the long-division remainders for three divisors with the values of the polynomial at $1$, $2$ and $3$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For each divisor x − c, the long-division remainder equals the value of the polynomial at c.`,
+        content: [
+          ciTable('remTable'),
+          `Three divisions, three evaluations, the same three numbers.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `The remainder on division by x − c is just P(c).`,
+        content: [
+          `This means the remainder can be found without performing any division at all.`,
+          `@academic[example:Example
+To find the remainder when $P(x) = x^3 - 4x + 2$ is divided by $(x - 3)$, simply compute $P(3) = 27 - 12 + 2 = 17$. The remainder is $17$.]@`,
+          `The theorem applies to any polynomial and any value of $c$.`,
+          `@academic[example:Example
+If $P(x) = 2x^4 - x^2 + 5$ and the divisor is $(x + 1)$, read $(x + 1)$ as $(x - (-1))$ and evaluate $P(-1) = 2(1) - 1 + 5 = 6$. The remainder is $6$, confirmed instantly without setting up [long division or synthetic division](!/algebra/polynomials/operations).]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [remainder theorem](!/algebra/definitions#remainder_theorem) states that dividing a polynomial $P(x)$ by $x - c$ leaves the remainder $P(c)$.`,
+        formula: [
+          `When a polynomial $P(x)$ is divided by a linear binomial $(x - c)$, the remainder is a constant — and that constant equals $P(c)$, the value of the polynomial evaluated at $x = c$.`,
+          `Formally:`,
+          `@academic[formula_callout:Remainder Theorem
+$$P(x) = (x - c) \\cdot Q(x) + P(c)$$
+/algebra/formulas#remainder_theorem]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+        ],
+        footer: `So dividing $x^3 - 4x + 2$ by $x - 3$ leaves the remainder $P(3) = 17$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It holds because the quotient term vanishes at x = c.`,
+        content: [
+          `In $P(x) = (x - c)Q(x) + r$, setting $x = c$ makes $(x - c)Q(x)$ equal to $0$, so $P(c) = r$. The full argument is in [why the remainder theorem works](!/algebra/polynomials/rules#2).`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `c is the number that makes the divisor zero, so watch its sign.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Using the wrong sign of c
+Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x + 3)$, $P(3) = 17$ is the remainder for $(x - 3)$. Here $c = -3$, so the remainder is $P(-3) = -13$.
+[Read more](!#pitfall-using-the-wrong-sign-of-c)]@`,
+          `In both examples the whole computation is a single evaluation, and the only choice to make is the value of $c$. The theorem is stated for a divisor written as $(x - c)$, so $c$ is the number that makes the divisor equal to zero.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers why the theorem works, the factor theorem, the rational root and integer root theorems, Descartes' rule of signs, bounds on roots, the fundamental theorem of algebra, Vieta's formulas, common mistakes and a summary toolkit.`,
+      },
+    ],
+  }
     
   const genericSections=[
      {
@@ -1148,7 +1240,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1272,6 +1364,15 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj10
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj13Table }}
           />,
+          <DiagramFrame
+            key={'obj13-mistakes'}
+            id="polynomial-theorem-pitfalls"
+            title="Common pitfalls with the polynomial theorems"
+            source="/algebra/polynomials/rules"
+            after={sectionsContent.obj13.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 

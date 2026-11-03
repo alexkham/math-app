@@ -1567,6 +1567,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -2250,6 +2252,24 @@ export async function getStaticProps(){
 // }
 
 
+
+// Concept introduction (section 1, "Even and Odd Functions") — template D,
+// comparison. Running instance: x², x³ and x² + x evaluated at 2 and −2. Old
+// obj1 text is kept in sectionsContent.obj1, unused; its passages, two formula
+// boxes and links, rule box, pitfall, obj1Table, the odd demo frame and its
+// line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciFlipTable = ciTableOpen(['f(x)', 'f(2)', 'f(−2)', 'what flipping the input did']) +
+  ciRow(['x²', '4', '4', 'nothing: same output']) +
+  ciRow(['x³', '8', '−8', 'negated the output'], { shade: true }) +
+  ciRow(['x² + x', '6', '2', 'neither'], { last: true, color: '#a4243b', cols: [3] }) +
+  '</tbody></table>'
 
 const sectionsContent = {
 
@@ -2954,6 +2974,10 @@ const faqQuestions = {
   decText: 'decreasing on (−∞, 0)', incText: 'increasing on (0, ∞)', caption: 'Moving right, the curve falls until x = 0, then rises',
 };
 
+  const conceptIntroFigures = {
+    flipTable: ciFlipTable,
+  };
+
   const demoUnits = {
     odd: demoUnitFrame({
       svg: functionSymmetryDiagrams.cubic,
@@ -3117,12 +3141,28 @@ const faqQuestions = {
       ] },
     ],
   };
+  // TheoremCard data (extreme-value-theorem-card); every fact is from the section text
+  const evtCard = {
+    header: { kicker: 'Absolute extrema', title: 'The Extreme Value Theorem', lede: 'Click a hypothesis to see what breaks without it.' },
+    theorem: {
+      hypotheses: [
+        { text: 'the interval is closed and bounded', job: 'The graph cannot run off without bound, and cannot approach a value it never reaches.',
+          counter: '$f(x) = 1/x$ on $(0, 1)$ approaches infinity as $x \\to 0^+$ and approaches $1$ as $x \\to 1^-$, but achieves neither. $f(x) = x$ on $(-\\infty, \\infty)$ has no maximum or minimum.' },
+        { text: '$f$ is continuous on the interval', job: 'The values are attained, not just approached.' },
+      ],
+      conclusion: '$f$ achieves both an absolute maximum and an absolute minimum',
+      meaning: 'The extrema occur either at local extrema within the interval or at the endpoints.',
+    },
+  };
+
 
    return {
       props:{
+      evtCard,
     localExtremaProfile,
     functionPropertiesOutline,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj1Table,
@@ -3144,7 +3184,9 @@ const faqQuestions = {
     }
    }
 
-export default function PropertiesPage({localExtremaProfile, functionPropertiesOutline, 
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function PropertiesPage({evtCard, localExtremaProfile, functionPropertiesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -3155,10 +3197,95 @@ export default function PropertiesPage({localExtremaProfile, functionPropertiesO
   obj13Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Replace the input x by −x. What happens to the output?`,
+        content: [
+          `Try it on three functions at $x = 2$ and $x = -2$.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `For x² the output stays the same, for x³ it changes sign, and for x² + x neither happens.`,
+        content: [
+          ciTable('flipTable'),
+          `The first two behave this way at every $x$, not only at $2$; the third does not follow either pattern.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Two outcomes are special: the output unchanged, or the output negated, for every x.`,
+        content: [
+          `To test algebraically: substitute $-x$ for $x$, simplify, and compare to $f(x)$ and $-f(x)$. If the result equals $f(x)$, the function is even. If it equals $-f(x)$, the function is odd. If neither, the function is neither even nor odd.`,
+          `Most functions fall into the third category. The function $f(x) = x^2 + x$ satisfies $f(-x) = x^2 - x$, which equals neither $f(x)$ nor $-f(x)$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A function is [even](!/functions/definitions#even_function) when $f(-x) = f(x)$ for every $x$ in its domain, and [odd](!/functions/definitions#odd_function) when $f(-x) = -f(x)$ for every such $x$.`,
+        formula: [
+          `A function is even if its output is unchanged under negation of the input, for every $x$ in its [domain](!/functions/domain):`,
+          `@academic[formula_callout:Even Function Test
+$$f(-x) = f(x) \\quad \\text{for all } x \\in \\text{Dom}(f)$$
+/functions/formulas#even_function_test]@`,
+          `@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@`,
+          `A function is odd if its output is negated when the input is negated:`,
+          `@academic[formula_callout:Odd Function Test
+$$f(-x) = -f(x) \\quad \\text{for all } x \\in \\text{Dom}(f)$$
+/functions/formulas#odd_function_test]@`,
+          `@academic[formulas_link:Browse all functions formulas
+/functions/formulas]@`,
+        ],
+        footer: `So $x^2$ is even, $x^3$ is odd, and $x^2 + x$ is neither.`,
+      },
+      {
+        id: 'kind',
+        lead: `Even and odd are symmetries of the graph.`,
+        content: [
+          `The [graph](!/functions/graphs) is symmetric about the $y$-axis — the left half mirrors the right.`,
+          `The function $f(x) = x^2$ is even: $f(-x) = (-x)^2 = x^2 = f(x)$. So are $f(x) = |x|$, $f(x) = x^4$, and $f(x) = \\cos(x)$.`,
+          `The graph is symmetric about the origin — rotating it $180°$ around the origin produces the same curve.`,
+          `The function $f(x) = x^3$ is odd: $f(-x) = (-x)^3 = -x^3 = -f(x)$. So are $f(x) = x$, $f(x) = x^5$, and $f(x) = \\sin(x)$.`,
+          `For polynomials the substitution can be read term by term, since $(-x)^n = x^n$ when $n$ is even and $(-x)^n = -x^n$ when $n$ is odd. Each term either keeps its sign or flips it, and the function is even or odd only when all of its terms do the same.`,
+          `The table below collects the three possible outcomes with the algebraic test, the graphical symmetry it implies, and a few examples for each.`,
+          <div
+            key={'obj1-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj1Table }}
+          />,
+          <div key={'unit-odd'} dangerouslySetInnerHTML={{ __html: demoUnits.odd }} />,
+          `Most functions are neither even nor odd; the two symmetries are special properties, not a dichotomy.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The domain must be symmetric, and odd powers alone do not make a function odd.`,
+        content: [
+          `@academic[rule_plain:For a function to be even or odd, its domain must be symmetric about the origin — if $x$ is in the domain, so is $-x$.]@`,
+          `@academic[pitfall,aside:true,width:35%:Judging by the exponents alone
+Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -x^3 + 1$, while $-f(x) = -x^3 - 1$. The constant does not change sign, so $f$ is neither even nor odd.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers symmetry, one-to-one, onto and bijective functions, monotonicity, boundedness, extrema, continuity and discontinuities, asymptotes, end behavior, periodicity, zeros, average rate of change, concavity, common pitfalls and an overview.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -3174,14 +3301,7 @@ export default function PropertiesPage({localExtremaProfile, functionPropertiesO
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
-                  <div key={'unit-odd'} dangerouslySetInnerHTML={{ __html: demoUnits.odd }} />,
-          `Most functions are neither even nor odd; the two symmetries are special properties, not a dichotomy.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -3289,6 +3409,16 @@ export default function PropertiesPage({localExtremaProfile, functionPropertiesO
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+          <DiagramFrame
+            key={'obj10-theorem'}
+            id="extreme-value-theorem-card"
+            title="The Extreme Value Theorem"
+            source="/functions/properties"
+            before={`The theorem has two hypotheses. The card shows what each one rules out.`}
+            after={`With both hypotheses in place, the candidates are short: the turning points inside the interval and its two ends.`}
+          >
+            <TheoremCard data={evtCard} variant="card" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

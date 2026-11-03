@@ -1130,6 +1130,7 @@ import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -2107,10 +2108,26 @@ const schemas = {
       href: '/linear-algebra/visual-tools/span-membership',
       linkText: 'span membership tester',
     }),
+  };  // TheoremCard data (wronskian-test-converse); every fact is from the section text
+  const wronskianConverse = {
+    header: { kicker: 'Linear independence', title: 'The Wronskian Test', lede: 'Nonzero at one point proves independence; zero everywhere proves nothing by itself.' },
+    theorem: {
+      says: 'If $W(f_1, \\dots, f_n)(x_0) \\neq 0$ at any single point $x_0$, the functions are linearly independent.',
+      not: 'If the Wronskian is $0$ at a point, or even everywhere, the functions are dependent.',
+      counter: {
+        label: 'Testing the Wronskian at one point',
+        wrong: '$x$ and $x^2$ are dependent, because $W = x \\cdot 2x - x^2 \\cdot 1 = x^2$ is $0$ at $x = 0$.',
+        right: 'At $x = 1$, $W = 1 \\neq 0$, so the functions are independent. One point with $W \\neq 0$ is enough; one zero is not.',
+      },
+      scope: '**Converse with a condition:** a Wronskian that vanishes identically implies dependence only when the functions solve one linear ODE with continuous coefficients.',
+    },
   };
+
+
 
 return {
   props:{
+      wronskianConverse,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2133,7 +2150,9 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function LinearIndependencePage({seoData, sectionsContent, introContent, independenceProperties, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function LinearIndependencePage({wronskianConverse, seoData, sectionsContent, introContent, independenceProperties, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2301,7 +2320,17 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
         content:[
-          sectionsContent.obj7.content,
+          sectionsContent.obj7.content,          <DiagramFrame
+            key={'obj7-theorem'}
+            id="wronskian-test-converse"
+            title="The Wronskian test: what it does not say"
+            source="/linear-algebra/vector-spaces/linear-independence"
+            before={`The test runs one way. The card separates the statement from the reading that fails.`}
+            after={`A zero Wronskian proves dependence only for solutions of one linear differential equation with continuous coefficients.`}
+          >
+            <TheoremCard data={wronskianConverse} variant="converse" theme={theoremTheme} />
+          </DiagramFrame>,
+
         ]
     },
     {

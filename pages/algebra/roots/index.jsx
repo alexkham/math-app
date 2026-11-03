@@ -18,6 +18,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -347,7 +348,7 @@ $$\\sqrt{25} = 5, \\quad \\text{not } -5, \\quad \\text{and not } \\pm 5$$]@
 
 @academic[pitfall,aside:true,width:35%:Simplifying the root of a square to x
 Writing $\\sqrt{x^2} = x$ fails for negative $x$: at $x = -3$ it gives $-3$, but $\\sqrt{(-3)^2} = \\sqrt{9} = 3$. The principal root is non-negative, so $\\sqrt{x^2} = |x|$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-simplifying-the-root-of-a-square-to-x)]@
 
 This convention exists so that $\\sqrt{x}$ is a function — one input, one output. Without it, $\\sqrt{25}$ would have two values, and expressions involving radicals would become ambiguous.
 
@@ -461,7 +462,7 @@ These rules work when the indices match and when the radicands satisfy certain c
 
 @academic[pitfall,aside:true,width:35%:Splitting a root over a sum
 Taking $\\sqrt{9 + 16}$ term by term gives $\\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$. The rules cover products and quotients only; the radicand is added first: $\\sqrt{9 + 16} = \\sqrt{25} = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-a-root-over-a-sum)]@
 
 All three rules act on a radicand built by multiplication, by division, or from another radical. Radicands built by addition or subtraction, such as $\\sqrt{9 + 16}$ or $\\sqrt{x^2 + 9}$, are just as common: the Pythagorean theorem and the distance formula both produce them.
 
@@ -515,7 +516,7 @@ $$x = 22$$]@
 
 @academic[pitfall,aside:true,width:35%:Squaring before isolating the radical
 Squaring $\\sqrt{x} + 2 = 4$ term by term gives $x + 4 = 16$, so $x = 12$, but $\\sqrt{12} + 2 \\approx 5.46$. Isolating first, $\\sqrt{x} = 2$, gives $x = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-before-isolating-the-radical)]@
 
 This process can introduce extraneous solutions — values that satisfy the transformed equation but not the original. Checking solutions is essential, especially with even-index radicals.
 
@@ -610,54 +611,9 @@ Mastery of roots and powers together provides the foundation for exponential fun
 
   obj12: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come up again and again when working with roots. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Simplifying the root of a square to x**
-
-A square root and a square are cancelled against each other, as if $\\sqrt{x^2}$ were always $x$. That is true only when $x \\geq 0$.
-
-Wrong working, for $x = -3$:
-$$\\sqrt{(-3)^2} = -3$$
-
-Right working: square first, then take the principal root.
-$$\\sqrt{(-3)^2} = \\sqrt{9} = 3 = |-3|$$
-In general, $\\sqrt{x^2} = |x|$.
-
-Why it happens: squaring and taking a square root undo each other, and in the other order the cancellation does work: $(\\sqrt{x})^2 = x$ for every $x \\geq 0$. In the order $\\sqrt{x^2}$, the radical returns only the non-negative root, so the sign of $x$ is lost.
-
-How to check: substitute a negative value. A square root is never negative, so a simplification that gives $-3$ for $x = -3$ cannot be right.
-
-**Splitting a root over a sum**
-
-The product rule is carried over to a sum under the radical, and the root is taken term by term.
-
-Wrong working:
-$$\\sqrt{9 + 16} = \\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$$
-
-Right working: evaluate the radicand first.
-$$\\sqrt{9 + 16} = \\sqrt{25} = 5$$
-An expression such as $\\sqrt{x^2 + 9}$ stays as it is; it does not split into $x + 3$.
-
-Why it happens: the product and quotient rules let a radical split, and the same move looks natural for addition. No rule allows it: roots split over multiplication and division only.
-
-How to check: square the answer. $7^2 = 49$, not $25$, while $5^2 = 25$.
-
-**Squaring before isolating the radical**
-
-Both sides are squared while another term still stands beside the radical, and each term is squared on its own.
-
-Wrong working:
-$$\\sqrt{x} + 2 = 4 \\implies x + 4 = 16 \\implies x = 12$$
-
-Right working: isolate the radical first, then square.
-$$\\sqrt{x} + 2 = 4 \\implies \\sqrt{x} = 2 \\implies x = 4$$
-Check: $\\sqrt{4} + 2 = 2 + 2 = 4$.
-
-Why it happens: squaring is meant to remove the radical, and squaring term by term seems to do that. But the square of a sum is not the sum of the squares: $(\\sqrt{x} + 2)^2 = x + 4\\sqrt{x} + 4$, so with the radical not isolated, it does not disappear.
-
-How to check: substitute the result into the original equation. $x = 12$ gives $\\sqrt{12} + 2 \\approx 3.46 + 2 = 5.46$, not $4$.`,
+    content: `Three mistakes come up again and again when working with roots. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Two of the slips simplify a radical by a rule that does not exist: $\\sqrt{x^2}$ is $|x|$, not $x$, and a root does not split over a sum. The third squares before the radical stands alone, so the square reaches the other terms too. A sign check catches the first, since a square root is never negative; squaring the answer catches the second; and substituting into the original equation catches the third.`,
     link: '',
   },
 
@@ -848,8 +804,38 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 3, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'simplifying-the-root-of-a-square-to-x', name: `Simplifying the root of a square to x`, errorAt: 1,
+        what: `A square root and a square are cancelled against each other, as if $\\sqrt{x^2}$ were always $x$. That is true only when $x \\geq 0$.`,
+        wrong: [`For $x = -3$:
+$$\\sqrt{(-3)^2}$$`, `$$= -3$$`],
+        right: [`For $x = -3$:
+$$\\sqrt{(-3)^2}$$`, `Square first, then take the principal root.
+$$= \\sqrt{9} = 3 = |-3|$$`, `In general, $\\sqrt{x^2} = |x|$.`],
+        why: `Squaring and taking a square root undo each other, and in the other order the cancellation does work: $(\\sqrt{x})^2 = x$ for every $x \\geq 0$. In the order $\\sqrt{x^2}$, the radical returns only the non-negative root, so the sign of $x$ is lost.`,
+        check: `Substitute a negative value. A square root is never negative, so a simplification that gives $-3$ for $x = -3$ cannot be right.` },
+      { id: 'splitting-a-root-over-a-sum', name: `Splitting a root over a sum`, errorAt: 1,
+        what: `The product rule is carried over to a sum under the radical, and the root is taken term by term.`,
+        wrong: [`$$\\sqrt{9 + 16}$$`, `$$= \\sqrt{9} + \\sqrt{16} = 3 + 4 = 7$$`],
+        right: [`$$\\sqrt{9 + 16}$$`, `Evaluate the radicand first.
+$$= \\sqrt{25} = 5$$`, `An expression such as $\\sqrt{x^2 + 9}$ stays as it is; it does not split into $x + 3$.`],
+        why: `The product and quotient rules let a radical split, and the same move looks natural for addition. No rule allows it: roots split over multiplication and division only.`,
+        check: `Square the answer. $7^2 = 49$, not $25$, while $5^2 = 25$.` },
+      { id: 'squaring-before-isolating-the-radical', name: `Squaring before isolating the radical`, errorAt: 1,
+        what: `Both sides are squared while another term still stands beside the radical, and each term is squared on its own.`,
+        wrong: [`$$\\sqrt{x} + 2 = 4$$`, `$$\\implies x + 4 = 16$$`, `$$\\implies x = 12$$`],
+        right: [`$$\\sqrt{x} + 2 = 4$$`, `Isolate the radical first, then square.`, `$$\\implies \\sqrt{x} = 2$$`, `$$\\implies x = 4$$`, `Check: $\\sqrt{4} + 2 = 2 + 2 = 4$.`],
+        why: `Squaring is meant to remove the radical, and squaring term by term seems to do that. But the square of a sum is not the sum of the squares: $(\\sqrt{x} + 2)^2 = x + 4\\sqrt{x} + 4$, so with the radical not isolated, it does not disappear.`,
+        check: `Substitute the result into the original equation. $x = 12$ gives $\\sqrt{12} + 2 \\approx 3.46 + 2 = 5.46$, not $4$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     faqQuestions,
     rootsSubtreeOutline,
     radicalFunctionCases,
@@ -877,7 +863,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RootsAndRadicalsPage({faqQuestions, rootsSubtreeOutline, radicalFunctionCases,
+export default function RootsAndRadicalsPage({ pitfallData,faqQuestions, rootsSubtreeOutline, radicalFunctionCases,
   seoData,
   sectionsContent,
   introContent,
@@ -1084,6 +1070,15 @@ $$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@`,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="root-pitfalls"
+            title="Common pitfalls with roots"
+            source="/algebra/roots"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

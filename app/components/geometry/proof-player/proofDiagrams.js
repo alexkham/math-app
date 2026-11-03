@@ -25,12 +25,14 @@ import ProofCanvas from './player/ProofCanvas';
 
 const FRAME_STYLE = { background: '#fafafa', border: '1px solid #e5e7eb', borderRadius: '8px' };
 
-export function proofStill(proofKey, step, { width = 420, height = 315, labels = true, measures = false } = {}) {
+// opts.model: a different model (e.g. the proof's model with a vertex moved),
+// for a still of a dragged figure.
+export function proofStill(proofKey, step, { width = 420, height = 315, labels = true, measures = false, model = null } = {}) {
   const proof = PROOFS[proofKey];
   const scenes = buildScenes(proof);
   return renderToStaticMarkup(
     createElement(ProofCanvas, {
-      model: proof.model,
+      model: model || proof.model,
       scenes,
       step: Math.min(step, scenes.length - 1),
       labelCenter: proof.labelCenter,

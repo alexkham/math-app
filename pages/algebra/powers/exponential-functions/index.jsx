@@ -15,6 +15,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -366,7 +368,7 @@ The larger the base (when $a > 1$), the steeper the growth. The function $10^x$ 
 
 @academic[pitfall,aside:true,width:35%:Expecting a larger base to decay faster
 Carrying "larger base, steeper curve" over to decay makes $0.9^x$ look like the faster fall. But $0.9^3 = 0.729$ while $0.5^3 = 0.125$: the base nearer $0$ decays faster.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-expecting-a-larger-base-to-decay-faster)]@
 
 For a decay curve, every step from $x$ to $x + 1$ multiplies the output by the base, a number below $1$. Starting from $(0, 1)$, three steps to the right leave the curve at height $a^3$, so two decay curves are compared by how much of the output each one keeps per step.`,
   before: ``,
@@ -385,7 +387,7 @@ The range is $(0, \\infty)$. The output is always positive — never zero, never
 
 @academic[pitfall,aside:true,width:35%:Making the output negative for a negative exponent
 Reading $2^{-3}$ as $-8$, or as $-6$, puts points of the curve below the axis. A negative exponent takes a reciprocal, not a sign: $2^{-3} = \\frac{1}{8}$, small but positive.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-making-the-output-negative-for-a-negative-exponent)]@
 
 The horizontal asymptote is the line $y = 0$. For $a > 1$, the curve approaches zero as $x \\to -\\infty$. For $0 < a < 1$, it approaches zero as $x \\to +\\infty$. In neither case does the function touch the axis.
 
@@ -403,7 +405,7 @@ obj4: {
 
 @academic[pitfall,aside:true,width:35%:Swapping the base and the exponent
 Evaluating $2^x$ as if it were $x^2$ gives $25$ at $x = 5$ and $1$ at $x = -1$. With the variable in the exponent, $2^5 = 32$ and $2^{-1} = \\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-base-and-the-exponent)]@
 
 For small positive values of $x$, the polynomial can dominate. At $x = 2$, $x^2 = 4$ while $2^x = 4$ — they are equal. At $x = 3$, $x^2 = 9$ while $2^x = 8$ — the polynomial is still ahead.
 
@@ -461,51 +463,9 @@ obj6: {
     },
     obj16: {
       title: `Common Pitfalls`,
-      content: `Three mistakes come up again and again when working with $f(x) = a^x$. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Expecting a larger base to decay faster**
-
-For growth curves, a larger base gives a steeper curve. The same rule is then carried over to bases between $0$ and $1$, and $0.9^x$ is taken to fall faster than $0.5^x$ because $0.9$ is the larger number.
-
-Wrong working: $0.9 > 0.5$, so $0.9^x$ is judged the faster decay.
-
-Right working: compare the two curves after the same number of steps.
-$$0.9^3 = 0.729 \\qquad 0.5^3 = 0.125$$
-After three steps $0.9^x$ still keeps about $73\\%$ of its starting value, while $0.5^x$ keeps only $12.5\\%$. The base nearer $0$ decays faster; the base nearer $1$ gives the flatter curve.
-
-Why it happens: "larger base, steeper curve" is first learned on growth curves, where it is true, and it is applied without checking which side of $1$ the base lies on.
-
-How to check: write each decay base as the reciprocal of a growth base. $0.5^x = 2^{-x}$ is the mirror image of $2^x$, while $0.9^x = \\left(\\frac{10}{9}\\right)^{-x}$ mirrors the much flatter $\\left(\\frac{10}{9}\\right)^x$. The steeper growth curve has the steeper mirror image.
-
-**Making the output negative for a negative exponent**
-
-A negative input is taken to give a negative output, as if the minus sign in the exponent passed on to the result. Some learners also multiply base and exponent, reading $2^{-3}$ as $2 \\cdot (-3)$.
-
-Wrong working:
-$$2^{-3} = -(2^3) = -8 \\qquad \\text{or} \\qquad 2^{-3} = 2 \\cdot (-3) = -6$$
-
-Right working: a negative exponent means a reciprocal.
-$$2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$$
-For negative $x$ the outputs of $2^x$ are fractions between $0$ and $1$, never negative numbers.
-
-Why it happens: elsewhere in arithmetic a minus sign makes a quantity negative, and the sign of the exponent is read the same way.
-
-How to check: the range of every exponential function is $(0, \\infty)$, so a negative or zero output always signals an error. Stepping left from $x = 0$ halves $2^x$ each time: $1, \\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}$ at $x = 0, -1, -2, -3$, getting closer to $0$ without crossing it.
-
-**Swapping the base and the exponent**
-
-The expressions $2^x$ and $x^2$ contain the same symbols, and the exponential is evaluated as if the variable were the base.
-
-Wrong working: at $x = 5$, $2^x$ is computed as $5^2 = 25$; at $x = -1$, as $(-1)^2 = 1$.
-
-Right working: the base stays $2$ and $x$ goes in the exponent.
-$$2^5 = 32 \\qquad 2^{-1} = \\frac{1}{2}$$
-
-Why it happens: in polynomials the letter almost always sits in the base, so the eye puts it there by habit.
-
-How to check: substitute $x = 0$. The exponential gives $2^0 = 1$, while the power function gives $0^2 = 0$. Every exponential graph passes through $(0, 1)$, so an output of $0$ at $x = 0$ means the roles were swapped.`,
+      content: `Three mistakes come up again and again when working with $f(x) = a^x$. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before: ``,
-      after: ``,
+      after: `All three slips lose sight of the roles in $a^x$: the base $a$ is fixed and $x$ is the exponent. A base nearer $0$ shrinks faster, a negative exponent gives a reciprocal rather than a negative number, and swapping base and exponent turns the exponential into a power function. Two facts catch the last two at once: every exponential takes only positive values, and every graph of $a^x$ passes through $(0, 1)$. The first is caught by computing both functions after the same number of steps.`,
       link: '',
     },
     obj8:{
@@ -751,8 +711,36 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'expecting-a-larger-base-to-decay-faster', name: `Expecting a larger base to decay faster`, errorAt: 0,
+        what: `For growth curves, a larger base gives a steeper curve. The same rule is then carried over to bases between $0$ and $1$, and $0.9^x$ is taken to fall faster than $0.5^x$ because $0.9$ is the larger number.`,
+        wrong: [`$0.9 > 0.5$, so $0.9^x$ is judged the faster decay.`],
+        right: [`Compare the two curves after the same number of steps.`, `$$0.9^3 = 0.729 \\qquad 0.5^3 = 0.125$$`, `After three steps $0.9^x$ still keeps about $73\\%$ of its starting value, while $0.5^x$ keeps only $12.5\\%$. The base nearer $0$ decays faster; the base nearer $1$ gives the flatter curve.`],
+        why: `"larger base, steeper curve" is first learned on growth curves, where it is true, and it is applied without checking which side of $1$ the base lies on.`,
+        check: `Write each decay base as the reciprocal of a growth base. $0.5^x = 2^{-x}$ is the mirror image of $2^x$, while $0.9^x = \\left(\\frac{10}{9}\\right)^{-x}$ mirrors the much flatter $\\left(\\frac{10}{9}\\right)^x$. The steeper growth curve has the steeper mirror image.` },
+      { id: 'making-the-output-negative-for-a-negative-exponent', name: `Making the output negative for a negative exponent`, errorAt: 0,
+        what: `A negative input is taken to give a negative output, as if the minus sign in the exponent passed on to the result. Some learners also multiply base and exponent, reading $2^{-3}$ as $2 \\cdot (-3)$.`,
+        wrong: [`$$2^{-3} = -(2^3) = -8$$
+or
+$$2^{-3} = 2 \\cdot (-3) = -6$$`],
+        right: [`A negative exponent means a reciprocal.`, `$$2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$$`, `For negative $x$ the outputs of $2^x$ are fractions between $0$ and $1$, never negative numbers.`],
+        why: `Elsewhere in arithmetic a minus sign makes a quantity negative, and the sign of the exponent is read the same way.`,
+        check: `The range of every exponential function is $(0, \\infty)$, so a negative or zero output always signals an error. Stepping left from $x = 0$ halves $2^x$ each time: $1, \\frac{1}{2}, \\frac{1}{4}, \\frac{1}{8}$ at $x = 0, -1, -2, -3$, getting closer to $0$ without crossing it.` },
+      { id: 'swapping-the-base-and-the-exponent', name: `Swapping the base and the exponent`, errorAt: 0,
+        what: `The expressions $2^x$ and $x^2$ contain the same symbols, and the exponential is evaluated as if the variable were the base.`,
+        wrong: [`At $x = 5$, $2^x$ is computed as $5^2 = 25$; at $x = -1$, as $(-1)^2 = 1$.`],
+        right: [`The base stays $2$ and $x$ goes in the exponent.`, `$$2^5 = 32 \\qquad 2^{-1} = \\frac{1}{2}$$`],
+        why: `In polynomials the letter almost always sits in the base, so the eye puts it there by habit.`,
+        check: `Substitute $x = 0$. The exponential gives $2^0 = 1$, while the power function gives $0^2 = 0$. Every exponential graph passes through $(0, 1)$, so an output of $0$ at $x = 0$ means the roles were swapped.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     sectionsContent,
     introContent,
     obj2Table,
@@ -775,7 +763,7 @@ return {
    }
 
 // export default function ExponentialFunctionsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialFunctionsPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ExponentialFunctionsPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj3Table, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -972,6 +960,15 @@ export default function ExponentialFunctionsPage({seoData, sectionsContent, intr
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="exponential-function-pitfalls"
+            title="Common pitfalls with exponential functions"
+            source="/algebra/powers/exponential-functions"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

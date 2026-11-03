@@ -13,6 +13,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
 
 
 export async function getStaticProps(){
@@ -610,6 +612,11 @@ Calling $P \\land Q$ a contradiction because it is F at $P = T$, $Q = F$ ignores
                 parentHref={contradictionContent.notation.parentHref}
                 parentLabel={contradictionContent.notation.parentLabel}
                 theme={'navy'}
+              />,
+              <NotationCheatSheet
+                key={'notation-sheet'}
+                sheet={logicNotationSheet}
+                current={'/logic/propositional-logic/semantics/contradiction'}
               />,
             ]
           },

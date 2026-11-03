@@ -700,6 +700,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -907,7 +909,7 @@ $$\\frac{\\frac{1}{2}}{3} \\quad \\frac{4}{\\frac{2}{5}} \\quad \\frac{\\frac{3}
 
 @academic[pitfall,aside:true,width:35%:Misreading the main bar
 Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\frac{2}{3} = \\frac{3}{2}$. The main bar sits under $\\frac{1}{2}$, so the value is $\\frac{1}{2} \\div 3 = \\frac{1}{6}$.
-[Read more](!#7)]@
+[Read more](!#pitfall-misreading-the-main-bar)]@
 
 The first has a fraction only in the numerator. The second has a fraction only in the denominator. The third has fractions in both positions.
 
@@ -973,7 +975,7 @@ Alternatively, multiply by the LCD of 2, 3, and 4, which is 12. Both approaches 
 
 @academic[pitfall,aside:true,width:35%:Flipping a sum term by term
 Turning $\\frac{1}{\\frac{1}{2} + \\frac{1}{3}}$ into $2 + 3 = 5$ flips each term instead of the whole denominator. Combined first, the denominator is $\\frac{5}{6}$, and the value is $\\frac{6}{5}$.
-[Read more](!#7)]@
+[Read more](!#pitfall-flipping-a-sum-term-by-term)]@
 
 The order of the steps matters most when the sum sits in the denominator. The division step turns the whole denominator over, so that denominator has to be a single fraction before it is flipped. The LCD method avoids the question, clearing every inner denominator in one multiplication.
 
@@ -998,7 +1000,7 @@ The 5s cancel during multiplication, leaving $\\frac{4}{2} = 2$ directly.
 
 @academic[pitfall,aside:true,width:35%:Dividing the parts separately
 Dividing whole by whole, $2 \\div 1 = 2$, and fraction by fraction, $\\frac{1}{2} \\div \\frac{1}{4} = 2$, then adding gives $4$. Converted first, $\\frac{5}{2} \\div \\frac{5}{4} = 2$.
-[Read more](!#7)]@
+[Read more](!#pitfall-dividing-the-parts-separately)]@
 
 Converting first turns each mixed number into a single fraction, so the main bar divides one number by another. A mixed number is a sum, $2\\frac{1}{2} = 2 + \\frac{1}{2}$, and the conversion packs that sum into one fraction before any division happens, just as the sums in the previous section were combined first.`,
     before: ``,
@@ -1036,45 +1038,9 @@ Applying the LCD incorrectly causes problems. The LCD must multiply the entire n
 
 Leaving answers unsimplified wastes effort. After clearing the complex structure, check whether the result reduces to [simplest form](!/arithmetic/fractions/equivalent).
 
-Mixing up which fraction to flip leads to inverted answers. In $\\frac{a}{b} \\div \\frac{c}{d}$, only the divisor $\\frac{c}{d}$ gets flipped, never the dividend $\\frac{a}{b}$.
-
-**Misreading the main bar**
-
-In a complex fraction the longest bar is the main bar, the division that is done last. Reading a shorter bar as the main one regroups the expression and changes its value.
-
-Wrong working: $\\frac{\\frac{1}{2}}{3}$ is read as $1$ over $\\frac{2}{3}$, so $1 \\div \\frac{2}{3} = 1 \\times \\frac{3}{2} = \\frac{3}{2}$.
-
-Right working: the main bar sits under $\\frac{1}{2}$, so the expression is $\\frac{1}{2} \\div 3 = \\frac{1}{2} \\times \\frac{1}{3} = \\frac{1}{6}$.
-
-Why it happens: handwritten bars often come out about the same length, and the numbers stacked in a column look the same under either grouping.
-
-How to check: rewrite with $\\div$ and brackets, $(1 \\div 2) \\div 3$ against $1 \\div (2 \\div 3)$, which makes the grouping visible. An estimate helps too: half of something shared among $3$ is less than $\\frac{1}{2}$, so an answer above $1$ means the bars were read the other way.
-
-**Flipping a sum term by term**
-
-The denominator of a complex fraction is a sum of fractions, and each term of the sum is turned over separately, as if the reciprocal of a sum were the sum of the reciprocals.
-
-Wrong working: $\\frac{1}{\\frac{1}{2} + \\frac{1}{3}} = 2 + 3 = 5$.
-
-Right working: combine first, $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$, so $\\frac{1}{\\frac{5}{6}} = 1 \\times \\frac{6}{5} = \\frac{6}{5}$. The LCD method agrees: multiplying top and bottom by $6$ gives $\\frac{6}{3 + 2} = \\frac{6}{5}$.
-
-Why it happens: a single fraction is inverted by flipping it, and the same move is applied to each piece of a sum. It works for a product, since $\\frac{1}{\\frac{1}{2} \\times \\frac{1}{3}} = 2 \\times 3 = 6$, but not for a sum.
-
-How to check: estimate the size. The denominator $\\frac{1}{2} + \\frac{1}{3}$ is more than $\\frac{1}{2}$ and less than $1$, so the value must lie between $1$ and $2$, and $5$ is far too large.
-
-**Dividing the parts separately**
-
-A complex fraction with mixed numbers is worked part by part: whole over whole and fraction over fraction, and the two results are put back together.
-
-Wrong working: for $\\frac{2\\frac{1}{2}}{1\\frac{1}{4}}$, $\\frac{2}{1} = 2$ and $\\frac{\\frac{1}{2}}{\\frac{1}{4}} = \\frac{1}{2} \\times \\frac{4}{1} = 2$, so the answer is $2 + 2 = 4$.
-
-Right working: convert first, $2\\frac{1}{2} = \\frac{5}{2}$ and $1\\frac{1}{4} = \\frac{5}{4}$, so the value is $\\frac{5}{2} \\times \\frac{4}{5} = 2$.
-
-Why it happens: mixed numbers can be added part by part, whole with whole and fraction with fraction, and that habit is carried over to division, where it does not hold.
-
-How to check: multiply back. The answer times the denominator must give the numerator: $1\\frac{1}{4} \\times 2 = 2\\frac{1}{2}$, while $1\\frac{1}{4} \\times 4 = 5$.`,
+Mixing up which fraction to flip leads to inverted answers. In $\\frac{a}{b} \\div \\frac{c}{d}$, only the divisor $\\frac{c}{d}$ gets flipped, never the dividend $\\frac{a}{b}$.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses track of what the main fraction bar divides. The longest bar is the main division, a sum in the denominator is combined before it is flipped, and mixed numbers are converted to improper fractions before they are divided. Estimating the size of the answer, or multiplying it back by the denominator, catches each slip.`,
     link: '',
   },
     obj8:{
@@ -1290,8 +1256,34 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 7, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj7 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'misreading-the-main-bar', name: `Misreading the main bar`, errorAt: 0,
+        what: `In a complex fraction the longest bar is the main bar, the division that is done last. Reading a shorter bar as the main one regroups the expression and changes its value.`,
+        wrong: [`$\\frac{\\frac{1}{2}}{3}$ is read as $1$ over $\\frac{2}{3}$, so $1 \\div \\frac{2}{3} = 1 \\times \\frac{3}{2} = \\frac{3}{2}$.`],
+        right: [`The main bar sits under $\\frac{1}{2}$, so the expression is $\\frac{1}{2} \\div 3 = \\frac{1}{2} \\times \\frac{1}{3} = \\frac{1}{6}$.`],
+        why: `Handwritten bars often come out about the same length, and the numbers stacked in a column look the same under either grouping.`,
+        check: `Rewrite with $\\div$ and brackets, $(1 \\div 2) \\div 3$ against $1 \\div (2 \\div 3)$, which makes the grouping visible. An estimate helps too: half of something shared among $3$ is less than $\\frac{1}{2}$, so an answer above $1$ means the bars were read the other way.` },
+      { id: 'flipping-a-sum-term-by-term', name: `Flipping a sum term by term`, errorAt: 0,
+        what: `The denominator of a complex fraction is a sum of fractions, and each term of the sum is turned over separately, as if the reciprocal of a sum were the sum of the reciprocals.`,
+        wrong: [`$\\frac{1}{\\frac{1}{2} + \\frac{1}{3}} = 2 + 3 = 5$.`],
+        right: [`Combine first, $\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$, so $\\frac{1}{\\frac{5}{6}} = 1 \\times \\frac{6}{5} = \\frac{6}{5}$. The LCD method agrees: multiplying top and bottom by $6$ gives $\\frac{6}{3 + 2} = \\frac{6}{5}$.`],
+        why: `A single fraction is inverted by flipping it, and the same move is applied to each piece of a sum. It works for a product, since $\\frac{1}{\\frac{1}{2} \\times \\frac{1}{3}} = 2 \\times 3 = 6$, but not for a sum.`,
+        check: `Estimate the size. The denominator $\\frac{1}{2} + \\frac{1}{3}$ is more than $\\frac{1}{2}$ and less than $1$, so the value must lie between $1$ and $2$, and $5$ is far too large.` },
+      { id: 'dividing-the-parts-separately', name: `Dividing the parts separately`, errorAt: 0,
+        what: `A complex fraction with mixed numbers is worked part by part: whole over whole and fraction over fraction, and the two results are put back together.`,
+        wrong: [`For $\\frac{2\\frac{1}{2}}{1\\frac{1}{4}}$, $\\frac{2}{1} = 2$ and $\\frac{\\frac{1}{2}}{\\frac{1}{4}} = \\frac{1}{2} \\times \\frac{4}{1} = 2$, so the answer is $2 + 2 = 4$.`],
+        right: [`Convert first, $2\\frac{1}{2} = \\frac{5}{2}$ and $1\\frac{1}{4} = \\frac{5}{4}$, so the value is $\\frac{5}{2} \\times \\frac{4}{5} = 2$.`],
+        why: `Mixed numbers can be added part by part, whole with whole and fraction with fraction, and that habit is carried over to division, where it does not hold.`,
+        check: `Multiply back. The answer times the denominator must give the numerator: $1\\frac{1}{4} \\times 2 = 2\\frac{1}{2}$, while $1\\frac{1}{4} \\times 4 = 5$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1312,7 +1304,7 @@ return {
    }
 
 
-export default function ComplexFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ComplexFractionsPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1370,7 +1362,7 @@ $$\\frac{\\frac{1}{2}}{3} \\quad \\frac{4}{\\frac{2}{5}} \\quad \\frac{\\frac{3}
         content: [
           `@academic[pitfall,aside:true,width:35%:Misreading the main bar
 Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\frac{2}{3} = \\frac{3}{2}$. The main bar sits under $\\frac{1}{2}$, so the value is $\\frac{1}{2} \\div 3 = \\frac{1}{6}$.
-[Read more](!#7)]@`,
+[Read more](!#pitfall-misreading-the-main-bar)]@`,
           `Turning a complex fraction into an ordinary one is the subject of the next section, [method 1: division](!/arithmetic/fractions/complex#2).`,
         ],
       },
@@ -1449,6 +1441,15 @@ Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\fr
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-mistakes'}
+            id="complex-fraction-pitfalls"
+            title="Common pitfalls with complex fractions"
+            source="/arithmetic/fractions/complex"
+            after={sectionsContent.obj7.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

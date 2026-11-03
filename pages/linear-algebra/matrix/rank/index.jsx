@@ -2006,6 +2006,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -3058,10 +3059,27 @@ const schemas = {
         example: 'a $5 \\times 3$ matrix with rank $2$ has one redundant column, in the span of the other two',
       },
     ],
+  };  // TheoremCard data (rank-nullity-apply); every fact is from the section text
+  const rankNullityApply = {
+    header: { kicker: 'Rank', title: 'The Rank–Nullity Theorem', lede: 'Pivot columns and free columns share the $n$ columns of $A$.' },
+    theorem: {
+      statement: 'For an $m \\times n$ matrix $A$: $\\text{rank}(A) + \\text{nullity}(A) = n$.',
+      steps: [
+        { label: 'Count the columns', text: 'A $3 \\times 5$ matrix: $n = 5$ unknowns in $A\\mathbf{x} = \\mathbf{0}$.' },
+        { label: 'Rank', text: 'Rank $2$: two pivot columns, a column space that is a plane in $\\mathbb{R}^3$.' },
+        { label: 'Nullity', hit: true, text: '$5 - 2 = 3$: three free columns, a three-dimensional null space in $\\mathbb{R}^5$.' },
+        { label: 'Square case', text: 'For $n \\times n$: rank $n$ gives nullity $0$ and $A$ invertible; rank below $n$ gives a nontrivial null space, determinant $0$, $A$ singular.' },
+      ],
+      misuse: { label: 'Subtracting the rank from the rows',
+        text: 'Using the number of rows gives a $2 \\times 4$ matrix of rank $2$ a nullity of $2 - 2 = 0$. But $A\\mathbf{x} = \\mathbf{0}$ has $4$ unknowns, so the nullity is $4 - 2 = 2$.' },
+    },
   };
+
+
 
    return {
   props: {
+      rankNullityApply,
     rankCases,
     demoUnits,
     conceptIntroFigures,
@@ -3087,7 +3105,9 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function MatrixRankPage({rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function MatrixRankPage({rankNullityApply, rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3233,7 +3253,17 @@ Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6
         content:[
           sectionsContent.obj6.content,
           <div key={'unit-rankNullity'} dangerouslySetInnerHTML={{ __html: demoUnits.rankNullity }} />,
-          `Every input dimension is accounted for exactly once: it either survives into the image or collapses into the kernel.`,
+          `Every input dimension is accounted for exactly once: it either survives into the image or collapses into the kernel.`,          <DiagramFrame
+            key={'obj6-theorem'}
+            id="rank-nullity-apply"
+            title="Rank–nullity, applied"
+            source="/linear-algebra/matrix/rank"
+            before={`The theorem on the page’s $3 \\times 5$ example, with the one count that must not be swapped.`}
+            after={`Every column is either a pivot column, feeding the rank, or a free column, feeding the nullity. The count runs over columns, never rows.`}
+          >
+            <TheoremCard data={rankNullityApply} variant="apply" theme={theoremTheme} />
+          </DiagramFrame>,
+
         ]
     },
     {

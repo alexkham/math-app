@@ -1018,6 +1018,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1296,6 +1297,24 @@ const faqQuestions = {
 `
 
 
+
+// Concept introduction (section 1, "General Solutions vs Restricted
+// Solutions") — template D, comparison. Running instance: x² = 1/4 (two
+// solutions) against sin x = 1/2 (infinitely many). Old obj1 text is kept in
+// sectionsContent.obj1, unused; its eight passages, two formula boxes, fact
+// aside, the general demo frame, the comparison diagram and their lines are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCountTable = ciTableOpen(['equation', 'solutions', 'how many']) +
+  ciRow(['x² = 1/4', '−1/2 and 1/2', '2']) +
+  ciRow(['sin x = 1/2', '…, −7π/6, π/6, 5π/6, 13π/6, 17π/6, …', 'infinitely many'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent={
 
@@ -1880,6 +1899,10 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     ],
   };
 
+  const conceptIntroFigures = {
+    countTable: ciCountTable,
+  };
+
   const demoUnits = {
     general: demoUnitFrame({
       svg: trigFunctionsGraphDiagrams.sin,
@@ -1973,6 +1996,7 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     generalRestrictedComparison,
     trigEquationDecision,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj4Table,
@@ -1992,9 +2016,88 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     }
    }
 
-export default function EquationsPage({generalRestrictedComparison, trigEquationDecision, seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function EquationsPage({generalRestrictedComparison, trigEquationDecision, seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template D (comparison).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Solving an equation usually ends with a short list of numbers.`,
+        content: [
+          `Compare a quadratic equation with a sine equation.`,
+        ],
+      },
+      {
+        id: 'compare',
+        kind: 'instance',
+        lead: `x² = 1/4 has two solutions; sin x = 1/2 has infinitely many.`,
+        content: [
+          ciTable('countTable'),
+          `Every $2\\pi$ the sine curve repeats, and both of its solutions repeat with it.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `A periodic function repeats its solutions, so the full answer is a pattern, not a list.`,
+        content: [
+          `Because trigonometric functions are periodic, any equation built only from trigonometric functions of $x$ and its whole-number multiples that has at least one solution has infinitely many. The general solution captures all of them in a compact expression parameterized by an integer $n$.`,
+          `The condition $n \\in \\mathbb{Z}$ reads '$n$ ranges over the integers' — $\\mathbb{Z}$ is one of the standard [set symbols](!/math-symbols/set-theory) that appears in every general solution.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **general solution** of a trigonometric equation describes every solution at once, as families $x = x_0 + nP$ with $n$ ranging over the integers; a **restricted solution** lists only the solutions inside a given interval.`,
+        formula: [
+          `For example, $\\sin(x) = \\frac{1}{2}$ has two solutions per period of $2\\pi$: $x = \\frac{\\pi}{6}$ and $x = \\frac{5\\pi}{6}$. The general solution is:`,
+          `@academic[formula_callout:General Solutions vs Restricted Solutions
+$$x = \\frac{\\pi}{6} + 2n\\pi \\quad \\text{or} \\quad x = \\frac{5\\pi}{6} + 2n\\pi, \\quad n \\in \\mathbb{Z}$$]@`,
+        ],
+        footer: `So $\\sin(x) = \\frac{1}{2}$ has general solution $x = \\frac{\\pi}{6} + 2n\\pi$ or $x = \\frac{5\\pi}{6} + 2n\\pi$, and restricted solution $\\frac{\\pi}{6}, \\frac{5\\pi}{6}$ on $[0, 2\\pi)$.`,
+      },
+      {
+        id: 'kind',
+        lead: `How many solutions each period holds depends on the function and the value.`,
+        content: [
+          `For tangent, which has period $\\pi$ and only one solution per period, the general solution is more compact. If $\\tan(x) = 1$, the principal solution is $x = \\frac{\\pi}{4}$, and the general solution is:`,
+          `@academic[formula_callout:General Solutions vs Restricted Solutions
+$$x = \\frac{\\pi}{4} + n\\pi, \\quad n \\in \\mathbb{Z}$$]@`,
+          `The number of solutions per period depends on the function and the value. Sine and cosine equations with $|a| < 1$ have two solutions per period of $2\\pi$. When $|a| = 1$, there is one (at the extreme of the function). Tangent and cotangent equations have exactly one solution per period of $\\pi$. These counts multiply when the argument is a multiple angle — $\\sin(2x) = a$ has up to four solutions per $2\\pi$ interval, $\\sin(3x) = a$ has up to six, and so on.`,
+          `@academic[fact,aside:true,width:35%:Close to 2, but never 2
+With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\sin(\\sqrt{2}\\,x)$ comes as close to $2$ as you like, yet equals $2$ nowhere. Both sines would have to be $1$ at the same $x$, and that would make $\\sqrt{2}$ a fraction.]@`,
+          <div key={'unit-general'} dangerouslySetInnerHTML={{ __html: demoUnits.general }} />,
+          `Restricting to an interval simply selects which of these infinitely many crossings to report.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The problem statement decides which of the two formats to give.`,
+        content: [
+          `A restricted solution lists only the solutions within a specified interval — most commonly $[0, 2\\pi)$ or $[0°, 360°)$. For $\\sin(x) = \\frac{1}{2}$ on $[0, 2\\pi)$, the answer is simply $x = \\frac{\\pi}{6}$ and $x = \\frac{5\\pi}{6}$.`,
+          `The problem statement determines which format is required. When no interval is specified and the problem says "find all solutions" or "solve," a general solution is expected. When an interval is given, only those solutions falling within it should be listed.`,
+          `The two formats side by side, with the example from this section.`,
+          <DiagramFrameV2
+            key={'obj1-comparison'}
+            id="general-restricted-solutions"
+            title="General and restricted solutions, side by side"
+            source="/trigonometry/equations"
+          >
+            <ComparisonTable2 data={generalRestrictedComparison} />
+          </DiagramFrameV2>,
+          `The restricted solution is the general one with $n$ chosen: here $n = 0$ is the only integer that keeps both families inside $[0, 2\\pi)$. The problem statement decides which format to give.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers basic sine, cosine and tangent equations, equations needing algebra or identity substitution, quadratic-type equations, multiple angles, extraneous solutions, common pitfalls and a summary by equation form.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2011,19 +2114,7 @@ export default function EquationsPage({generalRestrictedComparison, trigEquation
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-general'} dangerouslySetInnerHTML={{ __html: demoUnits.general }} />,
-          `Restricting to an interval simply selects which of these infinitely many crossings to report.`,
-          `The two formats side by side, with the example from this section.`,
-          <DiagramFrameV2
-            key={'obj1-comparison'}
-            id="general-restricted-solutions"
-            title="General and restricted solutions, side by side"
-            source="/trigonometry/equations"
-          >
-            <ComparisonTable2 data={generalRestrictedComparison} />
-          </DiagramFrameV2>,
-          `The restricted solution is the general one with $n$ chosen: here $n = 0$ is the only integer that keeps both families inside $[0, 2\\pi)$. The problem statement decides which format to give.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

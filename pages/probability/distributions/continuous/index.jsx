@@ -970,7 +970,7 @@ A z-score counts standard deviations, so it carries no units. A height and a tes
 
 **Linear Transformations**
 
-When you transform X to Y = aX + b, the distribution shifts and scales predictably. Adding b shifts the distribution's location—if X ~ N(μ, σ²), then X + b ~ N(μ + b, σ²). Multiplying by a scales both location and spread—if X ~ N(μ, σ²), then aX ~ N(aμ, a²σ²). This applies to any continuous distribution: linear transformations preserve the family while changing parameters.
+When you transform X to Y = aX + b, the distribution shifts and scales predictably. Adding b shifts the distribution's location—if X ~ N(μ, σ²), then X + b ~ N(μ + b, σ²). Multiplying by a scales both location and spread—if X ~ N(μ, σ²), then aX ~ N(aμ, a²σ²). The normal and uniform families are preserved by every such transformation with a ≠ 0, which only changes the parameters. Not every family is: an exponential variable stays exponential when multiplied by a positive a, but not after a shift or a sign change.
 
 **Nonlinear Transformations**
 

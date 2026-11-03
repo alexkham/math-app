@@ -13,6 +13,8 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -505,7 +507,7 @@ This connection creates a degree-reduction strategy. Once a root $r$ is identifi
 
 @academic[pitfall,aside:true,width:35%:Using the wrong sign of r
 Dividing $x^3 + 2x^2 - 5x - 6$ by $(x + 1)$ with $r = 1$ gives the remainder $P(1) = -8$, so the factor seems to fail. Since $x + 1 = x - (-1)$, $r = -1$: the remainder is $P(-1) = 0$ and the quotient is $x^2 + x - 6$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-wrong-sign-of-r)]@
 
 [Polynomial division](!/algebra/polynomials/operations) can be carried out using long division or synthetic division. The [polynomial calculator](!/algebra/calculators/polynomial) does both and shows every step. Synthetic division is faster but limited to divisors of the form $(x - r)$, which is exactly the form needed when factoring out a known root.
 
@@ -528,7 +530,7 @@ $$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\fra
 
 @academic[pitfall,aside:true,width:35%:Swapping the roles of p and q
 Building the list as divisors of $2$ over divisors of $12$ gives $\\pm 1, \\pm 2, \\pm \\frac{1}{2}, \\pm \\frac{1}{3}, \\dots, \\pm \\frac{1}{12}$, and the root $\\frac{3}{2}$ is missing. The numerator divides the constant term: $3$ divides $12$ and $2$ divides $2$, so $\\frac{3}{2}$ is a candidate.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-roles-of-p-and-q)]@
 
 Some of these fractions repeat values already on the list, such as $\\frac{2}{2} = 1$ and $\\frac{6}{2} = 3$, so each value is written only once, and sixteen candidates remain. Each one is tested by substitution, and the search can stop at the first candidate that gives zero, since one root is enough to begin reducing the degree.
 
@@ -536,7 +538,7 @@ Testing $x = 2$: $P(2) = 2(8) - 3(4) - 8(2) + 12 = 16 - 12 - 16 + 12 = 0$. So $x
 
 @academic[pitfall,aside:true,width:35%:Dropping the root that was divided out
 Solving only the quotient $2x^2 + x - 6 = 0$ gives $x = \\frac{3}{2}$ or $x = -2$, two roots for a cubic. The root found by testing stays in the answer: $x = 2$, $x = \\frac{3}{2}$ and $x = -2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-root-that-was-divided-out)]@
 
 Each division lowers the degree by one, so the work on this cubic ends with a quadratic. That quadratic is a new, smaller equation: its roots are the roots of the cubic that remain once the factor $(x - 2)$ has been taken out. Multiplying back, $(x - 2)(2x^2 + x - 6)$ returns the original polynomial.
 
@@ -582,7 +584,7 @@ In practice, quartic equations that appear in coursework are usually structured 
 
 @academic[pitfall,aside:true,width:35%:Taking only the positive square root
 Back-substituting $u = 1$ and $u = 4$ in $x^4 - 5x^2 + 4 = 0$ as $x = 1$ and $x = 2$ gives only two roots. Each positive $u$ gives two values, $x = \\pm\\sqrt{u}$, so the roots are $x = \\pm 1$ and $x = \\pm 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-only-the-positive-square-root)]@
 
 With $u = x^2$, the quadratic in $u$ is solved first, and its solutions are values of $x^2$, not of $x$. Each one is then turned back into values of $x$ by solving $x^2 = u$. The sign of $u$ decides what that step yields: a negative $u$ yields no real $x$ at all, since no real square is negative.
 
@@ -652,7 +654,7 @@ $$r_1 \\cdot r_2 \\cdots r_n = (-1)^n a_0$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the sign in the product of roots
 Reading the product of the roots of $2x^3 - 3x^2 - 8x + 12 = 0$ as $\\frac{12}{2} = 6$ drops the alternating sign. For degree $3$ the product is $(-1)^3 \\cdot \\frac{12}{2} = -6$, and indeed $(-2) \\cdot \\frac{3}{2} \\cdot 2 = -6$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-sign-in-the-product-of-roots)]@
 
 Each formula equates a coefficient to an elementary symmetric polynomial in the roots. The first gives the sum of all roots, the second the sum of all pairwise products, the third the sum of all triple products, and the last the product of all roots.
 
@@ -672,85 +674,9 @@ These relationships hold whether the roots are real or complex, rational or irra
 
   obj11: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again when polynomial equations are solved by hand. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Using the wrong sign of r**
-
-The divisor is written as $(x + a)$, and the number $a$ is used as $r$ in synthetic division or in the Remainder Theorem, although both are stated for a divisor of the form $(x - r)$.
-
-Wrong working: to divide $P(x) = x^3 + 2x^2 - 5x - 6$ by $(x + 1)$, synthetic division is run with $r = 1$. The coefficients $1, 2, -5, -6$ become $1, 3, -2, -8$, so the remainder is $-8$ and $(x + 1)$ is rejected as a factor.
-
-Right working: $x + 1 = x - (-1)$, so $r = -1$. The coefficients become $1, 1, -6, 0$: the remainder is $0$ and the quotient is $x^2 + x - 6 = (x + 3)(x - 2)$.
-$$x^3 + 2x^2 - 5x - 6 = (x + 1)(x + 3)(x - 2)$$
-The roots are $x = -1$, $x = -3$ and $x = 2$.
-
-Why it happens: the plus sign in the divisor is copied as it is written, but the theorems subtract $r$, and $x + 1$ is $x$ minus the number $-1$.
-
-How to check: set the divisor equal to zero. $x + 1 = 0$ gives $x = -1$, the number that belongs in the division. The wrong remainder is a clue too: $-8$ is $P(1) = 1 + 2 - 5 - 6$, which tests the factor $(x - 1)$, not $(x + 1)$.
-
-**Swapping the roles of p and q**
-
-The Rational Root Theorem pairs two lists of divisors, one from the constant term and one from the leading coefficient. The lists are put the wrong way round, so the candidates are built as divisors of $a_n$ over divisors of $a_0$.
-
-Wrong working: for $2x^3 - 3x^2 - 8x + 12 = 0$, divisors of $2$ over divisors of $12$ give
-$$\\pm 1, \\pm 2, \\pm \\frac{1}{2}, \\pm \\frac{1}{3}, \\pm \\frac{2}{3}, \\pm \\frac{1}{4}, \\pm \\frac{1}{6}, \\pm \\frac{1}{12}$$
-Testing this list finds $x = 2$ and $x = -2$, but the third root is not on it.
-
-Right working: the numerator $p$ divides the constant term $12$, and the denominator $q$ divides the leading coefficient $2$.
-$$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$
-This list contains all three roots: $x = -2$, $x = \\frac{3}{2}$ and $x = 2$.
-
-Why it happens: both coefficients are split into divisors in exactly the same way, and nothing in that arithmetic shows which list belongs on top.
-
-How to check: try the recipe on a polynomial whose roots are known. $(x - 2)(x - 3) = x^2 - 5x + 6$ has the roots $2$ and $3$, which divide the constant term $6$. The swapped recipe would allow only $\\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{3}, \\pm \\frac{1}{6}$ and miss both.
-
-**Dropping the root that was divided out**
-
-Once a root has been found and divided out, the work moves on to the quotient. The roots of the quotient are given as the answer, and the root that started the reduction is left behind.
-
-Wrong working:
-$$2x^3 - 3x^2 - 8x + 12 = (x - 2)(2x^2 + x - 6)$$
-$$2x^2 + x - 6 = (2x - 3)(x + 2) = 0 \\implies x = \\frac{3}{2} \\text{ or } x = -2$$
-The answer is given as $x = \\frac{3}{2}$ or $x = -2$.
-
-Right working: the cubic is the product of all three factors.
-$$(x - 2)(2x - 3)(x + 2) = 0 \\implies x = 2, \\; x = \\frac{3}{2} \\text{ or } x = -2$$
-
-Why it happens: the quadratic quotient looks like a complete new problem, and solving it feels like the last step. The first root was found by testing rather than by solving, so it never appears in the final line of working.
-
-How to check: count the roots against the degree. Each factor $(x - r)$ removed by division accounts for one root, and the quotient holds the rest; here one division and two roots of the quotient make the three that a cubic has. Substituting confirms it: $P(2) = 16 - 12 - 16 + 12 = 0$.
-
-**Taking only the positive square root**
-
-In a bi-quadratic equation, the substitution $u = x^2$ gives a quadratic in $u$. Its solutions are turned back into values of $x$ with the positive square root only, and half of the roots are lost.
-
-Wrong working:
-$$x^4 - 5x^2 + 4 = 0 \\implies u^2 - 5u + 4 = (u - 1)(u - 4) = 0 \\implies u = 1 \\text{ or } u = 4$$
-$$x = \\sqrt{1} = 1 \\text{ or } x = \\sqrt{4} = 2$$
-
-Right working: each value of $u$ is a value of $x^2$, and $x^2 = u$ has two solutions when $u > 0$.
-$$x^2 = 1 \\implies x = \\pm 1 \\qquad x^2 = 4 \\implies x = \\pm 2$$
-The quartic has four real roots: $-2$, $-1$, $1$ and $2$.
-
-Why it happens: $\\sqrt{4} = 2$ is correct as the value of the square root, and the step from $x^2 = 4$ to $x = \\sqrt{4}$ looks like the same operation. But solving $x^2 = 4$ asks for every number whose square is $4$, and there are two.
-
-How to check: a bi-quadratic has only even powers of $x$, so $x$ and $-x$ always give the same value; the opposite of every root is a root too. Substituting $x = -1$ gives $1 - 5 + 4 = 0$.
-
-**Dropping the sign in the product of roots**
-
-Vieta's formulas carry alternating signs: the product of the roots is $(-1)^n \\frac{a_0}{a_n}$ and the sum is $-\\frac{a_{n-1}}{a_n}$. The sign factor is dropped and the product is read straight from the coefficients as $\\frac{a_0}{a_n}$.
-
-Wrong working: for $2x^3 - 3x^2 - 8x + 12 = 0$, the product of the roots is taken as $\\frac{12}{2} = 6$.
-
-Right working: the degree is $n = 3$, so
-$$r_1 r_2 r_3 = (-1)^3 \\cdot \\frac{12}{2} = -6$$
-The roots $-2$, $\\frac{3}{2}$ and $2$ confirm it: $(-2) \\cdot \\frac{3}{2} \\cdot 2 = -6$. Their sum is $-\\frac{-3}{2} = \\frac{3}{2}$, and indeed $-2 + \\frac{3}{2} + 2 = \\frac{3}{2}$.
-
-Why it happens: for a quadratic, the product of the roots is $\\frac{c}{a}$ with no visible sign, because $(-1)^2 = 1$. The habit carries over to odd degrees, where the sign factor is $-1$.
-
-How to check: build a cubic from simple roots and compare. $(x - 1)(x - 2)(x - 3) = x^3 - 6x^2 + 11x - 6$ has roots with product $6$, while its constant term is $-6$.`,
+    content: `Five mistakes come up again and again when polynomial equations are solved by hand. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Four of the five slips end with fewer roots than the equation has: a factor is rejected because of the wrong sign of $r$, a list of candidates misses a root, a root that was divided out is forgotten, or the negative square roots are dropped. A count catches them: an equation of degree $n$ has at most $n$ roots, and when the working finds fewer, it is worth asking where the others went. The fifth slip, the sign in the product of roots, is caught by building a small polynomial from known roots and comparing.`,
     link: '',
   },
 };
@@ -946,8 +872,50 @@ const schemas = {
     }),
   };
 
+  // MistakeFix 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-the-wrong-sign-of-r', name: `Using the wrong sign of r`, errorAt: 0,
+        what: `The divisor is written as $(x + a)$, and the number $a$ is used as $r$ in synthetic division or in the Remainder Theorem, although both are stated for a divisor of the form $(x - r)$.`,
+        wrong: [`To divide $P(x) = x^3 + 2x^2 - 5x - 6$ by $(x + 1)$, synthetic division is run with $r = 1$. The coefficients $1, 2, -5, -6$ become $1, 3, -2, -8$, so the remainder is $-8$ and $(x + 1)$ is rejected as a factor.`],
+        right: [`$x + 1 = x - (-1)$, so $r = -1$. The coefficients become $1, 1, -6, 0$: the remainder is $0$ and the quotient is $x^2 + x - 6 = (x + 3)(x - 2)$.`, `$$x^3 + 2x^2 - 5x - 6 = (x + 1)(x + 3)(x - 2)$$`, `The roots are $x = -1$, $x = -3$ and $x = 2$.`],
+        why: `The plus sign in the divisor is copied as it is written, but the theorems subtract $r$, and $x + 1$ is $x$ minus the number $-1$.`,
+        check: `Set the divisor equal to zero. $x + 1 = 0$ gives $x = -1$, the number that belongs in the division. The wrong remainder is a clue too: $-8$ is $P(1) = 1 + 2 - 5 - 6$, which tests the factor $(x - 1)$, not $(x + 1)$.` },
+      { id: 'swapping-the-roles-of-p-and-q', name: `Swapping the roles of p and q`, errorAt: 0,
+        what: `The Rational Root Theorem pairs two lists of divisors, one from the constant term and one from the leading coefficient. The lists are put the wrong way round, so the candidates are built as divisors of $a_n$ over divisors of $a_0$.`,
+        wrong: [`For $2x^3 - 3x^2 - 8x + 12 = 0$, divisors of $2$ over divisors of $12$ give
+$$\\pm 1, \\pm 2, \\pm \\frac{1}{2}, \\pm \\frac{1}{3},$$
+$$\\pm \\frac{2}{3}, \\pm \\frac{1}{4}, \\pm \\frac{1}{6}, \\pm \\frac{1}{12}$$`, `Testing this list finds $x = 2$ and $x = -2$, but the third root is not on it.`],
+        right: [`The numerator $p$ divides the constant term $12$, and the denominator $q$ divides the leading coefficient $2$.`, `$$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$`, `This list contains all three roots: $x = -2$, $x = \\frac{3}{2}$ and $x = 2$.`],
+        why: `Both coefficients are split into divisors in exactly the same way, and nothing in that arithmetic shows which list belongs on top.`,
+        check: `Try the recipe on a polynomial whose roots are known. $(x - 2)(x - 3) = x^2 - 5x + 6$ has the roots $2$ and $3$, which divide the constant term $6$. The swapped recipe would allow only $\\pm 1, \\pm \\frac{1}{2}, \\pm \\frac{1}{3}, \\pm \\frac{1}{6}$ and miss both.` },
+      { id: 'dropping-the-root-that-was-divided-out', name: `Dropping the root that was divided out`, errorAt: 3,
+        what: `Once a root has been found and divided out, the work moves on to the quotient. The roots of the quotient are given as the answer, and the root that started the reduction is left behind.`,
+        wrong: [`$$2x^3 - 3x^2 - 8x + 12 = (x - 2)(2x^2 + x - 6)$$`, `$$2x^2 + x - 6 = (2x - 3)(x + 2) = 0$$`, `$$\\implies x = \\frac{3}{2} \\text{ or } x = -2$$`, `The answer is given as $x = \\frac{3}{2}$ or $x = -2$.`],
+        right: [`$$2x^3 - 3x^2 - 8x + 12 = (x - 2)(2x^2 + x - 6)$$`, `$$2x^2 + x - 6 = (2x - 3)(x + 2) = 0$$`, `$$\\implies x = \\frac{3}{2} \\text{ or } x = -2$$`, `The cubic is the product of all three factors.`, `$$(x - 2)(2x - 3)(x + 2) = 0$$`, `$$\\implies x = 2, \\; x = \\frac{3}{2} \\text{ or } x = -2$$`],
+        why: `The quadratic quotient looks like a complete new problem, and solving it feels like the last step. The first root was found by testing rather than by solving, so it never appears in the final line of working.`,
+        check: `Count the roots against the degree. Each factor $(x - r)$ removed by division accounts for one root, and the quotient holds the rest; here one division and two roots of the quotient make the three that a cubic has. Substituting confirms it: $P(2) = 16 - 12 - 16 + 12 = 0$.` },
+      { id: 'taking-only-the-positive-square-root', name: `Taking only the positive square root`, errorAt: 3,
+        what: `In a bi-quadratic equation, the substitution $u = x^2$ gives a quadratic in $u$. Its solutions are turned back into values of $x$ with the positive square root only, and half of the roots are lost.`,
+        wrong: [`$$x^4 - 5x^2 + 4 = 0$$`, `$$\\implies u^2 - 5u + 4 = (u - 1)(u - 4) = 0$$`, `$$\\implies u = 1 \\text{ or } u = 4$$`, `$$x = \\sqrt{1} = 1 \\text{ or } x = \\sqrt{4} = 2$$`],
+        right: [`$$x^4 - 5x^2 + 4 = 0$$`, `$$\\implies u^2 - 5u + 4 = (u - 1)(u - 4) = 0$$`, `$$\\implies u = 1 \\text{ or } u = 4$$`, `Each value of $u$ is a value of $x^2$, and $x^2 = u$ has two solutions when $u > 0$.`, `$$x^2 = 1 \\implies x = \\pm 1$$
+$$x^2 = 4 \\implies x = \\pm 2$$`, `The quartic has four real roots: $-2$, $-1$, $1$ and $2$.`],
+        why: `$\\sqrt{4} = 2$ is correct as the value of the square root, and the step from $x^2 = 4$ to $x = \\sqrt{4}$ looks like the same operation. But solving $x^2 = 4$ asks for every number whose square is $4$, and there are two.`,
+        check: `A bi-quadratic has only even powers of $x$, so $x$ and $-x$ always give the same value; the opposite of every root is a root too. Substituting $x = -1$ gives $1 - 5 + 4 = 0$.` },
+      { id: 'dropping-the-sign-in-the-product-of-roots', name: `Dropping the sign in the product of roots`, errorAt: 0,
+        what: `Vieta's formulas carry alternating signs: the product of the roots is $(-1)^n \\frac{a_0}{a_n}$ and the sum is $-\\frac{a_{n-1}}{a_n}$. The sign factor is dropped and the product is read straight from the coefficients as $\\frac{a_0}{a_n}$.`,
+        wrong: [`For $2x^3 - 3x^2 - 8x + 12 = 0$, the product of the roots is taken as $\\frac{12}{2} = 6$.`],
+        right: [`The degree is $n = 3$, so
+$$r_1 r_2 r_3 = (-1)^3 \\cdot \\frac{12}{2} = -6$$`, `The roots $-2$, $\\frac{3}{2}$ and $2$ confirm it: $(-2) \\cdot \\frac{3}{2} \\cdot 2 = -6$. Their sum is $-\\frac{-3}{2} = \\frac{3}{2}$, and indeed $-2 + \\frac{3}{2} + 2 = \\frac{3}{2}$.`],
+        why: `For a quadratic, the product of the roots is $\\frac{c}{a}$ with no visible sign, because $(-1)^2 = 1$. The habit carries over to odd degrees, where the sign factor is $-1$.`,
+        check: `Build a cubic from simple roots and compare. $(x - 1)(x - 2)(x - 3) = x^3 - 6x^2 + 11x - 6$ has roots with product $6$, while its constant term is $-6$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -968,7 +936,7 @@ const schemas = {
   }
 }
    }
-export default function PolynomialEquationsPage({
+export default function PolynomialEquationsPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1172,6 +1140,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="polynomial-equation-pitfalls"
+            title="Common pitfalls in polynomial equations"
+            source="/algebra/equations/polynomial"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

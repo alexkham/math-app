@@ -15,6 +15,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -405,7 +407,7 @@ The sequence $1, 4, 9, 16, 25$ has differences $3, 5, 7, 9$. These are not const
 
 @academic[pitfall,aside:true,width:35%:Subtracting in the wrong order
 Taking each term minus the next one: for $20, 17, 14, 11$ that gives $20 - 17 = 3$, so $d = 3$, as if the sequence rose. The difference is later minus earlier, $17 - 20 = -3$, so $d = -3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-in-the-wrong-order)]@
 
 The test applies to any number of terms: compute all consecutive differences and check for uniformity. A single pair of unequal differences is enough to disqualify. Conversely, if only a few terms are given, the test cannot confirm an arithmetic pattern with certainty — the sequence $2, 4, 6$ could continue as $8, 10, \\ldots$ (arithmetic) or as $10, 16, \\ldots$ (something else). The rule generating the sequence, not just a finite sample, is what determines its type.`,
     before: ``,
@@ -420,7 +422,7 @@ Finding a specific term: if $a_1 = 4$ and $d = 6$, then $a_{20} = 4 + 19 \\cdot 
 
 @academic[pitfall,aside:true,width:35%:Counting n steps instead of n − 1
 Writing $a_{20} = 4 + 20 \\cdot 6 = 124$ adds $d$ once too often, since $a_1$ already stands in place $1$. Only $19$ steps lead to place $20$: $a_{20} = 4 + 19 \\cdot 6 = 118$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-n-steps-instead-of-n-1)]@
 
 Finding the common difference: if $a_1 = 3$ and $a_8 = 24$, then $24 = 3 + 7d$, so $d = 3$.
 
@@ -536,7 +538,7 @@ For example, inserting $3$ arithmetic means between $5$ and $25$ requires $d = \
 
 @academic[pitfall,aside:true,width:35%:Dividing by the number of means
 Dividing $25 - 5$ by $3$ gives $d = \\frac{20}{3}$ and the list $5, \\frac{35}{3}, \\frac{55}{3}, 25$, with only two means. Three means make four steps: $d = \\frac{20}{4} = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-number-of-means)]@
 
 In this kind of problem the two endpoints are fixed and only the spacing between them is unknown. Once $d$ is found, the inserted terms follow by repeated addition, and the last step from $a + kd$ must land exactly on $b$, which checks the whole list at once.`,
     before: ``,
@@ -552,55 +554,9 @@ In this kind of problem the two endpoints are fixed and only the spacing between
   },
   obj8: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come up again and again with arithmetic sequences. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Subtracting in the wrong order**
-
-When the consecutive differences are computed, each term is subtracted from the one before it instead of the one after it. The differences still come out equal, but with the wrong sign.
-
-Wrong working: for $20, 17, 14, 11$,
-$$20 - 17 = 3, \\quad 17 - 14 = 3, \\quad 14 - 11 = 3 \\implies d = 3$$
-
-Right working: the common difference is $d = a_{n+1} - a_n$, later term minus earlier term.
-$$17 - 20 = -3, \\quad 14 - 17 = -3, \\quad 11 - 14 = -3 \\implies d = -3$$
-
-Why it happens: the larger number is written first out of habit, and because all the differences agree, the constant-difference test passes and hides the sign error.
-
-How to check: add $d$ to the first term; it must give the second. $20 + 3 = 23$, not $17$, while $20 + (-3) = 17$. A falling sequence always has $d < 0$.
-
-**Counting n steps instead of n − 1**
-
-In the general term, $d$ is multiplied by the position $n$ instead of by $n - 1$, the number of steps from the first term.
-
-Wrong working: with $a_1 = 4$ and $d = 6$,
-$$a_{20} = 4 + 20 \\cdot 6 = 124$$
-
-Right working: from place $1$ to place $20$ there are $19$ steps.
-$$a_{20} = 4 + (20 - 1) \\cdot 6 = 4 + 114 = 118$$
-
-The same slip appears when solving for $d$: from $a_1 = 3$ and $a_8 = 24$, dividing $24 - 3 = 21$ by $8$ gives $d = \\frac{21}{8}$ instead of $\\frac{21}{7} = 3$.
-
-Why it happens: the formula is remembered as "first term plus $n$ times $d$", and the fact that $a_1$ already occupies the first place, before any $d$ is added, gets lost.
-
-How to check: put $n = 1$ into the formula; it must return $a_1$. The wrong version gives $4 + 1 \\cdot 6 = 10$, not $4$, while $4 + 0 \\cdot 6 = 4$.
-
-**Dividing by the number of means**
-
-When $k$ arithmetic means are inserted between $a$ and $b$, the gap $b - a$ is split into $k$ equal parts instead of $k + 1$.
-
-Wrong working: $3$ means between $5$ and $25$,
-$$d = \\frac{25 - 5}{3} = \\frac{20}{3}$$
-which gives the list $5, \\frac{35}{3}, \\frac{55}{3}, 25$, with only two values between the endpoints.
-
-Right working: $3$ means and $2$ endpoints make $5$ terms, and $5$ terms have $4$ steps between them.
-$$d = \\frac{25 - 5}{3 + 1} = 5$$
-The sequence is $5, 10, 15, 20, 25$.
-
-Why it happens: the number of values to insert and the number of steps between neighbouring values are easy to confuse; there is always one more step than there are inserted values.
-
-How to check: count the values strictly between the endpoints in the finished list; there must be exactly $k$. Equivalently, $a + (k + 1)d$ must equal $b$: $5 + 4 \\cdot 5 = 25$.`,
+    content: `Three mistakes come up again and again with arithmetic sequences. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `All three slips miscount or misread the steps between terms. The difference is always a later term minus an earlier one, place $n$ is $n - 1$ steps after place $1$, and $k$ means between two endpoints make $k + 1$ steps. Putting $n = 1$ into a formula, adding $d$ to a term to see whether the next one appears, or counting the values in the finished list catches each slip in a line.`,
     link: '',
   },
 }
@@ -757,8 +713,37 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 4, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj8 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'subtracting-in-the-wrong-order', name: `Subtracting in the wrong order`, errorAt: 1,
+        what: `When the consecutive differences are computed, each term is subtracted from the one before it instead of the one after it. The differences still come out equal, but with the wrong sign.`,
+        wrong: [`For $20, 17, 14, 11$,`, `$$20 - 17 = 3, \\quad 17 - 14 = 3, \\quad 14 - 11 = 3$$
+$$\\implies d = 3$$`],
+        right: [`For $20, 17, 14, 11$,`, `The common difference is $d = a_{n+1} - a_n$, later term minus earlier term.`, `$$17 - 20 = -3, \\quad 14 - 17 = -3,$$
+$$11 - 14 = -3$$
+$$\\implies d = -3$$`],
+        why: `The larger number is written first out of habit, and because all the differences agree, the constant-difference test passes and hides the sign error.`,
+        check: `Add $d$ to the first term; it must give the second. $20 + 3 = 23$, not $17$, while $20 + (-3) = 17$. A falling sequence always has $d < 0$.` },
+      { id: 'counting-n-steps-instead-of-n-1', name: `Counting n steps instead of n − 1`, errorAt: 1,
+        what: `In the general term, $d$ is multiplied by the position $n$ instead of by $n - 1$, the number of steps from the first term.`,
+        wrong: [`With $a_1 = 4$ and $d = 6$,`, `$$a_{20} = 4 + 20 \\cdot 6 = 124$$`],
+        right: [`With $a_1 = 4$ and $d = 6$,`, `From place $1$ to place $20$ there are $19$ steps.`, `$$a_{20} = 4 + (20 - 1) \\cdot 6 = 4 + 114 = 118$$`, `The same slip appears when solving for $d$: from $a_1 = 3$ and $a_8 = 24$, dividing $24 - 3 = 21$ by $8$ gives $d = \\frac{21}{8}$ instead of $\\frac{21}{7} = 3$.`],
+        why: `The formula is remembered as "first term plus $n$ times $d$", and the fact that $a_1$ already occupies the first place, before any $d$ is added, gets lost.`,
+        check: `Put $n = 1$ into the formula; it must return $a_1$. The wrong version gives $4 + 1 \\cdot 6 = 10$, not $4$, while $4 + 0 \\cdot 6 = 4$.` },
+      { id: 'dividing-by-the-number-of-means', name: `Dividing by the number of means`, errorAt: 1,
+        what: `When $k$ arithmetic means are inserted between $a$ and $b$, the gap $b - a$ is split into $k$ equal parts instead of $k + 1$.`,
+        wrong: [`$3$ means between $5$ and $25$,`, `$$d = \\frac{25 - 5}{3} = \\frac{20}{3}$$`, `Which gives the list $5, \\frac{35}{3}, \\frac{55}{3}, 25$, with only two values between the endpoints.`],
+        right: [`$3$ means between $5$ and $25$,`, `$3$ means and $2$ endpoints make $5$ terms, and $5$ terms have $4$ steps between them.`, `$$d = \\frac{25 - 5}{3 + 1} = 5$$`, `The sequence is $5, 10, 15, 20, 25$.`],
+        why: `The number of values to insert and the number of steps between neighbouring values are easy to confuse; there is always one more step than there are inserted values.`,
+        check: `Count the values strictly between the endpoints in the finished list; there must be exactly $k$. Equivalently, $a + (k + 1)d$ must equal $b$: $5 + 4 \\cdot 5 = 25$.` },
+    ],
+  };
+
    return {
   props:{
+    pitfallData,
      sectionsContent,
      introContent,
      obj3Table,
@@ -778,7 +763,7 @@ const schemas = {
 }
    }
 
-export default function ArithmeticSequencesPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ArithmeticSequencesPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -958,6 +943,15 @@ $$a_n = a_1 + (n - 1)d$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-mistakes'}
+            id="arithmetic-sequence-pitfalls"
+            title="Common pitfalls with arithmetic sequences"
+            source="/algebra/sequences/arithmetic"
+            after={sectionsContent.obj8.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

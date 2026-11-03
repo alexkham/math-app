@@ -12,6 +12,10 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -124,7 +128,7 @@ $\\lfloor 3.7 \\rfloor = 3$, $\\; \\lfloor 5 \\rfloor = 5$, $\\; \\lfloor \\pi \
 
 @academic[pitfall,aside:true,width:35%:Dropping the decimals of a negative number
 Writing $\\lfloor -3.7 \\rfloor = -3$. But $-3$ is greater than $-3.7$, so it is not below it. The greatest integer below $-3.7$ is $-4$.
-[Read more](!#11)]@
+[Read more](!#pitfall-dropping-the-decimals-of-a-negative-number)]@
 
 For negative numbers, moving left means moving away from zero. The integers just around $-3.7$ are $-4$ and $-3$, and only $-4$ is at most $-3.7$:
 
@@ -153,7 +157,7 @@ For an integer, floor and ceiling are equal. For any other number, the ceiling i
 
 @academic[pitfall,aside:true,width:35%:Adding 1 to an integer
 Using $\\lceil x \\rceil = \\lfloor x \\rfloor + 1$ for every $x$ gives $\\lceil 5 \\rceil = 6$. At an integer nothing moves: $\\lceil 5 \\rceil = 5$.
-[Read more](!#11)]@
+[Read more](!#pitfall-adding-1-to-an-integer)]@
 
 The two are linked by a sign change: $\\lceil x \\rceil = -\\lfloor -x \\rfloor$. Negating flips the number line, so moving right becomes moving left.`,
   before: ``,
@@ -175,7 +179,7 @@ $\\{3.7\\} = 3.7 - 3 = 0.7$, $\\; \\{5\\} = 0$, $\\; \\{\\pi\\} = \\pi - 3 \\app
 
 @academic[pitfall,aside:true,width:35%:A negative fractional part
 Writing $\\{-3.7\\} = -0.7$. With the floor $\\lfloor -3.7 \\rfloor = -4$, the fractional part is $-3.7 - (-4) = 0.3$, never negative.
-[Read more](!#11)]@
+[Read more](!#pitfall-a-negative-fractional-part)]@
 
 For a negative number the fractional part is not the digits after the decimal point:
 
@@ -360,55 +364,9 @@ Positive test inputs cannot tell these apart. Code that floors, truncates or rou
 
 obj11: {
   title: `Common Pitfalls`,
-  content: `**Dropping the decimals of a negative number**
-
-The floor of a negative number is found by deleting the digits after the decimal point.
-
-Wrong working: $\\lfloor -3.7 \\rfloor = -3$.
-
-Right working: the floor is the greatest integer at most $-3.7$. Since $-3 > -3.7$, it does not qualify; $-4 \\leq -3.7$ does. So $\\lfloor -3.7 \\rfloor = -4$.
-
-Why it happens: for positive numbers, deleting the decimals and taking the floor give the same result, so the floor is remembered as "delete the decimals".
-
-How to check: the floor must not be greater than the number. On the number line, it is on the left of $x$ or at $x$.
-
-**A negative fractional part**
-
-The fractional part of a negative number is read off as the digits after the decimal point, with a minus sign.
-
-Wrong working: $\\{-3.7\\} = -0.7$.
-
-Right working: $\\{-3.7\\} = -3.7 - \\lfloor -3.7 \\rfloor = -3.7 - (-4) = 0.3$.
-
-Why it happens: the fractional part is thought of as "the decimal digits" rather than as $x - \\lfloor x \\rfloor$.
-
-How to check: the fractional part is always in $[0, 1)$, and $\\lfloor x \\rfloor + \\{x\\}$ must give back $x$: $-4 + 0.3 = -3.7$.
-
-**Adding 1 to an integer**
-
-The ceiling is computed as the floor plus one, without checking whether $x$ is an integer.
-
-Wrong working: $\\lceil 5 \\rceil = \\lfloor 5 \\rfloor + 1 = 6$, and so $\\lceil 60 / 12 \\rceil = 6$ buses for $60$ students in buses of $12$.
-
-Right working: an integer is its own ceiling, $\\lceil 5 \\rceil = 5$: five buses are enough.
-
-Why it happens: $\\lceil x \\rceil = \\lfloor x \\rfloor + 1$ is true for every non-integer, so the exception is forgotten.
-
-How to check: test the case where the division comes out exact.
-
-**Splitting the floor over a sum**
-
-The floor is distributed over a sum or pulled out of a multiple.
-
-Wrong working: $\\lfloor 0.6 + 0.6 \\rfloor = \\lfloor 0.6 \\rfloor + \\lfloor 0.6 \\rfloor = 0$, and $\\lfloor 2 \\cdot 1.6 \\rfloor = 2 \\lfloor 1.6 \\rfloor = 2$.
-
-Right working: $\\lfloor 1.2 \\rfloor = 1$ and $\\lfloor 3.2 \\rfloor = 3$. Only an integer term can be taken out: $\\lfloor x + n \\rfloor = \\lfloor x \\rfloor + n$.
-
-Why it happens: the floor is treated like a linear operation, such as multiplying by a constant.
-
-How to check: add the fractional parts. If they sum to $1$ or more, the floor of the sum is one larger than the sum of the floors.`,
+  content: `Four mistakes come up again and again with the floor, the ceiling and the fractional part. Here each is worked through in full, with the wrong and the right working side by side.`,
   before: ``,
-  after: ``,
+  after: `Each slip treats the floor as deleting digits or as a rule that splits over sums. The floor of $-3.7$ is $-4$, the greatest integer not above it; the fractional part $x - \\lfloor x \\rfloor$ always lies in $[0, 1)$; an integer is its own ceiling; and only an integer term can be taken out of a floor. Checking that the floor lies at or to the left of $x$, and testing an exact division or fractional parts that add up to $1$ or more, catches each slip.`,
   link: '',
 },
 
@@ -607,8 +565,40 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 8, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-decimals-of-a-negative-number', name: `Dropping the decimals of a negative number`, errorAt: 0,
+        what: `The floor of a negative number is found by deleting the digits after the decimal point.`,
+        wrong: [`$\\lfloor -3.7 \\rfloor = -3$.`],
+        right: [`The floor is the greatest integer at most $-3.7$. Since $-3 > -3.7$, it does not qualify; $-4 \\leq -3.7$ does. So $\\lfloor -3.7 \\rfloor = -4$.`],
+        why: `For positive numbers, deleting the decimals and taking the floor give the same result, so the floor is remembered as "delete the decimals".`,
+        check: `The floor must not be greater than the number. On the number line, it is on the left of $x$ or at $x$.` },
+      { id: 'a-negative-fractional-part', name: `A negative fractional part`, errorAt: 0,
+        what: `The fractional part of a negative number is read off as the digits after the decimal point, with a minus sign.`,
+        wrong: [`$\\{-3.7\\} = -0.7$.`],
+        right: [`$\\{-3.7\\} = -3.7 - \\lfloor -3.7 \\rfloor = -3.7 - (-4) = 0.3$.`],
+        why: `The fractional part is thought of as "the decimal digits" rather than as $x - \\lfloor x \\rfloor$.`,
+        check: `The fractional part is always in $[0, 1)$, and $\\lfloor x \\rfloor + \\{x\\}$ must give back $x$: $-4 + 0.3 = -3.7$.` },
+      { id: 'adding-1-to-an-integer', name: `Adding 1 to an integer`, errorAt: 0,
+        what: `The ceiling is computed as the floor plus one, without checking whether $x$ is an integer.`,
+        wrong: [`$\\lceil 5 \\rceil = \\lfloor 5 \\rfloor + 1 = 6$, and so $\\lceil 60 / 12 \\rceil = 6$ buses for $60$ students in buses of $12$.`],
+        right: [`An integer is its own ceiling, $\\lceil 5 \\rceil = 5$: five buses are enough.`],
+        why: `$\\lceil x \\rceil = \\lfloor x \\rfloor + 1$ is true for every non-integer, so the exception is forgotten.`,
+        check: `Test the case where the division comes out exact.` },
+      { id: 'splitting-the-floor-over-a-sum', name: `Splitting the floor over a sum`, errorAt: 0,
+        what: `The floor is distributed over a sum or pulled out of a multiple.`,
+        wrong: [`$\\lfloor 0.6 + 0.6 \\rfloor = \\lfloor 0.6 \\rfloor + \\lfloor 0.6 \\rfloor = 0$, and $\\lfloor 2 \\cdot 1.6 \\rfloor = 2 \\lfloor 1.6 \\rfloor = 2$.`],
+        right: [`$\\lfloor 1.2 \\rfloor = 1$ and $\\lfloor 3.2 \\rfloor = 3$. Only an integer term can be taken out: $\\lfloor x + n \\rfloor = \\lfloor x \\rfloor + n$.`],
+        why: `The floor is treated like a linear operation, such as multiplying by a constant.`,
+        check: `Add the fractional parts. If they sum to $1$ or more, the floor of the sum is one larger than the sum of the floors.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     figures,
     sectionsContent,
     introContent,
@@ -630,7 +620,7 @@ return {
    }
 
 
-export default function IntegerPartPage({seoData, sectionsContent, introContent, negativeTable, roundingTable, propertiesTable, summaryTable, faqQuestions, schemas, figures}) {
+export default function IntegerPartPage({ pitfallData,seoData, sectionsContent, introContent, negativeTable, roundingTable, propertiesTable, summaryTable, faqQuestions, schemas, figures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -685,6 +675,11 @@ export default function IntegerPartPage({seoData, sectionsContent, introContent,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={arithmeticNotationSheet}
+            current={'/arithmetic/integer-part'}
           />,
         ]
     },
@@ -760,6 +755,15 @@ export default function IntegerPartPage({seoData, sectionsContent, introContent,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="integer-part-pitfalls"
+            title="Common pitfalls with the floor, ceiling and fractional part"
+            source="/arithmetic/integer-part"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

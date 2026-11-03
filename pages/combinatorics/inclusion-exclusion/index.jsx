@@ -990,6 +990,8 @@ import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagr
 import renderFixedPoints from '@/app/utils/illustrations/combinatorics/permutations/fixedPoints'
 import renderVennCount from '@/app/utils/illustrations/combinatorics/counting/vennCount'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1386,7 +1388,7 @@ The remaining 4 students take neither.]@
 
 @academic[pitfall,aside:true,width:35%:Subtracting the overlap twice
 Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages altogether: 19 is the number taking exactly one ($11 + 8$). The 7 are counted twice in $18 + 15$, so subtracting them once gives $26$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-overlap-twice)]@
 
 Each number in the calculation describes a different group of students. The 18 and the 15 are full class lists, and the 7 students who take both languages appear on each of them. The 26 is the number of different names across the two lists, which is what taking at least one of the two languages means. The 4 students who take neither language appear on no list at all.
 `,
@@ -1418,7 +1420,7 @@ $$50 + 33 + 20 - 16 - 10 - 6 + 3 = 74.$$]@
 
 @academic[pitfall,aside:true,width:35%:Forgetting the triple intersection
 Stopping after the pairs gives $50 + 33 + 20 - 16 - 10 - 6 = 71$: the multiples of 30 are added three times and subtracted three times, so they are not counted at all. Adding $|A \\cap B \\cap C| = 3$ back gives $74$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-triple-intersection)]@
 
 Each term in the example is a count of multiples. Among the integers from 1 to 100 there are $16$ multiples of 6, $10$ multiples of 10 and $6$ multiples of 15, one count for each pair of primes, and $3$ multiples of 30, the numbers 30, 60 and 90 that are divisible by all three primes. The seven terms of the formula use each of these counts once, with a sign set by how many of the sets meet in that term.
 `,
@@ -1447,7 +1449,7 @@ $$\\left| \\bigcup_{i=1}^{n} A_i \\right| = \\sum_{k=1}^{n} (-1)^{k+1} \\sum_{1 
 
 @academic[pitfall,aside:true,width:35%:Giving the last term a plus sign
 With $n = 4$, an element in all four sets is counted $4 - 6 + 4 + 1 = 3$ times when the four-fold term is added. Its sign is $(-1)^{4+1} = -1$, and $4 - 6 + 4 - 1 = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-giving-the-last-term-a-plus-sign)]@
 
 The sign of each level depends only on how many sets meet in its intersections. Single sets enter with a plus, pairs with a minus, triples with a plus, and the pattern continues up to the one term that intersects all $n$ sets. In the compact form this is the factor $(-1)^{k+1}$, which is $+1$ when $k$ is odd and $-1$ when $k$ is even; the expanded form writes the same factor as $(-1)^{n+1}$ on its last term.
 
@@ -1506,7 +1508,7 @@ This is the natural form for problems phrased as "how many elements avoid all of
 
 @academic[pitfall,aside:true,width:35%:Subtracting the sets one by one
 Taking $30 - 18 - 15 = -3$ for the students who take neither language removes the 7 who take both twice. Adding the overlap back gives $30 - 18 - 15 + 7 = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-sets-one-by-one)]@
 
 The language example from the two-set section is the smallest case. The universal set $U$ is the class of 30 students, $A_1$ is the set of students taking French and $A_2$ the set taking Spanish. The students who avoid both conditions lie outside $A_1 \\cup A_2$, and with $n = 2$ the complementary form has four terms: $|U|$, $|A_1|$, $|A_2|$ and $|A_1 \\cap A_2|$.
 `,
@@ -1587,7 +1589,7 @@ $$\\#\\{\\text{surjections } [n] \\to [k]\\} = \\sum_{j=0}^{k} (-1)^j \\binom{k}
 
 @academic[pitfall,aside:true,width:35%:Swapping n and k in the total
 Writing the number of functions as $4^3 = 64$ for $n = 4$, $k = 3$ counts maps from the 3-set into the 4-set. Each of the 4 domain elements has 3 possible images, so there are $3^4 = 81$ functions, and the sum starts from $81$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-n-and-k-in-the-total)]@
 
 For a concrete case, take a domain of $n = 4$ elements and a codomain of $k = 3$ elements. The sum then has four terms, for $j = 0, 1, 2, 3$, and gives $81 - 48 + 3 - 0 = 36$. These $36$ surjections are the functions that use every one of the three codomain elements at least once. The term for $j = 3$ is $0$, because no function can miss the whole codomain.
 
@@ -1603,72 +1605,10 @@ In how many ways can $n$ items be arranged so that none of $m$ specified items o
 
   obj9: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes come up again and again when inclusion–exclusion is applied. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Subtracting the overlap twice**
-
-The overlap is removed from each of the two sets before they are added, as if both $|A|$ and $|B|$ had to be cleaned of it. The elements in both sets then drop out of the count completely.
-
-Wrong working: with 18 students taking French, 15 taking Spanish and 7 taking both, the number taking at least one language is given as $18 + 15 - 7 - 7 = 19$.
-
-Right working: $18 + 15$ counts the 7 twice, once on each list, so one subtraction leaves them counted once: $18 + 15 - 7 = 26$. By regions: $11$ take only French, $8$ only Spanish and $7$ both, and $11 + 8 + 7 = 26$.
-
-Why it happens: the count for "only $A$", $|A| - |A \\cap B|$, is mixed up with the count for the union. Subtracting the overlap from each set gives the elements in exactly one set, which answers a different question.
-
-How to check: add up the regions. Every element of the union is in exactly one of "only $A$", "only $B$" and "both", so the three region counts must add up to the answer; here they give $26$, not $19$.
-
-**Forgetting the triple intersection**
-
-For three sets, the singles and the pairs are written down and the count stops there. The elements in all three sets are then added three times and subtracted three times, so they are lost.
-
-Wrong working: the integers from 1 to 100 divisible by 2, 3 or 5 are counted as $50 + 33 + 20 - 16 - 10 - 6 = 71$.
-
-Right working: add back the $3$ multiples of 30: $50 + 33 + 20 - 16 - 10 - 6 + 3 = 74$.
-
-Why it happens: the two-set formula ends with a subtraction, and subtracting the overlaps feels like the complete correction. The over-correction at the centre stays hidden until one element is traced through every term.
-
-How to check: trace an element that is in all three sets, such as $30$. It is counted by $|A|$, $|B|$ and $|C|$ and removed by all three pairwise terms, so without the triple term it is counted $3 - 3 = 0$ times.
-
-**Giving the last term a plus sign**
-
-For four or more sets, the term that intersects all $n$ sets is added, as in the three-set formula. Its sign is $(-1)^{n+1}$, which is a minus whenever $n$ is even.
-
-Wrong working: for four sets, an element in all four is counted $\\binom{4}{1} - \\binom{4}{2} + \\binom{4}{3} + \\binom{4}{4} = 4 - 6 + 4 + 1 = 3$ times.
-
-Right working: the four-fold term has the sign $(-1)^{4+1} = -1$, so the element is counted $4 - 6 + 4 - 1 = 1$ time, as required.
-
-Why it happens: the three-set formula is the one most often memorized, and it ends with a plus. The habit carries over to larger $n$.
-
-How to check: apply the formula to $n$ copies of the same one-element set. Their union has $1$ element, so the signed sum must come out as $1$; with a wrong last sign it does not.
-
-**Subtracting the sets one by one**
-
-To count the elements in none of the sets, each set is subtracted from the universal set separately. Elements that belong to more than one set are then removed more than once.
-
-Wrong working: the students taking neither French nor Spanish are counted as $30 - 18 - 15 = -3$.
-
-Right working: subtract the union, not the separate sets: $30 - (18 + 15 - 7) = 30 - 18 - 15 + 7 = 4$.
-
-Why it happens: "not French and not Spanish" sounds like two separate removals, and the overlap is easy to forget once the question is about the outside of the sets.
-
-How to check: the answer can be at most the size of the smallest complement, here $30 - 18 = 12$, and it can never be negative. With other numbers the wrong answer may land inside these limits, so the reliable habit is to compute the union first and then subtract it from $|U|$.
-
-**Swapping n and k in the total**
-
-In the surjection count, the number of all functions from an $n$-set to a $k$-set is written as $n^k$ instead of $k^n$, and the whole sum is built on the wrong total.
-
-Wrong working: for $n = 4$ and $k = 3$, the number of functions is given as $4^3 = 64$. That is the number of functions from a 3-element set into a 4-element set.
-
-Right working: each of the $4$ domain elements picks one of $3$ images independently, so there are $3 \\cdot 3 \\cdot 3 \\cdot 3 = 3^4 = 81$ functions. The sum is $81 - 3 \\cdot 2^4 + 3 \\cdot 1^4 - 0^4 = 81 - 48 + 3 - 0 = 36$.
-
-Why it happens: both expressions are one size raised to the other, and $k^n$ is remembered as a pattern without the choices behind it.
-
-How to check: build the count as a product of choices, one factor for each domain element; the number of factors is the exponent. For a single domain element mapped into 3 elements there are $3 = 3^1$ functions, not $1^3 = 1$.
-`,
+    content: `Five mistakes come up again and again when inclusion–exclusion is applied. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
     between: ``,
-    after: ``,
+    after: `Four of the five slips break the pattern of the formula: the overlap is subtracted once, the triple intersection is added back, the signs alternate all the way to the last term, and the union is found before it is subtracted from the total. The fifth swaps base and exponent in the total $k^n$, which has one factor for each of the $n$ domain elements. Adding up the regions, tracing one element through every term, or building the count as a product of choices catches each slip.`,
     link: '',
   },
 
@@ -1862,8 +1802,46 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'subtracting-the-overlap-twice', name: `Subtracting the overlap twice`, errorAt: 0,
+        what: `The overlap is removed from each of the two sets before they are added, as if both $|A|$ and $|B|$ had to be cleaned of it. The elements in both sets then drop out of the count completely.`,
+        wrong: [`With 18 students taking French, 15 taking Spanish and 7 taking both, the number taking at least one language is given as $18 + 15 - 7 - 7 = 19$.`],
+        right: [`$18 + 15$ counts the 7 twice, once on each list, so one subtraction leaves them counted once: $18 + 15 - 7 = 26$. By regions: $11$ take only French, $8$ only Spanish and $7$ both, and $11 + 8 + 7 = 26$.`],
+        why: `The count for "only $A$", $|A| - |A \\cap B|$, is mixed up with the count for the union. Subtracting the overlap from each set gives the elements in exactly one set, which answers a different question.`,
+        check: `Add up the regions. Every element of the union is in exactly one of "only $A$", "only $B$" and "both", so the three region counts must add up to the answer; here they give $26$, not $19$.` },
+      { id: 'forgetting-the-triple-intersection', name: `Forgetting the triple intersection`, errorAt: 0,
+        what: `For three sets, the singles and the pairs are written down and the count stops there. The elements in all three sets are then added three times and subtracted three times, so they are lost.`,
+        wrong: [`The integers from 1 to 100 divisible by 2, 3 or 5 are counted as $50 + 33 + 20 - 16 - 10 - 6 = 71$.`],
+        right: [`Add back the $3$ multiples of 30: $50 + 33 + 20 - 16 - 10 - 6 + 3 = 74$.`],
+        why: `The two-set formula ends with a subtraction, and subtracting the overlaps feels like the complete correction. The over-correction at the centre stays hidden until one element is traced through every term.`,
+        check: `Trace an element that is in all three sets, such as $30$. It is counted by $|A|$, $|B|$ and $|C|$ and removed by all three pairwise terms, so without the triple term it is counted $3 - 3 = 0$ times.` },
+      { id: 'giving-the-last-term-a-plus-sign', name: `Giving the last term a plus sign`, errorAt: 0,
+        what: `For four or more sets, the term that intersects all $n$ sets is added, as in the three-set formula. Its sign is $(-1)^{n+1}$, which is a minus whenever $n$ is even.`,
+        wrong: [`For four sets, an element in all four is counted $\\binom{4}{1} - \\binom{4}{2} + \\binom{4}{3} + \\binom{4}{4} = 4 - 6 + 4 + 1 = 3$ times.`],
+        right: [`The four-fold term has the sign $(-1)^{4+1} = -1$, so the element is counted $4 - 6 + 4 - 1 = 1$ time, as required.`],
+        why: `The three-set formula is the one most often memorized, and it ends with a plus. The habit carries over to larger $n$.`,
+        check: `Apply the formula to $n$ copies of the same one-element set. Their union has $1$ element, so the signed sum must come out as $1$; with a wrong last sign it does not.` },
+      { id: 'subtracting-the-sets-one-by-one', name: `Subtracting the sets one by one`, errorAt: 0,
+        what: `To count the elements in none of the sets, each set is subtracted from the universal set separately. Elements that belong to more than one set are then removed more than once.`,
+        wrong: [`The students taking neither French nor Spanish are counted as $30 - 18 - 15 = -3$.`],
+        right: [`Subtract the union, not the separate sets: $30 - (18 + 15 - 7) = 30 - 18 - 15 + 7 = 4$.`],
+        why: `"not French and not Spanish" sounds like two separate removals, and the overlap is easy to forget once the question is about the outside of the sets.`,
+        check: `The answer can be at most the size of the smallest complement, here $30 - 18 = 12$, and it can never be negative. With other numbers the wrong answer may land inside these limits, so the reliable habit is to compute the union first and then subtract it from $|U|$.` },
+      { id: 'swapping-n-and-k-in-the-total', name: `Swapping n and k in the total`, errorAt: 1,
+        what: `In the surjection count, the number of all functions from an $n$-set to a $k$-set is written as $n^k$ instead of $k^n$, and the whole sum is built on the wrong total.`,
+        wrong: [`For $n = 4$ and $k = 3$,`, `The number of functions is given as $4^3 = 64$. That is the number of functions from a 3-element set into a 4-element set.`],
+        right: [`For $n = 4$ and $k = 3$,`, `Each of the $4$ domain elements picks one of $3$ images independently, so there are $3 \\cdot 3 \\cdot 3 \\cdot 3 = 3^4 = 81$ functions. The sum is $81 - 3 \\cdot 2^4 + 3 \\cdot 1^4 - 0^4 = 81 - 48 + 3 - 0 = 36$.`],
+        why: `Both expressions are one size raised to the other, and $k^n$ is remembered as a pattern without the choices behind it.`,
+        check: `Build the count as a product of choices, one factor for each domain element; the number of factors is the exponent. For a single domain element mapped into 3 elements there are $3 = 3^1$ functions, not $1^3 = 1$.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
          sectionsContent,
          introContent,
          obj6Table,
@@ -1884,7 +1862,7 @@ const schemas = {
     }
    }
 
-export default function InclusionExclusionPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function InclusionExclusionPage({ pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1955,7 +1933,7 @@ The remaining 4 students take neither.]@`,
         content: [
           `@academic[pitfall,aside:true,width:35%:Subtracting the overlap twice
 Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages altogether: 19 is the number taking exactly one ($11 + 8$). The 7 are counted twice in $18 + 15$, so subtracting them once gives $26$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-subtracting-the-overlap-twice)]@`,
           `With three sets, subtracting the pairwise overlaps takes the triple overlap away too often, so it has to be added back, as [three sets](!/combinatorics/inclusion-exclusion#2) shows.`,
         ],
       },
@@ -2038,6 +2016,15 @@ Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages alto
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="inclusion-exclusion-pitfalls"
+            title="Common pitfalls with inclusion–exclusion"
+            source="/combinatorics/inclusion-exclusion"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

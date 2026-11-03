@@ -51,7 +51,7 @@ const PRESETS = {
 
 const EQ = {
   absvalue: 'the absolute value, built from two pieces',
-  heaviside: 'the Heaviside step',
+  heaviside: 'a two-piece step: −1, then 1',
   sign: 'the sign function (three pieces)',
   sawtooth: 'a three-piece sawtooth',
   hole: 'a removable hole at x = 1',

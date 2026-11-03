@@ -69,7 +69,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { processContent } from '@/app/utils/contentProcessor';
 
 /* ------------------------------------------------------------------ */
@@ -561,17 +561,46 @@ function pickLayout(data, opts) {
 
 const LAYOUTS = { split: Split, ledger: Ledger, trace: Trace };
 
+// A display formula wider than its box is scaled down to fit, to no less
+// than MIN_FIT of its size; anything still wider scrolls inside its box.
+const MIN_FIT = 0.72;
+
+function fitFormulas(root) {
+  root.querySelectorAll('.katex-display').forEach((d) => {
+    const k = d.querySelector('.katex');
+    if (!k) return;
+    k.style.fontSize = '';
+    const avail = d.clientWidth;
+    const need = d.scrollWidth;
+    if (avail > 0 && need > avail + 1) {
+      const px = parseFloat(window.getComputedStyle(k).fontSize);
+      k.style.fontSize = (px * Math.max(MIN_FIT, avail / need)).toFixed(2) + 'px';
+    }
+  });
+}
+
 export default function MistakeFix({ data, variant = 'auto', theme, options }) {
   const t = { ...DEFAULT_THEME, ...(theme || {}), ...(data.theme || {}) };
   const labels = { ...DEFAULT_LABELS, ...(data.labels || {}) };
   const opts = { ...DEFAULT_OPTIONS, ...(options || {}), ...(data.options || {}) };
   const layout = LAYOUTS[variant] ? variant : pickLayout(data, opts);
   const View = LAYOUTS[layout];
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+    fitFormulas(root);
+    if (typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver(() => fitFormulas(root));
+    ro.observe(root);
+    return () => ro.disconnect();
+  }, [data, layout]);
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div className={'mf-root' + (opts.marks ? ' mf-marks' : '')} style={cssVars(t)}>
+      <div ref={rootRef} className={'mf-root' + (opts.marks ? ' mf-marks' : '')} style={cssVars(t)}>
         <div className="mf-card">
           {data.header && (
             <div className="mf-head">

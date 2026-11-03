@@ -103,7 +103,7 @@ const keyWords = [
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;"><a href="/linear-algebra/decompositions/qr" style="${linkStyle}">QR</a></td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;">A = QR</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any m × n with linearly independent columns</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">any m × n; independent columns make R invertible</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">Q with orthonormal columns, R upper triangular</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">least squares; iterative algorithm for eigenvalues</td>
     </tr>

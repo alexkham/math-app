@@ -1201,7 +1201,7 @@ const schemas = {
     operations: demoUnitFrame({
       svg: vectorAdditionDiagrams.done,
       caption: 'Addition finished, component by component',
-      text: 'Addition, subtraction and scaling all share this shape: the operation is applied to each slot on its own and the slots never talk to each other. That is why all three demand vectors of the same length and why all three return a vector of that same length. See the same run for subtraction on the',
+      text: 'Addition, subtraction and scaling all share this shape: the operation is applied to each slot on its own and the slots never talk to each other. That is why addition and subtraction need two vectors of the same length, why scaling acts on a single vector, and why all three return a vector of that same length. See the same run for subtraction on the',
       href: '/linear-algebra/visual-tools/vector-addition',
       linkText: 'vector addition visualizer',
     }),

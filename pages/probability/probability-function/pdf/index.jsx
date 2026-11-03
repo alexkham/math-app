@@ -20,6 +20,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -1270,9 +1271,20 @@ const schemas = {
       { id: 'num', name: 'Numerical', items: [ { label: 'Reads', text: 'tabulated values' }, { label: 'Examples', text: 'normal CDF tables' } ] },
     ],
   };
+  // TheoremCard data (pdf-cdf-chain); every fact is from the section text
+  const pdfCdfChain = {
+    header: { kicker: 'PDF and CDF', title: 'PDF to CDF and back', lede: 'Two representations of one distribution, linked by integration and differentiation.' },
+    chain: [
+      { name: 'PDF', text: '$f_X(x)$', items: ['Exponential: $\\lambda e^{-\\lambda x}$ for $x \\geq 0$', 'Uniform on $[0, 10]$: $\\frac{1}{10}$'], edge: 'integrate' },
+      { name: 'CDF', text: '$F_X(x) = \\int_{-\\infty}^{x} f_X(t)\\, dt$', items: ['Exponential: $1 - e^{-\\lambda x}$', 'Uniform: $\\frac{x}{10}$ on $[0, 10]$', 'Continuous and non-decreasing'], edge: 'differentiate' },
+      { name: 'Back to the PDF', text: '$f_X(x) = \\dfrac{d}{dx} F_X(x)$', items: ['The Fundamental Theorem of Calculus applied to probability', 'Steeper CDF, higher PDF; flat CDF, zero density'] },
+    ],
+  };
+
 
    return {
   props:{
+      pdfCdfChain,
     pdfViewTree,
     demoUnits,
     conceptIntroFigures,
@@ -1291,7 +1303,9 @@ const schemas = {
 }
    }
 
-export default function PDFPage({pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function PDFPage({pdfCdfChain, pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -1507,6 +1521,16 @@ Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$
           sectionsContent.obj12.content,
                   <div key={'unit-u_12_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_12_1 }} />,
           `The named continuous families are catalogued next.`,
+          <DiagramFrame
+            key={'obj12-theorem'}
+            id="pdf-cdf-chain"
+            title="PDF to CDF and back"
+            source="/probability/probability-function/pdf"
+            before={`The two representations are linked by the two operations of calculus. The chain runs the loop once, with the page’s exponential and uniform examples.`}
+            after={`Integration builds up cumulative probability; differentiation recovers the density. The steeper the CDF, the higher the PDF.`}
+          >
+            <TheoremCard data={pdfCdfChain} variant="chain" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

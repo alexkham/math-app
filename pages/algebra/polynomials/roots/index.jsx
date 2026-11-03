@@ -19,6 +19,7 @@ import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -410,7 +411,7 @@ This approach works whenever factoring is feasible. The polynomial $x^3 - 4x$ fa
 
 @academic[pitfall,aside:true,width:35%:Dividing by the variable
 Dividing $x^3 - 4x = 0$ by $x$ leaves $x^2 = 4$, so only $2$ and $-2$ are found and the root $0$ is lost. Factoring out $x$ keeps all three: $x(x - 2)(x + 2) = 0$ gives $0$, $2$ and $-2$.
-[Read more](!#12)]@
+[Read more](!#pitfall-dividing-by-the-variable)]@
 
 Once the polynomial is written as a product, the roots come from the zero-product property: a product equals zero exactly when at least one of its factors does. Each factor is set equal to zero on its own, and each one solved gives a root.
 
@@ -463,7 +464,7 @@ Consider $2x^3 - 3x^2 - 8x + 12$. The constant term is $12$ with divisors $\\pm 
 
 @academic[pitfall,aside:true,width:35%:Swapping p and q
 Building the candidates as divisors of $2$ over divisors of $12$ puts the leading coefficient on top; that list holds $\\frac{1}{3}$ and $\\frac{2}{3}$ but misses the root $\\frac{3}{2}$. The numerator divides the constant term $12$, the denominator the leading coefficient $2$.
-[Read more](!#12)]@
+[Read more](!#pitfall-swapping-p-and-q)]@
 
 Testing candidates by substitution identifies actual roots. For the polynomial above, $P(2) = 16 - 12 - 16 + 12 = 0$, confirming $x = 2$ as a root. Once a root is found, dividing out its factor reduces the degree, and the process can repeat on the quotient.
 
@@ -490,7 +491,7 @@ Synthetic division is faster than long division for divisors of the form $(x - r
 
 @academic[pitfall,aside:true,width:35%:Skipping a zero coefficient
 Writing the row for $x^3 - 7x + 6$ as $1, -7, 6$ leaves out the missing $x^2$ term, so testing $2$ gives remainder $-4$ and the root is missed. With the zero, $1, 0, -7, 6$, the remainder is $0$ and the quotient is $x^2 + 2x - 3$.
-[Read more](!#12)]@
+[Read more](!#pitfall-skipping-a-zero-coefficient)]@
 
 The row of coefficients is the only input synthetic division uses. The powers of $x$ are never written down; each number's position in the row stands for its power, from $x^n$ at the left down to the constant term at the right.`,
   before: ``,
@@ -545,7 +546,7 @@ $$r_1 + r_2 = -b \\qquad \\text{and} \\qquad r_1 \\cdot r_2 = c$$]@
 
 @academic[pitfall,aside:true,width:35%:Taking b as the sum of the roots
 Reading the sum of the roots of $x^2 + 7x + 10$ as $7$ takes $b$ without its minus sign. The roots are $-2$ and $-5$, so the sum is $-b = -7$; the product is $c = 10$.
-[Read more](!#12)]@
+[Read more](!#pitfall-taking-b-as-the-sum-of-the-roots)]@
 
 The sum of the roots equals the negative of the coefficient of $x$, and the product equals the constant term. For $x^2 - 5x + 6$, the roots sum to $5$ and multiply to $6$ — confirmed by the actual roots $2$ and $3$.
 
@@ -581,63 +582,9 @@ Overlooking the conjugate pair rule produces impossible root sets. If a polynomi
 
 Sign errors in the quadratic formula are common, particularly with the $-b$ term. For $x^2 + 6x + 5$, the formula gives $x = \\frac{-6 \\pm \\sqrt{36 - 20}}{2}$, not $\\frac{6 \\pm \\sqrt{36 - 20}}{2}$. The leading negative sign applies to all of $b$, not just part of it.
 
-Abandoning the Rational Root Theorem too early is another pitfall. Every candidate on the list must be tested before concluding that no rational roots exist. Missing one candidate can mean missing a root that would have unlocked the entire factorization.
-
-**Dividing by the variable**
-
-Every term of the equation contains $x$, so both sides are divided by $x$ to make it simpler. The division throws away the factor $x$, and with it the root $0$.
-
-Wrong working:
-$$x^3 - 4x = 0 \\implies x^2 - 4 = 0 \\implies x = 2 \\text{ or } x = -2$$
-
-Right working: factor out $x$ instead of dividing by it.
-$$x^3 - 4x = x(x^2 - 4) = x(x - 2)(x + 2) = 0$$
-Each factor gives a root: $x = 0$, $x = 2$ and $x = -2$.
-
-Why it happens: dividing both sides by the same quantity is a familiar move from linear equations, and it hides that the quantity may itself be zero.
-
-How to check: count the roots against the degree. A cubic with only two roots found, and no repeated factor, is missing one. Substituting $x = 0$ gives $0 - 0 = 0$, so $0$ is a root.
-
-**Swapping p and q**
-
-The Rational Root Theorem is applied with the roles of the two coefficients reversed: the divisors of the leading coefficient go on top and the divisors of the constant term go below.
-
-Wrong working: for $2x^3 - 3x^2 - 8x + 12$, the candidates are taken as a divisor of $2$ over a divisor of $12$:
-$$\\pm 1, \\pm 2, \\pm \\frac{1}{2}, \\pm \\frac{1}{3}, \\pm \\frac{2}{3}, \\pm \\frac{1}{4}, \\pm \\frac{1}{6}, \\pm \\frac{1}{12}$$
-
-Right working: $p$ divides the constant term $12$ and $q$ divides the leading coefficient $2$, which gives
-$$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$
-The polynomial factors as $(x - 2)(x + 2)(2x - 3)$, so its roots are $2$, $-2$ and $\\frac{3}{2}$. The wrong list misses $\\frac{3}{2}$.
-
-Why it happens: the theorem pairs two letters with two coefficients, and nothing in the letters $p$ and $q$ says which goes with which.
-
-How to check: try the rule on a polynomial whose root is known. $2x - 3$ has the root $\\frac{3}{2}$; its numerator $3$ divides the constant term $-3$, and its denominator $2$ divides the leading coefficient $2$.
-
-**Skipping a zero coefficient**
-
-The polynomial has a missing power, and its coefficient row is written without a placeholder for it. Every later number then sits under the wrong power.
-
-Wrong working: for $x^3 - 7x + 6$, the row is written as $1, -7, 6$. Testing $2$: bring down $1$; $1 \\cdot 2 = 2$, $-7 + 2 = -5$; $-5 \\cdot 2 = -10$, $6 - 10 = -4$. The remainder is $-4$, so $2$ seems not to be a root.
-
-Right working: the $x^2$ term has coefficient $0$, so the row is $1, 0, -7, 6$. Bring down $1$; $1 \\cdot 2 = 2$, $0 + 2 = 2$; $2 \\cdot 2 = 4$, $-7 + 4 = -3$; $-3 \\cdot 2 = -6$, $6 - 6 = 0$. The remainder is $0$, so $2$ is a root, and the quotient is $x^2 + 2x - 3$.
-
-Why it happens: the polynomial as written shows only three terms, and the row is copied from what is visible.
-
-How to check: the row must hold one more number than the degree, four numbers for a cubic. The remainder must also equal $P(r)$: here $P(2) = 8 - 14 + 6 = 0$.
-
-**Taking b as the sum of the roots**
-
-Vieta's formula for the sum is used without its minus sign, so the coefficient of $x$ is read directly as the sum of the roots.
-
-Wrong working: for $x^2 + 7x + 10$, the roots are said to add up to $7$ and multiply to $10$.
-
-Right working: $r_1 + r_2 = -b = -7$ and $r_1 \\cdot r_2 = c = 10$. The roots are $-2$ and $-5$: $-2 + (-5) = -7$ and $(-2)(-5) = 10$.
-
-Why it happens: the product is read straight off the constant term, and the sum is expected to work the same way.
-
-How to check: the factored form shows the signs. $x^2 + 7x + 10 = (x + 2)(x + 5)$, so both roots are negative and their sum cannot be positive.`,
+Abandoning the Rational Root Theorem too early is another pitfall. Every candidate on the list must be tested before concluding that no rational roots exist. Missing one candidate can mean missing a root that would have unlocked the entire factorization.`,
   before: ``,
-  after: ``,
+  after: `Two counts catch two of these slips: a polynomial of degree $n$ has $n$ roots counted with multiplicity, so a cubic with only two roots and no repeated factor is missing one, and a synthetic division row for degree $n$ holds $n + 1$ numbers, zeros included. The other two are settled by a small known example: $2x - 3$ shows that the numerator of a rational root divides the constant term, and $(x + 2)(x + 5)$ shows that two negative roots give a positive middle coefficient.`,
   link: '',
 },
     obj13:{
@@ -906,8 +853,44 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dividing-by-the-variable', name: `Dividing by the variable`, errorAt: 1,
+        what: `Every term of the equation contains $x$, so both sides are divided by $x$ to make it simpler. The division throws away the factor $x$, and with it the root $0$.`,
+        wrong: [`$$x^3 - 4x = 0$$`, `$$\\implies x^2 - 4 = 0$$`, `$$\\implies x = 2 \\text{ or } x = -2$$`],
+        right: [`$$x^3 - 4x = 0$$`, `Factor out $x$ instead of dividing by it.`, `$$x^3 - 4x = x(x^2 - 4)$$
+$$= x(x - 2)(x + 2) = 0$$`, `Each factor gives a root: $x = 0$, $x = 2$ and $x = -2$.`],
+        why: `Dividing both sides by the same quantity is a familiar move from linear equations, and it hides that the quantity may itself be zero.`,
+        check: `Count the roots against the degree. A cubic with only two roots found, and no repeated factor, is missing one. Substituting $x = 0$ gives $0 - 0 = 0$, so $0$ is a root.` },
+      { id: 'swapping-p-and-q', name: `Swapping p and q`, errorAt: 0,
+        what: `The Rational Root Theorem is applied with the roles of the two coefficients reversed: the divisors of the leading coefficient go on top and the divisors of the constant term go below.`,
+        wrong: [`For $2x^3 - 3x^2 - 8x + 12$, the candidates are taken as a divisor of $2$ over a divisor of $12$:
+$$\\pm 1, \\pm 2, \\pm \\frac{1}{2}, \\pm \\frac{1}{3},$$
+$$\\pm \\frac{2}{3}, \\pm \\frac{1}{4}, \\pm \\frac{1}{6}, \\pm \\frac{1}{12}$$`],
+        right: [`$p$ divides the constant term $12$ and $q$ divides the leading coefficient $2$, which gives
+$$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$$`, `The polynomial factors as $(x - 2)(x + 2)(2x - 3)$, so its roots are $2$, $-2$ and $\\frac{3}{2}$. The wrong list misses $\\frac{3}{2}$.`],
+        why: `The theorem pairs two letters with two coefficients, and nothing in the letters $p$ and $q$ says which goes with which.`,
+        check: `Try the rule on a polynomial whose root is known. $2x - 3$ has the root $\\frac{3}{2}$; its numerator $3$ divides the constant term $-3$, and its denominator $2$ divides the leading coefficient $2$.` },
+      { id: 'skipping-a-zero-coefficient', name: `Skipping a zero coefficient`, errorAt: 0,
+        what: `The polynomial has a missing power, and its coefficient row is written without a placeholder for it. Every later number then sits under the wrong power.`,
+        wrong: [`For $x^3 - 7x + 6$, the row is written as $1, -7, 6$. Testing $2$: bring down $1$; $1 \\cdot 2 = 2$, $-7 + 2 = -5$; $-5 \\cdot 2 = -10$, $6 - 10 = -4$. The remainder is $-4$, so $2$ seems not to be a root.`],
+        right: [`The $x^2$ term has coefficient $0$, so the row is $1, 0, -7, 6$. Bring down $1$; $1 \\cdot 2 = 2$, $0 + 2 = 2$; $2 \\cdot 2 = 4$, $-7 + 4 = -3$; $-3 \\cdot 2 = -6$, $6 - 6 = 0$. The remainder is $0$, so $2$ is a root, and the quotient is $x^2 + 2x - 3$.`],
+        why: `The polynomial as written shows only three terms, and the row is copied from what is visible.`,
+        check: `The row must hold one more number than the degree, four numbers for a cubic. The remainder must also equal $P(r)$: here $P(2) = 8 - 14 + 6 = 0$.` },
+      { id: 'taking-b-as-the-sum-of-the-roots', name: `Taking b as the sum of the roots`, errorAt: 0,
+        what: `Vieta's formula for the sum is used without its minus sign, so the coefficient of $x$ is read directly as the sum of the roots.`,
+        wrong: [`For $x^2 + 7x + 10$, the roots are said to add up to $7$ and multiply to $10$.`],
+        right: [`$r_1 + r_2 = -b = -7$ and $r_1 \\cdot r_2 = c = 10$. The roots are $-2$ and $-5$: $-2 + (-5) = -7$ and $(-2)(-5) = 10$.`],
+        why: `The product is read straight off the constant term, and the sum is expected to work the same way.`,
+        check: `The factored form shows the signs. $x^2 + 7x + 10 = (x + 2)(x + 5)$, so both roots are negative and their sum cannot be positive.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     rootMethodTree,
     cubicFactoringSteps,
     realComplexBeforeAfter,
@@ -932,7 +915,7 @@ const schemas = {
 }
    }
 
-export default function RootsPage({rootMethodTree, cubicFactoringSteps, realComplexBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RootsPage({ pitfallData,rootMethodTree, cubicFactoringSteps, realComplexBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1182,6 +1165,15 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="polynomial-root-pitfalls"
+            title="Common pitfalls with polynomial roots"
+            source="/algebra/polynomials/roots"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 

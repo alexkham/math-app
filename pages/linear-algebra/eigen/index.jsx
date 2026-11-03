@@ -896,7 +896,7 @@ The full set of [properties](!/linear-algebra/eigen/properties) — including ei
 @academic[fact,aside:true,width:35%:Google's ranking is an eigenvector
 PageRank, the score Google first used to rank web pages, is the eigenvector for eigenvalue $1$ of a matrix with one row and one column per page. With billions of pages, it was found by multiplying by the matrix over and over, never through a characteristic polynomial.]@
 
-In dynamical systems, eigenvalues determine long-term behavior. The system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ grows, decays, or oscillates depending on whether the eigenvalues have absolute value greater than, less than, or equal to $1$. The system $\\mathbf{x}' = A\\mathbf{x}$ has solutions involving $e^{\\lambda t}$, so the real parts of the eigenvalues determine exponential growth or decay and the imaginary parts determine oscillation frequency.
+In dynamical systems, eigenvalues determine long-term behavior. The system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ grows if any eigenvalue has absolute value greater than $1$ (for a typical starting vector), decays if every eigenvalue has absolute value less than $1$, and neither grows nor shrinks if the largest absolute value is exactly $1$ and $A$ is diagonalizable: it may stay fixed, rotate or oscillate. The system $\\mathbf{x}' = A\\mathbf{x}$ has solutions involving $e^{\\lambda t}$, so the real parts of the eigenvalues determine exponential growth or decay and the imaginary parts determine oscillation frequency.
 
 In statistics, the eigenvectors of a covariance matrix point in the directions of maximum variance — this is the foundation of principal component analysis. In physics, the eigenvectors of a Hamiltonian or stiffness matrix correspond to natural modes of vibration. In graph theory, eigenvalues of adjacency and Laplacian matrices encode connectivity and clustering structure.
 
@@ -1095,7 +1095,7 @@ const schemas = {
       {
         id: 'osc', condition: '$|\\lambda| = 1$',
         count: { n: '~' },
-        headline: 'Oscillates',
+        headline: 'Neither grows nor shrinks',
       },
     ],
   };

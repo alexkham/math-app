@@ -14,6 +14,7 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 export async function getStaticProps(){
 const keyWords = [
@@ -367,7 +368,7 @@ obj0: {
 - [Absolute Value Equation](!/algebra/formulas#absolute_value_equation) — $|p| = b \\implies p = b \\text{ or } p = -b$
 - [Absolute Value Inequalities](!/algebra/formulas#absolute_value_inequalities) — $|p| < b \\implies -b < p < b$
 - [Vieta's Formulas (Quadratic)](!/algebra/formulas#vietas_formulas_quadratic) — $x_1 + x_2 = -\\frac{b}{a}$
-- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + \\cdots + r_n = -a_{n-1}$
+- [Vieta's Formulas (General)](!/algebra/formulas#vietas_formulas_general) — $r_1 + r_2 + \\cdots + r_n = -\\frac{a_{n-1}}{a_n}$
 `,
     before: ``,
     after: `
@@ -427,7 +428,7 @@ These reversible operations are the backbone of algebraic manipulation.
 
 @academic[pitfall,aside:true,width:35%:Dividing by the variable
 Dividing $x^2 = 3x$ by $x$ gives $x = 3$ and loses $x = 0$, where both sides equal $0$. Moving every term to one side, $x(x - 3) = 0$, gives $x = 0$ or $x = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-variable)]@
 
 Other operations carry risk. Multiplying both sides by an expression containing the variable may introduce values that were not solutions of the original equation. Squaring both sides can do the same. The equation $x = 3$ has one solution, but squaring gives $x^2 = 9$, whose solution set $\\{-3, 3\\}$ is larger. The extra value $x = -3$ is an extraneous solution — it satisfies the transformed equation but not the original. Any solving method that involves a non-reversible step demands verification: every candidate must be substituted back into the original equation to confirm it is genuine.`,
     before: ``,
@@ -455,7 +456,7 @@ Solving a linear equation requires nothing beyond the properties of equality: is
 
 @academic[pitfall,aside:true,width:35%:Reading 0 = 0 as x = 0
 Simplifying $2(x + 1) = 2x + 2$ to $0 = 0$ and writing $x = 0$ reports a single solution. The statement $0 = 0$ no longer contains $x$ and is always true, so the solution set is all of $\\mathbb{R}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-0-0-as-x-0)]@
 
 The structure breaks only when the variable terms cancel entirely during simplification. If the remaining statement is true (like $0 = 0$), the original equation is an identity. If it is false (like $0 = 5$), the equation is a contradiction. These edge cases aside, first-degree equations are the most predictable objects in algebra.`,
     before: ``,
@@ -478,7 +479,7 @@ $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the sign of b
 For $x^2 - 5x + 6 = 0$, writing $-b$ as $-5$ gives $x = \\frac{-5 \\pm 1}{2}$, that is $-2$ and $-3$. Here $b = -5$, so $-b = 5$ and $x = \\frac{5 \\pm 1}{2}$: $x = 3$ or $x = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-sign-of-b)]@
 
 The formula accepts any coefficients and delivers the roots directly, making it the default tool when factoring is not immediate. Vieta's formulas offer a complementary perspective: the sum of the two roots equals $-\\frac{b}{a}$ and their product equals $\\frac{c}{a}$, connecting solutions back to the coefficients that generated them.
 
@@ -525,7 +526,7 @@ The risk of extraneous solutions is not a minor technicality — it is the defin
 
 @academic[pitfall,aside:true,width:35%:Forgetting the negative case
 Solving $|x - 2| = 5$ as $x - 2 = 5$ gives only $x = 7$. The case $x - 2 = -5$ adds $x = -3$, and $|-3 - 2| = 5$ as well, so both $x = 7$ and $x = -3$ are solutions.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-negative-case)]@
 
 This case-splitting approach extends to more complex configurations. The equation $|f(x)| = |g(x)|$ decomposes into $f(x) = g(x)$ and $f(x) = -g(x)$. Equations with multiple absolute value terms require identifying the critical points where each expression inside $|\\;|$ changes sign, then solving on each interval separately using the piecewise definition. The geometric reading — absolute value as distance on the number line — often provides a faster route to the answer than purely mechanical case analysis.`,
     before: ``,
@@ -563,77 +564,9 @@ This case-splitting approach extends to more complex configurations. The equatio
 
   obj13: {
     title: `Common Pitfalls`,
-    content: `Five mistakes cause most wrong answers in the equation types on this page. Four of them are marked where they happen in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Dividing by the variable**
-
-Both sides of an equation share a factor that contains the unknown, and the factor is cancelled by dividing both sides by it.
-
-Wrong working:
-$$x^2 = 3x \\implies x = 3$$
-
-Right working: move every term to one side and factor.
-$$x^2 - 3x = 0 \\implies x(x - 3) = 0 \\implies x = 0 \\text{ or } x = 3$$
-
-Why it happens: dividing by a constant is always safe, and dividing by $x$ looks like the same step. But when $x = 0$ it is a division by zero, so the solution $x = 0$ is thrown away without notice.
-
-How to check: substitute $x = 0$ into the original equation. Both sides give $0$, so it is a solution the wrong working lost.
-
-**Skipping the check after squaring**
-
-A radical equation is squared to remove the root, and every solution of the squared equation is reported as an answer.
-
-Wrong working:
-$$\\sqrt{x + 5} = x - 1 \\implies x + 5 = x^2 - 2x + 1 \\implies x^2 - 3x - 4 = 0 \\implies x = 4 \\text{ or } x = -1$$
-
-Right working: squaring is not reversible, so each candidate goes back into the original equation. For $x = 4$, $\\sqrt{9} = 3$ and $4 - 1 = 3$, which match. For $x = -1$, $\\sqrt{4} = 2$ but $-1 - 1 = -2$, which do not. The only solution is $x = 4$.
-
-Why it happens: the squared equation is an ordinary quadratic, and its two clean roots look final. Squaring also accepts values where the two sides are opposites, since $2^2 = (-2)^2$.
-
-How to check: substitute every candidate into the original equation, not into the squared one.
-
-**Reading 0 = 0 as x = 0**
-
-The variable terms cancel while simplifying, the statement $0 = 0$ is left, and it is read as the answer $x = 0$.
-
-Wrong working:
-$$2(x + 1) = 2x + 2 \\implies 2x + 2 = 2x + 2 \\implies 0 = 0 \\implies x = 0$$
-
-Right working: $0 = 0$ contains no $x$ and is true, so the original equation holds for every value of $x$. It is an identity, and the solution set is $\\mathbb{R}$.
-
-Why it happens: most solving ends with a line of the form $x = \\ldots$, and a lone $0$ on the last line looks like the value of $x$.
-
-How to check: substitute a value other than $0$. For $x = 5$, both sides give $12$, so $x = 0$ is not the only solution.
-
-**Dropping the sign of b**
-
-The quadratic formula is used with a negative coefficient $b$, and $-b$ is written with the wrong sign.
-
-Wrong working: for $x^2 - 5x + 6 = 0$, with $a = 1$, $b = -5$, $c = 6$ and $\\Delta = 25 - 24 = 1$,
-$$x = \\frac{-5 \\pm 1}{2} \\implies x = -2 \\text{ or } x = -3$$
-
-Right working: $-b = -(-5) = 5$, so
-$$x = \\frac{5 \\pm 1}{2} \\implies x = 3 \\text{ or } x = 2$$
-
-Why it happens: the minus sign in front of $b$ in the formula and the minus sign inside $b$ itself are easy to merge into one, especially when $b$ is copied straight from the equation.
-
-How to check: substitute a root. $x = -2$ gives $4 + 10 + 6 = 20$, not $0$; $x = 2$ gives $4 - 10 + 6 = 0$. By Vieta's formulas the roots must also add up to $-\\frac{b}{a} = 5$.
-
-**Forgetting the negative case**
-
-An absolute value equation $|f(x)| = k$ with $k > 0$ is solved by dropping the bars, so only the case $f(x) = k$ is solved.
-
-Wrong working:
-$$|x - 2| = 5 \\implies x - 2 = 5 \\implies x = 7$$
-
-Right working: both cases are needed.
-$$x - 2 = 5 \\implies x = 7 \\qquad x - 2 = -5 \\implies x = -3$$
-
-Why it happens: the bars look like a pair of brackets, and removing them seems harmless. But a number and its opposite have the same absolute value, so each value of $k$ comes from two values of $f(x)$.
-
-How to check: use the distance reading. $|x - 2| = 5$ asks for the points at distance $5$ from $2$ on the number line, and there are two of them, $7$ and $-3$.`,
+    content: `Five mistakes cause most wrong answers in the equation types on this page. Four of them are marked where they happen in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Two of the slips lose solutions: dividing by $x$ drops $x = 0$, and taking only the positive case of $|x - 2| = 5$ drops $x = -3$. One keeps a false solution, because squaring can add a root that the original equation rejects. The other two misread a line of working: $0 = 0$ means that every $x$ is a solution, and $-b$ for $b = -5$ is $5$. Substituting the candidates, and the values the working left out, back into the original equation catches every one of them.`,
     link: '',
   },
 
@@ -887,8 +820,49 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj13 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dividing-by-the-variable', name: `Dividing by the variable`, errorAt: 1,
+        what: `Both sides of an equation share a factor that contains the unknown, and the factor is cancelled by dividing both sides by it.`,
+        wrong: [`$$x^2 = 3x$$`, `$$\\implies x = 3$$`],
+        right: [`$$x^2 = 3x$$`, `Move every term to one side and factor.`, `$$x^2 - 3x = 0$$`, `$$\\implies x(x - 3) = 0$$`, `$$\\implies x = 0 \\text{ or } x = 3$$`],
+        why: `Dividing by a constant is always safe, and dividing by $x$ looks like the same step. But when $x = 0$ it is a division by zero, so the solution $x = 0$ is thrown away without notice.`,
+        check: `Substitute $x = 0$ into the original equation. Both sides give $0$, so it is a solution the wrong working lost.` },
+      { id: 'skipping-the-check-after-squaring', name: `Skipping the check after squaring`, errorAt: 1,
+        what: `A radical equation is squared to remove the root, and every solution of the squared equation is reported as an answer.`,
+        wrong: [`$$\\sqrt{x + 5} = x - 1$$`, `$$\\implies x + 5 = x^2 - 2x + 1$$`, `$$\\implies x^2 - 3x - 4 = 0$$`, `$$\\implies x = 4 \\text{ or } x = -1$$`],
+        right: [`$$\\sqrt{x + 5} = x - 1$$`, `Squaring is not reversible, so each candidate goes back into the original equation. For $x = 4$, $\\sqrt{9} = 3$ and $4 - 1 = 3$, which match. For $x = -1$, $\\sqrt{4} = 2$ but $-1 - 1 = -2$, which do not. The only solution is $x = 4$.`],
+        why: `The squared equation is an ordinary quadratic, and its two clean roots look final. Squaring also accepts values where the two sides are opposites, since $2^2 = (-2)^2$.`,
+        check: `Substitute every candidate into the original equation, not into the squared one.` },
+      { id: 'reading-0-0-as-x-0', name: `Reading 0 = 0 as x = 0`, errorAt: 1,
+        what: `The variable terms cancel while simplifying, the statement $0 = 0$ is left, and it is read as the answer $x = 0$.`,
+        wrong: [`$$2(x + 1) = 2x + 2$$`, `$$\\implies 2x + 2 = 2x + 2$$`, `$$\\implies 0 = 0$$`, `$$\\implies x = 0$$`],
+        right: [`$$2(x + 1) = 2x + 2$$`, `$0 = 0$ contains no $x$ and is true, so the original equation holds for every value of $x$. It is an identity, and the solution set is $\\mathbb{R}$.`],
+        why: `Most solving ends with a line of the form $x = \\ldots$, and a lone $0$ on the last line looks like the value of $x$.`,
+        check: `Substitute a value other than $0$. For $x = 5$, both sides give $12$, so $x = 0$ is not the only solution.` },
+      { id: 'dropping-the-sign-of-b', name: `Dropping the sign of b`, errorAt: 0,
+        what: `The quadratic formula is used with a negative coefficient $b$, and $-b$ is written with the wrong sign.`,
+        wrong: [`For $x^2 - 5x + 6 = 0$, with $a = 1$, $b = -5$, $c = 6$ and $\\Delta = 25 - 24 = 1$,
+$$x = \\frac{-5 \\pm 1}{2}$$`, `$$\\implies x = -2 \\text{ or } x = -3$$`],
+        right: [`$-b = -(-5) = 5$, so
+$$x = \\frac{5 \\pm 1}{2}$$`, `$$\\implies x = 3 \\text{ or } x = 2$$`],
+        why: `The minus sign in front of $b$ in the formula and the minus sign inside $b$ itself are easy to merge into one, especially when $b$ is copied straight from the equation.`,
+        check: `Substitute a root. $x = -2$ gives $4 + 10 + 6 = 20$, not $0$; $x = 2$ gives $4 - 10 + 6 = 0$. By Vieta's formulas the roots must also add up to $-\\frac{b}{a} = 5$.` },
+      { id: 'forgetting-the-negative-case', name: `Forgetting the negative case`, errorAt: 1,
+        what: `An absolute value equation $|f(x)| = k$ with $k > 0$ is solved by dropping the bars, so only the case $f(x) = k$ is solved.`,
+        wrong: [`$$|x - 2| = 5$$`, `$$\\implies x - 2 = 5$$`, `$$\\implies x = 7$$`],
+        right: [`$$|x - 2| = 5$$`, `Both cases are needed.`, `$$x - 2 = 5 \\implies x = 7$$
+$$x - 2 = -5 \\implies x = -3$$`],
+        why: `The bars look like a pair of brackets, and removing them seems harmless. But a number and its opposite have the same absolute value, so each value of $k$ comes from two values of $f(x)$.`,
+        check: `Use the distance reading. $|x - 2| = 5$ asks for the points at distance $5$ from $2$ on the number line, and there are two of them, $7$ and $-3$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     faqQuestions,
     beyondAlgebraTree,
     equationFamilyTree,
@@ -916,7 +890,7 @@ const schemas = {
    }
 
 
-export default function EquationsPage({faqQuestions, beyondAlgebraTree, equationFamilyTree,
+export default function EquationsPage({ pitfallData,faqQuestions, beyondAlgebraTree, equationFamilyTree,
   seoData,
   sectionsContent,
   introContent,
@@ -1172,6 +1146,15 @@ export default function EquationsPage({faqQuestions, beyondAlgebraTree, equation
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'obj13-mistakes'}
+            id="equation-pitfalls"
+            title="Common pitfalls in solving equations"
+            source="/algebra/equations"
+            after={sectionsContent.obj13.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

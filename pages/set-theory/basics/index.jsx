@@ -628,6 +628,7 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -797,7 +798,7 @@ If A = {1, 2, 3}, then the cardinality of A is |A| = 3, because there are three 
 
 @academic[pitfall,aside:true,width:35%:Counting a repeated element twice
 Taking $|\\{1, 2, 2, 3\\}| = 4$ counts the entry 2 twice. The listing names only the elements 1, 2 and 3, so the size is $3$, the same as for $\\{1, 2, 3\\}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-a-repeated-element-twice)]@
 
 To find a cardinality from a listing, read off the members one by one and count them. The order in which they are written plays no part, so {3, 1, 2} gives the same count as {1, 2, 3}, and a member that is itself a word, a number or a symbol counts in the same way as any other. For a finite set the counting always comes to an end, and its result is the cardinality: 0 for the empty set and a positive whole number for any other finite set.
 
@@ -816,7 +817,7 @@ Based on cardinality, mathematical sets are classified into groups:
 
 @academic[pitfall,aside:true,width:35%:Putting the empty set inside braces
 Writing the empty set as $\\{\\varnothing\\}$ gives a set with one element, the empty set itself, so $|\\{\\varnothing\\}| = 1$. The empty set is $\\varnothing$ or $\\{\\}$ on its own, with $|\\varnothing| = 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-putting-the-empty-set-inside-braces)]@
 
 Interestingly, despite being conceptually opposite, the universal set and the empty set share fundamental commonalities in set theory. Both are extremes in the hierarchy of sets — the universal set containing everything and the empty set containing nothing. Yet they are complementary and serve as identity elements in key set operations.
 
@@ -850,7 +851,7 @@ Understanding the universal set and the empty set has immense importance for mas
 
 @academic[pitfall,aside:true,width:35%:Using the membership sign for a subset
 Writing $\\{1, 2\\} \\in B$ for $B = \\{1, 2, 3, 4\\}$ claims that the set $\\{1, 2\\}$ is one of the four elements of $B$, and it is not. The correct statements are $\\{1, 2\\} \\subseteq B$ and $1 \\in B$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-membership-sign-for-a-subset)]@
 
 The example set B = {1, 2, 3, 4} has many subsets besides A = {1, 2}. The one-element sets such as {3} are subsets of B, and so are the empty set and B itself, since each of them is built only from elements of B. Their sizes run from 0 elements for the empty set up to 4 elements for B itself, and only B is a subset of B that is not proper. In all, a set with 4 elements has $2^4 = 16$ subsets.
 
@@ -888,7 +889,7 @@ The diagrams accompanying each operation below are [Venn diagrams](!/set-theory/
 
 @academic[pitfall,aside:true,width:35%:Adding the sizes for a union
 Taking $3 + 3 = 6$ as the size of $A \\cup B$ for $A = \\{1, 2, 3\\}$ and $B = \\{4, 5, 3\\}$ counts the shared element 3 twice. The union $\\{1, 2, 3, 4, 5\\}$ has $5$ elements: $3 + 3 - 1 = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-sizes-for-a-union)]@
 
 The shared element 3 belongs to A and to B at the same time, and the union takes it in like any other element. Union is the set version of the word "or": an element qualifies as soon as it belongs to at least one of the two sets, and belonging to both is allowed. The elements 1 and 2 come into the union from A alone, and 4 and 5 from B alone. The diagram below shades both circles completely, the overlap included.
     `,
@@ -897,7 +898,7 @@ The shared element 3 belongs to A and to B at the same time, and the union takes
 
 @academic[pitfall,aside:true,width:35%:Reversing the difference
 Computing $B - A$ in place of $A - B$ for $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$ gives $\\{5, 6\\}$, the part of $B$ outside $A$. Order matters: $A - B = \\{1, 2\\}$ and $B - A = \\{5, 6\\}$ are different sets.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reversing-the-difference)]@
 
 The difference starts from the first set and removes whatever the second set also contains. In the example, A loses 3 and 4 because B contains them, and it keeps 1 and 2, which B lacks. The elements 5 and 6 belong to B alone, so they play no part in the result: the difference only ever takes elements away from A and never adds any. The diagram below shades the part of the circle A that lies outside B.
     `,
@@ -913,71 +914,9 @@ This section demonstrates the fundamental operations on sets with graphical exam
   },
   obj6: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes come up again and again with the basic vocabulary of sets. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Counting a repeated element twice**
-
-A set is written down with one element listed twice, and its size is read off as the number of entries in the listing. Repeated entries name the same element, so they add nothing to the set.
-
-Wrong working: $\\{1, 2, 2, 3\\}$ has four entries, so $|\\{1, 2, 2, 3\\}| = 4$.
-
-Right working: the distinct elements are 1, 2 and 3, so $\\{1, 2, 2, 3\\} = \\{1, 2, 3\\}$ and $|\\{1, 2, 2, 3\\}| = 3$.
-
-Why it happens: counting the entries on the page is quicker than checking each one against the others, and many lists outside mathematics, such as shopping lists or tallies, do count repeats.
-
-How to check: rewrite the set with each element once, in any order, before counting. The number of entries in the rewritten listing is the cardinality.
-
-**Putting the empty set inside braces**
-
-The empty set is written as $\\{\\varnothing\\}$, with its symbol placed inside a pair of braces. The braces build a new set whose one element is the empty set, so the result is no longer empty.
-
-Wrong working: $E = \\{\\varnothing\\}$ is taken to be the empty set, so $|E| = 0$.
-
-Right working: $\\{\\varnothing\\}$ has exactly one element, so $|\\{\\varnothing\\}| = 1$. The empty set is written $\\varnothing$ or $\\{\\}$ on its own, and $|\\varnothing| = 0$.
-
-Why it happens: other sets are written with braces, so wrapping the symbol in braces looks like proper set notation. But $\\varnothing$ is already a complete name for a set and needs no braces around it.
-
-How to check: ask what is listed between the outer braces. In $\\{\\varnothing\\}$ there is one item, so the set is not empty.
-
-**Using the membership sign for a subset**
-
-The sign $\\in$ is written between two sets when one is contained in the other. $\\in$ says that its left side is one of the elements of the right side; containment of a whole set is written $\\subseteq$.
-
-Wrong working: for $B = \\{1, 2, 3, 4\\}$, the statements $\\{1, 2\\} \\in B$ and $1 \\subseteq B$ are written.
-
-Right working: the elements of $B$ are the numbers 1, 2, 3 and 4, and the set $\\{1, 2\\}$ is not one of them, so $\\{1, 2\\} \\notin B$ but $\\{1, 2\\} \\subseteq B$. The number 1 is an element, so $1 \\in B$, and the one-element set built from it is a subset: $\\{1\\} \\subseteq B$.
-
-Why it happens: both signs are often read aloud as "is in", and in everyday speech a group of items can be in a collection just as a single item can.
-
-How to check: read $x \\in B$ as "x appears in the listing of B". Look for $\\{1, 2\\}$, braces included, among the listed elements of $B$; it is not there.
-
-**Adding the sizes for a union**
-
-The size of a union is found by adding the sizes of the two sets. Elements that belong to both sets are then counted once for each set.
-
-Wrong working: for $A = \\{1, 2, 3\\}$ and $B = \\{4, 5, 3\\}$, the size of $A \\cup B$ is given as $3 + 3 = 6$.
-
-Right working: $A \\cup B = \\{1, 2, 3, 4, 5\\}$, which has $5$ elements. In general the size of the union is $|A| + |B| - |A \\cap B|$, and here $A \\cap B = \\{3\\}$, so $3 + 3 - 1 = 5$. The [inclusion-exclusion principle](!/combinatorics/inclusion-exclusion) extends this correction to more than two sets.
-
-Why it happens: the union is built by putting two sets together, and putting together sounds like adding.
-
-How to check: write the union out and count it, or test the answer against its bounds. The union has at least as many elements as the larger set and at most $|A| + |B|$, and it reaches $|A| + |B|$ only when the sets are disjoint.
-
-**Reversing the difference**
-
-$A - B$ is computed as if the order of the two sets did not matter, and the elements of $B$ outside $A$ are returned. Unlike union and intersection, the difference can change when the sets swap places.
-
-Wrong working: for $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$, the difference is given as $A - B = \\{5, 6\\}$.
-
-Right working: start from $A$ and remove the elements that are also in $B$, namely 3 and 4. This leaves $A - B = \\{1, 2\\}$. The set $\\{5, 6\\}$ is the other difference, $B - A$.
-
-Why it happens: union, intersection and symmetric difference give the same set in either order, and the habit carries over to the one basic operation where order matters.
-
-How to check: every element of $A - B$ must be an element of $A$. Since 5 and 6 are not in $A$, the set $\\{5, 6\\}$ cannot be $A - B$.
-    `,
+    content: `Five mistakes come up again and again with the basic vocabulary of sets. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip reads the notation of sets too literally or too loosely. A listing names each element once however often it is written, $\\{\\varnothing\\}$ has one element, $\\in$ asks for an element where $\\subseteq$ asks for a subset, a union counts its shared elements once, and $A - B$ keeps only elements of $A$. Writing the set out and counting its elements, or checking each one against the listing, catches every slip.`,
     link: '',
   }
 };
@@ -1161,8 +1100,46 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj6 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'counting-a-repeated-element-twice', name: `Counting a repeated element twice`, errorAt: 0,
+        what: `A set is written down with one element listed twice, and its size is read off as the number of entries in the listing. Repeated entries name the same element, so they add nothing to the set.`,
+        wrong: [`$\\{1, 2, 2, 3\\}$ has four entries, so $|\\{1, 2, 2, 3\\}| = 4$.`],
+        right: [`The distinct elements are 1, 2 and 3, so $\\{1, 2, 2, 3\\} = \\{1, 2, 3\\}$ and $|\\{1, 2, 2, 3\\}| = 3$.`],
+        why: `Counting the entries on the page is quicker than checking each one against the others, and many lists outside mathematics, such as shopping lists or tallies, do count repeats.`,
+        check: `Rewrite the set with each element once, in any order, before counting. The number of entries in the rewritten listing is the cardinality.` },
+      { id: 'putting-the-empty-set-inside-braces', name: `Putting the empty set inside braces`, errorAt: 0,
+        what: `The empty set is written as $\\{\\varnothing\\}$, with its symbol placed inside a pair of braces. The braces build a new set whose one element is the empty set, so the result is no longer empty.`,
+        wrong: [`$E = \\{\\varnothing\\}$ is taken to be the empty set, so $|E| = 0$.`],
+        right: [`$\\{\\varnothing\\}$ has exactly one element, so $|\\{\\varnothing\\}| = 1$. The empty set is written $\\varnothing$ or $\\{\\}$ on its own, and $|\\varnothing| = 0$.`],
+        why: `Other sets are written with braces, so wrapping the symbol in braces looks like proper set notation. But $\\varnothing$ is already a complete name for a set and needs no braces around it.`,
+        check: `Ask what is listed between the outer braces. In $\\{\\varnothing\\}$ there is one item, so the set is not empty.` },
+      { id: 'using-the-membership-sign-for-a-subset', name: `Using the membership sign for a subset`, errorAt: 1,
+        what: `The sign $\\in$ is written between two sets when one is contained in the other. $\\in$ says that its left side is one of the elements of the right side; containment of a whole set is written $\\subseteq$.`,
+        wrong: [`For $B = \\{1, 2, 3, 4\\}$,`, `The statements $\\{1, 2\\} \\in B$ and $1 \\subseteq B$ are written.`],
+        right: [`For $B = \\{1, 2, 3, 4\\}$,`, `The elements of $B$ are the numbers 1, 2, 3 and 4, and the set $\\{1, 2\\}$ is not one of them, so $\\{1, 2\\} \\notin B$ but $\\{1, 2\\} \\subseteq B$. The number 1 is an element, so $1 \\in B$, and the one-element set built from it is a subset: $\\{1\\} \\subseteq B$.`],
+        why: `Both signs are often read aloud as "is in", and in everyday speech a group of items can be in a collection just as a single item can.`,
+        check: `Read $x \\in B$ as "x appears in the listing of B". Look for $\\{1, 2\\}$, braces included, among the listed elements of $B$; it is not there.` },
+      { id: 'adding-the-sizes-for-a-union', name: `Adding the sizes for a union`, errorAt: 1,
+        what: `The size of a union is found by adding the sizes of the two sets. Elements that belong to both sets are then counted once for each set.`,
+        wrong: [`For $A = \\{1, 2, 3\\}$ and $B = \\{4, 5, 3\\}$,`, `The size of $A \\cup B$ is given as $3 + 3 = 6$.`],
+        right: [`For $A = \\{1, 2, 3\\}$ and $B = \\{4, 5, 3\\}$,`, `$A \\cup B = \\{1, 2, 3, 4, 5\\}$, which has $5$ elements. In general the size of the union is $|A| + |B| - |A \\cap B|$, and here $A \\cap B = \\{3\\}$, so $3 + 3 - 1 = 5$. The [inclusion-exclusion principle](!/combinatorics/inclusion-exclusion) extends this correction to more than two sets.`],
+        why: `The union is built by putting two sets together, and putting together sounds like adding.`,
+        check: `Write the union out and count it, or test the answer against its bounds. The union has at least as many elements as the larger set and at most $|A| + |B|$, and it reaches $|A| + |B|$ only when the sets are disjoint.` },
+      { id: 'reversing-the-difference', name: `Reversing the difference`, errorAt: 1,
+        what: `$A - B$ is computed as if the order of the two sets did not matter, and the elements of $B$ outside $A$ are returned. Unlike union and intersection, the difference can change when the sets swap places.`,
+        wrong: [`For $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$,`, `The difference is given as $A - B = \\{5, 6\\}$.`],
+        right: [`For $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$,`, `Start from $A$ and remove the elements that are also in $B$, namely 3 and 4. This leaves $A - B = \\{1, 2\\}$. The set $\\{5, 6\\}$ is the other difference, $B - A$.`],
+        why: `Union, intersection and symmetric difference give the same set in either order, and the habit carries over to the one basic operation where order matters.`,
+        check: `Every element of $A - B$ must be an element of $A$. Since 5 and 6 are not in $A$, the set $\\{5, 6\\}$ cannot be $A - B$.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     setTypesOutline,
     demoUnits,
     conceptIntroFigures,
@@ -1189,7 +1166,7 @@ const schemas = {
    }
 
 
-export default function SetTheoryBasicsPage({setTypesOutline, seoData, sectionsContent, introContent, figs, notationTable, cardinalityTable, relationshipsTable, operationsTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SetTheoryBasicsPage({ pitfallData,setTypesOutline, seoData, sectionsContent, introContent, figs, notationTable, cardinalityTable, relationshipsTable, operationsTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1380,6 +1357,15 @@ The collection of all sets that are not members of themselves would contain itse
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-mistakes'}
+            id="set-basics-pitfalls"
+            title="Common pitfalls with sets"
+            source="/set-theory/basics"
+            after={sectionsContent.obj6.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

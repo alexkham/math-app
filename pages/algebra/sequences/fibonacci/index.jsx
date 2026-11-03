@@ -18,6 +18,8 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -229,7 +231,7 @@ An alternative convention starts with $F_0 = 0$: the sequence becomes $0, 1, 1, 
 
 @academic[pitfall,aside:true,width:35%:Reading the list position as the index
 Taking the 10th entry of $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, \\ldots$ as $F_{10}$ gives $F_{10} = 34$. That list starts at $F_0$, so its 10th entry is $F_9 = 34$, and $F_{10} = 55$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-list-position-as-the-index)]@
 
 The two lists differ only by the extra $0$ in front, and that difference matters as soon as a term is called by its number. Binet's formula and the identities in the sections below are all stated in terms of the index $n$ of $F_n$, with $F_1 = F_2 = 1$.
 
@@ -300,7 +302,7 @@ The number $\\phi$ satisfies the equation $\\phi^2 = \\phi + 1$, or equivalently
 
 @academic[pitfall,aside:true,width:35%:Dividing the earlier term by the later one
 Taking $\\frac{F_n}{F_{n+1}}$ instead gives $\\frac{55}{89} \\approx 0.618$, which is $\\frac{1}{\\phi} = \\phi - 1$, not $\\phi$. The ratio is later over earlier: $\\frac{89}{55} \\approx 1.618$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-the-earlier-term-by-the-later-one)]@
 
 The two roots are related: $\\phi + \\psi = 1$ and $\\phi \\cdot \\psi = -1$. Since $|\\psi| < 1$, powers of $\\psi$ shrink toward zero, which is why the ratio $\\frac{F_{n+1}}{F_n}$ converges to $\\phi$ and not to $\\psi$.`,
     before: ``,
@@ -324,7 +326,7 @@ The derivation starts by assuming a solution of the form $F_n = x^n$ and substit
 
 @academic[pitfall,aside:true,width:35%:Dropping the sign of the second root
 Using $\\psi \\approx +0.618$ gives $\\psi^3 \\approx 0.236$ and, with $\\phi^3 \\approx 4.236$, $F_3 = \\frac{4.236 - 0.236}{\\sqrt{5}} \\approx 1.789$, not a whole number. With $\\psi \\approx -0.618$, $\\psi^3 \\approx -0.236$ and $F_3 = \\frac{4.236 + 0.236}{\\sqrt{5}} = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-sign-of-the-second-root)]@
 
 The formula involves irrational numbers — $\\sqrt{5}$ appears explicitly, and both $\\phi$ and $\\psi$ are irrational — yet it always produces an integer. The irrational parts of $\\phi^n$ and $\\psi^n$ cancel exactly upon subtraction.
 
@@ -377,7 +379,7 @@ $$\\gcd(F_m, F_n) = F_{\\gcd(m,n)}$$
 
 @academic[pitfall,aside:true,width:35%:Taking the GCD of the positions as the answer
 Reading $\\gcd(F_{12}, F_{18})$ as $\\gcd(12, 18) = 6$ stops halfway: $6$ does not even divide $F_{18} = 2584$. The GCD of the positions is an index, so the answer is $F_6 = 8$, and indeed $\\gcd(144, 2584) = 8$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-gcd-of-the-positions-as-the-answer)]@
 
 The identity works on two levels at once. On the left, the GCD is taken of two Fibonacci numbers, which are values in the sequence; on the right, it is taken of their positions $m$ and $n$, and the result is used as a position again. For example, $\\gcd(F_6, F_9) = \\gcd(8, 34) = 2 = F_3$.
 
@@ -435,63 +437,9 @@ The same holds for any pair of starting values: a sequence that follows the rule
   },
   obj7: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again with the Fibonacci sequence. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the list position as the index**
-
-When the sequence is written from $F_0 = 0$, the terms are counted from $1$ as they stand in the list, and the $k$-th entry is taken to be $F_k$. Every index then comes out one too high.
-
-Wrong working: in $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, \\ldots$ the 10th entry is $34$, so $F_{10} = 34$.
-
-Right working: the first entry of that list is $F_0$, so the $k$-th entry is $F_{k-1}$, and the 10th entry is $F_9 = 34$. The value $F_{10}$ is the next one, $21 + 34 = 55$. It is the same in both conventions, since $F_0 = 0$ only adds a term in front of $F_1 = F_2 = 1$.
-
-Why it happens: in the list $1, 1, 2, 3, \\ldots$ that starts at $F_1$, entry number and index agree, and the habit of counting entries is carried over to a list that starts at $F_0$.
-
-How to check: test a small index. $F_3$ must be $2$ in either convention, and Binet's formula with $n = 10$ gives $\\frac{\\phi^{10} - \\psi^{10}}{\\sqrt{5}} = 55$.
-
-**Dividing the earlier term by the later one**
-
-The ratio of consecutive terms is taken the other way up, smaller over larger, and the number it approaches is taken for the golden ratio.
-
-Wrong working:
-$$\\frac{F_{10}}{F_{11}} = \\frac{55}{89} \\approx 0.618, \\quad \\text{so } \\phi \\approx 0.618$$
-
-Right working: the ratio is $\\frac{F_{n+1}}{F_n}$, later over earlier.
-$$\\frac{F_{11}}{F_{10}} = \\frac{89}{55} \\approx 1.618, \\quad \\phi = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$$
-The reversed ratio approaches $\\frac{1}{\\phi}$, and dividing $\\phi^2 = \\phi + 1$ by $\\phi$ shows that $\\frac{1}{\\phi} = \\phi - 1 \\approx 0.618$.
-
-Why it happens: $0.618$ and $1.618$ share their decimal digits, and both are quoted in connection with the golden ratio. The number $0.618$ also matches the size of $\\psi$, though $\\psi \\approx -0.618$ is negative.
-
-How to check: the sequence grows, so a later term divided by an earlier one is greater than $1$. The golden ratio must also satisfy $\\phi^2 = \\phi + 1$: $1.618^2 \\approx 2.618$, while $0.618^2 \\approx 0.382$, not $1.618$.
-
-**Dropping the sign of the second root**
-
-In Binet's formula the second root is taken as $0.618$, positive, so $\\psi^n$ gets the wrong sign whenever $n$ is odd.
-
-Wrong working: with $\\psi = \\frac{\\sqrt{5} - 1}{2}$, the cube is $\\psi^3 = \\sqrt{5} - 2 \\approx 0.236$, and with $\\phi^3 = 2 + \\sqrt{5}$,
-$$F_3 = \\frac{(2 + \\sqrt{5}) - (\\sqrt{5} - 2)}{\\sqrt{5}} = \\frac{4}{\\sqrt{5}} \\approx 1.789$$
-
-Right working: $\\psi = \\frac{1 - \\sqrt{5}}{2} \\approx -0.618$, so $\\psi^3 = 2 - \\sqrt{5} \\approx -0.236$ and
-$$F_3 = \\frac{(2 + \\sqrt{5}) - (2 - \\sqrt{5})}{\\sqrt{5}} = \\frac{2\\sqrt{5}}{\\sqrt{5}} = 2$$
-
-Why it happens: $0.618$ is the familiar companion of $\\phi$ (it is $\\frac{1}{\\phi}$), and the minus sign of $\\psi$ is lost when the two are confused. For even $n$ the sign makes no difference, so the slip shows only at odd $n$.
-
-How to check: Binet's formula must give a whole number. $\\frac{4}{\\sqrt{5}} \\approx 1.789$ is not one, while $F_3 = 2$ matches the list $1, 1, 2, \\ldots$.
-
-**Taking the GCD of the positions as the answer**
-
-In $\\gcd(F_m, F_n) = F_{\\gcd(m,n)}$, the GCD of the indices is computed and given as the answer, without looking up the Fibonacci number at that position.
-
-Wrong working:
-$$\\gcd(F_{12}, F_{18}) = \\gcd(12, 18) = 6$$
-
-Right working: $\\gcd(12, 18) = 6$ is a position, so $\\gcd(F_{12}, F_{18}) = F_6 = 8$. Directly: $F_{12} = 144 = 8 \\cdot 18$ and $F_{18} = 2584 = 8 \\cdot 323$, and $18$ and $323 = 17 \\cdot 19$ share no factor, so $\\gcd(144, 2584) = 8$.
-
-Why it happens: the right-hand side contains a GCD of ordinary integers, and once it is worked out, the outer $F$ is overlooked. The identity mixes values and positions in one line.
-
-How to check: the answer must divide both numbers and must itself be a Fibonacci number. $6$ does not divide $2584$, and $6$ does not appear in $1, 1, 2, 3, 5, 8, \\ldots$.`,
+    content: `Four mistakes come up again and again with the Fibonacci sequence. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip uses the right pieces in the wrong place: the index is shifted by one, the ratio is turned upside down, the second root of $x^2 = x + 1$ loses its minus sign, and the GCD of the positions is taken for the GCD of the numbers. The checks share one move: test the claim against a value that is already known, such as $F_3 = 2$, $\\phi \\approx 1.618$, or the list $1, 1, 2, 3, 5, 8, \\ldots$`,
     link: '',
   },
 }
@@ -658,8 +606,42 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 4, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj7 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-list-position-as-the-index', name: `Reading the list position as the index`, errorAt: 0,
+        what: `When the sequence is written from $F_0 = 0$, the terms are counted from $1$ as they stand in the list, and the $k$-th entry is taken to be $F_k$. Every index then comes out one too high.`,
+        wrong: [`In $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, \\ldots$ the 10th entry is $34$, so $F_{10} = 34$.`],
+        right: [`The first entry of that list is $F_0$, so the $k$-th entry is $F_{k-1}$, and the 10th entry is $F_9 = 34$. The value $F_{10}$ is the next one, $21 + 34 = 55$. It is the same in both conventions, since $F_0 = 0$ only adds a term in front of $F_1 = F_2 = 1$.`],
+        why: `In the list $1, 1, 2, 3, \\ldots$ that starts at $F_1$, entry number and index agree, and the habit of counting entries is carried over to a list that starts at $F_0$.`,
+        check: `Test a small index. $F_3$ must be $2$ in either convention, and Binet's formula with $n = 10$ gives $\\frac{\\phi^{10} - \\psi^{10}}{\\sqrt{5}} = 55$.` },
+      { id: 'dividing-the-earlier-term-by-the-later-one', name: `Dividing the earlier term by the later one`, errorAt: 0,
+        what: `The ratio of consecutive terms is taken the other way up, smaller over larger, and the number it approaches is taken for the golden ratio.`,
+        wrong: [`$$\\frac{F_{10}}{F_{11}} = \\frac{55}{89} \\approx 0.618, \\quad \\text{so } \\phi \\approx 0.618$$`],
+        right: [`The ratio is $\\frac{F_{n+1}}{F_n}$, later over earlier.`, `$$\\frac{F_{11}}{F_{10}} = \\frac{89}{55} \\approx 1.618, \\quad \\phi = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$$`, `The reversed ratio approaches $\\frac{1}{\\phi}$, and dividing $\\phi^2 = \\phi + 1$ by $\\phi$ shows that $\\frac{1}{\\phi} = \\phi - 1 \\approx 0.618$.`],
+        why: `$0.618$ and $1.618$ share their decimal digits, and both are quoted in connection with the golden ratio. The number $0.618$ also matches the size of $\\psi$, though $\\psi \\approx -0.618$ is negative.`,
+        check: `The sequence grows, so a later term divided by an earlier one is greater than $1$. The golden ratio must also satisfy $\\phi^2 = \\phi + 1$: $1.618^2 \\approx 2.618$, while $0.618^2 \\approx 0.382$, not $1.618$.` },
+      { id: 'dropping-the-sign-of-the-second-root', name: `Dropping the sign of the second root`, errorAt: 0,
+        what: `In Binet's formula the second root is taken as $0.618$, positive, so $\\psi^n$ gets the wrong sign whenever $n$ is odd.`,
+        wrong: [`With $\\psi = \\frac{\\sqrt{5} - 1}{2}$, the cube is $\\psi^3 = \\sqrt{5} - 2 \\approx 0.236$, and with $\\phi^3 = 2 + \\sqrt{5}$,
+$$F_3 = \\frac{(2 + \\sqrt{5}) - (\\sqrt{5} - 2)}{\\sqrt{5}} = \\frac{4}{\\sqrt{5}} \\approx 1.789$$`],
+        right: [`$\\psi = \\frac{1 - \\sqrt{5}}{2} \\approx -0.618$, so $\\psi^3 = 2 - \\sqrt{5} \\approx -0.236$ and
+$$F_3 = \\frac{(2 + \\sqrt{5}) - (2 - \\sqrt{5})}{\\sqrt{5}} = \\frac{2\\sqrt{5}}{\\sqrt{5}} = 2$$`],
+        why: `$0.618$ is the familiar companion of $\\phi$ (it is $\\frac{1}{\\phi}$), and the minus sign of $\\psi$ is lost when the two are confused. For even $n$ the sign makes no difference, so the slip shows only at odd $n$.`,
+        check: `Binet's formula must give a whole number. $\\frac{4}{\\sqrt{5}} \\approx 1.789$ is not one, while $F_3 = 2$ matches the list $1, 1, 2, \\ldots$.` },
+      { id: 'taking-the-gcd-of-the-positions-as-the-answer', name: `Taking the GCD of the positions as the answer`, errorAt: 1,
+        what: `In $\\gcd(F_m, F_n) = F_{\\gcd(m,n)}$, the GCD of the indices is computed and given as the answer, without looking up the Fibonacci number at that position.`,
+        wrong: [`$$\\gcd(F_{12}, F_{18})$$`, `$$= \\gcd(12, 18) = 6$$`],
+        right: [`$$\\gcd(F_{12}, F_{18})$$`, `$\\gcd(12, 18) = 6$ is a position, so $\\gcd(F_{12}, F_{18}) = F_6 = 8$. Directly: $F_{12} = 144 = 8 \\cdot 18$ and $F_{18} = 2584 = 8 \\cdot 323$, and $18$ and $323 = 17 \\cdot 19$ share no factor, so $\\gcd(144, 2584) = 8$.`],
+        why: `The right-hand side contains a GCD of ordinary integers, and once it is worked out, the outer $F$ is overlooked. The identity mixes values and positions in one line.`,
+        check: `The answer must divide both numbers and must itself be a Fibonacci number. $6$ does not divide $2584$, and $6$ does not appear in $1, 1, 2, 3, 5, 8, \\ldots$.` },
+    ],
+  };
+
    return {
   props:{
+    pitfallData,
      sectionsContent,
      introContent,
      obj4Table,
@@ -679,7 +661,7 @@ const schemas = {
 }
    }
 
-export default function FibonacciSequencePage({seoData, sectionsContent, introContent, obj4Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function FibonacciSequencePage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -744,7 +726,7 @@ $$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, \\ldots$$]@`,
           `An alternative convention starts with $F_0 = 0$: the sequence becomes $0, 1, 1, 2, 3, 5, 8, \\ldots$. The same recurrence applies and every $F_n$ keeps its value — only the list gains a $0$ in front, so each term sits one place later in the list. Both conventions appear in the literature, and the choice is a matter of context. This page uses $F_1 = 1$.`,
           `@academic[pitfall,aside:true,width:35%:Reading the list position as the index
 Taking the 10th entry of $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, \\ldots$ as $F_{10}$ gives $F_{10} = 34$. That list starts at $F_0$, so its 10th entry is $F_9 = 34$, and $F_{10} = 55$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-reading-the-list-position-as-the-index)]@`,
           `The two lists differ only by the extra $0$ in front, and that difference matters as soon as a term is called by its number. Binet's formula and the identities in the sections below are all stated in terms of the index $n$ of $F_n$, with $F_1 = F_2 = 1$.`,
         ],
       },
@@ -850,6 +832,15 @@ Taking the 10th entry of $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, \\ldots$ as $F_{10}$ 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-mistakes'}
+            id="fibonacci-pitfalls"
+            title="Common pitfalls with the Fibonacci sequence"
+            source="/algebra/sequences/fibonacci"
+            after={sectionsContent.obj7.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

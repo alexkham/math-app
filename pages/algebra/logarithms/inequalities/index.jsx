@@ -12,6 +12,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -92,7 +94,7 @@ const keyWords = [
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Single log vs constant, 0 &lt; base &lt; 1</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">convert with direction reversed</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">log₍₁⁄₂₎(x) &gt; 3 → x &lt; 1⁄8</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">log₍₁⁄₂₎(x) &gt; 3 → 0 &lt; x &lt; 1⁄8</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Logs on both sides, same base</td>
@@ -225,7 +227,7 @@ Solution: $x \\geq 100$.]@
 
 @academic[pitfall,aside:true,width:35%:Keeping the direction with a base below 1
 Solving $\\log_{1/2}(x) > 3$ as $x > \\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$ keeps the sign, as for a base above 1. But $\\log_{1/2}$ is decreasing, so the sign flips: $0 < x < \\frac{1}{8}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-the-direction-with-a-base-below-1)]@
 
 In both examples the base lies between $0$ and $1$, and the step from logarithmic form to exponential form is where this matters. The comparison with $a^k$ is built exactly as for a base greater than one: the base is raised to the power $k$ and set against the argument.
 
@@ -264,7 +266,7 @@ Domain requires $x - 1 > 0$, so $x > 1$. Final solution: $x > 6$.]@
 
 @academic[pitfall,aside:true,width:35%:Checking only one argument
 Solving $\\log_2(x) > \\log_2(3 - x)$ by comparing arguments gives $x > \\frac{3}{2}$, which includes $x = 4$, where $\\log_2(3 - x) = \\log_2(-1)$ is undefined. Both arguments must be positive, $0 < x < 3$, so the answer is $\\frac{3}{2} < x < 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-only-one-argument)]@
 
 Dropping the logarithms turns the inequality into a plain comparison of the two arguments, and from there the work is ordinary algebra. The step is valid because the logarithm is monotonic: it keeps the order of its inputs when the base is greater than one and reverses it when the base is between zero and one.
 
@@ -307,7 +309,7 @@ Intersection: $-2 < x < -1$.]@
 
 @academic[pitfall,aside:true,width:35%:Forgetting the domain
 Solving $\\log_4(x + 2) < 0$ to $x < -1$ keeps values like $x = -3$, where $\\log_4(x + 2)$ is undefined. With the domain $x > -2$, the answer is $-2 < x < -1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-domain)]@
 
 In both examples the final answer comes from two separate conditions. One is the inequality solved for the argument; the other is the domain condition that keeps the argument positive.
 
@@ -372,7 +374,7 @@ Solution: $x > 4$.]@
 
 @academic[pitfall,aside:true,width:35%:Taking the domain after condensing
 The condensed $\\log_2(x^2 - 2x)$ is defined for every negative $x$ too, so $x = -3$ seems to solve it: $\\log_2(15) > 3$. But $\\log_2(-3)$ does not exist. The domain comes from the original terms, $x > 2$, so the answer is $x > 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-domain-after-condensing)]@
 
 Condensing turns the sum into a single logarithm, which can then be compared with $3$ exactly as in the earlier sections. The comparison produces a quadratic inequality, and a quadratic inequality usually has two solution intervals, one on each side of its roots.
 
@@ -406,62 +408,9 @@ The vertical asymptote at $x = 0$ visually enforces the domain restriction. No p
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for most wrong answers to logarithmic inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Keeping the direction with a base below 1**
-
-The base lies between $0$ and $1$, but the conversion to exponential form is done exactly as for a base greater than $1$, so the inequality sign is kept.
-
-Wrong working:
-$$\\log_{1/2}(x) > 3 \\implies x > \\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$$
-
-Right working: $\\log_{1/2}$ is decreasing, so the sign flips when the logarithm is removed.
-$$\\log_{1/2}(x) > 3 \\implies x < \\frac{1}{8}$$
-With the domain $x > 0$, the solution is $0 < x < \\frac{1}{8}$.
-
-Why it happens: the step "raise the base to both sides" is first learned with bases like $2$ or $10$, where it keeps the sign, and the base check gets skipped.
-
-How to check: test one value from the answer. $x = 1$ lies in the wrong answer, and $\\log_{1/2}(1) = 0$, which is not greater than $3$. A value from the right answer, $x = \\frac{1}{16}$, gives $\\log_{1/2}\\left(\\frac{1}{16}\\right) = 4 > 3$.
-
-**Checking only one argument**
-
-When logarithms with the same base stand on both sides, the arguments are compared directly, and the condition on one of the arguments is lost.
-
-Wrong working:
-$$\\log_2(x) > \\log_2(3 - x) \\implies x > 3 - x \\implies x > \\frac{3}{2}$$
-
-Right working: both arguments must be positive, $x > 0$ and $3 - x > 0$, so $0 < x < 3$. Intersecting with $x > \\frac{3}{2}$ gives $\\frac{3}{2} < x < 3$.
-
-Why it happens: once the logarithms are dropped, the inequality looks like an ordinary linear one, and the conditions that came with the arguments disappear with them.
-
-How to check: take a value from the wrong answer outside the right one. $x = 4$ gives $\\log_2(3 - 4) = \\log_2(-1)$, which is undefined. A value from the right answer, $x = 2$, gives $\\log_2(2) = 1 > \\log_2(1) = 0$.
-
-**Forgetting the domain**
-
-The inequality is solved for the argument, and the work stops there; the condition that the argument is positive is never written down.
-
-Wrong working:
-$$\\log_4(x + 2) < 0 \\implies x + 2 < 4^0 = 1 \\implies x < -1$$
-
-Right working: the domain is $x + 2 > 0$, so $x > -2$. Intersecting with $x < -1$ gives $-2 < x < -1$.
-
-Why it happens: the algebra ends with an inequality in $x$ that looks finished, and nothing in it signals that part of it lies where the logarithm does not exist.
-
-How to check: test a value from the wrong answer that lies outside the right one. $x = -3$ gives $\\log_4(-1)$, which is undefined. A value from the right answer, $x = -1.5$, gives $\\log_4(0.5) = -\\frac{1}{2} < 0$.
-
-**Taking the domain after condensing**
-
-Two logarithms are condensed into one, and the domain is read from the condensed form instead of from the original terms.
-
-Wrong working: from $\\log_2(x^2 - 2x) > 3$, the domain is taken as $x^2 - 2x > 0$, that is $x < 0$ or $x > 2$. Solving $x^2 - 2x > 8$ gives $x < -2$ or $x > 4$, and both intervals are kept.
-
-Right working: the original inequality $\\log_2(x) + \\log_2(x - 2) > 3$ needs $x > 0$ and $x - 2 > 0$, so $x > 2$. Of the two intervals, only $x > 4$ survives.
-
-Why it happens: the product rule $\\log_a(M) + \\log_a(N) = \\log_a(MN)$ holds only when $M$ and $N$ are both positive, but the product $MN$ is also positive when both are negative. The condensed logarithm is defined on a larger set than the pair it came from.
-
-How to check: substitute a value from the extra interval into the original inequality. $x = -3$ satisfies the condensed form, $\\log_2(15) > 3$, but the original needs $\\log_2(-3)$, which is undefined. A value from the right answer, $x = 5$, gives $\\log_2(5) + \\log_2(3) = \\log_2(15) > 3$.`,
+    content: `Four mistakes account for most wrong answers to logarithmic inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Three of the four slips concern the domain. Every logarithm in the original inequality needs a positive argument, the domain is read before any rule combines the logarithms, and the answer is the part of the solution that lies inside that domain. The fourth concerns direction: a base below $1$ makes the logarithm decreasing, so removing it reverses the sign. In each case a value from the wrong answer, put into the original inequality, gives a logarithm that is undefined or a statement that is false.`,
     link: '',
   },
 };
@@ -624,8 +573,40 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'keeping-the-direction-with-a-base-below-1', name: `Keeping the direction with a base below 1`, errorAt: 1,
+        what: `The base lies between $0$ and $1$, but the conversion to exponential form is done exactly as for a base greater than $1$, so the inequality sign is kept.`,
+        wrong: [`$$\\log_{1/2}(x) > 3$$`, `$$\\implies x > \\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$$`],
+        right: [`$$\\log_{1/2}(x) > 3$$`, `$\\log_{1/2}$ is decreasing, so the sign flips when the logarithm is removed.`, `$$\\implies x < \\frac{1}{8}$$`, `With the domain $x > 0$, the solution is $0 < x < \\frac{1}{8}$.`],
+        why: `The step "raise the base to both sides" is first learned with bases like $2$ or $10$, where it keeps the sign, and the base check gets skipped.`,
+        check: `Test one value from the answer. $x = 1$ lies in the wrong answer, and $\\log_{1/2}(1) = 0$, which is not greater than $3$. A value from the right answer, $x = \\frac{1}{16}$, gives $\\log_{1/2}\\left(\\frac{1}{16}\\right) = 4 > 3$.` },
+      { id: 'checking-only-one-argument', name: `Checking only one argument`, errorAt: 1,
+        what: `When logarithms with the same base stand on both sides, the arguments are compared directly, and the condition on one of the arguments is lost.`,
+        wrong: [`$$\\log_2(x) > \\log_2(3 - x)$$`, `$$\\implies x > 3 - x$$`, `$$\\implies x > \\frac{3}{2}$$`],
+        right: [`$$\\log_2(x) > \\log_2(3 - x)$$`, `Both arguments must be positive, $x > 0$ and $3 - x > 0$, so $0 < x < 3$. Intersecting with $x > \\frac{3}{2}$ gives $\\frac{3}{2} < x < 3$.`],
+        why: `Once the logarithms are dropped, the inequality looks like an ordinary linear one, and the conditions that came with the arguments disappear with them.`,
+        check: `Take a value from the wrong answer outside the right one. $x = 4$ gives $\\log_2(3 - 4) = \\log_2(-1)$, which is undefined. A value from the right answer, $x = 2$, gives $\\log_2(2) = 1 > \\log_2(1) = 0$.` },
+      { id: 'forgetting-the-domain', name: `Forgetting the domain`, errorAt: 1,
+        what: `The inequality is solved for the argument, and the work stops there; the condition that the argument is positive is never written down.`,
+        wrong: [`$$\\log_4(x + 2) < 0$$`, `$$\\implies x + 2 < 4^0 = 1$$`, `$$\\implies x < -1$$`],
+        right: [`$$\\log_4(x + 2) < 0$$`, `The domain is $x + 2 > 0$, so $x > -2$. Intersecting with $x < -1$ gives $-2 < x < -1$.`],
+        why: `The algebra ends with an inequality in $x$ that looks finished, and nothing in it signals that part of it lies where the logarithm does not exist.`,
+        check: `Test a value from the wrong answer that lies outside the right one. $x = -3$ gives $\\log_4(-1)$, which is undefined. A value from the right answer, $x = -1.5$, gives $\\log_4(0.5) = -\\frac{1}{2} < 0$.` },
+      { id: 'taking-the-domain-after-condensing', name: `Taking the domain after condensing`, errorAt: 0,
+        what: `Two logarithms are condensed into one, and the domain is read from the condensed form instead of from the original terms.`,
+        wrong: [`From $\\log_2(x^2 - 2x) > 3$, the domain is taken as $x^2 - 2x > 0$, that is $x < 0$ or $x > 2$. Solving $x^2 - 2x > 8$ gives $x < -2$ or $x > 4$, and both intervals are kept.`],
+        right: [`The original inequality $\\log_2(x) + \\log_2(x - 2) > 3$ needs $x > 0$ and $x - 2 > 0$, so $x > 2$. Of the two intervals, only $x > 4$ survives.`],
+        why: `The product rule $\\log_a(M) + \\log_a(N) = \\log_a(MN)$ holds only when $M$ and $N$ are both positive, but the product $MN$ is also positive when both are negative. The condensed logarithm is defined on a larger set than the pair it came from.`,
+        check: `Substitute a value from the extra interval into the original inequality. $x = -3$ satisfies the condensed form, $\\log_2(15) > 3$, but the original needs $\\log_2(-3)$, which is undefined. A value from the right answer, $x = 5$, gives $\\log_2(5) + \\log_2(3) = \\log_2(15) > 3$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     faqQuestions,
     sectionsContent,
     introContent,
@@ -648,7 +629,7 @@ return {
 // export default function InequalitiesPage({seoData,sectionsContent , introContent}) {
 
 
-export default function InequalitiesPage({
+export default function InequalitiesPage({ pitfallData,
   faqQuestions,
   seoData,
   sectionsContent,
@@ -834,6 +815,15 @@ With domain: $0 < x \\leq 25$.]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="logarithmic-inequality-pitfalls"
+            title="Common pitfalls with logarithmic inequalities"
+            source="/algebra/logarithms/inequalities"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

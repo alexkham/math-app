@@ -91,7 +91,8 @@ export default function ProofCanvas({
           const t = e.target.closest('[data-handle]');
           if (!t) return;
           dragRef.current = t.getAttribute('data-handle');
-          svgRef.current.setPointerCapture(e.pointerId);
+          // Synthetic pointer events (the demo player) carry no capturable pointer.
+          try { svgRef.current.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
         },
         onPointerMove: (e) => {
           if (dragRef.current) onHandleMove(dragRef.current, toSvg(e));

@@ -923,6 +923,7 @@ import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magni
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -1766,10 +1767,24 @@ const schemas = {
       href: '/linear-algebra/visual-tools/vector-magnitude',
       linkText: 'magnitude visualizer',
     }),
+  };  // TheoremCard data (pythagorean-theorem-card); every fact is from the section text
+  const pythagoreanCard = {
+    header: { kicker: 'Inner product', title: 'The Pythagorean Theorem', lede: 'Click the hypothesis to see what it does and what breaks without it.' },
+    theorem: {
+      hypotheses: [
+        { text: '$\\mathbf{u} \\cdot \\mathbf{v} = 0$', job: 'Kills the cross term: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\mathbf{u} \\cdot \\mathbf{u} + 2\\mathbf{u} \\cdot \\mathbf{v} + \\mathbf{v} \\cdot \\mathbf{v}$, and the middle term is $0$.',
+          counter: '$\\mathbf{u} = (1, 0)$ and $\\mathbf{v} = (1, 1)$ are not orthogonal. The sum is $(2, 1)$, so $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = 5$, not $1 + 2 = 3$: the cross term $2\\mathbf{u} \\cdot \\mathbf{v} = 2$ is back.' },
+      ],
+      conclusion: '$\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$',
+      meaning: 'Lengths decompose into independent, additive contributions from each perpendicular direction; the sum may run over any number of pairwise orthogonal vectors.',
+    },
   };
+
+
 
   return {
   props:{
+      pythagoreanCard,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1791,7 +1806,9 @@ const schemas = {
    }
 
 // export default function InnerProductPage({seoData,sectionsContent , introContent}) {
-export default function InnerProductPage({
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function InnerProductPage({pythagoreanCard, 
   seoData,
   sectionsContent,
   introContent,
@@ -1984,7 +2001,17 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
             key={'obj10-table'}
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          />,          <DiagramFrame
+            key={'obj10-theorem'}
+            id="pythagorean-theorem-card"
+            title="The Pythagorean Theorem for vectors"
+            source="/linear-algebra/orthogonality/inner-product"
+            before={`One hypothesis carries the whole theorem. Drop it to see the cross term come back.`}
+            after={`The same cancellation runs through any family of pairwise orthogonal vectors, in any inner product space, which is why orthogonal decompositions are so clean.`}
+          >
+            <TheoremCard data={pythagoreanCard} variant="card" theme={theoremTheme} />
+          </DiagramFrame>,
+
         ]
     },
     {

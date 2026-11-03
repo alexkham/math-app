@@ -682,6 +682,7 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -922,7 +923,7 @@ $$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$]@
 
 @academic[pitfall,aside:true,width:35%:Multiplying the base by the exponent
 Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent counts factors: $4^3 = 4 \\cdot 4 \\cdot 4 = 64$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-base-by-the-exponent)]@
 
 This definition works when $n$ is a positive integer. The expression $2^5$ means $2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 = 32$. Five factors of 2.
 
@@ -1024,7 +1025,7 @@ The definition extends the descending pattern below $a^0$. From $3^1 = 3$ and $3
 
 @academic[pitfall,aside:true,width:35%:Making the result negative
 Reading $2^{-3}$ as $-2^3 = -8$ moves the minus sign onto the result. A negative exponent means a reciprocal: $2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-making-the-result-negative)]@
 
 Evaluating a negative power takes two moves: compute the positive power, then take its reciprocal.
 
@@ -1085,7 +1086,7 @@ The [irrational exponents](!/algebra/powers/irrational-exponents) page formalize
 
 @academic[pitfall,aside:true,width:35%:Multiplying the exponents in a product
 Writing $x^3 \\cdot x^4 = x^{12}$ multiplies the exponents, as for a power of a power. The product rule adds them: $x^3 \\cdot x^4 = x^{3+4} = x^7$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-exponents-in-a-product)]@
 
 These laws are first proved for natural exponents, where they follow from counting factors. The extensions to other exponent types are then defined so that the same laws remain valid — each new definition is chosen precisely to preserve these identities.
 
@@ -1123,7 +1124,7 @@ When $0 < a < 1$, the function is decreasing: larger exponents produce smaller v
 
 @academic[pitfall,aside:true,width:35%:Keeping the sign with a base below 1
 Comparing exponents in $\\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2}$ with the sign kept gives $x \\leq -2$, which includes $x = -3$, where $\\left(\\frac{1}{3}\\right)^{-3} = 27 > 9$. With a base below $1$ the sign flips: $x \\geq -2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-the-sign-with-a-base-below-1)]@
 
 The example $\\left(\\frac{1}{3}\\right)^x \\leq 9$ from the start of this section shows where the base enters. Writing $9$ as a power of the base, $9 = \\left(\\frac{1}{3}\\right)^{-2}$, puts both sides over the same base $\\frac{1}{3}$. What remains is a comparison of the exponents $x$ and $-2$, and the base decides which way that comparison runs.
 
@@ -1164,66 +1165,9 @@ The [exponential functions](!/algebra/powers/exponential-functions) page covers 
 
   obj13: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when working with powers. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Multiplying the base by the exponent**
-
-A power with a natural exponent is evaluated by multiplying the base by the exponent, as if $a^n$ meant $a \\cdot n$.
-
-Wrong working:
-$$4^3 = 4 \\cdot 3 = 12$$
-
-Right working: the exponent counts how many factors of the base are multiplied together.
-$$4^3 = 4 \\cdot 4 \\cdot 4 = 16 \\cdot 4 = 64$$
-
-Why it happens: the base and the exponent are two visible numbers, and multiplying them is the first operation that comes to mind. For $2^2$ the wrong rule even gives the right answer, $2 \\cdot 2 = 4$, which hides the slip.
-
-How to check: estimate the size. $4^3$ starts with $4 \\cdot 4 = 16$, which is already larger than $12$.
-
-**Making the result negative**
-
-The minus sign in the exponent is moved onto the value, so a negative exponent is read as a negative result.
-
-Wrong working:
-$$2^{-3} = -2^3 = -8$$
-
-Right working: a negative exponent gives the reciprocal of the positive power.
-$$2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$$
-
-Why it happens: everywhere else a minus sign in front of a number makes it negative, and that reading is carried into the exponent. In the exponent, the minus sign means dividing by the base instead of multiplying by it.
-
-How to check: a positive base raised to any power gives a positive value, so a negative result for $2^{-3}$ is impossible. The pattern confirms the right value: $2^0 = 1$, and each step down divides by $2$, giving $2^{-1} = \\frac{1}{2}$, $2^{-2} = \\frac{1}{4}$, $2^{-3} = \\frac{1}{8}$.
-
-**Multiplying the exponents in a product**
-
-Two powers of the same base are multiplied, and their exponents are multiplied too, mixing up the product rule with the power-of-a-power rule.
-
-Wrong working:
-$$x^3 \\cdot x^4 = x^{3 \\cdot 4} = x^{12}$$
-
-Right working: count the factors. $x^3 \\cdot x^4 = (x \\cdot x \\cdot x)(x \\cdot x \\cdot x \\cdot x)$ has seven factors of $x$.
-$$x^3 \\cdot x^4 = x^{3+4} = x^7$$
-Multiplying the exponents belongs to a power raised to a power: $(x^3)^4 = x^{12}$.
-
-Why it happens: both rules turn two exponents into one, and a product of powers seems to call for a product of exponents.
-
-How to check: substitute $x = 2$. Then $2^3 \\cdot 2^4 = 8 \\cdot 16 = 128 = 2^7$, while $2^{12} = 4096$.
-
-**Keeping the sign with a base below 1**
-
-The base lies between $0$ and $1$, but the exponents are compared exactly as for a base greater than $1$, so the inequality sign is kept.
-
-Wrong working:
-$$\\left(\\frac{1}{3}\\right)^x \\leq 9 \\implies \\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2} \\implies x \\leq -2$$
-
-Right working: $\\left(\\frac{1}{3}\\right)^x$ is decreasing, so larger exponents give smaller values, and the sign flips when the exponents are compared.
-$$\\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2} \\implies x \\geq -2$$
-
-Why it happens: matching exponents is first learned with bases like $2$ or $10$, where the sign stays, and the step is repeated without a look at the base.
-
-How to check: test one value from the answer. $x = -3$ lies in the wrong answer and gives $\\left(\\frac{1}{3}\\right)^{-3} = 27$, which is not at most $9$. A value from the right answer, $x = 0$, gives $\\left(\\frac{1}{3}\\right)^0 = 1 \\leq 9$.`,
+    content: `Four mistakes come up again and again when working with powers. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Three of the four slips misread what an exponent does: it counts factors of the base, so $4^3$ is three fours multiplied together; for a positive base a negative exponent gives a reciprocal, never a negative number; and in a product the factors are counted together, so the exponents add. The fourth forgets that a base between $0$ and $1$ reverses the direction of an inequality. Writing a small power out as repeated multiplication, or trying a single value, exposes every one of them.`,
     link: '',
   },
 
@@ -1398,8 +1342,43 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 3, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj13 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-the-base-by-the-exponent', name: `Multiplying the base by the exponent`, errorAt: 1,
+        what: `A power with a natural exponent is evaluated by multiplying the base by the exponent, as if $a^n$ meant $a \\cdot n$.`,
+        wrong: [`$$4^3$$`, `$$= 4 \\cdot 3 = 12$$`],
+        right: [`$$4^3$$`, `The exponent counts how many factors of the base are multiplied together.
+$$= 4 \\cdot 4 \\cdot 4 = 16 \\cdot 4 = 64$$`],
+        why: `The base and the exponent are two visible numbers, and multiplying them is the first operation that comes to mind. For $2^2$ the wrong rule even gives the right answer, $2 \\cdot 2 = 4$, which hides the slip.`,
+        check: `Estimate the size. $4^3$ starts with $4 \\cdot 4 = 16$, which is already larger than $12$.` },
+      { id: 'making-the-result-negative', name: `Making the result negative`, errorAt: 1,
+        what: `The minus sign in the exponent is moved onto the value, so a negative exponent is read as a negative result.`,
+        wrong: [`$$2^{-3}$$`, `$$= -2^3 = -8$$`],
+        right: [`$$2^{-3}$$`, `A negative exponent gives the reciprocal of the positive power.
+$$= \\frac{1}{2^3} = \\frac{1}{8}$$`],
+        why: `Everywhere else a minus sign in front of a number makes it negative, and that reading is carried into the exponent. In the exponent, the minus sign means dividing by the base instead of multiplying by it.`,
+        check: `A positive base raised to any power gives a positive value, so a negative result for $2^{-3}$ is impossible. The pattern confirms the right value: $2^0 = 1$, and each step down divides by $2$, giving $2^{-1} = \\frac{1}{2}$, $2^{-2} = \\frac{1}{4}$, $2^{-3} = \\frac{1}{8}$.` },
+      { id: 'multiplying-the-exponents-in-a-product', name: `Multiplying the exponents in a product`, errorAt: 1,
+        what: `Two powers of the same base are multiplied, and their exponents are multiplied too, mixing up the product rule with the power-of-a-power rule.`,
+        wrong: [`$$x^3 \\cdot x^4$$`, `$$= x^{3 \\cdot 4} = x^{12}$$`],
+        right: [`$$x^3 \\cdot x^4$$`, `Count the factors. $x^3 \\cdot x^4 = (x \\cdot x \\cdot x)(x \\cdot x \\cdot x \\cdot x)$ has seven factors of $x$.
+$$= x^{3+4} = x^7$$`, `Multiplying the exponents belongs to a power raised to a power: $(x^3)^4 = x^{12}$.`],
+        why: `Both rules turn two exponents into one, and a product of powers seems to call for a product of exponents.`,
+        check: `Substitute $x = 2$. Then $2^3 \\cdot 2^4 = 8 \\cdot 16 = 128 = 2^7$, while $2^{12} = 4096$.` },
+      { id: 'keeping-the-sign-with-a-base-below-1', name: `Keeping the sign with a base below 1`, errorAt: 2,
+        what: `The base lies between $0$ and $1$, but the exponents are compared exactly as for a base greater than $1$, so the inequality sign is kept.`,
+        wrong: [`$$\\left(\\frac{1}{3}\\right)^x \\leq 9$$`, `$$\\implies \\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2}$$`, `$$\\implies x \\leq -2$$`],
+        right: [`$$\\left(\\frac{1}{3}\\right)^x \\leq 9$$`, `$$\\implies \\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2}$$`, `$\\left(\\frac{1}{3}\\right)^x$ is decreasing, so larger exponents give smaller values, and the sign flips when the exponents are compared.`, `$$\\left(\\frac{1}{3}\\right)^x \\leq \\left(\\frac{1}{3}\\right)^{-2}$$`, `$$\\implies x \\geq -2$$`],
+        why: `Matching exponents is first learned with bases like $2$ or $10$, where the sign stays, and the step is repeated without a look at the base.`,
+        check: `Test one value from the answer. $x = -3$ lies in the wrong answer and gives $\\left(\\frac{1}{3}\\right)^{-3} = 27$, which is not at most $9$. A value from the right answer, $x = 0$, gives $\\left(\\frac{1}{3}\\right)^0 = 1 \\leq 9$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     faqQuestions,
     exponentTypeCases,
     demoUnits,
@@ -1424,7 +1403,7 @@ const schemas = {
 
  const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PowersAndExponentsPage({faqQuestions, exponentTypeCases,seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
+export default function PowersAndExponentsPage({ pitfallData,faqQuestions, exponentTypeCases,seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1477,7 +1456,7 @@ $$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$$]@`,
         content: [
           `@academic[pitfall,aside:true,width:35%:Multiplying the base by the exponent
 Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent counts factors: $4^3 = 4 \\cdot 4 \\cdot 4 = 64$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-multiplying-the-base-by-the-exponent)]@`,
           `What $2^0$, $2^{-1}$ or $2^{1/2}$ should mean cannot be settled by counting. The page extends the definition one step at a time, starting with [zero as an exponent](!/algebra/powers#4).`,
         ],
       },
@@ -1649,6 +1628,15 @@ Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'obj13-mistakes'}
+            id="power-pitfalls"
+            title="Common pitfalls with powers"
+            source="/algebra/powers"
+            after={sectionsContent.obj13.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

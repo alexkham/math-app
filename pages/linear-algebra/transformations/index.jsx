@@ -1315,7 +1315,7 @@ const schemas = {
     geometry: demoUnitFrame({
       svg: linearTransformationDiagrams.fullRank,
       caption: 'What survives the transformation',
-      text: 'Lines are still lines, parallel families are still parallel, spacing along each family is still even, and the origin has not moved. Those four survivals are the geometric content of the two algebraic conditions, and a map that breaks any of them is not linear. Break them deliberately and watch which condition fails on the',
+      text: 'Lines go to lines or collapse to a single point, parallel families are still parallel, spacing along each family is still even, and the origin has not moved. Those four survivals are the geometric content of the two algebraic conditions, and a map that breaks any of them is not linear. Break them deliberately and watch which condition fails on the',
       href: '/linear-algebra/visual-tools/linear-transformation-2d',
       linkText: 'linear transformation explorer',
     }),

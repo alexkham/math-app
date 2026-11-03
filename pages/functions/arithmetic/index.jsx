@@ -1224,6 +1224,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare'
 
 
 export async function getStaticProps(){
@@ -2403,9 +2404,42 @@ const faqQuestions = {
         details: 'The reduced form $x - 3$ appears defined everywhere, but the original quotient excludes $x = -3$. The simplified function still has a hole at that point.' },
     ],
   };
+  // ConceptCompare data (arithmetic-vs-composition); every fact is from the section text
+  const arithmeticVsComposition = {
+    header: { kicker: 'Function arithmetic', title: 'Combining outputs vs chaining functions', lede: 'Arithmetic combines outputs at the same input; composition feeds one output into the next function.' },
+    concepts: [
+      { id: 'arith', name: 'Arithmetic combination',
+        values: {
+          rule: '$(f + g)(x) = f(x) + g(x)$, and likewise for $-$, $\\times$, $\\div$',
+          acts: 'On the outputs: the input $x$ passes through both functions, then the outputs combine',
+          ex: '$f(x) = x^2$, $g(x) = 3x$: $(f + g)(3) = 9 + 9 = 18$',
+          result: 'A single new function with its own formula, $(f + g)(x) = x^2 + 3x$',
+        } },
+      { id: 'comp', name: 'Composition',
+        values: {
+          rule: '$(f \\circ g)(x) = f(g(x))$',
+          acts: 'Chains the functions: the output of $g$ becomes the input of $f$',
+          ex: '$f(g(3)) = f(9) = 81$',
+          result: 'A new function built by chaining, covered on the [composition](!/functions/composition) page',
+        } },
+    ],
+    aspects: [
+      { id: 'rule', label: 'Rule', key: true },
+      { id: 'acts', label: 'Acts on' },
+      { id: 'ex', label: 'Example' },
+      { id: 'result', label: 'Result' },
+    ],
+    verdict: {
+      label: 'Not the same',
+      text: 'Combining outputs is not the same as chaining functions.',
+      more: 'All four arithmetic operations follow one rule, operate on the outputs and keep the input; composition changes the input of the outer function.',
+    },
+  };
+
 
    return {
       props:{
+      arithmeticVsComposition,
     functionArithTree,
     quotientReduceSteps,
          sectionsContent,
@@ -2429,7 +2463,9 @@ const faqQuestions = {
     }
    }
 
-export default function ArithmeticPage({functionArithTree, quotientReduceSteps,
+const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function ArithmeticPage({arithmeticVsComposition, functionArithTree, quotientReduceSteps,
   seoData,
   sectionsContent,
   introContent,
@@ -2520,6 +2556,16 @@ export default function ArithmeticPage({functionArithTree, quotientReduceSteps,
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          <DiagramFrame
+            key={'obj1-compare'}
+            id="arithmetic-vs-composition"
+            title="Combining outputs vs chaining functions"
+            source="/functions/arithmetic"
+            before={`Arithmetic on functions and composition of functions both build a new function from $f$ and $g$, in different ways. The card keeps them apart on the page’s own example.`}
+            after={`Same $f$, same $g$, same input $3$: the two constructions give $18$ and $81$.`}
+          >
+            <ConceptCompare data={arithmeticVsComposition} variant="confused" theme={compareTheme} />
+          </DiagramFrame>,
         ]
     },
     {

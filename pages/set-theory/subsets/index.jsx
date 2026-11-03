@@ -1054,6 +1054,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1494,7 +1496,7 @@ Each set properly contains the one to its right: the [complex numbers](!/complex
 
 @academic[pitfall,aside:true,width:35%:Reading the superset sign backwards
 Writing $\\{1, 2\\} \\supseteq \\{1, 2, 3\\}$ claims that every element of $\\{1, 2, 3\\}$ lies in $\\{1, 2\\}$, which fails at $3$. The open side faces the larger set: $\\{1, 2, 3\\} \\supseteq \\{1, 2\\}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-superset-sign-backwards)]@
 
 Each link in the chain passes the subset test from the first section. Every natural number is an integer, every integer $n$ equals the fraction $\\frac{n}{1}$, and every fraction is a real number, so each set lies inside the set to its left. Each link is proper because the larger set has elements the smaller one lacks: $-1 \\in \\mathbb{Z}$ but $-1 \\notin \\mathbb{N}$, and $\\frac{1}{2} \\in \\mathbb{Q}$ but $\\frac{1}{2} \\notin \\mathbb{Z}$.
     `,
@@ -1579,71 +1581,9 @@ The power set transforms subset relationships into membership relationships: $B 
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes come up again and again with subsets and power sets. The first four are marked where they happen in the sections above; the fifth, the power set of the empty set, is the case the Power Set section singles out. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Confusing membership with containment**
-
-The symbol $\\in$ links an element to a set, and $\\subseteq$ links two sets. The two are swapped: an element is written on the left of $\\subseteq$, or a set is written on the left of $\\in$ as if it were one of the elements.
-
-Wrong working: with $B = \\{1, 2, 3, 4, 5\\}$, the fact that $2$ is in $B$ is written as $2 \\subseteq B$, and the fact that the set $\\{2\\}$ lies inside $B$ is written as $\\{2\\} \\in B$. The second statement is false: the elements of $B$ are the numbers $1$ to $5$, and none of them is the set $\\{2\\}$.
-
-Right working: the number $2$ is an element, so $2 \\in B$. The set $\\{2\\}$ has one element, $2$, and it belongs to $B$, so $\\{2\\} \\subseteq B$.
-
-Why it happens: both symbols are read as "is in" in everyday speech, and a one-element set such as $\\{2\\}$ looks almost the same as the element $2$.
-
-How to check: list the elements of the set on the right. A statement with $\\in$ is true only if the left side appears in that list; a statement with $\\subseteq$ is true only if every element of the left side does. For $C = \\{1, \\{2\\}\\}$ the two tests give different answers: $\\{2\\} \\in C$ is true, while $\\{2\\} \\subseteq C$ is false because $2 \\notin C$.
-
-**Reading the superset sign backwards**
-
-The superset sign $\\supseteq$ is read as "is contained in", so the smaller set is written on its open side. The statement then claims the opposite containment.
-
-Wrong working: $\\{1, 2\\} \\supseteq \\{1, 2, 3\\}$ is written to say that $\\{1, 2\\}$ lies inside $\\{1, 2, 3\\}$. In the same way, $\\mathbb{N} \\supseteq \\mathbb{Z}$ is written for "the natural numbers are among the integers". Both are false: $3 \\notin \\{1, 2\\}$, and $-1 \\in \\mathbb{Z}$ but $-1 \\notin \\mathbb{N}$.
-
-Right working: the open side faces the larger set, so $\\{1, 2, 3\\} \\supseteq \\{1, 2\\}$ and $\\mathbb{Z} \\supseteq \\mathbb{N}$. These say the same as $\\{1, 2\\} \\subseteq \\{1, 2, 3\\}$ and $\\mathbb{N} \\subseteq \\mathbb{Z}$.
-
-Why it happens: $\\subseteq$ and $\\supseteq$ are mirror images, and the readings "contains" and "is contained in" differ only by a few words.
-
-How to check: rewrite $X \\supseteq Y$ as $Y \\subseteq X$ and test each element of $Y$ against $X$. Like the inequality sign in $3 > 2$, the open side of the sign faces the larger side.
-
-**Removing the empty set from the proper count**
-
-A proper subset is taken to mean a subset that is neither empty nor the whole set, so two subsets are removed from $2^n$ instead of one.
-
-Wrong working: $\\{a, b, c\\}$ has $2^3 = 8$ subsets; removing $\\emptyset$ and $\\{a, b, c\\}$ gives $8 - 2 = 6$ proper subsets.
-
-Right working: a proper subset only has to differ from the set. Since $\\emptyset \\subseteq \\{a, b, c\\}$ and $\\emptyset \\neq \\{a, b, c\\}$, the empty set is proper, and only $\\{a, b, c\\}$ itself is removed. The proper subsets are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\}$, $\\{a, b\\}$, $\\{a, c\\}$ and $\\{b, c\\}$, which makes $2^3 - 1 = 7$.
-
-Why it happens: the empty set feels like no subset at all, so it is set aside together with the set itself.
-
-How to check: try a one-element set $\\{x\\}$. Its subsets are $\\emptyset$ and $\\{x\\}$, and $\\emptyset \\subset \\{x\\}$, so it has exactly one proper subset. The formula $2^1 - 1 = 1$ agrees; $2^1 - 2 = 0$ does not.
-
-**Leaving the braces off the singletons**
-
-When a power set is written out, the elements of the original set are listed in place of its one-element subsets.
-
-Wrong working: $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, 1, 2, \\{1, 2\\}\\}$.
-
-Right working: every element of $\\mathcal{P}(\\{1, 2\\})$ is a subset of $\\{1, 2\\}$. The subsets with one element are $\\{1\\}$ and $\\{2\\}$, so $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$.
-
-Why it happens: the outer braces of the power set seem to be enough, and $1$ and $\\{1\\}$ look almost alike.
-
-How to check: for each entry $S$ in the list, ask whether $S \\subseteq A$ makes sense and is true; that is exactly the condition for $S \\in \\mathcal{P}(A)$. Apart from $\\emptyset$, every entry of a written-out power set starts with its own brace.
-
-**Taking the power set of the empty set to be empty**
-
-The empty set has no elements, so its power set is taken to have none either.
-
-Wrong working: $\\mathcal{P}(\\emptyset) = \\emptyset$, so $|\\mathcal{P}(\\emptyset)| = 0$.
-
-Right working: $\\emptyset \\subseteq \\emptyset$, so the empty set is a subset of itself and therefore an element of its power set: $\\mathcal{P}(\\emptyset) = \\{\\emptyset\\}$, with $|\\mathcal{P}(\\emptyset)| = 1$.
-
-Why it happens: $\\{\\emptyset\\}$ and $\\emptyset$ look alike, and "nothing in, nothing out" sounds reasonable.
-
-How to check: use the count $|\\mathcal{P}(A)| = 2^{|A|}$. With $|A| = 0$ it gives $2^0 = 1$, not $0$. A power set is never empty, since $\\emptyset$ is always one of its elements.
-`,
+    content: `Five mistakes come up again and again with subsets and power sets. The first four are marked where they happen in the sections above; the fifth, the power set of the empty set, is the case the Power Set section singles out. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip misreads a sign or a definition. $2 \\in B$ but $\\{2\\} \\subseteq B$; the open side of $\\supseteq$ faces the larger set; the empty set is a proper subset of every non-empty set; every element of a power set is a set, so singletons keep their braces; and $\\emptyset$ is a subset of itself, so $\\mathcal{P}(\\emptyset) = \\{\\emptyset\\}$ has one element. Listing the elements, testing a one-element set, or using the count $2^{|A|}$ catches each of them.`,
     link: '',
   },
   notation: {
@@ -1861,8 +1801,46 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'confusing-membership-with-containment', name: `Confusing membership with containment`, errorAt: 1,
+        what: `The symbol $\\in$ links an element to a set, and $\\subseteq$ links two sets. The two are swapped: an element is written on the left of $\\subseteq$, or a set is written on the left of $\\in$ as if it were one of the elements.`,
+        wrong: [`With $B = \\{1, 2, 3, 4, 5\\}$,`, `The fact that $2$ is in $B$ is written as $2 \\subseteq B$, and the fact that the set $\\{2\\}$ lies inside $B$ is written as $\\{2\\} \\in B$. The second statement is false: the elements of $B$ are the numbers $1$ to $5$, and none of them is the set $\\{2\\}$.`],
+        right: [`With $B = \\{1, 2, 3, 4, 5\\}$,`, `The number $2$ is an element, so $2 \\in B$. The set $\\{2\\}$ has one element, $2$, and it belongs to $B$, so $\\{2\\} \\subseteq B$.`],
+        why: `Both symbols are read as "is in" in everyday speech, and a one-element set such as $\\{2\\}$ looks almost the same as the element $2$.`,
+        check: `List the elements of the set on the right. A statement with $\\in$ is true only if the left side appears in that list; a statement with $\\subseteq$ is true only if every element of the left side does. For $C = \\{1, \\{2\\}\\}$ the two tests give different answers: $\\{2\\} \\in C$ is true, while $\\{2\\} \\subseteq C$ is false because $2 \\notin C$.` },
+      { id: 'reading-the-superset-sign-backwards', name: `Reading the superset sign backwards`, errorAt: 0,
+        what: `The superset sign $\\supseteq$ is read as "is contained in", so the smaller set is written on its open side. The statement then claims the opposite containment.`,
+        wrong: [`$\\{1, 2\\} \\supseteq \\{1, 2, 3\\}$ is written to say that $\\{1, 2\\}$ lies inside $\\{1, 2, 3\\}$. In the same way, $\\mathbb{N} \\supseteq \\mathbb{Z}$ is written for "the natural numbers are among the integers". Both are false: $3 \\notin \\{1, 2\\}$, and $-1 \\in \\mathbb{Z}$ but $-1 \\notin \\mathbb{N}$.`],
+        right: [`The open side faces the larger set, so $\\{1, 2, 3\\} \\supseteq \\{1, 2\\}$ and $\\mathbb{Z} \\supseteq \\mathbb{N}$. These say the same as $\\{1, 2\\} \\subseteq \\{1, 2, 3\\}$ and $\\mathbb{N} \\subseteq \\mathbb{Z}$.`],
+        why: `$\\subseteq$ and $\\supseteq$ are mirror images, and the readings "contains" and "is contained in" differ only by a few words.`,
+        check: `Rewrite $X \\supseteq Y$ as $Y \\subseteq X$ and test each element of $Y$ against $X$. Like the inequality sign in $3 > 2$, the open side of the sign faces the larger side.` },
+      { id: 'removing-the-empty-set-from-the-proper-count', name: `Removing the empty set from the proper count`, errorAt: 0,
+        what: `A proper subset is taken to mean a subset that is neither empty nor the whole set, so two subsets are removed from $2^n$ instead of one.`,
+        wrong: [`$\\{a, b, c\\}$ has $2^3 = 8$ subsets; removing $\\emptyset$ and $\\{a, b, c\\}$ gives $8 - 2 = 6$ proper subsets.`],
+        right: [`A proper subset only has to differ from the set. Since $\\emptyset \\subseteq \\{a, b, c\\}$ and $\\emptyset \\neq \\{a, b, c\\}$, the empty set is proper, and only $\\{a, b, c\\}$ itself is removed. The proper subsets are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\}$, $\\{a, b\\}$, $\\{a, c\\}$ and $\\{b, c\\}$, which makes $2^3 - 1 = 7$.`],
+        why: `The empty set feels like no subset at all, so it is set aside together with the set itself.`,
+        check: `Try a one-element set $\\{x\\}$. Its subsets are $\\emptyset$ and $\\{x\\}$, and $\\emptyset \\subset \\{x\\}$, so it has exactly one proper subset. The formula $2^1 - 1 = 1$ agrees; $2^1 - 2 = 0$ does not.` },
+      { id: 'leaving-the-braces-off-the-singletons', name: `Leaving the braces off the singletons`, errorAt: 0,
+        what: `When a power set is written out, the elements of the original set are listed in place of its one-element subsets.`,
+        wrong: [`$\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, 1, 2, \\{1, 2\\}\\}$.`],
+        right: [`Every element of $\\mathcal{P}(\\{1, 2\\})$ is a subset of $\\{1, 2\\}$. The subsets with one element are $\\{1\\}$ and $\\{2\\}$, so $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$.`],
+        why: `The outer braces of the power set seem to be enough, and $1$ and $\\{1\\}$ look almost alike.`,
+        check: `For each entry $S$ in the list, ask whether $S \\subseteq A$ makes sense and is true; that is exactly the condition for $S \\in \\mathcal{P}(A)$. Apart from $\\emptyset$, every entry of a written-out power set starts with its own brace.` },
+      { id: 'taking-the-power-set-of-the-empty-set-to-be-empty', name: `Taking the power set of the empty set to be empty`, errorAt: 0,
+        what: `The empty set has no elements, so its power set is taken to have none either.`,
+        wrong: [`$\\mathcal{P}(\\emptyset) = \\emptyset$, so $|\\mathcal{P}(\\emptyset)| = 0$.`],
+        right: [`$\\emptyset \\subseteq \\emptyset$, so the empty set is a subset of itself and therefore an element of its power set: $\\mathcal{P}(\\emptyset) = \\{\\emptyset\\}$, with $|\\mathcal{P}(\\emptyset)| = 1$.`],
+        why: `$\\{\\emptyset\\}$ and $\\emptyset$ look alike, and "nothing in, nothing out" sounds reasonable.`,
+        check: `Use the count $|\\mathcal{P}(A)| = 2^{|A|}$. With $|A| = 0$ it gives $2^0 = 1$, not $0$. A power set is never empty, since $\\emptyset$ is always one of its elements.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     sectionsContent,
     introContent,
     obj4Table,
@@ -1883,7 +1861,7 @@ const schemas = {
    }
 
 
-export default function SubsetsPage({seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SubsetsPage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1946,7 +1924,7 @@ $$A \\subseteq B \\iff \\forall x\\,(x \\in A \\Rightarrow x \\in B)$$]@`,
         lead: `Being a subset is a relation between two sets: a statement that is true or false.`,
         content: `@academic[pitfall,aside:true,width:35%:Confusing membership with containment
 Writing $2 \\subseteq B$ puts a number where a set must stand, and $\\{2\\} \\in B$ is false, since no element of $B = \\{1, 2, 3, 4, 5\\}$ is a set. The element claim is $2 \\in B$; the set claim is $\\{2\\} \\subseteq B$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-confusing-membership-with-containment)]@
 
 $A \\subseteq B$ is not a new set and not a number; it is a claim about two given sets, and it is either true or false. Order matters: $\\{2, 4\\} \\subseteq B$ is true, but $B \\subseteq \\{2, 4\\}$ is false.
 
@@ -2020,7 +1998,7 @@ The doubling can also be followed in a written list. Take the four subsets of $\
           />,
           `@academic[pitfall,aside:true,width:35%:Removing the empty set from the proper count
 Removing $\\emptyset$ as well as the set itself gives $2^3 - 2 = 6$ proper subsets of $\\{a, b, c\\}$. Since $\\emptyset \\subseteq \\{a, b, c\\}$ and $\\emptyset \\neq \\{a, b, c\\}$, the empty set is proper, and the count is $2^3 - 1 = 7$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-removing-the-empty-set-from-the-proper-count)]@
 
 The two columns of the table differ by exactly $1$ in every row, because a set has only one subset that is equal to it: the set itself. The first row follows the same pattern. The empty set has a single subset, $\\emptyset$, and that subset is the set itself, so the empty set has $2^0 - 1 = 0$ proper subsets. Further down, the gap stays at $1$ while the counts double, from $32$ and $31$ at $n = 5$ to $1024$ and $1023$ at $n = 10$.`,
           `@academic[punchline:Each element is a separate in-or-out choice, so every new element doubles the number of subsets.]@`,
@@ -2036,7 +2014,7 @@ The two columns of the table differ by exactly $1$ in every row, because a set h
           `Every node in that diagram is a subset of $A$ and an element of $\\mathcal{P}(A)$ at once — the power set turns containment into membership.`,
           `@academic[pitfall,aside:true,width:35%:Leaving the braces off the singletons
 Writing $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, 1, 2, \\{1, 2\\}\\}$ lists the elements $1$ and $2$, which are not subsets of $\\{1, 2\\}$. Every element of a power set is a set: $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-braces-off-the-singletons)]@
 
 The eight subsets in the diagram are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\}$, $\\{a, b\\}$, $\\{a, c\\}$, $\\{b, c\\}$ and $\\{a, b, c\\}$. Written between one outer pair of braces, these eight sets make up $\\mathcal{P}(\\{a, b, c\\})$, so the power set has $8$ elements even though $\\{a, b, c\\}$ itself has only $3$. Each of the letters $a$, $b$ and $c$ appears in four of the eight subsets, one for every choice made about the other two letters.`,
         ]
@@ -2047,6 +2025,15 @@ The eight subsets in the diagram are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="subset-pitfalls"
+            title="Common pitfalls with subsets"
+            source="/set-theory/subsets"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 

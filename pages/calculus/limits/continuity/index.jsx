@@ -20,6 +20,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -1089,9 +1090,25 @@ const schemas = {
       },
     ],
   };
+  // TheoremCard data (ivt-converse); every fact is from the section text
+  const ivtConverse = {
+    header: { kicker: 'Continuity', title: 'Intermediate Value Theorem', lede: 'The theorem only goes one way.' },
+    theorem: {
+      says: 'If $f$ is continuous on $[a, b]$ and $k$ lies between $f(a)$ and $f(b)$, then $f(c) = k$ for some $c \\in (a, b)$.',
+      not: 'If $k$ does not lie between $f(a)$ and $f(b)$, then $f$ never reaches $k$ on $[a, b]$.',
+      counter: {
+        label: 'Reading the theorem backwards',
+        wrong: '$f(x) = x^2$ on $[-1, 1]$ has $f(-1) = f(1) = 1$. There is no value $0$ between them, so $f$ never takes the value $0$.',
+        right: 'The theorem speaks only about values between $f(a)$ and $f(b)$. Here $f(0) = 0$.',
+      },
+      scope: '**Existence only:** it says a $c$ exists but does not tell you where or whether it is unique.',
+    },
+  };
+
 
 return {
   props: {
+      ivtConverse,
     demoUnits,
     conceptIntroFigures,
     discontinuityTypes,
@@ -1120,7 +1137,9 @@ const siteTheme = {
   warm: '#B45309', warmSoft: '#fef3c7', warmLine: '#fcd34d', warmInk: '#92400e',
 }
 
-export default function ContinuityPage({seoData, sectionsContent, introContent, discontinuityTypes, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function ContinuityPage({ivtConverse, seoData, sectionsContent, introContent, discontinuityTypes, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1336,6 +1355,16 @@ At any moment some pair of opposite points on the equator has exactly the same t
 
 The theorem is often applied to a function built for the purpose rather than to the one in the question. To show that two continuous quantities $p$ and $q$ are equal somewhere on $[a, b]$, apply it to their difference $g = p - q$, which is continuous too. If $g$ is negative at one end and positive at the other, then $g(c) = 0$ for some $c$, and so $p(c) = q(c)$. Nothing more about $p$ and $q$ needs to be known than their continuity and the two signs.`,
           `@academic[punchline:A continuous function cannot skip a value on its way, so solutions exist even when no one can say where.]@`,
+          <DiagramFrame
+            key={'obj11-theorem'}
+            id="ivt-converse"
+            title="Intermediate Value Theorem: what it does not say"
+            source="/calculus/limits/continuity"
+            before={`The theorem only goes one way. The card separates what it says from what it does not.`}
+            after={`A $c$ exists when $k$ lies between $f(a)$ and $f(b)$; when it does not, the theorem is silent.`}
+          >
+            <TheoremCard data={ivtConverse} variant="converse" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

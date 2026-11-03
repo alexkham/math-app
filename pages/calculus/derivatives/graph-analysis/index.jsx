@@ -21,6 +21,8 @@ import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/Fun
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -460,6 +462,26 @@ const keyWords = [
 
 
 // formulas-optimized: v1 | 2026-06-09 | 9 callouts (obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj10)
+// Concept introduction (section 4, "Critical Points") — template A,
+// definition last. Running instance: f(x) = x³ − 3x and its slope at five
+// points. Old obj4 text is kept in sectionsContent.obj4, unused; its five
+// passages, formula box and link, Fermat's theorem box, pitfall, the critical
+// demo frame and its line are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSlopeTable = ciTableOpen(['x', 'f(x) = x³ − 3x', "slope f′(x) = 3x² − 3", 'peak or valley?']) +
+  ciRow(['−2', '−2', '9', 'no, still rising']) +
+  ciRow(['−1', '2', '0', 'peak'], { shade: true, color: '#2563EB', cols: [2, 3] }) +
+  ciRow(['0', '0', '−3', 'no, falling']) +
+  ciRow(['1', '−2', '0', 'valley'], { shade: true, color: '#2563EB', cols: [2, 3] }) +
+  ciRow(['2', '2', '9', 'no, rising'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/derivatives/graph-analysis ─────────────────────────────────
 
@@ -1042,6 +1064,10 @@ const schemas = {
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
 
+  const conceptIntroFigures = {
+    slopeTable: ciSlopeTable,
+  };
+
   const demoUnits = {
     tangent: demoUnitFrame({
       svg: functionTangentLineDiagrams.pos,
@@ -1140,11 +1166,28 @@ const schemas = {
       ] },
     ],
   };
+  // TheoremCard data (fermat-theorem-converse); every fact is from the section text
+  const fermatConverse = {
+    header: { kicker: 'Critical points', title: 'Fermat’s Theorem', lede: 'The converse is false.' },
+    theorem: {
+      says: 'If $f$ has a local maximum or minimum at $c$, then $c$ is a critical point: $f\'(c) = 0$ or $f\'(c)$ does not exist.',
+      not: 'If $c$ is a critical point, then $f$ has a local maximum or minimum at $c$.',
+      counter: {
+        label: 'Reading the theorem backwards',
+        wrong: "$f(x) = x^3$ has $f'(0) = 0$, so $x = 0$ is a critical point, hence an extremum.",
+        right: '$f$ increases through the origin and has no extremum there. A critical point is a candidate that must be tested further.',
+      },
+      scope: '**Candidates only:** critical points are the only places a local extremum can occur; the derivative tests classify each one.',
+    },
+  };
+
 
   return {
   props: {
+      fermatConverse,
     cubicDirectionProfile,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj6Table,
@@ -1163,7 +1206,9 @@ const schemas = {
   }
 }
    }
-export default function PageTemplate({cubicDirectionProfile, 
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function PageTemplate({fermatConverse, cubicDirectionProfile, 
   seoData,
   sectionsContent,
   introContent,
@@ -1172,10 +1217,81 @@ export default function PageTemplate({cubicDirectionProfile,
   obj10Table,
   overviewTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 4 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `At the top of a hill or the bottom of a valley, a smooth graph is momentarily flat.`,
+        content: [
+          `Check this on $f(x) = x^3 - 3x$ by comparing its values with its slope.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The graph of x³ − 3x turns exactly where its slope is zero.`,
+        content: [
+          ciTable('slopeTable'),
+          `Where the slope is $9$ or $-3$ the graph is still climbing or falling, so it cannot have a peak or a valley there.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Peaks and valleys can only occur where the slope is zero, or where there is no slope at all.`,
+        content: [
+          `Critical points are the only candidates for local extrema.`,
+          `@academic[rule_theorem:Fermat's Theorem
+If $f$ has a local maximum or minimum at $c$, then $c$ must be a critical point.]@`,
+          `This is Fermat's theorem: a local extremum at an interior point requires the derivative to vanish or fail to exist.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A [critical point](!/calculus/definitions#critical_point) of $f$ is a value $c$ in its domain where $f'(c) = 0$ or $f'(c)$ does not exist.`,
+        formula: [
+          `A critical point of $f$ is a value $x = c$ in the domain of $f$ where either $f'(c) = 0$ or $f'(c)$ does not exist.`,
+          `@academic[formula_callout:Critical Point Condition
+$$f'(c) = 0 \\quad \\text{or} \\quad f'(c) \\text{ undefined}$$
+/calculus/formulas#critical_point_condition]@`,
+          `@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@`,
+        ],
+        footer: `So $f(x) = x^3 - 3x$ has critical points at $x = -1$ and $x = 1$, where $f'(x) = 3x^2 - 3 = 0$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Critical points are candidates: found first, tested afterwards.`,
+        content: [
+          `Finding critical points is the first step in any extremum or optimization problem. The subsequent tests—first derivative test and second derivative test—classify what happens at each candidate.`,
+          <div key={'unit-critical'} dangerouslySetInnerHTML={{ __html: demoUnits.critical }} />,
+          `Locating the critical points is the first step; classifying them is the work of the two tests that follow.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Not every critical point is a peak or a valley, and not every one comes from f′ = 0.`,
+        content: [
+          `The converse is false. The function $f(x) = x^3$ has $f'(0) = 0$, so $x = 0$ is a critical point, but $f$ has no extremum there—it increases through the origin. A critical point is a candidate that must be tested further.`,
+          `@academic[pitfall,aside:true,width:35%:Skipping points where the derivative is undefined
+Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\frac{2}{3}x^{-1/3}$ is never $0$. But $f'(0)$ does not exist, so $x = 0$ is a critical point, and it is the minimum: $f(0) = 0$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the first and second derivative tests, concavity, inflection points, curve sketching, optimization and related rates.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1243,9 +1359,17 @@ export default function PageTemplate({cubicDirectionProfile,
         title:sectionsContent.obj4.title,
         link:sectionsContent.obj4.link,
         content:[
-          sectionsContent.obj4.content,
-                  <div key={'unit-critical'} dangerouslySetInnerHTML={{ __html: demoUnits.critical }} />,
-          `Locating the critical points is the first step; classifying them is the work of the two tests that follow.`,
+          <ConceptIntro key={'obj4-intro'} data={conceptIntro} />,
+          <DiagramFrameV2
+            key={'obj4-theorem'}
+            id="fermat-theorem-converse"
+            title="Fermat’s Theorem: what it does not say"
+            source="/calculus/derivatives/graph-analysis"
+            before={`Fermat’s theorem runs one way. The card separates the statement from its false converse.`}
+            after={`A critical point is a candidate. The first and second derivative tests decide what happens there.`}
+          >
+            <TheoremCard data={fermatConverse} variant="converse" theme={theoremTheme} />
+          </DiagramFrameV2>,
         ]
     },
     {

@@ -15,6 +15,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -172,6 +173,24 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 2 callouts (obj6)
+// Concept introduction (section 1, "Direct Antidifferentiation") — template
+// A, definition last. Running instance: three integrands reduced to standard
+// forms with at most one line of algebra. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its five passages, three formula boxes,
+// pitfall and the split-fraction diagram are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciFormsTable = ciTableOpen(['integrand', 'after algebra', 'standard forms used']) +
+  ciRow(['3x² + 5eˣ − sec² x', 'already a sum of standard forms', 'power, exponential, tangent']) +
+  ciRow(['(x³ + 1) / x', 'x² + 1/x', 'power, logarithm'], { shade: true }) +
+  ciRow(['(x + 1)²', 'x² + 2x + 1', 'power'], { last: true }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/integrals/evaluating ───────────────────────────────────────
 
@@ -616,6 +635,10 @@ const schemas = {
     vlines: [{ x: -1 }, { x: 1 }],
     notes: [{ x: -1.45, y: 11, text: 'positive, unbounded at 0', pos: 'e' }, { x: -1.45, y: -1.4, text: 'naive [−1/x]: −2', pos: 'e', color: 'r' }, { x: -1.45, y: -2.4, text: 'a negative area: wrong', pos: 'e', color: 'r' }],
     caption: 'An unbounded integrand makes the integral improper; here it diverges' };
+  const conceptIntroFigures = {
+    formsTable: ciFormsTable,
+  };
+
   const demoUnits = {
     absSplit: demoUnitFrame({
       svg: renderFunctionPlotV4(fpAbsSplit),
@@ -733,6 +756,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Evaluating Integrals: Strategy & Examples | Learn Math Class",
       description: "Master integral evaluation: direct antidifferentiation, recognizing standard forms, definite integral setup, absolute values, piecewise functions, symmetry shortcuts, and avoiding common mistakes.",
@@ -744,17 +768,60 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({integralLadderDecision, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, splitFractionSteps, completeSquareIntegral}) {
+export default function PageTemplate({integralLadderDecision, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, splitFractionSteps, completeSquareIntegral, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
-  const genericSections=[
-    {
-        id:'1',
-        title:sectionsContent.obj1.title,
-        link:sectionsContent.obj1.link,
-        content:[
-          sectionsContent.obj1.content,
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Before reaching for substitution or other techniques, check whether the integrand is already made of standard forms.`,
+        content: [
+          `Many integrands are, sometimes after one line of algebra.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each of these integrands becomes a sum of standard forms with at most one algebraic step.`,
+        content: [
+          ciTable('formsTable'),
+          `Once the integrand is a sum of standard forms, each term is integrated on its own.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Linearity plus a little algebra settles many integrals directly.`,
+        content: [
+          `Apply linearity and known formulas:`,
+          `@academic[formula_callout:Direct Antidifferentiation
+$$= 3 \\cdot \\frac{x^3}{3} + 5e^x - \\tan x + C = x^3 + 5e^x - \\tan x + C$$]@`,
+          `Expand, simplify, and separate before reaching for techniques.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Direct antidifferentiation** evaluates an integral by matching the integrand, term by term, to known antiderivatives, using only linearity and simple algebra.`,
+        formula: [
+          `Try the straightforward approach first. Does the integrand match a standard form?`,
+          `@academic[formula_callout:Direct Antidifferentiation
+$$\\int (3x^2 + 5e^x - \\sec^2 x)\\, dx$$]@`,
+        ],
+        footer: `So $\\int (3x^2 + 5e^x - \\sec^2 x)\\,dx = x^3 + 5e^x - \\tan x + C$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Splitting a fraction over a single-term denominator is the most common algebraic step.`,
+        content: [
+          `Algebraic simplification often reveals standard forms:`,
+          `@academic[formula_callout:Direct Antidifferentiation
+$$\\int \\frac{x^3 + 1}{x}\\, dx = \\int \\left(x^2 + \\frac{1}{x}\\right)\\, dx = \\frac{x^3}{3} + \\ln|x| + C$$]@`,
+          `Here the denominator is a single term, so the fraction breaks into one fraction per term of the numerator: $\\frac{x^3 + 1}{x} = \\frac{x^3}{x} + \\frac{1}{x}$. Each piece is then a power of $x$, and the two standard forms $\\int x^n\\, dx$ and $\\int \\frac{1}{x}\\, dx$ finish the job. Linearity does the rest, one term at a time.`,
           <DiagramFrame
             key={'obj1-diagram'}
             id="split-fraction-steps"
@@ -769,6 +836,31 @@ export default function PageTemplate({integralLadderDecision, seoData, sectionsC
               theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
             />
           </DiagramFrame>,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The top and bottom of a fraction cannot be integrated separately.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Integrating the top and bottom separately
+Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\frac{x^2}{2} + \\frac{2}{x}$, whose derivative at $x = 1$ is $-1$, while the integrand there is $2$. Splitting the fraction first gives $\\frac{x^3}{3} + \\ln|x| + C$.
+[Read more](!#7)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers recognizing standard forms, setting up definite integrals, absolute values, piecewise functions, symmetry shortcuts, checking an answer and a summary of the strategy.`,
+      },
+    ],
+  }
+
+  const genericSections=[
+    {
+        id:'1',
+        title:sectionsContent.obj1.title,
+        link:sectionsContent.obj1.link,
+        content:[
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

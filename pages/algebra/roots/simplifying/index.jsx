@@ -14,6 +14,7 @@ import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -304,7 +305,7 @@ Recognizing perfect powers quickly — 4, 9, 16, 25, 36, 49, 64, 81, 100 for squ
 
 @academic[pitfall,aside:true,width:35%:Splitting a sum under the radical
 Writing $72 = 64 + 8$ and splitting, $\\sqrt{64 + 8} = 8 + \\sqrt{8}$, treats a sum like a product. But $8 + \\sqrt{8} \\approx 10.83$, while $\\sqrt{72} \\approx 8.49$. Only a product splits: $\\sqrt{36 \\cdot 2} = 6\\sqrt{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-a-sum-under-the-radical)]@
 
 Every extraction above begins by writing the radicand as a product, such as $72 = 36 \\cdot 2$ or $48 = 16 \\cdot 3$. The product rule then gives each factor its own radical, and the perfect power factor leaves the radical as a whole number. How the radicand is broken up is the first decision in every simplification.
 
@@ -363,7 +364,7 @@ The negative radicand is fine for odd index — cube roots handle negatives natu
 
 @academic[pitfall,aside:true,width:35%:Taking out the square instead of its root
 Moving the perfect square out unchanged, $\\sqrt{50x^5} = 25x^4\\sqrt{2x}$, skips its root. At $x = 1$ this gives $25\\sqrt{2} \\approx 35.4$, but $\\sqrt{50} \\approx 7.07$. The factor that leaves is $\\sqrt{25x^4} = 5x^2$, so the result is $5x^2\\sqrt{2x}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-out-the-square-instead-of-its-root)]@
 
 Organize work systematically: factor the coefficient, factor each variable's power, extract what divides evenly, leave remainders under the radical.
 
@@ -393,7 +394,7 @@ The cube root of 5 needs two more factors of 5 to become $\\sqrt[3]{125} = 5$.
 
 @academic[pitfall,aside:true,width:35%:Multiplying by the same cube root
 Multiplying $\\frac{2}{\\sqrt[3]{5}}$ by $\\frac{\\sqrt[3]{5}}{\\sqrt[3]{5}}$, as for a square root, gives $\\frac{2\\sqrt[3]{5}}{\\sqrt[3]{25}}$, and $\\sqrt[3]{25}$ is still irrational. The multiplier must be $\\sqrt[3]{25}$, giving $\\frac{2\\sqrt[3]{25}}{5}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-by-the-same-cube-root)]@
 
 General principle: multiply by $\\sqrt[n]{a^{n-k}}$ where $k$ is the current power of $a$ under the radical. This creates $\\sqrt[n]{a^n} = a$ in the denominator.
 
@@ -422,7 +423,7 @@ $$= -3(2 - \\sqrt{5}) = -6 + 3\\sqrt{5}$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the sign of a negative denominator
 Removing the $-1$ denominator without changing signs gives $6 - 3\\sqrt{5} \\approx -0.71$. But $\\frac{3}{2 + \\sqrt{5}}$ is positive; the result is $-6 + 3\\sqrt{5} \\approx 0.71$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-sign-of-a-negative-denominator)]@
 
 Here the product of the conjugates is $4 - 5 = -1$. The radicand $5$ is larger than $a^2 = 4$, so $a^2 - b$ is negative, even though the original denominator $2 + \\sqrt{5}$ is positive. The last step clears that $-1$ from the denominator.
 
@@ -534,65 +535,9 @@ This process prepares expressions for [operations](!/algebra/roots/operations) a
 
   obj11: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when simplifying radicals. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Splitting a sum under the radical**
-
-The radicand is broken into a sum instead of a product, and the radical is then applied to each part separately, as if the product rule also covered addition.
-
-Wrong working:
-$$\\sqrt{72} = \\sqrt{64 + 8} = \\sqrt{64} + \\sqrt{8} = 8 + 2\\sqrt{2}$$
-
-Right working: write $72$ as a product that contains a perfect square factor.
-$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$
-
-Why it happens: the product rule $\\sqrt{ab} = \\sqrt{a} \\cdot \\sqrt{b}$ seems to invite an addition version, and $64$ is the largest perfect square that fits inside $72$.
-
-How to check: compare decimals. $8 + 2\\sqrt{2} \\approx 10.83$, while $\\sqrt{72} \\approx 8.49$ and $6\\sqrt{2} \\approx 8.49$. A small test case shows the rule at once: $\\sqrt{9 + 16} = \\sqrt{25} = 5$, not $3 + 4 = 7$.
-
-**Taking out the square instead of its root**
-
-The perfect square factor is found correctly, but it is moved outside the radical as it is, without taking its square root.
-
-Wrong working:
-$$\\sqrt{50x^5} = \\sqrt{25x^4 \\cdot 2x} = 25x^4\\sqrt{2x}$$
-
-Right working: the part that leaves the radical is the square root of the perfect square factor.
-$$\\sqrt{50x^5} = \\sqrt{25x^4} \\cdot \\sqrt{2x} = 5x^2\\sqrt{2x}$$
-
-Why it happens: after the factoring step, attention moves to what stays inside, and the factor that leaves is copied across instead of being rooted.
-
-How to check: square the outside factor and multiply it back in. $(5x^2)^2 \\cdot 2x = 25x^4 \\cdot 2x = 50x^5$, the original radicand, while $(25x^4)^2 \\cdot 2x = 1250x^9$.
-
-**Multiplying by the same cube root**
-
-The square-root method, multiplying by the radical over itself, is used for a cube root. The new denominator is the cube root of a square, which is still irrational.
-
-Wrong working:
-$$\\frac{2}{\\sqrt[3]{5}} \\cdot \\frac{\\sqrt[3]{5}}{\\sqrt[3]{5}} = \\frac{2\\sqrt[3]{5}}{\\sqrt[3]{25}}$$
-
-Right working: the denominator needs $5^3$ under the cube root, so two more factors of $5$ are needed, and the multiplier is $\\sqrt[3]{25}$.
-$$\\frac{2}{\\sqrt[3]{5}} \\cdot \\frac{\\sqrt[3]{25}}{\\sqrt[3]{25}} = \\frac{2\\sqrt[3]{25}}{\\sqrt[3]{125}} = \\frac{2\\sqrt[3]{25}}{5}$$
-
-Why it happens: for square roots, multiplying a radical by itself always clears it, and that habit is carried over to every index.
-
-How to check: look at the radicand left in the denominator. It must be a perfect power for the index: $25$ is not a perfect cube, while $125 = 5^3$ is.
-
-**Dropping the sign of a negative denominator**
-
-Multiplying by the conjugate gives the denominator $a^2 - b$, which is negative when $b$ is larger than $a^2$. The $-1$ is then removed from the denominator without changing the signs in the numerator.
-
-Wrong working:
-$$\\frac{3}{2 + \\sqrt{5}} = \\frac{3(2 - \\sqrt{5})}{4 - 5} = 3(2 - \\sqrt{5}) = 6 - 3\\sqrt{5}$$
-
-Right working: dividing by $-1$ changes the sign of the whole numerator.
-$$\\frac{3(2 - \\sqrt{5})}{-1} = -3(2 - \\sqrt{5}) = -6 + 3\\sqrt{5}$$
-
-Why it happens: a product of conjugates is expected to come out positive, and a denominator of $-1$ looks as if it can simply be left out.
-
-How to check: estimate the sign. $\\frac{3}{2 + \\sqrt{5}}$ is a positive number divided by a positive number, about $0.71$. The wrong answer $6 - 3\\sqrt{5} \\approx -0.71$ has the opposite sign; $-6 + 3\\sqrt{5} \\approx 0.71$ matches.`,
+    content: `Four mistakes come up again and again when simplifying radicals. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip breaks a rule about what may leave or enter a radical. A root splits over a product, not a sum; what leaves the radical is the root of the perfect-power factor, not the factor itself; a cube root in a denominator is cleared only when the radicand becomes a perfect cube; and the $-1$ produced by a conjugate divides the whole numerator. Comparing decimals catches the first and the last, squaring the outside factor back in catches the second, and a glance at the radicand left in the denominator catches the third.`,
     link: '',
   },
 
@@ -816,8 +761,42 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 4, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'splitting-a-sum-under-the-radical', name: `Splitting a sum under the radical`, errorAt: 1,
+        what: `The radicand is broken into a sum instead of a product, and the radical is then applied to each part separately, as if the product rule also covered addition.`,
+        wrong: [`$$\\sqrt{72}$$`, `$$= \\sqrt{64 + 8} = \\sqrt{64} + \\sqrt{8} = 8 + 2\\sqrt{2}$$`],
+        right: [`$$\\sqrt{72}$$`, `Write $72$ as a product that contains a perfect square factor.
+$$= \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$`],
+        why: `The product rule $\\sqrt{ab} = \\sqrt{a} \\cdot \\sqrt{b}$ seems to invite an addition version, and $64$ is the largest perfect square that fits inside $72$.`,
+        check: `Compare decimals. $8 + 2\\sqrt{2} \\approx 10.83$, while $\\sqrt{72} \\approx 8.49$ and $6\\sqrt{2} \\approx 8.49$. A small test case shows the rule at once: $\\sqrt{9 + 16} = \\sqrt{25} = 5$, not $3 + 4 = 7$.` },
+      { id: 'taking-out-the-square-instead-of-its-root', name: `Taking out the square instead of its root`, errorAt: 1,
+        what: `The perfect square factor is found correctly, but it is moved outside the radical as it is, without taking its square root.`,
+        wrong: [`$$\\sqrt{50x^5}$$`, `$$= \\sqrt{25x^4 \\cdot 2x} = 25x^4\\sqrt{2x}$$`],
+        right: [`$$\\sqrt{50x^5}$$`, `The part that leaves the radical is the square root of the perfect square factor.
+$$= \\sqrt{25x^4} \\cdot \\sqrt{2x} = 5x^2\\sqrt{2x}$$`],
+        why: `After the factoring step, attention moves to what stays inside, and the factor that leaves is copied across instead of being rooted.`,
+        check: `Square the outside factor and multiply it back in. $(5x^2)^2 \\cdot 2x = 25x^4 \\cdot 2x = 50x^5$, the original radicand, while $(25x^4)^2 \\cdot 2x = 1250x^9$.` },
+      { id: 'multiplying-by-the-same-cube-root', name: `Multiplying by the same cube root`, errorAt: 0,
+        what: `The square-root method, multiplying by the radical over itself, is used for a cube root. The new denominator is the cube root of a square, which is still irrational.`,
+        wrong: [`$$\\frac{2}{\\sqrt[3]{5}} \\cdot \\frac{\\sqrt[3]{5}}{\\sqrt[3]{5}} = \\frac{2\\sqrt[3]{5}}{\\sqrt[3]{25}}$$`],
+        right: [`The denominator needs $5^3$ under the cube root, so two more factors of $5$ are needed, and the multiplier is $\\sqrt[3]{25}$.`, `$$\\frac{2}{\\sqrt[3]{5}} \\cdot \\frac{\\sqrt[3]{25}}{\\sqrt[3]{25}} = \\frac{2\\sqrt[3]{25}}{\\sqrt[3]{125}} = \\frac{2\\sqrt[3]{25}}{5}$$`],
+        why: `For square roots, multiplying a radical by itself always clears it, and that habit is carried over to every index.`,
+        check: `Look at the radicand left in the denominator. It must be a perfect power for the index: $25$ is not a perfect cube, while $125 = 5^3$ is.` },
+      { id: 'dropping-the-sign-of-a-negative-denominator', name: `Dropping the sign of a negative denominator`, errorAt: 1,
+        what: `Multiplying by the conjugate gives the denominator $a^2 - b$, which is negative when $b$ is larger than $a^2$. The $-1$ is then removed from the denominator without changing the signs in the numerator.`,
+        wrong: [`$$\\frac{3}{2 + \\sqrt{5}} = \\frac{3(2 - \\sqrt{5})}{4 - 5}$$`, `$$= 3(2 - \\sqrt{5}) = 6 - 3\\sqrt{5}$$`],
+        right: [`$$\\frac{3}{2 + \\sqrt{5}} = \\frac{3(2 - \\sqrt{5})}{4 - 5}$$`, `Dividing by $-1$ changes the sign of the whole numerator.`, `$$\\frac{3(2 - \\sqrt{5})}{-1} = -3(2 - \\sqrt{5}) = -6 + 3\\sqrt{5}$$`],
+        why: `A product of conjugates is expected to come out positive, and a denominator of $-1$ looks as if it can simply be left out.`,
+        check: `Estimate the sign. $\\frac{3}{2 + \\sqrt{5}}$ is a positive number divided by a positive number, about $0.71$. The wrong answer $6 - 3\\sqrt{5} \\approx -0.71$ has the opposite sign; $-6 + 3\\sqrt{5} \\approx 0.71$ matches.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     rationalizeMonomial,
     rationalizeBinomialSteps,
     reduceIndexSteps,
@@ -843,7 +822,7 @@ return {
    }
 
 // export default function SimplifyingPage({seoData,sectionsContent , introContent}) {
-export default function SimplifyingPage({
+export default function SimplifyingPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1075,6 +1054,15 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="simplifying-radicals-pitfalls"
+            title="Common pitfalls in simplifying radicals"
+            source="/algebra/roots/simplifying"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

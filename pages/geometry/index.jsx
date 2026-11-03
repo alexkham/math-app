@@ -40,17 +40,28 @@ export async function getStaticProps(){
       ],
       figures: [
         {
+          key: 'lines',
+          title: 'Lines and Angles',
+          description: 'The objects everything else is built from: points, lines and the angles they make. Crossing lines, straight angles, parallel lines and their transversals.',
+          href: '/geometry/visual-tools#sub-proofs-lines-and-angles',
+          views: ['Vertical angles'],
+          more: 'Open lines and angles'
+        },
+        {
           key: 'triangle',
           title: 'Triangle',
           description: 'The simplest polygon and the base of most proofs in the plane: angle relationships, isosceles and equilateral triangles, congruence and the Pythagorean theorem, each on a triangle you can reshape.',
           href: '/geometry/visual-tools#sub-proofs-triangle',
-          views: ['Triangle angle sum'],
+          views: ['Triangle angle sum', 'Exterior angle theorem', 'Sum of exterior angles', 'Isosceles base angles', 'Triangle inequality', 'Larger side, larger angle', 'Perpendicular is shortest'],
           more: 'Open triangle'
         },
         {
           key: 'circle',
           title: 'Circle',
-          description: "All points at one distance from a center. Inscribed and central angles, Thales' theorem, tangents meeting radii at right angles, chords and arcs."
+          description: "All points at one distance from a center. Inscribed and central angles, Thales' theorem, tangents meeting radii at right angles, chords and arcs.",
+          href: '/geometry/visual-tools#sub-proofs-circle',
+          views: ["Thales' theorem"],
+          more: 'Open circle'
         },
         {
           key: 'quadrilateral',
@@ -106,8 +117,9 @@ export async function getStaticProps(){
 }
 
 const FIGURE_ICONS = {
+  lines: <g><line x1="6" y1="40" x2="42" y2="10" stroke="#0f172a" strokeWidth="2" strokeLinecap="round"/><line x1="8" y1="8" x2="40" y2="42" stroke="#0f172a" strokeWidth="2" strokeLinecap="round"/><path d="M 17 31 A 8 8 0 0 1 17.5 19.5 L 24 25 Z" fill="#3498db" fillOpacity=".35"/><path d="M 31 19 A 8 8 0 0 1 30.5 30.5 L 24 25 Z" fill="#3498db" fillOpacity=".35"/></g>,
   triangle: <polygon points="6,40 42,40 24,8" fill="#3498db" fillOpacity=".12" stroke="#0f172a" strokeWidth="2" strokeLinejoin="round"/>,
-  circle: <circle cx="24" cy="24" r="17" fill="none" stroke="#aab7c4" strokeWidth="2"/>,
+  circle: <circle cx="24" cy="24" r="17" fill="#3498db" fillOpacity=".12" stroke="#0f172a" strokeWidth="2"/>,
   quadrilateral: <polygon points="6,38 16,10 42,10 32,38" fill="none" stroke="#aab7c4" strokeWidth="2" strokeLinejoin="round"/>,
   polygon: <polygon points="24,5 42,18 35,40 13,40 6,18" fill="none" stroke="#aab7c4" strokeWidth="2" strokeLinejoin="round"/>
 }

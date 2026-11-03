@@ -17,6 +17,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -254,7 +255,7 @@ For $27^{4/3}$, the root-first approach gives $27^{1/3} = 3$, then $3^4 = 81$. T
 
 @academic[pitfall,aside:true,width:35%:Swapping the root and the power
 Taking the numerator of $8^{2/3}$ as the root gives $\\left(\\sqrt{8}\\right)^3 = 16\\sqrt{2} \\approx 22.6$. The denominator is the root: $\\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-root-and-the-power)]@
 
 The general strategy is to take the root first whenever the base has a clean $n$th root. This keeps the numbers manageable and reduces the chance of arithmetic errors.
 
@@ -317,7 +318,7 @@ For $16^{-3/4}$, compute $16^{3/4} = (\\sqrt[4]{16})^3 = 2^3 = 8$, then $16^{-3/
 
 @academic[pitfall,aside:true,width:35%:Making the result negative
 Reading the minus in $16^{-3/4}$ as a sign gives $-8$. The minus asks only for a reciprocal: $16^{-3/4} = \\frac{1}{16^{3/4}} = \\frac{1}{8}$, a positive number.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-making-the-result-negative)]@
 
 The order of operations is flexible. Taking the reciprocal first, then the root and power, produces the same result: $8^{-2/3} = \\left(\\frac{1}{8}\\right)^{2/3} = \\left(\\frac{1}{2}\\right)^2 = \\frac{1}{4}$. Whichever sequence keeps the arithmetic simplest is the right one to use.`,
   before: ``,
@@ -333,7 +334,7 @@ Even roots require the base to be non-negative. The expression $(-4)^{1/2} = \\s
 
 @academic[pitfall,aside:true,width:35%:Giving an even root of a negative number a real value
 Writing $(-16)^{1/4} = -2$ fails the check: $(-2)^4 = 16$, not $-16$. No real number has a fourth power of $-16$, so $(-16)^{1/4}$ has no real value.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-giving-an-even-root-of-a-negative-number-a-real-value)]@
 
 Odd roots carry no such restriction. The expression $(-8)^{1/3} = \\sqrt[3]{-8} = -2$, because $(-2)^3 = -8$. Odd roots of negative numbers are negative, and the computation proceeds without difficulty.
 
@@ -382,7 +383,7 @@ Simplify $\\left(\\frac{x^{1/2}}{y^{-1/3}}\\right)^6$. The negative exponent in 
 
 @academic[pitfall,aside:true,width:35%:Adding the fractions straight across
 Adding $\\frac{1}{2} + \\frac{1}{3}$ top and bottom gives $x^{1/2} \\cdot x^{1/3} = x^{2/5}$. Over the common denominator $6$ the sum is $\\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$, so the product is $x^{5/6}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-fractions-straight-across)]@
 
 The key advantage of exponent notation over radical notation is uniformity. Every operation — multiplication, division, raising to a power — follows the same rules regardless of whether the exponent is natural, negative, or rational. Radicals require separate procedures for combining indices and simplifying nested roots. Exponents reduce everything to arithmetic on fractions.`,
   before: ``,
@@ -460,64 +461,9 @@ The key advantage of exponent notation over radical notation is uniformity. Ever
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes account for most wrong answers with rational exponents. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Swapping the root and the power**
-
-In $a^{m/n}$ the two parts of the fraction have different jobs, and they are swapped: the numerator is taken as the root's index and the denominator as the power.
-
-Wrong working:
-$$8^{2/3} = \\left(\\sqrt{8}\\right)^3 = 8\\sqrt{8} = 16\\sqrt{2} \\approx 22.6$$
-
-Right working: the denominator $3$ is the root, the numerator $2$ is the power.
-$$8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$
-
-Why it happens: the numerator is read first, and a square root is the most familiar root, so a $2$ anywhere in the exponent is taken as a square root.
-
-How to check: compare with the exponent $1$. Since $\\frac{2}{3} < 1$ and $8 > 1$, the value $8^{2/3}$ must be smaller than $8^1 = 8$. The value $22.6$ is larger, so the root and the power were swapped; it is $8^{3/2}$.
-
-**Making the result negative**
-
-The minus in a negative rational exponent is read as the sign of the answer, so the result is expected to be negative.
-
-Wrong working:
-$$16^{-3/4} = -16^{3/4} = -8$$
-
-Right working: the minus takes the reciprocal; the fraction $\\frac{3}{4}$ handles the root and the power.
-$$16^{-3/4} = \\frac{1}{16^{3/4}} = \\frac{1}{\\left(\\sqrt[4]{16}\\right)^3} = \\frac{1}{2^3} = \\frac{1}{8}$$
-
-Why it happens: everywhere else a minus sign in front of a number makes it negative, and that habit carries over to the exponent.
-
-How to check: multiply by the matching positive power. $16^{3/4} \\cdot 16^{-3/4}$ must equal $16^0 = 1$. With $\\frac{1}{8}$ the product is $8 \\cdot \\frac{1}{8} = 1$; with $-8$ it is $-64$.
-
-**Giving an even root of a negative number a real value**
-
-An even root of a negative base is evaluated as if it were an odd root, by taking the root of the positive number and keeping the minus sign.
-
-Wrong working:
-$$(-16)^{1/4} = -\\sqrt[4]{16} = -2$$
-
-Right working: $(-16)^{1/4}$ would have to be a real number whose fourth power is $-16$. Every real number raised to the fourth power is $0$ or positive, so $(-16)^{1/4}$ has no real value. The expression $-16^{1/4}$, without brackets, is a different one: $-16^{1/4} = -\\left(16^{1/4}\\right) = -2$.
-
-Why it happens: odd roots of negative numbers work exactly this way, as in $(-8)^{1/3} = -2$, and the same steps are carried over to even roots.
-
-How to check: raise the answer to the root's index. $(-2)^4 = 16$, not $-16$, so $-2$ is not a fourth root of $-16$. For the odd root, $(-2)^3 = -8$ confirms $(-8)^{1/3} = -2$.
-
-**Adding the fractions straight across**
-
-When two powers of the same base are multiplied, the exponents are added, but the two fractions are added numerator to numerator and denominator to denominator.
-
-Wrong working:
-$$x^{1/2} \\cdot x^{1/3} = x^{(1+1)/(2+3)} = x^{2/5}$$
-
-Right working: add the fractions over a common denominator.
-$$\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}, \\qquad x^{1/2} \\cdot x^{1/3} = x^{5/6}$$
-
-Why it happens: the product rule itself is applied correctly, and the slip is in the fraction arithmetic, which is easy to rush when it sits in a small raised exponent.
-
-How to check: substitute a number with clean roots. With $x = 64$, $64^{1/2} \\cdot 64^{1/3} = 8 \\cdot 4 = 32$, and $64^{5/6} = \\left(\\sqrt[6]{64}\\right)^5 = 2^5 = 32$. The wrong answer gives $64^{2/5} \\approx 5.28$.`,
+      content:`Four mistakes account for most wrong answers with rational exponents. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `In $a^{m/n}$ the denominator is the root and the numerator the power, a minus in front of the fraction means a reciprocal, and with an even denominator the base must not be negative. Three of the slips break one of these readings; the fourth adds the exponents straight across instead of over a common denominator. Comparing the answer with a nearby whole power, or raising it back to the root's index, catches the first three, and substituting a number with clean roots, such as $64$, catches the fourth.`,
       link:'',
     }
   
@@ -687,8 +633,43 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 3, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'swapping-the-root-and-the-power', name: `Swapping the root and the power`, errorAt: 1,
+        what: `In $a^{m/n}$ the two parts of the fraction have different jobs, and they are swapped: the numerator is taken as the root's index and the denominator as the power.`,
+        wrong: [`$$8^{2/3}$$`, `$$= \\left(\\sqrt{8}\\right)^3 = 8\\sqrt{8} = 16\\sqrt{2} \\approx 22.6$$`],
+        right: [`$$8^{2/3}$$`, `The denominator $3$ is the root, the numerator $2$ is the power.
+$$= \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$`],
+        why: `The numerator is read first, and a square root is the most familiar root, so a $2$ anywhere in the exponent is taken as a square root.`,
+        check: `Compare with the exponent $1$. Since $\\frac{2}{3} < 1$ and $8 > 1$, the value $8^{2/3}$ must be smaller than $8^1 = 8$. The value $22.6$ is larger, so the root and the power were swapped; it is $8^{3/2}$.` },
+      { id: 'making-the-result-negative', name: `Making the result negative`, errorAt: 1,
+        what: `The minus in a negative rational exponent is read as the sign of the answer, so the result is expected to be negative.`,
+        wrong: [`$$16^{-3/4}$$`, `$$= -16^{3/4} = -8$$`],
+        right: [`$$16^{-3/4}$$`, `The minus takes the reciprocal; the fraction $\\frac{3}{4}$ handles the root and the power.
+$$= \\frac{1}{16^{3/4}} = \\frac{1}{\\left(\\sqrt[4]{16}\\right)^3} = \\frac{1}{2^3} = \\frac{1}{8}$$`],
+        why: `Everywhere else a minus sign in front of a number makes it negative, and that habit carries over to the exponent.`,
+        check: `Multiply by the matching positive power. $16^{3/4} \\cdot 16^{-3/4}$ must equal $16^0 = 1$. With $\\frac{1}{8}$ the product is $8 \\cdot \\frac{1}{8} = 1$; with $-8$ it is $-64$.` },
+      { id: 'giving-an-even-root-of-a-negative-number-a-real-value', name: `Giving an even root of a negative number a real value`, errorAt: 1,
+        what: `An even root of a negative base is evaluated as if it were an odd root, by taking the root of the positive number and keeping the minus sign.`,
+        wrong: [`$$(-16)^{1/4}$$`, `$$= -\\sqrt[4]{16} = -2$$`],
+        right: [`$$(-16)^{1/4}$$`, `$(-16)^{1/4}$ would have to be a real number whose fourth power is $-16$. Every real number raised to the fourth power is $0$ or positive, so $(-16)^{1/4}$ has no real value. The expression $-16^{1/4}$, without brackets, is a different one: $-16^{1/4} = -\\left(16^{1/4}\\right) = -2$.`],
+        why: `Odd roots of negative numbers work exactly this way, as in $(-8)^{1/3} = -2$, and the same steps are carried over to even roots.`,
+        check: `Raise the answer to the root's index. $(-2)^4 = 16$, not $-16$, so $-2$ is not a fourth root of $-16$. For the odd root, $(-2)^3 = -8$ confirms $(-8)^{1/3} = -2$.` },
+      { id: 'adding-the-fractions-straight-across', name: `Adding the fractions straight across`, errorAt: 1,
+        what: `When two powers of the same base are multiplied, the exponents are added, but the two fractions are added numerator to numerator and denominator to denominator.`,
+        wrong: [`$$x^{1/2} \\cdot x^{1/3}$$`, `$$= x^{(1+1)/(2+3)} = x^{2/5}$$`],
+        right: [`$$x^{1/2} \\cdot x^{1/3}$$`, `Add the fractions over a common denominator.`, `$$\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6},$$
+$$x^{1/2} \\cdot x^{1/3} = x^{5/6}$$`],
+        why: `The product rule itself is applied correctly, and the slip is in the fraction arithmetic, which is easy to rush when it sits in a small raised exponent.`,
+        check: `Substitute a number with clean roots. With $x = 64$, $64^{1/2} \\cdot 64^{1/3} = 8 \\cdot 4 = 32$, and $64^{5/6} = \\left(\\sqrt[6]{64}\\right)^5 = 2^5 = 32$. The wrong answer gives $64^{2/5} \\approx 5.28$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     radicalProductSteps,
     sectionsContent,
     introContent,
@@ -710,7 +691,7 @@ return {
    }
 
 // export default function RationalExponentsPage({seoData,sectionsContent , introContent}) {
-export default function RationalExponentsPage({seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, radicalProductSteps}) {
+export default function RationalExponentsPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, radicalProductSteps}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -855,6 +836,15 @@ export default function RationalExponentsPage({seoData, sectionsContent, introCo
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="rational-exponent-pitfalls"
+            title="Common pitfalls with rational exponents"
+            source="/algebra/powers/rational-exponents"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

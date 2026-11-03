@@ -19,6 +19,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -805,9 +806,25 @@ const schemas = {
       { id: 'c0', symbol: 'C⁰', name: '[Continuous](!/calculus/limits/continuity)', note: '$f\'$ may not exist', example: '|x|' },
     ],
   };
+  // TheoremCard data (darboux-theorem-converse); every fact is from the section text
+  const darbouxConverse = {
+    header: { kicker: 'The derivative as a function', title: 'Darboux’s Theorem', lede: 'A derivative has the intermediate value property, even when it is not continuous.' },
+    theorem: {
+      says: 'If $f$ is differentiable on an interval and $f\'$ takes the values $A$ and $B$ there, then $f\'$ takes every value between $A$ and $B$ somewhere on that interval.',
+      not: 'If $f$ is differentiable everywhere, then $f\'$ is continuous.',
+      counter: {
+        label: 'A derivative that is not continuous',
+        wrong: '$f$ is differentiable at every real number, so $f\'$ must be continuous.',
+        right: '$f(x) = x^2 \\sin(1/x)$ for $x \\neq 0$, $f(0) = 0$, is differentiable everywhere, yet $f\'$ oscillates near the origin and is discontinuous there.',
+      },
+      scope: '**No jumps:** the only discontinuities a derivative can have are oscillatory ones. Functions whose derivative is continuous everywhere form the class $C^1$.',
+    },
+  };
+
 
   return {
   props: {
+      darbouxConverse,
     smoothNest,
     demoUnits,
     conceptIntroFigures,
@@ -829,7 +846,9 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function PageTemplate({darbouxConverse, smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -997,6 +1016,16 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{
             source="/calculus/derivatives/function"
           >
             <NestedContainment data={smoothNest} />
+          </DiagramFrame>,
+          <DiagramFrame
+            key={'obj7-theorem'}
+            id="darboux-theorem-converse"
+            title="Darboux’s theorem: what differentiability does and does not give"
+            source="/calculus/derivatives/function"
+            before={`Differentiability of $f$ constrains $f'$ without making it continuous. The card separates the guarantee from the tempting overstatement.`}
+            after={`A derivative can oscillate its way to a discontinuity, but it can never jump.`}
+          >
+            <TheoremCard data={darbouxConverse} variant="converse" theme={theoremTheme} />
           </DiagramFrame>,
         ]
     },

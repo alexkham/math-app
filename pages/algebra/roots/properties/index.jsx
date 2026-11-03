@@ -17,6 +17,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -517,7 +518,7 @@ $$\\sqrt{-9} \\quad \\text{is not a real number}$$]@
 
 @academic[pitfall,aside:true,width:35%:Taking the root of a negative as negative
 Writing $\\sqrt{-9} = -3$ fails the check: $(-3)^2 = 9$, not $-9$. No real number works, so $\\sqrt{-9}$ is not real; $-3$ is the value of $-\\sqrt{9}$, a different expression.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-root-of-a-negative-as-negative)]@
 
 Even-index radicals also produce only non-negative outputs. The principal root convention guarantees this: $\\sqrt{25} = 5$, not $-5$. Both 5 and $-5$ square to 25, but the radical symbol returns only the non-negative root.
 
@@ -579,7 +580,7 @@ $$(-3)^3 = -27 \\quad \\Longrightarrow \\quad \\sqrt[3]{-27} = -3$$]@
 
 @academic[pitfall,aside:true,width:35%:Rejecting odd roots of negatives
 Calling $\\sqrt[3]{-64}$ undefined applies the even-index rule to an odd index. Since $(-4)^3 = -64$, the root is real: $\\sqrt[3]{-64} = -4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-rejecting-odd-roots-of-negatives)]@
 
 Odd-index radicals preserve sign. Positive radicands yield positive roots. Negative radicands yield negative roots. Zero yields zero.
 
@@ -614,7 +615,7 @@ $$x^2 = 16 \\quad \\Longrightarrow \\quad x = \\pm\\sqrt{16} = \\pm 4$$]@
 
 @academic[pitfall,aside:true,width:35%:Giving the radical two values
 Writing $\\sqrt{16} = \\pm 4$ mixes the radical with the solutions of $x^2 = 16$. The symbol has one value, $\\sqrt{16} = 4$; the sign $\\pm$ stands in front of it: $x = \\pm\\sqrt{16}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-giving-the-radical-two-values)]@
 
 The $\\pm$ symbol signals that both positive and negative roots apply. This notation appears frequently when [solving radical equations](!/algebra/roots/equations).
 
@@ -698,7 +699,7 @@ $$\\sqrt[5]{y^{15}} = y^3$$]@
 
 @academic[pitfall,aside:true,width:35%:Adding absolute values to odd roots
 Writing $\\sqrt[3]{x^3} = |x|$ carries the even-root rule over to an odd index. At $x = -2$ it gives $2$, but $\\sqrt[3]{(-2)^3} = \\sqrt[3]{-8} = -2$. For odd $n$, $\\sqrt[n]{x^n} = x$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-absolute-values-to-odd-roots)]@
 
 The distinction between even and odd indices is essential when variables are involved. Assuming all variables are positive removes the absolute value issue for even indices — a common simplifying assumption stated explicitly in problems. Without that assumption, absolute values must be tracked.`,
     before: ``,
@@ -746,7 +747,7 @@ Domain: $(-\\infty, \\infty)$.
 
 @academic[pitfall,aside:true,width:35%:Leaving out the endpoint
 Solving $x - 3 > 0$ instead of $x - 3 \\geq 0$ drops $x = 3$, where $f(3) = \\sqrt{0} = 0$ is defined. The domain is $[3, \\infty)$, endpoint included.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-out-the-endpoint)]@
 
 These domain considerations carry into [operations](!/algebra/roots/operations) and [equations](!/algebra/roots/equations) involving radicals.
 
@@ -838,93 +839,9 @@ The properties established here — domain restrictions, sign behavior, absolute
 
   obj10: {
     title: `Common Pitfalls`,
-    content: `Six mistakes account for most wrong answers about even and odd roots. Five are marked where they happen in the sections above; dropping the absolute value is the one the section on the identity for even roots already warns about. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking the root of a negative as negative**
-
-A square root of a negative number is evaluated by taking the root of the number and keeping the minus sign, as if the sign could pass through the radical.
-
-Wrong working:
-$$\\sqrt{-9} = -\\sqrt{9} = -3$$
-
-Right working: a square root of $-9$ would be a number whose square is $-9$. Every real number squares to a value of at least $0$, so $\\sqrt{-9}$ is not a real number. The expression $-\\sqrt{9} = -3$ is a different one: there the minus sign stands outside the radical.
-
-Why it happens: for odd roots the sign does pass through, $\\sqrt[3]{-27} = -\\sqrt[3]{27} = -3$, and the same move is carried over to even roots.
-
-How to check: square the answer. $(-3)^2 = 9$, not $-9$.
-
-**Rejecting odd roots of negatives**
-
-The rule that even roots of negative numbers are not real is applied to every root, so a cube root or a fifth root of a negative number is called undefined.
-
-Wrong working:
-$$\\sqrt[3]{-64} \\quad \\text{is not a real number}$$
-
-Right working: the index $3$ is odd, and a negative number cubed stays negative.
-$$(-4)^3 = -64 \\implies \\sqrt[3]{-64} = -4$$
-
-Why it happens: square roots are met first and most often, and the rule "no roots of negative numbers" is remembered without the word even.
-
-How to check: look at the index before the radicand. If it is odd, look for the number whose cube (or fifth power) is the radicand; $(-4)^3 = -64$ confirms the answer.
-
-**Giving the radical two values**
-
-The two solutions of $x^2 = 16$ are carried over to the radical itself, so $\\sqrt{16}$ is written as $\\pm 4$.
-
-Wrong working:
-$$\\sqrt{16} = \\pm 4 \\implies \\sqrt{16} + 1 = 5 \\text{ or } -3$$
-
-Right working: the radical symbol denotes the non-negative root only.
-$$\\sqrt{16} = 4, \\qquad \\sqrt{16} + 1 = 5$$
-Both roots appear only when an equation asks for them, and then the sign is written in front of the radical: $x^2 = 16 \\implies x = \\pm\\sqrt{16} = \\pm 4$.
-
-Why it happens: "a square root of 16" (a number whose square is 16) and "the value of $\\sqrt{16}$" sound almost the same, and the first has two answers.
-
-How to check: the radical is a single number, so any expression built from it has a single value. If $\\sqrt{16} + 1$ seems to have two values, the $\\pm$ is in the wrong place.
-
-**Dropping the absolute value**
-
-An even root of an even power is simplified by cancelling the root against the power, and the absolute value bars are left off. The section on the identity for even roots warns about this for $\\sqrt{x^2}$; the same slip appears with higher powers.
-
-Wrong working:
-$$\\sqrt{x^6} = x^3$$
-
-Right working: the even root returns a non-negative value, and $x^3$ is negative whenever $x$ is.
-$$\\sqrt{x^6} = |x^3| = |x|^3$$
-
-Why it happens: the cancellation looks like the exponent rule $\\left(x^6\\right)^{1/2} = x^{6/2} = x^3$, and the sign condition is not visible in that step.
-
-How to check: substitute a negative value. At $x = -1$, $\\sqrt{(-1)^6} = \\sqrt{1} = 1$, but $(-1)^3 = -1$.
-
-**Adding absolute values to odd roots**
-
-After $\\sqrt{x^2} = |x|$ has been learned, the absolute value is added to every radical of a power, odd roots included.
-
-Wrong working:
-$$\\sqrt[3]{x^3} = |x|$$
-
-Right working: an odd root keeps the sign of its radicand, so no bars are needed.
-$$\\sqrt[3]{x^3} = x \\quad \\text{for all real } x$$
-
-Why it happens: the absolute value rule is remembered as "a root of a power needs bars", without the condition that the index is even.
-
-How to check: substitute a negative value. At $x = -2$, $\\sqrt[3]{(-2)^3} = \\sqrt[3]{-8} = -2$, while $|-2| = 2$.
-
-**Leaving out the endpoint**
-
-The domain of an even root is found by solving an inequality for the radicand, and the strict sign $>$ is used instead of $\\geq$.
-
-Wrong working:
-$$f(x) = \\sqrt{x - 3}: \\quad x - 3 > 0 \\implies x > 3$$
-
-Right working: the radicand may be zero, since $\\sqrt{0} = 0$.
-$$x - 3 \\geq 0 \\implies x \\geq 3, \\quad \\text{domain } [3, \\infty)$$
-
-Why it happens: the condition is confused with the one for a denominator or a logarithm, where zero is excluded.
-
-How to check: substitute the boundary value. $f(3) = \\sqrt{3 - 3} = \\sqrt{0} = 0$, a real number, so $x = 3$ belongs to the domain.`,
+    content: `Six mistakes account for most wrong answers about even and odd roots. Five are marked where they happen in the sections above; dropping the absolute value is the one the section on the identity for even roots already warns about. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Every slip above comes down to the index. An even root needs a radicand of at least $0$, zero included, and returns a single non-negative value, so $\\sqrt{x^6} = |x|^3$. An odd root accepts any real number and keeps its sign, so it needs no bars. Checking the index first settles most of them, and substituting a negative value or the boundary point settles the rest.`,
     link: '',
   },
 
@@ -1139,8 +1056,54 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 3, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-root-of-a-negative-as-negative', name: `Taking the root of a negative as negative`, errorAt: 1,
+        what: `A square root of a negative number is evaluated by taking the root of the number and keeping the minus sign, as if the sign could pass through the radical.`,
+        wrong: [`$$\\sqrt{-9}$$`, `$$= -\\sqrt{9} = -3$$`],
+        right: [`$$\\sqrt{-9}$$`, `A square root of $-9$ would be a number whose square is $-9$. Every real number squares to a value of at least $0$, so $\\sqrt{-9}$ is not a real number. The expression $-\\sqrt{9} = -3$ is a different one: there the minus sign stands outside the radical.`],
+        why: `For odd roots the sign does pass through, $\\sqrt[3]{-27} = -\\sqrt[3]{27} = -3$, and the same move is carried over to even roots.`,
+        check: `Square the answer. $(-3)^2 = 9$, not $-9$.` },
+      { id: 'rejecting-odd-roots-of-negatives', name: `Rejecting odd roots of negatives`, errorAt: 0,
+        what: `The rule that even roots of negative numbers are not real is applied to every root, so a cube root or a fifth root of a negative number is called undefined.`,
+        wrong: [`$$\\sqrt[3]{-64} \\quad \\text{is not a real number}$$`],
+        right: [`The index $3$ is odd, and a negative number cubed stays negative.`, `$$(-4)^3 = -64$$`, `$$\\implies \\sqrt[3]{-64} = -4$$`],
+        why: `Square roots are met first and most often, and the rule "no roots of negative numbers" is remembered without the word even.`,
+        check: `Look at the index before the radicand. If it is odd, look for the number whose cube (or fifth power) is the radicand; $(-4)^3 = -64$ confirms the answer.` },
+      { id: 'giving-the-radical-two-values', name: `Giving the radical two values`, errorAt: 0,
+        what: `The two solutions of $x^2 = 16$ are carried over to the radical itself, so $\\sqrt{16}$ is written as $\\pm 4$.`,
+        wrong: [`$$\\sqrt{16} = \\pm 4$$`, `$$\\implies \\sqrt{16} + 1 = 5 \\text{ or } -3$$`],
+        right: [`The radical symbol denotes the non-negative root only.`, `$$\\sqrt{16} = 4, \\qquad \\sqrt{16} + 1 = 5$$`, `Both roots appear only when an equation asks for them, and then the sign is written in front of the radical: $x^2 = 16 \\implies x = \\pm\\sqrt{16} = \\pm 4$.`],
+        why: `"a square root of 16" (a number whose square is 16) and "the value of $\\sqrt{16}$" sound almost the same, and the first has two answers.`,
+        check: `The radical is a single number, so any expression built from it has a single value. If $\\sqrt{16} + 1$ seems to have two values, the $\\pm$ is in the wrong place.` },
+      { id: 'dropping-the-absolute-value', name: `Dropping the absolute value`, errorAt: 1,
+        what: `An even root of an even power is simplified by cancelling the root against the power, and the absolute value bars are left off. The section on the identity for even roots warns about this for $\\sqrt{x^2}$; the same slip appears with higher powers.`,
+        wrong: [`$$\\sqrt{x^6}$$`, `$$= x^3$$`],
+        right: [`$$\\sqrt{x^6}$$`, `The even root returns a non-negative value, and $x^3$ is negative whenever $x$ is.
+$$= |x^3| = |x|^3$$`],
+        why: `The cancellation looks like the exponent rule $\\left(x^6\\right)^{1/2} = x^{6/2} = x^3$, and the sign condition is not visible in that step.`,
+        check: `Substitute a negative value. At $x = -1$, $\\sqrt{(-1)^6} = \\sqrt{1} = 1$, but $(-1)^3 = -1$.` },
+      { id: 'adding-absolute-values-to-odd-roots', name: `Adding absolute values to odd roots`, errorAt: 1,
+        what: `After $\\sqrt{x^2} = |x|$ has been learned, the absolute value is added to every radical of a power, odd roots included.`,
+        wrong: [`$$\\sqrt[3]{x^3}$$`, `$$= |x|$$`],
+        right: [`$$\\sqrt[3]{x^3}$$`, `An odd root keeps the sign of its radicand, so no bars are needed.
+$$= x \\quad \\text{for all real } x$$`],
+        why: `The absolute value rule is remembered as "a root of a power needs bars", without the condition that the index is even.`,
+        check: `Substitute a negative value. At $x = -2$, $\\sqrt[3]{(-2)^3} = \\sqrt[3]{-8} = -2$, while $|-2| = 2$.` },
+      { id: 'leaving-out-the-endpoint', name: `Leaving out the endpoint`, errorAt: 0,
+        what: `The domain of an even root is found by solving an inequality for the radicand, and the strict sign $>$ is used instead of $\\geq$.`,
+        wrong: [`$$f(x) = \\sqrt{x - 3}: \\quad x - 3 > 0 \\implies x > 3$$`],
+        right: [`The radicand may be zero, since $\\sqrt{0} = 0$.`, `$$x - 3 \\geq 0 \\implies x \\geq 3, \\quad \\text{domain } [3, \\infty)$$`],
+        why: `The condition is confused with the one for a denominator or a logarithm, where zero is excluded.`,
+        check: `Substitute the boundary value. $f(3) = \\sqrt{3 - 3} = \\sqrt{0} = 0$, a real number, so $x = 3$ belongs to the domain.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     principalRootCases,
     sectionsContent,
     introContent,
@@ -1165,7 +1128,7 @@ return {
 // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PropertiesPage({principalRootCases, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PropertiesPage({ pitfallData,principalRootCases, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1236,7 +1199,7 @@ $$x^2 = 16 \\quad \\Longrightarrow \\quad x = \\pm\\sqrt{16} = \\pm 4$$]@`,
         content: [
           `@academic[pitfall,aside:true,width:35%:Giving the radical two values
 Writing $\\sqrt{16} = \\pm 4$ mixes the radical with the solutions of $x^2 = 16$. The symbol has one value, $\\sqrt{16} = 4$; the sign $\\pm$ stands in front of it: $x = \\pm\\sqrt{16}$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-giving-the-radical-two-values)]@`,
           `The [root calculator](!/calculators/root-calculator) returns the principal root, following this convention.`,
           `What the convention does to $\\sqrt{x^2}$ when $x$ is negative is the subject of [the identity for even roots](!/algebra/roots/properties#4).`,
         ],
@@ -1382,6 +1345,15 @@ Writing $\\sqrt{16} = \\pm 4$ mixes the radical with the solutions of $x^2 = 16$
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="root-properties-pitfalls"
+            title="Common pitfalls with even and odd roots"
+            source="/algebra/roots/properties"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

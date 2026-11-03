@@ -14,6 +14,8 @@ const isosceles = {
     'base angles correspond. Drag C along the axis, or move A and B.',
   hint: 'Drag A, B, or C along the axis',
   labelCenter: ['A', 'B', 'C'],
+  // Tight frame around the figure (A 120..B 440, apex at y 110, labels to y≈375).
+  viewBox: [70, 70, 420, 320],
 
   model: {
     points: { A: { x: 120, y: 350 }, B: { x: 440, y: 350 } },

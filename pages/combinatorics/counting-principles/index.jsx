@@ -1013,6 +1013,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import distributionIntoCellsDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/distributionIntoCellsDiagrams'
 import renderCountTree from '@/app/utils/illustrations/combinatorics/counting/countTree'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1368,6 +1371,23 @@ export async function getStaticProps(){
 // };
 
 // formulas-optimized: v1 | 2026-06-11 | 6 callouts (obj1, obj2, obj3, obj4, obj5 ×2)
+// Concept introduction (section 1, "The Addition Rule") — template C,
+// failure first. Running instance: bus, train or taxi routes (adding works)
+// against hearts or kings in a deck (adding counts the king of hearts twice).
+// Old obj1 text is kept in sectionsContent.obj1, unused; its heading, five
+// passages, formula box and link and the example are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciAddTable = ciTableOpen(['count', 'cases', 'sum of the cases', 'true count']) +
+  ciRow(['routes to the city', 'bus 2, train 3, taxi 4', '9', '9'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['cards that are hearts or kings', 'hearts 13, kings 4', '17', '16'], { shade: true, last: true, color: '#a4243b', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   obj1: {
     title: `The Addition Rule`,
@@ -1429,7 +1449,7 @@ possible meals.]@
 
 @academic[pitfall,aside:true,width:35%:Adding the steps
 Adding the menu counts, $3 + 2 + 4 = 9$, counts dishes, not meals: a meal is a main and a drink and a dessert. Each of the $3 \\times 2 = 6$ main-and-drink pairs takes any of $4$ desserts, so there are $3 \\times 2 \\times 4 = 24$ meals.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-steps)]@
 
 Here every outcome uses all three steps: a meal has one main, one drink and one dessert. The traveller in the addition rule makes a single choice instead, and each trip uses exactly one mode of transport. Whether an outcome is put together from several choices or picked from one of several separate lists is what decides between multiplying and adding.
  
@@ -1470,7 +1490,7 @@ The number of arrangements of $n$ distinct items in which a designated item land
 
 @academic[pitfall,aside:true,width:35%:Securing one success first
 For at least one head in $4$ coin flips, choosing the flip that shows the head ($4$ ways) and letting the other $3$ land freely gives $4 \\cdot 2^3 = 32$, more than the $2^4 = 16$ possible outcomes. The complement gives $16 - 1 = 15$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-securing-one-success-first)]@
 
 A condition of the form "at least one" hides many cases at once: exactly one, exactly two, and so on up to all of them, and a single outcome can meet the condition in several places. Its negation, "none", is a single case with no overlaps, and it is usually counted by one product. That is why the subtraction route is the standard choice whenever the words "at least one" appear.
  
@@ -1506,7 +1526,7 @@ A canonical illustration: in a group of people who have shaken hands in various 
 
 @academic[pitfall,aside:true,width:35%:Counting each handshake twice
 With $6$ people who all shake hands, $6 \\cdot 5 = 30$ counts every handshake once from each of its two people. The lemma halves the sum: $\\frac{30}{2} = 15$ handshakes, the same as the $\\binom{6}{2} = 15$ pairs.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-each-handshake-twice)]@
 
 The lemma is easiest to use when every person's count is known. If each of $n$ people shakes hands with every other person exactly once, each of them shakes $n - 1$ hands, so the left side of the identity is a single product. The right side then gives the number of handshakes, which must match the number of pairs of people.
  
@@ -1559,7 +1579,7 @@ $$n \\text{ items into } k \\text{ containers} \\implies \\exists \\text{ contai
  
 @academic[pitfall,aside:true,width:35%:Rounding n/k down
 For $25$ people and $12$ months, $\\lfloor 25/12 \\rfloor = 2$ claims only that some month has $2$ birthdays. The bound is $\\lceil 25/12 \\rceil = 3$: with at most $2$ per month, $12$ months hold only $24$ people.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-rounding-n-k-down)]@
 
 In any group of 13 people, at least two share a birth month — the 13 people are distributed among 12 months, so the basic form applies.
  
@@ -1619,70 +1639,10 @@ These five principles together cover the logical foundation of every formula tha
 
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again when the counting principles are put to work. Four are marked where they happen in the sections above; the fifth, adding cases that overlap, is described in the addition rule section. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Adding overlapping cases**
-
-A count is split into cases and the case counts are added, but some outcomes belong to two cases at once. Each of those outcomes is counted twice.
-
-Wrong working: the integers from $1$ to $20$ divisible by $2$ or by $3$. There are $10$ multiples of $2$ and $6$ multiples of $3$, so the count is given as $10 + 6 = 16$.
-
-Right working: the multiples of $6$, namely $6$, $12$ and $18$, are in both lists. Subtracting them once gives $10 + 6 - 3 = 13$. This is the [inclusion–exclusion principle](!/combinatorics/inclusion-exclusion) for two sets.
-
-Why it happens: the word "or" points to the addition rule, and the condition that the cases cannot happen together is easy to skip.
-
-How to check: look for one outcome that fits two cases; here $6$ is divisible by both $2$ and $3$. Listing the numbers also works: $2, 3, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20$ are $13$ numbers.
-
-**Adding the steps**
-
-An outcome is built from several choices made together, but the option counts are added as if a single choice were made from one combined list. The reverse slip multiplies alternatives: the traveller's $2$ bus, $3$ train and $4$ taxi routes give $9$ trips, not $2 \\times 3 \\times 4 = 24$, because a trip uses only one of them.
-
-Wrong working: a lunch combo has $3$ mains, $2$ drinks and $4$ desserts, and the number of meals is given as $3 + 2 + 4 = 9$.
-
-Right working: each meal is one main and one drink and one dessert. The $3$ mains pair with the $2$ drinks in $3 \\times 2 = 6$ ways, and each pair goes with any of the $4$ desserts: $3 \\times 2 \\times 4 = 24$ meals.
-
-Why it happens: $9$ is the number of dishes on the menu, and adding feels like putting the options together. The word "and" is often left out of the problem.
-
-How to check: ask whether one outcome uses one choice or one of each. Main $1$ alone already gives $2 \\times 4 = 8$ different meals, so $9$ meals in total is far too few.
-
-**Securing one success first**
-
-For an "at least one" condition, one success is fixed first and everything else is left free. An outcome with several successes is then counted once for each of them.
-
-Wrong working: at least one head in $4$ coin flips. Choose the flip that shows the head in $4$ ways and let the other $3$ flips land freely in $2^3 = 8$ ways: $4 \\cdot 8 = 32$.
-
-Right working: there are $2^4 = 16$ outcomes in all, and only one of them, all tails, has no head. So $16 - 1 = 15$ outcomes have at least one head.
-
-Why it happens: fixing a head does guarantee the condition, so the count looks safe. But an outcome such as two heads followed by two tails is reached twice, once with the first flip fixed and once with the second, and four heads is reached four times.
-
-How to check: the answer can never be larger than the total; $32 > 16$ shows the overcount. Counting by the exact number of heads confirms the right answer: $\\binom{4}{1} + \\binom{4}{2} + \\binom{4}{3} + \\binom{4}{4} = 4 + 6 + 4 + 1 = 15$.
-
-**Counting each handshake twice**
-
-The number of handshakes is found by adding up how many hands each person shook, and that sum is given as the answer.
-
-Wrong working: $6$ people each shake hands with everyone else. Each shakes $5$ hands, so the count is given as $6 \\cdot 5 = 30$.
-
-Right working: each handshake involves $2$ people, so it appears twice in the sum. By the handshake lemma the sum is $2|E|$, so $|E| = \\frac{30}{2} = 15$. Choosing the $2$ people of a handshake gives the same number: $\\binom{6}{2} = 15$.
-
-Why it happens: counting person by person is natural, and it is easy to forget that the handshake between two people appears in both of their counts.
-
-How to check: try $3$ people. They make $3$ handshakes, but the per-person sum is $3 \\cdot 2 = 6$. The per-person sum is always even, since it is twice the number of handshakes; an odd sum signals a slip in the counts.
-
-**Rounding n/k down**
-
-The generalized form guarantees a container with at least $\\lceil n/k \\rceil$ items, but the quotient is rounded down instead of up.
-
-Wrong working: $25$ people and $12$ months. $\\lfloor 25/12 \\rfloor = 2$, so the conclusion drawn is only that some month has at least $2$ birthdays. For $13$ people the floor gives $1$, which says nothing at all.
-
-Right working: $\\lceil 25/12 \\rceil = 3$. If every month had at most $2$ birthdays, the $12$ months would hold at most $24$ people, fewer than $25$. So some month has at least $3$.
-
-Why it happens: rounding down is the habit for questions like "how many full boxes", where the leftover is ignored. Here the leftover is the whole point: it has to go somewhere, and it pushes one container higher.
-
-How to check: spread the items as evenly as possible. $12$ months with $2$ people each hold $24$; the $25$th person makes a third in some month, so the guaranteed number is $3$.`,
+    content: `Five mistakes come up again and again when the counting principles are put to work. Four are marked where they happen in the sections above; the fifth, adding cases that overlap, is described in the addition rule section. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
     between: ``,
-    after: ``,
+    after: `Each slip applies the right principle in the wrong way. Cases are added only when they do not overlap, the steps of one outcome are multiplied, at least one is counted as the total minus none, a sum over people counts every handshake twice, and the pigeonhole bound rounds $n/k$ up. Comparing the answer with the total, listing the outcomes, or trying $3$ people catches each of them.`,
     link: '',
   },
  
@@ -1855,6 +1815,10 @@ const schemas = {
     outcomeName: 'outfit', outcomePlural: 'outfits',
   };
 
+  const conceptIntroFigures = {
+    addTable: ciAddTable,
+  };
+
   const demoUnits = {
     pigeonhole: demoUnitFrame({
       svg: distributionIntoCellsDiagrams.big43,
@@ -1870,9 +1834,48 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'adding-overlapping-cases', name: `Adding overlapping cases`, errorAt: 1,
+        what: `A count is split into cases and the case counts are added, but some outcomes belong to two cases at once. Each of those outcomes is counted twice.`,
+        wrong: [`The integers from $1$ to $20$ divisible by $2$ or by $3$.`, `There are $10$ multiples of $2$ and $6$ multiples of $3$, so the count is given as $10 + 6 = 16$.`],
+        right: [`The integers from $1$ to $20$ divisible by $2$ or by $3$.`, `The multiples of $6$, namely $6$, $12$ and $18$, are in both lists. Subtracting them once gives $10 + 6 - 3 = 13$. This is the [inclusion–exclusion principle](!/combinatorics/inclusion-exclusion) for two sets.`],
+        why: `The word "or" points to the addition rule, and the condition that the cases cannot happen together is easy to skip.`,
+        check: `Look for one outcome that fits two cases; here $6$ is divisible by both $2$ and $3$. Listing the numbers also works: $2, 3, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20$ are $13$ numbers.` },
+      { id: 'adding-the-steps', name: `Adding the steps`, errorAt: 0,
+        what: `An outcome is built from several choices made together, but the option counts are added as if a single choice were made from one combined list. The reverse slip multiplies alternatives: the traveller's $2$ bus, $3$ train and $4$ taxi routes give $9$ trips, not $2 \\times 3 \\times 4 = 24$, because a trip uses only one of them.`,
+        wrong: [`A lunch combo has $3$ mains, $2$ drinks and $4$ desserts, and the number of meals is given as $3 + 2 + 4 = 9$.`],
+        right: [`Each meal is one main and one drink and one dessert. The $3$ mains pair with the $2$ drinks in $3 \\times 2 = 6$ ways, and each pair goes with any of the $4$ desserts: $3 \\times 2 \\times 4 = 24$ meals.`],
+        why: `$9$ is the number of dishes on the menu, and adding feels like putting the options together. The word "and" is often left out of the problem.`,
+        check: `Ask whether one outcome uses one choice or one of each. Main $1$ alone already gives $2 \\times 4 = 8$ different meals, so $9$ meals in total is far too few.` },
+      { id: 'securing-one-success-first', name: `Securing one success first`, errorAt: 1,
+        what: `For an "at least one" condition, one success is fixed first and everything else is left free. An outcome with several successes is then counted once for each of them.`,
+        wrong: [`At least one head in $4$ coin flips.`, `Choose the flip that shows the head in $4$ ways and let the other $3$ flips land freely in $2^3 = 8$ ways: $4 \\cdot 8 = 32$.`],
+        right: [`At least one head in $4$ coin flips.`, `There are $2^4 = 16$ outcomes in all, and only one of them, all tails, has no head. So $16 - 1 = 15$ outcomes have at least one head.`],
+        why: `Fixing a head does guarantee the condition, so the count looks safe. But an outcome such as two heads followed by two tails is reached twice, once with the first flip fixed and once with the second, and four heads is reached four times.`,
+        check: `The answer can never be larger than the total; $32 > 16$ shows the overcount. Counting by the exact number of heads confirms the right answer: $\\binom{4}{1} + \\binom{4}{2} + \\binom{4}{3} + \\binom{4}{4} = 4 + 6 + 4 + 1 = 15$.` },
+      { id: 'counting-each-handshake-twice', name: `Counting each handshake twice`, errorAt: 1,
+        what: `The number of handshakes is found by adding up how many hands each person shook, and that sum is given as the answer.`,
+        wrong: [`$6$ people each shake hands with everyone else.`, `Each shakes $5$ hands, so the count is given as $6 \\cdot 5 = 30$.`],
+        right: [`$6$ people each shake hands with everyone else.`, `Each handshake involves $2$ people, so it appears twice in the sum. By the handshake lemma the sum is $2|E|$, so $|E| = \\frac{30}{2} = 15$. Choosing the $2$ people of a handshake gives the same number: $\\binom{6}{2} = 15$.`],
+        why: `Counting person by person is natural, and it is easy to forget that the handshake between two people appears in both of their counts.`,
+        check: `Try $3$ people. They make $3$ handshakes, but the per-person sum is $3 \\cdot 2 = 6$. The per-person sum is always even, since it is twice the number of handshakes; an odd sum signals a slip in the counts.` },
+      { id: 'rounding-n-k-down', name: `Rounding n/k down`, errorAt: 1,
+        what: `The generalized form guarantees a container with at least $\\lceil n/k \\rceil$ items, but the quotient is rounded down instead of up.`,
+        wrong: [`$25$ people and $12$ months.`, `$\\lfloor 25/12 \\rfloor = 2$, so the conclusion drawn is only that some month has at least $2$ birthdays. For $13$ people the floor gives $1$, which says nothing at all.`],
+        right: [`$25$ people and $12$ months.`, `$\\lceil 25/12 \\rceil = 3$. If every month had at most $2$ birthdays, the $12$ months would hold at most $24$ people, fewer than $25$. So some month has at least $3$.`],
+        why: `Rounding down is the habit for questions like "how many full boxes", where the leftover is ignored. Here the leftover is the whole point: it has to go somewhere, and it pushes one container higher.`,
+        check: `Spread the items as evenly as possible. $12$ months with $2$ people each hold $24$; the $25$th person makes a third in some month, so the guaranteed number is $3$.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj2Table,
@@ -1891,9 +1894,80 @@ const schemas = {
     }
    }
 
-export default function CountingPrinciplesPage({seoData, sectionsContent, introContent, obj2Table, capstoneTable, faqQuestions, schemas, demoUnits}) {
+export default function CountingPrinciplesPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `When a choice can be made in one of several ways, count each way and add.`,
+        content: [
+          `The recipe looks too simple to go wrong. Try it on two counts.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Adding works for bus, train or taxi routes — but gives 17 hearts-or-kings in a deck that has only 16.`,
+        content: [
+          ciTable('addTable'),
+          `The king of hearts is both a heart and a king, so adding counts it twice. No route is both a bus route and a train route.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Adding counts is correct only when no outcome belongs to two cases.`,
+        content: [
+          `## The Mutual-Exclusion Condition`,
+          `The rule requires that the cases be mutually exclusive. When two methods share outcomes, naive addition counts the shared outcomes twice. The systematic correction for this case is the [inclusion–exclusion principle](!/combinatorics/inclusion-exclusion), which extends the addition rule by alternating additions and subtractions of intersection sizes.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [addition rule](!/combinatorics/definitions#addition_rule) says that when a count splits into cases that cannot happen together, the total is the sum of the case counts.`,
+        formula: [
+          `The addition rule applies when a count splits into cases that cannot occur simultaneously. If an outcome can be achieved by method 1 in $m_1$ ways, by method 2 in $m_2$ ways, and so on through method $k$ in $m_k$ ways, with no outcome belonging to more than one method, then the total number of outcomes is`,
+          `@academic[formula_callout:Addition Rule
+$$|A_1 \\cup A_2 \\cup \\cdots \\cup A_k| = |A_1| + |A_2| + \\cdots + |A_k|, \\quad A_i \\cap A_j = \\emptyset \\text{ for } i \\neq j.$$
+/combinatorics/formulas#addition_rule]@`,
+          `@academic[formulas_link:Browse all combinatorics formulas
+/combinatorics/formulas]@`,
+        ],
+        footer: `So the traveller has $2 + 3 + 4 = 9$ route choices.`,
+      },
+      {
+        id: 'kind',
+        lead: `The rule is signalled by the word "or" between cases that exclude each other.`,
+        content: [
+          `The linguistic marker for the addition rule is the word **or** — pick method 1 OR method 2 OR method 3. Each "or" between mutually exclusive cases contributes its own count to the sum.`,
+          `In the language of [set theory](!/set-theory), the rule is the cardinality identity $|A \\cup B| = |A| + |B|$ when $A \\cap B = \\emptyset$, generalized to any number of pairwise disjoint sets.`,
+          `@academic[example:Example
+ 
+A traveller can reach the city by 2 bus routes, by 3 train routes, or by 4 taxi routes. Since these options are mutually exclusive — one trip uses one mode of transport — the total number of route choices is
+ 
+$$2 + 3 + 4 = 9.$$]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `When cases overlap, the overlap has to be subtracted.`,
+        content: [
+          `For hearts or kings: $13 + 4 - 1 = 16$. Overlaps among any number of cases are handled by the [inclusion–exclusion principle](!/combinatorics/definitions#inclusion_exclusion_principle).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the multiplication rule, complementary counting, double counting, the pigeonhole principle, how the principles combine, related concepts and an overview.`,
+      },
+    ],
+  }
 
   const genericSections=[
     // {
@@ -1909,7 +1983,7 @@ export default function CountingPrinciplesPage({seoData, sectionsContent, introC
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1965,6 +2039,15 @@ export default function CountingPrinciplesPage({seoData, sectionsContent, introC
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="counting-principle-pitfalls"
+            title="Common pitfalls with the counting principles"
+            source="/combinatorics/counting-principles"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

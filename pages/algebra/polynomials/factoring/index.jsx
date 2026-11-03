@@ -19,6 +19,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -644,7 +645,7 @@ In $4x^2y + 8xy^2$, the numerical GCF is $4$, the lowest power of $x$ is $x^1$, 
 
 @academic[pitfall,aside:true,width:35%:Losing the term that equals the GCF
 Writing $6x^3 + 9x^2 - 3x$ as $3x(2x^2 + 3x)$ drops the last term: that product is only $6x^3 + 9x^2$. The term $-3x$ leaves $-1$ behind, so the factorization is $3x(2x^2 + 3x - 1)$.
-[Read more](!#12)]@
+[Read more](!#pitfall-losing-the-term-that-equals-the-gcf)]@
 
 Extracting the GCF should become automatic — it simplifies the remaining expression and often makes subsequent factoring steps far more manageable. A polynomial like $2x^3 + 8x^2 + 8x$ looks like a difficult cubic until the GCF of $2x$ is removed, leaving $2x(x^2 + 4x + 4)$, which is a recognizable perfect square trinomial: $2x(x + 2)^2$.`,
     before: ``,
@@ -708,7 +709,7 @@ For $6x^2 + 11x + 4$, compute $ac = 6 \\cdot 4 = 24$. The pair $3$ and $8$ satis
 
 @academic[pitfall,aside:true,width:35%:Using the AC pair as the factors
 Writing $6x^2 + 11x + 4$ as $(x + 3)(x + 8)$ treats the pair for $ac = 24$ as if $a$ were $1$; that product is $x^2 + 11x + 24$. The pair only splits the middle term, and grouping gives $(3x + 4)(2x + 1)$.
-[Read more](!#12)]@
+[Read more](!#pitfall-using-the-ac-pair-as-the-factors)]@
 
 The order in which the split terms are written does not affect the final result. Writing $6x^2 + 8x + 3x + 4$ instead leads to $2x(3x + 4) + 1(3x + 4) = (2x + 1)(3x + 4)$ — the same factors in a different order.
 
@@ -901,37 +902,9 @@ Confusing the sum and difference of squares is another trap. The difference $a^2
 
 With cube formulas, the most common error is mishandling signs in the quadratic factor. For $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$, the middle term of the quadratic factor is $-ab$, not $+ab$. Mixing this up produces an incorrect factorization that fails verification.
 
-Stopping too early leaves factors on the table. After obtaining $(x^2 + 4)(x^2 - 4)$ from $x^4 - 16$, the second factor is itself a difference of squares. Every factor must be inspected for further decomposition before the factorization is considered complete.
-
-**Losing the term that equals the GCF**
-
-When one term of the polynomial is the GCF itself, or its negative, dividing that term by the GCF leaves $1$ or $-1$. That quotient is easy to overlook, and the term vanishes from the parentheses.
-
-Wrong working:
-$$6x^3 + 9x^2 - 3x = 3x(2x^2 + 3x)$$
-
-Right working: divide every term by $3x$. The quotients are $6x^3 \\div 3x = 2x^2$, $9x^2 \\div 3x = 3x$ and $-3x \\div 3x = -1$, so
-$$6x^3 + 9x^2 - 3x = 3x(2x^2 + 3x - 1)$$
-
-Why it happens: dividing a term by itself feels like it leaves nothing behind, so the $-1$ is never written down.
-
-How to check: the parentheses must hold as many terms as the original polynomial. Substituting $x = 1$ also catches it: the original gives $6 + 9 - 3 = 12$, the wrong form $3 \\cdot 5 = 15$, and the right form $3 \\cdot 4 = 12$.
-
-**Using the AC pair as the factors**
-
-In the AC method, the two numbers are found for the product $ac$ and then written straight into $(x + m)(x + n)$, as in the simple case. The step where the pair splits the middle term is skipped, and the leading coefficient is lost.
-
-Wrong working: for $6x^2 + 11x + 4$, $ac = 24$ and the pair $3$, $8$ gives $3 \\cdot 8 = 24$, $3 + 8 = 11$, so
-$$6x^2 + 11x + 4 = (x + 3)(x + 8)$$
-
-Right working: use the pair to split the middle term, then group.
-$$6x^2 + 3x + 8x + 4 = 3x(2x + 1) + 4(2x + 1) = (3x + 4)(2x + 1)$$
-
-Why it happens: the search for two numbers looks exactly like the one in the simple case, where the pair goes directly into the factors.
-
-How to check: expand the answer. $(x + 3)(x + 8) = x^2 + 11x + 24$ has leading coefficient $1$ and constant $24$, not $6$ and $4$. The right answer gives $(3x + 4)(2x + 1) = 6x^2 + 3x + 8x + 4 = 6x^2 + 11x + 4$.`,
+Stopping too early leaves factors on the table. After obtaining $(x^2 + 4)(x^2 - 4)$ from $x^4 - 16$, the second factor is itself a difference of squares. Every factor must be inspected for further decomposition before the factorization is considered complete.`,
     before: ``,
-    after: ``,
+    after: `Most factoring slips, including the two worked above, are caught by multiplying the factors back out and comparing with the original, or by substituting a small value such as $x = 1$ into both forms. One slip escapes that test: stopping too early gives a correct but incomplete factorization, so each factor still has to be checked for further factoring.`,
     link: '',
   },
 
@@ -1220,8 +1193,31 @@ const schemas = {
     },
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'losing-the-term-that-equals-the-gcf', name: `Losing the term that equals the GCF`, errorAt: 1,
+        what: `When one term of the polynomial is the GCF itself, or its negative, dividing that term by the GCF leaves $1$ or $-1$. That quotient is easy to overlook, and the term vanishes from the parentheses.`,
+        wrong: [`$$6x^3 + 9x^2 - 3x$$`, `$$= 3x(2x^2 + 3x)$$`],
+        right: [`$$6x^3 + 9x^2 - 3x$$`, `Divide every term by $3x$. The quotients are $6x^3 \\div 3x = 2x^2$, $9x^2 \\div 3x = 3x$ and $-3x \\div 3x = -1$, so
+$$= 3x(2x^2 + 3x - 1)$$`],
+        why: `Dividing a term by itself feels like it leaves nothing behind, so the $-1$ is never written down.`,
+        check: `The parentheses must hold as many terms as the original polynomial. Substituting $x = 1$ also catches it: the original gives $6 + 9 - 3 = 12$, the wrong form $3 \\cdot 5 = 15$, and the right form $3 \\cdot 4 = 12$.` },
+      { id: 'using-the-ac-pair-as-the-factors', name: `Using the AC pair as the factors`, errorAt: 1,
+        what: `In the AC method, the two numbers are found for the product $ac$ and then written straight into $(x + m)(x + n)$, as in the simple case. The step where the pair splits the middle term is skipped, and the leading coefficient is lost.`,
+        wrong: [`For $6x^2 + 11x + 4$, $ac = 24$ and the pair $3$, $8$ gives $3 \\cdot 8 = 24$, $3 + 8 = 11$, so`, `$$6x^2 + 11x + 4 = (x + 3)(x + 8)$$`],
+        right: [`For $6x^2 + 11x + 4$, $ac = 24$ and the pair $3$, $8$ gives $3 \\cdot 8 = 24$, $3 + 8 = 11$, so`, `Use the pair to split the middle term, then group.`, `$$6x^2 + 3x + 8x + 4$$
+$$= 3x(2x + 1) + 4(2x + 1)$$
+$$= (3x + 4)(2x + 1)$$`],
+        why: `The search for two numbers looks exactly like the one in the simple case, where the pair goes directly into the factors.`,
+        check: `Expand the answer. $(x + 3)(x + 8) = x^2 + 11x + 24$ has leading coefficient $1$ and constant $24$, not $6$ and $4$. The right answer gives $(3x + 4)(2x + 1) = 6x^2 + 3x + 8x + 4 = 6x^2 + 11x + 4$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     factoringDecision,
     factorOutline,
     gcfFactoringSteps,
@@ -1246,7 +1242,7 @@ const schemas = {
 }
    }
 
-export default function FactoringPage({factoringDecision, factorOutline,gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function FactoringPage({ pitfallData,factoringDecision, factorOutline,gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1472,6 +1468,15 @@ export default function FactoringPage({factoringDecision, factorOutline,gcfFacto
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="factoring-pitfalls"
+            title="Common pitfalls in factoring polynomials"
+            source="/algebra/polynomials/factoring"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 

@@ -14,6 +14,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -409,6 +411,24 @@ const summaryTable = `
 // }
 
 
+// Concept introduction (section 1, "Product Rule") — template F, two
+// descriptions shown to agree. Running instance: the root of a product
+// against the product of roots for 4 · 9, 16 · 25 and 2 · 8. Old obj1 text is
+// kept in sectionsContent.obj1, unused; its passages, four formula boxes and
+// link, rule box, pitfall and the punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRootsTable = ciTableOpen(['product', 'root of the product', 'product of the roots']) +
+  ciRow(['4 · 9', '√36 = 6', '2 · 3 = 6']) +
+  ciRow(['16 · 25', '√400 = 20', '4 · 5 = 20'], { shade: true }) +
+  ciRow(['2 · 8', '√16 = 4', '√2 · √8 = √2 · 2√2 = 4'], { last: true, color: '#2563EB', cols: [1, 2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -551,7 +571,7 @@ $$\\sqrt{16^3} = 16^{3/2} = \\left(\\sqrt{16}\\right)^3 = 4^3 = 64$$]@
 
 @academic[pitfall,aside:true,width:35%:Putting the index on top
 Writing $\\sqrt[3]{8^2}$ as $8^{3/2}$ swaps the two numbers and gives $\\sqrt{512} \\approx 22.6$. The exponent goes on top and the index below: $8^{2/3} = 4$.
-[Read more](!#6)]@
+[Read more](!#pitfall-putting-the-index-on-top)]@
 
 Both examples are worked twice, once as a fractional power and once by taking the root first and then raising the result to the power. The two routes meet at the same number, which makes the second route a built-in check on the first.
 
@@ -607,7 +627,7 @@ This is the power of a power rule from [powers](!/algebra/powers) — multiply t
 
 @academic[pitfall,aside:true,width:35%:Adding the indices of nested roots
 Adding the indices turns $\\sqrt[3]{\\sqrt{64}}$ into $\\sqrt[5]{64} \\approx 2.30$. The indices multiply, $3 \\cdot 2 = 6$, so $\\sqrt[3]{\\sqrt{64}} = \\sqrt[6]{64} = 2$.
-[Read more](!#6)]@
+[Read more](!#pitfall-adding-the-indices-of-nested-roots)]@
 
 Nested radicals sometimes appear in [simplifying](!/algebra/roots/simplifying) problems and when solving certain [radical equations](!/algebra/roots/equations). Recognizing the pattern allows immediate simplification.
 
@@ -676,52 +696,9 @@ Dropping absolute values:
 @academic[formula_callout:Common Errors
 $$\\sqrt{x^2} = |x|, \\quad \\text{not } x$$]@
 
-When $x$ might be negative, the absolute value is essential. The [properties of radicals](!/algebra/roots/properties) page explains why.
-
-**Putting the index on top**
-
-A power under a radical is rewritten as a fractional exponent, and the two numbers change places: the index becomes the numerator and the exponent the denominator.
-
-Wrong working:
-$$\\sqrt[3]{8^2} = 8^{3/2} = \\sqrt{8^3} = \\sqrt{512} \\approx 22.6$$
-
-Right working: the exponent of the radicand is the numerator, the index is the denominator.
-$$\\sqrt[3]{8^2} = 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$
-
-Why it happens: the index is written high, in the crook of the radical sign, so it seems to belong on top of the fraction.
-
-How to check: a cube root of $8^2 = 64$ must be a number whose cube is $64$. That is $4$, since $4^3 = 64$, while $22.6^3$ is more than $11000$.
-
-**Adding the indices of nested roots**
-
-A radical sits inside another radical, and the two indices are combined by adding them instead of multiplying them.
-
-Wrong working:
-$$\\sqrt[3]{\\sqrt{64}} = \\sqrt[3 + 2]{64} = \\sqrt[5]{64} \\approx 2.30$$
-
-Right working: the indices multiply.
-$$\\sqrt[3]{\\sqrt{64}} = \\sqrt[3 \\cdot 2]{64} = \\sqrt[6]{64} = 2$$
-
-Why it happens: adding exponents, $a^m \\cdot a^n = a^{m+n}$, is the exponent law used most often, and it gets borrowed for a root of a root. In exponent form the step is a power of a power, $\\left(64^{1/2}\\right)^{1/3} = 64^{1/6}$, where the exponents multiply.
-
-How to check: work from the inside out. $\\sqrt{64} = 8$ and $\\sqrt[3]{8} = 2$, while $\\sqrt[5]{64}$ is not even a whole number, since $2^5 = 32$ and $3^5 = 243$.
-
-**Stopping before the largest square**
-
-To simplify a square root, the radicand is split into a perfect square times another factor. When the square chosen is not the largest one, the factor left inside still contains a square, and the work stops too early.
-
-Wrong working:
-$$\\sqrt{72} = \\sqrt{4 \\cdot 18} = \\sqrt{4} \\cdot \\sqrt{18} = 2\\sqrt{18}$$
-
-Right working: use the largest square factor of $72$, which is $36$.
-$$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$
-Starting from $2\\sqrt{18}$ also works if the splitting continues: $2\\sqrt{9 \\cdot 2} = 2 \\cdot 3\\sqrt{2} = 6\\sqrt{2}$.
-
-Why it happens: $4$ is the first square that comes to mind, and once one square has been pulled out the expression already looks simplified.
-
-How to check: look at the number left under the radical. If it has a square factor other than $1$ (such as $4$, $9$ or $16$), the simplification is not finished. Here $18 = 9 \\cdot 2$ fails the test, and $2$ passes it.`,
+When $x$ might be negative, the absolute value is essential. The [properties of radicals](!/algebra/roots/properties) page explains why.`,
     before: ``,
-    after: ``,
+    after: `The first two slips put an index in the wrong place: in $\\sqrt[n]{a^m} = a^{m/n}$ the index is the denominator, and the indices of nested roots multiply. The third stops one step too early, since a square root is simplified only when the number left inside has no square factor other than $1$. Cubing the answer catches the first, working from the inside out catches the second, and a look at the radicand that remains catches the third.`,
     link: '',
   },
 
@@ -734,7 +711,7 @@ $$\\sqrt{72} = \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$]
 
 @academic[pitfall,aside:true,width:35%:Stopping before the largest square
 Splitting $\\sqrt{72}$ as $\\sqrt{4 \\cdot 18} = 2\\sqrt{18}$ and stopping leaves a square inside, since $18 = 9 \\cdot 2$. The largest square factor, $36$, gives $6\\sqrt{2}$ in one step.
-[Read more](!#6)]@
+[Read more](!#pitfall-stopping-before-the-largest-square)]@
 
 Extracting perfect powers, rationalizing denominators, reducing indices, and combining like radicals all follow from the rules on this page. The complete toolkit for these techniques appears in [simplifying radicals](!/algebra/roots/simplifying), and methods for adding, subtracting, and multiplying radical expressions are covered in [operations with radicals](!/algebra/roots/operations). These rules also underpin solving [radical equations](!/algebra/roots/equations), where isolating and eliminating radicals requires systematic application of these identities.`,
     before: ``,
@@ -970,6 +947,10 @@ const schemas = {
     vlines: [{ x: 16 }],
     notes: [{ x: 0.4, y: 8.4, text: 'the split version overshoots for every x > 0', pos: 'e', color: 'r' }],
     caption: '√(a + b) ≠ √a + √b: at a = 9, b = 16 the two sides are 5 and 7' };
+  const conceptIntroFigures = {
+    rootsTable: ciRootsTable,
+  };
+
   const demoUnits = {
     rootOfSum: demoUnitFrame({
       svg: renderFunctionPlotV4(fpRootOfSum),
@@ -1033,8 +1014,37 @@ const schemas = {
     footnote: 'All three rules also need the same index on every radical: $\\sqrt{a} \\cdot \\sqrt[3]{b}$ has no single-radical form until both are written as rational exponents.',
   };
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj6 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'putting-the-index-on-top', name: `Putting the index on top`, errorAt: 1,
+        what: `A power under a radical is rewritten as a fractional exponent, and the two numbers change places: the index becomes the numerator and the exponent the denominator.`,
+        wrong: [`$$\\sqrt[3]{8^2}$$`, `$$= 8^{3/2} = \\sqrt{8^3} = \\sqrt{512} \\approx 22.6$$`],
+        right: [`$$\\sqrt[3]{8^2}$$`, `The exponent of the radicand is the numerator, the index is the denominator.
+$$= 8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 2^2 = 4$$`],
+        why: `The index is written high, in the crook of the radical sign, so it seems to belong on top of the fraction.`,
+        check: `A cube root of $8^2 = 64$ must be a number whose cube is $64$. That is $4$, since $4^3 = 64$, while $22.6^3$ is more than $11000$.` },
+      { id: 'adding-the-indices-of-nested-roots', name: `Adding the indices of nested roots`, errorAt: 1,
+        what: `A radical sits inside another radical, and the two indices are combined by adding them instead of multiplying them.`,
+        wrong: [`$$\\sqrt[3]{\\sqrt{64}}$$`, `$$= \\sqrt[3 + 2]{64} = \\sqrt[5]{64} \\approx 2.30$$`],
+        right: [`$$\\sqrt[3]{\\sqrt{64}}$$`, `The indices multiply.
+$$= \\sqrt[3 \\cdot 2]{64} = \\sqrt[6]{64} = 2$$`],
+        why: `Adding exponents, $a^m \\cdot a^n = a^{m+n}$, is the exponent law used most often, and it gets borrowed for a root of a root. In exponent form the step is a power of a power, $\\left(64^{1/2}\\right)^{1/3} = 64^{1/6}$, where the exponents multiply.`,
+        check: `Work from the inside out. $\\sqrt{64} = 8$ and $\\sqrt[3]{8} = 2$, while $\\sqrt[5]{64}$ is not even a whole number, since $2^5 = 32$ and $3^5 = 243$.` },
+      { id: 'stopping-before-the-largest-square', name: `Stopping before the largest square`, errorAt: 1,
+        what: `To simplify a square root, the radicand is split into a perfect square times another factor. When the square chosen is not the largest one, the factor left inside still contains a square, and the work stops too early.`,
+        wrong: [`$$\\sqrt{72}$$`, `$$= \\sqrt{4 \\cdot 18} = \\sqrt{4} \\cdot \\sqrt{18} = 2\\sqrt{18}$$`],
+        right: [`$$\\sqrt{72}$$`, `Use the largest square factor of $72$, which is $36$.
+$$= \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$`, `Starting from $2\\sqrt{18}$ also works if the splitting continues: $2\\sqrt{9 \\cdot 2} = 2 \\cdot 3\\sqrt{2} = 6\\sqrt{2}$.`],
+        why: `$4$ is the first square that comes to mind, and once one square has been pulled out the expression already looks simplified.`,
+        check: `Look at the number left under the radical. If it has a square factor other than $1$ (such as $4$, $9$ or $16$), the simplification is not finished. Here $18 = 9 \\cdot 2$ fails the test, and $2$ passes it.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     radicalRuleIndexProperties,
     radicalRuleTree,
     sectionsContent,
@@ -1045,6 +1055,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Radical Rules: Product, Quotient & Power | Learn Math Class",
       description: "Learn radical rules: product rule, quotient rule, power rule, and nested radicals. Understand restrictions, common errors, and connections to exponent laws.",
@@ -1056,9 +1067,87 @@ const schemas = {
 }
    }
 
-export default function RadicalRulesPage({radicalRuleIndexProperties, radicalRuleTree, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RadicalRulesPage({ pitfallData,radicalRuleIndexProperties, radicalRuleTree, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template F (two descriptions agree).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `To find √36 you can take the root at once — or split 36 as 4 · 9 and take two easier roots.`,
+        content: [
+          `Do the two routes always give the same answer?`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `The root of a product and the product of the roots agree every time.`,
+        content: [
+          ciTable('rootsTable'),
+          `In the last row neither root is a whole number, yet their product is exactly $4$.`,
+        ],
+      },
+      {
+        id: 'agree',
+        lead: `A root of a product splits into a product of roots, and the split runs both ways.`,
+        content: [
+          `This rule works in both directions. A single radical can split:`,
+          `@academic[formula_callout:Product Rule
+$$\\sqrt{12} = \\sqrt{4 \\cdot 3} = \\sqrt{4} \\cdot \\sqrt{3} = 2\\sqrt{3}$$]@`,
+          `Or separate radicals can combine:`,
+          `@academic[formula_callout:Product Rule
+$$\\sqrt{3} \\cdot \\sqrt{12} = \\sqrt{36} = 6$$]@`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **product rule** for radicals: under a shared index, $\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$.`,
+        formula: [
+          `The radical of a product equals the product of the radicals, provided both radicals share the same index.`,
+          `@academic[formula_callout:Product Rule (Radicals)
+$$\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$$
+/algebra/formulas#product_rule_radicals]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+        ],
+        footer: `So $\\sqrt{12} = \\sqrt{4} \\cdot \\sqrt{3} = 2\\sqrt{3}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `It is the power-of-a-product rule written with roots, and it is the tool behind simplifying radicals.`,
+        content: [
+          `The rule derives from exponent laws. In [rational exponent](!/algebra/roots/rational-exponents) notation:`,
+          `@academic[formula_callout:Product Rule
+$$(ab)^{1/n} = a^{1/n} \\cdot b^{1/n}$$]@`,
+          `This is the power of a product rule from [powers](!/algebra/powers), applied to fractional exponents.`,
+          `The product rule is essential for [simplifying radicals](!/algebra/roots/simplifying) — factoring out perfect powers relies on splitting the radical.`,
+          `Splitting works because the radicand is written as a product first. In $\\sqrt{12} = \\sqrt{4 \\cdot 3}$ the factor $4$ is a perfect square, so its root leaves the radical as the whole number $2$, while the factor $3$ stays inside.`,
+          `@academic[punchline:Under a shared index, a root of a product splits into a product of roots, and that split frees perfect powers.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Even roots need non-negative radicands, and the rule covers products — never sums.`,
+        content: [
+          `@academic[rule_plain:For even indices, both $a$ and $b$ must be non-negative when working in real numbers.]@`,
+          `Attempting to compute $\\sqrt{-2} \\cdot \\sqrt{-8}$ as $\\sqrt{16} = 4$ produces an error. Negative radicands under even roots require complex number treatment.`,
+          `@academic[pitfall,aside:true,width:35%:Distributing a radical over addition
+Splitting $\\sqrt{36 + 64}$ like a product gives $\\sqrt{36} + \\sqrt{64} = 14$. The rule covers products only; the sum is added first: $\\sqrt{100} = 10$.
+[Read more](!#6)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the quotient and power rules, the radical of a radical, when the rules apply, common errors, applying the rules and a summary.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1074,8 +1163,7 @@ export default function RadicalRulesPage({radicalRuleIndexProperties, radicalRul
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          `@academic[punchline:Under a shared index, a root of a product splits into a product of roots, and that split frees perfect powers.]@`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1140,6 +1228,15 @@ export default function RadicalRulesPage({radicalRuleIndexProperties, radicalRul
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj6Table }}
           />,
+          <DiagramFrame
+            key={'obj6-mistakes'}
+            id="radical-rule-pitfalls"
+            title="Common pitfalls with the radical rules"
+            source="/algebra/roots/radical-rules"
+            after={sectionsContent.obj6.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

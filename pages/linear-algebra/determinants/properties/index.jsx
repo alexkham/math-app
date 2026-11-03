@@ -1912,6 +1912,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2286,6 +2287,25 @@ const determinantProperties = {
 
 
 // formulas-injected: v1 | 2026-06-16 | 12 callouts (obj1 determinant_row_swap direct, obj2 determinant_row_scaling direct + determinant_of_scalar_multiple direct, obj3 determinant_row_addition direct, obj5 determinant_of_product direct + determinant_of_inverse direct + determinant_of_power direct, obj6 determinant_of_transpose direct, obj7 determinant_of_triangular direct + determinant_of_identity inline-promote, obj8 block_triangular_determinant direct, obj9 determinant_invertibility_criterion direct)
+
+// Concept introduction (section 1, "Effect of Row Swaps") — template A,
+// definition last. Running instance: (1 2; 3 4) with its rows swapped, its
+// columns swapped, and a matrix with two equal rows. Old obj1 text is kept in
+// sectionsContent.obj1, unused; its five passages, formula box and link,
+// pitfall and punchline are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSwapTable = ciTableOpen(['matrix', 'determinant']) +
+  ciRow(['(1 2; 3 4), the original', '1 · 4 − 2 · 3 = −2']) +
+  ciRow(['(3 4; 1 2), rows swapped', '3 · 2 − 4 · 1 = 2'], { shade: true, color: '#2563EB', cols: [1] }) +
+  ciRow(['(2 1; 4 3), columns swapped', '2 · 3 − 1 · 4 = 2'], { color: '#2563EB', cols: [1] }) +
+  ciRow(['(1 2; 1 2), two equal rows', '1 · 2 − 2 · 1 = 0'], { shade: true, last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -2731,6 +2751,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    swapTable: ciSwapTable,
+  };
+
   const demoUnits = {
     triangular: demoUnitFrame({
       svg: determinantDiagrams.diagonal,
@@ -2744,6 +2768,7 @@ const schemas = {
    return {
   props: {
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj5Table,
@@ -2770,10 +2795,75 @@ const schemas = {
      invertibilityRing,
      determinantProperties,
      faqQuestions,
-     schemas, demoUnits
+     schemas, demoUnits, conceptIntroFigures
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Reordering the rows of a matrix looks like a cosmetic change. Does the determinant notice?`,
+        content: [
+          `Compute the determinant of $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ before and after a swap.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `A swap keeps the size of the determinant and flips its sign.`,
+        content: [
+          ciTable('swapTable'),
+          `Swapping rows or swapping columns gives $2$ instead of $-2$. The last row has two equal rows, and its determinant is $0$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Each swap multiplies the determinant by −1, for rows and columns alike.`,
+        content: [
+          `The same rule holds for columns: swapping two columns also flips the sign. This follows from [transpose invariance](!/linear-algebra/determinants/properties#6), since swapping columns of $A$ is the same as swapping rows of $A^T$, and $\\det(A^T) = \\det(A)$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Row-swap rule:** exchanging two rows of a square matrix multiplies its determinant by $-1$, so $\\det(B) = -\\det(A)$.`,
+        formula: [
+          `Swapping two rows of a matrix multiplies its determinant by $-1$. If $B$ is obtained from $A$ by exchanging rows $i$ and $k$, then`,
+          `@academic[formula_callout:determinant_row_swap|Determinant Row Swap|$$\\det(B) = -\\det(A)$$]@
+@academic[formulas_link:/linear-algebra/formulas#determinant_row_swap]@`,
+        ],
+        footer: `So swapping the rows of $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ turns its determinant $-2$ into $2$.`,
+      },
+      {
+        id: 'kind',
+        lead: `A matrix with two equal rows has determinant zero.`,
+        content: [
+          `An immediate consequence is that any matrix with two identical rows has determinant zero. Swapping those two rows changes the sign of the determinant, yet the matrix itself is unchanged — the only number equal to its own negative is zero.`,
+          `@academic[punchline:Every swap of two rows or two columns flips the sign, so two equal rows force the determinant to zero.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Swaps made during elimination have to be counted.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Ignoring the sign of a row swap
+Swapping the rows of $\\begin{pmatrix} 0 & 1 \\\\ 2 & 3 \\end{pmatrix}$ to reach the triangular $\\begin{pmatrix} 2 & 3 \\\\ 0 & 1 \\end{pmatrix}$ and keeping its diagonal product gives $2$. The swap flips the sign: the determinant is $0 \\cdot 3 - 1 \\cdot 2 = -2$.
+[Read more](!#pitfalls)]@`,
+          `Each row swap during [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) must be tracked. If the reduction to triangular form uses $s$ row swaps, the sign correction is $(-1)^s$.`,
+          `Swaps enter elimination whenever a pivot position holds a zero. No multiple of that row can clear the entries below it, so a lower row with a nonzero entry in that column is moved up first. The swap only reorders the rows, and every row of the matrix is still present afterwards.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, row scaling and row addition, computing determinants by row reduction, the multiplicative property, transpose invariance, triangular and block triangular matrices, the invertibility equivalence, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2781,7 +2871,7 @@ const schemas = {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

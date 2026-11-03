@@ -80074,6 +80074,2080 @@
           "added": "2026-09-27"
         }
       ]
+    },
+    "geometry-proofs": {
+      "slug": "proofs",
+      "name": "Geometry Proofs",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "views": [
+        "triangle-angle-sum",
+        "exterior-angle",
+        "exterior-angle-sum",
+        "isosceles-base-angles",
+        "triangle-inequality",
+        "larger-side-larger-angle",
+        "perpendicular-shortest",
+        "thales-theorem",
+        "vertical-angles"
+      ],
+      "viewEntries": [
+        "geometry-proofs-triangle-angle-sum",
+        "geometry-proofs-exterior-angle",
+        "geometry-proofs-exterior-angle-sum",
+        "geometry-proofs-isosceles-base-angles",
+        "geometry-proofs-triangle-inequality",
+        "geometry-proofs-larger-side-larger-angle",
+        "geometry-proofs-perpendicular-shortest",
+        "geometry-proofs-thales-theorem",
+        "geometry-proofs-vertical-angles"
+      ],
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "angleSum-given",
+        "angleSum-construct",
+        "angleSum-alternate",
+        "angleSum-conclude",
+        "exteriorAngle-given",
+        "exteriorAngle-construct",
+        "exteriorAngle-linear",
+        "exteriorAngle-sum",
+        "exteriorAngle-conclude",
+        "exteriorAngleSum-given",
+        "exteriorAngleSum-construct",
+        "exteriorAngleSum-linear",
+        "exteriorAngleSum-sum",
+        "exteriorAngleSum-conclude",
+        "isosceles-given",
+        "isosceles-construct",
+        "isosceles-congruence",
+        "isosceles-conclude",
+        "triangleInequality-given",
+        "triangleInequality-construct",
+        "triangleInequality-isosceles",
+        "triangleInequality-compare",
+        "triangleInequality-side",
+        "triangleInequality-conclude",
+        "largerAngle-given",
+        "largerAngle-construct",
+        "largerAngle-isosceles",
+        "largerAngle-exterior",
+        "largerAngle-part",
+        "largerAngle-conclude",
+        "perpendicularShortest-given",
+        "perpendicularShortest-triangle",
+        "perpendicularShortest-acute",
+        "perpendicularShortest-largest",
+        "perpendicularShortest-side",
+        "perpendicularShortest-conclude",
+        "thales-given",
+        "thales-construct",
+        "thales-isoA",
+        "thales-isoB",
+        "thales-sum",
+        "thales-conclude",
+        "verticalAngles-given",
+        "verticalAngles-pair1",
+        "verticalAngles-pair2",
+        "verticalAngles-conclude",
+        "verticalAngles-other"
+      ],
+      "relatedTerms": [],
+      "note": "File-level entry of a dynamic route (flat URLs /geometry/visual-tools/<slug>, no /proofs level); the prose lives in the per-view entries."
+    },
+    "geometry-proofs-triangle-angle-sum": {
+      "slug": "triangle-angle-sum",
+      "name": "Triangle Angle Sum Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "triangle-angle-sum",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "angleSum-given",
+        "angleSum-construct",
+        "angleSum-alternate",
+        "angleSum-conclude"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-parallel-line",
+        "alternate-angles",
+        "the-second-pair",
+        "why-it-holds",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "the-statement"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-statement",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-01"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "alternate interior angles",
+          "entity": null,
+          "sections": [
+            "alternate-angles",
+            "the-second-pair",
+            "dragging-the-figure"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "alternate-angles",
+              "surface": "alternate interior angles",
+              "target": {
+                "path": "/trigonometry/right-triangle",
+                "section": "9"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-01"
+            }
+          ]
+        },
+        {
+          "term": "supplementary angles",
+          "entity": "supplementary_angles",
+          "sections": [
+            "why-it-holds"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "why-it-holds",
+              "surface": "supplementary",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "8"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-01"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "supplementary_angles"
+          }
+        },
+        {
+          "term": "triangle",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-parallel-line",
+            "dragging-the-figure",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "interior angle",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "parallel lines",
+          "entity": null,
+          "sections": [
+            "the-parallel-line",
+            "alternate-angles",
+            "the-second-pair"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "transversal",
+          "entity": null,
+          "sections": [
+            "alternate-angles",
+            "the-second-pair"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "parallel postulate",
+          "entity": null,
+          "sections": [
+            "the-parallel-line",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "straight angle",
+          "entity": null,
+          "sections": [
+            "why-it-holds",
+            "dragging-the-figure"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "exterior angle",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "polygon angle sum",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "Euclid's Elements",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-parallel-line"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "complementary angles",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-exterior-angle",
+          "fromSection": "consequences",
+          "surface": "exterior angle theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle-sum",
+          "fromSection": "consequences",
+          "surface": "sum of exterior angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-isosceles-base-angles",
+          "fromSection": "consequences",
+          "surface": "isosceles base angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-triangle-inequality",
+          "fromSection": "consequences",
+          "surface": "triangle inequality",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-larger-side-larger-angle",
+          "fromSection": "consequences",
+          "surface": "larger side, larger angle",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-perpendicular-shortest",
+          "fromSection": "consequences",
+          "surface": "perpendicular is shortest",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-thales-theorem",
+          "fromSection": "consequences",
+          "surface": "Thales' theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-vertical-angles",
+          "fromSection": "consequences",
+          "surface": "vertical angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
+    },
+    "geometry-proofs-exterior-angle": {
+      "slug": "exterior-angle",
+      "name": "Exterior Angle Theorem Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "exterior-angle",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "exteriorAngle-given",
+        "exteriorAngle-construct",
+        "exteriorAngle-linear",
+        "exteriorAngle-sum",
+        "exteriorAngle-conclude"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-extension",
+        "the-linear-pair",
+        "the-angle-sum",
+        "why-it-holds",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "the-statement"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-statement",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-01"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "supplementary angles",
+          "entity": "supplementary_angles",
+          "sections": [
+            "the-linear-pair"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-linear-pair",
+              "surface": "supplementary",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "8"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-01"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "supplementary_angles"
+          }
+        },
+        {
+          "term": "exterior angle",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-extension",
+            "the-linear-pair",
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "remote interior angles",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "linear pair",
+          "entity": null,
+          "sections": [
+            "the-linear-pair"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "straight angle",
+          "entity": null,
+          "sections": [
+            "the-linear-pair",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "vertical angles",
+          "entity": null,
+          "sections": [
+            "the-statement"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "triangle angle sum",
+          "entity": null,
+          "sections": [
+            "the-angle-sum",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "parallel postulate",
+          "entity": null,
+          "sections": [
+            "the-angle-sum"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "triangle inequality",
+          "entity": null,
+          "sections": [
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "Euclid's Elements",
+          "entity": null,
+          "sections": [
+            "the-extension",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-triangle-angle-sum",
+          "fromSection": "the-angle-sum",
+          "surface": "triangle angle sum theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle-sum",
+          "fromSection": "consequences",
+          "surface": "sum of the exterior angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-isosceles-base-angles",
+          "fromSection": "consequences",
+          "surface": "isosceles base angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-triangle-inequality",
+          "fromSection": "consequences",
+          "surface": "triangle inequality",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-larger-side-larger-angle",
+          "fromSection": "consequences",
+          "surface": "larger side, larger angle",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-perpendicular-shortest",
+          "fromSection": "consequences",
+          "surface": "perpendicular is shortest",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-thales-theorem",
+          "fromSection": "consequences",
+          "surface": "Thales' theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-vertical-angles",
+          "fromSection": "consequences",
+          "surface": "vertical angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
+    },
+    "geometry-proofs-exterior-angle-sum": {
+      "slug": "exterior-angle-sum",
+      "name": "Sum of Exterior Angles Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "exterior-angle-sum",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "exteriorAngleSum-given",
+        "exteriorAngleSum-construct",
+        "exteriorAngleSum-linear",
+        "exteriorAngleSum-sum",
+        "exteriorAngleSum-conclude"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-three-extensions",
+        "three-linear-pairs",
+        "the-angle-sum",
+        "why-it-holds",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "the-statement"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-statement",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-01"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "supplementary angles",
+          "entity": "supplementary_angles",
+          "sections": [
+            "three-linear-pairs"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "three-linear-pairs",
+              "surface": "supplementary",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "8"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-01"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "supplementary_angles"
+          }
+        },
+        {
+          "term": "exterior angle",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-three-extensions",
+            "three-linear-pairs",
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "linear pair",
+          "entity": null,
+          "sections": [
+            "three-linear-pairs"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "straight angle",
+          "entity": null,
+          "sections": [
+            "three-linear-pairs",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "vertical angles",
+          "entity": null,
+          "sections": [
+            "the-three-extensions"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "convex polygon",
+          "entity": null,
+          "sections": [
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "regular polygon",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "interior angle",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "three-linear-pairs",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "tiling",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-triangle-angle-sum",
+          "fromSection": "the-angle-sum",
+          "surface": "triangle angle sum theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle",
+          "fromSection": "the-three-extensions",
+          "surface": "exterior angle theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-isosceles-base-angles",
+          "fromSection": "consequences",
+          "surface": "isosceles base angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-triangle-inequality",
+          "fromSection": "consequences",
+          "surface": "triangle inequality",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-larger-side-larger-angle",
+          "fromSection": "consequences",
+          "surface": "larger side, larger angle",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-perpendicular-shortest",
+          "fromSection": "consequences",
+          "surface": "perpendicular is shortest",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-thales-theorem",
+          "fromSection": "consequences",
+          "surface": "Thales' theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-vertical-angles",
+          "fromSection": "consequences",
+          "surface": "vertical angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
+    },
+    "geometry-proofs-isosceles-base-angles": {
+      "slug": "isosceles-base-angles",
+      "name": "Isosceles Base Angles Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "isosceles-base-angles",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "isosceles-given",
+        "isosceles-construct",
+        "isosceles-congruence",
+        "isosceles-conclude"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-midpoint-line",
+        "three-equal-sides",
+        "why-it-holds",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "the-statement"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-statement",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-01"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "isosceles triangle",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "dragging-the-figure",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "base angles",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "midpoint",
+          "entity": null,
+          "sections": [
+            "the-midpoint-line",
+            "three-equal-sides"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "congruent triangles",
+          "entity": null,
+          "sections": [
+            "three-equal-sides",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "SSS",
+          "entity": null,
+          "sections": [
+            "three-equal-sides",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "CPCTC",
+          "entity": null,
+          "sections": [
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "median",
+          "entity": null,
+          "sections": [
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "angle bisector",
+          "entity": null,
+          "sections": [
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "altitude",
+          "entity": null,
+          "sections": [
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "perpendicular bisector",
+          "entity": null,
+          "sections": [
+            "dragging-the-figure",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "equilateral triangle",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "Euclid's Elements",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-midpoint-line"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-triangle-angle-sum",
+          "fromSection": "consequences",
+          "surface": "triangle angle sum",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle",
+          "fromSection": "consequences",
+          "surface": "exterior angle theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle-sum",
+          "fromSection": "consequences",
+          "surface": "sum of exterior angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-01"
+        },
+        {
+          "key": "geometry-proofs-triangle-inequality",
+          "fromSection": "consequences",
+          "surface": "triangle inequality",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-larger-side-larger-angle",
+          "fromSection": "consequences",
+          "surface": "larger side, larger angle",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-perpendicular-shortest",
+          "fromSection": "consequences",
+          "surface": "perpendicular is shortest",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-thales-theorem",
+          "fromSection": "consequences",
+          "surface": "Thales' theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-vertical-angles",
+          "fromSection": "consequences",
+          "surface": "vertical angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
+    },
+    "geometry-proofs-triangle-inequality": {
+      "slug": "triangle-inequality",
+      "name": "Triangle Inequality Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "triangle-inequality",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "triangleInequality-given",
+        "triangleInequality-construct",
+        "triangleInequality-isosceles",
+        "triangleInequality-compare",
+        "triangleInequality-side",
+        "triangleInequality-conclude"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-construction",
+        "an-isosceles-triangle",
+        "the-larger-angle",
+        "the-longer-side",
+        "why-it-holds",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "triangle inequality",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "isosceles triangle",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "an-isosceles-triangle"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "base angles",
+          "entity": null,
+          "sections": [
+            "an-isosceles-triangle"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "larger angle opposite longer side",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-longer-side"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "whole greater than part",
+          "entity": null,
+          "sections": [
+            "the-larger-angle",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "perimeter",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "convex polygon",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "metric space",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "Euclid's Elements",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-construction",
+            "the-longer-side"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-isosceles-base-angles",
+          "fromSection": "an-isosceles-triangle",
+          "surface": "isosceles base angles theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-triangle-angle-sum",
+          "fromSection": "consequences",
+          "surface": "triangle angle sum",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle",
+          "fromSection": "consequences",
+          "surface": "exterior angle theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle-sum",
+          "fromSection": "consequences",
+          "surface": "sum of exterior angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-larger-side-larger-angle",
+          "fromSection": "consequences",
+          "surface": "larger side, larger angle",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-perpendicular-shortest",
+          "fromSection": "consequences",
+          "surface": "perpendicular is shortest",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-thales-theorem",
+          "fromSection": "consequences",
+          "surface": "Thales' theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-vertical-angles",
+          "fromSection": "consequences",
+          "surface": "vertical angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
+    },
+    "geometry-proofs-larger-side-larger-angle": {
+      "slug": "larger-side-larger-angle",
+      "name": "Larger Side, Larger Angle Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "larger-side-larger-angle",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "largerAngle-given",
+        "largerAngle-construct",
+        "largerAngle-isosceles",
+        "largerAngle-exterior",
+        "largerAngle-part",
+        "largerAngle-conclude"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-cut-off-point",
+        "an-isosceles-triangle",
+        "the-exterior-angle",
+        "the-whole-angle",
+        "why-it-holds",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "the-statement"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-statement",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-02"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "isosceles triangle",
+          "entity": null,
+          "sections": [
+            "an-isosceles-triangle"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "exterior angle",
+          "entity": null,
+          "sections": [
+            "the-exterior-angle",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "hypotenuse",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "right triangle",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "perpendicular",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "whole greater than part",
+          "entity": null,
+          "sections": [
+            "the-whole-angle",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "proof by contradiction",
+          "entity": null,
+          "sections": [
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "Euclid's Elements",
+          "entity": null,
+          "sections": [
+            "the-statement"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-isosceles-base-angles",
+          "fromSection": "an-isosceles-triangle",
+          "surface": "isosceles base angles theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle",
+          "fromSection": "the-exterior-angle",
+          "surface": "exterior angle theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-triangle-inequality",
+          "fromSection": "the-statement",
+          "surface": "triangle inequality",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-triangle-angle-sum",
+          "fromSection": "consequences",
+          "surface": "triangle angle sum",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle-sum",
+          "fromSection": "consequences",
+          "surface": "sum of exterior angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-perpendicular-shortest",
+          "fromSection": "consequences",
+          "surface": "perpendicular is shortest",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-thales-theorem",
+          "fromSection": "consequences",
+          "surface": "Thales' theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-vertical-angles",
+          "fromSection": "consequences",
+          "surface": "vertical angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
+    },
+    "geometry-proofs-perpendicular-shortest": {
+      "slug": "perpendicular-shortest",
+      "name": "Perpendicular Is Shortest Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "perpendicular-shortest",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "perpendicularShortest-given",
+        "perpendicularShortest-triangle",
+        "perpendicularShortest-acute",
+        "perpendicularShortest-largest",
+        "perpendicularShortest-side",
+        "perpendicularShortest-conclude"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-right-triangle",
+        "two-acute-angles",
+        "the-largest-angle",
+        "the-longest-side",
+        "why-it-holds",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "the-statement"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-statement",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-02"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "perpendicular",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-right-triangle",
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "distance from a point to a line",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "foot of the perpendicular",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "dragging-the-figure"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "right triangle",
+          "entity": null,
+          "sections": [
+            "the-right-triangle",
+            "two-acute-angles",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "hypotenuse",
+          "entity": null,
+          "sections": [
+            "the-longest-side",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "complementary angles",
+          "entity": null,
+          "sections": [
+            "two-acute-angles"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "height of a triangle",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "parallel lines",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "tangent",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-triangle-angle-sum",
+          "fromSection": "two-acute-angles",
+          "surface": "triangle angle sum theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-larger-side-larger-angle",
+          "fromSection": "the-longest-side",
+          "surface": "larger side, larger angle",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle",
+          "fromSection": "consequences",
+          "surface": "exterior angle theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle-sum",
+          "fromSection": "consequences",
+          "surface": "sum of exterior angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-isosceles-base-angles",
+          "fromSection": "consequences",
+          "surface": "isosceles base angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-triangle-inequality",
+          "fromSection": "consequences",
+          "surface": "triangle inequality",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-thales-theorem",
+          "fromSection": "consequences",
+          "surface": "Thales' theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-vertical-angles",
+          "fromSection": "consequences",
+          "surface": "vertical angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
+    },
+    "geometry-proofs-thales-theorem": {
+      "slug": "thales-theorem",
+      "name": "Thales' Theorem Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "thales-theorem",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "thales-given",
+        "thales-construct",
+        "thales-isoA",
+        "thales-isoB",
+        "thales-sum",
+        "thales-conclude"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-radius-to-c",
+        "the-first-isosceles-triangle",
+        "the-second-isosceles-triangle",
+        "the-angle-sum",
+        "why-it-holds",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "the-statement"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-statement",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-02"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "diameter",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "the-radius-to-c",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "radius",
+          "entity": null,
+          "sections": [
+            "the-radius-to-c",
+            "the-first-isosceles-triangle",
+            "the-second-isosceles-triangle"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "chord",
+          "entity": null,
+          "sections": [
+            "the-statement"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "semicircle",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "why-it-holds",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "isosceles triangle",
+          "entity": null,
+          "sections": [
+            "the-first-isosceles-triangle",
+            "the-second-isosceles-triangle"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "inscribed angle",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "central angle",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "circumcentre",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "tangent",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "Euclid's Elements",
+          "entity": null,
+          "sections": [
+            "the-statement"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-isosceles-base-angles",
+          "fromSection": "the-first-isosceles-triangle",
+          "surface": "isosceles base angles theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-triangle-angle-sum",
+          "fromSection": "the-angle-sum",
+          "surface": "triangle angle sum theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle",
+          "fromSection": "consequences",
+          "surface": "exterior angle theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle-sum",
+          "fromSection": "consequences",
+          "surface": "sum of exterior angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-triangle-inequality",
+          "fromSection": "consequences",
+          "surface": "triangle inequality",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-larger-side-larger-angle",
+          "fromSection": "consequences",
+          "surface": "larger side, larger angle",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-perpendicular-shortest",
+          "fromSection": "consequences",
+          "surface": "perpendicular is shortest",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-02"
+        },
+        {
+          "key": "geometry-proofs-vertical-angles",
+          "fromSection": "consequences",
+          "surface": "vertical angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
+    },
+    "geometry-proofs-vertical-angles": {
+      "slug": "vertical-angles",
+      "name": "Vertical Angles Proof",
+      "section": "geometry",
+      "pagePath": "pages/geometry/visual-tools/[view].jsx",
+      "view": "vertical-angles",
+      "parent": "geometry-proofs",
+      "component": "app/components/geometry/proof-player/ProofPlayerWrapper.jsx (ProofPlayer + ProofCanvas; proof definitions in proof-player/proofs/)",
+      "diagramsModule": "app/components/geometry/proof-player/proofDiagrams.js",
+      "diagramStates": [
+        "verticalAngles-given",
+        "verticalAngles-pair1",
+        "verticalAngles-pair2",
+        "verticalAngles-conclude",
+        "verticalAngles-other"
+      ],
+      "sections": [
+        "getting-started",
+        "the-statement",
+        "the-first-linear-pair",
+        "the-second-linear-pair",
+        "why-it-holds",
+        "the-other-pair",
+        "dragging-the-figure",
+        "consequences"
+      ],
+      "relatedTerms": [
+        {
+          "term": "degree",
+          "entity": "degree",
+          "sections": [
+            "the-statement"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-statement",
+              "surface": "degrees",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "1"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-03"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "degree"
+          }
+        },
+        {
+          "term": "supplementary angles",
+          "entity": "supplementary_angles",
+          "sections": [
+            "the-first-linear-pair"
+          ],
+          "status": "linked",
+          "links": [
+            {
+              "fromSection": "the-first-linear-pair",
+              "surface": "supplementary",
+              "target": {
+                "path": "/trigonometry/degrees-radians",
+                "section": "8"
+              },
+              "method": "line2-hand",
+              "crossSection": "trigonometry",
+              "added": "2026-11-03"
+            }
+          ],
+          "definitionTarget": {
+            "path": "/trigonometry/definitions",
+            "section": "supplementary_angles"
+          }
+        },
+        {
+          "term": "vertical angles",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "why-it-holds",
+            "the-other-pair",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "linear pair",
+          "entity": null,
+          "sections": [
+            "the-first-linear-pair",
+            "the-second-linear-pair",
+            "the-other-pair"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "straight angle",
+          "entity": null,
+          "sections": [
+            "the-first-linear-pair",
+            "the-second-linear-pair",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "perpendicular lines",
+          "entity": null,
+          "sections": [
+            "dragging-the-figure",
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "parallel lines",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "transversal",
+          "entity": null,
+          "sections": [
+            "consequences"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        },
+        {
+          "term": "Euclid's Elements",
+          "entity": null,
+          "sections": [
+            "the-statement",
+            "why-it-holds"
+          ],
+          "status": "pending",
+          "reason": "No geometry lesson, definitions or formulas page yet (content gap). Re-run Line 2 when /geometry lesson pages exist."
+        }
+      ],
+      "relatedTools": [
+        {
+          "key": "geometry-proofs-triangle-angle-sum",
+          "fromSection": "consequences",
+          "surface": "triangle angle sum",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-03"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle",
+          "fromSection": "consequences",
+          "surface": "exterior angle theorem",
+          "method": "in-text",
+          "status": "linked",
+          "added": "2026-11-03"
+        },
+        {
+          "key": "geometry-proofs-exterior-angle-sum",
+          "fromSection": "consequences",
+          "surface": "sum of exterior angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        },
+        {
+          "key": "geometry-proofs-isosceles-base-angles",
+          "fromSection": "consequences",
+          "surface": "isosceles base angles",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        },
+        {
+          "key": "geometry-proofs-triangle-inequality",
+          "fromSection": "consequences",
+          "surface": "triangle inequality",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        },
+        {
+          "key": "geometry-proofs-larger-side-larger-angle",
+          "fromSection": "consequences",
+          "surface": "larger side, larger angle",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        },
+        {
+          "key": "geometry-proofs-perpendicular-shortest",
+          "fromSection": "consequences",
+          "surface": "perpendicular is shortest",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        },
+        {
+          "key": "geometry-proofs-thales-theorem",
+          "fromSection": "consequences",
+          "surface": "Thales' theorem",
+          "method": "strip",
+          "status": "linked",
+          "added": "2026-11-03"
+        }
+      ]
     }
   },
   "$stubTemplate": {

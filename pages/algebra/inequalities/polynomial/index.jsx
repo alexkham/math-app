@@ -15,6 +15,8 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -304,7 +306,7 @@ Step 1: Solve $P(x) = 0$ to find all real roots. Use factoring, the [rational ro
 
 @academic[pitfall,aside:true,width:35%:Dividing both sides by x
 Dividing $x^3 > 4x$ by $x$ gives $x^2 > 4$, so $x < -2$ or $x > 2$, but $x = -3$ fails: $-27 < -12$. Kept as $x(x + 2)(x - 2) > 0$, the root $0$ stays on the chart and the answer is $(-2, 0) \\cup (2, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-both-sides-by-x)]@
 
 Step 2: Order the roots on the number line from smallest to largest. They divide the line into intervals: one to the left of the smallest root, one between each consecutive pair, and one to the right of the largest.
 
@@ -334,7 +336,7 @@ In $(5, \\infty)$: all three factors are positive. The product is positive.
 
 @academic[pitfall,aside:true,width:35%:Misreading a reversed factor
 Reading $(5 - x)$ in $(x + 2)(x - 1)(5 - x) < 0$ like $(x - 5)$ gives $(-\\infty, -2) \\cup (1, 5)$, but $x = 3$ gives $5 \\cdot 2 \\cdot 2 = 20 > 0$. The factor $5 - x$ is positive left of $5$, so the answer is $(-2, 1) \\cup (5, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-misreading-a-reversed-factor)]@
 
 The inequality $< 0$ selects the negative intervals: $(-\\infty, -2) \\cup (1, 5)$. No numerical evaluation of $P(x)$ was needed — only sign tracking.
 
@@ -363,7 +365,7 @@ Consider $(x + 1)(x - 3)^2 > 0$. The roots are $x = -1$ (multiplicity $1$) and $
 
 @academic[pitfall,aside:true,width:35%:Flipping the sign at a double root
 Alternating the signs at every root of $(x + 1)(x - 3)^2 > 0$ makes $(-1, 3)$ negative and gives $(-\\infty, -1) \\cup (3, \\infty)$. The double root $3$ keeps the sign, so the answer is $(-1, 3) \\cup (3, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-flipping-the-sign-at-a-double-root)]@
 
 This multiplicity rule eliminates the need to test points in every interval. Once the sign is known in any one interval, the sign in each adjacent interval is determined by whether the separating root has odd or even multiplicity.
 
@@ -417,11 +419,11 @@ For polynomials that factor partially — say, one rational root found and a rem
     title: `Worked Examples`,
     content: `A cubic with three distinct real roots: solve $x^3 - 6x^2 + 11x - 6 \\leq 0$. The polynomial factors as $(x - 1)(x - 2)(x - 3)$. The roots $1$, $2$, $3$ create four intervals. All three roots have odd multiplicity, so the sign alternates. The leading coefficient is positive and the degree is odd, so the rightmost interval $(3, \\infty)$ is positive. Moving left: $(2, 3)$ is negative, $(1, 2)$ is positive, $(-\\infty, 1)$ is negative. The inequality $\\leq 0$ selects the negative intervals and includes the roots: $(-\\infty, 1] \\cup [2, 3]$.
 
-A quartic with a repeated root: solve $(x + 2)^2(x - 1)(x - 4) > 0$. The roots are $-2$ (multiplicity $2$), $1$ (multiplicity $1$), and $4$ (multiplicity $1$). The leading term is $x^4$ (positive), so both outermost intervals are positive. Moving inward from the right: $(4, \\infty)$ is positive. At $x = 4$ (odd), the sign flips: $(1, 4)$ is negative. At $x = 1$ (odd), the sign flips: $(-2, 1)$ is positive. At $x = -2$ (even), the sign stays: $(-\\infty, -2)$ is positive. The solution to $> 0$ is $(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$, — the even-multiplicity root $-2$ splits the left interval without changing the sign, and since $P(-2) = 0$, the strict inequality excludes $-2$ automatically. The solution is $(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$.
+A quartic with a repeated root: solve $(x + 2)^2(x - 1)(x - 4) > 0$. The roots are $-2$ (multiplicity $2$), $1$ (multiplicity $1$), and $4$ (multiplicity $1$). The leading term is $x^4$ (positive), so both outermost intervals are positive. Moving inward from the right: $(4, \\infty)$ is positive. At $x = 4$ (odd), the sign flips: $(1, 4)$ is negative. At $x = 1$ (odd), the sign flips: $(-2, 1)$ is positive. At $x = -2$ (even), the sign stays: $(-\\infty, -2)$ is positive. The solution to $> 0$ is $(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$ — the even-multiplicity root $-2$ splits the left interval without changing the sign, and since $P(-2) = 0$, the strict inequality excludes $-2$ automatically.
 
 @academic[pitfall,aside:true,width:35%:Losing an isolated root
 Solving $(x + 2)^2(x - 1)(x - 4) \\leq 0$ from the negative interval alone gives $[1, 4]$ and loses $x = -2$, where the product is $0$. The solution is $\\{-2\\} \\cup [1, 4]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-losing-an-isolated-root)]@
 
 The double root $-2$ is the one place in this example where the endpoint rule and the multiplicity rule meet. The sign does not change there: the polynomial is positive on both sides of $-2$ and touches zero at that single point. Whether a point like this belongs to the answer is decided by the endpoint rule of Step 5, not by the intervals around it.
 
@@ -441,70 +443,9 @@ A polynomial with an irrational root: solve $x^3 - 3x + 1 > 0$. The rational roo
 
   obj9: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when polynomial inequalities are solved by hand. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Dividing both sides by x**
-
-An inequality with $x$ in every term, such as $x^3 > 4x$, is simplified by dividing both sides by $x$, as one might in an equation. The sign of $x$ is unknown, so it is unclear whether the inequality should flip, and the root $x = 0$ disappears from the chart.
-
-Wrong working:
-$$x^3 > 4x \\implies x^2 > 4 \\implies x < -2 \\text{ or } x > 2$$
-
-Right working: collect everything on one side and factor.
-$$x^3 - 4x > 0 \\implies x(x + 2)(x - 2) > 0$$
-The roots $-2$, $0$ and $2$ are all simple. The degree is odd and the leading coefficient is positive, so from the right the signs are $+$ on $(2, \\infty)$, $-$ on $(0, 2)$, $+$ on $(-2, 0)$ and $-$ on $(-\\infty, -2)$. The solution is $(-2, 0) \\cup (2, \\infty)$.
-
-Why it happens: cancelling a common factor is routine in equations, and dividing an inequality by a positive number is safe, so a variable factor gets treated like any other number.
-
-How to check: test a value from the wrong answer. $x = -3$ gives $(-3)^3 = -27$, which is not greater than $4(-3) = -12$. A value the wrong answer left out, $x = -1$, gives $-1 > -4$, which is true.
-
-**Misreading a reversed factor**
-
-A factor written as $(5 - x)$ instead of $(x - 5)$ is given the usual pattern in the sign chart: negative to the left of its root and positive to the right. For $(5 - x)$ it is the other way round.
-
-Wrong working: $(x + 2)(x - 1)(5 - x) < 0$ is charted with the signs of $(x + 2)(x - 1)(x - 5)$, which is negative on $(-\\infty, -2)$ and $(1, 5)$. The answer is given as $(-\\infty, -2) \\cup (1, 5)$.
-
-Right working: $5 - x$ is positive for $x < 5$ and negative for $x > 5$.
-
-In $(-\\infty, -2)$: $(-)(-)(+)$, positive.
-
-In $(-2, 1)$: $(+)(-)(+)$, negative.
-
-In $(1, 5)$: $(+)(+)(+)$, positive.
-
-In $(5, \\infty)$: $(+)(+)(-)$, negative.
-
-The solution is $(-2, 1) \\cup (5, \\infty)$. Equivalently, $5 - x = -(x - 5)$, so the inequality is $(x + 2)(x - 1)(x - 5) > 0$.
-
-Why it happens: the rule "negative left of the root, positive right of it" is learned on factors of the form $(x - r)$ and then applied to every factor by habit. In $(5 - x)$ the coefficient of $x$ is negative, which reverses the pattern.
-
-How to check: substitute a value from the answer. $x = 3$ gives $(5)(2)(2) = 20$, which is not below zero. End behavior catches it too: the leading term is $-x^3$, so the rightmost interval must be negative.
-
-**Flipping the sign at a double root**
-
-The signs are alternated at every root, as in a chart where all roots are simple, without reading the multiplicity of each root.
-
-Wrong working: for $(x + 1)(x - 3)^2 > 0$, the rightmost interval $(3, \\infty)$ is positive. Flipping at $3$ makes $(-1, 3)$ negative, and flipping at $-1$ makes $(-\\infty, -1)$ positive. The answer is given as $(-\\infty, -1) \\cup (3, \\infty)$.
-
-Right working: $3$ has multiplicity $2$, so the sign stays positive on $(-1, 3)$. The simple root $-1$ flips it, so $(-\\infty, -1)$ is negative. The solution is $(-1, 3) \\cup (3, \\infty)$.
-
-Why it happens: the first examples of sign charts usually have only simple roots, where alternating is right every time, so alternation becomes the rule instead of multiplicity.
-
-How to check: test one point next to the repeated root. $x = 0$ gives $(1)(9) = 9 > 0$, so $(-1, 3)$ is positive. A value from the wrong answer, $x = -2$, gives $(-1)(25) = -25$.
-
-**Losing an isolated root**
-
-For a non-strict inequality, the answer is read only from the chosen intervals and their endpoints. A root of even multiplicity that sits between two intervals of the wrong sign satisfies $P(r) = 0$ but is the endpoint of no chosen interval, so it is lost.
-
-Wrong working: for $(x + 2)^2(x - 1)(x - 4) \\leq 0$, the signs are $+$ on $(-\\infty, -2)$, $+$ on $(-2, 1)$, $-$ on $(1, 4)$ and $+$ on $(4, \\infty)$. The only negative interval is $(1, 4)$; with its endpoints, the answer is given as $[1, 4]$.
-
-Right working: $P(-2) = 0$, and $0 \\leq 0$, so $x = -2$ satisfies the inequality. The solution is $\\{-2\\} \\cup [1, 4]$.
-
-Why it happens: Step 5 is read as "include the endpoints of the chosen intervals", and $-2$ is not an endpoint of any chosen interval. It is a single point where the graph touches the axis.
-
-How to check: for $\\leq$ or $\\geq$, list every root at the end. Each root makes $P(x) = 0$, so each one satisfies the inequality and must appear in the answer.`,
+    content: `Four mistakes come up again and again when polynomial inequalities are solved by hand. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `All four slips break the sign chart. Dividing by $x$ ignores the sign of $x$ and loses the root $0$, a reversed factor such as $5 - x$ has the opposite sign of $x - 5$, a root of even multiplicity does not change the sign, and with $\\leq$ every root belongs to the answer, even one where the sign does not change. Testing one value in each interval, and listing the roots at the end, catches each slip.`,
     link: '',
   },
 };
@@ -721,8 +662,40 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dividing-both-sides-by-x', name: `Dividing both sides by x`, errorAt: 1,
+        what: `An inequality with $x$ in every term, such as $x^3 > 4x$, is simplified by dividing both sides by $x$, as one might in an equation. The sign of $x$ is unknown, so it is unclear whether the inequality should flip, and the root $x = 0$ disappears from the chart.`,
+        wrong: [`$$x^3 > 4x$$`, `$$\\implies x^2 > 4$$`, `$$\\implies x < -2 \\text{ or } x > 2$$`],
+        right: [`$$x^3 > 4x$$`, `Collect everything on one side and factor.`, `$$x^3 - 4x > 0$$`, `$$\\implies x(x + 2)(x - 2) > 0$$`, `The roots $-2$, $0$ and $2$ are all simple. The degree is odd and the leading coefficient is positive, so from the right the signs are $+$ on $(2, \\infty)$, $-$ on $(0, 2)$, $+$ on $(-2, 0)$ and $-$ on $(-\\infty, -2)$. The solution is $(-2, 0) \\cup (2, \\infty)$.`],
+        why: `Cancelling a common factor is routine in equations, and dividing an inequality by a positive number is safe, so a variable factor gets treated like any other number.`,
+        check: `Test a value from the wrong answer. $x = -3$ gives $(-3)^3 = -27$, which is not greater than $4(-3) = -12$. A value the wrong answer left out, $x = -1$, gives $-1 > -4$, which is true.` },
+      { id: 'misreading-a-reversed-factor', name: `Misreading a reversed factor`, errorAt: 0,
+        what: `A factor written as $(5 - x)$ instead of $(x - 5)$ is given the usual pattern in the sign chart: negative to the left of its root and positive to the right. For $(5 - x)$ it is the other way round.`,
+        wrong: [`$(x + 2)(x - 1)(5 - x) < 0$ is charted with the signs of $(x + 2)(x - 1)(x - 5)$, which is negative on $(-\\infty, -2)$ and $(1, 5)$. The answer is given as $(-\\infty, -2) \\cup (1, 5)$.`],
+        right: [`$5 - x$ is positive for $x < 5$ and negative for $x > 5$.`, `In $(-\\infty, -2)$: $(-)(-)(+)$, positive.`, `In $(-2, 1)$: $(+)(-)(+)$, negative.`, `In $(1, 5)$: $(+)(+)(+)$, positive.`, `In $(5, \\infty)$: $(+)(+)(-)$, negative.`, `The solution is $(-2, 1) \\cup (5, \\infty)$. Equivalently, $5 - x = -(x - 5)$, so the inequality is $(x + 2)(x - 1)(x - 5) > 0$.`],
+        why: `The rule "negative left of the root, positive right of it" is learned on factors of the form $(x - r)$ and then applied to every factor by habit. In $(5 - x)$ the coefficient of $x$ is negative, which reverses the pattern.`,
+        check: `Substitute a value from the answer. $x = 3$ gives $(5)(2)(2) = 20$, which is not below zero. End behavior catches it too: the leading term is $-x^3$, so the rightmost interval must be negative.` },
+      { id: 'flipping-the-sign-at-a-double-root', name: `Flipping the sign at a double root`, errorAt: 0,
+        what: `The signs are alternated at every root, as in a chart where all roots are simple, without reading the multiplicity of each root.`,
+        wrong: [`For $(x + 1)(x - 3)^2 > 0$, the rightmost interval $(3, \\infty)$ is positive. Flipping at $3$ makes $(-1, 3)$ negative, and flipping at $-1$ makes $(-\\infty, -1)$ positive. The answer is given as $(-\\infty, -1) \\cup (3, \\infty)$.`],
+        right: [`$3$ has multiplicity $2$, so the sign stays positive on $(-1, 3)$. The simple root $-1$ flips it, so $(-\\infty, -1)$ is negative. The solution is $(-1, 3) \\cup (3, \\infty)$.`],
+        why: `The first examples of sign charts usually have only simple roots, where alternating is right every time, so alternation becomes the rule instead of multiplicity.`,
+        check: `Test one point next to the repeated root. $x = 0$ gives $(1)(9) = 9 > 0$, so $(-1, 3)$ is positive. A value from the wrong answer, $x = -2$, gives $(-1)(25) = -25$.` },
+      { id: 'losing-an-isolated-root', name: `Losing an isolated root`, errorAt: 0,
+        what: `For a non-strict inequality, the answer is read only from the chosen intervals and their endpoints. A root of even multiplicity that sits between two intervals of the wrong sign satisfies $P(r) = 0$ but is the endpoint of no chosen interval, so it is lost.`,
+        wrong: [`For $(x + 2)^2(x - 1)(x - 4) \\leq 0$, the signs are $+$ on $(-\\infty, -2)$, $+$ on $(-2, 1)$, $-$ on $(1, 4)$ and $+$ on $(4, \\infty)$. The only negative interval is $(1, 4)$; with its endpoints, the answer is given as $[1, 4]$.`],
+        right: [`$P(-2) = 0$, and $0 \\leq 0$, so $x = -2$ satisfies the inequality. The solution is $\\{-2\\} \\cup [1, 4]$.`],
+        why: `Step 5 is read as "include the endpoints of the chosen intervals", and $-2$ is not an endpoint of any chosen interval. It is a single point where the graph touches the axis.`,
+        check: `For $\\leq$ or $\\geq$, list every root at the end. Each root makes $P(x) = 0$, so each one satisfies the inequality and must appear in the answer.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     faqQuestions,
     factorSignProfile,
     demoUnits,
@@ -747,7 +720,7 @@ const schemas = {
 
 
 
-   export default function PolynomialInequalitiesPage({factorSignProfile, faqQuestions,
+   export default function PolynomialInequalitiesPage({ pitfallData,factorSignProfile, faqQuestions,
   seoData,
   sectionsContent,
   introContent,
@@ -968,6 +941,15 @@ $$P(x) > 0$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="polynomial-inequality-pitfalls"
+            title="Common pitfalls with polynomial inequalities"
+            source="/algebra/inequalities/polynomial"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

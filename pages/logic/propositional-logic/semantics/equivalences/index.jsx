@@ -440,6 +440,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
 
 export async function getStaticProps(){
 
@@ -1012,6 +1014,11 @@ export default function EquivalencesPage({demoUnits, conceptIntroFigures, negate
               parentHref={sectionsContent.notation.parentHref}
               parentLabel={sectionsContent.notation.parentLabel}
               theme={'navy'}
+            />,
+            <NotationCheatSheet
+              key={'notation-sheet'}
+              sheet={logicNotationSheet}
+              current={'/logic/propositional-logic/semantics/equivalences'}
             />,
           ]
         },

@@ -1772,6 +1772,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -2684,10 +2685,23 @@ const schemas = {
         desc: '$\\mathbf{b}$ is not in the column space; echelon form shows a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$',
       },
     ],
+  };  // TheoremCard data (rouche-capelli-iff); every fact is from the section text
+  const roucheCapelliIff = {
+    header: { kicker: 'Solvability', title: 'The Rouché–Capelli Theorem', lede: 'Existence of a solution, read off the ranks.' },
+    theorem: {
+      left: '$A\\mathbf{x} = \\mathbf{b}$ is consistent', leftSay: 'a solution exists',
+      right: '$\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$', rightSay: 'adding $\\mathbf{b}$ as a column does not raise the rank',
+      forward: 'implies', backward: 'conversely',
+      general: { label: 'When consistent', text: 'the solution set has dimension $n - \\text{rank}(A)$',
+        say: 'Existence and dimension in a single rank comparison; $A$ may be square, tall or wide. The proof: $\\mathbf{b} \\in \\text{Col}(A)$ exactly when the rank does not grow.' },
+    },
   };
+
+
 
 return {
   props:{
+      roucheCapelliIff,
     existenceCases,
     squareSystemCases,
     demoUnits,
@@ -2713,7 +2727,9 @@ return {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function SolvabilityPage({existenceCases, squareSystemCases, 
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function SolvabilityPage({roucheCapelliIff, existenceCases, squareSystemCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2864,7 +2880,17 @@ export default function SolvabilityPage({existenceCases, squareSystemCases,
         content:[
           sectionsContent.obj5.content,
           <div key={'unit-rankJumps'} dangerouslySetInnerHTML={{ __html: demoUnits.rankJumps }} />,
-          `Comparing two ranks is all the theorem asks, and row reduction computes both at once.`,
+          `Comparing two ranks is all the theorem asks, and row reduction computes both at once.`,          <DiagramFrame
+            key={'obj5-theorem'}
+            id="rouche-capelli-iff"
+            title="The Rouché–Capelli Theorem"
+            source="/linear-algebra/linear-systems/solvability"
+            before={`The theorem is a two-way statement: consistency and the rank comparison imply each other.`}
+            after={`One rank comparison answers both questions, existence and dimension, for a matrix of any shape.`}
+          >
+            <TheoremCard data={roucheCapelliIff} variant="iff" theme={theoremTheme} />
+          </DiagramFrame>,
+
         ]
     },
     {

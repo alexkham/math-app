@@ -701,6 +701,9 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -976,7 +979,7 @@ const keyWords = [
 
 @academic[pitfall,aside:true,width:35%:Dividing the bottom by the top
 Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a proper fraction. The numerator is divided by the denominator: $\\frac{2}{5} = 2 \\div 5 = 0.4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-the-bottom-by-the-top)]@
 
 For example, $\\frac{3}{4}$ equals $3 \\div 4 = 0.75$.
 
@@ -1084,7 +1087,7 @@ Copies of one size are not the only way to build a fraction from unit fractions.
 
 @academic[pitfall,aside:true,width:35%:Judging unit fractions by the denominator
 Ranking $\\frac{1}{10}$ above $\\frac{1}{5}$ because $10 > 5$ reverses the order: $\\frac{1}{10} = 0.1$ is half of $\\frac{1}{5} = 0.2$, so $\\frac{1}{10} < \\frac{1}{5}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-judging-unit-fractions-by-the-denominator)]@
 
 The fraction $\\frac{1}{8}$ is smaller than $\\frac{1}{4}$ because dividing something into eight parts creates smaller pieces than dividing it into four parts. This inverse relationship between denominator size and fraction value is essential when [comparing fractions](!/arithmetic/fractions/comparing).`,
     before: ``,
@@ -1100,7 +1103,7 @@ The fraction $\\frac{1}{8}$ is smaller than $\\frac{1}{4}$ because dividing some
 
 @academic[pitfall,aside:true,width:35%:Adding across the top and bottom
 Adding numerators and denominators gives $\\frac{1}{2} + \\frac{1}{4} = \\frac{2}{6} = \\frac{1}{3}$, less than $\\frac{1}{2}$ alone. In quarters, $\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-across-the-top-and-bottom)]@
 
 A shared denominator turns both fractions into pieces of one size, so the pieces can be counted together.
 
@@ -1113,7 +1116,7 @@ For $\\frac{1}{2} + \\frac{1}{3}$, halves and thirds both fit into sixths: $\\fr
 
 @academic[pitfall,aside:true,width:35%:Flipping the first fraction
 Inverting $\\frac{3}{4}$ instead of $\\frac{1}{2}$ turns $\\frac{3}{4} \\div \\frac{1}{2}$ into $\\frac{4}{3} \\times \\frac{1}{2} = \\frac{2}{3}$. Only the divisor is flipped: $\\frac{3}{4} \\times \\frac{2}{1} = \\frac{3}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-flipping-the-first-fraction)]@
 
 Dividing by $\\frac{4}{5}$ asks how many copies of $\\frac{4}{5}$ fit into $\\frac{2}{3}$, and multiplying by the reciprocal answers that question. The result can be checked by multiplying back: $\\frac{5}{6} \\times \\frac{4}{5} = \\frac{20}{30} = \\frac{2}{3}$, the number that was divided.
 
@@ -1212,57 +1215,9 @@ Each model serves different purposes. Circle models suit introductory understand
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes account for many of the wrong answers in early fraction work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Dividing the bottom by the top**
-
-A fraction is turned into a decimal by dividing the denominator by the numerator, usually because the larger number is placed first, as in most whole-number division. The two numbers swap roles, and a proper fraction comes out larger than one.
-
-Wrong working: $\\frac{2}{5} = 5 \\div 2 = 2.5$.
-
-Right working: the numerator is divided by the denominator, so $\\frac{2}{5} = 2 \\div 5 = 0.4$. Multiplying back confirms it: $0.4 \\times 5 = 2$, the numerator.
-
-Why it happens: whole-number division problems almost always divide a larger number by a smaller one, so $5 \\div 2$ looks like the natural problem and $2 \\div 5$ looks impossible until division into decimals is familiar.
-
-How to check: a proper fraction lies between $0$ and $1$, so its decimal must too. The value $2.5$ is more than two wholes, which $\\frac{2}{5}$ cannot be.
-
-**Judging unit fractions by the denominator**
-
-Two unit fractions are compared by their denominators as if they were whole numbers, so the one with the larger denominator is taken to be the larger fraction.
-
-Wrong working: $10 > 5$, so $\\frac{1}{10} > \\frac{1}{5}$.
-
-Right working: $\\frac{1}{10}$ is one of ten equal pieces of a whole and $\\frac{1}{5}$ is one of five, and ten pieces are smaller than five. In decimals, $\\frac{1}{10} = 0.1$ and $\\frac{1}{5} = 0.2$, so $\\frac{1}{10} < \\frac{1}{5}$. In fact $\\frac{1}{5} = \\frac{2}{10}$, two of the tenths.
-
-Why it happens: with whole numbers a larger number always means more, and that habit is carried over to the denominator, which counts how many pieces the whole is cut into rather than how much is taken.
-
-How to check: picture one whole shared among more people; each share gets smaller. Or convert both to decimals: $0.1 < 0.2$.
-
-**Adding across the top and bottom**
-
-Two fractions are added by adding their numerators and adding their denominators, as if each fraction were two separate whole numbers.
-
-Wrong working: $\\frac{1}{2} + \\frac{1}{4} = \\frac{1 + 1}{2 + 4} = \\frac{2}{6} = \\frac{1}{3}$.
-
-Right working: rewrite $\\frac{1}{2}$ in quarters, $\\frac{1}{2} = \\frac{2}{4}$, then add the numerators and keep the denominator: $\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$.
-
-Why it happens: multiplication of fractions does work straight across, $\\frac{1}{2} \\times \\frac{1}{4} = \\frac{1 \\times 1}{2 \\times 4} = \\frac{1}{8}$, and the same pattern is expected for addition.
-
-How to check: the sum of two positive numbers is larger than each of them. The wrong answer $\\frac{1}{3}$ is smaller than $\\frac{1}{2}$, so it cannot be $\\frac{1}{2}$ plus something; $\\frac{3}{4}$ is larger than both.
-
-**Flipping the first fraction**
-
-In a division of fractions, the reciprocal is taken of the first fraction, or of both, instead of only the second fraction, the divisor.
-
-Wrong working: $\\frac{3}{4} \\div \\frac{1}{2} = \\frac{4}{3} \\times \\frac{1}{2} = \\frac{4}{6} = \\frac{2}{3}$.
-
-Right working: keep the first fraction and flip only the divisor: $\\frac{3}{4} \\div \\frac{1}{2} = \\frac{3}{4} \\times \\frac{2}{1} = \\frac{6}{4} = \\frac{3}{2}$.
-
-Why it happens: the rule is remembered as "flip and multiply" without which fraction is flipped, and the first fraction is the one seen first.
-
-How to check: multiply the answer by the divisor; it must give the first fraction back. $\\frac{3}{2} \\times \\frac{1}{2} = \\frac{3}{4}$, while $\\frac{2}{3} \\times \\frac{1}{2} = \\frac{1}{3}$. A half also fits into three quarters more than once, so the answer must be larger than $1$.`,
+      content:`Four mistakes account for many of the wrong answers in early fraction work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip misreads what a fraction means. $\\frac{a}{b}$ is $a \\div b$, a larger denominator cuts the whole into smaller pieces, fractions are added over a common denominator and never top plus top over bottom plus bottom, and division flips only the divisor. A size check catches each of them: a proper fraction is below $1$, a sum is larger than each of its parts, and a quotient times the divisor gives the first fraction back.`,
       link:'',
 
     }
@@ -1469,8 +1424,40 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 7, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dividing-the-bottom-by-the-top', name: `Dividing the bottom by the top`, errorAt: 0,
+        what: `A fraction is turned into a decimal by dividing the denominator by the numerator, usually because the larger number is placed first, as in most whole-number division. The two numbers swap roles, and a proper fraction comes out larger than one.`,
+        wrong: [`$\\frac{2}{5} = 5 \\div 2 = 2.5$.`],
+        right: [`The numerator is divided by the denominator, so $\\frac{2}{5} = 2 \\div 5 = 0.4$. Multiplying back confirms it: $0.4 \\times 5 = 2$, the numerator.`],
+        why: `Whole-number division problems almost always divide a larger number by a smaller one, so $5 \\div 2$ looks like the natural problem and $2 \\div 5$ looks impossible until division into decimals is familiar.`,
+        check: `A proper fraction lies between $0$ and $1$, so its decimal must too. The value $2.5$ is more than two wholes, which $\\frac{2}{5}$ cannot be.` },
+      { id: 'judging-unit-fractions-by-the-denominator', name: `Judging unit fractions by the denominator`, errorAt: 0,
+        what: `Two unit fractions are compared by their denominators as if they were whole numbers, so the one with the larger denominator is taken to be the larger fraction.`,
+        wrong: [`$10 > 5$, so $\\frac{1}{10} > \\frac{1}{5}$.`],
+        right: [`$\\frac{1}{10}$ is one of ten equal pieces of a whole and $\\frac{1}{5}$ is one of five, and ten pieces are smaller than five. In decimals, $\\frac{1}{10} = 0.1$ and $\\frac{1}{5} = 0.2$, so $\\frac{1}{10} < \\frac{1}{5}$. In fact $\\frac{1}{5} = \\frac{2}{10}$, two of the tenths.`],
+        why: `With whole numbers a larger number always means more, and that habit is carried over to the denominator, which counts how many pieces the whole is cut into rather than how much is taken.`,
+        check: `Picture one whole shared among more people; each share gets smaller. Or convert both to decimals: $0.1 < 0.2$.` },
+      { id: 'adding-across-the-top-and-bottom', name: `Adding across the top and bottom`, errorAt: 0,
+        what: `Two fractions are added by adding their numerators and adding their denominators, as if each fraction were two separate whole numbers.`,
+        wrong: [`$\\frac{1}{2} + \\frac{1}{4} = \\frac{1 + 1}{2 + 4} = \\frac{2}{6} = \\frac{1}{3}$.`],
+        right: [`Rewrite $\\frac{1}{2}$ in quarters, $\\frac{1}{2} = \\frac{2}{4}$, then add the numerators and keep the denominator: $\\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$.`],
+        why: `Multiplication of fractions does work straight across, $\\frac{1}{2} \\times \\frac{1}{4} = \\frac{1 \\times 1}{2 \\times 4} = \\frac{1}{8}$, and the same pattern is expected for addition.`,
+        check: `The sum of two positive numbers is larger than each of them. The wrong answer $\\frac{1}{3}$ is smaller than $\\frac{1}{2}$, so it cannot be $\\frac{1}{2}$ plus something; $\\frac{3}{4}$ is larger than both.` },
+      { id: 'flipping-the-first-fraction', name: `Flipping the first fraction`, errorAt: 0,
+        what: `In a division of fractions, the reciprocal is taken of the first fraction, or of both, instead of only the second fraction, the divisor.`,
+        wrong: [`$\\frac{3}{4} \\div \\frac{1}{2} = \\frac{4}{3} \\times \\frac{1}{2} = \\frac{4}{6} = \\frac{2}{3}$.`],
+        right: [`Keep the first fraction and flip only the divisor: $\\frac{3}{4} \\div \\frac{1}{2} = \\frac{3}{4} \\times \\frac{2}{1} = \\frac{6}{4} = \\frac{3}{2}$.`],
+        why: `The rule is remembered as "flip and multiply" without which fraction is flipped, and the first fraction is the one seen first.`,
+        check: `Multiply the answer by the divisor; it must give the first fraction back. $\\frac{3}{2} \\times \\frac{1}{2} = \\frac{3}{4}$, while $\\frac{2}{3} \\times \\frac{1}{2} = \\frac{1}{3}$. A half also fits into three quarters more than once, so the answer must be larger than $1$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     fractionTypesOutline,
     fractionOpTree,
     sectionsContent,
@@ -1494,7 +1481,7 @@ return {
    }
 
 
-export default function FractionsPage({fractionTypesOutline, fractionOpTree, seoData, sectionsContent, introContent, obj3Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function FractionsPage({ pitfallData,fractionTypesOutline, fractionOpTree, seoData, sectionsContent, introContent, obj3Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1528,7 +1515,7 @@ export default function FractionsPage({fractionTypesOutline, fractionOpTree, seo
           `@academic[rule_plain:Every fraction represents a division operation. The expression $\\frac{a}{b}$ is equivalent to $a \\div b$, meaning the numerator divided by the denominator.]@`,
           `@academic[pitfall,aside:true,width:35%:Dividing the bottom by the top
 Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a proper fraction. The numerator is divided by the denominator: $\\frac{2}{5} = 2 \\div 5 = 0.4$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-dividing-the-bottom-by-the-top)]@`,
           `For example, $\\frac{3}{4}$ equals $3 \\div 4 = 0.75$.`,
         ],
       },
@@ -1591,6 +1578,11 @@ Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a pr
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={arithmeticNotationSheet}
+            current={'/arithmetic/fractions'}
           />,
         ]
     },
@@ -1686,6 +1678,15 @@ Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a pr
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="fraction-pitfalls"
+            title="Common pitfalls with fractions"
+            source="/arithmetic/fractions"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

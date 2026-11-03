@@ -16,6 +16,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -1056,9 +1057,23 @@ const schemas = {
       },
     ],
   };
+  // TheoremCard data (squeeze-theorem-card); every fact is from the section text
+  const squeezeCard = {
+    header: { kicker: 'Limits', title: 'The Squeeze Theorem', lede: 'Click a hypothesis to see what it does.' },
+    theorem: {
+      hypotheses: [
+        { text: '$g(x) \\leq f(x) \\leq h(x)$ for all $x$ near $a$', job: 'Traps $f$ between two functions; the point $a$ itself may be left out.' },
+        { text: '$\\lim_{x \\to a} g(x) = \\lim_{x \\to a} h(x) = L$', job: 'Both bounds converge to the same limit.' },
+      ],
+      conclusion: '$\\lim_{x \\to a} f(x) = L$',
+      meaning: 'The function has nowhere to go but $L$.',
+    },
+  };
+
 
   return {
   props: {
+      squeezeCard,
     sectionsContent,
     quotientRuleCases,
     introContent,
@@ -1082,7 +1097,9 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RulesPage({seoData, sectionsContent, introContent, quotientRuleCases, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function RulesPage({squeezeCard, seoData, sectionsContent, introContent, quotientRuleCases, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1265,6 +1282,16 @@ export default function RulesPage({seoData, sectionsContent, introContent, quoti
           <div key={'unit-squeeze'} dangerouslySetInnerHTML={{ __html: demoUnits.squeeze }} />,
           `Without the factor x² the band would stay between −1 and 1 and the squeeze would fail.`,
           `@academic[punchline:A limit no rule can reach can still be forced: trap the function between two bounds that meet.]@`,
+          <DiagramFrame
+            key={'obj14-theorem'}
+            id="squeeze-theorem-card"
+            title="The Squeeze Theorem"
+            source="/calculus/limits/rules"
+            before={`Two hypotheses, one conclusion. The card shows the job each hypothesis does.`}
+            after={`Trapped between two bounds that meet at $L$, the function has nowhere else to go.`}
+          >
+            <TheoremCard data={squeezeCard} variant="card" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

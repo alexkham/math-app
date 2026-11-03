@@ -15,6 +15,7 @@ import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -561,7 +562,7 @@ $$(a^{1/2})^2 = a^{(1/2) \\cdot 2} = a^1 = a$$]@
 
 @academic[pitfall,aside:true,width:35%:Multiplying the base by the exponent
 Reading $8^{1/3}$ as $8 \\cdot \\frac{1}{3} = \\frac{8}{3}$ treats the exponent as a factor. A denominator in the exponent means a root: $8^{1/3} = \\sqrt[3]{8} = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-base-by-the-exponent)]@
 
 The only non-negative number whose square is $a$ is $\\sqrt{a}$. Therefore $a^{1/2} = \\sqrt{a}$.
 
@@ -595,7 +596,7 @@ $$27^{4/3} = (\\sqrt[3]{27})^4 = 3^4 = 81$$]@
 
 @academic[pitfall,aside:true,width:35%:Swapping the index and the power
 Reading $8^{2/3}$ as $\\sqrt{8^3} = \\sqrt{512} \\approx 22.6$ makes the numerator the index. The denominator is the index: $8^{2/3} = \\sqrt[3]{8^2} = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-index-and-the-power)]@
 
 Computing $27^4 = 531441$ first and then taking $\\sqrt[3]{531441}$ reaches the same answer but with harder arithmetic.
 
@@ -625,7 +626,7 @@ $$8^{-2/3} = \\left(\\frac{1}{8}\\right)^{2/3} = \\frac{1}{8^{2/3}} = \\frac{1}{
 
 @academic[pitfall,aside:true,width:35%:Making the result negative
 Reading $8^{-2/3}$ as $-8^{2/3} = -4$ treats the minus sign as a sign of the value. A negative exponent means a reciprocal: $8^{-2/3} = \\frac{1}{4}$, which is positive.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-making-the-result-negative)]@
 
 Negative rational exponents combine the rules for negative exponents from [powers](!/algebra/powers) with rational exponent definitions. The base must still satisfy domain restrictions — nonzero for negative exponents, non-negative for even roots.`,
     before: ``,
@@ -740,7 +741,7 @@ $$(x^{2/3})^{3/4} = x^{6/12} = x^{1/2}$$]@
 
 @academic[pitfall,aside:true,width:35%:Adding numerators and denominators
 Adding the exponents as $\\frac{1}{2} + \\frac{1}{3} = \\frac{2}{5}$ turns $x^{1/2} \\cdot x^{1/3}$ into $x^{2/5}$. The sum is $\\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$, so the product is $x^{5/6}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-numerators-and-denominators)]@
 
 These are the same laws from [powers](!/algebra/powers), now with fractional arithmetic. Finding common denominators is often necessary when adding or subtracting exponents.`,
     before: ``,
@@ -767,7 +768,7 @@ $$x^{1/2} + x^{3/2} = x^{1/2}(1 + x)$$]@
 
 @academic[pitfall,aside:true,width:35%:Adding the exponents of a sum
 Adding the exponents in $x^{1/2} + x^{3/2}$ gives $x^2$. At $x = 4$ that is $16$, but the sum is $2 + 8 = 10$. The exponent laws are for products; a sum can only be factored: $x^{1/2}(1 + x)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-exponents-of-a-sum)]@
 
 The smallest exponent factors out, just as with integer exponents.
 
@@ -856,80 +857,9 @@ Fluency in both notations and the ability to convert freely between them is the 
 
   obj11: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again with rational exponents. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Multiplying the base by the exponent**
-
-A unit fraction exponent is read as an ordinary factor, so the base is multiplied by the fraction instead of having a root taken.
-
-Wrong working:
-$$8^{1/3} = 8 \\cdot \\frac{1}{3} = \\frac{8}{3}$$
-
-Right working: the denominator $3$ is the index of a root.
-$$8^{1/3} = \\sqrt[3]{8} = 2$$
-
-Why it happens: an exponent written as a fraction looks like a number to multiply by, and the meaning "denominator = index" has not yet replaced that first reading.
-
-How to check: raise the answer to the power of the denominator; it must give back the base. $\\left(\\frac{8}{3}\\right)^3 = \\frac{512}{27}$, which is not $8$, while $2^3 = 8$.
-
-**Swapping the index and the power**
-
-In $a^{m/n}$ the numerator and the denominator trade roles, so the numerator is taken as the index of the root and the denominator as the power.
-
-Wrong working:
-$$8^{2/3} = \\sqrt{8^3} = \\sqrt{512} \\approx 22.6$$
-
-Right working: the denominator $3$ is the index and the numerator $2$ is the power.
-$$8^{2/3} = \\sqrt[3]{8^2} = \\sqrt[3]{64} = 4$$
-or, root first, $(\\sqrt[3]{8})^2 = 2^2 = 4$.
-
-Why it happens: the fraction is read from the top down, and the first number seen is taken for the root.
-
-How to check: estimate the size. The base $8$ is greater than $1$ and the exponent $\\frac{2}{3}$ lies between $0$ and $1$, so the result must lie between $1$ and $8$. The value $22.6$ is too large; $4$ fits.
-
-**Making the result negative**
-
-The minus sign in the exponent is read as a minus sign on the result.
-
-Wrong working:
-$$8^{-2/3} = -8^{2/3} = -4$$
-
-Right working: a negative exponent means a reciprocal.
-$$8^{-2/3} = \\frac{1}{8^{2/3}} = \\frac{1}{4}$$
-
-Why it happens: everywhere else in arithmetic a minus sign makes a number negative, and that meaning is carried over to the exponent.
-
-How to check: a positive base raised to any power gives a positive result, so a negative answer from a positive base is always wrong. Also $8^{2/3} \\cdot 8^{-2/3} = 8^0 = 1$: indeed $4 \\cdot \\frac{1}{4} = 1$, while $4 \\cdot (-4) = -16$.
-
-**Adding numerators and denominators**
-
-The product rule is applied correctly, but the two exponent fractions are added by adding their numerators and their denominators separately.
-
-Wrong working:
-$$x^{1/2} \\cdot x^{1/3} = x^{\\frac{1 + 1}{2 + 3}} = x^{2/5}$$
-
-Right working: bring the fractions to a common denominator first.
-$$\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}, \\qquad x^{1/2} \\cdot x^{1/3} = x^{5/6}$$
-
-Why it happens: the attention is on the exponent law, and the fraction sum is done in the quickest-looking way.
-
-How to check: try a value that is a perfect sixth power, such as $x = 64$. Then $64^{1/2} \\cdot 64^{1/3} = 8 \\cdot 4 = 32$, and $64^{5/6} = 2^5 = 32$, while $64^{2/5} = 2^{12/5} \\approx 5.28$.
-
-**Adding the exponents of a sum**
-
-The rule "same base, add the exponents" is used on a sum of two powers, where it does not apply.
-
-Wrong working:
-$$x^{1/2} + x^{3/2} = x^{1/2 + 3/2} = x^2$$
-
-Right working: $x^{1/2}$ and $x^{3/2}$ are unlike terms and cannot be combined into one power. The sum can be factored by taking out the smallest exponent.
-$$x^{1/2} + x^{3/2} = x^{1/2}(1 + x)$$
-
-Why it happens: the product rule is used so often that it gets applied whenever two powers of the same base stand next to each other, whatever the sign between them.
-
-How to check: substitute $x = 4$. The sum is $4^{1/2} + 4^{3/2} = 2 + 8 = 10$, and $4^{1/2}(1 + 4) = 2 \\cdot 5 = 10$, but $4^2 = 16$.`,
+    content: `Five mistakes come up again and again with rational exponents. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `In $a^{m/n}$ the denominator is the index of a root, the numerator is a power, and a minus sign in front of the fraction means a reciprocal. Three of the slips misread one of these parts; the other two misuse the product rule, adding fractions straight across or adding exponents across a sum, where no rule applies. Raising the answer to the power of the denominator, checking its size and sign, or substituting a value such as $x = 4$ or $x = 64$ catches each of them.`,
     link: '',
   },
 
@@ -1125,8 +1055,51 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 4, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-the-base-by-the-exponent', name: `Multiplying the base by the exponent`, errorAt: 1,
+        what: `A unit fraction exponent is read as an ordinary factor, so the base is multiplied by the fraction instead of having a root taken.`,
+        wrong: [`$$8^{1/3}$$`, `$$= 8 \\cdot \\frac{1}{3} = \\frac{8}{3}$$`],
+        right: [`$$8^{1/3}$$`, `The denominator $3$ is the index of a root.
+$$= \\sqrt[3]{8} = 2$$`],
+        why: `An exponent written as a fraction looks like a number to multiply by, and the meaning "denominator = index" has not yet replaced that first reading.`,
+        check: `Raise the answer to the power of the denominator; it must give back the base. $\\left(\\frac{8}{3}\\right)^3 = \\frac{512}{27}$, which is not $8$, while $2^3 = 8$.` },
+      { id: 'swapping-the-index-and-the-power', name: `Swapping the index and the power`, errorAt: 1,
+        what: `In $a^{m/n}$ the numerator and the denominator trade roles, so the numerator is taken as the index of the root and the denominator as the power.`,
+        wrong: [`$$8^{2/3}$$`, `$$= \\sqrt{8^3} = \\sqrt{512} \\approx 22.6$$`],
+        right: [`$$8^{2/3}$$`, `The denominator $3$ is the index and the numerator $2$ is the power.
+$$= \\sqrt[3]{8^2} = \\sqrt[3]{64} = 4$$`, `Or, root first, $(\\sqrt[3]{8})^2 = 2^2 = 4$.`],
+        why: `The fraction is read from the top down, and the first number seen is taken for the root.`,
+        check: `Estimate the size. The base $8$ is greater than $1$ and the exponent $\\frac{2}{3}$ lies between $0$ and $1$, so the result must lie between $1$ and $8$. The value $22.6$ is too large; $4$ fits.` },
+      { id: 'making-the-result-negative', name: `Making the result negative`, errorAt: 1,
+        what: `The minus sign in the exponent is read as a minus sign on the result.`,
+        wrong: [`$$8^{-2/3}$$`, `$$= -8^{2/3} = -4$$`],
+        right: [`$$8^{-2/3}$$`, `A negative exponent means a reciprocal.
+$$= \\frac{1}{8^{2/3}} = \\frac{1}{4}$$`],
+        why: `Everywhere else in arithmetic a minus sign makes a number negative, and that meaning is carried over to the exponent.`,
+        check: `A positive base raised to any power gives a positive result, so a negative answer from a positive base is always wrong. Also $8^{2/3} \\cdot 8^{-2/3} = 8^0 = 1$: indeed $4 \\cdot \\frac{1}{4} = 1$, while $4 \\cdot (-4) = -16$.` },
+      { id: 'adding-numerators-and-denominators', name: `Adding numerators and denominators`, errorAt: 1,
+        what: `The product rule is applied correctly, but the two exponent fractions are added by adding their numerators and their denominators separately.`,
+        wrong: [`$$x^{1/2} \\cdot x^{1/3}$$`, `$$= x^{\\frac{1 + 1}{2 + 3}} = x^{2/5}$$`],
+        right: [`$$x^{1/2} \\cdot x^{1/3}$$`, `Bring the fractions to a common denominator first.`, `$$\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6},$$
+$$x^{1/2} \\cdot x^{1/3} = x^{5/6}$$`],
+        why: `The attention is on the exponent law, and the fraction sum is done in the quickest-looking way.`,
+        check: `Try a value that is a perfect sixth power, such as $x = 64$. Then $64^{1/2} \\cdot 64^{1/3} = 8 \\cdot 4 = 32$, and $64^{5/6} = 2^5 = 32$, while $64^{2/5} = 2^{12/5} \\approx 5.28$.` },
+      { id: 'adding-the-exponents-of-a-sum', name: `Adding the exponents of a sum`, errorAt: 1,
+        what: `The rule "same base, add the exponents" is used on a sum of two powers, where it does not apply.`,
+        wrong: [`$$x^{1/2} + x^{3/2}$$`, `$$= x^{1/2 + 3/2} = x^2$$`],
+        right: [`$$x^{1/2} + x^{3/2}$$`, `$x^{1/2}$ and $x^{3/2}$ are unlike terms and cannot be combined into one power. The sum can be factored by taking out the smallest exponent.
+$$= x^{1/2}(1 + x)$$`],
+        why: `The product rule is used so often that it gets applied whenever two powers of the same base stand next to each other, whatever the sign between them.`,
+        check: `Substitute $x = 4$. The sum is $4^{1/2} + 4^{3/2} = 2 + 8 = 10$, and $4^{1/2}(1 + 4) = 2 \\cdot 5 = 10$, but $4^2 = 16$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     ratExpDomainCases,
     combineRadicalsSteps,
     sectionsContent,
@@ -1154,7 +1127,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RationalExponentsPage({ratExpDomainCases, combineRadicalsSteps, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RationalExponentsPage({ pitfallData,ratExpDomainCases, combineRadicalsSteps, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1227,7 +1200,7 @@ $$(a^{1/2})^2 = a^{(1/2) \\cdot 2} = a^1 = a$$]@`,
         content: [
           `@academic[pitfall,aside:true,width:35%:Multiplying the base by the exponent
 Reading $8^{1/3}$ as $8 \\cdot \\frac{1}{3} = \\frac{8}{3}$ treats the exponent as a factor. A denominator in the exponent means a root: $8^{1/3} = \\sqrt[3]{8} = 2$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-multiplying-the-base-by-the-exponent)]@`,
           `$(-8)^{1/2}$ would be $\\sqrt{-8}$, which is not a real number. Which bases are allowed is set out in [domain restrictions](!/algebra/roots/rational-exponents#5).`,
         ],
       },
@@ -1374,6 +1347,15 @@ Reading $8^{1/3}$ as $8 \\cdot \\frac{1}{3} = \\frac{8}{3}$ treats the exponent 
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="rational-exponent-pitfalls"
+            title="Common pitfalls with rational exponents"
+            source="/algebra/roots/rational-exponents"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

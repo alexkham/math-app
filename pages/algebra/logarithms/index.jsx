@@ -700,6 +700,7 @@ import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -973,7 +974,7 @@ Consider $\\log_2(8) = 3$. This asks: what power of $2$ gives $8$? Since $2^3 = 
 
 @academic[pitfall,aside:true,width:35%:Swapping base and exponent
 Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 9$, not $8$. The base stays the base: $2^3 = 8$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-base-and-exponent)]@
 
 The base sits as a subscript, the argument sits inside parentheses, and the output is the exponent. Every logarithm can be rewritten as an exponential equation, and every exponential equation can be rewritten using logarithms. This duality is the foundation of all logarithmic work — converting between forms is often the first step in solving problems.`,
   before: ``,
@@ -1076,7 +1077,7 @@ The quotient rule: $\\log_a(x/y) = \\log_a(x) - \\log_a(y)$. Division becomes su
 
 @academic[pitfall,aside:true,width:35%:Splitting the logarithm of a sum
 Writing $\\log_2(4 + 4)$ as $\\log_2(4) + \\log_2(4) = 4$ treats a sum like a product. The true value is $\\log_2(8) = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-the-logarithm-of-a-sum)]@
 
 These rules allow expanding complex logarithms into simpler pieces and condensing sums of logarithms into single expressions. Both skills appear constantly when solving [equations](!/algebra/logarithms/equations). The change of base formula converts logarithms from one base to another, enabling calculator computation for any base.`,
   before: ``,
@@ -1091,7 +1092,7 @@ An equation like $\\log_2(x) = 5$ converts directly to exponential form: $x = 2^
 
 @academic[pitfall,aside:true,width:35%:Rejecting a negative solution
 Rejecting $x = -1$ in $\\log_2(x + 5) = 2$ because it is negative throws away the only solution. The condition is on the argument: $-1 + 5 = 4 > 0$ and $\\log_2(4) = 2$, so $x = -1$ is valid.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-rejecting-a-negative-solution)]@
 
 More complex equations require the [rules](!/algebra/logarithms/rules) to combine or separate logarithms before these techniques apply. Every solution must be checked against domain restrictions — the argument of every logarithm must be positive. Extraneous solutions that violate these restrictions must be rejected. The [logarithmic equation solver](!/algebra/calculators/equations/logarithmic) works through both forms step by step and rejects answers outside the domain.
 
@@ -1099,7 +1100,7 @@ Logarithms also solve exponential equations when matching bases fails. An equati
 
 @academic[pitfall,aside:true,width:35%:Reading a ratio of logs as a log of a ratio
 Turning $\\frac{\\log(7)}{\\log(3)}$ into $\\log\\left(\\frac{7}{3}\\right) \\approx 0.368$ applies the quotient rule where it does not hold. The two logs are divided as numbers: $x \\approx \\frac{0.845}{0.477} \\approx 1.771$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-ratio-of-logs-as-a-log-of-a-ratio)]@
 
 The answer $x = \\log(7)/\\log(3)$ is a ratio of two separate logarithms, one in the numerator and one in the denominator. A calculator evaluates each of them on its own, $\\log(7) \\approx 0.845$ and $\\log(3) \\approx 0.477$, and only then are the two values divided. A quick estimate shows what size of answer to expect: $3^1 = 3$ and $3^2 = 9$ lie on either side of $7$, so $x$ must fall between $1$ and $2$. Substituting the result back into $3^x$ should return a value close to $7$.`,
   before: ``,
@@ -1182,66 +1183,9 @@ Transformations shift, stretch, and reflect the basic shape. Horizontal shifts m
   
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes cause most wrong answers in early work with logarithms. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Swapping base and exponent**
-
-A logarithm is rewritten in exponential form, but the three numbers land in the wrong places: the value of the logarithm becomes the base of the power instead of its exponent.
-
-Wrong working:
-$$\\log_2(8) = 3 \\implies 3^2 = 8$$
-
-Right working: the base of the logarithm is the base of the power, the value of the logarithm is the exponent, and the argument is the result.
-$$\\log_2(8) = 3 \\iff 2^3 = 8$$
-
-Why it happens: both forms use the same three numbers, and the small subscript base is easy to read as just another number to place.
-
-How to check: work out the power that was written. $3^2 = 9$, which is not $8$, while $2^3 = 8$ is true.
-
-**Splitting the logarithm of a sum**
-
-The product rule is applied to a sum, as if the logarithm could be distributed over addition.
-
-Wrong working:
-$$\\log_2(4 + 4) = \\log_2(4) + \\log_2(4) = 2 + 2 = 4$$
-
-Right working: add first, then take the logarithm.
-$$\\log_2(4 + 4) = \\log_2(8) = 3$$
-No rule splits the logarithm of a sum. The product rule needs a product: $\\log_2(4 \\cdot 4) = \\log_2(16) = 4 = \\log_2(4) + \\log_2(4)$.
-
-Why it happens: the product rule looks like the distributive law, and the habit of distributing over a sum carries over to the logarithm.
-
-How to check: try the simplest numbers. $\\log_{10}(1 + 1) = \\log_{10}(2) \\approx 0.301$, but $\\log_{10}(1) + \\log_{10}(1) = 0$.
-
-**Rejecting a negative solution**
-
-The domain check is applied to the variable instead of to the arguments, so a negative value of $x$ is thrown out even though every argument is positive.
-
-Wrong working:
-$$\\log_2(x + 5) = 2 \\implies x + 5 = 2^2 = 4 \\implies x = -1$$
-and $x = -1$ is rejected because it is negative, leaving no solution.
-
-Right working: the domain is $x + 5 > 0$, that is $x > -5$. The value $x = -1$ satisfies it, and $\\log_2(-1 + 5) = \\log_2(4) = 2$. The solution is $x = -1$.
-
-Why it happens: the rule "logarithms of negative numbers do not exist" gets shortened to "negative numbers are not allowed", and the condition moves from the argument to $x$.
-
-How to check: substitute the candidate into each argument and look at the sign of the argument, not the sign of $x$.
-
-**Reading a ratio of logs as a log of a ratio**
-
-After solving an exponential equation with logarithms, the answer is a quotient of two logarithms, and the quotient rule is applied to it backwards.
-
-Wrong working:
-$$3^x = 7 \\implies x = \\frac{\\log(7)}{\\log(3)} = \\log(7) - \\log(3) = \\log\\left(\\frac{7}{3}\\right) \\approx 0.368$$
-
-Right working: the two logarithms are evaluated separately and then divided.
-$$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$
-
-Why it happens: the quotient rule $\\log\\left(\\frac{x}{y}\\right) = \\log(x) - \\log(y)$ also has a fraction and logarithms in it, and the two forms look alike at a glance. The rule is about the logarithm of a quotient, not a quotient of logarithms.
-
-How to check: raise $3$ to the answer. $3^{0.368} \\approx 1.50$, far from $7$, while $3^{1.771} \\approx 7.00$.`,
+      content:`Four mistakes cause most wrong answers in early work with logarithms. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Two of the four slips misread what a logarithm is: the exponential form puts the numbers in the wrong places, or a negative value of $x$ is taken for a negative argument. The other two use rules that do not exist, one splitting the logarithm of a sum and one turning a ratio of logarithms into the logarithm of a ratio. Converting back to exponential form, $\\log_a(x) = y$ exactly when $a^y = x$, checks every one of them.`,
       link:'',
     }
 
@@ -1433,8 +1377,42 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'swapping-base-and-exponent', name: `Swapping base and exponent`, errorAt: 1,
+        what: `A logarithm is rewritten in exponential form, but the three numbers land in the wrong places: the value of the logarithm becomes the base of the power instead of its exponent.`,
+        wrong: [`$$\\log_2(8) = 3$$`, `$$\\implies 3^2 = 8$$`],
+        right: [`$$\\log_2(8) = 3$$`, `The base of the logarithm is the base of the power, the value of the logarithm is the exponent, and the argument is the result.`, `$$\\iff 2^3 = 8$$`],
+        why: `Both forms use the same three numbers, and the small subscript base is easy to read as just another number to place.`,
+        check: `Work out the power that was written. $3^2 = 9$, which is not $8$, while $2^3 = 8$ is true.` },
+      { id: 'splitting-the-logarithm-of-a-sum', name: `Splitting the logarithm of a sum`, errorAt: 1,
+        what: `The product rule is applied to a sum, as if the logarithm could be distributed over addition.`,
+        wrong: [`$$\\log_2(4 + 4)$$`, `$$= \\log_2(4) + \\log_2(4) = 2 + 2 = 4$$`],
+        right: [`$$\\log_2(4 + 4)$$`, `Add first, then take the logarithm.
+$$= \\log_2(8) = 3$$`, `No rule splits the logarithm of a sum. The product rule needs a product: $\\log_2(4 \\cdot 4) = \\log_2(16) = 4 = \\log_2(4) + \\log_2(4)$.`],
+        why: `The product rule looks like the distributive law, and the habit of distributing over a sum carries over to the logarithm.`,
+        check: `Try the simplest numbers. $\\log_{10}(1 + 1) = \\log_{10}(2) \\approx 0.301$, but $\\log_{10}(1) + \\log_{10}(1) = 0$.` },
+      { id: 'rejecting-a-negative-solution', name: `Rejecting a negative solution`, errorAt: 3,
+        what: `The domain check is applied to the variable instead of to the arguments, so a negative value of $x$ is thrown out even though every argument is positive.`,
+        wrong: [`$$\\log_2(x + 5) = 2$$`, `$$\\implies x + 5 = 2^2 = 4$$`, `$$\\implies x = -1$$`, `And $x = -1$ is rejected because it is negative, leaving no solution.`],
+        right: [`$$\\log_2(x + 5) = 2$$`, `$$\\implies x + 5 = 2^2 = 4$$`, `$$\\implies x = -1$$`, `The domain is $x + 5 > 0$, that is $x > -5$. The value $x = -1$ satisfies it, and $\\log_2(-1 + 5) = \\log_2(4) = 2$. The solution is $x = -1$.`],
+        why: `The rule "logarithms of negative numbers do not exist" gets shortened to "negative numbers are not allowed", and the condition moves from the argument to $x$.`,
+        check: `Substitute the candidate into each argument and look at the sign of the argument, not the sign of $x$.` },
+      { id: 'reading-a-ratio-of-logs-as-a-log-of-a-ratio', name: `Reading a ratio of logs as a log of a ratio`, errorAt: 2,
+        what: `After solving an exponential equation with logarithms, the answer is a quotient of two logarithms, and the quotient rule is applied to it backwards.`,
+        wrong: [`$$3^x = 7$$`, `$$\\implies x = \\frac{\\log(7)}{\\log(3)}$$`, `$$= \\log(7) - \\log(3) = \\log\\left(\\frac{7}{3}\\right) \\approx 0.368$$`],
+        right: [`$$3^x = 7$$`, `$$\\implies x = \\frac{\\log(7)}{\\log(3)}$$`, `The two logarithms are evaluated separately and then divided.
+$$\\approx \\frac{0.845}{0.477} \\approx 1.771$$`],
+        why: `The quotient rule $\\log\\left(\\frac{x}{y}\\right) = \\log(x) - \\log(y)$ also has a fraction and logarithms in it, and the two forms look alike at a glance. The rule is about the logarithm of a quotient, not a quotient of logarithms.`,
+        check: `Raise $3$ to the answer. $3^{0.368} \\approx 1.50$, far from $7$, while $3^{1.771} \\approx 7.00$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     faqQuestions,
     logInequalityCases,
     demoUnits,
@@ -1459,7 +1437,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LogarithmsPage({faqQuestions, logInequalityCases,
+export default function LogarithmsPage({ pitfallData,faqQuestions, logInequalityCases,
   seoData,
   sectionsContent,
   introContent,
@@ -1520,7 +1498,7 @@ export default function LogarithmsPage({faqQuestions, logInequalityCases,
           `Consider $\\log_2(8) = 3$. This asks: what power of $2$ gives $8$? Since $2^3 = 8$, the answer is $3$. Similarly, $\\log_{10}(1000) = 3$ because $10^3 = 1000$, and $\\log_5(25) = 2$ because $5^2 = 25$.`,
           `@academic[pitfall,aside:true,width:35%:Swapping base and exponent
 Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 9$, not $8$. The base stays the base: $2^3 = 8$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-swapping-base-and-exponent)]@`,
           `The base sits as a subscript, the argument sits inside parentheses, and the output is the exponent. Every logarithm can be rewritten as an exponential equation, and every exponential equation can be rewritten using logarithms. This duality is the foundation of all logarithmic work — converting between forms is often the first step in solving problems.`,
         ],
       },
@@ -1672,6 +1650,15 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="logarithm-pitfalls"
+            title="Common pitfalls with logarithms"
+            source="/algebra/logarithms"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1578,6 +1578,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -2237,6 +2238,27 @@ const faqQuestions = {
 //   }
 
 
+
+// Concept introduction (section 1, "The Sine Function") — template E,
+// widening. Running instance: sine of 30°, 90°, 150°, 270° and −30°, from
+// the triangle where it exists and from the unit circle everywhere. Old obj1
+// text is kept in sectionsContent.obj1, unused; its six passages, formula box
+// and link, fact aside, the sin demo frame and its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciAnglesTable = ciTableOpen(['angle', 'right triangle possible?', 'unit circle: y-coordinate', 'sin']) +
+  ciRow(['30°', 'yes', '1/2', '1/2']) +
+  ciRow(['90°', 'no', '1', '1'], { shade: true }) +
+  ciRow(['150°', 'no', '1/2', '1/2']) +
+  ciRow(['270°', 'no', '−1', '−1'], { shade: true }) +
+  ciRow(['−30°', 'no', '−1/2', '−1/2'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent={
 
@@ -2934,6 +2956,10 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
     note: 'one value plus a quadrant fixes all six', noteX: 310,
   };
 
+  const conceptIntroFigures = {
+    anglesTable: ciAnglesTable,
+  };
+
   const demoUnits = {
     sin: demoUnitFrame({
       svg: unitCircleDiagrams.functions.sin,
@@ -3057,6 +3083,7 @@ This shift in perspective opens up the full toolkit of function analysis. Each o
     sixTrigOutline,
     sineCosineBeforeAfter,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj7Table,
@@ -3092,9 +3119,80 @@ Whether you are analyzing waveforms, studying rotations, or decomposing function
     }
    }
 
-export default function FunctionsPage({sixTrigOutline, sineCosineBeforeAfter, seoData,sectionsContent , introContent, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function FunctionsPage({sixTrigOutline, sineCosineBeforeAfter, seoData,sectionsContent , introContent, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template E (widening).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `In a right triangle, sin θ is opposite over hypotenuse — but only for angles between 0° and 90°.`,
+        content: [
+          `A right triangle cannot have an angle of $150°$ or $-30°$. Rotations, waves and cycles need the sine of every angle.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Beyond 90° the triangle disappears, but the unit circle still gives a value.`,
+        content: [
+          ciTable('anglesTable'),
+          `On the unit circle the hypotenuse is $1$, so for an acute angle the $y$-coordinate equals opposite over hypotenuse. For every other angle the $y$-coordinate simply keeps going.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **sine function** assigns to every real number $\\theta$ the $y$-coordinate of the point at angle $\\theta$ on the unit circle; for acute angles this is the [sine](!/trigonometry/definitions#sine) ratio, opposite over hypotenuse.`,
+        formula: [
+          `In a right triangle, the sine of an acute angle $\\theta$ is the ratio of the side opposite to $\\theta$ to the hypotenuse:`,
+          `@academic[formula_callout:Sine Definition
+$$\\sin\\theta = \\frac{\\text{side opposite to }\\theta}{\\text{hypotenuse}}$$
+/trigonometry/formulas#sine_definition]@`,
+          `@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@`,
+          `This ratio is bounded above by 1 (the hypotenuse is always the longest side) and is positive for any acute angle. The right-triangle definition is restricted to $0 < \\theta < \\frac{\\pi}{2}$; the [unit circle](!/trigonometry/unit-circle) extends the function to every real number by reinterpreting $\\sin\\theta$ as the $y$-coordinate of the point on the circle at angle $\\theta$.`,
+        ],
+        footer: `So $\\sin 30° = \\frac{1}{2}$ from the triangle, while $\\sin 150° = \\frac{1}{2}$ and $\\sin 270° = -1$ come from the circle.`,
+      },
+      {
+        id: 'kind',
+        lead: `Extended this way, sine is a function on the whole real line, with values from −1 to 1.`,
+        content: [
+          `Once extended, the domain of sine becomes the entire real line, and its range is the closed interval $[-1, 1]$. The function equals zero whenever the terminal side of $\\theta$ lies on the $x$-axis — at $\\theta = n\\pi$ for every integer $n$. It reaches its maximum of $1$ at $\\theta = \\frac{\\pi}{2} + 2n\\pi$ and its minimum of $-1$ at $\\theta = \\frac{3\\pi}{2} + 2n\\pi$.`,
+          `Sine is periodic with period $2\\pi$: $\\sin(\\theta + 2\\pi) = \\sin(\\theta)$ for all $\\theta$. It is an odd function: $\\sin(-\\theta) = -\\sin(\\theta)$, which means its [graph](!/trigonometry/graphs) is symmetric about the origin. On the interval $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, sine is strictly increasing — a fact that becomes essential when defining the [inverse sine function](!/trigonometry/inverse-functions).`,
+          <div key={'unit-sin'} dangerouslySetInnerHTML={{ __html: demoUnits.sin }} />,
+          `The graph of the sine function is nothing more than this leg length plotted against the angle.`,
+          `Because the sine function is continuous, bounded, periodic, and smooth, it serves as the prototype for modeling any oscillating quantity. The general sinusoidal model $y = A\\sin(Bx - C) + D$ modifies amplitude, period, phase, and baseline, but the underlying behavior is always that of the sine function.`,
+          `@academic[fact,aside:true,width:35%:Sine began as half a bowstring
+Indian astronomers tabulated the half-chord of a circle, the vertical leg in the unit circle picture, and called it jyā, a bowstring. Arabic copied it as jb, written without vowels and later read as jayb, a fold or pocket, which Latin translated as sinus.]@`,
+        ],
+      },
+      {
+        id: 'survives',
+        lead: `Nothing is lost for acute angles: the circle reproduces every triangle value.`,
+        content: [
+          `In the first row the triangle and the circle agree: $\\sin 30° = \\frac{1}{2}$ either way. The same holds for every angle between $0°$ and $90°$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The extension brings negative values, which no ratio of side lengths can produce.`,
+        content: [
+          `$\\sin 270° = -1$ has no triangle behind it; its sign comes from where the point sits on the circle, below the $x$-axis.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the cosine, tangent, cosecant, secant and cotangent functions, notation, and how the six functions relate.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -3111,9 +3209,7 @@ export default function FunctionsPage({sixTrigOutline, sineCosineBeforeAfter, se
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-sin'} dangerouslySetInnerHTML={{ __html: demoUnits.sin }} />,
-          `The graph of the sine function is nothing more than this leg length plotted against the angle.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

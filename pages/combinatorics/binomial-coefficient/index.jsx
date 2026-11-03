@@ -1103,6 +1103,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 import renderBinomialCurve from '@/app/utils/illustrations/combinatorics/binomial/binomialCurve'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import combinatoricsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/combinatorics'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1697,7 +1701,7 @@ A sum running down a diagonal of Pascal's triangle equals a single entry one row
 
 @academic[pitfall,aside:true,width:35%:Taking the entry from the last row of the sum
 Writing $\\sum_{i=2}^{5} \\binom{i}{2}$ as $\\binom{5}{3} = 10$ stops one row too early and gives half the actual total. The upper index is $n + 1$: $\\binom{6}{3} = 20$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-entry-from-the-last-row-of-the-sum)]@
 
 Take $k = 2$ and $n = 5$. The sum $\\binom{2}{2} + \\binom{3}{2} + \\binom{4}{2} + \\binom{5}{2} = 1 + 3 + 6 + 10 = 20$ adds the first four triangular numbers, which run down one diagonal of the triangle. The identity names this total as a single coefficient, so a long diagonal sum never has to be added term by term.
 
@@ -1722,7 +1726,7 @@ Each interior entry equals the sum of the two entries directly above it — the 
 
 @academic[pitfall,aside:true,width:35%:Counting rows and positions from 1
 Calling the top $1$ row $1$ and the left edge position $1$ reads $\\binom{5}{2}$ off the row $1, 4, 6, 4, 1$ as $4$. Counting both from $0$, row $5$ is $1, 5, 10, 10, 5, 1$ and $\\binom{5}{2} = 10$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-rows-and-positions-from-1)]@
 
 To read a value off the triangle, locate it by two counts: the row, counted down from the single $1$ at the top, and the position within the row, counted from the left edge. Both counts follow the indices of $\\binom{n}{k}$, so a lookup in the triangle needs no formula at all. For small $n$ this is the quickest way to get a binomial coefficient, and it shows the neighbouring values at the same time.
 
@@ -1783,7 +1787,7 @@ The multinomial coefficient counts the number of distinct arrangements of $n$ it
 
 @academic[pitfall,aside:true,width:35%:Using the multinomial for unnamed groups
 Using $\\binom{6}{2, 2, 2} = 90$ for the ways to split $6$ people into $3$ pairs counts each split $3! = 6$ times, once for every way of naming the pairs. The number of pairings is $90 / 6 = 15$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-multinomial-for-unnamed-groups)]@
 
 In the group reading, each group has its own size and its own name: group $1$ receives $k_1$ items, group $2$ receives $k_2$ items, and so on.
 
@@ -1827,58 +1831,10 @@ The page covered the formal definition and notation, the network of identities t
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when working with binomial coefficients. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Dropping the k! in the denominator**
-
-The binomial coefficient is computed as the product $n(n-1)\\cdots(n-k+1)$ alone, without dividing by $k!$. That product counts ordered selections, in which the same group picked in a different order is counted again.
-
-Wrong working: the number of ways to choose $2$ of $50$ items is given as $50 \\cdot 49 = 2450$.
-
-Right working: $\\binom{50}{2} = \\frac{50!}{2!\\,48!} = \\frac{50 \\cdot 49}{2!} = \\frac{2450}{2} = 1225$.
-
-Why it happens: after the factorials cancel, the product on top looks like the whole computation, and the small $k!$ underneath is easy to forget. The same product without the division is the correct count of [permutations](!/combinatorics/permutations), so it looks familiar.
-
-How to check: try a case small enough to list. The pairs from $\\{1, 2, 3\\}$ are $\\{1, 2\\}$, $\\{1, 3\\}$ and $\\{2, 3\\}$: three of them, while $3 \\cdot 2 = 6$. A product without $k!$ is always $k!$ times too large.
-
-**Taking the entry from the last row of the sum**
-
-The hockey stick sum $\\sum_{i=k}^{n} \\binom{i}{k}$ is written as a coefficient from row $n$, where the sum stops, instead of from the row below it.
-
-Wrong working: $\\binom{2}{2} + \\binom{3}{2} + \\binom{4}{2} + \\binom{5}{2} = \\binom{5}{3} = 10$.
-
-Right working: the identity gives $\\binom{n+1}{k+1}$ with $n = 5$ and $k = 2$, so the sum is $\\binom{6}{3} = 20$. Adding directly confirms it: $1 + 3 + 6 + 10 = 20$.
-
-Why it happens: the upper limit of the sum is $n$, and that $n$ is copied into the answer without the shift. In the triangle, the total sits one row below the last term of the diagonal, a step that is easy to miss.
-
-How to check: add the first two terms by hand. $\\binom{2}{2} + \\binom{3}{2} = 1 + 3 = 4 = \\binom{4}{3}$, while the last row of that sum gives $\\binom{3}{3} = 1$.
-
-**Counting rows and positions from 1**
-
-Pascal's triangle is read with the top row as row $1$ and the left edge as position $1$. The triangle is indexed from $0$ in both directions, so this lands one row above and one position to the left of the intended entry.
-
-Wrong working: for $\\binom{5}{2}$, the fifth row from the top is $1, 4, 6, 4, 1$, its second number is $4$, and $\\binom{5}{2} = 4$ is reported.
-
-Right working: the top row is row $0$, so row $5$ is $1, 5, 10, 10, 5, 1$. Its positions are $k = 0, 1, \\ldots, 5$, and position $2$ is the third number: $\\binom{5}{2} = 10$.
-
-Why it happens: everyday counting starts at $1$, and the triangle carries no labels. The count from $0$ comes from the left edge $\\binom{n}{0} = 1$ and the single entry $\\binom{0}{0} = 1$ at the top.
-
-How to check: row $n$ has $n + 1$ entries, and its second entry is $\\binom{n}{1} = n$. Row $5$ must start $1, 5$; a row that starts $1, 4$ is row $4$.
-
-**Using the multinomial for unnamed groups**
-
-The multinomial coefficient is used to split items into groups of equal size that have no names. The coefficient counts splits into named groups, so each split into unnamed groups is counted once for every way of naming them.
-
-Wrong working: the number of ways to pair up $6$ people is given as $\\binom{6}{2, 2, 2} = \\frac{720}{8} = 90$.
-
-Right working: the $90$ counts splits into a first, a second and a third pair. Any one pairing can be labelled in $3! = 6$ ways, so the number of pairings is $\\frac{90}{6} = 15$.
-
-Why it happens: the formula has a slot for each group size, and nothing in it asks whether the groups have names. When the sizes are all different, the sizes themselves tell the groups apart and no division is needed, which makes the equal-size case easy to overlook.
-
-How to check: count directly. Person $1$ has $5$ possible partners, then the first person left over has $3$, and the last two form the final pair: $5 \\cdot 3 \\cdot 1 = 15$.`,
+    content: `Four mistakes come up again and again when working with binomial coefficients. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
     between: ``,
-    after: ``,
+    after: `Each slip misreads a formula or a picture. $\\binom{n}{k}$ divides by $k!$, the hockey-stick sum lands one row below its last term and one place to the right, the rows and positions of Pascal's triangle are counted from $0$, and groups without names divide the multinomial by the number of ways to order the groups. A case small enough to list settles each of them.`,
     link: '',
   },
   faq: {
@@ -2036,8 +1992,40 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-k-in-the-denominator', name: `Dropping the k! in the denominator`, errorAt: 0,
+        what: `The binomial coefficient is computed as the product $n(n-1)\\cdots(n-k+1)$ alone, without dividing by $k!$. That product counts ordered selections, in which the same group picked in a different order is counted again.`,
+        wrong: [`The number of ways to choose $2$ of $50$ items is given as $50 \\cdot 49 = 2450$.`],
+        right: [`$\\binom{50}{2} = \\frac{50!}{2!\\,48!} = \\frac{50 \\cdot 49}{2!} = \\frac{2450}{2} = 1225$.`],
+        why: `After the factorials cancel, the product on top looks like the whole computation, and the small $k!$ underneath is easy to forget. The same product without the division is the correct count of [permutations](!/combinatorics/permutations), so it looks familiar.`,
+        check: `Try a case small enough to list. The pairs from $\\{1, 2, 3\\}$ are $\\{1, 2\\}$, $\\{1, 3\\}$ and $\\{2, 3\\}$: three of them, while $3 \\cdot 2 = 6$. A product without $k!$ is always $k!$ times too large.` },
+      { id: 'taking-the-entry-from-the-last-row-of-the-sum', name: `Taking the entry from the last row of the sum`, errorAt: 0,
+        what: `The hockey stick sum $\\sum_{i=k}^{n} \\binom{i}{k}$ is written as a coefficient from row $n$, where the sum stops, instead of from the row below it.`,
+        wrong: [`$\\binom{2}{2} + \\binom{3}{2} + \\binom{4}{2} + \\binom{5}{2} = \\binom{5}{3} = 10$.`],
+        right: [`The identity gives $\\binom{n+1}{k+1}$ with $n = 5$ and $k = 2$, so the sum is $\\binom{6}{3} = 20$. Adding directly confirms it: $1 + 3 + 6 + 10 = 20$.`],
+        why: `The upper limit of the sum is $n$, and that $n$ is copied into the answer without the shift. In the triangle, the total sits one row below the last term of the diagonal, a step that is easy to miss.`,
+        check: `Add the first two terms by hand. $\\binom{2}{2} + \\binom{3}{2} = 1 + 3 = 4 = \\binom{4}{3}$, while the last row of that sum gives $\\binom{3}{3} = 1$.` },
+      { id: 'counting-rows-and-positions-from-1', name: `Counting rows and positions from 1`, errorAt: 1,
+        what: `Pascal's triangle is read with the top row as row $1$ and the left edge as position $1$. The triangle is indexed from $0$ in both directions, so this lands one row above and one position to the left of the intended entry.`,
+        wrong: [`For $\\binom{5}{2}$,`, `The fifth row from the top is $1, 4, 6, 4, 1$, its second number is $4$, and $\\binom{5}{2} = 4$ is reported.`],
+        right: [`For $\\binom{5}{2}$,`, `The top row is row $0$, so row $5$ is $1, 5, 10, 10, 5, 1$. Its positions are $k = 0, 1, \\ldots, 5$, and position $2$ is the third number: $\\binom{5}{2} = 10$.`],
+        why: `Everyday counting starts at $1$, and the triangle carries no labels. The count from $0$ comes from the left edge $\\binom{n}{0} = 1$ and the single entry $\\binom{0}{0} = 1$ at the top.`,
+        check: `Row $n$ has $n + 1$ entries, and its second entry is $\\binom{n}{1} = n$. Row $5$ must start $1, 5$; a row that starts $1, 4$ is row $4$.` },
+      { id: 'using-the-multinomial-for-unnamed-groups', name: `Using the multinomial for unnamed groups`, errorAt: 0,
+        what: `The multinomial coefficient is used to split items into groups of equal size that have no names. The coefficient counts splits into named groups, so each split into unnamed groups is counted once for every way of naming them.`,
+        wrong: [`The number of ways to pair up $6$ people is given as $\\binom{6}{2, 2, 2} = \\frac{720}{8} = 90$.`],
+        right: [`The $90$ counts splits into a first, a second and a third pair. Any one pairing can be labelled in $3! = 6$ ways, so the number of pairings is $\\frac{90}{6} = 15$.`],
+        why: `The formula has a slot for each group size, and nothing in it asks whether the groups have names. When the sizes are all different, the sizes themselves tell the groups apart and no division is needed, which makes the equal-size case easy to overlook.`,
+        check: `Count directly. Person $1$ has $5$ possible partners, then the first person left over has $3$, and the last two form the final pair: $5 \\cdot 3 \\cdot 1 = 15$.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -2059,7 +2047,7 @@ const schemas = {
     }
    }
 
-export default function BinomialCoefficientPage({seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function BinomialCoefficientPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2133,7 +2121,7 @@ $$\\binom{x}{k} = \\frac{x(x-1)(x-2) \\cdots (x-k+1)}{k!}, \\quad k \\in \\mathb
           `The triangle is quickest for small $n$ and makes identities visible — symmetry, row sums, the adding rule. The count is what gives a binomial coefficient its meaning in a problem. The factorial formula is the one to compute with once $n$ is large: no one builds row $50$ by hand, but $\\binom{50}{2} = \\frac{50 \\cdot 49}{2} = 1225$ takes a line.`,
           `@academic[pitfall,aside:true,width:35%:Dropping the k! in the denominator
 Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so every pair is counted twice. Dividing by $2! = 2$ gives $\\binom{50}{2} = 1225$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-dropping-the-k-in-the-denominator)]@`,
           `The factorial formula cancels down to a short product before any large factorial is computed: $\\frac{n!}{k!\\,(n-k)!} = \\frac{n(n-1)\\cdots(n-k+1)}{k!}$, with $k$ factors on top. The top counts the ways to pick $k$ items one after another, as a first, a second and so on. The bottom counts the orders in which the same $k$ items can be picked, which is why it appears whenever order does not matter.`,
           `To evaluate the factorials in this formula for specific values, use the [factorial calculator](!/calculators/factorial-calculator).`,
         ],
@@ -2179,6 +2167,11 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={combinatoricsNotationSheet}
+            current={'/combinatorics/binomial-coefficient'}
+          />,
         ]
     },
     {
@@ -2218,6 +2211,15 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="binomial-coefficient-pitfalls"
+            title="Common pitfalls with binomial coefficients"
+            source="/combinatorics/binomial-coefficient"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

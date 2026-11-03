@@ -21,6 +21,10 @@ import divisibilityTilesDiagrams from '@/app/components/divisibility/divisibilit
 import eratosthenesSieveDiagrams from '@/app/components/visualizations/arithmetic/eratosthenesSieveDiagrams'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 export async function getStaticProps(){
 
@@ -300,7 +304,7 @@ $$a \\mid b \\quad \\text{means} \\quad b = a \\cdot k \\;\\text{ for some integ
 
 @academic[pitfall,aside:true,width:35%:Reading the bar as division
 Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. The divisor comes first: $3 \\mid 12$ asks whether $12 \\div 3$ is a whole number, and it is, while $12 \\mid 3$ is false.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-bar-as-division)]@
 
 The expression $3 \\mid 12$ is true because $12 = 3 \\cdot 4$. The expression $5 \\mid 12$ is false because no integer $k$ satisfies $12 = 5 \\cdot k$ — the closest are $5 \\cdot 2 = 10$ and $5 \\cdot 3 = 15$, neither of which equals $12$.
 
@@ -399,7 +403,7 @@ A number is divisible by $2$ if its last digit is even. By $5$ if its last digit
 
 @academic[pitfall,aside:true,width:35%:Testing 3 by the last digit
 Checking only the last digit, as for $2$ and $5$, gets $3$ wrong both ways: $13$ ends in $3$ but $3 \\nmid 13$, and $27$ ends in $7$ yet $27 = 3 \\cdot 9$. The digit sum decides: $1 + 3 = 4$ is not a multiple of $3$, and $2 + 7 = 9$ is.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-testing-3-by-the-last-digit)]@
 
 Each rule exploits the structure of base-$10$ place value. The last digit determines divisibility by $2$ and $5$ because $10$ is divisible by both. The digit-sum rule for $9$ works because $10 \\equiv 1 \\pmod{9}$, as explained on the [modular arithmetic](!/arithmetic/modulo/operations) page.
 
@@ -431,7 +435,7 @@ obj6: {
 
 @academic[pitfall,aside:true,width:35%:Mixing up factors and multiples
 Calling $48$ a factor of $24$ swaps the two roles. Since $48 = 24 \\cdot 2$, it is $24$ that divides $48$: $48$ is a multiple of $24$, and $24$ is a factor of $48$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-mixing-up-factors-and-multiples)]@
 
 The factors of a number are finite. The number $24$ has exactly eight factors: $1, 2, 3, 4, 6, 8, 12, 24$. Every integer greater than $1$ has at least two factors — $1$ and itself — and most have more.
 
@@ -451,7 +455,7 @@ Primes are the atoms of multiplication. Every integer greater than $1$ is either
 
 @academic[pitfall,aside:true,width:35%:Taking odd numbers for primes
 Calling $9$, $15$ or $91$ prime because they are odd misses $9 = 3 \\cdot 3$, $15 = 3 \\cdot 5$ and $91 = 7 \\cdot 13$. Being odd only rules out the factor $2$; an odd number still has to be tested against the odd primes.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-odd-numbers-for-primes)]@
 
 The first primes are $2, 3, 5, 7, 11, 13, 17, 19, 23, 29, \\ldots$ — an infinite sequence with no largest member. The number $2$ is the only even prime; every other even number is divisible by $2$ and therefore composite.
 
@@ -481,7 +485,7 @@ Prime factorization reveals the divisor structure of a number. The number of fac
 
 @academic[pitfall,aside:true,width:35%:Multiplying the exponents
 Counting the factors of $84 = 2^2 \\cdot 3 \\cdot 7$ as $2 \\cdot 1 \\cdot 1 = 2$ leaves out almost all of them. Adding $1$ to each exponent gives $(2 + 1)(1 + 1)(1 + 1) = 12$, the true count.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-exponents)]@
 
 A factor of $n$ is built by deciding how many copies of each prime to take, from none up to the exponent. For $84 = 2^2 \\cdot 3 \\cdot 7$, a factor takes $0$, $1$ or $2$ twos, $0$ or $1$ three and $0$ or $1$ seven: for example $2^1 \\cdot 3^0 \\cdot 7^1 = 14$. Different choices give different factors, by the uniqueness of the factorization.
 
@@ -512,7 +516,7 @@ For $4$ and $6$: $4 \\cdot 6 = 24$, and $\\gcd(4,6) \\cdot \\text{lcm}(4,6) = 2 
 
 @academic[pitfall,aside:true,width:35%:Multiplying to get the LCM
 Taking $4 \\cdot 6 = 24$ as $\\text{lcm}(4, 6)$ gives a common multiple, but not the least: $12$ is smaller and both $4$ and $6$ divide it. The product equals the LCM only when the GCD is $1$, as for $4$ and $9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-to-get-the-lcm)]@
 
 Read the other way, the identity gives the LCM from the GCD: $\\text{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$. The product $a \\cdot b$ is always a common multiple of the two numbers, and dividing it by their greatest common divisor brings it down to the least one.
 
@@ -583,81 +587,9 @@ obj10: {
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Six mistakes account for many of the wrong answers in divisibility work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the bar as division**
-
-The vertical bar in $a \\mid b$ is read like a division sign or a fraction bar, so $3 \\mid 12$ is taken to mean $3$ divided by $12$. The two numbers swap roles, and true statements look false.
-
-Wrong working: $3 \\mid 12$ means $3 \\div 12 = 0.25$, which is not a whole number, so $3 \\mid 12$ is false.
-
-Right working: $3 \\mid 12$ claims $12 = 3 \\cdot k$ for some integer $k$. With $k = 4$ the claim holds, so $3 \\mid 12$ is true. The reversed statement $12 \\mid 3$ would need $3 = 12 \\cdot k$, and no integer $k$ works, so it is false.
-
-Why it happens: in $\\frac{3}{12}$, $3 / 12$ and $3 \\div 12$ the first number is the one being divided; in $3 \\mid 12$ the first number does the dividing. The upright bar also looks like the slash of a fraction.
-
-How to check: for $b \\neq 0$, $a \\mid b$ can only hold when $|a| \\leq |b|$. So $12 \\mid 3$ is false at a glance, and $3 \\mid 12$ is settled by $12 \\div 3 = 4$.
-
-**Testing 3 by the last digit**
-
-The last-digit tests for $2$, $5$ and $10$ are carried over to $3$, and a number is judged by whether its last digit is a multiple of $3$.
-
-Wrong working: $13$ ends in $3$, so $3 \\mid 13$; $27$ ends in $7$, so $3 \\nmid 27$.
-
-Right working: the digit sum decides. $1 + 3 = 4$ is not a multiple of $3$, so $3 \\nmid 13$, and indeed $13 = 3 \\cdot 4 + 1$. $2 + 7 = 9$ is a multiple of $3$, so $3 \\mid 27$, and indeed $27 = 3 \\cdot 9$.
-
-Why it happens: the last-digit rules are learned first and are the simplest, so the same kind of rule is expected for every divisor. They work only for divisors of $10$: every number is a multiple of $10$ plus its last digit, and $3$ does not divide $10$.
-
-How to check: divide once. $13 \\div 3$ is $4$ with remainder $1$, while $27 \\div 3 = 9$ exactly.
-
-**Mixing up factors and multiples**
-
-The two words for the two sides of $a \\mid b$ are swapped, so a number larger than $b$ is listed among the factors of $b$, or a smaller one among its multiples.
-
-Wrong working: $24 \\cdot 2 = 48$, so $48$ is listed as a factor of $24$.
-
-Right working: $48 = 24 \\cdot 2$ means $24 \\mid 48$, so $24$ is the factor and $48$ is the multiple. The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$, and $48$ is not among them.
-
-Why it happens: both words describe the same relationship and come from the same multiplication fact; which side each word belongs to has to be remembered.
-
-How to check: compare sizes. A factor of a positive integer $n$ is at most $n$, and a positive multiple of $n$ is at least $n$.
-
-**Taking odd numbers for primes**
-
-Because every even number other than $2$ is composite, odd numbers are assumed to be prime, especially when they do not end in $5$.
-
-Wrong working: $9$, $15$ and $91$ are odd, so they are prime.
-
-Right working: $9 = 3 \\cdot 3$, $15 = 3 \\cdot 5$ and $91 = 7 \\cdot 13$ are all composite. The odd primes below $20$ are $3, 5, 7, 11, 13, 17, 19$, and the odd numbers $9$ and $15$ fall between them.
-
-Why it happens: being odd removes the factor $2$, the test everyone does first, and the remaining tests are skipped.
-
-How to check: test the primes up to the square root. For $91$, $\\sqrt{91} \\approx 9.5$, so the primes to test are $3$, $5$ and $7$, and $91 = 7 \\cdot 13$ shows it is composite.
-
-**Multiplying the exponents**
-
-In the factor-count formula the added $1$s are dropped, and the exponents of the prime factorization are multiplied as they stand.
-
-Wrong working: $84 = 2^2 \\cdot 3 \\cdot 7$ has exponents $2, 1, 1$, so it has $2 \\cdot 1 \\cdot 1 = 2$ factors.
-
-Right working: an exponent $a_i$ allows $a_i + 1$ choices, from $0$ to $a_i$ copies of its prime. So $84$ has $(2 + 1)(1 + 1)(1 + 1) = 12$ factors: $1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84$.
-
-Why it happens: the exponent counts the copies of a prime that are present, and the choice of taking none of them, which gives the factors without that prime, is easy to overlook.
-
-How to check: try a prime power. The factors of $8 = 2^3$ are $1, 2, 4, 8$, four of them, which is $3 + 1$ and not $3$. For $360 = 2^3 \\cdot 3^2 \\cdot 5$, multiplying the exponents gives $6$, while the true count is $24$.
-
-**Multiplying to get the LCM**
-
-The product of two numbers is taken as their least common multiple.
-
-Wrong working: $\\text{lcm}(4, 6) = 4 \\cdot 6 = 24$.
-
-Right working: the multiples of $4$ are $4, 8, 12, \\ldots$ and the multiples of $6$ are $6, 12, \\ldots$, and the first one they share is $12$. The identity gives the same: $\\text{lcm}(4, 6) = \\frac{4 \\cdot 6}{\\gcd(4, 6)} = \\frac{24}{2} = 12$.
-
-Why it happens: the product is always a common multiple, and for pairs with GCD $1$, such as $4$ and $9$, it is the LCM, $36$. The shortcut works often enough to seem like a rule.
-
-How to check: divide the product by the GCD and test the result. Here $24 \\div 2 = 12$, and $12 \\div 4 = 3$ and $12 \\div 6 = 2$ are both whole, so $12$ is a common multiple smaller than $24$.`,
+      content:`Six mistakes account for many of the wrong answers in divisibility work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip mistakes one idea for a neighbouring one. $a \\mid b$ asks whether $b$ is a multiple of $a$, not for $a \\div b$; divisibility by $3$ depends on the digit sum, not on the last digit; a factor goes into $n$ while a multiple comes out of it; odd is not the same as prime; each exponent $a_i$ gives $a_i + 1$ choices; and the LCM is the product only when the GCD is $1$. A single division, a size comparison, or a small case such as $8 = 2^3$ catches each slip.`,
       link:'',
     }
   
@@ -827,8 +759,52 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 7, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-bar-as-division', name: `Reading the bar as division`, errorAt: 0,
+        what: `The vertical bar in $a \\mid b$ is read like a division sign or a fraction bar, so $3 \\mid 12$ is taken to mean $3$ divided by $12$. The two numbers swap roles, and true statements look false.`,
+        wrong: [`$3 \\mid 12$ means $3 \\div 12 = 0.25$, which is not a whole number, so $3 \\mid 12$ is false.`],
+        right: [`$3 \\mid 12$ claims $12 = 3 \\cdot k$ for some integer $k$. With $k = 4$ the claim holds, so $3 \\mid 12$ is true. The reversed statement $12 \\mid 3$ would need $3 = 12 \\cdot k$, and no integer $k$ works, so it is false.`],
+        why: `In $\\frac{3}{12}$, $3 / 12$ and $3 \\div 12$ the first number is the one being divided; in $3 \\mid 12$ the first number does the dividing. The upright bar also looks like the slash of a fraction.`,
+        check: `For $b \\neq 0$, $a \\mid b$ can only hold when $|a| \\leq |b|$. So $12 \\mid 3$ is false at a glance, and $3 \\mid 12$ is settled by $12 \\div 3 = 4$.` },
+      { id: 'testing-3-by-the-last-digit', name: `Testing 3 by the last digit`, errorAt: 0,
+        what: `The last-digit tests for $2$, $5$ and $10$ are carried over to $3$, and a number is judged by whether its last digit is a multiple of $3$.`,
+        wrong: [`$13$ ends in $3$, so $3 \\mid 13$; $27$ ends in $7$, so $3 \\nmid 27$.`],
+        right: [`The digit sum decides. $1 + 3 = 4$ is not a multiple of $3$, so $3 \\nmid 13$, and indeed $13 = 3 \\cdot 4 + 1$. $2 + 7 = 9$ is a multiple of $3$, so $3 \\mid 27$, and indeed $27 = 3 \\cdot 9$.`],
+        why: `The last-digit rules are learned first and are the simplest, so the same kind of rule is expected for every divisor. They work only for divisors of $10$: every number is a multiple of $10$ plus its last digit, and $3$ does not divide $10$.`,
+        check: `Divide once. $13 \\div 3$ is $4$ with remainder $1$, while $27 \\div 3 = 9$ exactly.` },
+      { id: 'mixing-up-factors-and-multiples', name: `Mixing up factors and multiples`, errorAt: 0,
+        what: `The two words for the two sides of $a \\mid b$ are swapped, so a number larger than $b$ is listed among the factors of $b$, or a smaller one among its multiples.`,
+        wrong: [`$24 \\cdot 2 = 48$, so $48$ is listed as a factor of $24$.`],
+        right: [`$48 = 24 \\cdot 2$ means $24 \\mid 48$, so $24$ is the factor and $48$ is the multiple. The factors of $24$ are $1, 2, 3, 4, 6, 8, 12, 24$, and $48$ is not among them.`],
+        why: `Both words describe the same relationship and come from the same multiplication fact; which side each word belongs to has to be remembered.`,
+        check: `Compare sizes. A factor of a positive integer $n$ is at most $n$, and a positive multiple of $n$ is at least $n$.` },
+      { id: 'taking-odd-numbers-for-primes', name: `Taking odd numbers for primes`, errorAt: 0,
+        what: `Because every even number other than $2$ is composite, odd numbers are assumed to be prime, especially when they do not end in $5$.`,
+        wrong: [`$9$, $15$ and $91$ are odd, so they are prime.`],
+        right: [`$9 = 3 \\cdot 3$, $15 = 3 \\cdot 5$ and $91 = 7 \\cdot 13$ are all composite. The odd primes below $20$ are $3, 5, 7, 11, 13, 17, 19$, and the odd numbers $9$ and $15$ fall between them.`],
+        why: `Being odd removes the factor $2$, the test everyone does first, and the remaining tests are skipped.`,
+        check: `Test the primes up to the square root. For $91$, $\\sqrt{91} \\approx 9.5$, so the primes to test are $3$, $5$ and $7$, and $91 = 7 \\cdot 13$ shows it is composite.` },
+      { id: 'multiplying-the-exponents', name: `Multiplying the exponents`, errorAt: 0,
+        what: `In the factor-count formula the added $1$s are dropped, and the exponents of the prime factorization are multiplied as they stand.`,
+        wrong: [`$84 = 2^2 \\cdot 3 \\cdot 7$ has exponents $2, 1, 1$, so it has $2 \\cdot 1 \\cdot 1 = 2$ factors.`],
+        right: [`An exponent $a_i$ allows $a_i + 1$ choices, from $0$ to $a_i$ copies of its prime. So $84$ has $(2 + 1)(1 + 1)(1 + 1) = 12$ factors: $1, 2, 3, 4, 6, 7, 12, 14, 21, 28, 42, 84$.`],
+        why: `The exponent counts the copies of a prime that are present, and the choice of taking none of them, which gives the factors without that prime, is easy to overlook.`,
+        check: `Try a prime power. The factors of $8 = 2^3$ are $1, 2, 4, 8$, four of them, which is $3 + 1$ and not $3$. For $360 = 2^3 \\cdot 3^2 \\cdot 5$, multiplying the exponents gives $6$, while the true count is $24$.` },
+      { id: 'multiplying-to-get-the-lcm', name: `Multiplying to get the LCM`, errorAt: 0,
+        what: `The product of two numbers is taken as their least common multiple.`,
+        wrong: [`$\\text{lcm}(4, 6) = 4 \\cdot 6 = 24$.`],
+        right: [`The multiples of $4$ are $4, 8, 12, \\ldots$ and the multiples of $6$ are $6, 12, \\ldots$, and the first one they share is $12$. The identity gives the same: $\\text{lcm}(4, 6) = \\frac{4 \\cdot 6}{\\gcd(4, 6)} = \\frac{24}{2} = 12$.`],
+        why: `The product is always a common multiple, and for pairs with GCD $1$, such as $4$ and $9$, it is the LCM, $36$. The shortcut works often enough to seem like a rule.`,
+        check: `Divide the product by the GCD and test the result. Here $24 \\div 2 = 12$, and $12 \\div 4 = 3$ and $12 \\div 6 = 2$ are both whole, so $12$ is a common multiple smaller than $24$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -856,7 +832,7 @@ fsMainObj6,
 
 
 
-export default function DivisibilityPage({seoData, sectionsContent, introContent, obj2Table, 
+export default function DivisibilityPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, 
   obj3Table, summaryTable, obj1SvgExact, obj1SvgFails, obj3SvgScale, 
   obj4SvgRemainder, faqQuestions, schemas,fsMainObj6, demoUnits, conceptIntroFigures}) {
 
@@ -927,7 +903,7 @@ $$a \\mid b \\quad \\text{means} \\quad b = a \\cdot k \\;\\text{ for some integ
         content: [
           `@academic[pitfall,aside:true,width:35%:Reading the bar as division
 Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. The divisor comes first: $3 \\mid 12$ asks whether $12 \\div 3$ is a whole number, and it is, while $12 \\mid 3$ is false.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-reading-the-bar-as-division)]@`,
           `What is left over when the split fails, and how it decides divisibility, is the subject of [divisibility and remainders](!/arithmetic/divisibility#4).`,
         ],
       },
@@ -981,6 +957,11 @@ Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. T
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={arithmeticNotationSheet}
+            current={'/arithmetic/divisibility'}
           />,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
@@ -1115,6 +1096,15 @@ Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. T
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="divisibility-pitfalls"
+            title="Common pitfalls with divisibility"
+            source="/arithmetic/divisibility"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

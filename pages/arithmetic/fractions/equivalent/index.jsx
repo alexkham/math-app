@@ -678,6 +678,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -890,7 +892,7 @@ Starting with $\\frac{3}{5}$ and multiplying both parts by 2 gives $\\frac{6}{10
 
 @academic[pitfall,aside:true,width:35%:Adding the same number
 Adding $2$ to both parts of $\\frac{3}{5}$ gives $\\frac{5}{7}$, a larger value: $\\frac{5}{7} \\approx 0.71$, while $\\frac{3}{5} = 0.6$. Multiplying both parts by $2$ keeps the value: $\\frac{6}{10}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-same-number)]@
 
 This process works because multiplying by $\\frac{n}{n}$ is the same as multiplying by 1, which does not change a value. The equation $\\frac{3}{5} \\times \\frac{2}{2} = \\frac{6}{10}$ shows that the transformation preserves quantity.
 
@@ -931,7 +933,7 @@ The [fraction calculator](!/calculators/fraction-calculator) reduces every resul
 
 @academic[pitfall,aside:true,width:35%:Stopping before simplest form
 Dividing $\\frac{12}{18}$ by $2$ and stopping at $\\frac{6}{9}$ leaves the common factor $3$. One more division gives $\\frac{2}{3}$, where the GCF of $2$ and $3$ is $1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-before-simplest-form)]@
 
 To verify simplest form, check whether any integer greater than 1 divides both parts evenly. If none exists, the fraction is fully simplified. Alternatively, compute the GCF; if it equals 1, the fraction is in simplest form.
 
@@ -957,7 +959,7 @@ Testing $\\frac{2}{5}$ and $\\frac{3}{7}$: compute $2 \\times 7 = 14$ and $5 \\t
 
 @academic[pitfall,aside:true,width:35%:Pairing a product with the wrong fraction
 Crediting $15 = 5 \\times 3$ to $\\frac{2}{5}$ because it contains the $5$ makes $\\frac{2}{5}$ look larger than $\\frac{3}{7}$. Each product goes with the fraction whose numerator it uses: $14$ with $\\frac{2}{5}$, $15$ with $\\frac{3}{7}$, so $\\frac{3}{7}$ is larger.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-pairing-a-product-with-the-wrong-fraction)]@
 
 Cross-multiplication also extends to [comparing fractions](!/arithmetic/fractions/comparing). When the cross products are unequal, the larger product indicates the larger fraction.`,
     before: ``,
@@ -988,7 +990,7 @@ For $\\frac{1}{3}$ and $\\frac{1}{4}$, the denominators 3 and 4 share multiples 
 
 @academic[pitfall,aside:true,width:35%:Changing only the denominator
 Writing $\\frac{1}{3}$ as $\\frac{1}{12}$ changes the value: $\\frac{1}{12}$ is only a quarter of $\\frac{1}{3}$. The numerator takes the same factor $4$: $\\frac{1}{3} = \\frac{4}{12}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-changing-only-the-denominator)]@
 
 The [least common multiple](!/arithmetic/divisibility/lcm) produces the least common denominator (LCD). Using the LCD keeps numbers as small as possible. For denominators 6 and 8, the LCM is 24, so 24 is the LCD. Larger common denominators like 48 also work but result in bigger numbers that require simplification afterward.`,
     before: ``,
@@ -1058,57 +1060,9 @@ The [least common multiple](!/arithmetic/divisibility/lcm) produces the least co
 
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes cause many of the wrong answers when fractions are rewritten, simplified or compared. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Adding the same number**
-
-To build an equivalent fraction, the same number is added to the numerator and the denominator instead of multiplying them by it. Subtracting the same number from both parts is the same mistake run backward.
-
-Wrong working: $\\frac{3}{5} = \\frac{3 + 2}{5 + 2} = \\frac{5}{7}$.
-
-Right working: $\\frac{3}{5} = \\frac{3 \\times 2}{5 \\times 2} = \\frac{6}{10}$. Multiplying by $\\frac{2}{2}$ is multiplying by $1$, so the value stays $0.6$.
-
-Why it happens: the rule is remembered as "do the same thing to the top and the bottom", and adding feels like doing the same thing. Adding changes both parts by the same amount, but not in the same proportion, so the value moves.
-
-How to check: cross-multiply. For $\\frac{3}{5}$ and $\\frac{5}{7}$, $3 \\times 7 = 21$ and $5 \\times 5 = 25$ differ, so they are not equivalent. For $\\frac{3}{5}$ and $\\frac{6}{10}$, $3 \\times 10 = 30$ and $5 \\times 6 = 30$ match.
-
-**Stopping before simplest form**
-
-When simplifying step by step, one common factor is divided out and the result is taken as final, although the new numerator and denominator still share a factor.
-
-Wrong working: $\\frac{12}{18} = \\frac{12 \\div 2}{18 \\div 2} = \\frac{6}{9}$, and the work stops there.
-
-Right working: $6$ and $9$ still share the factor $3$, so $\\frac{6}{9} = \\frac{6 \\div 3}{9 \\div 3} = \\frac{2}{3}$. Dividing by the GCF $6$ at once gives the same $\\frac{2}{3}$ in one step.
-
-Why it happens: the first factor spotted, often $2$, is divided out, the new numbers look small, and the final check is skipped.
-
-How to check: find the GCF of the final numerator and denominator. For $\\frac{6}{9}$ it is $3$, so the fraction is not finished; for $\\frac{2}{3}$ it is $1$.
-
-**Pairing a product with the wrong fraction**
-
-When cross products are used to compare two fractions, each product is credited to the fraction whose denominator it contains, and the comparison comes out reversed.
-
-Wrong working: for $\\frac{2}{5}$ and $\\frac{3}{7}$, the product $5 \\times 3 = 15$ contains the $5$ of $\\frac{2}{5}$, so the larger product $15$ is taken to mean that $\\frac{2}{5}$ is larger.
-
-Right working: each product belongs to the fraction whose numerator it uses. $2 \\times 7 = 14$ goes with $\\frac{2}{5}$ and $5 \\times 3 = 15$ goes with $\\frac{3}{7}$. Since $14 < 15$, $\\frac{2}{5} < \\frac{3}{7}$.
-
-Why it happens: every cross product mixes one number from each fraction, so both fractions appear in it, and the crossing lines of the method do not show which way to read the result.
-
-How to check: the cross products are the numerators over the common denominator $5 \\times 7 = 35$: $\\frac{2}{5} = \\frac{14}{35}$ and $\\frac{3}{7} = \\frac{15}{35}$. In decimals, $\\frac{2}{5} = 0.4$ and $\\frac{3}{7} \\approx 0.43$.
-
-**Changing only the denominator**
-
-When fractions are rewritten over a common denominator, the new denominator is written in, but the numerator is left as it was.
-
-Wrong working: with the common denominator $12$, $\\frac{1}{3}$ becomes $\\frac{1}{12}$ and $\\frac{1}{4}$ becomes $\\frac{1}{12}$, so the two fractions now look equal.
-
-Right working: $3 \\times 4 = 12$, so the numerator of $\\frac{1}{3}$ is also multiplied by $4$: $\\frac{1}{3} = \\frac{4}{12}$. And $4 \\times 3 = 12$, so $\\frac{1}{4} = \\frac{3}{12}$.
-
-Why it happens: the goal of the step is the common denominator, so attention goes to the bottom of the fraction. Changing only the denominator cuts the whole into smaller parts but keeps the same number of them, so the amount shrinks.
-
-How to check: cross-multiply the old and new fraction. For $\\frac{1}{3}$ and $\\frac{1}{12}$, $1 \\times 12 = 12$ and $3 \\times 1 = 3$ differ; for $\\frac{1}{3}$ and $\\frac{4}{12}$, $1 \\times 12 = 12$ and $3 \\times 4 = 12$ match.`,
+      content:`Four mistakes cause many of the wrong answers when fractions are rewritten, simplified or compared. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip changes the value of a fraction while seeming only to rewrite it. Equivalent fractions multiply or divide the numerator and the denominator by the same number and never add to them, simplifying goes on until the GCF is $1$, each cross product belongs to the fraction whose numerator it uses, and a new denominator needs a matching new numerator. Cross-multiplying the old fraction with the new one, or finding the GCF of the result, catches every slip.`,
       link:'',
     },
     obj15:{
@@ -1300,8 +1254,40 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 8, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'adding-the-same-number', name: `Adding the same number`, errorAt: 0,
+        what: `To build an equivalent fraction, the same number is added to the numerator and the denominator instead of multiplying them by it. Subtracting the same number from both parts is the same mistake run backward.`,
+        wrong: [`$\\frac{3}{5} = \\frac{3 + 2}{5 + 2} = \\frac{5}{7}$.`],
+        right: [`$\\frac{3}{5} = \\frac{3 \\times 2}{5 \\times 2} = \\frac{6}{10}$. Multiplying by $\\frac{2}{2}$ is multiplying by $1$, so the value stays $0.6$.`],
+        why: `The rule is remembered as "do the same thing to the top and the bottom", and adding feels like doing the same thing. Adding changes both parts by the same amount, but not in the same proportion, so the value moves.`,
+        check: `Cross-multiply. For $\\frac{3}{5}$ and $\\frac{5}{7}$, $3 \\times 7 = 21$ and $5 \\times 5 = 25$ differ, so they are not equivalent. For $\\frac{3}{5}$ and $\\frac{6}{10}$, $3 \\times 10 = 30$ and $5 \\times 6 = 30$ match.` },
+      { id: 'stopping-before-simplest-form', name: `Stopping before simplest form`, errorAt: 0,
+        what: `When simplifying step by step, one common factor is divided out and the result is taken as final, although the new numerator and denominator still share a factor.`,
+        wrong: [`$\\frac{12}{18} = \\frac{12 \\div 2}{18 \\div 2} = \\frac{6}{9}$, and the work stops there.`],
+        right: [`$6$ and $9$ still share the factor $3$, so $\\frac{6}{9} = \\frac{6 \\div 3}{9 \\div 3} = \\frac{2}{3}$. Dividing by the GCF $6$ at once gives the same $\\frac{2}{3}$ in one step.`],
+        why: `The first factor spotted, often $2$, is divided out, the new numbers look small, and the final check is skipped.`,
+        check: `Find the GCF of the final numerator and denominator. For $\\frac{6}{9}$ it is $3$, so the fraction is not finished; for $\\frac{2}{3}$ it is $1$.` },
+      { id: 'pairing-a-product-with-the-wrong-fraction', name: `Pairing a product with the wrong fraction`, errorAt: 1,
+        what: `When cross products are used to compare two fractions, each product is credited to the fraction whose denominator it contains, and the comparison comes out reversed.`,
+        wrong: [`For $\\frac{2}{5}$ and $\\frac{3}{7}$,`, `The product $5 \\times 3 = 15$ contains the $5$ of $\\frac{2}{5}$, so the larger product $15$ is taken to mean that $\\frac{2}{5}$ is larger.`],
+        right: [`For $\\frac{2}{5}$ and $\\frac{3}{7}$,`, `Each product belongs to the fraction whose numerator it uses. $2 \\times 7 = 14$ goes with $\\frac{2}{5}$ and $5 \\times 3 = 15$ goes with $\\frac{3}{7}$. Since $14 < 15$, $\\frac{2}{5} < \\frac{3}{7}$.`],
+        why: `Every cross product mixes one number from each fraction, so both fractions appear in it, and the crossing lines of the method do not show which way to read the result.`,
+        check: `The cross products are the numerators over the common denominator $5 \\times 7 = 35$: $\\frac{2}{5} = \\frac{14}{35}$ and $\\frac{3}{7} = \\frac{15}{35}$. In decimals, $\\frac{2}{5} = 0.4$ and $\\frac{3}{7} \\approx 0.43$.` },
+      { id: 'changing-only-the-denominator', name: `Changing only the denominator`, errorAt: 0,
+        what: `When fractions are rewritten over a common denominator, the new denominator is written in, but the numerator is left as it was.`,
+        wrong: [`With the common denominator $12$, $\\frac{1}{3}$ becomes $\\frac{1}{12}$ and $\\frac{1}{4}$ becomes $\\frac{1}{12}$, so the two fractions now look equal.`],
+        right: [`$3 \\times 4 = 12$, so the numerator of $\\frac{1}{3}$ is also multiplied by $4$: $\\frac{1}{3} = \\frac{4}{12}$. And $4 \\times 3 = 12$, so $\\frac{1}{4} = \\frac{3}{12}$.`],
+        why: `The goal of the step is the common denominator, so attention goes to the bottom of the fraction. Changing only the denominator cuts the whole into smaller parts but keeps the same number of them, so the amount shrinks.`,
+        check: `Cross-multiply the old and new fraction. For $\\frac{1}{3}$ and $\\frac{1}{12}$, $1 \\times 12 = 12$ and $3 \\times 1 = 3$ differ; for $\\frac{1}{3}$ and $\\frac{4}{12}$, $1 \\times 12 = 12$ and $3 \\times 4 = 12$ match.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1321,7 +1307,7 @@ return {
 }
    }
 
-export default function EquivalentFractionsPage({seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function EquivalentFractionsPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1479,6 +1465,15 @@ export default function EquivalentFractionsPage({seoData, sectionsContent, intro
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="equivalent-fractions-pitfalls"
+            title="Common pitfalls with equivalent fractions"
+            source="/arithmetic/fractions/equivalent"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

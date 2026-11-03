@@ -710,6 +710,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -947,7 +949,7 @@ Both fractions take three parts, but fourths are larger pieces than sevenths. Th
 
 @academic[pitfall,aside:true,width:35%:Taking the larger denominator as larger
 Choosing $\\frac{2}{9}$ over $\\frac{2}{5}$ because $9 > 5$ reverses the order. In forty-fifths, $\\frac{2}{5} = \\frac{18}{45}$ and $\\frac{2}{9} = \\frac{10}{45}$, so $\\frac{2}{5} > \\frac{2}{9}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-larger-denominator-as-larger)]@
 
 This inverse relationship often surprises at first. The key insight is that larger denominators create smaller individual pieces. Dividing something into 100 parts produces much smaller pieces than dividing it into 2 parts.`,
     before: ``,
@@ -970,7 +972,7 @@ This method always works and is the most reliable approach when other shortcuts 
 
 @academic[pitfall,aside:true,width:35%:Comparing only the numerators
 Picking $\\frac{4}{9}$ over $\\frac{3}{5}$ because $4 > 3$ gets the order backwards. In forty-fifths, $\\frac{3}{5} = \\frac{27}{45}$ and $\\frac{4}{9} = \\frac{20}{45}$, so $\\frac{3}{5}$ is the larger fraction.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-comparing-only-the-numerators)]@
 
 The conversion step is what makes the numerators comparable. In $\\frac{3}{4}$ each piece is a quarter of the whole and in $\\frac{5}{6}$ each piece is a sixth, so the two numerators count pieces of different sizes. Rewriting both in twelfths gives every piece the same size, and from then on the count alone decides.`,
     before: ``,
@@ -991,7 +993,7 @@ Since $28 > 27$, we have $\\frac{4}{9} > \\frac{3}{7}$.
 
 @academic[pitfall,aside:true,width:35%:Reading the cross products backwards
 For $\\frac{5}{8}$ and $\\frac{2}{3}$, crediting $8 \\times 2 = 16$ to $\\frac{5}{8}$ because it contains the $8$ gives $\\frac{5}{8} > \\frac{2}{3}$. The $16$ is built from the numerator $2$, so it belongs to $\\frac{2}{3}$, and $\\frac{2}{3} > \\frac{5}{8}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-cross-products-backwards)]@
 
 The rule: multiply each numerator by the opposite denominator. The cross product stays on the same side as its numerator. If $a \\times d > b \\times c$ (with positive denominators), then $\\frac{a}{b} > \\frac{c}{d}$.
 
@@ -1027,7 +1029,7 @@ Since $0.636 > 0.625$, we have $\\frac{7}{11} > \\frac{5}{8}$.
 
 @academic[pitfall,aside:true,width:35%:Reading the longer decimal as larger
 Ranking $0.625$ above $0.64$ because $625 > 64$ puts $\\frac{5}{8}$ above $\\frac{16}{25}$. Place by place, the hundredths decide, $2 < 4$, so $0.625 < 0.64$ and $\\frac{16}{25} > \\frac{5}{8}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-longer-decimal-as-larger)]@
 
 This method is practical with a calculator or for fractions that produce simple decimals. It becomes cumbersome for fractions with long repeating decimals.
 
@@ -1048,7 +1050,7 @@ $$5\\frac{1}{8} > 4\\frac{7}{8}$$]@
 
 @academic[pitfall,aside:true,width:35%:Comparing the fractional parts first
 Judging $4\\frac{7}{8}$ larger than $5\\frac{1}{8}$ because $\\frac{7}{8} > \\frac{1}{8}$ reverses the order. As improper fractions the two are $\\frac{39}{8}$ and $\\frac{41}{8}$, so $5\\frac{1}{8}$ is larger.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-comparing-the-fractional-parts-first)]@
 
 Five wholes exceed four wholes regardless of the fractional parts.
 
@@ -1145,69 +1147,9 @@ Number lines are particularly useful for developing intuition about fraction siz
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Five mistakes cause many of the wrong answers in comparing fractions. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking the larger denominator as larger**
-
-Two fractions share a numerator, and the one with the larger denominator is picked as the larger fraction. The denominator is read as an amount, when it is the number of pieces the whole is cut into.
-
-Wrong working: $\\frac{2}{9}$ and $\\frac{2}{5}$ have the same numerator, and $9 > 5$, so $\\frac{2}{9} > \\frac{2}{5}$.
-
-Right working: with the common denominator $45$, $\\frac{2}{5} = \\frac{18}{45}$ and $\\frac{2}{9} = \\frac{10}{45}$. Since $18 > 10$, $\\frac{2}{5} > \\frac{2}{9}$.
-
-Why it happens: with whole numbers a bigger number always means more, and that habit is carried over to the bottom of the fraction, where a bigger number means more pieces and therefore smaller ones.
-
-How to check: picture unit fractions. Half of a pizza is clearly more than an eighth of it, so $\\frac{1}{2} > \\frac{1}{8}$; for equal numerators the smaller denominator wins.
-
-**Comparing only the numerators**
-
-Two fractions with different denominators are compared by their numerators alone, as if their pieces were the same size.
-
-Wrong working: $4 > 3$, so $\\frac{4}{9} > \\frac{3}{5}$.
-
-Right working: the LCM of $5$ and $9$ is $45$, so $\\frac{3}{5} = \\frac{27}{45}$ and $\\frac{4}{9} = \\frac{20}{45}$. Since $27 > 20$, $\\frac{3}{5} > \\frac{4}{9}$.
-
-Why it happens: the same-denominator rule from the first section is applied without checking that the denominators match.
-
-How to check: use the benchmark $\\frac{1}{2}$. $\\frac{3}{5} > \\frac{1}{2}$ since $3 > 2.5$, while $\\frac{4}{9} < \\frac{1}{2}$ since $4 < 4.5$, so $\\frac{3}{5}$ must be the larger.
-
-**Reading the cross products backwards**
-
-The two cross products are computed correctly, but each is credited to the fraction whose denominator it contains, so the comparison comes out reversed.
-
-Wrong working: for $\\frac{5}{8}$ and $\\frac{2}{3}$, $5 \\times 3 = 15$ and $8 \\times 2 = 16$. The $16$ contains the $8$ of $\\frac{5}{8}$, so $\\frac{5}{8} > \\frac{2}{3}$.
-
-Right working: each product belongs to the fraction whose numerator it uses. $15 = 5 \\times 3$ goes with $\\frac{5}{8}$ and $16 = 2 \\times 8$ goes with $\\frac{2}{3}$. Since $16 > 15$, $\\frac{2}{3} > \\frac{5}{8}$.
-
-Why it happens: each product mixes one number from each fraction, and once the products are written down nothing shows which fraction each one came from.
-
-How to check: the cross products are the numerators over the common denominator $8 \\times 3 = 24$. Here $\\frac{5}{8} = \\frac{15}{24}$ and $\\frac{2}{3} = \\frac{16}{24}$, which settles it.
-
-**Reading the longer decimal as larger**
-
-After converting to decimals, the digits after the point are compared as if they were whole numbers, so the decimal with more digits looks larger.
-
-Wrong working: $\\frac{5}{8} = 0.625$ and $\\frac{16}{25} = 0.64$. Since $625 > 64$, $\\frac{5}{8} > \\frac{16}{25}$.
-
-Right working: compare place by place from the left. The tenths are $6$ and $6$, equal. The hundredths are $2$ and $4$, and $2 < 4$. So $0.625 < 0.64$ and $\\frac{16}{25} > \\frac{5}{8}$.
-
-Why it happens: among whole numbers, more digits means a larger number, and the part after the point is read the same way.
-
-How to check: pad with zeros to the same length, $0.625$ against $0.640$, and compare $625 < 640$. Or cross-multiply: $5 \\times 25 = 125$ and $16 \\times 8 = 128$, so $\\frac{16}{25}$ is larger.
-
-**Comparing the fractional parts first**
-
-Two mixed numbers are compared by their fractional parts, and the whole parts are ignored.
-
-Wrong working: $\\frac{7}{8} > \\frac{1}{8}$, so $4\\frac{7}{8} > 5\\frac{1}{8}$.
-
-Right working: the whole parts come first, and $5 > 4$, so $5\\frac{1}{8} > 4\\frac{7}{8}$. As improper fractions, $4\\frac{7}{8} = \\frac{39}{8}$ and $5\\frac{1}{8} = \\frac{41}{8}$, and $41 > 39$.
-
-Why it happens: the fractional parts are where the comparison methods of this page apply, so attention goes to them and the whole number is treated as a label.
-
-How to check: a fractional part is always less than $1$, so it can never make up a difference of a whole: $4\\frac{7}{8} < 5 < 5\\frac{1}{8}$.`,
+      content:`Five mistakes cause many of the wrong answers in comparing fractions. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip compares one part of a fraction instead of its value. With equal numerators the smaller denominator gives the larger fraction, numerators alone decide only over a common denominator, each cross product belongs to the fraction whose numerator it uses, decimals are compared place by place from the left, and mixed numbers are compared by their whole parts first. Rewriting both fractions over a common denominator settles every case, and the benchmark $\\frac{1}{2}$ often settles it faster.`,
       link:'',
     }
   
@@ -1378,8 +1320,46 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 7, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-larger-denominator-as-larger', name: `Taking the larger denominator as larger`, errorAt: 0,
+        what: `Two fractions share a numerator, and the one with the larger denominator is picked as the larger fraction. The denominator is read as an amount, when it is the number of pieces the whole is cut into.`,
+        wrong: [`$\\frac{2}{9}$ and $\\frac{2}{5}$ have the same numerator, and $9 > 5$, so $\\frac{2}{9} > \\frac{2}{5}$.`],
+        right: [`With the common denominator $45$, $\\frac{2}{5} = \\frac{18}{45}$ and $\\frac{2}{9} = \\frac{10}{45}$. Since $18 > 10$, $\\frac{2}{5} > \\frac{2}{9}$.`],
+        why: `With whole numbers a bigger number always means more, and that habit is carried over to the bottom of the fraction, where a bigger number means more pieces and therefore smaller ones.`,
+        check: `Picture unit fractions. Half of a pizza is clearly more than an eighth of it, so $\\frac{1}{2} > \\frac{1}{8}$; for equal numerators the smaller denominator wins.` },
+      { id: 'comparing-only-the-numerators', name: `Comparing only the numerators`, errorAt: 0,
+        what: `Two fractions with different denominators are compared by their numerators alone, as if their pieces were the same size.`,
+        wrong: [`$4 > 3$, so $\\frac{4}{9} > \\frac{3}{5}$.`],
+        right: [`The LCM of $5$ and $9$ is $45$, so $\\frac{3}{5} = \\frac{27}{45}$ and $\\frac{4}{9} = \\frac{20}{45}$. Since $27 > 20$, $\\frac{3}{5} > \\frac{4}{9}$.`],
+        why: `The same-denominator rule from the first section is applied without checking that the denominators match.`,
+        check: `Use the benchmark $\\frac{1}{2}$. $\\frac{3}{5} > \\frac{1}{2}$ since $3 > 2.5$, while $\\frac{4}{9} < \\frac{1}{2}$ since $4 < 4.5$, so $\\frac{3}{5}$ must be the larger.` },
+      { id: 'reading-the-cross-products-backwards', name: `Reading the cross products backwards`, errorAt: 1,
+        what: `The two cross products are computed correctly, but each is credited to the fraction whose denominator it contains, so the comparison comes out reversed.`,
+        wrong: [`For $\\frac{5}{8}$ and $\\frac{2}{3}$, $5 \\times 3 = 15$ and $8 \\times 2 = 16$.`, `The $16$ contains the $8$ of $\\frac{5}{8}$, so $\\frac{5}{8} > \\frac{2}{3}$.`],
+        right: [`For $\\frac{5}{8}$ and $\\frac{2}{3}$, $5 \\times 3 = 15$ and $8 \\times 2 = 16$.`, `Each product belongs to the fraction whose numerator it uses. $15 = 5 \\times 3$ goes with $\\frac{5}{8}$ and $16 = 2 \\times 8$ goes with $\\frac{2}{3}$. Since $16 > 15$, $\\frac{2}{3} > \\frac{5}{8}$.`],
+        why: `Each product mixes one number from each fraction, and once the products are written down nothing shows which fraction each one came from.`,
+        check: `The cross products are the numerators over the common denominator $8 \\times 3 = 24$. Here $\\frac{5}{8} = \\frac{15}{24}$ and $\\frac{2}{3} = \\frac{16}{24}$, which settles it.` },
+      { id: 'reading-the-longer-decimal-as-larger', name: `Reading the longer decimal as larger`, errorAt: 1,
+        what: `After converting to decimals, the digits after the point are compared as if they were whole numbers, so the decimal with more digits looks larger.`,
+        wrong: [`$\\frac{5}{8} = 0.625$ and $\\frac{16}{25} = 0.64$.`, `Since $625 > 64$, $\\frac{5}{8} > \\frac{16}{25}$.`],
+        right: [`$\\frac{5}{8} = 0.625$ and $\\frac{16}{25} = 0.64$.`, `Compare place by place from the left. The tenths are $6$ and $6$, equal. The hundredths are $2$ and $4$, and $2 < 4$. So $0.625 < 0.64$ and $\\frac{16}{25} > \\frac{5}{8}$.`],
+        why: `Among whole numbers, more digits means a larger number, and the part after the point is read the same way.`,
+        check: `Pad with zeros to the same length, $0.625$ against $0.640$, and compare $625 < 640$. Or cross-multiply: $5 \\times 25 = 125$ and $16 \\times 8 = 128$, so $\\frac{16}{25}$ is larger.` },
+      { id: 'comparing-the-fractional-parts-first', name: `Comparing the fractional parts first`, errorAt: 0,
+        what: `Two mixed numbers are compared by their fractional parts, and the whole parts are ignored.`,
+        wrong: [`$\\frac{7}{8} > \\frac{1}{8}$, so $4\\frac{7}{8} > 5\\frac{1}{8}$.`],
+        right: [`The whole parts come first, and $5 > 4$, so $5\\frac{1}{8} > 4\\frac{7}{8}$. As improper fractions, $4\\frac{7}{8} = \\frac{39}{8}$ and $5\\frac{1}{8} = \\frac{41}{8}$, and $41 > 39$.`],
+        why: `The fractional parts are where the comparison methods of this page apply, so attention goes to them and the whole number is treated as a label.`,
+        check: `A fractional part is always less than $1$, so it can never make up a difference of a whole: $4\\frac{7}{8} < 5 < 5\\frac{1}{8}$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     sectionsContent,
     introContent,
     obj6Table,
@@ -1400,7 +1380,7 @@ return {
    }
 
 
-export default function ComparingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ComparingPage({ pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1571,6 +1551,15 @@ $$\\frac{5}{8} > \\frac{3}{8}$$]@`,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="comparing-fractions-pitfalls"
+            title="Common pitfalls in comparing fractions"
+            source="/arithmetic/fractions/comparing"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

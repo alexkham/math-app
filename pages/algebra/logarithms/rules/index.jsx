@@ -12,7 +12,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import MistakeFix from '@/app/components/infographics/MistakeFix'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
@@ -74,40 +74,6 @@ const keyWords = [
       <td style="padding: 12px 15px; color: #34495e;">let logₐ(x) = y, so aʸ = x</td>
       <td style="padding: 12px 15px; color: #34495e;">take log_b of both sides; apply the power rule</td>
       <td style="padding: 12px 15px; color: #34495e;">y · log_b(a) = log_b(x), so logₐ(x) = log_b(x) ⁄ log_b(a)</td>
-    </tr>
-  </tbody>
-</table>
-`
-
-  // obj7 — comparison: incorrect "rules" vs the truth
-  const obj7Table = `
-<table class="styled-table" style="border-collapse: collapse; width: 75%;margin:auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
-  <thead>
-    <tr>
-      <th style="${tableHeaders.comparison}">Incorrect &quot;rule&quot;</th>
-      <th style="${tableHeaders.comparison}">What is actually true</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">logₐ(x + y) ≠ logₐ(x) + logₐ(y)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">sums inside a logarithm have no expansion — leave logₐ(x + y) as written</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">logₐ(x − y) ≠ logₐ(x) − logₐ(y)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">differences inside a logarithm have no expansion either</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">logₐ(x) · logₐ(y) ≠ logₐ(xy)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">the product rule equates logₐ(xy) with the sum logₐ(x) + logₐ(y), not the product</td>
-    </tr>
-    <tr>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">logₐ(x) ⁄ logₐ(y) ≠ logₐ(x⁄y)</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">this ratio equals log_y(x) by change of base — a different logarithm entirely</td>
-    </tr>
-    <tr style="background: #f8f9fa;">
-      <td style="padding: 12px 15px; font-weight: bold; color: #06357a;">(logₐ(x))ⁿ ≠ n · logₐ(x)</td>
-      <td style="padding: 12px 15px; color: #34495e;">the power rule applies to exponents <em>inside</em> the argument; an exponent on the whole logarithm does not move</td>
     </tr>
   </tbody>
 </table>
@@ -415,7 +381,7 @@ $$\\log_a(xyz) = \\log_a(x) + \\log_a(y) + \\log_a(z)$$]@
 
 @academic[pitfall,aside:true,width:35%:Splitting a sum
 Writing $\\log_2(4 + 4)$ as $\\log_2(4) + \\log_2(4)$ gives $2 + 2 = 4$. But $\\log_2(4 + 4) = \\log_2(8) = 3$: the rule splits products only, and $\\log_a(x + y)$ does not split.
-[Read more](!#7)]@
+[Read more](!#pitfall-log-of-sum)]@
 
 In every use of the rule, the first step is to read the argument and find its factors. In $\\log_2(8 \\cdot 4)$ the factors are $8$ and $4$, and each one contributes its own logarithm to the sum. The same reading works with variables: $\\log_a(3x)$ has the factors $3$ and $x$, so it becomes $\\log_a(3) + \\log_a(x)$.`,
     before: ``,
@@ -445,7 +411,7 @@ $\\log_3(81/9) = \\log_3(81) - \\log_3(9) = 4 - 2 = 2$. Verification: $81/9 = 9 
 
 @academic[pitfall,aside:true,width:35%:Dividing the logarithms
 Writing $\\log_2(32/4)$ as $\\frac{\\log_2(32)}{\\log_2(4)}$ gives $\\frac{5}{2}$. The rule subtracts instead: $\\log_2(32) - \\log_2(4) = 5 - 2 = 3$, and $32/4 = 8 = 2^3$.
-[Read more](!#7)]@
+[Read more](!#pitfall-quotient-of-logs)]@
 
 The quotient rule always works on a single logarithm whose argument is a fraction. In $\\log_3(81/9)$ the division sits inside the logarithm, and the rule turns it into the subtraction $\\log_3(81) - \\log_3(9)$. Read the other way, a difference of two logarithms in the same base condenses back into one logarithm of a quotient.`,
     before: ``,
@@ -506,7 +472,7 @@ $$\\log_5(7) = \\frac{\\ln(7)}{\\ln(5)} = \\frac{1.946}{1.609} \\approx 1.209$$]
 
 @academic[pitfall,aside:true,width:35%:Inverting the fraction
 Writing $\\log_2(8)$ as $\\frac{\\ln(2)}{\\ln(8)}$ puts the base on top and gives $\\frac{1}{3}$. The argument goes in the numerator: $\\frac{\\ln(8)}{\\ln(2)} = 3$, and $2^3 = 8$.
-[Read more](!#7)]@
+[Read more](!#pitfall-inverting-the-fraction)]@
 
 Each application above follows the same pattern: two logarithms in a base the calculator knows, one divided by the other. A rough size check is always available. $\\log_2(10)$ must lie between $3$ and $4$, because $2^3 = 8$ and $2^4 = 16$, and $\\log_5(7)$ must lie between $1$ and $2$, because $5 < 7 < 25$.
 
@@ -535,7 +501,7 @@ $$= \\frac{1}{2}\\left(\\ln(a) - \\ln(b^3)\\right) = \\frac{1}{2}\\ln(a) - \\fra
 
 @academic[pitfall,aside:true,width:35%:Applying an exponent to the whole argument
 Writing $\\log_2(2 \\cdot 4^3)$ as $3\\log_2(2 \\cdot 4)$ gives $3 \\cdot 3 = 9$. The exponent belongs to $4$ only: $\\log_2(2) + 3\\log_2(4) = 1 + 6 = 7$, and $2 \\cdot 4^3 = 128 = 2^7$.
-[Read more](!#7)]@
+[Read more](!#pitfall-exponent-on-whole-argument)]@
 
 In both examples the expansion runs from the outside in. The outermost operation is split first, and the power rule comes last, applied to each piece that carries its own exponent. In the first example the exponent $3$ sits on $x$ and the exponent $2$ sits on $z$, so each becomes the coefficient of its own logarithm; in the second, the square root covers the whole fraction, so its $\\frac{1}{2}$ multiplies everything.`,
     before: ``,
@@ -561,7 +527,7 @@ $$= \\ln\\sqrt{a+1} - \\ln(bc) = \\ln\\left(\\frac{\\sqrt{a+1}}{bc}\\right)$$]@
 
 @academic[pitfall,aside:true,width:35%:Turning a coefficient into a factor
 Condensing $2\\log(x) + \\log(y)$ to $\\log(2xy)$: with $x = y = 10$ the sum is $2 + 1 = 3$, but $\\log(200) \\approx 2.301$. The coefficient becomes an exponent: $\\log(x^2 y) = \\log(1000) = 3$.
-[Read more](!#7)]@
+[Read more](!#pitfall-coefficient-as-factor)]@
 
 The order of the steps is the same in both examples. Every coefficient is dealt with first, so that each logarithm stands alone with coefficient $1$; only then do the sums and differences merge into a single argument. In the second example both $\\ln(b)$ and $\\ln(c)$ are subtracted, so $b$ and $c$ both end up in the denominator.
 
@@ -821,7 +787,8 @@ $$= 1 + 3\\log_2(4) = 1 + 6 = 7$$`,
       { id: 'coefficient-as-factor', name: `Turning a coefficient into a factor`,
         what: `When condensing, a coefficient in front of a logarithm is moved into the argument as a multiplier instead of as an exponent.`,
         wrong: [`$$2\\log(x) + \\log(y) = \\log(2x) + \\log(y) = \\log(2xy)$$`],
-        truth: `$$2\\log(x) + \\log(y) = \\log(x^2) + \\log(y) = \\log(x^2 y)$$`,
+        truth: `$$2\\log(x) + \\log(y) = \\log(x^2) + \\log(y)$$
+$$= \\log(x^2 y)$$`,
         right: [`The power rule turns the coefficient into an exponent, then the product rule combines the two logarithms.`],
         why: `In ordinary algebra a coefficient multiplies, so $2x$ looks like the natural way to bring the $2$ inside.`,
         check: `Substitute numbers. With $x = y = 10$, the original is $2 \\cdot 1 + 1 = 3$. The wrong form gives $\\log(200) \\approx 2.301$; the right form gives $\\log(1000) = 3$.` },
@@ -836,7 +803,6 @@ $$= 1 + 3\\log_2(4) = 1 + 6 = 7$$`,
     sectionsContent,
     introContent,
     derivationsTable,
-    obj7Table,
     summaryTable,
     faqQuestions,
     schemas,
@@ -858,7 +824,6 @@ $$= 1 + 3\\log_2(4) = 1 + 6 = 7$$`,
    sectionsContent,
    introContent,
    derivationsTable,
-   obj7Table,
    summaryTable,
    faqQuestions,
    schemas,
@@ -946,7 +911,7 @@ $$\\log_5(7) = \\frac{\\ln(7)}{\\ln(5)} = \\frac{1.946}{1.609} \\approx 1.209$$]
         content: [
           `@academic[pitfall,aside:true,width:35%:Inverting the fraction
 Writing $\\log_2(8)$ as $\\frac{\\ln(2)}{\\ln(8)}$ puts the base on top and gives $\\frac{1}{3}$. The argument goes in the numerator: $\\frac{\\ln(8)}{\\ln(2)} = 3$, and $2^3 = 8$.
-[Read more](!#7)]@`,
+[Read more](!#pitfall-inverting-the-fraction)]@`,
         ],
       },
       {
@@ -1034,11 +999,6 @@ The graph also suggests a way to multiply without multiplying. Suppose a table l
           >
             <MistakeFix data={logErrors} variant="ledger" />
           </DiagramFrame>,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
         ]
     },
     {

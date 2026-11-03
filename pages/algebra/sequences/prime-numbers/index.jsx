@@ -19,6 +19,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -309,7 +310,7 @@ The process stops once the current prime exceeds $\\sqrt{n}$. Any composite numb
 
 @academic[pitfall,aside:true,width:35%:Counting 1 as a prime
 Starting the list at $1$ leaves $1$ standing, since it is not a multiple of any prime, and the count up to $30$ comes out as $11$. The list starts at $2$ because $1$ is not prime: there are $10$ primes up to $30$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-1-as-a-prime)]@
 
 @academic[example:Example
 For $n = 30$: start with $2, 3, 4, 5, \\ldots, 30$. After sieving by $2$: all even numbers $> 2$ are removed. After $3$: $9, 15, 21, 27$ are removed. After $5$: $25$ is removed. Since $\\sqrt{30} < 6$, the process ends. The surviving numbers $2, 3, 5, 7, 11, 13, 17, 19, 23, 29$ are all primes up to $30$.]@
@@ -335,7 +336,7 @@ Is $91$ prime? Check $2$ (no), $3$ (no), $5$ (no), $7$: $91 = 7 \\times 13$. It 
 
 @academic[pitfall,aside:true,width:35%:Stopping the trial division too early
 Testing only $2, 3, 5, 7$ and calling $143$ prime stops short of $\\sqrt{143} \\approx 11.96$. Testing $11$ as well gives $143 = 11 \\cdot 13$, composite.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-the-trial-division-too-early)]@
 
 Both checks end at the same place: the largest prime that does not exceed $\\sqrt{n}$. For $91$ and for $97$ that prime is $7$, because the next prime, $11$, already has $11^2 = 121 > 97$.
 
@@ -364,7 +365,7 @@ Prime factorization connects directly to the [GCD](!/arithmetic/divisibility/gcd
 
 @academic[pitfall,aside:true,width:35%:Using the larger powers for the GCD
 Taking the larger exponents of the shared primes gives $\\gcd(60, 252) = 2^2 \\cdot 3^2 = 36$, which does not even divide $60$. The GCD takes the smaller ones, $2^2 \\cdot 3 = 12$; the larger powers of all primes give the LCM, $1260$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-larger-powers-for-the-gcd)]@
 
 With two factorizations side by side, the work is a comparison prime by prime: write each prime with its exponent in both numbers, using $0$ where a prime is missing, and keep one exponent per prime. For $60 = 2^2 \\cdot 3 \\cdot 5$ and $252 = 2^2 \\cdot 3^2 \\cdot 7$ the exponent pairs are $(2, 2)$ for $2$, $(1, 2)$ for $3$, $(1, 0)$ for $5$ and $(0, 1)$ for $7$.`,
     before: ``,
@@ -416,53 +417,9 @@ A regular polygon with a prime number $p$ of sides can be drawn with ruler and c
   },
   obj8: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come up again and again with prime numbers. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Counting 1 as a prime**
-
-When primes are listed or counted, $1$ is included with them. In the sieve this happens when the list starts at $1$ instead of $2$: $1$ is not a multiple of any prime, so no pass ever crosses it out.
-
-Wrong working: sieve the list $1, 2, 3, \\ldots, 30$ by $2$, $3$ and $5$. The survivors are
-$$1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29$$
-and the count of primes up to $30$ comes out as $11$.
-
-Right working: a prime has exactly two positive divisors, and $1$ has only one, so the list starts at $2$. The survivors are
-$$2, 3, 5, 7, 11, 13, 17, 19, 23, 29$$
-which is $10$ primes. In the same way $\\pi(100) = 25$, not $26$.
-
-Why it happens: the short form of the definition, "divisible only by $1$ and itself", seems to fit $1$, since its only divisor is both $1$ and itself. The requirement of two different divisors gets lost.
-
-How to check: count the divisors. A prime has exactly two; $1$ has one. A count can be tested on a small case: $\\pi(10) = 4$, for the primes $2, 3, 5, 7$.
-
-**Stopping the trial division too early**
-
-Trial division stops at a fixed list of small primes, often $2, 3, 5, 7$ from familiar examples, instead of running through every prime up to $\\sqrt{n}$. A number with no small factor is then declared prime.
-
-Wrong working: $143$ is odd, its digit sum $8$ is not a multiple of $3$, it does not end in $0$ or $5$, and $143 = 7 \\cdot 20 + 3$. No divisor among $2, 3, 5, 7$, so $143$ is called prime.
-
-Right working: $\\sqrt{143} \\approx 11.96$, so the primes to test are $2, 3, 5, 7, 11$. The last one divides:
-$$143 = 11 \\cdot 13$$
-and $143$ is composite.
-
-Why it happens: the examples with $91$ and $97$ end at $7$, and that list is easy to reuse without working out the bound again. The same slip appears at a perfect square: for $49$, testing only the primes below $7$ misses $7 = \\sqrt{49}$, and $49 = 7 \\cdot 7$.
-
-How to check: find the bound first. The last prime to test is the largest prime $p$ with $p^2 \\leq n$. For $143$, $11^2 = 121 \\leq 143$ while $13^2 = 169 > 143$, so $11$ must be on the list.
-
-**Using the larger powers for the GCD**
-
-When the GCD and LCM are read from prime factorizations, the two rules are swapped: the GCD gets the larger power of each shared prime, or the LCM gets the smaller ones.
-
-Wrong working: for $60 = 2^2 \\cdot 3 \\cdot 5$ and $252 = 2^2 \\cdot 3^2 \\cdot 7$,
-$$\\gcd(60, 252) = 2^2 \\cdot 3^2 = 36$$
-
-Right working: the GCD takes the smaller exponent of each shared prime, and the LCM takes the larger exponent of every prime that appears in either number.
-$$\\gcd(60, 252) = 2^2 \\cdot 3 = 12, \\quad \\text{lcm}(60, 252) = 2^2 \\cdot 3^2 \\cdot 5 \\cdot 7 = 1260$$
-
-Why it happens: the word "greatest" in greatest common divisor suggests taking the greatest exponents. But a divisor of both numbers cannot hold more copies of a prime than the number that has the fewest.
-
-How to check: the GCD must divide both numbers. $60 \\div 36$ is not a whole number, while $60 \\div 12 = 5$ and $252 \\div 12 = 21$. A second check: the GCD times the LCM equals the product of the two numbers, $12 \\cdot 1260 = 15120 = 60 \\cdot 252$.`,
+    content: `Three mistakes come up again and again with prime numbers. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip loosens a definition. A prime has exactly two divisors, so $1$ is not one; trial division must reach the largest prime whose square does not exceed the number; and the GCD takes the smaller exponent of each shared prime, the LCM the larger. A small test settles each case: count the divisors, square the last prime tested, or check that the GCD divides both numbers.`,
     link: '',
   },
 }
@@ -655,8 +612,38 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 4, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj8 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'counting-1-as-a-prime', name: `Counting 1 as a prime`, errorAt: 0,
+        what: `When primes are listed or counted, $1$ is included with them. In the sieve this happens when the list starts at $1$ instead of $2$: $1$ is not a multiple of any prime, so no pass ever crosses it out.`,
+        wrong: [`Sieve the list $1, 2, 3, \\ldots, 30$ by $2$, $3$ and $5$. The survivors are
+$$1, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29$$`, `And the count of primes up to $30$ comes out as $11$.`],
+        right: [`A prime has exactly two positive divisors, and $1$ has only one, so the list starts at $2$. The survivors are
+$$2, 3, 5, 7, 11, 13, 17, 19, 23, 29$$`, `Which is $10$ primes. In the same way $\\pi(100) = 25$, not $26$.`],
+        why: `The short form of the definition, "divisible only by $1$ and itself", seems to fit $1$, since its only divisor is both $1$ and itself. The requirement of two different divisors gets lost.`,
+        check: `Count the divisors. A prime has exactly two; $1$ has one. A count can be tested on a small case: $\\pi(10) = 4$, for the primes $2, 3, 5, 7$.` },
+      { id: 'stopping-the-trial-division-too-early', name: `Stopping the trial division too early`, errorAt: 0,
+        what: `Trial division stops at a fixed list of small primes, often $2, 3, 5, 7$ from familiar examples, instead of running through every prime up to $\\sqrt{n}$. A number with no small factor is then declared prime.`,
+        wrong: [`$143$ is odd, its digit sum $8$ is not a multiple of $3$, it does not end in $0$ or $5$, and $143 = 7 \\cdot 20 + 3$. No divisor among $2, 3, 5, 7$, so $143$ is called prime.`],
+        right: [`$\\sqrt{143} \\approx 11.96$, so the primes to test are $2, 3, 5, 7, 11$. The last one divides:
+$$143 = 11 \\cdot 13$$`, `And $143$ is composite.`],
+        why: `The examples with $91$ and $97$ end at $7$, and that list is easy to reuse without working out the bound again. The same slip appears at a perfect square: for $49$, testing only the primes below $7$ misses $7 = \\sqrt{49}$, and $49 = 7 \\cdot 7$.`,
+        check: `Find the bound first. The last prime to test is the largest prime $p$ with $p^2 \\leq n$. For $143$, $11^2 = 121 \\leq 143$ while $13^2 = 169 > 143$, so $11$ must be on the list.` },
+      { id: 'using-the-larger-powers-for-the-gcd', name: `Using the larger powers for the GCD`, errorAt: 1,
+        what: `When the GCD and LCM are read from prime factorizations, the two rules are swapped: the GCD gets the larger power of each shared prime, or the LCM gets the smaller ones.`,
+        wrong: [`For $60 = 2^2 \\cdot 3 \\cdot 5$ and $252 = 2^2 \\cdot 3^2 \\cdot 7$,`, `$$\\gcd(60, 252) = 2^2 \\cdot 3^2 = 36$$`],
+        right: [`For $60 = 2^2 \\cdot 3 \\cdot 5$ and $252 = 2^2 \\cdot 3^2 \\cdot 7$,`, `The GCD takes the smaller exponent of each shared prime, and the LCM takes the larger exponent of every prime that appears in either number.`, `$$\\gcd(60, 252) = 2^2 \\cdot 3 = 12,$$
+$$\\text{lcm}(60, 252) = 2^2 \\cdot 3^2 \\cdot 5 \\cdot 7 = 1260$$`],
+        why: `The word "greatest" in greatest common divisor suggests taking the greatest exponents. But a divisor of both numbers cannot hold more copies of a prime than the number that has the fewest.`,
+        check: `The GCD must divide both numbers. $60 \\div 36$ is not a whole number, while $60 \\div 12 = 5$ and $252 \\div 12 = 21$. A second check: the GCD times the LCM equals the product of the two numbers, $12 \\cdot 1260 = 15120 = 60 \\cdot 252$.` },
+    ],
+  };
+
    return {
   props:{
+    pitfallData,
     primeTypeTree,
      sectionsContent,
      introContent,
@@ -675,7 +662,7 @@ description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve 
 }
    }
 
-export default function PrimeNumbersPage({primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PrimeNumbersPage({ pitfallData,primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -852,6 +839,15 @@ $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-mistakes'}
+            id="prime-number-pitfalls"
+            title="Common pitfalls with prime numbers"
+            source="/algebra/sequences/prime-numbers"
+            after={sectionsContent.obj8.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

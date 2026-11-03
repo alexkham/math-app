@@ -812,6 +812,9 @@ import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieW
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1134,7 +1137,7 @@ For $123 \\bmod 7$: divide $123 \\div 7 = 17.57\\ldots$. The integer part is $17
 
 @academic[pitfall,aside:true,width:35%:Reading the decimal part as the remainder
 Taking the $4$ in $47 \\div 5 = 9.4$ as the remainder gives $47 \\bmod 5 = 4$. The $0.4$ is a fraction of $5$, not a count of units: $0.4 \\cdot 5 = 2$, so $47 \\bmod 5 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-decimal-part-as-the-remainder)]@
 
 The decimal quotient is only a step on the way to the answer. Its integer part counts the complete copies of $n$ inside $a$, and multiplying back turns that count into the largest multiple of $n$ that fits. Only the subtraction measures the leftover in whole units, and that whole-number leftover is what modulo returns.
 
@@ -1161,7 +1164,7 @@ When $0 \\leq a < n$, the divisor exceeds the dividend and fits zero times. The 
 
 @academic[pitfall,aside:true,width:35%:Giving the quotient instead of the remainder
 Answering $3 \\bmod 10 = 0$, because $10$ fits into $3$ zero times, reports the quotient. Modulo asks for what is left over, and all of $3$ is left: $3 \\bmod 10 = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-giving-the-quotient-instead-of-the-remainder)]@
 
 Here the division equation takes the form $a = n \\cdot 0 + a$. The quotient is $0$ because no complete copy of $n$ fits, and nothing is taken away from $a$ before the remainder is read. The two parts of the equation say different things: the quotient that $n$ is too large to fit even once, the remainder how much of $a$ is left over.
 
@@ -1202,7 +1205,7 @@ The expression $23 \\equiv 2 \\pmod{7}$ holds because $23 \\bmod 7 = 2$ and $2 \
 
 @academic[pitfall,aside:true,width:35%:Confusing mod with congruence
 Writing $17 \\bmod 5 = 7$ because $17 \\equiv 7 \\pmod{5}$ treats the relation as the operation. The value of $17 \\bmod 5$ is one number in $\\{0, 1, 2, 3, 4\\}$: $17 \\bmod 5 = 2$, while $17 \\equiv 7 \\pmod{5}$ is a true statement.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-confusing-mod-with-congruence)]@
 
 An equivalent way to test congruence: $a \\equiv b \\pmod{n}$ if and only if $n \\mid (a - b)$ — their difference is divisible by $n$. For the first example, $17 - 5 = 12$, and $12 \\mid 12$. For the second, $23 - 2 = 21$, and $7 \\mid 21$.
 
@@ -1237,7 +1240,7 @@ obj7: {
 
 @academic[pitfall,aside:true,width:35%:Writing the modulus instead of 0
 Reading the dial gives $24 \\bmod 12 = 12$, since the hand points at $12$. A remainder is always less than $12$: $24 = 12 \\cdot 2 + 0$, so $24 \\bmod 12 = 0$, the position the dial labels $12$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-writing-the-modulus-instead-of-0)]@
 
 The time $15{:}00$ on a $24$-hour clock translates to $3{:}00$ on a $12$-hour clock: $15 \\bmod 12 = 3$. The time $27$ hours from midnight is $3{:}00$ AM: $27 \\bmod 12 = 3$. Different numbers, same position on the dial.
 
@@ -1342,57 +1345,9 @@ The [GCD](!/arithmetic/divisibility/gcd) — greatest common divisor — relies 
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes account for many wrong remainders. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the decimal part as the remainder**
-
-A calculator divides $47$ by $5$ and shows $9.4$. The digits after the decimal point are read off as the remainder, as if $9.4$ meant "$9$ remainder $4$".
-
-Wrong working: $47 \\div 5 = 9.4$, so $47 \\bmod 5 = 4$.
-
-Right working: keep the integer part $9$, multiply back, $9 \\times 5 = 45$, and subtract, $47 - 45 = 2$. So $47 \\bmod 5 = 2$, and indeed $47 = 5 \\cdot 9 + 2$.
-
-Why it happens: "$9$ remainder $4$" and $9.4$ look alike, and the decimal point is read as a separator between quotient and remainder. The decimal part is a fraction of the divisor: $0.4$ of $5$ is $2$.
-
-How to check: put the answer into the division equation. $5 \\cdot 9 + 4 = 49$, not $47$, so $4$ cannot be the remainder; $5 \\cdot 9 + 2 = 47$ confirms $2$.
-
-**Giving the quotient instead of the remainder**
-
-When the dividend is smaller than the divisor, the divisor fits zero times, and that $0$ is given as the answer. The $0$ is the quotient; modulo asks for the remainder.
-
-Wrong working: $10$ goes into $3$ zero times, so $3 \\bmod 10 = 0$.
-
-Right working: $3 = 10 \\cdot 0 + 3$ with $0 \\leq 3 < 10$, so the quotient is $0$ and the remainder is $3$. So $3 \\bmod 10 = 3$.
-
-Why it happens: the first number found in a division is how many times the divisor fits, and "zero times" feels like the end of the work.
-
-How to check: a remainder of $0$ means that $n$ divides $a$. Since $10 \\nmid 3$, the answer cannot be $0$. More generally, if $0 \\leq a < n$, then $a \\bmod n = a$.
-
-**Confusing mod with congruence**
-
-Any number congruent to $a$ modulo $n$ is given as the value of $a \\bmod n$. The congruence $a \\equiv b \\pmod{n}$ holds for many values of $b$, but the operation $a \\bmod n$ returns exactly one number.
-
-Wrong working: $17 - 7 = 10$ is divisible by $5$, so $17 \\equiv 7 \\pmod{5}$, and therefore $17 \\bmod 5 = 7$.
-
-Right working: $17 = 5 \\cdot 3 + 2$ with $0 \\leq 2 < 5$, so $17 \\bmod 5 = 2$. The congruence $17 \\equiv 7 \\pmod{5}$ is also true, because $7 \\bmod 5 = 2$ as well: both numbers land on the remainder $2$.
-
-Why it happens: both use the word "mod", and $17 \\equiv 7 \\pmod{5}$ read aloud sounds almost like "$17$ mod $5$ is $7$".
-
-How to check: the value of $a \\bmod n$ must lie in $\\{0, 1, \\ldots, n-1\\}$. For $n = 5$ that set is $\\{0, 1, 2, 3, 4\\}$, and $7$ is not in it.
-
-**Writing the modulus instead of 0**
-
-A clock face has $12$ at the top, so a count that lands exactly on the top of the dial is given as $12$. In modulo arithmetic that position is the remainder $0$.
-
-Wrong working: at hour $24$ the hour hand points at $12$, so $24 \\bmod 12 = 12$.
-
-Right working: $24 = 12 \\cdot 2 + 0$, so $24 \\bmod 12 = 0$. The remainder set for $n = 12$ is $\\{0, 1, \\ldots, 11\\}$, and the dial's $12$ stands in for $0$.
-
-Why it happens: everyday clocks never show $0$, and the label on the dial is taken as the remainder.
-
-How to check: a remainder is always less than the modulus. An answer equal to $n$ means one more complete copy of $n$ can still be taken away.`,
+      content:`Four mistakes account for many wrong remainders. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip reads the remainder from the wrong place. It is what is left after the largest multiple of $n$ is taken away: not the decimal digits of the quotient, not the quotient, and never $n$ or more, so $a \\bmod n$ always lies in $\\{0, 1, \\ldots, n-1\\}$. Putting the answer back into $a = nq + r$ catches each slip.`,
       link:'',
     }
   
@@ -1602,8 +1557,40 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 8, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-decimal-part-as-the-remainder', name: `Reading the decimal part as the remainder`, errorAt: 0,
+        what: `A calculator divides $47$ by $5$ and shows $9.4$. The digits after the decimal point are read off as the remainder, as if $9.4$ meant "$9$ remainder $4$".`,
+        wrong: [`$47 \\div 5 = 9.4$, so $47 \\bmod 5 = 4$.`],
+        right: [`Keep the integer part $9$, multiply back, $9 \\times 5 = 45$, and subtract, $47 - 45 = 2$. So $47 \\bmod 5 = 2$, and indeed $47 = 5 \\cdot 9 + 2$.`],
+        why: `"$9$ remainder $4$" and $9.4$ look alike, and the decimal point is read as a separator between quotient and remainder. The decimal part is a fraction of the divisor: $0.4$ of $5$ is $2$.`,
+        check: `Put the answer into the division equation. $5 \\cdot 9 + 4 = 49$, not $47$, so $4$ cannot be the remainder; $5 \\cdot 9 + 2 = 47$ confirms $2$.` },
+      { id: 'giving-the-quotient-instead-of-the-remainder', name: `Giving the quotient instead of the remainder`, errorAt: 0,
+        what: `When the dividend is smaller than the divisor, the divisor fits zero times, and that $0$ is given as the answer. The $0$ is the quotient; modulo asks for the remainder.`,
+        wrong: [`$10$ goes into $3$ zero times, so $3 \\bmod 10 = 0$.`],
+        right: [`$3 = 10 \\cdot 0 + 3$ with $0 \\leq 3 < 10$, so the quotient is $0$ and the remainder is $3$. So $3 \\bmod 10 = 3$.`],
+        why: `The first number found in a division is how many times the divisor fits, and "zero times" feels like the end of the work.`,
+        check: `A remainder of $0$ means that $n$ divides $a$. Since $10 \\nmid 3$, the answer cannot be $0$. More generally, if $0 \\leq a < n$, then $a \\bmod n = a$.` },
+      { id: 'confusing-mod-with-congruence', name: `Confusing mod with congruence`, errorAt: 0,
+        what: `Any number congruent to $a$ modulo $n$ is given as the value of $a \\bmod n$. The congruence $a \\equiv b \\pmod{n}$ holds for many values of $b$, but the operation $a \\bmod n$ returns exactly one number.`,
+        wrong: [`$17 - 7 = 10$ is divisible by $5$, so $17 \\equiv 7 \\pmod{5}$, and therefore $17 \\bmod 5 = 7$.`],
+        right: [`$17 = 5 \\cdot 3 + 2$ with $0 \\leq 2 < 5$, so $17 \\bmod 5 = 2$. The congruence $17 \\equiv 7 \\pmod{5}$ is also true, because $7 \\bmod 5 = 2$ as well: both numbers land on the remainder $2$.`],
+        why: `Both use the word "mod", and $17 \\equiv 7 \\pmod{5}$ read aloud sounds almost like "$17$ mod $5$ is $7$".`,
+        check: `The value of $a \\bmod n$ must lie in $\\{0, 1, \\ldots, n-1\\}$. For $n = 5$ that set is $\\{0, 1, 2, 3, 4\\}$, and $7$ is not in it.` },
+      { id: 'writing-the-modulus-instead-of-0', name: `Writing the modulus instead of 0`, errorAt: 0,
+        what: `A clock face has $12$ at the top, so a count that lands exactly on the top of the dial is given as $12$. In modulo arithmetic that position is the remainder $0$.`,
+        wrong: [`At hour $24$ the hour hand points at $12$, so $24 \\bmod 12 = 12$.`],
+        right: [`$24 = 12 \\cdot 2 + 0$, so $24 \\bmod 12 = 0$. The remainder set for $n = 12$ is $\\{0, 1, \\ldots, 11\\}$, and the dial's $12$ stands in for $0$.`],
+        why: `Everyday clocks never show $0$, and the label on the dial is taken as the remainder.`,
+        check: `A remainder is always less than the modulus. An answer equal to $n$ means one more complete copy of $n$ can still be taken away.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     moduloDivisibilityCases,
     demoUnits,
     conceptIntroFigures,
@@ -1631,7 +1618,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function ModuloPage({moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ModuloPage({ pitfallData,moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1734,6 +1721,11 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={arithmeticNotationSheet}
+            current={'/arithmetic/modulo'}
+          />,
         ]
     },
     {
@@ -1833,6 +1825,15 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="modulo-pitfalls"
+            title="Common pitfalls with remainders"
+            source="/arithmetic/modulo"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -15,6 +15,7 @@ import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -135,7 +136,7 @@ const keyWords = [
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Coefficient</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">numerical factor of a term</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in 4x<sup>3</sup> − 2x + 7: &nbsp;4, −2, 7</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">in 4x<sup>3</sup> − 2x + 7: &nbsp;4, −2 (7 is the constant term)</td>
     </tr>
     <tr style="background: #f8f9fa;">
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Leading term</td>
@@ -404,7 +405,7 @@ The polynomial $2x^2 - x + 3$ is in standard form. The degrees decrease from lef
 
 @academic[pitfall,aside:true,width:35%:Taking the first term as the leading term
 Reading the leading coefficient of $3 + 2x^2 - x$ from its first term gives $3$. The leading term is the one of highest degree, $2x^2$, so the leading coefficient is $2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-first-term-as-the-leading-term)]@
 
 Standard form offers several advantages. The leading term appears first, making the degree immediately visible. The leading coefficient is the first number you see, simplifying analysis of end behavior. Comparing two polynomials becomes easier when both follow the same ordering convention.
 
@@ -466,7 +467,7 @@ $$(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$$]@
 
 @academic[pitfall,aside:true,width:35%:Squaring a binomial term by term
 Writing $(x + 3)^2$ as $x^2 + 9$ drops the middle terms. Multiplying out $(x + 3)(x + 3)$ gives $x^2 + 3x + 3x + 9 = x^2 + 6x + 9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-a-binomial-term-by-term)]@
 
 In the product above, the two binomials give four partial products before anything is combined: $x \\cdot x$, $x \\cdot (-3)$, $2 \\cdot x$ and $2 \\cdot (-3)$. The two middle products, $-3x$ and $2x$, are like terms and merge into $-x$. The same count holds for any product of two binomials, including a binomial multiplied by itself, and a binomial times a trinomial gives six partial products.
 
@@ -491,7 +492,7 @@ Why factor at all? Because products are easier to analyze than sums. A polynomia
 
 @academic[pitfall,aside:true,width:35%:Factoring a sum of squares
 Factoring $x^2 + 9$ as $(x + 3)(x - 3)$ uses the difference-of-squares pattern on a sum. Multiplying back gives $x^2 - 9$. Since $x^2 + 9 \\geq 9$ for every real $x$, it has no real linear factors.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-factoring-a-sum-of-squares)]@
 
 Several techniques exist. Extracting a greatest common factor applies to nearly every polynomial. Grouping handles four-term expressions by pairing terms strategically. Special patterns — the difference of squares, perfect square trinomials, and sum or difference of cubes — allow instant recognition and factoring. Trinomials of the form $ax^2 + bx + c$ require methods tailored to finding two binomial factors.
 
@@ -552,7 +553,7 @@ The Remainder Theorem states that when a polynomial $P(x)$ is divided by $(x - a
 
 @academic[pitfall,aside:true,width:35%:Evaluating at the wrong sign
 Dividing $x^3 - 2x + 4$ by $(x + 3)$ and using $P(3) = 25$ copies the sign from the divisor. Since $x + 3 = x - (-3)$, the remainder is $P(-3) = -27 + 6 + 4 = -17$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-evaluating-at-the-wrong-sign)]@
 
 The Factor Theorem follows immediately. Since the remainder of dividing $P(x)$ by $(x - a)$ is $P(a)$, the remainder is zero exactly when $P(a) = 0$. In other words, $(x - a)$ is a factor of $P(x)$ if and only if $a$ is a root. This bridges the gap between division and root-finding.
 
@@ -597,64 +598,9 @@ Together, these theorems provide a strategy: use the Rational Root Theorem to ge
 
   obj16: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers in basic polynomial work. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking the first term as the leading term**
-
-A polynomial is written with its terms out of order, and the first term written is taken as the leading term, so the leading coefficient and the degree are read from the wrong term.
-
-Wrong working: in $3 + 2x^2 - x$, the first term is $3$, so the leading coefficient is taken as $3$ and the degree as $0$.
-
-Right working: the degrees of the terms are $0$, $2$ and $1$. The highest is $2$, so the leading term is $2x^2$, the leading coefficient is $2$ and the degree is $2$. In standard form the polynomial is $2x^2 - x + 3$.
-
-Why it happens: most polynomials are met in standard form, where the leading term does come first, and the habit of reading the first term carries over to polynomials that are not.
-
-How to check: rewrite the polynomial in standard form before naming its leading term, or list the degree of every term and pick the largest.
-
-**Squaring a binomial term by term**
-
-A binomial is squared by squaring each of its two terms, as if the exponent could be distributed over the sum.
-
-Wrong working:
-$$(x + 3)^2 = x^2 + 3^2 = x^2 + 9$$
-
-Right working: write the square as a product and multiply every term by every term.
-$$(x + 3)^2 = (x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9$$
-
-Why it happens: powers do distribute over products, $(3x)^2 = 9x^2$, and the same move is applied to a sum, where it fails.
-
-How to check: substitute a simple value. At $x = 1$, $(1 + 3)^2 = 16$, while $1^2 + 9 = 10$ and $1^2 + 6 + 9 = 16$.
-
-**Factoring a sum of squares**
-
-The difference-of-squares pattern $a^2 - b^2 = (a + b)(a - b)$ is applied to a sum $a^2 + b^2$.
-
-Wrong working:
-$$x^2 + 9 = (x + 3)(x - 3)$$
-
-Right working: multiplying back shows the factors give a difference, not a sum.
-$$(x + 3)(x - 3) = x^2 - 3x + 3x - 9 = x^2 - 9$$
-Since $x^2 \\geq 0$, the value of $x^2 + 9$ is at least $9$ for every real $x$, so it has no real roots and, by the Factor Theorem, no real linear factors. Over the real numbers, $x^2 + 9$ is irreducible.
-
-Why it happens: the two expressions $x^2 - 9$ and $x^2 + 9$ differ only in one sign, and the pattern for the first is learned so well that it is applied to both.
-
-How to check: multiply the proposed factors back out and compare the result with the original, sign by sign.
-
-**Evaluating at the wrong sign**
-
-The Remainder Theorem is applied to a divisor of the form $(x + a)$, and the polynomial is evaluated at $a$ instead of $-a$.
-
-Wrong working: dividing $P(x) = x^3 - 2x + 4$ by $(x + 3)$, the remainder is taken as $P(3) = 27 - 6 + 4 = 25$.
-
-Right working: write the divisor in the form $(x - a)$: $x + 3 = x - (-3)$, so $a = -3$.
-$$P(-3) = (-3)^3 - 2(-3) + 4 = -27 + 6 + 4 = -17$$
-The remainder is $-17$.
-
-Why it happens: the theorem is stated for $(x - a)$, and the number visible in $(x + 3)$ is $3$, so the minus sign in the statement is lost.
-
-How to check: the value to substitute is the one that makes the divisor zero. $x + 3 = 0$ at $x = -3$, not at $x = 3$. Synthetic division with $-3$ on the coefficients $1, 0, -2, 4$ also ends in $-17$.`,
+    content: `Four mistakes account for many wrong answers in basic polynomial work. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip skips a step that the definitions require. The leading term is the term of highest degree, wherever it is written; the square of a sum is a product of two sums and has a middle term; $x^2 + 9$ has no real linear factors; and the Remainder Theorem evaluates at the value that makes the divisor zero. Writing the polynomial in standard form, substituting $x = 1$, multiplying the factors back, or solving $x + 3 = 0$ catches each of them.`,
     link: '',
   },
 
@@ -840,8 +786,44 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-first-term-as-the-leading-term', name: `Taking the first term as the leading term`, errorAt: 0,
+        what: `A polynomial is written with its terms out of order, and the first term written is taken as the leading term, so the leading coefficient and the degree are read from the wrong term.`,
+        wrong: [`In $3 + 2x^2 - x$, the first term is $3$, so the leading coefficient is taken as $3$ and the degree as $0$.`],
+        right: [`The degrees of the terms are $0$, $2$ and $1$. The highest is $2$, so the leading term is $2x^2$, the leading coefficient is $2$ and the degree is $2$. In standard form the polynomial is $2x^2 - x + 3$.`],
+        why: `Most polynomials are met in standard form, where the leading term does come first, and the habit of reading the first term carries over to polynomials that are not.`,
+        check: `Rewrite the polynomial in standard form before naming its leading term, or list the degree of every term and pick the largest.` },
+      { id: 'squaring-a-binomial-term-by-term', name: `Squaring a binomial term by term`, errorAt: 1,
+        what: `A binomial is squared by squaring each of its two terms, as if the exponent could be distributed over the sum.`,
+        wrong: [`$$(x + 3)^2$$`, `$$= x^2 + 3^2 = x^2 + 9$$`],
+        right: [`$$(x + 3)^2$$`, `Write the square as a product and multiply every term by every term.
+$$= (x + 3)(x + 3)$$
+$$= x^2 + 3x + 3x + 9 = x^2 + 6x + 9$$`],
+        why: `Powers do distribute over products, $(3x)^2 = 9x^2$, and the same move is applied to a sum, where it fails.`,
+        check: `Substitute a simple value. At $x = 1$, $(1 + 3)^2 = 16$, while $1^2 + 9 = 10$ and $1^2 + 6 + 9 = 16$.` },
+      { id: 'factoring-a-sum-of-squares', name: `Factoring a sum of squares`, errorAt: 0,
+        what: `The difference-of-squares pattern $a^2 - b^2 = (a + b)(a - b)$ is applied to a sum $a^2 + b^2$.`,
+        wrong: [`$$x^2 + 9 = (x + 3)(x - 3)$$`],
+        right: [`Multiplying back shows the factors give a difference, not a sum.`, `$$(x + 3)(x - 3) = x^2 - 3x + 3x - 9$$
+$$= x^2 - 9$$`, `Since $x^2 \\geq 0$, the value of $x^2 + 9$ is at least $9$ for every real $x$, so it has no real roots and, by the Factor Theorem, no real linear factors. Over the real numbers, $x^2 + 9$ is irreducible.`],
+        why: `The two expressions $x^2 - 9$ and $x^2 + 9$ differ only in one sign, and the pattern for the first is learned so well that it is applied to both.`,
+        check: `Multiply the proposed factors back out and compare the result with the original, sign by sign.` },
+      { id: 'evaluating-at-the-wrong-sign', name: `Evaluating at the wrong sign`, errorAt: 0,
+        what: `The Remainder Theorem is applied to a divisor of the form $(x + a)$, and the polynomial is evaluated at $a$ instead of $-a$.`,
+        wrong: [`Dividing $P(x) = x^3 - 2x + 4$ by $(x + 3)$, the remainder is taken as $P(3) = 27 - 6 + 4 = 25$.`],
+        right: [`Write the divisor in the form $(x - a)$: $x + 3 = x - (-3)$, so $a = -3$.`, `$$P(-3) = (-3)^3 - 2(-3) + 4$$
+$$= -27 + 6 + 4 = -17$$`, `The remainder is $-17$.`],
+        why: `The theorem is stated for $(x - a)$, and the number visible in $(x + 3)$ is $3$, so the minus sign in the statement is lost.`,
+        check: `The value to substitute is the one that makes the divisor zero. $x + 3 = 0$ at $x = -3$, not at $x = 3$. Synthetic division with $-3$ on the coefficients $1, 0, -2, 4$ also ends in $-17$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     faqQuestions,
     demoUnits,
     conceptIntroFigures,
@@ -866,7 +848,7 @@ const schemas = {
 
 
 
-export default function PolynomialsPage({faqQuestions, seoData,sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits, factoringBeforeAfter, conceptIntroFigures}) {
+export default function PolynomialsPage({ pitfallData,faqQuestions, seoData,sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits, factoringBeforeAfter, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1092,6 +1074,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@`,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="polynomial-pitfalls"
+            title="Common pitfalls with polynomials"
+            source="/algebra/polynomials"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -18,6 +18,9 @@ import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare'
 
 
 export async function getStaticProps(){
@@ -928,9 +931,42 @@ const schemas = {
       ] },
     ],
   };
+  // ConceptCompare data (limits-at-infinity-vs-infinite-limits); every fact is from the section text
+  const twoInfinityLimits = {
+    header: { kicker: 'Limits at infinity', title: 'Limits at infinity vs infinite limits', lede: 'Both use the infinity symbol, but in opposite roles.' },
+    concepts: [
+      { id: 'at', name: 'Limit at infinity',
+        values: {
+          notation: '$\\lim_{x \\to \\infty} f(x)$ or $\\lim_{x \\to -\\infty} f(x)$',
+          escapes: 'The input: $x$ grows without bound while we track where $f(x)$ goes',
+          where: 'Under the arrow',
+          ex: '$\\lim_{x \\to \\infty} \\frac{1}{x} = 0$',
+        } },
+      { id: 'inf', name: 'Infinite limit',
+        values: {
+          notation: '$\\lim_{x \\to a} f(x) = \\infty$ or $= -\\infty$',
+          escapes: 'The output: $x$ approaches a finite $a$ while $f(x)$ grows without bound',
+          where: 'After the equals sign',
+          ex: '$\\lim_{x \\to 0} \\frac{1}{x^2} = \\infty$',
+        } },
+    ],
+    aspects: [
+      { id: 'notation', label: 'Notation', key: true },
+      { id: 'escapes', label: 'What escapes' },
+      { id: 'where', label: 'Where the symbol sits' },
+      { id: 'ex', label: 'Example' },
+    ],
+    verdict: {
+      label: 'Opposite roles',
+      text: 'What tells them apart is which side escapes: the input or the output.',
+      more: 'The two can combine: in $\\lim_{x \\to \\infty} x^2 = \\infty$ the input and the output both escape, a limit at infinity whose value is infinite.',
+    },
+  };
+
 
 return {
   props: {
+      twoInfinityLimits,
     horizontalAsymptoteProfile,
     growthRateLevels,
     demoUnits,
@@ -956,7 +992,9 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function InfinityPage({horizontalAsymptoteProfile, growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function InfinityPage({twoInfinityLimits, horizontalAsymptoteProfile, growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1032,6 +1070,16 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          <DiagramFrame
+            key={'obj1-compare'}
+            id="limits-at-infinity-vs-infinite-limits"
+            title="Limits at infinity vs infinite limits"
+            source="/calculus/limits/infinity"
+            before={`The same symbol plays two opposite roles. The card sets the two cases side by side and ends with the one line that tells them apart.`}
+            after={`Read which side escapes: under the arrow it is the input, after the equals sign it is the output.`}
+          >
+            <ConceptCompare data={twoInfinityLimits} variant="confused" theme={compareTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1153,6 +1201,11 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
             parentHref={sectionsContent.notation.parentHref}
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
+          />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={limitsNotationSheet}
+            current={'/calculus/limits/infinity'}
           />,
         ]
     },

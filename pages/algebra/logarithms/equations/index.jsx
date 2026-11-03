@@ -14,6 +14,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -218,7 +220,7 @@ $$x = e^4 \\approx 54.598$$]@
 
 @academic[pitfall,aside:true,width:35%:Swapping the base and the exponent
 Rewriting $\\log_2(x) = 5$ as $x = 5^2 = 25$ raises the wrong number to the wrong power, and $\\log_2(25) \\approx 4.64$, not $5$. The correct answer is $x = 2^5 = 32$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-base-and-the-exponent)]@
 
 In each of these examples the conversion uses the same three numbers: the base, the value of the logarithm, and the argument. The base of the logarithm becomes the base of the power, the value $k$ becomes the exponent, and the argument is what that power equals.
 
@@ -259,7 +261,7 @@ Check both: $\\ln((-3)^2) = \\ln(9)$ works, and $\\ln((3)^2) = \\ln(9)$ works. B
 
 @academic[pitfall,aside:true,width:35%:Rejecting the negative root
 Dropping $x = -3$ because it is negative, or because $\\ln(x^2)$ was first rewritten as $2\\ln(x)$, leaves only $x = 3$. But $(-3)^2 = 9 > 0$, so both $x = 3$ and $x = -3$ solve the equation.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-rejecting-the-negative-root)]@
 
 In both examples the logarithms have the same base, so they are removed in one step and the equation becomes a statement about the arguments alone. What remains is ordinary algebra: a linear equation in the first case and a quadratic one in the second.
 
@@ -291,7 +293,7 @@ Solution: $x = 4$.]@
 
 @academic[pitfall,aside:true,width:35%:Turning a sum of logarithms into the logarithm of a sum
 Condensing $\\log_2(x) + \\log_2(x - 2)$ to $\\log_2(2x - 2)$ gives $2x - 2 = 8$, so $x = 5$, but $\\log_2(5) + \\log_2(3) = \\log_2(15) \\neq 3$. The product rule gives $x(x - 2) = 8$, so $x = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-turning-a-sum-of-logarithms-into-the-logarithm-of-a-sum)]@
 
 The condensing step is what makes the equation solvable: two logarithms with the same base become one, and the equation takes the basic form of the first section. The rule used here is the product rule, which joins the arguments $x$ and $x - 2$ into a single expression.
 
@@ -349,7 +351,7 @@ Check $x = -2$: $\\log(-2)$ — undefined. Extraneous.]@
 
 @academic[pitfall,aside:true,width:35%:Checking roots in the condensed equation
 Testing $x = -2$ in $\\log(x(x-3)) = 1$ gives $\\log((-2)(-5)) = \\log(10) = 1$, so it seems to pass. In the original, $\\log(-2)$ is undefined, so the only solution is $x = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-roots-in-the-condensed-equation)]@
 
 The squaring, factoring, or combining steps do not "create" these solutions — they were always algebraic solutions to the transformed equation. The domain restrictions eliminate them.
 
@@ -404,7 +406,7 @@ $$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$]
 
 @academic[pitfall,aside:true,width:35%:Turning the quotient into a difference
 Rewriting $\\frac{\\log(7)}{\\log(3)}$ as $\\log(7) - \\log(3) = \\log\\left(\\frac{7}{3}\\right)$ gives $x \\approx 0.368$, and $3^{0.368} \\approx 1.5$, not $7$. The correct value is $x \\approx 1.771$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-turning-the-quotient-into-a-difference)]@
 
 The power rule is what moves the unknown out of the exponent: $\\log(3^x)$ becomes $x \\cdot \\log(3)$, a product of $x$ and a fixed number. Dividing both sides by that number isolates $x$.
 
@@ -489,75 +491,9 @@ The expressions $\\log(7)/\\log(3)$ and $\\ln(7)/\\ln(3)$ compute to identical d
   },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again in logarithmic equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Swapping the base and the exponent**
-
-A logarithm is converted to exponential form, but the base and the value of the logarithm trade places, so the value is raised to the power of the base.
-
-Wrong working:
-$$\\log_2(x) = 5 \\implies x = 5^2 = 25$$
-
-Right working: $\\log_a(x) = k$ means $a^k = x$, so the base $2$ is raised to the power $5$.
-$$\\log_2(x) = 5 \\implies x = 2^5 = 32$$
-
-Why it happens: the equation holds two small numbers, and the conversion is remembered as "one number to the power of the other" without which one is the base.
-
-How to check: raise the base to the value of the logarithm and compare with the answer. $2^5 = 32$, not $25$; indeed $\\log_2(25) \\approx 4.64$, while $\\log_2(32) = 5$.
-
-**Rejecting the negative root**
-
-An equation such as $\\ln(x^2) = \\ln(9)$ produces a negative root, and it is thrown out on the belief that logarithmic equations never have negative solutions. The same loss happens when $\\ln(x^2)$ is rewritten as $2\\ln(x)$ before solving.
-
-Wrong working:
-$$\\ln(x^2) = \\ln(9) \\implies 2\\ln(x) = \\ln(9) \\implies \\ln(x) = \\ln(3) \\implies x = 3$$
-
-Right working: the one-to-one property gives $x^2 = 9$, so $x = 3$ or $x = -3$. The argument is $x^2$, which equals $9$ for both values, so both solutions stand.
-
-Why it happens: the rule "the argument must be positive" is remembered as "$x$ must be positive". The power rule $\\log_a(M^p) = p\\log_a(M)$ needs $M > 0$, so using it with $M = x$ quietly adds the condition $x > 0$.
-
-How to check: substitute the negative root into the original equation. $x = -3$ gives $\\ln((-3)^2) = \\ln(9)$, which is true.
-
-**Turning a sum of logarithms into the logarithm of a sum**
-
-Two logarithms with the same base are added, and the sum is condensed by adding the arguments instead of multiplying them.
-
-Wrong working:
-$$\\log_2(x) + \\log_2(x - 2) = 3 \\implies \\log_2(2x - 2) = 3 \\implies 2x - 2 = 8 \\implies x = 5$$
-
-Right working: the product rule gives $\\log_2(x(x - 2)) = 3$, so $x^2 - 2x = 8$ and $(x - 4)(x + 2) = 0$. Of $x = 4$ and $x = -2$, only $x = 4$ keeps both arguments positive.
-
-Why it happens: the plus sign between the logarithms looks as if it should carry over to the arguments. The product rule turns a product inside into a sum outside, not a sum into a sum.
-
-How to check: substitute the answer into the original equation. $x = 5$ gives $\\log_2(5) + \\log_2(3) = \\log_2(15) \\approx 3.907$, not $3$. $x = 4$ gives $\\log_2(4) + \\log_2(2) = 2 + 1 = 3$.
-
-**Checking roots in the condensed equation**
-
-The roots of the quadratic are tested, but in the condensed equation rather than in the original one, so an extraneous root passes the test.
-
-Wrong working: $\\log(x) + \\log(x - 3) = 1$ is condensed to $\\log(x(x - 3)) = 1$, with roots $x = 5$ and $x = -2$. In the condensed form $x = -2$ gives $\\log((-2)(-5)) = \\log(10) = 1$, so both roots are kept.
-
-Right working: in the original equation $x = -2$ gives $\\log(-2)$, which is undefined, so it is rejected. $x = 5$ gives $\\log(5) + \\log(2) = \\log(10) = 1$. The only solution is $x = 5$.
-
-Why it happens: the condensed equation is the last line written before the quadratic, so it is the one at hand. But it is defined on a larger set: the product $x(x - 3)$ is also positive when both factors are negative.
-
-How to check: write the domain from the original terms before solving. Here $x > 0$ and $x - 3 > 0$ give $x > 3$, and any root outside it is rejected at once.
-
-**Turning the quotient into a difference**
-
-The answer to an exponential equation is a quotient of two logarithms, and it is mistaken for the quotient rule, so the division is replaced by a subtraction.
-
-Wrong working:
-$$x = \\frac{\\log(7)}{\\log(3)} = \\log(7) - \\log(3) = \\log\\left(\\frac{7}{3}\\right) \\approx 0.368$$
-
-Right working: the two logarithms are separate numbers, divided as they stand.
-$$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$
-
-Why it happens: the quotient rule $\\log\\left(\\frac{M}{N}\\right) = \\log(M) - \\log(N)$ also has a fraction and a difference in it. There the fraction is inside one logarithm; here it is a fraction of two logarithms. The only rule that applies to it is the change of base formula, which turns it into $\\log_3(7)$, not into a difference.
-
-How to check: substitute the answer into the original equation. $3^{0.368} \\approx 1.50$, far from $7$, while $3^{1.771} \\approx 7.00$.`,
+    content: `Five mistakes come up again and again in logarithmic equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Four of the five slips apply a logarithm rule where it does not hold: the definition read backwards, the power rule used on an argument that can be negative, the logarithm of a product replaced by the logarithm of a sum, and the quotient rule applied to a quotient of two logarithms. The fifth checks the roots too late: condensing can widen the domain, so the domain has to come from the original equation. Substituting each answer into the original equation catches every case above.`,
     link: '',
   },
 };
@@ -767,8 +703,47 @@ const schemas = {
     last: [{ label: 'Log side', text: 'Check every answer against the domain: the argument of each logarithm must be positive.' }],
   };
 
+  // MistakeFix 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'swapping-the-base-and-the-exponent', name: `Swapping the base and the exponent`, errorAt: 1,
+        what: `A logarithm is converted to exponential form, but the base and the value of the logarithm trade places, so the value is raised to the power of the base.`,
+        wrong: [`$$\\log_2(x) = 5$$`, `$$\\implies x = 5^2 = 25$$`],
+        right: [`$$\\log_2(x) = 5$$`, `$\\log_a(x) = k$ means $a^k = x$, so the base $2$ is raised to the power $5$.`, `$$\\implies x = 2^5 = 32$$`],
+        why: `The equation holds two small numbers, and the conversion is remembered as "one number to the power of the other" without which one is the base.`,
+        check: `Raise the base to the value of the logarithm and compare with the answer. $2^5 = 32$, not $25$; indeed $\\log_2(25) \\approx 4.64$, while $\\log_2(32) = 5$.` },
+      { id: 'rejecting-the-negative-root', name: `Rejecting the negative root`, errorAt: 1,
+        what: `An equation such as $\\ln(x^2) = \\ln(9)$ produces a negative root, and it is thrown out on the belief that logarithmic equations never have negative solutions. The same loss happens when $\\ln(x^2)$ is rewritten as $2\\ln(x)$ before solving.`,
+        wrong: [`$$\\ln(x^2) = \\ln(9)$$`, `$$\\implies 2\\ln(x) = \\ln(9)$$`, `$$\\implies \\ln(x) = \\ln(3)$$`, `$$\\implies x = 3$$`],
+        right: [`$$\\ln(x^2) = \\ln(9)$$`, `The one-to-one property gives $x^2 = 9$, so $x = 3$ or $x = -3$. The argument is $x^2$, which equals $9$ for both values, so both solutions stand.`],
+        why: `The rule "the argument must be positive" is remembered as "$x$ must be positive". The power rule $\\log_a(M^p) = p\\log_a(M)$ needs $M > 0$, so using it with $M = x$ quietly adds the condition $x > 0$.`,
+        check: `Substitute the negative root into the original equation. $x = -3$ gives $\\ln((-3)^2) = \\ln(9)$, which is true.` },
+      { id: 'turning-a-sum-of-logarithms-into-the-logarithm-of-a-sum', name: `Turning a sum of logarithms into the logarithm of a sum`, errorAt: 1,
+        what: `Two logarithms with the same base are added, and the sum is condensed by adding the arguments instead of multiplying them.`,
+        wrong: [`$$\\log_2(x) + \\log_2(x - 2) = 3$$`, `$$\\implies \\log_2(2x - 2) = 3$$`, `$$\\implies 2x - 2 = 8$$`, `$$\\implies x = 5$$`],
+        right: [`$$\\log_2(x) + \\log_2(x - 2) = 3$$`, `The product rule gives $\\log_2(x(x - 2)) = 3$, so $x^2 - 2x = 8$ and $(x - 4)(x + 2) = 0$. Of $x = 4$ and $x = -2$, only $x = 4$ keeps both arguments positive.`],
+        why: `The plus sign between the logarithms looks as if it should carry over to the arguments. The product rule turns a product inside into a sum outside, not a sum into a sum.`,
+        check: `Substitute the answer into the original equation. $x = 5$ gives $\\log_2(5) + \\log_2(3) = \\log_2(15) \\approx 3.907$, not $3$. $x = 4$ gives $\\log_2(4) + \\log_2(2) = 2 + 1 = 3$.` },
+      { id: 'checking-roots-in-the-condensed-equation', name: `Checking roots in the condensed equation`, errorAt: 0,
+        what: `The roots of the quadratic are tested, but in the condensed equation rather than in the original one, so an extraneous root passes the test.`,
+        wrong: [`$\\log(x) + \\log(x - 3) = 1$ is condensed to $\\log(x(x - 3)) = 1$, with roots $x = 5$ and $x = -2$. In the condensed form $x = -2$ gives $\\log((-2)(-5)) = \\log(10) = 1$, so both roots are kept.`],
+        right: [`In the original equation $x = -2$ gives $\\log(-2)$, which is undefined, so it is rejected. $x = 5$ gives $\\log(5) + \\log(2) = \\log(10) = 1$. The only solution is $x = 5$.`],
+        why: `The condensed equation is the last line written before the quadratic, so it is the one at hand. But it is defined on a larger set: the product $x(x - 3)$ is also positive when both factors are negative.`,
+        check: `Write the domain from the original terms before solving. Here $x > 0$ and $x - 3 > 0$ give $x > 3$, and any root outside it is rejected at once.` },
+      { id: 'turning-the-quotient-into-a-difference', name: `Turning the quotient into a difference`, errorAt: 1,
+        what: `The answer to an exponential equation is a quotient of two logarithms, and it is mistaken for the quotient rule, so the division is replaced by a subtraction.`,
+        wrong: [`$$x = \\frac{\\log(7)}{\\log(3)}$$`, `$$= \\log(7) - \\log(3) = \\log\\left(\\frac{7}{3}\\right) \\approx 0.368$$`],
+        right: [`$$x = \\frac{\\log(7)}{\\log(3)}$$`, `The two logarithms are separate numbers, divided as they stand.
+$$\\approx \\frac{0.845}{0.477} \\approx 1.771$$`],
+        why: `The quotient rule $\\log\\left(\\frac{M}{N}\\right) = \\log(M) - \\log(N)$ also has a fraction and a difference in it. There the fraction is inside one logarithm; here it is a fraction of two logarithms. The only rule that applies to it is the change of base formula, which turns it into $\\log_3(7)$, not into a difference.`,
+        check: `Substitute the answer into the original equation. $3^{0.368} \\approx 1.50$, far from $7$, while $3^{1.771} \\approx 7.00$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     logEquationDecision,
     sectionsContent,
     introContent,
@@ -791,7 +766,7 @@ return {
    }
 
 // export default function EquationsPage({seoData,sectionsContent , introContent}) {
-export default function EquationsPage({logEquationDecision, 
+export default function EquationsPage({ pitfallData,logEquationDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -855,7 +830,7 @@ Solve $\\ln(x) = 4$.
 $$x = e^4 \\approx 54.598$$]@`,
           `@academic[pitfall,aside:true,width:35%:Swapping the base and the exponent
 Rewriting $\\log_2(x) = 5$ as $x = 5^2 = 25$ raises the wrong number to the wrong power, and $\\log_2(25) \\approx 4.64$, not $5$. The correct answer is $x = 2^5 = 32$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-swapping-the-base-and-the-exponent)]@`,
           `When the argument is an expression, solve the resulting equation:`,
           `@academic[example:Example
 Solve $\\log_5(2x - 1) = 2$.
@@ -1013,6 +988,15 @@ $$x = 13$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="logarithmic-equation-pitfalls"
+            title="Common pitfalls in logarithmic equations"
+            source="/algebra/logarithms/equations"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

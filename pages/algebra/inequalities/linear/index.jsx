@@ -18,6 +18,7 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -364,7 +365,7 @@ The multiplication property has two cases. Multiplying or dividing by a positive
 
 @academic[pitfall,aside:true,width:35%:Flipping the sign for a negative number
 Solving $3x > -12$ as $x < -4$ flips the sign because $-12$ is negative. Only the sign of the divisor matters, and $3$ is positive, so $x > -4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-flipping-the-sign-for-a-negative-number)]@
 
 The reversal is the entire difference between solving equations and solving inequalities. Every other step — collecting terms, distributing, clearing fractions — is mechanically identical. Missing the flip when dividing by a negative is the single most common error, and it produces the mirror image of the correct solution across the boundary point: the wrong half of the number line.`,
     before: ``,
@@ -382,7 +383,7 @@ An inequality requiring a direction flip: $-2x + 5 > 13$. Subtract $5$: $-2x > 8
 
 @academic[pitfall,aside:true,width:35%:Keeping the sign when dividing by a negative
 Dividing $-2x > 8$ by $-2$ without reversing gives $x > -4$, which includes $x = 0$, where $-2(0) + 5 = 5 > 13$ is false. Reversing gives $x < -4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-the-sign-when-dividing-by-a-negative)]@
 
 In that example the direction changes at exactly one step, the division by $-2$. The subtraction of $5$ before it leaves the sign as it was, and so would any addition, subtraction, or multiplication by a positive number elsewhere in the working.
 
@@ -411,7 +412,7 @@ For $x \\leq 9$: place a solid dot at $9$ (included because the inequality is no
 
 @academic[pitfall,aside:true,width:35%:Using an open dot for a non-strict sign
 Drawing $x \\leq 9$ with an open dot, or writing $(-\\infty, 9)$, leaves out $x = 9$, where both sides equal $29$ and $29 \\leq 29$ holds. The answer is $(-\\infty, 9]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-an-open-dot-for-a-non-strict-sign)]@
 
 The inequality $4x - 7 \\leq 2x + 11$ has the boundary at $x = 9$, the solution of $4x - 7 = 2x + 11$. The inequality symbol tells which side to shade, and whether the dot is solid or open.
 
@@ -430,7 +431,7 @@ A three-part chain like $-3 < 2x + 1 \\leq 7$ is a conjunction: both $-3 < 2x + 
 
 @academic[pitfall,aside:true,width:35%:Changing only the middle of a chain
 Subtracting $1$ from the middle alone turns $-3 < 2x + 1 \\leq 7$ into $-3 < 2x \\leq 7$, so $-\\frac{3}{2} < x \\leq \\frac{7}{2}$. All three parts change, which gives $-2 < x \\leq 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-changing-only-the-middle-of-a-chain)]@
 
 The chain is solved as one statement, with $x$ in the middle part. Each step is chosen to undo something around $x$, and after the last step $x$ stands alone between two numbers that are read off directly as the endpoints of the interval.
 
@@ -463,7 +464,7 @@ $$x > 18$$]@
 
 @academic[pitfall,aside:true,width:35%:Distributing a minus to the first term only
 Opening $4x - 3(x + 2)$ as $4x - 3x + 6$ gives $x + 6 > 12$, so $x > 6$. The $-3$ multiplies both terms, $-3x - 6$, so $x - 6 > 12$ and $x > 18$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-distributing-a-minus-to-the-first-term-only)]@
 
 The solution is $(18, \\infty)$. The multiplication by $12$ is safe because $12 > 0$, so the direction is preserved.
 
@@ -524,81 +525,9 @@ The same caution applies to multiplying by a variable expression whose sign is u
 
   obj10: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for most wrong answers to linear inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Flipping the sign for a negative number**
-
-The division is by a positive coefficient, but a negative number elsewhere in the inequality, here on the right side, is taken as the signal to reverse the direction.
-
-Wrong working:
-$$3x > -12 \\implies x < -4$$
-
-Right working: the divisor $3$ is positive, so the direction is kept.
-$$3x > -12 \\implies x > \\frac{-12}{3} = -4$$
-The solution is $(-4, \\infty)$.
-
-Why it happens: the flip rule is remembered as "negative means flip", without the part that says which number has to be negative: the one both sides are multiplied or divided by.
-
-How to check: test one value from each answer. $x = 0$ lies in the right answer and gives $0 > -12$, true. $x = -5$ lies in the wrong answer and gives $-15 > -12$, false.
-
-**Keeping the sign when dividing by a negative**
-
-Both sides are divided by a negative coefficient, and the inequality sign is copied unchanged, as it would be in an equation.
-
-Wrong working:
-$$-2x + 5 > 13 \\implies -2x > 8 \\implies x > -4$$
-
-Right working: dividing by $-2$ reverses the sign.
-$$-2x > 8 \\implies x < -4$$
-The solution is $(-\\infty, -4)$.
-
-Why it happens: every other step of the working is the same as for an equation, so the one step that differs is done out of habit.
-
-How to check: test one value on each side of the boundary $-4$. $x = -5$ gives $-2(-5) + 5 = 15 > 13$, true. $x = 0$ gives $5 > 13$, false. The solutions lie to the left of $-4$.
-
-**Using an open dot for a non-strict sign**
-
-The boundary of a non-strict inequality ($\\leq$ or $\\geq$) is drawn as an open dot or written with a round bracket, so the point where both sides are equal drops out of the answer.
-
-Wrong working: $x \\leq 9$ is graphed with an open dot at $9$ and written as $(-\\infty, 9)$.
-
-Right working: the bar under $\\leq$ allows equality, so $9$ belongs to the answer. The graph has a solid dot at $9$ with shading to the left, and the interval is $(-\\infty, 9]$.
-
-Why it happens: the boundary is found by solving an equation, and the separate question of whether it belongs is skipped when the dot is drawn.
-
-How to check: substitute the boundary into the original inequality. $x = 9$ gives $4(9) - 7 = 29$ and $2(9) + 11 = 29$, and $29 \\leq 29$ is true, so $9$ is in the answer. With a strict sign, $29 < 29$ would be false and the dot would be open.
-
-**Changing only the middle of a chain**
-
-In a three-part chain, an operation is applied to the middle part, where $x$ is, and the two outer bounds are left as they were.
-
-Wrong working:
-$$-3 < 2x + 1 \\leq 7 \\implies -3 < 2x \\leq 7 \\implies -\\frac{3}{2} < x \\leq \\frac{7}{2}$$
-
-Right working: subtract $1$ from all three parts, then divide all three by $2$.
-$$-4 < 2x \\leq 6 \\implies -2 < x \\leq 3$$
-The solution is $(-2, 3]$.
-
-Why it happens: the attention is on isolating $x$, and the outer numbers look like fixed limits rather than sides of the inequality.
-
-How to check: test an endpoint of the answer. $x = \\frac{7}{2}$ gives $2\\left(\\frac{7}{2}\\right) + 1 = 8$, and $8 \\leq 7$ is false. The right endpoint $x = 3$ gives $7 \\leq 7$, true.
-
-**Distributing a minus to the first term only**
-
-After the fractions are cleared, the bracket in $-3(x + 2)$ is opened and the second term keeps its plus sign, as if the $-3$ reached only the $x$.
-
-Wrong working:
-$$4x - 3(x + 2) > 12 \\implies 4x - 3x + 6 > 12 \\implies x > 6$$
-
-Right working: the $-3$ multiplies both terms, and $-3 \\cdot 2 = -6$.
-$$4x - 3x - 6 > 12 \\implies x - 6 > 12 \\implies x > 18$$
-The solution is $(18, \\infty)$.
-
-Why it happens: the minus sign in front of $\\frac{x + 2}{4}$ covers the whole numerator, and once the fraction bar is gone that is no longer visible.
-
-How to check: test a value from the wrong answer that lies outside the right one. $x = 10$ gives $\\frac{10}{3} - \\frac{12}{4} = \\frac{1}{3}$, which is not greater than $1$. A value from the right answer, $x = 24$, gives $8 - \\frac{26}{4} = \\frac{3}{2} > 1$.`,
+    content: `Five mistakes account for most wrong answers to linear inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Two of the five slips are about the direction of the sign: it reverses when both sides are multiplied or divided by a negative number, and only then. The other three each lose a piece: the sign of the second term in a bracket, the outer parts of a chain, or the endpoint of a non-strict answer. A test value catches every one of them: take a number from the wrong answer that is not in the right one, or substitute the boundary itself, and the original inequality gives the verdict.`,
     link: '',
   },
 };
@@ -811,8 +740,46 @@ const schemas = {
     ],
   };
 
+  // MistakeFix 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'flipping-the-sign-for-a-negative-number', name: `Flipping the sign for a negative number`, errorAt: 1,
+        what: `The division is by a positive coefficient, but a negative number elsewhere in the inequality, here on the right side, is taken as the signal to reverse the direction.`,
+        wrong: [`$$3x > -12$$`, `$$\\implies x < -4$$`],
+        right: [`$$3x > -12$$`, `The divisor $3$ is positive, so the direction is kept.`, `$$\\implies x > \\frac{-12}{3} = -4$$`, `The solution is $(-4, \\infty)$.`],
+        why: `The flip rule is remembered as "negative means flip", without the part that says which number has to be negative: the one both sides are multiplied or divided by.`,
+        check: `Test one value from each answer. $x = 0$ lies in the right answer and gives $0 > -12$, true. $x = -5$ lies in the wrong answer and gives $-15 > -12$, false.` },
+      { id: 'keeping-the-sign-when-dividing-by-a-negative', name: `Keeping the sign when dividing by a negative`, errorAt: 2,
+        what: `Both sides are divided by a negative coefficient, and the inequality sign is copied unchanged, as it would be in an equation.`,
+        wrong: [`$$-2x + 5 > 13$$`, `$$\\implies -2x > 8$$`, `$$\\implies x > -4$$`],
+        right: [`$$-2x + 5 > 13$$`, `$$\\implies -2x > 8$$`, `Dividing by $-2$ reverses the sign.`, `$$\\implies x < -4$$`, `The solution is $(-\\infty, -4)$.`],
+        why: `Every other step of the working is the same as for an equation, so the one step that differs is done out of habit.`,
+        check: `Test one value on each side of the boundary $-4$. $x = -5$ gives $-2(-5) + 5 = 15 > 13$, true. $x = 0$ gives $5 > 13$, false. The solutions lie to the left of $-4$.` },
+      { id: 'using-an-open-dot-for-a-non-strict-sign', name: `Using an open dot for a non-strict sign`, errorAt: 0,
+        what: `The boundary of a non-strict inequality ($\\leq$ or $\\geq$) is drawn as an open dot or written with a round bracket, so the point where both sides are equal drops out of the answer.`,
+        wrong: [`$x \\leq 9$ is graphed with an open dot at $9$ and written as $(-\\infty, 9)$.`],
+        right: [`The bar under $\\leq$ allows equality, so $9$ belongs to the answer. The graph has a solid dot at $9$ with shading to the left, and the interval is $(-\\infty, 9]$.`],
+        why: `The boundary is found by solving an equation, and the separate question of whether it belongs is skipped when the dot is drawn.`,
+        check: `Substitute the boundary into the original inequality. $x = 9$ gives $4(9) - 7 = 29$ and $2(9) + 11 = 29$, and $29 \\leq 29$ is true, so $9$ is in the answer. With a strict sign, $29 < 29$ would be false and the dot would be open.` },
+      { id: 'changing-only-the-middle-of-a-chain', name: `Changing only the middle of a chain`, errorAt: 1,
+        what: `In a three-part chain, an operation is applied to the middle part, where $x$ is, and the two outer bounds are left as they were.`,
+        wrong: [`$$-3 < 2x + 1 \\leq 7$$`, `$$\\implies -3 < 2x \\leq 7$$`, `$$\\implies -\\frac{3}{2} < x \\leq \\frac{7}{2}$$`],
+        right: [`$$-3 < 2x + 1 \\leq 7$$`, `Subtract $1$ from all three parts, then divide all three by $2$.`, `$$-4 < 2x \\leq 6$$`, `$$\\implies -2 < x \\leq 3$$`, `The solution is $(-2, 3]$.`],
+        why: `The attention is on isolating $x$, and the outer numbers look like fixed limits rather than sides of the inequality.`,
+        check: `Test an endpoint of the answer. $x = \\frac{7}{2}$ gives $2\\left(\\frac{7}{2}\\right) + 1 = 8$, and $8 \\leq 7$ is false. The right endpoint $x = 3$ gives $7 \\leq 7$, true.` },
+      { id: 'distributing-a-minus-to-the-first-term-only', name: `Distributing a minus to the first term only`, errorAt: 1,
+        what: `After the fractions are cleared, the bracket in $-3(x + 2)$ is opened and the second term keeps its plus sign, as if the $-3$ reached only the $x$.`,
+        wrong: [`$$4x - 3(x + 2) > 12$$`, `$$\\implies 4x - 3x + 6 > 12$$`, `$$\\implies x > 6$$`],
+        right: [`$$4x - 3(x + 2) > 12$$`, `The $-3$ multiplies both terms, and $-3 \\cdot 2 = -6$.`, `$$4x - 3x - 6 > 12$$`, `$$\\implies x - 6 > 12$$`, `$$\\implies x > 18$$`, `The solution is $(18, \\infty)$.`],
+        why: `The minus sign in front of $\\frac{x + 2}{4}$ covers the whole numerator, and once the fraction bar is gone that is no longer visible.`,
+        check: `Test a value from the wrong answer that lies outside the right one. $x = 10$ gives $\\frac{10}{3} - \\frac{12}{4} = \\frac{1}{3}$, which is not greater than $1$. A value from the right answer, $x = 24$, gives $8 - \\frac{26}{4} = \\frac{3}{2} > 1$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     literalInequalityCases,
     sectionsContent,
     introContent,
@@ -838,7 +805,7 @@ const schemas = {
 
    const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LinearInequalitiesPage({literalInequalityCases, 
+export default function LinearInequalitiesPage({ pitfallData,literalInequalityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1075,6 +1042,15 @@ $$ax + b < 0$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="linear-inequality-pitfalls"
+            title="Common pitfalls in linear inequalities"
+            source="/algebra/inequalities/linear"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

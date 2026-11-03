@@ -690,6 +690,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -992,7 +995,7 @@ Another example: convert $\\frac{23}{4}$. Dividing 23 by 4 gives a quotient of 5
 
 @academic[pitfall,aside:true,width:35%:Swapping quotient and remainder
 Using the remainder as the whole part turns $\\frac{17}{5}$ into $2\\frac{3}{5}$, which equals $\\frac{13}{5}$. The quotient $3$ is the whole part and the remainder $2$ the numerator: $3\\frac{2}{5}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-quotient-and-remainder)]@
 
 The two numbers from the division play different roles. The quotient counts how many complete wholes fit inside the fraction, and the remainder counts the parts left over once those wholes are filled. In $\\frac{23}{4}$, five wholes use up $5 \\times 4 = 20$ quarters, and the remaining $3$ quarters form the fractional part.
 
@@ -1014,7 +1017,7 @@ Another example: convert $6\\frac{5}{8}$. Compute $(6 \\times 8) + 5 = 53$. The 
 
 @academic[pitfall,aside:true,width:35%:Adding the whole to the numerator
 Adding $4$ straight onto the numerator turns $4\\frac{2}{7}$ into $\\frac{6}{7}$, a value below $1$. The wholes must first become sevenths: $4 \\times 7 + 2 = 30$, giving $\\frac{30}{7}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-whole-to-the-numerator)]@
 
 Each step of the conversion counts parts of one size. Multiplying the whole number by the denominator rewrites the complete units as parts: in $6\\frac{5}{8}$, the 6 wholes are $48$ eighths. Adding the numerator brings in the 5 eighths of the fractional part, and the denominator stays 8 because the size of the parts never changes.
 
@@ -1032,7 +1035,7 @@ When whole parts are equal, comparison shifts to the fractional parts. Between $
 
 @academic[pitfall,aside:true,width:35%:Comparing numerators only
 Judging $7\\frac{2}{3}$ and $7\\frac{3}{5}$ by the numerators alone makes $7\\frac{3}{5}$ the larger. In fifteenths, $\\frac{2}{3} = \\frac{10}{15}$ beats $\\frac{3}{5} = \\frac{9}{15}$, so $7\\frac{2}{3}$ is larger.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-comparing-numerators-only)]@
 
 Comparing fractional parts sometimes requires finding a common denominator or using other methods from [comparing fractions](!/arithmetic/fractions/comparing).
 
@@ -1056,7 +1059,7 @@ Subtraction sometimes requires borrowing when the first fractional part is small
 
 @academic[pitfall,aside:true,width:35%:Subtracting the fractions in reverse
 Taking $\\frac{1}{4}$ from $\\frac{3}{4}$ in $5\\frac{1}{4} - 2\\frac{3}{4}$ gives $3\\frac{2}{4} = 3\\frac{1}{2}$, one whole too much. Borrowing first, $4\\frac{5}{4} - 2\\frac{3}{4} = 2\\frac{2}{4} = 2\\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-fractions-in-reverse)]@
 
 Borrowing is needed when the fraction being subtracted is larger than the fraction it is taken from. One whole is taken from the whole part, rewritten as a fraction with the same denominator, such as $1 = \\frac{4}{4}$, and added to the fractional part. The value of the mixed number does not change, only its spelling, and the fractional parts can then be subtracted directly.
 
@@ -1163,69 +1166,9 @@ Number line visualization also supports estimation and rounding. A mixed number 
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Five mistakes cause many of the wrong answers with mixed numbers. Four are marked with a box where they happen in the sections above, and the fifth is the one the operations section warns about for multiplication. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Swapping quotient and remainder**
-
-When an improper fraction is converted, the division gives two numbers, a quotient and a remainder, and they are put in each other's places: the remainder becomes the whole part and the quotient the new numerator.
-
-Wrong working: $17 \\div 5 = 3$ remainder $2$, written as $2\\frac{3}{5}$.
-
-Right working: the quotient $3$ counts the complete wholes and the remainder $2$ counts the fifths left over, so $\\frac{17}{5} = 3\\frac{2}{5}$.
-
-Why it happens: both numbers come out of the same division step, and nothing in the written result labels which is which. The roles have to be remembered, not read off.
-
-How to check: convert back. $3\\frac{2}{5} = \\frac{3 \\times 5 + 2}{5} = \\frac{17}{5}$, the starting fraction, while $2\\frac{3}{5} = \\frac{2 \\times 5 + 3}{5} = \\frac{13}{5}$ is not.
-
-**Adding the whole to the numerator**
-
-When a mixed number is converted to an improper fraction, the whole number is added straight onto the numerator, and the multiplication by the denominator is skipped.
-
-Wrong working: $4\\frac{2}{7} = \\frac{4 + 2}{7} = \\frac{6}{7}$.
-
-Right working: the 4 wholes are $4 \\times 7 = 28$ sevenths; adding the 2 sevenths gives $28 + 2 = 30$, so $4\\frac{2}{7} = \\frac{30}{7}$.
-
-Why it happens: the hidden plus between the whole part and the fraction suggests adding the two numbers that are written down. But the 4 counts wholes and the 2 counts sevenths, and amounts in different units cannot be added until they are in the same unit.
-
-How to check: the size. $4\\frac{2}{7}$ is more than 4, but $\\frac{6}{7}$ is less than 1. Dividing back also works: $30 \\div 7 = 4$ remainder $2$, which returns $4\\frac{2}{7}$.
-
-**Comparing numerators only**
-
-Two mixed numbers have the same whole part, and their fractional parts have different denominators. The fractions are compared by their numerators alone, as if the denominators were equal.
-
-Wrong working: in $7\\frac{2}{3}$ against $7\\frac{3}{5}$, the numerator $3$ is larger than $2$, so $7\\frac{3}{5}$ is called the larger number.
-
-Right working: rewrite both fractional parts in fifteenths, $\\frac{2}{3} = \\frac{10}{15}$ and $\\frac{3}{5} = \\frac{9}{15}$. Since $\\frac{10}{15} > \\frac{9}{15}$, the larger number is $7\\frac{2}{3}$.
-
-Why it happens: with equal denominators, as in $3\\frac{2}{5}$ against $3\\frac{4}{5}$, the numerators do decide, and the shortcut is carried over to fractions whose parts have different sizes. A third is larger than a fifth, so two thirds can beat three fifths.
-
-How to check: cross-multiply the fractional parts, $2 \\times 5 = 10$ against $3 \\times 3 = 9$, or compare decimals, $\\frac{2}{3} \\approx 0.67$ and $\\frac{3}{5} = 0.6$.
-
-**Subtracting the fractions in reverse**
-
-In subtraction by parts, the first fractional part is smaller than the second. Instead of borrowing a whole, the smaller fraction is taken from the larger one.
-
-Wrong working: $5\\frac{1}{4} - 2\\frac{3}{4}$, with $5 - 2 = 3$ and $\\frac{3}{4} - \\frac{1}{4} = \\frac{2}{4}$, giving $3\\frac{2}{4} = 3\\frac{1}{2}$.
-
-Right working: borrow one whole, $5\\frac{1}{4} = 4 + \\frac{4}{4} + \\frac{1}{4} = 4\\frac{5}{4}$. Then $4 - 2 = 2$ and $\\frac{5}{4} - \\frac{3}{4} = \\frac{2}{4}$, giving $2\\frac{2}{4} = 2\\frac{1}{2}$. In improper form the same subtraction is $\\frac{21}{4} - \\frac{11}{4} = \\frac{10}{4} = 2\\frac{1}{2}$.
-
-Why it happens: it is the same slip as subtracting the smaller digit from the larger in a column, for example writing $52 - 37 = 25$. Taking $\\frac{1}{4} - \\frac{3}{4}$ looks impossible, so the order is quietly reversed.
-
-How to check: add back. $2\\frac{1}{2} + 2\\frac{3}{4} = 4\\frac{5}{4} = 5\\frac{1}{4}$, the starting number, while $3\\frac{1}{2} + 2\\frac{3}{4} = 6\\frac{1}{4}$ is one whole too much.
-
-**Multiplying the parts separately**
-
-The whole parts of two mixed numbers are multiplied together, the fractional parts are multiplied together, and the two results are joined into a new mixed number.
-
-Wrong working: for $2\\frac{1}{2} \\times 3\\frac{1}{3}$, take $2 \\times 3 = 6$ and $\\frac{1}{2} \\times \\frac{1}{3} = \\frac{1}{6}$, giving $6\\frac{1}{6}$.
-
-Right working: convert first, $2\\frac{1}{2} = \\frac{5}{2}$ and $3\\frac{1}{3} = \\frac{10}{3}$, then $\\frac{5}{2} \\times \\frac{10}{3} = \\frac{50}{6} = 8\\frac{1}{3}$.
-
-Why it happens: working by parts is correct for addition, so it seems natural for multiplication too. But a mixed number is a sum, and a product of two sums has four terms, not two: $(2 + \\frac{1}{2})(3 + \\frac{1}{3}) = 6 + \\frac{2}{3} + \\frac{3}{2} + \\frac{1}{6} = 8\\frac{1}{3}$. The parts method keeps only the first and the last.
-
-How to check: estimate. $2\\frac{1}{2} \\times 3\\frac{1}{3}$ is more than $2\\frac{1}{2} \\times 3 = 7\\frac{1}{2}$, so $6\\frac{1}{6}$ is too small.`,
+      content:`Five mistakes cause many of the wrong answers with mixed numbers. Four are marked with a box where they happen in the sections above, and the fifth is the one the operations section warns about for multiplication. Here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip handles the whole part and the fraction part as if they were separate numbers. The quotient gives the wholes and the remainder the numerator, the wholes become $4 \\times 7$ sevenths before the $2$ sevenths are added, fractional parts are compared over a common denominator, subtraction borrows a whole when the fraction is too small, and multiplication starts by converting to improper fractions. Converting back, adding back, or estimating the size catches each slip.`,
       link:'',
     }
   
@@ -1412,8 +1355,46 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 8, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'swapping-quotient-and-remainder', name: `Swapping quotient and remainder`, errorAt: 0,
+        what: `When an improper fraction is converted, the division gives two numbers, a quotient and a remainder, and they are put in each other's places: the remainder becomes the whole part and the quotient the new numerator.`,
+        wrong: [`$17 \\div 5 = 3$ remainder $2$, written as $2\\frac{3}{5}$.`],
+        right: [`The quotient $3$ counts the complete wholes and the remainder $2$ counts the fifths left over, so $\\frac{17}{5} = 3\\frac{2}{5}$.`],
+        why: `Both numbers come out of the same division step, and nothing in the written result labels which is which. The roles have to be remembered, not read off.`,
+        check: `Convert back. $3\\frac{2}{5} = \\frac{3 \\times 5 + 2}{5} = \\frac{17}{5}$, the starting fraction, while $2\\frac{3}{5} = \\frac{2 \\times 5 + 3}{5} = \\frac{13}{5}$ is not.` },
+      { id: 'adding-the-whole-to-the-numerator', name: `Adding the whole to the numerator`, errorAt: 0,
+        what: `When a mixed number is converted to an improper fraction, the whole number is added straight onto the numerator, and the multiplication by the denominator is skipped.`,
+        wrong: [`$4\\frac{2}{7} = \\frac{4 + 2}{7} = \\frac{6}{7}$.`],
+        right: [`The 4 wholes are $4 \\times 7 = 28$ sevenths; adding the 2 sevenths gives $28 + 2 = 30$, so $4\\frac{2}{7} = \\frac{30}{7}$.`],
+        why: `The hidden plus between the whole part and the fraction suggests adding the two numbers that are written down. But the 4 counts wholes and the 2 counts sevenths, and amounts in different units cannot be added until they are in the same unit.`,
+        check: `The size. $4\\frac{2}{7}$ is more than 4, but $\\frac{6}{7}$ is less than 1. Dividing back also works: $30 \\div 7 = 4$ remainder $2$, which returns $4\\frac{2}{7}$.` },
+      { id: 'comparing-numerators-only', name: `Comparing numerators only`, errorAt: 0,
+        what: `Two mixed numbers have the same whole part, and their fractional parts have different denominators. The fractions are compared by their numerators alone, as if the denominators were equal.`,
+        wrong: [`In $7\\frac{2}{3}$ against $7\\frac{3}{5}$, the numerator $3$ is larger than $2$, so $7\\frac{3}{5}$ is called the larger number.`],
+        right: [`Rewrite both fractional parts in fifteenths, $\\frac{2}{3} = \\frac{10}{15}$ and $\\frac{3}{5} = \\frac{9}{15}$. Since $\\frac{10}{15} > \\frac{9}{15}$, the larger number is $7\\frac{2}{3}$.`],
+        why: `With equal denominators, as in $3\\frac{2}{5}$ against $3\\frac{4}{5}$, the numerators do decide, and the shortcut is carried over to fractions whose parts have different sizes. A third is larger than a fifth, so two thirds can beat three fifths.`,
+        check: `Cross-multiply the fractional parts, $2 \\times 5 = 10$ against $3 \\times 3 = 9$, or compare decimals, $\\frac{2}{3} \\approx 0.67$ and $\\frac{3}{5} = 0.6$.` },
+      { id: 'subtracting-the-fractions-in-reverse', name: `Subtracting the fractions in reverse`, errorAt: 0,
+        what: `In subtraction by parts, the first fractional part is smaller than the second. Instead of borrowing a whole, the smaller fraction is taken from the larger one.`,
+        wrong: [`$5\\frac{1}{4} - 2\\frac{3}{4}$, with $5 - 2 = 3$ and $\\frac{3}{4} - \\frac{1}{4} = \\frac{2}{4}$, giving $3\\frac{2}{4} = 3\\frac{1}{2}$.`],
+        right: [`Borrow one whole, $5\\frac{1}{4} = 4 + \\frac{4}{4} + \\frac{1}{4} = 4\\frac{5}{4}$. Then $4 - 2 = 2$ and $\\frac{5}{4} - \\frac{3}{4} = \\frac{2}{4}$, giving $2\\frac{2}{4} = 2\\frac{1}{2}$. In improper form the same subtraction is $\\frac{21}{4} - \\frac{11}{4} = \\frac{10}{4} = 2\\frac{1}{2}$.`],
+        why: `It is the same slip as subtracting the smaller digit from the larger in a column, for example writing $52 - 37 = 25$. Taking $\\frac{1}{4} - \\frac{3}{4}$ looks impossible, so the order is quietly reversed.`,
+        check: `Add back. $2\\frac{1}{2} + 2\\frac{3}{4} = 4\\frac{5}{4} = 5\\frac{1}{4}$, the starting number, while $3\\frac{1}{2} + 2\\frac{3}{4} = 6\\frac{1}{4}$ is one whole too much.` },
+      { id: 'multiplying-the-parts-separately', name: `Multiplying the parts separately`, errorAt: 1,
+        what: `The whole parts of two mixed numbers are multiplied together, the fractional parts are multiplied together, and the two results are joined into a new mixed number.`,
+        wrong: [`For $2\\frac{1}{2} \\times 3\\frac{1}{3}$,`, `Take $2 \\times 3 = 6$ and $\\frac{1}{2} \\times \\frac{1}{3} = \\frac{1}{6}$, giving $6\\frac{1}{6}$.`],
+        right: [`For $2\\frac{1}{2} \\times 3\\frac{1}{3}$,`, `Convert first, $2\\frac{1}{2} = \\frac{5}{2}$ and $3\\frac{1}{3} = \\frac{10}{3}$, then $\\frac{5}{2} \\times \\frac{10}{3} = \\frac{50}{6} = 8\\frac{1}{3}$.`],
+        why: `Working by parts is correct for addition, so it seems natural for multiplication too. But a mixed number is a sum, and a product of two sums has four terms, not two: $(2 + \\frac{1}{2})(3 + \\frac{1}{3}) = 6 + \\frac{2}{3} + \\frac{3}{2} + \\frac{1}{6} = 8\\frac{1}{3}$. The parts method keeps only the first and the last.`,
+        check: `Estimate. $2\\frac{1}{2} \\times 3\\frac{1}{3}$ is more than $2\\frac{1}{2} \\times 3 = 7\\frac{1}{2}$, so $6\\frac{1}{6}$ is too small.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     borrowingBeforeAfter,
     sectionsContent,
     introContent,
@@ -1439,7 +1420,7 @@ return {
 
 
 
-export default function MixedNumbersPage({seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, borrowingBeforeAfter, conceptIntroFigures}) {
+export default function MixedNumbersPage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, borrowingBeforeAfter, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1537,6 +1518,11 @@ Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={arithmeticNotationSheet}
+            current={'/arithmetic/fractions/mixed-numbers'}
+          />,
         ]
     },
     {
@@ -1626,6 +1612,15 @@ Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="mixed-number-pitfalls"
+            title="Common pitfalls with mixed numbers"
+            source="/arithmetic/fractions/mixed-numbers"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -2090,7 +2090,7 @@ const transformationSignatures = {
           name: 'Rotation',
           anchor: '#3',
           formula: '$R^{\\mathsf{T}}R = I, \\quad \\det R = 1$',
-          condition: 'eigenvalues $e^{\\pm i\\theta}$ \u2014 complex pair',
+          condition: 'eigenvalues $e^{\\pm i\\theta}$ \u2014 a complex pair, real only at $0\u00b0$ and $180\u00b0$',
           note: 'Orthogonal with positive determinant. Over $\\mathbb{R}$ a plane rotation has no real eigenvectors unless $\\theta$ is $0\u00b0$ or $180\u00b0$, since at any other angle no direction survives unturned \u2014 which is exactly what the complex pair records. In $\\mathbb{R}^3$ there is one real eigenvalue $1$, and its eigenvector is the axis.',
         },
         {

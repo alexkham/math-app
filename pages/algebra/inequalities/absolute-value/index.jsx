@@ -13,6 +13,8 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -483,7 +485,7 @@ For a linear example: $|4x + 1| \\geq 7$ becomes $4x + 1 \\leq -7$ or $4x + 1 \\
 
 @academic[pitfall,aside:true,width:35%:Writing the greater-than form as a chain
 Writing $|4x + 1| \\geq 7$ as $-7 \\leq 4x + 1 \\leq 7$ gives $-2 \\leq x \\leq \\frac{3}{2}$, the points where $|4x + 1| \\leq 7$. The greater-than form splits instead: $x \\leq -2$ or $x \\geq \\frac{3}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-writing-the-greater-than-form-as-a-chain)]@
 
 The two parts of the disjunction are solved one at a time, and each answer is a ray. Here both rays start $\\frac{7}{4}$ away from $x = -\\frac{1}{4}$, the point where $4x + 1 = 0$, and run outward in opposite directions.`,
     before: ``,
@@ -505,9 +507,9 @@ Solve $|x - 4| > 0$. Convert: $x - 4 < 0$ or $x - 4 > 0$, meaning $x < 4$ or $x 
 
 @academic[pitfall,aside:true,width:35%:Forgetting to flip when dividing by a negative
 Dividing $-2x \\leq -6$ and $-2x \\geq 4$ by $-2$ without flipping gives $x \\leq 3$ or $x \\geq -2$, which is every real number. Flipping both signs gives $(-\\infty, -2] \\cup [3, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-to-flip-when-dividing-by-a-negative)]@
 
-In every linear case with $k > 0$, the less-than form produces a single bounded interval, and the greater-than form produces two rays. The center of symmetry is the root of $f(x) = 0$, and the radius is determined by $k$.
+In every linear case with $k > 0$, the less-than form produces a single bounded interval, and the greater-than form produces two rays. The center of symmetry is the root of $f(x) = 0$, and for $f(x) = ax + b$ the radius is $\\frac{k}{|a|}$.
 
 To solve your own absolute value inequality with each step shown, use the [absolute value inequality solver](!/algebra/calculators/inequalities/absolute-value).`,
     before: ``,
@@ -536,7 +538,7 @@ From the second: $x^2 - 7x + 8 \\geq 0$. The discriminant is $49 - 32 = 17 > 0$.
 
 @academic[pitfall,aside:true,width:35%:Solving only the positive part
 Solving only $x^2 - 7x + 10 \\geq 2$ gives the two outer rays and loses $[3, 4]$, where the inside is $-2$ or less: at $x = 3.5$, $|-2.25| = 2.25 \\geq 2$. The part $x^2 - 7x + 10 \\leq -2$ supplies that piece.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-solving-only-the-positive-part)]@
 
 The solution is the union of both parts: $\\left(-\\infty, \\frac{7 - \\sqrt{17}}{2}\\right] \\cup [3, 4] \\cup \\left[\\frac{7 + \\sqrt{17}}{2}, \\infty\\right)$.
 
@@ -564,7 +566,7 @@ For $|2x - 1| < |x + 3|$, square both sides: $(2x - 1)^2 < (x + 3)^2$. Rearrange
 
 @academic[pitfall,aside:true,width:35%:Dropping the bars on both sides
 Dropping the bars in $|2x - 1| < |x + 3|$ gives $2x - 1 < x + 3$, so $x < 4$. That keeps $x = -1$, where $|-3| = 3$ is not less than $|2| = 2$. Squaring gives $\\left(-\\frac{2}{3}, 4\\right)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-bars-on-both-sides)]@
 
 The case-splitting method is the alternative: consider the signs of $f(x)$ and $g(x)$ on each interval defined by their roots, remove the absolute value bars using the piecewise definition, and solve the resulting inequality on each interval. This approach is more laborious but avoids squaring and works for non-polynomial expressions as well.`,
     before: ``,
@@ -587,7 +589,7 @@ The inequality $|x - a| < |x - b|$ asks: which points are closer to $a$ than to 
 
 @academic[pitfall,aside:true,width:35%:Reading the centre with the wrong sign
 Reading $|x + 2| < 3$ as distance from $2$ gives $(-1, 5)$. Since $|x + 2| = |x - (-2)|$, the centre is $-2$ and the answer is $(-5, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-centre-with-the-wrong-sign)]@
 
 These geometric readings provide instant answers for simple absolute value inequalities and serve as sanity checks for more complex ones. If the algebraic solution to $|x - 5| < 3$ produces something other than a symmetric interval centered at $5$ with radius $3$, the algebra contains an error.`,
     before: ``,
@@ -605,80 +607,9 @@ These geometric readings provide instant answers for simple absolute value inequ
 
   obj9: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for most wrong answers to absolute value inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Writing the greater-than form as a chain**
-
-The greater-than form is converted with the same double inequality as the less-than form, so the answer is the interval between the boundaries instead of the two rays outside them.
-
-Wrong working:
-$$|4x + 1| \\geq 7 \\implies -7 \\leq 4x + 1 \\leq 7 \\implies -2 \\leq x \\leq \\frac{3}{2}$$
-
-Right working: greater-than becomes a disjunction.
-$$4x + 1 \\leq -7 \\text{ or } 4x + 1 \\geq 7 \\implies x \\leq -2 \\text{ or } x \\geq \\frac{3}{2}$$
-The solution is $(-\\infty, -2] \\cup \\left[\\frac{3}{2}, \\infty\\right)$.
-
-Why it happens: the chain $-k < f(x) < k$ is usually learned first and is the more familiar shape, so it gets used for both forms.
-
-How to check: test a point from the wrong answer. $x = 0$ gives $|1| = 1$, which is not $\\geq 7$. A point from the right answer, $x = 2$, gives $|9| = 9 \\geq 7$.
-
-**Forgetting to flip when dividing by a negative**
-
-In $|1 - 2x| \\geq 5$, both parts end with a division by $-2$, and the inequality signs are kept as they were.
-
-Wrong working:
-$$1 - 2x \\leq -5 \\implies -2x \\leq -6 \\implies x \\leq 3$$
-$$1 - 2x \\geq 5 \\implies -2x \\geq 4 \\implies x \\geq -2$$
-Together, $x \\leq 3$ or $x \\geq -2$ covers every real number.
-
-Right working: dividing by $-2$ reverses each sign.
-$$-2x \\leq -6 \\implies x \\geq 3 \\qquad -2x \\geq 4 \\implies x \\leq -2$$
-The solution is $(-\\infty, -2] \\cup [3, \\infty)$.
-
-Why it happens: the sign rule belongs to [linear inequalities](!/algebra/inequalities/linear), and it slips once attention is on the absolute value conversion.
-
-How to check: a greater-than inequality with $k > 0$ never holds for every $x$. Here $x = 0$ gives $|1| = 1$, which is not $\\geq 5$, while $x = 3$ gives $|-5| = 5 \\geq 5$.
-
-**Solving only the positive part**
-
-For $|x^2 - 7x + 10| \\geq 2$, only $x^2 - 7x + 10 \\geq 2$ is solved, and the values where the inside is $-2$ or less are lost.
-
-Wrong working:
-$$x^2 - 7x + 8 \\geq 0 \\implies x \\leq \\frac{7 - \\sqrt{17}}{2} \\text{ or } x \\geq \\frac{7 + \\sqrt{17}}{2}$$
-
-Right working: the second part $x^2 - 7x + 10 \\leq -2$ gives $(x - 3)(x - 4) \\leq 0$, so $3 \\leq x \\leq 4$. The solution is $\\left(-\\infty, \\frac{7 - \\sqrt{17}}{2}\\right] \\cup [3, 4] \\cup \\left[\\frac{7 + \\sqrt{17}}{2}, \\infty\\right)$.
-
-Why it happens: with a linear inside, the negative part always gives a ray and is hard to overlook. With a quadratic inside, it can be a short bounded piece in the middle that looks as if it adds nothing.
-
-How to check: test a point between the two outer rays. $x = 3.5$ gives $12.25 - 24.5 + 10 = -2.25$, and $|-2.25| = 2.25 \\geq 2$, so it belongs to the answer.
-
-**Dropping the bars on both sides**
-
-With absolute value on both sides, the bars are removed and the inner expressions are compared directly.
-
-Wrong working:
-$$|2x - 1| < |x + 3| \\implies 2x - 1 < x + 3 \\implies x < 4$$
-
-Right working: squaring keeps the comparison valid, because both sides are non-negative.
-$$(x + 3)^2 - (2x - 1)^2 > 0 \\implies (4 - x)(3x + 2) > 0 \\implies -\\frac{2}{3} < x < 4$$
-
-Why it happens: removing matching bars from both sides looks like cancelling the same operation, but $|A| < |B|$ compares sizes and says nothing about the signs of $A$ and $B$.
-
-How to check: test a point from the wrong answer. $x = -1$ gives $|-3| = 3$ on the left and $|2| = 2$ on the right, and $3 < 2$ is false.
-
-**Reading the centre with the wrong sign**
-
-The inequality $|x + 2| < 3$ is read as "within $3$ of $2$", taking the number inside the bars as the centre.
-
-Wrong working: centre $2$, radius $3$, so the answer is $(-1, 5)$.
-
-Right working: $|x + 2| = |x - (-2)|$ is the distance from $x$ to $-2$. The answer is $(-2 - 3, -2 + 3) = (-5, 1)$.
-
-Why it happens: the pattern $|x - a|$ has a minus sign, and when the bars hold a plus sign the number is copied as it appears.
-
-How to check: convert algebraically. $-3 < x + 2 < 3$ gives $-5 < x < 1$. Or test $x = 4$ from the wrong answer: $|6| = 6$, which is not less than $3$.`,
+    content: `Five mistakes account for most wrong answers to absolute value inequalities. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Four of the five slips happen as the bars come off. A greater-than form splits into two separate rays, the part $u \\leq -k$ counts as much as $u \\geq k$, dividing by a negative reverses the sign, and bars on both sides come off only by squaring. The fifth reads $|x + 2|$ as a distance from $2$ instead of from $-2$. Testing one point from the wrong answer, or one point it leaves out, against the original inequality catches each of them.`,
     link: '',
   },
 };
@@ -869,8 +800,47 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'writing-the-greater-than-form-as-a-chain', name: `Writing the greater-than form as a chain`, errorAt: 1,
+        what: `The greater-than form is converted with the same double inequality as the less-than form, so the answer is the interval between the boundaries instead of the two rays outside them.`,
+        wrong: [`$$|4x + 1| \\geq 7$$`, `$$\\implies -7 \\leq 4x + 1 \\leq 7$$`, `$$\\implies -2 \\leq x \\leq \\frac{3}{2}$$`],
+        right: [`$$|4x + 1| \\geq 7$$`, `Greater-than becomes a disjunction.`, `$$4x + 1 \\leq -7 \\text{ or } 4x + 1 \\geq 7$$`, `$$\\implies x \\leq -2 \\text{ or } x \\geq \\frac{3}{2}$$`, `The solution is $(-\\infty, -2] \\cup \\left[\\frac{3}{2}, \\infty\\right)$.`],
+        why: `The chain $-k < f(x) < k$ is usually learned first and is the more familiar shape, so it gets used for both forms.`,
+        check: `Test a point from the wrong answer. $x = 0$ gives $|1| = 1$, which is not $\\geq 7$. A point from the right answer, $x = 2$, gives $|9| = 9 \\geq 7$.` },
+      { id: 'forgetting-to-flip-when-dividing-by-a-negative', name: `Forgetting to flip when dividing by a negative`, errorAt: 1,
+        what: `In $|1 - 2x| \\geq 5$, both parts end with a division by $-2$, and the inequality signs are kept as they were.`,
+        wrong: [`$$1 - 2x \\leq -5$$`, `$$\\implies -2x \\leq -6$$`, `$$\\implies x \\leq 3$$`, `$$1 - 2x \\geq 5$$`, `$$\\implies -2x \\geq 4$$`, `$$\\implies x \\geq -2$$`, `Together, $x \\leq 3$ or $x \\geq -2$ covers every real number.`],
+        right: [`$$1 - 2x \\leq -5$$`, `Dividing by $-2$ reverses each sign.`, `$$-2x \\leq -6 \\implies x \\geq 3$$
+$$-2x \\geq 4 \\implies x \\leq -2$$`, `The solution is $(-\\infty, -2] \\cup [3, \\infty)$.`],
+        why: `The sign rule belongs to [linear inequalities](!/algebra/inequalities/linear), and it slips once attention is on the absolute value conversion.`,
+        check: `A greater-than inequality with $k > 0$ never holds for every $x$. Here $x = 0$ gives $|1| = 1$, which is not $\\geq 5$, while $x = 3$ gives $|-5| = 5 \\geq 5$.` },
+      { id: 'solving-only-the-positive-part', name: `Solving only the positive part`, errorAt: 1,
+        what: `For $|x^2 - 7x + 10| \\geq 2$, only $x^2 - 7x + 10 \\geq 2$ is solved, and the values where the inside is $-2$ or less are lost.`,
+        wrong: [`$$x^2 - 7x + 8 \\geq 0$$`, `$$\\implies x \\leq \\frac{7 - \\sqrt{17}}{2} \\text{ or } x \\geq \\frac{7 + \\sqrt{17}}{2}$$`],
+        right: [`$$x^2 - 7x + 8 \\geq 0$$`, `The second part $x^2 - 7x + 10 \\leq -2$ gives $(x - 3)(x - 4) \\leq 0$, so $3 \\leq x \\leq 4$. The solution is $\\left(-\\infty, \\frac{7 - \\sqrt{17}}{2}\\right] \\cup [3, 4] \\cup \\left[\\frac{7 + \\sqrt{17}}{2}, \\infty\\right)$.`],
+        why: `With a linear inside, the negative part always gives a ray and is hard to overlook. With a quadratic inside, it can be a short bounded piece in the middle that looks as if it adds nothing.`,
+        check: `Test a point between the two outer rays. $x = 3.5$ gives $12.25 - 24.5 + 10 = -2.25$, and $|-2.25| = 2.25 \\geq 2$, so it belongs to the answer.` },
+      { id: 'dropping-the-bars-on-both-sides', name: `Dropping the bars on both sides`, errorAt: 1,
+        what: `With absolute value on both sides, the bars are removed and the inner expressions are compared directly.`,
+        wrong: [`$$|2x - 1| < |x + 3|$$`, `$$\\implies 2x - 1 < x + 3$$`, `$$\\implies x < 4$$`],
+        right: [`$$|2x - 1| < |x + 3|$$`, `Squaring keeps the comparison valid, because both sides are non-negative.`, `$$(x + 3)^2 - (2x - 1)^2 > 0$$`, `$$\\implies (4 - x)(3x + 2) > 0$$`, `$$\\implies -\\frac{2}{3} < x < 4$$`],
+        why: `Removing matching bars from both sides looks like cancelling the same operation, but $|A| < |B|$ compares sizes and says nothing about the signs of $A$ and $B$.`,
+        check: `Test a point from the wrong answer. $x = -1$ gives $|-3| = 3$ on the left and $|2| = 2$ on the right, and $3 < 2$ is false.` },
+      { id: 'reading-the-centre-with-the-wrong-sign', name: `Reading the centre with the wrong sign`, errorAt: 0,
+        what: `The inequality $|x + 2| < 3$ is read as "within $3$ of $2$", taking the number inside the bars as the centre.`,
+        wrong: [`Centre $2$, radius $3$, so the answer is $(-1, 5)$.`],
+        right: [`$|x + 2| = |x - (-2)|$ is the distance from $x$ to $-2$. The answer is $(-2 - 3, -2 + 3) = (-5, 1)$.`],
+        why: `The pattern $|x - a|$ has a minus sign, and when the bars hold a plus sign the number is copied as it appears.`,
+        check: `Convert algebraically. $-3 < x + 2 < 3$ gives $-5 < x < 1$. Or test $x = 4$ from the wrong answer: $|6| = 6$, which is not less than $3$.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     faqQuestions,
     demoUnits,
     conceptIntroFigures,
@@ -891,7 +861,7 @@ const schemas = {
 }
    }
 
-export default function AbsoluteValueInequalitiesPage({
+export default function AbsoluteValueInequalitiesPage({ pitfallData,
   faqQuestions,
   seoData,
   sectionsContent,
@@ -1098,6 +1068,15 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="absolute-value-inequality-pitfalls"
+            title="Common pitfalls with absolute value inequalities"
+            source="/algebra/inequalities/absolute-value"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

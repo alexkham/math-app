@@ -1587,6 +1587,7 @@ import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiag
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare'
 
 
 export async function getStaticProps(){
@@ -2397,10 +2398,42 @@ const schemas = {
       { id: 'stayed', badge: 'What stayed', tone: 'warm',
         body: 'The map and its eigenvalues 2 ± i; every entry stays real.' },
     ],
+  };  // ConceptCompare data (real-vs-complex-eigen); every fact is from the section text
+  const realVsComplexField = {
+    header: { kicker: 'Complex eigenvalues', title: 'Over $\\mathbb{R}$ vs over $\\mathbb{C}$', lede: 'The choice of field decides how far the characteristic polynomial factors.' },
+    concepts: [
+      { id: 'real', name: 'Over the reals', symbol: '$\\mathbb{R}$',
+        values: {
+          factor: 'Linear factors for the real eigenvalues, and irreducible quadratic factors for the rest',
+          eig: 'Real eigenvalues, plus complex conjugate pairs hidden inside the quadratic factors',
+          tri: 'Not every matrix is triangularizable over $\\mathbb{R}$',
+          diag: 'Diagonalizability can fail for a reason the real field adds: the irreducible quadratics',
+          role: 'The natural setting for computation',
+        } },
+      { id: 'complex', name: 'Over the complex numbers', symbol: '$\\mathbb{C}$',
+        values: {
+          factor: 'Every polynomial of degree $n$ factors into $n$ linear factors (Fundamental Theorem of Algebra)',
+          eig: 'Exactly $n$ eigenvalues, counted with algebraic multiplicity',
+          tri: 'Every matrix is triangularizable: $A = UTU^*$ with $U$ unitary and the eigenvalues on the diagonal of $T$ (Schur)',
+          diag: 'Depends only on whether the geometric multiplicities match the algebraic ones',
+          role: 'The natural setting for spectral theory',
+        } },
+    ],
+    aspects: [
+      { id: 'factor', label: 'Characteristic polynomial' },
+      { id: 'eig', label: 'Eigenvalues' },
+      { id: 'tri', label: 'Triangular form' },
+      { id: 'diag', label: 'Diagonalizability' },
+      { id: 'role', label: 'Role' },
+    ],
+    together: { label: 'Both perspectives', text: 'A real matrix is computed with over $\\mathbb{R}$ and understood over $\\mathbb{C}$: the same matrix, two fields.' },
   };
+
+
 
   return {
   props: {
+      realVsComplexField,
     realCanonicalBeforeAfter,
     demoUnits,
     conceptIntroFigures,
@@ -2424,7 +2457,9 @@ const schemas = {
 
 
 
-  export default function ComplexEigenvaluesPage({
+const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+  export default function ComplexEigenvaluesPage({realVsComplexField, 
     realCanonicalBeforeAfter,
     seoData,
     sectionsContent,
@@ -2622,6 +2657,16 @@ const schemas = {
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-compare'}
+            id="real-vs-complex-eigen"
+            title="Eigenvalues over the reals and over the complex numbers"
+            source="/linear-algebra/eigen/complex"
+            before={`The section’s recurring theme, aspect by aspect: what changes when the characteristic polynomial is factored over $\\mathbb{C}$ instead of $\\mathbb{R}$.`}
+            after={`Real matrices are the natural objects of computation; complex eigenvalues are the natural objects of spectral theory. Both views are needed.`}
+          >
+            <ConceptCompare data={realVsComplexField} variant="versus" theme={compareTheme} />
+          </DiagramFrame>,
         ]
     },
     {

@@ -2307,6 +2307,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -3400,10 +3401,21 @@ const schemas = {
       { label: 'Examples', values: ['$\\mathbb{R}^n$, $\\mathcal{P}_n$, $\\mathbb{R}^{m \\times n}$, solution spaces of linear ODEs with constant coefficients', '$C[0, 1]$; the space of all real sequences'] },
     ],
     footnote: 'On this site every vector space is finite-dimensional unless stated otherwise.',
+  };  // TheoremCard data (basis-size-chain); every fact is from the section text
+  const basisSizeChain = {
+    header: { kicker: 'Dimension', title: 'The Basis Size Theorem', lede: 'Every basis of $V$ has the same number of elements.' },
+    chain: [
+      { name: 'Two bases', text: '$\\mathcal{B}$ with $n$ elements, $\\mathcal{C}$ with $m$', items: ['In a space spanned by $n$ vectors, more than $n$ vectors are dependent', 'A spanning set has at least as many vectors as an independent set'], edge: '$\\mathcal{B}$ spans, $\\mathcal{C}$ is independent' },
+      { name: 'First inequality', text: '$m \\leq n$', edge: 'swap the roles' },
+      { name: 'Second inequality', text: '$n \\leq m$, so $m = n$', items: ['Dimension is well-defined'] },
+    ],
   };
+
+
 
 return {
   props:{
+      basisSizeChain,
     finiteInfiniteDimension,
     setSizeLevels,
     subspaceDimLevels,
@@ -3432,7 +3444,9 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DimensionPage({finiteInfiniteDimension, setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function DimensionPage({basisSizeChain, finiteInfiniteDimension, setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3537,7 +3551,17 @@ $$\\dim(V) = |\\mathcal{B}| \\quad \\text{for any basis } \\mathcal{B} \\text{ o
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          sectionsContent.obj2.content,          <DiagramFrame
+            key={'obj2-theorem'}
+            id="basis-size-chain"
+            title="The Basis Size Theorem: the two inequalities"
+            source="/linear-algebra/vector-spaces/dimension"
+            before={`The proof is two uses of one fact, with the roles of the bases swapped.`}
+            after={`That is what makes dimension well-defined: the size of a basis is a property of the space, not of the basis chosen.`}
+          >
+            <TheoremCard data={basisSizeChain} variant="chain" theme={theoremTheme} />
+          </DiagramFrame>,
+
         ]
     },
     {

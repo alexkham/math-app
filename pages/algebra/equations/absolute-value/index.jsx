@@ -15,7 +15,7 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
-import MistakeFix from '@/app/components/infographics/MistakeFix'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 
@@ -486,7 +486,7 @@ When $B < 0$, no solution exists. The equation $|x + 3| = -2$ asks for a non-neg
 
 @academic[pitfall,aside:true,width:35%:Splitting a negative right-hand side
 Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x = -1$, but both make $|x + 3| = 2$, not $-2$. The equation has no solution.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-negative-right-side)]@
 
 Checking the sign of the right-hand side before proceeding is not a shortcut — it is the logical first step. A negative right-hand side eliminates the equation immediately, and recognizing this saves the effort of setting up cases that cannot produce valid solutions.`,
     before: ``,
@@ -512,7 +512,7 @@ The equation $|x^2 - 4| = 5$ splits into $x^2 - 4 = 5$ and $x^2 - 4 = -5$. The f
 
 @academic[pitfall,aside:true,width:35%:Dropping the negative case
 Solving $|3x + 5| = 11$ only as $3x + 5 = 11$ gives $x = 2$ and stops there. The case $3x + 5 = -11$ adds $x = -\\frac{16}{3}$, so the solution set is $\\left\\{-\\frac{16}{3}, 2\\right\\}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-negative-case)]@
 
 The method extends to any expression inside the absolute value. The internal structure determines how hard each case is to solve, but the case-splitting framework is always the same.
 
@@ -536,7 +536,7 @@ The equation $|2x - 1| = |x + 4|$ produces two equations. From $2x - 1 = x + 4$:
 
 @academic[pitfall,aside:true,width:35%:Negating only the first term
 Writing the second case of $|2x - 1| = |x + 4|$ as $2x - 1 = -x + 4$ gives $x = \\frac{5}{3}$, where the sides are $\\frac{7}{3}$ and $\\frac{17}{3}$. Negating the whole side, $-(x + 4) = -x - 4$, gives $x = -1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-negating-first-term)]@
 
 The second case is where the sign change enters. Its right-hand side is $-g(x)$, the opposite of the entire expression on the right, which for this equation is $-(x + 4) = -x - 4$. Both candidates are then confirmed by substitution, as above.
 
@@ -565,7 +565,7 @@ On $x > 1$: both expressions are positive, so the equation becomes $(x - 1) + (x
 
 @academic[pitfall,aside:true,width:35%:Keeping a candidate outside its interval
 Solving $|x - 1| + |x + 3| = 3$ piece by piece gives $x = -\\frac{5}{2}$ on $x < -3$ and $x = \\frac{1}{2}$ on $x > 1$. Neither lies in its interval, and both give a sum of $4$, so there is no solution.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-candidate-outside-interval)]@
 
 The solution set is $\\{-5, 3\\}$. The interval method is systematic: identify critical points, solve on each interval using the appropriate piecewise form, and verify that each candidate belongs to the interval where it was derived.`,
     before: ``,
@@ -592,7 +592,7 @@ This constraint is automatically enforced by careful case-splitting but easily m
 
 @academic[pitfall,aside:true,width:35%:Keeping a root where the right side is negative
 Accepting both cases of $|x + 3| = 2x$ keeps $x = -1$ beside $x = 3$. At $x = -1$ the right side is $2x = -2$ while $|x + 3| = 2$, so the only solution is $x = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-root-with-negative-right-side)]@
 
 The constraint matters whenever the right-hand side contains $x$, because then its sign changes along the number line. Each case produces a candidate, and the right-hand side is evaluated at that candidate before it joins the solution set.`,
     before: ``,
@@ -978,7 +978,7 @@ $$|p| = b \\implies p = b \\text{ or } p = -b \\quad (b > 0)$$
           `When $B < 0$, no solution exists. The equation $|x + 3| = -2$ asks for a non-negative quantity to equal $-2$, which is impossible. The solution set is empty, and no algebra is needed to determine this.`,
           `@academic[pitfall,aside:true,width:35%:Splitting a negative right-hand side
 Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x = -1$, but both make $|x + 3| = 2$, not $-2$. The equation has no solution.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-negative-right-side)]@`,
           `Checking the sign of the right-hand side before proceeding is not a shortcut — it is the logical first step. A negative right-hand side eliminates the equation immediately, and recognizing this saves the effort of setting up cases that cannot produce valid solutions.`,
           `When the inside is a longer expression, the same split applies to it as a whole, as the [next section](!/algebra/equations/absolute-value#3) shows.`,
         ],

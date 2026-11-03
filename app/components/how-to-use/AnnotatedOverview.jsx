@@ -11,6 +11,8 @@
 //   Mockup:      React component (required)
 //   mockupProps: props forwarded to Mockup
 //   callouts: [{ n, label, desc, pos: { top?, left?, right?, bottom? } }]
+//   frames?:  [{ title, mockupProps, callouts }]   several standard states,
+//             one picture each; when given, mockupProps / callouts above are ignored
 // }
 // ===========================================================
 
@@ -18,13 +20,10 @@ import React from 'react';
 
 const BLUE = '#1e40af';
 
-export default function AnnotatedOverview({ data }) {
-  if (!data || !data.Mockup) return null;
-
-  const { Mockup, mockupProps = {}, callouts = [] } = data;
-
+function Frame({ Mockup, title, mockupProps = {}, callouts = [] }) {
   return (
-    <div className="annotated-overview">
+    <div className="frame">
+      {title && <div className="frame-title">{title}</div>}
       <div className="mockup-frame">
         <Mockup {...mockupProps} />
 
@@ -55,10 +54,101 @@ export default function AnnotatedOverview({ data }) {
       )}
 
       <style jsx>{`
+        .frame {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+        .frame-title {
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: #64748b;
+        }
+        .mockup-frame {
+          position: relative;
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 12px;
+          padding: 16px 20px;
+        }
+        .callout-pin {
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: ${BLUE};
+          color: #ffffff;
+          font-size: 12px;
+          font-weight: 700;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid #ffffff;
+          box-shadow: 0 0 0 1px ${BLUE};
+          z-index: 3;
+        }
+        .callout-legend {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px 24px;
+          font-size: 14px;
+        }
+        .legend-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .legend-num {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background: ${BLUE};
+          color: #ffffff;
+          font-size: 11px;
+          font-weight: 700;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+        .legend-text {
+          color: #64748b;
+          line-height: 1.5;
+        }
+        .legend-text strong {
+          color: #0f172a;
+          font-weight: 600;
+        }
+        @media (max-width: 640px) {
+          .callout-legend { grid-template-columns: 1fr; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+export default function AnnotatedOverview({ data }) {
+  if (!data || !data.Mockup) return null;
+
+  const { Mockup, mockupProps = {}, callouts = [], frames = null } = data;
+  const list = Array.isArray(frames) && frames.length > 0
+    ? frames
+    : [{ mockupProps, callouts }];
+
+  return (
+    <div className="annotated-overview">
+      {list.map((f, i) => (
+        <Frame key={i} Mockup={Mockup} title={f.title} mockupProps={{ ...mockupProps, ...(f.mockupProps || {}) }} callouts={f.callouts || []} />
+      ))}
+
+      <style jsx>{`
         .annotated-overview {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 28px;
           font-family: Arial, sans-serif;
         }
         .mockup-frame {

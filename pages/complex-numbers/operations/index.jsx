@@ -883,6 +883,7 @@ import complexMultiplicationDiagrams from '@/app/components/calculators/complex-
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1069,6 +1070,24 @@ export async function getStaticProps(){
 
 
 // formulas-optimized: v1 | 2026-06-11 | 4 callouts (obj1, obj2, obj3, obj4)
+// Concept introduction (section 3, "Multiplication of Complex Numbers") —
+// template C, failure first. Running instance: multiplying part by part, as
+// in addition, against the full four-term expansion. Old obj3 text is kept in
+// sectionsContent.obj3, unused; its passages, formula boxes and link, two
+// pitfalls, example, fact, obj3Table, the mul demo frame and its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciMulTable = ciTableOpen(['product', 'part by part, as in addition', 'all four products, with i² = −1']) +
+  ciRow(['(1 + 2i)(3 + 4i)', '3 + 8i', '−5 + 10i'], { color: '#a4243b', cols: [1] }) +
+  ciRow(['i · i', 'i', '−1'], { shade: true, last: true, color: '#a4243b', cols: [1] }) +
+  '</tbody></table>'
+
 const sectionsContent={
 obj0: {
   title: `Key Terms`,
@@ -1574,6 +1593,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    mulTable: ciMulTable,
+  };
+
   const demoUnits = {
     add: demoUnitFrame({
       svg: complexAddSubDiagrams.add,
@@ -1625,6 +1648,7 @@ const schemas = {
   props:{
     complexOpTree,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj3Table,
@@ -1655,10 +1679,101 @@ export default function OperationsPage({complexOpTree,
   obj7Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 3 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Complex numbers add part by part: real with real, imaginary with imaginary. Does multiplication work the same way?`,
+        content: [
+          `Try the part-by-part recipe on two products, one of them as simple as possible.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Part by part, i · i would be i — contradicting i² = −1, the rule that defines i.`,
+        content: [
+          ciTable('mulTable'),
+          `The part-by-part answers miss the cross terms, and they never use $i^2 = -1$.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Every part of one factor meets every part of the other, and i² = −1 moves one product into the real part.`,
+        content: [
+          `For $z_1 = a + bi$ and $z_2 = c + di$, expand using distribution (the FOIL method):`,
+          `@academic[formula_callout:Multiplication of Complex Numbers
+$$(a + bi)(c + di) = ac + adi + bci + bdi^2$$]@`,
+          `The term $bdi^2$ contains $i^2 = -1$, so $bdi^2 = -bd$. Collecting real and imaginary parts:`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **product** of $a + bi$ and $c + di$ is $(ac - bd) + (ad + bc)i$, found by expanding all four products and replacing $i^2$ with $-1$.`,
+        formula: [
+          `Multiplication requires more care than addition. The distributive property expands the product into four terms, and the identity $i^2 = -1$ collapses one of those terms into the real part.`,
+          `@academic[formula_callout:Multiplication
+$$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$$
+/complex-numbers/formulas#multiplication]@`,
+          `@academic[formulas_link:Browse all complex numbers formulas
+/complex-numbers/formulas]@`,
+          `The real part of the product is $ac - bd$. The imaginary part is $ad + bc$. Both involve contributions from all four original values.`,
+        ],
+        footer: `So $(1 + 2i)(3 + 4i) = 3 + 4i + 6i + 8i^2 = -5 + 10i$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Seen in the plane, multiplying scales and rotates.`,
+        content: [
+          `@academic[example:Step-by-step example
+Compute $(2 + 3i)(4 - i)$.
+
+Expand: $2 \\cdot 4 + 2 \\cdot (-i) + 3i \\cdot 4 + 3i \\cdot (-i) = 8 - 2i + 12i - 3i^2$
+
+Substitute $i^2 = -1$: $= 8 - 2i + 12i - 3(-1) = 8 - 2i + 12i + 3$
+
+Combine: $= (8 + 3) + (-2 + 12)i = 11 + 10i$]@`,
+          `Multiplying by a pure real number scales both components proportionally. The product $3(2 + 5i) = 6 + 15i$ stretches the number by factor $3$ without rotating it. Multiplying by $i$ rotates $90°$ counterclockwise: $i(2 + 5i) = 2i + 5i^2 = -5 + 2i$. The [trigonometric form](!/complex-numbers/trigonometric-form) reveals multiplication's full geometric meaning — moduli multiply, arguments add.`,
+          <div
+            key={'obj3-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj3Table }}
+          />,
+          <div key={'unit-mul'} dangerouslySetInnerHTML={{ __html: demoUnits.mul }} />,
+          `The four-term expansion hides a rotation; the trigonometric form reveals it.`,
+          `@academic[fact,aside:true,width:35%:Squaring builds Pythagorean triples
+For whole numbers $a > b > 0$, the parts of $(a + bi)^2$ are the legs of a right triangle with hypotenuse $a^2 + b^2$, since $|z^2| = |z|^2$: hence $3, 4, 5$ and $5, 12, 13$. Every primitive Pythagorean triple arises from such a square.]@`,
+          `Squaring is the special case $z_1 = z_2$. For $z = a + bi$ the formula gives $z^2 = (a^2 - b^2) + 2abi$: the real part is a difference of two squares, and the imaginary part is twice the product of the two parts. With whole numbers this gives $(2 + i)^2 = 3 + 4i$, $(3 + 2i)^2 = 5 + 12i$ and $(4 + i)^2 = 15 + 8i$, and the [modulus](!/complex-numbers/absolute-value) of each square is the square of the original modulus: $5$, $13$ and $17$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Two slips spoil most products: multiplying part by part, and forgetting that i² = −1.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Multiplying part by part
+Multiplying real parts and imaginary parts separately, as in addition, gives $(1 + 2i)(3 + 4i) = 3 + 8i$. Expanding all four products gives $3 + 4i + 6i + 8i^2 = -5 + 10i$.
+[Read more](!#7)]@`,
+          `@academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
+Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12i - 3 = 5 + 10i$. Since $i^2 = -1$, the term is $+3$ and the product is $11 + 10i$.
+[Read more](!#7)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers division, the properties of complex arithmetic, the multiplicative inverse, common pitfalls and a summary of the four operations.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -1695,14 +1810,7 @@ export default function OperationsPage({complexOpTree,
         title:sectionsContent.obj3.title,
         link:sectionsContent.obj3.link,
         content:[
-          sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
-                  <div key={'unit-mul'} dangerouslySetInnerHTML={{ __html: demoUnits.mul }} />,
-          `The four-term expansion hides a rotation; the trigonometric form reveals it.`,
+          <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
         ]
     },
     {

@@ -5,11 +5,25 @@
 // ===========================================================
 
 import angleSum from './angleSum';
+import exteriorAngle from './exteriorAngle';
+import exteriorAngleSum from './exteriorAngleSum';
 import isosceles from './isosceles';
+import largerAngle from './largerAngle';
+import perpendicularShortest from './perpendicularShortest';
+import thales from './thales';
+import triangleInequality from './triangleInequality';
+import verticalAngles from './verticalAngles';
 
 const PROOFS = {
   angleSum,
-  isosceles
+  exteriorAngle,
+  exteriorAngleSum,
+  isosceles,
+  largerAngle,
+  perpendicularShortest,
+  thales,
+  triangleInequality,
+  verticalAngles
 };
 
 export default PROOFS;

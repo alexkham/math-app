@@ -16,6 +16,7 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -350,7 +351,7 @@ The actual number of turning points may be less than the maximum. The cubic $P(x
 
 @academic[pitfall,aside:true,width:35%:Forcing the maximum number of turns
 Drawing every cubic with two turns gives $x^3 + x$ a peak and a valley it does not have. Both $x^3$ and $x$ increase everywhere, so $x^3 + x$ rises the whole way with no turning points.
-[Read more](!#12)]@
+[Read more](!#pitfall-forcing-the-maximum-number-of-turns)]@
 
 Knowing the upper bound on turning points serves as a reality check when sketching. If a degree-$4$ polynomial sketch shows four turning points, something is wrong — the graph has been drawn with one bend too many.`,
   before: ``,
@@ -375,7 +376,7 @@ The polynomial $(x - 1)(x + 2)^2(x - 3)^3$ illustrates all three behaviors. At $
 
 @academic[pitfall,aside:true,width:35%:Counting factors instead of exponents
 Reading $(x - 1)(x + 2)^2(x - 3)^3$ as a cubic because it has three factors predicts ends going opposite ways. The exponents add to $1 + 2 + 3 = 6$: even degree, positive leading coefficient, both ends rise.
-[Read more](!#12)]@
+[Read more](!#pitfall-counting-factors-instead-of-exponents)]@
 
 The factored form carries more than the roots. Each exponent records a multiplicity, and together the factors also fix the degree of the polynomial and the sign of its leading coefficient, which decide the end behavior that the sketch must start and finish with.`,
   before: ``,
@@ -402,7 +403,7 @@ The polynomial $P(x) = x^3 - 5x$ is odd: $P(-x) = -x^3 + 5x = -(x^3 - 5x) = -P(x
 
 @academic[pitfall,aside:true,width:35%:Judging symmetry by the degree
 Calling $x^4 + x$ even because its degree is even fails at once: $P(1) = 2$ but $P(-1) = 0$, so the graph is not mirrored across the y-axis. Every power must be even; $x^4 + x$ has neither symmetry.
-[Read more](!#12)]@
+[Read more](!#pitfall-judging-symmetry-by-the-degree)]@
 
 Most polynomials have neither symmetry. The presence of both even and odd powers — as in $x^3 + x^2$ — breaks both conditions. Recognizing symmetry when it exists cuts the graphing work in half, since the behavior on one side of the axis determines the other.`,
   before: ``,
@@ -438,7 +439,7 @@ The vertex lies at $x = -\\frac{b}{2a}$, and the corresponding $y$-value is $P\\
 
 @academic[pitfall,aside:true,width:35%:Dropping the minus in the vertex formula
 Using $x = \\frac{b}{2a}$ for $x^2 - 2x - 3$ gives $x = -1$, where $P(-1) = 0$ is a root, not the minimum. With $x = -\\frac{b}{2a}$ the vertex is at $x = 1$, with $P(1) = -4$.
-[Read more](!#12)]@
+[Read more](!#pitfall-dropping-the-minus-in-the-vertex-formula)]@
 
 Together, the sign of $a$, the vertex and the discriminant settle the sketch of a parabola: which way it opens, where it turns, and whether it reaches the x-axis. For the parabola $x^2 - 2x - 3$ shown below, $a = 1$, $b = -2$ and $c = -3$.`,
   before: ``,
@@ -518,59 +519,9 @@ Drawing sharp corners violates the fundamental smoothness of polynomial curves. 
 
 Exceeding the turning point bound creates impossible graphs. A cubic with three turning points or a quartic with four has too many direction changes for its degree. The bound of $n - 1$ is absolute.
 
-Ignoring the leading coefficient's sign flips the entire graph. The polynomials $x^4 - 3x^2 + 1$ and $-x^4 + 3x^2 - 1$ have turning points at the same $x$-values (mirrored across the $x$-axis) and the same roots, but completely opposite orientations — one opens upward at the extremes, the other downward.
-
-**Forcing the maximum number of turns**
-
-The bound of $n - 1$ turning points is treated as the number every graph of degree $n$ must have, so each cubic is drawn with a peak and a valley.
-
-Wrong working: $x^3 + x$ is a cubic, so it is sketched rising to a peak, falling to a valley and rising again.
-
-Right working: $x^3$ and $x$ both increase everywhere, so their sum increases everywhere too. The graph of $x^3 + x = x(x^2 + 1)$ rises the whole way, crosses the axis only at the origin, and has no turning points.
-
-Why it happens: the familiar S-shaped cubics, such as $x^3 - 3x$, use both turns, and the bound is remembered as a fixed count rather than a ceiling.
-
-How to check: ask whether the polynomial can fall anywhere. For $x^3 + x$, a larger $x$ makes both $x^3$ and $x$ larger, so the value never falls; the values at $x = -1, 0, 1, 2$ are $-2, 0, 2, 10$. A curve that never falls has no peak and no valley.
-
-**Counting factors instead of exponents**
-
-The degree is read from the number of factors in the factored form, and the exponents are ignored. The wrong degree then gives the wrong end behavior.
-
-Wrong working: $(x - 1)(x + 2)^2(x - 3)^3$ has three factors, so it is taken as a cubic: odd degree with a positive leading coefficient, so the left end falls and the right end rises.
-
-Right working: the degree is the sum of the exponents, $1 + 2 + 3 = 6$, and the leading term is $x \\cdot x^2 \\cdot x^3 = x^6$. Even degree with a positive leading coefficient: both ends rise.
-
-Why it happens: each factor gives one root, so counting factors feels like counting the degree, and the exponents are treated as details that only shape the graph at each root.
-
-How to check: test a large negative value. At $x = -10$ the factors are $-11$, $(-8)^2 = 64$ and $(-13)^3 = -2197$. Two negative numbers and a positive one multiply to a positive number, so the left end is up, not down.
-
-**Judging symmetry by the degree**
-
-Symmetry is decided from the leading term alone: an even degree is taken to mean an even function, and an odd degree an odd function.
-
-Wrong working: $x^4 + x$ has even degree, so its graph is drawn as a mirror image across the y-axis.
-
-Right working: replace $x$ with $-x$. $P(-x) = x^4 - x$, which is neither $P(x) = x^4 + x$ nor $-P(x) = -x^4 - x$. The polynomial has neither symmetry, because it mixes an even power with an odd one.
-
-Why it happens: the words even and odd describe both the degree and the symmetry, and the leading term is the one that already decides the end behavior.
-
-How to check: substitute one pair of opposite values. An even function gives equal values at $x = 1$ and $x = -1$, an odd function gives opposite values; for $x^4 + x$ they are $2$ and $0$, which are neither.
-
-**Dropping the minus in the vertex formula**
-
-The vertex is computed as $\\frac{b}{2a}$ instead of $-\\frac{b}{2a}$, which puts it at the mirror position on the other side of the y-axis.
-
-Wrong working: for $x^2 - 2x - 3$, $a = 1$ and $b = -2$, so $x = \\frac{-2}{2} = -1$, and the vertex is taken as $(-1, P(-1)) = (-1, 0)$.
-
-Right working:
-$$x = -\\frac{b}{2a} = -\\frac{-2}{2 \\cdot 1} = 1$$
-and $P(1) = 1 - 2 - 3 = -4$. The vertex is $(1, -4)$.
-
-Why it happens: with a negative $b$, the minus in the formula and the sign of $b$ cancel, and one of the two signs is easily lost.
-
-How to check: with $a > 0$ the vertex is the lowest point, but $P(1) = -4$ lies below $P(-1) = 0$, so $(-1, 0)$ cannot be the minimum; it is a root. The vertex also sits midway between the roots $-1$ and $3$: $\\frac{-1 + 3}{2} = 1$.`,
+Ignoring the leading coefficient's sign flips the entire graph. The polynomials $x^4 - 3x^2 + 1$ and $-x^4 + 3x^2 - 1$ have turning points at the same $x$-values (mirrored across the $x$-axis) and the same roots, but completely opposite orientations — one opens upward at the extremes, the other downward.`,
   before: ``,
-  after: ``,
+  after: `Three of the four slips read too much into a single fact: the degree caps the number of turns but does not require them, the number of factors is not the degree, and an even degree does not make a graph symmetric. The fourth drops the minus sign in $x = -\\frac{b}{2a}$. A few computed values catch all four: the value at a large negative $x$ shows the end behaviour, a pair of opposite inputs tests symmetry, and comparing values near the claimed vertex shows whether it is really the lowest point.`,
   link: '',
 },
     obj13:{
@@ -813,8 +764,40 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'forcing-the-maximum-number-of-turns', name: `Forcing the maximum number of turns`, errorAt: 0,
+        what: `The bound of $n - 1$ turning points is treated as the number every graph of degree $n$ must have, so each cubic is drawn with a peak and a valley.`,
+        wrong: [`$x^3 + x$ is a cubic, so it is sketched rising to a peak, falling to a valley and rising again.`],
+        right: [`$x^3$ and $x$ both increase everywhere, so their sum increases everywhere too. The graph of $x^3 + x = x(x^2 + 1)$ rises the whole way, crosses the axis only at the origin, and has no turning points.`],
+        why: `The familiar S-shaped cubics, such as $x^3 - 3x$, use both turns, and the bound is remembered as a fixed count rather than a ceiling.`,
+        check: `Ask whether the polynomial can fall anywhere. For $x^3 + x$, a larger $x$ makes both $x^3$ and $x$ larger, so the value never falls; the values at $x = -1, 0, 1, 2$ are $-2, 0, 2, 10$. A curve that never falls has no peak and no valley.` },
+      { id: 'counting-factors-instead-of-exponents', name: `Counting factors instead of exponents`, errorAt: 0,
+        what: `The degree is read from the number of factors in the factored form, and the exponents are ignored. The wrong degree then gives the wrong end behavior.`,
+        wrong: [`$(x - 1)(x + 2)^2(x - 3)^3$ has three factors, so it is taken as a cubic: odd degree with a positive leading coefficient, so the left end falls and the right end rises.`],
+        right: [`The degree is the sum of the exponents, $1 + 2 + 3 = 6$, and the leading term is $x \\cdot x^2 \\cdot x^3 = x^6$. Even degree with a positive leading coefficient: both ends rise.`],
+        why: `Each factor gives one root, so counting factors feels like counting the degree, and the exponents are treated as details that only shape the graph at each root.`,
+        check: `Test a large negative value. At $x = -10$ the factors are $-11$, $(-8)^2 = 64$ and $(-13)^3 = -2197$. Two negative numbers and a positive one multiply to a positive number, so the left end is up, not down.` },
+      { id: 'judging-symmetry-by-the-degree', name: `Judging symmetry by the degree`, errorAt: 0,
+        what: `Symmetry is decided from the leading term alone: an even degree is taken to mean an even function, and an odd degree an odd function.`,
+        wrong: [`$x^4 + x$ has even degree, so its graph is drawn as a mirror image across the y-axis.`],
+        right: [`Replace $x$ with $-x$. $P(-x) = x^4 - x$, which is neither $P(x) = x^4 + x$ nor $-P(x) = -x^4 - x$. The polynomial has neither symmetry, because it mixes an even power with an odd one.`],
+        why: `The words even and odd describe both the degree and the symmetry, and the leading term is the one that already decides the end behavior.`,
+        check: `Substitute one pair of opposite values. An even function gives equal values at $x = 1$ and $x = -1$, an odd function gives opposite values; for $x^4 + x$ they are $2$ and $0$, which are neither.` },
+      { id: 'dropping-the-minus-in-the-vertex-formula', name: `Dropping the minus in the vertex formula`, errorAt: 0,
+        what: `The vertex is computed as $\\frac{b}{2a}$ instead of $-\\frac{b}{2a}$, which puts it at the mirror position on the other side of the y-axis.`,
+        wrong: [`For $x^2 - 2x - 3$, $a = 1$ and $b = -2$, so $x = \\frac{-2}{2} = -1$, and the vertex is taken as $(-1, P(-1)) = (-1, 0)$.`],
+        right: [`$$x = -\\frac{b}{2a} = -\\frac{-2}{2 \\cdot 1} = 1$$`, `And $P(1) = 1 - 2 - 3 = -4$. The vertex is $(1, -4)$.`],
+        why: `With a negative $b$, the minus in the formula and the sign of $b$ cancel, and one of the two signs is easily lost.`,
+        check: `With $a > 0$ the vertex is the lowest point, but $P(1) = -4$ lies below $P(-1) = 0$, so $(-1, 0)$ cannot be the minimum; it is a root. The vertex also sits midway between the roots $-1$ and $3$: $\\frac{-1 + 3}{2} = 1$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     linearPolyCases,
     demoUnits,
     conceptIntroFigures,
@@ -841,7 +824,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function GraphingPage({linearPolyCases, seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function GraphingPage({ pitfallData,linearPolyCases, seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1054,6 +1037,15 @@ export default function GraphingPage({linearPolyCases, seoData, sectionsContent,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="polynomial-graph-pitfalls"
+            title="Common pitfalls in graphing polynomials"
+            source="/algebra/polynomials/graphing"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 

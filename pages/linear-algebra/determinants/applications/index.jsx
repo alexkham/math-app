@@ -1013,6 +1013,7 @@ import inverseDiagrams from '@/app/components/linear-algebra copy/matrix/inverse
 import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/crossProductDiagrams'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1436,6 +1437,25 @@ const determinantApplications = {
 // obj2 (adjugate inverse), obj3 (cross product det form), obj4 (char polynomial,
 // trace identity), obj5 (Wronskian) — matching data entries live on other pages.
 // All worked-example $$ displays preserved.
+
+// Concept introduction (section 1, "Cramer's Rule") — template A, definition
+// last. Running instance: 2x + y = 5, x + 3y = 5 solved by three
+// determinants. Old obj1 text is kept in sectionsContent.obj1, unused; it is
+// carried in unchanged in four blocks (statement, 2×2 example, 3×3 example,
+// theoretical significance), with obj1Table, the cramer demo frame and its
+// line.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciCramerTable = ciTableOpen(['matrix', 'how it is formed', 'determinant']) +
+  ciRow(['A = (2 1; 1 3)', 'the coefficients', '2 · 3 − 1 · 1 = 5']) +
+  ciRow(['Aₓ = (5 1; 5 3)', 'right-hand side in column 1', '5 · 3 − 1 · 5 = 10'], { shade: true }) +
+  ciRow(['Aᵧ = (2 5; 1 5)', 'right-hand side in column 2', '2 · 5 − 5 · 1 = 5'], { last: true }) +
+  '</tbody></table>'
 
 const sectionsContent = {
   obj1: {
@@ -2008,6 +2028,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    cramerTable: ciCramerTable,
+  };
+
   const demoUnits = {
     cramer: demoUnitFrame({
       svg: cramerDiagrams.replace,
@@ -2055,6 +2079,7 @@ const schemas = {
   props: {
     wronskianSteps,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj1Table,
@@ -2082,10 +2107,129 @@ const schemas = {
      obj6Table,
      determinantApplications,
      faqQuestions,
-     schemas, demoUnits, wronskianSteps
+     schemas, demoUnits, wronskianSteps, conceptIntroFigures
    }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Elimination solves a system step by step. Could each unknown instead be written down directly, in one formula?`,
+        content: [
+          `Take $2x + y = 5$ and $x + 3y = 5$ and compute three determinants.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each unknown is a ratio of two determinants: x = 10 ÷ 5 = 2 and y = 5 ÷ 5 = 1.`,
+        content: [
+          ciTable('cramerTable'),
+          `Check: $2 \\cdot 2 + 1 = 5$ and $2 + 3 \\cdot 1 = 5$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Replace the column of the unknown by the right-hand side, take the determinant, and divide by det A.`,
+        content: [
+          `## 2×2 Example
+
+For the system
+
+@academic[formula_callout:Cramer's Rule
+$$\\begin{pmatrix} 3 & 2 \\\\ 1 & 5 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\end{pmatrix} = \\begin{pmatrix} 8 \\\\ 7 \\end{pmatrix}$$]@
+
+the coefficient determinant is $\\det(A) = 3 \\cdot 5 - 2 \\cdot 1 = 13$. Replacing column $1$ with $\\mathbf{b}$:
+
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_1) = \\det\\begin{pmatrix} 8 & 2 \\\\ 7 & 5 \\end{pmatrix} = 40 - 14 = 26$$]@
+
+Replacing column $2$ with $\\mathbf{b}$:
+
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_2) = \\det\\begin{pmatrix} 3 & 8 \\\\ 1 & 7 \\end{pmatrix} = 21 - 8 = 13$$]@
+
+So $x_1 = 26/13 = 2$ and $x_2 = 13/13 = 1$.
+
+@academic[pitfall,aside:true,width:35%:Replacing a row instead of a column
+Putting $\\mathbf{b}$ into row $1$ instead of column $1$ gives $\\det\\begin{pmatrix} 8 & 7 \\\\ 1 & 5 \\end{pmatrix} = 33$ and $x_1 = 33/13$. With column $1$ replaced, $\\det(A_1) = 26$ and $x_1 = 2$.
+[Read more](!#pitfalls)]@
+
+Both values can be checked in the original equations: $3 \\cdot 2 + 2 \\cdot 1 = 8$ and $1 \\cdot 2 + 5 \\cdot 1 = 7$. The denominator $\\det(A) = 13$ is shared by both components, while each numerator comes from its own modified matrix, in which $\\mathbf{b}$ stands where the coefficients of that unknown stood.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `[Cramer's rule](!/linear-algebra/definitions#cramers_rule): for an $n \\times n$ system $A\\mathbf{x} = \\mathbf{b}$ with $\\det(A) \\neq 0$, each unknown is $x_i = \\frac{\\det(A_i)}{\\det(A)}$, where $A_i$ is $A$ with column $i$ replaced by $\\mathbf{b}$.`,
+        formula: [
+          `Given a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ where $A$ is $n \\times n$ with $\\det(A) \\neq 0$, Cramer's rule expresses each component of the solution directly as a ratio of determinants:
+
+@academic[formula_callout:cramers_rule|Cramers Rule|$$x_i = \\frac{\\det(A_i)}{\\det(A)}$$]@
+@academic[formulas_link:/linear-algebra/formulas#cramers_rule]@
+
+where $A_i$ is the matrix formed by replacing column $i$ of $A$ with the right-hand side vector $\\mathbf{b}$. Every other column stays in place.`,
+        ],
+        footer: `So for the system above, $x = \\frac{10}{5} = 2$ and $y = \\frac{5}{5} = 1$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The rule works for any size of system, and its real value is theoretical.`,
+        content: [
+          `## 3×3 Example
+
+@academic[formula_callout:Cramer's Rule
+$$\\begin{pmatrix} 1 & 0 & 2 \\\\ -1 & 3 & 1 \\\\ 2 & 1 & 0 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\\\ x_3 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 0 \\\\ 3 \\end{pmatrix}$$]@
+
+The coefficient determinant is $\\det(A) = 1(0 - 1) - 0 + 2(-1 - 6) = -1 - 14 = -15$. The three modified determinants are:
+
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_1) = \\det\\begin{pmatrix} 5 & 0 & 2 \\\\ 0 & 3 & 1 \\\\ 3 & 1 & 0 \\end{pmatrix} = 5(0 - 1) - 0 + 2(0 - 9) = -5 - 18 = -23$$]@
+
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_2) = \\det\\begin{pmatrix} 1 & 5 & 2 \\\\ -1 & 0 & 1 \\\\ 2 & 3 & 0 \\end{pmatrix} = 1(0 - 3) - 5(0 - 2) + 2(-3 - 0) = -3 + 10 - 6 = 1$$]@
+
+@academic[formula_callout:Cramer's Rule
+$$\\det(A_3) = \\det\\begin{pmatrix} 1 & 0 & 5 \\\\ -1 & 3 & 0 \\\\ 2 & 1 & 3 \\end{pmatrix} = 1(9 - 0) - 0 + 5(-1 - 6) = 9 - 35 = -26$$]@
+
+The solution is $x_1 = -23/(-15) = 23/15$, $x_2 = 1/(-15) = -1/15$, $x_3 = -26/(-15) = 26/15$.`,
+          `## Theoretical Significance
+
+@academic[rule_corollary_plain:Cramer's rule proves that each solution component is a rational function of the matrix entries and the right-hand side entries.]@
+
+@academic[fact,aside:true,width:35%:Maclaurin had the rule first
+Colin Maclaurin's Treatise of Algebra, printed in 1748, two years after his death, already solves systems in 2 and 3 unknowns this way. Cramer's book of 1750 stated the rule for any number of unknowns, with a rule for the signs, and his name stuck.]@
+
+This has consequences in pure algebra and in sensitivity analysis, where it shows how solutions respond to perturbations in the data. As a computational method, however, it requires $n + 1$ determinant evaluations, making it far more expensive than [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) for large systems.
+
+The ratios in the rule were written down before determinants had a name or a notation. Early statements spelled out each numerator and each denominator as a sum of signed products of coefficients, six products for three unknowns, and left the reader to follow the pattern of signs to larger systems. The theory of determinants later grew out of exactly these sums.`,
+          <div
+            key={'obj1-table'}
+            style={tableWrapStyle}
+            dangerouslySetInnerHTML={{ __html: obj1Table }}
+          />,
+          <div key={'unit-cramer'} dangerouslySetInnerHTML={{ __html: demoUnits.cramer }} />,
+          `The rule is a statement about structure rather than a practical method; elimination beats it for anything you would actually solve.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `When det A = 0, the rule gives no answer.`,
+        content: [
+          `Every formula divides by $\\det(A)$. For a singular matrix the system has either no solution or infinitely many, and elimination is needed to tell which.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, the inverse via the adjugate, the cross product as a determinant, the characteristic polynomial, the Wronskian, Vandermonde and structured determinants, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -2093,14 +2237,7 @@ const schemas = {
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
-                  <div key={'unit-cramer'} dangerouslySetInnerHTML={{ __html: demoUnits.cramer }} />,
-          `The rule is a statement about structure rather than a practical method; elimination beats it for anything you would actually solve.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

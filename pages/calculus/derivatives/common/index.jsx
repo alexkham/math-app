@@ -16,6 +16,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -379,6 +380,23 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 10 callouts (obj4, obj5, obj6, obj7)
+// Concept introduction (section 1, "Constant Functions") — template A,
+// definition last. Running instance: difference quotients of f(x) = 5 for
+// shrinking h. Old obj1 text is kept in sectionsContent.obj1, unused; its four
+// passages, formula box and link and pitfall are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciQuotTable = ciTableOpen(['h', 'f(x + h) − f(x) for f(x) = 5', 'difference quotient']) +
+  ciRow(['1', '5 − 5 = 0', '0 ÷ 1 = 0']) +
+  ciRow(['0.1', '5 − 5 = 0', '0 ÷ 0.1 = 0'], { shade: true }) +
+  ciRow(['0.01', '5 − 5 = 0', '0 ÷ 0.01 = 0'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/derivatives/common ─────────────────────────────────────────
 
@@ -834,6 +852,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    quotTable: ciQuotTable,
+  };
+
   const demoUnits = {
     power: demoUnitFrame({
       svg: functionDerivativeDiagrams.quadratic,
@@ -905,6 +927,7 @@ const schemas = {
   props: {
     commonDerivativesOutline,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj2Table,
@@ -923,9 +946,75 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({commonDerivativesOutline, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({commonDerivativesOutline, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `A quantity that never changes has no rate of change: a car parked for an hour covers 0 km per hour.`,
+        content: [
+          `Check this against the limit definition of the derivative for $f(x) = 5$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `For f(x) = 5, every difference quotient is already 0, before any limit is taken.`,
+        content: [
+          ciTable('quotTable'),
+          `The output never moves, so the numerator is always $0$, whatever the size of $h$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `A horizontal line has slope zero everywhere.`,
+        content: [
+          `The graph of a constant function is a horizontal line. Every secant line through two points on it has slope zero, so the tangent line at every point also has slope zero. From the limit definition, the difference quotient $\\frac{c - c}{h} = 0$ for all $h \\neq 0$, and the limit is $0$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Constant rule:** the derivative of any constant function is zero, $\\frac{d}{dx}[c] = 0$.`,
+        formula: [
+          `For any constant $c$:`,
+          `@academic[formula_callout:Constant Rule (Derivatives)
+$$\\frac{d}{dx}[c] = 0$$
+/calculus/formulas#constant_rule_derivatives]@`,
+          `@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@`,
+        ],
+        footer: `So $\\frac{d}{dx}[5] = 0$ and $\\frac{d}{dx}[\\pi^2] = 0$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Constant terms disappear when a sum is differentiated.`,
+        content: [
+          `Under differentiation, constant terms vanish. In any sum $f(x) + c$, the constant contributes nothing to the derivative: $\\frac{d}{dx}[f(x) + c] = f'(x)$.`,
+          `So $x^2$ and $x^2 + 5$ have the same derivative, $2x$: their graphs differ only by a vertical shift.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A number written as a power is still a number.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Applying the power rule to a constant
+Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number as a function of $x$. $e^3 \\approx 20.09$ is a constant, so its derivative is $0$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the derivatives of power functions, polynomials, the trigonometric functions, exponential and logarithmic functions, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -933,7 +1022,7 @@ export default function PageTemplate({commonDerivativesOutline, seoData, section
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

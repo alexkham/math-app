@@ -14,6 +14,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -413,7 +414,7 @@ Check: $\\sqrt{9} - \\sqrt{4} = 3 - 2 = 1$. Valid.
 
 @academic[pitfall,aside:true,width:35%:Squaring term by term
 Squaring each term, $(\\sqrt{x} + 1)^2 = x + 1$, turns the equation into $x + 5 = x + 1$, that is $5 = 1$, so it seems to have no solution. The middle term is needed: $x + 5 = x + 2\\sqrt{x} + 1$ leads to $x = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-term-by-term)]@
 
 The first squaring did not eliminate all radicals — a radical remained from expanding $(\\sqrt{x} + 1)^2$ using techniques from [operations](!/algebra/roots/operations). A second isolation and squaring completed the process.`,
     before: ``,
@@ -465,7 +466,7 @@ Square again and solve. Check all candidates.
 
 @academic[pitfall,aside:true,width:35%:Skipping the check when both sides are radicals
 Squaring $\\sqrt{x - 5} = \\sqrt{2x - 9}$ gives $x - 5 = 2x - 9$, so $x = 4$, and the answer is accepted unchecked. At $x = 4$ both radicands equal $-1$, so neither side exists: the equation has no solution.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-skipping-the-check-when-both-sides-are-radicals)]@
 
 In both configurations, squaring once or twice turns the radicals into ordinary expressions, and the equation that remains is solved like any other linear or quadratic equation. The candidates it produces still belong to the original equation. There, each square root is defined only where its radicand is non-negative, and each side must take the same value.
 
@@ -570,7 +571,7 @@ Solution: $x = 4$ only.
 
 @academic[pitfall,aside:true,width:35%:Checking in the squared equation
 Substituting $x = 0$ into the squared equation $2x + 1 = (x - 1)^2$ gives $1 = 1$, so $x = 0$ looks valid. In the original, $\\sqrt{1} = 1$ but $0 - 1 = -1$, so $x = 4$ is the only solution.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-in-the-squared-equation)]@
 
 Verification protects against extraneous solutions introduced by squaring and against domain violations where radicands become negative.`,
     before: ``,
@@ -588,53 +589,9 @@ Verification protects against extraneous solutions introduced by squaring and ag
 
   obj12: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for many wrong answers to radical equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Squaring term by term**
-
-One side is a sum that contains a radical, and it is squared one term at a time, as if $(a + b)^2$ were $a^2 + b^2$.
-
-Wrong working:
-$$\\sqrt{x + 5} = \\sqrt{x} + 1 \\implies x + 5 = x + 1 \\implies 5 = 1$$
-The contradiction suggests that the equation has no solution.
-
-Right working: the square of a sum keeps its middle term.
-$$(\\sqrt{x} + 1)^2 = x + 2\\sqrt{x} + 1$$
-$$x + 5 = x + 2\\sqrt{x} + 1 \\implies 4 = 2\\sqrt{x} \\implies \\sqrt{x} = 2 \\implies x = 4$$
-
-Why it happens: squaring a single radical simply removes the root sign, and the same move is then applied to each term of a sum.
-
-How to check: try the expansion with numbers. $(3 + 1)^2 = 16$, while $3^2 + 1^2 = 10$. And $x = 4$ does satisfy the original equation: $\\sqrt{9} - \\sqrt{4} = 3 - 2 = 1$.
-
-**Skipping the check when both sides are radicals**
-
-With one square root on each side, squaring gives a linear equation at once. Both sides are non-negative, so no sign is lost, and the check gets skipped. The radicands, however, can still be negative.
-
-Wrong working:
-$$\\sqrt{x - 5} = \\sqrt{2x - 9} \\implies x - 5 = 2x - 9 \\implies x = 4$$
-The answer $x = 4$ is accepted without substitution.
-
-Right working: substitute $x = 4$ into the original. The radicands are $4 - 5 = -1$ and $2 \\cdot 4 - 9 = -1$, so neither $\\sqrt{-1}$ is a real number. The equation has no solution. The domain shows the same thing: $x - 5 \\geq 0$ and $2x - 9 \\geq 0$ require $x \\geq 5$, and $4$ lies outside it.
-
-Why it happens: the argument "both sides are principal roots, so both are non-negative" rules out one kind of extraneous solution, and it is taken to rule out all of them.
-
-How to check: when substituting, evaluate each radicand first. If any radicand under an even root is negative, the candidate is rejected.
-
-**Checking in the squared equation**
-
-The candidates are substituted into the equation obtained after squaring, instead of into the original equation.
-
-Wrong working:
-$$\\sqrt{2x + 1} = x - 1 \\implies 2x + 1 = x^2 - 2x + 1 \\implies x^2 - 4x = 0 \\implies x = 0 \\text{ or } x = 4$$
-Checked in $2x + 1 = (x - 1)^2$: $x = 0$ gives $1 = 1$ and $x = 4$ gives $9 = 9$, so both are kept.
-
-Right working: checked in the original. $x = 0$ gives $\\sqrt{1} = 1$ on the left and $0 - 1 = -1$ on the right, so it is rejected. $x = 4$ gives $\\sqrt{9} = 3$ and $4 - 1 = 3$, so it is kept. The solution is $x = 4$ only.
-
-Why it happens: the squared equation is the last one written down and the easiest to evaluate. But every candidate satisfies it automatically, since that is the equation it was solved from, so a check there cannot reject anything.
-
-How to check: substitute into the very first line of the problem, before any squaring, and compare the two sides with the radical evaluated as a principal root.`,
+    content: `Three mistakes account for many wrong answers to radical equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Squaring is the step that causes trouble in every case. It must be applied to whole sides, so a sum is squared with its middle term, and it can create solutions that the original equation does not have. That is why every candidate is substituted into the original equation, the very first line, with each radical evaluated as a principal root and each radicand checked for its sign.`,
     link: '',
   },
 
@@ -832,8 +789,34 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 3, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'squaring-term-by-term', name: `Squaring term by term`, errorAt: 1,
+        what: `One side is a sum that contains a radical, and it is squared one term at a time, as if $(a + b)^2$ were $a^2 + b^2$.`,
+        wrong: [`$$\\sqrt{x + 5} = \\sqrt{x} + 1$$`, `$$\\implies x + 5 = x + 1$$`, `$$\\implies 5 = 1$$`, `The contradiction suggests that the equation has no solution.`],
+        right: [`$$\\sqrt{x + 5} = \\sqrt{x} + 1$$`, `The square of a sum keeps its middle term.`, `$$(\\sqrt{x} + 1)^2 = x + 2\\sqrt{x} + 1$$`, `$$x + 5 = x + 2\\sqrt{x} + 1$$`, `$$\\implies 4 = 2\\sqrt{x}$$`, `$$\\implies \\sqrt{x} = 2$$`, `$$\\implies x = 4$$`],
+        why: `Squaring a single radical simply removes the root sign, and the same move is then applied to each term of a sum.`,
+        check: `Try the expansion with numbers. $(3 + 1)^2 = 16$, while $3^2 + 1^2 = 10$. And $x = 4$ does satisfy the original equation: $\\sqrt{9} - \\sqrt{4} = 3 - 2 = 1$.` },
+      { id: 'skipping-the-check-when-both-sides-are-radicals', name: `Skipping the check when both sides are radicals`, errorAt: 3,
+        what: `With one square root on each side, squaring gives a linear equation at once. Both sides are non-negative, so no sign is lost, and the check gets skipped. The radicands, however, can still be negative.`,
+        wrong: [`$$\\sqrt{x - 5} = \\sqrt{2x - 9}$$`, `$$\\implies x - 5 = 2x - 9$$`, `$$\\implies x = 4$$`, `The answer $x = 4$ is accepted without substitution.`],
+        right: [`$$\\sqrt{x - 5} = \\sqrt{2x - 9}$$`, `$$\\implies x - 5 = 2x - 9$$`, `$$\\implies x = 4$$`, `Substitute $x = 4$ into the original. The radicands are $4 - 5 = -1$ and $2 \\cdot 4 - 9 = -1$, so neither $\\sqrt{-1}$ is a real number. The equation has no solution. The domain shows the same thing: $x - 5 \\geq 0$ and $2x - 9 \\geq 0$ require $x \\geq 5$, and $4$ lies outside it.`],
+        why: `The argument "both sides are principal roots, so both are non-negative" rules out one kind of extraneous solution, and it is taken to rule out all of them.`,
+        check: `When substituting, evaluate each radicand first. If any radicand under an even root is negative, the candidate is rejected.` },
+      { id: 'checking-in-the-squared-equation', name: `Checking in the squared equation`, errorAt: 4,
+        what: `The candidates are substituted into the equation obtained after squaring, instead of into the original equation.`,
+        wrong: [`$$\\sqrt{2x + 1} = x - 1$$`, `$$\\implies 2x + 1 = x^2 - 2x + 1$$`, `$$\\implies x^2 - 4x = 0$$`, `$$\\implies x = 0 \\text{ or } x = 4$$`, `Checked in $2x + 1 = (x - 1)^2$: $x = 0$ gives $1 = 1$ and $x = 4$ gives $9 = 9$, so both are kept.`],
+        right: [`$$\\sqrt{2x + 1} = x - 1$$`, `$$\\implies 2x + 1 = x^2 - 2x + 1$$`, `$$\\implies x^2 - 4x = 0$$`, `$$\\implies x = 0 \\text{ or } x = 4$$`, `Checked in the original. $x = 0$ gives $\\sqrt{1} = 1$ on the left and $0 - 1 = -1$ on the right, so it is rejected. $x = 4$ gives $\\sqrt{9} = 3$ and $4 - 1 = 3$, so it is kept. The solution is $x = 4$ only.`],
+        why: `The squared equation is the last one written down and the easiest to evaluate. But every candidate satisfies it automatically, since that is the equation it was solved from, so a check there cannot reject anything.`,
+        check: `Substitute into the very first line of the problem, before any squaring, and compare the two sides with the radical evaluated as a principal root.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     radicalEquationCases,
     sectionsContent,
     introContent,
@@ -859,7 +842,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RootEquationsPage({radicalEquationCases, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RootEquationsPage({ pitfallData,radicalEquationCases, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1055,6 +1038,15 @@ $$\\sqrt[3]{2x - 1} = 3$$]@`,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="radical-equation-pitfalls"
+            title="Common pitfalls in radical equations"
+            source="/algebra/roots/equations"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

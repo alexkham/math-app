@@ -851,6 +851,7 @@ import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiag
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 
@@ -1654,10 +1655,25 @@ const schemas = {
       href: '/linear-algebra/visual-tools/eigenvalues-eigenvectors',
       linkText: 'eigenvalues and eigenvectors visualizer',
     }),
+  };  // TheoremCard data (cayley-hamilton-apply); every fact is from the section text
+  const cayleyHamiltonApply = {
+    header: { kicker: 'Characteristic equation', title: 'The Cayley–Hamilton Theorem', lede: 'Every square matrix satisfies its own characteristic polynomial.' },
+    theorem: {
+      statement: 'If $p(\\lambda) = \\det(A - \\lambda I)$, then $p(A) = O$, with $\\lambda$ replaced by $A$ and constant terms multiplied by $I$.',
+      steps: [
+        { label: 'Characteristic polynomial', text: '$p(\\lambda) = \\lambda^2 - 5\\lambda + 6$.' },
+        { label: 'Substitute $A$', hit: true, text: '$A^2 - 5A + 6I = O$.' },
+        { label: 'Inverse', text: 'Rearranging: $A^{-1} = \\frac{1}{6}(5I - A)$, provided $\\det(A) = 6 \\neq 0$.' },
+        { label: 'Higher powers', text: 'Any $A^k$ with $k \\geq n$ reduces to a polynomial in $A$ of degree at most $n - 1$.' },
+      ],
+    },
   };
+
+
 
    return {
   props: {
+      cayleyHamiltonApply,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1677,7 +1693,9 @@ const schemas = {
   }
 }
    }
-export default function CharacteristicEquationPage({
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function CharacteristicEquationPage({cayleyHamiltonApply, 
   seoData,
   sectionsContent,
   introContent,
@@ -1858,7 +1876,17 @@ export default function CharacteristicEquationPage({
         title:sectionsContent.obj8.title,
         link:sectionsContent.obj8.link,
         content:[
-          sectionsContent.obj8.content,
+          sectionsContent.obj8.content,          <DiagramFrame
+            key={'obj8-theorem'}
+            id="cayley-hamilton-apply"
+            title="Cayley–Hamilton, applied"
+            source="/linear-algebra/eigen/characteristic-equation"
+            before={`The theorem used as a tool, on the page’s own example.`}
+            after={`Once $A$ satisfies a polynomial of degree $n$, every higher power, and the inverse when it exists, collapses to a combination of $I, A, \\ldots, A^{n-1}$.`}
+          >
+            <TheoremCard data={cayleyHamiltonApply} variant="apply" theme={theoremTheme} />
+          </DiagramFrame>,
+
         ]
     },
     {

@@ -15,6 +15,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -131,6 +133,26 @@ const keyWords = [
 `
 
 
+// Concept introduction (section 1, "Domain") — template C, failure first.
+// Running instance: log₂ of 8, 1, 1/2, 0 and −4 found as exponents of 2. Old
+// obj1 text is kept in sectionsContent.obj1, unused; its theorem box, five
+// passages, pitfall, the argDomain demo frame and its line are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPowTable = ciTableOpen(['x', 'power of 2 that gives x', 'log₂(x)']) +
+  ciRow(['8', '2³ = 8', '3']) +
+  ciRow(['1', '2⁰ = 1', '0'], { shade: true }) +
+  ciRow(['1/2', '2⁻¹ = 1/2', '−1']) +
+  ciRow(['0', 'none', 'undefined'], { shade: true, color: '#a4243b', cols: [1, 2] }) +
+  ciRow(['−4', 'none', 'undefined'], { last: true, color: '#a4243b', cols: [1, 2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   
 obj0: {
@@ -159,7 +181,7 @@ For composite arguments, the entire expression inside the logarithm must be posi
 
 @academic[pitfall,aside:true,width:35%:Including the endpoint
 Writing the domain of $\\log_2(x - 3)$ as $x \\geq 3$ lets in $x = 3$, where the logarithm is $\\log_2(0)$ and undefined. The domain is $x > 3$, the interval $(3, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-including-the-endpoint)]@
 
 Finding such a domain comes down to solving an inequality in $x$: the whole argument is compared with zero. The edge of the answer is the value of $x$ at which the argument itself equals zero, $x = 3$ for $\\log_2(x - 3)$.
 
@@ -176,7 +198,7 @@ As $x$ increases from just above zero toward infinity, $\\log_a(x)$ takes every 
 
 @academic[pitfall,aside:true,width:35%:Thinking a logarithm cannot be negative
 Applying "must be positive" to the output instead of the argument makes $\\log_2(x) = -3$ look impossible. But $2^{-3} = \\frac{1}{8}$, so $x = \\frac{1}{8}$; only the argument has to be positive.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-thinking-a-logarithm-cannot-be-negative)]@
 
 This unlimited range contrasts with the exponential function $g(x) = a^x$, whose range is $(0, \\infty)$. The domain and range swap between a function and its inverse — logarithms and exponentials exhibit this exchange precisely.`,
     before: ``,
@@ -197,7 +219,7 @@ This property is critical for solving [inequalities](!/algebra/logarithms/inequa
 
 @academic[pitfall,aside:true,width:35%:Assuming every logarithm increases
 Concluding from $2 < 4$ that $\\log_{1/2}(2) < \\log_{1/2}(4)$ treats base $\\frac{1}{2}$ like base $2$. In fact $\\log_{1/2}(2) = -1$ and $\\log_{1/2}(4) = -2$, so $\\log_{1/2}(2) > \\log_{1/2}(4)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-assuming-every-logarithm-increases)]@
 
 The corollary is used whenever two numbers are compared through their logarithms, or a logarithm is removed from both sides of an inequality. What decides the outcome is a single check made before any algebra: whether the base lies above $1$ or between $0$ and $1$.
 
@@ -222,7 +244,7 @@ $\\log_3(2x + 1) = \\log_3(x + 5)$ implies $2x + 1 = x + 5$, giving $x = 4$.]@
 
 @academic[pitfall,aside:true,width:35%:Equating arguments before condensing
 Dropping the logarithms from $\\log_3(x) + \\log_3(2) = \\log_3(10)$ term by term gives $x + 2 = 10$, so $x = 8$, but $\\log_3(8) + \\log_3(2) = \\log_3(16)$. Condensed first, $\\log_3(2x) = \\log_3(10)$, so $x = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-equating-arguments-before-condensing)]@
 
 In the example each side is already a single logarithm with base $3$, which is exactly the form the property needs. The arguments $2x + 1$ and $x + 5$ are then set equal, and a linear equation is left.
 
@@ -301,66 +323,9 @@ This inverse relationship provides the foundation for converting between logarit
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when these properties are put to work. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Including the endpoint**
-
-The domain of a composite logarithm is found by solving an inequality, but the inequality is written with $\\geq$ instead of $>$, so the value that makes the argument zero is let in.
-
-Wrong working:
-$$\\log_2(x - 3): \\quad x - 3 \\geq 0 \\implies x \\geq 3$$
-
-Right working: the argument must be strictly positive.
-$$x - 3 > 0 \\implies x > 3, \\text{ that is } (3, \\infty)$$
-
-Why it happens: the restriction is remembered as "the argument cannot be negative", which leaves zero allowed, as it is for square roots, where $\\sqrt{0} = 0$.
-
-How to check: substitute the endpoint. $x = 3$ gives $\\log_2(0)$, and no real $y$ satisfies $2^y = 0$, so the endpoint is excluded.
-
-**Thinking a logarithm cannot be negative**
-
-The rule that the argument must be positive is applied to the value of the logarithm instead, so an equation or a result with a negative logarithm is declared impossible.
-
-Wrong working:
-$$\\log_2(x) = -3 \\implies \\text{no solution, since a logarithm cannot be negative}$$
-
-Right working: convert to exponential form.
-$$\\log_2(x) = -3 \\implies x = 2^{-3} = \\frac{1}{8}$$
-The argument $\\frac{1}{8}$ is positive, so the solution is valid.
-
-Why it happens: the domain $(0, \\infty)$ and the range $(-\\infty, \\infty)$ are easy to swap, and most first examples use arguments above $1$, whose logarithms are positive for a base above $1$.
-
-How to check: any argument between $0$ and $1$ gives a negative logarithm when the base is above $1$. For example $\\log_{10}(0.01) = -2$, since $10^{-2} = 0.01$.
-
-**Assuming every logarithm increases**
-
-Two values of a logarithm are compared by comparing their arguments, with the order kept, even though the base lies between $0$ and $1$.
-
-Wrong working:
-$$2 < 4 \\implies \\log_{1/2}(2) < \\log_{1/2}(4)$$
-
-Right working: $\\log_{1/2}$ is strictly decreasing, so the order reverses.
-$$\\log_{1/2}(2) = -1, \\quad \\log_{1/2}(4) = -2, \\quad \\text{so } \\log_{1/2}(2) > \\log_{1/2}(4)$$
-
-Why it happens: the bases used most often, $2$, $10$ and $e$, are all above $1$, and "larger input, larger output" becomes a habit.
-
-How to check: compute both values from the definition. $\\left(\\frac{1}{2}\\right)^{-1} = 2$ and $\\left(\\frac{1}{2}\\right)^{-2} = 4$, so the larger argument has the smaller logarithm.
-
-**Equating arguments before condensing**
-
-The one-to-one property is used to drop the logarithms from every term, although one side holds a sum of two logarithms rather than a single one.
-
-Wrong working:
-$$\\log_3(x) + \\log_3(2) = \\log_3(10) \\implies x + 2 = 10 \\implies x = 8$$
-
-Right working: condense first with the product rule, then apply the property.
-$$\\log_3(2x) = \\log_3(10) \\implies 2x = 10 \\implies x = 5$$
-
-Why it happens: the property is remembered as "remove the logarithms" instead of "if $\\log_a(M) = \\log_a(N)$, then $M = N$", and its condition, a single logarithm on each side, is skipped.
-
-How to check: substitute the answer into the original equation. $x = 8$ gives $\\log_3(8) + \\log_3(2) = \\log_3(16)$, not $\\log_3(10)$. $x = 5$ gives $\\log_3(5) + \\log_3(2) = \\log_3(10)$.`,
+    content: `Four mistakes come up again and again when these properties are put to work. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip misreads one property. The argument must be strictly positive, the value of a logarithm can be any real number, a base between $0$ and $1$ makes the function decreasing, and a sum of logarithms is condensed with the product rule before the arguments are compared. Substituting the endpoint or the answer, or working out two values from the definition of the logarithm, settles each case.`,
     link: '',
   },
 };
@@ -508,6 +473,10 @@ const schemas = {
     caption: 'Always increasing means one-to-one; log₂(x² + 1) turns back at 0',
   };
 
+  const conceptIntroFigures = {
+    powTable: ciPowTable,
+  };
+
   const demoUnits = {
     argDomain: demoUnitFrame({
       svg: renderFunctionPlotV4(fpLogArgDomain),
@@ -577,8 +546,42 @@ const schemas = {
     ] }],
   };
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'including-the-endpoint', name: `Including the endpoint`, errorAt: 1,
+        what: `The domain of a composite logarithm is found by solving an inequality, but the inequality is written with $\\geq$ instead of $>$, so the value that makes the argument zero is let in.`,
+        wrong: [`$$\\log_2(x - 3): \\quad x - 3 \\geq 0$$`, `$$\\implies x \\geq 3$$`],
+        right: [`$$\\log_2(x - 3): \\quad x - 3 \\geq 0$$`, `The argument must be strictly positive.`, `$$x - 3 > 0$$`, `$$\\implies x > 3, \\text{ that is } (3, \\infty)$$`],
+        why: `The restriction is remembered as "the argument cannot be negative", which leaves zero allowed, as it is for square roots, where $\\sqrt{0} = 0$.`,
+        check: `Substitute the endpoint. $x = 3$ gives $\\log_2(0)$, and no real $y$ satisfies $2^y = 0$, so the endpoint is excluded.` },
+      { id: 'thinking-a-logarithm-cannot-be-negative', name: `Thinking a logarithm cannot be negative`, errorAt: 1,
+        what: `The rule that the argument must be positive is applied to the value of the logarithm instead, so an equation or a result with a negative logarithm is declared impossible.`,
+        wrong: [`$$\\log_2(x) = -3$$`, `$$\\implies \\text{no solution,}$$
+since a logarithm cannot be negative`],
+        right: [`$$\\log_2(x) = -3$$`, `Convert to exponential form.`, `$$\\implies x = 2^{-3} = \\frac{1}{8}$$`, `The argument $\\frac{1}{8}$ is positive, so the solution is valid.`],
+        why: `The domain $(0, \\infty)$ and the range $(-\\infty, \\infty)$ are easy to swap, and most first examples use arguments above $1$, whose logarithms are positive for a base above $1$.`,
+        check: `Any argument between $0$ and $1$ gives a negative logarithm when the base is above $1$. For example $\\log_{10}(0.01) = -2$, since $10^{-2} = 0.01$.` },
+      { id: 'assuming-every-logarithm-increases', name: `Assuming every logarithm increases`, errorAt: 1,
+        what: `Two values of a logarithm are compared by comparing their arguments, with the order kept, even though the base lies between $0$ and $1$.`,
+        wrong: [`$$2 < 4$$`, `$$\\implies \\log_{1/2}(2) < \\log_{1/2}(4)$$`],
+        right: [`$$2 < 4$$`, `$\\log_{1/2}$ is strictly decreasing, so the order reverses.`, `$$\\log_{1/2}(2) = -1, \\quad \\log_{1/2}(4) = -2,$$
+$$\\text{so } \\log_{1/2}(2) > \\log_{1/2}(4)$$`],
+        why: `The bases used most often, $2$, $10$ and $e$, are all above $1$, and "larger input, larger output" becomes a habit.`,
+        check: `Compute both values from the definition. $\\left(\\frac{1}{2}\\right)^{-1} = 2$ and $\\left(\\frac{1}{2}\\right)^{-2} = 4$, so the larger argument has the smaller logarithm.` },
+      { id: 'equating-arguments-before-condensing', name: `Equating arguments before condensing`, errorAt: 1,
+        what: `The one-to-one property is used to drop the logarithms from every term, although one side holds a sum of two logarithms rather than a single one.`,
+        wrong: [`$$\\log_3(x) + \\log_3(2) = \\log_3(10)$$`, `$$\\implies x + 2 = 10$$`, `$$\\implies x = 8$$`],
+        right: [`$$\\log_3(x) + \\log_3(2) = \\log_3(10)$$`, `Condense first with the product rule, then apply the property.`, `$$\\log_3(2x) = \\log_3(10)$$`, `$$\\implies 2x = 10$$`, `$$\\implies x = 5$$`],
+        why: `The property is remembered as "remove the logarithms" instead of "if $\\log_a(M) = \\log_a(N)$, then $M = N$", and its condition, a single logarithm on each side, is skipped.`,
+        check: `Substitute the answer into the original equation. $x = 8$ gives $\\log_3(8) + \\log_3(2) = \\log_3(16)$, not $\\log_3(10)$. $x = 5$ gives $\\log_3(5) + \\log_3(2) = \\log_3(10)$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     logPropertyCards,
     logMonotonicityCases,
     sectionsContent,
@@ -588,6 +591,7 @@ return {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Properties of Logarithms: Domain, Range & More | Learn Math Class",
       description: "Learn logarithm properties: domain (0, ∞), range (-∞, ∞), monotonicity, one-to-one property, continuity, vertical asymptote, and inverse relationship with exponentials.",
@@ -602,7 +606,7 @@ return {
 // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PropertiesPage({logPropertyCards, logMonotonicityCases, 
+export default function PropertiesPage({ pitfallData,logPropertyCards, logMonotonicityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -611,9 +615,76 @@ export default function PropertiesPage({logPropertyCards, logMonotonicityCases,
   faqQuestions,
   schemas,
   demoUnits,
+  conceptIntroFigures,
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `log₂(x) asks: to what power must 2 be raised to give x?`,
+        content: [
+          `Ask that question for a few values of $x$, positive, zero and negative.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `For 8, 1 and 1/2 there is an answer; for 0 and −4 there is none.`,
+        content: [
+          ciTable('powTable'),
+          `Every power of $2$ is positive, however large or however negative the exponent.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `A logarithm can only return what a power can produce, and powers of a positive base are always positive.`,
+        content: [
+          `This restriction follows from the definition. The equation $\\log_a(x) = y$ means $a^y = x$. Since $a > 0$ and $a^y > 0$ for all real $y$, the output of any exponential with positive base is strictly positive. No real exponent produces zero or a negative number.`,
+          `Consequently, $\\log_a(0)$ is undefined — no solution to $a^y = 0$ exists. Similarly, $\\log_a(-5)$ is undefined — no real $y$ satisfies $a^y = -5$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **domain** of $\\log_a(x)$ is the set of positive real numbers, $(0, \\infty)$: the [logarithm](!/algebra/definitions#logarithm) is defined exactly where $x > 0$.`,
+        formula: [
+          `@academic[rule_theorem_plain:The domain of $f(x) = \\log_a(x)$ is the set of all positive real numbers: $(0, \\infty)$.]@`,
+        ],
+        footer: `So $\\log_2(8) = 3$ and $\\log_2(\\frac{1}{2}) = -1$, while $\\log_2(0)$ and $\\log_2(-4)$ are undefined.`,
+      },
+      {
+        id: 'kind',
+        lead: `For a composite argument, the whole argument must be positive.`,
+        content: [
+          `For composite arguments, the entire expression inside the logarithm must be positive. The function $\\log_2(x - 3)$ requires $x - 3 > 0$, giving domain $x > 3$. The function $\\log_5(x^2 + 1)$ has domain all real numbers, since $x^2 + 1 > 0$ for every $x$.`,
+          `Finding such a domain comes down to solving an inequality in $x$: the whole argument is compared with zero. The edge of the answer is the value of $x$ at which the argument itself equals zero, $x = 3$ for $\\log_2(x - 3)$.`,
+          <div key={'unit-argDomain'} dangerouslySetInnerHTML={{ __html: demoUnits.argDomain }} />,
+          `The domain of a composite logarithm is wherever its whole argument is positive.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The point where the argument equals zero is never part of the domain.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Including the endpoint
+Writing the domain of $\\log_2(x - 3)$ as $x \\geq 3$ lets in $x = 3$, where the logarithm is $\\log_2(0)$ and undefined. The domain is $x > 3$, the interval $(3, \\infty)$.
+[Read more](!#pitfall-including-the-endpoint)]@`,
+          `Near that edge the argument is a small positive number and the logarithm is defined. The edge itself is the place where the definition from the start of this section has to be applied once more.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the range, monotonicity, the one-to-one property, continuity, asymptotic behavior, the inverse relationship with exponential functions, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -629,9 +700,7 @@ export default function PropertiesPage({logPropertyCards, logMonotonicityCases,
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-          <div key={'unit-argDomain'} dangerouslySetInnerHTML={{ __html: demoUnits.argDomain }} />,
-          `The domain of a composite logarithm is wherever its whole argument is positive.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -727,6 +796,15 @@ export default function PropertiesPage({logPropertyCards, logMonotonicityCases,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="logarithm-property-pitfalls"
+            title="Common pitfalls with the properties of logarithms"
+            source="/algebra/logarithms/properties"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

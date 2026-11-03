@@ -208,7 +208,7 @@ The distribution functions as a model that captures the regularities of randomne
             read:`X equals Y in distribution`,
             means:`Same law, not same values: the $d$ rides the equality sign to mark which kind of sameness is claimed — one mark for the body's observation that variables on different spaces may share a distribution.`,
             cases:`The moving version is $X_n \\xrightarrow{d} X$, convergence in distribution — the mode of convergence the [central limit theorem](!/probability/central-limit-theorem) is stated in; some texts write $\\overset{\\mathcal{D}}{=}$, or put a tilde between two variables.`,
-            confusedWith:`Plain $X = Y$, equality as functions on $\\Omega$. Two fair dice are equal in distribution and almost never equal in value — the unmarked equals sign makes the far stronger claim.`,
+            confusedWith:`Plain $X = Y$, equality as functions on $\\Omega$. Two independent fair dice are equal in distribution and usually differ in value — the unmarked equals sign makes the far stronger claim.`,
           },
           {
             id:'family-declaration',

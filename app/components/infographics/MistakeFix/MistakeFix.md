@@ -3,12 +3,12 @@
 A common-mistakes infographic. Each mistake shows the **wrong working**, the **right working**, **why it happens** and **how to check**, which is the structure the site's "Common Pitfalls" sections already use. There are three layouts, and the component picks one from the data. Wording, colours and behaviour can all be set from data, with defaults.
 
 ```jsx
-import MistakeFix from '@/app/components/infographics/MistakeFix';
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix';
 
 <MistakeFix data={identityPitfalls} />
 ```
 
-The component is a single file, `MistakeFix.jsx`. It exports `DEFAULT_LABELS`, `DEFAULT_THEME` and `DEFAULT_OPTIONS`.
+The component is a single file, `MistakeFix/MistakeFix.jsx`, with these docs beside it. It exports `DEFAULT_LABELS`, `DEFAULT_THEME` and `DEFAULT_OPTIONS`.
 
 ---
 
@@ -98,7 +98,7 @@ A step that is only maths (nothing but punctuation outside its `$…$` / `$$…$
 $$3x + 5 = 11 \\implies x = 2$$`
 ```
 
-Wide formulas scroll sideways inside their own box. In split columns, break a long chain of `=` into two steps (`'$$= x^2 + 10x + 25$$'`).
+A display formula wider than its box is scaled down to fit, to no less than 72% of its size (`MIN_FIT`); a formula still wider scrolls sideways inside its own box. Inside `DiagramFrame` the card is about 640px wide, so each trace column is narrow: break long chains into steps. A chain of `\implies` becomes one step per arrow; a chain of `=` can be broken the same way (`'$$= x^2 + 10x + 25$$'`). Two statements side by side (`\qquad` between them) go on two display lines in the same step, and a long list is split after a comma. After converting a page, check at desktop width that no formula in a card still scrolls.
 
 ### How trace splits the steps
 
@@ -281,6 +281,48 @@ content: [
 The label words ("Wrong working:", "Why it happens:" and so on) are dropped, since the component shows its own labels. The first letter after a dropped label is made a capital.
 
 There are about 256 pitfall sections with about 1044 entries, all in this format. Pilot pages (2026-11-01): `/algebra/identities` (trace, first built as split), `/algebra/logarithms/rules` (ledger), `/algebra/equations/absolute-value` (trace).
+
+### Converted pages
+
+| Batch | Date | Pages (`/algebra/…` up to batch 5, trace unless noted) | Entries |
+|---|---|---|---|
+| pilot | 2026-11-01 | `identities`, `logarithms/rules` (ledger), `equations/absolute-value` | 18 |
+| 1 | 2026-11-01 | `absolute-value`, `equations/linear`, `equations/polynomial`, `equations/quadratic`, `equations/rational`, `inequalities`, `inequalities/linear`, `inequalities/quadratic`, `inequalities/rational`, `logarithms/equations` | 45 |
+| 2 | 2026-11-01 | `logarithms`, `logarithms/common-natural`, `logarithms/graphs`, `polynomials/factoring`, `polynomials/graphing`, `polynomials/operations`, `polynomials/roots`, `powers/exponential-equations`, `powers/exponential-functions`, `powers/exponential-inequalities`, `powers/zero-powers` | 41 |
+| 3 | 2026-11-01 | `powers`, `powers/irrational-exponents`, `powers/natural-exponents`, `powers/negative-exponents`, `powers/rational-exponents`, `roots`, `roots/equations`, `roots/functions`, `roots/operations`, `roots/properties` | 39 |
+| 4 | 2026-11-02 | `roots/rational-exponents`, `roots/simplifying`, `sequences`, `sequences/arithmetic`, `sequences/fibonacci`, `sequences/geometric`, `sequences/harmonic`, `sequences/prime-numbers`, `sequences/square-numbers`, `sequences/triangular-numbers` | 36 |
+| 5 | 2026-11-02 | `equations`, `inequalities/absolute-value`, `inequalities/polynomial`, `logarithms/inequalities`, `logarithms/properties`, `polynomials`, `polynomials/rules`, `powers/exponent-rules`, `roots/radical-rules` | 37 |
+| 6 | 2026-11-02 | `/set-theory/…`: `basics`, `cardinality`, `operations`, `relationships`, `subsets`, `venn-diagrams`; `/combinatorics/…`: `basics`, `binomial-coefficient`, `binomial-theorem`, `combinations`, `counting-principles`, `inclusion-exclusion`, `permutations` | 61 |
+| 7 | 2026-11-03 | `/arithmetic/…`: `divisibility`, `divisibility/factors`, `divisibility/gcd`, `divisibility/lcm`, `divisibility/rules`, `fractions`, `fractions/adding-subtracting`, `fractions/comparing`, `fractions/complex` | 40 |
+| 8 | 2026-11-03 | `/arithmetic/…`: `fractions/dividing`, `fractions/equivalent`, `fractions/mixed-numbers`, `fractions/multiplying`, `integer-part`, `modulo`, `modulo/negative-numbers`, `modulo/operations`, `properties` | 39 |
+
+Done: all of /algebra (53 pages, 216 entries), /set-theory (6 pages, 27 entries), /combinatorics (7 pages, 34 entries) and /arithmetic (18 pages, 79 entries). Still in the old text format: linear-algebra 54, probability 39, calculus 26, complex-numbers 14, logic 12, functions 12, trigonometry 11.
+
+`/arithmetic/integer-part` had no opening paragraph, so one was written. On `fractions/adding-subtracting` a demo and a one-line note follow the opening text; the cards come after them. On `fractions/adding-subtracting` and `fractions/complex` three side boxes cover mistakes from the older opening text and keep the link to the section.
+
+Set-theory and combinatorics entries are prose, one wrong statement and one right one. Where the wrong statement opens with a setup ("For $A = …$ and $B = …$," or a problem sentence such as "$7$ identical candies are shared among $3$ children."), that part is the shared start; otherwise the card has no start.
+
+The data constant is `pitfallData`. `/algebra/absolute-value` had no opening paragraph, so one was written. On `polynomials/factoring`, `polynomials/graphing` and `polynomials/roots` the section's older prose list and its summary table stay as they were; the cards come after the table. The same holds on `polynomials/rules`, `powers/exponent-rules` and `roots/radical-rules`, whose tables sum up the section's opening text, not the cards.
+
+**Side-box links.** Each pitfall side box ends with `[Read more](!#…)`. On a converted page it links to its own card, `#pitfall-<id>`, matched by box title = entry name. A box whose mistake has no card (it is only in an older prose list) keeps the link to the section. Three titles differed from their entry's name and were linked by hand: `absolute-value` "Splitting the bars over a difference", and on `logarithms/rules` "Splitting a sum" (`#pitfall-log-of-sum`) and "Dividing the logarithms" (`#pitfall-quotient-of-logs`). Do the same for each new page.
+
+**`/algebra/logarithms/rules`:** the old "Incorrect rule" table under the ledger repeated rows 1–5 and was removed (owner decision, 2026-11-01).
+
+### Converting with a script: traps
+
+- Several pages keep an old copy of the page component in a `//` comment with the same signature (`// export default function …({`). Insert the new prop at the position of the live signature, not with a plain text replace, which edits the first copy, the commented one.
+- Some signatures are indented (`   export default function …`).
+- When a chain is split at `\implies`, a step that already begins with `\implies` must not produce an empty first step. Check every step has content, and that every card has at least one wrong step and one right step after the start.
+- Field spacing varies between pages (`content: \``, `content:\``, `after:\`\``). Match with optional spaces, and find the section's `objN:` header with a pattern, not by searching for the letters "obj" (they also occur in ordinary words).
+- Some sections' `content` arrays hold more than the text (a summary table). The frame goes at the end of the array.
+- A start can also be taken at an `=` sign. Choose which one: in $x = \frac{\log 7}{\log 3} = \log 7 - \log 3$ the split belongs at the second `=`, because $x = \frac{\log 7}{\log 3}$ is correct.
+- Where the first line only sets up the problem ("For $20, 17, 14, 11$,", "Handshakes among $5$ people,"), that line can be the shared start and the formula after it the wrong turn.
+- Chains are split at `\implies` after `errorAt` is set. When an entry's start is built by hand and its formula holds an arrow, split the chain first and then set `errorAt`, or the arrow step lands in the start.
+- The error is not always in the first step after the problem statement. Read every entry and set `errorAt` to the first step that is actually wrong; the steps before it are correct and become the shared start.
+- The section key is not always `objN`: several set-theory and combinatorics pages call it `pitfalls`.
+- Some sections have no `after` field at all (`combinatorics/combinations`). Add one after the content's closing backtick.
+- At phone width a check for elements sticking out of the card reports KaTeX's hidden screen-reader copy of each formula (`math`, `mrow`, …). Those are not visible; ignore them.
+- Never pass page text as the second argument of `String.replace` as a plain string: `$$` there means one `$`, so every display formula turns into inline maths. Pass a function, `s.replace(from, () => to)`. This happened to 21 formula line breaks on 13 pages (2026-11-02) and was repaired. The too-wide check only looks at display formulas, so it did not notice.
 
 ---
 

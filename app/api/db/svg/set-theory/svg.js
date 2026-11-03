@@ -71,7 +71,7 @@
 
 
     "title":"Finite Set",
-    "description":"Finite Sets  Contain countable number of objects.",
+    "description":"Finite Sets Contain a finite number of objects.",
     "svg":`
     <svg width="760" height="260" xmlns="http://www.w3.org/2000/svg">
     <circle cx="330" cy="130" r="65" stroke="black" stroke-width="0.5" fill="rgba(255, 206, 86, 0.5)" />
@@ -80,7 +80,7 @@
     <circle cx="343" cy="130" r="5.2" fill="green" />
     <circle cx="304" cy="156" r="5.2" fill="blue" />
     <circle cx="356" cy="156" r="5.2" fill="brown" />
-    <text x="200" y="234" fontFamily="Arial" font-size="21" textAnchor="middle" fill="black">Finite Sets  Contain countable number of objects.</text>
+    <text x="200" y="234" fontFamily="Arial" font-size="21" textAnchor="middle" fill="black">Finite Sets Contain a finite number of objects.</text>
     </svg>
   
     `
@@ -89,7 +89,7 @@
 {
 
     "title":"Infinite Set",
-    "description":"Infinite Mathematical Sets Have uncountable number of elements",
+    "description":"Infinite Mathematical Sets Have infinitely many elements",
     "svg":`
     <svg width="390" height="390" xmlns="http://www.w3.org/2000/svg">
     <circle cx="230" cy="130" r="65" stroke="black" stroke-width="0.5" fill="rgba(255, 206, 86, 0.5)" />

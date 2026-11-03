@@ -15,6 +15,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -315,7 +317,7 @@ For solving general exponential [equations](!/algebra/logarithms/equations), eit
 
 @academic[pitfall,aside:true,width:35%:Turning a quotient of logs into the log of a quotient
 Computing $x = \\frac{\\log(7)}{\\log(3)}$ as $\\log\\left(\\frac{7}{3}\\right) \\approx 0.368$ gives $3^{0.368} \\approx 1.5$, not $7$. The two logarithms are divided as numbers: $x \\approx \\frac{0.845}{0.477} \\approx 1.771$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-turning-a-quotient-of-logs-into-the-log-of-a-quotient)]@
 
 Either way, the answer is a fraction with one logarithm above the bar and another below it. Its value does not depend on which base is used, as long as the same base appears on top and on the bottom.`,
     before: ``,
@@ -345,7 +347,7 @@ $$\\log_a(x) = \\frac{\\ln(x)}{\\ln(a)}$$]@
 
 @academic[pitfall,aside:true,width:35%:Flipping the change-of-base fraction
 Putting the base on top, $\\log_2(10) = \\frac{\\ln(2)}{\\ln(10)} \\approx 0.301$, gives $2^{0.301} \\approx 1.23$, not $10$. The argument goes on top: $\\frac{\\ln(10)}{\\ln(2)} \\approx 3.322$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-flipping-the-change-of-base-fraction)]@
 
 @academic[example:Example
 For example, $\\log_2(10) = \\frac{\\ln(10)}{\\ln(2)} = \\frac{2.303}{0.693} \\approx 3.322$. Verification: $2^{3.322} \\approx 10$.]@
@@ -375,7 +377,7 @@ Since $e < 10$, the natural logarithm reaches $1$ at a smaller input value. This
 
 @academic[pitfall,aside:true,width:35%:Dividing by ln 10 instead of multiplying
 Converting $\\log(100) = 2$ to natural log as $\\frac{2}{2.303} \\approx 0.868$ makes $\\ln(100)$ smaller than $\\log(100)$. The factor multiplies: $\\ln(100) \\approx 2 \\cdot 2.303 \\approx 4.605$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-ln-10-instead-of-multiplying)]@
 
 The ratio between them is constant: $\\ln(x) = \\ln(10) \\cdot \\log(x) \\approx 2.303 \\cdot \\log(x)$. The graphs are vertical stretches of each other. Multiplying every output of the common logarithm by $\\ln(10)$ produces the natural logarithm.`,
     before: ``,
@@ -391,51 +393,9 @@ The ratio between them is constant: $\\ln(x) = \\ln(10) \\cdot \\log(x) \\approx
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for most wrong answers when common and natural logarithms are used for computing. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Turning a quotient of logs into the log of a quotient**
-
-An exponential equation such as $3^x = 7$ is solved to $x = \\frac{\\log(7)}{\\log(3)}$, and the fraction of two logarithms is then read as the logarithm of a fraction.
-
-Wrong working:
-$$x = \\frac{\\log(7)}{\\log(3)} = \\log\\left(\\frac{7}{3}\\right) \\approx \\log(2.333) \\approx 0.368$$
-
-Right working: each logarithm is evaluated on its own, and the two values are divided.
-$$x = \\frac{\\log(7)}{\\log(3)} \\approx \\frac{0.845}{0.477} \\approx 1.771$$
-
-Why it happens: the quotient rule $\\log(M) - \\log(N) = \\log\\left(\\frac{M}{N}\\right)$ turns a difference of logarithms into the logarithm of a quotient. A quotient of logarithms looks similar, but no rule simplifies it.
-
-How to check: substitute the answer back. $3^{0.368} \\approx 1.5$, far from $7$, while $3^{1.771} \\approx 7.0$.
-
-**Flipping the change-of-base fraction**
-
-In $\\log_a(x) = \\frac{\\ln(x)}{\\ln(a)}$, the base and the argument swap places, so the logarithm of the base ends up on top.
-
-Wrong working:
-$$\\log_2(10) = \\frac{\\ln(2)}{\\ln(10)} \\approx \\frac{0.693}{2.303} \\approx 0.301$$
-
-Right working: the argument goes on top, the base below.
-$$\\log_2(10) = \\frac{\\ln(10)}{\\ln(2)} \\approx \\frac{2.303}{0.693} \\approx 3.322$$
-
-Why it happens: both numbers appear in the formula with the same logarithm applied to them, and nothing in the notation shows which one belongs on top. The swapped fraction is itself a real logarithm, $\\log_{10}(2) \\approx 0.301$, so the wrong answer does not look strange.
-
-How to check: estimate first. $2^3 = 8$ and $2^4 = 16$, so $\\log_2(10)$ lies between $3$ and $4$. The wrong value fails at once: $2^{0.301} \\approx 1.23$.
-
-**Dividing by ln 10 instead of multiplying**
-
-A common logarithm is converted to a natural logarithm, and the factor $\\ln(10) \\approx 2.303$ is divided out instead of multiplied in.
-
-Wrong working:
-$$\\ln(100) = \\frac{\\log(100)}{2.303} = \\frac{2}{2.303} \\approx 0.868$$
-
-Right working:
-$$\\ln(100) = \\log(100) \\cdot \\ln(10) \\approx 2 \\cdot 2.303 \\approx 4.605$$
-
-Why it happens: the two conversion formulas look alike. One multiplies by $\\ln(10)$ and the other divides by it, and it is easy to recall the wrong one.
-
-How to check: for $x > 1$, the natural logarithm is always larger than the common logarithm, because its base is smaller. The wrong value $0.868$ is smaller than $\\log(100) = 2$, so it cannot be right. The right value passes a second test as well: $e^{4.605} \\approx 100$.`,
+    content: `Three mistakes account for most wrong answers when common and natural logarithms are used for computing. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `All three slips put a number in the wrong place: a quotient of two logarithms is merged into one logarithm, the argument and the base trade places in the change-of-base fraction, and $\\ln(10)$ divides where it should multiply. An estimate made before the calculation catches each of them. Knowing that $\\log_2(10)$ lies between $3$ and $4$, or that $\\ln(x)$ is larger than $\\log(x)$ for $x > 1$, rules out the wrong values at a glance, and raising the base to the answer confirms the right one.`,
     link: '',
   },
 };
@@ -585,8 +545,36 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 2, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'turning-a-quotient-of-logs-into-the-log-of-a-quotient', name: `Turning a quotient of logs into the log of a quotient`, errorAt: 1,
+        what: `An exponential equation such as $3^x = 7$ is solved to $x = \\frac{\\log(7)}{\\log(3)}$, and the fraction of two logarithms is then read as the logarithm of a fraction.`,
+        wrong: [`$$x = \\frac{\\log(7)}{\\log(3)}$$`, `$$= \\log\\left(\\frac{7}{3}\\right) \\approx \\log(2.333) \\approx 0.368$$`],
+        right: [`$$x = \\frac{\\log(7)}{\\log(3)}$$`, `Each logarithm is evaluated on its own, and the two values are divided.
+$$\\approx \\frac{0.845}{0.477} \\approx 1.771$$`],
+        why: `The quotient rule $\\log(M) - \\log(N) = \\log\\left(\\frac{M}{N}\\right)$ turns a difference of logarithms into the logarithm of a quotient. A quotient of logarithms looks similar, but no rule simplifies it.`,
+        check: `Substitute the answer back. $3^{0.368} \\approx 1.5$, far from $7$, while $3^{1.771} \\approx 7.0$.` },
+      { id: 'flipping-the-change-of-base-fraction', name: `Flipping the change-of-base fraction`, errorAt: 1,
+        what: `In $\\log_a(x) = \\frac{\\ln(x)}{\\ln(a)}$, the base and the argument swap places, so the logarithm of the base ends up on top.`,
+        wrong: [`$$\\log_2(10)$$`, `$$= \\frac{\\ln(2)}{\\ln(10)} \\approx \\frac{0.693}{2.303} \\approx 0.301$$`],
+        right: [`$$\\log_2(10)$$`, `The argument goes on top, the base below.
+$$= \\frac{\\ln(10)}{\\ln(2)} \\approx \\frac{2.303}{0.693} \\approx 3.322$$`],
+        why: `Both numbers appear in the formula with the same logarithm applied to them, and nothing in the notation shows which one belongs on top. The swapped fraction is itself a real logarithm, $\\log_{10}(2) \\approx 0.301$, so the wrong answer does not look strange.`,
+        check: `Estimate first. $2^3 = 8$ and $2^4 = 16$, so $\\log_2(10)$ lies between $3$ and $4$. The wrong value fails at once: $2^{0.301} \\approx 1.23$.` },
+      { id: 'dividing-by-ln-10-instead-of-multiplying', name: `Dividing by ln 10 instead of multiplying`, errorAt: 1,
+        what: `A common logarithm is converted to a natural logarithm, and the factor $\\ln(10) \\approx 2.303$ is divided out instead of multiplied in.`,
+        wrong: [`$$\\ln(100)$$`, `$$= \\frac{\\log(100)}{2.303} = \\frac{2}{2.303} \\approx 0.868$$`],
+        right: [`$$\\ln(100)$$`, `$$= \\log(100) \\cdot \\ln(10) \\approx 2 \\cdot 2.303 \\approx 4.605$$`],
+        why: `The two conversion formulas look alike. One multiplies by $\\ln(10)$ and the other divides by it, and it is easy to recall the wrong one.`,
+        check: `For $x > 1$, the natural logarithm is always larger than the common logarithm, because its base is smaller. The wrong value $0.868$ is smaller than $\\log(100) = 2$, so it cannot be right. The right value passes a second test as well: $e^{4.605} \\approx 100$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     sectionsContent,
     introContent,
     obj3Table,
@@ -608,7 +596,7 @@ return {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function PageTemplate({
+export default function PageTemplate({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -804,6 +792,15 @@ A whole number has one more digit than the integer part of its common logarithm.
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="common-natural-log-pitfalls"
+            title="Common pitfalls with common and natural logarithms"
+            source="/algebra/logarithms/common-natural"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -11,6 +11,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -114,7 +116,7 @@ The bars are also grouping symbols, like parentheses: the expression inside is s
 
 @academic[pitfall,aside:true,width:35%:Splitting the bars over a difference
 Writing $|3 - 8| = |3| - |8| = -5$ produces a negative absolute value, which is impossible. Simplify inside first: $|3 - 8| = |-5| = 5$.
-[Read more](!#12)]@
+[Read more](!#pitfall-splitting-the-bars-over-a-sum-or-difference)]@
 
 @academic[example:Example
 $|3 - 8| = |-5| = 5$. $\\;$ $|2 \\cdot (-4) + 1| = |-7| = 7$. $\\;$ $|4| - |-9| = 4 - 9 = -5$, because here the bars close before the subtraction.]@
@@ -136,7 +138,7 @@ For $x \\geq 0$, the number already equals its distance from zero and is left un
 
 @academic[pitfall,aside:true,width:35%:Reading −x as a negative number
 Seeing $|x| = -x$ and concluding that $|x|$ is negative. In this case $x$ itself is negative, so $-x$ is positive: $|-6| = -(-6) = 6$.
-[Read more](!#12)]@
+[Read more](!#pitfall-reading-x-as-a-negative-number)]@
 
 The second case looks as if it produced a negative number, but it does the reverse. When $x$ is negative, $-x$ is positive: for $x = -6$, $-x = -(-6) = 6$. The minus sign in $-x$ means "the opposite of $x$", not "a negative number".
 
@@ -194,7 +196,7 @@ $$\\sqrt{x^2} = |x|$$]@
 
 @academic[pitfall,aside:true,width:35%:Writing √(x²) = x
 For $x = -4$ this gives $\\sqrt{(-4)^2} = -4$, a negative square root. In fact $\\sqrt{16} = 4 = |-4|$.
-[Read more](!#12)]@
+[Read more](!#pitfall-writing-root-of-x-squared-x)]@
 
 @academic[example:Example
 For $x = -4$: $\\sqrt{(-4)^2} = \\sqrt{16} = 4 = |-4|$. For $x = 4$: $\\sqrt{16} = 4 = |4|$. The answer is $|x|$ in both cases.]@
@@ -237,7 +239,7 @@ $|x - 2|$ is zero at $x = 2$. For $x \\geq 2$: $|x - 2| = x - 2$. For $x < 2$: $
 
 @academic[pitfall,aside:true,width:35%:Negating only the first term
 For $x < 5$, writing $|x - 5| = -x - 5$. At $x = 2$ this gives $-7$, but $|2 - 5| = 3$. The whole inside changes sign: $-(x - 5) = 5 - x$.
-[Read more](!#12)]@
+[Read more](!#pitfall-negating-only-the-first-term)]@
 
 With several absolute values, each one has its own split point. Together the split points cut the number line into intervals, and on each interval every inside expression keeps one sign.
 
@@ -328,55 +330,9 @@ In every setting, four rules hold: the size is never negative, it is zero only f
 
 obj12: {
   title: `Common Pitfalls`,
-  content: `**Splitting the bars over a sum or difference**
-
-The bars are distributed over the terms inside, as if they were a factor.
-
-Wrong working: $|3 - 8| = |3| - |8| = 3 - 8 = -5$, and $|x + 2| = |x| + 2$.
-
-Right working: simplify inside first, $|3 - 8| = |-5| = 5$. The expression $|x + 2|$ cannot be split; it is $x + 2$ for $x \\geq -2$ and $-x - 2$ for $x < -2$.
-
-Why it happens: the product rule $|ab| = |a|\\,|b|$ is true, and it is carried over to sums, where it fails.
-
-How to check: an absolute value can never be negative, so $-5$ is wrong on sight. For the expression, test a negative value: at $x = -5$, $|-5 + 2| = 3$, but $|-5| + 2 = 7$.
-
-**Reading −x as a negative number**
-
-The case $|x| = -x$ is read as "the absolute value is negative".
-
-Wrong working: "For $x < 0$, $|x| = -x$, so on this side the absolute value is negative."
-
-Right working: on this side $x$ is negative, so $-x$ is positive. For $x = -6$, $|x| = -(-6) = 6$.
-
-Why it happens: a minus sign in front of a letter is read as a negative number, when it means the opposite of whatever the letter stands for.
-
-How to check: substitute a number from the case. Any negative $x$ gives a positive $-x$.
-
-**Writing √(x²) = x**
-
-The square root and the square are treated as canceling.
-
-Wrong working: $\\sqrt{x^2} = x$, so $\\sqrt{(-4)^2} = -4$.
-
-Right working: $\\sqrt{(-4)^2} = \\sqrt{16} = 4$. In general $\\sqrt{x^2} = |x|$.
-
-Why it happens: for non-negative $x$ the square root and the square do undo each other, and the rule is remembered without its condition.
-
-How to check: a square root symbol never gives a negative result. If the answer can be negative, bars are missing.
-
-**Negating only the first term**
-
-When the inside is negative, the minus sign is applied to the first term only.
-
-Wrong working: for $x < 5$, $|x - 5| = -x - 5$.
-
-Right working: the whole inside changes sign, $|x - 5| = -(x - 5) = 5 - x$.
-
-Why it happens: the parentheses around $x - 5$ are left out when $-A$ is written down.
-
-How to check: test a value from the interval. At $x = 2$, $|2 - 5| = 3$ and $5 - 2 = 3$, while $-2 - 5 = -7$.`,
+  content: `Four slips account for most wrong answers with absolute values. Each one is worked through below, with the wrong and the right working side by side, the reason it happens and a quick way to check.`,
   before: ``,
-  after: ``,
+  after: `Three of these slips come from losing track of a sign: reading $-x$ as negative, dropping the bars around $\\sqrt{x^2}$, and changing the sign of only part of the inside. The fourth shares the bars out over a sum, which works only over a product. In every case a number settles it: an absolute value is never negative, and one test value from the case being worked on shows whether the rewritten form still agrees.`,
   link: '',
 },
 
@@ -567,8 +523,40 @@ const schemas = {
     }),
   };
 
+  // MistakeFix 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'splitting-the-bars-over-a-sum-or-difference', name: `Splitting the bars over a sum or difference`, errorAt: 0,
+        what: `The bars are distributed over the terms inside, as if they were a factor.`,
+        wrong: [`$|3 - 8| = |3| - |8| = 3 - 8 = -5$, and $|x + 2| = |x| + 2$.`],
+        right: [`Simplify inside first, $|3 - 8| = |-5| = 5$. The expression $|x + 2|$ cannot be split; it is $x + 2$ for $x \\geq -2$ and $-x - 2$ for $x < -2$.`],
+        why: `The product rule $|ab| = |a|\\,|b|$ is true, and it is carried over to sums, where it fails.`,
+        check: `An absolute value can never be negative, so $-5$ is wrong on sight. For the expression, test a negative value: at $x = -5$, $|-5 + 2| = 3$, but $|-5| + 2 = 7$.` },
+      { id: 'reading-x-as-a-negative-number', name: `Reading −x as a negative number`, errorAt: 0,
+        what: `The case $|x| = -x$ is read as "the absolute value is negative".`,
+        wrong: [`"For $x < 0$, $|x| = -x$, so on this side the absolute value is negative."`],
+        right: [`On this side $x$ is negative, so $-x$ is positive. For $x = -6$, $|x| = -(-6) = 6$.`],
+        why: `A minus sign in front of a letter is read as a negative number, when it means the opposite of whatever the letter stands for.`,
+        check: `Substitute a number from the case. Any negative $x$ gives a positive $-x$.` },
+      { id: 'writing-root-of-x-squared-x', name: `Writing √(x²) = x`, errorAt: 0,
+        what: `The square root and the square are treated as canceling.`,
+        wrong: [`$\\sqrt{x^2} = x$, so $\\sqrt{(-4)^2} = -4$.`],
+        right: [`$\\sqrt{(-4)^2} = \\sqrt{16} = 4$. In general $\\sqrt{x^2} = |x|$.`],
+        why: `For non-negative $x$ the square root and the square do undo each other, and the rule is remembered without its condition.`,
+        check: `A square root symbol never gives a negative result. If the answer can be negative, bars are missing.` },
+      { id: 'negating-only-the-first-term', name: `Negating only the first term`, errorAt: 0,
+        what: `When the inside is negative, the minus sign is applied to the first term only.`,
+        wrong: [`For $x < 5$, $|x - 5| = -x - 5$.`],
+        right: [`The whole inside changes sign, $|x - 5| = -(x - 5) = 5 - x$.`],
+        why: `The parentheses around $x - 5$ are left out when $-A$ is written down.`,
+        check: `Test a value from the interval. At $x = 2$, $|2 - 5| = 3$ and $5 - 2 = 3$, while $-2 - 5 = -7$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     figures,
     sectionsContent,
     introContent,
@@ -589,7 +577,7 @@ return {
    }
 
 
-export default function AbsoluteValuePage({seoData, sectionsContent, introContent, propertiesTable, formsTable, summaryTable, faqQuestions, schemas, figures}) {
+export default function AbsoluteValuePage({ pitfallData,seoData, sectionsContent, introContent, propertiesTable, formsTable, summaryTable, faqQuestions, schemas, figures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -705,6 +693,15 @@ export default function AbsoluteValuePage({seoData, sectionsContent, introConten
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="absolute-value-pitfalls"
+            title="Common pitfalls with absolute values"
+            source="/algebra/absolute-value"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

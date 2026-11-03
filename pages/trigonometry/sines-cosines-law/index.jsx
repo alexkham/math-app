@@ -919,6 +919,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1162,6 +1163,25 @@ const faqQuestions = {
     },
   }
 
+
+// Concept introduction (section 2, "The Law of Sines") — template A,
+// definition last. Running instance: the triangle with angles 30°, 45°, 105°
+// and a = 10, where every side over the sine of its opposite angle is 20.
+// Old obj2 text is kept in sectionsContent.obj2, unused; its seven passages,
+// three formula boxes and link, the lawSines demo frame and its line are
+// carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciRatioTable = ciTableOpen(['side', 'opposite angle', 'side ÷ sin(angle)']) +
+  ciRow(['a = 10', 'A = 30°', '10 ÷ 0.5 = 20']) +
+  ciRow(['b ≈ 14.14', 'B = 45°', '14.14 ÷ 0.7071 ≈ 20'], { shade: true }) +
+  ciRow(['c ≈ 19.32', 'C = 105°', '19.32 ÷ 0.9659 ≈ 20'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
 
 const sectionsContent={
    obj0: {
@@ -1656,6 +1676,10 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
     heightLabel: 'h = b sin C', note: 'area = \u00bd \u00b7 a \u00b7 h  =  \u00bd ab sin C',
   };
 
+  const conceptIntroFigures = {
+    ratioTable: ciRatioTable,
+  };
+
   const demoUnits = {
     lawSines: demoUnitFrame({
       svg: triangleDiagrams['law-of-sines'],
@@ -1751,6 +1775,7 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
     heronAnatomy,
     lawChoiceCases,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj4Table,
@@ -1780,10 +1805,82 @@ export default function SinesCosinesLawPage({heronAnatomy, lawChoiceCases,
   obj9Table,
   summaryTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Sine was defined in right triangles, but most triangles have no right angle.`,
+        content: [
+          `Take a triangle with angles $30°$, $45°$ and $105°$ and the side $a = 10$ opposite the $30°$ angle. There is no hypotenuse to divide by.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Each side divided by the sine of its opposite angle gives the same number, 20.`,
+        content: [
+          ciTable('ratioTable'),
+          `The longest side sits opposite the largest angle, and the shortest opposite the smallest, in exactly the same proportion.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `A side and the sine of the angle opposite it grow together, in a fixed proportion.`,
+        content: [
+          `The derivation proceeds by dropping an altitude from one vertex to the opposite side. In a triangle with vertices $A$, $B$, $C$, drop an altitude $h$ from $C$ to side $c$. This altitude can be expressed two ways:`,
+          `@academic[formula_callout:The Law of Sines
+$$h = b\\sin A \\quad \\text{and} \\quad h = a\\sin B$$]@`,
+          `Setting these equal: $b\\sin A = a\\sin B$, which rearranges to $\\frac{a}{\\sin A} = \\frac{b}{\\sin B}$. Repeating with an altitude from a different vertex produces the full three-way equality.`,
+          `The derivation works whether the triangle is acute or obtuse, though the obtuse case requires a slight adjustment (the altitude falls outside the triangle, and the supplementary angle identity $\\sin(180° - \\theta) = \\sin\\theta$ is invoked).`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The [law of sines](!/trigonometry/definitions#law_of_sines) states that in any triangle each side divided by the sine of its opposite angle gives the same value: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$.`,
+        formula: [
+          `The Law of Sines states that in any triangle, the ratio of each side to the sine of its opposite angle is constant:`,
+          `@academic[formula_callout:Law of Sines
+$$\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$$
+/trigonometry/formulas#law_of_sines]@`,
+          `@academic[formulas_link:Browse all trigonometry formulas
+/trigonometry/formulas]@`,
+          `Equivalently, the sines are proportional to their opposite sides:`,
+          `@academic[formula_callout:The Law of Sines
+$$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
+        ],
+        footer: `So in the triangle above, $b = \\frac{10 \\sin 45°}{\\sin 30°} \\approx 14.14$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The constant 20 is not arbitrary: it has a geometric meaning of its own.`,
+        content: [
+          `The common ratio $\\frac{a}{\\sin A}$ has a geometric interpretation: it equals the diameter of the circumscribed circle (the circle passing through all three vertices). If $R$ is the circumradius, then $\\frac{a}{\\sin A} = 2R$.`,
+          <div key={'unit-lawSines'} dangerouslySetInnerHTML={{ __html: demoUnits.lawSines }} />,
+          `The constant ratio is the diameter of the triangle&#8217;s circumscribed circle, which is why it is the same for all three pairs.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `Two sides and an angle opposite one of them can fit two different triangles.`,
+        content: [
+          `Because $\\sin\\theta = \\sin(180° - \\theta)$, an angle found from its sine may be acute or obtuse. That case is treated in [the ambiguous case (SSA)](!/trigonometry/sines-cosines-law#4).`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers when to use the law of sines, the ambiguous case, the law of cosines and when to use it, choosing between the two laws, triangle area, Heron's formula, applications, common pitfalls and a summary.`,
+      },
+    ],
+  }
 
   const genericSections=[
 
@@ -1825,9 +1922,7 @@ export default function SinesCosinesLawPage({heronAnatomy, lawChoiceCases,
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
-          <div key={'unit-lawSines'} dangerouslySetInnerHTML={{ __html: demoUnits.lawSines }} />,
-          `The constant ratio is the diameter of the triangle&#8217;s circumscribed circle, which is why it is the same for all three pairs.`,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

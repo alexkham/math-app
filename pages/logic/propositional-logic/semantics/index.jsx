@@ -304,7 +304,7 @@ Deciding whether a formula is satisfiable was the first problem proved NP-comple
     id:'equivalences',
     title:"Logical Equivalences",
     link:'/logic/propositional-logic/semantics/equivalences',
-    content:`Logical equivalences are statements in propositional logic that always have the same truth value regardless of the truth values of their individual components. 
+    content:`Logical equivalence is a relation between two statements in propositional logic that have the same truth value for every combination of truth values of their individual components.
    If two propositions $A$ and $B$ are logically equivalent, we write:$A≡B$.      
 This means that for every possible truth assignment,$A$ and $B$ yield the same truth value.
 @academic[pitfall,aside:true,width:35%:Checking only some rows
@@ -385,7 +385,7 @@ Sorting a formula into its category is a search over assignments. A single row w
     id: 'implication',
     title: 'Logical Implication',
     link: '/logic/propositional-logic/semantics/implication',
-    content: `Logical [implication](!/logic/propositional-logic/semantics/implication) is a core semantic construct in propositional logic, expressing conditional relationships between propositions. On this page, we introduce the formal definition of implication ($p \\rightarrow q$), along with common notation styles used in logic and mathematics.
+    content: `Logical [implication](!/logic/propositional-logic/semantics/implication) is a core semantic construct in propositional logic, expressing conditional relationships between propositions. The implication page introduces the formal definition of implication ($p \\rightarrow q$), along with common notation styles used in logic and mathematics.
   
   A [truth table](!/logic/propositional-logic/semantics/implication#truth_table) illustrates how implication behaves under all combinations of truth values for its components. From there, several key properties are discussed, including reflexivity, transitivity, contraposition, and the equivalence to the disjunction form ($\\neg p \\lor q$). These properties are essential for both understanding logical behavior and applying simplification techniques in formal proofs.
   

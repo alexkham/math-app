@@ -12,6 +12,10 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vennTruthTableDiagrams from '@/app/components/diagrams/set-theory/vennTruthTableDiagrams'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import { tableHeaders } from '@/app/styles/theme'
 
 
 
@@ -234,6 +238,87 @@ const faqQuestions = {
 
 
 
+// Concept introduction (section "definition", "Definition") — template C,
+// failure first. Running instance: the promise "if it rains, I will take an
+// umbrella" checked in its four situations. The section's original text is
+// carried in unchanged as the definition formula.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPromiseTable = ciTableOpen(['it rains (p)', 'I take an umbrella (q)', 'promise broken?', 'p → q']) +
+  ciRow(['T', 'T', 'no', 'T']) +
+  ciRow(['T', 'F', 'yes', 'F'], { shade: true, color: '#a4243b', cols: [2, 3] }) +
+  ciRow(['F', 'T', 'no', 'T']) +
+  ciRow(['F', 'F', 'no', 'T'], { shade: true, last: true }) +
+  '</tbody></table>'
+
+const ciOldDefinition = `**Logical implication** is a fundamental concept in logic and mathematics. It describes a conditional relationship between two statements.
+
+            Logical implication ($p→q$) is a conditional statement meaning "if $p$, then $q$." It asserts that whenever $p$ (the antecedent or hypothesis) is true, $q$ (the consequent or conclusion) must also be true.
+            **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the consequent**.
+            However, if $p$ is false, the implication is still considered to be true regardless of $q$. This is a very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table).
+            `
+
+const conceptIntro = {
+  beats: [
+    {
+      id: 'intuition',
+      lead: `A promise: "If it rains, I will take an umbrella." When has the promise been broken?`,
+      content: [
+        `Check the four possible days: rain or no rain, umbrella or no umbrella.`,
+      ],
+    },
+    {
+      id: 'example',
+      kind: 'instance',
+      tone: 'break',
+      lead: `Only one of the four days breaks the promise; on both dry days it is kept, whatever I carry.`,
+      content: [
+        <div key={'ci-promiseTable'} dangerouslySetInnerHTML={{ __html: ciPromiseTable }} />,
+        `On a dry day the promise makes no demand, so nothing can break it. That is why $p \\to q$ is true whenever $p$ is false.`,
+      ],
+    },
+    {
+      id: 'diagnosis',
+      lead: `An implication fails in exactly one case: p true and q false.`,
+      content: [
+        `Reading "if $p$ then $q$" as "$p$ causes $q$" or as "$p$ and $q$" misjudges the two rows where $p$ is false.`,
+      ],
+    },
+    {
+      id: 'definition',
+      kind: 'definition',
+      statement: `A **logical implication** $p \\to q$, also called a [conditional](!/logic/definitions#conditional), is the statement "if $p$, then $q$": it is false when $p$ is true and $q$ is false, and true in every other case.`,
+      formula: [
+        ciOldDefinition,
+      ],
+      footer: `So "if it rains, I take an umbrella" is true on every dry day.`,
+    },
+    {
+      id: 'kind',
+      lead: `Implication is a statement about truth values, not about cause.`,
+      content: [
+        `$p \\to q$ can be true when $p$ and $q$ have nothing to do with each other: "if $2 + 2 = 5$, then the moon is made of cheese" is true, because its antecedent is false.`,
+      ],
+    },
+    {
+      id: 'caveat',
+      lead: `Implication runs one way: p → q does not give q → p.`,
+      content: [
+        `Taking an umbrella does not mean it rained: in the third row $q$ is true and $p$ is false, and the promise is still kept. The full table is in [truth table for logical implication](!/logic/propositional-logic/semantics/implication#truth_table).`,
+      ],
+    },
+    {
+      id: 'exit',
+      content: `The rest of the page covers notation, the truth table, the properties of implication, common misconceptions, implication in proofs and in logic laws.`,
+    },
+  ],
+}
+
 export default function ImplicationPage({demoUnits, implicationLaws ,introContent ,properties ,keyWords ,notation ,notationSection ,faqQuestions}) {
 
 
@@ -242,12 +327,8 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
       {
             id:'definition',
             title:'Definition',
-            content:[`**Logical implication** is a fundamental concept in logic and mathematics. It describes a conditional relationship between two statements.
-
-            Logical implication ($p→q$) is a conditional statement meaning "if $p$, then $q$." It asserts that whenever $p$ (the antecedent or hypothesis) is true, $q$ (the consequent or conclusion) must also be true.
-            **An implication expresses a dependency between two propositions, where the truth of the antecedent guarantees the truth of the consequent**.
-            However, if $p$ is false, the implication is still considered to be true regardless of $q$. This is a very important point that follows directly from the definition. We will see the meaning of it while dealing with implication [truth table](!/logic/propositional-logic/semantics/implication#truth_table).
-            `,
+            content:[
+              <ConceptIntro key={'definition-intro'} data={conceptIntro} />,
         ]
           },
       {
@@ -265,6 +346,11 @@ export default function ImplicationPage({demoUnits, implicationLaws ,introConten
                 parentHref={notationSection.parentHref}
                 parentLabel={notationSection.parentLabel}
                 theme={'navy'}
+              />,
+              <NotationCheatSheet
+                key={'notation-sheet'}
+                sheet={logicNotationSheet}
+                current={'/logic/propositional-logic/semantics/implication'}
               />,
               <MyList data={notation}
               key={1}

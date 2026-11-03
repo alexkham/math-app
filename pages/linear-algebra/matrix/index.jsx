@@ -813,7 +813,7 @@ export async function getStaticProps(){
     </tr>
     <tr>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #06357a;">Eigenvalue link</td>
-      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">dimension of the column space (and image)</td>
+      <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">square A: at least the number of nonzero eigenvalues (with multiplicity); equal if A is diagonalizable</td>
       <td style="padding: 12px 15px; border-bottom: 1px solid #ddd; color: #34495e;">equals the sum of all eigenvalues</td>
     </tr>
     <tr style="background: #f8f9fa;">

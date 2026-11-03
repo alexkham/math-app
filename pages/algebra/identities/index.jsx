@@ -12,7 +12,7 @@ import identityDiagrams from '@/app/components/algebra/identities/identityDiagra
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import MistakeFix from '@/app/components/infographics/MistakeFix'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 
@@ -275,7 +275,7 @@ Geometrically, $(a+b)^2$ is the area of a square with side $a+b$, dissected into
 
 @academic[pitfall,aside:true,width:35%:Squaring only the letter
 Writing $(2x + 3)^2$ as $2x^2 + 12x + 9$ squares the $x$ but not the $2$; at $x = 1$ that gives $23$ instead of $5^2 = 25$. The first term is $a = 2x$, so $a^2 = 4x^2$ and $(2x + 3)^2 = 4x^2 + 12x + 9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-only-the-letter)]@
 
 In practice, $a$ and $b$ are rarely single letters. Expanding $(2x + 3)^2$ means applying the identity with $a = 2x$ and $b = 3$, and each of the three terms $a^2$, $2ab$ and $b^2$ is built from those whole expressions. The same substitution works for any binomial, whatever its two terms look like.
 
@@ -294,7 +294,7 @@ These identities show up in [polynomial factoring](!/algebra/polynomials/factori
 
 @academic[pitfall,aside:true,width:35%:Making every sign negative
 Writing $(x - 2)^3$ as $x^3 - 6x^2 - 12x - 8$ puts a minus on every term after the first; at $x = 3$ that gives $-71$ instead of $1^3 = 1$. The signs alternate: $(x - 2)^3 = x^3 - 6x^2 + 12x - 8$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-every-sign-negative)]@
 
 The structural pattern — descending powers of $a$, ascending powers of $b$, symmetric coefficients — is the same one that governs every higher power. Squares and cubes are the two cases worth committing to memory directly; beyond that, the binomial theorem takes over.`,
       before: ``,
@@ -327,7 +327,7 @@ Memorizing every higher power is unnecessary. The formula handles them all. What
 
 @academic[pitfall,aside:true,width:35%:Using the binomial coefficient alone
 Taking $\\binom{5}{2} = 10$ as the coefficient of $x^3$ in $(x + 2)^5$ leaves out the factor $b^2 = 2^2$. The term is $\\binom{5}{2} x^3 \\cdot 2^2 = 40x^3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-binomial-coefficient-alone)]@
 
 Reading off one term is the usual task in practice. In $(x + 2)^5$ the role of $a$ is played by $x$ and the role of $b$ by $2$, and the term with $x^3$ is the one where $n - k = 3$, that is $k = 2$. The general term then gives that term in full, its number and its power of $x$ together.`,
       before: ``,
@@ -384,7 +384,7 @@ $$a^3 + b^3 = (a+b)(a^2 - ab + b^2)$$
 
 @academic[pitfall,aside:true,width:35%:Copying the sign into the quadratic factor
 Writing $x^3 + 8$ as $(x + 2)(x^2 + 2x + 4)$ copies the plus sign into the middle term; that product is $x^3 + 4x^2 + 8x + 8$. The middle sign is the opposite one: $x^3 + 8 = (x + 2)(x^2 - 2x + 4)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-sign-in-quadratic-factor)]@
 
 The quadratic factors $a^2 \\pm ab + b^2$ are irreducible over the reals (their discriminants are negative), so this factorization is the end of the line for cubes over $\\mathbb{R}$.
 
@@ -811,7 +811,7 @@ $49 \\cdot 51 = (50 - 1)(50 + 1) = 50^2 - 1 = 2499$. Any two numbers the same di
         content: [
           `@academic[pitfall,aside:true,width:35%:Squaring only the letter
 Writing $(2x + 3)^2$ as $2x^2 + 12x + 9$ squares the $x$ but not the $2$; at $x = 1$ that gives $23$ instead of $5^2 = 25$. The first term is $a = 2x$, so $a^2 = 4x^2$ and $(2x + 3)^2 = 4x^2 + 12x + 9$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-only-the-letter)]@`,
           `Cubes work the same way with more cross terms, as [cubes of binomials](!/algebra/identities#2) shows.`,
         ],
       },

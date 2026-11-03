@@ -2032,9 +2032,43 @@ The sum of $n$ independent $\\text{Exp}(\\lambda)$ variables follows a Gamma$(n,
   link: '',
 },
     obj16:{
-  
+
       title:`Related Distributions`,
-      content:``,
+      content:`
+The exponential distribution sits in the middle of a small family. Some relatives describe the same random process from another angle, some are what the exponential becomes when time is cut into steps, and some are built from several exponentials at once.
+
+### Poisson: counts instead of gaps
+
+A [Poisson](!/probability/distributions/discrete/poisson) process can be watched in two ways. Count the events in a window of length $t$ and the count is Poisson with mean $\\lambda t$; time the gap from one event to the next and the gap is $\\text{Exp}(\\lambda)$. The same rate $\\lambda$ drives both, so a call centre taking $2$ calls an hour has $\\text{Pois}(2t)$ calls in $t$ hours and waits $\\frac{1}{2}$ hour between calls on average.
+
+@academic[formula_callout:Related Distributions
+$$P(\\text{no event in } [0, t]) = P(\\text{Pois}(\\lambda t) = 0) = e^{-\\lambda t} = P(X > t)$$]@
+
+The two descriptions meet in this identity: no event in the window is the same statement as a first wait longer than $t$.
+
+### Geometric: the same wait in whole steps
+
+The [geometric](!/probability/distributions/discrete/geometric) distribution counts trials until the first success, and it is the only discrete distribution with no memory, just as the exponential is the only continuous one. Cut time into steps of length $\\Delta t$ and let each step hold an event with probability $p = \\lambda \\Delta t$. The wait $T$ is the number of steps times $\\Delta t$, and
+
+@academic[formula_callout:Related Distributions
+$$P(T > t) = (1 - \\lambda \\Delta t)^{t / \\Delta t} \\to e^{-\\lambda t} \\quad \\text{as } \\Delta t \\to 0$$]@
+
+so the geometric wait turns into the exponential wait as the steps shrink.
+
+### Gamma: waiting for several events
+
+The sum of $n$ independent $\\text{Exp}(\\lambda)$ waits is the time until the $n$-th event, and it follows the gamma distribution with shape $n$ and rate $\\lambda$, also called the Erlang distribution. Its mean is $\\frac{n}{\\lambda}$ and its variance $\\frac{n}{\\lambda^2}$. The exponential is the case $n = 1$.
+
+### Distributions built from exponentials
+
+• **Minimum:** the first of several independent exponential waits with rates $\\lambda_1, \\ldots, \\lambda_k$ is again exponential, with rate $\\lambda_1 + \\cdots + \\lambda_k$.
+• **Weibull:** the Weibull distribution with shape $1$ is the exponential; other shapes let the event rate rise or fall with age.
+• **Chi-squared:** with $2$ degrees of freedom it is exactly $\\text{Exp}\\left(\\frac{1}{2}\\right)$.
+• **Laplace:** the difference of two independent $\\text{Exp}(\\lambda)$ variables has the two-sided Laplace density $\\frac{\\lambda}{2} e^{-\\lambda |x|}$.
+• **Uniform:** if $U$ is [uniform](!/probability/distributions/continuous/uniform) on $(0, 1)$, then $-\\frac{\\ln U}{\\lambda}$ is $\\text{Exp}(\\lambda)$, which is how computers draw exponential values.
+
+Of these, the Poisson and geometric links matter most in practice: the first says which question a rate answers, the second says the exponential is the geometric wait seen in continuous time.
+`,
       before:``,
       after:``,
       link:'',

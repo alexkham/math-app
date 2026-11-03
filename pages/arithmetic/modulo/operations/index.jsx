@@ -841,6 +841,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1125,7 +1127,7 @@ The alternative is to compute the full subtraction first: $23 - 47 = -24$, then 
 
 @academic[pitfall,aside:true,width:35%:Ignoring the minus sign
 Reducing $-24$ as if it were $24$ gives $-24 \\bmod 10 = 4$, yet $-24 - 4 = -28$ is not a multiple of $10$. Going down to $-30$ gives $-24 = 10 \\cdot (-3) + 6$, so the result is $6$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-ignoring-the-minus-sign)]@
 
 The negative intermediate result is not an error — it reflects a position on the number cycle that has wrapped past zero in the backward direction. Adding $n$ translates it to its equivalent position in $\\{0, 1, \\ldots, n-1\\}$.`,
   before: ``,
@@ -1203,7 +1205,7 @@ To compute $2^{100} \\bmod 7$, divide the exponent by the cycle length: $100 = 3
 
 @academic[pitfall,aside:true,width:35%:Reducing the exponent by the modulus
 Reducing the exponent of $2^{100}$ modulo $7$ gives $100 \\bmod 7 = 2$ and $2^2 = 4$. The powers repeat every $3$ steps, not every $7$: $100 \\bmod 3 = 1$, so $2^{100} \\bmod 7 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reducing-the-exponent-by-the-modulus)]@
 
 @academic[example:Example
 Powers of $3 \\bmod 10$ cycle through $\\{3, 9, 7, 1\\}$ with length $4$. For $3^{75} \\bmod 10$: $75 = 4 \\cdot 18 + 3$, so $3^{75}$ matches $3^3 = 7$. The answer is $7$.]@
@@ -1242,7 +1244,7 @@ Divide the exponent by the cycle length: $100 = 4 \\cdot 25 + 0$. A remainder of
 
 @academic[pitfall,aside:true,width:35%:Reading remainder 0 as the first place
 Reading the remainder $0$ in $20 = 4 \\cdot 5 + 0$ as the first place of the cycle $2, 4, 8, 6$ gives $2$ as the last digit of $2^{20}$. A remainder of $0$ points to the last place, so the last digit is $6$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-remainder-0-as-the-first-place)]@
 
 @academic[example:Example
 Find the last digit of $3^{75}$. The powers of $3 \\bmod 10$ cycle: $3, 9, 7, 1$ with period $4$. Divide: $75 = 4 \\cdot 18 + 3$. The remainder $3$ points to the third position in the cycle: $7$.]@
@@ -1280,7 +1282,7 @@ January $1$ is a Monday (day $1$). What day is March $15$? Count the days: $31$ 
 
 @academic[pitfall,aside:true,width:35%:Counting the days off by one
 Counting $31 - 1 = 30$ days for the rest of January gives $72$ days and $(1 + 72) \\bmod 7 = 3$, a Wednesday. January 1 to February 1 is $31$ days, so the count is $73$ and March 15 is a Thursday.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-the-days-off-by-one)]@
 
 In date problems the reduction modulo $7$ is the easy step; the work lies in the day count. The number added to the starting day is the number of days that pass between the two dates, and it is built from the month lengths before any reduction is done.
 
@@ -1343,69 +1345,9 @@ To check modular results with your own numbers, use the [modulo calculator](!/ca
 
     obj16:{
       title:`Common Pitfalls`,
-      content:`Five mistakes account for many of the wrong answers in modular arithmetic. Four are marked where they happen in the sections above; dividing the remainders is the one the division section already shows. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Ignoring the minus sign**
-
-A negative number is reduced by its size alone, as if $-24$ and $24$ had the same remainder. The sign is dropped, or put back in front of the remainder of the positive number.
-
-Wrong working: $24 = 10 \\cdot 2 + 4$, so $-24 \\bmod 10 = 4$.
-
-Right working: the remainder $r$ must satisfy $-24 = 10q + r$ with $0 \\leq r < 10$. The multiple of $10$ at or below $-24$ is $-30$, so $-24 = 10 \\cdot (-3) + 6$ and $-24 \\bmod 10 = 6$. The route through remainders agrees: $3 - 7 = -4$ and $-4 + 10 = 6$.
-
-Why it happens: for positive numbers the remainder is what is left after taking away multiples of $n$, and that habit is carried over to negative numbers, where the step goes down to the next multiple, away from zero.
-
-How to check: the number minus the result must be a multiple of $n$. $-24 - 6 = -30$ passes; $-24 - 4 = -28$ fails.
-
-**Reducing the exponent by the modulus**
-
-The base of a power may be replaced by its remainder, and the same move is made on the exponent: it is reduced modulo $n$ instead of modulo the length of the cycle of powers.
-
-Wrong working: for $2^{100} \\bmod 7$, $100 = 7 \\cdot 14 + 2$, so $2^{100} \\equiv 2^2 = 4 \\pmod{7}$.
-
-Right working: the powers of $2$ modulo $7$ run $2, 4, 1$ and repeat, so the cycle length is $3$. Since $100 = 3 \\cdot 33 + 1$, $2^{100} \\equiv 2^1 = 2 \\pmod{7}$.
-
-Why it happens: the core principle allows any number in a sum or a product to be replaced by its remainder, and the exponent looks like one more such number. But the exponent counts multiplications, and the count repeats with the cycle, not with $n$.
-
-How to check: try a small exponent that can be worked out in full. $2^7 = 128 = 7 \\cdot 18 + 2$, so $2^7 \\bmod 7 = 2$, while reducing the exponent $7$ modulo $7$ would give $2^0 = 1$.
-
-**Dividing the remainders**
-
-A quotient is reduced by reducing the dividend and the divisor first and then dividing, as is done for sums, differences and products.
-
-Wrong working: for $(12 \\div 4) \\bmod 5$, $12 \\bmod 5 = 2$ and $4 \\bmod 5 = 4$, so the answer is $\\frac{2}{4} = 0.5$.
-
-Right working: divide before reducing, $12 \\div 4 = 3$ and $3 \\bmod 5 = 3$. Working only with remainders, dividing by $4$ means multiplying by the inverse of $4$: $4 \\cdot 4 = 16 \\equiv 1 \\pmod{5}$, so the inverse is $4$ and $2 \\cdot 4 = 8 \\equiv 3 \\pmod{5}$.
-
-Why it happens: addition, subtraction and multiplication all allow reducing first, so division is expected to work the same way.
-
-How to check: multiply back. The answer times the divisor must be congruent to the dividend: $3 \\cdot 4 = 12 \\equiv 2 \\pmod{5}$. A result like $0.5$ is not a remainder at all.
-
-**Reading remainder 0 as the first place**
-
-In a last-digit problem the exponent is divided by the cycle length, and a remainder of $0$ is matched with the first entry of the cycle, or with the power $a^0 = 1$.
-
-Wrong working: the last digits of the powers of $2$ cycle $2, 4, 8, 6$. For $2^{20}$, $20 = 4 \\cdot 5 + 0$, and the remainder $0$ is read as the first place, giving $2$.
-
-Right working: a remainder of $0$ means the exponent is a whole number of cycles, so $2^{20}$ sits in the same place as $2^4 = 16$, the last place of the cycle. The last digit is $6$, and indeed $2^{20} = 1{,}048{,}576$.
-
-Why it happens: the remainders $1$, $2$ and $3$ match the first, second and third places directly, and $0$ matches no place number, so it is attached to the start.
-
-How to check: replace a remainder of $0$ by the cycle length. The exponent $20$ then behaves like the exponent $4$, and $2^4 = 16$ ends in $6$.
-
-**Counting the days off by one**
-
-When the number of days between two dates is built from month lengths, one end of the span is left out or counted twice.
-
-Wrong working: January 1 is already used, so $31 - 1 = 30$ days remain in January. With $28$ for February and $14$ for March, the count is $30 + 28 + 14 = 72$, and $(1 + 72) \\bmod 7 = 3$, a Wednesday.
-
-Right working: from January 1 to February 1 is $31$ days, to March 1 another $28$, and to March 15 another $14$, so $31 + 28 + 14 = 73$. Then $(1 + 73) \\bmod 7 = 74 \\bmod 7 = 4$, a Thursday.
-
-Why it happens: the days left in January are counted without January 1, and the days in March are counted without March 15, so the two ends of the span are handled by different rules and one day goes missing.
-
-How to check: test the count on a short span. From January 1 to January 8 is $8 - 1 = 7$ days, and January 8 falls on the same weekday as January 1.`,
+      content:`Five mistakes account for many of the wrong answers in modular arithmetic. Four are marked where they happen in the sections above; dividing the remainders is the one the division section already shows. Here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip reduces the wrong thing. A negative number takes the multiple of $n$ at or below it, an exponent is reduced by the length of the cycle of powers and not by the modulus, division is done before reducing or through an inverse, a remainder of $0$ stands for the last place of a cycle, and a count of days measures the distance between dates, so January 1 to February 1 is $31$ days. Trying a small case worked out in full, or multiplying back, catches each slip.`,
       link:'',
     },
 
@@ -1578,8 +1520,46 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 8, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'ignoring-the-minus-sign', name: `Ignoring the minus sign`, errorAt: 0,
+        what: `A negative number is reduced by its size alone, as if $-24$ and $24$ had the same remainder. The sign is dropped, or put back in front of the remainder of the positive number.`,
+        wrong: [`$24 = 10 \\cdot 2 + 4$, so $-24 \\bmod 10 = 4$.`],
+        right: [`The remainder $r$ must satisfy $-24 = 10q + r$ with $0 \\leq r < 10$. The multiple of $10$ at or below $-24$ is $-30$, so $-24 = 10 \\cdot (-3) + 6$ and $-24 \\bmod 10 = 6$. The route through remainders agrees: $3 - 7 = -4$ and $-4 + 10 = 6$.`],
+        why: `For positive numbers the remainder is what is left after taking away multiples of $n$, and that habit is carried over to negative numbers, where the step goes down to the next multiple, away from zero.`,
+        check: `The number minus the result must be a multiple of $n$. $-24 - 6 = -30$ passes; $-24 - 4 = -28$ fails.` },
+      { id: 'reducing-the-exponent-by-the-modulus', name: `Reducing the exponent by the modulus`, errorAt: 1,
+        what: `The base of a power may be replaced by its remainder, and the same move is made on the exponent: it is reduced modulo $n$ instead of modulo the length of the cycle of powers.`,
+        wrong: [`For $2^{100} \\bmod 7$, $100 = 7 \\cdot 14 + 2$,`, `So $2^{100} \\equiv 2^2 = 4 \\pmod{7}$.`],
+        right: [`For $2^{100} \\bmod 7$, $100 = 7 \\cdot 14 + 2$,`, `The powers of $2$ modulo $7$ run $2, 4, 1$ and repeat, so the cycle length is $3$. Since $100 = 3 \\cdot 33 + 1$, $2^{100} \\equiv 2^1 = 2 \\pmod{7}$.`],
+        why: `The core principle allows any number in a sum or a product to be replaced by its remainder, and the exponent looks like one more such number. But the exponent counts multiplications, and the count repeats with the cycle, not with $n$.`,
+        check: `Try a small exponent that can be worked out in full. $2^7 = 128 = 7 \\cdot 18 + 2$, so $2^7 \\bmod 7 = 2$, while reducing the exponent $7$ modulo $7$ would give $2^0 = 1$.` },
+      { id: 'dividing-the-remainders', name: `Dividing the remainders`, errorAt: 1,
+        what: `A quotient is reduced by reducing the dividend and the divisor first and then dividing, as is done for sums, differences and products.`,
+        wrong: [`For $(12 \\div 4) \\bmod 5$, $12 \\bmod 5 = 2$ and $4 \\bmod 5 = 4$,`, `So the answer is $\\frac{2}{4} = 0.5$.`],
+        right: [`For $(12 \\div 4) \\bmod 5$, $12 \\bmod 5 = 2$ and $4 \\bmod 5 = 4$,`, `Divide before reducing, $12 \\div 4 = 3$ and $3 \\bmod 5 = 3$. Working only with remainders, dividing by $4$ means multiplying by the inverse of $4$: $4 \\cdot 4 = 16 \\equiv 1 \\pmod{5}$, so the inverse is $4$ and $2 \\cdot 4 = 8 \\equiv 3 \\pmod{5}$.`],
+        why: `Addition, subtraction and multiplication all allow reducing first, so division is expected to work the same way.`,
+        check: `Multiply back. The answer times the divisor must be congruent to the dividend: $3 \\cdot 4 = 12 \\equiv 2 \\pmod{5}$. A result like $0.5$ is not a remainder at all.` },
+      { id: 'reading-remainder-0-as-the-first-place', name: `Reading remainder 0 as the first place`, errorAt: 1,
+        what: `In a last-digit problem the exponent is divided by the cycle length, and a remainder of $0$ is matched with the first entry of the cycle, or with the power $a^0 = 1$.`,
+        wrong: [`The last digits of the powers of $2$ cycle $2, 4, 8, 6$.`, `For $2^{20}$, $20 = 4 \\cdot 5 + 0$, and the remainder $0$ is read as the first place, giving $2$.`],
+        right: [`The last digits of the powers of $2$ cycle $2, 4, 8, 6$.`, `A remainder of $0$ means the exponent is a whole number of cycles, so $2^{20}$ sits in the same place as $2^4 = 16$, the last place of the cycle. The last digit is $6$, and indeed $2^{20} = 1{,}048{,}576$.`],
+        why: `The remainders $1$, $2$ and $3$ match the first, second and third places directly, and $0$ matches no place number, so it is attached to the start.`,
+        check: `Replace a remainder of $0$ by the cycle length. The exponent $20$ then behaves like the exponent $4$, and $2^4 = 16$ ends in $6$.` },
+      { id: 'counting-the-days-off-by-one', name: `Counting the days off by one`, errorAt: 0,
+        what: `When the number of days between two dates is built from month lengths, one end of the span is left out or counted twice.`,
+        wrong: [`January 1 is already used, so $31 - 1 = 30$ days remain in January. With $28$ for February and $14$ for March, the count is $30 + 28 + 14 = 72$, and $(1 + 72) \\bmod 7 = 3$, a Wednesday.`],
+        right: [`From January 1 to February 1 is $31$ days, to March 1 another $28$, and to March 15 another $14$, so $31 + 28 + 14 = 73$. Then $(1 + 73) \\bmod 7 = 74 \\bmod 7 = 4$, a Thursday.`],
+        why: `The days left in January are counted without January 1, and the days in March are counted without March 15, so the two ends of the span are handled by different rules and one day goes missing.`,
+        check: `Test the count on a short span. From January 1 to January 8 is $8 - 1 = 7$ days, and January 8 falls on the same weekday as January 1.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1602,7 +1582,7 @@ return {
 
 
 
-export default function OperationsPage({seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function OperationsPage({ pitfallData,seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1803,6 +1783,15 @@ export default function OperationsPage({seoData, sectionsContent, introContent, 
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="modular-arithmetic-pitfalls"
+            title="Common pitfalls in modular arithmetic"
+            source="/arithmetic/modulo/operations"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

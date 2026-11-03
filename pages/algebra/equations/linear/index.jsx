@@ -12,6 +12,8 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -309,7 +311,7 @@ $$x = 9$$]@
 
 @academic[pitfall,aside:true,width:35%:Moving a term without changing its sign
 Carrying $-7$ across unchanged turns $2x - 7 = 11$ into $2x = 11 - 7 = 4$, so $x = 2$. Adding $7$ to both sides gives $2x = 18$ and $x = 9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-moving-a-term-without-changing-its-sign)]@
 
 The order of these steps is flexible — subtracting $2x$ first or adding $7$ first both reach the same result — but the underlying logic is rigid: every step must preserve equivalence, and each step must bring the equation closer to the form $x = \\text{value}$.
 
@@ -337,7 +339,7 @@ A persistent source of error is the negative sign preceding parentheses. In the 
 
 @academic[pitfall,aside:true,width:35%:Distributing a minus sign to the first term only
 Opening $5x - (2x + 4) = 11$ as $5x - 2x + 4 = 11$ gives $3x = 7$, so $x = \\frac{7}{3}$. Both terms change sign: $5x - 2x - 4 = 11$, so $x = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-distributing-a-minus-sign-to-the-first-term-only)]@
 
 Subtracting a whole bracket is where this matters in practice. In $5x - (2x + 4) = 11$, the bracket is removed first and its terms are combined with $5x$; only then do the usual steps of collecting and isolating begin. Substituting the result into the original equation, with the bracket still in place, confirms the value of $x$.
 
@@ -367,7 +369,7 @@ $$x = \\frac{66}{7}$$]@
 
 @academic[pitfall,aside:true,width:35%:Multiplying only the fractions by the LCD
 Multiplying the two fractions by $12$ but leaving the $5$ gives $4x + 3(x - 2) = 5$, so $x = \\frac{11}{7}$. The $5$ becomes $60$ too, and $x = \\frac{66}{7}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-only-the-fractions-by-the-lcd)]@
 
 The multiplication by $12$ is valid because $12$ is a nonzero constant — it does not depend on $x$. The solution set is preserved exactly. After clearing, the equation is a standard multi-step linear equation with integer coefficients.
 
@@ -421,7 +423,7 @@ The equation $3(x + 1) = 3x + 8$ distributes to $3x + 3 = 3x + 8$. Subtracting $
 
 @academic[pitfall,aside:true,width:35%:Taking an identity for no solution
 Reading $6 = 6$ as no solution, because $x$ has cancelled, discards every answer. $2(x + 3) = 2x + 6$ holds for every $x$, for example $x = 1$ gives $8 = 8$. The solution set is $\\mathbb{R}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-an-identity-for-no-solution)]@
 
 In both examples the working ends on a line with no $x$ in it, after the same distribute-and-subtract steps used throughout the page. The answer is then a whole solution set rather than a single number, so it is written as $\\mathbb{R}$ or as the empty set instead of $x = \\text{value}$.`,
     before: ``,
@@ -468,64 +470,9 @@ To rearrange a formula for any variable with each step shown, use the [literal e
 
   obj10: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for most wrong answers to linear equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Moving a term without changing its sign**
-
-A constant is carried to the other side of the equation, but its sign is left as it was. "Moving" a term is shorthand for adding or subtracting it on both sides, and the shorthand hides which of the two was used.
-
-Wrong working:
-$$2x - 7 = 11 \\implies 2x = 11 - 7 = 4 \\implies x = 2$$
-
-Right working: add $7$ to both sides.
-$$2x - 7 + 7 = 11 + 7 \\implies 2x = 18 \\implies x = 9$$
-
-Why it happens: the phrase "move it to the other side" says where the term goes but not what happens to it, so the addition property is replaced by a picture of the term jumping across the equals sign.
-
-How to check: substitute into the original equation $4x - 7 = 2x + 11$. $x = 2$ gives $1$ on the left and $15$ on the right. $x = 9$ gives $29$ on both sides.
-
-**Distributing a minus sign to the first term only**
-
-A bracket with a minus sign in front of it is opened, and only the first term inside changes sign.
-
-Wrong working:
-$$5x - (2x + 4) = 11 \\implies 5x - 2x + 4 = 11 \\implies 3x = 7 \\implies x = \\frac{7}{3}$$
-
-Right working: the minus sign is a factor of $-1$ for the whole bracket, so $-(2x + 4) = -2x - 4$.
-$$5x - 2x - 4 = 11 \\implies 3x = 15 \\implies x = 5$$
-
-Why it happens: the minus sign is written right next to the first term, so it looks as though it belongs to that term alone.
-
-How to check: substitute with the bracket still in place. $x = 5$ gives $25 - (10 + 4) = 11$. $x = \\frac{7}{3}$ gives $\\frac{35}{3} - \\frac{26}{3} = 3$, not $11$.
-
-**Multiplying only the fractions by the LCD**
-
-To clear the fractions, each fraction is multiplied by the LCD, but the whole-number term on the other side is left as it was. The two sides are then multiplied by different numbers, and the equation changes.
-
-Wrong working:
-$$\\frac{x}{3} + \\frac{x - 2}{4} = 5 \\implies 4x + 3(x - 2) = 5 \\implies 7x = 11 \\implies x = \\frac{11}{7}$$
-
-Right working: multiply every term on both sides, including the $5$, by $12$.
-$$4x + 3(x - 2) = 60 \\implies 7x - 6 = 60 \\implies 7x = 66 \\implies x = \\frac{66}{7}$$
-
-Why it happens: the attention is on the denominators, so a term without one seems to need nothing.
-
-How to check: substitute into the original equation. $x = \\frac{66}{7}$ gives $\\frac{22}{7} + \\frac{13}{7} = 5$. $x = \\frac{11}{7}$ gives $\\frac{5}{12}$ on the left, exactly $12$ times too small.
-
-**Taking an identity for no solution**
-
-The variable terms cancel, and the disappearance of $x$ is taken to mean that no number solves the equation.
-
-Wrong working:
-$$2(x + 3) = 2x + 6 \\implies 2x + 6 = 2x + 6 \\implies 6 = 6 \\implies \\text{no solution}$$
-
-Right working: $6 = 6$ is true and contains no $x$, so it is true whatever $x$ is. The solution set is $\\mathbb{R}$. "No solution" belongs to a false statement such as the $3 = 8$ of $3(x + 1) = 3x + 8$.
-
-Why it happens: in a conditional equation the working ends with $x = \\text{value}$, so a last line without $x$ looks like a dead end rather than an answer.
-
-How to check: substitute any two numbers. $x = 1$ gives $8 = 8$; $x = -10$ gives $-14 = -14$.`,
+    content: `Four mistakes account for most wrong answers to linear equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Three of the four slips turn the equation into a different one: a sign is lost when a term moves, a minus reaches only part of a bracket, or the clearing step skips the term on the right. Substituting the answer into the original equation exposes each of them, because the two sides stop agreeing. The fourth is a slip in reading the result: when the variable cancels, a true statement such as $6 = 6$ means every number is a solution, and only a false one such as $3 = 8$ means none.`,
     link: '',
   },
 };
@@ -682,8 +629,40 @@ const schemas = {
     }),
   };
 
+  // MistakeFix 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'moving-a-term-without-changing-its-sign', name: `Moving a term without changing its sign`, errorAt: 1,
+        what: `A constant is carried to the other side of the equation, but its sign is left as it was. "Moving" a term is shorthand for adding or subtracting it on both sides, and the shorthand hides which of the two was used.`,
+        wrong: [`$$2x - 7 = 11$$`, `$$\\implies 2x = 11 - 7 = 4$$`, `$$\\implies x = 2$$`],
+        right: [`$$2x - 7 = 11$$`, `Add $7$ to both sides.`, `$$2x - 7 + 7 = 11 + 7$$`, `$$\\implies 2x = 18$$`, `$$\\implies x = 9$$`],
+        why: `The phrase "move it to the other side" says where the term goes but not what happens to it, so the addition property is replaced by a picture of the term jumping across the equals sign.`,
+        check: `Substitute into the original equation $4x - 7 = 2x + 11$. $x = 2$ gives $1$ on the left and $15$ on the right. $x = 9$ gives $29$ on both sides.` },
+      { id: 'distributing-a-minus-sign-to-the-first-term-only', name: `Distributing a minus sign to the first term only`, errorAt: 1,
+        what: `A bracket with a minus sign in front of it is opened, and only the first term inside changes sign.`,
+        wrong: [`$$5x - (2x + 4) = 11$$`, `$$\\implies 5x - 2x + 4 = 11$$`, `$$\\implies 3x = 7$$`, `$$\\implies x = \\frac{7}{3}$$`],
+        right: [`$$5x - (2x + 4) = 11$$`, `The minus sign is a factor of $-1$ for the whole bracket, so $-(2x + 4) = -2x - 4$.`, `$$5x - 2x - 4 = 11$$`, `$$\\implies 3x = 15$$`, `$$\\implies x = 5$$`],
+        why: `The minus sign is written right next to the first term, so it looks as though it belongs to that term alone.`,
+        check: `Substitute with the bracket still in place. $x = 5$ gives $25 - (10 + 4) = 11$. $x = \\frac{7}{3}$ gives $\\frac{35}{3} - \\frac{26}{3} = 3$, not $11$.` },
+      { id: 'multiplying-only-the-fractions-by-the-lcd', name: `Multiplying only the fractions by the LCD`, errorAt: 1,
+        what: `To clear the fractions, each fraction is multiplied by the LCD, but the whole-number term on the other side is left as it was. The two sides are then multiplied by different numbers, and the equation changes.`,
+        wrong: [`$$\\frac{x}{3} + \\frac{x - 2}{4} = 5$$`, `$$\\implies 4x + 3(x - 2) = 5$$`, `$$\\implies 7x = 11$$`, `$$\\implies x = \\frac{11}{7}$$`],
+        right: [`$$\\frac{x}{3} + \\frac{x - 2}{4} = 5$$`, `Multiply every term on both sides, including the $5$, by $12$.`, `$$4x + 3(x - 2) = 60$$`, `$$\\implies 7x - 6 = 60$$`, `$$\\implies 7x = 66$$`, `$$\\implies x = \\frac{66}{7}$$`],
+        why: `The attention is on the denominators, so a term without one seems to need nothing.`,
+        check: `Substitute into the original equation. $x = \\frac{66}{7}$ gives $\\frac{22}{7} + \\frac{13}{7} = 5$. $x = \\frac{11}{7}$ gives $\\frac{5}{12}$ on the left, exactly $12$ times too small.` },
+      { id: 'taking-an-identity-for-no-solution', name: `Taking an identity for no solution`, errorAt: 3,
+        what: `The variable terms cancel, and the disappearance of $x$ is taken to mean that no number solves the equation.`,
+        wrong: [`$$2(x + 3) = 2x + 6$$`, `$$\\implies 2x + 6 = 2x + 6$$`, `$$\\implies 6 = 6$$`, `$$\\implies \\text{no solution}$$`],
+        right: [`$$2(x + 3) = 2x + 6$$`, `$$\\implies 2x + 6 = 2x + 6$$`, `$$\\implies 6 = 6$$`, `$6 = 6$ is true and contains no $x$, so it is true whatever $x$ is. The solution set is $\\mathbb{R}$. "No solution" belongs to a false statement such as the $3 = 8$ of $3(x + 1) = 3x + 8$.`],
+        why: `In a conditional equation the working ends with $x = \\text{value}$, so a last line without $x$ looks like a dead end rather than an answer.`,
+        check: `Substitute any two numbers. $x = 1$ gives $8 = 8$; $x = -10$ gives $-14 = -14$.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -706,7 +685,7 @@ const schemas = {
    }
 
 
-export default function LinearEquationsPage({
+export default function LinearEquationsPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -893,6 +872,15 @@ $$ax + b = 0$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="linear-equation-pitfalls"
+            title="Common pitfalls in linear equations"
+            source="/algebra/equations/linear"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

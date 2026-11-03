@@ -18,6 +18,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionMVTDiagrams from '@/app/components/functions/mvt/functionMVTDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -441,6 +443,25 @@ const derivativeRulesData = {
 
 
 // formulas-optimized: v1 | 2026-06-09 | 10 callouts (obj1, obj2, obj3, obj4, obj5, obj6, obj7, obj8, obj9, obj10)
+// Concept introduction (section 2, "Power Rule") — template A, definition
+// last. Running instance: derivatives of x, x², x³ and x⁴ from the limit
+// definition, set against n·x^(n−1). Old obj2 text is kept in
+// sectionsContent.obj2, unused; its five passages, formula box and link and
+// pitfall are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciPowTable = ciTableOpen(['f(x)', 'derivative from the limit definition', 'n · xⁿ⁻¹']) +
+  ciRow(['x', '1', '1 · x⁰ = 1']) +
+  ciRow(['x²', '2x', '2 · x¹'], { shade: true }) +
+  ciRow(['x³', '3x²', '3 · x²']) +
+  ciRow(['x⁴', '4x³', '4 · x³'], { shade: true, last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/derivatives/rules ──────────────────────────────────────────
 
@@ -979,6 +1000,10 @@ const schemas = {
       { x: 1.5, y: 0, text: 'f', pos: 's', color: 'g' }, { x: 0, y: 1, text: 'g', pos: 'w', color: 'g' },
       { x: 0.15, y: 3.85, text: 'Δ(fg) = g · Δf + f · Δg + Δf · Δg', pos: 'e' }, { x: 0.15, y: 3.45, text: 'divide by Δx and let Δx → 0: the corner term vanishes', pos: 'e' }, { x: 0.15, y: 3.05, text: '(fg)′ = f′g + fg′', pos: 'e', color: 'r' }],
     caption: 'Each factor grows while the other stays fixed' };
+  const conceptIntroFigures = {
+    powTable: ciPowTable,
+  };
+
   const demoUnits = {
     mvt: demoUnitFrame({
       svg: functionMVTDiagrams.quadratic,
@@ -1033,11 +1058,42 @@ const schemas = {
       ] },
     ],
   };
+  // TheoremCard data (mean-value-theorem-chain); every fact is from the section text
+  const mvtChain = {
+    header: { kicker: 'Derivatives', title: 'From Rolle’s Theorem to the Mean Value Theorem', lede: 'The Mean Value Theorem is primarily a theoretical tool.' },
+    chain: [
+      { name: 'Rolle’s Theorem', text: "$f(a) = f(b) \\implies f'(c) = 0$", edge: 'special case $f(a) = f(b)$' },
+      { name: 'Mean Value Theorem', text: "$f'(c) = \\dfrac{f(b) - f(a)}{b - a}$", edge: 'proves' },
+      { name: 'Uses', items: [
+        'A function with positive derivative on an interval is increasing',
+        'Two functions with the same derivative differ by a constant',
+        'The connection between antiderivatives and definite integrals in the Fundamental Theorem of Calculus',
+      ] },
+    ],
+  };
+
+  // TheoremCard data (rolle-theorem-card); every fact is from the section text
+  const rolleCard = {
+    header: { kicker: 'Derivatives', title: 'Rolle’s Theorem', lede: 'Click a hypothesis to see what it does and what breaks without it.' },
+    theorem: {
+      hypotheses: [
+        { text: '$f$ is continuous on $[a, b]$', job: 'Keeps the graph from jumping over the turning point.' },
+        { text: '$f$ is differentiable on $(a, b)$', job: 'The graph has a tangent line at every interior point, including the one where it turns.',
+          counter: "$f(x) = |x|$ on $[-1, 1]$: $f(-1) = f(1) = 1$, yet $f'(x)$ is $-1$ or $1$ and never $0$. The corner at $x = 0$ breaks differentiability." },
+        { text: '$f(a) = f(b)$', job: 'Equal endpoint values make the secant through the endpoints flat.' },
+      ],
+      conclusion: "$f'(c) = 0$ for some $c \\in (a, b)$",
+      meaning: 'A function that starts and ends at the same value must have a horizontal tangent somewhere between.',
+    },
+  };
+
 
   return {
   props:{
+      mvtChain, rolleCard,
     derivRuleOutline,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     theoremsTable,
@@ -1055,17 +1111,85 @@ const schemas = {
 }
    }
 
-export default function RulesPage({derivRuleOutline, 
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function RulesPage({mvtChain, rolleCard, derivRuleOutline, 
   seoData,
   sectionsContent,
   introContent,
   theoremsTable,
   overviewTable,
   faqQuestions,
-  schemas, demoUnits
+  schemas, demoUnits, conceptIntroFigures
 }) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Working out each derivative from the limit definition is slow. Do the answers for powers of x share a pattern?`,
+        content: [
+          `Line up the derivatives of the first four powers of $x$.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `In every row the exponent comes down in front, and the new exponent is one less.`,
+        content: [
+          ciTable('powTable'),
+          `Four limit computations, one pattern.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Bring the exponent down, then lower it by one.`,
+        content: [
+          `Negative and fractional exponents follow the same two steps as positive ones: the exponent comes down as a coefficient, and the new exponent is one less than the old. Roots and reciprocals are first rewritten as powers, $\\sqrt{x} = x^{1/2}$ and $\\frac{1}{x^2} = x^{-2}$, so that the rule can be applied to them. The result is then usually written back in the original form, as in $-2x^{-3} = -\\frac{2}{x^3}$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **power rule**: for any real exponent $n$, the derivative of $x^n$ is $n x^{n-1}$.`,
+        formula: [
+          `For any real exponent $n$:`,
+          `@academic[formula_callout:Power Rule (Derivatives)
+$$\\frac{d}{dx}[x^n] = n x^{n-1}$$
+/calculus/formulas#power_rule_derivatives]@`,
+          `@academic[formulas_link:Browse all derivative formulas
+/calculus/formulas]@`,
+        ],
+        footer: `So $\\frac{d}{dx}[x^4] = 4x^3$ and $\\frac{d}{dx}[x^{1/2}] = \\frac{1}{2}x^{-1/2}$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The rule covers every real exponent, and with the sum and constant multiple rules it differentiates any polynomial.`,
+        content: [
+          `The rule covers positive integers ($x^3 \\to 3x^2$), negative integers ($x^{-2} \\to -2x^{-3}$), fractions ($x^{1/2} \\to \\frac{1}{2}x^{-1/2}$), and irrational exponents ($x^\\pi \\to \\pi x^{\\pi - 1}$). For positive integer $n$, the proof uses the binomial expansion of $(x+h)^n$ in the limit definition. Extension to rational exponents follows from implicit differentiation; for all real exponents it uses [logarithmic differentiation](!/calculus/derivatives/techniques) or the generalized exponential $x^n = e^{n \\ln x}$.`,
+          `The power rule is the most frequently applied differentiation formula. Combined with the constant multiple and sum rules, it handles all polynomials and many algebraic expressions directly.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `One less than a negative exponent is more negative, not closer to zero.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Moving a negative exponent toward zero
+Lowering $-2$ to $-1$ gives $\\frac{d}{dx}[x^{-2}] = -2x^{-1}$, which is $-1$ at $x = 2$. One less than $-2$ is $-3$: the derivative is $-2x^{-3}$, which is $-0.25$ at $x = 2$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the constant multiple, sum and difference, product, quotient and chain rules, the mean value theorem, Rolle's theorem and L'Hôpital's rule.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -1081,7 +1205,7 @@ export default function RulesPage({derivRuleOutline,
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1134,6 +1258,16 @@ export default function RulesPage({derivRuleOutline,
           sectionsContent.obj8.content,
                   <div key={'unit-mvt'} dangerouslySetInnerHTML={{ __html: demoUnits.mvt }} />,
           `Somewhere the instantaneous rate equals the average rate: that is the whole theorem, and Rolle&#8217;s is its level special case.`,
+          <DiagramFrame
+            key={'obj8-theorem'}
+            id="mean-value-theorem-chain"
+            title="From Rolle’s Theorem to the Mean Value Theorem"
+            source="/calculus/derivatives/rules"
+            before={`The theorem is a theoretical tool more than a computing device. The chain below shows where it comes from and what it proves.`}
+            after={`Each use rests on the same step: compare the average rate over the interval with the instantaneous rate at one point.`}
+          >
+            <TheoremCard data={mvtChain} variant="chain" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1144,6 +1278,16 @@ export default function RulesPage({derivRuleOutline,
           sectionsContent.obj9.content,
           <div key={'unit-rolleSine'} dangerouslySetInnerHTML={{ __html: demoUnits.rolleSine }} />,
           `Between two roots of f there is always a root of f′: here between 0 and π lies π/2.`,
+          <DiagramFrame
+            key={'obj9-theorem'}
+            id="rolle-theorem-card"
+            title="Rolle’s Theorem"
+            source="/calculus/derivatives/rules"
+            before={`The card lists the three hypotheses with the job each one does. Drop one to see what breaks.`}
+            after={`The corner of $|x|$ is the standard failure: two hypotheses hold, the third does not, and the conclusion goes with it.`}
+          >
+            <TheoremCard data={rolleCard} variant="card" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

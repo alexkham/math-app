@@ -1084,6 +1084,8 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import partialPermutationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/partialPermutationDiagrams'
 import simpleCombinationDiagrams from '@/app/components/combinatorics/new-visualizers/scenes/simpleCombinationDiagrams'
 import { tableHeaders } from '@/app/styles/theme'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -1650,7 +1652,7 @@ $$\\frac{n!}{n_1! \\, n_2! \\cdots n_k!}, \\quad n_1 + n_2 + \\cdots + n_k = n.$
 
 @academic[pitfall,aside:true,width:35%:Forgetting k! for unnamed groups
 Splitting $6$ people into $3$ pairs with no names as $\\frac{6!}{2! \\, 2! \\, 2!} = 90$ counts each split once for every one of the $3! = 6$ ways to name the pairs. The number of splits is $\\frac{90}{3!} = 15$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-k-for-unnamed-groups)]@
 
 Here $n$ is the total number of distinct items to partition into $k$ groups of sizes $n_1, n_2, \\ldots, n_k$ respectively, where the groups are labeled (distinguishable) and the order within each group does not matter.
 
@@ -1697,7 +1699,7 @@ $$r^n.$$
 
 @academic[pitfall,aside:true,width:35%:Swapping base and exponent
 Assigning $5$ employees to $3$ projects as $5^3 = 125$ treats each project as picking one employee. Each employee picks one of $3$ projects, so the count is $3^5 = 243$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-base-and-exponent)]@
 
 Here $n$ is the total number of distinct items to assign and $r$ is the number of labeled containers, where each item can go into any container and containers can be empty.
 
@@ -1743,7 +1745,7 @@ $$\\left(\\!\\!\\binom{r}{n}\\!\\!\\right) = \\binom{n + r - 1}{r - 1}.$$
 
 @academic[pitfall,aside:true,width:35%:Swapping items and containers
 For $7$ identical candies and $3$ children, putting $n = 3$ and $r = 7$ into the formula gives $\\binom{9}{6} = 84$. With $n = 7$ candies and $r = 3$ children, the count is $\\binom{7 + 3 - 1}{3 - 1} = \\binom{9}{2} = 36$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-items-and-containers)]@
 
 Here $n$ is the total number of identical items to distribute into $r$ labeled containers, where empty containers are allowed and only the count in each container matters.
 
@@ -1792,7 +1794,7 @@ $$\\binom{n - 1}{r - 1}.$$
 
 @academic[pitfall,aside:true,width:35%:Allowing empty containers
 Counting $7$ identical candies for $3$ children as $\\binom{7 + 3 - 1}{3 - 1} = 36$ includes splits like $7 + 0 + 0$, where a child gets nothing. With at least one candy each, the count is $\\binom{7 - 1}{3 - 1} = \\binom{6}{2} = 15$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-allowing-empty-containers)]@
 
 Here $n$ is the total number of identical items to distribute into $r$ labeled containers, where each container must receive at least one item and only the count in each container matters.
 
@@ -1841,55 +1843,8 @@ Understanding these different combination scenarios is essential because each si
   
       pitfalls: {
         title: `Common Pitfalls`,
-        content: `Four mistakes come up again and again when a counting formula from this page is put to work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Forgetting k! for unnamed groups**
-
-The formula $\\frac{n!}{n_1! \\, n_2! \\cdots n_k!}$ counts splits into labeled groups. It is used for groups that have no names, so each split is counted once for every way of attaching the names to groups of the same size.
-
-Wrong working: $6$ people are to be split into $3$ pairs, with no names for the pairs. The count is given as $\\frac{6!}{2! \\, 2! \\, 2!} = \\frac{720}{8} = 90$.
-
-Right working: the $90$ counts named pairs, Pair 1, Pair 2 and Pair 3. Any one split into pairs can be named in $3! = 6$ ways, so the number of splits is $\\frac{90}{6} = 15$. Only groups of equal size can be exchanged like this: if all the sizes are different, the sizes already tell the groups apart and no division is needed.
-
-Why it happens: the formula looks complete, and problems rarely say whether the groups have names, so it is easy to miss that the formula assumes they do.
-
-How to check: count directly. Person 1 has $5$ possible partners; of the $4$ people left, the first has $3$ possible partners; the last $2$ form the third pair. That gives $5 \\cdot 3 \\cdot 1 = 15$.
-
-**Swapping items and containers**
-
-In $\\binom{n + r - 1}{r - 1}$ the number of items $n$ and the number of containers $r$ do different jobs, and the two are put into the formula the wrong way round.
-
-Wrong working: $7$ identical candies are shared among $3$ children. With $n = 3$ and $r = 7$, the count is given as $\\binom{3 + 7 - 1}{7 - 1} = \\binom{9}{6} = 84$.
-
-Right working: the candies are the items and the children are the containers, so $n = 7$ and $r = 3$: $\\binom{7 + 3 - 1}{3 - 1} = \\binom{9}{2} = 36$.
-
-Why it happens: the top index $n + r - 1$ is the same either way, so the swap only shows in the bottom index. The notation $\\left(\\!\\!\\binom{r}{n}\\!\\!\\right)$ also writes the number of containers on top, the opposite of $\\binom{n}{r}$.
-
-How to check: try a case small enough to list. $2$ candies for $3$ children: $2 + 0 + 0$ in $3$ orders and $1 + 1 + 0$ in $3$ orders, $6$ in all. The correct substitution gives $\\binom{4}{2} = 6$; the swapped one gives $\\binom{4}{1} = 4$.
-
-**Allowing empty containers**
-
-Every container must receive at least one unit, but the weak composition formula is used, and it also counts the distributions that leave some containers empty.
-
-Wrong working: $7$ identical candies for $3$ children, each child getting at least one. The count is given as $\\binom{7 + 3 - 1}{3 - 1} = \\binom{9}{2} = 36$.
-
-Right working: $\\binom{7 - 1}{3 - 1} = \\binom{6}{2} = 15$. The same number comes from giving each child one candy first and sharing the remaining $4$ freely: $\\binom{4 + 3 - 1}{3 - 1} = \\binom{6}{2} = 15$.
-
-Why it happens: the two problems differ in a single condition, and the weak formula is usually the one learned first.
-
-How to check: the difference $36 - 15 = 21$ must be the number of distributions with an empty child. Exactly one child gets nothing in $3 \\cdot 6 = 18$ ways (choose that child, then split $7$ between the other two with at least one each), and two children get nothing in $3$ ways. Indeed $18 + 3 = 21$.
-
-**Swapping base and exponent**
-
-The count $r^n$ for $n$ distinct items in $r$ labeled containers is written as $n^r$.
-
-Wrong working: $5$ employees are assigned to $3$ projects, and the count is given as $5^3 = 125$.
-
-Right working: each of the $5$ employees chooses one of the $3$ projects, so the count is $3 \\cdot 3 \\cdot 3 \\cdot 3 \\cdot 3 = 3^5 = 243$.
-
-Why it happens: "$5$ employees to $3$ projects" names the numbers in the order base, then exponent. The count $5^3$ answers a different question, in which each project picks one employee and one employee may be picked by several projects.
-
-How to check: try $2$ employees and $3$ projects. Each employee has $3$ choices, giving $9$ assignments, which is $3^2$, not $2^3 = 8$. The exponent is always the number of choices made, one for each item.`,
+        content: `Four mistakes come up again and again when a counting formula from this page is put to work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
+        after: `Two of the slips set up stars and bars wrongly: the items are $n$ and the containers are $r$, and $\\binom{n + r - 1}{r - 1}$ allows empty containers, so at least one in each needs $\\binom{n - 1}{r - 1}$. The other two misplace a factor: groups without names divide by $k!$, and in an assignment count the base is the number of options and the exponent the number of items placed. A case small enough to list, or a direct count, catches each slip.`,
       },
 
       faq: {
@@ -2035,8 +1990,40 @@ const schemas = {
     symTable: ciSymTable,
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'forgetting-k-for-unnamed-groups', name: `Forgetting k! for unnamed groups`, errorAt: 1,
+        what: `The formula $\\frac{n!}{n_1! \\, n_2! \\cdots n_k!}$ counts splits into labeled groups. It is used for groups that have no names, so each split is counted once for every way of attaching the names to groups of the same size.`,
+        wrong: [`$6$ people are to be split into $3$ pairs, with no names for the pairs.`, `The count is given as $\\frac{6!}{2! \\, 2! \\, 2!} = \\frac{720}{8} = 90$.`],
+        right: [`$6$ people are to be split into $3$ pairs, with no names for the pairs.`, `The $90$ counts named pairs, Pair 1, Pair 2 and Pair 3. Any one split into pairs can be named in $3! = 6$ ways, so the number of splits is $\\frac{90}{6} = 15$. Only groups of equal size can be exchanged like this: if all the sizes are different, the sizes already tell the groups apart and no division is needed.`],
+        why: `The formula looks complete, and problems rarely say whether the groups have names, so it is easy to miss that the formula assumes they do.`,
+        check: `Count directly. Person 1 has $5$ possible partners; of the $4$ people left, the first has $3$ possible partners; the last $2$ form the third pair. That gives $5 \\cdot 3 \\cdot 1 = 15$.` },
+      { id: 'swapping-items-and-containers', name: `Swapping items and containers`, errorAt: 1,
+        what: `In $\\binom{n + r - 1}{r - 1}$ the number of items $n$ and the number of containers $r$ do different jobs, and the two are put into the formula the wrong way round.`,
+        wrong: [`$7$ identical candies are shared among $3$ children.`, `With $n = 3$ and $r = 7$, the count is given as $\\binom{3 + 7 - 1}{7 - 1} = \\binom{9}{6} = 84$.`],
+        right: [`$7$ identical candies are shared among $3$ children.`, `The candies are the items and the children are the containers, so $n = 7$ and $r = 3$: $\\binom{7 + 3 - 1}{3 - 1} = \\binom{9}{2} = 36$.`],
+        why: `The top index $n + r - 1$ is the same either way, so the swap only shows in the bottom index. The notation $\\left(\\!\\!\\binom{r}{n}\\!\\!\\right)$ also writes the number of containers on top, the opposite of $\\binom{n}{r}$.`,
+        check: `Try a case small enough to list. $2$ candies for $3$ children: $2 + 0 + 0$ in $3$ orders and $1 + 1 + 0$ in $3$ orders, $6$ in all. The correct substitution gives $\\binom{4}{2} = 6$; the swapped one gives $\\binom{4}{1} = 4$.` },
+      { id: 'allowing-empty-containers', name: `Allowing empty containers`, errorAt: 1,
+        what: `Every container must receive at least one unit, but the weak composition formula is used, and it also counts the distributions that leave some containers empty.`,
+        wrong: [`$7$ identical candies for $3$ children, each child getting at least one.`, `The count is given as $\\binom{7 + 3 - 1}{3 - 1} = \\binom{9}{2} = 36$.`],
+        right: [`$7$ identical candies for $3$ children, each child getting at least one.`, `$\\binom{7 - 1}{3 - 1} = \\binom{6}{2} = 15$. The same number comes from giving each child one candy first and sharing the remaining $4$ freely: $\\binom{4 + 3 - 1}{3 - 1} = \\binom{6}{2} = 15$.`],
+        why: `The two problems differ in a single condition, and the weak formula is usually the one learned first.`,
+        check: `The difference $36 - 15 = 21$ must be the number of distributions with an empty child. Exactly one child gets nothing in $3 \\cdot 6 = 18$ ways (choose that child, then split $7$ between the other two with at least one each), and two children get nothing in $3$ ways. Indeed $18 + 3 = 21$.` },
+      { id: 'swapping-base-and-exponent', name: `Swapping base and exponent`, errorAt: 0,
+        what: `The count $r^n$ for $n$ distinct items in $r$ labeled containers is written as $n^r$.`,
+        wrong: [`$5$ employees are assigned to $3$ projects, and the count is given as $5^3 = 125$.`],
+        right: [`Each of the $5$ employees chooses one of the $3$ projects, so the count is $3 \\cdot 3 \\cdot 3 \\cdot 3 \\cdot 3 = 3^5 = 243$.`],
+        why: `"$5$ employees to $3$ projects" names the numbers in the order base, then exponent. The count $5^3$ answers a different question, in which each project picks one employee and one employee may be picked by several projects.`,
+        check: `Try $2$ employees and $3$ projects. Each employee has $3$ choices, giving $9$ assignments, which is $3^2$, not $2^3 = 8$. The exponent is always the number of choices made, one for each item.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     conceptIntroFigures,
     seoData: {
       title: "Combinations: Formula, Types & Examples | Learn Math Class",
@@ -2059,7 +2046,7 @@ const schemas = {
 }
   }
   
-export default function CombinationsPage({seoData, sectionsContent, introContent, simpleCombinationTable,
+export default function CombinationsPage({ pitfallData,seoData, sectionsContent, introContent, simpleCombinationTable,
   partitionTable, weakCompositionTable, strongCompositionTable, distributionTable,
   combinationsScenariosTableData, faqQuestions, schemas, conceptIntroFigures}) {
 
@@ -2281,6 +2268,15 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
         link:'',
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="combination-pitfalls"
+            title="Common pitfalls with combinations"
+            source="/combinatorics/combinations"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

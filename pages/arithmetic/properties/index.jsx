@@ -764,6 +764,7 @@ import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/Taxon
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1132,7 +1133,7 @@ For $3(4 + 5)$: applying the formula gives $3 \\cdot 4 + 3 \\cdot 5 = 12 + 15 = 
 
 @academic[pitfall,aside:true,width:35%:Distributing only to the first term
 Multiplying only the first addend gives $3(4 + 5) = 3 \\cdot 4 + 5 = 17$. The factor multiplies both addends: $3 \\cdot 4 + 3 \\cdot 5 = 27$, the same as $3 \\cdot 9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-distributing-only-to-the-first-term)]@
 
 The factor in front of the parentheses multiplies the entire sum. With more addends inside, the pattern extends term by term: $2(x + y + 3) = 2x + 2y + 6$, one product for each addend. The number of products always matches the number of addends inside the parentheses.
  
@@ -1259,7 +1260,7 @@ The negative of a negative is the original number. The expression $-(-5)$ equals
 
 @academic[pitfall,aside:true,width:35%:Using the product sign rule for sums
 Applying "two negatives make a positive" to a sum gives $(-3) + (-4) = 7$. The rule is about products, $(-3)(-4) = 12$; adding two negatives goes further below zero, $(-3) + (-4) = -7$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-product-sign-rule-for-sums)]@
  
 These rules are not independent axioms — they follow from the [distributive property](!/arithmetic/properties#5) combined with the definition of additive inverses. Starting from $(-a)(b) + ab = (-a + a)(b) = 0 \\cdot b = 0$, the value $(-a)(b)$ must equal $-(ab)$. A similar derivation produces the other two rules.`,
     before: ``,
@@ -1278,7 +1279,7 @@ This definition has consequences. Because subtraction reduces to addition, certa
 
 @academic[pitfall,aside:true,width:35%:Grouping the terms after a minus sign
 Reading $10 - 4 + 3$ as $10 - (4 + 3)$ gives $3$. The operations go left to right, $(10 - 4) + 3 = 9$, which is also $10 + (-4) + 3 = 9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-grouping-the-terms-after-a-minus-sign)]@
  
 The [commutative](!/arithmetic/properties#3) and [associative](!/arithmetic/properties#4) properties, however, do not transfer cleanly. The expression $a - b$ does not equal $b - a$, and $(a - b) - c$ does not equal $a - (b - c)$. The reason is that subtraction is shorthand for an asymmetric operation — $a + (-b)$ treats $a$ and $b$ differently — so the symmetry that addition enjoys is lost in the abbreviation.
  
@@ -1299,7 +1300,7 @@ The structural parallel with subtraction is exact. Subtraction is addition of an
 
 @academic[pitfall,aside:true,width:35%:Taking division by zero as zero
 Giving $5 \\div 0$ the value $0$, like $0 \\div 5 = 0$, fails the check $0 \\cdot 0 = 0 \\neq 5$. No number times $0$ gives $5$, so $5 \\div 0$ is undefined, while $0 \\div 5 = 0$ because $0 \\cdot 5 = 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-division-by-zero-as-zero)]@
  
 The condition $b \\neq 0$ is unavoidable. Since $0$ has no multiplicative inverse (see [inverse elements](!/arithmetic/properties#7)), the expression $\\frac{a}{0}$ has no meaning. This is the formal reason division by zero is undefined.
  
@@ -1351,69 +1352,9 @@ The properties are usually applied without being named. The point of stating the
 
   obj16: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for many of the wrong answers when these properties are used. Four are marked where they happen in the sections above; mixing up the two identities is the one the identity section already points out. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Distributing only to the first term**
-
-A factor in front of parentheses is multiplied into the first addend only, and the rest of the sum is copied unchanged.
-
-Wrong working: $3(4 + 5) = 3 \\cdot 4 + 5 = 12 + 5 = 17$. In algebra the same slip turns $2(x + 3)$ into $2x + 3$.
-
-Right working: the factor multiplies every addend, so $3(4 + 5) = 3 \\cdot 4 + 3 \\cdot 5 = 12 + 15 = 27$ and $2(x + 3) = 2x + 6$.
-
-Why it happens: the factor stands right next to the first addend and seems to belong to it alone, while the parentheses that extend it to the whole sum are easy to overlook.
-
-How to check: when the parentheses hold numbers, add them first: $3(4 + 5) = 3 \\cdot 9 = 27$, not $17$. With a variable, substitute a value: for $x = 1$, $2(1 + 3) = 8$, while $2 \\cdot 1 + 3 = 5$.
-
-**Mixing up the two identities**
-
-The identity of addition is used for multiplication, so multiplying by $0$ is taken to leave a number unchanged, just as adding $0$ does.
-
-Wrong working: $7 + 0 = 7$, so $7 \\cdot 0 = 7$ as well.
-
-Right working: $0$ leaves a number unchanged only under addition, $7 + 0 = 7$. The identity of multiplication is $1$, so $7 \\cdot 1 = 7$, and by the zero property $7 \\cdot 0 = 0$.
-
-Why it happens: adding nothing changes nothing, and multiplying by zero feels like the same kind of "doing nothing" to the number.
-
-How to check: read the product as repeated addition. $7 \\cdot 1$ is one seven, which is $7$; $7 \\cdot 0$ is no sevens at all, which is $0$.
-
-**Using the product sign rule for sums**
-
-The rule that two negatives give a positive is applied to addition, so the sum of two negative numbers comes out positive.
-
-Wrong working: two negatives make a positive, so $(-3) + (-4) = 7$.
-
-Right working: adding a negative number moves down the number line. Starting at $-3$ and moving $4$ further down gives $(-3) + (-4) = -7$. The positive result belongs to the product: $(-3)(-4) = 12$.
-
-Why it happens: the rule is often memorized as a short slogan without the word "multiplying", and the slogan is then used on any expression with two minus signs.
-
-How to check: the sum of two numbers below zero is also below zero. A debt of $3$ plus a debt of $4$ is a debt of $7$, never a gain.
-
-**Grouping the terms after a minus sign**
-
-In a chain of subtractions and additions, the terms after a minus sign are added together first and their total is subtracted, as if the minus applied to everything that follows it.
-
-Wrong working: $10 - 4 + 3 = 10 - (4 + 3) = 10 - 7 = 3$.
-
-Right working: the operations go left to right, $(10 - 4) + 3 = 6 + 3 = 9$. Rewriting the subtraction as an addition gives the same: $10 + (-4) + 3 = 9$, and now the terms may be grouped in any way, for example $10 + (-4 + 3) = 10 + (-1) = 9$.
-
-Why it happens: sums can be regrouped freely, and the same freedom is used on an expression that contains a minus sign, where the associative property does not hold.
-
-How to check: rewrite every subtraction as adding the opposite before regrouping. Each minus sign then stays attached to the number right after it: $10 + (-4) + 3$ has the terms $10$, $-4$ and $3$, which add to $9$.
-
-**Taking division by zero as zero**
-
-A number divided by zero is given the value $0$, by analogy with zero divided by a number.
-
-Wrong working: $0 \\div 5 = 0$, so $5 \\div 0 = 0$ as well.
-
-Right working: a quotient $q = a \\div b$ must satisfy $q \\cdot b = a$. For $0 \\div 5$, the value $q = 0$ works, since $0 \\cdot 5 = 0$. For $5 \\div 0$, the quotient would need $q \\cdot 0 = 5$, but $q \\cdot 0 = 0$ for every $q$ by the zero property, so no value works and $5 \\div 0$ is undefined. In the terms of this page, $\\frac{5}{0} = 5 \\cdot \\frac{1}{0}$ would need the multiplicative inverse of $0$, which does not exist.
-
-Why it happens: both expressions contain the same two numbers and one of them really is $0$. Division is not commutative, so swapping the two numbers changes the question.
-
-How to check: multiply back. The quotient times the divisor must give the dividend, and $0 \\cdot 0 = 0$, not $5$.`,
+    content: `Five mistakes account for many of the wrong answers when these properties are used. Four are marked where they happen in the sections above; mixing up the two identities is the one the identity section already points out. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip applies a property where it does not hold. The distributive law multiplies every addend, $0$ is the identity for addition and $1$ for multiplication, two negatives make a positive only in a product, a subtraction cannot be regrouped unless each minus sign stays with its number, and division by zero has no value at all. Working the numbers out directly, or multiplying back, catches each slip.`,
     link: '',
   },
  
@@ -1644,8 +1585,46 @@ const schemas = {
     footnote: 'Subtraction and division are derived operations: $a - b = a + (-b)$ and $\\frac{a}{b} = a \\cdot \\frac{1}{b}$. **Distributive** links the two main ones: $a(b + c) = ab + ac$.',
   };
 
+  // MistakeFix batch 8, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'distributing-only-to-the-first-term', name: `Distributing only to the first term`, errorAt: 0,
+        what: `A factor in front of parentheses is multiplied into the first addend only, and the rest of the sum is copied unchanged.`,
+        wrong: [`$3(4 + 5) = 3 \\cdot 4 + 5 = 12 + 5 = 17$. In algebra the same slip turns $2(x + 3)$ into $2x + 3$.`],
+        right: [`The factor multiplies every addend, so $3(4 + 5) = 3 \\cdot 4 + 3 \\cdot 5 = 12 + 15 = 27$ and $2(x + 3) = 2x + 6$.`],
+        why: `The factor stands right next to the first addend and seems to belong to it alone, while the parentheses that extend it to the whole sum are easy to overlook.`,
+        check: `When the parentheses hold numbers, add them first: $3(4 + 5) = 3 \\cdot 9 = 27$, not $17$. With a variable, substitute a value: for $x = 1$, $2(1 + 3) = 8$, while $2 \\cdot 1 + 3 = 5$.` },
+      { id: 'mixing-up-the-two-identities', name: `Mixing up the two identities`, errorAt: 0,
+        what: `The identity of addition is used for multiplication, so multiplying by $0$ is taken to leave a number unchanged, just as adding $0$ does.`,
+        wrong: [`$7 + 0 = 7$, so $7 \\cdot 0 = 7$ as well.`],
+        right: [`$0$ leaves a number unchanged only under addition, $7 + 0 = 7$. The identity of multiplication is $1$, so $7 \\cdot 1 = 7$, and by the zero property $7 \\cdot 0 = 0$.`],
+        why: `Adding nothing changes nothing, and multiplying by zero feels like the same kind of "doing nothing" to the number.`,
+        check: `Read the product as repeated addition. $7 \\cdot 1$ is one seven, which is $7$; $7 \\cdot 0$ is no sevens at all, which is $0$.` },
+      { id: 'using-the-product-sign-rule-for-sums', name: `Using the product sign rule for sums`, errorAt: 0,
+        what: `The rule that two negatives give a positive is applied to addition, so the sum of two negative numbers comes out positive.`,
+        wrong: [`Two negatives make a positive, so $(-3) + (-4) = 7$.`],
+        right: [`Adding a negative number moves down the number line. Starting at $-3$ and moving $4$ further down gives $(-3) + (-4) = -7$. The positive result belongs to the product: $(-3)(-4) = 12$.`],
+        why: `The rule is often memorized as a short slogan without the word "multiplying", and the slogan is then used on any expression with two minus signs.`,
+        check: `The sum of two numbers below zero is also below zero. A debt of $3$ plus a debt of $4$ is a debt of $7$, never a gain.` },
+      { id: 'grouping-the-terms-after-a-minus-sign', name: `Grouping the terms after a minus sign`, errorAt: 0,
+        what: `In a chain of subtractions and additions, the terms after a minus sign are added together first and their total is subtracted, as if the minus applied to everything that follows it.`,
+        wrong: [`$10 - 4 + 3 = 10 - (4 + 3) = 10 - 7 = 3$.`],
+        right: [`The operations go left to right, $(10 - 4) + 3 = 6 + 3 = 9$. Rewriting the subtraction as an addition gives the same: $10 + (-4) + 3 = 9$, and now the terms may be grouped in any way, for example $10 + (-4 + 3) = 10 + (-1) = 9$.`],
+        why: `Sums can be regrouped freely, and the same freedom is used on an expression that contains a minus sign, where the associative property does not hold.`,
+        check: `Rewrite every subtraction as adding the opposite before regrouping. Each minus sign then stays attached to the number right after it: $10 + (-4) + 3$ has the terms $10$, $-4$ and $3$, which add to $9$.` },
+      { id: 'taking-division-by-zero-as-zero', name: `Taking division by zero as zero`, errorAt: 0,
+        what: `A number divided by zero is given the value $0$, by analogy with zero divided by a number.`,
+        wrong: [`$0 \\div 5 = 0$, so $5 \\div 0 = 0$ as well.`],
+        right: [`A quotient $q = a \\div b$ must satisfy $q \\cdot b = a$. For $0 \\div 5$, the value $q = 0$ works, since $0 \\cdot 5 = 0$. For $5 \\div 0$, the quotient would need $q \\cdot 0 = 5$, but $q \\cdot 0 = 0$ for every $q$ by the zero property, so no value works and $5 \\div 0$ is undefined. In the terms of this page, $\\frac{5}{0} = 5 \\cdot \\frac{1}{0}$ would need the multiplicative inverse of $0$, which does not exist.`],
+        why: `Both expressions contain the same two numbers and one of them really is $0$. Division is not commutative, so swapping the two numbers changes the question.`,
+        check: `Multiply back. The quotient times the divisor must give the dividend, and $0 \\cdot 0 = 0$, not $5$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     operationPropertyMatrix,
     arithPropOutline,
      sectionsContent,
@@ -1669,7 +1648,7 @@ const schemas = {
 }
    }
 
-export default function ArithmeticProperties({operationPropertyMatrix, arithPropOutline, seoData, sectionsContent, introContent, obj5Table, obj9Table, obj12Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ArithmeticProperties({ pitfallData,operationPropertyMatrix, arithPropOutline, seoData, sectionsContent, introContent, obj5Table, obj9Table, obj12Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1863,6 +1842,15 @@ export default function ArithmeticProperties({operationPropertyMatrix, arithProp
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="arithmetic-property-pitfalls"
+            title="Common pitfalls with the properties of arithmetic"
+            source="/arithmetic/properties"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

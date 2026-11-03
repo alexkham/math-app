@@ -1775,6 +1775,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
 
 
 
@@ -2583,10 +2584,25 @@ const schemas = {
       { id: 'diag', symbol: 'PDP⁻¹', name: '[Diagonalizable](!/linear-algebra/eigen/diagonalization)', note: '$P$ invertible' },
       { id: 'sq', symbol: 'n × n', name: 'Square', note: 'an eigendecomposition may not exist' },
     ],
+  };  // TheoremCard data (spectral-theorem-chain); every fact is from the section text
+  const spectralChain = {
+    header: { kicker: 'Spectral decomposition', title: 'The Spectral Theorem', lede: 'Every real symmetric matrix is orthogonally diagonalizable.' },
+    chain: [
+      { name: 'Real symmetric $A$', text: '$A = A^T$', edge: 'guarantees' },
+      { name: 'Three facts', items: [
+        'All eigenvalues are real; no complex eigenvalues can appear',
+        'Eigenvectors for distinct eigenvalues are orthogonal: $\\lambda_i \\neq \\lambda_j \\implies \\mathbf{q}_i \\cdot \\mathbf{q}_j = 0$',
+        'There are $n$ orthonormal eigenvectors even when eigenvalues repeat: Gram–Schmidt inside each repeated eigenspace',
+      ], edge: 'together give' },
+      { name: 'Orthogonal diagonalization', text: '$A = QDQ^T$', items: ['$Q$: an orthonormal basis of eigenvectors for $\\mathbb{R}^n$', 'Exists for every real symmetric $A$'] },
+    ],
   };
+
+
 
   return {
   props:{
+      spectralChain,
     spectralNest,
     demoUnits,
     conceptIntroFigures,
@@ -2610,7 +2626,9 @@ const schemas = {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
 
-export default function SpectralDecompositionPage({spectralNest, 
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function SpectralDecompositionPage({spectralChain, spectralNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -2721,7 +2739,17 @@ Mathematicians were calling the set of eigenvalues a spectrum by the early 1900s
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          sectionsContent.obj2.content,          <DiagramFrame
+            key={'obj2-theorem'}
+            id="spectral-theorem-chain"
+            title="The Spectral Theorem: three facts, one decomposition"
+            source="/linear-algebra/decompositions/spectral"
+            before={`The theorem rests on three facts about a real symmetric matrix. The chain shows how they combine into $A = QDQ^T$.`}
+            after={`Only the third fact needs any work, and only inside a repeated eigenspace: between different eigenspaces the orthogonality is automatic.`}
+          >
+            <TheoremCard data={spectralChain} variant="chain" theme={theoremTheme} />
+          </DiagramFrame>,
+
         ]
     },
     {

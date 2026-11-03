@@ -1047,6 +1047,7 @@ import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/Fun
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -1396,6 +1397,26 @@ const faqQuestions = {
   </tbody>
 </table>
 `
+
+    // Concept introduction (section 1, "Graph of the Sine Function") —
+    // template A, definition last. Running instance: sin x, sin(x + 2π) and
+    // sin(x + 4π) at the four quarter points. Old obj1 text is kept in
+    // sectionsContent.obj1, unused; its six passages, list, fact aside, the
+    // sinGraph demo frame, the sine profile diagram and their lines are
+    // carried in unchanged.
+    const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+    const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+      cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+    const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+    const ciRepeatTable = ciTableOpen(['x', 'sin x', 'sin(x + 2π)', 'sin(x + 4π)']) +
+      ciRow(['0', '0', '0', '0']) +
+      ciRow(['π/2', '1', '1', '1'], { shade: true }) +
+      ciRow(['π', '0', '0', '0']) +
+      ciRow(['3π/2', '−1', '−1', '−1'], { shade: true, last: true }) +
+      '</tbody></table>'
 
     const sectionsContent={
     obj0: {
@@ -1952,6 +1973,10 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     }],
   };
 
+  const conceptIntroFigures = {
+    repeatTable: ciRepeatTable,
+  };
+
   const demoUnits = {
     sinGraph: demoUnitFrame({
       svg: trigFunctionsGraphDiagrams.sin,
@@ -2235,6 +2260,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     sineKeyPointProfile,
     reciprocalGraphTree,
     demoUnits,
+    conceptIntroFigures,
          sectionsContent,
          introContent,
          obj4Table,
@@ -2255,9 +2281,88 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     }
    }
 
-export default function GraphsPage({phaseShiftBeforeAfter, tangentProfile, cosineProfile, sineProfile, sineKeyPointProfile, reciprocalGraphTree, seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits}) {
+export default function GraphsPage({phaseShiftBeforeAfter, tangentProfile, cosineProfile, sineProfile, sineKeyPointProfile, reciprocalGraphTree, seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Plot sin x far enough and the same shape keeps coming back.`,
+        content: [
+          `Compare the values at a few points with the values $2\\pi$ and $4\\pi$ further along.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Shifting x by 2π, or by any multiple of it, never changes the value.`,
+        content: [
+          ciTable('repeatTable'),
+          `The curve over $[2\\pi, 4\\pi]$ is an exact copy of the curve over $[0, 2\\pi]$.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `One cycle determines the whole graph.`,
+        content: [
+          `The wave begins at the origin: $\\sin(0) = 0$. It rises to its maximum value of $1$ at $x = \\frac{\\pi}{2}$, returns to zero at $x = \\pi$, drops to its minimum of $-1$ at $x = \\frac{3\\pi}{2}$, and returns to zero at $x = 2\\pi$. This completes one full cycle. The pattern then repeats identically — to the right without end, and (by extending leftward) to the left without end.`,
+          `Five key points define one period of the sine curve:`,
+          `- $(0, 0)$ — starting zero
+- $\\left(\\frac{\\pi}{2}, 1\\right)$ — maximum
+- $(\\pi, 0)$ — middle zero
+- $\\left(\\frac{3\\pi}{2}, -1\\right)$ — minimum
+- $(2\\pi, 0)$ — ending zero`,
+          `These five points, evenly spaced at intervals of $\\frac{\\pi}{2}$, are the skeleton of the graph. Connecting them with a smooth curve (not straight lines — the curve has a specific rounded shape, concave down from $0$ to $\\pi$ and concave up from $\\pi$ to $2\\pi$) produces the sine wave.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `A function is [periodic](!/trigonometry/definitions#periodic_function) when there is a positive number $P$ with $f(x + P) = f(x)$ for every $x$; the smallest such $P$ is its [period](!/trigonometry/definitions#period).`,
+        formula: [
+          `The graph of $y = \\sin(x)$ is a smooth, continuous wave that oscillates between $-1$ and $1$. It is the visual signature of the sine function and one of the most recognizable curves in mathematics.`,
+        ],
+        footer: `So $\\sin x$ is periodic with period $2\\pi$: $\\sin(x + 2\\pi) = \\sin x$ for every $x$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Period, amplitude and symmetry can all be read off a single cycle.`,
+        content: [
+          `The graph confirms several [properties](!/trigonometry/properties) at a glance. The period is $2\\pi$ — the horizontal length of one complete cycle. The amplitude is $1$ — the vertical distance from the midline ($y = 0$) to either extreme. The function is odd: the graph is symmetric about the origin, meaning the portion for negative $x$ is a $180°$ rotation of the portion for positive $x$. The zeros occur at every integer multiple of $\\pi$: $\\ldots, -2\\pi, -\\pi, 0, \\pi, 2\\pi, \\ldots$`,
+          <div key={'unit-sinGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.sinGraph }} />,
+          `Every property of the sine function has a visible counterpart on this curve.`,
+          `The same period with every property attached: the five key points of $y = \\sin(x)$ on $[0, 2\\pi]$, where the sign changes, where the bend changes, and the period, amplitude, range and symmetry the section reads off the graph.`,
+          <DiagramFrame
+            key={'obj1-profile'}
+            id="sine-profile"
+            title="Profile of the sine"
+            source="/trigonometry/graphs"
+          >
+            <FunctionAnalysis data={sineProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
+          </DiagramFrame>,
+          `The two strips change together at $x = \\pi$: the wave is positive exactly where it bends down and negative exactly where it bends up. That pairing holds for every period, since the pattern repeats every $2\\pi$.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A shift that repeats some values is not necessarily a period.`,
+        content: [
+          `Shifting by $\\pi$ keeps the zeros: $\\sin(0 + \\pi) = 0 = \\sin 0$. But $\\sin(\\frac{\\pi}{2} + \\pi) = -1$ while $\\sin\\frac{\\pi}{2} = 1$, so $\\pi$ is not a period.`,
+          `@academic[fact,aside:true,width:35%:A slanted cut through a paper tube
+Roll a sheet of paper into a tube, cut through it with one straight slanted cut, and unroll it: the cut edge is a sine wave. Around the tube the height of the cut rises and falls as the sine of the angle, and unrolling turns each angle $\\theta$ into a distance $r\\theta$ along the paper.]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the graphs of cosine, tangent and the reciprocal functions, the general sinusoidal form, amplitude, period, phase shift, vertical shift, finding an equation from a graph, the key-point method, notation and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
      {
@@ -2274,19 +2379,7 @@ export default function GraphsPage({phaseShiftBeforeAfter, tangentProfile, cosin
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-sinGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.sinGraph }} />,
-          `Every property of the sine function has a visible counterpart on this curve.`,
-          `The same period with every property attached: the five key points of $y = \\sin(x)$ on $[0, 2\\pi]$, where the sign changes, where the bend changes, and the period, amplitude, range and symmetry the section reads off the graph.`,
-          <DiagramFrame
-            key={'obj1-profile'}
-            id="sine-profile"
-            title="Profile of the sine"
-            source="/trigonometry/graphs"
-          >
-            <FunctionAnalysis data={sineProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
-          </DiagramFrame>,
-          `The two strips change together at $x = \\pi$: the wave is positive exactly where it bends down and negative exactly where it bends up. That pairing holds for every period, since the pattern repeats every $2\\pi$.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {

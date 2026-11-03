@@ -16,6 +16,8 @@ import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -359,7 +361,7 @@ $$a^m \\cdot a^n = a^{m+n}$$
 
 @academic[pitfall,aside:true,width:35%:Multiplying the exponents
 Treating $2^3 \\cdot 2^4$ as $2^{3 \\cdot 4} = 2^{12} = 4096$ multiplies the counts instead of adding them. There are seven factors of $2$ in all: $2^7 = 128$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-exponents)]@
 
 Three factors of $a$ followed by four more gives seven total — the exponents add. This holds for any natural numbers $m$ and $n$ and any base $a$.
 
@@ -388,7 +390,7 @@ $$\\frac{a^m}{a^n} = a^{m-n} \\qquad (m > n,\\; a \\neq 0)$$]@
 
 @academic[pitfall,aside:true,width:35%:Dividing the exponents
 Simplifying $\\frac{2^6}{2^2}$ to $2^{6 \\div 2} = 2^3 = 8$ divides the counts. Two of the six factors cancel, leaving four: $2^4 = 16$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-the-exponents)]@
 
 Five factors in the numerator minus three in the denominator leaves two — the exponent of the result is the difference.
 
@@ -420,7 +422,7 @@ $$(a^m)^n = a^{m \\cdot n}$$
 
 @academic[pitfall,aside:true,width:35%:Adding the exponents
 Writing $(y^5)^2$ as $y^{5+2} = y^7$ uses the product rule where it does not apply. Two copies of $y^5$ hold $5 \\cdot 2$ factors: $(y^5)^2 = y^{10}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-exponents)]@
 
 The outer exponent $n$ creates $n$ copies of $a^m$. The product rule then adds $m$ to itself $n$ times, producing $m \\cdot n$.
 
@@ -458,7 +460,7 @@ Each factor in the product acquires the exponent independently. This extends to 
 
 @academic[pitfall,aside:true,width:35%:Distributing the exponent over a sum
 Applying the rule to $(2 + 3)^2$ gives $2^2 + 3^2 = 13$. The rule covers products only; a sum is added first: $(2 + 3)^2 = 5^2 = 25$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-distributing-the-exponent-over-a-sum)]@
 
 The rule works because multiplication is commutative and associative — the order in which factors are grouped does not affect the product. Rewriting $(ab)(ab)(ab)$ as $(a \\cdot a \\cdot a)(b \\cdot b \\cdot b)$ is valid precisely because factors can be rearranged freely.
 
@@ -520,7 +522,7 @@ Simplify $\\left(\\frac{3x^2}{y}\\right)^3 \\cdot y^4$. The power of a quotient 
 
 @academic[pitfall,aside:true,width:35%:Leaving the coefficient unraised
 Writing $(2x^3)^4$ as $2x^{12}$ raises only the variable part. The $2$ is a factor of the product too: $2^4 x^{12} = 16x^{12}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-coefficient-unraised)]@
 
 Each step applies one law. When multiple laws are needed, working from the innermost grouping outward — simplifying parentheses first, then combining like bases — produces the cleanest path to the result.
 
@@ -539,80 +541,9 @@ To check results like these with your own numbers, use the [exponent calculator]
     },
     obj16: {
       title: `Common Pitfalls`,
-      content: `Five mistakes account for most wrong answers when the laws of exponents are applied. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Multiplying the exponents**
-
-Two powers of the same base are multiplied, and the exponents are multiplied as well, as if the operation between the powers passed on to the exponents.
-
-Wrong working:
-$$2^3 \\cdot 2^4 = 2^{3 \\cdot 4} = 2^{12} = 4096$$
-
-Right working: write out the factors and count them.
-$$2^3 \\cdot 2^4 = (2 \\cdot 2 \\cdot 2)(2 \\cdot 2 \\cdot 2 \\cdot 2) = 2^{3+4} = 2^7 = 128$$
-
-Why it happens: the powers are being multiplied, so multiplying the exponents feels like the matching move. Multiplying exponents belongs to a different law, the power of a power $(a^m)^n$.
-
-How to check: evaluate both sides with small numbers. $2^3 \\cdot 2^4 = 8 \\cdot 16 = 128$, which is $2^7$, not $2^{12} = 4096$.
-
-**Dividing the exponents**
-
-Two powers of the same base are divided, and the exponents are divided too.
-
-Wrong working:
-$$\\frac{2^6}{2^2} = 2^{6 \\div 2} = 2^3 = 8$$
-
-Right working: two factors in the denominator cancel two of the six in the numerator.
-$$\\frac{2^6}{2^2} = \\frac{2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2}{2 \\cdot 2} = 2^{6-2} = 2^4 = 16$$
-
-Why it happens: the same pattern as with the product rule. The operation between the powers, here division, is copied onto the exponents.
-
-How to check: $2^6 = 64$ and $2^2 = 4$, so the quotient is $\\frac{64}{4} = 16 = 2^4$, not $8$.
-
-**Adding the exponents**
-
-A power is raised to another power, and the two exponents are added, as in the product rule.
-
-Wrong working:
-$$(y^5)^2 = y^{5+2} = y^7$$
-
-Right working: the outer exponent counts copies of $y^5$.
-$$(y^5)^2 = y^5 \\cdot y^5 = y^{5+5} = y^{10} = y^{5 \\cdot 2}$$
-
-Why it happens: the product rule and the power of a power both involve two exponents, and with the two rules learned side by side, their operations get swapped.
-
-How to check: put $y = 2$. Then $(2^5)^2 = 32^2 = 1024 = 2^{10}$, while $2^7 = 128$.
-
-**Distributing the exponent over a sum**
-
-The power of a product rule, $(ab)^n = a^n b^n$, is applied to a sum inside the parentheses.
-
-Wrong working:
-$$(2 + 3)^2 = 2^2 + 3^2 = 4 + 9 = 13$$
-
-Right working: the sum is worked out first.
-$$(2 + 3)^2 = 5^2 = 25$$
-With letters, $(a + b)^2 = (a + b)(a + b) = a^2 + 2ab + b^2$. The wrong version loses the middle term $2ab$, here $2 \\cdot 2 \\cdot 3 = 12$, and $13 + 12 = 25$.
-
-Why it happens: in $(ab)^n = a^n b^n$ the exponent seems to pass through the parentheses onto each letter, and the same move is tried on a sum. The rule holds for products only because factors can be regrouped freely; the terms of a sum cannot.
-
-How to check: substitute $a = b = 1$. Then $(1 + 1)^2 = 4$, but $1^2 + 1^2 = 2$.
-
-**Leaving the coefficient unraised**
-
-A product with a number in front, such as $2x^3$, is raised to a power, and only the variable part receives the exponent.
-
-Wrong working:
-$$(2x^3)^4 = 2x^{12}$$
-
-Right working: every factor of the product is raised, the number included.
-$$(2x^3)^4 = 2^4 \\cdot (x^3)^4 = 16x^{12}$$
-
-Why it happens: the eye follows the variable and its exponent, and the number in front reads like a label rather than a factor of the product inside the parentheses.
-
-How to check: put $x = 1$. Then $(2 \\cdot 1^3)^4 = 2^4 = 16$, while $2 \\cdot 1^{12} = 2$.`,
+      content: `Five mistakes account for most wrong answers when the laws of exponents are applied. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before: ``,
-      after: ``,
+      after: `Each slip uses the wrong law, or a law where it does not hold: a product adds exponents, a quotient subtracts them, a power of a power multiplies them, an exponent does not pass through a sum, and it does reach every factor of a product, the number included. Every check above is the same move: put in small numbers such as $1$ or $2$ and evaluate both sides.`,
       link: '',
     },
     obj10:{
@@ -822,8 +753,51 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 3, 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-the-exponents', name: `Multiplying the exponents`, errorAt: 1,
+        what: `Two powers of the same base are multiplied, and the exponents are multiplied as well, as if the operation between the powers passed on to the exponents.`,
+        wrong: [`$$2^3 \\cdot 2^4$$`, `$$= 2^{3 \\cdot 4} = 2^{12} = 4096$$`],
+        right: [`$$2^3 \\cdot 2^4$$`, `Write out the factors and count them.
+$$= (2 \\cdot 2 \\cdot 2)(2 \\cdot 2 \\cdot 2 \\cdot 2) = 2^{3+4} = 2^7 = 128$$`],
+        why: `The powers are being multiplied, so multiplying the exponents feels like the matching move. Multiplying exponents belongs to a different law, the power of a power $(a^m)^n$.`,
+        check: `Evaluate both sides with small numbers. $2^3 \\cdot 2^4 = 8 \\cdot 16 = 128$, which is $2^7$, not $2^{12} = 4096$.` },
+      { id: 'dividing-the-exponents', name: `Dividing the exponents`, errorAt: 1,
+        what: `Two powers of the same base are divided, and the exponents are divided too.`,
+        wrong: [`$$\\frac{2^6}{2^2}$$`, `$$= 2^{6 \\div 2} = 2^3 = 8$$`],
+        right: [`$$\\frac{2^6}{2^2}$$`, `Two factors in the denominator cancel two of the six in the numerator.
+$$= \\frac{2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2}{2 \\cdot 2} = 2^{6-2} = 2^4 = 16$$`],
+        why: `The same pattern as with the product rule. The operation between the powers, here division, is copied onto the exponents.`,
+        check: `$2^6 = 64$ and $2^2 = 4$, so the quotient is $\\frac{64}{4} = 16 = 2^4$, not $8$.` },
+      { id: 'adding-the-exponents', name: `Adding the exponents`, errorAt: 1,
+        what: `A power is raised to another power, and the two exponents are added, as in the product rule.`,
+        wrong: [`$$(y^5)^2$$`, `$$= y^{5+2} = y^7$$`],
+        right: [`$$(y^5)^2$$`, `The outer exponent counts copies of $y^5$.
+$$= y^5 \\cdot y^5 = y^{5+5} = y^{10} = y^{5 \\cdot 2}$$`],
+        why: `The product rule and the power of a power both involve two exponents, and with the two rules learned side by side, their operations get swapped.`,
+        check: `Put $y = 2$. Then $(2^5)^2 = 32^2 = 1024 = 2^{10}$, while $2^7 = 128$.` },
+      { id: 'distributing-the-exponent-over-a-sum', name: `Distributing the exponent over a sum`, errorAt: 1,
+        what: `The power of a product rule, $(ab)^n = a^n b^n$, is applied to a sum inside the parentheses.`,
+        wrong: [`$$(2 + 3)^2$$`, `$$= 2^2 + 3^2 = 4 + 9 = 13$$`],
+        right: [`$$(2 + 3)^2$$`, `The sum is worked out first.
+$$= 5^2 = 25$$`, `With letters, $(a + b)^2 = (a + b)(a + b) = a^2 + 2ab + b^2$. The wrong version loses the middle term $2ab$, here $2 \\cdot 2 \\cdot 3 = 12$, and $13 + 12 = 25$.`],
+        why: `In $(ab)^n = a^n b^n$ the exponent seems to pass through the parentheses onto each letter, and the same move is tried on a sum. The rule holds for products only because factors can be regrouped freely; the terms of a sum cannot.`,
+        check: `Substitute $a = b = 1$. Then $(1 + 1)^2 = 4$, but $1^2 + 1^2 = 2$.` },
+      { id: 'leaving-the-coefficient-unraised', name: `Leaving the coefficient unraised`, errorAt: 1,
+        what: `A product with a number in front, such as $2x^3$, is raised to a power, and only the variable part receives the exponent.`,
+        wrong: [`$$(2x^3)^4$$`, `$$= 2x^{12}$$`],
+        right: [`$$(2x^3)^4$$`, `Every factor of the product is raised, the number included.
+$$= 2^4 \\cdot (x^3)^4 = 16x^{12}$$`],
+        why: `The eye follows the variable and its exponent, and the number in front reads like a label rather than a factor of the product inside the parentheses.`,
+        check: `Put $x = 1$. Then $(2 \\cdot 1^3)^4 = 2^4 = 16$, while $2 \\cdot 1^{12} = 2$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -845,7 +819,7 @@ return {
    }
 
 // export default function NaturalExponentsPage({seoData,sectionsContent , introContent}) {
-export default function NaturalExponentsPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function NaturalExponentsPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1051,6 +1025,15 @@ For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="exponent-law-pitfalls"
+            title="Common pitfalls with the laws of exponents"
+            source="/algebra/powers/natural-exponents"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

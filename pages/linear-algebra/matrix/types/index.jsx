@@ -889,6 +889,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 
 
 export async function getStaticProps(){
@@ -1630,44 +1631,47 @@ const introContent = {
 For step-by-step results on your own numbers, use the [matrix properties](https://calculatematrix.com/matrix-calculators/matrix-properties) calculator on CalculateMatrix.`,
 }
 
+
+// FAQ pass 2026-11-01: the FAQ was not shown on the live page (only in the
+// commented archive) while schemas.faq still sent it as FAQ data. Section
+// added after Common Pitfalls and the FAQ data line removed, as on every other
+// lesson page. Cut six questions that restate h2s (symmetric, diagonal,
+// orthogonal, singular vs nonsingular, nilpotent and idempotent, permutation);
+// kept the elementary-matrix question. Added: permutation inverse and nilpotent
+// with no zero entry (pitfall and fact box), square roots of I beyond ±I and
+// the diagonal test (pitfalls), odd-order skew-symmetric determinant (text).
 const faqQuestions = {
   obj1: {
-    question: "What is a symmetric matrix?",
-    answer: "A symmetric matrix equals its own transpose, meaning the entry in row i, column j is the same as the entry in row j, column i. Every eigenvalue of a real symmetric matrix is real, and its eigenvectors can be chosen to be mutually orthogonal. Symmetric matrices can always be diagonalized by an orthogonal matrix.",
-    sectionId: "5"
-  },
-  obj2: {
-    question: "What is a diagonal matrix?",
-    answer: "A diagonal matrix has nonzero entries only on the main diagonal, with all off-diagonal entries equal to zero. Its powers, products, and inverse reduce to operations on the diagonal entries alone. The determinant is the product of the diagonal entries, and the eigenvalues are the diagonal entries themselves.",
-    sectionId: "3"
-  },
-  obj3: {
-    question: "What makes a matrix orthogonal?",
-    answer: "A square matrix is orthogonal when its transpose equals its inverse, meaning its columns form an orthonormal set. Orthogonal matrices preserve lengths and angles, making them the algebraic representation of rotations and reflections. Their determinant is always +1 or −1.",
-    sectionId: "7"
-  },
-  obj4: {
-    question: "What is the difference between singular and nonsingular matrices?",
-    answer: "A singular matrix has determinant zero, linearly dependent columns, and rank less than its order — the system Ax = b does not have a unique solution for every b. A nonsingular matrix has nonzero determinant, full rank, and a unique inverse, guaranteeing exactly one solution for every right-hand side.",
-    sectionId: "10"
-  },
-  obj5: {
-    question: "What are nilpotent and idempotent matrices?",
-    answer: "A nilpotent matrix satisfies Aᵏ = O for some positive integer k, meaning all its eigenvalues are zero. An idempotent matrix satisfies A² = A, so applying the transformation twice is the same as applying it once. Idempotent matrices act as projections, and their rank always equals their trace.",
-    sectionId: "8"
-  },
-  obj6: {
-    question: "What is a permutation matrix?",
-    answer: "A permutation matrix is a square matrix with exactly one entry equal to 1 in each row and each column, and zeros elsewhere — the identity matrix with its rows rearranged. Multiplying on the left reorders the rows of a matrix and multiplying on the right reorders its columns. Permutation matrices are orthogonal, so the inverse is the transpose, and the determinant is +1 or −1 according to whether the permutation is even or odd.",
-    sectionId: "12"
-  },
-  obj7: {
     question: "Is a permutation matrix an elementary matrix?",
     answer: "Only when it swaps exactly two rows. Row-swap elementary matrices are permutation matrices, but a general permutation matrix is a product of several of them rather than a single elementary matrix. The other two kinds of elementary matrix — scaling a row and adding a multiple of one row to another — are not permutation matrices, because they change entry values instead of only moving entries.",
     sectionId: "12"
+  },
+  obj2: {
+    question: "Is a permutation matrix its own inverse?",
+    answer: "Only when it swaps two rows and leaves the rest alone. The inverse of every permutation matrix is its transpose, $P^{-1} = P^{T}$, which undoes the reordering. For the cycle $P$ with rows $(0, 1, 0)$, $(0, 0, 1)$, $(1, 0, 0)$, the product $P \\cdot P$ is not $I$; it takes three applications to return every row to its place, and $P^{T}$ equals $P^2$.",
+    sectionId: "12"
+  },
+  obj3: {
+    question: "Can a matrix square to zero if none of its entries is zero?",
+    answer: "Yes. The matrix with rows $(1, 1)$ and $(-1, -1)$ has no zero entry, yet its square is the zero matrix. Both columns lie on the line through $(1, -1)$, and that line is exactly what the matrix sends to $\\mathbf{0}$, so a second application wipes out everything. Being nilpotent says nothing about the entries; it shows in the eigenvalues, which are all $0$.",
+    sectionId: "8"
+  },
+  obj4: {
+    question: "Are $I$ and $-I$ the only matrices whose square is $I$?",
+    answer: "No. From $A^2 - I = (A - I)(A + I) = O$ it does not follow that a factor is zero, because matrices can multiply to $O$ without either being $O$. The diagonal matrix with entries $1$ and $-1$ squares to $I$, and so does every reflection and every permutation matrix that swaps pairs of rows. Such matrices are called involutory.",
+    sectionId: "9"
+  },
+  obj5: {
+    question: "Is a matrix invertible if no diagonal entry is zero?",
+    answer: "Not in general. The matrix with rows $(1, 2)$ and $(2, 4)$ has diagonal entries $1$ and $4$, yet $\\det = 1 \\cdot 4 - 2 \\cdot 2 = 0$, so it is singular: its second column is twice the first. The diagonal test works only for diagonal and triangular matrices, whose determinant is the product of the diagonal entries.",
+    sectionId: "10"
+  },
+  obj6: {
+    question: "Why is the determinant of an odd-size skew-symmetric matrix zero?",
+    answer: "Because $A^{T} = -A$ gives $\\det(A) = \\det(A^{T}) = \\det(-A) = (-1)^n \\det(A)$. When $n$ is odd, $(-1)^n = -1$, so $\\det(A) = -\\det(A)$ and the determinant must be $0$. For even sizes it can be nonzero: the $2 \\times 2$ matrix with rows $(0, 1)$ and $(-1, 0)$ has determinant $1$.",
+    sectionId: "6"
   }
 }
-
 
 const schemas = {
   learningResource: {
@@ -2045,7 +2049,22 @@ export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsC
           sectionsContent.obj13.content,
         ]
     },
-   
+    // faq: rendered component — must be built here, not in getStaticProps
+    {
+        id:'faq',
+        title:`Matrix Types FAQ`,
+        link:``,
+        content:[
+          <div key={'faq-wrap'} style={{width:'80%',margin:'auto'}}>
+            <FAQSection
+              faqQuestions={faqQuestions}
+              theme={'leftBorder'}
+              width={'100%'}
+              openFirst={false}
+            />
+          </div>,
+        ]
+    },
 
 ]
 
@@ -2080,13 +2099,6 @@ export default function MatrixTypesPage({permNest, demoUnits, seoData, sectionsC
     type="application/ld+json"
     dangerouslySetInnerHTML={{
       __html: JSON.stringify(schemas.breadcrumb)
-    }}
-  />
-
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify(schemas.faq)
     }}
   />
 </Head>

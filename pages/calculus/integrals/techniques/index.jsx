@@ -17,6 +17,7 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
 
 export async function getStaticProps(){
@@ -158,6 +159,24 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 2 callouts (obj2, obj3)
+// Concept introduction (section 2, "Substitution (u-Substitution)") —
+// template A, definition last. Running instance: ∫ 2x cos(x²) dx, found by
+// differentiating candidate answers. Old obj2 text is kept in
+// sectionsContent.obj2, unused; its five passages, formula box and link,
+// example and pitfall are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciGuessTable = ciTableOpen(['candidate antiderivative', 'its derivative', 'equal to 2x cos(x²)?']) +
+  ciRow(['sin x', 'cos x', 'no']) +
+  ciRow(['sin(x²) / (2x)', 'not 2x cos(x²): the quotient rule adds extra terms', 'no'], { shade: true }) +
+  ciRow(['sin(x²)', 'cos(x²) · 2x, by the chain rule', 'yes'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/integrals/techniques ───────────────────────────────────────
 
@@ -649,6 +668,10 @@ const schemas = {
     vlines: [{ x: -1, label: 'x = −1' }, { x: 1, label: 'x = 1' }],
     notes: [{ x: 1.4, y: 3.4, text: 'blue: 1/(x² − 1)', pos: 'e', color: 'f' }, { x: 1.4, y: 2.9, text: 'amber: (1/2)/(x − 1)', pos: 'e', color: 'r' }, { x: 1.4, y: 2.4, text: 'navy: −(1/2)/(x + 1)', pos: 'e', color: 'g' }],
     caption: 'Two simple fractions, one asymptote each, add up to the original' };
+  const conceptIntroFigures = {
+    guessTable: ciGuessTable,
+  };
+
   const demoUnits = {
     partialFractions: demoUnitFrame({
       svg: renderFunctionPlotV4(fpPartialFractions),
@@ -690,6 +713,7 @@ const schemas = {
     faqQuestions,
     schemas,
     demoUnits,
+    conceptIntroFigures,
     seoData: {
       title: "Integration Techniques: Substitution, Parts & More | Learn Math Class",
       description: "Master integration techniques: u-substitution, integration by parts (LIATE), trigonometric integrals, trig substitution, partial fractions, and how to choose the right method.",
@@ -701,9 +725,82 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({integrationTechniqueTree, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function PageTemplate({integrationTechniqueTree, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 2 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `∫ 2x cos(x²) dx appears in no table of standard integrals.`,
+        content: [
+          `Nothing on the standard list has $x^2$ inside a cosine. Test a few candidates by differentiating them.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Differentiating sin(x²) by the chain rule gives exactly 2x cos(x²).`,
+        content: [
+          ciTable('guessTable'),
+          `The factor $2x$ is the derivative of the inside, $x^2$; the chain rule is what put it there.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `An integrand holding a function and its derivative came from the chain rule, so the chain rule can be run backwards.`,
+        content: [
+          `Substitution reverses the chain rule. If the integrand contains a function and its derivative, substitution simplifies.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `**Substitution** evaluates $\\int f(g(x))\\,g'(x)\\,dx$ by setting $u = g(x)$, so that $du = g'(x)\\,dx$ and the integral becomes $\\int f(u)\\,du$.`,
+        formula: [
+          `**Method:** Let $u = g(x)$, so $du = g'(x)\\, dx$. Replace all $x$-expressions with $u$-expressions and integrate.`,
+          `@academic[formula_callout:Substitution Rule
+$$\\int f(g(x))\\, g'(x)\\, dx = \\int f(u)\\, du \\quad \\text{with } u = g(x)$$
+/calculus/formulas#substitution_rule]@`,
+          `@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@`,
+        ],
+        footer: `So with $u = x^2$, $\\int 2x\\cos(x^2)\\,dx = \\int \\cos u\\,du = \\sin(x^2) + C$.`,
+      },
+      {
+        id: 'kind',
+        lead: `Substitution trades a hard integral in x for an easy one in u.`,
+        content: [
+          `@academic[example:Example
+
+$$\\int 2x \\cos(x^2)\\, dx$$
+
+Let $u = x^2$, so $du = 2x\\, dx$:
+
+$$= \\int \\cos u\\, du = \\sin u + C = \\sin(x^2) + C$$]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `In a definite integral, the bounds change along with the variable.`,
+        content: [
+          `For definite integrals, convert the limits: when $x = a$, $u = g(a)$; when $x = b$, $u = g(b)$.`,
+          `@academic[pitfall,aside:true,width:35%:Keeping the x-bounds after substituting
+Evaluating $\\sin u$ from $0$ to $2$, the old $x$-bounds of $\\int_0^2 2x\\cos(x^2)\\, dx$, gives $\\sin 2 \\approx 0.909$. In $u = x^2$ the bounds are $0$ and $4$, and the integral is $\\sin 4 \\approx -0.757$.
+[Read more](!#pitfalls)]@`,
+          `The bounds of a definite integral are values of the variable of integration. In $\\int_0^2 2x\\cos(x^2)\\, dx$ the numbers $0$ and $2$ are values of $x$; after the substitution $u = x^2$ the integral runs over values of $u$, and the antiderivative $\\sin u$ is a function of $u$. Converting the bounds at the moment of substitution means the evaluation never has to return to $x$.`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers notation, trigonometric integrals, partial fractions, choosing the right technique, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -719,7 +816,7 @@ export default function PageTemplate({integrationTechniqueTree, seoData, section
         title:sectionsContent.obj2.title,
         link:sectionsContent.obj2.link,
         content:[
-          sectionsContent.obj2.content,
+          <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
         ]
     },
     {

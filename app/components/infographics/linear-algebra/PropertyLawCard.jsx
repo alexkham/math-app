@@ -4443,6 +4443,8 @@ const TEX_SYMBOLS = [
   [/\\vec\{([^}]*)\}/g, '$1'],
   [/\\left|\\right/g, ''],
   [/\\,|\\;|\\!|\\quad|\\qquad/g, ' '],
+  // named operators keep their name instead of being stripped (2026-11-01)
+  [/\\(det|tr|rank|ker|dim|deg|gcd|lcm|log|ln|exp|sin|cos|tan|min|max|lim)\b/g, '$1'],
 ];
 
 function detex(tex) {

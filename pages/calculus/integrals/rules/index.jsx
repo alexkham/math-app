@@ -14,6 +14,9 @@ import { tableHeaders } from '@/app/styles/theme'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import TheoremCard from '@/app/components/infographics/TheoremCard'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -331,6 +334,24 @@ const summaryTable = `
 
 
 // formulas-optimized: v1 | 2026-06-09 | 9 callouts (obj1, obj2, obj3, obj4, obj5, obj6, obj8)
+// Concept introduction (section 1, "Sum and Difference Rules") — template C,
+// failure first. Running instance: ∫(x + x²) dx split into pieces (works)
+// against ∫(x · x) dx split into factors (fails), both checked by
+// differentiating. Old obj1 text is kept in sectionsContent.obj1, unused; its
+// passages, two formula boxes and link, fact and pitfall are carried in
+// unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciSplitTable = ciTableOpen(['integral', 'integrated piece by piece', 'derivative of the result', 'matches?']) +
+  ciRow(['∫ (x + x²) dx', 'x²/2 + x³/3', 'x + x²', 'yes'], { color: '#2563EB', cols: [3] }) +
+  ciRow(['∫ (x · x) dx', '(x²/2) · (x²/2) = x⁴/4', 'x³', 'no: the integrand is x²'], { shade: true, last: true, color: '#a4243b', cols: [3] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
   // ─── /calculus/integrals/rules ────────────────────────────────────────────
 
@@ -833,6 +854,10 @@ const schemas = {
     vlines: [{ x: 1 }, { x: 4 }],
     notes: [{ x: 0.1, y: 2.55, text: '3 ≤ area under √x on [1, 4] = 14/3 ≤ 6', pos: 'e', color: 'r' }],
     caption: 'm(b − a) ≤ integral ≤ M(b − a): the area sits between two boxes' };
+  const conceptIntroFigures = {
+    splitTable: ciSplitTable,
+  };
+
   const demoUnits = {
     ftc1: demoUnitFrame({
       svg: functionFTCDiagrams.cubic,
@@ -847,10 +872,22 @@ const schemas = {
       text: 'On [1, 4] the function &#8730;x stays between m = 1 and M = 2. The shaded area under the curve therefore contains the box of height 1 over the interval, area 1 &#183; 3 = 3, and fits inside the box of height 2, area 2 &#183; 3 = 6. So 3 &#8804; &#8747;&#8321;&#8308; &#8730;x dx &#8804; 6 before any antiderivative is found; the exact value is 14/3 &#8776; 4.67.',
     }),
   };
+  // TheoremCard data (fundamental-theorem-chain); every fact is from the section text
+  const ftcChain = {
+    header: { kicker: 'Integrals', title: 'The Fundamental Theorem of Calculus', lede: 'Differentiation undoes integration; the computational engine of integral calculus.' },
+    chain: [
+      { name: 'Part 1', text: '$\\dfrac{d}{dx}\\int_a^x f(t)\\, dt = f(x)$', items: ['$f$ continuous', 'Every continuous function has an antiderivative: its accumulation function $F(x) = \\int_a^x f(t)\\, dt$'], edge: 'gives an antiderivative' },
+      { name: 'Part 2', text: '$\\int_a^b f(x)\\, dx = F(b){-}F(a)$', items: ['$F$ any antiderivative of $f$', 'Written $F(x)\\Big|_a^b$ or $[F(x)]_a^b$'], edge: 'evaluate at the endpoints' },
+      { name: 'Example', text: '$\\int_1^3 x^2\\, dx = \\frac{x^3}{3}\\Big|_1^3 = \\frac{27}{3} - \\frac{1}{3} = \\frac{26}{3}$', items: ['Upper limit first: $F(3) - F(1)$', 'The constant of integration cancels', '$x^2 > 0$ on $[1, 3]$, so the result is positive'] },
+    ],
+  };
+
 
   return {
   props: {
+      ftcChain,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj7Table,
@@ -869,9 +906,83 @@ const schemas = {
 
    }
 
-export default function RulesPage({seoData, sectionsContent, introContent, obj7Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function RulesPage({ftcChain, seoData, sectionsContent, introContent, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template C (failure first).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `Integrating a long expression one piece at a time would be convenient. When is that allowed?`,
+        content: [
+          `Try it on a sum and on a product, and check each answer by differentiating it.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        tone: 'break',
+        lead: `Splitting a sum works; splitting a product does not.`,
+        content: [
+          ciTable('splitTable'),
+          `Only the split sum differentiates back to the integrand.`,
+        ],
+      },
+      {
+        id: 'diagnosis',
+        lead: `Integration, like differentiation, passes through sums but not through products.`,
+        content: [
+          `In the example the two terms are integrated independently: $x^3$ by the power rule and $\\sin x$ from the trigonometric formulas, and the two results are simply added, with one constant for the whole answer. The sum rule is what allows this, and it holds because differentiation splits over sums in the same way: $(F + G)' = F' + G'$.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **sum and difference rules** state that the integral of a sum or difference is the sum or difference of the integrals: $\\int [f(x) \\pm g(x)]\\,dx = \\int f(x)\\,dx \\pm \\int g(x)\\,dx$.`,
+        formula: [
+          `Integrals distribute over addition and subtraction:`,
+          `@academic[formula_callout:Sum and Difference Rule (Integrals)
+$$\\int [f(x) \\pm g(x)]\\, dx = \\int f(x)\\, dx \\pm \\int g(x)\\, dx$$
+/calculus/formulas#sum_and_difference_rule_integrals]@`,
+          `@academic[formulas_link:Browse all integral formulas
+/calculus/formulas]@`,
+        ],
+        footer: `So $\\int (x + x^2)\\,dx = \\frac{x^2}{2} + \\frac{x^3}{3} + C$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The rule breaks an integrand into pieces — and can also gather pieces back together.`,
+        content: [
+          `These rules apply to both definite and indefinite integrals. They allow complex integrands to be broken into simpler pieces, each handled separately.`,
+          `The rule can be read in either direction. From left to right it breaks one integral into several; from right to left it gathers several integrals into one. A split helps only when every piece can be integrated on its own, so the pieces are worth checking before the integral is taken apart.`,
+          `For example:`,
+          `@academic[formula_callout:Sum and Difference Rules
+$$\\int (x^3 + \\sin x)\\, dx = \\int x^3\\, dx + \\int \\sin x\\, dx = \\frac{x^4}{4} - \\cos x + C$$]@`,
+          `@academic[fact,aside:true,width:35%:Two hopeless integrals, one easy sum
+Neither $\\int e^{x^2}\\, dx$ nor $\\int 2x^2 e^{x^2}\\, dx$ can be written with elementary functions, yet their sum is easy: $\\int (1 + 2x^2)\\, e^{x^2}\\, dx = x e^{x^2} + C$, because the product rule gives $(x e^{x^2})' = e^{x^2} + 2x^2 e^{x^2}$.]@`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `A product is not a sum, and its factors cannot be integrated one at a time.`,
+        content: [
+          `@academic[pitfall,aside:true,width:35%:Splitting a product like a sum
+Integrating each factor of $\\int x \\cdot x\\, dx$ separately gives $\\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$, whose derivative is $x^3$, not $x^2$. Multiplying first, $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
+[Read more](!#pitfalls)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the constant multiple rule, additivity over intervals, reversing the limits, both parts of the fundamental theorem of calculus, why differentiation and integration are inverses, comparison properties, a summary and common pitfalls.`,
+      },
+    ],
+  }
 
   const genericSections=[
     {
@@ -879,7 +990,7 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -922,6 +1033,16 @@ export default function RulesPage({seoData, sectionsContent, introContent, obj7T
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-theorem'}
+            id="fundamental-theorem-chain"
+            title="The Fundamental Theorem of Calculus, Part 1 to Part 2"
+            source="/calculus/integrals/rules"
+            before={`The two parts work as one chain: Part 1 supplies an antiderivative, Part 2 uses it to evaluate the integral.`}
+            after={`Find an antiderivative, evaluate it at both endpoints, subtract with the upper limit first.`}
+          >
+            <TheoremCard data={ftcChain} variant="chain" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

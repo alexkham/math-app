@@ -358,6 +358,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
 
 export async function getStaticProps() {
 
@@ -810,6 +812,11 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
         parentHref={sectionContent.notation.parentHref}
         parentLabel={sectionContent.notation.parentLabel}
         theme={'navy'}
+      />,
+      <NotationCheatSheet
+        key={'notation-sheet'}
+        sheet={logicNotationSheet}
+        current={'/logic/propositional-logic/syntax'}
       />,
         <DiagramFrame
           key={'notation-diagram'}

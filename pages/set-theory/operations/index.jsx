@@ -2791,6 +2791,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -2967,7 +2969,7 @@ $$A \\cap B = \\emptyset$$]@
 
 @academic[pitfall,aside:true,width:35%:Writing the empty set in braces
 Writing $A \\cap B = \\{\\emptyset\\}$ for $A = \\{1, 2\\}$ and $B = \\{3, 4\\}$ names a set with one element, the empty set itself, so $|\\{\\emptyset\\}| = 1$. The intersection is $\\emptyset$, also written $\\{\\}$, with $0$ elements.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-writing-the-empty-set-in-braces)]@
 
 Disjointness is read off the intersection directly.
 
@@ -3068,7 +3070,7 @@ $$B \\setminus A = \\{5\\}$$]@
 
 @academic[pitfall,aside:true,width:35%:Subtracting the sizes
 Taking $|A \\setminus B| = |A| - |B| = 4 - 3 = 1$ also removes the $5$, which is not in $A$. Only the shared elements $3$ and $4$ go: $|A \\setminus B| = |A| - |A \\cap B| = 4 - 2 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-sizes)]@
 
 The difference is built one element of $A$ at a time. In the example, $1$ and $2$ are not in $B$ and stay, while $3$ and $4$ are in $B$ and are removed. The elements of $B$ serve only as a list of what to take out of $A$, and the result is always a subset of $A$.
 
@@ -3126,7 +3128,7 @@ $$(A \\triangle B) \\triangle C = A \\triangle (B \\triangle C)$$]@
 
 @academic[pitfall,aside:true,width:35%:Keeping only elements in exactly one set
 Reading $A \\triangle B \\triangle C$ as the elements in exactly one of the three sets gives $\\{1, 2, 4, 6\\}$ and drops the $3$, which is in all three. Step by step, $\\{1, 2, 4, 5\\} \\triangle \\{3, 5, 6\\} = \\{1, 2, 3, 4, 6\\}$: the elements in an odd number of the sets.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-only-elements-in-exactly-one-set)]@
 
 Because the operation is associative, $A \\triangle B \\triangle C$ can be written without parentheses and computed in either grouping. With $A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$ and $C = \\{3, 5, 6\\}$, the first step gives $A \\triangle B = \\{1, 2, 4, 5\\}$, and the second step compares this set with $C$ element by element.
 
@@ -3191,47 +3193,9 @@ The five operations introduced above share a uniform structure: each consumes on
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `
-Three mistakes come up often when the operations are carried out by hand. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Writing the empty set in braces**
-
-When two sets share no elements, their intersection is written as $\\{\\emptyset\\}$ instead of $\\emptyset$. The braces turn the empty set into an element, so the answer becomes a set with one element instead of a set with none.
-
-Wrong working: for $A = \\{1, 2\\}$ and $B = \\{3, 4\\}$, no element is shared, so $A \\cap B = \\{\\emptyset\\}$.
-
-Right working: no $x$ satisfies both $x \\in A$ and $x \\in B$, so the intersection has no elements: $A \\cap B = \\emptyset$, also written $\\{\\}$. The set $\\{\\emptyset\\}$ is a different set: its one element is $\\emptyset$, so $|\\{\\emptyset\\}| = 1$ while $|\\emptyset| = 0$.
-
-Why it happens: answers are usually written inside braces, such as $A \\cap B = \\{3\\}$, and the empty answer gets braces by the same habit. The symbol $\\emptyset$ already stands for a whole set.
-
-How to check: $A \\cap B$ is always a subset of $A$. Here $\\emptyset$ is not an element of $A = \\{1, 2\\}$, so $\\{\\emptyset\\}$ is not a subset of $A$ and cannot be $A \\cap B$.
-
-**Subtracting the sizes**
-
-The size of $A \\setminus B$ is found as $|A| - |B|$, as if every element of $B$ were taken out of $A$. Elements of $B$ that are not in $A$ have nothing to remove, so the count comes out too small.
-
-Wrong working: for $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5\\}$, the size is given as $|A \\setminus B| = 4 - 3 = 1$.
-
-Right working: only $3$ and $4$ are in both sets, so $A \\setminus B = \\{1, 2\\}$ and $|A \\setminus B| = |A| - |A \\cap B| = 4 - 2 = 2$.
-
-Why it happens: the alternative notation $A - B$ looks like subtraction of numbers, where every unit of the second amount is taken away.
-
-How to check: list the elements of the result instead of computing its size. The size formula can even give a negative number: for $\\{1\\} \\setminus \\{2, 3\\}$ it gives $1 - 2 = -1$, while the difference is $\\{1\\}$, with $1$ element.
-
-**Keeping only elements in exactly one set**
-
-The two-set description, "elements in exactly one of $A$ or $B$", is carried over to three sets. For $A \\triangle B \\triangle C$ this drops the elements that belong to all three sets.
-
-Wrong working: with $A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$ and $C = \\{3, 5, 6\\}$, the elements in exactly one set are $1, 2, 4$ and $6$, so $A \\triangle B \\triangle C$ is given as $\\{1, 2, 4, 6\\}$.
-
-Right working: $A \\triangle B = \\{1, 2, 4, 5\\}$, and $\\{1, 2, 4, 5\\} \\triangle \\{3, 5, 6\\} = \\{1, 2, 3, 4, 6\\}$. The element $3$ is removed in the first step, because it is in both $A$ and $B$, and comes back in the second, because it is in $C$ but no longer in $A \\triangle B$. The element $5$ is in $A \\triangle B$ and in $C$, so it is removed.
-
-Why it happens: for two sets, "in exactly one" and "in an odd number" of the sets mean the same thing, so the difference shows only with three or more sets.
-
-How to check: count for each element how many of the sets contain it; the element stays when that count is odd. Here $3$ is in three sets and stays, $5$ is in two and goes. The other grouping gives the same answer: $B \\triangle C = \\{4, 6\\}$ and $\\{1, 2, 3\\} \\triangle \\{4, 6\\} = \\{1, 2, 3, 4, 6\\}$.
-`,
+    content: `Three mistakes come up often when the operations are carried out by hand. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `All three slips work with sizes or labels instead of the elements themselves. An intersection with nothing in common is $\\emptyset$, not $\\{\\emptyset\\}$; $|A \\setminus B|$ subtracts only the shared elements; and a symmetric difference of three sets keeps the elements that lie in an odd number of them. Listing the elements of the result, and counting how many sets hold each one, catches every slip.`,
     link: '',
   },
   faq: {
@@ -3405,8 +3369,34 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'writing-the-empty-set-in-braces', name: `Writing the empty set in braces`, errorAt: 1,
+        what: `When two sets share no elements, their intersection is written as $\\{\\emptyset\\}$ instead of $\\emptyset$. The braces turn the empty set into an element, so the answer becomes a set with one element instead of a set with none.`,
+        wrong: [`For $A = \\{1, 2\\}$ and $B = \\{3, 4\\}$,`, `No element is shared, so $A \\cap B = \\{\\emptyset\\}$.`],
+        right: [`For $A = \\{1, 2\\}$ and $B = \\{3, 4\\}$,`, `No $x$ satisfies both $x \\in A$ and $x \\in B$, so the intersection has no elements: $A \\cap B = \\emptyset$, also written $\\{\\}$. The set $\\{\\emptyset\\}$ is a different set: its one element is $\\emptyset$, so $|\\{\\emptyset\\}| = 1$ while $|\\emptyset| = 0$.`],
+        why: `Answers are usually written inside braces, such as $A \\cap B = \\{3\\}$, and the empty answer gets braces by the same habit. The symbol $\\emptyset$ already stands for a whole set.`,
+        check: `$A \\cap B$ is always a subset of $A$. Here $\\emptyset$ is not an element of $A = \\{1, 2\\}$, so $\\{\\emptyset\\}$ is not a subset of $A$ and cannot be $A \\cap B$.` },
+      { id: 'subtracting-the-sizes', name: `Subtracting the sizes`, errorAt: 1,
+        what: `The size of $A \\setminus B$ is found as $|A| - |B|$, as if every element of $B$ were taken out of $A$. Elements of $B$ that are not in $A$ have nothing to remove, so the count comes out too small.`,
+        wrong: [`For $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5\\}$,`, `The size is given as $|A \\setminus B| = 4 - 3 = 1$.`],
+        right: [`For $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5\\}$,`, `Only $3$ and $4$ are in both sets, so $A \\setminus B = \\{1, 2\\}$ and $|A \\setminus B| = |A| - |A \\cap B| = 4 - 2 = 2$.`],
+        why: `The alternative notation $A - B$ looks like subtraction of numbers, where every unit of the second amount is taken away.`,
+        check: `List the elements of the result instead of computing its size. The size formula can even give a negative number: for $\\{1\\} \\setminus \\{2, 3\\}$ it gives $1 - 2 = -1$, while the difference is $\\{1\\}$, with $1$ element.` },
+      { id: 'keeping-only-elements-in-exactly-one-set', name: `Keeping only elements in exactly one set`, errorAt: 1,
+        what: `The two-set description, "elements in exactly one of $A$ or $B$", is carried over to three sets. For $A \\triangle B \\triangle C$ this drops the elements that belong to all three sets.`,
+        wrong: [`With $A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$ and $C = \\{3, 5, 6\\}$,`, `The elements in exactly one set are $1, 2, 4$ and $6$, so $A \\triangle B \\triangle C$ is given as $\\{1, 2, 4, 6\\}$.`],
+        right: [`With $A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$ and $C = \\{3, 5, 6\\}$,`, `$A \\triangle B = \\{1, 2, 4, 5\\}$, and $\\{1, 2, 4, 5\\} \\triangle \\{3, 5, 6\\} = \\{1, 2, 3, 4, 6\\}$. The element $3$ is removed in the first step, because it is in both $A$ and $B$, and comes back in the second, because it is in $C$ but no longer in $A \\triangle B$. The element $5$ is in $A \\triangle B$ and in $C$, so it is removed.`],
+        why: `For two sets, "in exactly one" and "in an odd number" of the sets mean the same thing, so the difference shows only with three or more sets.`,
+        check: `Count for each element how many of the sets contain it; the element stays when that count is odd. Here $3$ is in three sets and stays, $5$ is in two and goes. The other grouping gives the same answer: $B \\triangle C = \\{4, 6\\}$ and $\\{1, 2, 3\\} \\triangle \\{4, 6\\} = \\{1, 2, 3, 4, 6\\}$.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     sectionsContent,
     introContent,
     summaryTable,
@@ -3424,7 +3414,7 @@ const schemas = {
   }
 }
    }
-export default function SetOperationsPage({seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SetOperationsPage({ pitfallData,seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3594,6 +3584,15 @@ $$\\bigcup_{i=1}^{n} A_i = A_1 \\cup A_2 \\cup \\cdots \\cup A_n$$]@`,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="set-operation-pitfalls"
+            title="Common pitfalls with set operations"
+            source="/set-theory/operations"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // obj6: NEW capstone — all five operations at a glance

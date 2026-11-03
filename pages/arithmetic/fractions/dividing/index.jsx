@@ -694,6 +694,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -887,7 +889,7 @@ The division sign $\\div$ is one of three spellings for the same operation: $a \
 
 @academic[pitfall,aside:true,width:35%:Flipping the first fraction
 Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\frac{4}{5} = \\frac{12}{10} = \\frac{6}{5}$, the reciprocal of the true answer. Only the divisor is flipped: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{5}{6}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-flipping-the-first-fraction)]@
 
 The mnemonic "keep, change, flip" summarizes the steps: keep the first fraction as is, change division to multiplication, flip the second fraction to its reciprocal.`,
     before: ``,
@@ -936,7 +938,7 @@ $$6 \\div \\frac{1}{2} = 6 \\times \\frac{2}{1} = 12$$]@
 
 @academic[pitfall,aside:true,width:35%:Dividing by a half as halving
 Reading $6 \\div \\frac{1}{2}$ as half of $6$ gives $3$, which is $6 \\times \\frac{1}{2}$. Dividing by $\\frac{1}{2}$ counts the halves in $6$: $6 \\times 2 = 12$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-a-half-as-halving)]@
 
 Six wholes contain twelve halves. The reciprocal method captures this directly.
 
@@ -952,7 +954,7 @@ Another example: $4 \\div \\frac{2}{3} = 4 \\times \\frac{3}{2} = \\frac{12}{2} 
 
 @academic[pitfall,aside:true,width:35%:Dividing the parts separately
 Splitting $3\\frac{1}{2} \\div 1\\frac{3}{4}$ into $3 \\div 1 = 3$ and $\\frac{1}{2} \\div \\frac{3}{4} = \\frac{2}{3}$ gives $3\\frac{2}{3}$. Converted first, $\\frac{7}{2} \\div \\frac{7}{4} = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-the-parts-separately)]@
 
 To compute $3\\frac{1}{2} \\div 1\\frac{3}{4}$, first convert both values. The mixed number $3\\frac{1}{2}$ becomes $\\frac{7}{2}$ and $1\\frac{3}{4}$ becomes $\\frac{7}{4}$.
 
@@ -978,7 +980,7 @@ $$\\frac{8}{9} \\times \\frac{3}{4} = \\frac{2}{3} \\times \\frac{1}{1} = \\frac
 
 @academic[pitfall,aside:true,width:35%:Canceling before the flip
 Canceling the $3$ and $6$ in $\\frac{3}{4} \\div \\frac{5}{6}$ gives $\\frac{1}{4} \\times \\frac{2}{5} = \\frac{1}{10}$. Flipped first, $\\frac{3}{4} \\times \\frac{6}{5}$ cancels $6$ with $4$: $\\frac{3}{2} \\times \\frac{3}{5} = \\frac{9}{10}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-canceling-before-the-flip)]@
 
 Without cross-canceling, the product $\\frac{24}{36}$ requires reduction using the [GCD](!/arithmetic/divisibility/gcd). Canceling first avoids larger numbers entirely.
 
@@ -1074,57 +1076,9 @@ If a pipe fills $\\frac{1}{4}$ of a tank in $\\frac{1}{2}$ hour, the rate is $\\
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes cause many of the wrong answers in fraction division. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Flipping the first fraction**
-
-In keep, change, flip, the reciprocal is taken of the first fraction, the one being divided, instead of the second. Sometimes both fractions are flipped.
-
-Wrong working: $\\frac{2}{3} \\div \\frac{4}{5} = \\frac{3}{2} \\times \\frac{4}{5} = \\frac{12}{10} = \\frac{6}{5}$.
-
-Right working: keep $\\frac{2}{3}$, flip the divisor $\\frac{4}{5}$ to $\\frac{5}{4}$, and multiply: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$.
-
-Why it happens: the word "flip" does not say which fraction, and in multiplication the order of the two fractions does not matter, so their roles seem interchangeable. Division is not like that: flipping the first fraction computes $\\frac{4}{5} \\div \\frac{2}{3}$ instead, which is why the wrong answer $\\frac{6}{5}$ is exactly the reciprocal of $\\frac{5}{6}$.
-
-How to check: multiply the answer by the divisor; the result must be the first fraction. Here $\\frac{5}{6} \\times \\frac{4}{5} = \\frac{20}{30} = \\frac{2}{3}$, while $\\frac{6}{5} \\times \\frac{4}{5} = \\frac{24}{25}$, which is not $\\frac{2}{3}$.
-
-**Dividing by a half as halving**
-
-"Divided by one half" is read as "divided in half", and the number is halved instead of being divided by $\\frac{1}{2}$.
-
-Wrong working: $6 \\div \\frac{1}{2} = 3$.
-
-Right working: $6 \\div \\frac{1}{2} = 6 \\times \\frac{2}{1} = 12$. Each whole holds two halves, so six wholes hold twelve.
-
-Why it happens: in everyday speech, splitting something in half and dividing it by two mean the same thing, and "dividing by a half" sounds almost the same. The habit that division always makes a number smaller points the same way.
-
-How to check: multiply back. $12 \\times \\frac{1}{2} = 6$, the starting number, while $3 \\times \\frac{1}{2} = \\frac{3}{2}$ is not. Dividing a positive number by a fraction between $0$ and $1$ always gives more than the starting number.
-
-**Dividing the parts separately**
-
-The whole-number parts of two mixed numbers are divided by each other, the fraction parts by each other, and the two results are joined into a new mixed number.
-
-Wrong working: for $3\\frac{1}{2} \\div 1\\frac{3}{4}$, take $3 \\div 1 = 3$ and $\\frac{1}{2} \\div \\frac{3}{4} = \\frac{1}{2} \\times \\frac{4}{3} = \\frac{4}{6} = \\frac{2}{3}$, giving $3\\frac{2}{3}$.
-
-Right working: convert first, $3\\frac{1}{2} = \\frac{7}{2}$ and $1\\frac{3}{4} = \\frac{7}{4}$, then $\\frac{7}{2} \\times \\frac{4}{7} = \\frac{28}{14} = 2$.
-
-Why it happens: when adding mixed numbers, the whole parts and the fraction parts can be handled separately, so the same split seems natural here. Division does not split that way: $(3 + \\frac{1}{2}) \\div (1 + \\frac{3}{4})$ is not $3 \\div 1 + \\frac{1}{2} \\div \\frac{3}{4}$.
-
-How to check: estimate. $3\\frac{1}{2}$ is a little over $3$ and $1\\frac{3}{4}$ is a little under $2$, so the answer is about $2$, nowhere near $3\\frac{2}{3}$. Multiplying back confirms it: $2 \\times \\frac{7}{4} = \\frac{7}{2} = 3\\frac{1}{2}$.
-
-**Canceling before the flip**
-
-Cross-canceling is applied to the division as written, pairing the numerator of the first fraction with the denominator of the second, before the second fraction has been flipped.
-
-Wrong working: in $\\frac{3}{4} \\div \\frac{5}{6}$, cancel the $3$ against the $6$ to get $\\frac{1}{4} \\div \\frac{5}{2} = \\frac{1}{4} \\times \\frac{2}{5} = \\frac{2}{20} = \\frac{1}{10}$.
-
-Right working: flip first, $\\frac{3}{4} \\times \\frac{6}{5}$. Now the $6$ is a numerator and cancels against the $4$ by their common factor $2$: $\\frac{3}{2} \\times \\frac{3}{5} = \\frac{9}{10}$.
-
-Why it happens: the diagonal pattern from [multiplying fractions](!/arithmetic/fractions/multiplying) is used before the problem has become a multiplication. The $3$ and the $6$ sit on a diagonal and share a factor, so they look ready to cancel, but after the flip the $6$ moves to the top, on the same side as the $3$.
-
-How to check: multiply the answer by the divisor. $\\frac{9}{10} \\times \\frac{5}{6} = \\frac{45}{60} = \\frac{3}{4}$, the first fraction, while $\\frac{1}{10} \\times \\frac{5}{6} = \\frac{5}{60} = \\frac{1}{12}$ is not.`,
+      content:`Four mistakes cause many of the wrong answers in fraction division. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip changes which number is divided or flipped. Only the divisor is flipped, dividing by $\\frac{1}{2}$ doubles, mixed numbers are converted before dividing, and cancelling waits until the division has become a multiplication. Multiplying the answer by the divisor catches every one of them: it must give back the first number.`,
       link:'',
     }
   
@@ -1277,8 +1231,40 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 8, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'flipping-the-first-fraction', name: `Flipping the first fraction`, errorAt: 0,
+        what: `In keep, change, flip, the reciprocal is taken of the first fraction, the one being divided, instead of the second. Sometimes both fractions are flipped.`,
+        wrong: [`$\\frac{2}{3} \\div \\frac{4}{5} = \\frac{3}{2} \\times \\frac{4}{5} = \\frac{12}{10} = \\frac{6}{5}$.`],
+        right: [`Keep $\\frac{2}{3}$, flip the divisor $\\frac{4}{5}$ to $\\frac{5}{4}$, and multiply: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$.`],
+        why: `The word "flip" does not say which fraction, and in multiplication the order of the two fractions does not matter, so their roles seem interchangeable. Division is not like that: flipping the first fraction computes $\\frac{4}{5} \\div \\frac{2}{3}$ instead, which is why the wrong answer $\\frac{6}{5}$ is exactly the reciprocal of $\\frac{5}{6}$.`,
+        check: `Multiply the answer by the divisor; the result must be the first fraction. Here $\\frac{5}{6} \\times \\frac{4}{5} = \\frac{20}{30} = \\frac{2}{3}$, while $\\frac{6}{5} \\times \\frac{4}{5} = \\frac{24}{25}$, which is not $\\frac{2}{3}$.` },
+      { id: 'dividing-by-a-half-as-halving', name: `Dividing by a half as halving`, errorAt: 0,
+        what: `"Divided by one half" is read as "divided in half", and the number is halved instead of being divided by $\\frac{1}{2}$.`,
+        wrong: [`$6 \\div \\frac{1}{2} = 3$.`],
+        right: [`$6 \\div \\frac{1}{2} = 6 \\times \\frac{2}{1} = 12$. Each whole holds two halves, so six wholes hold twelve.`],
+        why: `In everyday speech, splitting something in half and dividing it by two mean the same thing, and "dividing by a half" sounds almost the same. The habit that division always makes a number smaller points the same way.`,
+        check: `Multiply back. $12 \\times \\frac{1}{2} = 6$, the starting number, while $3 \\times \\frac{1}{2} = \\frac{3}{2}$ is not. Dividing a positive number by a fraction between $0$ and $1$ always gives more than the starting number.` },
+      { id: 'dividing-the-parts-separately', name: `Dividing the parts separately`, errorAt: 1,
+        what: `The whole-number parts of two mixed numbers are divided by each other, the fraction parts by each other, and the two results are joined into a new mixed number.`,
+        wrong: [`For $3\\frac{1}{2} \\div 1\\frac{3}{4}$,`, `Take $3 \\div 1 = 3$ and $\\frac{1}{2} \\div \\frac{3}{4} = \\frac{1}{2} \\times \\frac{4}{3} = \\frac{4}{6} = \\frac{2}{3}$, giving $3\\frac{2}{3}$.`],
+        right: [`For $3\\frac{1}{2} \\div 1\\frac{3}{4}$,`, `Convert first, $3\\frac{1}{2} = \\frac{7}{2}$ and $1\\frac{3}{4} = \\frac{7}{4}$, then $\\frac{7}{2} \\times \\frac{4}{7} = \\frac{28}{14} = 2$.`],
+        why: `When adding mixed numbers, the whole parts and the fraction parts can be handled separately, so the same split seems natural here. Division does not split that way: $(3 + \\frac{1}{2}) \\div (1 + \\frac{3}{4})$ is not $3 \\div 1 + \\frac{1}{2} \\div \\frac{3}{4}$.`,
+        check: `Estimate. $3\\frac{1}{2}$ is a little over $3$ and $1\\frac{3}{4}$ is a little under $2$, so the answer is about $2$, nowhere near $3\\frac{2}{3}$. Multiplying back confirms it: $2 \\times \\frac{7}{4} = \\frac{7}{2} = 3\\frac{1}{2}$.` },
+      { id: 'canceling-before-the-flip', name: `Canceling before the flip`, errorAt: 0,
+        what: `Cross-canceling is applied to the division as written, pairing the numerator of the first fraction with the denominator of the second, before the second fraction has been flipped.`,
+        wrong: [`In $\\frac{3}{4} \\div \\frac{5}{6}$, cancel the $3$ against the $6$ to get $\\frac{1}{4} \\div \\frac{5}{2} = \\frac{1}{4} \\times \\frac{2}{5} = \\frac{2}{20} = \\frac{1}{10}$.`],
+        right: [`Flip first, $\\frac{3}{4} \\times \\frac{6}{5}$. Now the $6$ is a numerator and cancels against the $4$ by their common factor $2$: $\\frac{3}{2} \\times \\frac{3}{5} = \\frac{9}{10}$.`],
+        why: `The diagonal pattern from [multiplying fractions](!/arithmetic/fractions/multiplying) is used before the problem has become a multiplication. The $3$ and the $6$ sit on a diagonal and share a factor, so they look ready to cancel, but after the flip the $6$ moves to the top, on the same side as the $3$.`,
+        check: `Multiply the answer by the divisor. $\\frac{9}{10} \\times \\frac{5}{6} = \\frac{45}{60} = \\frac{3}{4}$, the first fraction, while $\\frac{1}{10} \\times \\frac{5}{6} = \\frac{5}{60} = \\frac{1}{12}$ is not.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     sectionsContent,
     introContent,
     capstoneTable,
@@ -1298,7 +1284,7 @@ return {
    }
 
 
-export default function DividingPage({seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function DividingPage({ pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1357,7 +1343,7 @@ $$\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{a
         content: [
           `@academic[pitfall,aside:true,width:35%:Flipping the first fraction
 Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\frac{4}{5} = \\frac{12}{10} = \\frac{6}{5}$, the reciprocal of the true answer. Only the divisor is flipped: $\\frac{2}{3} \\times \\frac{5}{4} = \\frac{5}{6}$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-flipping-the-first-fraction)]@`,
           `Zero has no reciprocal, so division by $0$ stays undefined. Why flipping the divisor gives the right answer is explained in [why multiply by the reciprocal](!/arithmetic/fractions/dividing#3).`,
         ],
       },
@@ -1461,6 +1447,15 @@ Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="dividing-fractions-pitfalls"
+            title="Common pitfalls in dividing fractions"
+            source="/arithmetic/fractions/dividing"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

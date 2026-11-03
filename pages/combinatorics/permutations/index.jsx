@@ -1417,6 +1417,10 @@ import NotationSection from '@/app/components/page-components/content-components
 import FAQSection from '../../../app/components/page-components/faq-component/FAQSection'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
+import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import combinatoricsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/combinatorics'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 
@@ -2157,7 +2161,7 @@ $$\\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$$
 
 @academic[pitfall,aside:true,width:35%:Missing a repeated letter
 Computing $\\frac{11!}{4! \\cdot 4!} = 69{,}300$ for MISSISSIPPI divides out the Is and the Ss but not the two Ps, so every word is counted twice. With $2!$ in the denominator, the count is $34{,}650$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-missing-a-repeated-letter)]@
 
 MISSISSIPPI is the standard case for this formula. Its $11$ letters fall into four groups: one M, four Is, four Ss and two Ps, so $n = 11$ and the group sizes are $1, 4, 4$ and $2$. Swapping two letters of the same group gives back the same word, and the denominator removes these swaps group by group. A letter that appears only once forms a group of size one and contributes $1! = 1$.
       
@@ -2203,7 +2207,7 @@ $$P(n,r) = \\frac{n!}{(n-r)!}$$
 
 @academic[pitfall,aside:true,width:35%:Dividing by r! when order matters
 Using $\\binom{10}{3} = 120$ for gold, silver and bronze among 10 runners counts only which three runners win a medal. Each such trio can receive the three medals in $3! = 6$ orders, so the count is $P(10, 3) = 720$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-r-when-order-matters)]@
 
 A race with 10 runners and medals for the first three places is the typical case: $n = 10$ runners and $r = 3$ places. The formula keeps only the first $r$ factors of $10!$, one for each place to fill: $10$ choices for the gold, $9$ for the silver and $8$ for the bronze. The remaining factors $7 \\cdot 6 \\cdots 1$ are exactly the $(n - r)! = 7!$ that the division removes.
       
@@ -2280,7 +2284,7 @@ $$P_{\\text{circ}}(n) = (n-1)!$$
 
 @academic[pitfall,aside:true,width:35%:Using n! for a round table
 Counting $5! = 120$ seatings for 5 people at a round table counts each seating 5 times, once for every turn of the table. Dividing by 5 gives $4! = 24$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-n-for-a-round-table)]@
 
 Five people at a round table show how this works. Fix one of them in a seat; every seating can then be read from that seat clockwise, and the other four people fill the remaining seats in any order. Turning the whole table moves everyone at once but leaves each person with the same neighbours on the left and on the right, which is why a turn does not create a new arrangement.
     
@@ -2326,7 +2330,7 @@ $$P_{\\text{rep}}(n,r)=n^{r}$$
 
 @academic[pitfall,aside:true,width:35%:Swapping the base and the exponent
 Writing $4^{10} = 1{,}048{,}576$ for a 4-digit PIN treats it as 10 positions with 4 options each. Four positions with 10 digits each give $10^4 = 10{,}000$ codes.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-base-and-the-exponent)]@
 
 A 4-digit PIN is the standard example. Each of the $r = 4$ positions can hold any of the $n = 10$ digits, whatever was entered before, so the same digit may appear in several positions, as in 0707 or 1111. The count is built position by position, exactly as for a full permutation, except that the number of options never shrinks from one position to the next.
 
@@ -2477,7 +2481,7 @@ Out of the $4! = 24$ possible orderings of the four hats, exactly 9 satisfy the 
 
 @academic[pitfall,aside:true,width:35%:Subtracting only the single fixed points
 Taking $24 - 4 \\cdot 3! = 0$ for the 4 hats removes every order that returns two or more hats several times. Adding back pairs and subtracting triples gives $24 - 24 + 12 - 4 + 1 = 9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-only-the-single-fixed-points)]@
 
 Behind the five terms of the sum are the counts of orders with chosen hats fixed. Fixing the hat of one chosen guest leaves $3! = 6$ orders, and there are $4$ guests to choose. Fixing a chosen pair leaves $2! = 2$ orders for each of the $\\binom{4}{2} = 6$ pairs, a chosen three leaves $1$ order for each of the $4$ triples, and all four fixed is the single order that returns every hat. An order that returns two hats correctly is among the orders counted for each of those two guests.
 
@@ -2491,72 +2495,10 @@ The [factorial calculator](!/calculators/factorial-calculator) also computes the
   
   obj9: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes come up again and again when counting permutations. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Missing a repeated letter**
-
-In a word with several repeated letters, the factorial of one group or of two groups goes into the denominator and another group is left out. Every arrangement is then counted once for each order of the letters in the missing group.
-
-Wrong working: MISSISSIPPI has $11$ letters with four Is, four Ss and two Ps, and the count is given as $\\frac{11!}{4! \\cdot 4!} = \\frac{39{,}916{,}800}{576} = 69{,}300$.
-
-Right working: every repeated group gets its factorial: $\\frac{11!}{1! \\cdot 4! \\cdot 4! \\cdot 2!} = \\frac{39{,}916{,}800}{1152} = 34{,}650$.
-
-Why it happens: the large groups catch the eye, and a group of two looks too small to matter. Yet a group of two halves the count.
-
-How to check: list the letters with their counts before writing the formula, and make sure the counts add up to $n$: here $1 + 4 + 4 + 2 = 11$. Each count in that list must appear as a factorial in the denominator.
-
-**Dividing by r! when order matters**
-
-The places in the arrangement are different, but the count is done with the binomial coefficient $\\binom{n}{r}$, which treats the chosen items as a group with no order.
-
-Wrong working: gold, silver and bronze among $10$ runners: $\\binom{10}{3} = 120$.
-
-Right working: the medals are different, so the order of the three winners matters: $P(10, 3) = 10 \\cdot 9 \\cdot 8 = 720$. This is $120 \\cdot 3! = 720$: each group of three winners can receive the medals in $6$ orders.
-
-Why it happens: "choose 3 of 10" sounds like a selection, and the binomial coefficient is the more familiar formula. The words gold, silver and bronze are what make the places different.
-
-How to check: swap two of the winners and ask whether the result changes. If gold and silver swapped gives a different outcome, order matters and $P(n, r)$ is the count.
-
-**Swapping the base and the exponent**
-
-In a count with repetition, the number of positions is used as the base and the number of options as the exponent.
-
-Wrong working: a 4-digit PIN from the digits 0 to 9 is counted as $4^{10} = 1{,}048{,}576$.
-
-Right working: there are $4$ positions and each can hold any of $10$ digits, so the count is $10 \\cdot 10 \\cdot 10 \\cdot 10 = 10^4 = 10{,}000$.
-
-Why it happens: $n^r$ is remembered as a pattern of two numbers, without the product of choices behind it.
-
-How to check: write the count as a product of choices, one factor for each position. The number of factors is the exponent and each factor is the base. For a 4-digit PIN the codes 0000 to 9999 give exactly $10{,}000$.
-
-**Using n! for a round table**
-
-Seats around a round table are treated like places in a row, so the count is $n!$. A row has a first place; a round table does not, and turning the whole table gives the same seating.
-
-Wrong working: $5$ people around a round table: $5! = 120$ seatings.
-
-Right working: each seating appears $5$ times among the $120$ rows, once for each person who could sit in the first place of the row. So the count is $\\frac{5!}{5} = 4! = 24$. Equivalently, fix one person and arrange the other $4$: $4! = 24$.
-
-Why it happens: the people are distinct and order matters, which is exactly the description of a full permutation. The extra condition that turns count as the same arrangement is easy to overlook.
-
-How to check: take $n = 3$. Three people around a table have only $2$ seatings: the order clockwise is either A, B, C or A, C, B. The formula $(3 - 1)! = 2$ agrees, while $3! = 6$ does not.
-
-**Subtracting only the single fixed points**
-
-When counting derangements, the orders that return at least one hat are counted as $n \\cdot (n-1)!$ and subtracted once. Orders that return two or more hats are inside several of these counts, so they are subtracted more than once.
-
-Wrong working: for $4$ guests, $4! - 4 \\cdot 3! = 24 - 24 = 0$ derangements.
-
-Right working: continue the alternating sum: $24 - \\binom{4}{1} 3! + \\binom{4}{2} 2! - \\binom{4}{3} 1! + \\binom{4}{4} 0! = 24 - 24 + 12 - 4 + 1 = 9$.
-
-Why it happens: "subtract the orders where someone gets their own hat" sounds like one subtraction, and $n \\cdot (n-1)!$ looks like the number of such orders. It is not: it counts the identity order $4$ times, once for each guest.
-
-How to check: the answer $0$ is impossible for $n \\geq 2$, since moving every hat one seat along is always a derangement. For small $n$ the small values listed above give a direct check: $!3 = 2$ and $!4 = 9$.
-`,
+    content: `Five mistakes come up again and again when counting permutations. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
     between: ``,
-    after: ``,
+    after: `Each slip uses the right formula with one piece missing or added. Every repeated letter needs its own factorial, an ordered choice does not divide by $r!$, the base is the number of options for each position, a round table divides by $n$, and the derangement sum runs through every term. A small case such as $n = 3$, or a sense check such as $0$ derangements being impossible, exposes each of them.`,
     link: '',
   },
 
@@ -2731,8 +2673,46 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'missing-a-repeated-letter', name: `Missing a repeated letter`, errorAt: 0,
+        what: `In a word with several repeated letters, the factorial of one group or of two groups goes into the denominator and another group is left out. Every arrangement is then counted once for each order of the letters in the missing group.`,
+        wrong: [`MISSISSIPPI has $11$ letters with four Is, four Ss and two Ps, and the count is given as $\\frac{11!}{4! \\cdot 4!} = \\frac{39{,}916{,}800}{576} = 69{,}300$.`],
+        right: [`Every repeated group gets its factorial: $\\frac{11!}{1! \\cdot 4! \\cdot 4! \\cdot 2!} = \\frac{39{,}916{,}800}{1152} = 34{,}650$.`],
+        why: `The large groups catch the eye, and a group of two looks too small to matter. Yet a group of two halves the count.`,
+        check: `List the letters with their counts before writing the formula, and make sure the counts add up to $n$: here $1 + 4 + 4 + 2 = 11$. Each count in that list must appear as a factorial in the denominator.` },
+      { id: 'dividing-by-r-when-order-matters', name: `Dividing by r! when order matters`, errorAt: 1,
+        what: `The places in the arrangement are different, but the count is done with the binomial coefficient $\\binom{n}{r}$, which treats the chosen items as a group with no order.`,
+        wrong: [`Gold, silver and bronze among $10$ runners:`, `$\\binom{10}{3} = 120$.`],
+        right: [`Gold, silver and bronze among $10$ runners:`, `The medals are different, so the order of the three winners matters: $P(10, 3) = 10 \\cdot 9 \\cdot 8 = 720$. This is $120 \\cdot 3! = 720$: each group of three winners can receive the medals in $6$ orders.`],
+        why: `"choose 3 of 10" sounds like a selection, and the binomial coefficient is the more familiar formula. The words gold, silver and bronze are what make the places different.`,
+        check: `Swap two of the winners and ask whether the result changes. If gold and silver swapped gives a different outcome, order matters and $P(n, r)$ is the count.` },
+      { id: 'swapping-the-base-and-the-exponent', name: `Swapping the base and the exponent`, errorAt: 0,
+        what: `In a count with repetition, the number of positions is used as the base and the number of options as the exponent.`,
+        wrong: [`A 4-digit PIN from the digits 0 to 9 is counted as $4^{10} = 1{,}048{,}576$.`],
+        right: [`There are $4$ positions and each can hold any of $10$ digits, so the count is $10 \\cdot 10 \\cdot 10 \\cdot 10 = 10^4 = 10{,}000$.`],
+        why: `$n^r$ is remembered as a pattern of two numbers, without the product of choices behind it.`,
+        check: `Write the count as a product of choices, one factor for each position. The number of factors is the exponent and each factor is the base. For a 4-digit PIN the codes 0000 to 9999 give exactly $10{,}000$.` },
+      { id: 'using-n-for-a-round-table', name: `Using n! for a round table`, errorAt: 1,
+        what: `Seats around a round table are treated like places in a row, so the count is $n!$. A row has a first place; a round table does not, and turning the whole table gives the same seating.`,
+        wrong: [`$5$ people around a round table:`, `$5! = 120$ seatings.`],
+        right: [`$5$ people around a round table:`, `Each seating appears $5$ times among the $120$ rows, once for each person who could sit in the first place of the row. So the count is $\\frac{5!}{5} = 4! = 24$. Equivalently, fix one person and arrange the other $4$: $4! = 24$.`],
+        why: `The people are distinct and order matters, which is exactly the description of a full permutation. The extra condition that turns count as the same arrangement is easy to overlook.`,
+        check: `Take $n = 3$. Three people around a table have only $2$ seatings: the order clockwise is either A, B, C or A, C, B. The formula $(3 - 1)! = 2$ agrees, while $3! = 6$ does not.` },
+      { id: 'subtracting-only-the-single-fixed-points', name: `Subtracting only the single fixed points`, errorAt: 0,
+        what: `When counting derangements, the orders that return at least one hat are counted as $n \\cdot (n-1)!$ and subtracted once. Orders that return two or more hats are inside several of these counts, so they are subtracted more than once.`,
+        wrong: [`For $4$ guests, $4! - 4 \\cdot 3! = 24 - 24 = 0$ derangements.`],
+        right: [`Continue the alternating sum: $24 - \\binom{4}{1} 3! + \\binom{4}{2} 2! - \\binom{4}{3} 1! + \\binom{4}{4} 0! = 24 - 24 + 12 - 4 + 1 = 9$.`],
+        why: `"subtract the orders where someone gets their own hat" sounds like one subtraction, and $n \\cdot (n-1)!$ looks like the number of such orders. It is not: it counts the identity order $4$ times, once for each guest.`,
+        check: `The answer $0$ is impossible for $n \\geq 2$, since moving every hat one seat along is always a derangement. For small $n$ the small values listed above give a direct check: $!3 = 2$ and $!4 = 9$.` },
+    ],
+  };
+
    return {
   props:{
+    pitfallData,
     seoData: {
       title: "Permutations: Types, Formulas, Examples | Learn Math Class",
       description: "Permutations in combinatorics: full, partial, with repetition, with identical items, circular, and derangements. Formulas, notation, and worked examples.",
@@ -2758,7 +2738,7 @@ const schemas = {
 }
   }
   
-export default function PermutationsPage({seoData, sectionsContent, introContent, permutationsDiagram, fullPermutationTable,
+export default function PermutationsPage({ pitfallData,seoData, sectionsContent, introContent, permutationsDiagram, fullPermutationTable,
   identicalTable, permutationsTable, permutationsScenariosTableData, partialWithoutTable,
   permutationWithRepetitionTable, circularTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
@@ -2938,6 +2918,11 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
             parentLabel={sectionsContent.notation.parentLabel}
             theme={'navy'}
           />,
+          <NotationCheatSheet
+            key={'notation-sheet'}
+            sheet={combinatoricsNotationSheet}
+            current={'/combinatorics/permutations'}
+          />,
         ]
     },
       {
@@ -2989,6 +2974,15 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="permutation-pitfalls"
+            title="Common pitfalls with permutations"
+            source="/combinatorics/permutations"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 //   {

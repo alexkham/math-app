@@ -15,6 +15,7 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -387,7 +388,7 @@ Skipping the combination step — trying to work with two separate fractions —
 
 @academic[pitfall,aside:true,width:35%:Subtracting the constant from the numerator only
 Writing $\\frac{x - 3}{x + 2} - 1$ as $\\frac{x - 4}{x + 2}$ takes the $1$ off the numerator alone, and $\\frac{x - 4}{x + 2} > 0$ gives $(-\\infty, -2) \\cup (4, \\infty)$. With $1 = \\frac{x + 2}{x + 2}$, the fraction is $\\frac{-5}{x + 2}$ and the solution is $(-\\infty, -2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-constant-from-the-numerator-only)]@
 
 The combination step is ordinary fraction subtraction. Before two terms are merged, each one is written over the common denominator, so in the general form the constant $k$ enters the numerator as $k \\cdot Q(x)$, and in the example the fraction $\\frac{2}{x + 1}$ enters it as $2(x - 3)$.
 
@@ -405,7 +406,7 @@ An inequality requiring combination: solve $\\frac{1}{x - 3} \\leq \\frac{2}{x +
 
 @academic[pitfall,aside:true,width:35%:Bracketing a denominator zero
 Under $\\leq 0$, giving every critical point a bracket turns the answer into $[-1, 3] \\cup [7, \\infty)$, but at $x = -1$ and $x = 3$ the fraction $\\frac{-x + 7}{(x - 3)(x + 1)}$ is undefined. Only the numerator zero gets a bracket: $(-1, 3) \\cup [7, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-bracketing-a-denominator-zero)]@
 
 In this example the inequality is non-strict, and all three critical points sit at the ends of the selected intervals. Which of them belong to the answer is a separate question from which intervals are selected, and it is settled point by point with the endpoint rules from the earlier section.
 
@@ -413,7 +414,7 @@ An inequality with a repeated factor: solve $\\frac{(x - 1)^2}{x + 3} \\geq 0$. 
 
 @academic[pitfall,aside:true,width:35%:Alternating signs past a squared factor
 Flipping the sign at every critical point of $\\frac{(x - 1)^2}{x + 3} \\geq 0$ makes $(-\\infty, -3)$ positive and gives $(-\\infty, -3) \\cup [1, \\infty)$. But $x = -4$ gives $\\frac{25}{-1} = -25$. The sign changes only at $x = -3$, and the answer is $(-3, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-alternating-signs-past-a-squared-factor)]@
 
 The second example could move from right to left flipping the sign at each critical point, because every factor there has odd multiplicity. Here the factor $(x - 1)$ is squared, so the multiplicity of each critical point is read before the chart is filled in.
 
@@ -453,49 +454,9 @@ The sign chart handles the inequality question by treating numerator and denomin
 
   obj10: {
     title: `Common Pitfalls`,
-    content: `Cross-multiplication has a section of its own above. Three more mistakes account for many wrong answers to rational inequalities; each one is marked where it happens in the sections above, and here each is worked through in full, with the wrong and the right working side by side.
-
-**Subtracting the constant from the numerator only**
-
-An inequality compared with a constant is moved into standard form, but the constant is subtracted from the numerator without first being written over the denominator.
-
-Wrong working:
-$$\\frac{x - 3}{x + 2} > 1 \\implies \\frac{x - 3 - 1}{x + 2} > 0 \\implies \\frac{x - 4}{x + 2} > 0$$
-The critical points $x = -2$ and $x = 4$ give the solution $(-\\infty, -2) \\cup (4, \\infty)$.
-
-Right working: write $1$ as $\\frac{x + 2}{x + 2}$ before subtracting.
-$$\\frac{x - 3 - (x + 2)}{x + 2} > 0 \\implies \\frac{-5}{x + 2} > 0$$
-The numerator is always negative, so the fraction is positive only where $x + 2 < 0$. The solution is $(-\\infty, -2)$.
-
-Why it happens: the constant has no visible denominator, so it looks as if it can be taken straight off the numerator, and the common-denominator step is skipped.
-
-How to check: test a value from the wrong answer that lies outside the right one. $x = 5$ gives $\\frac{5 - 3}{5 + 2} = \\frac{2}{7}$, which is not greater than $1$. A value from the right answer, $x = -3$, gives $\\frac{-6}{-1} = 6 > 1$.
-
-**Bracketing a denominator zero**
-
-Under a non-strict inequality, every critical point at the end of a selected interval is given a square bracket, including the zeros of the denominator.
-
-Wrong working: for $\\frac{-x + 7}{(x - 3)(x + 1)} \\leq 0$, the negative intervals are $(-1, 3)$ and $(7, \\infty)$, and with $\\leq$ all their endpoints are included: $[-1, 3] \\cup [7, \\infty)$.
-
-Right working: $x = 7$ is a numerator zero, where the expression equals $0$, so it is included. $x = -1$ and $x = 3$ are denominator zeros, where the expression is undefined, so they are excluded under every symbol. The solution is $(-1, 3) \\cup [7, \\infty)$.
-
-Why it happens: the habit of including every endpoint under $\\leq$ and $\\geq$ comes from polynomial inequalities, where every critical point is a zero of the expression. A rational inequality has a second kind of critical point that this habit does not cover.
-
-How to check: substitute each bracketed endpoint into the expression. At $x = 3$ the denominator is $(3 - 3)(3 + 1) = 0$, so the expression has no value to compare with $0$. At $x = 7$ it is $\\frac{0}{32} = 0$, which satisfies $\\leq 0$.
-
-**Alternating signs past a squared factor**
-
-The sign chart is filled in by flipping the sign at every critical point, even where the factor that vanishes there has even multiplicity.
-
-Wrong working: for $\\frac{(x - 1)^2}{x + 3} \\geq 0$, the sign is positive on $(1, \\infty)$, then flipped to negative on $(-3, 1)$ and to positive on $(-\\infty, -3)$. With the numerator zero included, the answer is $(-\\infty, -3) \\cup [1, \\infty)$.
-
-Right working: $(x - 1)^2$ is never negative, so the sign does not change at $x = 1$. Only $x + 3$ changes sign, at $x = -3$: the expression is negative on $(-\\infty, -3)$ and non-negative on $(-3, \\infty)$. The solution is $(-3, \\infty)$.
-
-Why it happens: the right-to-left flipping shortcut works whenever every factor has odd multiplicity, as in the second worked example, and it gets applied without checking the exponents.
-
-How to check: test one value in each interval. $x = -4$ gives $\\frac{25}{-1} = -25$, so $(-\\infty, -3)$ fails; $x = 0$ gives $\\frac{1}{3} > 0$, so $(-3, 1)$ belongs to the answer.`,
+    content: `Cross-multiplication has a section of its own above. Three more mistakes account for many wrong answers to rational inequalities; each one is marked where it happens in the sections above, and here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each of the three slips goes wrong at the critical points: one produces the wrong numerator and so the wrong points, one includes points where the expression is undefined, and one changes the sign at a point where the expression only touches zero. Testing one value inside every interval, and checking each endpoint in the original expression, catches them all.`,
     link: '',
   },
 };
@@ -718,8 +679,34 @@ const schemas = {
     ],
   };
 
+  // MistakeFix 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'subtracting-the-constant-from-the-numerator-only', name: `Subtracting the constant from the numerator only`, errorAt: 1,
+        what: `An inequality compared with a constant is moved into standard form, but the constant is subtracted from the numerator without first being written over the denominator.`,
+        wrong: [`$$\\frac{x - 3}{x + 2} > 1$$`, `$$\\implies \\frac{x - 3 - 1}{x + 2} > 0$$`, `$$\\implies \\frac{x - 4}{x + 2} > 0$$`, `The critical points $x = -2$ and $x = 4$ give the solution $(-\\infty, -2) \\cup (4, \\infty)$.`],
+        right: [`$$\\frac{x - 3}{x + 2} > 1$$`, `Write $1$ as $\\frac{x + 2}{x + 2}$ before subtracting.`, `$$\\frac{x - 3 - (x + 2)}{x + 2} > 0$$`, `$$\\implies \\frac{-5}{x + 2} > 0$$`, `The numerator is always negative, so the fraction is positive only where $x + 2 < 0$. The solution is $(-\\infty, -2)$.`],
+        why: `The constant has no visible denominator, so it looks as if it can be taken straight off the numerator, and the common-denominator step is skipped.`,
+        check: `Test a value from the wrong answer that lies outside the right one. $x = 5$ gives $\\frac{5 - 3}{5 + 2} = \\frac{2}{7}$, which is not greater than $1$. A value from the right answer, $x = -3$, gives $\\frac{-6}{-1} = 6 > 1$.` },
+      { id: 'bracketing-a-denominator-zero', name: `Bracketing a denominator zero`, errorAt: 0,
+        what: `Under a non-strict inequality, every critical point at the end of a selected interval is given a square bracket, including the zeros of the denominator.`,
+        wrong: [`For $\\frac{-x + 7}{(x - 3)(x + 1)} \\leq 0$, the negative intervals are $(-1, 3)$ and $(7, \\infty)$, and with $\\leq$ all their endpoints are included: $[-1, 3] \\cup [7, \\infty)$.`],
+        right: [`$x = 7$ is a numerator zero, where the expression equals $0$, so it is included. $x = -1$ and $x = 3$ are denominator zeros, where the expression is undefined, so they are excluded under every symbol. The solution is $(-1, 3) \\cup [7, \\infty)$.`],
+        why: `The habit of including every endpoint under $\\leq$ and $\\geq$ comes from polynomial inequalities, where every critical point is a zero of the expression. A rational inequality has a second kind of critical point that this habit does not cover.`,
+        check: `Substitute each bracketed endpoint into the expression. At $x = 3$ the denominator is $(3 - 3)(3 + 1) = 0$, so the expression has no value to compare with $0$. At $x = 7$ it is $\\frac{0}{32} = 0$, which satisfies $\\leq 0$.` },
+      { id: 'alternating-signs-past-a-squared-factor', name: `Alternating signs past a squared factor`, errorAt: 0,
+        what: `The sign chart is filled in by flipping the sign at every critical point, even where the factor that vanishes there has even multiplicity.`,
+        wrong: [`For $\\frac{(x - 1)^2}{x + 3} \\geq 0$, the sign is positive on $(1, \\infty)$, then flipped to negative on $(-3, 1)$ and to positive on $(-\\infty, -3)$. With the numerator zero included, the answer is $(-\\infty, -3) \\cup [1, \\infty)$.`],
+        right: [`$(x - 1)^2$ is never negative, so the sign does not change at $x = 1$. Only $x + 3$ changes sign, at $x = -3$: the expression is negative on $(-\\infty, -3)$ and non-negative on $(-3, \\infty)$. The solution is $(-3, \\infty)$.`],
+        why: `The right-to-left flipping shortcut works whenever every factor has odd multiplicity, as in the second worked example, and it gets applied without checking the exponents.`,
+        check: `Test one value in each interval. $x = -4$ gives $\\frac{25}{-1} = -25$, so $(-\\infty, -3)$ fails; $x = 0$ gives $\\frac{1}{3} > 0$, so $(-3, 1)$ belongs to the answer.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     oneSideSteps,
@@ -741,7 +728,7 @@ return {
   }
 }}
 
-export default function RationalInequalitiesPage({
+export default function RationalInequalitiesPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -960,6 +947,15 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="rational-inequality-pitfalls"
+            title="Common pitfalls in rational inequalities"
+            source="/algebra/inequalities/rational"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

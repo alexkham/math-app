@@ -14,6 +14,8 @@ import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -462,6 +464,24 @@ const keyWords = [
 //   }
 
 
+// Concept introduction (section 1, "Product Rule") — template A, definition
+// last. Running instance: three products of powers written out factor by
+// factor. Old obj1 text is kept in sectionsContent.obj1, unused; its six
+// passages, formula box and link, pitfall, the product demo frame and its line
+// are carried in unchanged.
+const ciCell = 'padding: 10px 15px; border-bottom: 1px solid #ddd; color: #34495e; text-align: center;'
+const ciRow = (cells, opts = {}) => `<tr${opts.shade ? ' style="background: #f8f9fa;"' : ''}>` +
+  cells.map((c, i) => `<td style="${ciCell}${opts.last ? ' border-bottom: none;' : ''}${opts.color && (opts.cols ? opts.cols.includes(i) : true) ? ` color: ${opts.color}; font-weight: bold;` : ''}">${c}</td>`).join('') + '</tr>'
+const ciTableOpen = (heads) => `
+<table class="styled-table" style="border-collapse: collapse; width: auto; min-width: 60%; margin: 18px auto; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; font-family: Arial, sans-serif;">
+  <thead><tr>${heads.map((h) => `<th style="${tableHeaders.aggregation} text-align: center;">${h}</th>`).join('')}</tr></thead>
+  <tbody>`
+const ciFactorsTable = ciTableOpen(['product', 'written out', 'factors', 'result']) +
+  ciRow(['2² · 2³', '(2 · 2) · (2 · 2 · 2)', '2 + 3 = 5', '2⁵ = 32']) +
+  ciRow(['x³ · x⁵', '(x · x · x) · (x · x · x · x · x)', '3 + 5 = 8', 'x⁸'], { shade: true }) +
+  ciRow(['10² · 10⁴', '100 · 10 000', '2 + 4 = 6', '10⁶'], { last: true, color: '#2563EB', cols: [2] }) +
+  '</tbody></table>'
+
 const sectionsContent = {
 
   obj0: {
@@ -513,7 +533,7 @@ The base stays fixed. Only the exponents combine. The expression $x^3 \\cdot x^5
 
 @academic[pitfall,aside:true,width:35%:Multiplying the exponents
 Writing $2^3 \\cdot 2^2$ as $2^6$ gives $64$. The product is $8 \\cdot 4 = 32 = 2^5$: the exponents add, $3 + 2 = 5$.
-[Read more](!#10)]@
+[Read more](!#pitfall-multiplying-the-exponents)]@
 
 Counting factors shows why the exponents add. In $x^3 \\cdot x^5$ the first power holds three factors of $x$ and the second holds five, and writing them side by side gives one string of eight factors. The rule is a shortcut for that count.
 
@@ -540,7 +560,7 @@ The rule requires $a \\neq 0$. The expression $\\frac{x^7}{x^2} = x^5$, and $\\f
 
 @academic[pitfall,aside:true,width:35%:Dividing the exponents
 Writing $\\frac{2^6}{2^2}$ as $2^{6/2} = 2^3$ gives $8$. The quotient is $\\frac{64}{4} = 16 = 2^4$: the exponents subtract, $6 - 2 = 4$.
-[Read more](!#10)]@
+[Read more](!#pitfall-dividing-the-exponents)]@
 
 When $m = n$, the result is $a^0 = 1$. When $m < n$, the result is a [negative exponent](!/algebra/powers/negative-exponents) — a reciprocal. Both cases are natural consequences of subtracting exponents, and both require $a \\neq 0$.
 
@@ -567,7 +587,7 @@ The expression $(x^3)^4 = x^{12}$, and $(2^{-1})^3 = 2^{-3} = \\frac{1}{8}$.
 
 @academic[pitfall,aside:true,width:35%:Adding the exponents
 Writing $(3^2)^3$ as $3^{2+3} = 3^5$ gives $243$. The value is $9^3 = 729 = 3^6$: the exponents multiply, $2 \\cdot 3 = 6$.
-[Read more](!#10)]@
+[Read more](!#pitfall-adding-the-exponents)]@
 
 Counting factors shows why the exponents multiply. The power $(x^3)^4$ is four copies of the block $x^3$, and each block holds three factors of $x$, so the total is $4 \\cdot 3 = 12$ factors.
 
@@ -601,7 +621,7 @@ The expression $(3x)^4 = 3^4 \\cdot x^4 = 81x^4$.
 
 @academic[pitfall,aside:true,width:35%:Raising only the variable
 Writing $(2x)^3$ as $2x^3$ leaves the $2$ unraised: at $x = 1$ it gives $2$, but $(2 \\cdot 1)^3 = 8$. Every factor takes the exponent: $(2x)^3 = 8x^3$.
-[Read more](!#10)]@
+[Read more](!#pitfall-raising-only-the-variable)]@
 
 The distribution works because multiplication is commutative — the factors can be rearranged so that all copies of $a$ group together and all copies of $b$ group together.
 
@@ -649,7 +669,7 @@ The rule requires $a \\neq 0$. The expression $4^{-2} = \\frac{1}{16}$, and $x^{
 
 @academic[pitfall,aside:true,width:35%:Reading a negative exponent as a negative number
 Writing $5^{-2}$ as $-25$ treats the minus sign as the sign of the value. The exponent asks for a reciprocal: $5^{-2} = \\frac{1}{25}$, which is positive.
-[Read more](!#10)]@
+[Read more](!#pitfall-reading-a-negative-exponent-as-a-negative-number)]@
 
 An expression like $\\frac{x^{-3}}{y^{-2}}$ rewrites as $\\frac{y^2}{x^3}$ — each negative exponent crosses the fraction bar and becomes positive.
 
@@ -706,7 +726,7 @@ Both forms are equivalent. The expression $8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$
 
 @academic[pitfall,aside:true,width:35%:Multiplying by the exponent
 Writing $9^{1/2}$ as $9 \\cdot \\frac{1}{2}$ gives $4.5$. The exponent $\\frac{1}{2}$ asks for a square root: $9^{1/2} = \\sqrt{9} = 3$.
-[Read more](!#10)]@
+[Read more](!#pitfall-multiplying-by-the-exponent)]@
 
 In $8^{2/3}$, the denominator $3$ of the exponent names the root and the numerator $2$ names the power. Taking the root first keeps the numbers small: $\\sqrt[3]{8} = 2$, and then $2^2 = 4$. Taking the power first reaches the same value by a longer route, $\\sqrt[3]{64} = 4$.
 
@@ -746,93 +766,9 @@ The expression $0^{-n}$ is undefined for any positive $n$, since it demands divi
 
 The expressions $(-a)^n$ and $-a^n$ are not interchangeable. The first raises the negative quantity to the power: $(-3)^2 = 9$. The second raises $a$ to the power and then negates: $-3^2 = -9$. Parentheses determine which interpretation applies.
 
-The most persistent algebraic error is distributing an exponent over a sum: $(a + b)^n \\neq a^n + b^n$. The power of a product rule applies to multiplication, not addition. The expression $(2 + 3)^2 = 25$, while $2^2 + 3^2 = 13$. Expanding $(a + b)^n$ requires the binomial theorem or term-by-term multiplication — the exponent does not distribute.
-
-**Multiplying the exponents**
-
-Two powers of the same base are multiplied, and the exponents are multiplied too, as in the power of a power rule.
-
-Wrong working:
-$$2^3 \\cdot 2^2 = 2^{3 \\cdot 2} = 2^6 = 64$$
-
-Right working: the product rule adds the exponents.
-$$2^3 \\cdot 2^2 = 2^{3 + 2} = 2^5 = 32$$
-
-Why it happens: the product rule and the power of a power rule both combine two exponents, and the one that multiplies is easily borrowed for the one that adds.
-
-How to check: evaluate both sides. $2^3 \\cdot 2^2 = 8 \\cdot 4 = 32$, which matches $2^5$ and not $2^6 = 64$.
-
-**Dividing the exponents**
-
-Two powers of the same base are divided, and the exponents are divided as well.
-
-Wrong working:
-$$\\frac{2^6}{2^2} = 2^{6/2} = 2^3 = 8$$
-
-Right working: the quotient rule subtracts the exponents.
-$$\\frac{2^6}{2^2} = 2^{6 - 2} = 2^4 = 16$$
-
-Why it happens: dividing the powers suggests dividing the exponents, by the same pattern that makes multiplying them look right in the product rule.
-
-How to check: evaluate both sides. $\\frac{2^6}{2^2} = \\frac{64}{4} = 16 = 2^4$. Cancelling shows it too: two of the six factors of $2$ cancel, leaving four.
-
-**Adding the exponents**
-
-A power is raised to another power, and the exponents are added as in the product rule.
-
-Wrong working:
-$$(3^2)^3 = 3^{2 + 3} = 3^5 = 243$$
-
-Right working: the power of a power rule multiplies the exponents.
-$$(3^2)^3 = 3^{2 \\cdot 3} = 3^6 = 729$$
-
-Why it happens: $(3^2)^3$ shows two exponents next to each other, which looks like the two exponents of the product rule's $a^m \\cdot a^n$.
-
-How to check: write out the copies. $(3^2)^3 = 3^2 \\cdot 3^2 \\cdot 3^2$ is three blocks of two factors, six factors in all, and $9 \\cdot 9 \\cdot 9 = 729$.
-
-**Raising only the variable**
-
-A product such as $2x$ is raised to a power, and the exponent is applied to the variable but not to the number in front of it.
-
-Wrong working:
-$$(2x)^3 = 2x^3$$
-
-Right working: the exponent goes to every factor of the product.
-$$(2x)^3 = 2^3 \\cdot x^3 = 8x^3$$
-
-Why it happens: $2x^3$ and $(2x)^3$ differ only by the parentheses, and the coefficient is read as standing outside the power.
-
-How to check: substitute $x = 1$. The original gives $(2 \\cdot 1)^3 = 8$; the wrong form gives $2$ and the right form gives $8$.
-
-**Reading a negative exponent as a negative number**
-
-The minus sign in the exponent is moved onto the value, so the power becomes negative instead of becoming a reciprocal.
-
-Wrong working:
-$$5^{-2} = -5^2 = -25$$
-
-Right working: a negative exponent gives the reciprocal of the positive power.
-$$5^{-2} = \\frac{1}{5^2} = \\frac{1}{25}$$
-
-Why it happens: everywhere else a minus sign makes a number negative, and that meaning is carried into the exponent.
-
-How to check: a positive base raised to any power is positive, so a negative result is impossible. The pattern $5^1 = 5$, $5^0 = 1$, $5^{-1} = \\frac{1}{5}$, $5^{-2} = \\frac{1}{25}$ divides by $5$ at each step.
-
-**Multiplying by the exponent**
-
-A fractional exponent is treated as a multiplier, so the base is multiplied by the fraction instead of having a root taken.
-
-Wrong working:
-$$9^{1/2} = 9 \\cdot \\frac{1}{2} = 4.5$$
-
-Right working: the exponent $\\frac{1}{2}$ is a square root.
-$$9^{1/2} = \\sqrt{9} = 3$$
-
-Why it happens: the exponent is read as an ordinary number to multiply by, instead of as an instruction about repeated multiplication.
-
-How to check: square the answer. Since $(9^{1/2})^2 = 9^1 = 9$, the value must square to $9$. But $4.5^2 = 20.25$, while $3^2 = 9$.`,
+The most persistent algebraic error is distributing an exponent over a sum: $(a + b)^n \\neq a^n + b^n$. The power of a product rule applies to multiplication, not addition. The expression $(2 + 3)^2 = 25$, while $2^2 + 3^2 = 13$. Expanding $(a + b)^n$ requires the binomial theorem or term-by-term multiplication — the exponent does not distribute.`,
     before: ``,
-    after: ``,
+    after: `Four of the six slips misapply a rule for combining exponents: the product rule adds them, the quotient rule subtracts them, a power of a power multiplies them, and a power of a product goes to every factor. The other two read the exponent as an ordinary number: $5^{-2}$ is a reciprocal, not $-25$, and $9^{1/2}$ is a square root, not $9 \\cdot \\frac{1}{2}$. A quick numerical check exposes each of them: evaluate both sides, substitute $x = 1$, or square the answer.`,
     link: '',
   },
 
@@ -977,6 +913,10 @@ const schemas = {
   // panel reading that state, and the contextual link, in one frame. Built
   // here and rendered as content-array items - never interpolated into
   // sectionsContent, which cannot carry a wrapper div around an <svg>.
+  const conceptIntroFigures = {
+    factorsTable: ciFactorsTable,
+  };
+
   const demoUnits = {
     product: demoUnitFrame({
       svg: powersTableDiagrams['b2-default'],
@@ -1046,11 +986,62 @@ const schemas = {
     ] }],
   };
 
+  // MistakeFix batch 5, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-the-exponents', name: `Multiplying the exponents`, errorAt: 1,
+        what: `Two powers of the same base are multiplied, and the exponents are multiplied too, as in the power of a power rule.`,
+        wrong: [`$$2^3 \\cdot 2^2$$`, `$$= 2^{3 \\cdot 2} = 2^6 = 64$$`],
+        right: [`$$2^3 \\cdot 2^2$$`, `The product rule adds the exponents.
+$$= 2^{3 + 2} = 2^5 = 32$$`],
+        why: `The product rule and the power of a power rule both combine two exponents, and the one that multiplies is easily borrowed for the one that adds.`,
+        check: `Evaluate both sides. $2^3 \\cdot 2^2 = 8 \\cdot 4 = 32$, which matches $2^5$ and not $2^6 = 64$.` },
+      { id: 'dividing-the-exponents', name: `Dividing the exponents`, errorAt: 1,
+        what: `Two powers of the same base are divided, and the exponents are divided as well.`,
+        wrong: [`$$\\frac{2^6}{2^2}$$`, `$$= 2^{6/2} = 2^3 = 8$$`],
+        right: [`$$\\frac{2^6}{2^2}$$`, `The quotient rule subtracts the exponents.
+$$= 2^{6 - 2} = 2^4 = 16$$`],
+        why: `Dividing the powers suggests dividing the exponents, by the same pattern that makes multiplying them look right in the product rule.`,
+        check: `Evaluate both sides. $\\frac{2^6}{2^2} = \\frac{64}{4} = 16 = 2^4$. Cancelling shows it too: two of the six factors of $2$ cancel, leaving four.` },
+      { id: 'adding-the-exponents', name: `Adding the exponents`, errorAt: 1,
+        what: `A power is raised to another power, and the exponents are added as in the product rule.`,
+        wrong: [`$$(3^2)^3$$`, `$$= 3^{2 + 3} = 3^5 = 243$$`],
+        right: [`$$(3^2)^3$$`, `The power of a power rule multiplies the exponents.
+$$= 3^{2 \\cdot 3} = 3^6 = 729$$`],
+        why: `$(3^2)^3$ shows two exponents next to each other, which looks like the two exponents of the product rule's $a^m \\cdot a^n$.`,
+        check: `Write out the copies. $(3^2)^3 = 3^2 \\cdot 3^2 \\cdot 3^2$ is three blocks of two factors, six factors in all, and $9 \\cdot 9 \\cdot 9 = 729$.` },
+      { id: 'raising-only-the-variable', name: `Raising only the variable`, errorAt: 1,
+        what: `A product such as $2x$ is raised to a power, and the exponent is applied to the variable but not to the number in front of it.`,
+        wrong: [`$$(2x)^3$$`, `$$= 2x^3$$`],
+        right: [`$$(2x)^3$$`, `The exponent goes to every factor of the product.
+$$= 2^3 \\cdot x^3 = 8x^3$$`],
+        why: `$2x^3$ and $(2x)^3$ differ only by the parentheses, and the coefficient is read as standing outside the power.`,
+        check: `Substitute $x = 1$. The original gives $(2 \\cdot 1)^3 = 8$; the wrong form gives $2$ and the right form gives $8$.` },
+      { id: 'reading-a-negative-exponent-as-a-negative-number', name: `Reading a negative exponent as a negative number`, errorAt: 1,
+        what: `The minus sign in the exponent is moved onto the value, so the power becomes negative instead of becoming a reciprocal.`,
+        wrong: [`$$5^{-2}$$`, `$$= -5^2 = -25$$`],
+        right: [`$$5^{-2}$$`, `A negative exponent gives the reciprocal of the positive power.
+$$= \\frac{1}{5^2} = \\frac{1}{25}$$`],
+        why: `Everywhere else a minus sign makes a number negative, and that meaning is carried into the exponent.`,
+        check: `A positive base raised to any power is positive, so a negative result is impossible. The pattern $5^1 = 5$, $5^0 = 1$, $5^{-1} = \\frac{1}{5}$, $5^{-2} = \\frac{1}{25}$ divides by $5$ at each step.` },
+      { id: 'multiplying-by-the-exponent', name: `Multiplying by the exponent`, errorAt: 1,
+        what: `A fractional exponent is treated as a multiplier, so the base is multiplied by the fraction instead of having a root taken.`,
+        wrong: [`$$9^{1/2}$$`, `$$= 9 \\cdot \\frac{1}{2} = 4.5$$`],
+        right: [`$$9^{1/2}$$`, `The exponent $\\frac{1}{2}$ is a square root.
+$$= \\sqrt{9} = 3$$`],
+        why: `The exponent is read as an ordinary number to multiply by, instead of as an instruction about repeated multiplication.`,
+        check: `Square the answer. Since $(9^{1/2})^2 = 9^1 = 9$, the value must square to $9$. But $4.5^2 = 20.25$, while $3^2 = 9$.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     exponentLawCards,
     expQuotientCases,
     demoUnits,
+    conceptIntroFigures,
     sectionsContent,
     introContent,
     obj9Table,
@@ -1072,9 +1063,78 @@ const schemas = {
 // export default function RulesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RulesPage({exponentLawCards, expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function RulesPage({ pitfallData,exponentLawCards, expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
+
+  const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
+
+  // Section 1 concept introduction — template A (definition last).
+  const conceptIntro = {
+    beats: [
+      {
+        id: 'intuition',
+        lead: `2² · 2³ can be worked out as 4 · 8 = 32. Is there a faster way, straight from the exponents?`,
+        content: [
+          `Write each power out as a string of equal factors and count them.`,
+        ],
+      },
+      {
+        id: 'example',
+        kind: 'instance',
+        lead: `Multiplying two powers of the same base just joins their strings of factors.`,
+        content: [
+          ciTable('factorsTable'),
+          `The number of factors in the product is the sum of the numbers of factors in the two powers.`,
+        ],
+      },
+      {
+        id: 'pattern',
+        lead: `Same base: count the factors, and the exponents add.`,
+        content: [
+          `Counting factors shows why the exponents add. In $x^3 \\cdot x^5$ the first power holds three factors of $x$ and the second holds five, and writing them side by side gives one string of eight factors. The rule is a shortcut for that count.`,
+        ],
+      },
+      {
+        id: 'definition',
+        kind: 'definition',
+        statement: `The **product rule** for exponents: powers of the same base multiply by adding their exponents, $a^m \\cdot a^n = a^{m+n}$.`,
+        formula: [
+          `Multiplying two powers that share the same base adds the exponents:`,
+          `@academic[formula_callout:Product Rule
+$$a^m \\cdot a^n = a^{m+n}$$
+/algebra/formulas#product_rule_exponents]@`,
+          `@academic[formulas_link:Browse all algebra formulas
+/algebra/formulas]@`,
+          `The base stays fixed. Only the exponents combine. The expression $x^3 \\cdot x^5 = x^8$, and $2^{-1} \\cdot 2^{4} = 2^3 = 8$.`,
+        ],
+        footer: `So $2^2 \\cdot 2^3 = 2^5 = 32$ and $x^3 \\cdot x^5 = x^8$.`,
+      },
+      {
+        id: 'kind',
+        lead: `The rule starts from counting factors and extends to every real exponent.`,
+        content: [
+          `This identity holds for all real exponents $m$ and $n$, subject to the domain restrictions on the base outlined later on this page.`,
+          <div key={'unit-product'} dangerouslySetInnerHTML={{ __html: demoUnits.product }} />,
+          `The quotient rule reads the same table upward instead of downward.`,
+        ],
+      },
+      {
+        id: 'caveat',
+        lead: `The bases must match, and the exponents add — they are not multiplied.`,
+        content: [
+          `The rule requires the bases to match. The product $2^3 \\cdot 3^4$ cannot be reduced by adding exponents — different bases mean the rule does not apply.`,
+          `@academic[pitfall,aside:true,width:35%:Multiplying the exponents
+Writing $2^3 \\cdot 2^2$ as $2^6$ gives $64$. The product is $8 \\cdot 4 = 32 = 2^5$: the exponents add, $3 + 2 = 5$.
+[Read more](!#pitfall-multiplying-the-exponents)]@`,
+        ],
+      },
+      {
+        id: 'exit',
+        content: `The rest of the page covers the quotient rule, powers of powers, products and quotients, negative, zero and rational exponents, domain restrictions, edge cases and common mistakes, and a master reference.`,
+      },
+    ],
+  }
     
   const genericSections=[
       {
@@ -1090,9 +1150,7 @@ export default function RulesPage({exponentLawCards, expQuotientCases, seoData, 
         title:sectionsContent.obj1.title,
         link:sectionsContent.obj1.link,
         content:[
-          sectionsContent.obj1.content,
-                  <div key={'unit-product'} dangerouslySetInnerHTML={{ __html: demoUnits.product }} />,
-          `The quotient rule reads the same table upward instead of downward.`,
+          <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
         ]
     },
     {
@@ -1187,6 +1245,15 @@ export default function RulesPage({exponentLawCards, expQuotientCases, seoData, 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="exponent-rule-pitfalls"
+            title="Common pitfalls with the exponent rules"
+            source="/algebra/powers/exponent-rules"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 

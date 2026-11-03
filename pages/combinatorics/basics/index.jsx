@@ -1022,6 +1022,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1430,7 +1431,7 @@ The first two are foundational; the other three extend or apply them.
 
 @academic[pitfall,aside:true,width:35%:Adding counts of sequential choices
 Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 + 3 = 8$ treats the two choices as alternatives. Each shirt goes with each pair, so there are $5 \\cdot 3 = 15$ outfits.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-counts-of-sequential-choices)]@
 
 Which of the two rules applies depends on how an outcome is built. When a single choice is made from one of several separate groups, the groups are alternatives and each option belongs to exactly one of them. When an outcome needs one choice at each of several stages, every option at one stage can be combined with every option at the next. The linking word in the problem often shows which structure is present: "or" joins alternatives, "and" joins stages.
 `,
@@ -1458,7 +1459,7 @@ $$|A \\cup B| = |A| + |B| - |A \\cap B|.$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the triple intersection
 Counting $1$ to $30$ divisible by $2$, $3$ or $5$ as $15 + 10 + 6 - 5 - 3 - 2 = 21$ loses $30$, which is added three times and subtracted three times. Adding back the triple term gives $21 + 1 = 22$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-triple-intersection)]@
 
 For three sets the pattern continues — add singles, subtract pairwise intersections, add the triple intersection. For $n$ sets the signs alternate down the line, with one term for every non-empty subset of the sets involved.
 
@@ -1498,7 +1499,7 @@ $$\\binom{n}{r} = \\frac{n!}{r!(n-r)!}.$$
 
 @academic[pitfall,aside:true,width:35%:Using a permutation for a selection
 Counting committees of $3$ from $10$ people as $P(10,3) = 720$ treats each order of the same three members as a new committee. A committee has no order, so the count is $\\binom{10}{3} = 120$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-a-permutation-for-a-selection)]@
 
 The two formulas are closely linked. Every unordered selection of $r$ items can be lined up in $r!$ different orders, so each combination stands for exactly $r!$ permutations, and $\\binom{n}{r} = \\frac{P(n,r)}{r!}$. Which count a problem needs depends on whether two outcomes with the same items in a different order are treated as different outcomes.
 
@@ -1541,7 +1542,7 @@ Within the two families, problems reduce to ten standard templates — five perm
 
 @academic[pitfall,aside:true,width:35%:Swapping base and exponent
 Counting ways to drop $3$ distinct letters into $4$ mailboxes as $3^4 = 81$ has each mailbox choosing a letter. Each letter chooses a mailbox, so the count is $4^3 = 64$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-base-and-exponent)]@
 
 Two of the formulas above are powers, and both come from the multiplication rule. In a permutation with repetition, each of the $r$ positions is filled from the $n$ choices, giving one factor of $n$ per position. In a distribution into cells, each of the $n$ items is sent to one of the $r$ cells, giving one factor of $r$ per item.
 
@@ -1591,7 +1592,7 @@ $$(a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} \\, a^{n-k} b^k.$$
 
 @academic[pitfall,aside:true,width:35%:Forgetting the power on b
 Taking the $x^2$ term of $(x + 2)^4$ as $\\binom{4}{2} x^2 \\cdot 2 = 12x^2$ leaves the $2$ without its power. With $b^k = 2^2 = 4$, the term is $6 \\cdot 4\\, x^2 = 24x^2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-power-on-b)]@
 
 Each term of the expansion has three parts: the coefficient $\\binom{n}{k}$, the power $a^{n-k}$ and the power $b^k$, with the two exponents always adding up to $n$. When $a$ or $b$ is a number, or a variable with a coefficient, its power is a number too, and it multiplies into the coefficient of the term. Only for $(x + y)^n$ are the coefficients read directly from a row of Pascal's triangle.
 
@@ -1623,72 +1624,10 @@ The theorem generalizes — the multinomial theorem expands $(x_1 + x_2 + \\cdot
   },
   obj8: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes come up again and again in basic counting problems. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Adding counts of sequential choices**
-
-An outcome is built in stages, one choice at each stage, but the counts of the stages are added as if they were alternatives. The sum counts the options at the stages, not the ways to combine them.
-
-Wrong working: an outfit is one of $5$ shirts and one of $3$ pairs of trousers, so there are $5 + 3 = 8$ outfits.
-
-Right working: every shirt can be worn with every pair of trousers. The multiplication rule gives $5 \\cdot 3 = 15$ outfits.
-
-Why it happens: both rules start from the same numbers, and "5 shirts and 3 pairs of trousers" reads like a list of things to total. The addition rule fits only when exactly one option is picked from one of the groups.
-
-How to check: list the outcomes for a single shirt. It already gives $3$ outfits, one with each pair of trousers, so $5$ shirts give $5$ groups of $3$.
-
-**Dropping the triple intersection**
-
-With three sets, the pairwise intersections are subtracted and the calculation stops there. Elements that lie in all three sets were added three times and subtracted three times, so they are no longer counted at all.
-
-Wrong working: for the numbers $1$ to $30$ divisible by $2$, $3$ or $5$, $|A| = 15$, $|B| = 10$, $|C| = 6$, $|A \\cap B| = 5$, $|A \\cap C| = 3$ and $|B \\cap C| = 2$, so the count is $15 + 10 + 6 - 5 - 3 - 2 = 21$.
-
-Right working: the triple intersection holds the multiples of $30$, so $|A \\cap B \\cap C| = 1$ and $|A \\cup B \\cup C| = 21 + 1 = 22$.
-
-Why it happens: the two-set formula ends with a subtraction, and the three-set version is remembered as "add the sets, subtract the overlaps" without its last term.
-
-How to check: count the complement. The numbers from $1$ to $30$ divisible by none of $2$, $3$ and $5$ are $1, 7, 11, 13, 17, 19, 23, 29$. There are $8$ of them, and $30 - 8 = 22$.
-
-**Using a permutation for a selection**
-
-A problem that asks only which items are chosen is counted with $P(n,r)$, the formula for ordered arrangements. Each selection is then counted once for every order of its items.
-
-Wrong working: a committee of $3$ from $10$ people is counted as $P(10,3) = 10 \\cdot 9 \\cdot 8 = 720$.
-
-Right working: a committee has no first, second or third member, so order does not matter: $\\binom{10}{3} = \\frac{720}{3!} = \\frac{720}{6} = 120$.
-
-Why it happens: picking the members one after another feels like a sequence of choices, and the multiplication rule naturally produces $10 \\cdot 9 \\cdot 8$.
-
-How to check: swap two chosen items. If Ann, Ben, Cat and Cat, Ben, Ann describe the same committee, order does not matter and the ordered count must be divided by $r!$.
-
-**Swapping base and exponent**
-
-In a power formula such as $r^n$ for a distribution into cells, the number of items and the number of cells trade places. The count then answers a different question.
-
-Wrong working: $3$ distinct letters are dropped into $4$ mailboxes, and a mailbox may stay empty. The count is given as $3^4 = 81$.
-
-Right working: each of the $3$ letters chooses one of the $4$ mailboxes, so the count is $4 \\cdot 4 \\cdot 4 = 4^3 = 64$.
-
-Why it happens: the two power formulas on the page, $n^r$ and $r^n$, look alike, and the letters $n$ and $r$ stand for different things in the two scenarios.
-
-How to check: try a single letter. It can go into any of the $4$ mailboxes, which $4^1 = 4$ gives and $1^4 = 1$ does not.
-
-**Forgetting the power on b**
-
-A term of the binomial expansion is written with its coefficient $\\binom{n}{k}$ and the power of the variable, but the number in the binomial is not raised to its power.
-
-Wrong working: the $x^2$ term of $(x + 2)^4$ has $k = 2$, and it is written as $\\binom{4}{2} x^2 \\cdot 2 = 6 \\cdot 2\\, x^2 = 12x^2$.
-
-Right working: the term is $\\binom{4}{2} x^2 \\cdot 2^2 = 6 \\cdot 4\\, x^2 = 24x^2$. The full expansion is $(x + 2)^4 = x^4 + 8x^3 + 24x^2 + 32x + 16$.
-
-Why it happens: in $(a + b)^n$ with letters, $b^k$ looks like bookkeeping for the variables, and when $b$ is a number its power is easy to lose.
-
-How to check: set $x = 1$. The expansion must equal $(1 + 2)^4 = 81$, and $1 + 8 + 24 + 32 + 16 = 81$; with $12x^2$ in place of $24x^2$ the sum is only $69$.
-`,
+    content: `Five mistakes come up again and again in basic counting problems. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
     between: ``,
-    after: ``,
+    after: `Each slip uses the right numbers in the wrong rule. Independent choices multiply, a selection without order divides the ordered count by $r!$, the exponent counts the choices made, the triple intersection goes back in, and the binomial term raises $b$ to the power $k$. Trying a small case such as one shirt or one letter, counting the complement, or setting $x = 1$ catches each slip.`,
     link: '',
   },
   faq: {
@@ -1887,8 +1826,46 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 6, 2026-11-02: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj8 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'adding-counts-of-sequential-choices', name: `Adding counts of sequential choices`, errorAt: 0,
+        what: `An outcome is built in stages, one choice at each stage, but the counts of the stages are added as if they were alternatives. The sum counts the options at the stages, not the ways to combine them.`,
+        wrong: [`An outfit is one of $5$ shirts and one of $3$ pairs of trousers, so there are $5 + 3 = 8$ outfits.`],
+        right: [`Every shirt can be worn with every pair of trousers. The multiplication rule gives $5 \\cdot 3 = 15$ outfits.`],
+        why: `Both rules start from the same numbers, and "5 shirts and 3 pairs of trousers" reads like a list of things to total. The addition rule fits only when exactly one option is picked from one of the groups.`,
+        check: `List the outcomes for a single shirt. It already gives $3$ outfits, one with each pair of trousers, so $5$ shirts give $5$ groups of $3$.` },
+      { id: 'dropping-the-triple-intersection', name: `Dropping the triple intersection`, errorAt: 0,
+        what: `With three sets, the pairwise intersections are subtracted and the calculation stops there. Elements that lie in all three sets were added three times and subtracted three times, so they are no longer counted at all.`,
+        wrong: [`For the numbers $1$ to $30$ divisible by $2$, $3$ or $5$, $|A| = 15$, $|B| = 10$, $|C| = 6$, $|A \\cap B| = 5$, $|A \\cap C| = 3$ and $|B \\cap C| = 2$, so the count is $15 + 10 + 6 - 5 - 3 - 2 = 21$.`],
+        right: [`The triple intersection holds the multiples of $30$, so $|A \\cap B \\cap C| = 1$ and $|A \\cup B \\cup C| = 21 + 1 = 22$.`],
+        why: `The two-set formula ends with a subtraction, and the three-set version is remembered as "add the sets, subtract the overlaps" without its last term.`,
+        check: `Count the complement. The numbers from $1$ to $30$ divisible by none of $2$, $3$ and $5$ are $1, 7, 11, 13, 17, 19, 23, 29$. There are $8$ of them, and $30 - 8 = 22$.` },
+      { id: 'using-a-permutation-for-a-selection', name: `Using a permutation for a selection`, errorAt: 0,
+        what: `A problem that asks only which items are chosen is counted with $P(n,r)$, the formula for ordered arrangements. Each selection is then counted once for every order of its items.`,
+        wrong: [`A committee of $3$ from $10$ people is counted as $P(10,3) = 10 \\cdot 9 \\cdot 8 = 720$.`],
+        right: [`A committee has no first, second or third member, so order does not matter: $\\binom{10}{3} = \\frac{720}{3!} = \\frac{720}{6} = 120$.`],
+        why: `Picking the members one after another feels like a sequence of choices, and the multiplication rule naturally produces $10 \\cdot 9 \\cdot 8$.`,
+        check: `Swap two chosen items. If Ann, Ben, Cat and Cat, Ben, Ann describe the same committee, order does not matter and the ordered count must be divided by $r!$.` },
+      { id: 'swapping-base-and-exponent', name: `Swapping base and exponent`, errorAt: 1,
+        what: `In a power formula such as $r^n$ for a distribution into cells, the number of items and the number of cells trade places. The count then answers a different question.`,
+        wrong: [`$3$ distinct letters are dropped into $4$ mailboxes, and a mailbox may stay empty.`, `The count is given as $3^4 = 81$.`],
+        right: [`$3$ distinct letters are dropped into $4$ mailboxes, and a mailbox may stay empty.`, `Each of the $3$ letters chooses one of the $4$ mailboxes, so the count is $4 \\cdot 4 \\cdot 4 = 4^3 = 64$.`],
+        why: `The two power formulas on the page, $n^r$ and $r^n$, look alike, and the letters $n$ and $r$ stand for different things in the two scenarios.`,
+        check: `Try a single letter. It can go into any of the $4$ mailboxes, which $4^1 = 4$ gives and $1^4 = 1$ does not.` },
+      { id: 'forgetting-the-power-on-b', name: `Forgetting the power on b`, errorAt: 0,
+        what: `A term of the binomial expansion is written with its coefficient $\\binom{n}{k}$ and the power of the variable, but the number in the binomial is not raised to its power.`,
+        wrong: [`The $x^2$ term of $(x + 2)^4$ has $k = 2$, and it is written as $\\binom{4}{2} x^2 \\cdot 2 = 6 \\cdot 2\\, x^2 = 12x^2$.`],
+        right: [`The term is $\\binom{4}{2} x^2 \\cdot 2^2 = 6 \\cdot 4\\, x^2 = 24x^2$. The full expansion is $(x + 2)^4 = x^4 + 8x^3 + 24x^2 + 32x + 16$.`],
+        why: `In $(a + b)^n$ with letters, $b^k$ looks like bookkeeping for the variables, and when $b$ is a number its power is easy to lose.`,
+        check: `Set $x = 1$. The expansion must equal $(1 + 2)^4 = 81$, and $1 + 8 + 24 + 32 + 16 = 81$; with $12x^2$ in place of $24x^2$ the sum is only $69$.` },
+    ],
+  };
+
     return {
   props:{
+    pitfallData,
     scenarioOutline,
     permCombCases,
     demoUnits,
@@ -1915,7 +1892,7 @@ const schemas = {
    
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function CombinatoricsBasicsPage({scenarioOutline, permCombCases, sectionsContent, introContent,
+export default function CombinatoricsBasicsPage({ pitfallData,scenarioOutline, permCombCases, sectionsContent, introContent,
   combinatoricsScenariosData, countingPrinciplesData, countingPrinciplesDiagram,
   seoData, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
@@ -1975,7 +1952,7 @@ export default function CombinatoricsBasicsPage({scenarioOutline, permCombCases,
         content: [
           `@academic[pitfall,aside:true,width:35%:Adding counts of sequential choices
 Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 + 3 = 8$ treats the two choices as alternatives. Each shirt goes with each pair, so there are $5 \\cdot 3 = 15$ outfits.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-adding-counts-of-sequential-choices)]@`,
           `Alternatives that overlap need a correction to the addition rule, set out in [when counts overlap](!/combinatorics/basics#2).`,
         ],
       },
@@ -2070,6 +2047,15 @@ Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 +
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-mistakes'}
+            id="counting-basics-pitfalls"
+            title="Common pitfalls in basic counting"
+            source="/combinatorics/basics"
+            after={sectionsContent.obj8.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

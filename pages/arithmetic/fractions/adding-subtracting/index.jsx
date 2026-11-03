@@ -694,6 +694,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fractionBar'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -963,7 +965,7 @@ $$\\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$$]@
 
 @academic[pitfall,aside:true,width:35%:Changing only the denominator
 Changing only the bottoms turns $\\frac{2}{3} + \\frac{1}{4}$ into $\\frac{2}{12} + \\frac{1}{12} = \\frac{3}{12}$, less than $\\frac{2}{3}$ alone. Scaling the tops too gives $\\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$.
-[Read more](!#8)]@
+[Read more](!#pitfall-changing-only-the-denominator)]@
 
 Each factor is the LCD divided by the original denominator: $12 \\div 3 = 4$ for the thirds and $12 \\div 4 = 3$ for the quarters. Multiplying a fraction by $\\frac{4}{4}$ or $\\frac{3}{3}$ multiplies it by $1$, so its value stays the same; only the size of the pieces it is counted in changes.
 
@@ -1001,7 +1003,7 @@ For $5\\frac{3}{4} - 2\\frac{1}{4}$: subtract wholes $5 - 2 = 3$, subtract fract
 
 @academic[pitfall,aside:true,width:35%:Subtracting the fractions the wrong way round
 Subtracting the smaller fraction from the larger, $\\frac{4}{5} - \\frac{1}{5}$, turns $6\\frac{1}{5} - 3\\frac{4}{5}$ into $3\\frac{3}{5}$. Borrowing first gives $5\\frac{6}{5} - 3\\frac{4}{5} = 2\\frac{2}{5}$.
-[Read more](!#8)]@
+[Read more](!#pitfall-subtracting-the-fractions-the-wrong-way-round)]@
 
 @academic[example:Example
 For $5\\frac{1}{4} - 2\\frac{3}{4}$: the fraction $\\frac{1}{4}$ is smaller than $\\frac{3}{4}$, so borrow 1 from the 5. Rewrite as $4\\frac{5}{4} - 2\\frac{3}{4}$. Now subtract: $4 - 2 = 2$ and $\\frac{5}{4} - \\frac{3}{4} = \\frac{2}{4} = \\frac{1}{2}$. The result is $2\\frac{1}{2}$.]@`,
@@ -1021,7 +1023,7 @@ For $5 - \\frac{3}{4}$: rewrite 5 as $4\\frac{4}{4}$, then subtract $4\\frac{4}{
 
 @academic[pitfall,aside:true,width:35%:Putting the whole number over the denominator
 Writing $3$ as $\\frac{3}{5}$ turns $3 + \\frac{2}{5}$ into $\\frac{3}{5} + \\frac{2}{5} = 1$, less than the $3$ it started from. In fifths $3 = \\frac{15}{5}$, and the sum is $\\frac{17}{5} = 3\\frac{2}{5}$.
-[Read more](!#8)]@
+[Read more](!#pitfall-putting-the-whole-number-over-the-denominator)]@
 
 Alternatively, express 5 as $\\frac{5}{1}$, find a common denominator with $\\frac{3}{4}$, and compute: $\\frac{20}{4} - \\frac{3}{4} = \\frac{17}{4} = 4\\frac{1}{4}$.
 
@@ -1042,45 +1044,9 @@ Forgetting to convert all fractions to the LCD leads to incorrect results. Each 
 
 Failing to simplify the final answer leaves work incomplete. The sum $\\frac{2}{8} + \\frac{2}{8} = \\frac{4}{8}$ should be reduced to $\\frac{1}{2}$.
 
-Improper borrowing with mixed numbers causes errors in subtraction. When borrowing, the borrowed 1 becomes a fraction with the same denominator as the fractional part, not simply 1.
-
-**Changing only the denominator**
-
-When a fraction is rewritten over the common denominator, the denominator is changed to the LCD but the numerator is copied unchanged. The rewritten fraction then has a different value from the original.
-
-Wrong working: for $\\frac{2}{3} + \\frac{1}{4}$ with LCD $12$, write $\\frac{2}{3}$ as $\\frac{2}{12}$ and $\\frac{1}{4}$ as $\\frac{1}{12}$, then add: $\\frac{2}{12} + \\frac{1}{12} = \\frac{3}{12} = \\frac{1}{4}$.
-
-Right working: $12 \\div 3 = 4$, so both parts of $\\frac{2}{3}$ are multiplied by $4$: $\\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$. Likewise $12 \\div 4 = 3$ gives $\\frac{1 \\times 3}{4 \\times 3} = \\frac{3}{12}$. Then $\\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$.
-
-Why it happens: the denominator is the visible target of the step, so attention goes to making the bottoms match, and the top is forgotten once they do.
-
-How to check: a rewritten fraction must reduce back to the original. $\\frac{8}{12}$ reduces to $\\frac{2}{3}$, but $\\frac{2}{12}$ reduces to $\\frac{1}{6}$. The wrong sum $\\frac{1}{4}$ is also smaller than $\\frac{2}{3}$, one of the fractions being added.
-
-**Subtracting the fractions the wrong way round**
-
-In a mixed-number subtraction where the first fractional part is the smaller one, the fractional parts are subtracted in reverse, larger minus smaller, so that no borrowing seems to be needed.
-
-Wrong working: for $6\\frac{1}{5} - 3\\frac{4}{5}$, subtract wholes $6 - 3 = 3$, then fractions $\\frac{4}{5} - \\frac{1}{5} = \\frac{3}{5}$, giving $3\\frac{3}{5}$.
-
-Right working: $\\frac{1}{5}$ is smaller than $\\frac{4}{5}$, so borrow $1$ from the $6$ as $\\frac{5}{5}$: $6\\frac{1}{5} = 5\\frac{6}{5}$. Then $5 - 3 = 2$ and $\\frac{6}{5} - \\frac{4}{5} = \\frac{2}{5}$, giving $2\\frac{2}{5}$.
-
-Why it happens: the same slip happens in column subtraction of whole numbers, where the ones column of $52 - 27$ is worked as $7 - 2$ instead of borrowing. Each part looks like a small problem of its own, and taking the smaller number from the larger feels safe.
-
-How to check: estimate with decimals. $6\\frac{1}{5} = 6.2$ and $3\\frac{4}{5} = 3.8$, and $6.2 - 3.8 = 2.4 = 2\\frac{2}{5}$, not $3.6$.
-
-**Putting the whole number over the denominator**
-
-To combine a whole number with a fraction, the whole number is written over the fraction's denominator, as if $3$ were $\\frac{3}{5}$. That shrinks the whole number to a small part of its size.
-
-Wrong working: $3 + \\frac{2}{5} = \\frac{3}{5} + \\frac{2}{5} = \\frac{5}{5} = 1$.
-
-Right working: $3 = \\frac{3}{1}$, and in fifths that is $\\frac{3 \\times 5}{1 \\times 5} = \\frac{15}{5}$. Then $\\frac{15}{5} + \\frac{2}{5} = \\frac{17}{5} = 3\\frac{2}{5}$. Writing the mixed number directly gives the same result: $3 + \\frac{2}{5} = 3\\frac{2}{5}$.
-
-Why it happens: the same-denominator rule asks for matching bottoms, and putting the denominator under the whole number looks like the quickest way to make them match.
-
-How to check: adding a positive fraction to $3$ must give more than $3$, so a result of $1$ is impossible. For subtraction the same check applies: $5 - \\frac{3}{4}$ must lie between $4$ and $5$.`,
+Improper borrowing with mixed numbers causes errors in subtraction. When borrowing, the borrowed 1 becomes a fraction with the same denominator as the fractional part, not simply 1.`,
     before: ``,
-    after: ``,
+    after: `Each slip changes the value of a number while rewriting it. A fraction in new units has its numerator and its denominator multiplied by the same number, a mixed number whose fraction is too small borrows a whole before subtracting instead of subtracting the fractions the other way round, and a whole number becomes $\\frac{3}{1}$, that is $\\frac{15}{5}$ in fifths, before it is added. Reducing the rewritten fraction back, or estimating with decimals, catches each slip.`,
     link: '',
   },
     obj9:{
@@ -1304,8 +1270,34 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 7, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj8 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'changing-only-the-denominator', name: `Changing only the denominator`, errorAt: 0,
+        what: `When a fraction is rewritten over the common denominator, the denominator is changed to the LCD but the numerator is copied unchanged. The rewritten fraction then has a different value from the original.`,
+        wrong: [`For $\\frac{2}{3} + \\frac{1}{4}$ with LCD $12$, write $\\frac{2}{3}$ as $\\frac{2}{12}$ and $\\frac{1}{4}$ as $\\frac{1}{12}$, then add: $\\frac{2}{12} + \\frac{1}{12} = \\frac{3}{12} = \\frac{1}{4}$.`],
+        right: [`$12 \\div 3 = 4$, so both parts of $\\frac{2}{3}$ are multiplied by $4$: $\\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$. Likewise $12 \\div 4 = 3$ gives $\\frac{1 \\times 3}{4 \\times 3} = \\frac{3}{12}$. Then $\\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$.`],
+        why: `The denominator is the visible target of the step, so attention goes to making the bottoms match, and the top is forgotten once they do.`,
+        check: `A rewritten fraction must reduce back to the original. $\\frac{8}{12}$ reduces to $\\frac{2}{3}$, but $\\frac{2}{12}$ reduces to $\\frac{1}{6}$. The wrong sum $\\frac{1}{4}$ is also smaller than $\\frac{2}{3}$, one of the fractions being added.` },
+      { id: 'subtracting-the-fractions-the-wrong-way-round', name: `Subtracting the fractions the wrong way round`, errorAt: 1,
+        what: `In a mixed-number subtraction where the first fractional part is the smaller one, the fractional parts are subtracted in reverse, larger minus smaller, so that no borrowing seems to be needed.`,
+        wrong: [`For $6\\frac{1}{5} - 3\\frac{4}{5}$,`, `Subtract wholes $6 - 3 = 3$, then fractions $\\frac{4}{5} - \\frac{1}{5} = \\frac{3}{5}$, giving $3\\frac{3}{5}$.`],
+        right: [`For $6\\frac{1}{5} - 3\\frac{4}{5}$,`, `$\\frac{1}{5}$ is smaller than $\\frac{4}{5}$, so borrow $1$ from the $6$ as $\\frac{5}{5}$: $6\\frac{1}{5} = 5\\frac{6}{5}$. Then $5 - 3 = 2$ and $\\frac{6}{5} - \\frac{4}{5} = \\frac{2}{5}$, giving $2\\frac{2}{5}$.`],
+        why: `The same slip happens in column subtraction of whole numbers, where the ones column of $52 - 27$ is worked as $7 - 2$ instead of borrowing. Each part looks like a small problem of its own, and taking the smaller number from the larger feels safe.`,
+        check: `Estimate with decimals. $6\\frac{1}{5} = 6.2$ and $3\\frac{4}{5} = 3.8$, and $6.2 - 3.8 = 2.4 = 2\\frac{2}{5}$, not $3.6$.` },
+      { id: 'putting-the-whole-number-over-the-denominator', name: `Putting the whole number over the denominator`, errorAt: 0,
+        what: `To combine a whole number with a fraction, the whole number is written over the fraction's denominator, as if $3$ were $\\frac{3}{5}$. That shrinks the whole number to a small part of its size.`,
+        wrong: [`$3 + \\frac{2}{5} = \\frac{3}{5} + \\frac{2}{5} = \\frac{5}{5} = 1$.`],
+        right: [`$3 = \\frac{3}{1}$, and in fifths that is $\\frac{3 \\times 5}{1 \\times 5} = \\frac{15}{5}$. Then $\\frac{15}{5} + \\frac{2}{5} = \\frac{17}{5} = 3\\frac{2}{5}$. Writing the mixed number directly gives the same result: $3 + \\frac{2}{5} = 3\\frac{2}{5}$.`],
+        why: `The same-denominator rule asks for matching bottoms, and putting the denominator under the whole number looks like the quickest way to make them match.`,
+        check: `Adding a positive fraction to $3$ must give more than $3$, so a result of $1$ is impossible. For subtraction the same check applies: $5 - \\frac{3}{4}$ must lie between $4$ and $5$.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
     sectionsContent,
     introContent,
     obj6Table,
@@ -1326,7 +1318,7 @@ return {
    }
 
 
-export default function AddingSubtractingPage({seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function AddingSubtractingPage({ pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1468,6 +1460,15 @@ export default function AddingSubtractingPage({seoData, sectionsContent, introCo
           sectionsContent.obj8.content,
                   <div key={'unit-addMistake'} dangerouslySetInnerHTML={{ __html: demoUnits.addMistake }} />,
           `A quick check: a sum must be at least as large as each fraction in it.`,
+          <DiagramFrame
+            key={'obj8-mistakes'}
+            id="adding-fractions-pitfalls"
+            title="Common pitfalls in adding and subtracting fractions"
+            source="/arithmetic/fractions/adding-subtracting"
+            after={sectionsContent.obj8.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

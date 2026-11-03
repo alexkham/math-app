@@ -13,6 +13,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -256,7 +257,7 @@ The [quadratic formula](!/algebra/equations/quadratic) gives $x = 1 \\pm \\sqrt{
 
 @academic[pitfall,aside:true,width:35%:Multiplying only the fractions
 Multiplying only the fractions by $(x - 1)(x + 4)$ and leaving the $1$ as it is gives $5x + 10 = 1$, so $x = -\\frac{9}{5}$, which does not satisfy the equation. With the $1$ multiplied too, the solutions are $x = 1 \\pm \\sqrt{15}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-only-the-fractions)]@
 
 In this example the right side is the plain number $1$, a term with no visible denominator. When the whole equation is multiplied by the LCD, that term is multiplied as well, and the product $1 \\cdot (x - 1)(x + 4)$ is what supplies the $x^2$ on the right of the cleared equation.
 
@@ -300,7 +301,7 @@ Without the domain check, $x = 3$ would appear to be among the solutions.
 
 @academic[pitfall,aside:true,width:35%:Skipping the domain check
 Taking $0 = 0$ from $\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$ to mean every real number keeps $x = 3$, where both fractions are undefined. The solution set is every real number except $3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-skipping-the-domain-check)]@
 
 The rule is absolute: every candidate obtained after clearing denominators must be substituted back into the original equation to confirm it does not violate any domain restriction.
 
@@ -418,7 +419,7 @@ Negative exponents are the most direct case. The equation $x^{-1} + x^{-2} = 6$ 
 
 @academic[pitfall,aside:true,width:35%:Reading a negative exponent as a negative number
 Reading $x^{-1} + x^{-2} = 6$ as $-x - x^2 = 6$ gives $x^2 + x + 6 = 0$, which has no real roots. As fractions, $\\frac{1}{x} + \\frac{1}{x^2} = 6$ has the solutions $x = \\frac{1}{2}$ and $x = -\\frac{1}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-negative-exponent-as-a-negative-number)]@
 
 Rewritten this way, the equation has one excluded value, $x = 0$, and its LCD is $x^2$. From here it is solved exactly like the monomial-denominator equations above: clear the fractions, solve the resulting quadratic, and check each candidate against $x \\neq 0$.
 
@@ -445,57 +446,9 @@ Equations involving rates, reciprocals of linear expressions, or differences of 
 
   obj10: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for most wrong answers to rational equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Multiplying only the fractions**
-
-The equation contains a term with no denominator, and only the fractions are multiplied by the LCD. The term without a denominator is copied into the cleared equation unchanged.
-
-Wrong working:
-$$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1 \\implies 3(x + 4) + 2(x - 1) = 1$$
-$$5x + 10 = 1 \\implies x = -\\frac{9}{5}$$
-
-Right working: the $1$ is multiplied by the LCD as well.
-$$3(x + 4) + 2(x - 1) = (x - 1)(x + 4)$$
-$$x^2 - 2x - 14 = 0 \\implies x = 1 \\pm \\sqrt{15}$$
-Neither value is $1$ or $-4$, so both are solutions.
-
-Why it happens: the LCD is found by looking at the denominators, so attention stays on the fractions, and a whole number looks as if it needs nothing.
-
-How to check: substitute the result into the original equation. $x = -\\frac{9}{5}$ gives $\\frac{3}{-14/5} + \\frac{2}{11/5} = -\\frac{15}{14} + \\frac{10}{11} = -\\frac{25}{154}$, not $1$.
-
-**Skipping the domain check**
-
-The cleared equation is solved, and its solutions are reported as the answer without being compared with the excluded values.
-
-Wrong working:
-$$\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1 \\implies x - 3 = x - 3 \\implies 0 = 0$$
-so every real number is reported as a solution.
-
-Right working: the domain excludes $x = 3$, so the solution set is every real number except $3$. In the same way, $\\frac{2}{x^2 - 1} = \\frac{1}{x - 1}$ clears to $2 = x + 1$, so $x = 1$; but $x = 1$ is excluded, and that equation has no solution.
-
-Why it happens: multiplying by the LCD removes the denominators, and with them the only visible sign of the restrictions. The cleared equation looks like an ordinary polynomial equation, which has no excluded values.
-
-How to check: substitute each candidate into the original equation, not the cleared one. At $x = 3$ the term $\\frac{3}{3 - 3}$ is a division by zero, and at $x = 1$ so is $\\frac{1}{1 - 1}$.
-
-**Reading a negative exponent as a negative number**
-
-In an equation written with negative exponents, $x^{-1}$ and $x^{-2}$ are read as $-x$ and $-x^2$, so the equation is never rewritten as a rational one.
-
-Wrong working:
-$$x^{-1} + x^{-2} = 6 \\implies -x - x^2 = 6 \\implies x^2 + x + 6 = 0$$
-The discriminant is $1 - 24 = -23 < 0$, so no real solution is reported.
-
-Right working: $x^{-1} = \\frac{1}{x}$ and $x^{-2} = \\frac{1}{x^2}$, with $x \\neq 0$. Multiplying by the LCD $x^2$:
-$$\\frac{1}{x} + \\frac{1}{x^2} = 6 \\implies x + 1 = 6x^2 \\implies 6x^2 - x - 1 = 0$$
-$$(3x + 1)(2x - 1) = 0$$
-so $x = \\frac{1}{2}$ or $x = -\\frac{1}{3}$. Neither is zero, so both are solutions.
-
-Why it happens: the minus sign in the exponent looks like the minus sign of a negative number, but it stands for a reciprocal, not a change of sign.
-
-How to check: substitute the results. $x = \\frac{1}{2}$ gives $2 + 4 = 6$, and $x = -\\frac{1}{3}$ gives $-3 + 9 = 6$.`,
+    content: `Three mistakes account for most wrong answers to rational equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `All three slips happen around the step that clears the denominators: a term is left out of the multiplication, values excluded by the original denominators slip back in, or a negative exponent is never recognised as a fraction to be cleared. Substituting into the original equation, not the cleared one, settles the first two. For the third, rewriting $x^{-1}$ as $\\frac{1}{x}$ before anything else prevents the slip.`,
     link: '',
   },
 };
@@ -690,8 +643,35 @@ const schemas = {
     ],
   };
 
+  // MistakeFix 2026-11-01: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-only-the-fractions', name: `Multiplying only the fractions`, errorAt: 1,
+        what: `The equation contains a term with no denominator, and only the fractions are multiplied by the LCD. The term without a denominator is copied into the cleared equation unchanged.`,
+        wrong: [`$$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$`, `$$\\implies 3(x + 4) + 2(x - 1) = 1$$`, `$$5x + 10 = 1$$`, `$$\\implies x = -\\frac{9}{5}$$`],
+        right: [`$$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$`, `The $1$ is multiplied by the LCD as well.`, `$$3(x + 4) + 2(x - 1) = (x - 1)(x + 4)$$`, `$$x^2 - 2x - 14 = 0$$`, `$$\\implies x = 1 \\pm \\sqrt{15}$$`, `Neither value is $1$ or $-4$, so both are solutions.`],
+        why: `The LCD is found by looking at the denominators, so attention stays on the fractions, and a whole number looks as if it needs nothing.`,
+        check: `Substitute the result into the original equation. $x = -\\frac{9}{5}$ gives $\\frac{3}{-14/5} + \\frac{2}{11/5} = -\\frac{15}{14} + \\frac{10}{11} = -\\frac{25}{154}$, not $1$.` },
+      { id: 'skipping-the-domain-check', name: `Skipping the domain check`, errorAt: 3,
+        what: `The cleared equation is solved, and its solutions are reported as the answer without being compared with the excluded values.`,
+        wrong: [`$$\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$$`, `$$\\implies x - 3 = x - 3$$`, `$$\\implies 0 = 0$$`, `So every real number is reported as a solution.`],
+        right: [`$$\\frac{x}{x - 3} - \\frac{3}{x - 3} = 1$$`, `$$\\implies x - 3 = x - 3$$`, `$$\\implies 0 = 0$$`, `The domain excludes $x = 3$, so the solution set is every real number except $3$. In the same way, $\\frac{2}{x^2 - 1} = \\frac{1}{x - 1}$ clears to $2 = x + 1$, so $x = 1$; but $x = 1$ is excluded, and that equation has no solution.`],
+        why: `Multiplying by the LCD removes the denominators, and with them the only visible sign of the restrictions. The cleared equation looks like an ordinary polynomial equation, which has no excluded values.`,
+        check: `Substitute each candidate into the original equation, not the cleared one. At $x = 3$ the term $\\frac{3}{3 - 3}$ is a division by zero, and at $x = 1$ so is $\\frac{1}{1 - 1}$.` },
+      { id: 'reading-a-negative-exponent-as-a-negative-number', name: `Reading a negative exponent as a negative number`, errorAt: 1,
+        what: `In an equation written with negative exponents, $x^{-1}$ and $x^{-2}$ are read as $-x$ and $-x^2$, so the equation is never rewritten as a rational one.`,
+        wrong: [`$$x^{-1} + x^{-2} = 6$$`, `$$\\implies -x - x^2 = 6$$`, `$$\\implies x^2 + x + 6 = 0$$`, `The discriminant is $1 - 24 = -23 < 0$, so no real solution is reported.`],
+        right: [`$$x^{-1} + x^{-2} = 6$$`, `$x^{-1} = \\frac{1}{x}$ and $x^{-2} = \\frac{1}{x^2}$, with $x \\neq 0$. Multiplying by the LCD $x^2$:
+$$\\frac{1}{x} + \\frac{1}{x^2} = 6$$`, `$$\\implies x + 1 = 6x^2$$`, `$$\\implies 6x^2 - x - 1 = 0$$`, `$$(3x + 1)(2x - 1) = 0$$`, `So $x = \\frac{1}{2}$ or $x = -\\frac{1}{3}$. Neither is zero, so both are solutions.`],
+        why: `The minus sign in the exponent looks like the minus sign of a negative number, but it stands for a reciprocal, not a change of sign.`,
+        check: `Substitute the results. $x = \\frac{1}{2}$ gives $2 + 4 = 6$, and $x = -\\frac{1}{3}$ gives $-3 + 9 = 6$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     rationalSubtypeTree,
     sectionsContent,
     introContent,
@@ -713,7 +693,7 @@ const schemas = {
 }
    }
 
-export default function RationalEquationsPage({rationalSubtypeTree, 
+export default function RationalEquationsPage({ pitfallData,rationalSubtypeTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -907,6 +887,15 @@ $$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="rational-equation-pitfalls"
+            title="Common pitfalls in rational equations"
+            source="/algebra/equations/rational"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps
