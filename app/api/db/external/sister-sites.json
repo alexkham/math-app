@@ -1,5 +1,5 @@
 {
- "_about": "Snapshot of linearalgebranotes.com and calculatematrix.com pages and their anchor ids, read from builds of their repos on 2026-11-03 (LAN 39262bb, calculatematrix 02cff9e) by linearalgebranotes scripts/refresh-sister-snapshots.mjs. Used by check-sister-links.mjs.",
+ "_about": "Snapshot of linearalgebranotes.com and calculatematrix.com pages and their anchor ids, read from builds of their repos on 2026-11-04 (LAN 2d952e7, calculatematrix 02cff9e) by linearalgebranotes scripts/refresh-sister-snapshots.mjs. Used by check-sister-links.mjs.",
  "linearalgebranotes.com": {
   "https://linearalgebranotes.com/": [],
   "https://linearalgebranotes.com/about": [],
