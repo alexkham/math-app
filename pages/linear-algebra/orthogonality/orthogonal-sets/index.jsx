@@ -1292,7 +1292,7 @@ A less obvious example: $\\{(1, 1, 1), (1, -2, 1), (1, 0, -1)\\}$. Checking: $(1
 @academic[formula_callout:orthogonal_set_independence|Orthogonal Set Independence|$$\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\} \\text{ orthogonal, all nonzero} \\implies \\text{linearly independent}$$]@
 @academic[formulas_link:/linear-algebra/formulas#orthogonal_set_independence]@
 
-The proof is short and reveals exactly why orthogonality is so powerful.
+[The proof is short](https://linearalgebranotes.com/orthogonality/orthogonal-vectors#rule-independent) and reveals exactly why orthogonality is so powerful.
 
 Suppose $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$. Dot both sides with $\\mathbf{v}_j$:
 
@@ -1313,7 +1313,7 @@ The key mechanism is that orthogonality isolates each coefficient. Dotting with 
 @academic[formula_callout:orthonormal_set|Orthonormal Set|$$\\mathbf{v}_i \\cdot \\mathbf{v}_j = \\delta_{ij} = \\begin{cases} 1 & \\text{if } i = j \\\\ 0 & \\text{if } i \\neq j \\end{cases}$$]@
 @academic[formulas_link:/linear-algebra/formulas#orthonormal_set]@
 
-Any orthogonal set can be made orthonormal by normalizing each vector: $\\hat{\\mathbf{v}}_i = \\mathbf{v}_i / \\|\\mathbf{v}_i\\|$. The directions are preserved, only the lengths change to $1$.
+Any orthogonal set can be made orthonormal by [normalizing each vector](https://calculatematrix.com/vector-calculators/unit-vector#about): $\\hat{\\mathbf{v}}_i = \\mathbf{v}_i / \\|\\mathbf{v}_i\\|$. The directions are preserved, only the lengths change to $1$.
 
 @academic[pitfall,aside:true,width:35%:Dividing by the squared length
 Dividing by $\\mathbf{v} \\cdot \\mathbf{v} = 6$ instead of $\\|\\mathbf{v}\\| = \\sqrt{6}$ turns $(1, -2, 1)$ into $\\tfrac{1}{6}(1, -2, 1)$, whose length is $\\tfrac{1}{\\sqrt{6}} \\approx 0.41$. The unit vector is $\\tfrac{1}{\\sqrt{6}}(1, -2, 1)$.
@@ -1332,7 +1332,7 @@ The standard [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{e}_1, \\mathbf
 
 @academic[rule_corollary_plain:In $\\mathbb{R}^n$, an orthogonal set of $n$ nonzero vectors is automatically a basis — independence is guaranteed by orthogonality, and $n$ independent vectors in an $n$-dimensional space automatically span.]@
 
-So the only check needed is: do I have $n$ pairwise-orthogonal nonzero vectors? If yes, they form a basis.
+[So the only check needed is](https://linearalgebranotes.com/orthogonality/orthogonal-vectors#rule-basis-test): do I have $n$ pairwise-orthogonal nonzero vectors? If yes, they form a basis.
 
 Orthonormal bases exist for every finite-dimensional [inner product](!/linear-algebra/orthogonality/inner-product) space. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) constructs one from any given basis. This means the computational advantages of orthonormal bases are always available — any space that has a basis at all has an orthonormal one.`,
     before: ``,
@@ -1341,7 +1341,7 @@ Orthonormal bases exist for every finite-dimensional [inner product](!/linear-al
   },
   obj5: {
     title: `Coordinates via Dot Products`,
-    content: `The defining computational advantage of orthogonal bases is that coordinates are extracted by individual dot products.
+    content: `The defining computational advantage of orthogonal bases is that [coordinates are extracted by individual dot products](https://linearalgebranotes.com/orthogonality/orthonormal-basis#rule-coordinates).
 
 For an orthogonal basis $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_n\\}$, the coordinate of $\\mathbf{x}$ along $\\mathbf{v}_i$ is
 
@@ -1374,7 +1374,7 @@ The worked example uses unit vectors, which is why each coordinate came from a s
   },
   obj6: {
     title: `Orthogonal Matrices`,
-    content: `An $n \\times n$ [matrix](!/linear-algebra/matrix) $Q$ is [orthogonal](!/linear-algebra/matrix/types) if its columns form an orthonormal set. This is equivalent to $Q^TQ = QQ^T = I$, which is equivalent to $Q^{-1} = Q^T$.
+    content: `An $n \\times n$ [matrix](!/linear-algebra/matrix) $Q$ is [orthogonal](!/linear-algebra/matrix/types) if [its columns form an orthonormal set](https://calculatematrix.com/matrix-calculators/matrix-properties#about). This is equivalent to $Q^TQ = QQ^T = I$, which is equivalent to $Q^{-1} = Q^T$.
 
 @academic[rule_theorem_plain:The rows of an orthogonal matrix also form an orthonormal set — orthogonality of columns and rows go together.]@
 
@@ -1384,7 +1384,7 @@ The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\p
 Taking $M^{-1} = M^T$ for $M = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, whose columns are perpendicular but of length $\\sqrt{2}$, fails: $M^TM = 2I$, so $M^{-1} = \\tfrac{1}{2}M^T$, and $\\det M = -2$. Dividing each column by $\\sqrt{2}$ gives an orthogonal matrix.
 [Read more](!#pitfall-stopping-at-orthogonal-columns)]@
 
-The defining geometric property is that orthogonal matrices preserve the dot product: $(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = (Q\\mathbf{u})^T(Q\\mathbf{v}) = \\mathbf{u}^TQ^TQ\\mathbf{v} = \\mathbf{u}^T\\mathbf{v} = \\mathbf{u} \\cdot \\mathbf{v}$. Preserving the dot product automatically preserves lengths ($\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$), angles, and distances. An orthogonal matrix is a rigid motion of $\\mathbb{R}^n$ — it rearranges vectors without distorting any geometric relationship.`,
+The defining geometric property is that [orthogonal matrices preserve the dot product](https://linearalgebranotes.com/matrices/orthogonal-matrix#rule-dot-products): $(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = (Q\\mathbf{u})^T(Q\\mathbf{v}) = \\mathbf{u}^TQ^TQ\\mathbf{v} = \\mathbf{u}^T\\mathbf{v} = \\mathbf{u} \\cdot \\mathbf{v}$. Preserving the dot product automatically preserves lengths ($\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$), angles, and distances. An orthogonal matrix is a rigid motion of $\\mathbb{R}^n$ — it rearranges vectors without distorting any geometric relationship.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1395,7 +1395,7 @@ The defining geometric property is that orthogonal matrices preserve the dot pro
 
 The matrix $QQ^T$ is the [projection](!/linear-algebra/orthogonality/projections) matrix onto the column space of $Q$. For any $\\mathbf{b} \\in \\mathbb{R}^m$, the vector $QQ^T\\mathbf{b}$ is the orthogonal projection of $\\mathbf{b}$ onto the $n$-dimensional subspace spanned by the columns of $Q$.
 
-These rectangular matrices with orthonormal columns are the natural output of the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) applied to the columns of a matrix. If $A$ is $m \\times n$ with independent columns, Gram-Schmidt produces an $m \\times n$ matrix $Q$ with orthonormal columns and an $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) matrix $R$ such that $A = QR$. This is the thin [QR decomposition](!/linear-algebra/decompositions/qr).`,
+These rectangular matrices with orthonormal columns are the natural output of the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) applied to the columns of a matrix. If $A$ is $m \\times n$ with independent columns, [Gram-Schmidt produces](https://calculatematrix.com/matrix-calculators/qr-decomposition#about) an $m \\times n$ matrix $Q$ with orthonormal columns and an $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) matrix $R$ such that $A = QR$. This is the thin [QR decomposition](!/linear-algebra/decompositions/qr).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1407,7 +1407,7 @@ These rectangular matrices with orthonormal columns are the natural output of th
 @academic[formula_callout:parseval_identity|Parseval Identity|$$\\|\\mathbf{x}\\|^2 = \\sum_{i=1}^{n} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2$$]@
 @academic[formulas_link:/linear-algebra/formulas#parseval_identity]@
 
-The squared length of $\\mathbf{x}$ equals the sum of the squares of its coordinates. This is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product) applied to the orthonormal decomposition $\\mathbf{x} = c_1\\mathbf{q}_1 + \\cdots + c_n\\mathbf{q}_n$.
+The squared length of $\\mathbf{x}$ [equals the sum of the squares of its coordinates](https://linearalgebranotes.com/orthogonality/orthonormal-basis#rule-parseval). This is the [Pythagorean theorem](!/linear-algebra/orthogonality/inner-product) applied to the orthonormal decomposition $\\mathbf{x} = c_1\\mathbf{q}_1 + \\cdots + c_n\\mathbf{q}_n$.
 
 When the orthonormal set does not span — when $k < n$ — the sum accounts for only part of the length:
 
@@ -1428,12 +1428,12 @@ This is Bessel&apos;s inequality. The left side is the squared length of the pro
   },
   obj10: {
     title: `Isometries: Maps That Preserve Length`,
-    content: `An [isometry](!/linear-algebra/definitions#isometry) is a linear map that preserves length: $\\|T\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every $\\mathbf{x}$. Because the dot product can be recovered from lengths alone through the polarization identity
+    content: `An [isometry](!/linear-algebra/definitions#isometry) is a linear map that preserves length: $\\|T\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every $\\mathbf{x}$. Because the dot product can be recovered from lengths alone through [the polarization identity](https://linearalgebranotes.com/orthogonality/inner-product#rule-polarization)
 
 @academic[formula_callout:Isometries: Maps That Preserve Length
 $$\\mathbf{x} \\cdot \\mathbf{y} = \\tfrac{1}{2}\\left(\\|\\mathbf{x} + \\mathbf{y}\\|^2 - \\|\\mathbf{x}\\|^2 - \\|\\mathbf{y}\\|^2\\right)$$]@
 
-preserving every length forces $T$ to preserve every dot product, and with it every angle and every distance between points. Nothing is stretched, squashed or sheared.
+[preserving every length forces](https://linearalgebranotes.com/matrices/orthogonal-matrix#rule-length-converse) $T$ to preserve every dot product, and with it every angle and every distance between points. Nothing is stretched, squashed or sheared.
 
 For a matrix $Q$ this is exactly the orthogonality condition of the earlier sections. If $Q^TQ = I$ then $\\|Q\\mathbf{x}\\|^2 = \\mathbf{x}^TQ^TQ\\mathbf{x} = \\|\\mathbf{x}\\|^2$. Conversely, a $Q$ that preserves all dot products satisfies $(Q\\mathbf{e}_i) \\cdot (Q\\mathbf{e}_j) = \\mathbf{e}_i \\cdot \\mathbf{e}_j$, so its columns are orthonormal and $Q^TQ = I$.
 

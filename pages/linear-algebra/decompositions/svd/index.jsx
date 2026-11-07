@@ -8721,7 +8721,7 @@ $U$ rotates (or reflects) the scaled result into the output space.
 
 The singular values measure the stretching in each orthogonal direction. $\\sigma_1$ is the maximum stretching: $\\sigma_1 = \\max_{\\|\\mathbf{x}\\|=1}\\|A\\mathbf{x}\\|$. The smallest nonzero singular value $\\sigma_r$ is the minimum stretching on the [row space](!/linear-algebra/vector-spaces/fundamental-spaces). For a full-rank matrix, the ratio $\\sigma_1/\\sigma_r$ is the condition number — it measures how distorted the transformation is.
 
-Even the most complex-looking matrix is geometrically just two rotations or reflections sandwiching a coordinate-axis scaling.`,
+Even the most complex-looking matrix is [geometrically just two rotations or reflections sandwiching a coordinate-axis scaling](https://linearalgebranotes.com/eigen/singular-value-decomposition#intuition).`,
     before: ``,
     after: ``,
     link: ``,
@@ -8771,14 +8771,14 @@ Even the most complex-looking matrix is geometrically just two rotations or refl
 @academic[formula_callout:singular_values|Singular Values|$$\\sigma_i = \\sqrt{\\lambda_i(A^TA)} = \\sqrt{\\lambda_i(AA^T)}$$]@
 @academic[formulas_link:/linear-algebra/formulas#singular_values]@
 
-Since $A^TA$ is symmetric positive semi-definite, its eigenvalues are all $\\geq 0$, so the singular values are real and non-negative. They are ordered $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$.
+Since $A^TA$ is symmetric positive semi-definite, its eigenvalues are all $\\geq 0$, so [the singular values are real and non-negative](https://linearalgebranotes.com/eigen/singular-values#rule-nonnegative). They are ordered $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$.
 
 The number of nonzero singular values equals the [rank](!/linear-algebra/matrix/rank) of $A$:
 
 @academic[formula_callout:svd_rank|SVD Rank|$$\\text{rank}(A) = \\#\\{i : \\sigma_i > 0\\}$$]@
 @academic[formulas_link:/linear-algebra/formulas#svd_rank]@
 
-This is the most numerically stable method for determining rank: compute the SVD and count singular values above a tolerance.
+This is the most numerically stable method for determining rank: [compute the SVD and count singular values above a tolerance](https://calculatematrix.com/matrix-calculators/svd#uses).
 
 @academic[pitfall,aside:true,width:35%:Forgetting the square root
 Taking the eigenvalues of $A^TA$ as the singular values gives $3$ and $1$ for $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$, so $\\sigma_1^2 + \\sigma_2^2 = 10$, while the squared entries of $A$ add up to $4$. The singular values are $\\sqrt{3}$ and $1$.
@@ -8791,7 +8791,7 @@ The largest singular value $\\sigma_1$ is the operator norm $\\|A\\|_2 = \\max_{
   },
   obj4: {
     title: `Computing the SVD`,
-    content: `The standard hand method computes the SVD through the eigenvalue decomposition of $A^TA$.
+    content: `The standard hand method [computes the SVD through the eigenvalue decomposition](https://calculatematrix.com/matrix-calculators/svd#algorithm) of $A^TA$.
 
 Form $A^TA$ (symmetric, $n \\times n$). Find its eigenvalues $\\lambda_1 \\geq \\cdots \\geq \\lambda_n \\geq 0$ and orthonormal eigenvectors $\\mathbf{v}_1, \\dots, \\mathbf{v}_n$ using the [spectral decomposition](!/linear-algebra/decompositions/spectral). These are the right singular vectors: $V = [\\mathbf{v}_1 \\; \\cdots \\; \\mathbf{v}_n]$.
 
@@ -8838,14 +8838,14 @@ The first $r$ columns of $U$ ($\\mathbf{u}_1, \\dots, \\mathbf{u}_r$) form an or
 
 The last $m - r$ columns of $U$ ($\\mathbf{u}_{r+1}, \\dots, \\mathbf{u}_m$) form an orthonormal basis for the left null space of $A$.
 
-The SVD provides all four bases simultaneously, all orthonormal, and pairs them so that $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$. The SVD is the complete structural portrait of any matrix.`,
+The SVD [provides all four bases simultaneously](https://linearalgebranotes.com/eigen/singular-value-decomposition#rule-four-subspaces), all orthonormal, and pairs them so that $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$. The SVD is the complete structural portrait of any matrix.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj7: {
     title: `The Pseudoinverse`,
-    content: `The Moore-Penrose pseudoinverse $A^+$ is computed directly from the SVD:
+    content: `The Moore-Penrose pseudoinverse $A^+$ is [computed directly from the SVD](https://calculatematrix.com/matrix-calculators/pseudo-inverse#algorithm):
 
 @academic[formula_callout:moore_penrose_pseudoinverse|Moore-Penrose Pseudoinverse|$$A^+ = V\\Sigma^+ U^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#moore-penrose_pseudoinverse]@
@@ -8872,7 +8872,7 @@ Assembling $A^+$ takes three steps: reciprocate the nonzero singular values, tra
 @academic[formula_callout:eckart_young_low_rank_approximation|Eckart-Young Low-Rank Approximation|$$A_k = \\sum_{i=1}^{k} \\sigma_i \\mathbf{u}_i \\mathbf{v}_i^T, \\qquad \\|A - A_k\\|_2 = \\sigma_{k+1}, \\quad \\|A - A_k\\|_F = \\sqrt{\\sum_{i=k+1}^{r}\\sigma_i^2}$$]@
 @academic[formulas_link:/linear-algebra/formulas#eckart-young_low-rank_approximation]@
 
-This is the Eckart-Young-Mirsky theorem.
+This is [the Eckart-Young-Mirsky theorem](https://linearalgebranotes.com/eigen/singular-value-decomposition#rule-eckart-young).
 
 @academic[rule_theorem:Eckart–Young–Mirsky theorem
 Among all matrices of rank at most $k$, $A_k$ is the closest to $A$.]@
@@ -8891,7 +8891,7 @@ When the singular values decay rapidly — $\\sigma_1 \\gg \\sigma_2 \\gg \\cdot
     title: `SVD and Norms`,
     content: `The singular values provide the complete "size profile" of a matrix.
 
-The operator (spectral) norm is the largest singular value:
+The operator (spectral) norm [is the largest singular value](https://linearalgebranotes.com/matrices/matrix-norm#rule-sigma1):
 
 @academic[formula_callout:operator_norm|Operator Norm|$$\\|A\\|_2 = \\sigma_1 = \\max_{\\|\\mathbf{x}\\|=1} \\|A\\mathbf{x}\\|$$]@
 @academic[formulas_link:/linear-algebra/formulas#operator_norm]@
@@ -8994,14 +8994,14 @@ The [condition number](!/linear-algebra/definitions#condition_number) is the rat
 @academic[formula_callout:Spectral Norm and Condition Number
 $$\\kappa(A) = \\frac{\\sigma_1}{\\sigma_n} = \\|A\\|_2\\,\\|A^{-1}\\|_2$$]@
 
-for an invertible square matrix, since the largest singular value of $A^{-1}$ is $1 / \\sigma_n$. It bounds how a relative error in $\\mathbf{b}$ propagates to the solution of $A\\mathbf{x} = \\mathbf{b}$:
+for an invertible square matrix, since the largest singular value of $A^{-1}$ is $1 / \\sigma_n$. It [bounds how a relative error](https://linearalgebranotes.com/matrices/condition-number#rule-error-bound) in $\\mathbf{b}$ propagates to the solution of $A\\mathbf{x} = \\mathbf{b}$:
 
 @academic[formula_callout:Spectral Norm and Condition Number
 $$\\frac{\\|\\delta\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} \\leq \\kappa(A)\\,\\frac{\\|\\delta\\mathbf{b}\\|}{\\|\\mathbf{b}\\|}$$]@
 
 A condition number near $1$ means errors pass through unamplified, and [orthogonal matrices](!/linear-algebra/orthogonality/orthogonal-sets) achieve exactly $1$. A condition number of $10^k$ means roughly $k$ decimal digits of accuracy can be lost in solving the system. An infinite condition number means $\\sigma_n = 0$: the matrix is singular.
 
-The determinant says nothing about conditioning. The diagonal matrix with entries $10^{6}$ and $10^{-6}$ has $\\det = 1$ and $\\kappa = 10^{12}$. Ill-conditioning is about the ratio of the stretches, not their product, and only the singular values expose it.
+The determinant says nothing about conditioning. The diagonal matrix with entries $10^{6}$ and $10^{-6}$ has $\\det = 1$ and $\\kappa = 10^{12}$. Ill-conditioning is about the ratio of the stretches, not their product, and [only the singular values expose it](https://calculatematrix.com/matrix-calculators/condition-number#algorithm).
 
 The [SVD tool](!/linear-algebra/visual-tools/singular-value-decomposition) reports both numbers for any $2 \\times 2$ matrix alongside the ellipse whose axes they measure.`,
     before: ``,

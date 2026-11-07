@@ -2172,7 +2172,7 @@ const ciNearTable = ciTableOpen(['point t·(1, 1) on the line', 'leftover b − 
 const sectionsContent = {
   obj1: {
     title: `Projection onto a Vector`,
-    content: `The orthogonal projection of $\\mathbf{b}$ onto a nonzero vector $\\mathbf{a}$ is the point on the line through $\\mathbf{a}$ nearest to $\\mathbf{b}$:
+    content: `The orthogonal projection of $\\mathbf{b}$ onto a nonzero vector $\\mathbf{a}$ is [the point on the line through](https://linearalgebranotes.com/vectors/vector-projection#rule-closest-point) $\\mathbf{a}$ nearest to $\\mathbf{b}$:
 
 @academic[formula_callout:Projection onto a Vector
 $$\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a}$$]@
@@ -2184,7 +2184,7 @@ $$(\\mathbf{b} - \\hat{c}\\,\\mathbf{a}) \\cdot \\mathbf{a} = \\mathbf{b} \\cdot
 
 ## Worked Example
 
-Project $\\mathbf{b} = (3, 4, 0)$ onto $\\mathbf{a} = (1, 1, 1)$:
+[Project](https://calculatematrix.com/vector-calculators/vector-projection#walkthrough) $\\mathbf{b} = (3, 4, 0)$ onto $\\mathbf{a} = (1, 1, 1)$:
 
 @academic[formula_callout:Projection onto a Vector
 $$\\hat{c} = \\frac{3 + 4 + 0}{1 + 1 + 1} = \\frac{7}{3}, \\quad \\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{7}{3}(1, 1, 1) = \\left(\\frac{7}{3}, \\frac{7}{3}, \\frac{7}{3}\\right)$$]@
@@ -2195,7 +2195,7 @@ Residual: $\\mathbf{b} - \\text{proj}_{\\mathbf{a}}\\mathbf{b} = (\\frac{2}{3}, 
 Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$ instead of $\\mathbf{a} \\cdot \\mathbf{a} = 3$ gives $\\frac{7}{\\sqrt{3}}(1, 1, 1)$, of length $7$, more than $\\|\\mathbf{b}\\| = 5$. The projection is $\\frac{7}{3}(1, 1, 1)$.
 [Read more](!#pitfall-dividing-by-the-length-instead-of-its-square)]@
 
-The residual check is the quickest test of a computed projection. Only one multiple of $\\mathbf{a}$ leaves a remainder perpendicular to $\\mathbf{a}$, so a slip in the coefficient shows up as a nonzero dot product. A second test is size: the projection and the residual are the two legs of a right triangle whose hypotenuse is $\\mathbf{b}$, so the projection is never longer than $\\mathbf{b}$.`,
+[The residual check is the quickest test](https://linearalgebranotes.com/vectors/vector-projection#rule-perpendicular-error) of a computed projection. Only one multiple of $\\mathbf{a}$ leaves a remainder perpendicular to $\\mathbf{a}$, so a slip in the coefficient shows up as a nonzero dot product. A second test is size: the projection and the residual are the two legs of a right triangle whose hypotenuse is $\\mathbf{b}$, so the projection is never longer than $\\mathbf{b}$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2240,7 +2240,7 @@ The residual check is the quickest test of a computed projection. Only one multi
   },
   obj2: {
     title: `The Orthogonal Decomposition`,
-    content: `Every vector $\\mathbf{b} \\in \\mathbb{R}^n$ decomposes uniquely with respect to a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ as
+    content: `Every vector $\\mathbf{b} \\in \\mathbb{R}^n$ [decomposes uniquely](https://linearalgebranotes.com/orthogonality/orthogonal-complement#rule-direct-sum) with respect to a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ as
 
 @academic[formula_callout:orthogonal_decomposition|Orthogonal Decomposition|$$\\mathbf{b} = \\hat{\\mathbf{b}} + \\mathbf{z}, \\quad \\hat{\\mathbf{b}} \\in W, \\ \\mathbf{z} \\in W^\\perp$$]@
 @academic[formulas_link:/linear-algebra/formulas#orthogonal_decomposition]@
@@ -2264,7 +2264,7 @@ The argument uses nothing but the Pythagorean theorem, so it holds in any inner 
   },
   obj3: {
     title: `Projection with an Orthogonal Basis`,
-    content: `When $W = \\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ and the [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ is orthogonal, the projection of $\\mathbf{b}$ onto $W$ decomposes into independent vector projections:
+    content: `When $W = \\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ and the [basis](!/linear-algebra/vector-spaces) $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_k\\}$ is orthogonal, the projection of $\\mathbf{b}$ onto $W$ [decomposes into independent vector projections](https://linearalgebranotes.com/orthogonality/orthogonal-projection#rule-orthogonal-sum):
 
 @academic[formula_callout:Projection with an Orthogonal Basis
 $$\\text{proj}_W \\mathbf{b} = \\frac{\\mathbf{u}_1 \\cdot \\mathbf{b}}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1 + \\frac{\\mathbf{u}_2 \\cdot \\mathbf{b}}{\\mathbf{u}_2 \\cdot \\mathbf{u}_2}\\,\\mathbf{u}_2 + \\cdots + \\frac{\\mathbf{u}_k \\cdot \\mathbf{b}}{\\mathbf{u}_k \\cdot \\mathbf{u}_k}\\,\\mathbf{u}_k$$]@
@@ -2296,7 +2296,7 @@ This formula requires $A^TA$ to be [invertible](!/linear-algebra/matrix/inverse)
 Writing $(A^TA)^{-1} = A^{-1}(A^T)^{-1}$ cancels the formula to $P = I$, but an $m \\times k$ matrix $A$ with $k < m$ has no inverse. For the columns $(1, 0, 1)$ and $(0, 1, 1)$, $P = \\frac{1}{3}\\begin{pmatrix} 2 & -1 & 1 \\\\ -1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$, not $I$.
 [Read more](!#pitfall-splitting-the-inverse-of-a-product)]@
 
-The derivation comes from the orthogonality condition. The residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$ must be perpendicular to every column of $A$: $A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0}$. Solving for $\\hat{\\mathbf{x}}$ gives $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$, so $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$, and $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
+[The derivation comes from the orthogonality condition](https://linearalgebranotes.com/orthogonality/normal-equations#rule-normal). The residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$ must be perpendicular to every column of $A$: $A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0}$. Solving for $\\hat{\\mathbf{x}}$ gives $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$, so $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$, and $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
 
 The alternative is to first orthogonalize the basis using [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt), then use the simpler orthogonal formula. Both approaches give the same projection.`,
     before: ``,
@@ -2316,7 +2316,7 @@ When the basis is orthonormal ($A = Q$ with $Q^TQ = I$), the formula simplifies:
 Concluding $QQ^T = I$ from $Q^TQ = I$ fails for a non-square $Q$: with the single column $\\frac{1}{\\sqrt{2}}(1, 1, 0)$, $Q^TQ = (1)$, but $QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 & 0 \\\\ 1 & 1 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix}$ sends $(1, 0, 0)$ to $(\\frac{1}{2}, \\frac{1}{2}, 0)$.
 [Read more](!#pitfall-taking-qq-transpose-to-be-the-identity)]@
 
-The projection matrix satisfies two algebraic conditions. It is [symmetric](!/linear-algebra/matrix/types): $P^T = P$. And it is [idempotent](!/linear-algebra/matrix/types): $P^2 = P$ — projecting twice gives the same result as projecting once, because vectors already in $W$ are fixed by $P$.
+The projection matrix satisfies two algebraic conditions. It is [symmetric](!/linear-algebra/matrix/types): $P^T = P$. And it is [idempotent](!/linear-algebra/matrix/types): $P^2 = P$ — [projecting twice gives the same result as projecting once](https://linearalgebranotes.com/maps/projection-matrix#rule-idempotent), because vectors already in $W$ are fixed by $P$.
 
 The complementary matrix $I - P$ projects onto the orthogonal complement $W^\\perp$:
 
@@ -2346,7 +2346,7 @@ With the sun lower than $45°$, a pole casts a shadow longer than itself: sunlig
 
 Symmetry ($P^T = P$): the projection is self-adjoint with respect to the dot product. This means $P\\mathbf{u} \\cdot \\mathbf{v} = \\mathbf{u} \\cdot P\\mathbf{v}$ for all $\\mathbf{u}, \\mathbf{v}$. The symmetry condition is what makes the projection orthogonal rather than oblique — it ensures the residual is perpendicular to $W$, not merely non-parallel.
 
-A matrix satisfying $P^2 = P$ and $P^T = P$ is an orthogonal projection. A matrix satisfying $P^2 = P$ but $P^T \\neq P$ is an oblique projection — it projects onto the same subspace but along a different direction, not the perpendicular one.
+A matrix satisfying $P^2 = P$ and $P^T = P$ is [an orthogonal projection](https://linearalgebranotes.com/maps/projection-matrix#rule-characterisation). A matrix satisfying $P^2 = P$ but $P^T \\neq P$ is an oblique projection — it projects onto the same subspace but along a different direction, not the perpendicular one.
 
 The error $\\|\\mathbf{b} - P\\mathbf{b}\\|$ is the distance from $\\mathbf{b}$ to $W$. It is the smallest possible value of $\\|\\mathbf{b} - \\mathbf{w}\\|$ over all $\\mathbf{w} \\in W$.`,
     before: ``,
@@ -2366,7 +2366,7 @@ The least-squares solution does not solve $A\\mathbf{x} = \\mathbf{b}$. It solve
 
 The condition $A^T\\mathbf{r} = \\mathbf{0}$ is exactly the normal equation $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$.
 
-Every least-squares problem is a projection problem. Solving least squares means projecting the target $\\mathbf{b}$ onto the column space and finding the input $\\hat{\\mathbf{x}}$ that produces the projected output.`,
+[Every least-squares problem is a projection problem](https://calculatematrix.com/linear-systems/least-squares-solver#about). Solving least squares means projecting the target $\\mathbf{b}$ onto the column space and finding the input $\\hat{\\mathbf{x}}$ that produces the projected output.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2375,7 +2375,7 @@ Every least-squares problem is a projection problem. Solving least squares means
     title: `Worked Example: Full Projection Computation`,
     content: `Project $\\mathbf{b} = (1, 2, 3)$ onto the subspace $W = \\text{Span}\\{(1, 0, 1), (0, 1, 1)\\}$ in $\\mathbb{R}^3$.
 
-The basis is not orthogonal: $(1, 0, 1) \\cdot (0, 1, 1) = 0 + 0 + 1 = 1 \\neq 0$. Use the general formula. Set $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$.
+The basis is not orthogonal: $(1, 0, 1) \\cdot (0, 1, 1) = 0 + 0 + 1 = 1 \\neq 0$. [Use the general formula](https://calculatematrix.com/matrix-calculators/projection-matrix#algorithm). Set $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$.
 
 @academic[formula_callout:Worked Example: Full Projection Computation
 $$A^TA = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$$]@

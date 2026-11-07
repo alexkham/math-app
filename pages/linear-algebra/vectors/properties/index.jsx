@@ -1104,7 +1104,7 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@
 
 Magnitude is an intrinsic property: it belongs to the vector and does not depend on any other vector or operation. It is always non-negative, and the only vector with magnitude zero is the zero vector $\\mathbf{0}$. This makes magnitude a reliable indicator of whether a vector is trivial — a vector is the zero vector if and only if its magnitude vanishes.
 
-The norm satisfies two additional structural properties. Under [scalar multiplication](!/linear-algebra/vectors/basic-operations), the magnitude scales predictably: $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$. Under addition, it obeys the triangle inequality: $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$. These properties, along with normalization and the distance formula, are developed on the [magnitude](!/linear-algebra/vectors/magnitude) page.`,
+The norm satisfies two additional structural properties. Under [scalar multiplication](!/linear-algebra/vectors/basic-operations), the magnitude scales predictably: $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$. Under addition, it obeys [the triangle inequality](https://linearalgebranotes.com/vectors/norm#rule-triangle): $\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$. These properties, along with normalization and the distance formula, are developed on the [magnitude](!/linear-algebra/vectors/magnitude) page.`,
     before: ``,
     after: ``,
     link: '',
@@ -1119,9 +1119,9 @@ In $\\mathbb{R}^2$, direction can be described by the angle $\\alpha$ that the v
 Reading the angle of $(-1, -1)$ as $\\arctan\\left(\\frac{-1}{-1}\\right) = \\arctan(1) = 45^\\circ$ points it into the first quadrant. Both components are negative, so the vector lies in the third quadrant: $\\alpha = 45^\\circ + 180^\\circ = 225^\\circ$.
 [Read more](!#pitfall-skipping-the-quadrant-adjustment)]@
 
-Finding the angle of a specific vector takes two readings of its components. The ratio $\\frac{v_2}{v_1}$ fixes the slope of the line the vector lies along, and the signs of $v_1$ and $v_2$ fix which way along that line it points. Both readings go into the final angle, measured from the positive $x$-axis.
+[Finding the angle of a specific vector](https://calculatematrix.com/vector-calculators/unit-vector#direction-angles) takes two readings of its components. The ratio $\\frac{v_2}{v_1}$ fixes the slope of the line the vector lies along, and the signs of $v_1$ and $v_2$ fix which way along that line it points. Both readings go into the final angle, measured from the positive $x$-axis.
 
-The unit vector representation generalizes to any $\\mathbb{R}^n$. Dividing a nonzero vector by its [magnitude](!/linear-algebra/vectors/magnitude) isolates its direction as a vector on the unit sphere. Two vectors that differ only in magnitude share the same unit vector and therefore point the same way.
+The unit vector representation generalizes to any $\\mathbb{R}^n$. Dividing a nonzero vector by its [magnitude](!/linear-algebra/vectors/magnitude) isolates its direction as a vector on the unit sphere. [Two vectors that differ only in magnitude share the same unit vector](https://linearalgebranotes.com/vectors/unit-vector#rule-normalise) and therefore point the same way.
 
 The zero vector has no direction. Its components are all zero, its magnitude is zero, and there is no meaningful orientation to extract. The expression $\\frac{\\mathbf{0}}{\\|\\mathbf{0}\\|}$ involves division by zero and is undefined. This is not a technicality — the zero vector genuinely has no directional content.`,
     before: ``,
@@ -1135,7 +1135,7 @@ The zero vector has no direction. Its components are all zero, its magnitude is 
 In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, dimension has a direct geometric meaning — it is the number of independent spatial directions available. Two-component vectors live in a plane; three-component vectors live in the full space we inhabit visually. For $n > 3$, the geometric picture breaks down, but the algebraic structure does not. Operations, norms, and dot products all work identically in $\\mathbb{R}^{100}$ as they do in $\\mathbb{R}^3$ — only the number of terms in each sum changes.
 
 
-Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}^n$ has exactly $n$ components, and all operations within $\\mathbb{R}^n$ produce vectors with $n$ components. A vector cannot gain or lose components through addition, scaling, or any [linear combination](!/linear-algebra/vectors/linear-combinations). This rigidity is what keeps the algebra consistent.`,
+Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}^n$ has exactly $n$ components, and all operations within $\\mathbb{R}^n$ produce vectors with $n$ components. A vector [cannot gain or lose components through addition, scaling](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#definition), or any [linear combination](!/linear-algebra/vectors/linear-combinations). This rigidity is what keeps the algebra consistent.`,
     before: ``,
     after: ``,
     link: '',
@@ -1196,7 +1196,7 @@ Dimension is fixed by the space, not by the vector. Every vector in $\\mathbb{R}
   },
   obj4: {
     title: `Equality`,
-    content: `Two vectors are equal when every one of their corresponding components matches. For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$:
+    content: `[Two vectors are equal when every one of their corresponding components matches](https://linearalgebranotes.com/vectors/vector#definition). For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$:
 
 @academic[formula_callout:Vector Equality
 $$\\mathbf{a} = \\mathbf{b} \\iff a_i = b_i \\text{ for every } i = 1, 2, \\ldots, n$$]@
@@ -1236,7 +1236,7 @@ Among nonzero vectors, parallelism passes along a chain. If $\\mathbf{a} = c\\ma
 
 By convention, the zero vector is considered parallel to every vector, since $\\mathbf{0} = 0\\mathbf{b}$ for any $\\mathbf{b}$. This convention avoids the need to exclude $\\mathbf{0}$ as a special case in statements about parallelism.
 
-Parallelism is the simplest instance of linear dependence.
+Parallelism is [the simplest instance of linear dependence](https://linearalgebranotes.com/vectors/linear-independence#rule-two-vectors).
 
 @academic[rule_theorem_plain:Two vectors are linearly dependent precisely when one is a scalar multiple of the other — precisely when they are parallel.]@
 
@@ -1252,17 +1252,17 @@ The concept generalizes: for three or more vectors, dependence means at least on
 @academic[formula_callout:Orthogonality
 $$\\mathbf{a} \\perp \\mathbf{b} \\quad \\Longleftrightarrow \\quad \\mathbf{a} \\cdot \\mathbf{b} = 0$$]@
 
-In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicularity — the two vectors meet at a right angle. The algebraic condition $a_1b_1 + a_2b_2 + \\cdots + a_nb_n = 0$ translates the geometric concept of a $90°$ angle into a computation that works in any dimension, including those beyond visualization.
+In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicularity — the two vectors meet at a right angle. The algebraic condition $a_1b_1 + a_2b_2 + \\cdots + a_nb_n = 0$ translates the geometric concept of a $90°$ angle into [a computation that works in any dimension](https://calculatematrix.com/vector-calculators/dot-product#algorithm), including those beyond visualization.
 
 @academic[pitfall,aside:true,width:35%:Reading not orthogonal as parallel
 Concluding that $(1, 2)$ and $(3, 1)$ are parallel because $1 \\cdot 3 + 2 \\cdot 1 = 5 \\neq 0$ skips a case. Their ratios differ, $\\frac{1}{3} \\neq \\frac{2}{1}$, so the pair is neither parallel nor orthogonal: the vectors meet at $45^\\circ$.
 [Read more](!#pitfall-reading-not-orthogonal-as-parallel)]@
 
-Orthogonality is in a sense the opposite extreme of parallelism. Parallel vectors are maximally aligned — one lies entirely along the direction of the other. Orthogonal vectors have zero alignment — projecting one onto the other yields the zero vector. Between these extremes lies every other angular relationship, measured quantitatively by the dot product.
+Orthogonality is in a sense the opposite extreme of parallelism. Parallel vectors are maximally aligned — one lies entirely along the direction of the other. [Orthogonal vectors have zero alignment](https://linearalgebranotes.com/orthogonality/orthogonal-vectors#intuition) — projecting one onto the other yields the zero vector. Between these extremes lies every other angular relationship, measured quantitatively by the dot product.
 
 The zero vector is orthogonal to every vector, since $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for all $\\mathbf{v}$. This is consistent with the convention that the zero vector is also parallel to every vector. The zero vector is the only vector that is simultaneously parallel and orthogonal to everything — a consequence of its having no magnitude and no direction.
 
-Orthogonality grows in importance well beyond this section. Orthogonal bases simplify coordinate computations, orthogonal projections decompose vectors into independent components, and the Gram–Schmidt process converts an arbitrary basis into an orthogonal one. These ideas are developed in the [orthogonality](!/linear-algebra/orthogonality) section.`,
+Orthogonality grows in importance well beyond this section. Orthogonal bases simplify coordinate computations, orthogonal projections decompose vectors into independent components, and [the Gram–Schmidt process converts an arbitrary basis into an orthogonal one](https://calculatematrix.com/matrix-calculators/gram-schmidt#algorithm). These ideas are developed in the [orthogonality](!/linear-algebra/orthogonality) section.`,
     before: ``,
     after: ``,
     link: '',
@@ -1271,7 +1271,7 @@ Orthogonality grows in importance well beyond this section. Orthogonal bases sim
     title: `Algebraic Properties`,
     content: `In addition to the intrinsic and relational properties above, vectors in $\\mathbb{R}^n$ obey a collection of algebraic rules governing how they interact with [addition and scalar multiplication](!/linear-algebra/vectors/basic-operations). These rules are not properties of individual vectors but of the operations themselves — they describe the behavior of addition and scaling as applied to any vectors in the space.
 
-Under addition, vectors are commutative ($\\mathbf{a} + \\mathbf{b} = \\mathbf{b} + \\mathbf{a}$), associative ($( \\mathbf{a} + \\mathbf{b}) + \\mathbf{c} = \\mathbf{a} + (\\mathbf{b} + \\mathbf{c})$), have an identity element ($\\mathbf{a} + \\mathbf{0} = \\mathbf{a}$), and every vector has an additive inverse ($\\mathbf{a} + (-\\mathbf{a}) = \\mathbf{0}$). Under scalar multiplication, associativity holds ($c(d\\mathbf{a}) = (cd)\\mathbf{a}$), the scalar $1$ acts as an identity ($1\\mathbf{a} = \\mathbf{a}$), and two distributive laws connect the two operations: $c(\\mathbf{a} + \\mathbf{b}) = c\\mathbf{a} + c\\mathbf{b}$ and $(c + d)\\mathbf{a} = c\\mathbf{a} + d\\mathbf{a}$.
+Under addition, vectors are commutative ($\\mathbf{a} + \\mathbf{b} = \\mathbf{b} + \\mathbf{a}$), associative ($( \\mathbf{a} + \\mathbf{b}) + \\mathbf{c} = \\mathbf{a} + (\\mathbf{b} + \\mathbf{c})$), have an identity element ($\\mathbf{a} + \\mathbf{0} = \\mathbf{a}$), and every vector has an additive inverse ($\\mathbf{a} + (-\\mathbf{a}) = \\mathbf{0}$). Under scalar multiplication, associativity holds ($c(d\\mathbf{a}) = (cd)\\mathbf{a}$), the scalar $1$ acts as an identity ($1\\mathbf{a} = \\mathbf{a}$), and [two distributive laws](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#rule-scalar-rules) connect the two operations: $c(\\mathbf{a} + \\mathbf{b}) = c\\mathbf{a} + c\\mathbf{b}$ and $(c + d)\\mathbf{a} = c\\mathbf{a} + d\\mathbf{a}$.
 
 @academic[pitfall,aside:true,width:35%:Scaling only the first vector
 Writing $2\\big((1, 0) + (0, 3)\\big)$ as $(2, 0) + (0, 3) = (2, 3)$ leaves the second vector unscaled. The scalar multiplies every term: $(2, 0) + (0, 6) = (2, 6)$.

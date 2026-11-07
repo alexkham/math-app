@@ -1328,7 +1328,7 @@ When no exact solution exists, the goal shifts from solving $A\\mathbf{x} = \\ma
 @academic[formula_callout:The Problem
 $$\\hat{\\mathbf{x}} = \\arg\\min_{\\mathbf{x}} \\|A\\mathbf{x} - \\mathbf{b}\\|^2$$]@
 
-The quantity $\\|A\\mathbf{x} - \\mathbf{b}\\|^2 = \\sum_i (A\\mathbf{x} - \\mathbf{b})_i^2$ is the sum of squared residuals. The vector $\\hat{\\mathbf{x}}$ that minimizes this sum is the least-squares solution.`,
+The quantity $\\|A\\mathbf{x} - \\mathbf{b}\\|^2 = \\sum_i (A\\mathbf{x} - \\mathbf{b})_i^2$ is the sum of squared residuals. The vector $\\hat{\\mathbf{x}}$ that minimizes this sum is [the least-squares solution](https://calculatematrix.com/linear-systems/least-squares-solver#about).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1375,11 +1375,11 @@ The quantity $\\|A\\mathbf{x} - \\mathbf{b}\\|^2 = \\sum_i (A\\mathbf{x} - \\mat
 
   obj2: {
     title: `The Geometric Interpretation`,
-    content: `The set of all vectors $A\\mathbf{x}$ as $\\mathbf{x}$ ranges over $\\mathbb{R}^n$ is the column space of $A$. Minimizing $\\|A\\mathbf{x} - \\mathbf{b}\\|$ means finding the point in the column space closest to $\\mathbf{b}$. That closest point is the [orthogonal projection](!/linear-algebra/orthogonality/projections) $\\hat{\\mathbf{b}} = \\text{proj}_{\\text{Col}(A)}\\mathbf{b}$.
+    content: `The set of all vectors $A\\mathbf{x}$ as $\\mathbf{x}$ ranges over $\\mathbb{R}^n$ is the column space of $A$. Minimizing $\\|A\\mathbf{x} - \\mathbf{b}\\|$ means [finding the point in the column space closest](https://linearalgebranotes.com/orthogonality/orthogonal-projection#rule-closest) to $\\mathbf{b}$. That closest point is the [orthogonal projection](!/linear-algebra/orthogonality/projections) $\\hat{\\mathbf{b}} = \\text{proj}_{\\text{Col}(A)}\\mathbf{b}$.
 
 The least-squares solution $\\hat{\\mathbf{x}}$ satisfies $A\\hat{\\mathbf{x}} = \\hat{\\mathbf{b}}$ — it produces the projection, not the original $\\mathbf{b}$. The residual $\\mathbf{r} = \\mathbf{b} - A\\hat{\\mathbf{x}} = \\mathbf{b} - \\hat{\\mathbf{b}}$ is the component of $\\mathbf{b}$ [orthogonal](!/linear-algebra/orthogonality) to the column space. It lies in $\\text{Col}(A)^\\perp = \\text{Null}(A^T)$.
 
-The orthogonality condition $A^T\\mathbf{r} = \\mathbf{0}$ — the residual is perpendicular to every column of $A$ — is the geometric content of the least-squares solution. It is this condition that leads to the normal equations.`,
+The orthogonality condition $A^T\\mathbf{r} = \\mathbf{0}$ — the residual is perpendicular to every column of $A$ — is the geometric content of the least-squares solution. It is this condition that [leads to the normal equations](https://linearalgebranotes.com/orthogonality/normal-equations#rule-normal).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1395,7 +1395,7 @@ These are the normal equations. They form a square $n \\times n$ system regardle
 
 @academic[rule_plain:The [matrix](!/linear-algebra/matrix) $A^TA$ is always [symmetric](!/linear-algebra/matrix/types) and positive semi-definite.]@
 
-When $A$ has full column rank (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving a unique least-squares solution:
+When $A$ has full column rank (the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)), $A^TA$ is positive definite and [invertible](!/linear-algebra/matrix/inverse), giving [a unique least-squares solution](https://linearalgebranotes.com/orthogonality/least-squares#rule-unique):
 
 @academic[formula_callout:least_squares_solution|Least Squares Solution|$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$$]@
 @academic[formulas_link:/linear-algebra/formulas#least-squares_solution]@
@@ -1406,7 +1406,7 @@ Writing $(A^TA)^{-1} = A^{-1}(A^T)^{-1}$ collapses the formula to $\\hat{\\mathb
 
 The formula is read from right to left. The vector $A^T\\mathbf{b}$ collects the dot products of $\\mathbf{b}$ with the columns of $A$, the matrix $A^TA$ collects the dot products of the columns with each other, and the inverse of $A^TA$ turns the first into the coefficients. For the line fit below, $A$ is $4 \\times 2$, so both pieces are small: a $2 \\times 2$ matrix and a vector of length $2$.
 
-When $A$ does not have full column rank, $A^TA$ is singular and the normal equations have infinitely many solutions. All produce the same projection $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}}$, but the $\\hat{\\mathbf{x}}$ vectors differ. The minimum-norm solution — the one with smallest $\\|\\hat{\\mathbf{x}}\\|$ — is selected by the pseudoinverse.`,
+When $A$ does not have full column rank, $A^TA$ is singular and [the normal equations have infinitely many solutions](https://linearalgebranotes.com/orthogonality/normal-equations#rule-solvable). All produce the same projection $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}}$, but the $\\hat{\\mathbf{x}}$ vectors differ. The minimum-norm solution — the one with smallest $\\|\\hat{\\mathbf{x}}\\|$ — is [selected by the pseudoinverse](https://calculatematrix.com/matrix-calculators/pseudo-inverse#about).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1461,7 +1461,7 @@ The framework generalizes to any linear model: $y = c_0 f_0(x) + c_1 f_1(x) + \\
 @academic[formula_callout:The Projection Matrix
 $$P = A(A^TA)^{-1}A^T$$]@
 
-When the columns of $A$ are [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) ($A = Q$ with $Q^TQ = I$), this simplifies to $P = QQ^T$.
+When the columns of $A$ are [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) ($A = Q$ with $Q^TQ = I$), [this simplifies to](https://linearalgebranotes.com/maps/projection-matrix#rule-orthonormal) $P = QQ^T$.
 
 @academic[pitfall,aside:true,width:35%:Swapping the order of the two factors
 Writing $P = Q^TQ$ gives $I_n$, which is $n \\times n$ and for $m > n$ cannot even multiply $\\mathbf{b} \\in \\mathbb{R}^m$. For $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, $Q^TQ = 1$, while the projection is $P = QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$.
@@ -1471,7 +1471,7 @@ With orthonormal columns the middle factor $A^TA = Q^TQ$ drops out of the formul
 
 @academic[rule_plain:The projection matrix is [symmetric](!/linear-algebra/matrix/types) ($P^T = P$) and [idempotent](!/linear-algebra/matrix/types) ($P^2 = P$).]@
 
-The complementary matrix $I - P$ projects onto the orthogonal complement $\\text{Col}(A)^\\perp$ and extracts the residual: $\\mathbf{r} = (I - P)\\mathbf{b}$.
+[The complementary matrix](https://linearalgebranotes.com/maps/projection-matrix#rule-complement) $I - P$ projects onto the orthogonal complement $\\text{Col}(A)^\\perp$ and extracts the residual: $\\mathbf{r} = (I - P)\\mathbf{b}$.
 
 The minimum squared error is
 
@@ -1507,7 +1507,7 @@ Substituting $A = QR$ into $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ gives $R^TQ
 
 The right-hand side $Q^T\\mathbf{b}$ is a vector of $n$ dot products. The left-hand side is an upper [triangular](!/linear-algebra/matrix/types) system, solved by back substitution.
 
-The critical advantage is numerical. Forming $A^TA$ explicitly squares the [condition number](!/linear-algebra/matrix/rank) of $A$, amplifying rounding errors. The QR approach works with $Q$ and $R$ directly, preserving the original conditioning. This is why QR-based least squares is the standard algorithm in numerical software, from MATLAB to Python&apos;s NumPy.`,
+[The critical advantage is numerical](https://linearalgebranotes.com/matrices/qr-decomposition#rule-least-squares). Forming $A^TA$ explicitly squares the [condition number](!/linear-algebra/matrix/rank) of $A$, amplifying rounding errors. The QR approach works with $Q$ and $R$ directly, preserving the original conditioning. This is why QR-based least squares is the standard algorithm in numerical software, from MATLAB to Python&apos;s NumPy.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1540,7 +1540,7 @@ By the Pythagorean theorem, since $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}}$ and
 @academic[formula_callout:The Minimum Error
 $$\\|\\mathbf{b}\\|^2 = \\|\\hat{\\mathbf{b}}\\|^2 + \\|\\mathbf{r}\\|^2$$]@
 
-The error is what remains after the projection accounts for as much of $\\mathbf{b}$ as possible. The ratio $\\|\\hat{\\mathbf{b}}\\|^2 / \\|\\mathbf{b}\\|^2$ (computed with centered data in regression) is the coefficient of determination $R^2$ — the fraction of the total variation explained by the model. An $R^2$ close to $1$ means the column space captures nearly all of $\\mathbf{b}$; close to $0$ means the model explains little.
+The error is what remains after the projection accounts for as much of $\\mathbf{b}$ as possible. The ratio $\\|\\hat{\\mathbf{b}}\\|^2 / \\|\\mathbf{b}\\|^2$ (computed with centered data in regression) is [the coefficient of determination](https://calculatematrix.com/linear-systems/linear-regression#r-squared) $R^2$ — the fraction of the total variation explained by the model. An $R^2$ close to $1$ means the column space captures nearly all of $\\mathbf{b}$; close to $0$ means the model explains little.
 
 The error is zero if and only if $\\mathbf{b} \\in \\text{Col}(A)$ — if and only if the original system $A\\mathbf{x} = \\mathbf{b}$ has an exact solution. In that case, the least-squares solution is the exact solution, and the two problems coincide.`,
     before: ``,

@@ -2218,7 +2218,7 @@ const sectionsContent = {
 
 Optionally, each $\\mathbf{u}_i$ is normalized to unit length, producing an orthonormal set $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$.
 
-The process is the constructive proof that every finite-dimensional inner product space has an orthonormal [basis](!/linear-algebra/vector-spaces).
+The process is [the constructive proof](https://linearalgebranotes.com/orthogonality/gram-schmidt#rule-existence) that every finite-dimensional inner product space has an orthonormal [basis](!/linear-algebra/vector-spaces).
 
 @academic[rule_theorem_plain:Given any basis, Gram-Schmidt produces an orthonormal one for the same space.]@`,
     before: ``,
@@ -2236,7 +2236,7 @@ Subtract the [projection](!/linear-algebra/orthogonality/projections) of $\\math
 @academic[formula_callout:The Algorithm: Two Vectors
 $$\\mathbf{u}_2 = \\mathbf{v}_2 - \\frac{\\mathbf{u}_1 \\cdot \\mathbf{v}_2}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1$$]@
 
-The subtracted term is the component of $\\mathbf{v}_2$ along $\\mathbf{u}_1$. Removing it leaves only the component perpendicular to $\\mathbf{u}_1$, so $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0$.
+[The subtracted term](https://calculatematrix.com/vector-calculators/vector-projection#algorithm) is the component of $\\mathbf{v}_2$ along $\\mathbf{u}_1$. [Removing it leaves only the component perpendicular](https://linearalgebranotes.com/vectors/vector-projection#rule-perpendicular-error) to $\\mathbf{u}_1$, so $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0$.
 
 @academic[example:Worked Example
 
@@ -2269,9 +2269,9 @@ $$\\mathbf{u}_1 = \\mathbf{v}_1$$]@
 Projecting $\\mathbf{v}_3 = (0, 1, 1)$ onto $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$ instead of onto $\\mathbf{u}_1, \\mathbf{u}_2$ gives $(-1, \\frac{1}{2}, \\frac{1}{2})$, whose dot product with $\\mathbf{u}_1$ is $-\\frac{1}{2}$. Projecting onto the $\\mathbf{u}_i$ gives $\\mathbf{u}_3 = (-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3})$.
 [Read more](!#pitfall-projecting-onto-the-original-vectors)]@
 
-At each step, $\\mathbf{v}_j$ has its projections onto all previously computed orthogonal vectors subtracted. What remains is the component of $\\mathbf{v}_j$ perpendicular to $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$.
+At each step, $\\mathbf{v}_j$ [has its projections onto all previously computed orthogonal vectors subtracted](https://linearalgebranotes.com/orthogonality/gram-schmidt#rule-process). What remains is the component of $\\mathbf{v}_j$ perpendicular to $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$.
 
-Because $\\mathbf{v}_j$ is independent of $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}\\}$ — and therefore not in $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$ — this perpendicular component is nonzero. So each $\\mathbf{u}_j \\neq \\mathbf{0}$, and the process never breaks down.
+Because $\\mathbf{v}_j$ is independent of $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}\\}$ — and therefore not in $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$ — this perpendicular component is nonzero. So each $\\mathbf{u}_j \\neq \\mathbf{0}$, and [the process never breaks down](https://linearalgebranotes.com/orthogonality/gram-schmidt#rule-zero-remainder).
 
 At every stage, $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_j\\} = \\text{Span}\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_j\\}$. The span is preserved because each $\\mathbf{u}_j$ is a linear combination of $\\mathbf{v}_j$ and the earlier $\\mathbf{u}_i$&apos;s (which are themselves combinations of $\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}$).`,
     before: ``,
@@ -2325,7 +2325,7 @@ At every stage, $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_j\\} = \\text
 @academic[formula_callout:Normalization
 $$\\mathbf{q}_i = \\frac{\\mathbf{u}_i}{\\|\\mathbf{u}_i\\|}$$]@
 
-Each vector is divided by its length, making $\\|\\mathbf{q}_i\\| = 1$ while preserving direction. The resulting set satisfies $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.
+[Each vector is divided by its length](https://calculatematrix.com/vector-calculators/unit-vector#about), making $\\|\\mathbf{q}_i\\| = 1$ while preserving direction. The resulting set satisfies $\\mathbf{q}_i \\cdot \\mathbf{q}_j = \\delta_{ij}$.
 
 @academic[pitfall,aside:true,width:35%:Normalizing the inputs first
 Scaling $\\mathbf{v}_1, \\mathbf{v}_2$ to $\\frac{1}{\\sqrt{2}}(1, 1, 0)$ and $\\frac{1}{\\sqrt{2}}(1, 0, 1)$ before orthogonalizing gives $\\frac{1}{\\sqrt{2}}(\\frac{1}{2}, -\\frac{1}{2}, 1)$, of length $\\frac{\\sqrt{3}}{2}$, not $1$. Normalizing after the subtraction gives $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, -1, 2)$.
@@ -2361,7 +2361,7 @@ To run Gram-Schmidt on your own set of vectors, use the [vector calculator](!/li
   },
   obj6: {
     title: `Why It Works`,
-    content: `At each step, $\\mathbf{u}_j$ is constructed as $\\mathbf{v}_j$ minus everything in $\\mathbf{v}_j$ that lies in the subspace $W_{j-1} = \\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$. Since $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$ is orthogonal, the projection formula decomposes cleanly into independent terms — one projection per basis vector.
+    content: `At each step, $\\mathbf{u}_j$ is constructed as $\\mathbf{v}_j$ minus everything in $\\mathbf{v}_j$ that lies in the subspace $W_{j-1} = \\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$. Since $\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$ is orthogonal, [the projection formula decomposes cleanly into independent terms](https://linearalgebranotes.com/orthogonality/orthogonal-projection#rule-orthogonal-sum) — one projection per basis vector.
 
 What remains after subtraction is the component of $\\mathbf{v}_j$ [orthogonal](!/linear-algebra/orthogonality) to $W_{j-1}$. This component is nonzero because $\\mathbf{v}_j \\notin W_{j-1}$ — guaranteed by the independence of the original set.
 
@@ -2384,7 +2384,7 @@ $$A = QR$$
 
 $Q$ is $m \\times n$ with [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns (the normalized $\\mathbf{q}_i$&apos;s). $R$ is $n \\times n$ upper [triangular](!/linear-algebra/matrix/types) with positive diagonal entries.
 
-The entries of $R$ are the dot products computed during Gram-Schmidt: $R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{v}_j$ for $i \\leq j$, and $R_{ij} = 0$ for $i > j$ (because $\\mathbf{v}_j$ lies in the span of $\\mathbf{q}_1, \\ldots, \\mathbf{q}_j$, so it is perpendicular to $\\mathbf{q}_i$ when $i > j$).
+The entries of $R$ are [the dot products computed during Gram-Schmidt](https://calculatematrix.com/matrix-calculators/qr-decomposition#algorithm): $R_{ij} = \\mathbf{q}_i \\cdot \\mathbf{v}_j$ for $i \\leq j$, and $R_{ij} = 0$ for $i > j$ (because $\\mathbf{v}_j$ lies in the span of $\\mathbf{q}_1, \\ldots, \\mathbf{q}_j$, so it is perpendicular to $\\mathbf{q}_i$ when $i > j$).
 
 The factorization captures two complementary pieces of information. $Q$ stores the orthonormal directions. $R$ stores the coefficients that express the original columns in terms of those directions: $\\mathbf{v}_j = R_{1j}\\mathbf{q}_1 + R_{2j}\\mathbf{q}_2 + \\cdots + R_{jj}\\mathbf{q}_j$.`,
     before: ``,
@@ -2393,7 +2393,7 @@ The factorization captures two complementary pieces of information. $Q$ stores t
   },
   obj8: {
     title: `QR and Least Squares`,
-    content: `The QR decomposition provides a numerically superior method for solving [least-squares](!/linear-algebra/orthogonality/least-squares) problems.
+    content: `[The QR decomposition provides a numerically superior method](https://linearalgebranotes.com/matrices/qr-decomposition#rule-least-squares) for solving [least-squares](!/linear-algebra/orthogonality/least-squares) problems.
 
 The normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ can be rewritten using $A = QR$. Since $A^TA = R^TQ^TQR = R^TR$ and $A^T\\mathbf{b} = R^TQ^T\\mathbf{b}$, the normal equations become $R^TR\\hat{\\mathbf{x}} = R^TQ^T\\mathbf{b}$. Canceling $R^T$ (which is invertible since $R$ has positive diagonal):
 
@@ -2412,7 +2412,7 @@ The QR approach avoids forming $A^TA$ explicitly. This matters because the condi
     content: `@academic[fact,aside:true,width:35%:Perpendicular on paper, $60^\\circ$ on a computer
 Run classical Gram-Schmidt in double precision on $(1, \\varepsilon, 0, 0)$, $(1, 0, \\varepsilon, 0)$, $(1, 0, 0, \\varepsilon)$ with $\\varepsilon = 10^{-8}$: since $1 + \\varepsilon^2$ rounds to $1$, the last two outputs come out with $\\mathbf{q}_2 \\cdot \\mathbf{q}_3 = \\frac{1}{2}$, an angle of $60^\\circ$. The modified version, on the same input, gives $\\mathbf{q}_2 \\cdot \\mathbf{q}_3 \\approx 10^{-16}$.]@
 
-Classical Gram-Schmidt (as presented above) can lose orthogonality in floating-point arithmetic. When the input vectors are nearly dependent, the computed $\\mathbf{u}_j$&apos;s may fail to be perpendicular to machine precision, and the errors accumulate with each step.
+Classical Gram-Schmidt (as presented above) [can lose orthogonality in floating-point arithmetic](https://linearalgebranotes.com/orthogonality/gram-schmidt#failure-modes). When the input vectors are nearly dependent, the computed $\\mathbf{u}_j$&apos;s may fail to be perpendicular to machine precision, and the errors accumulate with each step.
 
 Modified Gram-Schmidt addresses this by reorganizing the computation. Instead of computing all projections using the original $\\mathbf{v}_j$, modified Gram-Schmidt updates $\\mathbf{v}_j$ in place after each projection is subtracted. At step $j$, first subtract the projection onto $\\mathbf{u}_1$ from $\\mathbf{v}_j$, then subtract the projection onto $\\mathbf{u}_2$ from the updated $\\mathbf{v}_j$, and so on. The mathematical result is identical in exact arithmetic, but the modified version is significantly more stable numerically.
 

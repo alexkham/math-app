@@ -1299,7 +1299,7 @@ The result is a scalar, not a [vector](!/linear-algebra/vectors). The matrix for
 @academic[example:Example
 For $\\mathbf{u} = (2, -1, 3, 0)$ and $\\mathbf{v} = (1, 4, -2, 5)$: $\\mathbf{u} \\cdot \\mathbf{v} = 2(1) + (-1)(4) + 3(-2) + 0(5) = 2 - 4 - 6 + 0 = -8$.]@
 
-The dot product is the standard inner product on $\\mathbb{R}^n$. It is the measuring tool that defines lengths, angles, distances, and perpendicularity throughout finite-dimensional linear algebra.`,
+[The dot product is the standard inner product](https://calculatematrix.com/vector-calculators/dot-product#about) on $\\mathbb{R}^n$. It is the measuring tool that defines lengths, angles, distances, and perpendicularity throughout finite-dimensional linear algebra.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1310,11 +1310,11 @@ The dot product is the standard inner product on $\\mathbb{R}^n$. It is the meas
 
 Symmetry: $\\mathbf{u} \\cdot \\mathbf{v} = \\mathbf{v} \\cdot \\mathbf{u}$. The order does not matter.
 
-Linearity: $(c\\mathbf{u} + d\\mathbf{w}) \\cdot \\mathbf{v} = c(\\mathbf{u} \\cdot \\mathbf{v}) + d(\\mathbf{w} \\cdot \\mathbf{v})$. The dot product distributes over addition and pulls scalars out. Combined with symmetry, it is linear in both arguments (bilinear).
+Linearity: $(c\\mathbf{u} + d\\mathbf{w}) \\cdot \\mathbf{v} = c(\\mathbf{u} \\cdot \\mathbf{v}) + d(\\mathbf{w} \\cdot \\mathbf{v})$. The dot product distributes over addition and pulls scalars out. Combined with symmetry, [it is linear in both arguments](https://linearalgebranotes.com/vectors/dot-product#rule-linear) (bilinear).
 
 Positive definiteness: $\\mathbf{v} \\cdot \\mathbf{v} \\geq 0$ for all $\\mathbf{v}$, with equality if and only if $\\mathbf{v} = \\mathbf{0}$. The quantity $\\mathbf{v} \\cdot \\mathbf{v} = v_1^2 + v_2^2 + \\cdots + v_n^2$ is a sum of squares, which is zero only when every component is zero.
 
-These three properties — symmetry, linearity, positive definiteness — are not just useful observations. They are the axioms that define an inner product in the abstract setting.`,
+These three properties — symmetry, linearity, positive definiteness — are not just useful observations. They are [the axioms that define an inner product](https://linearalgebranotes.com/orthogonality/inner-product#definition) in the abstract setting.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1326,11 +1326,11 @@ These three properties — symmetry, linearity, positive definiteness — are no
 @academic[formula_callout:Length
 $$\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}} = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@
 
-This is the Euclidean norm — the generalization of the Pythagorean theorem to $n$ dimensions. In $\\mathbb{R}^2$, $\\|(3, 4)\\| = \\sqrt{9 + 16} = 5$. In $\\mathbb{R}^3$, $\\|(1, 2, 2)\\| = \\sqrt{1 + 4 + 4} = 3$.
+This is [the Euclidean norm](https://calculatematrix.com/vector-calculators/vector-magnitude#about) — the generalization of the Pythagorean theorem to $n$ dimensions. In $\\mathbb{R}^2$, $\\|(3, 4)\\| = \\sqrt{9 + 16} = 5$. In $\\mathbb{R}^3$, $\\|(1, 2, 2)\\| = \\sqrt{1 + 4 + 4} = 3$.
 
 @academic[rule_plain:The norm satisfies $\\|\\mathbf{v}\\| \\geq 0$ with equality only for $\\mathbf{v} = \\mathbf{0}$, and $\\|c\\mathbf{v}\\| = |c|\\|\\mathbf{v}\\|$ — scaling a vector scales its length by the absolute value of the scalar.]@
 
-A unit vector has $\\|\\mathbf{v}\\| = 1$. Any nonzero vector can be normalized — replaced by $\\hat{\\mathbf{v}} = \\mathbf{v}/\\|\\mathbf{v}\\|$, which points in the same direction with length $1$. Normalization preserves direction and discards magnitude.
+A unit vector has $\\|\\mathbf{v}\\| = 1$. [Any nonzero vector can be normalized](https://calculatematrix.com/vector-calculators/unit-vector#about) — replaced by $\\hat{\\mathbf{v}} = \\mathbf{v}/\\|\\mathbf{v}\\|$, which points in the same direction with length $1$. Normalization preserves direction and discards magnitude.
 
 @academic[pitfall,aside:true,width:35%:Dividing by the squared length
 Dividing by $\\mathbf{v} \\cdot \\mathbf{v}$ instead of $\\|\\mathbf{v}\\|$ turns $(3, 4)$ into $(\\frac{3}{25}, \\frac{4}{25})$, a vector of length $\\frac{1}{5}$. Dividing by $\\|(3, 4)\\| = 5$ gives the unit vector $(\\frac{3}{5}, \\frac{4}{5})$.
@@ -1369,7 +1369,7 @@ Every inner product induces a distance through this formula, and the resulting d
 @academic[formula_callout:Angle Between Vectors
 $$\\cos\\theta = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|}$$]@
 
-The Cauchy-Schwarz inequality (next section) guarantees that the right-hand side lies between $-1$ and $1$, so the formula always produces a well-defined angle $\\theta \\in [0, \\pi]$.
+The Cauchy-Schwarz inequality (next section) [guarantees that the right-hand side lies between](https://linearalgebranotes.com/vectors/cauchy-schwarz-inequality#rule-cosine-range) $-1$ and $1$, so the formula always produces a well-defined angle $\\theta \\in [0, \\pi]$.
 
 When $\\cos\\theta = 1$ ($\\theta = 0$), the vectors point in the same direction. When $\\cos\\theta = -1$ ($\\theta = \\pi$), they point in opposite directions. When $\\cos\\theta = 0$ ($\\theta = \\pi/2$), the vectors are orthogonal.
 
@@ -1390,7 +1390,7 @@ For $\\mathbf{u} = (1, 2, 3)$ and $\\mathbf{v} = (4, -1, 2)$: $\\mathbf{u} \\cdo
 @academic[formula_callout:cauchy_schwarz_inequality|Cauchy-Schwarz Inequality|$$|\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\| \\, \\|\\mathbf{v}\\|$$]@
 @academic[formulas_link:/linear-algebra/formulas#cauchy-schwarz_inequality]@
 
-Equality holds if and only if one vector is a scalar multiple of the other — they are parallel.
+[Equality holds if and only if one vector is a scalar multiple of the other](https://linearalgebranotes.com/vectors/cauchy-schwarz-inequality#rule-equality) — they are parallel.
 
 The proof considers the expression $\\|\\mathbf{u} - t\\mathbf{v}\\|^2 \\geq 0$ for all $t \\in \\mathbb{R}$. Expanding: $\\|\\mathbf{u}\\|^2 - 2t(\\mathbf{u} \\cdot \\mathbf{v}) + t^2\\|\\mathbf{v}\\|^2 \\geq 0$. This is a quadratic in $t$ that is non-negative everywhere, so its discriminant must be non-positive: $4(\\mathbf{u} \\cdot \\mathbf{v})^2 - 4\\|\\mathbf{u}\\|^2\\|\\mathbf{v}\\|^2 \\leq 0$. Rearranging gives Cauchy-Schwarz.
 
@@ -1412,7 +1412,7 @@ The length of one side of a triangle never exceeds the sum of the other two. Equ
 Writing $\\|\\mathbf{u} + \\mathbf{v}\\| = \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$ for $\\mathbf{u} = (3, 0)$ and $\\mathbf{v} = (0, 4)$ gives $3 + 4 = 7$. The sum is $(3, 4)$, so $\\|\\mathbf{u} + \\mathbf{v}\\| = 5$.
 [Read more](!#pitfall-adding-the-lengths-of-a-sum)]@
 
-The proof follows from Cauchy-Schwarz. Square both sides: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2 \\leq \\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{u}\\|\\|\\mathbf{v}\\| + \\|\\mathbf{v}\\|^2 = (\\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|)^2$. The key step uses $\\mathbf{u} \\cdot \\mathbf{v} \\leq |\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$.
+[The proof follows from Cauchy-Schwarz](https://linearalgebranotes.com/vectors/norm#rule-triangle). Square both sides: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2 \\leq \\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{u}\\|\\|\\mathbf{v}\\| + \\|\\mathbf{v}\\|^2 = (\\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|)^2$. The key step uses $\\mathbf{u} \\cdot \\mathbf{v} \\leq |\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$.
 
 The triangle inequality is essential for the distance function $d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$ to satisfy the metric axioms. It ensures that going from $\\mathbf{u}$ to $\\mathbf{w}$ directly is never longer than going via $\\mathbf{v}$.`,
     before: ``,
@@ -1480,7 +1480,7 @@ Each of these geometries brings its own length, $\\|\\mathbf{v}\\| = \\sqrt{\\la
   },
   obj9: {
     title: `Examples of Inner Products`,
-    content: `The weighted inner product on $\\mathbb{R}^n$ is $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$, where $W$ is a [symmetric](!/linear-algebra/matrix/types) positive definite [matrix](!/linear-algebra/matrix). This distorts the standard geometry — unit circles become ellipses, and &quot;perpendicular&quot; directions depend on $W$. When $W = I$, it reduces to the standard dot product.
+    content: `[The weighted inner product](https://linearalgebranotes.com/orthogonality/inner-product#rule-matrix-form) on $\\mathbb{R}^n$ is $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$, where $W$ is a [symmetric](!/linear-algebra/matrix/types) positive definite [matrix](!/linear-algebra/matrix). This distorts the standard geometry — unit circles become ellipses, and &quot;perpendicular&quot; directions depend on $W$. When $W = I$, it reduces to the standard dot product.
 
 @academic[pitfall,aside:true,width:35%:Measuring with the plain dot product
 Testing $\\mathbf{u} = (1, 1)$ and $\\mathbf{v} = (1, -2)$ with $\\mathbf{u} \\cdot \\mathbf{v} = -1$ when the space uses $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$ suggests they are not orthogonal. In this space $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 2(1)(1) + (1)(-2) = 0$, so they are.
@@ -1510,7 +1510,7 @@ Each inner product defines its own geometry, but the linear algebra — [project
 Using $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$ for $\\mathbf{u} = (1, 0)$ and $\\mathbf{v} = (1, 1)$, which are not orthogonal, gives $1 + 2 = 3$. The sum is $(2, 1)$, so $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = 5$, which includes $2\\mathbf{u} \\cdot \\mathbf{v} = 2$.
 [Read more](!#pitfall-dropping-the-cross-term)]@
 
-The proof is a one-line expansion: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\mathbf{u} \\cdot \\mathbf{u} + 2\\mathbf{u} \\cdot \\mathbf{v} + \\mathbf{v} \\cdot \\mathbf{v} = \\|\\mathbf{u}\\|^2 + 0 + \\|\\mathbf{v}\\|^2$.
+[The proof is a one-line expansion](https://linearalgebranotes.com/orthogonality/orthogonal-vectors#rule-pythagoras): $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\mathbf{u} \\cdot \\mathbf{u} + 2\\mathbf{u} \\cdot \\mathbf{v} + \\mathbf{v} \\cdot \\mathbf{v} = \\|\\mathbf{u}\\|^2 + 0 + \\|\\mathbf{v}\\|^2$.
 
 The theorem extends to any number of mutually orthogonal vectors: if $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ are pairwise orthogonal, then
 

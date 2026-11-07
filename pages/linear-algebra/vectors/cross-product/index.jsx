@@ -2486,7 +2486,7 @@ Hamilton's quaternion units obey this same table, $ij = k$ and $ji = -k$, except
 
 The organizing principle is a directed loop $\\mathbf{i} \\to \\mathbf{j} \\to \\mathbf{k} \\to \\mathbf{i}$. Traversing it in the forward direction yields a positive basis vector; going against the loop negates the outcome. Any basis vector crossed with a copy of itself gives $\\mathbf{0}$: $\\mathbf{i} \\times \\mathbf{i} = \\mathbf{j} \\times \\mathbf{j} = \\mathbf{k} \\times \\mathbf{k} = \\mathbf{0}$.
 
-Every cross product in $\\mathbb{R}^3$ can be traced back to these nine cases. Expressing both input vectors as [linear combinations](!/linear-algebra/vectors/linear-combinations) of $\\mathbf{i}$, $\\mathbf{j}$, $\\mathbf{k}$ and distributing the cross product over the resulting sums reduces the computation to a collection of basis-pair cross products. Gathering terms afterward recovers the component formula.
+Every cross product in $\\mathbb{R}^3$ can be traced back to these nine cases. Expressing both input vectors as [linear combinations](!/linear-algebra/vectors/linear-combinations) of $\\mathbf{i}$, $\\mathbf{j}$, $\\mathbf{k}$ and [distributing the cross product over the resulting sums](https://linearalgebranotes.com/vectors/cross-product#rule-linear) reduces the computation to a collection of basis-pair cross products. Gathering terms afterward recovers the component formula.
 
 The nine pairings sit in one lookup grid below, with the left input vector indexing the rows and the right input indexing the columns.`,
     before: ``,
@@ -2506,7 +2506,7 @@ $$\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-where $\\theta$ is the angle separating $\\mathbf{a}$ and $\\mathbf{b}$. The product $\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ has a clean geometric reading: it is the area enclosed by the parallelogram whose adjacent sides are $\\mathbf{a}$ and $\\mathbf{b}$:
+where $\\theta$ is the angle separating $\\mathbf{a}$ and $\\mathbf{b}$. The product $\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ has a clean geometric reading: it is [the area enclosed by the parallelogram](https://linearalgebranotes.com/vectors/cross-product#rule-length) whose adjacent sides are $\\mathbf{a}$ and $\\mathbf{b}$:
 
 @academic[formula_callout:Parallelogram Area
 $$\\text{Area} = \\|\\mathbf{a} \\times \\mathbf{b}\\|$$
@@ -2519,7 +2519,7 @@ At $\\theta = \\frac{\\pi}{2}$ the sine reaches $1$ and the parallelogram attain
 
 @academic[rule_theorem_plain:The direction of $\\mathbf{a} \\times \\mathbf{b}$ sits at a right angle to both $\\mathbf{a}$ and $\\mathbf{b}$ simultaneously.]@
 
-An algebraic confirmation is straightforward: evaluate $\\mathbf{a} \\cdot (\\mathbf{a} \\times \\mathbf{b})$ and $\\mathbf{b} \\cdot (\\mathbf{a} \\times \\mathbf{b})$ component by component, and both [dot products](!/linear-algebra/vectors/dot-product) reduce to zero. The cross product therefore solves a problem that no other operation in the section addresses — it constructs a direction that exits the plane spanned by two given vectors.`,
+[An algebraic confirmation](https://linearalgebranotes.com/vectors/cross-product#rule-perpendicular) is straightforward: evaluate $\\mathbf{a} \\cdot (\\mathbf{a} \\times \\mathbf{b})$ and $\\mathbf{b} \\cdot (\\mathbf{a} \\times \\mathbf{b})$ component by component, and both [dot products](!/linear-algebra/vectors/dot-product) reduce to zero. The cross product therefore solves a problem that no other operation in the section addresses — it constructs a direction that exits the plane spanned by two given vectors.`,
     before: ``,
     after: ``,
     link: '',
@@ -2550,7 +2550,7 @@ $$\\mathbf{a} \\times \\mathbf{b} = -(\\mathbf{b} \\times \\mathbf{a})$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Exchanging the two inputs flips the output vector. In the language of the right-hand rule, reversing which vector the fingers follow and which they curl toward sends the thumb the other way.
+[Exchanging the two inputs flips the output vector](https://linearalgebranotes.com/vectors/cross-product#rule-anticommutative). In the language of the right-hand rule, reversing which vector the fingers follow and which they curl toward sends the thumb the other way.
 
 ## Distributivity
 
@@ -2586,7 +2586,7 @@ $$\\mathbf{a} \\times (\\mathbf{b} \\times \\mathbf{c}) = (\\mathbf{a} \\cdot \\
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-A related identity, due to Lagrange, expresses the dot product of two cross products as a determinant of pairwise dot products:
+A related identity, [due to Lagrange](https://linearalgebranotes.com/vectors/cross-product#rule-lagrange), expresses the dot product of two cross products as a determinant of pairwise dot products:
 
 @academic[formula_callout:Lagrange Identity
 $$(\\mathbf{a} \\times \\mathbf{b}) \\cdot (\\mathbf{c} \\times \\mathbf{d}) = (\\mathbf{a} \\cdot \\mathbf{c})(\\mathbf{b} \\cdot \\mathbf{d}) - (\\mathbf{a} \\cdot \\mathbf{d})(\\mathbf{b} \\cdot \\mathbf{c})$$
@@ -2602,7 +2602,7 @@ Setting $\\mathbf{c} = \\mathbf{a}$ and $\\mathbf{d} = \\mathbf{b}$ recovers the
 @academic[formula_callout:Properties of the Cross Product
 $$\\mathbf{a} \\times \\mathbf{a} = \\mathbf{0}$$]@
 
-Crossing a vector with itself always returns the zero vector. Anti-commutativity forces this: $\\mathbf{a} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{a})$ has the unique solution $\\mathbf{0}$. From the geometric side, a single vector does not span any area — the parallelogram degenerates to a segment — and no unique perpendicular direction can be extracted.`,
+[Crossing a vector with itself always returns the zero vector](https://linearalgebranotes.com/vectors/cross-product#rule-self). Anti-commutativity forces this: $\\mathbf{a} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{a})$ has the unique solution $\\mathbf{0}$. From the geometric side, a single vector does not span any area — the parallelogram degenerates to a segment — and no unique perpendicular direction can be extracted.`,
     before: ``,
     after: ``,
     link: '',
@@ -2636,7 +2636,7 @@ This criterion pairs naturally with the dot product's test for orthogonality. A 
 @academic[formula_callout:The Scalar Triple Product
 $$\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$$]@
 
-The inner operation $\\mathbf{b} \\times \\mathbf{c}$ yields a vector orthogonal to both $\\mathbf{b}$ and $\\mathbf{c}$, whose length equals the area of the parallelogram they outline. The outer dot product then projects $\\mathbf{a}$ onto that orthogonal direction, effectively extracting the component of $\\mathbf{a}$ that rises out of the $\\mathbf{b}$-$\\mathbf{c}$ plane. Multiplying base area by height produces a volume: the result is the signed volume of the parallelepiped whose edges are $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$.
+The inner operation $\\mathbf{b} \\times \\mathbf{c}$ yields a vector orthogonal to both $\\mathbf{b}$ and $\\mathbf{c}$, whose length equals the area of the parallelogram they outline. The outer dot product then projects $\\mathbf{a}$ onto that orthogonal direction, effectively extracting the component of $\\mathbf{a}$ that rises out of the $\\mathbf{b}$-$\\mathbf{c}$ plane. Multiplying base area by height produces a volume: the result is [the signed volume of the parallelepiped](https://linearalgebranotes.com/vectors/scalar-triple-product#rule-volume) whose edges are $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$.
 
 Taking the absolute value strips the sign and gives the true geometric volume of the parallelepiped:
 
@@ -2660,7 +2660,7 @@ $$V = \\tfrac{1}{6}|\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})|$$
 
 The factor $\\tfrac{1}{6}$ arises as $\\tfrac{1}{3}$ (the general pyramid factor $V = \\tfrac{1}{3} \\cdot \\text{base} \\cdot \\text{height}$) times $\\tfrac{1}{2}$ (the triangular base is half the parallelogram base).
 
-An equivalent computation arranges the nine components into a $3 \\times 3$ [determinant](!/linear-algebra/determinants):
+[An equivalent computation](https://calculatematrix.com/vector-calculators/scalar-triple-product#algorithm) arranges the nine components into a $3 \\times 3$ [determinant](!/linear-algebra/determinants):
 
 @academic[formula_callout:Scalar Triple Product
 $$\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c}) = \\begin{vmatrix} a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\\\ c_1 & c_2 & c_3 \\end{vmatrix}$$
@@ -2912,7 +2912,7 @@ $$= \\mathbf{a} \\times \\mathbf{a} - \\mathbf{a} \\times \\mathbf{b} + \\mathbf
 $$- \\mathbf{b} \\times \\mathbf{b}$$
 $$= -2(\\mathbf{a} \\times \\mathbf{b})$$`, `With $\\mathbf{a} = \\mathbf{i}$ and $\\mathbf{b} = \\mathbf{j}$, the result is $-2\\mathbf{k}$, not $\\mathbf{0}$.`],
         why: `The pattern $(x + y)(x - y) = x^2 - y^2$ is so familiar that the middle terms are cancelled without being written down. That cancellation needs $xy = yx$, which the cross product does not have.`,
-        check: `Compute one case in components. $(1, 1, 0) \\times (1, -1, 0) = (0, 0, -2)$, which is $-2\\mathbf{k}$.` },
+        check: `[Compute one case in components](https://calculatematrix.com/vector-calculators/cross-product#example). $(1, 1, 0) \\times (1, -1, 0) = (0, 0, -2)$, which is $-2\\mathbf{k}$.` },
       { id: 'reading-a-zero-cross-product-as-perpendicular', name: `Reading a zero cross product as perpendicular`, errorAt: 1,
         what: `The two zero tests are swapped: a zero cross product is read as a right angle, the meaning that belongs to a zero dot product.`,
         wrong: [`$$(1, 2, 3) \\times (2, 4, 6) = \\mathbf{0}$$`, `$$\\implies (1, 2, 3) \\perp (2, 4, 6)$$`],
@@ -3018,7 +3018,7 @@ $$\\mathbf{a} \\times \\mathbf{b} = (a_2 b_3 - a_3 b_2,\\ a_3 b_1 - a_1 b_3,\\ a
         lead: `The cross product takes two vectors and returns a vector — unlike the dot product, which returns a number.`,
         content: [
           `The indices rotate cyclically. To obtain the first component, cover the first entries of both vectors and cross-multiply the remaining pairs: $a_2b_3 - a_3b_2$. For the second component, cover the second entries and cross-multiply with a sign reversal: $a_3b_1 - a_1b_3$. The third component follows the same logic with the third entries hidden: $a_1b_2 - a_2b_1$.`,
-          `A convenient way to package the computation uses a symbolic $3 \\times 3$ [determinant](!/linear-algebra/determinants) whose first row holds the standard basis vectors:`,
+          `A convenient way to [package the computation](https://calculatematrix.com/vector-calculators/cross-product#algorithm) uses a symbolic $3 \\times 3$ [determinant](!/linear-algebra/determinants) whose first row holds the standard basis vectors:`,
           `@academic[formula_callout:Cross Product (Determinant Form)
 $$\\mathbf{a} \\times \\mathbf{b} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\end{vmatrix}$$
 /linear-algebra/formulas#cross_product_determinant_form]@`,

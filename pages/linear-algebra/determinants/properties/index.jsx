@@ -2311,7 +2311,7 @@ const ciSwapTable = ciTableOpen(['matrix', 'determinant']) +
 const sectionsContent = {
   obj1: {
     title: `Effect of Row Swaps`,
-    content: `Swapping two rows of a matrix multiplies its determinant by $-1$. If $B$ is obtained from $A$ by exchanging rows $i$ and $k$, then
+    content: `[Swapping two rows](https://linearalgebranotes.com/matrices/determinant#rule-row-swap) of a matrix multiplies its determinant by $-1$. If $B$ is obtained from $A$ by exchanging rows $i$ and $k$, then
 
 @academic[formula_callout:determinant_row_swap|Determinant Row Swap|$$\\det(B) = -\\det(A)$$]@
 @academic[formulas_link:/linear-algebra/formulas#determinant_row_swap]@
@@ -2397,7 +2397,7 @@ A row of all zeros makes the determinant zero, since scaling that row by $0$ giv
   },
   obj3: {
     title: `Effect of Row Addition`,
-    content: `Adding a scalar multiple of one row to a different row leaves the determinant completely unchanged. If $B$ is obtained from $A$ by replacing row $i$ with row $i$ plus $c$ times row $k$ (where $i \\neq k$), then
+    content: `Adding a scalar multiple of one row to a different row [leaves the determinant completely unchanged](https://linearalgebranotes.com/matrices/determinant#rule-row-addition). If $B$ is obtained from $A$ by replacing row $i$ with row $i$ plus $c$ times row $k$ (where $i \\neq k$), then
 
 @academic[formula_callout:determinant_row_addition|Determinant Row Addition|$$\\det(B) = \\det(A)$$]@
 @academic[formulas_link:/linear-algebra/formulas#determinant_row_addition]@
@@ -2411,7 +2411,7 @@ Together, the three row-operation rules form a complete toolkit. Row addition is
   },
   obj4: {
     title: `Computing Determinants via Row Reduction`,
-    content: `The three row-operation rules convert Gaussian elimination into a determinant algorithm. The procedure is: reduce $A$ to upper triangular form, record every row swap and every row scaling performed along the way, then compute the determinant of the triangular result as the product of its diagonal entries. Adjust by the accumulated sign flips and scale factors.
+    content: `The three row-operation rules [convert Gaussian elimination into a determinant algorithm](https://calculatematrix.com/matrix-calculators/determinant#methods). The procedure is: reduce $A$ to upper triangular form, record every row swap and every row scaling performed along the way, then compute the determinant of the triangular result as the product of its diagonal entries. Adjust by the accumulated sign flips and scale factors.
 
 ## Worked Example
 
@@ -2458,7 +2458,7 @@ The reduction to triangular form requires roughly $\\frac{2}{3}n^3$ arithmetic o
 @academic[formula_callout:determinant_of_product|Determinant of Product|$$\\det(AB) = \\det(A) \\cdot \\det(B)$$]@
 @academic[formulas_link:/linear-algebra/formulas#determinant_of_product]@
 
-This is one of the most powerful structural facts about determinants. The proof splits into two cases. If $A$ is singular, then $AB$ is also singular (it cannot map onto all of $\\mathbb{R}^n$ if $A$ already fails to), so both sides are zero. If $A$ is invertible, it can be written as a product of [elementary matrices](!/linear-algebra/matrix/operations), each corresponding to a single row operation. Since the determinant of each elementary matrix equals the factor by which that row operation multiplies the determinant, the result follows by chaining these factors together.
+This is one of the most powerful structural facts about determinants. [The proof splits into two cases](https://linearalgebranotes.com/matrices/determinant#rule-product). If $A$ is singular, then $AB$ is also singular (it cannot map onto all of $\\mathbb{R}^n$ if $A$ already fails to), so both sides are zero. If $A$ is invertible, it can be written as a product of [elementary matrices](!/linear-algebra/matrix/operations), each corresponding to a single row operation. Since the determinant of each elementary matrix equals the factor by which that row operation multiplies the determinant, the result follows by chaining these factors together.
 
 ## Corollaries
 
@@ -2503,7 +2503,7 @@ One way to see why the identity holds is through the permutation definition of t
   },
   obj7: {
     title: `Triangular and Diagonal Matrices`,
-    content: `For an upper triangular, lower triangular, or diagonal matrix, the determinant is simply the product of the diagonal entries:
+    content: `For an upper triangular, lower triangular, or diagonal matrix, the determinant is simply [the product of the diagonal entries](https://linearalgebranotes.com/matrices/determinant#rule-triangular):
 
 @academic[formula_callout:determinant_of_triangular|Determinant of Triangular|$$\\det(A) = a_{11} \\, a_{22} \\cdots a_{nn}$$]@
 @academic[formulas_link:/linear-algebra/formulas#triangular_matrix_determinant]@
@@ -2553,7 +2553,7 @@ For a full block matrix $\\begin{pmatrix} P & Q \\\\ R & S \\end{pmatrix}$ made 
   },
   obj9: {
     title: `The Invertibility Equivalence`,
-    content: `The determinant condenses the most fundamental structural question about a square matrix into a single test:
+    content: `The determinant condenses the most fundamental structural question about a square matrix into [a single test](https://linearalgebranotes.com/matrices/invertible-matrix-theorem):
 
 @academic[formula_callout:determinant_invertibility_criterion|Determinant Invertibility Criterion|$$A \\text{ invertible} \\iff \\det(A) \\neq 0$$]@
 
@@ -2573,7 +2573,7 @@ Each of these conditions approaches invertibility from a different angle — ran
   },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Three slips come up again and again when determinants are computed with row operations. Two are marked with a box where they happen in the sections above, and the third, pulling the scalar out of $kA$ only once, is flagged in the row-scaling section. Here each is worked through in full, with the wrong and the right working side by side.`,
+    content: `Three slips come up again and again when [determinants are computed with row operations](https://calculatematrix.com/matrix-calculators/ref#about). Two are marked with a box where they happen in the sections above, and the third, pulling the scalar out of $kA$ only once, is flagged in the row-scaling section. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
     after: `Each slip loses track of how a row operation changes the determinant. A row swap changes its sign, a scalar on the whole matrix comes out as $k^n$, and replacing a row by a multiple of itself plus another row multiplies the determinant by that multiple. Writing down the factor of every step, or trying $A = I$, catches each slip.`,
     link: ``,

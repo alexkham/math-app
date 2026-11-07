@@ -1944,7 +1944,7 @@ const sectionsContent = {
     title: `When Complex Eigenvalues Appear`,
     content: `A real matrix with real entries can have complex eigenvalues. This occurs when the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation) — a polynomial with real coefficients — has roots that are not real.
 
-For a $2 \\times 2$ matrix, the discriminant of the characteristic polynomial determines the eigenvalue type:
+For a $2 \\times 2$ matrix, the discriminant of the characteristic polynomial [determines the eigenvalue type](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-two-by-two):
 
 @academic[formula_callout:discriminant_classification_2x2|Discriminant Classification 2x2|$$\\Delta = \\text{tr}(A)^2 - 4\\det(A) \\quad \\begin{cases} \\Delta > 0: & \\text{two distinct real eigenvalues} \\\\ \\Delta = 0: & \\text{one repeated real eigenvalue} \\\\ \\Delta < 0: & \\text{complex conjugate pair} \\end{cases}$$]@
 @academic[formulas_link:/linear-algebra/formulas#discriminant_classification_2x2]@
@@ -1998,7 +1998,7 @@ The geometric interpretation is clear: no real direction in $\\mathbb{R}^2$ is m
 
   obj2: {
     title: `Conjugate Pairs`,
-    content: `For a real matrix, complex eigenvalues always come in conjugate pairs. If $\\lambda = a + bi$ is an eigenvalue (with $b \\neq 0$), then $\\bar{\\lambda} = a - bi$ is also an eigenvalue. The corresponding eigenvectors are also conjugates:
+    content: `For a real matrix, complex eigenvalues [always come in conjugate pairs](https://linearalgebranotes.com/eigen/eigenvalue-and-eigenvector#rule-conjugate-pairs). If $\\lambda = a + bi$ is an eigenvalue (with $b \\neq 0$), then $\\bar{\\lambda} = a - bi$ is also an eigenvalue. The corresponding eigenvectors are also conjugates:
 
 @academic[formula_callout:complex_conjugate_pairs|Complex Conjugate Pairs|$$A \\in \\mathbb{R}^{n \\times n}, \\;\\; A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow A\\bar{\\mathbf{v}} = \\bar{\\lambda}\\bar{\\mathbf{v}}$$]@
 @academic[formulas_link:/linear-algebra/formulas#complex_conjugate_pairs]@
@@ -2007,7 +2007,7 @@ The proof uses the fact that the characteristic polynomial has real coefficients
 
 For the eigenvector identity: applying complex conjugation to $A\\mathbf{v} = \\lambda\\mathbf{v}$ and using that $A$ has real entries gives $A\\bar{\\mathbf{v}} = \\bar{\\lambda}\\bar{\\mathbf{v}}$.
 
-One consequence for odd-dimensional real matrices: at least one eigenvalue must be real. Complex roots pair up, consuming an even number of the $n$ roots. When $n$ is odd, at least one root is left unpaired, and an unpaired root of a real polynomial must be real.`,
+One consequence for odd-dimensional real matrices: [at least one eigenvalue must be real](https://linearalgebranotes.com/eigen/characteristic-polynomial#rule-odd-real-root). Complex roots pair up, consuming an even number of the $n$ roots. When $n$ is odd, at least one root is left unpaired, and an unpaired root of a real polynomial must be real.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2039,7 +2039,7 @@ The modulus is $r = \\sqrt{4 + 1} = \\sqrt{5}$ and the argument is $\\theta = \\
   },
   obj4: {
     title: `Complex Eigenvectors`,
-    content: `The eigenvectors corresponding to complex eigenvalues have complex entries. To find them, solve $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ using complex arithmetic.
+    content: `The eigenvectors corresponding to complex eigenvalues have complex entries. To find them, solve $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ [using complex arithmetic](https://calculatematrix.com/matrix-calculators/eigenvectors#algorithm).
 
 Continuing the example with $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$ and $\\lambda = 2 + i$:
 
@@ -2094,7 +2094,7 @@ A $100 \\times 100$ matrix with independent, normally distributed entries has on
 
 The real canonical form is the real analogue of [diagonalization](!/linear-algebra/eigen/diagonalization): for a matrix diagonalizable over $\\mathbb{C}$ it achieves the simplest possible real matrix that is similar to $A$, with the block structure directly reflecting the eigenvalue spectrum; otherwise larger real Jordan blocks appear.
 
-How the $n$ eigenvalues split between the two kinds of block depends on the matrix. A [symmetric matrix](!/linear-algebra/decompositions/spectral) has only real eigenvalues, so its real canonical form is made of $1 \\times 1$ blocks alone, while a rotation of $\\mathbb{R}^4$ in two separate planes is made of two $2 \\times 2$ blocks and nothing else. A matrix whose entries are chosen at random falls somewhere between these extremes.`,
+How the $n$ eigenvalues split between the two kinds of block depends on the matrix. A [symmetric matrix](!/linear-algebra/decompositions/spectral) has [only real eigenvalues](https://linearalgebranotes.com/eigen/spectral-theorem#rule-real-eigenvalues), so its real canonical form is made of $1 \\times 1$ blocks alone, while a rotation of $\\mathbb{R}^4$ in two separate planes is made of two $2 \\times 2$ blocks and nothing else. A matrix whose entries are chosen at random falls somewhere between these extremes.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2103,13 +2103,13 @@ How the $n$ eigenvalues split between the two kinds of block depends on the matr
     title: `Dynamical Systems Interpretation`,
     content: `Complex eigenvalues produce oscillatory behavior in dynamical systems.
 
-In the discrete system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$, an eigenvalue $\\lambda = a + bi$ with modulus $r = |\\lambda| = \\sqrt{a^2 + b^2}$ generates a spiraling trajectory. When $r > 1$, the spiral grows outward — the system is unstable. When $r < 1$, the spiral decays inward — the system converges to the origin. When $r = 1$, the points stay on a closed curve — perpetual oscillation without growth or decay.
+In [the discrete system](https://calculatematrix.com/matrix-calculators/matrix-power#uses) $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$, an eigenvalue $\\lambda = a + bi$ with modulus $r = |\\lambda| = \\sqrt{a^2 + b^2}$ generates a spiraling trajectory. When $r > 1$, the spiral grows outward — the system is unstable. When $r < 1$, the spiral decays inward — the system converges to the origin. When $r = 1$, the points stay on a closed curve — perpetual oscillation without growth or decay.
 
 @academic[pitfall,aside:true,width:35%:Using the real-part test on a discrete system
 Judging $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ by the sign of the real part calls $\\lambda = \\frac{1}{2} \\pm \\frac{1}{2}i$ unstable, since $\\operatorname{Re}(\\lambda) > 0$. Here the modulus decides: $|\\lambda| = \\frac{\\sqrt{2}}{2} \\approx 0.71 < 1$, so the iterates spiral in to $\\mathbf{0}$.
 [Read more](!#pitfall-using-the-real-part-test-on-a-discrete-system)]@
 
-In the continuous system $\\mathbf{x}' = A\\mathbf{x}$, an eigenvalue $\\lambda = a + bi$ contributes a term $e^{at}(\\cos bt, \\sin bt)$ to the solution. The real part $a$ determines exponential growth ($a > 0$) or decay ($a < 0$). The imaginary part $b$ determines the oscillation frequency. When $a = 0$, the oscillation is sustained. When $a < 0$, it is damped. When $a > 0$, it grows without bound.
+In [the continuous system](https://calculatematrix.com/matrix-calculators/matrix-exponential#uses) $\\mathbf{x}' = A\\mathbf{x}$, an eigenvalue $\\lambda = a + bi$ contributes a term $e^{at}(\\cos bt, \\sin bt)$ to the solution. The real part $a$ determines exponential growth ($a > 0$) or decay ($a < 0$). The imaginary part $b$ determines the oscillation frequency. When $a = 0$, the oscillation is sustained. When $a < 0$, it is damped. When $a > 0$, it grows without bound.
 
 @academic[rule_theorem_plain:Stability of a linear system reduces to eigenvalue analysis: the system is stable if and only if every eigenvalue has negative real part (continuous) or modulus less than $1$ (discrete).]@`,
     before: ``,
@@ -2121,11 +2121,11 @@ In the continuous system $\\mathbf{x}' = A\\mathbf{x}$, an eigenvalue $\\lambda 
     content: `@academic[rule_theorem:Fundamental Theorem of Algebra
 Over $\\mathbb{C}$, every polynomial of degree $n$ factors completely into $n$ linear factors.]@
 
-This means every $n \\times n$ matrix — real or complex — has exactly $n$ eigenvalues counted with algebraic multiplicity when the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation) is factored over $\\mathbb{C}$.
+This means every $n \\times n$ matrix — real or complex — has exactly $n$ eigenvalues [counted with algebraic multiplicity](https://linearalgebranotes.com/eigen/algebraic-and-geometric-multiplicity#rule-total) when the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation) is factored over $\\mathbb{C}$.
 
 Over $\\mathbb{R}$, some factors may be irreducible quadratics rather than linear, corresponding to conjugate pairs of complex eigenvalues. The characteristic polynomial of a real matrix factors into linear terms (real eigenvalues) and irreducible quadratic terms (complex conjugate pairs).
 
-Working over $\\mathbb{C}$ simplifies the theory considerably. Every matrix is triangularizable over $\\mathbb{C}$ (Schur decomposition): $A = UTU^*$ where $U$ is unitary and $T$ is upper triangular with eigenvalues on the diagonal. [Diagonalizability](!/linear-algebra/eigen/diagonalization) depends only on whether the geometric multiplicities match the algebraic multiplicities, with no additional complications from irreducible quadratics.
+Working over $\\mathbb{C}$ simplifies the theory considerably. Every matrix is triangularizable over $\\mathbb{C}$ (Schur decomposition): $A = UTU^*$ where $U$ is unitary and $T$ is upper triangular with eigenvalues on the diagonal. [Diagonalizability](!/linear-algebra/eigen/diagonalization) depends only on [whether the geometric multiplicities match the algebraic multiplicities](https://linearalgebranotes.com/eigen/diagonalization#rule-gm-equals-am), with no additional complications from irreducible quadratics.
 
 The choice between working over $\\mathbb{R}$ and $\\mathbb{C}$ is a recurring theme. Real matrices are the natural objects of computation, but complex eigenvalues are the natural objects of spectral theory. Both perspectives are needed.`,
     before: ``,

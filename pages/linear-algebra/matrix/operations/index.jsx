@@ -3708,7 +3708,7 @@ const ciShopsTable = ciTableOpen(['product, day', 'shop 1', 'shop 2', 'combined'
 const sectionsContent = {
   obj1: {
     title: `Matrix Addition`,
-    content: `Two matrices of the same size can be added entry by entry. If $A$ and $B$ are both $m \\times n$, their sum is the $m \\times n$ matrix with entries
+    content: `Two matrices of the same size can be [added entry by entry](https://calculatematrix.com/matrix-calculators/matrix-addition#algorithm). If $A$ and $B$ are both $m \\times n$, their sum is the $m \\times n$ matrix with entries
 
 @academic[formula_callout:matrix_addition|Matrix Addition|$$(A + B)_{ij} = a_{ij} + b_{ij}$$]@
 @academic[formulas_link:/linear-algebra/formulas#matrix_addition]@
@@ -3807,7 +3807,7 @@ is a linear combination of matrices.
 
 @academic[rule_theorem_plain:Addition and scalar multiplication together give the set of all $m \\times n$ matrices the structure of a [vector space](!/linear-algebra/vector-spaces).]@
 
-The dimension of this space is $mn$ — one degree of freedom for each entry. The standard basis consists of the $mn$ matrices that have a single $1$ in one position and zeros everywhere else.`,
+[The dimension of this space](https://linearalgebranotes.com/matrices/matrix#rule-matrix-space) is $mn$ — one degree of freedom for each entry. The standard basis consists of the $mn$ matrices that have a single $1$ in one position and zeros everywhere else.`,
     before: ``,
     after: ``,
     link: ``,
@@ -3826,7 +3826,7 @@ The number of columns of $A$ must equal the number of rows of $B$. If this compa
 @academic[formula_callout:Matrix Multiplication — Definition
 $$\\begin{pmatrix} 1 & 0 & 3 \\\\ 2 & -1 & 4 \\end{pmatrix} \\begin{pmatrix} 5 & 1 \\\\ 2 & -3 \\\\ 0 & 6 \\end{pmatrix}$$]@
 
-The left matrix is $2 \\times 3$ and the right is $3 \\times 2$, so the product is $2 \\times 2$. Computing each entry:
+The left matrix is $2 \\times 3$ and the right is $3 \\times 2$, so the product is $2 \\times 2$. [Computing each entry](https://calculatematrix.com/matrix-calculators/matrix-multiplication#algorithm):
 
 @academic[formula_callout:Matrix Multiplication — Definition
 $$(1)(5) + (0)(2) + (3)(0) = 5, \\quad (1)(1) + (0)(-3) + (3)(6) = 19$$]@
@@ -3857,7 +3857,7 @@ Every entry of the product draws on a whole row of the left factor and a whole c
     title: `Matrix Multiplication — Properties`,
     content: `Matrix multiplication obeys several familiar algebraic rules and violates one that is deeply ingrained from scalar arithmetic.
 
-Associativity holds whenever all products are defined:
+[Associativity holds](https://linearalgebranotes.com/matrices/matrix-multiplication#rule-associative) whenever all products are defined:
 
 @academic[formula_callout:matrix_multiplication_associativity|Matrix Multiplication Associativity|$$(AB)C = A(BC)$$]@
 @academic[formulas_link:/linear-algebra/formulas#matrix_multiplication_associativity]@
@@ -3869,7 +3869,7 @@ Distribution holds on both sides:
 
 Scalars pass through freely: $c(AB) = (cA)B = A(cB)$. The identity matrix satisfies $AI = IA = A$ whenever the dimensions are compatible.
 
-Commutativity, however, fails:
+[Commutativity, however, fails](https://linearalgebranotes.com/matrices/matrix-multiplication#rule-noncommutative):
 
 @academic[formula_callout:matrix_multiplication_non_commutativity|Matrix Multiplication Non-Commutativity|$$AB \\neq BA \\text{ in general}$$]@
 @academic[formulas_link:/linear-algebra/formulas#matrix_multiplication_non-commutativity]@
@@ -3885,7 +3885,7 @@ Two further properties distinguish matrix multiplication from scalar multiplicat
     title: `Matrix Multiplication — Column and Row Interpretations`,
     content: `The entry-by-entry formula is the most common way to define matrix multiplication, but two alternative viewpoints often provide sharper insight.
 
-The column interpretation says that column $j$ of $AB$ is obtained by multiplying $A$ times column $j$ of $B$:
+[The column interpretation](https://linearalgebranotes.com/matrices/matrix-multiplication#rule-columns) says that column $j$ of $AB$ is obtained by multiplying $A$ times column $j$ of $B$:
 
 @academic[formula_callout:Matrix Multiplication — Column and Row Interpretations
 $$AB = \\begin{pmatrix} A\\mathbf{b}_1 & A\\mathbf{b}_2 & \\cdots & A\\mathbf{b}_p \\end{pmatrix}$$]@
@@ -3894,7 +3894,7 @@ Each column of the product is a linear combination of the columns of $A$, with w
 
 The row interpretation says that row $i$ of $AB$ equals row $i$ of $A$ times the entire matrix $B$. Each row of the product is a linear combination of the rows of $B$, weighted by the entries in the corresponding row of $A$.
 
-A third perspective writes the product as a sum of rank-one outer products:
+A third perspective writes the product as [a sum of rank-one outer products](https://linearalgebranotes.com/matrices/matrix-multiplication#rule-outer):
 
 @academic[formula_callout:Matrix Multiplication — Column and Row Interpretations
 $$AB = \\sum_{k=1}^{n} (\\text{column } k \\text{ of } A)(\\text{row } k \\text{ of } B)$$]@
@@ -3931,7 +3931,7 @@ and commutes with scalar multiplication:
 @academic[formula_callout:transpose_of_scalar_multiple|Transpose of Scalar Multiple|$$(cA)^T = c\\, A^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#transpose_of_scalar_multiple]@
 
-The product rule reverses the order:
+[The product rule reverses the order](https://linearalgebranotes.com/matrices/transpose#rule-product):
 
 @academic[formula_callout:transpose_of_product|Transpose of Product|$$(AB)^T = B^T A^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#transpose_of_product]@
@@ -3954,7 +3954,7 @@ A matrix satisfying $A = A^T$ is called [symmetric](!/linear-algebra/matrix/type
 
 @academic[rule_plain:The usual exponent laws hold: $A^j A^k = A^{j+k}$ and $(A^j)^k = A^{jk}$.]@
 
-When $A$ is invertible, negative powers are defined as $A^{-k} = (A^{-1})^k$, extending the exponent laws to all integers.
+When $A$ is invertible, negative powers are defined as $A^{-k} = (A^{-1})^k$, extending [the exponent laws](https://linearalgebranotes.com/matrices/matrix-powers#rule-exponent-laws) to all integers.
 
 One rule from scalar arithmetic does not carry over. Since matrix multiplication is not commutative, the identity $(AB)^k = A^k B^k$ is false in general. Expanding $(AB)^2 = ABAB$, there is no way to rearrange this into $A^2 B^2 = AABB$ without commutativity.
 
@@ -3964,7 +3964,7 @@ Writing $(A + B)^2 = A^2 + 2AB + B^2$ merges $AB$ and $BA$. With $A$ and $B$ fro
 
 Squaring a sum is where this matters most often. The square $(A + B)^2$ is the product $(A + B)(A + B)$, and it is expanded with the two distributive laws from the properties section, exactly as a product of two different sums would be. Only after the expansion is it clear which of the resulting terms can be combined.
 
-Powers of specific matrix types are particularly well-behaved. For a diagonal matrix $D = \\text{diag}(d_1, \\dots, d_n)$, the $k$-th power is $D^k = \\text{diag}(d_1^k, \\dots, d_n^k)$ — each diagonal entry is raised to the $k$-th power independently. This simplicity is one of the main reasons [diagonalization](!/linear-algebra/eigen/diagonalization) is so useful: writing $A = PDP^{-1}$ gives $A^k = PD^kP^{-1}$, reducing an expensive matrix power to a cheap diagonal power.`,
+Powers of specific matrix types are particularly well-behaved. For a diagonal matrix $D = \\text{diag}(d_1, \\dots, d_n)$, the $k$-th power is $D^k = \\text{diag}(d_1^k, \\dots, d_n^k)$ — each diagonal entry is raised to the $k$-th power independently. This simplicity is one of the main reasons [diagonalization](!/linear-algebra/eigen/diagonalization) is so useful: writing $A = PDP^{-1}$ gives $A^k = PD^kP^{-1}$, [reducing an expensive matrix power to a cheap diagonal power](https://calculatematrix.com/matrix-calculators/matrix-power#algorithm).`,
     before: ``,
     after: ``,
     link: ``,
@@ -3973,7 +3973,7 @@ Powers of specific matrix types are particularly well-behaved. For a diagonal ma
     title: `Elementary Matrices`,
     content: `An elementary matrix is the result of performing a single row operation on the identity matrix. There are three types, corresponding to the three row operations: swapping two rows, multiplying a row by a nonzero scalar, and adding a multiple of one row to another.
 
-The key property is that left-multiplying a matrix $A$ by an elementary matrix $E$ performs the corresponding row operation on $A$. If $E$ swaps rows $2$ and $3$ of the identity, then $EA$ swaps rows $2$ and $3$ of $A$. If $E$ scales row $1$ of the identity by $5$, then $EA$ scales row $1$ of $A$ by $5$.
+The key property is that [left-multiplying a matrix](https://linearalgebranotes.com/matrices/elementary-matrix#rule-left-multiplication) $A$ by an elementary matrix $E$ performs the corresponding row operation on $A$. If $E$ swaps rows $2$ and $3$ of the identity, then $EA$ swaps rows $2$ and $3$ of $A$. If $E$ scales row $1$ of the identity by $5$, then $EA$ scales row $1$ of $A$ by $5$.
 
 @academic[rule_theorem_plain:Every elementary matrix is invertible, and its inverse is another elementary matrix of the same type: the inverse of a row swap is the same row swap, the inverse of scaling by $k$ is scaling by $1/k$, and the inverse of adding $c$ times row $i$ to row $j$ is subtracting $c$ times row $i$ from row $j$.]@
 
@@ -3992,7 +3992,7 @@ This leads to a structural result: every invertible matrix can be written as a p
     title: `Matrix Decompositions`,
     content: `A matrix decomposition (or factorization) expresses a matrix as a product of simpler matrices with known structure. Decompositions are among the most powerful tools in computational linear algebra, converting hard problems into sequences of easy ones.
 
-The LU decomposition writes $A = LU$ where $L$ is lower triangular and $U$ is upper triangular. It captures the essence of Gaussian elimination in matrix form and makes solving [linear systems](!/linear-algebra/linear-systems) with multiple right-hand sides efficient: once $L$ and $U$ are known, each system reduces to two triangular solves.
+The LU decomposition writes $A = LU$ where $L$ is lower triangular and $U$ is upper triangular. It [captures the essence of Gaussian elimination in matrix form](https://calculatematrix.com/matrix-calculators/lu-decomposition#algorithm) and makes solving [linear systems](!/linear-algebra/linear-systems) with multiple right-hand sides efficient: once $L$ and $U$ are known, each system reduces to two triangular solves.
 
 The QR decomposition writes $A = QR$ where $Q$ is [orthogonal](!/linear-algebra/matrix/types) and $R$ is upper triangular. It is the foundation of least-squares computation and several eigenvalue algorithms.
 

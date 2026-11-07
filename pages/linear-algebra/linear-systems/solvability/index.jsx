@@ -2198,14 +2198,14 @@ The two questions are independent — existence can hold without uniqueness, and
 
   obj2: {
     title: `The Existence Condition`,
-    content: `The system $A\\mathbf{x} = \\mathbf{b}$ has at least one solution if and only if
+    content: `The system $A\\mathbf{x} = \\mathbf{b}$ [has at least one solution if and only if](https://linearalgebranotes.com/systems/consistency#rule-rank-test)
 
 @academic[formula_callout:The Existence Condition
 $$\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$$]@
 
 When this condition holds, $\\mathbf{b}$ is already a linear combination of the columns of $A$, so appending $\\mathbf{b}$ as an extra column does not introduce a new independent direction — the rank stays the same.
 
-When the condition fails — $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$ — the vector $\\mathbf{b}$ is not in the column space. In the [echelon form](!/linear-algebra/linear-systems/echelon-form) of the augmented matrix, this appears as a row $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$: the equation $0 = d$ has no solution, and the system is inconsistent.
+When the condition fails — $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$ — the vector $\\mathbf{b}$ is not in the column space. In the [echelon form](!/linear-algebra/linear-systems/echelon-form) of the augmented matrix, this appears as a row $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$: the equation $0 = d$ has no solution, and [the system is inconsistent](https://calculatematrix.com/linear-systems/consistency-checker#algorithm).
 
 Since appending one column can increase the rank by at most $1$, the only possibilities are $\\text{rank}([A \\mid \\mathbf{b}]) = \\text{rank}(A)$ (consistent) or $\\text{rank}([A \\mid \\mathbf{b}]) = \\text{rank}(A) + 1$ (inconsistent).`,
     before: ``,
@@ -2219,7 +2219,7 @@ Since appending one column can increase the rank by at most $1$, the only possib
 @academic[formula_callout:The Uniqueness Condition
 $$\\text{rank}(A) = n$$]@
 
-where $n$ is the number of unknowns. Full column rank means every column of $A$ contains a pivot, leaving no free variables. The null space is $\\{\\mathbf{0}\\}$, so the particular solution $\\mathbf{x}_p$ stands alone with nothing to add.
+where $n$ is the number of unknowns. [Full column rank](https://linearalgebranotes.com/systems/structure-of-the-solution-set#rule-unique-iff) means every column of $A$ contains a pivot, leaving no free variables. The null space is $\\{\\mathbf{0}\\}$, so the particular solution $\\mathbf{x}_p$ stands alone with nothing to add.
 
 When $\\text{rank}(A) < n$, there are $n - \\text{rank}(A)$ free variables. Each free variable parametrizes a direction along which the solution can move without violating the equations. The solution set is infinite — a translated copy of the null space, which has dimension $n - \\text{rank}(A)$.
 
@@ -2247,7 +2247,7 @@ $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) < n$: infinitely many sol
 @academic[fact,aside:true,width:35%:Exactly two solutions, in arithmetic mod 2
 With arithmetic mod $2$, where $1 + 1 = 0$, the equation $x_1 + x_2 = 1$ has exactly two solutions, $(1, 0)$ and $(0, 1)$. The line through two solutions has one point per scalar, and mod $2$ there are only two scalars.]@
 
-If two distinct solutions exist, their difference lies in the null space, which is a [subspace](!/linear-algebra/vector-spaces/subspaces) — and a nontrivial subspace contains infinitely many vectors, generating infinitely many solutions.
+If two distinct solutions exist, [their difference lies in the null space](https://linearalgebranotes.com/systems/structure-of-the-solution-set#rule-difference), which is a [subspace](!/linear-algebra/vector-spaces/subspaces) — and a nontrivial subspace contains infinitely many vectors, generating infinitely many solutions.
 
 The argument uses only one property of the scalars: there are infinitely many of them. The points $\\mathbf{x}_1 + t(\\mathbf{x}_2 - \\mathbf{x}_1)$ all solve the system, because $A(\\mathbf{x}_2 - \\mathbf{x}_1) = \\mathbf{b} - \\mathbf{b} = \\mathbf{0}$, and different values of $t$ give different points since $\\mathbf{x}_2 - \\mathbf{x}_1 \\neq \\mathbf{0}$. The number of solutions is therefore at least the number of scalars available for $t$.`,
     before: ``,
@@ -2263,7 +2263,7 @@ The argument uses only one property of the scalars: there are infinitely many of
 
 When consistent, the solution set has dimension $n - \\text{rank}(A)$.
 
-The theorem unifies the existence and dimension questions into a single rank comparison. It applies to every linear system regardless of the shape of $A$ — square, tall, or wide. The proof follows directly from the column-space interpretation: $\\mathbf{b} \\in \\text{Col}(A)$ if and only if adding $\\mathbf{b}$ as a column does not increase the rank.`,
+The theorem unifies the existence and dimension questions into a single rank comparison. It applies to every linear system regardless of the shape of $A$ — square, tall, or wide. [The proof follows directly from the column-space interpretation](https://linearalgebranotes.com/systems/consistency#rule-column-space): $\\mathbf{b} \\in \\text{Col}(A)$ if and only if adding $\\mathbf{b}$ as a column does not increase the rank.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2287,7 +2287,7 @@ If $\\det(A) = 0$: the matrix is singular, the rank is less than $n$, and the ou
   },
   obj7: {
     title: `Overdetermined Systems`,
-    content: `When $m > n$ — more equations than unknowns — the system is overdetermined. The coefficient matrix is tall, and generically, no solution exists.
+    content: `When $m > n$ — more equations than unknowns — the system is overdetermined. The coefficient matrix is tall, and [generically, no solution exists](https://linearalgebranotes.com/systems/overdetermined-and-underdetermined-systems#rule-tall-not-onto).
 
 The column space of $A$ is at most $n$-dimensional inside $\\mathbb{R}^m$. When $m > n$, this column space is a proper subspace — most vectors in $\\mathbb{R}^m$ lie outside it. A randomly chosen $\\mathbf{b}$ will almost certainly not be in the column space, making the system inconsistent.
 
@@ -2297,7 +2297,7 @@ Concluding "no solution" because $m = 3 > n = 2$ fails for $x_1 + x_2 = 2$, $x_1
 
 A solution exists only when $\\mathbf{b}$ happens to lie in the column space — when the extra equations are consistent with the first $n$. When a solution does exist and $\\text{rank}(A) = n$, it is unique.
 
-When no exact solution exists, the [least-squares](!/linear-algebra/orthogonality/least-squares) approach finds the $\\hat{\\mathbf{x}}$ that minimizes $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ — the closest approximation. The least-squares solution satisfies the normal equations $A^T A \\hat{\\mathbf{x}} = A^T \\mathbf{b}$ and $A\\hat{\\mathbf{x}}$ is the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space.
+When no exact solution exists, the [least-squares](!/linear-algebra/orthogonality/least-squares) approach finds the $\\hat{\\mathbf{x}}$ that minimizes $\\|A\\mathbf{x} - \\mathbf{b}\\|^2$ — [the closest approximation](https://calculatematrix.com/linear-systems/least-squares-solver#about). The least-squares solution satisfies the normal equations $A^T A \\hat{\\mathbf{x}} = A^T \\mathbf{b}$ and $A\\hat{\\mathbf{x}}$ is the [projection](!/linear-algebra/orthogonality/projections) of $\\mathbf{b}$ onto the column space.
 
 @academic[punchline:Extra equations rarely agree, so a tall system usually has no exact solution and least squares settles for the nearest one.]@`,
     before: ``,
@@ -2314,7 +2314,7 @@ Expecting infinitely many solutions because $m = 2 < n = 3$ fails for $x_1 + x_2
 
 The solution set, when nonempty, is an affine subspace of dimension at least $n - m$. Multiple vectors $\\mathbf{x}$ satisfy the equations, and additional criteria beyond the linear system itself are needed to select a preferred one.
 
-Common selection criteria include minimum norm (the $\\mathbf{x}$ closest to $\\mathbf{0}$, given by the pseudoinverse $\\mathbf{x} = A^+\\mathbf{b}$, which equals $A^T(AA^T)^{-1}\\mathbf{b}$ when $A$ has full row rank), sparsity (the $\\mathbf{x}$ with the fewest nonzero entries, central to compressed sensing), and physical constraints (bounds or nonnegativity in engineering applications).
+Common selection criteria include minimum norm (the $\\mathbf{x}$ closest to $\\mathbf{0}$, [given by the pseudoinverse](https://calculatematrix.com/matrix-calculators/pseudo-inverse#about) $\\mathbf{x} = A^+\\mathbf{b}$, which equals $A^T(AA^T)^{-1}\\mathbf{b}$ when $A$ has full row rank), sparsity (the $\\mathbf{x}$ with the fewest nonzero entries, central to compressed sensing), and physical constraints (bounds or nonnegativity in engineering applications).
 
 @academic[fact,aside:true,width:35%:Ten equations, a thousand unknowns
 A $10 \\times 1000$ system whose columns are independent ten at a time has at most one solution with $5$ or fewer nonzero entries. Two such solutions would differ by a null-space vector with at most $10$ nonzero entries, and no $10$ columns can cancel.]@
@@ -2343,7 +2343,7 @@ When the system has infinitely many solutions, the hyperplanes meet along a flat
   },
   obj10: {
     title: `Structure of the Solution Set`,
-    content: `When $A\\mathbf{x} = \\mathbf{b}$ is consistent, the complete solution set has the form
+    content: `When $A\\mathbf{x} = \\mathbf{b}$ is consistent, [the complete solution set has the form](https://linearalgebranotes.com/systems/structure-of-the-solution-set#rule-complete-solution)
 
 @academic[formula_callout:solution_structure_decomposition|Solution Structure Decomposition|$$\\mathbf{x} = \\mathbf{x}_p + \\mathbf{x}_h, \\quad \\mathbf{x}_h \\in \\text{Null}(A)$$]@
 @academic[formulas_link:/linear-algebra/formulas#solution_structure_decomposition]@

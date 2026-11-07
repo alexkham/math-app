@@ -2850,7 +2850,7 @@ $$\\dim(V) = |\\mathcal{B}| \\quad \\text{for any basis } \\mathcal{B} \\text{ o
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-This definition relies on a nontrivial fact: all bases for $V$ have the same size. Without this guarantee, "the number of vectors in a basis" would depend on which basis was chosen, and the definition would be meaningless. The basis size theorem, proved in the next section, ensures that the count is intrinsic to the space itself.
+This definition relies on [a nontrivial fact](https://linearalgebranotes.com/spaces/dimension#rule-invariance): all bases for $V$ have the same size. Without this guarantee, "the number of vectors in a basis" would depend on which basis was chosen, and the definition would be meaningless. The basis size theorem, proved in the next section, ensures that the count is intrinsic to the space itself.
 
 By convention, the zero space $\\{\\mathbf{0}\\}$ has dimension $0$. Its only "basis" is the empty set, which contains no vectors, is vacuously independent, and spans $\\{\\mathbf{0}\\}$ since the empty linear combination produces $\\mathbf{0}$.`,
     before: ``,
@@ -2902,7 +2902,7 @@ By convention, the zero space $\\{\\mathbf{0}\\}$ has dimension $0$. Its only "b
     content: `@academic[rule_theorem:Basis Size Theorem
 If a vector space $V$ has a basis with $n$ elements, then every basis for $V$ has exactly $n$ elements.]@
 
-The proof rests on two supporting facts. First, in a space spanned by $n$ vectors, any set of more than $n$ vectors is [dependent](!/linear-algebra/vector-spaces/linear-independence). Second, any [spanning](!/linear-algebra/vector-spaces/span) set contains at least as many vectors as any independent set.
+[The proof rests on two supporting facts](https://linearalgebranotes.com/spaces/dimension#rule-exchange). First, in a space spanned by $n$ vectors, any set of more than $n$ vectors is [dependent](!/linear-algebra/vector-spaces/linear-independence). Second, any [spanning](!/linear-algebra/vector-spaces/span) set contains at least as many vectors as any independent set.
 
 Suppose $\\mathcal{B}$ has $n$ elements and $\\mathcal{C}$ has $m$ elements, and both are bases. Since $\\mathcal{B}$ spans $V$ and $\\mathcal{C}$ is independent, we get $m \\leq n$. Since $\\mathcal{C}$ spans $V$ and $\\mathcal{B}$ is independent, we get $n \\leq m$. Together, $m = n$.
 
@@ -2930,7 +2930,7 @@ The space $C[a, b]$ of continuous functions on $[a, b]$ is also infinite-dimensi
     title: `Finite vs. Infinite Dimension`,
     content: `A vector space is finite-dimensional if it has a finite basis, and infinite-dimensional otherwise.
 
-In finite-dimensional spaces, the theory is clean and complete. Every independent set can be extended to a basis. Every spanning set can be reduced to one. The dimension is a finite integer that governs the entire structure of the space.
+In finite-dimensional spaces, the theory is clean and complete. [Every independent set can be extended to a basis](https://linearalgebranotes.com/spaces/basis-extension#rule-extension). Every spanning set can be reduced to one. The dimension is a finite integer that governs the entire structure of the space.
 
 @academic[fact,aside:true,width:35%:Sequences need uncountably many directions
 A real sequence has one entry for each of $1, 2, 3, \\ldots$, yet the space of all real sequences has no countable basis. The sequences $(1, t, t^2, \\ldots)$, one for each real $t$, are independent by the Vandermonde determinant, and no independent set is larger than a basis.]@
@@ -2955,13 +2955,13 @@ $$|S| > \\dim V \\Rightarrow S \\text{ is dependent}$$
 
 This is the absolute ceiling: independence cannot survive past $n$ vectors, no matter how cleverly they are chosen. In $\\mathbb{R}^3$, four or more vectors are always [dependent](!/linear-algebra/vector-spaces/linear-independence). In $\\mathcal{P}_2$, four or more polynomials are always dependent.
 
-An independent set of exactly $n$ vectors is automatically a basis. Spanning comes for free once the count reaches the dimension. This is one of the most useful shortcuts in practice: to verify that $n$ vectors in an $n$-dimensional space form a basis, it suffices to check independence alone.
+An independent set of exactly $n$ vectors [is automatically a basis](https://linearalgebranotes.com/spaces/dimension#rule-right-count). Spanning comes for free once the count reaches the dimension. This is one of the most useful shortcuts in practice: to verify that $n$ vectors in an $n$-dimensional space form a basis, it suffices to check independence alone.
 
 @academic[pitfall,aside:true,width:35%:Counting without checking independence
 Calling $(1, 2, 3)$, $(2, 4, 6)$, $(0, 0, 1)$ a basis of $\\mathbb{R}^3$ because there are three of them overlooks $(2, 4, 6) = 2(1, 2, 3)$. Their matrix has only $2$ pivots, so they span a plane and are not a basis.
 [Read more](!#pitfall-counting-without-checking-independence)]@
 
-In a typical exercise the vectors are written as the columns of a matrix, and the question is whether they form a basis. The count is compared with the dimension first. When the two agree, one further test settles the question, for example row reducing that matrix and counting its pivots: in $\\mathbb{R}^3$, three vectors whose matrix has three pivots, or equivalently a nonzero determinant, are a basis.
+In a typical exercise the vectors are written as the columns of a matrix, and the question is whether they form a basis. The count is compared with the dimension first. When the two agree, one further test settles the question, for example [row reducing that matrix and counting its pivots](https://calculatematrix.com/matrix-calculators/matrix-rank#about): in $\\mathbb{R}^3$, three vectors whose matrix has three pivots, or equivalently a nonzero determinant, are a basis.
 
 An independent set of fewer than $n$ vectors can always be extended to a basis by adding $n - k$ more vectors, where $k$ is the current count. The extension is not unique — there are many ways to complete the set — but the final count is always $n$.`,
     before: ``,
@@ -2978,7 +2978,7 @@ The span has dimension at most $k < n$, so it is a proper [subspace](!/linear-al
 
 A spanning set of exactly $n$ vectors is automatically a basis. Independence comes for free once the count hits the dimension. This is the mirror image of the independence shortcut: to verify that $n$ vectors span an $n$-dimensional space, it suffices to check spanning alone, and independence follows.
 
-A spanning set of more than $n$ vectors contains redundancies. At least $k - n$ vectors can be removed without shrinking the span. Removing all redundant vectors produces a basis.
+A spanning set of more than $n$ vectors contains redundancies. At least $k - n$ vectors can be removed without shrinking the span. [Removing all redundant vectors produces a basis](https://linearalgebranotes.com/spaces/basis#rule-shrink-to-basis).
 
 These two shortcuts — "$n$ independent vectors in an $n$-dimensional space form a basis" and "$n$ spanning vectors in an $n$-dimensional space form a basis" — are the workhorses of basis verification.`,
     before: ``,
@@ -2996,7 +2996,7 @@ $$W \\subseteq V \\Rightarrow \\dim(W) \\leq \\dim(V), \\quad \\text{with equali
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-The inequality is strict ($\\dim(W) < \\dim(V)$) for every proper subspace — a subspace that is not all of $V$. The only subspace with $\\dim(W) = \\dim(V)$ is $W = V$ itself. This follows because any basis for $W$ is an independent set in $V$ with $\\dim(W)$ elements, and extending it to a basis for $V$ adds $\\dim(V) - \\dim(W)$ vectors. If no vectors need adding, $W$ already has a basis for all of $V$.
+The inequality is strict ($\\dim(W) < \\dim(V)$) for every proper subspace — a subspace that is not all of $V$. The only subspace with $\\dim(W) = \\dim(V)$ is $W = V$ itself. [This follows because](https://linearalgebranotes.com/spaces/dimension#rule-subspace-dimension) any basis for $W$ is an independent set in $V$ with $\\dim(W)$ elements, and extending it to a basis for $V$ adds $\\dim(V) - \\dim(W)$ vectors. If no vectors need adding, $W$ already has a basis for all of $V$.
 
 @academic[pitfall,aside:true,width:35%:Counting components instead of directions
 Calling the plane $x + y + z = 0$ three-dimensional because its vectors have three entries gives $\\dim = 3$. It has the basis $(-1, 1, 0)$, $(-1, 0, 1)$, so its dimension is $2$.
@@ -3011,7 +3011,7 @@ For a [matrix](!/linear-algebra/matrix) $A$, the column space is a subspace of $
   },
   obj8: {
     title: `The Dimension Formula for Subspace Sums`,
-    content: `For two [subspaces](!/linear-algebra/vector-spaces/subspaces) $W_1$ and $W_2$ of a finite-dimensional space $V$, the dimension of their sum satisfies
+    content: `For two [subspaces](!/linear-algebra/vector-spaces/subspaces) $W_1$ and $W_2$ of a finite-dimensional space $V$, [the dimension of their sum](https://calculatematrix.com/matrix-calculators/subspace-intersection#algorithm) satisfies
 
 @academic[formula_callout:Dimension Sum Formula
 $$\\dim(W_1 + W_2) = \\dim(W_1) + \\dim(W_2) - \\dim(W_1 \\cap W_2)$$
@@ -3037,7 +3037,7 @@ $$V = W_1 \\oplus W_2 \\iff V = W_1 + W_2 \\text{ and } W_1 \\cap W_2 = \\{\\mat
 
 @academic[rule_theorem_plain:Every vector in a direct sum has a unique decomposition as $\\mathbf{w}_1 + \\mathbf{w}_2$ with $\\mathbf{w}_1 \\in W_1$ and $\\mathbf{w}_2 \\in W_2$.]@
 
-For direct sums, the dimension formula collapses to plain addition:
+For direct sums, [the dimension formula collapses to plain addition](https://linearalgebranotes.com/spaces/dimension-formula-for-sums#rule-direct-iff-dimensions-add):
 
 @academic[formula_callout:Direct Sum Dimension
 $$V = W_1 \\oplus W_2 \\Rightarrow \\dim(V) = \\dim(W_1) + \\dim(W_2)$$
@@ -3076,7 +3076,7 @@ Interpreted through the lens of [linear transformations](!/linear-algebra/transf
 For a $3 \\times 5$ matrix of rank $2$, taking $3 - 2$ gives nullity $1$. The null space lies in $\\mathbb{R}^5$, so the nullity is $5 - 2 = 3$.
 [Read more](!#pitfall-subtracting-the-rank-from-the-row-count)]@
 
-The rank-nullity theorem is the fundamental bridge between abstract dimension theory and concrete matrix computation. It connects the number of pivot columns (rank) to the number of free variables (nullity), and it guarantees that every question about the dimension of a null space or column space reduces to row reduction and pivot counting.`,
+The rank-nullity theorem is the fundamental bridge between abstract dimension theory and concrete matrix computation. It connects the number of pivot columns (rank) to the number of free variables (nullity), and it guarantees that every question about the dimension of a null space or column space [reduces to row reduction and pivot counting](https://calculatematrix.com/matrix-calculators/nullspace#rank-nullity).`,
     before: ``,
     after: ``,
     link: ``,

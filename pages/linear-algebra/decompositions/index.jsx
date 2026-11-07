@@ -173,7 +173,7 @@ The same factors serve many different questions. A single LU factorization solve
 
 Solving [linear systems](!/linear-algebra/linear-systems): the [LU decomposition](!/linear-algebra/decompositions/lower-upper) converts a single factorization into cheap triangular solves for any number of right-hand sides. The [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) does the same at half the cost when the matrix is symmetric positive definite.
 
-[Least squares](!/linear-algebra/orthogonality/least-squares): the [QR decomposition](!/linear-algebra/decompositions/qr) avoids squaring the condition number, providing a numerically stable solution to overdetermined systems.
+[Least squares](!/linear-algebra/orthogonality/least-squares): the [QR decomposition](!/linear-algebra/decompositions/qr) avoids [squaring the condition number](https://linearalgebranotes.com/matrices/condition-number#rule-normal-equations), providing a numerically stable solution to overdetermined systems.
 
 Eigenvalue computation: the QR algorithm — an iterative process built on repeated QR factorizations — is the standard method for finding eigenvalues of general matrices, entirely avoiding the characteristic polynomial.
 
@@ -186,9 +186,9 @@ Numerical stability: orthogonal factors ($Q$ in QR, $U$ and $V$ in SVD) preserve
   },
   obj3: {
     title: `LU Decomposition`,
-    content: `The [LU decomposition](!/linear-algebra/decompositions/lower-upper) factors a square matrix as $A = LU$ (or $PA = LU$ with row pivoting), where $L$ is lower triangular and $U$ is upper triangular. It captures the entire process of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) in matrix form: $U$ is the [echelon form](!/linear-algebra/linear-systems/echelon-form), and $L$ stores the multipliers used during elimination.
+    content: `The [LU decomposition](!/linear-algebra/decompositions/lower-upper) factors a square matrix as $A = LU$ (or $PA = LU$ with row pivoting), where $L$ is lower triangular and $U$ is upper triangular. It captures the entire process of [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) in matrix form: $U$ is the [echelon form](!/linear-algebra/linear-systems/echelon-form), and $L$ [stores the multipliers used during elimination](https://calculatematrix.com/matrix-calculators/lu-decomposition#algorithm).
 
-Solving $A\\mathbf{x} = \\mathbf{b}$ reduces to two triangular substitutions — forward ($L\\mathbf{y} = \\mathbf{b}$) then backward ($U\\mathbf{x} = \\mathbf{y}$) — each costing $O(n^2)$. The factorization itself costs $\\frac{2}{3}n^3$, but each additional right-hand side costs only $O(n^2)$. For $k$ systems sharing the same coefficient matrix, LU amortizes the dominant cost over all $k$ solves.`,
+Solving $A\\mathbf{x} = \\mathbf{b}$ reduces to [two triangular substitutions](https://linearalgebranotes.com/matrices/lu-decomposition#rule-two-solves) — forward ($L\\mathbf{y} = \\mathbf{b}$) then backward ($U\\mathbf{x} = \\mathbf{y}$) — each costing $O(n^2)$. The factorization itself costs $\\frac{2}{3}n^3$, but each additional right-hand side costs only $O(n^2)$. For $k$ systems sharing the same coefficient matrix, LU amortizes the dominant cost over all $k$ solves.`,
     before: ``,
     after: ``,
     link: ``,
@@ -197,7 +197,7 @@ Solving $A\\mathbf{x} = \\mathbf{b}$ reduces to two triangular substitutions —
     title: `QR Decomposition`,
     content: `The [QR decomposition](!/linear-algebra/decompositions/qr) factors an $m \\times n$ matrix as $A = QR$, where $Q$ has [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) columns and $R$ is upper triangular. It is produced by the [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt), by Householder reflections, or by Givens rotations.
 
-QR is the standard method for least-squares problems: the normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ simplify to the triangular system $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$, avoiding the condition-number-squaring that comes from forming $A^TA$ directly.
+QR is [the standard method for least-squares problems](https://linearalgebranotes.com/matrices/qr-decomposition#rule-least-squares): the normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ simplify to the triangular system $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$, avoiding the condition-number-squaring that comes from forming $A^TA$ directly.
 
 The QR algorithm for eigenvalues — an iterative scheme that repeatedly factors and recombines — converges to the eigenvalues of a general matrix without computing the [characteristic polynomial](!/linear-algebra/eigen/characteristic-equation). It is the dominant eigenvalue algorithm in numerical software.`,
     before: ``,
@@ -206,13 +206,13 @@ The QR algorithm for eigenvalues — an iterative scheme that repeatedly factors
   },
   obj5: {
     title: `Cholesky Decomposition`,
-    content: `The [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) factors a [symmetric](!/linear-algebra/matrix/types) positive definite matrix as $A = LL^T$, where $L$ is lower triangular with positive diagonal entries. It exists if and only if $A$ is symmetric positive definite — all [eigenvalues](!/linear-algebra/eigen) strictly positive and $A = A^T$.
+    content: `The [Cholesky decomposition](!/linear-algebra/decompositions/cholesky) factors a [symmetric](!/linear-algebra/matrix/types) positive definite matrix as $A = LL^T$, where $L$ is lower triangular with positive diagonal entries. [It exists if and only if](https://linearalgebranotes.com/matrices/cholesky-decomposition#rule-existence) $A$ is symmetric positive definite — all [eigenvalues](!/linear-algebra/eigen) strictly positive and $A = A^T$.
 
 Cholesky exploits symmetry to achieve half the cost of LU: $\\frac{1}{3}n^3$ versus $\\frac{2}{3}n^3$. Only the lower triangle of $A$ is read, and only $L$ is computed — the upper factor $L^T$ is just the transpose.
 
 @academic[rule_theorem_plain:Cholesky requires no pivoting. Positive definiteness guarantees that every diagonal entry encountered during the algorithm is strictly positive, so no zero pivots can occur.]@
 
-If the algorithm breaks down (a non-positive value under the square root), the matrix is not positive definite — the decomposition doubles as a definiteness test.
+If the algorithm breaks down (a non-positive value under the square root), the matrix is not positive definite — the decomposition [doubles as a definiteness test](https://calculatematrix.com/matrix-calculators/cholesky-decomposition#algorithm).
 
 @academic[pitfall,aside:true,width:35%:Applying Cholesky to any symmetric matrix
 Starting Cholesky on the symmetric $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ gives $l_{11} = 1$, $l_{21} = 2$, then $l_{22}^2 = 1 - 4 = -3$, with no real square root. The eigenvalues of $A$ are $3$ and $-1$, so it is not positive definite and has no Cholesky factor.
@@ -231,7 +231,7 @@ The two conditions are checked in different ways. Symmetry can be read directly 
 For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix}$, with eigenvalues $2$ and $1$ and unit eigenvectors as the columns of $Q$, the product is $QDQ^T = \\begin{pmatrix} 5/2 & -1/2 \\\\ -1/2 & 1/2 \\end{pmatrix} \\neq A$. These eigenvectors are not orthogonal, so the factorization is $A = PDP^{-1}$.
 [Read more](!#pitfall-using-the-spectral-form-on-a-non-symmetric-matrix)]@
 
-In outer product form, $A = \\lambda_1 \\mathbf{q}_1\\mathbf{q}_1^T + \\lambda_2 \\mathbf{q}_2\\mathbf{q}_2^T + \\cdots + \\lambda_n \\mathbf{q}_n\\mathbf{q}_n^T$. Each term is the eigenvalue times the [projection](!/linear-algebra/orthogonality/projections) matrix onto the corresponding eigenvector direction. The matrix is decomposed into a sum of independent rank-one projections, weighted by eigenvalues.
+In outer product form, $A = \\lambda_1 \\mathbf{q}_1\\mathbf{q}_1^T + \\lambda_2 \\mathbf{q}_2\\mathbf{q}_2^T + \\cdots + \\lambda_n \\mathbf{q}_n\\mathbf{q}_n^T$. Each term is the eigenvalue times the [projection](!/linear-algebra/orthogonality/projections) matrix onto the corresponding eigenvector direction. The matrix is decomposed into [a sum of independent rank-one projections](https://linearalgebranotes.com/eigen/spectral-theorem#rule-spectral-decomposition), weighted by eigenvalues.
 
 The spectral decomposition is the foundation of quadratic form analysis, principal component analysis, and the classification of symmetric matrices as positive definite, positive semi-definite, or indefinite.`,
     before: ``,
@@ -242,7 +242,7 @@ The spectral decomposition is the foundation of quadratic form analysis, princip
     title: `Singular Value Decomposition`,
     content: `The [singular value decomposition](!/linear-algebra/decompositions/svd) factors any $m \\times n$ matrix as $A = U\\Sigma V^T$, where $U$ and $V$ are orthogonal and $\\Sigma$ is diagonal with non-negative entries (the singular values). It exists for every matrix of every shape and every [rank](!/linear-algebra/matrix/rank).
 
-The SVD is the most informative factorization in linear algebra. The number of nonzero singular values equals the rank. The columns of $U$ and $V$ provide orthonormal bases for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces). The pseudoinverse is $A^+ = V\\Sigma^+ U^T$. The best rank-$k$ approximation to $A$ is obtained by truncating the SVD at $k$ terms. The [condition number](!/linear-algebra/matrix/rank) is $\\sigma_1/\\sigma_r$.
+The SVD is the most informative factorization in linear algebra. [The number of nonzero singular values equals the rank](https://linearalgebranotes.com/eigen/singular-values#rule-rank). The columns of $U$ and $V$ provide orthonormal bases for all four [fundamental subspaces](!/linear-algebra/vector-spaces/fundamental-spaces). [The pseudoinverse](https://calculatematrix.com/matrix-calculators/pseudo-inverse#algorithm) is $A^+ = V\\Sigma^+ U^T$. The best rank-$k$ approximation to $A$ is obtained by [truncating the SVD](https://linearalgebranotes.com/eigen/singular-value-decomposition#rule-eckart-young) at $k$ terms. The [condition number](!/linear-algebra/matrix/rank) is $\\sigma_1/\\sigma_r$.
 
 @academic[pitfall,aside:true,width:35%:Counting nonzero eigenvalues for the rank
 Both eigenvalues of $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ are $0$, which suggests rank $0$. Its singular values are $1$ and $0$, so the rank is $1$, as the nonzero column shows.

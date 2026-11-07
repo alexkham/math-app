@@ -1181,7 +1181,7 @@ const ciWalkTable = ciTableOpen(['', 'east', 'north']) +
 const sectionsContent = {
   obj1: {
     title: `Vector Addition`,
-    content: `Adding two vectors means pairing up their components and summing each pair independently. For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$ in the same $\\mathbb{R}^n$:
+    content: `Adding two vectors means [pairing up their components and summing each pair](https://calculatematrix.com/vector-calculators/vector-addition-subtraction#algorithm) independently. For $\\mathbf{a} = (a_1, a_2, \\ldots, a_n)$ and $\\mathbf{b} = (b_1, b_2, \\ldots, b_n)$ in the same $\\mathbb{R}^n$:
 
 @academic[formula_callout:Vector Addition
 $$\\mathbf{a} + \\mathbf{b} = (a_1 + b_1,\\ a_2 + b_2,\\ \\ldots,\\ a_n + b_n)$$
@@ -1192,7 +1192,7 @@ $$\\mathbf{a} + \\mathbf{b} = (a_1 + b_1,\\ a_2 + b_2,\\ \\ldots,\\ a_n + b_n)$$
 
 The result is again a vector in $\\mathbb{R}^n$ — addition does not change the dimension. Both inputs must belong to the same space; adding a vector in $\\mathbb{R}^2$ to a vector in $\\mathbb{R}^3$ is undefined because there is no way to match up the components.
 
-Geometrically, vector addition has two equivalent visualizations. In the tip-to-tail method, the tail of $\\mathbf{b}$ is placed at the head of $\\mathbf{a}$, and the sum $\\mathbf{a} + \\mathbf{b}$ is the vector running from the tail of $\\mathbf{a}$ to the head of $\\mathbf{b}$. In the parallelogram method, both vectors share a common tail, and the sum is the diagonal of the parallelogram they form. The two constructions always yield the same result, and each highlights a different aspect of addition: tip-to-tail emphasizes sequential displacement, while the parallelogram makes the symmetry between $\\mathbf{a}$ and $\\mathbf{b}$ visually explicit.
+Geometrically, vector addition has two equivalent visualizations. In the tip-to-tail method, the tail of $\\mathbf{b}$ is placed at the head of $\\mathbf{a}$, and the sum $\\mathbf{a} + \\mathbf{b}$ is the vector running from the tail of $\\mathbf{a}$ to the head of $\\mathbf{b}$. In the parallelogram method, both vectors share a common tail, and the sum is the diagonal of the parallelogram they form. [The two constructions always yield the same result](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#intuition), and each highlights a different aspect of addition: tip-to-tail emphasizes sequential displacement, while the parallelogram makes the symmetry between $\\mathbf{a}$ and $\\mathbf{b}$ visually explicit.
 
 @academic[pitfall,aside:true,width:35%:Taking the diagonal between the tips
 Reading the arrow that joins the two tips as the sum gives, for $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$, the vector $\\pm(3, -2)$, which is a difference. The sum is the diagonal from the shared tail: $\\mathbf{a} + \\mathbf{b} = (5, 4)$.
@@ -1242,7 +1242,7 @@ Both constructions start from the same two arrows. The parallelogram method in p
   },
   obj2: {
     title: `Properties of Addition`,
-    content: `Vector addition obeys four algebraic rules that govern how sums behave. Each has a geometric counterpart that can be verified by drawing the vectors involved.
+    content: `Vector addition obeys [four algebraic rules](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#rule-addition-rules) that govern how sums behave. Each has a geometric counterpart that can be verified by drawing the vectors involved.
 
 ## Commutativity
 
@@ -1292,7 +1292,7 @@ Reducing subtraction to addition and negation means that no separate set of rule
 Drawing $\\mathbf{a} - \\mathbf{b}$ from the tip of $\\mathbf{a}$ to the tip of $\\mathbf{b}$ gives, for $\\mathbf{a} = (5, 2)$ and $\\mathbf{b} = (2, 4)$, the vector $(-3, 2)$, which is $\\mathbf{b} - \\mathbf{a}$. The difference is $(5 - 2,\\ 2 - 4) = (3, -2)$.
 [Read more](!#pitfall-reversing-the-order-of-subtraction)]@
 
-The geometric picture of subtraction is particularly useful. When $\\mathbf{a}$ and $\\mathbf{b}$ are drawn from a common tail, the difference $\\mathbf{a} - \\mathbf{b}$ is the vector pointing from the tip of $\\mathbf{b}$ to the tip of $\\mathbf{a}$. This interpretation connects subtraction directly to distance: the length of $\\mathbf{a} - \\mathbf{b}$ is the Euclidean distance between the heads of the two vectors, formalized as $d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a} - \\mathbf{b}\\|$ on the [magnitude](!/linear-algebra/vectors/magnitude) page.`,
+The geometric picture of subtraction is particularly useful. When $\\mathbf{a}$ and $\\mathbf{b}$ are drawn from a common tail, the difference $\\mathbf{a} - \\mathbf{b}$ is the vector pointing from the tip of $\\mathbf{b}$ to the tip of $\\mathbf{a}$. This interpretation [connects subtraction directly to distance](https://calculatematrix.com/vector-calculators/vector-magnitude#uses): the length of $\\mathbf{a} - \\mathbf{b}$ is the Euclidean distance between the heads of the two vectors, formalized as $d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a} - \\mathbf{b}\\|$ on the [magnitude](!/linear-algebra/vectors/magnitude) page.`,
     before: ``,
     after: ``,
     link: '',
@@ -1316,9 +1316,9 @@ The result is always a vector in the same $\\mathbb{R}^n$.
 Writing $\\|-2\\mathbf{a}\\| = -2\\|\\mathbf{a}\\|$ for $\\mathbf{a} = (3, 4)$ gives a length of $-10$. But $-2\\mathbf{a} = (-6, -8)$ has length $\\sqrt{36 + 64} = 10 = |-2| \\cdot 5$; the sign only reverses the direction.
 [Read more](!#pitfall-giving-a-negative-scalar-a-negative-length)]@
 
-When $c > 0$, the scaled vector $c\\mathbf{a}$ points in the same direction as $\\mathbf{a}$. If $c > 1$, the vector stretches; if $0 < c < 1$, it compresses. When $c < 0$, the direction flips — the scaled vector points opposite to $\\mathbf{a}$, with its length multiplied by $|c|$. The boundary case $c = 0$ collapses any vector to the zero vector: $0\\mathbf{a} = \\mathbf{0}$.
+When $c > 0$, the scaled vector $c\\mathbf{a}$ points in the same direction as $\\mathbf{a}$. If $c > 1$, the vector stretches; if $0 < c < 1$, it compresses. When $c < 0$, [the direction flips](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#special-cases) — the scaled vector points opposite to $\\mathbf{a}$, with its length multiplied by $|c|$. The boundary case $c = 0$ collapses any vector to the zero vector: $0\\mathbf{a} = \\mathbf{0}$.
 
-Because scalar multiplication only ever stretches, compresses, or reverses a vector along its own line, the result $c\\mathbf{a}$ is always [parallel](!/linear-algebra/vectors/properties) to $\\mathbf{a}$ (provided $\\mathbf{a} \\neq \\mathbf{0}$). This observation becomes important later: two vectors are parallel precisely when one is a scalar multiple of the other.
+Because scalar multiplication only ever stretches, compresses, or reverses a vector along its own line, the result $c\\mathbf{a}$ is always [parallel](!/linear-algebra/vectors/properties) to $\\mathbf{a}$ (provided $\\mathbf{a} \\neq \\mathbf{0}$). This observation becomes important later: [two vectors are parallel precisely when one is a scalar multiple of the other](https://linearalgebranotes.com/vectors/linear-independence#rule-two-vectors).
 
 @academic[fact,aside:true,width:35%:Every quadrilateral hides a parallelogram
 Joining the midpoints of the four sides of any quadrilateral, even a non-convex one, gives a parallelogram. With corners $\\mathbf{a}, \\mathbf{b}, \\mathbf{c}, \\mathbf{d}$ in order, the midpoints $\\frac{1}{2}(\\mathbf{a} + \\mathbf{b})$ and $\\frac{1}{2}(\\mathbf{b} + \\mathbf{c})$ differ by $\\frac{1}{2}(\\mathbf{c} - \\mathbf{a})$, and so do the midpoints of the other two sides.]@
@@ -1330,7 +1330,7 @@ Scaling by $\\frac{1}{2}$ also locates midpoints. The point halfway between the 
   },
   obj5: {
     title: `Properties of Scalar Multiplication`,
-    content: `Scalar multiplication satisfies its own set of algebraic rules that describe how scalars and vectors interact. Combined with the properties of addition, these rules form the complete algebraic framework for working with vectors.
+    content: `Scalar multiplication satisfies [its own set of algebraic rules](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#rule-scalar-rules) that describe how scalars and vectors interact. Combined with the properties of addition, these rules form the complete algebraic framework for working with vectors.
 
 ## Associativity with Scalars
 
@@ -1362,7 +1362,7 @@ Scaling by $1$ leaves a vector unchanged. This ensures that the scalar $1$ acts 
 
 ## Consequences
 
-Two special cases follow immediately from these rules. Setting $c = 0$ gives $0\\mathbf{a} = \\mathbf{0}$: scaling any vector by zero produces the zero vector. Setting $c = -1$ gives $(-1)\\mathbf{a} = -\\mathbf{a}$: scaling by $-1$ produces the additive inverse. Neither fact requires a separate axiom — both are consequences of the properties above.`,
+Two special cases follow immediately from these rules. Setting $c = 0$ gives $0\\mathbf{a} = \\mathbf{0}$: scaling any vector by zero produces the zero vector. Setting $c = -1$ gives $(-1)\\mathbf{a} = -\\mathbf{a}$: scaling by $-1$ produces the additive inverse. [Neither fact requires a separate axiom](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#facts) — both are consequences of the properties above.`,
     before: ``,
     after: ``,
     link: '',
@@ -1374,7 +1374,7 @@ Two special cases follow immediately from these rules. Setting $c = 0$ gives $0\
 @academic[fact,aside:true,width:35%:One law follows from the other seven
 Expanding $(1 + 1)(\\mathbf{a} + \\mathbf{b})$ by each distributive law gives $\\mathbf{a} + \\mathbf{a} + \\mathbf{b} + \\mathbf{b} = \\mathbf{a} + \\mathbf{b} + \\mathbf{a} + \\mathbf{b}$. Cancelling the first $\\mathbf{a}$ and the last $\\mathbf{b}$ on both sides leaves $\\mathbf{a} + \\mathbf{b} = \\mathbf{b} + \\mathbf{a}$, so commutativity never has to be assumed.]@
 
-The eight properties listed on this page — four for addition and four for scalar multiplication, two of them distributive laws — are not arbitrary. Together with closure, they are precisely the axioms that define a [vector space](!/linear-algebra/vector-spaces/axioms). Any collection of objects that satisfies these rules qualifies as a vector space, whether the objects are arrows in $\\mathbb{R}^3$, polynomials, matrices, or functions. The vectors in $\\mathbb{R}^n$ studied throughout this section are the most concrete example, but the algebraic structure they exhibit extends far beyond ordered tuples of numbers.`,
+The eight properties listed on this page — four for addition and four for scalar multiplication, two of them distributive laws — are not arbitrary. Together with closure, they are precisely the axioms that define a [vector space](!/linear-algebra/vector-spaces/axioms). Any collection of objects that satisfies these rules qualifies as a vector space, whether the objects are arrows in $\\mathbb{R}^3$, polynomials, matrices, or functions. The vectors in $\\mathbb{R}^n$ studied throughout this section are [the most concrete example](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#rule-rn-vector-space), but the algebraic structure they exhibit extends far beyond ordered tuples of numbers.`,
     before: ``,
     after: ``,
     link: '',
@@ -1582,7 +1582,7 @@ const schemas = {
 $$(4 - 1,\\ 1 - 3) = (3, -2)$$`, `And this is taken as $\\mathbf{a} + \\mathbf{b}$.`],
         right: [`For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$,`, `The sum is the diagonal that starts at the shared tail and ends at the opposite corner.`, `$$\\mathbf{a} + \\mathbf{b} = (4 + 1,\\ 1 + 3) = (5, 4)$$`, `The arrow between the tips is $\\mathbf{a} - \\mathbf{b} = (3, -2)$, the difference.`],
         why: `Both diagonals are drawn from the same two arrows, and the one joining the tips looks like the natural link between $\\mathbf{a}$ and $\\mathbf{b}$.`,
-        check: `Build the sum tip-to-tail. Walking $\\mathbf{a}$ from the origin ends at $(4, 1)$, and walking $\\mathbf{b}$ from there ends at $(5, 4)$, so the sum must reach $(5, 4)$. The lengths also disagree: $\\|(3, -2)\\| = \\sqrt{13} \\approx 3.61$, while $\\|(5, 4)\\| = \\sqrt{41} \\approx 6.40$.` },
+        check: `[Build the sum tip-to-tail](https://calculatematrix.com/vector-calculators/vector-addition-subtraction#example). Walking $\\mathbf{a}$ from the origin ends at $(4, 1)$, and walking $\\mathbf{b}$ from there ends at $(5, 4)$, so the sum must reach $(5, 4)$. The lengths also disagree: $\\|(3, -2)\\| = \\sqrt{13} \\approx 3.61$, while $\\|(5, 4)\\| = \\sqrt{41} \\approx 6.40$.` },
       { id: 'reversing-the-order-of-subtraction', name: `Reversing the order of subtraction`, errorAt: 1,
         what: `The difference $\\mathbf{a} - \\mathbf{b}$ is drawn from the tip of $\\mathbf{a}$ to the tip of $\\mathbf{b}$, or computed by subtracting the components of $\\mathbf{a}$ from those of $\\mathbf{b}$. Both give $\\mathbf{b} - \\mathbf{a}$, the opposite vector.`,
         wrong: [`For $\\mathbf{a} = (5, 2)$ and $\\mathbf{b} = (2, 4)$,`, `$$\\mathbf{a} - \\mathbf{b} = (2 - 5,\\ 4 - 2) = (-3, 2)$$`],

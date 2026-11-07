@@ -1271,11 +1271,11 @@ The characteristic equation transforms the geometric question "which directions 
 
 It is a polynomial of degree $n$ in the variable $\\lambda$.
 
-For an $n \\times n$ matrix, $p(\\lambda)$ has degree $n$ with leading term $(-1)^n \\lambda^n$. The constant term is $p(0) = \\det(A)$ — the determinant of the matrix itself. The coefficient of $\\lambda^{n-1}$ is $(-1)^{n-1}\\text{tr}(A)$, connecting the next-to-leading term to the [trace](!/linear-algebra/matrix/trace).
+For an $n \\times n$ matrix, $p(\\lambda)$ has degree $n$ with leading term $(-1)^n \\lambda^n$. The constant term is $p(0) = \\det(A)$ — the determinant of the matrix itself. The coefficient of $\\lambda^{n-1}$ is $(-1)^{n-1}\\text{tr}(A)$, [connecting the next-to-leading term](https://linearalgebranotes.com/eigen/characteristic-polynomial#rule-trace-coefficient) to the [trace](!/linear-algebra/matrix/trace).
 
 @academic[rule_theorem_plain:The eigenvalues are precisely the roots of $p(\\lambda) = 0$.]@
 
-Every root is an eigenvalue, and every eigenvalue is a root. The characteristic polynomial packages the entire eigenvalue structure of the matrix into a single algebraic expression.`,
+[Every root is an eigenvalue, and every eigenvalue is a root](https://linearalgebranotes.com/eigen/characteristic-polynomial#rule-roots). The characteristic polynomial packages the entire eigenvalue structure of the matrix into a single algebraic expression.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1297,7 +1297,7 @@ The eigenvalues follow from the quadratic formula:
 @academic[formula_callout:Computing the Characteristic Polynomial: 2×2
 $$\\lambda = \\frac{\\text{tr}(A) \\pm \\sqrt{\\text{tr}(A)^2 - 4\\det(A)}}{2}$$]@
 
-The discriminant $\\Delta = \\text{tr}(A)^2 - 4\\det(A)$ classifies the eigenvalue type. When $\\Delta > 0$, there are two distinct real eigenvalues. When $\\Delta = 0$, there is one repeated real eigenvalue. When $\\Delta < 0$, the eigenvalues are a [complex](!/linear-algebra/eigen/complex) conjugate pair.
+The discriminant $\\Delta = \\text{tr}(A)^2 - 4\\det(A)$ [classifies the eigenvalue type](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-two-by-two). When $\\Delta > 0$, there are two distinct real eigenvalues. When $\\Delta = 0$, there is one repeated real eigenvalue. When $\\Delta < 0$, the eigenvalues are a [complex](!/linear-algebra/eigen/complex) conjugate pair.
 
 @academic[example:Worked Example
 
@@ -1314,7 +1314,7 @@ In the worked example, both inputs to the formula are read straight off the matr
   },
   obj4: {
     title: `Computing the Characteristic Polynomial: 3×3`,
-    content: `For a $3 \\times 3$ matrix, expanding $\\det(A - \\lambda I)$ using [cofactor](!/linear-algebra/determinants/cofactors) expansion produces a cubic polynomial:
+    content: `For a $3 \\times 3$ matrix, expanding $\\det(A - \\lambda I)$ using [cofactor](!/linear-algebra/determinants/cofactors) expansion [produces a cubic polynomial](https://calculatematrix.com/matrix-calculators/characteristic-polynomial#methods):
 
 @academic[formula_callout:Computing the Characteristic Polynomial: 3×3
 $$p(\\lambda) = -\\lambda^3 + \\text{tr}(A)\\lambda^2 - (\\text{sum of } 2 \\times 2 \\text{ principal minors})\\lambda + \\det(A)$$]@
@@ -1332,7 +1332,7 @@ The eigenvalues are $\\lambda = 1, 2, 3$ — readable directly from the diagonal
 
 @academic[rule_plain:For triangular matrices, the characteristic polynomial always factors as the product of the diagonal terms, making the eigenvalues visible by inspection.]@
 
-For non-triangular $3 \\times 3$ matrices, the cubic must be factored by finding rational roots (testing factors of the constant term), by inspection, or by the cubic formula.`,
+For non-triangular $3 \\times 3$ matrices, [the cubic must be factored](https://calculatematrix.com/matrix-calculators/eigenvalues#algorithm) by finding rational roots (testing factors of the constant term), by inspection, or by the cubic formula.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1366,7 +1366,7 @@ If $p(\\lambda) = (\\lambda - 2)^3(\\lambda + 1)$, then $\\lambda = 2$ has algeb
 Counting a double root as two independent eigenvectors fails for $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$: $p(\\lambda) = (\\lambda - 2)^2$, but $A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has only one free variable. The eigenspace $E_2$ is the line through $(1, 0)^T$, so $m_a = 2$ while $m_g = 1$.
 [Read more](!#pitfall-assuming-a-double-root-gives-two-eigenvectors)]@
 
-The geometric multiplicity is the dimension of the eigenspace, and it can be strictly smaller than the algebraic multiplicity. When this gap occurs for any eigenvalue, the matrix is not [diagonalizable](!/linear-algebra/eigen/diagonalization).`,
+The geometric multiplicity is the dimension of the eigenspace, and it [can be strictly smaller than the algebraic multiplicity](https://linearalgebranotes.com/eigen/algebraic-and-geometric-multiplicity#rule-bounds). When this gap occurs for any eigenvalue, the matrix is not [diagonalizable](!/linear-algebra/eigen/diagonalization).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1375,7 +1375,7 @@ The geometric multiplicity is the dimension of the eigenspace, and it can be str
     title: `Finding Eigenvectors After Finding Eigenvalues`,
     content: `Once the eigenvalues are known, the eigenvectors for each $\\lambda_i$ are found by solving the homogeneous system $(A - \\lambda_i I)\\mathbf{v} = \\mathbf{0}$.
 
-Row reduce $A - \\lambda_i I$ and express the general solution in parametric form. Each free variable contributes one [basis](!/linear-algebra/vector-spaces) vector for the eigenspace $E_{\\lambda_i}$.
+Row reduce $A - \\lambda_i I$ and [express the general solution in parametric form](https://calculatematrix.com/matrix-calculators/eigenvectors#algorithm). Each free variable contributes one [basis](!/linear-algebra/vector-spaces) vector for the eigenspace $E_{\\lambda_i}$.
 
 @academic[example:Worked Example
 
@@ -1398,7 +1398,7 @@ In both cases the reduced matrix keeps a single nonzero row, which encodes one e
   },
   obj8: {
     title: `The Cayley-Hamilton Theorem`,
-    content: `Every square matrix satisfies its own characteristic polynomial. If $p(\\lambda) = \\det(A - \\lambda I)$ is the characteristic polynomial, then
+    content: `[Every square matrix satisfies its own characteristic polynomial](https://calculatematrix.com/matrix-calculators/cayley-hamilton#about). If $p(\\lambda) = \\det(A - \\lambda I)$ is the characteristic polynomial, then
 
 @academic[formula_callout:cayley_hamilton|Cayley-Hamilton|$$p(A) = O$$]@
 @academic[formulas_link:/linear-algebra/formulas#cayley-hamilton]@
@@ -1408,7 +1408,7 @@ where $O$ is the zero matrix and $\\lambda$ is replaced by $A$ (with constant te
 @academic[fact,aside:true,width:35%:Cayley checked only two sizes
 Cayley published the theorem in 1858 after checking it for $2 \\times 2$ and $3 \\times 3$ matrices, and wrote that a general proof did not seem necessary. Hamilton had met the quaternion case earlier; the first proof for every size came from Frobenius in 1878.]@
 
-For example, if $p(\\lambda) = \\lambda^2 - 5\\lambda + 6$, then $A^2 - 5A + 6I = O$. This can be rearranged to express $A^{-1}$ as a polynomial in $A$: $A^{-1} = \\frac{1}{6}(5I - A)$ (provided $\\det(A) = 6 \\neq 0$). More generally, the Cayley-Hamilton theorem guarantees that, whenever $A$ is invertible, $A^{-1}$ can be written as a polynomial in $A$ of degree at most $n - 1$.
+For example, if $p(\\lambda) = \\lambda^2 - 5\\lambda + 6$, then $A^2 - 5A + 6I = O$. This can be rearranged to express $A^{-1}$ as a polynomial in $A$: $A^{-1} = \\frac{1}{6}(5I - A)$ (provided $\\det(A) = 6 \\neq 0$). More generally, [the Cayley-Hamilton theorem guarantees](https://linearalgebranotes.com/eigen/cayley-hamilton-theorem#rule-inverse-polynomial) that, whenever $A$ is invertible, $A^{-1}$ can be written as a polynomial in $A$ of degree at most $n - 1$.
 
 The theorem also shows that any power $A^k$ with $k \\geq n$ can be reduced to a polynomial in $A$ of degree at most $n - 1$ — the characteristic polynomial provides a recurrence that expresses higher powers in terms of lower ones.
 
@@ -1426,7 +1426,7 @@ $$\\det(P^{-1}AP - \\lambda I) = \\det(P^{-1}(A - \\lambda I)P) = \\det(A - \\la
 
 The second equality uses the [multiplicative property](!/linear-algebra/determinants/properties) of the determinant: $\\det(P^{-1})\\det(A - \\lambda I)\\det(P) = \\det(A - \\lambda I)$, since $\\det(P^{-1})\\det(P) = 1$.
 
-This means the characteristic polynomial is a property of the linear transformation itself, not of any particular matrix representation. Changing the basis changes the matrix but not the polynomial. Since the eigenvalues are the roots of the polynomial, similar matrices have the same eigenvalues with the same algebraic multiplicities.
+This means the characteristic polynomial is a property of the linear transformation itself, not of any particular matrix representation. [Changing the basis changes the matrix but not the polynomial](https://linearalgebranotes.com/maps/similar-matrices#rule-char-poly). Since the eigenvalues are the roots of the polynomial, similar matrices have the same eigenvalues with the same algebraic multiplicities.
 
 The [trace](!/linear-algebra/matrix/trace) and [determinant](!/linear-algebra/determinants) are just two of the $n$ coefficients of the characteristic polynomial. The polynomial carries more information than either one alone — it determines the complete multiset of eigenvalues, not just their sum and product.`,
     before: ``,

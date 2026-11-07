@@ -1256,7 +1256,7 @@ Checking a candidate set means testing each rule. Most failures happen at closur
   },
   obj3: {
     title: `Subspaces`,
-    content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is a vector space in its own right, using the same operations. Commutativity, associativity and the distributive laws are inherited from the larger space, so only three things need checking: the subset contains the zero vector, it is closed under addition, and it is closed under scalar multiplication.
+    content: `A [subspace](!/linear-algebra/vector-spaces/subspaces) is a subset of a vector space that is a vector space in its own right, using the same operations. Commutativity, associativity and the distributive laws are inherited from the larger space, so [only three things need checking](https://linearalgebranotes.com/spaces/subspace#rule-subspace-test): the subset contains the zero vector, it is closed under addition, and it is closed under scalar multiplication.
 
 In $\\mathbb{R}^3$ the subspaces are exactly four kinds of sets: the origin alone, lines through the origin, planes through the origin, and $\\mathbb{R}^3$ itself. A plane that misses the origin, such as $z = 1$, fails the first test.
 
@@ -1277,20 +1277,20 @@ Running the test on a candidate set means taking arbitrary members $\\mathbf{u}$
 
 @academic[rule_theorem_plain:The span is always a subspace, and it is the smallest subspace that contains the given vectors.]@
 
-Span answers a reachability question: which vectors can be built from the ones you have? In $\\mathbb{R}^3$, one nonzero vector spans a line, two vectors that are not multiples of each other span a plane, and three vectors span all of $\\mathbb{R}^3$ only when none of them lies in the plane of the other two. Testing whether a vector $\\mathbf{b}$ is in the span of the columns of a matrix $A$ is the same as asking whether $A\\mathbf{x} = \\mathbf{b}$ has a solution.`,
+Span answers a reachability question: which vectors can be built from the ones you have? In $\\mathbb{R}^3$, one nonzero vector spans a line, two vectors that are not multiples of each other span a plane, and three vectors span all of $\\mathbb{R}^3$ only when none of them lies in the plane of the other two. [Testing whether a vector](https://calculatematrix.com/vector-calculators/linear-combination#span) $\\mathbf{b}$ is in the span of the columns of a matrix $A$ is the same as asking whether $A\\mathbf{x} = \\mathbf{b}$ has a solution.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj5: {
     title: `Linear Independence`,
-    content: `A set of vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence) when the only way to combine them into the zero vector is with all coefficients zero: $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ forces $c_1 = \\cdots = c_k = 0$. If some other combination works, the set is dependent, and at least one vector can be written using the others.
+    content: `A set of vectors is [linearly independent](!/linear-algebra/vector-spaces/linear-independence) when the only way to combine them into the zero vector is with all coefficients zero: $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ forces $c_1 = \\cdots = c_k = 0$. If some other combination works, the set is dependent, and [at least one vector can be written using the others](https://linearalgebranotes.com/vectors/linear-independence#rule-one-is-combination).
 
 @academic[pitfall,aside:true,width:35%:Checking the vectors two at a time
 No two of $(1, 0, 1)$, $(0, 1, 1)$, $(1, 1, 2)$ are multiples of each other, so the set looks independent. But $(1, 1, 2) = (1, 0, 1) + (0, 1, 1)$, so the set is dependent.
 [Read more](!#pitfall-checking-the-vectors-two-at-a-time)]@
 
-Independence measures redundancy. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ span $\\mathbb{R}^2$, but they are dependent, since $(1, 1) = (1, 0) + (0, 1)$; dropping any one of them leaves the span unchanged. To test vectors in $\\mathbb{R}^n$, place them as the columns of a matrix and row reduce: they are independent exactly when every column has a pivot.
+Independence measures redundancy. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ span $\\mathbb{R}^2$, but they are dependent, since $(1, 1) = (1, 0) + (0, 1)$; dropping any one of them leaves the span unchanged. To test vectors in $\\mathbb{R}^n$, [place them as the columns of a matrix and row reduce](https://calculatematrix.com/vector-calculators/linear-independence#algorithm): they are independent exactly when every column has a pivot.
 
 @academic[rule_corollary_plain:More than $n$ vectors in $\\mathbb{R}^n$ are always dependent.]@`,
     before: ``,
@@ -1299,7 +1299,7 @@ Independence measures redundancy. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ sp
   },
   obj6: {
     title: `Basis`,
-    content: `A [basis](!/linear-algebra/vector-spaces/basis) is a set of vectors that is linearly independent and spans the whole space. Spanning guarantees that every vector can be built; independence guarantees that there is only one way to build it. Together they give each vector a unique list of coefficients, its coordinates relative to that basis.
+    content: `A [basis](!/linear-algebra/vector-spaces/basis) is a set of vectors that is linearly independent and spans the whole space. Spanning guarantees that every vector can be built; independence guarantees that [there is only one way to build it](https://linearalgebranotes.com/spaces/basis#rule-unique-representation). Together they give each vector a unique list of coefficients, its coordinates relative to that basis.
 
 The standard basis of $\\mathbb{R}^3$ is $\\mathbf{e}_1 = (1, 0, 0)$, $\\mathbf{e}_2 = (0, 1, 0)$, $\\mathbf{e}_3 = (0, 0, 1)$, but it is not the only one: $(1, 1, 0)$, $(0, 1, 1)$, $(1, 0, 1)$ is another basis.
 
@@ -1312,7 +1312,7 @@ A basis can be found from a spanning set by removing dependent vectors, or built
   },
   obj7: {
     title: `Dimension`,
-    content: `The [dimension](!/linear-algebra/vector-spaces/dimension) of a vector space is the number of vectors in any of its bases. It is well defined because all bases of the same space have the same size. $\\mathbb{R}^n$ has dimension $n$, the polynomials of degree at most $2$ have dimension $3$ (basis $1, x, x^2$), and the $2 \\times 2$ matrices have dimension $4$.
+    content: `The [dimension](!/linear-algebra/vector-spaces/dimension) of a vector space is the number of vectors in any of its bases. It is well defined because [all bases of the same space have the same size](https://linearalgebranotes.com/spaces/dimension#rule-invariance). $\\mathbb{R}^n$ has dimension $n$, the polynomials of degree at most $2$ have dimension $3$ (basis $1, x, x^2$), and the $2 \\times 2$ matrices have dimension $4$.
 
 Dimension turns many questions into counting.
 
@@ -1335,7 +1335,7 @@ A subspace never has a larger dimension than the space that contains it, and it 
 For $A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & 3 \\end{pmatrix}$, of rank $2$, taking $m - r = 2 - 2 = 0$ says only $\\mathbf{0}$ solves $A\\mathbf{x} = \\mathbf{0}$. Yet $(-2, -3, 1)$ does: the null space has dimension $n - r = 3 - 2 = 1$.
 [Read more](!#pitfall-subtracting-the-rank-from-the-row-count)]@
 
-Their dimensions are fixed by the [rank](!/linear-algebra/matrix/rank) $r$. The column space and the row space both have dimension $r$, the null space has dimension $n - r$, and the left null space has dimension $m - r$. This is the rank–nullity theorem in its full form. The pairs also meet at right angles: the row space is orthogonal to the null space, and the column space is orthogonal to the left null space.`,
+Their dimensions are fixed by the [rank](!/linear-algebra/matrix/rank) $r$. The column space and the row space both have dimension $r$, the null space has dimension $n - r$, and the left null space has dimension $m - r$. This is [the rank–nullity theorem in its full form](https://linearalgebranotes.com/spaces/rank-nullity-theorem#rule-four-subspaces). The pairs also meet at right angles: [the row space is orthogonal to the null space](https://linearalgebranotes.com/orthogonality/orthogonal-complement#rule-fundamental), and the column space is orthogonal to the left null space.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1344,7 +1344,7 @@ Their dimensions are fixed by the [rank](!/linear-algebra/matrix/rank) $r$. The 
     title: `Coordinates and Change of Basis`,
     content: `Once a basis $B = \\{\\mathbf{b}_1, \\ldots, \\mathbf{b}_n\\}$ is fixed, each vector $\\mathbf{v}$ is described by its coordinate vector $[\\mathbf{v}]_B$: the coefficients in $\\mathbf{v} = c_1\\mathbf{b}_1 + \\cdots + c_n\\mathbf{b}_n$. The same vector generally has different coordinates in different bases. The vector $(3, 1)$ has coordinates $(3, 1)$ in the standard basis of $\\mathbb{R}^2$, but in the basis $(1, 1), (1, -1)$ its coordinates are $(2, 1)$, since $2(1, 1) + 1(1, -1) = (3, 1)$.
 
-Moving between two bases takes a single invertible matrix, the change-of-basis matrix. The [basis change](!/linear-algebra/transformations/basis-change) page shows how to build it and how the matrix of a linear transformation changes when the basis does.`,
+[Moving between two bases](https://calculatematrix.com/matrix-calculators/change-of-basis#about) takes a single invertible matrix, the change-of-basis matrix. The [basis change](!/linear-algebra/transformations/basis-change) page shows how to build it and how the matrix of a linear transformation changes when the basis does.`,
     before: ``,
     after: ``,
     link: ``,

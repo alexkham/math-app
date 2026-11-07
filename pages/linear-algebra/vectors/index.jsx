@@ -909,7 +909,7 @@ The zero vector $\\mathbf{0}$ has every component equal to zero. Its [magnitude]
 
 ## Unit Vectors
 
-A unit vector has magnitude exactly $1$. It encodes pure direction with no scaling. The standard basis vectors are all unit vectors, but any nonzero vector can be converted into a unit vector through normalization — a process covered in detail on the magnitude page. Unit vectors are essential for isolating directional information from length.
+A unit vector has magnitude exactly $1$. It encodes pure direction with no scaling. The standard basis vectors are all unit vectors, but any nonzero vector can be [converted into a unit vector through normalization](https://calculatematrix.com/vector-calculators/unit-vector#algorithm) — a process covered in detail on the magnitude page. Unit vectors are essential for isolating directional information from length.
 
 ## Position Vectors
 
@@ -945,7 +945,7 @@ Vector addition combines two vectors into a third by summing their corresponding
 
 Subtraction reverses the process: $\\mathbf{a} - \\mathbf{b}$ adds $\\mathbf{a}$ to the negation of $\\mathbf{b}$, producing the vector that points from the tip of $\\mathbf{b}$ to the tip of $\\mathbf{a}$.
 
-Scalar multiplication scales a vector by a real number. Multiplying by a positive scalar stretches or compresses the vector without changing its direction; multiplying by a negative scalar also reverses it. These three operations satisfy a collection of algebraic rules — commutativity, associativity, distributivity — that make structured computation possible.`,
+Scalar multiplication scales a vector by a real number. Multiplying by a positive scalar stretches or compresses the vector without changing its direction; multiplying by a negative scalar also reverses it. These three operations satisfy [a collection of algebraic rules](https://linearalgebranotes.com/vectors/vector-addition-scalar-multiplication#rule-addition-rules) — commutativity, associativity, distributivity — that make structured computation possible.`,
     before: ``,
     after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Basic Vector Operations](!/linear-algebra/vectors/basic-operations) →@`,
     link: '',
@@ -961,7 +961,7 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@
 Taking $\\|\\mathbf{a} + \\mathbf{b}\\|$ to be $\\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ gives $3 + 4 = 7$ for $\\mathbf{a} = (3, 0)$ and $\\mathbf{b} = (0, 4)$. But $\\mathbf{a} + \\mathbf{b} = (3, 4)$, whose length is $\\sqrt{9 + 16} = 5$.
 [Read more](!#pitfall-adding-the-lengths)]@
 
-This quantity is called the Euclidean norm, and it satisfies three fundamental properties: it is never negative, it scales predictably under scalar multiplication ($\\|c\\mathbf{v}\\| = |c|\\|\\mathbf{v}\\|$), and it obeys the triangle inequality ($\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$).
+This quantity is called the Euclidean norm, and it satisfies three fundamental properties: it is never negative, it scales predictably under scalar multiplication ($\\|c\\mathbf{v}\\| = |c|\\|\\mathbf{v}\\|$), and it obeys [the triangle inequality](https://linearalgebranotes.com/vectors/norm#rule-triangle) ($\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$).
 
 The norm also provides a natural notion of distance: the distance between two vectors $\\mathbf{a}$ and $\\mathbf{b}$ is $\\|\\mathbf{a} - \\mathbf{b}\\|$. Closely tied to magnitude is the concept of a unit vector — a vector whose norm equals $1$. Any nonzero vector can be rescaled to unit length through normalization, a process that extracts pure direction by dividing out the magnitude.`,
     before: ``,
@@ -979,7 +979,7 @@ $$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n$$]@
 Stopping after the multiplications turns $(1, 2, 3) \\cdot (4, -5, 6)$ into the vector $(4, -10, 18)$. The products must be added: $4 - 10 + 18 = 12$, a single number.
 [Read more](!#pitfall-keeping-the-products-as-a-vector)]@
 
-This algebraic formula has a geometric equivalent: $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\cos\\theta$, where $\\theta$ is the angle between the two vectors. The geometric form reveals what the dot product actually measures — how much two vectors align directionally. When the dot product is positive, the vectors point roughly the same way. When it is negative, they point roughly in opposite directions. When it equals zero, the vectors are orthogonal: perpendicular in the geometric sense.
+This algebraic formula has [a geometric equivalent](https://linearalgebranotes.com/vectors/dot-product#rule-geometric): $\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\cos\\theta$, where $\\theta$ is the angle between the two vectors. The geometric form reveals what the dot product actually measures — how much two vectors align directionally. When the dot product is positive, the vectors point roughly the same way. When it is negative, they point roughly in opposite directions. When it equals zero, the vectors are orthogonal: perpendicular in the geometric sense.
 
 This connection to angles makes the dot product the gateway to projection: decomposing one vector into a component along another and a component perpendicular to it.
 
@@ -1005,7 +1005,7 @@ $$\\mathbf{a} \\times \\mathbf{b} = (a_2b_3 - a_3b_2,\\ a_3b_1 - a_1b_3,\\ a_1b_
 Writing the middle entry as $a_1b_3 - a_3b_1$ turns $(1, 2, 3) \\times (4, 5, 6)$ into $(-3, -6, -3)$, which is not perpendicular to $(1, 2, 3)$. The middle entry is $a_3b_1 - a_1b_3 = 12 - 6 = 6$, so the product is $(-3, 6, -3)$.
 [Read more](!#pitfall-flipping-the-sign-of-the-middle-component)]@
 
-The magnitude $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\sin\\theta$ equals the area of the parallelogram that the two vectors span. The direction is determined by the right-hand rule, which introduces the concept of orientation — a handedness to three-dimensional space that has no analogue in the dot product. Unlike most operations encountered so far, the cross product is anti-commutative: swapping the order of the inputs reverses the direction of the result.`,
+The magnitude $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\|\\mathbf{b}\\|\\sin\\theta$ equals [the area of the parallelogram that the two vectors span](https://linearalgebranotes.com/vectors/cross-product#rule-length). The direction is determined by the right-hand rule, which introduces the concept of orientation — a handedness to three-dimensional space that has no analogue in the dot product. Unlike most operations encountered so far, the cross product is anti-commutative: swapping the order of the inputs reverses the direction of the result.`,
     before: ``,
     after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[The Cross Product](!/linear-algebra/vectors/cross-product) →@`,
     link: '',
@@ -1023,7 +1023,7 @@ $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$
 
 is a linear combination of those vectors. Adding two vectors is the special case where $k = 2$ and both scalars equal $1$. Scalar multiplication is the case $k = 1$.
 
-The set of all possible linear combinations of a given collection of vectors is called the span of that collection. The span of a single nonzero vector is a line through the origin. The span of two non-parallel vectors is a plane. The span of three non-coplanar vectors in $\\mathbb{R}^3$ fills the entire space. Asking whether a particular vector lies in the span of a given set turns out to be equivalent to asking whether a certain [system of equations](!/linear-algebra/linear-systems) has a solution — a connection that links vectors directly to the machinery of matrices and row reduction.
+The set of all possible linear combinations of a given collection of vectors is called the span of that collection. The span of a single nonzero vector is a line through the origin. The span of two non-parallel vectors [is a plane](https://linearalgebranotes.com/vectors/span#intuition). The span of three non-coplanar vectors in $\\mathbb{R}^3$ fills the entire space. [Asking whether a particular vector lies in the span](https://calculatematrix.com/vector-calculators/linear-combination#span) of a given set turns out to be equivalent to asking whether a certain [system of equations](!/linear-algebra/linear-systems) has a solution — a connection that links vectors directly to the machinery of matrices and row reduction.
 
 Linear combinations also set the stage for two concepts developed in the [vector spaces](!/linear-algebra/vector-spaces) section: linear independence, which identifies when no vector in a set is redundant, and basis, which captures the minimal spanning set needed to reach every point in a space.
 
@@ -1334,7 +1334,7 @@ export default function VectorsPage({ formulaSummaryData, pitfallData,vectorType
         lead: `One way to describe a displacement: draw an arrow, whose length is how far and whose direction is which way.`,
         content: [
           `At its core, a vector is a mathematical object defined by two attributes: a magnitude (a non-negative number representing size) and a direction (an orientation in space). A scalar, by contrast, is fully specified by a single number — temperature, mass, or area require no directional component. A vector demands both.`,
-          `Geometrically, a vector appears as a directed line segment: an arrow drawn from an initial point to a terminal point. The arrow's length encodes the magnitude, and the way it points encodes the direction. Two arrows that share the same length and orientation represent the same vector, regardless of where in space they are positioned. This is the concept of a free vector — identity is determined entirely by magnitude and direction, never by location.`,
+          `Geometrically, a vector appears as a directed line segment: an arrow drawn from an initial point to a terminal point. The arrow's length encodes the magnitude, and the way it points encodes the direction. [Two arrows that share the same length and orientation represent the same vector](https://linearalgebranotes.com/vectors/vector#intuition), regardless of where in space they are positioned. This is the concept of a free vector — identity is determined entirely by magnitude and direction, never by location.`,
         ],
         visual: ciSvg('arrow'),
       },

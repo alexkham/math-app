@@ -2208,7 +2208,7 @@ This is the [diagonalization](!/linear-algebra/eigen/diagonalization) $A = PDP^{
     title: `The Spectral Theorem`,
     content: `The spectral theorem for real symmetric matrices states three facts.
 
-All eigenvalues of a real symmetric matrix are real. No [complex](!/linear-algebra/eigen/complex) eigenvalues can appear.
+[All eigenvalues of a real symmetric matrix are real](https://linearalgebranotes.com/eigen/spectral-theorem#rule-real-eigenvalues). No [complex](!/linear-algebra/eigen/complex) eigenvalues can appear.
 
 Eigenvectors corresponding to distinct eigenvalues are [orthogonal](!/linear-algebra/orthogonality). If $\\lambda_i \\neq \\lambda_j$, then $\\mathbf{q}_i \\cdot \\mathbf{q}_j = 0$ automatically — no [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt) is needed between different eigenspaces.
 
@@ -2235,14 +2235,14 @@ $$A = \\lambda_1 \\mathbf{q}_1\\mathbf{q}_1^T + \\lambda_2 \\mathbf{q}_2\\mathbf
 
 Each term $\\lambda_i \\mathbf{q}_i\\mathbf{q}_i^T$ is a rank-one matrix. The matrix $\\mathbf{q}_i\\mathbf{q}_i^T$ is the [projection](!/linear-algebra/orthogonality/projections) matrix onto the line spanned by $\\mathbf{q}_i$: it sends any vector $\\mathbf{x}$ to $(\\mathbf{q}_i \\cdot \\mathbf{x})\\mathbf{q}_i$. Multiplying by $\\lambda_i$ scales the projection by the eigenvalue.
 
-The spectral decomposition says that $A$ acts by projecting onto each eigenvector direction independently, scaling each projection by the corresponding eigenvalue, and summing the results. There is no interaction between different eigenvector directions — the orthogonality of the $\\mathbf{q}_i$'s ensures complete decoupling.`,
+The spectral decomposition says that $A$ [acts by projecting onto each eigenvector direction independently](https://linearalgebranotes.com/eigen/spectral-theorem#rule-spectral-decomposition), scaling each projection by the corresponding eigenvalue, and summing the results. There is no interaction between different eigenvector directions — the orthogonality of the $\\mathbf{q}_i$'s ensures complete decoupling.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj4: {
     title: `Computing the Spectral Decomposition`,
-    content: `The computation follows the standard eigenvalue workflow, with one additional step for repeated eigenvalues.
+    content: `The computation follows [the standard eigenvalue workflow](https://calculatematrix.com/matrix-calculators/diagonalization#algorithm), with one additional step for repeated eigenvalues.
 
 Find the eigenvalues by solving the [characteristic equation](!/linear-algebra/eigen/characteristic-equation) $\\det(A - \\lambda I) = 0$. All roots are real.
 
@@ -2260,7 +2260,7 @@ For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$: eigenvalues are $\\l
 Using $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$ unscaled gives $Q^TQ = 2I$ and $QDQ^T = \\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = 2A$. With the factor $\\frac{1}{\\sqrt{2}}$ on each column, $QDQ^T = A$.
 [Read more](!#pitfall-leaving-the-eigenvectors-unnormalized)]@
 
-Each eigenvector first comes out of row reduction as a direction, here $(1, 1)^T$ for $\\lambda_1 = 4$ and $(1, -1)^T$ for $\\lambda_2 = 2$, and any nonzero multiple of either would be an eigenvector as well. The factor $\\frac{1}{\\sqrt{2}}$ in front of each fixes its length at $1$. The pairing is fixed too: the $i$-th column of $Q$ goes with the $i$-th diagonal entry of $D$.`,
+Each eigenvector first comes out of row reduction as a direction, here $(1, 1)^T$ for $\\lambda_1 = 4$ and $(1, -1)^T$ for $\\lambda_2 = 2$, and any nonzero multiple of either would be an eigenvector as well. The factor $\\frac{1}{\\sqrt{2}}$ in front of each [fixes its length](https://calculatematrix.com/vector-calculators/unit-vector#algorithm) at $1$. The pairing is fixed too: the $i$-th column of $Q$ goes with the $i$-th diagonal entry of $D$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2273,7 +2273,7 @@ The [inverse](!/linear-algebra/matrix/inverse) is immediate: $A^{-1} = QD^{-1}Q^
 
 Powers are diagonal: $A^k = QD^kQ^T = Q\\,\\text{diag}(\\lambda_1^k, \\dots, \\lambda_n^k)\\,Q^T$.
 
-The matrix exponential is: $e^{At} = Qe^{Dt}Q^T = Q\\,\\text{diag}(e^{\\lambda_1 t}, \\dots, e^{\\lambda_n t})\\,Q^T$.
+[The matrix exponential](https://calculatematrix.com/matrix-calculators/matrix-exponential#algorithm) is: $e^{At} = Qe^{Dt}Q^T = Q\\,\\text{diag}(e^{\\lambda_1 t}, \\dots, e^{\\lambda_n t})\\,Q^T$.
 
 The [trace](!/linear-algebra/matrix/trace) is $\\text{tr}(A) = \\lambda_1 + \\cdots + \\lambda_n$. The [determinant](!/linear-algebra/determinants) is $\\det(A) = \\lambda_1 \\cdots \\lambda_n$. The [rank](!/linear-algebra/matrix/rank) is the number of nonzero eigenvalues.
 
@@ -2288,7 +2288,7 @@ Every property of $A$ reduces to a property of the diagonal $D$, mediated by the
   },
   obj6: {
     title: `Quadratic Forms`,
-    content: `A quadratic form $f(\\mathbf{x}) = \\mathbf{x}^TA\\mathbf{x}$ with $A$ symmetric can be diagonalized by the change of variables $\\mathbf{x} = Q\\mathbf{y}$:
+    content: `A quadratic form $f(\\mathbf{x}) = \\mathbf{x}^TA\\mathbf{x}$ with $A$ symmetric can be [diagonalized by the change of variables](https://linearalgebranotes.com/eigen/quadratic-forms#rule-principal-axis) $\\mathbf{x} = Q\\mathbf{y}$:
 
 @academic[formula_callout:quadratic_form_diagonalization|Quadratic Form Diagonalization|$$\\mathbf{x}^T A \\mathbf{x} = \\mathbf{y}^T D \\mathbf{y} = \\sum_{i=1}^{n} \\lambda_i y_i^2, \\qquad \\mathbf{x} = Q\\mathbf{y}$$]@
 @academic[formulas_link:/linear-algebra/formulas#quadratic_form_diagonalization]@
@@ -2298,7 +2298,7 @@ The inertia matrix of any rigid body, even a potato, is symmetric, so it has thr
 
 In the eigenvector coordinate system, the quadratic form decouples into a sum of independent squared terms. The eigenvectors define the principal axes of the quadratic surface (ellipsoid, hyperboloid, etc.), and the eigenvalues determine the curvature along each axis.
 
-Positive definite ($f > 0$ for $\\mathbf{x} \\neq \\mathbf{0}$) means all $\\lambda_i > 0$ — the surface is an ellipsoid. Positive semi-definite ($f \\geq 0$) means all $\\lambda_i \\geq 0$. Indefinite (eigenvalues of both signs) means the surface is a hyperboloid — $f$ takes both positive and negative values.
+[Positive definite](https://linearalgebranotes.com/matrices/positive-definite-matrix#rule-eigenvalue-test) ($f > 0$ for $\\mathbf{x} \\neq \\mathbf{0}$) means all $\\lambda_i > 0$ — the surface is an ellipsoid. Positive semi-definite ($f \\geq 0$) means all $\\lambda_i \\geq 0$. Indefinite (eigenvalues of both signs) means the surface is a hyperboloid — $f$ takes both positive and negative values.
 
 @academic[rule_plain:Classification of quadratic forms reduces entirely to checking the signs of the eigenvalues.]@
 
@@ -2313,7 +2313,7 @@ The full taxonomy — including the negative-definite and negative-semi-definite
 
 The covariance matrix $\\Sigma$ of a dataset is symmetric positive semi-definite. Its spectral decomposition $\\Sigma = QDQ^T$ identifies the eigenvectors $\\mathbf{q}_i$ as the principal component directions — the orthogonal axes along which the data varies most — and the eigenvalues $\\lambda_i$ as the variance captured by each direction.
 
-The first principal component $\\mathbf{q}_1$ (corresponding to the largest eigenvalue $\\lambda_1$) is the direction of maximum variance. The second $\\mathbf{q}_2$ is the direction of maximum variance orthogonal to $\\mathbf{q}_1$, and so on.
+The first principal component $\\mathbf{q}_1$ (corresponding to the largest eigenvalue $\\lambda_1$) is [the direction of maximum variance](https://linearalgebranotes.com/eigen/quadratic-forms#rule-rayleigh-bounds). The second $\\mathbf{q}_2$ is the direction of maximum variance orthogonal to $\\mathbf{q}_1$, and so on.
 
 Dimensionality reduction follows: projecting the data onto the top $k$ eigenvectors (those with the $k$ largest eigenvalues) captures as much variance as possible in $k$ dimensions. The discarded directions have small eigenvalues and contribute little information. This is PCA — the spectral decomposition applied to the covariance matrix.`,
     before: ``,
@@ -2324,7 +2324,7 @@ Dimensionality reduction follows: projecting the data onto the top $k$ eigenvect
     title: `Spectral Decomposition vs. General Eigendecomposition`,
     content: `The general eigendecomposition writes a diagonalizable matrix as $A = PDP^{-1}$ with $P$ [invertible](!/linear-algebra/matrix/inverse) but not necessarily orthogonal. The spectral decomposition writes a symmetric matrix as $A = QDQ^T$ with $Q$ orthogonal.
 
-The orthogonality of $Q$ provides three advantages. Inversion is free: $Q^{-1} = Q^T$, no computation needed. Multiplication preserves norms: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$, so numerical errors are not amplified. Projections are [orthogonal](!/linear-algebra/orthogonality/projections): the rank-one terms $\\mathbf{q}_i\\mathbf{q}_i^T$ are orthogonal projection matrices, making the outer product form geometrically transparent.
+The orthogonality of $Q$ provides three advantages. Inversion is free: $Q^{-1} = Q^T$, no computation needed. [Multiplication preserves norms](https://linearalgebranotes.com/matrices/orthogonal-matrix#rule-lengths): $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$, so numerical errors are not amplified. Projections are [orthogonal](!/linear-algebra/orthogonality/projections): the rank-one terms $\\mathbf{q}_i\\mathbf{q}_i^T$ are orthogonal projection matrices, making the outer product form geometrically transparent.
 
 The spectral decomposition exists only for [symmetric](!/linear-algebra/matrix/types) matrices (real case) or normal matrices, those with $AA^{*} = A^{*}A$ (complex case, with $U$ unitary); among these, $D$ is real exactly for Hermitian $A$. For non-symmetric matrices, the eigendecomposition $PDP^{-1}$ may exist (when the matrix is diagonalizable) but $P$ is not orthogonal, and the computational and geometric advantages are lost.`,
     before: ``,
@@ -2337,7 +2337,7 @@ The spectral decomposition exists only for [symmetric](!/linear-algebra/matrix/t
 
 The singular values are the eigenvalues, and $U = V = Q$: $A = QDQ^T = Q\\Sigma Q^T$.
 
-For a general symmetric matrix with negative eigenvalues, the relationship requires a sign adjustment. The singular values are the absolute values $|\\lambda_i|$, and the signs are absorbed into $U$ or $V$. If $\\lambda_i < 0$, the corresponding column of $U$ is negated relative to the corresponding column of $V$.
+For a general symmetric matrix with negative eigenvalues, the relationship requires a sign adjustment. [The singular values are the absolute values](https://linearalgebranotes.com/eigen/singular-values#rule-symmetric) $|\\lambda_i|$, and the signs are absorbed into $U$ or $V$. If $\\lambda_i < 0$, the corresponding column of $U$ is negated relative to the corresponding column of $V$.
 
 The [SVD](!/linear-algebra/decompositions/svd) generalizes the spectral decomposition to non-symmetric and non-square matrices. Every property that the spectral decomposition provides for symmetric matrices — rank, pseudoinverse, best low-rank approximation, condition number — the SVD provides for arbitrary matrices. The spectral decomposition is the special case where symmetry allows $U$ and $V$ to coincide.`,
     before: ``,

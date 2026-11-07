@@ -1410,7 +1410,7 @@ The trace of the $n \\times n$ [identity matrix](!/linear-algebra/matrix/types) 
 
   obj2: {
     title: `Linearity`,
-    content: `The trace is a linear function from the space of $n \\times n$ matrices to the real numbers. It satisfies additivity:
+    content: `The trace is [a linear function](https://linearalgebranotes.com/matrices/trace#rule-linear) from the space of $n \\times n$ matrices to the real numbers. It satisfies additivity:
 
 @academic[formula_callout:Linearity
 $$\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)$$]@
@@ -1468,9 +1468,9 @@ Every linear function $f$ on $n \\times n$ matrices with $f(AB) = f(BA)$ is a mu
 
 Note that $AB$ and $BA$ need not even have the same dimensions — if $A$ is $m \\times n$ and $B$ is $n \\times m$, then $AB$ is $m \\times m$ and $BA$ is $n \\times n$. The traces of these differently-sized matrices are nevertheless equal.
 
-The proof is a direct computation. The $(i,i)$ entry of $AB$ is $\\sum_k a_{ik} b_{ki}$, so $\\text{tr}(AB) = \\sum_i \\sum_k a_{ik} b_{ki}$. The $(k,k)$ entry of $BA$ is $\\sum_i b_{ki} a_{ik}$, so $\\text{tr}(BA) = \\sum_k \\sum_i b_{ki} a_{ik}$. Both double sums range over the same index pairs and contain the same terms.
+[The proof is a direct computation](https://linearalgebranotes.com/matrices/trace#rule-cyclic). The $(i,i)$ entry of $AB$ is $\\sum_k a_{ik} b_{ki}$, so $\\text{tr}(AB) = \\sum_i \\sum_k a_{ik} b_{ki}$. The $(k,k)$ entry of $BA$ is $\\sum_i b_{ki} a_{ik}$, so $\\text{tr}(BA) = \\sum_k \\sum_i b_{ki} a_{ik}$. Both double sums range over the same index pairs and contain the same terms.
 
-For three matrices, the cyclic property extends to
+For three matrices, [the cyclic property extends](https://linearalgebranotes.com/matrices/trace#rule-cyclic-three) to
 
 @academic[formula_callout:The Cyclic Property
 $$\\text{tr}(ABC) = \\text{tr}(BCA) = \\text{tr}(CAB)$$]@
@@ -1487,9 +1487,9 @@ Only cyclic reorderings are permitted. The rearrangement $\\text{tr}(ABC) = \\te
 @academic[formula_callout:trace_sum_of_eigenvalues|Trace Sum of Eigenvalues|$$\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$$]@
 @academic[formulas_link:/linear-algebra/formulas#trace_sum_of_eigenvalues]@
 
-This identity connects a trivially computable quantity (add the diagonal entries) to eigenvalue information that ordinarily requires solving a degree-$n$ polynomial.
+[This identity](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-trace-sum) connects a trivially computable quantity (add the diagonal entries) to [eigenvalue information that ordinarily requires solving](https://calculatematrix.com/matrix-calculators/eigenvalues#algorithm) a degree-$n$ polynomial.
 
-The proof comes from the characteristic polynomial $p(\\lambda) = \\det(A - \\lambda I)$. Expanding this determinant produces a polynomial of degree $n$ whose leading term is $(-\\lambda)^n$ and whose $\\lambda^{n-1}$ coefficient is $(-1)^{n-1} \\text{tr}(A)$. By Vieta's formulas, the sum of the roots of $p$ equals $\\text{tr}(A)$.
+[The proof comes from the characteristic polynomial](https://linearalgebranotes.com/eigen/characteristic-polynomial#rule-trace-coefficient) $p(\\lambda) = \\det(A - \\lambda I)$. Expanding this determinant produces a polynomial of degree $n$ whose leading term is $(-\\lambda)^n$ and whose $\\lambda^{n-1}$ coefficient is $(-1)^{n-1} \\text{tr}(A)$. By Vieta's formulas, the sum of the roots of $p$ equals $\\text{tr}(A)$.
 
 A companion identity links the determinant to the product of eigenvalues: $\\det(A) = \\lambda_1 \\lambda_2 \\cdots \\lambda_n$. Together, the trace and the determinant capture the two simplest symmetric functions of the eigenvalue spectrum — their sum and their product.
 
@@ -1497,7 +1497,7 @@ A companion identity links the determinant to the product of eigenvalues: $\\det
 Reading the eigenvalues of $\\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ off its diagonal gives $1$ and $1$. Only the sums agree: the eigenvalues are $3$ and $-1$, and $3 + (-1) = 2 = 1 + 1$.
 [Read more](!#pitfall-taking-diagonal-entries-as-eigenvalues)]@
 
-For a $3 \\times 3$ matrix with eigenvalues $2, -1, 4$, the trace is $5$ and the determinant is $-8$. Neither the trace nor the determinant individually determines the eigenvalues, but together they constrain them heavily. For a $2 \\times 2$ matrix, the trace and determinant determine the eigenvalues completely via the quadratic formula.
+For a $3 \\times 3$ matrix with eigenvalues $2, -1, 4$, the trace is $5$ and the determinant is $-8$. Neither the trace nor the determinant individually determines the eigenvalues, but together they constrain them heavily. For a $2 \\times 2$ matrix, [the trace and determinant determine the eigenvalues completely](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-two-by-two) via the quadratic formula.
 
 @academic[punchline:Adding the diagonal gives the sum of the eigenvalues without finding a single one of them.]@`,
     before: ``,
@@ -1508,7 +1508,7 @@ For a $3 \\times 3$ matrix with eigenvalues $2, -1, 4$, the trace is $5$ and the
     title: `Trace and Similarity`,
     content: `Two matrices $A$ and $B$ are similar if $B = P^{-1}AP$ for some invertible matrix $P$. Similar matrices represent the same [linear transformation](!/linear-algebra/transformations) in different coordinate systems — $P$ encodes the [change of basis](!/linear-algebra/transformations/basis-change).
 
-The trace is invariant under similarity:
+[The trace is invariant under similarity](https://linearalgebranotes.com/maps/similar-matrices#rule-det-trace):
 
 @academic[formula_callout:trace_similarity_invariance|Trace Similarity Invariance|$$\\text{tr}(P^{-1}AP) = \\text{tr}(A)$$]@
 @academic[formulas_link:/linear-algebra/formulas#trace_similarity_invariance]@
@@ -1530,14 +1530,14 @@ The determinant is also a similarity invariant: $\\det(P^{-1}AP) = \\det(A)$. To
   },
   obj7: {
     title: `The Frobenius Inner Product`,
-    content: `The trace provides a natural inner product on the space of $n \\times n$ matrices. For two matrices $A$ and $B$, the Frobenius inner product is
+    content: `The trace provides [a natural inner product](https://linearalgebranotes.com/matrices/trace#rule-inner-product) on the space of $n \\times n$ matrices. For two matrices $A$ and $B$, the Frobenius inner product is
 
 @academic[formula_callout:frobenius_inner_product|Frobenius Inner Product|$$\\langle A, B \\rangle_F = \\text{tr}(A^T B) = \\sum_{i=1}^{n} \\sum_{j=1}^{n} a_{ij} b_{ij}$$]@
 @academic[formulas_link:/linear-algebra/formulas#frobenius_inner_product]@
 
 This is the [dot product](!/linear-algebra/vectors/dot-product) of $A$ and $B$ viewed as vectors of $n^2$ entries. It is symmetric ($\\langle A, B \\rangle_F = \\langle B, A \\rangle_F$), linear in each argument, and positive definite ($\\langle A, A \\rangle_F > 0$ whenever $A \\neq O$).
 
-The associated norm is the Frobenius norm:
+The associated norm is [the Frobenius norm](https://calculatematrix.com/matrix-calculators/matrix-norm#algorithm):
 
 @academic[formula_callout:frobenius_norm|Frobenius Norm|$$\\|A\\|_F = \\sqrt{\\text{tr}(A^T A)} = \\sqrt{\\sum_{i,j} a_{ij}^2}$$]@
 @academic[formulas_link:/linear-algebra/formulas#frobenius_norm]@
@@ -1915,7 +1915,7 @@ export default function MatrixTracePage({ pitfallData,seoData, sectionsContent, 
         lead: `The trace is a single number, and only square matrices have one.`,
         content: [
           `The trace is defined only for square matrices — a rectangular matrix has no trace.`,
-          `For example, if $A = \\begin{pmatrix} 3 & 1 & 4 \\\\ 1 & 5 & 9 \\\\ 2 & 6 & 5 \\end{pmatrix}$, then $\\text{tr}(A) = 3 + 5 + 5 = 13$. The off-diagonal entries play no role.`,
+          `For example, if $A = \\begin{pmatrix} 3 & 1 & 4 \\\\ 1 & 5 & 9 \\\\ 2 & 6 & 5 \\end{pmatrix}$, then $\\text{tr}(A) = 3 + 5 + 5 = 13$. [The off-diagonal entries play no role](https://calculatematrix.com/matrix-calculators/matrix-trace#example).`,
           `The trace of the $n \\times n$ [identity matrix](!/linear-algebra/matrix/types) is $\\text{tr}(I_n) = n$, since there are $n$ ones on the diagonal. The trace of the zero matrix is $0$.`,
           <div key={'unit-definition'} dangerouslySetInnerHTML={{ __html: demoUnits.definition }} />,
           `Everything that follows — linearity, the cyclic property, the link to eigenvalues — is a consequence of the trace being this simple a sum.`,

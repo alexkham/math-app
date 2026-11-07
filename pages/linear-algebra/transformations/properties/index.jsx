@@ -1300,7 +1300,7 @@ Every line of the computation holds for all choices of $\\mathbf{u}$, $\\mathbf{
     title: `Disproving Linearity`,
     content: `To show $T$ is not linear, find a single concrete counterexample.
 
-The fastest first check is $T(\\mathbf{0}) = \\mathbf{0}$. Every linear transformation sends $\\mathbf{0}$ to $\\mathbf{0}$, so if $T(\\mathbf{0}) \\neq \\mathbf{0}$, the function is immediately disqualified. This eliminates translations ($T(\\mathbf{v}) = \\mathbf{v} + \\mathbf{b}$), constant functions ($T(\\mathbf{v}) = \\mathbf{c}$), and any formula with a constant term.
+[The fastest first check](https://linearalgebranotes.com/maps/linear-transformation#rule-origin) is $T(\\mathbf{0}) = \\mathbf{0}$. Every linear transformation sends $\\mathbf{0}$ to $\\mathbf{0}$, so if $T(\\mathbf{0}) \\neq \\mathbf{0}$, the function is immediately disqualified. This eliminates translations ($T(\\mathbf{v}) = \\mathbf{v} + \\mathbf{b}$), constant functions ($T(\\mathbf{v}) = \\mathbf{c}$), and any formula with a constant term.
 
 If $T(\\mathbf{0}) = \\mathbf{0}$ passes, test additivity or homogeneity with specific inputs.
 
@@ -1337,7 +1337,7 @@ $T(-\\mathbf{v}) = -T(\\mathbf{v})$: negation is preserved. Proof: $T(-\\mathbf{
 
 $T(\\mathbf{u} - \\mathbf{v}) = T(\\mathbf{u}) - T(\\mathbf{v})$: subtraction is preserved. Follows from combining additivity with the negation result.
 
-If $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ is [linearly dependent](!/linear-algebra/vector-spaces/linear-independence), then $\\{T(\\mathbf{v}_1), \\dots, T(\\mathbf{v}_k)\\}$ is also dependent. Linear transformations can destroy independence (by collapsing vectors to zero) but cannot create it. A nonzero dependence relation $\\sum c_i \\mathbf{v}_i = \\mathbf{0}$ maps to $\\sum c_i T(\\mathbf{v}_i) = \\mathbf{0}$ with the same coefficients.
+If $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ is [linearly dependent](!/linear-algebra/vector-spaces/linear-independence), then $\\{T(\\mathbf{v}_1), \\dots, T(\\mathbf{v}_k)\\}$ is also dependent. Linear transformations [can destroy independence](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-independent-lists) (by collapsing vectors to zero) but cannot create it. A nonzero dependence relation $\\sum c_i \\mathbf{v}_i = \\mathbf{0}$ maps to $\\sum c_i T(\\mathbf{v}_i) = \\mathbf{0}$ with the same coefficients.
 
 These are not additional axioms — they are free consequences of the two linearity conditions.`,
     before: ``,
@@ -1362,13 +1362,13 @@ $$(S \\circ T)(c\\mathbf{u} + d\\mathbf{v}) = S(T(c\\mathbf{u} + d\\mathbf{v})) 
 
 The first equality applies $T$'s linearity inside $S$; the second applies $S$'s linearity.
 
-Composition is associative: $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. It is not commutative: $S \\circ T$ and $T \\circ S$ are generally different (and may not even have compatible domains).
+[Composition is associative](https://linearalgebranotes.com/maps/composition-of-linear-maps#rule-associative): $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. It is not commutative: $S \\circ T$ and $T \\circ S$ are generally different (and may not even have compatible domains).
 
 @academic[pitfall,aside:true,width:35%:Multiplying in the order of application
 Writing $[T][S]$ because $T$ acts first fails for $T$ the projection $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $S$ the quarter-turn $\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$: $[T][S]\\mathbf{e}_1 = (0, 0)$, but $S(T(\\mathbf{e}_1)) = S(1, 0) = (0, 1)$. The matrix is $[S][T] = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$.
 [Read more](!#pitfall-multiplying-in-the-order-of-application)]@
 
-When both transformations are represented by [matrices](!/linear-algebra/transformations/matrix-representation), composition corresponds to matrix multiplication: the matrix of $S \\circ T$ is the product of the matrix of $S$ with the matrix of $T$. This is the fundamental reason matrix multiplication is defined as it is — it encodes the composition of the maps the matrices represent.`,
+When both transformations are represented by [matrices](!/linear-algebra/transformations/matrix-representation), [composition corresponds to matrix multiplication](https://calculatematrix.com/matrix-calculators/matrix-multiplication#about): the matrix of $S \\circ T$ is the product of the matrix of $S$ with the matrix of $T$. This is the fundamental reason matrix multiplication is defined as it is — it encodes the composition of the maps the matrices represent.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1377,7 +1377,7 @@ When both transformations are represented by [matrices](!/linear-algebra/transfo
     title: `Invertibility`,
     content: `A linear transformation $T: V \\to W$ is invertible if there exists a linear map $T^{-1}: W \\to V$ satisfying $T^{-1} \\circ T = I_V$ and $T \\circ T^{-1} = I_W$.
 
-The inverse, when it exists, is itself linear. If $T^{-1}(\\mathbf{w}_1) = \\mathbf{v}_1$ and $T^{-1}(\\mathbf{w}_2) = \\mathbf{v}_2$, then $T(c\\mathbf{v}_1 + d\\mathbf{v}_2) = cT(\\mathbf{v}_1) + dT(\\mathbf{v}_2) = c\\mathbf{w}_1 + d\\mathbf{w}_2$, so $T^{-1}(c\\mathbf{w}_1 + d\\mathbf{w}_2) = c\\mathbf{v}_1 + d\\mathbf{v}_2 = cT^{-1}(\\mathbf{w}_1) + dT^{-1}(\\mathbf{w}_2)$.
+[The inverse, when it exists, is itself linear](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-inverse-linear). If $T^{-1}(\\mathbf{w}_1) = \\mathbf{v}_1$ and $T^{-1}(\\mathbf{w}_2) = \\mathbf{v}_2$, then $T(c\\mathbf{v}_1 + d\\mathbf{v}_2) = cT(\\mathbf{v}_1) + dT(\\mathbf{v}_2) = c\\mathbf{w}_1 + d\\mathbf{w}_2$, so $T^{-1}(c\\mathbf{w}_1 + d\\mathbf{w}_2) = c\\mathbf{v}_1 + d\\mathbf{v}_2 = cT^{-1}(\\mathbf{w}_1) + dT^{-1}(\\mathbf{w}_2)$.
 
 @academic[rule_theorem_plain:$T$ is invertible if and only if it is bijective: injective (trivial [kernel](!/linear-algebra/transformations/image-kernel)) and surjective (image equals $W$).]@
 
@@ -1385,11 +1385,11 @@ The inverse, when it exists, is itself linear. If $T^{-1}(\\mathbf{w}_1) = \\mat
 Calling $T(x, y) = (x, y, 0)$ from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ invertible because its kernel is $\\{\\mathbf{0}\\}$ skips surjectivity: no $\\mathbf{v}$ has $T(\\mathbf{v}) = (0, 0, 1)$. Since $2 \\neq 3$, no linear map $\\mathbb{R}^2 \\to \\mathbb{R}^3$ is invertible.
 [Read more](!#pitfall-stopping-at-a-trivial-kernel)]@
 
-When $\\dim(V) = \\dim(W)$ is finite, these two conditions are equivalent — checking either one establishes both. For [matrix](!/linear-algebra/matrix) transformations, invertibility of $T$ corresponds to [invertibility](!/linear-algebra/matrix/inverse) of the matrix $A$.
+When $\\dim(V) = \\dim(W)$ is finite, [these two conditions are equivalent](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-equal-dimensions) — checking either one establishes both. For [matrix](!/linear-algebra/matrix) transformations, invertibility of $T$ corresponds to [invertibility](!/linear-algebra/matrix/inverse) of the matrix $A$.
 
 An invertible linear transformation between spaces of the same [dimension](!/linear-algebra/vector-spaces/dimension) is called an isomorphism. It establishes that the two spaces are structurally identical as vector spaces.
 
-The equivalence for equal dimensions is a counting argument. A trivial kernel gives $\\dim \\operatorname{im}(T) = \\dim(V)$ by rank–nullity, and a subspace of $W$ with $\\dim(W)$ dimensions must be all of $W$.
+The equivalence for equal dimensions is [a counting argument](https://linearalgebranotes.com/spaces/rank-nullity-theorem#rule-linear-maps). [A trivial kernel](https://calculatematrix.com/matrix-calculators/nullspace#rank-nullity) gives $\\dim \\operatorname{im}(T) = \\dim(V)$ by rank–nullity, and a subspace of $W$ with $\\dim(W)$ dimensions must be all of $W$.
 
 @academic[fact,aside:true,width:35%:Hilbert's hotel as a linear map
 Moving every guest up one room is the shift $(x_1, x_2, \\ldots) \\mapsto (0, x_1, x_2, \\ldots)$. Its kernel is $\\{\\mathbf{0}\\}$, yet room 1 stays empty: $(1, 0, 0, \\ldots)$ is never reached. The map is injective but not surjective, from a space to itself.]@
@@ -1407,7 +1407,7 @@ The sum $(S + T)(\\mathbf{v}) = S(\\mathbf{v}) + T(\\mathbf{v})$ is linear: $(S 
 
 The scalar multiple $(cT)(\\mathbf{v}) = cT(\\mathbf{v})$ is linear by a similar argument.
 
-These operations give the set of all linear transformations from $V$ to $W$ the structure of a [vector space](!/linear-algebra/vector-spaces), denoted $\\mathcal{L}(V, W)$. The zero element is the zero transformation, and the additive inverse of $T$ is $(-1)T$. When $V$ and $W$ are finite-dimensional, this space has dimension $\\dim(V) \\cdot \\dim(W)$, matching the number of entries in the representing matrix.`,
+These operations give the set of all linear transformations from $V$ to $W$ the structure of a [vector space](!/linear-algebra/vector-spaces), denoted $\\mathcal{L}(V, W)$. The zero element is the zero transformation, and the additive inverse of $T$ is $(-1)T$. When $V$ and $W$ are finite-dimensional, [this space has dimension](https://linearalgebranotes.com/maps/linear-transformation#rule-space-of-maps) $\\dim(V) \\cdot \\dim(W)$, matching the number of entries in the representing matrix.`,
     before: ``,
     after: ``,
     link: ``,

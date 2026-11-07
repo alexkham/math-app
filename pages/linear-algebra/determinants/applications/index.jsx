@@ -1461,7 +1461,7 @@ const ciCramerTable = ciTableOpen(['matrix', 'how it is formed', 'determinant'])
 const sectionsContent = {
   obj1: {
     title: `Cramer's Rule`,
-    content: `Given a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ where $A$ is $n \\times n$ with $\\det(A) \\neq 0$, Cramer's rule expresses each component of the solution directly as a ratio of determinants:
+    content: `Given a [linear system](!/linear-algebra/linear-systems) $Ax = \\mathbf{b}$ where $A$ is $n \\times n$ with $\\det(A) \\neq 0$, Cramer's rule [expresses each component of the solution directly as a ratio of determinants](https://linearalgebranotes.com/systems/cramers-rule#rule-cramer):
 
 @academic[formula_callout:cramers_rule|Cramers Rule|$$x_i = \\frac{\\det(A_i)}{\\det(A)}$$]@
 @academic[formulas_link:/linear-algebra/formulas#cramers_rule]@
@@ -1498,7 +1498,7 @@ Both values can be checked in the original equations: $3 \\cdot 2 + 2 \\cdot 1 =
 @academic[formula_callout:Cramer's Rule
 $$\\begin{pmatrix} 1 & 0 & 2 \\\\ -1 & 3 & 1 \\\\ 2 & 1 & 0 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\\\ x_3 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 0 \\\\ 3 \\end{pmatrix}$$]@
 
-The coefficient determinant is $\\det(A) = 1(0 - 1) - 0 + 2(-1 - 6) = -1 - 14 = -15$. The three modified determinants are:
+The coefficient determinant is $\\det(A) = 1(0 - 1) - 0 + 2(-1 - 6) = -1 - 14 = -15$. [The three modified determinants](https://calculatematrix.com/linear-systems/cramers-rule-calculator#algorithm) are:
 
 @academic[formula_callout:Cramer's Rule
 $$\\det(A_1) = \\det\\begin{pmatrix} 5 & 0 & 2 \\\\ 0 & 3 & 1 \\\\ 3 & 1 & 0 \\end{pmatrix} = 5(0 - 1) - 0 + 2(0 - 9) = -5 - 18 = -23$$]@
@@ -1518,7 +1518,7 @@ The solution is $x_1 = -23/(-15) = 23/15$, $x_2 = 1/(-15) = -1/15$, $x_3 = -26/(
 @academic[fact,aside:true,width:35%:Maclaurin had the rule first
 Colin Maclaurin's Treatise of Algebra, printed in 1748, two years after his death, already solves systems in 2 and 3 unknowns this way. Cramer's book of 1750 stated the rule for any number of unknowns, with a rule for the signs, and his name stuck.]@
 
-This has consequences in pure algebra and in sensitivity analysis, where it shows how solutions respond to perturbations in the data. As a computational method, however, it requires $n + 1$ determinant evaluations, making it far more expensive than [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) for large systems.
+This has consequences in pure algebra and in sensitivity analysis, where it shows how solutions respond to perturbations in the data. As a computational method, however, it requires $n + 1$ determinant evaluations, making it [far more expensive](https://linearalgebranotes.com/systems/cramers-rule#cost) than [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) for large systems.
 
 The ratios in the rule were written down before determinants had a name or a notation. Early statements spelled out each numerator and each denominator as a sum of signed products of coefficients, six products for three unknowns, and left the reader to follow the pattern of signs to larger systems. The theory of determinants later grew out of exactly these sums.`,
     before: ``,
@@ -1581,7 +1581,7 @@ The ratios in the rule were written down before determinants had a name or a not
   },
   obj2: {
     title: `The Inverse via the Adjugate`,
-    content: `The [adjugate identity](!/linear-algebra/determinants/cofactors) $A \\cdot \\operatorname{adj}(A) = \\det(A) \\cdot I$ immediately gives an explicit formula for the inverse when $\\det(A) \\neq 0$:
+    content: `The [adjugate identity](!/linear-algebra/determinants/cofactors) $A \\cdot \\operatorname{adj}(A) = \\det(A) \\cdot I$ immediately gives [an explicit formula for the inverse](https://linearalgebranotes.com/matrices/adjugate#rule-inverse-formula) when $\\det(A) \\neq 0$:
 
 @academic[formula_callout:Inverse via Adjugate
 $$A^{-1} = \\frac{1}{\\det(A)} \\operatorname{adj}(A)$$
@@ -1598,7 +1598,7 @@ For $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the [cofactor](!/lin
 @academic[formula_callout:The Inverse via the Adjugate
 $$A^{-1} = \\frac{1}{ad - bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$]@
 
-This is the familiar swap-the-diagonal, negate-the-off-diagonal formula that appears in every introductory linear algebra course.
+This is [the familiar swap-the-diagonal, negate-the-off-diagonal formula](https://linearalgebranotes.com/matrices/inverse#rule-two-by-two) that appears in every introductory linear algebra course.
 
 ## 3×3 Worked Example
 
@@ -1618,7 +1618,7 @@ $$C_{21} = -(2 \\cdot 1 - 0 \\cdot 0) = -2, \\quad C_{22} = +(1 \\cdot 1 - 0 \\c
 @academic[formula_callout:The Inverse via the Adjugate
 $$C_{31} = +(2 \\cdot 3 - 0 \\cdot 1) = 6, \\quad C_{32} = -(1 \\cdot 3 - 0 \\cdot 0) = -3, \\quad C_{33} = +(1 \\cdot 1 - 2 \\cdot 0) = 1$$]@
 
-The adjugate is the transpose of the cofactor matrix:
+[The adjugate is the transpose of the cofactor matrix](https://calculatematrix.com/matrix-calculators/adjugate#formula):
 
 @academic[formula_callout:The Inverse via the Adjugate
 $$\\operatorname{adj}(A) = \\begin{pmatrix} 1 & -2 & 6 \\\\ 6 & 1 & -3 \\\\ -2 & 4 & 1 \\end{pmatrix}$$]@
@@ -1633,7 +1633,7 @@ Verification: $A \\cdot A^{-1}$ should produce the identity. The $(1,1)$ entry i
 
 ## Practical Assessment
 
-The adjugate formula writes every entry of the inverse as an explicit ratio of cofactors and the determinant. This is valuable for symbolic work — it shows exactly how each entry of $A^{-1}$ depends on the entries of $A$. For numerical computation on matrices larger than $3 \\times 3$, row reduction is vastly more efficient.`,
+The adjugate formula writes every entry of the inverse as an explicit ratio of cofactors and the determinant. This is valuable for symbolic work — it shows exactly how each entry of $A^{-1}$ depends on the entries of $A$. For numerical computation on matrices larger than $3 \\times 3$, [row reduction is vastly more efficient](https://calculatematrix.com/matrix-calculators/matrix-inverse#methods).`,
     before: ``,
     after: ``,
     link: ``,
@@ -1671,7 +1671,7 @@ $$= \\hat{\\mathbf{i}}(2) - \\hat{\\mathbf{j}}(-16) + \\hat{\\mathbf{k}}(4) = (2
 Leaving out the minus in front of $\\hat{\\mathbf{j}}$ turns the result into $(2, -16, 4)$, whose dot product with $\\mathbf{a}$ is $4 + 16 + 12 = 32$, not $0$. With the sign, $\\mathbf{a} \\times \\mathbf{b} = (2, 16, 4)$.
 [Read more](!#pitfall-dropping-the-minus-sign-on-the-middle-component)]@
 
-The magnitude is $|\\mathbf{a} \\times \\mathbf{b}| = \\sqrt{4 + 256 + 16} = \\sqrt{276} = 2\\sqrt{69}$. This equals the area of the parallelogram spanned by $\\mathbf{a}$ and $\\mathbf{b}$, connecting the cross product back to the [geometric interpretation](!/linear-algebra/determinants/geometry) of the determinant as an area measure.`,
+The magnitude is $|\\mathbf{a} \\times \\mathbf{b}| = \\sqrt{4 + 256 + 16} = \\sqrt{276} = 2\\sqrt{69}$. This equals [the area of the parallelogram](https://linearalgebranotes.com/vectors/cross-product#rule-length) spanned by $\\mathbf{a}$ and $\\mathbf{b}$, connecting the cross product back to the [geometric interpretation](!/linear-algebra/determinants/geometry) of the determinant as an area measure.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1719,7 +1719,7 @@ The eigenvalues are $\\lambda = 1, 2, 3$ — they sit directly on the diagonal, 
 
 ## Two Identities
 
-Setting $\\lambda = 0$ in the characteristic polynomial gives $p(0) = \\det(A)$, which means the constant term of the characteristic polynomial is the determinant. Since the roots of $p$ are the eigenvalues $\\lambda_1, \\dots, \\lambda_n$, this yields
+Setting $\\lambda = 0$ in the characteristic polynomial gives $p(0) = \\det(A)$, which means [the constant term of the characteristic polynomial is the determinant](https://linearalgebranotes.com/eigen/characteristic-polynomial#rule-constant). Since the roots of $p$ are the eigenvalues $\\lambda_1, \\dots, \\lambda_n$, this yields
 
 @academic[formula_callout:determinant_product_of_eigenvalues|Determinant Product of Eigenvalues|$$\\det(A) = \\lambda_1 \\, \\lambda_2 \\cdots \\lambda_n$$]@
 @academic[formulas_link:/linear-algebra/formulas#determinant_product_of_eigenvalues]@
@@ -1809,7 +1809,7 @@ The product formula: $(x_2 - x_1)(x_3 - x_1)(x_3 - x_2) = (2 - 1)(4 - 1)(4 - 2) 
 @academic[fact,aside:true,width:35%:$b^2 - 4c$ is a squared Vandermonde
 For $x^2 + bx + c$ with roots $r_1, r_2$, the discriminant $b^2 - 4c$ equals $(r_2 - r_1)^2$, the square of the $2 \\times 2$ Vandermonde determinant of the roots. For every polynomial with leading coefficient $1$, the discriminant is the squared Vandermonde of its roots, which is why it is zero exactly at a repeated root.]@
 
-This guarantees that a polynomial of degree at most $n - 1$ is uniquely determined by its values at $n$ distinct points — the theoretical foundation of polynomial interpolation. It also appears in the theory of symmetric polynomials and in the derivation of various discrete orthogonality relations.
+This guarantees that a polynomial of degree at most $n - 1$ is uniquely determined by its values at $n$ distinct points — the theoretical foundation of [polynomial interpolation](https://calculatematrix.com/linear-systems/polynomial-interpolation#about). It also appears in the theory of symmetric polynomials and in the derivation of various discrete orthogonality relations.
 
 Exchanging two nodes exchanges two rows of $V$, so the determinant changes sign. Its square does not change at all: $\\det(V)^2$ stays the same under every reordering of the nodes, which makes it a symmetric polynomial in them. When the nodes are the roots of a polynomial, any symmetric polynomial in the roots can be rewritten in terms of the coefficients, without solving for the roots.
 

@@ -3550,7 +3550,7 @@ It is the set of all possible outputs of the [linear transformation](!/linear-al
 
 Vectors outside the column space are unreachable — no input $\\mathbf{x}$ can produce them.
 
-To find a [basis](!/linear-algebra/vector-spaces) for the column space, row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ form the basis. The echelon form identifies which columns are [independent](!/linear-algebra/vector-spaces/linear-independence), but the original columns are the actual vectors in $\\mathbb{R}^m$ that span the column space.
+To find a [basis](!/linear-algebra/vector-spaces) for the column space, row reduce $A$ and [identify the pivot columns](https://calculatematrix.com/matrix-calculators/column-space#method). The corresponding columns of the original matrix $A$ form the basis. The echelon form identifies which columns are [independent](!/linear-algebra/vector-spaces/linear-independence), but [the original columns are the actual vectors](https://linearalgebranotes.com/spaces/column-space#rule-pivot-basis) in $\\mathbb{R}^m$ that span the column space.
 
 ## Worked Example
 
@@ -3576,7 +3576,7 @@ $$\\text{Row}(A) = \\text{Col}(A^T)$$]@
 
 It lives in $\\mathbb{R}^n$ and has dimension $r$ — the same as the column space, despite the two subspaces living in different ambient spaces.
 
-To find a basis for the row space, row reduce $A$ and take the nonzero rows of the echelon form. Unlike the column space, the echelon form's rows are used directly — not the original rows. This is valid because elementary row operations replace rows with linear combinations of existing rows, preserving the row space. The nonzero rows of the echelon form are [independent](!/linear-algebra/vector-spaces/linear-independence) (the staircase pattern of pivots guarantees this) and span the same space as the original rows.
+To find a basis for the row space, row reduce $A$ and take the nonzero rows of the echelon form. Unlike the column space, the echelon form's rows are used directly — not the original rows. This is valid because elementary row operations replace rows with linear combinations of existing rows, [preserving the row space](https://linearalgebranotes.com/spaces/row-space#rule-elimination-keeps). The nonzero rows of the echelon form are [independent](!/linear-algebra/vector-spaces/linear-independence) (the staircase pattern of pivots guarantees this) and span the same space as the original rows.
 
 ## Continuing the Example
 
@@ -3596,13 +3596,13 @@ $$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{
 
 It lives in $\\mathbb{R}^n$ and has dimension $n - r$, where $r$ is the rank. This dimension is the nullity, and the identity $r + (n - r) = n$ is the [rank-nullity theorem](!/linear-algebra/matrix/rank).
 
-The null space measures the failure of injectivity.
+[The null space measures the failure of injectivity](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-kernel-test).
 
 @academic[rule_plain:If $\\text{Null}(A) = \\{\\mathbf{0}\\}$, the map is injective — different inputs produce different outputs.]@
 
 If the null space is nontrivial, the map collapses some directions to zero, and distinct inputs can produce the same output: if $A\\mathbf{x}_1 = A\\mathbf{x}_2$, then $\\mathbf{x}_1 - \\mathbf{x}_2 \\in \\text{Null}(A)$.
 
-To find a basis, reduce $A$ to [RREF](!/linear-algebra/linear-systems/echelon-form) and identify the free variables. Each free variable is set to $1$ (with the others at $0$), and the corresponding solution is one basis vector for the null space.
+To find a basis, reduce $A$ to [RREF](!/linear-algebra/linear-systems/echelon-form) and [identify the free variables](https://calculatematrix.com/matrix-calculators/nullspace#method). Each free variable is set to $1$ (with the others at $0$), and [the corresponding solution is one basis vector for the null space](https://linearalgebranotes.com/spaces/null-space#rule-special-solutions-basis).
 
 ## Continuing the Example
 
@@ -3639,7 +3639,7 @@ When $\\mathbf{y}^T \\mathbf{b} \\neq 0$, the combined equation reads $0 = \\mat
 
 A vector $\\mathbf{y}$ in the left null space can also be read as a list of weights for the $m$ equations of $A\\mathbf{x} = \\mathbf{b}$. Multiplying the $i$-th equation by $y_i$ and adding all of them gives the combined equation $\\mathbf{y}^T A\\mathbf{x} = \\mathbf{y}^T \\mathbf{b}$. Because $\\mathbf{y}^T A = \\mathbf{0}^T$, every unknown cancels on the left, and only the right-hand side is left to decide whether the combined equation can hold.
 
-To find a basis, solve $A^T\\mathbf{y} = \\mathbf{0}$ by row reducing $A^T$. Alternatively, row reduce $[A \\mid I_m]$ — the identity block tracks the row operations, and its rows beside the zero rows of the reduced $A$ reveal the left null space.
+To find a basis, solve $A^T\\mathbf{y} = \\mathbf{0}$ by [row reducing](https://calculatematrix.com/matrix-calculators/left-nullspace#algorithm) $A^T$. Alternatively, row reduce $[A \\mid I_m]$ — the identity block tracks the row operations, and its rows beside the zero rows of the reduced $A$ reveal the left null space.
 
 ## Continuing the Example
 
@@ -3673,7 +3673,7 @@ $$\\dim(\\text{Col}(A)) + \\dim(\\text{Null}(A^T)) = r + (m - r) = m$$]@
 For a $2 \\times 5$ matrix of rank $2$, swapping the sizes gives $\\dim(\\text{Null}\\,A) = 2 - 2 = 0$, as if $A$ were one-to-one. The null space lies in $\\mathbb{R}^5$, so $\\dim(\\text{Null}\\,A) = 5 - 2 = 3$, and $\\dim(\\text{Null}\\,A^T) = 2 - 2 = 0$.
 [Read more](!#pitfall-swapping-the-row-and-column-counts)]@
 
-The first equation is the rank-nullity theorem. The second is its transpose analogue. Together they say that the four subspaces account for every dimension of both the domain and the codomain — nothing is missing and nothing is double-counted.
+The first equation is the rank-nullity theorem. The second is its transpose analogue. Together they say that [the four subspaces account for every dimension](https://linearalgebranotes.com/spaces/rank-nullity-theorem#rule-four-subspaces) of both the domain and the codomain — nothing is missing and nothing is double-counted.
 
 For the running example ($3 \\times 4$ matrix, rank $2$): the row space and null space have dimensions $2$ and $2$, summing to $4 = n$. The column space and left null space have dimensions $2$ and $1$, summing to $3 = m$.
 
@@ -3688,7 +3688,7 @@ For the running example ($3 \\times 4$ matrix, rank $2$): the row space and null
 
 @academic[rule_theorem_plain:In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements.]@
 
-Every vector in the null space is perpendicular to every row of $A$, because $A\\mathbf{x} = \\mathbf{0}$ means the [dot product](!/linear-algebra/vectors/dot-product) of $\\mathbf{x}$ with each row is zero. Every vector in $\\mathbb{R}^n$ decomposes uniquely as the sum of a row-space component and a null-space component, and these two components are perpendicular.
+[Every vector in the null space is perpendicular to every row](https://linearalgebranotes.com/orthogonality/orthogonal-complement#rule-fundamental) of $A$, because $A\\mathbf{x} = \\mathbf{0}$ means the [dot product](!/linear-algebra/vectors/dot-product) of $\\mathbf{x}$ with each row is zero. Every vector in $\\mathbb{R}^n$ decomposes uniquely as the sum of a row-space component and a null-space component, and these two components are perpendicular.
 
 @academic[pitfall,aside:true,width:35%:Pairing the null space with the column space
 Taking $\\text{Col}(A)$ as the partner of $\\text{Null}(A)$ fails for $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$, where both are the line through $(1, 0)$ and are not perpendicular. The partner of $\\text{Null}(A)$ is $\\text{Row}(A)$, the line through $(0, 1)$.
@@ -3707,7 +3707,7 @@ These orthogonality relationships are not incidental — they are the structural
 
 @academic[rule_theorem_plain:The matrix $A$ maps the row space onto the column space. This restriction is a bijection — every vector in the row space has a unique image in the column space, and every vector in the column space comes from exactly one row-space vector.]@
 
-The rank $r$ is the dimension of both spaces, and this bijection is the "useful part" of the map.
+The rank $r$ is the dimension of both spaces, and [this bijection](https://linearalgebranotes.com/spaces/row-space#rule-one-to-one) is the "useful part" of the map.
 
 The matrix $A$ sends the entire null space to $\\mathbf{0}$. These are the directions that the map annihilates — the information that is lost.
 

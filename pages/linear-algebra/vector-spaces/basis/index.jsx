@@ -1176,7 +1176,7 @@ $$\\forall\\, \\mathbf{v} \\in V,\\ \\exists!\\, (c_1, \\ldots, c_n): \\mathbf{v
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Existence is guaranteed by the spanning condition — every vector is reachable. Uniqueness is guaranteed by independence: if two different sets of scalars both produced $\\mathbf{v}$, subtracting one from the other would give a nontrivial combination equal to $\\mathbf{0}$, contradicting independence.
+Existence is guaranteed by the spanning condition — every vector is reachable. [Uniqueness is guaranteed by independence](https://linearalgebranotes.com/spaces/basis#rule-unique-representation): if two different sets of scalars both produced $\\mathbf{v}$, subtracting one from the other would give a nontrivial combination equal to $\\mathbf{0}$, contradicting independence.
 
 This uniqueness is what separates a basis from an arbitrary spanning set. A spanning set that is not independent can represent some vectors in multiple ways — the representation is ambiguous. A basis eliminates all ambiguity: every vector has exactly one set of coefficients.`,
     before: ``,
@@ -1200,7 +1200,7 @@ Coordinates depend entirely on the choice of basis. The same vector $\\mathbf{v}
 Taking $[\\mathbf{v}]_\\mathcal{B} = (3, 5)$ for $\\mathbf{v} = (3, 5)$ and $\\mathcal{B} = \\{(1, 2), (0, 1)\\}$ rebuilds $3(1, 2) + 5(0, 1) = (3, 11)$, not $\\mathbf{v}$. Solving the system gives $[\\mathbf{v}]_\\mathcal{B} = (3, -1)$, since $3(1, 2) - 1(0, 1) = (3, 5)$.
 [Read more](!#pitfall-reading-components-as-coordinates)]@
 
-To find the coordinates of $\\mathbf{v}$ relative to $\\mathcal{B}$, solve the [linear system](!/linear-algebra/linear-systems) $c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n = \\mathbf{v}$. If the basis vectors are columns of a [matrix](!/linear-algebra/matrix) $B$, this is the system $B\\mathbf{c} = \\mathbf{v}$, and the coordinate vector is $\\mathbf{c} = B^{-1}\\mathbf{v}$ when $B$ is invertible. For the standard basis, $B = I$, so the coordinates are simply the components of $\\mathbf{v}$ itself.`,
+[To find the coordinates of](https://calculatematrix.com/matrix-calculators/change-of-basis#standard-basis) $\\mathbf{v}$ relative to $\\mathcal{B}$, solve the [linear system](!/linear-algebra/linear-systems) $c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n = \\mathbf{v}$. If the basis vectors are columns of a [matrix](!/linear-algebra/matrix) $B$, this is the system $B\\mathbf{c} = \\mathbf{v}$, and the coordinate vector is $\\mathbf{c} = B^{-1}\\mathbf{v}$ when $B$ is invertible. For the standard basis, $B = I$, so the coordinates are simply the components of $\\mathbf{v}$ itself.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1246,11 +1246,11 @@ These are all "standard" bases in the sense that they are the most natural first
     title: `Finding a Basis for a Subspace`,
     content: `The three [subspaces](!/linear-algebra/vector-spaces/subspaces) associated with a matrix each have a basis that can be extracted from row reduction.
 
-For the column space of an $m \\times n$ matrix $A$: row reduce $A$ and identify the pivot columns. The corresponding columns of the original matrix $A$ — not the echelon form — are a basis for $\\text{Col}(A)$. The echelon form reveals which columns are independent, but the original columns are the actual vectors spanning the column space.
+For the column space of an $m \\times n$ matrix $A$: row reduce $A$ and [identify the pivot columns](https://calculatematrix.com/matrix-calculators/column-space#method). The corresponding columns of the original matrix $A$ — not the echelon form — are a basis for $\\text{Col}(A)$. The echelon form reveals which columns are independent, but the original columns are the actual vectors spanning the column space.
 
-For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/echelon-form) and expressing the general solution in terms of free variables. Each free variable contributes one basis vector.
+For the null space: solve $A\\mathbf{x} = \\mathbf{0}$ by reducing to [RREF](!/linear-algebra/linear-systems/echelon-form) and expressing the general solution in terms of free variables. [Each free variable contributes one basis vector](https://linearalgebranotes.com/spaces/null-space#rule-special-solutions-basis).
 
-For the row space: the nonzero rows of the echelon form are a basis. Unlike the column space, the echelon form's rows — not the original rows — are used, because row operations change individual rows but preserve their span.
+For the row space: [the nonzero rows of the echelon form are a basis](https://linearalgebranotes.com/spaces/row-space#rule-rows-of-r-basis). Unlike the column space, the echelon form's rows — not the original rows — are used, because row operations change individual rows but preserve their span.
 
 @academic[example:Worked Example
 
@@ -1265,9 +1265,9 @@ For $A = \\begin{pmatrix} 1 & 2 & 0 & 1 \\\\ 2 & 4 & 1 & 3 \\\\ 3 & 6 & 1 & 4 \\
     title: `Extending and Reducing to a Basis`,
     content: `Two fundamental operations guarantee that bases always exist in finite-dimensional spaces.
 
-Extension: any linearly independent set can be grown into a basis by adding vectors one at a time. At each step, pick any vector not in the current [span](!/linear-algebra/vector-spaces/span) and adjoin it. Independence is preserved because the new vector is not a combination of the existing ones. The process stops when the span reaches all of $V$.
+Extension: [any linearly independent set can be grown into a basis](https://calculatematrix.com/vector-calculators/extend-to-basis#algorithm) by adding vectors one at a time. At each step, pick any vector not in the current [span](!/linear-algebra/vector-spaces/span) and adjoin it. Independence is preserved because the new vector is not a combination of the existing ones. The process stops when the span reaches all of $V$.
 
-Reduction: any spanning set can be trimmed into a basis by removing redundant vectors. A vector is redundant if it lies in the span of the remaining vectors. Remove redundant vectors one at a time until what remains is independent. The span does not shrink, because each removed vector was already expressible in terms of the others.
+Reduction: [any spanning set can be trimmed into a basis](https://linearalgebranotes.com/spaces/basis#rule-shrink-to-basis) by removing redundant vectors. A vector is redundant if it lies in the span of the remaining vectors. Remove redundant vectors one at a time until what remains is independent. The span does not shrink, because each removed vector was already expressible in terms of the others.
 
 Both processes terminate because [dimension](!/linear-algebra/vector-spaces/dimension) is finite — the independent set cannot grow past $n$ vectors, and the spanning set cannot shrink below $n$ vectors, where $n = \\dim(V)$. This means every finite-dimensional vector space has a basis, and the choice of basis is highly flexible.`,
     before: ``,
@@ -1276,7 +1276,7 @@ Both processes terminate because [dimension](!/linear-algebra/vector-spaces/dime
   },
   obj9: {
     title: `Change of Basis`,
-    content: `Different bases generally assign different coordinates to the same vector. The change-of-basis matrix converts between them.
+    content: `Different bases generally assign different coordinates to the same vector. [The change-of-basis matrix converts between them](https://linearalgebranotes.com/spaces/change-of-basis#rule-change-matrix).
 
 If $\\mathcal{B}$ and $\\mathcal{C}$ are two bases for $V$, the change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ satisfies
 
@@ -1322,7 +1322,7 @@ $$[\\mathbf{u} + \\mathbf{v}]_\\mathcal{B} = [\\mathbf{u}]_\\mathcal{B} + [\\mat
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Such a structure-preserving bijection is called an isomorphism. Its existence means that every $n$-dimensional real vector space — $\\mathbb{R}^n$, $\\mathcal{P}_{n-1}$, $\\mathbb{R}^{m \\times k}$ with $mk = n$, solution spaces of ODEs — behaves identically to $\\mathbb{R}^n$ in all algebraic respects. The objects differ, but the linear algebra is the same.
+[Such a structure-preserving bijection](https://linearalgebranotes.com/spaces/coordinates-in-a-basis#rule-coordinate-map) is called an isomorphism. Its existence means that every $n$-dimensional real vector space — $\\mathbb{R}^n$, $\\mathcal{P}_{n-1}$, $\\mathbb{R}^{m \\times k}$ with $mk = n$, solution spaces of ODEs — behaves identically to $\\mathbb{R}^n$ in all algebraic respects. The objects differ, but the linear algebra is the same.
 
 [Dimension](!/linear-algebra/vector-spaces/dimension) is the single invariant that classifies finite-dimensional vector spaces up to isomorphism.
 
@@ -1347,7 +1347,7 @@ Span is tested by checking whether $A\\mathbf{c} = \\mathbf{b}$ is consistent fo
 Calling $\\{(1, 0, 0), (0, 1, 0)\\}$ a basis of $\\mathbb{R}^3$ because it is independent misses that every combination $(a, b, 0)$ has third entry $0$, so $(0, 0, 1)$ is out of reach. The shortcut needs exactly $3$ vectors; this set is a basis only of the $xy$-plane.
 [Read more](!#pitfall-checking-one-condition-with-the-wrong-count)]@
 
-At the magic count $n = \\dim(V)$, the two conditions become equivalent.
+[At the magic count](https://linearalgebranotes.com/spaces/dimension#rule-right-count) $n = \\dim(V)$, the two conditions become equivalent.
 
 In practice the theorem halves the work. For $n$ vectors in $\\mathbb{R}^n$, a single determinant settles both conditions at once: a nonzero value shows that the vectors are independent, and with the count equal to the dimension they span the space as well.`,
     before: ``,

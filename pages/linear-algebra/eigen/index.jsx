@@ -757,7 +757,7 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
 
 These are the vectors that the [linear transformation](!/linear-algebra/transformations) $\\mathbf{x} \\mapsto A\\mathbf{x}$ stretches, compresses, or reverses without deflecting. They are the "natural axes" of the transformation, and the scaling factors measure exactly how the transformation acts along each such axis. Finding these directions and factors is the eigenvalue problem.
 
-These directions belong to the transformation, not to the way it happens to be written down. In another basis the same transformation gets a different array of numbers, yet it stretches the same lines by the same factors. The eigenvalues are therefore the same numbers whichever basis is used to write the matrix.`,
+These directions belong to the transformation, not to the way it happens to be written down. In another basis the same transformation gets a different array of numbers, yet it stretches the same lines by the same factors. The eigenvalues are therefore [the same numbers whichever basis is used](https://linearalgebranotes.com/maps/similar-matrices#rule-eigenvalues) to write the matrix.`,
     before: ``,
     after: ``,
     link: ``,
@@ -777,7 +777,7 @@ for some scalar $\\lambda$. The scalar $\\lambda$ is the corresponding eigenvalu
 
 The requirement that $\\mathbf{v} \\neq \\mathbf{0}$ is essential. The zero vector trivially satisfies $A\\mathbf{0} = \\lambda\\mathbf{0}$ for every $\\lambda$, so it carries no information and is excluded by convention.
 
-The eigenvalue $\\lambda$ can be any real or [complex](!/linear-algebra/eigen/complex) number, including zero. When $\\lambda = 0$, the equation $A\\mathbf{v} = \\mathbf{0}$ says that $\\mathbf{v}$ is in the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — the transformation annihilates that direction entirely.
+The eigenvalue $\\lambda$ can be any real or [complex](!/linear-algebra/eigen/complex) number, including zero. When $\\lambda = 0$, the equation $A\\mathbf{v} = \\mathbf{0}$ says that $\\mathbf{v}$ is in the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — [the transformation annihilates that direction entirely](https://linearalgebranotes.com/eigen/eigenvalue-and-eigenvector#rule-zero-eigenvalue).
 
 @academic[rule_plain:Only square matrices have eigenvalues.]@
 
@@ -806,7 +806,7 @@ $$\\det(A - \\lambda I) = 0$$
 Subtracting $\\lambda$ from all four entries of $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$ gives $(4 - \\lambda)(3 - \\lambda) - (2 - \\lambda)(1 - \\lambda) = 10 - 4\\lambda$, with the single root $\\lambda = 5/2$. Since $\\lambda I$ puts $\\lambda$ only on the diagonal, $\\det(A - \\lambda I) = \\lambda^2 - 7\\lambda + 10$, with roots $2$ and $5$.
 [Read more](!#pitfall-subtracting-from-every-entry)]@
 
-This [determinant](!/linear-algebra/determinants) condition is the [characteristic equation](!/linear-algebra/eigen/characteristic-equation). It converts the eigenvalue problem from a geometric question ("which directions survive?") into an algebraic one ("which values of $\\lambda$ make this determinant vanish?"). The characteristic equation is a polynomial of degree $n$ in $\\lambda$, and its roots are the eigenvalues.`,
+This [determinant](!/linear-algebra/determinants) condition is the [characteristic equation](!/linear-algebra/eigen/characteristic-equation). It converts the eigenvalue problem from a geometric question ("which directions survive?") into an algebraic one ("which values of $\\lambda$ make this determinant vanish?"). The characteristic equation is a polynomial of degree $n$ in $\\lambda$, and [its roots are the eigenvalues](https://linearalgebranotes.com/eigen/characteristic-polynomial#rule-roots).`,
     before: ``,
     after: ``,
     link: ``,
@@ -824,13 +824,13 @@ $$E_\\lambda = \\text{Null}(A - \\lambda I)$$
 
 @academic[rule_theorem_plain:The eigenspace is a [subspace](!/linear-algebra/vector-spaces/subspaces) of $\\mathbb{R}^n$.]@
 
-It contains the zero vector and is closed under addition and scalar multiplication — any linear combination of eigenvectors for the same eigenvalue is again an eigenvector for that eigenvalue (or the zero vector).
+It contains the zero vector and is [closed under addition and scalar multiplication](https://linearalgebranotes.com/eigen/eigenspace#rule-subspace) — any linear combination of eigenvectors for the same eigenvalue is again an eigenvector for that eigenvalue (or the zero vector).
 
 @academic[pitfall,aside:true,width:35%:Accepting the zero solution
 Reporting $\\mathbf{v} = \\mathbf{0}$ when $A - \\lambda I$ reduces with no free variable hides an error in $\\lambda$. For $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$, a sign slip gives $\\lambda = -2$, and $A + 2I = \\begin{pmatrix} 6 & 2 \\\\ 1 & 5 \\end{pmatrix}$ has $\\det = 28 \\neq 0$, so only $\\mathbf{0}$ solves it. The true eigenvalue $\\lambda = 2$ leaves a free variable and gives $\\mathbf{v} = (-1, 1)^T$.
 [Read more](!#pitfall-accepting-the-zero-solution)]@
 
-The [dimension](!/linear-algebra/vector-spaces/dimension) of the eigenspace is called the geometric multiplicity of $\\lambda$. Finding a [basis](!/linear-algebra/vector-spaces) for the eigenspace is a standard null-space computation: row reduce $A - \\lambda I$ and extract the general solution in parametric form. Each free variable contributes one basis vector to the eigenspace.
+The [dimension](!/linear-algebra/vector-spaces/dimension) of the eigenspace is called the geometric multiplicity of $\\lambda$. Finding a [basis](!/linear-algebra/vector-spaces) for the eigenspace is [a standard null-space computation](https://calculatematrix.com/matrix-calculators/nullspace#method): row reduce $A - \\lambda I$ and extract the general solution in parametric form. Each free variable contributes one basis vector to the eigenspace.
 
 @academic[punchline:An eigenvalue never comes with a single eigenvector: it owns a whole subspace of them, found as an ordinary null space.]@`,
     before: ``,
@@ -868,7 +868,7 @@ For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\begin{pmatrix} -1 & 2 \\\\ 1 & -2
 Taking the diagonal entries $4$ and $3$ of $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$ as its eigenvalues fails: $\\det(A - 4I) = 0 \\cdot (-1) - 2 \\cdot 1 = -2 \\neq 0$. The eigenvalues are $2$ and $5$; the diagonal gives them only for diagonal and triangular matrices.
 [Read more](!#pitfall-reading-eigenvalues-off-the-diagonal)]@
 
-The matrix in the worked example is neither diagonal nor triangular: both of its off-diagonal entries are nonzero. Its determinant $\\det(A - \\lambda I)$ is therefore not a plain product of diagonal terms, since the off-diagonal product $2 \\cdot 1$ is subtracted from it, and the eigenvalues come only from solving the full quadratic. The eigenvectors, too, point in directions other than $\\mathbf{e}_1$ and $\\mathbf{e}_2$.
+The matrix in the worked example is neither diagonal nor triangular: both of its off-diagonal entries are nonzero. Its determinant $\\det(A - \\lambda I)$ is therefore not a plain product of diagonal terms, since the off-diagonal product $2 \\cdot 1$ is subtracted from it, and the eigenvalues come only from [solving the full quadratic](https://calculatematrix.com/matrix-calculators/eigenvalues#algorithm). The eigenvectors, too, point in directions other than $\\mathbf{e}_1$ and $\\mathbf{e}_2$.
 
 Rotation by $90°$ in $\\mathbb{R}^2$ has matrix $\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and characteristic polynomial $\\lambda^2 + 1 = 0$. No real direction survives a quarter-turn — the eigenvalues are $\\pm i$, which are [complex](!/linear-algebra/eigen/complex).`,
     before: ``,
@@ -879,9 +879,9 @@ Rotation by $90°$ in $\\mathbb{R}^2$ has matrix $\\begin{pmatrix} 0 & -1 \\\\ 1
     title: `Eigenvalues and Matrix Properties`,
     content: `Two of the most basic matrix invariants are direct functions of the eigenvalues.
 
-The [trace](!/linear-algebra/matrix/trace) equals the sum of the eigenvalues: $\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$, counted with algebraic multiplicity. This follows from the relationship between the coefficients of the characteristic polynomial and the trace.
+The [trace](!/linear-algebra/matrix/trace) equals [the sum of the eigenvalues](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-trace-sum): $\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$, counted with algebraic multiplicity. This follows from the relationship between the coefficients of the characteristic polynomial and the trace.
 
-The [determinant](!/linear-algebra/determinants) equals the product of the eigenvalues: $\\det(A) = \\lambda_1 \\lambda_2 \\cdots \\lambda_n$. This follows from evaluating the characteristic polynomial at $\\lambda = 0$.
+The [determinant](!/linear-algebra/determinants) equals [the product of the eigenvalues](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-det-product): $\\det(A) = \\lambda_1 \\lambda_2 \\cdots \\lambda_n$. This follows from evaluating the characteristic polynomial at $\\lambda = 0$.
 
 Together these two identities connect the simplest diagonal entry sum and the global scaling factor to the eigenvalue spectrum. They immediately imply that $A$ is [invertible](!/linear-algebra/matrix/inverse) if and only if no eigenvalue is zero, and singular if and only if at least one eigenvalue vanishes.
 
@@ -892,7 +892,7 @@ The full set of [properties](!/linear-algebra/eigen/properties) — including ei
   },
   obj8: {
     title: `Why Eigenvalues Matter`,
-    content: `[Diagonalization](!/linear-algebra/eigen/diagonalization) is the most immediate application. If $A$ has $n$ [linearly independent](!/linear-algebra/vector-spaces/linear-independence) eigenvectors, it can be written as $A = PDP^{-1}$ where $D$ is the diagonal matrix of eigenvalues. This factorization reduces matrix powers to $A^k = PD^kP^{-1}$ — raising a diagonal matrix to a power means raising each diagonal entry independently.
+    content: `[Diagonalization](!/linear-algebra/eigen/diagonalization) is the most immediate application. If $A$ has $n$ [linearly independent](!/linear-algebra/vector-spaces/linear-independence) eigenvectors, it can be written as $A = PDP^{-1}$ where $D$ is the diagonal matrix of eigenvalues. This factorization [reduces matrix powers](https://linearalgebranotes.com/eigen/diagonalization#rule-powers) to $A^k = PD^kP^{-1}$ — raising a diagonal matrix to a power means raising each diagonal entry independently.
 
 @academic[fact,aside:true,width:35%:Google's ranking is an eigenvector
 PageRank, the score Google first used to rank web pages, is the eigenvector for eigenvalue $1$ of a matrix with one row and one column per page. With billions of pages, it was found by multiplying by the matrix over and over, never through a characteristic polynomial.]@
@@ -908,7 +908,7 @@ The eigenvalue decomposition is arguably the single most important factorization
   },
   obj9: {
     title: `Summary: The Eigenvalue Workflow`,
-    content: `Finding eigenvalues and eigenvectors is a four-step procedure: a single algebraic equation produces the eigenvalues, and a separate null-space computation produces the eigenvectors for each one. The table below collects the four steps alongside what each one produces and the tool it relies on, summarizing the entire computational pipeline assembled across the sections above.`,
+    content: `Finding eigenvalues and eigenvectors is [a four-step procedure](https://calculatematrix.com/matrix-calculators/eigenvectors#walkthrough): a single algebraic equation produces the eigenvalues, and a separate null-space computation produces the eigenvectors for each one. The table below collects the four steps alongside what each one produces and the tool it relies on, summarizing the entire computational pipeline assembled across the sections above.`,
     before: ``,
     after: ``,
     link: ``,

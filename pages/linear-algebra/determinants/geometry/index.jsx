@@ -1150,7 +1150,7 @@ const ciAreaTable = ciTableOpen(['columns u, v', 'area by geometry', 'ad − bc'
 const sectionsContent = {
   obj1: {
     title: `Signed Area in Two Dimensions`,
-    content: `The columns of a $2 \\times 2$ matrix $A$ define two vectors in $\\mathbb{R}^2$ emanating from the origin. These vectors span a parallelogram, and the determinant of $A$ equals the signed area of that parallelogram.
+    content: `The columns of a $2 \\times 2$ matrix $A$ define two vectors in $\\mathbb{R}^2$ emanating from the origin. These vectors span a parallelogram, and the determinant of $A$ equals [the signed area of that parallelogram](https://linearalgebranotes.com/matrices/determinant#intuition).
 
 For $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, the columns are $\\mathbf{u} = (a, c)$ and $\\mathbf{v} = (b, d)$. The unsigned area of the parallelogram they span can be computed from the [cross product](!/linear-algebra/vectors/cross-product) magnitude in three dimensions by embedding both vectors with a zero third component, but in two dimensions the formula reduces directly to
 
@@ -1214,12 +1214,12 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
     title: `Signed Volume in Three Dimensions`,
     content: `Three vectors in $\\mathbb{R}^3$ span a parallelepiped — the three-dimensional analogue of a parallelogram. Arranging these vectors as columns of a $3 \\times 3$ matrix $A$, the determinant equals the signed volume of that parallelepiped.
 
-This is identical to the scalar triple product. If the columns of $A$ are $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$, then
+This is [identical to the scalar triple product](https://linearalgebranotes.com/vectors/scalar-triple-product#rule-determinant). If the columns of $A$ are $\\mathbf{a}$, $\\mathbf{b}$, $\\mathbf{c}$, then
 
 @academic[formula_callout:determinant_signed_volume_3d|Determinant Signed Volume 3D|$$\\text{signed volume}(\\mathbf{a}, \\mathbf{b}, \\mathbf{c}) = \\det\\!\\begin{pmatrix} \\mathbf{a} & \\mathbf{b} & \\mathbf{c} \\end{pmatrix} = \\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})$$]@
 @academic[formulas_link:/linear-algebra/formulas#determinant_signed_volume_3d]@
 
-The [dot product](!/linear-algebra/vectors/dot-product) projects $\\mathbf{a}$ onto the direction perpendicular to the base parallelogram spanned by $\\mathbf{b}$ and $\\mathbf{c}$, and $|\\mathbf{b} \\times \\mathbf{c}|$ gives the base area. Their product is the volume.
+The [dot product](!/linear-algebra/vectors/dot-product) projects $\\mathbf{a}$ onto the direction perpendicular to the base parallelogram spanned by $\\mathbf{b}$ and $\\mathbf{c}$, and $|\\mathbf{b} \\times \\mathbf{c}|$ gives the base area. [Their product is the volume](https://linearalgebranotes.com/vectors/scalar-triple-product#rule-volume).
 
 The sign reflects handedness. When $\\det(A) > 0$, the three column vectors form a right-handed system — the same orientation as the standard basis $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$. When $\\det(A) < 0$, they form a left-handed system. When $\\det(A) = 0$, the three vectors are coplanar and the parallelepiped is flat.
 
@@ -1267,13 +1267,13 @@ In two dimensions, orientation is the sense of rotation. A positively oriented p
 
 In three dimensions, orientation is handedness. The standard basis is right-handed. A transformation with positive determinant sends right-handed triples to right-handed triples; a transformation with negative determinant sends them to left-handed triples.
 
-Standard examples make the distinction concrete. A rotation matrix in $\\mathbb{R}^2$ or $\\mathbb{R}^3$ always has $\\det = +1$ — it preserves both volume and orientation. A reflection across a line (in $\\mathbb{R}^2$) or a plane (in $\\mathbb{R}^3$) has $\\det = -1$ — it preserves volume but flips orientation. An improper rotation, which composes a rotation with a reflection, also has $\\det = -1$.
+Standard examples make the distinction concrete. [A rotation matrix](https://calculatematrix.com/matrix-calculators/rotation-matrix#properties) in $\\mathbb{R}^2$ or $\\mathbb{R}^3$ always has $\\det = +1$ — it preserves both volume and orientation. A reflection across a line (in $\\mathbb{R}^2$) or a plane (in $\\mathbb{R}^3$) has $\\det = -1$ — it preserves volume but flips orientation. An improper rotation, which composes a rotation with a reflection, also has $\\det = -1$.
 
 @academic[pitfall,aside:true,width:35%:Reading a determinant of 1 as a rotation
 Concluding that $A$ is a rotation because $\\det(A) = 1$ fails for the shear $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$: its determinant is $1$, yet it sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$. A determinant of $1$ only says that area and orientation are kept.
 [Read more](!#pitfall-reading-a-determinant-of-1-as-a-rotation)]@
 
-The examples above start from a known map and then compute its determinant. Classifying an unknown map runs the other way: the matrix is given, its determinant is computed, and the number is then read for what it says about the map. The size of that number and its sign are the two readings that this section and the previous one provide.
+The examples above start from a known map and then compute its determinant. Classifying an unknown map runs the other way: the matrix is given, [its determinant is computed](https://calculatematrix.com/matrix-calculators/determinant#walkthrough), and the number is then read for what it says about the map. The size of that number and its sign are the two readings that this section and the previous one provide.
 
 When $\\det(A) = 0$, orientation is undefined. The map crushes the space down to a lower-dimensional image, and the concept of clockwise versus counterclockwise or right-handed versus left-handed no longer applies in the collapsed image.`,
     before: ``,
@@ -1284,13 +1284,13 @@ When $\\det(A) = 0$, orientation is undefined. The map crushes the space down to
     title: `Linear Transformations as Geometric Mappings`,
     content: `Every invertible $n \\times n$ matrix defines a bijective [linear transformation](!/linear-algebra/transformations) from $\\mathbb{R}^n$ to itself. The determinant captures the two essential geometric facts about this transformation in a single number: it scales all volumes by $|\\det(A)|$, and it either preserves or reverses orientation according to the sign.
 
-The [multiplicative property](!/linear-algebra/determinants/properties) $\\det(AB) = \\det(A)\\det(B)$ takes on a clean geometric reading in this context.
+The [multiplicative property](!/linear-algebra/determinants/properties) $\\det(AB) = \\det(A)\\det(B)$ [takes on a clean geometric reading](https://linearalgebranotes.com/matrices/determinant#rule-product) in this context.
 
 @academic[rule_plain:Composing two linear maps multiplies their volume-scaling factors: if $A$ scales volumes by $|\\det(A)|$ and $B$ scales by $|\\det(B)|$, then $AB$ scales by $|\\det(A)| \\cdot |\\det(B)|$.]@
 
 The orientation effects compose as well — two orientation-reversing maps compose to an orientation-preserving one, matching the sign rule $(-1)(-1) = +1$.
 
-The inverse $A^{-1}$ undoes both effects. Its determinant is $\\det(A^{-1}) = 1/\\det(A)$, so it scales volumes by the reciprocal factor and restores whatever orientation $A$ may have flipped.
+The inverse $A^{-1}$ [undoes both effects](https://linearalgebranotes.com/matrices/determinant#rule-inverse). Its determinant is $\\det(A^{-1}) = 1/\\det(A)$, so it scales volumes by the reciprocal factor and restores whatever orientation $A$ may have flipped.
 
 A singular matrix ($\\det = 0$) is a transformation that is not bijective. It maps $\\mathbb{R}^n$ onto a proper subspace, losing information in the process. No inverse exists because the collapsed dimensions cannot be recovered.`,
     before: ``,
@@ -1355,7 +1355,7 @@ Given four vertices in $\\mathbb{R}^3$, pick one as the origin and form the thre
 @academic[fact,aside:true,width:35%:Empty of grid points, yet any volume
 A triangle whose only points with whole-number coordinates are its three corners always has area $\\frac{1}{2}$. In space this fails: the tetrahedron with corners $(0,0,0)$, $(1,0,0)$, $(0,1,0)$, $(1,1,r)$ holds no other such point, yet its determinant is $r$ and its volume $\\frac{r}{6}$, as large as wanted.]@
 
-where $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$ are the edge vectors arranged as columns. The factor $\\frac{1}{6}$ arises because a tetrahedron occupies one-sixth of the parallelepiped spanned by its three edges.
+where $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_3$ are the edge vectors arranged as columns. The factor $\\frac{1}{6}$ arises because [a tetrahedron occupies one-sixth of the parallelepiped](https://linearalgebranotes.com/vectors/scalar-triple-product#facts) spanned by its three edges.
 
 @academic[example:Example
 For vertices at $(0,0,0)$, $(1,0,0)$, $(0,2,0)$, $(0,0,3)$: the edge vectors are the standard-scaled basis vectors, the determinant is $6$, and the tetrahedron volume is $1$.]@
@@ -1364,7 +1364,7 @@ When all the vertices have whole-number coordinates, every edge vector has whole
 
 ## Parallelepiped Volume
 
-The parallelepiped spanned by three vectors in $\\mathbb{R}^3$ has volume equal to the full absolute value of the $3 \\times 3$ determinant formed by those vectors as columns — no fractional factor needed.`,
+The parallelepiped spanned by three vectors in $\\mathbb{R}^3$ [has volume equal to the full absolute value](https://calculatematrix.com/vector-calculators/scalar-triple-product#example) of the $3 \\times 3$ determinant formed by those vectors as columns — no fractional factor needed.`,
     before: ``,
     after: ``,
     link: ``,

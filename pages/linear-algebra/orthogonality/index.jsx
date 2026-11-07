@@ -939,7 +939,7 @@ const sectionsContent = {
 @academic[formula_callout:What Orthogonality Means
 $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@
 
-Geometrically, this means the angle between the two vectors is $90°$. The vectors are perpendicular — pointing in completely independent directions with no component of one lying along the other.
+Geometrically, this means [the angle between the two vectors](https://calculatematrix.com/vector-calculators/angle-between-vectors#about) is $90°$. The vectors are perpendicular — pointing in completely independent directions with no component of one lying along the other.
 
 The zero vector is orthogonal to every vector, since $\\mathbf{0} \\cdot \\mathbf{v} = 0$ for all $\\mathbf{v}$. This is a convention that keeps the theory clean, not a geometric statement — the zero vector has no direction. Orthogonality is defined relative to an [inner product](!/linear-algebra/orthogonality/inner-product), and on this site the standard dot product is used unless stated otherwise.`,
     before: ``,
@@ -981,7 +981,7 @@ $$W^\\perp = \\{\\mathbf{v} \\in \\mathbb{R}^n : \\mathbf{v} \\cdot \\mathbf{w} 
 Taking a subspace perpendicular to $W$ as $W^\\perp$: in $\\mathbb{R}^3$ the $y$-axis is perpendicular to the $x$-axis $W$, but the dimensions give $1 + 1 = 2 \\neq 3$. The complement $W^\\perp$ is the whole $yz$-plane, all vectors $(0, b, c)$.
 [Read more](!#pitfall-calling-any-perpendicular-subspace-the-complement)]@
 
-Its [dimension](!/linear-algebra/vector-spaces/dimension) satisfies $\\dim(W) + \\dim(W^\\perp) = n$, and taking the complement twice returns to the original: $(W^\\perp)^\\perp = W$.
+Its [dimension](!/linear-algebra/vector-spaces/dimension) satisfies $\\dim(W) + \\dim(W^\\perp) = n$, and [taking the complement twice returns to the original](https://linearalgebranotes.com/orthogonality/orthogonal-complement#rule-perp-perp): $(W^\\perp)^\\perp = W$.
 
 The most important structural consequence is the orthogonal decomposition. Every vector $\\mathbf{v} \\in \\mathbb{R}^n$ can be written uniquely as
 
@@ -1007,7 +1007,7 @@ In $\\mathbb{R}^n$, the row space and the null space are orthogonal complements:
 @academic[formula_callout:The Four Fundamental Subspaces Revisited
 $$\\text{Row}(A)^\\perp = \\text{Null}(A)$$]@
 
-Every vector in the null space is perpendicular to every row of $A$, because $A\\mathbf{x} = \\mathbf{0}$ means the dot product of $\\mathbf{x}$ with each row is zero.
+[Every vector in the null space is perpendicular to every row](https://linearalgebranotes.com/orthogonality/orthogonal-complement#rule-fundamental) of $A$, because $A\\mathbf{x} = \\mathbf{0}$ means the dot product of $\\mathbf{x}$ with each row is zero.
 
 In $\\mathbb{R}^m$, the column space and the left null space are orthogonal complements:
 
@@ -1027,7 +1027,7 @@ These two pairs of complements are the structural backbone of projection and [le
 
 [Projections](!/linear-algebra/orthogonality/projections) onto subspaces have explicit formulas when the basis is orthogonal. The projection of $\\mathbf{b}$ onto a subspace splits into independent projections onto each basis vector, with no cross-talk between components.
 
-[Least-squares](!/linear-algebra/orthogonality/least-squares) approximation — the best approximate solution when $A\\mathbf{x} = \\mathbf{b}$ has no exact solution — reduces to projecting $\\mathbf{b}$ onto the column space. The normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ are a direct consequence of the orthogonality condition on the residual.
+[Least-squares](!/linear-algebra/orthogonality/least-squares) approximation — the best approximate solution when $A\\mathbf{x} = \\mathbf{b}$ has no exact solution — reduces to projecting $\\mathbf{b}$ onto the column space. The normal equations $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$ are [a direct consequence of the orthogonality condition on the residual](https://linearalgebranotes.com/orthogonality/normal-equations#rule-normal).
 
 [Orthogonal matrices](!/linear-algebra/matrix/types) preserve lengths and angles, making them numerically stable in computation. The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) converts any basis into an orthogonal one, ensuring these benefits are always available.
 
@@ -1055,9 +1055,9 @@ The entire orthogonality framework — projections, Gram-Schmidt, least squares 
 
 @academic[rule_theorem_plain:Orthogonal sets of nonzero vectors are automatically [linearly independent](!/linear-algebra/vector-spaces/linear-independence) — no independence check is needed.]@
 
-The proof is one line: if $\\sum c_i \\mathbf{v}_i = \\mathbf{0}$, dotting both sides with $\\mathbf{v}_j$ gives $c_j \\|\\mathbf{v}_j\\|^2 = 0$, forcing $c_j = 0$.
+[The proof is one line](https://linearalgebranotes.com/orthogonality/orthogonal-vectors#rule-independent): if $\\sum c_i \\mathbf{v}_i = \\mathbf{0}$, dotting both sides with $\\mathbf{v}_j$ gives $c_j \\|\\mathbf{v}_j\\|^2 = 0$, forcing $c_j = 0$.
 
-The computational advantage of an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$ is that coordinates are free: $c_i = \\mathbf{q}_i \\cdot \\mathbf{v}$. No system of equations, no [row reduction](!/linear-algebra/linear-systems/gaussian-elimination), no matrix inversion — just $n$ dot products.
+The computational advantage of an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$ is that [coordinates are free](https://linearalgebranotes.com/orthogonality/orthonormal-basis#rule-coordinates): $c_i = \\mathbf{q}_i \\cdot \\mathbf{v}$. No system of equations, no [row reduction](!/linear-algebra/linear-systems/gaussian-elimination), no matrix inversion — just $n$ dot products.
 
 @academic[pitfall,aside:true,width:35%:Treating an orthogonal basis as orthonormal
 Using $c_i = \\mathbf{v}_i \\cdot \\mathbf{v}$ with a basis that is orthogonal but not unit length: for $(1, 1)$, $(1, -1)$ and $\\mathbf{v} = (3, 1)$ it gives $c_1 = 4$, $c_2 = 2$, and $4(1, 1) + 2(1, -1) = (6, 2) \\neq \\mathbf{v}$. Dividing by $\\mathbf{v}_i \\cdot \\mathbf{v}_i = 2$ gives $c_1 = 2$, $c_2 = 1$.
@@ -1070,9 +1070,9 @@ The formula relies on both halves of orthonormality. When $\\mathbf{v} = \\sum c
   },
   obj8: {
     title: `Projections`,
-    content: `The orthogonal [projection](!/linear-algebra/orthogonality/projections) of a vector $\\mathbf{b}$ onto a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ is the closest point in $W$ to $\\mathbf{b}$. It is the component of $\\mathbf{b}$ that lies in $W$, with the perpendicular remainder discarded.
+    content: `The orthogonal [projection](!/linear-algebra/orthogonality/projections) of a vector $\\mathbf{b}$ onto a [subspace](!/linear-algebra/vector-spaces/subspaces) $W$ is [the closest point](https://linearalgebranotes.com/orthogonality/orthogonal-projection#rule-closest) in $W$ to $\\mathbf{b}$. It is the component of $\\mathbf{b}$ that lies in $W$, with the perpendicular remainder discarded.
 
-For projection onto a single vector $\\mathbf{a}$: $\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\mathbf{a}$. For projection onto a subspace with basis matrix $A$: $\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
+For projection onto a single vector $\\mathbf{a}$: $\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\mathbf{a}$. [For projection onto a subspace](https://calculatematrix.com/matrix-calculators/projection-matrix#about) with basis matrix $A$: $\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
 
 @academic[rule_plain:The projection matrix $P = A(A^TA)^{-1}A^T$ is [symmetric](!/linear-algebra/matrix/types) and [idempotent](!/linear-algebra/matrix/types): $P^T = P$ and $P^2 = P$.]@
 
@@ -1089,7 +1089,7 @@ The formula is built for a basis matrix $A$ of size $m \\times n$ with independe
   },
   obj9: {
     title: `Gram-Schmidt and Least Squares`,
-    content: `The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) converts any linearly independent set into an orthogonal (or orthonormal) set spanning the same subspace. It does this by sequentially subtracting projections: each new vector has its components along all previously computed directions removed, leaving only the perpendicular remainder.
+    content: `The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) converts any linearly independent set into an orthogonal (or orthonormal) set spanning the same subspace. It does this by [sequentially subtracting projections](https://calculatematrix.com/matrix-calculators/gram-schmidt#algorithm): each new vector has its components along all previously computed directions removed, leaving only the perpendicular remainder.
 
 @academic[pitfall,aside:true,width:35%:Projecting onto the original vectors
 Subtracting projections onto the original $\\mathbf{v}_1, \\mathbf{v}_2$: for $(1, 1, 0)$, $(1, 0, 1)$, $(0, 1, 1)$ it gives $\\mathbf{u}_3 = (-1, \\frac{1}{2}, \\frac{1}{2})$, and $\\mathbf{u}_3 \\cdot \\mathbf{u}_1 = -\\frac{1}{2}$. Projecting onto $\\mathbf{u}_1 = (1, 1, 0)$ and $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$ gives $\\mathbf{u}_3 = (-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3})$.

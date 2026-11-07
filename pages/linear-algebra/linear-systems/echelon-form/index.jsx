@@ -1389,7 +1389,7 @@ The boxed entries are pivots. Each sits to the right of and below the previous o
 @academic[formula_callout:row_echelon_form_definition|Row Echelon Form Definition|$$\\text{REF: } \\begin{pmatrix} \\boxed{\\ast} & \\bullet & \\bullet & \\bullet & \\bullet \\\\ 0 & \\boxed{\\ast} & \\bullet & \\bullet & \\bullet \\\\ 0 & 0 & 0 & \\boxed{\\ast} & \\bullet \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
 @academic[formulas_link:/linear-algebra/formulas#row_echelon_form_definition]@
 
-REF is not unique. Different sequences of row operations applied to the same matrix can produce different echelon forms — the pivots may have different values, and the non-pivot entries above the pivots may differ.
+[REF is not unique](https://linearalgebranotes.com/systems/row-echelon-form#rule-pivot-positions). Different sequences of row operations applied to the same matrix can produce different echelon forms — the pivots may have different values, and the non-pivot entries above the pivots may differ.
 
 @academic[rule_theorem_plain:What remains the same across all echelon forms of a given matrix is the set of pivot positions (which columns contain pivots).]@`,
     before: ``,
@@ -1449,19 +1449,19 @@ Every pivot is $1$, and every other entry in a pivot column is $0$. The pivot co
 @academic[formula_callout:reduced_row_echelon_form_definition|Reduced Row Echelon Form Definition|$$\\text{RREF: } \\begin{pmatrix} \\boxed{1} & 0 & \\bullet & 0 & \\bullet \\\\ 0 & \\boxed{1} & \\bullet & 0 & \\bullet \\\\ 0 & 0 & 0 & \\boxed{1} & \\bullet \\\\ 0 & 0 & 0 & 0 & 0 \\end{pmatrix}$$]@
 @academic[formulas_link:/linear-algebra/formulas#reduced_row_echelon_form_definition]@
 
-RREF is achieved from REF by [Gauss-Jordan elimination](!/linear-algebra/linear-systems/gaussian-elimination): scale each pivot row so the pivot becomes $1$, then use row addition to eliminate all entries above each pivot.`,
+RREF is achieved from REF by [Gauss-Jordan elimination](!/linear-algebra/linear-systems/gaussian-elimination): scale each pivot row so the pivot becomes $1$, then use row addition to [eliminate all entries above each pivot](https://calculatematrix.com/matrix-calculators/rref#algorithm).`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj3: {
     title: `Uniqueness of RREF`,
-    content: `Every matrix has exactly one RREF. No matter which sequence of row operations is used to reach it, the result is the same:
+    content: `[Every matrix has exactly one RREF](https://linearalgebranotes.com/systems/reduced-row-echelon-form#rule-uniqueness). No matter which sequence of row operations is used to reach it, the result is the same:
 
 @academic[formula_callout:rref_uniqueness|RREF Uniqueness|$$\\text{RREF}(A) \\text{ is unique}$$]@
 @academic[formulas_link:/linear-algebra/formulas#rref_uniqueness]@
 
-This is not true of REF — different reduction paths can produce different row echelon forms of the same matrix, with different values in the non-pivot entries. But RREF is canonical: it is the unique representative of the matrix&apos;s row-equivalence class in reduced form.
+This is not true of REF — different reduction paths can produce different row echelon forms of the same matrix, with different values in the non-pivot entries. But RREF is canonical: it is [the unique representative](https://linearalgebranotes.com/systems/reduced-row-echelon-form#rule-row-equivalence) of the matrix&apos;s row-equivalence class in reduced form.
 
 The uniqueness of RREF implies that the pivot positions are intrinsic to the matrix. They do not depend on how the reduction is carried out. This means the [rank](!/linear-algebra/matrix/rank) (the number of pivots), the free variables (the non-pivot columns), and the entire solution structure are determined by the matrix itself, not by any particular algorithm applied to it.`,
     before: ``,
@@ -1486,7 +1486,7 @@ For the RREF example above, columns $1$, $2$, and $4$ are pivot columns, while c
   },
   obj5: {
     title: `Reading Solutions from REF`,
-    content: `In row echelon form, the solution is extracted by back substitution: solve from the bottom nonzero row upward, one pivot variable at a time.
+    content: `In row echelon form, [the solution is extracted by back substitution](https://linearalgebranotes.com/systems/gaussian-elimination#rule-back-substitution): solve from the bottom nonzero row upward, one pivot variable at a time.
 
 ## Worked Example
 
@@ -1549,7 +1549,7 @@ $$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\beg
 Taking the entries of column $2$ as they stand gives the direction $(2, 1, 0, 0)$, and at $s = 1$ the point $(7, 1, -2, 0)$, where row $1$ gives $7 + 2(1) - 0 = 9 \\neq 5$. Moving $2x_2$ to the right side flips the sign, so the direction is $(-2, 1, 0, 0)$.
 [Read more](!#pitfall-copying-the-free-column-without-changing-sign)]@
 
-The first vector is a particular solution $\\mathbf{x}_p$. The two direction vectors form a [basis](!/linear-algebra/vector-spaces) for the null space of the coefficient matrix. The solution set is the null space translated by $\\mathbf{x}_p$ — an affine subspace of dimension $2$ in $\\mathbb{R}^4$.
+The first vector is a particular solution $\\mathbf{x}_p$. The two direction vectors form a [basis](!/linear-algebra/vector-spaces) for the null space of the coefficient matrix. [The solution set is the null space translated by](https://linearalgebranotes.com/systems/structure-of-the-solution-set#rule-complete-solution) $\\mathbf{x}_p$ — an affine subspace of dimension $2$ in $\\mathbb{R}^4$.
 
 For a [homogeneous](!/linear-algebra/linear-systems/homogeneous) system ($\\mathbf{b} = \\mathbf{0}$), the particular solution is $\\mathbf{0}$ and the general solution is purely a null-space combination.
 
@@ -1560,7 +1560,7 @@ For a [homogeneous](!/linear-algebra/linear-systems/homogeneous) system ($\\math
   },
   obj8: {
     title: `Detecting Inconsistency`,
-    content: `A system is inconsistent — has no solution — if and only if the echelon form of the augmented matrix contains a row of the form
+    content: `A system is inconsistent — has no solution — [if and only if the echelon form of the augmented matrix contains a row](https://linearalgebranotes.com/systems/consistency#rule-elimination-test) of the form
 
 @academic[formula_callout:Detecting Inconsistency
 $$[0 \\quad 0 \\quad \\cdots \\quad 0 \\mid d] \\qquad \\text{with } d \\neq 0$$]@
@@ -1575,7 +1575,7 @@ The extra column $\\mathbf{b}$ introduces a new pivot that the coefficient matri
 Declaring $\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$ inconsistent because of its zero row gives no solution. That row says $0 = 0$, which every $\\mathbf{x}$ satisfies, and the system has infinitely many solutions, $x_1 = 3 - 2t$, $x_2 = t$.
 [Read more](!#pitfall-reading-a-zero-row-as-a-contradiction)]@
 
-If no such contradictory row appears, the system is consistent. The distinction between unique and infinite solutions then depends on whether free variables exist: rank $= n$ gives a unique solution, rank $< n$ gives infinitely many.`,
+If no such contradictory row appears, [the system is consistent](https://calculatematrix.com/linear-systems/consistency-checker#example). The distinction between unique and infinite solutions then depends on whether free variables exist: rank $= n$ gives a unique solution, rank $< n$ gives infinitely many.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1601,14 +1601,14 @@ The zero matrix is in both REF and RREF. It has rank $0$, and the corresponding 
     title: `Echelon Form and Rank`,
     content: `@academic[rule_theorem_plain:The [rank](!/linear-algebra/matrix/rank) of any matrix equals the number of pivots in any echelon form.]@
 
-This is the standard computational method for determining rank: row reduce and count pivots.
+This is the standard computational method for determining rank: [row reduce and count pivots](https://calculatematrix.com/matrix-calculators/matrix-rank#about).
 
 @academic[fact,aside:true,width:35%:Rank 1 on paper, rank 2 on a computer
 The rows $(7, 21)$ and $(9, 27)$ are proportional, yet $R_2 - \\frac{9}{7}R_1$ in double precision leaves about $3.6 \\times 10^{-15}$ where $0$ belongs, because $\\frac{9}{7}$ has no exact binary form. Numerical software therefore counts a pivot only above a small tolerance.]@
 
 From the rank, everything else follows. The dimension of the column space is $r$. The dimension of the row space is $r$. The number of free variables is $n - r$. The dimension of the null space is $n - r$. The system $A\\mathbf{x} = \\mathbf{b}$ is consistent if and only if the augmented matrix has the same rank $r$ as $A$. The solution, when it exists, is unique if $r = n$ and infinite if $r < n$.
 
-The pivot positions also identify [bases](!/linear-algebra/vector-spaces) for the fundamental subspaces. The original columns at pivot positions form a basis for the column space. The nonzero rows of the echelon form are a basis for the row space. The parametric solution of $A\\mathbf{x} = \\mathbf{0}$ gives a basis for the null space. Everything flows from counting and locating the pivots.
+The pivot positions also identify [bases](!/linear-algebra/vector-spaces) for the fundamental subspaces. [The original columns at pivot positions form a basis for the column space](https://calculatematrix.com/matrix-calculators/column-space#method). The nonzero rows of the echelon form are a basis for the row space. The parametric solution of $A\\mathbf{x} = \\mathbf{0}$ gives a basis for the null space. Everything flows from counting and locating the pivots.
 
 @academic[pitfall,aside:true,width:35%:Taking basis columns from the reduced matrix
 For $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, with reduced form $\\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix}$, taking pivot column $1$ of the reduced form gives $(1, 0)$, which is not in $\\text{Col}(A)$ at all. The basis is column $1$ of $A$ itself, $(1, 2)$.
